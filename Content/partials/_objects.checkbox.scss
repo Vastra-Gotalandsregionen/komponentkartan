@@ -1,0 +1,148 @@
+@import "_settings.sizes.scss";
+@import "_settings.colors.scss";
+@import "../thirdparty/font-awesome-4.7.0/font-awesome.scss";
+
+/* First, hide the default checkbox. It cannot be styled with CSS. 
+ * Instead, we will use the "label" that is associated with our textbox. 
+ * It will contain all of the checkbox graphics and behaviour */
+
+input[type=checkbox] {
+    visibility: hidden;
+}
+
+.checkbox {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+/**
+* Create the box for the .checkbox
+*/
+
+.checkbox label {
+    cursor: pointer;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    background: white;
+    border: 1px solid $control-color--enabled;
+}
+
+.checkbox input[type=checkbox]:disabled+label {
+    border-color: $control-color--disabled;
+}
+
+.checkbox input[type=checkbox]:checked+label {
+    background: $control-color--enabled;
+}
+
+.checkbox input[type=checkbox]:disabled:checked+label {
+    background: $control-color--disabled;
+}
+
+.checkbox input[type=checkbox]:disabled+label {
+    cursor: default;
+}
+
+
+/** 
+            * Display the tick inside the .checkbox*/
+
+.checkbox label:after {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 5px;
+    background: transparent;
+    top: 3px;
+    left: 3px;
+    border: 1px solid $control-color--enabled;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+}
+
+
+/**
+             * Create the .checkbox state for the tick
+             */
+
+.checkbox input[type=checkbox]:checked+label:after {
+    opacity: 1;
+    background: transparent;
+    top: 3px;
+    left: 3px;
+    border-color: white;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+}
+
+
+/* A checkbox Icon class, for use as a standalone checkbox icon */
+
+.checkbox-icon {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid $control-color--disabled;
+}
+
+.checkbox-icon--checked:after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 5px;
+    background: transparent;
+    top: 3px;
+    left: 3px;
+    border: 1px solid white;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+}
+
+.checkbox-icon--checked {
+    background: $control-color--disabled;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+    .checkbox {
+        width: 18px;
+    }
+    .checkbox label {
+        width: 18px;
+        height: 18px;
+    }
+    .checkbox label:after {
+        top: 4px;
+        left: 4px;
+        width: 9px;
+        height: 6px;
+    }
+    .checkbox input[type=checkbox]:checked+label:after {
+        top: 4px;
+        left: 4px;
+    }
+    .checkbox-icon {
+        width: 18px;
+        height: 18px;
+    }
+    .checkbox-icon--checked:after {
+        width: 9px;
+        height: 6px;
+        top: 4px;
+        left: 4px;
+    }
+}

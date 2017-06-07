@@ -1,0 +1,15 @@
+﻿@import "_settings.sizes.scss";
+@import "_settings.colors.scss";
+@import "_components.button.scss";
+.lock-button {
+    @extend .button;
+    width: 34px;
+}
+
+.lock-button__top {
+    transition: margin-right 0.2s linear;
+    margin-right: 0px;
+    .lock-button--unlocked & {
+        margin-right: 16px;
+    }
+}

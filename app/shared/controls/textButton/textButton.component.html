@@ -1,0 +1,7 @@
+﻿<div class="text-button noselect" role="button" (click)="buttonClicked()" (keydown)="keyPressed($event)"
+
+    tabindex="{{disabled ? -1 : 0}}" [ngClass]="{'button--disabled' : disabled, 'button--enabling' : reenabled}" >
+    <ng-content>
+    </ng-content>
+    <div class="button__focus-line"></div>
+</div>

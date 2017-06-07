@@ -1,0 +1,16 @@
+﻿<header class="site-header-vgr" [ngClass]="
+                    {   'site-header-vgr--neutral' : systemColor ==='neutral',
+                        'site-header-vgr--bmm' : systemColor ==='BMM',
+                        'site-header-vgr--vgpv' : systemColor ==='VGPV',
+                        'site-header-vgr--rehab' : systemColor ==='Rehab'
+                    }">
+    <img src="Images/VG_Ne.png" class="header__vgr-logo" />
+    <div class="login-info header-menu__trigger">
+        <div class="login-info__username">
+            <span>Inloggad som:<br />Nicklas Åkerman</span>
+        </div>
+        <div class="header-menu-indicator"></div>
+        <img src="images/mockups/ProfilbildHeader.png" class="login-info__profile_image" />        
+    </div>
+    <header-menu></header-menu>
+</header>

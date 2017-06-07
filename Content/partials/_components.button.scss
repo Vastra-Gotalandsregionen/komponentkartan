@@ -1,0 +1,67 @@
+﻿@import "_settings.sizes.scss";
+@import "_settings.colors.scss";
+@keyframes button-enabling {
+    0% {
+        background-color: $secondary-color--neutral;
+    }
+    50% {
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+    }
+    100% {
+        background-color: $primary-color--neutral;
+    }
+}
+
+.button {
+    height: 30px;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1px;
+    background-color: $primary-color--neutral;
+    color: $text-color--light;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    &:hover:not(.button--disabled) {
+        .button__focus-line {
+            visibility: visible;
+        }
+    }
+    &:focus:not(.button--disabled) {
+        box-shadow: 0 0 1px 1px #4990e2;
+    }
+    &:active:not(.button--disabled) {
+        height: 28px;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+        transform: scaleX(0.96);
+        outline: 0;
+        .button__focus-line {
+            background-color: transparentize($secondary-color--neutral, 0.4);
+        }
+    }
+    &.button--disabled {
+        background-color: $secondary-color--neutral;
+        cursor: default;
+        &:focus {
+            outline: 0;
+        }
+    }
+    .button__focus-line {
+        visibility: hidden;
+        height: 4px;
+        width: 100%;
+        background-color: $secondary-color--neutral;
+        position: absolute;
+        z-index: $layer-two;
+        bottom: 0;
+        left: 0;
+        border-bottom-left-radius: 1px;
+        border-bottom-right-radius: 1px;
+    }
+}
+
+.button--enabling {
+    animation: button-enabling 1s;
+}

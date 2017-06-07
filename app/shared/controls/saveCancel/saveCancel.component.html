@@ -1,0 +1,5 @@
+﻿<div class="save-cancel">
+    <text-button class="text-button--cancel" [disabled]="!saveCancelEnabled" (buttonClick)="cancel()">Avbryt</text-button>
+    <text-button class="text-button--save" [disabled]="!saveCancelEnabled" (buttonClick)="save()">Spara</text-button>
+    <lock-button (onLocked)="onLocked()" (onUnlocked)="onUnlocked()"></lock-button>
+</div>

@@ -1,0 +1,22 @@
+﻿@import "_settings.colors.scss";
+
+.mockup-indicator {
+    position:absolute;
+    background: $background-color--default;
+    color: $text-color--default;
+    text-align: left;
+    font-size: 12px;
+    padding: 5px;
+
+    span.mockup-indicator__heading {
+        margin-right: 5px;
+        font-weight: bold;
+    }
+
+    span.mockup-indicator__route {
+        margin-right: 5px;
+    }
+
+    span.mockup-indicator__filename {
+    }
+}

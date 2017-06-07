@@ -1,0 +1,113 @@
+@import "_settings.sizes.scss";
+@import "_settings.colors.scss";
+
+/**
+  * Headern innehåller VGR "vågen" som transparent bild. Det enda som krävs *
+  * för att ändra färgtema är att ändra bakgrundsfärg till primärfärgen     *
+  * så ändrar sig "vågen" till färschemats sekundärfärg automatiskt         *
+  */
+
+header {
+    position: fixed;
+    top: 0;
+    z-index: $layer-three;
+    width: 100%
+}
+
+.header--inline {
+    position: relative;
+    z-index: $layer-one;
+}
+
+.site-header-vgr {
+    min-height: $header-height;
+    border-bottom: solid 1px $border-color;
+    display: flex;
+    flex: none;
+    align-items: center;
+    background-color: $primary-color--neutral;
+}
+
+//THEMING
+.site-header-vgr--bmm {
+    background-color: $primary-color--bmm;
+    background-image: url("../Images/dekal.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+    transition: background-color ease-in 0.3s;
+}
+
+.site-header-vgr--neutral {
+    background-color: $primary-color--neutral;
+    transition: background-color ease-in 0.3s;
+}
+
+.site-header-vgr--vgpv {
+    background-color: $primary-color--vgpv;
+    background-image: url("../Images/dekal.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+    transition: background-color ease-in 0.3s;
+}
+
+.site-header-vgr--rehab {
+    background-color: $primary-color--rehab;
+    background-image: url("../Images/dekal.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+    transition: background-color ease-in 0.3s;
+}
+
+.header__vgr-logo {
+    margin-left: 25px;
+}
+
+//Bara för komponentkartan för att visa storleksinfo
+.header__size-info {
+    margin-left: auto;
+    display: inline-flex;
+    color: white;
+    align-items: center;
+    text-align: right;
+    width: 200px;
+     :after {
+        content: "Liten";
+    }
+}
+
+.login-info {
+    margin-left: auto;
+    display: inline-flex;
+    color: white;
+    align-items: center;
+    text-align: right;
+}
+
+.login-info__username {
+    padding-left: 20px;
+}
+
+.login-info__profile_image {
+    height: 39px;
+    width: 39px;
+    border-radius: 50%;
+    margin-left: 14px;
+    margin-top: 19px;
+    margin-right: 20px;
+    margin-bottom: 22px;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+    //Bara för komponentkartan för att visa storleksinfo
+    .header__size-info {
+        margin-left: auto;
+        display: inline-flex;
+        color: white;
+        align-items: center;
+        text-align: right;
+        width: 200px;
+         :after {
+            content: "Stor";
+        }
+    }
+}

@@ -1,0 +1,50 @@
+@import "_settings.sizes";
+@import "_settings.fonts";
+.komponentkarta-components {
+    background-color: $background-color--content;
+    position: relative;
+    top: 71px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: $margin--regular;
+}
+
+.komponentkarta-component {
+    margin-top: $margin--fat;
+}
+
+.komponentkarta-component__code {
+    display: none;
+}
+
+.with-classes {
+    cursor: pointer;
+}
+
+.class-description {
+    position: absolute;
+    background: $background-color--default;
+    border-radius: 5px;
+    border: 1px solid $border-color--light;
+    font-family: Courier New, Courier, monospace;
+    color: black;
+    display: block;
+    font-size: 14px;
+    font-style: italic;
+    display: none;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-left: 3px;
+    left: $margin--fat;
+}
+
+.markup-example {
+    background: $background-color--default;
+    font-family: Consolas, Courier New, Courier, monospace;
+    font-size: 12px;
+    white-space: pre;
+    border: 2px solid $border-color;
+    border-radius: 3px;
+    padding: 4px;
+}

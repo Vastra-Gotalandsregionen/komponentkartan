@@ -1,0 +1,15 @@
+﻿@import "_settings.sizes.scss";
+@import "_settings.colors.scss";
+.save-cancel{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 30px;
+    >*{
+        margin-left:$margin--fat;
+    }
+    >:first-child{
+        margin-left:0;
+    }
+
+}

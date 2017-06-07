@@ -1,0 +1,22 @@
+﻿//Base colors
+$background-color--default: #f0f0f0;
+$background-color--content: #ffffff;
+$text-color--default: #151515;
+$control-border-color--default: #151515;
+$text-color--light: #ffffff;
+$text-color--value: #000000;
+$text-color--read-only: #99a3ad;
+$menu-text-color: #314152;
+$border-color: #99a3ad;
+$border-color--light: #dfdfdf;
+$control-color--enabled: #151515;
+$control-color--disabled: #717171;
+$primary-color--bmm: #006298;
+$secondary-color--bmm: #598eb6;
+$primary-color--neutral: #314152;
+$secondary-color--neutral: #99a3ad;
+$primary-color--rehab: #4a773c;
+$secondary-color--rehab: #7fa276;
+$primary-color--vgpv: #9d2235;
+$secondary-color--vgpv: #ba6071;
+$menu-color--inactive: transparentize($background-color--default, 0.3);

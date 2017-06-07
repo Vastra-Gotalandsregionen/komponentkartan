@@ -1,0 +1,27 @@
+a {
+    color: #006298;
+    text-decoration: none;
+    border-bottom: solid 1px #006298;
+    padding-bottom: 1px;
+    cursor: pointer;
+}
+
+a:link {
+    color: #006298;
+}
+
+a:visited {
+    color: #314152;
+}
+
+a:hover {
+    color: #006298;
+    font-weight: bold;
+    border-bottom: none;
+}
+
+a:active {
+    color: #006298;
+    font-weight: bold;
+    border-bottom: none;
+}

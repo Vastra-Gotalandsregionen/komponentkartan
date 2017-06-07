@@ -1,0 +1,28 @@
+﻿@import "_settings.sizes";
+@import "_settings.colors";
+.back-to-top {
+    width: 51px !important;
+    height: 51px !important;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px;
+    left: calc(#{$content-width--small} + #{$nav-width--small} - 10px);
+    cursor: pointer;
+    background-image: url("../../Images/Knapp_BacktToTop.png");
+    background-position: center;
+    background-color: transparent !important;
+    display: none;
+    &:hover {
+        border: 2px solid #4990e2;
+        transition: border-color 0.5s ease;
+    }
+    z-index: $layer-five;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+    .back-to-top {
+        display: none;
+        left: calc(#{$content-width--medium} + #{$nav-width--medium} - 10px);
+        cursor: pointer;
+    }
+}

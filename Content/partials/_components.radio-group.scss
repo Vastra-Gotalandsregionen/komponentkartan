@@ -1,0 +1,74 @@
+@import "_settings.sizes.scss";
+@import "_settings.colors.scss";
+@import "../thirdparty/font-awesome-4.7.0/font-awesome.scss";
+.radio-button {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.radio-button__icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: solid 2px #151515;
+    background-color: $background-color--content;
+    border-radius: 100px;
+    margin-right: $margin--slim;
+    &:after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background-color: #151515;
+        border-radius: 100px;
+        display: block;
+        margin-left: 3px;
+        margin-top: 3px;
+        opacity: 0;
+    }
+    .radio-button--checked & {
+        &:after {
+            transition: opacity 0.5s ease;
+            opacity: 1;
+        }
+    }
+    &:focus {
+        &:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 0 4px 0 #4990e2;
+            border: solid 1px #4990e2;
+            border-radius: 100px;
+            margin-left: -3px;
+            margin-top: -3px;
+            position: absolute;
+            z-index: 2;
+        }
+    }
+    .radio-button--disabled & {
+        border-color: $control-color--disabled;
+        &:after {
+            background-color: $control-color--disabled;
+        }
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.radio-button__icon {
+    &:focus {
+        outline: 0;
+    }
+}
+
+.radio-button--disabled {
+    cursor: default;
+    .radio-button__text {
+        color: $control-color--disabled;
+    }
+    .radio-button__icon {}
+}

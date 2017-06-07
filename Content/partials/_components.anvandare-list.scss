@@ -1,0 +1,58 @@
+@import "_settings.sizes.scss";
+@import "_settings.colors.scss";
+@import "_objects.layout.scss";
+.anvandare-list {
+    .expandable-container-list {
+        position: relative;
+        margin-top: 112px;
+        transition: margin-top 0.6s ease;
+        transition-delay: 0.3s;
+    }
+    &.actions--visible {
+        .expandable-container-list {
+            margin-top: 260px;
+            transition: margin-top 0.6s ease;
+            transition-delay: 0;
+        }
+    }
+}
+
+.anvandare-list__namn {
+    @extend .flex-column-13;
+}
+
+.anvandare-list__efternamn {
+    @extend .flex-column-15;
+}
+
+.anvandare-list__vgrid {
+    @extend .flex-column-5;
+}
+
+.anvandare-list__lagg-till {
+    align-self: flex-end;
+}
+
+.anvandare-list__save-cancel {
+    margin-right: auto;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+    .list-header {
+        height: 40px;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .anvandare-list {
+        .expandable-container-list {
+            margin-top: 127px;
+        }
+        &.actions--visible {
+            .expandable-container-list {
+                margin-top: 272px;
+            }
+        }
+    }
+}

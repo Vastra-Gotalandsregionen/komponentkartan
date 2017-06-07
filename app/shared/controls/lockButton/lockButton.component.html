@@ -1,0 +1,6 @@
+﻿<div class="lock-button noselect" role="button" (click)="buttonClicked()" (keydown)="keyPressed($event)" [ngClass]="{ 'lock-button--unlocked' : unlocked,'button--disabled' : disabled}"
+    tabindex="{{disabled ? -1 : 0}}">
+    <img class="lock-button__top" src="../../Images/lock-button__top.png" />
+    <img class="lock-button__bottom" src="../../Images/lock-button__bottom.png" />
+    <div class="button__focus-line"></div>
+</div>

@@ -1,0 +1,15 @@
+﻿@import "_settings.colors.scss";
+@import "_settings.fonts.scss";
+@import "_settings.sizes.scss";
+input {
+    font-family: $font-family;
+    font-size: $font-size--small;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    padding-left: $margin--slim;
+    border-radius: 1px;
+    &:focus {
+        outline: none !important;
+    }
+}

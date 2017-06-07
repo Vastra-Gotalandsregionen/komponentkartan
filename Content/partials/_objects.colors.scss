@@ -1,0 +1,45 @@
+@import "_settings.colors.scss";
+
+.bmm--primary {
+    background-color: $primary-color--bmm;
+    color: $text-color--light;
+}
+
+.bmm--secondary {
+    background-color: $secondary-color--bmm;
+    color: $text-color--light;
+}
+
+.vgpv--primary {
+    background-color: $primary-color--vgpv;
+    color: $text-color--light;
+}
+
+.vgpv--secondary {
+    background-color: $secondary-color--vgpv;
+    color: $text-color--light;
+}
+
+.rehab--primary {
+    background-color: $primary-color--rehab;
+    color: $text-color--light;
+}
+
+.rehab--secondary {
+    background-color: $secondary-color--rehab;
+    color: $text-color--light;
+}
+
+.neutral--primary {
+    background-color: $primary-color--neutral;
+    color: $text-color--light;
+}
+
+.neutral--secondary {
+    background-color: $secondary-color--neutral;
+    color: $text-color--light;
+}
+
+.read-only {
+    color: $text-color--read-only;
+}

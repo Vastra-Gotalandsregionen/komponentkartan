@@ -1,0 +1,372 @@
+﻿<div class="main-content">
+    <page-header [title]="'KomponentKarTa'">
+    </page-header>
+
+    <div class="komponentkarta-components">
+        <div class="komponentkarta-component column-layout">
+            <h1>Radioknappar</h1>
+            <span>Ett valbart alternativ åt gången, val kan vara förvalda eller inaktiva. Vid val av alternativ triggas eventet <strong>selectedChanged</strong>
+            Valbara items är av typen <i>ISelectableItem</i> som innehåller id, displayName, selected samt disabled. Det är genom att sätta properties på dessa objekt som man styr beteendet.</span>
+
+            <h2>Fyra alternativ, varav ett inaktivt</h2>
+            <div>
+                <radio-group [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'},
+                {id:'4', displayName:'Fyra', disabled:true}]" (selectedChanged)="onSelectedRadioOptionChanged($event)">
+                </radio-group>
+                <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
+            </div>
+            <h2>Tre inaktiva alternativ, varav ett förvalt</h2>
+            <div>
+                <radio-group [options]="[{id:'1', displayName:'Ett',disabled:true},{id:'2', displayName:'Två',disabled:true, selected:true},{id:'3', displayName:'Tre',disabled:true}]">
+                </radio-group>
+            </div>
+            <div class="markup-example">&lt;radio-group [options]=&quot;myOptionsList&quot; (selectedChanged)=&quot;onSelectedChanged($event)&quot;&gt;&lt;/radio-group&gt;
+            </div>
+        </div>
+        <div class="komponentkarta-component column-layout">
+            <h1>Spara/avbryt-panel</h1>
+            <span>En panel som innehåller spara, avbryt samt låsknapp.
+            Spara och avbryt är inaktiverade i låst läge. De kan aktiveras genom att låsa upp.
+            När användaren sparar triggas eventet <strong>onSave</strong>, vid avbryt triggas <strong>onCancel</strong>.
+            Om man låser upp och sedan <strong>låser</strong> är det <strong>samma som att spara</strong>.
+            </span>
+            <div>
+                <save-cancel (onSave)="saveCancelMessage='Sparade!'" (onCancel)="saveCancelMessage='Avbröt.'"></save-cancel>
+                <br>
+                <span>Senaste händelse:&nbsp;<strong>{{saveCancelMessage}}</strong></span>
+            </div>
+            <div class="markup-example">&lt;save-cancel&gt;&lt;/save-cancel&gt;
+            </div>
+        </div>
+        <div class="komponentkarta-component column-layout">
+            <h1>Låsknapp</h1>
+            <span>Låsknappen är en "toggle-knapp", som kan vara låst eller upplåst.
+            För att inaktivera sätt [disabled]="<strong>true</strong>".
+            För att skapa en upplåst knapp, sätt [unlocked]="<strong>true</strong>".
+            Knappen skickar två events, ett för låst (onLocked) och ett för upplåst (onUnlocked).
+            </span>
+            <div class="markup-example">&lt;lock-button (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/lock-button&gt;
+                &lt;lock-button [unlocked]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/lock-button&gt;
+                &lt;lock-button [disabled]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/lock-button&gt;
+            </div>
+            <div>
+                <lock-button (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"></lock-button>
+                <lock-button [unlocked]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"></lock-button>
+                <lock-button [disabled]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"></lock-button>
+            </div>
+        </div>
+        <div class="komponentkarta-component column-layout">
+            <h1>Textknappar</h1>
+            <span>Knappar som innehåller text med en minsta bredd på 87px.
+                Vid klick triggas event <strong>buttonClick</strong>.
+                För att inaktivera sätt [disabled]="<strong>true</strong>".
+                Knappen stödjer klick med tangentbord via <strong>Space</strong> och <strong>Enter</strong>, enligt <a href="https://www.w3.org/TR/wai-aria-practices/examples/button/button.html">WCAG Button examples</a>
+            </span>
+            <span>Notera: Knapparna nedan loggar till konsollen vid klick.</span>
+            <div class="markup-example">&lt;text-button (buttonClick)="consoleLog('Click')"&gt;Klicka här&lt;/text-button&gt; &lt;text-button [disabled]="true"
+                (buttonClick)="consoleLog('Click')"&gt;Inaktiv&lt;/text-button&gt;
+            </div>
+
+            <div>
+                <text-button (buttonClick)="consoleLog('Click')">Klicka här</text-button>
+                <text-button (buttonClick)="consoleLog('Click')">OK</text-button>
+                <text-button (buttonClick)="buttonDisabled=!buttonDisabled">Aktivera/Inaktivera</text-button>
+                <text-button [disabled]="buttonDisabled" (buttonClick)="consoleLog('Click')">Inaktiv</text-button>
+            </div>
+        </div>
+        <!-- Färger -->
+        <div class="komponentkarta-component column-layout">
+            <h1>Färger</h1>
+            <span>Färger består av en primärfärg och en sekundärfärg som är primärfärg i 0.3 opacitet. </span>
+            <div class="color-sample">
+                <h2 class="color-sample__header">Neutral</h2>
+                <div class="color-sample__colors">
+                    <div class="neutral--primary with-classes">Primär</div>
+                    <div class="neutral--secondary with-classes">Sekundär</div>
+                </div>
+            </div>
+            <div class="color-sample">
+                <h2 class="color-sample__header">BMM</h2>
+                <div class="color-sample__colors">
+                    <div class="bmm--primary with-classes">Primär</div>
+                    <div class="bmm--secondary with-classes">Sekundär</div>
+                </div>
+            </div>
+            <div class="color-sample">
+                <h2 class="color-sample__header">VGPV</h2>
+                <div class="color-sample__colors">
+                    <div class="vgpv--primary with-classes">Primär</div>
+                    <div class="vgpv--secondary with-classes">Sekundär</div>
+                </div>
+            </div>
+            <div class="color-sample">
+                <h2 class="color-sample__header">Rehab</h2>
+                <div class="color-sample__colors">
+                    <div class="rehab--primary with-classes">Primär</div>
+                    <div class="rehab--secondary with-classes">Sekundär</div>
+                </div>
+            </div>
+        </div>
+        <!-- Information panels -->
+        <div class="komponentkarta-component column-layout">
+            <h1>Paneler</h1>
+            <div class="row-layout row-layout--equal-height">
+                <div class="information-panel information-panel--neutral two-thirds with-classes">
+                    <div class="information-panel__content">
+                        <div class="information-panel__header">
+                            <span class="information-panel__header__title">Panel med tiddstämpel</span>
+                            <span class="information-panel___header__timestamp">2017-12-31</span>
+                        </div>
+                        <p class="information-panel__information">
+                            En panel med både en rubrik och en tiddstämpel. Längst ned finns plats för en länk. Texten bryts efter tre rader: <i>
+                                We built this city we built this city on rock an roll Built this city we built this city on rock an roll Say you
+                                don't know me or recognize my face Say you don't care who goes to that kind of place Knee deep in the hoopla sinking in your fight Too many runaways eating up the night
+                            </i>
+                        </p>
+                        <div class="information-panel__footer">
+                            <a href="https://www.google.com">En användbar länk</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="information-panel information-panel--neutral one-third with-classes">
+                    <div class="information-panel__content">
+                        <div class="information-panel__header">
+                            <span class="information-panel__header__title">Panel med enkel rubrik</span>
+                        </div>
+                        <p class="information-panel__information">Den här panelen tar en tredjedel av utrymmet och saknar både tiddstämpel och länk.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row-layout row-layout--equal-height">
+                <div class="information-panel information-panel--rehab one-third with-classes">
+                    <div class="information-panel__content">
+                        <div class="information-panel__header">
+                            <span class="information-panel__header__title">Rehab</span>
+                        </div>
+                        <p class="information-panel__information">Panel med innehåll från Rehab får en grön markör överst. Den är panelen tar en tredjedel av utrymmet.</p>
+                        <div class="information-panel__footer">
+                            <a href="https://vardvalrehab.vgregion.se" target="_blank">Gå till Vårdval Rehab</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="information-panel information-panel--vgpv one-third with-classes">
+                    <div class="information-panel__content">
+                        <div class="information-panel__header">
+                            <span class="information-panel__header__title">VGPV</span>
+                        </div>
+                        <p class="information-panel__information">Panel med innehåll från VGPV får en röd markör överst. Den är panelen tar en tredjedel av utrymmet.</p>
+                        <div class="information-panel__footer">
+                            <a href="https://vardval.vgregion.se" target="_blank">Gå till Vårdval Primärvård</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="information-panel information-panel--bmm one-third with-classes">
+                    <div class="information-panel__content">
+                        <div class="information-panel__header">
+                            <span class="information-panel__header__title">BMM</span>
+                        </div>
+                        <p class="information-panel__information">Panel med innehåll från BMM får en blå markör överst. Den är panelen tar en tredjedel av utrymmet.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row-layout row-layout--equal-height">
+                <div class="information-panel information-panel--rehab half with-classes">
+                    <div class="information-panel__content">
+                        <div style="font-size: 48px">+89</div>
+                        <div class="information-panel__header">
+                            <span class="information-panel__header__title">NYA LISTNINGAR DENNA MÅNAD</span>
+                        </div>
+                        <p class="information-panel__information">En panel med eget innehåll före rubriken</p>
+                    </div>
+                </div>
+                <div class="information-panel information-panel--vgpv half with-classes">
+                    <div class="information-panel__content">
+                        <div>
+                            <img src="../images/Pinkiepie_small.jpg" style="width: 100px; height: 100px; border-radius: 50%; float: left;" />
+                            <span>Helt eget innehåll, utan rubriker och länkar</span>
+                            <div class="information-panel__footer">Meningen är att denna ska vara en footer...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Headers -->
+        <div class="komponentkarta-component column-layout column-layout--padded">
+            <h1>Headers</h1>
+            <p>
+                Headerfärg beror på vilket system som är aktivt. I portalen beror färgen på om användaren har ett eller flera system. Om
+                bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent bild som gör att man
+                bara behöver sätta headerns bakgrundsfärg genom rätt klassnamn.
+            </p>
+            <header class="header--inline site-header-vgr site-header-vgr--bmm with-classes">
+                <img src="../Images/VG_Ne.png" class="header__vgr-logo" />
+                <div class="login-info">
+                    <div>
+                        <span class="login-info__username">Inloggad som:<br />BMM Användare</span>
+                    </div>
+                    <img src="../Images/Pinkiepie_small.jpg" class="login-info__profile_image" />
+                </div>
+            </header>
+            <header class="header--inline site-header-vgr site-header-vgr--rehab with-classes">
+                <img src="../Images/VG_Ne.png" class="header__vgr-logo" />
+                <div class="login-info">
+                    <div>
+                        <span class="login-info__username">Inloggad som:<br />Rehab Användare</span>
+                    </div>
+                    <img src="../Images/Pinkiepie_small.jpg" class="login-info__profile_image" />
+                </div>
+            </header>
+            <header class="header--inline site-header-vgr site-header-vgr--vgpv with-classes">
+                <img src="../Images/VG_Ne.png" class="header__vgr-logo" />
+                <div class="login-info">
+                    <div>
+                        <span class="login-info__username">Inloggad som:<br />VGPV Användare</span>
+                    </div>
+                    <img src="../Images/Pinkiepie_small.jpg" class="login-info__profile_image" />
+                </div>
+            </header>
+            <header class="header--inline site-header-vgr site-header-vgr--neutral with-classes">
+                <img src="../Images/VG_Ne.png" class="header__vgr-logo" />
+                <div class="login-info">
+                    <div>
+                        <span class="login-info__username">Inloggad som:<br />Användare flera system</span>
+                    </div>
+                    <img src="../Images/Pinkiepie_small.jpg" class="login-info__profile_image" />
+                </div>
+            </header>
+        </div>
+        <div class="komponentkarta-component column-layout column-layout--padded">
+            <h1>Dropdown</h1>
+            <p>
+                En dropdown innehåller ett valt element samt en lista över valbara alternativ. Kompletteras med filter vid över 20 items.
+                Kompletteras med scroll vid över 8 items. För att inkludera en"Visa alla", ange <strong>[selectAllItemText]</strong>.
+                För att ge"Visa alla" ett annat namn vid val, ange <strong>[selectAllSelectedText]</strong>
+            </p>
+            <div class="markup-example">&lt;<strong>dropdown</strong> [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"
+                &gt;&lt;/
+                <strong>dropdown</strong>&gt;</div>
+
+            <div class="row-layout">
+                <div>
+                    <p>25 items</p>
+                    <dropdown [items]="dropDownItems25"></dropdown>
+                </div>
+                <div>
+                    <p>9 items</p>
+                    <dropdown [items]="dropDownItems9"></dropdown>
+                </div>
+                <div>
+                    <p>8 items</p>
+                    <dropdown [items]="dropDownItems8"></dropdown>
+                </div>
+                <div>
+                    <p>25 items och Visa alla</p>
+                    <dropdown [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"></dropdown>
+                </div>
+            </div>
+        </div>
+        <!--Expandable container -->
+        <div class="komponentkarta-component column-layout column-layout--padded">
+            <h1>Expandable container list</h1>
+            <p>
+                En lista med rader som går att expandera. <strong>En rad i taget</strong> kan vara expanderad. Vill man ha
+                kolumner får man definiera deras storlek själv, och lägga dem i header och respektive rad.
+                <strong>Notera!</strong> Listan lägger själv till en "back-to-top"-knapp. Därav knappen i komponentkartan.
+            </p>
+            <div class="markup-example">
+                &lt;expandable-container-list&gt; &lt;!-- Placera divs här för kolumn headers --&gt; &lt;div class="expandable-container-list__header"&gt;
+                &lt;!-- Placera divs här för kolumn headers --&gt; &lt;div class="flex-column-13"&gt;Kolumn 1&lt;/div&gt;
+                &lt;div class="flex-column-15"&gt;Kolumn 2&lt;/div&gt; &lt;/div&gt; &lt;div class="expandable-container-list__items"&gt;
+                &lt;!-- Placera rader här --&gt; &lt;expandable-container&gt; &lt;div class="expandable-container__header"&gt;
+                &lt;!-- Detta är radens header, som visas i kollapsat läge --&gt; &lt;div class="flex-column-13"&gt;Första
+                raden&lt;/div&gt; &lt;div class="flex-column-15"&gt;Innehåller text&lt;/div&gt; &lt;/div&gt; &lt;div class="expandable-container__content"&gt;
+                &lt;!-- Detta är radens innehåll, som visas i expanderat läge --&gt; &lt;span&gt;Lorem Ipsum....&lt;/span&gt;
+                &lt;/div&gt; &lt;/expandable-container&gt; &lt;/div&gt; &lt;/expandable-container-list&gt;
+            </div>
+            <expandable-container-list class="expandable-container-list--inline">
+                <div class="expandable-container-list__header">
+                    <div class="flex-column-13">Kolumn 1</div>
+                    <div class="flex-column-15">Kolumn 2</div>
+                </div>
+                <div class="expandable-container-list__items">
+                    <expandable-container>
+                        <div class="expandable-container__header">
+                            <div class="flex-column-13">Första raden</div>
+                            <div class="flex-column-15">Innehåller text</div>
+                        </div>
+                        <div class="expandable-container__content">
+                            <span>Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.</span>
+                        </div>
+                    </expandable-container>
+                    <expandable-container>
+                        <div class="expandable-container__header">
+                            <div class="flex-column-13">Andra raden</div>
+                            <div class="flex-column-15">Innehåller en bild</div>
+                        </div>
+                        <div class="expandable-container__content">
+                            <img src="../../images/pinkiepie.png" />
+                        </div>
+                    </expandable-container>
+                    <expandable-container>
+                        <div class="expandable-container__header">
+                            <div class="flex-column-13">Tredje raden</div>
+                            <div class="flex-column-15">Innehåller en användare</div>
+                        </div>
+                        <div class="expandable-container__content">
+                            <anvandare [anvandare]="demoAnvandare"></anvandare>
+                        </div>
+                    </expandable-container>
+                </div>
+            </expandable-container-list>
+        </div>
+        <!-- Checkbox -->
+        <div class="komponentkarta-component column-layout">
+            <h1>Checkbox</h1>
+            <span>Checkbox finns i tvp varianter, en för visning av t.ex status och en för interaktion vid val.</span>
+            <div class="row-layout">
+                <div class="flex-column control-example">
+                    <h2>Checkbox (med interaktion)</h2>
+                    <div class="flex-row">
+                        <span>Ej vald</span>
+                        <div class="checkbox flex-pull-right with-classes">
+                            <input type="checkbox" id="checkbox1" />
+                            <label for="checkbox1" tabindex="1"></label>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <span>Vald</span>
+                        <div class="checkbox flex-pull-right with-classes">
+                            <input type="checkbox" id="checkbox2" checked="true" />
+                            <label for="checkbox2" tabindex="2"></label>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <span>Inaktiv</span>
+                        <div class="checkbox flex-pull-right with-classes">
+                            <input type="checkbox" id="checkbox3" disabled="true" />
+                            <label for="checkbox3"></label>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <span>Inaktiv, vald</span>
+                        <div class="checkbox flex-pull-right with-classes">
+                            <input type="checkbox" id="checkbox3" checked="true" disabled="true" />
+                            <label for="checkbox3"></label>
+                        </div>
+                    </div>
+                    <br />
+                    <h2>Checkbox-ikoner (för visning)</h2>
+                    <div class="flex-row">
+                        <span>Vald</span>
+                        <div class="checkbox-icon checkbox-icon--checked flex-pull-right with-classes"></div>
+                    </div>
+                    <div class="flex-row">
+                        <span>Ej vald</span>
+                        <div class="checkbox-icon flex-pull-right with-classes"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>-->
+</div>

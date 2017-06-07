@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    
+    <script src="js/crypto.js"></script>
+    <script src="js/rsa.js"></script>
+    <script src="js/json-sans-eval.js"></script>
+    <script src="js/jws-3.0.js"></script>
+    <script>
+        logout();
+        function logout() {
+
+            var id_token = localStorage["id_token"];
+            window.location = "https://localhost:44333/core/connect/endsession?post_logout_redirect_uri=" + encodeURIComponent(window.location.protocol + "//" + window.location.host + "/index.html") + "&id_token_hint=" + encodeURIComponent(id_token);
+
+            localStorage.removeItem("id_token");
+        }
+    </script>
+
+</head>
+<body>
+    Hej då....
+</body>
+</html>

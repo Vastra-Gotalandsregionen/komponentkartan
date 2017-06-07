@@ -1,0 +1,88 @@
+﻿@import "_settings.sizes.scss";
+@import "_settings.colors.scss";
+@import "_components.dropdown.scss";
+$search-person-dropdown-width--small: 380px;
+$search-person-dropdown-width--medium: 420px;
+$search-person-width: 270px;
+.search-person__dropdown {
+    .search-person__search-text {
+        width: $search-person-width;
+    }
+    position: relative;
+    z-index: $layer-four;
+    .dropdown__menu {
+        width: $search-person-dropdown-width--small;
+        max-height: 410px;
+    }
+}
+
+.search-person__search-result-limited {
+    padding-left: $margin--regular;
+    padding-right: $margin--regular;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border-color--light;
+}
+
+.search-person {
+    &.search-person--result-limited {
+        .scroll-wrapper {
+            margin-top: 40px;
+        }
+    }
+    .dropdown__menu__items {
+        li:first-child {
+            z-index: $layer-four;
+        }
+    }
+}
+
+.search-person__search {
+    opacity: 1;
+    transition: all 0.5s ease;
+    &.search-person__search--hidden {
+        opacity: 0;
+    }
+}
+
+.search-person__search-header{
+    padding-bottom:8px !important;
+}
+
+.search-person__dropdown.dropdown--scroll-visible .dropdown__menu .dropdown__menu__items ul li:first-child {
+    z-index: $layer-four;
+}
+
+.search-person--result-limited.dropdown--scroll-visible .dropdown__menu .dropdown__menu__items {
+    height: 265px;
+}
+
+.search-person--result-limited.dropdown--scroll-visible {
+    .dropdown__dimmer--top {
+        top: 98px;
+    }
+}
+
+.search-person__utfardare {
+    margin-right: $margin--fat;
+}
+
+.search-person__utfardare_name {
+    @extend h3;
+    margin-right: $margin--fat;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+    .search-person__dropdown {
+        .dropdown__menu {
+            width: $search-person-dropdown-width--medium;
+        }
+    }
+    .search-person--result-limited.dropdown--scroll-visible .dropdown__menu .dropdown__menu__items {
+        height: 285px;
+    }
+    .search-person--result-limited.dropdown--scroll-visible {
+        .dropdown__dimmer--top {
+            top: 107px;
+        }
+    }
+}

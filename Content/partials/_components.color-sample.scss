@@ -1,0 +1,28 @@
+@import "_settings.colors.scss";
+@import "_settings.sizes.scss";
+.color-sample {
+    display: flex;
+    flex-direction: column;
+}
+
+.color-sample__header {
+    font-size: 17px;
+    display: block;
+    margin-top: 10px;
+}
+
+.color-sample__colors {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    >* {
+        width: 200px;
+        text-align: center;
+    }
+}
+
+.control-example {
+    border: 1px solid $border-color;
+    padding: $margin--slim;
+    width: 300px;
+}
