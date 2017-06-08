@@ -2,13 +2,14 @@
     "name": "vardvalportal",
     "version": "1.0.0",
     "scripts": {
-        "[start-app]": "concurrent \"npm run _watch-typescript\" \"npm run _local-webserver\" \"npm run _watch-css\"",
+        "[start-app]": "concurrent \"npm run _copy-fonts\" \"npm run _watch-typescript\" \"npm run _local-webserver\" \"npm run _watch-css\"",
         "_compile-typescript": "tsc",
         "_watch-typescript": "tsc -w",
         "_local-webserver": "lite-server",
         "_compile-css": "node-sass --include-path content content/main.scss content/main.css",
         "_watch-css": "nodemon -e scss --watch content/  --exec \"npm run _compile-css\"",
-        "_clean_build_output": "rimraf ./BuildOutput"
+        "_clean_build_output": "rimraf ./BuildOutput",
+        "_copy-fonts": "copyfiles -u 3 node_modules/font-awesome/fonts/*.* fonts"
     },
     "dependencies": {
         "@angular/common": "~2.2.0",
@@ -42,6 +43,7 @@
         "typescript": "~2.1.6",
         "rimraf": "2.6.1",
         "jasmine": "2.5.3",
+        "copyfiles": "^1.2.0",
         "@types/jasmine": "2.5.44"
     },
     "-vs-binding": {
