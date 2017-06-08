@@ -81,8 +81,28 @@ Task("PrebuildActions")
         WorkingDirectory = "./"
     });
 
+
+    //Sätter upp strukturen
     if (!DirectoryExists(buildOutputWeb)) {
 		CreateDirectory(buildOutputWeb);
+	}
+    if (!DirectoryExists("./BuildOutput/app")) {
+        CreateDirectory("./BuildOutput/app");
+	}
+    if (!DirectoryExists("./BuildOutput/scripts")) {
+	    CreateDirectory("./BuildOutput/scripts");
+	}
+    if (!DirectoryExists("./BuildOutput/content")) {
+	    CreateDirectory("./BuildOutput/content");
+	}
+    if (!DirectoryExists("./BuildOutput/tests")) {
+	    CreateDirectory("./BuildOutput/tests");
+	}
+    if (!DirectoryExists("./BuildOutput/Images")) {
+	    CreateDirectory("./BuildOutput/Images");
+	}
+    if (!DirectoryExists("./BuildOutput/fonts")) {
+	    CreateDirectory("./BuildOutput/fonts");
 	}
 });
 
@@ -130,33 +150,35 @@ Task("Build-TypescriptAndSass")
 Task("Move-TypescriptAndSass")
 .IsDependentOn("Build-TypescriptAndSass")
 .Does(() => {
-        if (!DirectoryExists("./BuildOutput/app")) {
-		    CreateDirectory("./BuildOutput/app");
-	    }
-        if (!DirectoryExists("./BuildOutput/scripts")) {
-		    CreateDirectory("./BuildOutput/scripts");
-	    }
-        if (!DirectoryExists("./BuildOutput/content")) {
-		    CreateDirectory("./BuildOutput/content");
-	    }
-
-		//Kopiera *,js filer
+        //Kopiera *.js filer
 		CopyFiles("./app/**/*.js", "./BuildOutput/app", true);
 		CopyFiles("./scripts/*.js", "./BuildOutput/scripts", true);
-
-		//Kopiera *.css
+		CopyFiles("./tests/*.js", "./BuildOutput/tests", true);
+        
+        //Kopiera *.css
 		CopyFiles("./content/*.css", "./BuildOutput/content", true);
 		
-        CopyFiles("./index.html", "./BuildOutput/", true);
-        CopyFiles("./systemjs.config.js", "./BuildOutput/", true);
-
 });
 
 Task("Build-Frontend")
 	.IsDependentOn("Build-TypescriptAndSass")
 	.IsDependentOn("Move-TypescriptAndSass")
 	.IsDependentOn("Build-Npm-Frontend-Packages")
-	.Does(() => {});
+	.Does(() => {
+        CopyFiles("./app/**/*.html", "./BuildOutput/app", true);
+                
+        CopyFiles("./app/**/*.ts", "./BuildOutput/app", true);
+        CopyFiles("./tests/**/*.ts", "./BuildOutput/tests", true);
+
+        CopyFiles("./app/**/*.js.map", "./BuildOutput/app", true);
+        CopyFiles("./tests/**/*.js.map", "./BuildOutput/tests", true);
+        
+        CopyFiles("./Images/*.*", "./BuildOutput/Images", true);
+
+        CopyFiles("./index.html", "./BuildOutput/", true);
+        CopyFiles("./systemjs.config.js", "./BuildOutput/", true);
+        CopyFiles("./BuildOutput/node_modules/font-awesome/fonts/*.*", "./BuildOutput/fonts/", true);
+    });
 
 
 
