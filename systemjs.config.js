@@ -7,8 +7,9 @@
         // map tells the System loader where to look for things
         map: {
             // our app is within the app folder
-            app: 'app',
+            app: 'demo-app',
             specs: 'tests',
+            componentpackage: 'component-package',
             // angular bundles
             '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
             '@angular/core/testing': 'npm:@angular/core/bundles/core-testing.umd.js',
@@ -45,7 +46,12 @@
             },
             specs: {
                 defaultExtension: 'js'
+            },
+            componentpackage: {
+                defaultExtension: 'js'
             }
+
+
         }
     });
 })(this);
