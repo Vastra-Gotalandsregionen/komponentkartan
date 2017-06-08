@@ -50,8 +50,6 @@
             componentpackage: {
                 defaultExtension: 'js'
             }
-
-
         }
     });
 })(this);

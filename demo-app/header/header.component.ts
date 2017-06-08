@@ -8,8 +8,11 @@
 export class HeaderComponent implements AfterViewInit {
     systemColor: string;
 
-    ngAfterViewInit() {
+    constructor() {
         this.systemColor = "neutral";
+
+    }
+    ngAfterViewInit() {
 
         $.getScript("../../scripts/_components.header-menu.js");
     }

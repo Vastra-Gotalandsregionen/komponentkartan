@@ -7,21 +7,17 @@
 
     return {
         files: [{
-                pattern: 'node_modules/systemjs/dist/system.src.js',
-                instrument: false
-            },
-            {
                 pattern: 'node_modules/systemjs/dist/system-polyfills.js',
                 instrument: false
             },
-
-
-            // Polyfills
             {
-                pattern: 'node_modules/core-js/client/shim.min.js',
+                pattern: 'node_modules/systemjs/dist/system.js',
                 instrument: false
             },
-
+            {
+                pattern: 'node_modules/core-js/client/shim.js',
+                instrument: false
+            },
 
             {
                 pattern: 'node_modules/zone.js/dist/zone.js',
@@ -47,15 +43,18 @@
                 pattern: 'node_modules/zone.js/dist/async-test.js',
                 instrument: false
             },
-
             {
                 pattern: 'node_modules/zone.js/dist/fake-async-test.js',
                 instrument: false
             },
-
+            {
+                pattern: 'node_modules/reflect-metadata/Reflect.js',
+                instrument: false
+            },
             {
                 pattern: 'node_modules/jquery/dist/jquery.min.js',
                 instrument: false
+
             },
 
             {
