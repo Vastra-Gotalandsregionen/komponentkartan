@@ -175,8 +175,7 @@ paket-files/
 *.sln.iml
 
 # Cake - Uncomment if you are using it
-Main/tools/**
-!Main/tools/packages.config
+tools/**
 
 ### VisualStudio Patch ###
 build/

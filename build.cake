@@ -7,13 +7,13 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var environment = Argument("environment", "Local");
 
-var buildOutputWeb = Directory("./Komponentkartan/BuildOutput/");
-var garbageDir = Directory("./Komponentkartan/garbageDir/");
+var buildOutputWeb = Directory("./BuildOutput/");
+var garbageDir = Directory("./garbageDir/");
 
-var buildBinWeb = Directory("./Komponentkartan/bin");
-var buildObjWeb = Directory("./Komponentkartan/obj");
+var buildBinWeb = Directory("./bin");
+var buildObjWeb = Directory("./obj");
 
-var javascriptTestFolder = Directory("./Komponentkartan/Tests");
+var javascriptTestFolder = Directory("./Tests");
 var deployServer = string.Empty;
 
 Task("Validate-Arguments")
@@ -51,7 +51,7 @@ Task("Validate-Arguments")
 	Verbose("Environment: {0}", environment);
 });
 
-Task("CleanStagingFolders")
+Task("PrebuildActions")
 	.IsDependentOn("Restore-NpmPackages")
 	.Does(() =>
 {
@@ -59,12 +59,12 @@ Task("CleanStagingFolders")
 		CreateDirectory(garbageDir);
 	}
 
-	Information("Flytta js filer för borttagning");
-	MoveFiles("./Komponentkartan/app/**/*.js", garbageDir);
-	MoveFiles("./Komponentkartan/app/**/*.js.map", garbageDir);
+    Information("Flytta js filer för borttagning");
+	MoveFiles("./app/**/*.js", garbageDir);
+	MoveFiles("./app/**/*.js.map", garbageDir);
 
 	Information("Ta bort css:er");
-	DeleteFiles("./Komponentkartan/Content/*.css");
+	DeleteFiles("./Content/*.css");
 
 	CleanDirectories(new DirectoryPath[]
     {
@@ -78,8 +78,12 @@ Task("CleanStagingFolders")
 	NpmRunScript(new NpmRunScriptSettings
     {
         ScriptName = "_clean_build_output",
-        WorkingDirectory = "./Komponentkartan"
+        WorkingDirectory = "./"
     });
+
+    if (!DirectoryExists(buildOutputWeb)) {
+		CreateDirectory(buildOutputWeb);
+	}
 });
 
 
@@ -88,20 +92,20 @@ Task("Restore-NpmPackages")
 	{
 		NpmInstall(new NpmInstallSettings
     	{
-        	WorkingDirectory = "./Komponentkartan",
+        	WorkingDirectory = "./",
 			Production = false
     	});
 	});
 
 Task("Build-Npm-Frontend-Packages")
 	.Does(()=>{
-		CopyFile("./Komponentkartan/package.json","./Komponentkartan/BuildOutput/_PublishedWebsites/Komponentkartan/package.json");
+		CopyFile("./package.json","./BuildOutput/package.json");
 		NpmInstall(new NpmInstallSettings
     	{
-        	WorkingDirectory = "./Komponentkartan/BuildOutput/_PublishedWebsites/Komponentkartan/",
+        	WorkingDirectory = "./BuildOutput/",
 			Production = true
     	});
-		DeleteFile("./Komponentkartan/BuildOutput/_PublishedWebsites/Komponentkartan/package.json");
+		DeleteFile("./BuildOutput/package.json");
 	});
 
 
@@ -112,12 +116,12 @@ Task("Build-TypescriptAndSass")
 	NpmRunScript(new NpmRunScriptSettings
     {
         ScriptName = "_compile-typescript",
-        WorkingDirectory = "./Komponentkartan"
+        WorkingDirectory = "./"
     });
 	NpmRunScript(new NpmRunScriptSettings
     {
         ScriptName = "_compile-css",
-        WorkingDirectory = "./Komponentkartan"
+        WorkingDirectory = "./"
     });
 });
 
@@ -126,12 +130,22 @@ Task("Build-TypescriptAndSass")
 Task("Move-TypescriptAndSass")
 .IsDependentOn("Build-TypescriptAndSass")
 .Does(() => {
+        if (!DirectoryExists("./BuildOutput/app")) {
+		    CreateDirectory("./BuildOutput/app");
+	    }
+        if (!DirectoryExists("./BuildOutput/scripts")) {
+		    CreateDirectory("./BuildOutput/scripts");
+	    }
+        if (!DirectoryExists("./BuildOutput/content")) {
+		    CreateDirectory("./BuildOutput/content");
+	    }
+
 		//Kopiera *,js filer
-		CopyFiles("./Komponentkartan/app/**/*.js", "./Komponentkartan/BuildOutput/_PublishedWebsites/Komponentkartan/app", true);
-		CopyFiles("./Komponentkartan/scripts/*.js", "./Komponentkartan/BuildOutput/_PublishedWebsites/Komponentkartan/scripts", true);
+		CopyFiles("./app/**/*.js", "./BuildOutput/app", true);
+		CopyFiles("./scripts/*.js", "./BuildOutput/scripts", true);
 
 		//Kopiera *.css
-		CopyFiles("./Komponentkartan/content/*.css", "./Komponentkartan/BuildOutput/_PublishedWebsites/Komponentkartan/content", true);
+		CopyFiles("./content/*.css", "./BuildOutput/content", true);
 
 });
 
@@ -146,12 +160,12 @@ Task("Build-Frontend")
 Task("Deploy-Frontend")
 	.IsDependentOn("Validate-Arguments")
 	.WithCriteria(() => environment != "Local")
-	.IsDependentOn("CleanStagingFolders")
+	.IsDependentOn("PrebuildActions")
 	.IsDependentOn("Build-Frontend")
 	.Does(() =>
 {
 
-	var sourcePath =  MakeAbsolute(Directory("./Komponentkartan/BuildOutput/_PublishedWebsites/Komponentkartan")).FullPath;
+	var sourcePath =  MakeAbsolute(Directory("./BuildOutput/")).FullPath;
 	var destinationPath = environment + "-komponentkartan";
 
 
