@@ -146,6 +146,8 @@ Task("Move-TypescriptAndSass")
 
 		//Kopiera *.css
 		CopyFiles("./content/*.css", "./BuildOutput/content", true);
+		
+        CopyFiles("./index.html", "./BuildOutput/", true);
 
 });
 
