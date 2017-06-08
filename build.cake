@@ -60,8 +60,10 @@ Task("PrebuildActions")
 	}
 
     Information("Flytta js filer för borttagning");
-	MoveFiles("./app/**/*.js", garbageDir);
-	MoveFiles("./app/**/*.js.map", garbageDir);
+	MoveFiles("./demo-app/**/*.js", garbageDir);
+	MoveFiles("./demo-app/**/*.js.map", garbageDir);
+    MoveFiles("./component-package/**/*.js", garbageDir);
+	MoveFiles("./component-package/**/*.js.map", garbageDir);
 
 	Information("Ta bort css:er");
 	DeleteFiles("./Content/*.css");
@@ -86,8 +88,11 @@ Task("PrebuildActions")
     if (!DirectoryExists(buildOutputWeb)) {
 		CreateDirectory(buildOutputWeb);
 	}
-    if (!DirectoryExists("./BuildOutput/app")) {
-        CreateDirectory("./BuildOutput/app");
+    if (!DirectoryExists("./BuildOutput/demo-app")) {
+        CreateDirectory("./BuildOutput/demo-app");
+	}
+    if (!DirectoryExists("./BuildOutput/component-package")) {
+        CreateDirectory("./BuildOutput/component-package");
 	}
     if (!DirectoryExists("./BuildOutput/scripts")) {
 	    CreateDirectory("./BuildOutput/scripts");
@@ -151,7 +156,8 @@ Task("Move-TypescriptAndSass")
 .IsDependentOn("Build-TypescriptAndSass")
 .Does(() => {
         //Kopiera *.js filer
-		CopyFiles("./app/**/*.js", "./BuildOutput/app", true);
+		CopyFiles("./demo-app/**/*.js", "./BuildOutput/demo-app", true);
+		CopyFiles("./component-package/**/*.js", "./BuildOutput/component-package", true);
 		CopyFiles("./scripts/*.js", "./BuildOutput/scripts", true);
 		CopyFiles("./tests/*.js", "./BuildOutput/tests", true);
         
@@ -165,12 +171,15 @@ Task("Build-Frontend")
 	.IsDependentOn("Move-TypescriptAndSass")
 	.IsDependentOn("Build-Npm-Frontend-Packages")
 	.Does(() => {
-        CopyFiles("./app/**/*.html", "./BuildOutput/app", true);
+        CopyFiles("./demo-app/**/*.html", "./BuildOutput/demo-app", true);
+        CopyFiles("./component-package/**/*.html", "./BuildOutput/component-package", true);
                 
-        CopyFiles("./app/**/*.ts", "./BuildOutput/app", true);
+        CopyFiles("./demo-app/**/*.ts", "./BuildOutput/demo-app", true);
+        CopyFiles("./component-package/**/*.ts", "./BuildOutput/component-package", true);
         CopyFiles("./tests/**/*.ts", "./BuildOutput/tests", true);
 
-        CopyFiles("./app/**/*.js.map", "./BuildOutput/app", true);
+        CopyFiles("./demo-app/**/*.js.map", "./BuildOutput/demo-app", true);
+        CopyFiles("./component-package/**/*.js.map", "./BuildOutput/component-package", true);
         CopyFiles("./tests/**/*.js.map", "./BuildOutput/tests", true);
         
         CopyFiles("./Images/*.*", "./BuildOutput/Images", true);
