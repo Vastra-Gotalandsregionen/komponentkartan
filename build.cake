@@ -148,7 +148,7 @@ Task("Move-TypescriptAndSass")
 		CopyFiles("./content/*.css", "./BuildOutput/content", true);
 		
         CopyFiles("./index.html", "./BuildOutput/", true);
-        CopyFiles("./systemjs.config", "./BuildOutput/", true);
+        CopyFiles("./systemjs.config.js", "./BuildOutput/", true);
 
 });
 
