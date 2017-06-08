@@ -94,7 +94,6 @@ Task("Restore-NpmPackages")
 	});
 
 Task("Build-Npm-Frontend-Packages")
-	.IsDependentOn("Build")
 	.Does(()=>{
 		CopyFile("./Komponentkartan/package.json","./Komponentkartan/BuildOutput/_PublishedWebsites/Komponentkartan/package.json");
 		NpmInstall(new NpmInstallSettings
