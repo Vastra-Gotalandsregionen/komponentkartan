@@ -3,7 +3,7 @@
 @import "_settings.sizes.scss";
 @import "_settings.colors.scss";
 @import "_settings.fonts.scss";
-@import "../thirdparty/font-awesome-4.7.0/font-awesome.scss";
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
 
 /**
     * The sidebar menu spans the entire height of the page and may contain
@@ -14,7 +14,6 @@
 sidebar-menu {
     position: fixed;
     z-index: $layer-three;
-    
 }
 
 .sidebar-menu {

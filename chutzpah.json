@@ -3,29 +3,51 @@
     "TestHarnessReferenceMode": "AMD",
     "TestHarnessLocationMode": "SettingsFileAdjacent",
     "Compile": {
-      "Mode": "External",
-      "Extensions": [ ".ts" ],
-      "ExtensionsWithNoOutput": [ ".d.ts" ] 
+        "Mode": "External",
+        "Extensions": [".ts"],
+        "ExtensionsWithNoOutput": [".d.ts"]
     },
     "Tests": [{
         "Includes": ["*/tests/*.ts"]
     }],
-    "References": [
-      { "Path": "node_modules/core-js/client/shim.min.js" },
-      { "Path": "node_modules/systemjs/dist/system.js" },
-      { "Path": "node_modules/zone.js/dist/zone.js" },
-      { "Path": "node_modules/zone.js/dist/async-test.js" },
-      { "Path": "node_modules/zone.js/dist/fake-async-test.js" },
-      { "Path": "node_modules/zone.js/dist/sync-test.js" },
-      { "Path": "node_modules/zone.js/dist/long-stack-trace-zone.js" },
-      { "Path": "node_modules/zone.js/dist/proxy.js" },
-      { "Path": "node_modules/zone.js/dist/jasmine-patch.js" },
+    "References": [{
+            "Path": "node_modules/core-js/client/shim.min.js"
+        },
+        {
+            "Path": "node_modules/systemjs/dist/system.js"
+        },
+        {
+            "Path": "node_modules/zone.js/dist/zone.js"
+        },
+        {
+            "Path": "node_modules/zone.js/dist/async-test.js"
+        },
+        {
+            "Path": "node_modules/zone.js/dist/fake-async-test.js"
+        },
+        {
+            "Path": "node_modules/zone.js/dist/sync-test.js"
+        },
+        {
+            "Path": "node_modules/zone.js/dist/long-stack-trace-zone.js"
+        },
+        {
+            "Path": "node_modules/zone.js/dist/proxy.js"
+        },
+        {
+            "Path": "node_modules/zone.js/dist/jasmine-patch.js"
+        },
 
-      { "Path": "node_modules/jquery/dist/jquery.min.js" },
-      { "Path": "content/thirdparty/jquery.scrollbar/prettify.js" },
-      { "Path": "content/thirdparty/jquery.scrollbar/jquery.scrollbar.min.js" },
+        {
+            "Path": "node_modules/jquery/dist/jquery.min.js"
+        },
+        {
+            "Path": "node_modules/jquery.scrollbar/jquery.scrollbar.min.js"
+        },
 
-      { "Path": "systemjs.config.js" }
+        {
+            "Path": "systemjs.config.js"
+        }
     ],
     "Server": {
         "Enabled": true

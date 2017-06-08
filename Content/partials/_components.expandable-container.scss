@@ -1,6 +1,6 @@
 @import "_settings.sizes.scss";
 @import "_settings.colors.scss";
-@import "../thirdparty/font-awesome-4.7.0/font-awesome.scss";
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
 //A list of expandable containers
 .expandable-container-list {
     position: relative;

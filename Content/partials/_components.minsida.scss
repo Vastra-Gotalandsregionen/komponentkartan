@@ -1,5 +1,5 @@
 @import "_settings.sizes.scss";
-@import "../thirdparty/font-awesome-4.7.0/font-awesome.scss";
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
 .minsida-header {
     display: flex;
     flex-direction: row;
@@ -31,8 +31,7 @@
     .user-card__header {
         //Linjen under headern skall gå hela vägen ut i kanten...
         margin-left: calc(-1 * #{$margin--fat});
-        margin-right: calc(-1 * #{$margin--fat});
-        //...men innehållet skall börja där det brukar
+        margin-right: calc(-1 * #{$margin--fat}); //...men innehållet skall börja där det brukar
         padding-left: $margin--fat;
         padding-right: $margin--fat;
     }

@@ -1,7 +1,7 @@
 @import "_settings.sizes";
 @import "_settings.fonts";
 @import "_objects.checkbox.scss";
-@import "../thirdparty/font-awesome-4.7.0/font-awesome.scss";
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
 @import "_components.information-panel.scss";
 .anvandarkort__header {
     border-bottom: $border--xs-slim solid $border-color; //Linjen under headern skall gå hela vägen ut i kanten...

@@ -1,15 +1,11 @@
 @import "_settings.sizes";
 @import "_settings.fonts";
 @import "_objects.checkbox.scss";
-@import "../thirdparty/font-awesome-4.7.0/font-awesome.scss";
-
-
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
 .user-card__header {
-    border-bottom: $border--xs-slim solid $border-color;
-    //Linjen under headern skall gå hela vägen ut i kanten...
+    border-bottom: $border--xs-slim solid $border-color; //Linjen under headern skall gå hela vägen ut i kanten...
     margin-left: calc(-1 * #{$margin--slim});
-    margin-right: calc(-1 * #{$margin--slim});
-    //...men innehållet skall börja där det brukar
+    margin-right: calc(-1 * #{$margin--slim}); //...men innehållet skall börja där det brukar
     padding-left: $margin--slim;
     padding-right: $margin--slim;
     padding-bottom: 6px;
@@ -49,7 +45,6 @@
     min-width: 469px;
     max-width: 469px;
     padding-right: $margin--slim;
-    
 }
 
 .user-card__panel-header {
