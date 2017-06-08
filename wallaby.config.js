@@ -64,13 +64,14 @@
             },
 
             {
-                pattern: './app/**/*+(ts|html|css)',
+                pattern: './demo-app/**/*+(ts|html|css)',
                 load: false
             },
             {
-                pattern: './app/**/*.spec.ts',
-                ignore: true
+                pattern: './component-package/**/*+(ts|html|css)',
+                load: false
             }
+
         ],
 
 
@@ -111,7 +112,7 @@
                 transpiler: 'none',
                 defaultJSExtensions: true,
                 meta: {
-                    './app/*': {
+                    './demo-app/*': {
                         scriptLoad: true,
                         format: 'register'
                     }

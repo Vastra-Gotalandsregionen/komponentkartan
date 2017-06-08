@@ -13,7 +13,8 @@
   },
   "compileOnSave": true,
   "include": [
-    "app/**/*.ts",
+    "demo-app/**/*.ts",
+    "component-package/**/*.ts",
     "tests/**/*.ts"
   ]
 
