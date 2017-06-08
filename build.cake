@@ -162,8 +162,7 @@ Task("Move-TypescriptAndSass")
 		CopyFiles("./tests/*.js", "./BuildOutput/tests", true);
         
         //Kopiera *.css
-		CopyFiles("./content/*.css", "./BuildOutput/content", true);
-		
+		CopyFiles("./content/*.css", "./BuildOutput/content", true);	
 });
 
 Task("Build-Frontend")
@@ -171,25 +170,14 @@ Task("Build-Frontend")
 	.IsDependentOn("Move-TypescriptAndSass")
 	.IsDependentOn("Build-Npm-Frontend-Packages")
 	.Does(() => {
-        CopyFiles("./demo-app/**/*.html", "./BuildOutput/demo-app", true);
-        CopyFiles("./component-package/**/*.html", "./BuildOutput/component-package", true);
-                
-        CopyFiles("./demo-app/**/*.ts", "./BuildOutput/demo-app", true);
-        CopyFiles("./component-package/**/*.ts", "./BuildOutput/component-package", true);
-        CopyFiles("./tests/**/*.ts", "./BuildOutput/tests", true);
-
-        CopyFiles("./demo-app/**/*.js.map", "./BuildOutput/demo-app", true);
-        CopyFiles("./component-package/**/*.js.map", "./BuildOutput/component-package", true);
-        CopyFiles("./tests/**/*.js.map", "./BuildOutput/tests", true);
-        
+        CopyFiles("./component-package/**/*.*", "./BuildOutput/component-package", true);
+        CopyFiles("./demo-app/**/*.*", "./BuildOutput/demo-app", true);
+        CopyFiles("./tests/**/*.*", "./BuildOutput/tests", true);
         CopyFiles("./Images/*.*", "./BuildOutput/Images", true);
-
         CopyFiles("./index.html", "./BuildOutput/", true);
         CopyFiles("./systemjs.config.js", "./BuildOutput/", true);
         CopyFiles("./BuildOutput/node_modules/font-awesome/fonts/*.*", "./BuildOutput/fonts/", true);
     });
-
-
 
 Task("Deploy-Frontend")
 	.IsDependentOn("Validate-Arguments")
