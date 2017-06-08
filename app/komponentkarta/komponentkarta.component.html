@@ -50,9 +50,12 @@
                 &lt;lock-button [disabled]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/lock-button&gt;
             </div>
             <div>
-                <lock-button (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"></lock-button>
-                <lock-button [unlocked]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"></lock-button>
-                <lock-button [disabled]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"></lock-button>
+                <lock-button (onLocked)="lockMessage='Lås 1 låst'" (onUnlocked)="lockMessage='Lås 1 upplåst'"></lock-button>
+                <lock-button [unlocked]="true" (onLocked)="lockMessage='Lås 2 låst'" (onUnlocked)="lockMessage='Lås 2 upplåst'"></lock-button>
+                <lock-button [disabled]="true"></lock-button>
+                <lock-button [disabled]="true" [unlocked]="true"></lock-button>
+                <br><br>
+                <span>Senaste händelse:&nbsp;<strong>{{lockMessage}}</strong></span>
             </div>
         </div>
         <div class="komponentkarta-component column-layout">
@@ -310,10 +313,16 @@
                     <expandable-container>
                         <div class="expandable-container__header">
                             <div class="flex-column-13">Tredje raden</div>
-                            <div class="flex-column-15">Innehåller en användare</div>
+                            <div class="flex-column-15">Innehåller komponenter</div>
                         </div>
                         <div class="expandable-container__content">
-                            <anvandare [anvandare]="demoAnvandare"></anvandare>
+                            <div class="column-layout">
+                                <dropdown [items]="dropDownItems25All"></dropdown>
+                                <radio-group [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'},
+                                {id:'4', displayName:'Fyra', disabled:true}]">
+                                </radio-group>
+                                <text-button>Knapp</text-button>
+                            </div>
                         </div>
                     </expandable-container>
                 </div>
