@@ -3,7 +3,7 @@
     <span *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{selectedItem | dropdownItemToSelectedText | truncate:14 }}</span>
     <span *ngIf="!selectedItem"></span>
     <div class="dropdown__menu">
-        <filter-textbox class="dropdown__filterTextbox" (inputChange)="nameChange($event)"></filter-textbox>
+        <vgr-filter-textbox class="dropdown__filterTextbox" (inputChange)="nameChange($event)"></vgr-filter-textbox>
         <div class="dropdown__dimmer dropdown__dimmer--top"></div>
         <ul class="dropdown__menu__items scrollbar-macosx">
             <li *ngIf="selectAllItem" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : selectAllItem.marked, 'dropdown-item--selected' : selectAllItem.selected }">

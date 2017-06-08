@@ -1,7 +1,7 @@
 ﻿import { Component, Input, EventEmitter, Output } from "@angular/core";
 
 @Component({
-    selector: "lock-button",
+    selector: "vgr-lock-button",
     templateUrl: "component-package/controls/lockButton/lockButton.component.html"
 })
 export class LockButtonComponent {

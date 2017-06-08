@@ -7,7 +7,7 @@
   * så ändrar sig "vågen" till färschemats sekundärfärg automatiskt         *
   */
 
-header {
+vgr-header {
     position: fixed;
     top: 0;
     z-index: $layer-three;
@@ -26,14 +26,14 @@ header {
     flex: none;
     align-items: center;
     background-color: $primary-color--neutral;
+    background-image: url("../Images/dekal.png");
+    background-repeat: no-repeat;
+    background-position: top right;
 }
 
 //THEMING
 .site-header-vgr--bmm {
     background-color: $primary-color--bmm;
-    background-image: url("../Images/dekal.png");
-    background-repeat: no-repeat;
-    background-position: top right;
     transition: background-color ease-in 0.3s;
 }
 
@@ -44,17 +44,11 @@ header {
 
 .site-header-vgr--vgpv {
     background-color: $primary-color--vgpv;
-    background-image: url("../Images/dekal.png");
-    background-repeat: no-repeat;
-    background-position: top right;
     transition: background-color ease-in 0.3s;
 }
 
 .site-header-vgr--rehab {
     background-color: $primary-color--rehab;
-    background-image: url("../Images/dekal.png");
-    background-repeat: no-repeat;
-    background-position: top right;
     transition: background-color ease-in 0.3s;
 }
 

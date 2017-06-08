@@ -4,7 +4,7 @@ import { TextButtonComponent } from "../textButton/textButton.component";
 import { LockButtonComponent } from "../lockButton/lockButton.component";
 
 @Component({
-    selector: "save-cancel",
+    selector: "vgr-save-cancel",
     templateUrl: "component-package/controls/saveCancel/saveCancel.component.html"
 })
 export class SaveCancelComponent implements OnChanges {

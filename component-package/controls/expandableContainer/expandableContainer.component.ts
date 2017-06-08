@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Observable";
 
 @Component({
     templateUrl: "component-package/controls/expandableContainer/expandableContainer.component.html",
-    selector: "expandable-container",
+    selector: "vgr-expandable-container",
     host: { 'class': 'expandable-container expandable-container--collapsed' }
 })
 export class ExpandableContainerComponent {

@@ -5,7 +5,7 @@ import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component";
 
 @Component({
-    selector: "dropdown",
+    selector: "vgr-dropdown",
     templateUrl: "component-package/controls/dropdown/dropdown.component.html",
     host: {
         '(document:click)': "onDocumentClick($event)"

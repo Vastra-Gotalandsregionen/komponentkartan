@@ -10,17 +10,17 @@
 
             <h2>Fyra alternativ, varav ett inaktivt</h2>
             <div>
-                <radio-group [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'},
+                <vgr-radio-group [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'},
                 {id:'4', displayName:'Fyra', disabled:true}]" (selectedChanged)="onSelectedRadioOptionChanged($event)">
-                </radio-group>
+                </vgr-radio-group>
                 <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
             </div>
             <h2>Tre inaktiva alternativ, varav ett förvalt</h2>
             <div>
-                <radio-group [options]="[{id:'1', displayName:'Ett',disabled:true},{id:'2', displayName:'Två',disabled:true, selected:true},{id:'3', displayName:'Tre',disabled:true}]">
-                </radio-group>
+                <vgr-radio-group [options]="[{id:'1', displayName:'Ett',disabled:true},{id:'2', displayName:'Två',disabled:true, selected:true},{id:'3', displayName:'Tre',disabled:true}]">
+                </vgr-radio-group>
             </div>
-            <div class="markup-example">&lt;radio-group [options]=&quot;myOptionsList&quot; (selectedChanged)=&quot;onSelectedChanged($event)&quot;&gt;&lt;/radio-group&gt;
+            <div class="markup-example">&lt;vgr-radio-group [options]=&quot;myOptionsList&quot; (selectedChanged)=&quot;onSelectedChanged($event)&quot;&gt;&lt;/vgr-radio-group&gt;
             </div>
         </div>
         <div class="komponentkarta-component column-layout">
@@ -31,7 +31,7 @@
             Om man låser upp och sedan <strong>låser</strong> är det <strong>samma som att spara</strong>.
             </span>
             <div>
-                <save-cancel (onSave)="saveCancelMessage='Sparade!'" (onCancel)="saveCancelMessage='Avbröt.'"></save-cancel>
+                <vgr-save-cancel (onSave)="saveCancelMessage='Sparade!'" (onCancel)="saveCancelMessage='Avbröt.'"></vgr-save-cancel>
                 <br>
                 <span>Senaste händelse:&nbsp;<strong>{{saveCancelMessage}}</strong></span>
             </div>
@@ -45,15 +45,15 @@
             För att skapa en upplåst knapp, sätt [unlocked]="<strong>true</strong>".
             Knappen skickar två events, ett för låst (onLocked) och ett för upplåst (onUnlocked).
             </span>
-            <div class="markup-example">&lt;lock-button (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/lock-button&gt;
-                &lt;lock-button [unlocked]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/lock-button&gt;
-                &lt;lock-button [disabled]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/lock-button&gt;
+            <div class="markup-example">&lt;vgr-lock-button (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/vgr-lock-button&gt;
+                &lt;vgr-lock-button [unlocked]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/vgr-lock-button&gt;
+                &lt;vgr-lock-button [disabled]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/vgr-lock-button&gt;
             </div>
             <div>
-                <lock-button (onLocked)="lockMessage='Lås 1 låst'" (onUnlocked)="lockMessage='Lås 1 upplåst'"></lock-button>
-                <lock-button [unlocked]="true" (onLocked)="lockMessage='Lås 2 låst'" (onUnlocked)="lockMessage='Lås 2 upplåst'"></lock-button>
-                <lock-button [disabled]="true"></lock-button>
-                <lock-button [disabled]="true" [unlocked]="true"></lock-button>
+                <vgr-lock-button (onLocked)="lockMessage='Lås 1 låst'" (onUnlocked)="lockMessage='Lås 1 upplåst'"></vgr-lock-button>
+                <vgr-lock-button [unlocked]="true" (onLocked)="lockMessage='Lås 2 låst'" (onUnlocked)="lockMessage='Lås 2 upplåst'"></vgr-lock-button>
+                <vgr-lock-button [disabled]="true"></vgr-lock-button>
+                <vgr-lock-button [disabled]="true" [unlocked]="true"></vgr-lock-button>
                 <br><br>
                 <span>Senaste händelse:&nbsp;<strong>{{lockMessage}}</strong></span>
             </div>
@@ -66,15 +66,15 @@
                 Knappen stödjer klick med tangentbord via <strong>Space</strong> och <strong>Enter</strong>, enligt <a href="https://www.w3.org/TR/wai-aria-practices/examples/button/button.html">WCAG Button examples</a>
             </span>
             <span>Notera: Knapparna nedan loggar till konsollen vid klick.</span>
-            <div class="markup-example">&lt;text-button (buttonClick)="consoleLog('Click')"&gt;Klicka här&lt;/text-button&gt; &lt;text-button [disabled]="true"
-                (buttonClick)="consoleLog('Click')"&gt;Inaktiv&lt;/text-button&gt;
+            <div class="markup-example">&lt;vgr-text-button (buttonClick)="consoleLog('Click')"&gt;Klicka här&lt;/vgr-text-button&gt; &lt;vgr-text-button
+                [disabled]="true" (buttonClick)="consoleLog('Click')"&gt;Inaktiv&lt;/vgr-text-button&gt;
             </div>
 
             <div>
-                <text-button (buttonClick)="consoleLog('Click')">Klicka här</text-button>
-                <text-button (buttonClick)="consoleLog('Click')">OK</text-button>
-                <text-button (buttonClick)="buttonDisabled=!buttonDisabled">Aktivera/Inaktivera</text-button>
-                <text-button [disabled]="buttonDisabled" (buttonClick)="consoleLog('Click')">Inaktiv</text-button>
+                <vgr-text-button (buttonClick)="consoleLog('Click')">Klicka här</vgr-text-button>
+                <vgr-text-button (buttonClick)="consoleLog('Click')">OK</vgr-text-button>
+                <vgr-text-button (buttonClick)="buttonDisabled=!buttonDisabled">Aktivera/Inaktivera</vgr-text-button>
+                <vgr-text-button [disabled]="buttonDisabled" (buttonClick)="consoleLog('Click')">Inaktiv</vgr-text-button>
             </div>
         </div>
         <!-- Färger -->
@@ -201,7 +201,7 @@
                 bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent bild som gör att man
                 bara behöver sätta headerns bakgrundsfärg genom rätt klassnamn.
             </p>
-            <header class="header--inline site-header-vgr site-header-vgr--bmm with-classes">
+            <div class="header--inline site-header-vgr site-header-vgr--bmm with-classes">
                 <img src="../Images/VG_Ne.png" class="header__vgr-logo" />
                 <div class="login-info">
                     <div>
@@ -209,8 +209,8 @@
                     </div>
                     <img src="../Images/Pinkiepie_small.jpg" class="login-info__profile_image" />
                 </div>
-            </header>
-            <header class="header--inline site-header-vgr site-header-vgr--rehab with-classes">
+            </div>
+            <div class="header--inline site-header-vgr site-header-vgr--rehab with-classes">
                 <img src="../Images/VG_Ne.png" class="header__vgr-logo" />
                 <div class="login-info">
                     <div>
@@ -218,8 +218,8 @@
                     </div>
                     <img src="../Images/Pinkiepie_small.jpg" class="login-info__profile_image" />
                 </div>
-            </header>
-            <header class="header--inline site-header-vgr site-header-vgr--vgpv with-classes">
+            </div>
+            <div class="header--inline site-header-vgr site-header-vgr--vgpv with-classes">
                 <img src="../Images/VG_Ne.png" class="header__vgr-logo" />
                 <div class="login-info">
                     <div>
@@ -227,8 +227,8 @@
                     </div>
                     <img src="../Images/Pinkiepie_small.jpg" class="login-info__profile_image" />
                 </div>
-            </header>
-            <header class="header--inline site-header-vgr site-header-vgr--neutral with-classes">
+            </div>
+            <div class="header--inline site-header-vgr site-header-vgr--neutral with-classes">
                 <img src="../Images/VG_Ne.png" class="header__vgr-logo" />
                 <div class="login-info">
                     <div>
@@ -236,7 +236,7 @@
                     </div>
                     <img src="../Images/Pinkiepie_small.jpg" class="login-info__profile_image" />
                 </div>
-            </header>
+            </div>
         </div>
         <div class="komponentkarta-component column-layout column-layout--padded">
             <h1>Dropdown</h1>
@@ -252,19 +252,19 @@
             <div class="row-layout">
                 <div>
                     <p>25 items</p>
-                    <dropdown [items]="dropDownItems25"></dropdown>
+                    <vgr-dropdown [items]="dropDownItems25"></vgr-dropdown>
                 </div>
                 <div>
                     <p>9 items</p>
-                    <dropdown [items]="dropDownItems9"></dropdown>
+                    <vgr-dropdown [items]="dropDownItems9"></vgr-dropdown>
                 </div>
                 <div>
                     <p>8 items</p>
-                    <dropdown [items]="dropDownItems8"></dropdown>
+                    <vgr-dropdown [items]="dropDownItems8"></vgr-dropdown>
                 </div>
                 <div>
                     <p>25 items och Visa alla</p>
-                    <dropdown [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"></dropdown>
+                    <vgr-dropdown [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"></vgr-dropdown>
                 </div>
             </div>
         </div>
@@ -286,13 +286,13 @@
                 &lt;!-- Detta är radens innehåll, som visas i expanderat läge --&gt; &lt;span&gt;Lorem Ipsum....&lt;/span&gt;
                 &lt;/div&gt; &lt;/expandable-container&gt; &lt;/div&gt; &lt;/expandable-container-list&gt;
             </div>
-            <expandable-container-list class="expandable-container-list--inline">
+            <vgr-expandable-container-list class="expandable-container-list--inline">
                 <div class="expandable-container-list__header">
                     <div class="flex-column-13">Kolumn 1</div>
                     <div class="flex-column-15">Kolumn 2</div>
                 </div>
                 <div class="expandable-container-list__items">
-                    <expandable-container>
+                    <vgr-expandable-container>
                         <div class="expandable-container__header">
                             <div class="flex-column-13">Första raden</div>
                             <div class="flex-column-15">Innehåller text</div>
@@ -300,8 +300,8 @@
                         <div class="expandable-container__content">
                             <span>Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.</span>
                         </div>
-                    </expandable-container>
-                    <expandable-container>
+                    </vgr-expandable-container>
+                    <vgr-expandable-container>
                         <div class="expandable-container__header">
                             <div class="flex-column-13">Andra raden</div>
                             <div class="flex-column-15">Innehåller en bild</div>
@@ -309,24 +309,24 @@
                         <div class="expandable-container__content">
                             <img src="../../images/pinkiepie.png" />
                         </div>
-                    </expandable-container>
-                    <expandable-container>
+                    </vgr-expandable-container>
+                    <vgr-expandable-container>
                         <div class="expandable-container__header">
                             <div class="flex-column-13">Tredje raden</div>
                             <div class="flex-column-15">Innehåller komponenter</div>
                         </div>
                         <div class="expandable-container__content">
                             <div class="column-layout">
-                                <dropdown [items]="dropDownItems25All"></dropdown>
-                                <radio-group [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'},
+                                <vgr-dropdown [items]="dropDownItems25All"></vgr-dropdown>
+                                <vgr-radio-group [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'},
                                 {id:'4', displayName:'Fyra', disabled:true}]">
-                                </radio-group>
-                                <text-button>Knapp</text-button>
+                                </vgr-radio-group>
+                                <vgr-text-button>Knapp</vgr-text-button>
                             </div>
                         </div>
-                    </expandable-container>
+                    </vgr-expandable-container>
                 </div>
-            </expandable-container-list>
+            </vgr-expandable-container-list>
         </div>
         <!-- Checkbox -->
         <div class="komponentkarta-component column-layout">
@@ -377,5 +377,5 @@
             </div>
         </div>
 
-    </div>-->
+    </div>
 </div>

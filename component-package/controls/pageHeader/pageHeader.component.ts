@@ -2,7 +2,7 @@ import { Component, Input, EventEmitter, Output, ViewChild } from "@angular/core
 import { SaveCancelComponent } from "../saveCancel/saveCancel.component";
 
 @Component({
-    selector: "page-header",
+    selector: "vgr-page-header",
     templateUrl: "component-package/controls/pageHeader/pageHeader.component.html",
     host: { 'class': 'page-header' }
 })

@@ -3,7 +3,7 @@ import { IDropdownItem } from "../../component-package/models/dropdownItem.model
 import { ISelectableItem } from "../../component-package/models/selectableItem.model";
 
 @Component({
-    selector: "komponentkarta",
+    selector: "vgr-komponentkarta",
     templateUrl: "/demo-app/komponentkarta/komponentkarta.component.html"
 })
 export class KomponentkartaComponent implements AfterViewInit {

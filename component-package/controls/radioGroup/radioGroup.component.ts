@@ -2,7 +2,7 @@ import { Component, Input, EventEmitter, Output, AfterViewInit, OnChanges } from
 import { ISelectableItem } from "../../models/selectableItem.model";
 
 @Component({
-    selector: "radio-group",
+    selector: "vgr-radio-group",
     templateUrl: "component-package/controls/radioGroup/radioGroup.component.html",
     host: { 'class': 'radio-group', 'role': 'radiogroup' }
 })

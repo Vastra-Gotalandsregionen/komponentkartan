@@ -1,7 +1,7 @@
 ﻿import { Component } from "@angular/core"
 
 @Component({
-    selector: "header-menu",
+    selector: "vgr-header-menu",
     templateUrl: "/demo-app/header/header-menu.component.html"
 })
 

@@ -1,7 +1,7 @@
 ﻿import { Component, Input, EventEmitter, Output, OnChanges } from "@angular/core";
 
 @Component({
-    selector: "text-button",
+    selector: "vgr-text-button",
     templateUrl: "component-package/controls/textButton/textButton.component.html"
 })
 export class TextButtonComponent implements OnChanges {
