@@ -1,6 +1,6 @@
 # Komponentkartan
 
-Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular 2
+Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular 4
 
 ## Getting Started
 TODO
@@ -32,7 +32,7 @@ TODO
 
 ## Built With
 
-* [Angular 2](https://angular.io/) - Web framework
+* [Angular 4](https://angular.io/) - Web framework
 * [NPM](https://www.npmjs.com/) - Dependency Management
 
 ## Contributing

@@ -1,0 +1,17 @@
+demo-app/
+tests/
+index.html
+.gitignore
+.v3.ncrunchsolution.user
+wallaby.config.js
+chutzpah.config.js
+build.ps1
+build.cake
+.vs/
+.vscode/
+bin/
+BuildOutput/
+garbageDir/
+obj/
+tools/
+
