@@ -6,6 +6,7 @@
 })
 export class TextButtonComponent implements OnChanges {
     @Input() disabled: boolean;
+    @Input() secondary: boolean;
     lastDisabledStatus: boolean;
     reenabled: boolean;
     @Output() buttonClick = new EventEmitter<string>();

@@ -12,6 +12,25 @@
     }
 }
 
+@keyframes button-enabling--secondary{
+    0% {
+        color: $secondary-color--neutral;
+        border: solid 1px $secondary-color--neutral;
+    }
+
+    50% {
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+        background-color: $primary-color--neutral;
+        color: $text-color--light;
+        border: solid 1px $primary-color--neutral;
+    }
+
+    100% {
+        background-color: $text-color--light;
+        color: $primary-color--neutral;
+    }
+}
+
 .button {
     height: 30px;
     position: relative;
@@ -24,30 +43,49 @@
     text-align: center;
     justify-content: center;
     cursor: pointer;
+
     &:hover:not(.button--disabled) {
         .button__focus-line {
             visibility: visible;
         }
+
+        &.button--secondary {
+            background-color: $primary-color--neutral;
+            color: $text-color--light;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
     }
+
     &:focus:not(.button--disabled) {
         box-shadow: 0 0 1px 1px #4990e2;
+        border-bottom-color: #4990e2;
     }
+
     &:active:not(.button--disabled) {
         height: 28px;
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
         transform: scaleX(0.96);
         outline: 0;
+
         .button__focus-line {
             background-color: transparentize($secondary-color--neutral, 0.4);
         }
     }
+
     &.button--disabled {
         background-color: $secondary-color--neutral;
         cursor: default;
+
         &:focus {
             outline: 0;
         }
+
+        &.button--secondary {
+            color: $secondary-color--neutral;
+            border: solid 1px $secondary-color--neutral;
+        }
     }
+
     .button__focus-line {
         visibility: hidden;
         height: 4px;
@@ -60,8 +98,20 @@
         border-bottom-left-radius: 1px;
         border-bottom-right-radius: 1px;
     }
+
+    &.button--secondary {
+        background-color: $text-color--light;
+        color: $primary-color--neutral;
+        border: solid 1px $primary-color--neutral;
+    }
 }
 
 .button--enabling {
     animation: button-enabling 1s;
+    transition: background-color 0.5s ease;
+
+    &.button--secondary {
+        animation: button-enabling--secondary 1.8s;
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
 }
