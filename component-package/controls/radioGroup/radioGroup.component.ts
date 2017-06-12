@@ -3,7 +3,8 @@ import { ISelectableItem } from "../../models/selectableItem.model";
 
 @Component({
     selector: "vgr-radio-group",
-    templateUrl: "component-package/controls/radioGroup/radioGroup.component.html",
+    moduleId: module.id,
+    templateUrl: "./radioGroup.component.html",
     host: { 'class': 'radio-group', 'role': 'radiogroup' }
 })
 export class RadioGroupComponent implements OnChanges {

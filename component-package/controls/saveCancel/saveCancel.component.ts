@@ -5,7 +5,8 @@ import { LockButtonComponent } from "../lockButton/lockButton.component";
 
 @Component({
     selector: "vgr-save-cancel",
-    templateUrl: "component-package/controls/saveCancel/saveCancel.component.html"
+    moduleId: module.id,
+    templateUrl: "./saveCancel.component.html"
 })
 export class SaveCancelComponent implements OnChanges {
     @Input() enabled: boolean;

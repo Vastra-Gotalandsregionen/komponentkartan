@@ -2,7 +2,8 @@
 
 @Component({
     selector: "vgr-lock-button",
-    templateUrl: "component-package/controls/lockButton/lockButton.component.html"
+    moduleId: module.id,
+    templateUrl: "./lockButton.component.html"
 })
 export class LockButtonComponent {
     @Input() disabled: boolean;

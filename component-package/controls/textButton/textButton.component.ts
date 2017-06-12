@@ -2,7 +2,8 @@
 
 @Component({
     selector: "vgr-text-button",
-    templateUrl: "component-package/controls/textButton/textButton.component.html"
+    moduleId: module.id,
+    templateUrl: "./textButton.component.html"
 })
 export class TextButtonComponent implements OnChanges {
     @Input() disabled: boolean;

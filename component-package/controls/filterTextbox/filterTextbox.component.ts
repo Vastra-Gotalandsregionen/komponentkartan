@@ -2,7 +2,8 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
     selector: "vgr-filter-textbox",
-    templateUrl: "component-package/controls/filterTextbox/filterTextbox.component.html"
+    moduleId: module.id,
+    templateUrl: "./filterTextbox.component.html"
 })
 export class FilterTextboxComponent {
     private value: string;

@@ -6,7 +6,8 @@ import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component
 
 @Component({
     selector: "vgr-dropdown",
-    templateUrl: "component-package/controls/dropdown/dropdown.component.html",
+    moduleId: module.id,
+    templateUrl: "./dropdown.component.html",
     host: {
         '(document:click)': "onDocumentClick($event)"
     }

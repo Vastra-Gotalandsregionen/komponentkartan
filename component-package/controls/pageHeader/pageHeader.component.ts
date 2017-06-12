@@ -3,7 +3,8 @@ import { SaveCancelComponent } from "../saveCancel/saveCancel.component";
 
 @Component({
     selector: "vgr-page-header",
-    templateUrl: "component-package/controls/pageHeader/pageHeader.component.html",
+    moduleId: module.id,
+    templateUrl: "./pageHeader.component.html",
     host: { 'class': 'page-header' }
 })
 export class PageHeaderComponent {
