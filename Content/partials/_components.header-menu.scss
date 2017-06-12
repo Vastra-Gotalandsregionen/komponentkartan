@@ -1,16 +1,17 @@
-@import "../../node_modules/font-awesome/scss/font-awesome.scss";
 @import "_settings.sizes.scss";
 @import "_settings.colors.scss";
 
 /* The small arrow indicating that there is a drop down menu below */
 
 .header-menu-indicator {
-    @extend .fa;
-    @extend .fa-sort-desc;
     color: white;
     align-self: flex-end;
     padding-bottom: 22px;
     padding-left: 5px;
+    &:before {
+        content: "\f0dd";
+        font-family: "FontAwesome",
+    }
 }
 
 
