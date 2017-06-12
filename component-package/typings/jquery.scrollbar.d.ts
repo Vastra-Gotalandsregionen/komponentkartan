@@ -1,3 +1,4 @@
 interface JQuery {
-    scrollbar(): JQuery;
+    scrollbar(): void;
+    scrollbar(config: any): void;
 }
