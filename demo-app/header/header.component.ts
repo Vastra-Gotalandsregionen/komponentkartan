@@ -14,6 +14,6 @@ export class HeaderComponent implements AfterViewInit {
     }
     ngAfterViewInit() {
 
-        $.getScript("../../scripts/_components.header-menu.js");
+
     }
 }

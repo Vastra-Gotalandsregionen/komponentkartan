@@ -1,5 +1,5 @@
 ﻿<div class="save-cancel">
-    <text-button class="text-button--cancel" [disabled]="!saveCancelEnabled" (buttonClick)="cancel()">Avbryt</text-button>
-    <text-button class="text-button--save" [disabled]="!saveCancelEnabled" (buttonClick)="save()">Spara</text-button>
-    <lock-button (onLocked)="onLocked()" (onUnlocked)="onUnlocked()"></lock-button>
+    <vgr-text-button class="text-button--cancel" [disabled]="!saveCancelEnabled" (buttonClick)="cancel()">Avbryt</vgr-text-button>
+    <vgr-text-button class="text-button--save" [disabled]="!saveCancelEnabled" (buttonClick)="save()">Spara</vgr-text-button>
+    <vgr-lock-button (onLocked)="onLocked()" (onUnlocked)="onUnlocked()"></vgr-lock-button>
 </div>

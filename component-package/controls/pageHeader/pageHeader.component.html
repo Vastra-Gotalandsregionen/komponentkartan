@@ -3,10 +3,10 @@
         <div class="page-header__top-border"></div>
         <div class="page-header__controls">
             <ng-content select=".page-header__control"></ng-content>
-            <text-button *ngIf="enableActionsText" class="page-header__control" (buttonClick)="enableActions()">{{enableActionsText}}</text-button>
+            <vgr-text-button *ngIf="enableActionsText" class="page-header__control" (buttonClick)="enableActions()">{{enableActionsText}}</vgr-text-button>
             <div class="page-header__control-panel control-with-heading">
                 <h1 class="page-header__title">{{title}}</h1>
-                <save-cancel *ngIf="saveCancel" class="page-header__save-cancel" (onCancel)="disableActions()" (onSave)="disableActions()"></save-cancel>
+                <vgr-save-cancel *ngIf="saveCancel" class="page-header__save-cancel" (onCancel)="disableActions()" (onSave)="disableActions()"></vgr-save-cancel>
             </div>
         </div>
     </div>
