@@ -183,6 +183,7 @@ build/
 
 # VardvalPortal-filer
 Content/main.css
+Content/komponentkartan.css
 
 
 demo-app/**/*.js

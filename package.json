@@ -1,13 +1,13 @@
 {
     "name": "vgr-komponentkartan",
-    "version": "0.0.1",
-    "author": "Västra Götalandsregionen",
+    "version": "0.0.2",
+    "author": "VÃ¤stra GÃ¶talandsregionen",
     "scripts": {
         "[start-app]": "concurrent \"npm run _copy-fonts\" \"npm run _watch-typescript\" \"npm run _local-webserver\" \"npm run _watch-css\"",
         "_compile-typescript": "tsc",
         "_watch-typescript": "tsc -w",
         "_local-webserver": "lite-server",
-        "_compile-css": "node-sass --include-path content content/main.scss content/main.css",
+        "_compile-css": "node-sass --include-path content content/komponentkartan.scss content/komponentkartan.css",
         "_watch-css": "nodemon -e scss --watch content/  --exec \"npm run _compile-css\"",
         "_clean_build_output": "rimraf ./BuildOutput",
         "_copy-fonts": "copyfiles -u 3 node_modules/font-awesome/fonts/*.* fonts"

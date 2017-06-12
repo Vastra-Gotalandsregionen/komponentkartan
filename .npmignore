@@ -2,11 +2,14 @@ demo-app/
 tests/
 index.html
 .gitignore
+.npmignore
 .v3.ncrunchsolution.user
 wallaby.config.js
-chutzpah.config.js
+chutzpah.json
 build.ps1
 build.cake
+systemjs.config.js
+tsconfig.json
 .vs/
 .vscode/
 bin/
@@ -14,4 +17,5 @@ BuildOutput/
 garbageDir/
 obj/
 tools/
+Content/partials/
 
