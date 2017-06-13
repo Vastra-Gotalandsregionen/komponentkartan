@@ -28,7 +28,7 @@
             border-radius: 1px;
         } //Ikon, uppåt- eller nedåtpil
         &:after {
-            @extend .bg-image-icon-chevron--inverted;
+            @extend .bg-image-icon-chevron-inverted;
             width: $icon-width;
             height: calc(#{$component-height});
             vertical-align: middle;
@@ -86,9 +86,9 @@
         visibility: hidden;
         cursor: default;
         &:before {
-            @extend .bg-image-icon-chevron--inverted;
+            @extend .bg-image-icon-chevron-inverted;
             position: absolute;
-            display: inline-block;
+            display: block;
             z-index: 2;
             margin-top: -32px;
             left: 20px;

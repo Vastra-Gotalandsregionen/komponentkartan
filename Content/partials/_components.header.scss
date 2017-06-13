@@ -85,6 +85,9 @@ vgr-header {
 
 .login-info__profile_image {
     @extend .bg-image-profile-header;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
     height: 39px;
     width: 39px;
     border-radius: 50%;
