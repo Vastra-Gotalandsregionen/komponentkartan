@@ -29,13 +29,16 @@
         } //Ikon, uppåt- eller nedåtpil
         &:after {
             @extend .bg-image-icon-chevron-inverted;
+            content: "";
+            background-size: 45%;
+            background-repeat: no-repeat;
+            background-position: center;
             width: $icon-width;
             height: calc(#{$component-height});
             vertical-align: middle;
             text-align: center;
             float: right;
             background-color: transparent;
-            color: white;
             cursor: pointer;
             transform: rotate(0deg);
             transition: all ease 0.3s;
