@@ -1,6 +1,6 @@
 {
     "name": "vgr-komponentkartan",
-    "version": "0.0.8",
+    "version": "0.0.10",
     "author": "Västra Götalandsregionen",
     "scripts": {
         "[start-app]": "concurrent \"npm run _copy-fonts\" \"npm run _watch-typescript\" \"npm run _local-webserver\" \"npm run _watch-css\"",
@@ -33,6 +33,7 @@
         "@types/jquery": "^2.0.40",
         "@types/core-js": "0.9.36",
         "@types/node": "7.0.7"
+
     },
     "devDependencies": {
         "body-parser": "^1.16.1",

@@ -1,3 +1,6 @@
+
+///<reference path="../../typings/jquery.scrollbar.d.ts"/>
+
 import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, OnInit, ViewChild } from "@angular/core";
 import { IDropdownItem } from "../../models/dropdownItem.model";
 import { FilterPipe } from "../../pipes/filterpipe";
