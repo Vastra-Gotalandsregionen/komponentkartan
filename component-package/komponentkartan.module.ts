@@ -37,7 +37,7 @@ import { RadioGroupComponent } from "./controls/radioGroup/radioGroup.component"
         LockButtonComponent,
         SaveCancelComponent,
         PageHeaderComponent,
-        RadioGroupComponent,
+        RadioGroupComponent
     ],
     exports: [
         SafePipe,
@@ -52,7 +52,11 @@ import { RadioGroupComponent } from "./controls/radioGroup/radioGroup.component"
         LockButtonComponent,
         SaveCancelComponent,
         PageHeaderComponent,
-        RadioGroupComponent,
+        RadioGroupComponent
+
     ]
 })
+
+
+
 export class KomponentkartanModule { }
