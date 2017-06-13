@@ -69,9 +69,7 @@
     margin-bottom: 1px;
     box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
     .expandable-container__header:after {
-        content: "\f106";
-        font-size: 20px;
-        font-family: FontAwesome;
+        @extend .bg-image-icon-chevron;
         vertical-align: middle;
         margin-left: auto;
         transform: rotate(0deg);
@@ -86,9 +84,7 @@
     &.expandable-container--collapsed {
         margin-top: 2px; //OBS! Denna måste ligga efter expanded-stilen i filen!
         .expandable-container__header:after {
-            content: "\f106";
-            font-size: 20px;
-            font-family: FontAwesome;
+            @extend .bg-image-icon-chevron;
             vertical-align: middle;
             margin-left: auto;
             transform: rotate(-180deg);

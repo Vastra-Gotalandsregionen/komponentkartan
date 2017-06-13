@@ -1,5 +1,6 @@
 @import "_settings.sizes.scss";
 @import "_settings.colors.scss";
+@import "_objects.images.scss";
 
 /* The small arrow indicating that there is a drop down menu below */
 
@@ -9,8 +10,7 @@
     padding-bottom: 22px;
     padding-left: 5px;
     &:before {
-        content: "\f0dd";
-        font-family: "FontAwesome",
+        @extend .bg-image-icon-arrow-white;
     }
 }
 
@@ -109,9 +109,7 @@
     >a:first-of-type {
         //Add a plus sign to the right when the menu is not expanded
         &:after {
-            content: "\f067"; //Plus
-            font-size: 7px;
-            font: normal normal normal 7px/1 FontAwesome;
+            @extend .bg-image-icon-plus;
             float: right;
             margin-right: 5px;
             font-size: 10px !important;
@@ -129,7 +127,7 @@
         } //Change the plus into a minus when the menu is expanded
         >a:first-of-type {
             &:after {
-                content: "\f068"; //Minus
+                @extend .bg-image-icon-minus;
             }
         }
     }
