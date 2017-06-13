@@ -4,6 +4,64 @@
 
     <div class="komponentkarta-components">
         <div class="komponentkarta-component column-layout">
+            <h1 class="formatmall__header">Formatmall</h1>
+            <span>Fonten som används är <strong>Calibri</strong>. Storlek på brödtext och rubriker anpassas efter fönstrets bredd i två steg.<br/>
+            Liten storlek är <strong>1366px - 1458px</strong>. Stor storlek <strong>1459px</strong> och större.</span>
+            <h1 class="font-example"></h1>
+            <h2 class="font-example"></h2>
+            <h3 class="font-example"></h3>
+            <div class="font-example"></div>
+            <div class="font-example text--white"></div>
+            <div><strong class="font-example"></strong></div>
+        </div>
+        <!-- Färger -->
+        <div class="komponentkarta-component column-layout">
+            <h1>Färgkarta</h1>
+            <div></div>
+            <div class="color-sample neutral--primary">
+                <span class="color-sample__name">Neutral primärfärg</span>
+                <span class="color-sample__code">R: 49 G: 65 B: 82 <strong>#314152</strong></span>
+            </div>
+            <div class="color-sample neutral--secondary">
+                <span class="color-sample__name">Neutral sekundärfärg</span>
+                <span class="color-sample__code">R: 135 G: 147 B: 159 <strong>#99A3AD</strong></span>
+            </div>
+            <div class="color-sample background-color--default">
+                <span class="color-sample__name">Bakgrund</span>
+                <span class="color-sample__code">R: 240 G: 240 B: 240 <strong>#F0F0F0</strong></span>
+            </div>
+            <div class="color-sample background-color--text">
+                <span class="color-sample__name">Textfärg</span>
+                <span class="color-sample__code">R: 30 G: 30 B: 30 <strong>#151515</strong></span>
+            </div>
+            <div class="color-sample vgpv--primary">
+                <span class="color-sample__name">VGPV primärfärg</span>
+                <span class="color-sample__code">R: 157 G: 34 B: 53 <strong>#9D2235</strong></span>
+            </div>
+            <div class="color-sample vgpv--secondary">
+                <span class="color-sample__name">VGPV sekundärfärg</span>
+                <span class="color-sample__code">R: 186 G: 98 B: 113 <strong>#BA6271</strong></span>
+            </div>
+            <div class="color-sample bmm--primary">
+                <span class="color-sample__name">BMM primärfärg</span>
+                <span class="color-sample__code">R: 0 G: 98 B: 152 <strong>#006298</strong></span>
+            </div>
+            <div class="color-sample bmm--secondary">
+                <span class="color-sample__name">BMM sekundärfärg</span>
+                <span class="color-sample__code">R: 80 G: 143 B: 184 <strong>#508FB8</strong></span>
+            </div>
+            <div class="color-sample rehab--primary">
+                <span class="color-sample__name">Rehab primärfärg</span>
+                <span class="color-sample__code">R: 74 G: 119 B: 60 <strong>#4A773C</strong></span>
+            </div>
+            <div class="color-sample rehab--secondary">
+                <span class="color-sample__name">Rehab sekundärfärg</span>
+                <span class="color-sample__code">R: 127 G: 162 B: 118 <strong>#7FA276</strong></span>
+            </div>
+
+
+        </div>
+        <div class="komponentkarta-component column-layout">
             <h1>Radioknappar</h1>
             <span>Ett valbart alternativ åt gången, val kan vara förvalda eller inaktiva. Vid val av alternativ triggas eventet <strong>selectedChanged</strong>
             Valbara items är av typen <i>ISelectableItem</i> som innehåller id, displayName, selected samt disabled. Det är genom att sätta properties på dessa objekt som man styr beteendet.</span>
@@ -70,13 +128,14 @@
             <div class="markup-example">&lt;vgr-text-button (buttonClick)="consoleLog('Click')"&gt;Klicka här&lt;/vgr-text-button&gt; &lt;vgr-text-button
                 [disabled]="true" (buttonClick)="consoleLog('Click')"&gt;Inaktiv&lt;/vgr-text-button&gt;
             </div>
-
+            <h2>Primärknappar</h2>
             <div>
                 <vgr-text-button (buttonClick)="consoleLog('Click')">Klicka här</vgr-text-button>
                 <vgr-text-button (buttonClick)="consoleLog('Click')">OK</vgr-text-button>
                 <vgr-text-button (buttonClick)="buttonDisabled=!buttonDisabled">Aktivera/Inaktivera</vgr-text-button>
                 <vgr-text-button [disabled]="buttonDisabled" (buttonClick)="consoleLog('Click')">Inaktiv</vgr-text-button>
             </div>
+            <h2>Sekundärknappar</h2>
             <div>
                 <vgr-text-button [secondary]="true" (buttonClick)="consoleLog('Click')">Klicka här</vgr-text-button>
                 <vgr-text-button [secondary]="true" (buttonClick)="consoleLog('Click')">OK</vgr-text-button>
@@ -84,39 +143,7 @@
                 <vgr-text-button [secondary]="true" [disabled]="buttonSecondaryDisabled" (buttonClick)="consoleLog('Click')">Inaktiv</vgr-text-button>
             </div>
         </div>
-        <!-- Färger -->
-        <div class="komponentkarta-component column-layout">
-            <h1>Färger</h1>
-            <span>Färger består av en primärfärg och en sekundärfärg som är primärfärg i 0.3 opacitet. </span>
-            <div class="color-sample">
-                <h2 class="color-sample__header">Neutral</h2>
-                <div class="color-sample__colors">
-                    <div class="neutral--primary with-classes">Primär</div>
-                    <div class="neutral--secondary with-classes">Sekundär</div>
-                </div>
-            </div>
-            <div class="color-sample">
-                <h2 class="color-sample__header">BMM</h2>
-                <div class="color-sample__colors">
-                    <div class="bmm--primary with-classes">Primär</div>
-                    <div class="bmm--secondary with-classes">Sekundär</div>
-                </div>
-            </div>
-            <div class="color-sample">
-                <h2 class="color-sample__header">VGPV</h2>
-                <div class="color-sample__colors">
-                    <div class="vgpv--primary with-classes">Primär</div>
-                    <div class="vgpv--secondary with-classes">Sekundär</div>
-                </div>
-            </div>
-            <div class="color-sample">
-                <h2 class="color-sample__header">Rehab</h2>
-                <div class="color-sample__colors">
-                    <div class="rehab--primary with-classes">Primär</div>
-                    <div class="rehab--secondary with-classes">Sekundär</div>
-                </div>
-            </div>
-        </div>
+
         <!-- Information panels -->
         <div class="komponentkarta-component column-layout">
             <h1>Paneler</h1>

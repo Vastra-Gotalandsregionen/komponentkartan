@@ -48,3 +48,91 @@
     border-radius: 3px;
     padding: 4px;
 }
+
+.color-sample {
+    display: block;
+    width: 600px;
+    height: 50px;
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
+    margin-top: 0px;
+    &::first-child {
+        margin-top: $margin--slim;
+    }
+}
+
+.color-sample__name {
+    float: left;
+}
+
+.color-sample__code {
+    float: right;
+}
+
+.control-example {
+    border: 1px solid $border-color;
+    padding: $margin--slim;
+    width: 300px;
+}
+
+.formatmall__header {
+    &:after {
+        content: " (1366px - 1458px)";
+    }
+}
+
+.font-example {
+    width: 900px;
+    &:after {
+        content: "Brödtext: 16 px, regular, radavstånd 1.5, #151515";
+    }
+}
+
+strong.font-example:after {
+    content: "Brödtext: 16 px, bold, radavstånd 1.5, #151515";
+}
+
+.text--white.font-example:after {
+    content: "Brödtext vit: 16 px, bold, radavstånd 1.5, #151515";
+}
+
+h1.font-example:after {
+    content: "Rubrik 1, ANVÄNDARE: 25 px, regular, radavstånd 1.5, #151515";
+}
+
+h2.font-example:after {
+    content: "Rubrik 2: 18 px, bold, radavstånd 1.5, #151515";
+}
+
+h3.font-example:after {
+    content: "Rubrik 3: 18 px, regular, radavstånd 1.5, #151515";
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+    .formatmall__header {
+        &:after {
+            content: " (1459px - )";
+        }
+    }
+    .font-example {
+        width: 900px;
+        &:after {
+            content: "Brödtext: 18 px, regular, radavstånd 1.5, #151515";
+        }
+    }
+    strong.font-example:after {
+        content: "Brödtext: 18 px, bold, radavstånd 1.5, #151515";
+    }
+    .text--white.font-example:after {
+        content: "Brödtext vit: 18 px, bold, radavstånd 1.5, #151515";
+    }
+    h1.font-example:after {
+        content: "Rubrik 1, ANVÄNDARE: 30 px, regular, radavstånd 1.5, #151515";
+    }
+    h2.font-example:after {
+        content: "Rubrik 2: 20 px, bold, radavstånd 1.5, #151515";
+    }
+    h3.font-example:after {
+        content: "Rubrik 3: 20 px, regular, radavstånd 1.5, #151515";
+    }
+}

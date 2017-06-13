@@ -1,5 +1,4 @@
 @import "_settings.colors.scss";
-
 .bmm--primary {
     background-color: $primary-color--bmm;
     color: $text-color--light;
@@ -42,4 +41,13 @@
 
 .read-only {
     color: $text-color--read-only;
+}
+
+.background-color--default {
+    background-color: $background-color--default;
+}
+
+.background-color--text {
+    background-color: $text-color--default;
+    color: $text-color--light;
 }

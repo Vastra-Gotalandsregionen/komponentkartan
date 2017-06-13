@@ -31,6 +31,11 @@ i {
     font-style: italic;
 }
 
+.text--white {
+    color: $text-color--light;
+    background: $primary-color--neutral;
+}
+
 @media screen and (min-width: $desktop-width--medium) {
     body {
         font-size: $font-size--medium;
