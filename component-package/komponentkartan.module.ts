@@ -1,7 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core"
 import { BrowserModule, Title } from "@angular/platform-browser"
 import { RouterModule, Routes } from "@angular/router"
-import { HttpModule } from "@angular/http";
+
 import { FormsModule } from "@angular/forms";
 import { SafePipe } from "./pipes/safePipe"
 import { TruncatePipe } from "./pipes/truncatePipe"
@@ -20,7 +20,6 @@ import { RadioGroupComponent } from "./controls/radioGroup/radioGroup.component"
 @NgModule({
     imports: [
         BrowserModule,
-        HttpModule,
         FormsModule
     ],
 

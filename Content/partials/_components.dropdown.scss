@@ -1,5 +1,6 @@
     @import "_settings.colors.scss";
     @import "_settings.sizes.scss";
+    @import "_objects.images.scss";
     $dropdown-height--small: 364px;
     $dropdown-height--medium: 394px;
     $dropdown-width--medium: 160px;
@@ -27,11 +28,9 @@
             border-radius: 1px;
         } //Ikon, uppåt- eller nedåtpil
         &:after {
-            content: "\f107";
+            @extend .bg-image-icon-chevron--inverted;
             width: $icon-width;
             height: calc(#{$component-height});
-            font-size: 21px;
-            font-family: FontAwesome;
             vertical-align: middle;
             text-align: center;
             float: right;
@@ -87,7 +86,7 @@
         visibility: hidden;
         cursor: default;
         &:before {
-            content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAMCAYAAAB8xa1IAAAAAXNSR0IArs4c6QAAANJJREFUOBHdUk0LgkAQtS8qhER/b1chhA71Fz2sBxdPeqrsvZiBdc1wPfbgMbPOzHsrO1H0b1gF/NBUbz9HY2rYnWWPS7dGE5dubZCvB6fxQQ3YtwV3XdflbduemYMbkDXtQxoODlOEgkfw1DTNtRfUdZ3zm9R4CTVEOh++SVpV1U1NNBpjLpBMQV4k2Mw3ySB4V3E/lmVZwCQLNQsyUdNQs0UmS8xoxC06gMm3N1HRqShvlmB+L1rUHEE3LLbWFhB7CJ+ILyHCb8g2xlDntlLzgzfMJhpkhRD1awAAAABJRU5ErkJggg==);
+            @extend .bg-image-icon-chevron--inverted;
             position: absolute;
             display: inline-block;
             z-index: 2;

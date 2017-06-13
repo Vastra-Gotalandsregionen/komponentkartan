@@ -1,5 +1,5 @@
-import { Component, OnInit, QueryList, ViewChildren, AfterViewInit, HostListener } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Component, HostListener } from "@angular/core";
+
 
 
 @Component({
