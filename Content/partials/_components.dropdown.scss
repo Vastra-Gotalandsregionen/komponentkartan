@@ -87,7 +87,7 @@
         visibility: hidden;
         cursor: default;
         &:before {
-            content: url("../images/menu_arrow.png");
+            content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAMCAYAAAB8xa1IAAAAAXNSR0IArs4c6QAAANJJREFUOBHdUk0LgkAQtS8qhER/b1chhA71Fz2sBxdPeqrsvZiBdc1wPfbgMbPOzHsrO1H0b1gF/NBUbz9HY2rYnWWPS7dGE5dubZCvB6fxQQ3YtwV3XdflbduemYMbkDXtQxoODlOEgkfw1DTNtRfUdZ3zm9R4CTVEOh++SVpV1U1NNBpjLpBMQV4k2Mw3ySB4V3E/lmVZwCQLNQsyUdNQs0UmS8xoxC06gMm3N1HRqShvlmB+L1rUHEE3LLbWFhB7CJ+ILyHCb8g2xlDntlLzgzfMJhpkhRD1awAAAABJRU5ErkJggg==);
             position: absolute;
             display: inline-block;
             z-index: 2;
@@ -173,25 +173,21 @@
             width: 9px;
             z-index: $layer-four;
         }
-        
-        .scroll-element.scroll-y.scroll-scrolly_visible{
+        .scroll-element.scroll-y.scroll-scrolly_visible {
             z-index: $layer-five;
         }
     }
 
-
-
-.dropdown__filterTextbox {
-    position: absolute;
-    margin-left: 30px;
-    margin-right: 30px;
-    width: calc(100% - 60px);
-    visibility: hidden;
-
-    .dropdown--filter-visible.dropdown--open & {
-        visibility: visible;
+    .dropdown__filterTextbox {
+        position: absolute;
+        margin-left: 30px;
+        margin-right: 30px;
+        width: calc(100% - 60px);
+        visibility: hidden;
+        .dropdown--filter-visible.dropdown--open & {
+            visibility: visible;
+        }
     }
-}
 
     .dropdown-item--select-all {
         &:after {
