@@ -30,11 +30,11 @@ $menu-text-font-size--medium: 20px;
 $font-size--large: 20px;
 @font-face {
   font-family: "FontAwesome";
-  src: url('/fonts/fontawesome-webfont.eot');
+  src: url('/node_modules/font-awesome/fonts/fontawesome-webfont.eot');
   /* IE9 Compat Modes */
-  src: url('/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('/fonts/fontawesome-webfont.woff') format('woff'), /* Modern Browsers */
-  url('/fonts/fontawesome-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
-  url('/fonts/fontawesome-webfont.svg#svgFontName') format('svg');
+  src: url('/node_modules/font-awesome/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/node_modules/font-awesome/fonts/fontawesome-webfont.woff') format('woff'), /* Modern Browsers */
+  url('/node_modules/font-awesome/fonts/fontawesome-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('/node_modules/font-awesome/fonts/fontawesome-webfont.svg#svgFontName') format('svg');
   /* Legacy iOS */
 }
