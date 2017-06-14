@@ -243,6 +243,10 @@
         }
     }
 
+    .scroll-element.scroll-x {
+        display: none !important;
+    }
+
     @media screen and (min-width: $desktop-width--medium) {
         .dropdown__menu {
             max-height: $dropdown-height--medium;
