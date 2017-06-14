@@ -89,9 +89,10 @@
         visibility: hidden;
         cursor: default;
         &:before {
-            @extend .bg-image-icon-chevron-inverted;
+            @extend .bg-image-menu-arrow;
+            content: "";
             position: absolute;
-            display: block;
+            display: inline-block;
             z-index: 2;
             margin-top: -32px;
             left: 20px;
