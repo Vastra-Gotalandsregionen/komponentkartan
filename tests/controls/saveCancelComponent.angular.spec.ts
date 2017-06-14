@@ -25,17 +25,17 @@ describe("SaveCancelComponent", () => {
 
         TestBed.overrideComponent(SaveCancelComponent, {
             set: {
-                templateUrl: "component-package/controls/saveCancel/saveCancel.component.html"
+                templateUrl: "saveCancel.component.html"
             }
         });
         TestBed.overrideComponent(TextButtonComponent, {
             set: {
-                templateUrl: "component-package/controls/textButton/textButton.component.html"
+                templateUrl: "../textButton/textButton.component.html"
             }
         });
         TestBed.overrideComponent(LockButtonComponent, {
             set: {
-                templateUrl: "component-package/controls/lockButton/lockButton.component.html"
+                templateUrl: "../lockButton/lockButton.component.html"
             }
         });
 
@@ -106,7 +106,7 @@ describe("SaveCancelComponent", () => {
         });
         describe("When unlock button is clicked", () => {
             beforeEach(() => {
-                var lockButton = rootElement.query(By.css("lock-button"));
+                var lockButton = rootElement.query(By.css("vgr-lock-button"));
                 lockButton.triggerEventHandler("onUnlocked", null);
             });
             it("saveCancelEnable is set to true", () => {
@@ -115,7 +115,7 @@ describe("SaveCancelComponent", () => {
         });
         describe("When lock button is clicked", () => {
             beforeEach(() => {
-                var lockButton = rootElement.query(By.css("lock-button"));
+                var lockButton = rootElement.query(By.css("vgr-lock-button"));
                 lockButton.triggerEventHandler("onLocked", null);
             });
             it("a save event is sent", () => {

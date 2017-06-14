@@ -23,7 +23,7 @@ describe("SaveCancelComponent", () => {
 
         TestBed.overrideComponent(RadioGroupComponent, {
             set: {
-                templateUrl: "component-package/controls/radioGroup/radioGroup.component.html"
+                templateUrl: "radioGroup.component.html"
             }
         });
 

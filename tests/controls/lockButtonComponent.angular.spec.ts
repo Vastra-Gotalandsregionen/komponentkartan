@@ -24,7 +24,7 @@ describe("TextButtonComponent", () => {
 
         TestBed.overrideComponent(LockButtonComponent, {
             set: {
-                templateUrl: "component-package/controls/lockButton/lockButton.component.html"
+                templateUrl: "lockButton.component.html"
             }
         });
 

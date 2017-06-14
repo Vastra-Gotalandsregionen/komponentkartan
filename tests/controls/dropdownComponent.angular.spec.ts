@@ -31,14 +31,14 @@ describe("DropdownComponent", () => {
         TestBed.overrideComponent(DropdownComponent,
             {
                 set: {
-                    templateUrl: "component-package/controls/dropdown/dropdown.component.html"
+                    templateUrl: "dropdown.component.html"
                 }
             });
 
         TestBed.overrideComponent(FilterTextboxComponent,
             {
                 set: {
-                    templateUrl: "component-package/controls/filterTextbox/filterTextbox.component.html"
+                    templateUrl: "../filterTextbox/filterTextbox.component.html"
                 }
             });
 

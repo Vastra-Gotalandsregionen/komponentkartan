@@ -41,7 +41,7 @@ describe("TextButtonComponent", () => {
 
         TestBed.overrideComponent(TextButtonComponent, {
             set: {
-                templateUrl: "component-package/controls/textButton/textButton.component.html"
+                templateUrl: "textButton.component.html"
             }
         });
 
