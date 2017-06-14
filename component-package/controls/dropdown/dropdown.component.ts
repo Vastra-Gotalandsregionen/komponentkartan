@@ -1,5 +1,4 @@
 
-///<reference path="../../typings/jquery.scrollbar.d.ts"/>
 
 import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, OnInit, ViewChild } from "@angular/core";
 import { IDropdownItem } from "../../models/dropdownItem.model";
@@ -54,8 +53,12 @@ export class DropdownComponent implements OnChanges, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        this.enableScrollbarOnElement($(".dropdown__menu__items"));
+    }
+
+    enableScrollbarOnElement(jqueryElement: any) {
         setTimeout(() => {
-            $(".dropdown__menu__items").scrollbar({
+            jqueryElement.scrollbar({
                 scrollStep: 1
             });
         }, 1000);
