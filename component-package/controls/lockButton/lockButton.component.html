@@ -1,6 +1,6 @@
 ﻿<div class="lock-button noselect" role="button" (click)="buttonClicked()" (keydown)="keyPressed($event)" [ngClass]="{ 'lock-button--unlocked' : unlocked,'button--disabled' : disabled}"
     tabindex="{{disabled ? -1 : 0}}">
-    <img class="lock-button__top" alt="lock-button__top" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAICAYAAAAiJnXPAAAAAXNSR0IArs4c6QAAAKNJREFUGBltjzEKwkAQRbOCEMHcxELsrK08g+BVPE5AiJXmFBZiYSeKjSC2ITY6ebNxYXTz4e3s/j+/WJf8SUSGWAuYwB22zrk9s1sURnAG1QVqeMOqs0HQhwM8YKpLzAHkoJpHRcyZj0SWNsRL4QZl8HvhwhyDQGG8hP+8eO9Acy9bynCeLFXfzI4rD829bEmNT2tH549vS0dWN9F6a5wY65A1Q2Bc68FP2SIAAAAASUVORK5CYII=">
-    <img class="lock-button__bottom" alt="lock-button__bottom" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAALCAYAAACksgdhAAAAAXNSR0IArs4c6QAAAKZJREFUKBVj/P//Pz8DA8MHICYWmDIRqxJZHS5Nf4CK3gLxT2TFMDYuTZ6MjIwiQEXqMIXINC5Nz6CKniIrhrFBmv7DOMTSTEBnfAIqfoWmgRPKh9EwaZAFd8AcYLDPB2JkcBvI2QDE55EFgewjMN0MQI4IED9DU4DO/QYU0IJrAjGAAjJAvAeI/wExOgDZqAvTwAhjwGigpDCQrQHjA+kHQH+jhCIAJweJeurkghoAAAAASUVORK5CYII=">
+    <div class="lock-button__top"></div>
+    <div class="lock-button__bottom"></div>
     <div class="button__focus-line"></div>
 </div>
