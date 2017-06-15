@@ -1,37 +1,16 @@
 ﻿@import "_settings.sizes.scss";
 @import "_settings.colors.scss";
+@import "_generic.themes.scss";
 @keyframes button-enabling {
-    0% {}
+    0% {
+        box-shadow: none;
+    }
     50% {
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
     }
-    100% {}
-}
-
-@keyframes button-enabling--secondary {
-    0% {}
-    50% {
-        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-        @extend .background-color--primary;
-        @extend .border-color--primary;
-        border-width: 1px;
-        border-style: solid;
-        color: $text-color--light;
+    100% {
+        box-shadow: none;
     }
-    100% {}
-}
-
-@keyframes button-enabling--secondary-red {
-    0% {}
-    50% {
-        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-        background-color: $primary-color--vgpv;
-        border-color: $primary-color--vgpv;
-        border-width: 1px;
-        border-style: solid;
-        color: $text-color--light;
-    }
-    100% {}
 }
 
 .button {
@@ -107,8 +86,4 @@
 .button--enabling {
     animation: button-enabling 1s;
     transition: background-color 0.5s ease;
-    &.button--secondary {
-        animation: button-enabling--secondary 1.8s;
-        transition: background-color 0.5s ease, color 0.5s ease;
-    }
 }
