@@ -5,9 +5,7 @@ Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular 
 ## Komma igång
 
 ### 0. Förutsättningar
-Komponentkartan förutsätter att Angular är konfigurerat...
-*TODO - Beskriv mer om Angular och upssättning*
-
+Komponentkartan förutsätter att Angular är konfigurerat. Se [Demoprojektet](https://github.com/Vastra-Gotalandsregionen/komponentkartan-demo) för en exempeluppsättning.
 
 ### 1. Installera vgr-komponentkartan via **npm**
 ```npm
@@ -41,10 +39,6 @@ Detta är något vi hoppas undvika i framtida releaser.
 ## Kod
 Koden är skriven i html, typescript och Sass.
 
-### Namnstandard
-*TODO Svenska/Engelska mm*
-*Förresten - borde Readme vara på engelska?*
-
 ### Tester
 Samtliga komponenter är täckta av tester via Jasmine.
 
@@ -57,25 +51,17 @@ Testerna är uppdelade i två typer, tester med Angular och tester utan Angular.
 * [Typescript](https://www.typescriptlang.org/) - Javascript that scales
 * [SASS](sass-lang.com) - SASS - Syntactically Awesome Style Sheets
 * [NPM](https://www.npmjs.com/) - Dependency Management
+* CSS struktureras enligt ITCSS. Se [ITCSS: SCALABLE AND MAINTAINABLE CSS ARCHITECTURE] (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/) för mer information.
 
 
-## Contributing
+## Versioner
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Vi använder [SemVer](http://semver.org/) för versionering.
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
-## Authors
+## Författare
 VGR IT
 
-
-## License
+## Licens
 
 TODO
-
-## Acknowledgments
-
-* CSS struktureras enligt ITCSS. Se [ITCSS: SCALABLE AND MAINTAINABLE CSS ARCHITECTURE] (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/) för mer information.
 
