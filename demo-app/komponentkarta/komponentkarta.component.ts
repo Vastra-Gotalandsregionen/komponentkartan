@@ -1,4 +1,4 @@
-﻿import { Component, AfterViewInit } from "@angular/core";
+﻿import { Component, AfterViewInit, EventEmitter, Output } from "@angular/core";
 import { IDropdownItem } from "../../component-package/models/dropdownItem.model";
 import { ISelectableItem } from "../../component-package/models/selectableItem.model";
 
@@ -7,6 +7,7 @@ import { ISelectableItem } from "../../component-package/models/selectableItem.m
     templateUrl: "/demo-app/komponentkarta/komponentkarta.component.html"
 })
 export class KomponentkartaComponent implements AfterViewInit {
+    @Output() themeChanged: EventEmitter<ISelectableItem>;
     selectedThemeOption: ISelectableItem;
     themeOptions: ISelectableItem[];
     dropDownItems25: IDropdownItem[];
@@ -20,6 +21,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     lockMessage: string;
     actionPanelMessage: string;
     constructor() {
+        this.themeChanged = new EventEmitter<ISelectableItem>();
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems25All = this.getDemoItems(25);
         this.dropDownItems8 = this.getDemoItems(8);
@@ -37,6 +39,11 @@ export class KomponentkartaComponent implements AfterViewInit {
         ] as ISelectableItem[];
         this.selectedThemeOption = this.themeOptions[0];
         this.selectedRadioOption = { displayName: "Inget" } as ISelectableItem;
+    }
+
+    private selectedThemeChanged(selectedTheme: ISelectableItem) {
+        this.selectedThemeOption = selectedTheme;
+        this.themeChanged.emit(selectedTheme);
     }
 
     private getDemoItems(numberOfItems: number): IDropdownItem[] {

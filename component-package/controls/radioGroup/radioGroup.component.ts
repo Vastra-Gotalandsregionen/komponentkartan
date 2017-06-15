@@ -33,7 +33,6 @@ export class RadioGroupComponent implements OnChanges {
         if (option.disabled || option.selected)
             return;
 
-        console.log(option);
         this.selectOption(option);
     }
 

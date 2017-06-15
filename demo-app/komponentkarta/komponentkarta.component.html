@@ -3,7 +3,7 @@
 'theme--red': selectedThemeOption.id==='red',
 'theme--green': selectedThemeOption.id==='green' }">
     <vgr-page-header [title]="'KomponentKarTa'" [enableActionsText]="'Öppna'" [disableActionsText]="'Stäng'" (actionStarted)="actionPanelMessage=''">
-        <vgr-radio-group class="page-header__control" [options]="themeOptions" (selectedChanged)="selectedThemeOption = $event"></vgr-radio-group>
+        <vgr-radio-group class="page-header__control" [options]="themeOptions" (selectedChanged)="selectedThemeChanged($event)"></vgr-radio-group>
         <div class="page-header__action-panel">
             <h2>Här placerar man de åtgärder som hör ihop med headern</h2>
             <vgr-text-button (buttonClick)="actionPanelMessage='Åtgärden utfördes.'">Åtgärd</vgr-text-button>
