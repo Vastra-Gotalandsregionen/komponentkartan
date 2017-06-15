@@ -84,11 +84,11 @@ describe("DropdownComponent", () => {
                         expect(dropdownElement.classes["dropdown--open"]).toBe(true);
                     });
                 });
-                describe("and scrollbar is clicked", () => {
-                    it("dropdown is not collapsed", () => {
+                //describe("and scrollbar is clicked", () => {
+                    //it("dropdown is not collapsed", () => {
                         //Behöver skrivas
-                    });
-                });
+                  //  });
+               // });
                 describe("and dropdown is clicked", () => {
                     it("dropdown is collapsed", () => {
                         dropdownElement.triggerEventHandler("mousedown", { target: dropdownElement.nativeElement } as MouseEvent);

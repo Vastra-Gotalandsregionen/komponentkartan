@@ -1,9 +1,9 @@
 {
     "name": "vgr-komponentkartan",
-    "version": "0.0.23",
+    "version": "0.0.24",
     "author": "Västra Götalandsregionen",
     "scripts": {
-        "[start-app]": "concurrent \"npm run _copy-fonts\" \"npm run _watch-typescript\" \"npm run _local-webserver\" \"npm run _watch-css\"",
+        "[start-app]": "concurrent \"npm run _watch-typescript\" \"npm run _local-webserver\" \"npm run _watch-css\"",
         "_compile-typescript": "tsc",
         "_watch-typescript": "tsc -w",
         "_local-webserver": "lite-server",

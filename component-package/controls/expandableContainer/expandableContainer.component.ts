@@ -17,9 +17,12 @@ export class ExpandableContainerComponent {
         let header = $(target);
 
         //If we click on an element INSIDE the header, get a reference to the actual header first
-        if (!header.hasClass("expandable-container__header"))
-            header = header.closest(".expandable-container__header");
+        if (!header.hasClass("expandable-container__header")) {
+            if (header.parents(".expandable-container__header").length === 0)
+                return;
 
+            header = header.closest(".expandable-container__header");
+        }
         //Slide clicked panel up/down
         header.next(".expandable-container__content").slideToggle(400);
 
