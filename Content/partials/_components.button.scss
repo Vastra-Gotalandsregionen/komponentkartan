@@ -1,96 +1,93 @@
 ﻿@import "_settings.sizes.scss";
 @import "_settings.colors.scss";
 @keyframes button-enabling {
-    0% {
-        background-color: $secondary-color--neutral;
-    }
+    0% {}
     50% {
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
     }
-    100% {
-        background-color: $primary-color--neutral;
-    }
+    100% {}
 }
 
-@keyframes button-enabling--secondary{
-    0% {
-        color: $secondary-color--neutral;
-        border: solid 1px $secondary-color--neutral;
-    }
-
+@keyframes button-enabling--secondary {
+    0% {}
     50% {
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-        background-color: $primary-color--neutral;
+        @extend .background-color--primary;
+        @extend .border-color--primary;
+        border-width: 1px;
+        border-style: solid;
         color: $text-color--light;
-        border: solid 1px $primary-color--neutral;
     }
+    100% {}
+}
 
-    100% {
-        background-color: $text-color--light;
-        color: $primary-color--neutral;
+@keyframes button-enabling--secondary-red {
+    0% {}
+    50% {
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+        background-color: $primary-color--vgpv;
+        border-color: $primary-color--vgpv;
+        border-width: 1px;
+        border-style: solid;
+        color: $text-color--light;
     }
+    100% {}
 }
 
 .button {
+    @extend .background-color--primary;
     height: 30px;
     position: relative;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     border-radius: 1px;
-    background-color: $primary-color--neutral;
     color: $text-color--light;
     text-align: center;
     justify-content: center;
     cursor: pointer;
-
     &:hover:not(.button--disabled) {
         .button__focus-line {
             visibility: visible;
         }
-
         &.button--secondary {
-            background-color: $primary-color--neutral;
+            @extend .background-color--primary;
             color: $text-color--light;
             transition: background-color 0.5s ease, color 0.5s ease;
         }
     }
-
     &:focus:not(.button--disabled) {
         box-shadow: 0 0 1px 1px #4990e2;
         border-bottom-color: #4990e2;
     }
-
     &:active:not(.button--disabled) {
         height: 28px;
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
         transform: scaleX(0.96);
         outline: 0;
-
         .button__focus-line {
             background-color: transparentize($secondary-color--neutral, 0.4);
         }
     }
-
     &.button--disabled {
-        background-color: $secondary-color--neutral;
+        @extend .background-color--secondary;
         cursor: default;
-
         &:focus {
             outline: 0;
         }
-
         &.button--secondary {
-            color: $secondary-color--neutral;
-            border: solid 1px $secondary-color--neutral;
+            @extend .color--secondary;
+            @extend .border-color--secondary;
+            border-width: 1px;
+            border-style: solid;
+            background-color: $text-color--light;
         }
     }
-
     .button__focus-line {
         visibility: hidden;
         height: 4px;
         width: 100%;
-        background-color: $secondary-color--neutral;
+        @extend .background-color--secondary;
         position: absolute;
         z-index: $layer-two;
         bottom: 0;
@@ -98,18 +95,18 @@
         border-bottom-left-radius: 1px;
         border-bottom-right-radius: 1px;
     }
-
     &.button--secondary {
         background-color: $text-color--light;
-        color: $primary-color--neutral;
-        border: solid 1px $primary-color--neutral;
+        @extend .color--primary;
+        @extend .border-color--primary;
+        border-width: 1px;
+        border-style: solid;
     }
 }
 
 .button--enabling {
     animation: button-enabling 1s;
     transition: background-color 0.5s ease;
-
     &.button--secondary {
         animation: button-enabling--secondary 1.8s;
         transition: background-color 0.5s ease, color 0.5s ease;

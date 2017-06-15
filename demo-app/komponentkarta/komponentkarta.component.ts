@@ -7,6 +7,8 @@ import { ISelectableItem } from "../../component-package/models/selectableItem.m
     templateUrl: "/demo-app/komponentkarta/komponentkarta.component.html"
 })
 export class KomponentkartaComponent implements AfterViewInit {
+    selectedThemeOption: ISelectableItem;
+    themeOptions: ISelectableItem[];
     dropDownItems25: IDropdownItem[];
     dropDownItems9: IDropdownItem[];
     dropDownItems8: IDropdownItem[];
@@ -27,6 +29,13 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.saveCancelMessage = "Ingen";
         this.lockMessage = "Ingen";
         this.actionPanelMessage = "";
+        this.themeOptions = [
+            { id: "neutral", displayName: "Neutral (grå)" } as ISelectableItem,
+            { id: "blue", displayName: "BMM (blå)" } as ISelectableItem,
+            { id: "red", displayName: "VGPV (röd)" } as ISelectableItem,
+            { id: "green", displayName: "Rehab (grön)" } as ISelectableItem,
+        ] as ISelectableItem[];
+        this.selectedThemeOption = this.themeOptions[0];
         this.selectedRadioOption = { displayName: "Inget" } as ISelectableItem;
     }
 

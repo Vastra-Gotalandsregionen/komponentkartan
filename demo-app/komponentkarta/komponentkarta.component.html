@@ -1,7 +1,9 @@
-﻿<div class="main-content">
-    <vgr-page-header [title]="'KomponentKarTa'" [enableActionsText]="'Öppna åtgärdspanel'" [disableActionsText]="'Stäng åtgärdspanel'"
-        (actionStarted)="actionPanelMessage=''">
-        <div class="page-header__control">Den här headern är också en komponent.</div>
+﻿<div class="main-content" [ngClass]="{'theme--neutral': selectedThemeOption.id==='netural',
+'theme--blue': selectedThemeOption.id==='blue',
+'theme--red': selectedThemeOption.id==='red',
+'theme--green': selectedThemeOption.id==='green' }">
+    <vgr-page-header [title]="'KomponentKarTa'" [enableActionsText]="'Öppna'" [disableActionsText]="'Stäng'" (actionStarted)="actionPanelMessage=''">
+        <vgr-radio-group class="page-header__control" [options]="themeOptions" (selectedChanged)="selectedThemeOption = $event"></vgr-radio-group>
         <div class="page-header__action-panel">
             <h2>Här placerar man de åtgärder som hör ihop med headern</h2>
             <vgr-text-button (buttonClick)="actionPanelMessage='Åtgärden utfördes.'">Åtgärd</vgr-text-button>
