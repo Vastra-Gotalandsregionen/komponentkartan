@@ -98,7 +98,9 @@
 /* Left side line, indicating that this element is hovered or active. Accessed by javascript*/
 
 .header-menu-item--marked {
-    border-left: 4px solid $primary-color--neutral;
+    @extend .border-left-color--primary;
+    border-left-width: 4px;
+    border-left-style: solid;
     font-weight: bold;
 }
 
