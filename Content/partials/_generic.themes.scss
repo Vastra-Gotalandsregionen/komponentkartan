@@ -1,82 +1,49 @@
 @import "_settings.colors.scss";
-.border-color--primary {
-    border-color: $primary-color--neutral;
-    .theme--blue & {
-        border-color: $primary-color--bmm;
+
+/*********************************************************************************
+* THEME MIXIN
+*
+* This mixin creates a set of styles to theme components.
+* Call @include theme(propertyName) to create classes for propertyName--primary and
+* propertyName--secondary
+*
+* Example: @include theme(background-color) will produce
+* .background-color--primary
+* .background-color--secondary
+* With themes for all defined colors.
+**********************************************************************************/
+
+@mixin theme($property) {
+    .#{$property}--primary {
+        #{$property}: $primary-color--neutral;
+        .theme--blue & {
+            #{$property}: $primary-color--bmm;
+        }
+        .theme--red & {
+            #{$property}: $primary-color--vgpv;
+        }
+        .theme--green & {
+            #{$property}: $primary-color--rehab;
+        }
     }
-    .theme--red & {
-        border-color: $primary-color--vgpv;
-    }
-    .theme--green & {
-        border-color: $primary-color--rehab;
+    .#{$property}--secondary {
+        #{$property}: $secondary-color--neutral;
+        .theme--blue & {
+            #{$property}: $secondary-color--bmm;
+        }
+        .theme--red & {
+            #{$property}: $secondary-color--vgpv;
+        }
+        .theme--green & {
+            #{$property}: $secondary-color--rehab;
+        }
     }
 }
 
-.border-color--secondary {
-    border-color: $secondary-color--neutral;
-    .theme--blue & {
-        border-color: $secondary-color--bmm;
-    }
-    .theme--red & {
-        border-color: $secondary-color--vgpv;
-    }
-    .theme--green & {
-        border-color: $secondary-color--rehab;
-    }
-}
-
-.color--primary {
-    color: $primary-color--neutral;
-    .theme--blue & {
-        color: $primary-color--bmm;
-    }
-    .theme--red & {
-        color: $primary-color--vgpv;
-    }
-    .theme--green & {
-        color: $primary-color--rehab;
-    }
-}
-
-.color--secondary {
-    color: $secondary-color--neutral;
-    .theme--blue & {
-        color: $secondary-color--bmm;
-    }
-    .theme--red & {
-        color: $secondary-color--vgpv;
-    }
-    .theme--green & {
-        color: $secondary-color--rehab;
-    }
-}
-
-.background-color--primary {
-    background-color: $primary-color--neutral;
-    .theme--blue & {
-        background-color: $primary-color--bmm;
-    }
-    .theme--red & {
-        background-color: $primary-color--vgpv;
-    }
-    .theme--green & {
-        background-color: $primary-color--rehab;
-    }
-}
-
-.background-color--secondary {
-    background-color: $secondary-color--neutral;
-    .theme--blue & {
-        background-color: $secondary-color--bmm;
-    }
-    .theme--red & {
-        background-color: $secondary-color--vgpv;
-    }
-    .theme--green & {
-        background-color: $secondary-color--rehab;
-    }
-}
-
+@include theme(border-left-color);
+@include theme(border-color);
+@include theme(color);
+@include theme(background-color);
 
 /*********************************************************************************************
     Button animations

@@ -1,16 +1,17 @@
     @import "_settings.colors.scss";
     @import "_settings.sizes.scss";
     @import "_objects.images.scss";
+    @import "_generic.themes.scss";
     $dropdown-height--small: 364px;
     $dropdown-height--medium: 394px;
     $dropdown-width--medium: 160px;
     $dropdown-width--small: 100px;
     .dropdown {
+        @extend .background-color--primary;
         position: relative;
         display: inline-block;
         height: $component-height;
         width: $dropdown-width--medium;
-        background-color: $primary-color--neutral;
         padding: 0px; //Text på vald item
         cursor: pointer;
         span {
@@ -112,7 +113,9 @@
         }
         .dropdown-item--marked {
             a {
-                border-left: 4px solid $primary-color--neutral;
+                @extend .border-left-color--primary;
+                border-left-width: 4px;
+                border-left-style: solid;
                 font-weight: bold;
                 padding-left: 11px;
                 padding-right: 11px;
