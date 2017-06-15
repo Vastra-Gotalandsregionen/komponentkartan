@@ -1,10 +1,17 @@
 ﻿<div class="main-content">
-    <vgr-page-header [title]="'KomponentKarTa'">
+    <vgr-page-header [title]="'KomponentKarTa'" [enableActionsText]="'Öppna åtgärdspanel'" [disableActionsText]="'Stäng åtgärdspanel'"
+        (actionStarted)="actionPanelMessage=''">
+        <div class="page-header__control">Den här headern är också en komponent.</div>
+        <div class="page-header__action-panel">
+            <h2>Här placerar man de åtgärder som hör ihop med headern</h2>
+            <vgr-text-button (buttonClick)="actionPanelMessage='Åtgärden utfördes.'">Åtgärd</vgr-text-button>
+            <h3>{{actionPanelMessage}}</h3>
+        </div>
     </vgr-page-header>
 
     <div class="komponentkarta-components">
         <div class="komponentkarta-component column-layout">
-            <h1 class="formatmall__header">Formatmall</h1>
+            <h1 class="formatmall__header" style="cursor: pointer;">Formatmall</h1>
             <span>Fonten som används är <strong>Calibri</strong>. Storlek på brödtext och rubriker anpassas efter fönstrets bredd i två steg.<br/>
             Liten storlek är <strong>1366px - 1458px</strong>. Stor storlek <strong>1459px</strong> och större.</span>
             <h1 class="font-example"></h1>

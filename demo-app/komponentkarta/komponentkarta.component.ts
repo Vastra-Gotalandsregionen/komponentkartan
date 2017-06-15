@@ -16,6 +16,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     selectedRadioOption: ISelectableItem;
     saveCancelMessage: string;
     lockMessage: string;
+    actionPanelMessage: string;
     constructor() {
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems25All = this.getDemoItems(25);
@@ -25,6 +26,7 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.buttonSecondaryDisabled = true;
         this.saveCancelMessage = "Ingen";
         this.lockMessage = "Ingen";
+        this.actionPanelMessage = "";
         this.selectedRadioOption = { displayName: "Inget" } as ISelectableItem;
     }
 

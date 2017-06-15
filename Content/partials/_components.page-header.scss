@@ -47,11 +47,13 @@ $action-panel-height: 137px;
 }
 
 .page-header__action-panel-area {
+    pointer-events: none;
     height: 0px;
     background: $background-color--default;
     width: calc(100% + 51px);
     margin-left: -30px;
     .page-header--actions-visible & {
+        pointer-events: auto;
         height: 157px;
         animation: action-panel-slide-in 0.6s ease;
         padding-top: $margin--slim;
