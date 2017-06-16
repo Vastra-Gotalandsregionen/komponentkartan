@@ -1,12 +1,14 @@
-﻿import { Component, AfterViewInit, EventEmitter, Output } from "@angular/core";
+﻿import { Component, AfterViewInit, EventEmitter, Output, ViewChild } from "@angular/core";
 import { IDropdownItem } from "../../component-package/models/dropdownItem.model";
 import { ISelectableItem } from "../../component-package/models/selectableItem.model";
+import { HeaderComponent } from "../../component-package/controls/header/header.component";
 
 @Component({
     selector: "vgr-komponentkarta",
     templateUrl: "/demo-app/komponentkarta/komponentkarta.component.html"
 })
 export class KomponentkartaComponent implements AfterViewInit {
+      @ViewChild(HeaderComponent) header: HeaderComponent;
     @Output() themeChanged: EventEmitter<ISelectableItem>;
     selectedThemeOption: ISelectableItem;
     themeOptions: ISelectableItem[];
@@ -43,8 +45,10 @@ export class KomponentkartaComponent implements AfterViewInit {
 
     private selectedThemeChanged(selectedTheme: ISelectableItem) {
         this.selectedThemeOption = selectedTheme;
-        this.themeChanged.emit(selectedTheme);
-    }
+         this.header.changeTheme(selectedTheme.id);
+        }
+
+
 
     private getDemoItems(numberOfItems: number): IDropdownItem[] {
         var items: IDropdownItem[] = [];

@@ -16,6 +16,7 @@ import { LockButtonComponent } from "./controls/lockButton/lockButton.component"
 import { SaveCancelComponent } from "./controls/saveCancel/saveCancel.component"
 import { PageHeaderComponent } from "./controls/pageHeader/pageHeader.component";
 import { RadioGroupComponent } from "./controls/radioGroup/radioGroup.component";
+import { HeaderComponent } from "./controls/header/header.component";
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { RadioGroupComponent } from "./controls/radioGroup/radioGroup.component"
         LockButtonComponent,
         SaveCancelComponent,
         PageHeaderComponent,
-        RadioGroupComponent
+        RadioGroupComponent,
+        HeaderComponent
     ],
     exports: [
         SafePipe,
@@ -51,7 +53,8 @@ import { RadioGroupComponent } from "./controls/radioGroup/radioGroup.component"
         LockButtonComponent,
         SaveCancelComponent,
         PageHeaderComponent,
-        RadioGroupComponent
+        RadioGroupComponent,
+         HeaderComponent
 
     ]
 })
