@@ -27,29 +27,29 @@ vgr-header {
     display: flex;
     flex: none;
     align-items: center;
-    background-color: $primary-color--neutral; //Images/dekal.png
+    background-color: $primary-color--default; //Images/dekal.png
     background-repeat: no-repeat;
     background-position: top right;
 }
 
 //THEMING
 .site-header-vgr--bmm {
-    background-color: $primary-color--bmm;
+    background-color: $primary-color--blue;
     transition: background-color ease-in 0.3s;
 }
 
 .site-header-vgr--neutral {
-    background-color: $primary-color--neutral;
+    background-color: $primary-color--default;
     transition: background-color ease-in 0.3s;
 }
 
 .site-header-vgr--vgpv {
-    background-color: $primary-color--vgpv;
+    background-color: $primary-color--red;
     transition: background-color ease-in 0.3s;
 }
 
 .site-header-vgr--rehab {
-    background-color: $primary-color--rehab;
+    background-color: $primary-color--green;
     transition: background-color ease-in 0.3s;
 }
 

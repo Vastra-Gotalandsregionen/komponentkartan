@@ -2,7 +2,7 @@
     @import "_settings.sizes.scss";
     .information-panel {
         // position: relative;
-        border-top: $border--regular solid $primary-color--neutral;
+        border-top: $border--regular solid $primary-color--default;
         background: white;
     }
 
@@ -61,20 +61,20 @@
         // bottom: 0px;
     }
 
-    .information-panel--bmm {
-        border-top-color: $primary-color--bmm;
+    .information-panel--blue {
+        border-top-color: $primary-color--blue;
     }
 
-    .information-panel--rehab {
-        border-top-color: $primary-color--rehab;
+    .information-panel--green {
+        border-top-color: $primary-color--green;
     }
 
-    .information-panel--vgpv {
-        border-top-color: $primary-color--vgpv;
+    .information-panel--red {
+        border-top-color: $primary-color--red;
     }
 
-    .information-panel--neutral {
-        border-top-color: $primary-color--neutral;
+    .information-panel--default {
+        border-top-color: $primary-color--default;
     }
 
     @media screen and (min-width: $desktop-width--medium) {

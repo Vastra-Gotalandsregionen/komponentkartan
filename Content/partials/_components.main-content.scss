@@ -20,7 +20,7 @@
     }
 }
 
-.main-content--rehab {
+.main-content--green {
     height: 5000px;
     width: calc(100vw - #{$nav-width--small} - #{$margin--slim});
     min-width: 1300px;
@@ -30,7 +30,7 @@
     }
 }
 
-.main-content--vgpv {
+.main-content--red {
     width: calc(100vw - #{$nav-width--small} - #{$margin--slim});
     iframe {
         width: calc(100% - #{$margin--slim} - #{$margin--slim});
@@ -58,7 +58,7 @@
             width: $content-width--medium;
         }
     }
-    .main-content--rehab {
+    .main-content--green {
         width: calc(100vw - #{$nav-width--medium} - #{$margin--fat});
         iframe {
             width: calc(100% - #{$margin--fat} - #{$margin--fat});

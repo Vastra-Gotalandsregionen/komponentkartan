@@ -33,7 +33,7 @@ i {
 
 .text--white {
     color: $text-color--light;
-    background: $primary-color--neutral;
+    background: $primary-color--default;
 }
 
 @media screen and (min-width: $desktop-width--medium) {

@@ -45,7 +45,7 @@
         transform: scaleX(0.96);
         outline: 0;
         .button__focus-line {
-            background-color: transparentize($secondary-color--neutral, 0.4);
+            background-color: transparentize($secondary-color--default, 0.4);
         }
     }
     &.button--disabled {

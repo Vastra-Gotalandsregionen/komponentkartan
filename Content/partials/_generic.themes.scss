@@ -15,27 +15,27 @@
 
 @mixin theme($property) {
     .#{$property}--primary {
-        #{$property}: $primary-color--neutral;
+        #{$property}: $primary-color--default;
         .theme--blue & {
-            #{$property}: $primary-color--bmm;
+            #{$property}: $primary-color--blue;
         }
         .theme--red & {
-            #{$property}: $primary-color--vgpv;
+            #{$property}: $primary-color--red;
         }
         .theme--green & {
-            #{$property}: $primary-color--rehab;
+            #{$property}: $primary-color--green;
         }
     }
     .#{$property}--secondary {
-        #{$property}: $secondary-color--neutral;
+        #{$property}: $secondary-color--default;
         .theme--blue & {
-            #{$property}: $secondary-color--bmm;
+            #{$property}: $secondary-color--blue;
         }
         .theme--red & {
-            #{$property}: $secondary-color--vgpv;
+            #{$property}: $secondary-color--red;
         }
         .theme--green & {
-            #{$property}: $secondary-color--rehab;
+            #{$property}: $secondary-color--green;
         }
     }
 }
@@ -70,10 +70,10 @@
     }
 }
 
-@include button-enabling--secondary(button-enabling--secondary-red, $primary-color--vgpv);
-@include button-enabling--secondary(button-enabling--secondary-neutral, $primary-color--neutral);
-@include button-enabling--secondary(button-enabling--secondary-blue, $primary-color--bmm);
-@include button-enabling--secondary(button-enabling--secondary-green, $primary-color--rehab);
+@include button-enabling--secondary(button-enabling--secondary-red, $primary-color--red);
+@include button-enabling--secondary(button-enabling--secondary-neutral, $primary-color--default);
+@include button-enabling--secondary(button-enabling--secondary-blue, $primary-color--blue);
+@include button-enabling--secondary(button-enabling--secondary-green, $primary-color--green);
 .button--enabling.button--secondary {
     transition: background-color 0.5s ease, color 0.5s ease;
     animation: button-enabling--secondary-neutral 1.8s;
