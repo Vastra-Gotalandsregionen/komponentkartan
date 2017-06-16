@@ -49,6 +49,17 @@
     padding: 4px;
 }
 
+.expandable-container-list-showcase {
+    background-color: $background-color--default !important;
+    margin-left: -20px;
+    padding-left: 20px;
+    margin-right: -20px;
+    padding-right: 20px;
+    .expandable-container-list__items {
+        background-color: $background-color--default;
+    }
+}
+
 .color-sample {
     display: block;
     width: 600px;

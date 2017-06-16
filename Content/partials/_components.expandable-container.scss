@@ -11,7 +11,7 @@
 }
 
 .expandable-container-list--inline {
-    background-color: $background-color--content;
+    background-color: $background-color--default;
     .expandable-container {
         border-bottom: 1px solid $background-color--default;
     }
@@ -80,16 +80,13 @@
         margin-left: auto;
         transform: rotate(0deg);
         transition: transform 0.4s;
-    }
-    //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
+    } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
     transition: margin-top 0.2s ease-in;
-
     &.expandable-container--expanded:not(.expandable-container--compact) {
         box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
         margin-top: 14px;
         margin-bottom: 14px;
     }
-
     &.expandable-container--collapsed {
         margin-top: 2px; //OBS! Denna måste ligga efter expanded-stilen i filen!
         .expandable-container__header:after {
@@ -100,15 +97,13 @@
             transition: transform 0.4s;
         }
     }
-
     &.expandable-container--compact {
         margin-bottom: 0px;
         margin-left: -$margin--xs-slim;
         padding-left: $margin--xs-slim;
         padding-right: $margin--xs-slim;
         margin-right: -$margin--xs-slim;
-    }
-    //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
+    } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
     &.expandable-container--collapsed:not(.expandable-container--compact):hover {
         position: relative;
         box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
