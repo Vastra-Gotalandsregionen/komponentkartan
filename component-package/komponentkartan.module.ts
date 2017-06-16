@@ -17,11 +17,15 @@ import { SaveCancelComponent } from "./controls/saveCancel/saveCancel.component"
 import { PageHeaderComponent } from "./controls/pageHeader/pageHeader.component";
 import { RadioGroupComponent } from "./controls/radioGroup/radioGroup.component";
 import { HeaderComponent } from "./controls/header/header.component";
+import { MenuComponent } from "./controls/sidebar-menu/menu.component";
+import { SidebarMenuComponent } from "./controls/sidebar-menu/sidebarMenu.component";
+
 
 @NgModule({
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+        RouterModule
     ],
 
     declarations: [
@@ -38,7 +42,9 @@ import { HeaderComponent } from "./controls/header/header.component";
         SaveCancelComponent,
         PageHeaderComponent,
         RadioGroupComponent,
-        HeaderComponent
+        HeaderComponent,
+        MenuComponent,
+        SidebarMenuComponent
     ],
     exports: [
         SafePipe,
@@ -54,7 +60,9 @@ import { HeaderComponent } from "./controls/header/header.component";
         SaveCancelComponent,
         PageHeaderComponent,
         RadioGroupComponent,
-         HeaderComponent
+         HeaderComponent,
+         MenuComponent,
+        SidebarMenuComponent
 
     ]
 })

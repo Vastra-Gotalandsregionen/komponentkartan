@@ -1,5 +1,4 @@
-﻿<vgr-header></vgr-header>
-<div class="main-content" [ngClass]="{'theme--neutral': selectedThemeOption.id==='netural',
+﻿<div class="main-content" [ngClass]="{'theme--neutral': selectedThemeOption.id==='netural',
 'theme--blue': selectedThemeOption.id==='blue',
 'theme--red': selectedThemeOption.id==='red',
 'theme--green': selectedThemeOption.id==='green' }">
@@ -113,7 +112,8 @@
             För att skapa en upplåst knapp, sätt [unlocked]="<strong>true</strong>".
             Knappen skickar två events, ett för låst (onLocked) och ett för upplåst (onUnlocked).
             </span>
-            <div class="markup-example">&lt;vgr-lock-button (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/vgr-lock-button&gt; &lt;vgr-lock-button [unlocked]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/vgr-lock-button&gt;
+            <div class="markup-example">&lt;vgr-lock-button (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/vgr-lock-button&gt;
+                &lt;vgr-lock-button [unlocked]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/vgr-lock-button&gt;
                 &lt;vgr-lock-button [disabled]="true" (onLocked)="consoleLog('Locked!')" (onUnlocked)="consoleLog('Unlocked!')"&gt;&lt;/vgr-lock-button&gt;
             </div>
             <div>
@@ -134,7 +134,8 @@
                 Knappen stödjer klick med tangentbord via <strong>Space</strong> och <strong>Enter</strong>, enligt <a href="https://www.w3.org/TR/wai-aria-practices/examples/button/button.html">WCAG Button examples</a>
             </span>
             <span>Notera: Knapparna nedan loggar till konsollen vid klick.</span>
-            <div class="markup-example">&lt;vgr-text-button (buttonClick)="consoleLog('Click')"&gt;Klicka här&lt;/vgr-text-button&gt; &lt;vgr-text-button [disabled]="true" (buttonClick)="consoleLog('Click')"&gt;Inaktiv&lt;/vgr-text-button&gt;
+            <div class="markup-example">&lt;vgr-text-button (buttonClick)="consoleLog('Click')"&gt;Klicka här&lt;/vgr-text-button&gt; &lt;vgr-text-button
+                [disabled]="true" (buttonClick)="consoleLog('Click')"&gt;Inaktiv&lt;/vgr-text-button&gt;
             </div>
             <h2>Primärknappar</h2>
             <div>
@@ -233,8 +234,9 @@
             <div class="komponentkarta-component column-layout column-layout--padded">
                 <h1>Headers</h1>
                 <p>
-                    Headerfärg beror på vilket system som är aktivt. I portalen beror färgen på om användaren har ett eller flera system. Om bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent bild som gör att man bara behöver sätta headerns
-                    bakgrundsfärg genom rätt klassnamn.
+                    Headerfärg beror på vilket system som är aktivt. I portalen beror färgen på om användaren har ett eller flera system. Om
+                    bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent bild som gör att
+                    man bara behöver sätta headerns bakgrundsfärg genom rätt klassnamn.
                 </p>
                 <div class="header--inline site-header-vgr site-header-vgr--blue with-classes">
                     <div class="header__vgr-logo"></div>
@@ -277,10 +279,12 @@
             <div class="komponentkarta-component column-layout column-layout--padded">
                 <h1>Dropdown</h1>
                 <p>
-                    En dropdown innehåller ett valt element samt en lista över valbara alternativ. Kompletteras med filter vid över 20 items. Kompletteras med scroll vid över 8 items. För att inkludera en"Visa alla", ange <strong>[selectAllItemText]</strong>.
+                    En dropdown innehåller ett valt element samt en lista över valbara alternativ. Kompletteras med filter vid över 20 items.
+                    Kompletteras med scroll vid över 8 items. För att inkludera en"Visa alla", ange <strong>[selectAllItemText]</strong>.
                     För att ge"Visa alla" ett annat namn vid val, ange <strong>[selectAllSelectedText]</strong>
                 </p>
-                <div class="markup-example">&lt;<strong>dropdown</strong> [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'" &gt;&lt;/
+                <div class="markup-example">&lt;<strong>dropdown</strong> [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"
+                    &gt;&lt;/
                     <strong>dropdown</strong>&gt;</div>
 
                 <div class="row-layout">
@@ -306,14 +310,20 @@
             <div class="komponentkarta-component column-layout column-layout--padded">
                 <h1>Expandable container list</h1>
                 <p>
-                    En lista med rader som går att expandera. <strong>En rad i taget</strong> kan vara expanderad. Vill man ha kolumner får man definiera deras storlek själv, och lägga dem i header och respektive rad.
+                    En lista med rader som går att expandera. <strong>En rad i taget</strong> kan vara expanderad. Vill man
+                    ha kolumner får man definiera deras storlek själv, och lägga dem i header och respektive rad.
                     <strong>Notera!</strong> Listan lägger själv till en "back-to-top"-knapp. Därav knappen i komponentkartan.
                 </p>
                 <div class="markup-example">
-                    &lt;expandable-container-list&gt; &lt;!-- Placera divs här för kolumn headers --&gt; &lt;div class="expandable-container-list__header"&gt; &lt;!-- Placera divs här för kolumn headers --&gt; &lt;div class="flex-column-13"&gt;Kolumn 1&lt;/div&gt; &lt;div
-                    class="flex-column-15"&gt;Kolumn 2&lt;/div&gt; &lt;/div&gt; &lt;div class="expandable-container-list__items"&gt; &lt;!-- Placera rader här --&gt; &lt;expandable-container&gt; &lt;div class="expandable-container__header"&gt; &lt;!--
-                    Detta är radens header, som visas i kollapsat läge --&gt; &lt;div class="flex-column-13"&gt;Första raden&lt;/div&gt; &lt;div class="flex-column-15"&gt;Innehåller text&lt;/div&gt; &lt;/div&gt; &lt;div class="expandable-container__content"&gt;
-                    &lt;!-- Detta är radens innehåll, som visas i expanderat läge --&gt; &lt;span&gt;Lorem Ipsum....&lt;/span&gt; &lt;/div&gt; &lt;/expandable-container&gt; &lt;/div&gt; &lt;/expandable-container-list&gt;
+                    &lt;expandable-container-list&gt; &lt;!-- Placera divs här för kolumn headers --&gt; &lt;div class="expandable-container-list__header"&gt;
+                    &lt;!-- Placera divs här för kolumn headers --&gt; &lt;div class="flex-column-13"&gt;Kolumn 1&lt;/div&gt;
+                    &lt;div class="flex-column-15"&gt;Kolumn 2&lt;/div&gt; &lt;/div&gt; &lt;div class="expandable-container-list__items"&gt;
+                    &lt;!-- Placera rader här --&gt; &lt;expandable-container&gt; &lt;div class="expandable-container__header"&gt;
+                    &lt;!-- Detta är radens header, som visas i kollapsat läge --&gt; &lt;div class="flex-column-13"&gt;Första
+                    raden&lt;/div&gt; &lt;div class="flex-column-15"&gt;Innehåller text&lt;/div&gt; &lt;/div&gt; &lt;div
+                    class="expandable-container__content"&gt; &lt;!-- Detta är radens innehåll, som visas i expanderat läge
+                    --&gt; &lt;span&gt;Lorem Ipsum....&lt;/span&gt; &lt;/div&gt; &lt;/expandable-container&gt; &lt;/div&gt;
+                    &lt;/expandable-container-list&gt;
                 </div>
                 <div class="expandable-container-list-showcase">
                     <vgr-expandable-container-list class="expandable-container-list--inline">

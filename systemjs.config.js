@@ -21,6 +21,9 @@
             '@angular/platform-browser/testing': 'npm:@angular/platform-browser/bundles/platform-browser-testing.umd.js',
             '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
             '@angular/platform-browser-dynamic/testing': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+            '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
+            '@angular/router/upgrade': 'npm:@angular/router/bundles/router-upgrade.umd.js',
+            '@angular/router/testing': 'npm:@angular/router/bundles/router-testing.umd.js',
 
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             '@angular/forms/testing': 'npm:@angular/forms/bundles/forms-testing.umd.js',

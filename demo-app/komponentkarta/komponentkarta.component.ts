@@ -1,15 +1,12 @@
-﻿import { Component, AfterViewInit, EventEmitter, Output, ViewChild } from "@angular/core";
+﻿import { Component, AfterViewInit, EventEmitter, Output } from "@angular/core";
 import { IDropdownItem } from "../../component-package/models/dropdownItem.model";
 import { ISelectableItem } from "../../component-package/models/selectableItem.model";
-import { HeaderComponent } from "../../component-package/controls/header/header.component";
 
 @Component({
     selector: "vgr-komponentkarta",
     templateUrl: "/demo-app/komponentkarta/komponentkarta.component.html"
 })
 export class KomponentkartaComponent implements AfterViewInit {
-      @ViewChild(HeaderComponent) header: HeaderComponent;
-    @Output() themeChanged: EventEmitter<ISelectableItem>;
     selectedThemeOption: ISelectableItem;
     themeOptions: ISelectableItem[];
     dropDownItems25: IDropdownItem[];
@@ -23,7 +20,6 @@ export class KomponentkartaComponent implements AfterViewInit {
     lockMessage: string;
     actionPanelMessage: string;
     constructor() {
-        this.themeChanged = new EventEmitter<ISelectableItem>();
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems25All = this.getDemoItems(25);
         this.dropDownItems8 = this.getDemoItems(8);
@@ -34,7 +30,7 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.lockMessage = "Ingen";
         this.actionPanelMessage = "";
         this.themeOptions = [
-            { id: "neutral", displayName: "Neutral (grå)" } as ISelectableItem,
+            { id: "default", displayName: "Neutral (grå)" } as ISelectableItem,
             { id: "blue", displayName: "BMM (blå)" } as ISelectableItem,
             { id: "red", displayName: "VGPV (röd)" } as ISelectableItem,
             { id: "green", displayName: "Rehab (grön)" } as ISelectableItem,
@@ -44,11 +40,21 @@ export class KomponentkartaComponent implements AfterViewInit {
     }
 
     private selectedThemeChanged(selectedTheme: ISelectableItem) {
-        this.selectedThemeOption = selectedTheme;
-         this.header.changeTheme(selectedTheme.id);
-        }
+        var systemName = selectedTheme.id === "default" ? "neutral"
+            : selectedTheme.id === "blue" ? "bmm"
+                : selectedTheme.id === "red" ? "vgpv"
+                    : selectedTheme.id === "green" ? "rehab" : "neutral";
+
+        $('.main-content').removeClass('theme--blue theme--red theme--neutral theme--green');
+        $('.main-content').addClass('theme--' + selectedTheme.id);
+
+        $('.menu').removeClass('menu--neutral menu--bmm menu--vgpv menu--rehab');
+        $('.menu').addClass('menu--' + systemName);
 
 
+        $('.site-header-vgr').not(".header--inline").removeClass('site-header-vgr--default site-header-vgr--blue site-header-vgr--red site-header-vgr--green');
+        $('.site-header-vgr').not(".header--inline").addClass('site-header-vgr--' + selectedTheme.id);
+    }
 
     private getDemoItems(numberOfItems: number): IDropdownItem[] {
         var items: IDropdownItem[] = [];

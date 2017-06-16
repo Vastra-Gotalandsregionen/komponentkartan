@@ -7,16 +7,18 @@ import { KomponentkartanApplicationComponent } from "./app.component"
 import { HeaderMenuComponent } from "./header/header-menu.component"
 import { KomponentkartaComponent } from "./komponentkarta/komponentkarta.component"
 import { KomponentkartanModule } from "../component-package/komponentkartan.module";
+import { RouterModule, Routes } from "@angular/router"
+import { appRoutes } from "./routes"
 
 
 @NgModule({
     imports: [
         KomponentkartanModule,
         BrowserModule,
-        FormsModule
+        FormsModule,
+        RouterModule.forRoot(appRoutes),
     ],
-    providers: [
-    ],
+    providers: [],
     declarations: [
         KomponentkartanApplicationComponent,
         HeaderMenuComponent,
