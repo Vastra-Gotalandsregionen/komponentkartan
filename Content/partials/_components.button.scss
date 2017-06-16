@@ -36,8 +36,8 @@
         }
     }
     &:focus:not(.button--disabled) {
-        box-shadow: 0 0 1px 1px #4990e2;
-        border-bottom-color: #4990e2;
+        box-shadow: 0 0 1px 1px $focus-color;
+        border-bottom-color: $focus-color;
     }
     &:active:not(.button--disabled) {
         height: 28px;
@@ -49,14 +49,14 @@
         }
     }
     &.button--disabled {
-        @extend .background-color--secondary;
+        background-color:$secondary-color--default;
         cursor: default;
         &:focus {
             outline: 0;
         }
         &.button--secondary {
-            @extend .color--secondary;
-            @extend .border-color--secondary;
+            border-color:$secondary-color--default;
+            color:$secondary-color--default;
             border-width: 1px;
             border-style: solid;
             background-color: $text-color--light;
