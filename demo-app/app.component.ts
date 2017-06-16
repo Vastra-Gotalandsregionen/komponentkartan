@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, ViewChild } from "@angular/core";
-import { HeaderComponent } from "./header/header.component";
 import { ISelectableItem } from "../component-package/models/selectableItem.model";
 import { IMenu, IMenuGroup, IMenuItem } from "../component-package/models/menu.model";
 
@@ -10,7 +9,6 @@ import { IMenu, IMenuGroup, IMenuItem } from "../component-package/models/menu.m
 
 export class KomponentkartanApplicationComponent implements AfterViewInit {
     selectedTheme: string;
-    @ViewChild(HeaderComponent) header: HeaderComponent;
     menus: IMenu[];
     constructor() {
         this.selectedTheme = "neutral";
@@ -33,11 +31,6 @@ export class KomponentkartanApplicationComponent implements AfterViewInit {
 
     onSelectedMenuChanged(newMenu: string) {
         console.log(newMenu);
-    }
-
-    selectedThemeChanged(theme: ISelectableItem) {
-        console.log(this.header);
-        this.header.changeTheme(theme.id);
     }
 
     ngAfterViewInit() {
