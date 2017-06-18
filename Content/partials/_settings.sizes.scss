@@ -32,7 +32,7 @@ $icon-width: 34px;
 
 $header-height:79px;
 $header-menu-width: 200px;
-$content-header-offset: calc(#{$header-height} + 2px);
+$content-header-offset: $header-height;
 
 /*------------------------------------*\
   #LAYERS
