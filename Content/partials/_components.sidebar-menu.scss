@@ -118,6 +118,7 @@ vgr-sidebar-menu {
         .menu--vgpv & {
             border-left-color: $secondary-color--red;
         }
+        transition: border-left-color 0.3s ease-in;
     }
     li:not(.menu__footer):not(.menu--single-menu--footer):hover {
         font-weight: bold;

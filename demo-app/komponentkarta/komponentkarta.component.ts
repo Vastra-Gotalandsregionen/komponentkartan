@@ -19,6 +19,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     saveCancelMessage: string;
     lockMessage: string;
     actionPanelMessage: string;
+    actionInProgress: boolean;
     constructor() {
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems25All = this.getDemoItems(25);
@@ -37,6 +38,16 @@ export class KomponentkartaComponent implements AfterViewInit {
         ] as ISelectableItem[];
         this.selectedThemeOption = this.themeOptions[0];
         this.selectedRadioOption = { displayName: "Inget" } as ISelectableItem;
+        this.actionInProgress = false;
+    }
+
+    private onActionStarted() {
+        this.actionPanelMessage = "";
+        this.actionInProgress = true;
+    }
+
+    private onActionEnded() {
+        this.actionInProgress = false;
     }
 
     private selectedThemeChanged(selectedTheme: ISelectableItem) {

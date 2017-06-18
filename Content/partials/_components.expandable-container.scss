@@ -70,15 +70,10 @@
     box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
     .expandable-container__header:after {
         @extend .bg-image-icon-chevron;
-        background-size: 50%;
-        background-repeat: no-repeat;
-        background-position: center;
         content: "";
-        width: 34px;
-        height: 28px;
         vertical-align: middle;
         margin-left: auto;
-        transform: rotate(0deg);
+        transform: rotate(-180deg);
         transition: transform 0.4s;
     } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
     transition: margin-top 0.2s ease-in;
@@ -93,7 +88,7 @@
             @extend .bg-image-icon-chevron;
             vertical-align: middle;
             margin-left: auto;
-            transform: rotate(-180deg);
+            transform: rotate(0deg);
             transition: transform 0.4s;
         }
     }

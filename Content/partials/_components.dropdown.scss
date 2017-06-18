@@ -31,11 +31,6 @@
         &:after {
             @extend .bg-image-icon-chevron-inverted;
             content: "";
-            background-size: 45%;
-            background-repeat: no-repeat;
-            background-position: center;
-            width: $icon-width;
-            height: calc(#{$component-height});
             vertical-align: middle;
             text-align: center;
             float: right;

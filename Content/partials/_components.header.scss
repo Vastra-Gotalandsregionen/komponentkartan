@@ -21,7 +21,6 @@ vgr-header {
 }
 
 .site-header-vgr {
-    @extend .bg-image-vgr-header;
     min-height: $header-height;
     border-bottom: solid 1px $border-color;
     display: flex;
@@ -34,6 +33,7 @@ vgr-header {
 
 //THEMING
 .site-header-vgr--blue {
+    @extend .bg-image-vgr-header;
     background-color: $primary-color--blue;
     transition: background-color ease-in 0.3s;
 }
@@ -44,11 +44,13 @@ vgr-header {
 }
 
 .site-header-vgr--red {
+    @extend .bg-image-vgr-header;
     background-color: $primary-color--red;
     transition: background-color ease-in 0.3s;
 }
 
 .site-header-vgr--green {
+    @extend .bg-image-vgr-header;
     background-color: $primary-color--green;
     transition: background-color ease-in 0.3s;
 }

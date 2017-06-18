@@ -7,6 +7,10 @@
     display: flex;
     flex-direction: column;
     padding-bottom: $margin--regular;
+    transition: top 0.5s ease;
+    &.komponentkarta-components--action-in-progress {
+        top: 233px;
+    }
 }
 
 .komponentkarta-component {

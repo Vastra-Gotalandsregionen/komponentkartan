@@ -2,7 +2,8 @@
 'theme--blue': selectedThemeOption.id==='blue',
 'theme--red': selectedThemeOption.id==='red',
 'theme--green': selectedThemeOption.id==='green' }">
-    <vgr-page-header [title]="'KomponentKarTa'" [enableActionsText]="'Öppna'" [disableActionsText]="'Stäng'" (actionStarted)="actionPanelMessage=''">
+    <vgr-page-header [title]="'KomponentKarTa'" [enableActionsText]="'Öppna'" [disableActionsText]="'Stäng'" (actionStarted)="onActionStarted()"
+        (actionEnded)="onActionEnded()">
         <vgr-radio-group class="page-header__control" [options]="themeOptions" (selectedChanged)="selectedThemeChanged($event)"></vgr-radio-group>
         <div class="page-header__action-panel">
             <h2>Här placerar man de åtgärder som hör ihop med headern</h2>
@@ -11,7 +12,7 @@
         </div>
     </vgr-page-header>
 
-    <div class="komponentkarta-components">
+    <div class="komponentkarta-components" [ngClass]="{'komponentkarta-components--action-in-progress' : actionInProgress}">
         <div class="komponentkarta-component column-layout">
             <h1 class="formatmall__header" style="cursor: pointer;">Formatmall</h1>
             <span>Fonten som används är <strong>Calibri</strong>. Storlek på brödtext och rubriker anpassas efter fönstrets bredd i två steg.<br/>
@@ -102,7 +103,7 @@
                 <br>
                 <span>Senaste händelse:&nbsp;<strong>{{saveCancelMessage}}</strong></span>
             </div>
-            <div class="markup-example">&lt;save-cancel&gt;&lt;/save-cancel&gt;
+            <div class="markup-example">&lt;vgr-save-cancel&gt;&lt;/vgr-save-cancel&gt;
             </div>
         </div>
         <div class="komponentkarta-component column-layout">
@@ -312,18 +313,18 @@
                 <p>
                     En lista med rader som går att expandera. <strong>En rad i taget</strong> kan vara expanderad. Vill man
                     ha kolumner får man definiera deras storlek själv, och lägga dem i header och respektive rad.
-                    <strong>Notera!</strong> Listan lägger själv till en "back-to-top"-knapp. Därav knappen i komponentkartan.
+
                 </p>
                 <div class="markup-example">
-                    &lt;expandable-container-list&gt; &lt;!-- Placera divs här för kolumn headers --&gt; &lt;div class="expandable-container-list__header"&gt;
+                    &lt;vgr-expandable-container-list&gt; &lt;!-- Placera divs här för kolumn headers --&gt; &lt;div class="vgr-expandable-container-list__header"&gt;
                     &lt;!-- Placera divs här för kolumn headers --&gt; &lt;div class="flex-column-13"&gt;Kolumn 1&lt;/div&gt;
-                    &lt;div class="flex-column-15"&gt;Kolumn 2&lt;/div&gt; &lt;/div&gt; &lt;div class="expandable-container-list__items"&gt;
-                    &lt;!-- Placera rader här --&gt; &lt;expandable-container&gt; &lt;div class="expandable-container__header"&gt;
+                    &lt;div class="flex-column-15"&gt;Kolumn 2&lt;/div&gt; &lt;/div&gt; &lt;div class="vgr-expandable-container-list__items"&gt;
+                    &lt;!-- Placera rader här --&gt; &lt;vgr-expandable-container&gt; &lt;div class="vgr-expandable-container__header"&gt;
                     &lt;!-- Detta är radens header, som visas i kollapsat läge --&gt; &lt;div class="flex-column-13"&gt;Första
                     raden&lt;/div&gt; &lt;div class="flex-column-15"&gt;Innehåller text&lt;/div&gt; &lt;/div&gt; &lt;div
-                    class="expandable-container__content"&gt; &lt;!-- Detta är radens innehåll, som visas i expanderat läge
-                    --&gt; &lt;span&gt;Lorem Ipsum....&lt;/span&gt; &lt;/div&gt; &lt;/expandable-container&gt; &lt;/div&gt;
-                    &lt;/expandable-container-list&gt;
+                    class="vgr-expandable-container__content"&gt; &lt;!-- Detta är radens innehåll, som visas i expanderat
+                    läge --&gt; &lt;span&gt;Lorem Ipsum....&lt;/span&gt; &lt;/div&gt; &lt;/vgr-expandable-container&gt; &lt;/div&gt;
+                    &lt;/vgr-expandable-container-list&gt;
                 </div>
                 <div class="expandable-container-list-showcase">
                     <vgr-expandable-container-list class="expandable-container-list--inline">
