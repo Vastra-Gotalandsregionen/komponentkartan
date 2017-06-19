@@ -9,8 +9,8 @@ import { Component, AfterViewInit } from "@angular/core"
 export class HeaderComponent {
     systemColor: string;
 
-    ngAfterViewInit() {
+    constructor() {
         this.systemColor = "neutral";
-
     }
+
 }
