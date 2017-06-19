@@ -17,6 +17,7 @@ import { SaveCancelComponent } from "./controls/saveCancel/saveCancel.component"
 import { PageHeaderComponent } from "./controls/pageHeader/pageHeader.component";
 import { RadioGroupComponent } from "./controls/radioGroup/radioGroup.component";
 import { HeaderComponent } from "./controls/header/header.component";
+import { LoginInformationComponent } from "./controls/loginInformation/loginInformation.component";
 import { MenuComponent } from "./controls/sidebar-menu/menu.component";
 import { SidebarMenuComponent } from "./controls/sidebar-menu/sidebarMenu.component";
 
@@ -42,9 +43,11 @@ import { SidebarMenuComponent } from "./controls/sidebar-menu/sidebarMenu.compon
         SaveCancelComponent,
         PageHeaderComponent,
         RadioGroupComponent,
+        LoginInformationComponent,
         HeaderComponent,
         MenuComponent,
-        SidebarMenuComponent
+        SidebarMenuComponent,
+
     ],
     exports: [
         SafePipe,
@@ -60,9 +63,10 @@ import { SidebarMenuComponent } from "./controls/sidebar-menu/sidebarMenu.compon
         SaveCancelComponent,
         PageHeaderComponent,
         RadioGroupComponent,
-         HeaderComponent,
-         MenuComponent,
-        SidebarMenuComponent
+        HeaderComponent,
+        MenuComponent,
+        SidebarMenuComponent,
+        LoginInformationComponent
 
     ]
 })

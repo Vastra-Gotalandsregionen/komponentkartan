@@ -12,7 +12,7 @@ vgr-header {
     position: fixed;
     top: 0;
     z-index: $layer-three;
-    width: 100%
+    width: 100%;
 }
 
 .header--inline {
@@ -29,6 +29,7 @@ vgr-header {
     background-color: $primary-color--default; //Images/dekal.png
     background-repeat: no-repeat;
     background-position: top right;
+    padding-right: $margin--fat;
 }
 
 //THEMING
@@ -84,7 +85,7 @@ vgr-header {
 }
 
 .login-info__username {
-    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .login-info__profile_image {
