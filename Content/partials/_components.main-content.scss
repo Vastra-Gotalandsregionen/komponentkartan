@@ -20,24 +20,6 @@
     }
 }
 
-.main-content--green {
-    height: 5000px;
-    width: calc(100vw - #{$nav-width--small} - #{$margin--slim});
-    min-width: 1300px;
-    iframe {
-        width: calc(100% - #{$margin--slim} - #{$margin--slim});
-        height: 8000px;
-    }
-}
-
-.main-content--red {
-    width: calc(100vw - #{$nav-width--small} - #{$margin--slim});
-    iframe {
-        width: calc(100% - #{$margin--slim} - #{$margin--slim});
-        height: 1200px;
-    }
-}
-
 //When we have mockup images, the include their own padding.
 .main-content--mockup {
     >* {
