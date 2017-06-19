@@ -57,7 +57,9 @@ vgr-header {
 
 .header__vgr-logo {
     @extend .bg-image-vgr-logo;
-    margin-left: 25px;
+    margin-left: 16px;
+    margin-top: 16px;
+    align-self: flex-start;
 }
 
 //Bara för komponentkartan för att visa storleksinfo
