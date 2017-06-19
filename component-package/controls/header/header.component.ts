@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from "@angular/core"
+import { Component, AfterViewInit, Input } from "@angular/core"
 
 @Component({
     selector: "vgr-header",
@@ -8,6 +8,7 @@ import { Component, AfterViewInit } from "@angular/core"
 
 export class HeaderComponent {
     systemColor: string;
+    @Input() userName: string;
 
     constructor() {
         this.systemColor = "neutral";
