@@ -75,6 +75,8 @@
         margin-left: auto;
         transform: rotate(-180deg);
         transition: transform 0.4s;
+        width: 15px !important;
+        background-size: 100% !important;
     } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
     transition: margin-top 0.2s ease-in;
     &.expandable-container--expanded:not(.expandable-container--compact) {
