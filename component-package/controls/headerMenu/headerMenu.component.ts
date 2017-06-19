@@ -2,7 +2,8 @@
 
 @Component({
     selector: "vgr-header-menu",
-    templateUrl: "/demo-app/header/header-menu.component.html"
+    moduleId: module.id,
+    templateUrl: "./headerMenu.component.html"
 })
 
 export class HeaderMenuComponent {

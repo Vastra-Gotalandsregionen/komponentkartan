@@ -20,6 +20,7 @@ import { HeaderComponent } from "./controls/header/header.component";
 import { LoginInformationComponent } from "./controls/loginInformation/loginInformation.component";
 import { MenuComponent } from "./controls/sidebar-menu/menu.component";
 import { SidebarMenuComponent } from "./controls/sidebar-menu/sidebarMenu.component";
+import { HeaderMenuComponent } from "./controls/headerMenu/headerMenu.component";
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { SidebarMenuComponent } from "./controls/sidebar-menu/sidebarMenu.compon
         HeaderComponent,
         MenuComponent,
         SidebarMenuComponent,
-
+        HeaderMenuComponent
     ],
     exports: [
         SafePipe,
@@ -66,8 +67,8 @@ import { SidebarMenuComponent } from "./controls/sidebar-menu/sidebarMenu.compon
         HeaderComponent,
         MenuComponent,
         SidebarMenuComponent,
-        LoginInformationComponent
-
+        LoginInformationComponent,
+        HeaderMenuComponent
     ]
 })
 
