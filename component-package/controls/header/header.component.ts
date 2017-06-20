@@ -1,6 +1,7 @@
-import { Component, AfterViewInit, Input } from "@angular/core"
+import { Component, AfterViewInit, Input,ElementRef,ViewChild } from "@angular/core"
 
 import { IHeaderMenu } from "../../models/headerMenu.model"
+import {HeaderMenuComponent} from "../headerMenu/headerMenu.component"
 
 @Component({
     selector: "vgr-header",
@@ -11,10 +12,24 @@ import { IHeaderMenu } from "../../models/headerMenu.model"
 export class HeaderComponent {
     systemColor: string;
     @Input() userName: string;
-    @Input() headerMenu: IHeaderMenu; 
+   // @Input() headerMenu: IHeaderMenu; 
 
-    constructor() {
+    @ViewChild(HeaderMenuComponent) headerMenu: HeaderMenuComponent;
+
+    constructor(private elementRef:ElementRef) {
         this.systemColor = "neutral";
+
     }
 
+onDocumentClick(event: any) {
+
+        let target = event.target || event.srcElement || event.currentTarget;
+
+        if (!this.elementRef.nativeElement.contains(target)) {
+            this.headerMenu.hidden = true;
+        }
+    }
+  
+    
 }
+

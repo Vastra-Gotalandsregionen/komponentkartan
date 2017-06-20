@@ -1,4 +1,4 @@
-﻿<div class="header-menu header-menu--hidden">
+﻿<div class="header-menu " [ngClass]="{'header-menu--hidden' : hidden}" (mousedown)="toggleHeaderMenu($event)">
     <div class="header-menu__content">
         <ul>
             <li><a routerLink="/minsida" routerLinkActive="header-menu-item--selected header-menu-item--marked">Min sida</a></li>
@@ -21,8 +21,6 @@
             </li>
 
             <li><a target="_blank" href="http://www.vgregion.se/halsa-och-vard/vardgivarwebben/it/it-system/it-stod-for-vardval-rehab/kontaktpersoner/">Kontakt</a></li>
-            <li class="header-menu-divider"></li>
-            <li><a routerLink="/komponentkarta" routerLinkActive="header-menu-item--selected header-menu-item--marked">Komponentkarta</a></li>
         </ul>
     </div>
 </div>
