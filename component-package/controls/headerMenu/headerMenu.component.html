@@ -1,7 +1,19 @@
-﻿<div class="header-menu " [ngClass]="{'header-menu--hidden' : hidden}" (mousedown)="toggleHeaderMenu($event)">
+﻿<div class="header-menu" [ngClass]="{'header-menu--hidden' : hidden}">
     <div class="header-menu__content">
-        <ul>
-            <li><a routerLink="/minsida" routerLinkActive="header-menu-item--selected header-menu-item--marked">Min sida</a></li>
+        <ul *ngFor="let group of menu.groups">
+            <li *ngFor="let menuItem of group.menuItems" class="header-menu-item--header">
+                <a *ngIf="menuItem.isInternalLink && menuItem.url" routerLink={{menuItem.url}} routerLinkActive="header-menu-item--selected header-menu-item--marked">{{menuItem.displayName}}</a>
+                <a *ngIf="!menuItem.isInternalLink && menuItem.url" target="_blank" href={{menuItem.url}}>{{menuItem.displayName}}</a>
+                <a *ngIf="!menuItem.url" onClick="$(this).parent('li').toggleClass('header-menu-submenu--expanded')" class="header-menu__submenu-header">{{menuItem.displayName}}</a>
+
+                <ul class="header-menu-submenu" *ngIf="menuItem.menuItems">
+                    <li *ngFor="let childMenuItem of menuItem.menuItems">
+                        <a *ngIf="childMenuItem.isInternalLink && childMenuItem.url" routerLink={{childMenuItem.url}} routerLinkActive="header-menu-item--selected header-menu-item--marked">{{childMenuItem.displayName}}</a>
+                        <a *ngIf="!childMenuItem.isInternalLink && childMenuItem.url" target="_blank" href={{childMenuItem.url}}>{{childMenuItem.displayName}}</a>
+                    </li>
+                </ul>
+            </li>
+            <!--<li><a routerLink="/minsida" routerLinkActive="header-menu-item--selected header-menu-item--marked">Min sida</a></li>
 
             <li class="header-menu-divider"></li>
             <li class="header-menu-item--header">
@@ -20,7 +32,7 @@
                 </ul>
             </li>
 
-            <li><a target="_blank" href="http://www.vgregion.se/halsa-och-vard/vardgivarwebben/it/it-system/it-stod-for-vardval-rehab/kontaktpersoner/">Kontakt</a></li>
+            <li><a target="_blank" href="http://www.vgregion.se/halsa-och-vard/vardgivarwebben/it/it-system/it-stod-for-vardval-rehab/kontaktpersoner/">Kontakt</a></li>-->
         </ul>
     </div>
 </div>

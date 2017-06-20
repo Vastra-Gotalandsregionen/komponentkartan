@@ -1,19 +1,18 @@
+import { ISelectableItem } from "./selectableItem.model";
 
 export interface IHeaderMenu {
-    title: string;
     expanded: boolean;
     groups: IHeaderMenuGroup[];
-    isExpandable: boolean;
 }
 
 export interface IHeaderMenuGroup {
     menuItems: IHeaderMenuItem[];
 }
 
-export interface IHeaderMenuItem {
-    title: string;
+export interface IHeaderMenuItem extends ISelectableItem {
     url: string;
     menuItems: IHeaderMenuItem[];
     expanded: boolean;
     isSeparator: boolean;
+    isInternalLink: boolean;
 }

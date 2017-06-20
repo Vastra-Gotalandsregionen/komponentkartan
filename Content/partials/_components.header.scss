@@ -63,6 +63,10 @@ vgr-header {
     align-self: flex-start;
 }
 
+.header__info-box {
+    margin-left: auto;
+}
+
 //Bara för komponentkartan för att visa storleksinfo
 .header__size-info {
     margin-left: auto;
@@ -77,7 +81,6 @@ vgr-header {
 }
 
 .login-info {
-    margin-left: auto;
     display: inline-flex;
     color: white;
     align-items: center;
