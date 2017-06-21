@@ -61,8 +61,7 @@ export class SidebarMenuComponent implements AfterViewInit {
 
         this.changeDetectorRef.detectChanges();
 
-        this.setupJQuery();
-        //setTimeout(() => { this.setupJQuery() }, 2000);
+        setTimeout(() => { this.setupJQuery() }, 1000);
 
     }
 
@@ -108,7 +107,7 @@ export class SidebarMenuComponent implements AfterViewInit {
 
         //TODO: När är det rätt läge att aktivera scrollbaren? DSom det är nu förminskar den single menyn!
 
-        //this.applyScrollbar($('.sidebar-menu'))
+        this.applyScrollbar($('.sidebar-menu'))
     }
 
     private applyScrollbar(jqueryMenu: any) {

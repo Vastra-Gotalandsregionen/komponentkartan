@@ -1,3 +1,4 @@
-﻿<vgr-sidebar-menu [menus]="menus"></vgr-sidebar-menu>
+﻿<menu-selector (menuSelected)="setSelectedMenu($event)"></menu-selector>
+<vgr-sidebar-menu [menus]="menus"></vgr-sidebar-menu>
 <vgr-header [userName]="'Nico Åberg'"></vgr-header>
 <router-outlet></router-outlet>

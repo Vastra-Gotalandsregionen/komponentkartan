@@ -14,11 +14,12 @@
 vgr-sidebar-menu {
     position: fixed;
     z-index: $layer-three;
+    height: calc(100vh - #{$header-height});
 }
 
 .sidebar-menu {
     background: $background-color--default;
-    height: 100vh;
+    height: calc(100vh - #{$header-height});
     position: fixed;
     top: $content-header-offset;
     min-width: $nav-width--small;
