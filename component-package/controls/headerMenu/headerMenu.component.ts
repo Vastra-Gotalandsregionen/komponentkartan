@@ -1,5 +1,5 @@
 ﻿import { Component, Input, ElementRef } from "@angular/core"
-import { IHeaderMenu } from "../../models/headermenu.model"
+import { IHeaderMenu, IHeaderMenuItem } from "../../models/headermenu.model"
 
 @Component({
     selector: "vgr-header-menu",
@@ -11,13 +11,14 @@ import { IHeaderMenu } from "../../models/headermenu.model"
 })
 
 export class HeaderMenuComponent {
-    @Input() menu: IHeaderMenu[];
+    @Input() menu: IHeaderMenu;
     hidden: boolean;
-    
+    selectedItem: IHeaderMenuItem;
+
     constructor(private elementRef: ElementRef) {
         this.hidden = false;
     }
-    
+
     toggleHeaderMenu(event: Event) {
         let target = event.target || event.srcElement || event.currentTarget;
         let element = $(target);
@@ -36,6 +37,32 @@ export class HeaderMenuComponent {
         if (!this.elementRef.nativeElement.contains(target)) {
             this.hidden = true;
         }
+    }
+
+    onMouseEnter(item: IHeaderMenuItem) {
+        this.menu.menuItems.forEach(x => x.marked = false);
+
+        item.marked = true;
+    }
+
+    onMouseLeave(item: IHeaderMenuItem) {
+        item.marked = false;
+        if (this.selectedItem)
+            this.selectedItem.marked = true;
+    }
+
+
+    selectItem(item: IHeaderMenuItem) {
+        if (!item)
+            return;
+
+        this.menu.menuItems.forEach(x => x.selected = false);
+
+        item.selected = true;
+        item.marked = true;
+        this.selectedItem = item;
+
+
     }
 }
 

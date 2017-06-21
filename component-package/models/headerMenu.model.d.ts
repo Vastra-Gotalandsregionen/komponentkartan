@@ -2,7 +2,8 @@ import { ISelectableItem } from "./selectableItem.model";
 
 export interface IHeaderMenu {
     expanded: boolean;
-    groups: IHeaderMenuGroup[];
+    //groups: IHeaderMenuGroup[];
+    menuItems: IHeaderMenuItem[];
 }
 
 export interface IHeaderMenuGroup {
@@ -15,4 +16,6 @@ export interface IHeaderMenuItem extends ISelectableItem {
     expanded: boolean;
     isSeparator: boolean;
     isInternalLink: boolean;
+    marked: boolean;
+    selected: boolean;
 }
