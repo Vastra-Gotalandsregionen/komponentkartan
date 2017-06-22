@@ -34,7 +34,7 @@ export class HeaderComponent {
                     isSeparator: true
                 },
                 {
-                    displayName: "Krav- och kvalitetsbok",
+                    displayName: "Krav- och kvalitetsbok fdslfjdkslfj",
                     menuItems: [
                         {
                             displayName: "VGPV",

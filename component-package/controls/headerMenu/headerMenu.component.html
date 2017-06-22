@@ -1,30 +1,27 @@
 ﻿<div class="header-menu" [ngClass]="{'header-menu--hidden' : hidden}">
     <div class="header-menu__content">
-        <ul *ngFor="let menuItem of menu.menuItems">
-            <li *ngIf="!menuItem.isSeparator" class="header-menu-item--header">
-
-                <a *ngIf="menuItem.isInternalLink && menuItem.url" routerLink={{menuItem.url}} [ngClass]="{'header-menu-item--marked' : menuItem.marked, 'header-menu-item--selected' : menuItem.selected }" routerLinkActive="header-menu-item--selected header-menu-item--marked"
-                    (mousedown)="selectItem(menuItem)" (mouseenter)="onMouseEnter(menuItem)" (mouseleave)="onMouseLeave(menuItem)">
-                        {{menuItem.displayName}}</a>
-                <a *ngIf="!menuItem.isInternalLink && menuItem.url" target="_blank" href={{menuItem.url}} [ngClass]="{'header-menu-item--marked' : menuItem.marked, 'header-menu-item--selected' : menuItem.selected }" (mouseenter)="onMouseEnter(menuItem)" (mouseleave)="onMouseLeave(menuItem)">
-                    {{menuItem.displayName}}</a>
-                <a *ngIf="!menuItem.url" (mousedown)="toggleSubMenu(menuItem)" class="header-menu__submenu-header" [ngClass]="{'header-menu-item--marked' : menuItem.marked, 'header-menu-item--selected' : menuItem.selected, 'header-menu-submenu--expanded': menuItem.expanded }" (mouseenter)="onMouseEnter(menuItem)"
-                    (mouseleave)="onMouseLeave(menuItem)">
+        <ul>
+            <li *ngFor="let menuItem of menu.menuItems" class="header-menu-item--header" [ngClass]="{'header-menu-divider': menuItem.isSeparator, 'header-menu-submenu--expanded': menuItem.expanded}">
+                <a *ngIf="!menuItem.isSeparator && menuItem.isInternalLink && menuItem.url" routerLink={{menuItem.url}} [ngClass]="{'header-menu-item--marked' : menuItem.marked, 'header-menu-item--selected' : menuItem.selected }" routerLinkActive="header-menu-item--selected header-menu-item--marked"
+                   (mousedown)="selectItem(menuItem)" (mouseenter)="onMouseEnter(menuItem)" (mouseleave)="onMouseLeave(menuItem)">
                     {{menuItem.displayName}}
-                    <span class="header-menu-item__minus" *ngIf="menuItem.expanded"></span>
-                    <span class="header-menu-item__plus" *ngIf="!menuItem.expanded"></span>
-                  </a>
-
+                </a>
+                <a *ngIf="!menuItem.isSeparator && !menuItem.isInternalLink && menuItem.url" target="_blank" href={{menuItem.url}} [ngClass]="{'header-menu-item--marked' : menuItem.marked, 'header-menu-item--selected' : menuItem.selected}" (mouseenter)="onMouseEnter(menuItem)" (mouseleave)="onMouseLeave(menuItem)">
+                    {{menuItem.displayName}}
+                </a>
+                <a *ngIf="!menuItem.isSeparator && !menuItem.url" (mousedown)="toggleSubMenu(menuItem)" class="header-menu__submenu-header" [ngClass]="{'header-menu-item--marked' : menuItem.marked, 'header-menu-item--selected' : menuItem.selected }" (mouseenter)="onMouseEnter(menuItem)"
+                   (mouseleave)="onMouseLeave(menuItem)">
+                    {{menuItem.displayName}}
+                </a>
                 <ul class="header-menu-submenu" *ngIf="menuItem.menuItems">
                     <li *ngFor="let childMenuItem of menuItem.menuItems">
                         <a *ngIf="childMenuItem.isInternalLink && childMenuItem.url" routerLink={{childMenuItem.url}} [ngClass]="{'header-menu-item--marked' : childMenuItem.marked, 'header-menu-item--selected' : childMenuItem.selected }" routerLinkActive="header-menu-item--selected header-menu-item--marked"
-                            (mousedown)="selectItem(childMenuItem)" (mouseenter)="onMouseEnter(childMenuItem)" (mouseleave)="onMouseLeave(childMenuItem)">{{childMenuItem.displayName}}</a>
+                           (mousedown)="selectItem(childMenuItem)" (mouseenter)="onMouseEnter(childMenuItem)" (mouseleave)="onMouseLeave(childMenuItem)">{{childMenuItem.displayName}}</a>
                         <a *ngIf="!childMenuItem.isInternalLink && childMenuItem.url" target="_blank" href={{childMenuItem.url}} [ngClass]="{'header-menu-item--marked' : childMenuItem.marked, 'header-menu-item--selected' : childMenuItem.selected }" (mouseenter)="onMouseEnter(childMenuItem)"
-                            (mouseleave)="onMouseLeave(childMenuItem)">{{childMenuItem.displayName}}</a>
+                           (mouseleave)="onMouseLeave(childMenuItem)">{{childMenuItem.displayName}}</a>
                     </li>
                 </ul>
             </li>
-            <li *ngIf="menuItem.isSeparator" class="header-menu-divider"></li>
             <!--<li><a routerLink="/minsida" routerLinkActive="header-menu-item--selected header-menu-item--marked">Min sida</a></li>
 
             <li class="header-menu-divider"></li>
