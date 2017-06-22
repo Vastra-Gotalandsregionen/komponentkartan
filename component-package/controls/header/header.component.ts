@@ -13,15 +13,12 @@ export class HeaderComponent {
     systemColor: string;
     headerMenu: IHeaderMenu;
     @Input() userName: string;
-    // @Input() headerMenu: IHeaderMenu; 
 
     @ViewChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
 
     constructor(private elementRef: ElementRef) {
         this.systemColor = "neutral";
         this.headerMenu = {
-            // groups: [
-            //     {
             menuItems: [
                 {
                     displayName: "Min sida",
@@ -29,12 +26,13 @@ export class HeaderComponent {
                     isInternalLink: true
                 },
                 {
+                    displayName: "Formatmall",
+                    url: "/formatmall",
+                    isInternalLink: true
+                },
+                {
                     isSeparator: true
                 },
-                // ] as IHeaderMenuItem[]
-                // },
-                // {
-                // menuItems: [
                 {
                     displayName: "Krav- och kvalitetsbok",
                     menuItems: [
@@ -71,24 +69,11 @@ export class HeaderComponent {
                     isInternalLink: false
                 }
             ] as IHeaderMenuItem[]
-            // }
-            // ] as IHeaderMenuGroup[]
         } as IHeaderMenu;
     }
 
     toggleHeaderMenu(event: Event): void {
         this.headerMenuComponent.toggleHeaderMenu(event);
     }
-
-    //onDocumentClick(event: any) {
-
-    //        let target = event.target || event.srcElement || event.currentTarget;
-
-    //        if (!this.elementRef.nativeElement.contains(target)) {
-    //            this.headerMenu.hidden = true;
-    //        }
-    //    }
-
-
 }
 

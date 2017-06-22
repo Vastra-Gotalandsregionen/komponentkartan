@@ -31,6 +31,10 @@ export class HeaderMenuComponent {
         }
     }
 
+    toggleSubMenu(item: IHeaderMenuItem) {
+        item.expanded = !item.expanded;
+    }
+
     onDocumentClick(event: any) {
         let target = event.target || event.srcElement || event.currentTarget;
 
