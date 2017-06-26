@@ -2,7 +2,6 @@ import { ISelectableItem } from "./selectableItem.model";
 
 export interface IHeaderMenu {
     expanded: boolean;
-    //groups: IHeaderMenuGroup[];
     menuItems: IHeaderMenuItem[];
 }
 
