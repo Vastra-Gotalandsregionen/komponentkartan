@@ -194,14 +194,6 @@ export class SidebarMenuComponent implements AfterViewInit {
 
     }
 
-    public onMenuInitialized() {
-        // this.initializedMenuCount++;
-        // if (!this.menuComponents)
-        //     return;
-        // if (this.initializedMenuCount >= this.menuComponents.length)
-        //     this.setupJQuery();
-    }
-
     private setupJQuery() {
         //Menu-item-marker
         $('.menu__item-list > li').hover(function () {

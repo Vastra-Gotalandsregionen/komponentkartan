@@ -12,7 +12,7 @@
     </div>
     <ul class="menu__item-list">
         <ng-template ngFor let-menuItem [ngForOf]="menuItems">
-            <li *ngIf="!menuItem.isSeparator" routerLinkActive="menu-item--selected menu-item--marked" [ngClass]="
+            <li *ngIf="!menuItem.isSeparator" routerLinkActive="menu-item--selected menu-item--marked" class="menu-item" [ngClass]="
                         {'menu-item--visible' : menuItem.visible,
                          'menu-item--hidden' : !menuItem.visible,
                          'menu-item--favourite' : menuItem.favourite,
@@ -34,7 +34,7 @@
                     <a routerLink={{childMenuItem.url}} (click)="setActiveMenuItem(childMenuItem)">{{childMenuItem.title}} <span *ngIf="!availableInThisBrowser()" title="Fungerar endast i Internet Explorer">(!)</span> </a>
                 </li>
             </ul>
-            <li *ngIf="menuItem.isSeparator" class="menu-item--separator" [ngClass]="
+            <li *ngIf="menuItem.isSeparator" class="menu-item menu-item--separator" [ngClass]="
                     {'menu-item--visible' : menuItem.visible,
                      'menu-item--hidden' : !menuItem.visible
                     }"></li>
