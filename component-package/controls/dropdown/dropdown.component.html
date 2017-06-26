@@ -5,14 +5,19 @@
     <div class="dropdown__menu">
         <vgr-filter-textbox class="dropdown__filterTextbox" (inputChange)="nameChange($event)"></vgr-filter-textbox>
         <div class="dropdown__dimmer dropdown__dimmer--top"></div>
-        <ul class="dropdown__menu__items scrollbar-macosx">
-            <li *ngIf="selectAllItem" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : selectAllItem.marked, 'dropdown-item--selected' : selectAllItem.selected }">
-                <a (mousedown)="selectAllItems()" title="{{selectAllItem.displayName}}" (mouseenter)="onMouseEnter(selectAllItem)" (mouseleave)="onMouseLeave(selectAllItem)">{{selectAllItem.displayName}}</a>
-            </li>
-            <li *ngFor="let item of items | filterByProperties: nameFilter : ['displayName']" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
-                <a (mousedown)="selectItem(item)" title={{item.displayName}} (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave(item)">{{item.displayName}}</a>
-            </li>
-        </ul>
+        <perfect-scrollbar class="container">
+            <ul class="dropdown__menu__items">
+
+                <li *ngIf="selectAllItem" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : selectAllItem.marked, 'dropdown-item--selected' : selectAllItem.selected }">
+                    <a (mousedown)="selectAllItems()" title="{{selectAllItem.displayName}}" (mouseenter)="onMouseEnter(selectAllItem)" (mouseleave)="onMouseLeave(selectAllItem)">{{selectAllItem.displayName}}</a>
+                </li>
+                <li *ngFor="let item of items | filterByProperties: nameFilter : ['displayName']" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
+                    <a (mousedown)="selectItem(item)" title={{item.displayName}} (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave(item)">{{item.displayName}}</a>
+                </li>
+
+            </ul>
+        </perfect-scrollbar>
+
         <div class="dropdown__dimmer dropdown__dimmer--bottom"></div>
     </div>
 </div>

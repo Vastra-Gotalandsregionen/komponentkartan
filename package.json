@@ -26,11 +26,11 @@
         "@types/node": "7.0.7",
         "core-js": "~2.4.1",
         "jquery": "^3.1.1",
-        "jquery.scrollbar": "^0.2.11",
         "reflect-metadata": "~0.1.10",
         "rxjs": "~5.4.0",
         "systemjs": "0.19.47",
-        "zone.js": "~0.8.12"
+        "zone.js": "~0.8.12",
+        "ngx-perfect-scrollbar": "~4.4.0"
     },
     "devDependencies": {
         "body-parser": "^1.16.1",

@@ -14,7 +14,7 @@ import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component
         '(document:click)': "onDocumentClick($event)"
     }
 })
-export class DropdownComponent implements OnChanges, AfterViewInit {
+export class DropdownComponent implements OnChanges {
     @Input() items: IDropdownItem[];
     @Input() selectAllSelectedText: string;
     @Input() selectAllItemText: string;
@@ -52,17 +52,7 @@ export class DropdownComponent implements OnChanges, AfterViewInit {
 
     }
 
-    ngAfterViewInit() {
-        this.enableScrollbarOnElement($(".dropdown__menu__items"));
-    }
 
-    enableScrollbarOnElement(jqueryElement: any) {
-        setTimeout(() => {
-            jqueryElement.scrollbar({
-                scrollStep: 1
-            });
-        }, 1000);
-    }
 
     selectItem(item: IDropdownItem) {
         if (!item)

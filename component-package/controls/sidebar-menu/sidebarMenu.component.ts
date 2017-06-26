@@ -4,10 +4,139 @@ import { MenuComponent } from "./menu.component";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { BrowserDetector } from "../../services/browserDetector";
 
+var scrollbarStyle = `
+
+:host /deep/ .ps {
+    -ms-touch-action: auto;
+    touch-action: auto;
+    overflow: hidden !important;
+    -ms-overflow-style: none;
+}
+
+:host /deep/ .ps.ps--active-y>.ps__scrollbar-y-rail {
+    display: block;
+    background-color: transparent;
+}
+
+:host /deep/ .ps.ps--in-scrolling.ps--y>.ps__scrollbar-y-rail {
+    background-color: transparent !important;
+    opacity: .9;
+}
+
+:host /deep/ .ps.ps--in-scrolling.ps--y>.ps__scrollbar-y-rail>.ps__scrollbar-y {
+    background-color: transparent !important;
+    width: 11px;
+}
+
+
+
+:host /deep/ .ps>.ps__scrollbar-y-rail {
+    display: none;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: background-color .2s linear, opacity .2s linear;
+    -o-transition: background-color .2s linear, opacity .2s linear;
+    -moz-transition: background-color .2s linear, opacity .2s linear;
+    transition: background-color .2s linear, opacity .2s linear;
+    right: 0;
+    width: 11px;
+}
+
+:host /deep/ .ps>.ps__scrollbar-y-rail>.ps__scrollbar-y {
+    position: absolute;
+    background-color: #aaa;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+    -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+    -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+    right: 2px;
+    width: 8px;
+}
+
+:host /deep/ .ps>.ps__scrollbar-y-rail:hover>.ps__scrollbar-y,
+:host /deep/ .ps>.ps__scrollbar-y-rail:active>.ps__scrollbar-y {
+    width: 8px;
+}
+
+:host /deep/ .ps:hover.ps--in-scrolling.ps--y>.ps__scrollbar-y-rail {
+    background-color: transparent;
+    opacity: .9;
+}
+
+:host /deep/ .ps:hover.ps--in-scrolling.ps--y>.ps__scrollbar-y-rail>.ps__scrollbar-y {
+    width: 8px;
+}
+
+:host /deep/ .ps:hover>.ps__scrollbar-y-rail {
+    opacity: .6;
+}
+
+
+:host /deep/ .ps:hover>.ps__scrollbar-y-rail:hover {
+    background-color: transparent;
+    opacity: .9;
+}
+
+:host /deep/ .ps:hover>.ps__scrollbar-y-rail:hover>.ps__scrollbar-y {
+    background-color: #999;
+}
+
+:host /deep/ .ps.ps--active-y>.ps__scrollbar-y-rail>.ps__scrollbar-y {
+    background-color: #999;
+}
+
+:host /deep/ .ps.ps--in-scrolling.ps--y>.ps__scrollbar-y-rail>.ps__scrollbar-y {
+    background-color: #999;
+}
+
+
+:host /deep/ .ps {
+    position: relative;
+    display: block;
+}
+
+:host /deep/ .ps[hidden] {
+    display: none;
+}
+
+:host /deep/ .ps[fxlayout]>.ps-content {
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+:host /deep/ .ps.ps-static {
+    position: static;
+}
+
+:host /deep/ .ps.ps-static>.ps__scrollbar-y-rail {
+    top: 0 !important;
+}
+
+:host /deep/ .ps.ps-outside.ps--active-y {
+    padding-right: 24px;
+    margin-right: -24px;
+}
+
+:host /deep/ .ps.ps-outside>.ps__scrollbar-x-rail {
+    margin: 0 8px;
+}
+
+:host /deep/ .ps.ps-outside>.ps__scrollbar-y-rail {
+    margin: 8px 0;
+}`;
+
 @Component({
     selector: "vgr-sidebar-menu",
     moduleId: module.id,
     templateUrl: "./sidebarMenu.component.html",
+    styles: [scrollbarStyle],
     providers: [BrowserDetector]
 })
 export class SidebarMenuComponent implements AfterViewInit {
@@ -105,16 +234,8 @@ export class SidebarMenuComponent implements AfterViewInit {
 
             });
 
-        //TODO: När är det rätt läge att aktivera scrollbaren? DSom det är nu förminskar den single menyn!
-
-        this.applyScrollbar($('.sidebar-menu'))
     }
 
-    private applyScrollbar(jqueryMenu: any) {
-        //Apply a scrollbar to the menu. We use jquery.scrollbar from https://github.com/gromo/jquery.scrollbar
-        jqueryMenu.scrollbar();
-
-    }
 
     private markParentOfSelectedChild() {
         //First remove all child-selected instances
@@ -138,11 +259,11 @@ export class SidebarMenuComponent implements AfterViewInit {
     private scrollToMenu(newSelectedMenu: JQuery) {
         //Calculate scrolling height by adding the heights of all menus above the selected one
         var totalHeight = 0;
-        newSelectedMenu.closest("menu").prevAll("menu").each(function () { totalHeight += $(this).height() });
+        newSelectedMenu.closest("vgr-menu").prevAll("vgr-menu").each(function () { totalHeight += $(this).children(".menu").height() });
         var newScrollTopValue = totalHeight > 0 ? totalHeight - 50 : 0;
 
         if (!this.browserDetector.isInternetExplorer())
-            $(".sidebar-menu").animate({ scrollTop: newScrollTopValue }, 900);
+            $("perfect-scrollbar").animate({ scrollTop: newScrollTopValue }, 900);
     }
 
     onAnyMenuExpanded(): void {

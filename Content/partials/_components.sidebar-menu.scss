@@ -37,7 +37,7 @@ vgr-sidebar-menu {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        height: 100%;
+        height: calc(100vh - #{$header-height});
         background: white;
         .menu__item-list {
             border-bottom: none;

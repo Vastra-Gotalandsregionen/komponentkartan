@@ -12,6 +12,13 @@ import { KomponentkartanModule } from "../component-package/komponentkartan.modu
 import { RouterModule, Routes } from "@angular/router"
 import { appRoutes } from "./routes"
 
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+    suppressScrollX: true
+};
+
 
 @NgModule({
     imports: [
@@ -19,6 +26,7 @@ import { appRoutes } from "./routes"
         BrowserModule,
         FormsModule,
         RouterModule.forRoot(appRoutes),
+        PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
     ],
     providers: [],
     declarations: [

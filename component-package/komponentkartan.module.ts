@@ -21,13 +21,19 @@ import { LoginInformationComponent } from "./controls/loginInformation/loginInfo
 import { MenuComponent } from "./controls/sidebar-menu/menu.component";
 import { SidebarMenuComponent } from "./controls/sidebar-menu/sidebarMenu.component";
 import { HeaderMenuComponent } from "./controls/headerMenu/headerMenu.component";
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
+const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+    suppressScrollX: true
+};
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
-        RouterModule
+        RouterModule,
+        PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
     ],
 
     declarations: [

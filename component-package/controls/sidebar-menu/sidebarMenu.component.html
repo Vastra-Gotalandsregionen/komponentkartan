@@ -1,6 +1,8 @@
-<nav class="sidebar-menu scrollbar-macosx" [ngClass]="{'sidebar-menu--single-menu' : menus && menus.length === 1}">
-    <vgr-menu *ngFor="let menu of menus" [menu]="menu" [isSingleMenu]="menus.length===1" (onToggleExpand)="onAnyMenuExpanded($event)"
-        (onInitialized)="onMenuInitialized($event)">
-    </vgr-menu>
-    <div *ngIf="menus && menus.length>1 && anyMenuExpanded" class="scroll-filler"></div>
+<nav class="sidebar-menu" [ngClass]="{'sidebar-menu--single-menu' : menus && menus.length === 1}">
+    <perfect-scrollbar class="container">
+        <vgr-menu *ngFor="let menu of menus" [menu]="menu" [isSingleMenu]="menus.length===1" (onToggleExpand)="onAnyMenuExpanded($event)"
+            (onInitialized)="onMenuInitialized($event)">
+        </vgr-menu>
+        <div *ngIf="menus && menus.length>1 && anyMenuExpanded" class="scroll-filler"></div>
+    </perfect-scrollbar>
 </nav>
