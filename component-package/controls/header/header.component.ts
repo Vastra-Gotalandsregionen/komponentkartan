@@ -75,5 +75,10 @@ export class HeaderComponent {
     toggleHeaderMenu(event: Event): void {
         this.headerMenuComponent.toggleHeaderMenu(event);
     }
-}
 
+    keyDown(event: KeyboardEvent): void {
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.headerMenuComponent.toggleHeaderMenu(event);
+        }
+    }
+}

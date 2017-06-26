@@ -5,8 +5,9 @@
                         'site-header-vgr--green' : systemColor ==='Rehab'
                     }">
     <div alt="VG_Ne" class="header__vgr-logo"></div>
-    <div class="header__info-box" (click)="toggleHeaderMenu($event)">
+    <div class="header__info-box" tabindex="1" (click)="toggleHeaderMenu($event)" (keydown)="keyDown($event)">
         <vgr-login-information [userName]="userName"></vgr-login-information>
+        <div class="header__info-header-menu-arrow"></div>
         <vgr-header-menu [menu]="headerMenu"></vgr-header-menu>
     </div>
 </header>

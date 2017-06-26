@@ -67,6 +67,14 @@ vgr-header {
     margin-left: auto;
 }
 
+.header__info-header-menu-arrow {
+    @extend .bg-image-icon-arrow-white;
+    display: inline-block;
+    position: absolute;
+    right: 69px;
+    bottom: 21px;
+}
+
 //Bara för komponentkartan för att visa storleksinfo
 .header__size-info {
     margin-left: auto;

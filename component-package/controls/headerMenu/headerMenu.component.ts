@@ -16,7 +16,7 @@ export class HeaderMenuComponent {
     selectedItem: IHeaderMenuItem;
 
     constructor(private elementRef: ElementRef) {
-        this.hidden = false;
+        this.hidden = true;
     }
 
     toggleHeaderMenu(event: Event) {

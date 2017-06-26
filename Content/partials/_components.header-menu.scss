@@ -115,17 +115,11 @@
     &:after {
         @extend .bg-image-icon-plus;
         content: "";
-        display: inline-block;
         float: right;
         vertical-align: middle;
         text-align: center;
         padding-bottom: 23px;
         margin-right: 10px;
-        height: 10px;
-        width: 10px;
-        background-repeat: no-repeat;
-        background-position: center;
-        vertical-align: middle;
     }
     .header-menu-submenu--expanded & {
         &:after {
@@ -172,17 +166,5 @@
     }
     .header-menu__content {
         min-width: $header-menu-width-medium;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        a {
-            color: $menu-text-color;
-            padding: 5px;
-            padding-left: $margin--regular;
-            text-decoration: none;
-            display: block;
-            border-bottom: none; //When this link is marked, push the contents closer to prevent moving menu items
-            &.header-menu-item--marked {
-                padding-left: 11px;
-            }
-        }
     }
 }
