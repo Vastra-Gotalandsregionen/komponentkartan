@@ -10,7 +10,7 @@
                     (mouseleave)="onMouseLeave(menuItem)">
                     {{menuItem.displayName}}
                 </a>
-                <a *ngIf="!menuItem.isSeparator && !menuItem.url" (mous edown)="toggleSubMenu(menuItem)" class="header-menu__submenu-header" [ngClass]="{'header-menu-item--marked' : menuItem.marked, 'header-menu-item--selected' : menuItem.selected }" (mouseenter)="onMouseEnter(menuItem)"
+                <a *ngIf="!menuItem.isSeparator && !menuItem.url" (mousedown)="toggleSubMenu(menuItem)" class="header-menu__submenu-header" [ngClass]="{'header-menu-item--marked' : menuItem.marked, 'header-menu-item--selected' : menuItem.selected }" (mouseenter)="onMouseEnter(menuItem)"
                     (mouseleave)="onMouseLeave(menuItem)">
                     {{menuItem.displayName}}
                 </a>

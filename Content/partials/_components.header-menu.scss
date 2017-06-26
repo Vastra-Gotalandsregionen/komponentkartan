@@ -1,6 +1,7 @@
 @import "_settings.sizes.scss";
 @import "_settings.colors.scss";
 @import "_objects.images.scss";
+
 /* The small arrow indicating that there is a drop down menu below */
 
 .header-menu-indicator {
@@ -8,17 +9,18 @@
     align-self: flex-end;
     padding-bottom: 22px;
     padding-left: 5px;
-
     &:before {
         @extend .bg-image-icon-arrow-white;
     }
 }
+
+
 /* Main container for the header menu */
 
 .header-menu {
     position: absolute;
     display: inline-block;
-    width: $header-menu-width;
+    width: $header-menu-width-small;
     top: 70px;
     right: $margin--fat;
     text-align: left; //This adds the small arrow on top of the menu
@@ -32,7 +34,6 @@
         position: absolute;
         pointer-events: none;
     }
-
     &:after {
         border-color: rgba(255, 255, 255, 0);
         border-bottom-color: #ffffff;
@@ -40,25 +41,30 @@
         left: 45%;
     }
 }
+
+
 /* Area that triggers the menu to open. Accessed by javascript */
 
 .header-menu__trigger {
     cursor: pointer;
 }
+
+
 /* Header-menu state Hidden */
 
 .header-menu--hidden {
     display: none;
 }
+
+
 /* Container for the top-level menu items*/
 
 .header-menu__content {
     position: absolute;
     background-color: $background-color--content;
-    min-width: $header-menu-width;
+    min-width: $header-menu-width-small;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: $layer-two;
-
     a {
         color: $menu-text-color;
         padding: 5px;
@@ -71,13 +77,14 @@
         }
     }
 }
+
+
 /* Divider between groups of related menu items*/
 
 .header-menu-divider {
     padding-top: 0px !important;
     padding-bottom: 0px !important;
     height: 1px;
-
     &:after {
         content: '';
         display: block;
@@ -86,6 +93,8 @@
         transition: opacity 0.5ms ease;
     }
 }
+
+
 /* Left side line, indicating that this element is hovered or active. Accessed by javascript*/
 
 .header-menu-item--marked {
@@ -98,6 +107,8 @@
 .header-menu-item--selected {
     font-weight: bold;
 }
+
+
 /* The title row of an expandable menu */
 
 .header-menu__submenu-header {
@@ -108,14 +119,14 @@
         float: right;
         vertical-align: middle;
         text-align: center;
-        padding-bottom: 18px;
-        height: 15px;
-        width: 15px;
+        padding-bottom: 23px;
+        margin-right: 10px;
+        height: 10px;
+        width: 10px;
         background-repeat: no-repeat;
         background-position: center;
         vertical-align: middle;
     }
-
     .header-menu-submenu--expanded & {
         &:after {
             @extend .bg-image-icon-minus;
@@ -129,7 +140,6 @@
         .header-menu-submenu {
             max-height: 500px;
             transition: max-height 0.8s ease;
-
             a {
                 opacity: 1;
                 transition: opacity 0.8s ease;
@@ -137,19 +147,42 @@
         }
     }
 }
+
+
 /* A submenu containing child items*/
+
 .header-menu-submenu {
     max-height: 0;
     transition: max-height 0.5s ease;
     overflow: hidden;
-
     a {
         opacity: 0;
         transition: opacity 0.3s ease 0.2s;
         padding-left: 25px;
-
         &.header-menu-item--marked {
             padding-left: 21px;
+        }
+    }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+    /* Main container for the header menu */
+    .header-menu {
+        width: $header-menu-width-medium;
+    }
+    .header-menu__content {
+        min-width: $header-menu-width-medium;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        a {
+            color: $menu-text-color;
+            padding: 5px;
+            padding-left: $margin--regular;
+            text-decoration: none;
+            display: block;
+            border-bottom: none; //When this link is marked, push the contents closer to prevent moving menu items
+            &.header-menu-item--marked {
+                padding-left: 11px;
+            }
         }
     }
 }
