@@ -402,9 +402,10 @@ vgr-sidebar-menu {
 
 .menu-item__expander {
     float: right;
-    margin-right: 20px;
+    margin-right: $margin--regular;
     font-size: 10px !important;
-    padding-top: 8px;
+    padding-bottom: 26px;
+    background-size: 80%;
 }
 
 .menu-item__minus {
@@ -559,7 +560,7 @@ vgr-sidebar-menu {
     }
     .menu-item__expander {
         font-size: 11px !important;
-        padding-top: 12px;
+        padding-bottom: 30px;
     }
     .menu__footer {
         &.menu__footer--expander {
