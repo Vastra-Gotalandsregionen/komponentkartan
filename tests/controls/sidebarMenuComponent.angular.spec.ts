@@ -8,10 +8,12 @@
 // import { RouterTestingModule } from "@angular/router/testing";
 // import { Observable } from "rxjs/Rx";
 
-// import { SidebarMenuComponent } from "../../app/sidebar-menu/sidebar-menu.component";
-// import { MenuComponent } from "../../app/sidebar-menu/menu.component";
-// import { IMenu, IMenuGroup, IMenuItem } from "../../app/shared/models/menu.model.d";
-// import { MenuService } from "../../app/shared/services/menu.service";
+// import { SidebarMenuComponent } from "../../component-package/controls/sidebar-menu/sidebarMenu.component";
+// import { MenuComponent } from "../../component-package/controls/sidebar-menu/menu.component";
+// import { IMenu, IMenuGroup, IMenuItem } from "../../component-package/models/menu.model.d";
+
+// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 // export class MockMenuService {
 //     numberOfMenusToReturn: number;
@@ -19,7 +21,7 @@
 //     constructor() {
 //         this.numberOfMenusToReturn = 1;
 //     }
-//     private getMenusforCurrentUser(numberOfMenus?: string): Observable<IMenu[]> {
+//     private createMenu(numberOfMenus?: string): Observable<IMenu[]> {
 
 //         console.log(this.numberOfMenusToReturn);
 //         const allMenus = [] as IMenu[];
@@ -62,28 +64,26 @@
 //         let fixture: ComponentFixture<SidebarMenuComponent>;
 //         let rootElement: DebugElement;
 
-//         var mockMenuService = new MockMenuService();
 
 //         beforeEach((done) => {
 //             TestBed.resetTestEnvironment();
 //             TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 //             TestBed.configureTestingModule({
 //                 declarations: [SidebarMenuComponent, MenuComponent],
-//                 imports: [CommonModule, RouterTestingModule.withRoutes([])],
-//                 providers: [{ provide: MenuService, useFactory: () => { return mockMenuService } }]
+//                 imports: [CommonModule, RouterTestingModule.withRoutes([])]
 //             });
 
 //             TestBed.overrideComponent(SidebarMenuComponent,
 //                 {
 //                     set: {
-//                         templateUrl: "app/sidebar-menu/sidebar-menu.component.html"
+//                         templateUrl: "./sidebarMenu.component.html"
 //                     }
 //                 });
 
 //             TestBed.overrideComponent(MenuComponent,
 //                 {
 //                     set: {
-//                         templateUrl: "app/sidebar-menu/menu.component.html"
+//                         templateUrl: "./menuComponent.html"
 //                     }
 //                 });
 
@@ -98,7 +98,7 @@
 
 //         describe("When one menu", () => {
 //             beforeEach(() => {
-//                 mockMenuService.numberOfMenusToReturn = 1;
+//                 component.menus = this.createMenu(1);
 //                 fixture.detectChanges();
 //             });
 //             it("sidebar-menu is in single menu mode", () => {
@@ -112,7 +112,7 @@
 
 //         describe("When two menus", () => {
 //             beforeEach(() => {
-//                 mockMenuService.numberOfMenusToReturn = 2;
+//                 component.menus = this.createMenu(2);
 //                 fixture.detectChanges();
 //             });
 

@@ -14,6 +14,8 @@ import { TruncatePipe } from "../../component-package/pipes/truncatePipe";
 import { FilterPipe } from "../../component-package/pipes/filterPipe";
 import { DropdownItemToSelectedTextPipe } from "../../component-package/pipes/dropdownItemToSelectedTextPipe";
 import { IDropdownItem } from "../../component-package/models/dropdownItem.model";
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 describe("DropdownComponent", () => {
     let component: DropdownComponent;
@@ -25,7 +27,7 @@ describe("DropdownComponent", () => {
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
             declarations: [DropdownComponent, FilterTextboxComponent, TruncatePipe, FilterPipe, DropdownItemToSelectedTextPipe],
-            imports: [CommonModule, FormsModule]
+            imports: [CommonModule, FormsModule, PerfectScrollbarModule]
         });
 
         TestBed.overrideComponent(DropdownComponent,
@@ -85,10 +87,10 @@ describe("DropdownComponent", () => {
                     });
                 });
                 //describe("and scrollbar is clicked", () => {
-                    //it("dropdown is not collapsed", () => {
-                        //Behöver skrivas
-                  //  });
-               // });
+                //it("dropdown is not collapsed", () => {
+                //Behöver skrivas
+                //  });
+                // });
                 describe("and dropdown is clicked", () => {
                     it("dropdown is collapsed", () => {
                         dropdownElement.triggerEventHandler("mousedown", { target: dropdownElement.nativeElement } as MouseEvent);
