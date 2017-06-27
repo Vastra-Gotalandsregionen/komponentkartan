@@ -1,97 +1,95 @@
-    @import "_settings.colors.scss";
-    @import "_settings.sizes.scss";
-    .information-panel {
-        // position: relative;
-        border-top: $border--regular solid $primary-color--default;
-        background: white;
-    }
+.information-panel {
+    // position: relative;
+    border-top: $border--regular solid $primary-color--default;
+    background: white;
+}
 
+.information-panel__content {
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
+    padding-top: $margin--slim;
+    padding-bottom: $margin--slim;
+    border: solid 1px $border-color;
+    width: 100%;
+    .information-panel--compact & {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+    .information-panel--indented {
+        >* {
+            margin-left: $margin--slim;
+            margin-right: $margin--slim;
+        }
+    }
+}
+
+.information-panel__header {
+    //Linjen under rubriken på en information panel
+    &:after {
+        display: block;
+        content: "";
+        width: 248px;
+        border-bottom: 1px solid#151515;
+        margin-top: 4px;
+    }
+    flex-shrink:1;
+}
+
+.information-panel__header__title {
+    display: inline;
+    font-weight: bold;
+    padding-right: $margin--regular;
+}
+
+.information-panel__header__timestamp {
+    font-weight: normal;
+    display: inline;
+}
+
+.information-panel__information {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    word-wrap: break-word;
+    /* hide text if it more than N lines  */
+    overflow: hidden;
+}
+
+.information-panel__footer {
+    flex-shrink: 1; // position: absolute;
+    // bottom: 0px;
+}
+
+.information-panel--blue {
+    border-top-color: $primary-color--blue;
+}
+
+.information-panel--green {
+    border-top-color: $primary-color--green;
+}
+
+.information-panel--red {
+    border-top-color: $primary-color--red;
+}
+
+.information-panel--default {
+    border-top-color: $primary-color--default;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
     .information-panel__content {
-        padding-left: $margin--slim;
-        padding-right: $margin--slim;
-        padding-top: $margin--slim;
-        padding-bottom: $margin--slim;
-        border: solid 1px $border-color;
-        width: 100%;
-        .information-panel--compact & {
-            padding-bottom: 0;
-            padding-top: 0;
-        }
-        .information-panel--indented {
-            >* {
-                margin-left: $margin--slim;
-                margin-right: $margin--slim;
-            }
-        }
+        padding-top: $margin--regular;
+        padding-left: $margin--fat;
+        padding-right: $margin--fat;
     }
-
     .information-panel__header {
         //Linjen under rubriken på en information panel
         &:after {
-            display: block;
-            content: "";
-            width: 248px;
-            border-bottom: 1px solid#151515;
-            margin-top: 4px;
+            width: 308px;
+            margin-top: 11px;
+            margin-bottom: 13px;
         }
-        flex-shrink:1;
     }
-
     .information-panel__header__title {
-        display: inline;
-        font-weight: bold;
-        padding-right: $margin--regular;
+        padding-right: 43px;
     }
-
-    .information-panel__header__timestamp {
-        font-weight: normal;
-        display: inline;
-    }
-
-    .information-panel__information {
-        margin-top: 3px;
-        margin-bottom: 3px;
-        word-wrap: break-word;
-        /* hide text if it more than N lines  */
-        overflow: hidden;
-    }
-
-    .information-panel__footer {
-        flex-shrink: 1; // position: absolute;
-        // bottom: 0px;
-    }
-
-    .information-panel--blue {
-        border-top-color: $primary-color--blue;
-    }
-
-    .information-panel--green {
-        border-top-color: $primary-color--green;
-    }
-
-    .information-panel--red {
-        border-top-color: $primary-color--red;
-    }
-
-    .information-panel--default {
-        border-top-color: $primary-color--default;
-    }
-
-    @media screen and (min-width: $desktop-width--medium) {
-        .information-panel__content {
-            padding-top: $margin--regular;
-            padding-left: $margin--fat;
-            padding-right: $margin--fat;
-        }
-        .information-panel__header {
-            //Linjen under rubriken på en information panel
-            &:after {
-                width: 308px;
-                margin-top: 11px;
-                margin-bottom: 13px;
-            }
-        }
-        .information-panel__header__title {
-            padding-right: 43px;
-        }
-    }
+}

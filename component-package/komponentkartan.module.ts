@@ -74,7 +74,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MenuComponent,
         SidebarMenuComponent,
         LoginInformationComponent,
-        HeaderMenuComponent
+        HeaderMenuComponent,
+        PerfectScrollbarModule
     ]
 })
 

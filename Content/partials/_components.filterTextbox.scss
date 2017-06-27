@@ -1,7 +1,3 @@
-@import "_settings.sizes.scss";
-@import "_settings.colors.scss";
-@import "_objects.images.scss";
-@import "_generic.themes.scss";
 .filter-textbox {
     @extend .background-color--primary;
     height: $component-height;

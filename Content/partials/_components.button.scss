@@ -1,7 +1,4 @@
-﻿@import "_settings.sizes.scss";
-@import "_settings.colors.scss";
-@import "_generic.themes.scss";
-@keyframes button-enabling {
+﻿@keyframes button-enabling {
     0% {
         box-shadow: none;
     }
@@ -49,14 +46,14 @@
         }
     }
     &.button--disabled {
-        background-color:$secondary-color--default;
+        background-color: $secondary-color--default;
         cursor: default;
         &:focus {
             outline: 0;
         }
         &.button--secondary {
-            border-color:$secondary-color--default;
-            color:$secondary-color--default;
+            border-color: $secondary-color--default;
+            color: $secondary-color--default;
             border-width: 1px;
             border-style: solid;
             background-color: $text-color--light;

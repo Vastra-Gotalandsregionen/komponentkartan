@@ -1,12 +1,8 @@
-﻿@import "_settings.sizes.scss";
-@import "_settings.colors.scss";
-@import "_components.button.scss";
-.text-button {
+﻿.text-button {
     @extend .button;
     min-width: 87px;
     padding-left: 18px;
     padding-right: 18px;
-
     &.button--secondary {
         padding-left: 17px;
         padding-right: 17px;
@@ -17,10 +13,9 @@
     .text-button {
         padding-left: 22px;
         padding-right: 22px;
-     
         &.button--secondary {
             padding-left: 21px;
             padding-right: 21px;
         }
-    }   
+    }
 }

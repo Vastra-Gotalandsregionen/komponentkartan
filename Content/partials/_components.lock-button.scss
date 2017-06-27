@@ -1,7 +1,4 @@
-﻿@import "_settings.sizes.scss";
-@import "_settings.colors.scss";
-@import "_components.button.scss";
-.lock-button {
+﻿.lock-button {
     @extend .button;
     width: 34px;
 }

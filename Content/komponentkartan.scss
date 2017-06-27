@@ -1,7 +1,6 @@
 ﻿/* Struktur efter ITCSS, se https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/*/
 
 @import "partials/generic.reset";
-@import "partials/_generic.themes";
 
 /* SETTINGS */
 
@@ -11,8 +10,8 @@
 
 /* BASE */
 
+@import "partials/_base.themes";
 @import "partials/_base.page.scss";
-@import "partials/_base.main.scss";
 @import "partials/_base.links.scss";
 @import "partials/_base.text.scss";
 @import "partials/_base.input.scss";
