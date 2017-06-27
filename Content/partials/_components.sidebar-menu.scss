@@ -401,25 +401,14 @@ vgr-sidebar-menu {
     margin-right: $margin--regular;
     font-size: 10px !important;
     padding-bottom: 26px;
-    background-size: 80%;
 }
 
 .menu-item__minus {
     @extend .bg-image-icon-minus;
-    height: 15px;
-    width: 15px;
-    background-repeat: no-repeat;
-    background-position: center;
-    vertical-align: middle;
 }
 
 .menu-item__plus {
     @extend .bg-image-icon-plus;
-    height: 15px;
-    width: 15px;
-    background-repeat: no-repeat;
-    background-position: center;
-    vertical-align: middle;
 }
 
 .menu-item--child {
