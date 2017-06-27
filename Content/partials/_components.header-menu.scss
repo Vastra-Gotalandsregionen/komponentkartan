@@ -114,7 +114,8 @@
         float: right;
         vertical-align: middle;
         text-align: center;
-        padding-bottom: 23px;
+        //padding-bottom: 20px;
+        margin-top: 5px;
         margin-right: 10px;
     }
     .header-menu-submenu--expanded & {
@@ -162,5 +163,10 @@
     }
     .header-menu__content {
         min-width: $header-menu-width-medium;
+    }
+    .header-menu__submenu-header {
+        &:after {
+            margin-top: 9px;
+        }
     }
 }
