@@ -164,19 +164,10 @@
                 position: relative; //
                 max-height: calc(#{$dropdown-height--small} - 55px);
             }
-            .scroll-wrapper {
+            .container {
                 margin-top: 40px;
             }
         } //För att justera scrollbarens "längd", den krymper alldeles för mycket som standard vid många items
-        .scrollbar-macosx>.scroll-element.scroll-y .scroll-bar {
-            left: -12px;
-            min-height: 100px;
-            width: 9px;
-            z-index: $layer-four;
-        }
-        .scroll-element.scroll-y.scroll-scrolly_visible {
-            z-index: $layer-five;
-        }
     }
 
     .dropdown__filterTextbox {
