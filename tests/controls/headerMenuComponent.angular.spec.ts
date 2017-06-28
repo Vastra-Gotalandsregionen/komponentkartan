@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, async } from "@angular/core/testing";
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
 import { By } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms"
-
 import { DebugElement } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterTestingModule } from "@angular/router/testing";
@@ -106,59 +105,100 @@ describe("HeaderMenuComponent", () => {
             expect(headerMenuElement.classes["header-menu--hidden"]).toBe(true);
         });
         describe("and toggleHeaderMenu is called ", () => {
-            it("headerMenu should be visible", () => {
-                var mockEvent;
+            var mockEvent;
+            beforeEach(() => {
                 mockEvent = new Event("");
-                spyOn(mockEvent, 'preventDefault');
                 component.toggleHeaderMenu(mockEvent);
                 fixture.detectChanges();
 
+            });
+            it("headerMenu should be visible", () => {
                 expect(headerMenuElement.classes["header-menu--hidden"]).toBe(false);
             });
 
-            describe("and an item is hovered", () => {
-                var itemToHover: DebugElement;
+            describe(" an item is clicked", () => {
+                var itemToClick: DebugElement;
                 beforeEach(() => {
-                    itemToHover = rootElement.queryAll(By.css("a"))[0]; //.filter(x => x.nativeElement.textContent === "FAQ")[0]
-                    itemToHover.triggerEventHandler("mouseenter", null);
+                    itemToClick = rootElement.queryAll(By.css("a")).filter(x => x.nativeElement.text === "Min sida")[0];
+                    itemToClick.triggerEventHandler("mousedown", null);
                     fixture.detectChanges();
-                });
-                it("the hovered item is marked", () => {
-                    expect(itemToHover.classes["header-menu-item--marked"]).toBe(true);
-                });
-                it("the hovered item is not selected", () => {
-                    expect(itemToHover.classes["header-menu-item--selected"]).toBe(false);
-                });
-                // it("the selected item is not marked", () => {
-                //     expect(itemToClick.parent.classes["dropdown-item--marked"]).toBe(false);
-                // });
-                // it("the clicked item is selected", () => {
-                //     expect(itemToClick.parent.classes["dropdown-item--selected"]).toBe(true);
-                // });
 
-                describe("and the item is un-hovered", () => {
+                });
+                it("the clicked item is selected", () => {
+                    expect(itemToClick.classes["header-menu-item--selected"]).toBe(true);
+                });
+                it("the clicked item is marked", () => {
+                    expect(itemToClick.classes["header-menu-item--marked"]).toBe(true);
+                });
+
+                describe("and an item is hovered", () => {
+                    var itemToHover: DebugElement;
                     beforeEach(() => {
-                        itemToHover.triggerEventHandler("mouseleave", null);
+                        itemToHover = rootElement.queryAll(By.css("a")).filter(x => x.nativeElement.text === "FAQ")[0];
+                        itemToHover.triggerEventHandler("mouseenter", null);
                         fixture.detectChanges();
                     });
-                    it("the un-hovered item is not marked", () => {
-                        expect(itemToHover.classes["header-menu-item--marked"]).toBe(false);
+                    it("the hovered item is marked", () => {
+                        expect(itemToHover.classes["header-menu-item--marked"]).toBe(true);
                     });
-                    it("the un-hovered item is not selected", () => {
+                    it("the hovered item is not selected", () => {
                         expect(itemToHover.classes["header-menu-item--selected"]).toBe(false);
                     });
-                    // it("the selected item is marked", () => {
-                    //     expect(itemToClick.parent.classes["dropdown-item--marked"]).toBe(true);
-                    // });
-                    // it("the clicked item is selected", () => {
-                    //     expect(itemToClick.parent.classes["dropdown-item--selected"]).toBe(true);
-                    // });
+                    it("the selected item is not marked", () => {
+                        expect(itemToClick.classes["header-menu-item--marked"]).toBe(false);
+                    });
+                    it("the clicked item is selected", () => {
+                        expect(itemToClick.classes["header-menu-item--selected"]).toBe(true);
+                    });
+
+                    describe("and the item is un-hovered", () => {
+                        beforeEach(() => {
+                            itemToHover.triggerEventHandler("mouseleave", null);
+                            fixture.detectChanges();
+                        });
+                        it("the un-hovered item is not marked", () => {
+                            expect(itemToHover.classes["header-menu-item--marked"]).toBe(false);
+                        });
+                        it("the un-hovered item is not selected", () => {
+                            expect(itemToHover.classes["header-menu-item--selected"]).toBe(false);
+                        });
+                        it("the selected item is marked", () => {
+                            expect(itemToClick.classes["header-menu-item--marked"]).toBe(true);
+                        });
+                        it("the clicked item is selected", () => {
+                            expect(itemToClick.classes["header-menu-item--selected"]).toBe(true);
+                        });
+                    });
+                });
+            });
+
+            describe(" and the user clicks outside headermenu", () => {
+                beforeEach(() => {
+                    mockEvent = new Event("");
+                    component.onDocumentClick(mockEvent);
+                    fixture.detectChanges();
+
+                });
+                it("headerMenu should not be visible", () => {
+                    expect(headerMenuElement.classes["header-menu--hidden"]).toBe(true);
                 });
             });
         });
+    });
 
+    describe("A submenu header is clicked", () => {
+        var itemToClick: DebugElement;
+        beforeEach(() => {
+            itemToClick = rootElement.queryAll(By.css("a")).filter(x => x.nativeElement.text === "FAQ")[0];
+            itemToClick.triggerEventHandler("mousedown", null);
+            fixture.detectChanges();
 
-
-
+        });
+        it(" the header is not marked as selected ", () => {
+            expect(itemToClick.classes["header-menu-item--selected"]).toBe(false);
+        });
+        it(" the submenu is opened ", () => {
+            expect(itemToClick.parent.classes["header-menu-submenu--expanded"]).toBe(true);
+        });
     });
 });
