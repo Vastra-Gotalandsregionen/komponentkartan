@@ -181,42 +181,18 @@
                     bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent bild som gör att
                     man bara behöver sätta headerns bakgrundsfärg genom rätt klassnamn.
                 </p>
-                <div class="header--inline site-header-vgr site-header-vgr--blue with-classes">
-                    <div class="header__vgr-logo"></div>
-                    <div class="login-info">
-                        <div>
-                            <span class="login-info__username">Inloggad som:<br />BMM Användare</span>
-                        </div>
-                        <div class="login-info__profile_image"></div>
-                    </div>
-                </div>
-                <div class="header--inline site-header-vgr site-header-vgr--green with-classes">
-                    <div class="header__vgr-logo"></div>
-                    <div class="login-info">
-                        <div>
-                            <span class="login-info__username">Inloggad som:<br />Rehab Användare</span>
-                        </div>
-                        <div class="login-info__profile_image"></div>
-                    </div>
-                </div>
-                <div class="header--inline site-header-vgr site-header-vgr--red with-classes">
-                    <div class="header__vgr-logo"></div>
-                    <div class="login-info">
-                        <div>
-                            <span class="login-info__username">Inloggad som:<br />VGPV Användare</span>
-                        </div>
-                        <div class="login-info__profile_image"></div>
-                    </div>
-                </div>
-                <div class="header--inline site-header-vgr site-header-vgr--default with-classes">
-                    <div class="header__vgr-logo"></div>
-                    <div class="login-info">
-                        <div>
-                            <span class="login-info__username">Inloggad som:<br />Användare flera system</span>
-                        </div>
-                        <div class="login-info__profile_image"></div>
-                    </div>
-                </div>
+
+                <h2>Header utan user och meny</h2>
+                <vgr-header class="header--inline"></vgr-header>
+
+
+                <h2>Header med user utan meny</h2>
+                <vgr-header class="header--inline" [userName]="'Någon Återkommande'"></vgr-header>
+
+                <h2>Header med user och meny</h2>
+                <vgr-header class="header--inline" [userName]="'Någon Återkommande'" [headerMenu]="headerMenu"></vgr-header>
+
+
             </div>
 
             <div class="komponentkarta-component column-layout column-layout--padded">

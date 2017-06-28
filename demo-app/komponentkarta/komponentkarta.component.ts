@@ -1,6 +1,7 @@
 ﻿import { Component, AfterViewInit, EventEmitter, Output } from "@angular/core";
 import { IDropdownItem } from "../../component-package/models/dropdownItem.model";
 import { ISelectableItem } from "../../component-package/models/selectableItem.model";
+import { IHeaderMenu, IHeaderMenuItem } from "../../component-package/models/headerMenu.model";
 
 @Component({
     selector: "vgr-komponentkarta",
@@ -20,6 +21,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     lockMessage: string;
     actionPanelMessage: string;
     actionInProgress: boolean;
+    headerMenu: IHeaderMenu;
     constructor() {
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems25All = this.getDemoItems(25);
@@ -39,6 +41,10 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.selectedThemeOption = this.themeOptions[0];
         this.selectedRadioOption = { displayName: "Inget" } as ISelectableItem;
         this.actionInProgress = false;
+        this.headerMenu = {
+            menuItems: [
+                { displayName: "Test" } as IHeaderMenuItem] as IHeaderMenuItem[]
+        } as IHeaderMenu;
     }
 
     private onActionStarted() {
