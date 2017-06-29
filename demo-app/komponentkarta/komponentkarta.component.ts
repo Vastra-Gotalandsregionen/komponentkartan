@@ -24,7 +24,6 @@ export class KomponentkartaComponent implements AfterViewInit {
     headerMenu: IHeaderMenu;
     constructor() {
         this.dropDownItems25 = this.getDemoItems(25);
-        this.dropDownItems25All = this.getDemoItems(25);
         this.dropDownItems8 = this.getDemoItems(8);
         this.dropDownItems9 = this.getDemoItems(9);
         this.buttonDisabled = true;
@@ -45,6 +44,13 @@ export class KomponentkartaComponent implements AfterViewInit {
             menuItems: [
                 { displayName: "Test" } as IHeaderMenuItem] as IHeaderMenuItem[]
         } as IHeaderMenu;
+
+        //Lägg til med fördröjning för att återskapa problem vi haft med laddning från service
+        this.dropDownItems25All = this.getDemoItems(1);
+        setTimeout(() => {
+            this.dropDownItems25All = this.getDemoItems(25);
+
+        }, 1000);
     }
 
     private onActionStarted() {

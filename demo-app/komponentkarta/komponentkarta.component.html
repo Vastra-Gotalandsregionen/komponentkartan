@@ -13,6 +13,37 @@
     </vgr-page-header>
 
     <div class="komponentkarta-components" [ngClass]="{'komponentkarta-components--action-in-progress' : actionInProgress}">
+        <div class="komponentkarta-component column-layout column-layout--padded">
+            <h1>Dropdown</h1>
+            <p>
+                En dropdown innehåller ett valt element samt en lista över valbara alternativ. Kompletteras med filter vid över 20 items.
+                Kompletteras med scroll vid över 8 items. För att inkludera en"Visa alla", ange <strong>[selectAllItemText]</strong>.
+                För att ge"Visa alla" ett annat namn vid val, ange <strong>[selectAllSelectedText]</strong>
+            </p>
+            <div class="markup-example">&lt;<strong>dropdown</strong> [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"
+                &gt;&lt;/
+                <strong>dropdown</strong>&gt;</div>
+
+            <div class="row-layout">
+                <div>
+                    <p>25 items</p>
+                    <vgr-dropdown [items]="dropDownItems25"></vgr-dropdown>
+                </div>
+                <div>
+                    <p>9 items</p>
+                    <vgr-dropdown [items]="dropDownItems9"></vgr-dropdown>
+                </div>
+                <div>
+                    <p>8 items</p>
+                    <vgr-dropdown [items]="dropDownItems8"></vgr-dropdown>
+                </div>
+                <div>
+                    <p>25 items och Visa alla (fördröjd 2 sek)</p>
+                    <vgr-dropdown [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"></vgr-dropdown>
+                </div>
+            </div>
+        </div>
+
         <div class="komponentkarta-component column-layout">
             <h1>Radioknappar</h1>
             <span>Ett valbart alternativ åt gången, val kan vara förvalda eller inaktiva. Vid val av alternativ triggas eventet <strong>selectedChanged</strong>
@@ -195,36 +226,7 @@
 
             </div>
 
-            <div class="komponentkarta-component column-layout column-layout--padded">
-                <h1>Dropdown</h1>
-                <p>
-                    En dropdown innehåller ett valt element samt en lista över valbara alternativ. Kompletteras med filter vid över 20 items.
-                    Kompletteras med scroll vid över 8 items. För att inkludera en"Visa alla", ange <strong>[selectAllItemText]</strong>.
-                    För att ge"Visa alla" ett annat namn vid val, ange <strong>[selectAllSelectedText]</strong>
-                </p>
-                <div class="markup-example">&lt;<strong>dropdown</strong> [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"
-                    &gt;&lt;/
-                    <strong>dropdown</strong>&gt;</div>
 
-                <div class="row-layout">
-                    <div>
-                        <p>25 items</p>
-                        <vgr-dropdown [items]="dropDownItems25"></vgr-dropdown>
-                    </div>
-                    <div>
-                        <p>9 items</p>
-                        <vgr-dropdown [items]="dropDownItems9"></vgr-dropdown>
-                    </div>
-                    <div>
-                        <p>8 items</p>
-                        <vgr-dropdown [items]="dropDownItems8"></vgr-dropdown>
-                    </div>
-                    <div>
-                        <p>25 items och Visa alla</p>
-                        <vgr-dropdown [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"></vgr-dropdown>
-                    </div>
-                </div>
-            </div>
             <!--Expandable container -->
             <div class="komponentkarta-component column-layout column-layout--padded">
                 <h1>Expandable container list</h1>

@@ -1,11 +1,14 @@
 
 
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, OnInit, ViewChild } from "@angular/core";
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, OnInit, ViewChild, SimpleChanges } from "@angular/core";
 import { IDropdownItem } from "../../models/dropdownItem.model";
 import { FilterPipe } from "../../pipes/filterpipe";
 import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelectedTextPipe";
 import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component";
+import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 
+
+//This is the style for the scrollbar. This was the only wa we could override the inline styles set by the component itself
 var scrollbarStyle = `
 
 :host /deep/ .ps {
@@ -29,6 +32,7 @@ var scrollbarStyle = `
 :host /deep/ .ps.ps--in-scrolling.ps--y>.ps__scrollbar-y-rail>.ps__scrollbar-y {
     background-color: transparent !important;
     width: 11px;
+    min-height: 40px;
 }
 
 
@@ -59,12 +63,16 @@ var scrollbarStyle = `
     transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
     right: 2px;
     width: 8px;
+    min-height: 40px;
+
 
 }
 
 :host /deep/ .ps>.ps__scrollbar-y-rail:hover>.ps__scrollbar-y,
 :host /deep/ .ps>.ps__scrollbar-y-rail:active>.ps__scrollbar-y {
     width: 8px;
+    min-height: 40px;
+
 }
 
 :host /deep/ .ps:hover.ps--in-scrolling.ps--y>.ps__scrollbar-y-rail {
@@ -144,12 +152,12 @@ var scrollbarStyle = `
     styles: [scrollbarStyle]
 })
 export class DropdownComponent implements OnChanges {
-    @Input() items: IDropdownItem[];
     @Input() selectAllSelectedText: string;
     @Input() selectAllItemText: string;
     @Input() filterProperties: string[];
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
+    @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
     selectedItem: IDropdownItem;
     selectAllItem: IDropdownItem;
     expanded: boolean;
@@ -160,6 +168,21 @@ export class DropdownComponent implements OnChanges {
     private scrollLimit = 8;
     private filterPipe: FilterPipe;
     private preventCollapse: boolean;
+
+    private _items: IDropdownItem[];
+    @Input() set items(value: IDropdownItem[]) {
+        //The scrollbar component would not refresh when items were changed unless we added a timeout...
+        //Ugly solution for sure, but until a better one comes along it will have to do :(
+        this._items = value;
+        setTimeout(() => {
+            this.scrollbarComponent.update();
+        }, 500);
+    }
+    get items(): IDropdownItem[] {
+
+        return this._items;
+    }
+
 
     constructor(private elementRef: ElementRef) {
         this.expanded = false;
@@ -175,6 +198,7 @@ export class DropdownComponent implements OnChanges {
         }
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
+
     }
 
     ngOnInit() {
