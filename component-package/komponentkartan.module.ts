@@ -21,6 +21,7 @@ import { LoginInformationComponent } from "./controls/loginInformation/loginInfo
 import { MenuComponent } from "./controls/sidebar-menu/menu.component";
 import { SidebarMenuComponent } from "./controls/sidebar-menu/sidebarMenu.component";
 import { HeaderMenuComponent } from "./controls/headerMenu/headerMenu.component";
+import { CheckboxComponent } from "./controls/checkbox/checkbox.component";
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
@@ -54,7 +55,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HeaderComponent,
         MenuComponent,
         SidebarMenuComponent,
-        HeaderMenuComponent
+        HeaderMenuComponent,
+        CheckboxComponent
     ],
     exports: [
         SafePipe,
@@ -75,7 +77,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SidebarMenuComponent,
         LoginInformationComponent,
         HeaderMenuComponent,
-        PerfectScrollbarModule
+        PerfectScrollbarModule,
+        CheckboxComponent
     ]
 })
 
