@@ -20,7 +20,6 @@
     border: 2px solid $control-color--enabled;
     &:focus {
         box-shadow: 0 0 4px 0 $focus-color;
-        border: solid 2px $focus-color;
     }
     .checkbox--disabled & {
         border: 2px solid $control-color--disabled;
