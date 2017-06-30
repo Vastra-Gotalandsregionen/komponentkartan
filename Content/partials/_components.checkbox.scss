@@ -24,6 +24,8 @@
     }
     .checkbox--disabled & {
         border: 2px solid $control-color--disabled;
+        outline: none;
+        box-shadow: none;
     }
     .checkbox--checked & {
         background: $control-color--enabled;
@@ -45,6 +47,8 @@
     .checkbox--disabled.checkbox--checked & {
         background: $control-color--disabled;
         border: none;
+        outline: none;
+        box-shadow: none;
     }
 }
 
