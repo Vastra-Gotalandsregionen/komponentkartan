@@ -55,6 +55,9 @@
 .checkbox__label {
     display: inline-block;
     margin-left: $margin--slim;
+    .checkbox--disabled & {
+        color: $control-color--disabled;
+    }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
