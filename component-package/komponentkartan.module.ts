@@ -24,6 +24,8 @@ import { HeaderMenuComponent } from "./controls/headerMenu/headerMenu.component"
 import { CheckboxComponent } from "./controls/checkbox/checkbox.component";
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ModalPlaceholderComponent } from "./controls/modal/modal.component";
+import { ModalService } from "./services/modalService";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -56,7 +58,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MenuComponent,
         SidebarMenuComponent,
         HeaderMenuComponent,
-        CheckboxComponent
+        CheckboxComponent,
+        ModalPlaceholderComponent
     ],
     exports: [
         SafePipe,
@@ -78,7 +81,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         LoginInformationComponent,
         HeaderMenuComponent,
         PerfectScrollbarModule,
-        CheckboxComponent
+        CheckboxComponent,
+        ModalPlaceholderComponent
     ]
 })
 

@@ -1,0 +1,10 @@
+<div class="vgr-modal" [ngClass]="{'vgr-modal--open':isOpen}">
+    <div class="modal-content ">
+        <h1 class="modal-content__title">{{title}}</h1>
+        <div class="modal-content__message">{{message}}</div>
+        <div class="modal-content__buttons">
+            <vgr-text-button *ngFor="let button of buttons" [secondary]="true" (buttonClick)="onButtonClicked(button.callback)">{{button.text}}</vgr-text-button>
+        </div>
+    </div>
+
+</div>

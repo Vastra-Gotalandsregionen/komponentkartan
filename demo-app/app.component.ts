@@ -2,10 +2,12 @@ import { Component, AfterViewInit, ViewChild } from "@angular/core";
 import { ISelectableItem } from "../component-package/models/selectableItem.model";
 import { SidebarMenuComponent } from "../component-package/controls/sidebar-menu/sidebarMenu.component";
 import { IMenu, IMenuGroup, IMenuItem } from "../component-package/models/menu.model";
+import { ModalService } from "../component-package/services/modalService";
 import { IHeaderMenu, IHeaderMenuItem } from "../component-package/models/headerMenu.model";
 @Component({
     selector: "komponentkartan-application",
     templateUrl: "/demo-app/app.component.html"
+
 })
 
 export class KomponentkartanApplicationComponent implements AfterViewInit {

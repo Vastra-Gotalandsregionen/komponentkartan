@@ -1,6 +1,7 @@
 ﻿import { Component, AfterViewInit, EventEmitter, Output } from "@angular/core";
 import { IDropdownItem } from "../../component-package/models/dropdownItem.model";
 import { ISelectableItem } from "../../component-package/models/selectableItem.model";
+import { ModalService, ModalButtonConfig } from "../../component-package/services/modalService";
 import { IHeaderMenu, IHeaderMenuItem } from "../../component-package/models/headerMenu.model";
 
 @Component({
@@ -22,7 +23,8 @@ export class KomponentkartaComponent implements AfterViewInit {
     actionPanelMessage: string;
     actionInProgress: boolean;
     headerMenu: IHeaderMenu;
-    constructor() {
+    lastModalAnswer: string;
+    constructor(private modalService: ModalService) {
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems8 = this.getDemoItems(8);
         this.dropDownItems9 = this.getDemoItems(9);
@@ -53,7 +55,36 @@ export class KomponentkartaComponent implements AfterViewInit {
         }, 1000);
     }
 
+    showOneButtonModal() {
+        this.modalService.openDialog("Detta är en dialog med en knapp", "Här kan du bara välja ett alternativ",
+            new ModalButtonConfig("OK", () => this.lastModalAnswer = "OK")
+        );
+    }
+
+
+    showTwoButtonModal() {
+        this.modalService.openDialog("Vill du spara ändringarna på användaren?", "Ändringarna går förlorade om du inte sparar dem.",
+            new ModalButtonConfig("Ja", () => this.lastModalAnswer = "Ja"),
+            new ModalButtonConfig("Nej", () => this.lastModalAnswer = "Nej"),
+        );
+    }
+
+
+    showThreeButtonModal() {
+        this.modalService.openDialog("Vill du spara innan du stänger?", "Ändringarna går förlorade om du inte sparar dem",
+            new ModalButtonConfig("Ja", () => this.lastModalAnswer = "Ja"),
+            new ModalButtonConfig("Nej", () => this.lastModalAnswer = "Nej"),
+            new ModalButtonConfig("Avbryt", () => this.lastModalAnswer = "Avbryt")
+        );
+    }
+
+    showSaveDontSaveCancelModal() {
+        this.modalService.openSaveDontSaveCancelDialog("Vill du spara innan du stänger?", "Ändringarna går förlorade om du inte sparar.",
+            () => this.lastModalAnswer = "Sparade", () => this.lastModalAnswer = "Sparade inte", () => this.lastModalAnswer = "Avbröt");
+    }
+
     private onActionStarted() {
+
         this.actionPanelMessage = "";
         this.actionInProgress = true;
     }

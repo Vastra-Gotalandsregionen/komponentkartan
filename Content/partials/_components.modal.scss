@@ -1,0 +1,60 @@
+.vgr-modal {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(21, 21, 21, 0.65);
+}
+
+.vgr-modal--open {
+    display: block;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border: 1px solid #888;
+    position: absolute;
+    top: 0px;
+    left: 700px;
+    width: 448px;
+}
+
+.modal-content__title {
+    margin-bottom: 30px;
+}
+
+.modal-content__message {
+    margin-bottom: 36px;
+}
+
+.modal-content__buttons {
+    float: right;
+    >* {
+        margin-right: 20px;
+    }
+    >*:last-child {
+        margin-right: 0px;
+    }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+    .modal-content {
+        padding-top: 38px;
+    }
+    .modal-content__title {
+        margin-bottom: 32px;
+    }
+    .modal-content__message {
+        margin-bottom: 36px;
+    }
+}

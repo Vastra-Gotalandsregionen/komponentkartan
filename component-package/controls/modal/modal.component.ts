@@ -1,44 +1,46 @@
 
-import { Component } from "@angular/core";
+import { Component, ViewContainerRef, OnInit, ViewChild } from "@angular/core";
+import { ModalService, ModalClosedArgs, ModalConfiguration, ModalButtonConfig } from "../../services/modalService";
+
 @Component({
-    selector: 'vgr-modal',
-    template: `
-  <div (click)="onContainerClicked($event)" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
-       [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <ng-content select=".app-modal-header"></ng-content>
-        </div>
-        <div class="modal-body">
-          <ng-content select=".app-modal-body"></ng-content>
-        </div>
-        <div class="modal-footer">
-          <ng-content select=".app-modal-footer"></ng-content>
-        </div>
-      </div>
-    </div>
-  </div>
-  `
+  selector: "vgr-modal",
+  moduleId: module.id,
+  templateUrl: "./modal.component.html"
 })
-export class ModalComponent {
 
-    public visible = false;
-    public visibleAnimate = false;
+export class ModalPlaceholderComponent {
+  isOpen: boolean;
+  message: string;
+  title: string;
+  buttons: ModalButtonConfig[];
+  constructor(
+    private modalService: ModalService) {
 
-    public show(): void {
-        this.visible = true;
-        setTimeout(() => this.visibleAnimate = true, 100);
-    }
+    this.buttons = [];
 
-    public hide(): void {
-        this.visibleAnimate = false;
-        setTimeout(() => this.visible = false, 300);
-    }
+    this.modalService.modalOpened$.subscribe(args => {
+      this.message = args.message;
+      this.title = args.title;
+      this.buttons = args.buttons;
+      this.openModal();
+    });
 
-    public onContainerClicked(event: MouseEvent): void {
-        if ((<HTMLElement>event.target).classList.contains('modal')) {
-            this.hide();
-        }
-    }
+
+  }
+
+  private openModal() {
+    this.isOpen = true;
+  }
+
+  private closeModal() {
+    this.isOpen = false;
+  }
+
+  onButtonClicked(callback: () => void) {
+    callback();
+    this.closeModal();
+  }
+
+
+
 }
