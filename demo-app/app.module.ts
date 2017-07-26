@@ -10,7 +10,6 @@ import { FargkartaComponent } from "./fargkarta/fargkarta.component"
 import { MenuSelectorComponent } from "./menuSelector/menuSelector.component"
 
 import { KomponentkartanModule } from "../component-package/komponentkartan.module";
-import { ModalService } from "../component-package/services/modalService";
 
 import { RouterModule, Routes } from "@angular/router"
 import { appRoutes } from "./routes"
@@ -30,7 +29,6 @@ import { appRoutes } from "./routes"
         FargkartaComponent,
         MenuSelectorComponent
     ],
-    providers: [ModalService],
 
     bootstrap: [KomponentkartanApplicationComponent]
 })

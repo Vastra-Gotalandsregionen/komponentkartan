@@ -83,7 +83,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PerfectScrollbarModule,
         CheckboxComponent,
         ModalPlaceholderComponent
-    ]
+    ],
+    providers: [ModalService]
 })
 
 
