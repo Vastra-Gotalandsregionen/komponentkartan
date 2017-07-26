@@ -1,6 +1,6 @@
 
 import { Component, ViewContainerRef, OnInit, ViewChild } from "@angular/core";
-import { ModalService, ModalClosedArgs, ModalConfiguration, ModalButtonConfig } from "../../services/modalService";
+import { ModalService, ModalConfiguration, ModalButtonConfiguration } from "../../services/modalService";
 
 @Component({
   selector: "vgr-modal",
@@ -12,7 +12,7 @@ export class ModalPlaceholderComponent {
   isOpen: boolean;
   message: string;
   title: string;
-  buttons: ModalButtonConfig[];
+  buttons: ModalButtonConfiguration[];
   constructor(
     private modalService: ModalService) {
 
