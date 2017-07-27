@@ -8,7 +8,7 @@ import { ModalService, ModalConfiguration, ModalButtonConfiguration } from "../.
   templateUrl: "./modal.component.html"
 })
 
-export class ModalPlaceholderComponent {
+export class ModalPlaceholderComponent implements OnInit {
   isOpen: boolean;
   message: string;
   title: string;
@@ -24,16 +24,21 @@ export class ModalPlaceholderComponent {
       this.buttons = args.buttons;
       this.openModal();
     });
+  }
 
+  ngOnInit() {
 
   }
 
   private openModal() {
     this.isOpen = true;
+    $("body").addClass("modal--open");
   }
 
   private closeModal() {
     this.isOpen = false;
+    $("body").removeClass("modal--open")
+
   }
 
   onButtonClicked(callback: () => void) {

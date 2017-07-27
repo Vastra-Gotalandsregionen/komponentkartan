@@ -26,6 +26,9 @@ body {
     min-width: $desktop-width__small;
     height: 100%;
     margin: 0;
+    &.modal--open {
+        overflow: hidden;
+    }
 }
 
 header,
