@@ -17,7 +17,7 @@ export class ModalPlaceholderComponent {
     private modalService: ModalService) {
 
     this.buttons = [];
-
+    this.isOpen = false;
     this.modalService.modalOpened$.subscribe(args => {
       this.message = args.message;
       this.title = args.title;
