@@ -195,12 +195,11 @@ export class DropdownMultiselectComponent implements OnChanges {
         this.displayAllItemsText = "Visa alla";
         this.selectAllItemText = "Välj alla";
         this.selectAllSelectedText = "Alla";
-        this.selectedItemsCountText = "Alla";
+        this.selectedItemsCountText = "Välj";
     }
     ngOnChanges() {
         if (this.selectAllItemText) {
             this.selectAllItem = { displayName: this.selectAllItemText, displayNameWhenSelected: this.selectAllSelectedText } as IDropdownItem;
-            this.selectItem(this.selectAllItem);
         }
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
@@ -274,6 +273,8 @@ export class DropdownMultiselectComponent implements OnChanges {
             var selectedCount = this.items.filter(x => x.selected).length;
             if (selectedCount == 1)
                 this.selectedItemsCountText = "1 vald";
+            else if (selectedCount == 0)
+                this.selectedItemsCountText = "Välj";
             else
                 this.selectedItemsCountText = selectedCount + " valda";
 
