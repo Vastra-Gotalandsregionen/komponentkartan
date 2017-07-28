@@ -145,20 +145,20 @@ var scrollbarStyle = `
 }`;
 
 @Component({
-    selector: "vgr-dropdown",
+    selector: "vgr-dropdown-multiselect",
     moduleId: module.id,
-    templateUrl: "./dropdown.component.html",
+    templateUrl: "./dropdown-multiselect.component.html",
     host: { '(document:click)': "onDocumentClick($event)" },
     styles: [scrollbarStyle]
 })
-export class DropdownComponent implements OnChanges {
+export class DropdownMultiselectComponent implements OnChanges {
     @Input() selectAllSelectedText: string;
     @Input() selectAllItemText: string;
+    @Input() displayAllItemsText: string;
     @Input() filterProperties: string[];
-    @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
+    @Output() selectionChanged = new EventEmitter<IDropdownItem[]>();
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
-    selectedItem: IDropdownItem;
     selectAllItem: IDropdownItem;
     expanded: boolean;
     filterVisible: boolean;
@@ -168,8 +168,8 @@ export class DropdownComponent implements OnChanges {
     private scrollLimit = 8;
     private filterPipe: FilterPipe;
     private preventCollapse: boolean;
-
     private _items: IDropdownItem[];
+    private selectedItemsCountText: string;
     @Input() set items(value: IDropdownItem[]) {
         //The scrollbar component would not refresh when items were changed unless we added a timeout...
         //Ugly solution for sure, but until a better one comes along it will have to do :(
@@ -182,7 +182,9 @@ export class DropdownComponent implements OnChanges {
 
         return this._items;
     }
-
+    get filterActive(): boolean {
+        return this.filterTextboxComponent && this.filterTextboxComponent.filterValue && this.filterTextboxComponent.filterValue != "";
+    }
 
 
     constructor(private elementRef: ElementRef) {
@@ -190,44 +192,92 @@ export class DropdownComponent implements OnChanges {
         this.filterVisible = false;
         this.scrollVisible = false;
         this.filterPipe = new FilterPipe();
+        this.displayAllItemsText = "Visa alla";
+        this.selectAllItemText = "Välj alla";
+        this.selectAllSelectedText = "Alla";
+        this.selectedItemsCountText = "Alla";
     }
     ngOnChanges() {
         if (this.selectAllItemText) {
             this.selectAllItem = { displayName: this.selectAllItemText, displayNameWhenSelected: this.selectAllSelectedText } as IDropdownItem;
-            this.selectedItem = this.selectAllItem;
-            this.selectedItem.selected = true;
+            this.selectItem(this.selectAllItem);
         }
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
 
     }
 
+    clearFilter() {
+        this.nameFilter = "";
+        this.filterTextboxComponent.clear();
+        this.preventCollapse = true;
+    }
+
     ngOnInit() {
 
     }
 
+    onItemCheckChanged(item: IDropdownItem) {
+        if (!item)
+            return;
+        if (item.selected)
+            this.deselectItem(item);
+        else
+            this.selectItem(item);
+    }
 
+    onItemClicked(item: IDropdownItem) {
+        if (item !== this.selectAllItem || this.selectAllItem.selected)
+            this.preventCollapse = true;
+        else {
 
+            this.onItemCheckChanged(this.selectAllItem);
+        }
+    }
     selectItem(item: IDropdownItem) {
         if (!item)
             return;
 
-        this.items.forEach(x => x.selected = false);
-        if (this.selectAllItem)
-            this.selectAllItem.selected = false;
-
         item.selected = true;
-        item.marked = true;
-        this.selectedItem = item;
-        this.selectedItemChanged.emit(item);
-
 
         if (item == this.selectAllItem) {
-            this.preventCollapse = true;
-            this.nameFilter = "";
-            this.filterTextboxComponent.clear();
+            this.items.forEach(x => x.selected = false);
+            this.selectionChanged.emit(this._items);
+        }
+        else {
+            this.selectAllItem.selected = false;
+            this.selectionChanged.emit(this._items.filter(x => x.selected));
+
         }
 
+
+        this.updateSelectedItemsCountText();
+
+    }
+    deselectItem(item: IDropdownItem) {
+        if (!item)
+            return;
+
+        item.selected = false;
+
+        this.selectionChanged.emit(this._items.filter(x => x.selected));
+
+        this.selectAllItem.selected = false;
+        this.updateSelectedItemsCountText();
+
+    }
+
+    private updateSelectedItemsCountText() {
+        if (this.selectAllItem.selected)
+            this.selectedItemsCountText = "Alla";
+        else {
+            var selectedCount = this.items.filter(x => x.selected).length;
+            if (selectedCount == 1)
+                this.selectedItemsCountText = "1 vald";
+            else
+                this.selectedItemsCountText = selectedCount + " valda";
+
+        }
     }
 
     selectAllItems() {
@@ -277,17 +327,11 @@ export class DropdownComponent implements OnChanges {
     }
 
     onMouseEnter(item: IDropdownItem) {
-        this.items.forEach(x => x.marked = false);
-
-        if (this.selectAllItem)
-            this.selectAllItem.marked = false;
-
         item.marked = true;
     }
 
     onMouseLeave(item: IDropdownItem) {
         item.marked = false;
-        if (this.selectedItem)
-            this.selectedItem.marked = true;
+
     }
 }

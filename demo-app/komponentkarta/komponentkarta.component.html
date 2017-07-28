@@ -14,6 +14,28 @@
 
     <div class="komponentkarta-components" [ngClass]="{'komponentkarta-components--action-in-progress' : actionInProgress}">
 
+        <!-- Dropdown multi -->
+        <div class="komponentkarta-component column-layout column-layout--padded">
+            <h1>Dropdown Multiselect</h1>
+            <p>
+                En dropdown innehåller ett valt element samt en lista över valbara alternativ. Kompletteras med filter vid över 20 items.
+                Kompletteras med scroll vid över 8 items. För att inkludera en"Visa alla", ange <strong>[selectAllItemText]</strong>.
+                För att ge"Visa alla" ett annat namn vid val, ange <strong>[selectAllSelectedText]</strong>
+            </p>
+
+            <div class="row-layout">
+                <div>
+                    <p>25 items</p>
+                    <vgr-dropdown-multiselect [items]="dropDownItems25"></vgr-dropdown-multiselect>
+                </div>
+                <div>
+                    <p>25 items (fördröjd 2 sek)</p>
+                    <vgr-dropdown-multiselect [items]="dropDownItems25All" [selectAllItemText]="'Välj alla alternativ'" [selectAllSelectedText]="'Alla'"
+                        [displayAllItemsText]="'Visa alla alternativ'"></vgr-dropdown-multiselect>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal -->
         <div class="komponentkarta-component column-layout column-layout--padded">
             <h1>Modal dialog</h1>

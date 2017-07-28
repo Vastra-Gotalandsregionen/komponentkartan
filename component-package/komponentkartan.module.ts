@@ -8,6 +8,7 @@ import { TruncatePipe } from "./pipes/truncatePipe"
 import { FilterPipe } from "./pipes/filterPipe"
 import { DropdownItemToSelectedTextPipe } from "./pipes/dropdownItemToSelectedTextPipe"
 import { DropdownComponent } from "./controls/dropdown/dropdown.component"
+import { DropdownMultiselectComponent } from "./controls/dropdown-multiselect/dropdown-multiselect.component"
 import { FilterTextboxComponent } from "./controls/filterTextbox/filterTextbox.component"
 import { ExpandableContainerComponent } from "./controls/expandableContainer/expandableContainer.component"
 import { ExpandableContainerListComponent } from "./controls/expandableContainerList/expandableContainerList.component"
@@ -59,7 +60,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SidebarMenuComponent,
         HeaderMenuComponent,
         CheckboxComponent,
-        ModalPlaceholderComponent
+        ModalPlaceholderComponent,
+        DropdownMultiselectComponent
     ],
     exports: [
         SafePipe,
@@ -82,7 +84,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HeaderMenuComponent,
         PerfectScrollbarModule,
         CheckboxComponent,
-        ModalPlaceholderComponent
+        ModalPlaceholderComponent,
+        DropdownMultiselectComponent
     ],
     providers: [ModalService]
 })
