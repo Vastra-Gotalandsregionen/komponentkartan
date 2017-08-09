@@ -3,8 +3,9 @@ import { ISelectableItem } from "../../component-package/models/selectableItem.m
 
 
 @Component({
+    moduleId: module.id,
     selector: "menu-selector",
-    templateUrl: "/demo-app/menuSelector/menuSelector.component.html",
+    templateUrl: "menuSelector.component.html",
     styles: [':host {    position: absolute;    top: 10;    top: 76px;    left: 23px;    z-index: 50;}'],
     host: { "class": "menu-selector" }
 })
