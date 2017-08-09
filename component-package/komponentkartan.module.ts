@@ -1,4 +1,4 @@
-import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core"
+﻿import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core"
 import { BrowserModule, Title } from "@angular/platform-browser"
 import { RouterModule, Routes } from "@angular/router"
 
@@ -27,6 +27,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ModalPlaceholderComponent } from "./controls/modal/modal.component";
 import { ModalService } from "./services/modalService";
+
+import * as $ from 'jquery';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true

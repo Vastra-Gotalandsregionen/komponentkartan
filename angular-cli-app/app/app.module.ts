@@ -16,8 +16,6 @@ import { KomponentkartanModule } from "../../component-package/komponentkartan.m
 import { RouterModule, Routes } from "@angular/router"
 import { appRoutes } from "./routes"
 
-import * as $ from 'jquery';
-
 @NgModule({
     imports: [
         KomponentkartanModule,
