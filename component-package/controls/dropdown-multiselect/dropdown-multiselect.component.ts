@@ -7,6 +7,7 @@ import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component";
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 
+import * as $ from 'jquery';
 
 //This is the style for the scrollbar. This was the only wa we could override the inline styles set by the component itself
 var scrollbarStyle = `
