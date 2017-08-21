@@ -140,7 +140,7 @@ Task("Build-TypescriptAndSass")
 {
 	NpmRunScript(new NpmRunScriptSettings
     {
-        ScriptName = "_compile-typescript",
+        ScriptName = "_compile-ts",
         WorkingDirectory = "./"
     });
 	NpmRunScript(new NpmRunScriptSettings
@@ -160,9 +160,9 @@ Task("Move-TypescriptAndSass")
 		CopyFiles("./component-package/**/*.js", "./BuildOutput/component-package", true);
 		CopyFiles("./scripts/*.js", "./BuildOutput/scripts", true);
 		CopyFiles("./tests/*.js", "./BuildOutput/tests", true);
-        
+
         //Kopiera *.css
-		CopyFiles("./content/*.css", "./BuildOutput/content", true);	
+		CopyFiles("./content/*.css", "./BuildOutput/content", true);
 });
 
 Task("Build-Frontend")

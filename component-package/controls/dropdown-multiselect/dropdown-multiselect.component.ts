@@ -17,7 +17,7 @@ var scrollbarStyle = `
     touch-action: auto;
     overflow: hidden !important;
     -ms-overflow-style: none;
-    z-index:999;
+    z-index:99;
 }
 
 :host /deep/ .ps.ps--active-y>.ps__scrollbar-y-rail {
@@ -241,13 +241,12 @@ export class DropdownMultiselectComponent implements OnChanges {
         item.selected = true;
 
         if (item == this.selectAllItem) {
-            this.items.forEach(x => x.selected = false);
+            this.items.forEach(x => x.selected = true);
             this.selectionChanged.emit(this._items);
         }
         else {
-            this.selectAllItem.selected = false;
+            this.selectAllItem.selected = this._items.filter(x => !x.selected).length === 0;
             this.selectionChanged.emit(this._items.filter(x => x.selected));
-
         }
 
 
@@ -260,6 +259,9 @@ export class DropdownMultiselectComponent implements OnChanges {
 
         item.selected = false;
 
+        if (item == this.selectAllItem) {
+            this.items.forEach(x => x.selected = false);
+        }
         this.selectionChanged.emit(this._items.filter(x => x.selected));
 
         this.selectAllItem.selected = false;
