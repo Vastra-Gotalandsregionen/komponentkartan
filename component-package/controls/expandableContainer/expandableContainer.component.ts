@@ -1,7 +1,5 @@
 import { Component, HostListener } from "@angular/core";
 
-import * as $ from 'jquery';
-
 @Component({
     templateUrl: "./expandableContainer.component.html",
     selector: "vgr-expandable-container",

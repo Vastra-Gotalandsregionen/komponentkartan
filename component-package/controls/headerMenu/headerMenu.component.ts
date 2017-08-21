@@ -1,8 +1,6 @@
 ﻿import { Component, Input, ElementRef } from "@angular/core"
 import { IHeaderMenu, IHeaderMenuItem } from "../../models/headermenu.model"
 
-import * as $ from 'jquery';
-
 @Component({
     selector: "vgr-header-menu",
     moduleId: module.id,
