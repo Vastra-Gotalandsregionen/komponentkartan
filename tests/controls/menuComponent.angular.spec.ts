@@ -7,7 +7,7 @@ import { DebugElement } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterTestingModule } from "@angular/router/testing";
 import { MenuComponent } from "../../component-package/controls/sidebar-menu/menu.component";
-import { IMenu, IMenuGroup, IMenuItem } from "../../component-package/models/menu.model.d";
+import { IMenu, IMenuGroup, IMenuItem } from "../../component-package/models/menu.model";
 import { BrowserDetector } from "../../component-package/services/browserDetector";
 
 describe("MenuComponent",

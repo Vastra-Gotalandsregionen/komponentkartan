@@ -10,7 +10,7 @@ import { Observable } from "rxjs/Rx";
 
 import { SidebarMenuComponent } from "../../component-package/controls/sidebar-menu/sidebarMenu.component";
 import { MenuComponent } from "../../component-package/controls/sidebar-menu/menu.component";
-import { IMenu, IMenuGroup, IMenuItem } from "../../component-package/models/menu.model.d";
+import { IMenu, IMenuGroup, IMenuItem } from "../../component-package/models/menu.model";
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
