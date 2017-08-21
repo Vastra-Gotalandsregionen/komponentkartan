@@ -1,11 +1,11 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "author": "Västra Götalandsregionen",
   "scripts": {
-    "[start-app]": "concurrent \"npm run _watch-typescript\" \"npm run _local-webserver\" \"npm run _watch-css\"",
-    "_compile-typescript": "tsc",
-    "_watch-typescript": "tsc -w",
+    "[start-app]": "concurrent \"npm run _watch-ts\" \"npm run _local-webserver\" \"npm run _watch-css\"",
+    "_compile-ts": "tsc -p tsconfig.demo-app.json",
+    "_watch-ts": "tsc -p tsconfig.demo-app.json -w",
     "_local-webserver": "lite-server",
     "_compile-css": "node-sass --include-path content content/komponentkartan.scss content/komponentkartan.css",
     "_watch-css": "nodemon -e scss --watch content/  --exec \"npm run _compile-css\"",
