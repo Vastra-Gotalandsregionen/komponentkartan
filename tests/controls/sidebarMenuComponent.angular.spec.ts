@@ -15,6 +15,8 @@ import { IMenu, IMenuGroup, IMenuItem } from "../../component-package/models/men
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
+import * as $ from 'jquery';
+
 export class MenuCreator {
     public createMenu(numberOfMenus: number): IMenu[] {
 
