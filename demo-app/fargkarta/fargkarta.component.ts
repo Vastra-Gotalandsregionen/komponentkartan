@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 
 @Component({
+    moduleId: module.id,
     selector: "vgr-fargkarta",
-    templateUrl: "/demo-app/fargkarta/fargkarta.component.html"
+    templateUrl: "fargkarta.component.html"
 })
 export class FargkartaComponent {
 

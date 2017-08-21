@@ -5,8 +5,9 @@ import { ModalService, ModalButtonConfiguration } from "../../component-package/
 import { IHeaderMenu, IHeaderMenuItem } from "../../component-package/models/headerMenu.model";
 
 @Component({
+    moduleId: module.id,
     selector: "vgr-komponentkarta",
-    templateUrl: "/demo-app/komponentkarta/komponentkarta.component.html"
+    templateUrl: "komponentkarta.component.html"
 })
 export class KomponentkartaComponent implements AfterViewInit {
     selectedThemeOption: ISelectableItem;

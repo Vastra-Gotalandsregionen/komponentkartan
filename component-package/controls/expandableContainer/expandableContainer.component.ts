@@ -5,8 +5,8 @@ import { Component, HostListener } from "@angular/core";
 @Component({
     templateUrl: "./expandableContainer.component.html",
     selector: "vgr-expandable-container",
-    moduleId: module.id,
-    host: { 'class': 'expandable-container expandable-container--collapsed' }
+    moduleId: module.id
+    //host: { 'class': 'expandable-container expandable-container--collapsed' }
 })
 export class ExpandableContainerComponent {
 
