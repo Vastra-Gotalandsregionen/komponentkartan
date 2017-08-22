@@ -2,7 +2,7 @@
 
 import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, OnInit, ViewChild, SimpleChanges } from "@angular/core";
 import { IDropdownItem } from "../../models/dropdownItem.model";
-import { FilterPipe } from "../../pipes/filterpipe";
+import { FilterPipe } from "../../pipes/filterPipe";
 import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelectedTextPipe";
 import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component";
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';

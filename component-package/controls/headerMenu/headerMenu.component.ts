@@ -1,5 +1,5 @@
 ﻿import { Component, Input, ElementRef } from "@angular/core"
-import { IHeaderMenu, IHeaderMenuItem } from "../../models/headermenu.model"
+import { IHeaderMenu, IHeaderMenuItem } from "../../models/headerMenu.model"
 
 @Component({
     selector: "vgr-header-menu",
