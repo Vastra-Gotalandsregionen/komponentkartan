@@ -2,7 +2,7 @@
   (mousedown)="toggleExpand($event)">
   <span>{{dropdownText}}</span>
   <div class="dropdown__menu">
-    <vgr-filter-textbox class="dropdown__filterTextbox" (inputChange)="nameChange($event)"></vgr-filter-textbox>
+    <vgr-filter-textbox class="dropdown__filterTextbox" (inputChange)="filterItems($event)"></vgr-filter-textbox>
     <div class="dropdown__dimmer dropdown__dimmer--top"></div>
     <perfect-scrollbar class="container" [config]="scrollbarConfig">
       <ul class="dropdown__menu__items">

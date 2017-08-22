@@ -162,7 +162,7 @@ export class DropdownComponent implements OnChanges {
     expanded: boolean;
     filterVisible: boolean;
     scrollVisible: boolean;
-    nameFilter: string;
+    filter: string;
     private filterLimit = 20;
     private scrollLimit = 8;
     private filterPipe: FilterPipe;
@@ -223,7 +223,7 @@ export class DropdownComponent implements OnChanges {
 
         if (item == this.selectAllItem) {
             this.preventCollapse = true;
-            this.nameFilter = "";
+            this.filter = "";
             this.filterTextboxComponent.clear();
         }
 
@@ -233,8 +233,8 @@ export class DropdownComponent implements OnChanges {
         this.selectItem(this.selectAllItem);
     }
 
-    nameChange(name: string) {
-        this.nameFilter = name;
+    filterItems(filterValue: string) {
+        this.filter = filterValue;
         this.updateScrolled();
         //Scroll to top when filter is changed
         $(".dropdown__menu__items").scrollTop(0);
@@ -247,7 +247,7 @@ export class DropdownComponent implements OnChanges {
             return;
         }
 
-        var visibleItemCount = this.filterPipe.transform(this.items, this.nameFilter, ["displayName"]).length;
+        var visibleItemCount = this.filterPipe.transform(this.items, this.filter, ["displayName"]).length;
 
         this.scrollVisible = visibleItemCount > this.scrollLimit;
     }
