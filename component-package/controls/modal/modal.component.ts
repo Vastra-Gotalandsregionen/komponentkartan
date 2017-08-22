@@ -2,8 +2,6 @@
 import { Component, ViewContainerRef, OnInit, ViewChild } from "@angular/core";
 import { ModalService, ModalConfiguration, ModalButtonConfiguration } from "../../services/modalService";
 
-import * as $ from 'jquery';
-
 @Component({
   selector: "vgr-modal",
   moduleId: module.id,

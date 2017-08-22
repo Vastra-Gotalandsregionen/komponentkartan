@@ -4,8 +4,6 @@ import { MenuComponent } from "./menu.component";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { BrowserDetector } from "../../services/browserDetector";
 
-import * as $ from 'jquery';
-
 var scrollbarStyle = `
 
 :host /deep/ .ps {
