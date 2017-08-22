@@ -203,7 +203,7 @@ $dropdown-width--small: 100px;
 .dropdown__dimmer {
   display: block;
   height: 24px; //Widht is 100% - scrollbar width
-  width: calc(100%);
+  width: calc(100%-20px);
   position: absolute;
   z-index: $layer-four;
   visibility: hidden;

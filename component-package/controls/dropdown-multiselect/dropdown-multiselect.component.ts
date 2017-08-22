@@ -163,12 +163,12 @@ export class DropdownMultiselectComponent implements OnChanges {
     filterVisible: boolean;
     scrollVisible: boolean;
     nameFilter: string;
+    dropdownText: string;
     private filterLimit = 20;
     private scrollLimit = 8;
     private filterPipe: FilterPipe;
     private preventCollapse: boolean;
     private _items: IDropdownItem[];
-    private selectedItemsCountText: string;
     @Input() set items(value: IDropdownItem[]) {
         //The scrollbar component would not refresh when items were changed unless we added a timeout...
         //Ugly solution for sure, but until a better one comes along it will have to do :(
@@ -178,7 +178,6 @@ export class DropdownMultiselectComponent implements OnChanges {
         }, 500);
     }
     get items(): IDropdownItem[] {
-
         return this._items;
     }
     get filterActive(): boolean {
@@ -194,11 +193,11 @@ export class DropdownMultiselectComponent implements OnChanges {
         this.displayAllItemsText = "Visa alla";
         this.selectAllItemText = "Välj alla";
         this.selectAllSelectedText = "Alla";
-        this.selectedItemsCountText = "Välj";
+        this.dropdownText = "Välj";
     }
     ngOnChanges() {
         if (this.selectAllItemText) {
-            this.selectAllItem = { displayName: this.selectAllItemText, displayNameWhenSelected: this.selectAllSelectedText } as IDropdownItem;
+            this.selectAllItem = { displayName: this.selectAllItemText, displayNameWhenSelected: this.selectAllSelectedText, selected: false } as IDropdownItem;
         }
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
@@ -269,15 +268,15 @@ export class DropdownMultiselectComponent implements OnChanges {
 
     private updateSelectedItemsCountText() {
         if (this.selectAllItem.selected)
-            this.selectedItemsCountText = "Alla";
+            this.dropdownText = "Alla";
         else {
             var selectedCount = this.items.filter(x => x.selected).length;
             if (selectedCount == 1)
-                this.selectedItemsCountText = "1 vald";
+                this.dropdownText = "1 vald";
             else if (selectedCount == 0)
-                this.selectedItemsCountText = "Välj";
+                this.dropdownText = "Välj";
             else
-                this.selectedItemsCountText = selectedCount + " valda";
+                this.dropdownText = selectedCount + " valda";
 
         }
     }
