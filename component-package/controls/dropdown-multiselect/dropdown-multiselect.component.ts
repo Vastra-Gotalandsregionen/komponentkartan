@@ -15,7 +15,7 @@ var scrollbarStyle = `
     touch-action: auto;
     overflow: hidden !important;
     -ms-overflow-style: none;
-    z-index:99;
+    z-index:50;
 }
 
 :host /deep/ .ps.ps--active-y>.ps__scrollbar-y-rail {

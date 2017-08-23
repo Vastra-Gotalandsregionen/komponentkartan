@@ -1,7 +1,9 @@
-$dropdown-height--small: 364px;
-$dropdown-height--medium: 394px;
+$dropdown-height--small: 285px;
+$dropdown-height--medium: 340px;
+$dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 160px;
 $dropdown-width--small: 100px;
+$filter-area-height: 60px;
 .dropdown {
   @extend .background-color--primary;
   position: relative;
@@ -130,29 +132,27 @@ $dropdown-width--small: 100px;
     height: $dropdown-height--small;
     .dropdown__menu__items {
       position: relative;
-      height: calc(#{$dropdown-height--small} - 15px);
-      ul {
-        li:last-child {
-          position: relative;
-          z-index: $layer-five;
-          background: white;
-          width: calc(100% - 17px);
-          margin-bottom: 0px;
+      height: calc(#{$dropdown-height--small} - #{$margin--fat});
+      li:last-child {
+        position: relative;
+        z-index: calc(#{$layer-above-scrollbar + 1});
+        background: white;
+        width: calc(100% - 17px);
+        margin-bottom: 0px;
+      }
+      li:first-child {
+        position: relative;
+        z-index: $layer-one;
+        background: white;
+        width: calc(100% - 17px);
+        margin-top: 4px;
+      }
+      li:first-child {
+        &.dropdown-item--selected {
+          z-index: calc(#{$layer-above-scrollbar + 1});
         }
-        li:first-child {
-          position: relative;
-          z-index: $layer-one;
-          background: white;
-          width: calc(100% - 17px);
-          margin-top: 4px;
-        }
-        li:first-child {
-          &.dropdown-item--selected {
-            z-index: $layer-four;
-          }
-          &.dropdown-item--marked {
-            z-index: $layer-four;
-          }
+        &.dropdown-item--marked {
+          z-index: calc(#{$layer-above-scrollbar + 1});
         }
       }
     }
@@ -160,7 +160,7 @@ $dropdown-width--small: 100px;
   .dropdown--filter-visible & {
     .dropdown__menu__items {
       position: relative; //
-      max-height: calc(#{$dropdown-height--small} - 55px);
+      max-height: calc(#{$dropdown-height--small} - #{$filter-area-height});
     }
     .container {
       margin-top: 40px;
@@ -201,15 +201,11 @@ $dropdown-width--small: 100px;
  *******************************************************************************************************/
 
 .dropdown__dimmer {
-  display: block;
-  height: 24px; //Widht is 100% - scrollbar width
-  width: calc(100%-20px);
+  display: none; //Is displayed by JQuery
+  height: 24px;
+  width: calc(100% - 20px); //Widht is 100% - scrollbar width
   position: absolute;
-  z-index: $layer-four;
-  visibility: hidden;
-  .dropdown--open.dropdown--scroll-visible & {
-    visibility: visible;
-  }
+  z-index: $layer-above-scrollbar;
 }
 
 .dropdown__dimmer--top {
@@ -221,18 +217,17 @@ $dropdown-width--small: 100px;
   .dropdown--filter-visible & {
     top: 47px;
   }
-  z-index: $layer-above-scrollbar;
 }
 
 .dropdown__dimmer--bottom {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), #FFFFFF);
+  display: block;
   .dropdown--scroll-visible & {
     top: calc(#{$dropdown-height--small} - 24px);
   }
   .dropdown--filter-visible & {
     top: calc(#{$dropdown-height--small} - 24px);
   }
-  z-index: $layer-above-scrollbar;
 }
 
 .scroll-element.scroll-x {
@@ -245,16 +240,20 @@ $dropdown-width--small: 100px;
     .dropdown--scroll-visible & {
       height: $dropdown-height--medium;
       .dropdown__menu__items {
-        height: calc(#{$dropdown-height--medium} - 15px);
+        height: calc(#{$dropdown-height--medium} - #{$margin--fat});
       }
     }
     .dropdown--filter-visible & {
+      max-height: $dropdown-height--medium-with-filter;
       .dropdown__menu__items {
-        max-height: calc(#{$dropdown-height--medium} - 55px);
+        max-height: calc(#{$dropdown-height--medium-with-filter} - #{$filter-area-height});
       }
       .scroll-wrapper {
         margin-top: 40px;
       }
+    }
+    .dropdown--scroll-visible.dropdown--filter-visible & {
+      height: $dropdown-height--medium-with-filter;
     }
   }
   .dropdown__dimmer--bottom {
@@ -262,7 +261,7 @@ $dropdown-width--small: 100px;
       top: calc(#{$dropdown-height--medium} - 24px);
     }
     .dropdown--filter-visible & {
-      top: calc(#{$dropdown-height--medium} - 24px);
+      top: calc(#{$dropdown-height--medium-with-filter} - 24px);
     }
   }
 }

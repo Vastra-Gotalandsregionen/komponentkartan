@@ -1,7 +1,44 @@
+$dropdown-multi-height--small: 285px;
+$dropdown-multi-height--medium: 380px;
+$dropdown-multi-height--medium-with-filter: 380px;
 .dropdown--multiselect {
-    .dropdown__menu {
-        a {
-            max-height: 38px;
-        }
+  .dropdown__menu {
+    a {
+      max-height: 38px;
     }
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .dropdown--multiselect {
+    .dropdown__menu {
+      max-height: $dropdown-multi-height--medium;
+      .dropdown--scroll-visible & {
+        height: $dropdown-multi-height--medium;
+        .dropdown__menu__items {
+          height: calc(#{$dropdown-multi-height--medium} - #{$margin--fat});
+        }
+      }
+      .dropdown--filter-visible & {
+        max-height: $dropdown-height--medium-with-filter;
+        .dropdown__menu__items {
+          max-height: calc(#{$dropdown-height--medium-with-filter} - #{$filter-area-height});
+        }
+        .scroll-wrapper {
+          margin-top: 40px;
+        }
+      }
+      .dropdown--scroll-visible.dropdown--filter-visible & {
+        height: $dropdown-height--medium-with-filter;
+      }
+    }
+    .dropdown__dimmer--bottom {
+      .dropdown--scroll-visible & {
+        top: calc(#{$dropdown-multi-height--medium} - 24px);
+      }
+      .dropdown--filter-visible & {
+        top: calc(#{$dropdown-height--medium-with-filter} - 24px);
+      }
+    }
+  }
 }
