@@ -215,26 +215,25 @@ export class DropdownComponent implements OnChanges {
 
     private hideDimmersIfScrollIsAtBottomOrTop(scrollEvent: JQueryEventObject) {
         let scrollbar = $(scrollEvent.target);
-        var scrollHeight = scrollEvent.target.scrollHeight;
+        let margintolerance = 20;
+
+        var scrollHeight = scrollEvent.target.scrollHeight - margintolerance;
         var clientHeight = scrollEvent.target.clientHeight;
         var scrollTop = scrollEvent.target.scrollTop;
+
         if (clientHeight + scrollTop >= scrollHeight) {
-            //At end
             scrollbar.next('.dropdown__dimmer--bottom').hide();
         }
         else {
             scrollbar.next('.dropdown__dimmer--bottom').show();
-            console.log("Show bottom");
         }
 
+        console.log(scrollTop);
         if (scrollTop === 0) {
-            //At top
-            scrollbar.next('.dropdown__dimmer--top').hide();
+            scrollbar.prev('.dropdown__dimmer--top').hide();
         }
         else {
-            scrollbar.next('.dropdown__dimmer--top').show();
-            console.log("Show top");
-
+            scrollbar.prev('.dropdown__dimmer--top').show();
         }
     }
 
