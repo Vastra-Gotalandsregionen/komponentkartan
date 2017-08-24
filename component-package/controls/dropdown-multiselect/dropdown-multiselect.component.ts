@@ -175,6 +175,8 @@ export class DropdownMultiselectComponent implements OnChanges {
         this._items = value;
         setTimeout(() => {
             this.scrollbarComponent.update();
+
+            this.listenToScrollbarEvents();
         }, 500);
     }
     get items(): IDropdownItem[] {
@@ -182,6 +184,12 @@ export class DropdownMultiselectComponent implements OnChanges {
     }
     get filterActive(): boolean {
         return this.filterTextboxComponent && this.filterTextboxComponent.filterValue && this.filterTextboxComponent.filterValue != "";
+    }
+
+    private listenToScrollbarEvents() {
+        $(this.scrollbarComponent.elementRef.nativeElement).scroll((e) => {
+            this.hideDimmersIfScrollIsAtBottomOrTop(e);
+        });
     }
 
 
@@ -212,6 +220,31 @@ export class DropdownMultiselectComponent implements OnChanges {
 
     ngOnInit() {
 
+    }
+
+    private hideDimmersIfScrollIsAtBottomOrTop(scrollEvent: JQueryEventObject) {
+        let scrollbar = $(scrollEvent.target);
+        var scrollHeight = scrollEvent.target.scrollHeight;
+        var clientHeight = scrollEvent.target.clientHeight;
+        var scrollTop = scrollEvent.target.scrollTop;
+        if (clientHeight + scrollTop >= scrollHeight) {
+            //At end
+            scrollbar.next('.dropdown__dimmer--bottom').hide();
+        }
+        else {
+            scrollbar.next('.dropdown__dimmer--bottom').show();
+            console.log("Show bottom");
+        }
+
+        if (scrollTop === 0) {
+            //At top
+            scrollbar.next('.dropdown__dimmer--top').hide();
+        }
+        else {
+            scrollbar.next('.dropdown__dimmer--top').show();
+            console.log("Show top");
+
+        }
     }
 
     onItemCheckChanged(item: IDropdownItem) {
