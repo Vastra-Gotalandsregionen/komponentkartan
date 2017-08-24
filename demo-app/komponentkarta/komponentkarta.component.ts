@@ -15,6 +15,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     dropDownItems25: IDropdownItem[];
     dropDownItems9: IDropdownItem[];
     dropDownItems8: IDropdownItem[];
+    dropDownItems10: IDropdownItem[];
     dropDownItems25All: IDropdownItem[];
     buttonDisabled: boolean;
     buttonSecondaryDisabled: boolean;
@@ -29,6 +30,7 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems8 = this.getDemoItems(8);
         this.dropDownItems9 = this.getDemoItems(9);
+        this.dropDownItems10 = this.getDemoItems(10);
         this.buttonDisabled = true;
         this.buttonSecondaryDisabled = true;
         this.saveCancelMessage = "Ingen";
@@ -64,9 +66,17 @@ export class KomponentkartaComponent implements AfterViewInit {
 
 
     showTwoButtonModal() {
-        this.modalService.openDialog("Vill du spara ändringarna på användaren?", "Ändringarna går förlorade om du inte sparar dem.",
-            new ModalButtonConfiguration("Ja", () => this.lastModalAnswer = "Ja"),
-            new ModalButtonConfiguration("Nej", () => this.lastModalAnswer = "Nej"),
+        this.modalService.openDialog("Acceptera villkor", "Denna fil innehåller personnummer på de personer som valt er vårdcentral tom 2017-01-31. " +
+            "För nedladdning av filen gäller följande villkor" +
+            "1. Innehållet i filen får inte behandlas i strid med personuppgiftslagen (PuL) och patient-datalagen (PdL). " +
+            "Informationen får därför inte användas för annat ändamål än det för vilket uppgifterna samlats in (9 § punkt c och d PuL och 2 kap. 4 § PdL). " +
+            "Detta innebär bland annat att uppgifterna inte får användas för massutskick eller marknadsföring. " +
+            "2. Verksamhetschefen ansvarar för att endast den senaste månadens fil används för eventuell bearbetning av informationen. " +
+            "För att acceptera båda villkoren ovan, tryck 'Jag accepterar' annars tryck 'Avbryt'." +
+            "Notera att systemet bokför vem som accepterat villkoren och tidpunkten för detta." +
+            "Notera även att alla register i verksamheten ska vara anmälda till utsett personuppgiftsombud eller Datainspektionen.",
+            new ModalButtonConfiguration("Jag accepterar", () => this.lastModalAnswer = "Jag accepterar"),
+            new ModalButtonConfiguration("Avbryt", () => this.lastModalAnswer = "Avbryt"),
         );
     }
 
