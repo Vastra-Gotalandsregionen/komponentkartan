@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class BrowserDetector {
@@ -8,14 +8,14 @@ export class BrowserDetector {
     };
 
     isInternetExplorer(): boolean {
-        var ua = window.navigator.userAgent;
+        const ua = window.navigator.userAgent;
 
-        var msie = ua.indexOf('MSIE ');
+        const msie = ua.indexOf('MSIE ');
         if (msie > 0) {
             return true;
         }
 
-        var trident = ua.indexOf('Trident/');
+        const trident = ua.indexOf('Trident/');
         if (trident > 0) {
             return true;
         }

@@ -1,12 +1,12 @@
-import { Component, AfterViewInit, Input, ElementRef, ViewChild } from "@angular/core"
+import { Component, AfterViewInit, Input, ElementRef, ViewChild } from '@angular/core'
 
-import { IHeaderMenu, IHeaderMenuGroup, IHeaderMenuItem } from "../../models/headerMenu.model"
-import { HeaderMenuComponent } from "../headerMenu/headerMenu.component"
+import { IHeaderMenu, IHeaderMenuGroup, IHeaderMenuItem } from '../../models/headerMenu.model'
+import { HeaderMenuComponent } from '../headerMenu/headerMenu.component'
 
 @Component({
-    selector: "vgr-header",
+    selector: 'vgr-header',
     moduleId: module.id,
-    templateUrl: "./header.component.html"
+    templateUrl: './header.component.html'
 })
 
 export class HeaderComponent {
@@ -17,7 +17,7 @@ export class HeaderComponent {
     @ViewChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
 
     constructor(private elementRef: ElementRef) {
-        this.systemColor = "neutral";
+        this.systemColor = 'neutral';
 
     }
 

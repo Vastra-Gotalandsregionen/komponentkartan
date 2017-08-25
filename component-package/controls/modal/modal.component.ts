@@ -1,11 +1,11 @@
 
-import { Component, ViewContainerRef, OnInit, ViewChild } from "@angular/core";
-import { ModalService, ModalConfiguration, ModalButtonConfiguration } from "../../services/modalService";
+import { Component, ViewContainerRef, OnInit, ViewChild } from '@angular/core';
+import { ModalService, ModalConfiguration, ModalButtonConfiguration } from '../../services/modalService';
 
 @Component({
-  selector: "vgr-modal",
+  selector: 'vgr-modal',
   moduleId: module.id,
-  templateUrl: "./modal.component.html"
+  templateUrl: './modal.component.html'
 })
 
 export class ModalPlaceholderComponent implements OnInit {
@@ -32,12 +32,12 @@ export class ModalPlaceholderComponent implements OnInit {
 
   private openModal() {
     this.isOpen = true;
-    $("body").addClass("modal--open");
+    $('body').addClass('modal--open');
   }
 
   private closeModal() {
     this.isOpen = false;
-    $("body").removeClass("modal--open")
+    $('body').removeClass('modal--open')
 
   }
 

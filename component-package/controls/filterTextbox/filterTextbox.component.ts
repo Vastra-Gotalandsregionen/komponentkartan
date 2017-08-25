@@ -1,9 +1,9 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-    selector: "vgr-filter-textbox",
+    selector: 'vgr-filter-textbox',
     moduleId: module.id,
-    templateUrl: "./filterTextbox.component.html"
+    templateUrl: './filterTextbox.component.html'
 })
 export class FilterTextboxComponent {
     private value: string;
@@ -17,7 +17,7 @@ export class FilterTextboxComponent {
 
     }
     clear() {
-        this.value = "";
-        this.inputChange.emit("");
+        this.value = '';
+        this.inputChange.emit('');
     }
 }

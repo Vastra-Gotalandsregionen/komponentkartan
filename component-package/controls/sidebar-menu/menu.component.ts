@@ -1,11 +1,11 @@
-import { Component, Input, Output, OnChanges, EventEmitter, AfterViewInit } from "@angular/core"
-import { IMenu, IMenuGroup, IMenuItem } from "../../models/menu.model";
-import { BrowserDetector } from "../../services/browserDetector";
+import { Component, Input, Output, OnChanges, EventEmitter, AfterViewInit } from '@angular/core'
+import { IMenu, IMenuGroup, IMenuItem } from '../../models/menu.model';
+import { BrowserDetector } from '../../services/browserDetector';
 
 @Component({
-    selector: "vgr-menu",
+    selector: 'vgr-menu',
     moduleId: module.id,
-    templateUrl: "./menu.component.html",
+    templateUrl: './menu.component.html',
 })
 
 export class MenuComponent implements OnChanges, AfterViewInit {
@@ -35,13 +35,14 @@ export class MenuComponent implements OnChanges, AfterViewInit {
     }
 
     toggleExpand() {
-        if (this.isSingleMenu)
+        if (this.isSingleMenu) {
             return;
+        }
 
         if (this.menuItems.length > 3) {
             this.menu.expanded = !this.menu.expanded;
             if (this.menu.expanded && this.selectedMenuItem && this.selectedMenuItem.child) {
-                var parentItem = this.getParentItem(this.selectedMenuItem);
+                const parentItem = this.getParentItem(this.selectedMenuItem);
                 if (parentItem && !parentItem.expanded) {
                     this.expandMenuItem(parentItem);
                 }
@@ -54,29 +55,31 @@ export class MenuComponent implements OnChanges, AfterViewInit {
 
     setActiveMenuItem(menuItem: IMenuItem): void {
         if (menuItem.isVirtualFavourite) {
-            let selectedMenuItem = this.menuItems.filter(x => x.title === menuItem.title && !x.isVirtualFavourite)[0];
+            const selectedMenuItem = this.menuItems.filter(x => x.title === menuItem.title && !x.isVirtualFavourite)[0];
 
-            if (!selectedMenuItem)
+            if (!selectedMenuItem) {
                 for (let i = 0; i < this.menuItems.length; i++) {
                     if (this.menuItems[i].menuItems) {
                         this.selectedMenuItem = this.menuItems[i].menuItems
                             .filter(x => x.title === menuItem.title && !x.isVirtualFavourite)[0];
 
-                        if (this.selectedMenuItem)
+                        if (this.selectedMenuItem) {
                             return;
+                        }
                     }
                 }
-        }
-        else {
+            }
+        } else {
             this.selectedMenuItem = menuItem;
         }
     }
 
     private getParentItem(menuItem: IMenuItem): IMenuItem {
-        let parents = this.menuItems.filter(x => x.menuItems && x.menuItems.find(y => y === menuItem));
+        const parents = this.menuItems.filter(x => x.menuItems && x.menuItems.find(y => y === menuItem));
 
-        if (parents && parents.length === 1)
+        if (parents && parents.length === 1) {
             return parents[0];
+        }
         return null;
     }
 
@@ -88,7 +91,7 @@ export class MenuComponent implements OnChanges, AfterViewInit {
     }
 
     availableInThisBrowser(): boolean {
-        if (this.menu.title === "VGPV") {
+        if (this.menu.title === 'VGPV') {
             return this.browserDetector.isInternetExplorer();
         }
         return true;
@@ -104,10 +107,11 @@ export class MenuComponent implements OnChanges, AfterViewInit {
     }
 
     private intializeMenuItems() {
-        if (this.isSingleMenu)
+        if (this.isSingleMenu) {
             this.menuItems = this.intializeMenuItemsForSingleMenu();
-        else
+        } else {
             this.menuItems = this.intializeMenuItemsForMultipleMenu();
+        }
 
     }
 
@@ -116,24 +120,26 @@ export class MenuComponent implements OnChanges, AfterViewInit {
         if (groupMenuItems.filter(x => !x.isSeparator).length <= 3) {
             groupMenuItems.forEach(x => x.visible = true);
             return groupMenuItems.sort(this.sortMenuItems);
-        } else
+        } else {
             return this.getFavouriteChildItems().concat(groupMenuItems).sort(this.sortMenuItems);
+        }
     }
 
     private intializeMenuItemsForSingleMenu(): IMenuItem[] {
-        var singleMenuItems = this.getGroupMenuItems().sort(this.sortMenuItems);
+        const singleMenuItems = this.getGroupMenuItems().sort(this.sortMenuItems);
         singleMenuItems.forEach(x => { x.visible = true; });
         return singleMenuItems;
 
     }
 
     private setVisibleItems() {
-        if (this.isSingleMenu || this.menuItems.filter(x => !x.isSeparator).length <= 3)
+        if (this.isSingleMenu || this.menuItems.filter(x => !x.isSeparator).length <= 3) {
             return;
+        }
 
-        if (this.menu.expanded)
+        if (this.menu.expanded) {
             this.menuItems.forEach(x => { x.visible = !x.isVirtualFavourite || x.isSeparator });
-        else {
+        } else {
             this.setVisibleFavourites(3);
         }
     }
@@ -141,16 +147,16 @@ export class MenuComponent implements OnChanges, AfterViewInit {
     private setVisibleFavourites(maxNumberOfVisibleFavourites: number) {
         let visibleCount = 0;
 
-        for (var i = 0; i < this.menuItems.length; i++) {
-            if (visibleCount >= maxNumberOfVisibleFavourites)
+        for (let i = 0; i < this.menuItems.length; i++) {
+            if (visibleCount >= maxNumberOfVisibleFavourites) {
                 this.menuItems[i].visible = false;
-            else {
+            } else {
                 if (this.menuItems[i].favourite || this.menuItems[i].isVirtualFavourite) {
                     this.menuItems[i].visible = true;
                     visibleCount++;
-                }
-                else
+                } else {
                     this.menuItems[i].visible = false;
+                }
             }
         }
     }
@@ -158,7 +164,7 @@ export class MenuComponent implements OnChanges, AfterViewInit {
     ///Returns a copy of the favourite child items to be put first in the list
     private getFavouriteChildItems(): IMenuItem[] {
         const flattenedMenuItems = this.flattenMenuItems(this.menu);
-        const favouriteItems = flattenedMenuItems.filter(menuItem => { return menuItem.favourite && menuItem.child; }).sort(this.sortMenuItems);
+        const favouriteItems = flattenedMenuItems.filter(menuItem => menuItem.favourite && menuItem.child).sort(this.sortMenuItems);
         const copyArray = JSON.parse(JSON.stringify(favouriteItems.slice()));
 
         copyArray.forEach((x: any) => { x.isVirtualFavourite = true; });
@@ -176,27 +182,31 @@ export class MenuComponent implements OnChanges, AfterViewInit {
         for (let i = 0; i < sortedGroups.length; i++) {
             ungroupedItems = ungroupedItems.concat(sortedGroups[i].menuItems.sort(this.sortMenuItems));
 
-            //Separator shall not be added in last group or if items is less than 4
+            // Separator shall not be added in last group or if items is less than 4
             if (i < sortedGroups.length - 1 && menuItemsCount > 3) {
-                ungroupedItems.push({ isSeparator: true, order: ungroupedItems[ungroupedItems.length - 1].order + ".1" } as IMenuItem);
+                ungroupedItems.push({ isSeparator: true, order: ungroupedItems[ungroupedItems.length - 1].order + '.1' } as IMenuItem);
             }
         }
         return ungroupedItems;
     }
 
     private sortMenuItems(a: IMenuItem, b: IMenuItem): number {
-        if (a.order > b.order)
+        if (a.order > b.order) {
             return 1;
-        if (a.order < b.order)
+        }
+        if (a.order < b.order) {
             return -1;
+        }
         return 0;
     }
 
     private sortGroups(a: IMenuGroup, b: IMenuGroup): number {
-        if (a.order > b.order)
+        if (a.order > b.order) {
             return 1;
-        if (a.order < b.order)
+        }
+        if (a.order < b.order) {
             return -1;
+        }
         return 0;
     }
 

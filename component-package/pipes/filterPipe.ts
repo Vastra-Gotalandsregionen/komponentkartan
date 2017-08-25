@@ -1,23 +1,25 @@
-﻿import { Pipe, PipeTransform } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
+﻿import { Pipe, PipeTransform } from '@angular/core'
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
-    name: "filterByProperties"
+    name: 'filterByProperties'
 })
 
 export class FilterPipe implements PipeTransform {
     transform(valueList: any[], filter: string, properties?: string[]): any[] {
-        if (!filter)
+        if (!filter) {
             return valueList;
-        let filteredItems: any[] = [];
+        }
+        const filteredItems: any[] = [];
         filter = filter.toLowerCase();
-        for (var i = 0; i < valueList.length; i++) {
-            let item = valueList[i];
-            for (var property in item) {
+        for (let i = 0; i < valueList.length; i++) {
+            const item = valueList[i];
+
+            for (const property in item) {
                 if (item.hasOwnProperty(property)) {
                     if (!properties || properties.length === 0 || properties.some(x => x === property)) {
-                        let propertyValue = item[property];
-                        if (propertyValue !== undefined && typeof (propertyValue) === "string" &&
+                        const propertyValue = item[property];
+                        if (propertyValue !== undefined && typeof (propertyValue) === 'string' &&
                             (propertyValue as string).toLowerCase().indexOf(filter) >= 0) {
                             filteredItems.push(item);
                             break;

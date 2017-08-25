@@ -1,37 +1,39 @@
-import { Component, Input, EventEmitter, Output, AfterViewInit, OnChanges } from "@angular/core";
-import { ISelectableItem } from "../../models/selectableItem.model";
+import { Component, Input, EventEmitter, Output, AfterViewInit, OnChanges, HostBinding } from '@angular/core';
+import { ISelectableItem } from '../../models/selectableItem.model';
 
 @Component({
-    selector: "vgr-radio-group",
+    selector: 'vgr-radio-group',
     moduleId: module.id,
-    templateUrl: "./radioGroup.component.html",
-    host: { 'class': 'radio-group', 'role': 'radiogroup' }
+    templateUrl: './radioGroup.component.html'
 })
 export class RadioGroupComponent implements OnChanges {
+    @HostBinding('class.radio-group') true;
+    @HostBinding('attr.role') 'radiogroup';
     @Input() options: ISelectableItem[];
     @Input() name: string;
     @Input() noSelection: boolean;
     @Output() selectedChanged: EventEmitter<ISelectableItem> = new EventEmitter<ISelectableItem>();
 
     constructor() {
-        this.name = "group";
+        this.name = 'group';
     }
 
     ngOnChanges() {
         if (!this.noSelection && this.options && this.options.length > 0) {
-            let preSelectedOptions = this.options.filter(x => x.selected);
-            if (preSelectedOptions.length > 0)
+            const preSelectedOptions = this.options.filter(x => x.selected);
+            if (preSelectedOptions.length > 0) {
                 this.selectOption(preSelectedOptions[0]);
-            else {
-                let enabledOptions = this.options.filter(x => !x.disabled)
+            } else {
+                const enabledOptions = this.options.filter(x => !x.disabled)
                 this.selectOption(enabledOptions[0]);
             }
         }
     }
 
     optionClicked(option: ISelectableItem) {
-        if (option.disabled || option.selected)
+        if (option.disabled || option.selected) {
             return;
+        }
 
         this.selectOption(option);
     }

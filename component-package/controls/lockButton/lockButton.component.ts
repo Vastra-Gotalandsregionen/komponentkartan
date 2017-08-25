@@ -1,9 +1,9 @@
-﻿import { Component, Input, EventEmitter, Output } from "@angular/core";
+import { Component, Input, EventEmitter, Output } from '@angular/core'
 
 @Component({
-    selector: "vgr-lock-button",
+    selector: 'vgr-lock-button',
     moduleId: module.id,
-    templateUrl: "./lockButton.component.html"
+    templateUrl: './lockButton.component.html'
 })
 export class LockButtonComponent {
     @Input() disabled: boolean;
@@ -16,10 +16,11 @@ export class LockButtonComponent {
 
     buttonClicked(): void {
         if (!this.disabled) {
-            if (this.unlocked)
+            if (this.unlocked) {
                 this.lock();
-            else
+            } else {
                 this.unlock();
+            }
         }
     }
 

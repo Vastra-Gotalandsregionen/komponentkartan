@@ -1,12 +1,12 @@
-﻿import { Component, Input, EventEmitter, Output, ViewChildren, QueryList, OnChanges, ViewChild } from "@angular/core";
+﻿import { Component, Input, EventEmitter, Output, ViewChildren, QueryList, OnChanges, ViewChild } from '@angular/core'
 
-import { TextButtonComponent } from "../textButton/textButton.component";
-import { LockButtonComponent } from "../lockButton/lockButton.component";
+import { TextButtonComponent } from '../textButton/textButton.component';
+import { LockButtonComponent } from '../lockButton/lockButton.component';
 
 @Component({
-    selector: "vgr-save-cancel",
+    selector: 'vgr-save-cancel',
     moduleId: module.id,
-    templateUrl: "./saveCancel.component.html"
+    templateUrl: './saveCancel.component.html'
 })
 export class SaveCancelComponent implements OnChanges {
     @Input() enabled: boolean;

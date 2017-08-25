@@ -1,9 +1,9 @@
-﻿import { Component, Input, EventEmitter, Output, OnChanges } from "@angular/core";
+﻿import { Component, Input, EventEmitter, Output, OnChanges } from '@angular/core'
 
 @Component({
-    selector: "vgr-text-button",
+    selector: 'vgr-text-button',
     moduleId: module.id,
-    templateUrl: "./textButton.component.html"
+    templateUrl: './textButton.component.html'
 })
 export class TextButtonComponent implements OnChanges {
     @Input() disabled: boolean;
