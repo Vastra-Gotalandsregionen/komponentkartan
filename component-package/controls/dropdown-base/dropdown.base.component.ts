@@ -3,7 +3,7 @@ import { IDropdownItem } from "../../models/dropdownItem.model";
 import { FilterPipe } from "../../pipes/filterPipe";
 import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelectedTextPipe";
 import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component";
-import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 
 @Component({
@@ -23,6 +23,7 @@ export class DropdownBaseComponent {
     filterVisible: boolean;
     scrollVisible: boolean;
     filter: string;
+    scrollbarConfig: PerfectScrollbarConfig;
 
     protected filterLimit = 20;
     protected scrollLimit = 8;
@@ -58,6 +59,8 @@ export class DropdownBaseComponent {
         this.filterVisible = false;
         this.scrollVisible = false;
         this.filterPipe = new FilterPipe();
+        this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
+
     }
 
     private hideDimmersIfScrollIsAtBottomOrTop(scrollEvent: JQueryEventObject) {

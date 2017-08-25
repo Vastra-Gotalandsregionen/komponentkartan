@@ -39,12 +39,18 @@ $content-header-offset: $header-height;
   #LAYERS
 \*------------------------------------*/
 
-$layer-one: 1;
-$layer-two: 10;
-$layer-three: 20;
-$layer-four: 30;
-$layer-five: 40;
-$layer-above-scrollbar: 100;
+$layer-zero: 0;
+$layer-one: 10;
+$layer-two: 20;
+$layer-three: 30;
+$layer-four: 40;
+$layer-five: 50;
+$layer-six: 60;
+$layer-seven: 70;
+$layer-site-header: 200;
+$layer-page-header: 250;
+$layer-modal: 300;
+$layer-bottom: -999;
 
 /*------------------------------------*\
   #SMALL

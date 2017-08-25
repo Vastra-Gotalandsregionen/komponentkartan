@@ -13,6 +13,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     selectedThemeOption: ISelectableItem;
     themeOptions: ISelectableItem[];
     dropDownItems25: IDropdownItem[];
+    dropDownItems100: IDropdownItem[];
     dropDownItems9: IDropdownItem[];
     dropDownItems8: IDropdownItem[];
     dropDownItems10: IDropdownItem[];
@@ -28,6 +29,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     lastModalAnswer: string;
     constructor(private modalService: ModalService) {
         this.dropDownItems25 = this.getDemoItems(25);
+        this.dropDownItems100 = this.getDemoItems(200);
         this.dropDownItems8 = this.getDemoItems(8);
         this.dropDownItems9 = this.getDemoItems(9);
         this.dropDownItems10 = this.getDemoItems(10);
