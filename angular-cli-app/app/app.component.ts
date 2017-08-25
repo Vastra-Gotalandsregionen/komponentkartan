@@ -379,12 +379,14 @@ export class KomponentkartanApplicationComponent implements AfterViewInit {
                     menuItems: [
                         {
                             displayName: 'VGPV',
-                            url: `http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-vg-primarvard/krav--och-kvalitetsbok-vg-primarvard/`,
+                            url: `http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal` +
+                            `/vardval-vg-primarvard/krav--och-kvalitetsbok-vg-primarvard/`,
                             isInternalLink: false
                         },
                         {
                             displayName: 'Rehab',
-                            url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-rehab/krav--och-kvalitetsbok/',
+                            url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal' +
+                                 '/vardval-rehab/krav--och-kvalitetsbok/',
                             isInternalLink: false
                         }
                     ] as IHeaderMenuItem[]
@@ -394,12 +396,14 @@ export class KomponentkartanApplicationComponent implements AfterViewInit {
                     menuItems: [
                         {
                             displayName: 'VGPV',
-                            url: 'http://www.vgregion.se/sv/Vastra-Gotalandsregionen/startsida/Vard-och-halsa/Forvardgivare/VG-Primarvard1/Fragor-och-svar/',
+                            url: 'http://www.vgregion.se/sv/Vastra-Gotalandsregionen/startsida/Vard-och-halsa' +
+                                 '/Forvardgivare/VG-Primarvard1/Fragor-och-svar/',
                             isInternalLink: false
                         },
                         {
                             displayName: 'Rehab',
-                            url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-rehab/fragor-och-svar/',
+                            url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal' +
+                                 '/vardval-rehab/fragor-och-svar/',
                             isInternalLink: false
                         }
                     ] as IHeaderMenuItem[]
