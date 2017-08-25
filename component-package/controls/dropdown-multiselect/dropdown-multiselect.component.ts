@@ -62,11 +62,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     onItemClicked(item: IDropdownItem) {
-        if (item !== this.selectAllItem || this.selectAllItem.selected) {
-            this.preventCollapse = true;
-        } else {
-            this.onItemCheckChanged(this.selectAllItem);
-        }
+        this.preventCollapse = true;
     }
 
     selectAllItems() {

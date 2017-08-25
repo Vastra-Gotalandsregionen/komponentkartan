@@ -1,5 +1,5 @@
 <div class="dropdown" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
-  (mousedown)="toggleExpand($event)">
+  (mousedown)="onDropdownMouseDown($event)">
   <span *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{selectedItem | dropdownItemToSelectedText | truncate:14 }}</span>
   <span *ngIf="!selectedItem"></span>
   <div class="dropdown__menu">
