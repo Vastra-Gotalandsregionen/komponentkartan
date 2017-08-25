@@ -26,20 +26,25 @@
       <div class="row-layout">
         <div>
           <p>200 items</p>
-          <vgr-dropdown [items]="dropDownItems200"></vgr-dropdown>
+          <vgr-dropdown [items]="dropDownItems200" (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
         </div>
         <div>
           <p>8 items</p>
-          <vgr-dropdown [items]="dropDownItems8"></vgr-dropdown>
+          <vgr-dropdown [items]="dropDownItems8" (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
         </div>
         <div>
           <p>9 items</p>
-          <vgr-dropdown [items]="dropDownItems9"></vgr-dropdown>
+          <vgr-dropdown [items]="dropDownItems9" (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
         </div>
         <div>
           <p>25 items och Visa alla</p>
-          <vgr-dropdown [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"></vgr-dropdown>
+          <vgr-dropdown [items]="dropDownItems25All" [selectAllItemText]="'Visa alla alternativ'" [selectAllSelectedText]="'Alla'"
+            (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
         </div>
+      </div>
+      <div>
+        <span>Senaste val:</span>
+        <span>{{lastSingleSelection}}</span>
       </div>
     </div>
 
@@ -57,17 +62,21 @@
       <div class="row-layout">
         <div>
           <p>8 items</p>
-          <vgr-dropdown-multiselect [items]="dropDownItems8"></vgr-dropdown-multiselect>
+          <vgr-dropdown-multiselect [items]="dropDownItems8" (selectionChanged)="onMultipleSelectionChanged($event)"></vgr-dropdown-multiselect>
         </div>
         <div>
           <p>9 items</p>
-          <vgr-dropdown-multiselect [items]="dropDownItems9"></vgr-dropdown-multiselect>
+          <vgr-dropdown-multiselect [items]="dropDownItems9" (selectionChanged)="onMultipleSelectionChanged($event)"></vgr-dropdown-multiselect>
         </div>
         <div>
           <p>25 items</p>
           <vgr-dropdown-multiselect [items]="dropDownItems25All" [selectAllItemText]="'Välj alla alternativ'" [selectAllSelectedText]="'Alla'"
-            [displayAllItemsText]="'Visa alla alternativ'"></vgr-dropdown-multiselect>
+            [displayAllItemsText]="'Visa alla alternativ'" (selectionChanged)="onMultipleSelectionChanged($event)"></vgr-dropdown-multiselect>
         </div>
+      </div>
+      <div>
+        <span>Senaste val:</span>
+        <span>{{lastMultipleSelection}}</span>
       </div>
     </div>
 

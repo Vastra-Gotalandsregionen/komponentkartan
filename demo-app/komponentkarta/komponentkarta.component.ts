@@ -27,6 +27,8 @@ export class KomponentkartaComponent implements AfterViewInit {
     actionInProgress: boolean;
     headerMenu: IHeaderMenu;
     lastModalAnswer: string;
+    lastMultipleSelection: string;
+    lastSingleSelection: string;
     constructor(private modalService: ModalService) {
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems200 = this.getDemoItems(200);
@@ -58,6 +60,8 @@ export class KomponentkartaComponent implements AfterViewInit {
             this.dropDownItems25All = this.getDemoItems(25);
 
         }, 1000);
+        this.lastMultipleSelection = 'Inget';
+        this.lastSingleSelection = 'Inget';
     }
 
     showOneButtonModal() {
@@ -158,6 +162,14 @@ export class KomponentkartaComponent implements AfterViewInit {
 
     toggleClasses() {
         $('.class-description').fadeToggle();
+    }
+
+    onMultipleSelectionChanged(selectedItems: IDropdownItem[]) {
+        this.lastMultipleSelection = selectedItems.map(x => x.displayName).join(',');
+    }
+
+    onSingleSelectionChanged(selectedItem: IDropdownItem) {
+        this.lastSingleSelection = selectedItem.displayName;
     }
 
 
