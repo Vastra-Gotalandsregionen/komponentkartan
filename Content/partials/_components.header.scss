@@ -5,74 +5,113 @@
   */
 
 vgr-header {
-    position: fixed;
-    top: 0;
-    z-index: $layer-three;
-    width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: $layer-site-header;
+  width: 100%;
 }
 
 .header--inline {
-    position: relative;
-    z-index: $layer-one;
+  position: relative;
+  z-index: $layer-one;
 }
 
 .site-header-vgr {
-    min-height: $header-height;
-    border-bottom: solid 1px $border-color;
-    display: flex;
-    flex: none;
-    align-items: center;
-    background-color: $primary-color--default; //Images/dekal.png
-    background-repeat: no-repeat;
-    background-position: top right;
-    padding-right: $margin--fat;
+  min-height: $header-height;
+  border-bottom: solid 1px $border-color;
+  display: flex;
+  flex: none;
+  align-items: center;
+  background-color: $primary-color--default; //Images/dekal.png
+  background-repeat: no-repeat;
+  background-position: top right;
+  padding-right: $margin--fat;
 }
 
 //THEMING
 .site-header-vgr--blue {
-    @extend .bg-image-vgr-header;
-    background-color: $primary-color--blue;
-    transition: background-color ease-in 0.3s;
+  @extend .bg-image-vgr-header;
+  background-color: $primary-color--blue;
+  transition: background-color ease-in 0.3s;
 }
 
 .site-header-vgr--default {
-    background-color: $primary-color--default;
-    transition: background-color ease-in 0.3s;
+  background-color: $primary-color--default;
+  transition: background-color ease-in 0.3s;
 }
 
 .site-header-vgr--red {
-    @extend .bg-image-vgr-header;
-    background-color: $primary-color--red;
-    transition: background-color ease-in 0.3s;
+  @extend .bg-image-vgr-header;
+  background-color: $primary-color--red;
+  transition: background-color ease-in 0.3s;
 }
 
 .site-header-vgr--green {
-    @extend .bg-image-vgr-header;
-    background-color: $primary-color--green;
-    transition: background-color ease-in 0.3s;
+  @extend .bg-image-vgr-header;
+  background-color: $primary-color--green;
+  transition: background-color ease-in 0.3s;
 }
 
 .header__vgr-logo {
-    @extend .bg-image-vgr-logo;
-    margin-left: 16px;
-    margin-top: 16px;
-    align-self: flex-start;
+  @extend .bg-image-vgr-logo;
+  margin-left: 16px;
+  margin-top: 16px;
+  align-self: flex-start;
 }
 
 .header__info-box {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .header__info-header-menu-arrow {
-    @extend .bg-image-icon-arrow-white;
-    display: inline-block;
-    position: absolute;
-    right: 69px;
-    bottom: 21px;
+  @extend .bg-image-icon-arrow-white;
+  display: inline-block;
+  position: absolute;
+  right: 69px;
+  bottom: 21px;
 }
 
 //Bara för komponentkartan för att visa storleksinfo
 .header__size-info {
+  margin-left: auto;
+  display: inline-flex;
+  color: white;
+  align-items: center;
+  text-align: right;
+  width: 200px;
+   :after {
+    content: "Liten";
+  }
+}
+
+.login-info {
+  display: inline-flex;
+  color: white;
+  align-items: center;
+  text-align: right;
+}
+
+.login-info__username {
+  padding-right: 20px;
+}
+
+.login-info__profile_image {
+  @extend .bg-image-profile-header;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  height: 39px;
+  width: 39px;
+  border-radius: 50%;
+  margin-left: 14px;
+  margin-top: 19px;
+  margin-right: 20px;
+  margin-bottom: 22px;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  //Bara för komponentkartan för att visa storleksinfo
+  .header__size-info {
     margin-left: auto;
     display: inline-flex;
     color: white;
@@ -80,46 +119,7 @@ vgr-header {
     text-align: right;
     width: 200px;
      :after {
-        content: "Liten";
+      content: "Stor";
     }
-}
-
-.login-info {
-    display: inline-flex;
-    color: white;
-    align-items: center;
-    text-align: right;
-}
-
-.login-info__username {
-    padding-right: 20px;
-}
-
-.login-info__profile_image {
-    @extend .bg-image-profile-header;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    height: 39px;
-    width: 39px;
-    border-radius: 50%;
-    margin-left: 14px;
-    margin-top: 19px;
-    margin-right: 20px;
-    margin-bottom: 22px;
-}
-
-@media screen and (min-width: $desktop-width--medium) {
-    //Bara för komponentkartan för att visa storleksinfo
-    .header__size-info {
-        margin-left: auto;
-        display: inline-flex;
-        color: white;
-        align-items: center;
-        text-align: right;
-        width: 200px;
-         :after {
-            content: "Stor";
-        }
-    }
+  }
 }

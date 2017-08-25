@@ -1,17 +1,16 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, SimpleChanges } from "@angular/core";
-import { IDropdownItem } from "../../models/dropdownItem.model";
-import { FilterPipe } from "../../pipes/filterPipe";
-import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelectedTextPipe";
-import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component";
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild } from '@angular/core';
+import { IDropdownItem } from '../../models/dropdownItem.model';
+import { FilterPipe } from '../../pipes/filterPipe';
+import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
+import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
-import { DropdownBaseComponent } from "../dropdown-base/dropdown.base.component";
+import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 
 @Component({
-    selector: "vgr-dropdown",
+    selector: 'vgr-dropdown',
     moduleId: module.id,
-    templateUrl: "./dropdown.component.html",
-    host: { '(document:click)': "onDocumentClick($event)" },
-    styleUrls: ["../dropdown-base/dropdown.scrollbar.css"]
+    templateUrl: './dropdown.component.html',
+    styleUrls: ['../dropdown-base/dropdown.scrollbar.css']
 })
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges {
@@ -24,7 +23,9 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     ngOnChanges() {
         if (this.selectAllItemText) {
-            this.selectAllItem = { displayName: this.selectAllItemText, displayNameWhenSelected: this.selectAllSelectedText } as IDropdownItem;
+            this.selectAllItem = {
+                displayName: this.selectAllItemText, displayNameWhenSelected: this.selectAllSelectedText
+            } as IDropdownItem;
             this.selectedItem = this.selectAllItem;
             this.selectedItem.selected = true;
         }
@@ -39,12 +40,14 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
 
     selectItem(item: IDropdownItem) {
-        if (!item)
+        if (!item) {
             return;
+        }
 
         this.items.forEach(x => x.selected = false);
-        if (this.selectAllItem)
+        if (this.selectAllItem) {
             this.selectAllItem.selected = false;
+        }
 
         item.selected = true;
         item.marked = true;
@@ -52,9 +55,9 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.selectedItemChanged.emit(item);
 
 
-        if (item == this.selectAllItem) {
+        if (item === this.selectAllItem) {
             this.preventCollapse = true;
-            this.filter = "";
+            this.filter = '';
             this.filterTextboxComponent.clear();
         }
 
@@ -63,15 +66,17 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     onMouseEnter(item: IDropdownItem) {
         this.items.forEach(x => x.marked = false);
 
-        if (this.selectAllItem)
+        if (this.selectAllItem) {
             this.selectAllItem.marked = false;
+        }
 
         item.marked = true;
     }
 
     onMouseLeave(item: IDropdownItem) {
         item.marked = false;
-        if (this.selectedItem)
+        if (this.selectedItem) {
             this.selectedItem.marked = true;
+        }
     }
 }

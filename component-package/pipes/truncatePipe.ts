@@ -1,23 +1,27 @@
-﻿import { Pipe, PipeTransform } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
+﻿import { Pipe, PipeTransform } from '@angular/core'
+import { DomSanitizer } from '@angular/platform-browser';
 
-@Pipe({ name: "truncate" })
-export class TruncatePipe {
+@Pipe({ name: 'truncate' })
+export class TruncatePipe implements PipeTransform {
     transform(value: string, maxLength?: string): string {
-        const trail = "...";
+        const trail = '...';
 
-        if (!value)
-            return "";
+        if (!value) {
+            return '';
+        }
 
-        if (!maxLength)
+        if (!maxLength) {
             return value;
+        }
 
         let limit = parseInt(maxLength);
-        if (!limit)
+        if (!limit) {
             return value;
+        }
 
-        if (value.length <= limit)
+        if (value.length <= limit) {
             return value;
+        }
 
         limit = limit - trail.length;
 

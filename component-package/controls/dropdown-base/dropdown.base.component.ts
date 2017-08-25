@@ -1,9 +1,9 @@
-import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, SimpleChanges } from "@angular/core";
-import { IDropdownItem } from "../../models/dropdownItem.model";
-import { FilterPipe } from "../../pipes/filterPipe";
-import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelectedTextPipe";
-import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component";
-import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
+import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
+import { IDropdownItem } from '../../models/dropdownItem.model';
+import { FilterPipe } from '../../pipes/filterPipe';
+import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
+import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
+import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 
 @Component({
@@ -23,6 +23,7 @@ export class DropdownBaseComponent {
     filterVisible: boolean;
     scrollVisible: boolean;
     filter: string;
+    scrollbarConfig: PerfectScrollbarConfig;
 
     protected filterLimit = 20;
     protected scrollLimit = 8;
@@ -32,8 +33,8 @@ export class DropdownBaseComponent {
 
     protected _items: IDropdownItem[];
     @Input() set items(value: IDropdownItem[]) {
-        //The scrollbar component would not refresh when items were changed unless we added a timeout...
-        //Ugly solution for sure, but until a better one comes along it will have to do :(
+        // The scrollbar component would not refresh when items were changed unless we added a timeout...
+        // Ugly solution for sure, but until a better one comes along it will have to do :(
         this._items = value;
         setTimeout(() => {
             this.scrollbarComponent.update();
@@ -58,27 +59,27 @@ export class DropdownBaseComponent {
         this.filterVisible = false;
         this.scrollVisible = false;
         this.filterPipe = new FilterPipe();
+        this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
+
     }
 
     private hideDimmersIfScrollIsAtBottomOrTop(scrollEvent: JQueryEventObject) {
-        let scrollbar = $(scrollEvent.target);
-        let margintolerance = 20;
+        const scrollbar = $(scrollEvent.target);
+        const margintolerance = 20;
 
-        var scrollHeight = scrollEvent.target.scrollHeight - margintolerance;
-        var clientHeight = scrollEvent.target.clientHeight;
-        var scrollTop = scrollEvent.target.scrollTop;
+        const scrollHeight = scrollEvent.target.scrollHeight - margintolerance;
+        const clientHeight = scrollEvent.target.clientHeight;
+        const scrollTop = scrollEvent.target.scrollTop;
 
         if (clientHeight + scrollTop >= scrollHeight) {
             scrollbar.next('.dropdown__dimmer--bottom').hide();
-        }
-        else {
+        } else {
             scrollbar.next('.dropdown__dimmer--bottom').show();
         }
 
         if (scrollTop === 0) {
             scrollbar.prev('.dropdown__dimmer--top').hide();
-        }
-        else {
+        } else {
             scrollbar.prev('.dropdown__dimmer--top').show();
         }
     }
@@ -87,8 +88,8 @@ export class DropdownBaseComponent {
     filterItems(filterValue: string) {
         this.filter = filterValue;
         this.updateScrolled();
-        //Scroll to top when filter is changed
-        $(".dropdown__menu__items").scrollTop(0);
+        // Scroll to top when filter is changed
+        $('.dropdown__menu__items').scrollTop(0);
     }
 
     updateScrolled() {
@@ -98,7 +99,7 @@ export class DropdownBaseComponent {
             return;
         }
 
-        var visibleItemCount = this.filterPipe.transform(this.items, this.filter, ["displayName"]).length;
+        const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
 
         this.scrollVisible = visibleItemCount > this.scrollLimit;
     }
@@ -110,16 +111,17 @@ export class DropdownBaseComponent {
             this.preventCollapse = false;
             return;
         }
-        let target = event.target || event.srcElement || event.currentTarget;
-        let element = $(target);
-        if (!element.is("input") && !element.is(".scroll-bar")) {
+        const target = event.target || event.srcElement || event.currentTarget;
+        const element = $(target);
+        if (!element.is('input') && !element.is('.scroll-bar')) {
             this.expanded = !this.expanded;
         }
     }
 
+    @HostListener('document:click', ['$event'])
     onDocumentClick(event: any) {
 
-        let target = event.target || event.srcElement || event.currentTarget;
+        const target = event.target || event.srcElement || event.currentTarget;
 
         if (!this.elementRef.nativeElement.contains(target)) {
             this.expanded = false;

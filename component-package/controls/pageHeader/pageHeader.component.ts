@@ -1,13 +1,13 @@
-import { Component, Input, EventEmitter, Output, ViewChild } from "@angular/core";
-import { SaveCancelComponent } from "../saveCancel/saveCancel.component";
+import { Component, Input, EventEmitter, Output, ViewChild, HostBinding } from '@angular/core';
+import { SaveCancelComponent } from '../saveCancel/saveCancel.component';
 
 @Component({
-    selector: "vgr-page-header",
+    selector: 'vgr-page-header',
     moduleId: module.id,
-    templateUrl: "./pageHeader.component.html",
-    host: { 'class': 'page-header' }
+    templateUrl: './pageHeader.component.html'
 })
 export class PageHeaderComponent {
+    @HostBinding('class.page-header') hasClass = true;
     @Input() saveCancel: boolean;
     @Input() title: string;
     @Input() enableActionsText: string;
@@ -22,8 +22,9 @@ export class PageHeaderComponent {
     enableActions() {
         this.actionsVisible = true;
         this.actionStarted.emit();
-        if (this.saveCancelComponent)
+        if (this.saveCancelComponent) {
             this.saveCancelComponent.unlock();
+        }
     }
 
     disableActions() {

@@ -1,13 +1,10 @@
-﻿import { Component, Input, ElementRef } from "@angular/core"
-import { IHeaderMenu, IHeaderMenuItem } from "../../models/headerMenu.model"
+import { Component, Input, ElementRef, HostListener } from '@angular/core'
+import { IHeaderMenu, IHeaderMenuItem } from '../../models/headerMenu.model'
 
 @Component({
-    selector: "vgr-header-menu",
+    selector: 'vgr-header-menu',
     moduleId: module.id,
-    templateUrl: "./headerMenu.component.html",
-    host: {
-        '(document:click)': "onDocumentClick($event)"
-    }
+    templateUrl: './headerMenu.component.html'
 })
 
 export class HeaderMenuComponent {
@@ -20,9 +17,9 @@ export class HeaderMenuComponent {
     }
 
     toggleHeaderMenu(event: Event) {
-        let target = event.target || event.srcElement || event.currentTarget;
-        let element = $(target);
-        if (!element.is(".header-menu__submenu-header")) {
+        const target = event.target || event.srcElement || event.currentTarget;
+        const element = $(target);
+        if (!element.is('.header-menu__submenu-header')) {
             this.hidden = !this.hidden;
         }
 
@@ -35,8 +32,9 @@ export class HeaderMenuComponent {
         item.expanded = !item.expanded;
     }
 
+    @HostListener('document:click', ['$event'])
     onDocumentClick(event: any) {
-        let target = event.target || event.srcElement || event.currentTarget;
+        const target = event.target || event.srcElement || event.currentTarget;
 
         if (!this.elementRef.nativeElement.contains(target)) {
             this.hidden = true;
@@ -51,14 +49,16 @@ export class HeaderMenuComponent {
 
     onMouseLeave(item: IHeaderMenuItem) {
         item.marked = false;
-        if (this.selectedItem)
+        if (this.selectedItem) {
             this.selectedItem.marked = true;
+        }
     }
 
 
     selectItem(item: IHeaderMenuItem) {
-        if (!item)
+        if (!item) {
             return;
+        }
 
         this.menu.menuItems.forEach(x => x.selected = false);
 

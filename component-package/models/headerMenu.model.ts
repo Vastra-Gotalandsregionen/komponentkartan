@@ -1,4 +1,4 @@
-import { ISelectableItem } from "./selectableItem.model";
+import { ISelectableItem } from './selectableItem.model';
 
 export interface IHeaderMenu {
     expanded: boolean;

@@ -1,10 +1,10 @@
-import { Input, Output, Component, AfterViewInit, ViewChildren, Query, QueryList, EventEmitter, ChangeDetectorRef } from "@angular/core"
-import { IMenu } from "../../models/menu.model";
-import { MenuComponent } from "./menu.component";
-import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
-import { BrowserDetector } from "../../services/browserDetector";
+import { Input, Output, Component, AfterViewInit, ViewChildren, Query, QueryList, EventEmitter, ChangeDetectorRef } from '@angular/core'
+import { IMenu } from '../../models/menu.model';
+import { MenuComponent } from './menu.component';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { BrowserDetector } from '../../services/browserDetector';
 
-var scrollbarStyle = `
+const scrollbarStyle = `
 
 :host /deep/ .ps {
     -ms-touch-action: auto;
@@ -51,9 +51,11 @@ var scrollbarStyle = `
     -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
     transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
     -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
-    -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+    -moz-transition: background-color .2s linear, height .2s linear,
+    width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
     transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
-    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear,
+    width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
     right: 2px;
     width: 8px;
 }
@@ -133,9 +135,9 @@ var scrollbarStyle = `
 }`;
 
 @Component({
-    selector: "vgr-sidebar-menu",
+    selector: 'vgr-sidebar-menu',
     moduleId: module.id,
-    templateUrl: "./sidebarMenu.component.html",
+    templateUrl: './sidebarMenu.component.html',
     styles: [scrollbarStyle],
     providers: [BrowserDetector]
 })
@@ -159,19 +161,18 @@ export class SidebarMenuComponent implements AfterViewInit {
         this.router.events.forEach((event) => {
             if (event instanceof NavigationEnd) {
                 setTimeout(() => {
-                    var newSelectedMenu = this.getSelectedMenu();
+                    const newSelectedMenu = this.getSelectedMenu();
                     if (newSelectedMenu.length === 0) {
-                        //User has selected something from outside of the menu, from the drop-down perhaps.
-                        this.selectedMenuChanged.emit("neutral");
+                        // User has selected something from outside of the menu, from the drop-down perhaps.
+                        this.selectedMenuChanged.emit('neutral');
                         this.selectedMenu = undefined;
-                    }
-                    //Don't scroll if the selected menu has not changed
-                    else {
-                        var newSelectedMenuComponent = this.getMenuComponent(newSelectedMenu);
+                    } else {
+                        // Don't scroll if the selected menu has not changed
+                        const newSelectedMenuComponent = this.getMenuComponent(newSelectedMenu);
                         if (newSelectedMenuComponent !== null) {
                             this.selectedMenuChanged.emit(newSelectedMenuComponent.menu.title);
                             this.menuComponents.forEach(x => x.selectedMenuChanged(newSelectedMenuComponent.menu.title));
-                            //Expand menu automatically when selected
+                            // Expand menu automatically when selected
                             if (!newSelectedMenuComponent.menu.expanded) {
                                 newSelectedMenuComponent.toggleExpand();
                             }
@@ -195,10 +196,11 @@ export class SidebarMenuComponent implements AfterViewInit {
     }
 
     private setupJQuery() {
-        //Menu-item-marker
+        // Menu-item-marker
         $('.menu__item-list > li').hover(function () {
-            if (!$(this).hasClass('menu__expander'))
+            if (!$(this).hasClass('menu__expander')) {
                 $('.menu-item--selected').removeClass('menu-item--marked');
+            }
 
         },
             function () {
@@ -207,8 +209,9 @@ export class SidebarMenuComponent implements AfterViewInit {
 
 
         $('.menu__subItems-list > li').hover(function () {
-            if (!$(this).hasClass('menu__expander'))
+            if (!$(this).hasClass('menu__expander')) {
                 $('.menu-item--selected').removeClass('menu-item--marked');
+            }
         },
             function () {
                 $('.menu-item--selected').addClass('menu-item--marked');
@@ -229,32 +232,36 @@ export class SidebarMenuComponent implements AfterViewInit {
 
 
     private markParentOfSelectedChild() {
-        //First remove all child-selected instances
-        $(".menu-item--parent").removeClass("menu-item--child-selected");
-        //Then add the child-selected class to the currently selected child's (<LI>) Parent's(<UL>) Previous Sibling (<LI>) with the class .menu-item--parent.
-        $(".menu-item--child.menu-item--selected").parent().prev(".menu-item--parent").addClass("menu-item--child-selected");
+        // First remove all child-selected instances
+        $('.menu-item--parent').removeClass('menu-item--child-selected');
+
+        // Then add the child-selected class to the currently selected child's (<LI>) Parent's(<UL>)
+        // Previous Sibling (<LI>) with the class .menu-item--parent.
+        $('.menu-item--child.menu-item--selected').parent().prev('.menu-item--parent').addClass('menu-item--child-selected');
     }
 
     private getSelectedMenu(): JQuery {
-        return $(".menu-item--selected").closest(".menu");
+        return $('.menu-item--selected').closest('.menu');
     }
 
     private getMenuComponent(menu: JQuery): MenuComponent {
-        var selectedTitle = menu.find(".menu__header__title").first().text();
-        var matchingComponents = this.menuComponents.filter(x => x.menu.title === selectedTitle);
-        if (matchingComponents.length === 1)
+        const selectedTitle = menu.find('.menu__header__title').first().text();
+        const matchingComponents = this.menuComponents.filter(x => x.menu.title === selectedTitle);
+        if (matchingComponents.length === 1) {
             return matchingComponents[0];
+        }
         return null;
     }
 
     private scrollToMenu(newSelectedMenu: JQuery) {
-        //Calculate scrolling height by adding the heights of all menus above the selected one
-        var totalHeight = 0;
-        newSelectedMenu.closest("vgr-menu").prevAll("vgr-menu").each(function () { totalHeight += $(this).children(".menu").height() });
-        var newScrollTopValue = totalHeight > 0 ? totalHeight - 50 : 0;
+        // Calculate scrolling height by adding the heights of all menus above the selected one
+        let totalHeight = 0;
+        newSelectedMenu.closest('vgr-menu').prevAll('vgr-menu').each(function () { totalHeight += $(this).children('.menu').height() });
+        const newScrollTopValue = totalHeight > 0 ? totalHeight - 50 : 0;
 
-        if (!this.browserDetector.isInternetExplorer())
-            $("perfect-scrollbar").animate({ scrollTop: newScrollTopValue }, 900);
+        if (!this.browserDetector.isInternetExplorer()) {
+            $('perfect-scrollbar').animate({ scrollTop: newScrollTopValue }, 900);
+        }
     }
 
     onAnyMenuExpanded(): void {
@@ -263,11 +270,12 @@ export class SidebarMenuComponent implements AfterViewInit {
     }
 
     anySubmenuExpanded(): boolean {
-        for (var i = 0; i < this.menus.length; i++) {
-            for (var j = 0; j < this.menus[i].groups.length; j++) {
-                for (var k = 0; k < this.menus[i].groups[j].menuItems.length; k++) {
-                    if (this.menus[i].groups[j].menuItems[k].expanded)
+        for (let i = 0; i < this.menus.length; i++) {
+            for (let j = 0; j < this.menus[i].groups.length; j++) {
+                for (let k = 0; k < this.menus[i].groups[j].menuItems.length; k++) {
+                    if (this.menus[i].groups[j].menuItems[k].expanded) {
                         return true;
+                    }
                 }
             }
         }

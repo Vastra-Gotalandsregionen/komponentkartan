@@ -1,17 +1,16 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, SimpleChanges } from "@angular/core";
-import { IDropdownItem } from "../../models/dropdownItem.model";
-import { FilterPipe } from "../../pipes/filterPipe";
-import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelectedTextPipe";
-import { FilterTextboxComponent } from "../filterTextbox/filterTextbox.component";
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, SimpleChanges } from '@angular/core';
+import { IDropdownItem } from '../../models/dropdownItem.model';
+import { FilterPipe } from '../../pipes/filterPipe';
+import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
+import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
-import { DropdownBaseComponent } from "../dropdown-base/dropdown.base.component";
+import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 
 @Component({
-    selector: "vgr-dropdown-multiselect",
+    selector: 'vgr-dropdown-multiselect',
     moduleId: module.id,
-    templateUrl: "./dropdown-multiselect.component.html",
-    host: { '(document:click)': "onDocumentClick($event)" },
-    styleUrls: ["../dropdown-base/dropdown.scrollbar.css"]
+    templateUrl: './dropdown-multiselect.component.html',
+    styleUrls: ['../dropdown-base/dropdown.scrollbar.css']
 })
 
 export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges {
@@ -20,21 +19,25 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     dropdownText: string;
 
     get filterActive(): boolean {
-        return this.filterTextboxComponent && this.filterTextboxComponent.filterValue && this.filterTextboxComponent.filterValue != "";
+        return this.filterTextboxComponent && this.filterTextboxComponent.filterValue && this.filterTextboxComponent.filterValue !== '';
     }
 
     constructor(elementRef: ElementRef) {
         super(elementRef);
 
-        this.displayAllItemsText = "Visa alla";
-        this.selectAllItemText = "Välj alla";
-        this.selectAllSelectedText = "Alla";
-        this.dropdownText = "Välj";
+        this.displayAllItemsText = 'Visa alla';
+        this.selectAllItemText = 'Välj alla';
+        this.selectAllSelectedText = 'Alla';
+        this.dropdownText = 'Välj';
     }
 
     ngOnChanges() {
         if (this.selectAllItemText) {
-            this.selectAllItem = { displayName: this.selectAllItemText, displayNameWhenSelected: this.selectAllSelectedText, selected: false } as IDropdownItem;
+            this.selectAllItem = {
+                displayName: this.selectAllItemText,
+                displayNameWhenSelected: this.selectAllSelectedText,
+                selected: false
+            } as IDropdownItem;
         }
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
@@ -42,25 +45,26 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     clearFilter() {
-        this.filter = "";
+        this.filter = '';
         this.filterTextboxComponent.clear();
         this.preventCollapse = true;
     }
 
     onItemCheckChanged(item: IDropdownItem) {
-        if (!item)
+        if (!item) {
             return;
-        if (item.selected)
+        }
+        if (item.selected) {
             this.deselectItem(item);
-        else
+        } else {
             this.selectItem(item);
+        }
     }
 
     onItemClicked(item: IDropdownItem) {
-        if (item !== this.selectAllItem || this.selectAllItem.selected)
+        if (item !== this.selectAllItem || this.selectAllItem.selected) {
             this.preventCollapse = true;
-        else {
-
+        } else {
             this.onItemCheckChanged(this.selectAllItem);
         }
     }
@@ -70,16 +74,16 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     selectItem(item: IDropdownItem) {
-        if (!item)
+        if (!item) {
             return;
+        }
 
         item.selected = true;
 
-        if (item == this.selectAllItem) {
+        if (item === this.selectAllItem) {
             this.items.forEach(x => x.selected = true);
             this.selectionChanged.emit(this._items);
-        }
-        else {
+        } else {
             this.selectAllItem.selected = this._items.filter(x => !x.selected).length === 0;
             this.selectionChanged.emit(this._items.filter(x => x.selected));
         }
@@ -87,12 +91,13 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     deselectItem(item: IDropdownItem) {
-        if (!item)
+        if (!item) {
             return;
+        }
 
         item.selected = false;
 
-        if (item == this.selectAllItem) {
+        if (item === this.selectAllItem) {
             this.items.forEach(x => x.selected = false);
         }
         this.selectionChanged.emit(this._items.filter(x => x.selected));
@@ -102,16 +107,17 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     private updateSelectedItemsCountText() {
-        if (this.selectAllItem.selected)
-            this.dropdownText = "Alla";
-        else {
-            var selectedCount = this.items.filter(x => x.selected).length;
-            if (selectedCount == 1)
-                this.dropdownText = "1 vald";
-            else if (selectedCount == 0)
-                this.dropdownText = "Välj";
-            else
-                this.dropdownText = selectedCount + " valda";
+        if (this.selectAllItem.selected) {
+            this.dropdownText = 'Alla';
+        } else {
+            const selectedCount = this.items.filter(x => x.selected).length;
+            if (selectedCount === 1) {
+                this.dropdownText = '1 vald';
+            } else if (selectedCount === 0) {
+                this.dropdownText = 'Välj';
+            } else {
+                this.dropdownText = selectedCount + ' valda';
+            }
         }
     }
 

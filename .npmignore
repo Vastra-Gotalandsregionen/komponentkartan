@@ -20,3 +20,4 @@ obj/
 tools/
 Komponentkartan.csproj
 Komponentkartan.sln
+tslint.json

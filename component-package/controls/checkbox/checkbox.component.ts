@@ -1,12 +1,12 @@
-import { Component, Input, EventEmitter, Output, OnChanges } from "@angular/core";
+import { Component, Input, EventEmitter, Output, OnChanges, HostBinding } from '@angular/core';
 
 @Component({
-    selector: "vgr-checkbox",
+    selector: 'vgr-checkbox',
     moduleId: module.id,
-    templateUrl: "./checkbox.component.html",
-    host: { 'class': 'checkbox' }
+    templateUrl: './checkbox.component.html'
 })
 export class CheckboxComponent {
+    @HostBinding('class.checkbox') hasClass = true;
     @Input() disabled: boolean;
     @Input() checked: boolean;
     @Output() checkedChanged = new EventEmitter<boolean>();
