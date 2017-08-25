@@ -7,7 +7,7 @@ import { Component, HostListener, HostBinding } from '@angular/core';
 })
 export class ExpandableContainerComponent {
     @HostBinding('class.expandable-container')
-    @HostBinding('class.expandable-container--collapsed') true;
+    @HostBinding('class.expandable-container--collapsed') hasClass = true;
     @HostListener('click', ['$event'])
     toggleExpand(event: Event) {
         // Find the clicked element from the event

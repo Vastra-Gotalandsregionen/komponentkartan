@@ -8,7 +8,7 @@ import { Component, Input, HostBinding } from '@angular/core'
 
 export class LoginInformationComponent {
     @HostBinding('class.login-info')
-    @HostBinding('class.header-menu__trigger') true;
+    @HostBinding('class.header-menu__trigger') hasClass = true;
     @Input() userName: string;
     constructor() {
         this.userName = 'Not set';

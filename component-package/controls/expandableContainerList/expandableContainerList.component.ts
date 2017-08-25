@@ -7,5 +7,5 @@ import { Component, HostBinding } from '@angular/core';
     selector: 'vgr-expandable-container-list'
 })
 export class ExpandableContainerListComponent {
-    @HostBinding('class.expandable-container-list') true;
+    @HostBinding('class.expandable-container-list') hasClass = true;
 }

@@ -7,7 +7,7 @@ import { SaveCancelComponent } from '../saveCancel/saveCancel.component';
     templateUrl: './pageHeader.component.html'
 })
 export class PageHeaderComponent {
-    @HostBinding('class.page-header') true;
+    @HostBinding('class.page-header') hasClass = true;
     @Input() saveCancel: boolean;
     @Input() title: string;
     @Input() enableActionsText: string;

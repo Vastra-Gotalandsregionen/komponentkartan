@@ -9,7 +9,7 @@ import { ISelectableItem } from '../../component-package/models/selectableItem.m
 })
 export class MenuSelectorComponent {
     menuOptions: ISelectableItem[];
-    @HostBinding('class.menu-selector') true;
+    @HostBinding('class.menu-selector') hasClass = true;
     @Output() menuSelected: EventEmitter<number> = new EventEmitter<number>();
     constructor() {
         this.menuOptions = [
