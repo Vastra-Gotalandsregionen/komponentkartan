@@ -1,5 +1,5 @@
 <div class="dropdown dropdown--multiselect" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
-  (mousedown)="toggleExpand($event)">
+  (mousedown)="onDropdownMouseDown($event)">
   <span>{{dropdownText}}</span>
   <div class="dropdown__menu">
     <vgr-filter-textbox class="dropdown__filterTextbox" (inputChange)="filterItems($event)"></vgr-filter-textbox>
@@ -15,7 +15,7 @@
             (mouseleave)="onMouseLeave(selectAllItem)">{{displayAllItemsText}}
                     </a>
         </li>
-        <li *ngFor="let item of items | filterByProperties: nameFilter : ['displayName']" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
+        <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
           <a title={{item.displayName}} (mousedown)="onItemClicked(item)" (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave(item)">
             <vgr-checkbox class="checkbox--inline" [checked]="item.selected" (checkedChanged)="onItemCheckChanged(item)">{{item.displayName}}</vgr-checkbox>
           </a>

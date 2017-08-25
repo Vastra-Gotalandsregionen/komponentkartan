@@ -30,7 +30,6 @@ export class DropdownBaseComponent {
     protected filterPipe: FilterPipe;
     protected preventCollapse: boolean;
 
-
     protected _items: IDropdownItem[];
     @Input() set items(value: IDropdownItem[]) {
         // The scrollbar component would not refresh when items were changed unless we added a timeout...
@@ -38,7 +37,6 @@ export class DropdownBaseComponent {
         this._items = value;
         setTimeout(() => {
             this.scrollbarComponent.update();
-
             this.listenToScrollbarEvents();
 
         }, 500);
@@ -76,7 +74,6 @@ export class DropdownBaseComponent {
         } else {
             scrollbar.next('.dropdown__dimmer--bottom').show();
         }
-
         if (scrollTop === 0) {
             scrollbar.prev('.dropdown__dimmer--top').hide();
         } else {
@@ -104,20 +101,23 @@ export class DropdownBaseComponent {
         this.scrollVisible = visibleItemCount > this.scrollLimit;
     }
 
-    toggleExpand(event: Event) {
+    onDropdownMouseDown(event: Event) {
         if (this.preventCollapse) {
             event.cancelBubble = true;
             event.returnValue = false;
             this.preventCollapse = false;
-            return;
+        } else {
+            this.toggleExpand(event);
         }
+    }
+
+    private toggleExpand(event: Event) {
         const target = event.target || event.srcElement || event.currentTarget;
         const element = $(target);
         if (!element.is('input') && !element.is('.scroll-bar')) {
             this.expanded = !this.expanded;
         }
     }
-
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: any) {
 
