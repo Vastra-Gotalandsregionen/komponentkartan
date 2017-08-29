@@ -126,5 +126,10 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     protected handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void {
+        this.selectAllItem.selected = this.items.length === selectedItems.length;  //this._items.filter(x => !x.selected).length === 0;
+        this.selectionChanged.emit(selectedItems);
+
+        this.updateSelectedItemsCountText();
+
     }
 }

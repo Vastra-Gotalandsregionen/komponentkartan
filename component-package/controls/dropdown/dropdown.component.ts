@@ -81,5 +81,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     protected handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void {
+        this.selectItem(selectedItems[0]);
     }
 }
