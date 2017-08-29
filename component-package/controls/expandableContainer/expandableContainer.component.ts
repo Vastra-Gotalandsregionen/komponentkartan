@@ -1,5 +1,6 @@
 import { Component, HostListener, HostBinding, Input } from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
+import { NotificationIcon } from '../../models/notificationIcon.model';
 
 
 @Component({
@@ -9,7 +10,9 @@ import { NotificationType } from '../../models/notificationType.model';
 })
 export class ExpandableContainerComponent {
     public NotificationTypes = NotificationType;
+    public NotificationIcons = NotificationIcon;
     @Input() notificationType: NotificationType;
+    @Input() notificationIcon: NotificationIcon;
     @HostBinding('class.expandable-container')
     @HostBinding('class.expandable-container--collapsed') hasClass = true;
     @HostBinding('class.expandable-container--notification-exists') notificationExists = false;

@@ -4,6 +4,7 @@ import { ISelectableItem } from '../../component-package/models/selectableItem.m
 import { ModalService, ModalButtonConfiguration } from '../../component-package/services/modalService';
 import { IHeaderMenu, IHeaderMenuItem } from '../../component-package/models/headerMenu.model';
 import { NotificationType } from '../../component-package/models/notificationType.model';
+import { NotificationIcon } from '../../component-package/models/notificationIcon.model';
 
 @Component({
     moduleId: module.id,
@@ -11,7 +12,10 @@ import { NotificationType } from '../../component-package/models/notificationTyp
     templateUrl: 'komponentkarta.component.html'
 })
 export class KomponentkartaComponent implements AfterViewInit {
+    // Enum declarations
     public NotificationTypes = NotificationType;
+    public NotificationIcons = NotificationIcon;
+
     selectedThemeOption: ISelectableItem;
     themeOptions: ISelectableItem[];
     dropDownItems25: IDropdownItem[];
