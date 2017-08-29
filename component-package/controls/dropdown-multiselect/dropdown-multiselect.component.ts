@@ -124,4 +124,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     onMouseLeave(item: IDropdownItem) {
         item.marked = false;
     }
+
+    protected handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void {
+    }
 }

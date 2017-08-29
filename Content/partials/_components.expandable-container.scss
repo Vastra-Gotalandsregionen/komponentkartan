@@ -1,184 +1,216 @@
 //A list of expandable containers
 .expandable-container-list {
-    position: relative;
-    display: block;
-    background-color: $background-color--default;
-    .expandable-container {
-        background-color: $background-color--content;
-    }
+  position: relative;
+  display: block;
+  background-color: $background-color--default;
+  .expandable-container {
+    background-color: $background-color--content;
+  }
 }
 
 .expandable-container-list--inline {
-    background-color: $background-color--default;
-    .expandable-container {
-        border-bottom: 1px solid $background-color--default;
-    }
+  background-color: $background-color--default;
+  .expandable-container {
+    border-bottom: 1px solid $background-color--default;
+  }
 }
 
 .expandable-container-list__header {
-    background-color: $background-color--content;
-    z-index: $layer-one;
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 37px;
-    font-weight: bold;
-    margin-bottom: 1px;
-    margin-left: calc(#{-$margin--slim} + #{-$margin--slim});
-    margin-right: -$margin--slim;
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
-    border-bottom: 2px solid $background-color--default; //The header is WIDER than the main-content, since it has borders to the right and left to cover scrolling shadows from below
-    width: calc(#{$content-width--small} + #{$margin--slim} + #{$margin--slim}); //The borders cover the scrolling shadows from below
-    border-right: 10px solid $background-color--default;
-    border-left: 10px solid $background-color--default;
-    .expandable-container-list--inline & {
-        position: relative;
-    }
+  background-color: $background-color--content;
+  z-index: $layer-one;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 37px;
+  font-weight: bold;
+  margin-bottom: 1px;
+  margin-left: calc(#{-$margin--slim} + #{-$margin--slim});
+  margin-right: -$margin--slim;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  border-bottom: 2px solid $background-color--default; //The header is WIDER than the main-content, since it has borders to the right and left to cover scrolling shadows from below
+  width: calc(#{$content-width--small} + #{$margin--slim} + #{$margin--slim}); //The borders cover the scrolling shadows from below
+  border-right: 10px solid $background-color--default;
+  border-left: 10px solid $background-color--default;
+  .expandable-container-list--inline & {
+    position: relative;
+  }
 }
 
 .expandable-container-list__items {
-    position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
+  position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
+  &:before {
+    content: "";
+    width: $content-width--small;
+    height: 35px;
+    display: block;
+  }
+  .expandable-container-list--inline & {
     &:before {
-        content: "";
-        width: $content-width--small;
-        height: 35px;
-        display: block;
+      content: "";
+      height: 0px;
     }
-    .expandable-container-list--inline & {
-        &:before {
-            content: "";
-            height: 0px;
-        }
-    }
+  }
 }
 
 
 /* Expandable container = en rad i listan som kan expanderas*/
 
 .expandable-container {
-    display: block;
-    margin-left: -$margin--slim;
-    margin-right: -$margin--slim;
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
-    margin-top: 1px;
-    margin-bottom: 1px;
-    box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
+  display: block;
+  margin-left: -$margin--slim;
+  margin-right: -$margin--slim;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
+  .expandable-container__header:after {
+    @extend .bg-image-icon-chevron;
+    content: "";
+    vertical-align: middle;
+    margin-left: auto;
+    transform: rotate(-180deg);
+    transition: transform 0.4s;
+    width: 15px !important;
+    background-size: 100% !important;
+  } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
+  transition: margin-top 0.2s ease-in;
+  &.expandable-container--expanded:not(.expandable-container--compact) {
+    box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+  &.expandable-container--collapsed {
+    margin-top: 2px; //OBS! Denna måste ligga efter expanded-stilen i filen!
     .expandable-container__header:after {
-        @extend .bg-image-icon-chevron;
-        content: "";
-        vertical-align: middle;
-        margin-left: auto;
-        transform: rotate(-180deg);
-        transition: transform 0.4s;
-        width: 15px !important;
-        background-size: 100% !important;
-    } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
-    transition: margin-top 0.2s ease-in;
-    &.expandable-container--expanded:not(.expandable-container--compact) {
-        box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-        margin-top: 14px;
-        margin-bottom: 14px;
+      @extend .bg-image-icon-chevron;
+      vertical-align: middle;
+      margin-left: auto;
+      transform: rotate(0deg);
+      transition: transform 0.4s;
     }
-    &.expandable-container--collapsed {
-        margin-top: 2px; //OBS! Denna måste ligga efter expanded-stilen i filen!
-        .expandable-container__header:after {
-            @extend .bg-image-icon-chevron;
-            vertical-align: middle;
-            margin-left: auto;
-            transform: rotate(0deg);
-            transition: transform 0.4s;
-        }
-    }
-    &.expandable-container--compact {
-        margin-bottom: 0px;
-        margin-left: -$margin--xs-slim;
-        padding-left: $margin--xs-slim;
-        padding-right: $margin--xs-slim;
-        margin-right: -$margin--xs-slim;
-    } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
-    &.expandable-container--collapsed:not(.expandable-container--compact):hover {
-        position: relative;
-        box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-    }
+  }
+  &.expandable-container--compact {
+    margin-bottom: 0px;
+    margin-left: -$margin--xs-slim;
+    padding-left: $margin--xs-slim;
+    padding-right: $margin--xs-slim;
+    margin-right: -$margin--xs-slim;
+  } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
+  &.expandable-container--collapsed:not(.expandable-container--compact):hover {
+    position: relative;
+    box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
+  }
 }
 
 .expandable-container__header {
-    cursor: pointer;
-    height: 35px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    .expandable-container--compact & {
-        height: auto;
-    }
+  cursor: pointer;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .expandable-container--compact & {
+    height: auto;
+  }
+}
+
+.expandable-container__notification {
+  padding-top: $margin--xs-slim;
+  padding-bottom: $margin--xs-slim;
+  margin-left: -$margin--slim;
+  margin-right: -$margin--slim;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  border-top: 1px solid $primary-color--default;
+  border-spacing: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.expandable-container__notification__icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin-right: 6px;
 }
 
 .expandable-container__content {
-    padding-top: $margin--slim;
-    padding-bottom: $margin--slim;
-    margin-left: -$margin--slim;
-    margin-right: -$margin--slim;
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
-    border-top: 2px solid $border-color;
-    border-spacing: 10px; // max-height: 500px;
-    display: none;
-    .expandable-container--compact & {
-        padding-top: 0px;
-        padding-bottom: 0px;
-        margin-left: -$margin--xs-slim;
-        margin-right: -$margin--xs-slim;
-        padding-left: $margin--xs-slim;
-        padding-right: $margin--xs-slim;
+  padding-top: $margin--slim;
+  padding-bottom: $margin--slim;
+  margin-left: -$margin--slim;
+  margin-right: -$margin--slim;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  border-top: 1px solid $primary-color--default;
+  border-spacing: 10px;
+  display: none;
+  .expandable-container--compact & {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-left: -$margin--xs-slim;
+    margin-right: -$margin--xs-slim;
+    padding-left: $margin--xs-slim;
+    padding-right: $margin--xs-slim;
+  }
+  .expandable-container--striped & {
+    >* {
+      border-bottom: 1px solid $border-color--light;
     }
-    .expandable-container--striped & {
-        >* {
-            border-bottom: 1px solid $border-color--light;
-        }
-        >*:last-child {
-            border-bottom: none;
-        }
+    >*:last-child {
+      border-bottom: none;
     }
+  }
+  .expandable-container--notification-exists & {
+    border-top: none;
+  }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-    .expandable-container-list__header {
-        margin-left: -30px;
-        margin-right: -$margin--fat;
-        padding-left: $margin--fat;
-        padding-right: $margin--fat;
-        width: calc(#{$content-width--medium} + #{$margin--slim} + 12px);
-        border-right-width: 12px;
+  .expandable-container-list__header {
+    margin-left: -30px;
+    margin-right: -$margin--fat;
+    padding-left: $margin--fat;
+    padding-right: $margin--fat;
+    width: calc(#{$content-width--medium} + #{$margin--slim} + 12px);
+    border-right-width: 12px;
+  }
+  .expandable-container__header {
+    height: 40px;
+    .expandable-container--compact & {
+      height: auto;
     }
-    .expandable-container__header {
-        height: 40px;
-        .expandable-container--compact & {
-            height: auto;
-        }
+  }
+  .expandable-container__notification {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-spacing: 10px;
+  }
+  .expandable-container__content {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: $margin--fat;
+    padding-top: $margin--fat;
+    .expandable-container--compact & {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin-left: -$margin--slim;
+      margin-right: -$margin--slim;
+      padding-left: $margin--slim;
+      padding-right: $margin--slim;
     }
-    .expandable-container__content {
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: $margin--fat;
-        padding-top: $margin--fat;
-        .expandable-container--compact & {
-            padding-top: 0px;
-            padding-bottom: 0px;
-            margin-left: -$margin--slim;
-            margin-right: -$margin--slim;
-            padding-left: $margin--slim;
-            padding-right: $margin--slim;
-        }
-    }
-    .expandable-container {
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  }
+  .expandable-container {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }

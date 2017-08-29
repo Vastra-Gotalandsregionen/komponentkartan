@@ -9,8 +9,7 @@ import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConf
 @Component({
 
 })
-
-export class DropdownBaseComponent {
+export abstract class DropdownBaseComponent {
     @Input() selectAllSelectedText: string;
     @Input() selectAllItemText: string;
     @Input() filterProperties: string[];
@@ -35,6 +34,11 @@ export class DropdownBaseComponent {
         // The scrollbar component would not refresh when items were changed unless we added a timeout...
         // Ugly solution for sure, but until a better one comes along it will have to do :(
         this._items = value;
+
+        const selectedItems = this._items.filter(x => x.selected);
+        if (selectedItems.length > 0) {
+            this.handleInitiallySelectedItems(selectedItems);
+        }
         setTimeout(() => {
             this.scrollbarComponent.update();
             this.listenToScrollbarEvents();
@@ -46,11 +50,6 @@ export class DropdownBaseComponent {
         return this._items;
     }
 
-    private listenToScrollbarEvents() {
-        $(this.scrollbarComponent.elementRef.nativeElement).scroll((e) => {
-            this.hideDimmersIfScrollIsAtBottomOrTop(e);
-        });
-    }
 
     constructor(protected elementRef: ElementRef) {
         this.expanded = false;
@@ -60,6 +59,15 @@ export class DropdownBaseComponent {
         this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
 
     }
+
+    protected abstract handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void;
+
+    private listenToScrollbarEvents() {
+        $(this.scrollbarComponent.elementRef.nativeElement).scroll((e) => {
+            this.hideDimmersIfScrollIsAtBottomOrTop(e);
+        });
+    }
+
 
     private hideDimmersIfScrollIsAtBottomOrTop(scrollEvent: JQueryEventObject) {
         const scrollbar = $(scrollEvent.target);

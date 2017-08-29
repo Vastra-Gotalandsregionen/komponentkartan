@@ -79,4 +79,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
             this.selectedItem.marked = true;
         }
     }
+
+    protected handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void {
+    }
 }

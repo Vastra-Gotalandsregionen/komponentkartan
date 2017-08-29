@@ -1,4 +1,4 @@
-﻿
+﻿/* tslint:disable */
 import { ComponentFixture, TestBed, async } from "@angular/core/testing";
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
 import { By } from "@angular/platform-browser";
@@ -236,8 +236,8 @@ describe("[DropdownMultiSelectComponent]", () => {
                     dropdownElement.triggerEventHandler("mousedown", { target: dropdownElement.nativeElement } as MouseEvent);
                     fixture.detectChanges();
                 });
-                it("dropdown is collapsed", () => {
-                    expect(dropdownElement.classes["dropdown--open"]).toBe(false);
+                it("dropdown is not collapsed", () => {
+                    expect(dropdownElement.classes["dropdown--open"]).toBe(true);
                 });
             });
         });
