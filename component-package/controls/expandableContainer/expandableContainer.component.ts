@@ -1,4 +1,6 @@
-import { Component, HostListener, HostBinding } from '@angular/core';
+import { Component, HostListener, HostBinding, Input } from '@angular/core';
+import { NotificationType } from '../../models/notificationType.model';
+
 
 @Component({
     templateUrl: './expandableContainer.component.html',
@@ -6,30 +8,59 @@ import { Component, HostListener, HostBinding } from '@angular/core';
     moduleId: module.id
 })
 export class ExpandableContainerComponent {
+    public NotificationTypes = NotificationType;
+    @Input() notificationType: NotificationType;
     @HostBinding('class.expandable-container')
     @HostBinding('class.expandable-container--collapsed') hasClass = true;
+    @HostBinding('class.expandable-container--notification-exists') notificationExists = false;
+    private _notificationMessage: string;
+    @Input() set notificationMessage(value: string) {
+        this._notificationMessage = value;
+        this.notificationExists = value && value.length > 0;
+    }
+    get notificationMessage(): string {
+
+        return this._notificationMessage;
+    }
+
+
     @HostListener('click', ['$event'])
     toggleExpand(event: Event) {
-        // Find the clicked element from the event
-        const target = event.target || event.srcElement || event.currentTarget;
-        let header = $(target);
-
-        // If we click on an element INSIDE the header, get a reference to the actual header first
-        if (!header.hasClass('expandable-container__header')) {
-            if (header.parents('.expandable-container__header').length === 0) {
-                return;
-            }
-
-            header = header.closest('.expandable-container__header');
+        const header = this.getHeader(event);
+        if (header) {
+            this.toggleHeader(header);
         }
+    }
+
+    private getHeader(event: Event): JQuery {
+        const target = event.target || event.srcElement || event.currentTarget;
+        const clickedElement = $(target);
+
+        if (clickedElement.hasClass('expandable-container__header')) {
+            return clickedElement;
+        }
+        if (clickedElement.hasClass('expandable-container__notification')) {
+            return clickedElement.siblings('.expandable-container__header');
+        }
+        if (clickedElement.parents('.expandable-container__header').length > 0) {
+            return clickedElement.parents('.expandable-container__header');
+        }
+        if (clickedElement.parents('.expandable-container__notification').length > 0) {
+            return clickedElement.parents('.expandable-container__notification').siblings('.expandable-container__header');
+        }
+        return null;
+    }
+
+
+    private toggleHeader(header: JQuery) {
         // Slide clicked panel up/down
-        header.next('.expandable-container__content').slideToggle(400);
+        header.siblings('.expandable-container__content').slideToggle(400);
 
         // Add class to reflect new state, to enable shadows and margins
         header.closest('.expandable-container').toggleClass('expandable-container--collapsed expandable-container--expanded');
 
         // Slide all other panels up
-        $('.expandable-container__content').not(header.next()).slideUp(400);
+        $('.expandable-container__content').not(header.siblings()).slideUp(400);
 
         // Add classes to other panels to reflect state
         $('.expandable-container__header').not(header).closest('.expandable-container').addClass('expandable-container--collapsed');

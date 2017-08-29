@@ -10,7 +10,7 @@ import { IHeaderMenu, IHeaderMenuItem } from '../component-package/models/header
 
 })
 
-export class KomponentkartanApplicationComponent implements AfterViewInit {
+export class KomponentkartanApplicationComponent {
     selectedTheme: string;
     menus: IMenu[];
     headerMenu: IHeaderMenu;
@@ -418,17 +418,14 @@ export class KomponentkartanApplicationComponent implements AfterViewInit {
     }
 
     setSelectedMenu(menuSize: number) {
-        if (menuSize > 1)
+        if (menuSize > 1) {
             this.menus = this.largeMenu;
-        else this.menus = this.singleMenu;
+        } else { this.menus = this.singleMenu; }
 
         this.sidebarMenu.ngAfterViewInit();
 
     }
 
-    ngAfterViewInit() {
-
-    }
 }
 
 

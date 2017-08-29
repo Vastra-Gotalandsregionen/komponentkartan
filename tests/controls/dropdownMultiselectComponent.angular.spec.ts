@@ -1,4 +1,4 @@
-﻿
+﻿/* tslint:disable */
 import { ComponentFixture, TestBed, async } from "@angular/core/testing";
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
 import { By } from "@angular/platform-browser";
@@ -89,6 +89,57 @@ describe("[DropdownMultiSelectComponent]", () => {
             expect(component.items.filter(x => x.selected).length).toBe(0);
         });
     });
+
+    describe("When component is initialized with one selected item", () => {
+        var dropdownElement: DebugElement;
+
+        beforeEach(() => {
+            spyOn(component.selectionChanged, "emit");
+            component.items = [{ displayName: "Option 1" } as IDropdownItem,
+            { displayName: "Option 2", selected: true } as IDropdownItem,
+            { displayName: "Option 3" } as IDropdownItem] as IDropdownItem[];
+            component.ngOnChanges();
+
+            fixture.detectChanges();
+
+
+        });
+        it("selectAll is not selected", () => {
+            expect(component.selectAllItem.selected).toBe(false);
+        });
+        it("selectionChanged event is emitted with the selected item", () => {
+            expect(component.selectionChanged.emit).toHaveBeenCalledWith([component.items[1]]);
+        });
+        it("dropdown text is 1 vald", () => {
+            expect(component.dropdownText).toBe("1 vald")
+        });
+    });
+
+    describe("When component is initialized with two selected items", () => {
+        var dropdownElement: DebugElement;
+
+        beforeEach(() => {
+            spyOn(component.selectionChanged, "emit");
+            component.items = [{ displayName: "Option 1", selected: true } as IDropdownItem,
+            { displayName: "Option 2", selected: true } as IDropdownItem,
+            { displayName: "Option 3" } as IDropdownItem] as IDropdownItem[];
+            component.ngOnChanges();
+
+            fixture.detectChanges();
+        });
+        it("selectAll is not selected", () => {
+            expect(component.selectAllItem.selected).toBe(false);
+        });
+        it("selectionChanged event is emitted with the selected items", () => {
+            expect(component.selectionChanged.emit).toHaveBeenCalledWith([component.items[0], component.items[1]]);
+        });
+        it("dropdown text is 2 vald", () => {
+            expect(component.dropdownText).toBe("2 valda")
+        });
+    });
+
+
+
 
     describe("when dropdown is clicked", () => {
         var dropdownElement: DebugElement;
@@ -236,8 +287,8 @@ describe("[DropdownMultiSelectComponent]", () => {
                     dropdownElement.triggerEventHandler("mousedown", { target: dropdownElement.nativeElement } as MouseEvent);
                     fixture.detectChanges();
                 });
-                it("dropdown is collapsed", () => {
-                    expect(dropdownElement.classes["dropdown--open"]).toBe(false);
+                it("dropdown is not collapsed", () => {
+                    expect(dropdownElement.classes["dropdown--open"]).toBe(true);
                 });
             });
         });

@@ -3,6 +3,7 @@ import { IDropdownItem } from '../../component-package/models/dropdownItem.model
 import { ISelectableItem } from '../../component-package/models/selectableItem.model';
 import { ModalService, ModalButtonConfiguration } from '../../component-package/services/modalService';
 import { IHeaderMenu, IHeaderMenuItem } from '../../component-package/models/headerMenu.model';
+import { NotificationType } from '../../component-package/models/notificationType.model';
 
 @Component({
     moduleId: module.id,
@@ -10,6 +11,7 @@ import { IHeaderMenu, IHeaderMenuItem } from '../../component-package/models/hea
     templateUrl: 'komponentkarta.component.html'
 })
 export class KomponentkartaComponent implements AfterViewInit {
+    public NotificationTypes = NotificationType;
     selectedThemeOption: ISelectableItem;
     themeOptions: ISelectableItem[];
     dropDownItems25: IDropdownItem[];
@@ -62,6 +64,8 @@ export class KomponentkartaComponent implements AfterViewInit {
         }, 1000);
         this.lastMultipleSelection = 'Inget';
         this.lastSingleSelection = 'Inget';
+
+        this.dropDownItems200[3].selected = true;
     }
 
     showOneButtonModal() {

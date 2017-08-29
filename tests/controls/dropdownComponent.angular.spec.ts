@@ -96,7 +96,6 @@ describe("DropdownComponent", () => {
                         dropdownElement.triggerEventHandler("mousedown", { target: dropdownElement.nativeElement } as MouseEvent);
                         fixture.detectChanges();
                         expect(dropdownElement.classes["dropdown--open"]).toBe(false);
-
                     });
                 });
             });
@@ -270,6 +269,7 @@ describe("DropdownComponent", () => {
                 });
             });
         });
+
         describe("and selectAll is clicked", () => {
             var itemToClick: DebugElement;
             beforeEach(() => {
@@ -294,6 +294,7 @@ describe("DropdownComponent", () => {
                 expect(component.selectedItemChanged.emit).toHaveBeenCalled();
             });
         });
+
         describe("and selectAllItemText is set", () => {
             beforeEach(() => {
                 component.items = [{ displayName: "one" }, { displayName: "two" }, { displayName: "three" }] as IDropdownItem[];
@@ -312,6 +313,7 @@ describe("DropdownComponent", () => {
                 expect(itemInList.parent.classes["dropdown-item--selected"]).toBeTruthy();
             });
         });
+
         describe("and selectAllISelectedText is set", () => {
             beforeEach(() => {
                 component.items = [{ displayName: "one" }, { displayName: "two" }, { displayName: "three" }] as IDropdownItem[];
@@ -327,8 +329,44 @@ describe("DropdownComponent", () => {
                 expect(component.selectAllItem.displayNameWhenSelected).toBe("Text when selected");
             });
         });
+    });
 
+    describe("When component is initialized with one selected item", () => {
+        var dropdownElement: DebugElement;
+        var selectedItemSpan: DebugElement;
 
+        beforeEach(() => {
+            component.items = [{ displayName: "one" }, { displayName: "two", selected: true }, { displayName: "three" }] as IDropdownItem[];
+            dropdownElement = rootElement.query(By.css(".dropdown"));
+            fixture.detectChanges();
+            selectedItemSpan = dropdownElement.query(By.css("span"));
+        });
+        it("item is selected", () => {
+            expect(component.selectedItem).toBe(component.items[1]);
+        });
+        it("selected item text is shown", () => {
+            expect(selectedItemSpan.nativeElement.title).toBe("two");
+        });
+    });
+
+    describe("When component is initialized with two selected items", () => {
+        var dropdownElement: DebugElement;
+        var selectedItemSpan: DebugElement;
+        beforeEach(() => {
+            component.items = [{ displayName: "one", selected: true }, { displayName: "two", selected: true }, { displayName: "three" }] as IDropdownItem[];
+            dropdownElement = rootElement.query(By.css(".dropdown"));
+            fixture.detectChanges();
+            selectedItemSpan = dropdownElement.query(By.css("span"));
+        });
+        it("first item is selected", () => {
+            expect(component.selectedItem).toBe(component.items[0]);
+        });
+        it("selected item text is shown", () => {
+            expect(selectedItemSpan.nativeElement.title).toBe("one");
+        });
+        it("the second item is unselected", () => {
+            expect(component.items[1].selected).toBe(false);
+        });
     });
 
     describe("When selectAllText is not set", () => {
@@ -340,6 +378,5 @@ describe("DropdownComponent", () => {
         it("the selectAllItem is not initialized", () => {
             expect(component.selectAllItem).toBeUndefined();
         });
-
     });
 });
