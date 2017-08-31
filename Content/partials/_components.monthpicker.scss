@@ -1,0 +1,44 @@
+$dropdown-height--small: 285px;
+$dropdown-height--medium: 340px;
+$dropdown-height--medium-with-filter: 360px;
+$dropdown-width--medium: 160px;
+$dropdown-width--small: 100px;
+.monthpicker__dropdown {
+    @extend .background-color--primary;
+    position: relative;
+    display: inline-block;
+    height: $component-height;
+    width: $dropdown-width--medium;
+    padding: 0px; //Text på vald item
+    cursor: pointer;
+    span {
+        padding-left: $margin--slim;
+        padding-top: 2px;
+        vertical-align: middle;
+        background-color: white;
+        width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        border-top: $border--single solid $control-border-color--default;
+        border-left: $border--single solid $control-border-color--default;
+        border-bottom: $border--single solid $control-border-color--default;
+        border-radius: 1px;
+    } //Ikon
+    &:after {
+        @extend .bg-image-icon-calendar;
+        content: "";
+        vertical-align: middle;
+        text-align: center;
+        float: right;
+        background-color: transparent;
+        cursor: pointer;
+        transform: rotate(0deg);
+        transition: all ease 0.3s;
+        margin-top: 0px;
+        padding-right: 3px;
+    }
+    &.dropdown--small {
+        width: $dropdown-width--small;
+    }
+}

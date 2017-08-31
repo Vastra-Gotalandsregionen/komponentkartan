@@ -26,6 +26,7 @@ import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ModalPlaceholderComponent } from './controls/modal/modal.component';
+import { MonthpickerComponent } from './controls/monthpicker/monthpicker.component'
 import { ModalService } from './services/modalService';
 
 import * as $ from 'jquery';
@@ -63,7 +64,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HeaderMenuComponent,
         CheckboxComponent,
         ModalPlaceholderComponent,
-        DropdownMultiselectComponent
+        DropdownMultiselectComponent,
+        MonthpickerComponent
     ],
     exports: [
         SafePipe,
@@ -87,7 +89,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PerfectScrollbarModule,
         CheckboxComponent,
         ModalPlaceholderComponent,
-        DropdownMultiselectComponent
+        DropdownMultiselectComponent,
+        MonthpickerComponent
     ],
     providers: [ModalService]
 })
