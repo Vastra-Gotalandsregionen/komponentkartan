@@ -353,6 +353,7 @@ export class KomponentkartanApplicationComponent {
                         menuItems: [
                             { title: 'Formatmall', url: '/formatmall' } as IMenuItem,
                             { title: 'Färgkarta', url: '/fargkarta' } as IMenuItem,
+                            { title: 'Listor', url: '/lists' } as IMenuItem,
                             { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem,
                         ] as IMenuItem[]
                     } as IMenuGroup
