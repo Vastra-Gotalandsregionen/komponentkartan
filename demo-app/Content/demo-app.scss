@@ -1,0 +1,16 @@
+@import "../../Content/komponentkartan.scss";
+.lists-component {
+  .expandable-container-list {
+    position: relative;
+    margin-top: 112px;
+    transition: margin-top 0.6s ease;
+    transition-delay: 0.3s;
+  }
+  &.actions--visible {
+    .expandable-container-list {
+      margin-top: 260px;
+      transition: margin-top 0.6s ease;
+      transition-delay: 0;
+    }
+  }
+}

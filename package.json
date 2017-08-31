@@ -3,12 +3,14 @@
   "version": "0.0.64",
   "author": "Västra Götalandsregionen",
   "scripts": {
-    "[start-app]": "concurrent \"npm run _watch-ts\" \"npm run _local-webserver\" \"npm run _watch-css\"",
+    "[start-app]": "concurrent \"npm run _watch-ts\" \"npm run _local-webserver\" \"npm run _watch-css\" \"npm run _watch-demo-app-css\"",
     "_compile-ts": "tsc -p tsconfig.demo-app.json",
     "_watch-ts": "tsc -p tsconfig.demo-app.json -w",
     "_local-webserver": "lite-server",
     "_compile-css": "node-sass --include-path content content/komponentkartan.scss content/komponentkartan.css",
+    "_compile-demo-app-css": "node-sass --include-path content demo-app/content/demo-app.scss demo-app/content/demo-app.css",
     "_watch-css": "nodemon -e scss --watch content/  --exec \"npm run _compile-css\"",
+    "_watch-demo-app-css": "nodemon -e scss --watch demo-app/content/  --exec \"npm run _compile-demo-app-css\"",
     "_clean_build_output": "rimraf ./BuildOutput"
   },
   "dependencies": {
