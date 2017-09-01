@@ -16,11 +16,11 @@ export class ListsComponent {
 
     constructor() {
         this.examplePeople = [
-            { firstName: 'Adam', lastName: 'Andersson', organistations: ['Team 1', 'Team 2'] } as ExamplePerson,
-            { firstName: 'Boyd', lastName: 'Braithwathe', organistations: ['Team 1'] } as ExamplePerson,
-            { firstName: 'Carol', lastName: 'Corbinson', organistations: ['Team 1', 'Team 2', 'Team 3'] } as ExamplePerson,
-            { firstName: 'Damon', lastName: 'Dietz', organistations: ['Team 4'] } as ExamplePerson,
-            { firstName: 'Erin', lastName: '', organistations: ['Team 2', 'Team 4'], validationError: 'Last name missing' } as ExamplePerson,
+            { firstName: 'Adam', lastName: 'Andersson', organisations: ['Team 1', 'Team 2'] } as ExamplePerson,
+            { firstName: 'Boyd', lastName: 'Braithwathe', organisations: ['Team 1'] } as ExamplePerson,
+            { firstName: 'Carol', lastName: 'Corbinson', organisations: ['Team 1', 'Team 2', 'Team 3'] } as ExamplePerson,
+            { firstName: 'Damon', lastName: 'Dietz', organisations: ['Team 4'] } as ExamplePerson,
+            { firstName: 'Erin', lastName: '', organisations: ['Team 2', 'Team 4'], validationError: 'Last name missing' } as ExamplePerson,
         ];
     }
 }
@@ -28,7 +28,7 @@ export class ListsComponent {
 export interface ExamplePerson {
     firstName: string;
     lastName: string;
-    organistations: string[];
+    organisations: string[];
     validationError: string;
 
 }
