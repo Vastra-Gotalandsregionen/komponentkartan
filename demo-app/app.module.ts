@@ -10,6 +10,7 @@ import { FargkartaComponent } from './fargkarta/fargkarta.component'
 import { MenuSelectorComponent } from './menuSelector/menuSelector.component'
 
 import { KomponentkartanModule } from '../component-package/komponentkartan.module';
+import { ListsComponent } from './lists/lists.component';
 
 import { RouterModule, Routes } from '@angular/router'
 import { appRoutes } from './routes'
@@ -27,7 +28,8 @@ import { appRoutes } from './routes'
         KomponentkartaComponent,
         FormatmallComponent,
         FargkartaComponent,
-        MenuSelectorComponent
+        MenuSelectorComponent,
+        ListsComponent
     ],
 
     bootstrap: [KomponentkartanApplicationComponent]

@@ -1,16 +1,27 @@
-﻿//Base colors
+﻿//background
 $background-color--default: #f0f0f0;
 $background-color--content: #ffffff;
+$background-color--error:#8C1919;
+$background-color--success: #3D7630;
+//text
 $text-color--default: #151515;
-$control-border-color--default: #151515;
 $text-color--light: #ffffff;
 $text-color--value: #000000;
 $text-color--read-only: #99a3ad;
-$menu-text-color: #314152;
-$border-color: #99a3ad;
-$border-color--light: #dfdfdf;
+//control
 $control-color--enabled: #151515;
 $control-color--disabled: #99a3ad;
+$control-border-color--default: #151515;
+//border
+$border-color: #99a3ad;
+$border-color--light: #dfdfdf;
+//menu
+$menu-text-color: #314152;
+$menu-color--inactive: transparentize($background-color--default, 0.3);
+//misc
+$focus-color: #4990e2;
+$modal-background-color: transparentize($text-color--default, 0.35);
+//themes
 $primary-color--blue: #006298;
 $secondary-color--blue: #598eb6;
 $primary-color--default: #314152;
@@ -19,6 +30,3 @@ $primary-color--green: #4a773c;
 $secondary-color--green: #7fa276;
 $primary-color--red: #9d2235;
 $secondary-color--red: #ba6071;
-$menu-color--inactive: transparentize($background-color--default, 0.3);
-$focus-color: #4990e2;
-$modal-background-color: transparentize($text-color--default, 0.35);

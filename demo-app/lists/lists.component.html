@@ -1,0 +1,42 @@
+<div class="main-content lists-component">
+  <vgr-page-header [title]="'Person list'">
+  </vgr-page-header>
+
+  <vgr-expandable-container-list>
+    <div class="expandable-container-list__header">
+      <div class="flex-column-13">First name</div>
+      <div class="flex-column-15">Last name</div>
+    </div>
+    <div class="expandable-container-list__items">
+      <vgr-expandable-container *ngFor="let person of examplePeople" [notificationMessage]="person.validationError" [notificationIcon]="NotificationIcons.ExclamationRed"
+        [notificationType]="NotificationTypes.ActionRequired">
+        <div class="expandable-container__header">
+          <div class="flex-column-13">{{person.firstName}}</div>
+          <div class="flex-column-15">{{person.lastName}}</div>
+        </div>
+        <div class="expandable-container__content">
+          <vgr-expandable-container>
+            <div class="expandable-container__header">
+              <div class="flex-column-15">Primary organisations</div>
+            </div>
+            <div class="expandable-container__content">
+              <div *ngFor="let organisation of person.organisations">
+                <div>{{organisation}}</div>
+              </div>
+            </div>
+          </vgr-expandable-container>
+          <vgr-expandable-container>
+            <div class="expandable-container__header">
+              <div class="flex-column-15">Secondary organisations</div>
+            </div>
+            <div class="expandable-container__content">
+              <div *ngFor="let organisation of person.organisations">
+                <div>{{organisation}}</div>
+              </div>
+            </div>
+          </vgr-expandable-container>
+        </div>
+      </vgr-expandable-container>
+    </div>
+  </vgr-expandable-container-list>
+</div>
