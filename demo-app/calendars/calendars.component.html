@@ -6,11 +6,11 @@
         <div class="komponentkarta-component row-layout row-layout--padded">
             <div>
                 <p>Default formatering</p>
-                <vgr-monthpicker style="margin-top: 20px"></vgr-monthpicker>
+                <vgr-monthpicker style="margin-top: 20px" [maxDate]="maxDate"></vgr-monthpicker>
             </div>
             <div>
                 <p>MM yyyy formatering</p>
-                <vgr-monthpicker style="margin-top: 20px" [selectedDateFormat]="'MM yyyy'"></vgr-monthpicker>
+                <vgr-monthpicker style="margin-top: 20px" [selectedDateFormat]="'MM yyyy'" [preselectedDate]="preselectedDate"></vgr-monthpicker>
             </div>
 
         </div>

@@ -180,13 +180,13 @@ table {
   .theme--green .border-left-color--secondary {
     border-left-color: #7fa276; }
 
-.border-color--primary, .button.button--secondary, .button--secondary.text-button, .button--secondary.lock-button {
+.border-color--primary, .button.button--secondary, .button--secondary.text-button, .button--secondary.lock-button, .monthpicker__calendar__month--today {
   border-color: #314152; }
-  .theme--blue .border-color--primary, .theme--blue .button.button--secondary, .theme--blue .button--secondary.text-button, .theme--blue .button--secondary.lock-button {
+  .theme--blue .border-color--primary, .theme--blue .button.button--secondary, .theme--blue .button--secondary.text-button, .theme--blue .button--secondary.lock-button, .theme--blue .monthpicker__calendar__month--today {
     border-color: #006298; }
-  .theme--red .border-color--primary, .theme--red .button.button--secondary, .theme--red .button--secondary.text-button, .theme--red .button--secondary.lock-button {
+  .theme--red .border-color--primary, .theme--red .button.button--secondary, .theme--red .button--secondary.text-button, .theme--red .button--secondary.lock-button, .theme--red .monthpicker__calendar__month--today {
     border-color: #9d2235; }
-  .theme--green .border-color--primary, .theme--green .button.button--secondary, .theme--green .button--secondary.text-button, .theme--green .button--secondary.lock-button {
+  .theme--green .border-color--primary, .theme--green .button.button--secondary, .theme--green .button--secondary.text-button, .theme--green .button--secondary.lock-button, .theme--green .monthpicker__calendar__month--today {
     border-color: #4a773c; }
 
 .border-color--secondary {
@@ -216,22 +216,22 @@ table {
   .theme--green .color--secondary {
     color: #7fa276; }
 
-.background-color--primary, .filter-textbox, .dropdown, .button, .text-button, .lock-button, .button.button--secondary:hover:not(.button--disabled), .button--secondary.text-button:hover:not(.button--disabled), .button--secondary.lock-button:hover:not(.button--disabled) {
+.background-color--primary, .filter-textbox, .dropdown, .button, .text-button, .lock-button, .button.button--secondary:hover:not(.button--disabled), .button--secondary.text-button:hover:not(.button--disabled), .button--secondary.lock-button:hover:not(.button--disabled), .monthpicker__dropdown, .monthpicker__calendar__header, .monthpicker__calendar__header__previous-year.disabled:hover, .monthpicker__calendar__header__next-year.disabled:hover, .monthpicker__calendar__month--selected {
   background-color: #314152; }
-  .theme--blue .background-color--primary, .theme--blue .filter-textbox, .theme--blue .dropdown, .theme--blue .button, .theme--blue .text-button, .theme--blue .lock-button, .theme--blue .button.button--secondary:hover:not(.button--disabled), .theme--blue .button--secondary.text-button:hover:not(.button--disabled), .theme--blue .button--secondary.lock-button:hover:not(.button--disabled) {
+  .theme--blue .background-color--primary, .theme--blue .filter-textbox, .theme--blue .dropdown, .theme--blue .button, .theme--blue .text-button, .theme--blue .lock-button, .theme--blue .button.button--secondary:hover:not(.button--disabled), .theme--blue .button--secondary.text-button:hover:not(.button--disabled), .theme--blue .button--secondary.lock-button:hover:not(.button--disabled), .theme--blue .monthpicker__dropdown, .theme--blue .monthpicker__calendar__header, .theme--blue .monthpicker__calendar__header__previous-year.disabled:hover, .theme--blue .monthpicker__calendar__header__next-year.disabled:hover, .theme--blue .monthpicker__calendar__month--selected {
     background-color: #006298; }
-  .theme--red .background-color--primary, .theme--red .filter-textbox, .theme--red .dropdown, .theme--red .button, .theme--red .text-button, .theme--red .lock-button, .theme--red .button.button--secondary:hover:not(.button--disabled), .theme--red .button--secondary.text-button:hover:not(.button--disabled), .theme--red .button--secondary.lock-button:hover:not(.button--disabled) {
+  .theme--red .background-color--primary, .theme--red .filter-textbox, .theme--red .dropdown, .theme--red .button, .theme--red .text-button, .theme--red .lock-button, .theme--red .button.button--secondary:hover:not(.button--disabled), .theme--red .button--secondary.text-button:hover:not(.button--disabled), .theme--red .button--secondary.lock-button:hover:not(.button--disabled), .theme--red .monthpicker__dropdown, .theme--red .monthpicker__calendar__header, .theme--red .monthpicker__calendar__header__previous-year.disabled:hover, .theme--red .monthpicker__calendar__header__next-year.disabled:hover, .theme--red .monthpicker__calendar__month--selected {
     background-color: #9d2235; }
-  .theme--green .background-color--primary, .theme--green .filter-textbox, .theme--green .dropdown, .theme--green .button, .theme--green .text-button, .theme--green .lock-button, .theme--green .button.button--secondary:hover:not(.button--disabled), .theme--green .button--secondary.text-button:hover:not(.button--disabled), .theme--green .button--secondary.lock-button:hover:not(.button--disabled) {
+  .theme--green .background-color--primary, .theme--green .filter-textbox, .theme--green .dropdown, .theme--green .button, .theme--green .text-button, .theme--green .lock-button, .theme--green .button.button--secondary:hover:not(.button--disabled), .theme--green .button--secondary.text-button:hover:not(.button--disabled), .theme--green .button--secondary.lock-button:hover:not(.button--disabled), .theme--green .monthpicker__dropdown, .theme--green .monthpicker__calendar__header, .theme--green .monthpicker__calendar__header__previous-year.disabled:hover, .theme--green .monthpicker__calendar__header__next-year.disabled:hover, .theme--green .monthpicker__calendar__month--selected {
     background-color: #4a773c; }
 
-.background-color--secondary, .button .button__focus-line, .text-button .button__focus-line, .lock-button .button__focus-line {
+.background-color--secondary, .button .button__focus-line, .text-button .button__focus-line, .lock-button .button__focus-line, .monthpicker__calendar__header__previous-year:hover, .monthpicker__calendar__header__next-year:hover, .monthpicker__calendar__month:hover {
   background-color: #99a3ad; }
-  .theme--blue .background-color--secondary, .theme--blue .button .button__focus-line, .button .theme--blue .button__focus-line, .theme--blue .text-button .button__focus-line, .text-button .theme--blue .button__focus-line, .theme--blue .lock-button .button__focus-line, .lock-button .theme--blue .button__focus-line {
+  .theme--blue .background-color--secondary, .theme--blue .button .button__focus-line, .button .theme--blue .button__focus-line, .theme--blue .text-button .button__focus-line, .text-button .theme--blue .button__focus-line, .theme--blue .lock-button .button__focus-line, .lock-button .theme--blue .button__focus-line, .theme--blue .monthpicker__calendar__header__previous-year:hover, .theme--blue .monthpicker__calendar__header__next-year:hover, .theme--blue .monthpicker__calendar__month:hover {
     background-color: #598eb6; }
-  .theme--red .background-color--secondary, .theme--red .button .button__focus-line, .button .theme--red .button__focus-line, .theme--red .text-button .button__focus-line, .text-button .theme--red .button__focus-line, .theme--red .lock-button .button__focus-line, .lock-button .theme--red .button__focus-line {
+  .theme--red .background-color--secondary, .theme--red .button .button__focus-line, .button .theme--red .button__focus-line, .theme--red .text-button .button__focus-line, .text-button .theme--red .button__focus-line, .theme--red .lock-button .button__focus-line, .lock-button .theme--red .button__focus-line, .theme--red .monthpicker__calendar__header__previous-year:hover, .theme--red .monthpicker__calendar__header__next-year:hover, .theme--red .monthpicker__calendar__month:hover {
     background-color: #ba6071; }
-  .theme--green .background-color--secondary, .theme--green .button .button__focus-line, .button .theme--green .button__focus-line, .theme--green .text-button .button__focus-line, .text-button .theme--green .button__focus-line, .theme--green .lock-button .button__focus-line, .lock-button .theme--green .button__focus-line {
+  .theme--green .background-color--secondary, .theme--green .button .button__focus-line, .button .theme--green .button__focus-line, .theme--green .text-button .button__focus-line, .text-button .theme--green .button__focus-line, .theme--green .lock-button .button__focus-line, .lock-button .theme--green .button__focus-line, .theme--green .monthpicker__calendar__header__previous-year:hover, .theme--green .monthpicker__calendar__header__next-year:hover, .theme--green .monthpicker__calendar__month:hover {
     background-color: #7fa276; }
 
 /*********************************************************************************************
@@ -600,7 +600,7 @@ input {
     left: calc(1170px + 248px - 10px);
     cursor: pointer; } }
 
-.bg-image--icon, .bg-image-lock-button__bottom, .lock-button__bottom, .bg-image-lock-button__top, .lock-button__top, .bg-image-menu-arrow, .dropdown__menu:before, .bg-image-profile-header, .login-info__profile_image, .bg-image-icon-arrow-white, .header__info-header-menu-arrow, .header-menu-indicator:before, .bg-image-icon-minus, .header-menu-submenu--expanded .header-menu__submenu-header:after, .menu-item__minus, .bg-image-icon-plus, .header-menu__submenu-header:after, .menu-item__plus, .bg-image-icon-ok-check, .bg-image-icon-exclamation, .bg-image-icon-exclamation--red, .bg-image-icon-ok-check--green {
+.bg-image--icon, .bg-image-lock-button__bottom, .lock-button__bottom, .bg-image-lock-button__top, .lock-button__top, .bg-image-menu-arrow, .dropdown__menu:before, .bg-image-profile-header, .login-info__profile_image, .bg-image-icon-arrow-white, .header__info-header-menu-arrow, .header-menu-indicator:before, .bg-image-icon-minus, .header-menu-submenu--expanded .header-menu__submenu-header:after, .menu-item__minus, .bg-image-icon-plus, .header-menu__submenu-header:after, .menu-item__plus, .bg-image-icon-ok-check, .bg-image-icon-exclamation, .bg-image-icon-exclamation--red, .bg-image-icon-ok-check--green, .bg-image-icon-calendar, .monthpicker__dropdown:after {
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
@@ -699,6 +699,9 @@ input {
 
 .bg-image-icon-ok-check--green {
   background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzBweCIgaGVpZ2h0PSIzMHB4IiB2aWV3Qm94PSIwIDAgMzAgMzAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ2LjIgKDQ0NDk2KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5Ja29uLk9LSW5ha3RpdiBDb3B5PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlN5bWJvbHMiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJJa29uLk9LSW5ha3Rpdi1Db3B5Ij4KICAgICAgICAgICAgPGNpcmNsZSBpZD0iT3ZhbC02IiBmaWxsPSIjM0Q3NjMwIiBjeD0iMTUiIGN5PSIxNSIgcj0iMTMiPjwvY2lyY2xlPgogICAgICAgICAgICA8cG9seWxpbmUgaWQ9IkxpbmUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiIHBvaW50cz0iOSAxNS43NjAyNzUzIDEzLjQyNjk4OTIgMjAgMjEgMTEiPjwvcG9seWxpbmU+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=); }
+
+.bg-image-icon-calendar, .monthpicker__dropdown:after {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzBweCIgaGVpZ2h0PSIzMHB4IiB2aWV3Qm94PSIwIDAgMzAgMzAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ2LjIgKDQ0NDk2KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5Ja29uLkthbGVuZGVySW52ZXJ0ZXJhZDwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPgogICAgICAgIDxyZWN0IGlkPSJwYXRoLTEiIHg9IjAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcng9IjEiPjwvcmVjdD4KICAgIDwvZGVmcz4KICAgIDxnIGlkPSJTeW1ib2xzIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iSWtvbi5LYWxlbmRlckludmVydGVyYWQiPgogICAgICAgICAgICA8ZyBpZD0iUmVjdGFuZ2xlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1LjAwMDAwMCwgNS4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxtYXNrIGlkPSJtYXNrLTIiIGZpbGw9IndoaXRlIj4KICAgICAgICAgICAgICAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNwYXRoLTEiPjwvdXNlPgogICAgICAgICAgICAgICAgPC9tYXNrPgogICAgICAgICAgICAgICAgPHVzZSBpZD0iTWFzayIgZmlsbD0iI0ZGRkZGRiIgeGxpbms6aHJlZj0iI3BhdGgtMSI+PC91c2U+CiAgICAgICAgICAgICAgICA8cmVjdCBmaWxsPSIjNTk4RUI2IiBtYXNrPSJ1cmwoI21hc2stMikiIHg9Ii0wLjkwOTA5MDkwOSIgeT0iLTEiIHdpZHRoPSIyMS44MTgxODE4IiBoZWlnaHQ9IjYuMzYzNjM2MzYiPjwvcmVjdD4KICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsLTkiIGZpbGw9IiMwMDYyOTgiIGN4PSI5IiBjeT0iMTMuNSIgcj0iMS41Ij48L2NpcmNsZT4KICAgICAgICAgICAgPGNpcmNsZSBpZD0iT3ZhbC05IiBmaWxsPSIjMDA2Mjk4IiBjeD0iMTUiIGN5PSIxMy41IiByPSIxLjUiPjwvY2lyY2xlPgogICAgICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsLTkiIGZpbGw9IiMwMDYyOTgiIGN4PSIyMSIgY3k9IjEzLjUiIHI9IjEuNSI+PC9jaXJjbGU+CiAgICAgICAgICAgIDxjaXJjbGUgaWQ9Ik92YWwtOSIgZmlsbD0iIzAwNjI5OCIgY3g9IjkiIGN5PSIxNy41IiByPSIxLjUiPjwvY2lyY2xlPgogICAgICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsLTkiIGZpbGw9IiMwMDYyOTgiIGN4PSIxNSIgY3k9IjE3LjUiIHI9IjEuNSI+PC9jaXJjbGU+CiAgICAgICAgICAgIDxjaXJjbGUgaWQ9Ik92YWwtOSIgZmlsbD0iIzAwNjI5OCIgY3g9IjIxIiBjeT0iMTcuNSIgcj0iMS41Ij48L2NpcmNsZT4KICAgICAgICAgICAgPGNpcmNsZSBpZD0iT3ZhbC05IiBmaWxsPSIjMDA2Mjk4IiBjeD0iOSIgY3k9IjIxLjUiIHI9IjEuNSI+PC9jaXJjbGU+CiAgICAgICAgICAgIDxjaXJjbGUgaWQ9Ik92YWwtOSIgZmlsbD0iIzAwNjI5OCIgY3g9IjE1IiBjeT0iMjEuNSIgcj0iMS41Ij48L2NpcmNsZT4KICAgICAgICAgICAgPGNpcmNsZSBpZD0iT3ZhbC05IiBmaWxsPSIjMDA2Mjk4IiBjeD0iMjEiIGN5PSIyMS41IiByPSIxLjUiPjwvY2lyY2xlPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+); }
 
 @media screen and (min-width: 1459px) {
   .bg-image-icon-plus, .header-menu__submenu-header:after, .menu-item__plus {
@@ -2371,6 +2374,225 @@ vgr-sidebar-menu {
   left: 23px;
   z-index: 40; }
 
+.monthpicker__dropdown {
+  position: relative;
+  display: inline-block;
+  height: 30px;
+  width: 160px;
+  padding: 0px;
+  cursor: pointer; }
+  .monthpicker__dropdown span {
+    padding-left: 10px;
+    padding-top: 2px;
+    vertical-align: middle;
+    background-color: white;
+    width: calc(160px - 34px - 1px - 1px);
+    display: inline-block;
+    height: 100%;
+    cursor: pointer;
+    border-top: 1px solid #151515;
+    border-left: 1px solid #151515;
+    border-bottom: 1px solid #151515;
+    border-radius: 1px; }
+  .monthpicker__dropdown:after {
+    content: "";
+    vertical-align: middle;
+    text-align: center;
+    float: right;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 0px;
+    padding-right: 3px;
+    width: 36px;
+    height: 30px; }
+
+.monthpicker__calendar {
+  position: absolute;
+  top: 42px;
+  text-align: left;
+  z-index: 40;
+  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
+  background-color: #ffffff;
+  border: none;
+  padding-bottom: 0px;
+  width: 250px;
+  height: 250px;
+  visibility: hidden;
+  cursor: default; }
+  .monthpicker--open .monthpicker__calendar {
+    visibility: visible; }
+
+/* .monthpicker__calendar__header__year {
+    display: table-cell;
+} */
+.monthpicker__calendar__header {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  vertical-align: middle;
+  color: #ffffff;
+  width: 250px;
+  height: 60px;
+  z-index: 40; }
+  .monthpicker__calendar__header :before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%; }
+
+.monthpicker__calendar__header__previous-year {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: auto;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  font-size: 23px;
+  font-family: Consolas;
+  margin-top: 14px; }
+  .monthpicker__calendar__header__previous-year:hover {
+    font-weight: bold;
+    color: #ffffff; }
+  .monthpicker__calendar__header__previous-year.disabled {
+    color: #99a3ad;
+    cursor: default; }
+    .monthpicker__calendar__header__previous-year.disabled:hover {
+      font-weight: normal; }
+  .monthpicker__calendar__header__previous-year:after {
+    content: "<";
+    width: 28px;
+    height: 28px;
+    font-size: 23px;
+    font-family: Consolas;
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 10px; }
+
+.monthpicker__calendar__header__next-year {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-top: 14px; }
+  .monthpicker__calendar__header__next-year:hover {
+    font-weight: bold;
+    color: #ffffff; }
+  .monthpicker__calendar__header__next-year.disabled {
+    color: #99a3ad;
+    cursor: default; }
+    .monthpicker__calendar__header__next-year.disabled:hover {
+      font-weight: normal; }
+  .monthpicker__calendar__header__next-year:after {
+    content: ">";
+    width: 28px;
+    height: 28px;
+    font-size: 23px;
+    font-family: Consolas;
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 213px; }
+
+.monthpicker__calendar__content {
+  margin-top: 6px;
+  margin-left: 9px;
+  margin-right: 9px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  vertical-align: middle; }
+
+.monthpicker__calendar__month {
+  width: 40.5px;
+  height: 40.5px;
+  border-radius: 50%;
+  margin-left: 9px;
+  margin-right: 9px;
+  margin-top: 14px;
+  padding-top: 5px;
+  cursor: pointer; }
+  .monthpicker__calendar__month:hover {
+    color: #ffffff; }
+  .monthpicker__calendar__month.disabled {
+    color: #99a3ad;
+    cursor: default; }
+    .monthpicker__calendar__month.disabled:hover {
+      background-color: #ffffff; }
+
+.monthpicker__calendar__month--today {
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  margin-top: 13px; }
+
+.monthpicker__calendar__month--selected {
+  color: #ffffff; }
+
+/* .dropdown__menu {
+    position: absolute;
+    top: 42px;
+    text-align: left;
+    z-index: $layer-four;
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
+    background-color: $background-color--content;
+    border: none;
+    padding-top: $margin--regular;
+    padding-bottom: 0px;
+    min-width: 330px;
+    max-height: $dropdown-height--small;
+    visibility: hidden;
+    cursor: default;
+    &:before {
+      @extend .bg-image-menu-arrow;
+      content: "";
+      position: absolute;
+      display: inline-block;
+      z-index: $layer-two;
+      margin-top: -32px;
+      left: 20px;
+    }
+    a {
+      color: $menu-text-color;
+      text-decoration: none;
+      display: block;
+      border-bottom: none;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: $margin--regular;
+      padding-right: $margin--regular;
+    }
+    .dropdown--open & {
+      visibility: visible;
+    }
+    .dropdown-item--marked {
+      a {
+        @extend .border-left-color--primary;
+        border-left-width: 4px;
+        border-left-style: solid;
+        font-weight: bold;
+        padding-left: 11px;
+        padding-right: 11px;
+      }
+    }
+    .dropdown-item--selected {
+      a {
+        font-weight: bold;
+      }
+    }
+    .dropdown__menu__items {
+      ul {
+        li:last-child {
+          margin-bottom: 7px;
+        }
+      }
+    } */
 .lists-component .expandable-container-list {
   position: relative;
   margin-top: 112px;

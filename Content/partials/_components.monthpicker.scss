@@ -58,15 +58,146 @@ $dropdown-width--small: 100px;
     }
 }
 
+
+/* .monthpicker__calendar__header__year {
+    display: table-cell;
+} */
+
 .monthpicker__calendar__header {
     @extend .background-color--primary;
-    display: table-cell;
+    display: flex;
+    flex-direction: row;
     text-align: center;
     vertical-align: middle;
     color: $text-color--light;
     width: 250px;
     height: 60px;
     z-index: $layer-four;
+     :before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+    }
+}
+
+.monthpicker__calendar__header__previous-year {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-right: auto;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 23px;
+    font-family: Consolas;
+    margin-top: 14px;
+    &:hover {
+        @extend .background-color--secondary;
+        font-weight: bold;
+        color: $text-color--light;
+    }
+    &.disabled {
+        &:hover {
+            @extend .background-color--primary;
+            font-weight: normal;
+        }
+        color: $control-color--disabled;
+        cursor: default;
+    }
+    &:after {
+        content: "<";
+        width: 28px;
+        height: 28px;
+        font-size: 23px;
+        font-family: Consolas;
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+}
+
+.monthpicker__calendar__header__next-year {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-top: 14px;
+    &:hover {
+        @extend .background-color--secondary;
+        font-weight: bold;
+        color: $text-color--light;
+    }
+    &.disabled {
+        &:hover {
+            @extend .background-color--primary;
+            font-weight: normal;
+        }
+        color: $control-color--disabled;
+        cursor: default;
+    }
+    &:after {
+        content: ">";
+        width: 28px;
+        height: 28px;
+        font-size: 23px;
+        font-family: Consolas;
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 213px;
+    }
+}
+
+.monthpicker__calendar__content {
+    margin-top: 6px;
+    margin-left: 9px;
+    margin-right: 9px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.monthpicker__calendar__month {
+    width: 40.5px;
+    height: 40.5px;
+    border-radius: 50%;
+    margin-left: 9px;
+    margin-right: 9px;
+    margin-top: 14px;
+    padding-top: 5px;
+    cursor: pointer;
+    &:hover {
+        @extend .background-color--secondary;
+        color: $text-color--light;
+    }
+    &.disabled {
+        &:hover {
+            background-color: $background-color--content;
+        }
+        color: $control-color--disabled;
+        cursor: default;
+    }
+}
+
+.monthpicker__calendar__month--today {
+    @extend .border-color--primary;
+    background-color: $background-color--content;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 13px;
+}
+
+.monthpicker__calendar__month--selected {
+    @extend .background-color--primary;
+    color: $text-color--light;
 }
 
 

@@ -4,10 +4,59 @@
         <span *ngIf="!selectedDate" title="Välj månad">Välj månad</span>
 
         <div class="monthpicker__calendar">
-            <div class="monthpicker__calendar__header">{{selectedDate | date : 'yyyy'}}</div>
-            <div class="monthpicker__calendar__content"></div>
+            <div class="monthpicker__calendar__header">
+                <div class="monthpicker__calendar__header__previous-year" (mousedown)="onPreviousMouseDown($event)" [ngClass]="{'disabled':!previousYear}"></div>
+
+                <div *ngIf="displayedYear" class="monthpicker__calendar__header__year"> {{displayedYear.year}}</div>
+                <div *ngIf="!displayedYear" class="monthpicker__calendar__header__year">{{today | date : 'yyyy'}}</div>
+
+                <div class="monthpicker__calendar__header__next-year" (mousedown)="onNextMouseDown($event)" [ngClass]="{'disabled ':!nextYear}"></div>
+            </div>
+            <div class="monthpicker__calendar__content">
+                <ul>
+                    <li class="monthpicker__calendar__month " [ngClass]="{'disabled':displayedYear.months[0].disabled,
+                                                                          'monthpicker__calendar__month--today' :displayedYear.months[0].isCurrentMonth,
+                                                                          'monthpicker__calendar__month--selected' :displayedYear.months[0].selected}">Jan</li>
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[4].disabled,
+                                                                        'monthpicker__calendar__month--today' :displayedYear.months[4].isCurrentMonth,
+                                                                        'monthpicker__calendar__month--selected' :displayedYear.months[4].selected}">Maj</li>
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[8].disabled,
+                    'monthpicker__calendar__month--today' :displayedYear.months[8].isCurrentMonth,
+                    'monthpicker__calendar__month--selected' :displayedYear.months[8].selected}">Sep</li>
+
+                </ul>
+                <ul>
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[1].disabled,
+                    'monthpicker__calendar__month--today' :displayedYear.months[1].isCurrentMonth,
+                    'monthpicker__calendar__month--selected' :displayedYear.months[1].selected}">Feb</li>
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[5].disabled,
+                    'monthpicker__calendar__month--today' :displayedYear.months[5].isCurrentMonth,
+                    'monthpicker__calendar__month--selected' :displayedYear.months[5].selected}">Jun</li>
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[9].disabled,
+                    'monthpicker__calendar__month--today' :displayedYear.months[9].isCurrentMonth,
+                    'monthpicker__calendar__month--selected' :displayedYear.months[9].selected}">Okt</li>
+                </ul>
+                <ul>
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[2].disabled,
+                    'monthpicker__calendar__month--today' :displayedYear.months[2].isCurrentMonth,
+                    'monthpicker__calendar__month--selected' :displayedYear.months[2].selected}">Mar</li>
+
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[6].disabled,
+                    'monthpicker__calendar__month--today' :displayedYear.months[6].isCurrentMonth,
+                    'monthpicker__calendar__month--selected' :displayedYear.months[6].selected}">Jul</li>
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[10].disabled,
+                    'monthpicker__calendar__month--today' :displayedYear.months[10].isCurrentMonth,
+                    'monthpicker__calendar__month--selected' :displayedYear.months[10].selected}">Nov</li>
+
+                </ul>
+                <ul>
+
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[3].disabled}">Apr</li>
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[7].disabled}">Aug</li>
+                    <li class="monthpicker__calendar__month" [ngClass]="{'disabled':displayedYear.months[11].disabled}">Dec</li>
+                </ul>
+
+            </div>
+
         </div>
     </div>
-</div>
-
-<!--today | date : 'yyyy'-->
