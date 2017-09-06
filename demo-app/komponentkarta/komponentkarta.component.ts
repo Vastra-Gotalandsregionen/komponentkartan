@@ -16,6 +16,8 @@ export class KomponentkartaComponent implements AfterViewInit {
     public NotificationTypes = NotificationType;
     public NotificationIcons = NotificationIcon;
 
+    maxDate: Date = new Date(2018, 7, 1);
+
     selectedThemeOption: ISelectableItem;
     themeOptions: ISelectableItem[];
     dropDownItems25: IDropdownItem[];
