@@ -63,7 +63,8 @@ export class InputComponent implements OnInit {
         }
 
         if (this.pattern && this.pattern.length > 0) {
-            if (!this.value.match(this.pattern)) {
+            const valueToMatch = this.value ? this.value : '';
+            if (!valueToMatch.match(this.pattern)) {
                 return this.failedValidationResult;
             }
         }

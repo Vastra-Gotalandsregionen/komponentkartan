@@ -13,16 +13,16 @@
             <vgr-input [maxlength]=5></vgr-input>
           </div>
           <div>
-            Min-längd 3 tecken (valideras direkt)
-            <vgr-input [minlength]=3 [validateOnInit]="true"></vgr-input>
+            Exakt 3 tecken (A-Z) (valideras direkt)
+            <vgr-input [pattern]="'[A-Za-z]{3}'" [invalidText]="'Ange exakt tre bokstäver'" [validateOnInit]="true"></vgr-input>
           </div>
           <div>
-            Mellan 2 och 6 tecken (min-längd ger fel)
-            <vgr-input [minlength]=2 [maxlength]=6></vgr-input>
+            Mellan 2 och 6 tecken
+            <vgr-input [maxlength]=6></vgr-input>
           </div>
           <div>
             Heltal
-            <vgr-input [integer]="true"></vgr-input>
+            <vgr-input [pattern]="'^[0-9]+$'" [invalidText]="'Ange ett numeriskt värde'"></vgr-input>
           </div>
           <div>
             Decimaltal
