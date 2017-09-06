@@ -355,6 +355,7 @@ export class KomponentkartanApplicationComponent {
                             { title: 'Färgkarta', url: '/fargkarta' } as IMenuItem,
                             { title: 'Listor', url: '/lists' } as IMenuItem,
                             { title: 'Kalender', url: '/calendars' } as IMenuItem,
+                            { title: 'Inputfält', url: '/inputFields' } as IMenuItem,
                             { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem,
                         ] as IMenuItem[]
                     } as IMenuGroup

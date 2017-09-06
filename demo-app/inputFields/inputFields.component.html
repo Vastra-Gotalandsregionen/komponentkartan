@@ -1,0 +1,56 @@
+<div class="main-content">
+  <vgr-page-header [title]="'Inputfält'">
+  </vgr-page-header>
+
+  <div class="komponentkarta-components">
+    <div class="komponentkarta-component column-layout">
+      <div class="row-layout">
+        <div class="half">
+          <h2>Standard validation</h2>
+
+          <div>
+            Max-längd 5 tecken (går ej att göra fel)
+            <vgr-input [maxlength]=5></vgr-input>
+          </div>
+          <div>
+            Min-längd 3 tecken (valideras direkt)
+            <vgr-input [minlength]=3 [validateOnInit]="true"></vgr-input>
+          </div>
+          <div>
+            Mellan 2 och 6 tecken (min-längd ger fel)
+            <vgr-input [minlength]=2 [maxlength]=6></vgr-input>
+          </div>
+          <div>
+            Heltal
+            <vgr-input [integer]="true"></vgr-input>
+          </div>
+          <div>
+            Decimaltal
+            <vgr-input [decimal]="true"></vgr-input>
+          </div>
+          <div>
+            Får inte vara tomt
+            <vgr-input [required]="true"></vgr-input>
+          </div>
+          <div>
+            Ingen validering
+            <vgr-input></vgr-input>
+          </div>
+
+        </div>
+        <div class="half">
+          <h2>Custom validation</h2>
+          <div>
+            Stad i USA
+            <vgr-input [customValidator]="validateCityName.bind(this)" [value]="cityName" (valueChanged)="cityName = $event"></vgr-input>
+          </div>
+          <div>
+            E-postadress
+            <vgr-input [customValidator]="validateEmail.bind(this)"></vgr-input>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>

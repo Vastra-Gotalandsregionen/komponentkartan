@@ -12,6 +12,8 @@ import { MenuSelectorComponent } from './menuSelector/menuSelector.component'
 import { KomponentkartanModule } from '../component-package/komponentkartan.module';
 import { ListsComponent } from './lists/lists.component';
 import { CalendarsComponent } from './calendars/calendars.component';
+import { InputFieldsComponent } from './inputFields/inputFields.component'
+import { CityService } from './inputFields/cityService';
 
 import { RouterModule, Routes } from '@angular/router'
 import { appRoutes } from './routes'
@@ -31,7 +33,11 @@ import { appRoutes } from './routes'
         FargkartaComponent,
         MenuSelectorComponent,
         ListsComponent,
-        CalendarsComponent
+        CalendarsComponent,
+        InputFieldsComponent
+    ],
+    providers: [
+        CityService
     ],
 
     bootstrap: [KomponentkartanApplicationComponent]

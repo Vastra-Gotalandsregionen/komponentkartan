@@ -1,4 +1,11 @@
 @import "../../Content/komponentkartan.scss";
+.expandable-container-list {
+  position: relative;
+  margin-top: 112px;
+  transition: margin-top 0.6s ease;
+  transition-delay: 0.3s;
+}
+
 .lists-component {
   .expandable-container-list {
     position: relative;

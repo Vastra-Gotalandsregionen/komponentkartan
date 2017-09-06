@@ -1,0 +1,12 @@
+<div class="validation-container" [ngClass]="{
+    'validation-error--active' : validationErrorState == validationErrorStates.Active,
+    'validation-error--editing' : validationErrorState == validationErrorStates.Editing,
+    'validation-error--fixed' : validationErrorState == validationErrorStates.Fixed
+  }">
+  <input type="text" #inputTextBox class="validated-input__textbox" (keypress)="onKeyPressed($event)" (blur)="onLeave()" (focus)="onFocus()"
+    [ngModel]="value" (ngModelChange)="value = $event" [maxlength]="maxlength">
+  <div class="validation-container__validation-area">
+    <div class="validation-container__validation-area__icon"></div>
+    <div class="validation-container__validation-area__message">{{validationErrorMessage}}</div>
+  </div>
+</div>

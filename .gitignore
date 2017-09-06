@@ -184,7 +184,7 @@ build/
 # VardvalPortal-filer
 Content/main.css
 Content/komponentkartan.css
-
+demo-app/Content/demo-app.css
 
 demo-app/**/*.js
 demo-app/**/*.js.map
