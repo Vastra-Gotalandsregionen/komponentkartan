@@ -17,18 +17,26 @@ vgr-header {
 }
 
 .site-header-vgr {
-    min-height: $header-height;
-    border-bottom: solid 1px $border-color;
-    display: flex;
-    flex: none;
-    align-items: center;
-    background-color: $primary-color--default; //Images/dekal.png
-    background-repeat: no-repeat;
-    background-position: top right;
-    padding-right: $margin--fat;
+  min-height: $header-height;
+  border-bottom: solid 1px $border-color;
+  display: flex;
+  flex: none;
+  align-items: center;
+  background-color: $primary-color--default; //Images/dekal.png
+  background-repeat: no-repeat;
+  background-position: top right;
+  padding-right: $margin--fat;
+  @extend .background-color--primary;
+  transition: background-color ease-in 0.3s;
+  .theme--blue & {
     @extend .bg-image-vgr-header;
-    @extend .background-color--primary-color;
-    transition: background-color ease-in 0.3s;
+  }
+  .theme--red & {
+    @extend .bg-image-vgr-header;
+  }
+  .theme--green & {
+    @extend .bg-image-vgr-header;
+  }
 }
 
 //THEMING
