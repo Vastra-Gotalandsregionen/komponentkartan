@@ -126,6 +126,11 @@ export class KomponentkartaComponent implements AfterViewInit {
                 : selectedTheme.id === 'red' ? 'vgpv'
                     : selectedTheme.id === 'green' ? 'rehab' : 'neutral';
 
+                    
+        $('komponentkartan-application').removeClass('theme--blue theme--red theme--neutral theme--green');
+        $('komponentkartan-application').addClass('theme--' + selectedTheme.id);
+
+
         $('.main-content').removeClass('theme--blue theme--red theme--neutral theme--green');
         $('.main-content').addClass('theme--' + selectedTheme.id);
 

@@ -17,41 +17,21 @@ vgr-header {
 }
 
 .site-header-vgr {
-  min-height: $header-height;
-  border-bottom: solid 1px $border-color;
-  display: flex;
-  flex: none;
-  align-items: center;
-  background-color: $primary-color--default; //Images/dekal.png
-  background-repeat: no-repeat;
-  background-position: top right;
-  padding-right: $margin--fat;
+    min-height: $header-height;
+    border-bottom: solid 1px $border-color;
+    display: flex;
+    flex: none;
+    align-items: center;
+    background-color: $primary-color--default; //Images/dekal.png
+    background-repeat: no-repeat;
+    background-position: top right;
+    padding-right: $margin--fat;
+    @extend .bg-image-vgr-header;
+    @extend .background-color--primary-color;
+    transition: background-color ease-in 0.3s;
 }
 
 //THEMING
-.site-header-vgr--blue {
-  @extend .bg-image-vgr-header;
-  background-color: $primary-color--blue;
-  transition: background-color ease-in 0.3s;
-}
-
-.site-header-vgr--default {
-  background-color: $primary-color--default;
-  transition: background-color ease-in 0.3s;
-}
-
-.site-header-vgr--red {
-  @extend .bg-image-vgr-header;
-  background-color: $primary-color--red;
-  transition: background-color ease-in 0.3s;
-}
-
-.site-header-vgr--green {
-  @extend .bg-image-vgr-header;
-  background-color: $primary-color--green;
-  transition: background-color ease-in 0.3s;
-}
-
 .header__vgr-logo {
   @extend .bg-image-vgr-logo;
   margin-left: 16px;
