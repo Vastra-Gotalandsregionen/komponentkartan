@@ -117,13 +117,15 @@ export class MonthpickerComponent implements OnInit {
     onNextMouseDown(event: Event) {
         event.cancelBubble = true;
 
-        this.setDisplayedYear(new Date(this.nextYear.year, 0, 1));
+        if (this.nextYear)
+            this.setDisplayedYear(new Date(this.nextYear.year, 0, 1));
     }
 
     onPreviousMouseDown(event: Event) {
         event.cancelBubble = true;
 
-        this.setDisplayedYear(new Date(this.previousYear.year, 0, 1));
+        if (this.previousYear)
+            this.setDisplayedYear(new Date(this.previousYear.year, 0, 1));
     }
 
     onMouseDown(event: Event) {
@@ -136,6 +138,15 @@ export class MonthpickerComponent implements OnInit {
         }
     }
 
+    onSelectMonthMouseDown(selectedDate: Date) {
+        this.selectDate(selectedDate)
+    }
+
+    onSelectMonthKeyDown(event: KeyboardEvent) {
+        if (event.keyCode === 13 || event.keyCode === 32) {
+
+        }
+    }
     private toggleCalendar(event: Event) {
         if (this.preventCollapse) {
             event.cancelBubble = true;
@@ -155,22 +166,24 @@ export class MonthpickerComponent implements OnInit {
         }
     }
 
-    selectDate(item: Date) {
-        if (!item) {
+
+    selectDate(date: Date) {
+        if (!date) {
             return;
         }
 
-        /*   this.items.forEach(x => x.selected = false);
-  
-  
-          item.selected = true;
-          item.marked = true;
-          this.selectedItem = item;
-          this.selectedDateChanged.emit(item); */
+        let index = this.years.indexOf(this.years.filter(y => y.year === date.getFullYear())[0])
+        let selectedMonth = this.years[index].months.filter(m => m.date.getMonth() === date.getMonth())[0];
 
+        if (selectedMonth.disabled)
+            return;
 
+        this.years.forEach(y => y.months.forEach(m => m.selected = false));
+        selectedMonth.selected = true;
 
-
+        this.selectedDate = date;
+        this.setDisplayedYear(this.selectedDate);
+        this.selectedDateChanged.emit(date);
     }
 
 
