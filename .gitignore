@@ -188,7 +188,7 @@ Content/komponentkartan.css
 
 demo-app/**/*.js
 demo-app/**/*.js.map
-demo-app/Content/
+demo-app/Content/**
 component-package/**/*.js
 component-package/**/*.js.map
 
