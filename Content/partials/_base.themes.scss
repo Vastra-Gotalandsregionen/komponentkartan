@@ -38,6 +38,7 @@
     }
 }
 
+@include theme(border-top-color);
 @include theme(border-left-color);
 @include theme(border-color);
 @include theme(color);

@@ -162,6 +162,24 @@ table {
 * .background-color--secondary
 * With themes for all defined colors.
 **********************************************************************************/
+.border-top-color--primary, .information-panel {
+  border-top-color: #314152; }
+  .theme--blue .border-top-color--primary, .theme--blue .information-panel {
+    border-top-color: #006298; }
+  .theme--red .border-top-color--primary, .theme--red .information-panel {
+    border-top-color: #9d2235; }
+  .theme--green .border-top-color--primary, .theme--green .information-panel {
+    border-top-color: #4a773c; }
+
+.border-top-color--secondary {
+  border-top-color: #99a3ad; }
+  .theme--blue .border-top-color--secondary {
+    border-top-color: #598eb6; }
+  .theme--red .border-top-color--secondary {
+    border-top-color: #ba6071; }
+  .theme--green .border-top-color--secondary {
+    border-top-color: #7fa276; }
+
 .border-left-color--primary, .header-menu-item--marked, .dropdown__menu .dropdown-item--marked a {
   border-left-color: #314152; }
   .theme--blue .border-left-color--primary, .theme--blue .header-menu-item--marked, .theme--blue .dropdown__menu .dropdown-item--marked a, .dropdown__menu .dropdown-item--marked .theme--blue a {
@@ -929,18 +947,6 @@ input {
 
 .information-panel__footer {
   flex-shrink: 1; }
-
-.information-panel--blue {
-  border-top-color: #006298; }
-
-.information-panel--green {
-  border-top-color: #4a773c; }
-
-.information-panel--red {
-  border-top-color: #9d2235; }
-
-.information-panel--default {
-  border-top-color: #314152; }
 
 @media screen and (min-width: 1459px) {
   .information-panel__content {
