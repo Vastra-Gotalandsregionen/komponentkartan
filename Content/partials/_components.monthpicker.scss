@@ -1,0 +1,261 @@
+$dropdown-height--small: 285px;
+$dropdown-height--medium: 340px;
+$dropdown-height--medium-with-filter: 360px;
+$dropdown-width--medium: 160px;
+$dropdown-width--small: 100px;
+.monthpicker__dropdown {
+    @extend .background-color--primary;
+    position: relative;
+    display: inline-block;
+    height: $component-height;
+    width: $dropdown-width--medium;
+    padding: 0px; //Text på vald item
+    cursor: pointer;
+    span {
+        padding-left: $margin--slim;
+        padding-top: 2px;
+        vertical-align: middle;
+        background-color: white;
+        width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        border-top: $border--single solid $control-border-color--default;
+        border-left: $border--single solid $control-border-color--default;
+        border-bottom: $border--single solid $control-border-color--default;
+        border-radius: 1px;
+    }
+    &:after {
+        @extend .bg-image-icon-calendar;
+        content: "";
+        vertical-align: middle;
+        text-align: center;
+        float: right;
+        background-color: transparent;
+        cursor: pointer;
+        margin-top: 0px;
+        padding-right: 3px;
+        width: 36px;
+        height: 30px;
+    }
+}
+
+.monthpicker__calendar {
+    position: absolute;
+    top: 42px;
+    text-align: left;
+    z-index: $layer-four;
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
+    background-color: $background-color--content;
+    border: none;
+    padding-bottom: 0px;
+    width: 250px;
+    height: 250px;
+    visibility: hidden;
+    cursor: default;
+    .monthpicker--open & {
+        visibility: visible;
+    }
+}
+
+
+/* .monthpicker__calendar__header__year {
+    display: table-cell;
+} */
+
+.monthpicker__calendar__header {
+    @extend .background-color--primary;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    vertical-align: middle;
+    color: $text-color--light;
+    width: 250px;
+    height: 60px;
+    z-index: $layer-four;
+     :before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+    }
+}
+
+.monthpicker__calendar__header__previous-year {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-right: auto;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 23px;
+    font-family: Consolas;
+    margin-top: 14px;
+    &:hover {
+        @extend .background-color--secondary;
+        font-weight: bold;
+        color: $text-color--light;
+    }
+    &.disabled {
+        &:hover {
+            @extend .background-color--primary;
+            font-weight: normal;
+        }
+        color: $control-color--disabled;
+        cursor: default;
+    }
+    &:after {
+        content: "<";
+        width: 28px;
+        height: 28px;
+        font-size: 23px;
+        font-family: Consolas;
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+}
+
+.monthpicker__calendar__header__next-year {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-top: 14px;
+    &:hover {
+        @extend .background-color--secondary;
+        font-weight: bold;
+        color: $text-color--light;
+    }
+    &.disabled {
+        &:hover {
+            @extend .background-color--primary;
+            font-weight: normal;
+        }
+        color: $control-color--disabled;
+        cursor: default;
+    }
+    &:after {
+        content: ">";
+        width: 28px;
+        height: 28px;
+        font-size: 23px;
+        font-family: Consolas;
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 213px;
+    }
+}
+
+.monthpicker__calendar__content {
+    margin-top: 6px;
+    margin-left: 9px;
+    margin-right: 9px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.monthpicker__calendar__month {
+    width: 40.5px;
+    height: 40.5px;
+    border-radius: 50%;
+    margin-left: 9px;
+    margin-right: 9px;
+    margin-top: 14px;
+    padding-top: 5px;
+    cursor: pointer;
+    &:hover {
+        @extend .background-color--secondary;
+        color: $text-color--light;
+    }
+    &.disabled {
+        &:hover {
+            background-color: $background-color--content;
+        }
+        color: $control-color--disabled;
+        cursor: default;
+    }
+}
+
+.monthpicker__calendar__month--today {
+    @extend .border-color--primary;
+    background-color: $background-color--content;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 13px;
+}
+
+.monthpicker__calendar__month--selected {
+    @extend .background-color--primary;
+    color: $text-color--light;
+}
+
+
+/* .dropdown__menu {
+    position: absolute;
+    top: 42px;
+    text-align: left;
+    z-index: $layer-four;
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
+    background-color: $background-color--content;
+    border: none;
+    padding-top: $margin--regular;
+    padding-bottom: 0px;
+    min-width: 330px;
+    max-height: $dropdown-height--small;
+    visibility: hidden;
+    cursor: default;
+    &:before {
+      @extend .bg-image-menu-arrow;
+      content: "";
+      position: absolute;
+      display: inline-block;
+      z-index: $layer-two;
+      margin-top: -32px;
+      left: 20px;
+    }
+    a {
+      color: $menu-text-color;
+      text-decoration: none;
+      display: block;
+      border-bottom: none;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: $margin--regular;
+      padding-right: $margin--regular;
+    }
+    .dropdown--open & {
+      visibility: visible;
+    }
+    .dropdown-item--marked {
+      a {
+        @extend .border-left-color--primary;
+        border-left-width: 4px;
+        border-left-style: solid;
+        font-weight: bold;
+        padding-left: 11px;
+        padding-right: 11px;
+      }
+    }
+    .dropdown-item--selected {
+      a {
+        font-weight: bold;
+      }
+    }
+    .dropdown__menu__items {
+      ul {
+        li:last-child {
+          margin-bottom: 7px;
+        }
+      }
+    } */
