@@ -12,32 +12,33 @@
 **********************************************************************************/
 
 @mixin theme($property) {
-    .#{$property}--primary {
-        #{$property}: $primary-color--default;
-        .theme--blue & {
-            #{$property}: $primary-color--blue;
-        }
-        .theme--red & {
-            #{$property}: $primary-color--red;
-        }
-        .theme--green & {
-            #{$property}: $primary-color--green;
-        }
+  .#{$property}--primary {
+    #{$property}: $primary-color--default;
+    .theme--blue & {
+      #{$property}: $primary-color--blue;
     }
-    .#{$property}--secondary {
-        #{$property}: $secondary-color--default;
-        .theme--blue & {
-            #{$property}: $secondary-color--blue;
-        }
-        .theme--red & {
-            #{$property}: $secondary-color--red;
-        }
-        .theme--green & {
-            #{$property}: $secondary-color--green;
-        }
+    .theme--red & {
+      #{$property}: $primary-color--red;
     }
+    .theme--green & {
+      #{$property}: $primary-color--green;
+    }
+  }
+  .#{$property}--secondary {
+    #{$property}: $secondary-color--default;
+    .theme--blue & {
+      #{$property}: $secondary-color--blue;
+    }
+    .theme--red & {
+      #{$property}: $secondary-color--red;
+    }
+    .theme--green & {
+      #{$property}: $secondary-color--green;
+    }
+  }
 }
 
+@include theme(border-top-color);
 @include theme(border-left-color);
 @include theme(border-color);
 @include theme(color);
@@ -50,22 +51,22 @@
 *********************************************************************************************/
 
 @mixin button-enabling--secondary($name, $color) {
-    @keyframes #{$name} {
-        0% {
-            background-color: $text-color--light;
-        }
-        50% {
-            box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-            background-color: $color;
-            border-color: $color;
-            border-width: 1px;
-            border-style: solid;
-            color: $text-color--light;
-        }
-        100% {
-            background-color: $text-color--light;
-        }
+  @keyframes #{$name} {
+    0% {
+      background-color: $text-color--light;
     }
+    50% {
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+      background-color: $color;
+      border-color: $color;
+      border-width: 1px;
+      border-style: solid;
+      color: $text-color--light;
+    }
+    100% {
+      background-color: $text-color--light;
+    }
+  }
 }
 
 @include button-enabling--secondary(button-enabling--secondary-red, $primary-color--red);
@@ -73,15 +74,15 @@
 @include button-enabling--secondary(button-enabling--secondary-blue, $primary-color--blue);
 @include button-enabling--secondary(button-enabling--secondary-green, $primary-color--green);
 .button--enabling.button--secondary {
-    transition: background-color 0.5s ease, color 0.5s ease;
-    animation: button-enabling--secondary-neutral 1.8s;
-    .theme--red & {
-        animation: button-enabling--secondary-red 1.8s;
-    }
-    .theme--blue & {
-        animation: button-enabling--secondary-blue 1.8s;
-    }
-    .theme--green & {
-        animation: button-enabling--secondary-green 1.8s;
-    }
+  transition: background-color 0.5s ease, color 0.5s ease;
+  animation: button-enabling--secondary-neutral 1.8s;
+  .theme--red & {
+    animation: button-enabling--secondary-red 1.8s;
+  }
+  .theme--blue & {
+    animation: button-enabling--secondary-blue 1.8s;
+  }
+  .theme--green & {
+    animation: button-enabling--secondary-green 1.8s;
+  }
 }
