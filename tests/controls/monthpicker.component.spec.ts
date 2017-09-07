@@ -7,7 +7,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 import { MonthpickerComponent } from "../../component-package/controls/monthpicker/monthpicker.component";
-
+import { ICalendarMonth } from "../../component-package/models/calendarMonth.model";
 
 describe("[MonthpickerComponent]", () => {
     let component: MonthpickerComponent;
@@ -246,8 +246,36 @@ describe("[MonthpickerComponent]", () => {
         it("Max date has last month in year", () => {
             expect(component.maxDate.getMonth()).toBe(11);
         });
+    });
+
+    describe("When selecting a month", () => {
+        let selectedMonth: ICalendarMonth;
+        let currentYear: number;
+        beforeEach(() => {
+            component.ngOnInit();
+            selectedMonth = component.years[0].months[0];
+            component.onSelectMonthMouseDown(selectedMonth);
+        });
+        it("the month is selected", () => {
+            expect(selectedMonth.selected).toBe(true);
+        });
+    });
+
+    describe("When selecting a month and the month is disabled", () => {
+        let selectedMonth: ICalendarMonth;
+        let currentYear: number;
+        beforeEach(() => {
+            currentYear = new Date().getFullYear();
+            component.minDate = new Date(currentYear, 1, 1);
+            component.ngOnInit();
+            selectedMonth = component.years[0].months[0];
+            component.onSelectMonthMouseDown(selectedMonth);
 
 
+        });
+        it("the month is not selected", () => {
+            expect(selectedMonth.selected).toBe(false);
+        });
     });
 });
 

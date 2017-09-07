@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
@@ -26,7 +26,7 @@ export class MonthpickerComponent implements OnInit {
     expanded: boolean;
     protected preventCollapse: boolean;
 
-    constructor() {
+    constructor(protected elementRef: ElementRef) {
         this.expanded = false;
         this.years = [];
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
@@ -138,8 +138,8 @@ export class MonthpickerComponent implements OnInit {
         }
     }
 
-    onSelectMonthMouseDown(selectedDate: Date) {
-        this.selectDate(selectedDate)
+    onSelectMonthMouseDown(selectedMonth: ICalendarMonth) {
+        this.selectDate(selectedMonth)
     }
 
     onSelectMonthKeyDown(event: KeyboardEvent) {
@@ -147,6 +147,18 @@ export class MonthpickerComponent implements OnInit {
 
         }
     }
+
+    @HostListener('document:click', ['$event'])
+    onDocumentClick(event: any) {
+
+        const target = event.target || event.srcElement || event.currentTarget;
+
+        if (!this.elementRef.nativeElement.contains(target)) {
+            this.expanded = false;
+        }
+    }
+
+
     private toggleCalendar(event: Event) {
         if (this.preventCollapse) {
             event.cancelBubble = true;
@@ -162,18 +174,16 @@ export class MonthpickerComponent implements OnInit {
         const target = event.target || event.srcElement || event.currentTarget;
         const element = $(target);
         if (!element.is('input')) {
+            this.setDisplayedYear(this.selectedDate);
             this.expanded = !this.expanded;
         }
     }
 
 
-    selectDate(date: Date) {
-        if (!date) {
+    selectDate(selectedMonth: ICalendarMonth) {
+        if (!selectedMonth) {
             return;
         }
-
-        let index = this.years.indexOf(this.years.filter(y => y.year === date.getFullYear())[0])
-        let selectedMonth = this.years[index].months.filter(m => m.date.getMonth() === date.getMonth())[0];
 
         if (selectedMonth.disabled)
             return;
@@ -181,9 +191,9 @@ export class MonthpickerComponent implements OnInit {
         this.years.forEach(y => y.months.forEach(m => m.selected = false));
         selectedMonth.selected = true;
 
-        this.selectedDate = date;
+        this.selectedDate = selectedMonth.date;
         this.setDisplayedYear(this.selectedDate);
-        this.selectedDateChanged.emit(date);
+        this.selectedDateChanged.emit(selectedMonth.date);
     }
 
 

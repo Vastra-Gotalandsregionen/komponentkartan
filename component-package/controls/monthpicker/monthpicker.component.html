@@ -14,47 +14,47 @@
             </div>
             <div class="monthpicker__calendar__content">
                 <ul>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[0].date)" (keydown)="onSelectMonthKeyDown(displayedYear.months[0].date)" [ngClass]="{'disabled':displayedYear.months[0].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[0])" [ngClass]="{'disabled':displayedYear.months[0].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[0].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[0].selected}">Jan</li>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[4].date)" [ngClass]="{'disabled':displayedYear.months[4].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[4])" [ngClass]="{'disabled':displayedYear.months[4].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[4].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[4].selected}">Maj</li>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[8].date)" [ngClass]="{'disabled':displayedYear.months[8].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[8])" [ngClass]="{'disabled':displayedYear.months[8].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[8].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[8].selected}">Sep</li>
                 </ul>
                 <ul>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[1].date)" [ngClass]="{'disabled':displayedYear.months[1].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[1])" [ngClass]="{'disabled':displayedYear.months[1].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[1].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[1].selected}">Feb</li>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[5].date)" [ngClass]="{'disabled':displayedYear.months[5].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[5])" [ngClass]="{'disabled':displayedYear.months[5].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[5].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[5].selected}">Jun</li>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[9].date)" [ngClass]="{'disabled':displayedYear.months[9].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[9])" [ngClass]="{'disabled':displayedYear.months[9].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[9].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[9].selected}">Okt</li>
                 </ul>
                 <ul>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[2].date)" [ngClass]="{'disabled':displayedYear.months[2].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[2])" [ngClass]="{'disabled':displayedYear.months[2].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[2].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[2].selected}">Mar</li>
 
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[6].date)" [ngClass]="{'disabled':displayedYear.months[6].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[6])" [ngClass]="{'disabled':displayedYear.months[6].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[6].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[6].selected}">Jul</li>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[10].date)" [ngClass]="{'disabled':displayedYear.months[10].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[10])" [ngClass]="{'disabled':displayedYear.months[10].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[10].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[10].selected}">Nov</li>
                 </ul>
                 <ul>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[3].date)" [ngClass]="{'disabled':displayedYear.months[3].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[3])" [ngClass]="{'disabled':displayedYear.months[3].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[3].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[3].selected}">Apr</li>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[7].date)" [ngClass]="{'disabled':displayedYear.months[7].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[7])" [ngClass]="{'disabled':displayedYear.months[7].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[7].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[7].selected}">Aug</li>
-                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[11].date)" [ngClass]="{'disabled':displayedYear.months[11].disabled,
+                    <li class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown(displayedYear.months[11])" [ngClass]="{'disabled':displayedYear.months[11].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[11].isCurrentMonth,
                                     'monthpicker__calendar__month--selected' :displayedYear.months[11].selected}">Dec</li>
                 </ul>
