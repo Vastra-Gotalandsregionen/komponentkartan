@@ -180,7 +180,7 @@ export class MonthpickerComponent implements OnInit {
     }
 
 
-    selectDate(selectedMonth: ICalendarMonth) {
+    private selectDate(selectedMonth: ICalendarMonth) {
         if (!selectedMonth) {
             return;
         }
