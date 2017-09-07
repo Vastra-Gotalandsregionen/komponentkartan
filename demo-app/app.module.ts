@@ -1,4 +1,6 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core'
+
+
+import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID } from '@angular/core'
 import { BrowserModule, Title } from '@angular/platform-browser'
 
 import { FormsModule } from '@angular/forms';
@@ -37,9 +39,11 @@ import { appRoutes } from './routes'
         InputFieldsComponent
     ],
     providers: [
-        CityService
+        CityService, { provide: LOCALE_ID, useValue: 'sv-SE' }
     ],
 
     bootstrap: [KomponentkartanApplicationComponent]
 })
 export class AppModule { }
+
+
