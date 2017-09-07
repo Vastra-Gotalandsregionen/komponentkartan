@@ -173,7 +173,10 @@ export class MonthpickerComponent implements OnInit {
     private toggleExpand(event: Event) {
         const target = event.target || event.srcElement || event.currentTarget;
         const element = $(target);
-        if (!element.is('input')) {
+
+        if ((element.hasClass('monthpicker__calendar__month') && !element.hasClass('disabled')) ||
+            element.hasClass('monthpicker__dropdown') ||
+            element.parent().hasClass('monthpicker__dropdown')) {
             this.setDisplayedYear(this.selectedDate);
             this.expanded = !this.expanded;
         }

@@ -6,7 +6,7 @@
         <div class="komponentkarta-component row-layout row-layout--padded">
             <div>
                 <p>Default formatering</p>
-                <vgr-monthpicker style="margin-top: 20px" [maxDate]="maxDate"></vgr-monthpicker>
+                <vgr-monthpicker (selectedDateChanged)="selectedDate=$event" style="margin-top: 20px" [maxDate]="maxDate"></vgr-monthpicker>
             </div>
             <div>
                 <p>MM yyyy formatering</p>
@@ -14,6 +14,8 @@
             </div>
 
         </div>
+        <span>Senast valt datum: </span>
+        <span>{{selectedDate | date : 'yyyy MMM'}}</span>
     </div>
 
 </div>

@@ -46,7 +46,7 @@ $dropdown-width--small: 100px;
 
 .monthpicker__calendar {
     position: absolute;
-    top: 43px;
+    top: 38px;
     text-align: left;
     z-index: $layer-four;
     box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
@@ -56,6 +56,7 @@ $dropdown-width--small: 100px;
     width: 250px;
     height: 250px;
     visibility: hidden;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     cursor: default;
     .monthpicker--open & {
         visibility: visible;
@@ -195,6 +196,10 @@ $dropdown-width--small: 100px;
     border-width: 1px;
     border-style: solid;
     margin-top: 13px;
+    &:hover {
+        border: none;
+        margin-top: 14px;
+    }
 }
 
 .monthpicker__calendar__month--selected {
