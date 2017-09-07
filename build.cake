@@ -149,6 +149,11 @@ Task("Build-TypescriptAndSass")
         ScriptName = "_compile-css",
         WorkingDirectory = "./"
     });
+	NpmRunScript(new NpmRunScriptSettings
+    {
+        ScriptName = "_compile-demo-app-css",
+        WorkingDirectory = "./"
+    });
 });
 
 
