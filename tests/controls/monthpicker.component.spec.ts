@@ -12,7 +12,7 @@ import { ICalendarMonth } from "../../component-package/models/calendarMonth.mod
 describe("[MonthpickerComponent]", () => {
     let component: MonthpickerComponent;
     beforeEach(() => {
-        component = new MonthpickerComponent();
+        component = new MonthpickerComponent(null);
 
     });
     describe("When initialized with default settings", () => {
