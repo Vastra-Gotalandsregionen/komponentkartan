@@ -92,6 +92,9 @@ Task("PrebuildActions")
     if (!DirectoryExists("./BuildOutput/demo-app")) {
         CreateDirectory("./BuildOutput/demo-app");
 	}
+	if (!DirectoryExists("./BuildOutput/demo-app/content")) {
+        CreateDirectory("./BuildOutput/demo-app/content");
+	}
     if (!DirectoryExists("./BuildOutput/component-package")) {
         CreateDirectory("./BuildOutput/component-package");
 	}
