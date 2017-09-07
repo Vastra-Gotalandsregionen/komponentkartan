@@ -67,6 +67,7 @@ Task("PrebuildActions")
 
 	Information("Ta bort css:er");
 	DeleteFiles("./Content/*.css");
+	DeleteFiles("./demo-app/Content*.css");
 
 	CleanDirectories(new DirectoryPath[]
     {
@@ -163,6 +164,7 @@ Task("Move-TypescriptAndSass")
 
         //Kopiera *.css
 		CopyFiles("./content/*.css", "./BuildOutput/content", true);
+		CopyFiles("./demo-app/content/*.css", "./BuildOutput/demo-app/content", true);
 });
 
 Task("Build-Frontend")
