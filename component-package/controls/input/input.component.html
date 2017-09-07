@@ -4,9 +4,9 @@
     'validation-error--fixed' : validationErrorState == validationErrorStates.Fixed
   }">
   <input type="text" #inputTextBox class="validated-input__textbox" (blur)="onLeave()" (focus)="onFocus()" [ngModel]="value"
-    (ngModelChange)="value = $event" [maxlength]="maxlength">
-  <div class="validation-container__validation-area">
+    title="{{title}}" placeholder="{{placeholder}}" (ngModelChange)="value = $event" [maxlength]="maxlength">
+  <div class="validation-container__validation-area" title="{{validationErrorMessage}}">
     <div class="validation-container__validation-area__icon"></div>
-    <div class="validation-container__validation-area__message">{{validationErrorMessage}}</div>
+    <div class="validation-container__validation-area__message">{{validationErrorMessage | truncate:64}}</div>
   </div>
 </div>

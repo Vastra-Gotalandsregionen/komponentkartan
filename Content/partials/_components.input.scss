@@ -1,13 +1,8 @@
 $input-width--small: 270px;
 $input-width--medium: 290px;
-vgr-input {
-  width: 290px;
-  max-width: 290px;
-}
-
 .validated-input__textbox {
-  width: 270px;
-  max-width: 270px;
+  width: $input-width--small;
+  max-width: $input-width--small;
   @extend .border-color--primary;
   .validation-error--active & {
     border-color: $primary-color--error;
@@ -18,8 +13,8 @@ vgr-input {
   padding: 0px;
   background-color: inherit;
   position: relative;
-  width: 290px;
-  max-width: 290px;
+  width: calc(#{$input-width--small} + #{$margin--slim});
+  max-width: calc(#{$input-width--small} + #{$margin--slim});
   &:after {
     content: "";
     @extend .bg-image-icon-ok-check--green;
@@ -34,15 +29,15 @@ vgr-input {
     visibility: hidden;
   }
   &.validation-error--active {
-    padding: $margin--slim;
-    margin-left: -$margin--slim;
+    padding: $margin--xs-slim;
+    margin-left: -$margin--xs-slim;
     background-color: $secondary-color--error;
     transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
   }
   &.validation-error--editing {
     background-color: $background-color--default;
-    padding: $margin--slim;
-    margin-left: -$margin--slim;
+    padding: $margin--xs-slim;
+    margin-left: -$margin--xs-slim;
     transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
   }
   &.validation-error--fixed {
@@ -88,5 +83,30 @@ vgr-input {
   .validation-error--editing & {
     display: inline-block;
     color: $text-color--default;
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .validated-input__textbox {
+    width: $input-width--medium;
+    max-width: $input-width--medium;
+  }
+  .validation-container {
+    width: calc(#{$input-width--medium} + #{$margin--slim} + #{$margin--slim});
+    max-width: calc(#{$input-width--medium} + #{$margin--slim} + #{$margin--slim});
+    &.validation-error--active {
+      padding: $margin--slim;
+      margin-left: -$margin--slim;
+    }
+    &.validation-error--editing {
+      padding: $margin--slim;
+      margin-left: -$margin--slim;
+    }
+    &:after {
+      left: 260px;
+    }
+  }
+  .validation-container__validation-area__message {
+    max-width: 259px;
   }
 }

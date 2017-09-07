@@ -19,15 +19,12 @@ export class InputComponent implements OnInit {
     validationErrorState: ValidationErrorState;
     validationErrorMessage: string;
 
-
+    @Input() placeholder: string;
+    @Input() title: string;
 
     // Standardvalidering
     @Input() maxlength?: number;
-    @Input() minlength?: number;
     @Input() required: boolean;
-    @Input() integer: boolean;
-    @Input() decimal: boolean;
-
     @Input() pattern: string;
     @Input() invalidText: string;
 
@@ -38,8 +35,17 @@ export class InputComponent implements OnInit {
         this.validationErrorState = ValidationErrorState.NoError;
     }
 
-    get failedValidationResult(): IValidationResult {
-        return { isValid: false, validationError: this.invalidText } as IValidationResult
+    get invalidPatternValidationResult(): IValidationResult {
+        return {
+            isValid: false,
+            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : 'Felaktigt format'
+        } as IValidationResult
+    }
+    get emptyRequiredFieldValidationResult(): IValidationResult {
+        return {
+            isValid: false,
+            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : 'Fältet är obligatoriskt'
+        } as IValidationResult
     }
     get successfulValidationResult(): IValidationResult {
         return { isValid: true, validationError: '' } as IValidationResult
@@ -59,13 +65,13 @@ export class InputComponent implements OnInit {
 
     validateInput(): IValidationResult {
         if (this.required && (!this.value || this.value.length === 0)) {
-            return this.failedValidationResult;
+            return this.emptyRequiredFieldValidationResult;
         }
 
         if (this.pattern && this.pattern.length > 0) {
             const valueToMatch = this.value ? this.value : '';
             if (!valueToMatch.match(this.pattern)) {
-                return this.failedValidationResult;
+                return this.invalidPatternValidationResult;
             }
         }
 
@@ -74,7 +80,6 @@ export class InputComponent implements OnInit {
         }
         return this.customValidator(this.value);
     }
-
 
     onLeave(): void {
         this.valueChanged.emit(this.value);
@@ -95,7 +100,10 @@ export class InputComponent implements OnInit {
                 this.setValidationState(ValidationErrorState.Fixed);
                 return;
             }
-            this.setValidationState(ValidationErrorState.NoError);
+            if (this.validationErrorState === ValidationErrorState.Fixed) {
+                this.setValidationState(ValidationErrorState.NoError);
+                return;
+            }
         }
 
         this.setValidationState(ValidationErrorState.Active);
@@ -104,20 +112,6 @@ export class InputComponent implements OnInit {
 
     setValidationState(newValidationErrorState: ValidationErrorState) {
         this.validationErrorState = newValidationErrorState;
-    }
-
-    /* Validering av datatyper, bryta ut till egen service */
-    isInt(value: any) {
-        if (isNaN(value)) {
-            return false;
-        }
-        const x = parseFloat(value);
-        return (x | 0) === x;
-    }
-
-    isNumber(value: any) {
-        return !isNaN(value);
-
     }
 }
 

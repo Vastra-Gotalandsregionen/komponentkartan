@@ -18,18 +18,22 @@
           </div>
           <div>
             Mellan 2 och 6 tecken
-            <vgr-input [maxlength]=6></vgr-input>
+            <vgr-input [pattern]="'^.{2,6}$'" [maxlength]=6 [invalidText]="'Ange mellan 2-6 tecken'"></vgr-input>
           </div>
           <div>
             Heltal
             <vgr-input [pattern]="'^[0-9]+$'" [invalidText]="'Ange ett numeriskt värde'"></vgr-input>
           </div>
           <div>
-            Decimaltal
-            <vgr-input [decimal]="true"></vgr-input>
+            Decimaltal (standardfelmeddelande)
+            <vgr-input [pattern]="'/^\d*\.?\d*$/'"></vgr-input>
           </div>
           <div>
-            Får inte vara tomt
+            Obligatoriskt (jättelångt felmeddelande)
+            <vgr-input [required]="true" [invalidText]="'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'"></vgr-input>
+          </div>
+          <div>
+            Obligatoriskt (standardfelmeddelande)
             <vgr-input [required]="true"></vgr-input>
           </div>
           <div>

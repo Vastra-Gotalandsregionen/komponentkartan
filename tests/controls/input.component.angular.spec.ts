@@ -24,6 +24,7 @@ import {
 import {
     InputComponent, ValidationErrorState
 } from '../../component-package/controls/input/input.component';
+import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
 
 describe('[InputComponent]', () => {
@@ -36,7 +37,7 @@ describe('[InputComponent]', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [InputComponent],
+            declarations: [InputComponent, TruncatePipe],
             imports: [CommonModule, FormsModule]
         });
 
@@ -67,20 +68,32 @@ describe('[InputComponent]', () => {
         });
     });
 
-    ///Hej då
-    // describe('When no invalidText is sen on the input that is required', () => {
-    //   beforeEach (() => {
-    //     component.required = true;
-    //     component.invalidText = 'Value requried';
-    //     component.ngOnInit();
-    //   });
 
-    //   it('The invalidText gets "Fältet är obligatoriskt"', () => {
-    //     expect(component.validationErrorMessage).toBe('Fältet är obligatoriskt')
-    //   });
+    describe('When no invalidText is set and validate on init is set', () => {
+        beforeEach(() => {
+            component.validateOnInit = true;
+        });
 
+        describe('and a required field is left empty', () => {
+            beforeEach(() => {
+                component.required = true;
+                component.ngOnInit();
+            });
+            it('validationErrorMessage is Fältet är obligatoriskt', () => {
+                expect(component.validationErrorMessage).toBe('Fältet är obligatoriskt')
+            });
+        });
+        describe('and the value does not match the pattern', () => {
+            beforeEach(() => {
+                component.pattern = '.{1}';
+                component.ngOnInit();
+            });
+            it('validationErrorMessage is Fältet är obligatoriskt', () => {
+                expect(component.validationErrorMessage).toBe('Felaktigt format')
+            });
+        });
+    });
 
-    // });
 
     describe('When initialized as required', () => {
         beforeEach(() => {
@@ -156,6 +169,16 @@ describe('[InputComponent]', () => {
                     });
                     it('Validation error state is Fixed', () => {
                         expect(component.validationErrorState).toEqual(validationErrorStates.Fixed);
+                    });
+
+                    describe('and the user enters and leaves without editing', () => {
+                        beforeEach(() => {
+                            component.onFocus();
+                            component.onLeave();
+                        });
+                        it('Validation error state is Fixed', () => {
+                            expect(component.validationErrorState).toEqual(validationErrorStates.NoError);
+                        });
                     });
                 });
             });
