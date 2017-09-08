@@ -12,6 +12,10 @@ $dropdown-width--small: 100px;
     width: $dropdown-width--medium;
     padding: 0px;
     cursor: pointer;
+    .disabled & {
+        background-color: $control-color--disabled;
+        cursor: default;
+    }
     span {
         padding-left: $margin--slim;
         padding-top: 2px;
@@ -25,6 +29,11 @@ $dropdown-width--small: 100px;
         border-left: $border--single solid $control-border-color--default;
         border-bottom: $border--single solid $control-border-color--default;
         border-radius: 1px;
+        .disabled & {
+            background-color: $background-color--default;
+            @extend .border-color--secondary;
+            cursor: default;
+        }
     }
     &:after {
         content: "";
@@ -46,6 +55,10 @@ $dropdown-width--small: 100px;
         }
         .theme--green & {
             @extend .bg-image-icon-calendar--green;
+        }
+        .disabled & {
+            @extend .bg-image-icon-calendar--inactive;
+            cursor: default;
         }
     }
     &:focus {

@@ -12,6 +12,8 @@ export class MonthpickerComponent implements OnInit {
     today: Date = new Date();
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
+    @Input() @HostBinding('class.disabled') disabled: boolean;
+
     @Input() selectedDateFormat: string = 'MMM yyyy';
     @Input() minDate: Date;
     @Input() maxDate: Date;
@@ -174,9 +176,13 @@ export class MonthpickerComponent implements OnInit {
         const target = event.target || event.srcElement || event.currentTarget;
         const element = $(target);
 
+        if (this.disabled)
+            return;
+
         if ((element.hasClass('monthpicker__calendar__month') && !element.hasClass('disabled')) ||
             element.hasClass('monthpicker__dropdown') ||
-            element.parent().hasClass('monthpicker__dropdown')) {
+            element.parent().hasClass('monthpicker__dropdown')
+        ) {
             this.setDisplayedYear(this.selectedDate);
             this.expanded = !this.expanded;
         }
