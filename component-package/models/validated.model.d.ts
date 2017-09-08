@@ -1,5 +1,5 @@
-export interface IStringValidator {
-    validate(value: string): IValidationResult;
+export interface IValidator {
+    validate(value: any): IValidationResult;
 }
 
 export interface IValidationResult {

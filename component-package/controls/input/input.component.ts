@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, HostBinding, OnInit } from '@angular/core'
-import { IValidationResult, IStringValidator } from '../../models/validated.model';
+import { IValidationResult } from '../../models/validated.model';
 
 @Component({
     selector: 'vgr-input',
@@ -11,7 +11,7 @@ export class InputComponent implements OnInit {
     validationErrorStates = ValidationErrorState;
     @HostBinding('class.validated-input') hasClass = true;
     @HostBinding('class.disabled') @Input() disabled: boolean;
-    @Input() value: string;
+    @Input() value: any;
 
     @Input() validateOnInit: boolean;
     @Output() valueChanged: EventEmitter<string> = new EventEmitter<string>();

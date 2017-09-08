@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IStringValidator, IValidationResult } from '../../component-package/models/validated.model';
+import { IValidator, IValidationResult } from '../../component-package/models/validated.model';
 import { CityService } from './cityService';
 
 @Component({
@@ -11,12 +11,12 @@ export class InputFieldsComponent {
     // Enum declarations
     cityName: string;
 
-    cityValidator: IStringValidator;
+    cityValidator: IValidator;
 
     constructor(private cityService: CityService) {
         this.cityName = 'Houstons';
         this.cityValidator = {
-            validate: (s) => this.validateCityName(s)
+            validate: (s: any) => this.validateCityName(s)
         }
     }
 
