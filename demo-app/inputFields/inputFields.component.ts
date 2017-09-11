@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { IValidator, IValidationResult } from '../../component-package/models/validated.model';
 import { CityService } from './cityService';
 
@@ -10,6 +11,7 @@ import { CityService } from './cityService';
 export class InputFieldsComponent {
     // Enum declarations
     cityName: string;
+    amount: number;
 
     cityValidator: IValidator;
 
@@ -18,6 +20,7 @@ export class InputFieldsComponent {
         this.cityValidator = {
             validate: (s: any) => this.validateCityName(s)
         }
+        this.amount = 15000;
     }
 
     validateCityName(cityName: string): IValidationResult {
@@ -32,7 +35,6 @@ export class InputFieldsComponent {
         const isValid = regex.test(email);
 
         return { isValid: isValid, validationError: isValid ? '' : 'Ogiltig e-postadress' } as IValidationResult;
-
     }
 
 

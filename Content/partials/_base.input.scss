@@ -18,3 +18,9 @@
 input[type=text]::-ms-clear {
   display: none;
 }
+
+@media screen and (min-width: $desktop-width--medium) {
+  input {
+    font-size: $font-size--medium;
+  }
+}

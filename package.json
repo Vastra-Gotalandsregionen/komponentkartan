@@ -42,6 +42,7 @@
     "body-parser": "^1.16.1",
     "codelyzer": "~3.0.1",
     "concurrently": "~3.3.0",
+    "intl": "^1.2.5",
     "jasmine": "2.5.3",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",

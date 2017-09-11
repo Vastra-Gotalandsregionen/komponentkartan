@@ -18,7 +18,7 @@ import {
     DebugElement
 } from '@angular/core';
 import {
-    CommonModule
+    CommonModule, DecimalPipe
 } from '@angular/common';
 
 import {
@@ -26,6 +26,7 @@ import {
 } from '../../component-package/controls/input/input.component';
 import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
+import 'npm:intl/locale-data/jsonp/se-SE.js';
 
 describe('[InputComponent]', () => {
     let component: InputComponent;
@@ -184,5 +185,93 @@ describe('[InputComponent]', () => {
             });
         });
     });
+
+    describe('When initialized as a small amount', () => {
+        beforeEach(() => {
+            component.type = 'amount';
+            component.value = 22;
+            component.ngOnInit();
+            fixture.detectChanges();
+            spyOn(component.valueChanged, 'emit');
+        });
+        it('display value is 22,00', () => {
+            expect(component.displayValue).toEqual('22,00');
+        });
+        describe('and field is left without changes', () => {
+            beforeEach(() => {
+                component.onLeave();
+                fixture.detectChanges();
+            });
+            it('22,00 is displayed', () => {
+                expect(component.displayValue).toBe('22,00');
+            });
+            it('a value change event is emitted with an unchanged value', () => {
+                expect(component.valueChanged.emit).toHaveBeenCalledWith(22);
+            });
+        });
+        describe('and field is left with a new valid value', () => {
+            beforeEach(() => {
+                component.onValueChange('23');
+                component.onLeave();
+                fixture.detectChanges();
+            });
+            it('23,00 is displayed', () => {
+                expect(component.displayValue).toBe('23,00');
+            });
+            it('a value change event is emitted with an unchanged value', () => {
+                expect(component.valueChanged.emit).toHaveBeenCalledWith(23);
+            });
+        });
+        describe('and field is left with a new valid decimal value', () => {
+            beforeEach(() => {
+                component.onValueChange('23,50');
+                component.onLeave();
+                fixture.detectChanges();
+            });
+            it('23,00 is displayed', () => {
+                expect(component.displayValue).toBe('23,50');
+            });
+            it('a value change event is emitted with an unchanged value', () => {
+                expect(component.valueChanged.emit).toHaveBeenCalledWith(23.5);
+            });
+        });
+
+    });
+
+    describe('When initialized as a large amount', () => {
+        beforeEach(() => {
+            component.type = 'amount';
+            component.value = 15000;
+            component.ngOnInit();
+            fixture.detectChanges();
+            spyOn(component.valueChanged, 'emit');
+        });
+        it('display value is 15 000,00', () => {
+            expect(component.displayValue).toEqual('15 000,00');
+        });
+        describe('and field is left without changes', () => {
+            beforeEach(() => {
+                component.onLeave();
+                fixture.detectChanges();
+            });
+            it('15 000,00 is displayed', () => {
+                expect(component.displayValue).toEqual('15 000,00');
+            });
+            it('a value change event is emitted with an unchanged value', () => {
+                expect(component.valueChanged.emit).toHaveBeenCalledWith(15000);
+            });
+        });
+        describe('and field is re-entered', () => {
+            beforeEach(() => {
+                component.onFocus();
+                fixture.detectChanges();
+            });
+            it('15000 is displayed', () => {
+                expect(component.displayValue).toEqual(15000);
+            });
+        });
+
+    });
+
 });
 
