@@ -1,10 +1,17 @@
 <div class="validation-container" [ngClass]="{
     'validation-error--active' : validationErrorState == validationErrorStates.Active,
     'validation-error--editing' : validationErrorState == validationErrorStates.Editing,
-    'validation-error--fixed' : validationErrorState == validationErrorStates.Fixed
+    'validation-error--fixed' : validationErrorState == validationErrorStates.Fixed,
+    'validation-container--suffixed' : suffix && suffix.length>0
   }">
-  <input type="text" #inputTextBox class="validated-input__textbox" (blur)="onLeave()" (focus)="onFocus()" [ngModel]="value"
-    title="{{title}}" placeholder="{{placeholder}}" (ngModelChange)="value = $event" [maxlength]="maxlength" [attr.disabled]="disabled ? '' : null">
+  <div class="input-container">
+    <input type="text" #inputTextBox class="input-container__textbox" (blur)="onLeave()" (focus)="onFocus()" [ngModel]="value"
+      title="{{title}}" placeholder="{{placeholder}}" (ngModelChange)="onValueChange($event)" [maxlength]="maxlength" [attr.disabled]="disabled ? '' : null">
+    <div class="input-container__suffix-container">
+      <div class="input-container__suffix-container__suffix">{{suffix}}</div>
+      <div class="validated-input__textbox__status-icon"></div>
+    </div>
+  </div>
   <div class="validation-container__validation-area" title="{{validationErrorMessage}}">
     <div class="validation-container__validation-area__icon"></div>
     <div class="validation-container__validation-area__message">{{validationErrorMessage | truncate:64}}</div>

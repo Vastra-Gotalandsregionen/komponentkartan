@@ -5,6 +5,7 @@
   font-style: normal;
   font-stretch: normal;
   padding-left: $margin--slim;
+  padding-right: $margin--slim;
   border-radius: 1px;
   border: 1px solid $control-border-color--default;
   width: 270px;
@@ -12,4 +13,8 @@
   &:focus {
     outline: none !important;
   }
+}
+
+input[type=text]::-ms-clear {
+  display: none;
 }

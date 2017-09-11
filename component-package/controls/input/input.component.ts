@@ -10,7 +10,7 @@ export class InputComponent implements OnInit {
     // För att kunna använda enum i markup måste den definieras som en variabel här
     validationErrorStates = ValidationErrorState;
     @HostBinding('class.validated-input') hasClass = true;
-    @Input() disabled?: boolean;
+    @Input() @HostBinding('class.disabled') disabled?: boolean;
     @Input() value: any;
 
     @Input() validateOnInit: boolean;
@@ -27,6 +27,9 @@ export class InputComponent implements OnInit {
     @Input() required: boolean;
     @Input() pattern: string;
     @Input() invalidText: string;
+
+    @Input() suffix: string;
+    @Input() @HostBinding('class.align-right') alignRight: boolean;
 
     // Egen validering
     @Input() customValidator: Function;
@@ -60,7 +63,15 @@ export class InputComponent implements OnInit {
     onFocus(): void {
         if (this.validationErrorState === ValidationErrorState.Active) {
             this.setValidationState(ValidationErrorState.Editing);
+        } else if (this.validationErrorState === ValidationErrorState.Fixed) {
+            this.setValidationState(ValidationErrorState.NoError);
         }
+    }
+
+
+    onValueChange(value: any) {
+        console.log(value);
+        // this.value = value.toFixed(Math.max(2, (value.toString().split(',')[1] || []).length));
     }
 
     validateInput(): IValidationResult {

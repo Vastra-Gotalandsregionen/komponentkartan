@@ -7,7 +7,10 @@
       <div class="row-layout">
         <div class="half">
           <h2>Standard validation</h2>
-
+          <div>
+            Belopp
+            <vgr-input [alignRight]="true" [suffix]="'kr'" [required]="true"></vgr-input>
+          </div>
           <div>
             Max-längd 5 tecken (går ej att göra fel)
             <vgr-input [maxlength]=5></vgr-input>
