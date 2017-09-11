@@ -21,7 +21,7 @@ $validation-icon-size: 18px;
   .validation-container--suffixed & {
     padding-right: 5px;
   }
-  .disabled & {
+  .readonly & {
     background-color: $background-color--default;
   }
 }
@@ -40,7 +40,7 @@ $validation-icon-size: 18px;
   border-right-width: 1px;
   padding-right: $margin--slim;
   padding-top: 2px;
-  .disabled & {
+  .readonly & {
     background-color: $background-color--default;
   }
 }

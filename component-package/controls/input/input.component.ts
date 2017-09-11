@@ -10,7 +10,7 @@ export class InputComponent implements OnInit {
     // För att kunna använda enum i markup måste den definieras som en variabel här
     validationErrorStates = ValidationErrorState;
     @HostBinding('class.validated-input') hasClass = true;
-    @Input() @HostBinding('class.disabled') disabled?: boolean;
+    @Input() @HostBinding('class.readonly') readonly?: boolean;
     @Input() value: any;
 
     @Input() validateOnInit: boolean;
