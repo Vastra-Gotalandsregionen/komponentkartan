@@ -20,6 +20,8 @@ export class InputComponent implements OnInit {
     validationErrorState: ValidationErrorState;
     validationErrorMessage: string;
 
+    swedishDecimalPipe: DecimalPipe = new DecimalPipe('sv-se');
+    decimalPipeConfiguration: string;
     @Input() placeholder: string;
     @Input() title: string;
 
@@ -46,7 +48,9 @@ export class InputComponent implements OnInit {
     get isKm(): boolean {
         return this.type === 'km';
     }
-
+    get isNumeric(): boolean {
+        return this.type === 'numeric' || this.isAmount || this.isKm || this.isPercent;
+    }
     // Egen validering
     @Input() customValidator: Function;
 
@@ -72,30 +76,32 @@ export class InputComponent implements OnInit {
 
     ngOnInit() {
         if (this.isAmount) {
-            this.displayValue = this.formatAmount(this.value);
-            this.setupNumericFormat('kr');
-
+            this.setupNumericFormat('kr', 1, 2, 2);
+            this.displayValue = this.convertNumberToString(this.value);
         } else if (this.isKm) {
             this.setupNumericFormat('km');
         } else if (this.isPercent) {
             this.setupNumericFormat('%');
+        } else if (this.isNumeric) {
+            this.setupNumericFormat();
         }
         if (this.validateOnInit) {
             this.updateValidation();
         };
     }
 
-    setupNumericFormat(suffix: string) {
+    setupNumericFormat(suffix?: string, minIntegerDigits: number = 1, minFractionDigits: number = 0, maxFractionDigits: number = 3) {
         if (!this.pattern) {
-            this.pattern = '^\\d+[,]{0,1}\\d{0,2}$';
+            this.pattern = '^[-]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
         }
-        if (!this.suffix) {
+        if (!this.suffix && suffix) {
             this.suffix = suffix;
         }
         this.alignRight = true;
+        this.decimalPipeConfiguration = minIntegerDigits + '.' + minFractionDigits + '-' + maxFractionDigits;
     }
 
-    onFocus(): void {
+    onFocus(event: FocusEvent): void {
 
         if (this.validationErrorState === ValidationErrorState.Active) {
             this.setValidationState(ValidationErrorState.Editing);
@@ -103,16 +109,22 @@ export class InputComponent implements OnInit {
             this.setValidationState(ValidationErrorState.NoError);
         }
 
-        if (this.isAmount) {
-            this.displayValue = this.value;
+        if (this.isNumeric) {
+            if (this.value && !isNaN(this.value)) {
+                this.displayValue = this.value % 1 !== 0 ?
+                    this.swedishDecimalPipe.transform(this.value, this.decimalPipeConfiguration).replace(/\s/g, '') :
+                    this.swedishDecimalPipe.transform(this.value, '1.0-2').replace(/\s/g, '');
+            }
+        }
+        console.log(event);
+        if (event && event.target) {
+            (event.target as HTMLInputElement).select();
         }
     }
 
-
     onValueChange(value: any) {
-        if (this.isAmount) {
-            this.value = parseFloat(this.displayValue.toString().replace(',', '.').replace(' ', ','));
-        } else {
+        this.displayValue = value;
+        if (!this.isNumeric) {
             this.value = value;
         }
     }
@@ -137,21 +149,29 @@ export class InputComponent implements OnInit {
     }
 
     onLeave(): void {
-
+        if (this.isNumeric) {
+            this.value = this.convertStringToNumber(this.displayValue);
+            if (!isNaN(this.value)) {
+                this.displayValue = this.convertNumberToString(this.value);
+            }
+        }
 
         this.valueChanged.emit(this.value);
         this.updateValidation();
-        if (this.isAmount) {
-            this.displayValue = this.formatAmount(this.value);
-        }
     }
 
-    formatAmount(amount: number): string {
+    convertNumberToString(value: number): string {
         if (!isNaN(this.value)) {
-            const pipe = new DecimalPipe('sv-se');
-            return pipe.transform(this.value, '1.2-2');
+            return this.swedishDecimalPipe.transform(this.value, this.decimalPipeConfiguration);
         }
         return null;
+    }
+
+    convertStringToNumber(value: string): number {
+        if (value) {
+            return parseFloat(value.replace(/\s/g, '').replace(',', '.'));
+        }
+        return NaN;
     }
 
     updateValidation(): void {

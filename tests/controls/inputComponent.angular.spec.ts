@@ -24,6 +24,10 @@ import {
 import {
     InputComponent, ValidationErrorState
 } from '../../component-package/controls/input/input.component';
+
+import {
+    IValidationResult
+} from '../../component-package/models/validated.model';
 import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
 import 'npm:intl/locale-data/jsonp/se-SE.js';
@@ -174,7 +178,7 @@ describe('[InputComponent]', () => {
 
                     describe('and the user enters and leaves without editing', () => {
                         beforeEach(() => {
-                            component.onFocus();
+                            component.onFocus(null);
                             component.onLeave();
                         });
                         it('Validation error state is Fixed', () => {
@@ -228,14 +232,25 @@ describe('[InputComponent]', () => {
                 component.onLeave();
                 fixture.detectChanges();
             });
-            it('23,00 is displayed', () => {
+            it('23,50 is displayed', () => {
                 expect(component.displayValue).toBe('23,50');
             });
             it('a value change event is emitted with an unchanged value', () => {
                 expect(component.valueChanged.emit).toHaveBeenCalledWith(23.5);
             });
-        });
+            it('no validation error exists', () => {
+                expect(component.validationErrorState).toEqual(validationErrorStates.NoError);
+            })
 
+            describe('and field is focused', () => {
+                beforeEach(() => {
+                    component.onFocus(null);
+                });
+                it('23,50 is displayed', () => {
+                    expect(component.displayValue).toBe('23,50');
+                });
+            });
+        });
     });
 
     describe('When initialized as a large amount', () => {
@@ -243,7 +258,6 @@ describe('[InputComponent]', () => {
             component.type = 'amount';
             component.value = 15000;
             component.ngOnInit();
-            fixture.detectChanges();
             spyOn(component.valueChanged, 'emit');
         });
         it('display value is 15 000,00', () => {
@@ -252,7 +266,6 @@ describe('[InputComponent]', () => {
         describe('and field is left without changes', () => {
             beforeEach(() => {
                 component.onLeave();
-                fixture.detectChanges();
             });
             it('15 000,00 is displayed', () => {
                 expect(component.displayValue).toEqual('15 000,00');
@@ -263,15 +276,77 @@ describe('[InputComponent]', () => {
         });
         describe('and field is re-entered', () => {
             beforeEach(() => {
-                component.onFocus();
-                fixture.detectChanges();
+                component.onFocus(null);
             });
             it('15000 is displayed', () => {
-                expect(component.displayValue).toEqual(15000);
+                expect(component.displayValue).toEqual('15000');
             });
         });
-
     });
+
+    describe('When initialized with a valid amount', () => {
+        beforeEach(() => {
+            component.type = 'amount';
+            component.value = 225200.5;
+            component.ngOnInit();
+            spyOn(component.valueChanged, 'emit');
+        });
+        it('display value is 225 200,50', () => {
+            expect(component.displayValue).toEqual('225 200,50');
+        });
+        describe('and field is left with an invalid value', () => {
+            beforeEach(() => {
+                component.onValueChange('Not a number');
+                component.onLeave();
+            });
+            it('Not a number is displayed', () => {
+                expect(component.displayValue).toEqual('Not a number');
+            });
+            it('value is set to null', () => {
+                expect(component.value).toBeNaN();
+            });
+            it('no value change event is emitted with an unchanged value', () => {
+                expect(component.valueChanged.emit).toHaveBeenCalledWith(NaN);
+            });
+            it('validation error state is active', () => {
+                expect(component.validationErrorState).toBe(validationErrorStates.Active);
+            });
+        });
+    });
+
+    describe('when initialized with a custom validator', () => {
+        describe('and the field is left invalid', () => {
+            beforeEach(() => {
+                component.customValidator = (s: any) => {
+                    return { isValid: false, validationError: 'Validation failed' } as IValidationResult;
+                };
+                component.ngOnInit();
+                component.onLeave();
+            });
+            it('validation error state is active', () => {
+                expect(component.validationErrorState).toEqual(validationErrorStates.Active);
+            });
+            it('validation error message is fetched from the validator', () => {
+                expect(component.validationErrorMessage).toEqual('Validation failed');
+            });
+        });
+        describe('and the field is left valid', () => {
+            beforeEach(() => {
+                component.customValidator = (s: any) => {
+                    return { isValid: true, validationError: '' } as IValidationResult;
+                };
+                component.ngOnInit();
+                component.onLeave();
+            });
+            it('validation error state is none', () => {
+                expect(component.validationErrorState).toEqual(validationErrorStates.NoError);
+            });
+            it('validation error message is undefined', () => {
+                expect(component.validationErrorMessage).toBeUndefined();
+            });
+        });
+    });
+
 
 });
 

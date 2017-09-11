@@ -21,3 +21,26 @@
     }
   }
 }
+
+.property-table {
+  text-align: left;
+  th,
+  td {
+    width: 400px;
+    text-align: left;
+    border-bottom: 1px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  th:first-child,
+  td:first-child {
+    width: 200px;
+  }
+  td:last-child,
+  th:last-child {
+    border-right: none;
+  }
+  th {
+    font-weight: bold;
+  }
+}

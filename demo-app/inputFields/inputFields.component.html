@@ -5,8 +5,8 @@
   <div class="komponentkarta-components">
     <div class="komponentkarta-component column-layout">
       <div class="row-layout">
-        <div class="half">
-          <h2>Standard validation</h2>
+        <div class="one-third">
+          <h2>Fördefinierade typer</h2>
           <div>
             Belopp
             <vgr-input [type]="'amount'" [value]="amount" (valueChanged)="amount = $event"></vgr-input>
@@ -21,6 +21,13 @@
             <vgr-input [type]="'km'"></vgr-input>
           </div>
           <div>
+            Numeriskt värde
+            <vgr-input [type]="'numeric'"></vgr-input>
+          </div>
+        </div>
+        <div class="one-third">
+          <h2>Egen konfiguration</h2>
+          <div>
             Max-längd 5 tecken (går ej att göra fel)
             <vgr-input [maxlength]=5></vgr-input>
           </div>
@@ -33,8 +40,8 @@
             <vgr-input [pattern]="'^.{2,6}$'" [maxlength]=6 [invalidText]="'Ange mellan 2-6 tecken'"></vgr-input>
           </div>
           <div>
-            Heltal
-            <vgr-input [pattern]="'^[0-9]+$'" [invalidText]="'Ange ett numeriskt värde'"></vgr-input>
+            Heltal med enhet
+            <vgr-input [pattern]="'^[0-9]+$'" [suffix]="'st'" [invalidText]="'Ange ett giltigt antal'" [alignRight]="true"></vgr-input>
           </div>
           <div>
             Decimaltal (standardfelmeddelande)
@@ -58,8 +65,8 @@
           </div>
 
         </div>
-        <div class="half">
-          <h2>Custom validation</h2>
+        <div class="one-third">
+          <h2>Validering med service</h2>
           <div>
             Stad i USA
             <vgr-input [customValidator]="validateCityName.bind(this)" [value]="cityName" (valueChanged)="cityName = $event"></vgr-input>
@@ -71,6 +78,80 @@
 
         </div>
 
+
+      </div>
+      <div class="row-layout">
+        <div class="full">
+          <h2>Konfiguration</h2>
+          <table class="property-table">
+            <tr>
+              <th>Property</th>
+              <th>Beskrivning</th>
+              <th>Exempel</th>
+            </tr>
+            <tr>
+              <td>[value]</td>
+              <td>Värde att binda till</td>
+              <td>[value]="person.lastName"</td>
+            </tr>
+            <tr>
+              <td>[validateOnInit]</td>
+              <td>Om true, validera värdet vid laddning av sidan. Default = false.</td>
+              <td>[validateOnInit]="true"</td>
+            </tr>
+            <tr>
+              <td>(valueChanged)</td>
+              <td>Event när värdet ändras. Triggas när fokus lämnar fältet. Värdet är parameter.</td>
+              <td>(valueChanged)="person.lastName = $event"</td>
+            </tr>
+            <tr>
+              <td>[title]</td>
+              <td>Tool-tip vid hover. Default = tomt.</td>
+              <td>[title]="'Fyll i ditt namn här'"</td>
+            </tr>
+            <tr>
+              <td>[maxlength]</td>
+              <td>Max antal tecken. Begränsar antalet möjliga tecken att mata in. Default = obegränsat.</td>
+              <td>[maxlength]="5"</td>
+            </tr>
+            <tr>
+              <td>[required]</td>
+              <td>Om true, är fältet obligatoriskt, annars skapas valideringsfel. Default = false</td>
+              <td>[required]="true"</td>
+            </tr>
+            <tr>
+              <td>[pattern]</td>
+              <td>Regex att matcha innehållet mot vid validering. Default = tomt</td>
+              <td>[pattern]="[a-z,A-Z]+'" (Minst en bokstav)</td>
+            </tr>
+            <tr>
+              <td>[invalidtext]</td>
+              <td>Text som visas vid valideringsfel för pattern eller om obligatoriskt fält ej fyllts i</td>
+              <td>[invalidtext]="'Ange ett värde mellan 1-10'"</td>
+            </tr>
+            <tr>
+              <td>[suffix]</td>
+              <td>Text som visas till höger om fältet, som t.ex en enhet (km, m, kg, kr mm)</td>
+              <td>[suffix]="'kg'"</td>
+            </tr>
+            <tr>
+              <td>[type]</td>
+              <td>Fördefinierade typer av färdig validering samt suffix. Gltiga värden är amount, kg, percent, numeric. Sätter
+                pattern, högerställer samt formatterar värdet. Inställningar möjliga att skriva över med enstaka properties
+                ovan.
+              </td>
+              <td>[type]="'amount'"</td>
+            </tr>
+            <tr>
+              <td>[customValidator]</td>
+              <td>En egendefinierad funktion som returnerar validering baserat på innehållet. Anropas när fokus lämnar fältet.
+                Funktionen tar in en sträng och returnerar ett IValidationResult med resultat samt meddelande. Se "Validering
+                med service" ovan. Notera anropet med [funktion].bind(this).
+              </td>
+              <td>[customValidator]="validateCityName.bind(this)"</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
