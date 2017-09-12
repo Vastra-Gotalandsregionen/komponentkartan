@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, HostBinding, OnInit } from '@angular/core'
+import { Component, Input, EventEmitter, Output, HostBinding, OnInit, ElementRef } from '@angular/core'
 import { DecimalPipe } from '@angular/common'
 import { IValidationResult } from '../../models/validated.model';
 
@@ -116,10 +116,13 @@ export class InputComponent implements OnInit {
                     this.swedishDecimalPipe.transform(this.value, '1.0-2').replace(/\s/g, '');
             }
         }
-        console.log(event);
-        if (event && event.target) {
-            (event.target as HTMLInputElement).select();
-        }
+        // Behöver sätta en timeout för att kunna selectera allt innehåll i textboxen...
+        setTimeout(() => {
+            if (event && event.target) {
+                (event.target as HTMLInputElement).select();
+            }
+        }, 200);
+
     }
 
     onValueChange(value: any) {
