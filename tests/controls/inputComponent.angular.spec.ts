@@ -90,10 +90,11 @@ describe('[InputComponent]', () => {
         });
         describe('and the value does not match the pattern', () => {
             beforeEach(() => {
-                component.pattern = '.{1}';
+                component.value = 'dasds';
+                component.pattern = '^.{1}$';
                 component.ngOnInit();
             });
-            it('validationErrorMessage is Fältet är obligatoriskt', () => {
+            it('validationErrorMessage is Felaktigt format', () => {
                 expect(component.validationErrorMessage).toBe('Felaktigt format')
             });
         });
@@ -108,7 +109,7 @@ describe('[InputComponent]', () => {
         });
         describe('and user leaves the input empty', () => {
             beforeEach(() => {
-                component.value = '';
+                component.onValueChange('');
                 component.onLeave();
             });
             it('Validation error state is Active', () => {
@@ -120,7 +121,7 @@ describe('[InputComponent]', () => {
         });
         describe('and user enters text and leaves the input', () => {
             beforeEach(() => {
-                component.value = 'foo';
+                component.onValueChange('foo');
                 component.onLeave();
             });
             it('Validation error state is NoError', () => {
@@ -137,7 +138,7 @@ describe('[InputComponent]', () => {
         });
         describe('and value is invalid when user leaves the input', () => {
             beforeEach(() => {
-                component.value = 'AB';
+                component.onValueChange('AB');
                 component.onLeave();
             });
             it('Validation error state is Active', () => {
@@ -159,7 +160,7 @@ describe('[InputComponent]', () => {
 
                 describe('and the user enters an invalid value and leaves', () => {
                     beforeEach(() => {
-                        component.value = 'a';
+                        component.onValueChange('a');
                         component.onLeave();
                     });
                     it('Validation error state is Active', () => {
@@ -169,7 +170,7 @@ describe('[InputComponent]', () => {
 
                 describe('and the user enters a valid value and leaves', () => {
                     beforeEach(() => {
-                        component.value = 'ABC';
+                        component.onValueChange('ABC');
                         component.onLeave();
                     });
                     it('Validation error state is Fixed', () => {
@@ -181,11 +182,31 @@ describe('[InputComponent]', () => {
                             component.onFocus(null);
                             component.onLeave();
                         });
-                        it('Validation error state is Fixed', () => {
+                        it('Validation error state is No error', () => {
                             expect(component.validationErrorState).toEqual(validationErrorStates.NoError);
                         });
                     });
                 });
+            });
+        });
+    });
+
+    describe('when initialized as an amount with no value', () => {
+        beforeEach(() => {
+            component.type = 'amount';
+            component.required = false;
+            spyOn(component.valueChanged, 'emit');
+            component.ngOnInit();
+        });
+        describe('and the user leaves the field empty', () => {
+            beforeEach(() => {
+                component.onLeave();
+            });
+            it('there is no validation error', () => {
+                expect(component.validationErrorState).toBe(validationErrorStates.NoError);
+            });
+            it('a valuechange event is emitted with NaN', () => {
+                expect(component.valueChanged.emit).toHaveBeenCalledWith(NaN);
             });
         });
     });
@@ -251,6 +272,22 @@ describe('[InputComponent]', () => {
                 });
             });
         });
+        describe('and field is left with empty', () => {
+            beforeEach(() => {
+                component.onValueChange('');
+                component.onLeave();
+                fixture.detectChanges();
+            });
+            it('nothing is displayed', () => {
+                expect(component.displayValue).toBe('');
+            });
+            it('a value change event is emitted with NaN', () => {
+                expect(component.valueChanged.emit).toHaveBeenCalledWith(NaN);
+            });
+            it('no validation error exists', () => {
+                expect(component.validationErrorState).toEqual(validationErrorStates.NoError);
+            })
+        });
     });
 
     describe('When initialized as a large amount', () => {
@@ -308,6 +345,9 @@ describe('[InputComponent]', () => {
             it('no value change event is emitted with an unchanged value', () => {
                 expect(component.valueChanged.emit).toHaveBeenCalledWith(NaN);
             });
+            it('display value is Not a number', () => {
+                expect(component.displayValue).toEqual('Not a number');
+            });
             it('validation error state is active', () => {
                 expect(component.validationErrorState).toBe(validationErrorStates.Active);
             });
@@ -346,6 +386,8 @@ describe('[InputComponent]', () => {
             });
         });
     });
+
+
 
 
 });

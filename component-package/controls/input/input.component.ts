@@ -84,6 +84,8 @@ export class InputComponent implements OnInit {
             this.setupNumericFormat('%');
         } else if (this.isNumeric) {
             this.setupNumericFormat();
+        } else {
+            this.displayValue = this.value;
         }
         if (this.validateOnInit) {
             this.updateValidation();
@@ -133,22 +135,29 @@ export class InputComponent implements OnInit {
     }
 
     validateInput(): IValidationResult {
-        if (this.required && (!this.value || this.value.length === 0)) {
-            return this.emptyRequiredFieldValidationResult;
+        if (this.customValidator) {
+            return this.customValidator(this.displayValue);
+        }
+
+        if (!this.displayValue || this.displayValue.length === 0) {
+            if (this.required) {
+                return this.emptyRequiredFieldValidationResult;
+            } else {
+                return this.successfulValidationResult;
+            }
         }
 
         if (this.pattern && this.pattern.length > 0) {
             const valueToMatch = this.value ? this.value : '';
             const regexp = new RegExp(this.pattern);
+            console.log(valueToMatch);
+            console.log(regexp);
             if (!regexp.test(valueToMatch)) {
                 return this.invalidPatternValidationResult;
             }
         }
 
-        if (!this.customValidator) {
-            return this.successfulValidationResult;
-        }
-        return this.customValidator(this.value);
+        return this.successfulValidationResult;
     }
 
     onLeave(): void {
