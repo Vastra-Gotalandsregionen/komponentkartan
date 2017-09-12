@@ -13,6 +13,11 @@
             <span>Nuvarande belopp:</span><span>{{amount}}</span>
           </div>
           <div>
+            Belopp, obligatoriskt
+            <vgr-input [type]="'amount'" [value]="amount" (valueChanged)="amount = $event" [required]="true"></vgr-input>
+            <span>Nuvarande belopp:</span><span>{{amount}}</span>
+          </div>
+          <div>
             Procent
             <vgr-input [type]="'percent'"></vgr-input>
           </div>
