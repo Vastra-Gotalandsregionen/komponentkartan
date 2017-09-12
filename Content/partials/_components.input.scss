@@ -8,7 +8,7 @@ $validation-icon-size: 18px;
 }
 
 .input-container__textbox {
-  @extend .border-color--primary;
+  border-color: $control-border-color--default;
   flex: 1;
   border-right-style: none;
   transition: padding-right 0.3s linear;
@@ -30,7 +30,7 @@ $validation-icon-size: 18px;
   display: flex;
   align-items: center;
   background-color: $background-color--content;
-  @extend .border-color--primary;
+  border-color: $control-border-color--default;
   border-left-style: none;
   border-top-style: solid;
   border-top-width: 1px;
