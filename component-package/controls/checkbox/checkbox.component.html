@@ -1,6 +1,6 @@
 <div class="checkbox" role="checkbox" [ngClass]="{'checkbox--checked' : checked, 'checkbox--disabled' : disabled }" (click)="onClick()"
   (keydown)="onKeyDown($event)">
-  <div class="checkbox__image" tabindex="{{disabled ? -1 : 0}}"></div>
+  <div class="checkbox__image" tabindex="0"></div>
   <div id="checkbox-label" class="checkbox__label">
     <ng-content></ng-content>
   </div>
