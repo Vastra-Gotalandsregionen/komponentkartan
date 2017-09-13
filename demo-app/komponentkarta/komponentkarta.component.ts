@@ -49,7 +49,7 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.lockMessage = 'Ingen';
         this.actionPanelMessage = '';
         this.themeOptions = [
-            { id: 'default', displayName: 'Neutral (grå)' } as ISelectableItem,
+            { id: 'neutral', displayName: 'Neutral (grå)' } as ISelectableItem,
             { id: 'blue', displayName: 'BMM (blå)' } as ISelectableItem,
             { id: 'red', displayName: 'VGPV (röd)' } as ISelectableItem,
             { id: 'green', displayName: 'Rehab (grön)' } as ISelectableItem,
@@ -123,26 +123,11 @@ export class KomponentkartaComponent implements AfterViewInit {
     }
 
     private selectedThemeChanged(selectedTheme: ISelectableItem) {
-        const systemName = selectedTheme.id === 'default' ? 'neutral'
-            : selectedTheme.id === 'blue' ? 'bmm'
-                : selectedTheme.id === 'red' ? 'vgpv'
-                    : selectedTheme.id === 'green' ? 'rehab' : 'neutral';
+        const themeClass = 'theme--' + selectedTheme.id;
 
-                    
         $('komponentkartan-application').removeClass('theme--blue theme--red theme--neutral theme--green');
-        $('komponentkartan-application').addClass('theme--' + selectedTheme.id);
+        $('komponentkartan-application').addClass(themeClass);
 
-
-        $('.main-content').removeClass('theme--blue theme--red theme--neutral theme--green');
-        $('.main-content').addClass('theme--' + selectedTheme.id);
-
-        $('.menu').removeClass('menu--neutral menu--bmm menu--vgpv menu--rehab');
-        $('.menu').addClass('menu--' + systemName);
-
-
-        $('.site-header-vgr').not('.header--inline')
-            .removeClass('site-header-vgr--default site-header-vgr--blue site-header-vgr--red site-header-vgr--green');
-        $('.site-header-vgr').not('.header--inline').addClass('site-header-vgr--' + selectedTheme.id);
     }
 
     private getDemoItems(numberOfItems: number): IDropdownItem[] {

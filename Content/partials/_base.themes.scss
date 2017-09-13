@@ -23,6 +23,18 @@
     .theme--green & {
       #{$property}: $primary-color--green;
     }
+    &.theme--neutral {
+      #{$property}: $primary-color--default;
+    }
+    &.theme--blue {
+      #{$property}: $primary-color--blue;
+    }
+    &.theme--red {
+      #{$property}: $primary-color--red;
+    }
+    &.theme--green {
+      #{$property}: $primary-color--green;
+    }
   }
   .#{$property}--secondary {
     #{$property}: $secondary-color--default;
@@ -35,11 +47,25 @@
     .theme--green & {
       #{$property}: $secondary-color--green;
     }
+    &.theme--neutral {
+      #{$property}: $secondary-color--default;
+    }
+    &.theme--blue {
+      #{$property}: $secondary-color--blue;
+    }
+    &.theme--red {
+      #{$property}: $secondary-color--red;
+    }
+    &.theme--green {
+      #{$property}: $secondary-color--green;
+    }
   }
 }
 
 @include theme(border-top-color);
 @include theme(border-left-color);
+@include theme(border-right-color);
+@include theme(border-bottom-color);
 @include theme(border-color);
 @include theme(color);
 @include theme(background-color);

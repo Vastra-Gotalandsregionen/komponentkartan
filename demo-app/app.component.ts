@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, HostBinding } from '@angular/core';
 import { ISelectableItem } from '../component-package/models/selectableItem.model';
 import { SidebarMenuComponent } from '../component-package/controls/sidebar-menu/sidebarMenu.component';
 import { IMenu, IMenuGroup, IMenuItem } from '../component-package/models/menu.model';
@@ -7,18 +7,15 @@ import { IHeaderMenu, IHeaderMenuItem } from '../component-package/models/header
 @Component({
     selector: 'komponentkartan-application',
     templateUrl: '/demo-app/app.component.html'
-
 })
 
 export class KomponentkartanApplicationComponent {
-    selectedTheme: string;
     menus: IMenu[];
     headerMenu: IHeaderMenu;
     @ViewChild(SidebarMenuComponent) sidebarMenu: SidebarMenuComponent;
     private largeMenu: IMenu[];
     private singleMenu: IMenu[];
     constructor() {
-        this.selectedTheme = 'neutral';
         this.largeMenu = [{
             'title': 'Portal',
             'groups': [{

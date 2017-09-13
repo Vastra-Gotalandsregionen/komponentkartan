@@ -1,7 +1,4 @@
-﻿<div class="main-content" [ngClass]="{'theme--neutral': selectedThemeOption.id==='netural',
-'theme--blue': selectedThemeOption.id==='blue',
-'theme--red': selectedThemeOption.id==='red',
-'theme--green': selectedThemeOption.id==='green' }">
+﻿<div class="main-content">
   <vgr-page-header [title]="'KomponentKarTa'" [enableActionsText]="'Öppna'" [disableActionsText]="'Stäng'" (actionStarted)="onActionStarted()"
     (actionEnded)="onActionEnded()">
     <vgr-radio-group class="page-header__control" [options]="themeOptions" (selectedChanged)="selectedThemeChanged($event)"></vgr-radio-group>
@@ -238,7 +235,7 @@
     <div class="komponentkarta-component column-layout">
       <h1>Paneler</h1>
       <div class="row-layout row-layout--equal-height">
-        <div class="information-panel information-panel--default two-thirds with-classes">
+        <div class="information-panel information-panel--default two-thirds ">
           <div class="information-panel__content">
             <div class="information-panel__header">
               <span class="information-panel__header__title">Panel med tiddstämpel</span>
@@ -255,7 +252,7 @@
             </div>
           </div>
         </div>
-        <div class="information-panel information-panel--default one-third with-classes">
+        <div class="information-panel one-third ">
           <div class="information-panel__content">
             <div class="information-panel__header">
               <span class="information-panel__header__title">Panel med enkel rubrik</span>
@@ -265,7 +262,7 @@
         </div>
       </div>
       <div class="row-layout row-layout--equal-height">
-        <div class="information-panel information-panel--green one-third with-classes">
+        <div class="information-panel theme--green one-third ">
           <div class="information-panel__content">
             <div class="information-panel__header">
               <span class="information-panel__header__title">Rehab</span>
@@ -276,7 +273,7 @@
             </div>
           </div>
         </div>
-        <div class="information-panel information-panel--red one-third with-classes">
+        <div class="information-panel theme--red one-third ">
           <div class="information-panel__content">
             <div class="information-panel__header">
               <span class="information-panel__header__title">VGPV</span>
@@ -287,7 +284,7 @@
             </div>
           </div>
         </div>
-        <div class="information-panel information-panel--blue one-third with-classes">
+        <div class="information-panel theme--blue one-third ">
           <div class="information-panel__content">
             <div class="information-panel__header">
               <span class="information-panel__header__title">BMM</span>
@@ -297,7 +294,7 @@
         </div>
       </div>
       <div class="row-layout row-layout--equal-height">
-        <div class="information-panel information-panel--green half with-classes">
+        <div class="information-panel theme--green half ">
           <div class="information-panel__content">
             <div style="font-size: 48px">+89</div>
             <div class="information-panel__header">
@@ -306,7 +303,7 @@
             <p class="information-panel__information">En panel med eget innehåll före rubriken</p>
           </div>
         </div>
-        <div class="information-panel information-panel--red half with-classes">
+        <div class="information-panel theme--red half ">
           <div class="information-panel__content">
           </div>
         </div>
@@ -323,14 +320,11 @@
         <h2>Header utan user och meny</h2>
         <vgr-header class="header--inline"></vgr-header>
 
-
         <h2>Header med user utan meny</h2>
         <vgr-header class="header--inline" [userName]="'Någon Återkommande'"></vgr-header>
 
         <h2>Header med user och meny</h2>
         <vgr-header class="header--inline" [userName]="'Någon Återkommande'" [headerMenu]="headerMenu"></vgr-header>
-
-
       </div>
 
 
