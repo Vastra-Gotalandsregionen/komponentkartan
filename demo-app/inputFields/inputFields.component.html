@@ -41,8 +41,8 @@
             <vgr-input [maxlength]=5></vgr-input>
           </div>
           <div>
-            Exakt 3 versaler (valideras vid laddning)
-            <vgr-input [pattern]="'^[A-Z]{3}$'" [invalidText]="'Ange exakt tre versaler'" [value]="'123'" [maxlength]="3" [validateOnInit]="true"></vgr-input>
+            Exakt 3 VERSALER (redan validerad)
+            <vgr-input [pattern]="'^[A-Z,Å,Ä,Ö]{3}$'" [invalidText]="'Ange exakt tre VERSALER'" [value]="'abc'" [maxlength]="3" [validateOnInit]="true"></vgr-input>
           </div>
           <div>
             Mellan 2 och 6 tecken
@@ -50,12 +50,12 @@
           </div>
           <div>
             Heltal med enhet
-            <vgr-input [pattern]="'^[0-9]+$'" [type]="'numeric'" [suffix]="'st'" [invalidText]="'Ange ett giltigt antal'" [alignRight]="true"
+            <vgr-input [pattern]="'^[0-9]+$'" [type]="'numeric'" [suffix]="'st'" [invalidText]="'Ange ett giltigt heltal'" [alignRight]="true"
               [value]="intValue" (valueChanged)="intValue = $event"></vgr-input>
             <span>Antal: </span><span>{{intValue + 0}}</span>
           </div>
           <div>
-            Obligatoriskt (jättelångt felmeddelande)
+            Felmeddelande >62 tkn med ... och tooltip
             <vgr-input [required]="true" [invalidText]="'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'"></vgr-input>
           </div>
           <div>
@@ -71,7 +71,7 @@
         <div class="one-third">
           <h2>Validering med service</h2>
           <div>
-            Ange en stor stad i USA
+            Ange en storstad i USA
             <vgr-input [customValidator]="validateCityName.bind(this)" [value]="cityName" (valueChanged)="cityName = $event"></vgr-input>
             <span>Din stad: {{cityName}}</span>
           </div>
@@ -92,7 +92,7 @@
               Validering sker alltid när man lämnar fältet (onblur)
             </li>
             <li>
-              Validering av pattern och värde sker bara om fältet innehåller något. För att invalidera tomma fält, sätt fältet som [required]="true"
+              Om man anger pattern blir fältet automatiskt obligatoriskt.
             </li>
             <li>
               För numeriska fält (numeric, amount, km, percent) uppdateras värdet till NaN om fältet inte kan tolkas som ett giltigt värde
