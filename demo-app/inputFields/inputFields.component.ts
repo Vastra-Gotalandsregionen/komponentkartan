@@ -11,22 +11,29 @@ import { CityService } from './cityService';
 export class InputFieldsComponent {
     // Enum declarations
     cityName: string;
-    amount: number;
-
+    amount1: number;
+    amount2: number;
+    numericValue: number;
+    percentValue: number;
+    kmValue: number;
     cityValidator: IValidator;
-
+    intValue: number;
     constructor(private cityService: CityService) {
         this.cityName = 'Houstons';
         this.cityValidator = {
             validate: (s: any) => this.validateCityName(s)
         }
-        this.amount = 15000;
+        this.amount1 = 15000;
+        this.amount2 = -25.5;
+        this.percentValue = 0.02;
+        this.kmValue = 11;
+        this.intValue = 0;
     }
 
     validateCityName(cityName: string): IValidationResult {
         const allCities = this.cityService.getCities();
         if (allCities.filter(x => x.city === cityName).length === 0) {
-            return { validationError: 'Detta är ett längre meddelande som visas när det går fel', isValid: false };
+            return { validationError: 'Ange en av de 1000 största städerna i USA', isValid: false };
         }
         return { isValid: true, validationError: '' } as IValidationResult;
     }
@@ -35,6 +42,10 @@ export class InputFieldsComponent {
         const isValid = regex.test(email);
 
         return { isValid: isValid, validationError: isValid ? '' : 'Ogiltig e-postadress' } as IValidationResult;
+    }
+
+    formatNumericValue(value: number) {
+        return isNaN(value) ? 'Inget' : value;
     }
 
 

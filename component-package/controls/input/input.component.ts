@@ -75,15 +75,18 @@ export class InputComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.isAmount) {
-            this.setupNumericFormat('kr', 1, 2, 2);
+
+        if (this.isNumeric) {
+            if (this.isAmount) {
+                this.setupNumericFormat('kr', 1, 2, 2);
+            } else if (this.isKm) {
+                this.setupNumericFormat('km');
+            } else if (this.isPercent) {
+                this.setupNumericFormat('%');
+            } else if (this.isNumeric) {
+                this.setupNumericFormat();
+            }
             this.displayValue = this.convertNumberToString(this.value);
-        } else if (this.isKm) {
-            this.setupNumericFormat('km');
-        } else if (this.isPercent) {
-            this.setupNumericFormat('%');
-        } else if (this.isNumeric) {
-            this.setupNumericFormat();
         } else {
             this.displayValue = this.value;
         }
@@ -150,8 +153,7 @@ export class InputComponent implements OnInit {
         if (this.pattern && this.pattern.length > 0) {
             const valueToMatch = this.value ? this.value : '';
             const regexp = new RegExp(this.pattern);
-            console.log(valueToMatch);
-            console.log(regexp);
+
             if (!regexp.test(valueToMatch)) {
                 return this.invalidPatternValidationResult;
             }
@@ -162,6 +164,7 @@ export class InputComponent implements OnInit {
 
     onLeave(): void {
         if (this.isNumeric) {
+
             this.value = this.convertStringToNumber(this.displayValue);
             if (!isNaN(this.value)) {
                 this.displayValue = this.convertNumberToString(this.value);
@@ -181,7 +184,9 @@ export class InputComponent implements OnInit {
 
     convertStringToNumber(value: string): number {
         if (value) {
-            return parseFloat(value.replace(/\s/g, '').replace(',', '.'));
+            const normalized = value.toString().trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
+            const floatVal = parseFloat(normalized);
+            return floatVal;
         }
         return NaN;
     }
