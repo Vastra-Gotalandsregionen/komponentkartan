@@ -141,14 +141,10 @@
 
       </p>
       <div class="column-layout">
-
-        <div class="row-layout">
-          <vgr-checkbox></vgr-checkbox><i>(Utan text)</i>
-        </div>
-        <vgr-checkbox>Med ledtext</vgr-checkbox>
-        <vgr-checkbox [disabled]="true">Inaktiverad</vgr-checkbox>
-        <vgr-checkbox [checked]="true">Vald</vgr-checkbox>
-        <vgr-checkbox [checked]="true" [disabled]="true">Inaktiverad vald</vgr-checkbox>
+        <vgr-checkbox [text]="'Med ledtext'"></vgr-checkbox>
+        <vgr-checkbox [disabled]="true" [text]="'Inaktiverad'"></vgr-checkbox>
+        <vgr-checkbox [checked]="true" [text]="'Vald'"></vgr-checkbox>
+        <vgr-checkbox [checked]="true" [disabled]="true" [text]="'Inaktiverad vald'"></vgr-checkbox>
       </div>
     </div>
 

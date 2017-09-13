@@ -13,7 +13,7 @@ describe('SaveCancelComponent', () => {
     let fixture: ComponentFixture<CheckboxComponent>;
     let rootElement: DebugElement;
     let checkbox: DebugElement;
-    var checkedChangedSpy: jasmine.Spy;
+    let checkedChangedSpy: jasmine.Spy;
 
 
     beforeEach((done) => {
@@ -148,11 +148,13 @@ describe('SaveCancelComponent', () => {
     });
 
     describe('WCAG compatibility', () => {
+        let checkboximage: DebugElement;
         beforeEach(() => {
+            checkboximage = rootElement.query(By.css('.checkbox__image'));
             fixture.detectChanges();
         });
         it('The checkbox has role checkbox.', () => {
-            expect(rootElement.attributes['role']).toBe('checkbox');
+            expect(checkboximage.attributes['role']).toBe('checkbox');
         });
 
         describe('The checkbox has an accessible label, preferably provided by a visible label associated using aria-labelledby', () => {
@@ -161,20 +163,20 @@ describe('SaveCancelComponent', () => {
                 expect(labelElement.nativeElement.id).toBe('checkbox-label');
             });
             it('checkbox is associated with the label', () => {
-                expect(rootElement.attributes['aria-labelledby']).toBe('checkbox-label');
+                expect(checkboximage.attributes['aria-labelledby']).toBe('checkbox-label');
             });
         });
 
         it('When checked, the checkbox element has state aria-checked set to true', () => {
             component.checked = true;
             fixture.detectChanges();
-            expect(rootElement.attributes['aria-checked']).toBe('true');
+            expect(checkboximage.attributes['aria-checked']).toBe('true');
         });
 
         it('When not checked, it has state aria-checked set to false', () => {
             component.checked = false;
             fixture.detectChanges();
-            expect(rootElement.attributes['aria-checked']).toBe('false');
+            expect(checkboximage.attributes['aria-checked']).toBe('false');
         });
 
         it('If the presentation includes additional descriptive static text relevant to a checkbox or checkbox group, the checkbox or checkbox group has the property aria- describedby set to the ID of the element containing the description', () => {

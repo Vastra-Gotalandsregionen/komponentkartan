@@ -6,12 +6,10 @@ import { Component, Input, EventEmitter, Output, OnChanges, HostBinding } from '
     templateUrl: './checkbox.component.html'
 })
 export class CheckboxComponent {
-    @HostBinding('class.checkbox') hasClass = true;
-    @HostBinding('attr.role') checkBoxRole = 'checkbox';
-    @HostBinding('attr.aria-labelledby') labelledBy = 'checkbox-label';
     @Input() disabled: boolean;
-    @HostBinding('attr.aria-checked') @Input() checked: boolean;
+    @Input() checked: boolean;
     @Output() checkedChanged = new EventEmitter<boolean>();
+    @Input() text: string;
 
     constructor() {
         this.disabled = false;
