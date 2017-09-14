@@ -26,7 +26,7 @@ describe('SaveCancelComponent', () => {
 
         TestBed.overrideComponent(CheckboxComponent, {
             set: {
-                templateUrl: 'checkbox.component.html'
+                templateUrl: './checkbox.component.html'
             }
         });
 

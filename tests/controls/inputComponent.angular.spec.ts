@@ -30,7 +30,7 @@ import {
 } from '../../component-package/models/validated.model';
 import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
-import 'npm:intl/locale-data/jsonp/se-SE.js';
+import 'intl/locale-data/jsonp/se-SE.js';
 
 
 describe('[InputComponent]', () => {

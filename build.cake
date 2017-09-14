@@ -160,6 +160,18 @@ Task("Build-TypescriptAndSass")
 });
 
 
+Task("Run-Jasmine-Tests")
+.IsDependentOn("Build-TypescriptAndSass")
+.Does(() =>
+{
+	NpmRunScript(new NpmRunScriptSettings
+    {
+        ScriptName = "test-ci",
+        WorkingDirectory = "./"
+    });
+});
+
+
 
 Task("Move-TypescriptAndSass")
 .IsDependentOn("Build-TypescriptAndSass")

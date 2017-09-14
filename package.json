@@ -11,7 +11,8 @@
     "_compile-demo-app-css": "node-sass --include-path content demo-app/content/demo-app.scss demo-app/content/demo-app.css",
     "_watch-css": "nodemon -e scss --watch content/  --exec \"npm run _compile-css\"",
     "_watch-demo-app-css": "nodemon -e scss --watch demo-app/content/ --watch content/  --exec \"npm run _compile-demo-app-css\"",
-    "_clean_build_output": "rimraf ./BuildOutput"
+    "_clean_build_output": "rimraf ./BuildOutput",
+    "test-ci": "karma start ./karma.conf.server.js"
   },
   "dependencies": {
     "@angular/common": "^4.3.1",
@@ -60,7 +61,10 @@
     "task-runner-js": "^2.1.4",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "~2.3.3",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "phantomjs-prebuilt": "^2.1.15",
+    "karma-typescript": "^3.0.5"
   },
   "-vs-binding": {
     "ProjectOpened": [

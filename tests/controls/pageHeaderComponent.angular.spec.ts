@@ -1,17 +1,17 @@
 
-import { ComponentFixture, TestBed, async } from "@angular/core/testing";
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
-import { By } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
-import { DebugElement } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { DebugElement } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { PageHeaderComponent } from "../../component-package/controls/pageHeader/pageHeader.component";
-import { SaveCancelComponent } from "../../component-package/controls/saveCancel/saveCancel.component";
-import { TextButtonComponent } from "../../component-package/controls/textButton/textButton.component";
-import { LockButtonComponent } from "../../component-package/controls/lockButton/lockButton.component";
+import { PageHeaderComponent } from '../../component-package/controls/pageHeader/pageHeader.component';
+import { SaveCancelComponent } from '../../component-package/controls/saveCancel/saveCancel.component';
+import { TextButtonComponent } from '../../component-package/controls/textButton/textButton.component';
+import { LockButtonComponent } from '../../component-package/controls/lockButton/lockButton.component';
 
-describe("PageHeaderComponent", () => {
+describe('PageHeaderComponent', () => {
     let component: PageHeaderComponent;
     let fixture: ComponentFixture<PageHeaderComponent>;
     let rootElement: DebugElement;
@@ -26,22 +26,22 @@ describe("PageHeaderComponent", () => {
 
         TestBed.overrideComponent(PageHeaderComponent, {
             set: {
-                templateUrl: "pageHeader.component.html"
+                templateUrl: 'pageHeader.component.html'
             }
         });
         TestBed.overrideComponent(SaveCancelComponent, {
             set: {
-                templateUrl: "../saveCancel/saveCancel.component.html"
+                templateUrl: '../saveCancel/saveCancel.component.html'
             }
         });
         TestBed.overrideComponent(TextButtonComponent, {
             set: {
-                templateUrl: "../textButton/textButton.component.html"
+                templateUrl: '../textButton/textButton.component.html'
             }
         });
         TestBed.overrideComponent(LockButtonComponent, {
             set: {
-                templateUrl: "../lockButton/lockButton.component.html"
+                templateUrl: '../lockButton/lockButton.component.html'
             }
         });
 
@@ -54,68 +54,68 @@ describe("PageHeaderComponent", () => {
             done();
         });
     });
-    describe("When initialized", () => {
+    describe('When initialized', () => {
         beforeEach(() => {
-            spyOn(component.actionEnded, "emit");
-            spyOn(component.actionStarted, "emit");
+            spyOn(component.actionEnded, 'emit');
+            spyOn(component.actionStarted, 'emit');
         });
-        describe("When an enableActionsText is provided", () => {
+        describe('When an enableActionsText is provided', () => {
             beforeEach(() => {
-                component.enableActionsText = "Aktivera";
+                component.enableActionsText = 'Aktivera';
                 fixture.detectChanges();
             });
-            it("actions are not visible", () => {
+            it('actions are not visible', () => {
                 expect(component.actionsVisible).toBeFalsy();
             });
-            it("and a text button is added", () => {
+            it('and a text button is added', () => {
                 var textButtons = rootElement.queryAll(By.css('.text-button'));
                 expect(textButtons.length).toEqual(1);
             });
-            describe("When the enableActionsButton is clicked", () => {
+            describe('When the enableActionsButton is clicked', () => {
                 beforeEach(() => {
-                    rootElement.queryAll(By.css('vgr-text-button'))[0].triggerEventHandler("buttonClick", null);
+                    rootElement.queryAll(By.css('vgr-text-button'))[0].triggerEventHandler('buttonClick', null);
                     fixture.detectChanges();
                 });
-                it("actions are visible", () => {
+                it('actions are visible', () => {
                     expect(component.actionsVisible).toBeTruthy();
                 });
-                it("and an actionStarted event is emitted", () => {
+                it('and an actionStarted event is emitted', () => {
                     expect(component.actionStarted.emit).toHaveBeenCalled();
                 });
             });
-            describe("And a disableActionsText is provided", () => {
+            describe('And a disableActionsText is provided', () => {
                 beforeEach(() => {
-                    component.disableActionsText = "Inaktivera";
-                    component.enableActionsText = "Aktivera";
+                    component.disableActionsText = 'Inaktivera';
+                    component.enableActionsText = 'Aktivera';
                     fixture.detectChanges();
                 });
-                it("actions are not visible", () => {
+                it('actions are not visible', () => {
                     expect(component.actionsVisible).toBeFalsy();
                 });
-                it("and another text button is added", () => {
+                it('and another text button is added', () => {
                     var textButtons = rootElement.queryAll(By.css('.text-button'));
                     expect(textButtons.length).toEqual(2);
                 });
-                describe("When the enableActionsButton is clicked", () => {
+                describe('When the enableActionsButton is clicked', () => {
                     beforeEach(() => {
-                        rootElement.queryAll(By.css('vgr-text-button'))[0].triggerEventHandler("buttonClick", null);
+                        rootElement.queryAll(By.css('vgr-text-button'))[0].triggerEventHandler('buttonClick', null);
                         fixture.detectChanges();
                     });
-                    it("actions are visible", () => {
+                    it('actions are visible', () => {
                         expect(component.actionsVisible).toBeTruthy();
                     });
-                    it("and an actionStarted event is emitted", () => {
+                    it('and an actionStarted event is emitted', () => {
                         expect(component.actionStarted.emit).toHaveBeenCalled();
                     });
-                    describe("When the disableActionsButton is clicked", () => {
+                    describe('When the disableActionsButton is clicked', () => {
                         beforeEach(() => {
-                            rootElement.queryAll(By.css('vgr-text-button'))[1].triggerEventHandler("buttonClick", null);
+                            rootElement.queryAll(By.css('vgr-text-button'))[1].triggerEventHandler('buttonClick', null);
                             fixture.detectChanges();
                         });
-                        it("actions are not visible", () => {
+                        it('actions are not visible', () => {
                             expect(component.actionsVisible).toBeFalsy();
                         });
-                        it("and an actionEnded event is emitted", () => {
+                        it('and an actionEnded event is emitted', () => {
                             expect(component.actionEnded.emit).toHaveBeenCalled();
                         });
                     });
@@ -123,15 +123,15 @@ describe("PageHeaderComponent", () => {
             });
         });
 
-        describe("When only a disableActionsText is provided", () => {
+        describe('When only a disableActionsText is provided', () => {
             beforeEach(() => {
-                component.disableActionsText = "Inaktivera";
+                component.disableActionsText = 'Inaktivera';
                 fixture.detectChanges();
             });
-            it("actions are not visible", () => {
+            it('actions are not visible', () => {
                 expect(component.actionsVisible).toBeFalsy();
             });
-            it("and no text button is added", () => {
+            it('and no text button is added', () => {
                 var textButtons = rootElement.queryAll(By.css('.text-button'));
                 expect(textButtons.length).toEqual(0);
             });

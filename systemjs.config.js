@@ -32,6 +32,7 @@
       // other libraries
       'jquery': 'npm:jquery/dist/jquery.js',
       'rxjs': 'npm:rxjs',
+      'intl': 'npm:intl',
       'ngx-perfect-scrollbar': "npm:ngx-perfect-scrollbar/bundles/ngx-perfect-scrollbar.umd.js"
 
     },
@@ -42,6 +43,9 @@
         defaultExtension: 'js'
       },
       rxjs: {
+        defaultExtension: 'js'
+      },
+      intl: {
         defaultExtension: 'js'
       },
 

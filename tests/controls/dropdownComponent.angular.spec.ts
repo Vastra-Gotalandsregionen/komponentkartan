@@ -30,20 +30,6 @@ describe("DropdownComponent", () => {
             imports: [CommonModule, FormsModule, PerfectScrollbarModule]
         });
 
-        TestBed.overrideComponent(DropdownComponent,
-            {
-                set: {
-                    templateUrl: "dropdown.component.html"
-                }
-            });
-
-        TestBed.overrideComponent(FilterTextboxComponent,
-            {
-                set: {
-                    templateUrl: "../filterTextbox/filterTextbox.component.html"
-                }
-            });
-
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(DropdownComponent);
             component = fixture.componentInstance;
