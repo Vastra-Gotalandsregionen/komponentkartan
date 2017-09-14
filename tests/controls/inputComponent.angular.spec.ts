@@ -32,6 +32,7 @@ import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
 import 'npm:intl/locale-data/jsonp/se-SE.js';
 
+
 describe('[InputComponent]', () => {
     let component: InputComponent;
     let fixture: ComponentFixture<InputComponent>;
