@@ -171,8 +171,6 @@ Task("Run-Jasmine-Tests")
     });
 });
 
-
-
 Task("Move-TypescriptAndSass")
 .IsDependentOn("Build-TypescriptAndSass")
 .Does(() => {
@@ -191,6 +189,7 @@ Task("Build-Frontend")
 	.IsDependentOn("Build-TypescriptAndSass")
 	.IsDependentOn("Move-TypescriptAndSass")
 	.IsDependentOn("Build-Npm-Frontend-Packages")
+	.IsDependentOn("Run-Jasmine-Tests")
 	.Does(() => {
         CopyFiles("./component-package/**/*.*", "./BuildOutput/component-package", true);
         CopyFiles("./demo-app/**/*.*", "./BuildOutput/demo-app", true);
