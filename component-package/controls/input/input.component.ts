@@ -149,7 +149,6 @@ export class InputComponent implements OnInit {
         if (this.pattern && this.pattern.length > 0) {
             const valueToMatch = this.value !== undefined ? this.value : '';
             const regexp = new RegExp(this.pattern);
-            console.log('valueToMatch ' + valueToMatch + ' regex: ' + regexp);
             if (!regexp.test(valueToMatch)) {
                 return this.invalidPatternValidationResult;
             }

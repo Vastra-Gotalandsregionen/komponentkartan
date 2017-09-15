@@ -53,18 +53,19 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-spec-reporter": "0.0.31",
+    "karma-typescript": "^3.0.5",
     "lite-server": "^2.2.2",
     "node-sass": "~4.5.0",
     "nodemon": "^1.11.0",
+    "phantomjs-prebuilt": "^2.1.15",
     "protractor": "~5.1.2",
     "rimraf": "2.6.1",
     "task-runner-js": "^2.1.4",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "phantomjs-prebuilt": "^2.1.15",
-    "karma-typescript": "^3.0.5"
+    "typescript": "~2.3.3"
   },
   "-vs-binding": {
     "ProjectOpened": [
