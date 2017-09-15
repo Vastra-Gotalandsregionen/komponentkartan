@@ -176,7 +176,7 @@ describe('SaveCancelComponent', () => {
         it('When not checked, it has state aria-checked set to false', () => {
             component.checked = false;
             fixture.detectChanges();
-            expect(checkboximage.attributes['aria-checked']).toBe('true');
+            expect(checkboximage.attributes['aria-checked']).toBe('false');
         });
 
     });
