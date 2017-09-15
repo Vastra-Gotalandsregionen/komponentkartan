@@ -31,7 +31,7 @@ $dropdown-width--small: 100px;
         border-radius: 1px;
         .disabled & {
             background-color: $background-color--default;
-            @extend .border-color--secondary;
+            border-color: $control-color--disabled;
             cursor: default;
         }
     }
