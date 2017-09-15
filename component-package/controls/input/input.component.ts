@@ -2,6 +2,8 @@ import { Component, Input, EventEmitter, Output, HostBinding, OnInit, ElementRef
 import { DecimalPipe } from '@angular/common'
 import { IValidationResult } from '../../models/validated.model';
 
+
+
 @Component({
     selector: 'vgr-input',
     moduleId: module.id,
@@ -36,7 +38,6 @@ export class InputComponent implements OnInit {
 
     @Input() type: string;
 
-
     displayValue: string;
 
     get isAmount(): boolean {
@@ -53,6 +54,8 @@ export class InputComponent implements OnInit {
     }
     // Egen validering
     @Input() customValidator: Function;
+
+    private maxNumberOfDecimals = 2;
 
     constructor() {
         this.validationErrorState = ValidationErrorState.NoError;
@@ -80,7 +83,7 @@ export class InputComponent implements OnInit {
         }
         if (this.isNumeric) {
             if (this.isAmount) {
-                this.setupNumericFormat('kr', 1, 2, 2);
+                this.setupNumericFormat('kr', 1, 2, this.maxNumberOfDecimals);
             } else if (this.isKm) {
                 this.setupNumericFormat('km');
             } else if (this.isPercent) {
@@ -97,7 +100,7 @@ export class InputComponent implements OnInit {
         };
     }
 
-    setupNumericFormat(suffix?: string, minIntegerDigits: number = 1, minFractionDigits: number = 0, maxFractionDigits: number = 3) {
+    setupNumericFormat(suffix?: string, minIntegerDigits: number = 1, minFractionDigits: number = 0, maxFractionDigits: number = this.maxNumberOfDecimals) {
         if (!this.pattern) {
             this.pattern = '^[-]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
         }
@@ -160,6 +163,7 @@ export class InputComponent implements OnInit {
     onLeave(): void {
         if (this.isNumeric) {
             this.value = this.convertStringToNumber(this.displayValue);
+
             if (!isNaN(this.value)) {
                 this.displayValue = this.convertNumberToString(this.value);
             }
@@ -179,11 +183,22 @@ export class InputComponent implements OnInit {
     convertStringToNumber(value: string): number {
         if (value) {
             const normalized = value.toString().trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
-            const floatVal = parseFloat(normalized);
+            const floatVal = this.roundNumber(parseFloat(normalized));
             return floatVal;
         }
         return NaN;
     }
+
+    roundNumber(number: number, numberOfDecimals = this.maxNumberOfDecimals) {
+        if (isNaN(number)) {
+            return number;
+        }
+
+        const factor = Math.pow(10, numberOfDecimals);
+        const tempNumber = number * factor;
+        const roundedTempNumber = Math.round(tempNumber);
+        return roundedTempNumber / factor;
+    };
 
     updateValidation(): void {
         const validationResult = this.validateInput();
