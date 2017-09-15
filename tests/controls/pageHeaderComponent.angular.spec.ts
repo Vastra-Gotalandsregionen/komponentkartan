@@ -65,7 +65,7 @@ describe('PageHeaderComponent', () => {
                 fixture.detectChanges();
             });
             it('actions are not visible', () => {
-                expect(component.actionsVisible).toBeFalsy();
+                expect(component.expanded).toBeFalsy();
             });
             it('and a text button is added', () => {
                 var textButtons = rootElement.queryAll(By.css('.text-button'));
@@ -77,7 +77,7 @@ describe('PageHeaderComponent', () => {
                     fixture.detectChanges();
                 });
                 it('actions are visible', () => {
-                    expect(component.actionsVisible).toBeTruthy();
+                    expect(component.expanded).toBeTruthy();
                 });
                 it('and an actionStarted event is emitted', () => {
                     expect(component.actionStarted.emit).toHaveBeenCalled();
@@ -90,7 +90,7 @@ describe('PageHeaderComponent', () => {
                     fixture.detectChanges();
                 });
                 it('actions are not visible', () => {
-                    expect(component.actionsVisible).toBeFalsy();
+                    expect(component.expanded).toBeFalsy();
                 });
                 it('and another text button is added', () => {
                     var textButtons = rootElement.queryAll(By.css('.text-button'));
@@ -102,7 +102,7 @@ describe('PageHeaderComponent', () => {
                         fixture.detectChanges();
                     });
                     it('actions are visible', () => {
-                        expect(component.actionsVisible).toBeTruthy();
+                        expect(component.expanded).toBeTruthy();
                     });
                     it('and an actionStarted event is emitted', () => {
                         expect(component.actionStarted.emit).toHaveBeenCalled();
@@ -113,7 +113,7 @@ describe('PageHeaderComponent', () => {
                             fixture.detectChanges();
                         });
                         it('actions are not visible', () => {
-                            expect(component.actionsVisible).toBeFalsy();
+                            expect(component.expanded).toBeFalsy();
                         });
                         it('and an actionEnded event is emitted', () => {
                             expect(component.actionEnded.emit).toHaveBeenCalled();
@@ -129,7 +129,7 @@ describe('PageHeaderComponent', () => {
                 fixture.detectChanges();
             });
             it('actions are not visible', () => {
-                expect(component.actionsVisible).toBeFalsy();
+                expect(component.expanded).toBeFalsy();
             });
             it('and no text button is added', () => {
                 var textButtons = rootElement.queryAll(By.css('.text-button'));

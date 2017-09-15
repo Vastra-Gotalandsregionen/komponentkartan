@@ -1,18 +1,18 @@
-<div [ngClass]="{'page-header--actions-visible' : actionsVisible, 'page-header--actions-hidden' : !actionsVisible}">
-    <div class="page-header__always-visible">
-        <div class="page-header__top-border"></div>
-        <div class="page-header__controls">
-            <ng-content select=".page-header__control"></ng-content>
-            <vgr-text-button *ngIf="enableActionsText" class="page-header__control" (buttonClick)="enableActions()" [disabled]="actionsVisible">{{enableActionsText}}</vgr-text-button>
-            <vgr-text-button *ngIf="enableActionsText && disableActionsText" class="page-header__control" (buttonClick)="disableActions()"
-                [disabled]="!actionsVisible">{{disableActionsText}}</vgr-text-button>
-            <div class="page-header__control-panel control-with-heading">
-                <h1 class="page-header__title">{{title}}</h1>
-                <vgr-save-cancel *ngIf="saveCancel" class="page-header__save-cancel" (onCancel)="disableActions()" (onSave)="disableActions()"></vgr-save-cancel>
-            </div>
-        </div>
+<div [ngClass]="{'page-header--actions-visible' : expanded, 'page-header--actions-hidden' : !expanded}">
+  <div class="page-header__always-visible">
+    <div class="page-header__top-border"></div>
+    <div class="page-header__controls">
+      <ng-content select=".page-header__control"></ng-content>
+      <vgr-text-button *ngIf="enableActionsText" class="page-header__control" (buttonClick)="enableActions()" [disabled]="expanded">{{enableActionsText}}</vgr-text-button>
+      <vgr-text-button *ngIf="enableActionsText && disableActionsText" class="page-header__control" (buttonClick)="disableActions()"
+        [disabled]="!expanded">{{disableActionsText}}</vgr-text-button>
+      <div class="page-header__control-panel control-with-heading">
+        <h1 class="page-header__title">{{title}}</h1>
+        <vgr-save-cancel *ngIf="saveCancel" class="page-header__save-cancel" (onCancel)="disableActions()" (onSave)="disableActions()"></vgr-save-cancel>
+      </div>
     </div>
-    <div class="page-header__action-panel-area">
-        <ng-content select=".page-header__action-panel"></ng-content>
-    </div>
+  </div>
+  <div class="page-header__action-panel-area">
+    <ng-content select=".page-header__action-panel"></ng-content>
+  </div>
 </div>

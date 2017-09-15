@@ -15,12 +15,10 @@ export class PageHeaderComponent {
     @Output() actionStarted: EventEmitter<any> = new EventEmitter();
     @Output() actionEnded: EventEmitter<any> = new EventEmitter();
     @ViewChild(SaveCancelComponent) saveCancelComponent: SaveCancelComponent;
-
-
-    actionsVisible: boolean;
+    @Input() expanded = false;
 
     enableActions() {
-        this.actionsVisible = true;
+        this.expanded = true;
         this.actionStarted.emit();
         if (this.saveCancelComponent) {
             this.saveCancelComponent.unlock();
@@ -28,7 +26,7 @@ export class PageHeaderComponent {
     }
 
     disableActions() {
-        this.actionsVisible = false;
+        this.expanded = false;
         this.actionEnded.emit();
     }
 }

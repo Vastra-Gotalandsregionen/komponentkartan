@@ -1,5 +1,12 @@
-<div class="main-content input-fields">
-  <vgr-page-header [title]="'Inputfält'">
+<div class="main-content input-fields" [ngClass]="{'input-fields--expanded' : headerExpanded}">
+  <vgr-page-header [title]="'Inputfält'" [expanded]="headerExpanded">
+    <div class="page-header__control">
+      <h2>Åtgärder</h2>
+      <vgr-text-button (buttonClick)="headerExpanded = !headerExpanded">Öppna</vgr-text-button>
+    </div>
+    <div class="page-header__action-panel">
+      <h1>Some content</h1>
+    </div>
   </vgr-page-header>
 
   <div class="komponentkarta-components">

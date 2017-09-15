@@ -18,6 +18,7 @@ export class InputFieldsComponent {
     kmValue: number;
     cityValidator: IValidator;
     intValue: number;
+    headerExpanded: boolean;
     constructor(private cityService: CityService) {
         this.cityName = 'Houstons';
         this.cityValidator = {
