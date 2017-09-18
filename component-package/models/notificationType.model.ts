@@ -1,5 +1,5 @@
 export enum NotificationType {
-    ActionRequired,
-    Information,
-    AwaitingRemoval
+    Permanent,
+    ShowOnCollapse,
+    ShowBeforeRemove
 }

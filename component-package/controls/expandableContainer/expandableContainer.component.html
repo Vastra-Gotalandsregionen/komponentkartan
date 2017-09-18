@@ -1,12 +1,14 @@
 <ng-content select=".expandable-container__header"></ng-content>
-<div *ngIf="notificationMessage" class="expandable-container__notification">
-  <span class="expandable-container__notification__icon" [ngClass]="
-            {   'bg-image-icon-ok-check' : notificationIcon===NotificationIcons.Ok,
-                'bg-image-icon-ok-check--green' : notificationIcon===NotificationIcons.OkGreen,
-                'bg-image-icon-exclamation' : notificationIcon===NotificationIcons.Exclamation,
-                'bg-image-icon-exclamation--red' : notificationIcon===NotificationIcons.ExclamationRed}"> </span>
-  <div class="expandable-container__notification__message">
-    {{notificationMessage}}
+<div class="expandable-container__notification-wrapper">
+  <div class="expandable-container__notification">
+    <span class="expandable-container__notification__icon" [ngClass]="
+            {   'bg-image-icon-ok-check' : notification && notification.icon===NotificationIcons.Ok,
+                'bg-image-icon-ok-check--green' : notification && notification.icon===NotificationIcons.OkGreen,
+                'bg-image-icon-exclamation' : notification && notification.icon===NotificationIcons.Exclamation,
+                'bg-image-icon-exclamation--red' : notification && notification.icon===NotificationIcons.ExclamationRed}"> </span>
+    <div class="expandable-container__notification__message">
+      {{notification? notification.message : ''}}
+    </div>
   </div>
 </div>
-<ng-content select=".expandable-container__content "></ng-content>
+<ng-content select=".expandable-container__content"></ng-content>
