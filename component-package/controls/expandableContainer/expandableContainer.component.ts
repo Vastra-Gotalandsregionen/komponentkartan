@@ -18,7 +18,6 @@ export class ExpandableContainerComponent implements OnInit {
     @HostBinding('class.expandable-container--collapsed') collapsed = true;
     @HostBinding('class.expandable-container--expanded') private _expanded: boolean;
     @Input() set expanded(expandedValue: boolean) {
-        console.log('Set Expanded= ' + expandedValue);
         if (expandedValue) {
             this.expand();
         } else {
@@ -33,7 +32,6 @@ export class ExpandableContainerComponent implements OnInit {
 
     private _notification: RowNotification;
     @Input() set notification(value: RowNotification) {
-        console.log(value);
         this._notification = value;
         if (value) {
             if (value.type === NotificationType.ShowOnCollapse) {
@@ -90,7 +88,6 @@ export class ExpandableContainerComponent implements OnInit {
     }
 
     collapse() {
-        console.log('collapse');
         if (!this._expanded) {
             return;
         }
@@ -105,10 +102,8 @@ export class ExpandableContainerComponent implements OnInit {
                     header.siblings('.expandable-container__notification-wrapper').slideUp(400);
                     this.notification.done = true;
                 }, 1500);
-
             }
         });
-
         this._expanded = false;
         this.collapsed = true;
         this.expandedChanged.emit(this._expanded);
