@@ -58,15 +58,15 @@
 }
 
 .flex-column-5 {
-  @include flex-column-mixin(5em);
+  width: 90px; //@include flex-column-mixin(5em);
 }
 
 .flex-column-13 {
-  @include flex-column-mixin(13em);
+  width: 200px; //@include flex-column-mixin(13em);
 }
 
 .flex-column-15 {
-  @include flex-column-mixin(15em);
+  width: 230px; //@include flex-column-mixin(15em);
 }
 
 .flex-row {

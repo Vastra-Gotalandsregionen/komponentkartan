@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-.card__top-container {
+.card__top {
   display: flex;
   flex-direction: row;
   padding-top: $margin--slim;
@@ -87,17 +87,15 @@
 
 @media screen and (min-width: $desktop-width--medium) {
   .card-section__header {
-    min-height: 45px;
+    min-height: 40px;
   }
   .card__left-container {
-    padding-right: $margin--fat;
-    padding-top: $margin--fat;
-    padding-bottom: $margin--fat;
+    padding-right: $margin--fat; // padding-top: $margin--fat;
+    // padding-bottom: $margin--fat;
   }
   .card__right-container {
-    padding-left: $margin--fat;
-    padding-top: $margin--fat;
-    padding-bottom: $margin--fat;
+    padding-left: $margin--fat; // padding-top: $margin--fat;
+    // padding-bottom: $margin--fat;
   }
   .card-section__content {
     padding-top: $margin--fat;
@@ -105,5 +103,8 @@
     >* {
       margin-bottom: $margin--fat;
     }
+  }
+  .card__top {
+    padding-top: 0px; //padding-bottom: 0px;
   }
 }

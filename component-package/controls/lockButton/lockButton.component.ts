@@ -8,7 +8,6 @@ import { Component, Input, EventEmitter, Output } from '@angular/core'
 export class LockButtonComponent {
     @Input() disabled: boolean;
     @Input() unlocked: boolean;
-
     @Output() onLocked = new EventEmitter<string>();
     @Output() onUnlocked = new EventEmitter<string>();
 

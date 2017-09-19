@@ -1,22 +1,54 @@
 <div class="main-content lists-component">
-  <vgr-page-header [title]="'Person list'">
+  <vgr-page-header [title]="'Demo-lista'">
   </vgr-page-header>
 
   <vgr-expandable-container-list [allowMultipleExpandedChildren]="false">
     <div class="expandable-container-list__header">
-      <div class="flex-column-13">First name</div>
-      <div class="flex-column-15">Last name</div>
+      <h2 class="flex-column-13">Förnamn</h2>
+      <h2 class="flex-column-15">Efternamn</h2>
     </div>
+
+    <vgr-expandable-container *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
+      <div class="expandable-container__header">
+        <div class="flex-column-13">{{row.object.firstName}}</div>
+        <div class="flex-column-15">{{row.object.lastName}}</div>
+      </div>
+      <div class="expandable-container__content">
+        <vgr-card>
+          <vgr-card-section class="card__left" [title]="'Personlig information'" [expanded]="true">
+            <div class="flex-row">
+              <span class="flex-column-15">Förnamn</span>
+              <span>{{row.object.firstName}}</span>
+            </div>
+            <div class="flex-row">
+              <span class="flex-column-15">Efternamn</span>
+              <span>{{row.object.lastName}}</span>
+            </div>
+          </vgr-card-section>
+          <vgr-card-section class="card__left" [title]="'Primära team'">
+            <div *ngFor="let organisation of row.object.organisations">
+              <div>{{organisation}}</div>
+            </div>
+          </vgr-card-section>
+          <vgr-card-section class="card__right" [title]="'Sekundära team'">
+            <div *ngFor="let organisation of row.object.organisations">
+              <div>{{organisation}}</div>
+            </div>
+          </vgr-card-section>
+        </vgr-card>
+        <!-- <vgr-text-button (buttonClick)="savePerson(row)">Save</vgr-text-button> -->
+      </div>
+    </vgr-expandable-container>
     <vgr-expandable-container [expanded]="true" [notification]="cardRow.notification">
       <div class="expandable-container__header">
-        <div class="flex-column-13">Card</div>
-        <div class="flex-column-15">Cardson</div>
+        <div class="flex-column-13">Kort</div>
+        <div class="flex-column-15">Med knappar</div>
       </div>
       <div class="expandable-container__content">
         <vgr-card>
           <div class="card__top flex-row">
             <vgr-text-button [secondary]="true" [disabled]="true">+ Lägg till i fler enheter</vgr-text-button>
-            <vgr-save-cancel class="flex-right" (onUnlock)="cardUnlocked=true" (onSave)="cardSaved()" (onCancel)="cardCancelled()"></vgr-save-cancel>
+            <vgr-save-cancel class="flex-right" [secondary]="true" (onUnlock)="cardUnlocked=true" (onSave)="cardSaved()" (onCancel)="cardCancelled()"></vgr-save-cancel>
           </div>
           <vgr-card-section [title]="'Uppgifter'" class="card__left">
             <div style="width:100%; height:100px; background-color:cornflowerblue"></div>
@@ -48,40 +80,12 @@
             </div>
           </vgr-card-section>
           <vgr-card-section [title]="'Sektion 3'" class="card__right">
-            Foo
+            <div style="width:100%; height:50px; background-color:cornflowerblue"></div>
+            <div style="width:100%; height:50px; background-color:crimson"></div>
+            <div style="width:100%; height:50px; background-color:burlywood"></div>
           </vgr-card-section>
         </vgr-card>
       </div>
     </vgr-expandable-container>
-    <vgr-expandable-container *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
-      <div class="expandable-container__header">
-        <div class="flex-column-13">{{row.object.firstName}}</div>
-        <div class="flex-column-15">{{row.object.lastName}}</div>
-      </div>
-      <div class="expandable-container__content">
-        <vgr-text-button (buttonClick)="savePerson(row)">Save</vgr-text-button>
-        <vgr-expandable-container>
-          <div class="expandable-container__header">
-            <div class="flex-column-15">Primary organisations</div>
-          </div>
-          <div class="expandable-container__content">
-            <div *ngFor="let organisation of row.object.organisations">
-              <div>{{organisation}}</div>
-            </div>
-          </div>
-        </vgr-expandable-container>
-        <vgr-expandable-container>
-          <div class="expandable-container__header">
-            <div class="flex-column-15">Secondary organisations</div>
-          </div>
-          <div class="expandable-container__content">
-            <div *ngFor="let organisation of row.object.organisations">
-              <div>{{organisation}}</div>
-            </div>
-          </div>
-        </vgr-expandable-container>
-      </div>
-    </vgr-expandable-container>
-
   </vgr-expandable-container-list>
 </div>

@@ -15,10 +15,12 @@ export class SaveCancelComponent implements OnChanges {
 
     @ViewChildren(TextButtonComponent) textButtonComponents: QueryList<TextButtonComponent>;
     @ViewChild(LockButtonComponent) lockButtonComponent: LockButtonComponent;
+    @Input() secondary: boolean;
 
     @Output() onCancel = new EventEmitter();
     @Output() onSave = new EventEmitter();
     @Output() onUnlock = new EventEmitter();
+
     saveCancelEnabled: boolean;
 
     constructor() {
@@ -26,6 +28,9 @@ export class SaveCancelComponent implements OnChanges {
     }
 
     ngOnChanges() {
+        if (!this.textButtonComponents || !this.lockButtonComponent) {
+            return;
+        }
         if (this.enabled) {
             this.textButtonComponents.forEach(x => x.disabled = false);
             this.lockButtonComponent.unlock();
