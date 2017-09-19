@@ -16,9 +16,9 @@ export class SaveCancelComponent implements OnChanges {
     @ViewChildren(TextButtonComponent) textButtonComponents: QueryList<TextButtonComponent>;
     @ViewChild(LockButtonComponent) lockButtonComponent: LockButtonComponent;
 
-    @Output() onCancel = new EventEmitter<string>();
-    @Output() onSave = new EventEmitter<string>();
-
+    @Output() onCancel = new EventEmitter();
+    @Output() onSave = new EventEmitter();
+    @Output() onUnlock = new EventEmitter();
     saveCancelEnabled: boolean;
 
     constructor() {
@@ -37,6 +37,7 @@ export class SaveCancelComponent implements OnChanges {
 
     onUnlocked() {
         this.saveCancelEnabled = true;
+        this.onUnlock.emit();
     }
 
     onLocked() {

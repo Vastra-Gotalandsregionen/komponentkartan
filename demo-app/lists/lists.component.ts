@@ -11,7 +11,8 @@ import { NotificationType } from '../../component-package/models/notificationTyp
 })
 export class ListsComponent {
     public peopleRows: ExpandableRow<ExamplePerson>[];
-
+    public cardUnlocked: boolean;
+    public cardRow: ExpandableRow<string> = new ExpandableRow<string>('Foo');
     constructor() {
         const examplePeople = [
             { id: '1', firstName: 'Adam', lastName: 'Andersson', organisations: ['Team 1', 'Team 2'] } as ExamplePerson,
@@ -30,6 +31,16 @@ export class ListsComponent {
 
     savePerson(row: ExpandableRow<ExamplePerson>) {
         row.notifyOnCollapse(row.object.firstName + ' was saved.', NotificationIcon.OkGreen);
+    }
+
+    cardSaved() {
+        this.cardUnlocked = false;
+        this.cardRow.notifyOnCollapse('Användaren sparades', NotificationIcon.OkGreen);
+    }
+
+    cardCancelled() {
+        this.cardUnlocked = false;
+        this.cardRow.notifyOnCollapse('Åtgärden avbröts', NotificationIcon.Ok);
     }
 }
 
