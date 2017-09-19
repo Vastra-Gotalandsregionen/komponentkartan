@@ -5,8 +5,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RowNotification } from '../../component-package/models/rowNotification.model';
-import { NotificationIcon } from '../../component-package/models/NotificationIcon.model';
-import { NotificationType } from '../../component-package/models/NotificationType.model';
+import { NotificationIcon } from '../../component-package/models/notificationIcon.model';
+import { NotificationType } from '../../component-package/models/notificationType.model';
 
 import { ExpandableContainerComponent } from '../../component-package/controls/expandableContainer/expandableContainer.component';
 
