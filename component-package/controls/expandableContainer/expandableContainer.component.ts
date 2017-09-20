@@ -80,7 +80,7 @@ export class ExpandableContainerComponent implements OnInit {
         event.cancelBubble = true;
     }
 
-    expand() {
+    private expand() {
         if (this._expanded) {
             return;
         }
@@ -91,7 +91,7 @@ export class ExpandableContainerComponent implements OnInit {
         this.expandedChanged.emit(this._expanded);
     }
 
-    collapse() {
+    private collapse() {
         if (!this._expanded) {
             return;
         }

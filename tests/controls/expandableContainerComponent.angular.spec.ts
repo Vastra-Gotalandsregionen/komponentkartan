@@ -35,8 +35,8 @@ describe('ExpandableContainerComponent', () => {
 
         TestBed.compileComponents().then(() => {
             // spyOn(jqueryHelper, 'collapseContent');
-            // spyOn(jqueryHelper, 'showNotification');
-            // spyOn(jqueryHelper, 'toggleContent');
+            spyOn(jqueryHelper, 'showNotification');
+            spyOn(jqueryHelper, 'toggleContent');
             spyOn(jqueryHelper, 'collapseNotification');
             spyOn(jqueryHelper, 'fadeInNotification');
             fixture = TestBed.createComponent(ExpandableContainerComponent);
@@ -51,6 +51,30 @@ describe('ExpandableContainerComponent', () => {
         beforeEach(() => {
             component.ngOnInit();
         });
+
+        it('the component has the expandable-container class', () => {
+            expect(rootElement.classes['expandable-container']).toBe(true);
+        });
+    });
+
+    describe('When initialized with a Permanent notification is set,', () => {
+        beforeEach(() => {
+            component.notification = { message: 'Information', icon: NotificationIcon.Ok, type: NotificationType.Permanent } as RowNotification;
+            component.ngOnInit();
+
+        });
+        it('notification is displayed', () => {
+            expect(jqueryHelper.showNotification).toHaveBeenCalled();
+        })
+
+    });
+
+
+    describe('When row is expanded', () => {
+        beforeEach(() => {
+            component.expanded = true;
+            fixture.detectChanges();
+        });
         beforeAll(() => {
             jasmine.clock().uninstall();
             jasmine.clock().install();
@@ -58,70 +82,71 @@ describe('ExpandableContainerComponent', () => {
         afterAll(() => {
             jasmine.clock().uninstall();
         })
-        it('the component has the expandable-container class', () => {
-            expect(rootElement.classes['expandable-container']).toBe(true);
+
+        it('the components property expanded is set to true', () => {
+            expect(component.expanded).toBe(true);
+        });
+        it('toggleContent is called', () => {
+            expect(jqueryHelper.toggleContent).toHaveBeenCalled();
         });
 
-        describe('When the component is expanding,', () => {
+        describe('and a ShowOnCollapse notification is set', () => {
             beforeEach(() => {
-                component.expand();
+                component.notification = { message: 'Row saved', icon: NotificationIcon.Ok, type: NotificationType.ShowOnCollapse } as RowNotification;
             });
-
-            it('the components property expanded is set to true', () => {
-                expect(component.expanded).toBe(true);
+            it('expanded is set to false', () => {
+                expect(component.expanded).toBe(false);
             });
-
-        });
-
-        describe('When row is expanded', () => {
-            beforeEach(() => {
-                component.expand();
-                fixture.detectChanges();
+            it('collapse is set to true', () => {
+                expect(component.collapsed).toBe(true);
             });
-            describe('When setting a ShowOnCollapse notification,', () => {
+            it('notification is displayed', () => {
+                expect(jqueryHelper.fadeInNotification).toHaveBeenCalled();
+            })
+            describe('after 1,9 seconds', () => {
                 beforeEach(() => {
-                    component.notification = { message: 'Row saved', icon: NotificationIcon.Ok, type: NotificationType.ShowOnCollapse } as RowNotification;
-                });
-                it('expanded is set to false', () => {
-                    expect(component.expanded).toBe(false);
-                });
-                it('collapse is set to true', () => {
-                    expect(component.collapsed).toBe(true);
-                });
-                it('notification is displayed', () => {
-                    expect(jqueryHelper.fadeInNotification).toHaveBeenCalled();
-                })
-                describe('after 1,9 seconds', () => {
-                    beforeEach(() => {
-                        jasmine.clock().tick(1900);
-                        fixture.detectChanges();
-                    });
-                    it('the notification is hidden', () => {
-                        expect(jqueryHelper.collapseNotification).toHaveBeenCalled();
-                    });
-                    it('the notification event is done', () => {
-                        expect(component.notification.done).toBe(true);
-                    });
-                });
-            });
-            describe('When setting a ShowOnRemove notification,', () => {
-                beforeEach(() => {
-                    component.notification = { message: 'Row deleted', icon: NotificationIcon.Ok, type: NotificationType.ShowOnRemove } as RowNotification;
+                    jasmine.clock().tick(1900);
                     fixture.detectChanges();
                 });
-                it('expanded is set to false', () => {
-                    expect(component.expanded).toBe(false);
+                it('the notification is hidden', () => {
+                    expect(jqueryHelper.collapseNotification).toHaveBeenCalled();
                 });
-                it('collapse is set to true', () => {
-                    expect(component.collapsed).toBe(true);
-                });
-                it('deleted is set to true', () => {
-                    expect(component.deleted).toBe(true);
-                });
-                it('class deleted is set', () => {
-                    expect(rootElement.classes['expandable-container--deleted']).toBe(true);
+                it('the notification event is done', () => {
+                    expect(component.notification.done).toBe(true);
                 });
             });
         });
+        describe('and a ShowOnRemove notification is set', () => {
+            beforeEach(() => {
+                component.notification = { message: 'Row deleted', icon: NotificationIcon.Ok, type: NotificationType.ShowOnRemove } as RowNotification;
+                fixture.detectChanges();
+            });
+            it('expanded is set to false', () => {
+                expect(component.expanded).toBe(false);
+            });
+            it('collapse is set to true', () => {
+                expect(component.collapsed).toBe(true);
+            });
+            it('deleted is set to true', () => {
+                expect(component.deleted).toBe(true);
+            });
+            it('class deleted is set', () => {
+                expect(rootElement.classes['expandable-container--deleted']).toBe(true);
+            });
+        });
+
+
+    });
+
+    describe('When initialized with a permanent notification, ', () => {
+        beforeEach(() => {
+            component.notification = { message: 'Information', icon: NotificationIcon.Ok, type: NotificationType.Permanent } as RowNotification;
+            component.ngOnInit();
+        });
+        it('notification is displayed', () => {
+            expect(jqueryHelper.showNotification).toHaveBeenCalled();
+        })
     });
 });
+
+
