@@ -11,6 +11,7 @@ import { DropdownComponent } from './controls/dropdown/dropdown.component'
 import { DropdownMultiselectComponent } from './controls/dropdown-multiselect/dropdown-multiselect.component'
 import { FilterTextboxComponent } from './controls/filterTextbox/filterTextbox.component'
 import { ExpandableContainerComponent } from './controls/expandableContainer/expandableContainer.component'
+import { ExpandableContainerJqeuryHelper } from './controls/expandableContainer/expandableContainerJqueryHelper';
 import { ExpandableContainerListComponent } from './controls/expandableContainerList/expandableContainerList.component'
 import { TextButtonComponent } from './controls/textButton/textButton.component'
 import { LockButtonComponent } from './controls/lockButton/lockButton.component'
@@ -101,7 +102,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CardComponent,
         CardSectionComponent
     ],
-    providers: [ModalService]
+    providers: [ModalService, ExpandableContainerJqeuryHelper]
 })
 
 

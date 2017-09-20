@@ -2,8 +2,7 @@ import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitt
 import { NotificationType } from '../../models/notificationType.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
 import { RowNotification } from '../../models/rowNotification.model';
-
-
+import { ExpandableContainerJqeuryHelper } from './expandableContainerJqueryHelper';
 
 @Component({
     templateUrl: './expandableContainer.component.html',
@@ -17,6 +16,8 @@ export class ExpandableContainerComponent implements OnInit {
     @HostBinding('class.expandable-container') isContainer = true;
     @HostBinding('class.expandable-container--collapsed') collapsed = true;
     @HostBinding('class.expandable-container--expanded') private _expanded: boolean;
+    @HostBinding('class.expandable-container--deleted') deleted: boolean;
+
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue) {
             this.expand();
@@ -37,6 +38,10 @@ export class ExpandableContainerComponent implements OnInit {
             if (value.type === NotificationType.ShowOnCollapse) {
                 this.expanded = false;
                 this.changeDetecor.detectChanges();
+            } else if (value.type === NotificationType.ShowOnRemove) {
+                this.expanded = false;
+                this.deleted = true;
+                this.changeDetecor.detectChanges();
             } else if (value.type === NotificationType.Permanent) {
                 this.showNotification();
             }
@@ -47,7 +52,7 @@ export class ExpandableContainerComponent implements OnInit {
         return this._notification;
     }
 
-    constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef) {
+    constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ExpandableContainerJqeuryHelper) {
 
     }
 
@@ -58,13 +63,13 @@ export class ExpandableContainerComponent implements OnInit {
     }
 
     showNotification() {
-        const header = this.getHeader();
-        header.siblings('.expandable-container__notification-wrapper').show();
+        const header = this.jqueryHelper.getHeader(this.elementRef);
+        this.jqueryHelper.showNotification(header);
     }
 
     @HostListener('click', ['$event'])
     toggleExpand(event: Event) {
-        if (!this.isClickEventHeader(event)) {
+        if (!this.jqueryHelper.isClickEventHeader(event)) {
             return;
         }
         if (!this._expanded) {
@@ -79,8 +84,7 @@ export class ExpandableContainerComponent implements OnInit {
         if (this._expanded) {
             return;
         }
-        const header = this.getHeader();
-        header.siblings('.expandable-container__content').slideToggle(400);
+        this.jqueryHelper.toggleContent(this.elementRef);
         this._expanded = true;
         this.collapsed = false;
 
@@ -91,46 +95,22 @@ export class ExpandableContainerComponent implements OnInit {
         if (!this._expanded) {
             return;
         }
-        const header = this.getHeader();
+        const header = this.jqueryHelper.getHeader(this.elementRef);
         const showNotificationOnCollapse = this.notification && this.notification.type === NotificationType.ShowOnCollapse && !this.notification.done;
         if (showNotificationOnCollapse) {
-            header.siblings('.expandable-container__notification-wrapper').fadeIn();
+            this.jqueryHelper.fadeInNotification(header);
         }
-        header.siblings('.expandable-container__content').slideUp(400, () => {
-            if (showNotificationOnCollapse && !this.notification.done) {
-                setTimeout(() => {
-                    header.siblings('.expandable-container__notification-wrapper').slideUp(400);
-                    this.notification.done = true;
-                }, 1500);
-            }
-        });
+        this.jqueryHelper.collapseContent(header);
+        if (showNotificationOnCollapse && !this.notification.done) {
+            setTimeout(() => {
+                this.jqueryHelper.collapseNotification(header);
+                this.notification.done = true;
+            }, 1900);
+        }
+
         this._expanded = false;
         this.collapsed = true;
         this.expandedChanged.emit(this._expanded);
     }
-
-
-
-    private getHeader(): JQuery {
-        return $(this.elementRef.nativeElement).children('.expandable-container__header');
-    }
-
-    private isClickEventHeader(event: Event): boolean {
-        const target = event.target || event.srcElement || event.currentTarget;
-        const clickedElement = $(target);
-
-        if (clickedElement.hasClass('expandable-container__header')) {
-            return true;
-        }
-        if (clickedElement.hasClass('expandable-container__notification')) {
-            return true;
-        }
-        if (clickedElement.parent('.expandable-container__header').length > 0) {
-            return true;
-        }
-        if (clickedElement.parent('.expandable-container__notification').length > 0) {
-            return true;
-        }
-        return false;
-    }
 }
+

@@ -9,20 +9,22 @@ import { NotificationIcon } from '../../component-package/models/notificationIco
 import { NotificationType } from '../../component-package/models/notificationType.model';
 
 import { ExpandableContainerComponent } from '../../component-package/controls/expandableContainer/expandableContainer.component';
+import { ExpandableContainerJqeuryHelper } from '../../component-package/controls/expandableContainer/expandableContainerJqueryHelper';
 
 
 describe('ExpandableContainerComponent', () => {
     let component: ExpandableContainerComponent;
     let fixture: ComponentFixture<ExpandableContainerComponent>;
     let rootElement: DebugElement;
-
+    let jqueryHelper: ExpandableContainerJqeuryHelper = new ExpandableContainerJqeuryHelper();
 
     beforeEach((done) => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
             declarations: [ExpandableContainerComponent],
-            imports: [CommonModule]
+            imports: [CommonModule],
+            providers: [{ provide: ExpandableContainerJqeuryHelper, useValue: jqueryHelper }]
         });
 
         TestBed.overrideComponent(ExpandableContainerComponent, {
@@ -32,6 +34,11 @@ describe('ExpandableContainerComponent', () => {
         });
 
         TestBed.compileComponents().then(() => {
+            // spyOn(jqueryHelper, 'collapseContent');
+            // spyOn(jqueryHelper, 'showNotification');
+            // spyOn(jqueryHelper, 'toggleContent');
+            spyOn(jqueryHelper, 'collapseNotification');
+            spyOn(jqueryHelper, 'fadeInNotification');
             fixture = TestBed.createComponent(ExpandableContainerComponent);
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
@@ -44,6 +51,13 @@ describe('ExpandableContainerComponent', () => {
         beforeEach(() => {
             component.ngOnInit();
         });
+        beforeAll(() => {
+            jasmine.clock().uninstall();
+            jasmine.clock().install();
+        });
+        afterAll(() => {
+            jasmine.clock().uninstall();
+        })
         it('the component has the expandable-container class', () => {
             expect(rootElement.classes['expandable-container']).toBe(true);
         });
@@ -58,20 +72,55 @@ describe('ExpandableContainerComponent', () => {
             });
 
         });
-        describe('When the component is collapsing,', () => {
+
+        describe('When row is expanded', () => {
             beforeEach(() => {
-                component.notification = { message: 'Permanent', icon: NotificationIcon.ExclamationRed, type: NotificationType.ShowOnCollapse } as RowNotification;
-                component.expanded = true;
-                component.notification.done = false;
-                component.collapse();
+                component.expand();
+                fixture.detectChanges();
             });
-
-            it('the components property expanded is set to false', () => {
-                expect(component.expanded).toBe(false);
+            describe('When setting a ShowOnCollapse notification,', () => {
+                beforeEach(() => {
+                    component.notification = { message: 'Row saved', icon: NotificationIcon.Ok, type: NotificationType.ShowOnCollapse } as RowNotification;
+                });
+                it('expanded is set to false', () => {
+                    expect(component.expanded).toBe(false);
+                });
+                it('collapse is set to true', () => {
+                    expect(component.collapsed).toBe(true);
+                });
+                it('notification is displayed', () => {
+                    expect(jqueryHelper.fadeInNotification).toHaveBeenCalled();
+                })
+                describe('after 1,9 seconds', () => {
+                    beforeEach(() => {
+                        jasmine.clock().tick(1900);
+                        fixture.detectChanges();
+                    });
+                    it('the notification is hidden', () => {
+                        expect(jqueryHelper.collapseNotification).toHaveBeenCalled();
+                    });
+                    it('the notification event is done', () => {
+                        expect(component.notification.done).toBe(true);
+                    });
+                });
             });
-
-            it('and the components property collapse is set to true', () => {
-                expect(component.collapsed).toBe(true);
+            describe('When setting a ShowOnRemove notification,', () => {
+                beforeEach(() => {
+                    component.notification = { message: 'Row deleted', icon: NotificationIcon.Ok, type: NotificationType.ShowOnRemove } as RowNotification;
+                    fixture.detectChanges();
+                });
+                it('expanded is set to false', () => {
+                    expect(component.expanded).toBe(false);
+                });
+                it('collapse is set to true', () => {
+                    expect(component.collapsed).toBe(true);
+                });
+                it('deleted is set to true', () => {
+                    expect(component.deleted).toBe(true);
+                });
+                it('class deleted is set', () => {
+                    expect(rootElement.classes['expandable-container--deleted']).toBe(true);
+                });
             });
         });
     });
