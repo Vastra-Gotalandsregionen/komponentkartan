@@ -47,13 +47,52 @@ describe('ExpandableContainerComponent', () => {
         });
     });
 
-    describe('When initialized, ', () => {
+    describe('When initialized', () => {
         beforeEach(() => {
             component.ngOnInit();
         });
 
         it('the component has the expandable-container class', () => {
             expect(rootElement.classes['expandable-container']).toBe(true);
+        });
+
+        describe('and the header is clicked', () => {
+            beforeEach(() => {
+                spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(true);
+                rootElement.triggerEventHandler('click', null);
+                fixture.detectChanges();
+            });
+            it('component is expanded', () => {
+                expect(component.expanded).toBe(true);
+            });
+            it('content is visible', () => {
+                expect(jqueryHelper.toggleContent).toHaveBeenCalled();
+            });
+            describe('and the header is clicked again', () => {
+                beforeEach(() => {
+                    rootElement.triggerEventHandler('click', null);
+                    fixture.detectChanges();
+                });
+                it('component is collapsed', () => {
+                    expect(component.expanded).toBe(false);
+                });
+                it('content not visible', () => {
+                    expect(jqueryHelper.toggleContent).toHaveBeenCalled();
+                });
+            });
+        });
+        describe('the component is clicked outside of the header', () => {
+            beforeEach(() => {
+                spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(false);
+                rootElement.triggerEventHandler('click', null);
+                fixture.detectChanges();
+            });
+            it('component is not expanded', () => {
+                expect(component.expanded).toBeFalsy();
+            });
+            it('content is not visible', () => {
+                expect(jqueryHelper.toggleContent).toHaveBeenCalledTimes(0);
+            });
         });
     });
 
@@ -66,11 +105,10 @@ describe('ExpandableContainerComponent', () => {
         it('notification is displayed', () => {
             expect(jqueryHelper.showNotification).toHaveBeenCalled();
         })
-
     });
 
 
-    describe('When row is expanded', () => {
+    describe('When expanded is set to true', () => {
         beforeEach(() => {
             component.expanded = true;
             fixture.detectChanges();
@@ -83,7 +121,7 @@ describe('ExpandableContainerComponent', () => {
             jasmine.clock().uninstall();
         })
 
-        it('the components property expanded is set to true', () => {
+        it('the property expanded is set to true', () => {
             expect(component.expanded).toBe(true);
         });
         it('toggleContent is called', () => {

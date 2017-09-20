@@ -19,7 +19,7 @@ export class ExpandableContainerListComponent implements AfterViewInit {
             this.expandableContainers.forEach(changedContainer => {
                 changedContainer.expandedChanged.subscribe((expanded: boolean) => {
                     if (expanded) {
-                        this.expandableContainers.filter(container => container !== changedContainer).forEach(otherContainer => otherContainer.collapse());
+                        this.expandableContainers.filter(container => container !== changedContainer).forEach(otherContainer => otherContainer.expanded = false);
                     }
                 });
             });
