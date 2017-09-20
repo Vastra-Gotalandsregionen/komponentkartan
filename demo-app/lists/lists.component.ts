@@ -29,6 +29,10 @@ export class ListsComponent {
 
     }
 
+    removeRow(row: ExpandableRow<string>) {
+        row.notifyOnRemove('Raden togs bort', NotificationIcon.Ok);
+    }
+
     savePerson(row: ExpandableRow<ExamplePerson>) {
         row.notifyOnCollapse(row.object.firstName + ' sparades', NotificationIcon.OkGreen);
     }

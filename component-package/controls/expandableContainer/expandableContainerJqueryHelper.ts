@@ -15,8 +15,19 @@ export class ExpandableContainerJqeuryHelper {
         header.siblings('.expandable-container__notification-wrapper').fadeIn();
     }
 
-    collapseNotification(header: JQuery) {
-        header.siblings('.expandable-container__notification-wrapper').slideUp(400);
+    collapseNotification(header: JQuery, callback?: Function) {
+        if (!callback) {
+            header.siblings('.expandable-container__notification-wrapper').slideUp(400);
+        } else {
+            header.siblings('.expandable-container__notification-wrapper').slideUp(400, callback);
+        }
+    }
+
+    collapseHeader(header: JQuery) {
+        header.slideUp(400);
+    }
+    fadeOutNotification(header: JQuery) {
+        header.siblings('.expandable-container__notification-wrapper').fadeOut(400);
     }
 
     toggleContent(elementRef: ElementRef) {

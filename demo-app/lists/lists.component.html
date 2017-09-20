@@ -47,7 +47,7 @@
       <div class="expandable-container__content">
         <vgr-card>
           <div class="card__top flex-row">
-            <vgr-text-button [secondary]="true" [disabled]="true">+ Lägg till i fler enheter</vgr-text-button>
+            <vgr-text-button [secondary]="true" [disabled]="false" (buttonClick)="removeRow(cardRow)">Ta bort rad</vgr-text-button>
             <vgr-save-cancel class="flex-right" [secondary]="true" (onUnlock)="cardUnlocked=true" (onSave)="cardSaved()" (onCancel)="cardCancelled()"></vgr-save-cancel>
           </div>
           <vgr-card-section [title]="'Uppgifter'" class="card__left">

@@ -165,12 +165,25 @@ describe('ExpandableContainerComponent', () => {
             it('collapse is set to true', () => {
                 expect(component.collapsed).toBe(true);
             });
-            it('deleted is set to true', () => {
-                expect(component.deleted).toBe(true);
+            describe('after 1,9 seconds', () => {
+                beforeEach(() => {
+                    jasmine.clock().tick(1900);
+                    fixture.detectChanges();
+                });
+                it('the notification is hidden', () => {
+                    expect(jqueryHelper.collapseNotification).toHaveBeenCalled();
+                });
+                // it('the notification event is done', () => {
+                //     expect(component.notification.done).toBe(true);
+                // });
+                it('deleted is set to true', () => {
+                    expect(component.deleted).toBe(true);
+                });
+                it('class deleted is set', () => {
+                    expect(rootElement.classes['expandable-container--deleted']).toBe(true);
+                });
             });
-            it('class deleted is set', () => {
-                expect(rootElement.classes['expandable-container--deleted']).toBe(true);
-            });
+
         });
 
 

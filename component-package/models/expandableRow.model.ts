@@ -12,4 +12,8 @@ export class ExpandableRow<T> {
     notifyOnCollapse(message: string, icon: NotificationIcon) {
         this.notification = { icon: icon, message: message, type: NotificationType.ShowOnCollapse } as RowNotification;
     }
+
+    notifyOnRemove(message: string, icon: NotificationIcon) {
+        this.notification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
+    }
 }

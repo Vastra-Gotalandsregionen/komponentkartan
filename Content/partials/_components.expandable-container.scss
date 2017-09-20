@@ -105,6 +105,11 @@
   }
 }
 
+// .expandable-container--deleted {
+//   max-height: 0;
+//   height: 0;
+//   transition: max-height 0.3s ease-in;
+// }
 .expandable-container__header {
   cursor: pointer;
   height: 35px;

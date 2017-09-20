@@ -97,14 +97,23 @@ export class ExpandableContainerComponent implements OnInit {
         }
         const header = this.jqueryHelper.getHeader(this.elementRef);
         const showNotificationOnCollapse = this.notification && this.notification.type === NotificationType.ShowOnCollapse && !this.notification.done;
-        if (showNotificationOnCollapse) {
+        const deleteAfterNotification = this.notification && this.notification.type === NotificationType.ShowOnRemove && !this.notification.done;
+
+        if (showNotificationOnCollapse || deleteAfterNotification) {
             this.jqueryHelper.fadeInNotification(header);
         }
         this.jqueryHelper.collapseContent(header);
-        if (showNotificationOnCollapse && !this.notification.done) {
+        if ((showNotificationOnCollapse || deleteAfterNotification) && !this.notification.done) {
             setTimeout(() => {
-                this.jqueryHelper.collapseNotification(header);
-                this.notification.done = true;
+                if (deleteAfterNotification) {
+                    this.jqueryHelper.collapseNotification(header, () => {
+                        this.jqueryHelper.collapseHeader(header);
+                        this.notification.done = true;
+                    });
+                } else {
+                    this.jqueryHelper.collapseNotification(header);
+                    this.notification.done = true;
+                }
             }, 1900);
         }
 
