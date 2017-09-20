@@ -13,6 +13,7 @@ export class ExpandableContainerComponent implements OnInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
 
+    readonly showNotificationDurationMs = 1900;
     @HostBinding('class.expandable-container') isContainer = true;
     @HostBinding('class.expandable-container--collapsed') collapsed = true;
     @HostBinding('class.expandable-container--expanded') private _expanded: boolean;
@@ -72,6 +73,7 @@ export class ExpandableContainerComponent implements OnInit {
         if (!this.jqueryHelper.isClickEventHeader(event)) {
             return;
         }
+
         if (!this._expanded) {
             this.expand();
         } else {
@@ -81,7 +83,7 @@ export class ExpandableContainerComponent implements OnInit {
     }
 
     private expand() {
-        if (this._expanded) {
+        if (this._expanded || this.deleted) {
             return;
         }
         this.jqueryHelper.toggleContent(this.elementRef);
@@ -96,30 +98,42 @@ export class ExpandableContainerComponent implements OnInit {
             return;
         }
         const header = this.jqueryHelper.getHeader(this.elementRef);
-        const showNotificationOnCollapse = this.notification && this.notification.type === NotificationType.ShowOnCollapse && !this.notification.done;
-        const deleteAfterNotification = this.notification && this.notification.type === NotificationType.ShowOnRemove && !this.notification.done;
 
-        if (showNotificationOnCollapse || deleteAfterNotification) {
-            this.jqueryHelper.fadeInNotification(header);
-        }
         this.jqueryHelper.collapseContent(header);
-        if ((showNotificationOnCollapse || deleteAfterNotification) && !this.notification.done) {
-            setTimeout(() => {
-                if (deleteAfterNotification) {
-                    this.jqueryHelper.collapseNotification(header, () => {
-                        this.jqueryHelper.collapseHeader(header);
-                        this.notification.done = true;
-                    });
-                } else {
-                    this.jqueryHelper.collapseNotification(header);
-                    this.notification.done = true;
-                }
-            }, 1900);
-        }
-
         this._expanded = false;
         this.collapsed = true;
         this.expandedChanged.emit(this._expanded);
+
+        this.processNotification(header);
+    }
+
+    private processNotification(header: JQuery): void {
+        if (!this.notification || this.notification.done) {
+            return;
+        }
+        if (this.notification.type === NotificationType.ShowOnCollapse) {
+            this.processShowOnCollapseNotification(header);
+        } else if (this.notification.type === NotificationType.ShowOnRemove) {
+            this.processShowOnRemoveNotification(header);
+        };
+    }
+
+    private processShowOnCollapseNotification(header: JQuery) {
+        this.jqueryHelper.fadeInNotification(header);
+        setTimeout(() => {
+            this.jqueryHelper.collapseNotification(header);
+            this.notification.done = true;
+        }, this.showNotificationDurationMs);
+    }
+
+    private processShowOnRemoveNotification(header: JQuery) {
+        this.jqueryHelper.fadeInNotification(header);
+        setTimeout(() => {
+            this.jqueryHelper.collapseNotification(header, () => {
+                this.jqueryHelper.collapseHeader(header);
+                this.notification.done = true;
+            });
+        }, this.showNotificationDurationMs);
     }
 }
 

@@ -105,11 +105,6 @@
   }
 }
 
-// .expandable-container--deleted {
-//   max-height: 0;
-//   height: 0;
-//   transition: max-height 0.3s ease-in;
-// }
 .expandable-container__header {
   cursor: pointer;
   height: 35px;
@@ -125,6 +120,9 @@
   }
   .expandable-container--expanded & {
     border-bottom: 1px solid $primary-color--default;
+  }
+  .expandable-container--deleted & {
+    cursor: default;
   }
 }
 
@@ -148,6 +146,9 @@
   align-items: center;
   flex-direction: row;
   cursor: pointer;
+  .expandable-container--deleted & {
+    cursor: default;
+  }
 }
 
 .expandable-container__notification__icon {

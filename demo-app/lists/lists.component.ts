@@ -3,6 +3,8 @@ import { ExpandableRow } from '../../component-package/models/expandableRow.mode
 import { NotificationIcon } from '../../component-package/models/notificationIcon.model';
 import { RowNotification } from '../../component-package/models/rowNotification.model';
 import { NotificationType } from '../../component-package/models/notificationType.model';
+import { ModalService } from '../../component-package/services/modalService';
+import { ModalButtonConfiguration } from '../../component-package/services/modalService';
 
 @Component({
     moduleId: module.id,
@@ -13,12 +15,12 @@ export class ListsComponent {
     public peopleRows: ExpandableRow<ExamplePerson>[];
     public cardUnlocked: boolean;
     public cardRow: ExpandableRow<string> = new ExpandableRow<string>('Foo');
-    constructor() {
+    constructor(private modalService: ModalService) {
         const examplePeople = [
             { id: '1', firstName: 'Adam', lastName: 'Andersson', organisations: ['Team 1', 'Team 2'] } as ExamplePerson,
-            { id: '2', firstName: 'Bjarne', lastName: 'Bengtsson', organisations: ['Team 1'] } as ExamplePerson,
+            { id: '2', firstName: 'Bjarne', lastName: 'Bengtsson', organisations: ['Team 1'], canBeDeleted: true } as ExamplePerson,
             { id: '3', firstName: 'Carola', lastName: 'Claesson', organisations: ['Team 1', 'Team 2', 'Team 3'] } as ExamplePerson,
-            { id: '4', firstName: 'Daniella', lastName: 'Di Maria Marquez ', organisations: ['Team 4'] } as ExamplePerson,
+            { id: '4', firstName: 'Daniella', lastName: 'Di Maria Marquez ', organisations: ['Team 4'], canBeDeleted: true } as ExamplePerson,
             { id: '5', firstName: 'Erik', lastName: '', organisations: ['Team 2', 'Team 4'] } as ExamplePerson,
         ];
 
@@ -29,8 +31,20 @@ export class ListsComponent {
 
     }
 
-    removeRow(row: ExpandableRow<string>) {
-        row.notifyOnRemove('Raden togs bort', NotificationIcon.Ok);
+    removeRow(row: ExpandableRow<ExamplePerson>) {
+        this.modalService.openDialog('Ta bort person', 'Vill du verkligen ta bort ' + row.object.firstName + '?',
+            new ModalButtonConfiguration('Ja', () => {
+                row.notifyOnRemove(row.object.firstName + ' togs bort', NotificationIcon.Ok);
+            }),
+            new ModalButtonConfiguration('Nej', () => { }));
+    }
+
+    removeCardRow(row: ExpandableRow<string>) {
+        this.modalService.openDialog('Ta bort rad', 'Vill du verkligen ta bort raden?',
+            new ModalButtonConfiguration('Ja', () => {
+                row.notifyOnRemove('Raden togs bort', NotificationIcon.Ok);
+            }),
+            new ModalButtonConfiguration('Nej', () => { }));
     }
 
     savePerson(row: ExpandableRow<ExamplePerson>) {
@@ -53,6 +67,7 @@ export interface ExamplePerson {
     firstName: string;
     lastName: string;
     organisations: string[];
+    canBeDeleted: boolean;
 }
 
 
