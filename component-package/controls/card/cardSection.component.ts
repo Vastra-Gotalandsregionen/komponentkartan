@@ -8,6 +8,8 @@ import { Component, HostBinding, Input, ElementRef } from '@angular/core';
 export class CardSectionComponent {
     @HostBinding('class.card-section') cardSectionClass = true;
     @Input() title: string;
+    @Input() editMode: boolean;
+    @Input() subTitle: string;
     @HostBinding('class.card-section--expanded') private _expanded: boolean;
     @Input() set expanded(value: boolean) {
         this._expanded = value;

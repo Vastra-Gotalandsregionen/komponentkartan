@@ -129,10 +129,8 @@ export class ExpandableContainerComponent implements OnInit {
     private processShowOnRemoveNotification(header: JQuery) {
         this.jqueryHelper.fadeInNotification(header);
         setTimeout(() => {
-            this.jqueryHelper.collapseNotification(header, () => {
-                this.jqueryHelper.collapseHeader(header);
-                this.notification.done = true;
-            });
+            this.jqueryHelper.collapseHeader(this.elementRef);
+            this.notification.done = true;
         }, this.showNotificationDurationMs);
     }
 }

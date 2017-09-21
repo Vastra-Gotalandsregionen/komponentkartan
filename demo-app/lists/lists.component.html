@@ -18,7 +18,8 @@
           <div *ngIf="row.object.canBeDeleted" class="card__top flex-row">
             <vgr-text-button class="flex-right" [secondary]="true" [disabled]="false" (buttonClick)="removeRow(row)">Ta bort</vgr-text-button>
           </div>
-          <vgr-card-section class="card__left" [title]="'Personlig information'" [expanded]="true">
+          <vgr-card-section class="card__left" [title]="'Personlig information'" [subTitle]="row.object.firstName + ' ' + row.object.lastName"
+            [expanded]="true">
             <div class="flex-row">
               <span class="flex-column-15">Förnamn</span>
               <span>{{row.object.firstName}}</span>
@@ -53,7 +54,7 @@
             <vgr-text-button [secondary]="true" [disabled]="false" (buttonClick)="removeCardRow(cardRow)">Ta bort rad</vgr-text-button>
             <vgr-save-cancel class="flex-right" [secondary]="true" (onUnlock)="cardUnlocked=true" (onSave)="cardSaved()" (onCancel)="cardCancelled()"></vgr-save-cancel>
           </div>
-          <vgr-card-section [title]="'Uppgifter'" class="card__left">
+          <vgr-card-section [title]="'Uppgifter'" class="card__left" [editMode]="cardUnlocked" [subTitle]="'aledu10'">
             <div style="width:100%; height:100px; background-color:cornflowerblue"></div>
             <div style="width:100%; height:50px; background-color:crimson"></div>
             <div style="width:100%; height:100px; background-color:burlywood"></div>
@@ -68,7 +69,7 @@
               <div class="flex-column-13">aledu10</div>
             </div>
           </vgr-card-section>
-          <vgr-card-section [title]="'Belopp'" [expanded]="true" class="card__left">
+          <vgr-card-section [title]="'Belopp'" [expanded]="true" [editMode]="cardUnlocked" class="card__left">
             <div class="flex-row">
               <span>Värde före skatt</span>
               <vgr-input class="flex-right" [value]="25" [type]="'amount'"></vgr-input>
@@ -82,7 +83,7 @@
               <vgr-input class="flex-right" [value]="12400" [type]="'amount'"></vgr-input>
             </div>
           </vgr-card-section>
-          <vgr-card-section [title]="'Färger'" class="card__right">
+          <vgr-card-section [title]="'Färger'" [subTitle]="'Färgkarta'" class="card__right">
             <div style="width:100%; height:50px; background-color:cornflowerblue"></div>
             <div style="width:100%; height:50px; background-color:crimson"></div>
             <div style="width:100%; height:50px; background-color:burlywood"></div>

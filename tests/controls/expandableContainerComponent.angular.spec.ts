@@ -160,7 +160,6 @@ describe('ExpandableContainerComponent', () => {
             });
             describe('and a ShowOnRemove notification is set', () => {
                 beforeEach(() => {
-                    spyOn(jqueryHelper, 'collapseNotification').and.callFake((header: JQuery, callback?: Function) => callback());
                     spyOn(jqueryHelper, 'collapseHeader');
                     component.notification = { message: 'Row deleted', icon: NotificationIcon.Ok, type: NotificationType.ShowOnRemove } as RowNotification;
                     fixture.detectChanges();
@@ -175,9 +174,6 @@ describe('ExpandableContainerComponent', () => {
                     beforeEach(() => {
                         jasmine.clock().tick(1900);
                         fixture.detectChanges();
-                    });
-                    it('the notification is hidden', () => {
-                        expect(jqueryHelper.collapseNotification).toHaveBeenCalled();
                     });
                     it('the notification event is done', () => {
                         expect(component.notification.done).toBe(true);

@@ -50,13 +50,24 @@
   justify-content: center;
   border-bottom: 1px solid $border-color;
   cursor: pointer;
-  h2 {
-    display: inline-block;
-    flex: 1;
-  }
   .card-section:first-child() & {
     border-top: 1px solid $border-color;
   }
+}
+
+.card-section__header__title {
+  display: inline-block;
+}
+
+.card-section__header__subtitle {
+  margin-left: $margin--regular;
+}
+
+.card-section__header__icon {
+  @extend .bg-image-icon--edit;
+  margin-left: $margin--regular;
+  width: 30px;
+  height: 30px;
 }
 
 .card-section__header__expander {

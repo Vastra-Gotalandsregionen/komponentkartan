@@ -23,9 +23,10 @@ export class ExpandableContainerJqeuryHelper {
         }
     }
 
-    collapseHeader(header: JQuery) {
-        header.slideUp(400);
+    collapseHeader(elementRef: ElementRef) {
+        $(elementRef.nativeElement).children('.expandable-container__header,.expandable-container__notification-wrapper').slideUp(400);
     }
+
     fadeOutNotification(header: JQuery) {
         header.siblings('.expandable-container__notification-wrapper').fadeOut(400);
     }
