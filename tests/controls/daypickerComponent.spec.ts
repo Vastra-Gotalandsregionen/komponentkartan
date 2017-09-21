@@ -36,6 +36,15 @@ describe('[MonthpickerComponent]', () => {
             expect(component.getNumberOfWeeks(currentYear, currentMonth)).toEqual(5);
         });
 
+        it('contains 5 elements of ICalendarWeeks', () => {
+            expect(component.createWeeks(currentYear, currentMonth).length).toEqual(5);
+        });
+
+        it('contains correct days in firstWeek of type ICalendarWeeks', () => {
+            expect(component.setFirstWeek(currentYear, currentMonth).days[4].day.toDateString()).toBe('Fri Sep 01 2017');
+        });
+
+
     });
     describe('When initialized with currentYear 2017 and currentMonth October', () => {
         beforeEach(() => {
@@ -58,7 +67,6 @@ describe('[MonthpickerComponent]', () => {
             });
 
             it('contains 6 weeks in month model', () => {
-                console.log(currentMonth)
                 expect(component.getNumberOfWeeks(currentYear, currentMonth)).toEqual(6);
             });
 
@@ -66,6 +74,14 @@ describe('[MonthpickerComponent]', () => {
                 expect(component.createWeeks(currentYear, currentMonth).length).toEqual(6);
             });
 
+            it('contains correct days in firstWeek of type ICalendarWeeks', () => {
+                expect(component.setFirstWeek(currentYear, currentMonth).days[6].day.toDateString()).toBe('Sun Oct 01 2017');
+            });
+
+            // it('contains correct days in lastWeek of type ICalendarWeeks', () => {
+            //     console.log(component.setLastWeek(currentYear, currentMonth).days[0].day.toDateString());
+            //     expect(component.setLastWeek(currentYear, currentMonth).days[1].day.toDateString()).toBe('Tue Oct 31 2017');
+            // });
 
         });
     });

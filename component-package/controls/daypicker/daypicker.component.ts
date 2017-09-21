@@ -38,23 +38,24 @@ export class DaypickerComponent implements OnInit {
 
                 if (new Date(year, month) >= this.minDate && (new Date(year, month) <= this.maxDate)) {
                     this.yearMonths.push({ year: year, month: month } as ICalendarYearMonth);
-                    console.log(this.yearMonths);
                 }
             }
         }
-        console.log(this.yearMonths.length);
     }
 
     getFirstDayInMonth(year: number, month: number) { return new Date(year, month, 1); }
 
-    getLastDayInMonth(year: number, month: number) { return new Date(year, month, 0); }
+    getLastDayInMonth(year: number, month: number) {
+        console.log(new Date(year, month, 0));
+        return new Date(year, month, 0);
+    }
 
     getNumberOfWeeks(year: number, month: number): number {
         const firstDayOfWeek = 1;
-        const firstOfMonth = this.getFirstDayInMonth(year, month - 1);
-        const lastOfMonth = this.getLastDayInMonth(year, month);
-        const numberOfDaysInMonth = lastOfMonth.getDate();
-        const firstWeekDay = (firstOfMonth.getDay() - firstDayOfWeek + 7) % 7;
+        const firstDayOfMonth = this.getFirstDayInMonth(year, month - 1);
+        const lastDayOfMonth = this.getLastDayInMonth(year, month);
+        const numberOfDaysInMonth = lastDayOfMonth.getDate();
+        const firstWeekDay = (firstDayOfMonth.getDay() - firstDayOfWeek + 7) % 7;
         const used = firstWeekDay + numberOfDaysInMonth;
 
         return Math.ceil(used / 7);
@@ -65,10 +66,90 @@ export class DaypickerComponent implements OnInit {
         const numberOfWeeks = this.getNumberOfWeeks(year, month);
 
         for (let i = 1; i <= numberOfWeeks; i++) {
-            weeks.push({} as ICalendarWeek)
+            weeks.push({} as ICalendarWeek);
         }
-        console.log(weeks);
         return weeks;
+    }
+
+    setDays(year: number, month: number) {
+        const weeks: ICalendarWeek[] = this.createWeeks(year, month);
+        const daysInWeek: ICalendarDay[] = [];
+
+        // const firstDayOfMonth = this.getFirstDayInMonth(year, month - 1);
+        // const lastDayOfMonth = this.getLastDayInMonth(year, month);
+        // const numberOfDaysInMonth = lastOfMonth.getDate();
+
+        const firstWeek: ICalendarWeek = this.setFirstWeek(year, month);
+        // const lastWeek: ICalendarWeek = this.setLastWeek();
+        // }
+    }
+
+    setFirstWeek(year: number, month: number): ICalendarWeek {
+        const firstDayOfMonth = this.getFirstDayInMonth(year, month - 1);
+        const calendarWeek: ICalendarWeek = {} as ICalendarWeek;
+        calendarWeek.days = [];
+
+        let daynumber = 1;
+
+        for (let i = 0; i <= 6; i++) {
+            if (i < (this.getSwedishDayNumbersInWeek(firstDayOfMonth.getDay()))) {
+                calendarWeek.days.push({} as ICalendarDay);
+            } else {
+                calendarWeek.days.push({ day: new Date(year, month - 1, daynumber) } as ICalendarDay);
+                daynumber++;
+            }
+        }
+        return calendarWeek;
+    }
+
+    setLastWeek(year: number, month: number): ICalendarWeek {
+        const lastDayOfMonth = this.getLastDayInMonth(year, month);
+        console.log(lastDayOfMonth);
+        const calendarWeek: ICalendarWeek = {} as ICalendarWeek;
+        calendarWeek.days = [];
+
+
+        let daynumber = lastDayOfMonth.getDate() - this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay());
+        console.log(daynumber);
+        console.log(this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()));
+
+
+        for (let i = 0; i <= 6; i++) {
+            if (i < (this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()))) {
+                calendarWeek.days.push({ day: new Date(year, month - 1, daynumber) } as ICalendarDay);
+                daynumber++
+            }
+        }
+
+        console.log(calendarWeek.days);
+        return calendarWeek;
+    }
+
+
+    getSwedishDayNumbersInWeek(weekNumber: number): number {
+        switch (weekNumber) {
+            case 0: {
+                return 6;
+            }
+            case 1: {
+                return 0;
+            }
+            case 2: {
+                return 1;
+            }
+            case 3: {
+                return 2;
+            }
+            case 4: {
+                return 3;
+            }
+            case 5: {
+                return 4;
+            }
+            case 6: {
+                return 5;
+            }
+        }
     }
 }
 
