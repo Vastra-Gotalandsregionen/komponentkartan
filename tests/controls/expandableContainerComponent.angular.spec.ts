@@ -16,7 +16,7 @@ describe('ExpandableContainerComponent', () => {
     let component: ExpandableContainerComponent;
     let fixture: ComponentFixture<ExpandableContainerComponent>;
     let rootElement: DebugElement;
-    let jqueryHelper: ExpandableContainerJqeuryHelper = new ExpandableContainerJqeuryHelper();
+    const jqueryHelper: ExpandableContainerJqeuryHelper = new ExpandableContainerJqeuryHelper();
 
     beforeEach((done) => {
         TestBed.resetTestEnvironment();

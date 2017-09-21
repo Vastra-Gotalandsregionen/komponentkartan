@@ -98,8 +98,8 @@ export class ExpandableContainerComponent implements OnInit {
             return;
         }
         const header = this.jqueryHelper.getHeader(this.elementRef);
-
         this.jqueryHelper.collapseContent(header);
+
         this._expanded = false;
         this.collapsed = true;
         this.expandedChanged.emit(this._expanded);
