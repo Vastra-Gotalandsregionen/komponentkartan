@@ -34,7 +34,6 @@ describe('ExpandableContainerComponent', () => {
         });
 
         TestBed.compileComponents().then(() => {
-            // spyOn(jqueryHelper, 'collapseContent');
             fixture = TestBed.createComponent(ExpandableContainerComponent);
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;

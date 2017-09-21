@@ -1,5 +1,4 @@
 #addin "Cake.MsDeploy"
-#addin "Cake.XdtTransform"
 #addin "Cake.Npm"
 #addin "Cake.Powershell"
 
