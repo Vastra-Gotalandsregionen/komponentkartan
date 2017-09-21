@@ -28,7 +28,6 @@ export class ListsComponent {
 
         this.peopleRows[0].notification = { message: 'Information saknas', icon: NotificationIcon.ExclamationRed, type: NotificationType.Permanent } as RowNotification;
         this.peopleRows[4].notification = { message: 'Personen är inaktiv', icon: NotificationIcon.Exclamation, type: NotificationType.Permanent } as RowNotification;
-
     }
 
     removeRow(row: ExpandableRow<ExamplePerson>) {

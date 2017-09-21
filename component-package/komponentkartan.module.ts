@@ -31,6 +31,7 @@ import { MonthpickerComponent } from './controls/monthpicker/monthpicker.compone
 import { InputComponent } from './controls/input/input.component';
 import { CardComponent } from './controls/card/card.component';
 import { CardSectionComponent } from './controls/card/cardSection.component';
+import { TitleValueComponent } from './controls/titleValue/titleValue.component';
 import { ModalService } from './services/modalService';
 
 import * as $ from 'jquery';
@@ -72,7 +73,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MonthpickerComponent,
         InputComponent,
         CardComponent,
-        CardSectionComponent
+        CardSectionComponent,
+        TitleValueComponent
     ],
     exports: [
         SafePipe,
@@ -100,7 +102,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MonthpickerComponent,
         InputComponent,
         CardComponent,
-        CardSectionComponent
+        CardSectionComponent,
+        TitleValueComponent
     ],
     providers: [ModalService, ExpandableContainerJqeuryHelper]
 })

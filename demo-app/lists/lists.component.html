@@ -1,95 +1,118 @@
 <div class="main-content lists-component">
-  <vgr-page-header [title]="'Demo-lista'">
-  </vgr-page-header>
+    <vgr-page-header [title]="'Demo-lista'">
+    </vgr-page-header>
 
-  <vgr-expandable-container-list [allowMultipleExpandedChildren]="false">
-    <div class="expandable-container-list__header">
-      <h2 class="flex-column-13">Förnamn</h2>
-      <h2 class="flex-column-15">Efternamn</h2>
-    </div>
+    <vgr-expandable-container-list [allowMultipleExpandedChildren]="false">
+        <div class="expandable-container-list__header">
+            <h2 class="flex-column-13">Förnamn</h2>
+            <h2 class="flex-column-15">Efternamn</h2>
+        </div>
 
-    <vgr-expandable-container *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
-      <div class="expandable-container__header">
-        <div class="flex-column-13">{{row.object.firstName}}</div>
-        <div class="flex-column-15">{{row.object.lastName}}</div>
-      </div>
-      <div class="expandable-container__content">
-        <vgr-card>
-          <div *ngIf="row.object.canBeDeleted" class="card__top flex-row">
-            <vgr-text-button class="flex-right" [secondary]="true" [disabled]="false" (buttonClick)="removeRow(row)">Ta bort</vgr-text-button>
-          </div>
-          <vgr-card-section class="card__left" [title]="'Personlig information'" [subTitle]="row.object.firstName + ' ' + row.object.lastName"
-            [expanded]="true">
-            <div class="flex-row">
-              <span class="flex-column-15">Förnamn</span>
-              <span>{{row.object.firstName}}</span>
+        <vgr-expandable-container *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
+            <div class="expandable-container__header">
+                <div class="flex-column-13">{{row.object.firstName}}</div>
+                <div class="flex-column-15">{{row.object.lastName}}</div>
             </div>
-            <div class="flex-row">
-              <span class="flex-column-15">Efternamn</span>
-              <span>{{row.object.lastName}}</span>
+            <div class="expandable-container__content">
+                <vgr-card>
+                    <div *ngIf="row.object.canBeDeleted" class="card__top flex-row">
+                        <vgr-text-button class="flex-right" [secondary]="true" [disabled]="false" (buttonClick)="removeRow(row)">Ta bort</vgr-text-button>
+                    </div>
+                    <vgr-card-section class="card__left" [title]="'Personlig information'" [subTitle]="row.object.firstName + ' ' + row.object.lastName" [expanded]="true">
+                        <div class="flex-row">
+                            <span class="flex-column-15">Förnamn</span>
+                            <span>{{row.object.firstName}}</span>
+                        </div>
+                        <div class="flex-row">
+                            <span class="flex-column-15">Efternamn</span>
+                            <span>{{row.object.lastName}}</span>
+                        </div>
+                    </vgr-card-section>
+                    <vgr-card-section class="card__left" [title]="'Primära team'">
+                        <div *ngFor="let organisation of row.object.organisations">
+                            <div>{{organisation}}</div>
+                        </div>
+                    </vgr-card-section>
+                    <vgr-card-section class="card__right" [title]="'Sekundära team'">
+                        <div *ngFor="let organisation of row.object.organisations">
+                            <div>{{organisation}}</div>
+                        </div>
+                    </vgr-card-section>
+                </vgr-card>
+                <!-- <vgr-text-button (buttonClick)="savePerson(row)">Save</vgr-text-button> -->
             </div>
-          </vgr-card-section>
-          <vgr-card-section class="card__left" [title]="'Primära team'">
-            <div *ngFor="let organisation of row.object.organisations">
-              <div>{{organisation}}</div>
+        </vgr-expandable-container>
+        <vgr-expandable-container [expanded]="true" [notification]="cardRow.notification">
+            <div class="expandable-container__header">
+                <div class="flex-column-13">Kort</div>
+                <div class="flex-column-15">Med knappar</div>
             </div>
-          </vgr-card-section>
-          <vgr-card-section class="card__right" [title]="'Sekundära team'">
-            <div *ngFor="let organisation of row.object.organisations">
-              <div>{{organisation}}</div>
-            </div>
-          </vgr-card-section>
-        </vgr-card>
-        <!-- <vgr-text-button (buttonClick)="savePerson(row)">Save</vgr-text-button> -->
-      </div>
-    </vgr-expandable-container>
-    <vgr-expandable-container [expanded]="true" [notification]="cardRow.notification">
-      <div class="expandable-container__header">
-        <div class="flex-column-13">Kort</div>
-        <div class="flex-column-15">Med knappar</div>
-      </div>
-      <div class="expandable-container__content">
-        <vgr-card>
-          <div class="card__top flex-row">
-            <vgr-text-button [secondary]="true" [disabled]="false" (buttonClick)="removeCardRow(cardRow)">Ta bort rad</vgr-text-button>
-            <vgr-save-cancel class="flex-right" [secondary]="true" (onUnlock)="cardUnlocked=true" (onSave)="cardSaved()" (onCancel)="cardCancelled()"></vgr-save-cancel>
-          </div>
-          <vgr-card-section [title]="'Uppgifter'" class="card__left" [editMode]="cardUnlocked" [subTitle]="'aledu10'">
-            <div style="width:100%; height:100px; background-color:cornflowerblue"></div>
-            <div style="width:100%; height:50px; background-color:crimson"></div>
-            <div style="width:100%; height:100px; background-color:burlywood"></div>
-            <div class="flex-row">
-              <div class="flex-column-13">HSA ID</div>
-              <div *ngIf="!cardUnlocked" class="flex-column-13">SE2321000131-P000000226487</div>
-              <vgr-input *ngIf="cardUnlocked" [value]="'hsaId'"></vgr-input>
-            </div>
+            <div class="expandable-container__content">
+                <vgr-card>
+                    <div class="card__top flex-row">
+                        <vgr-text-button [secondary]="true" [disabled]="false" (buttonClick)="removeCardRow(cardRow)">Ta bort rad</vgr-text-button>
+                        <vgr-save-cancel class="flex-right" [secondary]="true" (onUnlock)="cardUnlocked=true" (onSave)="cardSaved()" (onCancel)="cardCancelled()"></vgr-save-cancel>
+                    </div>
+                    <vgr-card-section [title]="'Uppgifter'" class="card__left" [editMode]="cardUnlocked" [subTitle]="'aledu10'">
+                        <div style="width:100%; height:100px; background-color:cornflowerblue"></div>
+                        <div style="width:100%; height:50px; background-color:crimson"></div>
+                        <div style="width:100%; height:100px; background-color:burlywood"></div>
+                        <div class="flex-row">
+                            <div class="flex-column-13">HSA ID</div>
+                            <div *ngIf="!cardUnlocked" class="flex-column-13">SE2321000131-P000000226487</div>
+                            <vgr-input *ngIf="cardUnlocked" [value]="'hsaId'"></vgr-input>
+                        </div>
 
-            <div class="flex-row">
-              <div class="flex-column-13">Användarnamn</div>
-              <div class="flex-column-13">aledu10</div>
+                        <div class="flex-row">
+                            <div class="flex-column-13">Användarnamn</div>
+                            <div class="flex-column-13">aledu10</div>
+                        </div>
+                    </vgr-card-section>
+
+                    <vgr-card-section [title]="'Belopp'" [expanded]="true" [editMode]="cardUnlocked" class="card__left">
+                        <div class="title-value-layout">
+
+                            <vgr-title-value [title]="'Kostnadsställe'">
+                                <vgr-input [value]="'Kiosk & Godis'"></vgr-input>
+                            </vgr-title-value>
+                            <vgr-title-value [title]="'Bruttobelopp'">
+                                <vgr-input [value]="2500" [type]="'amount'"></vgr-input>
+                            </vgr-title-value>
+                            <vgr-title-value [title]="'Månad'">
+                                <vgr-monthpicker></vgr-monthpicker>
+                            </vgr-title-value>
+                            <vgr-title-value [title]="'Kund'">
+                                <vgr-dropdown [items]="[{id:'1', displayName:'Kalles chokladfabrik'},{id:'2', displayName:'Jonnas jordgubbar'}]"></vgr-dropdown>
+                            </vgr-title-value>
+                            <vgr-title-value [title]="'Skall ha tillägg'">
+                                <vgr-radio-group [options]="[{id:'1', displayName:'Ja'},{id:'2', displayName:'Nej'}]"></vgr-radio-group>
+                            </vgr-title-value>
+                            <vgr-title-value [title]="'Belopp avser'">
+                                <vgr-checkbox [text]="'Privat'"></vgr-checkbox>
+                                <vgr-checkbox [text]="'Företag'"></vgr-checkbox>
+                                <vgr-checkbox [text]="'Gåva'"></vgr-checkbox>
+                                <vgr-checkbox></vgr-checkbox>
+                            </vgr-title-value>
+                            <vgr-title-value [title]="'Fakturaadress'">
+                                <span>Bakgatan 11</span><br>
+                                <span>123 45 Växjötaslätten</span><br>
+                                <span>Sverige</span>
+                            </vgr-title-value>
+                            <vgr-title-value [title]="'Nettobelopp'">
+                                <span>2000</span>
+                            </vgr-title-value>
+
+                        </div>
+                    </vgr-card-section>
+
+                    <vgr-card-section [title]="'Färger'" [subTitle]="'Färgkarta'" class="card__right">
+                        <div style="width:100%; height:50px; background-color:cornflowerblue"></div>
+                        <div style="width:100%; height:50px; background-color:crimson"></div>
+                        <div style="width:100%; height:50px; background-color:burlywood"></div>
+
+                    </vgr-card-section>
+                </vgr-card>
             </div>
-          </vgr-card-section>
-          <vgr-card-section [title]="'Belopp'" [expanded]="true" [editMode]="cardUnlocked" class="card__left">
-            <div class="flex-row">
-              <span>Värde före skatt</span>
-              <vgr-input class="flex-right" [value]="25" [type]="'amount'"></vgr-input>
-            </div>
-            <div class="flex-row">
-              <span>Avgifter</span>
-              <vgr-input class="flex-right" [value]="-120" [type]="'amount'"></vgr-input>
-            </div>
-            <div class="flex-row">
-              <span>Värde efter skatt</span>
-              <vgr-input class="flex-right" [value]="12400" [type]="'amount'"></vgr-input>
-            </div>
-          </vgr-card-section>
-          <vgr-card-section [title]="'Färger'" [subTitle]="'Färgkarta'" class="card__right">
-            <div style="width:100%; height:50px; background-color:cornflowerblue"></div>
-            <div style="width:100%; height:50px; background-color:crimson"></div>
-            <div style="width:100%; height:50px; background-color:burlywood"></div>
-          </vgr-card-section>
-        </vgr-card>
-      </div>
-    </vgr-expandable-container>
-  </vgr-expandable-container-list>
+        </vgr-expandable-container>
+    </vgr-expandable-container-list>
 </div>

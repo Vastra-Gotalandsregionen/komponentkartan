@@ -1,0 +1,23 @@
+.title-value-layout {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.title-value {
+    display: table-row;
+    width: 100%;
+}
+
+.title-value__title {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.title-value__value {
+    display: table-cell;
+    vertical-align: middle;
+    span {
+        padding-left: 10px;
+    }
+}
