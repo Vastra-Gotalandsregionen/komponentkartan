@@ -13,6 +13,26 @@ describe('[MonthpickerComponent]', () => {
     let currentYear: number;
     let currentMonth: number;
 
+    /* let minDate: Date;
+    let maxDate: Date;
+ */
+    /*   beforeEach(() => {
+          currentYear = 2017;
+          currentMonth = 9;
+          component = new DaypickerComponent(null);
+          minDate = new Date(2000, 1, 15);
+          maxDate = new Date(2020, 1, 15);
+      });
+      describe('When initialized with currentYear 2017 and currentMonth September', () => {
+          beforeEach(() => {
+              component.ngOnInit();
+          });
+  
+          it('contains disabled days for item out of min and max range', () => {
+              expect(component.setDisableMonths(minDate, maxDate)).toBe(null);
+          });
+      });
+   */
     beforeEach(() => {
         currentYear = 2017;
         currentMonth = 9;

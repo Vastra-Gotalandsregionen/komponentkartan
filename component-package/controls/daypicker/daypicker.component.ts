@@ -16,18 +16,20 @@ export class DaypickerComponent implements OnInit {
 
     @Input() minDate: Date;
     @Input() maxDate: Date;
-    yearMonths: ICalendarYearMonth[] = [];
 
-    ngOnInit() {
-        this.createYearMonths();
-    }
+    yearMonths: ICalendarYearMonth[] = [];
 
     constructor(protected elementRef: ElementRef) {
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
     };
 
-    createYearMonths() {
+    ngOnInit() {
+        this.createYearMonths(this.minDate, this.maxDate);
+        //this.setDisableMonths(this.minDate, this.maxDate);
+    }
+
+    createYearMonths(minDate: Date, maxDate: Date) {
         for (let year = this.minDate.getFullYear(); year <= this.maxDate.getFullYear(); year++) {
             for (let month = 0; month <= 12; month++) {
                 const lastDayInMonth = new Date(year, month, 0);
@@ -154,5 +156,19 @@ export class DaypickerComponent implements OnInit {
             }
         }
     }
+
+    /*     setDisableMonths(minDate: Date, maxDate: Date) {
+            console.log(this.yearMonths);
+            this.yearMonths.forEach(ICalendarYearMonth => {
+                ICalendarYearMonth.weeks.forEach(ICalendarWeek => {
+                    console.log('hello');
+                    ICalendarWeek.days.forEach(day => {
+                        console.log(day);
+                    });
+                });
+            });
+
+            return null;
+        } */
 }
 
