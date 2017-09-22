@@ -80,16 +80,14 @@ export class DaypickerComponent implements OnInit {
         weeks[0] = firstWeek;
 
         for (let iWeekIndex = secondWeekIndex; iWeekIndex < secondLastWeekIndex; iWeekIndex++) {
-            let weekContainer: ICalendarWeek = {} as ICalendarWeek;
-            let daysContainer: ICalendarDay[] = [];
-            weekContainer.days = daysContainer;
+            const weekContainer: ICalendarWeek = {} as ICalendarWeek;
+            const daysContainer: ICalendarDay[] = [];
+            weekContainer.days = [];
             for (let iDayIndex = 0; iDayIndex < 7; iDayIndex++) {
                 weekContainer.days.push({ day: new Date(year, month - 1, dayNumber) } as ICalendarDay);
                 dayNumber++;
             }
             weeks[iWeekIndex] = weekContainer;
-            weekContainer = {} as ICalendarWeek;
-            daysContainer = [];
         }
 
         weeks[lastWeekIndex] = lastWeek;

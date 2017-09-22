@@ -88,12 +88,20 @@ describe('[MonthpickerComponent]', () => {
                 expect(component.setLastWeek(currentYear, currentMonth).days[1].day.toDateString()).toBe('Tue Oct 31 2017');
             });
 
-            it('contains correct day in lastWeek of type ICalendarWeeks', () => {
+            it('contains empty day in lastWeek of type ICalendarWeeks', () => {
                 expect(component.setLastWeek(currentYear, currentMonth).days[2]).toEqual({});
             });
 
-            it('', () => {
-                expect(component.setWeeksAndDays(currentYear, currentMonth)[1].days[0].day.toDateString()).toBe('Mon Oct 02 2017');
+            it('contains correct day in the middle of the month', () => {
+                expect(component.setWeeksAndDays(currentYear, currentMonth)[2].days[2].day.toDateString()).toBe('Wed Oct 11 2017');
+            });
+
+            it('contains Empty day in the First week of the month', () => {
+                expect(component.setWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
+            });
+
+            it('contains Empty day in the First week of the month', () => {
+                expect(component.setWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
             });
         });
     });
