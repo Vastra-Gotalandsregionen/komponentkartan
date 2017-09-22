@@ -23,7 +23,6 @@ describe('[MonthpickerComponent]', () => {
             component.ngOnInit();
         });
 
-
         it('contains a yearmonth-model with current year', () => {
             expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(currentYear);
         });
@@ -42,6 +41,11 @@ describe('[MonthpickerComponent]', () => {
 
         it('contains correct days in firstWeek of type ICalendarWeeks', () => {
             expect(component.setFirstWeek(currentYear, currentMonth).days[4].day.toDateString()).toBe('Fri Sep 01 2017');
+        });
+
+        it('contains correct days in lastWeek of type ICalendarWeeks', () => {
+            console.log(component.setLastWeek(currentYear, currentMonth).days[5].day.toDateString());
+            expect(component.setLastWeek(currentYear, currentMonth).days[5].day.toDateString()).toBe('Sat Sep 30 2017');
         });
 
 
@@ -78,10 +82,10 @@ describe('[MonthpickerComponent]', () => {
                 expect(component.setFirstWeek(currentYear, currentMonth).days[6].day.toDateString()).toBe('Sun Oct 01 2017');
             });
 
-            // it('contains correct days in lastWeek of type ICalendarWeeks', () => {
-            //     console.log(component.setLastWeek(currentYear, currentMonth).days[0].day.toDateString());
-            //     expect(component.setLastWeek(currentYear, currentMonth).days[1].day.toDateString()).toBe('Tue Oct 31 2017');
-            // });
+            it('contains correct days in lastWeek of type ICalendarWeeks', () => {
+                console.log(component.setLastWeek(currentYear, currentMonth).days[0].day.toDateString());
+                expect(component.setLastWeek(currentYear, currentMonth).days[1].day.toDateString()).toBe('Tue Oct 31 2017');
+            });
 
         });
     });

@@ -110,21 +110,16 @@ export class DaypickerComponent implements OnInit {
 
 
         let daynumber = lastDayOfMonth.getDate() - this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay());
-        console.log(daynumber);
-        console.log(this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()));
-
 
         for (let i = 0; i <= 6; i++) {
-            if (i < (this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()))) {
+            if (i <= (this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()))) {
                 calendarWeek.days.push({ day: new Date(year, month - 1, daynumber) } as ICalendarDay);
                 daynumber++
             }
         }
 
-        console.log(calendarWeek.days);
         return calendarWeek;
     }
-
 
     getSwedishDayNumbersInWeek(weekNumber: number): number {
         switch (weekNumber) {
