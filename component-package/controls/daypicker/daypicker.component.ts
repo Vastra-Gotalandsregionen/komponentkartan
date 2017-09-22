@@ -22,12 +22,10 @@ export class DaypickerComponent implements OnInit {
         this.createYearMonths();
     }
 
-
     constructor(protected elementRef: ElementRef) {
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
     };
-
 
     createYearMonths() {
         for (let year = this.minDate.getFullYear(); year <= this.maxDate.getFullYear(); year++) {
@@ -45,10 +43,7 @@ export class DaypickerComponent implements OnInit {
 
     getFirstDayInMonth(year: number, month: number) { return new Date(year, month, 1); }
 
-    getLastDayInMonth(year: number, month: number) {
-        console.log(new Date(year, month, 0));
-        return new Date(year, month, 0);
-    }
+    getLastDayInMonth(year: number, month: number) { return new Date(year, month, 0); }
 
     getNumberOfWeeks(year: number, month: number): number {
         const firstDayOfWeek = 1;
@@ -71,17 +66,34 @@ export class DaypickerComponent implements OnInit {
         return weeks;
     }
 
-    setDays(year: number, month: number) {
+    setWeeksAndDays(year: number, month: number): ICalendarWeek[] {
         const weeks: ICalendarWeek[] = this.createWeeks(year, month);
-        const daysInWeek: ICalendarDay[] = [];
-
-        // const firstDayOfMonth = this.getFirstDayInMonth(year, month - 1);
-        // const lastDayOfMonth = this.getLastDayInMonth(year, month);
-        // const numberOfDaysInMonth = lastOfMonth.getDate();
-
         const firstWeek: ICalendarWeek = this.setFirstWeek(year, month);
-        // const lastWeek: ICalendarWeek = this.setLastWeek();
-        // }
+        const lastWeek: ICalendarWeek = this.setLastWeek(year, month);
+
+        const secondWeekIndex = 1;
+        const secondLastWeekIndex = weeks.length - 1;
+        const lastWeekIndex = weeks.length
+
+        let dayNumber = firstWeek.days[6].day.getDate() + 1;
+
+        weeks[0] = firstWeek;
+
+        for (let iWeekIndex = secondWeekIndex; iWeekIndex < secondLastWeekIndex; iWeekIndex++) {
+            let weekContainer: ICalendarWeek = {} as ICalendarWeek;
+            let daysContainer: ICalendarDay[] = [];
+            weekContainer.days = daysContainer;
+            for (let iDayIndex = 0; iDayIndex < 7; iDayIndex++) {
+                weekContainer.days.push({ day: new Date(year, month - 1, dayNumber) } as ICalendarDay);
+                dayNumber++;
+            }
+            weeks[iWeekIndex] = weekContainer;
+            weekContainer = {} as ICalendarWeek;
+            daysContainer = [];
+        }
+
+        weeks[lastWeekIndex] = lastWeek;
+        return weeks;
     }
 
     setFirstWeek(year: number, month: number): ICalendarWeek {
@@ -91,7 +103,7 @@ export class DaypickerComponent implements OnInit {
 
         let daynumber = 1;
 
-        for (let i = 0; i <= 6; i++) {
+        for (let i = 0; i < 7; i++) {
             if (i < (this.getSwedishDayNumbersInWeek(firstDayOfMonth.getDay()))) {
                 calendarWeek.days.push({} as ICalendarDay);
             } else {
@@ -104,18 +116,16 @@ export class DaypickerComponent implements OnInit {
 
     setLastWeek(year: number, month: number): ICalendarWeek {
         const lastDayOfMonth = this.getLastDayInMonth(year, month);
-        console.log(lastDayOfMonth);
         const calendarWeek: ICalendarWeek = {} as ICalendarWeek;
         calendarWeek.days = [];
 
-
         let daynumber = lastDayOfMonth.getDate() - this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay());
 
-        for (let i = 0; i <= 6; i++) {
+        for (let i = 0; i < 7; i++) {
             if (i <= (this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()))) {
                 calendarWeek.days.push({ day: new Date(year, month - 1, daynumber) } as ICalendarDay);
                 daynumber++
-            }
+            } else { calendarWeek.days.push({} as ICalendarDay); };
         }
 
         return calendarWeek;

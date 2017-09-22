@@ -44,7 +44,6 @@ describe('[MonthpickerComponent]', () => {
         });
 
         it('contains correct days in lastWeek of type ICalendarWeeks', () => {
-            console.log(component.setLastWeek(currentYear, currentMonth).days[5].day.toDateString());
             expect(component.setLastWeek(currentYear, currentMonth).days[5].day.toDateString()).toBe('Sat Sep 30 2017');
         });
 
@@ -78,15 +77,24 @@ describe('[MonthpickerComponent]', () => {
                 expect(component.createWeeks(currentYear, currentMonth).length).toEqual(6);
             });
 
-            it('contains correct days in firstWeek of type ICalendarWeeks', () => {
+            it('contains correct day in firstWeek of type ICalendarWeeks', () => {
                 expect(component.setFirstWeek(currentYear, currentMonth).days[6].day.toDateString()).toBe('Sun Oct 01 2017');
             });
 
-            it('contains correct days in lastWeek of type ICalendarWeeks', () => {
-                console.log(component.setLastWeek(currentYear, currentMonth).days[0].day.toDateString());
+            it('contains correct day in lastWeek of type ICalendarWeeks', () => {
+                expect(component.setLastWeek(currentYear, currentMonth).days[0].day.toDateString()).toBe('Mon Oct 30 2017');
+            });
+            it('contains correct day in lastWeek of type ICalendarWeeks', () => {
                 expect(component.setLastWeek(currentYear, currentMonth).days[1].day.toDateString()).toBe('Tue Oct 31 2017');
             });
 
+            it('contains correct day in lastWeek of type ICalendarWeeks', () => {
+                expect(component.setLastWeek(currentYear, currentMonth).days[2]).toEqual({});
+            });
+
+            it('', () => {
+                expect(component.setWeeksAndDays(currentYear, currentMonth)[1].days[0].day.toDateString()).toBe('Mon Oct 02 2017');
+            });
         });
     });
 });
