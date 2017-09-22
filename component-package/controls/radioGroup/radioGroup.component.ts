@@ -9,6 +9,8 @@ import { ISelectableItem } from '../../models/selectableItem.model';
 export class RadioGroupComponent implements OnChanges {
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
+    @Input() @HostBinding('class.disabled') disabled;
+
     @Input() options: ISelectableItem[];
     @Input() name: string;
     @Input() noSelection: boolean;

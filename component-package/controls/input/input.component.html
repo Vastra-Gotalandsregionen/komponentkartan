@@ -4,6 +4,7 @@
     'validation-error--fixed' : validationErrorState == validationErrorStates.Fixed,
     'validation-container--suffixed' : suffix && suffix.length>0
   }">
+
   <div class="input-container">
     <input type="text" #inputTextBox class="input-container__textbox" (blur)="onLeave()" (focus)="onFocus($event)" [ngModel]="displayValue"
       title="{{title}}" placeholder="{{placeholder}}" (ngModelChange)="onValueChange($event)" [maxlength]="maxlength" [attr.readonly]="readonly ? '' : null">

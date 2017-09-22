@@ -106,7 +106,7 @@
   &.expandable-container--deleted {
     opacity: 0;
     transition: opacity 0.3s ease-out;
-    transition-delay: 1.9s; //1.9 sek pga delay vid visning av notifieringar!
+    transition-delay: 0.3s;
   }
 }
 

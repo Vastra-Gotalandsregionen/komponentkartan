@@ -101,14 +101,14 @@
 @include button-enabling--secondary(button-enabling--secondary-green, $primary-color--green);
 .button--enabling.button--secondary {
   transition: background-color 0.5s ease, color 0.5s ease;
-  animation: button-enabling--secondary-neutral 1.8s;
+  animation: button-enabling--secondary-neutral 0.9s;
   .theme--red & {
-    animation: button-enabling--secondary-red 1.8s;
+    animation: button-enabling--secondary-red 0.9s;
   }
   .theme--blue & {
-    animation: button-enabling--secondary-blue 1.8s;
+    animation: button-enabling--secondary-blue 0.9s;
   }
   .theme--green & {
-    animation: button-enabling--secondary-green 1.8s;
+    animation: button-enabling--secondary-green 0.9s;
   }
 }

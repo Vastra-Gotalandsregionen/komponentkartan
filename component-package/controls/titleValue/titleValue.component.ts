@@ -1,5 +1,4 @@
-import { Input, Output, Component, HostBinding } from '@angular/core'
-    ;
+import { Input, Output, Component, HostBinding, ContentChild } from '@angular/core';
 
 
 @Component({

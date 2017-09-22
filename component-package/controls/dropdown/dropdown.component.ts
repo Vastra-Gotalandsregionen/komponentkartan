@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -15,6 +15,7 @@ import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component'
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges {
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
+    @Input() @HostBinding('class.disabled') disabled;
     selectedItem: IDropdownItem;
 
     constructor(elementRef: ElementRef) {

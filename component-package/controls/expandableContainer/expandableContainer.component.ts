@@ -13,7 +13,7 @@ export class ExpandableContainerComponent implements OnInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
 
-    readonly showNotificationDurationMs = 1900;
+    readonly showNotificationDurationMs = 1500;
     @HostBinding('class.expandable-container') isContainer = true;
     @HostBinding('class.expandable-container--collapsed') collapsed = true;
     @HostBinding('class.expandable-container--expanded') private _expanded: boolean;
@@ -41,7 +41,6 @@ export class ExpandableContainerComponent implements OnInit {
                 this.changeDetecor.detectChanges();
             } else if (value.type === NotificationType.ShowOnRemove) {
                 this.expanded = false;
-                this.deleted = true;
                 this.changeDetecor.detectChanges();
             } else if (value.type === NotificationType.Permanent) {
                 this.showNotification();
@@ -98,40 +97,64 @@ export class ExpandableContainerComponent implements OnInit {
             return;
         }
         const header = this.jqueryHelper.getHeader(this.elementRef);
-        this.jqueryHelper.collapseContent(header);
 
-        this._expanded = false;
-        this.collapsed = true;
-        this.expandedChanged.emit(this._expanded);
+        if (!this.processNotification(header, () => {
+            this._expanded = false;
+            this.collapsed = true;
+            this.expandedChanged.emit(this._expanded);
+        })) {
+            this.jqueryHelper.collapseContent(header);
+            this._expanded = false;
+            this.collapsed = true;
+            this.expandedChanged.emit(this._expanded);
+        }
 
-        this.processNotification(header);
+
+
     }
 
-    private processNotification(header: JQuery): void {
+    private processNotification(header: JQuery, callback: Function): boolean {
         if (!this.notification || this.notification.done) {
-            return;
+            return false;
         }
         if (this.notification.type === NotificationType.ShowOnCollapse) {
-            this.processShowOnCollapseNotification(header);
+
+            this.processShowOnCollapseNotification(header, callback);
+            return true;
         } else if (this.notification.type === NotificationType.ShowOnRemove) {
-            this.processShowOnRemoveNotification(header);
+            this.processShowOnRemoveNotification(header, callback);
+            return true;
         };
     }
 
-    private processShowOnCollapseNotification(header: JQuery) {
-        this.jqueryHelper.fadeInNotification(header);
-        setTimeout(() => {
-            this.jqueryHelper.collapseNotification(header);
-            this.notification.done = true;
-        }, this.showNotificationDurationMs);
+    private processShowOnCollapseNotification(header: JQuery, callback: Function) {
+        this.jqueryHelper.slideDownNotification(header, () => {
+            setTimeout(() => {
+                this.jqueryHelper.collapseContent(header, () => {
+                    setTimeout(() => {
+                        this.jqueryHelper.collapseNotification(header);
+                        this.notification.done = true;
+                        callback();
+                    }, 2000)
+                });
+            }, 1000);
+        });
+
     }
 
-    private processShowOnRemoveNotification(header: JQuery) {
-        this.jqueryHelper.fadeInNotification(header);
-        setTimeout(() => {
-            this.jqueryHelper.collapseHeader(this.elementRef);
-            this.notification.done = true;
-        }, this.showNotificationDurationMs);
+    private processShowOnRemoveNotification(header: JQuery, callback: Function) {
+        this.jqueryHelper.slideDownNotification(header, () => {
+            setTimeout(() => {
+                this.jqueryHelper.collapseContent(header, () => {
+                    setTimeout(() => {
+                        this.jqueryHelper.collapseHeader(this.elementRef);
+                        this.notification.done = true;
+                        this.deleted = true;
+                        callback();
+                    }, 2000)
+                });
+            }, 1000);
+        });
     }
 }
 

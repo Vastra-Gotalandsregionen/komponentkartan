@@ -3,16 +3,39 @@ import { Injectable, ElementRef } from '@angular/core';
 @Injectable()
 export class ExpandableContainerJqeuryHelper {
 
-    collapseContent(header: JQuery) {
-        header.siblings('.expandable-container__content').slideUp(400);
+    collapseContent(header: JQuery, callback?: Function) {
+        if (!callback) {
+            header.siblings('.expandable-container__content').slideUp(400);
+        } else {
+            header.siblings('.expandable-container__content').slideUp(400, callback);
+        }
+    }
+
+    collapseContentSlow(header: JQuery, callback?: Function) {
+        if (!callback) {
+            header.siblings('.expandable-container__content').slideUp(1000);
+        } else {
+            header.siblings('.expandable-container__content').slideUp(1000, callback);
+        }
     }
 
     showNotification(header: JQuery) {
         header.siblings('.expandable-container__notification-wrapper').show();
     }
 
-    fadeInNotification(header: JQuery) {
-        header.siblings('.expandable-container__notification-wrapper').fadeIn();
+    fadeInNotification(header: JQuery, callback?: Function) {
+        if (!callback) {
+            header.siblings('.expandable-container__notification-wrapper').fadeIn();
+        } else {
+            header.siblings('.expandable-container__notification-wrapper').fadeIn(400, callback);
+        }
+    }
+    slideDownNotification(header: JQuery, callback?: Function) {
+        if (!callback) {
+            header.siblings('.expandable-container__notification-wrapper').slideDown(400);
+        } else {
+            header.siblings('.expandable-container__notification-wrapper').slideDown(400, callback);
+        }
     }
 
     collapseNotification(header: JQuery, callback?: Function) {
@@ -23,8 +46,12 @@ export class ExpandableContainerJqeuryHelper {
         }
     }
 
-    collapseHeader(elementRef: ElementRef) {
-        $(elementRef.nativeElement).children('.expandable-container__header,.expandable-container__notification-wrapper').slideUp(400);
+    collapseHeader(elementRef: ElementRef, callback?: Function) {
+        if (!callback) {
+            $(elementRef.nativeElement).children('.expandable-container__header,.expandable-container__notification-wrapper').slideUp(400);
+        } else {
+            $(elementRef.nativeElement).children('.expandable-container__header,.expandable-container__notification-wrapper').slideUp(400, callback);
+        }
     }
 
     fadeOutNotification(header: JQuery) {
@@ -39,6 +66,7 @@ export class ExpandableContainerJqeuryHelper {
     getHeader(elementRef: ElementRef): JQuery {
         return $(elementRef.nativeElement).children('.expandable-container__header');
     }
+
 
     isClickEventHeader(event: Event): boolean {
         const target = event.target || event.srcElement || event.currentTarget;
