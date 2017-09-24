@@ -12,7 +12,7 @@
       <div class="expandable-container__header">
         <div class="flex-column-13">{{row.object.firstName}}</div>
         <div class="flex-column-15">{{row.object.lastName}}</div>
-        <a *ngIf="row.object.canBeDeleted" (click)="removeRow(row)">Ta bort</a>
+        <a *ngIf="row.object.canBeDeleted && !row.deleted" (click)="removeRowWithoutExpand(row, $event)">Ta bort</a>
       </div>
       <div class="expandable-container__content">
         <vgr-card>
@@ -84,7 +84,7 @@
                 <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
               </vgr-title-value>
               <vgr-title-value [title]="'Månader'">
-                <div class="flex-row">
+                <div class="row-layout">
                   <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
                   <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
                 </div>
@@ -96,10 +96,12 @@
                 <vgr-radio-group [disabled]="!cardUnlocked" [options]="[{id:'1', displayName:'Ja'},{id:'2', displayName:'Nej'}]"></vgr-radio-group>
               </vgr-title-value>
               <vgr-title-value [title]="'Belopp avser'">
-                <vgr-checkbox [disabled]="!cardUnlocked" [text]="'Privat'"></vgr-checkbox>
-                <vgr-checkbox [disabled]="!cardUnlocked" [text]="'Företag'"></vgr-checkbox>
-                <vgr-checkbox [disabled]="!cardUnlocked" [text]="'Gåva'"></vgr-checkbox>
-                <vgr-checkbox></vgr-checkbox>
+                <div class="column-layout column-layout--tight">
+                  <vgr-checkbox [disabled]="!cardUnlocked" [text]="'Privat'"></vgr-checkbox>
+                  <vgr-checkbox [disabled]="!cardUnlocked" [text]="'Företag'"></vgr-checkbox>
+                  <vgr-checkbox [disabled]="!cardUnlocked" [text]="'Gåva'"></vgr-checkbox>
+                  <vgr-checkbox></vgr-checkbox>
+                </div>
               </vgr-title-value>
               <vgr-title-value [title]="'Fakturaadress'">
                 <span>Bakgatan 11</span><br>

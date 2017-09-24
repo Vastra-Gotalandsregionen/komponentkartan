@@ -15,7 +15,7 @@ import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component'
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges {
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
-    @Input() @HostBinding('class.disabled') disabled;
+    @Input() @HostBinding('class.disabled') disabled: boolean;
     selectedItem: IDropdownItem;
 
     constructor(elementRef: ElementRef) {

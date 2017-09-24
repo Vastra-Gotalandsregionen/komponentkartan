@@ -38,6 +38,17 @@ export class ListsComponent {
             new ModalButtonConfiguration('Nej', () => { }));
     }
 
+
+    removeRowWithoutExpand(row: ExpandableRow<ExamplePerson>, event: Event) {
+        event.cancelBubble = true;
+        this.modalService.openDialog('Ta bort person', 'Vill du verkligen ta bort ' + row.object.firstName + '?',
+            new ModalButtonConfiguration('Ja', () => {
+                row.notifyOnRemove(row.object.firstName + ' togs bort', NotificationIcon.Ok);
+                row.object.deleted = true;
+            }),
+            new ModalButtonConfiguration('Nej', () => { }));
+    }
+
     removeCardRow(row: ExpandableRow<string>) {
         this.modalService.openDialog('Ta bort rad', 'Vill du verkligen ta bort raden?',
             new ModalButtonConfiguration('Ja', () => {
@@ -67,6 +78,7 @@ export interface ExamplePerson {
     lastName: string;
     organisations: string[];
     canBeDeleted: boolean;
+    deleted: boolean;
 }
 
 

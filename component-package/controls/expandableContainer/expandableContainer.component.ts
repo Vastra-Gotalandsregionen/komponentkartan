@@ -18,6 +18,8 @@ export class ExpandableContainerComponent implements OnInit {
     @HostBinding('class.expandable-container--collapsed') collapsed = true;
     @HostBinding('class.expandable-container--expanded') private _expanded: boolean;
     @HostBinding('class.expandable-container--deleted') deleted: boolean;
+    @HostBinding('class.expandable-container--notification-visible') notificationVisible: boolean;
+    @HostBinding('class.expandable-container--collapsing') collapsing: boolean;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue) {
@@ -37,10 +39,10 @@ export class ExpandableContainerComponent implements OnInit {
         this._notification = value;
         if (value) {
             if (value.type === NotificationType.ShowOnCollapse) {
-                this.expanded = false;
+                this.collapse(value.type);
                 this.changeDetecor.detectChanges();
             } else if (value.type === NotificationType.ShowOnRemove) {
-                this.expanded = false;
+                this.collapse(value.type);
                 this.changeDetecor.detectChanges();
             } else if (value.type === NotificationType.Permanent) {
                 this.showNotification();
@@ -63,12 +65,15 @@ export class ExpandableContainerComponent implements OnInit {
     }
 
     showNotification() {
-        const header = this.jqueryHelper.getHeader(this.elementRef);
-        this.jqueryHelper.showNotification(header);
+        this.notificationVisible = true;
     }
 
     @HostListener('click', ['$event'])
     toggleExpand(event: Event) {
+        if (this.collapsing) {
+            return;
+        }
+
         if (!this.jqueryHelper.isClickEventHeader(event)) {
             return;
         }
@@ -82,7 +87,7 @@ export class ExpandableContainerComponent implements OnInit {
     }
 
     private expand() {
-        if (this._expanded || this.deleted) {
+        if (this.deleted || this.collapsing) {
             return;
         }
         this.jqueryHelper.toggleContent(this.elementRef);
@@ -92,69 +97,61 @@ export class ExpandableContainerComponent implements OnInit {
         this.expandedChanged.emit(this._expanded);
     }
 
-    private collapse() {
-        if (!this._expanded) {
-            return;
-        }
+    private collapse(notificationToShow?: NotificationType) {
+        this.collapsing = true;
         const header = this.jqueryHelper.getHeader(this.elementRef);
 
-        if (!this.processNotification(header, () => {
-            this._expanded = false;
-            this.collapsed = true;
-            this.expandedChanged.emit(this._expanded);
-        })) {
-            this.jqueryHelper.collapseContent(header);
-            this._expanded = false;
-            this.collapsed = true;
-            this.expandedChanged.emit(this._expanded);
+        if (notificationToShow) {
+            this.processNotification(header, notificationToShow, () => {
+                this._expanded = false;
+                this.collapsed = true;
+                this.expandedChanged.emit(this._expanded);
+                this.collapsing = false;
+            });
+        } else {
+            this.jqueryHelper.collapseContent(header, () => {
+                this._expanded = false;
+                this.collapsed = true;
+                this.collapsing = false;
+                this.expandedChanged.emit(this._expanded);
+            });
         }
-
-
-
     }
 
-    private processNotification(header: JQuery, callback: Function): boolean {
-        if (!this.notification || this.notification.done) {
-            return false;
-        }
-        if (this.notification.type === NotificationType.ShowOnCollapse) {
 
+    private processNotification(header: JQuery, notificationType: NotificationType, callback: Function): void {
+        if (notificationType === NotificationType.ShowOnCollapse) {
             this.processShowOnCollapseNotification(header, callback);
-            return true;
-        } else if (this.notification.type === NotificationType.ShowOnRemove) {
+        } else if (notificationType === NotificationType.ShowOnRemove) {
             this.processShowOnRemoveNotification(header, callback);
-            return true;
         };
     }
 
     private processShowOnCollapseNotification(header: JQuery, callback: Function) {
-        this.jqueryHelper.slideDownNotification(header, () => {
-            setTimeout(() => {
-                this.jqueryHelper.collapseContent(header, () => {
-                    setTimeout(() => {
-                        this.jqueryHelper.collapseNotification(header);
-                        this.notification.done = true;
-                        callback();
-                    }, 2000)
-                });
-            }, 1000);
-        });
+        this.notificationVisible = true;
+        setTimeout(() => {
+            this.jqueryHelper.collapseContent(header, () => {
+                setTimeout(() => {
+                    this.notification.done = true;
+                    this.notificationVisible = false;
+                    callback();
+                }, 2000)
+            });
+        }, 1400);
 
     }
 
     private processShowOnRemoveNotification(header: JQuery, callback: Function) {
-        this.jqueryHelper.slideDownNotification(header, () => {
-            setTimeout(() => {
-                this.jqueryHelper.collapseContent(header, () => {
-                    setTimeout(() => {
-                        this.jqueryHelper.collapseHeader(this.elementRef);
-                        this.notification.done = true;
-                        this.deleted = true;
-                        callback();
-                    }, 2000)
-                });
-            }, 1000);
-        });
+        this.notificationVisible = true;
+        setTimeout(() => {
+            this.jqueryHelper.collapseContent(header, () => {
+                setTimeout(() => {
+                    this.notification.done = true;
+                    this.notificationVisible = false;
+                    this.deleted = true;
+                    callback();
+                }, 2000)
+            });
+        }, 1400);
     }
 }
-

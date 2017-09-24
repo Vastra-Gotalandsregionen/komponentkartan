@@ -58,13 +58,13 @@
 /* Expandable container = en rad i listan som kan expanderas*/
 
 .expandable-container {
+  visibility: visible;
   display: block;
   margin-left: -$margin--slim;
   margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   margin-top: 1px;
-  margin-bottom: 1px;
   box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
   .expandable-container__header:after {
     @extend .bg-image-icon-chevron;
@@ -92,6 +92,9 @@
       transition: transform 0.4s;
     }
   }
+  &.expandable-container--deleted {
+    margin-top: 0px;
+  }
   &.expandable-container--compact {
     margin-bottom: 0px;
     margin-left: -$margin--xs-slim;
@@ -104,13 +107,14 @@
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
   }
   &.expandable-container--deleted {
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
+    visibility: hidden;
+    transition: visibility 0.3s ease-out;
     transition-delay: 0.3s;
   }
 }
 
 .expandable-container__header {
+  opacity: 1;
   cursor: pointer;
   height: 35px;
   display: flex;
@@ -120,33 +124,49 @@
   margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
+  transition: opacity 0.3s linear, height 0.3s linear;
+  transition-delay: 0.2s, 0s;
   .expandable-container--compact & {
     height: auto;
   }
   .expandable-container--expanded & {
     border-bottom: 1px solid $primary-color--default;
   }
-  .expandable-container--deleted & {
+  .expandable-container--collapsing & {
     cursor: default;
+  }
+  .expandable-container--deleted & {
+    opacity: 0;
+    height: 0px;
+    transition: opacity 0.3s linear, height 0.3s linear;
+    transition-delay: 0s, 0.2s;
   }
 }
 
-.expandable-container__notification-wrapper {
-  padding-top: $margin--xs-slim;
-  padding-bottom: $margin--xs-slim;
+.expandable-container__notification {
+  opacity: 0;
+  max-height: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   margin-left: -$margin--slim;
   margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
-  border-top: 1px solid $primary-color--default;
+  border-spacing: 10px;
+  transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
+  transition-delay: 0s, 0.2s, 0.2s, 0.2s;
+  .expandable-container--notification-visible & {
+    opacity: 1;
+    border-top: 1px solid $primary-color--default;
+    max-height: 40px;
+    padding-top: $margin--xs-slim;
+    padding-bottom: $margin--xs-slim;
+    transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
+    transition-delay: 0.2s, 0s, 0s, 0s;
+  }
   .expandable-container--expanded & {
     border-top: none;
   }
-  border-spacing: 10px;
-  display: none;
-}
-
-.expandable-container__notification {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -156,6 +176,7 @@
   }
 }
 
+// .expandable-container__notification {}
 .expandable-container__notification__icon {
   width: 30px;
   height: 30px;
@@ -220,7 +241,7 @@
       height: auto;
     }
   }
-  .expandable-container__notification-wrapper {
+  .expandable-container__notification {
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 20px;
