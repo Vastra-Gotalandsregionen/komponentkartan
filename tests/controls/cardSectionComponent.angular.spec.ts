@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'
-
+import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -19,7 +19,7 @@ describe('[CardSectionComponent]', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [CardSectionComponent],
+            declarations: [CardSectionComponent, TruncatePipe],
             imports: [CommonModule]
         });
 
