@@ -6,11 +6,11 @@ import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
 
 @Component({
-    selector: 'vgr-daypicker',
+    selector: 'vgr-datepicker',
     moduleId: module.id,
-    templateUrl: './daypicker.component.html'
+    templateUrl: './datepicker.component.html'
 })
-export class DaypickerComponent implements OnInit {
+export class DatepickerComponent implements OnInit {
 
     today: Date = new Date();
 

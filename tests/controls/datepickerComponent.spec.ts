@@ -6,37 +6,17 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { DaypickerComponent } from '../../component-package/controls/daypicker/daypicker.component';
+import { DatepickerComponent } from '../../component-package/controls/datepicker/datepicker.component';
 
 describe('[MonthpickerComponent]', () => {
-    let component: DaypickerComponent;
+    let component: DatepickerComponent;
     let currentYear: number;
     let currentMonth: number;
 
-    /* let minDate: Date;
-    let maxDate: Date;
- */
-    /*   beforeEach(() => {
-          currentYear = 2017;
-          currentMonth = 9;
-          component = new DaypickerComponent(null);
-          minDate = new Date(2000, 1, 15);
-          maxDate = new Date(2020, 1, 15);
-      });
-      describe('When initialized with currentYear 2017 and currentMonth September', () => {
-          beforeEach(() => {
-              component.ngOnInit();
-          });
-
-          it('contains disabled days for item out of min and max range', () => {
-              expect(component.setDisableMonths(minDate, maxDate)).toBe(null);
-          });
-      });
-   */
     beforeEach(() => {
         currentYear = 2017;
         currentMonth = 9;
-        component = new DaypickerComponent(null);
+        component = new DatepickerComponent(null);
     });
     describe('When initialized with currentYear 2017 and currentMonth September', () => {
         beforeEach(() => {
@@ -73,7 +53,7 @@ describe('[MonthpickerComponent]', () => {
         beforeEach(() => {
             currentYear = 2017;
             currentMonth = 10;
-            component = new DaypickerComponent(null);
+            component = new DatepickerComponent(null);
         });
 
         describe('When initialized with default settings', () => {
