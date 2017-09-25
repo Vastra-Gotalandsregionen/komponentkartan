@@ -84,7 +84,7 @@
                 </div>
               </vgr-title-value>
               <vgr-title-value [title]="'Tillbehör'">
-                <vgr-radio-group [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'}]">
+                <vgr-radio-group [disabled]="!cardUnlocked" [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'}]">
                 </vgr-radio-group>
               </vgr-title-value>
             </div>

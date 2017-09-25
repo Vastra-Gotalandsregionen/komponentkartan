@@ -12,6 +12,7 @@
   height: 18px;
   border: solid 2px #151515;
   background-color: $background-color--content;
+  transition: background-color 0.6s linear border-color 0.6s linear;
   border-radius: 100px;
   margin-right: $margin--slim;
   &:after {
@@ -19,6 +20,7 @@
     width: 8px;
     height: 8px;
     background-color: #151515;
+    transition: background-color 0.6s linear;
     border-radius: 100px;
     display: block;
     margin-left: 3px;
@@ -49,10 +51,22 @@
     border-color: $control-color--disabled;
     &:after {
       background-color: $control-color--disabled;
+      transition: background-color 0.6s linear;
     }
     &:before {
       display: none;
     }
+  }
+  .disabled & {
+    border-color: $control-color--disabled;
+    &:after {
+      background-color: $control-color--disabled;
+      transition: background-color 0.6s linear;
+    }
+    &:before {
+      display: none;
+    }
+    transition: border-color 0.6s linear;
   }
 }
 
@@ -66,6 +80,15 @@
   cursor: default;
   .radio-button__text {
     color: $control-color--disabled;
+    transition: color 0.6s linear;
   }
-  .radio-button__icon {}
+}
+
+.radio-button {
+  .disabled & {
+    cursor: default;
+    .radio-button__text {
+      color: $control-color--disabled;
+    }
+  }
 }
