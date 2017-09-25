@@ -25,7 +25,7 @@ vgr-header {
   background-color: $primary-color--default; //Images/dekal.png
   background-repeat: no-repeat;
   background-position: top right;
-  padding-right: $margin--fat;
+  padding-right: 40px;
   @extend .background-color--primary;
   transition: background-color ease-in 0.3s;
   .theme--blue & {
@@ -55,7 +55,7 @@ vgr-header {
   @extend .bg-image-icon-arrow-white;
   display: inline-block;
   position: absolute;
-  right: 69px;
+  right: 89px;
   bottom: 21px;
 }
 
