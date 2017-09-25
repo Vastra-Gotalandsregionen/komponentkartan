@@ -27,7 +27,7 @@ describe('[MonthpickerComponent]', () => {
           beforeEach(() => {
               component.ngOnInit();
           });
-  
+
           it('contains disabled days for item out of min and max range', () => {
               expect(component.setDisableMonths(minDate, maxDate)).toBe(null);
           });
@@ -60,11 +60,11 @@ describe('[MonthpickerComponent]', () => {
         });
 
         it('contains correct days in firstWeek of type ICalendarWeeks', () => {
-            expect(component.setFirstWeek(currentYear, currentMonth).days[4].day.toDateString()).toBe('Fri Sep 01 2017');
+            expect(component.createFirstWeek(currentYear, currentMonth).days[4].day.toDateString()).toBe('Fri Sep 01 2017');
         });
 
         it('contains correct days in lastWeek of type ICalendarWeeks', () => {
-            expect(component.setLastWeek(currentYear, currentMonth).days[5].day.toDateString()).toBe('Sat Sep 30 2017');
+            expect(component.createLastWeek(currentYear, currentMonth).days[5].day.toDateString()).toBe('Sat Sep 30 2017');
         });
 
 
@@ -98,30 +98,30 @@ describe('[MonthpickerComponent]', () => {
             });
 
             it('contains correct day in firstWeek of type ICalendarWeeks', () => {
-                expect(component.setFirstWeek(currentYear, currentMonth).days[6].day.toDateString()).toBe('Sun Oct 01 2017');
+                expect(component.createFirstWeek(currentYear, currentMonth).days[6].day.toDateString()).toBe('Sun Oct 01 2017');
             });
 
             it('contains correct day in lastWeek of type ICalendarWeeks', () => {
-                expect(component.setLastWeek(currentYear, currentMonth).days[0].day.toDateString()).toBe('Mon Oct 30 2017');
+                expect(component.createLastWeek(currentYear, currentMonth).days[0].day.toDateString()).toBe('Mon Oct 30 2017');
             });
             it('contains correct day in lastWeek of type ICalendarWeeks', () => {
-                expect(component.setLastWeek(currentYear, currentMonth).days[1].day.toDateString()).toBe('Tue Oct 31 2017');
+                expect(component.createLastWeek(currentYear, currentMonth).days[1].day.toDateString()).toBe('Tue Oct 31 2017');
             });
 
             it('contains empty day in lastWeek of type ICalendarWeeks', () => {
-                expect(component.setLastWeek(currentYear, currentMonth).days[2]).toEqual({});
+                expect(component.createLastWeek(currentYear, currentMonth).days[2]).toEqual({});
             });
 
             it('contains correct day in the middle of the month', () => {
-                expect(component.setWeeksAndDays(currentYear, currentMonth)[2].days[2].day.toDateString()).toBe('Wed Oct 11 2017');
+                expect(component.createWeeksAndDays(currentYear, currentMonth)[2].days[2].day.toDateString()).toBe('Wed Oct 11 2017');
             });
 
             it('contains Empty day in the First week of the month', () => {
-                expect(component.setWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
+                expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
             });
 
             it('contains Empty day in the First week of the month', () => {
-                expect(component.setWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
+                expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
             });
         });
     });

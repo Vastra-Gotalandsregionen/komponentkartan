@@ -25,11 +25,12 @@ export class DaypickerComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.createYearMonths(this.minDate, this.maxDate);
-        //this.setDisableMonths(this.minDate, this.maxDate);
+        this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
+        // this.setDisableMonths(this.minDate, this.maxDate);
     }
 
-    createYearMonths(minDate: Date, maxDate: Date) {
+    createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {
+        const yearMonths: ICalendarYearMonth[] = [];
         for (let year = this.minDate.getFullYear(); year <= this.maxDate.getFullYear(); year++) {
             for (let month = 0; month <= 12; month++) {
                 const lastDayInMonth = new Date(year, month, 0);
@@ -37,10 +38,12 @@ export class DaypickerComponent implements OnInit {
                 const firstDayInFirstWeek = lastDayInMonth.getDay();
 
                 if (new Date(year, month) >= this.minDate && (new Date(year, month) <= this.maxDate)) {
-                    this.yearMonths.push({ year: year, month: month } as ICalendarYearMonth);
+                    yearMonths.push({ year: year, month: month, weeks: this.createWeeks(year, month) } as ICalendarYearMonth);
                 }
             }
         }
+
+        return yearMonths;
     }
 
     getFirstDayInMonth(year: number, month: number) { return new Date(year, month, 1); }
@@ -68,10 +71,10 @@ export class DaypickerComponent implements OnInit {
         return weeks;
     }
 
-    setWeeksAndDays(year: number, month: number): ICalendarWeek[] {
+    createWeeksAndDays(year: number, month: number): ICalendarWeek[] {
         const weeks: ICalendarWeek[] = this.createWeeks(year, month);
-        const firstWeek: ICalendarWeek = this.setFirstWeek(year, month);
-        const lastWeek: ICalendarWeek = this.setLastWeek(year, month);
+        const firstWeek: ICalendarWeek = this.createFirstWeek(year, month);
+        const lastWeek: ICalendarWeek = this.createLastWeek(year, month);
 
         const secondWeekIndex = 1;
         const secondLastWeekIndex = weeks.length - 1;
@@ -96,7 +99,7 @@ export class DaypickerComponent implements OnInit {
         return weeks;
     }
 
-    setFirstWeek(year: number, month: number): ICalendarWeek {
+    createFirstWeek(year: number, month: number): ICalendarWeek {
         const firstDayOfMonth = this.getFirstDayInMonth(year, month - 1);
         const calendarWeek: ICalendarWeek = {} as ICalendarWeek;
         calendarWeek.days = [];
@@ -114,7 +117,7 @@ export class DaypickerComponent implements OnInit {
         return calendarWeek;
     }
 
-    setLastWeek(year: number, month: number): ICalendarWeek {
+    createLastWeek(year: number, month: number): ICalendarWeek {
         const lastDayOfMonth = this.getLastDayInMonth(year, month);
         const calendarWeek: ICalendarWeek = {} as ICalendarWeek;
         calendarWeek.days = [];
@@ -157,18 +160,21 @@ export class DaypickerComponent implements OnInit {
         }
     }
 
-    /*     setDisableMonths(minDate: Date, maxDate: Date) {
-            console.log(this.yearMonths);
-            this.yearMonths.forEach(ICalendarYearMonth => {
-                ICalendarYearMonth.weeks.forEach(ICalendarWeek => {
-                    console.log('hello');
-                    ICalendarWeek.days.forEach(day => {
-                        console.log(day);
-                    });
-                });
-            });
-
-            return null;
-        } */
+    setDisableMonths(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
+        for (let indexYearMonth = 0; indexYearMonth < this.yearMonths.length; indexYearMonth++) {
+            const yearMonth = yearMonths[indexYearMonth] as ICalendarYearMonth;
+            console.log(indexYearMonth)
+            console.log(yearMonths.length)
+            for (let indexWeeks = 0; indexWeeks < yearMonth.weeks.length; indexWeeks++) {
+                for (let indexDays = 0; indexDays < yearMonth.weeks[indexWeeks].days.length; indexDays++) {
+                    const date = yearMonth.weeks[indexWeeks].days[indexDays].day;
+                    if (date > minDate && date < maxDate) {
+                        yearMonth.weeks[indexWeeks].days[indexDays].disabled = true;
+                    }
+                }
+            }
+        }
+        return yearMonths;
+    }
 }
 
