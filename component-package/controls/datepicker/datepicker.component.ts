@@ -12,7 +12,7 @@ import { ICalendarDay } from '../../models/calendarDay.model';
 })
 export class DatepickerComponent implements OnInit {
 
-    today: Date = new Date();
+    @Input() currentDate: Date;
 
     @Input() minDate: Date;
     @Input() maxDate: Date;
@@ -20,25 +20,24 @@ export class DatepickerComponent implements OnInit {
     yearMonths: ICalendarYearMonth[] = [];
 
     constructor(protected elementRef: ElementRef) {
-        this.minDate = new Date(this.today.getFullYear(), 0, 1);
-        this.maxDate = new Date(this.today.getFullYear(), 11, 31);
+        this.currentDate = new Date();
     };
 
     ngOnInit() {
+        this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
+        this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
-        // this.setDisableMonths(this.minDate, this.maxDate);
+
+        this.setDisabledDates(this.minDate, this.maxDate, this.yearMonths);
     }
 
     createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {
         const yearMonths: ICalendarYearMonth[] = [];
-        for (let year = this.minDate.getFullYear(); year <= this.maxDate.getFullYear(); year++) {
-            for (let month = 0; month <= 12; month++) {
-                const lastDayInMonth = new Date(year, month, 0);
-                const firstDayInMonth = this.getFirstDayInMonth(year, month);
-                const firstDayInFirstWeek = lastDayInMonth.getDay();
-
-                if (new Date(year, month) >= this.minDate && (new Date(year, month) <= this.maxDate)) {
-                    yearMonths.push({ year: year, month: month, weeks: this.createWeeks(year, month) } as ICalendarYearMonth);
+        for (let year = minDate.getFullYear(); year <= maxDate.getFullYear(); year++) {
+            for (let month = 1; month <= 12; month++) {
+                if (new Date(year, month - 1) >= new Date(minDate.getFullYear(), minDate.getMonth())
+                    && (new Date(year, month - 1) <= new Date(maxDate.getFullYear(), maxDate.getMonth()))) {
+                    yearMonths.push({ year: year, month: month, weeks: this.createWeeksAndDays(year, month) } as ICalendarYearMonth);
                 }
             }
         }
@@ -70,32 +69,32 @@ export class DatepickerComponent implements OnInit {
         }
         return weeks;
     }
-
     createWeeksAndDays(year: number, month: number): ICalendarWeek[] {
         const weeks: ICalendarWeek[] = this.createWeeks(year, month);
         const firstWeek: ICalendarWeek = this.createFirstWeek(year, month);
         const lastWeek: ICalendarWeek = this.createLastWeek(year, month);
-
         const secondWeekIndex = 1;
-        const secondLastWeekIndex = weeks.length - 1;
-        const lastWeekIndex = weeks.length
+        const secondLastWeekIndex = weeks.length - 2;
+        const lastWeekIndex = weeks.length - 1
 
         let dayNumber = firstWeek.days[6].day.getDate() + 1;
 
         weeks[0] = firstWeek;
 
-        for (let iWeekIndex = secondWeekIndex; iWeekIndex < secondLastWeekIndex; iWeekIndex++) {
-            const weekContainer: ICalendarWeek = {} as ICalendarWeek;
+        for (let iWeekIndex = secondWeekIndex; iWeekIndex <= secondLastWeekIndex + 1; iWeekIndex++) {
+            let weekContainer: ICalendarWeek;
+            weekContainer = {} as ICalendarWeek;
             const daysContainer: ICalendarDay[] = [];
             weekContainer.days = [];
             for (let iDayIndex = 0; iDayIndex < 7; iDayIndex++) {
-                weekContainer.days.push({ day: new Date(year, month - 1, dayNumber) } as ICalendarDay);
+                weekContainer.days.push({ day: new Date(year, month - 1, dayNumber), disabled: false } as ICalendarDay);
                 dayNumber++;
             }
             weeks[iWeekIndex] = weekContainer;
         }
 
         weeks[lastWeekIndex] = lastWeek;
+
         return weeks;
     }
 
@@ -110,7 +109,7 @@ export class DatepickerComponent implements OnInit {
             if (i < (this.getSwedishDayNumbersInWeek(firstDayOfMonth.getDay()))) {
                 calendarWeek.days.push({} as ICalendarDay);
             } else {
-                calendarWeek.days.push({ day: new Date(year, month - 1, daynumber) } as ICalendarDay);
+                calendarWeek.days.push({ day: new Date(year, month - 1, daynumber), disabled: false } as ICalendarDay);
                 daynumber++;
             }
         }
@@ -126,7 +125,7 @@ export class DatepickerComponent implements OnInit {
 
         for (let i = 0; i < 7; i++) {
             if (i <= (this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()))) {
-                calendarWeek.days.push({ day: new Date(year, month - 1, daynumber) } as ICalendarDay);
+                calendarWeek.days.push({ day: new Date(year, month - 1, daynumber), disabled: false } as ICalendarDay);
                 daynumber++
             } else { calendarWeek.days.push({} as ICalendarDay); };
         }
@@ -160,18 +159,20 @@ export class DatepickerComponent implements OnInit {
         }
     }
 
-    setDisableMonths(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
+    setDisabledDates(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
         for (let indexYearMonth = 0; indexYearMonth < this.yearMonths.length; indexYearMonth++) {
+
             const yearMonth = yearMonths[indexYearMonth] as ICalendarYearMonth;
-            console.log(indexYearMonth)
-            console.log(yearMonths.length)
+
             for (let indexWeeks = 0; indexWeeks < yearMonth.weeks.length; indexWeeks++) {
                 for (let indexDays = 0; indexDays < yearMonth.weeks[indexWeeks].days.length; indexDays++) {
                     const date = yearMonth.weeks[indexWeeks].days[indexDays].day;
-                    if (date > minDate && date < maxDate) {
+
+                    if (date < minDate && date > maxDate) {
                         yearMonth.weeks[indexWeeks].days[indexDays].disabled = true;
                     }
                 }
+
             }
         }
         return yearMonths;
