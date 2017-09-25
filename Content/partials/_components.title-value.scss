@@ -2,7 +2,7 @@
     display: table;
     table-layout: fixed;
     width: 100%;
-    border-spacing: 0px 10px;
+    border-spacing: 0px $margin--slim;
   }
 
   .title-value {
@@ -19,6 +19,9 @@
     display: table-cell;
     vertical-align: middle;
     width: 280px;
+    >span {
+      padding-left: $margin--slim;
+    }
   }
 
   @media screen and (min-width: $desktop-width--medium) {
@@ -26,6 +29,6 @@
       width: 300px;
     }
     .title-value-layout {
-      border-spacing: 0px 20px;
+      border-spacing: 0px $margin--regular;
     }
   }

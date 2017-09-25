@@ -92,9 +92,6 @@
       transition: transform 0.4s;
     }
   }
-  &.expandable-container--deleted {
-    margin-top: 0px;
-  }
   &.expandable-container--compact {
     margin-bottom: 0px;
     margin-left: -$margin--xs-slim;
@@ -107,8 +104,9 @@
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
   }
   &.expandable-container--deleted {
+    margin-top: 0px;
     visibility: hidden;
-    transition: visibility 0.3s ease-out;
+    transition: visibility 0.3s ease-out, margin-top 0.3s ease-out;
     transition-delay: 0.3s;
   }
 }
@@ -132,7 +130,7 @@
   .expandable-container--expanded & {
     border-bottom: 1px solid $primary-color--default;
   }
-  .expandable-container--collapsing & {
+  .expandable-container--not-interactable & {
     cursor: default;
   }
   .expandable-container--deleted & {

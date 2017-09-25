@@ -15,6 +15,16 @@ export class ListsComponent {
     public peopleRows: ExpandableRow<ExamplePerson>[];
     public cardUnlocked: boolean;
     public cardRow: ExpandableRow<string> = new ExpandableRow<string>('Foo');
+    get netAmount(): number {
+        if (isNaN(this.grossAmount) || isNaN(this.taxPercent)) {
+            return NaN;
+        } else {
+            return this.grossAmount - ((this.taxPercent / 100) * this.grossAmount);
+        }
+    }
+    public grossAmount: number;
+    public taxPercent: number;
+    public selectedDate: Date;
     constructor(private modalService: ModalService) {
         const examplePeople = [
             { id: '1', firstName: 'Adam', lastName: 'Andersson', organisations: ['Team 1', 'Team 2'] } as ExamplePerson,
@@ -23,6 +33,10 @@ export class ListsComponent {
             { id: '4', firstName: 'Daniella', lastName: 'Di Maria Marquez ', organisations: ['Team 4'], canBeDeleted: true } as ExamplePerson,
             { id: '5', firstName: 'Erik', lastName: '', organisations: ['Team 2', 'Team 4'] } as ExamplePerson,
         ];
+
+        this.grossAmount = 15000;
+        this.taxPercent = 32;
+
 
         this.peopleRows = examplePeople.map(x => new ExpandableRow<ExamplePerson>(x));
 
@@ -33,7 +47,7 @@ export class ListsComponent {
     removeRow(row: ExpandableRow<ExamplePerson>) {
         this.modalService.openDialog('Ta bort person', 'Vill du verkligen ta bort ' + row.object.firstName + '?',
             new ModalButtonConfiguration('Ja', () => {
-                row.notifyOnRemove(row.object.firstName + ' togs bort', NotificationIcon.Ok);
+                row.notifyOnRemove(row.object.firstName + ' togs bort och kommer inte längre att kunna logga in', NotificationIcon.Ok);
             }),
             new ModalButtonConfiguration('Nej', () => { }));
     }
@@ -43,7 +57,7 @@ export class ListsComponent {
         event.cancelBubble = true;
         this.modalService.openDialog('Ta bort person', 'Vill du verkligen ta bort ' + row.object.firstName + '?',
             new ModalButtonConfiguration('Ja', () => {
-                row.notifyOnRemove(row.object.firstName + ' togs bort', NotificationIcon.Ok);
+                row.notifyOnRemove(row.object.firstName + ' togs bort och kommer inte längre att kunna logga in', NotificationIcon.Ok);
                 row.object.deleted = true;
             }),
             new ModalButtonConfiguration('Nej', () => { }));
@@ -70,6 +84,8 @@ export class ListsComponent {
         this.cardUnlocked = false;
         this.cardRow.notifyOnCollapse('Åtgärden avbröts', NotificationIcon.Ok);
     }
+
+
 }
 
 export interface ExamplePerson {

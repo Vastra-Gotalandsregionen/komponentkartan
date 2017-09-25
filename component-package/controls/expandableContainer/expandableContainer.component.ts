@@ -19,7 +19,7 @@ export class ExpandableContainerComponent implements OnInit {
     @HostBinding('class.expandable-container--expanded') private _expanded: boolean;
     @HostBinding('class.expandable-container--deleted') deleted: boolean;
     @HostBinding('class.expandable-container--notification-visible') notificationVisible: boolean;
-    @HostBinding('class.expandable-container--collapsing') collapsing: boolean;
+    @HostBinding('class.expandable-container--not-interactable') notInteractable: boolean;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue) {
@@ -70,7 +70,7 @@ export class ExpandableContainerComponent implements OnInit {
 
     @HostListener('click', ['$event'])
     toggleExpand(event: Event) {
-        if (this.collapsing) {
+        if (this.notInteractable) {
             return;
         }
 
@@ -87,7 +87,7 @@ export class ExpandableContainerComponent implements OnInit {
     }
 
     private expand() {
-        if (this.deleted || this.collapsing) {
+        if (this.deleted || this.notInteractable) {
             return;
         }
         this.jqueryHelper.toggleContent(this.elementRef);
@@ -97,27 +97,23 @@ export class ExpandableContainerComponent implements OnInit {
         this.expandedChanged.emit(this._expanded);
     }
 
-    private collapse(notificationToShow?: NotificationType) {
-        this.collapsing = true;
+    private collapse(collapsingNotification?: NotificationType) {
+        this.notInteractable = true;
         const header = this.jqueryHelper.getHeader(this.elementRef);
 
-        if (notificationToShow) {
-            this.processNotification(header, notificationToShow, () => {
-                this._expanded = false;
-                this.collapsed = true;
-                this.expandedChanged.emit(this._expanded);
-                this.collapsing = false;
+        if (collapsingNotification) {
+            this.processNotification(header, collapsingNotification, () => {
+
             });
         } else {
             this.jqueryHelper.collapseContent(header, () => {
                 this._expanded = false;
                 this.collapsed = true;
-                this.collapsing = false;
+                this.notInteractable = false;
                 this.expandedChanged.emit(this._expanded);
             });
         }
     }
-
 
     private processNotification(header: JQuery, notificationType: NotificationType, callback: Function): void {
         if (notificationType === NotificationType.ShowOnCollapse) {
@@ -131,10 +127,13 @@ export class ExpandableContainerComponent implements OnInit {
         this.notificationVisible = true;
         setTimeout(() => {
             this.jqueryHelper.collapseContent(header, () => {
+                this._expanded = false;
+                this.collapsed = true;
+                this.expandedChanged.emit(this._expanded);
                 setTimeout(() => {
                     this.notification.done = true;
                     this.notificationVisible = false;
-                    callback();
+                    this.notInteractable = false;
                 }, 2000)
             });
         }, 1400);
@@ -145,11 +144,14 @@ export class ExpandableContainerComponent implements OnInit {
         this.notificationVisible = true;
         setTimeout(() => {
             this.jqueryHelper.collapseContent(header, () => {
+                this._expanded = false;
+                this.collapsed = true;
+                this.expandedChanged.emit(this._expanded);
                 setTimeout(() => {
                     this.notification.done = true;
                     this.notificationVisible = false;
+                    this.notInteractable = false;
                     this.deleted = true;
-                    callback();
                 }, 2000)
             });
         }, 1400);

@@ -40,6 +40,8 @@
 .card__right-container {
   @extend .card__section-container;
   padding-left: $margin--slim;
+  min-width: 627px;
+  width: 627px;
 }
 
 .card-section__header {
@@ -94,12 +96,10 @@
 }
 
 .card-section__content {
-  padding-top: $margin--regular;
-  padding-bottom: $margin--regular;
-  display: none;
-  >* {
-    margin-bottom: $margin--regular;
-  }
+  padding-bottom: $margin--slim;
+  display: none; // >* {
+  //   margin-bottom: $margin--regular;
+  // }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
@@ -111,15 +111,7 @@
     // padding-bottom: $margin--fat;
   }
   .card__right-container {
-    padding-left: $margin--fat; // padding-top: $margin--fat;
-    // padding-bottom: $margin--fat;
-  }
-  .card-section__content {
-    padding-top: $margin--fat;
-    padding-bottom: $margin--fat;
-    >* {
-      margin-bottom: $margin--fat;
-    }
+    padding-left: $margin--fat;
   }
   .card__top {
     padding-top: 0px; //padding-bottom: 0px;

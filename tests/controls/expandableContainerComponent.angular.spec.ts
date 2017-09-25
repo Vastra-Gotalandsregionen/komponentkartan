@@ -139,7 +139,7 @@ describe('ExpandableContainerComponent', () => {
                     expect(component.notificationVisible).toBe(true);
                 });
                 it('component is collapsing', () => {
-                    expect(component.collapsing).toBe(true);
+                    expect(component.notInteractable).toBe(true);
                 });
 
                 describe('after 1,4 seconds', () => {
@@ -164,7 +164,7 @@ describe('ExpandableContainerComponent', () => {
                             expect(component.expanded).toBe(false);
                         });
                         it('component is not collapsing', () => {
-                            expect(component.collapsing).toBe(false);
+                            expect(component.notInteractable).toBe(false);
                         });
                     });
                 });
@@ -179,7 +179,7 @@ describe('ExpandableContainerComponent', () => {
                     expect(component.notificationVisible).toBe(true);
                 });
                 it('component is collapsing', () => {
-                    expect(component.collapsing).toBe(true);
+                    expect(component.notInteractable).toBe(true);
                 });
 
                 describe('after 1,4 seconds', () => {
@@ -204,7 +204,7 @@ describe('ExpandableContainerComponent', () => {
                             expect(component.expanded).toBe(false);
                         });
                         it('component is not collapsing', () => {
-                            expect(component.collapsing).toBe(false);
+                            expect(component.notInteractable).toBe(false);
                         });
                         it('component is deleted', () => {
                             expect(component.deleted).toBe(true);
@@ -219,7 +219,7 @@ describe('ExpandableContainerComponent', () => {
             beforeEach(() => {
                 spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(true);
                 spyOn(jqueryHelper, 'toggleContent');
-                component.collapsing = true;
+                component.notInteractable = true;
             });
             describe('and header is clicked', () => {
                 beforeEach(() => {

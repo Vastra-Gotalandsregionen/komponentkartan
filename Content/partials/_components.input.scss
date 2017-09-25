@@ -25,8 +25,10 @@ $validation-icon-size: 18px;
   }
   .readonly & {
     border-color: $background-color--content;
+    cursor: text;
   }
-  transition: border-color 0.6s linear;
+  transition: border-color 0.6s linear,
+  padding-left 0.6s linear;
 }
 
 .input-container__suffix-container {
@@ -77,14 +79,15 @@ $validation-icon-size: 18px;
 }
 
 .validation-container {
+  max-height: 30px;
   padding: 0px;
   background-color: inherit;
   position: relative;
   width: calc(#{$input-width--small} + #{$margin--fat});
   max-width: calc(#{$input-width--small} + #{$margin--fat});
-  top: 0px;
-  transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear, top 0.3s linear;
+  top: 0px; //transition: padding-top 0.3s linear, padding-bottom 0.3s linear, top 0.3s linear;
   &.validation-error--active {
+    max-height: unset;
     padding: $margin--slim;
     margin-left: -$margin--slim;
     .title-value-layout & {
@@ -97,22 +100,21 @@ $validation-icon-size: 18px;
     top 0.3s linear;
   }
   &.validation-error--editing {
+    max-height: unset;
     .title-value-layout & {
       top: -10px;
     }
     background-color: $background-color--default;
     padding: $margin--slim;
     margin-left: -$margin--slim;
-    transition: background-color 0.3s linear,
-    padding-top 0.3s linear,
-    padding-bottom 0.3s linear;
+    transition: background-color 0.3s linear; // padding-top 0.3s linear,
+    // padding-bottom 0.3s linear;
   }
   &.validation-error--fixed {
-    transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
+    //transition: background-color 0.3s linear; //, padding-top 0.3s linear, padding-bottom 0.3s linear;
     &:after {
-      visibility: visible;
-      transition: visibility 0.3s linear;
-      transition-delay: 0.3s;
+      visibility: visible; // transition: visibility 0.3s linear;
+      // transition-delay: 0.3s;
     }
   }
 }

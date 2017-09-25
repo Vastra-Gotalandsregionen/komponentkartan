@@ -112,7 +112,9 @@ export class InputComponent implements OnInit {
     }
 
     onFocus(event: FocusEvent): void {
-
+        if (this.readonly) {
+            return;
+        }
         if (this.validationErrorState === ValidationErrorState.Active) {
             this.setValidationState(ValidationErrorState.Editing);
         } else if (this.validationErrorState === ValidationErrorState.Fixed) {
@@ -137,6 +139,10 @@ export class InputComponent implements OnInit {
     }
 
     validateInput(): IValidationResult {
+        if (this.readonly) {
+            return this.successfulValidationResult;
+        }
+
         if (this.customValidator) {
             return this.customValidator(this.displayValue);
         }
@@ -161,6 +167,10 @@ export class InputComponent implements OnInit {
     }
 
     onLeave(): void {
+        if (this.readonly) {
+            return;
+        }
+
         if (this.isNumeric) {
             this.value = this.convertStringToNumber(this.displayValue);
 
