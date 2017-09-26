@@ -8,7 +8,7 @@ import { ICalendarDay } from '../../models/calendarDay.model';
 @Component({
     selector: 'vgr-datepicker',
     moduleId: module.id,
-    templateUrl: './datepicker.component.html'
+    templateUrl: './datepicker.component.html',
 })
 export class DatepickerComponent implements OnInit {
 
@@ -19,8 +19,15 @@ export class DatepickerComponent implements OnInit {
 
     yearMonths: ICalendarYearMonth[] = [];
 
+    isDatePickerVisible: boolean;
+    nextMonth: boolean;
+    previousMonth: boolean;
+
     constructor(protected elementRef: ElementRef) {
         this.currentDate = new Date();
+        this.isDatePickerVisible = false;
+        this.nextMonth = true;
+        this.previousMonth = true;
     };
 
     ngOnInit() {
@@ -176,5 +183,26 @@ export class DatepickerComponent implements OnInit {
             }
             return yearMonths;
         }
+    }
+
+    // UI functions
+
+    displayDatePicker() {
+        this.isDatePickerVisible = true;
+    }
+
+    @HostListener('document:click', ['$event'])
+    onOutsideClick(event) {
+        if (!this.elementRef.nativeElement.contains(event.target)) {
+            this.isDatePickerVisible = false;
+        }
+    }
+
+    onPreviousMonth() {
+        console.log('to be implemented');
+    }
+
+    onNextMonth() {
+        console.log('to be implemented');
     }
 }
