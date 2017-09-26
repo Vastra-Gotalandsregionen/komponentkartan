@@ -27,8 +27,6 @@ export class DatepickerComponent implements OnInit {
         this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
         this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
-
-        this.setDisabledDates(this.minDate, this.maxDate, this.yearMonths);
     }
 
     createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {
@@ -41,7 +39,6 @@ export class DatepickerComponent implements OnInit {
                 }
             }
         }
-
         return yearMonths;
     }
 
@@ -160,22 +157,24 @@ export class DatepickerComponent implements OnInit {
     }
 
     setDisabledDates(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
+
         for (let indexYearMonth = 0; indexYearMonth < this.yearMonths.length; indexYearMonth++) {
 
             const yearMonth = yearMonths[indexYearMonth] as ICalendarYearMonth;
 
             for (let indexWeeks = 0; indexWeeks < yearMonth.weeks.length; indexWeeks++) {
-                for (let indexDays = 0; indexDays < yearMonth.weeks[indexWeeks].days.length; indexDays++) {
-                    const date = yearMonth.weeks[indexWeeks].days[indexDays].day;
 
-                    if (date < minDate && date > maxDate) {
-                        yearMonth.weeks[indexWeeks].days[indexDays].disabled = true;
+                for (let indexDays = 0; indexDays < yearMonth.weeks[indexWeeks].days.length; indexDays++) {
+
+                    const calendarDay = yearMonth.weeks[indexWeeks].days[indexDays] as ICalendarDay;
+                    if (calendarDay != null) {
+                        if (calendarDay.day < minDate || calendarDay.day > maxDate) {
+                            yearMonth.weeks[indexWeeks].days[indexDays].disabled = true;
+                        }
                     }
                 }
-
             }
+            return yearMonths;
         }
-        return yearMonths;
     }
 }
-

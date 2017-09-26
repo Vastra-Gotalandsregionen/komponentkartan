@@ -18,49 +18,12 @@ describe('[MonthpickerComponent]', () => {
     let minDate: Date;
     let maxDate: Date;
 
-    // beforeEach(() => {
-    //     currentYear = 2017;
-    //     currentMonth = 9;
-    //     component = new DatepickerComponent(null);
-    //     component.currentDate = new Date(currentYear, currentMonth, 1);
-    // });
-    // describe('When initialized with currentYear 2017 and currentMonth September', () => {
-    //     beforeEach(() => {
-    //         component.ngOnInit();
-    //     });
-
-    //     it('contains a yearmonth-model with current year', () => {
-    //         expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(currentYear);
-    //     });
-
-    //     it('contains the current month in the yearmonth model', () => {
-    //         expect(component.yearMonths.filter(ym => ym.month === currentMonth).map(ym => ym.month)[0]).toEqual(currentMonth);
-    //     });
-
-    //     it('contains 5 weeks in month model', () => {
-    //         expect(component.getNumberOfWeeks(currentYear, currentMonth)).toEqual(5);
-    //     });
-
-    //     it('contains 5 elements of ICalendarWeeks', () => {
-    //         expect(component.createWeeks(currentYear, currentMonth).length).toEqual(5);
-    //     });
-
-    //     it('contains correct days in firstWeek of type ICalendarWeeks', () => {
-    //         expect(component.createFirstWeek(currentYear, currentMonth).days[4].day.toDateString()).toBe('Fri Sep 01 2017');
-    //     });
-
-    //     it('contains correct days in lastWeek of type ICalendarWeeks', () => {
-    //         expect(component.createLastWeek(currentYear, currentMonth).days[5].day.toDateString()).toBe('Sat Sep 30 2017');
-    //     });
-
-
-    // });
     describe('When initialized with currentYear 2017 and currentMonth October', () => {
         beforeEach(() => {
             currentYear = 2017;
             currentMonth = 10;
-            minDate = new Date(currentYear, currentMonth - 1, 1);
-            maxDate = new Date(currentYear, currentMonth - 1, 31);
+            minDate = new Date(currentYear, currentMonth - 1, 15);
+            maxDate = new Date(currentYear, currentMonth - 1, 27);
             component = new DatepickerComponent(null);
             component.currentDate = new Date(currentYear, currentMonth, 1);
         });
@@ -123,6 +86,21 @@ describe('[MonthpickerComponent]', () => {
                 expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[1].disabled as boolean).toBe(false);
                 expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[2].disabled as boolean).toBe(false);
             });
+
+            it('Days before mindate and after maxdate are disabled=true', () => {
+                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[0].days[6].disabled).toBe(true);
+                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[5].disabled).toBe(true);
+                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
+                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
+                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[5].days[1].disabled).toBe(true);
+            });
+
+
+            it('Days in between mindate are maxdate disabled=false', () => {
+                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[6].disabled).toBe(false);
+                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[4].disabled).toBe(false);
+            });
+
         });
     });
 });
