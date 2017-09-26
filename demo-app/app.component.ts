@@ -425,7 +425,10 @@ export class KomponentkartanApplicationComponent {
         this.sidebarMenu.ngAfterViewInit();
 
     }
+    onActivate(e: any) {
+        window.scrollTo(0, 0);
 
+    }
 }
 
 

@@ -47,7 +47,9 @@ export class ListsComponent {
     removeRow(row: ExpandableRow<ExamplePerson>) {
         this.modalService.openDialog('Ta bort person', 'Vill du verkligen ta bort ' + row.object.firstName + '?',
             new ModalButtonConfiguration('Ja', () => {
+
                 row.notifyOnRemove(row.object.firstName + ' togs bort och kommer inte längre att kunna logga in', NotificationIcon.Ok);
+                row.object.deleted = true;
             }),
             new ModalButtonConfiguration('Nej', () => { }));
     }

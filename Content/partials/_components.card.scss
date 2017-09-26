@@ -1,119 +1,120 @@
 .card {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .card__top {
-  display: flex;
-  flex-direction: row;
-  padding-top: $margin--slim;
-  padding-bottom: $margin--slim;
+    display: flex;
+    flex-direction: row;
+    padding-top: $margin--slim;
+    padding-bottom: $margin--slim;
 }
 
 .card__bottom-container {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .card__section-container {
-  padding-top: $margin--slim;
-  padding-bottom: $margin--slim;
-  flex: 1;
-  .card-section--expanded {
-    .card-section__content {
-      border-bottom: 1px solid $border-color;
+    padding-top: $margin--slim;
+    padding-bottom: $margin--slim;
+    flex: 1;
+    .card-section--expanded {
+        .card-section__content {
+            border-bottom: 1px solid $border-color;
+        }
     }
-  }
-  .card-section--expanded:last-child {
-    .card-section__content {
-      border-bottom: none;
+    .card-section--expanded:last-child {
+        .card-section__content {
+            border-bottom: none;
+        }
     }
-  }
 }
 
 .card__left-container {
-  @extend .card__section-container;
-  border-right: 1px solid $border-color;
-  padding-right: $margin--slim;
+    @extend .card__section-container;
+    border-right: 1px solid $border-color;
+    padding-right: $margin--slim;
 }
 
 .card__right-container {
-  @extend .card__section-container;
-  padding-left: $margin--slim;
-  min-width: 627px;
-  width: 627px;
+    @extend .card__section-container;
+    padding-left: $margin--slim;
+    min-width: 600px;
+    width: 600px;
 }
 
 .card-section__header {
-  min-height: 35px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid $border-color;
-  cursor: pointer;
-  .card-section:first-child() & {
-    border-top: 1px solid $border-color;
-  }
+    min-height: 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid $border-color;
+    cursor: pointer;
+    .card-section:first-child() & {
+        border-top: 1px solid $border-color;
+    }
 }
 
 .card-section__header__title {
-  display: inline-block;
+    display: inline-block;
 }
 
 .card-section__header__subtitle {
-  margin-left: $margin--regular;
+    margin-left: $margin--regular;
 }
 
 .card-section__header__icon {
-  @extend .bg-image-icon--edit;
-  margin-left: $margin--regular;
-  width: 30px;
-  height: 30px;
-  opacity: 0;
-  transition: opacity 0.6s linear;
-  .card-section--edit-mode & {
-    opacity: 1;
+    @extend .bg-image-icon--edit;
+    margin-left: $margin--regular;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
     transition: opacity 0.6s linear;
-  }
+    .card-section--edit-mode & {
+        opacity: 1;
+        transition: opacity 0.6s linear;
+    }
 }
 
 .card-section__header__expander {
-  @extend .bg-image-icon-chevron;
-  display: inline-block;
-  margin-right: $margin--slim;
-  width: 15px;
-  height: 15px;
-  background-size: 100%;
-  vertical-align: middle;
-  margin-left: auto;
-  transform: rotate(0deg);
-  transition: transform 0.4s;
-  .card-section--expanded & {
-    transform: rotate(-180deg);
+    @extend .bg-image-icon-chevron;
+    display: inline-block;
+    margin-right: $margin--slim;
+    width: 15px;
+    height: 15px;
+    background-size: 100%;
+    vertical-align: middle;
+    margin-left: auto;
+    transform: rotate(0deg);
     transition: transform 0.4s;
-  }
+    .card-section--expanded & {
+        transform: rotate(-180deg);
+        transition: transform 0.4s;
+    }
 }
 
 .card-section__content {
-  padding-bottom: $margin--slim;
-  display: none; // >* {
-  //   margin-bottom: $margin--regular;
-  // }
+    padding-bottom: $margin--slim;
+    display: none;
+    padding-top: $margin--xs-slim;
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .card-section__header {
-    min-height: 40px;
-  }
-  .card__left-container {
-    padding-right: $margin--fat; // padding-top: $margin--fat;
-    // padding-bottom: $margin--fat;
-  }
-  .card__right-container {
-    padding-left: $margin--fat;
-  }
-  .card__top {
-    padding-top: 0px; //padding-bottom: 0px;
-  }
+    .card-section__header {
+        min-height: 40px;
+    }
+    .card__left-container {
+        padding-right: $margin--fat;
+    }
+    .card__right-container {
+        padding-left: $margin--fat;
+    }
+    .card__top {
+        padding-top: 0px;
+    }
+    .card-section__content {
+        padding-top: 0px;
+    }
 }
