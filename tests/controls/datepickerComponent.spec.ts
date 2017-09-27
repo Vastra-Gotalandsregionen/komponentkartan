@@ -101,6 +101,23 @@ describe('[MonthpickerComponent]', () => {
                 expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[4].disabled).toBe(false);
             });
 
+            /*  Det finns en kalender där man väljer datum
+             Valt datum väljer och stänger kalender
+             Valt datum markeras som skiss
+             Hover markeras som skiss
+             Det går att gå fram och tillbaka i tid om min/maxvärde tillåter
+             Inaktiva val (val utanför min /maxvärden) markeras som skiss
+             Kalendern kan temas
+             Dagens datum är alltid markerad enligt skiss om dagens datum inte är valt
+             Växer vid brytgräns
+             Ett exempel ska finnas på komponentkartan
+             Man kan sätta formatet på valt datum
+             Man kan sätta formatet på tooltip för valt datum
+             Kalenderdropdown ska se ut enligt skiss
+             Kalendern visas nedanför kalenderdropdown enligt skiss
+             Man kan sätta min och maxdatum och startvärde
+             När kalendern stängs visas datum i valt format */
+
         });
     });
 });
