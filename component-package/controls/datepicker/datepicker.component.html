@@ -1,16 +1,16 @@
-<div class="monthpicker" (click)="displayDatePicker()" [ngClass]="{'monthpicker--open' : true}">
-  <div class="monthpicker__dropdown">
-    <span *ngIf="true" title="Välj månad">Välj datum</span>
+<div class="datepicker" (click)="displayDatePicker()" [ngClass]="{'datepicker--open' : true}">
+  <div class="datepicker__dropdown">
+    <span class="datepicker__calendar__selector" *ngIf="true" title="Välj månad">Välj datum</span>
 
-    <div *ngIf="isDatePickerVisible" class="monthpicker__calendar">
-      <div class="monthpicker__calendar__header">
-        <div class="monthpicker__calendar__header__previous-year" (click)="onPreviousMonth()" [ngClass]="{'disabled': !previousMonth}"></div>
+    <div *ngIf="isDatePickerVisible" class="datepicker__calendar">
+      <div class="datepicker__calendar__header">
+        <div class="datepicker__calendar__header__previous-year" (click)="onPreviousMonth()" [ngClass]="{'disabled': !previousMonth}"></div>
 
-        <div *ngIf="!displayedYear" class="monthpicker__calendar__header__year">{{currentYearMonthOutput | date: 'MMMM y' }}</div>
+        <div *ngIf="!displayedYear" class="datepicker__calendar__header__year">{{currentYearMonthOutput | date: 'MMMM y' }}</div>
 
-        <div class="monthpicker__calendar__header__next-year" (click)="onNextMonth()" [ngClass]="{'disabled' : !nextMonth}"></div>
+        <div class="datepicker__calendar__header__next-year" (click)="onNextMonth()" [ngClass]="{'disabled' : !nextMonth}"></div>
       </div>
-      <div class="monthpicker__calendar__content">
+      <div class="datepicker__calendar__content">
         <table class="datepicker__calendar_table">
           <tr>
             <th>Må</th>
@@ -22,8 +22,13 @@
             <th>Sö</th>
           </tr>
           <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
-            <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index">
-              {{yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d'}}
+            <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index"
+              class="datepicker__calendar__month" 
+              [ngClass]="{
+              'disabled': checkDisabledDate(weekIndex, dayIndex),
+              'datepicker__calendar__month--today' : checkTodayDate(weekIndex, dayIndex),
+              'datepicker__calendar__month--selected' : checkSelectedDate(weekIndex, dayIndex) }">
+              <span *ngIf="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex]">{{yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d'}}</span>
             </td>
           </tr>
         </table>
