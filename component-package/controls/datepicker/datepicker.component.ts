@@ -195,7 +195,8 @@ export class DatepickerComponent implements OnInit {
     }
 
     @HostListener('document:click', ['$event'])
-    onOutsideClick(event) {
+
+    onOutsideClick(event: Event) {
         if (!this.elementRef.nativeElement.contains(event.target)) {
             this.isDatePickerVisible = false;
         }
