@@ -18,7 +18,7 @@ $dropdown-width--small: 100px;
     cursor: default;
     transition: background-color 0.6s linear;
   }
-  span {
+  .datepicker__calendar__selector {
     padding-left: $margin--slim;
     padding-top: 2px;
     vertical-align: middle;
@@ -80,7 +80,7 @@ $dropdown-width--small: 100px;
   border: none;
   padding-bottom: 0px;
   width: 250px;
-  height: 250px;
+  height: 300px;
   visibility: hidden;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   cursor: default;
@@ -192,16 +192,24 @@ $dropdown-width--small: 100px;
   flex-direction: row;
   text-align: center;
   vertical-align: middle;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+      padding: 5px;
+      text-align: center;
+  }
 }
 
 .datepicker__calendar__month {
-  width: 40.5px;
-  height: 40.5px;
+  // width: 40.5px;
+  // height: 40.5px;
   border-radius: 50%;
-  margin-left: 9px;
-  margin-right: 9px;
-  margin-top: 14px;
-  padding-top: 7px;
+  // margin-left: 9px;
+  // margin-right: 9px;
+  // margin-top: 14px;
+  // padding-top: 7px;
   cursor: pointer;
   &:hover {
     @extend .background-color--secondary;

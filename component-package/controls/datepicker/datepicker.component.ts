@@ -9,6 +9,7 @@ import { ICalendarDay } from '../../models/calendarDay.model';
     selector: 'vgr-datepicker',
     moduleId: module.id,
     templateUrl: './datepicker.component.html',
+    providers: [DatePipe]
 })
 export class DatepickerComponent implements OnInit {
 
@@ -28,7 +29,7 @@ export class DatepickerComponent implements OnInit {
 
     currentYearMonthOutput: Date;
 
-    constructor(protected elementRef: ElementRef) {
+    constructor(protected elementRef: ElementRef, private datePipe: DatePipe) {
         this.currentDate = new Date();
         this.isDatePickerVisible = false;
         this.nextMonth = true;
@@ -42,6 +43,8 @@ export class DatepickerComponent implements OnInit {
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
         this.yearMonths = this.setDisabledDates(this.minDate, this.maxDate, this.yearMonths);
         this.setCurrentYearMonthOutput();
+        this.setCheckSelectedDate();
+        console.log(this.yearMonths);
     }
 
     setCurrentYearMonthOutput() {
@@ -134,7 +137,7 @@ export class DatepickerComponent implements OnInit {
 
         for (let i = 0; i < 7; i++) {
             if (i < (this.getSwedishDayNumbersInWeek(firstDayOfMonth.getDay()))) {
-                calendarWeek.days.push({} as ICalendarDay);
+                calendarWeek.days.push(null);
             } else {
                 calendarWeek.days.push({ day: new Date(year, month - 1, daynumber), disabled: false } as ICalendarDay);
                 daynumber++;
@@ -154,7 +157,7 @@ export class DatepickerComponent implements OnInit {
             if (i <= (this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()))) {
                 calendarWeek.days.push({ day: new Date(year, month - 1, daynumber), disabled: false } as ICalendarDay);
                 daynumber++
-            } else { calendarWeek.days.push({} as ICalendarDay); };
+            } else { calendarWeek.days.push(null); };
         }
 
         return calendarWeek;
@@ -223,17 +226,50 @@ export class DatepickerComponent implements OnInit {
     }
 
     onPreviousMonth() {
-        if (this.currentYearMonthIndex - 1 !== 0) {
-            this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
-            this.setCurrentYearMonthOutput();
-        }
+        this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
+        this.setCurrentYearMonthOutput();
     }
 
     onNextMonth() {
-        if (this.currentYearMonthIndex + 1 !== this.yearMonths.length) {
-            this.currentYearMonthIndex = this.currentYearMonthIndex + 1;
-            this.setCurrentYearMonthOutput();
-            console.log(this.yearMonths[this.currentYearMonthIndex]);
+        this.currentYearMonthIndex = this.currentYearMonthIndex + 1;
+        this.setCurrentYearMonthOutput();
+    }
+
+    checkDisabledDate(weekIndex: number, dayIndex: number): boolean {
+        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] === null || this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].disabled;
+    }
+
+    checkTodayDate(weekIndex: number, dayIndex: number): boolean {
+        return false;
+    }
+
+    checkSelectedDate(weekIndex: number, dayIndex: number): boolean {     
+        if(this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null) {
+            return  this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].marked;
         }
+    }
+
+    setCheckSelectedDate(): boolean {
+        let result: boolean;
+
+        this.yearMonths.forEach((month) => {
+            month.weeks.forEach((week) => {
+                week.days.forEach((day) => {
+                    if(day !== null) {
+                    const currentDatePosition = this.datePipe.transform(day.day , 'ddMMyyyy');
+                    const currentselectedDate = this.datePipe.transform( this.selectedDate , 'ddMMyyyy');
+                    result = currentDatePosition.toString() === currentselectedDate.toString();
+                    if(result) {
+                        day.marked = true;
+                    }
+                    console.log(currentselectedDate);
+                    console.log(currentDatePosition);
+                    console.log(result);
+                    }
+                })
+            })
+        });
+        
+        return result
     }
 }
