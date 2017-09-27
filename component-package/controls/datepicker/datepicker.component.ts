@@ -16,6 +16,7 @@ export class DatepickerComponent implements OnInit {
 
     @Input() minDate: Date;
     @Input() maxDate: Date;
+    @Input() selectedDate?: Date;
 
     yearMonths: ICalendarYearMonth[] = [];
 
@@ -23,17 +24,39 @@ export class DatepickerComponent implements OnInit {
     nextMonth: boolean;
     previousMonth: boolean;
 
+    currentYearMonthIndex: number;
+
+    currentYearMonthOutput: Date;
+
     constructor(protected elementRef: ElementRef) {
         this.currentDate = new Date();
         this.isDatePickerVisible = false;
         this.nextMonth = true;
         this.previousMonth = true;
+        this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
+        this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
+        this.currentYearMonthIndex = 0;
     };
 
     ngOnInit() {
-        this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
-        this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
+        this.yearMonths = this.setDisabledDates(this.minDate, this.maxDate, this.yearMonths);
+        this.setCurrentYearMonthOutput();
+    }
+
+    setCurrentYearMonthOutput() {
+        this.currentYearMonthOutput = new Date(this.yearMonths[this.currentYearMonthIndex].year, this.yearMonths[this.currentYearMonthIndex].month - 1);
+    }
+
+    setMinAndMaxDate() {
+        // Glöm inte att kolla om min och maxdatumet är satt av utvecklaren
+
+        if (this.selectedDate) {
+            if (this.selectedDate < new Date(this.minDate.getFullYear(), this.minDate.getMonth())
+                || (this.selectedDate > new Date(this.maxDate.getFullYear(), this.maxDate.getMonth()))) {
+                this.selectedDate = this.minDate;
+            }
+        }
     }
 
     createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {
@@ -192,17 +215,25 @@ export class DatepickerComponent implements OnInit {
     }
 
     @HostListener('document:click', ['$event'])
-    onOutsideClick(event) {
+
+    onOutsideClick(event: Event) {
         if (!this.elementRef.nativeElement.contains(event.target)) {
             this.isDatePickerVisible = false;
         }
     }
 
     onPreviousMonth() {
-        console.log('to be implemented');
+        if (this.currentYearMonthIndex - 1 !== 0) {
+            this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
+            this.setCurrentYearMonthOutput();
+        }
     }
 
     onNextMonth() {
-        console.log('to be implemented');
+        if (this.currentYearMonthIndex + 1 !== this.yearMonths.length) {
+            this.currentYearMonthIndex = this.currentYearMonthIndex + 1;
+            this.setCurrentYearMonthOutput();
+            console.log(this.yearMonths[this.currentYearMonthIndex]);
+        }
     }
 }

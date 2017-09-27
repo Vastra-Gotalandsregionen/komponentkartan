@@ -17,10 +17,13 @@ $action-panel-height: 137px;
 
 .page-header__title {
   position: relative;
-  font-size: 25px;
-  text-transform: uppercase;
   margin-left: auto;
-  text-align: right;
+  align-self: flex-start;
+  h1 {
+    font-size: 25px;
+    text-transform: uppercase;
+    text-align: right;
+  }
 }
 
 .page-header__controls {

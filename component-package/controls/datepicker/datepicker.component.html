@@ -6,14 +6,13 @@
       <div class="monthpicker__calendar__header">
         <div class="monthpicker__calendar__header__previous-year" (click)="onPreviousMonth()" [ngClass]="{'disabled': !previousMonth}"></div>
 
-        <div *ngIf="!displayedYear" class="monthpicker__calendar__header__year">Mars 2017</div>
+        <div *ngIf="!displayedYear" class="monthpicker__calendar__header__year">{{currentYearMonthOutput | date: 'MMMM y' }}</div>
 
         <div class="monthpicker__calendar__header__next-year" (click)="onNextMonth()" [ngClass]="{'disabled' : !nextMonth}"></div>
       </div>
       <div class="monthpicker__calendar__content">
         <table class="datepicker__calendar_table">
           <tr>
-            <th>V</th>
             <th>Må</th>
             <th>Ti</th>
             <th>On</th>
@@ -21,6 +20,11 @@
             <th>Fr</th>
             <th>Lö</th>
             <th>Sö</th>
+          </tr>
+          <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
+            <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index">
+              {{yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d'}}
+            </td>
           </tr>
         </table>
       </div>

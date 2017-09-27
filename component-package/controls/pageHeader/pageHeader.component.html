@@ -6,11 +6,12 @@
       <vgr-text-button *ngIf="enableActionsText" class="page-header__control" (buttonClick)="enableActions()" [disabled]="expanded">{{enableActionsText}}</vgr-text-button>
       <vgr-text-button *ngIf="enableActionsText && disableActionsText" class="page-header__control" (buttonClick)="disableActions()"
         [disabled]="!expanded">{{disableActionsText}}</vgr-text-button>
-      <div class="page-header__control-panel control-with-heading">
-        <h1 class="page-header__title">{{title}}</h1>
+      <div class="page-header__title control-with-heading">
+        <h1>{{title}}</h1>
         <vgr-save-cancel *ngIf="saveCancel" class="page-header__save-cancel" (onCancel)="disableActions()" (onSave)="disableActions()"></vgr-save-cancel>
       </div>
     </div>
+
   </div>
   <div class="page-header__action-panel-area">
     <ng-content select=".page-header__action-panel"></ng-content>
