@@ -43,7 +43,7 @@ export class DatepickerComponent implements OnInit {
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
         this.yearMonths = this.setDisabledDates(this.minDate, this.maxDate, this.yearMonths);
         this.setCurrentYearMonthOutput();
-        this.setCheckSelectedDate();
+        this.setPreviousAndNextMonthNavigation();
         console.log(this.yearMonths);
     }
 
@@ -190,25 +190,29 @@ export class DatepickerComponent implements OnInit {
     }
 
     setDisabledDates(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
-
-        for (let indexYearMonth = 0; indexYearMonth < this.yearMonths.length; indexYearMonth++) {
-
-            const yearMonth = yearMonths[indexYearMonth] as ICalendarYearMonth;
-
-            for (let indexWeeks = 0; indexWeeks < yearMonth.weeks.length; indexWeeks++) {
-
-                for (let indexDays = 0; indexDays < yearMonth.weeks[indexWeeks].days.length; indexDays++) {
-
-                    const calendarDay = yearMonth.weeks[indexWeeks].days[indexDays] as ICalendarDay;
+        yearMonths.forEach((month) => {
+            month.weeks.forEach((week, indexWeeks) => {
+                week.days.forEach((calendarDay, indexDays) => {
                     if (calendarDay != null) {
-                        if (calendarDay.day < minDate || calendarDay.day > maxDate) {
-                            yearMonth.weeks[indexWeeks].days[indexDays].disabled = true;
+                        const currentDatePosition = this.datePipe.transform(calendarDay.day , 'ddMMyyyy');
+                        const currentselectedDate = this.datePipe.transform( this.selectedDate , 'ddMMyyyy');
+                        const currentTodayDate = this.datePipe.transform( new Date() , 'ddMMyyyy');
+
+                        // Set disabled dates
+                        if (calendarDay.day < minDate ||calendarDay.day > maxDate) {
+                            month.weeks[indexWeeks].days[indexDays].disabled = true;
                         }
+                        
+                        // Set current selected date
+                        calendarDay.marked = currentDatePosition === currentselectedDate;
+                        
+                        // Set today's date
+                        calendarDay.isCurrentDay = currentDatePosition === currentTodayDate;
                     }
-                }
-            }
-            return yearMonths;
-        }
+                });
+            })
+        });
+        return yearMonths;
     }
 
     // UI functions
@@ -226,13 +230,19 @@ export class DatepickerComponent implements OnInit {
     }
 
     onPreviousMonth() {
-        this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
-        this.setCurrentYearMonthOutput();
+        if(this.previousMonth) {
+            this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
+            this.setCurrentYearMonthOutput();
+            this.setPreviousAndNextMonthNavigation();
+        }
     }
 
     onNextMonth() {
-        this.currentYearMonthIndex = this.currentYearMonthIndex + 1;
-        this.setCurrentYearMonthOutput();
+        if(this.nextMonth) {
+            this.currentYearMonthIndex = this.currentYearMonthIndex + 1;
+            this.setCurrentYearMonthOutput();
+            this.setPreviousAndNextMonthNavigation();
+        }
     }
 
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {
@@ -240,7 +250,9 @@ export class DatepickerComponent implements OnInit {
     }
 
     checkTodayDate(weekIndex: number, dayIndex: number): boolean {
-        return false;
+        if(this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null) {
+            return  this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].isCurrentDay;
+        }
     }
 
     checkSelectedDate(weekIndex: number, dayIndex: number): boolean {     
@@ -249,27 +261,26 @@ export class DatepickerComponent implements OnInit {
         }
     }
 
-    setCheckSelectedDate(): boolean {
-        let result: boolean;
-
-        this.yearMonths.forEach((month) => {
-            month.weeks.forEach((week) => {
-                week.days.forEach((day) => {
-                    if(day !== null) {
-                    const currentDatePosition = this.datePipe.transform(day.day , 'ddMMyyyy');
-                    const currentselectedDate = this.datePipe.transform( this.selectedDate , 'ddMMyyyy');
-                    result = currentDatePosition.toString() === currentselectedDate.toString();
-                    if(result) {
-                        day.marked = true;
-                    }
-                    console.log(currentselectedDate);
-                    console.log(currentDatePosition);
-                    console.log(result);
-                    }
-                })
-            })
-        });
-        
-        return result
+    setPreviousAndNextMonthNavigation() {
+        const minMonth = this.minDate.getMonth() +1;
+        const maxMonth = this.maxDate.getMonth() +1;
+        const minYear = this.minDate.getFullYear();
+        const maxYear = this.maxDate.getFullYear();
+        const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
+        const currentYear = this.yearMonths[this.currentYearMonthIndex].year;
+        if((currentYear === minYear && currentMonth === minMonth) && (currentYear === maxYear && currentMonth === maxMonth) ) {
+            this.previousMonth = false;
+            this.nextMonth = false;
+        }                
+        else if(currentYear <= minYear && currentMonth <= minMonth  ) {
+            this.previousMonth = false;
+        }
+        else if(currentYear >= maxYear && currentMonth >= maxMonth) {
+            this.nextMonth = false;
+        }        
+        else if((currentYear >= minYear && currentYear <= maxYear) && (currentMonth >= minMonth && currentMonth <= maxMonth) {
+            this.previousMonth = true;
+            this.nextMonth = true;
+        }
     }
 }
