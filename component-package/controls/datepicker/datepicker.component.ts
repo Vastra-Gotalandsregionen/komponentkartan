@@ -28,12 +28,15 @@ export class DatepickerComponent implements OnInit {
         this.isDatePickerVisible = false;
         this.nextMonth = true;
         this.previousMonth = true;
+        this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
+        this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
+
     };
 
     ngOnInit() {
-        this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
-        this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
+        this.yearMonths = this.setDisabledDates(this.minDate, this.maxDate, this.yearMonths);
+        console.log(this.yearMonths);
     }
 
     createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {

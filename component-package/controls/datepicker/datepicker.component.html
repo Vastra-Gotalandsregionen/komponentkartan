@@ -13,7 +13,6 @@
       <div class="monthpicker__calendar__content">
         <table class="datepicker__calendar_table">
           <tr>
-            <th>V</th>
             <th>Må</th>
             <th>Ti</th>
             <th>On</th>
@@ -22,6 +21,12 @@
             <th>Lö</th>
             <th>Sö</th>
           </tr>
+
+          <!--   <tr *ngFor="let week of yearMonths[0].">
+            <td *ngFor="let day of yearMonths[0].weeks[0].days; let i = index">
+              {{yearMonths[0].weeks[0].days[i].day | date:'dd'}}
+            </td>
+          </tr> -->
         </table>
       </div>
     </div>
