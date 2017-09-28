@@ -23,9 +23,13 @@
             <td>Sö</td>
           </tr>
           <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
+<<<<<<< HEAD
             <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index"
               (click)="onSelectedDate(currentYearMonthIndex, weekIndex,dayIndex)"
               class="datepicker__calendar__month" 
+=======
+            <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index" class="datepicker__calendar__month"
+>>>>>>> 173bea5f1d7d8655207534d7f82bd8c6b7226859
               [ngClass]="{
               'disabled': checkDisabledDate(weekIndex, dayIndex),
               'datepicker__calendar__month--today' : checkTodayDate(weekIndex, dayIndex),
