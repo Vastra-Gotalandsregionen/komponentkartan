@@ -210,6 +210,21 @@ describe('[InputComponent]', () => {
                 expect(component.valueChanged.emit).toHaveBeenCalledWith(NaN);
             });
         });
+        describe('and the user enters an alphanumeric value and leaves', () => {
+            beforeEach(() => {
+                component.onValueChange('123abc456');
+                component.onLeave();
+            });
+            it('value is invalid', () => {
+                expect(component.validationErrorState).toBe(validationErrorStates.Active);
+            });
+            it('value is NaN', () => {
+                expect(component.value).toEqual(NaN);
+            });
+            it('display value is 123abc456', () => {
+                expect(component.displayValue).toEqual('123abc456');
+            });
+        });
     });
 
     describe('When initialized as a small amount', () => {
@@ -280,7 +295,7 @@ describe('[InputComponent]', () => {
                 fixture.detectChanges();
             });
             it('nothing is displayed', () => {
-                expect(component.displayValue).toBe('');
+                expect(component.displayValue).toBe(null);
             });
             it('a value change event is emitted with NaN', () => {
                 expect(component.valueChanged.emit).toHaveBeenCalledWith(NaN);
@@ -375,7 +390,7 @@ describe('[InputComponent]', () => {
     });
 
 
-    describe('When amount with three digits is entered', () => {
+    describe('When amount with three decimal digits is entered', () => {
         beforeEach(() => {
             component.type = 'amount';
             component.ngOnInit();
@@ -427,9 +442,6 @@ describe('[InputComponent]', () => {
             it('no value change event is emitted with an unchanged value', () => {
                 expect(component.valueChanged.emit).toHaveBeenCalledWith(NaN);
             });
-            it('display value is Not a number', () => {
-                expect(component.displayValue).toEqual('Not a number');
-            });
             it('validation error state is active', () => {
                 expect(component.validationErrorState).toBe(validationErrorStates.Active);
             });
@@ -443,6 +455,7 @@ describe('[InputComponent]', () => {
                     return { isValid: false, validationError: 'Validation failed' } as IValidationResult;
                 };
                 component.ngOnInit();
+                component.onValueChange('Some value');
                 component.onLeave();
             });
             it('validation error state is active', () => {
@@ -465,6 +478,52 @@ describe('[InputComponent]', () => {
             });
             it('validation error message is undefined', () => {
                 expect(component.validationErrorMessage).toBeUndefined();
+            });
+        });
+    });
+
+    describe('when field is read only', () => {
+        beforeEach(() => {
+            component.readonly = true;
+        })
+        describe('and field is amount', () => {
+            beforeEach(() => {
+                component.type = 'amount';
+                component.ngOnInit();
+            });
+            it('value is undefined', () => {
+                expect(component.value).toBeUndefined();
+            });
+            it('there is no validation error', () => {
+                expect(component.validationErrorState).toBe(ValidationErrorState.NoError);
+            });
+        });
+        describe('and field is a text field with a pattern', () => {
+            beforeEach(() => {
+                component.pattern = '^[A-Z]{1}$';
+                component.ngOnInit();
+            });
+            it('value is undefined', () => {
+                expect(component.value).toBeUndefined();
+            });
+            it('there is no validation error', () => {
+                expect(component.validationErrorState).toBe(ValidationErrorState.NoError);
+            });
+            describe('and field loses focus', () => {
+                beforeEach(() => {
+                    component.onLeave();
+                });
+                it('there is no validation error', () => {
+                    expect(component.validationErrorState).toBe(ValidationErrorState.NoError);
+                });
+            });
+            describe('and field receives focus', () => {
+                beforeEach(() => {
+                    component.onFocus(null);
+                });
+                it('there is no validation error', () => {
+                    expect(component.validationErrorState).toBe(ValidationErrorState.NoError);
+                });
             });
         });
     });

@@ -96,13 +96,13 @@ export class InputComponent implements OnInit {
             this.displayValue = this.value;
         }
         if (this.validateOnInit) {
-            this.updateValidation();
+            this.validate();
         };
     }
 
     setupNumericFormat(suffix?: string, minIntegerDigits: number = 1, minFractionDigits: number = 0, maxFractionDigits: number = this.maxNumberOfDecimals) {
         if (!this.pattern) {
-            this.pattern = '^[-]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
+            this.pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
         }
         if (!this.suffix && suffix) {
             this.suffix = suffix;
@@ -128,13 +128,12 @@ export class InputComponent implements OnInit {
                     this.swedishDecimalPipe.transform(this.value, '1.0-2').replace(/\s/g, '');
             }
         }
-
     }
 
-    onValueChange(value: any) {
-        this.displayValue = value;
+    onValueChange(input: any) {
+        this.displayValue = input;
         if (!this.isNumeric) {
-            this.value = value;
+            this.value = input;
         }
     }
 
@@ -156,7 +155,7 @@ export class InputComponent implements OnInit {
         }
 
         if (this.pattern && this.pattern.length > 0) {
-            const valueToMatch = this.value !== undefined ? this.value : '';
+            const valueToMatch = this.displayValue !== undefined ? this.displayValue : '';
             const regexp = new RegExp(this.pattern);
             if (!regexp.test(valueToMatch)) {
                 return this.invalidPatternValidationResult;
@@ -171,16 +170,19 @@ export class InputComponent implements OnInit {
             return;
         }
 
-        if (this.isNumeric) {
-            this.value = this.convertStringToNumber(this.displayValue);
-
-            if (!isNaN(this.value)) {
+        if (this.validate()) {
+            if (this.isNumeric) {
+                this.value = this.convertStringToNumber(this.displayValue);
                 this.displayValue = this.convertNumberToString(this.value);
+            }
+        } else {
+            if (this.isNumeric) {
+                this.value = NaN;
             }
         }
 
         this.valueChanged.emit(this.value);
-        this.updateValidation();
+
     }
 
     convertNumberToString(value: number): string {
@@ -210,28 +212,29 @@ export class InputComponent implements OnInit {
         return roundedTempNumber / factor;
     };
 
-    updateValidation(): void {
+    validate(): boolean {
         const validationResult = this.validateInput();
 
         if (validationResult.isValid) {
             if (this.validationErrorState === ValidationErrorState.NoError) {
-                return;
+                return true;
             }
 
             this.validationErrorMessage = '';
 
             if (this.validationErrorState === ValidationErrorState.Active || this.validationErrorState === ValidationErrorState.Editing) {
                 this.setValidationState(ValidationErrorState.Fixed);
-                return;
+                return true;
             }
             if (this.validationErrorState === ValidationErrorState.Fixed) {
                 this.setValidationState(ValidationErrorState.NoError);
-                return;
+                return true;
             }
         }
 
         this.setValidationState(ValidationErrorState.Active);
         this.validationErrorMessage = validationResult.validationError;
+        return false;
     }
 
     setValidationState(newValidationErrorState: ValidationErrorState) {
