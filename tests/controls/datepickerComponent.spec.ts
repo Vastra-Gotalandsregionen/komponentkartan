@@ -21,6 +21,7 @@ describe('[MonthpickerComponent]', () => {
     describe('When initialized with default settings', () => {
         beforeEach(() => {
             currentMonth = new Date().getMonth();
+            currentYear = new Date().getFullYear();
             component = new DatepickerComponent(null);
             component.ngOnInit();
         });
@@ -30,9 +31,13 @@ describe('[MonthpickerComponent]', () => {
             expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(new Date().getFullYear());
         });
 
-        /*         it('contains Janyarie yearmonth model', () => {
-                    console.log(currentMonth);
-                    expect(component.yearMonths.filter(ym => ym.month === currentMonth).map(ym => ym.month)[currentMonth - 1]).toEqual(currentMonth);
+        it('contains the current month in the year-month model', () => {
+            console.log(component.yearMonths.filter(ym => ym.month === currentMonth).map(ym => ym.month)[0]);
+            expect(component.yearMonths.filter(ym => ym.month === currentMonth).map(ym => ym.month)[0]).toEqual(currentMonth);
+        });
+        /*
+                it('contains January in the year-month model', () => {
+                    expect(component.yearMonths.filter(ym => ym.month === currentMonth).map(ym => ym.month)).toEqual(currentMonth);
                 });
         
                 it('contains 6 weeks in month model', () => {
@@ -94,24 +99,24 @@ describe('[MonthpickerComponent]', () => {
                     expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[6].disabled).toBe(false);
                     expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[4].disabled).toBe(false);
                 });
-         */
-
-        /*  Det finns en kalender där man väljer datum
-        Valt datum väljer och stänger kalender
-        Valt datum markeras som skiss
-        Hover markeras som skiss
-        Det går att gå fram och tillbaka i tid om min/maxvärde tillåter
-        Inaktiva val (val utanför min /maxvärden) markeras som skiss
-        Kalendern kan temas
-        Dagens datum är alltid markerad enligt skiss om dagens datum inte är valt
-        Växer vid brytgräns
-        Ett exempel ska finnas på komponentkartan
-        Man kan sätta formatet på valt datum
-        Man kan sätta formatet på tooltip för valt datum
-        Kalenderdropdown ska se ut enligt skiss
-        Kalendern visas nedanför kalenderdropdown enligt skiss
-        Man kan sätta min och maxdatum och startvärde
-        När kalendern stängs visas datum i valt format */
+        
+        
+                Det finns en kalender där man väljer datum
+                Valt datum väljer och stänger kalender
+                Valt datum markeras som skiss
+                Hover markeras som skiss
+                Det går att gå fram och tillbaka i tid om min/ maxvärde tillåter
+                Inaktiva val (val utanför min / maxvärden) markeras som skiss
+                Kalendern kan temas
+                Dagens datum är alltid markerad enligt skiss om dagens datum inte är valt
+                Växer vid brytgräns
+                Ett exempel ska finnas på komponentkartan
+                Man kan sätta formatet på valt datum
+                Man kan sätta formatet på tooltip för valt datum
+                Kalenderdropdown ska se ut enligt skiss
+                Kalendern visas nedanför kalenderdropdown enligt skiss
+                Man kan sätta min och maxdatum och startvärde
+                När kalendern stängs visas datum i valt format */
 
 
     });
