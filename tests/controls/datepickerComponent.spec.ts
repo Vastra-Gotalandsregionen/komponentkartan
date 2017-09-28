@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { ICalendarYearMonth } from '../../component-package/models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../component-package/models/calendarWeek.model';
 import { ICalendarDay } from '../../component-package/models/calendarDay.model';
-//import { DatePipe } from '@angular/common';
 import { DatepickerComponent } from '../../component-package/controls/datepicker/datepicker.component';
 import { inject } from '@angular/core/testing';
 
@@ -149,17 +148,17 @@ describe('[DatepickerComponent]', () => {
         });
 
         it('Days before mindate and after maxdate are disabled=true', () => {
-            expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[0].days[6].disabled).toBe(true);
-            expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[5].disabled).toBe(true);
-            expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
-            expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
-            expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[5].days[1].disabled).toBe(true);
+            expect(component.updateDays(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[0].days[6].disabled).toBe(true);
+            expect(component.updateDays(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[5].disabled).toBe(true);
+            expect(component.updateDays(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
+            expect(component.updateDays(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
+            expect(component.updateDays(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[5].days[1].disabled).toBe(true);
         });
 
 
         it('Days in between mindate are maxdate disabled=false', () => {
-            expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[6].disabled).toBe(false);
-            expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[4].disabled).toBe(false);
+            expect(component.updateDays(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[6].disabled).toBe(false);
+            expect(component.updateDays(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[4].disabled).toBe(false);
         });
     });
 

@@ -1,6 +1,5 @@
 
 import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
@@ -28,7 +27,6 @@ export class DatepickerComponent implements OnInit {
 
     currentYearMonthOutput: Date;
 
-    // constructor(protected elementRef: ElementRef, private datePipe: DatePipe) {
     constructor(protected elementRef: ElementRef) {
         this.currentDate = new Date();
         this.isDatePickerVisible = false;
@@ -41,7 +39,7 @@ export class DatepickerComponent implements OnInit {
 
     ngOnInit() {
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
-        this.yearMonths = this.setDisabledDates(this.minDate, this.maxDate, this.yearMonths);
+        this.yearMonths = this.updateDays(this.minDate, this.maxDate, this.yearMonths);
         this.setCurrentYearMonthOutput();
         this.setPreviousAndNextMonthNavigation();
         console.log(this.yearMonths);
@@ -49,17 +47,6 @@ export class DatepickerComponent implements OnInit {
 
     setCurrentYearMonthOutput() {
         this.currentYearMonthOutput = new Date(this.yearMonths[this.currentYearMonthIndex].year, this.yearMonths[this.currentYearMonthIndex].month - 1);
-    }
-
-    setMinAndMaxDate() {
-        // Glöm inte att kolla om min och maxdatumet är satt av utvecklaren
-
-        if (this.selectedDate) {
-            if (this.selectedDate < new Date(this.minDate.getFullYear(), this.minDate.getMonth())
-                || (this.selectedDate > new Date(this.maxDate.getFullYear(), this.maxDate.getMonth()))) {
-                this.selectedDate = this.minDate;
-            }
-        }
     }
 
     createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {
@@ -189,7 +176,7 @@ export class DatepickerComponent implements OnInit {
         }
     }
 
-    setDisabledDates(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
+    updateDays(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
         yearMonths.forEach((month) => {
             month.weeks.forEach((week, indexWeeks) => {
                 week.days.forEach((calendarDay, indexDays) => {
@@ -207,10 +194,10 @@ export class DatepickerComponent implements OnInit {
                         }
 
                         // Set current selected date
-                        calendarDay.marked = currentDatePosition === currentselectedDate;
+                        calendarDay.marked = currentDatePosition.toDateString() === currentselectedDate.toDateString();
 
                         // Set today's date
-                        calendarDay.isCurrentDay = currentDatePosition === currentTodayDate;
+                        calendarDay.isCurrentDay = currentDatePosition.toDateString() === currentTodayDate.toDateString();
                     }
                 });
             })
