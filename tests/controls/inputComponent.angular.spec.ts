@@ -445,7 +445,33 @@ describe('[InputComponent]', () => {
             it('validation error state is active', () => {
                 expect(component.validationErrorState).toBe(validationErrorStates.Active);
             });
+
+            describe('and field is left with an updated valid value', () => {
+                beforeEach(() => {
+                    component.onValueChange('45');
+                    component.onLeave();
+                });
+                it('value is set to 45', () => {
+                    expect(component.value).toBe(45);
+                });
+                it('validation error state is fixed', () => {
+                    expect(component.validationErrorState).toBe(validationErrorStates.Fixed);
+                });
+            });
+            describe('and field is focused again and left', () => {
+                beforeEach(() => {
+                    component.onValueChange('45');
+                    component.onLeave();
+                });
+                it('value is unchanged', () => {
+                    expect(component.value).toBe(45);
+                });
+                it('validation error state is no error', () => {
+                    expect(component.validationErrorState).toBe(validationErrorStates.NoError);
+                });
+            });
         });
+
     });
 
     describe('when initialized with a custom validator', () => {
