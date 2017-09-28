@@ -197,8 +197,12 @@ $dropdown-width--small: 100px;
     width: 100%;
   }
   th, td {
-      padding: 5px;
-      text-align: center;
+    width: 20px;
+    padding: 5px;
+    text-align: center;
+  }
+  th {
+    color: darkgrey;
   }
 }
 
@@ -223,10 +227,10 @@ $dropdown-width--small: 100px;
   background-color: $background-color--content;
   border-width: 1px;
   border-style: solid;
-  margin-top: 13px;
+  // margin-top: 13px;
   &:hover {
     border: none;
-    margin-top: 14px;
+    // margin-top: 14px;
   }
 }
 
@@ -248,5 +252,8 @@ $dropdown-width--small: 100px;
   }
   .datepicker__calendar__month {
     padding-top: 5px;
+  }
+  .datepicker__calendar {    
+    height: 320px;
   }
 }

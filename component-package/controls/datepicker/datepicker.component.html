@@ -1,6 +1,7 @@
 <div class="datepicker" (click)="displayDatePicker()" [ngClass]="{'datepicker--open' : true}">
   <div class="datepicker__dropdown">
-    <span class="datepicker__calendar__selector" *ngIf="true" title="Välj månad">Välj datum</span>
+    <span *ngIf="isSelectedDate" class="datepicker__calendar__selector" title="Vald måndad">{{currentYearMonthOutput | date: 'ddMMMyy'}}</span>
+    <span *ngIf="!isSelectedDate" class="datepicker__calendar__selector" title="Välj månad">Välj månad</span>
 
     <div *ngIf="isDatePickerVisible" class="datepicker__calendar">
       <div class="datepicker__calendar__header">
@@ -13,16 +14,17 @@
       <div class="datepicker__calendar__content">
         <table class="datepicker__calendar_table">
           <tr>
-            <th>Må</th>
-            <th>Ti</th>
-            <th>On</th>
-            <th>To</th>
-            <th>Fr</th>
-            <th>Lö</th>
-            <th>Sö</th>
+            <td>Må</td>
+            <td>Ti</td>
+            <td>On</td>
+            <td>To</td>
+            <td>Fr</td>
+            <td>Lö</td>
+            <td>Sö</td>
           </tr>
           <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
             <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index"
+              (click)="onSelectedDate(currentYearMonthIndex, weekIndex,dayIndex)"
               class="datepicker__calendar__month" 
               [ngClass]="{
               'disabled': checkDisabledDate(weekIndex, dayIndex),
