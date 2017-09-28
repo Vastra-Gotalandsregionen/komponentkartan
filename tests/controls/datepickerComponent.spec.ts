@@ -20,92 +20,98 @@ describe('[MonthpickerComponent]', () => {
 
     describe('When initialized with default settings', () => {
         beforeEach(() => {
+            currentMonth = new Date().getMonth();
+            component = new DatepickerComponent(null);
             component.ngOnInit();
         });
-        /*     it('contains a yearmonth-model with current year', () => {
-                console.log(component.yearMonths.map(ym => ym.year)[0].toString());
-                expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(new Date().getFullYear());
-            });
-    
-            it('contains the current month in the yearmonth model', () => {
-                expect(component.yearMonths.filter(ym => ym.month === currentMonth).map(ym => ym.month)[0]).toEqual(currentMonth);
-            });
-    
-            it('contains 6 weeks in month model', () => {
-                expect(component.getNumberOfWeeks(currentYear, currentMonth)).toEqual(6);
-            });
-    
-            it('contains 6 elements of ICalendarWeeks', () => {
-                expect(component.createWeeks(currentYear, currentMonth).length).toEqual(6);
-            });
-    
-            it('contains correct day in firstWeek of type ICalendarWeeks', () => {
-                expect(component.createFirstWeek(currentYear, currentMonth).days[6].day.toDateString()).toBe('Sun Oct 01 2017');
-            });
-    
-            it('contains correct day in lastWeek of type ICalendarWeeks', () => {
-                expect(component.createLastWeek(currentYear, currentMonth).days[0].day.toDateString()).toBe('Mon Oct 30 2017');
-            });
-            it('contains correct day in lastWeek of type ICalendarWeeks', () => {
-                expect(component.createLastWeek(currentYear, currentMonth).days[1].day.toDateString()).toBe('Tue Oct 31 2017');
-            });
-    
-            it('contains empty day in lastWeek of type ICalendarWeeks', () => {
-                expect(component.createLastWeek(currentYear, currentMonth).days[2]).toEqual({});
-            });
-    
-            it('contains correct day in the middle of the month', () => {
-                expect(component.createWeeksAndDays(currentYear, currentMonth)[2].days[2].day.toDateString()).toBe('Wed Oct 11 2017');
-            });
-    
-            it('contains Empty day in the First week of the month', () => {
-                expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
-            });
-    
-            it('contains Empty day in the First week of the month', () => {
-                expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
-            });
-    
-            it('First month of the year shall have 6 weeks', () => {
-                expect(component.createYearMonths(minDate, maxDate)[0].weeks.length).toBe(6);
-            });
-    
-            it('all days in october disabled=false', () => {
-                expect(component.createYearMonths(minDate, maxDate)[0].weeks[0].days[6].disabled as boolean).toBe(false);
-                expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[0].disabled as boolean).toBe(false);
-                expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[1].disabled as boolean).toBe(false);
-                expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[2].disabled as boolean).toBe(false);
-            });
-    
-            it('Days before mindate and after maxdate are disabled=true', () => {
-                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[0].days[6].disabled).toBe(true);
-                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[5].disabled).toBe(true);
-                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
-                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
-                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[5].days[1].disabled).toBe(true);
-            });
-    
-    
-            it('Days in between mindate are maxdate disabled=false', () => {
-                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[6].disabled).toBe(false);
-                expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[4].disabled).toBe(false);
-            }); */
-        /*     Det finns en kalender där man väljer datum
-            Valt datum väljer och stänger kalender
-            Valt datum markeras som skiss
-            Hover markeras som skiss
-            Det går att gå fram och tillbaka i tid om min/maxvärde tillåter
-            Inaktiva val (val utanför min /maxvärden) markeras som skiss
-            Kalendern kan temas
-            Dagens datum är alltid markerad enligt skiss om dagens datum inte är valt
-            Växer vid brytgräns
-            Ett exempel ska finnas på komponentkartan
-            Man kan sätta formatet på valt datum
-            Man kan sätta formatet på tooltip för valt datum
-            Kalenderdropdown ska se ut enligt skiss
-            Kalendern visas nedanför kalenderdropdown enligt skiss
-            Man kan sätta min och maxdatum och startvärde
-            När kalendern stängs visas datum i valt format */
+        it('contains a yearmonth-model with current year', () => {
+            console.log(component.yearMonths.map(ym => ym.year)[0]);
+
+            expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(new Date().getFullYear());
+        });
+
+        /*         it('contains Janyarie yearmonth model', () => {
+                    console.log(currentMonth);
+                    expect(component.yearMonths.filter(ym => ym.month === currentMonth).map(ym => ym.month)[currentMonth - 1]).toEqual(currentMonth);
+                });
+        
+                it('contains 6 weeks in month model', () => {
+                    expect(component.getNumberOfWeeks(currentYear, currentMonth)).toEqual(6);
+                });
+        
+                it('contains 6 elements of ICalendarWeeks', () => {
+                    expect(component.createWeeks(currentYear, currentMonth).length).toEqual(6);
+                });
+        
+                it('contains correct day in firstWeek of type ICalendarWeeks', () => {
+                    expect(component.createFirstWeek(currentYear, currentMonth).days[6].day.toDateString()).toBe('Sun Oct 01 2017');
+                });
+        
+                it('contains correct day in lastWeek of type ICalendarWeeks', () => {
+                    expect(component.createLastWeek(currentYear, currentMonth).days[0].day.toDateString()).toBe('Mon Oct 30 2017');
+                });
+                it('contains correct day in lastWeek of type ICalendarWeeks', () => {
+                    expect(component.createLastWeek(currentYear, currentMonth).days[1].day.toDateString()).toBe('Tue Oct 31 2017');
+                });
+        
+                it('contains empty day in lastWeek of type ICalendarWeeks', () => {
+                    expect(component.createLastWeek(currentYear, currentMonth).days[2]).toEqual({});
+                });
+        
+                it('contains correct day in the middle of the month', () => {
+                    expect(component.createWeeksAndDays(currentYear, currentMonth)[2].days[2].day.toDateString()).toBe('Wed Oct 11 2017');
+                });
+        
+                it('contains Empty day in the First week of the month', () => {
+                    expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
+                });
+        
+                it('contains Empty day in the First week of the month', () => {
+                    expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
+                });
+        
+                it('First month of the year shall have 6 weeks', () => {
+                    expect(component.createYearMonths(minDate, maxDate)[0].weeks.length).toBe(6);
+                });
+        
+                it('all days in october disabled=false', () => {
+                    expect(component.createYearMonths(minDate, maxDate)[0].weeks[0].days[6].disabled as boolean).toBe(false);
+                    expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[0].disabled as boolean).toBe(false);
+                    expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[1].disabled as boolean).toBe(false);
+                    expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[2].disabled as boolean).toBe(false);
+                });
+        
+                it('Days before mindate and after maxdate are disabled=true', () => {
+                    expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[0].days[6].disabled).toBe(true);
+                    expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[5].disabled).toBe(true);
+                    expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
+                    expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[5].disabled).toBe(true);
+                    expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[5].days[1].disabled).toBe(true);
+                });
+        
+        
+                it('Days in between mindate are maxdate disabled=false', () => {
+                    expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[6].disabled).toBe(false);
+                    expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[4].disabled).toBe(false);
+                });
+         */
+
+        /*  Det finns en kalender där man väljer datum
+        Valt datum väljer och stänger kalender
+        Valt datum markeras som skiss
+        Hover markeras som skiss
+        Det går att gå fram och tillbaka i tid om min/maxvärde tillåter
+        Inaktiva val (val utanför min /maxvärden) markeras som skiss
+        Kalendern kan temas
+        Dagens datum är alltid markerad enligt skiss om dagens datum inte är valt
+        Växer vid brytgräns
+        Ett exempel ska finnas på komponentkartan
+        Man kan sätta formatet på valt datum
+        Man kan sätta formatet på tooltip för valt datum
+        Kalenderdropdown ska se ut enligt skiss
+        Kalendern visas nedanför kalenderdropdown enligt skiss
+        Man kan sätta min och maxdatum och startvärde
+        När kalendern stängs visas datum i valt format */
 
 
     });
@@ -116,7 +122,6 @@ describe('[MonthpickerComponent]', () => {
             currentMonth = 10;
             minDate = new Date(currentYear, currentMonth - 1, 15);
             maxDate = new Date(currentYear, currentMonth - 1, 27);
-            component = new DatepickerComponent(null);
             component.currentDate = new Date(currentYear, currentMonth, 1);
             component.ngOnInit();
         });
