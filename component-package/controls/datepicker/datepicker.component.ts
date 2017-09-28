@@ -8,8 +8,7 @@ import { ICalendarDay } from '../../models/calendarDay.model';
 @Component({
     selector: 'vgr-datepicker',
     moduleId: module.id,
-    templateUrl: './datepicker.component.html',
-    providers: [DatePipe]
+    templateUrl: './datepicker.component.html'
 })
 export class DatepickerComponent implements OnInit {
 
@@ -29,7 +28,8 @@ export class DatepickerComponent implements OnInit {
 
     currentYearMonthOutput: Date;
 
-    constructor(protected elementRef: ElementRef, private datePipe: DatePipe) {
+    // constructor(protected elementRef: ElementRef, private datePipe: DatePipe) {
+    constructor(protected elementRef: ElementRef) {
         this.currentDate = new Date();
         this.isDatePickerVisible = false;
         this.nextMonth = true;
@@ -194,18 +194,21 @@ export class DatepickerComponent implements OnInit {
             month.weeks.forEach((week, indexWeeks) => {
                 week.days.forEach((calendarDay, indexDays) => {
                     if (calendarDay != null) {
-                        const currentDatePosition = this.datePipe.transform(calendarDay.day , 'ddMMyyyy');
-                        const currentselectedDate = this.datePipe.transform( this.selectedDate , 'ddMMyyyy');
-                        const currentTodayDate = this.datePipe.transform( new Date() , 'ddMMyyyy');
+                        /* const currentDatePosition = this.datePipe.transform(calendarDay.day, 'ddMMyyyy');
+                        const currentselectedDate = this.datePipe.transform(this.selectedDate, 'ddMMyyyy');
+                        const currentTodayDate = this.datePipe.transform(new Date(), 'ddMMyyyy'); */
+                        const currentDatePosition = new Date();
+                        const currentselectedDate = new Date();
+                        const currentTodayDate = new Date();
 
                         // Set disabled dates
-                        if (calendarDay.day < minDate ||calendarDay.day > maxDate) {
+                        if (calendarDay.day < minDate || calendarDay.day > maxDate) {
                             month.weeks[indexWeeks].days[indexDays].disabled = true;
                         }
-                        
+
                         // Set current selected date
                         calendarDay.marked = currentDatePosition === currentselectedDate;
-                        
+
                         // Set today's date
                         calendarDay.isCurrentDay = currentDatePosition === currentTodayDate;
                     }
@@ -230,7 +233,7 @@ export class DatepickerComponent implements OnInit {
     }
 
     onPreviousMonth() {
-        if(this.previousMonth) {
+        if (this.previousMonth) {
             this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
             this.setCurrentYearMonthOutput();
             this.setPreviousAndNextMonthNavigation();
@@ -238,7 +241,7 @@ export class DatepickerComponent implements OnInit {
     }
 
     onNextMonth() {
-        if(this.nextMonth) {
+        if (this.nextMonth) {
             this.currentYearMonthIndex = this.currentYearMonthIndex + 1;
             this.setCurrentYearMonthOutput();
             this.setPreviousAndNextMonthNavigation();
@@ -250,35 +253,32 @@ export class DatepickerComponent implements OnInit {
     }
 
     checkTodayDate(weekIndex: number, dayIndex: number): boolean {
-        if(this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null) {
-            return  this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].isCurrentDay;
+        if (this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null) {
+            return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].isCurrentDay;
         }
     }
 
-    checkSelectedDate(weekIndex: number, dayIndex: number): boolean {     
-        if(this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null) {
-            return  this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].marked;
+    checkSelectedDate(weekIndex: number, dayIndex: number): boolean {
+        if (this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null) {
+            return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].marked;
         }
     }
 
     setPreviousAndNextMonthNavigation() {
-        const minMonth = this.minDate.getMonth() +1;
-        const maxMonth = this.maxDate.getMonth() +1;
+        const minMonth = this.minDate.getMonth() + 1;
+        const maxMonth = this.maxDate.getMonth() + 1;
         const minYear = this.minDate.getFullYear();
         const maxYear = this.maxDate.getFullYear();
         const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
         const currentYear = this.yearMonths[this.currentYearMonthIndex].year;
-        if((currentYear === minYear && currentMonth === minMonth) && (currentYear === maxYear && currentMonth === maxMonth) ) {
+        if ((currentYear === minYear && currentMonth === minMonth) && (currentYear === maxYear && currentMonth === maxMonth)) {
             this.previousMonth = false;
             this.nextMonth = false;
-        }                
-        else if(currentYear <= minYear && currentMonth <= minMonth  ) {
+        } else if (currentYear <= minYear && currentMonth <= minMonth) {
             this.previousMonth = false;
-        }
-        else if(currentYear >= maxYear && currentMonth >= maxMonth) {
+        } else if (currentYear >= maxYear && currentMonth >= maxMonth) {
             this.nextMonth = false;
-        }        
-        else if((currentYear >= minYear && currentYear <= maxYear) && (currentMonth >= minMonth && currentMonth <= maxMonth) {
+        } else if ((currentYear >= minYear && currentYear <= maxYear) && (currentMonth >= minMonth && currentMonth <= maxMonth)) {
             this.previousMonth = true;
             this.nextMonth = true;
         }

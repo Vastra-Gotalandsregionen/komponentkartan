@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { ICalendarYearMonth } from '../../component-package/models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../component-package/models/calendarWeek.model';
 import { ICalendarDay } from '../../component-package/models/calendarDay.model';
-
+//import { DatePipe } from '@angular/common';
 import { DatepickerComponent } from '../../component-package/controls/datepicker/datepicker.component';
+import { inject } from '@angular/core/testing';
 
-describe('[DaypickerComponent]', () => {
+describe('[DatepickerComponent]', () => {
     let component: DatepickerComponent;
     let currentYear: number;
     let currentMonth: number;
@@ -25,9 +26,9 @@ describe('[DaypickerComponent]', () => {
             component = new DatepickerComponent(null);
             component.ngOnInit();
         });
-        it('contains a yearmonth-model with current year', () => {
-            console.log(component.yearMonths.map(ym => ym.year)[0]);
 
+        it('contains a yearmonth-model with current year', () => {
+            console.log(component.yearMonths);
             expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(new Date().getFullYear());
         });
 
@@ -74,29 +75,8 @@ describe('[DaypickerComponent]', () => {
             it('the selected day closes the calendar', () => { });
             it('the todays date is set in the calendar', () => { });
             it('the selected date is set in the dropdown', () => { });
+            it('', () => { });
         });
-
-
-
-        it('', () => { });
-
-        /*     - Det finns en kalender där man väljer datum (duh)
-               X Valt datum väljer och stänger kalender
-               X Valt datum markeras som skiss
-               - Hover markeras som skiss (svårt att testa?)
-              -  Det går att gå fram och tillbaka i tid om min/ maxvärde tillåter
-               - Inaktiva val (val utanför min / maxvärden) markeras som skiss (har vi redan tester på disablead date)
-               - Kalendern kan temas (behövs inte testas)
-               X Dagens datum är alltid markerad enligt skiss om dagens datum inte är valt
-               - Växer vid brytgräns (behövs inte testa)
-               - Ett exempel ska finnas på komponentkartan
-               - Man kan sätta formatet på valt datum (irrelecant)
-               - Man kan sätta formatet på tooltip för valt datum (irrelevant)
-               - Kalenderdropdown ska se ut enligt skiss (räcker med UI-tester)
-               - Kalendern visas nedanför kalenderdropdown enligt skiss (räcker med UI-tester)
-               - Man kan sätta min och maxdatum och startvärde (finns enhetstester)
-               X När kalendern stängs visas datum i valt format
-         */
 
     });
 
@@ -111,6 +91,7 @@ describe('[DaypickerComponent]', () => {
         });
 
         it('contains a yearmonth-model with current year', () => {
+            console.log(component);
             expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(currentYear);
         });
 
@@ -138,7 +119,7 @@ describe('[DaypickerComponent]', () => {
         });
 
         it('contains empty day in lastWeek of type ICalendarWeeks', () => {
-            expect(component.createLastWeek(currentYear, currentMonth).days[2]).toEqual({});
+            expect(component.createLastWeek(currentYear, currentMonth).days[2]).toBeNull(true);
         });
 
         it('contains correct day in the middle of the month', () => {
@@ -146,11 +127,14 @@ describe('[DaypickerComponent]', () => {
         });
 
         it('contains Empty day in the First week of the month', () => {
-            expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
+            console.log(currentYear);
+            console.log(currentMonth);
+            console.log(component.createWeeksAndDays(currentYear, currentMonth)[0].days);
+            expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toBeNull(true);
         });
 
         it('contains Empty day in the First week of the month', () => {
-            expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toEqual({});
+            expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toBeNull(true);
         });
 
         it('First month of the year shall have 6 weeks', () => {
@@ -178,6 +162,6 @@ describe('[DaypickerComponent]', () => {
             expect(component.setDisabledDates(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[4].disabled).toBe(false);
         });
     });
-});
 
+});
 
