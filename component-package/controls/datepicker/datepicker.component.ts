@@ -258,6 +258,9 @@ export class DatepickerComponent implements OnInit {
 
     onSelectedDate(currentYearMonthIndex: number, weekIndex: number,dayIndex: number) {
         const date = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
+        if(date.disabled ) {
+            return;
+        }
         this.selectedDayIndexPosition.marked = false;
         this.selectedDayIndexPosition = date;
         date.marked = true;
