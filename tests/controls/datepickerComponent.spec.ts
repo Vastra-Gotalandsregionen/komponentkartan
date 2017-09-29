@@ -26,7 +26,8 @@ describe('[DatepickerComponent]', () => {
         });
 
         it('contains a yearmonth-model with current year', () => {
-            console.log(component.yearMonths);
+
+            console.log(component.yearMonths.map(ym => ym.year)[0]);
             expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(new Date().getFullYear());
         });
 

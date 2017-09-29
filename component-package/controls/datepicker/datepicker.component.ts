@@ -9,15 +9,15 @@ import { ICalendarDay } from '../../models/calendarDay.model';
     moduleId: module.id,
     templateUrl: './datepicker.component.html'
 })
-export class DatepickerComponent implements OnInit { 
+export class DatepickerComponent implements OnInit {
 
     @Input() currentDate: Date;
     @Input() minDate: Date;
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
-    @Input() selectedDateFormat: string = 'MMM yyyy';
+    @Input() selectedDateFormat: String = 'MMM yyyy';
     @Output() selectedDateChanged = new EventEmitter<Date>();
-    
+
     yearMonths: ICalendarYearMonth[] = [];
     isDatePickerVisible: boolean;
     nextMonth: boolean;
@@ -32,6 +32,7 @@ export class DatepickerComponent implements OnInit {
         this.isDatePickerVisible = false;
         this.nextMonth = true;
         this.previousMonth = true;
+        this.currentYearMonthIndex = 0;
         this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
         this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
         this.selectedDayText = 'Välj datum';
@@ -42,7 +43,7 @@ export class DatepickerComponent implements OnInit {
         this.yearMonths = this.updateDays(this.minDate, this.maxDate, this.yearMonths);
         this.setCurrentYearMonthOutput();
         this.setPreviousAndNextMonthNavigation();
-        
+
         this.selectedDateChanged.subscribe((date: Date) => {
             this.setPreviousAndNextMonthNavigation();
             this.selectedDayText = this.formatDate(date);
@@ -50,15 +51,12 @@ export class DatepickerComponent implements OnInit {
     }
 
     private formatDate(date: Date): string {
-        let day: string = '';
-        if(date.getDate() < 10) {
-            day = '0'+date.getDate().toString();
-        }
-        else {
-            day = date.getDate().toString();
-        }
+        let day: String = '';
+        if (date.getDate() < 10) {
+            day = '0' + date.getDate().toString();
+        } else { day = date.getDate().toString(); }
 
-        return day + '/' + (date.getMonth()+1).toString() + '/'+ date.getFullYear().toString();
+        return day + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
     }
     setCurrentYearMonthOutput() {
         this.currentYearMonthOutput = new Date(this.yearMonths[this.currentYearMonthIndex].year, this.yearMonths[this.currentYearMonthIndex].month - 1);
@@ -196,27 +194,25 @@ export class DatepickerComponent implements OnInit {
             month.weeks.forEach((week, weekindex) => {
                 week.days.forEach((calendarDay, dayindex) => {
                     if (calendarDay != null) {
-                        /* const currentDatePosition = this.datePipe.transform(calendarDay.day, 'ddMMyyyy');
-                        const currentselectedDate = this.datePipe.transform(this.selectedDate, 'ddMMyyyy');
-                        const currentTodayDate = this.datePipe.transform(new Date(), 'ddMMyyyy'); */
+
                         const currentDatePosition = calendarDay.day.toDateString();
-                        const currentselectedDate = this.selectedDate.toDateString();
+                        const currentselectedDate = this.selectedDate !== undefined ? this.selectedDate.toDateString() : this.selectedDate;
                         const currentTodayDate = new Date().toDateString();
 
                         // Set disabled dates
-                        if (calendarDay.day < minDate ||calendarDay.day > maxDate) {
+                        if (calendarDay.day < minDate || calendarDay.day > maxDate) {
                             month.weeks[weekindex].days[dayindex].disabled = true;
                         }
 
                         // Set current selected date
-                        if(currentDatePosition === currentselectedDate) {
+                        if (currentselectedDate !== undefined && currentDatePosition === currentselectedDate) {
                             calendarDay.marked = true;
                             this.selectedDayIndexPosition = this.yearMonths[index].weeks[weekindex].days[dayindex];
                             this.currentYearMonthIndex = index;
                         }
-                        
+
                         // Set today's date
-                        if(currentDatePosition === currentTodayDate) {
+                        if (currentDatePosition === currentTodayDate) {
                             calendarDay.isCurrentDay = true;
                         }
                     }
@@ -256,12 +252,12 @@ export class DatepickerComponent implements OnInit {
         }
     }
 
-    onSelectedDate(currentYearMonthIndex: number, weekIndex: number,dayIndex: number) {
+    onSelectedDate(currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
         const date = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
         this.selectedDayIndexPosition.marked = false;
         this.selectedDayIndexPosition = date;
         date.marked = true;
-        
+
         this.selectedDateChanged.emit(date.day);
         this.isDatePickerVisible = false;
     }
@@ -296,8 +292,7 @@ export class DatepickerComponent implements OnInit {
             this.previousMonth = false;
         } else if (currentYear >= maxYear && currentMonth >= maxMonth) {
             this.nextMonth = false;
-        }        
-        else if((currentYear >= minYear && currentYear <= maxYear) && (currentMonth >= minMonth && currentMonth <= maxMonth)) {
+        } else if ((currentYear >= minYear && currentYear <= maxYear) && (currentMonth >= minMonth && currentMonth <= maxMonth)) {
             this.previousMonth = true;
             this.nextMonth = true;
         }
