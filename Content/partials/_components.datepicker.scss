@@ -2,7 +2,7 @@
 $dropdown-height--medium: 340px;
 $dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 130px;
-$dropdown-width--medium--extended: 140px;
+$dropdown-width--medium--extended: 150px;
 $dropdown-width--small: 100px;
 .datepicker__dropdown {
   @extend .background-color--primary;
@@ -186,28 +186,28 @@ $dropdown-width--small: 100px;
 
 .datepicker__calendar__content {
   margin-top: 6px;
-  margin-left: 9px;
-  margin-right: 9px;
-  display: flex;
-  flex-direction: row;
+  margin-left: 1px;
+  margin-right: 1px;
   text-align: center;
   vertical-align: middle;
   table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  th, td {
-    width: 20px;
-    padding: 5px;
-    text-align: center;
+    border-collapse: separate;
+    border-spacing: 1px;
   }
   th {
-    color: darkgrey;
+    
   }
 }
 
-.datepicker__calendar__month {
+.datepicker__calendar__day{
   border-radius: 50%;
+  > div {
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    vertical-align: middle;
+  }
   cursor: pointer;
   &:hover {
     @extend .background-color--secondary;
@@ -222,7 +222,7 @@ $dropdown-width--small: 100px;
   }
 }
 
-.datepicker__calendar__month--today {
+.datepicker__calendar__day--today {
   @extend .border-color--primary;
   background-color: $background-color--content;
   border-width: 1px;
@@ -234,10 +234,10 @@ $dropdown-width--small: 100px;
   }
 }
 
-.datepicker__calendar__month--selected {
-  @extend .background-color--primary;
+.datepicker__calendar__day--selected {
+  @extend .background-color--primary;  
   color: $text-color--light;
-  &.datepicker__calendar__month--today {
+  &.datepicker__calendar__day--today {
     @extend .background-color--primary;
     font-weight: normal;
   }
@@ -249,9 +249,6 @@ $dropdown-width--small: 100px;
     span {
       width: calc(#{$dropdown-width--medium--extended} - #{$icon-width} - #{$border--single} - #{$border--single});
     }
-  }
-  .datepicker__calendar__month {
-    padding-top: 5px;
   }
   .datepicker__calendar {    
     height: 320px;

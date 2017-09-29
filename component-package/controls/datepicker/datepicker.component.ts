@@ -15,16 +15,17 @@ export class DatepickerComponent implements OnInit {
     @Input() minDate: Date;
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
+    @Input() selectedDateFormat: string = 'MMM yyyy';
     @Output() selectedDateChanged = new EventEmitter<Date>();
-
+    
     yearMonths: ICalendarYearMonth[] = [];
     isDatePickerVisible: boolean;
     nextMonth: boolean;
     previousMonth: boolean;
     currentYearMonthIndex: number;
     currentYearMonthOutput: Date;
+    selectedDayText: any;
     selectedDayIndexPosition: ICalendarDay;
-    isSelectedDate: boolean;
 
     constructor(protected elementRef: ElementRef) {
         this.currentDate = new Date();
@@ -33,9 +34,7 @@ export class DatepickerComponent implements OnInit {
         this.previousMonth = true;
         this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
         this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
-        this.isSelectedDate = false;
-
-        this.currentYearMonthIndex = 0;
+        this.selectedDayText = 'Välj datum';
     };
 
     ngOnInit() {
@@ -43,13 +42,24 @@ export class DatepickerComponent implements OnInit {
         this.yearMonths = this.updateDays(this.minDate, this.maxDate, this.yearMonths);
         this.setCurrentYearMonthOutput();
         this.setPreviousAndNextMonthNavigation();
+        
+        this.selectedDateChanged.subscribe((date: Date) => {
+            this.setPreviousAndNextMonthNavigation();
+            this.selectedDayText = this.formatDate(date);
+        });
     }
 
-    setIndexTodayDate(): number {
-        this.selectedDate.getMonth();
-       return 0;
-    }
+    private formatDate(date: Date): string {
+        let day: string = '';
+        if(date.getDate() < 10) {
+            day = '0'+date.getDate().toString();
+        }
+        else {
+            day = date.getDate().toString();
+        }
 
+        return day + '/' + (date.getMonth()+1).toString() + '/'+ date.getFullYear().toString();
+    }
     setCurrentYearMonthOutput() {
         this.currentYearMonthOutput = new Date(this.yearMonths[this.currentYearMonthIndex].year, this.yearMonths[this.currentYearMonthIndex].month - 1);
     }
@@ -181,37 +191,24 @@ export class DatepickerComponent implements OnInit {
         }
     }
 
-<<<<<<< HEAD
-    setDisabledDates(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
+    updateDays(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
         yearMonths.forEach((month, index) => {
             month.weeks.forEach((week, weekindex) => {
                 week.days.forEach((calendarDay, dayindex) => {
-=======
-    updateDays(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
-        yearMonths.forEach((month) => {
-            month.weeks.forEach((week, indexWeeks) => {
-                week.days.forEach((calendarDay, indexDays) => {
->>>>>>> 173bea5f1d7d8655207534d7f82bd8c6b7226859
                     if (calendarDay != null) {
                         /* const currentDatePosition = this.datePipe.transform(calendarDay.day, 'ddMMyyyy');
                         const currentselectedDate = this.datePipe.transform(this.selectedDate, 'ddMMyyyy');
                         const currentTodayDate = this.datePipe.transform(new Date(), 'ddMMyyyy'); */
-                        const currentDatePosition = new Date();
-                        const currentselectedDate = new Date();
-                        const currentTodayDate = new Date();
+                        const currentDatePosition = calendarDay.day.toDateString();
+                        const currentselectedDate = this.selectedDate.toDateString();
+                        const currentTodayDate = new Date().toDateString();
 
                         // Set disabled dates
-<<<<<<< HEAD
                         if (calendarDay.day < minDate ||calendarDay.day > maxDate) {
                             month.weeks[weekindex].days[dayindex].disabled = true;
-=======
-                        if (calendarDay.day < minDate || calendarDay.day > maxDate) {
-                            month.weeks[indexWeeks].days[indexDays].disabled = true;
->>>>>>> 173bea5f1d7d8655207534d7f82bd8c6b7226859
                         }
 
                         // Set current selected date
-<<<<<<< HEAD
                         if(currentDatePosition === currentselectedDate) {
                             calendarDay.marked = true;
                             this.selectedDayIndexPosition = this.yearMonths[index].weeks[weekindex].days[dayindex];
@@ -222,12 +219,6 @@ export class DatepickerComponent implements OnInit {
                         if(currentDatePosition === currentTodayDate) {
                             calendarDay.isCurrentDay = true;
                         }
-=======
-                        calendarDay.marked = currentDatePosition.toDateString() === currentselectedDate.toDateString();
-
-                        // Set today's date
-                        calendarDay.isCurrentDay = currentDatePosition.toDateString() === currentTodayDate.toDateString();
->>>>>>> 173bea5f1d7d8655207534d7f82bd8c6b7226859
                     }
                 });
             })
@@ -273,7 +264,6 @@ export class DatepickerComponent implements OnInit {
         
         this.selectedDateChanged.emit(date.day);
         this.isDatePickerVisible = false;
-        this.isSelectedDate = true;
     }
 
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {
@@ -306,12 +296,8 @@ export class DatepickerComponent implements OnInit {
             this.previousMonth = false;
         } else if (currentYear >= maxYear && currentMonth >= maxMonth) {
             this.nextMonth = false;
-<<<<<<< HEAD
         }        
         else if((currentYear >= minYear && currentYear <= maxYear) && (currentMonth >= minMonth && currentMonth <= maxMonth)) {
-=======
-        } else if ((currentYear >= minYear && currentYear <= maxYear) && (currentMonth >= minMonth && currentMonth <= maxMonth)) {
->>>>>>> 173bea5f1d7d8655207534d7f82bd8c6b7226859
             this.previousMonth = true;
             this.nextMonth = true;
         }
