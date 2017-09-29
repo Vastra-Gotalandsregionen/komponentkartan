@@ -69,8 +69,10 @@ describe('[DatepickerComponent]', () => {
 
         });
 
+
         describe('and selecting a day in the calendar ', () => {
-            it('the selected date is set in the component')
+            it('the selected date is set in the component', () => {
+            });
             it('the selected day closes the calendar', () => { });
             it('the todays date is set in the calendar', () => { });
             it('the selected date is set in the dropdown', () => { });
