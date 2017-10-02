@@ -35,9 +35,9 @@ describe('[DatepickerComponent]', () => {
             expect(component.yearMonths.filter(ym => ym.month === currentMonth).map(ym => ym.month)[0]).toEqual(currentMonth);
         });
 
-        it('contains January in the year-month model', () => {
-            expect((component.yearMonths.filter(ym => ym.month === currentMonth)[0].month)).toBe(8);
-        });
+        // it('contains January in the year-month model', () => {
+        //     expect((component.yearMonths.filter(ym => ym.month === currentMonth)[0].month)).toBe(8);
+        // });
 
         it('contains right amount of weeks in month model', () => {
             const firstDayOfWeek = 1;
