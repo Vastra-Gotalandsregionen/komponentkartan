@@ -3,7 +3,7 @@ $input-small-width--medium: 140px;
 $input-width--small: 270px;
 $input-width--medium: 290px;
 $validation-icon-size: 18px;
-$suffix-width: 25px;
+$suffix-width: 30px;
 .input-container {
     max-width: $input-width--small;
     width: $input-width--small;
@@ -155,9 +155,12 @@ input.input-container__textbox {
 .validation-container__validation-area__message {
     display: none;
     margin-left: 4px;
-    margin-top: 3px;
+    margin-top: 5px;
     max-width: 239px;
     vertical-align: middle;
+    .input__small & {
+        max-width: 89px;
+    }
     .validation-error--active & {
         color: $primary-color--error;
         display: inline-block;
@@ -196,5 +199,9 @@ input.input-container__textbox {
     }
     .validation-container__validation-area__message {
         max-width: 259px;
+        margin-top: 3px;
+        .input__small & {
+            max-width: 99px;
+        }
     }
 }

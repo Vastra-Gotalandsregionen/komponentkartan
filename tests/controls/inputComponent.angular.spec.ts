@@ -99,8 +99,38 @@ describe('[InputComponent]', () => {
                 expect(component.validationErrorMessage).toBe('Felaktigt format')
             });
         });
-    });
 
+    });
+    describe('When no invalidText is set and validate on init is set ', () => {
+        beforeEach(() => {
+            component.validateOnInit = true;
+        });
+
+        describe('on a small box and a required field is left empty', () => {
+            beforeEach(() => {
+                component.required = true;
+                component.small = true;
+                component.ngOnInit();
+            });
+            it('validationErrorMessage is Obligatoriskt', () => {
+                expect(component.validationErrorMessage).toBe('Obligatoriskt')
+            });
+        });
+        describe('on a small box and the value does not match the pattern', () => {
+            beforeEach(() => {
+                component.small = true;
+                component.required = true;
+                component.value = 'dasds';
+                component.pattern = '^.{1}$';
+                component.ngOnInit();
+            });
+            it('validationErrorMessage is Formatfel', () => {
+                expect(component.validationErrorMessage).toBe('Formatfel')
+            });
+
+        });
+
+    });
 
     describe('When initialized as required', () => {
         beforeEach(() => {
@@ -482,12 +512,7 @@ describe('[InputComponent]', () => {
         });
     });
 
-    describe('when field is small', () => {
-        beforeEach(() => {
-            component.small = true;
-        })
 
-    });
 
     describe('when field is read only', () => {
         beforeEach(() => {

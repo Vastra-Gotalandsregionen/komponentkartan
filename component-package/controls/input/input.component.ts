@@ -14,7 +14,7 @@ export class InputComponent implements OnInit {
     validationErrorStates = ValidationErrorState;
     @HostBinding('class.validated-input') hasClass = true;
     @Input() @HostBinding('class.readonly') readonly?: boolean;
-    @Input() @HostBinding('class.input__small') small?: boolean;
+    @Input() @HostBinding('class.input__small') small: boolean;
     @Input() value: any;
     numericValue?: number;
     @Input() validateOnInit: boolean;
@@ -65,18 +65,33 @@ export class InputComponent implements OnInit {
     get invalidPatternValidationResult(): IValidationResult {
         return {
             isValid: false,
-            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : 'Felaktigt format'
+            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : this.convertText('Felaktigt format')
         } as IValidationResult
     }
+
     get emptyRequiredFieldValidationResult(): IValidationResult {
+
         return {
             isValid: false,
-            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : 'Fältet är obligatoriskt'
+            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : this.convertText('Fältet är obligatoriskt')
         } as IValidationResult
     }
     get successfulValidationResult(): IValidationResult {
         return { isValid: true, validationError: '' } as IValidationResult
     }
+    convertText(text: string): string {
+
+        if (this.small) {
+            if (text === 'Felaktigt format')
+                return 'Formatfel';
+
+            if (text === 'Fältet är obligatoriskt')
+                return 'Obligatoriskt'
+        }
+        return text;
+    }
+
+
 
     ngOnInit() {
         if (this.pattern && this.pattern.length > 0) {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { IValidator, IValidationResult } from '../../component-package/models/validated.model';
 import { CityService } from './cityService';
+import { ISelectableItem } from '../../component-package/models/selectableItem.model';
 
 @Component({
     moduleId: module.id,
@@ -19,6 +20,8 @@ export class InputFieldsComponent {
     cityValidator: IValidator;
     intValue: number;
     headerExpanded: boolean;
+    isSmall: boolean;
+
     constructor(private cityService: CityService) {
         this.cityName = 'Houstons';
         this.cityValidator = {
@@ -29,6 +32,8 @@ export class InputFieldsComponent {
         this.percentValue = 0.02;
         this.kmValue = 11;
         this.intValue = 0;
+        this.isSmall = false;
+
     }
 
     validateCityName(cityName: string): IValidationResult {
@@ -48,7 +53,13 @@ export class InputFieldsComponent {
     formatNumericValue(value: number) {
         return isNaN(value) ? 'Inget' : value;
     }
-
+    toggleInputType(option: ISelectableItem) {
+        console.log(this.isSmall);
+        if (option.displayName === 'Stor')
+            this.isSmall = false;
+        else
+            this.isSmall = true;
+    }
 
 
 }

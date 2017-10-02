@@ -9,51 +9,40 @@
         </div>
     </vgr-page-header>
 
+    
     <div class="komponentkarta-components column-layout">
+        <vgr-radio-group [options]="[{id:'1', displayName:'Stor', selected:true},{id:'2', displayName:'Liten'}]" (selectedChanged)="toggleInputType($event)">
+        </vgr-radio-group>
         <div class="row-layout">
-            <h2>Små inputboxar</h2>
-            <div>
-                Belopp 1 (type=amount)
-                <vgr-input [small]="true" [type]="'amount'" [value]="amount1" (valueChanged)="amount1 = $event"></vgr-input>
-                <span>Belopp 1: </span><span>{{formatNumericValue(amount1)}}</span>
-            </div>
-            <div>
-                Belopp 1 (type)
-                <vgr-input [small]="true"></vgr-input>
 
-            </div>
-
-
-        </div>
-    </div>
-    <div class="komponentkarta-components column-layout">
-        <div class="row-layout">
             <div class="one-third">
+
+
                 <h2>Fördefinierade typer</h2>
                 <div>
                     Belopp 1 (type=amount)
-                    <vgr-input [type]="'amount'" [value]="amount1" (valueChanged)="amount1 = $event"></vgr-input>
+                    <vgr-input [type]="'amount'" [value]="amount1" (valueChanged)="amount1 = $event" [small]="isSmall"></vgr-input>
                     <span>Belopp 1: </span><span>{{formatNumericValue(amount1)}}</span>
                 </div>
                 <div>
                     Belopp 2, obligatoriskt
-                    <vgr-input [type]="'amount'" [value]="amount2" (valueChanged)="amount2 = $event" [required]="true"></vgr-input>
+                    <vgr-input [type]="'amount'" [value]="amount2" (valueChanged)="amount2 = $event" [required]="true" [small]="isSmall"></vgr-input>
                     <span>Belopp 2: </span><span>{{formatNumericValue(amount2)}}</span>
                 </div>
                 <div>
                     Procent
-                    <vgr-input [type]="'percent'" [value]="percentValue" (valueChanged)="percentValue = $event"></vgr-input>
+                    <vgr-input [type]="'percent'" [value]="percentValue" (valueChanged)="percentValue = $event" [small]="isSmall"></vgr-input>
                     <span>Procent: </span><span>{{formatNumericValue(percentValue)}}</span>
                 </div>
                 <div>
                     Km
-                    <vgr-input [type]="'km'" [value]="kmValue" (valueChanged)="kmValue = $event"></vgr-input>
+                    <vgr-input [type]="'km'" [value]="kmValue" (valueChanged)="kmValue = $event" [small]="isSmall"></vgr-input>
                     <span>Km: </span><span>{{formatNumericValue(kmValue)}}</span>
 
                 </div>
                 <div>
                     Numeriskt värde utan enhet
-                    <vgr-input [type]="'numeric'" [value]="numericValue" (valueChanged)="numericValue = $event"></vgr-input>
+                    <vgr-input [type]="'numeric'" [value]="numericValue" (valueChanged)="numericValue = $event" [small]="isSmall"></vgr-input>
                     <span>Värde: </span><span>{{formatNumericValue(numericValue)}}</span>
                 </div>
             </div>
@@ -61,32 +50,32 @@
                 <h2>Egen konfiguration</h2>
                 <div>
                     Max-längd 5 tecken
-                    <vgr-input [maxlength]=5></vgr-input>
+                    <vgr-input [maxlength]=5 [small]="isSmall"></vgr-input>
                 </div>
                 <div>
                     Exakt 3 VERSALER (redan validerad)
-                    <vgr-input [pattern]="'^[A-Z,Å,Ä,Ö]{3}$'" [invalidText]="'Ange exakt tre VERSALER'" [value]="'abc'" [maxlength]="3" [validateOnInit]="true"></vgr-input>
+                    <vgr-input [pattern]="'^[A-Z,Å,Ä,Ö]{3}$'" [invalidText]="'Ange exakt tre VERSALER'" [value]="'abc'" [maxlength]="3" [validateOnInit]="true" [small]="isSmall"></vgr-input>
                 </div>
                 <div>
                     Mellan 2 och 6 tecken
-                    <vgr-input [pattern]="'^.{2,6}$'" [maxlength]=6 [invalidText]="'Ange mellan 2-6 tecken'"></vgr-input>
+                    <vgr-input [pattern]="'^.{2,6}$'" [maxlength]=6 [invalidText]="'Ange mellan 2-6 tecken'" [small]="isSmall"></vgr-input>
                 </div>
                 <div>
                     Heltal med enhet
-                    <vgr-input [pattern]="'^[0-9]+$'" [type]="'numeric'" [suffix]="'st'" [invalidText]="'Ange ett giltigt heltal'" [alignRight]="true" [value]="intValue" (valueChanged)="intValue = $event"></vgr-input>
+                    <vgr-input [pattern]="'^[0-9]+$'" [type]="'numeric'" [suffix]="'st'" [invalidText]="'Ange ett giltigt heltal'" [alignRight]="true" [value]="intValue" (valueChanged)="intValue = $event" [small]="isSmall"></vgr-input>
                     <span>Antal: </span><span>{{intValue + 0}}</span>
                 </div>
                 <div>
-                    Felmeddelande >62 tkn med ... och tooltip
-                    <vgr-input [required]="true" [invalidText]="'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'"></vgr-input>
+                    Långa felmeddelanden
+                    <vgr-input [required]="true" [invalidText]="'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'" [small]="isSmall"></vgr-input>
                 </div>
                 <div>
                     Låst fält
-                    <vgr-input class="no-padding" [readonly]="true" [value]="'Visar värdet utan ram'"></vgr-input>
+                    <vgr-input class="no-padding" [readonly]="true" [value]="'Visar värdet utan ram'" [small]="isSmall"></vgr-input>
                 </div>
                 <div>
                     Ingen validering
-                    <vgr-input></vgr-input>
+                    <vgr-input [small]="isSmall"></vgr-input>
                 </div>
 
             </div>
@@ -94,12 +83,12 @@
                 <h2>Validering med service</h2>
                 <div>
                     Ange en storstad i USA
-                    <vgr-input [customValidator]="validateCityName.bind(this)" [value]="cityName" (valueChanged)="cityName = $event"></vgr-input>
+                    <vgr-input [customValidator]="validateCityName.bind(this)" [value]="cityName" (valueChanged)="cityName = $event" [small]="isSmall"></vgr-input>
                     <span>Din stad: {{cityName}}</span>
                 </div>
                 <div>
                     E-postadress
-                    <vgr-input [customValidator]="validateEmail.bind(this)"></vgr-input>
+                    <vgr-input [customValidator]="validateEmail.bind(this)" [small]="isSmall"></vgr-input>
                 </div>
 
             </div>
