@@ -1,6 +1,7 @@
 
 export interface IMenu {
     title: string;
+    theme: string;
     expanded: boolean;
     groups: IMenuGroup[];
     isExpandable: boolean;
@@ -13,6 +14,7 @@ export interface IMenuGroup {
 
 export interface IMenuItem {
     title: string;
+
     url: string;
     favourite: boolean;
     order: string;

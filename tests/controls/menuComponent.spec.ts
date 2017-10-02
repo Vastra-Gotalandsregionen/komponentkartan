@@ -949,20 +949,20 @@ describe("when calling avaliableInThisBrowser", () => {
         menuComponent = new MenuComponent(browserDetector);
 
     });
-    describe("and menu is Rehab", () => {
-        beforeEach(() => { menuComponent.menu = { title: "Rehab" } as IMenu });
+    describe("and menu is Green", () => {
+        beforeEach(() => { menuComponent.menu = { title: "Rehab", theme: "Green" } as IMenu });
         it("returns true", () => {
             expect(menuComponent.availableInThisBrowser()).toBeTruthy();
         });
     });
-    describe("and menu is BMM", () => {
-        beforeEach(() => { menuComponent.menu = { title: "BMM" } as IMenu });
+    describe("and menu is Blue", () => {
+        beforeEach(() => { menuComponent.menu = { title: "BMM", theme: "Blue" } as IMenu });
         it("returns true", () => {
             expect(menuComponent.availableInThisBrowser()).toBeTruthy();
         });
     });
-    describe("and menu is VGPV", () => {
-        beforeEach(() => { menuComponent.menu = { title: "VGPV" } as IMenu });
+    describe("and menu is Red", () => {
+        beforeEach(() => { menuComponent.menu = { title: "VGPV", theme: "Red" } as IMenu });
         describe("and browser is Internet Explorer", () => {
             beforeEach(() => {
                 spyOn(browserDetector, "isInternetExplorer").and.returnValue(true);

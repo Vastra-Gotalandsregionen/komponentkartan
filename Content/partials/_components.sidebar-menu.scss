@@ -103,16 +103,16 @@ vgr-sidebar-menu {
             color: inherit;
             font-weight: inherit;
         } //Themeing
-        .menu--bmm & {
+        .menu--blue & {
             border-left-color: $secondary-color--blue;
         }
-        .menu--rehab & {
+        .menu--green & {
             border-left-color: $secondary-color--green;
         }
         .menu--neutral & {
             border-left-color: $secondary-color--default;
         }
-        .menu--vgpv & {
+        .menu--red & {
             border-left-color: $secondary-color--red;
         }
         .sidebar-menu--single-menu & {
@@ -123,16 +123,16 @@ vgr-sidebar-menu {
         font-weight: bold;
         border-left: calc(#{2 * $menu-border-width--small}) solid $primary-color--default;
         margin-left: calc(#{-1 * $menu-border-width--small}); //Themeing
-        .menu--bmm & {
+        .menu--blue & {
             border-left-color: $primary-color--blue;
         }
-        .menu--rehab & {
+        .menu--green & {
             border-left-color: $primary-color--green;
         }
         .menu--neutral & {
             border-left-color: $primary-color--default;
         }
-        .menu--vgpv & {
+        .menu--red & {
             border-left-color: $primary-color--red;
         }
         .sidebar-menu--single-menu & {
@@ -315,16 +315,16 @@ vgr-sidebar-menu {
     flex-direction: row;
     align-items: center;
     cursor: pointer; //Themeing
-    .menu--bmm & {
+    .menu--blue & {
         border-left-color: $primary-color--blue;
     }
-    .menu--rehab & {
+    .menu--green & {
         border-left-color: $primary-color--green;
     }
     .menu--neutral & {
         border-left-color: $primary-color--default;
     }
-    .menu--vgpv & {
+    .menu--red & {
         border-left-color: $primary-color--red;
     }
     .sidebar-menu--single-menu & {
@@ -375,16 +375,16 @@ vgr-sidebar-menu {
 .menu-item--selected {
     color: $text-color--light;
     font-weight: bold;
-    .menu--bmm & {
+    .menu--blue & {
         background-color: $secondary-color--blue;
     }
-    .menu--rehab & {
+    .menu--green & {
         background-color: $secondary-color--green;
     }
     .menu--neutral & {
         background-color: $secondary-color--default;
     }
-    .menu--vgpv & {
+    .menu--red & {
         background-color: $secondary-color--red;
     }
     .sidebar-menu--single-menu & {
@@ -394,16 +394,16 @@ vgr-sidebar-menu {
 
 .menu-item--marked {
     border-left: calc(#{2 * $menu-border-width--small}) solid $primary-color--blue;
-    .menu--bmm & {
+    .menu--blue & {
         border-left-color: $primary-color--blue;
     }
-    .menu--rehab & {
+    .menu--green & {
         border-left-color: $primary-color--green;
     }
     .menu--neutral & {
         border-left-color: $primary-color--default;
     }
-    .menu--vgpv & {
+    .menu--red & {
         border-left-color: $primary-color--red;
     }
     .sidebar-menu--single-menu & {
@@ -464,16 +464,16 @@ vgr-sidebar-menu {
         font-weight: bold;
         border-left: calc(#{2 * $menu-border-width--small}) solid $primary-color--default;
         margin-left: calc(#{-1 * $menu-border-width--small}); //Themeing
-        .menu--bmm & {
+        .menu--blue & {
             border-left-color: $primary-color--blue;
         }
-        .menu--rehab & {
+        .menu--green & {
             border-left-color: $primary-color--green;
         }
         .menu--neutral & {
             border-left-color: $primary-color--default;
         }
-        .menu--vgpv & {
+        .menu--red & {
             border-left-color: $primary-color--red;
         }
         .sidebar-menu--single-menu & {
@@ -519,16 +519,16 @@ vgr-sidebar-menu {
         }
     }
     .menu-item--marked {
-        border-left: calc(#{2 * $menu-border-width--medium}) solid $primary-color--blue; // .menu--bmm & {
+        border-left: calc(#{2 * $menu-border-width--medium}) solid $primary-color--blue; // .menu--blue & {
         //   border-left-color: $primary-color--blue;
         // }
-        // .menu--rehab & {
+        // .menu--green & {
         //   border-left-color: $primary-color--green;
         // }
         // .menu--neutral & {
         //   border-left-color: $primary-color--default;
         // }
-        // .menu--vgpv & {
+        // .menu--red & {
         //   border-left-color: $primary-color--red;
         // }
         // .sidebar-menu--single-menu & {

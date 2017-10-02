@@ -91,7 +91,7 @@ export class MenuComponent implements OnChanges, AfterViewInit {
     }
 
     availableInThisBrowser(): boolean {
-        if (this.menu.title === 'VGPV') {
+        if (this.menu.theme === 'Red') {
             return this.browserDetector.isInternetExplorer();
         }
         return true;

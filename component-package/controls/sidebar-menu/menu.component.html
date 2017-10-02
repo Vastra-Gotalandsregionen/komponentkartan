@@ -1,8 +1,8 @@
 <div class="menu" [ngClass]="
-                    {   'menu--bmm' : menu.title ==='BMM',
-                        'menu--vgpv' : menu.title ==='VGPV',
-                        'menu--rehab' : menu.title ==='Rehab',
-                        'menu--neutral' : menu.title !=='VGPV' && menu.title !=='BMM' && menu.title !=='Rehab' ,
+                    {   'menu--blue' : menu.theme ==='Blue',
+                        'menu--red' : menu.theme ==='Red',
+                        'menu--green' : menu.theme ==='Green',
+                        'menu--neutral' : menu.theme !=='Red' && menu.theme !=='Blue' && menu.theme !=='Green' ,
                         'menu--expanded' : menu.expanded,
                         'menu--expandable': menuItems.length>3 && !isSingleMenu,
                         'menu--inactive': isInactive
@@ -28,8 +28,7 @@
                     <span class="menu-item__expander menu-item__plus" *ngIf="!menuItem.expanded"></span>
                 </a>
             </li>
-            <ul *ngIf="menuItem.menuItems && menuItem.menuItems.length>0 && menuItem.visible" class="menu__subItems-list menu-subItems"
-                [ngClass]="[menuItem.expanded ? 'menu-subItems__show' :'' ]">
+            <ul *ngIf="menuItem.menuItems && menuItem.menuItems.length>0 && menuItem.visible" class="menu__subItems-list menu-subItems" [ngClass]="[menuItem.expanded ? 'menu-subItems__show' :'' ]">
                 <li *ngFor="let childMenuItem of menuItem.menuItems " class="menu-item menu-item--child" routerLinkActive="menu-item--selected menu-item--marked ">
                     <a routerLink={{childMenuItem.url}} (click)="setActiveMenuItem(childMenuItem)">{{childMenuItem.title}} <span *ngIf="!availableInThisBrowser()" title="Fungerar endast i Internet Explorer">(!)</span> </a>
                 </li>
