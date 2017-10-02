@@ -21,13 +21,12 @@
         <vgr-monthpicker style="margin-top: 20px" [disabled]="true" [preselectedDate]="preselectedDate"></vgr-monthpicker>
       </div>
     </div>
-
-
-
     <div>
       <span>Senast valt datum: </span>
       <span>{{selectedDate | date : 'yyyy MMM'}}</span>
     </div>
+    
+    <br/>
     <h2>Användning</h2>
     <div>
       Ange följande i din @NgModule för att ställa in svenskt språk providers
@@ -56,14 +55,22 @@
         <p>{{datepicker_selectedDate | date : 'dd MMM yyyy'}}</p>
       </div>
     </div>
+    <div class="komponentkarta-component row-layout row-layout--padded">
+      <div>
+        <p>Avstängd datepicker</p>
+        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate" [disabled]="true"></vgr-datepicker>
+      </div>
+    </div>
 
-    
-    <h2>Användning</h2>
     <div>
-      Ange följande i din @NgModule för att ställa in svenskt språk providers
+      <br/>
+      <h2>Användning</h2>
+      <div>
+        Ange följande i din @NgModule för att ställa in svenskt språk providers
 
-      <div class="markup-example">
-        [ {{'{ provide: LOCALE_ID, useValue: "sv-SE" }'}}
+        <div class="markup-example">
+          [ {{'{ provide: LOCALE_ID, useValue: "sv-SE" }'}}
+        </div>
       </div>
     </div>
   </div>

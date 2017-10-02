@@ -15,6 +15,7 @@ export class DatepickerComponent implements OnInit {
     @Input() minDate: Date;
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
+    @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() selectedDateFormat: String = 'MMM yyyy';
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
@@ -56,7 +57,7 @@ export class DatepickerComponent implements OnInit {
             day = '0' + date.getDate().toString();
         } else { day = date.getDate().toString(); }
 
-        return day + '/' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString();
+        return day + ' ' + (date.getMonth() + 1).toString() + ' ' + date.getFullYear().toString();
     }
     setCurrentYearMonthOutput() {
         this.currentYearMonthOutput = new Date(this.yearMonths[this.currentYearMonthIndex].year, this.yearMonths[this.currentYearMonthIndex].month - 1);
@@ -225,7 +226,9 @@ export class DatepickerComponent implements OnInit {
     // UI functions
 
     displayDatePicker() {
+        if(!this.disabled) {
         this.isDatePickerVisible = true;
+    }
     }
 
     @HostListener('document:click', ['$event'])
