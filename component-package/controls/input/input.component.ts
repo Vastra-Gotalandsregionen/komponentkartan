@@ -14,6 +14,7 @@ export class InputComponent implements OnInit {
     validationErrorStates = ValidationErrorState;
     @HostBinding('class.validated-input') hasClass = true;
     @Input() @HostBinding('class.readonly') readonly?: boolean;
+    @Input() @HostBinding('class.input__small') small?: boolean;
     @Input() value: any;
     numericValue?: number;
     @Input() validateOnInit: boolean;
@@ -226,10 +227,7 @@ export class InputComponent implements OnInit {
                 this.setValidationState(ValidationErrorState.Fixed);
                 return true;
             }
-            if (this.validationErrorState === ValidationErrorState.Fixed) {
-                this.setValidationState(ValidationErrorState.NoError);
-                return true;
-            }
+
         }
 
         this.setValidationState(ValidationErrorState.Active);

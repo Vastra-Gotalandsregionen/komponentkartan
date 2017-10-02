@@ -14,9 +14,16 @@
             <h2>Små inputboxar</h2>
             <div>
                 Belopp 1 (type=amount)
-                <vgr-input class="small" [type]="'amount'" [value]="amount1" (valueChanged)="amount1 = $event"></vgr-input>
+                <vgr-input [small]="true" [type]="'amount'" [value]="amount1" (valueChanged)="amount1 = $event"></vgr-input>
                 <span>Belopp 1: </span><span>{{formatNumericValue(amount1)}}</span>
             </div>
+            <div>
+                Belopp 1 (type)
+                <vgr-input [small]="true"></vgr-input>
+
+            </div>
+
+
         </div>
     </div>
     <div class="komponentkarta-components column-layout">

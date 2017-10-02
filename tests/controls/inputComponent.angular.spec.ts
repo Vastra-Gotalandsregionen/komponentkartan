@@ -482,6 +482,13 @@ describe('[InputComponent]', () => {
         });
     });
 
+    describe('when field is small', () => {
+        beforeEach(() => {
+            component.small = true;
+        })
+
+    });
+
     describe('when field is read only', () => {
         beforeEach(() => {
             component.readonly = true;
