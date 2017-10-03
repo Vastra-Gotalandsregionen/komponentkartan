@@ -60,6 +60,7 @@ export class KomponentkartanApplicationComponent {
         },
         {
             'title': 'VGPV',
+            'theme': 'Red',
             'groups': [{
                 'order': '1',
                 'menuItems': [{
@@ -222,6 +223,7 @@ export class KomponentkartanApplicationComponent {
         },
         {
             'title': 'BMM',
+            'theme': 'Blue',
             'groups': [{
                 'order': '1',
                 'menuItems': [{
@@ -264,6 +266,7 @@ export class KomponentkartanApplicationComponent {
         },
         {
             'title': 'Rehab',
+            'theme': 'Green',
             'groups': [{
                 'order': '1',
                 'menuItems': [{
