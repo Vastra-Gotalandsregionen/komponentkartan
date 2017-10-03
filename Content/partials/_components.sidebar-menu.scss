@@ -77,7 +77,8 @@ vgr-sidebar-menu {
     list-style-type: none;
     border-bottom: solid 1px $border-color;
     li {
-        border-left: $menu-border-width--small solid $secondary-color--default;
+        @extend .border-left-color--secondary;
+        border-left: $menu-border-width--small solid; // $secondary-color--default;
         padding-left: $margin--slim;
         font-size: $menu-text-font-size--small;
         padding-top: $margin--xs-slim;
@@ -103,38 +104,39 @@ vgr-sidebar-menu {
             color: inherit;
             font-weight: inherit;
         } //Themeing
-        .menu--blue & {
-            border-left-color: $secondary-color--blue;
-        }
-        .menu--green & {
-            border-left-color: $secondary-color--green;
-        }
-        .menu--neutral & {
-            border-left-color: $secondary-color--default;
-        }
-        .menu--red & {
-            border-left-color: $secondary-color--red;
-        }
+        // .menu--blue & {
+        //     border-left-color: $secondary-color--blue;
+        // }
+        // .menu--green & {
+        //     border-left-color: $secondary-color--green;
+        // }
+        // .menu--neutral & {
+        //     border-left-color: $secondary-color--default;
+        // }
+        // .menu--red & {
+        //     border-left-color: $secondary-color--red;
+        // }
         .sidebar-menu--single-menu & {
             @extend .border-left-color--secondary;
         }
     }
     li:not(.menu__footer):not(.menu--single-menu--footer):hover {
+        @extend .border-left-color--primary;
         font-weight: bold;
-        border-left: calc(#{2 * $menu-border-width--small}) solid $primary-color--default;
+        border-left: calc(#{2 * $menu-border-width--small}) solid; // $primary-color--default;
         margin-left: calc(#{-1 * $menu-border-width--small}); //Themeing
-        .menu--blue & {
-            border-left-color: $primary-color--blue;
-        }
-        .menu--green & {
-            border-left-color: $primary-color--green;
-        }
-        .menu--neutral & {
-            border-left-color: $primary-color--default;
-        }
-        .menu--red & {
-            border-left-color: $primary-color--red;
-        }
+        // .menu--blue & {
+        //     border-left-color: $primary-color--blue;
+        // }
+        // .menu--green & {
+        //     border-left-color: $primary-color--green;
+        // }
+        // .menu--neutral & {
+        //     border-left-color: $primary-color--default;
+        // }
+        // .menu--red & {
+        //     border-left-color: $primary-color--red;
+        // }
         .sidebar-menu--single-menu & {
             @extend .border-left-color--primary;
         }
@@ -302,7 +304,8 @@ vgr-sidebar-menu {
 }
 
 .menu__header {
-    border-left: $menu-border-width--small solid $primary-color--default;
+    @extend .border-left-color--primary;
+    border-left: $menu-border-width--small solid; // $primary-color--default;
     padding-left: 0px;
     margin: 0;
     font-size: $menu-header-font-size--small;
@@ -315,18 +318,18 @@ vgr-sidebar-menu {
     flex-direction: row;
     align-items: center;
     cursor: pointer; //Themeing
-    .menu--blue & {
-        border-left-color: $primary-color--blue;
-    }
-    .menu--green & {
-        border-left-color: $primary-color--green;
-    }
-    .menu--neutral & {
-        border-left-color: $primary-color--default;
-    }
-    .menu--red & {
-        border-left-color: $primary-color--red;
-    }
+    // .menu--blue & {
+    //     border-left-color: $primary-color--blue;
+    // }
+    // .menu--green & {
+    //     border-left-color: $primary-color--green;
+    // }
+    // .menu--neutral & {
+    //     border-left-color: $primary-color--default;
+    // }
+    // .menu--red & {
+    //     border-left-color: $primary-color--red;
+    // }
     .sidebar-menu--single-menu & {
         @extend .border-left-color--primary;
     }
@@ -373,39 +376,42 @@ vgr-sidebar-menu {
 }
 
 .menu-item--selected {
+    @extend .background-color--secondary;
     color: $text-color--light;
     font-weight: bold;
-    .menu--blue & {
-        background-color: $secondary-color--blue;
-    }
-    .menu--green & {
-        background-color: $secondary-color--green;
-    }
-    .menu--neutral & {
-        background-color: $secondary-color--default;
-    }
-    .menu--red & {
-        background-color: $secondary-color--red;
-    }
+    // .menu--blue & {
+    //     background-color: $secondary-color--blue;
+    // }
+    // .menu--green & {
+    //     background-color: $secondary-color--green;
+    // }
+    // .menu--neutral & {
+    //     background-color: $secondary-color--default;
+    // }
+    // .menu--red & {
+    //     background-color: $secondary-color--red;
+    // }
     .sidebar-menu--single-menu & {
         @extend .background-color--secondary;
     }
 }
 
 .menu-item--marked {
-    border-left: calc(#{2 * $menu-border-width--small}) solid $primary-color--blue;
-    .menu--blue & {
-        border-left-color: $primary-color--blue;
-    }
-    .menu--green & {
-        border-left-color: $primary-color--green;
-    }
-    .menu--neutral & {
-        border-left-color: $primary-color--default;
-    }
-    .menu--red & {
-        border-left-color: $primary-color--red;
-    }
+    @extend .border-left-color--primary;
+    border-left: calc(#{2 * $menu-border-width--small}) solid;
+    // $primary-color--blue;
+    // .menu--blue & {
+    //     border-left-color: $primary-color--blue;
+    // }
+    // .menu--green & {
+    //     border-left-color: $primary-color--green;
+    // }
+    // .menu--neutral & {
+    //     border-left-color: $primary-color--default;
+    // }
+    // .menu--red & {
+    //     border-left-color: $primary-color--red;
+    // }
     .sidebar-menu--single-menu & {
         @extend .border-left-color--primary;
     }
@@ -461,21 +467,22 @@ vgr-sidebar-menu {
         }
     }
     li:not(.menu__footer):hover {
+        @extend .border-left-color--primary;
         font-weight: bold;
-        border-left: calc(#{2 * $menu-border-width--small}) solid $primary-color--default;
+        border-left: calc(#{2 * $menu-border-width--small}) solid; //$primary-color--default;
         margin-left: calc(#{-1 * $menu-border-width--small}); //Themeing
-        .menu--blue & {
-            border-left-color: $primary-color--blue;
-        }
-        .menu--green & {
-            border-left-color: $primary-color--green;
-        }
-        .menu--neutral & {
-            border-left-color: $primary-color--default;
-        }
-        .menu--red & {
-            border-left-color: $primary-color--red;
-        }
+        // .menu--blue & {
+        //     border-left-color: $primary-color--blue;
+        // }
+        // .menu--green & {
+        //     border-left-color: $primary-color--green;
+        // }
+        // .menu--neutral & {
+        //     border-left-color: $primary-color--default;
+        // }
+        // .menu--red & {
+        //     border-left-color: $primary-color--red;
+        // }
         .sidebar-menu--single-menu & {
             @extend .border-left-color--primary;
         }
@@ -508,18 +515,18 @@ vgr-sidebar-menu {
     .menu__item-list {
         //height: calc(100% - #{$menu-header-height--medium});
         li {
-            border-left: $menu-border-width--medium solid $secondary-color--default; //padding-left: $menu-border-width--medium;
+            border-left: $menu-border-width--medium solid; //  $secondary-color--default; //padding-left: $menu-border-width--medium;
             font-size: $menu-text-font-size--medium;
             padding-top: 12px;
             padding-bottom: 12px;
         }
         li:not(.menu__footer):not(.menu--single-menu--footer):hover {
-            border-left: calc(#{2 * $menu-border-width--medium}) solid $primary-color--blue;
+            border-left: calc(#{2 * $menu-border-width--medium}) solid; //$primary-color--blue;
             margin-left: calc(#{-1 * $menu-border-width--medium});
         }
     }
     .menu-item--marked {
-        border-left: calc(#{2 * $menu-border-width--medium}) solid $primary-color--blue; // .menu--blue & {
+        border-left: calc(#{2 * $menu-border-width--medium}); // .menu--blue & {
         //   border-left-color: $primary-color--blue;
         // }
         // .menu--green & {
@@ -559,7 +566,7 @@ vgr-sidebar-menu {
             padding-bottom: $margin--slimmer;
         }
         li:not(.menu__footer):hover {
-            border-left: calc(#{2 * $menu-border-width--medium}) solid $primary-color--default;
+            border-left: calc(#{2 * $menu-border-width--medium}); // solid $primary-color--default;
             margin-left: calc(#{-1 * $menu-border-width--medium});
         }
     }

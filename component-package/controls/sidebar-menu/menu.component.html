@@ -1,8 +1,8 @@
 <div class="menu" [ngClass]="
-                    {   'menu--blue' : menu.theme ==='Blue',
-                        'menu--red' : menu.theme ==='Red',
-                        'menu--green' : menu.theme ==='Green',
-                        'menu--neutral' : menu.theme !=='Red' && menu.theme !=='Blue' && menu.theme !=='Green' ,
+                    {   'theme--blue' : menu.theme ==='Blue',
+                        'theme--red' : menu.theme ==='Red',
+                        'theme--green' : menu.theme ==='Green',
+                        'theme--neutral' : menu.theme !=='Red' && menu.theme !=='Blue' && menu.theme !=='Green' ,
                         'menu--expanded' : menu.expanded,
                         'menu--expandable': menuItems.length>3 && !isSingleMenu,
                         'menu--inactive': isInactive
