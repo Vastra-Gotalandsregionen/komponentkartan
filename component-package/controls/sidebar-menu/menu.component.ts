@@ -11,6 +11,7 @@ import { BrowserDetector } from '../../services/browserDetector';
 export class MenuComponent implements OnChanges, AfterViewInit {
     @Input() menu: IMenu;
     @Input() isSingleMenu: boolean;
+
     @Output() onToggleExpand = new EventEmitter();
     @Output() onInitialized = new EventEmitter();
     menuItems: IMenuItem[];
