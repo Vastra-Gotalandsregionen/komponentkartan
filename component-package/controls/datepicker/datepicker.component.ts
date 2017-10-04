@@ -44,11 +44,6 @@ export class DatepickerComponent implements OnInit {
         this.yearMonths = this.updateDays(this.minDate, this.maxDate, this.yearMonths);
         this.setCurrentYearMonthOutput();
         this.setPreviousAndNextMonthNavigation();
-
-        this.selectedDateChanged.subscribe((date: Date) => {
-            this.setPreviousAndNextMonthNavigation();
-            this.selectedDayText = this.formatDate(date);
-        });
     }
 
     private formatDate(date: Date): string {
@@ -222,13 +217,15 @@ export class DatepickerComponent implements OnInit {
         return yearMonths;
     }
 
-    setSelectedDay(calendarDay: ICalendarDay) {
+    private setSelectedDay(calendarDay: ICalendarDay) {
 
         if (this.selectedCalendarDay) {
             this.selectedCalendarDay.selected = false;
         }
         calendarDay.selected = true;
         this.selectedCalendarDay = calendarDay;
+        this.setPreviousAndNextMonthNavigation();
+        this.selectedDayText = this.formatDate(calendarDay.day);
     }
 
     // UI functions
@@ -266,12 +263,11 @@ export class DatepickerComponent implements OnInit {
     onSelectedDate(currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
         const selectedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
 
-        if (selectedDate.disabled) {
-            return;
+        if (!selectedDate.disabled) {
+            this.setSelectedDay(selectedDate);
+            this.selectedDateChanged.emit(selectedDate.day);
+            this.isDatePickerVisible = false;
         }
-        this.setSelectedDay(selectedDate);
-        this.selectedDateChanged.emit(selectedDate.day);
-        this.isDatePickerVisible = false;
     }
 
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {

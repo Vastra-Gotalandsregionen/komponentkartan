@@ -246,9 +246,9 @@ div.datepicker__calendar__day--today:not(.datepicker__calendar__day--selected) {
     }
   }
   .datepicker__calendar__day {
-    width: 35px;
-    height: 35px;
-    line-height: 35px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
   }
   .datepicker__calendar__content {
     margin-left: 10px;
@@ -258,8 +258,8 @@ div.datepicker__calendar__day--today:not(.datepicker__calendar__day--selected) {
       border-collapse: separate;
     }
     td {
-      width: 34px;
-      height: 32px;
+      width: 36px;
+      height: 34px;
       left: 5px;
     }
   }

@@ -99,7 +99,6 @@ describe('[DatepickerComponent]', () => {
             currentMonth = 10;
             minDate = new Date(currentYear, currentMonth - 1, 15);
             maxDate = new Date(currentYear, currentMonth - 1, 27);
-            component = new DatepickerComponent(null);
             component.currentDate = new Date(currentYear, currentMonth - 1, 1);
             component.minDate = new Date(currentYear, currentMonth - 1, 15);
             component.maxDate = new Date(currentYear, currentMonth - 1, 27);
@@ -208,6 +207,15 @@ describe('[DatepickerComponent]', () => {
                     expect(component.selectedDateChanged.emit).toHaveBeenCalled();
                 });
             });
+
+            describe('and user clicks outside the calendar', () => {
+                beforeEach(() => {
+                    component.onOutsideClick({ target: {} } as Event)
+                });
+                it('the calendar is closed', () => {
+                    expect(component.isDatePickerVisible).toBe(false);
+                });
+            });
         });
 
 
@@ -238,11 +246,12 @@ describe('[DatepickerComponent]', () => {
             const year = 2017;
             const october = 9;
             component = new DatepickerComponent(null);
-            component.currentDate = new Date(year, october, 1);
             component.minDate = new Date(year, october - 1, 1);
             component.maxDate = new Date(year, october + 1, 30);
+            component.selectedDate = new Date(year, october, 1);
             component.ngOnInit();
         });
+
         it('can navigate to previous month', () => {
             expect(component.previousMonth).toBeTruthy();
         });
@@ -257,11 +266,11 @@ describe('[DatepickerComponent]', () => {
             });
 
             it('can navigate to previous month', () => {
-                //expect(component.previousMonth).toBeTruthy();
+                expect(component.previousMonth).toBeTruthy();
             });
 
             it('can not navigate to next month', () => {
-                //  expect(component.nextMonth).toBeFalsy();
+                expect(component.nextMonth).toBeFalsy();
             });
         });
 
@@ -278,12 +287,8 @@ describe('[DatepickerComponent]', () => {
                 expect(component.nextMonth).toBeTruthy();
             });
         });
-
-
-
-
     });
-    describe('direct function test', () => {
+    describe('correct css class assignment', () => {
         beforeEach(() => {
             component.yearMonths = [
                 {
