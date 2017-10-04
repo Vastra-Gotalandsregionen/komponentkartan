@@ -12,10 +12,38 @@ import { inject } from '@angular/core/testing';
 
 describe('[DatepickerComponent]', () => {
     let component: DatepickerComponent;
+    let fixture: ComponentFixture<DatepickerComponent>;
+    let rootElement: DebugElement;
+    let datepicker: DebugElement;
     let currentYear: number;
     let currentMonth: number;
     let minDate: Date;
     let maxDate: Date;
+
+    beforeEach((done) => {
+        TestBed.resetTestEnvironment();
+        TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+        TestBed.configureTestingModule({
+            declarations: [DatepickerComponent],
+            imports: [CommonModule]
+        });
+
+        TestBed.overrideComponent(DatepickerComponent, {
+            set: {
+                templateUrl: './datepicker.component.html'
+            }
+        });
+
+        TestBed.compileComponents().then(() => {
+            fixture = TestBed.createComponent(DatepickerComponent);
+            component = fixture.componentInstance;
+            rootElement = fixture.debugElement;
+            datepicker = rootElement.query(By.css('.datepicker'));
+            fixture.detectChanges();
+
+            done();
+        });
+    });
 
     describe('When initialized with default settings', () => {
         beforeEach(() => {
@@ -26,8 +54,6 @@ describe('[DatepickerComponent]', () => {
         });
 
         it('contains a yearmonth-model with current year', () => {
-
-            console.log(component.yearMonths.map(ym => ym.year)[0]);
             expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(new Date().getFullYear());
         });
 
@@ -35,9 +61,9 @@ describe('[DatepickerComponent]', () => {
             expect(component.yearMonths.filter(ym => ym.month === currentMonth).map(ym => ym.month)[0]).toEqual(currentMonth);
         });
 
-        // it('contains January in the year-month model', () => {
-        //     expect((component.yearMonths.filter(ym => ym.month === currentMonth)[0].month)).toBe(8);
-        // });
+        it('contains January in the year-month model', () => {
+            expect((component.yearMonths.filter(ym => ym.month === 1)[0].month)).toBe(1);
+        });
 
         it('contains right amount of weeks in month model', () => {
             const firstDayOfWeek = 1;
@@ -65,20 +91,6 @@ describe('[DatepickerComponent]', () => {
             expect(component.yearMonths.filter(ym => ym.year === ym.year)[0].weeks[lastWeekIndex - 1].days[firstDayInYearInWeekIndex].day).toEqual(new Date(currentYear, 1, 0));
         });
 
-        it('todays date is set in the calendar', () => {
-
-        });
-
-
-        describe('and selecting a day in the calendar ', () => {
-            it('the selected date is set in the component', () => {
-            });
-            it('the selected day closes the calendar', () => { });
-            it('the todays date is set in the calendar', () => { });
-            it('the selected date is set in the dropdown', () => { });
-            it('', () => { });
-        });
-
     });
 
     describe(' When initialized with currentYear 2017 and currentMonth October', () => {
@@ -87,12 +99,14 @@ describe('[DatepickerComponent]', () => {
             currentMonth = 10;
             minDate = new Date(currentYear, currentMonth - 1, 15);
             maxDate = new Date(currentYear, currentMonth - 1, 27);
-            component.currentDate = new Date(currentYear, currentMonth, 1);
+            component = new DatepickerComponent(null);
+            component.currentDate = new Date(currentYear, currentMonth - 1, 1);
+            component.minDate = new Date(currentYear, currentMonth - 1, 15);
+            component.maxDate = new Date(currentYear, currentMonth - 1, 27);
             component.ngOnInit();
         });
 
         it('contains a yearmonth-model with current year', () => {
-            console.log(component);
             expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(currentYear);
         });
 
@@ -128,9 +142,6 @@ describe('[DatepickerComponent]', () => {
         });
 
         it('contains Empty day in the First week of the month', () => {
-            console.log(currentYear);
-            console.log(currentMonth);
-            console.log(component.createWeeksAndDays(currentYear, currentMonth)[0].days);
             expect(component.createWeeksAndDays(currentYear, currentMonth)[0].days[2]).toBeNull(true);
         });
 
@@ -143,6 +154,7 @@ describe('[DatepickerComponent]', () => {
         });
 
         it('all days in october disabled=false', () => {
+            console.log(component.yearMonths);
             expect(component.createYearMonths(minDate, maxDate)[0].weeks[0].days[6].disabled as boolean).toBe(false);
             expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[0].disabled as boolean).toBe(false);
             expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[1].disabled as boolean).toBe(false);
@@ -162,7 +174,167 @@ describe('[DatepickerComponent]', () => {
             expect(component.updateDays(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[2].days[6].disabled).toBe(false);
             expect(component.updateDays(minDate, maxDate, component.createYearMonths(minDate, maxDate))[0].weeks[4].days[4].disabled).toBe(false);
         });
+
+        it('yearmonth shall only contain one month', () => {
+            expect(component.yearMonths.length).toBe(1);
+        });
+
+        it('the calendar is not visible', () => {
+            expect(component.isDatePickerVisible).toBe(false);
+        });
+
+
+        describe('and the datepicker is clicked', () => {
+
+            beforeEach(() => {
+                component.displayDatePicker();
+            });
+            it('the calendar is visible', () => {
+                expect(component.isDatePickerVisible).toBe(true);
+            });
+
+            describe('and selecting a day in the calendar ', () => {
+                beforeEach(() => {
+                    const spy = spyOn(component.selectedDateChanged, 'emit');
+                    component.onSelectedDate(0, 3, 1);
+                });
+                it('the selected date is set', () => {
+                    expect(component.yearMonths[0].weeks[3].days[1].selected).toBe(true);
+                });
+                it('the calendar is closed', () => {
+                    expect(component.isDatePickerVisible).toBe(false);
+                });
+                it('selectedDateChanged event is emitted', () => {
+                    expect(component.selectedDateChanged.emit).toHaveBeenCalled();
+                });
+            });
+        });
+
+
+        describe('when a date has been selected', () => {
+            beforeEach(() => {
+                component.onSelectedDate(0, 3, 2);
+            });
+
+            describe('and a new date is selected', () => {
+                beforeEach(() => {
+                    component.onSelectedDate(0, 3, 3);
+                });
+                it('the selected date is selected', () => {
+                    expect(component.yearMonths[0].weeks[3].days[3].selected).toBe(true);
+                });
+                it('the previous date is not selected', () => {
+                    expect(component.yearMonths[0].weeks[3].days[2].selected).toBe(false);
+                });
+            });
+
+        });
+
     });
+
+
+    describe(' When initialized with 3 months', () => {
+        beforeEach(() => {
+            const year = 2017;
+            const october = 9;
+            component = new DatepickerComponent(null);
+            component.currentDate = new Date(year, october, 1);
+            component.minDate = new Date(year, october - 1, 1);
+            component.maxDate = new Date(year, october + 1, 30);
+            component.ngOnInit();
+        });
+        it('can navigate to previous month', () => {
+            expect(component.previousMonth).toBeTruthy();
+        });
+
+        it('can navigate to next month', () => {
+            expect(component.nextMonth).toBeTruthy();
+        });
+
+        describe('and navigation to next month', () => {
+            beforeEach(() => {
+                component.onNextMonth();
+            });
+
+            it('can navigate to previous month', () => {
+                //expect(component.previousMonth).toBeTruthy();
+            });
+
+            it('can not navigate to next month', () => {
+                //  expect(component.nextMonth).toBeFalsy();
+            });
+        });
+
+        describe('and navigation to previous month', () => {
+            beforeEach(() => {
+                component.onPreviousMonth();
+            });
+
+            it('can not navigate to previous month', () => {
+                expect(component.previousMonth).toBeFalsy();
+            });
+
+            it('can navigate to next month', () => {
+                expect(component.nextMonth).toBeTruthy();
+            });
+        });
+
+
+
+
+    });
+    describe('direct function test', () => {
+        beforeEach(() => {
+            component.yearMonths = [
+                {
+                    year: 2017, month: 1, weeks: [
+                        {
+                            days: [
+                                { day: new Date(2017, 1, 1), disabled: true } as ICalendarDay,
+                                { day: new Date(2017, 1, 2), isCurrentDay: true } as ICalendarDay,
+                                { day: new Date(2017, 1, 3), selected: true } as ICalendarDay,
+                                { day: new Date(2017, 1, 4), disabled: false } as ICalendarDay
+                            ] as ICalendarDay[]
+                        } as ICalendarWeek
+                    ] as ICalendarWeek[]
+                } as ICalendarYearMonth
+            ] as ICalendarYearMonth[];
+            component.currentYearMonthIndex = 0;
+        });
+
+        describe('when checkDisabledDate is called', () => {
+
+            it('disabled date returns true', () => {
+                expect(component.checkDisabledDate(0, 0)).toBe(true);
+            });
+            it('enabled date returns false', () => {
+                expect(component.checkDisabledDate(0, 3)).toBe(false);
+            });
+        });
+
+        describe('when checkTodayDate is called', () => {
+            it('todays date returns true', () => {
+                expect(component.checkTodayDate(0, 1)).toBeTruthy();
+            });
+            it('other date returns false', () => {
+                expect(component.checkTodayDate(0, 0)).toBeFalsy();
+            });
+        });
+
+        describe('when checkSelectedDate is called', () => {
+            it('selected date returns true', () => {
+                expect(component.checkSelectedDate(0, 2)).toBeTruthy();
+            });
+            it('other date returns false', () => {
+                expect(component.checkSelectedDate(0, 0)).toBeFalsy();
+            });
+        });
+
+
+
+    });
+
+
 
 });
 

@@ -26,7 +26,7 @@ export class DatepickerComponent implements OnInit {
     currentYearMonthIndex: number;
     currentYearMonthOutput: Date;
     selectedDayText: any;
-    selectedDayIndexPosition: ICalendarDay;
+    selectedCalendarDay: ICalendarDay;
 
     constructor(protected elementRef: ElementRef) {
         this.currentDate = new Date();
@@ -198,7 +198,7 @@ export class DatepickerComponent implements OnInit {
 
                         const currentDatePosition = calendarDay.day.toDateString();
                         const currentselectedDate = this.selectedDate !== undefined ? this.selectedDate.toDateString() : this.selectedDate;
-                        const currentTodayDate = new Date().toDateString();
+                        const currentTodayDate = this.currentDate.toDateString();
 
                         // Set disabled dates
                         if (calendarDay.day < minDate || calendarDay.day > maxDate) {
@@ -207,8 +207,7 @@ export class DatepickerComponent implements OnInit {
 
                         // Set current selected date
                         if (currentselectedDate !== undefined && currentDatePosition === currentselectedDate) {
-                            calendarDay.marked = true;
-                            this.selectedDayIndexPosition = this.yearMonths[index].weeks[weekindex].days[dayindex];
+                            this.setSelectedDay(calendarDay);
                             this.currentYearMonthIndex = index;
                         }
 
@@ -223,12 +222,21 @@ export class DatepickerComponent implements OnInit {
         return yearMonths;
     }
 
+    setSelectedDay(calendarDay: ICalendarDay) {
+
+        if (this.selectedCalendarDay) {
+            this.selectedCalendarDay.selected = false;
+        }
+        calendarDay.selected = true;
+        this.selectedCalendarDay = calendarDay;
+    }
+
     // UI functions
 
     displayDatePicker() {
-        if(!this.disabled) {
-        this.isDatePickerVisible = true;
-    }
+        if (!this.disabled) {
+            this.isDatePickerVisible = true;
+        }
     }
 
     @HostListener('document:click', ['$event'])
@@ -256,15 +264,13 @@ export class DatepickerComponent implements OnInit {
     }
 
     onSelectedDate(currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
-        const date = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
-        if(date.disabled ) {
+        const selectedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
+
+        if (selectedDate.disabled) {
             return;
         }
-        this.selectedDayIndexPosition.marked = false;
-        this.selectedDayIndexPosition = date;
-        date.marked = true;
-
-        this.selectedDateChanged.emit(date.day);
+        this.setSelectedDay(selectedDate);
+        this.selectedDateChanged.emit(selectedDate.day);
         this.isDatePickerVisible = false;
     }
 
@@ -273,16 +279,14 @@ export class DatepickerComponent implements OnInit {
     }
 
     checkTodayDate(weekIndex: number, dayIndex: number): boolean {
-        if (this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null) {
-            return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].isCurrentDay;
-        }
+        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].isCurrentDay;
+
     }
 
     checkSelectedDate(weekIndex: number, dayIndex: number): boolean {
-        if (this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null) {
-            return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].marked;
-        }
+        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].selected;
     }
+
 
     setPreviousAndNextMonthNavigation() {
         const minMonth = this.minDate.getMonth() + 1;

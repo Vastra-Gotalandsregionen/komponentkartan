@@ -1,6 +1,6 @@
 export interface ICalendarDay {
     day: Date;
-    marked: boolean;
+    selected: boolean;
     isCurrentDay: boolean;
     disabled: boolean;
 }

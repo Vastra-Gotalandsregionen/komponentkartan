@@ -18,7 +18,7 @@ $dropdown-width--small: 100px;
     cursor: default;
     transition: background-color 0.6s linear;
   }
-  .datepicker__calendar__selector  {
+  .datepicker__calendar__selector {
     padding-left: $margin--slim;
     padding-top: 2px;
     vertical-align: middle;
@@ -195,7 +195,7 @@ $dropdown-width--small: 100px;
   }
 }
 
-.datepicker__calendar__day{  
+.datepicker__calendar__day {
   border-radius: 50%;
   border-width: 1px;
   border-style: solid;
@@ -216,43 +216,40 @@ $dropdown-width--small: 100px;
     cursor: default;
     &:hover {
       background-color: $background-color--content;
-    }    
+    }
   }
 }
 
- div.datepicker__calendar__day--today {
- @extend .border-color--primary;
+div.datepicker__calendar__day--today:not(.datepicker__calendar__day--selected) {
+  @extend .border-color--primary;
   background-color: $background-color--content;
 }
 
 .datepicker__calendar__day--selected {
-  @extend .background-color--primary;  
-  @extend .border-color--primary;  
+  @extend .background-color--primary;
+  @extend .border-color--primary;
   color: $text-color--light;
 }
 
 @media screen and (min-width: $desktop-width--medium) {
   .datepicker__dropdown {
-    width: $dropdown-width--medium--extended;    
+    width: $dropdown-width--medium--extended;
     .datepicker__calendar__selector {
       width: calc(#{$dropdown-width--medium--extended} - #{$icon-width} - #{$border--single} - #{$border--single});
     }
   }
- 
   .datepicker__calendar {
     width: 270px;
     height: 320px;
-    .datepicker__calendar__header{
+    .datepicker__calendar__header {
       width: 270px;
     }
   }
-
-  .datepicker__calendar__day{
+  .datepicker__calendar__day {
     width: 35px;
     height: 35px;
     line-height: 35px;
   }
-
   .datepicker__calendar__content {
     margin-left: 10px;
     text-align: center;
@@ -266,7 +263,7 @@ $dropdown-width--small: 100px;
       left: 5px;
     }
   }
-  .datepicker__calendar__header__next-year {    
+  .datepicker__calendar__header__next-year {
     &:after {
       left: 233px;
     }
