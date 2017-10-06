@@ -1,6 +1,8 @@
 <div class="datepicker" (click)="displayDatePicker()" [ngClass]="{'datepicker--open' : true}">
   <div class="datepicker__dropdown">
-    <span class="datepicker__calendar__selector" title="Välj månad">{{selectedDayText}}</span>
+    <span *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date: selectedDateFormat}}</span>
+    <span *ngIf="!selectedDate" class="datepicker__calendar__selector" title="Välj månad">Välj månad</span>
+
     <div *ngIf="isDatePickerVisible" class="datepicker__calendar">
       <div class="datepicker__calendar__header">
         <div class="datepicker__calendar__header__previous-year" (click)="onPreviousMonth()" [ngClass]="{'disabled': !previousMonth}"></div>
