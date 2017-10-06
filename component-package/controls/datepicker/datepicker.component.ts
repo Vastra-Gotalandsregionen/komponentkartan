@@ -28,7 +28,6 @@ export class DatepickerComponent implements OnInit {
     previousMonth: boolean;
     currentYearMonthIndex: number;
     currentYearMonthOutput: Date;
-    // selectedDayText: any;
     selectedCalendarDay: ICalendarDay;
 
     constructor(protected elementRef: ElementRef) {
@@ -39,7 +38,6 @@ export class DatepickerComponent implements OnInit {
         this.currentYearMonthIndex = 0;
         this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
         this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
-        // this.selectedDayText = 'Välj datum';
     };
 
     ngOnInit() {
@@ -48,15 +46,6 @@ export class DatepickerComponent implements OnInit {
         this.setCurrentYearMonthOutput();
         this.setPreviousAndNextMonthNavigation();
     }
-
-    // private formatDate(date: Date): string {
-    //     let day: String = '';
-    //     if (date.getDate() < 10) {
-    //         day = '0' + date.getDate().toString();
-    //     } else { day = date.getDate().toString(); }
-
-    //     return day + ' ' + (date.getMonth() + 1).toString() + ' ' + date.getFullYear().toString();
-    // }
 
     setCurrentYearMonthOutput() {
         this.currentYearMonthOutput = new Date(this.yearMonths[this.currentYearMonthIndex].year, this.yearMonths[this.currentYearMonthIndex].month - 1);
@@ -229,7 +218,6 @@ export class DatepickerComponent implements OnInit {
         calendarDay.selected = true;
         this.selectedCalendarDay = calendarDay;
         this.setPreviousAndNextMonthNavigation();
-        // this.selectedDayText = this.formatDate(calendarDay.day);
     }
 
     // UI functions

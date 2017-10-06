@@ -47,14 +47,31 @@
         <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate"></vgr-datepicker>
       </div>
       <div>
-        <span>Valt datum (yyyy MMM dd): </span>
-        <p>{{datepicker_selectedDate | date : 'yyyy MMM dd'}}</p>
+        <span>Valt datum default: </span>
+        <p>{{datepicker_selectedDate | date : 'yyyy MM dd'}}</p>
+      </div>
+    </div>
+    <div class="komponentkarta-component row-layout row-layout--padded">
+      <div>
+        <p>Format yyyy-MMM-dd</p>
+        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate" [selectedDateFormat]="'yyyy-MMM-dd'"></vgr-datepicker>
       </div>
       <div>
-        <span>Valt datum (dd MMM yyyy): </span>
+        <span>Valt datum: </span>
+        <p>{{datepicker_selectedDate | date : 'dd MMMM yyyy'}}</p>
+      </div>
+    </div>
+    <div class="komponentkarta-component row-layout row-layout--padded">
+      <div>
+        <p>Format yyyy på tooltip</p>
+        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate" [tooltipDateFormat]="'yyyy'"></vgr-datepicker>
+      </div>
+      <div>
+        <span>Valt datum: </span>
         <p>{{datepicker_selectedDate | date : 'dd MMM yyyy'}}</p>
       </div>
     </div>
+
     <div class="komponentkarta-component row-layout row-layout--padded">
       <div>
         <p>Avstängd datepicker</p>
