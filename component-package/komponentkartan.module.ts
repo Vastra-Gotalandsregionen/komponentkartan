@@ -3,6 +3,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 // Common
 import { ModalService } from './services/modalService';
@@ -39,7 +40,7 @@ import { InputComponent } from './controls/input/input.component';
 import { CardComponent } from './controls/card/card.component';
 import { CardSectionComponent } from './controls/card/cardSection.component';
 import { TitleValueComponent } from './controls/titleValue/titleValue.component';
-import { LoaderComponent } from './controls/loader/loader.component';
+import { SpinnerComponent } from './controls/spinner/spinner.component';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -50,7 +51,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         BrowserModule,
         FormsModule,
         RouterModule,
-        PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
+        PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
+        BrowserAnimationsModule
     ],
 
     declarations: [
@@ -81,7 +83,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CardComponent,
         CardSectionComponent,
         TitleValueComponent,
-        LoaderComponent
+        SpinnerComponent
     ],
     exports: [
         SafePipe,
@@ -112,7 +114,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CardComponent,
         CardSectionComponent,
         TitleValueComponent,
-        LoaderComponent
+        SpinnerComponent
     ],
     providers: [ModalService, ExpandableContainerJqeuryHelper]
 })

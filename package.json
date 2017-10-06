@@ -15,6 +15,7 @@
         "test-ci": "karma start ./karma.conf.server.js"
     },
     "dependencies": {
+        "@angular/animations": "^4.4.4",
         "@angular/common": "^4.3.1",
         "@angular/compiler": "^4.3.1",
         "@angular/core": "^4.3.1",

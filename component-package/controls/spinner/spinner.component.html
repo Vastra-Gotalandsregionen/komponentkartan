@@ -1,0 +1,9 @@
+<div class="spinner" [@spinning]="spinningState" (@spinning.done)="rotationDone()" [ngClass]="{'spinner--small':size==='small', 'spinner--large':size==='large'}">
+</div>
+
+<ul>
+  <li>Spinning: {{spinning}}</li>
+  <li>Rotation in progress: {{rotationInProgress}}</li>
+  <li>Spinning state: {{spinningState}}</li>
+  <li>Size: {{size}}</li>
+</ul>

@@ -2,7 +2,7 @@
 
 import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID } from '@angular/core'
 import { BrowserModule, Title } from '@angular/platform-browser'
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
 
 import { KomponentkartanApplicationComponent } from './app.component';
@@ -27,7 +27,8 @@ import { appRoutes } from './routes'
         KomponentkartanModule,
         BrowserModule,
         FormsModule,
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes),
+        BrowserAnimationsModule
     ],
     declarations: [
         KomponentkartanApplicationComponent,
