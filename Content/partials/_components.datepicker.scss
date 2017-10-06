@@ -110,71 +110,57 @@ $dropdown-width--small: 100px;
   }
 }
 
-.datepicker__calendar__header__previous-year {
+.datepicker__calendar__header__navigation {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  margin-right: auto;
-  margin-left: 10px;
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
+  margin-top: 14px;
   font-size: 23px;
   font-family: Consolas;
   margin-top: 14px;
-  &:hover {
+
+  &:hover:not(.disabled) {
     @extend .background-color--secondary;
     font-weight: bold;
     color: $text-color--light;
   }
   &.disabled {
-    &:hover {
-      @extend .background-color--primary;
-      font-weight: normal;
-    }
     color: $control-color--disabled;
     cursor: default;
   }
+
   &:after {
-    content: "<";
     width: 28px;
     height: 28px;
-    font-size: 23px;
-    font-family: Consolas;
     display: inline-block;
     position: absolute;
+  }
+
+}
+
+.datepicker__calendar__header__previous-year {
+    @extend .datepicker__calendar__header__navigation;
+    margin-right: auto;
+    margin-left: 10px;
+
+    
+  &:after {
+    content: "<";
     top: 10px;
     left: 10px;
   }
 }
 
 .datepicker__calendar__header__next-year {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  margin-left: auto;
-  margin-right: 10px;
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
-  margin-top: 14px;
-  &:hover {
-    @extend .background-color--secondary;
-    font-weight: bold;
-    color: $text-color--light;
-  }
-  &.disabled {
-    color: $control-color--disabled;
-    cursor: default;
-  }
-  &:after {
+    @extend .datepicker__calendar__header__navigation;  
+    margin-right: 10px;
+    margin-left: auto;
+
+    &:after {
     content: ">";
-    width: 28px;
-    height: 28px;
-    font-size: 23px;
-    font-family: Consolas;
-    display: inline-block;
-    position: absolute;
     top: 10px;
     left: 213px;
   }
