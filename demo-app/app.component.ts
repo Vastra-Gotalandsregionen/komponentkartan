@@ -358,6 +358,30 @@ export class KomponentkartanApplicationComponent {
                             { title: 'Inputfält', url: '/inputFields' } as IMenuItem,
                             { title: 'Laddningssnurra', url: '/loader' } as IMenuItem,
                             { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem,
+                            {
+                                title: 'Parent', menuItems: [
+                                    { title: 'firstChild', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'child', url: '/child' } as IMenuItem,
+                                    { title: 'lastChild', url: '/child' } as IMenuItem
+                                ] as IMenuItem[]
+                            } as IMenuItem,
                         ] as IMenuItem[]
                     } as IMenuGroup
                 ] as IMenuGroup[]

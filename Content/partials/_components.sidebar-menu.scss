@@ -147,6 +147,7 @@ vgr-sidebar-menu {
 .menu-subItems__show {
   max-height: 1000px;
   transition: max-height 1s ease;
+  overflow: visible;
   a {
     opacity: 1;
     transition: opacity 0.8s ease;
