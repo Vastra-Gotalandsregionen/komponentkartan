@@ -160,6 +160,7 @@ export class SidebarMenuComponent implements AfterViewInit {
 
         this.router.events.forEach((event) => {
             if (event instanceof NavigationEnd) {
+                const url = (event as NavigationEnd).url;
                 setTimeout(() => {
                     const newSelectedMenu = this.getSelectedMenu();
                     if (newSelectedMenu.length === 0) {
@@ -167,7 +168,6 @@ export class SidebarMenuComponent implements AfterViewInit {
                         this.selectedMenuChanged.emit('neutral');
                         this.selectedMenu = undefined;
                     } else {
-                        // Don't scroll if the selected menu has not changed
                         const newSelectedMenuComponent = this.getMenuComponent(newSelectedMenu);
                         if (newSelectedMenuComponent !== null) {
                             this.selectedMenuChanged.emit(newSelectedMenuComponent.menu.title);
@@ -175,9 +175,17 @@ export class SidebarMenuComponent implements AfterViewInit {
                             // Expand menu automatically when selected
                             if (!newSelectedMenuComponent.menu.expanded) {
                                 newSelectedMenuComponent.toggleExpand();
+                                newSelectedMenuComponent.menuItems.forEach(menuItem => {
+                                    if (menuItem.menuItems) {
+                                        const selectedChildren = menuItem.menuItems.filter(x => x.url === url);
+                                        if (selectedChildren.length > 0) {
+                                            menuItem.expanded = true;
+                                        }
+                                    }
+                                });
                             }
                         }
-
+                        // Don't scroll if the selected menu has not changed
                         if (!newSelectedMenu.is(this.selectedMenu)) {
                             this.scrollToMenu(newSelectedMenu);
                         }

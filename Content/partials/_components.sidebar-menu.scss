@@ -28,7 +28,7 @@ vgr-sidebar-menu {
 }
 
 .sidebar-menu--single-menu {
-  height: 100%;
+  background-color: white;
   .menu {
     flex-grow: 1;
     display: flex;
@@ -37,7 +37,6 @@ vgr-sidebar-menu {
     background: white;
     .menu__item-list {
       border-bottom: none;
-      height: 100%;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -48,7 +47,6 @@ vgr-sidebar-menu {
     }
   }
   vgr-menu {
-    height: 100%;
     display: flex;
     flex-direction: column;
   }
