@@ -12,7 +12,6 @@ import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConf
 export abstract class DropdownBaseComponent {
     @Input() selectAllSelectedText: string;
     @Input() selectAllItemText: string;
-    @Input() filterProperties: string[];
 
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
