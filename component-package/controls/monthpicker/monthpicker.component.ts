@@ -19,9 +19,9 @@ export class MonthpickerComponent implements OnInit {
     @Input() maxDate: Date;
     @Input() preselectedDate?: Date;
 
-    @Input() displayedYear: ICalendarYear;
-    @Input() previousYear: ICalendarYear;
-    @Input() nextYear: ICalendarYear;
+    displayedYear: ICalendarYear;
+    previousYear: ICalendarYear;
+    nextYear: ICalendarYear;
 
     selectedDate?: Date;
     years: ICalendarYear[];
