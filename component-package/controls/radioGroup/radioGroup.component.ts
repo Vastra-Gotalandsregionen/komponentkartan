@@ -11,12 +11,11 @@ export class RadioGroupComponent implements OnChanges {
     @HostBinding('attr.role') role = 'radiogroup';
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() options: ISelectableItem[];
-    @Input() name: string;
     @Input() noSelection: boolean;
     @Output() selectedChanged: EventEmitter<ISelectableItem> = new EventEmitter<ISelectableItem>();
 
     constructor() {
-        this.name = 'group';
+
     }
 
     ngOnChanges() {
@@ -32,7 +31,7 @@ export class RadioGroupComponent implements OnChanges {
     }
 
     optionClicked(option: ISelectableItem) {
-        if (option.disabled || option.selected) {
+        if (this.disabled || option.disabled || option.selected) {
             return;
         }
 
