@@ -197,7 +197,7 @@ export class SidebarMenuComponent implements AfterViewInit {
 
     private setupJQuery() {
         // Menu-item-marker
-        $('.menu__item-list > li').hover(function () {
+        $('.menu__item-list > li').not('.menu__footer').hover(function () {
             if (!$(this).hasClass('menu__expander')) {
                 $('.menu-item--selected').removeClass('menu-item--marked');
             }
