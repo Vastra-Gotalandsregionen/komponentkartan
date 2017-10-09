@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   templateUrl: './spinner.component.html',
   animations: [trigger('spinning', [
     transition('stopped=>spinning',
-      animate('2s', keyframes([
+      animate('1.2s ease-out', keyframes([
         style({ transform: 'rotate(-45deg)', offset: 0 }),
         style({ transform: 'rotate(315deg)', offset: 1 })
       ])))
