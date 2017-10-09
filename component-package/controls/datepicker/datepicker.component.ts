@@ -259,6 +259,7 @@ export class DatepickerComponent implements OnInit {
             this.setSelectedDay(selectedDate);
             this.selectedDateChanged.emit(selectedDate.day);
             this.isDatePickerVisible = false;
+            this.selectedDate = selectedDate.day;
         }
     }
 

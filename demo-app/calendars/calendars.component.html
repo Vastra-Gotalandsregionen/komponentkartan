@@ -44,17 +44,17 @@
     <div class="komponentkarta-component row-layout row-layout--padded">
       <div>
         <p>Default formatering</p>
-        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate"></vgr-datepicker>
+        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDateNew=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max"></vgr-datepicker>
       </div>
       <div>
         <span>Valt datum default: </span>
-        <p>{{datepicker_selectedDate | date : 'yyyy MM dd'}}</p>
+        <p>{{datepicker_selectedDateNew | date : 'yyyy MM dd'}}</p>
       </div>
     </div>
     <div class="komponentkarta-component row-layout row-layout--padded">
       <div>
-        <p>Format yyyy-MMM-dd</p>
-        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate" [selectedDateFormat]="'yyyy-MMM-dd'"></vgr-datepicker>
+        <p>Format yyyy MMM dd</p>
+        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate" [selectedDateFormat]="'yyyy MMM dd'"></vgr-datepicker>
       </div>
       <div>
         <span>Valt datum: </span>
