@@ -5,16 +5,10 @@
   border: solid 7px #dbdbdb;
   border-top: solid 7px #314152;
   border-radius: 50%;
-}
-
-.spinner.spinner--large {
-  width: 100px;
-  height: 100px;
-  border: double 15px transparent;
-}
-
-.spinner.spinner--small {
-  width: 30px;
-  height: 30px;
-  border: double 5px transparent;
+  &.spinner--small {
+    width: 22px;
+    height: 22px;
+    border: solid 4px #dbdbdb;
+    border-top: solid 4px #314152;
+  }
 }

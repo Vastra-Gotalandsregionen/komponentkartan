@@ -2,26 +2,25 @@
   <vgr-page-header [title]="'Demo-lista'"></vgr-page-header>
   <div class="komponentkarta-components">
     <div>
-      <vgr-spinner [spinning]="actionInProgress"></vgr-spinner>
       <vgr-spinner [spinning]="actionInProgress" [size]="'small'"></vgr-spinner>
       <vgr-spinner [spinning]="actionInProgress" [size]="'large'"></vgr-spinner>
-      <input type="button" (click)="actionInProgress=!actionInProgress" [value]="buttonText" size="20"/>
-  </div>
+      <input type="button" (click)="actionInProgress=!actionInProgress" [value]="buttonText" size="20" />
+    </div>
     <div>
       <br/>
       <h2>Konfiguration</h2>
       <table class="property-table">
         <tr>
-            <th>Property</th>
-            <th>Beskrivning</th>
-            <th>Exempel</th>
+          <th>Property</th>
+          <th>Beskrivning</th>
+          <th>Exempel</th>
         </tr>
         <tr>
-            <td>@Input speed: number</td>
-            <td>Sätter hastigheten på snurran</td>
-            <td>[speed]="1"</td>
-        </tr>         
+          <td>@Input speed: number</td>
+          <td>Sätter hastigheten på snurran</td>
+          <td>[speed]="1"</td>
+        </tr>
       </table>
     </div>
-  </div>  
+  </div>
 </div>
