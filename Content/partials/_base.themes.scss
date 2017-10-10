@@ -27,16 +27,16 @@
       #{$property}: $primary-color--green;
     }
     &.theme--neutral {
-      #{$property}: $primary-color--default !important;
+      #{$property}: $primary-color--default;
     }
     &.theme--blue {
-      #{$property}: $primary-color--blue !important;
+      #{$property}: $primary-color--blue;
     }
     &.theme--red {
-      #{$property}: $primary-color--red !important;
+      #{$property}: $primary-color--red;
     }
     &.theme--green {
-      #{$property}: $primary-color--green !important;
+      #{$property}: $primary-color--green;
     }
   }
   .#{$property}--secondary {
@@ -54,16 +54,16 @@
       #{$property}: $secondary-color--green;
     }
     &.theme--neutral {
-      #{$property}: $secondary-color--default !important;
+      #{$property}: $secondary-color--default;
     }
     &.theme--blue {
-      #{$property}: $secondary-color--blue !important;
+      #{$property}: $secondary-color--blue;
     }
     &.theme--red {
-      #{$property}: $secondary-color--red !important;
+      #{$property}: $secondary-color--red;
     }
     &.theme--green {
-      #{$property}: $secondary-color--green !important;
+      #{$property}: $secondary-color--green;
     }
   }
 }
