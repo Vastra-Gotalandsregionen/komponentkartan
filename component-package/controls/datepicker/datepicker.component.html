@@ -1,7 +1,7 @@
 <div class="datepicker" (click)="displayDatePicker()" [ngClass]="{'datepicker--open' : true}">
   <div class="datepicker__dropdown">
     <span *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date: selectedDateFormat}}</span>
-    <span *ngIf="!selectedDate" class="datepicker__calendar__selector" title="Välj datrum">Välj datum</span>
+    <span *ngIf="!selectedDate" class="datepicker__calendar__selector" title="Välj datum">Välj datum</span>
 
     <div *ngIf="isDatePickerVisible" class="datepicker__calendar">
       <div class="datepicker__calendar__header">
