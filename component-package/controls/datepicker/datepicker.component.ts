@@ -26,7 +26,7 @@ export class DatepickerComponent implements OnInit {
     isDatePickerVisible: boolean;
     nextMonth: boolean;
     previousMonth: boolean;
-    currentYearMonthIndex: number;
+    currentYearMonthIndex: number = 0;
     currentYearMonthOutput: Date;
     selectedCalendarDay: ICalendarDay;
 
@@ -35,7 +35,6 @@ export class DatepickerComponent implements OnInit {
         this.isDatePickerVisible = false;
         this.nextMonth = true;
         this.previousMonth = true;
-        this.currentYearMonthIndex = 0;
         this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
         this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
     };
@@ -202,6 +201,9 @@ export class DatepickerComponent implements OnInit {
                         // Set today's date
                         if (currentDatePosition === currentTodayDate) {
                             calendarDay.isCurrentDay = true;
+                            if(this.selectedDate === null || this.selectedDate === undefined) {                                
+                                this.currentYearMonthIndex = index;
+                            }
                         }
                     }
                 });

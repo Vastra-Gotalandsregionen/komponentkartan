@@ -54,7 +54,7 @@ describe('[DatepickerComponent]', () => {
         });
 
         it('contains a yearmonth-model with current year', () => {
-            expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(new Date().getFullYear());
+            expect(component.yearMonths.map(ym => ym.year)[0]).toEqual(currentYear);
         });
 
         it('contains the current month in the year-month model', () => {
@@ -64,6 +64,13 @@ describe('[DatepickerComponent]', () => {
         it('contains January in the year-month model', () => {
             expect((component.yearMonths.filter(ym => ym.month === 1)[0].month)).toBe(1);
         });
+
+        it('currentYearMonthIndex is set with todays date', () => {            
+            expect(component.yearMonths[component.currentYearMonthIndex].year).toBe(currentYear);
+            expect(component.yearMonths[component.currentYearMonthIndex].month).toBe(currentMonth+1);
+        });
+
+
 
         it('contains right amount of weeks in month model', () => {
             const firstDayOfWeek = 1;
