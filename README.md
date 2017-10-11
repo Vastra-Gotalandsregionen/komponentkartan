@@ -1,7 +1,7 @@
 # Komponentkartan
 <!-- Badges section here. -->
-[![npm](https://img.shields.io/npm/v/vgr-komponentkartan.svg)][npm-badge-url]
-[![npm](https://img.shields.io/npm/v/vgr-komponentkartan/demo.svg)][npm-badge-url]
+![npm](https://img.shields.io/npm/v/vgr-komponentkartan.svg)
+![npm](https://img.shields.io/npm/v/vgr-komponentkartan/demo.svg)
 
 Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular 4
 
