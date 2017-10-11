@@ -38,11 +38,10 @@ describe('TextButtonComponent', () => {
         });
     });
     describe('When component is initialized', () => {
-        var lockButtonElement: DebugElement;
+        let lockButtonElement: DebugElement;
         beforeEach(() => {
             lockButtonElement = rootElement.query(By.css('.lock-button'));
-            spyOn(component.onLocked, 'emit');
-            spyOn(component.onUnlocked, 'emit');
+            spyOn(component.lockChanged, 'emit');
             component.unlocked = false;
         });
         it('button is enabled', () => {
@@ -55,9 +54,9 @@ describe('TextButtonComponent', () => {
             expect(lockButtonElement.classes['button--unlocked']).toBeFalsy();
         });
         describe('and button is clicked', () => {
-            it('an onUnlocked event is triggered', () => {
+            it('a lockChanged Event is triggered', () => {
                 lockButtonElement.triggerEventHandler('click', {});
-                expect(component.onUnlocked.emit).toHaveBeenCalled();
+                expect(component.lockChanged.emit).toHaveBeenCalledWith(false);
             });
             it('button is unlocked', () => {
                 lockButtonElement.triggerEventHandler('click', {});
@@ -65,9 +64,9 @@ describe('TextButtonComponent', () => {
             });
         });
         describe('and space is pressed', () => {
-            it('an onUnlocked event is triggered', () => {
+            it('a lockChanged Event is triggered', () => {
                 lockButtonElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
-                expect(component.onUnlocked.emit).toHaveBeenCalled();
+                expect(component.lockChanged.emit).toHaveBeenCalledWith(false);
             });
             it('button is unlocked', () => {
                 lockButtonElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
@@ -75,9 +74,9 @@ describe('TextButtonComponent', () => {
             });
         });
         describe('and Enter is pressed', () => {
-            it('an onUnlocked event is triggered', () => {
+            it('a lockChanged Event is triggered', () => {
                 lockButtonElement.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
-                expect(component.onUnlocked.emit).toHaveBeenCalled();
+                expect(component.lockChanged.emit).toHaveBeenCalledWith(false);
             });
             it('button is unlocked', () => {
                 lockButtonElement.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
@@ -86,9 +85,9 @@ describe('TextButtonComponent', () => {
         });
 
         describe('and a letter is pressed', () => {
-            it('an onUnlocked event is triggered', () => {
+            it('a lockChangedEvent is triggered', () => {
                 lockButtonElement.triggerEventHandler('keydown', { keyCode: 162 } as KeyboardEvent);
-                expect(component.onUnlocked.emit).toHaveBeenCalledTimes(0);
+                expect(component.lockChanged.emit).toHaveBeenCalledTimes(0);
             });
             it('button is not unlocked', () => {
                 lockButtonElement.triggerEventHandler('keydown', { keyCode: 162 } as KeyboardEvent);
@@ -102,9 +101,9 @@ describe('TextButtonComponent', () => {
                 fixture.detectChanges();
             });
             describe('and button is clicked', () => {
-                it('an onLocked event is triggered', () => {
+                it('a lockChanged event is triggered', () => {
                     lockButtonElement.triggerEventHandler('click', {});
-                    expect(component.onLocked.emit).toHaveBeenCalled();
+                    expect(component.lockChanged.emit).toHaveBeenCalledWith(true);
                 });
                 it('button is locked', () => {
                     lockButtonElement.triggerEventHandler('click', {});
@@ -112,9 +111,9 @@ describe('TextButtonComponent', () => {
                 });
             });
             describe('and space is pressed', () => {
-                it('an onLocked event is triggered', () => {
+                it('a lockChanged event is triggered', () => {
                     lockButtonElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
-                    expect(component.onLocked.emit).toHaveBeenCalled();
+                    expect(component.lockChanged.emit).toHaveBeenCalledWith(true);
                 });
                 it('button is locked', () => {
                     lockButtonElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
@@ -122,9 +121,9 @@ describe('TextButtonComponent', () => {
                 });
             });
             describe('and Enter is pressed', () => {
-                it('an onLocked event is triggered', () => {
+                it('a lockChanged event is triggered', () => {
                     lockButtonElement.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
-                    expect(component.onLocked.emit).toHaveBeenCalled();
+                    expect(component.lockChanged.emit).toHaveBeenCalledWith(true);
                 });
                 it('button is locked', () => {
                     lockButtonElement.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
@@ -132,9 +131,9 @@ describe('TextButtonComponent', () => {
                 });
             });
             describe('and a letter is pressed', () => {
-                it('no onLocked event is triggered', () => {
+                it('a lockChanged event is triggered', () => {
                     lockButtonElement.triggerEventHandler('keydown', { keyCode: 168 } as KeyboardEvent);
-                    expect(component.onLocked.emit).toHaveBeenCalledTimes(0);
+                    expect(component.lockChanged.emit).toHaveBeenCalledTimes(0);
                 });
                 it('button is not locked', () => {
                     lockButtonElement.triggerEventHandler('keydown', { keyCode: 168 } as KeyboardEvent);
@@ -155,13 +154,9 @@ describe('TextButtonComponent', () => {
                 expect(lockButtonElement.nativeElement.attributes.tabIndex.value).toBe('-1');
             });
             describe('and button is clicked', () => {
-                it('no onLocked event is triggered', () => {
+                it('no lockChanged event is triggered', () => {
                     lockButtonElement.triggerEventHandler('click', null);
-                    expect(component.onLocked.emit).toHaveBeenCalledTimes(0);
-                });
-                it('no onUnlocked event is triggered', () => {
-                    lockButtonElement.triggerEventHandler('click', null);
-                    expect(component.onUnlocked.emit).toHaveBeenCalledTimes(0);
+                    expect(component.lockChanged.emit).toHaveBeenCalledTimes(0);
                 });
             });
         });

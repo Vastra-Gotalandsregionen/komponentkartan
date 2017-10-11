@@ -8,11 +8,10 @@ import { Component, Input, EventEmitter, Output } from '@angular/core'
 export class LockButtonComponent {
     @Input() disabled: boolean;
     @Input() unlocked: boolean;
-    @Output() onLocked = new EventEmitter<string>();
-    @Output() onUnlocked = new EventEmitter<string>();
-
-
-
+    @Output() lockChanged = new EventEmitter<boolean>();
+    get locked(): boolean {
+        return !this.unlocked;
+    }
     onClick(event: any): void {
         event.cancelBubble = true;
         if (!this.disabled) {
@@ -26,12 +25,12 @@ export class LockButtonComponent {
 
     lock() {
         this.unlocked = false;
-        this.onLocked.emit();
+        this.lockChanged.emit(this.locked);
     }
 
     unlock() {
         this.unlocked = true;
-        this.onUnlocked.emit();
+        this.lockChanged.emit(this.locked);
     }
 
     keyPressed(event: KeyboardEvent): void {
