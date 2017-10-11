@@ -1,49 +1,30 @@
 # Komponentkartan
+<!-- Badges section here. -->
+[![npm](https://img.shields.io/npm/v/vgr-komponentkartan.svg)][npm-badge-url]
+[![npm](https://img.shields.io/npm/v/vgr-komponentkartan/demo.svg)][npm-badge-url]
 
 Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular 4
 
 ## Komma igång
 
 ### 0. Förutsättningar
-Komponentkartan förutsätter att Angular är konfigurerat. Se [Demoprojektet](https://github.com/Vastra-Gotalandsregionen/komponentkartan-demo) för en exempeluppsättning.
+Se [Demoprojektet]https://github.com/Vastra-Gotalandsregionen/komponentkartan-demo) för en exempeluppsättning.
 
 ### 1. Installera vgr-komponentkartan via **npm**
 ```npm
 npm install vgr-komponentkartan
 ```
 
-### 2a (Om du använder SASS)
-I din SCSS-fil, importera komponentkartan.
-```css
-@import "../node_modules/vgr-komponentkartan/Content/komponentkartan.scss";
-```
-
-### 2b (Om du inte använder SASS)
-I index.html (eller liknande)
-```html
-    <LINK href="node_modules/vgr-komponentkartan/Content/komponentkartan.css" rel="stylesheet" type="text/css">
-```
-
-### 3 Konfigurera JQuery.Scrollbar
-För närvarande används [JQuery.Scrollbar](https://github.com/gromo/jquery.scrollbar), en JQuery-plugin för att hantera scrollning i komponenterna. Detta medför ett beroende till JQuery. Dettta innebär att du måste inkludera JQuery samt JQuery.Scrollbar i index.html.
-
-Detta är något vi hoppas undvika i framtida releaser.
-
-```html
-
-<LINK href="node_modules/jquery.scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css">
-<script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
-<script src="node_modules/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-```
-
 ## Kod
-Koden är skriven i html, typescript och Sass.
+Skriven i html, typescript och Sass.
+
+### Namngivning av komponenter och dess egenskaper
+...
 
 ### Tester
-Samtliga komponenter är täckta av tester via Jasmine.
+Samtliga komponenter är och ska vara täckta av tester via Jasmine.
 
 Testerna är uppdelade i två typer, tester med Angular och tester utan Angular. Tester **med** Angular benämns *komponent*.**angular**.spec.ts. Tester **utan** Angular namnges endast med *komponent*.spec.ts
-
 
 ## Byggt med
 
@@ -58,6 +39,19 @@ Testerna är uppdelade i två typer, tester med Angular och tester utan Angular.
 
 Vi använder [SemVer](http://semver.org/) för versionering.
 
+### Senaste stabila version
+Den senaste stabila versionen hämtas automatiskt via
+```npm
+npm install vgr-komponentkartan
+```
+
+### Senaste demo version
+Den senaste demo versionen (OBS! Ej för produktion) hämtas via
+```npm
+npm install vgr-komponentkartan@demo
+```
+
+Demoversioner är alltid märkta med "rc", dvs x.y.z-rc1, x.y.z-rc2 osv.
 ## Författare
 VGR IT
 
