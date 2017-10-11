@@ -1,6 +1,6 @@
 <div class="card-section__header" (click)="expanded = !expanded">
     <h2 class="noselect">{{title}}</h2>
-    <h4 class="card-section__header__subtitle" *ngIf="subTitle && subTitle.length>0" title="{{subTitle}}">{{subTitle|truncate:30}}</h4>
+    <h4 class="card-section__header__subtitle" *ngIf="subtitle && subtitle.length>0" title="{{subtitle}}">{{subtitle|truncate:30}}</h4>
     <div class="card-section__header__icon"></div>
     <div class="card-section__header__expander"></div>
 </div>

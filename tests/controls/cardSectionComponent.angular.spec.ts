@@ -42,6 +42,9 @@ describe('[CardSectionComponent]', () => {
         it('component has class card-section', () => {
             expect(rootElement.classes['card-section']).toBe(true);
         });
+        it('readonly is set to true', () => {
+            expect(component.readonly).toBe(true);
+        });
         describe('and title is set', () => {
             beforeEach(() => {
                 component.title = 'Section 1';
