@@ -40,7 +40,7 @@ import { InputComponent } from './controls/input/input.component';
 import { CardComponent } from './controls/card/card.component';
 import { CardSectionComponent } from './controls/card/cardSection.component';
 import { TitleValueComponent } from './controls/titleValue/titleValue.component';
-import { SpinnerComponent } from './controls/spinner/spinner.component';
+import { LoaderComponent } from './controls/loader/loader.component';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -83,7 +83,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CardComponent,
         CardSectionComponent,
         TitleValueComponent,
-        SpinnerComponent
+        LoaderComponent
     ],
     exports: [
         SafePipe,
@@ -114,7 +114,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CardComponent,
         CardSectionComponent,
         TitleValueComponent,
-        SpinnerComponent
+        LoaderComponent
     ],
     providers: [ModalService, ExpandableContainerJqeuryHelper]
 })

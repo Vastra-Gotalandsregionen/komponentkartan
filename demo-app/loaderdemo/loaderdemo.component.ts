@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'vgr-laddningssnurra',
-  templateUrl: 'laddningssnurra.component.html'
+  selector: 'vgr-loader-demo',
+  templateUrl: 'loaderdemo.component.html'
 })
-export class LaddningsSnurraComponent {
+export class LoaderDemoComponent {
   title = 'app';
   actionInProgress = false;
 

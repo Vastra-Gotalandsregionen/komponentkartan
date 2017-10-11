@@ -1,47 +1,47 @@
 .main-content {
-    height: calc(100vh - #{$header-height} - 2px);
-    position: absolute;
-    top: $content-header-offset;
-    left: $nav-width--small;
-    display: inline-block;
+  height: calc(100vh - #{$header-height} - 2px);
+  position: absolute;
+  top: $content-header-offset;
+  left: $nav-width--small;
+  display: inline-block;
+  width: $content-width--small;
+  >*:first-child {
+    margin-top: $margin--fat;
+  }
+  >* {
+    margin-left: $margin--fat;
+    margin-right: $margin--fat;
+    margin-top: $margin--slim; //background-color: $background-color--content;
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
     width: $content-width--small;
-    >*:first-child {
-        margin-top: $margin--fat;
-    }
-    >* {
-        margin-left: $margin--fat;
-        margin-right: $margin--fat;
-        margin-top: $margin--slim; //background-color: $background-color--content;
-        padding-left: $margin--slim;
-        padding-right: $margin--slim;
-        width: $content-width--small;
-    }
+  }
 }
 
 //When we have mockup images, the include their own padding.
 .main-content--mockup {
-    >* {
-        padding: 0 !important;
-    }
+  >* {
+    padding: 0 !important;
+  }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-    .main-content {
-        left: $nav-width--medium;
-        width: $content-width--medium;
-        >* {
-            margin-left: $margin--fat;
-            margin-top: $margin--fat;
-            margin-right: $margin--fat;
-            padding-left: $margin--fat;
-            padding-right: $margin--fat;
-            width: $content-width--medium;
-        }
+  .main-content {
+    left: $nav-width--medium;
+    width: $content-width--medium;
+    >* {
+      margin-left: $margin--fat;
+      margin-top: $margin--fat;
+      margin-right: $margin--fat;
+      padding-left: $margin--fat;
+      padding-right: $margin--fat;
+      width: $content-width--medium;
     }
-    .main-content--green {
-        width: calc(100vw - #{$nav-width--medium} - #{$margin--fat});
-        iframe {
-            width: calc(100% - #{$margin--fat} - #{$margin--fat});
-        }
+  }
+  .main-content--green {
+    width: calc(100vw - #{$nav-width--medium} - #{$margin--fat});
+    iframe {
+      width: calc(100% - #{$margin--fat} - #{$margin--fat});
     }
+  }
 }

@@ -1,0 +1,33 @@
+<div class="main-content lists-component">
+  <vgr-page-header [title]="'Demo-lista'"></vgr-page-header>
+  <div class="komponentkarta-components">
+    <div class="row-layout row-layout--padded">
+      <div class="column-layout">
+        <h3>Liten storlek</h3>
+        <vgr-loader [spinning]="actionInProgress" [small]="true"></vgr-loader>
+      </div>
+      <div class="column-layout">
+        <h3>Stor storlek</h3>
+        <vgr-loader [spinning]="actionInProgress"></vgr-loader>
+      </div>
+    </div>
+    <br>
+    <vgr-text-button (buttonClick)="actionInProgress=!actionInProgress">{{buttonText}}</vgr-text-button>
+    <div>
+      <br/>
+      <h2>Konfiguration</h2>
+      <table class="property-table">
+        <tr>
+          <th>Namn</th>
+          <th>Beskrivning</th>
+          <th>Exempel</th>
+        </tr>
+        <tr>
+          <td>small</td>
+          <td>Visa liten loader</td>
+          <td>[small]="true"</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

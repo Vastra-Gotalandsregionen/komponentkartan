@@ -15,7 +15,7 @@ import { KomponentkartanModule } from '../component-package/komponentkartan.modu
 import { ListsComponent } from './lists/lists.component';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { InputFieldsComponent } from './inputFields/inputFields.component'
-import { LaddningsSnurraComponent } from './laddningssnurra/laddningssnurra.component';
+import { LoaderDemoComponent } from './loaderdemo/loaderdemo.component'
 import { CityService } from './inputFields/cityService';
 
 import { RouterModule, Routes } from '@angular/router'
@@ -39,7 +39,7 @@ import { appRoutes } from './routes'
         ListsComponent,
         CalendarsComponent,
         InputFieldsComponent,
-        LaddningsSnurraComponent
+        LoaderDemoComponent
     ],
     providers: [
         CityService, { provide: LOCALE_ID, useValue: 'sv-SE' }

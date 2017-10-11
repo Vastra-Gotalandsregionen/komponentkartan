@@ -1,11 +1,11 @@
-.spinner {
+.loader {
   width: 55px;
   height: 55px;
   transform: rotate(-45deg);
   border: solid 7px #dbdbdb;
   border-top: solid 7px #314152;
   border-radius: 50%;
-  &.spinner--small {
+  &.loader--small {
     width: 22px;
     height: 22px;
     border: solid 4px #dbdbdb;
