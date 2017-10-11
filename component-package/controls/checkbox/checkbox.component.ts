@@ -9,7 +9,7 @@ export class CheckboxComponent {
     @Input() disabled: boolean;
     @Input() checked: boolean;
     @Output() checkedChanged = new EventEmitter<boolean>();
-    @Input() text: string;
+    @Input() label: string;
 
     constructor() {
         this.disabled = false;
