@@ -10,20 +10,19 @@ import { ICalendarYear } from '../../models/calendarYear.model';
 })
 export class MonthpickerComponent implements OnInit {
     today: Date = new Date();
-
-    @Output() selectedDateChanged = new EventEmitter<Date>();
-    @Input() @HostBinding('class.disabled') disabled: boolean;
-
-    @Input() selectedDateFormat: string = 'MMM yyyy';
     @Input() minDate: Date;
     @Input() maxDate: Date;
-    @Input() preselectedDate?: Date;
+    @Input() selectedDate?: Date;
+    @Input() @HostBinding('class.disabled') disabled: boolean;
+    @Input() selectedDateFormat: string = 'MMM yyyy';
+    @Input() tooltipDateFormat: string = 'MMM yyyy';
+
+    @Output() selectedDateChanged = new EventEmitter<Date>();
 
     displayedYear: ICalendarYear;
     previousYear: ICalendarYear;
     nextYear: ICalendarYear;
 
-    selectedDate?: Date;
     years: ICalendarYear[];
     expanded: boolean;
     protected preventCollapse: boolean;
@@ -39,17 +38,15 @@ export class MonthpickerComponent implements OnInit {
 
         this.years = [];
 
-        if (this.preselectedDate) {
-            this.selectedDate = this.preselectedDate;
-
+        if (this.selectedDate) {
             if (this.selectedDate.getFullYear() < this.today.getFullYear())
                 this.minDate = new Date(this.selectedDate.getFullYear(), 0, 1);
 
 
             if (this.selectedDate.getFullYear() > this.today.getFullYear())
                 this.maxDate = new Date(this.selectedDate.getFullYear(), 11, 1);
-        }
 
+        }
         this.createYears();
 
         this.setDisplayedYear(this.selectedDate);

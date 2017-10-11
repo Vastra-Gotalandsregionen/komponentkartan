@@ -10,17 +10,15 @@ import { ICalendarDay } from '../../models/calendarDay.model';
     templateUrl: './datepicker.component.html'
 })
 export class DatepickerComponent implements OnInit {
-
-    @Input() currentDate: Date;
+    today: Date = new Date();
     @Input() minDate: Date;
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
     @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() selectedDateFormat: String = 'yyyy-MM-dd';
-    @Input() tooltipDateFormat: String = 'yyyy-MM-dd';
+    @Input() selectedDateFormat: string = 'yyyy-MM-dd';
+    @Input() tooltipDateFormat: string = 'yyyy-MM-dd';
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
-    
 
     yearMonths: ICalendarYearMonth[] = [];
     isDatePickerVisible: boolean;
@@ -31,12 +29,11 @@ export class DatepickerComponent implements OnInit {
     selectedCalendarDay: ICalendarDay;
 
     constructor(protected elementRef: ElementRef) {
-        this.currentDate = new Date();
         this.isDatePickerVisible = false;
         this.nextMonth = true;
         this.previousMonth = true;
-        this.minDate = new Date(this.currentDate.getFullYear(), 0, 1);
-        this.maxDate = new Date(this.currentDate.getFullYear(), 11, 31);
+        this.minDate = new Date(this.today.getFullYear(), 0, 1);
+        this.maxDate = new Date(this.today.getFullYear(), 11, 31);
     };
 
     ngOnInit() {
@@ -185,7 +182,7 @@ export class DatepickerComponent implements OnInit {
 
                         const currentDatePosition = calendarDay.day.toDateString();
                         const currentselectedDate = this.selectedDate !== undefined ? this.selectedDate.toDateString() : this.selectedDate;
-                        const currentTodayDate = this.currentDate.toDateString();
+                        const currentTodayDate = this.today.toDateString();
 
                         // Set disabled dates
                         if (calendarDay.day < minDate || calendarDay.day > maxDate) {
@@ -201,7 +198,7 @@ export class DatepickerComponent implements OnInit {
                         // Set today's date
                         if (currentDatePosition === currentTodayDate) {
                             calendarDay.isCurrentDay = true;
-                            if(this.selectedDate === null || this.selectedDate === undefined) {                                
+                            if (this.selectedDate === null || this.selectedDate === undefined) {
                                 this.currentYearMonthIndex = index;
                             }
                         }

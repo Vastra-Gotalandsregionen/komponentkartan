@@ -65,9 +65,9 @@ describe('[DatepickerComponent]', () => {
             expect((component.yearMonths.filter(ym => ym.month === 1)[0].month)).toBe(1);
         });
 
-        it('currentYearMonthIndex is set with todays date', () => {            
+        it('currentYearMonthIndex is set with todays date', () => {
             expect(component.yearMonths[component.currentYearMonthIndex].year).toBe(currentYear);
-            expect(component.yearMonths[component.currentYearMonthIndex].month).toBe(currentMonth+1);
+            expect(component.yearMonths[component.currentYearMonthIndex].month).toBe(currentMonth + 1);
         });
 
 
@@ -101,15 +101,23 @@ describe('[DatepickerComponent]', () => {
     });
 
     describe(' When initialized with currentYear 2017 and currentMonth October', () => {
+
         beforeEach(() => {
+            jasmine.clock().uninstall();
+            jasmine.clock().install();
             currentYear = 2017;
             currentMonth = 10;
+
+            jasmine.clock().mockDate(new Date(currentYear, currentMonth - 1, 15));
+
             minDate = new Date(currentYear, currentMonth - 1, 15);
             maxDate = new Date(currentYear, currentMonth - 1, 27);
-            component.currentDate = new Date(currentYear, currentMonth - 1, 1);
             component.minDate = new Date(currentYear, currentMonth - 1, 15);
             component.maxDate = new Date(currentYear, currentMonth - 1, 27);
             component.ngOnInit();
+        });
+        afterEach(() => {
+            jasmine.clock().uninstall();
         });
 
         it('contains a yearmonth-model with current year', () => {

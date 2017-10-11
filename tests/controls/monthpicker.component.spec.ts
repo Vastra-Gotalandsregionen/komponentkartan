@@ -118,14 +118,14 @@ describe("[MonthpickerComponent]", () => {
         });
 
 
-        describe("end preselectedDate is previous year", () => {
+        describe("and selectedDate is previous year", () => {
 
             beforeEach(() => {
-                component.preselectedDate = new Date(prevYear, 2, 1);
+                component.selectedDate = new Date(prevYear, 2, 1);
                 component.ngOnInit();
             });
 
-            it("displayedYear is set to the preselectedDates year", () => {
+            it("displayedYear is set to the selectedDates year", () => {
                 expect(component.displayedYear.year).toBe(prevYear);
             });
         });
@@ -186,7 +186,7 @@ describe("[MonthpickerComponent]", () => {
         let currentYear: number;
         beforeEach(() => {
             currentYear = new Date().getFullYear();
-            component.preselectedDate = new Date(2015, 0, 1);
+            component.selectedDate = new Date(2015, 0, 1);
             component.ngOnInit();
         });
         it("the default min date is set to 2015", () => {
@@ -219,7 +219,7 @@ describe("[MonthpickerComponent]", () => {
         let currentYear: number;
         beforeEach(() => {
             currentYear = new Date().getFullYear();
-            component.preselectedDate = new Date(currentYear + 2, 2, 1);
+            component.selectedDate = new Date(currentYear + 2, 2, 1);
             component.ngOnInit();
         });
         it("the default min date is set to currentYear", () => {

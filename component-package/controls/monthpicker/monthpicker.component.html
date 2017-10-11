@@ -1,6 +1,6 @@
 <div class="monthpicker" (mousedown)="onMouseDown($event)" (keydown)="onKeyDown($event)" [ngClass]="{'monthpicker--open' : expanded}">
     <div class="monthpicker__dropdown" tabindex="{{disabled ? -1 : 0}}">
-        <span *ngIf="selectedDate" title="{{selectedDate}}">{{selectedDate | date : selectedDateFormat}}</span>
+        <span *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date : selectedDateFormat}}</span>
         <span *ngIf="!selectedDate" title="Välj månad">Välj månad</span>
 
         <div class="monthpicker__calendar">
