@@ -22,6 +22,13 @@
   text-align: center;
   justify-content: center;
   cursor: pointer;
+  min-width: 87px;
+  padding-left: 18px;
+  padding-right: 18px;
+  &.button--secondary {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
   &:hover:not(.button--disabled) {
     .button__focus-line {
       visibility: visible;
@@ -78,9 +85,23 @@
     border-width: 1px;
     border-style: solid;
   }
+  &.lock-button {
+    min-width: 0;
+  }
 }
 
 .button--enabling {
   animation: button-enabling 0.6s;
   transition: background-color 0.4s ease;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .button {
+    padding-left: 22px;
+    padding-right: 22px;
+    &.button--secondary {
+      padding-left: 21px;
+      padding-right: 21px;
+    }
+  }
 }

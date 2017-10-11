@@ -1,0 +1,32 @@
+﻿import { Component, Input, EventEmitter, Output, OnChanges } from '@angular/core'
+
+@Component({
+    selector: 'vgr-button',
+    moduleId: module.id,
+    templateUrl: './button.component.html'
+})
+export class ButtonComponent implements OnChanges {
+    @Input() disabled: boolean;
+    @Input() secondary: boolean;
+    lastDisabledStatus: boolean;
+    reenabled: boolean;
+    @Output() click = new EventEmitter<string>();
+
+    onClick(event: any): void {
+        event.cancelBubble = true;
+        if (!this.disabled) {
+            this.click.emit();
+        }
+    }
+
+    ngOnChanges() {
+        this.reenabled = this.lastDisabledStatus === true && this.disabled === false;
+        this.lastDisabledStatus = this.disabled;
+    }
+
+    keyPressed(event: KeyboardEvent): void {
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.onClick(event);
+        }
+    }
+}
