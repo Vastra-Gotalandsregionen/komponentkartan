@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   templateUrl: './loader.component.html',
   animations: [trigger('spinning', [
     transition('stopped=>spinning',
-      animate('1.2s cubic-bezier(0.645, 0.045, 0.355, 1)', keyframes([
+      animate('1.2s linear', keyframes([
         style({ transform: 'rotate(-45deg)', offset: 0 }),
         style({ transform: 'rotate(315deg)', offset: 1 })
       ])))
@@ -41,7 +41,7 @@ export class LoaderComponent {
   rotationDone() {
     this.rotationInProgress = false;
     this.changeDetector.detectChanges();
-    if (!this._spinning) {
+    if (this._spinning) {
       this.rotationInProgress = true;
     }
   }
