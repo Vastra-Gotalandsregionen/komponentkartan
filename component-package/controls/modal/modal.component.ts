@@ -41,7 +41,7 @@ export class ModalPlaceholderComponent implements OnInit {
 
   }
 
-  onButtonClicked(callback: () => void) {
+  onClicked(callback: () => void) {
     callback();
     this.closeModal();
   }

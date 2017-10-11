@@ -13,7 +13,8 @@ export class LockButtonComponent {
 
 
 
-    buttonClicked(): void {
+    onClick(event: any): void {
+        event.cancelBubble = true;
         if (!this.disabled) {
             if (this.unlocked) {
                 this.lock();
@@ -35,7 +36,7 @@ export class LockButtonComponent {
 
     keyPressed(event: KeyboardEvent): void {
         if (event.keyCode === 13 || event.keyCode === 32) {
-            this.buttonClicked();
+            this.onClick(event);
         }
     }
 }

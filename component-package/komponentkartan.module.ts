@@ -20,7 +20,7 @@ import { FilterTextboxComponent } from './controls/filterTextbox/filterTextbox.c
 import { ExpandableContainerComponent } from './controls/expandableContainer/expandableContainer.component';
 import { ExpandableContainerJqeuryHelper } from './controls/expandableContainer/expandableContainerJqueryHelper';
 import { ExpandableContainerListComponent } from './controls/expandableContainerList/expandableContainerList.component';
-import { TextButtonComponent } from './controls/textButton/textButton.component';
+import { ButtonComponent } from './controls/button/button.component';
 import { LockButtonComponent } from './controls/lockButton/lockButton.component';
 import { SaveCancelComponent } from './controls/saveCancel/saveCancel.component';
 import { PageHeaderComponent } from './controls/pageHeader/pageHeader.component';
@@ -64,7 +64,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FilterTextboxComponent,
         ExpandableContainerComponent,
         ExpandableContainerListComponent,
-        TextButtonComponent,
+        ButtonComponent,
         LockButtonComponent,
         SaveCancelComponent,
         PageHeaderComponent,
@@ -94,7 +94,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FilterTextboxComponent,
         ExpandableContainerComponent,
         ExpandableContainerListComponent,
-        TextButtonComponent,
+        ButtonComponent,
         LockButtonComponent,
         SaveCancelComponent,
         PageHeaderComponent,

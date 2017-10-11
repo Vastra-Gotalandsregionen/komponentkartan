@@ -1,16 +1,16 @@
 ﻿
-import { ComponentFixture, TestBed, async } from "@angular/core/testing";
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
-import { By } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
-import { DebugElement } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { DebugElement } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { SaveCancelComponent } from "../../component-package/controls/saveCancel/saveCancel.component";
-import { TextButtonComponent } from "../../component-package/controls/textButton/textButton.component";
-import { LockButtonComponent } from "../../component-package/controls/lockButton/lockButton.component";
+import { SaveCancelComponent } from '../../component-package/controls/saveCancel/saveCancel.component';
+import { ButtonComponent } from '../../component-package/controls/button/button.component';
+import { LockButtonComponent } from '../../component-package/controls/lockButton/lockButton.component';
 
-describe("SaveCancelComponent", () => {
+describe('SaveCancelComponent', () => {
     let component: SaveCancelComponent;
     let fixture: ComponentFixture<SaveCancelComponent>;
     let rootElement: DebugElement;
@@ -19,23 +19,23 @@ describe("SaveCancelComponent", () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [SaveCancelComponent, TextButtonComponent, LockButtonComponent],
+            declarations: [SaveCancelComponent, ButtonComponent, LockButtonComponent],
             imports: [CommonModule, FormsModule]
         });
 
         TestBed.overrideComponent(SaveCancelComponent, {
             set: {
-                templateUrl: "saveCancel.component.html"
+                templateUrl: 'saveCancel.component.html'
             }
         });
-        TestBed.overrideComponent(TextButtonComponent, {
+        TestBed.overrideComponent(ButtonComponent, {
             set: {
-                templateUrl: "../textButton/textButton.component.html"
+                templateUrl: '../button/button.component.html'
             }
         });
         TestBed.overrideComponent(LockButtonComponent, {
             set: {
-                templateUrl: "../lockButton/lockButton.component.html"
+                templateUrl: '../lockButton/lockButton.component.html'
             }
         });
 
@@ -48,80 +48,80 @@ describe("SaveCancelComponent", () => {
             done();
         });
     });
-    describe("When initialized", () => {
+    describe('When initialized', () => {
         beforeEach(() => {
-            spyOn(component.onCancel, "emit");
-            spyOn(component.onSave, "emit");
-            spyOn(component.lockButtonComponent, "unlock");
-            spyOn(component.lockButtonComponent, "lock");
+            spyOn(component.onCancel, 'emit');
+            spyOn(component.onSave, 'emit');
+            spyOn(component.lockButtonComponent, 'unlock');
+            spyOn(component.lockButtonComponent, 'lock');
         });
-        describe("When enabled", () => {
+        describe('When enabled', () => {
             beforeEach(() => {
                 component.enabled = true;
                 component.ngOnChanges();
             });
-            it("text buttons are enabled", () => {
+            it('text buttons are enabled', () => {
                 expect(component.textButtonComponents.filter(x => !x.disabled).length).toBe(component.textButtonComponents.length);
             });
-            it("Lock button is unlocked", () => {
+            it('Lock button is unlocked', () => {
                 expect(component.lockButtonComponent.unlock).toHaveBeenCalled();
             });
         });
-        describe("When disabled", () => {
+        describe('When disabled', () => {
             beforeEach(() => {
                 component.enabled = false;
                 component.ngOnChanges();
             });
-            it("text buttons are disabled", () => {
+            it('text buttons are disabled', () => {
                 expect(component.textButtonComponents.filter(x => x.disabled).length).toBe(component.textButtonComponents.length);
             });
-            it("Llck button is locked", () => {
+            it('Llck button is locked', () => {
                 expect(component.lockButtonComponent.lock).toHaveBeenCalled();
             });
         });
-        describe("When save button is clicked", () => {
+        describe('When save button is clicked', () => {
             beforeEach(() => {
-                var saveButton = rootElement.query(By.css(".text-button--save"));
-                saveButton.triggerEventHandler("buttonClick", null);
+                var saveButton = rootElement.query(By.css('.button--save'));
+                saveButton.triggerEventHandler('click', {});
             });
-            it("lock button is locked", () => {
+            it('lock button is locked', () => {
                 expect(component.lockButtonComponent.lock).toHaveBeenCalled();
             });
-            it("a save event is sent", () => {
+            it('a save event is sent', () => {
                 expect(component.onSave.emit).toHaveBeenCalled();
             });
 
         });
-        describe("When cancel button is clicked", () => {
+        describe('When cancel button is clicked', () => {
             beforeEach(() => {
-                var cancelButton = rootElement.query(By.css(".text-button--cancel"));
-                cancelButton.triggerEventHandler("buttonClick", null);
+                var cancelButton = rootElement.query(By.css('.button--cancel'));
+                cancelButton.triggerEventHandler('click', {});
             });
-            it("lock button is locked", () => {
+            it('lock button is locked', () => {
                 expect(component.lockButtonComponent.lock).toHaveBeenCalled();
             });
-            it("a cancel event is sent", () => {
+            it('a cancel event is sent', () => {
                 expect(component.onCancel.emit).toHaveBeenCalled();
             });
         });
-        describe("When unlock button is clicked", () => {
+        describe('When unlock button is clicked', () => {
             beforeEach(() => {
-                var lockButton = rootElement.query(By.css("vgr-lock-button"));
-                lockButton.triggerEventHandler("onUnlocked", null);
+                var lockButton = rootElement.query(By.css('vgr-lock-button'));
+                lockButton.triggerEventHandler('onUnlocked', null);
             });
-            it("saveCancelEnable is set to true", () => {
+            it('saveCancelEnable is set to true', () => {
                 expect(component.saveCancelEnabled).toBe(true);
             });
         });
-        describe("When lock button is clicked", () => {
+        describe('When lock button is clicked', () => {
             beforeEach(() => {
-                var lockButton = rootElement.query(By.css("vgr-lock-button"));
-                lockButton.triggerEventHandler("onLocked", null);
+                var lockButton = rootElement.query(By.css('vgr-lock-button'));
+                lockButton.triggerEventHandler('onLocked', null);
             });
-            it("a save event is sent", () => {
+            it('a save event is sent', () => {
                 expect(component.onSave.emit).toHaveBeenCalled();
             });
-            it("saveCancelEnable is set to false", () => {
+            it('saveCancelEnable is set to false', () => {
                 expect(component.saveCancelEnabled).toBe(false);
             });
         });

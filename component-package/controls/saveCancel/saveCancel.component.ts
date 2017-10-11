@@ -1,6 +1,6 @@
 ﻿import { Component, Input, EventEmitter, Output, ViewChildren, QueryList, OnChanges, ViewChild } from '@angular/core'
 
-import { TextButtonComponent } from '../textButton/textButton.component';
+import { ButtonComponent } from '../button/button.component';
 import { LockButtonComponent } from '../lockButton/lockButton.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class SaveCancelComponent implements OnChanges {
 
 
 
-    @ViewChildren(TextButtonComponent) textButtonComponents: QueryList<TextButtonComponent>;
+    @ViewChildren(ButtonComponent) textButtonComponents: QueryList<ButtonComponent>;
     @ViewChild(LockButtonComponent) lockButtonComponent: LockButtonComponent;
     @Input() secondary: boolean;
 

@@ -1,4 +1,4 @@
-﻿<div class="lock-button noselect" role="button" (click)="onClick()" (keydown)="keyPressed($event)" [ngClass]="{ 'lock-button--unlocked' : unlocked,'button--disabled' : disabled}"
+﻿<div class="lock-button noselect" role="button" (click)="onClick($event)" (keydown)="keyPressed($event)" [ngClass]="{ 'lock-button--unlocked' : unlocked,'button--disabled' : disabled}"
   tabindex="{{disabled ? -1 : 0}}">
   <div class="lock-button__top"></div>
   <div class="lock-button__bottom"></div>

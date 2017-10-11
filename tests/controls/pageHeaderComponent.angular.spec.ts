@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 import { PageHeaderComponent } from '../../component-package/controls/pageHeader/pageHeader.component';
 import { SaveCancelComponent } from '../../component-package/controls/saveCancel/saveCancel.component';
-import { TextButtonComponent } from '../../component-package/controls/textButton/textButton.component';
+import { ButtonComponent } from '../../component-package/controls/button/button.component';
 import { LockButtonComponent } from '../../component-package/controls/lockButton/lockButton.component';
 
 describe('PageHeaderComponent', () => {
@@ -20,7 +20,7 @@ describe('PageHeaderComponent', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [PageHeaderComponent, SaveCancelComponent, TextButtonComponent, LockButtonComponent],
+            declarations: [PageHeaderComponent, SaveCancelComponent, ButtonComponent, LockButtonComponent],
             imports: [CommonModule, FormsModule]
         });
 
@@ -34,9 +34,9 @@ describe('PageHeaderComponent', () => {
                 templateUrl: '../saveCancel/saveCancel.component.html'
             }
         });
-        TestBed.overrideComponent(TextButtonComponent, {
+        TestBed.overrideComponent(ButtonComponent, {
             set: {
-                templateUrl: '../textButton/textButton.component.html'
+                templateUrl: '../button/button.component.html'
             }
         });
         TestBed.overrideComponent(LockButtonComponent, {
@@ -68,12 +68,12 @@ describe('PageHeaderComponent', () => {
                 expect(component.expanded).toBeFalsy();
             });
             it('and a text button is added', () => {
-                var textButtons = rootElement.queryAll(By.css('.text-button'));
+                var textButtons = rootElement.queryAll(By.css('.button'));
                 expect(textButtons.length).toEqual(1);
             });
             describe('When the enableActionsButton is clicked', () => {
                 beforeEach(() => {
-                    rootElement.queryAll(By.css('vgr-text-button'))[0].triggerEventHandler('buttonClick', null);
+                    rootElement.queryAll(By.css('vgr-button'))[0].triggerEventHandler('click', {});
                     fixture.detectChanges();
                 });
                 it('actions are visible', () => {
@@ -93,12 +93,12 @@ describe('PageHeaderComponent', () => {
                     expect(component.expanded).toBeFalsy();
                 });
                 it('and another text button is added', () => {
-                    var textButtons = rootElement.queryAll(By.css('.text-button'));
+                    var textButtons = rootElement.queryAll(By.css('.button'));
                     expect(textButtons.length).toEqual(2);
                 });
                 describe('When the enableActionsButton is clicked', () => {
                     beforeEach(() => {
-                        rootElement.queryAll(By.css('vgr-text-button'))[0].triggerEventHandler('buttonClick', null);
+                        rootElement.queryAll(By.css('vgr-button'))[0].triggerEventHandler('click', {});
                         fixture.detectChanges();
                     });
                     it('actions are visible', () => {
@@ -109,7 +109,7 @@ describe('PageHeaderComponent', () => {
                     });
                     describe('When the disableActionsButton is clicked', () => {
                         beforeEach(() => {
-                            rootElement.queryAll(By.css('vgr-text-button'))[1].triggerEventHandler('buttonClick', null);
+                            rootElement.queryAll(By.css('vgr-button'))[1].triggerEventHandler('click', {});
                             fixture.detectChanges();
                         });
                         it('actions are not visible', () => {
@@ -132,7 +132,7 @@ describe('PageHeaderComponent', () => {
                 expect(component.expanded).toBeFalsy();
             });
             it('and no text button is added', () => {
-                var textButtons = rootElement.queryAll(By.css('.text-button'));
+                var textButtons = rootElement.queryAll(By.css('.button'));
                 expect(textButtons.length).toEqual(0);
             });
         });
