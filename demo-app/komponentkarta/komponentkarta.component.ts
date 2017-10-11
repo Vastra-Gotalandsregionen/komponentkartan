@@ -80,6 +80,14 @@ export class KomponentkartaComponent implements AfterViewInit {
         );
     }
 
+    onLock1Changed(locked: boolean) {
+        this.lockMessage = 'Lås 1 ' + (locked ? 'låst' : 'upplåst');
+    }
+
+    onLock2Changed(locked: boolean) {
+        this.lockMessage = 'Lås 2 ' + (locked ? 'låst' : 'upplåst');
+    }
+
 
     showTwoButtonModal() {
         this.modalService.openDialog('Acceptera villkor',
