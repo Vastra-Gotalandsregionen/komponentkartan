@@ -1,4 +1,4 @@
-﻿import { Component, Input, EventEmitter, Output, ViewChildren, QueryList, OnChanges, ViewChild } from '@angular/core'
+﻿import { Component, Input, EventEmitter, Output, QueryList, OnInit } from '@angular/core'
 
 import { ButtonComponent } from '../button/button.component';
 import { LockButtonComponent } from '../lockButton/lockButton.component';
@@ -8,63 +8,38 @@ import { LockButtonComponent } from '../lockButton/lockButton.component';
     moduleId: module.id,
     templateUrl: './saveCancel.component.html'
 })
-export class SaveCancelComponent implements OnChanges {
-    @Input() enabled: boolean;
-
-
-
-    @ViewChildren(ButtonComponent) textButtonComponents: QueryList<ButtonComponent>;
-    @ViewChild(LockButtonComponent) lockButtonComponent: LockButtonComponent;
+export class SaveCancelComponent implements OnInit {
+    @Input() unlocked: boolean;
     @Input() secondary: boolean;
-
-    @Output() onCancel = new EventEmitter();
-    @Output() onSave = new EventEmitter();
-    @Output() onUnlock = new EventEmitter();
-
-    saveCancelEnabled: boolean;
+    @Output() cancel = new EventEmitter();
+    @Output() save = new EventEmitter();
+    @Output() unlock = new EventEmitter();
 
     constructor() {
-        this.saveCancelEnabled = false;
     }
 
-    ngOnChanges() {
-        if (!this.textButtonComponents || !this.lockButtonComponent) {
-            return;
-        }
-        if (this.enabled) {
-            this.textButtonComponents.forEach(x => x.disabled = false);
-            this.lockButtonComponent.unlock();
+    ngOnInit() {
+    }
+
+    onLockChanged(locked: boolean) {
+        if (locked) {
+            this.unlocked = false;
+            this.save.emit();
+
         } else {
-            this.textButtonComponents.forEach(x => x.disabled = true);
-            this.lockButtonComponent.lock();
+            this.unlocked = true;
+            this.unlock.emit();
         }
     }
 
-    onUnlocked() {
-        this.saveCancelEnabled = true;
-        this.onUnlock.emit();
+    onSave() {
+        this.unlocked = false;
+        this.save.emit();
     }
 
-    onLocked() {
-        this.saveCancelEnabled = false;
-        this.onSave.emit();
+    onCancel() {
+        this.unlocked = false;
+        this.cancel.emit();
     }
 
-    save() {
-        this.lockButtonComponent.lock();
-        this.onSave.emit();
-    }
-
-    cancel() {
-        this.lockButtonComponent.lock();
-        this.onCancel.emit();
-    }
-
-    unlock() {
-        this.lockButtonComponent.unlock();
-    }
-
-    consoleLog(logText: string) {
-        console.log(logText);
-    }
 }

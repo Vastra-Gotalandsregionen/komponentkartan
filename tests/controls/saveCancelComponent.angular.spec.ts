@@ -50,79 +50,56 @@ describe('SaveCancelComponent', () => {
     });
     describe('When initialized', () => {
         beforeEach(() => {
-            spyOn(component.onCancel, 'emit');
-            spyOn(component.onSave, 'emit');
-            spyOn(component.lockButtonComponent, 'unlock');
-            spyOn(component.lockButtonComponent, 'lock');
-        });
-        describe('When enabled', () => {
-            beforeEach(() => {
-                component.enabled = true;
-                component.ngOnChanges();
-            });
-            it('text buttons are enabled', () => {
-                expect(component.textButtonComponents.filter(x => !x.disabled).length).toBe(component.textButtonComponents.length);
-            });
-            it('Lock button is unlocked', () => {
-                expect(component.lockButtonComponent.unlock).toHaveBeenCalled();
-            });
-        });
-        describe('When disabled', () => {
-            beforeEach(() => {
-                component.enabled = false;
-                component.ngOnChanges();
-            });
-            it('text buttons are disabled', () => {
-                expect(component.textButtonComponents.filter(x => x.disabled).length).toBe(component.textButtonComponents.length);
-            });
-            it('Llck button is locked', () => {
-                expect(component.lockButtonComponent.lock).toHaveBeenCalled();
-            });
-        });
-        describe('When save button is clicked', () => {
-            beforeEach(() => {
-                var saveButton = rootElement.query(By.css('.button--save'));
-                saveButton.triggerEventHandler('click', {});
-            });
-            it('lock button is locked', () => {
-                expect(component.lockButtonComponent.lock).toHaveBeenCalled();
-            });
-            it('a save event is sent', () => {
-                expect(component.onSave.emit).toHaveBeenCalled();
-            });
-
-        });
-        describe('When cancel button is clicked', () => {
-            beforeEach(() => {
-                var cancelButton = rootElement.query(By.css('.button--cancel'));
-                cancelButton.triggerEventHandler('click', {});
-            });
-            it('lock button is locked', () => {
-                expect(component.lockButtonComponent.lock).toHaveBeenCalled();
-            });
-            it('a cancel event is sent', () => {
-                expect(component.onCancel.emit).toHaveBeenCalled();
-            });
+            spyOn(component.cancel, 'emit');
+            spyOn(component.save, 'emit');
+            spyOn(component.unlock, 'emit');
         });
         describe('When unlock button is clicked', () => {
             beforeEach(() => {
-                var lockButton = rootElement.query(By.css('vgr-lock-button'));
-                lockButton.triggerEventHandler('onUnlocked', null);
+                const lockButton = rootElement.query(By.css('vgr-lock-button'));
+                lockButton.triggerEventHandler('lockChanged', false);
             });
-            it('saveCancelEnable is set to true', () => {
-                expect(component.saveCancelEnabled).toBe(true);
+            it('component is unlocked', () => {
+                expect(component.unlocked).toBe(true);
             });
-        });
-        describe('When lock button is clicked', () => {
-            beforeEach(() => {
-                var lockButton = rootElement.query(By.css('vgr-lock-button'));
-                lockButton.triggerEventHandler('onLocked', null);
+
+            describe('and save button is clicked', () => {
+                beforeEach(() => {
+                    const saveButton = rootElement.query(By.css('.button--save'));
+                    saveButton.triggerEventHandler('click', {});
+                });
+                it('component is locked', () => {
+                    expect(component.unlocked).toBeFalsy();
+                });
+                it('a save event is sent', () => {
+                    expect(component.save.emit).toHaveBeenCalled();
+                });
+
             });
-            it('a save event is sent', () => {
-                expect(component.onSave.emit).toHaveBeenCalled();
+            describe('and cancel button is clicked', () => {
+                beforeEach(() => {
+                    const cancelButton = rootElement.query(By.css('.button--cancel'));
+                    cancelButton.triggerEventHandler('click', {});
+                });
+                it('lock button is locked', () => {
+                    expect(component.unlocked).toBeFalsy();
+                });
+                it('a cancel event is sent', () => {
+                    expect(component.cancel.emit).toHaveBeenCalled();
+                });
             });
-            it('saveCancelEnable is set to false', () => {
-                expect(component.saveCancelEnabled).toBe(false);
+
+            describe('and lock button is clicked', () => {
+                beforeEach(() => {
+                    const lockButton = rootElement.query(By.css('vgr-lock-button'));
+                    lockButton.triggerEventHandler('lockChanged', true);
+                });
+                it('a save event is sent', () => {
+                    expect(component.save.emit).toHaveBeenCalled();
+                });
+                it('component is locked', () => {
+                    expect(component.unlocked).toBe(false);
+                });
             });
         });
     });
