@@ -14,84 +14,73 @@ export class InputComponent implements OnInit {
     validationErrorStates = ValidationErrorState;
     @HostBinding('class.validated-input') hasClass = true;
     @Input() @HostBinding('class.readonly') readonly?: boolean;
-    @Input() @HostBinding('class.input__small') small: boolean;
-    @Input() value: any;
-    numericValue?: number;
+    @Input() @HostBinding('class.input--small') small: boolean;
+    @Input() @HostBinding('class.align-right') alignRight: boolean;
+
     @Input() validateOnInit: boolean;
-    @Output() valueChanged: EventEmitter<string> = new EventEmitter<string>();
-
-    validationErrorState: ValidationErrorState;
-    validationErrorMessage: string;
-
-    swedishDecimalPipe: DecimalPipe = new DecimalPipe('sv-se');
-    decimalPipeConfiguration: string;
+    @Input() suffix: string;
+    @Input() type: string;
+    @Input() value: any;
     @Input() placeholder: string;
     @Input() title: string;
-
-    // Standardvalidering
     @Input() maxlength?: number;
     @Input() required: boolean;
     @Input() pattern: string;
     @Input() invalidText: string;
-
-    @Input() suffix: string;
-    @Input() @HostBinding('class.align-right') alignRight: boolean;
-
-    @Input() type: string;
-
-    displayValue: string;
-
-    get isAmount(): boolean {
-        return this.type === 'amount';
-    }
-    get isPercent(): boolean {
-        return this.type === 'percent';
-    }
-    get isKm(): boolean {
-        return this.type === 'km';
-    }
-    get isNumeric(): boolean {
-        return this.type === 'numeric' || this.isAmount || this.isKm || this.isPercent;
-    }
-    // Egen validering
     @Input() customValidator: Function;
 
+    @Output() valueChanged: EventEmitter<string> = new EventEmitter<string>();
+
+    numericValue?: number;
+    validationErrorState: ValidationErrorState;
+    validationErrorMessage: string;
+    swedishDecimalPipe: DecimalPipe = new DecimalPipe('sv-se');
+    decimalPipeConfiguration: string;
+    displayValue: string;
     private maxNumberOfDecimals = 2;
+
+    private get isAmount(): boolean {
+        return this.type === 'amount';
+    }
+    private get isPercent(): boolean {
+        return this.type === 'percent';
+    }
+    private get isKm(): boolean {
+        return this.type === 'km';
+    }
+    private get isNumeric(): boolean {
+        return this.type === 'numeric' || this.isAmount || this.isKm || this.isPercent;
+    }
+
+    private get invalidFormatText(): string {
+        return this.small ? 'Formatfel' : 'Felaktigt format';
+    }
+
+    private get requiredFieldText(): string {
+        return this.small ? 'Obligatoriskt' : 'Fältet är obligatoriskt';
+    }
+
+    private get invalidPatternValidationResult(): IValidationResult {
+        return {
+            isValid: false,
+            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : this.invalidFormatText
+        } as IValidationResult
+    }
+
+    private get emptyRequiredFieldValidationResult(): IValidationResult {
+
+        return {
+            isValid: false,
+            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : this.requiredFieldText
+        } as IValidationResult
+    }
+    private get successfulValidationResult(): IValidationResult {
+        return { isValid: true, validationError: '' } as IValidationResult
+    }
 
     constructor() {
         this.validationErrorState = ValidationErrorState.NoError;
     }
-
-    get invalidPatternValidationResult(): IValidationResult {
-        return {
-            isValid: false,
-            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : this.convertText('Felaktigt format')
-        } as IValidationResult
-    }
-
-    get emptyRequiredFieldValidationResult(): IValidationResult {
-
-        return {
-            isValid: false,
-            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : this.convertText('Fältet är obligatoriskt')
-        } as IValidationResult
-    }
-    get successfulValidationResult(): IValidationResult {
-        return { isValid: true, validationError: '' } as IValidationResult
-    }
-    convertText(text: string): string {
-
-        if (this.small) {
-            if (text === 'Felaktigt format')
-                return 'Formatfel';
-
-            if (text === 'Fältet är obligatoriskt')
-                return 'Obligatoriskt'
-        }
-        return text;
-    }
-
-
 
     ngOnInit() {
         if (this.pattern && this.pattern.length > 0) {
