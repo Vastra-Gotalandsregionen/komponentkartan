@@ -21,7 +21,7 @@ export class PageHeaderComponent {
         this.expanded = true;
         this.actionStarted.emit();
         if (this.saveCancelComponent) {
-            this.saveCancelComponent.unlock();
+            this.saveCancelComponent.unlocked = true;
         }
     }
 
