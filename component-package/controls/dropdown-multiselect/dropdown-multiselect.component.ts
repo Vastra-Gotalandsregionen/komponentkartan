@@ -14,7 +14,8 @@ import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component'
 })
 
 export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges {
-    @Input() displayAllItemsText: string;
+    @Input() displayAllItemsText: string; //showAllItemText (skrivit ett filter och vill rensa filtret)
+    @Input() selectAllSelectedText: string;
     @Output() selectionChanged = new EventEmitter<IDropdownItem[]>();
     dropdownText: string;
 
@@ -26,15 +27,15 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         super(elementRef);
 
         this.displayAllItemsText = 'Visa alla';
-        this.selectAllItemText = 'Välj alla';
+        this.showAllItemText = 'Välj alla';
         this.selectAllSelectedText = 'Alla';
         this.dropdownText = 'Välj';
     }
 
     ngOnChanges() {
-        if (this.selectAllItemText) {
-            this.selectAllItem = {
-                displayName: this.selectAllItemText,
+        if (this.showAllItemText) {
+            this.showAllItem = {
+                displayName: this.showAllItemText,
                 displayNameWhenSelected: this.selectAllSelectedText,
                 selected: false
             } as IDropdownItem;
@@ -66,7 +67,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     selectAllItems() {
-        this.selectItem(this.selectAllItem);
+        this.selectItem(this.showAllItem);
     }
 
     selectItem(item: IDropdownItem) {
@@ -76,11 +77,11 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         item.selected = true;
 
-        if (item === this.selectAllItem) {
+        if (item === this.showAllItem) {
             this.items.forEach(x => x.selected = true);
             this.selectionChanged.emit(this._items);
         } else {
-            this.selectAllItem.selected = this._items.filter(x => !x.selected).length === 0;
+            this.showAllItem.selected = this._items.filter(x => !x.selected).length === 0;
             this.selectionChanged.emit(this._items.filter(x => x.selected));
         }
         this.updateSelectedItemsCountText();
@@ -93,17 +94,17 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         item.selected = false;
 
-        if (item === this.selectAllItem) {
+        if (item === this.showAllItem) {
             this.items.forEach(x => x.selected = false);
         }
         this.selectionChanged.emit(this._items.filter(x => x.selected));
 
-        this.selectAllItem.selected = false;
+        this.showAllItem.selected = false;
         this.updateSelectedItemsCountText();
     }
 
     private updateSelectedItemsCountText() {
-        if (this.selectAllItem.selected) {
+        if (this.showAllItem.selected) {
             this.dropdownText = 'Alla';
         } else {
             const selectedCount = this.items.filter(x => x.selected).length;
@@ -126,7 +127,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     protected handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void {
-        this.selectAllItem.selected = this.items.length === selectedItems.length;  //this._items.filter(x => !x.selected).length === 0;
+        this.showAllItem.selected = this.items.length === selectedItems.length;  //this._items.filter(x => !x.selected).length === 0;
         this.selectionChanged.emit(selectedItems);
 
         this.updateSelectedItemsCountText();

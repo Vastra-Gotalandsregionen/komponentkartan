@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -13,30 +13,36 @@ import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component'
     styleUrls: ['../dropdown-base/dropdown.scrollbar.css']
 })
 
-export class DropdownComponent extends DropdownBaseComponent implements OnChanges {
+export class DropdownComponent extends DropdownBaseComponent implements OnInit, OnChanges {
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
+
+    @Input() noItemSelectedLabel: string; //visas i dropdownboxen då man inte valt något
     @Input() @HostBinding('class.disabled') disabled: boolean;
     selectedItem: IDropdownItem;
 
     constructor(elementRef: ElementRef) {
         super(elementRef);
+        this.noItemSelectedLabel = "";
     };
 
     ngOnChanges() {
-        if (this.selectAllItemText) {
-            this.selectAllItem = {
-                displayName: this.selectAllItemText, displayNameWhenSelected: this.selectAllSelectedText
-            } as IDropdownItem;
-            this.selectedItem = this.selectAllItem;
-            this.selectedItem.selected = true;
-        }
+        this.showAllItem = {
+            displayName: this.showAllItemText
+        } as IDropdownItem;
+
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
+    }
+    ngOnInit() {
 
     }
 
-    selectAllItems() {
-        this.selectItem(this.selectAllItem);
+    showAllItems() {
+
+        this.preventCollapse = true;
+        this.filter = '';
+        this.filterTextboxComponent.clear();
+
     }
 
 
@@ -46,29 +52,20 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         }
 
         this.items.forEach(x => x.selected = false);
-        if (this.selectAllItem) {
-            this.selectAllItem.selected = false;
-        }
-
         item.selected = true;
+
         item.marked = true;
         this.selectedItem = item;
         this.selectedItemChanged.emit(item);
 
-
-        if (item === this.selectAllItem) {
-            this.preventCollapse = true;
-            this.filter = '';
-            this.filterTextboxComponent.clear();
-        }
 
     }
 
     onMouseEnter(item: IDropdownItem) {
         this.items.forEach(x => x.marked = false);
 
-        if (this.selectAllItem) {
-            this.selectAllItem.marked = false;
+        if (this.showAllItem) {
+            this.showAllItem.marked = false;
         }
 
         item.marked = true;

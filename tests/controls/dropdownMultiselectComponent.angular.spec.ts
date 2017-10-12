@@ -58,7 +58,7 @@ describe("[DropdownMultiSelectComponent]", () => {
             rootElement = fixture.debugElement;
             fixture.detectChanges();
 
-            component.selectAllItemText = "Select all";
+            component.showAllItemText = "Select all";
             component.items = [{ displayName: "Option 1" } as IDropdownItem,
             { displayName: "Option 2" } as IDropdownItem,
             { displayName: "Option 3" } as IDropdownItem] as IDropdownItem[];
@@ -80,7 +80,7 @@ describe("[DropdownMultiSelectComponent]", () => {
             expect(component.dropdownText).toBe("Välj");
         });
         it("select all is not selected", () => {
-            expect(component.selectAllItem.selected).toBe(false);
+            expect(component.showAllItem.selected).toBe(false);
         });
         it("there are 3 items in the list", () => {
             expect(component.items.length).toBe(3);
@@ -105,7 +105,7 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         });
         it("selectAll is not selected", () => {
-            expect(component.selectAllItem.selected).toBe(false);
+            expect(component.showAllItem.selected).toBe(false);
         });
         it("selectionChanged event is emitted with the selected item", () => {
             expect(component.selectionChanged.emit).toHaveBeenCalledWith([component.items[1]]);
@@ -128,7 +128,7 @@ describe("[DropdownMultiSelectComponent]", () => {
             fixture.detectChanges();
         });
         it("selectAll is not selected", () => {
-            expect(component.selectAllItem.selected).toBe(false);
+            expect(component.showAllItem.selected).toBe(false);
         });
         it("selectionChanged event is emitted with the selected items", () => {
             expect(component.selectionChanged.emit).toHaveBeenCalledWith([component.items[0], component.items[1]]);
@@ -185,7 +185,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         });
 
         it("select all item is checked", () => {
-            expect(component.selectAllItem.selected).toBeTruthy();
+            expect(component.showAllItem.selected).toBeTruthy();
         });
         it("all items are checked", () => {
             expect(component.items.filter(x => !x.selected).length).toBe(0);
@@ -203,7 +203,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                 expect(component.items[0].selected).toBe(false);
             });
             it("select all item is not checked", () => {
-                expect(component.selectAllItem.selected).toBe(false);
+                expect(component.showAllItem.selected).toBe(false);
             });
             it("dropdown text is '2 valda'", () => {
                 expect(component.dropdownText).toBe("2 valda");
@@ -226,7 +226,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                 expect(component.items[0].selected).toBe(true);
             });
             it("select all item is checked", () => {
-                expect(component.selectAllItem.selected).toBe(true);
+                expect(component.showAllItem.selected).toBe(true);
             });
             it("dropdown text is 'Alla'", () => {
                 expect(component.dropdownText).toBe("Alla");
@@ -241,7 +241,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                 expect(component.items.filter(x => !x.selected).length).toBe(0);
             });
             it("select all item is checked", () => {
-                expect(component.selectAllItem.selected).toBe(true);
+                expect(component.showAllItem.selected).toBe(true);
             });
             it("dropdown text is 'Alla'", () => {
                 expect(component.dropdownText).toBe("Alla");
@@ -258,7 +258,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         });
         describe("and select all is checked", () => {
             beforeEach(() => {
-                component.selectAllItem.selected = true;
+                component.showAllItem.selected = true;
             });
             describe("and select all is clicked", () => {
                 beforeEach(() => {
@@ -276,7 +276,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         });
         describe("and select all is not checked", () => {
             beforeEach(() => {
-                component.selectAllItem.selected = false;
+                component.showAllItem.selected = false;
             });
             describe("and select all is clicked", () => {
                 beforeEach(() => {
@@ -337,7 +337,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                     component.clearFilter();
                 });
                 it("the select all item remains checked", () => {
-                    expect(component.selectAllItem.selected).toBe(true);
+                    expect(component.showAllItem.selected).toBe(true);
                 });
 
                 it("and select all item checkbox is visible", () => {
@@ -352,7 +352,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                     component.clearFilter();
                 });
                 it("the select all item is not checked", () => {
-                    expect(component.selectAllItem.selected).toBe(false);
+                    expect(component.showAllItem.selected).toBe(false);
                 });
             });
         });

@@ -10,13 +10,14 @@ import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConf
 
 })
 export abstract class DropdownBaseComponent {
-    @Input() selectAllSelectedText: string;
-    @Input() selectAllItemText: string;
 
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
-    selectAllItem: IDropdownItem;
+    //property sets the text for the "show all" item in the dropdown
+    @Input() showAllItemText: string;
+    showAllItem: IDropdownItem;
+
     expanded: boolean;
     filterVisible: boolean;
     scrollVisible: boolean;
@@ -56,7 +57,7 @@ export abstract class DropdownBaseComponent {
         this.scrollVisible = false;
         this.filterPipe = new FilterPipe();
         this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
-
+        this.showAllItemText = "Visa alla";
     }
 
     protected abstract handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void;

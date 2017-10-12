@@ -43,8 +43,8 @@ describe('DropdownComponent', () => {
         var dropdownElement: DebugElement;
         beforeEach(() => {
             dropdownElement = rootElement.query(By.css('.dropdown'));
-            component.selectAllItemText = 'Select all';
-            component.ngOnChanges();
+            component.showAllItemText = 'Select all';
+            component.ngOnInit();
         });
         it('dropdown is not expanded', () => {
             expect(dropdownElement.classes['dropdown--open']).toBe(false);
@@ -103,7 +103,7 @@ describe('DropdownComponent', () => {
                 }
 
                 component.items = dropdownItems;
-                component.ngOnChanges();
+                component.ngOnInit();
                 fixture.detectChanges();
                 let dropdownElement = rootElement.query(By.css('.dropdown'));
                 expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(true);
@@ -124,7 +124,7 @@ describe('DropdownComponent', () => {
                     dropdownItems.push({ displayName: `Name${i}` } as IDropdownItem);
                 }
                 component.items = dropdownItems;
-                component.ngOnChanges();
+                component.ngOnInit();
                 fixture.detectChanges();
             });
             it('filter is visible', () => {
@@ -261,9 +261,9 @@ describe('DropdownComponent', () => {
             beforeEach(() => {
                 spyOn(component.selectedItemChanged, 'emit');
                 component.items = [{ displayName: 'one' }, { displayName: 'two' }, { displayName: 'three' }] as IDropdownItem[];
-                component.selectAllItem = { displayName: 'select all' } as IDropdownItem;
+                component.showAllItem = { displayName: 'select all' } as IDropdownItem;
                 fixture.detectChanges();
-                component.ngOnChanges();
+                component.ngOnInit();
                 itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.textContent === 'select all')[0];
                 itemToClick.triggerEventHandler('mousedown', null);
                 fixture.detectChanges();
@@ -281,20 +281,20 @@ describe('DropdownComponent', () => {
             });
         });
 
-        describe('and selectAllItemText is set', () => {
+        describe('and showAllItemText is set', () => {
             beforeEach(() => {
                 component.items = [{ displayName: 'one' }, { displayName: 'two' }, { displayName: 'three' }] as IDropdownItem[];
-                component.selectAllItemText = 'Select All';
-                component.ngOnChanges();
+                component.showAllItemText = 'Select All';
+                component.ngOnInit();
                 fixture.detectChanges();
             });
-            it('the selectAllItem Is Initialized', () => {
-                expect(component.selectAllItem.displayName).toBe('Select All');
+            it('the showAllItem Is Initialized', () => {
+                expect(component.showAllItem.displayName).toBe('Select All');
             });
-            it('the selectAllItem is selected', () => {
-                expect(component.selectedItem).toEqual(component.selectAllItem);
+            it('the showAllItem is selected', () => {
+                expect(component.selectedItem).toEqual(component.showAllItem);
             });
-            it('the selectAllItem is selected in the drop down list', () => {
+            it('the showAllItem is selected in the drop down list', () => {
                 var itemInList = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.textContent === 'Select All')[0];
                 expect(itemInList.parent.classes['dropdown-item--selected']).toBeTruthy();
             });
@@ -303,16 +303,16 @@ describe('DropdownComponent', () => {
         describe('and selectAllISelectedText is set', () => {
             beforeEach(() => {
                 component.items = [{ displayName: 'one' }, { displayName: 'two' }, { displayName: 'three' }] as IDropdownItem[];
-                component.selectAllItemText = 'Item text in list';
-                component.selectAllSelectedText = 'Text when selected';
+                component.showAllItemText = 'Item text in list';
+                component.noItemSelectedLabel = 'Text when selected';
                 fixture.detectChanges();
-                component.ngOnChanges();
+                component.ngOnInit();
             });
-            it('the selectAllItem Is Initialized with displayName', () => {
-                expect(component.selectAllItem.displayName).toBe('Item text in list');
+            it('the showAllItem Is Initialized with displayName', () => {
+                expect(component.showAllItem.displayName).toBe('Item text in list');
             });
-            it('the selectAllItem Is Initialized with displayNameWhenSelected', () => {
-                expect(component.selectAllItem.displayNameWhenSelected).toBe('Text when selected');
+            it('the showAllItem Is Initialized with displayNameWhenSelected', () => {
+                expect(component.showAllItem.displayNameWhenSelected).toBe('Text when selected');
             });
         });
     });
@@ -359,10 +359,10 @@ describe('DropdownComponent', () => {
         beforeEach(() => {
             component.items = [{ displayName: 'one' }, { displayName: 'two' }, { displayName: 'three' }] as IDropdownItem[];
             fixture.detectChanges();
-            component.ngOnChanges();
+            component.ngOnInit();
         });
-        it('the selectAllItem is not initialized', () => {
-            expect(component.selectAllItem).toBeUndefined();
+        it('the showAllItem is not initialized', () => {
+            expect(component.showAllItem).toBeUndefined();
         });
     });
 });

@@ -5,11 +5,14 @@
         <div class="dropdown__dimmer dropdown__dimmer--top"></div>
         <perfect-scrollbar class="container" [config]="scrollbarConfig">
             <ul class="dropdown__menu__items">
+                <!-- om det finns en showAllItem -->
                 <li *ngIf="selectAllItem" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : selectAllItem.marked, 'dropdown-item--selected' : selectAllItem.selected }">
+                    <!-- om listan inte är filtrerad -->
                     <a *ngIf="!filterActive" (mousedown)="onItemClicked(selectAllItem)" title="{{selectAllItem.displayName}}" (mouseenter)="onMouseEnter(selectAllItem)" (mouseleave)="onMouseLeave(selectAllItem)">
                         <vgr-checkbox class="checkbox--inline" [checked]="selectAllItem.selected" (checkedChanged)="onItemCheckChanged(selectAllItem)" [label]="selectAllItem.displayName"></vgr-checkbox>
                     </a>
-                    <a *ngIf="filterActive" (mousedown)="clearFilter()" title="{{displayAllItemsText}}" (mouseenter)="onMouseEnter(selectAllItem)" (mouseleave)="onMouseLeave(selectAllItem)">{{displayAllItemsText}}
+                    <!-- om listan är filtrerad -->
+                    <a *ngIf="filterActive" (mousedown)="clearFilter()" title="{{showAllItemText}}" (mouseenter)="onMouseEnter(selectAllItem)" (mouseleave)="onMouseLeave(selectAllItem)">{{showAllItemText}}
                     </a>
                 </li>
                 <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
