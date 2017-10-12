@@ -37,21 +37,32 @@ Testerna är uppdelade i två typer, tester med Angular och tester utan Angular.
 
 ## Versioner
 
-Vi använder [SemVer](http://semver.org/) för versionering.
+Vi använder [SemVer](http://semver.org/) för versionering. Ändringar mellan versioner noteras i vår [Changelog](CHANGELOG.md), som följer riktlinjer från [keepachangelog.com](http://keepachangelog.com). Changelog för stabil version (se nedan) innehåller alltid ändringar utifrån **föregående stabila version**.
 
 ### Senaste stabila version
-Den senaste stabila versionen hämtas automatiskt via
+Efter godkännande av demo från produktägare skapas en ny stabil version.
+
+Den senaste stabila versionen hämtas automatiskt via.
 ```npm
 npm install vgr-komponentkartan
 ```
 
-### Senaste demo version
-Den senaste demo versionen (OBS! Ej för produktion) hämtas via
+### Senaste demoversion
+Under utveckling av nya features publiceras en demoversion. Den används internt av teamet och används vid demo för produktägare. Den namnges som releasekandidat med *kommande-version*-*rc*.*nummer*. T.ex
+- 1.2.0-rc1
+- 1.2.0-rc2
+- osv..
+
+En demoversion publiceras av teamet med hjälp av
+```npm
+npm publish --tag demo
+```
+
+För att hämta ner den senaste demoversionen **OBS! Ej för produktion**
 ```npm
 npm install vgr-komponentkartan@demo
 ```
 
-Demoversioner är alltid märkta med "rc", dvs x.y.z-rc1, x.y.z-rc2 osv.
 ## Författare
 VGR IT
 
