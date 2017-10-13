@@ -14,6 +14,7 @@ export abstract class DropdownBaseComponent {
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
+    @Input() noItemSelectedLabel: string; //visas i dropdownboxen då man inte valt något
     //property sets the text for the "show all" item in the dropdown
     @Input() showAllItemText: string;
     showAllItem: IDropdownItem;
@@ -58,7 +59,14 @@ export abstract class DropdownBaseComponent {
         this.filterPipe = new FilterPipe();
         this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
         this.showAllItemText = "Visa alla";
+
+        this.showAllItem = {
+            displayName: this.showAllItemText,
+        } as IDropdownItem;
     }
+
+
+
 
     protected abstract handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void;
 
