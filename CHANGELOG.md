@@ -14,8 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - renamed preselectedDate to selectedDate
 #### TextButtonComponent/ButtonComponent
 - renamed TextButtonComponent to ButtonComponent
-- renamed TextButtonComponent selector from vgr-text-button to
-vgr-button
+- renamed TextButtonComponent selector from vgr-text-button to vgr-button
 - renamed TextButtonComponent.buttonClick to click
 - renamed all css classes concerning .text-button to .button
 #### LockButtonComponent
