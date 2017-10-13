@@ -6,18 +6,17 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     templateUrl: './filterTextbox.component.html'
 })
 export class FilterTextboxComponent {
-    private value: string;
-    @Output() inputChange = new EventEmitter<string>();
-    @Input() get filterValue() {
-        return this.value;
+    private _value: string;
+    @Output() valueChanged = new EventEmitter<string>();
+    @Input() get value() {
+        return this._value;
     }
-    set filterValue(newValue: string) {
-        this.value = newValue;
-        this.inputChange.emit(newValue);
-
+    set value(newValue: string) {
+        this._value = newValue;
+        this.valueChanged.emit(newValue);
     }
     clear() {
-        this.value = '';
-        this.inputChange.emit('');
+        this._value = '';
+        this.valueChanged.emit('');
     }
 }

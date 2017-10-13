@@ -138,7 +138,7 @@ describe('DropdownComponent', () => {
                 });
                 describe('and the text mathches 11 items', () => {
                     beforeEach(() => {
-                        filterBoxElement.triggerEventHandler('inputChange', 'Name1');
+                        filterBoxElement.triggerEventHandler('valueChanged', 'Name1');
                         fixture.detectChanges();
                     });
                     it('11 items are displayed', () => {
@@ -157,7 +157,7 @@ describe('DropdownComponent', () => {
                         for (let i = 0; i < 8; i++) {
                             component.items.push({ displayName: `NewItem!${i}` } as IDropdownItem);
                         };
-                        filterBoxElement.triggerEventHandler('inputChange', 'NewItem');
+                        filterBoxElement.triggerEventHandler('valueChanged', 'NewItem');
                         fixture.detectChanges();
                     });
                     it('8 items are displayed', () => {
@@ -173,7 +173,7 @@ describe('DropdownComponent', () => {
                 describe('and the text mathches and id of an item', () => {
                     beforeEach(() => {
                         component.items.push({ id: 'SomeId' } as IDropdownItem);
-                        filterBoxElement.triggerEventHandler('inputChange', 'SomeId');
+                        filterBoxElement.triggerEventHandler('valueChanged', 'SomeId');
                         fixture.detectChanges();
                     });
                     it('no items are displayed', () => {

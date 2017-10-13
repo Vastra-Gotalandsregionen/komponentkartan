@@ -311,7 +311,7 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         describe("when the list has been filtered", () => {
             beforeEach(() => {
-                component.filterTextboxComponent.filterValue = "2";
+                component.filterTextboxComponent.value = "2";
                 fixture.detectChanges();
             });
             it("the select all item text is 'Välj alla'", () => {
@@ -325,7 +325,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         describe("when all items are selected and the list is filtered", () => {
             beforeEach(() => {
                 component.selectAllItems();
-                component.filterTextboxComponent.filterValue = "2";
+                component.filterTextboxComponent.value = "2";
                 fixture.detectChanges();
             });
             describe("and filter is cleared", () => {

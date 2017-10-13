@@ -23,7 +23,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
     @Output() selectionChanged = new EventEmitter<IDropdownItem[]>();
     get filterActive(): boolean {
-        return this.filterTextboxComponent && this.filterTextboxComponent.filterValue && this.filterTextboxComponent.filterValue !== '';
+        return this.filterTextboxComponent && this.filterTextboxComponent.value && this.filterTextboxComponent.value !== '';
     }
 
     constructor(elementRef: ElementRef) {
