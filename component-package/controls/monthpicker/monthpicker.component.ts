@@ -15,7 +15,7 @@ export class MonthpickerComponent implements OnInit {
     @Input() selectedDate?: Date;
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() selectedDateFormat: string = 'MMM yyyy';
-    @Input() tooltipDateFormat: string = 'MMM yyyy';
+    @Input() tooltipDateFormat: string = 'MMMM yyyy';
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
