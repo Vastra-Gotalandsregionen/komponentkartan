@@ -1,5 +1,7 @@
-import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener, HostBinding } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
+import { IValidatable } from '../../models/validatable.model';
+import { IValidationResult } from '../../models/validated.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
@@ -9,8 +11,7 @@ import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConf
 @Component({
 
 })
-export abstract class DropdownBaseComponent {
-
+export abstract class DropdownBaseComponent implements IValidatable {
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
@@ -65,6 +66,9 @@ export abstract class DropdownBaseComponent {
         } as IDropdownItem;
     }
 
+    validate(): IValidationResult {
+        return { isValid: true, validationError: '' } as IValidationResult;
+    }
 
 
 

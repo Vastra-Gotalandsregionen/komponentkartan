@@ -8,6 +8,7 @@ import { CalendarsComponent } from './calendars/calendars.component'
 import { FargkartaComponent } from './fargkarta/fargkarta.component'
 import { InputFieldsComponent } from './inputFields/inputFields.component'
 import { LoaderDemoComponent } from './loaderdemo/loaderdemo.component'
+import { FormExampleComponent } from './formexample/formexample.component'
 
 export const appRoutes: Routes = [
     { path: 'formatmall', component: FormatmallComponent },
@@ -16,5 +17,6 @@ export const appRoutes: Routes = [
     { path: 'calendars', component: CalendarsComponent },
     { path: 'inputFields', component: InputFieldsComponent },
     { path: 'loader', component: LoaderDemoComponent },
+    { path: 'formexample', component: FormExampleComponent },
     { path: '**', component: KomponentkartaComponent }
 ];

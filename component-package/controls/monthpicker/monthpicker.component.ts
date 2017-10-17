@@ -2,23 +2,27 @@ import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit,
 import { DatePipe } from '@angular/common';
 import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
+import { IValidatable } from '../../models/validatable.model';
+import { IValidationResult } from '../../models/validated.model';
 
 @Component({
     selector: 'vgr-monthpicker',
     moduleId: module.id,
     templateUrl: './monthpicker.component.html'
 })
-export class MonthpickerComponent implements OnInit {
+export class MonthpickerComponent implements OnInit, IValidatable {
     today: Date = new Date();
     @Input() minDate: Date;
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
+    @Input() required: boolean;
     @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() selectedDateFormat: string = 'MMM yyyy';
-    @Input() tooltipDateFormat: string = 'MMMM yyyy';
+    @Input() selectedDateFormat = 'MMM yyyy';
+    @Input() tooltipDateFormat = 'MMMM yyyy';
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
+    @HostBinding('class.invalid') invalid: boolean;
     displayedYear: ICalendarYear;
     previousYear: ICalendarYear;
     nextYear: ICalendarYear;
@@ -33,6 +37,16 @@ export class MonthpickerComponent implements OnInit {
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
     };
+
+    validate(): IValidationResult {
+        if (this.required && !this.selectedDate) {
+            this.invalid = true;
+            return { isValid: false, validationError: 'Obligatoriskt' } as IValidationResult;
+        } else {
+            this.invalid = false;
+            return { isValid: true, validationError: '' } as IValidationResult;
+        }
+    }
 
     ngOnInit() {
 
@@ -113,6 +127,9 @@ export class MonthpickerComponent implements OnInit {
 
     }
 
+    onLeave() {
+        this.validate();
+    }
     onNextMouseDown(event: Event) {
         event.cancelBubble = true;
 

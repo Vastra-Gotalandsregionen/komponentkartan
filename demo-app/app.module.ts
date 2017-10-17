@@ -15,6 +15,7 @@ import { KomponentkartanModule } from '../component-package/komponentkartan.modu
 import { ListsComponent } from './lists/lists.component';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { InputFieldsComponent } from './inputFields/inputFields.component'
+import { FormExampleComponent } from './formexample/formexample.component'
 import { LoaderDemoComponent } from './loaderdemo/loaderdemo.component'
 import { CityService } from './inputFields/cityService';
 
@@ -39,7 +40,8 @@ import { appRoutes } from './routes'
         ListsComponent,
         CalendarsComponent,
         InputFieldsComponent,
-        LoaderDemoComponent
+        LoaderDemoComponent,
+        FormExampleComponent
     ],
     providers: [
         CityService, { provide: LOCALE_ID, useValue: 'sv-SE' }

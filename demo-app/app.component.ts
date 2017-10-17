@@ -357,7 +357,8 @@ export class KomponentkartanApplicationComponent {
                             { title: 'Kalender', url: '/calendars' } as IMenuItem,
                             { title: 'Inputfält', url: '/inputFields' } as IMenuItem,
                             { title: 'Loader', url: '/loader' } as IMenuItem,
-                            { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem
+                            { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem,
+                            { title: 'Formulär', url: '/formexample' } as IMenuItem,
                         ] as IMenuItem[]
                     } as IMenuGroup
                 ] as IMenuGroup[]

@@ -3,13 +3,15 @@ import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit,
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
+import { IValidatable } from '../../models/validatable.model';
+import { IValidationResult } from '../../models/validated.model';
 
 @Component({
     selector: 'vgr-datepicker',
     moduleId: module.id,
     templateUrl: './datepicker.component.html'
 })
-export class DatepickerComponent implements OnInit {
+export class DatepickerComponent implements OnInit, IValidatable {
     today: Date = new Date();
     @Input() minDate: Date;
     @Input() maxDate: Date;
@@ -35,6 +37,10 @@ export class DatepickerComponent implements OnInit {
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
     };
+
+    validate(): IValidationResult {
+        return { isValid: true, validationError: '' } as IValidationResult;
+    }
 
     ngOnInit() {
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
