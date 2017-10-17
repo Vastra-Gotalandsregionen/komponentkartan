@@ -1,48 +1,67 @@
-import { Component, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, HostBinding } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { trigger, state, style, animation, keyframes, transition, animate } from '@angular/animations';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'vgr-loader',
   moduleId: module.id,
-  templateUrl: './loader.component.html',
-  animations: [trigger('spinning', [
-    transition('stopped=>spinning',
-      animate('1.2s linear', keyframes([
-        style({ transform: 'rotate(-45deg)', offset: 0 }),
-        style({ transform: 'rotate(315deg)', offset: 1 })
-      ])))
-  ])]
+  templateUrl: './loader.component.html'
 })
 export class LoaderComponent {
-  private _spinning: boolean;
-  private spinningState = 'stopped';
-  get rotationInProgress(): boolean {
-    return this.spinningState === 'spinning';
-  }
-  set rotationInProgress(value: boolean) {
-    this.spinningState = value ? 'spinning' : 'stopped';
-  }
-  @Input() set spinning(value: boolean) {
-    this._spinning = value;
-    if (value) {
-      this.rotationInProgress = true;
+  private _minimumTimeMs = 1000;
+  private lastActivated: Date;
+  private _active = false;
+
+  @HostBinding('class.loader--visible') visible = false;
+  @HostBinding('class.loader--spinning') spinning = false;
+
+  @Input() set active(value: boolean) {
+    if ((this._active && !value) || (!this._active && value)) {
+      this._active = value;
+      if (!this._active) {
+        this.hideWhenMinimumTimeHasPassed();
+      } else {
+        this.showForMinimumTime();
+      }
     }
   }
-  get spinning(): boolean {
-    return this._spinning;
+  get active(): boolean {
+    return this._active;
   }
 
   @Input() small: boolean;
 
+
   constructor(private changeDetector: ChangeDetectorRef) { }
 
-  rotationDone() {
-    this.rotationInProgress = false;
-    this.changeDetector.detectChanges();
-    if (this._spinning) {
-      this.rotationInProgress = true;
+  private startSpinning() {
+    this.spinning = true;
+    this.visible = true;
+  }
+  private stopSpinning() {
+    setTimeout(() => {
+      if (this._active) {
+        this.startSpinning();
+      } else {
+        this.spinning = false;
+      }
+    }, 400);
+    this.visible = false;
+  }
+  private hideWhenMinimumTimeHasPassed() {
+    const timeShown = new Date().getTime() - this.lastActivated.getTime();
+    if (timeShown >= this._minimumTimeMs) {
+      this.stopSpinning();
+    } else {
+      setTimeout(() => {
+        this.stopSpinning();
+      }, this._minimumTimeMs - timeShown);
     }
   }
+
+  private showForMinimumTime() {
+    this.lastActivated = new Date();
+    this.startSpinning();
+  }
+
+
 }
