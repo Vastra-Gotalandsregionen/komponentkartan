@@ -109,7 +109,7 @@ describe('HeaderMenuComponent', () => {
             describe(' an item is clicked', () => {
                 var itemToClick: DebugElement;
                 beforeEach(() => {
-                    itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text === 'Min sida')[0];
+                    itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('Min sida'))[0];
                     itemToClick.triggerEventHandler('mousedown', null);
                     fixture.detectChanges();
 
@@ -124,7 +124,7 @@ describe('HeaderMenuComponent', () => {
                 describe('and an item is hovered', () => {
                     var itemToHover: DebugElement;
                     beforeEach(() => {
-                        itemToHover = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text === 'FAQ')[0];
+                        itemToHover = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('FAQ'))[0];
                         itemToHover.triggerEventHandler('mouseenter', null);
                         fixture.detectChanges();
                     });
@@ -179,7 +179,7 @@ describe('HeaderMenuComponent', () => {
     describe('A submenu header is clicked', () => {
         var itemToClick: DebugElement;
         beforeEach(() => {
-            itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text === 'FAQ')[0];
+            itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('FAQ'))[0];
             itemToClick.triggerEventHandler('mousedown', null);
             fixture.detectChanges();
 

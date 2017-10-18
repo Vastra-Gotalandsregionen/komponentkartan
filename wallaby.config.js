@@ -83,6 +83,10 @@
       load: false
     }],
 
+    env: {
+      kind: 'chrome'
+    },
+
 
     middleware: function (app, express) {
       app.use('/node_modules', express.static(require('path').join(__dirname, 'node_modules')));
