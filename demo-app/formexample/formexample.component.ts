@@ -4,6 +4,7 @@ import { ISelectableItem } from '../../component-package/models/selectableItem.m
 import { MonthpickerComponent } from '../../component-package/controls/monthpicker/monthpicker.component';
 import { DropdownBaseComponent } from '../../component-package/controls/dropdown-base/dropdown.base.component';
 import { DropdownComponent } from '../../component-package/controls/dropdown/dropdown.component';
+import { ValidationComponent } from '../../component-package/controls/validation/validation.component';
 
 @Component({
     moduleId: module.id,
@@ -14,7 +15,7 @@ export class FormExampleComponent {
     validationStatus: string;
     items: ISelectableItem[];
     multiItems: ISelectableItem[];
-    @ViewChildren('validate') validatedComponents: QueryList<IValidation>;
+    @ViewChildren(ValidationComponent) validatedComponents: QueryList<ValidationComponent>;
     constructor() {
         this.validationStatus = 'Inte validerad';
         this.items = [
@@ -32,23 +33,19 @@ export class FormExampleComponent {
     }
 
     onSave() {
-        this.validationStatus = 'Inga';
+        this.validationStatus = 'Inga fel (kontrollerar ' + this.validatedComponents.length + ' fält)';
         let isValid = true;
 
         this.validatedComponents.forEach(validatedComponent => {
-            if (validatedComponent.validate !== undefined) {
-                const result = validatedComponent.validate();
-                if (result.isValid) {
-                    console.log('Component is valid');
-                } else {
-                    isValid = false;
-                }
+            const result = validatedComponent.validate();
+            if (result.isValid) {
+                console.log('Component is valid');
             } else {
-                console.log('Component has no validation');
+                isValid = false;
             }
         });
         if (!isValid) {
-            this.validationStatus = 'Ett eller flera fält har fel, se markering';
+            this.validationStatus = 'Ett eller flera av ' + this.validatedComponents.length + ' fält har fel, se markering';
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef, forwardRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
@@ -9,7 +9,9 @@ import { ValidationComponent } from '../../controls/validation/validation.compon
 @Component({
     selector: 'vgr-monthpicker',
     moduleId: module.id,
-    templateUrl: './monthpicker.component.html'
+    templateUrl: './monthpicker.component.html',
+    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => MonthpickerComponent) }]
+
 })
 export class MonthpickerComponent extends ValidationComponent implements OnInit {
 

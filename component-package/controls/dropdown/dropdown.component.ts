@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding, forwardRef } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -6,11 +6,15 @@ import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 import { IValidationResult } from '../../models/validation.model';
+import { ValidationComponent } from '../validation/validation.component';
+
 @Component({
     selector: 'vgr-dropdown',
     moduleId: module.id,
     templateUrl: './dropdown.component.html',
-    styleUrls: ['../dropdown-base/dropdown.scrollbar.css']
+    styleUrls: ['../dropdown-base/dropdown.scrollbar.css'],
+    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownComponent) }]
+
 })
 
 export class DropdownComponent extends DropdownBaseComponent implements OnInit, OnChanges {

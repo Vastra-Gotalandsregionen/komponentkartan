@@ -507,7 +507,7 @@ describe('[InputComponent]', () => {
                 expect(component.validationErrorState).toEqual(validationErrorStates.NoError);
             });
             it('validation error message is undefined', () => {
-                expect(component.validationErrorMessage).toBeUndefined();
+                expect(component.validationErrorMessage).toBe('');
             });
         });
     });

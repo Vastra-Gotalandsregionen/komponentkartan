@@ -1,5 +1,5 @@
 
-import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef, forwardRef } from '@angular/core';
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
@@ -8,7 +8,9 @@ import { ValidationComponent } from '../../controls/validation/validation.compon
 @Component({
     selector: 'vgr-datepicker',
     moduleId: module.id,
-    templateUrl: './datepicker.component.html'
+    templateUrl: './datepicker.component.html',
+    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DatepickerComponent) }]
+
 })
 export class DatepickerComponent extends ValidationComponent implements OnInit {
     today: Date = new Date();

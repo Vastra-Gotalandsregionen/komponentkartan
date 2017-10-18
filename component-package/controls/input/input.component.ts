@@ -1,14 +1,14 @@
-import { Component, Input, EventEmitter, Output, HostBinding, OnInit, ElementRef } from '@angular/core'
+import { Component, Input, EventEmitter, Output, HostBinding, OnInit, ElementRef, forwardRef } from '@angular/core'
 import { DecimalPipe } from '@angular/common'
 import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
-
-
-
+import { ValidationComponent } from '../../controls/validation/validation.component';
 
 @Component({
     selector: 'vgr-input',
     moduleId: module.id,
-    templateUrl: './input.component.html'
+    templateUrl: './input.component.html',
+    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => InputComponent) }]
+
 })
 export class InputComponent implements OnInit, IValidation {
     // För att kunna använda enum i markup måste den definieras som en variabel här
@@ -144,31 +144,36 @@ export class InputComponent implements OnInit, IValidation {
     }
 
     validate(): IValidationResult {
+        let result = this.successfulValidationResult;
         if (this.readonly) {
-            return this.successfulValidationResult;
-        }
-
-        if (this.customValidator) {
-            return this.customValidator(this.displayValue);
-        }
-
-        if (!this.displayValue || this.displayValue.length === 0) {
+            result = this.successfulValidationResult;
+        } else if (this.customValidator) {
+            result = this.customValidator(this.displayValue);
+        } else if (!this.displayValue || this.displayValue.length === 0) {
             if (this.required) {
-                return this.emptyRequiredFieldValidationResult;
+                result = this.emptyRequiredFieldValidationResult;
             } else {
-                return this.successfulValidationResult;
+                result = this.successfulValidationResult;
             }
-        }
-
-        if (this.pattern && this.pattern.length > 0) {
+        } else if (this.pattern && this.pattern.length > 0) {
             const valueToMatch = this.displayValue !== undefined ? this.displayValue : '';
             const regexp = new RegExp(this.pattern);
             if (!regexp.test(valueToMatch)) {
-                return this.invalidPatternValidationResult;
+                result = this.invalidPatternValidationResult;
             }
         }
 
-        return this.successfulValidationResult;
+        if (result.isValid) {
+            this.validationErrorMessage = '';
+            if (this.validationErrorState === ValidationErrorState.Active || this.validationErrorState === ValidationErrorState.Editing) {
+                this.setValidationState(ValidationErrorState.Fixed);
+            }
+
+        } else {
+            this.setValidationState(ValidationErrorState.Active);
+            this.validationErrorMessage = result.validationError;
+        }
+        return result;
     }
 
     onLeave(): void {
@@ -221,23 +226,8 @@ export class InputComponent implements OnInit, IValidation {
     private isContentValid(): boolean {
         const validationResult = this.validate();
 
-        if (validationResult.isValid) {
-            if (this.validationErrorState === ValidationErrorState.NoError) {
-                return true;
-            }
+        return validationResult.isValid;
 
-            this.validationErrorMessage = '';
-
-            if (this.validationErrorState === ValidationErrorState.Active || this.validationErrorState === ValidationErrorState.Editing) {
-                this.setValidationState(ValidationErrorState.Fixed);
-                return true;
-            }
-
-        }
-
-        this.setValidationState(ValidationErrorState.Active);
-        this.validationErrorMessage = validationResult.validationError;
-        return false;
     }
 
     setValidationState(newValidationErrorState: ValidationErrorState) {
