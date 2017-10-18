@@ -97,16 +97,16 @@
 .font-example {
   width: 900px;
   &:after {
-    content: "Brödtext: 16 px, regular, radavstånd 1.5, #151515";
+    content: "Text: 16 px, regular, radavstånd 1.5, #151515";
   }
 }
 
 strong.font-example:after {
-  content: "Brödtext: 16 px, bold, radavstånd 1.5, #151515";
+  content: "Text: 16 px, bold, radavstånd 1.5, #151515";
 }
 
 .text--white.font-example:after {
-  content: "Brödtext vit: 16 px, bold, radavstånd 1.5, #151515";
+  content: "Text vit: 16 px, bold, radavstånd 1.5, #151515";
 }
 
 h1.font-example:after {
@@ -130,14 +130,14 @@ h3.font-example:after {
   .font-example {
     width: 900px;
     &:after {
-      content: "Brödtext: 18 px, regular, radavstånd 1.5, #151515";
+      content: "Text: 18 px, regular, radavstånd 1.5, #151515";
     }
   }
   strong.font-example:after {
-    content: "Brödtext: 18 px, bold, radavstånd 1.5, #151515";
+    content: "Text: 18 px, bold, radavstånd 1.5, #151515";
   }
   .text--white.font-example:after {
-    content: "Brödtext vit: 18 px, bold, radavstånd 1.5, #151515";
+    content: "Text vit: 18 px, bold, radavstånd 1.5, #151515";
   }
   h1.font-example:after {
     content: "Rubrik 1, ANVÄNDARE: 30 px, regular, radavstånd 1.5, #151515";
