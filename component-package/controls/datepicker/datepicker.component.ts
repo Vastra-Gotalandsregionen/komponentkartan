@@ -58,7 +58,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         if (this.disabled)
             return;
 
-        this.setValidationStateErrorEditing();
+        this.setValidationStateEditing();
     }
 
     ngOnInit() {

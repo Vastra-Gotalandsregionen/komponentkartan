@@ -16,6 +16,9 @@ export abstract class ValidationComponent implements IValidation {
     @HostBinding('class.validation-error--editing') get validationErrorEditing() {
         return this.validationErrorState === ValidationErrorState.Editing;
     }
+    @HostBinding('class.validation-error--fixed') get validationErrorFixed() {
+        return this.validationErrorState === ValidationErrorState.Fixed;
+    }
 
     constructor() {
         this.validationErrorState = ValidationErrorState.NoError;
@@ -24,7 +27,7 @@ export abstract class ValidationComponent implements IValidation {
     abstract doValidate(): IValidationResult;
 
     validate(): IValidationResult {
-        var result = this.doValidate();
+        const result = this.doValidate();
         if (result.isValid) {
             this.setValidationStateNoError();
         } else {
@@ -33,22 +36,29 @@ export abstract class ValidationComponent implements IValidation {
         return result;
     }
 
-    protected setValidationStateErrorActive(message: string) {
+    protected setValidationStateEditing() {
+        if (this.validationErrorState === ValidationErrorState.Active) {
+            this.validationErrorState = ValidationErrorState.Editing;
+        } else if (this.validationErrorState === ValidationErrorState.Fixed) {
+            this.setValidationStateNoError();
+        }
+    }
+
+    private setValidationStateErrorActive(message: string) {
         this.validationErrorMessage = message;
         this.validationErrorState = ValidationErrorState.Active;
     }
-    protected setValidationStateErrorEditing() {
-        if (this.validationErrorState === ValidationErrorState.Active)
-            this.validationErrorState = ValidationErrorState.Editing;
-    }
-    protected setValidationStateErrorFixed() {
+
+    private setValidationStateErrorFixed() {
         this.validationErrorMessage = '';
         this.validationErrorState = ValidationErrorState.Fixed;
     }
-    protected setValidationStateNoError() {
-        this.validationErrorMessage = '';
-        this.validationErrorState = ValidationErrorState.NoError;
+    private setValidationStateNoError() {
+        if (this.validationErrorState === ValidationErrorState.Active || this.validationErrorState === ValidationErrorState.Editing) {
+            this.setValidationStateErrorFixed();
+        } else {
+            this.validationErrorMessage = '';
+            this.validationErrorState = ValidationErrorState.NoError;
+        }
     }
-
-    //Active
 }

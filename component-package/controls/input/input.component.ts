@@ -10,7 +10,7 @@ import { ValidationComponent } from '../../controls/validation/validation.compon
     providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => InputComponent) }]
 
 })
-export class InputComponent implements OnInit, IValidation {
+export class InputComponent extends ValidationComponent implements OnInit, IValidation {
     // För att kunna använda enum i markup måste den definieras som en variabel här
     validationErrorStates = ValidationErrorState;
     @HostBinding('class.validated-input') hasClass = true;
@@ -33,8 +33,6 @@ export class InputComponent implements OnInit, IValidation {
     @Output() valueChanged: EventEmitter<string> = new EventEmitter<string>();
 
     numericValue?: number;
-    validationErrorState: ValidationErrorState;
-    validationErrorMessage: string;
     swedishDecimalPipe: DecimalPipe = new DecimalPipe('sv-se');
     decimalPipeConfiguration: string;
     displayValue: string;
@@ -80,7 +78,7 @@ export class InputComponent implements OnInit, IValidation {
     }
 
     constructor() {
-        this.validationErrorState = ValidationErrorState.NoError;
+        super();
     }
 
     ngOnInit() {
@@ -121,11 +119,7 @@ export class InputComponent implements OnInit, IValidation {
         if (this.readonly) {
             return;
         }
-        if (this.validationErrorState === ValidationErrorState.Active) {
-            this.setValidationState(ValidationErrorState.Editing);
-        } else if (this.validationErrorState === ValidationErrorState.Fixed) {
-            this.setValidationState(ValidationErrorState.NoError);
-        }
+        this.setValidationStateEditing();
 
         if (this.isNumeric) {
             if (this.value && !isNaN(this.value)) {
@@ -143,7 +137,7 @@ export class InputComponent implements OnInit, IValidation {
         }
     }
 
-    validate(): IValidationResult {
+    doValidate(): IValidationResult {
         let result = this.successfulValidationResult;
         if (this.readonly) {
             result = this.successfulValidationResult;
@@ -161,17 +155,6 @@ export class InputComponent implements OnInit, IValidation {
             if (!regexp.test(valueToMatch)) {
                 result = this.invalidPatternValidationResult;
             }
-        }
-
-        if (result.isValid) {
-            this.validationErrorMessage = '';
-            if (this.validationErrorState === ValidationErrorState.Active || this.validationErrorState === ValidationErrorState.Editing) {
-                this.setValidationState(ValidationErrorState.Fixed);
-            }
-
-        } else {
-            this.setValidationState(ValidationErrorState.Active);
-            this.validationErrorMessage = result.validationError;
         }
         return result;
     }
@@ -225,13 +208,7 @@ export class InputComponent implements OnInit, IValidation {
 
     private isContentValid(): boolean {
         const validationResult = this.validate();
-
         return validationResult.isValid;
-
-    }
-
-    setValidationState(newValidationErrorState: ValidationErrorState) {
-        this.validationErrorState = newValidationErrorState;
     }
 }
 

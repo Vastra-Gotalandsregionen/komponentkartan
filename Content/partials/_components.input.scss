@@ -102,7 +102,7 @@ input.input-container__textbox {
     width: calc(#{$input-small-width--small} + #{$margin--fat});
     max-width: calc(#{$input-small-width--small} + #{$margin--fat});
   }
-  &.validation-error--active {
+  .validation-error--active & {
     max-height: unset;
     padding: $margin--slim;
     margin-left: -$margin--slim;
@@ -115,7 +115,7 @@ input.input-container__textbox {
     padding-bottom 0.3s linear,
     top 0.3s linear;
   }
-  &.validation-error--editing {
+  .validation-error--editing & {
     max-height: unset;
     .title-value-layout & {
       top: -10px;
@@ -125,7 +125,7 @@ input.input-container__textbox {
     margin-left: -$margin--slim;
     transition: background-color 0.3s linear;
   }
-  &.validation-error--fixed {
+  .validation-error--fixed & {
     &:after {
       visibility: visible;
     }

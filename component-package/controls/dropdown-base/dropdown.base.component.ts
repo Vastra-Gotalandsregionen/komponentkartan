@@ -125,7 +125,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     }
 
     onEnter() {
-        this.setValidationStateErrorEditing();
+        this.setValidationStateEditing();
     }
 
     onLeave() {
