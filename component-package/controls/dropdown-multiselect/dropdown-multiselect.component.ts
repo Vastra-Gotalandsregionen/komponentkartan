@@ -5,6 +5,8 @@ import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
+import { IValidationResult } from '../../models/validation.model';
+
 
 @Component({
     selector: 'vgr-dropdown-multiselect',
@@ -14,9 +16,10 @@ import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component'
 })
 
 export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges {
-    @Input() showAllItemText: string; //showAllItemText (skrivit ett filter och vill rensa filtret)
+
+    @Input() showAllItemText: string; // showAllItemText (skrivit ett filter och vill rensa filtret)
     @Input() allItemsSelectedLabel: string;
-    @Input() selectAllItemText: string; //texten som visaspå checkboxen för att välja alla
+    @Input() selectAllItemText: string; // texten som visaspå checkboxen för att välja alla
 
     dropdownLabel: string;
     selectAllItem: IDropdownItem;
@@ -24,6 +27,9 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     @Output() selectionChanged = new EventEmitter<IDropdownItem[]>();
     get filterActive(): boolean {
         return this.filterTextboxComponent && this.filterTextboxComponent.value && this.filterTextboxComponent.value !== '';
+    }
+    get selectedItems(): IDropdownItem[] {
+        return this._items.filter(x => x.selected);
     }
 
     constructor(elementRef: ElementRef) {
@@ -41,6 +47,14 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         } as IDropdownItem;
 
 
+    }
+
+    doValidate(): IValidationResult {
+        const isValid = !this.required || (this.selectedItems && this.selectedItems.length > 0);
+        return {
+            isValid: isValid,
+            validationError: isValid ? '' : 'Obligatoriskt'
+        } as IValidationResult;
     }
 
     ngOnChanges() {
@@ -93,9 +107,10 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             this.selectionChanged.emit(this._items);
         } else {
             this.selectAllItem.selected = this._items.filter(x => !x.selected).length === 0;
-            this.selectionChanged.emit(this._items.filter(x => x.selected));
+            this.selectionChanged.emit(this.selectedItems);
         }
         this.updateDropdownLabel();
+        this.validate();
     }
 
     deselectItem(item: IDropdownItem) {
@@ -112,6 +127,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         this.selectAllItem.selected = false;
         this.updateDropdownLabel();
+        this.validate();
     }
 
     private updateDropdownLabel() {

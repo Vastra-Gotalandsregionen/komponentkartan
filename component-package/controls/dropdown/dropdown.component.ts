@@ -5,7 +5,7 @@ import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
-
+import { IValidationResult } from '../../models/validation.model';
 @Component({
     selector: 'vgr-dropdown',
     moduleId: module.id,
@@ -16,13 +16,13 @@ import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component'
 export class DropdownComponent extends DropdownBaseComponent implements OnInit, OnChanges {
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
 
-    @Input() noItemSelectedLabel: string; //visas i dropdownboxen då man inte valt något
+    @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
     @Input() @HostBinding('class.disabled') disabled: boolean;
     selectedItem: IDropdownItem;
 
     constructor(elementRef: ElementRef) {
         super(elementRef);
-        this.noItemSelectedLabel = "";
+        this.noItemSelectedLabel = ''
     };
 
     ngOnChanges() {
@@ -35,6 +35,14 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
     }
     ngOnInit() {
 
+    }
+
+    doValidate(): IValidationResult {
+        const isValid = !this.required || this.selectedItem;
+        return {
+            isValid: isValid,
+            validationError: isValid ? '' : 'Obligatoriskt'
+        } as IValidationResult;
     }
 
     showAllItems() {
@@ -56,6 +64,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
 
         item.marked = true;
         this.selectedItem = item;
+        this.validate();
         this.selectedItemChanged.emit(item);
 
 

@@ -12,13 +12,14 @@ import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConf
 @Component({
 
 })
-export abstract class DropdownBaseComponent {
+export abstract class DropdownBaseComponent extends ValidationComponent {
 
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
+    @Input() required: boolean;
     showAllItem: IDropdownItem;
 
     expanded: boolean;
@@ -53,12 +54,13 @@ export abstract class DropdownBaseComponent {
         return this._items;
     }
     constructor(protected elementRef: ElementRef) {
+        super();
         this.expanded = false;
         this.filterVisible = false;
         this.scrollVisible = false;
         this.filterPipe = new FilterPipe();
         this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
-        this.showAllItemText = "Visa alla";
+        this.showAllItemText = 'Visa alla';
 
         this.showAllItem = {
             displayName: this.showAllItemText,
@@ -71,7 +73,6 @@ export abstract class DropdownBaseComponent {
             this.hideDimmersIfScrollIsAtBottomOrTop(e);
         });
     }
-
 
     private hideDimmersIfScrollIsAtBottomOrTop(scrollEvent: JQueryEventObject) {
         const scrollbar = $(scrollEvent.target);
@@ -123,6 +124,14 @@ export abstract class DropdownBaseComponent {
         }
     }
 
+    onEnter() {
+        this.setValidationStateErrorEditing();
+    }
+
+    onLeave() {
+        this.validate();
+    }
+
     private toggleExpand(event: Event) {
         const target = event.target || event.srcElement || event.currentTarget;
         const element = $(target);
@@ -139,5 +148,7 @@ export abstract class DropdownBaseComponent {
             this.expanded = false;
         }
     }
+
+
 
 }

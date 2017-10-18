@@ -1,23 +1,29 @@
-<div class="dropdown" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
-  (mousedown)="onDropdownMouseDown($event)">
-  <span *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{selectedItem | dropdownItemToSelectedText | truncate:14 }}</span>
-  <span *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{noItemSelectedLabel | truncate:14 }}</span>
-  <div class="dropdown__menu">
-    <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
+<div class="validation">
+  <div class="dropdown" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
+    (mousedown)="onDropdownMouseDown($event)" (focusout)="onLeave()" (focusin)="onEnter()">
+    <span tabIndex="0" *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{selectedItem | dropdownItemToSelectedText | truncate:14 }}</span>
+    <span tabIndex="0" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{noItemSelectedLabel | truncate:14 }}</span>
+    <div class="dropdown__menu">
+      <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
 
-    <div class="dropdown__dimmer dropdown__dimmer--top"></div>
-    <perfect-scrollbar class="container" [config]="scrollbarConfig">
-      <ul class="dropdown__menu__items">
-        <li *ngIf="filterVisible" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : showAllItem.marked }">
-          <a (mousedown)="showAllItems()" title="{{showAllItem.displayName}}" (mouseenter)="onMouseEnter(showAllItem)" (mouseleave)="onMouseLeave(showAllItem)">{{showAllItem.displayName}}</a>
-        </li>
-        <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
-          <a (mousedown)="selectItem(item)" title={{item.displayName}} (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave(item)">{{item.displayName}}</a>
-        </li>
-      </ul>
-    </perfect-scrollbar>
-    <div class="dropdown__dimmer dropdown__dimmer--bottom"></div>
+      <div class="dropdown__dimmer dropdown__dimmer--top"></div>
+      <perfect-scrollbar class="container" [config]="scrollbarConfig">
+        <ul class="dropdown__menu__items">
+          <li *ngIf="filterVisible" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : showAllItem.marked }">
+            <a (mousedown)="showAllItems()" title="{{showAllItem.displayName}}" (mouseenter)="onMouseEnter(showAllItem)" (mouseleave)="onMouseLeave(showAllItem)">{{showAllItem.displayName}}</a>
+          </li>
+          <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
+            <a (mousedown)="selectItem(item)" title={{item.displayName}} (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave(item)">{{item.displayName}}</a>
+          </li>
+        </ul>
+      </perfect-scrollbar>
+      <div class="dropdown__dimmer dropdown__dimmer--bottom"></div>
 
 
+    </div>
+  </div>
+  <div class="validation__status" title="{{validationErrorMessage}}">
+    <div class="validation__status__icon"></div>
+    <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
   </div>
 </div>
