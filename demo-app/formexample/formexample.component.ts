@@ -1,7 +1,6 @@
 import { Component, ViewChildren, QueryList } from '@angular/core';
-import { IValidator, IValidationResult } from '../../component-package/models/validated.model';
+import { IValidationResult, ValidationErrorState, IValidation } from '../../component-package/models/validation.model';
 import { ISelectableItem } from '../../component-package/models/selectableItem.model';
-import { IValidatable } from '../../component-package/models/validatable.model';
 import { MonthpickerComponent } from '../../component-package/controls/monthpicker/monthpicker.component';
 import { DropdownBaseComponent } from '../../component-package/controls/dropdown-base/dropdown.base.component';
 import { DropdownComponent } from '../../component-package/controls/dropdown/dropdown.component';
@@ -15,7 +14,7 @@ export class FormExampleComponent {
     validationStatus: string;
     items: ISelectableItem[];
     multiItems: ISelectableItem[];
-    @ViewChildren('validate') validatedComponents: QueryList<IValidatable>;
+    @ViewChildren('validate') validatedComponents: QueryList<IValidation>;
     constructor() {
         this.validationStatus = 'Inte validerad';
         this.items = [

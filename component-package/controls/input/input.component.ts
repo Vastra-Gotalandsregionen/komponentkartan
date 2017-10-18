@@ -1,6 +1,7 @@
 import { Component, Input, EventEmitter, Output, HostBinding, OnInit, ElementRef } from '@angular/core'
 import { DecimalPipe } from '@angular/common'
-import { IValidationResult } from '../../models/validated.model';
+import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
+
 
 
 
@@ -9,7 +10,7 @@ import { IValidationResult } from '../../models/validated.model';
     moduleId: module.id,
     templateUrl: './input.component.html'
 })
-export class InputComponent implements OnInit {
+export class InputComponent implements OnInit, IValidation {
     // För att kunna använda enum i markup måste den definieras som en variabel här
     validationErrorStates = ValidationErrorState;
     @HostBinding('class.validated-input') hasClass = true;
@@ -101,7 +102,7 @@ export class InputComponent implements OnInit {
             this.displayValue = this.value;
         }
         if (this.validateOnInit) {
-            this.validate();
+            this.isContentValid();
         };
     }
 
@@ -142,7 +143,7 @@ export class InputComponent implements OnInit {
         }
     }
 
-    validateInput(): IValidationResult {
+    validate(): IValidationResult {
         if (this.readonly) {
             return this.successfulValidationResult;
         }
@@ -175,7 +176,7 @@ export class InputComponent implements OnInit {
             return;
         }
 
-        if (this.validate()) {
+        if (this.isContentValid()) {
             if (this.isNumeric) {
                 this.value = this.convertStringToNumber(this.displayValue);
                 this.displayValue = this.convertNumberToString(this.value);
@@ -217,8 +218,8 @@ export class InputComponent implements OnInit {
         return roundedTempNumber / factor;
     };
 
-    validate(): boolean {
-        const validationResult = this.validateInput();
+    private isContentValid(): boolean {
+        const validationResult = this.validate();
 
         if (validationResult.isValid) {
             if (this.validationErrorState === ValidationErrorState.NoError) {
@@ -244,9 +245,3 @@ export class InputComponent implements OnInit {
     }
 }
 
-export enum ValidationErrorState {
-    NoError,
-    Active,
-    Editing,
-    Fixed
-}

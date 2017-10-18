@@ -1,24 +1,23 @@
 import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener, HostBinding } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
-import { IValidatable } from '../../models/validatable.model';
-import { IValidationResult } from '../../models/validated.model';
+import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
+import { ValidationComponent } from '../../controls/validation/validation.component';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { ValidationErrorState } from '../../controls/input/input.component'
+
 
 
 @Component({
 
 })
-export abstract class DropdownBaseComponent implements IValidatable {
-    validationErrorState: ValidationErrorState;
+export abstract class DropdownBaseComponent {
+
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
-    @Input() noItemSelectedLabel: string; //visas i dropdownboxen då man inte valt något
-    //property sets the text for the "show all" item in the dropdown
+    @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
     showAllItem: IDropdownItem;
 
@@ -53,8 +52,6 @@ export abstract class DropdownBaseComponent implements IValidatable {
 
         return this._items;
     }
-
-
     constructor(protected elementRef: ElementRef) {
         this.expanded = false;
         this.filterVisible = false;
@@ -67,13 +64,6 @@ export abstract class DropdownBaseComponent implements IValidatable {
             displayName: this.showAllItemText,
         } as IDropdownItem;
     }
-
-    validate(): IValidationResult {
-        return { isValid: true, validationError: '' } as IValidationResult;
-    }
-
-
-
     protected abstract handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void;
 
     private listenToScrollbarEvents() {

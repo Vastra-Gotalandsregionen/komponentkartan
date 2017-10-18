@@ -22,12 +22,12 @@ import {
 } from '@angular/common';
 
 import {
-    InputComponent, ValidationErrorState
+    InputComponent
 } from '../../component-package/controls/input/input.component';
 
 import {
-    IValidationResult
-} from '../../component-package/models/validated.model';
+    IValidationResult, ValidationErrorState
+} from '../../component-package/models/validation.model';
 import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
 import 'intl/locale-data/jsonp/se-SE.js';

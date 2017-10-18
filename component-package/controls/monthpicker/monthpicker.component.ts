@@ -2,20 +2,17 @@ import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit,
 import { DatePipe } from '@angular/common';
 import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
-import { IValidatable } from '../../models/validatable.model';
-import { IValidationResult } from '../../models/validated.model';
+import { IValidationResult } from '../../models/validation.model';
+import { ValidationComponent } from '../../controls/validation/validation.component';
 
-import { ValidationErrorState } from '../../controls/input/input.component'
 
 @Component({
     selector: 'vgr-monthpicker',
     moduleId: module.id,
     templateUrl: './monthpicker.component.html'
 })
-export class MonthpickerComponent implements OnInit, IValidatable {
-    validationErrorMessage: string;
-    validationErrorStates = ValidationErrorState;
-    validationErrorState: ValidationErrorState;
+export class MonthpickerComponent extends ValidationComponent implements OnInit {
+
     today: Date = new Date();
     @Input() minDate: Date;
     @Input() maxDate: Date;
@@ -27,7 +24,6 @@ export class MonthpickerComponent implements OnInit, IValidatable {
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
-    @HostBinding('class.invalid') invalid: boolean;
     displayedYear: ICalendarYear;
     previousYear: ICalendarYear;
     nextYear: ICalendarYear;
@@ -37,26 +33,12 @@ export class MonthpickerComponent implements OnInit, IValidatable {
     protected preventCollapse: boolean;
 
     constructor(protected elementRef: ElementRef) {
+        super();
         this.expanded = false;
         this.years = [];
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
-
-        this.validationErrorState = ValidationErrorState.NoError;
     };
-
-    validate(): IValidationResult {
-        if (this.required && !this.selectedDate) {
-            this.invalid = true;
-            this.validationErrorState = ValidationErrorState.Active;
-            this.validationErrorMessage = 'Obligatoriskt'
-            return { isValid: false, validationError: 'Obligatoriskt' } as IValidationResult;
-        } else {
-            this.invalid = false;
-            this.validationErrorState = ValidationErrorState.NoError;
-            return { isValid: true, validationError: '' } as IValidationResult;
-        }
-    }
 
     ngOnInit() {
 
@@ -137,17 +119,26 @@ export class MonthpickerComponent implements OnInit, IValidatable {
 
     }
 
+    doValidate(): IValidationResult {
+        if (this.required && !this.selectedDate) {
+            return { isValid: false, validationError: 'Obligatoriskt' } as IValidationResult;
+        } else {
+            return { isValid: true, validationError: '' } as IValidationResult;
+        }
+    }
+
     onLeave() {
         this.validate();
     }
 
-    onFocus(event: FocusEvent): void {
+    onEnter() {
+
         if (this.disabled)
             return;
 
-        if (this.validationErrorState === ValidationErrorState.Active)
-            this.validationErrorState = ValidationErrorState.Editing;
+        this.setValidationStateErrorEditing();
     }
+
     onNextMouseDown(event: Event) {
         event.cancelBubble = true;
 
@@ -229,10 +220,12 @@ export class MonthpickerComponent implements OnInit, IValidatable {
         if (selectedMonth.disabled)
             return;
 
+
         this.years.forEach(y => y.months.forEach(m => m.selected = false));
         selectedMonth.selected = true;
 
         this.selectedDate = selectedMonth.date;
+        this.validate();
         this.setDisplayedYear(this.selectedDate);
         this.selectedDateChanged.emit(selectedMonth.date);
     }

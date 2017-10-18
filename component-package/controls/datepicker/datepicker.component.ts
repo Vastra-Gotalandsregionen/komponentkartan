@@ -3,15 +3,15 @@ import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit,
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
-import { IValidatable } from '../../models/validatable.model';
-import { IValidationResult } from '../../models/validated.model';
-import { ValidationErrorState } from '../../controls/input/input.component'
+import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
+import { ValidationComponent } from '../../controls/validation/validation.component';
 @Component({
     selector: 'vgr-datepicker',
     moduleId: module.id,
     templateUrl: './datepicker.component.html'
 })
-export class DatepickerComponent implements OnInit, IValidatable {
+export class DatepickerComponent implements OnInit {
+    validationErrorMessage: string;
     validationErrorState: ValidationErrorState;
     today: Date = new Date();
     @Input() minDate: Date;

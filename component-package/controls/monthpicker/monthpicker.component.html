@@ -1,9 +1,6 @@
-<div class="validation" [ngClass]="{
-  'validation-error--active' : validationErrorState == validationErrorStates.Active,
-  'validation-error--editing' : validationErrorState == validationErrorStates.Editing
-  }">
+<div class="validation">
 
-    <div class="monthpicker" (mousedown)="onMouseDown($event)" (keydown)="onKeyDown($event)" (focusout)="onLeave()" [ngClass]="{'monthpicker--open' : expanded}">
+    <div class="monthpicker" (mousedown)="onMouseDown($event)" (keydown)="onKeyDown($event)" (focusin)="onEnter()" (focusout)="onLeave()" [ngClass]="{'monthpicker--open' : expanded}">
 
         <div class="monthpicker__dropdown" tabindex="{{disabled ? -1 : 0}}">
             <span tabindex="0" *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date : selectedDateFormat}}</span>

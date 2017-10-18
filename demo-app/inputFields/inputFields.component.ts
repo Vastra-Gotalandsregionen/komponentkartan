@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { IValidator, IValidationResult } from '../../component-package/models/validated.model';
+import { IValidationResult, ValidationErrorState, IValidation, ICustomValidator } from '../../component-package/models/validation.model';
 import { CityService } from './cityService';
 import { ISelectableItem } from '../../component-package/models/selectableItem.model';
 
@@ -17,7 +17,7 @@ export class InputFieldsComponent {
     numericValue: number;
     percentValue: number;
     kmValue: number;
-    cityValidator: IValidator;
+    cityValidator: ICustomValidator;
     intValue: number;
     headerExpanded: boolean;
     isSmall: boolean;

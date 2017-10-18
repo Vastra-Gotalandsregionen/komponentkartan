@@ -3,10 +3,9 @@
     padding: 0px;
     background-color: inherit;
     position: relative;
-    // width: calc(#{$input-width--small} + #{$margin--fat});
-    // max-width: calc(#{$input-width--small} + #{$margin--fat});
+    display: inline-block;
     top: 0px;
-    &.validation-error--active {
+    .validation-error--active & {
         max-height: unset;
         padding: $margin--slim;
         margin-left: -$margin--slim;
@@ -19,7 +18,7 @@
         padding-bottom 0.3s linear,
         top 0.3s linear;
     }
-    &.validation-error--editing {
+    .validation-error--editing & {
         max-height: unset;
         .title-value-layout & {
             top: -10px;
@@ -29,11 +28,11 @@
         margin-left: -$margin--slim;
         transition: background-color 0.3s linear;
     }
-    &.validation-error--fixed {
-        &:after {
-            visibility: visible;
-        }
-    }
+    // .validation-error--fixed & {
+    //     &:after {
+    //         visibility: visible;
+    //     }
+    // }
 }
 
 .validation__status {
@@ -60,7 +59,6 @@
     display: none;
     margin-left: 4px;
     margin-top: 5px;
-    // max-width: 239px;
     vertical-align: middle;
     .validation-error--active & {
         color: $primary-color--error;
