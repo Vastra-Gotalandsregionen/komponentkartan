@@ -7,8 +7,8 @@ import { IValidation, IValidationResult, ValidationErrorState } from '../../mode
 })
 export abstract class ValidationComponent implements IValidation {
 
-    private validationErrorState: ValidationErrorState;
-    private validationErrorMessage: string;
+    public validationErrorState: ValidationErrorState;
+    public validationErrorMessage: string;
 
     @HostBinding('class.validation-error--active') get validationErrorActive() {
         return this.validationErrorState === ValidationErrorState.Active;
