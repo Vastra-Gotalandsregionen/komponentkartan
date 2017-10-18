@@ -47,12 +47,13 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
         this.years = [];
 
         if (this.selectedDate) {
-            if (this.selectedDate.getFullYear() < this.today.getFullYear())
+            if (this.selectedDate.getFullYear() < this.today.getFullYear()) {
                 this.minDate = new Date(this.selectedDate.getFullYear(), 0, 1);
+            }
 
-
-            if (this.selectedDate.getFullYear() > this.today.getFullYear())
+            if (this.selectedDate.getFullYear() > this.today.getFullYear()) {
                 this.maxDate = new Date(this.selectedDate.getFullYear(), 11, 1);
+            }
 
         }
         this.createYears();
@@ -62,36 +63,38 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
 
     setDisplayedYear(chosenDate: Date) {
 
-        if (chosenDate)
+        if (chosenDate) {
             this.displayedYear = this.years.filter(y => y.year === chosenDate.getFullYear())[0];
-        else
+        } else {
             this.displayedYear = this.years.filter(y => y.year === this.today.getFullYear())[0];
+        }
 
         let index: number;
-        if (this.years.length > 1)
+        if (this.years.length > 1) {
             index = this.years.indexOf(this.displayedYear)
-        {
-            if (this.years[index - 1])
-                this.previousYear = this.years[index - 1]
-            else
-                this.previousYear = undefined;
 
-            if (this.years[index + 1])
+            if (this.years[index - 1]) {
+                this.previousYear = this.years[index - 1]
+            } else {
+                this.previousYear = undefined;
+            }
+            if (this.years[index + 1]) {
                 this.nextYear = this.years[index + 1]
-            else
+            } else {
                 this.nextYear = undefined;
+            }
         }
     }
 
     createYears() {
         for (let yearNumber = this.minDate.getFullYear(); yearNumber <= this.maxDate.getFullYear(); yearNumber++) {
 
-            let newYear = { year: yearNumber, months: [] } as ICalendarYear;
+            const newYear = { year: yearNumber, months: [] } as ICalendarYear;
 
             for (let monthnumber = 0; monthnumber < 12; monthnumber++) {
-                let dateForMonth = new Date(newYear.year, monthnumber, 1);
+                const dateForMonth = new Date(newYear.year, monthnumber, 1);
 
-                let newMonth = {
+                const newMonth = {
                     displayName: this.getMonthName(monthnumber), date: dateForMonth,
                     isCurrentMonth: dateForMonth.getFullYear() === this.today.getFullYear() && dateForMonth.getMonth() === this.today.getMonth(),
                     disabled: dateForMonth < this.minDate || dateForMonth > this.maxDate,
@@ -135,8 +138,9 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
 
     onEnter() {
 
-        if (this.disabled)
+        if (this.disabled) {
             return;
+        }
 
         this.setValidationStateEditing();
     }
@@ -144,15 +148,17 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     onNextMouseDown(event: Event) {
         event.cancelBubble = true;
 
-        if (this.nextYear)
+        if (this.nextYear) {
             this.setDisplayedYear(new Date(this.nextYear.year, 0, 1));
+        }
     }
 
     onPreviousMouseDown(event: Event) {
         event.cancelBubble = true;
 
-        if (this.previousYear)
+        if (this.previousYear) {
             this.setDisplayedYear(new Date(this.previousYear.year, 0, 1));
+        }
     }
 
     onMouseDown(event: Event) {
@@ -201,8 +207,9 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
         const target = event.target || event.srcElement || event.currentTarget;
         const element = $(target);
 
-        if (this.disabled)
+        if (this.disabled) {
             return;
+        }
 
         if ((element.hasClass('monthpicker__calendar__month') && !element.hasClass('disabled')) ||
             element.hasClass('monthpicker__dropdown') ||
@@ -219,9 +226,9 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
             return;
         }
 
-        if (selectedMonth.disabled)
+        if (selectedMonth.disabled) {
             return;
-
+        }
 
         this.years.forEach(y => y.months.forEach(m => m.selected = false));
         selectedMonth.selected = true;

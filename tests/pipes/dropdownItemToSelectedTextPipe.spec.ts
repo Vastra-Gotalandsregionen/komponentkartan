@@ -1,30 +1,30 @@
-﻿import { DropdownItemToSelectedTextPipe } from "../../component-package/pipes/dropdownItemToSelectedTextPipe";
-import { IDropdownItem } from "../../component-package/models/dropdownItem.model";
+﻿import { DropdownItemToSelectedTextPipe } from '../../component-package/pipes/dropdownItemToSelectedTextPipe';
+import { IDropdownItem } from '../../component-package/models/dropdownItem.model';
 
-describe("DropdownItemToSelectedTextPipe", () => {
-    var dropdownPipe = new DropdownItemToSelectedTextPipe();
-    describe("When displayNameWhenSelected is undefined", () => {
-        it("display name is returned", () => {
-            let result = dropdownPipe.transform(
-                { displayName: "DisplayName", displayNameWhenSelected: undefined } as IDropdownItem);
+describe('DropdownItemToSelectedTextPipe', () => {
+    const dropdownPipe = new DropdownItemToSelectedTextPipe();
+    describe('When displayNameWhenSelected is undefined', () => {
+        it('display name is returned', () => {
+            const result = dropdownPipe.transform(
+                { displayName: 'DisplayName', displayNameWhenSelected: undefined } as IDropdownItem);
 
-            expect(result).toBe("DisplayName");
+            expect(result).toBe('DisplayName');
         });
     });
-    describe("When displayNameWhenSelected is defined", () => {
-        it("displayNameWhenSelected is returned", () => {
-            let result = dropdownPipe.transform(
-                { displayName: "DisplayName", displayNameWhenSelected: "When selected" } as IDropdownItem);
+    describe('When displayNameWhenSelected is defined', () => {
+        it('displayNameWhenSelected is returned', () => {
+            const result = dropdownPipe.transform(
+                { displayName: 'DisplayName', displayNameWhenSelected: 'When selected' } as IDropdownItem);
 
-            expect(result).toBe("When selected");
+            expect(result).toBe('When selected');
         });
     });
-    describe("When neither displayNameWhenSelected nor displayName is defined", () => {
-        it("empty string is returned", () => {
-            let result = dropdownPipe.transform(
+    describe('When neither displayNameWhenSelected nor displayName is defined', () => {
+        it('empty string is returned', () => {
+            const result = dropdownPipe.transform(
                 { displayName: undefined, displayNameWhenSelected: undefined } as IDropdownItem);
 
-            expect(result).toBe("");
+            expect(result).toBe('');
         });
     });
 });

@@ -6,8 +6,6 @@ import { FormsModule } from '@angular/forms'
 import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
 import { CardSectionComponent } from '../../component-package/controls/card/cardSection.component';
 
 describe('[CardSectionComponent]', () => {

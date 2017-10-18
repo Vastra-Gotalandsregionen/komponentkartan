@@ -68,7 +68,7 @@ describe('PageHeaderComponent', () => {
                 expect(component.expanded).toBeFalsy();
             });
             it('and a text button is added', () => {
-                var textButtons = rootElement.queryAll(By.css('.button'));
+                const textButtons = rootElement.queryAll(By.css('.button'));
                 expect(textButtons.length).toEqual(1);
             });
             describe('When the enableActionsButton is clicked', () => {
@@ -93,7 +93,7 @@ describe('PageHeaderComponent', () => {
                     expect(component.expanded).toBeFalsy();
                 });
                 it('and another text button is added', () => {
-                    var textButtons = rootElement.queryAll(By.css('.button'));
+                    const textButtons = rootElement.queryAll(By.css('.button'));
                     expect(textButtons.length).toEqual(2);
                 });
                 describe('When the enableActionsButton is clicked', () => {
@@ -132,7 +132,7 @@ describe('PageHeaderComponent', () => {
                 expect(component.expanded).toBeFalsy();
             });
             it('and no text button is added', () => {
-                var textButtons = rootElement.queryAll(By.css('.button'));
+                const textButtons = rootElement.queryAll(By.css('.button'));
                 expect(textButtons.length).toEqual(0);
             });
         });

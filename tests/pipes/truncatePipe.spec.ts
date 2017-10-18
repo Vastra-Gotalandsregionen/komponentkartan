@@ -1,67 +1,67 @@
-﻿import { TruncatePipe } from "../../component-package/pipes/truncatePipe";
+﻿import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
-describe("truncatePipe test", () => {
+describe('truncatePipe test', () => {
 
-    var truncatePipe = new TruncatePipe();
+    const truncatePipe = new TruncatePipe();
 
-    describe("When text is undefined",
+    describe('When text is undefined',
         () => {
 
-            it("empty text is returned",
+            it('empty text is returned',
                 () => {
-                    expect(truncatePipe.transform(null)).toBe("");
+                    expect(truncatePipe.transform(null)).toBe('');
                 });
         });
 
-    describe("When text is 20 characters long", () => {
-        var text = "abcdefghijklmnopqrst";
-        describe("and limit is 10 characters", () => {
-            var result: string;
+    describe('When text is 20 characters long', () => {
+        const text = 'abcdefghijklmnopqrst';
+        describe('and limit is 10 characters', () => {
+            let result: string;
             beforeEach(() => {
-                result = truncatePipe.transform(text, "10");
+                result = truncatePipe.transform(text, '10');
             });
 
-            it("text should be 10 characters long",
+            it('text should be 10 characters long',
                 () => {
                     expect(result.length).toBe(10);
                 });
 
-            it("text should be 7 characters and trailing ...", () => {
-                expect(result).toBe("abcdefg...");
+            it('text should be 7 characters and trailing ...', () => {
+                expect(result).toBe('abcdefg...');
             })
         });
-        describe("and limit is not set",
+        describe('and limit is not set',
             () => {
 
-                it("text should not be modified",
+                it('text should not be modified',
                     () => {
                         expect(truncatePipe.transform(text)).toBe(text);
                     });
             });
 
-        describe("and limit is not a number",
+        describe('and limit is not a number',
             () => {
 
-                it("text should not be modified",
+                it('text should not be modified',
                     () => {
-                        expect(truncatePipe.transform(text, "ten")).toBe(text);
+                        expect(truncatePipe.transform(text, 'ten')).toBe(text);
                     });
 
             });
 
-        describe("and limit is greater than text",
+        describe('and limit is greater than text',
             () => {
 
-                it("text should not be modified",
+                it('text should not be modified',
                     () => {
                         expect(truncatePipe.transform(text, (text.length + 1).toString())).toBe(text);
                     });
 
             });
-        describe("and limit is equal to text",
+        describe('and limit is equal to text',
             () => {
 
-                it("text should not be modified",
+                it('text should not be modified',
                     () => {
                         expect(truncatePipe.transform(text, text.length.toString())).toBe(text);
                     });

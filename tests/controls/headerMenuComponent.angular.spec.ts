@@ -85,7 +85,7 @@ describe('HeaderMenuComponent', () => {
     });
 
     describe('When component is initialized', () => {
-        var headerMenuElement: DebugElement;
+        let headerMenuElement: DebugElement;
         beforeEach(() => {
             headerMenuElement = rootElement.query(By.css('.header-menu'));
 
@@ -95,7 +95,7 @@ describe('HeaderMenuComponent', () => {
             expect(headerMenuElement.classes['header-menu--hidden']).toBe(true);
         });
         describe('and toggleHeaderMenu is called ', () => {
-            var mockEvent;
+            let mockEvent;
             beforeEach(() => {
                 mockEvent = new Event('');
                 component.toggleHeaderMenu(mockEvent);
@@ -107,7 +107,7 @@ describe('HeaderMenuComponent', () => {
             });
 
             describe(' an item is clicked', () => {
-                var itemToClick: DebugElement;
+                let itemToClick: DebugElement;
                 beforeEach(() => {
                     itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('Min sida'))[0];
                     itemToClick.triggerEventHandler('mousedown', null);
@@ -122,7 +122,7 @@ describe('HeaderMenuComponent', () => {
                 });
 
                 describe('and an item is hovered', () => {
-                    var itemToHover: DebugElement;
+                    let itemToHover: DebugElement;
                     beforeEach(() => {
                         itemToHover = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('FAQ'))[0];
                         itemToHover.triggerEventHandler('mouseenter', null);
@@ -177,7 +177,7 @@ describe('HeaderMenuComponent', () => {
     });
 
     describe('A submenu header is clicked', () => {
-        var itemToClick: DebugElement;
+        let itemToClick: DebugElement;
         beforeEach(() => {
             itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('FAQ'))[0];
             itemToClick.triggerEventHandler('mousedown', null);

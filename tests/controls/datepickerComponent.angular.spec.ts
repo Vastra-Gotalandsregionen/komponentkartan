@@ -9,7 +9,7 @@ import { ICalendarWeek } from '../../component-package/models/calendarWeek.model
 import { ICalendarDay } from '../../component-package/models/calendarDay.model';
 import { DatepickerComponent } from '../../component-package/controls/datepicker/datepicker.component';
 import { inject } from '@angular/core/testing';
-import { TruncatePipe } from "../../component-package/pipes/truncatePipe";
+import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
 
 describe('[DatepickerComponent(Angular)]', () => {
@@ -58,14 +58,14 @@ describe('[DatepickerComponent(Angular)]', () => {
             it('the calendar is visible', () => {
                 expect(component.isDatePickerVisible).toBe(true);
             });
-            // describe('and user clicks outside the calendar', () => {
-            //     beforeEach(() => {
-            //         component.onOutsideClick({ target: new Document() })
-            //     });
-            //     it('the calendar is closed', () => {
-            //         expect(component.isDatePickerVisible).toBe(false);
-            //     });
-            // });
+            describe('and user clicks outside the calendar', () => {
+                beforeEach(() => {
+                    component.onOutsideClick(new Event('click'));
+                });
+                it('the calendar is closed', () => {
+                    expect(component.isDatePickerVisible).toBe(false);
+                });
+            });
         });
     });
 });
