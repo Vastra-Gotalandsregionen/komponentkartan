@@ -8,12 +8,12 @@
             <vgr-title-value [title]="'Ett datum'">
                 <vgr-datepicker #validate [required]="true"></vgr-datepicker>
             </vgr-title-value>
-            <!-- <vgr-title-value [title]="'Land'">
-        <vgr-dropdown #validate [items]="items"></vgr-dropdown>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Länder'">
-        <vgr-dropdown-multiselect #validate [items]="multiItems"></vgr-dropdown-multiselect>
-      </vgr-title-value> -->
+            <vgr-title-value [title]="'Land'">
+                <vgr-dropdown #validate [required]="true" [items]="items"></vgr-dropdown>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Länder'">
+                <vgr-dropdown-multiselect #validate [required]="true" [items]="multiItems"></vgr-dropdown-multiselect>
+            </vgr-title-value>
             <vgr-button (click)="onSave()">Spara</vgr-button>
         </div>
         <div>Valideringsfel:</div>
