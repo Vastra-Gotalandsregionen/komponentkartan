@@ -10,9 +10,7 @@ import { ValidationComponent } from '../../controls/validation/validation.compon
     moduleId: module.id,
     templateUrl: './datepicker.component.html'
 })
-export class DatepickerComponent implements OnInit {
-    validationErrorMessage: string;
-    validationErrorState: ValidationErrorState;
+export class DatepickerComponent extends ValidationComponent implements OnInit {
     today: Date = new Date();
     @Input() minDate: Date;
     @Input() maxDate: Date;
@@ -20,7 +18,7 @@ export class DatepickerComponent implements OnInit {
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() selectedDateFormat: string = 'yyyy-MM-dd';
     @Input() tooltipDateFormat: string = 'yyyy-MM-dd';
-
+    @Input() required: boolean;
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
     yearMonths: ICalendarYearMonth[] = [];
@@ -32,6 +30,8 @@ export class DatepickerComponent implements OnInit {
     selectedCalendarDay: ICalendarDay;
 
     constructor(protected elementRef: ElementRef) {
+        super();
+
         this.isDatePickerVisible = false;
         this.nextMonth = true;
         this.previousMonth = true;
@@ -39,8 +39,24 @@ export class DatepickerComponent implements OnInit {
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
     };
 
-    validate(): IValidationResult {
-        return { isValid: true, validationError: '' } as IValidationResult;
+
+    doValidate(): IValidationResult {
+        if (this.required && !this.selectedDate) {
+            return { isValid: false, validationError: 'Obligatoriskt' } as IValidationResult;
+        } else {
+            return { isValid: true, validationError: '' } as IValidationResult;
+        }
+    }
+
+    onLeave() {
+        this.validate();
+    }
+
+    onEnter() {
+        if (this.disabled)
+            return;
+
+        this.setValidationStateErrorEditing();
     }
 
     ngOnInit() {
@@ -259,14 +275,16 @@ export class DatepickerComponent implements OnInit {
     }
 
     onSelectedDate(currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
-        const selectedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
+        const clickedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
 
-        if (!selectedDate.disabled) {
-            this.setSelectedDay(selectedDate);
-            this.selectedDateChanged.emit(selectedDate.day);
-            this.isDatePickerVisible = false;
-            this.selectedDate = selectedDate.day;
-        }
+        if (clickedDate.disabled)
+            return;
+
+        this.selectedDate = clickedDate.day;
+        this.validate();
+        this.setSelectedDay(clickedDate);
+        this.selectedDateChanged.emit(clickedDate.day);
+        this.isDatePickerVisible = false;
     }
 
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {

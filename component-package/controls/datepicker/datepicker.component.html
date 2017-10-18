@@ -1,41 +1,48 @@
-<div class="datepicker" (click)="displayDatePicker()" [ngClass]="{'datepicker--open' : true}">
-  <div class="datepicker__dropdown">
-    <span *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date: selectedDateFormat}}</span>
-    <span *ngIf="!selectedDate" class="datepicker__calendar__selector" title="Välj datum">Välj datum</span>
+<div class="validation">
+    <div class="datepicker" (click)="displayDatePicker()" (focusin)="onEnter()" (focusout)="onLeave()" [ngClass]="{'datepicker--open' : true}">
+        <div class="datepicker__dropdown">
+            <span tabindex="0" *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date: selectedDateFormat}}</span>
+            <span tabindex="0" *ngIf="!selectedDate" class="datepicker__calendar__selector" title="Välj datum">Välj datum</span>
 
-    <div *ngIf="isDatePickerVisible" class="datepicker__calendar">
-      <div class="datepicker__calendar__header">
-        <div class="datepicker__calendar__header__previous-year" (click)="onPreviousMonth()" [ngClass]="{'disabled': !previousMonth}"></div>
+            <div *ngIf="isDatePickerVisible" class="datepicker__calendar">
+                <div class="datepicker__calendar__header">
+                    <div class="datepicker__calendar__header__previous-year" (click)="onPreviousMonth()" [ngClass]="{'disabled': !previousMonth}"></div>
 
-        <div *ngIf="!displayedYear" class="datepicker__calendar__header__year">{{currentYearMonthOutput | date: 'MMMM y' }}</div>
+                    <div *ngIf="!displayedYear" class="datepicker__calendar__header__year">{{currentYearMonthOutput | date: 'MMMM y' }}</div>
 
-        <div class="datepicker__calendar__header__next-year" (click)="onNextMonth()" [ngClass]="{'disabled' : !nextMonth}"></div>
-      </div>
-      <div class="datepicker__calendar__content">
-        <table>
-          <tr>
-            <td>Må</td>
-            <td>Ti</td>
-            <td>On</td>
-            <td>To</td>
-            <td>Fr</td>
-            <td>Lö</td>
-            <td>Sö</td>
-          </tr>
-          <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
-            <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index"
-              (click)="onSelectedDate(currentYearMonthIndex, weekIndex,dayIndex)">
-              <div *ngIf="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex]"
-              class="datepicker__calendar__day"
-              [ngClass]="{
+                    <div class="datepicker__calendar__header__next-year" (click)="onNextMonth()" [ngClass]="{'disabled' : !nextMonth}"></div>
+                </div>
+                <div class="datepicker__calendar__content">
+                    <table>
+                        <tr>
+                            <td>Må</td>
+                            <td>Ti</td>
+                            <td>On</td>
+                            <td>To</td>
+                            <td>Fr</td>
+                            <td>Lö</td>
+                            <td>Sö</td>
+                        </tr>
+                        <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
+                            <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index" (click)="onSelectedDate(currentYearMonthIndex, weekIndex,dayIndex)">
+                                <div *ngIf="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex]" class="datepicker__calendar__day" [ngClass]="{
                 'disabled': checkDisabledDate(weekIndex, dayIndex),
                 'datepicker__calendar__day--today' : checkTodayDate(weekIndex, dayIndex),
                 'datepicker__calendar__day--selected' : checkSelectedDate(weekIndex, dayIndex)}">{{yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d'}}</div>
-            </td>
-          </tr>
-        </table>
-      </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
-  </div>
+    <div class="validation__status" title="{{validationErrorMessage}}">
+        <div class="validation__status__icon"></div>
+        <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
+
+    </div>
+
 </div>

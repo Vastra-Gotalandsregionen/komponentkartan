@@ -9,6 +9,8 @@ import { ICalendarWeek } from '../../component-package/models/calendarWeek.model
 import { ICalendarDay } from '../../component-package/models/calendarDay.model';
 import { DatepickerComponent } from '../../component-package/controls/datepicker/datepicker.component';
 import { inject } from '@angular/core/testing';
+import { TruncatePipe } from "../../component-package/pipes/truncatePipe";
+
 
 describe('[DatepickerComponent(Angular)]', () => {
     let component: DatepickerComponent;
@@ -20,7 +22,7 @@ describe('[DatepickerComponent(Angular)]', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [DatepickerComponent],
+            declarations: [DatepickerComponent, TruncatePipe],
             imports: [CommonModule]
         });
 
@@ -29,6 +31,7 @@ describe('[DatepickerComponent(Angular)]', () => {
                 templateUrl: './datepicker.component.html'
             }
         });
+
 
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(DatepickerComponent);
