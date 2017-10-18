@@ -5,12 +5,17 @@ import { ICalendarYear } from '../../models/calendarYear.model';
 import { IValidatable } from '../../models/validatable.model';
 import { IValidationResult } from '../../models/validated.model';
 
+import { ValidationErrorState } from '../../controls/input/input.component'
+
 @Component({
     selector: 'vgr-monthpicker',
     moduleId: module.id,
     templateUrl: './monthpicker.component.html'
 })
 export class MonthpickerComponent implements OnInit, IValidatable {
+    validationErrorMessage: string;
+    validationErrorStates = ValidationErrorState;
+    validationErrorState: ValidationErrorState;
     today: Date = new Date();
     @Input() minDate: Date;
     @Input() maxDate: Date;
@@ -36,14 +41,19 @@ export class MonthpickerComponent implements OnInit, IValidatable {
         this.years = [];
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
+
+        this.validationErrorState = ValidationErrorState.NoError;
     };
 
     validate(): IValidationResult {
         if (this.required && !this.selectedDate) {
             this.invalid = true;
+            this.validationErrorState = ValidationErrorState.Active;
+            this.validationErrorMessage = 'Obligatoriskt'
             return { isValid: false, validationError: 'Obligatoriskt' } as IValidationResult;
         } else {
             this.invalid = false;
+            this.validationErrorState = ValidationErrorState.NoError;
             return { isValid: true, validationError: '' } as IValidationResult;
         }
     }
@@ -129,6 +139,14 @@ export class MonthpickerComponent implements OnInit, IValidatable {
 
     onLeave() {
         this.validate();
+    }
+
+    onFocus(event: FocusEvent): void {
+        if (this.disabled)
+            return;
+
+        if (this.validationErrorState === ValidationErrorState.Active)
+            this.validationErrorState = ValidationErrorState.Editing;
     }
     onNextMouseDown(event: Event) {
         event.cancelBubble = true;

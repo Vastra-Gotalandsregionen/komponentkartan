@@ -1,11 +1,11 @@
 <div class="main-content">
-  <div class="komponentkarta-components">
-    <div class="title-value-layout" style="width:50%">
+    <div class="komponentkarta-components">
+        <div class="title-value-layout" style="width:50%">
 
-      <vgr-title-value [title]="'Startmånad'">
-        <vgr-monthpicker #validate [required]="true"></vgr-monthpicker>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Ett datum'">
+            <vgr-title-value [title]="'Startmånad'">
+                <vgr-monthpicker #validate [required]="true"></vgr-monthpicker>
+            </vgr-title-value>
+            <!-- <vgr-title-value [title]="'Ett datum'">
         <vgr-datepicker #validate></vgr-datepicker>
       </vgr-title-value>
       <vgr-title-value [title]="'Land'">
@@ -13,10 +13,10 @@
       </vgr-title-value>
       <vgr-title-value [title]="'Länder'">
         <vgr-dropdown-multiselect #validate [items]="multiItems"></vgr-dropdown-multiselect>
-      </vgr-title-value>
-      <vgr-button (click)="onSave()">Spara</vgr-button>
+      </vgr-title-value> -->
+            <vgr-button (click)="onSave()">Spara</vgr-button>
+        </div>
+        <div>Valideringsfel:</div>
+        <div>{{validationStatus}}</div>
     </div>
-    <div>Valideringsfel:</div>
-    <div>{{validationStatus}}</div>
-  </div>
 </div>

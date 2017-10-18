@@ -6,12 +6,14 @@ import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ValidationErrorState } from '../../controls/input/input.component'
 
 
 @Component({
 
 })
 export abstract class DropdownBaseComponent implements IValidatable {
+    validationErrorState: ValidationErrorState;
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 

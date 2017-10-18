@@ -5,13 +5,14 @@ import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
 import { IValidatable } from '../../models/validatable.model';
 import { IValidationResult } from '../../models/validated.model';
-
+import { ValidationErrorState } from '../../controls/input/input.component'
 @Component({
     selector: 'vgr-datepicker',
     moduleId: module.id,
     templateUrl: './datepicker.component.html'
 })
 export class DatepickerComponent implements OnInit, IValidatable {
+    validationErrorState: ValidationErrorState;
     today: Date = new Date();
     @Input() minDate: Date;
     @Input() maxDate: Date;
