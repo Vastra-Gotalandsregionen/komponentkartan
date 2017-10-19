@@ -15,6 +15,32 @@ Se [Demoprojektet]https://github.com/Vastra-Gotalandsregionen/komponentkartan-de
 npm install vgr-komponentkartan
 ```
 
+### 2. Uppsättning av vgr-komponentkartan
+Importera komponentkartanmodule i användande module.
+```
+import { KomponentkartanModule } from 'vgr-komponentkartan/component-package/komponentkartan.module';
+@NgModule({
+    imports: [
+        KomponentkartanModule
+    ],
+    ...
+})
+```
+
+Lägg till sökvägar till scss filen och jquery i angular-cli.json filen, som är beroenden för komponentkartan
+```
+"styles": [
+    "../node_modules/vgr-komponentkartan/Content/komponentkartan.scss",
+    "styles.css"
+],
+"scripts": ["../node_modules/jquery/dist/jquery.min.js"],
+```
+
+Börja använda komponenterna t.ex.
+```
+<vgr-header></vgr-header>
+```
+
 ## Kod
 Skriven i html, typescript och Sass.
 
