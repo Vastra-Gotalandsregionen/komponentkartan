@@ -31,7 +31,7 @@ input.input-container__textbox {
   .align-right & {
     text-align: right;
   }
-  .validation-container--suffixed & {
+  .input-validation--suffixed & {
     padding-right: 5px;
   }
   .readonly & {
@@ -67,12 +67,12 @@ input.input-container__textbox {
   font-style: italic;
   display: none;
   margin-right: $margin--slim;
-  .validation-container--suffixed & {
+  .input-validation--suffixed & {
     display: inline-block;
   }
 }
 
-.validated-input__textbox__status-icon {
+.input-container__suffix-container__status-icon {
   @extend .bg-image-icon-ok-check--green;
   background-size: 100%;
   height: 0px;
@@ -90,7 +90,7 @@ input.input-container__textbox {
   }
 }
 
-.validation-container {
+.input-validation {
   max-height: 30px;
   padding: 0px;
   background-color: inherit;
@@ -132,12 +132,12 @@ input.input-container__textbox {
   }
 }
 
-.validation-container__validation-area {
+.input-validation_status {
   margin-top: 4px;
   display: flex;
 }
 
-.validation-container__validation-area__icon {
+.input-validation_status__icon {
   display: none;
   margin-top: 2px;
   height: 30px;
@@ -152,7 +152,7 @@ input.input-container__textbox {
   }
 }
 
-.validation-container__validation-area__message {
+.input-validation_status__message {
   display: none;
   margin-left: 4px;
   margin-top: 5px;
@@ -183,7 +183,7 @@ input.input-container__textbox {
   .input-container__suffix-container {
     padding-top: 0px;
   }
-  .validation-container {
+  .input-validation {
     width: calc(#{$input-width--medium} + #{$margin--fat});
     max-width: calc(#{$input-width--medium} + #{$margin--fat});
     &:after {
@@ -197,7 +197,7 @@ input.input-container__textbox {
       }
     }
   }
-  .validation-container__validation-area__message {
+  .input-validation_status__message {
     max-width: 259px;
     margin-top: 3px;
     .input--small & {
