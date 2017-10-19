@@ -6,9 +6,9 @@
 - [ ] Förbättringsförslag
 
 ### Din miljö
-* Version av vgr-komponentkartan
-* Angular version
-* Browser
+* Version av vgr-komponentkartan: **version**
+* Angular version: **version**
+* Browsers: **Browser1, Browser2**
 
 ### Steg för att påvisa problemet
 *Beskriv hur man kan återskapa problemet.*
