@@ -7,10 +7,8 @@ import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
-
-
 @Component({
-    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownBaseComponent) }]
+
 })
 export abstract class DropdownBaseComponent extends ValidationComponent {
 

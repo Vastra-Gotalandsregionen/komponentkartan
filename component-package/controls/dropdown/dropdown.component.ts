@@ -1,5 +1,5 @@
 import {
-    Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef
+    Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef
 } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
@@ -14,7 +14,8 @@ import { ValidationComponent } from '../validation/validation.component';
     selector: 'vgr-dropdown',
     moduleId: module.id,
     templateUrl: './dropdown.component.html',
-    styleUrls: ['../dropdown-base/dropdown.scrollbar.css']
+    styleUrls: ['../dropdown-base/dropdown.scrollbar.css'],
+    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownComponent) }]
 })
 
 export class DropdownComponent extends DropdownBaseComponent implements OnInit, OnChanges {
