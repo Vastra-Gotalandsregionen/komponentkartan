@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, SimpleChanges, forwardRef } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -13,8 +13,7 @@ import { IValidationResult } from '../../models/validation.model';
     selector: 'vgr-dropdown-multiselect',
     moduleId: module.id,
     templateUrl: './dropdown-multiselect.component.html',
-    styleUrls: ['../dropdown-base/dropdown.scrollbar.css'],
-    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownMultiselectComponent) }]
+    styleUrls: ['../dropdown-base/dropdown.scrollbar.css']
 })
 
 export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges {

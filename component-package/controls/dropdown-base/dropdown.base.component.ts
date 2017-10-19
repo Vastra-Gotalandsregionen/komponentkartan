@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener, HostBinding } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener, HostBinding, forwardRef } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
 import { ValidationComponent } from '../../controls/validation/validation.component';
@@ -10,7 +10,7 @@ import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConf
 
 
 @Component({
-
+    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownBaseComponent) }]
 })
 export abstract class DropdownBaseComponent extends ValidationComponent {
 

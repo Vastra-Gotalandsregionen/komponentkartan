@@ -1,8 +1,6 @@
 import { Component, HostBinding } from '@angular/core';
 import { IValidation, IValidationResult, ValidationErrorState } from '../../models/validation.model';
 
-
-
 @Component({
 })
 export abstract class ValidationComponent implements IValidation {

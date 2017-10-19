@@ -10,9 +10,7 @@ import { ValidationComponent } from '../../controls/validation/validation.compon
     providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => InputComponent) }]
 
 })
-export class InputComponent extends ValidationComponent implements OnInit, IValidation {
-    // För att kunna använda enum i markup måste den definieras som en variabel här
-    validationErrorStates = ValidationErrorState;
+export class InputComponent extends ValidationComponent implements OnInit {
     @HostBinding('class.validated-input') hasClass = true;
     @Input() @HostBinding('class.readonly') readonly?: boolean;
     @Input() @HostBinding('class.input--small') small: boolean;
@@ -179,6 +177,10 @@ export class InputComponent extends ValidationComponent implements OnInit, IVali
 
     }
 
+    private isContentValid(): boolean {
+        return this.validate().isValid;
+    }
+
     convertNumberToString(value: number): string {
         if (!isNaN(this.value)) {
             return this.swedishDecimalPipe.transform(this.value, this.decimalPipeConfiguration);
@@ -206,9 +208,6 @@ export class InputComponent extends ValidationComponent implements OnInit, IVali
         return roundedTempNumber / factor;
     };
 
-    private isContentValid(): boolean {
-        const validationResult = this.validate();
-        return validationResult.isValid;
-    }
+
 }
 

@@ -1,6 +1,5 @@
 import {
-    Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding, forwardRef,
-    ChangeDetectorRef
+    Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef
 } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
@@ -15,9 +14,7 @@ import { ValidationComponent } from '../validation/validation.component';
     selector: 'vgr-dropdown',
     moduleId: module.id,
     templateUrl: './dropdown.component.html',
-    styleUrls: ['../dropdown-base/dropdown.scrollbar.css'],
-    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownComponent) }]
-
+    styleUrls: ['../dropdown-base/dropdown.scrollbar.css']
 })
 
 export class DropdownComponent extends DropdownBaseComponent implements OnInit, OnChanges {
@@ -76,7 +73,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedItem = item;
         this.changeDetectorRef.detectChanges();
-
     }
 
     onMouseEnter(item: IDropdownItem) {
