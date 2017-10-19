@@ -1,71 +1,66 @@
 .validation {
-    max-height: 30px;
-    padding: 0px;
-    background-color: inherit;
-    position: relative;
-    display: inline-block;
-    top: 0px;
-    .validation-error--active & {
-        max-height: unset;
-        padding: $margin--slim;
-        margin-left: -$margin--slim;
-        .title-value-layout & {
-            top: -10px;
-        }
-        background-color: $secondary-color--error;
-        transition: background-color 0.3s linear,
-        padding-top 0.3s linear,
-        padding-bottom 0.3s linear,
-        top 0.3s linear;
+  max-height: 30px;
+  padding: 0px;
+  background-color: inherit;
+  position: relative;
+  display: inline-block;
+  top: 0px;
+  .validation-error--active & {
+    max-height: unset;
+    padding: $margin--slim;
+    margin-left: -$margin--slim;
+    .title-value-layout & {
+      top: -10px;
     }
-    .validation-error--editing & {
-        max-height: unset;
-        .title-value-layout & {
-            top: -10px;
-        }
-        background-color: $background-color--default;
-        padding: $margin--slim;
-        margin-left: -$margin--slim;
-        transition: background-color 0.3s linear;
+    background-color: $secondary-color--error;
+    transition: background-color 0.3s linear,
+    padding-top 0.3s linear,
+    padding-bottom 0.3s linear,
+    top 0.3s linear;
+  }
+  .validation-error--editing & {
+    max-height: unset;
+    .title-value-layout & {
+      top: -10px;
     }
-    // .validation-error--fixed & {
-    //     &:after {
-    //         visibility: visible;
-    //     }
-    // }
+    background-color: $background-color--default;
+    padding: $margin--slim;
+    margin-left: -$margin--slim;
+    transition: background-color 0.3s linear;
+  }
 }
 
 .validation__status {
-    margin-top: 4px;
-    display: flex;
+  margin-top: 4px;
+  display: flex;
 }
 
 .validation__status__icon {
-    display: none;
-    margin-top: 2px;
-    height: 30px;
-    width: 30px;
-    .validation-error--active & {
-        @extend .bg-image-icon-exclamation--red;
-        display: inline-block;
-    }
-    .validation-error--editing & {
-        display: inline-block;
-        @extend .bg-image-icon-exclamation;
-    }
+  display: none;
+  margin-top: 2px;
+  height: 30px;
+  width: 30px;
+  .validation-error--active & {
+    @extend .bg-image-icon-exclamation--red;
+    display: inline-block;
+  }
+  .validation-error--editing & {
+    display: inline-block;
+    @extend .bg-image-icon-exclamation;
+  }
 }
 
 .validation__status__message {
-    display: none;
-    margin-left: 4px;
-    margin-top: 5px;
-    vertical-align: middle;
-    .validation-error--active & {
-        color: $primary-color--error;
-        display: inline-block;
-    }
-    .validation-error--editing & {
-        display: inline-block;
-        color: $text-color--default;
-    }
+  display: none;
+  margin-left: 4px;
+  margin-top: 5px;
+  vertical-align: middle;
+  .validation-error--active & {
+    color: $primary-color--error;
+    display: inline-block;
+  }
+  .validation-error--editing & {
+    display: inline-block;
+    color: $text-color--default;
+  }
 }
