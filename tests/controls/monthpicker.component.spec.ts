@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -11,8 +11,10 @@ import { ICalendarMonth } from '../../component-package/models/calendarMonth.mod
 
 describe('[MonthpickerComponent]', () => {
     let component: MonthpickerComponent;
+
     beforeEach(() => {
-        component = new MonthpickerComponent(null);
+
+        component = new MonthpickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef);
 
     });
     describe('When initialized with default settings', () => {

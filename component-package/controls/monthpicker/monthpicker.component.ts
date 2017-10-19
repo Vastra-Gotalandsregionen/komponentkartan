@@ -1,4 +1,7 @@
-import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef, forwardRef } from '@angular/core';
+import {
+    Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef, forwardRef,
+    ChangeDetectorRef
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
@@ -34,7 +37,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     expanded: boolean;
     protected preventCollapse: boolean;
 
-    constructor(protected elementRef: ElementRef) {
+    constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super();
         this.expanded = false;
         this.years = [];
@@ -220,7 +223,6 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
         }
     }
 
-
     private selectDate(selectedMonth: ICalendarMonth) {
         if (!selectedMonth) {
             return;
@@ -230,13 +232,16 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
             return;
         }
 
-        this.years.forEach(y => y.months.forEach(m => m.selected = false));
-        selectedMonth.selected = true;
 
-        this.selectedDate = selectedMonth.date;
+        this.years.forEach(y => y.months.forEach(m => m.selected = false));
+
+        selectedMonth.selected = true;
+        this.setDisplayedYear(selectedMonth.date);
         this.validate();
-        this.setDisplayedYear(this.selectedDate);
         this.selectedDateChanged.emit(selectedMonth.date);
+        // Utan detectchanges får man "Value was changed after is was checked" i browser console.
+        this.selectedDate = selectedMonth.date;
+        this.changeDetectorRef.detectChanges();
     }
 
 

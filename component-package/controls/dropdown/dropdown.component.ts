@@ -1,4 +1,7 @@
-import { Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding, forwardRef } from '@angular/core';
+import {
+    Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding, forwardRef,
+    ChangeDetectorRef
+} from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -24,7 +27,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
     @Input() @HostBinding('class.disabled') disabled: boolean;
     selectedItem: IDropdownItem;
 
-    constructor(elementRef: ElementRef) {
+    constructor(elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
         this.noItemSelectedLabel = ''
     };
@@ -63,14 +66,16 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
             return;
         }
 
+
         this.items.forEach(x => x.selected = false);
         item.selected = true;
-
         item.marked = true;
-        this.selectedItem = item;
         this.validate();
         this.selectedItemChanged.emit(item);
 
+        // Utan detectchanges får man "Value was changed after is was checked" i browser console.
+        this.selectedItem = item;
+        this.changeDetectorRef.detectChanges();
 
     }
 
