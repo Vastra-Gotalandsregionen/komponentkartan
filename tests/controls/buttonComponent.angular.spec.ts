@@ -23,7 +23,7 @@ import {
 
 import {
     ButtonComponent
-} from '../../component-package/controls/button/button.component';
+} from '../../';
 
 
 describe('ButtonComponent', () => {
