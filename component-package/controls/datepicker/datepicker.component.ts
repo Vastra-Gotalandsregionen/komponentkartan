@@ -58,7 +58,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         if (this.disabled) {
             return;
         }
-
         this.setValidationStateEditing();
     }
 
@@ -248,13 +247,11 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     }
 
     // UI functions
-
     displayDatePicker() {
         if (this.disabled)
             return;
 
         this.isDatePickerVisible = true;
-        this.setValidationStateEditing();
     }
 
     @HostListener('document:click', ['$event'])
@@ -262,9 +259,9 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     onOutsideClick(event: Event) {
         if (!this.elementRef.nativeElement.contains(event.target)) {
             this.isDatePickerVisible = false;
-            this.validate();
 
         }
+
     }
 
     onPreviousMonth() {
