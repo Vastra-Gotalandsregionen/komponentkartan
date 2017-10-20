@@ -24,8 +24,8 @@
                             <td>Sö</td>
                         </tr>
                         <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
-                            <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index" (click)="onSelectedDate(currentYearMonthIndex, weekIndex,dayIndex)">
-                                <div *ngIf="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex]" class="datepicker__calendar__day" [ngClass]="{
+                            <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index">
+                                <div *ngIf="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex]" class="datepicker__calendar__day" (click)="onSelectedDate(currentYearMonthIndex, weekIndex,dayIndex)" [ngClass]="{
                 'disabled': checkDisabledDate(weekIndex, dayIndex),
                 'datepicker__calendar__day--today' : checkTodayDate(weekIndex, dayIndex),
                 'datepicker__calendar__day--selected' : checkSelectedDate(weekIndex, dayIndex)}">{{yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d'}}</div>

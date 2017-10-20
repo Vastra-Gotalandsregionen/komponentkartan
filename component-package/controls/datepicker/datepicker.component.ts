@@ -62,6 +62,8 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         this.setValidationStateEditing();
     }
 
+
+
     ngOnInit() {
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
         this.yearMonths = this.updateDays(this.minDate, this.maxDate, this.yearMonths);
@@ -248,9 +250,11 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     // UI functions
 
     displayDatePicker() {
-        if (!this.disabled) {
-            this.isDatePickerVisible = true;
-        }
+        if (this.disabled)
+            return;
+
+        this.isDatePickerVisible = true;
+        this.setValidationStateEditing();
     }
 
     @HostListener('document:click', ['$event'])
@@ -258,6 +262,8 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     onOutsideClick(event: Event) {
         if (!this.elementRef.nativeElement.contains(event.target)) {
             this.isDatePickerVisible = false;
+            this.validate();
+
         }
     }
 
