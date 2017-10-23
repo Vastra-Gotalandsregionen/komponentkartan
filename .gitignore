@@ -199,3 +199,5 @@ fonts/*.*
 *.map
 
 dist/
+
+index.js
