@@ -31,8 +31,15 @@
 }
 
 .validation__status {
-  margin-top: 4px;
-  display: flex;
+  display: none;
+  .validation-error--active & {
+    margin-top: 4px;
+    display: flex;
+  }
+  .validation-error--editing & {
+    margin-top: 4px;
+    display: flex;
+  }
 }
 
 .validation__status__icon {
