@@ -3,8 +3,8 @@
     <vgr-button class="page-header__control" (click)="actionPanelVisible = !actionPanelVisible">Foo</vgr-button>
   </vgr-page-header>
 
-  <vgr-expandable-container-list [allowMultipleExpandedChildren]="false" [actionsVisible]="actionPanelVisible">
-    <div class="expandable-container-list__header">
+  <vgr-list [allowMultipleExpandedItems]="false" [actionsVisible]="actionPanelVisible">
+    <div class="list__header">
       <span class="flex-column-13">Förnamn</span>
       <span class="flex-column-15">Efternamn</span>
     </div>
@@ -101,13 +101,13 @@
       </vgr-card>
     </vgr-action-panel>
 
-    <vgr-expandable-container *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
-      <div class="expandable-container__header">
+    <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
+      <div class="list-item__header">
         <div class="flex-column-13">{{row.object.firstName}}</div>
         <div class="flex-column-15">{{row.object.lastName}}</div>
         <a *ngIf="row.object.canBeDeleted && !row.object.deleted" (click)="removeRowWithoutExpand(row, $event)">Ta bort</a>
       </div>
-      <div class="expandable-container__content">
+      <div class="list-item__content">
         <vgr-card>
           <div *ngIf="row.object.canBeDeleted && !row.object.deleted" class="card__top flex-row">
             <vgr-button class="flex-right" [secondary]="true" [disabled]="false" (buttonClick)="removeRow(row)">Ta bort</vgr-button>
@@ -135,13 +135,13 @@
         </vgr-card>
         <!-- <vgr-button (buttonClick)="savePerson(row)">Save</vgr-button> -->
       </div>
-    </vgr-expandable-container>
-    <vgr-expandable-container [expanded]="true" [notification]="cardRow.notification">
-      <div class="expandable-container__header">
+    </vgr-list-item>
+    <vgr-list-item [expanded]="true" [notification]="cardRow.notification">
+      <div class="list-item__header">
         <div class="flex-column-13">Kort</div>
         <div class="flex-column-15">Med knappar</div>
       </div>
-      <div class="expandable-container__content">
+      <div class="list-item__content">
         <vgr-card>
           <div class="card__top flex-row">
             <vgr-button [secondary]="true" [disabled]="false" (buttonClick)="removeCardRow(cardRow)">Ta bort rad</vgr-button>
@@ -234,6 +234,6 @@
           </vgr-card-section>
         </vgr-card>
       </div>
-    </vgr-expandable-container>
-  </vgr-expandable-container-list>
+    </vgr-list-item>
+  </vgr-list>
 </div>

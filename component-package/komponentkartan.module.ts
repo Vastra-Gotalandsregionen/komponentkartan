@@ -43,6 +43,10 @@ import { CardComponent } from './controls/card/card.component';
 import { CardSectionComponent } from './controls/card/cardSection.component';
 import { TitleValueComponent } from './controls/titleValue/titleValue.component';
 import { LoaderComponent } from './controls/loader/loader.component';
+import { ListComponent } from './controls/list/list.component';
+import { ListItemJqeuryHelper } from './controls/list-item/listItemJqueryHelper';
+import { ListItemComponent } from './controls/list-item/list-item.component';
+
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -86,7 +90,9 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CardComponent,
         CardSectionComponent,
         TitleValueComponent,
-        LoaderComponent
+        LoaderComponent,
+        ListComponent,
+        ListItemComponent
     ],
     exports: [
         SafePipe,
@@ -118,9 +124,12 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CardComponent,
         CardSectionComponent,
         TitleValueComponent,
-        LoaderComponent
+        LoaderComponent,
+        ListComponent,
+        ListItemComponent
+
     ],
-    providers: [ModalService, ExpandableContainerJqeuryHelper, ActionPanelJqeuryHelper]
+    providers: [ModalService, ExpandableContainerJqeuryHelper, ActionPanelJqeuryHelper, ListItemJqeuryHelper]
 })
 
 export class KomponentkartanModule { }
