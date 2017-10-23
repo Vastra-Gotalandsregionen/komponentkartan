@@ -50,6 +50,9 @@ $filter-area-height: 60px;
             padding-left: 6px;
         }
     }
+    &:focus {
+        outline-width: 0;
+    }
 }
 
 .dropdown__filterTextbox {
