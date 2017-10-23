@@ -13,7 +13,7 @@
         <div class="card__top flex-row">
           <span>Enhet</span>
           <span style="margin-left:40px">Mödravården Mölndal</span>
-          <vgr-save-cancel class="flex-right" [secondary]="true" (onUnlock)="cardUnlocked=true" (onSave)="cardSaved()" (onCancel)="cardCancelled()"></vgr-save-cancel>
+          <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="onCardUnlocked()" (save)="cardSaved()" (cancel)="cardCancelled()"></vgr-save-cancel>
         </div>
         <vgr-card-section [title]="'Belopp'" [expanded]="true" [readonly]="!cardUnlocked" class="card__left">
           <div class="title-value-layout">
@@ -145,7 +145,7 @@
         <vgr-card>
           <div class="card__top flex-row">
             <vgr-button [secondary]="true" [disabled]="false" (buttonClick)="removeCardRow(cardRow)">Ta bort rad</vgr-button>
-            <vgr-save-cancel class="flex-right" [secondary]="true" (onUnlock)="cardUnlocked=true" (onSave)="cardSaved()" (onCancel)="cardCancelled()"></vgr-save-cancel>
+            <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="cardUnlocked=true" (save)="cardSaved()" (cancel)="cardCancelled()"></vgr-save-cancel>
           </div>
 
 

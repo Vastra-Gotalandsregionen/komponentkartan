@@ -88,7 +88,9 @@ export class ListsComponent {
         this.cardRow.notifyOnCollapse('Åtgärden avbröts', NotificationIcon.Ok);
     }
 
-
+    onCardUnlocked() {
+        this.cardUnlocked = true;
+    }
 }
 
 export interface ExamplePerson {
