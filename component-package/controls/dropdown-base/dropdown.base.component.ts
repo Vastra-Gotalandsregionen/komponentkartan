@@ -114,7 +114,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
     onDropdownMouseDown(event: Event) {
         if (this.preventCollapse) {
-            event.cancelBubble = true;
             event.returnValue = false;
             this.preventCollapse = false;
         } else {

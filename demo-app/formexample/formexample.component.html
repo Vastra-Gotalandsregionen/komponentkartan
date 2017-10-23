@@ -1,24 +1,24 @@
 <div class="main-content">
-  <div class="komponentkarta-components">
-    <div class="title-value-layout" style="width:50%">
-      <vgr-title-value [title]="'Skriv något'">
-        <vgr-input [required]="true"></vgr-input>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Startmånad'">
-        <vgr-monthpicker [required]="true"></vgr-monthpicker>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Ett datum'">
-        <vgr-datepicker [required]="true"></vgr-datepicker>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Land'">
-        <vgr-dropdown [required]="true" [disabled]="true" [items]="items"></vgr-dropdown>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Länder'">
-        <vgr-dropdown-multiselect [required]="true" [items]="multiItems"></vgr-dropdown-multiselect>
-      </vgr-title-value>
-      <vgr-button (click)="onSave()">Spara</vgr-button>
+    <div class="komponentkarta-components">
+        <div class="title-value-layout" style="width:50%">
+            <vgr-title-value [title]="'Skriv något'">
+                <vgr-input [required]="true"></vgr-input>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Startmånad'">
+                <vgr-monthpicker [required]="true"></vgr-monthpicker>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Ett datum'">
+                <vgr-datepicker [required]="true"></vgr-datepicker>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Land'">
+                <vgr-dropdown [required]="true" [disabled]="true" [items]="items"></vgr-dropdown>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Länder'">
+                <vgr-dropdown-multiselect [required]="true" [items]="multiItems"></vgr-dropdown-multiselect>
+            </vgr-title-value>
+            <vgr-button (click)="onSave()">Spara</vgr-button>
+        </div>
+        <div>Valideringsfel:</div>
+        <div>{{validationStatus}}</div>
     </div>
-    <div>Valideringsfel:</div>
-    <div>{{validationStatus}}</div>
-  </div>
 </div>

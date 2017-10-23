@@ -51,6 +51,7 @@ $filter-area-height: 60px;
         }
     }
     &:focus {
+        //Tar bort highlight vid tabstop
         outline-width: 0;
     }
 }
