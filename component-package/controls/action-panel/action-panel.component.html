@@ -1,0 +1,16 @@
+<h3 class="action-panel__title">{{title}}</h3>
+
+<div class="action-panel__notification">
+  <span class="action-panel__notification__icon" [ngClass]="
+            {   'bg-image-icon-ok-check' : notification && notification.icon===NotificationIcons.Ok,
+                'bg-image-icon-ok-check--green' : notification && notification.icon===NotificationIcons.OkGreen,
+                'bg-image-icon-exclamation' : notification && notification.icon===NotificationIcons.Exclamation,
+                'bg-image-icon-exclamation--red' : notification && notification.icon===NotificationIcons.ExclamationRed}">
+  </span>
+  <div class="action-panel__notification__message">
+    {{notification? notification.message : ''}}
+  </div>
+</div>
+<div class="action-panel__content">
+  <ng-content></ng-content>
+</div>

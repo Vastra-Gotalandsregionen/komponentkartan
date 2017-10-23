@@ -9,6 +9,7 @@ import { ExpandableContainerComponent } from '../expandableContainer/expandableC
 })
 export class ExpandableContainerListComponent implements AfterViewInit {
     @HostBinding('class.expandable-container-list') hasClass = true;
+    @Input() @HostBinding('class.expandable-container-list--actions-visible') actionsVisible: boolean;
     @ContentChildren(ExpandableContainerComponent) expandableContainers: QueryList<ExpandableContainerComponent> = new QueryList<ExpandableContainerComponent>();
     @Input() allowMultipleExpandedChildren = false;
     constructor() {
