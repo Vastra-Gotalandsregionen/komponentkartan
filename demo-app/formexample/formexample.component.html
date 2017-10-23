@@ -1,24 +1,40 @@
 <div class="main-content">
-    <div class="komponentkarta-components">
-        <div class="title-value-layout" style="width:50%">
-            <vgr-title-value [title]="'Skriv något'">
-                <vgr-input [required]="true"></vgr-input>
-            </vgr-title-value>
-            <vgr-title-value [title]="'Startmånad'">
-                <vgr-monthpicker [required]="true"></vgr-monthpicker>
-            </vgr-title-value>
-            <vgr-title-value [title]="'Ett datum'">
-                <vgr-datepicker [required]="true"></vgr-datepicker>
-            </vgr-title-value>
-            <vgr-title-value [title]="'Land'">
-                <vgr-dropdown [required]="true" [disabled]="true" [items]="items"></vgr-dropdown>
-            </vgr-title-value>
-            <vgr-title-value [title]="'Länder'">
-                <vgr-dropdown-multiselect [required]="true" [items]="multiItems"></vgr-dropdown-multiselect>
-            </vgr-title-value>
-            <vgr-button (click)="onSave()">Spara</vgr-button>
-        </div>
-        <div>Valideringsfel:</div>
-        <div>{{validationStatus}}</div>
+  <div class="komponentkarta-components">
+    <div class="title-value-layout" style="width:50%">
+      <vgr-title-value [title]="'Skriv något'">
+        <vgr-input [required]="true"></vgr-input>
+      </vgr-title-value>
+      <vgr-title-value [title]="'Startmånad'">
+        <vgr-monthpicker [required]="true"></vgr-monthpicker>
+      </vgr-title-value>
+      <vgr-title-value [title]="'Ett datum'">
+        <vgr-datepicker [required]="true"></vgr-datepicker>
+      </vgr-title-value>
+      <vgr-title-value [title]="'Land'">
+        <vgr-dropdown [required]="true" [disabled]="true" [items]="items"></vgr-dropdown>
+      </vgr-title-value>
+      <vgr-title-value [title]="'Länder'">
+        <vgr-dropdown-multiselect [required]="true" [items]="multiItems"></vgr-dropdown-multiselect>
+      </vgr-title-value>
+      <vgr-button (click)="onSave()">Spara</vgr-button>
     </div>
+    <div>Valideringsfel:</div>
+    <div>{{validationStatus}}</div>
+  </div>
+
+  <vgr-expandable-container-list class="expandable-container-list--inline">
+    <div class="expandable-container-list__header">
+      <span class="flex-column-13">Förnamn</span>
+      <span class="flex-column-15">Efternamn</span>
+    </div>
+    <vgr-expandable-container>
+      <div class="expandable-container__header">
+        <div class="flex-column-13">John</div>
+        <div class="flex-column-15">Doe</div>
+      </div>
+      <div class="expandable-container__content">
+        Some content
+      </div>
+    </vgr-expandable-container>
+  </vgr-expandable-container-list>
 </div>

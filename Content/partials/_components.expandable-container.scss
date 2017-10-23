@@ -35,6 +35,7 @@
   border-left: 10px solid $background-color--default;
   .expandable-container-list--inline & {
     position: relative;
+    border-bottom: none;
   }
   .expandable-container-list--actions-visible & {
     position: relative;
@@ -51,6 +52,12 @@
     display: block;
   }
   .expandable-container-list--actions-visible & {
+    &:before {
+      height: 0px;
+      display: none;
+    }
+  }
+  .expandable-container-list--inline & {
     &:before {
       height: 0px;
       display: none;
