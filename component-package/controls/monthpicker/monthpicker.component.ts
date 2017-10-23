@@ -237,11 +237,13 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
 
         selectedMonth.selected = true;
         this.setDisplayedYear(selectedMonth.date);
-        this.validate();
+
         this.selectedDateChanged.emit(selectedMonth.date);
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedDate = selectedMonth.date;
         this.changeDetectorRef.detectChanges();
+
+        this.validate();
     }
 
 

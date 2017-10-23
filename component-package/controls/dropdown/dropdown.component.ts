@@ -68,12 +68,14 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
         this.items.forEach(x => x.selected = false);
         item.selected = true;
         item.marked = true;
-        this.validate();
+
         this.selectedItemChanged.emit(item);
 
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedItem = item;
         this.changeDetectorRef.detectChanges();
+
+        this.validate();
     }
 
     onMouseEnter(item: IDropdownItem) {
