@@ -3,7 +3,7 @@
         <vgr-radio-group class="page-header__control" [options]="themeOptions" (selectedChanged)="selectedThemeChanged($event)"></vgr-radio-group>
         <div class="page-header__action-panel">
             <h2>Här placerar man de åtgärder som hör ihop med headern</h2>
-            <vgr-button (buttonClick)="actionPanelMessage='Åtgärden utfördes.'">Åtgärd</vgr-button>
+            <vgr-button (click)="actionPanelMessage='Åtgärden utfördes.'">Åtgärd</vgr-button>
             <h3>{{actionPanelMessage}}</h3>
         </div>
     </vgr-page-header>
@@ -110,16 +110,16 @@
 
             <div class="row-layout">
                 <div>
-                    <vgr-button (buttonClick)="showOneButtonModal()">En knapp</vgr-button>
+                    <vgr-button (click)="showOneButtonModal()">En knapp</vgr-button>
                 </div>
                 <div>
-                    <vgr-button (buttonClick)="showTwoButtonModal()">Två knappar med lång text</vgr-button>
+                    <vgr-button (click)="showTwoButtonModal()">Två knappar med lång text</vgr-button>
                 </div>
                 <div>
-                    <vgr-button (buttonClick)="showThreeButtonModal()">Tre knappar</vgr-button>
+                    <vgr-button (click)="showThreeButtonModal()">Tre knappar</vgr-button>
                 </div>
                 <div>
-                    <vgr-button (buttonClick)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt</vgr-button>
+                    <vgr-button (click)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt</vgr-button>
                 </div>
             </div>
             <div>
@@ -219,7 +219,7 @@
         <div class="komponentkarta-component column-layout">
             <h1>Textknappar</h1>
             <span>Knappar som innehåller text med en minsta bredd på 87px. Vid klick triggas event
-        <strong>buttonClick</strong>. För att inaktivera sätt [disabled]="
+        <strong>click</strong>. För att inaktivera sätt [disabled]="
         <strong>true</strong>". För sekundär knapp sätt [secondary]="
         <strong>true</strong>". Knappen stödjer klick med tangentbord via
         <strong>Space</strong> och
@@ -227,21 +227,21 @@
         <a href="https://www.w3.org/TR/wai-aria-practices/examples/button/button.html">WCAG Button examples</a>
       </span>
             <span>Notera: Knapparna nedan loggar till konsollen vid klick.</span>
-            <div class="markup-example">&lt;vgr-button (buttonClick)="consoleLog('Click')"&gt;Klicka här&lt;/vgr-button&gt; &lt;vgr-button [disabled]="true" (buttonClick)="consoleLog('Click')"&gt;Inaktiv&lt;/vgr-button&gt;
+            <div class="markup-example">&lt;vgr-button (click)="consoleLog('Click')"&gt;Klicka här&lt;/vgr-button&gt; &lt;vgr-button [disabled]="true" (click)="consoleLog('Click')"&gt;Inaktiv&lt;/vgr-button&gt;
             </div>
             <h2>Primärknappar</h2>
             <div>
-                <vgr-button (buttonClick)="consoleLog('Click')">Klicka här</vgr-button>
-                <vgr-button (buttonClick)="consoleLog('Click')">OK</vgr-button>
-                <vgr-button (buttonClick)="buttonDisabled=!buttonDisabled">Aktivera/Inaktivera</vgr-button>
-                <vgr-button [disabled]="buttonDisabled" (buttonClick)="consoleLog('Click')">Inaktiv</vgr-button>
+                <vgr-button (click)="consoleLog('Click')">Klicka här</vgr-button>
+                <vgr-button (click)="consoleLog('Click')">OK</vgr-button>
+                <vgr-button (click)="buttonDisabled=!buttonDisabled">Aktivera/Inaktivera</vgr-button>
+                <vgr-button [disabled]="buttonDisabled" (click)="consoleLog('Click')">Inaktiv</vgr-button>
             </div>
             <h2>Sekundärknappar</h2>
             <div>
-                <vgr-button [secondary]="true" (buttonClick)="consoleLog('Click')">Klicka här</vgr-button>
-                <vgr-button [secondary]="true" (buttonClick)="consoleLog('Click')">OK</vgr-button>
-                <vgr-button [secondary]="true" (buttonClick)="buttonSecondaryDisabled=!buttonSecondaryDisabled">Aktivera/Inaktivera</vgr-button>
-                <vgr-button [secondary]="true" [disabled]="buttonSecondaryDisabled" (buttonClick)="consoleLog('Click')">Inaktiv</vgr-button>
+                <vgr-button [secondary]="true" (click)="consoleLog('Click')">Klicka här</vgr-button>
+                <vgr-button [secondary]="true" (click)="consoleLog('Click')">OK</vgr-button>
+                <vgr-button [secondary]="true" (click)="buttonSecondaryDisabled=!buttonSecondaryDisabled">Aktivera/Inaktivera</vgr-button>
+                <vgr-button [secondary]="true" [disabled]="buttonSecondaryDisabled" (click)="consoleLog('Click')">Inaktiv</vgr-button>
             </div>
         </div>
 
