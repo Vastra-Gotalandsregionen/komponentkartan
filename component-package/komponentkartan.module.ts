@@ -46,6 +46,8 @@ import { LoaderComponent } from './controls/loader/loader.component';
 import { ListComponent } from './controls/list/list.component';
 import { ListItemJqeuryHelper } from './controls/list-item/listItemJqueryHelper';
 import { ListItemComponent } from './controls/list-item/list-item.component';
+import { BrowserDetector } from './services/browserDetector';
+
 
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -129,7 +131,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ListItemComponent
 
     ],
-    providers: [ModalService, ExpandableContainerJqeuryHelper, ActionPanelJqeuryHelper, ListItemJqeuryHelper]
+    providers: [ModalService, ExpandableContainerJqeuryHelper, ActionPanelJqeuryHelper, ListItemJqeuryHelper, BrowserDetector]
 })
 
 export class KomponentkartanModule { }

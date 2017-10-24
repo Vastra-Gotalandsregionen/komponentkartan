@@ -139,7 +139,6 @@ const scrollbarStyle = `
     moduleId: module.id,
     templateUrl: './sidebarMenu.component.html',
     styles: [scrollbarStyle],
-    providers: [BrowserDetector]
 })
 export class SidebarMenuComponent implements AfterViewInit {
     @Input() menus: IMenu[];
