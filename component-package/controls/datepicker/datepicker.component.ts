@@ -76,14 +76,24 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
 
     createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {
         const yearMonths: ICalendarYearMonth[] = [];
-        for (let year = minDate.getFullYear(); year <= maxDate.getFullYear(); year++) {
+        let tmpMinDate = minDate;
+        let tmpMaxDate = maxDate;
+        if (tmpMinDate > this.today) {
+            tmpMinDate = this.today;
+        };
+        if (tmpMaxDate < this.today) {
+            tmpMaxDate = this.today;
+        };
+
+        for (let year = tmpMinDate.getFullYear(); year <= tmpMaxDate.getFullYear(); year++) {
             for (let month = 1; month <= 12; month++) {
-                if (new Date(year, month - 1) >= new Date(minDate.getFullYear(), minDate.getMonth())
-                    && (new Date(year, month - 1) <= new Date(maxDate.getFullYear(), maxDate.getMonth()))) {
+                if (new Date(year, month - 1) >= new Date(tmpMinDate.getFullYear(), tmpMinDate.getMonth())
+                    && (new Date(year, month - 1) <= new Date(tmpMaxDate.getFullYear(), tmpMaxDate.getMonth()))) {
                     yearMonths.push({ year: year, month: month, weeks: this.createWeeksAndDays(year, month) } as ICalendarYearMonth);
                 }
             }
         }
+        console.log(yearMonths);
         return yearMonths;
     }
 
@@ -248,9 +258,9 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
 
     // UI functions
     displayDatePicker() {
-        if (this.disabled)
+        if (this.disabled) {
             return;
-
+        }
         this.isDatePickerVisible = true;
     }
 
@@ -265,6 +275,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     }
 
     onPreviousMonth() {
+
         if (this.previousMonth) {
             this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
             this.setCurrentYearMonthOutput();
