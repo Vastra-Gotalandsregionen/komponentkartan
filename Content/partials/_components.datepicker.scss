@@ -200,9 +200,6 @@ $dropdown-width--small: 100px;
   &.disabled {
     color: $control-color--disabled;
     cursor: default;
-    &:hover {
-      background-color: $background-color--content;
-    }
   }
 }
 
