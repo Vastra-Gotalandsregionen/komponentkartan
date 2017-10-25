@@ -93,7 +93,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
                 }
             }
         }
-        console.log(yearMonths);
         return yearMonths;
     }
 
@@ -121,6 +120,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         }
         return weeks;
     }
+
     createWeeksAndDays(year: number, month: number): ICalendarWeek[] {
         const weeks: ICalendarWeek[] = this.createWeeks(year, month);
         const firstWeek: ICalendarWeek = this.createFirstWeek(year, month);
@@ -275,7 +275,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     }
 
     onPreviousMonth() {
-
         if (this.previousMonth) {
             this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
             this.setCurrentYearMonthOutput();
@@ -320,10 +319,20 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
 
 
     setPreviousAndNextMonthNavigation() {
-        const minMonth = this.minDate.getMonth() + 1;
-        const maxMonth = this.maxDate.getMonth() + 1;
-        const minYear = this.minDate.getFullYear();
-        const maxYear = this.maxDate.getFullYear();
+        let tmpMinDate = this.minDate;
+        let tmpMaxDate = this.maxDate;
+        if (tmpMinDate > this.today) {
+            tmpMinDate = this.today;
+        };
+        if (tmpMaxDate < this.today) {
+            tmpMaxDate = this.today;
+        };
+
+        const minMonth = tmpMinDate.getMonth() + 1;
+        const maxMonth = tmpMaxDate.getMonth() + 1;
+        const minYear = tmpMinDate.getFullYear();
+        const maxYear = tmpMaxDate.getFullYear();       
+
         const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
         const currentYear = this.yearMonths[this.currentYearMonthIndex].year;
         if ((currentYear === minYear && currentMonth === minMonth) && (currentYear === maxYear && currentMonth === maxMonth)) {
