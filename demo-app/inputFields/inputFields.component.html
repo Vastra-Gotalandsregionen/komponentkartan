@@ -1,206 +1,201 @@
-<div class="main-content input-fields" [ngClass]="{'input-fields--expanded' : headerExpanded}">
-  <vgr-page-header [title]="'Inputfält'" [expanded]="headerExpanded">
-    <div class="page-header__control">
-      <h2>Åtgärder</h2>
-      <vgr-button (click)="headerExpanded = !headerExpanded">Öppna</vgr-button>
+<vgr-page>
+    <vgr-page-header [title]="'Inputfält'" [expanded]="headerExpanded">
+        <div class="colum-layout">
+            <h2>Åtgärder</h2>
+            <vgr-button (click)="headerExpanded = !headerExpanded">Öppna</vgr-button>
+        </div>
+
+
+    </vgr-page-header>
+    <vgr-action-panel [expanded]="headerExpanded">
+        <h1>Some content</h1>
+    </vgr-action-panel>
+
+    <div class="page-block column-layout">
+        <vgr-radio-group [options]="[{id:'1', displayName:'Stor', selected:true},{id:'2', displayName:'Liten'}]" (selectedChanged)="toggleInputType($event)">
+        </vgr-radio-group>
+        <div class="row-layout">
+
+            <div class="one-third">
+
+
+                <h2>Fördefinierade typer</h2>
+                <div>
+                    Belopp 1 (type=amount)
+                    <vgr-input [type]="'amount'" [value]="amount1" (valueChanged)="amount1 = $event" [small]="isSmall"></vgr-input>
+                    <span>Belopp 1: </span>
+                    <span>{{formatNumericValue(amount1)}}</span>
+                </div>
+                <div>
+                    Belopp 2, obligatoriskt
+                    <vgr-input [type]="'amount'" [value]="amount2" (valueChanged)="amount2 = $event" [required]="true" [small]="isSmall"></vgr-input>
+                    <span>Belopp 2: </span>
+                    <span>{{formatNumericValue(amount2)}}</span>
+                </div>
+                <div>
+                    Procent
+                    <vgr-input [type]="'percent'" [value]="percentValue" (valueChanged)="percentValue = $event" [small]="isSmall"></vgr-input>
+                    <span>Procent: </span>
+                    <span>{{formatNumericValue(percentValue)}}</span>
+                </div>
+                <div>
+                    Km
+                    <vgr-input [type]="'km'" [value]="kmValue" (valueChanged)="kmValue = $event" [small]="isSmall"></vgr-input>
+                    <span>Km: </span>
+                    <span>{{formatNumericValue(kmValue)}}</span>
+
+                </div>
+                <div>
+                    Numeriskt värde utan enhet
+                    <vgr-input [type]="'numeric'" [value]="numericValue" (valueChanged)="numericValue = $event" [small]="isSmall"></vgr-input>
+                    <span>Värde: </span>
+                    <span>{{formatNumericValue(numericValue)}}</span>
+                </div>
+            </div>
+            <div class="one-third">
+                <h2>Egen konfiguration</h2>
+                <div>
+                    Max-längd 5 tecken
+                    <vgr-input [maxlength]=5 [small]="isSmall"></vgr-input>
+                </div>
+                <div>
+                    Exakt 3 VERSALER (redan validerad)
+                    <vgr-input [pattern]="'^[A-Z,Å,Ä,Ö]{3}$'" [invalidText]="'Ange exakt tre VERSALER'" [value]="'abc'" [maxlength]="3" [validateOnInit]="true" [small]="isSmall"></vgr-input>
+                </div>
+                <div>
+                    Mellan 2 och 6 tecken
+                    <vgr-input [pattern]="'^.{2,6}$'" [maxlength]=6 [invalidText]="'Ange mellan 2-6 tecken'" [small]="isSmall"></vgr-input>
+                </div>
+                <div>
+                    Heltal med enhet
+                    <vgr-input [pattern]="'^[0-9]+$'" [type]="'numeric'" [suffix]="'st'" [invalidText]="'Ange ett giltigt heltal'" [alignRight]="true" [value]="intValue" (valueChanged)="intValue = $event" [small]="isSmall"></vgr-input>
+                    <span>Antal: </span>
+                    <span>{{intValue + 0}}</span>
+                </div>
+                <div>
+                    Långa felmeddelanden
+                    <vgr-input [required]="true" [invalidText]="'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'" [small]="isSmall"></vgr-input>
+                </div>
+                <div>
+                    Låst fält
+                    <vgr-input class="no-padding" [readonly]="true" [value]="'Visar värdet utan ram'" [small]="isSmall"></vgr-input>
+                </div>
+                <div>
+                    Ingen validering
+                    <vgr-input [small]="isSmall"></vgr-input>
+                </div>
+
+            </div>
+            <div class="one-third">
+                <h2>Validering med service</h2>
+                <div>
+                    Ange en storstad i USA
+                    <vgr-input [customValidator]="validateCityName.bind(this)" [value]="cityName" (valueChanged)="cityName = $event" [small]="isSmall"></vgr-input>
+                    <span>Din stad: {{cityName}}</span>
+                </div>
+                <div>
+                    E-postadress
+                    <vgr-input [customValidator]="validateEmail.bind(this)" [small]="isSmall"></vgr-input>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="row-layout">
+            <div class="full">
+                <h2>Notera</h2>
+                <ul>
+                    <li>
+                        Validering sker alltid när man lämnar fältet (onblur)
+                    </li>
+                    <li>
+                        Om man anger pattern blir fältet automatiskt obligatoriskt.
+                    </li>
+                    <li>
+                        För numeriska fält (numeric, amount, km, percent) uppdateras värdet till NaN om fältet inte kan tolkas som ett giltigt värde
+                    </li>
+
+                    <li>
+                        Om pattern anger ett maximalt antal tecken, sätt även [maxlength] för att spärra fältet för längre inmatning
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row-layout">
+            <div class="full">
+                <h2>Konfiguration</h2>
+                <table class="property-table">
+                    <tr>
+                        <th>Property</th>
+                        <th>Beskrivning</th>
+                        <th>Exempel</th>
+                    </tr>
+                    <tr>
+                        <td>[value]</td>
+                        <td>Värde att binda till</td>
+                        <td>[value]="person.lastName"</td>
+                    </tr>
+                    <tr>
+                        <td>[validateOnInit]</td>
+                        <td>Om true, validera värdet vid laddning av sidan. Default = false.</td>
+                        <td>[validateOnInit]="true"</td>
+                    </tr>
+                    <tr>
+                        <td>(valueChanged)</td>
+                        <td>Event när värdet ändras. Triggas när fokus lämnar fältet. Värdet är parameter.</td>
+                        <td>(valueChanged)="person.lastName = $event"</td>
+                    </tr>
+                    <tr>
+                        <td>[title]</td>
+                        <td>Tool-tip vid hover. Default = tomt.</td>
+                        <td>[title]="'Fyll i ditt namn här'"</td>
+                    </tr>
+                    <tr>
+                        <td>[maxlength]</td>
+                        <td>Max antal tecken. Begränsar antalet möjliga tecken att mata in. Default = obegränsat.</td>
+                        <td>[maxlength]="5"</td>
+                    </tr>
+                    <tr>
+                        <td>[required]</td>
+                        <td>Om true, är fältet obligatoriskt, annars skapas valideringsfel. Default = false</td>
+                        <td>[required]="true"</td>
+                    </tr>
+                    <tr>
+                        <td>[pattern]</td>
+                        <td>Regex att matcha innehållet mot vid validering. Default = tomt</td>
+                        <td>[pattern]="[a-z,A-Z]+'" (Minst en bokstav)</td>
+                    </tr>
+                    <tr>
+                        <td>[invalidtext]</td>
+                        <td>Text som visas vid valideringsfel för pattern eller om obligatoriskt fält ej fyllts i</td>
+                        <td>[invalidtext]="'Ange ett värde mellan 1-10'"</td>
+                    </tr>
+                    <tr>
+                        <td>[suffix]</td>
+                        <td>Text som visas till höger om fältet, som t.ex en enhet (km, m, kg, kr mm)</td>
+                        <td>[suffix]="'kg'"</td>
+                    </tr>
+                    <tr>
+                        <td>[alignRight]</td>
+                        <td>Om true, högerställ innehållet i fältet. Default är False.</td>
+                        <td>[alignRight]="true"</td>
+                    </tr>
+                    <tr>
+                        <td>[type]</td>
+                        <td>Fördefinierade typer av färdig validering samt suffix. Gltiga värden är amount, kg, percent, numeric. Sätter pattern, högerställer samt formatterar värdet. Inställningar möjliga att skriva över med enstaka properties ovan.
+                        </td>
+                        <td>[type]="'amount'"</td>
+                    </tr>
+                    <tr>
+                        <td>[customValidator]</td>
+                        <td>En egendefinierad funktion som returnerar validering baserat på innehållet. Anropas när fokus lämnar fältet. Funktionen tar in en sträng och returnerar ett IValidationResult med resultat samt meddelande. Se "Validering med service"
+                            ovan. Notera anropet med [funktion].bind(this).
+                        </td>
+                        <td>[customValidator]="validateCityName.bind(this)"</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="page-header__action-panel">
-      <h1>Some content</h1>
-    </div>
-  </vgr-page-header>
-
-
-  <div class="komponentkarta-components column-layout">
-    <vgr-radio-group [options]="[{id:'1', displayName:'Stor', selected:true},{id:'2', displayName:'Liten'}]" (selectedChanged)="toggleInputType($event)">
-    </vgr-radio-group>
-    <div class="row-layout">
-
-      <div class="one-third">
-
-
-        <h2>Fördefinierade typer</h2>
-        <div>
-          Belopp 1 (type=amount)
-          <vgr-input [type]="'amount'" [value]="amount1" (valueChanged)="amount1 = $event" [small]="isSmall"></vgr-input>
-          <span>Belopp 1: </span>
-          <span>{{formatNumericValue(amount1)}}</span>
-        </div>
-        <div>
-          Belopp 2, obligatoriskt
-          <vgr-input [type]="'amount'" [value]="amount2" (valueChanged)="amount2 = $event" [required]="true" [small]="isSmall"></vgr-input>
-          <span>Belopp 2: </span>
-          <span>{{formatNumericValue(amount2)}}</span>
-        </div>
-        <div>
-          Procent
-          <vgr-input [type]="'percent'" [value]="percentValue" (valueChanged)="percentValue = $event" [small]="isSmall"></vgr-input>
-          <span>Procent: </span>
-          <span>{{formatNumericValue(percentValue)}}</span>
-        </div>
-        <div>
-          Km
-          <vgr-input [type]="'km'" [value]="kmValue" (valueChanged)="kmValue = $event" [small]="isSmall"></vgr-input>
-          <span>Km: </span>
-          <span>{{formatNumericValue(kmValue)}}</span>
-
-        </div>
-        <div>
-          Numeriskt värde utan enhet
-          <vgr-input [type]="'numeric'" [value]="numericValue" (valueChanged)="numericValue = $event" [small]="isSmall"></vgr-input>
-          <span>Värde: </span>
-          <span>{{formatNumericValue(numericValue)}}</span>
-        </div>
-      </div>
-      <div class="one-third">
-        <h2>Egen konfiguration</h2>
-        <div>
-          Max-längd 5 tecken
-          <vgr-input [maxlength]=5 [small]="isSmall"></vgr-input>
-        </div>
-        <div>
-          Exakt 3 VERSALER (redan validerad)
-          <vgr-input [pattern]="'^[A-Z,Å,Ä,Ö]{3}$'" [invalidText]="'Ange exakt tre VERSALER'" [value]="'abc'" [maxlength]="3" [validateOnInit]="true"
-            [small]="isSmall"></vgr-input>
-        </div>
-        <div>
-          Mellan 2 och 6 tecken
-          <vgr-input [pattern]="'^.{2,6}$'" [maxlength]=6 [invalidText]="'Ange mellan 2-6 tecken'" [small]="isSmall"></vgr-input>
-        </div>
-        <div>
-          Heltal med enhet
-          <vgr-input [pattern]="'^[0-9]+$'" [type]="'numeric'" [suffix]="'st'" [invalidText]="'Ange ett giltigt heltal'" [alignRight]="true"
-            [value]="intValue" (valueChanged)="intValue = $event" [small]="isSmall"></vgr-input>
-          <span>Antal: </span>
-          <span>{{intValue + 0}}</span>
-        </div>
-        <div>
-          Långa felmeddelanden
-          <vgr-input [required]="true" [invalidText]="'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'"
-            [small]="isSmall"></vgr-input>
-        </div>
-        <div>
-          Låst fält
-          <vgr-input class="no-padding" [readonly]="true" [value]="'Visar värdet utan ram'" [small]="isSmall"></vgr-input>
-        </div>
-        <div>
-          Ingen validering
-          <vgr-input [small]="isSmall"></vgr-input>
-        </div>
-
-      </div>
-      <div class="one-third">
-        <h2>Validering med service</h2>
-        <div>
-          Ange en storstad i USA
-          <vgr-input [customValidator]="validateCityName.bind(this)" [value]="cityName" (valueChanged)="cityName = $event" [small]="isSmall"></vgr-input>
-          <span>Din stad: {{cityName}}</span>
-        </div>
-        <div>
-          E-postadress
-          <vgr-input [customValidator]="validateEmail.bind(this)" [small]="isSmall"></vgr-input>
-        </div>
-
-      </div>
-
-
-    </div>
-    <div class="row-layout">
-      <div class="full">
-        <h2>Notera</h2>
-        <ul>
-          <li>
-            Validering sker alltid när man lämnar fältet (onblur)
-          </li>
-          <li>
-            Om man anger pattern blir fältet automatiskt obligatoriskt.
-          </li>
-          <li>
-            För numeriska fält (numeric, amount, km, percent) uppdateras värdet till NaN om fältet inte kan tolkas som ett giltigt värde
-          </li>
-
-          <li>
-            Om pattern anger ett maximalt antal tecken, sätt även [maxlength] för att spärra fältet för längre inmatning
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="row-layout">
-      <div class="full">
-        <h2>Konfiguration</h2>
-        <table class="property-table">
-          <tr>
-            <th>Property</th>
-            <th>Beskrivning</th>
-            <th>Exempel</th>
-          </tr>
-          <tr>
-            <td>[value]</td>
-            <td>Värde att binda till</td>
-            <td>[value]="person.lastName"</td>
-          </tr>
-          <tr>
-            <td>[validateOnInit]</td>
-            <td>Om true, validera värdet vid laddning av sidan. Default = false.</td>
-            <td>[validateOnInit]="true"</td>
-          </tr>
-          <tr>
-            <td>(valueChanged)</td>
-            <td>Event när värdet ändras. Triggas när fokus lämnar fältet. Värdet är parameter.</td>
-            <td>(valueChanged)="person.lastName = $event"</td>
-          </tr>
-          <tr>
-            <td>[title]</td>
-            <td>Tool-tip vid hover. Default = tomt.</td>
-            <td>[title]="'Fyll i ditt namn här'"</td>
-          </tr>
-          <tr>
-            <td>[maxlength]</td>
-            <td>Max antal tecken. Begränsar antalet möjliga tecken att mata in. Default = obegränsat.</td>
-            <td>[maxlength]="5"</td>
-          </tr>
-          <tr>
-            <td>[required]</td>
-            <td>Om true, är fältet obligatoriskt, annars skapas valideringsfel. Default = false</td>
-            <td>[required]="true"</td>
-          </tr>
-          <tr>
-            <td>[pattern]</td>
-            <td>Regex att matcha innehållet mot vid validering. Default = tomt</td>
-            <td>[pattern]="[a-z,A-Z]+'" (Minst en bokstav)</td>
-          </tr>
-          <tr>
-            <td>[invalidtext]</td>
-            <td>Text som visas vid valideringsfel för pattern eller om obligatoriskt fält ej fyllts i</td>
-            <td>[invalidtext]="'Ange ett värde mellan 1-10'"</td>
-          </tr>
-          <tr>
-            <td>[suffix]</td>
-            <td>Text som visas till höger om fältet, som t.ex en enhet (km, m, kg, kr mm)</td>
-            <td>[suffix]="'kg'"</td>
-          </tr>
-          <tr>
-            <td>[alignRight]</td>
-            <td>Om true, högerställ innehållet i fältet. Default är False.</td>
-            <td>[alignRight]="true"</td>
-          </tr>
-          <tr>
-            <td>[type]</td>
-            <td>Fördefinierade typer av färdig validering samt suffix. Gltiga värden är amount, kg, percent, numeric. Sätter
-              pattern, högerställer samt formatterar värdet. Inställningar möjliga att skriva över med enstaka properties
-              ovan.
-            </td>
-            <td>[type]="'amount'"</td>
-          </tr>
-          <tr>
-            <td>[customValidator]</td>
-            <td>En egendefinierad funktion som returnerar validering baserat på innehållet. Anropas när fokus lämnar fältet.
-              Funktionen tar in en sträng och returnerar ett IValidationResult med resultat samt meddelande. Se "Validering
-              med service" ovan. Notera anropet med [funktion].bind(this).
-            </td>
-            <td>[customValidator]="validateCityName.bind(this)"</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+</vgr-page>

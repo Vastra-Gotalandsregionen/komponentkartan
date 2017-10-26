@@ -17,11 +17,8 @@ import { DropdownItemToSelectedTextPipe } from './pipes/dropdownItemToSelectedTe
 import { DropdownComponent } from './controls/dropdown/dropdown.component';
 import { DropdownMultiselectComponent } from './controls/dropdown-multiselect/dropdown-multiselect.component';
 import { FilterTextboxComponent } from './controls/filterTextbox/filterTextbox.component';
-import { ExpandableContainerComponent } from './controls/expandableContainer/expandableContainer.component';
 import { ActionPanelComponent } from './controls/action-panel/action-panel.component';
-import { ExpandableContainerJqeuryHelper } from './controls/expandableContainer/expandableContainerJqueryHelper';
 import { ActionPanelJqeuryHelper } from './controls/action-panel/actionPanelJqueryHelper';
-import { ExpandableContainerListComponent } from './controls/expandableContainerList/expandableContainerList.component';
 import { ButtonComponent } from './controls/button/button.component';
 import { LockButtonComponent } from './controls/lockButton/lockButton.component';
 import { SaveCancelComponent } from './controls/saveCancel/saveCancel.component';
@@ -71,8 +68,6 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DropdownItemToSelectedTextPipe,
         DropdownComponent,
         FilterTextboxComponent,
-        ExpandableContainerComponent,
-        ExpandableContainerListComponent,
         ActionPanelComponent,
         ButtonComponent,
         LockButtonComponent,
@@ -105,9 +100,9 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DropdownItemToSelectedTextPipe,
         DropdownComponent,
         FilterTextboxComponent,
-        ExpandableContainerComponent,
+
         ActionPanelComponent,
-        ExpandableContainerListComponent,
+
         ButtonComponent,
         LockButtonComponent,
         SaveCancelComponent,
@@ -134,7 +129,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PageComponent
 
     ],
-    providers: [ModalService, ExpandableContainerJqeuryHelper, ActionPanelJqeuryHelper, ListItemJqeuryHelper, BrowserDetector]
+    providers: [ModalService, ActionPanelJqeuryHelper, ListItemJqeuryHelper, BrowserDetector]
 })
 
 export class KomponentkartanModule { }

@@ -1,98 +1,95 @@
-<div class="main-content">
-  <vgr-page-header [title]="'Calendars'">
-  </vgr-page-header>
+<vgr-page>
+    <vgr-page-header [title]="'Calendars'">
+    </vgr-page-header>
 
-  <div class="komponentkarta-components">
-    <div>
-      <h1>Month picker</h1>
-    </div>
-    <div class="komponentkarta-component row-layout row-layout--padded">
-      <div>
-        <p>Default formatering</p>
-        <vgr-monthpicker (selectedDateChanged)="selectedDate=$event" style="margin-top: 20px" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
-      </div>
-      <div>
-        <p>MM yyyy formatering</p>
-        <vgr-monthpicker style="margin-top: 20px" [selectedDateFormat]="'MM yyyy'" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
-      </div>
-
-      <div>
-        <p>Disabled</p>
-        <vgr-monthpicker style="margin-top: 20px" [disabled]="true" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
-      </div>
-    </div>
-    <div>
-      <span>Senast valt datum: </span>
-      <span>{{selectedDate | date : 'yyyy MMM'}}</span>
-    </div>
-
-    <br/>
-    <h2>Användning</h2>
-    <div>
-      Ange följande i din @NgModule för att ställa in svenskt språk providers
-
-      <div class="markup-example">
-        [ {{'{ provide: LOCALE_ID, useValue: "sv-SE" }'}}
-      </div>
-    </div>
-  </div>
-
-  <div class="komponentkarta-components">
-    <div>
-      <h1>Date picker</h1>
-    </div>
-    <div class="komponentkarta-component row-layout row-layout--padded">
-      <div>
-        <p>Default formatering</p>
-        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDateNew=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max"></vgr-datepicker>
-      </div>
-      <div>
-        <span>Valt datum default: </span>
-        <p>{{datepicker_selectedDateNew | date : 'yyyy MM dd'}}</p>
-      </div>
-    </div>
-    <div class="komponentkarta-component row-layout row-layout--padded">
-      <div>
-        <p>Format yyyy MMM dd</p>
-        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max"
-          [selectedDate]="datepicker_selectedDate" [selectedDateFormat]="'yyyy MMM dd'"></vgr-datepicker>
-      </div>
-      <div>
-        <span>Valt datum: </span>
-        <p>{{datepicker_selectedDate | date : 'dd MMMM yyyy'}}</p>
-      </div>
-    </div>
-    <div class="komponentkarta-component row-layout row-layout--padded">
-      <div>
-        <p>Format yyyy på tooltip</p>
-        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max"
-          [selectedDate]="datepicker_selectedDate" [tooltipDateFormat]="'yyyy'"></vgr-datepicker>
-      </div>
-      <div>
-        <span>Valt datum: </span>
-        <p>{{datepicker_selectedDate | date : 'dd MMM yyyy'}}</p>
-      </div>
-    </div>
-
-    <div class="komponentkarta-component row-layout row-layout--padded">
-      <div>
-        <p>Avstängd datepicker</p>
-        <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max"
-          [selectedDate]="datepicker_selectedDate" [disabled]="true"></vgr-datepicker>
-      </div>
-    </div>
-
-    <div>
-      <br/>
-      <h2>Användning</h2>
-      <div>
-        Ange följande i din @NgModule för att ställa in svenskt språk providers
-
-        <div class="markup-example">
-          [ {{'{ provide: LOCALE_ID, useValue: "sv-SE" }'}}
+    <div class="page-block">
+        <div>
+            <h1>Month picker</h1>
         </div>
-      </div>
-    </div>
-  </div>
+        <div class="row-layout row-layout--padded">
+            <div>
+                <p>Default formatering</p>
+                <vgr-monthpicker (selectedDateChanged)="selectedDate=$event" style="margin-top: 20px" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
+            </div>
+            <div>
+                <p>MM yyyy formatering</p>
+                <vgr-monthpicker style="margin-top: 20px" [selectedDateFormat]="'MM yyyy'" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
+            </div>
 
-</div>
+            <div>
+                <p>Disabled</p>
+                <vgr-monthpicker style="margin-top: 20px" [disabled]="true" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
+            </div>
+        </div>
+        <div>
+            <span>Senast valt datum: </span>
+            <span>{{selectedDate | date : 'yyyy MMM'}}</span>
+        </div>
+
+        <br/>
+        <h2>Användning</h2>
+        <div>
+            Ange följande i din @NgModule för att ställa in svenskt språk providers
+
+            <div class="markup-example">
+                [ {{'{ provide: LOCALE_ID, useValue: "sv-SE" }'}}
+            </div>
+        </div>
+    </div>
+
+    <div class="page-block">
+        <div>
+            <h1>Date picker</h1>
+        </div>
+        <div class="row-layout row-layout--padded">
+            <div>
+                <p>Default formatering</p>
+                <vgr-datepicker (selectedDateChanged)="datepicker_selectedDateNew=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max"></vgr-datepicker>
+            </div>
+            <div>
+                <span>Valt datum default: </span>
+                <p>{{datepicker_selectedDateNew | date : 'yyyy MM dd'}}</p>
+            </div>
+        </div>
+        <div class="row-layout row-layout--padded">
+            <div>
+                <p>Format yyyy MMM dd</p>
+                <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate" [selectedDateFormat]="'yyyy MMM dd'"></vgr-datepicker>
+            </div>
+            <div>
+                <span>Valt datum: </span>
+                <p>{{datepicker_selectedDate | date : 'dd MMMM yyyy'}}</p>
+            </div>
+        </div>
+        <div class="row-layout row-layout--padded">
+            <div>
+                <p>Format yyyy på tooltip</p>
+                <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate" [tooltipDateFormat]="'yyyy'"></vgr-datepicker>
+            </div>
+            <div>
+                <span>Valt datum: </span>
+                <p>{{datepicker_selectedDate | date : 'dd MMM yyyy'}}</p>
+            </div>
+        </div>
+
+        <div class="row-layout row-layout--padded">
+            <div>
+                <p>Avstängd datepicker</p>
+                <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max" [selectedDate]="datepicker_selectedDate" [disabled]="true"></vgr-datepicker>
+            </div>
+        </div>
+
+        <div>
+            <br/>
+            <h2>Användning</h2>
+            <div>
+                Ange följande i din @NgModule för att ställa in svenskt språk providers
+
+                <div class="markup-example">
+                    [ {{'{ provide: LOCALE_ID, useValue: "sv-SE" }'}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</vgr-page>

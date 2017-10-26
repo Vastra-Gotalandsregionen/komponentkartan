@@ -1,33 +1,38 @@
-<div class="main-content">
-  <vgr-page-header [title]="'Demo-lista'"></vgr-page-header>
-  <div class="komponentkarta-components">
-    <div class="row-layout row-layout--padded">
-      <div class="column-layout">
-        <h3>Liten storlek</h3>
-        <vgr-loader [active]="actionInProgress" [small]="true"></vgr-loader>
-      </div>
-      <div class="column-layout">
-        <h3>Stor storlek</h3>
-        <vgr-loader [active]="actionInProgress"></vgr-loader>
-      </div>
+<vgr-page>
+    <vgr-page-header [title]="'Loader'"></vgr-page-header>
+
+    <div class="page-block">
+        <div class="row-layout">
+            <div class="column-layout">
+                <h3>Liten storlek</h3>
+                <vgr-loader [active]="actionInProgress" [small]="true"></vgr-loader>
+                <br>
+                <vgr-button (click)="actionInProgress=!actionInProgress">{{buttonText}}</vgr-button>
+            </div>
+            <div class="column-layout">
+                <h3>Stor storlek</h3>
+                <vgr-loader [active]="actionInProgress"></vgr-loader>
+
+
+            </div>
+
+        </div>
     </div>
-    <br>
-    <vgr-button (click)="actionInProgress=!actionInProgress">{{buttonText}}</vgr-button>
-    <div>
-      <br/>
-      <h2>Konfiguration</h2>
-      <table class="property-table">
-        <tr>
-          <th>Namn</th>
-          <th>Beskrivning</th>
-          <th>Exempel</th>
-        </tr>
-        <tr>
-          <td>small</td>
-          <td>Visa liten loader</td>
-          <td>[small]="true"</td>
-        </tr>
-      </table>
+    <div class="page-block">
+
+        <h2>Konfiguration</h2>
+        <table class="property-table">
+            <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Exempel</th>
+            </tr>
+            <tr>
+                <td>small</td>
+                <td>Visa liten loader</td>
+                <td>[small]="true"</td>
+            </tr>
+        </table>
+
     </div>
-  </div>
-</div>
+</vgr-page>

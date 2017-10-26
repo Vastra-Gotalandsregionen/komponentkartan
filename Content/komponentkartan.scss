@@ -27,13 +27,10 @@
 
 /* COMPONENTS */
 
-//Main-content används av många komponenter, lägg denna först
-@import "partials/_components.main-content.scss";
 @import "partials/_components.page.scss";
 @import "partials/_components.page-header.scss";
 @import "partials/_components.information-panel.scss";
 @import "partials/_components.header.scss";
-@import "partials/_components.expandable-container.scss";
 @import "partials/_components.action-panel.scss";
 @import "partials/_components.header-menu.scss";
 @import "partials/_components.filterTextbox.scss";

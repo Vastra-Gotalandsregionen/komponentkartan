@@ -61,7 +61,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
         this.createYears();
 
         this.setDisplayedYear(this.selectedDate);
-        console.log('displayedYear', this.displayedYear);
+
     }
 
     setDisplayedYear(chosenDate: Date) {
