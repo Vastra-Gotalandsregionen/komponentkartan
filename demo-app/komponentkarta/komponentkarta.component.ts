@@ -64,15 +64,22 @@ export class KomponentkartaComponent implements AfterViewInit {
         } as IHeaderMenu;
 
         // Lägg til med fördröjning för att återskapa problem vi haft med laddning från service
-        this.dropDownItems25All = this.getDemoItems(1);
-        setTimeout(() => {
-            this.dropDownItems25All = this.getDemoItems(25);
+        
+        // setTimeout(() => {
+        //     this.dropDownItems25All = this.getDemoItems(25);            
+        //     this.dropDownItems25All[1].selected = true;
 
-        }, 1000);
+        // }, 1000);
+
+        this.dropDownItems25All = this.getDemoItems(25);            
+        this.dropDownItems25All[1].selected = true;
+
         this.lastMultipleSelection = 'Inget';
         this.lastSingleSelection = 'Inget';
 
         this.dropDownItems200[3].selected = true;
+        this.dropDownItems8[0].selected = true;
+        this.dropDownItems9[7].selected = true;
     }
 
     showOneButtonModal() {

@@ -66,6 +66,10 @@
                     <p>25 items och Visa alla</p>
                     <vgr-dropdown [items]="dropDownItems25All" [showAllItemText]="'Visa alla alternativ'" [noItemSelectedLabel]="'Välj alternativ'" (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
                 </div>
+                <div>
+                    <p>200 items readonly</p>
+                    <vgr-dropdown [items]="dropDownItems200" [readonly]="true"></vgr-dropdown>
+                </div>
             </div>
             <div>
                 <span>Senaste val:</span>
