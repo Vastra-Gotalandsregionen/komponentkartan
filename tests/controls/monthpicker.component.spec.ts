@@ -12,11 +12,61 @@ import { ICalendarMonth } from '../../component-package/models/calendarMonth.mod
 describe('[MonthpickerComponent]', () => {
     let component: MonthpickerComponent;
 
-    beforeEach(() => {
 
+    beforeEach(() => {
         component = new MonthpickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef);
+    });
+
+    describe('When initialized with minDate 2017-01-01 and maxDate 2017-02-01', () => {
+        beforeEach(() => {
+            component.minDate = new Date(2016, 0, 1);
+            component.maxDate = new Date(2016, 1, 1);
+            component.ngOnInit();
+        });
+
+        it('contains months after maxDate', () => {
+            expect(component.years[0].year).toBe(2016);
+        });
 
     });
+
+    describe('When initialized with minDate currentYearPlusOneYear-01-01 and currentYearPlusOneYear-02-01', () => {
+        const currentYearPlusOneYear = (new Date().getFullYear() + 1);
+        beforeEach(() => {
+
+            console.log(currentYearPlusOneYear)
+            component.minDate = new Date(currentYearPlusOneYear, 0, 1);
+            component.maxDate = new Date(currentYearPlusOneYear, 1, 1);
+            component.ngOnInit();
+        });
+
+        it('contains currentYearPlusOneYear in years', () => {
+            expect(component.years.filter(x => x.year === currentYearPlusOneYear)[0].year).toBe(currentYearPlusOneYear);
+        });
+
+        it('contains currentYear in years', () => {
+            expect(component.years.filter(x => x.year === new Date().getFullYear())[0].year).toBe(new Date().getFullYear());
+        });
+    });
+
+    describe('When initialized with minDate currentYearPlusMinusYear-01-01 and currentYearMinusOneYear-02-01', () => {
+        const currentYearMinusOneYear = (new Date().getFullYear() - 1);
+        beforeEach(() => {
+            console.log(currentYearMinusOneYear)
+            component.minDate = new Date(currentYearMinusOneYear, 0, 1);
+            component.maxDate = new Date(currentYearMinusOneYear, 1, 1);
+            component.ngOnInit();
+        });
+
+        it('contains currentYearPlusOneYear in years', () => {
+            expect(component.years.filter(x => x.year === currentYearMinusOneYear)[0].year).toBe(currentYearMinusOneYear);
+        });
+
+        it('contains currentYear in years', () => {
+            expect(component.years.filter(x => x.year === new Date().getFullYear())[0].year).toBe(new Date().getFullYear());
+        });
+    });
+
     describe('When initialized with default settings', () => {
         beforeEach(() => {
             component.ngOnInit();

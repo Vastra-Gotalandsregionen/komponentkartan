@@ -9,16 +9,16 @@
     <div class="komponentkarta-component row-layout row-layout--padded">
       <div>
         <p>Default formatering</p>
-        <vgr-monthpicker (selectedDateChanged)="selectedDate=$event" style="margin-top: 20px" [maxDate]="maxDate"></vgr-monthpicker>
+        <vgr-monthpicker (selectedDateChanged)="selectedDate=$event" style="margin-top: 20px" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
       </div>
       <div>
         <p>MM yyyy formatering</p>
-        <vgr-monthpicker style="margin-top: 20px" [selectedDateFormat]="'MM yyyy'" [selectedDate]="selectedDate"></vgr-monthpicker>
+        <vgr-monthpicker style="margin-top: 20px" [selectedDateFormat]="'MM yyyy'" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
       </div>
 
       <div>
         <p>Disabled</p>
-        <vgr-monthpicker style="margin-top: 20px" [disabled]="true" [selectedDate]="selectedDate"></vgr-monthpicker>
+        <vgr-monthpicker style="margin-top: 20px" [disabled]="true" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
       </div>
     </div>
     <div>
