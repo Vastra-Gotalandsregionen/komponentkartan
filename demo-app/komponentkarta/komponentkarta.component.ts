@@ -23,7 +23,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     dropDownItems25: IDropdownItem[];
     dropDownItems200: IDropdownItem[];
     dropDownItems9: IDropdownItem[];
-    dropDownItems8: IDropdownItem[];
+    dropDownItems8: IDropdownItem[] = {} as IDropdownItem[];
     dropDownItems10: IDropdownItem[];
     dropDownItems25All: IDropdownItem[];
     buttonDisabled: boolean;
@@ -64,14 +64,14 @@ export class KomponentkartaComponent implements AfterViewInit {
         } as IHeaderMenu;
 
         // Lägg til med fördröjning för att återskapa problem vi haft med laddning från service
-        
+
         // setTimeout(() => {
-        //     this.dropDownItems25All = this.getDemoItems(25);            
+        //     this.dropDownItems25All = this.getDemoItems(25);
         //     this.dropDownItems25All[1].selected = true;
 
         // }, 1000);
 
-        this.dropDownItems25All = this.getDemoItems(25);            
+        this.dropDownItems25All = this.getDemoItems(25);
         this.dropDownItems25All[1].selected = true;
 
         this.lastMultipleSelection = 'Inget';
@@ -79,7 +79,12 @@ export class KomponentkartaComponent implements AfterViewInit {
 
         this.dropDownItems200[3].selected = true;
         this.dropDownItems8[0].selected = true;
+        this.dropDownItems8[1].selected = true;
+        this.dropDownItems8[2].selected = true;
+
         this.dropDownItems9[7].selected = true;
+
+        console.log('dropDownItems8', this.dropDownItems8);
     }
 
     showOneButtonModal() {
@@ -139,7 +144,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     private getDemoItems(numberOfItems: number): IDropdownItem[] {
         const items: IDropdownItem[] = [];
         for (let i = 1; i <= numberOfItems; i++) {
-            items.push({ id: i.toString(), displayName: `Långt namn ${i}`, displayNameWhenSelected: `Alt ${i}` } as IDropdownItem);
+            items.push({ id: i.toString(), displayName: `Långt namn ${i}`, displayNameWhenSelected: `Alt ${i}`, selected: false } as IDropdownItem);
         }
         return items;
     }

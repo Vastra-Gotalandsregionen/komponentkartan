@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef, OnInit } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -17,11 +17,13 @@ import { IValidationResult } from '../../models/validation.model';
     providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownMultiselectComponent) }]
 })
 
-export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges {
+export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, OnInit {
 
     @Input() showAllItemText: string; // showAllItemText (skrivit ett filter och vill rensa filtret)
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string; // texten som visaspå checkboxen för att välja alla
+
+    selectedValues: string;
 
     dropdownLabel: string;
     selectAllItem: IDropdownItem;
@@ -49,6 +51,16 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         } as IDropdownItem;
 
 
+    }
+    ngOnInit() {
+        this.selectedValues = this.concatinateSelectedValues();
+        console.log('selectedValues', this.selectedValues);
+    }
+
+    concatinateSelectedValues(): string {
+        console.log('items', this.items);
+        console.log(this.items.filter(x => x.selected));
+        return this.items.filter(x => x.selected).map(x => x.displayNameWhenSelected).join(',');
     }
 
     doValidate(): IValidationResult {
