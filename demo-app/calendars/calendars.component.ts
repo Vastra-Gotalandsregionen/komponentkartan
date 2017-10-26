@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 })
 export class CalendarsComponent {
     selectedDate: Date = new Date(2015, 0, 13);
-    maxDate: Date = new Date(2018, 7, 1);
+    minDate: Date = new Date(2015, 0, 1)
+    maxDate: Date = new Date(2016, 11, 1);
     datepicker_Min: Date = new Date(2018, 0, 15)
     datepicker_Max: Date = new Date(2019, 11, 27);
     datepicker_selectedDate: Date = new Date(2017, 9, 17);

@@ -29,7 +29,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
-    displayedYear: ICalendarYear;
+    displayedYear: ICalendarYear = {} as ICalendarYear;
     previousYear: ICalendarYear;
     nextYear: ICalendarYear;
 
@@ -46,7 +46,6 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     };
 
     ngOnInit() {
-
         this.years = [];
 
         if (this.selectedDate) {
@@ -62,10 +61,10 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
         this.createYears();
 
         this.setDisplayedYear(this.selectedDate);
+        console.log('displayedYear', this.displayedYear);
     }
 
     setDisplayedYear(chosenDate: Date) {
-
         if (chosenDate) {
             this.displayedYear = this.years.filter(y => y.year === chosenDate.getFullYear())[0];
         } else {
@@ -90,10 +89,18 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     }
 
     createYears() {
-        for (let yearNumber = this.minDate.getFullYear(); yearNumber <= this.maxDate.getFullYear(); yearNumber++) {
 
+        let tmpMinDate = this.minDate;
+        let tmpMaxDate = this.maxDate;
+        if (tmpMinDate > this.today) {
+            tmpMinDate = this.today;
+        };
+        if (tmpMaxDate < this.today) {
+            tmpMaxDate = this.today;
+        };
+
+        for (let yearNumber = tmpMinDate.getFullYear(); yearNumber <= tmpMaxDate.getFullYear(); yearNumber++) {
             const newYear = { year: yearNumber, months: [] } as ICalendarYear;
-
             for (let monthnumber = 0; monthnumber < 12; monthnumber++) {
                 const dateForMonth = new Date(newYear.year, monthnumber, 1);
 
@@ -105,7 +112,6 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
                 } as ICalendarMonth;
                 newYear.months.push(newMonth);
             }
-
             this.years.push(newYear);
         }
     }
