@@ -84,7 +84,6 @@ export class KomponentkartaComponent implements AfterViewInit {
 
         this.dropDownItems9[7].selected = true;
 
-        console.log('dropDownItems8', this.dropDownItems8);
     }
 
     showOneButtonModal() {

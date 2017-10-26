@@ -54,12 +54,12 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
     ngOnInit() {
         this.selectedValues = this.concatinateSelectedValues();
-        console.log('selectedValues', this.selectedValues);
+        //  console.log('selectedValues', this.selectedValues);
     }
 
     concatinateSelectedValues(): string {
-        console.log('items', this.items);
-        console.log(this.items.filter(x => x.selected));
+        //console.log('items', this.items);
+        //console.log(this.items.filter(x => x.selected));
         return this.items.filter(x => x.selected).map(x => x.displayNameWhenSelected).join(',');
     }
 
