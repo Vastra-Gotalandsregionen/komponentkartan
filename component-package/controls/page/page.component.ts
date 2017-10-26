@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, AfterViewInit, ContentChild, ViewChild, HostBinding, ElementRef, DoCheck } from '@angular/core';
+import { Component, Input, EventEmitter, Output, AfterViewInit, ContentChild, ViewChild, HostBinding, HostListener, ElementRef } from '@angular/core';
 import { PageHeaderComponent } from '../pageHeader/pageHeader.component';
 
 @Component({
@@ -6,7 +6,7 @@ import { PageHeaderComponent } from '../pageHeader/pageHeader.component';
     moduleId: module.id,
     templateUrl: './page.component.html'
 })
-export class PageComponent implements AfterViewInit, DoCheck {
+export class PageComponent implements AfterViewInit {
     @HostBinding('class.page') hasClass = true;
     @ContentChild(PageHeaderComponent, { read: ElementRef }) pageHeader: ElementRef;
     @ViewChild('pagebody') pageBody: ElementRef;
@@ -15,7 +15,8 @@ export class PageComponent implements AfterViewInit, DoCheck {
         this.pageBody.nativeElement.style.top = this.pageHeader.nativeElement.offsetHeight + 'px';
     }
 
-    ngDoCheck() {
+    @HostListener('window:resize', ['$event'])
+    onWindowResize(event: Event) {
         this.pageBody.nativeElement.style.top = this.pageHeader.nativeElement.offsetHeight + 'px';
     }
 
