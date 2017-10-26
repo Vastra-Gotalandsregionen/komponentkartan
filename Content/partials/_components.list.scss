@@ -6,6 +6,9 @@
   .list-item {
     background-color: $background-color--content;
   }
+  .page-block & {
+    margin: -$margin--slim;
+  }
 }
 
 .list__header {
@@ -29,9 +32,6 @@
   .list--inline & {
     position: relative;
     border: none;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
     width: $content-width--small;
   }
   .list--actions-visible & {
@@ -189,6 +189,11 @@
 }
 
 @media screen and (min-width: $desktop-width--medium) {
+  .list {
+    .page-block & {
+      margin: -$margin--fat;
+    }
+  }
   .list__header {
     padding-left: $margin--fat;
     padding-right: $margin--fat;
@@ -219,8 +224,5 @@
   .list-item__content {
     padding: $margin--fat;
     width: #{$content-width--medium};
-  }
-  .list.list--inline {
-    margin-top: 0px;
   }
 }

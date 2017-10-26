@@ -4,9 +4,14 @@
   background-color: white;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
+  margin-left: $margin--fat;
   box-shadow: none;
-  display: none;
   width: $content-width--small;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 0px;
+  transition: all 0.6s ease;
   &.action-panel--expanded {
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
     margin-bottom: 14px;
@@ -15,9 +20,15 @@
     position: relative;
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
   }
+  &.action-panel--slow {
+    transition: all 1s ease;
+  }
+  &.action-panel--fast {
+    transition: all 0.3s ease;
+  }
 }
 
-.action-panel__content {
+.action .action-panel__content {
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
 }

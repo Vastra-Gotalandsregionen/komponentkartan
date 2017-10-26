@@ -17,6 +17,9 @@ import { CalendarsComponent } from './calendars/calendars.component';
 import { InputFieldsComponent } from './inputFields/inputFields.component'
 import { FormExampleComponent } from './formexample/formexample.component'
 import { ExampleLayoutComponent } from './example-layout/example-layout.component'
+import { FakeAComponent } from './fake/fake-a.component';
+import { FakeBComponent } from './fake/fake-b.component';
+import { FakeCComponent } from './fake/fake-c.component';
 import { LoaderDemoComponent } from './loaderdemo/loaderdemo.component'
 import { CityService } from './inputFields/cityService';
 
@@ -43,7 +46,10 @@ import { appRoutes } from './routes'
         InputFieldsComponent,
         LoaderDemoComponent,
         FormExampleComponent,
-        ExampleLayoutComponent
+        ExampleLayoutComponent,
+        FakeAComponent,
+        FakeBComponent,
+        FakeCComponent
     ],
     providers: [
         CityService, { provide: LOCALE_ID, useValue: 'sv-SE' }

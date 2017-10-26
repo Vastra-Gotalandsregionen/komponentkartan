@@ -44,6 +44,8 @@ import { ListComponent } from './controls/list/list.component';
 import { ListItemJqeuryHelper } from './controls/list-item/listItemJqueryHelper';
 import { ListItemComponent } from './controls/list-item/list-item.component';
 import { PageComponent } from './controls/page/page.component';
+import { PageBodyComponent } from './controls/page-body/page-body.component';
+import { PageBlockComponent } from './controls/page-block/page-block.component';
 import { BrowserDetector } from './services/browserDetector';
 
 
@@ -91,7 +93,9 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         LoaderComponent,
         ListComponent,
         ListItemComponent,
-        PageComponent
+        PageComponent,
+        PageBodyComponent,
+        PageBlockComponent
     ],
     exports: [
         SafePipe,
@@ -126,7 +130,9 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         LoaderComponent,
         ListComponent,
         ListItemComponent,
-        PageComponent
+        PageComponent,
+        PageBodyComponent,
+        PageBlockComponent
 
     ],
     providers: [ModalService, ActionPanelJqeuryHelper, ListItemJqeuryHelper, BrowserDetector]
