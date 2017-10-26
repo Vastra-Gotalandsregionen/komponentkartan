@@ -6,6 +6,12 @@ import { DropdownBaseComponent } from '../../component-package/controls/dropdown
 import { DropdownComponent } from '../../component-package/controls/dropdown/dropdown.component';
 import { ValidationComponent } from '../../component-package/controls/validation/validation.component';
 
+
+import { NotificationIcon } from '../../component-package/models/notificationIcon.model';
+import { RowNotification } from '../../component-package/models/rowNotification.model';
+import { NotificationType } from '../../component-package/models/notificationType.model';
+
+
 @Component({
     moduleId: module.id,
     selector: 'vgr-form-example',
@@ -15,6 +21,8 @@ export class FormExampleComponent {
     validationStatus: string;
     items: ISelectableItem[];
     multiItems: ISelectableItem[];
+    notification: RowNotification;
+
     @ViewChildren(ValidationComponent) validatedComponents: QueryList<ValidationComponent>;
     constructor() {
         this.validationStatus = 'Inte validerad';
@@ -30,6 +38,10 @@ export class FormExampleComponent {
             { displayName: 'Finland' } as ISelectableItem,
             { displayName: 'Island' } as ISelectableItem,
         ] as ISelectableItem[];
+
+
+
+        this.notification = { message: 'Information saknas', icon: NotificationIcon.ExclamationRed, type: NotificationType.Permanent } as RowNotification;
     }
 
     onSave() {

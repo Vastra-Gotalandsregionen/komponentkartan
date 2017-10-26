@@ -16,6 +16,7 @@ import { ListsComponent } from './lists/lists.component';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { InputFieldsComponent } from './inputFields/inputFields.component'
 import { FormExampleComponent } from './formexample/formexample.component'
+import { ExampleLayoutComponent } from './example-layout/example-layout.component'
 import { LoaderDemoComponent } from './loaderdemo/loaderdemo.component'
 import { CityService } from './inputFields/cityService';
 
@@ -41,7 +42,8 @@ import { appRoutes } from './routes'
         CalendarsComponent,
         InputFieldsComponent,
         LoaderDemoComponent,
-        FormExampleComponent
+        FormExampleComponent,
+        ExampleLayoutComponent
     ],
     providers: [
         CityService, { provide: LOCALE_ID, useValue: 'sv-SE' }

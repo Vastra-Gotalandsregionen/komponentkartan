@@ -2,21 +2,14 @@
 
 .action-panel {
   background-color: white;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
-  margin-top: 1px;
   box-shadow: none;
-  transition: margin-top 0.2s ease-in;
   display: none;
+  width: $content-width--small;
   &.action-panel--expanded {
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-    margin-top: 14px;
     margin-bottom: 14px;
-  }
-  &.action-panel--collapsed {
-    margin-top: 2px; //OBS! Denna måste ligga efter expanded-stilen i filen!
   }
   &.action-panel--collapsed:hover {
     position: relative;
@@ -43,8 +36,6 @@
   max-height: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   border-spacing: 10px;
@@ -58,9 +49,6 @@
     padding-bottom: $margin--xs-slim;
     transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
     transition-delay: 0.2s, 0s, 0s, 0s;
-  }
-  .action-panel--expanded & {
-    border-top: none;
   }
   display: flex;
   align-items: center;
@@ -77,17 +65,14 @@
 
 @media screen and (min-width: $desktop-width--medium) {
   .action-panel__notification {
-    margin-left: -20px;
-    margin-right: -20px;
     padding-left: 20px;
     padding-right: 20px;
     border-spacing: 10px;
   }
   .action-panel {
-    margin-left: -$margin--fat;
-    margin-right: -$margin--fat;
     padding-left: $margin--fat;
     padding-right: $margin--fat;
+    width: $content-width--medium;
   }
   .action-panel__content {
     padding-top: $margin--fat;

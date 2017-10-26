@@ -2,17 +2,18 @@ import { Injectable, ElementRef } from '@angular/core';
 
 @Injectable()
 export class ActionPanelJqeuryHelper {
+    private defaultDuration = 600;
 
-    collapseContent(elementRef: ElementRef, callback?: Function) {
+    collapseContent(elementRef: ElementRef, callback?: Function, duration?: number) {
         if (!callback) {
-            $(elementRef.nativeElement).slideUp(400);
+            $(elementRef.nativeElement).slideUp(duration ? duration : this.defaultDuration);
         } else {
-            $(elementRef.nativeElement).slideUp(400, callback);
+            $(elementRef.nativeElement).slideUp(duration ? duration : this.defaultDuration, callback);
         }
     }
 
-    toggleContent(elementRef: ElementRef) {
-        $(elementRef.nativeElement).slideToggle(400, () => { $(elementRef.nativeElement).css('display', 'block') });
+    toggleContent(elementRef: ElementRef, duration?: number, ) {
+        $(elementRef.nativeElement).slideToggle(duration ? duration : this.defaultDuration, () => { $(elementRef.nativeElement).css('display', 'block') });
     }
 
 }

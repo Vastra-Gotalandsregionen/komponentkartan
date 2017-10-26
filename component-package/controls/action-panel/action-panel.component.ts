@@ -21,6 +21,7 @@ export class ActionPanelComponent implements OnInit {
     @HostBinding('class.action-panel--notification-visible') notificationVisible: boolean;
     @HostBinding('class.action-panel--not-interactable') notInteractable: boolean;
     @Input() title: string;
+    @Input() expandingDuration: number;
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
             this.expand();
@@ -71,7 +72,7 @@ export class ActionPanelComponent implements OnInit {
         if (this.deleted || this.notInteractable) {
             return;
         }
-        this.jqueryHelper.toggleContent(this.elementRef);
+        this.jqueryHelper.toggleContent(this.elementRef, this.expandingDuration);
         this._expanded = true;
         this.collapsed = false;
 
@@ -93,7 +94,7 @@ export class ActionPanelComponent implements OnInit {
                 this.collapsed = true;
                 this.notInteractable = false;
                 this.expandedChanged.emit(this._expanded);
-            });
+            }, this.expandingDuration);
         }
     }
 
@@ -117,7 +118,7 @@ export class ActionPanelComponent implements OnInit {
                     this.notificationVisible = false;
                     this.notInteractable = false;
                 }, 2000)
-            });
+            }, this.expandingDuration);
         }, 1400);
 
     }
@@ -135,7 +136,7 @@ export class ActionPanelComponent implements OnInit {
                     this.notInteractable = false;
                     this.deleted = true;
                 }, 2000)
-            });
+            }, this.expandingDuration);
         }, 1400);
     }
 }

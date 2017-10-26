@@ -1,0 +1,16 @@
+<vgr-page>
+  <vgr-page-header [title]="'Snygg Layout'">
+
+    <vgr-button (click)="onClick()">action-panel</vgr-button>
+  </vgr-page-header>
+  <vgr-action-panel [expanded]="expanded" [expandingDuration]="2000">
+    <vgr-card>
+      <div class="card__top flex-row">
+        <span>Enhet</span>
+        <span style="margin-left:40px">Mödravården Mölndal</span>
+        <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="onCardUnlocked()" (save)="cardSaved()" (cancel)="cardCancelled()"></vgr-save-cancel>
+      </div>
+    </vgr-card>
+  </vgr-action-panel>
+  <div class="page-block"></div>
+</vgr-page>

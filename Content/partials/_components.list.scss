@@ -8,13 +8,6 @@
   }
 }
 
-.list--inline {
-  background-color: $background-color--default;
-  .list-item {
-    border-bottom: 1px solid $background-color--default;
-  }
-}
-
 .list__header {
   background-color: $background-color--content;
   z-index: $layer-one;
@@ -25,17 +18,21 @@
   height: 37px;
   font-weight: bold;
   margin-bottom: 1px;
-  margin-left: calc(#{-$margin--slim} + #{-$margin--slim});
+  margin-left: -$margin--slim;
   margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   border-bottom: 2px solid $background-color--default; //The header is WIDER than the main-content, since it has borders to the right and left to cover scrolling shadows from below
   width: calc(#{$content-width--small} + #{$margin--slim} + #{$margin--slim}); //The borders cover the scrolling shadows from below
-  border-right: 10px solid $background-color--default;
-  border-left: 10px solid $background-color--default;
+  border-right: $margin--slim solid $background-color--default;
+  border-left: $margin--slim solid $background-color--default;
   .list--inline & {
     position: relative;
-    border-bottom: none;
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    width: $content-width--small;
   }
   .list--actions-visible & {
     position: relative;
@@ -71,10 +68,6 @@
 .list-item {
   visibility: visible;
   display: block;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
-  padding-left: $margin--slim;
-  padding-right: $margin--slim;
   margin-top: 1px;
   box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
   .list-item__header:after {
@@ -94,21 +87,14 @@
     margin-bottom: 14px;
   }
   &.list-item--collapsed {
-    margin-top: 2px; //OBS! Denna måste ligga efter expanded-stilen i filen!
     .list-item__header:after {
+      //OBS! Denna måste ligga efter expanded-stilen i filen!
       @extend .bg-image-icon-chevron;
       vertical-align: middle;
       margin-left: auto;
       transform: rotate(0deg);
       transition: transform 0.4s;
     }
-  }
-  &.list-item--compact {
-    margin-bottom: 0px;
-    margin-left: -$margin--xs-slim;
-    padding-left: $margin--xs-slim;
-    padding-right: $margin--xs-slim;
-    margin-right: -$margin--xs-slim;
   } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
   &.list-item--collapsed:not(.list-item--compact):hover {
     position: relative;
@@ -129,8 +115,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   transition: opacity 0.3s linear, height 0.3s linear;
@@ -157,8 +141,6 @@
   max-height: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   border-spacing: 10px;
@@ -196,88 +178,49 @@
 .list-item__content {
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   border-spacing: 10px;
   display: none;
   width: calc(#{$content-width--small});
-  .list-item--compact & {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    margin-left: -$margin--xs-slim;
-    margin-right: -$margin--xs-slim;
-    padding-left: $margin--xs-slim;
-    padding-right: $margin--xs-slim;
-  }
-  .list-item--striped & {
-    >* {
-      border-bottom: 1px solid $border-color--light;
-    }
-    >*:last-child {
-      border-bottom: none;
-    }
-  }
   .list-item--notification-visible & {
     border-top: none;
   }
 }
 
-.list {
-  margin-top: 82px;
-}
-
 @media screen and (min-width: $desktop-width--medium) {
-  .list {
-    margin-top: 97px;
-  }
   .list__header {
-    margin-left: -30px;
-    margin-right: -$margin--fat;
     padding-left: $margin--fat;
     padding-right: $margin--fat;
     width: calc(#{$content-width--medium} + #{$margin--slim} + 12px);
     border-right-width: 12px;
+    .list--inline & {
+      position: relative;
+      border: none;
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 0;
+      width: $content-width--medium;
+    }
   }
   .list-item__header {
     height: 40px;
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: $margin--fat;
+    padding-right: $margin--fat;
     .list-item--compact & {
       height: auto;
     }
   }
   .list-item__notification {
-    margin-left: -20px;
-    margin-right: -20px;
     padding-left: 20px;
     padding-right: 20px;
     border-spacing: 10px;
   }
   .list-item__content {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: $margin--fat;
-    padding-top: $margin--fat;
-    width: calc(#{$content-width--medium});
-    .list-item--compact & {
-      padding-top: 0px;
-      padding-bottom: 0px;
-      margin-left: -$margin--slim;
-      margin-right: -$margin--slim;
-      padding-left: $margin--slim;
-      padding-right: $margin--slim;
-    }
+    padding: $margin--fat;
+    width: #{$content-width--medium};
   }
-  .list-item {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+  .list.list--inline {
+    margin-top: 0px;
   }
 }

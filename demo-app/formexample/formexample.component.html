@@ -1,40 +1,142 @@
-<div class="main-content">
-  <div class="komponentkarta-components">
-    <div class="title-value-layout" style="width:50%">
-      <vgr-title-value [title]="'Skriv något'">
-        <vgr-input [required]="true"></vgr-input>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Startmånad'">
-        <vgr-monthpicker [required]="true"></vgr-monthpicker>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Ett datum'">
-        <vgr-datepicker [required]="true"></vgr-datepicker>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Land'">
-        <vgr-dropdown [required]="true" [disabled]="true" [items]="items"></vgr-dropdown>
-      </vgr-title-value>
-      <vgr-title-value [title]="'Länder'">
-        <vgr-dropdown-multiselect [required]="true" [items]="multiItems"></vgr-dropdown-multiselect>
-      </vgr-title-value>
-      <vgr-button (click)="onSave()">Spara</vgr-button>
+<vgr-page>
+  <vgr-page-header [title]="'Testlayout'">
+    <div class="column-layout">
+      Sök enhet
+      <vgr-filter-textbox></vgr-filter-textbox>
+      <vgr-button>Sök</vgr-button>
     </div>
-    <div>Valideringsfel:</div>
-    <div>{{validationStatus}}</div>
+  </vgr-page-header>
+
+
+
+  <div class="page-block row-layout row-layout--equal-height">
+    <div class="information-panel information-panel--default two-thirds ">
+      <div class="information-panel__content">
+        <div class="information-panel__header">
+          <span class="information-panel__header__title">Panel med tiddstämpel</span>
+          <span class="information-panel___header__timestamp">2017-12-31</span>
+        </div>
+        <p class="information-panel__information">
+          En panel med både en rubrik och en tiddstämpel. Längst ned finns plats för en länk. Texten bryts efter tre rader:
+          <i>
+            We built this city we built this city on rock an roll Built this city we built this city on rock an roll Say you don't know
+            me or recognize my face Say you don't care who goes to that kind of place Knee deep in the hoopla sinking in
+            your fight Too many runaways eating up the night
+          </i>
+        </p>
+        <div class="information-panel__footer">
+          <a href="https://www.google.com">En användbar länk</a>
+        </div>
+      </div>
+    </div>
+    <div class="information-panel one-third ">
+      <div class="information-panel__content">
+        <div class="information-panel__header">
+          <span class="information-panel__header__title">Panel med enkel rubrik</span>
+        </div>
+        <p class="information-panel__information">Den här panelen tar en tredjedel av utrymmet och saknar både tiddstämpel och länk.</p>
+      </div>
+    </div>
   </div>
 
-  <vgr-expandable-container-list class="expandable-container-list--inline">
-    <div class="expandable-container-list__header">
+  <vgr-list class="page-block list--inline">
+    <div class="list__header">
       <span class="flex-column-13">Förnamn</span>
       <span class="flex-column-15">Efternamn</span>
     </div>
-    <vgr-expandable-container>
-      <div class="expandable-container__header">
+    <vgr-list-item [notification]="notification">
+      <div class="list-item__header">
         <div class="flex-column-13">John</div>
         <div class="flex-column-15">Doe</div>
       </div>
-      <div class="expandable-container__content">
+      <div class="list-item__content">
         Some content
       </div>
-    </vgr-expandable-container>
-  </vgr-expandable-container-list>
-</div>
+    </vgr-list-item>
+    <vgr-list-item>
+      <div class="list-item__header">
+        <div class="flex-column-13">John</div>
+        <div class="flex-column-15">Doe</div>
+      </div>
+      <div class="list-item__content">
+        Some content
+      </div>
+    </vgr-list-item>
+    <vgr-list-item>
+      <div class="list-item__header">
+        <div class="flex-column-13">John</div>
+        <div class="flex-column-15">Doe</div>
+      </div>
+      <div class="list-item__content">
+        Some content
+      </div>
+    </vgr-list-item>
+    <vgr-list-item>
+      <div class="list-item__header">
+        <div class="flex-column-13">John</div>
+        <div class="flex-column-15">Doe</div>
+      </div>
+      <div class="list-item__content">
+        Some content
+      </div>
+    </vgr-list-item>
+    <vgr-list-item>
+      <div class="list-item__header">
+        <div class="flex-column-13">John</div>
+        <div class="flex-column-15">Doe</div>
+      </div>
+      <div class="list-item__content">
+        Some content
+      </div>
+    </vgr-list-item>
+    <vgr-list-item>
+      <div class="list-item__header">
+        <div class="flex-column-13">John</div>
+        <div class="flex-column-15">Doe</div>
+      </div>
+      <div class="list-item__content">
+        Some content
+      </div>
+    </vgr-list-item>
+    <vgr-list-item>
+      <div class="list-item__header">
+        <div class="flex-column-13">John</div>
+        <div class="flex-column-15">Doe</div>
+      </div>
+      <div class="list-item__content">
+        Some content
+      </div>
+    </vgr-list-item>
+  </vgr-list>
+
+  <div class="page-block row-layout row-layout--equal-height" style="background-color:white">
+    <div class="information-panel information-panel--default two-thirds ">
+      <div class="information-panel__content">
+        <div class="information-panel__header">
+          <span class="information-panel__header__title">Panel med tiddstämpel</span>
+          <span class="information-panel___header__timestamp">2017-12-31</span>
+        </div>
+        <p class="information-panel__information">
+          En panel med både en rubrik och en tiddstämpel. Längst ned finns plats för en länk. Texten bryts efter tre rader:
+          <i>
+            We built this city we built this city on rock an roll Built this city we built this city on rock an roll Say you don't know
+            me or recognize my face Say you don't care who goes to that kind of place Knee deep in the hoopla sinking in
+            your fight Too many runaways eating up the night
+          </i>
+        </p>
+        <div class="information-panel__footer">
+          <a href="https://www.google.com">En användbar länk</a>
+        </div>
+      </div>
+    </div>
+    <div class="information-panel one-third ">
+      <div class="information-panel__content">
+        <div class="information-panel__header">
+          <span class="information-panel__header__title">Panel med enkel rubrik</span>
+        </div>
+        <p class="information-panel__information">Den här panelen tar en tredjedel av utrymmet och saknar både tiddstämpel och länk.</p>
+      </div>
+    </div>
+  </div>
+
+</vgr-page>

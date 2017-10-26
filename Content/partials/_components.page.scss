@@ -1,0 +1,32 @@
+.page {
+  height: calc(100vh - #{$header-height} - 2px);
+  position: absolute;
+  top: $content-header-offset;
+  left: $nav-width--small;
+  margin-left: $margin--fat;
+  display: inline-block;
+  width: $content-width--small;
+}
+
+.page__body {
+  position: relative;
+}
+
+.page-block {
+  padding: $margin--slim;
+  background-color: white;
+  &.list {
+    padding: 0;
+  }
+  margin-bottom: $margin--slim;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .page {
+    left: $nav-width--medium;
+    width: $content-width--medium;
+  }
+  .page-block {
+    padding: $margin--fat;
+  }
+}
