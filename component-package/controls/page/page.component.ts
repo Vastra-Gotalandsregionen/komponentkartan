@@ -15,18 +15,21 @@ export class PageComponent implements AfterViewInit {
     @ContentChild(ActionPanelComponent, { read: ElementRef }) actionPanel: ElementRef;
 
     ngAfterViewInit() {
-        this.pageBody.nativeElement.style.top = this.pageHeader.nativeElement.offsetHeight + 'px';
-        if (this.actionPanel) {
-            this.actionPanel.nativeElement.style.top = this.pageHeader.nativeElement.offsetHeight + 'px';
-        }
+        this.setTopPositionElementBasedOnHeaderHeight(this.pageBody);
+        this.setTopPositionElementBasedOnHeaderHeight(this.actionPanel);
     }
 
     @HostListener('window:resize', ['$event'])
     onWindowResize(event: Event) {
-        this.pageBody.nativeElement.style.top = this.pageHeader.nativeElement.offsetHeight + 'px';
-        if (this.actionPanel) {
-            this.actionPanel.nativeElement.style.top = this.pageHeader.nativeElement.offsetHeight + 'px';
+        this.setTopPositionElementBasedOnHeaderHeight(this.pageBody);
+        this.setTopPositionElementBasedOnHeaderHeight(this.actionPanel);
+    }
+
+    private setTopPositionElementBasedOnHeaderHeight(element: ElementRef) {
+        if (element && this.pageHeader) {
+            element.nativeElement.style.top = this.pageHeader.nativeElement.offsetHeight + 'px';
         }
+
     }
 
 }
