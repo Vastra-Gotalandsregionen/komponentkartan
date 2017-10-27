@@ -23,7 +23,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
 
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
     @Input() @HostBinding('class.disabled') disabled: boolean;
-   
+
 
     selectedItem: IDropdownItem;
     preSelectedItem: IDropdownItem = {} as IDropdownItem;
@@ -42,7 +42,9 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
         this.updateScrolled();
     }
     ngOnInit() {
-        this.preSelectedItem = this.items.filter(x => x.selected)[0]; 
+        if (this.items) {
+            this.preSelectedItem = this.items.filter(x => x.selected)[0];
+        }
     }
 
     doValidate(): IValidationResult {
