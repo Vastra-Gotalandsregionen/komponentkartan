@@ -51,7 +51,9 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         } as IDropdownItem;
     }
     ngOnInit() {
-        this.selectedValues = this.items.filter(x => x.selected);
+        if (this.items) {
+            this.selectedValues = this.items.filter(x => x.selected === true);
+        }
     }
 
     doValidate(): IValidationResult {
@@ -62,7 +64,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         } as IValidationResult;
     }
 
-    ngOnChanges() {     
+    ngOnChanges() {
 
         this.showAllItem.displayName = this.showAllItemText;
 
