@@ -3,7 +3,7 @@
 
     <vgr-button (click)="onClick()">action-panel</vgr-button>
   </vgr-page-header>
-  <vgr-action-panel [expanded]="expanded" [expandingDuration]="2000">
+  <vgr-action-panel [expanded]="expanded" [expansionSpeed]="'normal'">
     <vgr-card>
       <div class="card__top flex-row">
         <span>Enhet</span>
@@ -12,5 +12,4 @@
       </div>
     </vgr-card>
   </vgr-action-panel>
-  <div class="page-block"></div>
 </vgr-page>

@@ -3,21 +3,21 @@
   position: absolute;
   top: $content-header-offset;
   left: $nav-width--small;
-  margin-left: $margin--fat;
   display: inline-block;
   width: $content-width--small;
 }
 
 .page__body {
+  margin-left: $margin--fat;
   position: relative;
+  display: block;
 }
 
 .page-block {
   padding: $margin--slim;
   background-color: white;
-  &.list {
-    padding: 0;
-  }
+  display: block;
+  width: $content-width--small;
   margin-bottom: $margin--slim;
 }
 
@@ -28,5 +28,6 @@
   }
   .page-block {
     padding: $margin--fat;
+    width: $content-width--medium;
   }
 }

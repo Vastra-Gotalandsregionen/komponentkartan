@@ -10,7 +10,6 @@
   border-left: $margin--fat solid $background-color--default;
   border-right: $margin--fat solid $background-color--default;
   width: calc(#{$content-width--small} + #{$margin--fat} + #{$margin--fat});
-  margin-left: -$margin--fat;
   padding: 10px;
   margin-top: $margin--fat;
 }
@@ -34,6 +33,5 @@
 @media screen and (min-width: $desktop-width--medium) {
   .page-header {
     width: calc(#{$content-width--medium} + #{$margin--fat} + #{$margin--fat});
-    margin-left: -$margin--fat;
   }
 }

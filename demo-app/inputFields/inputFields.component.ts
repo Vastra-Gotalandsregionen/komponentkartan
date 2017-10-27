@@ -54,7 +54,6 @@ export class InputFieldsComponent {
         return isNaN(value) ? 'Inget' : value;
     }
     toggleInputType(option: ISelectableItem) {
-        console.log(this.isSmall);
         if (option.displayName === 'Stor')
             this.isSmall = false;
         else

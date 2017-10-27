@@ -22,9 +22,11 @@ export class FormExampleComponent {
     items: ISelectableItem[];
     multiItems: ISelectableItem[];
     notification: RowNotification;
-
+    actionpanel: boolean;
+    view: string;
     @ViewChildren(ValidationComponent) validatedComponents: QueryList<ValidationComponent>;
     constructor() {
+        this.view = 'A';
         this.validationStatus = 'Inte validerad';
         this.items = [
             { displayName: 'Sverige' } as ISelectableItem,

@@ -1,4 +1,4 @@
-import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
 import { RowNotification } from '../../models/rowNotification.model';
@@ -9,19 +9,28 @@ import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
     selector: 'vgr-action-panel',
     moduleId: module.id
 })
-export class ActionPanelComponent implements OnInit {
+export class ActionPanelComponent implements OnInit, AfterViewInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
 
     readonly showNotificationDurationMs = 1500;
+    private actualContentHeight: string;
     @HostBinding('class.action-panel') isContainer = true;
     @HostBinding('class.action-panel--collapsed') collapsed = true;
     @HostBinding('class.action-panel--expanded') private _expanded: boolean;
     @HostBinding('class.action-panel--deleted') deleted: boolean;
     @HostBinding('class.action-panel--notification-visible') notificationVisible: boolean;
     @HostBinding('class.action-panel--not-interactable') notInteractable: boolean;
+
     @Input() title: string;
-    @Input() expandingDuration: number;
+    @Input() expansionSpeed: 'slow' | 'normal' | 'fast';
+    @HostBinding('class.action-panel--slow') get slow() {
+        return this.expansionSpeed === 'slow';
+    }
+    @HostBinding('class.action-panel--fast') get fast() {
+        return this.expansionSpeed === 'fast';
+    }
+
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
             this.expand();
@@ -58,6 +67,10 @@ export class ActionPanelComponent implements OnInit {
     constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ActionPanelJqeuryHelper) {
     }
 
+    ngAfterViewInit() {
+
+        this.actualContentHeight = this.elementRef.nativeElement.scrollHeight + 'px';
+    }
     ngOnInit() {
         if (this.notification && this.notification.type === NotificationType.Permanent) {
             this.showNotification();
@@ -72,7 +85,8 @@ export class ActionPanelComponent implements OnInit {
         if (this.deleted || this.notInteractable) {
             return;
         }
-        this.jqueryHelper.toggleContent(this.elementRef, this.expandingDuration);
+        //  this.jqueryHelper.toggleContent(this.elementRef, this.expandingDuration);
+        this.elementRef.nativeElement.style.height = this.actualContentHeight;
         this._expanded = true;
         this.collapsed = false;
 
@@ -82,20 +96,22 @@ export class ActionPanelComponent implements OnInit {
 
     private collapse(collapsingNotification?: NotificationType) {
 
-        this.notInteractable = true;
+        this.elementRef.nativeElement.style.height = '0px';
+        this._expanded = false;
+        this.collapsed = true;
 
-        if (collapsingNotification) {
-            this.processNotification(collapsingNotification, () => {
+        // if (collapsingNotification) {
+        //     this.processNotification(collapsingNotification, () => {
 
-            });
-        } else {
-            this.jqueryHelper.collapseContent(this.elementRef, () => {
-                this._expanded = false;
-                this.collapsed = true;
-                this.notInteractable = false;
-                this.expandedChanged.emit(this._expanded);
-            }, this.expandingDuration);
-        }
+        //     });
+        // } else {
+        //     this.jqueryHelper.collapseContent(this.elementRef, () => {
+        //         this._expanded = false;
+        //         this.collapsed = true;
+        //         this.notInteractable = false;
+        //         this.expandedChanged.emit(this._expanded);
+        //     }, this.expandingDuration);
+        // }
     }
 
     private processNotification(notificationType: NotificationType, callback: Function): void {
@@ -108,35 +124,35 @@ export class ActionPanelComponent implements OnInit {
 
     private processShowOnCollapseNotification(callback: Function) {
         this.notificationVisible = true;
-        setTimeout(() => {
-            this.jqueryHelper.collapseContent(this.elementRef, () => {
-                this._expanded = false;
-                this.collapsed = true;
-                this.expandedChanged.emit(this._expanded);
-                setTimeout(() => {
-                    this.notification.done = true;
-                    this.notificationVisible = false;
-                    this.notInteractable = false;
-                }, 2000)
-            }, this.expandingDuration);
-        }, 1400);
+        // setTimeout(() => {
+        //     this.jqueryHelper.collapseContent(this.elementRef, () => {
+        //         this._expanded = false;
+        //         this.collapsed = true;
+        //         this.expandedChanged.emit(this._expanded);
+        //         setTimeout(() => {
+        //             this.notification.done = true;
+        //             this.notificationVisible = false;
+        //             this.notInteractable = false;
+        //         }, 2000)
+        //     }, this.expandingDuration);
+        // }, 1400);
 
     }
 
     private processShowOnRemoveNotification(callback: Function) {
         this.notificationVisible = true;
-        setTimeout(() => {
-            this.jqueryHelper.collapseContent(this.elementRef, () => {
-                this._expanded = false;
-                this.collapsed = true;
-                this.expandedChanged.emit(this._expanded);
-                setTimeout(() => {
-                    this.notification.done = true;
-                    this.notificationVisible = false;
-                    this.notInteractable = false;
-                    this.deleted = true;
-                }, 2000)
-            }, this.expandingDuration);
-        }, 1400);
+        // setTimeout(() => {
+        //     this.jqueryHelper.collapseContent(this.elementRef, () => {
+        //         this._expanded = false;
+        //         this.collapsed = true;
+        //         this.expandedChanged.emit(this._expanded);
+        //         setTimeout(() => {
+        //             this.notification.done = true;
+        //             this.notificationVisible = false;
+        //             this.notInteractable = false;
+        //             this.deleted = true;
+        //         }, 2000)
+        //     }, this.expandingDuration);
+        // }, 1400);
     }
 }
