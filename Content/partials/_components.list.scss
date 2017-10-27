@@ -25,14 +25,13 @@
   margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
-  border-bottom: 2px solid $background-color--default; //The header is WIDER than the main-content, since it has borders to the right and left to cover scrolling shadows from below
+  border-bottom: 1px solid $background-color--default; //The header is WIDER than the main-content, since it has borders to the right and left to cover scrolling shadows from below
   width: calc(#{$content-width--small} + #{$margin--slim} + #{$margin--slim}); //The borders cover the scrolling shadows from below
   border-right: $margin--slim solid $background-color--default;
   border-left: $margin--slim solid $background-color--default;
   .list--inline & {
     position: relative;
-    border: none;
-    width: $content-width--small;
+    border-bottom: none;
   }
   .list--actions-visible & {
     position: relative;
@@ -199,14 +198,6 @@
     padding-right: $margin--fat;
     width: calc(#{$content-width--medium} + #{$margin--slim} + 12px);
     border-right-width: 12px;
-    .list--inline & {
-      position: relative;
-      border: none;
-      margin-left: 0;
-      margin-right: 0;
-      margin-top: 0;
-      width: $content-width--medium;
-    }
   }
   .list-item__header {
     height: 40px;
