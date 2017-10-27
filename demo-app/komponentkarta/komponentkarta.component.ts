@@ -23,7 +23,8 @@ export class KomponentkartaComponent implements AfterViewInit {
     dropDownItems25: IDropdownItem[];
     dropDownItems200: IDropdownItem[];
     dropDownItems9: IDropdownItem[];
-    dropDownItems8: IDropdownItem[] = {} as IDropdownItem[];
+    dropDownItems8: IDropdownItem[];
+    dropMultipleDownItems8: IDropdownItem[];
     dropDownItems10: IDropdownItem[];
     dropDownItems25All: IDropdownItem[];
     buttonDisabled: boolean;
@@ -42,6 +43,7 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems200 = this.getDemoItems(200);
         this.dropDownItems8 = this.getDemoItems(8);
+        this.dropMultipleDownItems8 = this.getDemoItems(8);
         this.dropDownItems9 = this.getDemoItems(9);
         this.dropDownItems10 = this.getDemoItems(10);
         this.buttonDisabled = true;
@@ -78,13 +80,12 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.lastSingleSelection = 'Inget';
 
         this.dropDownItems200[3].selected = true;
-        this.dropDownItems8[0].selected = true;
-        this.dropDownItems8[1].selected = true;
-        this.dropDownItems8[2].selected = true;
+
+        this.dropMultipleDownItems8[0].selected = true;
+        this.dropMultipleDownItems8[1].selected = true;
+        this.dropMultipleDownItems8[2].selected = true;
 
         this.dropDownItems9[7].selected = true;
-
-        console.log('dropDownItems8', this.dropDownItems8);
     }
 
     showOneButtonModal() {
@@ -144,7 +145,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     private getDemoItems(numberOfItems: number): IDropdownItem[] {
         const items: IDropdownItem[] = [];
         for (let i = 1; i <= numberOfItems; i++) {
-            items.push({ id: i.toString(), displayName: `Långt namn ${i}`, displayNameWhenSelected: `Alt ${i}`, selected: false } as IDropdownItem);
+            items.push({ id: i.toString(), displayName: `Långt namn ${i}`, displayNameWhenSelected: `Alt ${i}` } as IDropdownItem);
         }
         return items;
     }

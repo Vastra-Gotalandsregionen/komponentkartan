@@ -23,7 +23,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string; // texten som visaspå checkboxen för att välja alla
 
-    selectedValues: string;
+    selectedValues: IDropdownItem[];
 
     dropdownLabel: string;
     selectAllItem: IDropdownItem;
@@ -49,18 +49,9 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             displayNameWhenSelected: this.allItemsSelectedLabel,
             selected: false
         } as IDropdownItem;
-
-
     }
     ngOnInit() {
-        this.selectedValues = this.concatinateSelectedValues();
-        console.log('selectedValues', this.selectedValues);
-    }
-
-    concatinateSelectedValues(): string {
-        console.log('items', this.items);
-        console.log(this.items.filter(x => x.selected));
-        return this.items.filter(x => x.selected).map(x => x.displayNameWhenSelected).join(',');
+        this.selectedValues = this.items.filter(x => x.selected);
     }
 
     doValidate(): IValidationResult {
@@ -71,7 +62,8 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         } as IValidationResult;
     }
 
-    ngOnChanges() {
+    ngOnChanges() {     
+
         this.showAllItem.displayName = this.showAllItemText;
 
         this.selectAllItem.displayName = this.selectAllItemText;

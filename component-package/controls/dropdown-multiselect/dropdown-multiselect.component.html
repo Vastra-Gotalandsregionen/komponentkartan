@@ -41,6 +41,8 @@
 </div>
 <ng-template #readonlyTemplate>
   <div>
-    <p>{{selectedValues}}</p>
+    <ul>
+      <li *ngFor="let selectedValue of selectedValues; let i=index" >{{selectedValues[i].displayNameWhenSelected}}</li>
+    </ul>
   </div>
 </ng-template>

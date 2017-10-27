@@ -97,11 +97,11 @@
       <div class="row-layout">
         <div>
           <p>8 items</p>
-          <vgr-dropdown-multiselect [items]="dropDownItems8" (selectionChanged)="onMultipleSelectionChanged($event)"></vgr-dropdown-multiselect>
+          <vgr-dropdown-multiselect [items]="dropMultipleDownItems8" (selectionChanged)="onMultipleSelectionChanged($event)"></vgr-dropdown-multiselect>
         </div>
         <div>
-          <p>8 items readonly</p>
-          <vgr-dropdown-multiselect [items]="dropDownItems8" [readonly]="true"></vgr-dropdown-multiselect>
+          <p>8 items (3 pre-selected) readonly</p>
+          <vgr-dropdown-multiselect [items]="dropMultipleDownItems8" [readonly]="true"></vgr-dropdown-multiselect>
         </div>
         <div>
           <p>9 items</p>
