@@ -30,6 +30,7 @@ $icon-width: 34px;
   #Misc
 \*------------------------------------*/
 
+//OBS! $header-height används som hårdkodat värde i action-panel.component.ts. Vid ändring måste .ts uppdateras.
 $header-height:79px;
 $header-menu-width-small: 200px;
 $header-menu-width-medium: 220px;

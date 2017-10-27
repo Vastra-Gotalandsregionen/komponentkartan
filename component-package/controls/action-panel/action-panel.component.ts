@@ -1,4 +1,4 @@
-import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, AfterContentInit } from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
 import { RowNotification } from '../../models/rowNotification.model';
@@ -9,12 +9,13 @@ import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
     selector: 'vgr-action-panel',
     moduleId: module.id
 })
-export class ActionPanelComponent implements OnInit, AfterViewInit {
+export class ActionPanelComponent implements OnInit, AfterContentInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
 
     readonly showNotificationDurationMs = 1500;
     private actualContentHeight: string;
+    private pageHeaderHeight: number;
     @HostBinding('class.action-panel') isContainer = true;
     @HostBinding('class.action-panel--collapsed') collapsed = true;
     @HostBinding('class.action-panel--expanded') private _expanded: boolean;
@@ -24,6 +25,11 @@ export class ActionPanelComponent implements OnInit, AfterViewInit {
 
     @Input() title: string;
     @Input() expansionSpeed: 'slow' | 'normal' | 'fast';
+    get animationDelayMs(): number {
+        return this.expansionSpeed === 'slow' ? 1000 :
+            this.expansionSpeed === 'fast' ? 300 : 600;
+
+    }
     @HostBinding('class.action-panel--slow') get slow() {
         return this.expansionSpeed === 'slow';
     }
@@ -65,12 +71,22 @@ export class ActionPanelComponent implements OnInit, AfterViewInit {
     }
 
     constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ActionPanelJqeuryHelper) {
+        this.pageHeaderHeight = 0;
     }
 
-    ngAfterViewInit() {
+    ngAfterContentInit() {
+        this.updateActualContentHeight();
+    }
 
+    private updateActualContentHeight() {
         this.actualContentHeight = this.elementRef.nativeElement.scrollHeight + 'px';
     }
+
+    public setPageHeaderHeight(height: number) {
+        this.pageHeaderHeight = height;
+        this.elementRef.nativeElement.style.top = height + 'px';
+    }
+
     ngOnInit() {
         if (this.notification && this.notification.type === NotificationType.Permanent) {
             this.showNotification();
@@ -85,20 +101,27 @@ export class ActionPanelComponent implements OnInit, AfterViewInit {
         if (this.deleted || this.notInteractable) {
             return;
         }
-        //  this.jqueryHelper.toggleContent(this.elementRef, this.expandingDuration);
+        this.updateActualContentHeight();
         this.elementRef.nativeElement.style.height = this.actualContentHeight;
         this._expanded = true;
         this.collapsed = false;
 
         this.expandedChanged.emit(this._expanded);
+        setTimeout(() => {
+            this.elementRef.nativeElement.style.height = 'auto';
+        }, this.animationDelayMs);
 
     }
 
     private collapse(collapsingNotification?: NotificationType) {
+        this.updateActualContentHeight();
+        this.elementRef.nativeElement.style.height = this.actualContentHeight;
+        setTimeout(() => {
+            this.elementRef.nativeElement.style.height = '0px';
+            this._expanded = false;
+            this.collapsed = true;
+        }, 50);
 
-        this.elementRef.nativeElement.style.height = '0px';
-        this._expanded = false;
-        this.collapsed = true;
 
         // if (collapsingNotification) {
         //     this.processNotification(collapsingNotification, () => {
