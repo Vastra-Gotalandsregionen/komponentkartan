@@ -2,8 +2,6 @@
 
 .action-panel {
   background-color: white;
-  padding-left: $margin--slim;
-  padding-right: $margin--slim;
   margin-left: $margin--fat;
   box-shadow: none;
   width: $content-width--small;
@@ -12,6 +10,10 @@
   overflow: hidden;
   height: 0px;
   transition: all 0.6s ease;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
   &.action-panel--expanded {
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
     margin-bottom: 14px;
@@ -81,9 +83,11 @@
     border-spacing: 10px;
   }
   .action-panel {
+    width: $content-width--medium;
+    padding-top: 0;
+    padding-bottom: 0;
     padding-left: $margin--fat;
     padding-right: $margin--fat;
-    width: $content-width--medium;
   }
   .action-panel__content {
     padding-top: $margin--fat;
