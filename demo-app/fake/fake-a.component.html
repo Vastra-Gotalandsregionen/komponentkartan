@@ -61,3 +61,23 @@
     </div>
   </div>
 </vgr-page-block>
+
+<vgr-page-block>
+  <div class="row-layout">
+    <div class="column-layout">
+      <h2>Dropdown</h2>
+      <vgr-dropdown [values]="['Option A','Option B','Option C']" [selectedValue]="'Option A'" [readonly]="readonly"></vgr-dropdown>
+      <vgr-dropdown [values]="['Option A','Option B','Option C']" [selectedValue]="'Option A'" [readonly]="!readonly"></vgr-dropdown>
+      <vgr-dropdown [items]="options123_1" [readonly]="readonly"></vgr-dropdown>
+      <vgr-dropdown [items]="options123_2" [readonly]="!readonly"></vgr-dropdown>
+    </div>
+    <div class="column-layout">
+      <h2>Dropdown - multi</h2>
+      <vgr-dropdown-multiselect [values]="['Option A','Option B','Option C']" [selectedValues]="['Option A','Option C']" [readonly]="readonly"></vgr-dropdown-multiselect>
+      <vgr-dropdown-multiselect [values]="['Option A','Option B','Option C']" [selectedValues]="['Option A','Option C']" [readonly]="!readonly"></vgr-dropdown-multiselect>
+      <vgr-dropdown-multiselect [items]="options123Multi_1" [readonly]="readonly"></vgr-dropdown-multiselect>
+      <vgr-dropdown-multiselect [items]="options123Multi_2" [readonly]="!readonly"></vgr-dropdown-multiselect>
+    </div>
+  </div>
+  <vgr-button (click)="readonly=!readonly">Invert readonly</vgr-button>
+</vgr-page-block>

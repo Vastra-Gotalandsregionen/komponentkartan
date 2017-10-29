@@ -369,5 +369,43 @@ describe("[DropdownMultiSelectComponent]", () => {
             expect(dropdownElement.classes["dropdown--filter-visible"]).toBe(false);
         });
     });
+
+    describe('When component is initialized with two simple values', () => {
+        beforeEach(() => {
+            component.values = ['one', 'two'];
+            fixture.detectChanges();
+            spyOn(component.selectionChanged, 'emit');
+        });
+        it('the item list contains two items', () => {
+            expect(component.items).toEqual([{ displayName: 'one', id: 'one' }, { displayName: 'two', id: 'two' }]);
+        })
+        describe('and a selected value', () => {
+            beforeEach(() => {
+                component.selectedValues = ['one'];
+            });
+            it('the matching drop down item is selected', () => {
+                expect(component.items[0].selected).toBe(true);
+            });
+            it('a selectedItemChanged is emitted', () => {
+                expect(component.selectionChanged.emit).toHaveBeenCalledWith([{ displayName: 'one', id: 'one', selected: true }]);
+            });
+        });
+        describe('and both are selected', () => {
+            beforeEach(() => {
+                component.selectedValues = ['one', 'two'];
+            });
+            it('the matching drop down items are selected', () => {
+                expect(component.items[0].selected).toBe(true);
+                expect(component.items[1].selected).toBe(true);
+            });
+
+            it('a selectedItemChanged is emitted', () => {
+                expect(component.selectionChanged.emit).toHaveBeenCalledWith([{ displayName: 'one', id: 'one', selected: true }, { displayName: 'two', id: 'two', selected: true }]);
+            });
+            it('select all is selected', () => {
+                expect(component.selectAllItem.selected).toBeTruthy();
+            });
+        });
+    });
 });
 

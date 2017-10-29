@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef, OnInit } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -17,13 +17,11 @@ import { IValidationResult } from '../../models/validation.model';
     providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownMultiselectComponent) }]
 })
 
-export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, OnInit {
+export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges {
 
     @Input() showAllItemText: string; // showAllItemText (skrivit ett filter och vill rensa filtret)
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string; // texten som visaspå checkboxen för att välja alla
-
-    selectedValues: IDropdownItem[];
 
     dropdownLabel: string;
     selectAllItem: IDropdownItem;
@@ -34,6 +32,16 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
     get selectedItems(): IDropdownItem[] {
         return this._items.filter(x => x.selected);
+    }
+
+    @Input() set selectedValues(values: string[]) {
+        if (this.items) {
+            const matchingItems = this.items.filter(x => values.find(val => val === x.id));
+            if (matchingItems.length > 0) {
+                matchingItems.forEach(x => x.selected = true);
+                this.handleInitiallySelectedItems(matchingItems);
+            }
+        }
     }
 
     constructor(elementRef: ElementRef) {
@@ -49,11 +57,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             displayNameWhenSelected: this.allItemsSelectedLabel,
             selected: false
         } as IDropdownItem;
-    }
-    ngOnInit() {
-        if (this.items) {
-            this.selectedValues = this.items.filter(x => x.selected === true);
-        }
     }
 
     doValidate(): IValidationResult {
