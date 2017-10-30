@@ -9,6 +9,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
 })
 export class ListComponent implements AfterViewInit {
     @HostBinding('class.list') hasClass = true;
+    @Input() @HostBinding('class.list--inline') flexibleHeader: boolean;
     @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
     @Input() allowMultipleExpandedItems = false;
     constructor() {
