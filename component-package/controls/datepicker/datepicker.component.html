@@ -1,4 +1,4 @@
-<div class="validation">
+<div *ngIf="!readonly;  else readonlyTemplate" class="validation">
     <div class="datepicker datepicker--open" (click)="displayDatePicker()" (focusin)="onEnter()" (focusout)="onLeave()">
         <div class="datepicker__dropdown" tabindex="{{disabled ? -1 : 0}}">
             <span tabindex="0" *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date: selectedDateFormat}}</span>
@@ -46,3 +46,9 @@
     </div>
 
 </div>
+
+<ng-template #readonlyTemplate>
+        <div class="datepicker--readonly">
+            {{selectedDate | date: selectedDateFormat}}
+        </div>
+</ng-template>

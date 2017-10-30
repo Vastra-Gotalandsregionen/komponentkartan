@@ -1,5 +1,4 @@
-<div class="validation">
-
+<div *ngIf="!readonly; else readonlyTemplate" class="validation">
   <div class="monthpicker" (mousedown)="onMouseDown($event)" (keydown)="onKeyDown($event)" (focusin)="onEnter()" (focusout)="onLeave()"
     [ngClass]="{'monthpicker--open' : expanded}">
 
@@ -71,6 +70,13 @@
       <div class="validation__status__icon"></div>
       <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
     </div>
-
-
+    
+    </div>
   </div>
+
+  <ng-template #readonlyTemplate>
+      <div class="monthpicker--readonly">
+          {{selectedDate | date: selectedDateFormat}}
+      </div>
+  </ng-template>
+  
