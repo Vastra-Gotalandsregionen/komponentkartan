@@ -15,10 +15,17 @@
           <p>MM yyyy formatering</p>
           <vgr-monthpicker style="margin-top: 20px" [selectedDateFormat]="'MM yyyy'" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
         </div>
-
         <div>
           <p>Disabled</p>
           <vgr-monthpicker style="margin-top: 20px" [disabled]="true" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
+        </div>
+        <div>
+          <p>Readonlyläge vid ej ifyllt datum</p>
+          <vgr-monthpicker [selectedDate]="selectedDateNew" [readonly]="true"></vgr-monthpicker>
+        </div>
+        <div>
+          <p>Readonlyläge vid befintlig datum</p>
+          <vgr-monthpicker [selectedDate]="selectedDate" [readonly]="true"></vgr-monthpicker>
         </div>
       </div>
       <div>
@@ -71,15 +78,30 @@
         <div>
           <span>Valt datum: </span>
           <p>{{datepicker_selectedDate | date : 'dd MMM yyyy'}}</p>
-        </div>
+        </div>       
       </div>
-
       <div class="row-layout row-layout--padded">
         <div>
           <p>Avstängd datepicker</p>
           <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max"
             [selectedDate]="datepicker_selectedDate" [disabled]="true"></vgr-datepicker>
         </div>
+      </div>
+      <div class="row-layout row-layout--padded">
+        <div>
+          <p>Readonlyläge vid ej ifyllt datum</p>
+          <vgr-datepicker [selectedDate]="datepicker_selectedDateNew" [readonly]="true"></vgr-datepicker>
+        </div>
+        <div>
+          <span>Valt datum: </span>
+          <p>{{datepicker_selectedDateNew | date : 'dd MMM yyyy'}}</p>
+        </div>     
+      </div>
+      <div class="row-layout row-layout--padded">
+        <div>
+          <p>Readonlyläge vid befintlig datum</p>
+          <vgr-datepicker [selectedDate]="datepicker_selectedDate" [readonly]="true"></vgr-datepicker>
+        </div>  
       </div>
 
       <div>

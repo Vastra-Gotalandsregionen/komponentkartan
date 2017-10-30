@@ -28,7 +28,6 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     @Input() selectedDateFormat = 'MMM yyyy';
     @Input() tooltipDateFormat = 'MMMM yyyy';
 
-
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
     displayedYear: ICalendarYear = {} as ICalendarYear;

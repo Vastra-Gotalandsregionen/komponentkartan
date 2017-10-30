@@ -68,5 +68,56 @@ describe('[DatepickerComponent(Angular)]', () => {
             });
         });
     });
+
+    describe('When initialized with empty Selected date and readonly-mode', () => {
+        beforeEach(() => {
+            component.readonly = true;
+            fixture.detectChanges();
+           
+        });
+
+        it('contains div class .datepicker--readonly', () => {
+            let divDatePickerReadOnly = fixture.debugElement.query(By.css('.datepicker--readonly'));
+             expect(divDatePickerReadOnly.attributes['class']).toBe('datepicker--readonly');
+        });
+        it('selected date is empty', () => {
+            let divDatePickerReadOnly = fixture.debugElement.query(By.css('.datepicker--readonly'));
+            let content = divDatePickerReadOnly.nativeElement.textContent;
+             expect(content.trim()).toBe('');
+        });
+    });
+
+    describe('When initialized with existing Selected date and readonly-mode', () => {
+        beforeEach(() => {
+            component.selectedDate = new Date(2017,1,1);
+            component.readonly = true;
+            fixture.detectChanges();
+        });
+
+        it('contains div class .datepicker--readonly', () => {            
+            let divDatePickerReadOnly = fixture.debugElement.query(By.css('.datepicker--readonly'));            
+             expect(divDatePickerReadOnly.attributes['class']).toBe('datepicker--readonly');
+        });
+        it('selected date is new Date(2017,1,1)', () => {           
+            let divDatePickerReadOnly = fixture.debugElement.query(By.css('.datepicker--readonly'));
+            let content = divDatePickerReadOnly.nativeElement.textContent;
+             expect(content.trim()).toBe('2017-02-01');
+        });
+
+
+    });
+
+    describe('When initialized with readonly-mode', () => {
+        beforeEach(() => {
+            component.readonly = false;
+            fixture.detectChanges();
+        });
+
+        it('not contains div class .datepicker--readonly', () => {            
+            let divDatePickerReadOnly = fixture.debugElement.query(By.css('.datepicker--readonly'));
+            
+             expect(divDatePickerReadOnly).toBeNull(true);
+        });
+    });
 });
 
