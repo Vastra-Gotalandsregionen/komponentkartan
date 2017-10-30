@@ -22,7 +22,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     @Input() required: boolean;
     @Input() readonly: boolean;
     @Output() selectedDateChanged = new EventEmitter<Date>();
-  
+
 
     yearMonths: ICalendarYearMonth[] = [];
     isDatePickerVisible: boolean;
@@ -59,10 +59,9 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         if (this.disabled) {
             return;
         }
+
         this.setValidationStateEditing();
     }
-
-
 
     ngOnInit() {
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
@@ -270,9 +269,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     onOutsideClick(event: Event) {
         if (!this.elementRef.nativeElement.contains(event.target)) {
             this.isDatePickerVisible = false;
-
         }
-
     }
 
     onPreviousMonth() {
@@ -332,7 +329,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         const minMonth = tmpMinDate.getMonth() + 1;
         const maxMonth = tmpMaxDate.getMonth() + 1;
         const minYear = tmpMinDate.getFullYear();
-        const maxYear = tmpMaxDate.getFullYear();       
+        const maxYear = tmpMaxDate.getFullYear();
 
         const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
         const currentYear = this.yearMonths[this.currentYearMonthIndex].year;
