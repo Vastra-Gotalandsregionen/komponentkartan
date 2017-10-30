@@ -96,15 +96,17 @@
   </vgr-action-panel>
   <vgr-page-body>
     <vgr-page-block>
-      <vgr-list [allowMultipleExpandedItems]="false" [flexibleHeader]="actionPanelVisible">
-        <div class="list__header">
-          <span class="flex-column-13 list__column--sorted-asc">Förnamn</span>
-          <span class="flex-column-15 list__column--sorted-desc">Efternamn</span>
-        </div>
+      <vgr-list [allowMultipleExpandedItems]="false" [flexibleHeader]="actionPanelVisible" (sortChanged)="onSortChanged($event)">
+        <vgr-list-header>
+          <vgr-list-column [text]="'Förnamn'" [sort]="sortDirections.Ascending" [width]="'m'"></vgr-list-column>
+          <vgr-list-column [text]="'Efternamn'" [width]="'xxl'"></vgr-list-column>
+        </vgr-list-header>
+
+
         <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
           <div class="list-item__header">
-            <div class="flex-column-13">{{row.object.firstName}}</div>
-            <div class="flex-column-15">{{row.object.lastName}}</div>
+            <vgr-list-column [text]="row.object.firstName" [width]="'m'"></vgr-list-column>
+            <vgr-list-column [text]="row.object.lastName" [width]="'xxl'"></vgr-list-column>
             <a *ngIf="row.object.canBeDeleted && !row.object.deleted" (click)="removeRowWithoutExpand(row, $event)">Ta bort</a>
           </div>
           <div class="list-item__content">

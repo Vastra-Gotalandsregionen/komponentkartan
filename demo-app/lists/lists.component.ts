@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, AfterContentInit, ContentChild } from '@angular/core';
 import { ExpandableRow } from '../../component-package/models/expandableRow.model';
 import { NotificationIcon } from '../../component-package/models/notificationIcon.model';
 import { RowNotification } from '../../component-package/models/rowNotification.model';
 import { NotificationType } from '../../component-package/models/notificationType.model';
 import { ModalService } from '../../component-package/services/modalService';
 import { ModalButtonConfiguration } from '../../component-package/services/modalService';
+import { SortDirection } from '../../component-package/controls/list/list-column.component';
+import { SortChangedArgs, ListHeaderComponent } from '../../component-package/controls/list/list-header.component';
 
 @Component({
     moduleId: module.id,
@@ -12,6 +14,7 @@ import { ModalButtonConfiguration } from '../../component-package/services/modal
     templateUrl: 'lists.component.html'
 })
 export class ListsComponent {
+    sortDirections = SortDirection;
     actionPanelVisible: boolean;
     public peopleRows: ExpandableRow<ExamplePerson>[];
     public cardUnlocked: boolean;
@@ -26,6 +29,8 @@ export class ListsComponent {
     public grossAmount: number;
     public taxPercent: number;
     public selectedDate: Date;
+
+
     constructor(private modalService: ModalService) {
         const examplePeople = [
             { id: '1', firstName: 'Adam', lastName: 'Andersson', organisations: ['Team 1', 'Team 2'] } as ExamplePerson,
@@ -43,6 +48,12 @@ export class ListsComponent {
 
         this.peopleRows[0].notification = { message: 'Information saknas', icon: NotificationIcon.ExclamationRed, type: NotificationType.Permanent } as RowNotification;
         this.peopleRows[4].notification = { message: 'Personen är inaktiv', icon: NotificationIcon.Exclamation, type: NotificationType.Permanent } as RowNotification;
+    }
+
+
+
+    onSortChanged(event: any) {
+        console.log('Sorterar på kolumn ' + event.columnTitle + ' riktning: ' + event.sortDirection);
     }
 
     removeRow(row: ExpandableRow<ExamplePerson>) {
