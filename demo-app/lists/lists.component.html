@@ -98,8 +98,8 @@
     <vgr-page-block>
       <vgr-list [allowMultipleExpandedItems]="false" [flexibleHeader]="actionPanelVisible">
         <div class="list__header">
-          <span class="flex-column-13">Förnamn</span>
-          <span class="flex-column-15">Efternamn</span>
+          <span class="flex-column-13 list__column--sorted-asc">Förnamn</span>
+          <span class="flex-column-15 list__column--sorted-desc">Efternamn</span>
         </div>
         <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
           <div class="list-item__header">
