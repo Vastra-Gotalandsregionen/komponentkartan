@@ -12,6 +12,7 @@ import { ModalButtonConfiguration } from '../../component-package/services/modal
     templateUrl: 'lists.component.html'
 })
 export class ListsComponent {
+    actionPanelVisible: boolean;
     public peopleRows: ExpandableRow<ExamplePerson>[];
     public cardUnlocked: boolean;
     public cardRow: ExpandableRow<string> = new ExpandableRow<string>('Foo');
@@ -87,7 +88,9 @@ export class ListsComponent {
         this.cardRow.notifyOnCollapse('Åtgärden avbröts', NotificationIcon.Ok);
     }
 
-
+    onCardUnlocked() {
+        this.cardUnlocked = true;
+    }
 }
 
 export interface ExamplePerson {

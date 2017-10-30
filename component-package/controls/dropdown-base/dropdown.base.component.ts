@@ -18,6 +18,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
     @Input() required: boolean;
+    @Input() readonly: boolean;
     showAllItem: IDropdownItem;
 
     expanded: boolean;
@@ -25,6 +26,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     scrollVisible: boolean;
     filter: string;
     scrollbarConfig: PerfectScrollbarConfig;
+
 
     protected filterLimit = 20;
     protected scrollLimit = 8;
@@ -42,9 +44,10 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             this.handleInitiallySelectedItems(selectedItems);
         }
         setTimeout(() => {
-            this.scrollbarComponent.update();
-            this.listenToScrollbarEvents();
-
+            if(this.readonly === false) {
+                this.scrollbarComponent.update();
+                this.listenToScrollbarEvents();
+             }
         }, 500);
     }
     get items(): IDropdownItem[] {
@@ -114,7 +117,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
     onDropdownMouseDown(event: Event) {
         if (this.preventCollapse) {
-            event.cancelBubble = true;
             event.returnValue = false;
             this.preventCollapse = false;
         } else {

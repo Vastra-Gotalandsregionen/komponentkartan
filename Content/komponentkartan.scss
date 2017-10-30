@@ -27,12 +27,11 @@
 
 /* COMPONENTS */
 
-//Main-content används av många komponenter, lägg denna först
-@import "partials/_components.main-content.scss";
+@import "partials/_components.page.scss";
 @import "partials/_components.page-header.scss";
 @import "partials/_components.information-panel.scss";
 @import "partials/_components.header.scss";
-@import "partials/_components.expandable-container.scss";
+@import "partials/_components.action-panel.scss";
 @import "partials/_components.header-menu.scss";
 @import "partials/_components.filterTextbox.scss";
 @import "partials/_components.dropdown.scss";
@@ -52,3 +51,4 @@
 @import "partials/_components.card.scss";
 @import "partials/_components.title-value.scss";
 @import "partials/_components.loader.scss";
+@import "partials/_components.list.scss";

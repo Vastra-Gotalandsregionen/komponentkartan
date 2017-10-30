@@ -4,6 +4,7 @@ import { SidebarMenuComponent } from '../component-package/controls/sidebar-menu
 import { IMenu, IMenuGroup, IMenuItem } from '../component-package/models/menu.model';
 import { ModalService } from '../component-package/services/modalService';
 import { IHeaderMenu, IHeaderMenuItem } from '../component-package/models/headerMenu.model';
+
 @Component({
     selector: 'komponentkartan-application',
     templateUrl: '/demo-app/app.component.html'
@@ -359,6 +360,7 @@ export class KomponentkartanApplicationComponent {
                             { title: 'Loader', url: '/loader' } as IMenuItem,
                             { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem,
                             { title: 'Formulär', url: '/formexample' } as IMenuItem,
+                            { title: 'Snygg Layout', url: '/example-layout' } as IMenuItem,
                         ] as IMenuItem[]
                     } as IMenuGroup
                 ] as IMenuGroup[]

@@ -10,7 +10,6 @@ import { ValidationComponent } from '../../controls/validation/validation.compon
     moduleId: module.id,
     templateUrl: './datepicker.component.html',
     providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DatepickerComponent) }]
-
 })
 export class DatepickerComponent extends ValidationComponent implements OnInit {
     today: Date = new Date();
@@ -21,7 +20,9 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     @Input() selectedDateFormat = 'yyyy-MM-dd';
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
     @Input() required: boolean;
+    @Input() readonly: boolean;
     @Output() selectedDateChanged = new EventEmitter<Date>();
+
 
     yearMonths: ICalendarYearMonth[] = [];
     isDatePickerVisible: boolean;
@@ -75,10 +76,19 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
 
     createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {
         const yearMonths: ICalendarYearMonth[] = [];
-        for (let year = minDate.getFullYear(); year <= maxDate.getFullYear(); year++) {
+        let tmpMinDate = minDate;
+        let tmpMaxDate = maxDate;
+        if (tmpMinDate > this.today) {
+            tmpMinDate = this.today;
+        };
+        if (tmpMaxDate < this.today) {
+            tmpMaxDate = this.today;
+        };
+
+        for (let year = tmpMinDate.getFullYear(); year <= tmpMaxDate.getFullYear(); year++) {
             for (let month = 1; month <= 12; month++) {
-                if (new Date(year, month - 1) >= new Date(minDate.getFullYear(), minDate.getMonth())
-                    && (new Date(year, month - 1) <= new Date(maxDate.getFullYear(), maxDate.getMonth()))) {
+                if (new Date(year, month - 1) >= new Date(tmpMinDate.getFullYear(), tmpMinDate.getMonth())
+                    && (new Date(year, month - 1) <= new Date(tmpMaxDate.getFullYear(), tmpMaxDate.getMonth()))) {
                     yearMonths.push({ year: year, month: month, weeks: this.createWeeksAndDays(year, month) } as ICalendarYearMonth);
                 }
             }
@@ -110,6 +120,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         }
         return weeks;
     }
+
     createWeeksAndDays(year: number, month: number): ICalendarWeek[] {
         const weeks: ICalendarWeek[] = this.createWeeks(year, month);
         const firstWeek: ICalendarWeek = this.createFirstWeek(year, month);
@@ -246,11 +257,11 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     }
 
     // UI functions
-
     displayDatePicker() {
-        if (!this.disabled) {
-            this.isDatePickerVisible = true;
+        if (this.disabled) {
+            return;
         }
+        this.isDatePickerVisible = true;
     }
 
     @HostListener('document:click', ['$event'])
@@ -306,10 +317,20 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
 
 
     setPreviousAndNextMonthNavigation() {
-        const minMonth = this.minDate.getMonth() + 1;
-        const maxMonth = this.maxDate.getMonth() + 1;
-        const minYear = this.minDate.getFullYear();
-        const maxYear = this.maxDate.getFullYear();
+        let tmpMinDate = this.minDate;
+        let tmpMaxDate = this.maxDate;
+        if (tmpMinDate > this.today) {
+            tmpMinDate = this.today;
+        };
+        if (tmpMaxDate < this.today) {
+            tmpMaxDate = this.today;
+        };
+
+        const minMonth = tmpMinDate.getMonth() + 1;
+        const maxMonth = tmpMaxDate.getMonth() + 1;
+        const minYear = tmpMinDate.getFullYear();
+        const maxYear = tmpMaxDate.getFullYear();
+
         const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
         const currentYear = this.yearMonths[this.currentYearMonthIndex].year;
         if ((currentYear === minYear && currentMonth === minMonth) && (currentYear === maxYear && currentMonth === maxMonth)) {

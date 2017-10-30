@@ -1,21 +1,17 @@
 //A list of expandable containers
-.expandable-container-list {
+.list {
   position: relative;
   display: block;
   background-color: $background-color--default;
-  .expandable-container {
+  .list-item {
     background-color: $background-color--content;
   }
-}
-
-.expandable-container-list--inline {
-  background-color: $background-color--default;
-  .expandable-container {
-    border-bottom: 1px solid $background-color--default;
+  .page-block & {
+    margin: -$margin--slim;
   }
 }
 
-.expandable-container-list__header {
+.list__header {
   background-color: $background-color--content;
   z-index: $layer-one;
   position: fixed;
@@ -25,20 +21,25 @@
   height: 37px;
   font-weight: bold;
   margin-bottom: 1px;
-  margin-left: calc(#{-$margin--slim} + #{-$margin--slim});
+  margin-left: -$margin--slim;
   margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
-  border-bottom: 2px solid $background-color--default; //The header is WIDER than the main-content, since it has borders to the right and left to cover scrolling shadows from below
+  border-bottom: 1px solid $background-color--default; //The header is WIDER than the main-content, since it has borders to the right and left to cover scrolling shadows from below
   width: calc(#{$content-width--small} + #{$margin--slim} + #{$margin--slim}); //The borders cover the scrolling shadows from below
-  border-right: 10px solid $background-color--default;
-  border-left: 10px solid $background-color--default;
-  .expandable-container-list--inline & {
+  border-right: $margin--slim solid $background-color--default;
+  border-left: $margin--slim solid $background-color--default;
+  .list--inline & {
     position: relative;
+    border-bottom: none;
+  }
+  .list--actions-visible & {
+    position: relative;
+    border-bottom: none;
   }
 }
 
-.expandable-container-list__items {
+.list__items {
   position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
   &:before {
     content: "";
@@ -46,10 +47,16 @@
     height: 35px;
     display: block;
   }
-  .expandable-container-list--inline & {
+  .list--actions-visible & {
     &:before {
-      content: "";
       height: 0px;
+      display: none;
+    }
+  }
+  .list--inline & {
+    &:before {
+      height: 0px;
+      display: none;
     }
   }
 }
@@ -57,16 +64,12 @@
 
 /* Expandable container = en rad i listan som kan expanderas*/
 
-.expandable-container {
+.list-item {
   visibility: visible;
   display: block;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
-  padding-left: $margin--slim;
-  padding-right: $margin--slim;
   margin-top: 1px;
   box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
-  .expandable-container__header:after {
+  .list-item__header:after {
     @extend .bg-image-icon-chevron;
     content: "";
     vertical-align: middle;
@@ -77,33 +80,26 @@
     background-size: 100% !important;
   } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
   transition: margin-top 0.2s ease-in;
-  &.expandable-container--expanded:not(.expandable-container--compact) {
+  &.list-item--expanded:not(.list-item--compact) {
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
     margin-top: 14px;
     margin-bottom: 14px;
   }
-  &.expandable-container--collapsed {
-    margin-top: 2px; //OBS! Denna måste ligga efter expanded-stilen i filen!
-    .expandable-container__header:after {
+  &.list-item--collapsed {
+    .list-item__header:after {
+      //OBS! Denna måste ligga efter expanded-stilen i filen!
       @extend .bg-image-icon-chevron;
       vertical-align: middle;
       margin-left: auto;
       transform: rotate(0deg);
       transition: transform 0.4s;
     }
-  }
-  &.expandable-container--compact {
-    margin-bottom: 0px;
-    margin-left: -$margin--xs-slim;
-    padding-left: $margin--xs-slim;
-    padding-right: $margin--xs-slim;
-    margin-right: -$margin--xs-slim;
   } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
-  &.expandable-container--collapsed:not(.expandable-container--compact):hover {
+  &.list-item--collapsed:not(.list-item--compact):hover {
     position: relative;
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
   }
-  &.expandable-container--deleted {
+  &.list-item--deleted {
     margin-top: 0px;
     visibility: hidden;
     transition: visibility 0.3s ease-out, margin-top 0.3s ease-out;
@@ -111,29 +107,27 @@
   }
 }
 
-.expandable-container__header {
+.list-item__header {
   opacity: 1;
   cursor: pointer;
   height: 35px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   transition: opacity 0.3s linear, height 0.3s linear;
   transition-delay: 0.2s, 0s;
-  .expandable-container--compact & {
+  .list-item--compact & {
     height: auto;
   }
-  .expandable-container--expanded & {
+  .list-item--expanded & {
     border-bottom: 1px solid $primary-color--default;
   }
-  .expandable-container--not-interactable & {
+  .list-item--not-interactable & {
     cursor: default;
   }
-  .expandable-container--deleted & {
+  .list-item--deleted & {
     opacity: 0;
     height: 0px;
     transition: opacity 0.3s linear, height 0.3s linear;
@@ -141,19 +135,17 @@
   }
 }
 
-.expandable-container__notification {
+.list-item__notification {
   opacity: 0;
   max-height: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   border-spacing: 10px;
   transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
   transition-delay: 0s, 0.2s, 0.2s, 0.2s;
-  .expandable-container--notification-visible & {
+  .list-item--notification-visible & {
     opacity: 1;
     border-top: 1px solid $primary-color--default;
     max-height: 40px;
@@ -162,111 +154,66 @@
     transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
     transition-delay: 0.2s, 0s, 0s, 0s;
   }
-  .expandable-container--expanded & {
+  .list-item--expanded & {
     border-top: none;
   }
   display: flex;
   align-items: center;
   flex-direction: row;
   cursor: pointer;
-  .expandable-container--deleted & {
+  .list-item--deleted & {
     cursor: default;
   }
 }
 
-// .expandable-container__notification {}
-.expandable-container__notification__icon {
+// .list-item__notification {}
+.list-item__notification__icon {
   width: 30px;
   height: 30px;
   display: inline-block;
   margin-right: 6px;
 }
 
-.expandable-container__content {
+.list-item__content {
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   border-spacing: 10px;
   display: none;
   width: calc(#{$content-width--small});
-  .expandable-container--compact & {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    margin-left: -$margin--xs-slim;
-    margin-right: -$margin--xs-slim;
-    padding-left: $margin--xs-slim;
-    padding-right: $margin--xs-slim;
-  }
-  .expandable-container--striped & {
-    >* {
-      border-bottom: 1px solid $border-color--light;
-    }
-    >*:last-child {
-      border-bottom: none;
-    }
-  }
-  .expandable-container--notification-visible & {
+  .list-item--notification-visible & {
     border-top: none;
   }
 }
 
-.expandable-container-list {
-  margin-top: 82px;
-}
-
 @media screen and (min-width: $desktop-width--medium) {
-  .expandable-container-list {
-    margin-top: 97px;
+  .list {
+    .page-block & {
+      margin: -$margin--fat;
+    }
   }
-  .expandable-container-list__header {
-    margin-left: -30px;
-    margin-right: -$margin--fat;
+  .list__header {
     padding-left: $margin--fat;
     padding-right: $margin--fat;
     width: calc(#{$content-width--medium} + #{$margin--slim} + 12px);
     border-right-width: 12px;
   }
-  .expandable-container__header {
+  .list-item__header {
     height: 40px;
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    .expandable-container--compact & {
+    padding-left: $margin--fat;
+    padding-right: $margin--fat;
+    .list-item--compact & {
       height: auto;
     }
   }
-  .expandable-container__notification {
-    margin-left: -20px;
-    margin-right: -20px;
+  .list-item__notification {
     padding-left: 20px;
     padding-right: 20px;
     border-spacing: 10px;
   }
-  .expandable-container__content {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: $margin--fat;
-    padding-top: $margin--fat;
-    width: calc(#{$content-width--medium});
-    .expandable-container--compact & {
-      padding-top: 0px;
-      padding-bottom: 0px;
-      margin-left: -$margin--slim;
-      margin-right: -$margin--slim;
-      padding-left: $margin--slim;
-      padding-right: $margin--slim;
-    }
-  }
-  .expandable-container {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+  .list-item__content {
+    padding: $margin--fat;
+    width: #{$content-width--medium};
   }
 }

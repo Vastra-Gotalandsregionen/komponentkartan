@@ -71,7 +71,7 @@ describe('ModalPlaceholderComponent', () => {
         describe('and button 2 is clicked', () => {
             beforeEach(() => {
                 var buttons = rootElement.queryAll(By.css('.button--secondary'));
-                buttons[1].triggerEventHandler('click', {});
+                buttons[1].triggerEventHandler('mousedown', {});
             });
             it('modal is closed', () => {
                 expect(component.isOpen).toBe(false);

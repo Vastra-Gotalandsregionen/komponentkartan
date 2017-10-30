@@ -8,48 +8,48 @@ import { RowNotification } from '../../component-package/models/rowNotification.
 import { NotificationIcon } from '../../component-package/models/notificationIcon.model';
 import { NotificationType } from '../../component-package/models/notificationType.model';
 
-import { ExpandableContainerComponent } from '../../component-package/controls/expandableContainer/expandableContainer.component';
-import { ExpandableContainerJqeuryHelper } from '../../component-package/controls/expandableContainer/expandableContainerJqueryHelper';
+import { ListItemComponent } from '../../component-package/controls/list-item/list-item.component';
+import { ListItemJqeuryHelper } from '../../component-package/controls/list-item/listItemJqueryHelper';
 
 
-describe('ExpandableContainerComponent', () => {
-    let component: ExpandableContainerComponent;
-    let fixture: ComponentFixture<ExpandableContainerComponent>;
+describe('ListItemComponent', () => {
+    let component: ListItemComponent;
+    let fixture: ComponentFixture<ListItemComponent>;
     let rootElement: DebugElement;
-    const jqueryHelper: ExpandableContainerJqeuryHelper = new ExpandableContainerJqeuryHelper();
+    const jqueryHelper: ListItemJqeuryHelper = new ListItemJqeuryHelper();
 
     beforeEach((done) => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [ExpandableContainerComponent],
+            declarations: [ListItemComponent],
             imports: [CommonModule],
-            providers: [{ provide: ExpandableContainerJqeuryHelper, useValue: jqueryHelper }]
+            providers: [{ provide: ListItemJqeuryHelper, useValue: jqueryHelper }]
         });
 
-        TestBed.overrideComponent(ExpandableContainerComponent, {
+        TestBed.overrideComponent(ListItemComponent, {
             set: {
-                templateUrl: './expandableContainer.component.html'
+                templateUrl: './list-item.component.html'
             }
         });
 
         TestBed.compileComponents().then(() => {
             // spyOn(jqueryHelper, 'collapseContent');
-            fixture = TestBed.createComponent(ExpandableContainerComponent);
+            fixture = TestBed.createComponent(ListItemComponent);
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
             fixture.detectChanges();
             done();
         });
     });
-    describe('[ExpandableContainerComponent', () => {
+    describe('[ListItemComponent', () => {
         describe('When initialized', () => {
             beforeEach(() => {
                 component.ngOnInit();
             });
 
-            it('the component has the expandable-container class', () => {
-                expect(rootElement.classes['expandable-container']).toBe(true);
+            it('the component has the list-item class', () => {
+                expect(rootElement.classes['list-item']).toBe(true);
             });
 
             describe('and the header is clicked', () => {
@@ -215,7 +215,7 @@ describe('ExpandableContainerComponent', () => {
 
         });
 
-        describe('When container is collapsing', () => {
+        describe('When item is collapsing', () => {
             beforeEach(() => {
                 spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(true);
                 spyOn(jqueryHelper, 'toggleContent');
@@ -226,7 +226,7 @@ describe('ExpandableContainerComponent', () => {
                     rootElement.triggerEventHandler('click', null);
                     fixture.detectChanges();
                 });
-                it('container is not expanded', () => {
+                it('item is not expanded', () => {
                     expect(component.expanded).toBeFalsy();
                 });
                 it('content is not visible', () => {
@@ -238,7 +238,7 @@ describe('ExpandableContainerComponent', () => {
                     component.expanded = true;
                     fixture.detectChanges();
                 });
-                it('container is not expanded', () => {
+                it('item is not expanded', () => {
                     expect(component.expanded).toBeFalsy();
                 });
                 it('content is not visible', () => {

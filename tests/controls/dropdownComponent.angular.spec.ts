@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms'
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
 import { DropdownComponent } from '../../component-package/controls/dropdown/dropdown.component';
 import { FilterTextboxComponent } from '../../component-package/controls/filterTextbox/filterTextbox.component';
 import { TruncatePipe } from '../../component-package/pipes/truncatePipe';

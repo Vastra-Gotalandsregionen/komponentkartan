@@ -7,6 +7,17 @@ $dropdown-multi-height--medium-with-filter: 380px;
       max-height: 38px;
     }
   }
+  &:focus {
+    //Tar bort highlight vid tabstop
+    outline-width: 0;
+  }
+}
+
+.dropdown__multiselect-readonlylist {
+  padding-left: 15px;
+  li {
+    list-style-type: disc;
+  }
 }
 
 @media screen and (min-width: $desktop-width--medium) {

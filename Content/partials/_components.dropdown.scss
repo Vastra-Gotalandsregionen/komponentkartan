@@ -50,6 +50,10 @@ $filter-area-height: 60px;
             padding-left: 6px;
         }
     }
+    &:focus {
+        //Tar bort highlight vid tabstop
+        outline-width: 0;
+    }
 }
 
 .dropdown__filterTextbox {

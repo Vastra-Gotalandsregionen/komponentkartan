@@ -24,6 +24,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     dropDownItems200: IDropdownItem[];
     dropDownItems9: IDropdownItem[];
     dropDownItems8: IDropdownItem[];
+    dropMultipleDownItems8: IDropdownItem[];
     dropDownItems10: IDropdownItem[];
     dropDownItems25All: IDropdownItem[];
     buttonDisabled: boolean;
@@ -37,10 +38,12 @@ export class KomponentkartaComponent implements AfterViewInit {
     lastModalAnswer: string;
     lastMultipleSelection: string;
     lastSingleSelection: string;
+    expanded: boolean;
     constructor(private modalService: ModalService) {
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems200 = this.getDemoItems(200);
         this.dropDownItems8 = this.getDemoItems(8);
+        this.dropMultipleDownItems8 = this.getDemoItems(8);
         this.dropDownItems9 = this.getDemoItems(9);
         this.dropDownItems10 = this.getDemoItems(10);
         this.buttonDisabled = true;
@@ -63,15 +66,26 @@ export class KomponentkartaComponent implements AfterViewInit {
         } as IHeaderMenu;
 
         // Lägg til med fördröjning för att återskapa problem vi haft med laddning från service
-        this.dropDownItems25All = this.getDemoItems(1);
-        setTimeout(() => {
-            this.dropDownItems25All = this.getDemoItems(25);
 
-        }, 1000);
+        // setTimeout(() => {
+        //     this.dropDownItems25All = this.getDemoItems(25);
+        //     this.dropDownItems25All[1].selected = true;
+
+        // }, 1000);
+
+        this.dropDownItems25All = this.getDemoItems(25);
+        this.dropDownItems25All[1].selected = true;
+
         this.lastMultipleSelection = 'Inget';
         this.lastSingleSelection = 'Inget';
 
         this.dropDownItems200[3].selected = true;
+
+        this.dropMultipleDownItems8[0].selected = true;
+        this.dropMultipleDownItems8[1].selected = true;
+        this.dropMultipleDownItems8[2].selected = true;
+
+        this.dropDownItems9[7].selected = true;
     }
 
     showOneButtonModal() {
@@ -118,16 +132,6 @@ export class KomponentkartaComponent implements AfterViewInit {
     showSaveDontSaveCancelModal() {
         this.modalService.openSaveDontSaveCancelDialog('Vill du spara innan du stänger?', 'Ändringarna går förlorade om du inte sparar.',
             () => this.lastModalAnswer = 'Sparade', () => this.lastModalAnswer = 'Sparade inte', () => this.lastModalAnswer = 'Avbröt');
-    }
-
-    private onActionStarted() {
-
-        this.actionPanelMessage = '';
-        this.actionInProgress = true;
-    }
-
-    private onActionEnded() {
-        this.actionInProgress = false;
     }
 
     private selectedThemeChanged(selectedTheme: ISelectableItem) {

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Rx';
 import { SidebarMenuComponent } from '../../component-package/controls/sidebar-menu/sidebarMenu.component';
 import { MenuComponent } from '../../component-package/controls/sidebar-menu/menu.component';
 import { IMenu, IMenuGroup, IMenuItem } from '../../component-package/models/menu.model';
+import { BrowserDetector } from '../../component-package/services/browserDetector';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -64,7 +65,8 @@ describe('SidebarMenuComponent',
             TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
             TestBed.configureTestingModule({
                 declarations: [SidebarMenuComponent, MenuComponent],
-                imports: [CommonModule, RouterTestingModule.withRoutes([]), PerfectScrollbarModule]
+                imports: [CommonModule, RouterTestingModule.withRoutes([]), PerfectScrollbarModule],
+                providers: [BrowserDetector]
             });
 
             TestBed.overrideComponent(SidebarMenuComponent,

@@ -12,11 +12,15 @@ export class ButtonComponent implements OnChanges {
     reenabled: boolean;
     @Output() click = new EventEmitter<string>();
 
-    onClick(event: any): void {
+    onMouseDown(event: any): void {
         event.cancelBubble = true;
         if (!this.disabled) {
             this.click.emit();
         }
+    }
+
+    onClick(event: any) {
+        event.cancelBubble = true;
     }
 
     ngOnChanges() {
@@ -26,7 +30,7 @@ export class ButtonComponent implements OnChanges {
 
     keyPressed(event: KeyboardEvent): void {
         if (event.keyCode === 13 || event.keyCode === 32) {
-            this.onClick(event);
+            this.onMouseDown(event);
         }
     }
 }

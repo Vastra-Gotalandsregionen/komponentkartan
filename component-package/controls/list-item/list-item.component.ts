@@ -2,24 +2,24 @@ import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitt
 import { NotificationType } from '../../models/notificationType.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
 import { RowNotification } from '../../models/rowNotification.model';
-import { ExpandableContainerJqeuryHelper } from './expandableContainerJqueryHelper';
+import { ListItemJqeuryHelper } from './listItemJqueryHelper';
 
 @Component({
-    templateUrl: './expandableContainer.component.html',
-    selector: 'vgr-expandable-container',
+    templateUrl: './list-item.component.html',
+    selector: 'vgr-list-item',
     moduleId: module.id
 })
-export class ExpandableContainerComponent implements OnInit {
+export class ListItemComponent implements OnInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
 
     readonly showNotificationDurationMs = 1500;
-    @HostBinding('class.expandable-container') isContainer = true;
-    @HostBinding('class.expandable-container--collapsed') collapsed = true;
-    @HostBinding('class.expandable-container--expanded') private _expanded: boolean;
-    @HostBinding('class.expandable-container--deleted') deleted: boolean;
-    @HostBinding('class.expandable-container--notification-visible') notificationVisible: boolean;
-    @HostBinding('class.expandable-container--not-interactable') notInteractable: boolean;
+    @HostBinding('class.list-item') isContainer = true;
+    @HostBinding('class.list-item--collapsed') collapsed = true;
+    @HostBinding('class.list-item--expanded') private _expanded: boolean;
+    @HostBinding('class.list-item--deleted') deleted: boolean;
+    @HostBinding('class.list-item--notification-visible') notificationVisible: boolean;
+    @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue) {
@@ -54,7 +54,7 @@ export class ExpandableContainerComponent implements OnInit {
         return this._notification;
     }
 
-    constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ExpandableContainerJqeuryHelper) {
+    constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ListItemJqeuryHelper) {
 
     }
 

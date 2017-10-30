@@ -23,11 +23,14 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
 
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
     @Input() @HostBinding('class.disabled') disabled: boolean;
+
+
     selectedItem: IDropdownItem;
+    preSelectedItem: IDropdownItem = {} as IDropdownItem;
 
     constructor(elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
-        this.noItemSelectedLabel = ''
+        this.noItemSelectedLabel = '';
     };
 
     ngOnChanges() {
@@ -39,7 +42,9 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
         this.updateScrolled();
     }
     ngOnInit() {
-
+        if (this.items) {
+            this.preSelectedItem = this.items.filter(x => x.selected)[0];
+        }
     }
 
     doValidate(): IValidationResult {
@@ -68,12 +73,14 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
         this.items.forEach(x => x.selected = false);
         item.selected = true;
         item.marked = true;
-        this.validate();
+
         this.selectedItemChanged.emit(item);
 
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedItem = item;
         this.changeDetectorRef.detectChanges();
+
+        this.validate();
     }
 
     onMouseEnter(item: IDropdownItem) {

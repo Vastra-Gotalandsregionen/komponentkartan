@@ -68,7 +68,7 @@ describe('ButtonComponent', () => {
         });
         describe('and button is clicked', () => {
             it('a click event is triggered', () => {
-                textButtonElement.triggerEventHandler('click', {});
+                textButtonElement.triggerEventHandler('mousedown', {});
                 expect(component.click.emit).toHaveBeenCalled();
             });
         });

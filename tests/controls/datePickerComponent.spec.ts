@@ -21,6 +21,19 @@ describe('[DatepickerComponent]', () => {
         component = new DatepickerComponent(null);
     });
 
+    describe('When initialized with minDate 2017-08-01 and maxDate 2017-09-01', () => {
+        beforeEach(() => {
+            component.minDate = new Date(2017, 7, 1);
+            component.maxDate = new Date(2017, 8, 1);
+            component.ngOnInit();
+        });
+
+        it('contains months after maxDate', () => {
+            expect(component.yearMonths[2].month).toBe(10);
+        });
+
+    });
+
     describe('When initialized with default settings', () => {
         beforeEach(() => {
             currentMonth = new Date().getMonth();

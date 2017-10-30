@@ -1,0 +1,102 @@
+/* Action-panel används för att "droppa ner" innehåll från page-header */
+
+.action-panel {
+  background-color: white;
+  margin-left: $margin--fat;
+  box-shadow: none;
+  width: $content-width--small;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 0px;
+  transition: height 0.6s ease, box-shadow 0.6s ease;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  &.action-panel--expanded {
+    box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 14px;
+  }
+  &.action-panel--collapsed:hover {
+    position: relative;
+    box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
+  }
+  &.action-panel--slow {
+    transition: height 1s ease, box-shadow 1s ease;
+  }
+  &.action-panel--fast {
+    transition: height 0.3s ease, box-shadow 0.3s ease;
+  }
+}
+
+.action .action-panel__content {
+  padding-top: $margin--slim;
+  padding-bottom: $margin--slim;
+}
+
+.action-panel__title {
+  margin-left: -$margin--slim;
+  margin-right: -$margin--slim;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  border-bottom: 2px solid #99a3ad;
+  font-weight: bold;
+}
+
+.action-panel__notification {
+  opacity: 0;
+  max-height: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  border-spacing: 10px;
+  transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
+  transition-delay: 0s, 0.2s, 0.2s, 0.2s;
+  .action-panel--notification-visible & {
+    opacity: 1;
+    border-top: 1px solid $primary-color--default;
+    max-height: 40px;
+    padding-top: $margin--xs-slim;
+    padding-bottom: $margin--xs-slim;
+    transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
+    transition-delay: 0.2s, 0s, 0s, 0s;
+  }
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.action-panel__notification__icon {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .action-panel__notification {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-spacing: 10px;
+  }
+  .action-panel {
+    width: $content-width--medium;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: $margin--fat;
+    padding-right: $margin--fat;
+  }
+  .action-panel__content {
+    padding-top: $margin--fat;
+    padding-bottom: $margin--fat;
+  }
+  .action-panel__title {
+    margin-left: -$margin--fat;
+    margin-right: -$margin--fat;
+    padding-left: $margin--fat;
+    padding-right: $margin--fat;
+  }
+}

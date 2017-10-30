@@ -92,6 +92,11 @@ $dropdown-width--small: 100px;
   }
 }
 
+.datepicker--readonly {
+  height: $component-height;
+  width: $dropdown-width--medium;
+}
+
 .datepicker__calendar__header {
   @extend .background-color--primary;
   display: flex;
@@ -200,9 +205,6 @@ $dropdown-width--small: 100px;
   &.disabled {
     color: $control-color--disabled;
     cursor: default;
-    &:hover {
-      background-color: $background-color--content;
-    }
   }
 }
 

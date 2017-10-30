@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 // Common
-import { ModalService } from './services';
+import { ModalService, BrowserDetector } from './services';
 import { SafePipe, TruncatePipe, FilterPipe } from './pipes';
 import * as $ from 'jquery';
 
@@ -15,6 +15,7 @@ import { DropdownItemToSelectedTextPipe } from './pipes';
 import * as control from './controls';
 
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -36,8 +37,6 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DropdownItemToSelectedTextPipe,
         control.DropdownComponent,
         control.FilterTextboxComponent,
-        control.ExpandableContainerComponent,
-        control.ExpandableContainerListComponent,
         control.ButtonComponent,
         control.LockButtonComponent,
         control.SaveCancelComponent,
@@ -57,7 +56,12 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.CardComponent,
         control.CardSectionComponent,
         control.TitleValueComponent,
-        control.LoaderComponent
+        control.LoaderComponent,
+        control.ListComponent,
+        control.ListItemComponent,
+        control.PageComponent,
+        control.PageBodyComponent,
+        control.PageBlockComponent
     ],
     exports: [
         SafePipe,
@@ -66,8 +70,6 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DropdownItemToSelectedTextPipe,
         control.DropdownComponent,
         control.FilterTextboxComponent,
-        control.ExpandableContainerComponent,
-        control.ExpandableContainerListComponent,
         control.ButtonComponent,
         control.LockButtonComponent,
         control.SaveCancelComponent,
@@ -88,9 +90,16 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.CardComponent,
         control.CardSectionComponent,
         control.TitleValueComponent,
-        control.LoaderComponent
-            ],
-    providers: [ModalService, control.ExpandableContainerJqeuryHelper]
+        control.LoaderComponent,
+        control.ListComponent,
+        control.ListItemComponent,
+        control.PageComponent,
+        control.PageBodyComponent,
+        control.PageBlockComponent
+    ],
+
+    providers: [ModalService, control.ActionPanelJqeuryHelper, control.ListItemJqeuryHelper, BrowserDetector]
+
 })
 
 export class KomponentkartanModule { }

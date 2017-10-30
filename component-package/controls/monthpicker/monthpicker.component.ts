@@ -23,13 +23,14 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
     @Input() required: boolean;
+    @Input() readonly: boolean;
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() selectedDateFormat = 'MMM yyyy';
     @Input() tooltipDateFormat = 'MMMM yyyy';
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
-    displayedYear: ICalendarYear;
+    displayedYear: ICalendarYear = {} as ICalendarYear;
     previousYear: ICalendarYear;
     nextYear: ICalendarYear;
 
@@ -46,7 +47,6 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     };
 
     ngOnInit() {
-
         this.years = [];
 
         if (this.selectedDate) {
@@ -62,10 +62,10 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
         this.createYears();
 
         this.setDisplayedYear(this.selectedDate);
+
     }
 
     setDisplayedYear(chosenDate: Date) {
-
         if (chosenDate) {
             this.displayedYear = this.years.filter(y => y.year === chosenDate.getFullYear())[0];
         } else {
@@ -90,10 +90,18 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     }
 
     createYears() {
-        for (let yearNumber = this.minDate.getFullYear(); yearNumber <= this.maxDate.getFullYear(); yearNumber++) {
 
+        let tmpMinDate = this.minDate;
+        let tmpMaxDate = this.maxDate;
+        if (tmpMinDate > this.today) {
+            tmpMinDate = this.today;
+        };
+        if (tmpMaxDate < this.today) {
+            tmpMaxDate = this.today;
+        };
+
+        for (let yearNumber = tmpMinDate.getFullYear(); yearNumber <= tmpMaxDate.getFullYear(); yearNumber++) {
             const newYear = { year: yearNumber, months: [] } as ICalendarYear;
-
             for (let monthnumber = 0; monthnumber < 12; monthnumber++) {
                 const dateForMonth = new Date(newYear.year, monthnumber, 1);
 
@@ -105,7 +113,6 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
                 } as ICalendarMonth;
                 newYear.months.push(newMonth);
             }
-
             this.years.push(newYear);
         }
     }
@@ -237,11 +244,13 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
 
         selectedMonth.selected = true;
         this.setDisplayedYear(selectedMonth.date);
-        this.validate();
+
         this.selectedDateChanged.emit(selectedMonth.date);
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedDate = selectedMonth.date;
         this.changeDetectorRef.detectChanges();
+
+        this.validate();
     }
 
 
