@@ -10,7 +10,6 @@ import { ValidationComponent } from '../../controls/validation/validation.compon
     moduleId: module.id,
     templateUrl: './datepicker.component.html',
     providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DatepickerComponent) }]
-
 })
 export class DatepickerComponent extends ValidationComponent implements OnInit {
     today: Date = new Date();
@@ -21,7 +20,9 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     @Input() selectedDateFormat = 'yyyy-MM-dd';
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
     @Input() required: boolean;
+    @Input() readonly: boolean;
     @Output() selectedDateChanged = new EventEmitter<Date>();
+  
 
     yearMonths: ICalendarYearMonth[] = [];
     isDatePickerVisible: boolean;

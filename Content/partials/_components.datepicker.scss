@@ -92,6 +92,11 @@ $dropdown-width--small: 100px;
   }
 }
 
+.datepicker--readonly {
+  height: $component-height;
+  width: $dropdown-width--medium;
+}
+
 .datepicker__calendar__header {
   @extend .background-color--primary;
   display: flex;
