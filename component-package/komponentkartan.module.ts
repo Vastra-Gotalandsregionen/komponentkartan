@@ -6,13 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 // Common
-import { ModalService, BrowserDetector } from './services';
-import { SafePipe, TruncatePipe, FilterPipe } from './pipes';
+import { ModalService, BrowserDetector } from './services/index';
+import { SafePipe, TruncatePipe, FilterPipe } from './pipes/index';
 import * as $ from 'jquery';
 
 // UI Components
-import { DropdownItemToSelectedTextPipe } from './pipes';
-import * as control from './controls';
+import { DropdownItemToSelectedTextPipe } from './pipes/index';
+import * as control from './controls/index';
 
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
@@ -35,6 +35,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         TruncatePipe,
         FilterPipe,
         DropdownItemToSelectedTextPipe,
+        control.ActionPanelComponent,
         control.DropdownComponent,
         control.FilterTextboxComponent,
         control.ButtonComponent,
@@ -68,6 +69,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         TruncatePipe,
         FilterPipe,
         DropdownItemToSelectedTextPipe,
+        control.ActionPanelComponent,
         control.DropdownComponent,
         control.FilterTextboxComponent,
         control.ButtonComponent,
