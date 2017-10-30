@@ -21,9 +21,7 @@ import {
     CommonModule
 } from '@angular/common';
 
-import {
-    ButtonComponent
-} from '../../';
+import { ButtonComponent } from '../../component-package/controls/button/button.component';
 
 
 describe('ButtonComponent', () => {
