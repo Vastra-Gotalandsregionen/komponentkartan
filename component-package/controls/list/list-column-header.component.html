@@ -1,3 +1,4 @@
-<div [ngClass]="getColumnWidthClass()">
+<div [ngClass]="getColumnWidthClass()" (click)="onClick()">
   <span title="{{text}}">{{text | truncate:maxCharacters}}</span>
+
 </div>

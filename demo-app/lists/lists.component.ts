@@ -5,7 +5,7 @@ import { RowNotification } from '../../component-package/models/rowNotification.
 import { NotificationType } from '../../component-package/models/notificationType.model';
 import { ModalService } from '../../component-package/services/modalService';
 import { ModalButtonConfiguration } from '../../component-package/services/modalService';
-import { SortDirection } from '../../component-package/controls/list/list-column.component';
+import { SortDirection } from '../../component-package/controls/list/list-column-header.component';
 import { SortChangedArgs, ListHeaderComponent } from '../../component-package/controls/list/list-header.component';
 
 @Component({
@@ -52,8 +52,18 @@ export class ListsComponent {
 
 
 
-    onSortChanged(event: any) {
-        console.log('Sorterar på kolumn ' + event.columnTitle + ' riktning: ' + event.sortDirection);
+    onSortChanged(event: SortChangedArgs) {
+        if (event.columnTitle === 'Förnamn') {
+            this.peopleRows = this.peopleRows.sort((row1, row2) => {
+                return row1.object.firstName > row2.object.firstName ? (event.sortDirection === SortDirection.Ascending ? 1 : -1) :
+                    row1.object.firstName < row2.object.firstName ? (event.sortDirection === SortDirection.Ascending ? -1 : 1) : 0;
+            });
+        } else if (event.columnTitle === 'Efternamn') {
+            this.peopleRows = this.peopleRows.sort((row1, row2) => {
+                return row1.object.lastName > row2.object.lastName ? (event.sortDirection === SortDirection.Ascending ? 1 : -1) :
+                    row1.object.lastName < row2.object.lastName ? (event.sortDirection === SortDirection.Ascending ? -1 : 1) : 0;
+            });
+        }
     }
 
     removeRow(row: ExpandableRow<ExamplePerson>) {

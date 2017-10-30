@@ -20,7 +20,10 @@ export class ListComponent implements AfterViewInit, AfterContentInit {
 
     }
     ngAfterContentInit() {
-        this.listHeader.sortChanged.subscribe(args => this.sortChanged.emit(args));
+        this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+        this.items.forEach(item => {
+            item.copyPropertiesFromHeader(this.listHeader)
+        });
     }
     ngAfterViewInit() {
         if (!this.allowMultipleExpandedItems) {

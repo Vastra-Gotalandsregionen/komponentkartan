@@ -1,15 +1,21 @@
-import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef } from '@angular/core';
+import {
+    Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, ContentChildren, QueryList,
+    AfterContentInit
+} from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
 import { RowNotification } from '../../models/rowNotification.model';
 import { ListItemJqeuryHelper } from './listItemJqueryHelper';
+import { ListColumnComponent } from '../list/list-column.component';
+import { ListColumnHeaderComponent } from '../list/list-column-header.component';
+import { ListHeaderComponent } from '../list/list-header.component';
 
 @Component({
     templateUrl: './list-item.component.html',
     selector: 'vgr-list-item',
     moduleId: module.id
 })
-export class ListItemComponent implements OnInit {
+export class ListItemComponent implements OnInit, AfterContentInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
 
@@ -54,6 +60,8 @@ export class ListItemComponent implements OnInit {
         return this._notification;
     }
 
+    @ContentChildren(ListColumnComponent) columns: QueryList<ListColumnComponent>;
+
     constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ListItemJqeuryHelper) {
 
     }
@@ -62,6 +70,16 @@ export class ListItemComponent implements OnInit {
         if (this.notification && this.notification.type === NotificationType.Permanent) {
             this.showNotification();
         }
+    }
+
+    copyPropertiesFromHeader(header: ListHeaderComponent) {
+        this.columns.forEach((column, index) => {
+            header.applyToColumn(column, index);
+        });
+    }
+
+    ngAfterContentInit() {
+
     }
 
     showNotification() {

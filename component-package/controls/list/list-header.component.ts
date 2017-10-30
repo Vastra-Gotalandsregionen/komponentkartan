@@ -1,5 +1,6 @@
 import { Component, HostBinding, ContentChildren, AfterContentInit, QueryList, Input, EventEmitter, Output } from '@angular/core';
-import { ListColumnComponent, SortDirection } from './list-column.component';
+import { ListColumnHeaderComponent, SortDirection } from './list-column-header.component';
+import { ListColumnComponent } from './list-column.component';
 
 @Component({
     templateUrl: './list-header.component.html',
@@ -8,15 +9,20 @@ import { ListColumnComponent, SortDirection } from './list-column.component';
 })
 export class ListHeaderComponent implements AfterContentInit {
     @HostBinding('class.list__header') listHeaderClass = true;
-    @ContentChildren(ListColumnComponent) columns: QueryList<ListColumnComponent>;
+    @ContentChildren(ListColumnHeaderComponent) headerColumns: QueryList<ListColumnHeaderComponent>;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
     ngAfterContentInit() {
-        this.columns.forEach(column => column.sortChanged.subscribe((sort: SortDirection) => this.onColumnSortChanged(column, sort)));
+        this.headerColumns.forEach(column => column.sortChanged.subscribe((sort: SortDirection) => this.onColumnSortChanged(column, sort)));
     }
 
-    onColumnSortChanged(column: ListColumnComponent, sort: SortDirection) {
-        this.columns.filter(otherCol => otherCol !== column).forEach(otherCol => otherCol.sort = SortDirection.None);
+    onColumnSortChanged(column: ListColumnHeaderComponent, sort: SortDirection) {
+        this.headerColumns.filter(otherCol => otherCol !== column).forEach(otherCol => otherCol.sort = SortDirection.None);
         this.sortChanged.emit({ columnTitle: column.text, sortDirection: sort } as SortChangedArgs);
+    }
+
+    applyToColumn(column: ListColumnComponent, index: number) {
+        const headerColumn = this.headerColumns.toArray()[index];
+        column.copyPropertiesFromHeader(headerColumn);
     }
 }
 

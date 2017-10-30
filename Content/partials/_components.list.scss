@@ -187,7 +187,7 @@
   }
 }
 
-.list__column {
+.list__column-header {
   display: inline-block;
   cursor: pointer;
   div {
@@ -196,7 +196,7 @@
   height:30px;
 }
 
-.list__column--sorted-asc {
+.list__column-header--sorted-asc {
   span {
     &:after {
       @extend .bg-image-icon-chevron;
@@ -212,7 +212,7 @@
   }
 }
 
-.list__column--sorted-desc {
+.list__column-header--sorted-desc {
   span {
     &:after {
       @extend .bg-image-icon-chevron;

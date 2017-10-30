@@ -98,16 +98,15 @@
     <vgr-page-block>
       <vgr-list [allowMultipleExpandedItems]="false" [flexibleHeader]="actionPanelVisible" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
-          <vgr-list-column [text]="'Förnamn'" [sort]="sortDirections.Ascending" [width]="'m'"></vgr-list-column>
-          <vgr-list-column [text]="'Efternamn'" [width]="'xxl'"></vgr-list-column>
+          <vgr-list-column-header [text]="'Förnamn'" [sort]="sortDirections.Ascending" [width]="'m'"></vgr-list-column-header>
+          <vgr-list-column-header [text]="'Efternamn'" [width]="'xxl'"></vgr-list-column-header>
         </vgr-list-header>
 
 
         <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
           <div class="list-item__header">
-            <vgr-list-column [text]="row.object.firstName" [width]="'m'"></vgr-list-column>
-            <vgr-list-column [text]="row.object.lastName" [width]="'xxl'"></vgr-list-column>
-            <a *ngIf="row.object.canBeDeleted && !row.object.deleted" (click)="removeRowWithoutExpand(row, $event)">Ta bort</a>
+            <vgr-list-column [text]="row.object.firstName"></vgr-list-column>
+            <vgr-list-column [text]="row.object.lastName"></vgr-list-column>
           </div>
           <div class="list-item__content">
             <vgr-card>
