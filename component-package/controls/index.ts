@@ -24,7 +24,7 @@ export { TitleValueComponent } from './titleValue/titleValue.component';
 export { LoaderComponent } from './loader/loader.component';
 export { ListComponent } from './list/list.component';
 export { ListItemComponent } from './list-item/list-item.component';
-export { ListItemJqeuryHelper } from './list-item/listItemJQueryHelper';
+export { ListItemJqeuryHelper } from './list-item/listItemJqueryHelper';
 export { PageComponent } from './page/page.component';
 export { PageHeaderComponent } from './pageHeader/pageHeader.component';
 export { PageBodyComponent } from './page-body/page-body.component';
