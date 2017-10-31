@@ -1,11 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { ListColumnHeaderComponent, ColumnWidth, SortDirection } from '../../component-package/controls/list/list-column-header.component';
-import { inject } from '@angular/core/testing';
 
 describe('[DatepickerComponent]', () => {
     let component: ListColumnHeaderComponent;
@@ -13,11 +7,6 @@ describe('[DatepickerComponent]', () => {
     beforeEach(() => {
         component = new ListColumnHeaderComponent();
     });
-
-    /*
-        getColumnWidthClass(): string {
-            return 'flex-column--' + ColumnWidth[this.width];
-        } */
 
     describe('When initialized with no ColumnWidth,', () => {
         it('the width is 10 pixels', () => {
