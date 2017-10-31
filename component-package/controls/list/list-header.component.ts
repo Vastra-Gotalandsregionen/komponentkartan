@@ -16,8 +16,8 @@ export class ListHeaderComponent implements AfterContentInit {
     }
 
     onColumnSortChanged(column: ListColumnHeaderComponent, sort: SortDirection) {
-        this.headerColumns.filter(otherCol => otherCol !== column).forEach(otherCol => otherCol.sort = SortDirection.None);
-        this.sortChanged.emit({ columnTitle: column.text, sortDirection: sort } as SortChangedArgs);
+        this.headerColumns.filter(otherCol => otherCol !== column).forEach(otherCol => otherCol.sortDirection = SortDirection.None);
+        this.sortChanged.emit({ key: column.sortKey ? column.sortKey : column.text, direction: sort } as SortChangedArgs);
     }
 
     applyToColumn(column: ListColumnComponent, index: number) {
@@ -27,6 +27,6 @@ export class ListHeaderComponent implements AfterContentInit {
 }
 
 export interface SortChangedArgs {
-    columnTitle: string;
-    sortDirection: SortDirection;
+    key: string;
+    direction: SortDirection;
 }

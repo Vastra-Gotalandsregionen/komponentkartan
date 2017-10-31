@@ -9,39 +9,70 @@ import { Component, HostBinding, ContentChildren, AfterViewInit, QueryList, Inpu
 export class ListColumnHeaderComponent {
     @HostBinding('class.list__column-header') listColumnHeaderClass = true;
     @Input() text: string;
-    @Input() sort: SortDirection;
-    @Input() width: 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
+    @Input() sortDirection: SortDirection;
+    @Input() width: ColumnWidth;
+    @Input() sortKey: string;
 
     get maxCharacters(): number {
-        return 10;
+
+        switch (this.width) {
+            case ColumnWidth.xxs: {
+                return 3;
+            }
+            case ColumnWidth.xs: {
+                return 5;
+            }
+            case ColumnWidth.s: {
+                return 7;
+            }
+            case ColumnWidth.m: {
+                return 10;
+            }
+            case ColumnWidth.l: {
+                return 15;
+            }
+            case ColumnWidth.xl: {
+                return 17;
+            }
+            case ColumnWidth.xxl: {
+                return 20;
+            }
+            case ColumnWidth.xxxl: {
+                return 25;
+            }
+            default: {
+                return 10;
+            }
+        }
+
     }
     @HostBinding('class.list__column-header--sorted-desc') get isSortDescending(): boolean {
-        return this.sort === SortDirection.Descending;
+        return this.sortDirection === SortDirection.Descending;
     };
 
     @HostBinding('class.list__column-header--sorted-asc') get isSortAscending(): boolean {
-        return this.sort === SortDirection.Ascending;
+        return this.sortDirection === SortDirection.Ascending;
     };
 
     @Output() sortChanged: EventEmitter<SortDirection> = new EventEmitter<SortDirection>();
 
     constructor() {
-        this.sort = SortDirection.None;
+        this.sortDirection = SortDirection.None;
     }
 
     getColumnWidthClass(): string {
-        return 'flex-column--' + this.width;
+        return 'flex-column--' + ColumnWidth[this.width];
     }
 
     onClick() {
-        if (this.sort === SortDirection.None) {
-            this.sort = SortDirection.Ascending;
-        } else if (this.sort === SortDirection.Ascending) {
-            this.sort = SortDirection.Descending;
-        } else if (this.sort === SortDirection.Descending) {
-            this.sort = SortDirection.Ascending;
+        if (this.sortDirection === SortDirection.None) {
+            this.sortDirection = SortDirection.Ascending;
+        } else if (this.sortDirection === SortDirection.Ascending) {
+            this.sortDirection = SortDirection.Descending;
+        } else if (this.sortDirection === SortDirection.Descending) {
+            this.sortDirection = SortDirection.Ascending;
         }
-        this.sortChanged.emit(this.sort);
+        this.sortChanged.emit(this.sortDirection);
     }
 }
 
@@ -51,3 +82,6 @@ export enum SortDirection {
     Descending
 }
 
+export enum ColumnWidth {
+    xxs, xs, s, m, l, xl, xxl, xxxl
+}

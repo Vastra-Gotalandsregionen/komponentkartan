@@ -199,10 +199,9 @@
 .list__column-header--sorted-asc {
   span {
     &:after {
-      @extend .bg-image-icon-chevron;
+      @extend .bg-image-icon-sortarrow;
       content: "";
       display: inline-block;
-      width: 15px !important;
       background-size: 100% !important;
       vertical-align: middle;
       margin-left: $margin--slim;
@@ -215,10 +214,9 @@
 .list__column-header--sorted-desc {
   span {
     &:after {
-      @extend .bg-image-icon-chevron;
+      @extend .bg-image-icon-sortarrow;
       content: "";
       display: inline-block;
-      width: 15px !important;
       background-size: 100% !important;
       vertical-align: middle;
       margin-left: $margin--slim;

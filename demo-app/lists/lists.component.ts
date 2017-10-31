@@ -5,7 +5,7 @@ import { RowNotification } from '../../component-package/models/rowNotification.
 import { NotificationType } from '../../component-package/models/notificationType.model';
 import { ModalService } from '../../component-package/services/modalService';
 import { ModalButtonConfiguration } from '../../component-package/services/modalService';
-import { SortDirection } from '../../component-package/controls/list/list-column-header.component';
+import { SortDirection, ColumnWidth } from '../../component-package/controls/list/list-column-header.component';
 import { SortChangedArgs, ListHeaderComponent } from '../../component-package/controls/list/list-header.component';
 
 @Component({
@@ -15,6 +15,7 @@ import { SortChangedArgs, ListHeaderComponent } from '../../component-package/co
 })
 export class ListsComponent {
     sortDirections = SortDirection;
+    columnWidth = ColumnWidth;
     actionPanelVisible: boolean;
     public peopleRows: ExpandableRow<ExamplePerson>[];
     public cardUnlocked: boolean;
@@ -53,25 +54,10 @@ export class ListsComponent {
 
 
     onSortChanged(event: SortChangedArgs) {
-        const col = this.getPeopleRowColumnFromTitle(event);
         this.peopleRows = this.peopleRows.sort((row1, row2) => {
-            return row1.object[col] > row2.object[col] ? (event.sortDirection === SortDirection.Ascending ? 1 : -1) :
-                row1.object[col] < row2.object[col] ? (event.sortDirection === SortDirection.Ascending ? -1 : 1) : 0;
+            return row1.object[event.key] > row2.object[event.key] ? (event.direction === SortDirection.Ascending ? 1 : -1) :
+                row1.object[event.key] < row2.object[event.key] ? (event.direction === SortDirection.Ascending ? -1 : 1) : 0;
         });
-    }
-
-    getPeopleRowColumnFromTitle(event: SortChangedArgs): string {
-        switch (event.columnTitle) {
-            case 'Förnamn': {
-                return 'firstName';
-            }
-            case 'Efternamn': {
-                return 'lastName';
-            }
-            default: {
-                return '';
-            }
-        };
     }
 
     removeRow(row: ExpandableRow<ExamplePerson>) {
