@@ -38,6 +38,7 @@ describe('DropdownComponent', () => {
             done();
         });
     });
+
     describe('When component is initialized', () => {
         var dropdownElement: DebugElement;
         beforeEach(() => {
@@ -340,6 +341,27 @@ describe('DropdownComponent', () => {
             expect(component.items[1].selected).toBe(false);
         });
     });
-
-
+  
+    describe('When component is initialized with two simple values', () => {
+        beforeEach(() => {
+            component.values = ['one', 'two'];
+            component.ngOnChanges();
+            fixture.detectChanges();
+            spyOn(component.selectedItemChanged, 'emit');
+        });
+        it('the item list contains two items', () => {
+            expect(component.items).toEqual([{ displayName: 'one', id: 'one' }, { displayName: 'two', id: 'two' }]);
+        })
+        describe('and a selected value', () => {
+            beforeEach(() => {
+                component.selectedValue = 'one';
+            });
+            it('the matching drop down item is selected', () => {
+                expect(component.items[0].selected).toBe(true);
+            });
+            it('a selectedItemChanged is emitted', () => {
+                expect(component.selectedItemChanged.emit).toHaveBeenCalledWith({ displayName: 'one', id: 'one', selected: true, marked: true });
+            });
+        });
+    });
 });

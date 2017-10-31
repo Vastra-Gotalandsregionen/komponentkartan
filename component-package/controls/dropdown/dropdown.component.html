@@ -21,14 +21,15 @@
 
 
     </div>
-    <div class="validation__status" title="{{validationErrorMessage}}">
-      <div class="validation__status__icon"></div>
-      <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
-    </div>
   </div>
+  <div class="validation__status" title="{{validationErrorMessage}}">
+    <div class="validation__status__icon"></div>
+    <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
+  </div>
+</div>
 
-  <ng-template #readonlyTemplate>
-    <div>
-      <p>{{preSelectedItem?.displayNameWhenSelected}}</p>
-    </div>
-  </ng-template>
+<ng-template #readonlyTemplate>
+  <div>
+    <p>{{selectedItem | dropdownItemToSelectedText}}</p>
+  </div>
+</ng-template>

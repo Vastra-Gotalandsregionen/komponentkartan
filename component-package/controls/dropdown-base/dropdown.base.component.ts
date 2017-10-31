@@ -44,16 +44,22 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             this.handleInitiallySelectedItems(selectedItems);
         }
         setTimeout(() => {
-            if(this.readonly === false) {
+            if (this.readonly === false) {
                 this.scrollbarComponent.update();
                 this.listenToScrollbarEvents();
-             }
+            }
         }, 500);
     }
     get items(): IDropdownItem[] {
-
         return this._items;
     }
+
+    @Input() set values(values: string[]) {
+        this.items = values.map(function (value: string) {
+            return { displayName: value, id: value } as IDropdownItem
+        });
+    }
+
     constructor(protected elementRef: ElementRef) {
         super();
         this.expanded = false;
