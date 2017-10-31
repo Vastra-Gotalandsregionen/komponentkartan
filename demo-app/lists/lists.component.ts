@@ -53,17 +53,25 @@ export class ListsComponent {
 
 
     onSortChanged(event: SortChangedArgs) {
-        if (event.columnTitle === 'Förnamn') {
-            this.peopleRows = this.peopleRows.sort((row1, row2) => {
-                return row1.object.firstName > row2.object.firstName ? (event.sortDirection === SortDirection.Ascending ? 1 : -1) :
-                    row1.object.firstName < row2.object.firstName ? (event.sortDirection === SortDirection.Ascending ? -1 : 1) : 0;
-            });
-        } else if (event.columnTitle === 'Efternamn') {
-            this.peopleRows = this.peopleRows.sort((row1, row2) => {
-                return row1.object.lastName > row2.object.lastName ? (event.sortDirection === SortDirection.Ascending ? 1 : -1) :
-                    row1.object.lastName < row2.object.lastName ? (event.sortDirection === SortDirection.Ascending ? -1 : 1) : 0;
-            });
-        }
+        const col = this.getPeopleRowColumnFromTitle(event);
+        this.peopleRows = this.peopleRows.sort((row1, row2) => {
+            return row1.object[col] > row2.object[col] ? (event.sortDirection === SortDirection.Ascending ? 1 : -1) :
+                row1.object[col] < row2.object[col] ? (event.sortDirection === SortDirection.Ascending ? -1 : 1) : 0;
+        });
+    }
+
+    getPeopleRowColumnFromTitle(event: SortChangedArgs): string {
+        switch (event.columnTitle) {
+            case 'Förnamn': {
+                return 'firstName';
+            }
+            case 'Efternamn': {
+                return 'lastName';
+            }
+            default: {
+                return '';
+            }
+        };
     }
 
     removeRow(row: ExpandableRow<ExamplePerson>) {
