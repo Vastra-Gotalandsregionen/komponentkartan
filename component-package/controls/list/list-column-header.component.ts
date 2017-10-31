@@ -61,7 +61,7 @@ export class ListColumnHeaderComponent {
     }
 
     getColumnWidthClass(): string {
-        return 'flex-column--' + ColumnWidth[this.width];
+        return 'flex-column--' + (ColumnWidth[this.width] ? ColumnWidth[this.width] : ColumnWidth[ColumnWidth.m]);
     }
 
     onClick() {
