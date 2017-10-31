@@ -14,11 +14,6 @@ describe('[DatepickerComponent]', () => {
         component = new ListColumnHeaderComponent();
     });
 
-    /*
-        getColumnWidthClass(): string {
-            return 'flex-column--' + ColumnWidth[this.width];
-        } */
-
     describe('When initialized with no ColumnWidth,', () => {
         it('the width is 10 pixels', () => {
             expect(component.maxCharacters).toBe(10);
@@ -26,6 +21,36 @@ describe('[DatepickerComponent]', () => {
         it('and the class for column-width is flex-column--', () => {
             expect(component.getColumnWidthClass()).toBe('flex-column--m');
         });
+
+        it('the sortdirection is none', () => {
+            expect(component.sortDirection).toBe(SortDirection.None);
+        });
+
+        describe('and clicked', () => {
+            beforeEach(() => {
+                component.onClick();
+            });
+            it('the sortdirection is Ascending', () => {
+                expect(component.sortDirection).toBe(SortDirection.Ascending);
+            });
+            describe('and clicked again', () => {
+                beforeEach(() => {
+                    component.onClick();
+                });
+                it('the sortdirection is Descending', () => {
+                    expect(component.sortDirection).toBe(SortDirection.Descending);
+                });
+                describe('and clicked for the last time', () => {
+                    beforeEach(() => {
+                        component.onClick();
+                    });
+                    it('the sortdirection is Descending', () => {
+                        expect(component.sortDirection).toBe(SortDirection.Ascending);
+                    });
+                });
+            });
+        });
+
     });
 
     describe('When initialized with ColumnWidth xxs and sortdirection is ascending,', () => {
@@ -55,6 +80,10 @@ describe('[DatepickerComponent]', () => {
 
         beforeEach(() => {
             component.width = ColumnWidth.xs
+
+        });
+        it('the width is 3 pixels', () => {
+            expect(component.maxCharacters).toBe(5);
         });
 
         it('the width is 3 pixels', () => {
