@@ -21,8 +21,10 @@ export class ListHeaderComponent implements AfterContentInit {
     }
 
     applyToColumn(column: ListColumnComponent, index: number) {
-        const headerColumn = this.headerColumns.toArray()[index];
-        column.copyPropertiesFromHeader(headerColumn);
+        const headerColumnArray = this.headerColumns.toArray();
+        if (headerColumnArray.length > index) {
+            column.copyPropertiesFromHeader(headerColumnArray[index]);
+        }
     }
 }
 
