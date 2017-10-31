@@ -33,7 +33,7 @@ export class ListsComponent {
 
     constructor(private modalService: ModalService) {
         const examplePeople = [
-            { id: '1', firstName: 'Adam', lastName: 'Andersson', organisations: ['Team 1', 'Team 2'] } as ExamplePerson,
+            { id: '1', firstName: 'Mijo', lastName: 'Koletic', organisations: ['Team 1', 'Team 2'] } as ExamplePerson,
             { id: '2', firstName: 'Bjarne', lastName: 'Bengtsson', organisations: ['Team 1'], canBeDeleted: true } as ExamplePerson,
             { id: '3', firstName: 'Carola', lastName: 'Claesson', organisations: ['Team 1', 'Team 2', 'Team 3'] } as ExamplePerson,
             { id: '4', firstName: 'Daniella', lastName: 'Di Maria Marquez ', organisations: ['Team 4'], canBeDeleted: true } as ExamplePerson,
