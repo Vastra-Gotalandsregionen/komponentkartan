@@ -1,4 +1,4 @@
-import { Component, HostBinding, ContentChildren, ContentChild, AfterViewInit, AfterContentInit, QueryList, Input, Output, EventEmitter } from '@angular/core';
+import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 
@@ -8,7 +8,7 @@ import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.compon
     moduleId: module.id,
     selector: 'vgr-list'
 })
-export class ListComponent implements AfterViewInit, AfterContentInit {
+export class ListComponent implements AfterContentInit {
     @HostBinding('class.list') hasClass = true;
     @Input() @HostBinding('class.list--inline') flexibleHeader: boolean;
     @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
@@ -24,8 +24,6 @@ export class ListComponent implements AfterViewInit, AfterContentInit {
         this.items.forEach(item => {
             item.copyPropertiesFromHeader(this.listHeader)
         });
-    }
-    ngAfterViewInit() {
         if (!this.allowMultipleExpandedItems) {
             this.items.forEach(changedContainer => {
                 changedContainer.expandedChanged.subscribe((expanded: boolean) => {
