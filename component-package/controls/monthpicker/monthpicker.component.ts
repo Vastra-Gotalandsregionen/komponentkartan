@@ -23,6 +23,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
     @Input() required: boolean;
+    @Input() readonly: boolean;
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() selectedDateFormat = 'MMM yyyy';
     @Input() tooltipDateFormat = 'MMMM yyyy';

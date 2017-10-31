@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms'
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
 import { DropdownComponent } from '../../component-package/controls/dropdown/dropdown.component';
 import { FilterTextboxComponent } from '../../component-package/controls/filterTextbox/filterTextbox.component';
 import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
@@ -342,7 +341,7 @@ describe('DropdownComponent', () => {
             expect(component.items[1].selected).toBe(false);
         });
     });
-
+  
     describe('When component is initialized with two simple values', () => {
         beforeEach(() => {
             component.values = ['one', 'two'];
