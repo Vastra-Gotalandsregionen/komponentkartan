@@ -110,14 +110,17 @@
                         </div>
                     </div>
                     <div class="row-layout">
-                        <vgr-button (click)="isReadonlyAndDisabled = !isReadonlyAndDisabled;">Readonly och Disable</vgr-button>
                         <div>
                             <p>8 items (3 pre-selected) readonly</p> 
                             <vgr-dropdown-multiselect [items]="dropMultipleDownItems8" [readonly]="isReadonlyAndDisabled"></vgr-dropdown-multiselect>
                         </div>
                         <div>
-                            <p>8 items (3 pre-selected) readonly</p>
+                            <p>8 items (3 pre-selected) disabled</p>
                             <vgr-dropdown-multiselect [items]="dropMultipleDownItems8" [disabled]="isReadonlyAndDisabled"></vgr-dropdown-multiselect>
+                        </div>
+                        <div>
+                            <p>Toggle readonly och disabled</p>
+                            <vgr-button (click)="isReadonlyAndDisabled = !isReadonlyAndDisabled;">Toggle</vgr-button>                                
                         </div>
                     </div>
                     <div>

@@ -10,18 +10,17 @@ $filter-area-height: 60px;
     display: inline-block;
     height: $component-height;
     width: $dropdown-width--medium;
-    padding: 0px; //Text på vald item
+    padding: 0px;
+    transition: background-color 0.6s linear;    
     cursor: pointer;
     .disabled & {
         background-color: $control-color--disabled;
-        cursor: default;
-        transition: background-color 0.6s linear;
+        cursor: default;    
     }
     .readonly & {
         background-color: $background-color--content;
         cursor: default;
-        transition: background-color 0.6s linear;
-      }
+    }
     span {
         padding-left: $margin--slim;
         padding-top: 2px;
@@ -35,19 +34,17 @@ $filter-area-height: 60px;
         border-left: $border--single solid $control-border-color--default;
         border-bottom: $border--single solid $control-border-color--default;
         border-radius: 1px;
-        transition: background-color 0.6s linear;
+        transition: background-color 0.6s linear, border-color 0.6s linear;
         .disabled & {
             background-color: $background-color--default;
             border-color: $control-color--disabled;
             cursor: default;
-            transition: background-color 0.6s linear;
         }
         .readonly & {
             background-color: $background-color--content;
             border-color: $background-color--content;
             outline: none;
             cursor: text;
-            transition: background-color 0.6s linear;
         }
     } //Ikon, uppåt- eller nedåtpil
     &:after {
