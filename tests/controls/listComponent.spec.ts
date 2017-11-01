@@ -27,8 +27,8 @@ describe('[ListComponent]', () => {
             spyOn(childItem1, 'copyPropertiesFromHeader');
             spyOn(childItem2, 'copyPropertiesFromHeader');
             spyOn(childItem3, 'copyPropertiesFromHeader');
-            spyOn(listComponent.items, 'forEach').and.callFake((callback => [childItem1, childItem2, childItem3].forEach(callback)));
-            spyOn(listComponent.items, 'filter').and.callFake((callback => [childItem1, childItem2, childItem3].filter(callback)));
+            spyOn(listComponent.items, 'forEach').and.callFake(((callback: any) => [childItem1, childItem2, childItem3].forEach(callback)));
+            spyOn(listComponent.items, 'filter').and.callFake(((callback: any) => [childItem1, childItem2, childItem3].filter(callback)));
             listComponent.ngAfterContentInit();
         });
         it('items are initialized with header sizing information', () => {

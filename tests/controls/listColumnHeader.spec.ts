@@ -1,13 +1,6 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { ListColumnHeaderComponent, ColumnWidth, SortDirection } from '../../component-package/controls/list/list-column-header.component';
-import { inject } from '@angular/core/testing';
 
-describe('[DatepickerComponent]', () => {
+describe('[ListColumnHeaderComponent]', () => {
     let component: ListColumnHeaderComponent;
 
     beforeEach(() => {
@@ -15,10 +8,10 @@ describe('[DatepickerComponent]', () => {
     });
 
     describe('When initialized with no ColumnWidth,', () => {
-        it('the width is 10 pixels', () => {
+        it('the maxCharacters is 10', () => {
             expect(component.maxCharacters).toBe(10);
         });
-        it('and the class for column-width is flex-column--', () => {
+        it('and the class for column-width is flex-column--m', () => {
             expect(component.getColumnWidthClass()).toBe('flex-column--m');
         });
 
@@ -44,7 +37,7 @@ describe('[DatepickerComponent]', () => {
                     beforeEach(() => {
                         component.onClick();
                     });
-                    it('the sortdirection is Descending', () => {
+                    it('the sortdirection is Ascending', () => {
                         expect(component.sortDirection).toBe(SortDirection.Ascending);
                     });
                 });
@@ -63,30 +56,25 @@ describe('[DatepickerComponent]', () => {
             expect(component.isSortAscending).toBeTruthy();
         });
 
-        it('the isSortDescending is set to true', () => {
+        it('the isSortDescending is set to false', () => {
             expect(component.isSortDescending).toBeFalsy();
         });
 
-        it('the width is 3 pixels', () => {
+        it('The maxCharacters is 3', () => {
             expect(component.maxCharacters).toBe(3);
         });
 
-        it('and the class for column-width is flex-column--', () => {
+        it('and the class for column-width is flex-column--xxs', () => {
             expect(component.getColumnWidthClass()).toBe('flex-column--xxs');
         });
     });
 
     describe('When initialized with ColumnWidth xs,', () => {
-
         beforeEach(() => {
             component.width = ColumnWidth.xs
 
         });
-        it('the width is 3 pixels', () => {
-            expect(component.maxCharacters).toBe(5);
-        });
-
-        it('the width is 3 pixels', () => {
+        it('maxCharacters is 5', () => {
             expect(component.maxCharacters).toBe(5);
         });
     });
@@ -96,7 +84,7 @@ describe('[DatepickerComponent]', () => {
             component.width = ColumnWidth.s
         });
 
-        it('the width is 7 pixels', () => {
+        it('maxCharacters is 7', () => {
             expect(component.maxCharacters).toBe(7);
         });
     });
@@ -106,7 +94,7 @@ describe('[DatepickerComponent]', () => {
             component.width = ColumnWidth.m
         });
 
-        it('the width is 7 pixels', () => {
+        it('maxCharacters is 10', () => {
             expect(component.maxCharacters).toBe(10);
         });
     });
@@ -116,7 +104,7 @@ describe('[DatepickerComponent]', () => {
             component.width = ColumnWidth.l
         });
 
-        it('the width is 7 pixels', () => {
+        it('maxCharacters is 15', () => {
             expect(component.maxCharacters).toBe(15);
         });
     });
@@ -127,7 +115,7 @@ describe('[DatepickerComponent]', () => {
             component.width = ColumnWidth.xl
         });
 
-        it('the width is 17 pixels', () => {
+        it('maxCharacters is 17', () => {
             expect(component.maxCharacters).toBe(17);
         });
     });
@@ -137,7 +125,7 @@ describe('[DatepickerComponent]', () => {
             component.width = ColumnWidth.xxl
         });
 
-        it('the width is 17 pixels', () => {
+        it('maxCharacters is 20', () => {
             expect(component.maxCharacters).toBe(20);
         });
     });
@@ -147,7 +135,7 @@ describe('[DatepickerComponent]', () => {
             component.width = ColumnWidth.xxxl
         });
 
-        it('the width is 25 pixels', () => {
+        it('maxCharacters is 25', () => {
             expect(component.maxCharacters).toBe(25);
         });
     });

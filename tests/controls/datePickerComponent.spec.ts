@@ -16,6 +16,8 @@ describe('[DatepickerComponent]', () => {
     let currentMonth: number;
     let minDate: Date;
     let maxDate: Date;
+    let numberOfMonthsInYearMonths: number;
+
 
     beforeEach(() => {
         component = new DatepickerComponent(null);
@@ -90,18 +92,32 @@ describe('[DatepickerComponent]', () => {
 
     describe(' When initialized with currentYear 2017 and currentMonth October', () => {
 
+
+
+        function NumberofYearMonthsInCalendar(d1: Date, d2: Date) {
+            let monthCount = 0;
+            for (let year = d1.getFullYear(); year <= d2.getFullYear(); year++) {
+                for (let month = 1; month <= 12; month++) {
+                    if (new Date(year, month - 1) >= new Date(d1.getFullYear(), d1.getMonth())
+                        && (new Date(year, month - 1) <= new Date(d2.getFullYear(), d2.getMonth()))) {
+                        monthCount++;
+                    }
+                }
+            }
+            return monthCount;
+        }
+
         beforeEach(() => {
             jasmine.clock().uninstall();
             jasmine.clock().install();
             currentYear = 2017;
             currentMonth = 10;
-
-            jasmine.clock().mockDate(new Date(currentYear, currentMonth - 1, 15));
-
             minDate = new Date(currentYear, currentMonth - 1, 15);
             maxDate = new Date(currentYear, currentMonth - 1, 27);
             component.minDate = new Date(currentYear, currentMonth - 1, 15);
             component.maxDate = new Date(currentYear, currentMonth - 1, 27);
+
+            numberOfMonthsInYearMonths = NumberofYearMonthsInCalendar(component.maxDate, new Date());
             component.ngOnInit();
         });
         afterEach(() => {
@@ -156,7 +172,6 @@ describe('[DatepickerComponent]', () => {
         });
 
         it('all days in october disabled=false', () => {
-            console.log(component.yearMonths);
             expect(component.createYearMonths(minDate, maxDate)[0].weeks[0].days[6].disabled as boolean).toBe(false);
             expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[0].disabled as boolean).toBe(false);
             expect(component.createYearMonths(minDate, maxDate)[0].weeks[1].days[1].disabled as boolean).toBe(false);
@@ -178,7 +193,7 @@ describe('[DatepickerComponent]', () => {
         });
 
         it('yearmonth shall only contain one month', () => {
-            expect(component.yearMonths.length).toBe(1);
+            expect(component.yearMonths.length).toBe(numberOfMonthsInYearMonths);
         });
 
         it('the calendar is not visible', () => {
