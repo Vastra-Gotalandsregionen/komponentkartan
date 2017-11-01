@@ -13,16 +13,13 @@ $dropdown-width--small: 100px;
   padding: 0px;
   transition: background-color 0.6s linear;
   cursor: pointer;
-  
   .disabled & {
     background-color: $control-color--disabled;
     cursor: default;
-    transition: background-color 0.6s linear;
   }
   .readonly & {
     background-color: $background-color--content;
     cursor: default;
-    transition: background-color 0.6s linear;
   }
 
   .datepicker__calendar__selector {
@@ -38,19 +35,17 @@ $dropdown-width--small: 100px;
     border-left: $border--single solid $control-border-color--default;
     border-bottom: $border--single solid $control-border-color--default;
     border-radius: 1px;
-    transition: background-color 0.6s linear;
+    transition: background-color 0.6s linear, border-color 0.6s linear;
     .disabled & {
       background-color: $background-color--default;
       border-color: $control-color--disabled;
       cursor: default;
-      transition: background-color 0.6s linear;
     }
     .readonly & {
       background-color: $background-color--content;
       border-color: $background-color--content;
       outline: none;
       cursor: text;
-      transition: background-color 0.6s linear;
     }
   }
   &:after {
@@ -58,28 +53,33 @@ $dropdown-width--small: 100px;
     vertical-align: middle;
     text-align: center;
     float: right;
-    background-color: transparent;
     cursor: pointer;
     margin-top: 0px;
     padding-right: 3px;
     width: 36px;
     height: 30px;
     @extend .bg-image-icon-calendar;
+    background-color: $primary-color--default;
+    transition: background-color 0.6s linear, opacity 0.6s linear;
     .theme--blue & {
       @extend .bg-image-icon-calendar--blue;
+      background-color: $primary-color--blue;
     }
     .theme--red & {
+      background-color: $primary-color--red;
       @extend .bg-image-icon-calendar--red;
     }
     .theme--green & {
+      background-color: $primary-color--green;
       @extend .bg-image-icon-calendar--green;
     }
     .disabled & {
       @extend .bg-image-icon-calendar--inactive;
+      background-color: $control-color--disabled;
       cursor: default;
     }
     .readonly & {
-      background-image: none;
+      opacity: 0;
       cursor: default;
     }
   }
@@ -150,10 +150,6 @@ $dropdown-width--small: 100px;
     cursor: default;
   }
 
-  &.readonly {
-    cursor: default;
-  }
-
   &:after {
     width: 28px;
     height: 28px;
@@ -214,17 +210,13 @@ $dropdown-width--small: 100px;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  &:hover:not(.disabled):not(.readonly) {
+  &:hover:not(.disabled) {
     @extend .background-color--secondary;
     color: $text-color--light;
     @extend .border-color--secondary;
   }
   &.disabled {
     color: $control-color--disabled;
-    cursor: default;
-  }
-  &.readonly {
-    color: $background-color--content;
     cursor: default;
   }
 }

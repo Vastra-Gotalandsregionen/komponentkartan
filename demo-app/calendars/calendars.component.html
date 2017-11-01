@@ -15,6 +15,8 @@
           <p>MM yyyy formatering</p>
           <vgr-monthpicker style="margin-top: 20px" [selectedDateFormat]="'MM yyyy'" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
         </div>
+      </div>
+      <div class="row-layout row-layout--padded">
         <div>
           <p>Disabled</p>
           <vgr-monthpicker style="margin-top: 20px" [disabled]="isReadonlyAndDisabled" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
@@ -27,11 +29,12 @@
           <p>Readonlyläge vid befintlig datum</p>
           <vgr-monthpicker [selectedDate]="selectedDate" [readonly]="isReadonlyAndDisabled"></vgr-monthpicker>
         </div>
+        <div>
+          <p>Toggle readonly och disable</p>
+          <vgr-button (click)="isReadonlyAndDisabled = !isReadonlyAndDisabled;">Toggle</vgr-button>
+        </div>
       </div>
-      <br>
-      <div>
-        <vgr-button (click)="isReadonlyAndDisabled = !isReadonlyAndDisabled;">Readonly och Disable</vgr-button>
-      </div>
+      <br/>
       <div>
         <span>Senast valt datum: </span>
         <span>{{selectedDate | date : 'yyyy MMM'}}</span>
@@ -110,7 +113,8 @@
       <br>
       <div>
           <div>
-              <vgr-button (click)="isReadonlyAndDisabledDatepicker = !isReadonlyAndDisabledDatepicker;">Readonly och Disable</vgr-button>
+            <p>Toggle readonly och disabled </p>
+              <vgr-button (click)="isReadonlyAndDisabledDatepicker = !isReadonlyAndDisabledDatepicker;">Toggle</vgr-button>
           </div>
       </div>
 
