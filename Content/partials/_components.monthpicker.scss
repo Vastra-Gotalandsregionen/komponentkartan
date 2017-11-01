@@ -11,14 +11,14 @@ $dropdown-width--small: 100px;
   height: $component-height;
   width: $dropdown-width--medium;
   padding: 0px;
-  transition: background-color 0.6 linear;
+  transition: background-color 0.6s linear;
   cursor: pointer;
   .disabled & {
-    background-color: $control-color--disabled;
+    background-color: $control-color--disabled;    
     cursor: default;
   }
   .readonly & {
-    background-color: $background-color--content;
+    background-color: $background-color--content;    
     cursor: default;
   }
   span {
@@ -34,8 +34,7 @@ $dropdown-width--small: 100px;
     border-left: $border--single solid $control-border-color--default;
     border-bottom: $border--single solid $control-border-color--default;
     border-radius: 1px;
-    transition: background-color 0.6s linear;
-    transition: border-color 0.6s linear;
+    transition: background-color 0.6s linear, border-color 0.6s linear;
     .disabled & {
       background-color: $background-color--default;
       border-color: $control-color--disabled;
@@ -53,31 +52,34 @@ $dropdown-width--small: 100px;
     vertical-align: middle;
     text-align: center;
     float: right;
-    @extend .background-color--primary;
     cursor: pointer;
     margin-top: 0px;
     padding-right: 3px;
     width: 36px;
     height: 30px;
-    transition: background-color 0.6s linear;
+    opacity: 1;
     @extend .bg-image-icon-calendar;
-
+    background-color: $primary-color--default;
+    transition: background-color 0.6s linear, opacity 0.6s linear;
     .theme--blue & {
       @extend .bg-image-icon-calendar--blue;
+      background-color: $primary-color--blue;
     }
     .theme--red & {
+      background-color: $primary-color--red;
       @extend .bg-image-icon-calendar--red;
     }
     .theme--green & {
+      background-color: $primary-color--green;
       @extend .bg-image-icon-calendar--green;
     }
     .disabled & {
       @extend .bg-image-icon-calendar--inactive;
+      background-color: $control-color--disabled;
       cursor: default;
     }
     .readonly & {
-      background-color: $background-color--content;
-      background-image: none;
+      opacity: 0;
       cursor: default;
     }
   }
