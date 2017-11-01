@@ -17,16 +17,20 @@
         </div>
         <div>
           <p>Disabled</p>
-          <vgr-monthpicker style="margin-top: 20px" [disabled]="true" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
+          <vgr-monthpicker style="margin-top: 20px" [disabled]="isReadonlyAndDisabled" [minDate]="minDate" [maxDate]="maxDate" [selectedDate]="selectedDate"></vgr-monthpicker>
         </div>
         <div>
           <p>Readonlyläge vid ej ifyllt datum</p>
-          <vgr-monthpicker [selectedDate]="selectedDateNew" [readonly]="true"></vgr-monthpicker>
+          <vgr-monthpicker [selectedDate]="selectedDateNew" [readonly]="isReadonlyAndDisabled"></vgr-monthpicker>
         </div>
         <div>
           <p>Readonlyläge vid befintlig datum</p>
-          <vgr-monthpicker [selectedDate]="selectedDate" [readonly]="true"></vgr-monthpicker>
+          <vgr-monthpicker [selectedDate]="selectedDate" [readonly]="isReadonlyAndDisabled"></vgr-monthpicker>
         </div>
+      </div>
+      <br>
+      <div>
+        <vgr-button (click)="isReadonlyAndDisabled = !isReadonlyAndDisabled;">Readonly och Disable</vgr-button>
       </div>
       <div>
         <span>Senast valt datum: </span>
@@ -90,7 +94,7 @@
       <div class="row-layout row-layout--padded">
         <div>
           <p>Readonlyläge vid ej ifyllt datum</p>
-          <vgr-datepicker [selectedDate]="datepicker_selectedDateNew" [readonly]="true"></vgr-datepicker>
+          <vgr-datepicker [selectedDate]="datepicker_selectedDateNew" [readonly]="isReadonlyAndDisabledDatepicker"></vgr-datepicker>
         </div>
         <div>
           <span>Valt datum: </span>
@@ -100,8 +104,14 @@
       <div class="row-layout row-layout--padded">
         <div>
           <p>Readonlyläge vid befintlig datum</p>
-          <vgr-datepicker [selectedDate]="datepicker_selectedDate" [readonly]="true"></vgr-datepicker>
+          <vgr-datepicker [selectedDate]="datepicker_selectedDate" [readonly]="isReadonlyAndDisabledDatepicker"></vgr-datepicker>
         </div>  
+      </div>
+      <br>
+      <div>
+          <div>
+              <vgr-button (click)="isReadonlyAndDisabledDatepicker = !isReadonlyAndDisabledDatepicker;">Readonly och Disable</vgr-button>
+          </div>
       </div>
 
       <div>

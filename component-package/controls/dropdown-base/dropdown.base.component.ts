@@ -18,7 +18,9 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
     @Input() required: boolean;
-    @Input() readonly: boolean;
+    @Input() @HostBinding('class.readonly') readonly: boolean;
+    @Input() @HostBinding('class.disabled') disabled: boolean;
+
     showAllItem: IDropdownItem;
 
     expanded: boolean;
@@ -44,7 +46,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             this.handleInitiallySelectedItems(selectedItems);
         }
         setTimeout(() => {
-            if (this.readonly === false) {
+            if (this.readonly === false && this.disabled === false) {
                 this.scrollbarComponent.update();
                 this.listenToScrollbarEvents();
             }
@@ -122,6 +124,9 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     }
 
     onDropdownMouseDown(event: Event) {
+        if (this.readonly || this.disabled) {
+            return;
+        }
         if (this.preventCollapse) {
             event.returnValue = false;
             this.preventCollapse = false;

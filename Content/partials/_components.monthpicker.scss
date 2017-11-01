@@ -11,12 +11,15 @@ $dropdown-width--small: 100px;
   height: $component-height;
   width: $dropdown-width--medium;
   padding: 0px;
-  transition: background-color 0.6s linear;
+  transition: background-color 0.6 linear;
   cursor: pointer;
   .disabled & {
     background-color: $control-color--disabled;
     cursor: default;
-    transition: background-color 0.6s linear;
+  }
+  .readonly & {
+    background-color: $background-color--content;
+    cursor: default;
   }
   span {
     padding-left: $margin--slim;
@@ -32,11 +35,17 @@ $dropdown-width--small: 100px;
     border-bottom: $border--single solid $control-border-color--default;
     border-radius: 1px;
     transition: background-color 0.6s linear;
+    transition: border-color 0.6s linear;
     .disabled & {
       background-color: $background-color--default;
       border-color: $control-color--disabled;
       cursor: default;
-      transition: background-color 0.6s linear;
+    }
+    .readonly & {
+      background-color: $background-color--content;
+      border-color: $background-color--content;
+      outline: none;
+      cursor: text;
     }
   }
   &:after {
@@ -44,13 +53,15 @@ $dropdown-width--small: 100px;
     vertical-align: middle;
     text-align: center;
     float: right;
-    background-color: transparent;
+    @extend .background-color--primary;
     cursor: pointer;
     margin-top: 0px;
     padding-right: 3px;
     width: 36px;
     height: 30px;
+    transition: background-color 0.6s linear;
     @extend .bg-image-icon-calendar;
+
     .theme--blue & {
       @extend .bg-image-icon-calendar--blue;
     }
@@ -64,15 +75,15 @@ $dropdown-width--small: 100px;
       @extend .bg-image-icon-calendar--inactive;
       cursor: default;
     }
+    .readonly & {
+      background-color: $background-color--content;
+      background-image: none;
+      cursor: default;
+    }
   }
   &:focus {
     outline: 0;
   }
-}
-
-.monthpicker--readonly {
-  height: $component-height;
-  width: $dropdown-width--medium;
 }
 
 .monthpicker__calendar {
@@ -227,7 +238,7 @@ $dropdown-width--small: 100px;
   border-width: 1px;
   border-style: solid;
   margin-top: 13px;
-  &:hover:not(.disabled) {
+  &:hover:not(.disabled):not(.readonly) {
     border: none;
     margin-top: 14px;
   }
