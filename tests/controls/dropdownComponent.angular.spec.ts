@@ -383,7 +383,7 @@ describe('DropdownComponent', () => {
             expect(fixture.debugElement.classes['readonly']).toBe(true);
         });
 
-        it('should have empty selected items text', () => {
+        it('should display selected item text', () => {
             const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
             const content = selectedItemsSpan.nativeElement.textContent;
             expect(content.trim()).toBe('one');
