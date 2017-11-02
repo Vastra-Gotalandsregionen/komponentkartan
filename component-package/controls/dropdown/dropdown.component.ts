@@ -20,9 +20,7 @@ import { ValidationComponent } from '../validation/validation.component';
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges {
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
-
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
-    @Input() @HostBinding('class.disabled') disabled: boolean;
 
     @Input() set selectedValue(value: string) {
         if (this.items) {

@@ -23,8 +23,8 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
     @Input() required: boolean;
-    @Input() readonly: boolean;
     @Input() @HostBinding('class.disabled') disabled: boolean;
+    @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() selectedDateFormat = 'MMM yyyy';
     @Input() tooltipDateFormat = 'MMMM yyyy';
 
@@ -148,7 +148,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
 
     onEnter() {
 
-        if (this.disabled) {
+        if (this.disabled || this.readonly) {
             return;
         }
 
@@ -217,7 +217,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
         const target = event.target || event.srcElement || event.currentTarget;
         const element = $(target);
 
-        if (this.disabled) {
+        if (this.disabled || this.readonly) {
             return;
         }
 

@@ -17,12 +17,11 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
     @Input() @HostBinding('class.disabled') disabled: boolean;
+    @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() selectedDateFormat = 'yyyy-MM-dd';
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
     @Input() required: boolean;
-    @Input() readonly: boolean;
     @Output() selectedDateChanged = new EventEmitter<Date>();
-
 
     yearMonths: ICalendarYearMonth[] = [];
     isDatePickerVisible: boolean;
@@ -57,7 +56,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     }
 
     onEnter() {
-        if (this.disabled) {
+        if (this.disabled || this.readonly) {
             return;
         }
 
@@ -263,7 +262,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
 
     // UI functions
     displayDatePicker() {
-        if (this.disabled) {
+        if (this.disabled || this.readonly) {
             return;
         }
         this.isDatePickerVisible = true;
