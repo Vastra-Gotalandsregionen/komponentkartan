@@ -64,14 +64,20 @@
                         <div>
                             <p>25 items och Visa alla</p>
                             <vgr-dropdown [items]="dropDownItems25All" [showAllItemText]="'Visa alla alternativ'" [noItemSelectedLabel]="'Välj alternativ'" (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
-                        </div>
+                        </div>                       
+                    </div>
+                    <div class="row-layout">
                         <div>
                             <p>200 items readonly</p>
-                            <vgr-dropdown [items]="dropDownItems200" [readonly]="true"></vgr-dropdown>
+                            <vgr-dropdown [items]="dropDownItems200" [readonly]="isReadonlyAndDisabled"></vgr-dropdown>
                         </div>
                         <div>
                             <p>200 items disabled</p>
-                            <vgr-dropdown [items]="dropDownItems200" [disabled]="true"></vgr-dropdown>
+                            <vgr-dropdown [items]="dropDownItems200" [disabled]="isReadonlyAndDisabled"></vgr-dropdown>
+                        </div>
+                        <div>
+                            <p>Toggle readonly och disabled</p>
+                            <vgr-button (click)="isReadonlyAndDisabled = !isReadonlyAndDisabled;">Toggle</vgr-button>                                
                         </div>
                     </div>
                     <div>
@@ -112,15 +118,15 @@
                     <div class="row-layout">
                         <div>
                             <p>8 items (3 pre-selected) readonly</p> 
-                            <vgr-dropdown-multiselect [items]="dropMultipleDownItems8" [readonly]="isReadonlyAndDisabled"></vgr-dropdown-multiselect>
+                            <vgr-dropdown-multiselect [items]="dropMultipleDownItems8" [readonly]="isReadonlyAndDisabledMulti"></vgr-dropdown-multiselect>
                         </div>
                         <div>
                             <p>8 items (3 pre-selected) disabled</p>
-                            <vgr-dropdown-multiselect [items]="dropMultipleDownItems8" [disabled]="isReadonlyAndDisabled"></vgr-dropdown-multiselect>
+                            <vgr-dropdown-multiselect [items]="dropMultipleDownItems8" [disabled]="isReadonlyAndDisabledMulti"></vgr-dropdown-multiselect>
                         </div>
                         <div>
                             <p>Toggle readonly och disabled</p>
-                            <vgr-button (click)="isReadonlyAndDisabled = !isReadonlyAndDisabled;">Toggle</vgr-button>                                
+                            <vgr-button (click)="isReadonlyAndDisabledMulti = !isReadonlyAndDisabledMulti;">Toggle</vgr-button>                                
                         </div>
                     </div>
                     <div>
