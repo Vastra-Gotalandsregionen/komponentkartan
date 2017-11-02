@@ -1,10 +1,10 @@
-<div *ngIf="!readonly; else readonlyTemplate" class="validation">
+<div class="validation">
   <div class="monthpicker" (mousedown)="onMouseDown($event)" (keydown)="onKeyDown($event)" (focusin)="onEnter()" (focusout)="onLeave()"
     [ngClass]="{'monthpicker--open' : expanded}">
 
-    <div class="monthpicker__dropdown" tabindex="{{disabled ? -1 : 0}}">
+    <div class="monthpicker__dropdown" tabindex="{{disabled || readonly ? -1 : 0}}">
       <span tabindex="0" *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date : selectedDateFormat}}</span>
-      <span tabindex="0" *ngIf="!selectedDate" title="Välj månad">Välj månad</span>
+      <span tabindex="0" *ngIf="!selectedDate" title="Välj månad">{{ readonly ? '' : 'Välj månad' }}</span>
 
       <div class="monthpicker__calendar">
         <div class="monthpicker__calendar__header">
@@ -73,10 +73,3 @@
     
     </div>
   </div>
-
-  <ng-template #readonlyTemplate>
-      <div class="monthpicker--readonly">
-          {{selectedDate | date: selectedDateFormat}}
-      </div>
-  </ng-template>
-  

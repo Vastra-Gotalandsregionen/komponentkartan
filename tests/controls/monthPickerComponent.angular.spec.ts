@@ -1,20 +1,15 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+﻿import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ICalendarYearMonth } from '../../component-package/models/calendarYearMonth.model';
-import { ICalendarWeek } from '../../component-package/models/calendarWeek.model';
-import { ICalendarDay } from '../../component-package/models/calendarDay.model';
-import { DatepickerComponent } from '../../component-package/controls/datepicker/datepicker.component';
-import { inject } from '@angular/core/testing';
+import { MonthpickerComponent } from '../../component-package/controls/monthpicker/monthpicker.component';
 import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
 
-describe('[DatepickerComponent(Angular)]', () => {
-    let component: DatepickerComponent;
-    let fixture: ComponentFixture<DatepickerComponent>;
+describe('[MonthpickerComponent(Angular)]', () => {
+    let component: MonthpickerComponent;
+    let fixture: ComponentFixture<MonthpickerComponent>;
     let rootElement: DebugElement;
     let datepicker: DebugElement;
 
@@ -22,52 +17,28 @@ describe('[DatepickerComponent(Angular)]', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [DatepickerComponent, TruncatePipe],
+            declarations: [MonthpickerComponent, TruncatePipe],
             imports: [CommonModule]
         });
 
-        TestBed.overrideComponent(DatepickerComponent, {
+        TestBed.overrideComponent(MonthpickerComponent, {
             set: {
-                templateUrl: './datepicker.component.html'
+                templateUrl: './monthpicker.component.html'
             }
         });
 
 
         TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(DatepickerComponent);
+            fixture = TestBed.createComponent(MonthpickerComponent);
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
-            datepicker = rootElement.query(By.css('.datepicker'));
+            datepicker = rootElement.query(By.css('.monthpicker'));
             fixture.detectChanges();
 
             done();
         });
     });
 
-    describe('When initialized', () => {
-
-        beforeEach(() => {
-            component.ngOnInit();
-        });
-
-        describe('and the datepicker is clicked', () => {
-
-            beforeEach(() => {
-                component.displayDatePicker();
-            });
-            it('the calendar is visible', () => {
-                expect(component.isDatePickerVisible).toBe(true);
-            });
-            describe('and user clicks outside the calendar', () => {
-                beforeEach(() => {
-                    component.onOutsideClick(new Event('click'));
-                });
-                it('the calendar is closed', () => {
-                    expect(component.isDatePickerVisible).toBe(false);
-                });
-            });
-        });
-    });
 
     describe('When initialized with empty Selected date and readonly-mode', () => {
         beforeEach(() => {
@@ -78,9 +49,10 @@ describe('[DatepickerComponent(Angular)]', () => {
         it('has div class .readonly', () => {
             expect(fixture.debugElement.classes['readonly']).toBe(true);
         });
+
         it('selected date is empty', () => {
-            const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
-            const content = selectedDateSpan.nativeElement.textContent;
+            const selectedMonthSpan = fixture.debugElement.query(By.css('.monthpicker__dropdown span'));
+            const content = selectedMonthSpan.nativeElement.textContent;
             expect(content.trim()).toBe('');
         });
     });
@@ -89,7 +61,7 @@ describe('[DatepickerComponent(Angular)]', () => {
         beforeEach(() => {
             component.selectedDate = new Date(2017, 1, 1);
             component.readonly = true;
-            component.selectedDateFormat = 'yyyy-MM-dd';
+            component.selectedDateFormat = 'MM';
             fixture.detectChanges();
         });
 
@@ -97,10 +69,10 @@ describe('[DatepickerComponent(Angular)]', () => {
             expect(fixture.debugElement.classes['readonly']).toBe(true);
         });
 
-        it('selected date is new Date(2017,1,1) and displayed on format yyyy-MM-dd', () => {
-            const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
-            const content = selectedDateSpan.nativeElement.textContent;
-            expect(content.trim()).toBe('2017-02-01');
+        it('selected date is new Date(2017,1,1) and displayed on format MM', () => {
+            const selectedMonthSpan = fixture.debugElement.query(By.css('.monthpicker__dropdown span'));
+            const content = selectedMonthSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('02');
         });
     });
 
@@ -119,7 +91,7 @@ describe('[DatepickerComponent(Angular)]', () => {
         beforeEach(() => {
             component.selectedDate = new Date(2017, 1, 1);
             component.disabled = true;
-            component.selectedDateFormat = 'yyyy-MM-dd';
+            component.selectedDateFormat = 'MM';
             fixture.detectChanges();
         });
 
@@ -127,10 +99,10 @@ describe('[DatepickerComponent(Angular)]', () => {
             expect(fixture.debugElement.classes['disabled']).toBe(true);
         });
 
-        it('selected date is new Date(2017,1,1) and displayed on format yyyy-MM-dd', () => {
-            const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
-            const content = selectedDateSpan.nativeElement.textContent;
-            expect(content.trim()).toBe('2017-02-01');
+        it('selected date is new Date(2017,1,1) and displayed on format MM', () => {
+            const selectedMonthSpan = fixture.debugElement.query(By.css('.monthpicker__dropdown span'));
+            const content = selectedMonthSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('02');
         });
     });
 
@@ -143,13 +115,13 @@ describe('[DatepickerComponent(Angular)]', () => {
         it('has div class .readonly', () => {
             expect(fixture.debugElement.classes['disabled']).toBe(true);
         });
+
         it('selected date is empty', () => {
-            const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
-            const content = selectedDateSpan.nativeElement.textContent;
-            expect(content.trim()).toBe('Välj datum');
+            const selectedMonthSpan = fixture.debugElement.query(By.css('.monthpicker__dropdown span'));
+            const content = selectedMonthSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('Välj månad');
         });
     });
-
 
     describe('When initialized with disabled-mode set to false', () => {
         beforeEach(() => {
