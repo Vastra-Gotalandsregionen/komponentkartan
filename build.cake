@@ -54,15 +54,13 @@ Task("PrebuildActions")
 	.IsDependentOn("Restore-NpmPackages")
 	.Does(() =>
 {
-	if (!DirectoryExists(garbageDir)) {
-		CreateDirectory(garbageDir);
-	}
+
 
     Information("Flytta js filer för borttagning");
-	MoveFiles("./demo-app/**/*.js", garbageDir);
-	MoveFiles("./demo-app/**/*.js.map", garbageDir);
-    MoveFiles("./component-package/**/*.js", garbageDir);
-	MoveFiles("./component-package/**/*.js.map", garbageDir);
+	DeleteFiles("./demo-app/**/*.js");
+	DeleteFiles("./demo-app/**/*.js.map");
+    DeleteFiles("./component-package/**/*.js");
+	DeleteFiles("./component-package/**/*.js.map");
 
 	Information("Ta bort css:er");
 	DeleteFiles("./Content/*.css");
@@ -71,7 +69,7 @@ Task("PrebuildActions")
 	CleanDirectories(new DirectoryPath[]
     {
 
-        buildBinWeb,buildObjWeb,garbageDir
+        buildBinWeb,buildObjWeb
     });
 
 	//Kör rimraf eftersom vi har långa sökvägar

@@ -88,7 +88,7 @@ describe('[DatepickerComponent]', () => {
     });
 
     describe(' When initialized with 2017 october 15th ', () => {
-        var yearMonthArray
+        let yearMonthArray: ICalendarYearMonth[];
 
         beforeEach(() => {
             jasmine.clock().uninstall();
