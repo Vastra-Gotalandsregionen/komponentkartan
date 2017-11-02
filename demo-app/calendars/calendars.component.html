@@ -91,7 +91,7 @@
         <div>
           <p>Avstängd datepicker</p>
           <vgr-datepicker (selectedDateChanged)="datepicker_selectedDate=$event" [minDate]="datepicker_Min" [maxDate]="datepicker_Max"
-            [selectedDate]="datepicker_selectedDate" [disabled]="true"></vgr-datepicker>
+            [selectedDate]="datepicker_selectedDate" [disabled]="isReadonlyAndDisabledDatepicker"></vgr-datepicker>
         </div>
       </div>
       <div class="row-layout row-layout--padded">
