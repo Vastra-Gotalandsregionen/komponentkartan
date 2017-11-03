@@ -16,9 +16,6 @@ describe('[DatepickerComponent]', () => {
     let currentMonth: number;
     let minDate: Date;
     let maxDate: Date;
-    let numberOfMonthsInYearMonths: number;
-
-
 
     describe('When initialized with minDate 2017-08-01 and maxDate 2017-09-01', () => {
         beforeEach(() => {
@@ -177,8 +174,8 @@ describe('[DatepickerComponent]', () => {
             });
 
             it('Days before mindate are disabled', () => {
-                let weekTwo = yearMonthArray[0].weeks[1].days as Array<ICalendarDay>;
-                let weekThree = yearMonthArray[0].weeks[2].days as Array<ICalendarDay>;
+                const weekTwo = yearMonthArray[0].weeks[1].days as Array<ICalendarDay>;
+                const weekThree = yearMonthArray[0].weeks[2].days as Array<ICalendarDay>;
 
 
                 expect(yearMonthArray[0].weeks[0].days[6].disabled).toBe(true);
@@ -192,12 +189,13 @@ describe('[DatepickerComponent]', () => {
 
             it('Days between mindate and maxdate are enabled', () => {
 
-                let weekThree = yearMonthArray[0].weeks[2].days as Array<ICalendarDay>;
-                let weekFour = yearMonthArray[0].weeks[3].days as Array<ICalendarDay>;
-                let weekFive = yearMonthArray[0].weeks[4].days as Array<ICalendarDay>;
+                const weekThree = yearMonthArray[0].weeks[2].days as Array<ICalendarDay>;
+                const weekFour = yearMonthArray[0].weeks[3].days as Array<ICalendarDay>;
+                const weekFive = yearMonthArray[0].weeks[4].days as Array<ICalendarDay>;
 
                 expect(weekThree[6].disabled).toBe(false);
                 expect(weekThree[6].disabled).toBe(false);
+
                 expect(weekFour[0].disabled).toBe(false);
                 expect(weekFour[1].disabled).toBe(false);
                 expect(weekFour[2].disabled).toBe(false);
@@ -214,8 +212,8 @@ describe('[DatepickerComponent]', () => {
 
 
             it('Days after maxdate are disabled', () => {
-                let weekFive = yearMonthArray[0].weeks[4].days as Array<ICalendarDay>;
-                let weekSix = yearMonthArray[0].weeks[5].days as Array<ICalendarDay>;
+                const weekFive = yearMonthArray[0].weeks[4].days as Array<ICalendarDay>;
+                const weekSix = yearMonthArray[0].weeks[5].days as Array<ICalendarDay>;
 
                 expect(weekFive[5].disabled).toBe(true);
                 expect(weekFive[6].disabled).toBe(true);
