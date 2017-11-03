@@ -104,8 +104,8 @@ describe('[ListColumnHeaderComponent]', () => {
             component.width = ColumnWidth.l
         });
 
-        it('maxCharacters is 15', () => {
-            expect(component.maxCharacters).toBe(15);
+        it('maxCharacters is 20', () => {
+            expect(component.maxCharacters).toBe(20);
         });
     });
 
@@ -115,8 +115,8 @@ describe('[ListColumnHeaderComponent]', () => {
             component.width = ColumnWidth.xl
         });
 
-        it('maxCharacters is 17', () => {
-            expect(component.maxCharacters).toBe(17);
+        it('maxCharacters is 35', () => {
+            expect(component.maxCharacters).toBe(35);
         });
     });
 
@@ -125,8 +125,8 @@ describe('[ListColumnHeaderComponent]', () => {
             component.width = ColumnWidth.xxl
         });
 
-        it('maxCharacters is 20', () => {
-            expect(component.maxCharacters).toBe(20);
+        it('maxCharacters is 50', () => {
+            expect(component.maxCharacters).toBe(50);
         });
     });
 
@@ -135,8 +135,8 @@ describe('[ListColumnHeaderComponent]', () => {
             component.width = ColumnWidth.xxxl
         });
 
-        it('maxCharacters is 25', () => {
-            expect(component.maxCharacters).toBe(25);
+        it('maxCharacters is 70', () => {
+            expect(component.maxCharacters).toBe(70);
         });
     });
 
