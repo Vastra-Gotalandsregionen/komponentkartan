@@ -10,8 +10,17 @@ $filter-area-height: 60px;
     display: inline-block;
     height: $component-height;
     width: $dropdown-width--medium;
-    padding: 0px; //Text på vald item
+    padding: 0px;
+    transition: background-color 0.6s linear;    
     cursor: pointer;
+    .disabled & {
+        background-color: $control-color--disabled;
+        cursor: default;    
+    }
+    .readonly & {
+        background-color: $background-color--content;
+        cursor: default;
+    }
     span {
         padding-left: $margin--slim;
         padding-top: 2px;
@@ -25,6 +34,18 @@ $filter-area-height: 60px;
         border-left: $border--single solid $control-border-color--default;
         border-bottom: $border--single solid $control-border-color--default;
         border-radius: 1px;
+        transition: background-color 0.6s linear, border-color 0.6s linear;
+        .disabled & {
+            background-color: $background-color--default;
+            border-color: $control-color--disabled;
+            cursor: default;
+        }
+        .readonly & {
+            background-color: $background-color--content;
+            border-color: $background-color--content;
+            outline: none;
+            cursor: text;
+        }
     } //Ikon, uppåt- eller nedåtpil
     &:after {
         @extend .bg-image-icon-chevron-inverted;
@@ -33,11 +54,15 @@ $filter-area-height: 60px;
         text-align: center;
         float: right;
         background-color: transparent;
-        cursor: pointer;
+        cursor: default;
         transform: rotate(0deg);
         transition: all ease 0.3s;
         margin-top: 0px;
         padding-right: 3px;
+
+        &:not(.disabled):not(.readonly) {
+            cursor: pointer;
+        }
     }
     &.dropdown--small {
         width: $dropdown-width--small;

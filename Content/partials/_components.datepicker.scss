@@ -16,8 +16,12 @@ $dropdown-width--small: 100px;
   .disabled & {
     background-color: $control-color--disabled;
     cursor: default;
-    transition: background-color 0.6s linear;
   }
+  .readonly & {
+    background-color: $background-color--content;
+    cursor: default;
+  }
+
   .datepicker__calendar__selector {
     padding-left: $margin--slim;
     padding-top: 2px;
@@ -31,12 +35,17 @@ $dropdown-width--small: 100px;
     border-left: $border--single solid $control-border-color--default;
     border-bottom: $border--single solid $control-border-color--default;
     border-radius: 1px;
-    transition: background-color 0.6s linear;
+    transition: background-color 0.6s linear, border-color 0.6s linear;
     .disabled & {
       background-color: $background-color--default;
       border-color: $control-color--disabled;
       cursor: default;
-      transition: background-color 0.6s linear;
+    }
+    .readonly & {
+      background-color: $background-color--content;
+      border-color: $background-color--content;
+      outline: none;
+      cursor: text;
     }
   }
   &:after {
@@ -44,24 +53,33 @@ $dropdown-width--small: 100px;
     vertical-align: middle;
     text-align: center;
     float: right;
-    background-color: transparent;
     cursor: pointer;
     margin-top: 0px;
     padding-right: 3px;
     width: 36px;
     height: 30px;
     @extend .bg-image-icon-calendar;
+    background-color: $primary-color--default;
+    transition: background-color 0.6s linear, opacity 0.6s linear;
     .theme--blue & {
       @extend .bg-image-icon-calendar--blue;
+      background-color: $primary-color--blue;
     }
     .theme--red & {
+      background-color: $primary-color--red;
       @extend .bg-image-icon-calendar--red;
     }
     .theme--green & {
+      background-color: $primary-color--green;
       @extend .bg-image-icon-calendar--green;
     }
     .disabled & {
       @extend .bg-image-icon-calendar--inactive;
+      background-color: $control-color--disabled;
+      cursor: default;
+    }
+    .readonly & {
+      opacity: 0;
       cursor: default;
     }
   }
@@ -90,11 +108,6 @@ $dropdown-width--small: 100px;
   &:focus {
     outline: 0;
   }
-}
-
-.datepicker--readonly {
-  height: $component-height;
-  width: $dropdown-width--medium;
 }
 
 .datepicker__calendar__header {

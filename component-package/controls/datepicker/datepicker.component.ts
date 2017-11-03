@@ -12,17 +12,16 @@ import { ValidationComponent } from '../../controls/validation/validation.compon
     providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DatepickerComponent) }]
 })
 export class DatepickerComponent extends ValidationComponent implements OnInit {
-    today: Date = new Date();
+    today: Date;
     @Input() minDate: Date;
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
     @Input() @HostBinding('class.disabled') disabled: boolean;
+    @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() selectedDateFormat = 'yyyy-MM-dd';
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
     @Input() required: boolean;
-    @Input() readonly: boolean;
     @Output() selectedDateChanged = new EventEmitter<Date>();
-
 
     yearMonths: ICalendarYearMonth[] = [];
     isDatePickerVisible: boolean;
@@ -35,6 +34,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     constructor(protected elementRef: ElementRef) {
         super();
 
+        this.today = new Date();
         this.isDatePickerVisible = false;
         this.nextMonth = true;
         this.previousMonth = true;
@@ -56,7 +56,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     }
 
     onEnter() {
-        if (this.disabled) {
+        if (this.disabled || this.readonly) {
             return;
         }
 
@@ -65,7 +65,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
 
     ngOnInit() {
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
-        this.yearMonths = this.updateDays(this.minDate, this.maxDate, this.yearMonths);
+        this.updateYearMonths(this.minDate, this.maxDate, this.yearMonths);
         this.setCurrentYearMonthOutput();
         this.setPreviousAndNextMonthNavigation();
     }
@@ -75,9 +75,12 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     }
 
     createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {
+
         const yearMonths: ICalendarYearMonth[] = [];
         let tmpMinDate = minDate;
         let tmpMaxDate = maxDate;
+
+
         if (tmpMinDate > this.today) {
             tmpMinDate = this.today;
         };
@@ -93,6 +96,8 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
                 }
             }
         }
+
+
         return yearMonths;
     }
 
@@ -111,7 +116,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         return Math.ceil(used / 7);
     }
 
-    createWeeks(year: number, month: number): ICalendarWeek[] {
+    private createWeeks(year: number, month: number): ICalendarWeek[] {
         const weeks: ICalendarWeek[] = [];
         const numberOfWeeks = this.getNumberOfWeeks(year, month);
 
@@ -121,7 +126,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         return weeks;
     }
 
-    createWeeksAndDays(year: number, month: number): ICalendarWeek[] {
+    private createWeeksAndDays(year: number, month: number): ICalendarWeek[] {
         const weeks: ICalendarWeek[] = this.createWeeks(year, month);
         const firstWeek: ICalendarWeek = this.createFirstWeek(year, month);
         const lastWeek: ICalendarWeek = this.createLastWeek(year, month);
@@ -150,7 +155,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         return weeks;
     }
 
-    createFirstWeek(year: number, month: number): ICalendarWeek {
+    private createFirstWeek(year: number, month: number): ICalendarWeek {
         const firstDayOfMonth = this.getFirstDayInMonth(year, month - 1);
         const calendarWeek: ICalendarWeek = {} as ICalendarWeek;
         calendarWeek.days = [];
@@ -168,7 +173,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         return calendarWeek;
     }
 
-    createLastWeek(year: number, month: number): ICalendarWeek {
+    private createLastWeek(year: number, month: number): ICalendarWeek {
         const lastDayOfMonth = this.getLastDayInMonth(year, month);
         const calendarWeek: ICalendarWeek = {} as ICalendarWeek;
         calendarWeek.days = [];
@@ -211,7 +216,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         }
     }
 
-    updateDays(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]): ICalendarYearMonth[] {
+    private updateYearMonths(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]) {
         yearMonths.forEach((month, index) => {
             month.weeks.forEach((week, weekindex) => {
                 week.days.forEach((calendarDay, dayindex) => {
@@ -243,7 +248,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
                 });
             })
         });
-        return yearMonths;
     }
 
     private setSelectedDay(calendarDay: ICalendarDay) {
@@ -258,7 +262,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
 
     // UI functions
     displayDatePicker() {
-        if (this.disabled) {
+        if (this.disabled || this.readonly) {
             return;
         }
         this.isDatePickerVisible = true;

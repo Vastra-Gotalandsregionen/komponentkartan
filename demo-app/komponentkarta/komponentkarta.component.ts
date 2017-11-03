@@ -39,7 +39,11 @@ export class KomponentkartaComponent implements AfterViewInit {
     lastMultipleSelection: string;
     lastSingleSelection: string;
     expanded: boolean;
+    isReadonlyAndDisabled: boolean;
+    isReadonlyAndDisabledMulti: boolean;
     constructor(private modalService: ModalService) {
+        this.isReadonlyAndDisabled = true;
+        this.isReadonlyAndDisabledMulti = true;
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems200 = this.getDemoItems(200);
         this.dropDownItems8 = this.getDemoItems(8);

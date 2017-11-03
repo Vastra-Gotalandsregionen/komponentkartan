@@ -42,7 +42,7 @@
 <ng-template #readonlyTemplate>
   <div class="dropdown__multiselect-readonlylist">
     <ul>
-      <li *ngFor="let selectedValue of selectedValues; let i=index">{{selectedValues[i].displayNameWhenSelected}}</li>
+      <li *ngFor="let selectedItem of selectedItems">{{selectedItem | dropdownItemToSelectedText}}</li>
     </ul>
   </div>
 </ng-template>

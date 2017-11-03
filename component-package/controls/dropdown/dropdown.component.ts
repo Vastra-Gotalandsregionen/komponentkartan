@@ -1,5 +1,5 @@
 import {
-    Component, Input, AfterViewInit, ElementRef, OnInit, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef
+    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef
 } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
@@ -18,15 +18,20 @@ import { ValidationComponent } from '../validation/validation.component';
     providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownComponent) }]
 })
 
-export class DropdownComponent extends DropdownBaseComponent implements OnInit, OnChanges {
+export class DropdownComponent extends DropdownBaseComponent implements OnChanges {
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
-
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
-    @Input() @HostBinding('class.disabled') disabled: boolean;
 
+    @Input() set selectedValue(value: string) {
+        if (this.items) {
+            const matchingItems = this.items.filter(x => x.id === value);
+            if (matchingItems.length > 0) {
+                this.handleInitiallySelectedItems(matchingItems);
+            }
+        }
+    }
 
     selectedItem: IDropdownItem;
-    preSelectedItem: IDropdownItem = {} as IDropdownItem;
 
     constructor(elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
@@ -40,11 +45,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
 
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
-    }
-    ngOnInit() {
-        if (this.items) {
-            this.preSelectedItem = this.items.filter(x => x.selected)[0];
-        }
     }
 
     doValidate(): IValidationResult {

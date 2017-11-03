@@ -38,8 +38,9 @@ describe('DropdownComponent', () => {
             done();
         });
     });
+
     describe('When component is initialized', () => {
-        var dropdownElement: DebugElement;
+        let dropdownElement: DebugElement;
         beforeEach(() => {
             dropdownElement = rootElement.query(By.css('.dropdown'));
             component.showAllItemText = 'Select all';
@@ -64,7 +65,7 @@ describe('DropdownComponent', () => {
 
                 describe('and filterTextBox is clicked', () => {
                     it('dropdown is not collapsed', () => {
-                        let filterTextbox = rootElement.query(By.css('.dropdown__filterTextbox'));
+                        const filterTextbox = rootElement.query(By.css('.dropdown__filterTextbox'));
                         filterTextbox.triggerEventHandler('mousedown', { target: filterTextbox.nativeElement } as MouseEvent);
                         fixture.detectChanges();
 
@@ -85,14 +86,12 @@ describe('DropdownComponent', () => {
         describe('and item list is less than 11 items', () => {
             it('scroll is not visible', () => {
                 component.items = [{ displayName: 'name' }] as IDropdownItem[];
-
-                let dropdownElement = rootElement.query(By.css('.dropdown'));
                 expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(false);
             });
         });
         describe('and item list is more than 11 items', () => {
             it('scroll is visible', () => {
-                let dropdownItems = [] as IDropdownItem[];
+                const dropdownItems = [] as IDropdownItem[];
                 for (let i = 0; i <= 11; i++) {
                     dropdownItems.push({ displayName: `Name${i}` } as IDropdownItem);
                 }
@@ -100,21 +99,18 @@ describe('DropdownComponent', () => {
                 component.items = dropdownItems;
                 component.ngOnChanges();
                 fixture.detectChanges();
-                let dropdownElement = rootElement.query(By.css('.dropdown'));
                 expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(true);
             });
         });
         describe('and item list is less than 20 items', () => {
             it('filter is not visible', () => {
                 component.items = [{ displayName: 'name' }] as IDropdownItem[];
-
-                let dropdownElement = rootElement.query(By.css('.dropdown'));
                 expect(dropdownElement.classes['dropdown--filter-visible']).toBe(false);
             });
         });
         describe('and item list is more than 20 items', () => {
             beforeEach(() => {
-                let dropdownItems = [] as IDropdownItem[];
+                const dropdownItems = [] as IDropdownItem[];
                 for (let i = 0; i <= 20; i++) {
                     dropdownItems.push({ displayName: `Name${i}` } as IDropdownItem);
                 }
@@ -123,34 +119,34 @@ describe('DropdownComponent', () => {
                 fixture.detectChanges();
             });
             it('filter is visible', () => {
-                let dropdownElement = rootElement.query(By.css('.dropdown'));
                 expect(dropdownElement.classes['dropdown--filter-visible']).toBe(true);
             });
             it('all items are visible', () => {
-                let listItems = rootElement.queryAll(By.css('li'));
-                expect(listItems.length).toBe(21 + 1); //+1 for select all element
+                const listItems = rootElement.queryAll(By.css('li'));
+                expect(listItems.length).toBe(21 + 1); // +1 for select all element
             });
+
             describe('and filter text is added', () => {
-                var filterBoxElement: DebugElement;
+                let filterBoxElement: DebugElement;
+
                 beforeEach(() => {
                     filterBoxElement = rootElement.query(By.css('.dropdown__filterTextbox'));
                 });
+
                 describe('and the text mathches 11 items', () => {
                     beforeEach(() => {
                         filterBoxElement.triggerEventHandler('valueChanged', 'Name1');
                         fixture.detectChanges();
                     });
                     it('11 items are displayed', () => {
-
-                        let listItems = rootElement.queryAll(By.css('li'));
-                        expect(listItems.length).toBe(11 + 1);//+1 for select all element
+                        const listItems = rootElement.queryAll(By.css('li'));
+                        expect(listItems.length).toBe(11 + 1); // +1 for select all element
                     });
                     it('scroll is visible', () => {
-
-                        let dropdownElement = rootElement.query(By.css('.dropdown'));
                         expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(true);
                     });
                 });
+
                 describe('and the text mathches 8 new items', () => {
                     beforeEach(() => {
                         for (let i = 0; i < 8; i++) {
@@ -161,11 +157,10 @@ describe('DropdownComponent', () => {
                     });
                     it('8 items are displayed', () => {
 
-                        let listItems = rootElement.queryAll(By.css('li'));
-                        expect(listItems.length).toBe(8 + 1);//+1 for select all element
+                        const listItems = rootElement.queryAll(By.css('li'));
+                        expect(listItems.length).toBe(8 + 1); // +1 for select all element
                     });
                     it('scroll is not visible', () => {
-                        let dropdownElement = rootElement.query(By.css('.dropdown'));
                         expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(false);
                     });
                 });
@@ -177,11 +172,10 @@ describe('DropdownComponent', () => {
                     });
                     it('no items are displayed', () => {
 
-                        let listItems = rootElement.queryAll(By.css('li'));
-                        expect(listItems.length).toBe(1);//+1 for select all element
+                        const listItems = rootElement.queryAll(By.css('li'));
+                        expect(listItems.length).toBe(1); // +1 for select all element
                     });
                     it('scroll is not visible', () => {
-                        let dropdownElement = rootElement.query(By.css('.dropdown'));
                         expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(false);
                     });
                 });
@@ -189,7 +183,7 @@ describe('DropdownComponent', () => {
         });
 
         describe('and an item is clicked', () => {
-            var itemToClick: DebugElement;
+            let itemToClick: DebugElement;
             beforeEach(() => {
                 spyOn(component.selectedItemChanged, 'emit');
                 component.items = [{ displayName: 'one' }, { displayName: 'two' }, { displayName: 'three' }] as IDropdownItem[];
@@ -197,7 +191,6 @@ describe('DropdownComponent', () => {
                 itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.textContent === 'one')[0];
                 itemToClick.triggerEventHandler('mousedown', null);
                 fixture.detectChanges();
-
             });
             it('the clicked item is selected', () => {
                 expect(itemToClick.parent.classes['dropdown-item--selected']).toBe(true);
@@ -206,12 +199,11 @@ describe('DropdownComponent', () => {
                 expect(itemToClick.parent.classes['dropdown-item--marked']).toBe(true);
             });
             it('a selectedItemChangedEvent is emitted', () => {
-
                 expect(component.selectedItemChanged.emit).toHaveBeenCalled();
             });
 
             describe('and an item is hovered', () => {
-                var itemToHover: DebugElement;
+                let itemToHover: DebugElement;
                 beforeEach(() => {
                     itemToHover = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.textContent === 'two')[0];
                     itemToHover.triggerEventHandler('mouseenter', null);
@@ -252,22 +244,21 @@ describe('DropdownComponent', () => {
         });
 
         describe('and showAll is clicked', () => {
-            var itemToClick: DebugElement;
+            let itemToClick: DebugElement;
             beforeEach(() => {
                 spyOn(component.selectedItemChanged, 'emit');
-                let dropdownItems = [] as IDropdownItem[];
+                const dropdownItems = [] as IDropdownItem[];
                 for (let i = 0; i <= 20; i++) {
                     dropdownItems.push({ displayName: `Name${i}` } as IDropdownItem);
                 }
                 component.items = dropdownItems;
-
                 component.showAllItemText = 'show all';
 
                 component.ngOnChanges();
                 fixture.detectChanges();
 
                 itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text === 'show all')[0];
-                console.log(itemToClick.parent.classes);
+                // console.log(itemToClick.parent.classes);
                 itemToClick.triggerEventHandler('mousedown', null);
                 fixture.detectChanges();
 
@@ -287,7 +278,7 @@ describe('DropdownComponent', () => {
 
 
         describe('and noItemSelectedLabel is set', () => {
-            var item: DebugElement;
+            let item: DebugElement;
             beforeEach(() => {
                 component.items = [{ displayName: 'one' }, { displayName: 'two' }, { displayName: 'three' }] as IDropdownItem[];
 
@@ -299,13 +290,12 @@ describe('DropdownComponent', () => {
             it('the showAllItem Is Initialized with displayName', () => {
                 expect(item.nativeElement.innerText).toBe('Choose Item')
             });
-
         });
     });
 
     describe('When component is initialized with one selected item', () => {
-        var dropdownElement: DebugElement;
-        var selectedItemSpan: DebugElement;
+        let dropdownElement: DebugElement;
+        let selectedItemSpan: DebugElement;
 
         beforeEach(() => {
             component.items = [{ displayName: 'one' }, { displayName: 'two', selected: true }, { displayName: 'three' }] as IDropdownItem[];
@@ -322,8 +312,8 @@ describe('DropdownComponent', () => {
     });
 
     describe('When component is initialized with two selected items', () => {
-        var dropdownElement: DebugElement;
-        var selectedItemSpan: DebugElement;
+        let dropdownElement: DebugElement;
+        let selectedItemSpan: DebugElement;
         beforeEach(() => {
             component.items = [{ displayName: 'one', selected: true }, { displayName: 'two', selected: true }, { displayName: 'three' }] as IDropdownItem[];
             dropdownElement = rootElement.query(By.css('.dropdown'));
@@ -341,5 +331,111 @@ describe('DropdownComponent', () => {
         });
     });
 
+    describe('When component is initialized with two simple values', () => {
+        beforeEach(() => {
+            component.values = ['one', 'two'];
+            component.ngOnChanges();
+            fixture.detectChanges();
+            spyOn(component.selectedItemChanged, 'emit');
+        });
+        it('the item list contains two items', () => {
+            expect(component.items).toEqual([{ displayName: 'one', id: 'one' }, { displayName: 'two', id: 'two' }]);
+        })
+        describe('and a selected value', () => {
+            beforeEach(() => {
+                component.selectedValue = 'one';
+            });
+            it('the matching drop down item is selected', () => {
+                expect(component.items[0].selected).toBe(true);
+            });
+            it('a selectedItemChanged is emitted', () => {
+                expect(component.selectedItemChanged.emit).toHaveBeenCalledWith({ displayName: 'one', id: 'one', selected: true, marked: true });
+            });
+        });
+    });
 
+    describe('When initialized with no selected item and readonly-mode', () => {
+        beforeEach(() => {
+            component.readonly = true;
+            fixture.detectChanges();
+        });
+
+        it('has div class .readonly', () => {
+            expect(fixture.debugElement.classes['readonly']).toBe(true);
+        });
+
+        it('should have empty selected items text', () => {
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const content = selectedItemsSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('');
+        });
+    });
+
+    describe('When initialized with one selected item and readonly-mode', () => {
+        beforeEach(() => {
+            component.readonly = true;
+            component.values = ['one', 'two'];
+            component.selectedValue = 'one';
+            fixture.detectChanges();
+        });
+
+        it('has div class .readonly', () => {
+            expect(fixture.debugElement.classes['readonly']).toBe(true);
+        });
+
+        it('should display selected item text', () => {
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const content = selectedItemsSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('one');
+        });
+    });
+
+    describe('When initialized with no selected items and disabled-mode', () => {
+        beforeEach(() => {
+            component.disabled = true;
+            fixture.detectChanges();
+        });
+
+        it('has div class .disabled', () => {
+            expect(fixture.debugElement.classes['disabled']).toBe(true);
+        });
+
+        it('should have empty selected items text', () => {
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const content = selectedItemsSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('');
+        });
+    });
+
+    describe('When initialized with one selected item and disabled-mode', () => {
+        beforeEach(() => {
+            component.disabled = true;
+            component.values = ['one', 'two'];
+            component.selectedValue = 'two';
+            fixture.detectChanges();
+        });
+
+        it('has div class .disabled', () => {
+            expect(fixture.debugElement.classes['disabled']).toBe(true);
+        });
+
+        it('should display selected item text', () => {
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const content = selectedItemsSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('two');
+        });
+    });
+
+    describe('When initialized with no selected items and disabled-mode and readonly-mode set to false', () => {
+        beforeEach(() => {
+            component.disabled = false;
+            component.readonly = false;
+            fixture.detectChanges();
+        });
+
+        it('does not have div class .readonly or .disabled', () => {
+            expect(fixture.debugElement.classes['disabled']).toBe(false);
+            expect(fixture.debugElement.classes['readonly']).toBe(false);
+        });
+    });
 });

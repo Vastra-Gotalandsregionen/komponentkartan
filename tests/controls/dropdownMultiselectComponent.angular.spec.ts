@@ -56,8 +56,6 @@ describe("[DropdownMultiSelectComponent]", () => {
             fixture = TestBed.createComponent(DropdownMultiselectComponent);
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
-            fixture.detectChanges();
-
             component.showAllItemText = "Select all";
             component.items = [{ displayName: "Option 1" } as IDropdownItem,
             { displayName: "Option 2" } as IDropdownItem,
@@ -209,8 +207,6 @@ describe("[DropdownMultiSelectComponent]", () => {
                 expect(component.dropdownLabel).toBe("2 valda");
             });
         });
-
-
     });
 
     describe("when one item is not selected", () => {
@@ -367,6 +363,96 @@ describe("[DropdownMultiSelectComponent]", () => {
         it("the filter textbox is not visible", () => {
             let dropdownElement = rootElement.query(By.css(".dropdown"));
             expect(dropdownElement.classes["dropdown--filter-visible"]).toBe(false);
+        });
+    });
+
+    describe('When component is initialized with two simple values', () => {
+        beforeEach(() => {
+            component.values = ['one', 'two'];
+            fixture.detectChanges();
+            spyOn(component.selectionChanged, 'emit');
+        });
+        it('the item list contains two items', () => {
+            expect(component.items).toEqual([{ displayName: 'one', id: 'one' }, { displayName: 'two', id: 'two' }]);
+        })
+        describe('and a selected value', () => {
+            beforeEach(() => {
+                component.selectedValues = ['one'];
+            });
+            it('the matching drop down item is selected', () => {
+                expect(component.items[0].selected).toBe(true);
+            });
+            it('a selectedItemChanged is emitted', () => {
+                expect(component.selectionChanged.emit).toHaveBeenCalledWith([{ displayName: 'one', id: 'one', selected: true }]);
+            });
+        });
+        describe('and both are selected', () => {
+            beforeEach(() => {
+                component.selectedValues = ['one', 'two'];
+            });
+            it('the matching drop down items are selected', () => {
+                expect(component.items[0].selected).toBe(true);
+                expect(component.items[1].selected).toBe(true);
+            });
+
+            it('a selectedItemChanged is emitted', () => {
+                expect(component.selectionChanged.emit).toHaveBeenCalledWith([{ displayName: 'one', id: 'one', selected: true }, { displayName: 'two', id: 'two', selected: true }]);
+            });
+            it('select all is selected', () => {
+                expect(component.selectAllItem.selected).toBeTruthy();
+            });
+        });
+    });
+
+    describe('When initialized with no selected items and disabled-mode', () => {
+        beforeEach(() => {
+            component.disabled = true;
+            fixture.detectChanges();
+        });
+
+        it('has div class .disabled', () => {
+            expect(fixture.debugElement.classes['disabled']).toBe(true);
+        });
+
+        it('should display "Välj"', () => {
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const content = selectedItemsSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('Välj');
+        });
+    });
+
+    describe('When initialized with two selected items and disabled-mode', () => {
+        beforeEach(() => {
+            component.disabled = true;
+            component.values = ['one', 'two', 'three'];
+            component.selectedValues = ['one', 'two'];
+            fixture.detectChanges();
+        });
+
+        it('has div class .disabled', () => {
+            expect(fixture.debugElement.classes['disabled']).toBe(true);
+        });
+
+        it('should display a text with the number of items selected', () => {
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const content = selectedItemsSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('2 valda');
+        });
+    });
+
+    describe('When initialized with two selected items and readonly-mode', () => {
+        beforeEach(() => {
+            component.readonly = true;
+            component.values = ['one', 'two', 'three'];
+            component.selectedValues = ['one', 'two'];
+            fixture.detectChanges();
+        });
+
+        it('should display an ul with selected items', () => {
+            const selectedItemslist = fixture.debugElement.queryAll(By.css('.dropdown__multiselect-readonlylist ul li'));     
+            expect(selectedItemslist.length).toBe(2);
+            expect(selectedItemslist[0].nativeElement.textContent).toBe('one');
+            expect(selectedItemslist[1].nativeElement.textContent).toBe('two');
         });
     });
 });

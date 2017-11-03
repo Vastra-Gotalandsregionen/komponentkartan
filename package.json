@@ -1,16 +1,16 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "0.2.1-rc6",
+  "version": "0.2.1-rc8",
   "author": "Västra Götalandsregionen",
   "scripts": {
     "start": "concurrent \"npm run _watch-ts\" \"npm run _local-webserver\" \"npm run _watch-css\" \"npm run _watch-demo-app-css\"",
     "_compile-ts": "tsc -p tsconfig.demo-app.json",
     "_watch-ts": "tsc -p tsconfig.demo-app.json -w",
     "_local-webserver": "lite-server",
-    "_compile-css": "node-sass --include-path content content/komponentkartan.scss content/komponentkartan.css",
-    "_compile-demo-app-css": "node-sass --include-path content demo-app/content/demo-app.scss demo-app/content/demo-app.css",
-    "_watch-css": "nodemon -e scss --watch content/  --exec \"npm run _compile-css\"",
-    "_watch-demo-app-css": "nodemon -e scss --watch demo-app/content/ --watch content/  --exec \"npm run _compile-demo-app-css\"",
+    "_compile-css": "node-sass --include-path Content Content/komponentkartan.scss Content/komponentkartan.css",
+    "_compile-demo-app-css": "node-sass --include-path Content demo-app/Content/demo-app.scss demo-app/Content/demo-app.css",
+    "_watch-css": "nodemon -e scss --watch Content/  --exec \"npm run _compile-css\"",
+    "_watch-demo-app-css": "nodemon -e scss --watch demo-app/Content/ --watch Content/  --exec \"npm run _compile-demo-app-css\"",
     "_clean_build_output": "rimraf ./BuildOutput",
     "test-ci": "karma start ./karma.conf.server.js",
     "publish-demo": "npm publish --tag demo"
