@@ -187,6 +187,44 @@
   }
 }
 
+.list__column-header {
+  margin-top: $margin--slim;
+  display: inline-block;
+  cursor: pointer;
+  div {
+    display: inline-block;
+  }
+  height:30px;
+}
+
+.list__column-header--sorted-asc {
+  h2 {
+    &:after {
+      @extend .bg-image-icon-sortarrow;
+      content: "";
+      display: inline-block;
+      background-size: 100% !important;
+      vertical-align: middle;
+      margin-left: $margin--slim;
+      transform: rotate(0deg);
+    }
+  }
+}
+
+.list__column-header--sorted-desc {
+  h2 {
+    &:after {
+      @extend .bg-image-icon-sortarrow;
+      content: "";
+      display: inline-block;
+      background-size: 100% !important;
+      vertical-align: middle;
+      margin-left: $margin--slim;
+      transform: rotate(180deg);
+    }
+  }
+}
+
 @media screen and (min-width: $desktop-width--medium) {
   .list {
     .page-block & {

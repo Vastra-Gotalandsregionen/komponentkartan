@@ -1,127 +1,165 @@
 .row-layout {
-    display: flex;
-    flex-direction: row;
-    >*:first-child {
-        margin-left: 0px;
-    }
-    >* {
-        margin-left: $margin--regular;
-    }
+  display: flex;
+  flex-direction: row;
+  >*:first-child {
+    margin-left: 0px;
+  }
+  >* {
+    margin-left: $margin--regular;
+  }
 }
 
 .row-layout--equal-height {
-    >* {
-        display: flex;
-    }
+  >* {
+    display: flex;
+  }
 }
 
 .column-layout {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  >*:first-child {
+    margin-top: 0px;
+  }
+  >* {
+    margin-top: $margin--slim;
+  }
+  &.column-layout--tight {
     >*:first-child {
-        margin-top: 0px;
+      margin-top: 0px;
     }
     >* {
-        margin-top: $margin--slim;
+      margin-top: $margin--slimmer;
     }
-    &.column-layout--tight {
-        >*:first-child {
-            margin-top: 0px;
-        }
-        >* {
-            margin-top: $margin--slimmer;
-        }
-    }
+  }
 }
 
 .noselect {
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    -webkit-user-select: none;
-    /* Safari */
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    -moz-user-select: none;
-    /* Firefox */
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    user-select: none;
-    /* Non-prefixed version, currently
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
 
 .flex-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .flex-right {
-    margin-left: auto !important;
+  margin-left: auto !important;
 }
 
-@mixin flex-column-mixin($width) {
-    display: flex;
-    flex-direction: column;
-    width: $width;
+.flex-column--xxs {
+  width: 40px;
 }
 
-.flex-column-5 {
-    width: 90px; //@include flex-column-mixin(5em);
+.flex-column--xs {
+  width: 60px;
 }
 
-.flex-column-13 {
-    width: 200px; //@include flex-column-mixin(13em);
+.flex-column--s {
+  width: 90px;
 }
 
-.flex-column-15 {
-    width: 230px; //@include flex-column-mixin(15em);
+.flex-column--m {
+  width: 200px;
+}
+
+.flex-column--l {
+  width: 230px;
+}
+
+.flex-column--xl {
+  width: 280px;
+}
+
+.flex-column--xxl {
+  width: 350px;
+}
+
+.flex-column--xxxl {
+  width: 400px;
 }
 
 .flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
 }
 
 .flex-pull-right {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .bordered {
-    border: 1px solid $border-color;
+  border: 1px solid $border-color;
 }
 
 .control-with-heading {
-    >* {
-        justify-content: flex-end;
-    }
-    >*:first-child {
-        padding-bottom: 10px;
-    }
-    display: flex;
-    flex-direction: column;
+  >* {
     justify-content: flex-end;
+  }
+  >*:first-child {
+    padding-bottom: 10px;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .control-without-heading {
-    align-self: flex-end;
+  align-self: flex-end;
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-    .row-layout {
-        >* {
-            margin-left: $margin--fat;
-        }
+  .row-layout {
+    >* {
+      margin-left: $margin--fat;
     }
-    .column-layout {
-        >* {
-            margin-top: $margin--regular;
-        }
-        &.column-layout--tight {
-            >* {
-                margin-top: $margin--slim;
-            }
-        }
+  }
+  .column-layout {
+    >* {
+      margin-top: $margin--regular;
     }
+    &.column-layout--tight {
+      >* {
+        margin-top: $margin--slim;
+      }
+    }
+  }
+  .flex-column--xxs {
+    width: 60px;
+  }
+  .flex-column--xs {
+    width: 80px;
+  }
+  .flex-column--s {
+    width: 110px;
+  }
+  .flex-column--m {
+    width: 220px;
+  }
+  .flex-column--l {
+    width: 250px;
+  }
+  .flex-column--xl {
+    width: 300px;
+  }
+  .flex-column--xxl {
+    width: 370px;
+  }
+  .flex-column--xxxl {
+    width: 420px;
+  }
 }
