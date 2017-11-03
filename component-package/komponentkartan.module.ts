@@ -62,7 +62,10 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.ListItemComponent,
         control.PageComponent,
         control.PageBodyComponent,
-        control.PageBlockComponent
+        control.PageBlockComponent,
+        control.ListColumnHeaderComponent,
+        control.ListColumnComponent,
+        control.ListHeaderComponent
     ],
     exports: [
         SafePipe,
@@ -97,7 +100,10 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.ListItemComponent,
         control.PageComponent,
         control.PageBodyComponent,
-        control.PageBlockComponent
+        control.PageBlockComponent,
+        control.ListColumnHeaderComponent,
+        control.ListColumnComponent,
+        control.ListHeaderComponent
     ],
 
     providers: [ModalService, control.ActionPanelJqeuryHelper, control.ListItemJqeuryHelper, BrowserDetector]
