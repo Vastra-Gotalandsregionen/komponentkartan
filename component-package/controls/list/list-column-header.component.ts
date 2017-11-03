@@ -29,16 +29,16 @@ export class ListColumnHeaderComponent {
                 return 10;
             }
             case ColumnWidth.l: {
-                return 15;
-            }
-            case ColumnWidth.xl: {
-                return 17;
-            }
-            case ColumnWidth.xxl: {
                 return 20;
             }
+            case ColumnWidth.xl: {
+                return 35;
+            }
+            case ColumnWidth.xxl: {
+                return 50;
+            }
             case ColumnWidth.xxxl: {
-                return 25;
+                return 70;
             }
             default: {
                 return 10;
