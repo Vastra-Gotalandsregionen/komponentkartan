@@ -15,7 +15,7 @@ describe('[ListHeaderComponent]', () => {
         columnHeader3.sortKey = 'column3.key';
         listHeaderComponent = new ListHeaderComponent();
         listHeaderComponent.headerColumns = new QueryList<ListColumnHeaderComponent>();
-        spyOn(listHeaderComponent.headerColumns, 'forEach').and.callFake((callback) => [columnHeader1, columnHeader2, columnHeader3].forEach(callback));
+        spyOn(listHeaderComponent.headerColumns, 'forEach').and.callFake((callback: any) => [columnHeader1, columnHeader2, columnHeader3].forEach(callback));
         spyOn(listHeaderComponent.headerColumns, 'toArray').and.returnValue([columnHeader1, columnHeader2, columnHeader3]);
         spyOn(listHeaderComponent.sortChanged, 'emit');
 
