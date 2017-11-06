@@ -18,12 +18,14 @@
         </ul>
       </perfect-scrollbar>
       <div class="dropdown__dimmer dropdown__dimmer--bottom"></div>
-
-
     </div>
   </div>
   <div class="validation__status" title="{{validationErrorMessage}}">
     <div class="validation__status__icon"></div>
     <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
   </div>
+</div>
+<div class="dropdown--readonly">
+  <span *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{selectedItem.displayName}}</span>
+  <span *ngIf="!selectedItem"></span>
 </div>
