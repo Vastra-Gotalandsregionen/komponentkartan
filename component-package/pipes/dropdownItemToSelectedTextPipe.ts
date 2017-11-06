@@ -6,7 +6,7 @@ import { IDropdownItem } from '../models/dropdownItem.model';
 })
 
 export class DropdownItemToSelectedTextPipe implements PipeTransform {
-    transform(item: IDropdownItem, isReadonly?: boolean): string {
-        return isReadonly ? item.displayName : item.displayNameWhenSelected ? item.displayNameWhenSelected : item.displayName ? item.displayName : '';
+    transform(item: IDropdownItem): string {
+        return item.displayNameWhenSelected ? item.displayNameWhenSelected : item.displayName ? item.displayName : '';
     }
 }

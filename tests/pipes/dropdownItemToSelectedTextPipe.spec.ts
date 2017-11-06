@@ -3,23 +3,6 @@ import { IDropdownItem } from '../../component-package/models/dropdownItem.model
 
 describe('DropdownItemToSelectedTextPipe', () => {
     const dropdownPipe = new DropdownItemToSelectedTextPipe();
-    describe('When readonly is true', () => {
-        it('display name is returned', () => {
-            const result = dropdownPipe.transform(
-                { displayName: 'DisplayName', displayNameWhenSelected: 'DisplayNameWhenSelected' } as IDropdownItem
-                , true);
-            expect(result).toBe('DisplayName');
-        });
-    });
-    describe('When readonly is false', () => {
-        it('display name is returned', () => {
-            const result = dropdownPipe.transform(
-                { displayName: 'DisplayName', displayNameWhenSelected: 'DisplayNameWhenSelected' } as IDropdownItem
-                , false);
-
-            expect(result).toBe('DisplayNameWhenSelected');
-        });
-    });
     describe('When displayNameWhenSelected is undefined', () => {
         it('display name is returned', () => {
             const result = dropdownPipe.transform(
