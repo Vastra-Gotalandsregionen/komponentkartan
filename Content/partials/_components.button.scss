@@ -10,7 +10,7 @@
   }
 }
 
-.button {
+.button__base {
   @extend .background-color--primary;
   height: 30px;
   position: relative;
@@ -85,9 +85,10 @@
     border-width: 1px;
     border-style: solid;
   }
-  &.lock-button {
-    min-width: 0;
-  }
+}
+
+.button {
+  @extend .button__base;
 }
 
 .button--enabling {

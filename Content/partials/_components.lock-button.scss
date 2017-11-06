@@ -1,17 +1,18 @@
 ﻿.lock-button {
-    @extend .button;
-    width: 34px;
+  @extend .button__base;
+  width: 34px;
+  min-width: 0;
 }
 
 .lock-button__top {
-    @extend .bg-image-lock-button__top;
-    transition: margin-right 0.2s linear;
-    margin-right: 0px;
-    .lock-button--unlocked & {
-        margin-right: 16px;
-    }
+  @extend .bg-image-lock-button__top;
+  transition: margin-right 0.2s linear;
+  margin-right: 0px;
+  .lock-button--unlocked & {
+    margin-right: 16px;
+  }
 }
 
 .lock-button__bottom {
-    @extend .bg-image-lock-button__bottom;
+  @extend .bg-image-lock-button__bottom;
 }
