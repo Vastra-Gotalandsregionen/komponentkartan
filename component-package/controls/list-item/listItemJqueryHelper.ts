@@ -36,6 +36,9 @@ export class ListItemJqeuryHelper {
         if (clickedElement.parent('.list-item__notification').length > 0) {
             return true;
         }
+        if (clickedElement.parent('.flex-column').length > 0) {
+            return true;
+        }
         return false;
     }
 }
