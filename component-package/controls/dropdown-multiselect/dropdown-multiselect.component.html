@@ -1,4 +1,4 @@
-<div *ngIf="!readonly;  else readonlyTemplate" class="validation">
+<div class="validation">
   <div class="dropdown dropdown--multiselect" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
     (mousedown)="onDropdownMouseDown($event)" (focusout)="onLeave()" (focusin)="onEnter()" tabindex="{{disabled ? -1 : 0}}">
     <span tabindex="0">{{dropdownLabel}}</span>
@@ -39,10 +39,9 @@
     <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
   </div>
 </div>
-<ng-template #readonlyTemplate>
-  <div class="dropdown__multiselect-readonlylist">
-    <ul>
-      <li *ngFor="let selectedItem of selectedItems">{{selectedItem | dropdownItemToSelectedText:readonly}}</li>
-    </ul>
-  </div>
-</ng-template>
+
+<div class="dropdown--readonly dropdown__multiselect-readonlylist">
+  <ul>
+    <li *ngFor="let selectedItem of selectedItems">{{selectedItem | dropdownItemToSelectedText:readonly}}</li>
+  </ul>
+</div>

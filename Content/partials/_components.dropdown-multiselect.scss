@@ -14,9 +14,9 @@ $dropdown-multi-height--medium-with-filter: 380px;
 }
 
 .dropdown__multiselect-readonlylist {
-  padding-left: 15px;
-  li {
+  ul {
     list-style-type: disc;
+    list-style-position: inside;
   }
 }
 
