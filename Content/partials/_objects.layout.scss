@@ -122,6 +122,14 @@
   align-self: flex-end;
 }
 
+.control-with-label {
+  label {
+    font-size: $h2-font-size--small;
+    margin-bottom: $margin--xs-slim;
+    display: inline-block;
+  }
+}
+
 @media screen and (min-width: $desktop-width--medium) {
   .row-layout {
     >* {
@@ -161,5 +169,10 @@
   }
   .flex-column--xxxl {
     width: 420px;
+  }
+  .control-with-label {
+    label {
+      font-size: $h2-font-size--medium;
+    }
   }
 }
