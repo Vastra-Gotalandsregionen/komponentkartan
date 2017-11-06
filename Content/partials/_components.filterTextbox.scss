@@ -26,3 +26,9 @@
     float: right;
   }
 }
+
+@media screen and (min-width: $desktop-width--medium) {
+  .filter-textbox {
+    width: $input-width--medium;
+  }
+}
