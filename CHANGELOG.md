@@ -3,16 +3,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-## 0.2.1 (2017-10-30)
+## 0.3.0 (2017-11-07)
 
+### Description of release
+This release includes improved structure for both pages and lists. The aim is to make it simple to create a new page and add content.
+*Note*: Introducing more structure means that some flexibility is lost. This is to support out known UX-designs in a simpler way.
 
 ### List component (former expandable-container-list)
 - Expandable-container-list is replaced by list
 - added property flexibleHeader. This is a replacement for the former class "list--inline", that will be set by the property instead
-- removed Back-to-top component from the list
+- removed Back-to-top component from the list, see section below.
+- Addded new tags for more structure on the list. Vgr-list-header, vgr-list-column, vgr-list-column-header are added.
+- Sorting added
+- Automatic width adjustment of list columns based on header width
 
 ### Back-to-top
-- No longer exists in the list component
+- No longer exists in the list component, add it on your app.component.html to enable it
+
+### Page structure
+- A page is now constructed by using vgr-page, vgr-page-header, vgr-page-body and vgr-page-block
+- An action-panel can be added to the page by adding a vgr-action-panel on the page. When expanded, it drops down from the page header.
+
+### DropdownComponent, DropdownMultiSelectComponent
+- Readonly mode is changed to allow longer text to be displayed
+- Animation added when transitioning between readonly true/false
+
+### DatepickerComponent, MonthpickerComponent
+- Animation added when transitioning between readonly true/false
 
 
 ## 0.2.0 (2017-10-24)
