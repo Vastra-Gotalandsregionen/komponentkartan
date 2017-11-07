@@ -47,7 +47,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             this.handleInitiallySelectedItems(selectedItems);
         }
         setTimeout(() => {
-            if (this.readonly === false && this.disabled === false) {
+            if (!this.readonly && !this.disabled) {
                 this.scrollbarComponent.update();
                 this.listenToScrollbarEvents();
             }
@@ -103,7 +103,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             scrollbar.prev('.dropdown__dimmer--top').show();
         }
     }
-
 
     filterItems(filterValue: string) {
         this.filter = filterValue;
