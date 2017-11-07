@@ -20,7 +20,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     @Input() required: boolean;
     @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() @HostBinding('class.disabled') disabled: boolean;
-    @HostBinding('class.dropdown-new') dropdownClass = true;
+    @HostBinding('class.dropdown') dropdownClass = true;
 
     showAllItem: IDropdownItem;
 

@@ -4,7 +4,7 @@ $dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 160px;
 $dropdown-width--small: 100px;
 $filter-area-height: 60px;
-.dropdown-new {
+.dropdown {
   .dropdown--readonly {
     display: block;
     opacity: 0;
@@ -37,7 +37,7 @@ $filter-area-height: 60px;
   }
 }
 
-.dropdown {
+.dropdown--edit {
   @extend .background-color--primary;
   position: relative;
   display: inline-block;
@@ -291,7 +291,7 @@ $filter-area-height: 60px;
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .dropdown {
+  .dropdown--edit {
     width: $dropdown-width--medium + $margin--slim;
     span {
       width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
