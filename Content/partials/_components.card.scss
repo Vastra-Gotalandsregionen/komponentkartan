@@ -18,7 +18,7 @@
 .card__section-container {
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
-  flex: 1;
+  flex: 1 1 auto;
   .card-section--expanded {
     .card-section__content {
       border-bottom: 1px solid $border-color;
@@ -49,7 +49,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border-bottom: 1px solid $border-color;
   cursor: pointer;
   .card-section:first-child() & {
@@ -59,10 +59,12 @@
 
 .card-section__header__title {
   display: inline-block;
+  flex: 0 0 auto;
 }
 
 .card-section__header__subtitle {
   margin-left: $margin--regular;
+  flex: 0 0 auto;
 }
 
 .card-section__header__icon {
