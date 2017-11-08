@@ -55,7 +55,7 @@ describe('ButtonComponent', () => {
     describe('When component is initialized', () => {
         let textButtonElement: DebugElement;
         beforeEach(() => {
-            textButtonElement = rootElement.query(By.css('.button'));
+            textButtonElement = rootElement.query(By.css('.text-button'));
             spyOn(component.click, 'emit');
         });
         it('button is enabled', () => {
