@@ -10,17 +10,19 @@
   }
 }
 
+.button {
+  height: $component-height;
+  display: inline-block;
+}
+
 .button__base {
   @extend .background-color--primary;
-  height: 30px;
+  height: $component-height;
+  line-height: $component-height;
   position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
   border-radius: 1px;
   color: $text-color--light;
   text-align: center;
-  justify-content: center;
   cursor: pointer;
   min-width: 87px;
   padding-left: 18px;
@@ -87,7 +89,7 @@
   }
 }
 
-.button {
+.text-button {
   @extend .button__base;
 }
 
@@ -97,7 +99,7 @@
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .button {
+  .text-button {
     padding-left: 22px;
     padding-right: 22px;
     &.button--secondary {

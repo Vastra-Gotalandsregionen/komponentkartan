@@ -32,6 +32,12 @@
       margin-top: $margin--slimmer;
     }
   }
+  &.column-layout--pull-left {
+    align-items: flex-start;
+  }
+  &.column-layout--pull-right {
+    align-items: flex-end;
+  }
 }
 
 .noselect {

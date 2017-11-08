@@ -1,4 +1,4 @@
-﻿import { Component, Input, EventEmitter, Output, OnChanges } from '@angular/core'
+﻿import { Component, Input, EventEmitter, Output, OnChanges, HostBinding } from '@angular/core'
 
 @Component({
     selector: 'vgr-button',
@@ -6,6 +6,7 @@
     templateUrl: './button.component.html'
 })
 export class ButtonComponent implements OnChanges {
+    @HostBinding('class.button') buttonClass = true;
     @Input() disabled: boolean;
     @Input() secondary: boolean;
     lastDisabledStatus: boolean;

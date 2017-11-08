@@ -1,7 +1,7 @@
 ﻿<vgr-page>
   <vgr-page-header [title]="'KomponentKarTa'">
 
-    <div class="column-layout">
+    <div class="column-layout column-layout--pull-left">
       <vgr-radio-group [options]="themeOptions" (selectedChanged)="selectedThemeChanged($event)"></vgr-radio-group>
       <vgr-button (click)="expanded = !expanded">Öppna panel</vgr-button>
     </div>
