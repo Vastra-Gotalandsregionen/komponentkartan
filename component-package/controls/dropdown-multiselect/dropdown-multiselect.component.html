@@ -1,5 +1,5 @@
 <div class="validation">
-  <div class="dropdown dropdown--multiselect" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
+  <div class="dropdown--edit dropdown--multiselect" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
     (mousedown)="onDropdownMouseDown($event)" (focusout)="onLeave()" (focusin)="onEnter()" tabindex="{{disabled ? -1 : 0}}">
     <span tabindex="0">{{dropdownLabel}}</span>
     <div class="dropdown__menu">

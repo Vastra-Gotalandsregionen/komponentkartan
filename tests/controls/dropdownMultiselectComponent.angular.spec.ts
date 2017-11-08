@@ -68,7 +68,7 @@ describe("[DropdownMultiSelectComponent]", () => {
     describe("When component is initialized", () => {
         var dropdownElement: DebugElement;
         beforeEach(() => {
-            dropdownElement = rootElement.query(By.css(".dropdown"));
+            dropdownElement = rootElement.query(By.css(".dropdown--edit"));
 
         });
         it("dropdown is not expanded", () => {
@@ -142,7 +142,7 @@ describe("[DropdownMultiSelectComponent]", () => {
     describe("when dropdown is clicked", () => {
         var dropdownElement: DebugElement;
         beforeEach(() => {
-            dropdownElement = rootElement.query(By.css(".dropdown"));
+            dropdownElement = rootElement.query(By.css(".dropdown--edit"));
             dropdownElement.triggerEventHandler("mousedown", { target: dropdownElement.nativeElement } as MouseEvent);
             fixture.detectChanges();
         });
@@ -248,7 +248,7 @@ describe("[DropdownMultiSelectComponent]", () => {
     describe("when dropdown is open", () => {
         var dropdownElement: DebugElement;
         beforeEach(() => {
-            dropdownElement = rootElement.query(By.css(".dropdown"));
+            dropdownElement = rootElement.query(By.css(".dropdown--edit"));
             component.expanded = true;
             fixture.detectChanges();
         });
@@ -301,7 +301,7 @@ describe("[DropdownMultiSelectComponent]", () => {
             fixture.detectChanges();
         });
         it("the filter textbox is visible", () => {
-            let dropdownElement = rootElement.query(By.css(".dropdown"));
+            let dropdownElement = rootElement.query(By.css(".dropdown--edit"));
             expect(dropdownElement.classes["dropdown--filter-visible"]).toBe(true);
         });
 
@@ -361,7 +361,7 @@ describe("[DropdownMultiSelectComponent]", () => {
             fixture.detectChanges();
         });
         it("the filter textbox is not visible", () => {
-            let dropdownElement = rootElement.query(By.css(".dropdown"));
+            let dropdownElement = rootElement.query(By.css(".dropdown--edit"));
             expect(dropdownElement.classes["dropdown--filter-visible"]).toBe(false);
         });
     });
@@ -415,7 +415,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         });
 
         it('should display "Välj"', () => {
-            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown--edit > span'));
             const content = selectedItemsSpan.nativeElement.textContent;
             expect(content.trim()).toBe('Välj');
         });
@@ -434,7 +434,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         });
 
         it('should display a text with the number of items selected', () => {
-            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown--edit > span'));
             const content = selectedItemsSpan.nativeElement.textContent;
             expect(content.trim()).toBe('2 valda');
         });
@@ -449,7 +449,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         });
 
         it('should display an ul with selected items', () => {
-            const selectedItemslist = fixture.debugElement.queryAll(By.css('.dropdown__multiselect-readonlylist ul li'));     
+            const selectedItemslist = fixture.debugElement.queryAll(By.css('.dropdown__multiselect-readonlylist ul li'));
             expect(selectedItemslist.length).toBe(2);
             expect(selectedItemslist[0].nativeElement.textContent).toBe('one');
             expect(selectedItemslist[1].nativeElement.textContent).toBe('two');

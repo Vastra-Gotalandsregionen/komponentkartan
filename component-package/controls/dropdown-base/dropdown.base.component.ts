@@ -20,7 +20,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     @Input() required: boolean;
     @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() @HostBinding('class.disabled') disabled: boolean;
-    @HostBinding('class.dropdown-new') dropdownClass = true;
+    @HostBinding('class.dropdown') dropdownClass = true;
 
     showAllItem: IDropdownItem;
 
@@ -47,7 +47,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             this.handleInitiallySelectedItems(selectedItems);
         }
         setTimeout(() => {
-            if (this.readonly === false && this.disabled === false) {
+            if (!this.readonly && !this.disabled) {
                 this.scrollbarComponent.update();
                 this.listenToScrollbarEvents();
             }
@@ -103,7 +103,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             scrollbar.prev('.dropdown__dimmer--top').show();
         }
     }
-
 
     filterItems(filterValue: string) {
         this.filter = filterValue;
