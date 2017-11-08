@@ -295,7 +295,8 @@ vgr-sidebar-menu {
   font-style: normal;
   font-stretch: normal;
   letter-spacing: normal;
-  height: $menu-header-height--small;
+  min-height: $menu-header-height--small;
+  max-height: $menu-header-height--small;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -307,7 +308,6 @@ vgr-sidebar-menu {
 
 .menu__header__title {
   padding-left: $margin--slim;
-  border-top: 1px solid rgb(207, 207, 207);
   width: 100%;
   height: 100%;
   display: flex;
@@ -428,11 +428,11 @@ vgr-sidebar-menu {
     padding-left: 0px;
     border-left: $menu-border-width--medium solid $primary-color--default;
     font-size: $menu-header-font-size--medium;
-    height: $menu-header-height--medium;
+    min-height: $menu-header-height--medium;
+    max-height: $menu-header-height--medium;
   }
   .menu__header__title {
     padding-left: $menu-border-width--medium;
-    border-top: 1px solid rgb(207, 207, 207);
     width: 100%;
     margin-top: 0px;
     height: 100%;
