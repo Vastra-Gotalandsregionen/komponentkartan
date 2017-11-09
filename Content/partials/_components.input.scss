@@ -98,7 +98,7 @@ input.input-container__textbox {
     max-width: calc(#{$input-small-width--small} + #{$margin--fat});
   }
   .validation-error--active & {
-    max-height: unset;
+    max-height: none;
     padding: $margin--slim;
     margin-left: -$margin--slim;
     .title-value-layout & {
@@ -111,7 +111,7 @@ input.input-container__textbox {
     top 0.3s linear;
   }
   .validation-error--editing & {
-    max-height: unset;
+    max-height: none;
     .title-value-layout & {
       top: -10px;
     }
