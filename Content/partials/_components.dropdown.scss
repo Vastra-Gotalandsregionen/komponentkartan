@@ -61,7 +61,8 @@ $filter-area-height: 60px;
     background-color: white;
     width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
     display: inline-block;
-    height: 100%;
+    height: $component-height;
+    position: absolute;
     cursor: pointer;
     border-top: $border--single solid $control-border-color--default;
     border-left: $border--single solid $control-border-color--default;
@@ -329,6 +330,26 @@ $filter-area-height: 60px;
   .dropdown__filterTextbox {
     .filter-textbox {
       width: $input-width--small;
+    }
+  }
+}
+
+
+/*******************************************************************************
+* IE11 Specific styles
+* 1. Disable chevron animation, since it is too slow in IE11
+*******************************************************************************/
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+  .dropdown--edit {
+    &:after {
+      transition: none;
+    }
+    &.dropdown--open {
+      &:after {
+        transition: none;
+      }
     }
   }
 }

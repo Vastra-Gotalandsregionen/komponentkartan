@@ -18,7 +18,6 @@
 .card__section-container {
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
-  flex: 1 1 auto;
   .card-section--expanded {
     .card-section__content {
       border-bottom: 1px solid $border-color;
@@ -35,11 +34,13 @@
   @extend .card__section-container;
   border-right: 1px solid $border-color;
   padding-right: $margin--slim;
+  flex: 1 1 auto;
 }
 
 .card__right-container {
   @extend .card__section-container;
   padding-left: $margin--slim;
+  flex: 0 0 600px;
   min-width: 600px;
   width: 600px;
 }
@@ -60,11 +61,13 @@
 .card-section__header__title {
   display: inline-block;
   flex: 0 0 auto;
+  line-height: 35px;
 }
 
 .card-section__header__subtitle {
   margin-left: $margin--regular;
   flex: 0 0 auto;
+  line-height: 35px;
 }
 
 .card-section__header__icon {
@@ -106,6 +109,7 @@
 @media screen and (min-width: $desktop-width--medium) {
   .card-section__header {
     min-height: 40px;
+    line-height: 40px;
   }
   .card__left-container {
     padding-right: $margin--fat;
