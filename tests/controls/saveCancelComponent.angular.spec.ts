@@ -55,12 +55,17 @@ describe('SaveCancelComponent', () => {
             spyOn(component.unlock, 'emit');
         });
         describe('When unlock button is clicked', () => {
+            let lockButton: DebugElement;
             beforeEach(() => {
-                const lockButton = rootElement.query(By.css('vgr-lock-button'));
+                lockButton = rootElement.query(By.css('vgr-lock-button'));
                 lockButton.triggerEventHandler('lockChanged', false);
+                fixture.detectChanges();
             });
             it('component is unlocked', () => {
                 expect(component.unlocked).toBe(true);
+            });
+            it('lock button is disabled', () => {
+                expect(lockButton.attributes['ng-reflect-disabled']).toEqual('true');
             });
 
             describe('and save button is clicked', () => {
