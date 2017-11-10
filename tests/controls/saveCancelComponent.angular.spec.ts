@@ -49,17 +49,24 @@ describe('SaveCancelComponent', () => {
         });
     });
     describe('When initialized', () => {
+        let lockButton: DebugElement;
         beforeEach(() => {
             spyOn(component.cancel, 'emit');
             spyOn(component.save, 'emit');
             spyOn(component.unlock, 'emit');
+            lockButton = rootElement.query(By.css('vgr-lock-button'));
+            fixture.detectChanges();
+        });
+        it('lock button is enabled', () => {
+            expect(lockButton.attributes['ng-reflect-disabled']).toBeNull();
         });
         describe('When unlock button is clicked', () => {
-            let lockButton: DebugElement;
             beforeEach(() => {
-                lockButton = rootElement.query(By.css('vgr-lock-button'));
                 lockButton.triggerEventHandler('lockChanged', false);
                 fixture.detectChanges();
+            });
+            it('lock button is disabled', () => {
+                expect(lockButton.attributes['ng-reflect-disabled']).toEqual('true');
             });
             it('component is unlocked', () => {
                 expect(component.unlocked).toBe(true);
@@ -96,7 +103,6 @@ describe('SaveCancelComponent', () => {
 
             describe('and lock button is clicked', () => {
                 beforeEach(() => {
-                    const lockButton = rootElement.query(By.css('vgr-lock-button'));
                     lockButton.triggerEventHandler('lockChanged', true);
                 });
                 it('a save event is sent', () => {
