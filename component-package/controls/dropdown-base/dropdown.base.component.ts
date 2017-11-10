@@ -32,7 +32,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
 
     protected filterLimit = 20;
-    protected scrollLimit = 8;
+    abstract get scrollLimit(): number;
     protected filterPipe: FilterPipe;
     protected preventCollapse: boolean;
 
