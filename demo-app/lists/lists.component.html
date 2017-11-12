@@ -61,9 +61,7 @@
           </vgr-title-value>
           <vgr-title-value [title]="'Fakturaadress'">
             <span>Bakgatan 11</span>
-            <br>
             <span>123 45 Västgötaslätten</span>
-            <br>
             <span>Sverige</span>
           </vgr-title-value>
 
@@ -148,7 +146,6 @@
                 <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="cardUnlocked=true" (save)="cardSaved()" (cancel)="cardCancelled()"></vgr-save-cancel>
               </div>
 
-
               <vgr-card-section [title]="'Belopp'" [expanded]="true" [readonly]="!cardUnlocked" class="card__left">
                 <div class="title-value-layout">
                   <vgr-title-value [title]="'Bruttobelopp'" [slim]="!cardUnlocked">
@@ -190,6 +187,7 @@
                   </vgr-title-value>
                 </div>
               </vgr-card-section>
+
               <vgr-card-section [title]="'Övrig information'" [readonly]="!cardUnlocked" [subtitle]="'Kalles chokladfabrik Kalles chokladfabrik'"
                 class="card__left">
                 <div class="title-value-layout">
@@ -227,6 +225,37 @@
                       <div style="width:100%; height:30px; background-color:#006298"></div>
                       <div style="width:100%; height:30px; background-color:#508FB8"></div>
                     </div>
+                  </vgr-title-value>
+                </div>
+              </vgr-card-section>
+              <vgr-card-section [title]="'Test'" [expanded]="true" [readonly]="!cardUnlocked" class="card__right">
+                <div class="title-value-layout">
+                  <vgr-title-value [title]="'Månad'" [slim]="!cardUnlocked">
+                    <div class="row-layout">
+                      <vgr-monthpicker [readonly]="!cardUnlocked" (selectedDateChanged)="selectedDate = $event"></vgr-monthpicker>
+                      <span class="flex-right" style="margin-right: 30px">{{selectedDate | date:'MM yyyy'}}</span>
+                    </div>
+                  </vgr-title-value>
+                  <vgr-title-value [title]="'Månader'">
+                    <div class="row-layout">
+                      <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
+                      <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
+                    </div>
+                  </vgr-title-value>
+                  <vgr-title-value [title]="'Bruttobelopp'" [slim]="!cardUnlocked">
+                    <vgr-input [value]="grossAmount" [type]="'amount'" (valueChanged)="grossAmount = $event" [readonly]="!cardUnlocked"></vgr-input>
+                  </vgr-title-value>
+                  <vgr-title-value [title]="'Skattesats'" [slim]="!cardUnlocked">
+                    <vgr-input [value]="taxPercent" [type]="'percent'" (valueChanged)="taxPercent = $event" [readonly]="!cardUnlocked"></vgr-input>
+                  </vgr-title-value>
+                  <vgr-title-value [title]="'Nettobelopp'" [slim]="!cardUnlocked">
+                    <div class="row-layout">
+                      <span *ngIf="netAmount" class="flex-right" style="margin-right:30px">{{netAmount | currency:'SEK':true}}</span>
+                    </div>
+                  </vgr-title-value>
+                  <vgr-title-value [title]="'Tillbehör'">
+                    <vgr-radio-group [disabled]="!cardUnlocked" [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'}]">
+                    </vgr-radio-group>
                   </vgr-title-value>
                 </div>
               </vgr-card-section>
