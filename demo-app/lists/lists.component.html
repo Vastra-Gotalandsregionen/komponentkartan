@@ -196,14 +196,12 @@
                   <vgr-title-value [title]="'Kund som berörs av dessa belopp'">
                     <vgr-dropdown [disabled]="!cardUnlocked" [items]="[{id:'1', displayName:'Kalles chokladfabrik', selected:true},{id:'2', displayName:'Jonnas jordgubbar'}]"></vgr-dropdown>
                   </vgr-title-value>
-                  <vgr-title-value [title]="'Kostnadsställe'">
+                  <vgr-title-value [title]="'Kostnadsställe'" [slim]="!cardUnlocked">
                     <vgr-input [value]="'Kiosk & Godis'" [required]="true" [readonly]="!cardUnlocked"></vgr-input>
                   </vgr-title-value>
                   <vgr-title-value [title]="'Fakturaadress'">
                     <span>Bakgatan 11</span>
-                    <br>
                     <span>123 45 Västgötaslätten</span>
-                    <br>
                     <span>Sverige</span>
                   </vgr-title-value>
 
