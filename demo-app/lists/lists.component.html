@@ -151,13 +151,13 @@
 
               <vgr-card-section [title]="'Belopp'" [expanded]="true" [readonly]="!cardUnlocked" class="card__left">
                 <div class="title-value-layout">
-                  <vgr-title-value [title]="'Bruttobelopp'">
+                  <vgr-title-value [title]="'Bruttobelopp'" [slim]="!cardUnlocked">
                     <vgr-input [value]="grossAmount" [type]="'amount'" (valueChanged)="grossAmount = $event" [readonly]="!cardUnlocked"></vgr-input>
                   </vgr-title-value>
-                  <vgr-title-value [title]="'Skattesats'">
+                  <vgr-title-value [title]="'Skattesats'" [slim]="!cardUnlocked">
                     <vgr-input [value]="taxPercent" [type]="'percent'" (valueChanged)="taxPercent = $event" [readonly]="!cardUnlocked"></vgr-input>
                   </vgr-title-value>
-                  <vgr-title-value [title]="'Nettobelopp'">
+                  <vgr-title-value [title]="'Nettobelopp'" [slim]="!cardUnlocked">
                     <div class="row-layout">
 
                       <span *ngIf="netAmount" class="flex-right" style="margin-right:30px">{{netAmount | currency:'SEK':true}}</span>

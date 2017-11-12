@@ -2,7 +2,7 @@
     display: table;
     table-layout: fixed;
     width: 100%;
-    border-spacing: 0px $margin--slim;
+    border-spacing: 0px;
   }
 
   .title-value {
@@ -13,18 +13,27 @@
   .title-value__title {
     display: table-cell;
     vertical-align: top;
-    padding-top: 5px;
+    padding: 10px 0 5px 0;
+    transition: padding 0.6s linear;
+    .slim-row &{
+      padding: 5px 0 0 0;
+    }
   }
 
   .title-value__value {
     display: table-cell;
     vertical-align: top;
+    padding: 5px 0;
+    transition: padding 0.6s linear;
     width: 290px;
     height: 30px;
     >span {
       padding-top: 5px;
       display: block;
       padding-left: $margin--slim;
+    }
+    .slim-row &{
+      padding: 0;
     }
   }
 
