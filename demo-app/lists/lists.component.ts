@@ -5,7 +5,7 @@ import { RowNotification } from '../../component-package/models/rowNotification.
 import { NotificationType } from '../../component-package/models/notificationType.model';
 import { ModalService } from '../../component-package/services/modalService';
 import { ModalButtonConfiguration } from '../../component-package/services/modalService';
-import { SortDirection, ColumnWidth } from '../../component-package/controls/list/list-column-header.component';
+import { SortDirection } from '../../component-package/controls/list/list-column-header.component';
 import { SortChangedArgs, ListHeaderComponent } from '../../component-package/controls/list/list-header.component';
 
 @Component({
@@ -15,7 +15,6 @@ import { SortChangedArgs, ListHeaderComponent } from '../../component-package/co
 })
 export class ListsComponent {
     sortDirections = SortDirection;
-    columnWidth = ColumnWidth;
     actionPanelVisible: boolean;
     public peopleRows: ExpandableRow<ExamplePerson>[];
     public cardUnlocked: boolean;
