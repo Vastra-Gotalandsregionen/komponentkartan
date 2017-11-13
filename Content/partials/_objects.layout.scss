@@ -59,38 +59,6 @@
   margin-left: auto !important;
 }
 
-.flex-column--xxs {
-  width: 40px;
-}
-
-.flex-column--xs {
-  width: 60px;
-}
-
-.flex-column--s {
-  width: 90px;
-}
-
-.flex-column--m {
-  width: 200px;
-}
-
-.flex-column--l {
-  width: 230px;
-}
-
-.flex-column--xl {
-  width: 280px;
-}
-
-.flex-column--xxl {
-  width: 350px;
-}
-
-.flex-column--xxxl {
-  width: 400px;
-}
-
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -145,30 +113,6 @@
         margin-top: $margin--slim;
       }
     }
-  }
-  .flex-column--xxs {
-    width: 60px;
-  }
-  .flex-column--xs {
-    width: 80px;
-  }
-  .flex-column--s {
-    width: 110px;
-  }
-  .flex-column--m {
-    width: 220px;
-  }
-  .flex-column--l {
-    width: 250px;
-  }
-  .flex-column--xl {
-    width: 300px;
-  }
-  .flex-column--xxl {
-    width: 370px;
-  }
-  .flex-column--xxxl {
-    width: 420px;
   }
   .control-with-label {
     label {
