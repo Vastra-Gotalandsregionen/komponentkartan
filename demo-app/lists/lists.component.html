@@ -230,9 +230,9 @@
               </vgr-card-section>
               <vgr-card-section [title]="'Test'" [expanded]="true" [readonly]="!cardUnlocked" class="card__right">
                 <div class="title-value-layout">
-                  <vgr-title-value [title]="'Månad'" [slim]="!cardUnlocked">
+                  <vgr-title-value [title]="'Datum'" [slim]="!cardUnlocked">
                     <div class="row-layout">
-                      <vgr-monthpicker [readonly]="!cardUnlocked" [selectedDate]="initialDate" (selectedDateChanged)="selectedDate = $event"></vgr-monthpicker>
+                      <vgr-datepicker [readonly]="!cardUnlocked" [selectedDate]="initialDate" (selectedDateChanged)="selectedDate = $event"></vgr-datepicker>
                       <span class="flex-right" style="margin-right: 30px">{{selectedDate | date:'MM yyyy'}}</span>
                     </div>
                   </vgr-title-value>

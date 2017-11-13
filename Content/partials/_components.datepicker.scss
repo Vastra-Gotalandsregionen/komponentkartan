@@ -4,6 +4,11 @@ $dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 130px;
 $dropdown-width--medium--extended: 140px;
 $dropdown-width--small: 100px;
+
+vgr-datepicker.readonly {
+  max-height: $component-height;
+}
+
 .datepicker__dropdown {
   @extend .background-color--primary;
   position: relative;
