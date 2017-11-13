@@ -154,7 +154,7 @@
                   <vgr-title-value [title]="'Skattesats'" [slim]="!cardUnlocked">
                     <vgr-input [value]="taxPercent" [type]="'percent'" (valueChanged)="taxPercent = $event" [readonly]="!cardUnlocked"></vgr-input>
                   </vgr-title-value>
-                  <vgr-title-value [title]="'Nettobelopp'" [slim]="!cardUnlocked">
+                  <vgr-title-value [title]="'Nettobelopp'" [slim]="true">
                     <div class="row-layout">
 
                       <span *ngIf="netAmount" class="flex-right" style="margin-right:30px">{{netAmount | currency:'SEK':true}}</span>
@@ -232,14 +232,14 @@
                 <div class="title-value-layout">
                   <vgr-title-value [title]="'Månad'" [slim]="!cardUnlocked">
                     <div class="row-layout">
-                      <vgr-monthpicker [readonly]="!cardUnlocked" (selectedDateChanged)="selectedDate = $event"></vgr-monthpicker>
+                      <vgr-monthpicker [readonly]="!cardUnlocked" [selectedDate]="initialDate" (selectedDateChanged)="selectedDate = $event"></vgr-monthpicker>
                       <span class="flex-right" style="margin-right: 30px">{{selectedDate | date:'MM yyyy'}}</span>
                     </div>
                   </vgr-title-value>
-                  <vgr-title-value [title]="'Månader'">
+                  <vgr-title-value [title]="'Månader'" [slim]="!cardUnlocked">
                     <div class="row-layout">
-                      <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
-                      <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
+                      <vgr-monthpicker [readonly]="!cardUnlocked" [selectedDate]="initialFromDate"></vgr-monthpicker>
+                      <vgr-monthpicker [readonly]="!cardUnlocked" [selectedDate]="initialToDate"></vgr-monthpicker>
                     </div>
                   </vgr-title-value>
                   <vgr-title-value [title]="'Bruttobelopp'" [slim]="!cardUnlocked">
@@ -248,7 +248,7 @@
                   <vgr-title-value [title]="'Skattesats'" [slim]="!cardUnlocked">
                     <vgr-input [value]="taxPercent" [type]="'percent'" (valueChanged)="taxPercent = $event" [readonly]="!cardUnlocked"></vgr-input>
                   </vgr-title-value>
-                  <vgr-title-value [title]="'Nettobelopp'" [slim]="!cardUnlocked">
+                  <vgr-title-value [title]="'Nettobelopp'" [slim]="true">
                     <div class="row-layout">
                       <span *ngIf="netAmount" class="flex-right" style="margin-right:30px">{{netAmount | currency:'SEK':true}}</span>
                     </div>

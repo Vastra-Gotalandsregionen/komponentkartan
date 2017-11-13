@@ -14,7 +14,7 @@
     display: table-cell;
     vertical-align: top;
     padding: 10px 0 5px 0;
-    transition: padding 0.6s linear;
+    transition: padding 0.2s linear;
     .slim-row &{
       padding: 5px 0 0 0;
     }
@@ -24,7 +24,7 @@
     display: table-cell;
     vertical-align: top;
     padding: 5px 0;
-    transition: padding 0.6s linear;
+    transition: padding 0.2s linear;
     width: 290px;
     height: 30px;
     >span {
@@ -33,17 +33,20 @@
       padding-left: $margin--slim;
     }
     .slim-row &{
-      padding: 0;
+      padding: 5px 0 0 0;
     }
   }
 
   @media screen and (min-width: $desktop-width--medium) {
     .title-value__value {
+      width: 300px;
       padding: 7px 0 8px 0;
       >span {
         padding-top: 3px;
       }
-      width: 300px;
+      .slim-row &{
+        padding: 3px 0 0 0;
+      }
     }
     .title-value__title {
       padding: 10px 0 8px 0;

@@ -31,6 +31,10 @@ export class ListsComponent {
     public taxPercent: number;
     public selectedDate: Date;
 
+    public initialDate: Date = new Date();
+    public initialFromDate: Date = new Date(2017, 1, 20);
+    public initialToDate: Date = new Date(2017, 10, 20);
+
 
     constructor(private modalService: ModalService) {
         const examplePeople = [
