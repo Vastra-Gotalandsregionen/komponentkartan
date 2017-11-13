@@ -7,7 +7,11 @@ import { Component, HostBinding, ContentChildren, AfterViewInit, QueryList, Inpu
     selector: 'vgr-list-column-header'
 })
 export class ListColumnHeaderComponent {
-    @HostBinding('class.list__column-header') listColumnHeaderClass = true;
+    @HostBinding('class')
+    get classes(): string {
+        return '.list__column-header flex-column ' + this.getColumnWidthClass();
+    }
+
     @Input() text: string;
     @Input() sortDirection: SortDirection;
     @Input() width: number;
@@ -26,6 +30,11 @@ export class ListColumnHeaderComponent {
     constructor() {
         this.sortDirection = SortDirection.None;
     }
+
+    getColumnWidthClass(): string {
+        return 'flex-column--' + (this.width ? this.width : 1);
+    }
+
 
     onClick() {
         if (this.sortDirection === SortDirection.None) {

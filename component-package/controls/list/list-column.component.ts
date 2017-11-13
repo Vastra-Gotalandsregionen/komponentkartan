@@ -8,13 +8,19 @@ import { ListColumnHeaderComponent } from './list-column-header.component';
     selector: 'vgr-list-column'
 })
 export class ListColumnComponent {
-    @HostBinding('class.list__column') listColumnClass = true;
+    @HostBinding('class')
+    get classes(): string {
+        return '.list__column flex-column ' + this.getColumnWidthClass();
+    }
     @Input() text: string;
 
     width: number;
-    maxCharacters: number;
 
     constructor(private changeDetectorRef: ChangeDetectorRef) {
+    }
+
+    private getColumnWidthClass(): string {
+        return 'flex-column--' + (this.width ? this.width : 1);
     }
 
     copyPropertiesFromHeader(header: ListColumnHeaderComponent) {
