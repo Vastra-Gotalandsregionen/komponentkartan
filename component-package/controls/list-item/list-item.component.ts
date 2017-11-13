@@ -73,9 +73,11 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     copyPropertiesFromHeader(header: ListHeaderComponent) {
+        this.changeDetecor.detectChanges();
         this.columns.forEach((column, index) => {
             header.applyToColumn(column, index);
         });
+        this.changeDetecor.detectChanges();
     }
 
     ngAfterContentInit() {

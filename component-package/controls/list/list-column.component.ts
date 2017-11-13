@@ -10,7 +10,7 @@ import { ListColumnHeaderComponent } from './list-column-header.component';
 export class ListColumnComponent {
     @HostBinding('class')
     get classes(): string {
-        return '.list__column flex-column ' + this.getColumnWidthClass();
+        return 'list__column flex-column ' + this.getColumnWidthClass();
     }
     @Input() text: string;
 

@@ -141,12 +141,9 @@
   }
 }
 
-.list-column {
+.list__column {
   span {
-    /* word-wrap: break-word; */
     text-overflow: ellipsis;
-    /* width: 59px; */
-    /* display: inline-block; */
     overflow: hidden;
     white-space: nowrap;
   }
