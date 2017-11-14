@@ -7,7 +7,7 @@ describe('[ListColumnComponent]', () => {
         component = new ListColumnComponent();
     });
 
-    describe('When copy properties from header is called', () => {
+    describe('When set width is called', () => {
         beforeEach(() => {
             component.setWidth(20);
         });
@@ -18,7 +18,7 @@ describe('[ListColumnComponent]', () => {
             beforeEach(() => {
                 component.ngDoCheck();
             });
-            it('Width is copied from the header', () => {
+            it('Width is set', () => {
                 expect(component.width).toEqual(20);
             });
         });
