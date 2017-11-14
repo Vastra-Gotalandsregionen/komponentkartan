@@ -102,32 +102,32 @@
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
           <div class="list-item__header">
-            <vgr-list-column [text]="row.object.firstName"></vgr-list-column>
-            <vgr-list-column [text]="row.object.lastName"></vgr-list-column>
-            <vgr-list-column [text]="row.object.lastName"></vgr-list-column>
+            <vgr-list-column [text]="row.previewObject.firstName"></vgr-list-column>
+            <vgr-list-column [text]="row.previewObject.lastName"></vgr-list-column>
+            <vgr-list-column [text]="row.previewObject.lastName"></vgr-list-column>
           </div>
           <div class="list-item__content">
             <vgr-card>
-              <div *ngIf="row.object.canBeDeleted && !row.object.deleted" class="card__top flex-row">
+              <div *ngIf="row.previewObject.canBeDeleted && !row.previewObject.deleted" class="card__top flex-row">
                 <vgr-button class="flex-right" [secondary]="true" [disabled]="false" (click)="removeRow(row)">Ta bort</vgr-button>
               </div>
-              <vgr-card-section class="card__left" [expanded]="true" [title]="'Personlig information'" [subtitle]="row.object.firstName + ' ' + row.object.lastName">
+              <vgr-card-section class="card__left" [expanded]="true" [title]="'Personlig information'" [subtitle]="row.previewObject.firstName + ' ' + row.previewObject.lastName">
                 <div class="title-value-layout">
                   <vgr-title-value [title]="'Förnamn'">
-                    <span>{{row.object.firstName}}</span>
+                    <span>{{row.previewObject.firstName}}</span>
                   </vgr-title-value>
                   <vgr-title-value [title]="'Efternamn'">
-                    <span>{{row.object.lastName}}</span>
+                    <span>{{row.previewObject.lastName}}</span>
                   </vgr-title-value>
                 </div>
               </vgr-card-section>
               <vgr-card-section class="card__right" [title]="'Detaljerad information'">
                 <div class="title-value-layout">
                   <vgr-title-value [title]="'Förnamn'">
-                    <span>{{row.object.firstName}}</span>
+                    <span>{{row.previewObject.firstName}}</span>
                   </vgr-title-value>
                   <vgr-title-value [title]="'Efternamn'">
-                    <span>{{row.object.lastName}}</span>
+                    <span>{{row.previewObject.lastName}}</span>
                   </vgr-title-value>
                 </div>
               </vgr-card-section>

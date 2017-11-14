@@ -16,9 +16,9 @@ import { SortChangedArgs, ListHeaderComponent } from '../../component-package/co
 export class ListsComponent {
     sortDirections = SortDirection;
     actionPanelVisible: boolean;
-    public peopleRows: ExpandableRow<ExamplePerson>[];
+    public peopleRows: ExpandableRow<ExamplePerson, ExamplePerson>[];
     public cardUnlocked: boolean;
-    public cardRow: ExpandableRow<string> = new ExpandableRow<string>('Foo');
+    public cardRow: ExpandableRow<string, string> = new ExpandableRow<string, string>('Foo');
     get netAmount(): number {
         if (isNaN(this.grossAmount) || isNaN(this.taxPercent)) {
             return NaN;
@@ -48,7 +48,7 @@ export class ListsComponent {
         this.taxPercent = 32;
 
 
-        this.peopleRows = examplePeople.map(x => new ExpandableRow<ExamplePerson>(x));
+        this.peopleRows = examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
         this.peopleRows[0].notification = { message: 'Information saknas', icon: NotificationIcon.ExclamationRed, type: NotificationType.Permanent } as RowNotification;
         this.peopleRows[4].notification = { message: 'Personen är inaktiv', icon: NotificationIcon.Exclamation, type: NotificationType.Permanent } as RowNotification;
@@ -58,33 +58,33 @@ export class ListsComponent {
 
     onSortChanged(event: SortChangedArgs) {
         this.peopleRows = this.peopleRows.sort((row1, row2) => {
-            return row1.object[event.key] > row2.object[event.key] ? (event.direction === SortDirection.Ascending ? 1 : -1) :
-                row1.object[event.key] < row2.object[event.key] ? (event.direction === SortDirection.Ascending ? -1 : 1) : 0;
+            return row1.previewObject[event.key] > row2.previewObject[event.key] ? (event.direction === SortDirection.Ascending ? 1 : -1) :
+                row1.previewObject[event.key] < row2.previewObject[event.key] ? (event.direction === SortDirection.Ascending ? -1 : 1) : 0;
         });
     }
 
-    removeRow(row: ExpandableRow<ExamplePerson>) {
-        this.modalService.openDialog('Ta bort person', 'Vill du verkligen ta bort ' + row.object.firstName + '?',
+    removeRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
+        this.modalService.openDialog('Ta bort person', 'Vill du verkligen ta bort ' + row.previewObject.firstName + '?',
             new ModalButtonConfiguration('Ja', () => {
 
-                row.notifyOnRemove(row.object.firstName + ' togs bort och kommer inte längre att kunna logga in', NotificationIcon.Ok);
-                row.object.deleted = true;
+                row.notifyOnRemove(row.previewObject.firstName + ' togs bort och kommer inte längre att kunna logga in', NotificationIcon.Ok);
+                row.previewObject.deleted = true;
             }),
             new ModalButtonConfiguration('Nej', () => { }));
     }
 
 
-    removeRowWithoutExpand(row: ExpandableRow<ExamplePerson>, event: Event) {
+    removeRowWithoutExpand(row: ExpandableRow<ExamplePerson, ExamplePerson>, event: Event) {
         event.cancelBubble = true;
-        this.modalService.openDialog('Ta bort person', 'Vill du verkligen ta bort ' + row.object.firstName + '?',
+        this.modalService.openDialog('Ta bort person', 'Vill du verkligen ta bort ' + row.previewObject.firstName + '?',
             new ModalButtonConfiguration('Ja', () => {
-                row.notifyOnRemove(row.object.firstName + ' togs bort och kommer inte längre att kunna logga in', NotificationIcon.Ok);
-                row.object.deleted = true;
+                row.notifyOnRemove(row.previewObject.firstName + ' togs bort och kommer inte längre att kunna logga in', NotificationIcon.Ok);
+                row.previewObject.deleted = true;
             }),
             new ModalButtonConfiguration('Nej', () => { }));
     }
 
-    removeCardRow(row: ExpandableRow<string>) {
+    removeCardRow(row: ExpandableRow<string, string>) {
         this.modalService.openDialog('Ta bort rad', 'Vill du verkligen ta bort raden?',
             new ModalButtonConfiguration('Ja', () => {
                 row.notifyOnRemove('Raden togs bort', NotificationIcon.Ok);
@@ -92,8 +92,8 @@ export class ListsComponent {
             new ModalButtonConfiguration('Nej', () => { }));
     }
 
-    savePerson(row: ExpandableRow<ExamplePerson>) {
-        row.notifyOnCollapse(row.object.firstName + ' sparades', NotificationIcon.OkGreen);
+    savePerson(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
+        row.notifyOnCollapse(row.previewObject.firstName + ' sparades', NotificationIcon.OkGreen);
     }
 
     cardSaved() {
