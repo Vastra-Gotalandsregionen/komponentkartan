@@ -9,7 +9,7 @@ import { Component, HostBinding, ContentChildren, AfterViewInit, QueryList, Inpu
 export class ListColumnHeaderComponent {
     @HostBinding('class')
     get classes(): string {
-        return '.list__column-header flex-column ' + this.getColumnWidthClass();
+        return 'list__column-header flex-column ' + this.getColumnWidthClass();
     }
 
     @Input() text: string;

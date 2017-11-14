@@ -4,39 +4,42 @@ describe('[ListColumnComponent]', () => {
     let component: ListColumnComponent;
 
     beforeEach(() => {
-        component = new ListColumnComponent(null);
+        component = new ListColumnComponent();
     });
-    /*     constructor(private changeDetectorRef: ChangeDetectorRef) {
-    }
 
-    getColumnWidthClass(): string {
-        return 'flex-column--' + ColumnWidth[this.width];
-    }
+    describe('When copy properties from header is called', () => {
+        beforeEach(() => {
+            component.setWidth(20);
+        });
+        it('Width is left unchanged', () => {
+            expect(component.width).toBeUndefined();
+        });
+        describe('And NgDoCheck is called', () => {
+            beforeEach(() => {
+                component.ngDoCheck();
+            });
+            it('Width is copied from the header', () => {
+                expect(component.width).toEqual(20);
+            });
+        });
+    });
 
-    copyPropertiesFromHeader(header: ListColumnHeaderComponent) {
-        this.changeDetectorRef.detectChanges();
-        this.width = header.width;
-        this.maxCharacters = header.maxCharacters;
-        this.changeDetectorRef.detectChanges();
-    }
-} */
+    describe('When getClasses is called', () => {
+        describe('And width is not set', () => {
+            it('It returns the default classes', () => {
+                expect(component.classes).toEqual('list__column flex-column flex-column--1');
+            });
+        });
+        describe('And width is set', () => {
+            beforeEach(() => {
+                component.setWidth(20);
+                component.ngDoCheck();
+            });
+            it('It returns classes updated with width', () => {
+                expect(component.classes).toEqual('list__column flex-column flex-column--20');
+            });
+        });
+    });
 
-
-    /*    describe('When initialized with ColumnWidth xxs and sortdirection is ascending,', () => {
-           beforeEach(() => {
-               component.width = ColumnWidth.xxs
-               component.sortDirection = SortDirection.Ascending
-           });
-       });
-
-       describe('When initialized with ColumnWidth xs,', () => {
-           beforeEach(() => {
-               component.width = ColumnWidth.xs
-
-           });
-           it('maxCharacters is 5', () => {
-               expect(component.maxCharacters).toBe(5);
-           });
-       }); */
 });
 

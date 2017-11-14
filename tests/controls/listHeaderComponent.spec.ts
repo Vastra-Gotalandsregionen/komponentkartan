@@ -9,10 +9,13 @@ describe('[ListHeaderComponent]', () => {
     beforeEach(() => {
         columnHeader1 = new ListColumnHeaderComponent();
         columnHeader1.sortKey = 'column1.key';
+        columnHeader1.width = 1;
         columnHeader2 = new ListColumnHeaderComponent();
         columnHeader2.text = 'column2.text';
+        columnHeader2.width = 2;
         columnHeader3 = new ListColumnHeaderComponent();
         columnHeader3.sortKey = 'column3.key';
+        columnHeader3.width = 3;
         listHeaderComponent = new ListHeaderComponent();
         listHeaderComponent.headerColumns = new QueryList<ListColumnHeaderComponent>();
         spyOn(listHeaderComponent.headerColumns, 'forEach').and.callFake((callback: any) => [columnHeader1, columnHeader2, columnHeader3].forEach(callback));
@@ -46,24 +49,24 @@ describe('[ListHeaderComponent]', () => {
     describe('when apply to column is called', () => {
         let listColumn: ListColumnComponent;
         beforeEach(() => {
-            listColumn = new ListColumnComponent({ detectChanges: () => { } } as ChangeDetectorRef)
+            listColumn = new ListColumnComponent();
         });
         describe('and there is a matching header for the supplied index', () => {
             beforeEach(() => {
-                spyOn(listColumn, 'copyPropertiesFromHeader');
+                spyOn(listColumn, 'setWidth');
                 listHeaderComponent.applyToColumn(listColumn, 1);
             });
             it('the correct column header is used to copy properties to the list column', () => {
-                expect(listColumn.copyPropertiesFromHeader).toHaveBeenCalledWith(columnHeader2);
+                expect(listColumn.setWidth).toHaveBeenCalledWith(columnHeader2.width);
             });
         });
         describe('and there is no matching header for the supplied index', () => {
             beforeEach(() => {
-                spyOn(listColumn, 'copyPropertiesFromHeader');
+                spyOn(listColumn, 'setWidth');
                 listHeaderComponent.applyToColumn(listColumn, 7);
             });
             it('the list column receives no properties', () => {
-                expect(listColumn.copyPropertiesFromHeader).toHaveBeenCalledTimes(0);
+                expect(listColumn.setWidth).toHaveBeenCalledTimes(0);
             });
         });
     });

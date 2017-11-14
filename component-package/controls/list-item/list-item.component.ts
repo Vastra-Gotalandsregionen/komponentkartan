@@ -15,7 +15,7 @@ import { ListHeaderComponent } from '../list/list-header.component';
     selector: 'vgr-list-item',
     moduleId: module.id
 })
-export class ListItemComponent implements OnInit, AfterContentInit {
+export class ListItemComponent implements OnInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
 
@@ -73,16 +73,11 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     copyPropertiesFromHeader(header: ListHeaderComponent) {
-        this.changeDetecor.detectChanges();
         this.columns.forEach((column, index) => {
             header.applyToColumn(column, index);
         });
-        this.changeDetecor.detectChanges();
     }
 
-    ngAfterContentInit() {
-
-    }
 
     showNotification() {
         this.notificationVisible = true;
