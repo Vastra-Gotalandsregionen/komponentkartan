@@ -106,10 +106,14 @@ export class ListItemComponent implements OnInit {
             return;
         }
         this.jqueryHelper.toggleContent(this.elementRef);
+
+        const expandedChanged = !this._expanded;
         this._expanded = true;
         this.collapsed = false;
 
-        this.expandedChanged.emit(this._expanded);
+        if (expandedChanged) {
+            this.expandedChanged.emit(this._expanded);
+        }
     }
 
     private collapse(collapsingNotification?: NotificationType) {
@@ -122,10 +126,13 @@ export class ListItemComponent implements OnInit {
             });
         } else {
             this.jqueryHelper.collapseContent(header, () => {
+                const expandedChanged = this._expanded;
                 this._expanded = false;
                 this.collapsed = true;
                 this.notInteractable = false;
-                this.expandedChanged.emit(this._expanded);
+                if (expandedChanged) {
+                    this.expandedChanged.emit(this._expanded);
+                }
             });
         }
     }
