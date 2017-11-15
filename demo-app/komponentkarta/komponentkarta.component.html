@@ -216,8 +216,12 @@
           <strong>låser</strong> är det
           <strong>samma som att spara</strong>.
         </span>
-        <div>
-          <vgr-save-cancel (onSave)="saveCancelMessage='Sparade!' " (onCancel)="saveCancelMessage='Avbröt.' "></vgr-save-cancel>
+        <div class="flex-right" style="width:100%">
+          <vgr-save-cancel class="flex-right" (save)="saveCancelMessage='Sparade (1)' " (cancel)="saveCancelMessage='Avbröt (1)'" (unlock)="saveCancelMessage='Låste upp (1)'"></vgr-save-cancel>
+          <vgr-save-cancel class="flex-right" (save)="saveCancelMessage='Sparade (2)' " (cancel)="saveCancelMessage='Avbröt (2)'" (unlock)="saveCancelMessage='Låste upp (2)'"
+            [hideLock]="true"></vgr-save-cancel>
+          <vgr-save-cancel class="flex-right" (save)="saveCancelMessage='Sparade (3)' " (cancel)="saveCancelMessage='Avbröt (3)'" (unlock)="saveCancelMessage='Låste upp (3)'"
+            [hideLock]="true" [saveButtonText]="'Spara enhet'"></vgr-save-cancel>
           <br>
           <span>Senaste händelse:&nbsp;
             <strong>{{saveCancelMessage}}</strong>
