@@ -11,14 +11,20 @@ import { LockButtonComponent } from '../lockButton/lockButton.component';
 export class SaveCancelComponent implements OnInit {
     @Input() unlocked: boolean;
     @Input() secondary: boolean;
+    @Input() hideLock: boolean;
+    @Input() saveButtonText: string;
     @Output() cancel = new EventEmitter();
     @Output() save = new EventEmitter();
     @Output() unlock = new EventEmitter();
 
     constructor() {
+        this.saveButtonText = 'Spara';
     }
 
     ngOnInit() {
+        if (this.hideLock) {
+            this.unlocked = true;
+        }
     }
 
     onLockChanged(locked: boolean) {
@@ -33,12 +39,16 @@ export class SaveCancelComponent implements OnInit {
     }
 
     onSave() {
-        this.unlocked = false;
+        if (!this.hideLock) {
+            this.unlocked = false;
+        }
         this.save.emit();
     }
 
     onCancel() {
-        this.unlocked = false;
+        if (!this.hideLock) {
+            this.unlocked = false;
+        }
         this.cancel.emit();
     }
 

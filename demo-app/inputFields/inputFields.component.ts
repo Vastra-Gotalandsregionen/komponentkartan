@@ -21,6 +21,7 @@ export class InputFieldsComponent {
     intValue: number;
     headerExpanded: boolean;
     isSmall: boolean;
+    delayedObject: any;
 
     constructor(private cityService: CityService) {
         this.cityName = 'Houstons';
@@ -33,7 +34,10 @@ export class InputFieldsComponent {
         this.kmValue = 11;
         this.intValue = 0;
         this.isSmall = false;
-
+        this.delayedObject = {};
+        setTimeout(() => {
+            this.delayedObject.value = 'foo;'
+        }, 3000);
     }
 
     validateCityName(cityName: string): IValidationResult {
