@@ -58,6 +58,22 @@ describe('ButtonComponent', () => {
             textButtonElement = rootElement.query(By.css('.button'));
             spyOn(component.click, 'emit');
         });
+
+        it('The button has the role button', () => {
+            expect(textButtonElement.attributes['role']).toBe('button');
+        });
+
+        it('button has an accessible label', () => {
+
+        });
+
+        it('if a button is disabled, the aria-disabled', () => {
+
+        });
+
+
+
+
         it('button is enabled', () => {
             expect(textButtonElement.classes['button--disabled']).toBeFalsy();
         });
@@ -96,8 +112,8 @@ describe('ButtonComponent', () => {
             it('button is displayed as disabled', () => {
                 expect(textButtonElement.classes['button--disabled']).toBeTruthy();
             });
-            it('button has no tab stop', () => {
-                expect(textButtonElement.nativeElement.attributes.tabIndex.value).toBe('-1');
+            it('button has tab stop', () => {
+                expect(textButtonElement.nativeElement.attributes.tabIndex.value).toBe('0');
             });
             describe('and button is clicked', () => {
                 it('no clicked event is triggered', () => {

@@ -30,8 +30,8 @@ export class ButtonComponent implements OnChanges {
 
     keyPressed(event: KeyboardEvent): void {
         if (event.keyCode === 13 || event.keyCode === 32) {
-            event.preventDefault();
             this.onMouseDown(event);
+            event.preventDefault();
         }
     }
 }
