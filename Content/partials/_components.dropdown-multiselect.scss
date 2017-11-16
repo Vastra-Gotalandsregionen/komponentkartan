@@ -1,18 +1,26 @@
-.dropdown--multiselect {
-  .dropdown__menu {
-    a {
-      max-height: 38px;
+    .dropdown--multiselect {
+      .dropdown__menu {
+        a {
+          max-height: 38px;
+        }
+      }
+      &:focus {
+        //Tar bort highlight vid tabstop
+        outline-width: 0;
+      }
     }
-  }
-  &:focus {
-    //Tar bort highlight vid tabstop
-    outline-width: 0;
-  }
-}
 
-.dropdown__multiselect-readonlylist {
-  ul {
-    list-style-type: disc;
-    list-style-position: inside;
-  }
-}
+    .dropdown__multiselect-readonlylist {
+      ul {
+        list-style-type: disc;
+        list-style-position: inside;
+      }
+    }
+
+    @media screen and (max-width: $desktop-width--small) {
+      .dropdown--multiselect {
+        .dropdown__menu {
+          max-height: 320px;
+        }
+      }
+    }

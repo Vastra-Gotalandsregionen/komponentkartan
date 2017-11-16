@@ -29,7 +29,8 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     scrollVisible: boolean;
     filter: string;
     scrollbarConfig: PerfectScrollbarConfig;
-
+    dimmerTopVisible: boolean;
+    dimmerBottomVisible: boolean;
 
     protected filterLimit = 20;
     abstract get scrollLimit(): number;
@@ -52,6 +53,8 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
                 this.listenToScrollbarEvents();
             }
         }, 500);
+        this.dimmerTopVisible = false;
+        this.dimmerBottomVisible = this._items.length > this.scrollLimit;
     }
     get items(): IDropdownItem[] {
         return this._items;
@@ -93,14 +96,14 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         const scrollTop = scrollEvent.target.scrollTop;
 
         if (clientHeight + scrollTop >= scrollHeight) {
-            scrollbar.next('.dropdown__dimmer--bottom').hide();
+            this.dimmerBottomVisible = false;
         } else {
-            scrollbar.next('.dropdown__dimmer--bottom').show();
+            this.dimmerBottomVisible = true;
         }
         if (scrollTop === 0) {
-            scrollbar.prev('.dropdown__dimmer--top').hide();
+            this.dimmerTopVisible = false;
         } else {
-            scrollbar.prev('.dropdown__dimmer--top').show();
+            this.dimmerTopVisible = true;
         }
     }
 
@@ -119,7 +122,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         }
 
         const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
-
         this.scrollVisible = visibleItemCount > this.scrollLimit;
     }
 

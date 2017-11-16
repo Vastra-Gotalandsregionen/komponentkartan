@@ -23,7 +23,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string; // texten som visaspå checkboxen för att välja alla
     get scrollLimit(): number {
-        return 6;
+        return this.filterVisible ? 6 : 7;
     }
     dropdownLabel: string;
     selectAllItem: IDropdownItem;

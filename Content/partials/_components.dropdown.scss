@@ -251,7 +251,7 @@ $filter-area-height: 60px;
  *******************************************************************************************************/
 
 .dropdown__dimmer {
-  display: none; //Is displayed by JQuery
+  display: block; //Is displayed by JQuery
   height: 24px;
   width: calc(100% - 20px); //Widht is 100% - scrollbar width
   position: absolute;

@@ -4,7 +4,7 @@
     <span class="noselect" tabindex="0">{{dropdownLabel}}</span>
     <div class="dropdown__menu">
       <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
-      <div class="dropdown__dimmer dropdown__dimmer--top"></div>
+      <div *ngIf="dimmerTopVisible" class="dropdown__dimmer dropdown__dimmer--top"></div>
       <perfect-scrollbar class="container" [config]="scrollbarConfig">
         <ul class="dropdown__menu__items">
           <!-- om det finns en showAllItem -->
@@ -31,7 +31,7 @@
         </ul>
       </perfect-scrollbar>
 
-      <div class="dropdown__dimmer dropdown__dimmer--bottom"></div>
+      <div *ngIf="dimmerBottomVisible" class="dropdown__dimmer dropdown__dimmer--bottom"></div>
     </div>
   </div>
   <div class="validation__status" title="{{validationErrorMessage}}">
