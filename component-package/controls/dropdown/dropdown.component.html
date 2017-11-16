@@ -6,7 +6,7 @@
     <div class="dropdown__menu">
       <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
 
-      <div class="dropdown__dimmer dropdown__dimmer--top"></div>
+      <div *ngIf="dimmerTopVisible" class="dropdown__dimmer dropdown__dimmer--top"></div>
       <perfect-scrollbar class="container" [config]="scrollbarConfig">
         <ul class="dropdown__menu__items">
           <li *ngIf="filterVisible" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : showAllItem.marked }">
@@ -17,7 +17,7 @@
           </li>
         </ul>
       </perfect-scrollbar>
-      <div class="dropdown__dimmer dropdown__dimmer--bottom"></div>
+      <div *ngIf="dimmerBottomVisible" class="dropdown__dimmer dropdown__dimmer--bottom"></div>
     </div>
   </div>
   <div class="validation__status" title="{{validationErrorMessage}}">

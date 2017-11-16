@@ -147,18 +147,18 @@ describe('DropdownComponent', () => {
                     });
                 });
 
-                describe('and the text mathches 8 new items', () => {
+                describe('and the text mathches 7 new items', () => {
                     beforeEach(() => {
-                        for (let i = 0; i < 8; i++) {
+                        for (let i = 0; i < 7; i++) {
                             component.items.push({ displayName: `NewItem!${i}` } as IDropdownItem);
                         };
                         filterBoxElement.triggerEventHandler('valueChanged', 'NewItem');
                         fixture.detectChanges();
                     });
-                    it('8 items are displayed', () => {
+                    it('7 items are displayed', () => {
 
                         const listItems = rootElement.queryAll(By.css('li'));
-                        expect(listItems.length).toBe(8 + 1); // +1 for select all element
+                        expect(listItems.length).toBe(7 + 1); // +1 for select all element
                     });
                     it('scroll is not visible', () => {
                         expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(false);
