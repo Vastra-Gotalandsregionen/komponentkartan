@@ -55,9 +55,6 @@
   &.button--disabled {
     background-color: $secondary-color--default;
     cursor: default;
-    &:focus {
-      //outline: 0;
-    }
     &.button--secondary {
       border-color: $secondary-color--default;
       color: $secondary-color--default;
