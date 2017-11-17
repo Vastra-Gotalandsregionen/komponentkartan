@@ -1,5 +1,6 @@
 ﻿<div class="lock-button noselect" role="button" (click)="onClick($event)" (keydown)="keyPressed($event)" [ngClass]="{ 'lock-button--unlocked' : unlocked,'button--disabled' : disabled}"
-  tabindex="{{disabled ? -1 : 0}}">
+  [attr.aria-disabled]="disabled" [attr.aria-label]="label" tabindex="0">
+
   <div class="lock-button__top"></div>
   <div class="lock-button__bottom"></div>
   <div class="button__focus-line"></div>

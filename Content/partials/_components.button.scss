@@ -39,7 +39,7 @@
       transition: background-color 0.5s ease, color 0.5s ease;
     }
   }
-  &:focus:not(.button--disabled) {
+  &:focus {
     box-shadow: 0 0 1px 1px $focus-color;
     border-bottom-color: $focus-color;
   }
@@ -55,9 +55,6 @@
   &.button--disabled {
     background-color: $secondary-color--default;
     cursor: default;
-    &:focus {
-      outline: 0;
-    }
     &.button--secondary {
       border-color: $secondary-color--default;
       color: $secondary-color--default;
