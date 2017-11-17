@@ -6,7 +6,7 @@
     templateUrl: './button.component.html'
 })
 export class ButtonComponent implements OnChanges {
-    @Input() disabled: boolean;
+    @Input() disabled = false;
     @Input() secondary: boolean;
     lastDisabledStatus: boolean;
     reenabled: boolean;

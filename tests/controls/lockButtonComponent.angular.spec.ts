@@ -44,11 +44,17 @@ describe('TextButtonComponent', () => {
             spyOn(component.lockChanged, 'emit');
             component.unlocked = false;
         });
+        it('if a button is not disabled, the aria-disabled is set to false', () => {
+            expect(lockButtonElement.attributes['aria-disabled']).toBe('false');
+        });
         it('button is enabled', () => {
             expect(lockButtonElement.classes['button--disabled']).toBeFalsy();
         });
         it('button has tab stop', () => {
             expect(lockButtonElement.nativeElement.attributes.tabIndex.value).toBe('0');
+        });
+        it('button aria-label is set to lås', () => {
+            expect(lockButtonElement.attributes['aria-label']).toBe('lås upp');
         });
         it('button is locked', () => {
             expect(lockButtonElement.classes['button--unlocked']).toBeFalsy();
@@ -100,6 +106,11 @@ describe('TextButtonComponent', () => {
                 component.unlocked = true;
                 fixture.detectChanges();
             });
+
+            it('button aria-label is set to lås', () => {
+                expect(lockButtonElement.attributes['aria-label']).toBe('lås');
+            });
+
             describe('and button is clicked', () => {
                 it('a lockChanged event is triggered', () => {
                     lockButtonElement.triggerEventHandler('click', {});
@@ -147,11 +158,14 @@ describe('TextButtonComponent', () => {
                 component.disabled = true;
                 fixture.detectChanges();
             });
+            it('if a button is disabled, the aria-disabled is set to true', () => {
+                expect(lockButtonElement.attributes['aria-disabled']).toBeTruthy();
+            });
             it('button is displayed as disabled', () => {
                 expect(lockButtonElement.classes['button--disabled']).toBeTruthy();
             });
             it('button has no tab stop', () => {
-                expect(lockButtonElement.nativeElement.attributes.tabIndex.value).toBe('-1');
+                expect(lockButtonElement.nativeElement.attributes.tabIndex.value).toBe('0');
             });
             describe('and button is clicked', () => {
                 it('no lockChanged event is triggered', () => {
