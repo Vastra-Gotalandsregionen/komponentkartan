@@ -4,26 +4,27 @@ import { NotificationType } from '../../component-package/models/notificationTyp
 
 describe('[ExpandableRow]', () => {
     const wrappedObject = { name: 'Some name', value: 'Some value' };
-    const expandableRow = new ExpandableRow<any>(wrappedObject);
+    const expandableRow = new ExpandableRow<any, any>(wrappedObject);
     describe('When constructed', () => {
-        it('wrapped object is stored in object', () => {
-            expect(expandableRow.object).toBe(wrappedObject);
+        it('wrapped object is stored in preview object', () => {
+            expect(expandableRow.previewObject).toBe(wrappedObject);
         });
-    });
-    describe('When showNotificationOnCollapse is called', () => {
-        beforeEach(() => {
-            expandableRow.notifyOnCollapse('Collapsed', NotificationIcon.Ok);
+        describe('When showNotificationOnCollapse is called', () => {
+            beforeEach(() => {
+                expandableRow.notifyOnCollapse('Collapsed', NotificationIcon.Ok);
+            });
+            it('notification is set to notify on collapse', () => {
+                expect(expandableRow.notification).toEqual({ type: NotificationType.ShowOnCollapse, icon: NotificationIcon.Ok, message: 'Collapsed' });
+            });
         });
-        it('notification is set to notify on collapse', () => {
-            expect(expandableRow.notification).toEqual({ type: NotificationType.ShowOnCollapse, icon: NotificationIcon.Ok, message: 'Collapsed' });
-        });
-    });
-    describe('When showNotificationOnRemove is called', () => {
-        beforeEach(() => {
-            expandableRow.notifyOnRemove('Removed', NotificationIcon.OkGreen);
-        });
-        it('notification is set to notify on remove', () => {
-            expect(expandableRow.notification).toEqual({ type: NotificationType.ShowOnRemove, icon: NotificationIcon.OkGreen, message: 'Removed' });
+        describe('When showNotificationOnRemove is called', () => {
+            beforeEach(() => {
+                expandableRow.notifyOnRemove('Removed', NotificationIcon.OkGreen);
+            });
+            it('notification is set to notify on remove', () => {
+                expect(expandableRow.notification).toEqual({ type: NotificationType.ShowOnRemove, icon: NotificationIcon.OkGreen, message: 'Removed' });
+            });
         });
     });
 });
+

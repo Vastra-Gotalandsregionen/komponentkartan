@@ -15,7 +15,7 @@ import { ListHeaderComponent } from '../list/list-header.component';
     selector: 'vgr-list-item',
     moduleId: module.id
 })
-export class ListItemComponent implements OnInit, AfterContentInit {
+export class ListItemComponent implements OnInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
 
@@ -78,9 +78,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         });
     }
 
-    ngAfterContentInit() {
-
-    }
 
     showNotification() {
         this.notificationVisible = true;
@@ -109,10 +106,14 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             return;
         }
         this.jqueryHelper.toggleContent(this.elementRef);
+
+        const expandedChanged = !this._expanded;
         this._expanded = true;
         this.collapsed = false;
 
-        this.expandedChanged.emit(this._expanded);
+        if (expandedChanged) {
+            this.expandedChanged.emit(this._expanded);
+        }
     }
 
     private collapse(collapsingNotification?: NotificationType) {
@@ -125,10 +126,13 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             });
         } else {
             this.jqueryHelper.collapseContent(header, () => {
+                const expandedChanged = this._expanded;
                 this._expanded = false;
                 this.collapsed = true;
                 this.notInteractable = false;
-                this.expandedChanged.emit(this._expanded);
+                if (expandedChanged) {
+                    this.expandedChanged.emit(this._expanded);
+                }
             });
         }
     }

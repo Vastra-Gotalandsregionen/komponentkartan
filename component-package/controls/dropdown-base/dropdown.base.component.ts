@@ -7,9 +7,6 @@ import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
-@Component({
-
-})
 export abstract class DropdownBaseComponent extends ValidationComponent {
 
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
@@ -20,7 +17,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     @Input() required: boolean;
     @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() @HostBinding('class.disabled') disabled: boolean;
-    @HostBinding('class.dropdown-new') dropdownClass = true;
+    @HostBinding('class.dropdown') dropdownClass = true;
 
     showAllItem: IDropdownItem;
 
@@ -29,10 +26,11 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     scrollVisible: boolean;
     filter: string;
     scrollbarConfig: PerfectScrollbarConfig;
-
+    dimmerTopVisible: boolean;
+    dimmerBottomVisible: boolean;
 
     protected filterLimit = 20;
-    protected scrollLimit = 8;
+    abstract get scrollLimit(): number;
     protected filterPipe: FilterPipe;
     protected preventCollapse: boolean;
 
@@ -47,11 +45,13 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             this.handleInitiallySelectedItems(selectedItems);
         }
         setTimeout(() => {
-            if (this.readonly === false && this.disabled === false) {
+            if (!this.readonly && !this.disabled) {
                 this.scrollbarComponent.update();
                 this.listenToScrollbarEvents();
             }
         }, 500);
+        this.dimmerTopVisible = false;
+        this.dimmerBottomVisible = this._items.length > this.scrollLimit;
     }
     get items(): IDropdownItem[] {
         return this._items;
@@ -93,17 +93,16 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         const scrollTop = scrollEvent.target.scrollTop;
 
         if (clientHeight + scrollTop >= scrollHeight) {
-            scrollbar.next('.dropdown__dimmer--bottom').hide();
+            this.dimmerBottomVisible = false;
         } else {
-            scrollbar.next('.dropdown__dimmer--bottom').show();
+            this.dimmerBottomVisible = true;
         }
         if (scrollTop === 0) {
-            scrollbar.prev('.dropdown__dimmer--top').hide();
+            this.dimmerTopVisible = false;
         } else {
-            scrollbar.prev('.dropdown__dimmer--top').show();
+            this.dimmerTopVisible = true;
         }
     }
-
 
     filterItems(filterValue: string) {
         this.filter = filterValue;
@@ -120,7 +119,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         }
 
         const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
-
         this.scrollVisible = visibleItemCount > this.scrollLimit;
     }
 

@@ -23,6 +23,8 @@ export class KomponentkartaComponent implements AfterViewInit {
     dropDownItems25: IDropdownItem[];
     dropDownItems200: IDropdownItem[];
     dropDownItems9: IDropdownItem[];
+    dropDownItems6: IDropdownItem[];
+    dropDownItems7: IDropdownItem[];
     dropDownItems8: IDropdownItem[];
     dropMultipleDownItems8: IDropdownItem[];
     dropDownItems10: IDropdownItem[];
@@ -47,6 +49,8 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems200 = this.getDemoItems(200);
         this.dropDownItems8 = this.getDemoItems(8);
+        this.dropDownItems7 = this.getDemoItems(7);
+        this.dropDownItems6 = this.getDemoItems(6);
         this.dropMultipleDownItems8 = this.getDemoItems(8);
         this.dropDownItems9 = this.getDemoItems(9);
         this.dropDownItems10 = this.getDemoItems(10);

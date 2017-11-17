@@ -19,6 +19,9 @@ import { ValidationComponent } from '../validation/validation.component';
 })
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges {
+    get scrollLimit(): number {
+        return this.filterVisible ? 7 : 8;
+    }
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
 

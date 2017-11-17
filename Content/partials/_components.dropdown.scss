@@ -4,7 +4,7 @@ $dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 160px;
 $dropdown-width--small: 100px;
 $filter-area-height: 60px;
-.dropdown-new {
+.dropdown {
   .dropdown--readonly {
     display: block;
     opacity: 0;
@@ -37,7 +37,7 @@ $filter-area-height: 60px;
   }
 }
 
-.dropdown {
+.dropdown--edit {
   @extend .background-color--primary;
   position: relative;
   display: inline-block;
@@ -61,7 +61,8 @@ $filter-area-height: 60px;
     background-color: white;
     width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
     display: inline-block;
-    height: 100%;
+    height: $component-height;
+    position: absolute;
     cursor: pointer;
     border-top: $border--single solid $control-border-color--default;
     border-left: $border--single solid $control-border-color--default;
@@ -87,7 +88,7 @@ $filter-area-height: 60px;
     text-align: center;
     float: right;
     background-color: transparent;
-    cursor: default;
+    cursor: pointer;
     transform: rotate(0deg);
     transition: all ease 0.3s;
     margin-top: 0px;
@@ -250,7 +251,7 @@ $filter-area-height: 60px;
  *******************************************************************************************************/
 
 .dropdown__dimmer {
-  display: none; //Is displayed by JQuery
+  display: block; //Is displayed by JQuery
   height: 24px;
   width: calc(100% - 20px); //Widht is 100% - scrollbar width
   position: absolute;
@@ -291,7 +292,7 @@ $filter-area-height: 60px;
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .dropdown {
+  .dropdown--edit {
     width: $dropdown-width--medium + $margin--slim;
     span {
       width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
@@ -329,6 +330,26 @@ $filter-area-height: 60px;
   .dropdown__filterTextbox {
     .filter-textbox {
       width: $input-width--small;
+    }
+  }
+}
+
+
+/*******************************************************************************
+* IE11 Specific styles
+* 1. Disable chevron animation, since it is too slow in IE11
+*******************************************************************************/
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+  .dropdown--edit {
+    &:after {
+      transition: none;
+    }
+    &.dropdown--open {
+      &:after {
+        transition: none;
+      }
     }
   }
 }

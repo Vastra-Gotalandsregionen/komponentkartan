@@ -84,7 +84,7 @@
     }],
 
     env: {
-      kind: 'chrome'
+      kind: 'electron'
     },
 
 

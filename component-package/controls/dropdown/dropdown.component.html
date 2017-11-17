@@ -1,12 +1,12 @@
 <div class="validation">
-  <div class="dropdown" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
+  <div class="dropdown--edit" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
     (mousedown)="onDropdownMouseDown($event)" (focusout)="onLeave()" (focusin)="onEnter()" tabindex="{{disabled ? -1 : 0}}">
-    <span tabIndex="0" *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{ selectedItem | dropdownItemToSelectedText | truncate:14 }}</span>
-    <span tabIndex="0" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{readonly ? '' : (noItemSelectedLabel | truncate:14) }}</span>
+    <span class="noselect" tabIndex="0" *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{ selectedItem | dropdownItemToSelectedText | truncate:14 }}</span>
+    <span class="noselect" tabIndex="0" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{readonly ? '' : (noItemSelectedLabel | truncate:14) }}</span>
     <div class="dropdown__menu">
       <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
 
-      <div class="dropdown__dimmer dropdown__dimmer--top"></div>
+      <div *ngIf="dimmerTopVisible" class="dropdown__dimmer dropdown__dimmer--top"></div>
       <perfect-scrollbar class="container" [config]="scrollbarConfig">
         <ul class="dropdown__menu__items">
           <li *ngIf="filterVisible" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : showAllItem.marked }">
@@ -17,7 +17,7 @@
           </li>
         </ul>
       </perfect-scrollbar>
-      <div class="dropdown__dimmer dropdown__dimmer--bottom"></div>
+      <div *ngIf="dimmerBottomVisible" class="dropdown__dimmer dropdown__dimmer--bottom"></div>
     </div>
   </div>
   <div class="validation__status" title="{{validationErrorMessage}}">

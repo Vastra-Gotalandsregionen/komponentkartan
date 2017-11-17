@@ -49,18 +49,30 @@ describe('SaveCancelComponent', () => {
         });
     });
     describe('When initialized', () => {
+        let lockButton: DebugElement;
         beforeEach(() => {
             spyOn(component.cancel, 'emit');
             spyOn(component.save, 'emit');
             spyOn(component.unlock, 'emit');
+            lockButton = rootElement.query(By.css('vgr-lock-button'));
+            fixture.detectChanges();
+        });
+        it('lock button is enabled', () => {
+            expect(lockButton.attributes['ng-reflect-disabled']).toBeNull();
         });
         describe('When unlock button is clicked', () => {
             beforeEach(() => {
-                const lockButton = rootElement.query(By.css('vgr-lock-button'));
                 lockButton.triggerEventHandler('lockChanged', false);
+                fixture.detectChanges();
+            });
+            it('lock button is disabled', () => {
+                expect(lockButton.attributes['ng-reflect-disabled']).toEqual('true');
             });
             it('component is unlocked', () => {
                 expect(component.unlocked).toBe(true);
+            });
+            it('lock button is disabled', () => {
+                expect(lockButton.attributes['ng-reflect-disabled']).toEqual('true');
             });
 
             describe('and save button is clicked', () => {
@@ -91,7 +103,6 @@ describe('SaveCancelComponent', () => {
 
             describe('and lock button is clicked', () => {
                 beforeEach(() => {
-                    const lockButton = rootElement.query(By.css('vgr-lock-button'));
                     lockButton.triggerEventHandler('lockChanged', true);
                 });
                 it('a save event is sent', () => {
@@ -102,5 +113,57 @@ describe('SaveCancelComponent', () => {
                 });
             });
         });
+
+    });
+    describe('On initialized with no lock ', () => {
+        beforeEach(() => {
+            spyOn(component.cancel, 'emit');
+            spyOn(component.save, 'emit');
+            spyOn(component.unlock, 'emit');
+            component.hideLock = true;
+            component.ngOnInit();
+            fixture.detectChanges();
+        });
+        it('lock button is hidden', () => {
+            expect(rootElement.queryAll(By.css('vgr-lock-button')).length).toBe(0);
+        });
+        it('no unlock event is emitted', () => {
+            expect(component.unlock.emit).toHaveBeenCalledTimes(0);
+        });
+        it('component is unlocked', () => {
+            expect(component.unlocked).toBeTruthy();
+        });
+        describe('and save button is clicked', () => {
+            beforeEach(() => {
+                const saveButton = rootElement.query(By.css('.button--save'));
+                saveButton.triggerEventHandler('click', {});
+            });
+            it('component remains unlocked', () => {
+                expect(component.unlocked).toBeTruthy();
+            });
+            it('no unlock event is emitted', () => {
+                expect(component.unlock.emit).toHaveBeenCalledTimes(0);
+            });
+            it('a save event is emitted', () => {
+                expect(component.save.emit).toHaveBeenCalled();
+            });
+        });
+        describe('and cancel button is clicked', () => {
+            beforeEach(() => {
+                const cancelButton = rootElement.query(By.css('.button--cancel'));
+                cancelButton.triggerEventHandler('click', {});
+            });
+
+            it('component remains unlocked', () => {
+                expect(component.unlocked).toBeTruthy();
+            });
+            it('no unlock event is emitted', () => {
+                expect(component.unlock.emit).toHaveBeenCalledTimes(0);
+            });
+            it('a cancel event is sent', () => {
+                expect(component.cancel.emit).toHaveBeenCalled();
+            });
+        });
+
     });
 });

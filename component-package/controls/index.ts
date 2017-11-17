@@ -24,7 +24,7 @@ export { TitleValueComponent } from './titleValue/titleValue.component';
 export { LoaderComponent } from './loader/loader.component';
 export { ListComponent } from './list/list.component';
 export { ListHeaderComponent, SortChangedArgs } from './list/list-header.component';
-export { ListColumnHeaderComponent, SortDirection, ColumnWidth } from './list/list-column-header.component';
+export { ListColumnHeaderComponent, SortDirection } from './list/list-column-header.component';
 export { ListColumnComponent } from './list/list-column.component';
 export { ListItemComponent } from './list-item/list-item.component';
 export { ListItemJqeuryHelper } from './list-item/listItemJqueryHelper';

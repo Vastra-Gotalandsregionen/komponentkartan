@@ -4,6 +4,11 @@ $dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 130px;
 $dropdown-width--medium--extended: 140px;
 $dropdown-width--small: 100px;
+
+vgr-monthpicker.readonly {
+  max-height: $component-height;
+}
+
 .monthpicker__dropdown {
   @extend .background-color--primary;
   position: relative;
@@ -14,26 +19,27 @@ $dropdown-width--small: 100px;
   transition: background-color 0.6s linear;
   cursor: pointer;
   .disabled & {
-    background-color: $control-color--disabled;    
+    background-color: $control-color--disabled;
     cursor: default;
   }
   .readonly & {
-    background-color: $background-color--content;    
+    background-color: $background-color--content;
     cursor: default;
   }
   span {
+    position: absolute;
+    border-radius: 0;
     padding-left: $margin--slim;
     padding-top: 2px;
     vertical-align: middle;
     background-color: white;
     width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
     display: inline-block;
-    height: 100%;
+    height: $component-height;
     cursor: pointer;
     border-top: $border--single solid $control-border-color--default;
     border-left: $border--single solid $control-border-color--default;
     border-bottom: $border--single solid $control-border-color--default;
-    border-radius: 1px;
     transition: background-color 0.6s linear, border-color 0.6s linear;
     .disabled & {
       background-color: $background-color--default;

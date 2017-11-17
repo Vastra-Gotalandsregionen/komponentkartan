@@ -7,9 +7,13 @@ import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/co
 })
 export class LockButtonComponent {
     @HostBinding('class.button') buttonClass = true;
-    @Input() disabled: boolean;
+    @Input() disabled = false;
     @Input() unlocked: boolean;
     @Output() lockChanged = new EventEmitter<boolean>();
+
+    get label(): string {
+        return this.unlocked ? 'lås' : 'lås upp';
+    }
     get locked(): boolean {
         return !this.unlocked;
     }
@@ -37,6 +41,7 @@ export class LockButtonComponent {
     keyPressed(event: KeyboardEvent): void {
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.onClick(event);
+            event.preventDefault();
         }
     }
 }

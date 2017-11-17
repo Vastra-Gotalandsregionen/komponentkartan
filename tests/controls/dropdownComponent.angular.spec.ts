@@ -42,7 +42,7 @@ describe('DropdownComponent', () => {
     describe('When component is initialized', () => {
         let dropdownElement: DebugElement;
         beforeEach(() => {
-            dropdownElement = rootElement.query(By.css('.dropdown'));
+            dropdownElement = rootElement.query(By.css('.dropdown--edit'));
             component.showAllItemText = 'Select all';
             component.ngOnChanges();
         });
@@ -147,18 +147,18 @@ describe('DropdownComponent', () => {
                     });
                 });
 
-                describe('and the text mathches 8 new items', () => {
+                describe('and the text mathches 7 new items', () => {
                     beforeEach(() => {
-                        for (let i = 0; i < 8; i++) {
+                        for (let i = 0; i < 7; i++) {
                             component.items.push({ displayName: `NewItem!${i}` } as IDropdownItem);
                         };
                         filterBoxElement.triggerEventHandler('valueChanged', 'NewItem');
                         fixture.detectChanges();
                     });
-                    it('8 items are displayed', () => {
+                    it('7 items are displayed', () => {
 
                         const listItems = rootElement.queryAll(By.css('li'));
-                        expect(listItems.length).toBe(8 + 1); // +1 for select all element
+                        expect(listItems.length).toBe(7 + 1); // +1 for select all element
                     });
                     it('scroll is not visible', () => {
                         expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(false);
@@ -299,7 +299,7 @@ describe('DropdownComponent', () => {
 
         beforeEach(() => {
             component.items = [{ displayName: 'one' }, { displayName: 'two', selected: true }, { displayName: 'three' }] as IDropdownItem[];
-            dropdownElement = rootElement.query(By.css('.dropdown'));
+            dropdownElement = rootElement.query(By.css('.dropdown--edit'));
             fixture.detectChanges();
             selectedItemSpan = dropdownElement.query(By.css('span'));
         });
@@ -316,7 +316,7 @@ describe('DropdownComponent', () => {
         let selectedItemSpan: DebugElement;
         beforeEach(() => {
             component.items = [{ displayName: 'one', selected: true }, { displayName: 'two', selected: true }, { displayName: 'three' }] as IDropdownItem[];
-            dropdownElement = rootElement.query(By.css('.dropdown'));
+            dropdownElement = rootElement.query(By.css('.dropdown--edit'));
             fixture.detectChanges();
             selectedItemSpan = dropdownElement.query(By.css('span'));
         });
@@ -365,7 +365,7 @@ describe('DropdownComponent', () => {
         });
 
         it('should have empty selected items text', () => {
-            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown--edit > span'));
             const content = selectedItemsSpan.nativeElement.textContent;
             expect(content.trim()).toBe('');
         });
@@ -384,7 +384,7 @@ describe('DropdownComponent', () => {
         });
 
         it('should display selected item text', () => {
-            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown--edit > span'));
             const content = selectedItemsSpan.nativeElement.textContent;
             expect(content.trim()).toBe('one');
         });
@@ -401,7 +401,7 @@ describe('DropdownComponent', () => {
         });
 
         it('should have empty selected items text', () => {
-            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown--edit > span'));
             const content = selectedItemsSpan.nativeElement.textContent;
             expect(content.trim()).toBe('');
         });
@@ -420,7 +420,7 @@ describe('DropdownComponent', () => {
         });
 
         it('should display selected item text', () => {
-            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown > span'));
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown--edit > span'));
             const content = selectedItemsSpan.nativeElement.textContent;
             expect(content.trim()).toBe('two');
         });

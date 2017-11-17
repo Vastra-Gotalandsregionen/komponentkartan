@@ -7,7 +7,7 @@
 })
 export class ButtonComponent implements OnChanges {
     @HostBinding('class.button') buttonClass = true;
-    @Input() disabled: boolean;
+    @Input() disabled = false;
     @Input() secondary: boolean;
     lastDisabledStatus: boolean;
     reenabled: boolean;
@@ -32,6 +32,7 @@ export class ButtonComponent implements OnChanges {
     keyPressed(event: KeyboardEvent): void {
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.onMouseDown(event);
+            event.preventDefault();
         }
     }
 }
