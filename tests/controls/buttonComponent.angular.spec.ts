@@ -63,16 +63,9 @@ describe('ButtonComponent', () => {
             expect(textButtonElement.attributes['role']).toBe('button');
         });
 
-        it('button has an accessible label', () => {
-
+        it('if a button is not disabled, the aria-disabled is set to false', () => {
+            expect(textButtonElement.attributes['aria-disabled']).toBe('false');
         });
-
-        it('if a button is disabled, the aria-disabled', () => {
-
-        });
-
-
-
 
         it('button is enabled', () => {
             expect(textButtonElement.classes['button--disabled']).toBeFalsy();
@@ -108,6 +101,9 @@ describe('ButtonComponent', () => {
             beforeEach(() => {
                 component.disabled = true;
                 fixture.detectChanges();
+            });
+            it('if a button is disabled, the aria-disabled is set to true', () => {
+                expect(textButtonElement.attributes['aria-disabled']).toBe('true');
             });
             it('button is displayed as disabled', () => {
                 expect(textButtonElement.classes['button--disabled']).toBeTruthy();
