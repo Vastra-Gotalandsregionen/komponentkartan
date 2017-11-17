@@ -29,7 +29,7 @@
     padding-left: 17px;
     padding-right: 17px;
   }
-  &:hover:not(.button--disabled) {
+  &:hover:not(.button--disabled), &:focus:not(.button--disabled) {
     .button__focus-line {
       visibility: visible;
     }
