@@ -59,6 +59,10 @@ describe('ButtonComponent', () => {
             spyOn(component.click, 'emit');
         });
 
+        it('the aria-describedby is null', () => {
+            expect(textButtonElement.attributes['aria-describedby']).toBeNull();
+        });
+
         it('The button has the role button', () => {
             expect(textButtonElement.attributes['role']).toBe('button');
         });
@@ -97,11 +101,17 @@ describe('ButtonComponent', () => {
                 expect(component.click.emit).toHaveBeenCalledTimes(0);
             });
         });
-        describe('and button is disabled', () => {
+        describe('and button is disabled, and have an aria-describedby set to "info"', () => {
             beforeEach(() => {
                 component.disabled = true;
+                component.describedBy = 'info';
                 fixture.detectChanges();
             });
+
+            it('the aria-describedby is null', () => {
+                expect(textButtonElement.attributes['aria-describedby']).toBe('info');
+            });
+
             it('if a button is disabled, the aria-disabled is set to true', () => {
                 expect(textButtonElement.attributes['aria-disabled']).toBe('true');
             });

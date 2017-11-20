@@ -79,8 +79,8 @@
             <vgr-dropdown [items]="dropDownItems200" [disabled]="isReadonlyAndDisabled"></vgr-dropdown>
           </div>
           <div>
-            <p>Toggle readonly och disabled</p>
-            <vgr-button (click)="isReadonlyAndDisabled = !isReadonlyAndDisabled;">Toggle</vgr-button>
+            <p id="toggleinfo">Toggle readonly och disabled</p>
+            <vgr-button [describedBy]="'toggleinfo'" (click)="isReadonlyAndDisabled = !isReadonlyAndDisabled;">Toggle</vgr-button>
           </div>
         </div>
         <div>
