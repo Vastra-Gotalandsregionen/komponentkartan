@@ -9,6 +9,7 @@ export class ButtonComponent implements OnChanges {
     @HostBinding('class.button') buttonClass = true;
     @Input() disabled = false;
     @Input() secondary: boolean;
+    @Input() describedBy: string;
     lastDisabledStatus: boolean;
     reenabled: boolean;
     @Output() click = new EventEmitter<string>();
