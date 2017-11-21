@@ -120,6 +120,11 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
         const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
         this.scrollVisible = visibleItemCount > this.scrollLimit;
+        if (!this.scrollVisible) {
+            this.dimmerBottomVisible = false;
+            this.dimmerTopVisible = false;
+        }
+
     }
 
     onDropdownMouseDown(event: Event) {
