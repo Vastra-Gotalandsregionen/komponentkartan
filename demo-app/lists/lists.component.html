@@ -19,6 +19,7 @@
           </vgr-title-value>
           <vgr-title-value [title]="'Nettobelopp'">
             <div class="row-layout">
+
               <span *ngIf="netAmount" class="flex-right" style="margin-right:30px">{{netAmount | currency:'SEK':true}}</span>
             </div>
           </vgr-title-value>
@@ -155,7 +156,6 @@
                   </vgr-title-value>
                   <vgr-title-value [title]="'Nettobelopp'" [slim]="true">
                     <div class="row-layout">
-
                       <span *ngIf="netAmount" class="flex-right" style="margin-right:30px">{{netAmount | currency:'SEK':true}}</span>
                     </div>
                   </vgr-title-value>
@@ -166,7 +166,7 @@
                     </div>
                   </vgr-title-value>
                   <vgr-title-value [title]="'Månader'">
-                    <div class="row-layout">
+                    <div class="row-layout row-layout--tight">
                       <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
                       <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
                     </div>
@@ -236,7 +236,7 @@
                     </div>
                   </vgr-title-value>
                   <vgr-title-value [title]="'Månader'" [slim]="!cardUnlocked">
-                    <div class="row-layout">
+                    <div class="row-layout row-layout--tight">
                       <vgr-monthpicker [readonly]="!cardUnlocked" [selectedDate]="initialFromDate"></vgr-monthpicker>
                       <vgr-monthpicker [readonly]="!cardUnlocked" [selectedDate]="initialToDate"></vgr-monthpicker>
                     </div>
