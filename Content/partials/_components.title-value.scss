@@ -16,7 +16,7 @@
     padding: 10px 0 5px 0;
     transition: padding 0.2s linear;
     .slim-row &{
-      padding: 5px 0 0 0;
+      padding: 8px 0 0 0;
     }
   }
 
@@ -27,13 +27,12 @@
     transition: padding 0.2s linear;
     width: 290px;
     height: 30px;
-    >span {
-      padding-top: 5px;
+    >.row-layout > span {
       display: block;
-      padding-left: $margin--slim;
+      padding-top: 3px;
     }
     .slim-row &{
-      padding: 5px 0 0 0;
+      padding-top: 5px;
     }
   }
 
@@ -41,15 +40,18 @@
     .title-value__value {
       width: 300px;
       padding: 7px 0 8px 0;
-      >span {
-        padding-top: 3px;
-      }
       .slim-row &{
         padding: 3px 0 0 0;
+      }
+      >.row-layout > span {
+        padding-top: 3px;
       }
     }
     .title-value__title {
       padding: 10px 0 8px 0;
+      .slim-row &{
+        padding: 5px 0 0 0;
+      }
     }
     .title-value-layout {
       border-spacing: 0px;
