@@ -30,6 +30,7 @@
     >span, .row-layout > span {
       display: block;
       padding-top: 3px;
+      padding-left: $margin--slim;
     }
     .slim-row &{
       padding-top: 5px;
