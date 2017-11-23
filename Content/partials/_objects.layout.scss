@@ -7,6 +7,12 @@
   >* {
     margin-left: $margin--regular;
   }
+
+  &.row-layout--tight {
+    >*:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
 }
 
 .row-layout--equal-height {
