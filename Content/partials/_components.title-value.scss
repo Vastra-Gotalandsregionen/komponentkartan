@@ -27,7 +27,7 @@
     transition: padding 0.2s linear;
     width: 290px;
     height: 30px;
-    >.row-layout > span {
+    >span, .row-layout > span {
       display: block;
       padding-top: 3px;
     }
@@ -43,7 +43,7 @@
       .slim-row &{
         padding: 3px 0 0 0;
       }
-      >.row-layout > span {
+      >span, .row-layout > span {
         padding-top: 3px;
       }
     }
