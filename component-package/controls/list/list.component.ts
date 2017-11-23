@@ -21,9 +21,7 @@ export class ListComponent implements AfterContentInit {
     }
     ngAfterContentInit() {
         this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
-        this.items.forEach(item => {
-            item.copyPropertiesFromHeader(this.listHeader)
-        });
+        this.copyItemWidthsFromHeader();
         if (!this.allowMultipleExpandedItems) {
             this.items.forEach(changedContainer => {
                 changedContainer.expandedChanged.subscribe((expanded: boolean) => {
@@ -33,6 +31,15 @@ export class ListComponent implements AfterContentInit {
                 });
             });
         }
+        this.items.changes.subscribe(() => {
+            this.copyItemWidthsFromHeader();
+        });
     }
 
+    copyItemWidthsFromHeader() {
+        this.items.forEach(item => {
+            item.copyPropertiesFromHeader(this.listHeader)
+        });
+
+    }
 }

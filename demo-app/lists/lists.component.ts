@@ -7,6 +7,7 @@ import { ModalService } from '../../component-package/services/modalService';
 import { ModalButtonConfiguration } from '../../component-package/services/modalService';
 import { SortDirection } from '../../component-package/controls/list/list-column-header.component';
 import { SortChangedArgs, ListHeaderComponent } from '../../component-package/controls/list/list-header.component';
+import { setTimeout } from 'core-js/library/web/timers';
 
 @Component({
     moduleId: module.id,
@@ -34,6 +35,7 @@ export class ListsComponent {
     public initialFromDate: Date = new Date(2017, 1, 20);
     public initialToDate: Date = new Date(2017, 10, 20);
 
+    public claimRows: ExpandableRow<any, any>[];
 
     constructor(private modalService: ModalService) {
         const examplePeople = [
@@ -44,16 +46,41 @@ export class ListsComponent {
             { id: '5', firstName: 'Erik', lastName: '', organisations: ['Team 2', 'Team 4'] } as ExamplePerson,
         ];
 
+
+
+
         this.grossAmount = 15000;
         this.taxPercent = 32;
 
-
+        //this.loadItems();
         this.peopleRows = examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
         this.peopleRows[0].notification = { message: 'Information saknas', icon: NotificationIcon.ExclamationRed, type: NotificationType.Permanent } as RowNotification;
         this.peopleRows[4].notification = { message: 'Personen är inaktiv', icon: NotificationIcon.Exclamation, type: NotificationType.Permanent } as RowNotification;
     }
 
+    loadItems() {
+
+        this.claimRows = [
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 122300200112', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 122343242342', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 1223424242', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 12232342342', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 12232342344', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 12231111222', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 122312135654', payableAmount: 200, issueDate: new Date(), visits: undefined }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 12230098667', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 1223654767', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 12237567567', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 1223567567', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 12234534w345', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 122353453453', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 122334534534', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: 'ZVFf9023874sdpaföjou', invoiceId: 'INV 122334534534', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] })];
+
+
+
+    }
 
 
     onSortChanged(event: SortChangedArgs) {
