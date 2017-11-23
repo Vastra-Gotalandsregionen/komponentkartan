@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "0.3.1-rc16",
+  "version": "0.3.3-rc1",
   "author": "Västra Götalandsregionen",
   "scripts": {
     "start": "concurrent \"npm run _watch-ts\" \"npm run _local-webserver\" \"npm run _watch-css\" \"npm run _watch-demo-app-css\"",
