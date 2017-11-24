@@ -8,6 +8,10 @@
   }
   .page-block & {
     margin: -$margin--slim;
+    &.list--inline {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -244,6 +248,10 @@
   .list {
     .page-block & {
       margin: -$margin--fat;
+      &.list--inline {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
     }
   }
   .list__header {
