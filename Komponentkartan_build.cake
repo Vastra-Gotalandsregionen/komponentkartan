@@ -223,8 +223,8 @@ Task("Deploy-Frontend")
 			Direction = Direction.dest,
 			Path = destinationPath,
 			WebManagementService = deployServer,
-			Username = "deploy",
-			Password = "Spring2017!"
+			Username = EnvironmentVariable("IIS_Deploy_Username"),
+			Password = EnvironmentVariable("IIS_Deploy_Pwd")
 		}
 	});
 });

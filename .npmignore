@@ -7,7 +7,7 @@ index.html
 wallaby.config.js
 chutzpah.json
 build.ps1
-build.cake
+*build.cake
 systemjs.config.js
 tsconfig.json
 .vs/
