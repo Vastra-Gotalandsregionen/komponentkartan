@@ -208,7 +208,7 @@ Task("Deploy-Frontend")
 	var sourcePath =  MakeAbsolute(Directory("./BuildOutput/")).FullPath;
 	var destinationPath = environment + "-komponentkartan";
 	var username =  EnvironmentVariable("DeployUsername");
-	var password =  EnvironmentVariable("DeployPwd")
+	var password =  EnvironmentVariable("DeployPwd");
 
 		MsDeploy(new MsDeploySettings
 	{
