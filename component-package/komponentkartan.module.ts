@@ -65,6 +65,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.PageBlockComponent,
         control.ListColumnHeaderComponent,
         control.ListColumnComponent,
+        control.ListColumnCheckboxComponent,
         control.ListColumnTrashcanComponent,
         control.ListHeaderComponent
     ],
@@ -104,6 +105,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.PageBlockComponent,
         control.ListColumnHeaderComponent,
         control.ListColumnComponent,
+        control.ListColumnCheckboxComponent,
         control.ListColumnTrashcanComponent,
         control.ListHeaderComponent
     ],

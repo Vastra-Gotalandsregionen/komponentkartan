@@ -105,7 +105,7 @@
           <vgr-list-column-header [text]="'Rader'" [width]="2"></vgr-list-column-header>
           <vgr-list-column-header [text]="'!'" [width]="2"></vgr-list-column-header>
           <vgr-list-column-header [text]="'Status'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Välj'" [width]="1"></vgr-list-column-header>
+          <vgr-list-column-header [width]="1"></vgr-list-column-header>
           <vgr-list-column-header [width]="1"></vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let c of claimRows">
@@ -120,6 +120,7 @@
             <vgr-list-column [text]="'Test'"></vgr-list-column>
             <vgr-list-column [text]="'Test'"></vgr-list-column>
             <vgr-list-column [text]="'Test'"></vgr-list-column>
+            <vgr-list-column-checkbox (check)="onSelectRowChanged(c)"></vgr-list-column-checkbox>
             <vgr-list-column-trashcan (delete)="onDeleteRow(c)"></vgr-list-column-trashcan>
           </div>
           <div class="list-item__content">

@@ -198,6 +198,11 @@
   display: inline-block;
 }
 
+.list-item__checkbox__icon {
+  @extend .checkbox__image;
+  display: inline-block;
+}
+
 .list-item__content {
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
