@@ -193,6 +193,11 @@
   margin-right: 6px;
 }
 
+.list-item__trashcan__icon {
+  @extend .bg-image-icon-trashcan;
+  display: inline-block;
+}
+
 .list-item__content {
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
@@ -277,4 +282,32 @@
     padding: $margin--fat;
     width: #{$content-width--medium};
   }
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@mixin flex-column($number) {
+  .flex-column--#{$number} {
+    flex-grow: 0;
+    flex-basis: 52px * $number;
+    .list-item--displayTrashcan & {
+      flex-basis: 50px * $number;
+    }
+  }
+  @media screen and (min-width: $desktop-width--medium) {
+    .flex-column--#{$number} {
+      flex-basis: 56px * $number;
+      .list-item--displayTrashcan & {
+        flex-basis: 54px * $number;
+      }
+    }
+  }
+}
+
+@for $i from 1 through 20 {
+  @include flex-column($i);
 }
