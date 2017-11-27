@@ -12,7 +12,7 @@ export class FakeBComponent {
 
     constructor() { }
 
-    onSortChanged(event) {
+    onSortChanged(event: any) {
         console.log(event);
     }
 }
