@@ -136,6 +136,10 @@ export class ListsComponent {
     onCardUnlocked() {
         this.cardUnlocked = true;
     }
+
+    OnDelete(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
+        console.log('delete! ', row);
+    }
 }
 
 export interface ExamplePerson {

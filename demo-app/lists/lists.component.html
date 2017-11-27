@@ -105,7 +105,8 @@
           <vgr-list-column-header [text]="'Rader'" [width]="2"></vgr-list-column-header>
           <vgr-list-column-header [text]="'!'" [width]="2"></vgr-list-column-header>
           <vgr-list-column-header [text]="'Status'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Välj'" [width]="2"></vgr-list-column-header>
+          <vgr-list-column-header [text]="'Välj'" [width]="1"></vgr-list-column-header>
+          <vgr-list-column-header [text]="'X'" [width]="1"></vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let c of claimRows">
           <div class="list-item__header">
@@ -119,6 +120,7 @@
             <vgr-list-column [text]="'Test'"></vgr-list-column>
             <vgr-list-column [text]="'Test'"></vgr-list-column>
             <vgr-list-column [text]="'Test'"></vgr-list-column>
+            <span class="list-item__trashcan__icon" (click)="OnDelete(c)"></span>
           </div>
           <div class="list-item__content">
             Hej
