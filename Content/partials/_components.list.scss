@@ -193,16 +193,6 @@
   margin-right: 6px;
 }
 
-.list-item__trashcan__icon {
-  @extend .bg-image-icon-trashcan;
-  display: inline-block;
-}
-
-.list-item__checkbox__icon {
-  @extend .checkbox__image;
-  display: inline-block;
-}
-
 .list-item__content {
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
@@ -315,4 +305,24 @@
 
 @for $i from 1 through 20 {
   @include flex-column($i);
+}
+
+.list__column--trashcan {
+  height: 100%;
+  .list-item__trashcan__icon {
+    @extend .bg-image-icon-trashcan;
+    display: inline-block;
+  }
+}
+
+.list__column--checkbox {
+  height: 100%;
+  .checkbox--inline {
+    height: 100%;
+    .checkbox {
+      justify-content: center;
+      flex-direction: column;
+      padding: 0 10px;
+    }
+  }
 }
