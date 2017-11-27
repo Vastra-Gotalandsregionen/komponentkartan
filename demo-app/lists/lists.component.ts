@@ -137,8 +137,8 @@ export class ListsComponent {
         this.cardUnlocked = true;
     }
 
-    OnDelete(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
-        console.log('delete! ', row);
+    onDeleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
+        console.log('delete row: ', row);
     }
 }
 

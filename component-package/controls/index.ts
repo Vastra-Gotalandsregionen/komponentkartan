@@ -26,6 +26,7 @@ export { ListComponent } from './list/list.component';
 export { ListHeaderComponent, SortChangedArgs } from './list/list-header.component';
 export { ListColumnHeaderComponent, SortDirection } from './list/list-column-header.component';
 export { ListColumnComponent } from './list/list-column.component';
+export { ListColumnTrashcanComponent } from './list/list-column-trashcan.component';
 export { ListItemComponent } from './list-item/list-item.component';
 export { ListItemJqeuryHelper } from './list-item/listItemJqueryHelper';
 export { PageComponent } from './page/page.component';
