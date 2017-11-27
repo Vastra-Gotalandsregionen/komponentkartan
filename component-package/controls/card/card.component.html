@@ -1,9 +1,20 @@
 <ng-content select=".card__top"></ng-content>
-<div class="card__bottom-container">
-  <div class="card__left-container">
-    <ng-content select="vgr-card-section.card__left"></ng-content>
+
+<div *ngIf="mode===2">
+  <div class="card__bottom-container">
+    <div class="card__left-container">
+      <ng-content select="vgr-card-section.card__left"></ng-content>
+    </div>
+    <div class="card__right-container">
+      <ng-content select="vgr-card-section.card__right"></ng-content>
+    </div>
   </div>
-  <div class="card__right-container">
-    <ng-content select="vgr-card-section.card__right"></ng-content>
+</div>
+
+<div *ngIf="mode===1">
+  <div class=" card__bottom-container">
+    <div class="card__fullwidth-container">
+      <ng-content select="vgr-card-section"></ng-content>
+    </div>
   </div>
 </div>

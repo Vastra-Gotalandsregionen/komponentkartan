@@ -30,6 +30,11 @@
   }
 }
 
+.card__fullwidth-container {
+  @extend .card__section-container;
+  flex: 1 1 auto;
+}
+
 .card__left-container {
   @extend .card__section-container;
   border-right: 1px solid $border-color;

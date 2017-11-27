@@ -3,11 +3,12 @@
     <vgr-button (click)="view='A'">View A</vgr-button>
     <vgr-button (click)="view='B'">View B</vgr-button>
     <vgr-button (click)="view='C'">View C</vgr-button>
+    <vgr-button (click)="view='D'">Full Width Card</vgr-button>
     <vgr-button (click)="actionpanel=!actionpanel">Action</vgr-button>
   </vgr-page-header>
   <vgr-action-panel [expanded]="actionpanel" [title]="'Action-panel'">
 
-    <vgr-card>
+    <vgr-card [mode]="2">
       <div class="card__top">
         <div class="row-layout">
           <div class="enhet-card__enhet-title">Enhet</div>
@@ -136,6 +137,7 @@
     <vgr-fake-a *ngSwitchCase="'A'"></vgr-fake-a>
     <vgr-fake-b *ngSwitchCase="'B'"></vgr-fake-b>
     <vgr-fake-c *ngSwitchCase="'C'"></vgr-fake-c>
+    <vgr-full-width-card *ngSwitchCase="'D'"></vgr-full-width-card>
   </vgr-page-body>
 
 </vgr-page>

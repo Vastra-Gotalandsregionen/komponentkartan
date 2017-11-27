@@ -46,7 +46,7 @@ export class ListsComponent {
             { id: '5', firstName: 'Erik', lastName: '', organisations: ['Team 2', 'Team 4'] } as ExamplePerson,
         ];
 
-
+        this.actionPanelVisible = true;
 
 
         this.grossAmount = 15000;
