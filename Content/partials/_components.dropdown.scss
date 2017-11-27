@@ -14,6 +14,7 @@ $filter-area-height: 60px;
     transition-delay: 0s;
   }
   .validation {
+    height: 30px;
     display: block;
     opacity: 1;
     max-height: 300px;
@@ -33,6 +34,8 @@ $filter-area-height: 60px;
       max-width: $max-text-width--small;
       transition: opacity 0.3s linear, max-height 0.3s linear, max-width 0.6s;
       transition-delay: 0.3s, 0.3s, 0s;
+      padding-left: $border--single + $margin--slim;
+      padding-top: $border--single + 2px;
     }
   }
 }
@@ -283,12 +286,6 @@ $filter-area-height: 60px;
 
 .scroll-element.scroll-x {
   display: none !important;
-}
-
-.dropdown--readonly {
-  padding-left: $border--single + $margin--slim;
-  padding-top: $border--single + 2px;
-  span {}
 }
 
 @media screen and (min-width: $desktop-width--medium) {
