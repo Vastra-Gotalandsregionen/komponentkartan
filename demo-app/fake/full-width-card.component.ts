@@ -8,6 +8,7 @@ import { IDropdownItem } from '../../component-package/models/dropdownItem.model
 })
 export class FullWidthCardComponent {
 
+  readonly = true;
   constructor() { }
 
 }
