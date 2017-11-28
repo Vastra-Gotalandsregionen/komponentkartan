@@ -17,11 +17,13 @@ export class ListColumnHeaderComponent {
     @Input() width: number;
     @Input() sortKey: string;
 
-    @HostBinding('class.list__column-header--sorted-desc') get isSortDescending(): boolean {
+    @HostBinding('class.list__column-header--sorted-desc')
+    get isSortDescending(): boolean {
         return this.sortDirection === SortDirection.Descending;
     };
 
-    @HostBinding('class.list__column-header--sorted-asc') get isSortAscending(): boolean {
+    @HostBinding('class.list__column-header--sorted-asc')
+    get isSortAscending(): boolean {
         return this.sortDirection === SortDirection.Ascending;
     };
 

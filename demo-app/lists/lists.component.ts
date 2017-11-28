@@ -136,6 +136,14 @@ export class ListsComponent {
     onCardUnlocked() {
         this.cardUnlocked = true;
     }
+
+    onSelectRowChanged(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
+        console.log('select row: ', row);
+    }
+
+    onDeleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
+        console.log('delete row: ', row);
+    }
 }
 
 export interface ExamplePerson {

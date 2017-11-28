@@ -7,7 +7,6 @@
   >* {
     margin-left: $margin--regular;
   }
-
   &.row-layout--tight {
     >*:not(:first-child) {
       margin-left: 10px;
@@ -60,28 +59,6 @@
   user-select: none;
   /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-@mixin flex-column($number) {
-  .flex-column--#{$number} {
-    flex-grow: 0;
-    flex-basis: 52px * $number;
-  }
-  @media screen and (min-width: $desktop-width--medium) {
-    .flex-column--#{$number} {
-      flex-basis: 56px * $number;
-    }
-  }
-}
-
-@for $i from 1 through 20 {
-  @include flex-column($i);
 }
 
 .flex-right {
