@@ -10,12 +10,13 @@ import { ListColumnComponent } from './list-column.component';
 })
 export class ListColumnCheckboxComponent extends ListColumnComponent {
     @HostBinding('class.list__column--checkbox') listColumnCheckboxClass = true;
-    @Output() check = new EventEmitter();
+    @Output() checkedChanged = new EventEmitter<boolean>();
     @Input() checked = false;
     @Input() disabled = false;
 
-    onItemCheckChanged() {
-        this.check.emit();
+    onItemCheckChanged(event: boolean) {
+        this.checked = event;
+        this.checkedChanged.emit(this.checked);
     }
 }
 
