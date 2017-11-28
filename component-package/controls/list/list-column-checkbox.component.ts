@@ -15,7 +15,6 @@ export class ListColumnCheckboxComponent extends ListColumnComponent {
     @Input() disabled = false;
 
     onItemCheckChanged() {
-        // e.cancelBubble = true;
         this.check.emit();
     }
 }
