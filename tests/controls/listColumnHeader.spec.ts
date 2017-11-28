@@ -7,7 +7,11 @@ describe('[ListColumnHeaderComponent]', () => {
         component = new ListColumnHeaderComponent();
     });
 
+
     describe('When initialized,', () => {
+        it('classes is set', () => {
+            expect(component.classes).toBe('list__column-header flex-column flex-column--1');
+        });
         it('the sortdirection is none', () => {
             expect(component.sortDirection).toBe(SortDirection.None);
         });
@@ -36,6 +40,16 @@ describe('[ListColumnHeaderComponent]', () => {
             });
         });
     });
+
+    describe('when initialized with column width set to 3', () => {
+        beforeEach(() => {
+            component.width = 3;
+        })
+
+        it('classes is set to reflect width', () => {
+            expect(component.classes).toBe('list__column-header flex-column flex-column--3');
+        })
+    })
 
     describe('When initialized with sortdirection is ascending,', () => {
         beforeEach(() => {

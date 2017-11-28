@@ -12,6 +12,11 @@ export class FakeBComponent {
 
     constructor() { }
 
+<<<<<<< HEAD
     onSortChanged(event) {
+=======
+    onSortChanged(event: any) {
+        console.log(event);
+>>>>>>> master
     }
 }
