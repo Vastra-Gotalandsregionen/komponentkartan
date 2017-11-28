@@ -20,6 +20,7 @@ import { ExampleLayoutComponent } from './example-layout/example-layout.componen
 import { FakeAComponent } from './fake/fake-a.component';
 import { FakeBComponent } from './fake/fake-b.component';
 import { FakeCComponent } from './fake/fake-c.component';
+import { FullWidthCardComponent } from './fake/full-width-card.component';
 import { LoaderDemoComponent } from './loaderdemo/loaderdemo.component'
 import { CityService } from './inputFields/cityService';
 
@@ -49,7 +50,8 @@ import { appRoutes } from './routes'
         ExampleLayoutComponent,
         FakeAComponent,
         FakeBComponent,
-        FakeCComponent
+        FakeCComponent,
+        FullWidthCardComponent
     ],
     providers: [
         CityService, { provide: LOCALE_ID, useValue: 'sv-SE' }

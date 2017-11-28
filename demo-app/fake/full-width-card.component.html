@@ -1,0 +1,53 @@
+<vgr-page-block>
+  <vgr-card>
+    <div class="card__top">
+      <div class="row-layout">
+        <div class="enhet-card__enhet-title">Enhet</div>
+        <div>Enhetens namn</div>
+      </div>
+
+      <div class="flex-right">
+        <vgr-button class="enhet-card__abort-button" [secondary]="true ">Avbryt</vgr-button>
+        <vgr-button [secondary]="true ">Spara enhet</vgr-button>
+      </div>
+    </div>
+
+    <vgr-card-section [title]=" 'Enhetsinformation' " [expanded]="true " [readonly]="readonly">
+      <div class="title-value-layout">
+        <vgr-title-value [title]=" 'HSA-id' ">
+          <span>SE2321000131-E000000011887</span>
+        </vgr-title-value>
+        <vgr-title-value title="Avtalskod* ">
+          <vgr-input></vgr-input>
+        </vgr-title-value>
+        <vgr-title-value [title]=" 'Enhetskod*' ">
+          <span></span>
+        </vgr-title-value>
+        <vgr-title-value [title]=" 'Nämnd*' ">
+          <!-- <vgr-dropdown [noItemSelectedLabel]="'Välj nämnd'"></vgr-dropdown> -->
+        </vgr-title-value>
+        <vgr-title-value [title]=" 'Avtalsperiod*' ">
+          <div class="row-layout">
+            <vgr-monthpicker></vgr-monthpicker>
+            <vgr-monthpicker></vgr-monthpicker>
+          </div>
+        </vgr-title-value>
+      </div>
+    </vgr-card-section>
+    <vgr-card-section [title]=" 'Ersättningsgrundande information' " [readonly]="readonly " [expanded]="true">
+      <div class="title-value-layout ">
+        <vgr-title-value [title]=" 'Medverkan i familjecentral' ">
+          <!-- <vgr-dropdown [noItemSelectedLabel]="'Välj'"></vgr-dropdown> -->
+        </vgr-title-value>
+        <vgr-title-value [title]=" 'Regionsövergripande grupper (kr/månad)' ">
+          <vgr-input></vgr-input>
+        </vgr-title-value>
+      </div>
+    </vgr-card-section>
+    <vgr-card-section [title]=" 'Eget innehåll' " [readonly]="readonly " [expanded]="false">
+      <div>
+        Här kan man lägga in vad man vill själv
+      </div>
+    </vgr-card-section>
+  </vgr-card>
+</vgr-page-block>
