@@ -33,8 +33,6 @@ describe('[MonthpickerComponent]', () => {
     describe('When initialized with minDate currentYearPlusOneYear-01-01 and currentYearPlusOneYear-02-01', () => {
         const currentYearPlusOneYear = (new Date().getFullYear() + 1);
         beforeEach(() => {
-
-            console.log(currentYearPlusOneYear)
             component.minDate = new Date(currentYearPlusOneYear, 0, 1);
             component.maxDate = new Date(currentYearPlusOneYear, 1, 1);
             component.ngOnInit();
@@ -52,7 +50,6 @@ describe('[MonthpickerComponent]', () => {
     describe('When initialized with minDate currentYearPlusMinusYear-01-01 and currentYearMinusOneYear-02-01', () => {
         const currentYearMinusOneYear = (new Date().getFullYear() - 1);
         beforeEach(() => {
-            console.log(currentYearMinusOneYear)
             component.minDate = new Date(currentYearMinusOneYear, 0, 1);
             component.maxDate = new Date(currentYearMinusOneYear, 1, 1);
             component.ngOnInit();
