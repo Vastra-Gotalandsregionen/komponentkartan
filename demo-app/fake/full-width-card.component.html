@@ -62,14 +62,23 @@
 
       </div>
     </vgr-card-section>
-    <vgr-card-section [title]=" 'Ersättningsgrundande information' " [readonly]="readonly " [expanded]="true">
+    <vgr-card-section [title]=" 'Ersättningsgrundande information' " [readonly]="readonly " [expanded]="true" class="card__right">
       <div class="title-value-layout ">
-        <vgr-title-value [title]=" 'Medverkan i familjecentral' ">
-          <!-- <vgr-dropdown [noItemSelectedLabel]="'Välj'"></vgr-dropdown> -->
+        <vgr-title-value [title]="'Kommun'" [slim]="true">
+          <span>Vänersborg</span>
         </vgr-title-value>
-        <vgr-title-value [title]=" 'Regionsövergripande grupper (kr/månad)' ">
-          <vgr-input></vgr-input>
+        <vgr-title-value [title]="'Kommun'" [slim]="true">
+
+          <span>Duellvägen
+            <br>462 60
+            <br>Vänersborg
+          </span>
+
         </vgr-title-value>
+        <vgr-title-value [title]="'Geokod (PT90)'" [slim]="true">
+          <span>x: 6471784</span>
+        </vgr-title-value>
+
       </div>
     </vgr-card-section>
     <vgr-card-section [title]=" 'Eget innehåll' " [readonly]="readonly " [expanded]="false">
