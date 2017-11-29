@@ -108,7 +108,7 @@ export interface ExamplePerson {
     organisations: string[];
     canBeDeleted: boolean;
     deleted: boolean;
-    selected;
+    selected: boolean;
 }
 
 
