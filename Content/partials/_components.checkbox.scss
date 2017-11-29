@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  height: $component-height;
   &.checkbox--disabled {
     cursor: default;
   }

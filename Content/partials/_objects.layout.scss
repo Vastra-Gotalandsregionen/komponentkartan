@@ -12,6 +12,9 @@
       margin-left: 10px;
     }
   }
+  &.row-layout--component {
+    height: $component-height;
+  }
 }
 
 .row-layout--equal-height {

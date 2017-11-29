@@ -4,9 +4,9 @@ $dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 130px;
 $dropdown-width--medium--extended: 140px;
 $dropdown-width--small: 100px;
-
 vgr-monthpicker.readonly {
   max-height: $component-height;
+  height: $component-height;
 }
 
 .monthpicker__dropdown {
