@@ -1,332 +1,335 @@
 //A list of expandable containers
 .list {
-    position: relative;
-    display: block;
-    background-color: $background-color--default;
-    .list-item {
-        background-color: $background-color--content;
+  position: relative;
+  display: block;
+  background-color: $background-color--default;
+  .list-item {
+    background-color: $background-color--content;
+  }
+  .page-block & {
+    margin: -$margin--slim;
+    &.list--inline {
+      margin-top: 0;
+      margin-bottom: 0;
     }
-    .page-block & {
-        margin: -$margin--slim;
-        &.list--inline {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-    }
+  }
 }
 
 .list__header {
-    background-color: $background-color--content;
-    z-index: $layer-one;
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 37px;
-    font-weight: bold;
-    margin-bottom: 1px;
-    margin-left: -$margin--slim;
-    margin-right: -$margin--slim;
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
-    border-bottom: 1px solid $background-color--default; //The header is WIDER than the main-content, since it has borders to the right and left to cover scrolling shadows from below
-    width: calc(#{$content-width--small} + #{$margin--slim} + #{$margin--slim}); //The borders cover the scrolling shadows from below
-    border-right: $margin--slim solid $background-color--default;
-    border-left: $margin--slim solid $background-color--default;
-    .list--inline & {
-        position: relative;
-        border-bottom: none;
-    }
-    .list--actions-visible & {
-        position: relative;
-        border-bottom: none;
-    }
-    &:after {
-        content: "";
-        margin-left: auto;
-        width: 15px !important;
-        height: 30px;
-    } //Pop-out b
+  background-color: $background-color--content;
+  z-index: $layer-one;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 37px;
+  font-weight: bold;
+  margin-bottom: 1px;
+  margin-left: -$margin--slim;
+  margin-right: -$margin--slim;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  border-bottom: 1px solid $background-color--default; //The header is WIDER than the main-content, since it has borders to the right and left to cover scrolling shadows from below
+  width: calc(#{$content-width--small} + #{$margin--slim} + #{$margin--slim}); //The borders cover the scrolling shadows from below
+  border-right: $margin--slim solid $background-color--default;
+  border-left: $margin--slim solid $background-color--default;
+  .list--inline & {
+    position: relative;
+    border-bottom: none;
+  }
+  .list--actions-visible & {
+    position: relative;
+    border-bottom: none;
+  }
+  &:after {
+    content: "";
+    margin-left: auto;
+    width: 15px !important;
+    height: 30px;
+  } //Pop-out b
 }
 
 .list__items {
-    position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
+  position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
+  &:before {
+    content: "";
+    width: $content-width--small;
+    height: 35px;
+    display: block;
+  }
+  .list--actions-visible & {
     &:before {
-        content: "";
-        width: $content-width--small;
-        height: 35px;
-        display: block;
+      height: 0px;
+      display: none;
     }
-    .list--actions-visible & {
-        &:before {
-            height: 0px;
-            display: none;
-        }
+  }
+  .list--inline & {
+    &:before {
+      height: 0px;
+      display: none;
     }
-    .list--inline & {
-        &:before {
-            height: 0px;
-            display: none;
-        }
-    }
+  }
 }
 
 
 /* Expandable container = en rad i listan som kan expanderas*/
 
 .list-item {
-    visibility: visible;
+  visibility: visible;
+  display: block;
+  margin-top: 1px;
+  box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
+  .list-item__header:after {
+    @extend .bg-image-icon-chevron;
+    content: "";
+    margin-left: auto;
+    transform: rotate(-180deg);
+    transition: transform 0.4s;
+    width: 15px !important;
+    background-size: 100% !important;
     display: block;
-    margin-top: 1px;
-    box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
+  } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
+  transition: margin-top 0.2s ease-in;
+  &.list-item--expanded:not(.list-item--compact) {
+    box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+  &.list-item--collapsed {
     .list-item__header:after {
-        @extend .bg-image-icon-chevron;
-        content: "";
-        margin-left: auto;
-        transform: rotate(-180deg);
-        transition: transform 0.4s;
-        width: 15px !important;
-        background-size: 100% !important;
-        display: block;
-    } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
-    transition: margin-top 0.2s ease-in;
-    &.list-item--expanded:not(.list-item--compact) {
-        box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-        margin-top: 14px;
-        margin-bottom: 14px;
+      //OBS! Denna måste ligga efter expanded-stilen i filen!
+      @extend .bg-image-icon-chevron;
+      vertical-align: middle;
+      margin-left: auto;
+      transform: rotate(0deg);
+      transition: transform 0.4s;
     }
-    &.list-item--collapsed {
-        .list-item__header:after {
-            //OBS! Denna måste ligga efter expanded-stilen i filen!
-            @extend .bg-image-icon-chevron;
-            vertical-align: middle;
-            margin-left: auto;
-            transform: rotate(0deg);
-            transition: transform 0.4s;
-        }
-    } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
-    &.list-item--collapsed:not(.list-item--compact):hover {
-        position: relative;
-        box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-    }
-    &.list-item--deleted {
-        margin-top: 0px;
-        visibility: hidden;
-        transition: visibility 0.3s ease-out, margin-top 0.3s ease-out;
-        transition-delay: 0.3s;
-    }
+  } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
+  &.list-item--collapsed:not(.list-item--compact):hover {
+    position: relative;
+    box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
+  }
+  &.list-item--deleted {
+    margin-top: 0px;
+    visibility: hidden;
+    transition: visibility 0.3s ease-out, margin-top 0.3s ease-out;
+    transition-delay: 0.3s;
+  }
 }
 
 .list-item__header {
-    opacity: 1;
-    cursor: pointer;
-    height: 35px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
+  opacity: 1;
+  cursor: pointer;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  transition: opacity 0.3s linear, height 0.3s linear;
+  transition-delay: 0.2s, 0s;
+  .list-item--compact & {
+    height: auto;
+  }
+  .list-item--expanded & {
+    border-bottom: 1px solid $primary-color--default;
+  }
+  .list-item--not-interactable & {
+    cursor: default;
+  }
+  .list-item--deleted & {
+    opacity: 0;
+    height: 0px;
     transition: opacity 0.3s linear, height 0.3s linear;
-    transition-delay: 0.2s, 0s;
-    .list-item--compact & {
-        height: auto;
-    }
-    .list-item--expanded & {
-        border-bottom: 1px solid $primary-color--default;
-    }
-    .list-item--not-interactable & {
-        cursor: default;
-    }
-    .list-item--deleted & {
-        opacity: 0;
-        height: 0px;
-        transition: opacity 0.3s linear, height 0.3s linear;
-        transition-delay: 0s, 0.2s;
-    }
+    transition-delay: 0s, 0.2s;
+  }
 }
 
 .list__column {
-    span {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        padding-right: 10px;
-    }
+  span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-right: 10px;
+  }
 }
 
 .list-item__notification {
-    opacity: 0;
-    max-height: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
-    border-spacing: 10px;
+  opacity: 0;
+  max-height: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  border-spacing: 10px;
+  transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
+  transition-delay: 0s, 0.2s, 0.2s, 0.2s;
+  .list-item--notification-visible & {
+    opacity: 1;
+    border-top: 1px solid $primary-color--default;
+    max-height: 40px;
+    padding-top: $margin--xs-slim;
+    padding-bottom: $margin--xs-slim;
     transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
-    transition-delay: 0s, 0.2s, 0.2s, 0.2s;
-    .list-item--notification-visible & {
-        opacity: 1;
-        border-top: 1px solid $primary-color--default;
-        max-height: 40px;
-        padding-top: $margin--xs-slim;
-        padding-bottom: $margin--xs-slim;
-        transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
-        transition-delay: 0.2s, 0s, 0s, 0s;
-    }
-    .list-item--expanded & {
-        border-top: none;
-    }
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    cursor: pointer;
-    .list-item--deleted & {
-        cursor: default;
-    }
+    transition-delay: 0.2s, 0s, 0s, 0s;
+  }
+  .list-item--expanded & {
+    border-top: none;
+  }
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+  .list-item--deleted & {
+    cursor: default;
+  }
 }
 
 // .list-item__notification {}
 .list-item__notification__icon {
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    margin-right: 6px;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin-right: 6px;
 }
 
 .list-item__content {
-    padding-top: $margin--slim;
-    padding-bottom: $margin--slim;
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
-    border-spacing: 10px;
-    display: none;
-    width: calc(#{$content-width--small});
-    .list-item--notification-visible & {
-        border-top: none;
-    }
+  padding-top: $margin--slim;
+  padding-bottom: $margin--slim;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  border-spacing: 10px;
+  display: none;
+  width: calc(#{$content-width--small});
+  .list-item--notification-visible & {
+    border-top: none;
+  }
 }
 
 .list__column-header {
-    margin-top: $margin--slim;
+  margin-top: $margin--slim;
+  display: inline-block;
+  cursor: pointer;
+  div {
     display: inline-block;
-    cursor: pointer;
-    div {
-        display: inline-block;
-    }
-    height:30px;
+  }
+  height:30px;
 }
 
 .list__column-header--sorted-asc {
-    h2 {
-        &:after {
-            @extend .bg-image-icon-sortarrow;
-            content: "";
-            display: inline-block;
-            background-size: 100% !important;
-            vertical-align: middle;
-            margin-left: $margin--xs-slim;
-            transform: rotate(0deg);
-        }
+  h2 {
+    &:after {
+      @extend .bg-image-icon-sortarrow;
+      content: "";
+      display: inline-block;
+      background-size: 100% !important;
+      vertical-align: middle;
+      margin-left: $margin--xs-slim;
+      transform: rotate(0deg);
     }
+  }
 }
 
 .list__column-header--sorted-desc {
-    h2 {
-        &:after {
-            @extend .bg-image-icon-sortarrow;
-            content: "";
-            display: inline-block;
-            background-size: 100% !important;
-            vertical-align: middle;
-            margin-left: $margin--xs-slim;
-            transform: rotate(180deg);
-        }
+  h2 {
+    &:after {
+      @extend .bg-image-icon-sortarrow;
+      content: "";
+      display: inline-block;
+      background-size: 100% !important;
+      vertical-align: middle;
+      margin-left: $margin--xs-slim;
+      transform: rotate(180deg);
     }
+  }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-    .list {
-        .page-block & {
-            margin: -$margin--fat;
-            &.list--inline {
-                margin-top: 0;
-                margin-bottom: 0;
-            }
-        }
+  .list {
+    .page-block & {
+      margin: -$margin--fat;
+      &.list--inline {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
     }
-    .list__header {
-        padding-left: $margin--fat;
-        padding-right: $margin--fat;
-        width: calc(#{$content-width--medium} + #{$margin--slim} + 12px);
-        border-right-width: 12px;
+  }
+  .list__header {
+    padding-left: $margin--fat;
+    padding-right: $margin--fat;
+    width: calc(#{$content-width--medium} + #{$margin--slim} + 12px);
+    border-right-width: 12px;
+  }
+  .list-item__header {
+    height: 40px;
+    padding-left: $margin--fat;
+    padding-right: $margin--fat;
+    .list-item--compact & {
+      height: auto;
     }
-    .list-item__header {
-        height: 40px;
-        padding-left: $margin--fat;
-        padding-right: $margin--fat;
-        .list-item--compact & {
-            height: auto;
-        }
-    }
-    .list-item__notification {
-        padding-left: 20px;
-        padding-right: 20px;
-        border-spacing: 10px;
-    }
-    .list-item__content {
-        padding: $margin--fat;
-        width: #{$content-width--medium};
-    }
+  }
+  .list-item__notification {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-spacing: 10px;
+  }
+  .list-item__content {
+    padding: $margin--fat;
+    width: #{$content-width--medium};
+  }
 }
 
 .flex-column {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 @mixin flex-column($number) {
+  .flex-column--#{$number} {
+    flex-grow: 0;
+    flex-basis: 52px * $number;
+    .list-item--displayTrashcan & {
+      flex-basis: 50px * $number;
+    }
+  }
+  @media screen and (min-width: $desktop-width--medium) {
     .flex-column--#{$number} {
-        flex-grow: 0;
-        flex-basis: 52px * $number;
-        .list-item--displayTrashcan & {
-            flex-basis: 50px * $number;
-        }
+      flex-basis: 56px * $number;
+      .list-item--displayTrashcan & {
+        flex-basis: 54px * $number;
+      }
     }
-    @media screen and (min-width: $desktop-width--medium) {
-        .flex-column--#{$number} {
-            flex-basis: 56px * $number;
-            .list-item--displayTrashcan & {
-                flex-basis: 54px * $number;
-            }
-        }
-    }
+  }
 }
 
 @for $i from 1 through 20 {
-    @include flex-column($i);
+  @include flex-column($i);
 }
 
 .list__column--trashcan {
+  height: 100%;
+  .list-item__trashcan__icon {
+    @extend .bg-image-icon-trashcan;
     height: 100%;
-    .list-item__trashcan__icon {
-        @extend .bg-image-icon-trashcan;
-        display: inline-block;
-    }
-    &.disabled .list-item__trashcan__icon {
-        @extend .bg-image-icon-trashcan--disabled;
-        cursor: default;
-    }
+    width: 40px;
+    display: inline-block;
+  }
+  &.disabled .list-item__trashcan__icon {
+    @extend .bg-image-icon-trashcan--disabled;
+    cursor: default;
+  }
 }
 
 .list__column--checkbox {
+  height: 100%;
+  .checkbox--inline {
     height: 100%;
-    .checkbox--inline {
-        height: 100%;
-        .checkbox {
-            justify-content: center;
-            flex-direction: column;
-            padding: 0 10px;
-        }
+    .checkbox {
+      height: 100%;
+      justify-content: center;
+      flex-direction: column;
+      padding: 0 10px;
     }
+  }
 }
