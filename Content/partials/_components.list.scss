@@ -9,8 +9,8 @@
     .page-block & {
         margin: -$margin--slim;
         &.list--inline {
-            margin-top: 0;
-            margin-bottom: 0;
+      margin-top: -$margin--slim;
+      margin-bottom: -$margin--slim;
         }
     }
 }
@@ -261,8 +261,8 @@
         .page-block & {
             margin: -$margin--fat;
             &.list--inline {
-                margin-top: 0;
-                margin-bottom: 0;
+        margin-top: -$margin--fat;
+        margin-bottom: -$margin--fat;
             }
         }
     }
