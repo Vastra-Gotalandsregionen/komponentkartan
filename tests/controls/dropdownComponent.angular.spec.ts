@@ -258,7 +258,6 @@ describe('DropdownComponent', () => {
                 fixture.detectChanges();
 
                 itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text === 'show all')[0];
-                // console.log(itemToClick.parent.classes);
                 itemToClick.triggerEventHandler('mousedown', null);
                 fixture.detectChanges();
 

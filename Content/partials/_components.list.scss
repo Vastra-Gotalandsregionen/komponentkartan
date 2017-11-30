@@ -311,6 +311,7 @@
   height: 100%;
   .list-item__trashcan__icon {
     @extend .bg-image-icon-trashcan;
+    background-size: 19px 21px;
     height: 100%;
     width: 40px;
     display: inline-block;
@@ -318,6 +319,12 @@
   &.disabled .list-item__trashcan__icon {
     @extend .bg-image-icon-trashcan--disabled;
     cursor: default;
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .list__column--trashcan .list-item__trashcan__icon {
+    background-size: 22px 24px;
   }
 }
 

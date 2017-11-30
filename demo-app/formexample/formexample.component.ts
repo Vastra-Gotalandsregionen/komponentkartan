@@ -53,7 +53,6 @@ export class FormExampleComponent {
         this.validatedComponents.forEach(validatedComponent => {
             const result = validatedComponent.validate();
             if (result.isValid) {
-                console.log('Component is valid');
             } else {
                 isValid = false;
             }

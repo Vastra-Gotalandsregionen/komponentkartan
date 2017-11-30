@@ -3,6 +3,9 @@ export { ActionPanelJqeuryHelper } from './action-panel/actionPanelJqueryHelper'
 
 export { ButtonComponent } from './button/button.component';
 export { CardComponent } from './card/card.component';
+export { CardColumnComponent } from './card/card-column.component';
+export { CardHeaderComponent } from './card/card-header.component';
+
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { DropdownComponent } from './dropdown/dropdown.component';
 export { DropdownMultiselectComponent } from './dropdown-multiselect/dropdown-multiselect.component';
