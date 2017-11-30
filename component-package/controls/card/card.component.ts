@@ -9,8 +9,6 @@ import { CardColumnComponent } from './card-column.component';
     templateUrl: './card.component.html'
 })
 export class CardComponent implements OnInit, AfterContentInit {
-
-    // @HostBinding('class.card') cardClass = true;
     @ContentChildren(CardColumnComponent) columns: QueryList<CardColumnComponent>;
 
     constructor() {
@@ -22,11 +20,9 @@ export class CardComponent implements OnInit, AfterContentInit {
     ngAfterContentInit() {
         if (this.columns.length === 1) {
             this.columns.first.fullwidth = true;
-        }
-        else if (this.columns.length === 2) {
+        } else if (this.columns.length === 2) {
             this.columns.first.left = true;
             this.columns.last.right = true;
         }
     }
-
 }
