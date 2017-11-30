@@ -1,6 +1,11 @@
 <vgr-page-block>
+<<<<<<< HEAD
   <vgr-card [mode]="2">
     <div class="card__top">
+=======
+  <vgr-card>
+    <vgr-card-header>
+>>>>>>> a95597f522d730f548b01d93d4073c06b953c0a2
       <div class="row-layout">
         <div class="enhet-card__enhet-title">Enhet</div>
         <div>Enhetens namn</div>
@@ -9,6 +14,7 @@
       <div class="flex-right">
         <vgr-save-cancel (unlock)="readonly=false" (save)="readonly=true" (cancel)="readonly=true"></vgr-save-cancel>
       </div>
+<<<<<<< HEAD
     </div>
 
     <vgr-card-section [title]=" 'Enhetsinformationen' " [expanded]="false" [readonly]="readonly" class="card__left">
@@ -86,5 +92,102 @@
         Här kan man lägga in vad man vill själv
       </div>
     </vgr-card-section>
+=======
+    </vgr-card-header>
+
+    <vgr-card-column>
+      <vgr-card-section [title]=" 'Exempel1' ">
+        <div class="title-value-layout">
+          <vgr-title-value [title]=" 'HSA-id'" [slim]="readonly">
+            <span>SE2321000131-E000000011887</span>
+          </vgr-title-value>
+          <vgr-title-value title="Avtalskod*" [slim]="readonly">
+            <vgr-input [value]="'Avtal12345'" [readonly]="readonly"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Enhetskod*' " [slim]="readonly">
+            <span>12345</span>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Nämnd*' " [slim]="readonly">
+            <vgr-dropdown [items]="['foo','bar']" [readonly]="readonly" [required]="true"></vgr-dropdown>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Avtalsperiod*' " [slim]="readonly">
+            <div class="row-layout row-layout--tight row-layout--component">
+              <vgr-monthpicker [readonly]="readonly"></vgr-monthpicker>
+              <vgr-monthpicker [readonly]="readonly"></vgr-monthpicker>
+            </div>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'HSA-id'" [slim]="readonly">
+            <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Nämnd*' " [slim]="readonly">
+            <vgr-dropdown-multiselect [items]="['foo','bar']" [readonly]="readonly" [required]="true"></vgr-dropdown-multiselect>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Identifiering'" [slim]="readonly">
+            <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Har du läst?' " [slim]="readonly">
+            <vgr-checkbox [label]="'Ja det har jag'" [disabled]="readonly"></vgr-checkbox>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Serienummer'" [slim]="readonly">
+            <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Betalform'" [slim]="readonly">
+            <vgr-radio-group [disabled]="readonly" [options]="[{id: '1', displayName: 'Bankgiro'},{id: '2', displayName: 'Plusgiro'}] "></vgr-radio-group>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Krypteringsnyckel'" [slim]="readonly">
+            <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Ett datum'" [slim]="readonly">
+            <vgr-datepicker [readonly]="readonly"></vgr-datepicker>
+          </vgr-title-value>
+          <vgr-title-value [title]=" 'Derivata'" [slim]="readonly">
+            <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
+          </vgr-title-value>
+        </div>
+      </vgr-card-section>
+      <vgr-card-section [title]=" 'Ersättningsgrundande information' " [readonly]="true" [expanded]="true" class="card__right">
+        <div class="title-value-layout ">
+          <vgr-title-value [title]="'Kommun'" [slim]="true">
+            <span>Vänersborg</span>
+          </vgr-title-value>
+          <vgr-title-value [title]="'Kommun'" [slim]="true">
+
+            <span>Duellvägen
+              <br>462 60
+              <br>Vänersborg
+            </span>
+
+          </vgr-title-value>
+          <vgr-title-value [title]="'Geokod (PT90)'" [slim]="true">
+            <span>x: 6471784</span>
+          </vgr-title-value>
+
+        </div>
+      </vgr-card-section>
+      <vgr-card-section [title]=" 'Eget innehåll' " [readonly]="readonly " [expanded]="false">
+        <div>
+          Här kan man lägga in vad man vill själv
+        </div>
+      </vgr-card-section>
+      <vgr-card-section [title]=" 'Adress' ">
+        <div class="title-value-layout ">
+          <vgr-title-value [title]="'Kommun'" [slim]="true">
+            <span>Vänersborg</span>
+          </vgr-title-value>
+          <vgr-title-value [title]="'Kommun'" [slim]="true">
+
+            <span>Duellvägen
+              <br>462 60
+              <br>Vänersborg
+            </span>
+
+          </vgr-title-value>
+          <vgr-title-value [title]="'Geokod (PT90)'" [slim]="true">
+            <span>x: 6471784</span>
+          </vgr-title-value>
+        </div>
+      </vgr-card-section>
+    </vgr-card-column>
+>>>>>>> a95597f522d730f548b01d93d4073c06b953c0a2
   </vgr-card>
 </vgr-page-block>
