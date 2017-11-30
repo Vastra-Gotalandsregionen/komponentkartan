@@ -10,14 +10,20 @@ import { ListColumnHeaderComponent } from './list-column-header.component';
 export class ListColumnComponent implements DoCheck {
     @HostBinding('class', )
     get classes(): string {
-        return 'list__column flex-column ' + this.getColumnWidthClass();
+        return 'list__column flex-column ' + this.getColumnWidthClass() + ' ' + this.getAlignClass();
     }
     @Input() text: string;
 
     width: number;
+    align: string;
     pendingWidth: number;
+    pendingAlign: string;
     private getColumnWidthClass(): string {
         return 'flex-column--' + (this.width ? this.width : 1);
+    }
+
+    private getAlignClass(): string {
+        return 'column--align-' + (this.align ? this.align : "left");
     }
 
     ngDoCheck() {
@@ -28,12 +34,21 @@ export class ListColumnComponent implements DoCheck {
         if (this.pendingWidth !== this.width) {
             this.width = this.pendingWidth;
         }
+
+        if (this.pendingAlign !== this.align) {
+            this.align = this.pendingAlign;
+        }
     }
 
     setWidth(width: number) {
         // För att undvika att man får Expression Changed after it was checked, lagras värdet undan som "pending".
         // Det sätts sedan i DoCheck
         this.pendingWidth = width;
+    }
+    setAlignment(alignment: string) {
+        // För att undvika att man får Expression Changed after it was checked, lagras värdet undan som "pending".
+        // Det sätts sedan i DoCheck
+        this.pendingAlign = alignment;
     }
 }
 
