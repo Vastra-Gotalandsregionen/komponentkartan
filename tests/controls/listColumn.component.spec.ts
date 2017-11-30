@@ -25,9 +25,9 @@ describe('[ListColumnComponent]', () => {
     });
 
     describe('When getClasses is called', () => {
-        describe('And width is not set', () => {
+        describe('And width  and align is not set', () => {
             it('It returns the default classes', () => {
-                expect(component.classes).toEqual('list__column flex-column flex-column--1');
+                expect(component.classes).toEqual('list__column flex-column flex-column--1 column--align-left');
             });
         });
         describe('And width is set', () => {
@@ -36,7 +36,17 @@ describe('[ListColumnComponent]', () => {
                 component.ngDoCheck();
             });
             it('It returns classes updated with width', () => {
-                expect(component.classes).toEqual('list__column flex-column flex-column--20');
+                expect(component.classes).toEqual('list__column flex-column flex-column--20 column--align-left');
+            });
+        });
+
+        describe('And align is set', () => {
+            beforeEach(() => {
+                component.setAlignment("center");
+                component.ngDoCheck();
+            });
+            it('It returns classes updated with width', () => {
+                expect(component.classes).toEqual('list__column flex-column flex-column--1 column--align-center');
             });
         });
     });

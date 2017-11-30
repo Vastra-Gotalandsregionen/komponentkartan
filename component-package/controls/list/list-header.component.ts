@@ -25,6 +25,7 @@ export class ListHeaderComponent implements AfterContentInit {
         const headerColumnArray = this.headerColumns.toArray();
         if (headerColumnArray.length > index) {
             column.setWidth(headerColumnArray[index].width);
+            column.setAlignment(headerColumnArray[index].align);
         }
     }
 }
