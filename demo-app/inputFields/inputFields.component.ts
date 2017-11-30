@@ -3,13 +3,20 @@ import { DecimalPipe } from '@angular/common';
 import { IValidationResult, ValidationErrorState, IValidation, ICustomValidator } from '../../component-package/models/validation.model';
 import { CityService } from './cityService';
 import { ISelectableItem } from '../../component-package/models/selectableItem.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
     selector: 'vgr-input-fields',
-    templateUrl: 'inputFields.component.html'
+    templateUrl: 'inputFields.component.html',
+
 })
+
+
 export class InputFieldsComponent {
+    // Reactive form
+    userForm: FormGroup;
+
     // Enum declarations
     cityName: string;
     amount1: number;
@@ -23,7 +30,7 @@ export class InputFieldsComponent {
     isSmall: boolean;
     delayedObject: any;
 
-    constructor(private cityService: CityService) {
+    constructor(private cityService: CityService, private fb: FormBuilder) {
         this.cityName = 'Houstons';
         this.cityValidator = {
             validate: (s: any) => this.validateCityName(s)
@@ -38,6 +45,21 @@ export class InputFieldsComponent {
         setTimeout(() => {
             this.delayedObject.value = 'foo;'
         }, 3000);
+    }
+
+    ngOnInit() {
+        this.createForm();
+        this.userForm.controls.firstname.valueChanges.subscribe((x) => {
+            console.log(x);
+            console.log(this.userForm.controls.firstname)
+        })
+    }
+
+    createForm() {
+        this.userForm = this.fb.group({
+            firstname: ['', [Validators.required, Validators.minLength(4)]],
+            lastname: ['', [Validators.required, Validators.minLength(3)]],
+        });
     }
 
     validateCityName(cityName: string): IValidationResult {
