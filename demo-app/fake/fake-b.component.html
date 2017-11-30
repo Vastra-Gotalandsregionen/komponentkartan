@@ -1,9 +1,5 @@
 <vgr-page-block>
-  <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
-    <!-- <div class="list__header">
-      <span class="flex-column-13">Förnamn</span>
-      <span class="flex-column-15">Efternamn</span>
-    </div> -->
+  <vgr-list [flexibleHeader]="true">
     <vgr-list-header>
       <vgr-list-column-header [text]="'Förnamn'" [width]="5" [sortKey]="'firstName'" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
       <vgr-list-column-header [text]="'Efternamn'" [width]="5" [sortKey]="'lastName'"></vgr-list-column-header>
