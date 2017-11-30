@@ -154,7 +154,6 @@
         wallaby.start();
       }).catch(function (e) {
         setTimeout(function () {
-          console.log(e);
           throw e;
         }, 0);
       });

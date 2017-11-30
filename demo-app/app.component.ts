@@ -421,7 +421,6 @@ export class KomponentkartanApplicationComponent {
     }
 
     onSelectedMenuChanged(newMenu: string) {
-        console.log(newMenu);
     }
 
     setSelectedMenu(menuSize: number) {

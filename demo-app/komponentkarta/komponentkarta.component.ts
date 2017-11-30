@@ -162,7 +162,6 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.selectedRadioOption = option;
     }
     consoleLog(logText: string) {
-        console.log(logText);
     }
 
     ngAfterViewInit() {
