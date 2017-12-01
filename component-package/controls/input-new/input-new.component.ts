@@ -1,13 +1,14 @@
-import { Component, Input, HostBinding, OnInit, forwardRef, Host } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input, HostBinding, OnInit, forwardRef, Host, ChangeDetectionStrategy } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, AbstractControl } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { concat } from 'rxjs/observable/concat';
 
 @Component({
   selector: 'vgr-input-new',
   moduleId: module.id,
   templateUrl: './input-new.component.html',
+
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => InputNewComponent),
@@ -16,79 +17,100 @@ import { concat } from 'rxjs/observable/concat';
 
 })
 export class InputNewComponent implements ControlValueAccessor {
-  @Input() control: AbstractControl;
-  // private control: AbstractControl;
+  ismarkAsTouched: boolean = false;
+  @Input() form: FormGroup;
+  @Input() formControlName: string;
 
   @HostBinding('class.validated-input') hasClass = true;
   @Input() @HostBinding('class.readonly') readonly?: boolean;
   @Input() @HostBinding('class.input--small') small: boolean;
   @Input() @HostBinding('class.align-right') alignRight: boolean;
 
-  // @Input() control: FormControl;
+
   @HostBinding('class.validation-error--active') get validationErrorActive() {
     // TODO
-    return false;
-    // return this.model.control.touched && this.model.control.invalid && this.model.control.dirty;
+    return !this.control.valid && !this.control.touched && this.control.dirty;
   }
   @HostBinding('class.validation-error--editing') get validationErrorEditing() {
     // TODO
-    return false;
-    // return this.control.touched;
+    return !this.control.valid && this.control.touched && this.control.dirty;
   }
   @HostBinding('class.validation-error--fixed') get validationErrorFixed() {
     // TODO
-    return false;
+    return this.control.valid && this.control.untouched;
   }
 
   @Input() suffix: string;
   @Input() value: any;
   @Input() maxlength?: number;
+  @Input() validationErrorMessages: {};
+  validationErrorMessage: string;
 
-  get validationErrorMessage(): string {
-    return 'Fältet är ifyllt felaktigt';
-  }
-
-  doValidate: boolean;
-  // model: any;
+  control: AbstractControl;
 
   constructor() {
-    console.log('control', this.control);
+    this.ismarkAsTouched = false;
   }
 
+  //TODO använd validationErrorMessage istället 
+  get ValidationMessages(): any {
+    return {
+      'required': 'Fält är obligatoriskt.',
+      'minlength': 'Du måste ange minst 4 tecken.',
+      'maxlength': 'Du kan inte ha mer än 10 tecken.'
+    };
+  }
+
+  doValidate() {
+    let messages = this.ValidationMessages;
+    if (this.control && this.control.dirty && !this.control.valid) {
+      for (let key of Object.keys(messages)) {
+        let message = messages[key];
+
+        for (const error in this.control.errors) {
+          if (key === error) {
+            this.validationErrorMessage = message;
+          }
+        }
+      }
+    }
+  }
+
+
+  ngOnInit() {
+    this.control = this.form.controls[this.formControlName];
+  }
 
   writeValue(value: any) {
     if (value !== undefined) {
       this.value = value;
-      console.log('VALUE', value);
     }
   }
 
-  registerOnChange(fn) {
+  registerOnChange(fn: any) {
     this.onChange = fn;
-    console.log(fn);
   }
 
-  registerOnTouched(fn) {
+  registerOnTouched(fn: any) {
     this.onTouched = fn;
-    console.log('registerOnTouched', fn);
   }
 
   onChange(input: any) {
     this.value = input;
-    console.log('onChange', input);
   }
 
   onTouched() {
-    console.log('this has been touched');
-    // console.log('blur-touched', this.control.touched);
-    // console.log('blur-untouched', this.control.untouched);
+    console.log('I have been touched!');
   }
+
 
   onBlur(): void {
     if (this.readonly) {
       return;
     }
     this.control.markAsUntouched();
+    this.control.markAsDirty();
+    this.doValidate()
   }
 
   onFocus(): void {
@@ -98,4 +120,3 @@ export class InputNewComponent implements ControlValueAccessor {
     this.control.markAsTouched();
   }
 }
-

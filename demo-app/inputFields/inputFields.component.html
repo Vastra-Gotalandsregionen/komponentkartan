@@ -16,19 +16,23 @@
         <vgr-card-column>
           <vgr-card-section [title]="'Reactive Forms'" [expanded]="true">
             <form [formGroup]="userForm">
-              <div class="title-value-layout">
-                <vgr-title-value [title]="'Text'">
-                  <vgr-input-new [maxlength]="10" formControlName="firstname" [control]="userForm.controls.firstname"></vgr-input-new>
-                </vgr-title-value>
+              <div>
+                <h2> Ange en text</h2>
+                <vgr-input-new [maxlength]="10" [form]="userForm" [formControlName]="'firstname'"></vgr-input-new>
+                <br>
+                <span>Din text: {{userForm.get('firstname').value}}</span>
+                <br>
               </div>
             </form>
-            <p>Form pending: {{ userForm.controls.firstname.pending | json }}</p>
-            <p>Form pristine: {{ userForm.controls.firstname.pristine | json }}</p>
-            <p>Form touched: {{ userForm.controls.firstname.touched | json }}</p>
-            <p>Form dirty: {{ userForm.controls.firstname.dirty | json }}</p>
-            <p>Form value: {{ userForm.controls.firstname.value | json }}</p>
-            <p>Form status: {{ userForm.controls.firstname.status | json }}</p>
-            <p>Form errors: {{ userForm.controls.firstname.errors | json }}</p>
+            <div>
+              <p>Form pending: {{ userForm.controls.firstname.pending | json }}</p>
+              <p>Form pristine: {{ userForm.controls.firstname.pristine | json }}</p>
+              <p>Form touched: {{ userForm.controls.firstname.touched | json }}</p>
+              <p>Form dirty: {{ userForm.controls.firstname.dirty | json }}</p>
+              <p>Form value: {{ userForm.controls.firstname.value | json }}</p>
+              <p>Form status: {{ userForm.controls.firstname.status | json }}</p>
+              <p>Form errors: {{ userForm.controls.firstname.errors | json }}</p>
+            </div>
           </vgr-card-section>
         </vgr-card-column>
       </vgr-card>

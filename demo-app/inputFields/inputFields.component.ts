@@ -12,7 +12,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 })
 
-
 export class InputFieldsComponent {
     // Reactive form
     userForm: FormGroup;
@@ -29,6 +28,9 @@ export class InputFieldsComponent {
     headerExpanded: boolean;
     isSmall: boolean;
     delayedObject: any;
+
+    validationMessages: any;
+    formErrors: any;
 
     constructor(private cityService: CityService, private fb: FormBuilder) {
         this.cityName = 'Houstons';
@@ -49,15 +51,11 @@ export class InputFieldsComponent {
 
     ngOnInit() {
         this.createForm();
-        this.userForm.controls.firstname.valueChanges.subscribe((x) => {
-            console.log(this.userForm.status);
-            console.log(this.userForm.controls.firstname)
-        })
     }
 
     createForm() {
         this.userForm = this.fb.group({
-            firstname: ['', [Validators.required, Validators.minLength(4)]],
+            firstname: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
             lastname: ['', [Validators.required, Validators.minLength(3)]],
         });
     }

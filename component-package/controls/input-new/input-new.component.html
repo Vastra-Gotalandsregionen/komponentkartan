@@ -2,9 +2,10 @@
     'input-validation--suffixed' : suffix && suffix.length>0
   }">
 
-  <div class="input-container">
-    <input type="text" #inputTextBox class="input-container__textbox" (blur)="onBlur()" (focus)="onFocus($event)" [ngModel]="value"
-      (ngModelChange)="onChange($event)" [maxlength]="maxlength" [attr.readonly]="readonly ? '' : null">
+  <div class="input-container" [formGroup]="form">
+    <!-- <input type="text" #inputTextBox class="input-container__textbox" (blur)="onBlur()" (focus)="onFocus($event)" [ngModel]="value"
+      (ngModelChange)="onChange($event)" [maxlength]="maxlength" [attr.readonly]="readonly ? '' : null"> -->
+    <input type="text" #inputTextBox class="input-container__textbox" [formControlName]="formControlName" (blur)="onBlur()" (focus)="onFocus()">
     <div class="input-container__suffix-container">
       <div class="input-container__suffix-container__suffix">{{suffix}}</div>
       <div class="input-container__suffix-container__status-icon"></div>
