@@ -50,7 +50,7 @@ export class InputFieldsComponent {
     ngOnInit() {
         this.createForm();
         this.userForm.controls.firstname.valueChanges.subscribe((x) => {
-            console.log(x);
+            console.log(this.userForm.status);
             console.log(this.userForm.controls.firstname)
         })
     }

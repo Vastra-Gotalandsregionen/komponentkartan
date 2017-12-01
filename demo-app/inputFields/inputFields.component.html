@@ -14,7 +14,7 @@
     <vgr-page-block class=" column-layout">
       <vgr-card>
         <vgr-card-column>
-          <vgr-card-section [title]="'Form'" [expanded]="true">
+          <vgr-card-section [title]="'Reactive Forms'" [expanded]="true">
             <form [formGroup]="userForm">
               <div class="title-value-layout">
                 <vgr-title-value [title]="'Text'">
@@ -22,8 +22,13 @@
                 </vgr-title-value>
               </div>
             </form>
-            <p>Form value: {{ userForm.value | json }}</p>
-            <p>Form status: {{ userForm.status | json }}</p>
+            <p>Form pending: {{ userForm.controls.firstname.pending | json }}</p>
+            <p>Form pristine: {{ userForm.controls.firstname.pristine | json }}</p>
+            <p>Form touched: {{ userForm.controls.firstname.touched | json }}</p>
+            <p>Form dirty: {{ userForm.controls.firstname.dirty | json }}</p>
+            <p>Form value: {{ userForm.controls.firstname.value | json }}</p>
+            <p>Form status: {{ userForm.controls.firstname.status | json }}</p>
+            <p>Form errors: {{ userForm.controls.firstname.errors | json }}</p>
           </vgr-card-section>
         </vgr-card-column>
       </vgr-card>
