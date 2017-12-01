@@ -271,8 +271,11 @@ describe('[DatepickerComponent]', () => {
 
     describe(' When initialized with 3 months', () => {
         beforeEach(() => {
+            jasmine.clock().uninstall();
+            jasmine.clock().install();
             const year = 2017;
             const october = 9;
+            jasmine.clock().mockDate(new Date(year, october - 1, 15));
             component = new DatepickerComponent(null);
             component.minDate = new Date(year, october - 1, 1);
             component.maxDate = new Date(year, october + 1, 30);

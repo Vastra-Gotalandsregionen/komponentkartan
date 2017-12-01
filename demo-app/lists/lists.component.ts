@@ -44,21 +44,21 @@ export class ListsComponent {
 
     loadItems() {
         this.claimRows = [
-            new ExpandableRow<any, any>({ identification: '1ZVFf9023874sdpaföj', invoiceId: 'INV 122300200112', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '2ZVFf9023874sdpaföj', invoiceId: 'INV 122343242342', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '3ZVFf9023874sdpaföj', invoiceId: 'INV 1223424242', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '4ZVFf9023874sdpaföj', invoiceId: 'INV 12232342342', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '5ZVFf9023874sdpaföj', invoiceId: 'INV 12232342344', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '6ZVFf9023874sdpaföj', invoiceId: 'INV 12231111222', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '7ZVFf9023874sdpaföj', invoiceId: 'INV 122312135654', payableAmount: 200, issueDate: new Date(), visits: undefined }),
-            new ExpandableRow<any, any>({ identification: '8ZVFf9023874sdpaföj', invoiceId: 'INV 12230098667', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '9ZVFf9023874sdpaföj', invoiceId: 'INV 1223654767', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '10ZVFf9023874sdpaföj', invoiceId: 'INV 12237567567', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '11ZVFf9023874sdpaföj', invoiceId: 'INV 1223567567', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '12ZVFf9023874sdpaföj', invoiceId: 'INV 12234534w345', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '13ZVFf9023874sdpaföj', invoiceId: 'INV 122353453453', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '14ZVFf9023874sdpaföj', invoiceId: 'INV 122334534534', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] }),
-            new ExpandableRow<any, any>({ identification: '15ZVFf9023874sdpaföj', invoiceId: 'INV 122334534534', payableAmount: 200, issueDate: new Date(), visits: [1, 2, 3] })];
+            new ExpandableRow<any, any>({ identification: '1ZVFf9023874sdpaföj', invoiceId: 'INV 122300200112', payableAmount: 2500, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '2ZVFf9023874sdpaföj', invoiceId: 'INV 122343242342', payableAmount: 199, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '3ZVFf9023874sdpaföj', invoiceId: 'INV 1223424242', payableAmount: 239, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '4ZVFf9023874sdpaföj', invoiceId: 'INV 12232342342', payableAmount: 5417, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '5ZVFf9023874sdpaföj', invoiceId: 'INV 12232342344', payableAmount: 999, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '6ZVFf9023874sdpaföj', invoiceId: 'INV 12231111222', payableAmount: 12, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '7ZVFf9023874sdpaföj', invoiceId: 'INV 122312135654', payableAmount: 4500, issueDate: new Date(), visits: undefined }),
+            new ExpandableRow<any, any>({ identification: '8ZVFf9023874sdpaföj', invoiceId: 'INV 12230098667', payableAmount: 4500, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '9ZVFf9023874sdpaföj', invoiceId: 'INV 1223654767', payableAmount: 1990, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '10ZVFf9023874sdpaföj', invoiceId: 'INV 12237567567', payableAmount: 1221, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '11ZVFf9023874sdpaföj', invoiceId: 'INV 1223567567', payableAmount: 31232, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '12ZVFf9023874sdpaföj', invoiceId: 'INV 12234534w345', payableAmount: 3232, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '13ZVFf9023874sdpaföj', invoiceId: 'INV 122353453453', payableAmount: 321, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '14ZVFf9023874sdpaföj', invoiceId: 'INV 122334534534', payableAmount: 122, issueDate: new Date(), visits: [1, 2, 3] }),
+            new ExpandableRow<any, any>({ identification: '15ZVFf9023874sdpaföj', invoiceId: 'INV 122334534534', payableAmount: 43, issueDate: new Date(), visits: [1, 2, 3] })];
     }
 
     cardSaved() {
