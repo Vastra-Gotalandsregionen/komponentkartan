@@ -12,14 +12,15 @@
     </div>
     <ul class="menu__item-list">
         <ng-template ngFor let-menuItem [ngForOf]="menuItems">
-            <li *ngIf="!menuItem.isSeparator" routerLinkActive="menu-item--selected menu-item--marked" class="menu-item" [ngClass]="
+            <li *ngIf="!menuItem.isSeparator" routerLinkActive="menu-item--selected menu-item--marked" [routerLinkActiveOptions]="{exact:true}" class="menu-item" [ngClass]="
                         {'menu-item--visible' : menuItem.visible,
                          'menu-item--hidden' : !menuItem.visible,
                          'menu-item--favourite' : menuItem.favourite,
                          'menu-item--virtual-favourite' : menuItem.isVirtualFavourite,
                          'menu-item--parent' : menuItem.menuItems && menuItem.menuItems.length>0
+
                         }">
-                <a *ngIf="!menuItem.menuItems" routerLink={{menuItem.url}} (click)="setActiveMenuItem(menuItem)">{{menuItem.title}} <span *ngIf="!availableInThisBrowser()" title="Fungerar endast i Internet Explorer">(!)</span> </a>
+                <a *ngIf="!menuItem.menuItems" routerLink={{menuItem.url}} routerLink (click)="setActiveMenuItem(menuItem)">{{menuItem.title}} <span *ngIf="!availableInThisBrowser()" title="Fungerar endast i Internet Explorer">(!)</span> </a>
 
                 <!-- Expanderbar meny -->
                 <a *ngIf="menuItem.menuItems" (click)="expandMenuItem(menuItem)">
@@ -29,7 +30,7 @@
                 </a>
             </li>
             <ul *ngIf="menuItem.menuItems && menuItem.menuItems.length>0 && menuItem.visible" class="menu__subItems-list menu-subItems" [ngClass]="[menuItem.expanded ? 'menu-subItems__show' :'' ]">
-                <li *ngFor="let childMenuItem of menuItem.menuItems " class="menu-item menu-item--child" routerLinkActive="menu-item--selected menu-item--marked ">
+                <li *ngFor="let childMenuItem of menuItem.menuItems " class="menu-item menu-item--child" routerLinkActive="menu-item--selected menu-item--marked" [routerLinkActiveOptions]="{exact:true}"  >
                     <a routerLink={{childMenuItem.url}} (click)="setActiveMenuItem(childMenuItem)">{{childMenuItem.title}} <span *ngIf="!availableInThisBrowser()" title="Fungerar endast i Internet Explorer">(!)</span> </a>
                 </li>
             </ul>
