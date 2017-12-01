@@ -69,6 +69,9 @@
       display: none;
     }
   }
+  .list-item:last-child() {
+      &.list-item--expanded { margin-bottom: 0; }
+    }
 }
 
 
