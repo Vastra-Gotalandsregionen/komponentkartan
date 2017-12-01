@@ -359,6 +359,11 @@
   .list__column--trashcan .list-item__trashcan__icon {
     background-size: 22px 24px;
   }
+  .list-item__content {
+    .list-item--notification-visible & {
+      padding-top: 10px;
+    }
+  }
 }
 
 .list__column--checkbox {
@@ -371,12 +376,5 @@
       flex-direction: column;
       padding: 0 10px;
     }
-  }
-}
-
-.list-item__content {
-  .list-item--notification-visible & {
-    border-top: none;
-    padding-top: 10px;
   }
 }
