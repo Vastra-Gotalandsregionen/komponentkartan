@@ -14,101 +14,96 @@
     <vgr-page-block class=" column-layout">
       <vgr-radio-group [options]="[{id:'1', displayName:'Stor', selected:true},{id:'2', displayName:'Liten'}]" (selectedChanged)="toggleInputType($event)">
       </vgr-radio-group>
-      <div class="row-layout">
+      <form [formGroup]="form">
 
-        <div class="one-third">
+        <div class="row-layout">
+          <div class="one-third">
 
 
-          <h2>Fördefinierade typer</h2>
-          <div>
-            Belopp 1 (type=amount)
-            <vgr-input [type]="'amount'" [value]="amount1" (valueChanged)="amount1 = $event" [small]="isSmall"></vgr-input>
-            <span>Belopp 1: </span>
-            <span>{{formatNumericValue(amount1)}}</span>
+            <h2>Fördefinierade typer</h2>
+            <div>
+              Belopp 1 (type=amount)
+              <vgr-input formControlName="control1" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"></vgr-input>
+              <span>Belopp 1: </span>
+              <span>{{formatNumericValue(form.controls.control1.value)}}</span>
+            </div>
+            <div>
+              Belopp 2, obligatoriskt
+              <vgr-input formControlName="control2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall" [isInvalid]="form.get('control2').invalid"
+                [errormessage]="'Fältet är obligatoriskt'"></vgr-input>
+              <span>Belopp 2: </span>
+              <span>{{formatNumericValue(form.controls.control2.value)}}</span>
+            </div>
+            <div>
+              Procent
+              <vgr-input formControlName="control3" [suffix]="'%'" [alignRight]="true" [small]="isSmall"></vgr-input>
+              <span>Procent: </span>
+              <span>{{formatNumericValue(form.controls.control3.value)}}</span>
+            </div>
+            <div>
+              Km
+              <vgr-input formControlName="control4" [suffix]="'km'" [alignRight]="true" [small]="isSmall"></vgr-input>
+              <span>Km: </span>
+              <span>{{formatNumericValue(form.controls.control4.value)}}</span>
+
+            </div>
+            <div>
+              Numeriskt värde utan enhet
+              <vgr-input formControlName="control5" [alignRight]="true" [small]="isSmall"></vgr-input>
+              <span>Värde: </span>
+              <span>{{formatNumericValue(form.controls.control5.value)}}</span>
+            </div>
           </div>
-          <div>
-            Belopp 2, obligatoriskt
-            <vgr-input [type]="'amount'" [value]="amount2" (valueChanged)="amount2 = $event" [required]="true" [small]="isSmall"></vgr-input>
-            <span>Belopp 2: </span>
-            <span>{{formatNumericValue(amount2)}}</span>
-          </div>
-          <div>
-            Procent
-            <vgr-input [type]="'percent'" [value]="percentValue" (valueChanged)="percentValue = $event" [small]="isSmall"></vgr-input>
-            <span>Procent: </span>
-            <span>{{formatNumericValue(percentValue)}}</span>
-          </div>
-          <div>
-            Km
-            <vgr-input [type]="'km'" [value]="kmValue" (valueChanged)="kmValue = $event" [small]="isSmall"></vgr-input>
-            <span>Km: </span>
-            <span>{{formatNumericValue(kmValue)}}</span>
+          <div class="one-third">
+            <h2>Egen konfiguration</h2>
+            <div>
+              Max-längd 5 tecken
+              <vgr-input formControlName="control6" [maxlength]=5 [small]="isSmall"></vgr-input>
+            </div>
+            <div>
+              Exakt 3 VERSALER
+              <vgr-input formControlName="control7" [errormessage]="'Ange exakt tre VERSALER'" [maxlength]="3" [small]="isSmall" [isInvalid]="form.get('control7').invalid"></vgr-input>
+            </div>
+            <div>
+              Mellan 2 och 6 tecken
+              <vgr-input formControlName="control8" [maxlength]=6 [errormessage]="'Ange mellan 2-6 tecken'" [small]="isSmall" [isInvalid]="form.get('control8').invalid"></vgr-input>
+            </div>
+            <div>
+              Heltal med enhet
+              <vgr-input formControlName="control9" [alignRight]="true" [suffix]="'st'" [errormessage]="'Ange ett giltigt heltal'" [alignRight]="true"
+                [small]="isSmall" [isInvalid]="form.get('control9').invalid"></vgr-input>
+              <span>Antal: </span>
+              <span>{{intValue + 0}}</span>
+            </div>
+            <div>
+              Långa felmeddelanden
+              <vgr-input formControlName="control10" [isInvalid]="form.get('control10').invalid" [errormessage]="'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'"
+                [small]="isSmall"></vgr-input>
+            </div>
+            <div>
+              Readonly fält
+              <vgr-input formControlName="control11" [readonly]="true" [small]="isSmall"></vgr-input>
+            </div>
+            <div>
+              Ingen validering
+              <vgr-input formControlName="control12" [small]="isSmall"></vgr-input>
+            </div>
 
           </div>
-          <div>
-            Numeriskt värde utan enhet
-            <vgr-input [type]="'numeric'" [value]="numericValue" (valueChanged)="numericValue = $event" [small]="isSmall"></vgr-input>
-            <span>Värde: </span>
-            <span>{{formatNumericValue(numericValue)}}</span>
+          <div class="one-third">
+            <h2>Validering med service</h2>
+            <div>
+              Ange en storstad i USA
+              <vgr-input formControlName="control13" [small]="isSmall" [isInvalid]="form.get('control13').invalid" [errormessage]="'Felaktig stad'"></vgr-input>
+              <span>Din stad: {{form.controls.control13.value}}</span>
+            </div>
+            <div>
+              E-postadress
+              <vgr-input formControlName="control14" [small]="isSmall" [isInvalid]="form.get('control14').invalid" [errormessage]="'Felaktig e-post'"></vgr-input>
+            </div>
           </div>
         </div>
-        <div class="one-third">
-          <h2>Egen konfiguration</h2>
-          <div>
-            Max-längd 5 tecken
-            <vgr-input [maxlength]=5 [small]="isSmall"></vgr-input>
-          </div>
-          <div>
-            Exakt 3 VERSALER (redan validerad)
-            <vgr-input [pattern]="'^[A-Z,Å,Ä,Ö]{3}$'" [invalidText]="'Ange exakt tre VERSALER'" [value]="'abc'" [maxlength]="3" [validateOnInit]="true"
-              [small]="isSmall"></vgr-input>
-          </div>
-          <div>
-            Mellan 2 och 6 tecken
-            <vgr-input [pattern]="'^.{2,6}$'" [maxlength]=6 [invalidText]="'Ange mellan 2-6 tecken'" [small]="isSmall"></vgr-input>
-          </div>
-          <div>
-            Heltal med enhet
-            <vgr-input [pattern]="'^[0-9]+$'" [type]="'numeric'" [suffix]="'st'" [invalidText]="'Ange ett giltigt heltal'" [alignRight]="true"
-              [value]="intValue" (valueChanged)="intValue = $event" [small]="isSmall"></vgr-input>
-            <span>Antal: </span>
-            <span>{{intValue + 0}}</span>
-          </div>
-          <div>
-            Långa felmeddelanden
-            <vgr-input [required]="true" [invalidText]="'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'"
-              [small]="isSmall"></vgr-input>
-          </div>
-          <div>
-            Readonly fält
-            <vgr-input class="no-padding" [readonly]="true" [value]="'Visar värdet utan ram'" [small]="isSmall"></vgr-input>
-          </div>
-          <div>
-            Ingen validering
-            <vgr-input [small]="isSmall"></vgr-input>
-          </div>
-
-        </div>
-        <div class="one-third">
-          <h2>Validering med service</h2>
-          <div>
-            Ange en storstad i USA
-            <vgr-input [customValidator]="validateCityName.bind(this)" [value]="cityName" (valueChanged)="cityName = $event" [small]="isSmall"></vgr-input>
-            <span>Din stad: {{cityName}}</span>
-          </div>
-          <div>
-            E-postadress
-            <vgr-input [customValidator]="validateEmail.bind(this)" [small]="isSmall"></vgr-input>
-          </div>
-          <div>
-            Delayed
-            <vgr-input [small]="isSmall" [value]="delayedObject?.value"></vgr-input>
-          </div>
-
-        </div>
-
-
-      </div>
+      </form>
       <div class="row-layout">
         <div class="full">
           <h2>Notera</h2>
