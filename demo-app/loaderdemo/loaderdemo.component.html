@@ -7,7 +7,8 @@
           <h3>Liten storlek</h3>
           <vgr-loader [active]="actionInProgress" [small]="true"></vgr-loader>
           <br>
-          <vgr-button (click)="actionInProgress=!actionInProgress">{{buttonText}}</vgr-button>
+          <vgr-button (click)="onClick($event)">{{buttonText}}</vgr-button>
+          <vgr-button (click)="onClick($event)" [disabled]="true">{{buttonText}}</vgr-button>
         </div>
         <div class="column-layout">
           <h3>Stor storlek</h3>
