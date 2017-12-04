@@ -3,16 +3,16 @@
   }">
 
   <div class="input-container">
-    <input type="text" #inputTextBox class="input-container__textbox" (blur)="onLeave()" (focus)="onFocus($event)" [ngModel]="displayValue"
-      title="{{title}}" placeholder="{{placeholder}}" (ngModelChange)="onValueChange($event)" [maxlength]="maxlength" [attr.readonly]="readonly ? '' : null">
+    <input type="text" #inputTextBox class="input-container__textbox" (blur)="onBlur($event)" (focus)="onFocus()" [ngModel]="value"
+      (ngModelChange)="onChange($event)" [maxlength]="maxlength" [attr.readonly]="readonly ? '' : null">
     <div class="input-container__suffix-container">
       <div class="input-container__suffix-container__suffix">{{suffix}}</div>
       <div class="input-container__suffix-container__status-icon"></div>
     </div>
   </div>
-  <div class="input-validation_status" title="{{validationErrorMessage}}">
+  <div class="input-validation_status" title="{{errormessage}}">
     <div class="input-validation_status__icon"></div>
-    <div *ngIf="!small" class="input-validation_status__message">{{validationErrorMessage | truncate:64}}</div>
-    <div *ngIf="small" class="input-validation_status__message">{{validationErrorMessage | truncate:24}}</div>
+    <div *ngIf="!small" class="input-validation_status__message">{{errormessage | truncate:64}}</div>
+    <div *ngIf="small" class="input-validation_status__message">{{errormessage | truncate:24}}</div>
   </div>
 </div>

@@ -2,7 +2,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 // Common
@@ -27,7 +27,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FormsModule,
         RouterModule,
         PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ReactiveFormsModule
     ],
 
     declarations: [
