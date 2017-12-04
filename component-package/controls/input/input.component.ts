@@ -1,213 +1,94 @@
-import { Component, Input, EventEmitter, Output, HostBinding, OnInit, ElementRef, forwardRef } from '@angular/core'
+import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, Output } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common'
-import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
-import { ValidationComponent } from '../../controls/validation/validation.component';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { concat } from 'rxjs/observable/concat';
 
 @Component({
-    selector: 'vgr-input',
-    moduleId: module.id,
-    templateUrl: './input.component.html',
-    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => InputComponent) }]
+  selector: 'vgr-input',
+  moduleId: module.id,
+  templateUrl: './input.component.html',
+
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => InputComponent),
+    multi: true
+  }]
 
 })
-export class InputComponent extends ValidationComponent implements OnInit {
-    @HostBinding('class.validated-input') hasClass = true;
-    @Input() @HostBinding('class.readonly') readonly?: boolean;
-    @Input() @HostBinding('class.input--small') small: boolean;
-    @Input() @HostBinding('class.align-right') alignRight: boolean;
+export class InputComponent implements ControlValueAccessor {
+  @Input() isInvalid: boolean;
 
-    @Input() validateOnInit: boolean;
-    @Input() suffix: string;
-    @Input() type: string;
-    @Input() value: any;
-    @Input() placeholder: string;
-    @Input() title: string;
-    @Input() maxlength?: number;
-    @Input() required: boolean;
-    @Input() pattern: string;
-    @Input() invalidText: string;
-    @Input() customValidator: Function;
+  @Input() @HostBinding('class.readonly') readonly?: boolean;
+  @Input() @HostBinding('class.input--small') small: boolean;
+  @Input() @HostBinding('class.align-right') alignRight: boolean;
 
-    @Output() valueChanged: EventEmitter<string> = new EventEmitter<string>();
+  @Input() suffix: string;
+  @Input() value: any;
+  @Input() maxlength?: number;
+  @Input() errormessage: string;
 
-    numericValue?: number;
-    swedishDecimalPipe: DecimalPipe = new DecimalPipe('sv-se');
-    decimalPipeConfiguration: string;
-    displayValue: string;
-    private maxNumberOfDecimals = 2;
+  @Output() blur: EventEmitter<any>;
+  @Output() focus: EventEmitter<any>;
 
-    private get isAmount(): boolean {
-        return this.type === 'amount';
+  @HostBinding('class.validated-input') hasClass = true;
+  @HostBinding('class.validation-error--active') get errorClass() {
+    return this.touched && this.isInvalid && !this.hasFocus;
+  }
+  @HostBinding('class.validation-error--editing') get editingClass() {
+    return this.touched && this.isInvalid && this.hasFocus;
+  }
+  @HostBinding('class.validation-error--fixed') get fixedClass() {
+    return this.invalidOnFocus && this.touched && !this.isInvalid && !this.hasFocus;
+  }
+
+  control: AbstractControl;
+  hasFocus = false;
+  touched = false;
+  invalidOnFocus = false;
+
+  constructor() {
+    this.blur = new EventEmitter<any>();
+    this.focus = new EventEmitter<any>();
+  }
+
+  writeValue(value: any) {
+    if (value !== undefined) {
+      this.value = value;
     }
-    private get isPercent(): boolean {
-        return this.type === 'percent';
-    }
-    private get isKm(): boolean {
-        return this.type === 'km';
-    }
-    private get isNumeric(): boolean {
-        return this.type === 'numeric' || this.isAmount || this.isKm || this.isPercent;
-    }
+  }
 
-    private get invalidFormatText(): string {
-        return this.small ? 'Formatfel' : 'Felaktigt format';
-    }
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
 
-    private get requiredFieldText(): string {
-        return this.small ? 'Obligatoriskt' : 'Fältet är obligatoriskt';
-    }
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
 
-    private get invalidPatternValidationResult(): IValidationResult {
-        return {
-            isValid: false,
-            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : this.invalidFormatText
-        } as IValidationResult
-    }
+  onChange(input: any) {
+    this.value = input;
+  }
 
-    private get emptyRequiredFieldValidationResult(): IValidationResult {
+  onTouched() {
+  }
 
-        return {
-            isValid: false,
-            validationError: this.invalidText && this.invalidText.length > 0 ? this.invalidText : this.requiredFieldText
-        } as IValidationResult
-    }
-    private get successfulValidationResult(): IValidationResult {
-        return { isValid: true, validationError: '' } as IValidationResult
+  onBlur(event): void {
+    if (this.readonly) {
+      return;
     }
 
-    constructor() {
-        super();
+    this.touched = true;
+    this.hasFocus = false;
+    this.blur.emit(event);
+  }
+
+  onFocus(): void {
+    if (this.readonly) {
+      return;
     }
-
-    ngOnInit() {
-        if (this.pattern && this.pattern.length > 0) {
-            this.required = true;
-        }
-        if (this.isNumeric) {
-            if (this.isAmount) {
-                this.setupNumericFormat('kr', 1, 2, this.maxNumberOfDecimals);
-            } else if (this.isKm) {
-                this.setupNumericFormat('km');
-            } else if (this.isPercent) {
-                this.setupNumericFormat('%');
-            } else if (this.isNumeric) {
-                this.setupNumericFormat();
-            }
-            this.displayValue = this.convertNumberToString(this.value);
-        } else {
-            this.displayValue = this.value;
-        }
-        if (this.validateOnInit) {
-            this.isContentValid();
-        };
-    }
-
-    setupNumericFormat(suffix?: string, minIntegerDigits: number = 1, minFractionDigits: number = 0, maxFractionDigits: number = this.maxNumberOfDecimals) {
-        if (!this.pattern) {
-            this.pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
-        }
-        if (!this.suffix && suffix) {
-            this.suffix = suffix;
-        }
-        this.alignRight = true;
-        this.decimalPipeConfiguration = minIntegerDigits + '.' + minFractionDigits + '-' + maxFractionDigits;
-    }
-
-    onFocus(event: FocusEvent): void {
-        if (this.readonly) {
-            return;
-        }
-        this.setValidationStateEditing();
-
-        if (this.isNumeric) {
-            if (this.value && !isNaN(this.value)) {
-                this.displayValue = this.value % 1 !== 0 ?
-                    this.swedishDecimalPipe.transform(this.value, this.decimalPipeConfiguration).replace(/\s/g, '') :
-                    this.swedishDecimalPipe.transform(this.value, '1.0-2').replace(/\s/g, '');
-            }
-        }
-    }
-
-    onValueChange(input: any) {
-        this.displayValue = input;
-        if (!this.isNumeric) {
-            this.value = input;
-        }
-    }
-
-    doValidate(): IValidationResult {
-        let result = this.successfulValidationResult;
-        if (this.readonly) {
-            result = this.successfulValidationResult;
-        } else if (this.customValidator) {
-            result = this.customValidator(this.displayValue);
-        } else if (!this.displayValue || this.displayValue.length === 0) {
-            if (this.required) {
-                result = this.emptyRequiredFieldValidationResult;
-            } else {
-                result = this.successfulValidationResult;
-            }
-        } else if (this.pattern && this.pattern.length > 0) {
-            const valueToMatch = this.displayValue !== undefined ? this.displayValue : '';
-            const regexp = new RegExp(this.pattern);
-            if (!regexp.test(valueToMatch)) {
-                result = this.invalidPatternValidationResult;
-            }
-        }
-        return result;
-    }
-
-    onLeave(): void {
-        if (this.readonly) {
-            return;
-        }
-
-        if (this.isContentValid()) {
-            if (this.isNumeric) {
-                this.value = this.convertStringToNumber(this.displayValue);
-                this.displayValue = this.convertNumberToString(this.value);
-            }
-        } else {
-            if (this.isNumeric) {
-                this.value = NaN;
-            }
-        }
-
-        this.valueChanged.emit(this.value);
-
-    }
-
-    private isContentValid(): boolean {
-        return this.validate().isValid;
-    }
-
-    convertNumberToString(value: number): string {
-        if (!isNaN(this.value)) {
-            return this.swedishDecimalPipe.transform(this.value, this.decimalPipeConfiguration);
-        }
-        return null;
-    }
-
-    convertStringToNumber(value: string): number {
-        if (value) {
-            const normalized = value.toString().trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
-            const floatVal = this.roundNumber(parseFloat(normalized));
-            return floatVal;
-        }
-        return NaN;
-    }
-
-    roundNumber(number: number, numberOfDecimals = this.maxNumberOfDecimals) {
-        if (isNaN(number)) {
-            return number;
-        }
-
-        const factor = Math.pow(10, numberOfDecimals);
-        const tempNumber = number * factor;
-        const roundedTempNumber = Math.round(tempNumber);
-        return roundedTempNumber / factor;
-    };
-
-
+    this.invalidOnFocus = this.isInvalid && this.touched;
+    this.hasFocus = true;
+    this.focus.emit(event);
+  }
 }
-

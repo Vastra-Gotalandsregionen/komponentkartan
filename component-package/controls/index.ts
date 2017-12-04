@@ -22,7 +22,6 @@ export { ModalPlaceholderComponent } from './modal/modal.component';
 export { MonthpickerComponent } from './monthpicker/monthpicker.component';
 export { DatepickerComponent } from './datepicker/datepicker.component';
 export { InputComponent } from './input/input.component';
-export { InputNewComponent } from './input-new/input-new.component';
 export { CardSectionComponent } from './card/cardSection.component';
 export { TitleValueComponent } from './titleValue/titleValue.component';
 export { LoaderComponent } from './loader/loader.component';
