@@ -11,17 +11,10 @@ describe('[ListColumnComponent]', () => {
         beforeEach(() => {
             component.setWidth(20);
         });
-        it('Width is left unchanged', () => {
-            expect(component.width).toBeUndefined();
+        it('Width is set', () => {
+            expect(component.width).toEqual(20);
         });
-        describe('And NgDoCheck is called', () => {
-            beforeEach(() => {
-                component.ngDoCheck();
-            });
-            it('Width is set', () => {
-                expect(component.width).toEqual(20);
-            });
-        });
+
     });
 
     describe('When getClasses is called', () => {
@@ -33,7 +26,6 @@ describe('[ListColumnComponent]', () => {
         describe('And width is set', () => {
             beforeEach(() => {
                 component.setWidth(20);
-                component.ngDoCheck();
             });
             it('It returns classes updated with width', () => {
                 expect(component.classes).toEqual('list__column flex-column flex-column--20 column--align-left');
@@ -42,8 +34,7 @@ describe('[ListColumnComponent]', () => {
 
         describe('And align is set', () => {
             beforeEach(() => {
-                component.setAlignment("center");
-                component.ngDoCheck();
+                component.setAlignment('center');
             });
             it('It returns classes updated with width', () => {
                 expect(component.classes).toEqual('list__column flex-column flex-column--1 column--align-center');
