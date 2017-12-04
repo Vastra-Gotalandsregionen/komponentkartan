@@ -12,10 +12,10 @@
       <vgr-card-section [title]="'Belopp'" [expanded]="true" [readonly]="!cardUnlocked" class="card__left">
         <div class="title-value-layout">
           <vgr-title-value [title]="'Bruttobelopp'">
-            <vgr-input [value]="grossAmount" [type]="'amount'" (valueChanged)="grossAmount = $event" [readonly]="!cardUnlocked"></vgr-input>
+            <vgr-input [value]="grossAmount" [suffix]="'kr'" [alignRight]="true" (valueChanged)="grossAmount = $event" [readonly]="!cardUnlocked"></vgr-input>
           </vgr-title-value>
           <vgr-title-value [title]="'Skattesats'">
-            <vgr-input [value]="taxPercent" [type]="'percent'" (valueChanged)="taxPercent = $event" [readonly]="!cardUnlocked"></vgr-input>
+            <vgr-input [value]="taxPercent" [suffix]="'%'" [alignRight]="true" (valueChanged)="taxPercent = $event" [readonly]="!cardUnlocked"></vgr-input>
           </vgr-title-value>
           <vgr-title-value [title]="'Nettobelopp'">
             <div class="row-layout">
@@ -57,7 +57,7 @@
             <vgr-dropdown [disabled]="!cardUnlocked" [items]="[{id:'1', displayName:'Kalles chokladfabrik', selected:true},{id:'2', displayName:'Jonnas jordgubbar'}]"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value [title]="'Kostnadsställe'">
-            <vgr-input [value]="'Kiosk & Godis'" [required]="true" [readonly]="!cardUnlocked"></vgr-input>
+            <vgr-input [value]="'Kiosk & Godis'" [readonly]="!cardUnlocked"></vgr-input>
           </vgr-title-value>
           <vgr-title-value [title]="'Fakturaadress'">
             <span>Bakgatan 11</span>

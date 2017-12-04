@@ -4,6 +4,7 @@ import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID } from '@angular/core'
 import { BrowserModule, Title } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { KomponentkartanApplicationComponent } from './app.component';
 import { KomponentkartaComponent } from './komponentkarta/komponentkarta.component'
@@ -35,7 +36,8 @@ import { appRoutes } from './routes'
         BrowserModule,
         FormsModule,
         RouterModule.forRoot(appRoutes),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         KomponentkartanApplicationComponent,
@@ -57,7 +59,8 @@ import { appRoutes } from './routes'
 
     ],
     providers: [
-        CityService, { provide: LOCALE_ID, useValue: 'sv-SE' }
+        CityService,
+        { provide: LOCALE_ID, useValue: 'sv-SE' }
     ],
 
     bootstrap: [KomponentkartanApplicationComponent]
