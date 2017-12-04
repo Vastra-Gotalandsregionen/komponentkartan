@@ -65,13 +65,13 @@ describe('ModalPlaceholderComponent', () => {
             expect(component.isOpen).toBe(true);
         });
         it('modal is visible', () => {
-            var openModals = rootElement.queryAll(By.css('.vgr-modal--open'));
+            const openModals = rootElement.queryAll(By.css('.vgr-modal--open'));
             expect(openModals.length).toBe(1);
         });
         describe('and button 2 is clicked', () => {
             beforeEach(() => {
-                var buttons = rootElement.queryAll(By.css('.button--secondary'));
-                buttons[1].triggerEventHandler('mousedown', {});
+                const buttons = rootElement.queryAll(By.css('.button'));
+                buttons[1].triggerEventHandler('click', {});
             });
             it('modal is closed', () => {
                 expect(component.isOpen).toBe(false);

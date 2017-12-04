@@ -24,7 +24,7 @@ import {
 import { ButtonComponent } from '../../component-package/controls/button/button.component';
 
 
-describe('ButtonComponent', () => {
+describe('[ButtonComponent - Angular]', () => {
     let component: ButtonComponent;
     let fixture: ComponentFixture<ButtonComponent>;
     let rootElement: DebugElement;
@@ -52,93 +52,115 @@ describe('ButtonComponent', () => {
             done();
         });
     });
-    describe('When component is initialized', () => {
+    describe('When button is initialized', () => {
         let textButtonElement: DebugElement;
         beforeEach(() => {
             textButtonElement = rootElement.query(By.css('.text-button'));
-            spyOn(component.click, 'emit');
+
         });
 
-        it('the aria-describedby is null', () => {
-            expect(textButtonElement.attributes['aria-describedby']).toBeNull();
-        });
-
-        it('The button has the role button', () => {
-            expect(textButtonElement.attributes['role']).toBe('button');
-        });
-
-        it('if a button is not disabled, the aria-disabled is set to false', () => {
-            expect(textButtonElement.attributes['aria-disabled']).toBe('false');
-        });
-
-        it('button is enabled', () => {
-            expect(textButtonElement.classes['button--disabled']).toBeFalsy();
-        });
-        it('button has tab stop', () => {
-            expect(textButtonElement.nativeElement.attributes.tabIndex.value).toBe('0');
-        });
-        describe('and button is clicked', () => {
-            it('a click event is triggered', () => {
-                textButtonElement.triggerEventHandler('mousedown', {});
-                expect(component.click.emit).toHaveBeenCalled();
-            });
-        });
-        describe('and space is pressed', () => {
-            it('a clicked event is triggered', () => {
-                textButtonElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
-                expect(component.click.emit).toHaveBeenCalled();
-            });
-        });
-        describe('and Enter is pressed', () => {
-            it('a clicked event is triggered', () => {
-                textButtonElement.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
-                expect(component.click.emit).toHaveBeenCalled();
-            });
-        });
-        describe('and a letter is pressed', () => {
-            it('no clicked event is triggered', () => {
-                textButtonElement.triggerEventHandler('keydown', { keyCode: 167 } as KeyboardEvent);
-                expect(component.click.emit).toHaveBeenCalledTimes(0);
-            });
-        });
-        describe('and button is disabled, and have an aria-describedby set to "info"', () => {
+        describe('And button is enabled', () => {
             beforeEach(() => {
-                component.disabled = true;
-                component.describedBy = 'info';
+                component.disabled = false;
                 fixture.detectChanges();
             });
-
-            it('the aria-describedby is null', () => {
-                expect(textButtonElement.attributes['aria-describedby']).toBe('info');
+            it('button is enabled', () => {
+                expect(textButtonElement.classes['button--disabled']).toBe(false);
             });
-
-            it('if a button is disabled, the aria-disabled is set to true', () => {
-                expect(textButtonElement.attributes['aria-disabled']).toBe('true');
+        });
+        describe('When button is disabled', () => {
+            beforeEach(() => {
+                component.disabled = true;
+                fixture.detectChanges();
+                spyOn(component.click, 'emit');
             });
             it('button is displayed as disabled', () => {
-                expect(textButtonElement.classes['button--disabled']).toBeTruthy();
+                expect(textButtonElement.classes['button--disabled']).toBe(true);
             });
-            it('button has tab stop', () => {
-                expect(textButtonElement.nativeElement.attributes.tabIndex.value).toBe('0');
-            });
+
             describe('and button is clicked', () => {
-                it('no clicked event is triggered', () => {
-                    textButtonElement.triggerEventHandler('click', null);
-                    expect(component.click.emit).toHaveBeenCalledTimes(0);
+                const mockEvent = { stopPropagation: () => { } };
+                beforeEach(() => {
+                    spyOn(mockEvent, 'stopPropagation');
+                    textButtonElement.triggerEventHandler('click', mockEvent);
+                });
+                it('the click event is not propagated', () => {
+                    expect(mockEvent.stopPropagation).toHaveBeenCalled();
                 });
             });
             describe('and space is pressed', () => {
                 it('no clicked event is triggered', () => {
-                    textButtonElement.triggerEventHandler('keypress', { code: 'Space' } as KeyboardEvent);
+                    textButtonElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
                     expect(component.click.emit).toHaveBeenCalledTimes(0);
                 });
             });
             describe('and Enter is pressed', () => {
                 it('no clicked event is triggered', () => {
-                    textButtonElement.triggerEventHandler('keypress', { code: 'Enter' } as KeyboardEvent);
+                    textButtonElement.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
                     expect(component.click.emit).toHaveBeenCalledTimes(0);
                 });
             });
         });
     });
+
+    describe('WCAG Tests', () => {
+        let textButtonElement: DebugElement;
+        beforeEach(() => {
+            textButtonElement = rootElement.query(By.css('.text-button'));
+            spyOn(component.click, 'emit');
+        });
+        describe('When button is enabled', () => {
+            it('button has tab stop', () => {
+                expect(textButtonElement.nativeElement.attributes.tabIndex.value).toBe('0');
+            });
+
+            it('button has role "button"', () => {
+                expect(textButtonElement.attributes['role']).toBe('button');
+            });
+
+            it('aria-disabled is false', () => {
+                expect(textButtonElement.attributes['aria-disabled']).toBe('false');
+            });
+
+            describe('and space is pressed', () => {
+                const spacePressedEvent = { preventDefault: () => { }, keyCode: 32 };
+                beforeEach(() => {
+                    spyOn(spacePressedEvent, 'preventDefault');
+                    textButtonElement.triggerEventHandler('keydown', spacePressedEvent);
+
+                });
+                it('a clicked event is triggered', () => {
+                    expect(component.click.emit).toHaveBeenCalled();
+                });
+                it('to prevent the default behaviour of SPACE, preventDefault is called', () => {
+                    expect(spacePressedEvent.preventDefault).toHaveBeenCalled();
+                });
+            });
+            describe('and Enter is pressed', () => {
+                it('a clicked event is triggered', () => {
+                    textButtonElement.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
+                    expect(component.click.emit).toHaveBeenCalled();
+                });
+            });
+            describe('and a letter is pressed', () => {
+                it('no clicked event is triggered', () => {
+                    textButtonElement.triggerEventHandler('keydown', { keyCode: 167 } as KeyboardEvent);
+                    expect(component.click.emit).toHaveBeenCalledTimes(0);
+                });
+            });
+        });
+        describe('When button is disabled', () => {
+            beforeEach(() => {
+                component.disabled = true;
+                fixture.detectChanges();
+            });
+            it('button has tab stop', () => {
+                expect(textButtonElement.nativeElement.attributes.tabIndex.value).toBe('0');
+            });
+            it('aria-disabled is set to true', () => {
+                expect(textButtonElement.attributes['aria-disabled']).toBe('true');
+            });
+        });
+    });
 });
+
