@@ -23,6 +23,7 @@ import { FakeCComponent } from './fake/fake-c.component';
 import { FullWidthCardComponent } from './fake/full-width-card.component';
 import { LoaderDemoComponent } from './loaderdemo/loaderdemo.component'
 import { CityService } from './inputFields/cityService';
+import { ListColumnsComponent } from './list-columns/list-columns.component';
 
 import { RouterModule, Routes } from '@angular/router'
 import { appRoutes } from './routes'
@@ -51,7 +52,9 @@ import { appRoutes } from './routes'
         FakeAComponent,
         FakeBComponent,
         FakeCComponent,
-        FullWidthCardComponent
+        FullWidthCardComponent,
+        ListColumnsComponent
+
     ],
     providers: [
         CityService, { provide: LOCALE_ID, useValue: 'sv-SE' }

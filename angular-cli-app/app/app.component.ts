@@ -353,7 +353,14 @@ export class KomponentkartanApplicationComponent implements AfterViewInit {
                         menuItems: [
                             { title: 'Formatmall', url: '/formatmall' } as IMenuItem,
                             { title: 'Färgkarta', url: '/fargkarta' } as IMenuItem,
+                            { title: 'Listor', url: '/lists' } as IMenuItem,
+                            { title: 'Kalender', url: '/calendars' } as IMenuItem,
+                            { title: 'Inputfält', url: '/inputFields' } as IMenuItem,
+                            { title: 'Loader', url: '/loader' } as IMenuItem,
                             { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem,
+                            { title: 'Formulär', url: '/formexample' } as IMenuItem,
+                            { title: 'Snygg Layout', url: '/example-layout' } as IMenuItem,
+                            { title: 'List kolumner', url: '/list-columns' } as IMenuItem
                         ] as IMenuItem[]
                     } as IMenuGroup
                 ] as IMenuGroup[]

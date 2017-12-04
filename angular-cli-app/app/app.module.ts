@@ -9,6 +9,7 @@ import { KomponentkartaComponent } from '../../demo-app/komponentkarta/komponent
 
 import { FormatmallComponent } from '../../demo-app/formatmall/formatmall.component'
 import { FargkartaComponent } from '../../demo-app/fargkarta/fargkarta.component'
+import { ListColumnsComponent } from '../../demo-app/list-columns/list-columns.component'
 import { MenuSelectorComponent } from '../../demo-app/menuSelector/menuSelector.component'
 
 import { KomponentkartanModule } from '../../component-package/komponentkartan.module';
@@ -28,7 +29,8 @@ import { appRoutes } from './routes'
         KomponentkartaComponent,
         FormatmallComponent,
         FargkartaComponent,
-        MenuSelectorComponent
+        MenuSelectorComponent,
+        ListColumnsComponent
     ],
 
     bootstrap: [KomponentkartanApplicationComponent]
