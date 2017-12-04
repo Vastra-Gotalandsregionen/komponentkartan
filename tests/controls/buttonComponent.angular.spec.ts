@@ -123,9 +123,17 @@ describe('[ButtonComponent - Angular]', () => {
             });
 
             describe('and space is pressed', () => {
+                const spacePressedEvent = { preventDefault: () => { }, keyCode: 32 };
+                beforeEach(() => {
+                    spyOn(spacePressedEvent, 'preventDefault');
+                    textButtonElement.triggerEventHandler('keydown', spacePressedEvent);
+
+                });
                 it('a clicked event is triggered', () => {
-                    textButtonElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
                     expect(component.click.emit).toHaveBeenCalled();
+                });
+                it('to prevent the default behaviour of SPACE, preventDefault is called', () => {
+                    expect(spacePressedEvent.preventDefault).toHaveBeenCalled();
                 });
             });
             describe('and Enter is pressed', () => {

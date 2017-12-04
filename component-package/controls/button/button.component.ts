@@ -29,7 +29,10 @@ export class ButtonComponent implements OnChanges {
             return;
         }
 
-        if (event.keyCode === 13 || event.keyCode === 32) {
+        if (event.keyCode === 32) {
+            event.preventDefault();
+            this.click.emit();
+        } else if (event.keyCode === 13) {
             this.click.emit();
         }
     }
