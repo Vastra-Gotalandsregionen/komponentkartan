@@ -9,20 +9,14 @@ export class ButtonComponent implements OnChanges {
     @HostBinding('class.button') buttonClass = true;
     @Input() disabled = false;
     @Input() secondary: boolean;
-    @Input() describedBy: string;
     lastDisabledStatus: boolean;
     reenabled: boolean;
-    @Output() click = new EventEmitter<string>();
+    @Output() click = new EventEmitter();
 
-    onMouseDown(event: any): void {
-        event.cancelBubble = true;
-        if (!this.disabled) {
-            this.click.emit();
+    onClick(event: MouseEvent) {
+        if (this.disabled) {
+            event.stopPropagation();
         }
-    }
-
-    onClick(event: any) {
-        event.cancelBubble = true;
     }
 
     ngOnChanges() {
@@ -31,9 +25,15 @@ export class ButtonComponent implements OnChanges {
     }
 
     keyPressed(event: KeyboardEvent): void {
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            this.onMouseDown(event);
+        if (this.disabled) {
+            return;
+        }
+
+        if (event.keyCode === 32) {
             event.preventDefault();
+            this.click.emit();
+        } else if (event.keyCode === 13) {
+            this.click.emit();
         }
     }
 }
