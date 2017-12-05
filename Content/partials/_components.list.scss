@@ -81,9 +81,12 @@
 
 .list-item {
   visibility: visible;
-  display: block;
+  display: none;
   margin-top: 1px;
   box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
+  &.list-item--columns-initialized {
+    display: block;
+  }
   .list-item__header:after {
     @extend .bg-image-icon-chevron;
     content: "";
