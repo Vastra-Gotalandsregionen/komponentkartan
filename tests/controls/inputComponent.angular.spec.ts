@@ -31,6 +31,7 @@ import {
 import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
 import 'intl/locale-data/jsonp/se-SE.js';
+import { combineAll } from 'rxjs/operator/combineAll';
 
 
 describe('[InputComponent]', () => {
@@ -107,6 +108,26 @@ describe('[InputComponent]', () => {
         });
       })
     })
+  });
+
+  describe('When initialized with invalid state and validate on init is true', () => {
+    beforeEach(() => {
+      component = fixture.componentInstance;
+      component.isInvalid = true;
+      component.validateoninit = true
+      component.errormessage = 'error';
+      fixture.detectChanges();
+    });
+
+    it('CSS Class validation-error--active is applied', () => {
+      expect(rootElement.classes['validation-error--editing']).toEqual(false);
+      expect(rootElement.classes['validation-error--active']).toEqual(true);
+      expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+    });
+    it('There is a error message section', () => {
+      let element = rootElement.query(By.css('.input-validation_status__message'));
+      expect(element.nativeElement.innerText).toEqual('error');
+    });
   });
 });
 
