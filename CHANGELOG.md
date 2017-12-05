@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added trashcan column, vgr-list-column-trashcan, that adds support for trashcan buttons in lists
 - Added support for aligment on vgr-list-column-header. Left, center and right alignment is supported
 
+### Input component
+- Removed validation logic from input-component
+- Added support for angular forms (i.e reactive forms or template driven forms)
 
 ## 0.3.0 (2017-11-07)
 
