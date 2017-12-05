@@ -80,28 +80,33 @@ describe('[InputComponent]', () => {
       expect(element.nativeElement.innerText).toEqual('error');
     });
 
-    it('CSS Class validation-error--editing is applied when focused', () => {
-      component.onFocus();
-      fixture.detectChanges();
+    describe('When focused', () => {
+      beforeEach(() => {
+        component.onFocus();
+        fixture.detectChanges();
+      });
+      it('CSS Class validation-error--editing is applied', () => {
 
-      let element = rootElement.query(By.css('.input-validation_status__message'));
-      expect(element.nativeElement.innerText).toEqual('error');
-      expect(rootElement.classes['validation-error--editing']).toEqual(true);
-      expect(rootElement.classes['validation-error--active']).toEqual(false);
-      expect(rootElement.classes['validation-error--fixed']).toEqual(false);
-    });
+        let element = rootElement.query(By.css('.input-validation_status__message'));
+        expect(element.nativeElement.innerText).toEqual('error');
+        expect(rootElement.classes['validation-error--editing']).toEqual(true);
+        expect(rootElement.classes['validation-error--active']).toEqual(false);
+        expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+      });
 
-    it('CSS Class validation-error--fixed is applied when valid and onblur', () => {
-      component.onFocus();
-      component.isInvalid = false;      
-      component.onBlur();   
-      fixture.detectChanges();
-
-      expect(rootElement.classes['validation-error--editing']).toEqual(false);
-      expect(rootElement.classes['validation-error--active']).toEqual(false);
-      expect(rootElement.classes['validation-error--fixed']).toEqual(true);
-    });
-
+      describe('When error is corrected and field is blurred', () => {
+        beforeEach(() => {
+          component.isInvalid = false;
+          component.onBlur();
+          fixture.detectChanges();
+        });
+        it('CSS Class validation-error--fixed is applied', () => {
+          expect(rootElement.classes['validation-error--editing']).toEqual(false);
+          expect(rootElement.classes['validation-error--active']).toEqual(false);
+          expect(rootElement.classes['validation-error--fixed']).toEqual(true);
+        });
+      })
+    })
   });
 });
 
