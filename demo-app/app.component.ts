@@ -361,6 +361,7 @@ export class KomponentkartanApplicationComponent {
                             { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem,
                             { title: 'Formulär', url: '/formexample' } as IMenuItem,
                             { title: 'Snygg Layout', url: '/example-layout' } as IMenuItem,
+                            { title: 'List kolumner', url: '/list-columns' } as IMenuItem,
                         ] as IMenuItem[]
                     } as IMenuGroup
                 ] as IMenuGroup[]

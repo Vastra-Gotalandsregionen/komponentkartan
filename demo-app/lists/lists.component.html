@@ -94,7 +94,10 @@
   </vgr-action-panel>
   <vgr-page-body>
     <vgr-page-block>
-      <vgr-list [allowMultipleExpandedItems]="false" [flexibleHeader]="actionPanelVisible" (sortChanged)="onSortChanged($event)">
+      <vgr-button (click)="loadItems()">Foo</vgr-button>
+    </vgr-page-block>
+    <vgr-page-block>
+      <vgr-list [allowMultipleExpandedItems]="false" [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
           <vgr-list-column-header [text]="'ID'" [width]="2"></vgr-list-column-header>
           <vgr-list-column-header [text]="'Fakturanr'" [width]="3"></vgr-list-column-header>

@@ -4,6 +4,7 @@ import { IValidationResult, ValidationErrorState, IValidation, ICustomValidator 
 import { CityService } from './cityService';
 import { ISelectableItem } from '../../component-package/models/selectableItem.model';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
     moduleId: module.id,
@@ -11,7 +12,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
     templateUrl: 'inputFields.component.html'
 })
 
-export class InputFieldsComponent {
+export class InputFieldsComponent implements OnInit {
     // Reactive form
     form: FormGroup;
 
