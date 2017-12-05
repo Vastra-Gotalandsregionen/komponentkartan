@@ -18,7 +18,6 @@ import { ListHeaderComponent } from '../list/list-header.component';
 export class ListItemComponent implements OnInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
-    public columnInitialized: boolean;
     readonly showNotificationDurationMs = 1500;
     @HostBinding('class.list-item') isContainer = true;
     @HostBinding('class.list-item--collapsed') collapsed = true;
@@ -76,7 +75,6 @@ export class ListItemComponent implements OnInit {
         this.columns.forEach((column, index) => {
             header.applyToColumn(column, index);
         });
-        this.columnInitialized = true;
     }
 
 

@@ -1,15 +1,14 @@
-<div *ngIf="columnInitialized">
-  <ng-content select=".list-item__header"></ng-content>
-  <div class="list-item__notification">
-    <span class="list-item__notification__icon" [ngClass]="
+<ng-content select=".list-item__header">
+</ng-content>
+<div class="list-item__notification">
+  <span class="list-item__notification__icon" [ngClass]="
             {   'bg-image-icon-ok-check' : notification && notification.icon===NotificationIcons.Ok,
                 'bg-image-icon-ok-check--green' : notification && notification.icon===NotificationIcons.OkGreen,
                 'bg-image-icon-exclamation' : notification && notification.icon===NotificationIcons.Exclamation,
                 'bg-image-icon-exclamation--red' : notification && notification.icon===NotificationIcons.ExclamationRed}">
-    </span>
-    <div class="list-item__notification__message">
-      {{notification? notification.message : ''}}
-    </div>
+  </span>
+  <div class="list-item__notification__message">
+    {{notification? notification.message : ''}}
   </div>
-  <ng-content select=".list-item__content"></ng-content>
 </div>
+<ng-content select=".list-item__content"></ng-content>
