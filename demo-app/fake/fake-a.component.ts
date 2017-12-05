@@ -8,7 +8,7 @@ import { IDropdownItem } from '../../component-package/models/dropdownItem.model
 })
 export class FakeAComponent {
 
-    readonly: boolean;
+    readonly = true;
     options123_1 = [{ displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
     { displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
     { displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian' }] as IDropdownItem[];
