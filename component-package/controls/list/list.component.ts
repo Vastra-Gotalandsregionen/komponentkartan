@@ -1,4 +1,4 @@
-import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter } from '@angular/core';
+import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 
@@ -32,7 +32,7 @@ export class ListComponent implements AfterContentInit {
             });
         }
         this.items.changes.subscribe(() => {
-            this.copyItemWidthsFromHeader();
+            setTimeout(() => { this.copyItemWidthsFromHeader() }, 20);
         });
     }
 

@@ -5,90 +5,90 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { concat } from 'rxjs/observable/concat';
 
 @Component({
-  selector: 'vgr-input',
-  moduleId: module.id,
-  templateUrl: './input.component.html',
+    selector: 'vgr-input',
+    moduleId: module.id,
+    templateUrl: './input.component.html',
 
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => InputComponent),
-    multi: true
-  }]
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => InputComponent),
+        multi: true
+    }]
 
 })
 export class InputComponent implements ControlValueAccessor {
-  @Input() isInvalid: boolean;
+    @Input() isInvalid: boolean;
 
-  @Input() @HostBinding('class.readonly') readonly?: boolean;
-  @Input() @HostBinding('class.input--small') small: boolean;
-  @Input() @HostBinding('class.align-right') alignRight: boolean;
+    @Input() @HostBinding('class.readonly') readonly?: boolean;
+    @Input() @HostBinding('class.input--small') small: boolean;
+    @Input() @HostBinding('class.align-right') alignRight: boolean;
 
-  @Input() suffix: string;
-  @Input() value: any;
-  @Input() maxlength?: number;
-  @Input() errormessage: string;
+    @Input() suffix: string;
+    @Input() value: any;
+    @Input() maxlength?: number;
+    @Input() errormessage: string;
 
-  @Output() blur: EventEmitter<any>;
-  @Output() focus: EventEmitter<any>;
+    @Output() blur: EventEmitter<any>;
+    @Output() focus: EventEmitter<any>;
 
-  @HostBinding('class.validated-input') hasClass = true;
-  @HostBinding('class.validation-error--active') get errorClass() {
-    return this.touched && this.isInvalid && !this.hasFocus;
-  }
-  @HostBinding('class.validation-error--editing') get editingClass() {
-    return this.touched && this.isInvalid && this.hasFocus;
-  }
-  @HostBinding('class.validation-error--fixed') get fixedClass() {
-    return this.invalidOnFocus && this.touched && !this.isInvalid && !this.hasFocus;
-  }
-
-  control: AbstractControl;
-  hasFocus = false;
-  touched = false;
-  invalidOnFocus = false;
-
-  constructor() {
-    this.blur = new EventEmitter<any>();
-    this.focus = new EventEmitter<any>();
-  }
-
-  writeValue(value: any) {
-    if (value !== undefined) {
-      this.value = value;
+    @HostBinding('class.validated-input') hasClass = true;
+    @HostBinding('class.validation-error--active') get errorClass() {
+        return this.touched && this.isInvalid && !this.hasFocus;
     }
-  }
-
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-
-  onChange(input: any) {
-    this.value = input;
-  }
-
-  onTouched() {
-  }
-
-  onBlur(event): void {
-    if (this.readonly) {
-      return;
+    @HostBinding('class.validation-error--editing') get editingClass() {
+        return this.touched && this.isInvalid && this.hasFocus;
+    }
+    @HostBinding('class.validation-error--fixed') get fixedClass() {
+        return this.invalidOnFocus && this.touched && !this.isInvalid && !this.hasFocus;
     }
 
-    this.touched = true;
-    this.hasFocus = false;
-    this.blur.emit(event);
-  }
+    control: AbstractControl;
+    hasFocus = false;
+    touched = false;
+    invalidOnFocus = false;
 
-  onFocus(): void {
-    if (this.readonly) {
-      return;
+    constructor() {
+        this.blur = new EventEmitter<any>();
+        this.focus = new EventEmitter<any>();
     }
-    this.invalidOnFocus = this.isInvalid && this.touched;
-    this.hasFocus = true;
-    this.focus.emit(event);
-  }
+
+    writeValue(value: any) {
+        if (value !== undefined) {
+            this.value = value;
+        }
+    }
+
+    registerOnChange(fn: any) {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any) {
+        this.onTouched = fn;
+    }
+
+    onChange(input: any) {
+        this.value = input;
+    }
+
+    onTouched() {
+    }
+
+    onBlur(event: any): void {
+        if (this.readonly) {
+            return;
+        }
+
+        this.touched = true;
+        this.hasFocus = false;
+        this.blur.emit(event);
+    }
+
+    onFocus(): void {
+        if (this.readonly) {
+            return;
+        }
+        this.invalidOnFocus = this.isInvalid && this.touched;
+        this.hasFocus = true;
+        this.focus.emit(event);
+    }
 }
