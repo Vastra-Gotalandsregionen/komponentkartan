@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+## 0.3.3 (2017-12-05)
+- Controls in a title-value-layout are now equally spaced and takes less room when in slim mode
+- More examples added to komponentkartan-demo
+- Route matching in the menu is now *exact*, disabling partial route matching
+
+### Card component
+- Card now supports a single-column layout
+- Restructured card with new components, vgr-card-header and vgr-card-column.
+
+### List component
+- Added checkbox column, vgr-list-column-checkbox, that adds support for checkboxes in lists
+- Added trashcan column, vgr-list-column-trashcan, that adds support for trashcan buttons in lists
+- Added support for aligment on vgr-list-column-header. Left, center and right alignment is supported
+
+
 ## 0.3.0 (2017-11-07)
 
 ### Description of release
