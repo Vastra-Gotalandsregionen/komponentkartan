@@ -73,7 +73,7 @@ export class InputComponent implements ControlValueAccessor {
     onTouched() {
     }
 
-    onBlur(event: any): void {
+    onBlur(): void {
         if (this.readonly) {
             return;
         }

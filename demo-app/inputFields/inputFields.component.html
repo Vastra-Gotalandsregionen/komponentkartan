@@ -12,23 +12,6 @@
   </vgr-action-panel>
   <vgr-page-body>
     <vgr-page-block class=" column-layout">
-      <vgr-card>
-        <vgr-card-column>
-          <vgr-card-section [title]="'Form'" [expanded]="true">
-            <form [formGroup]="userForm">
-              <div class="title-value-layout">
-                <vgr-title-value [title]="'Text'">
-                  <vgr-input-new [maxlength]="10" formControlName="firstname" [control]="userForm.controls.firstname"></vgr-input-new>
-                </vgr-title-value>
-              </div>
-            </form>
-            <p>Form value: {{ userForm.value | json }}</p>
-            <p>Form status: {{ userForm.status | json }}</p>
-          </vgr-card-section>
-        </vgr-card-column>
-      </vgr-card>
-    </vgr-page-block>
-    <vgr-page-block class=" column-layout">
       <vgr-radio-group [options]="[{id:'1', displayName:'Stor', selected:true},{id:'2', displayName:'Liten'}]" (selectedChanged)="toggleInputType($event)">
       </vgr-radio-group>
       <form [formGroup]="form">
