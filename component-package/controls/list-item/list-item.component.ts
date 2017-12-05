@@ -25,6 +25,7 @@ export class ListItemComponent implements OnInit {
     @HostBinding('class.list-item--deleted') deleted: boolean;
     @HostBinding('class.list-item--notification-visible') notificationVisible: boolean;
     @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
+    @HostBinding('class.list-item--columns-initialized') columnsInitialized: boolean;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue) {
@@ -75,6 +76,7 @@ export class ListItemComponent implements OnInit {
         this.columns.forEach((column, index) => {
             header.applyToColumn(column, index);
         });
+        this.columnsInitialized = true;
     }
 
 
