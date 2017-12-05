@@ -26,6 +26,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() suffix: string;
   @Input() value: any;
   @Input() maxlength?: number;
+  @Input() validateoninit: boolean;
   @Input() errormessage: string;
 
   @Output() blur: EventEmitter<any>;
@@ -33,10 +34,10 @@ export class InputComponent implements ControlValueAccessor {
 
   @HostBinding('class.validated-input') hasClass = true;
   @HostBinding('class.validation-error--active') get errorClass() {
-    return this.touched && this.isInvalid && !this.hasFocus;
+    return this.isInvalid && !this.hasFocus && (this.touched || this.validateoninit);
   }
   @HostBinding('class.validation-error--editing') get editingClass() {
-    return this.touched && this.isInvalid && this.hasFocus;
+    return this.isInvalid && this.hasFocus && (this.touched || this.validateoninit);
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
     return this.invalidOnFocus && this.touched && !this.isInvalid && !this.hasFocus;
@@ -87,7 +88,7 @@ export class InputComponent implements ControlValueAccessor {
     if (this.readonly) {
       return;
     }
-    this.invalidOnFocus = this.isInvalid && this.touched;
+    this.invalidOnFocus = this.isInvalid && (this.touched || this.validateoninit);
     this.hasFocus = true;
     this.focus.emit(event);
   }

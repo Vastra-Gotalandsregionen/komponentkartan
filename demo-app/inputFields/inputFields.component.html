@@ -56,8 +56,9 @@
               <vgr-input formControlName="control6" [maxlength]=5 [small]="isSmall"></vgr-input>
             </div>
             <div>
-              Exakt 3 VERSALER
-              <vgr-input formControlName="control7" [errormessage]="'Ange exakt tre VERSALER'" [maxlength]="3" [small]="isSmall" [isInvalid]="form.get('control7').invalid"></vgr-input>
+              Exakt 3 VERSALER (validera vid initiering)
+              <vgr-input formControlName="control7" [errormessage]="'Ange exakt tre VERSALER'" [validateoninit]="true" [maxlength]="3"
+                [small]="isSmall" [isInvalid]="form.get('control7').invalid"></vgr-input>
             </div>
             <div>
               Mellan 2 och 6 tecken
@@ -88,8 +89,9 @@
           <div class="one-third">
             <h2>Validering med service</h2>
             <div>
-              Ange en storstad i USA
-              <vgr-input formControlName="control13" [small]="isSmall" [isInvalid]="form.get('control13').invalid" [errormessage]="'Felaktig stad'"></vgr-input>
+              Ange en storstad i USA (validera vid initiering)
+              <vgr-input formControlName="control13" [small]="isSmall" [isInvalid]="form.get('control13').invalid" [validateoninit]="true"
+                [errormessage]="'Felaktig stad'"></vgr-input>
               <span>Din stad: {{form.controls.control13.value}}</span>
             </div>
             <div>
