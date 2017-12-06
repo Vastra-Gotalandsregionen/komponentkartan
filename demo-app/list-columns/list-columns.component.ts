@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {
     SortDirection, SortChangedArgs
@@ -18,13 +18,17 @@ import {
     moduleId: module.id
 
 })
-export class ListColumnsComponent {
+export class ListColumnsComponent implements OnInit {
 
     public peopleRows: ExpandableRow<ExamplePerson, any>[];
+    public peopleWithUnitRows: ExpandableRow<ExamplePersonWithUnit, any>[];
     typeScriptSimpleListMarkup: string;
     htmlSimpleListMarkup: string;
 
+    ngOnInit() {
+        this.loadExamplePersonWithUnitData();
 
+    }
     loadData() {
         this.peopleRows = [
             new ExpandableRow<ExamplePerson, any>({ id: '1', firstName: 'Git', lastName: 'Hubsson', amount: 125000 }),
@@ -32,6 +36,32 @@ export class ListColumnsComponent {
             new ExpandableRow<ExamplePerson, any>({ id: '3', firstName: 'Bjarne', lastName: 'Chi', amount: 25000 }),
             new ExpandableRow<ExamplePerson, any>({ id: '4', firstName: 'Carola', lastName: 'Bengtsson', amount: 720000 }),
             new ExpandableRow<ExamplePerson, any>({ id: '5', firstName: 'Erik', lastName: 'Karlsson', amount: 401200 }),
+        ];
+    }
+
+
+    loadExamplePersonWithUnitData() {
+        this.peopleWithUnitRows = [
+            new ExpandableRow<ExamplePersonWithUnit, any>({
+                id: '1', firstName: 'Git', lastName: 'Hubsson', amount: 125000,
+                unitname: 'BVC & Mödravården Mölndal', unitcode: '23111', hsaid: 'SE2321000131-E000000011851', committee: '67 - Göteborgs hälso- och sjukvårdsnämnden', owner: 'Stefan Larsson'
+            }),
+            new ExpandableRow<ExamplePersonWithUnit, any>({
+                id: '2', firstName: 'Adam', lastName: 'Lind', amount: 235000,
+                unitname: 'BVC & Mödravården Mölndal', unitcode: '23111', hsaid: 'SE2321000131-E000000011851', committee: '67 - Göteborgs hälso- och sjukvårdsnämnden', owner: 'Stefan Larsson'
+            }),
+            new ExpandableRow<ExamplePersonWithUnit, any>({
+                id: '3', firstName: 'Bjarne', lastName: 'Chi', amount: 25000,
+                unitname: 'BVC & Mödravården Mölndal', unitcode: '23111', hsaid: 'SE2321000131-E000000011851', committee: '67 - Göteborgs hälso- och sjukvårdsnämnden', owner: 'Stefan Larsson'
+            }),
+            new ExpandableRow<ExamplePersonWithUnit, any>({
+                id: '4', firstName: 'Carola', lastName: 'Bengtsson', amount: 720000,
+                unitname: 'BVC & Mödravården Mölndal', unitcode: '23111', hsaid: 'SE2321000131-E000000011851', committee: '67 - Göteborgs hälso- och sjukvårdsnämnden', owner: 'Stefan Larsson'
+            }),
+            new ExpandableRow<ExamplePersonWithUnit, any>({
+                id: '5', firstName: 'Erik', lastName: 'Karlsson', amount: 401200,
+                unitname: 'BVC & Mödravården Mölndal', unitcode: '23111', hsaid: 'SE2321000131-E000000011851', committee: '67 - Göteborgs hälso- och sjukvårdsnämnden', owner: 'Stefan Larsson'
+            }),
         ];
     }
 
@@ -103,3 +133,14 @@ export interface ExamplePerson {
     selected?: boolean;
 }
 
+export interface ExamplePersonWithUnit {
+    id: string;
+    firstName: string;
+    lastName: string;
+    amount: number;
+    unitname: string;
+    unitcode: string;
+    hsaid: string;
+    committee: string;
+    owner: string;
+}
