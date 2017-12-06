@@ -5,14 +5,14 @@
     <vgr-page-block>
       <vgr-list [flexibleHeader]="true">
         <vgr-list-header>
-          <vgr-list-column-header align="left" text="FörnamnLeft" width="2" sortKey="firstName"></vgr-list-column-header>
-          <vgr-list-column-header align="right" text="EfternamnRight" width="2" sortKey="lastName"></vgr-list-column-header>
-          <vgr-list-column-header align="right" text="ÅrsbeloppRight" width="3" sortKey="amount"></vgr-list-column-header>
-          <vgr-list-column-header align="right" text="EnhetRight" width="3" sortKey="unitname"></vgr-list-column-header>
-          <vgr-list-column-header align="right" text="hsaidRight" width="3" sortKey="hsaid"></vgr-list-column-header>
-          <vgr-list-column-header align="left" text="ÄgareLeft" width="2" sortKey="owner"></vgr-list-column-header>
-          <vgr-list-column-header align="center" text="EnhetskodCenter" width="2" sortKey="unitcode"></vgr-list-column-header>
-          <vgr-list-column-header align="left" text="NämndLeft" width="3" sortKey="committee"></vgr-list-column-header>
+          <vgr-list-column-header align="left" text="Förnamn" width="2" sortKey="firstName"></vgr-list-column-header>
+          <vgr-list-column-header align="right" text="Efternamn" width="2" sortKey="lastName"></vgr-list-column-header>
+          <vgr-list-column-header align="right" text="Årsbelopp" width="3" sortKey="amount"></vgr-list-column-header>
+          <vgr-list-column-header align="right" text="Enhet" width="3" sortKey="unitname"></vgr-list-column-header>
+          <vgr-list-column-header align="right" text="hsaid" width="3" sortKey="hsaid"></vgr-list-column-header>
+          <vgr-list-column-header align="left" text="Ägare" width="2" sortKey="owner"></vgr-list-column-header>
+          <vgr-list-column-header align="center" text="Enhetskod" width="2" sortKey="unitcode"></vgr-list-column-header>
+          <vgr-list-column-header align="left" text="Nämnd" width="3" sortKey="committee"></vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of peopleWithUnitRows" [notification]="row.notification">
           <div class="list-item__header">
