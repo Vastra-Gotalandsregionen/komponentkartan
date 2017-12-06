@@ -328,13 +328,13 @@
 
 @mixin flex-column($number) {
   .flex-column--#{$number} {
-    min-width: 54px * $number;
-    width: 54px * $number;
+    min-width: 53px * $number;
+    width: 53px * $number;
   }
   @media screen and (min-width: $desktop-width--medium) {
     .flex-column--#{$number} {
-      min-width: 56px * $number;
-      width: 56px * $number;
+      min-width: 55px * $number;
+      width: 55px * $number;
     }
   }
 }
