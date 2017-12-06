@@ -5,11 +5,13 @@ import { CityService } from './cityService';
 import { ISelectableItem } from '../../component-package/models/selectableItem.model';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { ErrorHandler } from '../../component-package/services/errorhandler';
 
 @Component({
     moduleId: module.id,
     selector: 'vgr-input-fields',
-    templateUrl: 'inputFields.component.html'
+    templateUrl: 'inputFields.component.html',
+    providers: [ErrorHandler]
 })
 
 export class InputFieldsComponent implements OnInit {
@@ -27,13 +29,43 @@ export class InputFieldsComponent implements OnInit {
     headerExpanded: boolean;
     isSmall: boolean;
 
-    validationMessage: string;
-    formErrors: any;
-
     state: string;
     allCities: any;
 
-    constructor(private fb: FormBuilder) {
+    formErrors = {
+        'control2': '',
+        'control7': '',
+        'control8': '',
+        'control9': '',
+        'control10': '',
+        'control13': '',
+        'control14': ''
+    };
+
+    validationMessages = {
+        'control2': {
+        },
+        'control7': {
+            'pattern': 'Ange exakt tre VERSALER.',
+        },
+        'control8': {
+            'pattern': ' Ange mellan 2-6 tecken.'
+        },
+        'control9': {
+            'pattern': 'Ange ett giltigt heltal.'
+        },
+        'control10': {
+            'required': 'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'
+        },
+        'control13': {
+            'invalidCity': 'Felaktig stad',
+        },
+        'control14': {
+            'email': 'Felaktig e-post'
+        }
+    };
+
+    constructor(private fb: FormBuilder, private errorHandler: ErrorHandler) {
         this.cityName = 'Houstons';
         this.amount1 = 15000;
         this.amount2 = -25.5;
@@ -45,7 +77,7 @@ export class InputFieldsComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
-        this.validationMessage = 'aj då';
+        this.errorHandler.reactiveFormsDoValidate(this.formErrors, this.validationMessages, this.form, true, true);
     }
 
     createForm() {
@@ -56,8 +88,8 @@ export class InputFieldsComponent implements OnInit {
             control4: [this.kmValue],
             control5: [this.numericValue],
             control6: [],
-            control7: ['abc', Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$')],
-            control8: ['', Validators.pattern('^.{2,6}$')],
+            control7: ['abc', [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required]],
+            control8: ['', [Validators.pattern('^.{2,6}$'), Validators.required]],
             control9: [this.intValue, Validators.pattern('^[0-9]+$')],
             control10: ['', Validators.required],
             control11: ['Visar värdet utan ram'],

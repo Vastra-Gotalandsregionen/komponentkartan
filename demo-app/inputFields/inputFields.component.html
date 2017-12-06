@@ -25,7 +25,7 @@
             <div>
               Belopp 2, obligatoriskt
               <vgr-input formControlName="control2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall" [isInvalid]="form.get('control2').invalid"
-                [errormessage]="'Fältet är obligatoriskt'"></vgr-input>
+                [errormessage]="formErrors.control2"></vgr-input>
               <span>Belopp 2: </span>
               <span>{{formatNumericValue(form.controls.control2.value)}}</span>
             </div>
@@ -57,23 +57,23 @@
             </div>
             <div>
               Exakt 3 VERSALER (validera vid initiering)
-              <vgr-input formControlName="control7" [errormessage]="'Ange exakt tre VERSALER'" [validateoninit]="true" [maxlength]="3"
-                [small]="isSmall" [isInvalid]="form.get('control7').invalid"></vgr-input>
+              <vgr-input formControlName="control7" [errormessage]="formErrors.control7" [validateoninit]="true" [maxlength]="3" [small]="isSmall"
+                [isInvalid]="form.get('control7').invalid"></vgr-input>
             </div>
             <div>
               Mellan 2 och 6 tecken
-              <vgr-input formControlName="control8" [maxlength]=6 [errormessage]="'Ange mellan 2-6 tecken'" [small]="isSmall" [isInvalid]="form.get('control8').invalid"></vgr-input>
+              <vgr-input formControlName="control8" [maxlength]=6 [errormessage]="formErrors.control8" [small]="isSmall" [isInvalid]="form.get('control8').invalid"></vgr-input>
             </div>
             <div>
               Heltal med enhet
-              <vgr-input formControlName="control9" [suffix]="'st'" [errormessage]="'Ange ett giltigt heltal'" [alignRight]="true" [small]="isSmall"
+              <vgr-input formControlName="control9" [suffix]="'st'" [errormessage]="formErrors.control9" [alignRight]="true" [small]="isSmall"
                 [isInvalid]="form.get('control9').invalid"></vgr-input>
               <span>Antal: </span>
               <span>{{intValue + 0}}</span>
             </div>
             <div>
               Långa felmeddelanden
-              <vgr-input formControlName="control10" [isInvalid]="form.get('control10').invalid" [errormessage]="'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'"
+              <vgr-input formControlName="control10" [isInvalid]="form.get('control10').invalid" [errormessage]="formErrors.control10"
                 [small]="isSmall"></vgr-input>
             </div>
             <div>
@@ -91,12 +91,12 @@
             <div>
               Ange en storstad i USA (validera vid initiering)
               <vgr-input formControlName="control13" [small]="isSmall" [isInvalid]="form.get('control13').invalid" [validateoninit]="true"
-                [errormessage]="'Felaktig stad'"></vgr-input>
+                [errormessage]="formErrors.control13"></vgr-input>
               <span>Din stad: {{form.controls.control13.value}}</span>
             </div>
             <div>
               E-postadress
-              <vgr-input formControlName="control14" [small]="isSmall" [isInvalid]="form.get('control14').invalid" [errormessage]="'Felaktig e-post'"></vgr-input>
+              <vgr-input formControlName="control14" [small]="isSmall" [isInvalid]="form.get('control14').invalid" [errormessage]="formErrors.control14"></vgr-input>
             </div>
           </div>
         </div>
