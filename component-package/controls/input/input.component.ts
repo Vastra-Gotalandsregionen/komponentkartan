@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, Output } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, Output, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -16,8 +16,9 @@ import { concat } from 'rxjs/observable/concat';
   }]
 
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() isInvalid: boolean;
+  @Input() formatNumber: boolean;
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
   @Input() @HostBinding('class.input--small') small: boolean;
@@ -48,14 +49,42 @@ export class InputComponent implements ControlValueAccessor {
   touched = false;
   invalidOnFocus = false;
 
+  swedishDecimalPipe: DecimalPipe;
+  decimalPipeConfiguration: string;
+  displayValue: string;
+  private maxNumberOfDecimals = 2;
+
   constructor() {
     this.blur = new EventEmitter<any>();
     this.focus = new EventEmitter<any>();
+
+    this.formatNumber = true;
+  }
+
+  ngOnInit() {
+    // this.decimalPipeConfiguration = 1 + '.' + 0 + '-' + 2;
+    // if (this.formatNumber) {
+    //   this.displayValue = this.convertNumberToString(this.value);
+    // }
+    // else {
+    //   this.displayValue = this.value;
+    // }
+
+    this.swedishDecimalPipe = new DecimalPipe('sv-se')
   }
 
   writeValue(value: any) {
     if (value !== undefined) {
       this.value = value;
+
+      if (this.formatNumber) {
+        this.displayValue =
+
+        // this.convertNumberToString(this.value);
+      }
+      else {
+        this.displayValue = this.value;
+      }
     }
   }
 
@@ -68,7 +97,6 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   onChange(input: any) {
-    this.value = input;
   }
 
   onTouched() {
@@ -79,6 +107,10 @@ export class InputComponent implements ControlValueAccessor {
       return;
     }
 
+    // if (this.formatNumber && this.isInvalid) {
+    //   this.displayValue = this.convertNumberToString(this.value);
+    // }
+
     this.touched = true;
     this.hasFocus = false;
     this.blur.emit(event);
@@ -88,8 +120,52 @@ export class InputComponent implements ControlValueAccessor {
     if (this.readonly) {
       return;
     }
+
     this.invalidOnFocus = this.isInvalid && (this.touched || this.validateoninit);
     this.hasFocus = true;
     this.focus.emit(event);
   }
+
+  // private formatNumberValue(value: string): string {
+  //   const decimalPipe: DecimalPipe = new DecimalPipe('s');
+  //   return this.validateNumber(value) ? decimalPipe.transform(value, '1.1-1') : value;
+  // }
+
+  // private validateNumber(value: string): boolean {
+  //   const regexp = new RegExp('^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$');
+  //   return regexp.test(value);
+  // }
+
+  // private convertNumberToString(value: any): string {
+  //   let pipe = new DecimalPipe('sv-se');
+  //   return pipe.transform(value, '1.0-2');
+
+  //   //   if (!isNaN(value)) {
+  //   //     let pipe = new DecimalPipe('sv-se');
+  //   //     return pipe.transform(value, '1.0-2');
+  //   //   }
+  //   //   return null;
+  // }
+
+  private convertStringToNumber(value: string): number {
+    if (value) {
+      const normalized = value.toString().trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
+      const floatVal = this.roundNumber(parseFloat(normalized));
+      return floatVal;
+    }
+    return NaN;
+  }
+
+  private roundNumber(number: number, numberOfDecimals = this.maxNumberOfDecimals) {
+    if (isNaN(number)) {
+      return number;
+    }
+
+    const factor = Math.pow(10, numberOfDecimals);
+    const tempNumber = number * factor;
+    const roundedTempNumber = Math.round(tempNumber);
+    return roundedTempNumber / factor;
+  };
+
+
 }

@@ -33,7 +33,11 @@ export class InputFieldsComponent implements OnInit {
     allCities: any;
 
     formErrors = {
+        'control1': '',
         'control2': '',
+        'control3': '',
+        'control4': '',
+        'control5': '',
         'control7': '',
         'control8': '',
         'control9': '',
@@ -43,7 +47,20 @@ export class InputFieldsComponent implements OnInit {
     };
 
     validationMessages = {
+        'control1': {
+            'invalidNumber': 'Ange ett nummer!',
+        },
         'control2': {
+            'invalidNumber': 'Ange ett nummer!',
+        },
+        'control3': {
+            'invalidNumber': 'Ange ett nummer!',
+        },
+        'control4': {
+            'invalidNumber': 'Ange ett nummer!',
+        },
+        'control5': {
+            'invalidNumber': 'Ange ett nummer!',
         },
         'control7': {
             'pattern': 'Ange exakt tre VERSALER.',
@@ -77,16 +94,26 @@ export class InputFieldsComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
-        this.errorHandler.reactiveFormsDoValidate(this.formErrors, this.validationMessages, this.form, true, true);
+        let validateOnInit = true;
+
+        if (validateOnInit) {
+            this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form);
+        }
+
+        this.form.valueChanges
+            .subscribe(data => {
+                this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form);
+            }
+            );
     }
 
     createForm() {
         this.form = this.fb.group({
-            control1: [this.amount1],
-            control2: [this.amount2, Validators.required],
-            control3: [this.percentValue],
-            control4: [this.kmValue],
-            control5: [this.numericValue],
+            control1: [this.amount1, validateNumber],
+            control2: [this.amount2, [validateNumber, Validators.required]],
+            control3: [this.percentValue, validateNumber],
+            control4: [this.kmValue, validateNumber],
+            control5: [this.numericValue, validateNumber],
             control6: [],
             control7: ['abc', [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required]],
             control8: ['', [Validators.pattern('^.{2,6}$'), Validators.required]],
@@ -118,4 +145,17 @@ function validateCityName(control: AbstractControl) {
         return null
     }
     return { invalidCity: true };
+}
+
+function validateNumber(control: AbstractControl) {
+    let pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
+
+    const regexp = new RegExp(pattern);
+    if (regexp.test(control.value)) {
+        return null;
+    }
+
+    return { invalidNumber: true }
+
+
 }

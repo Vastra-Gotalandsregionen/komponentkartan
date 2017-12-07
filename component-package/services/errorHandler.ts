@@ -8,24 +8,13 @@ export class ErrorHandler {
 
   };
 
+  getErrorMessages(formErrors?: any, validationMessages?: any): any {
 
-  reactiveFormsDoValidate(formErrors: any, validationMessages: any, form: FormGroup, validateOnInit?: boolean, isSmall?: boolean) {
-    if (validateOnInit) {
-      this.reactiveFormsOnValueChanged(formErrors, validationMessages, form);
-      console.log('this.formErrors', formErrors);
-    }
-
-    form.valueChanges
-      .subscribe(data => {
-        this.reactiveFormsOnValueChanged(formErrors, validationMessages, form);
-        console.log('this.formErrors', formErrors);
-      }
-      );
   }
 
-  private reactiveFormsOnValueChanged(formErrors: any, validationMessages: any, form?: FormGroup): any {
+
+  getErrorMessagesReactiveForms(formErrors: any, validationMessages: any, form?: FormGroup): any {
     if (!form) { return; }
-    console.log('onValueChanged', form);
 
     for (const field in formErrors) {
       if (form.get(field)['controls']) {
@@ -47,7 +36,7 @@ export class ErrorHandler {
           const messages = validationMessages[field];
           for (const key in control.errors) {
             if (key === 'required') {
-              formErrors[field] += messages[key] ? messages[key] + ' ' : ' Obligatoriskt! ';
+              formErrors[field] = messages[key] ? messages[key] + ' ' : ' Obligatoriskt! ';
             }
             else {
               formErrors[field] += messages[key] + ' ';

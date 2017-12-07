@@ -1,3 +1,3 @@
 export { BrowserDetector } from './browserDetector';
-export { errorHandler } from './errorHandler';
+export { ErrorHandler } from './errorHandler';
 export { ModalButtonConfiguration, ModalConfiguration, ModalService } from './modalService';

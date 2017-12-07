@@ -18,7 +18,8 @@
             <h2>Fördefinierade typer</h2>
             <div>
               Belopp 1 (type=amount)
-              <vgr-input formControlName="control1" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"></vgr-input>
+              <vgr-input formControlName="control1" [suffix]="'kr'" [alignRight]="true" [small]="isSmall" [isInvalid]="form.get('control1').invalid"
+                [errormessage]="formErrors.control1"></vgr-input>
               <span>Belopp 1: </span>
               <span>{{formatNumericValue(form.controls.control1.value)}}</span>
             </div>
@@ -31,20 +32,22 @@
             </div>
             <div>
               Procent
-              <vgr-input formControlName="control3" [suffix]="'%'" [alignRight]="true" [small]="isSmall"></vgr-input>
+              <vgr-input formControlName="control3" [suffix]="'%'" [alignRight]="true" [small]="isSmall" [isInvalid]="form.get('control3').invalid"
+                [errormessage]="formErrors.control3"></vgr-input>
               <span>Procent: </span>
               <span>{{formatNumericValue(form.controls.control3.value)}}</span>
             </div>
             <div>
               Km
-              <vgr-input formControlName="control4" [suffix]="'km'" [alignRight]="true" [small]="isSmall"></vgr-input>
+              <vgr-input formControlName="control4" [suffix]="'km'" [alignRight]="true" [small]="isSmall" [isInvalid]="form.get('control4').invalid"
+                [errormessage]="formErrors.control4"></vgr-input>
               <span>Km: </span>
               <span>{{formatNumericValue(form.controls.control4.value)}}</span>
 
             </div>
             <div>
               Numeriskt värde utan enhet
-              <vgr-input formControlName="control5" [alignRight]="true" [small]="isSmall"></vgr-input>
+              <vgr-input formControlName="control5" [alignRight]="true" [small]="isSmall" [isInvalid]="form.get('control5').invalid" [errormessage]="formErrors.control5"></vgr-input>
               <span>Värde: </span>
               <span>{{formatNumericValue(form.controls.control5.value)}}</span>
             </div>
