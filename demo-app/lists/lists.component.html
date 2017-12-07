@@ -19,7 +19,6 @@
           </vgr-title-value>
           <vgr-title-value [title]="'Nettobelopp'">
             <div class="row-layout">
-
               <span *ngIf="netAmount" class="flex-right" style="margin-right:30px">{{netAmount | currency:'SEK':true}}</span>
             </div>
           </vgr-title-value>
@@ -64,10 +63,8 @@
             <span>123 45 Västgötaslätten</span>
             <span>Sverige</span>
           </vgr-title-value>
-
         </div>
       </vgr-card-section>
-
       <vgr-card-section [title]="'Uppgifter'" class="card__right" [expanded]="true" [subtitle]="'aledu10'">
         <div class="title-value-layout">
           <vgr-title-value [title]="'Rött tema'">
@@ -112,7 +109,7 @@
           <vgr-list-column-header [align]="'center'" [width]="1"></vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let c of claimRows" [notification]="c.notification">
-          <div class="list-item__header">
+          <vgr-list-item-header>
             <vgr-list-column [text]="c.previewObject.identification"></vgr-list-column>
             <vgr-list-column [text]="c.previewObject.invoiceId"></vgr-list-column>
             <vgr-list-column [text]="c.previewObject.payableAmount"></vgr-list-column>
@@ -124,19 +121,15 @@
             <vgr-list-column [text]="'Test'"></vgr-list-column>
             <vgr-list-column-trashcan [disabled]="c.previewObject.deleted" (delete)="onDeleteRow(c)"></vgr-list-column-trashcan>
             <vgr-list-column-checkbox [disabled]="c.previewObject.deleted" [checked]="c.previewObject.selected" (checkedChanged)="onSelectRowChanged(c,$event)"></vgr-list-column-checkbox>
-          </div>
-          <div class="list-item__content">
+          </vgr-list-item-header>
+          <vgr-list-item-content>
             Hej
-          </div>
+          </vgr-list-item-content>
         </vgr-list-item>
-
       </vgr-list>
-
     </vgr-page-block>
     <vgr-page-block *ngIf="claimRows">
       <span>Du har valt: {{ getSelectedRows() }}</span>
     </vgr-page-block>
-
   </vgr-page-body>
-
 </vgr-page>

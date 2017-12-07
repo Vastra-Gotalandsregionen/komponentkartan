@@ -1,6 +1,6 @@
 import {
     Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, ContentChildren, QueryList,
-    AfterContentInit
+    AfterContentInit, forwardRef
 } from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
@@ -60,7 +60,7 @@ export class ListItemComponent implements OnInit {
         return this._notification;
     }
 
-    @ContentChildren(ListColumnComponent) columns: QueryList<ListColumnComponent>;
+    @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
     constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ListItemJqeuryHelper) {
 
