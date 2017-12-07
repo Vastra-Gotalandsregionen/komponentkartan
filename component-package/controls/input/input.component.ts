@@ -78,7 +78,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
       this.value = value;
 
       if (this.formatNumber) {
-        this.displayValue =
 
         // this.convertNumberToString(this.value);
       }
