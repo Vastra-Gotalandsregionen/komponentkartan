@@ -70,7 +70,9 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.ListColumnComponent,
         control.ListColumnCheckboxComponent,
         control.ListColumnTrashcanComponent,
-        control.ListHeaderComponent
+        control.ListHeaderComponent,
+        control.ListItemContentComponent,
+        control.ListItemHeaderComponent
     ],
     exports: [
         SafePipe,
@@ -112,7 +114,9 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.ListColumnComponent,
         control.ListColumnCheckboxComponent,
         control.ListColumnTrashcanComponent,
-        control.ListHeaderComponent
+        control.ListHeaderComponent,
+        control.ListItemContentComponent,
+        control.ListItemHeaderComponent
     ],
 
     providers: [ModalService, control.ActionPanelJqeuryHelper, control.ListItemJqeuryHelper, BrowserDetector]
