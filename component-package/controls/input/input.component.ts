@@ -37,7 +37,7 @@ export class InputComponent implements ControlValueAccessor {
     return this.isInvalid && !this.hasFocus && (this.touched || this.validateoninit);
   }
   @HostBinding('class.validation-error--editing') get editingClass() {
-    return this.isInvalid && this.hasFocus && (this.touched || this.validateoninit);
+    return this.invalidOnFocus && this.hasFocus && (this.touched || this.validateoninit);
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
     return this.invalidOnFocus && this.touched && !this.isInvalid && !this.hasFocus;
@@ -59,12 +59,12 @@ export class InputComponent implements ControlValueAccessor {
     }
   }
 
-  registerOnChange(fn: any) {
-    this.onChange = fn;
+  registerOnChange(func: any) {
+    this.onChange = func;
   }
 
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
+  registerOnTouched(func: any) {
+    this.onTouched = func;
   }
 
   onChange(input: any) {
