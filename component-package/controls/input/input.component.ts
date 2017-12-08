@@ -53,22 +53,15 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   decimalPipeConfiguration: string;
   displayValue: string;
   currentErrorMesage: string;
+
   private maxNumberOfDecimals = 2;
 
   constructor() {
     this.blur = new EventEmitter<any>();
     this.focus = new EventEmitter<any>();
-
-    this.formatNumber = true;
   }
 
   ngOnInit() {
-    // if (this.formatNumber) {
-    //   this.displayValue = this.convertNumberToString(this.value);
-    // }
-    // else {
-    //   this.displayValue = this.value;
-    // }
     this.currentErrorMesage = this.errormessage;
     this.swedishDecimalPipe = new DecimalPipe('sv-se')
   }
@@ -76,11 +69,11 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   writeValue(value: any) {
     if (value !== undefined) {
       this.value = value;
+      this.displayValue = value;
 
       if (this.formatNumber && !this.isInvalid) {
         this.displayValue = this.formatNumberValue(this.value);
-      }
-      else {
+      } else {
         this.displayValue = this.value;
       }
     }
@@ -95,26 +88,28 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
   onChange(input: any) {
+    console.log(input);
+    this.value = input;
+    this.displayValue = input;
   }
 
   onTouched() {
   }
 
   onBlur(): void {
+    console.log('oblur value ', this.value);
+    console.log('oblur displayvalue ', this.displayValue);
+
     if (this.readonly) {
       return;
     }
 
-    console.log('this.displayValue)', this.displayValue);
-    console.log('this.value', this.value);
-    this.displayValue = this.formatNumberValue(this.value);
-    console.log(this.displayValue);
 
-    // if (this.formatNumber && !this.isInvalid) {
-    //   this.displayValue = this.formatNumberValue(this.displayValue);
-    // }
-    // else
-    //   this.displayValue = this.formatNumberValue(this.displayValue);
+    if (this.formatNumber && !this.isInvalid) {
+      this.displayValue = this.formatNumberValue(this.displayValue);
+    } else {
+      this.displayValue = this.value;
+    }
 
     this.touched = true;
     this.hasFocus = false;
@@ -123,11 +118,13 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
   onFocus(): void {
+    console.log('focus value ', this.value);
+    console.log('focus displayvalue ', this.displayValue);
     if (this.readonly) {
       return;
     }
 
-    // this.displayValue = this.value;
+    this.displayValue = this.value;
 
     this.invalidOnFocus = this.isInvalid && (this.touched || this.validateoninit);
     this.hasFocus = true;

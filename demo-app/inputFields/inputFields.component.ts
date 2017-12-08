@@ -102,6 +102,7 @@ export class InputFieldsComponent implements OnInit {
 
         this.form.valueChanges
             .subscribe(data => {
+                console.log(this.form.controls.control2.value);
                 this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form);
             }
             );
