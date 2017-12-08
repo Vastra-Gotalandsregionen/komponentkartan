@@ -19,28 +19,28 @@
             <div>
               Belopp 1 (type=amount)
               <vgr-input formControlName="control1" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
-                [isInvalid]="form.get('control1').invalid" [errormessage]="formErrors.control1"></vgr-input>
+                [isInvalid]="form.get('control1').invalid" [errormessage]="validationMessages.control1"></vgr-input>
               <span>Belopp 1: </span>
               <span>{{formatNumericValue(form.controls.control1.value)}}</span>
             </div>
             <div>
               Belopp 2, obligatoriskt
               <vgr-input formControlName="control2" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
-                [isInvalid]="form.get('control2').invalid" [errormessage]="formErrors.control2"></vgr-input>
+                [isInvalid]="form.get('control2').invalid" [errormessage]="validationMessages.control2"></vgr-input>
               <span>Belopp 2: </span>
               <span>{{formatNumericValue(form.controls.control2.value)}}</span>
             </div>
             <div>
               Procent
               <vgr-input formControlName="control3" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'%'" [alignRight]="true" [small]="isSmall"
-                [isInvalid]="form.get('control3').invalid" [errormessage]="formErrors.control3"></vgr-input>
+                [isInvalid]="form.get('control3').invalid" [errormessage]="validationMessages.control3"></vgr-input>
               <span>Procent: </span>
               <span>{{formatNumericValue(form.controls.control3.value)}}</span>
             </div>
             <div>
               Km
               <vgr-input formControlName="control4" [formatNumber]="true" [nrOfDecimals]="0" [suffix]="'km'" [alignRight]="true" [small]="isSmall"
-                [isInvalid]="form.get('control4').invalid" [errormessage]="formErrors.control4"></vgr-input>
+                [isInvalid]="form.get('control4').invalid" [errormessage]="validationMessages.control4"></vgr-input>
               <span>Km: </span>
               <span>{{formatNumericValue(form.controls.control4.value)}}</span>
 
@@ -48,7 +48,7 @@
             <div>
               Numeriskt värde utan enhet
               <vgr-input formControlName="control5" [formatNumber]="true" [alignRight]="true" [small]="isSmall" [isInvalid]="form.get('control5').invalid"
-                [errormessage]="formErrors.control5"></vgr-input>
+                [errormessage]="validationMessages.control5"></vgr-input>
               <span>Värde: </span>
               <span>{{formatNumericValue(form.controls.control5.value)}}</span>
             </div>
@@ -61,25 +61,25 @@
             </div>
             <div>
               Exakt 3 VERSALER (validera vid initiering)
-              <vgr-input formControlName="control7" [errormessage]="formErrors.control7" [validateoninit]="true" [maxlength]="3" [small]="isSmall"
-                [isInvalid]="form.get('control7').invalid"></vgr-input>
+              <vgr-input formControlName="control7" [errormessage]="validationMessages.control7" [validateoninit]="true" [maxlength]="3"
+                [small]="isSmall"></vgr-input>
               <span>Värde: </span>
               <span>{{form.controls.control7.value}}</span>
             </div>
             <div>
               Mellan 2 och 6 tecken
-              <vgr-input formControlName="control8" [maxlength]=6 [errormessage]="formErrors.control8" [small]="isSmall" [isInvalid]="form.get('control8').invalid"></vgr-input>
+              <vgr-input formControlName="control8" [maxlength]=6 [errormessage]="validationMessages.control8" [small]="isSmall" [isInvalid]="form.get('control8').invalid"></vgr-input>
             </div>
             <div>
               Heltal med enhet
-              <vgr-input formControlName="control9" [formatNumber]="true" [nrOfDecimals]="0" [suffix]="'st'" [errormessage]="formErrors.control9"
+              <vgr-input formControlName="control9" [formatNumber]="true" [nrOfDecimals]="0" [suffix]="'st'" [errormessage]="validationMessages.control9"
                 [alignRight]="true" [small]="isSmall" [isInvalid]="form.get('control9').invalid"></vgr-input>
               <span>Antal: </span>
               <span>{{intValue + 0}}</span>
             </div>
             <div>
               Långa felmeddelanden
-              <vgr-input formControlName="control10" [isInvalid]="form.get('control10').invalid" [errormessage]="formErrors.control10"
+              <vgr-input formControlName="control10" [isInvalid]="form.get('control10').invalid" [errormessage]="validationMessages.control10"
                 [small]="isSmall"></vgr-input>
             </div>
             <div>
@@ -102,7 +102,7 @@
             </div>
             <div>
               E-postadress
-              <vgr-input formControlName="control14" [small]="isSmall" [isInvalid]="form.get('control14').invalid" [errormessage]="formErrors.control14"></vgr-input>
+              <vgr-input formControlName="control14" [small]="isSmall" [isInvalid]="form.get('control14').invalid" [errormessage]="validationMessages.control14"></vgr-input>
             </div>
           </div>
         </div>

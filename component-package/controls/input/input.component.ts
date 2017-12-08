@@ -1,8 +1,11 @@
-import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, Output, OnInit, Optional, SkipSelf, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 import { concat } from 'rxjs/observable/concat';
+import { ErrorHandler } from '../../services/errorhandler';
+import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
+import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'vgr-input',
@@ -13,66 +16,94 @@ import { concat } from 'rxjs/observable/concat';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => InputComponent),
     multi: true
-  }]
+  }, ErrorHandler]
 
 })
-export class InputComponent implements ControlValueAccessor, OnInit {
+export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
+
+  @Input() formControlName?: string;
+
   @Input() isInvalid: boolean;
   @Input() formatNumber: boolean;
   @Input() nrOfDecimals: number;
-
-  @Input() @HostBinding('class.readonly') readonly?: boolean;
-  @Input() @HostBinding('class.input--small') small: boolean;
-  @Input() @HostBinding('class.align-right') alignRight: boolean;
-
   @Input() suffix: string;
   @Input() value: any;
   @Input() maxlength?: number;
   @Input() validateoninit: boolean;
-  @Input() errormessage: string;
+
+  @Input() errormessage?: any;
+
+  @Input() @HostBinding('class.readonly') readonly?: boolean;
+  @Input() @HostBinding('class.input--small') small: boolean;
+  @Input() @HostBinding('class.align-right') alignRight: boolean;
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
 
   @HostBinding('class.validated-input') hasClass = true;
   @HostBinding('class.validation-error--active') get errorClass() {
-    return this.isInvalid && !this.hasFocus && (this.touched || this.validateoninit);
+    return (this.formControlName ? this.control.invalid : this.isInvalid) && !this.hasFocus && (this.touched || this.validateoninit);
   }
   @HostBinding('class.validation-error--editing') get editingClass() {
     return this.invalidOnFocus && this.hasFocus && (this.touched || this.validateoninit);
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
-    return this.invalidOnFocus && this.touched && !this.isInvalid && !this.hasFocus;
+    return this.invalidOnFocus && this.touched && !(this.formControlName ? this.control.invalid : this.isInvalid) && !this.hasFocus;
   }
 
-  control: AbstractControl;
   hasFocus = false;
   touched = false;
   invalidOnFocus = false;
 
   swedishDecimalPipe: DecimalPipe;
-  decimalPipeConfiguration: string;
   displayValue: string;
   currentErrorMesage: string;
+  selectedErrorMessage: string;
+  control: AbstractControl;
 
   private maxNumberOfDecimals = 2;
 
-  constructor() {
+  constructor(private errorHandler: ErrorHandler, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.blur = new EventEmitter<any>();
     this.focus = new EventEmitter<any>();
     this.nrOfDecimals = 2;
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.control = this.controlContainer.control.get(this.formControlName);
+
+    if (changes.small) {
+      this.currentErrorMesage = this.checkErrorMessage();
+    }
   }
 
   ngOnInit() {
-    this.currentErrorMesage = this.errormessage;
     this.swedishDecimalPipe = new DecimalPipe('sv-se');
+    this.doValidate();
   }
 
+  doValidate() {
+    this.currentErrorMesage = this.checkErrorMessage();
+
+    this.control.valueChanges
+      .subscribe(data => {
+        this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errormessage, this.control, this.small);
+      });
+  }
+
+  checkErrorMessage(): string {
+    if (typeof (this.errormessage) === 'object') {
+      return this.errorHandler.getErrorMessageReactiveForms(this.errormessage, this.control, this.small);
+    }
+    else
+      return this.errormessage;
+  }
   writeValue(value: any) {
     if (value !== undefined) {
       this.value = value;
 
-      if (this.formatNumber && !this.isInvalid) {
+      if (this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid)) {
         this.displayValue = this.convertNumberToString(this.value);
       } else {
         this.displayValue = this.value;
@@ -99,7 +130,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
       return;
     }
 
-    if (this.formatNumber && !this.isInvalid) {
+    if (this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid)) {
       this.value = this.convertStringToNumber(this.displayValue);
       this.displayValue = this.convertNumberToString(this.value);
     } else {
@@ -113,7 +144,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
     this.blur.emit(event);
 
-    this.currentErrorMesage = this.errormessage;
+    this.currentErrorMesage = this.selectedErrorMessage;
   }
 
   onFocus(): void {
@@ -123,10 +154,9 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
     this.displayValue = this.value;
 
-    this.invalidOnFocus = this.isInvalid && (this.touched || this.validateoninit);
+    this.invalidOnFocus = (this.formControlName ? this.control.invalid : this.isInvalid) && (this.touched || this.validateoninit);
     this.hasFocus = true;
     this.focus.emit(event);
-
   }
 
   private convertStringToNumber(value: string): number {
@@ -151,7 +181,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   private convertNumberToString(value: number): string {
     if (!isNaN(this.value)) {
-      return this.swedishDecimalPipe.transform(this.value, this.decimalPipeConfiguration);
+      return this.swedishDecimalPipe.transform(this.value);
     }
     return null;
   }

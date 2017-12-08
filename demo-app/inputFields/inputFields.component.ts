@@ -97,6 +97,8 @@ export class InputFieldsComponent implements OnInit {
         this.createForm();
         const validateOnInit = true;
 
+        this.isSmall = true;
+
         if (validateOnInit) {
             this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form, this.isSmall);
         }
