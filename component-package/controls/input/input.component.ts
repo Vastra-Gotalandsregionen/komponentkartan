@@ -19,6 +19,7 @@ import { concat } from 'rxjs/observable/concat';
 export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() isInvalid: boolean;
   @Input() formatNumber: boolean;
+  @Input() nrOfDecimals: number;
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
   @Input() @HostBinding('class.input--small') small: boolean;
@@ -59,20 +60,20 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   constructor() {
     this.blur = new EventEmitter<any>();
     this.focus = new EventEmitter<any>();
+    this.nrOfDecimals = 2;
   }
 
   ngOnInit() {
     this.currentErrorMesage = this.errormessage;
-    this.swedishDecimalPipe = new DecimalPipe('sv-se')
+    this.swedishDecimalPipe = new DecimalPipe('sv-se');
   }
 
   writeValue(value: any) {
     if (value !== undefined) {
       this.value = value;
-      this.displayValue = value;
 
       if (this.formatNumber && !this.isInvalid) {
-        this.displayValue = this.formatNumberValue(this.value);
+        this.displayValue = this.convertNumberToString(this.value);
       } else {
         this.displayValue = this.value;
       }
@@ -94,29 +95,27 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   onTouched() { }
 
   onBlur(): void {
-    this.value = this.displayValue;
-    this.onChange(this.value);
 
     if (this.readonly) {
       return;
     }
 
     if (this.formatNumber && !this.isInvalid) {
-      this.displayValue = this.formatNumberValue(this.displayValue);
+      this.value = this.convertStringToNumber(this.displayValue);
+      this.displayValue = this.convertNumberToString(this.value);
+    } else {
+      this.value = this.displayValue;
     }
+
+    this.onChange(this.value);
 
     this.touched = true;
     this.hasFocus = false;
-    this.blur.emit(event);
     this.currentErrorMesage = this.errormessage;
-
-    console.log('oblur value ', this.value);
-    console.log('oblur displayvalue ', this.displayValue);
+    this.blur.emit(event);
   }
 
   onFocus(): void {
-    console.log('focus value ', this.value);
-    console.log('focus displayvalue ', this.displayValue);
     if (this.readonly) {
       return;
     }
@@ -128,22 +127,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.focus.emit(event);
   }
 
-  private formatNumberValue(value: string): any {
-    return this.validateNumber(value) ? this.swedishDecimalPipe.transform(value, '1.2-2') : value;
-  }
-
-  private validateNumber(value: string): boolean {
-    const regexp = new RegExp('^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$');
-    return regexp.test(value);
-  }
-
-  // convertNumberToString(value: number): string {
-  //   if (!isNaN(this.value)) {
-  //     return this.swedishDecimalPipe.transform(this.value, this.decimalPipeConfiguration);
-  //   }
-  //   return null;
-  // }
-
   private convertStringToNumber(value: string): number {
     if (value) {
       const normalized = value.toString().trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
@@ -153,16 +136,21 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     return NaN;
   }
 
-  private roundNumber(number: number, numberOfDecimals = this.maxNumberOfDecimals) {
+  private roundNumber(number: number) {
     if (isNaN(number)) {
       return number;
     }
 
-    const factor = Math.pow(10, numberOfDecimals);
+    const factor = Math.pow(10, this.nrOfDecimals);
     const tempNumber = number * factor;
     const roundedTempNumber = Math.round(tempNumber);
     return roundedTempNumber / factor;
   };
 
-
+  private convertNumberToString(value: number): string {
+    if (!isNaN(this.value)) {
+      return this.swedishDecimalPipe.transform(this.value, this.decimalPipeConfiguration);
+    }
+    return null;
+  }
 }

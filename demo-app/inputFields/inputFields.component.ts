@@ -94,7 +94,7 @@ export class InputFieldsComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
-        let validateOnInit = true;
+        const validateOnInit = true;
 
         if (validateOnInit) {
             this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form);
@@ -102,10 +102,8 @@ export class InputFieldsComponent implements OnInit {
 
         this.form.valueChanges
             .subscribe(data => {
-                console.log(this.form.controls.control2.value);
                 this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form);
-            }
-            );
+            });
     }
 
     createForm() {
@@ -149,7 +147,7 @@ function validateCityName(control: AbstractControl) {
 }
 
 function validateNumber(control: AbstractControl) {
-    let pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
+    const pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
 
     const regexp = new RegExp(pattern);
     if (regexp.test(control.value)) {
