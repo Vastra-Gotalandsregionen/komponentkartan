@@ -88,17 +88,15 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
   onChange(input: any) {
-    console.log(input);
     this.value = input;
-    this.displayValue = input;
   }
 
   onTouched() {
   }
 
   onBlur(): void {
-    console.log('oblur value ', this.value);
-    console.log('oblur displayvalue ', this.displayValue);
+    this.value = this.displayValue;
+    this.onChange(this.value);
 
     if (this.readonly) {
       return;
@@ -115,6 +113,9 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.hasFocus = false;
     this.blur.emit(event);
     this.currentErrorMesage = this.errormessage;
+
+    console.log('oblur value ', this.value);
+    console.log('oblur displayvalue ', this.displayValue);
   }
 
   onFocus(): void {
