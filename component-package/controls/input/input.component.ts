@@ -95,7 +95,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   onTouched() { }
 
   onBlur(): void {
-
     if (this.readonly) {
       return;
     }
@@ -111,8 +110,10 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
     this.touched = true;
     this.hasFocus = false;
-    this.currentErrorMesage = this.errormessage;
+
     this.blur.emit(event);
+
+    this.currentErrorMesage = this.errormessage;
   }
 
   onFocus(): void {
@@ -125,6 +126,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.invalidOnFocus = this.isInvalid && (this.touched || this.validateoninit);
     this.hasFocus = true;
     this.focus.emit(event);
+
   }
 
   private convertStringToNumber(value: string): number {

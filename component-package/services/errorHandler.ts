@@ -13,7 +13,7 @@ export class ErrorHandler {
   }
 
 
-  getErrorMessagesReactiveForms(formErrors: any, validationMessages: any, form?: FormGroup): any {
+  getErrorMessagesReactiveForms(formErrors: any, validationMessages: any, form?: FormGroup, smallMode?: boolean): any {
     if (!form) { return; }
 
     for (const field in formErrors) {
@@ -24,7 +24,7 @@ export class ErrorHandler {
           if (control && control.dirty && !control.valid) {
             const messages = validationMessages[subfield];
             for (const key in control.errors) {
-              formErrors[field][subfield] += messages[key] + ' ';
+              formErrors[field][subfield] = messages[key] + ' ';
             }
           }
         }
@@ -36,10 +36,13 @@ export class ErrorHandler {
           const messages = validationMessages[field];
           for (const key in control.errors) {
             if (key === 'required') {
-              formErrors[field] = messages[key] ? messages[key] + ' ' : ' Obligatoriskt! ';
+              if (smallMode) {
+                formErrors[field] = messages[key] ? messages[key] + ' ' : ' Obligatoriskt ';
+              }
+              else formErrors[field] = messages[key] ? messages[key] + ' ' : ' Fältet är obligatoriskt ';
             }
             else {
-              formErrors[field] += messages[key] + ' ';
+              formErrors[field] = messages[key] + ' ';
             }
 
           }

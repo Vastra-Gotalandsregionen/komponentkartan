@@ -51,7 +51,8 @@ export class InputFieldsComponent implements OnInit {
             'invalidNumber': 'Ange ett nummer!',
         },
         'control2': {
-            'invalidNumber': 'Ange ett nummer!',
+            'invalidNumber': 'Minst 3 siffror tack!',
+            'minlength': 'Minst 3 siffror tack!'
         },
         'control3': {
             'invalidNumber': 'Ange ett nummer!',
@@ -69,7 +70,7 @@ export class InputFieldsComponent implements OnInit {
             'pattern': ' Ange mellan 2-6 tecken.'
         },
         'control9': {
-            'pattern': 'Ange ett giltigt heltal.'
+            'invalidNumber': 'Ange ett giltigt heltal.'
         },
         'control10': {
             'required': 'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'
@@ -97,26 +98,26 @@ export class InputFieldsComponent implements OnInit {
         const validateOnInit = true;
 
         if (validateOnInit) {
-            this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form);
+            this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form, this.isSmall);
         }
 
         this.form.valueChanges
             .subscribe(data => {
-                this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form);
+                this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form, this.isSmall);
             });
     }
 
     createForm() {
         this.form = this.fb.group({
             control1: [this.amount1, validateNumber],
-            control2: [this.amount2, [validateNumber, Validators.required]],
+            control2: [this.amount2, [validateNumber, Validators.required, Validators.minLength(3)]],
             control3: [this.percentValue, validateNumber],
             control4: [this.kmValue, validateNumber],
             control5: [this.numericValue, validateNumber],
             control6: [],
             control7: ['abc', [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required]],
             control8: ['', [Validators.pattern('^.{2,6}$'), Validators.required]],
-            control9: [this.intValue, Validators.pattern('^[0-9]+$')],
+            control9: [this.intValue, validateNumber],
             control10: ['', Validators.required],
             control11: ['Visar värdet utan ram'],
             control12: [],
