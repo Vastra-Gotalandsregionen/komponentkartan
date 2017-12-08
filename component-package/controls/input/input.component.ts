@@ -91,8 +91,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.value = input;
   }
 
-  onTouched() {
-  }
+  onTouched() { }
 
   onBlur(): void {
     this.value = this.displayValue;
@@ -102,11 +101,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
       return;
     }
 
-
     if (this.formatNumber && !this.isInvalid) {
       this.displayValue = this.formatNumberValue(this.displayValue);
-    } else {
-      this.displayValue = this.value;
     }
 
     this.touched = true;
