@@ -52,6 +52,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   swedishDecimalPipe: DecimalPipe;
   decimalPipeConfiguration: string;
   displayValue: string;
+  currentErrorMesage: string;
   private maxNumberOfDecimals = 2;
 
   constructor() {
@@ -62,14 +63,13 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
   ngOnInit() {
-    // this.decimalPipeConfiguration = 1 + '.' + 0 + '-' + 2;
     // if (this.formatNumber) {
     //   this.displayValue = this.convertNumberToString(this.value);
     // }
     // else {
     //   this.displayValue = this.value;
     // }
-
+    this.currentErrorMesage = this.errormessage;
     this.swedishDecimalPipe = new DecimalPipe('sv-se')
   }
 
@@ -77,9 +77,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     if (value !== undefined) {
       this.value = value;
 
-      if (this.formatNumber) {
-
-        // this.convertNumberToString(this.value);
+      if (this.formatNumber && !this.isInvalid) {
+        this.displayValue = this.formatNumberValue(this.value);
       }
       else {
         this.displayValue = this.value;
@@ -106,13 +105,21 @@ export class InputComponent implements ControlValueAccessor, OnInit {
       return;
     }
 
-    // if (this.formatNumber && this.isInvalid) {
-    //   this.displayValue = this.convertNumberToString(this.value);
+    console.log('this.displayValue)', this.displayValue);
+    console.log('this.value', this.value);
+    this.displayValue = this.formatNumberValue(this.value);
+    console.log(this.displayValue);
+
+    // if (this.formatNumber && !this.isInvalid) {
+    //   this.displayValue = this.formatNumberValue(this.displayValue);
     // }
+    // else
+    //   this.displayValue = this.formatNumberValue(this.displayValue);
 
     this.touched = true;
     this.hasFocus = false;
     this.blur.emit(event);
+    this.currentErrorMesage = this.errormessage;
   }
 
   onFocus(): void {
@@ -120,30 +127,27 @@ export class InputComponent implements ControlValueAccessor, OnInit {
       return;
     }
 
+    // this.displayValue = this.value;
+
     this.invalidOnFocus = this.isInvalid && (this.touched || this.validateoninit);
     this.hasFocus = true;
     this.focus.emit(event);
   }
 
-  // private formatNumberValue(value: string): string {
-  //   const decimalPipe: DecimalPipe = new DecimalPipe('s');
-  //   return this.validateNumber(value) ? decimalPipe.transform(value, '1.1-1') : value;
-  // }
+  private formatNumberValue(value: string): any {
+    return this.validateNumber(value) ? this.swedishDecimalPipe.transform(value, '1.2-2') : value;
+  }
 
-  // private validateNumber(value: string): boolean {
-  //   const regexp = new RegExp('^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$');
-  //   return regexp.test(value);
-  // }
+  private validateNumber(value: string): boolean {
+    const regexp = new RegExp('^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$');
+    return regexp.test(value);
+  }
 
-  // private convertNumberToString(value: any): string {
-  //   let pipe = new DecimalPipe('sv-se');
-  //   return pipe.transform(value, '1.0-2');
-
-  //   //   if (!isNaN(value)) {
-  //   //     let pipe = new DecimalPipe('sv-se');
-  //   //     return pipe.transform(value, '1.0-2');
-  //   //   }
-  //   //   return null;
+  // convertNumberToString(value: number): string {
+  //   if (!isNaN(this.value)) {
+  //     return this.swedishDecimalPipe.transform(this.value, this.decimalPipeConfiguration);
+  //   }
+  //   return null;
   // }
 
   private convertStringToNumber(value: string): number {
