@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { AbstractControl } from '@angular/forms/src/model';
+import { FormGroup, AbstractControl } from '@angular/forms';
 
 @Injectable()
 export class ErrorHandler {
-
   constructor() {
-
   };
 
   getErrorMessageReactiveForms(validationMessages: any, control?: AbstractControl, smallMode?: boolean): string {
