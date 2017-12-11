@@ -10,10 +10,10 @@ export class ErrorHandler {
     if (control.errors) {
       if (typeof (validationMessages) === 'object') {
         for (var key in control.errors) {
-          if (key === 'required' && smallMode) {
+          if (key === 'required' && smallMode && !validationMessages[key]) {
             return 'Obligatoriskt';
           }
-          else if (key === 'required' && !smallMode) {
+          else if (key === 'required' && !smallMode && !validationMessages[key]) {
             return 'Fältet är obligatoriskt';
           }
           else if (validationMessages) {
