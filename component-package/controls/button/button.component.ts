@@ -1,4 +1,4 @@
-﻿import { Component, Input, EventEmitter, Output, OnChanges, HostBinding } from '@angular/core'
+﻿import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, ElementRef } from '@angular/core'
 
 @Component({
     selector: 'vgr-button',
@@ -13,6 +13,9 @@ export class ButtonComponent implements OnChanges {
     reenabled: boolean;
     @Output() click = new EventEmitter();
 
+    constructor(private elementRef: ElementRef) {
+
+    }
     onClick(event: MouseEvent) {
         if (this.disabled) {
             event.stopPropagation();
@@ -22,6 +25,15 @@ export class ButtonComponent implements OnChanges {
     ngOnChanges() {
         this.reenabled = this.lastDisabledStatus === true && this.disabled === false;
         this.lastDisabledStatus = this.disabled;
+    }
+
+    focus() {
+        this.elementRef.nativeElement.children[0].focus();
+    }
+
+    isElement(otherElement: any) {
+
+        return (otherElement === this.elementRef.nativeElement || otherElement === this.elementRef.nativeElement.children[0]);
     }
 
     keyPressed(event: KeyboardEvent): void {

@@ -3,7 +3,7 @@
     <h1 class="modal-content__title">{{title}}</h1>
     <div class="modal-content__message">{{message}}</div>
     <div class="modal-content__buttons">
-      <vgr-button *ngFor="let button of buttons" [secondary]="true" (click)="onClicked(button.callback)">{{button.text}}</vgr-button>
+      <vgr-button *ngFor="let button of buttons" secondary="true" (click)="onClicked(button.callback)" (focusout)="onBlur($event)">{{button.text}}</vgr-button>
     </div>
   </div>
 </div>
