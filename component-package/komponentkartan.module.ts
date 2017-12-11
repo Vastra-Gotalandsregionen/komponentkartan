@@ -119,8 +119,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.ListItemContentComponent,
         control.ListItemHeaderComponent
     ],
-
     providers: [ModalService, control.ActionPanelJqeuryHelper, control.ListItemJqeuryHelper, BrowserDetector, DecimalPipe, ErrorHandler]
+
 
 })
 
