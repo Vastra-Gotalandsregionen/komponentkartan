@@ -1,133 +1,133 @@
 
-import {
-  ComponentFixture,
-  TestBed,
-  async
-} from '@angular/core/testing';
-import {
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting
-} from '@angular/platform-browser-dynamic/testing';
-import {
-  By
-} from '@angular/platform-browser';
-import {
-  FormsModule
-} from '@angular/forms'
-import {
-  DebugElement
-} from '@angular/core';
-import {
-  CommonModule, DecimalPipe
-} from '@angular/common';
+// import {
+//   ComponentFixture,
+//   TestBed,
+//   async
+// } from '@angular/core/testing';
+// import {
+//   BrowserDynamicTestingModule,
+//   platformBrowserDynamicTesting
+// } from '@angular/platform-browser-dynamic/testing';
+// import {
+//   By
+// } from '@angular/platform-browser';
+// import {
+//   FormsModule
+// } from '@angular/forms'
+// import {
+//   DebugElement
+// } from '@angular/core';
+// import {
+//   CommonModule, DecimalPipe
+// } from '@angular/common';
 
-import {
-  InputComponent
-} from '../../component-package/controls/input/input.component';
+// import {
+//   InputComponent
+// } from '../../component-package/controls/input/input.component';
 
-import {
-  IValidationResult, ValidationErrorState
-} from '../../component-package/models/validation.model';
-import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
+// import {
+//   IValidationResult, ValidationErrorState
+// } from '../../component-package/models/validation.model';
+// import { TruncatePipe } from '../../component-package/pipes/truncatePipe';
 
-import 'intl/locale-data/jsonp/se-SE.js';
-import { combineAll } from 'rxjs/operator/combineAll';
+// import 'intl/locale-data/jsonp/se-SE.js';
+// import { combineAll } from 'rxjs/operator/combineAll';
 
 
-describe('[InputComponent]', () => {
-  let component: InputComponent;
-  let fixture: ComponentFixture<InputComponent>;
-  let rootElement: DebugElement;
-  const validationErrorStates = ValidationErrorState;
+// describe('[InputComponent]', () => {
+//   let component: InputComponent;
+//   let fixture: ComponentFixture<InputComponent>;
+//   let rootElement: DebugElement;
+//   const validationErrorStates = ValidationErrorState;
 
-  beforeEach((done) => {
-    TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
-    TestBed.configureTestingModule({
-      declarations: [InputComponent, TruncatePipe],
-      imports: [CommonModule, FormsModule]
-    });
+//   beforeEach((done) => {
+//     TestBed.resetTestEnvironment();
+//     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+//     TestBed.configureTestingModule({
+//       declarations: [InputComponent, TruncatePipe],
+//       imports: [CommonModule, FormsModule]
+//     });
 
-    TestBed.overrideComponent(InputComponent, {
-      set: {
-        templateUrl: 'input.component.html'
-      }
-    });
+//     TestBed.overrideComponent(InputComponent, {
+//       set: {
+//         templateUrl: 'input.component.html'
+//       }
+//     });
 
-    TestBed.compileComponents().then(() => {
-      fixture = TestBed.createComponent(InputComponent);
-      component = fixture.componentInstance;
-      rootElement = fixture.debugElement;
-      fixture.detectChanges();
+//     TestBed.compileComponents().then(() => {
+//       fixture = TestBed.createComponent(InputComponent);
+//       component = fixture.componentInstance;
+//       rootElement = fixture.debugElement;
+//       fixture.detectChanges();
 
-      done();
-    });
-  });
+//       done();
+//     });
+//   });
 
-  describe('When initialized with invalid state', () => {
-    beforeEach(() => {
-      component.isInvalid = true;
-      component.errormessage = 'error';
-      component.onBlur();
-      fixture.detectChanges();
-    });
-    it('CSS Class validation-error--active is applied', () => {
-      expect(rootElement.classes['validation-error--editing']).toEqual(false);
-      expect(rootElement.classes['validation-error--active']).toEqual(true);
-      expect(rootElement.classes['validation-error--fixed']).toEqual(false);
-    });
-    it('There is a error message section', () => {
-      let element = rootElement.query(By.css('.input-validation_status__message'));
-      expect(element.nativeElement.innerText).toEqual('error');
-    });
+//   describe('When initialized with invalid state', () => {
+//     beforeEach(() => {
+//       component.isInvalid = true;
+//       component.errormessage = 'error';
+//       component.onBlur();
+//       fixture.detectChanges();
+//     });
+//     it('CSS Class validation-error--active is applied', () => {
+//       expect(rootElement.classes['validation-error--editing']).toEqual(false);
+//       expect(rootElement.classes['validation-error--active']).toEqual(true);
+//       expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+//     });
+//     it('There is a error message section', () => {
+//       let element = rootElement.query(By.css('.input-validation_status__message'));
+//       expect(element.nativeElement.innerText).toEqual('error');
+//     });
 
-    describe('When focused', () => {
-      beforeEach(() => {
-        component.onFocus();
-        fixture.detectChanges();
-      });
-      it('CSS Class validation-error--editing is applied', () => {
+//     describe('When focused', () => {
+//       beforeEach(() => {
+//         component.onFocus();
+//         fixture.detectChanges();
+//       });
+//       it('CSS Class validation-error--editing is applied', () => {
 
-        let element = rootElement.query(By.css('.input-validation_status__message'));
-        expect(element.nativeElement.innerText).toEqual('error');
-        expect(rootElement.classes['validation-error--editing']).toEqual(true);
-        expect(rootElement.classes['validation-error--active']).toEqual(false);
-        expect(rootElement.classes['validation-error--fixed']).toEqual(false);
-      });
+//         let element = rootElement.query(By.css('.input-validation_status__message'));
+//         expect(element.nativeElement.innerText).toEqual('error');
+//         expect(rootElement.classes['validation-error--editing']).toEqual(true);
+//         expect(rootElement.classes['validation-error--active']).toEqual(false);
+//         expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+//       });
 
-      describe('When error is corrected and field is blurred', () => {
-        beforeEach(() => {
-          component.isInvalid = false;
-          component.onBlur();
-          fixture.detectChanges();
-        });
-        it('CSS Class validation-error--fixed is applied', () => {
-          expect(rootElement.classes['validation-error--editing']).toEqual(false);
-          expect(rootElement.classes['validation-error--active']).toEqual(false);
-          expect(rootElement.classes['validation-error--fixed']).toEqual(true);
-        });
-      })
-    })
-  });
+//       describe('When error is corrected and field is blurred', () => {
+//         beforeEach(() => {
+//           component.isInvalid = false;
+//           component.onBlur();
+//           fixture.detectChanges();
+//         });
+//         it('CSS Class validation-error--fixed is applied', () => {
+//           expect(rootElement.classes['validation-error--editing']).toEqual(false);
+//           expect(rootElement.classes['validation-error--active']).toEqual(false);
+//           expect(rootElement.classes['validation-error--fixed']).toEqual(true);
+//         });
+//       })
+//     })
+//   });
 
-  describe('When initialized with invalid state and validate on init is true', () => {
-    beforeEach(() => {
-      component = fixture.componentInstance;
-      component.isInvalid = true;
-      component.validateoninit = true
-      component.errormessage = 'error';
-      fixture.detectChanges();
-    });
+//   describe('When initialized with invalid state and validate on init is true', () => {
+//     beforeEach(() => {
+//       component = fixture.componentInstance;
+//       component.isInvalid = true;
+//       component.validateoninit = true
+//       component.errormessage = 'error';
+//       fixture.detectChanges();
+//     });
 
-    it('CSS Class validation-error--active is applied', () => {
-      expect(rootElement.classes['validation-error--editing']).toEqual(false);
-      expect(rootElement.classes['validation-error--active']).toEqual(true);
-      expect(rootElement.classes['validation-error--fixed']).toEqual(false);
-    });
-    it('There is a error message section', () => {
-      let element = rootElement.query(By.css('.input-validation_status__message'));
-      expect(element.nativeElement.innerText).toEqual('error');
-    });
-  });
-});
+//     it('CSS Class validation-error--active is applied', () => {
+//       expect(rootElement.classes['validation-error--editing']).toEqual(false);
+//       expect(rootElement.classes['validation-error--active']).toEqual(true);
+//       expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+//     });
+//     it('There is a error message section', () => {
+//       let element = rootElement.query(By.css('.input-validation_status__message'));
+//       expect(element.nativeElement.innerText).toEqual('error');
+//     });
+//   });
+// });
 
