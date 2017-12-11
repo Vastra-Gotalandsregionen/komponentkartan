@@ -25,6 +25,9 @@ export class FakeAComponent {
     { displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
     { displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian', selected: true }] as IDropdownItem[];
 
+    minDate: Date = new Date(2015, 0, 1)
+    maxDate: Date = new Date(2016, 11, 31);
+
     constructor() { }
 
 }
