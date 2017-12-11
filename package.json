@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "0.3.3-rc37",
+  "version": "0.3.3-rc40",
   "author": "Västra Götalandsregionen",
   "scripts": {
     "start": "concurrent \"npm run _watch-ts\" \"npm run _local-webserver\" \"npm run _watch-css\" \"npm run _watch-demo-app-css\"",
@@ -13,7 +13,8 @@
     "_watch-demo-app-css": "nodemon -e scss --watch demo-app/Content/ --watch Content/  --exec \"npm run _compile-demo-app-css\"",
     "_clean_build_output": "rimraf ./BuildOutput",
     "test-ci": "karma start ./karma.conf.server.js",
-    "publish-demo": "npm publish --tag demo"
+    "publish-demo": "npm publish --tag demo",
+    "publish-dev": "npm publish --tag dev"
   },
   "dependencies": {
     "@angular/animations": "^4.4.4",

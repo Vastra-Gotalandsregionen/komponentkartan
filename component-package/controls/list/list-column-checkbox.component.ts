@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Output, Input } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Output, Input, forwardRef } from '@angular/core';
 
 import { ListColumnHeaderComponent } from './list-column-header.component';
 import { ListColumnComponent } from './list-column.component';
@@ -6,7 +6,11 @@ import { ListColumnComponent } from './list-column.component';
 @Component({
     templateUrl: './list-column-checkbox.component.html',
     moduleId: module.id,
-    selector: 'vgr-list-column-checkbox'
+    selector: 'vgr-list-column-checkbox',
+    providers: [{
+        provide: ListColumnComponent,
+        useExisting: forwardRef(() => ListColumnCheckboxComponent)
+    }]
 })
 export class ListColumnCheckboxComponent extends ListColumnComponent {
     @HostBinding('class.list__column--checkbox') listColumnCheckboxClass = true;

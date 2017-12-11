@@ -24,6 +24,7 @@
   background: white;
   border: 2px solid $control-color--enabled;
   transition: border-color 0.6s linear;
+  position: relative;
   &:focus {
     box-shadow: 0 0 4px 0 $focus-color;
   }
@@ -41,8 +42,8 @@
       width: 9px;
       height: 5px;
       background: transparent;
-      margin-top: 5px;
-      margin-left: 3px;
+      top: 5px;
+      left: 4px;
       border: 2px solid white;
       border-top: none;
       border-right: none;
@@ -74,8 +75,8 @@
       &:after {
         width: 10px;
         height: 5px;
-        margin-top: 6px;
-        margin-left: 4px;
+        top: 6px;
+        left: 4px;
       }
     }
   }

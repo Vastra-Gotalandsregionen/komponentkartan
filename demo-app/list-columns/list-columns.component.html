@@ -7,12 +7,19 @@
         <vgr-list-header>
           <vgr-list-column-header align="left" text="Förnamn" width="2" sortKey="firstName"></vgr-list-column-header>
           <vgr-list-column-header align="right" text="Efternamn" width="2" sortKey="lastName"></vgr-list-column-header>
-          <vgr-list-column-header align="right" text="Årsbelopp" width="3" sortKey="amount"></vgr-list-column-header>
-          <vgr-list-column-header align="right" text="Enhet" width="3" sortKey="unitname"></vgr-list-column-header>
-          <vgr-list-column-header align="right" text="hsaid" width="3" sortKey="hsaid"></vgr-list-column-header>
-          <vgr-list-column-header align="left" text="Ägare" width="2" sortKey="owner"></vgr-list-column-header>
-          <vgr-list-column-header align="center" text="Enhetskod" width="2" sortKey="unitcode"></vgr-list-column-header>
-          <vgr-list-column-header align="left" text="Nämnd" width="3" sortKey="committee"></vgr-list-column-header>
+          <vgr-list-column-header align="right" text="Årsbelopp" width="2" sortKey="amount"></vgr-list-column-header>
+          <vgr-list-column-header align="left" text="Enhet" width="2" sortKey="unitname"></vgr-list-column-header>
+          <vgr-list-column-header align="right" text="hsaid" width="2" sortKey="hsaid"></vgr-list-column-header>
+          <vgr-list-column-header align="left" text="Ägare" width="1" sortKey="owner"></vgr-list-column-header>
+          <vgr-list-column-header align="center" text="A" width="1" sortKey="unitcode"></vgr-list-column-header>
+          <vgr-list-column-header align="left" text="B" width="1" sortKey="committee"></vgr-list-column-header>
+          <vgr-list-column-header align="left" text="C" width="1" sortKey="committee"></vgr-list-column-header>
+          <vgr-list-column-header align="center" text="D" width="1" sortKey="committee"></vgr-list-column-header>
+          <vgr-list-column-header align="center" text="E" width="1" sortKey="committee"></vgr-list-column-header>
+          <vgr-list-column-header align="center" text="F" width="1" sortKey="committee"></vgr-list-column-header>
+          <vgr-list-column-header align="center" text="G" width="1" sortKey="committee"></vgr-list-column-header>
+          <vgr-list-column-header align="center" text="H" width="1" sortKey="committee"></vgr-list-column-header>
+          <vgr-list-column-header align="center" text="I" width="1" sortKey="committee"></vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of peopleWithUnitRows" [notification]="row.notification">
           <vgr-list-item-header>
@@ -23,7 +30,15 @@
             <vgr-list-column [text]="row.previewObject.hsaid"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.owner"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.unitcode"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.committee"></vgr-list-column>
+            <vgr-list-column [text]="row.previewObject.unitcode"></vgr-list-column>
+            <vgr-list-column text="Yadayad"></vgr-list-column>
+            <vgr-list-column-checkbox></vgr-list-column-checkbox>
+            <vgr-list-column-checkbox></vgr-list-column-checkbox>
+            <vgr-list-column-checkbox></vgr-list-column-checkbox>
+            <vgr-list-column-checkbox></vgr-list-column-checkbox>
+            <vgr-list-column-trashcan></vgr-list-column-trashcan>
+            <vgr-list-column-checkbox></vgr-list-column-checkbox>
+
           </vgr-list-item-header>
           <vgr-list-item-content>
             <span> Mer information</span>

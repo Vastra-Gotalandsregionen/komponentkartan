@@ -32,7 +32,7 @@ export class ListComponent implements AfterContentInit {
             });
         }
         this.items.changes.subscribe(() => {
-            setTimeout(() => { this.copyItemWidthsFromHeader() }, 20);
+            this.copyItemWidthsFromHeader();
         });
     }
 

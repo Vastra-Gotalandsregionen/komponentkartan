@@ -50,11 +50,14 @@ describe('[ListHeaderComponent]', () => {
         let listColumn: ListColumnComponent;
         beforeEach(() => {
             listColumn = new ListColumnComponent();
+            jasmine.clock().uninstall();
+            jasmine.clock().install();
         });
         describe('and there is a matching header for the supplied index', () => {
             beforeEach(() => {
                 spyOn(listColumn, 'setWidth');
                 listHeaderComponent.applyToColumn(listColumn, 1);
+                jasmine.clock().tick(1);
             });
             it('the correct column header is used to copy properties to the list column', () => {
                 expect(listColumn.setWidth).toHaveBeenCalledWith(columnHeader2.width);
@@ -68,6 +71,9 @@ describe('[ListHeaderComponent]', () => {
             it('the list column receives no properties', () => {
                 expect(listColumn.setWidth).toHaveBeenCalledTimes(0);
             });
+        });
+        afterEach(() => {
+            jasmine.clock().uninstall();
         });
     });
 });
