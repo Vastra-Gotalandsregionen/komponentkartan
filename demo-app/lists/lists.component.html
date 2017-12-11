@@ -4,89 +4,93 @@
   </vgr-page-header>
   <vgr-action-panel [expanded]="actionPanelVisible" [title]="'Lägg till ny enhet'">
     <vgr-card>
-      <div class="card__top flex-row">
+      <vgr-card-header>
         <span>Enhet</span>
         <span style="margin-left:40px">Mödravården Mölndal</span>
         <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="onCardUnlocked()" (save)="cardSaved()" (cancel)="cardCancelled()"></vgr-save-cancel>
-      </div>
-      <vgr-card-section [title]="'Belopp'" [expanded]="true" [readonly]="!cardUnlocked" class="card__left">
-        <div class="title-value-layout">
-          <vgr-title-value [title]="'Bruttobelopp'">
-            <vgr-input [value]="grossAmount" [suffix]="'kr'" [alignRight]="true" (valueChanged)="grossAmount = $event" [readonly]="!cardUnlocked"></vgr-input>
-          </vgr-title-value>
-          <vgr-title-value [title]="'Skattesats'">
-            <vgr-input [value]="taxPercent" [suffix]="'%'" [alignRight]="true" (valueChanged)="taxPercent = $event" [readonly]="!cardUnlocked"></vgr-input>
-          </vgr-title-value>
-          <vgr-title-value [title]="'Nettobelopp'">
-            <div class="row-layout">
-              <span *ngIf="netAmount" class="flex-right" style="margin-right:30px">{{netAmount | currency:'SEK':true}}</span>
-            </div>
-          </vgr-title-value>
-          <vgr-title-value [title]="'Månad'">
-            <div class="row-layout">
-              <vgr-monthpicker [disabled]="!cardUnlocked" (selectedDateChanged)="selectedDate = $event"></vgr-monthpicker>
-              <span class="flex-right" style="margin-right: 30px">{{selectedDate | date:'MM yyyy'}}</span>
-            </div>
-          </vgr-title-value>
-          <vgr-title-value [title]="'Månader'">
-            <div class="row-layout">
-              <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
-              <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
-            </div>
-          </vgr-title-value>
+      </vgr-card-header>
+      <vgr-card-column>
+        <vgr-card-section [title]="'Belopp'" [expanded]="true" [readonly]="!cardUnlocked" class="card__left">
+          <div class="title-value-layout">
+            <vgr-title-value [title]="'Bruttobelopp'">
+              <vgr-input [value]="grossAmount" [suffix]="'kr'" [alignRight]="true" [readonly]="!cardUnlocked"></vgr-input>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Skattesats'">
+              <vgr-input [value]="taxPercent" [suffix]="'%'" [alignRight]="true" [readonly]="!cardUnlocked"></vgr-input>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Nettobelopp'">
+              <div class="row-layout">
+                <span *ngIf="netAmount" class="flex-right" style="margin-right:30px">{{netAmount | currency:'SEK':true}}</span>
+              </div>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Månad'">
+              <div class="row-layout">
+                <vgr-monthpicker [disabled]="!cardUnlocked" (selectedDateChanged)="selectedDate = $event"></vgr-monthpicker>
+                <span class="flex-right" style="margin-right: 30px">{{selectedDate | date:'MM yyyy'}}</span>
+              </div>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Månader'">
+              <div class="row-layout">
+                <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
+                <vgr-monthpicker [disabled]="!cardUnlocked"></vgr-monthpicker>
+              </div>
+            </vgr-title-value>
 
-          <vgr-title-value [title]="'Belopp avser'">
-            <div class="column-layout column-layout--tight">
-              <vgr-checkbox [disabled]="!cardUnlocked" [label]="'Privat'"></vgr-checkbox>
-              <vgr-checkbox [disabled]="!cardUnlocked" [label]="'Företag'"></vgr-checkbox>
-              <vgr-checkbox [disabled]="!cardUnlocked" [label]="'Gåva'"></vgr-checkbox>
-              <vgr-checkbox [disabled]="!cardUnlocked"></vgr-checkbox>
-            </div>
-          </vgr-title-value>
-          <vgr-title-value [title]="'Tillbehör'">
-            <vgr-radio-group [disabled]="!cardUnlocked" [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'}]">
-            </vgr-radio-group>
-          </vgr-title-value>
-        </div>
-      </vgr-card-section>
-      <vgr-card-section [title]="'Övrig information'" [readonly]="!cardUnlocked" [subtitle]="'Kalles chokladfabrik Kalles chokladfabrik'"
-        class="card__left">
-        <div class="title-value-layout">
-          <vgr-title-value [title]="'Kund som berörs av dessa belopp'">
-            <vgr-dropdown [disabled]="!cardUnlocked" [items]="[{id:'1', displayName:'Kalles chokladfabrik', selected:true},{id:'2', displayName:'Jonnas jordgubbar'}]"></vgr-dropdown>
-          </vgr-title-value>
-          <vgr-title-value [title]="'Kostnadsställe'">
-            <vgr-input [value]="'Kiosk & Godis'" [readonly]="!cardUnlocked"></vgr-input>
-          </vgr-title-value>
-          <vgr-title-value [title]="'Fakturaadress'">
-            <span>Bakgatan 11</span>
-            <span>123 45 Västgötaslätten</span>
-            <span>Sverige</span>
-          </vgr-title-value>
-        </div>
-      </vgr-card-section>
-      <vgr-card-section [title]="'Uppgifter'" class="card__right" [expanded]="true" [subtitle]="'aledu10'">
-        <div class="title-value-layout">
-          <vgr-title-value [title]="'Rött tema'">
-            <div class="row-layout">
-              <div style="width:100%; height:30px; background-color:#9D2235"></div>
-              <div style="width:100%; height:30px; background-color:#BA6271"></div>
-            </div>
-          </vgr-title-value>
-          <vgr-title-value [title]="'Grönt tema'">
-            <div class="row-layout">
-              <div style="width:100%; height:30px; background-color: #4A773C"></div>
-              <div style="width:100%; height:30px; background-color:#7FA276"></div>
-            </div>
-          </vgr-title-value>
-          <vgr-title-value [title]="'Blått tema'">
-            <div class="row-layout">
-              <div style="width:100%; height:30px; background-color:#006298"></div>
-              <div style="width:100%; height:30px; background-color:#508FB8"></div>
-            </div>
-          </vgr-title-value>
-        </div>
-      </vgr-card-section>
+            <vgr-title-value [title]="'Belopp avser'">
+              <div class="column-layout column-layout--tight">
+                <vgr-checkbox [disabled]="!cardUnlocked" [label]="'Privat'"></vgr-checkbox>
+                <vgr-checkbox [disabled]="!cardUnlocked" [label]="'Företag'"></vgr-checkbox>
+                <vgr-checkbox [disabled]="!cardUnlocked" [label]="'Gåva'"></vgr-checkbox>
+                <vgr-checkbox [disabled]="!cardUnlocked"></vgr-checkbox>
+              </div>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Tillbehör'">
+              <vgr-radio-group [disabled]="!cardUnlocked" [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'}]">
+              </vgr-radio-group>
+            </vgr-title-value>
+          </div>
+        </vgr-card-section>
+        <vgr-card-section [title]="'Övrig information'" [readonly]="!cardUnlocked" [subtitle]="'Kalles chokladfabrik Kalles chokladfabrik'"
+          class="card__left">
+          <div class="title-value-layout">
+            <vgr-title-value [title]="'Kund som berörs av dessa belopp'">
+              <vgr-dropdown [disabled]="!cardUnlocked" [items]="[{id:'1', displayName:'Kalles chokladfabrik', selected:true},{id:'2', displayName:'Jonnas jordgubbar'}]"></vgr-dropdown>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Kostnadsställe'">
+              <vgr-input [value]="'Kiosk & Godis'" [readonly]="!cardUnlocked"></vgr-input>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Fakturaadress'">
+              <span>Bakgatan 11</span>
+              <span>123 45 Västgötaslätten</span>
+              <span>Sverige</span>
+            </vgr-title-value>
+          </div>
+        </vgr-card-section>
+      </vgr-card-column>
+      <vgr-card-column>
+        <vgr-card-section [title]="'Uppgifter'" class="card__right" [expanded]="true" [subtitle]="'aledu10'">
+          <div class="title-value-layout">
+            <vgr-title-value [title]="'Rött tema'">
+              <div class="row-layout">
+                <div style="width:100%; height:30px; background-color:#9D2235"></div>
+                <div style="width:100%; height:30px; background-color:#BA6271"></div>
+              </div>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Grönt tema'">
+              <div class="row-layout">
+                <div style="width:100%; height:30px; background-color: #4A773C"></div>
+                <div style="width:100%; height:30px; background-color:#7FA276"></div>
+              </div>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Blått tema'">
+              <div class="row-layout">
+                <div style="width:100%; height:30px; background-color:#006298"></div>
+                <div style="width:100%; height:30px; background-color:#508FB8"></div>
+              </div>
+            </vgr-title-value>
+          </div>
+        </vgr-card-section>
+      </vgr-card-column>
     </vgr-card>
   </vgr-action-panel>
   <vgr-page-body>
