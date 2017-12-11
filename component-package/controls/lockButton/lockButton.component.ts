@@ -18,7 +18,7 @@ export class LockButtonComponent {
         return !this.unlocked;
     }
     onClick(event: any): void {
-        event.cancelBubble = true;
+
         if (!this.disabled) {
             if (this.unlocked) {
                 this.lock();
