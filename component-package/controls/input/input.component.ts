@@ -1,11 +1,9 @@
-import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, Output, OnInit, Optional, SkipSelf, SimpleChanges } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, Output, OnInit, Optional, SkipSelf, SimpleChanges, OnChanges } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 import { concat } from 'rxjs/observable/concat';
 import { ErrorHandler } from '../../services/errorhandler';
-import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
-import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'vgr-input',
