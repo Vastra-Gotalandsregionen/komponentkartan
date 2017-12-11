@@ -1,22 +1,19 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { AbstractControl } from '@angular/forms/src/model';
+import { FormGroup, AbstractControl } from '@angular/forms';
 
 @Injectable()
 export class ErrorHandler {
-
   constructor() {
-
   };
 
   getErrorMessageReactiveForms(validationMessages: any, control?: AbstractControl, smallMode?: boolean): string {
     if (control.errors) {
       if (typeof (validationMessages) === 'object') {
         for (var key in control.errors) {
-          if (key === 'required' && smallMode) {
+          if (key === 'required' && smallMode && !validationMessages[key]) {
             return 'Obligatoriskt';
           }
-          else if (key === 'required' && !smallMode) {
+          else if (key === 'required' && !smallMode && !validationMessages[key]) {
             return 'Fältet är obligatoriskt';
           }
           else if (validationMessages) {

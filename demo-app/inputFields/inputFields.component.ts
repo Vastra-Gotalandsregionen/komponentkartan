@@ -10,8 +10,7 @@ import { ErrorHandler } from '../../component-package/services/errorhandler';
 @Component({
     moduleId: module.id,
     selector: 'vgr-input-fields',
-    templateUrl: 'inputFields.component.html',
-    providers: [ErrorHandler]
+    templateUrl: 'inputFields.component.html'
 })
 
 export class InputFieldsComponent implements OnInit {
