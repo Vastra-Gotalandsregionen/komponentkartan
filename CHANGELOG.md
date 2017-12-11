@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added checkbox column, vgr-list-column-checkbox, that adds support for checkboxes in lists
 - Added trashcan column, vgr-list-column-trashcan, that adds support for trashcan buttons in lists
 - Added support for aligment on vgr-list-column-header. Left, center and right alignment is supported
-- Altered structure for list: Replace the divs (list-item__header and list-item__content) => vgr-list-item-header and vgr-list-item-content.
+- Altered structure for list: Replace the divs that having the classes list-item__header and list-item__content in your list with the components vgr-list-item-header and vgr-list-item-content.
 
 ### Input component
 - Removed validation logic from input-component
