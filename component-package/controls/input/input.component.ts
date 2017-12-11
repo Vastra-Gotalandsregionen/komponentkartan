@@ -60,17 +60,17 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   selectedErrorMessage: string;
   control: AbstractControl;
 
-  private maxNumberOfDecimals = 2;
-
   constructor(private errorHandler: ErrorHandler, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.blur = new EventEmitter<any>();
     this.focus = new EventEmitter<any>();
     this.nrOfDecimals = 2;
-
+    this.swedishDecimalPipe = new DecimalPipe('sv-se');
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.control = this.controlContainer.control.get(this.formControlName);
+    if (this.formControlName) {
+      this.control = this.controlContainer.control.get(this.formControlName);
+    }
 
     if (changes.small) {
       this.currentErrorMesage = this.checkErrorMessage();
@@ -78,28 +78,22 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.swedishDecimalPipe = new DecimalPipe('sv-se');
-    if (this.formControlName) {
-      this.doValidate();
-    }
-    else {
-      this.selectedErrorMessage = this.errormessage;
-      if (this.formatNumber && !(this.isInvalid)) {
-        this.displayValue = this.convertNumberToString(this.value);
-      } else {
-        this.displayValue = this.value;
-      }
-    }
+    this.getErrorMessages();
+    this.setDisplayValue();
   }
 
-  doValidate() {
-    this.currentErrorMesage = this.checkErrorMessage();
+  getErrorMessages() {
+    if (this.formControlName) {
+      this.currentErrorMesage = this.checkErrorMessage();
 
+      this.control.valueChanges
+        .subscribe(data => {
+          this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errormessage, this.control, this.small);
+        });
+    } else {
+      this.selectedErrorMessage = this.errormessage;
+    }
 
-    this.control.valueChanges
-      .subscribe(data => {
-        this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errormessage, this.control, this.small);
-      });
   }
 
   checkErrorMessage(): string {
@@ -114,11 +108,15 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     if (value !== undefined) {
       this.value = value;
 
-      if (this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid)) {
-        this.displayValue = this.convertNumberToString(this.value);
-      } else {
-        this.displayValue = this.value;
-      }
+      this.setDisplayValue();
+    }
+  }
+
+  setDisplayValue() {
+    if (this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid)) {
+      this.displayValue = this.convertNumberToString(this.value);
+    } else {
+      this.displayValue = this.value;
     }
   }
 
@@ -171,12 +169,9 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   private convertStringToNumber(value: string): number {
-    if (value) {
-      const normalized = value.toString().trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
-      const floatVal = this.roundNumber(parseFloat(normalized));
-      return floatVal;
-    }
-    return NaN;
+    const normalized = value.toString().trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
+    const floatVal = this.roundNumber(parseFloat(normalized));
+    return floatVal;
   }
 
   private roundNumber(number: number) {
