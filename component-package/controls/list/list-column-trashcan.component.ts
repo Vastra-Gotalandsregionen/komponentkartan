@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Output, Input } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Output, Input, forwardRef } from '@angular/core';
 
 import { ListColumnHeaderComponent } from './list-column-header.component';
 import { ListColumnComponent } from './list-column.component';
@@ -6,7 +6,11 @@ import { ListColumnComponent } from './list-column.component';
 @Component({
     templateUrl: './list-column-trashcan.component.html',
     moduleId: module.id,
-    selector: 'vgr-list-column-trashcan'
+    selector: 'vgr-list-column-trashcan',
+    providers: [{
+        provide: ListColumnComponent,
+        useExisting: forwardRef(() => ListColumnTrashcanComponent)
+    }]
 })
 export class ListColumnTrashcanComponent extends ListColumnComponent {
     @HostBinding('class.list__column--trashcan') listColumnTrashcanClass = true;

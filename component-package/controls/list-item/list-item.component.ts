@@ -1,6 +1,6 @@
 import {
     Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, ContentChildren, QueryList,
-    AfterContentInit
+    AfterContentInit, forwardRef
 } from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
@@ -28,9 +28,9 @@ export class ListItemComponent implements OnInit {
     @HostBinding('class.list-item--columns-initialized') columnsInitialized: boolean;
 
     @Input() set expanded(expandedValue: boolean) {
-        if (expandedValue) {
+        if (expandedValue && !this._expanded) {
             this.expand();
-        } else {
+        } else if (!expandedValue && this._expanded) {
             this.collapse();
         }
     }
@@ -60,7 +60,7 @@ export class ListItemComponent implements OnInit {
         return this._notification;
     }
 
-    @ContentChildren(ListColumnComponent) columns: QueryList<ListColumnComponent>;
+    @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
     constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ListItemJqeuryHelper) {
 
@@ -76,7 +76,12 @@ export class ListItemComponent implements OnInit {
         this.columns.forEach((column, index) => {
             header.applyToColumn(column, index);
         });
-        this.columnsInitialized = true;
+
+        setTimeout(() => {
+            this.columnsInitialized = true;
+        }, 1);
+
+
     }
 
 

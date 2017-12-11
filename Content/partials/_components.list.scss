@@ -154,18 +154,15 @@
 }
 
 .list__column {
-  padding-right: 10px;
   span {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    padding-right: 10px;
     display: block;
   }
-  &.column--align-right {
-    span {
-      padding-right: $margin--fat;
-    }
+  padding-right: $margin--fat;
+  &:last-child() {
+    padding-right: 0;
   }
 }
 
@@ -220,19 +217,24 @@
     border-top: none;
     padding-top: 0;
   }
+  .list-item--expanded & {
+    // jQuery slideUp verkar sätta display inline. Blir ej bra.
+    // Lyckades inte overridea så detta löser problemet (om än inte på ett snyggt sätt)
+    display: block !important;
+  }
 }
 
 .list__column-header {
   margin-top: $margin--slim;
   display: inline-block;
   cursor: pointer;
-  padding-right: 18px;
   div {
     display: inline-block;
   }
   height:30px;
-  &.column--align-right {
-    padding-right: 30px;
+  padding-right: $margin--fat;
+  &:last-child() {
+    padding-right: 0;
   }
 }
 
@@ -319,6 +321,9 @@
 
 .column--align-center {
   text-align: center;
+  >* {
+    margin-left: auto;
+  }
 }
 
 .flex-column {
@@ -330,11 +335,19 @@
   .flex-column--#{$number} {
     min-width: 53px * $number;
     width: 53px * $number;
+    &:last-child() {
+      min-width: (53px * $number) - $margin--fat;
+      width: (53px * $number) - $margin--fat;
+    }
   }
   @media screen and (min-width: $desktop-width--medium) {
     .flex-column--#{$number} {
-      min-width: 55px * $number;
-      width: 55px * $number;
+      min-width: 55.5px * $number;
+      width: 55.5px * $number;
+      &:last-child() {
+        min-width: (55.5px * $number) - $margin--fat;
+        width: (55.5px * $number) - $margin--fat;
+      }
     }
   }
 }
@@ -343,13 +356,13 @@
   @include flex-column($i);
 }
 
-.list__column--trashcan {
+vgr-list-column-trashcan {
   height: 100%;
   .list-item__trashcan__icon {
     @extend .bg-image-icon-trashcan;
     background-size: 19px 21px;
     height: 100%;
-    width: 40px;
+    width: 33px;
     display: inline-block;
   }
   &.disabled .list-item__trashcan__icon {
@@ -359,7 +372,7 @@
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .list__column--trashcan .list-item__trashcan__icon {
+  vgr-list-column-trashcan .list-item__trashcan__icon {
     background-size: 22px 24px;
   }
   .list-item__content {
@@ -369,15 +382,18 @@
   }
 }
 
-.list__column--checkbox {
+vgr-list-column-checkbox {
   height: 100%;
   .checkbox--inline {
     height: 100%;
     .checkbox {
       height: 100%;
+      width: 33px;
       justify-content: center;
       flex-direction: column;
-      padding: 0 10px;
+      .checkbox__label {
+        display: none;
+      }
     }
   }
 }
