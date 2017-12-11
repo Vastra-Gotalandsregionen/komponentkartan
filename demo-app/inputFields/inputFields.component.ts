@@ -32,6 +32,8 @@ export class InputFieldsComponent implements OnInit {
     state: string;
     allCities: any;
 
+    value: any = 81273128739;
+
     formErrors = {
         'control1': '',
         'control2': '',
@@ -137,6 +139,16 @@ export class InputFieldsComponent implements OnInit {
             this.isSmall = false;
         else
             this.isSmall = true;
+    }
+
+    validateNumberControl1(value: any): boolean {
+        const pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
+
+        const regexp = new RegExp(pattern);
+        if (regexp.test(value)) {
+            return true;
+        }
+        return false;
     }
 }
 

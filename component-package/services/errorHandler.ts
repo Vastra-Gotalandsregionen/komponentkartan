@@ -10,25 +10,28 @@ export class ErrorHandler {
   };
 
   getErrorMessages(formErrors?: any, validationMessages?: any): any {
-
   }
 
   getErrorMessageReactiveForms(validationMessages: any, control?: AbstractControl, smallMode?: boolean): string {
-
     if (control.errors) {
-      for (var key in control.errors) {
-        if (key === 'required' && smallMode) {
-          return 'Obligatoriskt';
+      if (typeof (validationMessages) === 'object') {
+        for (var key in control.errors) {
+          if (key === 'required' && smallMode) {
+            return 'Obligatoriskt';
+          }
+          else if (key === 'required' && !smallMode) {
+            return 'Fältet är obligatoriskt';
+          }
+          else if (validationMessages) {
+            return validationMessages[key];
+          }
+          else {
+            return 'Det här ska inte hända'
+          }
         }
-        else if (key === 'required' && !smallMode) {
-          return 'Fältet är obligatoriskt';
-        }
-        else if (validationMessages) {
-          return validationMessages[key];
-        }
-        else {
-          return 'Det här ska inte hända'
-        }
+      }
+      else {
+        return validationMessages;
       }
     }
   }

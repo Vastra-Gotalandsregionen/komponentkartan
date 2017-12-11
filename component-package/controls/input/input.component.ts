@@ -24,13 +24,12 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() formControlName?: string;
 
   @Input() isInvalid?: boolean;
-  @Input() formatNumber: boolean;
-  @Input() nrOfDecimals: number;
-  @Input() suffix: string;
-  @Input() value: any;
+  @Input() formatNumber?: boolean;
+  @Input() nrOfDecimals?: number;
+  @Input() suffix?: string;
+  @Input() value?: any;
   @Input() maxlength?: number;
-  @Input() validateoninit: boolean;
-
+  @Input() validateoninit?: boolean;
   @Input() errormessage?: any;
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
@@ -80,11 +79,22 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   ngOnInit() {
     this.swedishDecimalPipe = new DecimalPipe('sv-se');
-    this.doValidate();
+    if (this.formControlName) {
+      this.doValidate();
+    }
+    else {
+      this.selectedErrorMessage = this.errormessage;
+      if (this.formatNumber && !(this.isInvalid)) {
+        this.displayValue = this.convertNumberToString(this.value);
+      } else {
+        this.displayValue = this.value;
+      }
+    }
   }
 
   doValidate() {
     this.currentErrorMesage = this.checkErrorMessage();
+
 
     this.control.valueChanges
       .subscribe(data => {
@@ -99,6 +109,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     else
       return this.errormessage;
   }
+
   writeValue(value: any) {
     if (value !== undefined) {
       this.value = value;

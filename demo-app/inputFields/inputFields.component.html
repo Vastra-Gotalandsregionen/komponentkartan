@@ -18,10 +18,11 @@
             <h2>Fördefinierade typer</h2>
             <div>
               Belopp 1 (type=amount)
-              <vgr-input formControlName="control1" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
-                [isInvalid]="form.get('control1').invalid" [errormessage]="validationMessages.control1"></vgr-input>
+              <vgr-input (input)="value=$event.target.value" [value]="value" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true"
+                [small]="isSmall" [isInvalid]="!validateNumberControl1(value)" [errormessage]="'Felaktigt nummer'"></vgr-input>
               <span>Belopp 1: </span>
-              <span>{{formatNumericValue(form.controls.control1.value)}}</span>
+              <span>{{value}}</span>
+              <!-- <span>{{formatNumericValue(form.controls.control1.value)}}</span> -->
             </div>
             <div>
               Belopp 2, obligatoriskt
