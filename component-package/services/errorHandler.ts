@@ -9,9 +9,6 @@ export class ErrorHandler {
 
   };
 
-  getErrorMessages(formErrors?: any, validationMessages?: any): any {
-  }
-
   getErrorMessageReactiveForms(validationMessages: any, control?: AbstractControl, smallMode?: boolean): string {
     if (control.errors) {
       if (typeof (validationMessages) === 'object') {

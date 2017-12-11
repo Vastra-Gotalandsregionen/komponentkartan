@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DecimalPipe } from '@angular/common';
 
 // Common
-import { ModalService, BrowserDetector } from './services/index';
+import { ModalService, BrowserDetector, ErrorHandler } from './services/index';
 import { SafePipe, TruncatePipe, FilterPipe } from './pipes/index';
 import * as $ from 'jquery';
 
@@ -119,8 +119,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         control.ListItemContentComponent,
         control.ListItemHeaderComponent
     ],
+    providers: [ModalService, control.ActionPanelJqeuryHelper, control.ListItemJqeuryHelper, BrowserDetector, DecimalPipe, ErrorHandler]
 
-    providers: [ModalService, control.ActionPanelJqeuryHelper, control.ListItemJqeuryHelper, BrowserDetector, DecimalPipe]
 
 })
 

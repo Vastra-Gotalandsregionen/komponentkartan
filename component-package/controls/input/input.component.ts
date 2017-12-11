@@ -15,8 +15,8 @@ import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => InputComponent),
-    multi: true
-  }, ErrorHandler]
+    multi: true,
+  }]
 
 })
 export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
