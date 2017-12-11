@@ -37,6 +37,16 @@ $filter-area-height: 60px;
       padding-top: $border--single + 2px;
     }
   }
+  &.validation-error--active {
+    .validation {
+      height: auto;
+    }
+  }
+  &.validation-error--editing {
+    .validation {
+      height: auto;
+    }
+  }
 }
 
 .dropdown--readonly {
