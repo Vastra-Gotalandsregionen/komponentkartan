@@ -23,7 +23,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @Input() formControlName?: string;
 
-  @Input() isInvalid: boolean;
+  @Input() isInvalid?: boolean;
   @Input() formatNumber: boolean;
   @Input() nrOfDecimals: number;
   @Input() suffix: string;
