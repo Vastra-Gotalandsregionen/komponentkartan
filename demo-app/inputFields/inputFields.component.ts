@@ -15,6 +15,8 @@ import { ErrorHandler } from '../../component-package/services/errorhandler';
 })
 
 export class InputFieldsComponent implements OnInit {
+    //Obs olika implementationer
+
     // Reactive form
     form: FormGroup;
 

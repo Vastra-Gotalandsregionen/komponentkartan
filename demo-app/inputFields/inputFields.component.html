@@ -12,6 +12,8 @@
     <vgr-page-block class=" column-layout">
       <vgr-radio-group [options]="[{id:'1', displayName:'Stor', selected:true},{id:'2', displayName:'Liten'}]" (selectedChanged)="toggleInputType($event)">
       </vgr-radio-group>
+      <br>
+      <h3>Obs Experimentell kod</h3>
       <form [formGroup]="form">
         <div class="row-layout">
           <div class="one-third">
@@ -22,7 +24,6 @@
                 [small]="isSmall" [isInvalid]="!validateNumberControl1(value)" [errormessage]="'Felaktigt nummer'"></vgr-input>
               <span>Belopp 1: </span>
               <span>{{value}}</span>
-              <!-- <span>{{formatNumericValue(form.controls.control1.value)}}</span> -->
             </div>
             <div>
               Belopp 2, obligatoriskt
