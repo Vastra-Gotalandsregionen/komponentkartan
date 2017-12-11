@@ -12,7 +12,6 @@ export class ListHeaderComponent implements AfterContentInit {
     @ContentChildren(ListColumnHeaderComponent) headerColumns: QueryList<ListColumnHeaderComponent>;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
     private contentInitialized: boolean;
-    private columnsIn
 
     ngAfterContentInit() {
         this.headerColumns.forEach(column => column.sortChanged.subscribe((sort: SortDirection) => this.onColumnSortChanged(column, sort)));
