@@ -11,6 +11,8 @@ export class ListHeaderComponent implements AfterContentInit {
     @HostBinding('class.list__header') listHeaderClass = true;
     @ContentChildren(ListColumnHeaderComponent) headerColumns: QueryList<ListColumnHeaderComponent>;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
+    private contentInitialized: boolean;
+    private columnsIn
 
     ngAfterContentInit() {
         this.headerColumns.forEach(column => column.sortChanged.subscribe((sort: SortDirection) => this.onColumnSortChanged(column, sort)));
@@ -22,11 +24,13 @@ export class ListHeaderComponent implements AfterContentInit {
     }
 
     applyToColumn(column: ListColumnComponent, index: number) {
-        const headerColumnArray = this.headerColumns.toArray();
-        if (headerColumnArray.length > index) {
-            column.setWidth(headerColumnArray[index].width);
-            column.setAlignment(headerColumnArray[index].align);
-        }
+        setTimeout(() => {
+            const headerColumnArray = this.headerColumns.toArray();
+            if (headerColumnArray.length > index) {
+                column.setWidth(headerColumnArray[index].width);
+                column.setAlignment(headerColumnArray[index].align);
+            }
+        }, 1);
     }
 }
 

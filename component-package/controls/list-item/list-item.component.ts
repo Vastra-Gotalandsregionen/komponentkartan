@@ -28,9 +28,9 @@ export class ListItemComponent implements OnInit {
     @HostBinding('class.list-item--columns-initialized') columnsInitialized: boolean;
 
     @Input() set expanded(expandedValue: boolean) {
-        if (expandedValue) {
+        if (expandedValue && !this._expanded) {
             this.expand();
-        } else {
+        } else if (!expandedValue && this._expanded) {
             this.collapse();
         }
     }
@@ -76,7 +76,12 @@ export class ListItemComponent implements OnInit {
         this.columns.forEach((column, index) => {
             header.applyToColumn(column, index);
         });
-        this.columnsInitialized = true;
+
+        setTimeout(() => {
+            this.columnsInitialized = true;
+        }, 1);
+
+
     }
 
 
