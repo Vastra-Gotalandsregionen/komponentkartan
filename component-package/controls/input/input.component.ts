@@ -92,7 +92,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     } else {
       this.selectedErrorMessage = this.errormessage;
     }
-
   }
 
   checkErrorMessage(): string {
