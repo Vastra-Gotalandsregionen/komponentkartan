@@ -105,7 +105,6 @@ describe('[InputComponent]', () => {
       component.errormessage = 'error';
       component.small = false;
       component.ngOnInit();
-      // component.onBlur();
       fixture.detectChanges();
     });
 
@@ -119,7 +118,6 @@ describe('[InputComponent]', () => {
       expect(element.nativeElement.innerText).toEqual('error');
     });
   });
-  // this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid
   describe('When initialized with number formatting, valid state and 5 decimals', () => {
     beforeEach(() => {
       component = fixture.componentInstance;
