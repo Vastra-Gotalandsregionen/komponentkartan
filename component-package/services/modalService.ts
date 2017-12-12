@@ -33,7 +33,7 @@ export class ModalService {
     openSaveDontSaveCancelDialog(title: string, message: string,
         saveCallback: () => void, dontSaveCallback: () => void, cancelCallback: () => void) {
         this.openDialog(title, message, new ModalButtonConfiguration('Spara', saveCallback),
-            new ModalButtonConfiguration('Spara inte', dontSaveCallback), new ModalButtonConfiguration('Avbryt', cancelCallback));
+            new ModalButtonConfiguration('Spara inte', dontSaveCallback), new ModalButtonConfiguration('Avbryt', cancelCallback, true));
 
     }
 }
@@ -44,7 +44,7 @@ export class ModalConfiguration {
 }
 
 export class ModalButtonConfiguration {
-    constructor(public text: string, public callback: () => void) {
+    constructor(public text: string, public callback: () => void, public isDefault = false) {
     }
 }
 

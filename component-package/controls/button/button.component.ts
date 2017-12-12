@@ -13,6 +13,9 @@ export class ButtonComponent implements OnChanges {
     reenabled: boolean;
     @Output() click = new EventEmitter();
 
+    constructor() {
+
+    }
     onClick(event: MouseEvent) {
         if (this.disabled) {
             event.stopPropagation();
