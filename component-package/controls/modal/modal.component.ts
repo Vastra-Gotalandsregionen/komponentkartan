@@ -1,5 +1,7 @@
 
-import { Component, ViewContainerRef, OnInit, ViewChildren, AfterViewChecked, QueryList, ElementRef } from '@angular/core';
+import {
+    Component, ViewContainerRef, OnInit, ViewChildren, AfterViewChecked, QueryList, ElementRef
+} from '@angular/core';
 import { ModalService, ModalConfiguration, ModalButtonConfiguration } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
 
@@ -9,13 +11,22 @@ import { ButtonComponent } from '../button/button.component';
     templateUrl: './modal.component.html'
 })
 
-export class ModalPlaceholderComponent implements OnInit, AfterViewChecked {
+export class ModalPlaceholderComponent implements AfterViewChecked {
     isOpen: boolean;
     message: string;
     title: string;
     buttons: ModalButtonConfiguration[];
     modalInitialized: boolean;
-    @ViewChildren(ButtonComponent) buttonComponents: QueryList<ButtonComponent>;
+    lastFocusedElement: any;
+    firstTabStop: any;
+    lastTabStop: any;
+    focusableElements: any;
+
+    // A list of elements that can recieve focus
+    focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+
+
+    @ViewChildren(ButtonComponent, { read: ElementRef }) buttonComponents: QueryList<ElementRef>;
     constructor(
         private modalService: ModalService, private elementRef: ElementRef) {
 
@@ -31,39 +42,31 @@ export class ModalPlaceholderComponent implements OnInit, AfterViewChecked {
         });
     }
 
-    ngOnInit() {
-
-    }
-
     ngAfterViewChecked() {
-        if (!this.modalInitialized && this.buttonComponents && this.buttonComponents.length > 0) {
-            this.buttonComponents.first.focus();
+        // Set focus on first/default button when opening modal
+        if (!this.modalInitialized && this.isOpen && this.buttonComponents && this.buttonComponents.length > 0) {
+            this.initFocusableElements();
             this.modalInitialized = true;
         }
     }
 
-    onBlur(event: FocusEvent) {
-        if (!this.isDescendant(this.elementRef.nativeElement, event.relatedTarget)) {
-            if (this.buttonComponents.first.isElement(event.target)) {
-                this.buttonComponents.last.focus();
-            } else {
-                this.buttonComponents.first.focus();
-            }
-        }
-    }
+    initFocusableElements() {
+        // Had to put this in a SetTimeout since the QuerySelector returned old objects from the last opened dialog otherwise
+        setTimeout(() => {
+            const focusableNodes: NodeList = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
+            this.focusableElements = Array.from(focusableNodes);
 
-    isDescendant(parent, child) {
-        if (!child) {
-            return false;
-        }
-        let node = child.parentNode;
-        while (node != null) {
-            if (node === parent) {
-                return true;
+            this.firstTabStop = this.focusableElements[0];
+            this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
+
+            // Set default button if one is defined
+            const defaultButton = this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
+            if (defaultButton) {
+                defaultButton.nativeElement.children[0].focus();
+            } else {
+                this.firstTabStop.focus();
             }
-            node = node.parentNode;
-        }
-        return false;
+        }, 1);
     }
 
     private openModal() {
@@ -73,15 +76,36 @@ export class ModalPlaceholderComponent implements OnInit, AfterViewChecked {
 
     private closeModal() {
         this.isOpen = false;
-        $('body').removeClass('modal--open')
+        $('body').removeClass('modal--open');
 
     }
 
-    onClicked(callback: () => void) {
+    onButtonClick(callback: () => void) {
         callback();
         this.closeModal();
     }
 
+    onKeyDown(e: any) {
+        if (e.keyCode === 9) {
+            // If Shift + Tab
+            if (e.shiftKey) {
+                // If the current element in focus is the first focusable element within the modal window...
+                if (document.activeElement === this.firstTabStop) {
+                    e.preventDefault();
+                    // ...jump to the last focusable element
+                    this.lastTabStop.focus();
+                }
+                // if Tab
+            } else {
+                // If the current element in focus is the last focusable element within the modal window...
+                if (document.activeElement === this.lastTabStop) {
+                    e.preventDefault();
+                    // ...jump to the first focusable element
+                    this.firstTabStop.focus();
+                }
+            }
+        }
+    }
 
 
 }
