@@ -15,7 +15,7 @@ $filter-area-height: 60px;
   }
   .validation {
     height: 30px;
-    display: block;
+    display: inline-block;
     opacity: 1;
     max-height: 300px;
     transition: opacity 0.3s linear, max-height 0.3s linear;
