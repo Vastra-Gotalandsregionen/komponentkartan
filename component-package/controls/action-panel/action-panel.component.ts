@@ -109,6 +109,7 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         this.expandedChanged.emit(this._expanded);
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = 'auto';
+            this.elementRef.nativeElement.style.overflow = 'visible';
         }, this.animationDelayMs);
 
     }
@@ -118,23 +119,10 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         this.elementRef.nativeElement.style.height = this.actualContentHeight;
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = '0px';
+            this.elementRef.nativeElement.style.overflow = 'hidden';
             this._expanded = false;
             this.collapsed = true;
         }, 50);
-
-
-        // if (collapsingNotification) {
-        //     this.processNotification(collapsingNotification, () => {
-
-        //     });
-        // } else {
-        //     this.jqueryHelper.collapseContent(this.elementRef, () => {
-        //         this._expanded = false;
-        //         this.collapsed = true;
-        //         this.notInteractable = false;
-        //         this.expandedChanged.emit(this._expanded);
-        //     }, this.expandingDuration);
-        // }
     }
 
     private processNotification(notificationType: NotificationType, callback: Function): void {
@@ -147,35 +135,10 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
 
     private processShowOnCollapseNotification(callback: Function) {
         this.notificationVisible = true;
-        // setTimeout(() => {
-        //     this.jqueryHelper.collapseContent(this.elementRef, () => {
-        //         this._expanded = false;
-        //         this.collapsed = true;
-        //         this.expandedChanged.emit(this._expanded);
-        //         setTimeout(() => {
-        //             this.notification.done = true;
-        //             this.notificationVisible = false;
-        //             this.notInteractable = false;
-        //         }, 2000)
-        //     }, this.expandingDuration);
-        // }, 1400);
-
     }
 
     private processShowOnRemoveNotification(callback: Function) {
         this.notificationVisible = true;
-        // setTimeout(() => {
-        //     this.jqueryHelper.collapseContent(this.elementRef, () => {
-        //         this._expanded = false;
-        //         this.collapsed = true;
-        //         this.expandedChanged.emit(this._expanded);
-        //         setTimeout(() => {
-        //             this.notification.done = true;
-        //             this.notificationVisible = false;
-        //             this.notInteractable = false;
-        //             this.deleted = true;
-        //         }, 2000)
-        //     }, this.expandingDuration);
-        // }, 1400);
+
     }
 }

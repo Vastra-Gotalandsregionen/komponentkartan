@@ -119,11 +119,11 @@ vgr-monthpicker.readonly {
   padding-bottom: 0px;
   width: 250px;
   height: 250px;
-  visibility: hidden;
+  display: none;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   cursor: default;
   .monthpicker--open & {
-    visibility: visible;
+    display: inline-block;
   }
   &:focus {
     outline: 0;
