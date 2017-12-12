@@ -103,6 +103,7 @@ describe('[InputComponent]', () => {
       component.isInvalid = true;
       component.validateoninit = true
       component.errormessage = 'error';
+      component.small = false;
       component.ngOnInit();
       // component.onBlur();
       fixture.detectChanges();
@@ -115,9 +116,40 @@ describe('[InputComponent]', () => {
     });
     it('There is a error message section', () => {
       let element = rootElement.query(By.css('.input-validation_status__message'));
-      expect(component.currentErrorMesage).toEqual('');
       expect(element.nativeElement.innerText).toEqual('error');
     });
+  });
+  // this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid
+  describe('When initialized with number formatting, valid state and 5 decimals', () => {
+    beforeEach(() => {
+      component = fixture.componentInstance;
+      component.formatNumber = true;
+      component.nrOfDecimals = 4;
+      component.value = '1234.567340980932848';
+      component.isInvalid = false;
+      component.readonly = false;
+      component.ngOnInit();
+      component.onBlur();
+      fixture.detectChanges();
+    });
+
+    it('Value and displayvalue has been formatted correctly', () => {
+      expect(component.value).toEqual(1234.5673);
+    });
+
+    describe('When number formatting is off', () => {
+      beforeEach(() => {
+        component = new InputComponent(null, null);
+        component.value = '1234.5673409';
+        component.formatNumber = false;
+        component.ngOnInit();
+        component.onBlur();
+        fixture.detectChanges();
+      });
+      it('Value is not formatted', () => {
+        expect(component.value).toEqual('1234.5673409');
+      });
+    })
   });
 });
 

@@ -82,14 +82,15 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   getErrorMessages() {
+    this.currentErrorMesage = this.checkErrorMessage();
     if (this.formControlName) {
-      this.currentErrorMesage = this.checkErrorMessage();
 
       this.control.valueChanges
         .subscribe(data => {
           this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errormessage, this.control, this.small);
         });
-    } else {
+    }
+    else {
       this.selectedErrorMessage = this.errormessage;
     }
   }
@@ -132,7 +133,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   onTouched() { }
 
-  onBlur(): void {
+  onBlur() {
     if (this.readonly) {
       return;
     }
@@ -185,7 +186,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   private convertNumberToString(value: number): string {
     if (!isNaN(this.value)) {
-      return this.swedishDecimalPipe.transform(this.value);
+      return this.swedishDecimalPipe.transform(this.value, `1.${this.nrOfDecimals}-${this.nrOfDecimals}`);
     }
     return null;
   }
