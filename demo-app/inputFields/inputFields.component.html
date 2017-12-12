@@ -27,7 +27,7 @@
             </div>
             <div>
               Belopp 2, obligatoriskt
-              <vgr-input formControlName="control2" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
+              <vgr-input formControlName="control2" [formatNumber]="true" [nrOfDecimals]="4" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
                 [isInvalid]="form.get('control2').invalid" [errormessage]="validationMessages.control2"></vgr-input>
               <span>Belopp 2: </span>
               <span>{{formatNumericValue(form.controls.control2.value)}}</span>
