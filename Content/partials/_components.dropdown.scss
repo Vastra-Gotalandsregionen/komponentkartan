@@ -6,7 +6,7 @@ $dropdown-width--small: 100px;
 $filter-area-height: 60px;
 .dropdown {
   .dropdown--readonly {
-    display: block;
+    display: inline-block;
     opacity: 0;
     max-height: 0;
     max-width: 0;
@@ -15,7 +15,7 @@ $filter-area-height: 60px;
   }
   .validation {
     height: 30px;
-    display: block;
+    display: inline-block;
     opacity: 1;
     max-height: 300px;
     transition: opacity 0.3s linear, max-height 0.3s linear;
@@ -25,7 +25,7 @@ $filter-area-height: 60px;
     .validation {
       opacity: 0;
       max-height: 0;
-      display: block;
+      display: inline-block;
       transition: opacity 0.3s linear, max-height 0.3s linear;
     }
     .dropdown--readonly {
@@ -160,7 +160,8 @@ $filter-area-height: 60px;
   padding-bottom: 0px;
   min-width: 330px;
   max-height: $dropdown-height--small;
-  visibility: hidden;
+  
+  display: none;
   cursor: default;
   &:before {
     @extend .bg-image-menu-arrow;
@@ -182,7 +183,8 @@ $filter-area-height: 60px;
     padding-right: $margin--regular;
   }
   .dropdown--open & {
-    visibility: visible;
+    
+    display: inline-block;
   }
   .dropdown-item--marked {
     a {
