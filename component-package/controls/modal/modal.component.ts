@@ -43,7 +43,6 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
     }
 
     ngAfterViewChecked() {
-        // Set focus on first/default button when opening modal
         if (!this.modalInitialized && this.isOpen && this.buttonComponents && this.buttonComponents.length > 0) {
             this.initFocusableElements();
             this.modalInitialized = true;
