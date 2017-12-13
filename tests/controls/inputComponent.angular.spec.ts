@@ -51,7 +51,7 @@ describe('[InputComponent]', () => {
   describe('When initialized with invalid state', () => {
     beforeEach(() => {
       component.isInvalid = true;
-      component.errormessage = 'error';
+      component.errorMessage = 'error';
       component.readonly = false;
       component.ngOnInit();
       component.onBlur();
@@ -101,8 +101,8 @@ describe('[InputComponent]', () => {
     beforeEach(() => {
       component = fixture.componentInstance;
       component.isInvalid = true;
-      component.validateoninit = true
-      component.errormessage = 'error';
+      component.validateOnInit = true
+      component.errorMessage = 'error';
       component.small = false;
       component.ngOnInit();
       fixture.detectChanges();

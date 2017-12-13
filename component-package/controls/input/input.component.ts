@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, Output, OnInit, Optional, SkipSelf, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, AfterViewChecked, Output, OnInit, Optional, SkipSelf, SimpleChanges, OnChanges } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
@@ -27,8 +27,8 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() suffix?: string;
   @Input() value?: any;
   @Input() maxlength?: number;
-  @Input() validateoninit?: boolean;
-  @Input() errormessage?: any;
+  @Input() validateOnInit?: boolean;
+  @Input() errorMessage?: any;
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
   @Input() @HostBinding('class.input--small') small: boolean;
@@ -40,10 +40,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @HostBinding('class.validated-input') hasClass = true;
   @HostBinding('class.validation-error--active') get errorClass() {
-    return (this.formControlName ? this.control.invalid : this.isInvalid) && !this.hasFocus && (this.touched || this.validateoninit);
+    return (this.formControlName ? this.control.invalid : this.isInvalid) && !this.hasFocus && (this.touched || this.validateOnInit);
   }
   @HostBinding('class.validation-error--editing') get editingClass() {
-    return this.invalidOnFocus && this.hasFocus && (this.touched || this.validateoninit);
+    return this.invalidOnFocus && this.hasFocus && (this.touched || this.validateOnInit);
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
     return this.invalidOnFocus && this.touched && !(this.formControlName ? this.control.invalid : this.isInvalid) && !this.hasFocus;
@@ -77,30 +77,35 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   ngOnInit() {
+    // console.log(`${this.formControlName} - errormessage`, this.errorMessage);
     this.getErrorMessages();
     this.setDisplayValue();
+  }
+
+  ngAfterViewChecked() {
+    this.getErrorMessages();
+    console.log(`${this.formControlName} - errormessage`, this.errorMessage);
   }
 
   getErrorMessages() {
     this.currentErrorMesage = this.checkErrorMessage();
     if (this.formControlName) {
-
       this.control.valueChanges
         .subscribe(data => {
-          this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errormessage, this.control, this.small);
+          this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
         });
     }
     else {
-      this.selectedErrorMessage = this.errormessage;
+      this.selectedErrorMessage = this.errorMessage;
     }
   }
 
   checkErrorMessage(): string {
-    if (typeof (this.errormessage) === 'object') {
-      return this.errorHandler.getErrorMessageReactiveForms(this.errormessage, this.control, this.small);
+    if (typeof (this.errorMessage) === 'object') {
+      return this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
     }
     else
-      return this.errormessage;
+      return this.errorMessage;
   }
 
   writeValue(value: any) {
@@ -162,7 +167,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
     this.displayValue = this.value;
 
-    this.invalidOnFocus = (this.formControlName ? this.control.invalid : this.isInvalid) && (this.touched || this.validateoninit);
+    this.invalidOnFocus = (this.formControlName ? this.control.invalid : this.isInvalid) && (this.touched || this.validateOnInit);
     this.hasFocus = true;
     this.focus.emit(event);
   }
