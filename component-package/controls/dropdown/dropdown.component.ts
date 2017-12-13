@@ -1,5 +1,6 @@
 import {
-    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef, OnInit
+    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef, OnInit,
+    SkipSelf, Optional, Host
 } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
@@ -8,7 +9,7 @@ import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 import { IValidationResult } from '../../models/validation.model';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 
 @Component({
     selector: 'vgr-dropdown',
@@ -23,7 +24,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
 })
 
 
-export class DropdownComponent extends DropdownBaseComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
+    @Input() formControlName?: string;
 
     get scrollLimit(): number {
         return this.filterVisible ? 7 : 8;
@@ -42,17 +44,18 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
     }
 
     selectedItem: IDropdownItem;
+    control: AbstractControl;
 
-    constructor(elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
+    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
         this.noItemSelectedLabel = '';
     };
 
-    ngOnInit() {
-        //this.selectedValue = obj;
-    }
 
     ngOnChanges() {
+        if (this.formControlName) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
         this.showAllItem = {
             displayName: this.showAllItemText
         } as IDropdownItem;
@@ -82,11 +85,15 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
     onTouched() { }
 
     doValidate(): IValidationResult {
-        const isValid = !this.required || this.selectedItem;
+        const isValid = (!this.required || this.selectedItem) && !this.controlHasErrors();
         return {
             isValid: isValid,
             validationError: isValid ? '' : 'Obligatoriskt'
         } as IValidationResult;
+    }
+
+    controlHasErrors() {
+        return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }
 
     showAllItems() {
@@ -102,7 +109,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnInit, 
         if (!item) {
             return;
         }
-
 
         this.items.forEach(x => x.selected = false);
         item.selected = true;

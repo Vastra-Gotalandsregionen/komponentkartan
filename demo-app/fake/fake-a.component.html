@@ -26,9 +26,9 @@
     <h2>Reactive forms</h2>
     <div class="row-layout">
       <form [formGroup]="form">
-        <vgr-dropdown formControlName="foo" [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown>
+        <vgr-dropdown formControlName="foo" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown>
       </form>
-      {{ form.controls.foo.value }}
+      {{ form.controls.foo.value }}, {{ form.controls.foo.valid }}
     </div>
   </div>
 </vgr-page-block>
