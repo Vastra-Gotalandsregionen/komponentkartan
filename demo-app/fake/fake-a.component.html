@@ -12,11 +12,12 @@
   <div class="column-layout">
     <h2>Bugg: Fel storlek valideringsrutan för dropdown/dropdownmulti, och calendar</h2>
     <div class="row-layout">
-      <vgr-dropdown-multiselect [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown-multiselect>
-      <vgr-dropdown [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown>
-      <vgr-dropdown [values]="['Foo','Bar','Monkey','Wrench']" [selectedValue]="'Monkey'" required="true"></vgr-dropdown>
-      <vgr-monthpicker [minDate]="minDate" [maxDate]="maxDate" required="true"></vgr-monthpicker>
-      <vgr-datepicker [minDate]="minDate" [maxDate]="maxDate" required="true"></vgr-datepicker>
+      <vgr-dropdown-multiselect [readonly]="readonly" [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown-multiselect>
+      <vgr-dropdown [readonly]="readonly" [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown>
+      <vgr-dropdown-multiselect [readonly]="readonly" [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown-multiselect>
+      <vgr-monthpicker [readonly]="readonly" [minDate]="minDate" [maxDate]="maxDate" required="true"></vgr-monthpicker>
+      <vgr-datepicker [readonly]="readonly" [minDate]="minDate" [maxDate]="maxDate" required="true"></vgr-datepicker>
+      <vgr-button (click)="readonly=!readonly">Toggle readonly</vgr-button>
     </div>
   </div>
 </vgr-page-block>
@@ -24,13 +25,13 @@
 <vgr-page-block>
   <div class="column-layout">
     <h2>Reactive forms</h2>
-    <div class="row-layout">
-      <form [formGroup]="form">
+    <form [formGroup]="form">
+      <div class="row-layout">
         <vgr-dropdown formControlName="control1" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown>
         <vgr-dropdown-multiselect formControlName="control2" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown-multiselect>
-      </form>
-      Control 1: {{ form.controls.control1.value }}, {{ form.controls.control1.valid }} Control 2: {{ form.controls.control2.value
-      }}, {{ form.controls.control2.valid }}
-    </div>
+        Control 1: {{ form.controls.control1.value }}, {{ form.controls.control1.valid }} Control 2: {{ form.controls.control2.value}},
+        {{ form.controls.control2.valid }}
+      </div>
+    </form>
   </div>
 </vgr-page-block>

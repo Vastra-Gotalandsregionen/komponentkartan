@@ -38,10 +38,10 @@
     <div class="validation__status__icon"></div>
     <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
   </div>
-</div>
 
-<div class="dropdown--readonly dropdown__multiselect-readonlylist">
-  <ul>
-    <li *ngFor="let selectedItem of selectedItems">{{selectedItem | dropdownItemToSelectedText}}</li>
-  </ul>
+  <div class="dropdown--readonly dropdown__multiselect-readonlylist">
+    <ul>
+      <li *ngFor="let selectedItem of selectedItems">{{selectedItem | dropdownItemToSelectedText}}</li>
+    </ul>
+  </div>
 </div>

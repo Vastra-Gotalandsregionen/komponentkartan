@@ -382,6 +382,13 @@ vgr-list-column-trashcan {
   }
 }
 
+@media screen and (max-width: $desktop-width--small - 1) {
+  .list__header {
+    position: absolute;
+    top: 0px;
+  }
+}
+
 vgr-list-column-checkbox {
   height: 100%;
   .checkbox--inline {

@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class FakeAComponent implements OnInit {
     form: FormGroup;
 
-    readonly = true;
+    readonly = false;
     options123_1 = [{ displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
     { displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
     { displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian' }] as IDropdownItem[];

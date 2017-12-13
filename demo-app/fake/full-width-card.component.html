@@ -23,20 +23,21 @@
           <vgr-title-value [title]=" 'Enhetskod*' " [slim]="readonly">
             <span>12345</span>
           </vgr-title-value>
-          <vgr-title-value [title]=" 'Nämnd*' " [slim]="readonly">
-            <vgr-dropdown [items]="['foo','bar']" [readonly]="readonly" [required]="true"></vgr-dropdown>
+          <vgr-title-value [title]=" 'Nämnd (single)*' " [slim]="readonly">
+            <vgr-dropdown [values]="['The One with Chandlers Work Laugh','The One with the Girl Who Hits Joey']" [readonly]="readonly"
+              [required]="true"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value [title]=" 'Avtalsperiod*' " [slim]="readonly">
-            <div class="row-layout row-layout--tight row-layout--component">
-              <vgr-monthpicker [readonly]="readonly"></vgr-monthpicker>
-              <vgr-monthpicker [readonly]="readonly"></vgr-monthpicker>
+            <div class="row-layout row-layout--tight">
+              <vgr-monthpicker [readonly]="readonly" required="true"></vgr-monthpicker>
+              <vgr-datepicker [readonly]="readonly" required="true"></vgr-datepicker>
             </div>
           </vgr-title-value>
           <vgr-title-value [title]=" 'HSA-id'" [slim]="readonly">
             <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
           </vgr-title-value>
-          <vgr-title-value [title]=" 'Nämnd*' " [slim]="readonly">
-            <vgr-dropdown-multiselect [items]="['foo','bar']" [readonly]="readonly" [required]="true"></vgr-dropdown-multiselect>
+          <vgr-title-value [title]=" 'Nämnd (multi)*' " [slim]="readonly">
+            <vgr-dropdown-multiselect [values]="['The One with Chandlers Work Laugh','The One with the Girl Who Hits Joey']" [readonly]="readonly" [required]="true"></vgr-dropdown-multiselect>
           </vgr-title-value>
           <vgr-title-value [title]=" 'Identifiering'" [slim]="readonly">
             <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
