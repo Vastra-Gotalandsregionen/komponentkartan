@@ -37,3 +37,11 @@
     padding-right: $margin--fat;
   }
 }
+
+@media screen and (max-width: $desktop-width--small - 1) {
+  .page-header {
+    position: absolute;
+    top: 0px;
+    z-index: $layer-one;
+  }
+}
