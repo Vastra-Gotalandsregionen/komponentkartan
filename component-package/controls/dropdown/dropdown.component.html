@@ -1,8 +1,8 @@
 <div class="validation">
   <div class="dropdown--edit" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible, 'dropdown--scroll-visible' : scrollVisible}"
     (mousedown)="onDropdownMouseDown($event)" (focusout)="onLeave()" (focusin)="onEnter()" tabindex="{{disabled ? -1 : 0}}">
-    <span class="noselect" tabIndex="0" *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{ selectedItem | dropdownItemToSelectedText | truncate:14 }}</span>
-    <span class="noselect" tabIndex="0" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{readonly ? '' : (noItemSelectedLabel | truncate:14) }}</span>
+    <span class="noselect" tabIndex="0" *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{ selectedItem | dropdownItemToSelectedText}}</span>
+    <span class="noselect" tabIndex="0" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{readonly ? '' : noItemSelectedLabel }}</span>
     <div class="dropdown__menu">
       <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
 

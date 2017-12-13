@@ -44,7 +44,8 @@ $filter-area-height: 60px;
     padding-top: 2px;
     vertical-align: middle;
     background-color: white;
-    width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
+    max-width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
+    min-width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
     display: inline-block;
     height: $component-height;
     position: absolute;
@@ -54,6 +55,9 @@ $filter-area-height: 60px;
     border-bottom: $border--single solid $control-border-color--default;
     border-radius: 1px;
     transition: background-color 0.6s linear, border-color 0.6s linear;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     .disabled & {
       background-color: $background-color--default;
       border-color: $control-color--disabled;
@@ -64,10 +68,13 @@ $filter-area-height: 60px;
       border-color: $background-color--content;
       outline: none;
       cursor: text;
+      max-width: 600px;
+      transition: max-width 0.3s linear;
     }
   } //Ikon, uppåt- eller nedåtpil
   &:after {
     @extend .bg-image-icon-chevron-inverted;
+    display: block;
     content: "";
     vertical-align: middle;
     text-align: center;
@@ -80,6 +87,9 @@ $filter-area-height: 60px;
     padding-right: 3px;
     &:not(.disabled):not(.readonly) {
       cursor: pointer;
+    }
+    .readonly & {
+      display: none;
     }
   }
   &.dropdown--small {
@@ -279,7 +289,8 @@ $filter-area-height: 60px;
   .dropdown--edit {
     width: $dropdown-width--medium + $margin--slim;
     span {
-      width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
+      max-width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
+      min-width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
     }
   }
   .dropdown__menu {
