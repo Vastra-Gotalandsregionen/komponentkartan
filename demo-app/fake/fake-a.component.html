@@ -14,9 +14,21 @@
     <div class="row-layout">
       <vgr-dropdown-multiselect [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown-multiselect>
       <vgr-dropdown [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown>
-      <vgr-dropdown [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown>
+      <vgr-dropdown [values]="['Foo','Bar','Monkey','Wrench']" [selectedValue]="'Monkey'" required="true"></vgr-dropdown>
       <vgr-monthpicker [minDate]="minDate" [maxDate]="maxDate" required="true"></vgr-monthpicker>
       <vgr-datepicker [minDate]="minDate" [maxDate]="maxDate" required="true"></vgr-datepicker>
+    </div>
+  </div>
+</vgr-page-block>
+
+<vgr-page-block>
+  <div class="column-layout">
+    <h2>Reactive forms</h2>
+    <div class="row-layout">
+      <form [formGroup]="form">
+        <vgr-dropdown formControlName="foo" [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown>
+      </form>
+      {{ form.controls.foo.value }}
     </div>
   </div>
 </vgr-page-block>

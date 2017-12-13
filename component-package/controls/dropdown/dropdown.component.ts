@@ -1,5 +1,5 @@
 import {
-    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef
+    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef, OnInit
 } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
@@ -8,7 +8,6 @@ import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 import { IValidationResult } from '../../models/validation.model';
-import { ValidationComponent } from '../validation/validation.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 
 @Component({
@@ -16,19 +15,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
     moduleId: module.id,
     templateUrl: './dropdown.component.html',
     styleUrls: ['../dropdown-base/dropdown.scrollbar.css'],
-    providers: [
-        {
-            provide: ValidationComponent, useExisting: forwardRef(() => DropdownComponent)
-        },
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => DropdownComponent),
-            multi: true
-        }]
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => DropdownComponent),
+        multi: true
+    }]
 })
 
 
-export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
+export class DropdownComponent extends DropdownBaseComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     get scrollLimit(): number {
         return this.filterVisible ? 7 : 8;
@@ -37,6 +32,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
 
     @Input() set selectedValue(value: string) {
+        console.log('selected value ', value);
         if (this.items) {
             const matchingItems = this.items.filter(x => x.id === value);
             if (matchingItems.length > 0) {
@@ -52,6 +48,9 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.noItemSelectedLabel = '';
     };
 
+    ngOnInit() {
+        //this.selectedValue = obj;
+    }
 
     ngOnChanges() {
         this.showAllItem = {
@@ -63,7 +62,9 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     writeValue(obj: any): void {
-        throw new Error("Method not implemented.");
+        console.log('write value ', obj);
+        this.selectedValue = obj;
+
     }
 
     registerOnChange(func: any): void {
@@ -75,7 +76,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     onChange(input: any) {
-        this.selectedValue = input;
+        console.log('on change ', input);
     }
 
     onTouched() { }
@@ -112,7 +113,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedItem = item;
         this.changeDetectorRef.detectChanges();
-
+        this.onChange(item.displayName);
         this.validate();
     }
 
