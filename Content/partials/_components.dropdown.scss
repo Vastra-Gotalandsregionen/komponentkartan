@@ -6,7 +6,7 @@ $dropdown-width--small: 100px;
 $filter-area-height: 60px;
 .dropdown {
   .dropdown--readonly {
-    display: inline-block;
+    display: block;
     opacity: 0;
     max-height: 0;
     max-width: 0;
@@ -14,38 +14,7 @@ $filter-area-height: 60px;
     transition-delay: 0s;
   }
   .validation {
-    height: 30px;
-    display: inline-block;
-    opacity: 1;
-    max-height: 300px;
-    transition: opacity 0.3s linear, max-height 0.3s linear;
-    transition-delay: 0.3s;
-  }
-  &.readonly {
-    .validation {
-      opacity: 0;
-      max-height: 0;
-      display: inline-block;
-      transition: opacity 0.3s linear, max-height 0.3s linear;
-    }
-    .dropdown--readonly {
-      opacity: 1;
-      max-height: 300px;
-      max-width: $max-text-width--small;
-      transition: opacity 0.3s linear, max-height 0.3s linear, max-width 0.6s;
-      transition-delay: 0.3s, 0.3s, 0s;
-      padding-top: $border--single + 2px;
-    }
-  }
-  &.validation-error--active {
-    .validation {
-      height: auto;
-    }
-  }
-  &.validation-error--editing {
-    .validation {
-      height: auto;
-    }
+    max-width: $dropdown-width--medium + $margin--slim + $margin--slim;
   }
 }
 
@@ -160,7 +129,6 @@ $filter-area-height: 60px;
   padding-bottom: 0px;
   min-width: 330px;
   max-height: $dropdown-height--small;
-  
   display: none;
   cursor: default;
   &:before {
@@ -183,7 +151,6 @@ $filter-area-height: 60px;
     padding-right: $margin--regular;
   }
   .dropdown--open & {
-    
     display: inline-block;
   }
   .dropdown-item--marked {
@@ -304,6 +271,11 @@ $filter-area-height: 60px;
 }
 
 @media screen and (min-width: $desktop-width--medium) {
+  .dropdown {
+    .validation {
+      max-width: $dropdown-width--medium + $margin--regular + $margin--regular;
+    }
+  }
   .dropdown--edit {
     width: $dropdown-width--medium + $margin--slim;
     span {
