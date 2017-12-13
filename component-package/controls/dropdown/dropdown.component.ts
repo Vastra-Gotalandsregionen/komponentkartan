@@ -9,16 +9,27 @@ import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 import { IValidationResult } from '../../models/validation.model';
 import { ValidationComponent } from '../validation/validation.component';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 
 @Component({
     selector: 'vgr-dropdown',
     moduleId: module.id,
     templateUrl: './dropdown.component.html',
     styleUrls: ['../dropdown-base/dropdown.scrollbar.css'],
-    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownComponent) }]
+    providers: [
+        {
+            provide: ValidationComponent, useExisting: forwardRef(() => DropdownComponent)
+        },
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DropdownComponent),
+            multi: true
+        }]
 })
 
-export class DropdownComponent extends DropdownBaseComponent implements OnChanges {
+
+export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
+
     get scrollLimit(): number {
         return this.filterVisible ? 7 : 8;
     }
@@ -41,6 +52,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.noItemSelectedLabel = '';
     };
 
+
     ngOnChanges() {
         this.showAllItem = {
             displayName: this.showAllItemText
@@ -49,6 +61,24 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
     }
+
+    writeValue(obj: any): void {
+        throw new Error("Method not implemented.");
+    }
+
+    registerOnChange(func: any): void {
+        this.onChange = func;
+    }
+
+    registerOnTouched(func: any): void {
+        this.onTouched = func;
+    }
+
+    onChange(input: any) {
+        this.selectedValue = input;
+    }
+
+    onTouched() { }
 
     doValidate(): IValidationResult {
         const isValid = !this.required || this.selectedItem;
