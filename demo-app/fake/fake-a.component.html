@@ -26,9 +26,11 @@
     <h2>Reactive forms</h2>
     <div class="row-layout">
       <form [formGroup]="form">
-        <vgr-dropdown formControlName="foo" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown>
+        <vgr-dropdown formControlName="control1" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown>
+        <vgr-dropdown-multiselect formControlName="control2" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown-multiselect>
       </form>
-      {{ form.controls.foo.value }}, {{ form.controls.foo.valid }}
+      Control 1: {{ form.controls.control1.value }}, {{ form.controls.control1.valid }} Control 2: {{ form.controls.control2.value
+      }}, {{ form.controls.control2.valid }}
     </div>
   </div>
 </vgr-page-block>

@@ -9,7 +9,7 @@ import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 import { IValidationResult } from '../../models/validation.model';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 
 @Component({
     selector: 'vgr-dropdown',
@@ -25,8 +25,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
 
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
-    @Input() formControlName?: string;
-
     get scrollLimit(): number {
         return this.filterVisible ? 7 : 8;
     }
@@ -34,7 +32,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
 
     @Input() set selectedValue(value: string) {
-        console.log('selected value ', value);
         if (this.items) {
             const matchingItems = this.items.filter(x => x.id === value);
             if (matchingItems.length > 0) {
@@ -44,7 +41,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     selectedItem: IDropdownItem;
-    control: AbstractControl;
 
     constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
@@ -64,10 +60,8 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.updateScrolled();
     }
 
-    writeValue(obj: any): void {
-        console.log('write value ', obj);
-        this.selectedValue = obj;
-
+    writeValue(value: any): void {
+        this.selectedValue = value;
     }
 
     registerOnChange(func: any): void {
@@ -79,7 +73,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     onChange(input: any) {
-        console.log('on change ', input);
     }
 
     onTouched() { }
@@ -97,13 +90,10 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     showAllItems() {
-
         this.preventCollapse = true;
         this.filter = '';
         this.filterTextboxComponent.clear();
-
     }
-
 
     selectItem(item: IDropdownItem) {
         if (!item) {
