@@ -4,9 +4,14 @@ $dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 130px;
 $dropdown-width--medium--extended: 140px;
 $dropdown-width--small: 100px;
-
 vgr-datepicker.readonly {
   max-height: $component-height;
+}
+
+vgr-datepicker {
+  .validation {
+    max-width: $dropdown-width--medium + $margin--slim + $margin--slim;
+  }
 }
 
 .datepicker {
@@ -236,6 +241,11 @@ div.datepicker__calendar__day--today:not(.datepicker__calendar__day--selected) {
 }
 
 @media screen and (min-width: $desktop-width--medium) {
+  vgr-datepicker {
+    .validation {
+      max-width: $dropdown-width--medium + $margin--regular + $margin--regular;
+    }
+  }
   .datepicker__dropdown {
     width: $dropdown-width--medium--extended;
     .datepicker__calendar__selector {

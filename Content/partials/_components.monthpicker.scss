@@ -9,6 +9,12 @@ vgr-monthpicker.readonly {
   height: $component-height;
 }
 
+vgr-monthpicker {
+  .validation {
+    max-width: $dropdown-width--medium + $margin--slim + $margin--slim;
+  }
+}
+
 .monthpicker {
   height: $component-height;
 }
@@ -266,6 +272,11 @@ vgr-monthpicker.readonly {
 }
 
 @media screen and (min-width: $desktop-width--medium) {
+  vgr-monthpicker {
+    .validation {
+      max-width: $dropdown-width--medium + $margin--regular + $margin--regular;
+    }
+  }
   .monthpicker__dropdown {
     width: $dropdown-width--medium--extended;
     span {
