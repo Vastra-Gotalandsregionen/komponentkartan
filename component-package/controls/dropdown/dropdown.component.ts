@@ -21,12 +21,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => DropdownComponent),
         multi: true
-    },
-    {
+    }, {
         provide: ValidationComponent,
         useExisting: forwardRef(() => DropdownComponent)
-    }
-    ]
+    }]
 })
 
 
