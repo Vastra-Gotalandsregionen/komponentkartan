@@ -21,3 +21,15 @@
     </div>
   </div>
 </vgr-page-block>
+
+<vgr-page-block>
+  <div class="column-layout">
+    <h2>Reactive forms</h2>
+    <form [formGroup]="form">
+      <div class="row-layout">
+        <vgr-dropdown formControlName="control1" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown>
+        <vgr-dropdown-multiselect formControlName="control2" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown-multiselect>
+      </div>
+    </form>
+  </div>
+</vgr-page-block>
