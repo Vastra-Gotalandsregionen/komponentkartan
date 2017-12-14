@@ -24,7 +24,7 @@
             <span>12345</span>
           </vgr-title-value>
           <vgr-title-value [title]=" 'Nämnd (single)*' " [slim]="readonly">
-            <vgr-dropdown [values]="['The One with Chandlers Work Laugh','The One with the Girl Who Hits Joey']" [readonly]="readonly"
+            <vgr-dropdown [values]="['The One with Chandlers Work Laugh and other stuff','The One with the Girl Who Hits Joey']" [readonly]="readonly"
               [required]="true"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value [title]=" 'Avtalsperiod*' " [slim]="readonly">
@@ -37,7 +37,8 @@
             <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
           </vgr-title-value>
           <vgr-title-value [title]=" 'Nämnd (multi)*' " [slim]="readonly">
-            <vgr-dropdown-multiselect [values]="['The One with Chandlers Work Laugh','The One with the Girl Who Hits Joey']" [readonly]="readonly" [required]="true"></vgr-dropdown-multiselect>
+            <vgr-dropdown-multiselect [values]="['The One with Chandlers Work Laugh and other stuff','The One with the Girl Who Hits Joey']"
+              [readonly]="readonly" [required]="true"></vgr-dropdown-multiselect>
           </vgr-title-value>
           <vgr-title-value [title]=" 'Identifiering'" [slim]="readonly">
             <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
@@ -104,6 +105,8 @@
           </vgr-title-value>
         </div>
       </vgr-card-section>
+    </vgr-card-column>
+    <vgr-card-column>
     </vgr-card-column>
   </vgr-card>
 </vgr-page-block>

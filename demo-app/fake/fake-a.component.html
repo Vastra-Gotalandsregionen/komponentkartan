@@ -13,8 +13,10 @@
     <h2>Bugg: Fel storlek valideringsrutan för dropdown/dropdownmulti, och calendar</h2>
     <div class="row-layout">
       <vgr-dropdown-multiselect [readonly]="readonly" [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown-multiselect>
-      <vgr-dropdown [readonly]="readonly" [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown>
-      <vgr-dropdown-multiselect [readonly]="readonly" [values]="['Foo','Bar','Monkey','Wrench']" required="true"></vgr-dropdown-multiselect>
+      <vgr-dropdown [readonly]="readonly" [values]="['Ballad of the Beaconsfield Miners','The Colour and the Shape','Monkey Wrench','The Feast and the Famine']"
+        [selectedValue]="'Ballad of the Beaconsfield Miners'" required="true"></vgr-dropdown>
+      <vgr-dropdown-multiselect [readonly]="!readonly" [values]="['Ballad of the Beaconsfield Miners','The Colour and the Shape','Monkey Wrench','The Feast and the Famine']"
+        [selectedValues]="['Ballad of the Beaconsfield Miners','The Colour and the Shape','Monkey Wrench']" required="true"></vgr-dropdown-multiselect>
       <vgr-monthpicker [readonly]="readonly" [minDate]="minDate" [maxDate]="maxDate" required="true"></vgr-monthpicker>
       <vgr-datepicker [readonly]="readonly" [minDate]="minDate" [maxDate]="maxDate" required="true"></vgr-datepicker>
       <vgr-button (click)="readonly=!readonly">Toggle readonly</vgr-button>

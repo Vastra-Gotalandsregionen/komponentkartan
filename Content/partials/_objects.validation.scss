@@ -33,8 +33,9 @@
   }
   .readonly & {
     background-color: inherit;
-    max-height: 0;
     transition: max-height 0.3s linear;
+    max-width: none !important;
+    height: auto;
   }
 }
 
