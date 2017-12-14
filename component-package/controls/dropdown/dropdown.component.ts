@@ -9,6 +9,7 @@ import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 import { IValidationResult } from '../../models/validation.model';
+import { ValidationComponent } from '../../controls/validation/validation.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 
 @Component({
@@ -20,7 +21,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => DropdownComponent),
         multi: true
-    }]
+    },
+    {
+        provide: ValidationComponent,
+        useExisting: forwardRef(() => DropdownComponent)
+    }
+    ]
 })
 
 

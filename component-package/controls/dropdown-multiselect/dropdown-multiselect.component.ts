@@ -19,6 +19,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => DropdownMultiselectComponent),
         multi: true
+    },
+    {
+        provide: ValidationComponent,
+        useExisting: forwardRef(() => DropdownMultiselectComponent)
     }]
 })
 
