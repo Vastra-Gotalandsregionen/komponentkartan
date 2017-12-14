@@ -33,8 +33,9 @@
   }
   .readonly & {
     background-color: inherit;
-    max-height: 0;
-    transition: max-height 0.3s linear;
+    transition: max-height 0.3s linear; //UPPDATERING
+    max-width: none !important;
+    height: auto; //UPPDATERING
   }
 }
 

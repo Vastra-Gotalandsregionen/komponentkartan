@@ -24,8 +24,9 @@ $filter-area-height: 60px;
 
 .dropdown--edit {
   @extend .background-color--primary;
-  position: relative;
-  display: inline-block;
+  position: relative; //UPPDATERING
+  //  display: inline-block;
+  display: block; //UPPDATERING
   height: $component-height;
   width: $dropdown-width--medium;
   padding: 0px;
@@ -37,7 +38,9 @@ $filter-area-height: 60px;
   }
   .readonly & {
     background-color: $background-color--content;
-    cursor: default;
+    cursor: default; // UPPDATERING
+    width: auto;
+    height: auto; // UPPDATERING
   }
   >span {
     padding-left: $margin--slim;
@@ -46,9 +49,9 @@ $filter-area-height: 60px;
     background-color: white;
     max-width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
     min-width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
-    display: inline-block;
-    height: $component-height;
-    position: absolute;
+    display: block;
+    position: relative;
+    height: $component-height; //position: absolute;
     cursor: pointer;
     border-top: $border--single solid $control-border-color--default;
     border-left: $border--single solid $control-border-color--default;
@@ -68,8 +71,13 @@ $filter-area-height: 60px;
       border-color: $background-color--content;
       outline: none;
       cursor: text;
-      max-width: 600px;
-      transition: max-width 0.3s linear;
+      transition: max-width 0.3s linear; //UPPDATERING
+      word-wrap: break-word;
+      overflow: visible;
+      white-space: normal;
+      height: auto;
+      display: block;
+      max-width: none; //UPPDATERING
     }
   } //Ikon, uppåt- eller nedåtpil
   &:after {
@@ -83,8 +91,11 @@ $filter-area-height: 60px;
     cursor: pointer;
     transform: rotate(0deg);
     transition: all ease 0.3s;
-    margin-top: 0px;
-    padding-right: 3px;
+    padding-right: 3px; // UPPDAtERING
+    position: absolute;
+    top: 0px;
+    right: 0px; // margin-top: 0px;
+    // UPPDAtERING
     &:not(.disabled):not(.readonly) {
       cursor: pointer;
     }
@@ -98,8 +109,9 @@ $filter-area-height: 60px;
   &.dropdown--open {
     &:after {
       transform: rotate(180deg);
-      transition: all 0.3s ease;
-      margin-top: 2px;
+      transition: all 0.3s ease; // UPPDAtERING
+      // margin-top: 2px;
+      // UPPDAtERING
       padding-left: 6px;
     }
   }

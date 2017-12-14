@@ -4,24 +4,24 @@ $dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 130px;
 $dropdown-width--medium--extended: 140px;
 $dropdown-width--small: 100px;
-
-vgr-datepicker{
-  &.validation-error--active {
-    .validation {
-      height: auto;
-    }
-  }
-  &.validation-error--editing {
-    .validation {
-      height: auto;
-    }
-  }
-}
-
+// vgr-datepicker{
+//   &.validation-error--active {
+//     .validation {
+//       height: auto;
+//     }
+//   }
+//   &.validation-error--editing {
+//     .validation {
+//       height: auto;
+//     }
+//   }
+// }
 vgr-datepicker.readonly {
   max-height: $component-height;
- 
- 
+}
+
+.datepicker {
+  height: $component-height;
 }
 
 .datepicker__dropdown {
@@ -41,7 +41,6 @@ vgr-datepicker.readonly {
     background-color: $background-color--content;
     cursor: default;
   }
-
   .datepicker__calendar__selector {
     padding-left: $margin--slim;
     padding-top: 2px;
@@ -107,7 +106,6 @@ vgr-datepicker.readonly {
   &:focus {
     outline: 0;
   }
-
 }
 
 .datepicker__calendar {
@@ -161,7 +159,6 @@ vgr-datepicker.readonly {
   font-size: 23px;
   font-family: Consolas;
   margin-top: 14px;
-
   &:hover:not(.disabled) {
     @extend .background-color--secondary;
     font-weight: bold;
@@ -171,22 +168,18 @@ vgr-datepicker.readonly {
     color: $control-color--disabled;
     cursor: default;
   }
-
   &:after {
     width: 28px;
     height: 28px;
     display: inline-block;
     position: absolute;
   }
-
 }
 
 .datepicker__calendar__header__previous-year {
-    @extend .datepicker__calendar__header__navigation;
-    margin-right: auto;
-    margin-left: 10px;
-
-    
+  @extend .datepicker__calendar__header__navigation;
+  margin-right: auto;
+  margin-left: 10px;
   &:after {
     content: "<";
     top: 10px;
@@ -195,11 +188,10 @@ vgr-datepicker.readonly {
 }
 
 .datepicker__calendar__header__next-year {
-    @extend .datepicker__calendar__header__navigation;  
-    margin-right: 10px;
-    margin-left: auto;
-
-    &:after {
+  @extend .datepicker__calendar__header__navigation;
+  margin-right: 10px;
+  margin-left: auto;
+  &:after {
     content: ">";
     top: 10px;
     left: 213px;
