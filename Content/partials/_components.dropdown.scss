@@ -6,7 +6,7 @@ $dropdown-width--small: 100px;
 $filter-area-height: 60px;
 .dropdown {
   .dropdown--readonly {
-    display: inline-block;
+    display: block;
     opacity: 0;
     max-height: 0;
     max-width: 0;
@@ -14,38 +14,7 @@ $filter-area-height: 60px;
     transition-delay: 0s;
   }
   .validation {
-    height: 30px;
-    display: inline-block;
-    opacity: 1;
-    max-height: 300px;
-    transition: opacity 0.3s linear, max-height 0.3s linear;
-    transition-delay: 0.3s;
-  }
-  &.readonly {
-    .validation {
-      opacity: 0;
-      max-height: 0;
-      display: inline-block;
-      transition: opacity 0.3s linear, max-height 0.3s linear;
-    }
-    .dropdown--readonly {
-      opacity: 1;
-      max-height: 300px;
-      max-width: $max-text-width--small;
-      transition: opacity 0.3s linear, max-height 0.3s linear, max-width 0.6s;
-      transition-delay: 0.3s, 0.3s, 0s;
-      padding-top: $border--single + 2px;
-    }
-  }
-  &.validation-error--active {
-    .validation {
-      height: auto;
-    }
-  }
-  &.validation-error--editing {
-    .validation {
-      height: auto;
-    }
+    max-width: $dropdown-width--medium + $margin--slim + $margin--slim;
   }
 }
 
@@ -56,7 +25,7 @@ $filter-area-height: 60px;
 .dropdown--edit {
   @extend .background-color--primary;
   position: relative;
-  display: inline-block;
+  display: block;
   height: $component-height;
   width: $dropdown-width--medium;
   padding: 0px;
@@ -69,22 +38,28 @@ $filter-area-height: 60px;
   .readonly & {
     background-color: $background-color--content;
     cursor: default;
+    width: auto;
+    height: auto;
   }
   >span {
     padding-left: $margin--slim;
     padding-top: 2px;
     vertical-align: middle;
     background-color: white;
-    width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
-    display: inline-block;
-    height: $component-height;
-    position: absolute;
+    max-width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
+    min-width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
+    display: block;
+    position: relative;
+    height: $component-height; //position: absolute;
     cursor: pointer;
     border-top: $border--single solid $control-border-color--default;
     border-left: $border--single solid $control-border-color--default;
     border-bottom: $border--single solid $control-border-color--default;
     border-radius: 1px;
     transition: background-color 0.6s linear, border-color 0.6s linear;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     .disabled & {
       background-color: $background-color--default;
       border-color: $control-color--disabled;
@@ -95,10 +70,18 @@ $filter-area-height: 60px;
       border-color: $background-color--content;
       outline: none;
       cursor: text;
+      transition: max-width 0.3s linear;
+      word-wrap: break-word;
+      overflow: visible;
+      white-space: normal;
+      height: auto;
+      display: block;
+      max-width: none;
     }
   } //Ikon, uppåt- eller nedåtpil
   &:after {
     @extend .bg-image-icon-chevron-inverted;
+    display: block;
     content: "";
     vertical-align: middle;
     text-align: center;
@@ -107,10 +90,16 @@ $filter-area-height: 60px;
     cursor: pointer;
     transform: rotate(0deg);
     transition: all ease 0.3s;
-    margin-top: 0px;
-    padding-right: 3px;
+    padding-right: 3px; // UPPDAtERING
+    position: absolute;
+    top: 0px;
+    right: 0px; // margin-top: 0px;
+    // UPPDAtERING
     &:not(.disabled):not(.readonly) {
       cursor: pointer;
+    }
+    .readonly & {
+      display: none;
     }
   }
   &.dropdown--small {
@@ -119,8 +108,9 @@ $filter-area-height: 60px;
   &.dropdown--open {
     &:after {
       transform: rotate(180deg);
-      transition: all 0.3s ease;
-      margin-top: 2px;
+      transition: all 0.3s ease; // UPPDAtERING
+      // margin-top: 2px;
+      // UPPDAtERING
       padding-left: 6px;
     }
   }
@@ -160,7 +150,6 @@ $filter-area-height: 60px;
   padding-bottom: 0px;
   min-width: 330px;
   max-height: $dropdown-height--small;
-  
   display: none;
   cursor: default;
   &:before {
@@ -183,7 +172,6 @@ $filter-area-height: 60px;
     padding-right: $margin--regular;
   }
   .dropdown--open & {
-    
     display: inline-block;
   }
   .dropdown-item--marked {
@@ -304,10 +292,16 @@ $filter-area-height: 60px;
 }
 
 @media screen and (min-width: $desktop-width--medium) {
+  .dropdown {
+    .validation {
+      max-width: $dropdown-width--medium + $margin--regular + $margin--regular;
+    }
+  }
   .dropdown--edit {
     width: $dropdown-width--medium + $margin--slim;
     span {
-      width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
+      max-width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
+      min-width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
     }
   }
   .dropdown__menu {

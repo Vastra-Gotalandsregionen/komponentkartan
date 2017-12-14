@@ -1,12 +1,18 @@
-import { Component, Input, EventEmitter, Output, AfterViewInit, OnChanges, HostBinding } from '@angular/core';
+import { Component, Input, EventEmitter, Output, AfterViewInit, OnChanges, HostBinding, forwardRef } from '@angular/core';
 import { ISelectableItem } from '../../models/selectableItem.model';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'vgr-radio-group',
     moduleId: module.id,
-    templateUrl: './radioGroup.component.html'
+    templateUrl: './radioGroup.component.html',
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => RadioGroupComponent),
+        multi: true
+    }]
 })
-export class RadioGroupComponent implements OnChanges {
+export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
     @Input() @HostBinding('class.disabled') disabled: boolean;
@@ -14,9 +20,7 @@ export class RadioGroupComponent implements OnChanges {
     @Input() noSelection: boolean;
     @Output() selectedChanged: EventEmitter<ISelectableItem> = new EventEmitter<ISelectableItem>();
 
-    constructor() {
-
-    }
+    constructor() { }
 
     ngOnChanges() {
         if (!this.noSelection && this.options && this.options.length > 0) {
@@ -45,6 +49,25 @@ export class RadioGroupComponent implements OnChanges {
         }
     }
 
+    writeValue(optionValue: any): void {
+        this.options.forEach(o => {
+            o.selected = o.displayName === optionValue;
+        });
+    }
+
+    registerOnChange(func: any): void {
+        this.onChange = func;
+    }
+
+    registerOnTouched(func: any): void {
+        this.onTouched = func;
+    }
+
+    onChange(input: any) {
+    }
+
+    onTouched() { }
+
     private selectOption(option: ISelectableItem) {
         option.selected = true;
         this.options.filter(x => x !== option).forEach(o => {
@@ -52,5 +75,6 @@ export class RadioGroupComponent implements OnChanges {
         });
 
         this.selectedChanged.emit(option);
+        this.onChange(option.displayName);
     }
 }
