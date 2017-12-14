@@ -40,7 +40,9 @@ export class FakeAComponent implements OnInit {
     createForm() {
         this.form = this.fb.group({
             control1: ['', Validators.required],
-            control2: [null, Validators.required]
+            control2: [null, Validators.required],
+            control3: [true],
+            control4: ['Två']
         });
     }
 
