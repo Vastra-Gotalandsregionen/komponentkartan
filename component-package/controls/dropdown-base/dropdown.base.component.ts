@@ -6,12 +6,14 @@ import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { AbstractControl } from '@angular/forms';
 
 export abstract class DropdownBaseComponent extends ValidationComponent {
 
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
+    @Input() formControlName?: string;
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
     @Input() required: boolean;
@@ -28,6 +30,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     scrollbarConfig: PerfectScrollbarConfig;
     dimmerTopVisible: boolean;
     dimmerBottomVisible: boolean;
+    control: AbstractControl;
 
     protected filterLimit = 20;
     abstract get scrollLimit(): number;

@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef, Optional, SkipSelf, Host } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -7,6 +7,7 @@ import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 import { ValidationComponent } from '../validation/validation.component';
 import { IValidationResult } from '../../models/validation.model';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 
 
 @Component({
@@ -14,14 +15,18 @@ import { IValidationResult } from '../../models/validation.model';
     moduleId: module.id,
     templateUrl: './dropdown-multiselect.component.html',
     styleUrls: ['../dropdown-base/dropdown.scrollbar.css'],
-    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DropdownMultiselectComponent) }]
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => DropdownMultiselectComponent),
+        multi: true
+    }]
 })
 
-export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges {
+export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
 
     @Input() showAllItemText: string; // showAllItemText (skrivit ett filter och vill rensa filtret)
     @Input() allItemsSelectedLabel: string;
-    @Input() selectAllItemText: string; // texten som visaspå checkboxen för att välja alla
+    @Input() selectAllItemText: string; // texten som visas å checkboxen för att välja alla
     get scrollLimit(): number {
         return this.filterVisible ? 6 : 7;
     }
@@ -46,7 +51,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         }
     }
 
-    constructor(elementRef: ElementRef) {
+    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef) {
         super(elementRef);
         this.allItemsSelectedLabel = 'Alla';
         this.noItemSelectedLabel = 'Välj';
@@ -62,14 +67,21 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     doValidate(): IValidationResult {
-        const isValid = !this.required || (this.selectedItems && this.selectedItems.length > 0);
+        const isValid = (!this.required || this.selectedItems && this.selectedItems.length > 0) && !this.controlHasErrors();
         return {
             isValid: isValid,
             validationError: isValid ? '' : 'Obligatoriskt'
         } as IValidationResult;
     }
 
+    controlHasErrors() {
+        return (this.control && this.control.errors ? this.control.errors['required'] : false);
+    }
+
     ngOnChanges() {
+        if (this.formControlName) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
 
         this.showAllItem.displayName = this.showAllItemText;
 
@@ -80,8 +92,26 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.updateScrolled();
 
         this.updateDropdownLabel();
-
     }
+
+    writeValue(values: any): void {
+        if (values) {
+            this.selectedValues = values;
+        }
+    }
+
+    registerOnChange(func: any): void {
+        this.onChange = func;
+    }
+
+    registerOnTouched(func: any): void {
+        this.onTouched = func;
+    }
+
+    onChange(input: any) {
+    }
+
+    onTouched() { }
 
     clearFilter() {
         this.filter = '';
@@ -118,9 +148,11 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         if (item === this.selectAllItem) {
             this.items.forEach(x => x.selected = true);
             this.selectionChanged.emit(this._items);
+            this.onChange(this._items.map(x => x.displayName));
         } else {
             this.selectAllItem.selected = this._items.filter(x => !x.selected).length === 0;
             this.selectionChanged.emit(this.selectedItems);
+            this.onChange(this.selectedItems.map(x => x.displayName));
         }
         this.updateDropdownLabel();
         this.validate();
@@ -137,6 +169,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             this.items.forEach(x => x.selected = false);
         }
         this.selectionChanged.emit(this._items.filter(x => x.selected));
+        this.onChange(this._items.filter(x => x.selected).map(x => x.displayName));
 
         this.selectAllItem.selected = false;
         this.updateDropdownLabel();
