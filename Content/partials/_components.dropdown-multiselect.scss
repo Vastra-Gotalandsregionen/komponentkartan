@@ -35,9 +35,13 @@
       width: auto;
       max-height: 0px;
       ul {
-        padding-left: 10px;
         list-style-type: disc;
         list-style-position: inside;
+        li {
+          margin-left: 10px;
+          text-indent: -25px;
+          padding-left: 25px;
+        }
       }
       .readonly & {
         opacity: 1;

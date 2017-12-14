@@ -9,6 +9,10 @@ vgr-monthpicker.readonly {
   height: $component-height;
 }
 
+.monthpicker {
+  height: $component-height;
+}
+
 .monthpicker__dropdown {
   @extend .background-color--primary;
   position: relative;

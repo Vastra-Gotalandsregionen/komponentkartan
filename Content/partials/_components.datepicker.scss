@@ -4,18 +4,7 @@ $dropdown-height--medium-with-filter: 360px;
 $dropdown-width--medium: 130px;
 $dropdown-width--medium--extended: 140px;
 $dropdown-width--small: 100px;
-// vgr-datepicker{
-//   &.validation-error--active {
-//     .validation {
-//       height: auto;
-//     }
-//   }
-//   &.validation-error--editing {
-//     .validation {
-//       height: auto;
-//     }
-//   }
-// }
+
 vgr-datepicker.readonly {
   max-height: $component-height;
 }

@@ -24,9 +24,8 @@ $filter-area-height: 60px;
 
 .dropdown--edit {
   @extend .background-color--primary;
-  position: relative; //UPPDATERING
-  //  display: inline-block;
-  display: block; //UPPDATERING
+  position: relative;
+  display: block;
   height: $component-height;
   width: $dropdown-width--medium;
   padding: 0px;
@@ -38,9 +37,9 @@ $filter-area-height: 60px;
   }
   .readonly & {
     background-color: $background-color--content;
-    cursor: default; // UPPDATERING
+    cursor: default;
     width: auto;
-    height: auto; // UPPDATERING
+    height: auto;
   }
   >span {
     padding-left: $margin--slim;
@@ -71,13 +70,13 @@ $filter-area-height: 60px;
       border-color: $background-color--content;
       outline: none;
       cursor: text;
-      transition: max-width 0.3s linear; //UPPDATERING
+      transition: max-width 0.3s linear;
       word-wrap: break-word;
       overflow: visible;
       white-space: normal;
       height: auto;
       display: block;
-      max-width: none; //UPPDATERING
+      max-width: none;
     }
   } //Ikon, uppåt- eller nedåtpil
   &:after {

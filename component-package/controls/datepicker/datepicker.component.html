@@ -2,7 +2,7 @@
   <div class="datepicker datepicker--open" (click)="displayDatePicker()" (focusin)="onEnter()" (focusout)="onLeave()">
     <div class="datepicker__dropdown" tabindex="{{disabled ? -1 : 0}}">
       <span tabindex="0" *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date: selectedDateFormat}}</span>
-      <span tabindex="0" *ngIf="!selectedDate" class="datepicker__calendar__selector" title="Välj datum">{{ readonly ? '' : 'Välj datum' }}</span>
+      <span tabindex="0" *ngIf="!selectedDate" class="datepicker__calendar__selector" title="{{ readonly ? '' : 'Välj datum' }}">{{ readonly ? '' : 'Välj datum' }}</span>
 
       <div *ngIf="isDatePickerVisible" class="datepicker__calendar">
         <div class="datepicker__calendar__header">
@@ -34,13 +34,11 @@
           </table>
         </div>
       </div>
-
-    </div>
-    <div class="validation__status" title="{{validationErrorMessage}}">
-      <div class="validation__status__icon"></div>
-      <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
     </div>
   </div>
-
+  <div class="validation__status" title="{{validationErrorMessage}}">
+    <div class="validation__status__icon"></div>
+    <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
+  </div>
 
 </div>
