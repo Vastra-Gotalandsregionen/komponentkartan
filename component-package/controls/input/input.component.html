@@ -10,9 +10,9 @@
       <div class="input-container__suffix-container__status-icon"></div>
     </div>
   </div>
-  <div class="input-validation_status" title="{{currentErrorMesage}}">
+  <div *ngIf="formControlName && control.errors" class="input-validation_status" title="{{errorMessage | errormessagehandler:  control.errors : small }}">
     <div class="input-validation_status__icon"></div>
-    <div *ngIf="!small" class="input-validation_status__message">{{currentErrorMesage | truncate:64}}</div>
-    <div *ngIf="small" class="input-validation_status__message">{{currentErrorMesage | truncate:24}}</div>
+    <div *ngIf="formControlName && control.errors && control.invalid && !small" class="input-validation_status__message">{{errorMessage | errormessagehandler: control.errors : small | truncate:64}}</div>
+    <div *ngIf="formControlName && control.errors && control.invalid && small" class="input-validation_status__message">{{errorMessage | errormessagehandler: control.errors : small | truncate:24}}</div>
   </div>
 </div>

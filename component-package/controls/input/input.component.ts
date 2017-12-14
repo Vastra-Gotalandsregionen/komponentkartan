@@ -55,7 +55,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   swedishDecimalPipe: DecimalPipe;
   displayValue: string;
-  currentErrorMesage: string;
+  currentErrorMessage: string;
   selectedErrorMessage: string;
   control: AbstractControl;
 
@@ -71,42 +71,36 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
       this.control = this.controlContainer.control.get(this.formControlName);
     }
 
-    if (changes.small) {
-      this.currentErrorMesage = this.checkErrorMessage();
-    }
+    // if (changes.small) {
+    //   this.currentErrorMessage = this.checkErrorMessage();
+    // }
   }
 
   ngOnInit() {
-    // console.log(`${this.formControlName} - errormessage`, this.errorMessage);
-    this.getErrorMessages();
+    // this.getErrorMessages();
     this.setDisplayValue();
   }
 
-  ngAfterViewChecked() {
-    this.getErrorMessages();
-    console.log(`${this.formControlName} - errormessage`, this.errorMessage);
-  }
-
   getErrorMessages() {
-    this.currentErrorMesage = this.checkErrorMessage();
-    if (this.formControlName) {
-      this.control.valueChanges
-        .subscribe(data => {
-          this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
-        });
-    }
-    else {
-      this.selectedErrorMessage = this.errorMessage;
-    }
+    // this.currentErrorMessage = this.checkErrorMessage();
+    // if (this.formControlName) {
+    //   this.control.valueChanges
+    //     .subscribe(data => {
+    //       this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
+    //     });
+    // }
+    // else {
+    //   this.selectedErrorMessage = this.errorMessage;
+    // }
   }
 
-  checkErrorMessage(): string {
-    if (typeof (this.errorMessage) === 'object') {
-      return this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
-    }
-    else
-      return this.errorMessage;
-  }
+  // checkErrorMessage(): string {
+  //   if (typeof (this.errorMessage) === 'object') {
+  //     return this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
+  //   }
+  //   else
+  //     return this.errorMessage;
+  // }
 
   writeValue(value: any) {
     if (value !== undefined) {
@@ -157,7 +151,8 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
     this.blur.emit(event);
 
-    this.currentErrorMesage = this.selectedErrorMessage;
+
+    this.currentErrorMessage = this.selectedErrorMessage;
   }
 
   onFocus(): void {

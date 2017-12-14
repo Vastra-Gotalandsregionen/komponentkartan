@@ -8,10 +8,10 @@ import { DecimalPipe } from '@angular/common';
 
 // Common
 import { ModalService, BrowserDetector, ErrorHandler } from './services/index';
-import { SafePipe, TruncatePipe, FilterPipe } from './pipes/index';
+import { SafePipe, TruncatePipe, FilterPipe, ErrorMessagePipe } from './pipes/index';
 import * as $ from 'jquery';
 
-// UI Components
+// UI Components,
 import { DropdownItemToSelectedTextPipe } from './pipes/index';
 import * as control from './controls/index';
 
@@ -36,6 +36,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SafePipe,
         TruncatePipe,
         FilterPipe,
+        ErrorMessagePipe,
         DropdownItemToSelectedTextPipe,
         control.ActionPanelComponent,
         control.DropdownComponent,
@@ -79,6 +80,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SafePipe,
         TruncatePipe,
         FilterPipe,
+        ErrorMessagePipe,
         DropdownItemToSelectedTextPipe,
         control.ActionPanelComponent,
         control.DropdownComponent,

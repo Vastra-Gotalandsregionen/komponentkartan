@@ -129,7 +129,7 @@ export class InputFieldsComponent implements OnInit {
             control10: ['', Validators.required],
             control11: ['Visar värdet utan ram'],
             control12: [],
-            control13: [this.cityName, null, validateAsyncCityName()],
+            control13: [this.cityName, Validators.required, validateAsyncCityName()],
             control14: ['', Validators.email]
         });
     }
