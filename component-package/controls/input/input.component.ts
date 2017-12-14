@@ -46,7 +46,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     return this.invalidOnFocus && this.hasFocus && (this.touched || this.validateOnInit);
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
-    return this.invalidOnFocus && this.touched && !(this.formControlName ? this.control.invalid : this.isInvalid) && !this.hasFocus;
+    return this.invalidOnFocus && this.touched && (this.formControlName ? this.control.valid : !this.isInvalid) && !this.hasFocus;
   }
 
   hasFocus = false;
@@ -70,37 +70,33 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     if (this.formControlName) {
       this.control = this.controlContainer.control.get(this.formControlName);
     }
-
-    // if (changes.small) {
-    //   this.currentErrorMessage = this.checkErrorMessage();
-    // }
   }
 
   ngOnInit() {
-    // this.getErrorMessages();
+    this.setErrorMessages();
     this.setDisplayValue();
   }
 
-  getErrorMessages() {
-    // this.currentErrorMessage = this.checkErrorMessage();
-    // if (this.formControlName) {
-    //   this.control.valueChanges
-    //     .subscribe(data => {
-    //       this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
-    //     });
-    // }
-    // else {
-    //   this.selectedErrorMessage = this.errorMessage;
-    // }
+  setErrorMessages() {
+    this.currentErrorMessage = this.checkErrorMessage();
+    if (this.formControlName) {
+      this.control.valueChanges
+        .subscribe(data => {
+          this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
+        });
+    }
+    else {
+      this.selectedErrorMessage = this.errorMessage;
+    }
   }
 
-  // checkErrorMessage(): string {
-  //   if (typeof (this.errorMessage) === 'object') {
-  //     return this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
-  //   }
-  //   else
-  //     return this.errorMessage;
-  // }
+  checkErrorMessage(): string {
+    if (typeof (this.errorMessage) === 'object') {
+      return this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
+    }
+    else
+      return this.errorMessage;
+  }
 
   writeValue(value: any) {
     if (value !== undefined) {
@@ -145,14 +141,11 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     }
 
     this.onChange(this.value);
-
     this.touched = true;
     this.hasFocus = false;
-
     this.blur.emit(event);
 
-
-    this.currentErrorMessage = this.selectedErrorMessage;
+    // this.currentErrorMessage = this.selectedErrorMessage;
   }
 
   onFocus(): void {

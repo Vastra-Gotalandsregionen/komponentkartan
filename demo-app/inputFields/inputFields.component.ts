@@ -123,7 +123,7 @@ export class InputFieldsComponent implements OnInit {
             control4: [this.kmValue, validateNumber],
             control5: [this.numericValue, validateNumber],
             control6: [],
-            control7: ['abc', [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required]],
+            control7: ['', [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required]],
             control8: ['', [Validators.pattern('^.{2,6}$'), Validators.required]],
             control9: [this.intValue, validateNumber],
             control10: ['', Validators.required],
