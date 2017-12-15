@@ -44,8 +44,8 @@ export class FakeAComponent implements OnInit {
             control2: [null, Validators.required],
             control3: [true],
             control4: ['Två'],
-            control5: [date, Validators.required],
-            control6: [date, Validators.required]
+            control5: ['', Validators.required],
+            control6: ['', Validators.required]
         });
     }
 
