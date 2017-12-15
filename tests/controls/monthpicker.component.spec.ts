@@ -14,7 +14,7 @@ describe('[MonthpickerComponent]', () => {
 
 
     beforeEach(() => {
-        component = new MonthpickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef);
+        component = new MonthpickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
     });
 
     describe('When initialized with minDate 2017-01-01 and maxDate 2017-02-01', () => {

@@ -1,17 +1,27 @@
 
-import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef, forwardRef } from '@angular/core';
+import {
+    Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener,
+    ElementRef, forwardRef, SkipSelf, Optional, Host
+} from '@angular/core';
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
 import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
 import { ValidationComponent } from '../../controls/validation/validation.component';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
+
 @Component({
     selector: 'vgr-datepicker',
     moduleId: module.id,
     templateUrl: './datepicker.component.html',
-    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => DatepickerComponent) }]
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => DatepickerComponent),
+        multi: true
+    }, { provide: ValidationComponent, useExisting: forwardRef(() => DatepickerComponent) }]
 })
-export class DatepickerComponent extends ValidationComponent implements OnInit {
+export class DatepickerComponent extends ValidationComponent implements OnInit, OnChanges, ControlValueAccessor {
     today: Date;
     @Input() minDate: Date;
     @Input() maxDate: Date;
@@ -22,6 +32,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
     @Input() required: boolean;
     @Output() selectedDateChanged = new EventEmitter<Date>();
+    @Input() formControlName?: string;
 
     yearMonths: ICalendarYearMonth[] = [];
     isDatePickerVisible: boolean;
@@ -30,8 +41,9 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
     currentYearMonthIndex = 0;
     currentYearMonthOutput: Date;
     selectedCalendarDay: ICalendarDay;
+    control: AbstractControl;
 
-    constructor(protected elementRef: ElementRef) {
+    constructor(protected elementRef: ElementRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
         super();
 
         this.today = new Date();
@@ -42,6 +54,30 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
     };
 
+
+    ngOnChanges() {
+        if (this.formControlName) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
+
+    }
+
+    writeValue(value: any): void {
+        this.selectedDate = value;
+    }
+
+    registerOnChange(func: any): void {
+        this.onChange = func;
+    }
+
+    registerOnTouched(func: any): void {
+        this.onTouched = func;
+    }
+
+    onChange(input: any) {
+    }
+
+    onTouched() { }
 
     doValidate(): IValidationResult {
         if (this.required && !this.selectedDate) {
@@ -257,6 +293,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
         }
         calendarDay.selected = true;
         this.selectedCalendarDay = calendarDay;
+        this.onChange(calendarDay.day);
         this.setPreviousAndNextMonthNavigation();
     }
 
@@ -312,13 +349,11 @@ export class DatepickerComponent extends ValidationComponent implements OnInit {
 
     checkTodayDate(weekIndex: number, dayIndex: number): boolean {
         return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].isCurrentDay;
-
     }
 
     checkSelectedDate(weekIndex: number, dayIndex: number): boolean {
         return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].selected;
     }
-
 
     setPreviousAndNextMonthNavigation() {
         let tmpMinDate = this.minDate;
