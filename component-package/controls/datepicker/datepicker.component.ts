@@ -80,11 +80,16 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     onTouched() { }
 
     doValidate(): IValidationResult {
-        if (this.required && !this.selectedDate) {
-            return { isValid: false, validationError: 'Obligatoriskt' } as IValidationResult;
-        } else {
-            return { isValid: true, validationError: '' } as IValidationResult;
-        }
+        const isValid = (!this.required || this.selectedDate) && !this.controlHasErrors();
+
+        return {
+            isValid: isValid,
+            validationError: isValid ? '' : 'Obligatoriskt'
+        } as IValidationResult;
+    }
+
+    controlHasErrors() {
+        return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }
 
     onLeave() {
