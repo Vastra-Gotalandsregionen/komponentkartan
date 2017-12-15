@@ -38,9 +38,14 @@ export class FakeAComponent implements OnInit {
     }
 
     createForm() {
+        let date: Date = new Date(2017, 11, 24);
         this.form = this.fb.group({
             control1: ['', Validators.required],
-            control2: [null, Validators.required]
+            control2: [null, Validators.required],
+            control3: [true],
+            control4: ['Två'],
+            control5: [date, Validators.required],
+            control6: [date, Validators.required]
         });
     }
 
