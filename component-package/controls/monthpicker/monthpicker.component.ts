@@ -14,11 +14,13 @@ import { AbstractControl } from '@angular/forms';
     selector: 'vgr-monthpicker',
     moduleId: module.id,
     templateUrl: './monthpicker.component.html',
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => MonthpickerComponent),
-        multi: true
-    }, { provide: ValidationComponent, useExisting: forwardRef(() => MonthpickerComponent) }]
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MonthpickerComponent),
+            multi: true
+        },
+        { provide: ValidationComponent, useExisting: forwardRef(() => MonthpickerComponent) }]
 
 })
 export class MonthpickerComponent extends ValidationComponent implements OnInit, OnChanges, ControlValueAccessor {

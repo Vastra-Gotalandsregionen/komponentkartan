@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ICalendarYearMonth } from '../../component-package/models/calendarYearMonth.model';
@@ -19,7 +19,7 @@ describe('[DatepickerComponent]', () => {
 
     describe('When initialized with minDate 2017-08-01 and maxDate 2017-09-01', () => {
         beforeEach(() => {
-            component = new DatepickerComponent(null, null);
+            component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
             component.minDate = new Date(2017, 7, 1);
             component.maxDate = new Date(2017, 8, 1);
             component.ngOnInit();
@@ -33,7 +33,7 @@ describe('[DatepickerComponent]', () => {
 
     describe('When initialized with default settings', () => {
         beforeEach(() => {
-            component = new DatepickerComponent(null, null);
+            component = new DatepickerComponent(null, null, null);
             currentMonth = new Date().getMonth();
             currentYear = new Date().getFullYear();
             component.ngOnInit();
@@ -111,7 +111,7 @@ describe('[DatepickerComponent]', () => {
             currentMonth = 10;
 
             jasmine.clock().mockDate(new Date(currentYear, currentMonth - 1, 15));
-            component = new DatepickerComponent(null, null);
+            component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
 
             minDate = new Date(currentYear, currentMonth - 1, 15);
             maxDate = new Date(currentYear, currentMonth - 1, 27);
@@ -276,7 +276,7 @@ describe('[DatepickerComponent]', () => {
             const year = 2017;
             const october = 9;
             jasmine.clock().mockDate(new Date(year, october - 1, 15));
-            component = new DatepickerComponent(null, null);
+            component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
             component.minDate = new Date(year, october - 1, 1);
             component.maxDate = new Date(year, october + 1, 30);
             component.selectedDate = new Date(year, october, 1);
@@ -321,7 +321,7 @@ describe('[DatepickerComponent]', () => {
     });
     describe('correct css class assignment', () => {
         beforeEach(() => {
-            component = new DatepickerComponent(null, null);
+            component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
 
             component.yearMonths = [
                 {

@@ -1,7 +1,7 @@
 
 import {
     Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener,
-    ElementRef, forwardRef, SkipSelf, Optional, Host
+    ElementRef, forwardRef, SkipSelf, Optional, Host, ChangeDetectorRef
 } from '@angular/core';
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
@@ -43,7 +43,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     selectedCalendarDay: ICalendarDay;
     control: AbstractControl;
 
-    constructor(protected elementRef: ElementRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
+    constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
         super();
 
         this.today = new Date();
@@ -297,7 +297,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         }
         calendarDay.selected = true;
         this.selectedCalendarDay = calendarDay;
-        this.onChange(calendarDay.day);
         this.setPreviousAndNextMonthNavigation();
     }
 
@@ -344,6 +343,8 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         this.setSelectedDay(clickedDate);
         this.selectedDateChanged.emit(clickedDate.day);
         this.isDatePickerVisible = false;
+        this.onChange(clickedDate.day);
+        this.changeDetectorRef.detectChanges();
         this.validate();
     }
 
