@@ -1,22 +1,27 @@
 import {
     Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef, forwardRef,
-    ChangeDetectorRef
+    ChangeDetectorRef, SkipSelf, Optional, Host
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
 import { IValidationResult } from '../../models/validation.model';
 import { ValidationComponent } from '../../controls/validation/validation.component';
-
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms'
+import { AbstractControl } from '@angular/forms';
 
 @Component({
     selector: 'vgr-monthpicker',
     moduleId: module.id,
     templateUrl: './monthpicker.component.html',
-    providers: [{ provide: ValidationComponent, useExisting: forwardRef(() => MonthpickerComponent) }]
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => MonthpickerComponent),
+        multi: true
+    }, { provide: ValidationComponent, useExisting: forwardRef(() => MonthpickerComponent) }]
 
 })
-export class MonthpickerComponent extends ValidationComponent implements OnInit {
+export class MonthpickerComponent extends ValidationComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     today: Date = new Date();
     @Input() minDate: Date;
@@ -27,6 +32,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() selectedDateFormat = 'MMM yyyy';
     @Input() tooltipDateFormat = 'MMMM yyyy';
+    @Input() formControlName?: string;
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
@@ -36,9 +42,10 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
 
     years: ICalendarYear[];
     expanded: boolean;
+    control: AbstractControl;
     protected preventCollapse: boolean;
 
-    constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
+    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super();
         this.expanded = false;
         this.years = [];
@@ -64,6 +71,28 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
         this.setDisplayedYear(this.selectedDate);
 
     }
+
+    ngOnChanges() {
+        if (this.formControlName) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
+    }
+    writeValue(value: any): void {
+        this.selectedDate = value;
+    }
+
+    registerOnChange(func: any): void {
+        this.onChange = func;
+    }
+
+    registerOnTouched(func: any): void {
+        this.onTouched = func;
+    }
+
+    onChange(input: any) {
+    }
+
+    onTouched() { }
 
     setDisplayedYear(chosenDate: Date) {
         if (chosenDate) {
@@ -135,11 +164,16 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
     }
 
     doValidate(): IValidationResult {
-        if (this.required && !this.selectedDate) {
-            return { isValid: false, validationError: 'Obligatoriskt' } as IValidationResult;
-        } else {
-            return { isValid: true, validationError: '' } as IValidationResult;
-        }
+        const isValid = (!this.required || this.selectedDate) && !this.controlHasErrors();
+
+        return {
+            isValid: isValid,
+            validationError: isValid ? '' : 'Obligatoriskt'
+        } as IValidationResult;
+    }
+
+    controlHasErrors() {
+        return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }
 
     onLeave() {
@@ -248,6 +282,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit 
         this.selectedDateChanged.emit(selectedMonth.date);
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedDate = selectedMonth.date;
+        this.onChange(selectedMonth.date);
         this.changeDetectorRef.detectChanges();
 
         this.validate();
