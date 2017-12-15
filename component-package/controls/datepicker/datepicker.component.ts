@@ -43,7 +43,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     selectedCalendarDay: ICalendarDay;
     control: AbstractControl;
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, protected elementRef: ElementRef) {
+    constructor(protected elementRef: ElementRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
         super();
 
         this.today = new Date();
