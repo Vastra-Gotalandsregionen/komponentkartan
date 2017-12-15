@@ -6,19 +6,18 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 
 export class ErrorMessagePipe implements PipeTransform {
-  transform(message: any, currentMessage: any, hasFocus: boolean, errors: any, small: boolean) {
+  currentMessage: string;
+
+  transform(message: any, hasFocus: boolean, errors: any, small: boolean) {
     if (!message) {
       return null;
     }
 
-    return this.setErrorMessage(errors, message, small);
+    if (!hasFocus) {
+      this.currentMessage = this.setErrorMessage(errors, message, small);
+    }
 
-    // if (hasFocus) {
-    //   return this.setErrorMessage(errors, message, small);
-    // }
-    // else {
-    //   return this.setErrorMessage(errors, message, small);
-    // }
+    return this.currentMessage;
   }
 
   private setErrorMessage(errors: any, message: any, small: any): string {

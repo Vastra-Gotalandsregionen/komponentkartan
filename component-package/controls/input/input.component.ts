@@ -73,29 +73,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.setErrorMessages();
     this.setDisplayValue();
-  }
-
-  setErrorMessages() {
-    this.currentErrorMessage = this.checkErrorMessage();
-    if (this.formControlName) {
-      this.control.valueChanges
-        .subscribe(data => {
-          this.selectedErrorMessage = this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
-        });
-    }
-    else {
-      this.selectedErrorMessage = this.errorMessage;
-    }
-  }
-
-  checkErrorMessage(): string {
-    if (typeof (this.errorMessage) === 'object') {
-      return this.errorHandler.getErrorMessageReactiveForms(this.errorMessage, this.control, this.small);
-    }
-    else
-      return this.errorMessage;
   }
 
   writeValue(value: any) {
@@ -144,8 +122,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.touched = true;
     this.hasFocus = false;
     this.blur.emit(event);
-
-    // this.currentErrorMessage = this.selectedErrorMessage;
   }
 
   onFocus(): void {

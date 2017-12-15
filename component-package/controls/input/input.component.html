@@ -11,8 +11,21 @@
     </div>
   </div>
 
-  <div *ngIf="formControlName" class="input-validation_status" title="{{ errorMessage | errormessagehandler: currentErrorMessage : hasFocus : control.errors : small }}">
-    <div class="input-validation_status__icon"></div>
-    <div class="input-validation_status__message">{{errorMessage | errormessagehandler: currentErrorMessage : hasFocus : control.errors : small | truncate:64}}</div>
-  </div>
+  <div *ngIf="formControlName; then content1 else content2"></div>
+
+  <ng-template #content1>
+    <div class="input-validation_status" title="{{  errorMessage | errormessagehandler: hasFocus : control.errors : small }}">
+      <div class="input-validation_status__icon"></div>
+      <div *ngIf="!small" class="input-validation_status__message">{{errorMessage | errormessagehandler: hasFocus : control.errors : small | truncate:64}}</div>
+      <div *ngIf="small" class="input-validation_status__message">{{errorMessage | errormessagehandler: hasFocus : control.errors : small | truncate:24}}</div>
+    </div>
+  </ng-template>
+
+  <ng-template #content2>
+    <div class="input-validation_status" title="{{ currentErrorMessage }}">
+      <div class="input-validation_status__icon"></div>
+      <div *ngIf="!small" class="input-validation_status__message">{{currentErrorMessage | truncate:64}}</div>
+      <div *ngIf="small" class="input-validation_status__message">{{currentErrorMessage | truncate:24}}</div>
+    </div>
+  </ng-template>
 </div>
