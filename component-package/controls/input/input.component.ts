@@ -153,7 +153,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
       return;
     }
 
-    this.displayValue = this.value;
+    this.displayValue = this.convertNumberToString(this.value);
 
     this.invalidOnFocus = (this.formControlName ? this.control.invalid : this.isInvalid) && (this.touched || this.validateOnInit);
     this.hasFocus = true;
