@@ -11,12 +11,14 @@ export class ErrorMessagePipe implements PipeTransform {
       return null;
     }
 
-    if (hasFocus) {
-      return currentMessage ? currentMessage : errors ? this.setErrorMessage(errors, message, small) : message[Object.keys(message)[0]];
-    }
-    else {
-      return this.setErrorMessage(errors, message, small);
-    }
+    return this.setErrorMessage(errors, message, small);
+
+    // if (hasFocus) {
+    //   return this.setErrorMessage(errors, message, small);
+    // }
+    // else {
+    //   return this.setErrorMessage(errors, message, small);
+    // }
   }
 
   private setErrorMessage(errors: any, message: any, small: any): string {
