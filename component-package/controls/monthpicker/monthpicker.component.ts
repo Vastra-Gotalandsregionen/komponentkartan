@@ -45,7 +45,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
     control: AbstractControl;
     protected preventCollapse: boolean;
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
+    constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
         super();
         this.expanded = false;
         this.years = [];
@@ -282,7 +282,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
         this.selectedDateChanged.emit(selectedMonth.date);
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedDate = selectedMonth.date;
-        this.onChange(selectedMonth.date);
+        //   this.onChange(selectedMonth.date);
         this.changeDetectorRef.detectChanges();
 
         this.validate();
