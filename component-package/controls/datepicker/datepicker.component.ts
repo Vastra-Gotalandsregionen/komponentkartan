@@ -59,7 +59,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         if (this.formControlName) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
-
     }
 
     writeValue(value: any): void {
@@ -342,10 +341,10 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         }
 
         this.selectedDate = clickedDate.day;
-        this.validate();
         this.setSelectedDay(clickedDate);
         this.selectedDateChanged.emit(clickedDate.day);
         this.isDatePickerVisible = false;
+        this.validate();
     }
 
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {
