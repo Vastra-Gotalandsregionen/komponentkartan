@@ -3,9 +3,12 @@ import { DecimalPipe } from '@angular/common';
 import { IValidationResult, ValidationErrorState, IValidation, ICustomValidator } from '../../component-package/models/validation.model';
 import { CityService } from './cityService';
 import { ISelectableItem } from '../../component-package/models/selectableItem.model';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ErrorHandler } from '../../component-package/services/errorhandler';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
 
 @Component({
     moduleId: module.id,
@@ -120,13 +123,13 @@ export class InputFieldsComponent implements OnInit {
             control4: [this.kmValue, validateNumber],
             control5: [this.numericValue, validateNumber],
             control6: [],
-            control7: ['abc', [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required]],
+            control7: ['', [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required]],
             control8: ['', [Validators.pattern('^.{2,6}$'), Validators.required]],
             control9: [this.intValue, validateNumber],
             control10: ['', Validators.required],
             control11: ['Visar värdet utan ram'],
             control12: [],
-            control13: [this.cityName, validateCityName],
+            control13: [this.cityName, Validators.required, validateAsyncCityName()],
             control14: ['', Validators.email]
         });
     }
@@ -153,6 +156,16 @@ export class InputFieldsComponent implements OnInit {
     }
 }
 
+function validateAsyncCityName(): AsyncValidatorFn {
+    const service = new CityService();
+
+    return (control: AbstractControl) => {
+        return service.getAsyncCities().map(cities => {
+            return cities.filter(x => x.city === control.value).length > 0 ? null : { 'invalidCity': { value: control.value } };
+        });
+    };
+}
+
 function validateCityName(control: AbstractControl) {
     const service = new CityService();
     const allCities = service.getCities();
@@ -171,6 +184,6 @@ function validateNumber(control: AbstractControl) {
     }
 
     return { invalidNumber: true }
-
-
 }
+
+
