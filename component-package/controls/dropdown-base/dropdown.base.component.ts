@@ -146,8 +146,19 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         this.setValidationStateEditing();
     }
 
-    onLeave() {
-        this.validate();
+    onLeave(event: FocusEvent) {
+
+        if (!event) {
+            this.validate();
+            return;
+        }
+
+        const focusedElement = event.relatedTarget;
+        if (focusedElement === null || !this.elementRef.nativeElement.contains(focusedElement)) {
+            //validera endast om vi är påväg från komponenten
+            this.validate();
+        }
+
     }
 
     private toggleExpand(event: Event) {
@@ -155,13 +166,14 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         const element = $(target);
         if (!element.is('input') && !element.is('.scroll-bar')) {
             this.expanded = !this.expanded;
-            if (!this.expanded)
+            if (!this.expanded) {
                 this.validate();
+            }
+
         }
     }
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: any) {
-
         const target = event.target || event.srcElement || event.currentTarget;
 
         if (!this.elementRef.nativeElement.contains(target)) {
