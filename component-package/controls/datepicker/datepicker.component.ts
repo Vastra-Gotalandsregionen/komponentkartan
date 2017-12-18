@@ -80,11 +80,11 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
 
     doValidate(): IValidationResult {
         const isValid = (!this.required || this.selectedDate) && !this.controlHasErrors();
-
         return {
             isValid: isValid,
             validationError: isValid ? '' : 'Obligatoriskt'
         } as IValidationResult;
+
     }
 
     controlHasErrors() {
@@ -309,7 +309,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     }
 
     @HostListener('document:click', ['$event'])
-
     onOutsideClick(event: Event) {
         if (!this.elementRef.nativeElement.contains(event.target)) {
             this.isDatePickerVisible = false;
@@ -341,11 +340,13 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
 
         this.selectedDate = clickedDate.day;
         this.setSelectedDay(clickedDate);
-        this.selectedDateChanged.emit(clickedDate.day);
+
         this.isDatePickerVisible = false;
         this.onChange(clickedDate.day);
-        this.changeDetectorRef.detectChanges();
+
         this.validate();
+        this.selectedDateChanged.emit(clickedDate.day);
+        this.changeDetectorRef.detectChanges();
     }
 
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {
