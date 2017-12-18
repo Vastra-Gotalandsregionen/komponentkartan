@@ -73,6 +73,10 @@ export class ListColumnsComponent implements OnInit {
         this.removeRow(row);
     }
 
+    onDeleted(item: any) {
+        console.log('deleted', item);
+    }
+
     removeRow(row: any) {
         this.modalService.openDialog('Ta bort raden', 'Vill du verkligen ta bort ' + row.previewObject.firstName + '?',
             new ModalButtonConfiguration('Ja', () => {
