@@ -186,7 +186,11 @@ $filter-area-height: 60px;
   }
   .dropdown-item--selected {
     a {
+      border-left-width: 4px;
+      border-left-style: solid;
       font-weight: bold;
+      padding-left: 11px;
+      padding-right: 11px;
     }
   }
   .dropdown__menu__items {
@@ -202,7 +206,7 @@ $filter-area-height: 60px;
       position: relative;
       height: calc(#{$dropdown-height--small} - #{$margin--fat});
       li {
-        width: calc(100% - 17px);
+        width: 100%;
         background: white;
       }
       li:last-child {
