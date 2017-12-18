@@ -159,7 +159,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             this.onChange(this.selectedItems.map(x => x.displayName));
         }
         this.updateDropdownLabel();
-        this.validate();
+
     }
 
     deselectItem(item: IDropdownItem) {
@@ -177,7 +177,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         this.selectAllItem.selected = false;
         this.updateDropdownLabel();
-        this.validate();
+
     }
 
     private updateDropdownLabel() {

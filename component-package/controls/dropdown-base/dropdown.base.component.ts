@@ -155,6 +155,8 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         const element = $(target);
         if (!element.is('input') && !element.is('.scroll-bar')) {
             this.expanded = !this.expanded;
+            if (!this.expanded)
+                this.validate();
         }
     }
     @HostListener('document:click', ['$event'])
