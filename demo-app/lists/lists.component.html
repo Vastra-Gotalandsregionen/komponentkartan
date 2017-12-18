@@ -112,7 +112,7 @@
           <vgr-list-column-header [align]="'center'" [width]="1"></vgr-list-column-header>
           <vgr-list-column-header [align]="'center'" [width]="1"></vgr-list-column-header>
         </vgr-list-header>
-        <vgr-list-item *ngFor="let c of claimRows" [notification]="c.notification">
+        <vgr-list-item *ngFor="let c of claimRows" [notification]="c.notification" (deleted)="onDeleted(c)">
           <vgr-list-item-header>
             <vgr-list-column [text]="c.previewObject.identification"></vgr-list-column>
             <vgr-list-column [text]="c.previewObject.invoiceId"></vgr-list-column>

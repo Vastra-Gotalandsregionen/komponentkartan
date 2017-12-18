@@ -21,7 +21,7 @@
           <vgr-list-column-header align="center" text="H" width="1" sortKey="committee"></vgr-list-column-header>
           <vgr-list-column-header align="center" text="I" width="1" sortKey="committee"></vgr-list-column-header>
         </vgr-list-header>
-        <vgr-list-item *ngFor="let row of peopleWithUnitRows" [notification]="row.notification">
+        <vgr-list-item *ngFor="let row of peopleWithUnitRows" [notification]="row.notification" (deleted)="onDeleted(row)">
           <vgr-list-item-header>
             <vgr-list-column [text]="row.previewObject.firstName"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.lastName"></vgr-list-column>
@@ -36,7 +36,7 @@
             <vgr-list-column-checkbox></vgr-list-column-checkbox>
             <vgr-list-column-checkbox></vgr-list-column-checkbox>
             <vgr-list-column-checkbox></vgr-list-column-checkbox>
-            <vgr-list-column-trashcan></vgr-list-column-trashcan>
+            <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (delete)="onDeleteRow(row)"></vgr-list-column-trashcan>
             <vgr-list-column-checkbox></vgr-list-column-checkbox>
 
           </vgr-list-item-header>
@@ -68,7 +68,7 @@
           <vgr-list-column-header width="1"></vgr-list-column-header>
           <vgr-list-column-header width="1" align="center" text="Val" sortKey="selected"></vgr-list-column-header>
         </vgr-list-header>
-        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification">
+        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" (deleted)="onDeleted(row)">
           <vgr-list-item-header>
             <vgr-list-column [text]="row.previewObject.firstName"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.lastName"></vgr-list-column>

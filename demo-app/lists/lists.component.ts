@@ -61,6 +61,10 @@ export class ListsComponent {
             new ExpandableRow<any, any>({ identification: '15ZVFf9023874sdpaföj', invoiceId: 'INV 122334534534', payableAmount: 43, issueDate: new Date(), visits: [1, 2, 3] })];
     }
 
+    onDeleted(item: any) {
+        console.log('deleted', item);
+    }
+
     cardSaved() {
         this.cardUnlocked = false;
         this.cardRow.notifyOnCollapse('Användaren sparades', NotificationIcon.OkGreen);

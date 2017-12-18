@@ -22,7 +22,7 @@ export class ListItemComponent implements OnInit {
     @HostBinding('class.list-item') isContainer = true;
     @HostBinding('class.list-item--collapsed') collapsed = true;
     @HostBinding('class.list-item--expanded') private _expanded: boolean;
-    @HostBinding('class.list-item--deleted') deleted: boolean;
+    @HostBinding('class.list-item--deleted') isDeleted: boolean;
     @HostBinding('class.list-item--notification-visible') notificationVisible: boolean;
     @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
     @HostBinding('class.list-item--columns-initialized') columnsInitialized: boolean;
@@ -39,6 +39,7 @@ export class ListItemComponent implements OnInit {
     }
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() notificationChanged: EventEmitter<RowNotification> = new EventEmitter<RowNotification>();
+    @Output() deleted: EventEmitter<any> = new EventEmitter();
 
     private _notification: RowNotification;
     @Input() set notification(value: RowNotification) {
@@ -108,7 +109,7 @@ export class ListItemComponent implements OnInit {
     }
 
     private expand() {
-        if (this.deleted || this.notInteractable) {
+        if (this.isDeleted || this.notInteractable) {
             return;
         }
         this.jqueryHelper.toggleContent(this.elementRef);
@@ -179,7 +180,8 @@ export class ListItemComponent implements OnInit {
                     this.notification.done = true;
                     this.notificationVisible = false;
                     this.notInteractable = false;
-                    this.deleted = true;
+                    this.isDeleted = true;
+                    this.deleted.emit();
                 }, 2000)
             });
         }, 1400);

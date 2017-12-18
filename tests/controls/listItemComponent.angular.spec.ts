@@ -207,7 +207,7 @@ describe('ListItemComponent', () => {
                             expect(component.notInteractable).toBe(false);
                         });
                         it('component is deleted', () => {
-                            expect(component.deleted).toBe(true);
+                            expect(component.isDeleted).toBe(true);
                         });
                     });
                 });
