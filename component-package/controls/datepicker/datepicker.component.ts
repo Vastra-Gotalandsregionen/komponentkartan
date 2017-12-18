@@ -91,8 +91,23 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }
 
-    onLeave() {
-        this.validate();
+    onLeave(event: FocusEvent) {
+
+        if (!event) {
+            this.validate();
+            console.log('validated on no event')
+            return;
+        }
+
+        const focusedElement = event.relatedTarget;
+        if (focusedElement !== null && !this.elementRef.nativeElement.contains(focusedElement)) {
+            //validera endast om vi är påväg från komponenten
+            this.validate();
+            console.log('validated on leave')
+            console.log('focused element: ' + focusedElement)
+            console.log('is focused element: ' + !this.elementRef.nativeElement.contains(focusedElement))
+        }
+
     }
 
     onEnter() {
@@ -301,12 +316,33 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     }
 
     // UI functions
-    displayDatePicker() {
+    // displayDatePicker() {
+    //     if (this.disabled || this.readonly) {
+    //         return;
+    //     }
+
+    //     this.isDatePickerVisible = !this.isDatePickerVisible;
+    // }
+
+    toggleExpand(event: Event) {
+        const target = event.target || event.srcElement || event.currentTarget;
+        const element = $(target);
+
         if (this.disabled || this.readonly) {
             return;
         }
-        this.isDatePickerVisible = true;
+
+        if (!element.hasClass('datepicker__calendar__header__next-year') &&
+            !element.hasClass('datepicker__calendar__header__previous-year') &&
+            !element.hasClass('datepicker__calendar__day') &&
+            !element.hasClass('datepicker__calendar')) {
+
+            console.log('toggle: ' + target.classList)
+            this.isDatePickerVisible = !this.isDatePickerVisible;
+        }
+
     }
+
 
     @HostListener('document:click', ['$event'])
     onOutsideClick(event: Event) {
@@ -334,7 +370,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     onSelectedDate(currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
         const clickedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
 
-        if (clickedDate.disabled) {
+        if (!clickedDate || clickedDate.disabled) {
             return;
         }
 
@@ -347,6 +383,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         this.validate();
         this.selectedDateChanged.emit(clickedDate.day);
         this.changeDetectorRef.detectChanges();
+
     }
 
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {

@@ -1,6 +1,6 @@
 <div class="validation">
-  <div class="datepicker datepicker--open" (mousedown)="displayDatePicker()" (focusin)="onEnter()" (focusout)="onLeave()">
-    <div class="datepicker__dropdown">
+  <div class="datepicker datepicker--open" (mousedown)="toggleExpand($event)" (focusin)="onEnter()" (focusout)="onLeave($event)">
+    <div class="datepicker__dropdown" tabindex="{{disabled || readonly ? -1 : 0}}">
       <span tabindex="0" *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date: selectedDateFormat}}</span>
       <span tabindex="0" *ngIf="!selectedDate" class="datepicker__calendar__selector" title="{{ readonly ? '' : 'Välj datum' }}">{{ readonly ? '' : 'Välj datum' }}</span>
 
@@ -24,7 +24,7 @@
               <td>Sö</td>
             </tr>
             <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
-              <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index" (click)="onSelectedDate(currentYearMonthIndex, weekIndex,dayIndex)">
+              <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index" (mousedown)="onSelectedDate(currentYearMonthIndex, weekIndex,dayIndex)">
                 <div *ngIf="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex]" class="datepicker__calendar__day" [ngClass]="{
                 'disabled': checkDisabledDate(weekIndex, dayIndex),
                 'datepicker__calendar__day--today' : checkTodayDate(weekIndex, dayIndex),
