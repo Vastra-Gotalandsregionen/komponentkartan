@@ -92,20 +92,18 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     }
 
     onLeave(event: FocusEvent) {
-
         if (!event) {
             this.validate();
-            console.log('validated on no event')
+            this.isDatePickerVisible = false;
             return;
         }
 
         const focusedElement = event.relatedTarget;
-        if (focusedElement !== null && !this.elementRef.nativeElement.contains(focusedElement)) {
+        if (focusedElement === null || !this.elementRef.nativeElement.contains(focusedElement)) {
             //validera endast om vi är påväg från komponenten
             this.validate();
-            console.log('validated on leave')
-            console.log('focused element: ' + focusedElement)
-            console.log('is focused element: ' + !this.elementRef.nativeElement.contains(focusedElement))
+            this.isDatePickerVisible = false;
+
         }
 
     }
@@ -315,51 +313,35 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         this.setPreviousAndNextMonthNavigation();
     }
 
-    // UI functions
-    // displayDatePicker() {
-    //     if (this.disabled || this.readonly) {
-    //         return;
-    //     }
 
-    //     this.isDatePickerVisible = !this.isDatePickerVisible;
-    // }
 
-    toggleExpand(event: Event) {
-        const target = event.target || event.srcElement || event.currentTarget;
-        const element = $(target);
+    onCalendarClick(event: Event) {
+        //används för att stoppa events från att bubbla ut
+        event.cancelBubble = true;
+    }
 
+    onDatePickerClick(event: Event) {
         if (this.disabled || this.readonly) {
             return;
         }
-
-        if (!element.hasClass('datepicker__calendar__header__next-year') &&
-            !element.hasClass('datepicker__calendar__header__previous-year') &&
-            !element.hasClass('datepicker__calendar__day') &&
-            !element.hasClass('datepicker__calendar')) {
-
-            console.log('toggle: ' + target.classList)
-            this.isDatePickerVisible = !this.isDatePickerVisible;
-        }
-
+        this.isDatePickerVisible = !this.isDatePickerVisible;
     }
 
 
-    @HostListener('document:click', ['$event'])
-    onOutsideClick(event: Event) {
-        if (!this.elementRef.nativeElement.contains(event.target)) {
-            this.isDatePickerVisible = false;
-        }
-    }
 
-    onPreviousMonth() {
+
+    onPreviousMonth(event: Event) {
+        event.cancelBubble = true;
         if (this.previousMonth) {
+
             this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
             this.setCurrentYearMonthOutput();
             this.setPreviousAndNextMonthNavigation();
         }
     }
 
-    onNextMonth() {
+    onNextMonth(event: Event) {
+        event.cancelBubble = true;
         if (this.nextMonth) {
             this.currentYearMonthIndex = this.currentYearMonthIndex + 1;
             this.setCurrentYearMonthOutput();
@@ -367,17 +349,19 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         }
     }
 
-    onSelectedDate(currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
+    onSelectedDate(event: Event, currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
         const clickedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
+
 
         if (!clickedDate || clickedDate.disabled) {
             return;
         }
-
+        event.cancelBubble = true;
         this.selectedDate = clickedDate.day;
         this.setSelectedDay(clickedDate);
 
         this.isDatePickerVisible = false;
+
         this.onChange(clickedDate.day);
 
         this.validate();
