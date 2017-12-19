@@ -116,6 +116,7 @@ vgr-sidebar-menu {
   li:not(.menu__footer):not(.menu--single-menu--footer):hover {
     @extend .border-left-color--primary;
     font-weight: bold;
+    letter-spacing: $font-size--small-letter-spacing-bold;
     border-left: calc(#{2 * $menu-border-width--small}) solid;
     margin-left: calc(#{-1 * $menu-border-width--small});
     .sidebar-menu--single-menu & {
@@ -406,6 +407,7 @@ vgr-sidebar-menu {
   li:not(.menu__footer):hover {
     @extend .border-left-color--primary;
     font-weight: bold;
+    letter-spacing: $font-size--small-letter-spacing-bold;
     border-left: calc(#{2 * $menu-border-width--small}) solid;
     margin-left: calc(#{-1 * $menu-border-width--small});
     .sidebar-menu--single-menu & {
@@ -450,6 +452,7 @@ vgr-sidebar-menu {
     li:not(.menu__footer):not(.menu--single-menu--footer):hover {
       border-left: calc(#{2 * $menu-border-width--medium}) solid;
       margin-left: calc(#{-1 * $menu-border-width--medium});
+      letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
     }
   }
   .menu__item-list {
@@ -478,6 +481,7 @@ vgr-sidebar-menu {
     li:not(.menu__footer):hover {
       border-left: calc(#{2 * $menu-border-width--medium});
       margin-left: calc(#{-1 * $menu-border-width--medium});
+      letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
     }
   }
   .menu-item__expander {
