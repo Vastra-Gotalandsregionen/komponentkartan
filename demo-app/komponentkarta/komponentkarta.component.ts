@@ -153,7 +153,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     private getDemoItems(numberOfItems: number): IDropdownItem[] {
         const items: IDropdownItem[] = [];
         for (let i = 1; i <= numberOfItems; i++) {
-            items.push({ id: i.toString(), displayName: `Långt namn med lite gött ${i}`, displayNameWhenSelected: `Alt ${i}` } as IDropdownItem);
+            items.push({ id: i.toString(), displayName: `21 - Södra hälso- och sjukvårdsnämnd`, displayNameWhenSelected: `Alt ${i}` } as IDropdownItem);
         }
         return items;
     }
