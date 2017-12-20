@@ -393,11 +393,17 @@ vgr-list-column-checkbox {
   height: 100%;
   .checkbox--inline {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
     .checkbox {
       height: 100%;
       width: 33px;
       justify-content: center;
-      flex-direction: column;
+      align-items: center;
+      .checkbox__image {
+        margin-top: 0;
+      }
       .checkbox__label {
         display: none;
       }
