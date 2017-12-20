@@ -281,125 +281,173 @@ describe('[DatepickerComponent]', () => {
         });
     });
 
-
-    describe('When calendar is disabled', () => {
+    describe('When calendar is open and focused', () => {
         beforeEach(() => {
-            component.disabled = true;
+            //component.ngOnInit();
+            component.isDatePickerVisible = true;
+            component.onEnter();
         });
-
-        describe('and the datepicker is clicked', () => {
-
+        describe('and user leaves component', () => {
             beforeEach(() => {
-                component.onDatePickerClick({ cancelBubble: true } as Event);
+
+                spyOn(component, 'validate');
+                component.onLeave(null);
+            });
+            it('datepicker is validated', () => {
+                expect(component.validate).toHaveBeenCalled();
             });
             it('the calendar is not visible', () => {
                 expect(component.isDatePickerVisible).toBe(false);
             });
+        })
+        describe('and user leaves component with no related target', () => {
+            beforeEach(() => {
 
-
+                spyOn(component, 'validate');
+                component.onLeave({ relatedTarget: null } as FocusEvent);
+            });
+            it('datepicker is validated', () => {
+                expect(component.validate).toHaveBeenCalled();
+            });
+            it('the calendar is not visible', () => {
+                expect(component.isDatePickerVisible).toBe(false);
+            });
         });
 
+        // describe('and user leaves component with a related target', () => {
+        //     beforeEach(() => {
+
+        //         spyOn(component, 'validate');
+        //         component.onLeave({ relatedTarget: {} as HTMLElement } } as FocusEvent);
+        // });
+        // it('datepicker is validated', () => {
+        //     expect(component.validate).toHaveBeenCalled();
+        // });
+        // it('the calendar is not visible', () => {
+        //     expect(component.isDatePickerVisible).toBe(false);
+        // });
     })
 
+})
 
-    describe(' When initialized with 3 months', () => {
+describe('When calendar is disabled', () => {
+    beforeEach(() => {
+        component.disabled = true;
+    });
+
+    describe('and the datepicker is clicked', () => {
+
         beforeEach(() => {
-            jasmine.clock().uninstall();
-            jasmine.clock().install();
-            const year = 2017;
-            const october = 9;
-            jasmine.clock().mockDate(new Date(year, october - 1, 15));
-            component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
-            component.minDate = new Date(year, october - 1, 1);
-            component.maxDate = new Date(year, october + 1, 30);
-            component.selectedDate = new Date(year, october, 1);
-            component.ngOnInit();
+            component.onDatePickerClick({ cancelBubble: true } as Event);
+        });
+        it('the calendar is not visible', () => {
+            expect(component.isDatePickerVisible).toBe(false);
+        });
+
+
+    });
+
+})
+
+
+describe(' When initialized with 3 months', () => {
+    beforeEach(() => {
+        jasmine.clock().uninstall();
+        jasmine.clock().install();
+        const year = 2017;
+        const october = 9;
+        jasmine.clock().mockDate(new Date(year, october - 1, 15));
+        component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
+        component.minDate = new Date(year, october - 1, 1);
+        component.maxDate = new Date(year, october + 1, 30);
+        component.selectedDate = new Date(year, october, 1);
+        component.ngOnInit();
+    });
+
+    it('can navigate to previous month', () => {
+        expect(component.previousMonth).toBeTruthy();
+    });
+
+    it('can navigate to next month', () => {
+        expect(component.nextMonth).toBeTruthy();
+    });
+
+    describe('and navigation to next month', () => {
+        beforeEach(() => {
+            component.onNextMonth({ cancelBubble: true } as Event);
         });
 
         it('can navigate to previous month', () => {
             expect(component.previousMonth).toBeTruthy();
         });
 
+        it('can not navigate to next month', () => {
+            expect(component.nextMonth).toBeFalsy();
+        });
+    });
+
+    describe('and navigation to previous month', () => {
+        beforeEach(() => {
+            component.onPreviousMonth({ cancelBubble: true } as Event);
+        });
+
+        it('can not navigate to previous month', () => {
+            expect(component.previousMonth).toBeFalsy();
+        });
+
         it('can navigate to next month', () => {
             expect(component.nextMonth).toBeTruthy();
         });
+    });
+});
+describe('correct css class assignment', () => {
+    beforeEach(() => {
+        component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
 
-        describe('and navigation to next month', () => {
-            beforeEach(() => {
-                component.onNextMonth({ cancelBubble: true } as Event);
-            });
+        component.yearMonths = [
+            {
+                year: 2017, month: 1, weeks: [
+                    {
+                        days: [
+                            { day: new Date(2017, 1, 1), disabled: true } as ICalendarDay,
+                            { day: new Date(2017, 1, 2), isCurrentDay: true } as ICalendarDay,
+                            { day: new Date(2017, 1, 3), selected: true } as ICalendarDay,
+                            { day: new Date(2017, 1, 4), disabled: false } as ICalendarDay
+                        ] as ICalendarDay[]
+                    } as ICalendarWeek
+                ] as ICalendarWeek[]
+            } as ICalendarYearMonth
+        ] as ICalendarYearMonth[];
+        component.currentYearMonthIndex = 0;
+    });
 
-            it('can navigate to previous month', () => {
-                expect(component.previousMonth).toBeTruthy();
-            });
+    describe('when checkDisabledDate is called', () => {
 
-            it('can not navigate to next month', () => {
-                expect(component.nextMonth).toBeFalsy();
-            });
+        it('disabled date returns true', () => {
+            expect(component.checkDisabledDate(0, 0)).toBe(true);
         });
-
-        describe('and navigation to previous month', () => {
-            beforeEach(() => {
-                component.onPreviousMonth({ cancelBubble: true } as Event);
-            });
-
-            it('can not navigate to previous month', () => {
-                expect(component.previousMonth).toBeFalsy();
-            });
-
-            it('can navigate to next month', () => {
-                expect(component.nextMonth).toBeTruthy();
-            });
+        it('enabled date returns false', () => {
+            expect(component.checkDisabledDate(0, 3)).toBe(false);
         });
     });
-    describe('correct css class assignment', () => {
-        beforeEach(() => {
-            component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
 
-            component.yearMonths = [
-                {
-                    year: 2017, month: 1, weeks: [
-                        {
-                            days: [
-                                { day: new Date(2017, 1, 1), disabled: true } as ICalendarDay,
-                                { day: new Date(2017, 1, 2), isCurrentDay: true } as ICalendarDay,
-                                { day: new Date(2017, 1, 3), selected: true } as ICalendarDay,
-                                { day: new Date(2017, 1, 4), disabled: false } as ICalendarDay
-                            ] as ICalendarDay[]
-                        } as ICalendarWeek
-                    ] as ICalendarWeek[]
-                } as ICalendarYearMonth
-            ] as ICalendarYearMonth[];
-            component.currentYearMonthIndex = 0;
+    describe('when checkTodayDate is called', () => {
+        it('todays date returns true', () => {
+            expect(component.checkTodayDate(0, 1)).toBeTruthy();
         });
-
-        describe('when checkDisabledDate is called', () => {
-
-            it('disabled date returns true', () => {
-                expect(component.checkDisabledDate(0, 0)).toBe(true);
-            });
-            it('enabled date returns false', () => {
-                expect(component.checkDisabledDate(0, 3)).toBe(false);
-            });
-        });
-
-        describe('when checkTodayDate is called', () => {
-            it('todays date returns true', () => {
-                expect(component.checkTodayDate(0, 1)).toBeTruthy();
-            });
-            it('other date returns false', () => {
-                expect(component.checkTodayDate(0, 0)).toBeFalsy();
-            });
-        });
-
-        describe('when checkSelectedDate is called', () => {
-            it('selected date returns true', () => {
-                expect(component.checkSelectedDate(0, 2)).toBeTruthy();
-            });
-            it('other date returns false', () => {
-                expect(component.checkSelectedDate(0, 0)).toBeFalsy();
-            });
+        it('other date returns false', () => {
+            expect(component.checkTodayDate(0, 0)).toBeFalsy();
         });
     });
+
+    describe('when checkSelectedDate is called', () => {
+        it('selected date returns true', () => {
+            expect(component.checkSelectedDate(0, 2)).toBeTruthy();
+        });
+        it('other date returns false', () => {
+            expect(component.checkSelectedDate(0, 0)).toBeFalsy();
+        });
+    });
+});
 });
 
