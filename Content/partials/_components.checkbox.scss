@@ -4,11 +4,10 @@
 
 .checkbox {
   position: relative;
-  align-items: center;
+  align-items: flex-start;
   display: flex;
-  align-items: center;
   cursor: pointer;
-  height: $component-height;
+  min-height: $component-height;
   &.checkbox--disabled {
     cursor: default;
   }
@@ -19,9 +18,10 @@
 }
 
 .checkbox__image {
-  width: 16px;
-  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
   background: white;
+  margin-top: 7px;
   border: 2px solid $control-color--enabled;
   transition: border-color 0.6s linear;
   position: relative;
@@ -60,17 +60,20 @@
 .checkbox__label {
   display: inline-block;
   margin-left: $margin--slim;
+  margin-top: 3px;
   transition: color 0.6s linear;
+  cursor: pointer;
   .checkbox--disabled & {
     color: $control-color--disabled;
     transition: color 0.6s linear;
+    cursor: default;
   }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
   .checkbox__image {
-    width: 18px;
-    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
     .checkbox--checked & {
       &:after {
         width: 10px;

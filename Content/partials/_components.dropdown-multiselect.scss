@@ -1,7 +1,7 @@
     .dropdown--multiselect {
       .dropdown__menu {
         a {
-          max-height: 38px;
+          min-height: 38px;
         }
       }
       &:focus {
