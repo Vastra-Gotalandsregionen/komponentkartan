@@ -53,19 +53,12 @@ describe('[DatepickerComponent(Angular)]', () => {
         describe('and the datepicker is clicked', () => {
 
             beforeEach(() => {
-                component.displayDatePicker();
+                component.onDatePickerClick({ cancelBubble: true } as Event);
             });
             it('the calendar is visible', () => {
                 expect(component.isDatePickerVisible).toBe(true);
             });
-            describe('and user clicks outside the calendar', () => {
-                beforeEach(() => {
-                    component.onOutsideClick(new Event('click'));
-                });
-                it('the calendar is closed', () => {
-                    expect(component.isDatePickerVisible).toBe(false);
-                });
-            });
+
         });
     });
 

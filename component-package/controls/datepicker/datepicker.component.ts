@@ -91,8 +91,21 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }
 
-    onLeave() {
-        this.validate();
+    onLeave(event: FocusEvent) {
+        if (!event) {
+            this.validate();
+            this.isDatePickerVisible = false;
+            return;
+        }
+
+        const focusedElement = event.relatedTarget;
+        if (focusedElement === null || !this.elementRef.nativeElement.contains(focusedElement)) {
+            //validera endast om vi är påväg från komponenten
+            this.validate();
+            this.isDatePickerVisible = false;
+
+        }
+
     }
 
     onEnter() {
@@ -300,30 +313,35 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         this.setPreviousAndNextMonthNavigation();
     }
 
-    // UI functions
-    displayDatePicker() {
+
+
+    onCalendarClick(event: Event) {
+        //används för att stoppa events från att bubbla ut
+        event.cancelBubble = true;
+    }
+
+    onDatePickerClick(event: Event) {
         if (this.disabled || this.readonly) {
             return;
         }
-        this.isDatePickerVisible = true;
+        this.isDatePickerVisible = !this.isDatePickerVisible;
     }
 
-    @HostListener('document:click', ['$event'])
-    onOutsideClick(event: Event) {
-        if (!this.elementRef.nativeElement.contains(event.target)) {
-            this.isDatePickerVisible = false;
-        }
-    }
 
-    onPreviousMonth() {
+
+
+    onPreviousMonth(event: Event) {
+        event.cancelBubble = true;
         if (this.previousMonth) {
+
             this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
             this.setCurrentYearMonthOutput();
             this.setPreviousAndNextMonthNavigation();
         }
     }
 
-    onNextMonth() {
+    onNextMonth(event: Event) {
+        event.cancelBubble = true;
         if (this.nextMonth) {
             this.currentYearMonthIndex = this.currentYearMonthIndex + 1;
             this.setCurrentYearMonthOutput();
@@ -331,22 +349,25 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         }
     }
 
-    onSelectedDate(currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
+    onSelectedDate(event: Event, currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
         const clickedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
 
-        if (clickedDate.disabled) {
+
+        if (!clickedDate || clickedDate.disabled) {
             return;
         }
-
+        event.cancelBubble = true;
         this.selectedDate = clickedDate.day;
         this.setSelectedDay(clickedDate);
 
         this.isDatePickerVisible = false;
+
         this.onChange(clickedDate.day);
 
         this.validate();
         this.selectedDateChanged.emit(clickedDate.day);
         this.changeDetectorRef.detectChanges();
+
     }
 
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {

@@ -220,20 +220,32 @@ describe('[DatepickerComponent]', () => {
                 expect(weekSix[0].disabled).toBe(true);
                 expect(weekSix[1].disabled).toBe(true);
             });
-
             describe('and the datepicker is clicked', () => {
 
                 beforeEach(() => {
-                    component.displayDatePicker();
+                    component.onDatePickerClick({ cancelBubble: true } as Event);
                 });
                 it('the calendar is visible', () => {
                     expect(component.isDatePickerVisible).toBe(true);
                 });
 
+                describe('and a disabled date is clicked', () => {
+                    beforeEach(() => {
+                        const spy = spyOn(component.selectedDateChanged, 'emit');
+                        component.onSelectedDate({ cancelBubble: true } as Event, 0, 5, 1);
+                    });
+                    it('the selected date is disabled', () => {
+                        expect(component.yearMonths[0].weeks[5].days[1].disabled).toBe(true);
+                    })
+                    it('the calendar is still visible', () => {
+                        expect(component.isDatePickerVisible).toBe(true);
+                    });
+                });
+
                 describe('and selecting a day in the calendar ', () => {
                     beforeEach(() => {
                         const spy = spyOn(component.selectedDateChanged, 'emit');
-                        component.onSelectedDate(0, 3, 1);
+                        component.onSelectedDate({ cancelBubble: true } as Event, 0, 3, 1);
                     });
                     it('the selected date is set', () => {
                         expect(component.yearMonths[0].weeks[3].days[1].selected).toBe(true);
@@ -250,12 +262,12 @@ describe('[DatepickerComponent]', () => {
 
             describe('when a date has been selected', () => {
                 beforeEach(() => {
-                    component.onSelectedDate(0, 3, 2);
+                    component.onSelectedDate({ cancelBubble: true } as Event, 0, 3, 2);
                 });
 
                 describe('and a new date is selected', () => {
                     beforeEach(() => {
-                        component.onSelectedDate(0, 3, 3);
+                        component.onSelectedDate({ cancelBubble: true } as Event, 0, 3, 3);
                     });
                     it('the selected date is selected', () => {
                         expect(component.yearMonths[0].weeks[3].days[3].selected).toBe(true);
@@ -268,6 +280,63 @@ describe('[DatepickerComponent]', () => {
             });
         });
     });
+
+    describe('When calendar is open and focused', () => {
+        beforeEach(() => {
+            //component.ngOnInit();
+            component.isDatePickerVisible = true;
+            component.onEnter();
+        });
+        describe('and user leaves component', () => {
+            beforeEach(() => {
+
+                spyOn(component, 'validate');
+                component.onLeave(null);
+            });
+            it('datepicker is validated', () => {
+                expect(component.validate).toHaveBeenCalled();
+            });
+            it('the calendar is not visible', () => {
+                expect(component.isDatePickerVisible).toBe(false);
+            });
+        })
+        describe('and user leaves component with no related target', () => {
+            beforeEach(() => {
+
+                spyOn(component, 'validate');
+                component.onLeave({ relatedTarget: null } as FocusEvent);
+            });
+            it('datepicker is validated', () => {
+                expect(component.validate).toHaveBeenCalled();
+            });
+            it('the calendar is not visible', () => {
+                expect(component.isDatePickerVisible).toBe(false);
+            });
+        });
+
+
+
+    })
+
+    describe('When calendar is disabled', () => {
+        beforeEach(() => {
+            component.disabled = true;
+        });
+
+        describe('and the datepicker is clicked', () => {
+
+            beforeEach(() => {
+                component.onDatePickerClick({ cancelBubble: true } as Event);
+            });
+            it('the calendar is not visible', () => {
+                expect(component.isDatePickerVisible).toBe(false);
+            });
+
+
+        });
+
+    })
+
 
     describe(' When initialized with 3 months', () => {
         beforeEach(() => {
@@ -293,7 +362,7 @@ describe('[DatepickerComponent]', () => {
 
         describe('and navigation to next month', () => {
             beforeEach(() => {
-                component.onNextMonth();
+                component.onNextMonth({ cancelBubble: true } as Event);
             });
 
             it('can navigate to previous month', () => {
@@ -307,7 +376,7 @@ describe('[DatepickerComponent]', () => {
 
         describe('and navigation to previous month', () => {
             beforeEach(() => {
-                component.onPreviousMonth();
+                component.onPreviousMonth({ cancelBubble: true } as Event);
             });
 
             it('can not navigate to previous month', () => {
