@@ -175,7 +175,11 @@ $filter-area-height: 60px;
     display: inline-block;
   }
   .dropdown__menu__items {
+    position: relative;
+    max-height: calc(#{$dropdown-height--small} - #{$margin--fat});
     li {
+      width: calc(100% - 17px);
+      background: white;
       a {
         padding-right: 11px;
         padding-left: 15px;
@@ -200,21 +204,11 @@ $filter-area-height: 60px;
         margin-bottom: 7px;
       }
     }
-  }
-  .dropdown--scroll-visible & {
-    max-height: $dropdown-height--small;
-    .dropdown__menu__items {
-      position: relative; // height: calc(#{$dropdown-height--small} - #{$margin--fat});
-      li {
-        width: calc(100% - 17px);
-        background: white;
-      }
-      li:last-child {
-        margin-bottom: 0px;
-      }
-      li:first-child {
-        margin-top: 4px;
-      }
+    li:last-child {
+      margin-bottom: 0px;
+    }
+    li:first-child {
+      margin-top: 4px;
     }
   }
   .dropdown--filter-visible & {
@@ -225,7 +219,7 @@ $filter-area-height: 60px;
     .container {
       margin-top: 40px;
     }
-  } //För att justera scrollbarens "längd", den krymper alldeles för mycket som standard vid många items
+  }
 }
 
 .dropdown__filterTextbox {
@@ -270,10 +264,7 @@ $filter-area-height: 60px;
 
 .dropdown__dimmer--top {
   background-image: linear-gradient(to top, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.38) 19%, rgba(255, 255, 255, 0.74) 52%, rgba(255, 255, 255, 0.9) 72%, #ffffff);
-  top: 0px;
-  .dropdown--scroll-visible & {
-    top: 8px;
-  }
+  top: 8px;
   .dropdown--filter-visible & {
     top: 47px;
   }
@@ -281,10 +272,8 @@ $filter-area-height: 60px;
 
 .dropdown__dimmer--bottom {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), #FFFFFF);
-  .dropdown--scroll-visible & {
-    display: block;
-    top: calc(#{$dropdown-height--small} - 25px);
-  }
+  display: block;
+  top: calc(#{$dropdown-height--small} - 25px);
   .dropdown--filter-visible & {
     display: block;
     top: calc(#{$dropdown-height--small} - 25px);
@@ -310,11 +299,8 @@ $filter-area-height: 60px;
   }
   .dropdown__menu {
     max-height: $dropdown-height--medium;
-    .dropdown--scroll-visible & {
-      max-height: $dropdown-height--medium;
-      .dropdown__menu__items {
-        max-height: calc(#{$dropdown-height--medium} - #{$margin--fat});
-      }
+    .dropdown__menu__items {
+      max-height: calc(#{$dropdown-height--medium} - #{$margin--fat});
     }
     .dropdown--filter-visible & {
       max-height: $dropdown-height--medium-with-filter;
@@ -325,16 +311,14 @@ $filter-area-height: 60px;
         margin-top: 40px;
       }
     }
-    .dropdown--scroll-visible.dropdown--filter-visible & {
-      height: $dropdown-height--medium-with-filter;
+    .dropdown--filter-visible & {
+      max-height: $dropdown-height--medium-with-filter;
     }
   }
   .dropdown__dimmer--bottom {
-    .dropdown--scroll-visible & {
-      top: calc(#{$dropdown-height--medium} - 24px);
-    }
+    top: calc(#{$dropdown-height--medium} - 25px);
     .dropdown--filter-visible & {
-      top: calc(#{$dropdown-height--medium-with-filter} - 24px);
+      top: calc(#{$dropdown-height--medium-with-filter} - 25px);
     }
   }
   .dropdown__filterTextbox {
@@ -361,11 +345,5 @@ $filter-area-height: 60px;
         transition: none;
       }
     }
-  }
-}
-
-vgr-dropdown {
-  .container {
-    max-height: 270px;
   }
 }

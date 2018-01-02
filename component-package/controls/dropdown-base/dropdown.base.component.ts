@@ -25,7 +25,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
     expanded: boolean;
     filterVisible: boolean;
-    scrollVisible: boolean;
     filter: string;
     scrollbarConfig: PerfectScrollbarConfig;
     dimmerTopVisible: boolean;
@@ -70,7 +69,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         super();
         this.expanded = false;
         this.filterVisible = false;
-        this.scrollVisible = false;
         this.filterPipe = new FilterPipe();
         this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
         this.showAllItemText = 'Visa alla';
@@ -115,19 +113,11 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     }
 
     updateScrolled() {
-
         if (!this.items) {
-            this.scrollVisible = false;
             return;
         }
-
-        const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
-        this.scrollVisible = true;// visibleItemCount > this.scrollLimit;
-        if (!this.scrollVisible) {
-            this.dimmerBottomVisible = false;
-            this.dimmerTopVisible = false;
-        }
-
+        const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length
+        this.dimmerBottomVisible = false;
     }
 
     onDropdownMouseDown(event: Event) {
@@ -155,7 +145,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
         const focusedElement = event.relatedTarget;
         if (focusedElement === null || !this.elementRef.nativeElement.contains(focusedElement)) {
-            //validera endast om vi är påväg från komponenten
+            // validera endast om vi är påväg från komponenten
             this.validate();
         }
 
