@@ -32,7 +32,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     control: AbstractControl;
 
     protected filterLimit = 20;
-    abstract get scrollLimit(): number;
     protected filterPipe: FilterPipe;
     protected preventCollapse: boolean;
 
@@ -53,7 +52,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             }
         }, 500);
         this.dimmerTopVisible = false;
-        this.dimmerBottomVisible = this._items.length > this.scrollLimit;
+        this.dimmerBottomVisible = false;
     }
     get items(): IDropdownItem[] {
         return this._items;
@@ -109,7 +108,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         this.filter = filterValue;
         this.updateScrolled();
         // Scroll to top when filter is changed
-        $('.dropdown__menu__items').scrollTop(0);
+        $('.container.ps').scrollTop(0);
     }
 
     updateScrolled() {

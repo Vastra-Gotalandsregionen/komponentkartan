@@ -29,9 +29,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
 
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
-    get scrollLimit(): number {
-        return this.filterVisible ? 7 : 8;
-    }
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
 
