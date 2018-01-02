@@ -48,7 +48,7 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.isReadonlyAndDisabledMulti = true;
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems200 = this.getDemoItems(200);
-        this.dropDownItems8 = this.getDemoItems(8);
+        this.dropDownItems4 = this.getDemoItems(4);
         this.dropDownItems7 = this.getDemoItems(7);
         this.dropDownItems6 = this.getDemoItems(6);
         this.dropMultipleDownItems8 = this.getDemoItems(8);

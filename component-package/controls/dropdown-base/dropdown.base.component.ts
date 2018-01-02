@@ -52,7 +52,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             }
         }, 500);
         this.dimmerTopVisible = false;
-        this.dimmerBottomVisible = false;
     }
     get items(): IDropdownItem[] {
         return this._items;
@@ -76,21 +75,23 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             displayName: this.showAllItemText,
         } as IDropdownItem;
     }
+
+
     protected abstract handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void;
 
     private listenToScrollbarEvents() {
         $(this.scrollbarComponent.elementRef.nativeElement).scroll((e) => {
-            this.hideDimmersIfScrollIsAtBottomOrTop(e);
+            this.hideDimmersIfScrollIsAtBottomOrTop(e.target);
         });
     }
 
-    private hideDimmersIfScrollIsAtBottomOrTop(scrollEvent: JQueryEventObject) {
-        const scrollbar = $(scrollEvent.target);
+    private hideDimmersIfScrollIsAtBottomOrTop(scrollElement: Element) {
+        const scrollbar = $(scrollElement);
         const margintolerance = 20;
 
-        const scrollHeight = scrollEvent.target.scrollHeight - margintolerance;
-        const clientHeight = scrollEvent.target.clientHeight;
-        const scrollTop = scrollEvent.target.scrollTop;
+        const scrollHeight = scrollElement.scrollHeight - margintolerance;
+        const clientHeight = scrollElement.clientHeight;
+        const scrollTop = scrollElement.scrollTop;
 
         if (clientHeight + scrollTop >= scrollHeight) {
             this.dimmerBottomVisible = false;
@@ -109,6 +110,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         this.updateScrolled();
         // Scroll to top when filter is changed
         $('.container.ps').scrollTop(0);
+        this.dimmerBottomVisible = false;
     }
 
     updateScrolled() {
@@ -116,7 +118,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             return;
         }
         const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length
-        this.dimmerBottomVisible = false;
     }
 
     onDropdownMouseDown(event: Event) {
@@ -147,7 +148,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             // validera endast om vi är påväg från komponenten
             this.validate();
         }
-
     }
 
     private toggleExpand(event: Event) {
@@ -157,8 +157,11 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             this.expanded = !this.expanded;
             if (!this.expanded) {
                 this.validate();
+            } else {
+                setTimeout(() => {
+                    this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent.elementRef.nativeElement);
+                }, 10);
             }
-
         }
     }
     @HostListener('document:click', ['$event'])
