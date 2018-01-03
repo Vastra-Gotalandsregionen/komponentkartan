@@ -1,0 +1,5 @@
+<vgr-modal></vgr-modal>
+<menu-selector (menuSelected)="setSelectedMenu($event)"></menu-selector>
+<vgr-sidebar-menu [menus]="menus"></vgr-sidebar-menu>
+<vgr-header [userName]="'Nico Åberg'" [headerMenu]="headerMenu"></vgr-header>
+<router-outlet (activate)="onActivate($event)"></router-outlet>

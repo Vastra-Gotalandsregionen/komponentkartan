@@ -1,0 +1,34 @@
+﻿//background
+$background-color--default: #f0f0f0;
+$background-color--content: #ffffff;
+$background-color--disabled: #87939f;
+$primary-color--error:#8C1919;
+$primary-color--success: #3D7630;
+$secondary-color--error:#f9dede;
+//text
+$text-color--default: #151515;
+$text-color--light: #ffffff;
+$text-color--value: #000000;
+$text-color--read-only: #87939f;
+//control
+$control-color--enabled: #151515;
+$control-color--disabled: #87939f;
+$control-border-color--default: #151515;
+//border
+$border-color: #87939f;
+$border-color--light: #dfdfdf;
+//menu
+$menu-text-color: #314152;
+$menu-color--inactive: transparentize($background-color--default, 0.3);
+//misc
+$focus-color: #4990e2;
+$modal-background-color: transparentize($text-color--default, 0.35);
+//themes
+$primary-color--blue: #006298;
+$secondary-color--blue: #598eb6;
+$primary-color--default: #314152;
+$secondary-color--default: #87939f;
+$primary-color--green: #4a773c;
+$secondary-color--green: #7fa276;
+$primary-color--red: #9d2235;
+$secondary-color--red: #ba6071;

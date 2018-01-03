@@ -1,7 +1,0 @@
-<nav class="sidebar-menu" [ngClass]="{'sidebar-menu--single-menu' : menus && menus.length === 1}">
-    <perfect-scrollbar class="container">
-        <vgr-menu *ngFor="let menu of menus" [menu]="menu" [isSingleMenu]="menus.length===1" (onToggleExpand)="onAnyMenuExpanded($event)">
-        </vgr-menu>
-        <div *ngIf="menus && menus.length>1 && anyMenuExpanded" class="scroll-filler"></div>
-    </perfect-scrollbar>
-</nav>

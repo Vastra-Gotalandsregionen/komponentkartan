@@ -1,98 +1,27 @@
 # Komponentkartan
-<!-- Badges section here. -->
-![npm](https://img.shields.io/npm/v/vgr-komponentkartan.svg)
-![npm](https://img.shields.io/npm/v/vgr-komponentkartan/demo.svg)
 
-Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular 4
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
 
-## Komma igång
+## Development server
 
-### 0. Förutsättningar
-Se [Demoprojektet]https://github.com/Vastra-Gotalandsregionen/komponentkartan-demo) för en exempeluppsättning.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-### 1. Installera vgr-komponentkartan via **npm**
-```npm
-npm install vgr-komponentkartan
-```
+## Code scaffolding
 
-### 2. Uppsättning av vgr-komponentkartan
-Importera komponentkartanmodule i användande module.
-```
-import { KomponentkartanModule } from 'vgr-komponentkartan/component-package/komponentkartan.module';
-@NgModule({
-    imports: [
-        KomponentkartanModule
-    ],
-    ...
-})
-```
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Lägg till sökvägar till scss filen och jquery i angular-cli.json filen, som är beroenden för komponentkartan
-```
-"styles": [
-    "../node_modules/vgr-komponentkartan/Content/komponentkartan.scss",
-    "styles.css"
-],
-"scripts": ["../node_modules/jquery/dist/jquery.min.js"],
-```
+## Build
 
-Börja använda komponenterna t.ex.
-```
-<vgr-header></vgr-header>
-```
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Kod
-Skriven i html, typescript och Sass.
+## Running unit tests
 
-### Namngivning av komponenter och dess egenskaper
-...
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-### Tester
-Samtliga komponenter är och ska vara täckta av tester via Jasmine.
+## Running end-to-end tests
 
-Testerna är uppdelade i två typer, tester med Angular och tester utan Angular. Tester **med** Angular benämns *komponent*.**angular**.spec.ts. Tester **utan** Angular namnges endast med *komponent*.spec.ts
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Byggt med
+## Further help
 
-* [Angular 4](https://angular.io/) - Web framework
-* [Typescript](https://www.typescriptlang.org/) - Javascript that scales
-* [SASS](sass-lang.com) - SASS - Syntactically Awesome Style Sheets
-* [NPM](https://www.npmjs.com/) - Dependency Management
-* CSS struktureras enligt ITCSS. Se [ITCSS: SCALABLE AND MAINTAINABLE CSS ARCHITECTURE] (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/) för mer information.
-
-
-## Versioner
-
-Vi använder [SemVer](http://semver.org/) för versionering. Ändringar mellan versioner noteras i vår [Changelog](CHANGELOG.md), som följer riktlinjer från [keepachangelog.com](http://keepachangelog.com). Changelog för stabil version (se nedan) innehåller alltid ändringar utifrån **föregående stabila version**.
-
-### Senaste stabila version
-Efter godkännande av demo från produktägare skapas en ny stabil version.
-
-Den senaste stabila versionen hämtas automatiskt via.
-```npm
-npm install vgr-komponentkartan
-```
-
-### Senaste demoversion
-Under utveckling av nya features publiceras en demoversion. Den används internt av teamet och används vid demo för produktägare. Den namnges som releasekandidat med *kommande-version*-*rc*.*nummer*. T.ex
-- 1.2.0-rc1
-- 1.2.0-rc2
-- osv..
-
-En demoversion publiceras av teamet med hjälp av
-```npm
-npm publish --tag demo
-```
-
-För att hämta ner den senaste demoversionen **OBS! Ej för produktion**
-```npm
-npm install vgr-komponentkartan@demo
-```
-
-## Författare
-VGR IT
-
-## Licens
-
-TODO
-
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
