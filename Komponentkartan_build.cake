@@ -163,7 +163,7 @@ Task("Run-Jasmine-Tests")
 {
 	NpmRunScript(new NpmRunScriptSettings
     {
-        ScriptName = "ng-test",
+        ScriptName = "test-ci",
         WorkingDirectory = "./"
     });
 });
