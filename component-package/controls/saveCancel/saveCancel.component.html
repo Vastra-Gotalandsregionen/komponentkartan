@@ -1,5 +1,0 @@
-﻿<div class="save-cancel">
-  <vgr-button class="button--cancel" [disabled]="!unlocked" (click)="onCancel()" [secondary]="secondary">Avbryt</vgr-button>
-  <vgr-button class="button--save" [disabled]="!unlocked" (click)="onSave()" [secondary]="secondary">{{saveButtonText}}</vgr-button>
-  <vgr-lock-button *ngIf="!hideLock" [disabled]="unlocked" [unlocked]="unlocked" (lockChanged)="onLockChanged($event)"></vgr-lock-button>
-</div>
