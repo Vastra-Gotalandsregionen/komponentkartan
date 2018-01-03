@@ -1,162 +1,124 @@
-﻿module.exports = function (wallaby) {
+var wallabyWebpack = require('wallaby-webpack');
+var path = require('path');
 
+var compilerOptions = Object.assign(
+  require('./tsconfig.json').compilerOptions,
+  require('./src/tsconfig.spec.json').compilerOptions);
 
-  var compilerOptions = require('./tsconfig.json').compilerOptions;
-  compilerOptions.module = 'system';
+module.exports = function (wallaby) {
 
+  var webpackPostprocessor = wallabyWebpack({
+    entryPatterns: [
+      'src/wallabyTest.js',
+      'src/**/*spec.js'
+    ],
+    module: {
+      loaders: [{
+          test: /\.css$/,
+          loader: ['raw-loader', 'css-loader']
+        },
+        {
+          test: /\.html$/,
+          loader: 'raw-loader'
+        },
+        {
+          test: /\.ts$/,
+          loader: '@ngtools/webpack',
+          include: /node_modules/,
+          query: {
+            tsConfigPath: 'tsconfig.json'
+          }
+        },
+        {
+          test: /\.js$/,
+          loader: 'angular2-template-loader',
+          exclude: /node_modules/
+        },
+        {
+          test: /\.json$/,
+          loader: 'json-loader'
+        },
+        {
+          test: /\.styl$/,
+          loaders: ['raw-loader', 'stylus-loader']
+        },
+        {
+          test: /\.less$/,
+          loaders: ['raw-loader', 'less-loader']
+        },
+        {
+          test: /\.scss$|\.sass$/,
+          loaders: ['raw-loader', 'sass-loader']
+        },
+        {
+          test: /\.(jpg|png)$/,
+          loader: 'url-loader?limit=128000'
+        }
+      ]
+    },
+
+    resolve: {
+      extensions: ['.js', '.ts'],
+      modules: [
+        path.join(wallaby.projectCacheDir, 'src/app'),
+        path.join(wallaby.projectCacheDir, 'src'),
+        'node_modules'
+      ]
+    },
+    node: {
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty',
+      dns: 'empty'
+    }
+  });
 
   return {
     files: [{
-        pattern: 'node_modules/systemjs/dist/system-polyfills.js',
-        instrument: false
+        pattern: 'src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)',
+        load: false
       },
       {
-        pattern: 'node_modules/systemjs/dist/system.js',
-        instrument: false
+        pattern: 'src/**/*.d.ts',
+        ignore: true
       },
       {
-        pattern: 'node_modules/core-js/client/shim.js',
-        instrument: false
-      },
-
-      {
-        pattern: 'node_modules/zone.js/dist/zone.js',
-        instrument: false
-      },
-      {
-        pattern: 'node_modules/zone.js/dist/long-stack-trace-zone.js',
-        instrument: false
-      },
-      {
-        pattern: 'node_modules/zone.js/dist/proxy.js',
-        instrument: false
-      },
-      {
-        pattern: 'node_modules/zone.js/dist/sync-test.js',
-        instrument: false
-      },
-      {
-        pattern: 'node_modules/zone.js/dist/jasmine-patch.js',
-        instrument: false
-      },
-      {
-        pattern: 'node_modules/zone.js/dist/async-test.js',
-        instrument: false
-      },
-      {
-        pattern: 'node_modules/zone.js/dist/fake-async-test.js',
-        instrument: false
-      },
-      {
-        pattern: 'node_modules/reflect-metadata/Reflect.js',
-        instrument: false
+        pattern: 'src/**/*spec.ts',
+        ignore: true
       },
       {
         pattern: 'node_modules/jquery/dist/jquery.min.js',
         instrument: false
-
       },
-
-      {
-        pattern: './systemjs.config.js',
-        instrument: false
-      },
-
-      {
-        pattern: './demo-app/**/*+(ts|html|css)',
-        load: false
-      },
-      {
-        pattern: './component-package/**/*+(ts|html|css)',
-        load: false
-      },
-      {
-        pattern: 'node_modules/intl/dist/Intl.js',
-        instrument: false
-      },
-
     ],
 
-
     tests: [{
-      pattern: "./tests/**/*.spec.ts",
+      pattern: 'src/**/*spec.ts',
       load: false
     }],
 
-    env: {
-      kind: 'electron'
-    },
-
-
-    middleware: function (app, express) {
-      app.use('/node_modules', express.static(require('path').join(__dirname, 'node_modules')));
-    },
-
-
     testFramework: 'jasmine',
-
 
     compilers: {
       '**/*.ts': wallaby.compilers.typeScript(compilerOptions)
     },
 
-
-    preprocessors: {
-      '**/*.js': function (file) {
-        return file.content.replace('moduleId: module.id', 'moduleId: __moduleName');
-      }
+    middleware: function (app, express) {
+      var path = require('path');
+      app.use('/favicon.ico', express.static(path.join(__dirname, 'src/favicon.ico')));
+      app.use('/assets', express.static(path.join(__dirname, 'src/assets')));
     },
 
+    env: {
+      kind: 'electron'
+    },
 
-    debug: true,
+    postprocessor: webpackPostprocessor,
 
+    setup: function () {
+      window.__moduleBundler.loadTests();
+    },
 
-    setup: function (wallaby) {
-      wallaby.delayStart();
-
-
-      System.config({
-        transpiler: 'none',
-        defaultJSExtensions: true,
-        meta: {
-          './demo-app/*': {
-            scriptLoad: true,
-            format: 'register'
-          }
-        }
-      });
-
-      var promises = [
-        Promise.all([
-          System.import('@angular/core/testing'),
-          System.import('@angular/platform-browser-dynamic/testing')
-        ])
-
-
-        .then(function (providers) {
-          var coreTesting = providers[0];
-          var browserTesting = providers[1];
-
-
-          coreTesting.TestBed.initTestEnvironment(
-            browserTesting.BrowserDynamicTestingModule,
-            browserTesting.platformBrowserDynamicTesting());
-        })
-      ];
-
-
-      for (var i = 0, len = wallaby.tests.length; i < len; i++) {
-        promises.push(System['import'](wallaby.tests[i]));
-      }
-
-
-      Promise.all(promises).then(function () {
-        wallaby.start();
-      }).catch(function (e) {
-        setTimeout(function () {
-          throw e;
-        }, 0);
-      });
-    }
+    debug: true
   };
 };

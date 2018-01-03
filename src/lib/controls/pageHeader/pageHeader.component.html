@@ -1,0 +1,11 @@
+<div [ngClass]="{'page-header--actions-visible' : expanded, 'page-header--actions-hidden' : !expanded}">
+  <div class="page-header__top-border"></div>
+  <div class="page-header__controls">
+    <ng-content></ng-content>
+
+    <div class="page-header__title control-with-heading">
+      <h1>{{title}}</h1>
+      <vgr-save-cancel *ngIf="saveCancel" class="page-header__save-cancel" (onCancel)="disableActions()" (onSave)="disableActions()"></vgr-save-cancel>
+    </div>
+  </div>
+</div>
