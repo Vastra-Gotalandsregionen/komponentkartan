@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "2.0.0-rc1",
+  "version": "2.0.0-rc2",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
@@ -15,7 +15,6 @@
     "packagr": "ng-packagr -p ng-package.json && npm run copy-assets",
     "copy-assets": "cp -r src/assets dist"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
