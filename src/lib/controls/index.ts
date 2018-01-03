@@ -5,7 +5,6 @@ export { ButtonComponent } from './button/button.component';
 export { CardComponent } from './card/card.component';
 export { CardColumnComponent } from './card/card-column.component';
 export { CardHeaderComponent } from './card/card-header.component';
-
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { DropdownComponent } from './dropdown/dropdown.component';
 export { DropdownMultiselectComponent } from './dropdown-multiselect/dropdown-multiselect.component';
@@ -39,3 +38,5 @@ export { PageBodyComponent } from './page-body/page-body.component';
 export { PageBlockComponent } from './page-block/page-block.component';
 export { ListItemContentComponent } from './list-item/list-item-content.component';
 export { ListItemHeaderComponent } from './list-item/list-item-header.component';
+
+export { ValidationComponent } from './validation/validation.component';
