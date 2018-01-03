@@ -1,0 +1,9 @@
+<div class="vgr-modal" (keydown)="onKeyDown($event)" [ngClass]="{'vgr-modal--open':isOpen}">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+    <h1 id="dialogTitle" class="modal-content__title">{{title}}</h1>
+    <div class="modal-content__message">{{message}}</div>
+    <div class="modal-content__buttons">
+      <vgr-button *ngFor="let button of buttons" secondary="true" [attr.default]="button.isDefault" (click)="onButtonClick(button.callback)">{{button.text}}</vgr-button>
+    </div>
+  </div>
+</div>

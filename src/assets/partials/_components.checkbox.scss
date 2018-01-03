@@ -1,0 +1,89 @@
+/* First, hide the default checkbox. It cannot be styled with CSS.
+ * Instead, we will use the "label" that is associated with our textbox.
+ * It will contain all of the checkbox graphics and behaviour */
+
+.checkbox {
+  position: relative;
+  align-items: flex-start;
+  display: flex;
+  cursor: pointer;
+  min-height: $component-height;
+  &.checkbox--disabled {
+    cursor: default;
+  }
+}
+
+.checkbox--inline {
+  display: inline-flex;
+}
+
+.checkbox__image {
+  min-width: 16px;
+  min-height: 16px;
+  background: white;
+  margin-top: 7px;
+  border: 2px solid $control-color--enabled;
+  transition: border-color 0.6s linear;
+  position: relative;
+  &:focus {
+    box-shadow: 0 0 4px 0 $focus-color;
+  }
+  .checkbox--disabled & {
+    border: 2px solid $control-color--disabled;
+    box-shadow: none;
+    transition: border-color 0.6s linear;
+  }
+  .checkbox--checked & {
+    background: $control-color--enabled;
+    border: none;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 9px;
+      height: 5px;
+      background: transparent;
+      top: 5px;
+      left: 4px;
+      border: 2px solid white;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-50deg);
+    }
+  }
+  .checkbox--disabled.checkbox--checked & {
+    background: $control-color--disabled;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.checkbox__label {
+  display: inline-block;
+  margin-left: $margin--slim;
+  margin-top: 3px;
+  transition: color 0.6s linear;
+  cursor: pointer;
+  .checkbox--disabled & {
+    color: $control-color--disabled;
+    transition: color 0.6s linear;
+    cursor: default;
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .checkbox__image {
+    min-width: 18px;
+    min-height: 18px;
+    .checkbox--checked & {
+      &:after {
+        width: 10px;
+        height: 5px;
+        top: 6px;
+        left: 4px;
+      }
+    }
+  }
+  .checkbox__label {
+    margin-left: $margin--regular;
+  }
+}

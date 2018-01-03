@@ -1,0 +1,13 @@
+<header class="site-header-vgr">
+    <div alt="VG_Ne" class="header__vgr-logo"></div>
+    <div *ngIf="userName && headerMenu" class="header__info-box header-menu__trigger" tabindex="1" (click)="toggleHeaderMenu($event)" (keydown)="keyDown($event)">
+        <vgr-login-information [userName]="userName"></vgr-login-information>
+        <div class="header__info-header-menu-arrow"></div>
+        <vgr-header-menu [menu]="headerMenu"></vgr-header-menu>
+    </div>
+
+    <div *ngIf="userName && !headerMenu" class="header__info-box" tabindex="1">
+        <vgr-login-information [userName]="userName"></vgr-login-information>
+    </div>
+
+</header>

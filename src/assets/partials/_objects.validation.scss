@@ -1,0 +1,85 @@
+.validation {
+  max-height: auto;
+  height: 30px;
+  padding: 0px;
+  background-color: inherit;
+  position: relative;
+  display: block;
+  top: 0px;
+  .validation-error--active & {
+    max-height: unset;
+    height: auto;
+    padding: $margin--slim;
+    margin-left: -$margin--slim;
+    .title-value-layout & {
+      top: -10px;
+    }
+    background-color: $secondary-color--error;
+    transition: background-color 0.3s linear,
+    padding-top 0.3s linear,
+    padding-bottom 0.3s linear,
+    top 0.3s linear;
+  }
+  .validation-error--editing & {
+    max-height: unset;
+    height: auto;
+    .title-value-layout & {
+      top: -10px;
+    }
+    background-color: $background-color--default;
+    padding: $margin--slim;
+    margin-left: -$margin--slim;
+    transition: background-color 0.3s linear;
+  }
+  .readonly & {
+    background-color: inherit;
+    transition: max-height 0.3s linear;
+    max-width: none !important;
+    height: auto;
+  }
+}
+
+.validation__status {
+  display: none;
+  .validation-error--active & {
+    margin-top: 4px;
+    display: flex;
+  }
+  .validation-error--editing & {
+    margin-top: 4px;
+    display: flex;
+  }
+  .readonly & {
+    display: none;
+  }
+}
+
+.validation__status__icon {
+  display: none;
+  margin-top: 2px;
+  height: 30px;
+  width: 30px;
+  .validation-error--active & {
+    @extend .bg-image-icon-exclamation--red;
+    display: inline-block;
+  }
+  .validation-error--editing & {
+    display: inline-block;
+    @extend .bg-image-icon-exclamation;
+  }
+}
+
+.validation__status__message {
+  display: none;
+  margin-left: 4px;
+  margin-top: 5px;
+  vertical-align: middle;
+  .validation-error--active & {
+    color: $primary-color--error;
+    display: inline-block;
+  }
+  .validation-error--editing & {
+    display: inline-block;
+    color: $text-color--default;
+  }
+}

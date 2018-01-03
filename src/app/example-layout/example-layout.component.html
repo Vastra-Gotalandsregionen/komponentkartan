@@ -1,0 +1,12 @@
+<vgr-page>
+  <vgr-page-header [title]="'Snygg Layout'">
+
+    <vgr-button (click)="onClick()">action-panel</vgr-button>
+  </vgr-page-header>
+  <vgr-action-panel [expanded]="expanded" [expansionSpeed]="'fast'">
+    <div class="row-layout">
+      <vgr-button>test</vgr-button>
+      <vgr-lock-button></vgr-lock-button>
+    </div>
+  </vgr-action-panel>
+</vgr-page>

@@ -1,0 +1,131 @@
+.row-layout {
+  display: flex;
+  flex-direction: row;
+  >*:first-child {
+    margin-left: 0px;
+  }
+  >* {
+    margin-left: $margin--regular;
+  }
+  &.row-layout--tight {
+    >*:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
+  &.row-layout--component {
+    height: $component-height;
+  }
+}
+
+.row-layout--equal-height {
+  >* {
+    display: flex;
+  }
+}
+
+.column-layout {
+  display: flex;
+  flex-direction: column;
+  >*:first-child {
+    margin-top: 0px;
+  }
+  >* {
+    margin-top: $margin--slim;
+  }
+  &.column-layout--tight {
+    >*:first-child {
+      margin-top: 0px;
+    }
+    >* {
+      margin-top: $margin--slimmer;
+    }
+  }
+  &.column-layout--pull-left {
+    align-items: flex-start;
+  }
+  &.column-layout--pull-right {
+    align-items: flex-end;
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.flex-right {
+  margin-left: auto !important;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.flex-pull-right {
+  margin-left: auto;
+}
+
+.bordered {
+  border: 1px solid $border-color;
+}
+
+.control-with-heading {
+  >* {
+    justify-content: flex-end;
+  }
+  >*:first-child {
+    padding-bottom: 10px;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.control-without-heading {
+  align-self: flex-end;
+}
+
+.control-with-label {
+  label {
+    font-size: $h2-font-size--small;
+    margin-bottom: $margin--xs-slim;
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .row-layout {
+    >* {
+      margin-left: $margin--fat;
+    }
+  }
+  .column-layout {
+    >* {
+      margin-top: $margin--regular;
+    }
+    &.column-layout--tight {
+      >* {
+        margin-top: $margin--slim;
+      }
+    }
+  }
+  .control-with-label {
+    label {
+      font-size: $h2-font-size--medium;
+    }
+  }
+}
