@@ -13,7 +13,8 @@
     "copy-assets": "cp -r src/assets dist",
     "packagr": "ng-packagr -p ng-package.json && npm run copy-assets",
     "publish-demo": "npm run packagr && npm publish --tag demo",
-    "publish-dev": "npm run packagr && npm publish --tag dev"
+    "publish-dev": "npm run packagr && npm publish --tag dev",
+    "test-ci": "karma start ./karma.conf.server.js"
   },
   "dependencies": {
     "@angular/animations": "^5.0.0",
