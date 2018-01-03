@@ -31,9 +31,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     @Input() showAllItemText: string; // showAllItemText (skrivit ett filter och vill rensa filtret)
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string; // texten som visas å checkboxen för att välja alla
-    get scrollLimit(): number {
-        return this.filterVisible ? 6 : 7;
-    }
     dropdownLabel: string;
     selectAllItem: IDropdownItem;
 

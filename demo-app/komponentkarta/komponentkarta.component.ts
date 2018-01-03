@@ -48,7 +48,7 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.isReadonlyAndDisabledMulti = true;
         this.dropDownItems25 = this.getDemoItems(25);
         this.dropDownItems200 = this.getDemoItems(200);
-        this.dropDownItems8 = this.getDemoItems(8);
+        this.dropDownItems4 = this.getDemoItems(4);
         this.dropDownItems7 = this.getDemoItems(7);
         this.dropDownItems6 = this.getDemoItems(6);
         this.dropMultipleDownItems8 = this.getDemoItems(8);
@@ -153,7 +153,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     private getDemoItems(numberOfItems: number): IDropdownItem[] {
         const items: IDropdownItem[] = [];
         for (let i = 1; i <= numberOfItems; i++) {
-            items.push({ id: i.toString(), displayName: `21 - Södra hälso- och sjukvårdsnämnd`, displayNameWhenSelected: `Alt ${i}` } as IDropdownItem);
+            items.push({ id: i.toString(), displayName: `${i} - Södra hälso- och sjukvårdsnämndernas riksförbund`, displayNameWhenSelected: `Alt ${i}` } as IDropdownItem);
         }
         return items;
     }
