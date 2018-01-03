@@ -1,0 +1,1133 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.Npm</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.Npm.AddinInformation">
+            <summary>
+            Helper to log addin version information
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.AddinInformation.LogVersionInformation(Cake.Core.Diagnostics.ICakeLog)">
+            <summary>
+            verbosely log addin version information
+            </summary>
+            <param name="log"></param>
+        </member>
+        <member name="T:Cake.Npm.Install.NpmInstaller">
+            <summary>
+            Tool for installing npm modules.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstaller.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator,Cake.Core.Diagnostics.ICakeLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.Install.NpmInstaller"/> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="processRunner">The process runner.</param>
+            <param name="tools">The tool locator.</param>
+            <param name="log">Cake log instance.</param>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstaller.Install(Cake.Npm.Install.NpmInstallSettings)">
+            <summary>
+            Installs a npm package from the specified settings.
+            </summary>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="T:Cake.Npm.Install.NpmInstallSettings">
+            <summary>
+            Contains settings used by <see cref="T:Cake.Npm.Install.NpmInstaller"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.Install.NpmInstallSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Install.NpmInstallSettings.Force">
+            <summary>
+            Gets a value indicating whether npm should fetch remote resources even if a local copy
+            exists on disk.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Install.NpmInstallSettings.Global">
+            <summary>
+            Gets a value indicating whether the package should be installed globally rather than locally.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Install.NpmInstallSettings.Production">
+            <summary>
+            Gets a value indicating whether npm should ignore modules listed in <code>devDependencies</code>.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Install.NpmInstallSettings.NoOptional">
+            <summary>
+            Gets a value indicating whether npm should prevent optional dependencies from being installed
+            (the --no-optional argument)
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Install.NpmInstallSettings.Packages">
+            <summary>
+            Gets the list of packages which should be installed.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Install.NpmInstallSettings.Registry">
+            <summary>
+            Gets or sets a value indicating which registry we should point to. Defaulted to whatever the NPM configuration is.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Install.NpmInstallSettings.PreferOffline">
+            <summary>
+            Gets or sets a value indicating whether or not to utilise the prefer offline flag, avoiding going to the internet for packages if possible.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the settings and writes them to <paramref name="args"/>.
+            </summary>
+            <param name="args">The argument builder into which the settings should be written.</param>
+        </member>
+        <member name="T:Cake.Npm.Install.NpmInstallSettingsExtensions">
+            <summary>
+            Extensions for <see cref="T:Cake.Npm.Install.NpmInstallSettings"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.WithForce(Cake.Npm.Install.NpmInstallSettings)">
+            <summary>
+            Defines that npm should fetch remote resources even if a local copy
+            exists on disk.
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Install.NpmInstallSettings.Force"/> set to <c>true</c>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.WithoutForce(Cake.Npm.Install.NpmInstallSettings)">
+            <summary>
+            Defines that npm should not fetch remote resources if a local copy exists on disk.
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Install.NpmInstallSettings.Force"/> set to <c>false</c>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.WithForce(Cake.Npm.Install.NpmInstallSettings,System.Boolean)">
+            <summary>
+            Defines whether npm should fetch remote resources even if a local copy
+            exists on disk.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="value">Value which should be set.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Install.NpmInstallSettings.Force"/> set to <paramref name="value"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.InstallGlobally(Cake.Npm.Install.NpmInstallSettings)">
+            <summary>
+            Defines that the package should be installed globally.
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Install.NpmInstallSettings.Global"/> set to <c>true</c>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.InstallLocally(Cake.Npm.Install.NpmInstallSettings)">
+            <summary>
+            Defines that the package should be installed locally.
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Install.NpmInstallSettings.Global"/> set to <c>false</c>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.ForProduction(Cake.Npm.Install.NpmInstallSettings)">
+            <summary>
+            Defines that npm should ignore modules listed in <c>devDependencies</c>.
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Install.NpmInstallSettings.Production"/> set to <c>true</c>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.WithoutOptionalDependencies(Cake.Npm.Install.NpmInstallSettings)">
+            <summary>
+            Defines that npm should prevent optional dependencies from being installed
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Install.NpmInstallSettings.NoOptional"/> set to <c>true</c>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.WithOptionalDependencies(Cake.Npm.Install.NpmInstallSettings)">
+            <summary>
+            Defines that npm should install optional dependencies
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Install.NpmInstallSettings.NoOptional"/> set to <c>false</c>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.WithNoOptional(Cake.Npm.Install.NpmInstallSettings,System.Boolean)">
+            <summary>
+            Defines whether npm should prevent optional dependencies from being installed
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="value">Value which should be set.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Install.NpmInstallSettings.NoOptional"/> set to <paramref name="value"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.AddPackage(Cake.Npm.Install.NpmInstallSettings,System.Uri)">
+            <summary>
+            Install a package from a specific url.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="url">Url to directory containing package.json (see npm docs)</param>
+            <returns>The <paramref name="settings"/> instance with <paramref name="url"/> added to <see cref="P:Cake.Npm.Install.NpmInstallSettings.Packages"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.AddPackage(Cake.Npm.Install.NpmInstallSettings,System.String)">
+            <summary>
+            Install a package by name, version/tag.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="packageName">Name of the package.</param>
+            <returns>The <paramref name="settings"/> instance with <paramref name="packageName"/> added to <see cref="P:Cake.Npm.Install.NpmInstallSettings.Packages"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.AddPackage(Cake.Npm.Install.NpmInstallSettings,System.String,System.String)">
+            <summary>
+            Install a package by name and version/tag.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="packageName">Name of the package.</param>
+            <param name="versionOrTag">Version or tag published to the registry.</param>
+            <returns>The <paramref name="settings"/> instance with <paramref name="packageName"/> added to <see cref="P:Cake.Npm.Install.NpmInstallSettings.Packages"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.AddScopedPackage(Cake.Npm.Install.NpmInstallSettings,System.String,System.String)">
+            <summary>
+            Install a scoped package by name, version/tag.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="packageName">Name of the package.</param>
+            <param name="scope">Scope of the package.</param>
+            <returns>The <paramref name="settings"/> instance with <paramref name="packageName"/> added to <see cref="P:Cake.Npm.Install.NpmInstallSettings.Packages"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Install.NpmInstallSettingsExtensions.AddPackage(Cake.Npm.Install.NpmInstallSettings,System.String,System.String,System.String)">
+            <summary>
+            Install a package by name, version/tag and scope.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="packageName">Name of the package.</param>
+            <param name="scope">Scope of the package. Null for not restricting to a scope.</param>
+            <param name="versionOrTag">Version or tag published to the registry. Null for latest version.</param>
+            <returns>The <paramref name="settings"/> instance with <paramref name="packageName"/> added to <see cref="P:Cake.Npm.Install.NpmInstallSettings.Packages"/>.</returns>
+        </member>
+        <member name="T:Cake.Npm.Install.NamespaceDoc">
+            <summary>
+            This namespace contain types used for installing npm packages.
+            </summary>
+        </member>
+        <member name="T:Cake.Npm.NamespaceDoc">
+            <summary>
+            This namespace contain types used for operations using the Npm tool wrapper.
+            </summary>
+        </member>
+        <member name="T:Cake.Npm.Pack.NamespaceDoc">
+            <summary>
+            This namespace contain types used for creating npm packages.
+            </summary>
+        </member>
+        <member name="T:Cake.Npm.Pack.NpmPacker">
+            <summary>
+            Tool for packaging npm modules.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Pack.NpmPacker.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator,Cake.Core.Diagnostics.ICakeLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.Pack.NpmPacker"/> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="processRunner">The process runner.</param>
+            <param name="tools">The tool locator.</param>
+            <param name="log">Cake log instance.</param>
+        </member>
+        <member name="M:Cake.Npm.Pack.NpmPacker.Pack(Cake.Npm.Pack.NpmPackSettings)">
+            <summary>
+            Creates a npm package from the specified settings.
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>List of created packages.</returns>
+        </member>
+        <member name="T:Cake.Npm.Pack.NpmPackSettings">
+            <summary>
+            Contains settings used by <see cref="T:Cake.Npm.Pack.NpmPacker"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Pack.NpmPackSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.Pack.NpmPackSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Pack.NpmPackSettings.Source">
+            <summary>
+            Source to pack.
+            Can be anything that is installable by npm, like a package folder, tarball, tarball url,
+            name@tag, name@version, name, or scoped name.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Pack.NpmPackSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the settings and writes them to <paramref name="args"/>.
+            </summary>
+            <param name="args">The argument builder into which the settings should be written.</param>
+        </member>
+        <member name="T:Cake.Npm.Pack.NpmPackSettingsExtensions">
+            <summary>
+            Extensions for <see cref="T:Cake.Npm.Pack.NpmPackSettings"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Pack.NpmPackSettingsExtensions.FromSource(Cake.Npm.Pack.NpmPackSettings,System.String)">
+            <summary>
+            Sets the source to pack.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="source">Source to pack.
+            Can be anything that is installable by npm, like a package folder, tarball, tarball url,
+            name@tag, name@version, name, or scoped name.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Pack.NpmPackSettings.Source"/> set to <paramref name="source"/>.</returns>
+        </member>
+        <member name="T:Cake.Npm.Publish.NamespaceDoc">
+            <summary>
+            This namespace contain types used for publishing npm packages.
+            </summary>
+        </member>
+        <member name="T:Cake.Npm.Publish.NpmPublishAccess">
+            <summary>
+            Possible values for <see cref="P:Cake.Npm.Publish.NpmPublishSettings.Access"/>.
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.Publish.NpmPublishAccess.Default">
+            <summary>
+            Default value for <c>npm publish</c>.
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.Publish.NpmPublishAccess.Public">
+            <summary>
+            Public access.
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.Publish.NpmPublishAccess.Restricted">
+            <summary>
+            Restricted access.
+            </summary>
+        </member>
+        <member name="T:Cake.Npm.Publish.NpmPublisher">
+            <summary>
+            Tool for publishing npm modules.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Publish.NpmPublisher.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator,Cake.Core.Diagnostics.ICakeLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.Publish.NpmPublisher"/> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="processRunner">The process runner.</param>
+            <param name="tools">The tool locator.</param>
+            <param name="log">Cake log instance.</param>
+        </member>
+        <member name="M:Cake.Npm.Publish.NpmPublisher.Publish(Cake.Npm.Publish.NpmPublishSettings)">
+            <summary>
+            Publishes a npm package based on the specified settings.
+            </summary>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="T:Cake.Npm.Publish.NpmPublishSettings">
+            <summary>
+            Contains settings used by <see cref="T:Cake.Npm.Publish.NpmPublisher"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Publish.NpmPublishSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.Publish.NpmPublishSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Publish.NpmPublishSettings.Source">
+            <summary>
+            Gets or sets the source to publish.
+            A folder containing a package.json file or an url or file path to a gzipped tar archive 
+            containing a single folder with a package.json file inside.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Publish.NpmPublishSettings.Tag">
+            <summary>
+            Gets or sets the tag with which the package will be published.
+            By default the <c>latest</c> tag is used. 
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Publish.NpmPublishSettings.Access">
+            <summary>
+            Gets or sets whether the package should be published as public or restricted.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Publish.NpmPublishSettings.Registry">
+            <summary>
+            Gets or sets the registry where the package should be published to.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Publish.NpmPublishSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the settings and writes them to <paramref name="args"/>.
+            </summary>
+            <param name="args">The argument builder into which the settings should be written.</param>
+        </member>
+        <member name="T:Cake.Npm.Publish.NpmPublishSettingsExtensions">
+            <summary>
+            Extensions for <see cref="T:Cake.Npm.Publish.NpmPublishSettings"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Publish.NpmPublishSettingsExtensions.FromSource(Cake.Npm.Publish.NpmPublishSettings,System.String)">
+            <summary>
+            Sets the source to publish.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="source">Source to publish.
+            A folder containing a package.json file or an url or file path to a gzipped tar archive 
+            containing a single folder with a package.json file inside.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Publish.NpmPublishSettings.Source"/> set to <paramref name="source"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Publish.NpmPublishSettingsExtensions.WithTag(Cake.Npm.Publish.NpmPublishSettings,System.String)">
+            <summary>
+            Sets the tag of the package to publish.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="tag">Tag with which the package will be published.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Publish.NpmPublishSettings.Tag"/> set to <paramref name="tag"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Publish.NpmPublishSettingsExtensions.WithAccess(Cake.Npm.Publish.NpmPublishSettings,Cake.Npm.Publish.NpmPublishAccess)">
+            <summary>
+            Sets the access of the published package.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="access">Access of the published package.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Publish.NpmPublishSettings.Access"/> set to <paramref name="access"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Publish.NpmPublishSettingsExtensions.ToRegistry(Cake.Npm.Publish.NpmPublishSettings,System.Uri)">
+            <summary>
+            Sets the registry where the package will be published to.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="registry">Registry where the package will be published to.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.Publish.NpmPublishSettings.Registry"/> set to <paramref name="registry"/>.</returns>
+        </member>
+        <member name="T:Cake.Npm.RunScript.NamespaceDoc">
+            <summary>
+            This namespace contain types used for running npm scripts.
+            </summary>
+        </member>
+        <member name="T:Cake.Npm.RunScript.NpmRunScriptSettings">
+            <summary>
+            Contains settings used by <see cref="T:Cake.Npm.RunScript.NpmScriptRunner"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.RunScript.NpmRunScriptSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.RunScript.NpmRunScriptSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.RunScript.NpmRunScriptSettings.ScriptName">
+            <summary>
+            Name of the script to execute as defined in package.json.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.RunScript.NpmRunScriptSettings.Arguments">
+            <summary>
+            Arguments to pass to the target script.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.RunScript.NpmRunScriptSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the settings and writes them to <paramref name="args"/>.
+            </summary>
+            <param name="args">The argument builder into which the settings should be written.</param>
+        </member>
+        <member name="T:Cake.Npm.RunScript.NpmRunScriptSettingsExtensions">
+            <summary>
+            Extensions for <see cref="T:Cake.Npm.RunScript.NpmRunScriptSettings"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.RunScript.NpmRunScriptSettingsExtensions.WithArguments(Cake.Npm.RunScript.NpmRunScriptSettings,System.String)">
+            <summary>
+            Sets the arguments which should be passed to the script.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="arguments">Arguments which should be passed to the script.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.RunScript.NpmRunScriptSettings.Arguments"/> set to <paramref name="arguments"/>.</returns>
+        </member>
+        <member name="T:Cake.Npm.RunScript.NpmScriptRunner">
+            <summary>
+            Tool for running npm scripts.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.RunScript.NpmScriptRunner.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator,Cake.Core.Diagnostics.ICakeLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.RunScript.NpmScriptRunner"/> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="processRunner">The process runner.</param>
+            <param name="tools">The tool locator.</param>
+            <param name="log">Cake log instance.</param>
+        </member>
+        <member name="M:Cake.Npm.RunScript.NpmScriptRunner.RunScript(Cake.Npm.RunScript.NpmRunScriptSettings)">
+            <summary>
+            Runs a npm script with the specified settings.
+            </summary>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="T:Cake.Npm.NpmInstallAliases">
+            <summary>
+            Npm Install aliases
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.NpmInstallAliases.NpmInstall(Cake.Core.ICakeContext)">
+            <summary>
+            Installs packages for the project in the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmInstall();
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmInstallAliases.NpmInstall(Cake.Core.ICakeContext,System.String[])">
+            <summary>
+            Install one or more packages to the project in the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="packages">one or more packages</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmInstall("gulp", "left-pad");
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmInstallAliases.NpmInstall(Cake.Core.ICakeContext,System.Action{Cake.Npm.Install.NpmInstallSettings})">
+            <summary>
+            Installs packages using the settings returned by a configurator.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="configurator">The settings configurator.</param>
+            <example>
+            <para>Install packages in a specific working directory ('npm install')</para>
+            <code>
+            <![CDATA[
+                NpmInstall(settings => settings.FromPath(@"c:\myproject"));
+            ]]>
+            </code>
+            <para>Force fetching of remote resources ('npm install --force')</para>
+            <code>
+            <![CDATA[
+                NpmInstall(settings => setting.WithForce());
+            ]]>
+            </code>
+            <para>Install gulp globally ('npm install gulp -g')</para>
+            <code>
+            <![CDATA[
+                NpmInstall(settings => settings.AddPackage("gulp").InstallGlobally());
+            ]]>
+            </code>
+            <para>Ignore devDependencies while installaling packages of the project in the current directory ('npm install --production')</para>
+            <code>
+            <![CDATA[
+                NpmInstall(settings => setting.OnProduction());
+            ]]>
+            </code>
+            <para>Use specific log level ('npm install')</para>
+            <code>
+            <![CDATA[
+                NpmInstall(settings => settings.WithLogLevel(NpmLogLevel.Verbose));
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmInstallAliases.NpmInstall(Cake.Core.ICakeContext,Cake.Npm.Install.NpmInstallSettings)">
+            <summary>
+            Installs packages using the specified settings.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The settings.</param>
+            <example>
+            <para>Install packages in a specific working directory ('npm install')</para>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmInstallSettings 
+                    {
+                        WorkingDirectory = "c:\myproject"
+                    };
+                NpmInstall(settings);
+            ]]>
+            </code>
+            <para>Force fetching of remote resources ('npm install --force')</para>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmInstallSettings 
+                    {
+                        Force = true
+                    };
+                NpmInstall(settings);
+            ]]>
+            </code>
+            <para>Install gulp globally ('npm install gulp -g')</para>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmInstallSettings 
+                    {
+                        Global = true
+                    };
+                settings.AddPackage("gulp");
+                NpmInstall(settings);
+            ]]>
+            </code>
+            <para>Ignore devDependencies while installaling packages of the project in the current directory ('npm install --production')</para>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmInstallSettings 
+                    {
+                        Production = true
+                    };
+                NpmInstall(settings);
+            ]]>
+            </code>
+            <para>Use specific log level ('npm install')</para>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmInstallSettings 
+                    {
+                        LogLevel = NpmLogLevel.Verbose
+                    };
+                NpmInstall(settings);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.Npm.NpmLogLevel">
+            <summary>
+            Details the npm log levels
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.NpmLogLevel.Default">
+            <summary>
+            Uses log level as defined by the running Cake script.
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.NpmLogLevel.Silent">
+            <summary>
+            -s, --silent or --loglevel silent
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.NpmLogLevel.Warn">
+            <summary>
+            -q, --quiet or --loglevel warn
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.NpmLogLevel.Info">
+            <summary>
+            -d or --loglevel info
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.NpmLogLevel.Error">
+            <summary>
+            --loglevel error
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.NpmLogLevel.Verbose">
+            <summary>
+            -dd or --loglevel verbose
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.NpmLogLevel.Silly">
+            <summary>
+            -ddd or --loglevel silly
+            </summary>
+        </member>
+        <member name="F:Cake.Npm.NpmLogLevel.Http">
+            <summary>
+            --loglevel http
+            </summary>
+        </member>
+        <member name="T:Cake.Npm.NpmPackAliases">
+            <summary>
+            Npm Pack aliases
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.NpmPackAliases.NpmPack(Cake.Core.ICakeContext)">
+            <summary>
+            Creates a npm package from the current working directory.
+            Package will be created in the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <returns>List of created packages.</returns>
+            <example>
+            <code>
+            <![CDATA[
+                NpmPack();
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmPackAliases.NpmPack(Cake.Core.ICakeContext,System.String)">
+            <summary>
+            Creates a npm package from a specific source.
+            Package will be created in the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="source">Source to pack. Can be anything that is installable by npm, like
+            a package folder, tarball, tarball url, name@tag, name@version, name, or scoped name.</param>
+            <returns>List of created packages.</returns>
+            <example>
+            <code>
+            <![CDATA[
+                NpmPack("c:\mypackagesource");
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmPackAliases.NpmPack(Cake.Core.ICakeContext,System.Action{Cake.Npm.Pack.NpmPackSettings})">
+            <summary>
+            Creates a npm package using the settings returned by a configurator.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="configurator">The settings configurator.</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmPack(settings => settings.WithLogLevel(NpmLogLevel.Verbose));
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmPackAliases.NpmPack(Cake.Core.ICakeContext,Cake.Npm.Pack.NpmPackSettings)">
+            <summary>
+            Creates a npm package using the specified settings.
+            Package will be created in the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The settings.</param>
+            <returns>List of created packages.</returns>
+            <example>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmPackSettings 
+                    {
+                        LogLevel = NpmLogLevel.Verbose
+                    };
+                NpmPack(settings);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.Npm.NpmPublishAliases">
+            <summary>
+            Npm publish aliases.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.NpmPublishAliases.NpmPublish(Cake.Core.ICakeContext)">
+            <summary>
+            Publishes the npm package in the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmPublish();
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmPublishAliases.NpmPublish(Cake.Core.ICakeContext,System.String)">
+            <summary>
+            Publishes the npm package created from a specific source.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="source">Source to publish.
+            A folder containing a package.json file or an url or file path to a gzipped tar archive 
+            containing a single folder with a package.json file inside.</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmPublish("c:\mypackagesource");
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmPublishAliases.NpmPublish(Cake.Core.ICakeContext,System.Action{Cake.Npm.Publish.NpmPublishSettings})">
+            <summary>
+            Publishes a npm package using the settings returned by a configurator.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="configurator">The settings configurator.</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmPack(settings => settings.WithLogLevel(NpmLogLevel.Verbose));
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmPublishAliases.NpmPublish(Cake.Core.ICakeContext,Cake.Npm.Publish.NpmPublishSettings)">
+            <summary>
+            Publishes a npm package based on the specified settings.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The settings.</param>
+            <example>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmPublishSettings 
+                    {
+                        LogLevel = NpmLogLevel.Verbose,
+                        Source = "c:\mypackagesource"
+                    };
+                NpmPublish(settings);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.Npm.NpmRebuildAliases">
+            <summary>
+            Npm Rebuild aliases
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.NpmRebuildAliases.NpmRebuild(Cake.Core.ICakeContext)">
+            <summary>
+            Rebuilds packages for the project in the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmRebuild();
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmRebuildAliases.NpmRebuild(Cake.Core.ICakeContext,System.String[])">
+            <summary>
+            Rebuild one or more packages to the project in the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="packages">one or more packages</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmRebuild("gulp", "left-pad");
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmRebuildAliases.NpmRebuild(Cake.Core.ICakeContext,System.Action{Cake.Npm.Rebuild.NpmRebuildSettings})">
+            <summary>
+            Rebuild packages using the settings returned by a configurator.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="configurator">The settings configurator</param>
+            <example>
+            <para>Rebuild packages in a specific working directory ('npm rebuild')</para>
+            <code>
+            <![CDATA[
+                NpmRebuild(settings => settings.FromPath(@"c:\myproject"));
+            ]]>
+            </code>
+            </example>
+            <para>Rebuild gulp ('npm rebuild gulp')</para>
+            <code>
+            <![CDATA[
+                NpmRebuild(settings => settings.AddPackage("gulp"));
+            ]]>
+            </code>
+        </member>
+        <member name="M:Cake.Npm.NpmRebuildAliases.NpmRebuild(Cake.Core.ICakeContext,Cake.Npm.Rebuild.NpmRebuildSettings)">
+            <summary>
+            Rebuilds packages using the specified settings.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The settings.</param>
+            <example>
+            <para>Rebuild packages in a specific working directory ('npm rebuild')</para>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmRebuildSettings 
+                    {
+                        WorkingDirectory = "c:\myproject"
+                    };
+                NpmRebuild(settings);
+            ]]>
+            </code>
+            <para>Rebuild gulp ('npm rebuild gulp')</para>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmRebuildSettings 
+                    {
+                        Global = true
+                    };
+                settings.AddPackage("gulp");
+                NpmRebuild(settings);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.Npm.NpmRunScriptAliases">
+            <summary>
+            Npm RunScript aliases
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.NpmRunScriptAliases.NpmRunScript(Cake.Core.ICakeContext,System.String)">
+            <summary>
+            Runs a npm script defined in the package.json from the current folder.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="scriptName">Name of the script to execute as defined in package.json.</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmRunScript("hello");
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmRunScriptAliases.NpmRunScript(Cake.Core.ICakeContext,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Runs a npm script defined in the package.json from the current folder with specific arguments.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="scriptName">Name of the script to execute as defined in package.json.</param>
+            <param name="arguments">Arguments to pass to the target script</param>
+            <example>
+            <code>
+            <![CDATA[
+                NpmRunScript("hello", new List<string> { "--foo=bar" });
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmRunScriptAliases.NpmRunScript(Cake.Core.ICakeContext,System.String,System.Action{Cake.Npm.RunScript.NpmRunScriptSettings})">
+            <summary>
+            Runs a npm script using the settings returned by a configurator.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="scriptName">Name of the script to execute as defined in package.json.</param>
+            <param name="configurator">The settings configurator.</param>
+            <example>
+            <para>Use specific log level</para>
+            <code>
+            <![CDATA[
+                NpmRunScript("hello", settings => settings.WithLogLevel(NpmLogLevel.Verbose));
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Npm.NpmRunScriptAliases.NpmRunScript(Cake.Core.ICakeContext,Cake.Npm.RunScript.NpmRunScriptSettings)">
+            <summary>
+            Runs a npm script with the specified settings.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The settings.</param>
+            <example>
+            <para>Use specific log level</para>
+            <code>
+            <![CDATA[
+                var settings = 
+                    new NpmRunScriptSettings 
+                    {
+                        ScriptName = "hello"
+                        LogLevel = NpmLogLevel.Verbose
+                    };
+                NpmRunScript(settings);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.Npm.NpmSettings">
+            <summary>
+            Npm tool settings.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.NpmSettings.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.NpmSettings"/> class.
+            </summary>
+            <param name="command">Command to run.</param>
+        </member>
+        <member name="P:Cake.Npm.NpmSettings.LogLevel">
+            <summary>
+            Gets or sets the log level which should be used to run the npm command.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.NpmSettings.CakeVerbosityLevel">
+            <summary>
+            Gets or sets the Log level set by Cake.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.NpmSettings.Command">
+            <summary>
+            Gets the command which should be run.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.NpmSettings.Evaluate(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the settings and writes them to <paramref name="args"/>.
+            </summary>
+            <param name="args">The argument builder into which the settings should be written.</param>
+        </member>
+        <member name="M:Cake.Npm.NpmSettings.AppendNpmSettings(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the settings and appends Npm specific options to arguments
+            </summary>
+            <param name="args">The argument builder into which the settings should be written.</param>
+        </member>
+        <member name="M:Cake.Npm.NpmSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the settings and writes them to <paramref name="args"/>.
+            </summary>
+            <param name="args">The argument builder into which the settings should be written.</param>
+        </member>
+        <member name="T:Cake.Npm.NpmSettingsExtensions">
+            <summary>
+            Extensions for <see cref="T:Cake.Npm.NpmSettings"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.NpmSettingsExtensions.WithLogLevel(Cake.Npm.NpmSettings,Cake.Npm.NpmLogLevel)">
+            <summary>
+            Sets the log level which should be used to run the npm command.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="logLevel">Log level which should be used to run the npm command.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Npm.NpmSettings.LogLevel"/> set to <paramref name="logLevel"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.NpmSettingsExtensions.FromPath(Cake.Npm.NpmSettings,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Sets the working directory which should be used to run the npm command.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="path">Working directory which should be used to run the npm command.</param>
+            <returns>The <paramref name="settings"/> instance with <see cref="P:Cake.Core.Tooling.ToolSettings.WorkingDirectory"/> set to <paramref name="path"/>.</returns>
+        </member>
+        <member name="T:Cake.Npm.NpmTool`1">
+            <summary>
+            Base class for all npm tools.
+            </summary>
+            <typeparam name="TSettings">The settings type.</typeparam>
+        </member>
+        <member name="M:Cake.Npm.NpmTool`1.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator,Cake.Core.Diagnostics.ICakeLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.NpmTool`1"/> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="processRunner">The process runner.</param>
+            <param name="tools">The tool locator.</param>
+            <param name="log">Cake log instance.</param>
+        </member>
+        <member name="P:Cake.Npm.NpmTool`1.CakeLog">
+            <summary>
+            Cake log instance.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.NpmTool`1.GetToolName">
+            <summary>
+            Gets the name of the tool.
+            </summary>
+            <returns>The name of the tool.</returns>
+        </member>
+        <member name="M:Cake.Npm.NpmTool`1.GetToolExecutableNames">
+            <summary>
+            Gets the possible names of the tool executable.
+            </summary>
+            <returns>The tool executable name.</returns>
+        </member>
+        <member name="M:Cake.Npm.NpmTool`1.RunCore(`0)">
+            <summary>
+            Runs npm.
+            </summary>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="M:Cake.Npm.NpmTool`1.RunCore(`0,Cake.Core.IO.ProcessSettings,System.Action{Cake.Core.IO.IProcess})">
+            <summary>
+            Runs npm.
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="processSettings">The process settings. <c>null</c> for default settings.</param>
+            <param name="postAction">Action which should be executed after running npm. <c>null</c> for no action.</param>
+        </member>
+        <member name="M:Cake.Npm.NpmTool`1.GetArguments(`0)">
+            <summary>
+            Builds the arguments for npm.
+            </summary>
+            <param name="settings">Settings used for building the arguments.</param>
+            <returns>Argument builder containing the arguments based on <paramref name="settings"/>.</returns>
+        </member>
+        <member name="T:Cake.Npm.Rebuild.NpmRebuilder">
+            <summary>
+            Tool for rebuilding npm modules.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Rebuild.NpmRebuilder.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator,Cake.Core.Diagnostics.ICakeLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.Rebuild.NpmRebuilder"/> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="processRunner">The process runner.</param>
+            <param name="tools">The tool locator.</param>
+            <param name="log">Cake log instance.</param>
+        </member>
+        <member name="M:Cake.Npm.Rebuild.NpmRebuilder.Rebuild(Cake.Npm.Rebuild.NpmRebuildSettings)">
+            <summary>
+            Rebuilds a npm package from the specified settings.
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="T:Cake.Npm.Rebuild.NpmRebuildSettings">
+            <summary>
+            Contains settings used by <see cref="T:Cake.Npm.Rebuild.NpmRebuilder"/>
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Rebuild.NpmRebuildSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Npm.Rebuild.NpmRebuildSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Cake.Npm.Rebuild.NpmRebuildSettings.Packages">
+            <summary>
+            Gets the list of packages which should be rebuilt
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Rebuild.NpmRebuildSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the settings and writes them to <paramref name="args"/>.
+            </summary>
+            <param name="args">The argument builder into which the settings should be written.</param>
+        </member>
+        <member name="T:Cake.Npm.Rebuild.NpmRebuilSettingsExtensions">
+            <summary>
+            Extensions for <see cref="T:Cake.Npm.Rebuild.NpmRebuildSettings"/>.
+            </summary>
+        </member>
+        <member name="M:Cake.Npm.Rebuild.NpmRebuilSettingsExtensions.AddPackage(Cake.Npm.Rebuild.NpmRebuildSettings,System.String)">
+            <summary>
+            Rebuild a package by name
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="packageName">Name of the package.</param>
+            <returns>The <paramref name="settings"/> instance with <paramref name="packageName"/> added to <see cref="P:Cake.Npm.Rebuild.NpmRebuildSettings.Packages"/>.</returns>
+        </member>
+        <member name="M:Cake.Npm.Rebuild.NpmRebuilSettingsExtensions.AddScopedPackage(Cake.Npm.Rebuild.NpmRebuildSettings,System.String,System.String)">
+            <summary>
+            Rebuild a scoped package by name
+            </summary>
+            <param name="settings">The settings.</param>
+            <param name="packageName">Name of the package.</param>
+            <param name="scope">Scope of the package.</param>
+            <returns>The <paramref name="settings"/> instance with <paramref name="packageName"/> added to <see cref="P:Cake.Npm.Rebuild.NpmRebuildSettings.Packages"/>.</returns>
+        </member>
+    </members>
+</doc>
