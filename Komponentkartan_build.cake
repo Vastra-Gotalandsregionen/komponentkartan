@@ -3,33 +3,12 @@
 #addin "Cake.Powershell"
 
 var target = Argument("target", "Default");
-var configuration = Argument("configuration", "Release");
 var environment = Argument("environment", "Local");
-
-var buildOutputWeb = Directory("./BuildOutput/");
-var garbageDir = Directory("./garbageDir/");
-
-var buildBinWeb = Directory("./bin");
-var buildObjWeb = Directory("./obj");
-
-var javascriptTestFolder = Directory("./Tests");
 var deployServer = string.Empty;
 
 Task("Validate-Arguments")
 	.Does(() =>
 {
-	switch(configuration)
-	{
-		case "Debug":
-			break;
-		case "Release":
-			break;
-		default:
-			throw new Exception(string.Format(
-				"{0} is not a valid configuration. Valid configurations are: Debug, Release.",
-				configuration));
-	}
-
 	switch(environment)
 	{
 		case "Local":
@@ -46,72 +25,9 @@ Task("Validate-Arguments")
 				environment));
 	}
 
-	Verbose("Configuration: {0}", configuration);
+	
 	Verbose("Environment: {0}", environment);
 });
-
-Task("PrebuildActions")
-	.IsDependentOn("Restore-NpmPackages")
-	.Does(() =>
-{
-
-
-    Information("Flytta js filer för borttagning");
-	DeleteFiles("./demo-app/**/*.js");
-	DeleteFiles("./demo-app/**/*.js.map");
-    DeleteFiles("./component-package/**/*.js");
-	DeleteFiles("./component-package/**/*.js.map");
-
-	Information("Ta bort css:er");
-	DeleteFiles("./Content/*.css");
-	DeleteFiles("./demo-app/Content*.css");
-
-	CleanDirectories(new DirectoryPath[]
-    {
-
-        buildBinWeb,buildObjWeb
-    });
-
-	//Kör rimraf eftersom vi har långa sökvägar
-	//OBS! Rimraf kräver att vi har installerat NPM, eftersom det körs via npm run
-
-	NpmRunScript(new NpmRunScriptSettings
-    {
-        ScriptName = "_clean_build_output",
-        WorkingDirectory = "./"
-    });
-
-
-    //Sätter upp strukturen
-    if (!DirectoryExists(buildOutputWeb)) {
-		CreateDirectory(buildOutputWeb);
-	}
-    if (!DirectoryExists("./BuildOutput/demo-app")) {
-        CreateDirectory("./BuildOutput/demo-app");
-	}
-	if (!DirectoryExists("./BuildOutput/demo-app/content")) {
-        CreateDirectory("./BuildOutput/demo-app/content");
-	}
-    if (!DirectoryExists("./BuildOutput/component-package")) {
-        CreateDirectory("./BuildOutput/component-package");
-	}
-    if (!DirectoryExists("./BuildOutput/scripts")) {
-	    CreateDirectory("./BuildOutput/scripts");
-	}
-    if (!DirectoryExists("./BuildOutput/content")) {
-	    CreateDirectory("./BuildOutput/content");
-	}
-    if (!DirectoryExists("./BuildOutput/tests")) {
-	    CreateDirectory("./BuildOutput/tests");
-	}
-    if (!DirectoryExists("./BuildOutput/Images")) {
-	    CreateDirectory("./BuildOutput/Images");
-	}
-    if (!DirectoryExists("./BuildOutput/fonts")) {
-	    CreateDirectory("./BuildOutput/fonts");
-	}
-});
-
 
 Task("Restore-NpmPackages")
    .Does(() =>
@@ -123,85 +39,34 @@ Task("Restore-NpmPackages")
     	});
 	});
 
-Task("Build-Npm-Frontend-Packages")
-	.Does(()=>{
-		CopyFile("./package.json","./BuildOutput/package.json");
-		NpmInstall(new NpmInstallSettings
-    	{
-        	WorkingDirectory = "./BuildOutput/",
-			Production = true
-    	});
-		DeleteFile("./BuildOutput/package.json");
-	});
-
-
-Task("Build-TypescriptAndSass")
-.IsDependentOn("Restore-NpmPackages")
-.Does(() =>
-{
-	NpmRunScript(new NpmRunScriptSettings
-    {
-        ScriptName = "_compile-ts",
-        WorkingDirectory = "./"
-    });
-	NpmRunScript(new NpmRunScriptSettings
-    {
-        ScriptName = "_compile-css",
-        WorkingDirectory = "./"
-    });
-	NpmRunScript(new NpmRunScriptSettings
-    {
-        ScriptName = "_compile-demo-app-css",
-        WorkingDirectory = "./"
-    });
-});
-
-
 Task("Run-Jasmine-Tests")
-.IsDependentOn("Build-TypescriptAndSass")
 .Does(() =>
 {
 	NpmRunScript(new NpmRunScriptSettings
     {
-        ScriptName = "ng test",
+        ScriptName = "test",
         WorkingDirectory = "./"
     });
-});
-
-Task("Move-TypescriptAndSass")
-.IsDependentOn("Build-TypescriptAndSass")
-.Does(() => {
-        //Kopiera *.js filer
-		CopyFiles("./demo-app/**/*.js", "./BuildOutput/demo-app", true);
-		CopyFiles("./component-package/**/*.js", "./BuildOutput/component-package", true);
-		CopyFiles("./scripts/*.js", "./BuildOutput/scripts", true);
-		CopyFiles("./tests/*.js", "./BuildOutput/tests", true);
-
-        //Kopiera *.css
-		CopyFiles("./content/*.css", "./BuildOutput/content", true);
-		CopyFiles("./demo-app/content/*.css", "./BuildOutput/demo-app/content", true);
 });
 
 Task("Build-Frontend")
-	.IsDependentOn("Build-TypescriptAndSass")
-	.IsDependentOn("Move-TypescriptAndSass")
-	.IsDependentOn("Build-Npm-Frontend-Packages")
-	.IsDependentOn("Run-Jasmine-Tests")
+	 .IsDependentOn("Restore-NpmPackages")
 	.Does(() => {
-        CopyFiles("./component-package/**/*.*", "./BuildOutput/component-package", true);
-        CopyFiles("./demo-app/**/*.*", "./BuildOutput/demo-app", true);
-        CopyFiles("./tests/**/*.*", "./BuildOutput/tests", true);
-        CopyFiles("./Images/*.*", "./BuildOutput/Images", true);
-        CopyFiles("./index.html", "./BuildOutput/", true);
-        CopyFiles("./systemjs.config.js", "./BuildOutput/", true);
-        CopyFiles("./BuildOutput/node_modules/font-awesome/fonts/*.*", "./BuildOutput/fonts/", true);
+      NpmRunScript(new NpmRunScriptSettings
+    {
+        ScriptName = "build",
+        WorkingDirectory = "./"
     });
+
+	});
+
+
 
 Task("Deploy-Frontend")
 	.IsDependentOn("Validate-Arguments")
 	.WithCriteria(() => environment != "Local")
-	.IsDependentOn("PrebuildActions")
 	.IsDependentOn("Build-Frontend")
+	.IsDependentOn("Run-Jasmine-Tests")
 	.Does(() =>
 {
 
@@ -229,8 +94,6 @@ Task("Deploy-Frontend")
 		}
 	});
 });
-
-
 
 
 Task("Default")
