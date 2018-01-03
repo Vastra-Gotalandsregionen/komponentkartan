@@ -83,25 +83,7 @@ describe('DropdownComponent', () => {
             });
         });
 
-        describe('and item list is less than 11 items', () => {
-            it('scroll is not visible', () => {
-                component.items = [{ displayName: 'name' }] as IDropdownItem[];
-                expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(false);
-            });
-        });
-        describe('and item list is more than 11 items', () => {
-            it('scroll is visible', () => {
-                const dropdownItems = [] as IDropdownItem[];
-                for (let i = 0; i <= 11; i++) {
-                    dropdownItems.push({ displayName: `Name${i}` } as IDropdownItem);
-                }
 
-                component.items = dropdownItems;
-                component.ngOnChanges();
-                fixture.detectChanges();
-                expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(true);
-            });
-        });
         describe('and item list is less than 20 items', () => {
             it('filter is not visible', () => {
                 component.items = [{ displayName: 'name' }] as IDropdownItem[];
@@ -142,9 +124,7 @@ describe('DropdownComponent', () => {
                         const listItems = rootElement.queryAll(By.css('li'));
                         expect(listItems.length).toBe(11 + 1); // +1 for select all element
                     });
-                    it('scroll is visible', () => {
-                        expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(true);
-                    });
+
                 });
 
                 describe('and the text mathches 7 new items', () => {
@@ -160,9 +140,7 @@ describe('DropdownComponent', () => {
                         const listItems = rootElement.queryAll(By.css('li'));
                         expect(listItems.length).toBe(7 + 1); // +1 for select all element
                     });
-                    it('scroll is not visible', () => {
-                        expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(false);
-                    });
+
                 });
                 describe('and the text mathches and id of an item', () => {
                     beforeEach(() => {
@@ -175,9 +153,7 @@ describe('DropdownComponent', () => {
                         const listItems = rootElement.queryAll(By.css('li'));
                         expect(listItems.length).toBe(1); // +1 for select all element
                     });
-                    it('scroll is not visible', () => {
-                        expect(dropdownElement.classes['dropdown--scroll-visible']).toBe(false);
-                    });
+
                 });
             });
         });
