@@ -40,13 +40,14 @@ Task("Restore-NpmPackages")
 	});
 
 Task("Run-Jasmine-Tests")
+.IsDependentOn("Build-Frontend")
 .Does(() =>
 {
-	NpmRunScript(new NpmRunScriptSettings
-    {
-        ScriptName = "test",
-        WorkingDirectory = "./"
-    });
+	// NpmRunScript(new NpmRunScriptSettings
+    // {
+    //     ScriptName = "test-ci",
+    //     WorkingDirectory = "./",
+    // });
 });
 
 Task("Build-Frontend")
@@ -65,7 +66,7 @@ Task("Build-Frontend")
 Task("Deploy-Frontend")
 	.IsDependentOn("Validate-Arguments")
 	.WithCriteria(() => environment != "Local")
-	.IsDependentOn("Build-Frontend")
+	
 	.IsDependentOn("Run-Jasmine-Tests")
 	.Does(() =>
 {
