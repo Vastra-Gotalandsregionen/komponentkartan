@@ -37,21 +37,13 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
     protected _items: IDropdownItem[];
     @Input() set items(value: IDropdownItem[]) {
-        // The scrollbar component would not refresh when items were changed unless we added a timeout...
-        // Ugly solution for sure, but until a better one comes along it will have to do :(
         this._items = value;
 
         const selectedItems = this._items.filter(x => x.selected);
         if (selectedItems.length > 0) {
             this.handleInitiallySelectedItems(selectedItems);
+            this.listenToScrollbarEvents();
         }
-        setTimeout(() => {
-            if (!this.readonly && !this.disabled) {
-                // this.scrollbarComponent.update();
-                this.listenToScrollbarEvents();
-            }
-        }, 500);
-        this.dimmerTopVisible = false;
     }
     get items(): IDropdownItem[] {
         return this._items;
@@ -80,7 +72,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     protected abstract handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void;
 
     private listenToScrollbarEvents() {
-        $(this.scrollbarComponent['elementRef'].nativeElement).scroll((e: any) => {
+        $(this.scrollbarComponent.directiveRef.elementRef.nativeElement).scroll((e: any) => {
             this.hideDimmersIfScrollIsAtBottomOrTop(e.target);
         });
     }
@@ -159,7 +151,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
                 this.validate();
             } else {
                 setTimeout(() => {
-                    this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent['elementRef'].nativeElement);
+                    this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent.directiveRef.elementRef.nativeElement);
                 }, 10);
             }
         }
