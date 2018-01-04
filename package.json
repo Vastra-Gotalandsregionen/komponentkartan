@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "2.0.0-rc9",
+  "version": "2.0.0-rc14",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
@@ -10,13 +10,16 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+
     "copy-assets": "cp -r src/assets dist",
     "copy-scripts": "cp -r src/lib/scripts dist/scripts",
-    "copy-package": "cp -rf package.json dist",
-    "packagr": "ng-packagr -p ng-package.json && npm run copy-assets && npm run copy-scripts && npm run copy-package",
-    "publish-demo": "npm run packagr && cd dist && npm publish --tag demo",
-    "publish-dev": "npm run packagr && cd dist && npm publish --tag dev",
-    "publish": "npm run packagr && cd dist && npm publish",
+    "copy-changelog": "cp -rf CHANGELOG.md dist",
+    "packagr": "ng-packagr -p ng-package.json && npm run copy-assets && npm run copy-scripts && npm run copy-changelog",
+
+    "publish-demo": "npm run packagr && cd dist && npm publish --tag demo && cd ..",
+    "publish-dev": "npm run packagr && cd dist && npm publish --tag dev && cd ..",
+    "publish-stable": "npm run packagr && cd dist && npm publish --tag dev && cd ..",
+
     "test-ci": "karma start ./karma.conf.server.js"
   },
   "dependencies": {
