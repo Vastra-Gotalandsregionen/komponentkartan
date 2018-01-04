@@ -8,10 +8,19 @@ import { Component, ViewChildren, QueryList } from '@angular/core';
 })
 export class ExampleLayoutComponent {
     expanded: boolean;
+    chevron_class = 'chevron-collapsed';
+
     constructor() { }
 
     onClick() {
         this.expanded = !this.expanded;
+    }
 
+    toggleClass() {
+        if (this.chevron_class === 'chevron-collapsed') {
+            this.chevron_class = 'chevron-expanded';
+        } else {
+            this.chevron_class = 'chevron-collapsed';
+        }
     }
 }
