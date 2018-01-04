@@ -16,8 +16,6 @@ import 'rxjs/add/operator/map';
 })
 
 export class InputFieldsComponent implements OnInit {
-    //Obs olika implementationer
-
     // Reactive form
     form: FormGroup;
 
