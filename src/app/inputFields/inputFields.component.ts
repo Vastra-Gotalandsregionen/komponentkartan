@@ -16,7 +16,7 @@ import 'rxjs/add/operator/map';
 })
 
 export class InputFieldsComponent implements OnInit {
-    //Obs olika implementationer
+    // Obs olika implementationer
 
     // Reactive form
     form: FormGroup;
@@ -48,7 +48,8 @@ export class InputFieldsComponent implements OnInit {
         'control9': '',
         'control10': '',
         'control13': '',
-        'control14': ''
+        'control14': '',
+        'control15': ''
     };
 
     validationMessages = {
@@ -80,10 +81,10 @@ export class InputFieldsComponent implements OnInit {
         'control10': {
             'required': 'Detta är ett längre meddelande som visas när något blir väldigt väldigt fel'
         },
-        'control13': {
+        'control14': {
             'invalidCity': 'Felaktig stad',
         },
-        'control14': {
+        'control15': {
             'email': 'Felaktig e-post'
         }
     };
@@ -128,8 +129,9 @@ export class InputFieldsComponent implements OnInit {
             control10: ['', Validators.required],
             control11: ['Visar värdet utan ram'],
             control12: [],
-            control13: [this.cityName, Validators.required, validateAsyncCityName()],
-            control14: ['', Validators.email]
+            control13: [],
+            control14: [this.cityName, Validators.required, validateAsyncCityName()],
+            control15: ['', Validators.email],
         });
     }
 

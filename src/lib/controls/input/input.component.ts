@@ -25,6 +25,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() formatNumber?: boolean;
   @Input() nrOfDecimals?: number;
   @Input() suffix?: string;
+  @Input() placeholder?: string;
   @Input() value?: any;
   @Input() maxlength?: number;
   @Input() validateOnInit?: boolean;

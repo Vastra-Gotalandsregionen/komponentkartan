@@ -92,18 +92,22 @@
               Ingen validering
               <vgr-input formControlName="control12" [small]="isSmall"></vgr-input>
             </div>
+            <div>
+              Med placeholder
+              <vgr-input formControlName="control13" placeholder="Skriv något här..." [small]="isSmall"></vgr-input>
+            </div>
 
           </div>
           <div class="one-third">
             <h2>Validering med service</h2>
             <div>
               Ange en storstad i USA (validera vid initiering)
-              <vgr-input formControlName="control13" [small]="isSmall" [validateOnInit]="true" [errorMessage]="validationMessages.control13"></vgr-input>
+              <vgr-input formControlName="control14" [small]="isSmall" [validateOnInit]="true" [errorMessage]="validationMessages.control13"></vgr-input>
               <span>Din stad: {{form.controls.control13.value}}</span>
             </div>
             <div>
               E-postadress
-              <vgr-input formControlName="control14" [small]="isSmall" [isInvalid]="form.get('control14').invalid" [errorMessage]="validationMessages.control14"></vgr-input>
+              <vgr-input formControlName="control15" [small]="isSmall" [isInvalid]="form.get('control14').invalid" [errorMessage]="validationMessages.control14"></vgr-input>
             </div>
           </div>
         </div>
