@@ -20,8 +20,8 @@
             <h2>Fördefinierade typer</h2>
             <div>
               Belopp 1 (type=amount)
-              <vgr-input (valueChanged)="value = $event" [value]="value" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true"
-                [small]="isSmall" [isInvalid]="!validateNumberControl1(value)" [errorMessage]="'Felaktigt nummer'"></vgr-input>
+              <vgr-input [value]="value" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
+                [isInvalid]="!validateNumberControl1(value)" [errorMessage]="'Felaktigt nummer'"></vgr-input>
               <span>Belopp 1: </span>
               <span>{{value}}</span>
             </div>
