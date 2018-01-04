@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+## 2.0.0 (2018-01-04)
+- Upgraded to Angular 5
+- More examples added to komponentkartan-demo
+- New path to library module, use: "vgr-komponentkartan/dist" instead of old paths
+
+
 ## 0.3.3 (2017-12-05)
 - Controls in a title-value-layout are now equally spaced and takes less room when in slim mode
 - More examples added to komponentkartan-demo
