@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 2.0.0 (2018-01-04)
 - Upgraded to Angular 5
 - More examples added to komponentkartan-demo
-- New path to library module, use: "vgr-komponentkartan/dist" instead of old paths
+- New path to library module, use: "vgr-komponentkartan" instead of old paths
 
 
 ## 0.3.3 (2017-12-05)
