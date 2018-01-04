@@ -43,11 +43,11 @@ Task("Run-Jasmine-Tests")
 .IsDependentOn("Build-Frontend")
 .Does(() =>
 {
-	// NpmRunScript(new NpmRunScriptSettings
-    // {
-    //     ScriptName = "test-ci",
-    //     WorkingDirectory = "./",
-    // });
+	NpmRunScript(new NpmRunScriptSettings
+    {
+        ScriptName = "test-ci",
+        WorkingDirectory = "./",
+    });
 });
 
 Task("Build-Frontend")
