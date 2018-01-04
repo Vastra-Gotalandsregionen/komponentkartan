@@ -36,7 +36,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
-  @Output() valueChanged: EventEmitter<string> = new EventEmitter<string>();
 
   @HostBinding('class.validated-input') hasClass = true;
   @HostBinding('class.validation-error--active') get errorClass() {

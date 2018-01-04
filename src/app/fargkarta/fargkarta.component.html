@@ -66,39 +66,6 @@
           </span>
         </div>
       </div>
-      <h3>Rubrik</h3>
-      <vgr-list [allowMultipleExpandedItems]="false" [flexibleHeader]="true">
-        <vgr-list-header>
-          <vgr-list-column-header [text]="'ID'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Fakturanr'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Belopp'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Datum'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Säljare'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Vårdtyp'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Rader'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'!'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Status'" [width]="2"></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Välj'" [width]="2"></vgr-list-column-header>
-        </vgr-list-header>
-        <vgr-list-item *ngFor="let c of claimRows">
-          <div class="list-item__header">
-            <vgr-list-column [text]="c.previewObject.identification"></vgr-list-column>
-            <vgr-list-column [text]="c.previewObject.invoiceId"></vgr-list-column>
-            <vgr-list-column [text]="c.previewObject.payableAmount"></vgr-list-column>
-            <vgr-list-column [text]="c.previewObject.issueDate"></vgr-list-column>
-            <vgr-list-column [text]="'Test'"></vgr-list-column>
-            <vgr-list-column [text]="'Test'"></vgr-list-column>
-            <vgr-list-column [text]="c.previewObject.visits?.length"></vgr-list-column>
-            <vgr-list-column [text]="'Test'"></vgr-list-column>
-            <vgr-list-column [text]="'Test'"></vgr-list-column>
-            <vgr-list-column [text]="'Test'"></vgr-list-column>
-          </div>
-          <div class="list-item__content">
-            Hej
-          </div>
-        </vgr-list-item>
-
-      </vgr-list>
     </vgr-page-block>
   </vgr-page-body>
 </vgr-page>

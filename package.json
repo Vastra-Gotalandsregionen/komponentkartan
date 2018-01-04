@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "2.0.0-rc7",
+  "version": "2.0.0-rc14",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
@@ -12,9 +12,11 @@
     "e2e": "ng e2e",
     "copy-assets": "cp -r src/assets dist",
     "copy-scripts": "cp -r src/lib/scripts dist/scripts",
-    "packagr": "ng-packagr -p ng-package.json && npm run copy-assets && npm run copy-scripts",
-    "publish-demo": "npm run packagr && npm publish --tag demo",
-    "publish-dev": "npm run packagr && npm publish --tag dev",
+    "copy-changelog": "cp -rf CHANGELOG.md dist",
+    "packagr": "ng-packagr -p ng-package.json && npm run copy-assets && npm run copy-scripts && npm run copy-changelog",
+    "publish-demo": "npm run packagr && cd dist && npm publish --tag demo && cd ..",
+    "publish-dev": "npm run packagr && cd dist && npm publish --tag dev && cd ..",
+    "publish-stable": "npm run packagr && cd dist && npm publish --tag dev && cd ..",
     "test-ci": "karma start ./karma.conf.server.js"
   },
   "dependencies": {
@@ -28,11 +30,12 @@
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "core-js": "^2.4.1",
-    "rxjs": "^5.5.2",
-    "zone.js": "^0.8.14",
+    "eslint": "^4.14.0",
     "jquery": "^3.1.1",
     "ngx-perfect-scrollbar": "5.3.0",
-    "wallaby-webpack": "^3.9.3"
+    "rxjs": "^5.5.2",
+    "wallaby-webpack": "^3.9.3",
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "@angular/cli": "1.6.3",
@@ -42,6 +45,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/jquery": "^3.2.17",
     "@types/node": "~6.0.60",
+    "angular2-template-loader": "^0.6.2",
     "codelyzer": "^4.0.1",
     "electron": "^1.7.10",
     "jasmine-core": "~2.6.2",
