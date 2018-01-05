@@ -1,4 +1,4 @@
-import { Input, Component, HostBinding, ContentChild, ElementRef } from '@angular/core';
+import { Input, Component, HostBinding, ContentChild, ElementRef, OnInit } from '@angular/core';
 
 @Component({
     selector: 'vgr-expandable-div',
@@ -11,7 +11,7 @@ export class ExpandableDivComponent {
     @Input() expanded: boolean;
 
     get chevron_class() {
-        return this.expanded ? 'chevron-expanded' : 'chevron-collapsed';
+        return 'expandable-div-chevron '.concat(this.expanded ? 'expanded' : 'collapsed');
     }
 
     constructor(private elementRef: ElementRef) { }
@@ -28,7 +28,7 @@ export class ExpandableDivComponent {
     }
 
     private collapseContent(callback?: any) {
-        const chevron = $(this.elementRef.nativeElement).children('.chevron-expanded');
+        const chevron = $(this.elementRef.nativeElement).children('.expandable-div-chevron');
         if (!callback) {
             chevron.siblings('.expandable-content').slideUp(400);
 
@@ -38,7 +38,7 @@ export class ExpandableDivComponent {
     }
 
     private expandContent() {
-        const chevron = $(this.elementRef.nativeElement).children('.chevron-collapsed');
+        const chevron = $(this.elementRef.nativeElement).children('.expandable-div-chevron');
         chevron.siblings('.expandable-content').slideToggle(400);
     }
 }

@@ -39,5 +39,7 @@ export { PageBlockComponent } from './page-block/page-block.component';
 export { ListItemContentComponent } from './list-item/list-item-content.component';
 export { ListItemHeaderComponent } from './list-item/list-item-header.component';
 export { ExpandableDivComponent } from './expandableDiv/expandableDiv.component';
+export { ExpandableDivHeaderComponent } from './expandableDiv/expandableDiv-header.component';
+export { ExpandableDivContentComponent } from './expandableDiv/expandableDiv-content.component';
 
 export { ValidationComponent } from './validation/validation.component';

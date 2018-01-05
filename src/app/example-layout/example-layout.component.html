@@ -11,10 +11,15 @@
   </vgr-action-panel>
   <vgr-page-body>
     <vgr-page-block>
-      <h1>Test Expandable Div</h1>
-      <vgr-expandable-div [expanded]="true">
-        <p>some content</p>
-        <p>Some more content</p>
+      <h1>Expandable div</h1>
+      <vgr-expandable-div [expanded]="false">
+        <vgr-expandable-div-header>
+          <p>Denna div kan expanderas</p>
+        </vgr-expandable-div-header>
+        <vgr-expandable-div-content>
+          <p>Lite innehåll</p>
+          <p>Mer innehåll</p>
+        </vgr-expandable-div-content>
       </vgr-expandable-div>
     </vgr-page-block>
   </vgr-page-body>

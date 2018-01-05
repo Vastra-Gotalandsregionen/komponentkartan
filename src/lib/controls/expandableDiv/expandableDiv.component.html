@@ -1,4 +1,5 @@
 <span [className]="chevron_class" (click)="toggleExpand()"></span>
+<ng-content select="vgr-expandable-div-header"></ng-content>
 <div class="expandable-content">
-  <ng-content></ng-content>
+  <ng-content select="vgr-expandable-div-content"></ng-content>
 </div>

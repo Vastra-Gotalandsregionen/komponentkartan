@@ -2,10 +2,17 @@
   position: relative;
   display: block;
   min-height: 20px;
-  >span {
+  background-color: #dddddd;
+  .expandable-div-chevron {
     cursor: pointer;
     position: absolute;
     top: 0;
     right: 10px;
+    &.expanded {
+      @extend .chevron-expanded;
+    }
+    &.collapsed {
+      @extend .chevron-collapsed;
+    }
   }
 }
