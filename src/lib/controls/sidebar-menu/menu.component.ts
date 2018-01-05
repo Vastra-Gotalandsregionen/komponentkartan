@@ -162,7 +162,7 @@ export class MenuComponent implements OnChanges, AfterViewInit {
         }
     }
 
-    ///Returns a copy of the favourite child items to be put first in the list
+    // Returns a copy of the favourite child items to be put first in the list
     private getFavouriteChildItems(): IMenuItem[] {
         const flattenedMenuItems = this.flattenMenuItems(this.menu);
         const favouriteItems = flattenedMenuItems.filter(menuItem => menuItem.favourite && menuItem.child).sort(this.sortMenuItems);

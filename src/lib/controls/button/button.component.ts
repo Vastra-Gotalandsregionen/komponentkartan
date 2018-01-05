@@ -1,4 +1,4 @@
-﻿import { Component, Input, EventEmitter, Output, OnChanges, HostBinding } from '@angular/core'
+﻿import { Component, Input, EventEmitter, Output, OnChanges, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'vgr-button',

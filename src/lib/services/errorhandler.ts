@@ -4,40 +4,35 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 @Injectable()
 export class ErrorHandler {
   constructor() {
-  };
-
+  }
 
   getErrorMessageReactiveForms(validationMessages: any, control?: AbstractControl, smallMode?: boolean): string {
     if (control.errors) {
       if (typeof (validationMessages) === 'object') {
-        for (var key in control.errors) {
+        for (const key in control.errors) {
           if (key === 'required' && smallMode && !validationMessages[key]) {
             return 'Obligatoriskt';
-          }
-          else if (key === 'required' && !smallMode && !validationMessages[key]) {
+          } else if (key === 'required' && !smallMode && !validationMessages[key]) {
             return 'Fältet är obligatoriskt';
-          }
-          else if (validationMessages) {
+          } else if (validationMessages) {
             return validationMessages[key];
-          }
-          else {
-            return 'Det här ska inte hända'
+          } else {
+            return 'Det här ska inte hända';
           }
         }
-      }
-      else {
+      } else {
         return validationMessages;
       }
     }
   }
 
   convertObjectToArray(obj: any): any {
-    var arr = [];
-    for (var key in obj) {
+    const arr = [];
+    for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         arr.push(key + '=' + obj[key]);
       }
-    };
+    }
 
     return arr.join(',');
   }
@@ -57,8 +52,7 @@ export class ErrorHandler {
             }
           }
         }
-      }
-      else {
+      } else {
         const control = form.get(field);
         formErrors[field] = '';
         if (control && !control.valid) {
@@ -67,10 +61,10 @@ export class ErrorHandler {
             if (key === 'required') {
               if (smallMode) {
                 formErrors[field] = messages[key] ? messages[key] + ' ' : ' Obligatoriskt ';
+              } else {
+                formErrors[field] = messages[key] ? messages[key] + ' ' : ' Fältet är obligatoriskt ';
               }
-              else formErrors[field] = messages[key] ? messages[key] + ' ' : ' Fältet är obligatoriskt ';
-            }
-            else {
+            } else {
               formErrors[field] = messages[key] + ' ';
             }
 

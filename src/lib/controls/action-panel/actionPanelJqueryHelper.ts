@@ -14,7 +14,7 @@ export class ActionPanelJqeuryHelper {
 
 
     toggleContent(elementRef: ElementRef, duration?: number, ) {
-        $(elementRef.nativeElement).slideToggle(duration ? duration : this.defaultDuration, () => { $(elementRef.nativeElement).css('display', 'block') });
+        $(elementRef.nativeElement).slideToggle(duration ? duration : this.defaultDuration, () => { $(elementRef.nativeElement).css('display', 'block'); });
     }
 
 }

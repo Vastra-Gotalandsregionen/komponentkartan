@@ -21,12 +21,12 @@ export class ListColumnHeaderComponent {
   @HostBinding('class.list__column-header--sorted-desc')
   get isSortDescending(): boolean {
     return this.sortDirection === SortDirection.Descending;
-  };
+  }
 
   @HostBinding('class.list__column-header--sorted-asc')
   get isSortAscending(): boolean {
     return this.sortDirection === SortDirection.Ascending;
-  };
+  }
 
   @Output() sortChanged: EventEmitter<SortDirection> = new EventEmitter<SortDirection>();
 
@@ -40,12 +40,13 @@ export class ListColumnHeaderComponent {
 
   getAlignClass(): string {
 
-    if (this.align !== "right" &&
-      this.align !== "left" &&
-      this.align !== "center")
-      this.align = "left";
+    if (this.align !== 'right' &&
+      this.align !== 'left' &&
+      this.align !== 'center') {
+      this.align = 'left';
+    }
 
-    return 'column--align-' + (this.align ? this.align : "left");
+    return 'column--align-' + (this.align ? this.align : 'left');
   }
 
   onClick() {

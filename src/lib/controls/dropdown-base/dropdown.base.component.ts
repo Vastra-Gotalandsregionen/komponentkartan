@@ -1,4 +1,7 @@
-import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener, HostBinding, forwardRef } from '@angular/core';
+import {
+    Component, Input, AfterViewInit, ElementRef, Output,
+    EventEmitter, ViewChild, HostListener, HostBinding, forwardRef
+} from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
 import { ValidationComponent } from '../../controls/validation/validation.component';
@@ -51,7 +54,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
     @Input() set values(values: string[]) {
         this.items = values.map(function (value: string) {
-            return { displayName: value, id: value } as IDropdownItem
+            return { displayName: value, id: value } as IDropdownItem;
         });
     }
 
@@ -109,7 +112,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         if (!this.items) {
             return;
         }
-        const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length
+        const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
     }
 
     onDropdownMouseDown(event: Event) {
