@@ -71,7 +71,8 @@ import * as $ from 'jquery';
     type.ListColumnTrashcanComponent,
     type.ListHeaderComponent,
     type.ListItemContentComponent,
-    type.ListItemHeaderComponent
+    type.ListItemHeaderComponent,
+    type.ExpandableDivComponent
   ],
   exports: [
     type.SafePipe,
@@ -115,7 +116,8 @@ import * as $ from 'jquery';
     type.ListColumnTrashcanComponent,
     type.ListHeaderComponent,
     type.ListItemContentComponent,
-    type.ListItemHeaderComponent
+    type.ListItemHeaderComponent,
+    type.ExpandableDivComponent
   ],
   providers: [
     type.ModalService,

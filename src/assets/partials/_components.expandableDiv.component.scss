@@ -1,0 +1,11 @@
+.expandable-div {
+  position: relative;
+  display: block;
+  min-height: 20px;
+  >span {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+}

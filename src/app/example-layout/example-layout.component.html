@@ -11,9 +11,11 @@
   </vgr-action-panel>
   <vgr-page-body>
     <vgr-page-block>
-      <div class="test">
-        <span [className]="chevron_class" (click)="toggleClass()"></span>
-      </div>
+      <h1>Test Expandable Div</h1>
+      <vgr-expandable-div [expanded]="true">
+        <p>some content</p>
+        <p>Some more content</p>
+      </vgr-expandable-div>
     </vgr-page-block>
   </vgr-page-body>
 </vgr-page>

@@ -38,5 +38,6 @@ export { PageBodyComponent } from './page-body/page-body.component';
 export { PageBlockComponent } from './page-block/page-block.component';
 export { ListItemContentComponent } from './list-item/list-item-content.component';
 export { ListItemHeaderComponent } from './list-item/list-item-header.component';
+export { ExpandableDivComponent } from './expandableDiv/expandableDiv.component';
 
 export { ValidationComponent } from './validation/validation.component';
