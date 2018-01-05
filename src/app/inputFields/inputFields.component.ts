@@ -136,10 +136,11 @@ export class InputFieldsComponent implements OnInit {
     }
 
     toggleInputType(option: ISelectableItem) {
-        if (option.displayName === 'Stor')
+        if (option.displayName === 'Stor') {
             this.isSmall = false;
-        else
+        } else {
             this.isSmall = true;
+        }
     }
 
     validateNumberControl1(value: any): boolean {
@@ -167,7 +168,7 @@ function validateCityName(control: AbstractControl) {
     const service = new CityService();
     const allCities = service.getCities();
     if (allCities.filter(x => x.city === control.value).length > 0) {
-        return null
+        return null;
     }
     return { invalidCity: true };
 }
@@ -180,7 +181,7 @@ function validateNumber(control: AbstractControl) {
         return null;
     }
 
-    return { invalidNumber: true }
+    return { invalidNumber: true };
 }
 
 
