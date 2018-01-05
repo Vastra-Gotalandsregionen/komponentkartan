@@ -3,16 +3,23 @@
   display: block;
   min-height: 20px;
   background-color: #dddddd;
-  .expandable-div-chevron {
+  .expandable-div-header {
     cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 10px;
-    &.expanded {
-      @extend .chevron-expanded;
+    .expandable-div-chevron {
+      position: absolute;
+      top: 0;
+      right: 10px;
+      &.expanded {
+        @extend .chevron-expanded;
+      }
+      &.collapsed {
+        @extend .chevron-collapsed;
+      }
     }
-    &.collapsed {
-      @extend .chevron-collapsed;
-    }
-  }
+  } // .expandable-div-content {
+  //   display: none;
+  //   .expandable-div--expanded & {
+  //     display: block;
+  //   }
+  // }
 }
