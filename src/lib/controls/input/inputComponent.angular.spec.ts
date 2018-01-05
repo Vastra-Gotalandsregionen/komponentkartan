@@ -14,7 +14,7 @@ import { IValidationResult, ValidationErrorState } from '../../models/validation
 import { TruncatePipe } from '../../pipes/truncatePipe';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 
-//Locale registration
+// Locale registration
 import { registerLocaleData } from '@angular/common';
 import localeSe from '@angular/common/locales/se';
 import localeSerExtra from '@angular/common/locales/extra/se';
@@ -57,7 +57,7 @@ describe('[InputComponent]', () => {
   describe('When initialized with invalid state', () => {
     beforeEach(() => {
       component.isInvalid = true;
-      component.errorMessage = 'error';
+      component.currentErrorMessage = 'error';
       component.readonly = false;
       component.ngOnInit();
       component.onBlur();
@@ -70,19 +70,20 @@ describe('[InputComponent]', () => {
       expect(rootElement.classes['validation-error--fixed']).toEqual(false);
     });
     it('There is an error message section', () => {
-      let element = rootElement.query(By.css('.input-validation_status__message'));
-      // expect(element.nativeElement.innerText).toEqual('error');
+      const element = rootElement.query(By.css('.input-validation_status__message'));
+      expect(element.nativeElement.innerText).toEqual('error');
     });
 
     describe('When focused', () => {
       beforeEach(() => {
+        component.displayValue = 'test';
         component.onFocus();
         fixture.detectChanges();
       });
       it('CSS Class validation-error--editing is applied', () => {
 
-        let element = rootElement.query(By.css('.input-validation_status__message'));
-        // expect(element.nativeElement.innerText).toEqual('error');
+        const element = rootElement.query(By.css('.input-validation_status__message'));
+        expect(element.nativeElement.innerText).toEqual('error');
         expect(rootElement.classes['validation-error--editing']).toEqual(true);
         expect(rootElement.classes['validation-error--active']).toEqual(false);
         expect(rootElement.classes['validation-error--fixed']).toEqual(false);
@@ -99,16 +100,16 @@ describe('[InputComponent]', () => {
           expect(rootElement.classes['validation-error--active']).toEqual(false);
           expect(rootElement.classes['validation-error--fixed']).toEqual(true);
         });
-      })
-    })
+      });
+    });
   });
 
   describe('When initialized with invalid state and validate on init is true', () => {
     beforeEach(() => {
       component = fixture.componentInstance;
       component.isInvalid = true;
-      component.validateOnInit = true
-      component.errorMessage = 'error';
+      component.validateOnInit = true;
+      component.currentErrorMessage = 'error';
       component.small = false;
       component.ngOnInit();
       fixture.detectChanges();
@@ -120,8 +121,8 @@ describe('[InputComponent]', () => {
       expect(rootElement.classes['validation-error--fixed']).toEqual(false);
     });
     it('There is a error message section', () => {
-      let element = rootElement.query(By.css('.input-validation_status__message'));
-      // expect(element.nativeElement.innerText).toEqual('error');
+      const element = rootElement.query(By.css('.input-validation_status__message'));
+      expect(element.nativeElement.innerText).toEqual('error');
     });
   });
   describe('When initialized with number formatting, valid state and 5 decimals', () => {
@@ -153,7 +154,7 @@ describe('[InputComponent]', () => {
       it('Value is not formatted', () => {
         expect(component.value).toEqual('1234.5673409');
       });
-    })
+    });
   });
 });
 
