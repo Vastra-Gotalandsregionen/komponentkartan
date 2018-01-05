@@ -71,7 +71,7 @@ Task("Deploy-Frontend")
 	.Does(() =>
 {
 
-	var sourcePath =  MakeAbsolute(Directory("./BuildOutput/")).FullPath;
+	var sourcePath =  MakeAbsolute(Directory("./dist/")).FullPath;
 	var destinationPath = environment + "-komponentkartan";
 	var username =  EnvironmentVariable("DeployUsername");
 	var password =  EnvironmentVariable("DeployPwd");
