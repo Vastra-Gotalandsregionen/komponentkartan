@@ -155,7 +155,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             } else {
                 setTimeout(() => {
                     this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent.directiveRef.elementRef.nativeElement);
-                }, 10);
+                }, 100);
             }
         }
     }
