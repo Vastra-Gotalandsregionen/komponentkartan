@@ -1,7 +1,4 @@
-import {
-    Component, Input, AfterViewInit, ElementRef, Output,
-    EventEmitter, ViewChild, HostListener, HostBinding, forwardRef
-} from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener, HostBinding, forwardRef } from '@angular/core';
 import { IDropdownItem } from '../../models/dropdownItem.model';
 import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
 import { ValidationComponent } from '../../controls/validation/validation.component';
@@ -40,13 +37,20 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
     protected _items: IDropdownItem[];
     @Input() set items(value: IDropdownItem[]) {
+        // The scrollbar component would not refresh when items were changed unless we added a timeout...
+        // Ugly solution for sure, but until a better one comes along it will have to do :(
         this._items = value;
 
         const selectedItems = this._items.filter(x => x.selected);
         if (selectedItems.length > 0) {
             this.handleInitiallySelectedItems(selectedItems);
-            this.listenToScrollbarEvents();
         }
+        setTimeout(() => {
+            if (!this.readonly && !this.disabled) {
+                this.listenToScrollbarEvents();
+            }
+        }, 500);
+        this.dimmerTopVisible = false;
     }
     get items(): IDropdownItem[] {
         return this._items;
@@ -75,7 +79,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     protected abstract handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void;
 
     private listenToScrollbarEvents() {
-        $(this.scrollbarComponent.directiveRef.elementRef.nativeElement).scroll((e: any) => {
+        $(this.scrollbarComponent.directiveRef.elementRef.nativeElement).scroll((e) => {
             this.hideDimmersIfScrollIsAtBottomOrTop(e.target);
         });
     }
@@ -155,7 +159,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
             } else {
                 setTimeout(() => {
                     this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent.directiveRef.elementRef.nativeElement);
-                }, 100);
+                }, 10);
             }
         }
     }
