@@ -12,9 +12,18 @@
   <vgr-page-body>
     <vgr-page-block>
       <h1>Expandable div</h1>
-      <vgr-expandable-div [expanded]="true">
+      <vgr-expandable-div [expanded]="false" (expandedChanged)="onExpandedChanged($event)">
         <vgr-expandable-div-header>
-          <p>Denna div kan expanderas</p>
+          <p>Denna div är collapsed från början</p>
+        </vgr-expandable-div-header>
+        <vgr-expandable-div-content>
+          <p>Lite innehåll</p>
+          <p>Mer innehåll</p>
+        </vgr-expandable-div-content>
+      </vgr-expandable-div>
+      <vgr-expandable-div [expanded]="true" (expandedChanged)="onExpandedChanged($event)">
+        <vgr-expandable-div-header>
+          <p>Denna div är expanded från början
         </vgr-expandable-div-header>
         <vgr-expandable-div-content>
           <p>Lite innehåll</p>

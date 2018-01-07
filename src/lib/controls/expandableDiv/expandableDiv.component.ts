@@ -1,4 +1,4 @@
-import { Input, Component, HostBinding, ContentChild, ElementRef, AfterContentInit } from '@angular/core';
+import { Input, Component, HostBinding, ContentChild, ElementRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'vgr-expandable-div',
@@ -6,8 +6,11 @@ import { Input, Component, HostBinding, ContentChild, ElementRef, AfterContentIn
     templateUrl: './expandableDiv.component.html',
 })
 export class ExpandableDivComponent {
+    @HostBinding('class.expandable-div--collapsed') private collapsed = true;
     @HostBinding('class.expandable-div--expanded') private _expanded: boolean;
     @HostBinding('class.expandable-div') private expandableDivClass = true;
+
+    @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
@@ -25,49 +28,37 @@ export class ExpandableDivComponent {
         return 'expandable-div-chevron '.concat(this.expanded ? 'expanded' : 'collapsed');
     }
 
-    // ngAfterContentInit() {
-    //     setTimeout(() => {
-    //         this.setContentOpenOrClosed();
-    //     }, 10);
-    // }
-
     constructor(private elementRef: ElementRef) { }
 
     collapse() {
         this.collapseContent(() => {
+            const expandedChanged = this._expanded;
             this._expanded = false;
-        })
+            this.collapsed = true;
+            if (expandedChanged) {
+                this.expandedChanged.emit(this._expanded);
+            }
+        });
     }
 
     expand() {
-        this._expanded = true;
         this.expandContent();
+        const expandedChanged = !this._expanded;
+        this._expanded = true;
+        this.collapsed = false;
+        if (expandedChanged) {
+            this.expandedChanged.emit(this._expanded);
+        }
     }
-
-    // setContentOpenOrClosed() {
-    //     if (this._expanded) {
-    //         this.collapseContent(() => {
-    //             this._expanded = false;
-    //         })
-    //     } else {
-    //         this._expanded = true;
-    //         this.expandContent();
-    //     }
-    // }
 
     private collapseContent(callback?: any) {
         const header = $(this.elementRef.nativeElement).children('.expandable-div-header');
-        if (!callback) {
-            header.siblings('.expandable-div-content').slideUp(400);
-
-        } else {
-            header.siblings('.expandable-div-content').slideUp(400, callback);
-        }
+        header.siblings('.expandable-div-content').slideUp(400, callback);
     }
 
     private expandContent() {
         const header = $(this.elementRef.nativeElement).children('.expandable-div-header');
-        header.siblings('.expandable-div-content').slideToggle(400);
+        header.siblings('.expandable-div-content').slideDown(400);
     }
 }
 

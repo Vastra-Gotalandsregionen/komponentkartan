@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class ExampleLayoutComponent {
     constructor() { }
+
+    onExpandedChanged(isExpanded: boolean) {
+        console.log(isExpanded ? 'expanded' : 'collapsed');
+    }
 }

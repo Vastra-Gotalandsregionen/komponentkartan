@@ -2,7 +2,6 @@
   position: relative;
   display: block;
   min-height: 20px;
-  background-color: #dddddd;
   .expandable-div-header {
     cursor: pointer;
     .expandable-div-chevron {
@@ -16,10 +15,10 @@
         @extend .chevron-collapsed;
       }
     }
-  } // .expandable-div-content {
-  //   display: none;
-  //   .expandable-div--expanded & {
-  //     display: block;
-  //   }
-  // }
+  }
+  &.expandable-div--collapsed {
+    .expandable-div-content {
+      display: none;
+    }
+  }
 }
