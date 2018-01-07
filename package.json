@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "2.0.0-rc14",
+  "version": "2.0.0-rc16",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
@@ -10,16 +10,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-
     "copy-assets": "cp -r src/assets dist",
     "copy-scripts": "cp -r src/lib/scripts dist/scripts",
     "copy-changelog": "cp -rf CHANGELOG.md dist",
     "packagr": "ng-packagr -p ng-package.json && npm run copy-assets && npm run copy-scripts && npm run copy-changelog",
-
     "publish-demo": "npm run packagr && cd dist && npm publish --tag demo && cd ..",
     "publish-dev": "npm run packagr && cd dist && npm publish --tag dev && cd ..",
     "publish-stable": "npm run packagr && cd dist && npm publish --tag dev && cd ..",
-
     "test-ci": "karma start ./karma.conf.server.js"
   },
   "dependencies": {
@@ -48,20 +45,23 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/jquery": "^3.2.17",
     "@types/node": "~6.0.60",
+    "angular2-template-loader": "^0.6.2",
     "codelyzer": "^4.0.1",
+    "electron": "^1.7.10",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
-    "karma": "~1.7.0",
+    "karma": "^1.7.1",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-spec-reporter": "~0.0.32",
+    "karma-typescript": "~3.0.9",
     "ng-packagr": "^1.6.0",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2",
-    "electron": "^1.7.10"
+    "typescript": "~2.4.2"
   }
 }

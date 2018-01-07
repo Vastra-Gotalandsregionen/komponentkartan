@@ -18,6 +18,6 @@ export class MenuSelectorComponent {
     }
 
     onSelectedMenuChanged(selectedMenu: ISelectableItem) {
-        this.menuSelected.emit(parseInt(selectedMenu.id));
+        this.menuSelected.emit(parseInt(selectedMenu.id, null));
     }
 }

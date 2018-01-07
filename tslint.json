@@ -24,15 +24,17 @@
     ],
     "interface-over-type-literal": true,
     "label-position": true,
-    "max-line-length": [
-      true,
-      255
-    ],
     "member-access": false,
     "member-ordering": [
       true,
-      "static-before-instance",
-      "variables-before-functions"
+      {
+        "order": [
+          "static-field",
+          "instance-field",
+          "static-method",
+          "instance-method"
+        ]
+      }
     ],
     "no-arg": true,
     "no-bitwise": true,
@@ -78,8 +80,9 @@
       true,
       "single"
     ],
-    "radix": false,
+    "radix": true,
     "semicolon": [
+      true,
       "always"
     ],
     "triple-equals": [
@@ -110,13 +113,12 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
       "camelCase"
     ],
     "component-selector": [
-      false,
+      true,
       "element",
-      "app",
+      "vgr",
       "kebab-case"
     ],
     "use-input-property-decorator": true,
@@ -128,8 +130,6 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "no-access-missing-member": true,
-    "templates-use-public": true,
-    "invoke-injectable": true
+    "invoke-injectable": false
   }
 }

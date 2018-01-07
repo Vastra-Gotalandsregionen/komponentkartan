@@ -47,7 +47,6 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         }
         setTimeout(() => {
             if (!this.readonly && !this.disabled) {
-                // this.scrollbarComponent.update();
                 this.listenToScrollbarEvents();
             }
         }, 500);
@@ -59,7 +58,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
     @Input() set values(values: string[]) {
         this.items = values.map(function (value: string) {
-            return { displayName: value, id: value } as IDropdownItem
+            return { displayName: value, id: value } as IDropdownItem;
         });
     }
 
@@ -80,7 +79,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     protected abstract handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void;
 
     private listenToScrollbarEvents() {
-        $(this.scrollbarComponent['elementRef'].nativeElement).scroll((e: any) => {
+        $(this.scrollbarComponent.directiveRef.elementRef.nativeElement).scroll((e) => {
             this.hideDimmersIfScrollIsAtBottomOrTop(e.target);
         });
     }
@@ -117,7 +116,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         if (!this.items) {
             return;
         }
-        const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length
+        const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
     }
 
     onDropdownMouseDown(event: Event) {
@@ -159,7 +158,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
                 this.validate();
             } else {
                 setTimeout(() => {
-                    this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent['elementRef'].nativeElement);
+                    this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent.directiveRef.elementRef.nativeElement);
                 }, 10);
             }
         }

@@ -27,7 +27,7 @@ export class ModalService {
     }
 
     openOneButtonDialog(title: string, message: string, buttonText: string, callback: () => void) {
-        this.openDialog(title, message, new ModalButtonConfiguration(buttonText, callback))
+        this.openDialog(title, message, new ModalButtonConfiguration(buttonText, callback));
     }
 
     openSaveDontSaveCancelDialog(title: string, message: string,

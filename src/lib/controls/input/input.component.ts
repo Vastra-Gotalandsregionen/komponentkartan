@@ -36,7 +36,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
-  @Output() valueChanged: EventEmitter<string> = new EventEmitter<string>();
 
   @HostBinding('class.validated-input') hasClass = true;
   @HostBinding('class.validation-error--active') get errorClass() {
@@ -129,7 +128,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
       return;
     }
 
-    this.displayValue = this.formatNumber ? this.convertNumberToString(this.value) : this.value;
+    this.displayValue = this.displayValue.toString().replace(/\s/g, '');
 
     this.invalidOnFocus = (this.formControlName ? this.control.invalid : this.isInvalid) && (this.touched || this.validateOnInit);
     this.hasFocus = true;

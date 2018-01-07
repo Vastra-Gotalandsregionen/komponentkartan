@@ -43,11 +43,11 @@ Task("Run-Jasmine-Tests")
 .IsDependentOn("Build-Frontend")
 .Does(() =>
 {
-	// NpmRunScript(new NpmRunScriptSettings
-    // {
-    //     ScriptName = "test-ci",
-    //     WorkingDirectory = "./",
-    // });
+	NpmRunScript(new NpmRunScriptSettings
+    {
+        ScriptName = "test-ci",
+        WorkingDirectory = "./",
+    });
 });
 
 Task("Build-Frontend")
@@ -71,7 +71,7 @@ Task("Deploy-Frontend")
 	.Does(() =>
 {
 
-	var sourcePath =  MakeAbsolute(Directory("./BuildOutput/")).FullPath;
+	var sourcePath =  MakeAbsolute(Directory("./dist/")).FullPath;
 	var destinationPath = environment + "-komponentkartan";
 	var username =  EnvironmentVariable("DeployUsername");
 	var password =  EnvironmentVariable("DeployPwd");

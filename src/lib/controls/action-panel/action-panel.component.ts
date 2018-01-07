@@ -130,7 +130,7 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
             this.processShowOnCollapseNotification(callback);
         } else if (notificationType === NotificationType.ShowOnRemove) {
             this.processShowOnRemoveNotification(callback);
-        };
+        }
     }
 
     private processShowOnCollapseNotification(callback: Function) {

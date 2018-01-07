@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core'
+import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
@@ -22,23 +22,19 @@ export class ErrorMessagePipe implements PipeTransform {
 
   private setErrorMessage(errors: any, message: any, small: any): string {
     if (typeof (message) === 'object') {
-      for (var key in errors) {
+      for (const key in errors) {
         if (key === 'required' && small && !message[key]) {
           return 'Obligatoriskt';
-        }
-        else if (key === 'required' && !small && !message[key]) {
+        } else if (key === 'required' && !small && !message[key]) {
           return 'Fältet är obligatoriskt';
-        }
-        else if (message) {
+        } else if (message) {
           return message[key];
-        }
-        else {
-          return 'Det här ska inte hända'
+        } else {
+          return 'Det här ska inte hända';
         }
       }
-    }
-    else {
+    } else {
       return message;
     }
   }
-}  
+}

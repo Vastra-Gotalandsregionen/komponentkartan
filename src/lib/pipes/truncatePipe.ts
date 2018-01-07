@@ -14,7 +14,7 @@ export class TruncatePipe implements PipeTransform {
             return value;
         }
 
-        let limit = parseInt(maxLength);
+        let limit = parseInt(maxLength, null);
         if (!limit) {
             return value;
         }
