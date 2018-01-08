@@ -74,7 +74,11 @@ import * as $ from 'jquery';
     type.ListItemHeaderComponent,
     type.ExpandableDivComponent,
     type.ExpandableDivHeaderComponent,
-    type.ExpandableDivContentComponent
+    type.ExpandableDivContentComponent,
+    type.PanelComponent,
+    type.PanelHeaderComponent,
+    type.PanelInformationComponent,
+    type.PanelFooterComponent
   ],
   exports: [
     type.SafePipe,
@@ -121,7 +125,11 @@ import * as $ from 'jquery';
     type.ListItemHeaderComponent,
     type.ExpandableDivComponent,
     type.ExpandableDivHeaderComponent,
-    type.ExpandableDivContentComponent
+    type.ExpandableDivContentComponent,
+    type.PanelComponent,
+    type.PanelHeaderComponent,
+    type.PanelInformationComponent,
+    type.PanelFooterComponent
   ],
   providers: [
     type.ModalService,
