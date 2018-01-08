@@ -1,0 +1,24 @@
+.expandable-div {
+  position: relative;
+  display: block;
+  min-height: 20px;
+  .expandable-div-header {
+    cursor: pointer;
+    .expandable-div-chevron {
+      position: absolute;
+      top: 0;
+      right: 10px;
+      &.expanded {
+        @extend .chevron-expanded;
+      }
+      &.collapsed {
+        @extend .chevron-collapsed;
+      }
+    }
+  }
+  &.expandable-div--collapsed {
+    .expandable-div-content {
+      display: none;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
@@ -7,11 +7,9 @@ import { Component, ViewChildren, QueryList } from '@angular/core';
     templateUrl: 'example-layout.component.html'
 })
 export class ExampleLayoutComponent {
-    expanded: boolean;
     constructor() { }
 
-    onClick() {
-        this.expanded = !this.expanded;
-
+    onExpandedChanged(isExpanded: boolean) {
+        console.log(isExpanded ? 'expanded' : 'collapsed');
     }
 }

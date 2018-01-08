@@ -79,6 +79,27 @@
 
 /* Expandable container = en rad i listan som kan expanderas*/
 
+.chevron-expanded {
+  @extend .bg-image-icon-chevron;
+  content: "";
+  transform: rotate(-180deg);
+  transition: transform 0.4s;
+  width: 15px !important;
+  background-size: 100% !important;
+  display: block;
+}
+
+.chevron-collapsed {
+  @extend .bg-image-icon-chevron;
+  content: "";
+  width: 15px !important;
+  background-size: 100% !important;
+  display: block;
+  vertical-align: middle;
+  transform: rotate(0deg);
+  transition: transform 0.4s;
+}
+
 .list-item {
   visibility: visible;
   display: none;
@@ -88,14 +109,8 @@
     display: block;
   }
   .list-item__header:after {
-    @extend .bg-image-icon-chevron;
-    content: "";
+    @extend .chevron-expanded;
     margin-left: auto;
-    transform: rotate(-180deg);
-    transition: transform 0.4s;
-    width: 15px !important;
-    background-size: 100% !important;
-    display: block;
   } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
   transition: margin-top 0.2s ease-in;
   &.list-item--expanded:not(.list-item--compact) {
@@ -106,11 +121,7 @@
   &.list-item--collapsed {
     .list-item__header:after {
       //OBS! Denna måste ligga efter expanded-stilen i filen!
-      @extend .bg-image-icon-chevron;
-      vertical-align: middle;
-      margin-left: auto;
-      transform: rotate(0deg);
-      transition: transform 0.4s;
+      @extend .chevron-collapsed;
     }
   } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
   &.list-item--collapsed:not(.list-item--compact):hover {
