@@ -3,7 +3,7 @@
 ![npm](https://img.shields.io/npm/v/vgr-komponentkartan.svg)
 ![npm](https://img.shields.io/npm/v/vgr-komponentkartan/demo.svg)
 
-Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular 4
+Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular 5
 
 ## Komma igång
 
@@ -54,7 +54,7 @@ Testerna är uppdelade i två typer, tester med Angular och tester utan Angular.
 
 ## Byggt med
 
-* [Angular 4](https://angular.io/) - Web framework
+* [Angular 5](https://angular.io/) - Web framework
 * [Typescript](https://www.typescriptlang.org/) - Javascript that scales
 * [SASS](sass-lang.com) - SASS - Syntactically Awesome Style Sheets
 * [NPM](https://www.npmjs.com/) - Dependency Management
