@@ -9,6 +9,12 @@ import { Component } from '@angular/core';
 export class ExampleLayoutComponent {
     constructor() { }
 
+    expanded: boolean;
+
+    onClick() {
+        this.expanded = !this.expanded;
+    }
+
     onExpandedChanged(isExpanded: boolean) {
         console.log(isExpanded ? 'expanded' : 'collapsed');
     }
