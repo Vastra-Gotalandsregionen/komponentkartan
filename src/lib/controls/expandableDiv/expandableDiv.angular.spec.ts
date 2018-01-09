@@ -1,13 +1,11 @@
 import { ExpandableDivComponent } from './expandableDiv.component';
 import { ExpandableDivHeaderComponent } from './expandableDiv-header.component';
 import { ExpandableDivContentComponent } from './expandableDiv-content.component';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async, fakeAsync } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
-
-
 
 describe('[ExpandableDivComponent]', () => {
 
@@ -15,7 +13,6 @@ describe('[ExpandableDivComponent]', () => {
     let fixture: ComponentFixture<ExpandableDivComponent>;
     let rootElement: DebugElement;
     let header: DebugElement;
-
 
     beforeEach((done) => {
         TestBed.resetTestEnvironment();
@@ -55,17 +52,22 @@ describe('[ExpandableDivComponent]', () => {
             expect(rootElement.classes['expandable-div--expanded']).toBe(true);
         });
 
+
         // Todo, få bortkommenterade testet att lira.
         describe('and header is clicked', () => {
-            beforeEach(() => {
+            beforeEach((done) => {
                 header = rootElement.query(By.css('.expandable-div-header'));
                 header.triggerEventHandler('click', null);
                 fixture.detectChanges();
+                setTimeout(() => {
+                    done();
+                }, 500);
             });
 
             it('div is collapsed', () => {
-                // expect(component.expanded).toBe(false);
+                expect(component.expanded).toBe(false);
             });
+
             describe('and header is clicked again', () => {
                 beforeEach(() => {
                     header.triggerEventHandler('click', null);
@@ -101,12 +103,15 @@ describe('[ExpandableDivComponent]', () => {
                 expect(component.expanded).toBe(true);
             });
             describe('and header is clicked again', () => {
-                beforeEach(() => {
+                beforeEach((done) => {
                     header.triggerEventHandler('click', null);
                     fixture.detectChanges();
+                    setTimeout(() => {
+                        done();
+                    }, 500);
                 });
                 it('div is collapsed', () => {
-                    //   expect(component.expanded).toBe(false);
+                    expect(component.expanded).toBe(false);
                 });
             });
         });
