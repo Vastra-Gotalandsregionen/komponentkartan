@@ -1,5 +1,5 @@
 import {
-    Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, ContentChildren, QueryList,
+    Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, ContentChildren, ContentChild, QueryList,
     AfterContentInit, forwardRef
 } from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
@@ -9,6 +9,7 @@ import { ListItemJqeuryHelper } from './listItemJqueryHelper';
 import { ListColumnComponent } from '../list/list-column.component';
 import { ListColumnHeaderComponent } from '../list/list-column-header.component';
 import { ListHeaderComponent } from '../list/list-header.component';
+import { ListItemHeaderComponent } from '../list-item/list-item-header.component';
 
 @Component({
     templateUrl: './list-item.component.html',
@@ -26,6 +27,8 @@ export class ListItemComponent implements OnInit {
     @HostBinding('class.list-item--notification-visible') notificationVisible: boolean;
     @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
     @HostBinding('class.list-item--columns-initialized') columnsInitialized: boolean;
+
+    @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
@@ -63,10 +66,15 @@ export class ListItemComponent implements OnInit {
 
     @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
+
+
     constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ListItemJqeuryHelper) {
 
     }
 
+    ngAfterContentInit() {
+        this.listItemHeader.expandedChanged.subscribe(() => this.setExpandOrCollapsed());
+    }
     ngOnInit() {
         if (this.notification && this.notification.type === NotificationType.Permanent) {
             this.showNotification();
@@ -76,6 +84,7 @@ export class ListItemComponent implements OnInit {
     copyPropertiesFromHeader(header: ListHeaderComponent) {
         this.columns.forEach((column, index) => {
             header.applyToColumn(column, index);
+
         });
 
         setTimeout(() => {
@@ -100,14 +109,18 @@ export class ListItemComponent implements OnInit {
             return;
         }
 
+        this.setExpandOrCollapsed();
+
+        event.cancelBubble = true;
+    }
+
+    private setExpandOrCollapsed() {
         if (!this._expanded) {
             this.expand();
         } else {
             this.collapse();
         }
-        event.cancelBubble = true;
     }
-
     private expand() {
         if (this.isDeleted || this.notInteractable) {
             return;
