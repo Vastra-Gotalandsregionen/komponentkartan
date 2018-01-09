@@ -364,6 +364,9 @@ vgr-sidebar-menu {
 
 .menu-item__minus {
   @extend .bg-image-icon-minus;
+  background-size: 9px 26px;
+  background-repeat: no-repeat;
+  background-position-x: center;
 }
 
 .menu-item__plus {
@@ -421,6 +424,16 @@ vgr-sidebar-menu {
 }
 
 @media screen and (min-width: $desktop-width--medium) {
+
+  .menu-item__plus {
+    height: 15px;
+    width: 15px;
+  }
+
+  .menu-item__minus {
+    background-size: 9px 30px;
+  }
+
   .sidebar-menu {
     min-width: $nav-width--medium;
     max-width: $nav-width--medium;
