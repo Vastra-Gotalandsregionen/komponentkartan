@@ -19,7 +19,7 @@ export class PanelComponent {
     }
 
     private getColorClass(): string {
-        return 'color--' + this.color;
+        return this.color ? 'color--' + this.color : '';
     }
 
     constructor(private elementRef: ElementRef) { }
