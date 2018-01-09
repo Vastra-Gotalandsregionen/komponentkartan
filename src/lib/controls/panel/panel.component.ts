@@ -6,9 +6,21 @@ import { Input, Component, HostBinding, ContentChild, ElementRef } from '@angula
     templateUrl: './panel.component.html',
 })
 export class PanelComponent {
-    @HostBinding('class.information-panel') private panelClass = true;
-    @HostBinding('class.one-third') private widthClass = true;
-    @HostBinding('class.theme-green') private themeClass = true;
+    @Input() width: number;
+    @Input() color: string;
+
+    @HostBinding('class', )
+    get classes(): string {
+        return 'information-panel ' + this.getColumnWidthClass() + ' ' + this.getColorClass();
+    }
+
+    private getColumnWidthClass(): string {
+        return 'flex-width--' + (this.width ? this.width : 4);
+    }
+
+    private getColorClass(): string {
+        return 'color--' + this.color;
+    }
 
     constructor(private elementRef: ElementRef) { }
 }

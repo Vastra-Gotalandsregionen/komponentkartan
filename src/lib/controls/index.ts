@@ -33,9 +33,6 @@ export { ListColumnTrashcanComponent } from './list/list-column-trashcan.compone
 export { ListItemComponent } from './list-item/list-item.component';
 export { ListItemJqeuryHelper } from './list-item/listItemJqueryHelper';
 export { PanelComponent } from './panel/panel.component';
-export { PanelHeaderComponent } from './panel/panel-header.component';
-export { PanelInformationComponent } from './panel/panel-information.component';
-export { PanelFooterComponent } from './panel/panel-footer.component';
 
 export { PageComponent } from './page/page.component';
 export { PageHeaderComponent } from './pageHeader/pageHeader.component';

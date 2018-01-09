@@ -2,61 +2,40 @@
   @extend .border-top-color--primary;
   border-top: $border--regular solid $primary-color--default;
   background: white;
+  &.color--red {
+    border-color: $primary-color--red;
+  }
+  &.color--blue {
+    border-color: $primary-color--blue;
+  }
+  &.color--green {
+    border-color: $primary-color--green;
+  }
+  &.color-neutral {
+    border-color: $primary-color--default;
+  }
 }
 
-.information-panel__content {
+.information-panel__container {
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
   border: solid 1px $border-color;
+  height: 150px;
   width: 100%;
-  .information-panel--compact & {
-    padding-bottom: 0;
-    padding-top: 0;
+  .color--red & {
+    border-color: $primary-color--red;
   }
-  .information-panel--indented {
-    >* {
-      margin-left: $margin--slim;
-      margin-right: $margin--slim;
-    }
+  .color--blue & {
+    border-color: $primary-color--blue;
   }
-}
-
-.information-panel__header {
-  //Linjen under rubriken på en information panel
-  &:after {
-    display: block;
-    content: "";
-    width: 248px;
-    border-bottom: 1px solid#151515;
-    margin-top: 4px;
+  .color--green & {
+    border-color: $primary-color--green;
   }
-  flex-shrink:1;
-}
-
-.information-panel__header__title {
-  display: inline;
-  font-weight: bold;
-  padding-right: $margin--regular;
-}
-
-.information-panel__header__timestamp {
-  font-weight: normal;
-  display: inline;
-}
-
-.information-panel__information {
-  margin-top: 3px;
-  margin-bottom: 3px;
-  word-wrap: break-word;
-  /* hide text if it more than N lines  */
-  overflow: hidden;
-}
-
-.information-panel__footer {
-  flex-shrink: 1; // position: absolute;
-  // bottom: 0px;
+  .color-neutral & {
+    border-color: $primary-color--default;
+  }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
@@ -65,15 +44,15 @@
     padding-left: $margin--fat;
     padding-right: $margin--fat;
   }
-  .information-panel__header {
-    //Linjen under rubriken på en information panel
-    &:after {
-      width: 308px;
-      margin-top: 11px;
-      margin-bottom: 13px;
-    }
+}
+
+// TODO: Move to row layout????
+@mixin flex-width($number) {
+  .flex-width--#{$number} {
+    flex: percentage(0.08333 * $number);
   }
-  .information-panel__header__title {
-    padding-right: 43px;
-  }
+}
+
+@for $i from 1 through 12 {
+  @include flex-width($i);
 }
