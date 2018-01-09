@@ -11,7 +11,7 @@ export class PanelComponent {
 
     @HostBinding('class', )
     get classes(): string {
-        return 'information-panel ' + this.getColumnWidthClass() + ' ' + this.getColorClass();
+        return 'panel ' + this.getColumnWidthClass() + ' ' + this.getColorClass();
     }
 
     private getColumnWidthClass(): string {
