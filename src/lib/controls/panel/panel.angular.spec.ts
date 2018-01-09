@@ -4,7 +4,6 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { By } from '@angular/platform-browser';
 
 import { PanelComponent } from '../../controls/panel/panel.component';
 
