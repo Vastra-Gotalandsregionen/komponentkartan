@@ -43,7 +43,8 @@ describe('PanelComponent', () => {
         });
 
         it('should have the classes flex-width--4', () => {
-            expect(component.classes.trim()).toEqual('panel flex-width--4');
+            console.log(component.classes);
+            expect(component.classes).toContain('flex-width--4');
         });
     });
 
@@ -56,11 +57,11 @@ describe('PanelComponent', () => {
         });
 
         it('should have the classes flex-width--3', () => {
-            expect(component.classes.trim()).toEqual('panel flex-width--12 color--blue');
+            expect(component.classes).toEqual('flex-width--12 panel-with-border color--blue');
         });
     });
 
-    describe('When component is initialized with width = 12 and color = blue', () => {
+    describe('When component is initialized with width = 5 and color = red', () => {
 
         beforeEach(() => {
             component.width = 5;
@@ -69,7 +70,21 @@ describe('PanelComponent', () => {
         });
 
         it('should have the classes flex-width--3', () => {
-            expect(component.classes.trim()).toEqual('panel flex-width--5 color--red');
+            expect(component.classes.trim()).toEqual('flex-width--5 panel-with-border color--red');
+        });
+    });
+
+    describe('When component is initialized with width = 6 and no border', () => {
+
+        beforeEach(() => {
+            component.width = 6;
+            component.noborder = true;
+            component.color = 'red';
+            fixture.detectChanges();
+        });
+
+        it('should have the classes flex-width--6', () => {
+            expect(component.classes.trim()).toEqual('flex-width--6');
         });
     });
 });

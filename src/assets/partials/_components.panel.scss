@@ -1,4 +1,4 @@
-.panel__container {
+.panel {
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   padding-top: $margin--slim;
@@ -6,26 +6,26 @@
   background: white;
   height: 150px;
   width: 100%;
-  @extend .border-top-color--primary;
-  border-color: $primary-color--default;
-  border: solid 1px $border-color;
-  border-top: $border--regular solid;
-  .color--red & {
+  .panel-with-border & {
+    @extend .border-top-color--primary;
+    border-color: $primary-color--default;
+    border: solid 1px $border-color;
+    border-top: $border--regular solid;
+  }
+  .color--red.panel-with-border & {
     border-color: $primary-color--red;
   }
-  .color--green & {
+  .color--green.panel-with-border & {
     border-color: $primary-color--green;
   }
-  .color--blue & {
+  .color--blue.panel-with-border & {
     border-color: $primary-color--blue;
   }
-  .color--neutral & {
+  .color--neutral.panel-with-border & {
     border-color: $primary-color--default;
   }
 }
 
-// TODO: Move to row layout????
-// TODO: dokumentera och exponera dessa klasser
 @mixin flex-width($number) {
   .flex-width--#{$number} {
     flex: $number;
@@ -57,6 +57,13 @@
 }
 
 @media screen and (min-width: $desktop-width--medium) {
+  .panel {
+    padding-left: $margin--fat;
+    padding-right: $margin--fat;
+    padding-top: $margin--fat;
+    padding-bottom: $margin--fat;
+    height: 170px;
+  }
   .panel-container {
     padding: $margin--fat/2 0;
     .panel__wrapper {

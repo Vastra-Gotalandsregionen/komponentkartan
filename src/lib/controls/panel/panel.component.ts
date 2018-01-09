@@ -8,10 +8,10 @@ import { Input, Component, HostBinding, ContentChild, ElementRef } from '@angula
 export class PanelComponent {
     @Input() width: number;
     @Input() color: string;
-
+    @Input() noborder: boolean;
     @HostBinding('class', )
     get classes(): string {
-        return 'panel ' + this.getColumnWidthClass() + ' ' + this.getColorClass();
+        return this.getColumnWidthClass() + this.getBorderClass() + this.getColorClass();
     }
 
     private getColumnWidthClass(): string {
@@ -19,9 +19,12 @@ export class PanelComponent {
     }
 
     private getColorClass(): string {
-        return this.color ? 'color--' + this.color : '';
+        return this.color && !this.noborder ? ' color--' + this.color : '';
     }
 
+    private getBorderClass(): string {
+        return this.noborder ? '' : ' panel-with-border';
+    }
     constructor(private elementRef: ElementRef) { }
 }
 
