@@ -24,11 +24,8 @@
   }
 }
 
-@media screen and (min-width: $desktop-width--medium) {}
-
 // TODO: Move to row layout????
 // TODO: dokumentera och exponera dessa klasser
-// TODO: paddinge ska vara olika i stora och illa storleken
 @mixin flex-width($number) {
   .flex-width--#{$number} {
     flex: $number;
@@ -43,8 +40,9 @@
   display: flex;
   flex-direction: row;
   margin: 0;
+  padding: $margin--slim/2 0;
   .panel__wrapper {
-    padding: 0 10px;
+    padding: 0 $margin--slim/2;
   }
   >*:first-child {
     .panel__wrapper {
@@ -54,6 +52,15 @@
   >*:last-child {
     .panel__wrapper {
       padding-right: 0;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .panel-container {
+    padding: $margin--fat/2 0;
+    .panel__wrapper {
+      padding: 0 $margin--fat/2;
     }
   }
 }
