@@ -21,10 +21,12 @@ export class ExpandableDivComponent {
         if (expandedValue && !this._expanded) {
             this._expanded = true;
             this.showContent = true;
+            this.expandedChanged.emit(this._expanded);
         } else if (!expandedValue && this._expanded) {
             this._expanded = false;
             setTimeout(() => {
                 this.showContent = false;
+                this.expandedChanged.emit(this._expanded);
             }, 400);
         }
     }
