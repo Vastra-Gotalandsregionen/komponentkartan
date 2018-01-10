@@ -7,7 +7,6 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 
 export class ListItemContentComponent {
-    @HostBinding('class.list-item__content') listItemContent = true;
     constructor() {
     }
 }
