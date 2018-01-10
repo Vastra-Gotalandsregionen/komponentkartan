@@ -3,5 +3,5 @@
   <ng-content select="vgr-expandable-div-header"></ng-content>
 </div>
 <div class="expandable-div-content">
-  <ng-content select="vgr-expandable-div-content"></ng-content>
+  <ng-content *ngIf="expanded_chevron" select="vgr-expandable-div-content"></ng-content>
 </div>
