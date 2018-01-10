@@ -55,13 +55,10 @@ describe('[ExpandableDivComponent]', () => {
 
         // Todo, få bortkommenterade testet att lira.
         describe('and header is clicked', () => {
-            beforeEach((done) => {
+            beforeEach(() => {
                 header = rootElement.query(By.css('.expandable-div-header'));
                 header.triggerEventHandler('click', null);
                 fixture.detectChanges();
-                setTimeout(() => {
-                    done();
-                }, 500);
             });
 
             it('div is collapsed', () => {
@@ -103,12 +100,9 @@ describe('[ExpandableDivComponent]', () => {
                 expect(component.expanded).toBe(true);
             });
             describe('and header is clicked again', () => {
-                beforeEach((done) => {
+                beforeEach(() => {
                     header.triggerEventHandler('click', null);
                     fixture.detectChanges();
-                    setTimeout(() => {
-                        done();
-                    }, 500);
                 });
                 it('div is collapsed', () => {
                     expect(component.expanded).toBe(false);
