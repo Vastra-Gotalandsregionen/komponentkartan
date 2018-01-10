@@ -6,7 +6,7 @@ import { Input, Component, HostBinding, ContentChild, ElementRef, Output, EventE
     templateUrl: './expandableDiv.component.html',
 })
 export class ExpandableDivComponent {
-    private showContent: boolean;
+    showContent: boolean;
 
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 

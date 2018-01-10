@@ -7,7 +7,7 @@ import { Component, HostBinding, Input, ElementRef, AfterContentInit } from '@an
 })
 export class CardSectionComponent {
 
-    private showContent;
+    showContent: boolean;
 
     @Input() title: string;
     @Input() subtitle: string;
