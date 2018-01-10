@@ -18,9 +18,9 @@ describe('[ListComponent]', () => {
         });
     });
     describe('when list is initialized with three items', () => {
-        const childItem1 = { copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
-        const childItem2 = { copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
-        const childItem3 = { copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
+        const childItem1 = { setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
+        const childItem2 = { setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
+        const childItem3 = { setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
 
         beforeEach(() => {
             listComponent.items = new QueryList<ListItemComponent>();

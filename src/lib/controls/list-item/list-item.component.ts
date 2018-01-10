@@ -43,6 +43,8 @@ export class ListItemComponent implements OnInit {
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() notificationChanged: EventEmitter<RowNotification> = new EventEmitter<RowNotification>();
     @Output() deleted: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnFirstRow: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnLastRow: EventEmitter<any> = new EventEmitter();
 
     private _notification: RowNotification;
     @Input() set notification(value: RowNotification) {
@@ -74,11 +76,23 @@ export class ListItemComponent implements OnInit {
 
     ngAfterContentInit() {
         this.listItemHeader.expandedChanged.subscribe(() => this.setExpandOrCollapsed());
+        this.listItemHeader.goToFirst.subscribe(() => this.setFocusOnFirstRow.emit());
+        this.listItemHeader.goToLast.subscribe(() => this.setFocusOnLastRow.emit());
+
+
     }
+
+
     ngOnInit() {
         if (this.notification && this.notification.type === NotificationType.Permanent) {
             this.showNotification();
         }
+    }
+
+
+    setFocusOnRow() {
+        this.listItemHeader.setFocus();
+
     }
 
     copyPropertiesFromHeader(header: ListHeaderComponent) {

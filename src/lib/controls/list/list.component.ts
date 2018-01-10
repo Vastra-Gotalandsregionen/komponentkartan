@@ -19,6 +19,7 @@ export class ListComponent implements AfterContentInit {
     constructor() {
 
     }
+
     ngAfterContentInit() {
         this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
         this.copyItemWidthsFromHeader();
@@ -29,12 +30,24 @@ export class ListComponent implements AfterContentInit {
                         this.items.filter(container => container !== changedContainer).forEach(otherContainer => otherContainer.expanded = false);
                     }
                 });
+
             });
         }
         this.items.changes.subscribe(() => {
             this.copyItemWidthsFromHeader();
         });
+
+        this.items.forEach(item => {
+            item.setFocusOnFirstRow.subscribe(() => this.items.first.setFocusOnRow());
+            item.setFocusOnLastRow.subscribe(() => this.items.last.setFocusOnRow());
+        });
+
+
+
+
     }
+
+
 
     copyItemWidthsFromHeader() {
         this.items.forEach(item => {
