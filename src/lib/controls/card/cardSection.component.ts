@@ -7,7 +7,7 @@ import { Component, HostBinding, Input, ElementRef, AfterContentInit } from '@an
 })
 export class CardSectionComponent {
 
-    private expanded_chevron;
+    private showContent;
 
     @Input() title: string;
     @Input() subtitle: string;
@@ -23,11 +23,11 @@ export class CardSectionComponent {
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
             this._expanded = true;
-            this.expanded_chevron = true;
+            this.showContent = true;
         } else if (!expandedValue && this._expanded) {
             this._expanded = false;
             setTimeout(() => {
-                this.expanded_chevron = false;
+                this.showContent = false;
             }, 400);
         }
     }
@@ -37,7 +37,7 @@ export class CardSectionComponent {
     }
 
     get chevron_class() {
-        return 'card-section__header__expander  '.concat(this.expanded_chevron ? 'expanded' : 'collapsed');
+        return 'card-section__header__expander  '.concat(this.showContent ? 'expanded' : 'collapsed');
     }
     constructor(private elementRef: ElementRef) {
         this.readonly = true;
