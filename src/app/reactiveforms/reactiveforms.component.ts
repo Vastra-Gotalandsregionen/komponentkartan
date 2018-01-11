@@ -46,7 +46,7 @@ export class ReactiveformsComponent implements OnInit {
       favourite_pet: ['', Validators.required],
       interests: [['Koda'], Validators.required],
       check: [true, Validators.pattern('true')],
-      optional: ['Två'],
+      optional: [{ id: '2', displayName: 'Två' }],
       monthpicker: ['', Validators.required],
       datepicker: ['', Validators.required],
       datepicker_preselected: [new Date(), Validators.required]

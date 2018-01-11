@@ -28,7 +28,7 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
             if (preSelectedOptions.length > 0) {
                 this.selectOption(preSelectedOptions[0]);
             } else {
-                const enabledOptions = this.options.filter(x => !x.disabled)
+                const enabledOptions = this.options.filter(x => !x.disabled);
                 this.selectOption(enabledOptions[0]);
             }
         }
@@ -49,9 +49,9 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
         }
     }
 
-    writeValue(optionValue: any): void {
+    writeValue(optionValue: ISelectableItem): void {
         this.options.forEach(o => {
-            o.selected = o.displayName === optionValue;
+            o.selected = (o.displayName === optionValue.displayName && o.id === optionValue.id);
         });
     }
 

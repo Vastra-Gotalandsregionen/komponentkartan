@@ -58,7 +58,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.noItemSelectedLabel = 'Välj';
 
         this.showAllItemText = 'Visa alla';
-        this.selectAllItemText = 'Välj alla'
+        this.selectAllItemText = 'Välj alla';
 
         this.selectAllItem = {
             displayName: this.selectAllItemText,
