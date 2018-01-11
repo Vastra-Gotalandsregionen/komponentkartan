@@ -32,6 +32,9 @@ export { ListColumnCheckboxComponent } from './list/list-column-checkbox.compone
 export { ListColumnTrashcanComponent } from './list/list-column-trashcan.component';
 export { ListItemComponent } from './list-item/list-item.component';
 export { ListItemJqeuryHelper } from './list-item/listItemJqueryHelper';
+export { PanelComponent } from './panel/panel.component';
+export { PanelContainerComponent } from './panel/panel-container.component';
+
 export { PageComponent } from './page/page.component';
 export { PageHeaderComponent } from './pageHeader/pageHeader.component';
 export { PageBodyComponent } from './page-body/page-body.component';

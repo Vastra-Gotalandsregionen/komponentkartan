@@ -17,12 +17,6 @@
   }
 }
 
-.row-layout--equal-height {
-  >* {
-    display: flex;
-  }
-}
-
 .column-layout {
   display: flex;
   flex-direction: column;

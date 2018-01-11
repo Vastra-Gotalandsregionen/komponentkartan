@@ -26,7 +26,7 @@ export class FormExampleComponent {
     @ViewChildren(ValidationComponent) validatedComponents: QueryList<ValidationComponent>;
     constructor() {
         this.readonly = false;
-        this.view = 'A';
+        this.view = 'C';
         this.validationStatus = 'Inte validerad';
         this.items = [
             { displayName: 'Sverige' } as ISelectableItem,
