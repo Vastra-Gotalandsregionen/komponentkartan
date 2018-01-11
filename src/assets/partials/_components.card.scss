@@ -105,17 +105,17 @@
 }
 
 .card-section__content {
-  padding-bottom: $margin--slim;
-  padding-top: $margin--slim;
   .card-section--collapsed & {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-in;
+    transition: max-height 0.4s ease-in, padding 0.4s ease-in;
   }
   .card-section--expanded & {
     max-height: 999px;
     overflow: hidden;
-    transition: max-height 0.4s ease-out;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-in-out;
+    padding-bottom: $margin--slim;
+    padding-top: $margin--slim;
   }
 }
 
