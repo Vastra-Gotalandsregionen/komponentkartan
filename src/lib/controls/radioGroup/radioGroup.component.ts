@@ -1,4 +1,7 @@
-import { Component, Input, EventEmitter, Output, AfterViewInit, OnChanges, HostBinding, forwardRef, ElementRef, Renderer2 } from '@angular/core';
+import {
+    Component, Input, EventEmitter, Output, AfterViewInit,
+    OnChanges, HostBinding, forwardRef, ElementRef, Renderer
+} from '@angular/core';
 import { ISelectableItem } from '../../models/selectableItem.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -20,10 +23,16 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
     @Input() noSelection: boolean;
     @Output() selectedChanged: EventEmitter<ISelectableItem> = new EventEmitter<ISelectableItem>();
 
-    constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
+    noSelectionFlag: boolean;
 
-    ngOnChanges() {
-        if (!this.noSelection && this.options && this.options.length > 0) {
+    constructor(private elementRef: ElementRef, private renderer: Renderer) {
+    }
+
+    ngOnChanges(changes) {
+        const noSelectedItems = this.options.every((x) => x.selected === false);
+        this.noSelectionFlag = this.noSelection || noSelectedItems;
+
+        if (!this.noSelectionFlag && this.options && this.options.length > 0) {
             const preSelectedOptions = this.options.filter(x => x.selected);
             if (preSelectedOptions.length > 0) {
                 this.selectOption(preSelectedOptions[0]);
@@ -43,29 +52,62 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
     }
 
     keyDown(event: KeyboardEvent, option: ISelectableItem): void {
-        if (event.keyCode === 39 || event.keyCode === 38) {
-            console.log('keyDown', event.keyCode);
-            const position = this.options.indexOf(option);
-            console.log(position);
-            const nextItem = this.options[position + 1];
-            console.log(event);
-            const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
-            const test = elements[position + 1];
-            this.renderer.setAttribute(elements[position], 'focus', 'false');
-            this.renderer.setAttribute(test, 'focus', 'true');
-
-            console.log(elements);
-
-            // this.renderer.setAttribute(event.srcElement, 'focus', 'true');
-            // event.srcElement.console.log(position);
-            this.optionClicked(nextItem);
+        if (event.keyCode === 9) {
+            this.setFocus();
             // event.preventDefault();
+        }
+
+        if (event.keyCode === 39 || event.keyCode === 38) {
+            this.setFocus(option, 'forward');
+            event.preventDefault();
+        }
+
+        if (event.keyCode === 37 || event.keyCode === 40) {
+            this.setFocus(option, 'back');
+            event.preventDefault();
         }
 
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.optionClicked(option);
             event.preventDefault();
         }
+    }
+
+    setFocus(option?: ISelectableItem, direction?: string) {
+        const position = this.options.indexOf(option);
+        const nextItem = this.options[position + 1];
+        const previousItem = this.options[position - 1];
+        const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
+
+        if (this.noSelectionFlag) {
+            this.renderer.invokeElementMethod(elements[0], 'focus');
+            this.optionClicked(this.options[0]);
+            this.noSelectionFlag = false;
+            return;
+        }
+
+        if (direction === 'forward') {
+            if (position + 1 === this.options.length) {
+                this.renderer.invokeElementMethod(elements[0], 'focus');
+                this.optionClicked(this.options[0]);
+            } else {
+                this.renderer.invokeElementMethod(elements[position + 1], 'focus');
+                this.optionClicked(nextItem);
+            }
+        } else if (direction === 'back') {
+            if (position === 0) {
+                this.renderer.invokeElementMethod(elements[this.options.length - 1], 'focus');
+                this.optionClicked(this.options[this.options.length - 1]);
+            } else {
+                this.renderer.invokeElementMethod(elements[position - 1], 'focus');
+                this.optionClicked(previousItem);
+            }
+        }
+    }
+
+    checkTabFocus(option: ISelectableItem) {
+        const index = this.options.indexOf(option);
+        return !option.disabled && (option.selected || (index === 0 && this.noSelectionFlag));
     }
 
     writeValue(optionValue: any): void {

@@ -198,6 +198,20 @@
           </vgr-radio-group>
           <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
         </div>
+        <h2>Fyra alternativ, [noSelection]="true" </h2>
+        <div>
+          <vgr-radio-group [noSelection]="true" [options]="[{id: '1', displayName: 'Etta'},{id: '2', displayName: 'Tvåa'},{id: '3', displayName:
+                      'Trea'}, {id: '4', displayName: 'Fyra'}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
+          </vgr-radio-group>
+          <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
+        </div>
+        <h2>Fyra alternativ, alla selected = false</h2>
+        <div>
+          <vgr-radio-group [options]="[{id: '1', displayName: 'Etta', selected: false},{id: '2', displayName: 'Tvåa', selected: false},{id: '3', displayName:
+                      'Trea', selected:false}, {id: '4', displayName: 'Fyra', selected:false}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
+          </vgr-radio-group>
+          <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
+        </div>
         <h2>Tre inaktiva alternativ, varav ett förvalt</h2>
         <div>
           <vgr-radio-group [options]="[{id: '1', displayName: 'Ett',disabled:true},{id: '2', displayName: 'Två',disabled:true,
