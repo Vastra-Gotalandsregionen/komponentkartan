@@ -41,7 +41,7 @@ export class ListComponent implements AfterContentInit {
             item.setFocusOnLastRow.subscribe(() => this.items.last.setFocusOnRow());
             item.setFocusOnPreviousRow.subscribe(() => this.setFocusOnPreviousRow(this.items, item, index));
             item.setFocusOnNextRow.subscribe(() => this.setFocusOnNextRow(this.items, item, index));
-            item.setFocusOnPreviousRowContent.subscribe(() => this.setFocusOnPreviousRowContent(this.items, item, index));
+            item.setFocusOnPreviousRowContent.subscribe(() => this.setFocusOnPreviousRowContent(item));
             item.setFocusOnNextRowContent.subscribe(() => this.setFocusOnNextRow(this.items, item, index));
         });
     }
@@ -65,7 +65,7 @@ export class ListComponent implements AfterContentInit {
     }
 
     // TODO: skapa test
-    setFocusOnPreviousRowContent(items: QueryList<ListItemComponent>, item: ListItemComponent, index: number) {
+    setFocusOnPreviousRowContent(item: ListItemComponent) {
         if (!item.collapsed) {
             item.setFocusOnRow();
         }
