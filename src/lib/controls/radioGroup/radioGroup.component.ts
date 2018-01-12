@@ -51,7 +51,7 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
 
     writeValue(optionValue: ISelectableItem): void {
         this.options.forEach(o => {
-            o.selected = (o.displayName === optionValue.displayName && o.id === optionValue.id);
+            o.selected = (o.id === optionValue.id);
         });
     }
 

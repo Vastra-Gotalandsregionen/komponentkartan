@@ -31,9 +31,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
     @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
-    @Input() set selectedValue(value: string) {
+    @Input() set selectedValue(value: IDropdownItem) {
         if (this.items) {
-            const matchingItems = this.items.filter(x => x.id === value);
+            const matchingItems = this.items.filter(x => x.id === value.id);
             if (matchingItems.length > 0) {
                 this.handleInitiallySelectedItems(matchingItems);
             }
@@ -59,7 +59,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.updateScrolled();
     }
 
-    writeValue(value: any): void {
+    writeValue(value: IDropdownItem): void {
         this.selectedValue = value;
     }
 
