@@ -8,21 +8,21 @@
   width: 100%;
   .panel-with-border & {
     @extend .border-top-color--primary;
-    border-color: $primary-color--default;
+    border-color: $secondary-color--default;
     border: solid 1px $border-color;
     border-top: $border--regular solid;
   }
   .color--red.panel-with-border & {
-    border-color: $primary-color--red;
+    border-top-color: $primary-color--red;
   }
   .color--green.panel-with-border & {
-    border-color: $primary-color--green;
+    border-top-color: $primary-color--green;
   }
   .color--blue.panel-with-border & {
-    border-color: $primary-color--blue;
+    border-top-color: $primary-color--blue;
   }
   .color--neutral.panel-with-border & {
-    border-color: $primary-color--default;
+    border-top-color: $primary-color--default;
   }
 }
 
