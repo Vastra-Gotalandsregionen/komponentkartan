@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 2.0.1
 - Added component vgr-expandable-div
-
+- Added component vgr-panel
 ## 2.0.0 (2018-01-04)
 - Upgraded to Angular 5
 - More examples added to komponentkartan-demo
