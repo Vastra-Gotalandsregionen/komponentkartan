@@ -9,7 +9,7 @@ export class PanelComponent {
     @Input() width: number;
     @Input() themecolor: string;
     @Input() noborder: boolean;
-    @HostBinding('class', )
+    @HostBinding('class')
     get classes(): string {
         return this.getColumnWidthClass() + this.getBorderClass() + this.getColorClass();
     }
