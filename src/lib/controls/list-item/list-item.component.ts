@@ -120,6 +120,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         this.notificationVisible = true;
     }
 
+
     @HostListener('click', ['$event'])
     toggleExpand(event: Event) {
         if (this.notInteractable) {
@@ -135,7 +136,8 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         event.cancelBubble = true;
     }
 
-    private setExpandOrCollapsed() {
+    public setExpandOrCollapsed() {
+        console.log('hej');
         if (!this._expanded) {
             this.expand();
         } else {
