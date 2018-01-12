@@ -1,10 +1,8 @@
 
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { By } from '@angular/platform-browser';
 
 import { PanelComponent } from '../../controls/panel/panel.component';
 
@@ -52,7 +50,7 @@ describe('PanelComponent', () => {
 
         beforeEach(() => {
             component.width = 12;
-            component.color = 'blue';
+            component.themecolor = 'blue';
             fixture.detectChanges();
         });
 
@@ -65,7 +63,7 @@ describe('PanelComponent', () => {
 
         beforeEach(() => {
             component.width = 5;
-            component.color = 'red';
+            component.themecolor = 'red';
             fixture.detectChanges();
         });
 
@@ -79,7 +77,7 @@ describe('PanelComponent', () => {
         beforeEach(() => {
             component.width = 6;
             component.noborder = true;
-            component.color = 'red';
+            component.themecolor = 'red';
             fixture.detectChanges();
         });
 

@@ -7,7 +7,7 @@ import { Input, Component, HostBinding, ContentChild, ElementRef } from '@angula
 })
 export class PanelComponent {
     @Input() width: number;
-    @Input() color: string;
+    @Input() themecolor: string;
     @Input() noborder: boolean;
     @HostBinding('class', )
     get classes(): string {
@@ -19,7 +19,7 @@ export class PanelComponent {
     }
 
     private getColorClass(): string {
-        return this.color && !this.noborder ? ' color--' + this.color : '';
+        return this.themecolor && !this.noborder ? ' color--' + this.themecolor : '';
     }
 
     private getBorderClass(): string {
