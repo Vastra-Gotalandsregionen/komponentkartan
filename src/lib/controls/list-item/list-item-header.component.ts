@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, Input, Output, EventEmitter, ElementRef, Renderer } from '@angular/core';
+import { Component, HostBinding, HostListener, Input, Output, EventEmitter, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
     selector: 'vgr-list-item-header',
@@ -12,12 +12,12 @@ export class ListItemHeaderComponent {
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() goToFirst: EventEmitter<any> = new EventEmitter();
     @Output() goToLast: EventEmitter<any> = new EventEmitter();
-
     @HostListener('keydown', ['$event'])
     toggleExpand(event: KeyboardEvent) {
         if (event.keyCode === 13 || event.keyCode === 32) {
-
+            console.log('toggleExpand');
             this.expandedChanged.emit(true);
+            event.preventDefault();
         }
         if (event.keyCode === 36) { //Home
 
@@ -28,15 +28,16 @@ export class ListItemHeaderComponent {
             this.goToLast.emit();
         }
     }
+    constructor(private hostElement: ElementRef, private renderer: Renderer2) {
+    }
 
     setFocus() {
-        this.renderer.invokeElementMethod(this.hostElement.nativeElement, 'focus');
+        console.log('hello');
+        this.renderer.setAttribute(this.hostElement.nativeElement, 'focus', 'true');
     }
 
 
 
-    constructor(private hostElement: ElementRef, private renderer: Renderer) {
-    }
 
 }
 

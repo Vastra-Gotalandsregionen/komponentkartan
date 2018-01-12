@@ -78,8 +78,6 @@ export class ListItemComponent implements OnInit {
         this.listItemHeader.expandedChanged.subscribe(() => this.setExpandOrCollapsed());
         this.listItemHeader.goToFirst.subscribe(() => this.setFocusOnFirstRow.emit());
         this.listItemHeader.goToLast.subscribe(() => this.setFocusOnLastRow.emit());
-
-
     }
 
 
@@ -113,6 +111,7 @@ export class ListItemComponent implements OnInit {
         this.notificationVisible = true;
     }
 
+
     @HostListener('click', ['$event'])
     toggleExpand(event: Event) {
         if (this.notInteractable) {
@@ -128,7 +127,8 @@ export class ListItemComponent implements OnInit {
         event.cancelBubble = true;
     }
 
-    private setExpandOrCollapsed() {
+    public setExpandOrCollapsed() {
+        console.log('hej');
         if (!this._expanded) {
             this.expand();
         } else {
