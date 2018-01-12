@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input, Output, EventEmitter, HostListener, ElementRef, Renderer } from '@angular/core';
 
 @Component({
     selector: 'vgr-list-item-content',
@@ -7,7 +7,28 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 
 export class ListItemContentComponent {
+    @Output() goUp: EventEmitter<any> = new EventEmitter();
+    @Output() goDown: EventEmitter<any> = new EventEmitter();
     @HostBinding('class.list-item__content') listItemContent = true;
-    constructor() {
+
+    @HostBinding('tabIndex') tabIndex = 0;
+
+    @HostListener('keydown', ['$event'])
+    toggleExpand(event: KeyboardEvent) {
+        if (event.altKey && event.keyCode === 33) { // Ctrl + PageUp
+            this.goUp.emit();
+            event.preventDefault();
+        }
+        if (event.altKey && event.keyCode === 34) { // PageDown
+            this.goDown.emit();
+            event.preventDefault();
+        }
+    }
+
+    constructor(private elementRef: ElementRef, private renderer: Renderer) {
+    }
+
+    setFocus() {
+        this.renderer.invokeElementMethod(this.elementRef.nativeElement, 'focus');
     }
 }

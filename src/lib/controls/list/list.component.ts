@@ -2,7 +2,6 @@ import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 
-
 @Component({
     templateUrl: './list.component.html',
     moduleId: module.id,
@@ -37,21 +36,44 @@ export class ListComponent implements AfterContentInit {
             this.copyItemWidthsFromHeader();
         });
 
-        this.items.forEach(item => {
+        this.items.forEach((item, index) => {
             item.setFocusOnFirstRow.subscribe(() => this.items.first.setFocusOnRow());
             item.setFocusOnLastRow.subscribe(() => this.items.last.setFocusOnRow());
+            item.setFocusOnPreviousRow.subscribe(() => this.setFocusOnPreviousRow(this.items, item, index));
+            item.setFocusOnNextRow.subscribe(() => this.setFocusOnNextRow(this.items, item, index));
+            item.setFocusOnPreviousRowContent.subscribe(() => this.setFocusOnPreviousRowContent(this.items, item, index));
+            item.setFocusOnNextRowContent.subscribe(() => this.setFocusOnNextRow(this.items, item, index));
         });
-
-
-
-
     }
 
+    // TODO: skapa test
+    setFocusOnPreviousRow(items: QueryList<ListItemComponent>, item: ListItemComponent, index: number) {
+        if (index === 0) {
+            items.toArray()[items.length - 1].setFocusOnRow();
+        } else {
+            items.toArray()[index - 1].setFocusOnRow();
+        }
+    }
 
+    // TODO: skapa test
+    setFocusOnNextRow(items: QueryList<ListItemComponent>, item: ListItemComponent, index: number) {
+        if (index + 1 === items.length) {
+            items.toArray()[0].setFocusOnRow();
+        } else {
+            items.toArray()[index + 1].setFocusOnRow();
+        }
+    }
+
+    // TODO: skapa test
+    setFocusOnPreviousRowContent(items: QueryList<ListItemComponent>, item: ListItemComponent, index: number) {
+        if (!item.collapsed) {
+            item.setFocusOnRow();
+        }
+    }
 
     copyItemWidthsFromHeader() {
         this.items.forEach(item => {
-            item.copyPropertiesFromHeader(this.listHeader)
+            item.copyPropertiesFromHeader(this.listHeader);
         });
 
     }

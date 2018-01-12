@@ -10,13 +10,14 @@ import { ListColumnComponent } from '../list/list-column.component';
 import { ListColumnHeaderComponent } from '../list/list-column-header.component';
 import { ListHeaderComponent } from '../list/list-header.component';
 import { ListItemHeaderComponent } from '../list-item/list-item-header.component';
+import { ListItemContentComponent } from '../list-item/list-item-content.component';
 
 @Component({
     templateUrl: './list-item.component.html',
     selector: 'vgr-list-item',
     moduleId: module.id
 })
-export class ListItemComponent implements OnInit {
+export class ListItemComponent implements OnInit, AfterContentInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
     readonly showNotificationDurationMs = 1500;
@@ -29,6 +30,7 @@ export class ListItemComponent implements OnInit {
     @HostBinding('class.list-item--columns-initialized') columnsInitialized: boolean;
 
     @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
+    @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
@@ -45,6 +47,10 @@ export class ListItemComponent implements OnInit {
     @Output() deleted: EventEmitter<any> = new EventEmitter();
     @Output() setFocusOnFirstRow: EventEmitter<any> = new EventEmitter();
     @Output() setFocusOnLastRow: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnPreviousRow: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnNextRow: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnPreviousRowContent: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnNextRowContent: EventEmitter<any> = new EventEmitter();
 
     private _notification: RowNotification;
     @Input() set notification(value: RowNotification) {
@@ -78,8 +84,11 @@ export class ListItemComponent implements OnInit {
         this.listItemHeader.expandedChanged.subscribe(() => this.setExpandOrCollapsed());
         this.listItemHeader.goToFirst.subscribe(() => this.setFocusOnFirstRow.emit());
         this.listItemHeader.goToLast.subscribe(() => this.setFocusOnLastRow.emit());
+        this.listItemHeader.goUp.subscribe(() => this.setFocusOnPreviousRow.emit());
+        this.listItemHeader.goDown.subscribe(() => this.setFocusOnNextRow.emit());
+        this.listContent.goUp.subscribe(() => this.setFocusOnPreviousRowContent.emit());
+        this.listContent.goDown.subscribe(() => this.setFocusOnNextRowContent.emit());
     }
-
 
     ngOnInit() {
         if (this.notification && this.notification.type === NotificationType.Permanent) {
@@ -176,7 +185,7 @@ export class ListItemComponent implements OnInit {
             this.processShowOnCollapseNotification(header, callback);
         } else if (notificationType === NotificationType.ShowOnRemove) {
             this.processShowOnRemoveNotification(header, callback);
-        };
+        }
     }
 
     private processShowOnCollapseNotification(header: JQuery, callback: Function) {
@@ -190,7 +199,7 @@ export class ListItemComponent implements OnInit {
                     this.notification.done = true;
                     this.notificationVisible = false;
                     this.notInteractable = false;
-                }, 2000)
+                }, 2000);
             });
         }, 1400);
 
@@ -209,7 +218,7 @@ export class ListItemComponent implements OnInit {
                     this.notInteractable = false;
                     this.isDeleted = true;
                     this.deleted.emit();
-                }, 2000)
+                }, 2000);
             });
         }, 1400);
     }

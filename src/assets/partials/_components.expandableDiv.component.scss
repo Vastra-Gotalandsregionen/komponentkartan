@@ -7,7 +7,7 @@
     .expandable-div-chevron {
       position: absolute;
       top: 0;
-      right: 10px;
+      right: 0;
       &.expanded {
         @extend .chevron-expanded;
       }
@@ -18,7 +18,16 @@
   }
   &.expandable-div--collapsed {
     .expandable-div-content {
-      display: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-in;
+    }
+  }
+  &.expandable-div--expanded {
+    .expandable-div-content {
+      max-height: 999px;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
     }
   }
 }

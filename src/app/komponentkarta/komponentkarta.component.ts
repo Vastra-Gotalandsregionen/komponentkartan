@@ -145,10 +145,13 @@ export class KomponentkartaComponent implements AfterViewInit {
     }
 
     selectedThemeChanged(selectedTheme: ISelectableItem) {
-        const themeClass = 'theme--' + selectedTheme.id;
 
-        $('komponentkartan-application').removeClass('theme--blue theme--red theme--neutral theme--green');
-        $('komponentkartan-application').addClass(themeClass);
+        const themeClass = 'theme--' + selectedTheme.id;
+        document.getElementById('theme-root').classList.remove('theme--neutral');
+        document.getElementById('theme-root').classList.remove('theme--blue');
+        document.getElementById('theme-root').classList.remove('theme--red');
+        document.getElementById('theme-root').classList.remove('theme--green');
+        document.getElementById('theme-root').classList.add(themeClass);
 
     }
 
