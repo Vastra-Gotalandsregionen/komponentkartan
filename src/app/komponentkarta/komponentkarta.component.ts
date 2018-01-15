@@ -187,13 +187,11 @@ export class KomponentkartaComponent implements AfterViewInit {
         $('.class-description').fadeToggle();
     }
 
-    onMultipleSelectionChanged(selectedItems: DropdownItem<string>[]) {
-        this.lastMultipleSelection = selectedItems.map(x => x.displayName).join(',');
+    onMultipleSelectionChanged(selectedItems: string[]) {
+        this.lastMultipleSelection = selectedItems.join(',');
     }
 
-    onSingleSelectionChanged(selectedItem: DropdownItem<string>) {
-        this.lastSingleSelection = selectedItem.displayName;
+    onSingleSelectionChanged(selectedItem: string) {
+        this.lastSingleSelection = selectedItem;
     }
-
-
 }
