@@ -33,6 +33,7 @@ export class CheckboxComponent implements ControlValueAccessor {
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.onClick();
             event.preventDefault();
+            event.cancelBubble = true;
         }
     }
 
