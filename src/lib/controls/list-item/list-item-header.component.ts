@@ -29,11 +29,11 @@ export class ListItemHeaderComponent {
             this.goToLast.emit();
             event.preventDefault();
         }
-        if ((event.altKey && event.keyCode === 33) || event.keyCode === 38) { // Ctrl + PageUp and Arrow Up
+        if ((event.ctrlKey && event.keyCode === 33) || event.keyCode === 38) { // Ctrl + PageUp and Arrow Up
             this.goUp.emit();
             event.preventDefault();
         }
-        if ((event.altKey && event.keyCode === 34) || event.keyCode === 40) { // PageDown and Arrow Down
+        if ((event.ctrlKey && event.keyCode === 34) || event.keyCode === 40) { // PageDown and Arrow Down
             this.goDown.emit();
             event.preventDefault();
         }

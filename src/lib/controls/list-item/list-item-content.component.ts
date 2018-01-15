@@ -15,11 +15,11 @@ export class ListItemContentComponent {
 
     @HostListener('keydown', ['$event'])
     toggleExpand(event: KeyboardEvent) {
-        if (event.altKey && event.keyCode === 33) { // Ctrl + PageUp
+        if (event.ctrlKey && event.keyCode === 33) { // Ctrl + PageUp
             this.goUp.emit();
             event.preventDefault();
         }
-        if (event.altKey && event.keyCode === 34) { // PageDown
+        if (event.ctrlKey && event.keyCode === 34) { // PageDown
             this.goDown.emit();
             event.preventDefault();
         }
