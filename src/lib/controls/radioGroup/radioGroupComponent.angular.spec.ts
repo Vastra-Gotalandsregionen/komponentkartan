@@ -45,19 +45,15 @@ describe('SaveCancelComponent', () => {
                 { id: 'SH', displayName: 'Sofia Hejdenberg' } as ISelectableItem,
                 { id: 'CB', displayName: 'Caroline Bornsjö' } as ISelectableItem,
             ] as ISelectableItem[];
-            component.ngOnChanges();
             fixture.detectChanges();
         });
         it('options are displayed', () => {
             const visibleOptions = rootElement.queryAll(By.css('.radio-button'));
             expect(visibleOptions.map(x => x.properties['title'])).toEqual(['Per Åkerberg', 'Sofia Hejdenberg', 'Caroline Bornsjö']);
         });
-        it('only the first option is selected', () => {
+        it('no option is selected', () => {
             const selectedOptions = rootElement.queryAll(By.css('.radio-button--checked'));
-            expect(selectedOptions.map(x => x.properties['title'])).toEqual(['Per Åkerberg']);
-        });
-        it('an selectedChanged event is emitted', () => {
-            expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.options[0]);
+            expect(selectedOptions.length).toEqual(0);
         });
         describe('and an option is clicked', () => {
             beforeEach(() => {
@@ -133,7 +129,6 @@ describe('SaveCancelComponent', () => {
                 { id: 'SH', displayName: 'Sofia Hejdenberg', selected: true } as ISelectableItem,
                 { id: 'CB', displayName: 'Caroline Bornsjö' } as ISelectableItem,
             ] as ISelectableItem[];
-            component.ngOnChanges();
             fixture.detectChanges();
         });
         it('options are displayed', () => {
@@ -143,9 +138,6 @@ describe('SaveCancelComponent', () => {
         it('the pre-selected option is selected', () => {
             const selectedOptions = rootElement.queryAll(By.css('.radio-button--checked'));
             expect(selectedOptions.map(x => x.properties['title'])).toEqual(['Sofia Hejdenberg']);
-        });
-        it('an selectedChanged event is emitted', () => {
-            expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.options[1]);
         });
     });
 
@@ -181,7 +173,6 @@ describe('SaveCancelComponent', () => {
                 { id: 'SH', displayName: 'Sofia Hejdenberg' } as ISelectableItem,
                 { id: 'CB', displayName: 'Caroline Bornsjö' } as ISelectableItem,
             ] as ISelectableItem[];
-            component.ngOnChanges();
             fixture.detectChanges();
         });
         it('options are displayed', () => {
@@ -192,13 +183,7 @@ describe('SaveCancelComponent', () => {
             const disabledOptions = rootElement.queryAll(By.css('.radio-button--disabled'));
             expect(disabledOptions.map(x => x.properties['title'])).toEqual(['Per Åkerberg']);
         });
-        it('the first enabled option is selected', () => {
-            const selectedOptions = rootElement.queryAll(By.css('.radio-button--checked'));
-            expect(selectedOptions.map(x => x.properties['title'])).toEqual(['Sofia Hejdenberg']);
-        });
-        it('an selectedChanged event is emitted', () => {
-            expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.options[1]);
-        });
+
 
         describe('and the disabled option is clicked', () => {
             beforeEach(() => {
@@ -208,7 +193,7 @@ describe('SaveCancelComponent', () => {
             });
             it('the option is not selected', () => {
                 const selectedOptions = rootElement.queryAll(By.css('.radio-button--checked'));
-                expect(selectedOptions.map(x => x.properties['title'])).toEqual(['Sofia Hejdenberg']);
+                expect(selectedOptions.length).toEqual(0);
             });
         });
     });

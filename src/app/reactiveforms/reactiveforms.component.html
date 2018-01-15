@@ -47,7 +47,7 @@
         <vgr-button (click)="onSubmit()">Skapa användare</vgr-button>
       </form>
 
-      <vgr-radio-group [options]="[{id: '1', displayName: 'Ett'},{id: '2', displayName: 'Två'},{id: '3', displayName:
+      <vgr-radio-group [options]="[{id: '1', displayName: 'Ett'},{id: '2', displayName: 'Två', selected: true},{id: '3', displayName:
       'Tre', selected: true}] " (selectedChanged)="onChange($event)"></vgr-radio-group>
 
     </vgr-page-block>
