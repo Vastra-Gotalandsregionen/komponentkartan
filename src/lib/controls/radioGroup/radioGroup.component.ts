@@ -22,7 +22,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
 
     noSelectionFlag: boolean;
-
     constructor(private elementRef: ElementRef, private renderer: Renderer) {
     }
 
