@@ -44,8 +44,12 @@
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
           </vgr-title-value>
         </div>
-        <vgr-button [disabled]="userForm.invalid">Skapa användare</vgr-button>
+        <vgr-button (click)="onSubmit()">Skapa användare</vgr-button>
       </form>
+
+      <vgr-radio-group [options]="[{id: '1', displayName: 'Ett'},{id: '2', displayName: 'Två', selected: true},{id: '3', displayName:
+      'Tre', selected: true}] " (selectedChanged)="onChange($event)"></vgr-radio-group>
+
     </vgr-page-block>
   </vgr-page-body>
 </vgr-page>

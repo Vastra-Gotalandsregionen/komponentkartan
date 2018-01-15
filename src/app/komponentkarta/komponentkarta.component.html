@@ -198,9 +198,9 @@
           </vgr-radio-group>
           <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
         </div>
-        <h2>Fyra alternativ, [noSelection]="true" </h2>
+        <h2>Fyra alternativ, ingen förvald</h2>
         <div>
-          <vgr-radio-group [noSelection]="true" [options]="[{id: '1', displayName: 'Etta'},{id: '2', displayName: 'Tvåa'},{id: '3', displayName:
+          <vgr-radio-group [options]="[{id: '1', displayName: 'Etta'},{id: '2', displayName: 'Tvåa'},{id: '3', displayName:
                       'Trea'}, {id: '4', displayName: 'Fyra'}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
           </vgr-radio-group>
           <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>

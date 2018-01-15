@@ -30,7 +30,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
     @Input() showAllItemText: string; // showAllItemText (skrivit ett filter och vill rensa filtret)
     @Input() allItemsSelectedLabel: string;
-    @Input() selectAllItemText: string; // texten som visas å checkboxen för att välja alla
+    @Input() selectAllItemText: string; // texten som visas på checkboxen för att välja alla
     dropdownLabel: string;
     selectAllItem: IDropdownItem;
 
@@ -42,9 +42,9 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         return this._items.filter(x => x.selected);
     }
 
-    @Input() set selectedValues(values: string[]) {
+    @Input() set selectedValues(values: IDropdownItem[]) {
         if (this.items) {
-            const matchingItems = this.items.filter(x => values.find(val => val === x.id));
+            const matchingItems = this.items.filter(x => values.find(val => val.id === x.id));
             if (matchingItems.length > 0) {
                 matchingItems.forEach(x => x.selected = true);
                 this.handleInitiallySelectedItems(matchingItems);
@@ -58,7 +58,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.noItemSelectedLabel = 'Välj';
 
         this.showAllItemText = 'Visa alla';
-        this.selectAllItemText = 'Välj alla'
+        this.selectAllItemText = 'Välj alla';
 
         this.selectAllItem = {
             displayName: this.selectAllItemText,
@@ -95,7 +95,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.updateDropdownLabel();
     }
 
-    writeValue(values: any): void {
+    writeValue(values: IDropdownItem[]): void {
         if (values) {
             this.selectedValues = values;
         }
