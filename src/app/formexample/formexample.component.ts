@@ -1,7 +1,7 @@
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import {
     IValidationResult, ValidationErrorState, IValidation,
-    ISelectableItem, MonthpickerComponent,
+    SelectableItem, MonthpickerComponent,
     DropdownComponent, NotificationIcon,
     RowNotification, NotificationType
 } from '../../lib/index';
@@ -16,8 +16,8 @@ import { ValidationComponent } from '../../lib/controls/validation/validation.co
 })
 export class FormExampleComponent {
     validationStatus: string;
-    items: ISelectableItem[];
-    multiItems: ISelectableItem[];
+    items: SelectableItem<string>[];
+    multiItems: SelectableItem<string>[];
     notification: RowNotification;
     actionpanel: boolean;
     view: string;
@@ -29,19 +29,17 @@ export class FormExampleComponent {
         this.view = 'C';
         this.validationStatus = 'Inte validerad';
         this.items = [
-            { displayName: 'Sverige' } as ISelectableItem,
-            { displayName: 'Danmark' } as ISelectableItem,
-        ] as ISelectableItem[];
+            { displayName: 'Sverige', value: 'Sverige' } as SelectableItem<string>,
+            { displayName: 'Danmark', value: 'Danmark' } as SelectableItem<string>,
+        ] as SelectableItem<string>[];
 
         this.multiItems = [
-            { displayName: 'Sverige' } as ISelectableItem,
-            { displayName: 'Danmark' } as ISelectableItem,
-            { displayName: 'Norge' } as ISelectableItem,
-            { displayName: 'Finland' } as ISelectableItem,
-            { displayName: 'Island' } as ISelectableItem,
-        ] as ISelectableItem[];
-
-
+            { displayName: 'Sverige', value: 'Sverige' } as SelectableItem<string>,
+            { displayName: 'Danmark', value: 'Danmark' } as SelectableItem<string>,
+            { displayName: 'Norge', value: 'Norge' } as SelectableItem<string>,
+            { displayName: 'Finland', value: 'Finland' } as SelectableItem<string>,
+            { displayName: 'Island', value: 'Island' } as SelectableItem<string>,
+        ] as SelectableItem<string>[];
 
         this.notification = { message: 'Information saknas', icon: NotificationIcon.ExclamationRed, type: NotificationType.Permanent } as RowNotification;
     }

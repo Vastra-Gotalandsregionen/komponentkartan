@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { IValidationResult, ValidationErrorState, IValidation, ICustomValidator, ISelectableItem, ErrorHandler } from '../../lib/index';
+import { IValidationResult, ValidationErrorState, IValidation, ICustomValidator, SelectableItem, ErrorHandler } from '../../lib/index';
 import { CityService } from './cityService';
 import { FormGroup, FormBuilder, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -135,8 +135,8 @@ export class InputFieldsComponent implements OnInit {
         return isNaN(value) ? 'Inget' : value;
     }
 
-    toggleInputType(option: ISelectableItem) {
-        if (option.displayName === 'Stor') {
+    toggleInputType(option: string) {
+        if (option === 'Stor') {
             this.isSmall = false;
         } else {
             this.isSmall = true;
