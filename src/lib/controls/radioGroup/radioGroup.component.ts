@@ -22,12 +22,14 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
 
     noSelectionFlag: boolean;
-    elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
 
     constructor(private elementRef: ElementRef, private renderer: Renderer) {
     }
 
     ngOnChanges() {
+        // this.noSelectionFlag = true;
+        this.noSelectionFlag = this.options.every((x) => (x.selected === false || x.selected === undefined));
+
         if (this.options && this.options.length > 0) {
             const preSelectedOption = this.options.find(x => x.selected);
             if (preSelectedOption) {
@@ -45,9 +47,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     }
 
     keyDown(event: KeyboardEvent, option: SelectableItem<any>): void {
-        if (event.keyCode === 9) {
-            this.setFocus();
-        }
 
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.optionClicked(option);
@@ -63,11 +62,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
             this.setFocus(option, 'back');
             event.preventDefault();
         }
-
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            this.optionClicked(option);
-            event.preventDefault();
-        }
     }
 
     setFocus(option?: SelectableItem<any>, direction?: string) {
@@ -75,34 +69,30 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
         const nextItem = this.options[position + 1];
         const previousItem = this.options[position - 1];
 
-        if (this.noSelectionFlag && option.selected === false) {
-            this.renderer.invokeElementMethod(this.elements[0], 'focus');
-            this.noSelectionFlag = false;
-            return;
-        }
+        const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
+        const enabledOptions = this.options.filter(x => !x.disabled);
 
         if (direction === 'forward') {
-            if (position + 1 === this.options.length) {
-                this.renderer.invokeElementMethod(this.elements[0], 'focus');
-                this.optionClicked(this.options[0]);
+            if (position + 1 === enabledOptions.length) {
+                this.renderer.invokeElementMethod(elements[0], 'focus');
+                this.optionClicked(enabledOptions[0]);
             } else {
-                this.renderer.invokeElementMethod(this.elements[position + 1], 'focus');
+                this.renderer.invokeElementMethod(elements[position + 1], 'focus');
                 this.optionClicked(nextItem);
             }
         } else if (direction === 'back') {
             if (position === 0) {
-                this.renderer.invokeElementMethod(this.elements[this.options.length - 1], 'focus');
-                this.optionClicked(this.options[this.options.length - 1]);
+                this.renderer.invokeElementMethod(elements[this.options.length - 1], 'focus');
+                this.optionClicked(this.options[enabledOptions.length - 1]);
             } else {
-                this.renderer.invokeElementMethod(this.elements[position - 1], 'focus');
+                this.renderer.invokeElementMethod(elements[position - 1], 'focus');
                 this.optionClicked(previousItem);
             }
         }
     }
 
-    checkTabFocus(option: SelectableItem<any>) {
-        const index = this.options.indexOf(option);
-        return !option.disabled && (option.selected || (index === 0 && this.noSelectionFlag));
+    checkTabFocus(index: number) {
+        return !this.options[index].disabled && (this.options[index].selected || (index === 0 && this.noSelectionFlag));
     }
 
     writeValue(option: any): void {
@@ -132,6 +122,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
             o.selected = (o === option);
         });
         option.selected = true;
+        this.noSelectionFlag = false;
         this.onChange(option.value);
         this.selectedChanged.emit(option.value);
     }

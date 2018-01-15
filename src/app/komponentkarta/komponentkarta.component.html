@@ -193,7 +193,7 @@
 
         <h2>Fyra alternativ, varav ett inaktivt</h2>
         <div>
-          <vgr-radio-group [options]="[{value: '1', displayName: 'Ett'},{value: '2', displayName: 'Två'},{value: '3', displayName:
+          <vgr-radio-group [options]="[{value: '1', displayName: 'Ett', selected: false},{value: '2', displayName: 'Två'},{value: '3', displayName:
                       'Tre'}, {value: '4', displayName: 'Fyra', disabled:true}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
           </vgr-radio-group>
           <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
