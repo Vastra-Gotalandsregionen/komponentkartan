@@ -10,7 +10,7 @@
   </vgr-action-panel>
   <vgr-page-body>
     <vgr-page-block class=" column-layout">
-      <vgr-radio-group [options]="[{id:'1', displayName:'Stor', selected:true},{id:'2', displayName:'Liten'}]" (selectedChanged)="toggleInputType($event)">
+      <vgr-radio-group [options]="[{value:'Stor', displayName:'Stor', selected:true},{value:'Liten', displayName:'Liten'}]" (selectedChanged)="toggleInputType($event)">
       </vgr-radio-group>
       <br>
       <h3>Obs Experimentell kod</h3>

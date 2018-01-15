@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild, HostBinding } from '@angular/core';
 import {
-  ISelectableItem, SidebarMenuComponent,
+  SidebarMenuComponent,
   IMenu, IMenuGroup, IMenuItem,
   ModalService, IHeaderMenu, IHeaderMenuItem
 } from '../lib/index';

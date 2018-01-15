@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import {
-    DropdownItem, ISelectableItem, ModalService,
+    DropdownItem, SelectableItem, ModalService,
     ModalButtonConfiguration, IHeaderMenu,
     IHeaderMenuItem, NotificationType, NotificationIcon
 } from '../../lib/index';
@@ -20,8 +20,8 @@ export class KomponentkartaComponent implements AfterViewInit {
 
     maxDate: Date = new Date(2018, 7, 1);
 
-    selectedThemeOption: ISelectableItem;
-    themeOptions: ISelectableItem[];
+    selectedThemeOption: string;
+    themeOptions: SelectableItem<string>[];
     dropDownItems25: DropdownItem<string>[];
     dropDownItems200: DropdownItem<string>[];
     dropDownItems9: DropdownItem<string>[];
@@ -33,7 +33,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     dropDownItems25All: DropdownItem<string>[];
     buttonDisabled: boolean;
     buttonSecondaryDisabled: boolean;
-    selectedRadioOption: ISelectableItem;
+    selectedRadioOption: SelectableItem<number>;
     saveCancelMessage: string;
     lockMessage: string;
     actionPanelMessage: string;
@@ -62,13 +62,13 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.lockMessage = 'Ingen';
         this.actionPanelMessage = '';
         this.themeOptions = [
-            { id: 'neutral', displayName: 'Neutral (grå)' } as ISelectableItem,
-            { id: 'blue', displayName: 'BMM (blå)' } as ISelectableItem,
-            { id: 'red', displayName: 'VGPV (röd)' } as ISelectableItem,
-            { id: 'green', displayName: 'Rehab (grön)' } as ISelectableItem,
-        ] as ISelectableItem[];
-        this.selectedThemeOption = this.themeOptions[0];
-        this.selectedRadioOption = { displayName: 'Inget' } as ISelectableItem;
+            { value: 'neutral', displayName: 'Neutral (grå)', selected: true } as SelectableItem<string>,
+            { value: 'blue', displayName: 'BMM (blå)' } as SelectableItem<string>,
+            { value: 'red', displayName: 'VGPV (röd)' } as SelectableItem<string>,
+            { value: 'green', displayName: 'Rehab (grön)' } as SelectableItem<string>,
+        ] as SelectableItem<string>[];
+        this.selectedThemeOption = this.themeOptions[0].value;
+        this.selectedRadioOption = { displayName: 'Inget', value: 0 } as SelectableItem<number>;
         this.actionInProgress = false;
         this.headerMenu = {
             menuItems: [
@@ -144,9 +144,8 @@ export class KomponentkartaComponent implements AfterViewInit {
             () => this.lastModalAnswer = 'Sparade', () => this.lastModalAnswer = 'Sparade inte', () => this.lastModalAnswer = 'Avbröt');
     }
 
-    selectedThemeChanged(selectedTheme: ISelectableItem) {
-
-        const themeClass = 'theme--' + selectedTheme.id;
+    selectedThemeChanged(selectedTheme: string) {
+        const themeClass = 'theme--' + selectedTheme;
         document.getElementById('theme-root').classList.remove('theme--neutral');
         document.getElementById('theme-root').classList.remove('theme--blue');
         document.getElementById('theme-root').classList.remove('theme--red');
@@ -163,8 +162,8 @@ export class KomponentkartaComponent implements AfterViewInit {
         return items;
     }
 
-    onSelectedRadioOptionChanged(option: ISelectableItem) {
-        this.selectedRadioOption = option;
+    onSelectedRadioOptionChanged(optionValue: number) {
+        this.selectedRadioOption.value = optionValue;
     }
     consoleLog(logText: string) {
     }
