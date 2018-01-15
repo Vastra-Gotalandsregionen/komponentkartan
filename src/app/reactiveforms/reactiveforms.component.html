@@ -24,7 +24,7 @@
             <vgr-dropdown formControlName="favourite_pet" [items]="dropdownItems"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value title="Intressen">
-            <vgr-dropdown-multiselect formControlName="interests" [values]="['Koda','Sport','Sova','Äta']"></vgr-dropdown-multiselect>
+            <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti"></vgr-dropdown-multiselect>
           </vgr-title-value>
           <vgr-title-value title="Du måste kryssa i mig!">
             <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>
@@ -43,9 +43,8 @@
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
           </vgr-title-value>
         </div>
-        <vgr-button (click)="onSubmit()">Skapa användare</vgr-button>
+        <vgr-button [disabled]="userForm.invalid">Skapa användare</vgr-button>
       </form>
-      <vgr-dropdown (selectedChanged)="onSelectedChanged($event)" [values]="['Hej', 'Test']" [selectedValue]="'Test'"></vgr-dropdown>
     </vgr-page-block>
   </vgr-page-body>
 </vgr-page>

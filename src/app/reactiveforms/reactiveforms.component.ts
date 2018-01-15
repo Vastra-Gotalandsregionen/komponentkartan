@@ -10,10 +10,9 @@ import { SelectableItem, DropdownItem } from '../../lib/index';
 })
 export class ReactiveformsComponent implements OnInit {
 
-  radioOptions: SelectableItem<MyObject>[];
-  radioOptions2: SelectableItem<MyObject>[];
-
-  dropdownItems: DropdownItem<MyObject2>[];
+  radioOptions: SelectableItem<number>[];
+  dropdownItems: DropdownItem<string>[];
+  dropdownItemsMulti: DropdownItem<string>[];
 
   userForm: FormGroup;
   validationMessages = {
@@ -38,15 +37,21 @@ export class ReactiveformsComponent implements OnInit {
   };
   constructor(private fb: FormBuilder) {
     this.radioOptions = [
-      { displayName: 'Ett', value: { id: '1', number: 1 } },
-      { displayName: 'Två', value: { id: '2', number: 2 } },
-      { displayName: 'Tre', value: { id: '3', number: 3 } }
+      { displayName: 'Ett', value: 1 },
+      { displayName: 'Två', value: 2 },
+      { displayName: 'Tre', value: 3 }
     ];
 
     this.dropdownItems = [
-      { displayName: 'Hund', value: { id: '1', name: 'Hund' } },
-      { displayName: 'Katt', value: { id: '2', name: 'Katt' } },
-      { displayName: 'Guldfisk', value: { id: '3', name: 'Guldfisk' } }
+      { displayName: 'Hund', value: 'Hund' },
+      { displayName: 'Katt', value: 'Katt' },
+      { displayName: 'Guldfisk', value: 'Guldfisk' }
+    ];
+
+    this.dropdownItemsMulti = [
+      { displayName: 'Koda', value: 'Koda' },
+      { displayName: 'Äta', value: 'Äta' },
+      { displayName: 'Sova', value: 'Soa' }
     ];
   }
 
@@ -62,22 +67,14 @@ export class ReactiveformsComponent implements OnInit {
       age: ['', [Validators.required, Validators.min(18), Validators.max(120), validateNumber]],
       email: ['', [Validators.required, Validators.email]],
       salary: ['', [Validators.required, validateNumber]],
-      favourite_pet: [this.dropdownItems[1].value, Validators.required],
-      interests: [['Koda'], Validators.required],
+      favourite_pet: [null, Validators.required],
+      interests: [[this.dropdownItemsMulti[0].value], Validators.required],
       check: [true, Validators.pattern('true')],
       optional: [this.radioOptions[2].value],
       monthpicker: ['', Validators.required],
       datepicker: ['', Validators.required],
       datepicker_preselected: [new Date(), Validators.required]
     });
-  }
-
-  onSelectedChanged(event: any) {
-    console.log(event);
-  }
-
-  onSubmit() {
-    console.log(this.userForm.controls.favourite_pet.value);
   }
 }
 
@@ -89,14 +86,4 @@ function validateNumber(control: AbstractControl) {
     return null;
   }
   return { invalidNumber: true };
-}
-
-declare interface MyObject {
-  id: string;
-  number: number;
-}
-
-declare interface MyObject2 {
-  id: string;
-  name: string;
 }
