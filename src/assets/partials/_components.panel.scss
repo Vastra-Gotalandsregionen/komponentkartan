@@ -71,3 +71,11 @@
     }
   }
 }
+
+vgr-panel-container:first-of-type {
+  padding-top: 0px;
+}
+
+vgr-panel-container:last-of-type {
+  padding-bottom: 0px;
+}
