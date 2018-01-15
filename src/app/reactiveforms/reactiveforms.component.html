@@ -4,7 +4,7 @@
   <vgr-page-body>
     <vgr-page-block>
       <form [formGroup]="userForm">
-        <div class="title-value-layout">
+        <vgr-title-value-layout>
           <vgr-title-value title="Förnamn">
             <vgr-input formControlName="firstname" [errorMessage]="validationMessages.firstname"></vgr-input>
           </vgr-title-value>
@@ -42,7 +42,7 @@
           <vgr-title-value title="Registreringsdatum">
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
           </vgr-title-value>
-        </div>
+        </vgr-title-value-layout>
         <vgr-button [disabled]="userForm.invalid">Skapa användare</vgr-button>
       </form>
     </vgr-page-block>

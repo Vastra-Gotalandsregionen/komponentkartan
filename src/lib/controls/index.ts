@@ -23,6 +23,7 @@ export { DatepickerComponent } from './datepicker/datepicker.component';
 export { InputComponent } from './input/input.component';
 export { CardSectionComponent } from './card/cardSection.component';
 export { TitleValueComponent } from './titleValue/titleValue.component';
+export { TitleValueLayoutComponent } from './titleValue/TitleValueLayout.component';
 export { LoaderComponent } from './loader/loader.component';
 export { ListComponent } from './list/list.component';
 export { ListHeaderComponent, SortChangedArgs } from './list/list-header.component';

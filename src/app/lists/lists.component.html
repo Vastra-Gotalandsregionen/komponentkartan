@@ -11,7 +11,7 @@
       </vgr-card-header>
       <vgr-card-column>
         <vgr-card-section [title]="'Belopp'" [expanded]="true" [readonly]="!cardUnlocked" class="card__left">
-          <div class="title-value-layout">
+          <vgr-title-value-layout>
             <vgr-title-value [title]="'Bruttobelopp'">
               <vgr-input [value]="grossAmount" [suffix]="'kr'" [alignRight]="true" [readonly]="!cardUnlocked"></vgr-input>
             </vgr-title-value>
@@ -48,11 +48,11 @@
               <vgr-radio-group [disabled]="!cardUnlocked" [options]="[{id:'1', displayName:'Ett'},{id:'2', displayName:'Två'},{id:'3', displayName:'Tre'}]">
               </vgr-radio-group>
             </vgr-title-value>
-          </div>
+          </vgr-title-value-layout>
         </vgr-card-section>
         <vgr-card-section [title]="'Övrig information'" [readonly]="!cardUnlocked" [subtitle]="'Kalles chokladfabrik Kalles chokladfabrik'"
           class="card__left">
-          <div class="title-value-layout">
+          <vgr-title-value-layout>
             <vgr-title-value [title]="'Kund som berörs av dessa belopp'">
               <vgr-dropdown [disabled]="!cardUnlocked" [items]="[{value:'1', displayName:'Kalles chokladfabrik', selected:true},{value:'2', displayName:'Jonnas jordgubbar'}]"></vgr-dropdown>
             </vgr-title-value>
@@ -64,12 +64,12 @@
               <span>123 45 Västgötaslätten</span>
               <span>Sverige</span>
             </vgr-title-value>
-          </div>
+          </vgr-title-value-layout>
         </vgr-card-section>
       </vgr-card-column>
       <vgr-card-column>
         <vgr-card-section [title]="'Uppgifter'" class="card__right" [expanded]="true" [subtitle]="'aledu10'">
-          <div class="title-value-layout">
+          <vgr-title-value-layout>
             <vgr-title-value [title]="'Rött tema'">
               <div class="row-layout">
                 <div style="width:100%; height:30px; background-color:#9D2235"></div>
@@ -88,7 +88,7 @@
                 <div style="width:100%; height:30px; background-color:#508FB8"></div>
               </div>
             </vgr-title-value>
-          </div>
+          </vgr-title-value-layout>
         </vgr-card-section>
       </vgr-card-column>
     </vgr-card>
