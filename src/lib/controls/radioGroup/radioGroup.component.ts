@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, AfterViewInit, OnChanges, HostBinding, forwardRef } from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostBinding, forwardRef } from '@angular/core';
 import { ISelectableItem } from '../../models/selectableItem.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -12,27 +12,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         multi: true
     }]
 })
-export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
+export class RadioGroupComponent implements ControlValueAccessor {
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() options: ISelectableItem[];
-    @Input() noSelection: boolean;
     @Output() selectedChanged: EventEmitter<ISelectableItem> = new EventEmitter<ISelectableItem>();
 
     constructor() { }
-
-    ngOnChanges() {
-        if (!this.noSelection && this.options && this.options.length > 0) {
-            const preSelectedOptions = this.options.filter(x => x.selected);
-            if (preSelectedOptions.length > 0) {
-                this.selectOption(preSelectedOptions[0]);
-            } else {
-                const enabledOptions = this.options.filter(x => !x.disabled);
-                this.selectOption(enabledOptions[0]);
-            }
-        }
-    }
 
     optionClicked(option: ISelectableItem) {
         if (this.disabled || option.disabled || option.selected) {
@@ -49,10 +36,10 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
         }
     }
 
-    writeValue(optionValue: ISelectableItem): void {
-        this.options.forEach(o => {
-            o.selected = (o.id === optionValue.id);
-        });
+    writeValue(option: ISelectableItem): void {
+        if (option) {
+            this.selectOption(option);
+        }
     }
 
     registerOnChange(func: any): void {
@@ -63,18 +50,17 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
         this.onTouched = func;
     }
 
-    onChange(input: any) {
+    onChange(input: ISelectableItem) {
     }
 
     onTouched() { }
 
     private selectOption(option: ISelectableItem) {
-        option.selected = true;
-        this.options.filter(x => x !== option).forEach(o => {
-            o.selected = false;
+        this.options.forEach(o => {
+            o.selected = (o.id === option.id);
         });
-
+        option.selected = true;
+        this.onChange(option);
         this.selectedChanged.emit(option);
-        this.onChange(option.displayName);
     }
 }

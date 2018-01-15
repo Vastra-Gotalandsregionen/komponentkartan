@@ -52,6 +52,14 @@ export class ReactiveformsComponent implements OnInit {
       datepicker_preselected: [new Date(), Validators.required]
     });
   }
+
+  onSubmit() {
+    console.log(this.userForm.controls.optional.value);
+  }
+
+  onChange(event: any) {
+    console.log('onChange', event);
+  }
 }
 
 function validateNumber(control: AbstractControl) {
