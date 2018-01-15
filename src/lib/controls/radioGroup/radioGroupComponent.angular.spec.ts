@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RadioGroupComponent } from '../../controls/radioGroup/radioGroup.component';
-import { SelectableItem } from '../../models/selectableItem.model';
+import { SelectableItem, ISelectableItem } from '../../models/selectableItem.model';
 
 describe('SaveCancelComponent', () => {
     let component: RadioGroupComponent;
@@ -206,10 +206,11 @@ describe('SaveCancelComponent', () => {
         beforeEach(() => {
             selectedChangedSpy = spyOn(component.selectedChanged, 'emit');
             component.options = [
-                { id: 'PÅ', displayName: 'Per Åkerberg', disabled: false, selected: false } as ISelectableItem,
-                { id: 'SH', displayName: 'Sofia Hejdenberg', disabled: false, selected: false } as ISelectableItem,
-                { id: 'CB', displayName: 'Caroline Bornsjö', disabled: false, selected: false } as ISelectableItem,
-            ] as ISelectableItem[];
+                { disabled: false, selected: false, value: { id: 'PÅ', displayName: 'Per Åkerberg' } as ISelectableItem },
+                { disabled: false, selected: false, value: { id: 'PÅ', displayName: 'Per Åkerberg' } as ISelectableItem },
+                { disabled: false, selected: false, value: { id: 'SH', displayName: 'Sofia Hejdenberg' } as ISelectableItem },
+                { disabled: false, selected: false, value: { id: 'CB', displayName: 'Caroline Bornsjö' } as ISelectableItem },
+            ] as SelectableItem<any>[];
             component.noSelectionFlag = true;
 
 
