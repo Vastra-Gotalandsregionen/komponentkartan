@@ -57,6 +57,11 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
             // event.preventDefault();
         }
 
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.optionClicked(option);
+            event.preventDefault();
+        }
+
         if (event.keyCode === 39 || event.keyCode === 38) {
             this.setFocus(option, 'forward');
             event.preventDefault();
@@ -79,9 +84,9 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
         const previousItem = this.options[position - 1];
         const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
 
-        if (this.noSelectionFlag) {
+        if (this.noSelectionFlag && option.selected === false) {
             this.renderer.invokeElementMethod(elements[0], 'focus');
-            this.optionClicked(this.options[0]);
+            // this.optionClicked(this.options[0]);
             this.noSelectionFlag = false;
             return;
         }
