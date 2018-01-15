@@ -1,5 +1,5 @@
 import { Component, ViewChildren, QueryList, HostBinding, OnInit } from '@angular/core';
-import { IDropdownItem } from '../../lib/index';
+import { DropdownItem } from '../../lib/index';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
@@ -12,23 +12,23 @@ export class FakeAComponent implements OnInit {
     form: FormGroup;
     notification: any;
     readonly = false;
-    options123_1 = [{ displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
-    { displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
-    { displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian' }] as IDropdownItem[];
+    options123_1 = [{ value: 'Option 1 - Meat', displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
+    { value: 'Option 2 - Fish', displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
+    { value: 'Option 3 - Vegetarian', displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian' }] as DropdownItem<string>[];
 
-    options123Multi_1 = [{ displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
-    { displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
-    { displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian', selected: true }] as IDropdownItem[];
+    options123Multi_1 = [{ value: 'Option 1 - Meat', displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
+    { value: 'Option 2 - Fish', displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
+    { value: 'Option 3 - Vegetarian', displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian', selected: true }] as DropdownItem<string>[];
 
-    options123_2 = [{ displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
-    { displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
-    { displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian' }] as IDropdownItem[];
+    options123_2 = [{ value: 'Option 1 - Meat', displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
+    { value: 'Option 2 - Fish', displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
+    { value: 'Option 3 - Vegetarian', displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian' }] as DropdownItem<string>[];
 
-    options123Multi_2 = [{ displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
-    { displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
-    { displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian', selected: true }] as IDropdownItem[];
+    options123Multi_2 = [{ value: 'Option 1 - Meat', displayName: 'Option 1 - Meat', displayNameWhenSelected: 'Meat' },
+    { value: 'Option 2 - Fish', displayName: 'Option 2 - Fish', displayNameWhenSelected: 'Fish', selected: true },
+    { value: 'Option 3 - Vegetarian', displayName: 'Option 3 - Vegetarian', displayNameWhenSelected: 'Vegetarian', selected: true }] as DropdownItem<string>[];
 
-    minDate: Date = new Date(2015, 0, 1)
+    minDate: Date = new Date(2015, 0, 1);
     maxDate: Date = new Date(2016, 11, 31);
 
     constructor(private fb: FormBuilder) { }
