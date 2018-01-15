@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, Input, Output, EventEmitter, ElementRef, Renderer2 } from '@angular/core';
+import { Component, HostBinding, HostListener, Input, Output, EventEmitter, ElementRef, Renderer } from '@angular/core';
 
 @Component({
     selector: 'vgr-list-item-header',
@@ -38,12 +38,12 @@ export class ListItemHeaderComponent {
             event.preventDefault();
         }
     }
-    constructor(private hostElement: ElementRef, private renderer: Renderer2) {
+    constructor(private hostElement: ElementRef, private renderer: Renderer) {
     }
 
     setFocus() {
-        console.log('hello');
-        this.renderer.setAttribute(this.hostElement.nativeElement, 'focus', 'true');
+
+        this.renderer.invokeElementMethod(this.hostElement.nativeElement, 'focus');
     }
 
 
