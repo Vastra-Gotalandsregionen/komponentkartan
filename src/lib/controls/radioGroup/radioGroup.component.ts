@@ -22,6 +22,8 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
 
     noSelectionFlag: boolean;
+    elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
+
     constructor(private elementRef: ElementRef, private renderer: Renderer) {
     }
 
@@ -72,28 +74,27 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
         const position = this.options.indexOf(option);
         const nextItem = this.options[position + 1];
         const previousItem = this.options[position - 1];
-        const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
 
         if (this.noSelectionFlag && option.selected === false) {
-            this.renderer.invokeElementMethod(elements[0], 'focus');
+            this.renderer.invokeElementMethod(this.elements[0], 'focus');
             this.noSelectionFlag = false;
             return;
         }
 
         if (direction === 'forward') {
             if (position + 1 === this.options.length) {
-                this.renderer.invokeElementMethod(elements[0], 'focus');
+                this.renderer.invokeElementMethod(this.elements[0], 'focus');
                 this.optionClicked(this.options[0]);
             } else {
-                this.renderer.invokeElementMethod(elements[position + 1], 'focus');
+                this.renderer.invokeElementMethod(this.elements[position + 1], 'focus');
                 this.optionClicked(nextItem);
             }
         } else if (direction === 'back') {
             if (position === 0) {
-                this.renderer.invokeElementMethod(elements[this.options.length - 1], 'focus');
+                this.renderer.invokeElementMethod(this.elements[this.options.length - 1], 'focus');
                 this.optionClicked(this.options[this.options.length - 1]);
             } else {
-                this.renderer.invokeElementMethod(elements[position - 1], 'focus');
+                this.renderer.invokeElementMethod(this.elements[position - 1], 'focus');
                 this.optionClicked(previousItem);
             }
         }
