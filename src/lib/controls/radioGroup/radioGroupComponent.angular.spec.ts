@@ -197,4 +197,66 @@ describe('SaveCancelComponent', () => {
             });
         });
     });
+
+
+
+    describe('WCAG: When initialized with options', () => {
+        let selectedChangedSpy: jasmine.Spy;
+        let firstOption: DebugElement;
+        beforeEach(() => {
+            selectedChangedSpy = spyOn(component.selectedChanged, 'emit');
+            component.options = [
+                { id: 'PÅ', displayName: 'Per Åkerberg', disabled: false, selected: false } as ISelectableItem,
+                { id: 'SH', displayName: 'Sofia Hejdenberg', disabled: false, selected: false } as ISelectableItem,
+                { id: 'CB', displayName: 'Caroline Bornsjö', disabled: false, selected: false } as ISelectableItem,
+            ] as ISelectableItem[];
+            component.noSelectionFlag = true;
+
+
+            fixture.detectChanges();
+            firstOption = rootElement.queryAll(By.css('.radio-button'))[0];
+        });
+
+        it('no option is selected', () => {
+            const selectedOptions = rootElement.queryAll(By.css('.radio-button--checked'));
+            expect(selectedOptions.length).toEqual(0);
+        });
+        it('The radiogroup has role radiogroup.', () => {
+            expect(rootElement.attributes['role']).toBe('radiogroup');
+        });
+        it('The radiobuttons has role radio.', () => {
+            expect(firstOption.attributes['role']).toBe('radio');
+        });
+
+        describe('The radiogroup has an accessible label, preferably provided by a visible label associated using aria-labelledby', () => {
+            // it('radiogroup has a label with an id', () => {
+            //     const labelElement = rootElement.query(By.css('.radio-button__text'));
+            //     expect(labelElement.nativeElement.id).toBe('Per Åkerberg');
+            // });
+            // it('radiobutton is associated with the label', () => {
+            //     expect(rootElement.queryAll(By.css('.radio-button'))[0].attributes['aria-labelledby']).toBe('Per Åkerberg');
+            // });
+        });
+
+        it('When checked, the radiobutton element has state aria-checked set to true', () => {
+            component.options[0].selected = true;
+            fixture.detectChanges();
+            expect(firstOption.attributes['aria-checked']).toBe('true');
+        });
+
+        it('When not checked, it has state aria-checked set to false', () => {
+            component.options[0].selected = false;
+            fixture.detectChanges();
+            expect(firstOption.attributes['aria-checked']).toBe('false');
+        });
+
+
+        // it('radiobuttons in group has tabstop', () => {
+        //     const visibleOptions = rootElement.queryAll(By.css('.radio-button__icon'));
+
+        //     visibleOptions.forEach(e => expect(e.properties['tabIndex']).toBe('0'));
+        // });
+
+
+    });
 });
