@@ -53,20 +53,20 @@
         <div class="row-layout">
           <div>
             <p>200 items</p>
-            <vgr-dropdown [items]="dropDownItems200" (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
+            <vgr-dropdown [items]="dropDownItems200" (selectedChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
           </div>
           <div>
             <p>4 items</p>
-            <vgr-dropdown [items]="dropDownItems4" (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
+            <vgr-dropdown [items]="dropDownItems4" (selectedChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
           </div>
           <div>
             <p>9 items</p>
-            <vgr-dropdown [items]="dropDownItems9" (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
+            <vgr-dropdown [items]="dropDownItems9" (selectedChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
           </div>
           <div>
             <p>25 items och Visa alla</p>
             <vgr-dropdown [items]="dropDownItems25All" [showAllItemText]="'Visa alla alternativ'" [noItemSelectedLabel]="'Välj alternativ'"
-              (selectedItemChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
+              (selectedChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
           </div>
         </div>
         <div class="row-layout">
@@ -188,20 +188,34 @@
         <span>Ett valbart alternativ åt gången, val kan vara förvalda eller inaktiva. Vid val av alternativ triggas eventet
           <strong>selectedChanged</strong>
           Valbara items är av typen
-          <i>ISelectableItem</i> som innehåller id, displayName, selected samt disabled. Det är genom att sätta properties på
-          dessa objekt som man styr beteendet.</span>
+          <i>SelectableItem</i> som innehåller value, displayName, selected samt disabled. Det är genom att sätta properties
+          på dessa objekt som man styr beteendet.</span>
 
         <h2>Fyra alternativ, varav ett inaktivt</h2>
         <div>
-          <vgr-radio-group [options]="[{id: '1', displayName: 'Ett'},{id: '2', displayName: 'Två'},{id: '3', displayName:
-                      'Tre'}, {id: '4', displayName: 'Fyra', disabled:true}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
+          <vgr-radio-group [options]="[{value: '1', displayName: 'Ett'},{value: '2', displayName: 'Två'},{value: '3', displayName:
+                      'Tre'}, {value: '4', displayName: 'Fyra', disabled:true}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
+          </vgr-radio-group>
+          <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
+        </div>
+        <h2>Fyra alternativ, ingen förvald</h2>
+        <div>
+          <vgr-radio-group [options]="[{value: '1', displayName: 'Etta'},{value: '2', displayName: 'Tvåa'},{value: '3', displayName:
+                      'Trea'}, {value: '4', displayName: 'Fyra'}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
+          </vgr-radio-group>
+          <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
+        </div>
+        <h2>Fyra alternativ, alla selected = false</h2>
+        <div>
+          <vgr-radio-group [options]="[{value: '1', displayName: 'Etta', selected: false},{value: '2', displayName: 'Tvåa', selected: false},{value: '3', displayName:
+                      'Trea', selected:false}, {value: '4', displayName: 'Fyra', selected:false}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
           </vgr-radio-group>
           <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
         </div>
         <h2>Tre inaktiva alternativ, varav ett förvalt</h2>
         <div>
-          <vgr-radio-group [options]="[{id: '1', displayName: 'Ett',disabled:true},{id: '2', displayName: 'Två',disabled:true,
-                      selected:true},{id: '3', displayName: 'Tre',disabled:true}] ">
+          <vgr-radio-group [options]="[{value: '1', displayName: 'Ett',disabled:true},{value: '2', displayName: 'Två',disabled:true,
+                      selected:true},{value: '3', displayName: 'Tre',disabled:true}] ">
           </vgr-radio-group>
         </div>
         <div class="markup-example ">&lt;vgr-radio-group [options]=&quot;myOptionsList&quot; (selectedChanged)=&quot;onSelectedChanged($event)&quot;&gt;&lt;/vgr-radio-group&gt;

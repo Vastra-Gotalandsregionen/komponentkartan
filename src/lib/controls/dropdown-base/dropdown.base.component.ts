@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener, HostBinding, forwardRef } from '@angular/core';
-import { IDropdownItem } from '../../models/dropdownItem.model';
+import { DropdownItem } from '../../models/dropdownItem.model';
 import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
 import { ValidationComponent } from '../../controls/validation/validation.component';
 import { FilterPipe } from '../../pipes/filterPipe';
@@ -21,7 +21,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @HostBinding('class.dropdown') dropdownClass = true;
 
-    showAllItem: IDropdownItem;
+    showAllItem: DropdownItem<any>;
 
     expanded: boolean;
     filterVisible: boolean;
@@ -35,8 +35,8 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     protected filterPipe: FilterPipe;
     protected preventCollapse: boolean;
 
-    protected _items: IDropdownItem[];
-    @Input() set items(value: IDropdownItem[]) {
+    protected _items: DropdownItem<any>[];
+    @Input() set items(value: DropdownItem<any>[]) {
         // The scrollbar component would not refresh when items were changed unless we added a timeout...
         // Ugly solution for sure, but until a better one comes along it will have to do :(
         this._items = value;
@@ -52,13 +52,13 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         }, 500);
         this.dimmerTopVisible = false;
     }
-    get items(): IDropdownItem[] {
+    get items(): DropdownItem<any>[] {
         return this._items;
     }
 
     @Input() set values(values: string[]) {
         this.items = values.map(function (value: string) {
-            return { displayName: value, id: value } as IDropdownItem;
+            return { displayName: value, value: value } as DropdownItem<any>;
         });
     }
 
@@ -72,11 +72,11 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
 
         this.showAllItem = {
             displayName: this.showAllItemText,
-        } as IDropdownItem;
+        } as DropdownItem<any>;
     }
 
 
-    protected abstract handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void;
+    protected abstract handleInitiallySelectedItems(selectedItems: DropdownItem<any>[]): void;
 
     private listenToScrollbarEvents() {
         $(this.scrollbarComponent.directiveRef.elementRef.nativeElement).scroll((e) => {

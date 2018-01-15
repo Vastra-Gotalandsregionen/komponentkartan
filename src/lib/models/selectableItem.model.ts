@@ -1,6 +1,13 @@
-export interface ISelectableItem {
-    id: string;
+export interface SelectableItem<TValue> {
     displayName: string;
-    selected: boolean;
-    disabled: boolean;
+    value: TValue;
+    selected?: boolean;
+    disabled?: boolean;
+}
+
+export interface ISelectableItem {
+    displayName: string;
+    id: string;
+    selected?: boolean;
+    disabled?: boolean;
 }

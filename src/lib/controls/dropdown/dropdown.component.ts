@@ -2,7 +2,7 @@ import {
     Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef, OnInit,
     SkipSelf, Optional, Host
 } from '@angular/core';
-import { IDropdownItem } from '../../models/dropdownItem.model';
+import { DropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
@@ -29,18 +29,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
 
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
-    @Output() selectedItemChanged = new EventEmitter<IDropdownItem>();
+    @Output() selectedChanged = new EventEmitter<DropdownItem<any>>();
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
-    @Input() set selectedValue(value: string) {
+    @Input() set selectedValue(value: any) {
         if (this.items) {
-            const matchingItems = this.items.filter(x => x.id === value);
+            const matchingItems = this.items.filter(x => x.value === value);
             if (matchingItems.length > 0) {
                 this.handleInitiallySelectedItems(matchingItems);
             }
         }
     }
 
-    selectedItem: IDropdownItem;
+    selectedItem: DropdownItem<any>;
 
     constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
@@ -53,14 +53,20 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         }
         this.showAllItem = {
             displayName: this.showAllItemText
-        } as IDropdownItem;
+        } as DropdownItem<any>;
 
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
     }
 
     writeValue(value: any): void {
-        this.selectedValue = value;
+        if (value && this.items) {
+            const matchingItems = this.items.filter(x => x.value === value);
+            if (matchingItems.length > 0) {
+                this.handleInitiallySelectedItems(matchingItems);
+            }
+            this.onChange(value);
+        }
     }
 
     registerOnChange(func: any): void {
@@ -94,7 +100,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.filterTextboxComponent.clear();
     }
 
-    selectItem(item: IDropdownItem) {
+    selectItem(item: DropdownItem<any>) {
         if (!item) {
             return;
         }
@@ -103,16 +109,16 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         item.selected = true;
         item.marked = true;
 
-        this.selectedItemChanged.emit(item);
+        this.selectedChanged.emit(item.value);
 
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedItem = item;
         this.changeDetectorRef.detectChanges();
-        this.onChange(item.displayName);
+        this.onChange(item.value);
         this.validate();
     }
 
-    onMouseEnter(item: IDropdownItem) {
+    onMouseEnter(item: DropdownItem<any>) {
         this.items.forEach(x => x.marked = false);
 
         if (this.showAllItem) {
@@ -122,14 +128,14 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         item.marked = true;
     }
 
-    onMouseLeave(item: IDropdownItem) {
+    onMouseLeave(item: DropdownItem<any>) {
         item.marked = false;
         if (this.selectedItem) {
             this.selectedItem.marked = true;
         }
     }
 
-    protected handleInitiallySelectedItems(selectedItems: IDropdownItem[]): void {
+    protected handleInitiallySelectedItems(selectedItems: DropdownItem<any>[]): void {
         this.selectItem(selectedItems[0]);
     }
 }

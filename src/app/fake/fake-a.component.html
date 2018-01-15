@@ -29,11 +29,11 @@
     <h2>Reactive forms</h2>
     <form [formGroup]="form">
       <div class="row-layout">
-        <vgr-dropdown formControlName="control1" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown>
-        <vgr-dropdown-multiselect formControlName="control2" [values]="['Foo','Bar','Monkey','Wrench']"></vgr-dropdown-multiselect>
+        <vgr-dropdown formControlName="control1" [items]="options123_1"></vgr-dropdown>
+        <vgr-dropdown-multiselect formControlName="control2" [items]="options123Multi_1"></vgr-dropdown-multiselect>
         <vgr-checkbox formControlName="control3" [label]=" 'Vald' "></vgr-checkbox>
-        <vgr-radio-group formControlName="control4" [options]="[{id: '1', displayName: 'Ett'},{id: '2', displayName: 'Två'},{id: '3', displayName:
-          'Tre'}, {id: '4', displayName: 'Fyra', disabled:true}] ">
+        <vgr-radio-group formControlName="control4" [options]="[{value: '1', displayName: 'Ett'},{value: '2', displayName: 'Två'},{value: '3', displayName:
+          'Tre'}, {value: '4', displayName: 'Fyra', disabled:true}]">
         </vgr-radio-group>
 
         <vgr-monthpicker formControlName="control5"></vgr-monthpicker>

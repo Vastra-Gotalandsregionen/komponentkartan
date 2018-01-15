@@ -21,17 +21,16 @@
             <vgr-input formControlName="salary" [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Favoritdjur">
-            <vgr-dropdown formControlName="favourite_pet" [values]="['Katt','Hund','Guldfisk']"></vgr-dropdown>
+            <vgr-dropdown formControlName="favourite_pet" [items]="dropdownItems"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value title="Intressen">
-            <vgr-dropdown-multiselect formControlName="interests" [values]="['Koda','Sport','Sova','Äta']"></vgr-dropdown-multiselect>
+            <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti"></vgr-dropdown-multiselect>
           </vgr-title-value>
           <vgr-title-value title="Du måste kryssa i mig!">
             <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>
           </vgr-title-value>
           <vgr-title-value title="Välj valfri">
-            <vgr-radio-group formControlName="optional" [options]="[{id: '1', displayName: 'Ett'},{id: '2', displayName: 'Två'},{id: '3', displayName:
-              'Tre'}] ">
+            <vgr-radio-group formControlName="optional" [options]="radioOptions">
             </vgr-radio-group>
           </vgr-title-value>
           <vgr-title-value title="Välj Månad">

@@ -1,12 +1,12 @@
 ﻿import { DropdownItemToSelectedTextPipe } from '../pipes/dropdownItemToSelectedTextPipe';
-import { IDropdownItem } from '../models/dropdownItem.model';
+import { DropdownItem } from '../models/dropdownItem.model';
 
 describe('DropdownItemToSelectedTextPipe', () => {
     const dropdownPipe = new DropdownItemToSelectedTextPipe();
     describe('When displayNameWhenSelected is undefined', () => {
         it('display name is returned', () => {
             const result = dropdownPipe.transform(
-                { displayName: 'DisplayName', displayNameWhenSelected: undefined } as IDropdownItem);
+                { displayName: 'DisplayName', displayNameWhenSelected: undefined } as DropdownItem<string>);
 
             expect(result).toBe('DisplayName');
         });
@@ -14,7 +14,7 @@ describe('DropdownItemToSelectedTextPipe', () => {
     describe('When displayNameWhenSelected is defined', () => {
         it('displayNameWhenSelected is returned', () => {
             const result = dropdownPipe.transform(
-                { displayName: 'DisplayName', displayNameWhenSelected: 'When selected' } as IDropdownItem);
+                { displayName: 'DisplayName', displayNameWhenSelected: 'When selected' } as DropdownItem<string>);
 
             expect(result).toBe('When selected');
         });
@@ -22,7 +22,7 @@ describe('DropdownItemToSelectedTextPipe', () => {
     describe('When neither displayNameWhenSelected nor displayName is defined', () => {
         it('empty string is returned', () => {
             const result = dropdownPipe.transform(
-                { displayName: undefined, displayNameWhenSelected: undefined } as IDropdownItem);
+                { displayName: undefined, displayNameWhenSelected: undefined } as DropdownItem<string>);
 
             expect(result).toBe('');
         });

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { ViewEncapsulation } from '@angular/core/src/metadata/view';
+import { SelectableItem, DropdownItem } from '../../lib/index';
 
 @Component({
   selector: 'app-reactiveforms',
@@ -8,6 +9,11 @@ import { ViewEncapsulation } from '@angular/core/src/metadata/view';
   styleUrls: ['./reactiveforms.component.css']
 })
 export class ReactiveformsComponent implements OnInit {
+
+  radioOptions: SelectableItem<number>[];
+  dropdownItems: DropdownItem<string>[];
+  dropdownItemsMulti: DropdownItem<string>[];
+
   userForm: FormGroup;
   validationMessages = {
     firstname: {
@@ -29,7 +35,25 @@ export class ReactiveformsComponent implements OnInit {
       'required': 'Detta skriver över default meddelandet för obligatoriska fält'
     }
   };
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+    this.radioOptions = [
+      { displayName: 'Ett', value: 1 },
+      { displayName: 'Två', value: 2 },
+      { displayName: 'Tre', value: 3 }
+    ];
+
+    this.dropdownItems = [
+      { displayName: 'Hund', value: 'Hund' },
+      { displayName: 'Katt', value: 'Katt' },
+      { displayName: 'Guldfisk', value: 'Guldfisk' }
+    ];
+
+    this.dropdownItemsMulti = [
+      { displayName: 'Koda', value: 'Koda' },
+      { displayName: 'Äta', value: 'Äta' },
+      { displayName: 'Sova', value: 'Soa' }
+    ];
+  }
 
   ngOnInit() {
     this.createForm();
@@ -43,10 +67,10 @@ export class ReactiveformsComponent implements OnInit {
       age: ['', [Validators.required, Validators.min(18), Validators.max(120), validateNumber]],
       email: ['', [Validators.required, Validators.email]],
       salary: ['', [Validators.required, validateNumber]],
-      favourite_pet: ['', Validators.required],
-      interests: [['Koda'], Validators.required],
+      favourite_pet: [null, Validators.required],
+      interests: [[this.dropdownItemsMulti[0].value], Validators.required],
       check: [true, Validators.pattern('true')],
-      optional: ['Två'],
+      optional: [this.radioOptions[2].value],
       monthpicker: ['', Validators.required],
       datepicker: ['', Validators.required],
       datepicker_preselected: [new Date(), Validators.required]

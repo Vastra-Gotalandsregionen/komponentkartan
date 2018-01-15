@@ -1,5 +1,7 @@
-import { Component, Input, EventEmitter, Output, AfterViewInit, OnChanges, HostBinding, forwardRef } from '@angular/core';
-import { ISelectableItem } from '../../models/selectableItem.model';
+import {
+    Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, Renderer, OnChanges
+} from '@angular/core';
+import { SelectableItem } from '../../models/selectableItem.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -12,29 +14,27 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         multi: true
     }]
 })
-export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
+export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
     @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() options: ISelectableItem[];
-    @Input() noSelection: boolean;
-    @Output() selectedChanged: EventEmitter<ISelectableItem> = new EventEmitter<ISelectableItem>();
+    @Input() options: SelectableItem<any>[];
+    @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor() { }
+    noSelectionFlag: boolean;
+    constructor(private elementRef: ElementRef, private renderer: Renderer) {
+    }
 
     ngOnChanges() {
-        if (!this.noSelection && this.options && this.options.length > 0) {
-            const preSelectedOptions = this.options.filter(x => x.selected);
-            if (preSelectedOptions.length > 0) {
-                this.selectOption(preSelectedOptions[0]);
-            } else {
-                const enabledOptions = this.options.filter(x => !x.disabled)
-                this.selectOption(enabledOptions[0]);
+        if (this.options && this.options.length > 0) {
+            const preSelectedOption = this.options.find(x => x.selected);
+            if (preSelectedOption) {
+                this.selectOption(preSelectedOption);
             }
         }
     }
 
-    optionClicked(option: ISelectableItem) {
+    optionClicked(option: SelectableItem<any>) {
         if (this.disabled || option.disabled || option.selected) {
             return;
         }
@@ -42,17 +42,75 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
         this.selectOption(option);
     }
 
-    keyDown(event: KeyboardEvent, option: ISelectableItem): void {
+    keyDown(event: KeyboardEvent, option: SelectableItem<any>): void {
+        if (event.keyCode === 9) {
+            this.setFocus();
+        }
+
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.optionClicked(option);
+            event.preventDefault();
+        }
+
+        if (event.keyCode === 39 || event.keyCode === 38) {
+            this.setFocus(option, 'forward');
+            event.preventDefault();
+        }
+
+        if (event.keyCode === 37 || event.keyCode === 40) {
+            this.setFocus(option, 'back');
+            event.preventDefault();
+        }
+
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.optionClicked(option);
             event.preventDefault();
         }
     }
 
-    writeValue(optionValue: any): void {
-        this.options.forEach(o => {
-            o.selected = o.displayName === optionValue;
-        });
+    setFocus(option?: SelectableItem<any>, direction?: string) {
+        const position = this.options.indexOf(option);
+        const nextItem = this.options[position + 1];
+        const previousItem = this.options[position - 1];
+        const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
+
+        if (this.noSelectionFlag && option.selected === false) {
+            this.renderer.invokeElementMethod(elements[0], 'focus');
+            this.noSelectionFlag = false;
+            return;
+        }
+
+        if (direction === 'forward') {
+            if (position + 1 === this.options.length) {
+                this.renderer.invokeElementMethod(elements[0], 'focus');
+                this.optionClicked(this.options[0]);
+            } else {
+                this.renderer.invokeElementMethod(elements[position + 1], 'focus');
+                this.optionClicked(nextItem);
+            }
+        } else if (direction === 'back') {
+            if (position === 0) {
+                this.renderer.invokeElementMethod(elements[this.options.length - 1], 'focus');
+                this.optionClicked(this.options[this.options.length - 1]);
+            } else {
+                this.renderer.invokeElementMethod(elements[position - 1], 'focus');
+                this.optionClicked(previousItem);
+            }
+        }
+    }
+
+    checkTabFocus(option: SelectableItem<any>) {
+        const index = this.options.indexOf(option);
+        return !option.disabled && (option.selected || (index === 0 && this.noSelectionFlag));
+    }
+
+    writeValue(option: any): void {
+        if (option) {
+            const preSelectedOption = this.options.find(x => x.value === option);
+            if (preSelectedOption) {
+                this.selectOption(preSelectedOption);
+            }
+        }
     }
 
     registerOnChange(func: any): void {
@@ -63,18 +121,17 @@ export class RadioGroupComponent implements OnChanges, ControlValueAccessor {
         this.onTouched = func;
     }
 
-    onChange(input: any) {
+    onChange(input: SelectableItem<any>) {
     }
 
     onTouched() { }
 
-    private selectOption(option: ISelectableItem) {
-        option.selected = true;
-        this.options.filter(x => x !== option).forEach(o => {
-            o.selected = false;
+    private selectOption(option: SelectableItem<any>) {
+        this.options.forEach(o => {
+            o.selected = (o === option);
         });
-
-        this.selectedChanged.emit(option);
-        this.onChange(option.displayName);
+        option.selected = true;
+        this.onChange(option.value);
+        this.selectedChanged.emit(option.value);
     }
 }
