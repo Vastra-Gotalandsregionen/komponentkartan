@@ -13,7 +13,7 @@
 
     <vgr-card-column>
       <vgr-card-section [title]=" 'Exempel1' ">
-        <div class="title-value-layout">
+        <vgr-title-value-layout>
           <vgr-title-value [title]=" 'HSA-id'" [slim]="readonly">
             <span>SE2321000131-E000000011887</span>
           </vgr-title-value>
@@ -68,10 +68,10 @@
           <vgr-title-value [title]=" 'Derivata'" [slim]="readonly">
             <vgr-input [value]="'SE2321000131-E000000011887'" [readonly]="readonly"></vgr-input>
           </vgr-title-value>
-        </div>
+        </vgr-title-value-layout>
       </vgr-card-section>
       <vgr-card-section [title]=" 'Ersättningsgrundande information' " [readonly]="true" [expanded]="true" class="card__right">
-        <div class="title-value-layout ">
+        <vgr-title-value-layout>
           <vgr-title-value [title]="'Kommun'" [slim]="true">
             <span>Vänersborg</span>
           </vgr-title-value>
@@ -87,7 +87,7 @@
             <span>x: 6471784</span>
           </vgr-title-value>
 
-        </div>
+        </vgr-title-value-layout>
       </vgr-card-section>
       <vgr-card-section [title]=" 'Eget innehåll' " [readonly]="readonly " [expanded]="false">
         <div>
@@ -95,7 +95,7 @@
         </div>
       </vgr-card-section>
       <vgr-card-section [title]=" 'Adress' ">
-        <div class="title-value-layout ">
+        <vgr-title-value-layout>
           <vgr-title-value [title]="'Kommun'" [slim]="true">
             <span>Vänersborg</span>
           </vgr-title-value>
@@ -105,12 +105,11 @@
               <br>462 60
               <br>Vänersborg
             </span>
-
           </vgr-title-value>
           <vgr-title-value [title]="'Geokod (PT90)'" [slim]="true">
             <span>x: 6471784</span>
           </vgr-title-value>
-        </div>
+        </vgr-title-value-layout>
       </vgr-card-section>
     </vgr-card-column>
     <vgr-card-column>
