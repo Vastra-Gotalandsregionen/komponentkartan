@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import {
-    IDropdownItem, ISelectableItem, ModalService,
+    DropdownItem, ISelectableItem, ModalService,
     ModalButtonConfiguration, IHeaderMenu,
     IHeaderMenuItem, NotificationType, NotificationIcon
 } from '../../lib/index';
@@ -22,15 +22,15 @@ export class KomponentkartaComponent implements AfterViewInit {
 
     selectedThemeOption: ISelectableItem;
     themeOptions: ISelectableItem[];
-    dropDownItems25: IDropdownItem[];
-    dropDownItems200: IDropdownItem[];
-    dropDownItems9: IDropdownItem[];
-    dropDownItems6: IDropdownItem[];
-    dropDownItems7: IDropdownItem[];
-    dropDownItems4: IDropdownItem[];
-    dropMultipleDownItems8: IDropdownItem[];
-    dropDownItems10: IDropdownItem[];
-    dropDownItems25All: IDropdownItem[];
+    dropDownItems25: DropdownItem<string>[];
+    dropDownItems200: DropdownItem<string>[];
+    dropDownItems9: DropdownItem<string>[];
+    dropDownItems6: DropdownItem<string>[];
+    dropDownItems7: DropdownItem<string>[];
+    dropDownItems4: DropdownItem<string>[];
+    dropMultipleDownItems8: DropdownItem<string>[];
+    dropDownItems10: DropdownItem<string>[];
+    dropDownItems25All: DropdownItem<string>[];
     buttonDisabled: boolean;
     buttonSecondaryDisabled: boolean;
     selectedRadioOption: ISelectableItem;
@@ -155,10 +155,10 @@ export class KomponentkartaComponent implements AfterViewInit {
 
     }
 
-    private getDemoItems(numberOfItems: number): IDropdownItem[] {
-        const items: IDropdownItem[] = [];
+    private getDemoItems(numberOfItems: number): DropdownItem<string>[] {
+        const items: DropdownItem<string>[] = [];
         for (let i = 1; i <= numberOfItems; i++) {
-            items.push({ id: i.toString(), displayName: `${i} - Södra hälso- och sjukvårdsnämnd`, displayNameWhenSelected: `Alt ${i}` } as IDropdownItem);
+            items.push({ value: i.toString(), displayName: `${i} - Södra hälso- och sjukvårdsnämnd`, displayNameWhenSelected: `Alt ${i}` } as DropdownItem<string>);
         }
         return items;
     }
@@ -188,11 +188,11 @@ export class KomponentkartaComponent implements AfterViewInit {
         $('.class-description').fadeToggle();
     }
 
-    onMultipleSelectionChanged(selectedItems: IDropdownItem[]) {
+    onMultipleSelectionChanged(selectedItems: DropdownItem<string>[]) {
         this.lastMultipleSelection = selectedItems.map(x => x.displayName).join(',');
     }
 
-    onSingleSelectionChanged(selectedItem: IDropdownItem) {
+    onSingleSelectionChanged(selectedItem: DropdownItem<string>) {
         this.lastSingleSelection = selectedItem.displayName;
     }
 

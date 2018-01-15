@@ -1,6 +1,6 @@
-﻿import { ISelectableItem } from './selectableItem.model';
+﻿import { SelectableItem } from './selectableItem.model';
 
-export interface IDropdownItem extends ISelectableItem {
-    displayNameWhenSelected: string;
-    marked: boolean;
+export interface DropdownItem<TValue> extends SelectableItem<TValue> {
+    displayNameWhenSelected?: string;
+    marked?: boolean;
 }

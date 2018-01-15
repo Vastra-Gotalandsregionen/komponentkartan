@@ -1,5 +1,4 @@
 import { Component, ViewChildren, QueryList, HostBinding } from '@angular/core';
-import { IDropdownItem } from '../../lib/index';
 
 @Component({
   moduleId: module.id,

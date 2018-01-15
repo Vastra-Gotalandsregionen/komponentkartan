@@ -21,7 +21,7 @@
             <vgr-input formControlName="salary" [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Favoritdjur">
-            <vgr-dropdown formControlName="favourite_pet" [values]="['Katt','Hund','Guldfisk']"></vgr-dropdown>
+            <vgr-dropdown formControlName="favourite_pet" [items]="dropdownItems"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value title="Intressen">
             <vgr-dropdown-multiselect formControlName="interests" [values]="['Koda','Sport','Sova','Äta']"></vgr-dropdown-multiselect>
@@ -43,8 +43,9 @@
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
           </vgr-title-value>
         </div>
-        <vgr-button [disabled]="userForm.invalid">Skapa användare</vgr-button>
+        <vgr-button (click)="onSubmit()">Skapa användare</vgr-button>
       </form>
+      <vgr-dropdown (selectedChanged)="onSelectedChanged($event)" [values]="['Hej', 'Test']" [selectedValue]="'Test'"></vgr-dropdown>
     </vgr-page-block>
   </vgr-page-body>
 </vgr-page>

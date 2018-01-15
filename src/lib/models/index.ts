@@ -3,7 +3,7 @@ export { ICalendarMonth } from './calendarMonth.model';
 export { ICalendarWeek } from './calendarWeek.model';
 export { ICalendarYear } from './calendarYear.model';
 export { ICalendarYearMonth } from './calendarYearMonth.model';
-export { IDropdownItem, DropdownItem } from './dropdownItem.model';
+export { DropdownItem } from './dropdownItem.model';
 export { ExpandableRow } from './expandableRow.model';
 export { IHeaderMenu, IHeaderMenuGroup, IHeaderMenuItem } from './headerMenu.model';
 export { IMenu, IMenuGroup, IMenuItem } from './menu.model';

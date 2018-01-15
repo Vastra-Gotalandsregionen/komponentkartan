@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { ViewEncapsulation } from '@angular/core/src/metadata/view';
-import { SelectableItem } from '../../lib/index';
+import { SelectableItem, DropdownItem } from '../../lib/index';
 
 @Component({
   selector: 'app-reactiveforms',
@@ -12,6 +12,8 @@ export class ReactiveformsComponent implements OnInit {
 
   radioOptions: SelectableItem<MyObject>[];
   radioOptions2: SelectableItem<MyObject>[];
+
+  dropdownItems: DropdownItem<MyObject2>[];
 
   userForm: FormGroup;
   validationMessages = {
@@ -40,6 +42,12 @@ export class ReactiveformsComponent implements OnInit {
       { displayName: 'Två', value: { id: '2', number: 2 } },
       { displayName: 'Tre', value: { id: '3', number: 3 } }
     ];
+
+    this.dropdownItems = [
+      { displayName: 'Hund', value: { id: '1', name: 'Hund' } },
+      { displayName: 'Katt', value: { id: '2', name: 'Katt' } },
+      { displayName: 'Guldfisk', value: { id: '3', name: 'Guldfisk' } }
+    ];
   }
 
   ngOnInit() {
@@ -54,7 +62,7 @@ export class ReactiveformsComponent implements OnInit {
       age: ['', [Validators.required, Validators.min(18), Validators.max(120), validateNumber]],
       email: ['', [Validators.required, Validators.email]],
       salary: ['', [Validators.required, validateNumber]],
-      favourite_pet: ['', Validators.required],
+      favourite_pet: [this.dropdownItems[1].value, Validators.required],
       interests: [['Koda'], Validators.required],
       check: [true, Validators.pattern('true')],
       optional: [this.radioOptions[2].value],
@@ -62,6 +70,14 @@ export class ReactiveformsComponent implements OnInit {
       datepicker: ['', Validators.required],
       datepicker_preselected: [new Date(), Validators.required]
     });
+  }
+
+  onSelectedChanged(event: any) {
+    console.log(event);
+  }
+
+  onSubmit() {
+    console.log(this.userForm.controls.favourite_pet.value);
   }
 }
 
@@ -78,4 +94,9 @@ function validateNumber(control: AbstractControl) {
 declare interface MyObject {
   id: string;
   number: number;
+}
+
+declare interface MyObject2 {
+  id: string;
+  name: string;
 }
