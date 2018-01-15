@@ -152,7 +152,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             this.onChange(this._items.map(x => x.value));
         } else {
             this.selectAllItem.selected = this._items.filter(x => !x.selected).length === 0;
-            this.selectionChanged.emit(this._items.map(x => x.value));
+            this.selectionChanged.emit(this.selectedItems.map(x => x.value));
             this.onChange(this.selectedItems.map(x => x.value));
         }
         this.updateDropdownLabel();
