@@ -14,9 +14,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         multi: true
     }]
 })
+
+
 export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
+    @HostBinding('id') groupId = Guid.newGuid();
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() options: SelectableItem<any>[];
     @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
@@ -124,5 +127,23 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
         this.noSelectionFlag = false;
         this.onChange(option.value);
         this.selectedChanged.emit(option.value);
+    }
+
+    setLabelledBy(index: number): string {
+        return this.groupId + ' ' + 'radio-button-label__' + index;
+    }
+
+    setLabelledById(index: number): string {
+        return 'radio-button-label__' + index;
+    }
+
+}
+
+class Guid {
+    static newGuid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
 }
