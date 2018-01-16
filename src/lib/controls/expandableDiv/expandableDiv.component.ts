@@ -6,23 +6,17 @@ import { Input, Component, HostBinding, ContentChild, ElementRef, Output, EventE
     templateUrl: './expandableDiv.component.html',
 })
 export class ExpandableDivComponent {
-    private expanded_chevron: boolean;
+    @HostBinding('class.expandable-div--collapsed') private collapsed = true;
+    @HostBinding('class.expandable-div--expanded') private _expanded: boolean;
+    @HostBinding('class.expandable-div') private expandableDivClass = true;
 
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    @HostBinding('class.expandable-div--expanded') private _expanded: boolean;
-    @HostBinding('class.expandable-div') private expandableDivClass = true;
-    @HostBinding('class.expandable-div--collapsed') isCollapsed() { return !this._expanded; }
-
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
-            this._expanded = true;
-            this.expanded_chevron = true;
+            this.expand();
         } else if (!expandedValue && this._expanded) {
-            this._expanded = false;
-            setTimeout(() => {
-                this.expanded_chevron = false;
-            }, 400);
+            this.collapse();
         }
     }
 
@@ -31,9 +25,40 @@ export class ExpandableDivComponent {
     }
 
     get chevron_class() {
-        return 'expandable-div-chevron '.concat(this.expanded_chevron ? 'expanded' : 'collapsed');
+        return 'expandable-div-chevron '.concat(this.expanded ? 'expanded' : 'collapsed');
     }
 
     constructor(private elementRef: ElementRef) { }
+
+    collapse() {
+        this.collapseContent(() => {
+            const expandedChanged = this._expanded;
+            this._expanded = false;
+            this.collapsed = true;
+            if (expandedChanged) {
+                this.expandedChanged.emit(this._expanded);
+            }
+        });
+    }
+
+    expand() {
+        this.expandContent();
+        const expandedChanged = !this._expanded;
+        this._expanded = true;
+        this.collapsed = false;
+        if (expandedChanged) {
+            this.expandedChanged.emit(this._expanded);
+        }
+    }
+
+    private collapseContent(callback?: any) {
+        const header = $(this.elementRef.nativeElement).children('.expandable-div-header');
+        header.siblings('.expandable-div-content').slideUp(400, callback);
+    }
+
+    private expandContent() {
+        const header = $(this.elementRef.nativeElement).children('.expandable-div-header');
+        header.siblings('.expandable-div-content').slideDown(400);
+    }
 }
 
