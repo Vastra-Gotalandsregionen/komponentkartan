@@ -228,18 +228,10 @@
     border-top: none;
     padding-top: 0;
   }
-  .list-item--collapsed & {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in;
-  }
   .list-item--expanded & {
     // jQuery slideUp verkar sätta display inline. Blir ej bra.
     // Lyckades inte overridea så detta löser problemet (om än inte på ett snyggt sätt)
-    display: block;
-    max-height: 999px;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
+    display: block !important;
   }
 }
 
