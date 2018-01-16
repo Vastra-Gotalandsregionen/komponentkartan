@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RadioGroupComponent } from '../../controls/radioGroup/radioGroup.component';
-import { SelectableItem } from '../../models/selectableItem.model';
+import { SelectableItem, ISelectableItem } from '../../models/selectableItem.model';
 
 describe('SaveCancelComponent', () => {
     let component: RadioGroupComponent;
@@ -196,5 +196,68 @@ describe('SaveCancelComponent', () => {
                 expect(selectedOptions.length).toEqual(0);
             });
         });
+    });
+
+
+
+    describe('WCAG: When initialized with options', () => {
+        let selectedChangedSpy: jasmine.Spy;
+        let firstOption: DebugElement;
+        beforeEach(() => {
+            selectedChangedSpy = spyOn(component.selectedChanged, 'emit');
+            component.options = [
+                { disabled: false, selected: false, value: { id: 'PÅ', displayName: 'Per Åkerberg' } as ISelectableItem },
+                { disabled: false, selected: false, value: { id: 'PÅ', displayName: 'Per Åkerberg' } as ISelectableItem },
+                { disabled: false, selected: false, value: { id: 'SH', displayName: 'Sofia Hejdenberg' } as ISelectableItem },
+                { disabled: false, selected: false, value: { id: 'CB', displayName: 'Caroline Bornsjö' } as ISelectableItem },
+            ] as SelectableItem<any>[];
+            component.noSelectionFlag = true;
+
+
+            fixture.detectChanges();
+            firstOption = rootElement.queryAll(By.css('.radio-button'))[0];
+        });
+
+        it('no option is selected', () => {
+            const selectedOptions = rootElement.queryAll(By.css('.radio-button--checked'));
+            expect(selectedOptions.length).toEqual(0);
+        });
+        it('The radiogroup has role radiogroup.', () => {
+            expect(rootElement.attributes['role']).toBe('radiogroup');
+        });
+        it('The radiobuttons has role radio.', () => {
+            expect(firstOption.attributes['role']).toBe('radio');
+        });
+
+        describe('The radiogroup has an accessible label, preferably provided by a visible label associated using aria-labelledby', () => {
+            it('radiogroup has a label with an id', () => {
+                const labelElement = rootElement.query(By.css('.radio-button__text'));
+                expect(labelElement.nativeElement.id).toBe('radio-button-label__0');
+            });
+            it('radiobutton is associated with the label', () => {
+                expect(firstOption.attributes['aria-labelledby']).toContain('radio-button-label__0');
+            });
+        });
+
+        it('When checked, the radiobutton element has state aria-checked set to true', () => {
+            component.options[0].selected = true;
+            fixture.detectChanges();
+            expect(firstOption.attributes['aria-checked']).toBe('true');
+        });
+
+        it('When not checked, it has state aria-checked set to false', () => {
+            component.options[0].selected = false;
+            fixture.detectChanges();
+            expect(firstOption.attributes['aria-checked']).toBe('false');
+        });
+
+
+        // it('radiobuttons in group has tabstop', () => {
+        //     const visibleOptions = rootElement.queryAll(By.css('.radio-button__icon'));
+
+        //     visibleOptions.forEach(e => expect(e.properties['tabIndex']).toBe('0'));
+        // });
+
+
     });
 });

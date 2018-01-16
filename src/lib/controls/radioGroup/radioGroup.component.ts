@@ -14,9 +14,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         multi: true
     }]
 })
+
+
 export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
+    @HostBinding('id') groupId = Guid.newGuid();
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() options: SelectableItem<any>[];
     @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
@@ -26,6 +29,9 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     }
 
     ngOnChanges() {
+        // this.noSelectionFlag = true;
+        this.noSelectionFlag = this.options.every((x) => (x.selected === false || x.selected === undefined));
+
         if (this.options && this.options.length > 0) {
             const preSelectedOption = this.options.find(x => x.selected);
             if (preSelectedOption) {
@@ -43,9 +49,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     }
 
     keyDown(event: KeyboardEvent, option: SelectableItem<any>): void {
-        if (event.keyCode === 9) {
-            this.setFocus();
-        }
 
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.optionClicked(option);
@@ -61,29 +64,20 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
             this.setFocus(option, 'back');
             event.preventDefault();
         }
-
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            this.optionClicked(option);
-            event.preventDefault();
-        }
     }
 
     setFocus(option?: SelectableItem<any>, direction?: string) {
         const position = this.options.indexOf(option);
         const nextItem = this.options[position + 1];
         const previousItem = this.options[position - 1];
-        const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
 
-        if (this.noSelectionFlag && option.selected === false) {
-            this.renderer.invokeElementMethod(elements[0], 'focus');
-            this.noSelectionFlag = false;
-            return;
-        }
+        const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
+        const enabledOptions = this.options.filter(x => !x.disabled);
 
         if (direction === 'forward') {
-            if (position + 1 === this.options.length) {
+            if (position + 1 === enabledOptions.length) {
                 this.renderer.invokeElementMethod(elements[0], 'focus');
-                this.optionClicked(this.options[0]);
+                this.optionClicked(enabledOptions[0]);
             } else {
                 this.renderer.invokeElementMethod(elements[position + 1], 'focus');
                 this.optionClicked(nextItem);
@@ -91,7 +85,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
         } else if (direction === 'back') {
             if (position === 0) {
                 this.renderer.invokeElementMethod(elements[this.options.length - 1], 'focus');
-                this.optionClicked(this.options[this.options.length - 1]);
+                this.optionClicked(this.options[enabledOptions.length - 1]);
             } else {
                 this.renderer.invokeElementMethod(elements[position - 1], 'focus');
                 this.optionClicked(previousItem);
@@ -99,9 +93,8 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
         }
     }
 
-    checkTabFocus(option: SelectableItem<any>) {
-        const index = this.options.indexOf(option);
-        return !option.disabled && (option.selected || (index === 0 && this.noSelectionFlag));
+    checkTabFocus(index: number) {
+        return !this.options[index].disabled && (this.options[index].selected || (index === 0 && this.noSelectionFlag));
     }
 
     writeValue(option: any): void {
@@ -131,7 +124,26 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
             o.selected = (o === option);
         });
         option.selected = true;
+        this.noSelectionFlag = false;
         this.onChange(option.value);
         this.selectedChanged.emit(option.value);
+    }
+
+    setLabelledBy(index: number): string {
+        return this.groupId + ' ' + 'radio-button-label__' + index;
+    }
+
+    setLabelledById(index: number): string {
+        return 'radio-button-label__' + index;
+    }
+
+}
+
+class Guid {
+    static newGuid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
 }

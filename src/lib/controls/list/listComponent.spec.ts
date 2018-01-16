@@ -1,8 +1,12 @@
-import { ListComponent, ListHeaderComponent, SortChangedArgs, SortDirection, ListItemComponent, ListItemJqeuryHelper } from '../../controls/index';
+import { ListComponent, ListHeaderComponent, ListItemContentComponent, SortChangedArgs, SortDirection, ListItemComponent, ListItemJqeuryHelper } from '../../controls/index';
 import { QueryList, EventEmitter } from '@angular/core';
+import { ListItemHeaderComponent } from '../list-item/list-item-header.component';
 
 describe('[ListComponent]', () => {
     let listComponent: ListComponent;
+
+
+
     beforeEach(() => {
         listComponent = new ListComponent();
         listComponent.listHeader = new ListHeaderComponent();
@@ -18,9 +22,9 @@ describe('[ListComponent]', () => {
         });
     });
     describe('when list is initialized with three items', () => {
-        const childItem1 = { copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
-        const childItem2 = { copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
-        const childItem3 = { copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
+        const childItem1 = { setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
+        const childItem2 = { setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
+        const childItem3 = { setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
 
         beforeEach(() => {
             listComponent.items = new QueryList<ListItemComponent>();
@@ -29,6 +33,7 @@ describe('[ListComponent]', () => {
             spyOn(childItem3, 'copyPropertiesFromHeader');
             spyOn(listComponent.items, 'forEach').and.callFake(((callback: any) => [childItem1, childItem2, childItem3].forEach(callback)));
             spyOn(listComponent.items, 'filter').and.callFake(((callback: any) => [childItem1, childItem2, childItem3].filter(callback)));
+            spyOn(listComponent.items, 'toArray').and.returnValue([childItem1, childItem2, childItem3]);
             listComponent.ngAfterContentInit();
         });
         it('items are initialized with header sizing information', () => {

@@ -1,5 +1,5 @@
 import {
-    Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, ContentChildren, QueryList,
+    Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, ContentChildren, ContentChild, QueryList,
     AfterContentInit, forwardRef
 } from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
@@ -9,13 +9,15 @@ import { ListItemJqeuryHelper } from './listItemJqueryHelper';
 import { ListColumnComponent } from '../list/list-column.component';
 import { ListColumnHeaderComponent } from '../list/list-column-header.component';
 import { ListHeaderComponent } from '../list/list-header.component';
+import { ListItemHeaderComponent } from '../list-item/list-item-header.component';
+import { ListItemContentComponent } from '../list-item/list-item-content.component';
 
 @Component({
     templateUrl: './list-item.component.html',
     selector: 'vgr-list-item',
     moduleId: module.id
 })
-export class ListItemComponent implements OnInit {
+export class ListItemComponent implements OnInit, AfterContentInit {
     // För att kunna binda till Enum värde i markup
     public NotificationIcons = NotificationIcon;
     readonly showNotificationDurationMs = 1500;
@@ -26,6 +28,9 @@ export class ListItemComponent implements OnInit {
     @HostBinding('class.list-item--notification-visible') notificationVisible: boolean;
     @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
     @HostBinding('class.list-item--columns-initialized') columnsInitialized: boolean;
+
+    @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
+    @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
@@ -40,6 +45,12 @@ export class ListItemComponent implements OnInit {
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() notificationChanged: EventEmitter<RowNotification> = new EventEmitter<RowNotification>();
     @Output() deleted: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnFirstRow: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnLastRow: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnPreviousRow: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnNextRow: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnPreviousRowContent: EventEmitter<any> = new EventEmitter();
+    @Output() setFocusOnNextRowContent: EventEmitter<any> = new EventEmitter();
 
     private _notification: RowNotification;
     @Input() set notification(value: RowNotification) {
@@ -63,8 +74,20 @@ export class ListItemComponent implements OnInit {
 
     @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
+
+
     constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ListItemJqeuryHelper) {
 
+    }
+
+    ngAfterContentInit() {
+        this.listItemHeader.expandedChanged.subscribe(() => this.setExpandOrCollapsed());
+        this.listItemHeader.goToFirst.subscribe(() => this.setFocusOnFirstRow.emit());
+        this.listItemHeader.goToLast.subscribe(() => this.setFocusOnLastRow.emit());
+        this.listItemHeader.goUp.subscribe(() => this.setFocusOnPreviousRow.emit());
+        this.listItemHeader.goDown.subscribe(() => this.setFocusOnNextRow.emit());
+        this.listContent.goUp.subscribe(() => this.setFocusOnPreviousRowContent.emit());
+        this.listContent.goDown.subscribe(() => this.setFocusOnNextRowContent.emit());
     }
 
     ngOnInit() {
@@ -73,9 +96,16 @@ export class ListItemComponent implements OnInit {
         }
     }
 
+
+    setFocusOnRow() {
+        this.listItemHeader.setFocus();
+
+    }
+
     copyPropertiesFromHeader(header: ListHeaderComponent) {
         this.columns.forEach((column, index) => {
             header.applyToColumn(column, index);
+
         });
 
         setTimeout(() => {
@@ -90,6 +120,7 @@ export class ListItemComponent implements OnInit {
         this.notificationVisible = true;
     }
 
+
     @HostListener('click', ['$event'])
     toggleExpand(event: Event) {
         if (this.notInteractable) {
@@ -100,14 +131,19 @@ export class ListItemComponent implements OnInit {
             return;
         }
 
+        this.setExpandOrCollapsed();
+
+        event.cancelBubble = true;
+    }
+
+    public setExpandOrCollapsed() {
+        console.log('hej');
         if (!this._expanded) {
             this.expand();
         } else {
             this.collapse();
         }
-        event.cancelBubble = true;
     }
-
     private expand() {
         if (this.isDeleted || this.notInteractable) {
             return;
@@ -149,7 +185,7 @@ export class ListItemComponent implements OnInit {
             this.processShowOnCollapseNotification(header, callback);
         } else if (notificationType === NotificationType.ShowOnRemove) {
             this.processShowOnRemoveNotification(header, callback);
-        };
+        }
     }
 
     private processShowOnCollapseNotification(header: JQuery, callback: Function) {
@@ -163,7 +199,7 @@ export class ListItemComponent implements OnInit {
                     this.notification.done = true;
                     this.notificationVisible = false;
                     this.notInteractable = false;
-                }, 2000)
+                }, 2000);
             });
         }, 1400);
 
@@ -182,7 +218,7 @@ export class ListItemComponent implements OnInit {
                     this.notInteractable = false;
                     this.isDeleted = true;
                     this.deleted.emit();
-                }, 2000)
+                }, 2000);
             });
         }, 1400);
     }

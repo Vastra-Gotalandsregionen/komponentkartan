@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, Renderer, ElementRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RowNotification } from '../../models/rowNotification.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
@@ -10,21 +10,61 @@ import { NotificationType } from '../../models/notificationType.model';
 
 import { ListItemComponent } from '../../controls/list-item/list-item.component';
 import { ListItemJqeuryHelper } from '../../controls/list-item/listItemJqueryHelper';
+import { ListItemHeaderComponent } from '../../controls/list-item/list-item-header.component';
+import { ListItemContentComponent } from './list-item-content.component';
 
+export class MockElementRef extends ElementRef {
+    constructor() { super(null); }
+
+}
 
 describe('ListItemComponent', () => {
     let component: ListItemComponent;
     let fixture: ComponentFixture<ListItemComponent>;
     let rootElement: DebugElement;
+    let renderer: Renderer;
     const jqueryHelper: ListItemJqeuryHelper = new ListItemJqeuryHelper();
+
+    let rendererMock = jasmine.createSpyObj('rendererMock', ['selectRootElement',
+        'createElement',
+        'createViewRoot',
+        'createText',
+        'setElementProperty',
+        'setElementAttribute',
+        'setText',
+        'setBindingDebugInfo',
+        'createTemplateAnchor',
+        'projectNodes',
+        'attachViewAfter',
+        'detachView',
+        'destroyView',
+        'listen',
+        'listenGlobal',
+        'setElementClass',
+        'setElementStyle',
+        'invokeElementMethod',
+        'animate']);
+
+
+
+    let rootRendererMock = {
+        renderComponent: () => {
+            return rendererMock;
+        }
+    };
+
+
 
     beforeEach((done) => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [ListItemComponent],
+            declarations: [ListItemComponent, ListItemHeaderComponent],
             imports: [CommonModule],
-            providers: [{ provide: ListItemJqeuryHelper, useValue: jqueryHelper }]
+            providers: [
+                { provide: ElementRef, useClass: MockElementRef },
+                { provide: Renderer, useValue: rootRendererMock },
+                { provide: ListItemJqeuryHelper, useValue: jqueryHelper }]
         });
 
         TestBed.overrideComponent(ListItemComponent, {
@@ -33,11 +73,20 @@ describe('ListItemComponent', () => {
             }
         });
 
+
+
         TestBed.compileComponents().then(() => {
             // spyOn(jqueryHelper, 'collapseContent');
+
             fixture = TestBed.createComponent(ListItemComponent);
+            fixture.componentInstance.listItemHeader = new ListItemHeaderComponent(new MockElementRef(), rendererMock);
+            fixture.componentInstance.listContent = new ListItemContentComponent(new MockElementRef(), rendererMock);
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
+
+
+
+
             fixture.detectChanges();
             done();
         });
@@ -46,6 +95,7 @@ describe('ListItemComponent', () => {
         describe('When initialized', () => {
             beforeEach(() => {
                 component.ngOnInit();
+                component.ngAfterContentInit();
             });
 
             it('the component has the list-item class', () => {
@@ -248,5 +298,3 @@ describe('ListItemComponent', () => {
         });
     });
 });
-
-

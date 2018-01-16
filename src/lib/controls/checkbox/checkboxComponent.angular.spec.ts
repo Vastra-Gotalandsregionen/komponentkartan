@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { CheckboxComponent } from './checkbox.component';
 
 
-describe('SaveCancelComponent', () => {
+describe('CheckboxComponent', () => {
     let component: CheckboxComponent;
     let fixture: ComponentFixture<CheckboxComponent>;
     let rootElement: DebugElement;
@@ -163,6 +163,7 @@ describe('SaveCancelComponent', () => {
                 expect(labelElement.nativeElement.id).toBe('checkbox-label');
             });
             it('checkbox is associated with the label', () => {
+                let checkbox = rootElement.query(By.css('.checkbox'));
                 expect(checkboximage.attributes['aria-labelledby']).toBe('checkbox-label');
             });
         });
