@@ -6,7 +6,7 @@ import { Input, Component, HostBinding, ContentChild, ElementRef, Output, EventE
     templateUrl: './expandableDiv.component.html',
 })
 export class ExpandableDivComponent {
-    showContent: boolean;
+    private expanded_chevron: boolean;
 
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -20,11 +20,11 @@ export class ExpandableDivComponent {
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
             this._expanded = true;
-            this.showContent = true;
+            this.expanded_chevron = true;
         } else if (!expandedValue && this._expanded) {
             this._expanded = false;
             setTimeout(() => {
-                this.showContent = false;
+                this.expanded_chevron = false;
             }, 400);
         }
     }
@@ -34,7 +34,7 @@ export class ExpandableDivComponent {
     }
 
     get chevron_class() {
-        return 'expandable-div-chevron '.concat(this.showContent ? 'expanded' : 'collapsed');
+        return 'expandable-div-chevron '.concat(this.expanded_chevron ? 'expanded' : 'collapsed');
     }
 
     constructor(private elementRef: ElementRef) { }
