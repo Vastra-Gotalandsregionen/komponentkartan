@@ -53,13 +53,6 @@ export class ListColumnsComponent implements OnInit {
                 unitname: 'BVC & Mödravården Mölndal', unitcode: '23111', hsaid: 'SE2321000131-E000000011851', committee: '67 - Göteborgs hälso- och sjukvårdsnämnden', owner: 'Stefan Larsson'
             }),
         ];
-
-        for (let index = 0; index < 100; index++) {
-            this.peopleWithUnitRows.push(new ExpandableRow<ExamplePersonWithUnit, any>({
-                id: '1', firstName: index.toString(), lastName: 'Hubsson', amount: 125000,
-                unitname: 'BVC & Mödravården Mölndal', unitcode: '23111', hsaid: 'SE2321000131-E000000011851', committee: '67 - Göteborgs hälso- och sjukvårdsnämnden', owner: 'Stefan Larsson'
-            }));
-        }
     }
 
     onSelectRowChanged(row: any, checked: boolean) {

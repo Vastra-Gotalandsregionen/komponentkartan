@@ -22,7 +22,7 @@
           <vgr-list-column-header align="center" text="I" width="1" sortKey="committee"></vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of peopleWithUnitRows" [notification]="row.notification" (deleted)="onDeleted(row)">
-          <vgr-list-item-header *ngIf="false">
+          <vgr-list-item-header>
             <vgr-list-column [text]="row.previewObject.firstName"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.lastName"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.amount | number:'2.2-2':'sv-SE'"></vgr-list-column>
@@ -40,7 +40,7 @@
             <vgr-list-column-checkbox></vgr-list-column-checkbox>
 
           </vgr-list-item-header>
-          <vgr-list-item-content *ngIf="false">
+          <vgr-list-item-content>
             <vgr-checkbox></vgr-checkbox>
             <span> Mer information</span>
           </vgr-list-item-content>
