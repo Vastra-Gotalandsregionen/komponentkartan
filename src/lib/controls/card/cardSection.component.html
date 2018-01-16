@@ -2,8 +2,8 @@
   <h2 class="card-section__header__title noselect">{{title}}</h2>
   <h4 class="card-section__header__subtitle" *ngIf="subtitle && subtitle.length>0" title="{{subtitle}}">{{subtitle|truncate:30}}</h4>
   <div class="card-section__header__icon"></div>
-  <div [className]="chevron_class"></div>
+  <div class="card-section__header__expander"></div>
 </div>
 <div class="card-section__content">
-  <ng-content *ngIf="expanded_chevron"></ng-content>
+  <ng-content></ng-content>
 </div>

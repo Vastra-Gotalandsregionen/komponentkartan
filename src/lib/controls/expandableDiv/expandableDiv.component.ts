@@ -12,10 +12,7 @@ export class ExpandableDivComponent {
 
     @HostBinding('class.expandable-div--expanded') private _expanded: boolean;
     @HostBinding('class.expandable-div') private expandableDivClass = true;
-    @HostBinding('class.expandable-div--collapsed')
-    get isCollapsed() {
-        return !this._expanded;
-    }
+    @HostBinding('class.expandable-div--collapsed') isCollapsed() { return !this._expanded; }
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
