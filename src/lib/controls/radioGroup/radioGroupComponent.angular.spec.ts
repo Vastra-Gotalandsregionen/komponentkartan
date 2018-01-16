@@ -230,13 +230,13 @@ describe('SaveCancelComponent', () => {
         });
 
         describe('The radiogroup has an accessible label, preferably provided by a visible label associated using aria-labelledby', () => {
-            // it('radiogroup has a label with an id', () => {
-            //     const labelElement = rootElement.query(By.css('.radio-button__text'));
-            //     expect(labelElement.nativeElement.id).toBe('Per Åkerberg');
-            // });
-            // it('radiobutton is associated with the label', () => {
-            //     expect(rootElement.queryAll(By.css('.radio-button'))[0].attributes['aria-labelledby']).toBe('Per Åkerberg');
-            // });
+            it('radiogroup has a label with an id', () => {
+                const labelElement = rootElement.query(By.css('.radio-button__text'));
+                expect(labelElement.nativeElement.id).toBe('radio-button-label__0');
+            });
+            it('radiobutton is associated with the label', () => {
+                expect(firstOption.attributes['aria-labelledby']).toContain('radio-button-label__0');
+            });
         });
 
         it('When checked, the radiobutton element has state aria-checked set to true', () => {
