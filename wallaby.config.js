@@ -74,6 +74,9 @@ module.exports = function (wallaby) {
   });
 
   return {
+    hints: {
+      commentAutoLog: 'out:'
+    },
     files: [{
         pattern: 'src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)',
         load: false

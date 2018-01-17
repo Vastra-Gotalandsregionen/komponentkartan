@@ -8,10 +8,10 @@ import { RowNotification } from '../../models/rowNotification.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
 import { NotificationType } from '../../models/notificationType.model';
 
-import { ListItemComponent } from '../../controls/list-item/list-item.component';
-import { ListItemJqeuryHelper } from '../../controls/list-item/listItemJqueryHelper';
-import { ListItemHeaderComponent } from '../../controls/list-item/list-item-header.component';
-import { ListItemContentComponent } from './list-item-content.component';
+import {
+    ListItemComponent, ListItemHeaderComponent, ListColumnComponent,
+    ListItemContentComponent, ListItemJqeuryHelper
+} from '../../controls/index';
 
 export class MockElementRef extends ElementRef {
     constructor() { super(null); }
@@ -22,36 +22,36 @@ describe('ListItemComponent', () => {
     let component: ListItemComponent;
     let fixture: ComponentFixture<ListItemComponent>;
     let rootElement: DebugElement;
-    let renderer: Renderer;
+    // let renderer: Renderer;
     const jqueryHelper: ListItemJqeuryHelper = new ListItemJqeuryHelper();
 
-    let rendererMock = jasmine.createSpyObj('rendererMock', ['selectRootElement',
-        'createElement',
-        'createViewRoot',
-        'createText',
-        'setElementProperty',
-        'setElementAttribute',
-        'setText',
-        'setBindingDebugInfo',
-        'createTemplateAnchor',
-        'projectNodes',
-        'attachViewAfter',
-        'detachView',
-        'destroyView',
-        'listen',
-        'listenGlobal',
-        'setElementClass',
-        'setElementStyle',
-        'invokeElementMethod',
-        'animate']);
+    // const rendererMock = jasmine.createSpyObj('rendererMock', ['selectRootElement',
+    //     'createElement',
+    //     'createViewRoot',
+    //     'createText',
+    //     'setElementProperty',
+    //     'setElementAttribute',
+    //     'setText',
+    //     'setBindingDebugInfo',
+    //     'createTemplateAnchor',
+    //     'projectNodes',
+    //     'attachViewAfter',
+    //     'detachView',
+    //     'destroyView',
+    //     'listen',
+    //     'listenGlobal',
+    //     'setElementClass',
+    //     'setElementStyle',
+    //     'invokeElementMethod',
+    //     'animate']);
 
 
 
-    let rootRendererMock = {
-        renderComponent: () => {
-            return rendererMock;
-        }
-    };
+    // let rootRendererMock = {
+    //     renderComponent: () => {
+    //         return rendererMock;
+    //     }
+    // };
 
 
 
@@ -59,33 +59,39 @@ describe('ListItemComponent', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [ListItemComponent, ListItemHeaderComponent],
+            declarations: [
+                ListItemComponent,
+                ListItemHeaderComponent,
+                ListColumnComponent,
+                ListItemContentComponent
+            ],
             imports: [CommonModule],
             providers: [
                 { provide: ElementRef, useClass: MockElementRef },
-                { provide: Renderer, useValue: rootRendererMock },
+                { provide: Renderer },
                 { provide: ListItemJqeuryHelper, useValue: jqueryHelper }]
         });
 
         TestBed.overrideComponent(ListItemComponent, {
             set: {
-                templateUrl: './list-item.component.html'
+                template: `
+                <vgr-list-item-header>
+                   <vgr-list-column [text]="'Testman'"></vgr-list-column>
+               </vgr-list-item-header>
+               <vgr-list-item-content>
+                 <span> Mer information</span>
+               </vgr-list-item-content>`
             }
         });
-
-
 
         TestBed.compileComponents().then(() => {
             // spyOn(jqueryHelper, 'collapseContent');
 
             fixture = TestBed.createComponent(ListItemComponent);
-            fixture.componentInstance.listItemHeader = new ListItemHeaderComponent(new MockElementRef(), rendererMock);
-            fixture.componentInstance.listContent = new ListItemContentComponent(new MockElementRef(), rendererMock);
+            fixture.componentInstance.listItemHeader = <ListItemHeaderComponent>fixture.debugElement.children[0].componentInstance; // First element in list-item which is list-item-header;
+            fixture.componentInstance.listContent = <ListItemContentComponent>fixture.debugElement.children[1].componentInstance;  // Second element in list-item which is list-item-content;
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
-
-
-
 
             fixture.detectChanges();
             done();
@@ -96,10 +102,38 @@ describe('ListItemComponent', () => {
             beforeEach(() => {
                 component.ngOnInit();
                 component.ngAfterContentInit();
+                // component.listItemHeader.setFocus();
             });
 
             it('the component has the list-item class', () => {
                 expect(rootElement.classes['list-item']).toBe(true);
+            });
+
+            // TODO: lägg in till egen subscribe
+            it('When header is focused and space is presssed', () => {
+                // TODO: sätta header i fokus
+                // component.listItemHeader.setFocus();
+                let header: DebugElement;
+                header = rootElement.children[0];  // First element in list-item which is list-item-header;
+                console.log('content', header.name);
+                spyOn(component.listItemHeader.expandedChanged, 'emit');
+
+                header.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
+
+                expect(component.listItemHeader.expandedChanged.emit).toHaveBeenCalledWith(true);
+            });
+
+            // TODO: lägg in till egen subscribe
+            it('When content is focused and Ctrl + PageUp is pressed', () => {
+                // TODO: sätta content i fokus
+                // component.listContent.setFocus();
+                let content: DebugElement;
+                content = rootElement.children[1]; // Second element in list-item which is list-item-content;
+                spyOn(component.listContent.goUp, 'emit');
+                console.log('content', content.name);
+
+                content.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 33 } as KeyboardEvent);
+                expect(component.listContent.goUp.emit).toHaveBeenCalled();
             });
 
             describe('and the header is clicked', () => {
@@ -121,7 +155,7 @@ describe('ListItemComponent', () => {
                 });
                 describe('and the header is clicked again', () => {
                     beforeEach(() => {
-                        spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback() });
+                        spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
                         rootElement.triggerEventHandler('click', null);
                         fixture.detectChanges();
                     });
@@ -156,7 +190,7 @@ describe('ListItemComponent', () => {
             });
             it('notification is displayed', () => {
                 expect(component.notificationVisible).toBe(true);
-            })
+            });
         });
 
         describe('When expanded is set to true', () => {
@@ -171,7 +205,7 @@ describe('ListItemComponent', () => {
             });
             afterAll(() => {
                 jasmine.clock().uninstall();
-            })
+            });
 
             it('the property expanded is set to true', () => {
                 expect(component.expanded).toBe(true);
@@ -182,7 +216,7 @@ describe('ListItemComponent', () => {
 
             describe('and a ShowOnCollapse notification is set', () => {
                 beforeEach(() => {
-                    spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback() });
+                    spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
                     component.notification = { message: 'Row saved', icon: NotificationIcon.Ok, type: NotificationType.ShowOnCollapse } as RowNotification;
                 });
                 it('notification is displayed', () => {
@@ -222,7 +256,7 @@ describe('ListItemComponent', () => {
 
             describe('and a ShowOnRemove notification is set', () => {
                 beforeEach(() => {
-                    spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback() });
+                    spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
                     component.notification = { message: 'Row deleted', icon: NotificationIcon.Ok, type: NotificationType.ShowOnRemove } as RowNotification;
                 });
                 it('notification is displayed', () => {

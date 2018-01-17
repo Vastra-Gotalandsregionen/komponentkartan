@@ -17,7 +17,7 @@ export class ListItemHeaderComponent {
 
     @HostListener('keydown', ['$event'])
     toggleExpand(event: KeyboardEvent) {
-        if (event.keyCode === 13 || event.keyCode === 32) {
+        if (event.keyCode === 13 || event.keyCode === 32) { // enter & space
             this.expandedChanged.emit(true);
             event.preventDefault();
         }
