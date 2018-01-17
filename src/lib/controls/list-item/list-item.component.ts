@@ -137,7 +137,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     public setExpandOrCollapsed() {
-        console.log('hej');
         if (!this._expanded) {
             this.expand();
         } else {

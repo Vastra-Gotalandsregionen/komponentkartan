@@ -1,5 +1,5 @@
 import {
-    Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, Renderer, OnChanges
+    Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, Renderer, OnChanges, AfterViewInit
 } from '@angular/core';
 import { SelectableItem } from '../../models/selectableItem.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 
 
-export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
+export class RadioGroupComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
     @HostBinding('id') groupId = Guid.newGuid();
@@ -24,12 +24,12 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
     @Input() options: SelectableItem<any>[];
     @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
 
+    elements: any;
     noSelectionFlag: boolean;
     constructor(private elementRef: ElementRef, private renderer: Renderer) {
     }
 
     ngOnChanges() {
-        // this.noSelectionFlag = true;
         this.noSelectionFlag = this.options.every((x) => (x.selected === false || x.selected === undefined));
 
         if (this.options && this.options.length > 0) {
@@ -38,6 +38,11 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
                 this.selectOption(preSelectedOption);
             }
         }
+    }
+
+    ngAfterViewInit() {
+        this.elements = this.elementRef.nativeElement.querySelectorAll(':not(.radio-button--disabled) .radio-button__icon');
+
     }
 
     optionClicked(option: SelectableItem<any>) {
@@ -66,28 +71,27 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
         }
     }
 
-    setFocus(option?: SelectableItem<any>, direction?: string) {
+    setFocus(option: SelectableItem<any>, direction?: string) {
         const position = this.options.indexOf(option);
         const nextItem = this.options[position + 1];
         const previousItem = this.options[position - 1];
 
-        const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
-        const enabledOptions = this.options.filter(x => !x.disabled);
 
+        const enabledOptions = this.options.filter(x => !x.disabled);
         if (direction === 'forward') {
             if (position + 1 === enabledOptions.length) {
-                this.renderer.invokeElementMethod(elements[0], 'focus');
+                this.renderer.invokeElementMethod(this.elements[0], 'focus');
                 this.optionClicked(enabledOptions[0]);
             } else {
-                this.renderer.invokeElementMethod(elements[position + 1], 'focus');
+                this.renderer.invokeElementMethod(this.elements[position + 1], 'focus');
                 this.optionClicked(nextItem);
             }
         } else if (direction === 'back') {
             if (position === 0) {
-                this.renderer.invokeElementMethod(elements[this.options.length - 1], 'focus');
+                this.renderer.invokeElementMethod(this.elements[this.options.length - 1], 'focus');
                 this.optionClicked(this.options[enabledOptions.length - 1]);
             } else {
-                this.renderer.invokeElementMethod(elements[position - 1], 'focus');
+                this.renderer.invokeElementMethod(this.elements[position - 1], 'focus');
                 this.optionClicked(previousItem);
             }
         }

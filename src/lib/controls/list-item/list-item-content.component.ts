@@ -19,7 +19,7 @@ export class ListItemContentComponent {
             this.goUp.emit();
             event.preventDefault();
         }
-        if (event.ctrlKey && event.keyCode === 34) { // PageDown
+        if (event.ctrlKey && event.keyCode === 34) { // Ctrl + PageDown
             this.goDown.emit();
             event.preventDefault();
         }
