@@ -109,6 +109,7 @@ describe('ListItemComponent', () => {
                 expect(rootElement.classes['list-item']).toBe(true);
             });
 
+            // TODO: lägg in till egen subscribe
             it('When header is focused and space is presssed', () => {
                 // TODO: sätta header i fokus
                 // component.listItemHeader.setFocus();
@@ -122,6 +123,7 @@ describe('ListItemComponent', () => {
                 expect(component.listItemHeader.expandedChanged.emit).toHaveBeenCalledWith(true);
             });
 
+            // TODO: lägg in till egen subscribe
             it('When content is focused and Ctrl + PageUp is pressed', () => {
                 // TODO: sätta content i fokus
                 // component.listContent.setFocus();
