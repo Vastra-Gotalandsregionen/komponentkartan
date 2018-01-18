@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RadioGroupComponent } from '../../controls/radioGroup/radioGroup.component';
-import { SelectableItem, ISelectableItem } from '../../models/selectableItem.model';
+import { SelectableItem } from '../../models/selectableItem.model';
 
 describe('SaveCancelComponent', () => {
     let component: RadioGroupComponent;
@@ -67,7 +67,7 @@ describe('SaveCancelComponent', () => {
                 expect(selectedOptions.map(x => x.properties['title'])).toEqual(['Caroline Bornsjö']);
             });
             it('an selectedChanged event is emitted', () => {
-                expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.options[2].value);
+                expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.radiogroupItems[2].value);
             });
 
             describe('and the already selected option is clicked again', () => {
@@ -99,7 +99,7 @@ describe('SaveCancelComponent', () => {
                 expect(selectedOptions.map(x => x.properties['title'])).toEqual(['Caroline Bornsjö']);
             });
             it('an selectedChanged event is emitted', () => {
-                expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.options[2].value);
+                expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.radiogroupItems[2].value);
             });
         });
 
@@ -115,7 +115,7 @@ describe('SaveCancelComponent', () => {
                 expect(selectedOptions.map(x => x.properties['title'])).toEqual(['Caroline Bornsjö']);
             });
             it('an selectedChanged event is emitted', () => {
-                expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.options[2].value);
+                expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.radiogroupItems[2].value);
             });
         });
 
@@ -161,7 +161,7 @@ describe('SaveCancelComponent', () => {
             expect(selectedOptions.map(x => x.properties['title'])).toEqual(['Sofia Hejdenberg']);
         });
         it('an selectedChanged event is emitted', () => {
-            expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.options[1].value);
+            expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.radiogroupItems[1].value);
         });
     });
 
@@ -203,19 +203,20 @@ describe('SaveCancelComponent', () => {
     describe('WCAG: When initialized with options', () => {
         let selectedChangedSpy: jasmine.Spy;
         let firstOption: DebugElement;
+        let visibleOptions: DebugElement[];
         beforeEach(() => {
             selectedChangedSpy = spyOn(component.selectedChanged, 'emit');
             component.options = [
-                { disabled: false, selected: false, value: { id: 'PÅ', displayName: 'Per Åkerberg' } as ISelectableItem },
-                { disabled: false, selected: false, value: { id: 'PÅ', displayName: 'Per Åkerberg' } as ISelectableItem },
-                { disabled: false, selected: false, value: { id: 'SH', displayName: 'Sofia Hejdenberg' } as ISelectableItem },
-                { disabled: false, selected: false, value: { id: 'CB', displayName: 'Caroline Bornsjö' } as ISelectableItem },
+                { disabled: false, selected: false, value: 'PÅ', displayName: 'Per Åkerberg' } as SelectableItem<string>,
+                { disabled: false, selected: false, value: 'SH', displayName: 'Sofia Hejdenberg' } as SelectableItem<string>,
+                { disabled: false, selected: false, value: 'CB', displayName: 'Caroline Bornsjö' } as SelectableItem<string>,
             ] as SelectableItem<any>[];
-            component.noSelectionFlag = true;
 
 
             fixture.detectChanges();
-            firstOption = rootElement.queryAll(By.css('.radio-button'))[0];
+            firstOption = rootElement.queryAll(By.css('.radio-button__icon'))[0];
+
+            visibleOptions = rootElement.queryAll(By.css('.radio-button__icon'));
         });
 
         it('no option is selected', () => {
@@ -229,35 +230,123 @@ describe('SaveCancelComponent', () => {
             expect(firstOption.attributes['role']).toBe('radio');
         });
 
-        describe('The radiogroup has an accessible label, preferably provided by a visible label associated using aria-labelledby', () => {
-            it('radiogroup has a label with an id', () => {
+        describe('The aria-labelledby is defined on the radiobutton ', () => {
+            it('radiobutton has a label with a guid', () => {
                 const labelElement = rootElement.query(By.css('.radio-button__text'));
-                expect(labelElement.nativeElement.id).toBe('radio-button-label__0');
+                expect(labelElement.nativeElement.id).toBe(component.radiogroupItems[0].ariaid);
             });
             it('radiobutton is associated with the label', () => {
-                expect(firstOption.attributes['aria-labelledby']).toContain('radio-button-label__0');
+                expect(firstOption.attributes['aria-labelledby']).toBe(component.radiogroupItems[0].ariaid);
+            });
+            it('radiobuttons labels are unique', () => {
+                expect(component.radiogroupItems[0].ariaid).not.toBe(component.radiogroupItems[1].ariaid);
             });
         });
 
-        it('When checked, the radiobutton element has state aria-checked set to true', () => {
-            component.options[0].selected = true;
-            fixture.detectChanges();
-            expect(firstOption.attributes['aria-checked']).toBe('true');
+        describe('Aria-check state is set ', () => {
+
+            describe('when checked', () => {
+                beforeEach(() => {
+                    component.radiogroupItems[0].selected = true;
+                    fixture.detectChanges();
+                });
+                it('the radiobutton element has state aria-checked set to true', () => {
+                    expect(firstOption.attributes['aria-checked']).toBe('true');
+                })
+
+                describe('when not checked', () => {
+                    beforeEach(() => {
+                        component.radiogroupItems[0].selected = false;
+                        fixture.detectChanges();
+
+                    });
+                    it('the radiobutton element has state aria-checked set to false', () => {
+                        expect(firstOption.attributes['aria-checked']).toBe('false');
+                    })
+                });
+
+            })
+
         });
 
-        it('When not checked, it has state aria-checked set to false', () => {
-            component.options[0].selected = false;
-            fixture.detectChanges();
-            expect(firstOption.attributes['aria-checked']).toBe('false');
+        describe('Tabstop is set', () => {
+
+            describe('When no option is selected', () => {
+                it('first element has tabstop', () => {
+                    for (let i = 0; i < visibleOptions.length; i++) {
+                        expect(visibleOptions[i].properties['tabIndex']).toBe(i === 0 ? '0' : '-1');
+                    }
+                });
+
+                describe('When second option is selected', () => {
+                    describe('the second option is the first tabstop', () => {
+                        let selectedOptions: DebugElement[];
+                        beforeEach(() => {
+                            const optionToSelect = rootElement.queryAll(By.css('.radio-button')).filter(x => x.properties['title'] === 'Sofia Hejdenberg')[0];
+
+                            optionToSelect.triggerEventHandler('click', null);
+                            fixture.detectChanges();
+                            selectedOptions = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
+
+                        });
+                        it('the option is  selected', () => {
+
+                            expect(selectedOptions.length).toEqual(1);
+                        });
+                        it('the selected option has tabstop', () => {
+                            expect(selectedOptions[0].properties['tabIndex']).toBe('0');
+                        });
+                        it('only the second option has first tabstop', () => {
+                            for (let i = 0; i < visibleOptions.length; i++) {
+                                expect(visibleOptions[i].properties['tabIndex']).toBe(i === 1 ? '0' : '-1');
+                            }
+                        });
+
+                    });
+                });
+
+            });
         });
+        describe('When first option is selected', () => {
+            let selectedOption: DebugElement[];
+            let optionToSelect: DebugElement;
 
 
-        // it('radiobuttons in group has tabstop', () => {
-        //     const visibleOptions = rootElement.queryAll(By.css('.radio-button__icon'));
+            beforeEach(() => {
+                //   spyOn(component, 'setFocus');
+                optionToSelect = rootElement.queryAll(By.css('.radio-button')).filter(x => x.properties['title'] === 'Per Åkerberg')[0];
 
-        //     visibleOptions.forEach(e => expect(e.properties['tabIndex']).toBe('0'));
-        // });
+                optionToSelect.triggerEventHandler('click', null);
+                fixture.detectChanges();
+                selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
 
 
+
+            });
+            it('the option is  selected', () => {
+                expect(selectedOption[0].parent.properties['title']).toEqual('Per Åkerberg');
+
+            });
+            // describe('and right key is pressed', () => {
+            //     beforeEach(() => {
+            //         selectedOption[0].parent.triggerEventHandler('keydown', { keyCode: 39, preventDefault: function () { } } as KeyboardEvent);
+            //         fixture.detectChanges();
+            //         console.log(rootElement.children);
+            //         selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
+
+
+            //     });
+            //     it('next option is selected', () => {
+            //         expect(selectedOption.length).toBe(1);
+            //     });
+
+            //     it('next option is selected', () => {
+            //         expect(selectedOption[0].parent.properties['title']).toEqual('Sofia Hejdenberg');
+            //     });
+            //     // it('setFous has been called', () => {
+            //     //     expect(component.setFocus).toHaveBeenCalled();
+            //     // })
+            // })
+        });
     });
 });

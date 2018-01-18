@@ -3,7 +3,7 @@ export interface SelectableItem<TValue> {
     value: TValue;
     selected?: boolean;
     disabled?: boolean;
-    ariaid?: string;
+
 }
 
 export interface ISelectableItem {
@@ -11,5 +11,4 @@ export interface ISelectableItem {
     id: string;
     selected?: boolean;
     disabled?: boolean;
-    ariaid?: string;
 }
