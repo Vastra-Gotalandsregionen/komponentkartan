@@ -74,7 +74,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         }
 
         if (event.keyCode === 39 || event.keyCode === 38) {
-
             this.setFocus(option, 'forward');
             event.preventDefault();
         }
@@ -86,7 +85,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     }
 
     setFocus(option: RadioGroupItem<any>, direction?: string) {
-        console.log('hej');
         const position = this.radiogroupItems.indexOf(option);
         const nextItem = this.radiogroupItems[position + 1];
         const previousItem = this.radiogroupItems[position - 1];
@@ -98,6 +96,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
                 this.renderer.invokeElementMethod(this.elements[0], 'focus');
                 this.optionClicked(enabledOptions[0]);
             } else {
+
                 this.renderer.invokeElementMethod(this.elements[position + 1], 'focus');
                 this.optionClicked(nextItem);
             }
@@ -143,7 +142,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
             o.selected = (o === option);
         });
         option.selected = true;
-        //this.noSelectionFlag = false;
+        // this.noSelectionFlag = false;
         this.onChange(option.value);
         this.selectedChanged.emit(option.value);
     }

@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { RadioGroupComponent } from '../../controls/radioGroup/radioGroup.component';
 import { SelectableItem } from '../../models/selectableItem.model';
 
-describe('SaveCancelComponent', () => {
+describe('RadioGroupComponent', () => {
     let component: RadioGroupComponent;
     let fixture: ComponentFixture<RadioGroupComponent>;
     let rootElement: DebugElement;
@@ -108,6 +108,7 @@ describe('SaveCancelComponent', () => {
                 selectedChangedSpy.calls.reset();
                 const optionToSelect = rootElement.queryAll(By.css('.radio-button')).filter(x => x.properties['title'] === 'Caroline Bornsjö')[0];
                 optionToSelect.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+
                 fixture.detectChanges();
             });
             it('the option is selected', () => {
@@ -252,7 +253,7 @@ describe('SaveCancelComponent', () => {
                 });
                 it('the radiobutton element has state aria-checked set to true', () => {
                     expect(firstOption.attributes['aria-checked']).toBe('true');
-                })
+                });
 
                 describe('when not checked', () => {
                     beforeEach(() => {
@@ -262,10 +263,10 @@ describe('SaveCancelComponent', () => {
                     });
                     it('the radiobutton element has state aria-checked set to false', () => {
                         expect(firstOption.attributes['aria-checked']).toBe('false');
-                    })
+                    });
                 });
 
-            })
+            });
 
         });
 
@@ -313,40 +314,33 @@ describe('SaveCancelComponent', () => {
 
 
             beforeEach(() => {
-                //   spyOn(component, 'setFocus');
                 optionToSelect = rootElement.queryAll(By.css('.radio-button')).filter(x => x.properties['title'] === 'Per Åkerberg')[0];
-
                 optionToSelect.triggerEventHandler('click', null);
                 fixture.detectChanges();
                 selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
-
-
-
             });
             it('the option is  selected', () => {
                 expect(selectedOption[0].parent.properties['title']).toEqual('Per Åkerberg');
 
             });
-            // describe('and right key is pressed', () => {
-            //     beforeEach(() => {
-            //         selectedOption[0].parent.triggerEventHandler('keydown', { keyCode: 39, preventDefault: function () { } } as KeyboardEvent);
-            //         fixture.detectChanges();
-            //         console.log(rootElement.children);
-            //         selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
+            describe('and right key is pressed', () => {
+                let currentSelection: DebugElement;
+                beforeEach(() => {
+                    selectedChangedSpy.calls.reset();
+                    currentSelection = rootElement.query(By.css('.radio-button--checked'));
+                    currentSelection.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
 
+                    fixture.detectChanges();
+                });
+                it('next option is selected', () => {
+                    expect(selectedOption.length).toBe(1);
+                });
 
-            //     });
-            //     it('next option is selected', () => {
-            //         expect(selectedOption.length).toBe(1);
-            //     });
-
-            //     it('next option is selected', () => {
-            //         expect(selectedOption[0].parent.properties['title']).toEqual('Sofia Hejdenberg');
-            //     });
-            //     // it('setFous has been called', () => {
-            //     //     expect(component.setFocus).toHaveBeenCalled();
-            //     // })
-            // })
+                it('next option is selected', () => {
+                    currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
+                    // expect(currentSelection.properties['title']).toEqual('Sofia Hejdenberg');
+                });
+            });
         });
     });
 });
