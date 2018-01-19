@@ -47,7 +47,7 @@ export class ListComponent implements AfterContentInit {
     }
 
     // TODO: skapa test
-    setFocusOnPreviousRow(item: ListItemComponent, index: number) {
+    setFocusOnPreviousRow(item: ListItemComponent, index: number): any {
         if (index === 0) {
             this.items.toArray()[this.items.length - 1].setFocusOnRow();
         } else {

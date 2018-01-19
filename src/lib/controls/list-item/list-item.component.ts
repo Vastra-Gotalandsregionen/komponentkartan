@@ -99,7 +99,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     setFocusOnRow() {
         this.listItemHeader.setFocus();
-
     }
 
     copyPropertiesFromHeader(header: ListHeaderComponent) {

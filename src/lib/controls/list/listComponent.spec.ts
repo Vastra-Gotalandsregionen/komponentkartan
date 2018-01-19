@@ -5,8 +5,6 @@ import { ListItemHeaderComponent } from '../list-item/list-item-header.component
 describe('[ListComponent]', () => {
     let listComponent: ListComponent;
 
-
-
     beforeEach(() => {
         listComponent = new ListComponent();
         listComponent.listHeader = new ListHeaderComponent();
@@ -66,6 +64,21 @@ describe('[ListComponent]', () => {
                     });
                 });
             });
+        });
+
+        describe('if focus is on the first list-item header', () => {
+            beforeEach(() => {
+                spyOn(listComponent, 'setFocusOnPreviousRow');
+                listComponent.setFocusOnPreviousRow(childItem1, 0);
+
+            });
+            it('setFocusOnPreviousRow toHaveBeenCalled ', () => {
+                expect(listComponent.setFocusOnPreviousRow).toHaveBeenCalledWith(childItem1, 0);
+            });
+            it('setFocus on last row', () => {
+                expect(listComponent.items.toArray()[listComponent.items.toArray().length - 1]).toBeTruthy();
+            });
+
         });
     });
 });
