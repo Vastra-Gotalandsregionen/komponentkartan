@@ -43,6 +43,9 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     constructor(private elementRef: ElementRef, private renderer: Renderer) {
     }
 
+    get classRenderer(): Renderer {
+        return this.renderer;
+    }
 
     ngOnChanges() {
         if (this.radiogroupItems && this.radiogroupItems.length > 0) {
@@ -89,14 +92,12 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         const nextItem = this.radiogroupItems[position + 1];
         const previousItem = this.radiogroupItems[position - 1];
 
-
         const enabledOptions = this.radiogroupItems.filter(x => !x.disabled);
         if (direction === 'forward') {
             if (position + 1 === enabledOptions.length) {
                 this.renderer.invokeElementMethod(this.elements[0], 'focus');
                 this.optionClicked(enabledOptions[0]);
             } else {
-
                 this.renderer.invokeElementMethod(this.elements[position + 1], 'focus');
                 this.optionClicked(nextItem);
             }
@@ -142,12 +143,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
             o.selected = (o === option);
         });
         option.selected = true;
-        // this.noSelectionFlag = false;
         this.onChange(option.value);
         this.selectedChanged.emit(option.value);
     }
 }
-
 
 export interface RadioGroupItem<TValue> extends SelectableItem<TValue> {
     ariaid?: string;
