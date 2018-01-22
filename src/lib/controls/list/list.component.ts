@@ -21,18 +21,13 @@ export class ListComponent implements AfterContentInit {
     ngAfterContentInit() {
         this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
         this.copyItemWidthsFromHeader();
-
-        if (this.items.length > 0) {
-            this.init();
-        } else {
-            this.init();
-            this.items.changes.subscribe(() => {
-                this.init();
-            });
-        }
+        this.subscribeEvents();
+        this.items.changes.subscribe(() => {
+            this.subscribeEvents();
+        });
     }
 
-    init() {
+    subscribeEvents() {
         if (!this.allowMultipleExpandedItems) {
             this.items.forEach(changedContainer => {
                 changedContainer.expandedChanged.subscribe((expanded: boolean) => {
