@@ -89,7 +89,6 @@
 }
 
 .card-section__header__expander {
-  @extend .bg-image-icon-chevron;
   display: inline-block;
   margin-right: $margin--slim;
   width: 15px;
@@ -97,18 +96,27 @@
   background-size: 100%;
   vertical-align: middle;
   margin-left: auto;
-  transform: rotate(0deg);
-  transition: transform 0.4s;
-  .card-section--expanded & {
-    transform: rotate(-180deg);
-    transition: transform 0.4s;
+  &.expanded {
+    @extend .chevron-expanded;
+  }
+  &.collapsed {
+    @extend .chevron-collapsed;
   }
 }
 
 .card-section__content {
-  padding-bottom: $margin--slim;
-  display: none;
-  padding-top: $margin--slim;
+  .card-section--collapsed & {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in, padding 0.4s ease-in;
+  }
+  .card-section--expanded & {
+    max-height: 999px;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-in-out;
+    padding-bottom: $margin--slim;
+    padding-top: $margin--slim;
+  }
 }
 
 @media screen and (min-width: $desktop-width--medium) {

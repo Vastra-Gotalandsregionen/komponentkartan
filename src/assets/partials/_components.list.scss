@@ -231,7 +231,7 @@
   .list-item--expanded & {
     // jQuery slideUp verkar sätta display inline. Blir ej bra.
     // Lyckades inte overridea så detta löser problemet (om än inte på ett snyggt sätt)
-    display: block !important;
+    display: block;
   }
 }
 

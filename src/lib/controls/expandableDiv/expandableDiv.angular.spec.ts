@@ -53,6 +53,7 @@ describe('[ExpandableDivComponent]', () => {
         });
 
 
+        // Todo, få bortkommenterade testet att lira.
         describe('and header is clicked', () => {
             beforeEach(() => {
                 header = rootElement.query(By.css('.expandable-div-header'));
@@ -61,8 +62,7 @@ describe('[ExpandableDivComponent]', () => {
             });
 
             it('div is collapsed', () => {
-                // TODO: Test funkar inte pga fördröjning på 400ms
-                // expect(component.expanded).toBe(false);
+                expect(component.expanded).toBe(false);
             });
 
             describe('and header is clicked again', () => {
@@ -88,6 +88,7 @@ describe('[ExpandableDivComponent]', () => {
             expect(rootElement.classes['expandable-div--expanded']).toBe(false);
         });
 
+        // Todo, få bortkommenterade testet att lira.
         describe('and header is clicked', () => {
             beforeEach(() => {
                 header = rootElement.query(By.css('.expandable-div-header'));
@@ -104,8 +105,7 @@ describe('[ExpandableDivComponent]', () => {
                     fixture.detectChanges();
                 });
                 it('div is collapsed', () => {
-                    // TODO: Test funkar inte pga fördröjning på 400ms
-                    // expect(component.expanded).toBe(false);
+                    expect(component.expanded).toBe(false);
                 });
             });
         });

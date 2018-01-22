@@ -2,14 +2,16 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, Renderer, ElementRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RowNotification } from '../../models/rowNotification.model';
 import { NotificationIcon } from '../../models/notificationIcon.model';
 import { NotificationType } from '../../models/notificationType.model';
 
-import { ListItemComponent } from '../../controls/list-item/list-item.component';
-import { ListItemJqeuryHelper } from '../../controls/list-item/listItemJqueryHelper';
+import {
+    ListItemComponent, ListItemHeaderComponent, ListColumnComponent,
+    ListItemContentComponent, ListItemJqeuryHelper
+} from '../../controls/index';
 
 
 describe('ListItemComponent', () => {
@@ -22,22 +24,38 @@ describe('ListItemComponent', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [ListItemComponent],
+            declarations: [
+                ListItemComponent,
+                ListItemHeaderComponent,
+                ListColumnComponent,
+                ListItemContentComponent
+            ],
             imports: [CommonModule],
-            providers: [{ provide: ListItemJqeuryHelper, useValue: jqueryHelper }]
+            providers: [
+                { provide: ElementRef },
+                { provide: Renderer },
+                { provide: ListItemJqeuryHelper, useValue: jqueryHelper }]
         });
 
         TestBed.overrideComponent(ListItemComponent, {
             set: {
-                templateUrl: './list-item.component.html'
+                template: `
+                <vgr-list-item-header>
+                   <vgr-list-column [text]="'Testman'"></vgr-list-column>
+               </vgr-list-item-header>
+               <vgr-list-item-content>
+                 <span> Mer information</span>
+               </vgr-list-item-content>`
             }
         });
 
         TestBed.compileComponents().then(() => {
-            // spyOn(jqueryHelper, 'collapseContent');
             fixture = TestBed.createComponent(ListItemComponent);
+            fixture.componentInstance.listItemHeader = <ListItemHeaderComponent>fixture.debugElement.children[0].componentInstance; // First element in list-item which is list-item-header;
+            fixture.componentInstance.listContent = <ListItemContentComponent>fixture.debugElement.children[1].componentInstance;  // Second element in list-item which is list-item-content;
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
+
             fixture.detectChanges();
             done();
         });
@@ -46,13 +64,14 @@ describe('ListItemComponent', () => {
         describe('When initialized', () => {
             beforeEach(() => {
                 component.ngOnInit();
+                component.ngAfterContentInit();
             });
 
             it('the component has the list-item class', () => {
                 expect(rootElement.classes['list-item']).toBe(true);
             });
 
-            describe('and the header is clicked', () => {
+            describe('and the list-item-header is clicked', () => {
                 const event: any = {};
                 beforeEach(() => {
                     spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(true);
@@ -71,7 +90,7 @@ describe('ListItemComponent', () => {
                 });
                 describe('and the header is clicked again', () => {
                     beforeEach(() => {
-                        spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback() });
+                        spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
                         rootElement.triggerEventHandler('click', null);
                         fixture.detectChanges();
                     });
@@ -83,7 +102,181 @@ describe('ListItemComponent', () => {
                     });
                 });
             });
-            describe('the component is clicked outside of the header', () => {
+
+            describe('and the list-item-header is in focus', () => {
+                let header: DebugElement;
+                beforeEach(() => {
+                    header = rootElement.children[0];  // First element in list-item which is list-item-header;
+                    spyOn(component.listItemHeader.expandedChanged, 'emit').and.callThrough();
+                    spyOn(component.listItemHeader.goToFirst, 'emit').and.callThrough();
+                    spyOn(component.listItemHeader.goToLast, 'emit').and.callThrough();
+                    spyOn(component.listItemHeader.goUp, 'emit').and.callThrough();
+                    spyOn(component.listItemHeader.goDown, 'emit').and.callThrough();
+
+                    spyOn(component.setFocusOnFirstRow, 'emit');
+                    spyOn(component.setFocusOnLastRow, 'emit');
+                    spyOn(component.setFocusOnPreviousRow, 'emit');
+                    spyOn(component.setFocusOnNextRow, 'emit');
+                    spyOn(component.setFocusOnPreviousRowContent, 'emit');
+                    spyOn(component.setFocusOnNextRowContent, 'emit');
+
+                    component.ngOnInit();
+                    fixture.detectChanges();
+                });
+
+                describe('and the header is pressed with space', () => {
+                    beforeEach(() => {
+                        header.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
+                    });
+
+                    it('expandedChanged event has been emitted', () => {
+                        expect(component.listItemHeader.expandedChanged.emit).toHaveBeenCalledWith(true);
+                    });
+
+                    it('component is expanded', () => {
+                        expect(component.expanded).toBe(true);
+                    });
+                });
+
+                describe('and the header is pressed with enter', () => {
+                    beforeEach(() => {
+                        header.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
+                    });
+
+                    it('expandedChanged event has been emitted', () => {
+                        expect(component.listItemHeader.expandedChanged.emit).toHaveBeenCalledWith(true);
+                    });
+
+                    it('component is expanded', () => {
+                        expect(component.expanded).toBe(true);
+                    });
+                });
+
+                describe('and the header is pressed with Home key', () => {
+                    beforeEach(() => {
+                        header.triggerEventHandler('keydown', { keyCode: 36 } as KeyboardEvent);
+                    });
+
+                    it('goToFirst event has been emitted', () => {
+                        expect(component.listItemHeader.goToFirst.emit).toHaveBeenCalled();
+                    });
+
+                    it('setFocusOnFirstRow event is emitted', () => {
+                        expect(component.setFocusOnFirstRow.emit).toHaveBeenCalled();
+                    });
+                });
+
+                describe('and the header is pressed with End key', () => {
+                    beforeEach(() => {
+                        header.triggerEventHandler('keydown', { keyCode: 35 } as KeyboardEvent);
+                    });
+
+                    it('goToLast event has been emitted', () => {
+                        expect(component.listItemHeader.goToLast.emit).toHaveBeenCalled();
+                    });
+
+                    it('setFocusOnLastRow event is emitted', () => {
+                        expect(component.setFocusOnLastRow.emit).toHaveBeenCalled();
+                    });
+                });
+
+                describe('and the header is pressed with Ctrl + PageUp', () => {
+                    beforeEach(() => {
+                        header.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 33 } as KeyboardEvent);
+                    });
+
+                    it('goToLast event has been emitted', () => {
+                        expect(component.listItemHeader.goUp.emit).toHaveBeenCalled();
+                    });
+
+                    it('setFocusOnPreviousRow event is emitted', () => {
+                        expect(component.setFocusOnPreviousRow.emit).toHaveBeenCalled();
+                    });
+                });
+
+                describe('and the header is pressed with Ctrl + PageDown', () => {
+                    beforeEach(() => {
+                        header.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 34 } as KeyboardEvent);
+                    });
+
+                    it('goToLast event has been emitted', () => {
+                        expect(component.listItemHeader.goDown.emit).toHaveBeenCalled();
+                    });
+
+                    it('setFocusOnNextRow event is emitted', () => {
+                        expect(component.setFocusOnNextRow.emit).toHaveBeenCalled();
+                    });
+                });
+
+                describe('and the header is pressed with Arrow Up', () => {
+                    beforeEach(() => {
+                        header.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
+                    });
+
+                    it('goToLast event has been emitted', () => {
+                        expect(component.listItemHeader.goUp.emit).toHaveBeenCalled();
+                    });
+
+                    it('setFocusOnPreviousRow event is emitted', () => {
+                        expect(component.setFocusOnPreviousRow.emit).toHaveBeenCalled();
+                    });
+                });
+
+                describe('and the header is pressed with Arrow Down', () => {
+                    beforeEach(() => {
+                        header.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+                    });
+
+                    it('goToLast event has been emitted', () => {
+                        expect(component.listItemHeader.goDown.emit).toHaveBeenCalled();
+                    });
+
+                    it('setFocusOnNextRow event is emitted', () => {
+                        expect(component.setFocusOnNextRow.emit).toHaveBeenCalled();
+                    });
+                });
+            });
+
+            describe('and the list-item-content is in focus', () => {
+                let content: DebugElement;
+
+                beforeEach(() => {
+                    content = rootElement.children[1];
+                    spyOn(component.listContent.goUp, 'emit').and.callThrough();
+                    spyOn(component.listContent.goDown, 'emit').and.callThrough();
+                    spyOn(component.setFocusOnPreviousRowContent, 'emit');
+                    spyOn(component.setFocusOnNextRowContent, 'emit');
+                    component.ngOnInit();
+                });
+
+                describe('and the content is pressed with Ctrl + PageUp', () => {
+                    beforeEach(() => {
+                        content.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 33 } as KeyboardEvent);
+                    });
+
+                    it('go up event is emitted', () => {
+                        expect(component.listContent.goUp.emit).toHaveBeenCalled();
+                    });
+                    it('setFocusOnPreviousRowContent event is emitted', () => {
+                        expect(component.setFocusOnPreviousRowContent.emit).toHaveBeenCalled();
+                    });
+                });
+
+                describe('and the content is pressed with Ctrl + PageDown', () => {
+                    beforeEach(() => {
+                        content.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 34 } as KeyboardEvent);
+                    });
+
+                    it('go up event is emitted', () => {
+                        expect(component.listContent.goDown.emit).toHaveBeenCalled();
+                    });
+                    it('setFocusOnNextRowContent event is emitted', () => {
+                        expect(component.setFocusOnNextRowContent.emit).toHaveBeenCalled();
+                    });
+                });
+            });
+
+            describe('the component is clicked outside of the list-item-header', () => {
                 beforeEach(() => {
                     spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(false);
                     spyOn(jqueryHelper, 'toggleContent');
@@ -106,7 +299,7 @@ describe('ListItemComponent', () => {
             });
             it('notification is displayed', () => {
                 expect(component.notificationVisible).toBe(true);
-            })
+            });
         });
 
         describe('When expanded is set to true', () => {
@@ -121,7 +314,7 @@ describe('ListItemComponent', () => {
             });
             afterAll(() => {
                 jasmine.clock().uninstall();
-            })
+            });
 
             it('the property expanded is set to true', () => {
                 expect(component.expanded).toBe(true);
@@ -132,7 +325,7 @@ describe('ListItemComponent', () => {
 
             describe('and a ShowOnCollapse notification is set', () => {
                 beforeEach(() => {
-                    spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback() });
+                    spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
                     component.notification = { message: 'Row saved', icon: NotificationIcon.Ok, type: NotificationType.ShowOnCollapse } as RowNotification;
                 });
                 it('notification is displayed', () => {
@@ -172,7 +365,7 @@ describe('ListItemComponent', () => {
 
             describe('and a ShowOnRemove notification is set', () => {
                 beforeEach(() => {
-                    spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback() });
+                    spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
                     component.notification = { message: 'Row deleted', icon: NotificationIcon.Ok, type: NotificationType.ShowOnRemove } as RowNotification;
                 });
                 it('notification is displayed', () => {
@@ -248,5 +441,3 @@ describe('ListItemComponent', () => {
         });
     });
 });
-
-

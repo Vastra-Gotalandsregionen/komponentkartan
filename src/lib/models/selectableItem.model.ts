@@ -3,6 +3,7 @@ export interface SelectableItem<TValue> {
     value: TValue;
     selected?: boolean;
     disabled?: boolean;
+
 }
 
 export interface ISelectableItem {
