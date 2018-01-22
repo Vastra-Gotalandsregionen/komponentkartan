@@ -12,5 +12,5 @@
   </div>
 </div>
 <div class="list-item__content">
-  <ng-content select="vgr-list-item-content"></ng-content>
+  <ng-content *ngIf="expanded" select="vgr-list-item-content"></ng-content>
 </div>
