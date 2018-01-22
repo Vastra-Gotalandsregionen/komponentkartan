@@ -1,5 +1,7 @@
 import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Guid } from '../../utils/guid';
+
 
 @Component({
     selector: 'vgr-checkbox',
@@ -17,9 +19,13 @@ export class CheckboxComponent implements ControlValueAccessor {
     @Output() checkedChanged = new EventEmitter<boolean>();
     @Input() label: string;
 
+
+
+    labelledbyid: string = Guid.newGuid();
     constructor() {
         this.disabled = false;
         this.checked = false;
+
     }
     onClick(): void {
         if (!this.disabled) {
