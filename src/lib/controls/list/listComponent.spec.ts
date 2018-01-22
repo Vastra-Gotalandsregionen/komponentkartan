@@ -26,7 +26,6 @@ describe('[ListComponent]', () => {
         const childItem3 = { setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), copyPropertiesFromHeader: (h) => { }, expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
 
         beforeEach(() => {
-            listComponent.items = new QueryList<ListItemComponent>();
             spyOn(childItem1, 'copyPropertiesFromHeader');
             spyOn(childItem2, 'copyPropertiesFromHeader');
             spyOn(childItem3, 'copyPropertiesFromHeader');
