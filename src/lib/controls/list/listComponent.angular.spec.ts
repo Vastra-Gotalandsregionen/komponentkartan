@@ -83,12 +83,12 @@
 //         beforeEach(() => {
 //           let header: DebugElement;
 //           header = rootElement.children[0];
-//           spyOn(component.items.first.setFocusOnFirstRow, 'emit').and.callThrough();
+//           spyOn(component.items.first.setFocusOnFirstRow, 'emit');
 //           header.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
 //         });
 
 //         it('component is expanded', () => {
-//           expect(component.items.first.listItemHeader.expandedChanged).toBe(true);
+//           // expect(component.items.first.listItemHeader.expandedChanged).toBe(true);
 //         });
 //       });
 //     });

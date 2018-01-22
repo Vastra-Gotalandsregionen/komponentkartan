@@ -39,25 +39,25 @@ export class ListComponent implements AfterContentInit {
         this.items.forEach((item, index) => {
             item.setFocusOnFirstRow.subscribe(() => this.items.first.setFocusOnRow());
             item.setFocusOnLastRow.subscribe(() => this.items.last.setFocusOnRow());
-            item.setFocusOnPreviousRow.subscribe(() => this.setFocusOnPreviousRow(item, index));
-            item.setFocusOnNextRow.subscribe(() => this.setFocusOnNextRow(item, index));
-            item.setFocusOnPreviousRowContent.subscribe(() => this.setFocusOnPreviousRowContent(item, index));
-            item.setFocusOnNextRowContent.subscribe(() => this.setFocusOnNextRow(item, index));
+            item.setFocusOnPreviousRow.subscribe(() => this.setFocusOnPreviousRow(index));
+            item.setFocusOnNextRow.subscribe(() => this.setFocusOnNextRow(index));
+            item.setFocusOnPreviousRowContent.subscribe(() => this.setFocusOnPreviousRowContent(item));
+            item.setFocusOnNextRowContent.subscribe(() => this.setFocusOnNextRow(index));
         });
     }
 
     // TODO: skapa test
-    setFocusOnPreviousRow(item: ListItemComponent, index: number): any {
+    setFocusOnPreviousRow(index: number): any {
         if (index === 0) {
-            this.items.toArray()[this.items.length - 1].setFocusOnRow();
+            this.items.toArray()[this.items.toArray().length - 1].setFocusOnRow();
         } else {
             this.items.toArray()[index - 1].setFocusOnRow();
         }
     }
 
     // TODO: skapa test
-    setFocusOnNextRow(item: ListItemComponent, index: number) {
-        if (index + 1 === this.items.length) {
+    setFocusOnNextRow(index: number) {
+        if (index + 1 === this.items.toArray().length) {
             this.items.toArray()[0].setFocusOnRow();
         } else {
             this.items.toArray()[index + 1].setFocusOnRow();
@@ -65,7 +65,7 @@ export class ListComponent implements AfterContentInit {
     }
 
     // TODO: skapa test
-    setFocusOnPreviousRowContent(item: ListItemComponent, index: number) {
+    setFocusOnPreviousRowContent(item: ListItemComponent) {
         if (!item.collapsed) {
             item.setFocusOnRow();
         }
