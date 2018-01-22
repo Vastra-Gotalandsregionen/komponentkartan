@@ -4,7 +4,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { Guid } from '../../utils/guid';
 import { CheckboxComponent } from './checkbox.component';
 
 
@@ -149,7 +149,9 @@ describe('CheckboxComponent', () => {
 
     describe('WCAG compatibility', () => {
         let checkboximage: DebugElement;
+
         beforeEach(() => {
+
             checkboximage = rootElement.query(By.css('.checkbox__image'));
             fixture.detectChanges();
         });
@@ -158,9 +160,12 @@ describe('CheckboxComponent', () => {
         });
 
         describe('The checkbox has an accessible label, preferably provided by a visible label associated using aria-labelledby', () => {
-            const labelElement = rootElement.query(By.css('.checkbox__label'));
-            it('checkbox is associated with the label', () => {
+            let labelElement: DebugElement;
+            beforeEach(() => {
+                labelElement = rootElement.query(By.css('.checkbox__label'));
+            });
 
+            it('checkbox is associated with the label', () => {
                 expect(labelElement.nativeElement.id).toBe(component.labelledbyid);
             });
             it('checkbox has a label with an id', () => {
