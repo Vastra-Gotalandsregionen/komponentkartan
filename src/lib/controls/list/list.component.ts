@@ -16,12 +16,18 @@ export class ListComponent implements AfterContentInit {
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
 
     constructor() {
-
     }
 
     ngAfterContentInit() {
         this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
         this.copyItemWidthsFromHeader();
+        this.subscribeEvents();
+        this.items.changes.subscribe(() => {
+            this.subscribeEvents();
+        });
+    }
+
+    subscribeEvents() {
         if (!this.allowMultipleExpandedItems) {
             this.items.forEach(changedContainer => {
                 changedContainer.expandedChanged.subscribe((expanded: boolean) => {

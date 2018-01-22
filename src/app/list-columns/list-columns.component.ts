@@ -17,8 +17,8 @@ export class ListColumnsComponent implements OnInit {
 
     ngOnInit() {
         this.loadExamplePersonWithUnitData();
-
     }
+
     loadData() {
         this.peopleRows = [
             new ExpandableRow<ExamplePerson, any>({ id: '1', firstName: 'Git', lastName: 'Hubsson', amount: 125000 }),
