@@ -14,8 +14,8 @@ export class ReactiveformsComponent implements OnInit {
   dropdownItems: DropdownItem<string>[];
   dropdownItemsMulti: DropdownItem<string>[];
 
-  minDate = new Date(2015);
-  maxDate = new Date(2025);
+  minDate = new Date('2015');
+  maxDate = new Date('2025');
 
   userForm: FormGroup;
   validationMessages = {
