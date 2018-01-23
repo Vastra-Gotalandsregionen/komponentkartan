@@ -80,13 +80,21 @@ export class ReactiveformsComponent implements OnInit {
   }
 
   createInputForm() {
-    this.inputForm = this.fb.group({
-      firstname: ['', [Validators.required, Validators.minLength(2)]],
-      lastname: ['', [Validators.required, Validators.minLength(2)]],
-      age: ['', [Validators.required, Validators.min(18), Validators.max(120), validateNumber]],
-      email: ['', [Validators.required, Validators.email]],
-      salary: ['', [Validators.required, validateNumber]]
-    }, { updateOn: 'submit' });
+    this.inputForm = new FormGroup({
+      firstname: new FormControl('Hej', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'blur' }),
+      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'submit' }),
+      age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
+      email: new FormControl('', { validators: [Validators.required, Validators.email], updateOn: 'blur' }),
+      salary: new FormControl('', { validators: [Validators.required, validateNumber], updateOn: 'blur' })
+    });
+
+    // this.inputForm = this.fb.group({
+    //   firstname: ['', [Validators.required, Validators.minLength(2)]],
+    //   lastname: ['', [Validators.required, Validators.minLength(2)]],
+    //   age: ['', [Validators.required, Validators.min(18), Validators.max(120), validateNumber]],
+    //   email: ['', [Validators.required, Validators.email]],
+    //   salary: ['', [Validators.required, validateNumber]]
+    // }, { updateOn: 'submit' });
   }
 
   onSubmit() {

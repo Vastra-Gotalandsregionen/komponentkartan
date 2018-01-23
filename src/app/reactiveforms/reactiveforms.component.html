@@ -51,18 +51,23 @@
         <vgr-title-value-layout>
           <vgr-title-value title="Förnamn">
             <vgr-input-new formControlName="firstname" [errorMessage]="validationMessages.firstname"></vgr-input-new>
+            <span>{{inputForm.controls.firstname.valid}}</span>
           </vgr-title-value>
           <vgr-title-value title="Efternamn">
             <vgr-input-new formControlName="lastname" [errorMessage]="validationMessages.lastname"></vgr-input-new>
+            <span>{{inputForm.controls.lastname.valid}}</span>
           </vgr-title-value>
           <vgr-title-value title="Ålder">
             <vgr-input-new formControlName="age" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input-new>
+            <span>{{inputForm.controls.age.valid}}</span>
           </vgr-title-value>
           <vgr-title-value title="E-post">
             <vgr-input-new formControlName="email" [errorMessage]="validationMessages.email"></vgr-input-new>
+            <span>{{inputForm.controls.email.valid}}</span>
           </vgr-title-value>
           <vgr-title-value title="Inkomst">
             <vgr-input-new formControlName="salary" [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input-new>
+            <span>{{inputForm.controls.salary.valid}}</span>
           </vgr-title-value>
         </vgr-title-value-layout>
         <vgr-button (click)="onSubmit()">Skapa användare</vgr-button>
