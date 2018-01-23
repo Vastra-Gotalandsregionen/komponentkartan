@@ -3,8 +3,8 @@
     [ngClass]="{'monthpicker--open' : expanded}">
 
     <div class="monthpicker__dropdown" tabindex="{{disabled || readonly ? -1 : 0}}">
-      <span tabindex="0" *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date : selectedDateFormat}}</span>
-      <span tabindex="0" *ngIf="!selectedDate" title="{{ readonly ? '' : 'Välj månad' }}">{{ readonly ? '' : 'Välj månad' }}</span>
+      <span *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date : selectedDateFormat}}</span>
+      <span *ngIf="!selectedDate" title="{{ readonly ? '' : 'Välj månad' }}">{{ readonly ? '' : 'Välj månad' }}</span>
 
       <div class="monthpicker__calendar">
         <div class="monthpicker__calendar__header">
