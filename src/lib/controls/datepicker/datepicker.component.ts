@@ -51,8 +51,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         this.previousMonth = true;
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
-    };
-
+    }
 
     ngOnChanges() {
         if (this.formControlName) {
@@ -93,18 +92,14 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     onLeave(event: FocusEvent) {
         if (!event) {
             this.validate();
-            this.isDatePickerVisible = false;
             return;
         }
 
         const focusedElement = event.relatedTarget;
         if (focusedElement === null || !this.elementRef.nativeElement.contains(focusedElement)) {
-            //validera endast om vi är påväg från komponenten
+            // validera endast om vi är påväg från komponenten
             this.validate();
-            this.isDatePickerVisible = false;
-
         }
-
     }
 
     onEnter() {
@@ -113,6 +108,16 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         }
 
         this.setValidationStateEditing();
+    }
+
+    @HostListener('document:click', ['$event'])
+    onDocumentClick(event: any) {
+
+        const target = event.target || event.srcElement || event.currentTarget;
+
+        if (!this.elementRef.nativeElement.contains(target)) {
+            this.isDatePickerVisible = false;
+        }
     }
 
     ngOnInit() {
@@ -135,10 +140,10 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
 
         if (tmpMinDate > this.today) {
             tmpMinDate = this.today;
-        };
+        }
         if (tmpMaxDate < this.today) {
             tmpMaxDate = this.today;
-        };
+        }
 
         for (let year = tmpMinDate.getFullYear(); year <= tmpMaxDate.getFullYear(); year++) {
             for (let month = 1; month <= 12; month++) {
@@ -184,7 +189,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         const lastWeek: ICalendarWeek = this.createLastWeek(year, month);
         const secondWeekIndex = 1;
         const secondLastWeekIndex = weeks.length - 2;
-        const lastWeekIndex = weeks.length - 1
+        const lastWeekIndex = weeks.length - 1;
 
         let dayNumber = firstWeek.days[6].day.getDate() + 1;
 
@@ -235,8 +240,8 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         for (let i = 0; i < 7; i++) {
             if (i <= (this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()))) {
                 calendarWeek.days.push({ day: new Date(year, month - 1, daynumber), disabled: false } as ICalendarDay);
-                daynumber++
-            } else { calendarWeek.days.push(null); };
+                daynumber++;
+            } else { calendarWeek.days.push(null); }
         }
 
         return calendarWeek;
@@ -298,7 +303,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
                         }
                     }
                 });
-            })
+            });
         });
     }
 
@@ -315,7 +320,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
 
 
     onCalendarClick(event: Event) {
-        //används för att stoppa events från att bubbla ut
+        // används för att stoppa events från att bubbla ut
         event.cancelBubble = true;
     }
 
@@ -325,9 +330,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         }
         this.isDatePickerVisible = !this.isDatePickerVisible;
     }
-
-
-
 
     onPreviousMonth(event: Event) {
         event.cancelBubble = true;
@@ -386,10 +388,10 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         let tmpMaxDate = this.maxDate;
         if (tmpMinDate > this.today) {
             tmpMinDate = this.today;
-        };
+        }
         if (tmpMaxDate < this.today) {
             tmpMaxDate = this.today;
-        };
+        }
 
         const minMonth = tmpMinDate.getMonth() + 1;
         const maxMonth = tmpMaxDate.getMonth() + 1;
