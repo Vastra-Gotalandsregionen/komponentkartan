@@ -41,6 +41,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     currentYearMonthOutput: Date;
     selectedCalendarDay: ICalendarDay;
     control: AbstractControl;
+    isFocused: boolean;
 
     constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
         super();
@@ -51,6 +52,8 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         this.previousMonth = true;
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
+
+        this.isFocused = false;
     }
 
     ngOnChanges() {
@@ -77,12 +80,12 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     onTouched() { }
 
     doValidate(): IValidationResult {
+        console.log('doValidate');
         const isValid = (!this.required || this.selectedDate) && !this.controlHasErrors();
         return {
             isValid: isValid,
             validationError: isValid ? '' : 'Obligatoriskt'
         } as IValidationResult;
-
     }
 
     controlHasErrors() {
