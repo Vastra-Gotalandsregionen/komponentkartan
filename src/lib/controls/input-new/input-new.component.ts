@@ -20,8 +20,6 @@ import { ErrorHandler } from '../../services/errorhandler';
 export class InputNewComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @Input() formControlName?: string;
-
-  // @Input() isInvalid?: boolean;
   @Input() formatNumber?: boolean;
   @Input() nrOfDecimals?: number;
   @Input() suffix?: string;
@@ -41,15 +39,14 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
     return this.control.invalid && !this.hasFocus;
   }
   @HostBinding('class.validation-error--editing') get editingClass() {
-    return this.invalidOnFocus && this.hasFocus;
+    return this.control.invalid && this.hasFocus;
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
     return this.invalidOnFocus && this.control.valid && !this.hasFocus;
   }
 
-  hasFocus = false;
   invalidOnFocus = false;
-
+  hasFocus = false;
   swedishDecimalPipe: DecimalPipe;
   displayValue: string;
   currentErrorMessage: string;
@@ -125,11 +122,9 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
     if (this.readonly) {
       return;
     }
+    this.invalidOnFocus = this.control.invalid;
 
     this.displayValue = this.displayValue ? this.displayValue.toString().replace(/\s/g, '') : this.displayValue;
-
-    this.invalidOnFocus = this.control.invalid;
-    // this.invalidOnFocus = this.control.invalid;
     this.hasFocus = true;
     this.focus.emit(event);
   }
