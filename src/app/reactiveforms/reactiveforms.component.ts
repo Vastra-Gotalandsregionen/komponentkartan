@@ -17,11 +17,12 @@ export class ReactiveformsComponent implements OnInit {
   minDate = new Date('2015');
   maxDate = new Date('2025');
 
-  submitted = false;
-
   userForm: FormGroup;
-  inputForm: FormGroup;
-  inputForm2: FormGroup;
+  updateOnBlurForm: FormGroup;
+  updateOnSubmitForm: FormGroup;
+  updateOnChangeForm: FormGroup;
+
+  formSubmitted: boolean;
 
   validationMessages = {
     firstname: {
@@ -65,8 +66,9 @@ export class ReactiveformsComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.createInputForm();
-    this.createInputForm2();
+    this.createUpdateOnBlurForm();
+    this.createUpdateOnChangeForm();
+    this.createUpdateOnSubmitForm();
   }
 
   createForm() {
@@ -86,32 +88,41 @@ export class ReactiveformsComponent implements OnInit {
     });
   }
 
-  createInputForm() {
-    this.inputForm = new FormGroup({
-      firstname: new FormControl('H', { validators: [Validators.required, Validators.minLength(2)] }),
-      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
-      age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
-      email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+  createUpdateOnBlurForm() {
+    this.updateOnBlurForm = new FormGroup({
+      firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       salary: new FormControl('', { validators: [Validators.required, validateNumber] })
     }, { updateOn: 'blur' });
   }
 
-  createInputForm2() {
-    this.inputForm2 = new FormGroup({
-      firstname: new FormControl('H', { validators: [Validators.required, Validators.minLength(2)] }),
-      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
-      age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
-      email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+  createUpdateOnSubmitForm() {
+    this.updateOnSubmitForm = new FormGroup({
+      firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       salary: new FormControl('', { validators: [Validators.required, validateNumber] })
     }, { updateOn: 'submit' });
   }
 
-  onSubmit() {
-    this.submitted = true;
+  createUpdateOnChangeForm() {
+    this.updateOnChangeForm = new FormGroup({
+      firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      salary: new FormControl('', { validators: [Validators.required, validateNumber] })
+    }, { updateOn: 'change' });
   }
 
-  onReset() {
-    this.inputForm.reset();
+  onSubmit() {
+    this.formSubmitted = true;
+  }
+
+  onResetUpdateOnBlurForm() {
+    this.updateOnBlurForm.reset();
+  }
+
+  onResetUpdateOnSubmitForm() {
+    this.updateOnSubmitForm.reset();
+  }
+
+  onResetUpdateOnChangeForm() {
+    this.updateOnChangeForm.reset();
   }
 }
 

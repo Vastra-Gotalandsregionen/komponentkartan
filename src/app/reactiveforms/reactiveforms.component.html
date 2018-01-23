@@ -47,74 +47,53 @@
       </form>
     </vgr-page-block>
     <vgr-page-block>
-      <form [formGroup]="inputForm">
+      <h2>Formulär med fält som valideras på blur</h2>
+      <form [formGroup]="updateOnBlurForm">
         <vgr-title-value-layout>
           <vgr-title-value title="Förnamn">
-            <vgr-input-new formControlName="firstname" [showValidation]="inputForm.controls.firstname.touched" [errorMessage]="validationMessages.firstname"></vgr-input-new>
-            <span>{{inputForm.controls.firstname.valid}}</span>
-            <span>{{inputForm.controls.firstname.touched}}</span>
-
-          </vgr-title-value>
-          <vgr-title-value title="Efternamn">
-            <vgr-input-new formControlName="lastname" [showValidation]="inputForm.controls.lastname.touched" [errorMessage]="validationMessages.lastname"></vgr-input-new>
-            <span>{{inputForm.controls.lastname.valid}}</span>
-          </vgr-title-value>
-          <vgr-title-value title="Ålder">
-            <vgr-input-new formControlName="age" [showValidation]="inputForm.controls.age.touched" [alignRight]="true" [suffix]="'år'"
-              [errorMessage]="validationMessages.age"></vgr-input-new>
-            <span>{{inputForm.controls.age.valid}}</span>
-          </vgr-title-value>
-          <vgr-title-value title="E-post">
-            <vgr-input-new formControlName="email" [showValidation]="inputForm.controls.email.touched" [errorMessage]="validationMessages.email"></vgr-input-new>
-            <span>{{inputForm.controls.email.valid}}</span>
+            <vgr-input-new formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched" [errorMessage]="validationMessages.firstname"></vgr-input-new>
           </vgr-title-value>
           <vgr-title-value title="Inkomst">
-            <vgr-input-new formControlName="salary" [showValidation]="inputForm.controls.salary.touched" [errorMessage]="validationMessages.salary"
+            <vgr-input-new formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched" [errorMessage]="validationMessages.salary"
               [formatNumber]="true" [nrOfDecimals]="2"></vgr-input-new>
-            <span>{{inputForm.controls.salary.valid}}</span>
           </vgr-title-value>
         </vgr-title-value-layout>
-        <button type="submit" (click)="onSubmit()">Skapa användare</button>
-
-        <vgr-button (click)="onSubmit()">Skapa användare</vgr-button>
-        <vgr-button (click)="onReset()">Reset form</vgr-button>
+        <vgr-button [disabled]="updateOnBlurForm.invalid">Skapa användare</vgr-button>
+        <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
       </form>
     </vgr-page-block>
-
     <vgr-page-block>
-      <form [formGroup]="inputForm">
+      <h2>Formulär med fält som valideras på submit</h2>
+      <form [formGroup]="updateOnSubmitForm">
         <vgr-title-value-layout>
           <vgr-title-value title="Förnamn">
-            <vgr-input-new formControlName="firstname" [showValidation]="submitted" [errorMessage]="validationMessages.firstname"></vgr-input-new>
-            <span>{{inputForm.controls.firstname.valid}}</span>
-            <span>{{inputForm.controls.firstname.touched}}</span>
-
-          </vgr-title-value>
-          <vgr-title-value title="Efternamn">
-            <vgr-input-new formControlName="lastname" [showValidation]="submitted" [errorMessage]="validationMessages.lastname"></vgr-input-new>
-            <span>{{inputForm.controls.lastname.valid}}</span>
-          </vgr-title-value>
-          <vgr-title-value title="Ålder">
-            <vgr-input-new formControlName="age" [showValidation]="submitted" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input-new>
-            <span>{{inputForm.controls.age.valid}}</span>
-          </vgr-title-value>
-          <vgr-title-value title="E-post">
-            <vgr-input-new formControlName="email" [showValidation]="submitted" [errorMessage]="validationMessages.email"></vgr-input-new>
-            <span>{{inputForm.controls.email.valid}}</span>
+            <vgr-input-new formControlName="firstname" [showValidation]="formSubmitted" [errorMessage]="validationMessages.firstname"></vgr-input-new>
           </vgr-title-value>
           <vgr-title-value title="Inkomst">
-            <vgr-input-new formControlName="salary" [showValidation]="submitted" [errorMessage]="validationMessages.salary" [formatNumber]="true"
+            <vgr-input-new formControlName="salary" [showValidation]="formSubmitted" [errorMessage]="validationMessages.salary" [formatNumber]="true"
               [nrOfDecimals]="2"></vgr-input-new>
-            <span>{{inputForm.controls.salary.valid}}</span>
           </vgr-title-value>
         </vgr-title-value-layout>
         <button type="submit" (click)="onSubmit()">Skapa användare</button>
-
-        <vgr-button (click)="onSubmit()">Skapa användare</vgr-button>
-        <vgr-button (click)="onReset()">Reset form</vgr-button>
+        <vgr-button [disabled]="updateOnBlurForm.invalid">Skapa användare</vgr-button>
+        <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
       </form>
     </vgr-page-block>
-
-
+    <vgr-page-block>
+      <h2>Formulär med fält som valideras när dess värde ändras</h2>
+      <form [formGroup]="updateOnChangeForm">
+        <vgr-title-value-layout>
+          <vgr-title-value title="Förnamn">
+            <vgr-input-new formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty" [errorMessage]="validationMessages.firstname"></vgr-input-new>
+          </vgr-title-value>
+          <vgr-title-value title="Inkomst">
+            <vgr-input-new formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty" [errorMessage]="validationMessages.salary"
+              [formatNumber]="true" [nrOfDecimals]="2"></vgr-input-new>
+          </vgr-title-value>
+        </vgr-title-value-layout>
+        <vgr-button [disabled]="updateOnBlurForm.invalid">Skapa användare</vgr-button>
+        <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
+      </form>
+    </vgr-page-block>
   </vgr-page-body>
 </vgr-page>

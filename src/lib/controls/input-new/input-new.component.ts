@@ -107,6 +107,8 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
 
     this.onTouched();
 
+    // TODO: Nedan villkor funkar inte då validering görs på submit.
+    // Dår är controllen inte valid men vi vill ändå formatera om det är ett nummer
     if (this.formatNumber && this.control.valid) {
       this.value = this.convertStringToNumber(this.displayValue);
       this.displayValue = this.convertNumberToString(this.value);
