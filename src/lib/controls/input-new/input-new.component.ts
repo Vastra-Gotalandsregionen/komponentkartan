@@ -18,7 +18,7 @@ import { ErrorHandler } from '../../services/errorhandler';
 
 })
 export class InputNewComponent implements ControlValueAccessor, OnInit, OnChanges {
-
+  @Input() showValidation?: boolean;
   @Input() formControlName?: string;
   @Input() formatNumber?: boolean;
   @Input() nrOfDecimals?: number;
@@ -36,13 +36,13 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
 
   @HostBinding('class.validated-input') hasClass = true;
   @HostBinding('class.validation-error--active') get errorClass() {
-    return this.control.invalid && !this.hasFocus;
+    return this.showValidation && this.control.invalid && !this.hasFocus;
   }
   @HostBinding('class.validation-error--editing') get editingClass() {
-    return this.control.invalid && this.hasFocus;
+    return this.showValidation && this.control.invalid && this.hasFocus;
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
-    return this.invalidOnFocus && this.control.valid && !this.hasFocus;
+    return this.showValidation && this.invalidOnFocus && this.control.valid && !this.hasFocus;
   }
 
   invalidOnFocus = false;
@@ -105,6 +105,8 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
       return;
     }
 
+    this.onTouched();
+
     if (this.formatNumber && this.control.valid) {
       this.value = this.convertStringToNumber(this.displayValue);
       this.displayValue = this.convertNumberToString(this.value);
@@ -113,7 +115,6 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     this.onChange(this.value);
-    this.onTouched();
     this.hasFocus = false;
     this.blur.emit(event);
   }
@@ -122,9 +123,11 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
     if (this.readonly) {
       return;
     }
-    this.invalidOnFocus = this.control.invalid;
+    this.invalidOnFocus = this.control.invalid && this.control.touched;
+    if (this.displayValue) {
+      this.displayValue = this.displayValue.toString().replace(/\s/g, '');
 
-    this.displayValue = this.displayValue ? this.displayValue.toString().replace(/\s/g, '') : this.displayValue;
+    }
     this.hasFocus = true;
     this.focus.emit(event);
   }

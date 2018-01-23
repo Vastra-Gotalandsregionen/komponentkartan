@@ -17,8 +17,11 @@ export class ReactiveformsComponent implements OnInit {
   minDate = new Date('2015');
   maxDate = new Date('2025');
 
+  submitted = false;
+
   userForm: FormGroup;
   inputForm: FormGroup;
+  inputForm2: FormGroup;
 
   validationMessages = {
     firstname: {
@@ -63,6 +66,7 @@ export class ReactiveformsComponent implements OnInit {
   ngOnInit() {
     this.createForm();
     this.createInputForm();
+    this.createInputForm2();
   }
 
   createForm() {
@@ -92,9 +96,18 @@ export class ReactiveformsComponent implements OnInit {
     }, { updateOn: 'blur' });
   }
 
+  createInputForm2() {
+    this.inputForm2 = new FormGroup({
+      firstname: new FormControl('H', { validators: [Validators.required, Validators.minLength(2)] }),
+      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
+      email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      salary: new FormControl('', { validators: [Validators.required, validateNumber] })
+    }, { updateOn: 'submit' });
+  }
+
   onSubmit() {
-    console.log('values: ', this.inputForm.value);
-    console.log('isValid: ', this.inputForm.valid);
+    this.submitted = true;
   }
 
   onReset() {
