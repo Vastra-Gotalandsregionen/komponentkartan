@@ -193,24 +193,24 @@
 
         <h2>Fyra alternativ, varav ett inaktivt</h2>
         <div>
-          <vgr-radio-group [options]="[{value: '1', displayName: 'Ett'},{value: '2', displayName: 'Två'},{value: '3', displayName:
+          <vgr-radio-group [options]="[{value: '1', displayName: 'Ett', selected: false},{value: '2', displayName: 'Två'},{value: '3', displayName:
                       'Tre'}, {value: '4', displayName: 'Fyra', disabled:true}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
           </vgr-radio-group>
-          <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
+          <div>Du har valt alternativ: {{selectedRadioOption.value}}</div>
         </div>
         <h2>Fyra alternativ, ingen förvald</h2>
         <div>
           <vgr-radio-group [options]="[{value: '1', displayName: 'Etta'},{value: '2', displayName: 'Tvåa'},{value: '3', displayName:
                       'Trea'}, {value: '4', displayName: 'Fyra'}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
           </vgr-radio-group>
-          <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
+          <div>Du har valt alternativ: {{selectedRadioOption.value}}</div>
         </div>
         <h2>Fyra alternativ, alla selected = false</h2>
         <div>
           <vgr-radio-group [options]="[{value: '1', displayName: 'Etta', selected: false},{value: '2', displayName: 'Tvåa', selected: false},{value: '3', displayName:
                       'Trea', selected:false}, {value: '4', displayName: 'Fyra', selected:false}] " (selectedChanged)="onSelectedRadioOptionChanged($event) ">
           </vgr-radio-group>
-          <div>Du har valt alternativ: {{selectedRadioOption.displayName}}</div>
+          <div>Du har valt alternativ: {{selectedRadioOption.value}}</div>
         </div>
         <h2>Tre inaktiva alternativ, varav ett förvalt</h2>
         <div>

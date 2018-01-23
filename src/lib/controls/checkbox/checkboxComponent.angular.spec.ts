@@ -4,11 +4,11 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { Guid } from '../../utils/guid';
 import { CheckboxComponent } from './checkbox.component';
 
 
-describe('SaveCancelComponent', () => {
+describe('CheckboxComponent', () => {
     let component: CheckboxComponent;
     let fixture: ComponentFixture<CheckboxComponent>;
     let rootElement: DebugElement;
@@ -149,7 +149,9 @@ describe('SaveCancelComponent', () => {
 
     describe('WCAG compatibility', () => {
         let checkboximage: DebugElement;
+
         beforeEach(() => {
+
             checkboximage = rootElement.query(By.css('.checkbox__image'));
             fixture.detectChanges();
         });
@@ -158,12 +160,17 @@ describe('SaveCancelComponent', () => {
         });
 
         describe('The checkbox has an accessible label, preferably provided by a visible label associated using aria-labelledby', () => {
-            it('checkbox has a label with an id', () => {
-                const labelElement = rootElement.query(By.css('.checkbox__label'));
-                expect(labelElement.nativeElement.id).toBe('checkbox-label');
+            let labelElement: DebugElement;
+            beforeEach(() => {
+                labelElement = rootElement.query(By.css('.checkbox__label'));
             });
+
             it('checkbox is associated with the label', () => {
-                expect(checkboximage.attributes['aria-labelledby']).toBe('checkbox-label');
+                expect(labelElement.nativeElement.id).toBe(component.labelledbyid);
+            });
+            it('checkbox has a label with an id', () => {
+                let checkbox = rootElement.query(By.css('.checkbox'));
+                expect(checkboximage.attributes['aria-labelledby']).toBe(labelElement.nativeElement.id);
             });
         });
 

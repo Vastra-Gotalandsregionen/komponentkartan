@@ -1,6 +1,6 @@
-<div class="radio-button" role="radio" title="{{option.displayName}}" [attr.aria-checked]="option.selected" *ngFor="let option of options"
-  [ngClass]="{'radio-button--checked' : option.selected, 'radio-button--disabled' : option.disabled }" (click)="optionClicked(option)"
-  (keydown)="keyDown($event, option)">
-  <div class="radio-button__icon" tabindex="{{checkTabFocus(option) ? 0 : -1}}" (focus)="setFocus()"></div>
-  <span class="radio-button__text">{{option.displayName}}</span>
+<div class="radio-button" title="{{option.displayName}}" *ngFor="let option of radiogroupItems; let i = index" [ngClass]="{'radio-button--checked' : option.selected, 'radio-button--disabled' : option.disabled }"
+  (click)="optionClicked(option)" (keydown)="keyDown($event, option)">
+  <div [attr.aria-labelledby]="option.ariaid" role="radio" [attr.aria-checked]="option.selected" class="radio-button__icon"
+    tabindex="{{checkTabFocus(i) ? 0 : -1}}"></div>
+  <span id="{{option.ariaid}}" class="radio-button__text ">{{option.displayName}}</span>
 </div>

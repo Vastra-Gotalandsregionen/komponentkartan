@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "2.0.1-rc12",
+  "version": "2.0.2-rc5",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
@@ -48,7 +48,7 @@
     "@types/node": "~6.0.60",
     "angular2-template-loader": "^0.6.2",
     "codelyzer": "^4.0.1",
-    "electron": "^1.7.10",
+    "electron": "^1.7.11",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "^1.7.1",

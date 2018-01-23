@@ -1,8 +1,9 @@
 import {
-    Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, Renderer, OnChanges
+    Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, Renderer, OnChanges, AfterViewInit
 } from '@angular/core';
 import { SelectableItem } from '../../models/selectableItem.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-radio-group',
@@ -14,27 +15,53 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         multi: true
     }]
 })
-export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
+
+
+export class RadioGroupComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
     @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() options: SelectableItem<any>[];
+
+    public radiogroupItems: RadioGroupItem<any>[] = [];
+    @Input() set options(items: SelectableItem<any>[]) {
+        let newItem: RadioGroupItem<any>;
+        items.forEach(item => {
+            newItem = item as RadioGroupItem<any>;
+            newItem.ariaid = Guid.newGuid();
+            this.radiogroupItems.push(newItem);
+        });
+    }
+
+
+
     @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
 
-    noSelectionFlag: boolean;
+    elements: any;
+    get noSelectionFlag(): boolean {
+        return this.radiogroupItems.every((x) => (x.selected === false || x.selected === undefined));
+    }
     constructor(private elementRef: ElementRef, private renderer: Renderer) {
     }
 
+    get classRenderer(): Renderer {
+        return this.renderer;
+    }
+
     ngOnChanges() {
-        if (this.options && this.options.length > 0) {
-            const preSelectedOption = this.options.find(x => x.selected);
+        if (this.radiogroupItems && this.radiogroupItems.length > 0) {
+            const preSelectedOption = this.radiogroupItems.find(x => x.selected);
             if (preSelectedOption) {
                 this.selectOption(preSelectedOption);
             }
         }
     }
 
-    optionClicked(option: SelectableItem<any>) {
+    ngAfterViewInit() {
+        this.elements = this.elementRef.nativeElement.querySelectorAll(':not(.radio-button--disabled) .radio-button__icon');
+
+    }
+
+    optionClicked(option: RadioGroupItem<any>) {
         if (this.disabled || option.disabled || option.selected) {
             return;
         }
@@ -42,10 +69,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
         this.selectOption(option);
     }
 
-    keyDown(event: KeyboardEvent, option: SelectableItem<any>): void {
-        if (event.keyCode === 9) {
-            this.setFocus();
-        }
+    keyDown(event: KeyboardEvent, option: RadioGroupItem<any>): void {
 
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.optionClicked(option);
@@ -61,52 +85,40 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
             this.setFocus(option, 'back');
             event.preventDefault();
         }
-
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            this.optionClicked(option);
-            event.preventDefault();
-        }
     }
 
-    setFocus(option?: SelectableItem<any>, direction?: string) {
-        const position = this.options.indexOf(option);
-        const nextItem = this.options[position + 1];
-        const previousItem = this.options[position - 1];
-        const elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
+    setFocus(option: RadioGroupItem<any>, direction?: string) {
+        const position = this.radiogroupItems.indexOf(option);
+        const nextItem = this.radiogroupItems[position + 1];
+        const previousItem = this.radiogroupItems[position - 1];
 
-        if (this.noSelectionFlag && option.selected === false) {
-            this.renderer.invokeElementMethod(elements[0], 'focus');
-            this.noSelectionFlag = false;
-            return;
-        }
-
+        const enabledOptions = this.radiogroupItems.filter(x => !x.disabled);
         if (direction === 'forward') {
-            if (position + 1 === this.options.length) {
-                this.renderer.invokeElementMethod(elements[0], 'focus');
-                this.optionClicked(this.options[0]);
+            if (position + 1 === enabledOptions.length) {
+                this.renderer.invokeElementMethod(this.elements[0], 'focus');
+                this.optionClicked(enabledOptions[0]);
             } else {
-                this.renderer.invokeElementMethod(elements[position + 1], 'focus');
+                this.renderer.invokeElementMethod(this.elements[position + 1], 'focus');
                 this.optionClicked(nextItem);
             }
         } else if (direction === 'back') {
             if (position === 0) {
-                this.renderer.invokeElementMethod(elements[this.options.length - 1], 'focus');
-                this.optionClicked(this.options[this.options.length - 1]);
+                this.renderer.invokeElementMethod(this.elements[this.radiogroupItems.length - 1], 'focus');
+                this.optionClicked(this.radiogroupItems[enabledOptions.length - 1]);
             } else {
-                this.renderer.invokeElementMethod(elements[position - 1], 'focus');
+                this.renderer.invokeElementMethod(this.elements[position - 1], 'focus');
                 this.optionClicked(previousItem);
             }
         }
     }
 
-    checkTabFocus(option: SelectableItem<any>) {
-        const index = this.options.indexOf(option);
-        return !option.disabled && (option.selected || (index === 0 && this.noSelectionFlag));
+    checkTabFocus(index: number) {
+        return !this.radiogroupItems[index].disabled && (this.radiogroupItems[index].selected || (index === 0 && this.noSelectionFlag));
     }
 
     writeValue(option: any): void {
         if (option) {
-            const preSelectedOption = this.options.find(x => x.value === option);
+            const preSelectedOption = this.radiogroupItems.find(x => x.value === option);
             if (preSelectedOption) {
                 this.selectOption(preSelectedOption);
             }
@@ -126,8 +138,8 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
 
     onTouched() { }
 
-    private selectOption(option: SelectableItem<any>) {
-        this.options.forEach(o => {
+    private selectOption(option: RadioGroupItem<any>) {
+        this.radiogroupItems.forEach(o => {
             o.selected = (o === option);
         });
         option.selected = true;
@@ -135,3 +147,9 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges {
         this.selectedChanged.emit(option.value);
     }
 }
+
+export interface RadioGroupItem<TValue> extends SelectableItem<TValue> {
+    ariaid?: string;
+}
+
+
