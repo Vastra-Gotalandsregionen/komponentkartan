@@ -7,7 +7,7 @@ import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
 import { IValidationResult } from '../../models/validation.model';
 import { ValidationComponent } from '../../controls/validation/validation.component';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
 
 @Component({
@@ -53,7 +53,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
         this.years = [];
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
-    };
+    }
 
     ngOnInit() {
         this.years = [];
@@ -105,15 +105,15 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
 
         let index: number;
         if (this.years.length > 1) {
-            index = this.years.indexOf(this.displayedYear)
+            index = this.years.indexOf(this.displayedYear);
 
             if (this.years[index - 1]) {
-                this.previousYear = this.years[index - 1]
+                this.previousYear = this.years[index - 1];
             } else {
                 this.previousYear = undefined;
             }
             if (this.years[index + 1]) {
-                this.nextYear = this.years[index + 1]
+                this.nextYear = this.years[index + 1];
             } else {
                 this.nextYear = undefined;
             }
@@ -126,10 +126,10 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
         let tmpMaxDate = this.maxDate;
         if (tmpMinDate > this.today) {
             tmpMinDate = this.today;
-        };
+        }
         if (tmpMaxDate < this.today) {
             tmpMaxDate = this.today;
-        };
+        }
 
         for (let yearNumber = tmpMinDate.getFullYear(); yearNumber <= tmpMaxDate.getFullYear(); yearNumber++) {
             const newYear = { year: yearNumber, months: [] } as ICalendarYear;
@@ -183,7 +183,6 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
     }
 
     onEnter() {
-
         if (this.disabled || this.readonly) {
             return;
         }
@@ -218,7 +217,7 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
     }
 
     onSelectMonthMouseDown(selectedMonth: ICalendarMonth) {
-        this.selectDate(selectedMonth)
+        this.selectDate(selectedMonth);
     }
 
     onSelectMonthKeyDown(event: KeyboardEvent) {

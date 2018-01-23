@@ -39,6 +39,34 @@ describe('[MonthpickerComponent(Angular)]', () => {
         });
     });
 
+    describe('When in monthpicker and nextmonth is clicked', () => {
+        beforeEach(() => {
+            const nextMonth = fixture.debugElement.query(By.css('.monthpicker__calendar__header__next-year'));
+            spyOn(component, 'onLeave');
+            spyOn(component, 'onNextMouseDown');
+            nextMonth.triggerEventHandler('mousedown', event);
+        });
+
+        it('onNextMouseDown function has been called', () => {
+            expect(component.onNextMouseDown).toHaveBeenCalled();
+        });
+
+        it('onLeave event is not triggered', () => {
+            expect(component.onLeave).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('When in monthpicker is clicked outside - focusedout', () => {
+        beforeEach(() => {
+            const nextMonth = fixture.debugElement.query(By.css('.monthpicker'));
+            spyOn(component, 'onLeave');
+            nextMonth.triggerEventHandler('focusout', event);
+        });
+
+        it('onLeave event is triggered', () => {
+            expect(component.onLeave).toHaveBeenCalled();
+        });
+    });
 
     describe('When initialized with empty Selected date and readonly-mode', () => {
         beforeEach(() => {

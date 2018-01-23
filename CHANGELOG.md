@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added component vgr-expandable-div
 - Added component vgr-panel
 - Added component vgr-title-value-layout, replace the divs that's having the class vgr-title-layout with this component instead.
+- Fixed bug for back to top, It always appears no matter what resolution you have on your browser
 
 ## 2.0.0 (2018-01-04)
 - Upgraded to Angular 5

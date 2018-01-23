@@ -34,7 +34,7 @@
             </vgr-radio-group>
           </vgr-title-value>
           <vgr-title-value title="Välj Månad">
-            <vgr-monthpicker formControlName="monthpicker"></vgr-monthpicker>
+            <vgr-monthpicker formControlName="monthpicker" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
           </vgr-title-value>
           <vgr-title-value title="Välj Dag">
             <vgr-datepicker formControlName="datepicker"></vgr-datepicker>
