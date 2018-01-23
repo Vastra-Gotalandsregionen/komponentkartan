@@ -15,6 +15,8 @@ export class ReactiveformsComponent implements OnInit {
   dropdownItemsMulti: DropdownItem<string>[];
 
   userForm: FormGroup;
+  inputForm: FormGroup;
+
   validationMessages = {
     firstname: {
       'minlength': 'Namnet måste vara minst 2 tecken',
@@ -57,10 +59,10 @@ export class ReactiveformsComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    this.createInputForm();
   }
 
   createForm() {
-
     this.userForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.minLength(2)]],
       lastname: ['', [Validators.required, Validators.minLength(2)]],
@@ -75,6 +77,25 @@ export class ReactiveformsComponent implements OnInit {
       datepicker: ['', Validators.required],
       datepicker_preselected: [new Date(), Validators.required]
     });
+  }
+
+  createInputForm() {
+    this.inputForm = this.fb.group({
+      firstname: ['', [Validators.required, Validators.minLength(2)]],
+      lastname: ['', [Validators.required, Validators.minLength(2)]],
+      age: ['', [Validators.required, Validators.min(18), Validators.max(120), validateNumber]],
+      email: ['', [Validators.required, Validators.email]],
+      salary: ['', [Validators.required, validateNumber]]
+    }, { updateOn: 'submit' });
+  }
+
+  onSubmit() {
+    console.log('values: ', this.inputForm.value);
+    console.log('isValid: ', this.inputForm.valid);
+  }
+
+  onReset() {
+    this.inputForm.reset();
   }
 }
 
