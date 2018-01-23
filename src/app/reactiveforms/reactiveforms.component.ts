@@ -94,7 +94,7 @@ export class ReactiveformsComponent implements OnInit {
     //   age: ['', [Validators.required, Validators.min(18), Validators.max(120), validateNumber]],
     //   email: ['', [Validators.required, Validators.email]],
     //   salary: ['', [Validators.required, validateNumber]]
-    // }, { updateOn: 'submit' });
+    // }, { updateOn: 'blur' });
   }
 
   onSubmit() {
