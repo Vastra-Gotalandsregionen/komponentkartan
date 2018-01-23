@@ -102,9 +102,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
             //validera endast om vi är påväg från komponenten
             this.validate();
             this.isDatePickerVisible = false;
-
         }
-
     }
 
     onEnter() {
@@ -184,7 +182,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         const lastWeek: ICalendarWeek = this.createLastWeek(year, month);
         const secondWeekIndex = 1;
         const secondLastWeekIndex = weeks.length - 2;
-        const lastWeekIndex = weeks.length - 1
+        const lastWeekIndex = weeks.length - 1;
 
         let dayNumber = firstWeek.days[6].day.getDate() + 1;
 

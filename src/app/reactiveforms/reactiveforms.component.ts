@@ -81,12 +81,12 @@ export class ReactiveformsComponent implements OnInit {
 
   createInputForm() {
     this.inputForm = new FormGroup({
-      firstname: new FormControl('Hej', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'blur' }),
-      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)], updateOn: 'submit' }),
+      firstname: new FormControl('Hej', { validators: [Validators.required, Validators.minLength(2)] }),
+      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
-      email: new FormControl('', { validators: [Validators.required, Validators.email], updateOn: 'blur' }),
-      salary: new FormControl('', { validators: [Validators.required, validateNumber], updateOn: 'blur' })
-    });
+      email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      salary: new FormControl('', { validators: [Validators.required, validateNumber] })
+    }, { updateOn: 'blur' });
 
     // this.inputForm = this.fb.group({
     //   firstname: ['', [Validators.required, Validators.minLength(2)]],

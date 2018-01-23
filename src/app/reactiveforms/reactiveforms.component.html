@@ -52,13 +52,16 @@
           <vgr-title-value title="Förnamn">
             <vgr-input-new formControlName="firstname" [errorMessage]="validationMessages.firstname"></vgr-input-new>
             <span>{{inputForm.controls.firstname.valid}}</span>
+            <span>{{inputForm.controls.firstname.touched}}</span>
+
           </vgr-title-value>
           <vgr-title-value title="Efternamn">
-            <vgr-input-new formControlName="lastname" [errorMessage]="validationMessages.lastname"></vgr-input-new>
+            <!-- <vgr-input-new formControlName="lastname" [errorMessage]="validationMessages.lastname"></vgr-input-new> -->
+            <input formControlName="lastname" />
             <span>{{inputForm.controls.lastname.valid}}</span>
           </vgr-title-value>
           <vgr-title-value title="Ålder">
-            <vgr-input-new formControlName="age" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input-new>
+            <vgr-input formControlName="age" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
             <span>{{inputForm.controls.age.valid}}</span>
           </vgr-title-value>
           <vgr-title-value title="E-post">
@@ -70,6 +73,9 @@
             <span>{{inputForm.controls.salary.valid}}</span>
           </vgr-title-value>
         </vgr-title-value-layout>
+        <button type="submit" (click)="onSubmit()">Skapa användare</button>
+        <button type="submit" (click)="onSubmit()">Skapa användare</button>
+
         <vgr-button (click)="onSubmit()">Skapa användare</vgr-button>
         <vgr-button (click)="onReset()">Reset form</vgr-button>
       </form>

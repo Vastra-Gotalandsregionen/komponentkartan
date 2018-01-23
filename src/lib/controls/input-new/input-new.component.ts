@@ -21,9 +21,11 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
 
   @Input() formControlName?: string;
 
+  @Input() isInvalid?: boolean;
   @Input() formatNumber?: boolean;
   @Input() nrOfDecimals?: number;
   @Input() suffix?: string;
+  @Input() value?: any;
   @Input() maxlength?: number;
   @Input() errorMessage?: any;
 
@@ -36,16 +38,15 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
 
   @HostBinding('class.validated-input') hasClass = true;
   @HostBinding('class.validation-error--active') get errorClass() {
-    return (this.control && this.control.invalid && !this.hasFocus);
+    return (this.formControlName ? this.control.invalid : this.isInvalid) && !this.hasFocus;
   }
   @HostBinding('class.validation-error--editing') get editingClass() {
     return this.invalidOnFocus && this.hasFocus;
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
-    return this.invalidOnFocus && this.control && this.control.valid && !this.hasFocus;
+    return this.invalidOnFocus && (this.formControlName ? this.control.valid : !this.isInvalid) && !this.hasFocus;
   }
 
-  value: any;
   hasFocus = false;
   invalidOnFocus = false;
 
@@ -81,7 +82,7 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
   }
 
   setDisplayValue() {
-    if (this.formatNumber && !(this.control && this.control.invalid)) {
+    if (this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid)) {
       this.displayValue = this.convertNumberToString(this.value);
     } else {
       this.displayValue = this.value;
@@ -102,12 +103,12 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
 
   onTouched() { }
 
-  onBlur() {
+  onBlur(event: Event) {
     if (this.readonly) {
       return;
     }
 
-    if (this.formatNumber && !(this.control && this.control.invalid)) {
+    if (this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid)) {
       this.value = this.convertStringToNumber(this.displayValue);
       this.displayValue = this.convertNumberToString(this.value);
     } else {
@@ -115,6 +116,7 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     this.onChange(this.value);
+    this.onTouched();
     this.hasFocus = false;
     this.blur.emit(event);
   }
@@ -126,7 +128,7 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
 
     this.displayValue = this.displayValue.toString().replace(/\s/g, '');
 
-    this.invalidOnFocus = (this.control && this.control.invalid);
+    this.invalidOnFocus = (this.formControlName ? this.control.invalid : this.isInvalid);
     this.hasFocus = true;
     this.focus.emit(event);
   }
