@@ -179,13 +179,10 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
     }
 
     onLeave() {
-        console.log('on leave');
         this.validate();
     }
 
     onEnter() {
-        console.log('on enter');
-
         if (this.disabled || this.readonly) {
             return;
         }
