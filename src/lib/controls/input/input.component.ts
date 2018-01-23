@@ -73,6 +73,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   ngOnInit() {
     this.setDisplayValue();
+
+    this.control.statusChanges.subscribe((x) => {
+      console.log(x);
+    });
   }
 
   writeValue(value: any) {
