@@ -21,7 +21,7 @@
       "./assets/komponentkartan.scss",
       "styles.css"
     ],
-    "scripts": ["../node_modules/jquery/dist/jquery.min.js"],
+    "scripts": ["../node_modules/jquery/dist/jquery.min.js", "./lib/scripts/_objects.back-to-top.js"],
     "environmentSource": "environments/environment.ts",
     "environments": {
       "dev": "environments/environment.ts",
