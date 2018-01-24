@@ -53,10 +53,12 @@
           <vgr-title-value title="Förnamn">
             <vgr-input-new formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched" [errorMessage]="validationMessages.firstname"></vgr-input-new>
           </vgr-title-value>
+          <span>{{updateOnBlurForm.valid}}</span>
           <vgr-title-value title="Inkomst">
             <vgr-input-new formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched" [errorMessage]="validationMessages.salary"
               [formatNumber]="true" [nrOfDecimals]="2"></vgr-input-new>
           </vgr-title-value>
+          <span>{{updateOnBlurForm.valid}}</span>
         </vgr-title-value-layout>
         <vgr-button [disabled]="updateOnBlurForm.invalid">Skapa användare</vgr-button>
         <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
@@ -69,14 +71,16 @@
           <vgr-title-value title="Förnamn">
             <vgr-input-new formControlName="firstname" [showValidation]="formSubmitted" [errorMessage]="validationMessages.firstname"></vgr-input-new>
           </vgr-title-value>
+          <span>{{updateOnSubmitForm.valid}}</span>
           <vgr-title-value title="Inkomst">
             <vgr-input-new formControlName="salary" [showValidation]="formSubmitted" [errorMessage]="validationMessages.salary" [formatNumber]="true"
               [nrOfDecimals]="2"></vgr-input-new>
           </vgr-title-value>
+          <span>{{updateOnSubmitForm.valid}}</span>
         </vgr-title-value-layout>
         <button type="submit" (click)="onSubmit()">Skapa användare</button>
-        <vgr-button [disabled]="updateOnBlurForm.invalid">Skapa användare</vgr-button>
-        <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
+        <vgr-button type="button" (click)="onSubmit()">Skapa användare</vgr-button>
+        <vgr-button (click)="onResetUpdateOnSubmitForm()">Reset form</vgr-button>
       </form>
     </vgr-page-block>
     <vgr-page-block>
@@ -91,8 +95,8 @@
               [formatNumber]="true" [nrOfDecimals]="2"></vgr-input-new>
           </vgr-title-value>
         </vgr-title-value-layout>
-        <vgr-button [disabled]="updateOnBlurForm.invalid">Skapa användare</vgr-button>
-        <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
+        <vgr-button [disabled]="updateOnChangeForm.invalid">Skapa användare</vgr-button>
+        <vgr-button (click)="onResetUpdateOnChangeForm()">Reset form</vgr-button>
       </form>
     </vgr-page-block>
   </vgr-page-body>

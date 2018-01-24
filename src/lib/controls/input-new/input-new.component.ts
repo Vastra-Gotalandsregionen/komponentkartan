@@ -106,19 +106,26 @@ export class InputNewComponent implements ControlValueAccessor, OnInit, OnChange
     }
 
     this.onTouched();
+    this.formatDisplayNumber();
 
-    // TODO: Nedan villkor funkar inte då validering görs på submit.
-    // Dår är controllen inte valid men vi vill ändå formatera om det är ett nummer
-    if (this.formatNumber && this.control.valid) {
+    this.onChange(this.value);
+    this.hasFocus = false;
+    this.blur.emit(event);
+  }
+
+  formatDisplayNumber() {
+    if (this.formatNumber && this.isNumber(this.displayValue)) {
       this.value = this.convertStringToNumber(this.displayValue);
       this.displayValue = this.convertNumberToString(this.value);
     } else {
       this.value = this.displayValue;
     }
+  }
 
-    this.onChange(this.value);
-    this.hasFocus = false;
-    this.blur.emit(event);
+  isNumber(value: any): boolean {
+    const pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
+    const regexp = new RegExp(pattern);
+    return regexp.test(value);
   }
 
   onFocus(): void {

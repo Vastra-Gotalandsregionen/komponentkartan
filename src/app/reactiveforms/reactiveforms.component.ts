@@ -110,6 +110,7 @@ export class ReactiveformsComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('onSubmit');
     this.formSubmitted = true;
   }
 
@@ -119,6 +120,7 @@ export class ReactiveformsComponent implements OnInit {
 
   onResetUpdateOnSubmitForm() {
     this.updateOnSubmitForm.reset();
+    this.formSubmitted = false;
   }
 
   onResetUpdateOnChangeForm() {
