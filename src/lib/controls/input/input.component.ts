@@ -18,16 +18,13 @@ import { ErrorHandler } from '../../services/errorhandler';
 
 })
 export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
-
+  @Input() showValidation = true;
   @Input() formControlName?: string;
-
-  @Input() isInvalid?: boolean;
   @Input() formatNumber?: boolean;
   @Input() nrOfDecimals?: number;
   @Input() suffix?: string;
   @Input() value?: any;
   @Input() maxlength?: number;
-  @Input() validateOnInit?: boolean;
   @Input() errorMessage?: any;
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
@@ -39,19 +36,17 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @HostBinding('class.validated-input') hasClass = true;
   @HostBinding('class.validation-error--active') get errorClass() {
-    return (this.formControlName ? this.control.invalid : this.isInvalid) && !this.hasFocus && (this.touched || this.validateOnInit);
+    return this.showValidation && this.control.invalid && !this.hasFocus;
   }
   @HostBinding('class.validation-error--editing') get editingClass() {
-    return this.invalidOnFocus && this.hasFocus && (this.touched || this.validateOnInit);
+    return this.showValidation && this.control.invalid && this.hasFocus;
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
-    return this.invalidOnFocus && this.touched && (this.formControlName ? this.control.valid : !this.isInvalid) && !this.hasFocus;
+    return this.showValidation && this.invalidOnFocus && this.control.valid && !this.hasFocus;
   }
 
-  hasFocus = false;
-  touched = false;
   invalidOnFocus = false;
-
+  hasFocus = false;
   swedishDecimalPipe: DecimalPipe;
   displayValue: string;
   currentErrorMessage: string;
@@ -73,7 +68,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   ngOnInit() {
     this.setDisplayValue();
-
   }
 
   writeValue(value: any) {
@@ -85,7 +79,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   setDisplayValue() {
-    if (this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid)) {
+    if (this.formatNumber && this.control.valid) {
       this.displayValue = this.convertNumberToString(this.value);
     } else {
       this.displayValue = this.value;
@@ -106,32 +100,43 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   onTouched() { }
 
-  onBlur() {
+  onBlur(event: Event) {
     if (this.readonly) {
       return;
     }
 
-    if (this.formatNumber && !(this.formControlName ? this.control.invalid : this.isInvalid)) {
+    this.onTouched();
+    this.formatDisplayNumber();
+
+    this.onChange(this.value);
+    this.hasFocus = false;
+    this.blur.emit(event);
+  }
+
+  formatDisplayNumber() {
+    if (this.formatNumber && this.isNumber(this.displayValue)) {
       this.value = this.convertStringToNumber(this.displayValue);
       this.displayValue = this.convertNumberToString(this.value);
     } else {
       this.value = this.displayValue;
     }
+  }
 
-    this.onChange(this.value);
-    this.touched = true;
-    this.hasFocus = false;
-    this.blur.emit(event);
+  isNumber(value: any): boolean {
+    const pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
+    const regexp = new RegExp(pattern);
+    return regexp.test(value);
   }
 
   onFocus(): void {
     if (this.readonly) {
       return;
     }
+    this.invalidOnFocus = this.control.invalid && this.control.touched;
+    if (this.displayValue) {
+      this.displayValue = this.displayValue.toString().replace(/\s/g, '');
 
-    this.displayValue = this.displayValue.toString().replace(/\s/g, '');
-
-    this.invalidOnFocus = (this.formControlName ? this.control.invalid : this.isInvalid) && (this.touched || this.validateOnInit);
+    }
     this.hasFocus = true;
     this.focus.emit(event);
   }
