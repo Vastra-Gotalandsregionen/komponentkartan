@@ -6,19 +6,20 @@
       <form [formGroup]="userForm">
         <vgr-title-value-layout>
           <vgr-title-value title="Förnamn">
-            <vgr-input formControlName="firstname" [errorMessage]="validationMessages.firstname"></vgr-input>
+            <vgr-input formControlName="firstname" [showValidation]="userForm.controls.firstname.dirty" [errorMessage]="validationMessages.firstname"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Efternamn">
-            <vgr-input formControlName="lastname" [errorMessage]="validationMessages.lastname"></vgr-input>
+            <vgr-input formControlName="lastname" [showValidation]="userForm.controls.lastname.dirty" [errorMessage]="validationMessages.lastname"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Ålder">
-            <vgr-input formControlName="age" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+            <vgr-input formControlName="age" [showValidation]="userForm.controls.age.dirty" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="E-post">
-            <vgr-input formControlName="email" [errorMessage]="validationMessages.email"></vgr-input>
+            <vgr-input formControlName="email" [showValidation]="userForm.controls.email.dirty" [errorMessage]="validationMessages.email"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Inkomst">
-            <vgr-input formControlName="salary" [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
+            <vgr-input formControlName="salary" [showValidation]="userForm.controls.salary.dirty" [errorMessage]="validationMessages.salary"
+              [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Favoritdjur">
             <vgr-dropdown formControlName="favourite_pet" [items]="dropdownItems"></vgr-dropdown>
@@ -43,7 +44,7 @@
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
           </vgr-title-value>
         </vgr-title-value-layout>
-        <vgr-button [disabled]="userForm.invalid">Skapa användare</vgr-button>
+        <vgr-button [disabled]="false">Skapa användare</vgr-button>
       </form>
     </vgr-page-block>
     <vgr-page-block>
@@ -51,12 +52,12 @@
       <form [formGroup]="updateOnBlurForm">
         <vgr-title-value-layout>
           <vgr-title-value title="Förnamn">
-            <vgr-input-new formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched" [errorMessage]="validationMessages.firstname"></vgr-input-new>
+            <vgr-input formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched" [errorMessage]="validationMessages.firstname"></vgr-input>
           </vgr-title-value>
           <span>{{updateOnBlurForm.valid}}</span>
           <vgr-title-value title="Inkomst">
-            <vgr-input-new formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched" [errorMessage]="validationMessages.salary"
-              [formatNumber]="true" [nrOfDecimals]="2"></vgr-input-new>
+            <vgr-input formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched" [errorMessage]="validationMessages.salary"
+              [formatNumber]="true" [nrOfDecimals]="2"></vgr-input>
           </vgr-title-value>
           <span>{{updateOnBlurForm.valid}}</span>
         </vgr-title-value-layout>
@@ -69,12 +70,12 @@
       <form [formGroup]="updateOnSubmitForm">
         <vgr-title-value-layout>
           <vgr-title-value title="Förnamn">
-            <vgr-input-new formControlName="firstname" [showValidation]="formSubmitted" [errorMessage]="validationMessages.firstname"></vgr-input-new>
+            <vgr-input formControlName="firstname" [showValidation]="formSubmitted" [errorMessage]="validationMessages.firstname"></vgr-input>
           </vgr-title-value>
           <span>{{updateOnSubmitForm.valid}}</span>
           <vgr-title-value title="Inkomst">
-            <vgr-input-new formControlName="salary" [showValidation]="formSubmitted" [errorMessage]="validationMessages.salary" [formatNumber]="true"
-              [nrOfDecimals]="2"></vgr-input-new>
+            <vgr-input formControlName="salary" [showValidation]="formSubmitted" [errorMessage]="validationMessages.salary" [formatNumber]="true"
+              [nrOfDecimals]="2"></vgr-input>
           </vgr-title-value>
           <span>{{updateOnSubmitForm.valid}}</span>
         </vgr-title-value-layout>
@@ -88,11 +89,11 @@
       <form [formGroup]="updateOnChangeForm">
         <vgr-title-value-layout>
           <vgr-title-value title="Förnamn">
-            <vgr-input-new formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty" [errorMessage]="validationMessages.firstname"></vgr-input-new>
+            <vgr-input formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty" [errorMessage]="validationMessages.firstname"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Inkomst">
-            <vgr-input-new formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty" [errorMessage]="validationMessages.salary"
-              [formatNumber]="true" [nrOfDecimals]="2"></vgr-input-new>
+            <vgr-input formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty" [errorMessage]="validationMessages.salary"
+              [formatNumber]="true" [nrOfDecimals]="2"></vgr-input>
           </vgr-title-value>
         </vgr-title-value-layout>
         <vgr-button [disabled]="updateOnChangeForm.invalid">Skapa användare</vgr-button>
