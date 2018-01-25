@@ -8,7 +8,7 @@ import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component
 import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { AbstractControl } from '@angular/forms';
 
-export abstract class DropdownBaseComponent extends ValidationComponent {
+export abstract class DropdownBaseComponent {
 
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
@@ -63,7 +63,7 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     }
 
     constructor(protected elementRef: ElementRef) {
-        super();
+        // super();
         this.expanded = false;
         this.filterVisible = false;
         this.filterPipe = new FilterPipe();
@@ -131,31 +131,13 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         }
     }
 
-    onEnter() {
-        this.setValidationStateEditing();
-    }
-
-    onLeave(event: FocusEvent) {
-
-        if (!event) {
-            this.validate();
-            return;
-        }
-
-        const focusedElement = event.relatedTarget;
-        if (focusedElement === null || !this.elementRef.nativeElement.contains(focusedElement)) {
-            // validera endast om vi är påväg från komponenten
-            this.validate();
-        }
-    }
-
     private toggleExpand(event: Event) {
         const target = event.target || event.srcElement || event.currentTarget;
         const element = $(target);
         if (!element.is('input') && !element.is('.scroll-bar')) {
             this.expanded = !this.expanded;
             if (!this.expanded) {
-                this.validate();
+                // this.validate();
             } else {
                 setTimeout(() => {
                     this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent.directiveRef.elementRef.nativeElement);

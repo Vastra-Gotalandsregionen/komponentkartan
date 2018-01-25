@@ -22,7 +22,7 @@
               [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Favoritdjur">
-            <vgr-dropdown formControlName="favourite_pet" [showValidation]="userForm.controls.favourite_pet.touched" [items]="dropdownItems"></vgr-dropdown>
+            <vgr-dropdown formControlName="favourite_pet" [items]="dropdownItems"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value title="Intressen">
             <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti"></vgr-dropdown-multiselect>
@@ -35,7 +35,8 @@
             </vgr-radio-group>
           </vgr-title-value>
           <vgr-title-value title="Välj Månad">
-            <vgr-monthpicker formControlName="monthpicker" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
+            <vgr-monthpicker formControlName="monthpicker" [showValidation]="userForm.controls.monthpicker.touched" [minDate]="minDate"
+              [maxDate]="maxDate"></vgr-monthpicker>
           </vgr-title-value>
           <vgr-title-value title="Välj Dag">
             <vgr-datepicker formControlName="datepicker"></vgr-datepicker>
