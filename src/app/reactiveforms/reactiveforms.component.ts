@@ -23,6 +23,7 @@ export class ReactiveformsComponent implements OnInit {
   updateOnChangeForm: FormGroup;
 
   formSubmitted: boolean;
+  userFormSubmitted: boolean;
 
   validationMessages = {
     firstname: {
@@ -110,8 +111,20 @@ export class ReactiveformsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('onSubmit');
     this.formSubmitted = true;
+  }
+
+  onSubmmitUserForm() {
+    this.userFormSubmitted = true;
+    for (const control in this.userForm.controls) {
+      if (this.userForm.controls.hasOwnProperty(control)) {
+        this.userForm.get(control).markAsTouched();
+      }
+    }
+  }
+
+  onResetUserForm() {
+    this.userForm.reset();
   }
 
   onResetUpdateOnBlurForm() {

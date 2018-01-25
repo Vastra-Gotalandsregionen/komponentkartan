@@ -30,6 +30,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
     @Output() selectedChanged = new EventEmitter<DropdownItem<any>>();
+    @Input() showValidation: boolean;
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
     @Input() set selectedValue(value: any) {
         if (this.items) {
@@ -47,7 +48,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.noItemSelectedLabel = '';
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes) {
         if (this.formControlName) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
@@ -83,15 +84,10 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     onTouched() { }
 
     doValidate(): IValidationResult {
-        const isValid = (!this.required || this.selectedItem) && !this.controlHasErrors();
         return {
-            isValid: isValid,
-            validationError: isValid ? '' : 'Obligatoriskt'
+            isValid: this.control.valid,
+            validationError: this.control.valid ? '' : 'Obligatoriskt'
         } as IValidationResult;
-    }
-
-    controlHasErrors() {
-        return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }
 
     showAllItems() {
@@ -113,6 +109,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedItem = item;
+        this.control.setValue(item);
         this.changeDetectorRef.detectChanges();
         this.onChange(item.value);
         this.validate();

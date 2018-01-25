@@ -6,23 +6,23 @@
       <form [formGroup]="userForm">
         <vgr-title-value-layout>
           <vgr-title-value title="Förnamn">
-            <vgr-input formControlName="firstname" [showValidation]="userForm.controls.firstname.dirty" [errorMessage]="validationMessages.firstname"></vgr-input>
+            <vgr-input formControlName="firstname" [showValidation]="userForm.controls.firstname.touched" [errorMessage]="validationMessages.firstname"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Efternamn">
-            <vgr-input formControlName="lastname" [showValidation]="userForm.controls.lastname.dirty" [errorMessage]="validationMessages.lastname"></vgr-input>
+            <vgr-input formControlName="lastname" [showValidation]="userForm.controls.lastname.touched" [errorMessage]="validationMessages.lastname"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Ålder">
-            <vgr-input formControlName="age" [showValidation]="userForm.controls.age.dirty" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+            <vgr-input formControlName="age" [showValidation]="userForm.controls.age.touched" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="E-post">
-            <vgr-input formControlName="email" [showValidation]="userForm.controls.email.dirty" [errorMessage]="validationMessages.email"></vgr-input>
+            <vgr-input formControlName="email" [showValidation]="userForm.controls.email.touched" [errorMessage]="validationMessages.email"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Inkomst">
-            <vgr-input formControlName="salary" [showValidation]="userForm.controls.salary.dirty" [errorMessage]="validationMessages.salary"
+            <vgr-input formControlName="salary" [showValidation]="userForm.controls.salary.touched" [errorMessage]="validationMessages.salary"
               [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Favoritdjur">
-            <vgr-dropdown formControlName="favourite_pet" [items]="dropdownItems"></vgr-dropdown>
+            <vgr-dropdown formControlName="favourite_pet" [showValidation]="userForm.controls.favourite_pet.touched" [items]="dropdownItems"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value title="Intressen">
             <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti"></vgr-dropdown-multiselect>
@@ -44,7 +44,8 @@
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
           </vgr-title-value>
         </vgr-title-value-layout>
-        <vgr-button [disabled]="false">Skapa användare</vgr-button>
+        <vgr-button [disabled]="false" (click)="onSubmmitUserForm()">Skapa användare</vgr-button>
+        <vgr-button (click)="onResetUserForm()">Reset form</vgr-button>
       </form>
     </vgr-page-block>
     <vgr-page-block>
