@@ -115,7 +115,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
 
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: any) {
-
         const target = event.target || event.srcElement || event.currentTarget;
 
         if (!this.elementRef.nativeElement.contains(target)) {

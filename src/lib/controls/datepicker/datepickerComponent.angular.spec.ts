@@ -59,6 +59,32 @@ describe('[DatepickerComponent(Angular)]', () => {
                 expect(component.isDatePickerVisible).toBe(true);
             });
 
+            describe('and the datepicker is closed', () => {
+                beforeEach(() => {
+                    const datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
+                    datepickerElement.triggerEventHandler('click', event);
+                });
+                it('the calendar is not visible', () => {
+                    expect(component.isDatePickerVisible).toBe(false);
+                    expect(fixture.debugElement.query(By.css('.datepicker__calendar'))).toBeNull();
+                });
+            });
+
+            describe('and the datepicker is focusout', () => {
+                beforeEach(() => {
+                    spyOn(component, 'onLeave').and.callThrough();
+                    spyOn(component, 'validate');
+                    const datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
+                    datepickerElement.triggerEventHandler('focusout', event);
+                });
+                it('onLeave is has been called', () => {
+                    expect(component.onLeave).toHaveBeenCalled();
+                });
+                it('datepicker is validated', () => {
+                    expect(component.validate).toHaveBeenCalled();
+                });
+            });
+
         });
     });
 

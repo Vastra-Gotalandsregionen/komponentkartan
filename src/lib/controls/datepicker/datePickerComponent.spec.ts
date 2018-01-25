@@ -34,7 +34,7 @@ describe('[DatepickerComponent]', () => {
   describe('When initialized with default settings', () => {
     beforeEach(() => {
       component = new DatepickerComponent(null, null, null);
-      currentMonth = new Date().getMonth() + 1; //då månad är indexerad från 1
+      currentMonth = new Date().getMonth() + 1; // då månad är indexerad från 1
       currentYear = new Date().getFullYear();
       component.ngOnInit();
     });
@@ -232,7 +232,7 @@ describe('[DatepickerComponent]', () => {
           });
           it('the selected date is disabled', () => {
             expect(component.yearMonths[0].weeks[5].days[1].disabled).toBe(true);
-          })
+          });
           it('the calendar is still visible', () => {
             expect(component.isDatePickerVisible).toBe(true);
           });
@@ -284,17 +284,13 @@ describe('[DatepickerComponent]', () => {
     });
     describe('and user leaves component', () => {
       beforeEach(() => {
-
         spyOn(component, 'validate');
         component.onLeave(null);
       });
       it('datepicker is validated', () => {
         expect(component.validate).toHaveBeenCalled();
       });
-      it('the calendar is not visible', () => {
-        expect(component.isDatePickerVisible).toBe(false);
-      });
-    })
+    });
     describe('and user leaves component with no related target', () => {
       beforeEach(() => {
 
@@ -304,12 +300,8 @@ describe('[DatepickerComponent]', () => {
       it('datepicker is validated', () => {
         expect(component.validate).toHaveBeenCalled();
       });
-      it('the calendar is not visible', () => {
-        expect(component.isDatePickerVisible).toBe(false);
-      });
     });
-
-  })
+  });
 
   describe('When calendar is disabled', () => {
     beforeEach(() => {
@@ -321,13 +313,8 @@ describe('[DatepickerComponent]', () => {
       beforeEach(() => {
         component.onDatePickerClick({ cancelBubble: true } as Event);
       });
-      it('the calendar is not visible', () => {
-        expect(component.isDatePickerVisible).toBe(false);
-      });
-
     });
-
-  })
+  });
 
   describe(' When initialized with 3 months', () => {
     beforeEach(() => {
