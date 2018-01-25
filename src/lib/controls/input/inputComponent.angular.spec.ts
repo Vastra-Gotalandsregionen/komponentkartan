@@ -2,11 +2,11 @@
 // import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 // import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 // import { By } from '@angular/platform-browser';
-// import { FormsModule, ReactiveFormsModule, ControlContainer } from '@angular/forms';
+// import { FormsModule, ReactiveFormsModule, ControlContainer } from '@angular/forms'
 // import { DebugElement } from '@angular/core';
 // import { CommonModule, DecimalPipe } from '@angular/common';
 
-// import { InputNewComponent } from '../../controls/input-new/input-new.component';
+// import { InputComponent } from '../../controls/input/input.component';
 
 // import { ErrorHandler } from '../../services/errorhandler';
 
@@ -23,9 +23,9 @@
 // import { combineAll } from 'rxjs/operator/combineAll';
 
 
-// describe('[InputNewComponent]', () => {
-//   let component: InputNewComponent;
-//   let fixture: ComponentFixture<InputNewComponent>;
+// describe('[InputComponent]', () => {
+//   let component: InputComponent;
+//   let fixture: ComponentFixture<InputComponent>;
 //   let rootElement: DebugElement;
 //   const validationErrorStates = ValidationErrorState;
 
@@ -33,19 +33,19 @@
 //     TestBed.resetTestEnvironment();
 //     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 //     TestBed.configureTestingModule({
-//       declarations: [InputNewComponent, TruncatePipe, ErrorMessagePipe],
+//       declarations: [InputComponent, TruncatePipe, ErrorMessagePipe],
 //       imports: [CommonModule, FormsModule, ReactiveFormsModule],
 //       providers: [ErrorHandler]
 //     });
 
-//     TestBed.overrideComponent(InputNewComponent, {
+//     TestBed.overrideComponent(InputComponent, {
 //       set: {
 //         templateUrl: 'input.component.html'
 //       }
 //     });
 
 //     TestBed.compileComponents().then(() => {
-//       fixture = TestBed.createComponent(InputNewComponent);
+//       fixture = TestBed.createComponent(InputComponent);
 //       component = fixture.componentInstance;
 //       rootElement = fixture.debugElement;
 //       fixture.detectChanges();
@@ -144,7 +144,7 @@
 
 //     describe('When number formatting is off', () => {
 //       beforeEach(() => {
-//         component = new InputNewComponent(null, null);
+//         component = new InputComponent(null, null);
 //         component.value = '1234.5673409';
 //         component.formatNumber = false;
 //         component.ngOnInit();
