@@ -43,9 +43,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     @HostBinding('class.validation-error--editing') get editingClass() {
         return this.showValidation && this.control.invalid && this.hasFocus;
     }
-    @HostBinding('class.validation-error--fixed') get fixedClass() {
-        return this.showValidation && this.invalidOnFocus && this.control.valid && !this.hasFocus;
-    }
 
     invalidOnFocus = false;
     hasFocus = false;

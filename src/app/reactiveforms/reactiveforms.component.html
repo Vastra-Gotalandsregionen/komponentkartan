@@ -35,7 +35,8 @@
             </vgr-radio-group>
           </vgr-title-value>
           <vgr-title-value title="Välj Månad">
-            <vgr-monthpicker formControlName="monthpicker" [showValidation]="userForm.controls.age.monthpicker" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
+            <vgr-monthpicker formControlName="monthpicker" [showValidation]="userForm.controls.monthpicker.touched" [minDate]="minDate"
+              [maxDate]="maxDate"></vgr-monthpicker>
           </vgr-title-value>
           <vgr-title-value title="Välj Dag">
             <vgr-datepicker formControlName="datepicker"></vgr-datepicker>
@@ -44,6 +45,8 @@
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
           </vgr-title-value>
         </vgr-title-value-layout>
+        <vgr-button [disabled]="false" (click)="onSubmmitUserForm()">Skapa användare</vgr-button>
+        <vgr-button (click)="onResetUserForm()">Reset form</vgr-button>
         <button type="submit">Submit</button>
         <!-- <vgr-button [disabled]="false">Skapa användare</vgr-button> -->
       </form>

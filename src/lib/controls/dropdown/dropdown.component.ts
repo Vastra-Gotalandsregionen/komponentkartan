@@ -1,5 +1,6 @@
 import {
-    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef, OnInit,
+    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, SimpleChange,
+    EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef, OnInit,
     SkipSelf, Optional, Host
 } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
@@ -27,36 +28,49 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
     }]
 })
 
-
-export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
+export class DropdownComponent extends DropdownBaseComponent implements OnChanges, OnInit, ControlValueAccessor {
     @Output() selectedChanged = new EventEmitter<DropdownItem<any>>();
+    // @Input() showValidation: boolean;
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
-    @Input() set selectedValue(value: any) {
-        if (this.items) {
-            const matchingItems = this.items.filter(x => x.value === value);
-            if (matchingItems.length > 0) {
-                this.handleInitiallySelectedItems(matchingItems);
-            }
-        }
+
+    @HostBinding('class.validation-error--active') get errorClass() {
+        return this.control.invalid && this.control.touched && !this.hasFocus;
+    }
+    @HostBinding('class.validation-error--editing') get editingClass() {
+        return this.control.invalid && this.control.touched && this.hasFocus;
     }
 
     selectedItem: DropdownItem<any>;
+    hasFocus: boolean;
+    validationErrorMessage: string;
 
     constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
         this.noItemSelectedLabel = '';
+        this.validationErrorMessage = 'Obligatorisk';
+        this.hasFocus = false;
     }
 
     ngOnChanges() {
-        if (this.formControlName) {
-            this.control = this.controlContainer.control.get(this.formControlName);
-        }
         this.showAllItem = {
             displayName: this.showAllItemText
         } as DropdownItem<any>;
 
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
+    }
+
+    ngOnInit() {
+        this.control = this.controlContainer.control.get(this.formControlName);
+    }
+
+    onLeave() {
+        this.hasFocus = false;
+    }
+
+    onEnter() {
+        this.control.markAsTouched();
+        this.hasFocus = true;
     }
 
     writeValue(value: any): void {
@@ -82,18 +96,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     onTouched() { }
 
-    doValidate(): IValidationResult {
-        const isValid = (!this.required || this.selectedItem) && !this.controlHasErrors();
-        return {
-            isValid: isValid,
-            validationError: isValid ? '' : 'Obligatoriskt'
-        } as IValidationResult;
-    }
-
-    controlHasErrors() {
-        return (this.control && this.control.errors ? this.control.errors['required'] : false);
-    }
-
     showAllItems() {
         this.preventCollapse = true;
         this.filter = '';
@@ -113,9 +115,9 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedItem = item;
+        this.control.setValue(item);
         this.changeDetectorRef.detectChanges();
         this.onChange(item.value);
-        this.validate();
     }
 
     onMouseEnter(item: DropdownItem<any>) {
