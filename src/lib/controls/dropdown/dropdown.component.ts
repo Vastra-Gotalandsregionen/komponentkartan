@@ -84,6 +84,10 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
             }
             this.onChange(value);
         }
+
+        if (!value) {
+            this.selectedItem = null;
+        }
     }
 
     registerOnChange(func: any): void {
