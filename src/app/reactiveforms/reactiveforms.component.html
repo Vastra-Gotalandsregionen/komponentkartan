@@ -39,7 +39,7 @@
               [maxDate]="maxDate"></vgr-monthpicker>
           </vgr-title-value>
           <vgr-title-value title="Välj Dag">
-            <vgr-datepicker formControlName="datepicker"></vgr-datepicker>
+            <vgr-datepicker formControlName="datepicker" [showValidation]="userForm.controls.datepicker.touched"></vgr-datepicker>
           </vgr-title-value>
           <vgr-title-value title="Registreringsdatum">
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
@@ -85,7 +85,7 @@
             <vgr-monthpicker formControlName="monthpicker" [showValidation]="userFormnSubmitted" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
           </vgr-title-value>
           <vgr-title-value title="Välj Dag">
-            <vgr-datepicker formControlName="datepicker"></vgr-datepicker>
+            <vgr-datepicker formControlName="datepicker" [showValidation]="userFormnSubmitted"></vgr-datepicker>
           </vgr-title-value>
           <vgr-title-value title="Registreringsdatum">
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>

@@ -19,7 +19,7 @@ import { ErrorHandler } from '../../services/errorhandler';
 })
 export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() showValidation = true;
-  @Input() formControlName?: string;
+  @Input() formControlName: string;
   @Input() formatNumber?: boolean;
   @Input() nrOfDecimals?: number;
   @Input() suffix?: string;
@@ -36,13 +36,13 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @HostBinding('class.validated-input') hasClass = true;
   @HostBinding('class.validation-error--active') get errorClass() {
-    return this.showValidation && this.control.invalid && !this.hasFocus;
+    return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
   }
   @HostBinding('class.validation-error--editing') get editingClass() {
-    return this.showValidation && this.control.invalid && this.hasFocus;
+    return this.showValidation && this.control && this.control.invalid && this.hasFocus;
   }
   @HostBinding('class.validation-error--fixed') get fixedClass() {
-    return this.showValidation && this.invalidOnFocus && this.control.valid && !this.hasFocus;
+    return this.showValidation && this.invalidOnFocus && this.control && this.control.valid && !this.hasFocus;
   }
 
   invalidOnFocus = false;

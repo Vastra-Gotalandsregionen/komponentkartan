@@ -20,8 +20,9 @@ import { AbstractControl } from '@angular/forms';
         multi: true
     }, { provide: ValidationComponent, useExisting: forwardRef(() => DatepickerComponent) }]
 })
-export class DatepickerComponent extends ValidationComponent implements OnInit, OnChanges, ControlValueAccessor {
-    today: Date;
+export class DatepickerComponent implements OnInit, OnChanges, ControlValueAccessor {
+    @Input() showValidation = true;
+
     @Input() minDate: Date;
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
@@ -33,27 +34,47 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     @Output() selectedDateChanged = new EventEmitter<Date>();
     @Input() formControlName?: string;
 
+
+    @HostBinding('class.validated-input') hasClass = true;
+    @HostBinding('class.validation-error--active') get errorClass() {
+        return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
+    }
+    @HostBinding('class.validation-error--editing') get editingClass() {
+        return this.showValidation && this.control && this.control.invalid && this.hasFocus;
+    }
+
+    invalidOnFocus: boolean;
+    hasFocus: boolean;
+
+    control: AbstractControl;
+    expanded: boolean;
+
+    today: Date;
     yearMonths: ICalendarYearMonth[] = [];
-    isDatePickerVisible: boolean;
     nextMonth: boolean;
     previousMonth: boolean;
     currentYearMonthIndex = 0;
     currentYearMonthOutput: Date;
     selectedCalendarDay: ICalendarDay;
-    control: AbstractControl;
-    isFocused: boolean;
+
+    validationErrorMessage = 'Obligatoriskt';
+
 
     constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
-        super();
-
         this.today = new Date();
-        this.isDatePickerVisible = false;
         this.nextMonth = true;
         this.previousMonth = true;
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
 
-        this.isFocused = false;
+    }
+
+
+    ngOnInit() {
+        this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
+        this.updateYearMonths(this.minDate, this.maxDate, this.yearMonths);
+        this.setCurrentYearMonthOutput();
+        this.setPreviousAndNextMonthNavigation();
     }
 
     ngOnChanges() {
@@ -80,7 +101,6 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
     onTouched() { }
 
     doValidate(): IValidationResult {
-        console.log('doValidate');
         const isValid = (!this.required || this.selectedDate) && !this.controlHasErrors();
         return {
             isValid: isValid,
@@ -92,16 +112,11 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }
 
-    onLeave(event: FocusEvent) {
-        if (!event) {
-            this.validate();
-            return;
-        }
-
-        const focusedElement = event.relatedTarget;
-        if (focusedElement === null || !this.elementRef.nativeElement.contains(focusedElement)) {
-            // validera endast om vi är påväg från komponenten
-            this.validate();
+    onLeave() {
+        this.hasFocus = false;
+        this.control.markAsTouched();
+        if (this.control.updateOn === 'blur') {
+            this.control.setValue(this.selectedDate);
         }
     }
 
@@ -109,24 +124,18 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         if (this.disabled || this.readonly) {
             return;
         }
-
-        this.setValidationStateEditing();
+        this.hasFocus = true;
+        this.invalidOnFocus = this.control.invalid && this.control.touched;
     }
 
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: any) {
+
         const target = event.target || event.srcElement || event.currentTarget;
 
         if (!this.elementRef.nativeElement.contains(target)) {
-            this.isDatePickerVisible = false;
+            this.expanded = false;
         }
-    }
-
-    ngOnInit() {
-        this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
-        this.updateYearMonths(this.minDate, this.maxDate, this.yearMonths);
-        this.setCurrentYearMonthOutput();
-        this.setPreviousAndNextMonthNavigation();
     }
 
     setCurrentYearMonthOutput() {
@@ -330,7 +339,7 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         if (this.disabled || this.readonly) {
             return;
         }
-        this.isDatePickerVisible = !this.isDatePickerVisible;
+        this.expanded = !this.expanded;
     }
 
     onPreviousMonth(event: Event) {
@@ -363,11 +372,8 @@ export class DatepickerComponent extends ValidationComponent implements OnInit, 
         this.selectedDate = clickedDate.day;
         this.setSelectedDay(clickedDate);
 
-        this.isDatePickerVisible = false;
-
+        this.expanded = false;
         this.onChange(clickedDate.day);
-
-        this.validate();
         this.selectedDateChanged.emit(clickedDate.day);
         this.changeDetectorRef.detectChanges();
 

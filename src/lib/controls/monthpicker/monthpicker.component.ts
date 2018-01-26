@@ -1,6 +1,6 @@
 import {
     Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef, forwardRef,
-    ChangeDetectorRef, SkipSelf, Optional, Host
+    ChangeDetectorRef, SkipSelf, Optional, Host, SimpleChanges
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ICalendarMonth } from '../../models/calendarMonth.model';
@@ -22,39 +22,40 @@ import { AbstractControl } from '@angular/forms';
 })
 export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAccessor {
 
-    today: Date = new Date();
     @Input() showValidation = true;
     @Input() minDate: Date;
     @Input() maxDate: Date;
-    @Input() selectedDate?: Date;
     @Input() required: boolean;
-    @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() selectedDateFormat = 'MMM yyyy';
     @Input() tooltipDateFormat = 'MMMM yyyy';
     @Input() formControlName?: string;
+    @Input() selectedDate?: Date;
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
+    @Input() @HostBinding('class.disabled') disabled: boolean;
+    @Input() @HostBinding('class.readonly') readonly: boolean;
+
     @HostBinding('class.validated-input') hasClass = true;
     @HostBinding('class.validation-error--active') get errorClass() {
-        return this.showValidation && this.control.invalid && !this.hasFocus;
+        return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
     }
     @HostBinding('class.validation-error--editing') get editingClass() {
-        return this.showValidation && this.control.invalid && this.hasFocus;
+        return this.showValidation && this.control && this.control.invalid && this.hasFocus;
     }
 
-    invalidOnFocus = false;
-    hasFocus = false;
+    invalidOnFocus: boolean;
+    hasFocus: boolean;
+
+    expanded: boolean;
+    control: AbstractControl;
+    preventCollapse: boolean;
 
     displayedYear: ICalendarYear = {} as ICalendarYear;
     previousYear: ICalendarYear;
     nextYear: ICalendarYear;
-
+    today: Date = new Date();
     years: ICalendarYear[];
-    expanded: boolean;
-    control: AbstractControl;
-    protected preventCollapse: boolean;
 
     validationErrorMessage = 'Obligatoriskt';
 
@@ -67,7 +68,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     ngOnInit() {
         this.years = [];
-
         if (this.selectedDate) {
             if (this.selectedDate.getFullYear() < this.today.getFullYear()) {
                 this.minDate = new Date(this.selectedDate.getFullYear(), 0, 1);
@@ -79,16 +79,15 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
         }
         this.createYears();
-
         this.setDisplayedYear(this.selectedDate);
-
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes: SimpleChanges) {
         if (this.formControlName) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
     }
+
     writeValue(value: any): void {
         this.selectedDate = value;
     }
@@ -286,8 +285,8 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
         this.selectedDateChanged.emit(selectedMonth.date);
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
-        this.selectedDate = selectedMonth.date;
         this.changeDetectorRef.detectChanges();
+        this.selectedDate = selectedMonth.date;
         this.onChange(selectedMonth.date);
     }
 }
