@@ -5,8 +5,6 @@ import {
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
-import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
-import { ValidationComponent } from '../../controls/validation/validation.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
 
@@ -18,7 +16,7 @@ import { AbstractControl } from '@angular/forms';
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => DatepickerComponent),
         multi: true
-    }, { provide: ValidationComponent, useExisting: forwardRef(() => DatepickerComponent) }]
+    }]
 })
 export class DatepickerComponent implements OnInit, OnChanges, ControlValueAccessor {
     @Input() showValidation = true;
@@ -99,14 +97,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     }
 
     onTouched() { }
-
-    doValidate(): IValidationResult {
-        const isValid = (!this.required || this.selectedDate) && !this.controlHasErrors();
-        return {
-            isValid: isValid,
-            validationError: isValid ? '' : 'Obligatoriskt'
-        } as IValidationResult;
-    }
 
     controlHasErrors() {
         return (this.control && this.control.errors ? this.control.errors['required'] : false);

@@ -1,7 +1,5 @@
 import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener, HostBinding, forwardRef } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
-import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
-import { ValidationComponent } from '../../controls/validation/validation.component';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
@@ -13,6 +11,7 @@ export abstract class DropdownBaseComponent {
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
+    @Input() showValidation = true;
     @Input() formControlName?: string;
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
@@ -21,15 +20,24 @@ export abstract class DropdownBaseComponent {
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @HostBinding('class.dropdown') dropdownClass = true;
 
-    showAllItem: DropdownItem<any>;
+    @HostBinding('class.validation-error--active') get errorClass() {
+        return this.showValidation && this.control.invalid && !this.hasFocus;
+    }
+    @HostBinding('class.validation-error--editing') get editingClass() {
+        return this.showValidation && this.control.invalid && this.hasFocus;
+    }
 
+    control: AbstractControl;
+    hasFocus: boolean;
     expanded: boolean;
+    validationErrorMessage: string;
+
+    showAllItem: DropdownItem<any>;
     filterVisible: boolean;
     filter: string;
     scrollbarConfig: PerfectScrollbarConfig;
     dimmerTopVisible: boolean;
     dimmerBottomVisible: boolean;
-    control: AbstractControl;
 
     protected filterLimit = 20;
     protected filterPipe: FilterPipe;
@@ -69,6 +77,7 @@ export abstract class DropdownBaseComponent {
         this.filterPipe = new FilterPipe();
         this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
         this.showAllItemText = 'Visa alla';
+        this.validationErrorMessage = 'Obligatorisk';
 
         this.showAllItem = {
             displayName: this.showAllItemText,

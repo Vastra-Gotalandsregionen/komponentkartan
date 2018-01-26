@@ -1,12 +1,10 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef, Optional, SkipSelf, Host } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef, Optional, SkipSelf, Host, HostBinding, OnInit } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
-import { ValidationComponent } from '../validation/validation.component';
-import { IValidationResult } from '../../models/validation.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 
 
@@ -19,18 +17,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => DropdownMultiselectComponent),
         multi: true
-    },
-    {
-        provide: ValidationComponent,
-        useExisting: forwardRef(() => DropdownMultiselectComponent)
     }]
 })
 
-export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
+export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, OnInit, ControlValueAccessor {
 
-    @Input() showAllItemText: string; // showAllItemText (skrivit ett filter och vill rensa filtret)
+    @Input() showAllItemText: string;
     @Input() allItemsSelectedLabel: string;
-    @Input() selectAllItemText: string; // texten som visas på checkboxen för att välja alla
+    @Input() selectAllItemText: string;
     dropdownLabel: string;
     selectAllItem: DropdownItem<any>;
 
@@ -56,7 +50,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         super(elementRef);
         this.allItemsSelectedLabel = 'Alla';
         this.noItemSelectedLabel = 'Välj';
-
         this.showAllItemText = 'Visa alla';
         this.selectAllItemText = 'Välj alla';
 
@@ -67,16 +60,8 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         } as DropdownItem<any>;
     }
 
-    doValidate(): IValidationResult {
-        const isValid = (!this.required || this.selectedItems && this.selectedItems.length > 0) && !this.controlHasErrors();
-        return {
-            isValid: isValid,
-            validationError: isValid ? '' : 'Obligatoriskt'
-        } as IValidationResult;
-    }
-
-    controlHasErrors() {
-        return (this.control && this.control.errors ? this.control.errors['required'] : false);
+    ngOnInit() {
+        this.control = this.controlContainer.control.get(this.formControlName);
     }
 
     ngOnChanges() {
@@ -95,10 +80,17 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.updateDropdownLabel();
     }
 
+    controlHasErrors() {
+        return (this.control && this.control.errors ? this.control.errors['required'] : false);
+    }
+
     writeValue(values: DropdownItem<any>[]): void {
         if (values) {
             this.selectedValues = values;
         }
+        // if (!values) {
+        //     this.selectedValues = null;
+        // }
     }
 
     registerOnChange(func: any): void {
@@ -198,6 +190,18 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
     onMouseLeave(item: DropdownItem<any>) {
         item.marked = false;
+    }
+
+    onEnter() {
+        this.hasFocus = true;
+    }
+
+    onLeave() {
+        this.hasFocus = false;
+        this.control.markAsTouched();
+        if (this.control.updateOn === 'blur' && this.selectedItems) {
+            this.control.setValue(this._items.filter(x => x.selected).map(x => x.displayName));
+        }
     }
 
     protected handleInitiallySelectedItems(selectedItems: DropdownItem<any>[]): void {

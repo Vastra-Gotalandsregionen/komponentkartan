@@ -22,7 +22,8 @@
               [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Favoritdjur">
-            <vgr-dropdown formControlName="favourite_pet" [showValidation]="userForm.controls.favourite_pet.touched" [items]="dropdownItems"></vgr-dropdown>
+            <vgr-dropdown formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'" [showValidation]="userForm.controls.favourite_pet.touched"
+              [items]="dropdownItems"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value title="Intressen">
             <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti"></vgr-dropdown-multiselect>
@@ -69,7 +70,7 @@
               [nrOfDecimals]="0"></vgr-input>
           </vgr-title-value>
           <vgr-title-value title="Favoritdjur">
-            <vgr-dropdown formControlName="favourite_pet" [showValidation]="userFormnSubmitted" [items]="dropdownItems"></vgr-dropdown>
+            <vgr-dropdown formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'" [showValidation]="userFormnSubmitted" [items]="dropdownItems"></vgr-dropdown>
           </vgr-title-value>
           <vgr-title-value title="Intressen">
             <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti"></vgr-dropdown-multiselect>
