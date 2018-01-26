@@ -18,12 +18,14 @@ export class ReactiveformsComponent implements OnInit {
   maxDate = new Date('2025');
 
   userForm: FormGroup;
+  userFormSubmit: FormGroup;
   updateOnBlurForm: FormGroup;
   updateOnSubmitForm: FormGroup;
   updateOnChangeForm: FormGroup;
 
   formSubmitted: boolean;
   userFormSubmitted: boolean;
+  userFormnSubmitted: boolean;
 
   validationMessages = {
     firstname: {
@@ -67,6 +69,7 @@ export class ReactiveformsComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    this.createUserFormSubmit();
     this.createUpdateOnBlurForm();
     this.createUpdateOnChangeForm();
     this.createUpdateOnSubmitForm();
@@ -87,6 +90,23 @@ export class ReactiveformsComponent implements OnInit {
       datepicker: new FormControl('', { validators: [Validators.required] }),
       datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] })
     }, { updateOn: 'blur' });
+  }
+
+  createUserFormSubmit() {
+    this.userFormSubmit = new FormGroup({
+      firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
+      email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
+      favourite_pet: new FormControl(null, { validators: [Validators.required] }),
+      interests: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
+      check: new FormControl(true, { validators: [Validators.pattern('true')] }),
+      optional: new FormControl(this.radioOptions[2].value),
+      monthpicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] })
+    }, { updateOn: 'submit' });
   }
 
   createUpdateOnBlurForm() {
@@ -114,6 +134,11 @@ export class ReactiveformsComponent implements OnInit {
     this.formSubmitted = true;
   }
 
+
+  onSubmitUserForm() {
+    this.userFormnSubmitted = true;
+  }
+
   onSubmmitUserForm() {
     for (const control in this.userForm.controls) {
       if (this.userForm.controls.hasOwnProperty(control)) {
@@ -122,9 +147,13 @@ export class ReactiveformsComponent implements OnInit {
     }
   }
 
-  onResetUserForm() {
+  onResetForm() {
     this.userForm.reset();
-    console.log(this.userForm.controls.firstname.value);
+  }
+
+  onResetUserForm() {
+    this.userFormSubmit.reset();
+    this.userFormnSubmitted = false;
   }
 
   onResetUpdateOnBlurForm() {

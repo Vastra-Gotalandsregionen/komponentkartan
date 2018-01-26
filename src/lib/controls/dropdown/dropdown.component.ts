@@ -30,14 +30,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges, OnInit, ControlValueAccessor {
     @Output() selectedChanged = new EventEmitter<DropdownItem<any>>();
-    // @Input() showValidation: boolean;
+    @Input() showValidation = true;
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
 
     @HostBinding('class.validation-error--active') get errorClass() {
-        return this.control.invalid && this.control.touched && !this.hasFocus;
+        return this.showValidation && this.control.invalid && this.control.touched && !this.hasFocus;
     }
     @HostBinding('class.validation-error--editing') get editingClass() {
-        return this.control.invalid && this.control.touched && this.hasFocus;
+        return this.showValidation && this.control.invalid && this.control.touched && this.hasFocus;
     }
 
     selectedItem: DropdownItem<any>;
@@ -66,6 +66,9 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     onLeave() {
         this.hasFocus = false;
+        if (this.control.updateOn === 'blur') {
+            this.control.setValue(this.selectedItem.value);
+        }
     }
 
     onEnter() {

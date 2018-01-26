@@ -45,10 +45,54 @@
             <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
           </vgr-title-value>
         </vgr-title-value-layout>
-        <vgr-button [disabled]="false" (click)="onSubmmitUserForm()">Skapa användare</vgr-button>
+        <vgr-button (click)="onResetForm()">Reset form</vgr-button>
+        <vgr-button [disabled]="false">Skapa användare</vgr-button>
+      </form>
+    </vgr-page-block>
+    <vgr-page-block>
+      <form [formGroup]="userFormSubmit">
+        <vgr-title-value-layout>
+          <vgr-title-value title="Förnamn">
+            <vgr-input formControlName="firstname" [showValidation]="userFormnSubmitted" [errorMessage]="validationMessages.firstname"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value title="Efternamn">
+            <vgr-input formControlName="lastname" [showValidation]="userFormnSubmitted" [errorMessage]="validationMessages.lastname"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value title="Ålder">
+            <vgr-input formControlName="age" [showValidation]="userFormnSubmitted" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value title="E-post">
+            <vgr-input formControlName="email" [showValidation]="userFormnSubmitted" [errorMessage]="validationMessages.email"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value title="Inkomst">
+            <vgr-input formControlName="salary" [showValidation]="userFormnSubmitted" [errorMessage]="validationMessages.salary" [formatNumber]="true"
+              [nrOfDecimals]="0"></vgr-input>
+          </vgr-title-value>
+          <vgr-title-value title="Favoritdjur">
+            <vgr-dropdown formControlName="favourite_pet" [items]="dropdownItems"></vgr-dropdown>
+          </vgr-title-value>
+          <vgr-title-value title="Intressen">
+            <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti"></vgr-dropdown-multiselect>
+          </vgr-title-value>
+          <vgr-title-value title="Du måste kryssa i mig!">
+            <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>
+          </vgr-title-value>
+          <vgr-title-value title="Välj valfri">
+            <vgr-radio-group formControlName="optional" [options]="radioOptions">
+            </vgr-radio-group>
+          </vgr-title-value>
+          <vgr-title-value title="Välj Månad">
+            <vgr-monthpicker formControlName="monthpicker" [showValidation]="userFormnSubmitted" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
+          </vgr-title-value>
+          <vgr-title-value title="Välj Dag">
+            <vgr-datepicker formControlName="datepicker"></vgr-datepicker>
+          </vgr-title-value>
+          <vgr-title-value title="Registreringsdatum">
+            <vgr-datepicker formControlName="datepicker_preselected"></vgr-datepicker>
+          </vgr-title-value>
+        </vgr-title-value-layout>
         <vgr-button (click)="onResetUserForm()">Reset form</vgr-button>
-        <button type="submit">Submit</button>
-        <!-- <vgr-button [disabled]="false">Skapa användare</vgr-button> -->
+        <button type="submit" (click)="onSubmitUserForm()">Submit</button>
       </form>
     </vgr-page-block>
     <vgr-page-block>
