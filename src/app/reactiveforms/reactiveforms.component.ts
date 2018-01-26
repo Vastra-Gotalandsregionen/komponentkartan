@@ -139,14 +139,6 @@ export class ReactiveformsComponent implements OnInit {
     this.userFormnSubmitted = true;
   }
 
-  onSubmmitUserForm() {
-    for (const control in this.userForm.controls) {
-      if (this.userForm.controls.hasOwnProperty(control)) {
-        this.userForm.get(control).markAsTouched();
-      }
-    }
-  }
-
   onResetForm() {
     this.userForm.reset();
   }

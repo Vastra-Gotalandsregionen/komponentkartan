@@ -34,10 +34,10 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
 
     @HostBinding('class.validation-error--active') get errorClass() {
-        return this.showValidation && this.control.invalid && this.control.touched && !this.hasFocus;
+        return this.showValidation && this.control.invalid && !this.hasFocus;
     }
     @HostBinding('class.validation-error--editing') get editingClass() {
-        return this.showValidation && this.control.invalid && this.control.touched && this.hasFocus;
+        return this.showValidation && this.control.invalid && this.hasFocus;
     }
 
     selectedItem: DropdownItem<any>;
@@ -66,13 +66,13 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     onLeave() {
         this.hasFocus = false;
-        if (this.control.updateOn === 'blur') {
+        this.control.markAsTouched();
+        if (this.control.updateOn === 'blur' && this.selectedItem && this.selectedItem.value) {
             this.control.setValue(this.selectedItem.value);
         }
     }
 
     onEnter() {
-        this.control.markAsTouched();
         this.hasFocus = true;
     }
 
@@ -118,7 +118,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedItem = item;
-        this.control.setValue(item);
         this.changeDetectorRef.detectChanges();
         this.onChange(item.value);
     }
