@@ -306,7 +306,7 @@ describe('RadioGroupComponent', () => {
                 selectedChangedSpy.calls.reset();
                 optionToSelect = rootElement.queryAll(By.css('.radio-button')).filter(x => x.properties['title'] === 'Per Åkerberg')[0];
                 optionToSelect.triggerEventHandler('click', null);
-                spyOn(component.classRenderer, 'invokeElementMethod').and.callThrough;
+                spyOn(component.classRenderer, 'invokeElementMethod');
                 fixture.detectChanges();
                 selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
             });
@@ -318,6 +318,7 @@ describe('RadioGroupComponent', () => {
                 beforeEach(() => {
                     currentSelection = rootElement.query(By.css('.radio-button--checked'));
                     currentSelection.triggerEventHandler('keydown', { keyCode: 39, preventDefault: function () { } } as KeyboardEvent);
+
 
                     fixture.detectChanges();
                     selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
@@ -349,7 +350,7 @@ describe('RadioGroupComponent', () => {
                         currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
                         expect(currentSelection.properties['title']).toEqual('Per Åkerberg');
                     });
-                })
+                });
             });
             describe('and down arrow key is pressed', () => {
 
@@ -366,7 +367,7 @@ describe('RadioGroupComponent', () => {
 
                 it('last option is selected', () => {
                     currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
-                    expect(currentSelection.properties['title']).toEqual('Caroline Bornsjö');
+                    expect(currentSelection.properties['title']).toEqual('Sofia Hejdenberg');
                 });
                 describe('and up arrow key is pressed', () => {
 
@@ -387,8 +388,8 @@ describe('RadioGroupComponent', () => {
                         currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
                         expect(currentSelection.properties['title']).toEqual('Per Åkerberg');
                     });
-                })
-            })
+                });
+            });
         });
     });
 });
