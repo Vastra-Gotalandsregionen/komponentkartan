@@ -4,8 +4,8 @@
       <span tabindex="0" *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date: selectedDateFormat}}</span>
       <span tabindex="0" *ngIf="!selectedDate" class="datepicker__calendar__selector" title="{{ readonly ? '' : 'Välj datum' }}">{{ readonly ? '' : 'Välj datum' }}</span>
 
-      <!-- *ngIf="isDatePickerVisible" -->
-      <div *ngIf="isDatePickerVisible" class="datepicker__calendar" (click)="onCalendarClick($event)">
+      <!-- *ngIf="expanded" -->
+      <div *ngIf="expanded" class="datepicker__calendar" (click)="onCalendarClick($event)">
         <div class="datepicker__calendar__header">
           <div class="datepicker__calendar__header__previous-year" (click)="onPreviousMonth($event)" [ngClass]="{'disabled': !previousMonth}"></div>
 

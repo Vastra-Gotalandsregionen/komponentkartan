@@ -9,8 +9,6 @@ import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
-import { IValidationResult } from '../../models/validation.model';
-import { ValidationComponent } from '../../controls/validation/validation.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 
 @Component({
@@ -22,33 +20,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => DropdownComponent),
         multi: true
-    }, {
-        provide: ValidationComponent,
-        useExisting: forwardRef(() => DropdownComponent)
     }]
 })
 
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges, OnInit, ControlValueAccessor {
     @Output() selectedChanged = new EventEmitter<DropdownItem<any>>();
-    @Input() showValidation = true;
-    @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
-
-    @HostBinding('class.validation-error--active') get errorClass() {
-        return this.showValidation && this.control.invalid && !this.hasFocus;
-    }
-    @HostBinding('class.validation-error--editing') get editingClass() {
-        return this.showValidation && this.control.invalid && this.hasFocus;
-    }
+    @Input() noItemSelectedLabel: string;
 
     selectedItem: DropdownItem<any>;
-    hasFocus: boolean;
-    validationErrorMessage: string;
 
     constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
-        this.noItemSelectedLabel = '';
-        this.validationErrorMessage = 'Obligatorisk';
-        this.hasFocus = false;
+        this.noItemSelectedLabel = 'Välj';
     }
 
     ngOnChanges() {
