@@ -184,7 +184,7 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     onLeave() {
         this.hasFocus = false;
-
+        this.control.markAsTouched();
         if (this.control.updateOn === 'blur') {
             this.control.setValue(this.selectedDate);
         }
