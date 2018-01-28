@@ -14,61 +14,59 @@
       </vgr-radio-group>
       <br>
       <h3>Obs Experimentell kod</h3>
-      <!-- <form [formGroup]="form">
+      <form [formGroup]="form">
         <div class="row-layout">
           <div class="one-third">
-            <h2>Fördefinierade typer</h2>
             <div>
-              Belopp 1 (type=amount)
-              <vgr-input [value]="value" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
-                [errorMessage]="'Felaktigt nummer'"></vgr-input>
+              Belopp 1 (2 decimaler)
+              <vgr-input formControlName="control1" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
+                [errorMessage]="validationMessages.control1" [showValidation]="form.controls.control1.touched"></vgr-input>
               <span>Belopp 1: </span>
-              <span>{{value}}</span>
+              <span>{{formatNumericValue(form.controls.control1.value)}}</span>
             </div>
             <div>
-              Belopp 2, obligatoriskt
-              <vgr-input formControlName="control2" [formatNumber]="true" [nrOfDecimals]="4" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
-                [errorMessage]="validationMessages.control2"></vgr-input>
+              Belopp 2 (2 decimaler)
+              <vgr-input formControlName="control2" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
+                [errorMessage]="validationMessages.control2" [showValidation]="form.controls.control2.touched"></vgr-input>
               <span>Belopp 2: </span>
               <span>{{formatNumericValue(form.controls.control2.value)}}</span>
             </div>
             <div>
-              Procent
+              Procent (2 decimaler)
               <vgr-input formControlName="control3" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'%'" [alignRight]="true" [small]="isSmall"
-                [errorMessage]="validationMessages.control3"></vgr-input>
+                [errorMessage]="validationMessages.control3" [showValidation]="form.controls.control3.touched"></vgr-input>
               <span>Procent: </span>
               <span>{{formatNumericValue(form.controls.control3.value)}}</span>
             </div>
             <div>
-              Km
+              Km (inga decimaler)
               <vgr-input formControlName="control4" [formatNumber]="true" [nrOfDecimals]="0" [suffix]="'km'" [alignRight]="true" [small]="isSmall"
-                [errorMessage]="validationMessages.control4"></vgr-input>
+                [errorMessage]="validationMessages.control4" [showValidation]="form.controls.control4.touched"></vgr-input>
               <span>Km: </span>
               <span>{{formatNumericValue(form.controls.control4.value)}}</span>
-
             </div>
             <div>
               Numeriskt värde utan enhet
-              <vgr-input formControlName="control5" [formatNumber]="true" [alignRight]="true" [small]="isSmall" [errorMessage]="validationMessages.control5"></vgr-input>
+              <vgr-input formControlName="control5" [formatNumber]="true" [alignRight]="true" [small]="isSmall" [errorMessage]="validationMessages.control5"
+                [showValidation]="form.controls.control5.touched"></vgr-input>
               <span>Värde: </span>
               <span>{{formatNumericValue(form.controls.control5.value)}}</span>
             </div>
           </div>
           <div class="one-third">
-            <h2>Egen konfiguration</h2>
             <div>
               Max-längd 5 tecken
-              <vgr-input formControlName="control6" [maxlength]=5 [small]="isSmall"></vgr-input>
+              <vgr-input formControlName="control6" [maxlength]=5 [small]="isSmall" [showValidation]="form.controls.control6.touched"></vgr-input>
             </div>
             <div>
               Exakt 3 VERSALER (validera vid initiering)
-              <vgr-input formControlName="control7" [errorMessage]="validationMessages.control7" [maxlength]="3" [small]="isSmall"></vgr-input>
+              <vgr-input formControlName="control7" [errorMessage]="validationMessages.control7" [maxlength]="3" [small]="isSmall" [showValidation]="true"></vgr-input>
               <span>Värde: </span>
               <span>{{form.controls.control7.value}}</span>
             </div>
             <div>
               Mellan 2 och 6 tecken
-              <vgr-input formControlName="control8" [maxlength]=6 [errorMessage]="validationMessages.control8" [small]="isSmall"></vgr-input>
+              <vgr-input formControlName="control8" [maxlength]=6 [errorMessage]="validationMessages.control8" [small]="isSmall" [showValidation]="form.controls.control8.touched"></vgr-input>
             </div>
             <div>
               Heltal med enhet
@@ -79,11 +77,11 @@
             </div>
             <div>
               Långa felmeddelanden
-              <vgr-input formControlName="control10" [errorMessage]="validationMessages.control10" [small]="isSmall"></vgr-input>
+              <vgr-input formControlName="control10" [errorMessage]="validationMessages.control10" [small]="isSmall" [showValidation]="form.controls.control10.touched"></vgr-input>
             </div>
             <div>
               Readonly fält
-              <vgr-input formControlName="control11" [readonly]="true" [small]="isSmall"></vgr-input>
+              <vgr-input formControlName="control11" [readonly]="true" [small]="isSmall" [showValidation]="form.controls.control11.touched"></vgr-input>
             </div>
             <div>
               Ingen validering
@@ -92,19 +90,18 @@
 
           </div>
           <div class="one-third">
-            <h2>Validering med service</h2>
             <div>
               Ange en storstad i USA (validera vid initiering)
-              <vgr-input formControlName="control13" [small]="isSmall" [errorMessage]="validationMessages.control13"></vgr-input>
+              <vgr-input formControlName="control13" [small]="isSmall" [errorMessage]="validationMessages.control13" [showValidation]="true"></vgr-input>
               <span>Din stad: {{form.controls.control13.value}}</span>
             </div>
             <div>
               E-postadress
-              <vgr-input formControlName="control14" [small]="isSmall" [errorMessage]="validationMessages.control14"></vgr-input>
+              <vgr-input formControlName="control14" [small]="isSmall" [errorMessage]="validationMessages.control14" [showValidation]="form.controls.control14.touched"></vgr-input>
             </div>
           </div>
         </div>
-      </form> -->
+      </form>
     </vgr-page-block>
   </vgr-page-body>
 </vgr-page>
