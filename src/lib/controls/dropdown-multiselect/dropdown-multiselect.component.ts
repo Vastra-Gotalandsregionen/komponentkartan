@@ -198,9 +198,11 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
     onLeave() {
         this.hasFocus = false;
-        this.control.markAsTouched();
-        if (this.control.updateOn === 'blur' && this.selectedItems) {
-            this.control.setValue(this._items.filter(x => x.selected).map(x => x.displayName));
+        if (this.control) {
+            this.control.markAsTouched();
+            if (this.control.updateOn === 'blur' && this.selectedItems) {
+                this.control.setValue(this._items.filter(x => x.selected).map(x => x.displayName));
+            }
         }
     }
 

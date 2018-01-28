@@ -41,7 +41,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         return this.showValidation && this.control && this.control.invalid && this.hasFocus;
     }
 
-    invalidOnFocus: boolean;
     hasFocus: boolean;
 
     control: AbstractControl;
@@ -104,10 +103,13 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
     onLeave() {
         this.hasFocus = false;
-        this.control.markAsTouched();
-        if (this.control.updateOn === 'blur') {
-            this.control.setValue(this.selectedDate);
+        if (this.control) {
+            this.control.markAsTouched();
+            if (this.control.updateOn === 'blur') {
+                this.control.setValue(this.selectedDate);
+            }
         }
+
     }
 
     onEnter() {
@@ -115,7 +117,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
             return;
         }
         this.hasFocus = true;
-        this.invalidOnFocus = this.control.invalid && this.control.touched;
     }
 
     @HostListener('document:click', ['$event'])

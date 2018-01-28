@@ -44,7 +44,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         return this.showValidation && this.control && this.control.invalid && this.hasFocus;
     }
 
-    invalidOnFocus: boolean;
     hasFocus: boolean;
 
     expanded: boolean;
@@ -180,10 +179,13 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     onLeave() {
         this.hasFocus = false;
-        this.control.markAsTouched();
-        if (this.control.updateOn === 'blur') {
-            this.control.setValue(this.selectedDate);
+        if (this.control) {
+            this.control.markAsTouched();
+            if (this.control.updateOn === 'blur') {
+                this.control.setValue(this.selectedDate);
+            }
         }
+
     }
 
     onEnter() {
@@ -191,7 +193,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
             return;
         }
         this.hasFocus = true;
-        this.invalidOnFocus = this.control.invalid && this.control.touched;
     }
 
     onNextMouseDown(event: Event) {
