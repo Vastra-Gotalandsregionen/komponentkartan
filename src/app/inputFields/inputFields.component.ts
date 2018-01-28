@@ -126,7 +126,7 @@ export class InputFieldsComponent implements OnInit {
             control10: new FormControl('', { validators: [Validators.required] }),
             control11: new FormControl('Visar värdet utan ram'),
             control12: new FormControl(),
-            control13: new FormControl(this.cityName, { validators: [Validators.required, validateAsyncCityName()] }),
+            control13: new FormControl(this.cityName, { validators: [Validators.required], asyncValidators: [validateAsyncCityName()] }),
             control14: new FormControl('', { validators: [Validators.email] })
         }, { updateOn: 'blur' });
     }
