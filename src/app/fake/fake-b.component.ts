@@ -1,5 +1,4 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
-import { SortDirection, SortChangedArgs } from '../../lib/index';
+import { Component } from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -7,11 +6,9 @@ import { SortDirection, SortChangedArgs } from '../../lib/index';
     templateUrl: 'fake-b.component.html'
 })
 export class FakeBComponent {
-    sortDirections = SortDirection;
-    notification: any;
+
 
     constructor() {
-        this.notification = null;
     }
 
 }

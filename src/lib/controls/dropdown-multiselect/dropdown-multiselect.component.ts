@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef, Optional, SkipSelf, Host, HostBinding, OnInit } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef, Optional, SkipSelf, Host, HostBinding } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
     }]
 })
 
-export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, OnInit, ControlValueAccessor {
+export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
 
     @Input() showAllItemText: string;
     @Input() allItemsSelectedLabel: string;
@@ -60,10 +60,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         } as DropdownItem<any>;
     }
 
-    ngOnInit() {
-        this.control = this.controlContainer.control.get(this.formControlName);
-    }
-
     ngOnChanges() {
         if (this.formControlName) {
             this.control = this.controlContainer.control.get(this.formControlName);
@@ -73,6 +69,10 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         this.selectAllItem.displayName = this.selectAllItemText;
         this.selectAllItem.displayNameWhenSelected = this.allItemsSelectedLabel;
+
+        if (this.formControlName) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
 
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();

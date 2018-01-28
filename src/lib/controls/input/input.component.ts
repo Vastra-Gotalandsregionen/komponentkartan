@@ -79,7 +79,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   setDisplayValue() {
-    if (this.formatNumber && this.control.valid) {
+    if (this.formatNumber && this.control && this.control.valid) {
       this.displayValue = this.convertNumberToString(this.value);
     } else {
       this.displayValue = this.value;
@@ -132,7 +132,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     if (this.readonly) {
       return;
     }
-    this.invalidOnFocus = this.control.invalid && this.control.touched;
+    this.invalidOnFocus = this.control && this.control.invalid && this.control.touched;
     if (this.displayValue) {
       this.displayValue = this.displayValue.toString().replace(/\s/g, '');
 

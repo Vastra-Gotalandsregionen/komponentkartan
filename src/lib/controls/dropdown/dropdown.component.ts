@@ -1,6 +1,6 @@
 import {
     Component, Input, AfterViewInit, ElementRef, OnChanges, Output, SimpleChange,
-    EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef, OnInit,
+    EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef,
     SkipSelf, Optional, Host
 } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
@@ -23,7 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
     }]
 })
 
-export class DropdownComponent extends DropdownBaseComponent implements OnChanges, OnInit, ControlValueAccessor {
+export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
     @Output() selectedChanged = new EventEmitter<DropdownItem<any>>();
     @Input() noItemSelectedLabel: string;
 
@@ -39,12 +39,12 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
             displayName: this.showAllItemText
         } as DropdownItem<any>;
 
+        if (this.formControlName) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
+
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
-    }
-
-    ngOnInit() {
-        this.control = this.controlContainer.control.get(this.formControlName);
     }
 
     onLeave() {

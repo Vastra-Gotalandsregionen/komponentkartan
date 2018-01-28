@@ -21,10 +21,10 @@ export abstract class DropdownBaseComponent {
     @HostBinding('class.dropdown') dropdownClass = true;
 
     @HostBinding('class.validation-error--active') get errorClass() {
-        return this.showValidation && this.control.invalid && !this.hasFocus;
+        return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
     }
     @HostBinding('class.validation-error--editing') get editingClass() {
-        return this.showValidation && this.control.invalid && this.hasFocus;
+        return this.showValidation && this.control && this.control.invalid && this.hasFocus;
     }
 
     control: AbstractControl;
