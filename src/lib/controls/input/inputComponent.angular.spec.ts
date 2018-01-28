@@ -12,8 +12,6 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import { InputComponent } from '../../controls/input/input.component';
 
 import { ErrorHandler } from '../../services/errorhandler';
-
-import { IValidationResult, ValidationErrorState } from '../../models/validation.model';
 import { TruncatePipe } from '../../pipes/truncatePipe';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 
@@ -61,7 +59,6 @@ describe('[InputComponent]', () => {
   let component: InputComponent;
   let fixture: ComponentFixture<InputComponent>;
   let rootElement: DebugElement;
-  const validationErrorStates = ValidationErrorState;
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();

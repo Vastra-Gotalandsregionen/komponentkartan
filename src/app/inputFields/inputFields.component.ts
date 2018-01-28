@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { IValidationResult, ValidationErrorState, IValidation, ICustomValidator, SelectableItem, ErrorHandler } from '../../lib/index';
+import { ErrorHandler } from '../../lib/index';
 import { CityService } from './cityService';
 import { FormGroup, FormControl, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
