@@ -132,7 +132,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     if (this.readonly) {
       return;
     }
-    this.invalidOnFocus = this.control && this.control.invalid && this.control.touched;
+    this.invalidOnFocus = this.control && this.control.invalid && this.showValidation;
     if (this.displayValue) {
       this.displayValue = this.displayValue.toString().replace(/\s/g, '');
 
