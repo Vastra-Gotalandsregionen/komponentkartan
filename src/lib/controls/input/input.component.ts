@@ -71,10 +71,13 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   writeValue(value: any) {
-    if (value !== undefined) {
+    if (value) {
       this.value = value;
-
       this.setDisplayValue();
+
+      if (this.formatNumber && (value.toString().split('.')[1] || []).length !== this.nrOfDecimals) {
+        this.formatDisplayNumber();
+      }
     }
   }
 
@@ -96,6 +99,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   onChange(input: any) {
     this.value = input;
+    this.control.setValue(this.value);
   }
 
   onTouched() { }
@@ -112,7 +116,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.hasFocus = false;
     this.blur.emit(event);
 
-    console.log(this.control.value);
   }
 
   formatDisplayNumber() {
@@ -121,6 +124,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
       this.displayValue = this.convertNumberToString(this.value);
     } else {
       this.value = this.displayValue;
+    }
+
+    if (this.control.updateOn === 'blur') {
+      this.control.setValue(this.value);
     }
   }
 
