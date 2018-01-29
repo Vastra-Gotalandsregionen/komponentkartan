@@ -24,37 +24,6 @@ registerLocaleData(localeSe, 'sv-SE', localeSerExtra);
 import { combineAll } from 'rxjs/operator/combineAll';
 import { Observable } from 'rxjs/Observable';
 
-export class Controler implements ControlContainer {
-  name: string;
-  formDirective: Form;
-  path: string[];
-  control: AbstractControl;
-  value: any;
-  valid: boolean;
-  invalid: boolean;
-  pending: boolean;
-  disabled: boolean;
-  enabled: boolean;
-  errors: { [key: string]: any; };
-  pristine: boolean;
-  dirty: boolean;
-  touched: boolean;
-  status: string;
-  untouched: boolean;
-  statusChanges: Observable<any>;
-  valueChanges: Observable<any>;
-  reset(value?: any): void {
-    // throw new Error("Method not implemented.");
-  }
-  hasError(errorCode: string, path?: string[]): boolean {
-    // throw new Error("Method not implemented.");
-    return null;
-  }
-  getError(errorCode: string, path?: string[]) {
-    // throw new Error("Method not implemented.");
-  }
-}
-
 describe('[InputComponent]', () => {
   let component: InputComponent;
   let fixture: ComponentFixture<InputComponent>;
@@ -91,7 +60,7 @@ describe('[InputComponent]', () => {
   // Emulate OnSubmit
   describe('When initialized with invalid state and showValidation is false', () => {
     beforeEach(() => {
-      component.control = new FormControl('', { validators: [Validators.required] });
+      component.control = new FormControl('', { validators: [Validators.required], updateOn: 'submit' });
       component.errorMessage = 'error';
       component.showValidation = false;
       component.readonly = false;

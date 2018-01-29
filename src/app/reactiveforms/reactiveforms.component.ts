@@ -68,14 +68,12 @@ export class ReactiveformsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createForm();
-    this.createUserFormSubmit();
-    this.createUpdateOnBlurForm();
+    this.createOnBlurForm();
+    this.createOnSubmitForm();
     this.createUpdateOnChangeForm();
-    this.createUpdateOnSubmitForm();
   }
 
-  createForm() {
+  createOnBlurForm() {
     this.userForm = new FormGroup({
       firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
@@ -92,7 +90,7 @@ export class ReactiveformsComponent implements OnInit {
     }, { updateOn: 'blur' });
   }
 
-  createUserFormSubmit() {
+  createOnSubmitForm() {
     this.userFormSubmit = new FormGroup({
       firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
@@ -109,24 +107,20 @@ export class ReactiveformsComponent implements OnInit {
     }, { updateOn: 'submit' });
   }
 
-  createUpdateOnBlurForm() {
-    this.updateOnBlurForm = new FormGroup({
-      firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
-      salary: new FormControl('', { validators: [Validators.required, validateNumber] })
-    }, { updateOn: 'blur' });
-  }
-
-  createUpdateOnSubmitForm() {
-    this.updateOnSubmitForm = new FormGroup({
-      firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
-      salary: new FormControl('', { validators: [Validators.required, validateNumber] })
-    }, { updateOn: 'submit' });
-  }
-
   createUpdateOnChangeForm() {
     this.updateOnChangeForm = new FormGroup({
       firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
-      salary: new FormControl('', { validators: [Validators.required, validateNumber] })
+      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
+      email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
+      favourite_pet: new FormControl(null, { validators: [Validators.required] }),
+      interests: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
+      check: new FormControl(true, { validators: [Validators.pattern('true')] }),
+      optional: new FormControl(this.radioOptions[2].value),
+      monthpicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] })
     }, { updateOn: 'change' });
   }
 
@@ -139,14 +133,14 @@ export class ReactiveformsComponent implements OnInit {
     this.userFormnSubmitted = true;
   }
 
-  onResetForm() {
-    this.userForm.reset();
-  }
+  // onResetForm() {
+  //   this.userForm.reset();
+  // }
 
-  onResetUserForm() {
-    this.userFormSubmit.reset();
-    this.userFormnSubmitted = false;
-  }
+  // onResetUserForm() {
+  //   this.userFormSubmit.reset();
+  //   this.userFormnSubmitted = false;
+  // }
 
   onResetUpdateOnBlurForm() {
     this.updateOnBlurForm.reset();
