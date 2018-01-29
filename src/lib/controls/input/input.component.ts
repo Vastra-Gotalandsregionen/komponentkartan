@@ -111,6 +111,8 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.onChange(this.value);
     this.hasFocus = false;
     this.blur.emit(event);
+
+    console.log(this.control.value);
   }
 
   formatDisplayNumber() {

@@ -62,6 +62,7 @@ describe('[InputComponent]', () => {
     beforeEach(() => {
       component.control = new FormControl('', { validators: [Validators.required], updateOn: 'submit' });
       component.errorMessage = 'error';
+      component.formatNumber = true;
       component.showValidation = false;
       component.readonly = false;
       component.ngOnInit();
@@ -130,7 +131,7 @@ describe('[InputComponent]', () => {
 
             describe('When submit is triggered with valid input', () => {
               beforeEach(() => {
-                component.control.setValue('valid');
+                component.control.setValue(12312);
                 fixture.detectChanges();
                 rootElement.triggerEventHandler('submit', event);
               });
@@ -178,6 +179,22 @@ describe('[InputComponent]', () => {
           });
         });
       });
+    });
+  });
+
+  describe('When initialized with valid state', () => {
+    beforeEach(() => {
+      component.control = new FormControl(123123, { validators: [Validators.required], updateOn: 'submit' });
+      component.errorMessage = 'error';
+      component.formatNumber = true;
+      component.showValidation = false;
+      component.readonly = false;
+      component.ngOnInit();
+      fixture.detectChanges();
+    });
+
+    it('CSS Class validated-input has been applied', () => {
+      expect(rootElement.classes['validated-input']).toEqual(true);
     });
   });
 });

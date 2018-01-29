@@ -96,7 +96,7 @@ export class ReactiveformsComponent implements OnInit {
       lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
       email: new FormControl('', { validators: [Validators.required, Validators.email] }),
-      salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
+      salary: new FormControl(987798.9879, { validators: [Validators.required, validateNumber] }),
       favourite_pet: new FormControl(null, { validators: [Validators.required] }),
       interests: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
       check: new FormControl(true, { validators: [Validators.pattern('true')] }),
@@ -132,15 +132,6 @@ export class ReactiveformsComponent implements OnInit {
   onSubmitUserForm() {
     this.userFormnSubmitted = true;
   }
-
-  // onResetForm() {
-  //   this.userForm.reset();
-  // }
-
-  // onResetUserForm() {
-  //   this.userFormSubmit.reset();
-  //   this.userFormnSubmitted = false;
-  // }
 
   onResetUpdateOnBlurForm() {
     this.updateOnBlurForm.reset();
