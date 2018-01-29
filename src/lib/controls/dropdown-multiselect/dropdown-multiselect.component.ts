@@ -200,6 +200,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.hasFocus = false;
         if (this.control) {
             this.control.markAsTouched();
+            this.control.markAsDirty();
             if (this.control.updateOn === 'blur' && this.selectedItems) {
                 this.control.setValue(this._items.filter(x => x.selected).map(x => x.displayName));
             }

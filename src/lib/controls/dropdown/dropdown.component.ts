@@ -49,9 +49,12 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     onLeave() {
         this.hasFocus = false;
-        this.control.markAsTouched();
-        if (this.control.updateOn === 'blur' && this.selectedItem && this.selectedItem.value) {
-            this.control.setValue(this.selectedItem.value);
+        if (this.control) {
+            this.control.markAsTouched();
+            this.control.markAsDirty();
+            if (this.control.updateOn === 'blur' && this.selectedItem && this.selectedItem.value) {
+                this.control.setValue(this.selectedItem.value);
+            }
         }
     }
 
