@@ -126,11 +126,11 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     } else {
       this.value = this.displayValue;
     }
-
     if (this.control.updateOn === 'blur') {
       this.control.setValue(this.value);
     }
   }
+
 
   isNumber(value: any): boolean {
     const pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
