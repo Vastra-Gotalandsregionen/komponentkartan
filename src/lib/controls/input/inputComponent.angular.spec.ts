@@ -55,6 +55,7 @@ describe('[InputComponent]', () => {
   });
 
   // Emulate OnBlur
+
   // Emulate OnChange
 
   // Emulate OnSubmit
@@ -223,6 +224,7 @@ describe('[InputComponent]', () => {
   });
 
   describe('When setting number value', () => {
+    let element: DebugElement;
     beforeEach(() => {
       component.control = new FormControl('', { validators: [Validators.required], updateOn: 'change' });
       component.formatNumber = true;
@@ -230,7 +232,7 @@ describe('[InputComponent]', () => {
       component.nrOfDecimals = 1;
       component.ngOnInit();
 
-      const element = rootElement.query(By.css('.input-container__textbox'));
+      element = rootElement.query(By.css('.input-container__textbox'));
       const input = element.nativeElement;
       element.triggerEventHandler('focus', event);
       input.value = '100.67';
@@ -242,6 +244,19 @@ describe('[InputComponent]', () => {
     it('value number is correctly formatted', () => {
       expect(component.value).toEqual(100.7);
       expect(component.control.value).toEqual(100.7);
+    });
+
+    describe('When focused again', () => {
+      beforeEach(() => {
+        element.triggerEventHandler('focus', event);
+        fixture.detectChanges();
+      });
+
+      it('the value should still be formatted correctly', () => {
+        expect(component.value).toEqual(100.7);
+        expect(component.control.value).toEqual(100.7);
+      });
+
     });
   });
 });
