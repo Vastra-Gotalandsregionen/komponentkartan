@@ -31,7 +31,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
-        this.noItemSelectedLabel = 'Välj';
+        this.noItemSelectedLabel = '';
     }
 
     ngOnChanges() {
