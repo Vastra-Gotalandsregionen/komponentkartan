@@ -36,7 +36,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         return this._items.filter(x => x.selected);
     }
 
-    @Input() set selectedValues(values: any[]) {
+    set selectedValues(values: any[]) {
         if (this.items) {
             const matchingItems = this.items.filter((x => values.indexOf(x.value) > -1));
             if (matchingItems.length > 0) {

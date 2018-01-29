@@ -88,7 +88,7 @@ export class InputFieldsComponent implements OnInit {
 
     constructor(private errorHandler: ErrorHandler) {
         this.cityName = 'Houstons';
-        this.amount1 = 15000;
+        this.amount1 = 15000.54434;
         this.amount2 = -25.5;
         this.percentValue = 0.02;
         this.kmValue = 11;
