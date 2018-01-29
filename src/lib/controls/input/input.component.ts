@@ -77,6 +77,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
       if (this.formatNumber && (value.toString().split('.')[1] || []).length !== this.nrOfDecimals) {
         this.formatDisplayNumber();
+        this.control.setValue(this.value);
       }
     }
   }

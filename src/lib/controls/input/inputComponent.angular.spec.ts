@@ -182,19 +182,66 @@ describe('[InputComponent]', () => {
     });
   });
 
-  describe('When initialized with valid state', () => {
+  describe('When initialized with a value and formatNumber set to true', () => {
     beforeEach(() => {
-      component.control = new FormControl(123123, { validators: [Validators.required], updateOn: 'submit' });
-      component.errorMessage = 'error';
+      component.control = new FormControl(213123.123213, { validators: [Validators.required], updateOn: 'submit' });
       component.formatNumber = true;
-      component.showValidation = false;
       component.readonly = false;
+      component.nrOfDecimals = 2;
       component.ngOnInit();
+      component.writeValue(213123.123213);
       fixture.detectChanges();
     });
 
-    it('CSS Class validated-input has been applied', () => {
-      expect(rootElement.classes['validated-input']).toEqual(true);
+    it('value number is correctly formatted with 2 decimals', () => {
+      expect(component.value).toEqual(213123.12);
+      expect(component.control.value).toEqual(213123.12);
+    });
+  });
+
+  describe('When initialized with updateOn blur and a value set', () => {
+    beforeEach(() => {
+      component.control = new FormControl('', { validators: [Validators.required], updateOn: 'blur' });
+      component.formatNumber = true;
+      component.readonly = false;
+      component.nrOfDecimals = 1;
+      component.ngOnInit();
+
+      const element = rootElement.query(By.css('.input-container__textbox'));
+      const input = element.nativeElement;
+      element.triggerEventHandler('focus', event);
+      input.value = '23.67';
+      input.dispatchEvent(new Event('input'));
+      element.triggerEventHandler('blur', event);
+      fixture.detectChanges();
+    });
+
+    it('value number is correctly formatted with one decimal', () => {
+      expect(component.value).toEqual(23.7);
+      expect(component.control.value).toEqual(23.7);
+    });
+  });
+
+  describe('When setting number value', () => {
+    beforeEach(() => {
+      component.control = new FormControl('', { validators: [Validators.required], updateOn: 'change' });
+      component.formatNumber = true;
+      component.readonly = false;
+      component.nrOfDecimals = 1;
+      component.ngOnInit();
+
+      const element = rootElement.query(By.css('.input-container__textbox'));
+      const input = element.nativeElement;
+      element.triggerEventHandler('focus', event);
+      input.value = '100.67';
+      input.dispatchEvent(new Event('input'));
+      element.triggerEventHandler('blur', event);
+      fixture.detectChanges();
+    });
+
+    it('value number is correctly formatted', () => {
+      expect(component.value).toEqual(100.7);
+      expect(component.control.value).toEqual(100.7);
     });
   });
 });
