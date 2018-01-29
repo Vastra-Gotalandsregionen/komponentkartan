@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { IValidationResult, ValidationErrorState, IValidation, ICustomValidator, SelectableItem, ErrorHandler } from '../../lib/index';
+import { ErrorHandler } from '../../lib/index';
 import { CityService } from './cityService';
-import { FormGroup, FormBuilder, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import { Observable } from 'rxjs/Observable';
@@ -86,7 +86,7 @@ export class InputFieldsComponent implements OnInit {
         }
     };
 
-    constructor(private fb: FormBuilder, private errorHandler: ErrorHandler) {
+    constructor(private errorHandler: ErrorHandler) {
         this.cityName = 'Houstons';
         this.amount1 = 15000;
         this.amount2 = -25.5;
@@ -113,22 +113,22 @@ export class InputFieldsComponent implements OnInit {
     }
 
     createForm() {
-        this.form = this.fb.group({
-            control1: [this.amount1, validateNumber],
-            control2: [this.amount2, [validateNumber, Validators.required, Validators.minLength(3)]],
-            control3: [this.percentValue, validateNumber],
-            control4: [this.kmValue, validateNumber],
-            control5: [this.numericValue, validateNumber],
-            control6: [],
-            control7: ['', [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required]],
-            control8: ['', [Validators.pattern('^.{2,6}$'), Validators.required]],
-            control9: [this.intValue, validateNumber],
-            control10: ['', Validators.required],
-            control11: ['Visar värdet utan ram'],
-            control12: [],
-            control13: [this.cityName, Validators.required, validateAsyncCityName()],
-            control14: ['', Validators.email]
-        });
+        this.form = new FormGroup({
+            control1: new FormControl(this.amount1, { validators: [validateNumber] }),
+            control2: new FormControl(this.amount2, { validators: [validateNumber, Validators.required, Validators.minLength(3)] }),
+            control3: new FormControl(this.percentValue, { validators: [validateNumber] }),
+            control4: new FormControl(this.kmValue, { validators: [validateNumber] }),
+            control5: new FormControl(this.numericValue, { validators: [validateNumber] }),
+            control6: new FormControl(),
+            control7: new FormControl('', { validators: [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required] }),
+            control8: new FormControl('', { validators: [Validators.pattern('^.{2,6}$'), Validators.required] }),
+            control9: new FormControl(this.intValue, { validators: [validateNumber] }),
+            control10: new FormControl('', { validators: [Validators.required] }),
+            control11: new FormControl('Visar värdet utan ram'),
+            control12: new FormControl(),
+            control13: new FormControl(this.cityName, { validators: [Validators.required], asyncValidators: [validateAsyncCityName()] }),
+            control14: new FormControl('', { validators: [Validators.email] })
+        }, { updateOn: 'blur' });
     }
 
     formatNumericValue(value: number) {

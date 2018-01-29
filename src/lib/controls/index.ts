@@ -45,5 +45,3 @@ export { ListItemHeaderComponent } from './list-item/list-item-header.component'
 export { ExpandableDivComponent } from './expandableDiv/expandableDiv.component';
 export { ExpandableDivHeaderComponent } from './expandableDiv/expandableDiv-header.component';
 export { ExpandableDivContentComponent } from './expandableDiv/expandableDiv-content.component';
-
-export { ValidationComponent } from './validation/validation.component';

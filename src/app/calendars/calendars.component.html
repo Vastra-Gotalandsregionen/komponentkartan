@@ -85,7 +85,7 @@
         <div>
           <span>Valt datum: </span>
           <p>{{datepicker_selectedDate | date : 'dd MMM yyyy'}}</p>
-        </div>       
+        </div>
       </div>
       <div class="row-layout row-layout--padded">
         <div>
@@ -102,20 +102,20 @@
         <div>
           <span>Valt datum: </span>
           <p>{{datepicker_selectedDateNew | date : 'dd MMM yyyy'}}</p>
-        </div>     
+        </div>
       </div>
       <div class="row-layout row-layout--padded">
         <div>
           <p>Readonlyläge vid befintlig datum</p>
           <vgr-datepicker [selectedDate]="datepicker_selectedDate" [readonly]="isReadonlyAndDisabledDatepicker"></vgr-datepicker>
-        </div>  
+        </div>
       </div>
       <br>
       <div>
-          <div>
-            <p>Toggle readonly och disabled </p>
-              <vgr-button (click)="isReadonlyAndDisabledDatepicker = !isReadonlyAndDisabledDatepicker;">Toggle</vgr-button>
-          </div>
+        <div>
+          <p>Toggle readonly och disabled </p>
+          <vgr-button (click)="isReadonlyAndDisabledDatepicker = !isReadonlyAndDisabledDatepicker;">Toggle</vgr-button>
+        </div>
       </div>
 
       <div>

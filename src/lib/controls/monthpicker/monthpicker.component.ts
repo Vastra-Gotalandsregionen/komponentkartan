@@ -1,12 +1,10 @@
 import {
     Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef, forwardRef,
-    ChangeDetectorRef, SkipSelf, Optional, Host
+    ChangeDetectorRef, SkipSelf, Optional, Host, SimpleChanges
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
-import { IValidationResult } from '../../models/validation.model';
-import { ValidationComponent } from '../../controls/validation/validation.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
 
@@ -19,36 +17,48 @@ import { AbstractControl } from '@angular/forms';
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => MonthpickerComponent),
             multi: true
-        },
-        { provide: ValidationComponent, useExisting: forwardRef(() => MonthpickerComponent) }]
+        }]
 
 })
-export class MonthpickerComponent extends ValidationComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAccessor {
 
-    today: Date = new Date();
+    @Input() showValidation = true;
     @Input() minDate: Date;
     @Input() maxDate: Date;
-    @Input() selectedDate?: Date;
     @Input() required: boolean;
-    @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() selectedDateFormat = 'MMM yyyy';
     @Input() tooltipDateFormat = 'MMMM yyyy';
     @Input() formControlName?: string;
+    @Input() selectedDate?: Date;
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
+
+    @Input() @HostBinding('class.disabled') disabled: boolean;
+    @Input() @HostBinding('class.readonly') readonly: boolean;
+
+    @HostBinding('class.validated-input') hasClass = true;
+    @HostBinding('class.validation-error--active') get errorClass() {
+        return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
+    }
+    @HostBinding('class.validation-error--editing') get editingClass() {
+        return this.showValidation && this.control && this.control.invalid && this.hasFocus;
+    }
+
+    hasFocus: boolean;
+
+    expanded: boolean;
+    control: AbstractControl;
+    preventCollapse: boolean;
 
     displayedYear: ICalendarYear = {} as ICalendarYear;
     previousYear: ICalendarYear;
     nextYear: ICalendarYear;
-
+    today: Date = new Date();
     years: ICalendarYear[];
-    expanded: boolean;
-    control: AbstractControl;
-    protected preventCollapse: boolean;
+
+    validationErrorMessage = 'Obligatoriskt';
 
     constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
-        super();
         this.expanded = false;
         this.years = [];
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
@@ -57,7 +67,6 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
 
     ngOnInit() {
         this.years = [];
-
         if (this.selectedDate) {
             if (this.selectedDate.getFullYear() < this.today.getFullYear()) {
                 this.minDate = new Date(this.selectedDate.getFullYear(), 0, 1);
@@ -69,16 +78,15 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
 
         }
         this.createYears();
-
         this.setDisplayedYear(this.selectedDate);
-
     }
 
-    ngOnChanges() {
+    ngOnChanges(changes: SimpleChanges) {
         if (this.formControlName) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
     }
+
     writeValue(value: any): void {
         this.selectedDate = value;
     }
@@ -165,29 +173,27 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
 
     }
 
-    doValidate(): IValidationResult {
-        const isValid = (!this.required || this.selectedDate) && !this.controlHasErrors();
-
-        return {
-            isValid: isValid,
-            validationError: isValid ? '' : 'Obligatoriskt'
-        } as IValidationResult;
-    }
-
     controlHasErrors() {
         return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }
 
     onLeave() {
-        this.validate();
+        this.hasFocus = false;
+        if (this.control) {
+            this.control.markAsTouched();
+            this.control.markAsDirty();
+            if (this.control.updateOn === 'blur') {
+                this.control.setValue(this.selectedDate);
+            }
+        }
+
     }
 
     onEnter() {
         if (this.disabled || this.readonly) {
             return;
         }
-
-        this.setValidationStateEditing();
+        this.hasFocus = true;
     }
 
     onNextMouseDown(event: Event) {
@@ -236,7 +242,6 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
         }
     }
 
-
     private toggleCalendar(event: Event) {
         if (this.preventCollapse) {
             event.cancelBubble = true;
@@ -282,12 +287,8 @@ export class MonthpickerComponent extends ValidationComponent implements OnInit,
 
         this.selectedDateChanged.emit(selectedMonth.date);
         // Utan detectchanges får man "Value was changed after is was checked" i browser console.
+        this.changeDetectorRef.detectChanges();
         this.selectedDate = selectedMonth.date;
         this.onChange(selectedMonth.date);
-        this.changeDetectorRef.detectChanges();
-
-        this.validate();
     }
-
-
 }

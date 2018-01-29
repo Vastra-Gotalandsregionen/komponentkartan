@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { ViewEncapsulation } from '@angular/core/src/metadata/view';
 import { SelectableItem, DropdownItem } from '../../lib/index';
 
@@ -18,6 +18,15 @@ export class ReactiveformsComponent implements OnInit {
   maxDate = new Date('2025');
 
   userForm: FormGroup;
+  userFormSubmit: FormGroup;
+  updateOnBlurForm: FormGroup;
+  updateOnSubmitForm: FormGroup;
+  updateOnChangeForm: FormGroup;
+
+  formSubmitted: boolean;
+  userFormSubmitted: boolean;
+  userFormnSubmitted: boolean;
+
   validationMessages = {
     firstname: {
       'minlength': 'Namnet måste vara minst 2 tecken',
@@ -38,7 +47,7 @@ export class ReactiveformsComponent implements OnInit {
       'required': 'Detta skriver över default meddelandet för obligatoriska fält'
     }
   };
-  constructor(private fb: FormBuilder) {
+  constructor() {
     this.radioOptions = [
       { displayName: 'Ett', value: 1 },
       { displayName: 'Två', value: 2 },
@@ -59,25 +68,82 @@ export class ReactiveformsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createForm();
+    this.createOnBlurForm();
+    this.createOnSubmitForm();
+    this.createUpdateOnChangeForm();
   }
 
-  createForm() {
+  createOnBlurForm() {
+    this.userForm = new FormGroup({
+      firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
+      email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
+      favourite_pet: new FormControl(null, { validators: [Validators.required] }),
+      interests: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
+      check: new FormControl(true, { validators: [Validators.pattern('true')] }),
+      optional: new FormControl(this.radioOptions[2].value),
+      monthpicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] })
+    }, { updateOn: 'blur' });
+  }
 
-    this.userForm = this.fb.group({
-      firstname: ['', [Validators.required, Validators.minLength(2)]],
-      lastname: ['', [Validators.required, Validators.minLength(2)]],
-      age: ['', [Validators.required, Validators.min(18), Validators.max(120), validateNumber]],
-      email: ['', [Validators.required, Validators.email]],
-      salary: ['', [Validators.required, validateNumber]],
-      favourite_pet: [null, Validators.required],
-      interests: [[this.dropdownItemsMulti[0].value], Validators.required],
-      check: [true, Validators.pattern('true')],
-      optional: [this.radioOptions[2].value],
-      monthpicker: ['', Validators.required],
-      datepicker: ['', Validators.required],
-      datepicker_preselected: [new Date(), Validators.required]
-    });
+  createOnSubmitForm() {
+    this.userFormSubmit = new FormGroup({
+      firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
+      email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      salary: new FormControl(987798.9879, { validators: [Validators.required, validateNumber] }),
+      favourite_pet: new FormControl(null, { validators: [Validators.required] }),
+      interests: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
+      check: new FormControl(true, { validators: [Validators.pattern('true')] }),
+      optional: new FormControl(this.radioOptions[2].value),
+      monthpicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] })
+    }, { updateOn: 'submit' });
+  }
+
+  createUpdateOnChangeForm() {
+    this.updateOnChangeForm = new FormGroup({
+      firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+      age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
+      email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
+      favourite_pet: new FormControl(null, { validators: [Validators.required] }),
+      interests: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
+      check: new FormControl(true, { validators: [Validators.pattern('true')] }),
+      optional: new FormControl(this.radioOptions[2].value),
+      monthpicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker: new FormControl('', { validators: [Validators.required] }),
+      datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] })
+    }, { updateOn: 'change' });
+  }
+
+  onSubmit() {
+    this.formSubmitted = true;
+  }
+
+
+  onSubmitUserForm() {
+    this.userFormnSubmitted = true;
+  }
+
+  onResetUpdateOnBlurForm() {
+    this.updateOnBlurForm.reset();
+  }
+
+  onResetUpdateOnSubmitForm() {
+    this.updateOnSubmitForm.reset();
+    this.formSubmitted = false;
+  }
+
+  onResetUpdateOnChangeForm() {
+    this.updateOnChangeForm.reset();
   }
 }
 

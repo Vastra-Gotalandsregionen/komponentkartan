@@ -2,15 +2,16 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule, ControlContainer } from '@angular/forms'
+import {
+  FormsModule, ReactiveFormsModule, ControlContainer,
+  FormGroup, FormControl, Validators, AbstractControl, Form
+} from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { InputComponent } from '../../controls/input/input.component';
 
 import { ErrorHandler } from '../../services/errorhandler';
-
-import { IValidationResult, ValidationErrorState } from '../../models/validation.model';
 import { TruncatePipe } from '../../pipes/truncatePipe';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 
@@ -21,13 +22,12 @@ import localeSerExtra from '@angular/common/locales/extra/se';
 registerLocaleData(localeSe, 'sv-SE', localeSerExtra);
 
 import { combineAll } from 'rxjs/operator/combineAll';
-
+import { Observable } from 'rxjs/Observable';
 
 describe('[InputComponent]', () => {
   let component: InputComponent;
   let fixture: ComponentFixture<InputComponent>;
   let rootElement: DebugElement;
-  const validationErrorStates = ValidationErrorState;
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -35,7 +35,7 @@ describe('[InputComponent]', () => {
     TestBed.configureTestingModule({
       declarations: [InputComponent, TruncatePipe, ErrorMessagePipe],
       imports: [CommonModule, FormsModule, ReactiveFormsModule],
-      providers: [ErrorHandler]
+      providers: [ErrorHandler, ControlContainer]
     });
 
     TestBed.overrideComponent(InputComponent, {
@@ -54,107 +54,147 @@ describe('[InputComponent]', () => {
     });
   });
 
-  describe('When initialized with invalid state', () => {
+  // Emulate OnBlur
+  // Emulate OnChange
+
+  // Emulate OnSubmit
+  describe('When initialized with invalid state and showValidation is false', () => {
     beforeEach(() => {
-      component.isInvalid = true;
-      component.currentErrorMessage = 'error';
+      component.control = new FormControl('', { validators: [Validators.required], updateOn: 'submit' });
+      component.errorMessage = 'error';
+      component.formatNumber = true;
+      component.showValidation = false;
       component.readonly = false;
       component.ngOnInit();
-      component.onBlur();
       fixture.detectChanges();
     });
 
-    it('CSS Class validation-error--active is applied', () => {
+    it('CSS Class validated-input has been applied', () => {
+      expect(rootElement.classes['validated-input']).toEqual(true);
+    });
+
+    it('no CSS Class validation-error has been applied', () => {
       expect(rootElement.classes['validation-error--editing']).toEqual(false);
-      expect(rootElement.classes['validation-error--active']).toEqual(true);
+      expect(rootElement.classes['validation-error--active']).toEqual(false);
       expect(rootElement.classes['validation-error--fixed']).toEqual(false);
     });
+
     it('There is an error message section', () => {
       const element = rootElement.query(By.css('.input-validation_status__message'));
       expect(element.nativeElement.innerText).toEqual('error');
     });
 
-    describe('When focused', () => {
+    describe('When submited without changes', () => {
       beforeEach(() => {
-        component.displayValue = 'test';
-        component.onFocus();
+        component.showValidation = true;
         fixture.detectChanges();
-      });
-      it('CSS Class validation-error--editing is applied', () => {
-
-        const element = rootElement.query(By.css('.input-validation_status__message'));
-        expect(element.nativeElement.innerText).toEqual('error');
-        expect(rootElement.classes['validation-error--editing']).toEqual(true);
-        expect(rootElement.classes['validation-error--active']).toEqual(false);
-        expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+        rootElement.triggerEventHandler('submit', event);
       });
 
-      describe('When error is corrected and field is blurred', () => {
+      it('CSS Class validation-error--active has been applied', () => {
+        expect(rootElement.classes['validation-error--active']).toEqual(true);
+      });
+
+      describe('When input is focused', () => {
         beforeEach(() => {
-          component.isInvalid = false;
-          component.onBlur();
+          component.control.markAsTouched();
+          component.onFocus();
           fixture.detectChanges();
         });
-        it('CSS Class validation-error--fixed is applied', () => {
+        it('CSS Class validation-error--editing has been applied', () => {
+          expect(rootElement.classes['validation-error--editing']).toEqual(true);
+          expect(rootElement.classes['validation-error--active']).toEqual(false);
+          expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+        });
+
+        describe('When input is focused and corrected', () => {
+          beforeEach(() => {
+            component.onFocus();
+            fixture.detectChanges();
+          });
+          it('CSS Class validation-error--editing has been applied', () => {
+            expect(rootElement.classes['validation-error--editing']).toEqual(true);
+            expect(rootElement.classes['validation-error--active']).toEqual(false);
+            expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+          });
+
+          describe('When input is out of focus and still corrected', () => {
+            beforeEach(() => {
+              component.onBlur(null);
+              fixture.detectChanges();
+            });
+            it('CSS Class validation-error--active is still active', () => {
+              expect(rootElement.classes['validation-error--editing']).toEqual(false);
+              expect(rootElement.classes['validation-error--active']).toEqual(true);
+              expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+            });
+
+            describe('When submit is triggered with valid input', () => {
+              beforeEach(() => {
+                component.control.setValue(12312);
+                fixture.detectChanges();
+                rootElement.triggerEventHandler('submit', event);
+              });
+              it('Validation is not triggered', () => {
+                expect(rootElement.classes['validation-error--editing']).toEqual(false);
+                expect(rootElement.classes['validation-error--active']).toEqual(false);
+                expect(rootElement.classes['validation-error--fixed']).toEqual(true);
+              });
+            });
+          });
+        });
+      });
+
+      describe('When focused', () => {
+        beforeEach(() => {
+          component.control = new FormControl('', { validators: [Validators.required] });
+          component.errorMessage = 'error';
+          component.showValidation = false;
+          component.readonly = false;
+          component.ngOnInit();
+          fixture.detectChanges();
+          const element = rootElement.query(By.css('.input-container__textbox'));
+          element.triggerEventHandler('focus', null);
+        });
+        it('Validation is not triggered', () => {
+          const element = rootElement.query(By.css('.input-validation_status__message'));
+          expect(element.nativeElement.innerText).toEqual('error');
           expect(rootElement.classes['validation-error--editing']).toEqual(false);
           expect(rootElement.classes['validation-error--active']).toEqual(false);
-          expect(rootElement.classes['validation-error--fixed']).toEqual(true);
+          expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+        });
+
+        describe('When error is corrected first time', () => {
+          let textboxElement: DebugElement;
+          beforeEach(() => {
+            textboxElement = rootElement.query(By.css('.input-container__textbox'));
+            component.control.setValue('Valid');
+            component.onFocus();
+            fixture.detectChanges();
+          });
+          it('Validation is not triggered', () => {
+            expect(rootElement.classes['validation-error--editing']).toEqual(false);
+            expect(rootElement.classes['validation-error--active']).toEqual(false);
+            expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+          });
         });
       });
     });
   });
 
-  describe('When initialized with invalid state and validate on init is true', () => {
+  describe('When initialized with valid state', () => {
     beforeEach(() => {
-      component = fixture.componentInstance;
-      component.isInvalid = true;
-      component.validateOnInit = true;
-      component.currentErrorMessage = 'error';
-      component.small = false;
-      component.ngOnInit();
-      fixture.detectChanges();
-    });
-
-    it('CSS Class validation-error--active is applied', () => {
-      expect(rootElement.classes['validation-error--editing']).toEqual(false);
-      expect(rootElement.classes['validation-error--active']).toEqual(true);
-      expect(rootElement.classes['validation-error--fixed']).toEqual(false);
-    });
-    it('There is a error message section', () => {
-      const element = rootElement.query(By.css('.input-validation_status__message'));
-      expect(element.nativeElement.innerText).toEqual('error');
-    });
-  });
-  describe('When initialized with number formatting, valid state and 5 decimals', () => {
-    beforeEach(() => {
-      component = fixture.componentInstance;
+      component.control = new FormControl(123123, { validators: [Validators.required], updateOn: 'submit' });
+      component.errorMessage = 'error';
       component.formatNumber = true;
-      component.nrOfDecimals = 4;
-      component.value = '1234.567340980932848';
-      component.isInvalid = false;
+      component.showValidation = false;
       component.readonly = false;
       component.ngOnInit();
-      component.onBlur();
       fixture.detectChanges();
     });
 
-    it('Value and displayvalue has been formatted correctly', () => {
-      expect(component.value).toEqual(1234.5673);
-    });
-
-    describe('When number formatting is off', () => {
-      beforeEach(() => {
-        component = new InputComponent(null, null);
-        component.value = '1234.5673409';
-        component.formatNumber = false;
-        component.ngOnInit();
-        component.onBlur();
-        fixture.detectChanges();
-      });
-      it('Value is not formatted', () => {
-        expect(component.value).toEqual('1234.5673409');
-      });
+    it('CSS Class validated-input has been applied', () => {
+      expect(rootElement.classes['validated-input']).toEqual(true);
     });
   });
 });
-
