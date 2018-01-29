@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed, async } from "@angular/core/testing";
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
 import { By } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms"
+import { FormsModule, FormControl, Validators } from "@angular/forms"
 
 import { DebugElement } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -453,6 +453,48 @@ describe("[DropdownMultiSelectComponent]", () => {
             expect(selectedItemslist.length).toBe(2);
             expect(selectedItemslist[0].nativeElement.textContent).toBe('one');
             expect(selectedItemslist[1].nativeElement.textContent).toBe('two');
+        });
+    });
+
+    describe('When component is initialized with two simple values and one selected item', () => {
+        let element: DebugElement;
+
+        beforeEach(() => {
+            element = rootElement.query(By.css('.dropdown--edit'));
+            component.control = new FormControl(null, { validators: [Validators.required], updateOn: 'blur' });
+            component.values = ['one', 'two', 'three'];
+            component.selectAllItems();
+            component.ngOnChanges();
+            element.triggerEventHandler('focusin', event);
+            fixture.detectChanges();
+        });
+
+        it('the matching drop down item is selected', () => {
+            expect(component.items[0].selected).toBe(true);
+            expect(component.items[1].selected).toBe(true);
+            expect(component.items[2].selected).toBe(true);
+
+        });
+
+        it('the form control value is not updated', () => {
+            expect(component.control.value).toBe(null);
+        });
+
+        describe('when onLeave is triggered', () => {
+            beforeEach(() => {
+                element.triggerEventHandler('focusout', event);
+                fixture.detectChanges();
+            });
+
+            it('the matching drop down item is selected', () => {
+                expect(component.items[1].selected).toBe(true);
+                expect(component.control.value.toString()).toBe(['one', 'two', 'three'].toString());
+            });
+
+            it('the control is touched and dirty', () => {
+                expect(component.control.touched).toBe(true);
+                expect(component.control.dirty).toBe(true);
+            });
         });
     });
 });

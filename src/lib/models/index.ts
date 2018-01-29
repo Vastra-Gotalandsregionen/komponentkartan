@@ -11,4 +11,3 @@ export { NotificationIcon } from './notificationIcon.model';
 export { NotificationType } from './notificationType.model';
 export { RowNotification } from './rowNotification.model';
 export { ISelectableItem, SelectableItem } from './selectableItem.model';
-export { ICustomValidator, IValidation, IValidationResult, IValidator, ValidationErrorState } from './validation.model';

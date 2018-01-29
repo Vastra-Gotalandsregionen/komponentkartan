@@ -56,7 +56,7 @@ describe('[DatepickerComponent(Angular)]', () => {
                 component.onDatePickerClick({ cancelBubble: true } as Event);
             });
             it('the calendar is visible', () => {
-                expect(component.isDatePickerVisible).toBe(true);
+                expect(component.expanded).toBe(true);
             });
 
             describe('and the datepicker is closed', () => {
@@ -65,7 +65,7 @@ describe('[DatepickerComponent(Angular)]', () => {
                     datepickerElement.triggerEventHandler('click', event);
                 });
                 it('the calendar is not visible', () => {
-                    expect(component.isDatePickerVisible).toBe(false);
+                    expect(component.expanded).toBe(false);
                     expect(fixture.debugElement.query(By.css('.datepicker__calendar'))).toBeNull();
                 });
             });
@@ -73,15 +73,11 @@ describe('[DatepickerComponent(Angular)]', () => {
             describe('and the datepicker is focusout', () => {
                 beforeEach(() => {
                     spyOn(component, 'onLeave').and.callThrough();
-                    spyOn(component, 'validate');
                     const datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
                     datepickerElement.triggerEventHandler('focusout', event);
                 });
                 it('onLeave is has been called', () => {
                     expect(component.onLeave).toHaveBeenCalled();
-                });
-                it('datepicker is validated', () => {
-                    expect(component.validate).toHaveBeenCalled();
                 });
             });
 

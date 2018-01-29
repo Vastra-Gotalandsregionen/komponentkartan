@@ -1,5 +1,6 @@
 import {
-    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef, OnInit,
+    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, SimpleChange,
+    EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef,
     SkipSelf, Optional, Host
 } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
@@ -8,8 +9,6 @@ import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
-import { IValidationResult } from '../../models/validation.model';
-import { ValidationComponent } from '../../controls/validation/validation.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 
 @Component({
@@ -21,24 +20,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => DropdownComponent),
         multi: true
-    }, {
-        provide: ValidationComponent,
-        useExisting: forwardRef(() => DropdownComponent)
     }]
 })
 
-
 export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
     @Output() selectedChanged = new EventEmitter<DropdownItem<any>>();
-    @Input() noItemSelectedLabel: string; // visas i dropdownboxen då man inte valt något
-    @Input() set selectedValue(value: any) {
-        if (this.items) {
-            const matchingItems = this.items.filter(x => x.value === value);
-            if (matchingItems.length > 0) {
-                this.handleInitiallySelectedItems(matchingItems);
-            }
-        }
-    }
+    @Input() noItemSelectedLabel: string;
 
     selectedItem: DropdownItem<any>;
 
@@ -48,15 +35,31 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     ngOnChanges() {
-        if (this.formControlName) {
-            this.control = this.controlContainer.control.get(this.formControlName);
-        }
         this.showAllItem = {
             displayName: this.showAllItemText
         } as DropdownItem<any>;
 
+        if (this.formControlName) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
+
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
+    }
+
+    onLeave() {
+        this.hasFocus = false;
+        if (this.control) {
+            this.control.markAsTouched();
+            this.control.markAsDirty();
+            if (this.control.updateOn === 'blur' && this.selectedItem && this.selectedItem.value) {
+                this.control.setValue(this.selectedItem.value);
+            }
+        }
+    }
+
+    onEnter() {
+        this.hasFocus = true;
     }
 
     writeValue(value: any): void {
@@ -66,6 +69,10 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
                 this.handleInitiallySelectedItems(matchingItems);
             }
             this.onChange(value);
+        }
+
+        if (!value) {
+            this.selectedItem = null;
         }
     }
 
@@ -81,18 +88,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     onTouched() { }
-
-    doValidate(): IValidationResult {
-        const isValid = (!this.required || this.selectedItem) && !this.controlHasErrors();
-        return {
-            isValid: isValid,
-            validationError: isValid ? '' : 'Obligatoriskt'
-        } as IValidationResult;
-    }
-
-    controlHasErrors() {
-        return (this.control && this.control.errors ? this.control.errors['required'] : false);
-    }
 
     showAllItems() {
         this.preventCollapse = true;
@@ -115,7 +110,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.selectedItem = item;
         this.changeDetectorRef.detectChanges();
         this.onChange(item.value);
-        this.validate();
     }
 
     onMouseEnter(item: DropdownItem<any>) {

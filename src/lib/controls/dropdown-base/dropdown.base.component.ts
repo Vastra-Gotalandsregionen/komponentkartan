@@ -1,18 +1,17 @@
 import { Component, Input, AfterViewInit, ElementRef, Output, EventEmitter, ViewChild, HostListener, HostBinding, forwardRef } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
-import { IValidationResult, ValidationErrorState, IValidation } from '../../models/validation.model';
-import { ValidationComponent } from '../../controls/validation/validation.component';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { AbstractControl } from '@angular/forms';
 
-export abstract class DropdownBaseComponent extends ValidationComponent {
+export abstract class DropdownBaseComponent {
 
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
+    @Input() showValidation = true;
     @Input() formControlName?: string;
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
@@ -21,15 +20,24 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @HostBinding('class.dropdown') dropdownClass = true;
 
-    showAllItem: DropdownItem<any>;
+    @HostBinding('class.validation-error--active') get errorClass() {
+        return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
+    }
+    @HostBinding('class.validation-error--editing') get editingClass() {
+        return this.showValidation && this.control && this.control.invalid && this.hasFocus;
+    }
 
+    control: AbstractControl;
+    hasFocus: boolean;
     expanded: boolean;
+    validationErrorMessage: string;
+
+    showAllItem: DropdownItem<any>;
     filterVisible: boolean;
     filter: string;
     scrollbarConfig: PerfectScrollbarConfig;
     dimmerTopVisible: boolean;
     dimmerBottomVisible: boolean;
-    control: AbstractControl;
 
     protected filterLimit = 20;
     protected filterPipe: FilterPipe;
@@ -63,12 +71,13 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
     }
 
     constructor(protected elementRef: ElementRef) {
-        super();
+        // super();
         this.expanded = false;
         this.filterVisible = false;
         this.filterPipe = new FilterPipe();
         this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
         this.showAllItemText = 'Visa alla';
+        this.validationErrorMessage = 'Obligatorisk';
 
         this.showAllItem = {
             displayName: this.showAllItemText,
@@ -131,31 +140,13 @@ export abstract class DropdownBaseComponent extends ValidationComponent {
         }
     }
 
-    onEnter() {
-        this.setValidationStateEditing();
-    }
-
-    onLeave(event: FocusEvent) {
-
-        if (!event) {
-            this.validate();
-            return;
-        }
-
-        const focusedElement = event.relatedTarget;
-        if (focusedElement === null || !this.elementRef.nativeElement.contains(focusedElement)) {
-            // validera endast om vi är påväg från komponenten
-            this.validate();
-        }
-    }
-
     private toggleExpand(event: Event) {
         const target = event.target || event.srcElement || event.currentTarget;
         const element = $(target);
         if (!element.is('input') && !element.is('.scroll-bar')) {
             this.expanded = !this.expanded;
             if (!this.expanded) {
-                this.validate();
+                // this.validate();
             } else {
                 setTimeout(() => {
                     this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent.directiveRef.elementRef.nativeElement);
