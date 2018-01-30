@@ -76,7 +76,6 @@
   }
 }
 
-
 /* Expandable container = en rad i listan som kan expanderas*/
 
 .chevron-expanded {
@@ -412,11 +411,34 @@ vgr-list-column-checkbox {
       width: 33px;
       justify-content: center;
       align-items: center;
+      display: flex;
       .checkbox__image {
         margin-top: 0;
       }
       .checkbox__label {
         display: none;
+      }
+    }
+  }
+}
+
+vgr-list-column-header-checkbox {
+  .checkbox--inline {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    .checkbox {
+      height: 100%;
+      padding-left: 9px;
+      display: flex;
+      .checkbox__image {
+        margin-top: 5px;
+      }
+      .checkbox__label {
+        display: inline-block;
+        margin-left: 6px;
+        margin-top: 2px;
       }
     }
   }

@@ -64,10 +64,10 @@
       <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
           <vgr-list-column-header text="Förnamn" width="6" align="left" sortKey="firstName"></vgr-list-column-header>
-          <vgr-list-column-header text="Efternamn" width="6" sortKey="lastName"></vgr-list-column-header>
-          <vgr-list-column-header text="Årsbelopp" width="6" align="right" sortKey="amount"></vgr-list-column-header>
+          <vgr-list-column-header text="Efternamn" width="5" sortKey="lastName"></vgr-list-column-header>
+          <vgr-list-column-header text="Årsbelopp" width="5" align="right" sortKey="amount"></vgr-list-column-header>
           <vgr-list-column-header width="1"></vgr-list-column-header>
-          <vgr-list-column-header width="1" align="center" text="Val" sortKey="selected"></vgr-list-column-header>
+          <vgr-list-column-header-checkbox align="left" width="3" [label]="'Markera alla'" [checked]="allChecked" (checkedChanged)="onSelectAllChanged($event)"></vgr-list-column-header-checkbox>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" (deleted)="onDeleted(row)">
           <vgr-list-item-header>
