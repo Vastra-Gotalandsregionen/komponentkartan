@@ -15,7 +15,6 @@ export abstract class DropdownBaseComponent {
     @Input() formControlName?: string;
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
-    @Input() required: boolean;
     @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @HostBinding('class.dropdown') dropdownClass = true;
@@ -145,9 +144,7 @@ export abstract class DropdownBaseComponent {
         const element = $(target);
         if (!element.is('input') && !element.is('.scroll-bar')) {
             this.expanded = !this.expanded;
-            if (!this.expanded) {
-                // this.validate();
-            } else {
+            if (this.expanded) {
                 setTimeout(() => {
                     this.hideDimmersIfScrollIsAtBottomOrTop(this.scrollbarComponent.directiveRef.elementRef.nativeElement);
                 }, 10);

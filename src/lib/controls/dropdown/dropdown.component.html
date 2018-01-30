@@ -1,6 +1,6 @@
 <div class="validation">
   <div class="dropdown--edit" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible}" (mousedown)="onDropdownMouseDown($event)"
-    (focusout)="onLeave($event)" (focusin)="onEnter()" tabindex="{{disabled ? -1 : 0}}">
+    (focusout)="onLeave()" (focusin)="onEnter()" tabindex="{{disabled ? -1 : 0}}">
     <span class="noselect" *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{ selectedItem | dropdownItemToSelectedText}}</span>
     <span class="noselect" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{readonly ? '' : noItemSelectedLabel }}</span>
     <div class="dropdown__menu">

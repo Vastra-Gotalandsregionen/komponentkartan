@@ -25,7 +25,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     @Input() showValidation = true;
     @Input() minDate: Date;
     @Input() maxDate: Date;
-    @Input() required: boolean;
     @Input() selectedDateFormat = 'MMM yyyy';
     @Input() tooltipDateFormat = 'MMMM yyyy';
     @Input() formControlName?: string;

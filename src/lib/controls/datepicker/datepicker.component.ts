@@ -28,7 +28,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     @Input() @HostBinding('class.readonly') readonly: boolean;
     @Input() selectedDateFormat = 'yyyy-MM-dd';
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
-    @Input() required: boolean;
     @Output() selectedDateChanged = new EventEmitter<Date>();
     @Input() formControlName?: string;
 
