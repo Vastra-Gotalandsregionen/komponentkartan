@@ -37,12 +37,17 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     set selectedValues(values: any[]) {
-        if (this.items) {
+
+        if (values) {
             const matchingItems = this.items.filter((x => values.indexOf(x.value) > -1));
             if (matchingItems.length > 0) {
                 matchingItems.forEach(x => x.selected = true);
                 this.handleInitiallySelectedItems(matchingItems);
             }
+        } else {
+            this.items.forEach(x => x.selected = false);
+            this.handleInitiallySelectedItems([]);
+
         }
     }
 
@@ -87,10 +92,9 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     writeValue(values: DropdownItem<any>[]): void {
         if (values) {
             this.selectedValues = values;
+        } else {
+            this.selectedValues = null;
         }
-        // if (!values) {
-        //     this.selectedValues = null;
-        // }
     }
 
     registerOnChange(func: any): void {

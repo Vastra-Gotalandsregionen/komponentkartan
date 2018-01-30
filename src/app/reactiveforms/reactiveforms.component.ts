@@ -17,15 +17,12 @@ export class ReactiveformsComponent implements OnInit {
   minDate = new Date('2015');
   maxDate = new Date('2025');
 
-  userForm: FormGroup;
-  userFormSubmit: FormGroup;
+
   updateOnBlurForm: FormGroup;
   updateOnSubmitForm: FormGroup;
   updateOnChangeForm: FormGroup;
 
   formSubmitted: boolean;
-  userFormSubmitted: boolean;
-  userFormnSubmitted: boolean;
 
   validationMessages = {
     firstname: {
@@ -74,7 +71,7 @@ export class ReactiveformsComponent implements OnInit {
   }
 
   createOnBlurForm() {
-    this.userForm = new FormGroup({
+    this.updateOnBlurForm = new FormGroup({
       firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
@@ -91,12 +88,12 @@ export class ReactiveformsComponent implements OnInit {
   }
 
   createOnSubmitForm() {
-    this.userFormSubmit = new FormGroup({
+    this.updateOnSubmitForm = new FormGroup({
       firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
       age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
       email: new FormControl('', { validators: [Validators.required, Validators.email] }),
-      salary: new FormControl(987798.9879, { validators: [Validators.required, validateNumber] }),
+      salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
       favourite_pet: new FormControl(null, { validators: [Validators.required] }),
       interests: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
       check: new FormControl(true, { validators: [Validators.pattern('true')] }),
@@ -128,11 +125,6 @@ export class ReactiveformsComponent implements OnInit {
     this.formSubmitted = true;
   }
 
-
-  onSubmitUserForm() {
-    this.userFormnSubmitted = true;
-  }
-
   onResetUpdateOnBlurForm() {
     this.updateOnBlurForm.reset();
   }
@@ -147,6 +139,7 @@ export class ReactiveformsComponent implements OnInit {
   }
 }
 
+// Custom validator
 function validateNumber(control: AbstractControl) {
   const pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
 

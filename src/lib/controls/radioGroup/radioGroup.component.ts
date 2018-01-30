@@ -122,6 +122,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
             if (preSelectedOption) {
                 this.selectOption(preSelectedOption);
             }
+        } else {
+            this.radiogroupItems.forEach(o => {
+                o.selected = false;
+            });
         }
     }
 

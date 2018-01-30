@@ -71,11 +71,11 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   writeValue(value: any) {
-    if (value) {
+    if (value !== undefined) {
       this.value = value;
       this.setDisplayValue();
 
-      if (this.formatNumber && (value.toString().split('.')[1] || []).length !== this.nrOfDecimals) {
+      if (value && this.formatNumber && (value.toString().split('.')[1] || []).length !== this.nrOfDecimals) {
         this.formatDisplayNumber();
         this.control.setValue(this.value);
       }
