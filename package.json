@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "2.1.0",
+  "version": "2.1.1-rc1",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
@@ -17,7 +17,9 @@
     "publish-demo": "npm run packagr && cd dist && npm publish --tag demo && cd ..",
     "publish-dev": "npm run packagr && cd dist && npm publish --tag dev && cd ..",
     "publish-stable": "npm run packagr && cd dist && npm publish && cd ..",
+    "publish-local": "npm run packagr && npm pack",
     "test-ci": "karma start ./karma.conf.server.js"
+
   },
   "dependencies": {
     "@angular/animations": "^5.0.0",

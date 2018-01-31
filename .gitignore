@@ -43,6 +43,8 @@ testem.log
 /src/app/**/*.js
 /src/**/*.map
 
+
 # System Files
 .DS_Store
 Thumbs.db
+*.tgz
