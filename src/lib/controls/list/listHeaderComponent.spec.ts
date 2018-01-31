@@ -1,4 +1,4 @@
-import { ListHeaderComponent, ListColumnHeaderComponent, ListColumnComponent, SortChangedArgs, SortDirection, ListItemComponent, ListItemJqeuryHelper } from '../../controls/index';
+import { ListHeaderComponent, ListColumnHeaderComponent, ListColumnComponent, SortChangedArgs, SortDirection, ListItemComponent, ListItemJqeuryHelper } from '../../index';
 import { QueryList, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 describe('[ListHeaderComponent]', () => {
@@ -29,7 +29,7 @@ describe('[ListHeaderComponent]', () => {
             columnHeader1.sortChanged.emit(SortDirection.Descending);
         });
         it('a sortchanged event is emitted for that column', () => {
-            expect(listHeaderComponent.sortChanged.emit).toHaveBeenCalledWith({ key: 'column1.key', direction: SortDirection.Descending })
+            expect(listHeaderComponent.sortChanged.emit).toHaveBeenCalledWith({ key: 'column1.key', direction: SortDirection.Descending });
         });
         it('and all other columns are set to sortDirection = none', () => {
             expect(columnHeader2.sortDirection).toEqual(SortDirection.None);
@@ -42,7 +42,7 @@ describe('[ListHeaderComponent]', () => {
             columnHeader2.sortChanged.emit(SortDirection.Descending);
         });
         it('a sortchanged event is emitted for that column with text as key', () => {
-            expect(listHeaderComponent.sortChanged.emit).toHaveBeenCalledWith({ key: 'column2.text', direction: SortDirection.Descending })
+            expect(listHeaderComponent.sortChanged.emit).toHaveBeenCalledWith({ key: 'column2.text', direction: SortDirection.Descending });
         });
     });
 

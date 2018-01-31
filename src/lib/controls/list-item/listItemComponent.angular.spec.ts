@@ -11,7 +11,7 @@ import { NotificationType } from '../../models/notificationType.model';
 import {
     ListItemComponent, ListItemHeaderComponent, ListColumnComponent,
     ListItemContentComponent, ListItemJqeuryHelper
-} from '../../controls/index';
+} from '../../index';
 
 
 describe('ListItemComponent', () => {

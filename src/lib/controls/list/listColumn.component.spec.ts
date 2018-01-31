@@ -1,5 +1,5 @@
 import { ListColumnComponent } from '../../controls/list/list-column.component';
-import { ListColumnHeaderComponent } from '../../controls/list/list-column-header.component'
+import { ListColumnHeaderComponent } from '../../controls/list/list-column-header.component';
 describe('[ListColumnComponent]', () => {
     let component: ListColumnComponent;
 
