@@ -1,8 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+## 2.1.2
+- New component vgr-list-column-header-checkbox for checkboxes in list headers
+
+## 2.1.1
+- Added support for AOT builds
 
 ## 2.1.0
 - Added support in form-components; datepicker, monthpicker, input, dropdown, dropdown-multi to use  updateOn (submit, change, blur) from reactive forms. Reactive Forms reset will now clear all form values.
