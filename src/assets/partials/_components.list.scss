@@ -432,6 +432,9 @@ vgr-list-column-header-checkbox {
       height: 100%;
       padding-left: 9px;
       display: flex;
+      @media screen and (min-width: $desktop-width--medium) {
+        padding-left: 7px;
+      }
       .checkbox__image {
         margin-top: 5px;
       }
