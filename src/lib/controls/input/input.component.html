@@ -4,7 +4,7 @@
 
   <div class="input-container">
     <input type="text" #inputTextBox class="input-container__textbox" (blur)="onBlur($event)" (focus)="onFocus()" [(ngModel)]="displayValue"
-      (ngModelChange)="onChange($event)" [maxlength]="maxlength" [attr.readonly]="readonly ? '' : null">
+      (ngModelChange)="onChange($event)" [maxlength]="maxlength" [attr.readonly]="readonly ? '' : null" [placeholder]="placeholder ? placeholder : ''">
     <div class="input-container__suffix-container">
       <div class="input-container__suffix-container__suffix">{{suffix}}</div>
       <div class="input-container__suffix-container__status-icon"></div>
