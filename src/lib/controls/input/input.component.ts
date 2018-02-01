@@ -101,7 +101,9 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   onChange(input: any) {
     this.value = input;
-    this.control.setValue(this.value);
+    if (this.control) {
+      this.control.setValue(this.value);
+    }
   }
 
   onTouched() { }
