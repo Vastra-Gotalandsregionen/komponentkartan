@@ -73,7 +73,6 @@ input.input-container__textbox {
   height: 0px;
   width: 0px;
   display: inline-block;
-  z-index: $layer-four;
   visibility: hidden;
   transition: width 0.3s linear, visibility 0.3s linear;
   .validation-error--fixed & {
