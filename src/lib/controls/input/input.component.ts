@@ -26,7 +26,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() placeholder?: string;
   @Input() value?: any;
   @Input() maxlength?: number;
-  @Input() errorMessage?: any;
+  @Input() errorMessage = {};
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
   @Input() @HostBinding('class.input--small') small: boolean;
