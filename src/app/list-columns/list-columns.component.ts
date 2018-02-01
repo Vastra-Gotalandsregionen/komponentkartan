@@ -15,9 +15,14 @@ export class ListColumnsComponent implements OnInit {
     typeScriptSimpleListMarkup: string;
     htmlSimpleListMarkup: string;
 
+    get allChecked() {
+        return this.peopleRows && !this.peopleRows.find(x => !x.previewObject.selected);
+    }
+
     ngOnInit() {
         this.loadExamplePersonWithUnitData();
     }
+
 
     loadData() {
         this.peopleRows = [
@@ -57,6 +62,12 @@ export class ListColumnsComponent implements OnInit {
 
     onSelectRowChanged(row: any, checked: boolean) {
         row.previewObject.selected = checked;
+    }
+
+    onSelectAllChanged(checked: boolean) {
+        if (this.peopleRows) {
+            this.peopleRows.forEach(r => r.previewObject.selected = checked);
+        }
     }
 
     onDeleteRow(row: any) {

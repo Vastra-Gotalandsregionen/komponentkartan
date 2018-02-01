@@ -28,6 +28,7 @@ export { LoaderComponent } from './controls/loader/loader.component';
 export { ListComponent } from './controls/list/list.component';
 export { ListHeaderComponent, SortChangedArgs } from './controls/list/list-header.component';
 export { ListColumnHeaderComponent, SortDirection } from './controls/list/list-column-header.component';
+export { ListColumnHeaderCheckboxComponent } from './controls/list/list-column-header-checkbox.component';
 export { ListColumnComponent } from './controls/list/list-column.component';
 export { ListColumnCheckboxComponent } from './controls/list/list-column-checkbox.component';
 export { ListColumnTrashcanComponent } from './controls/list/list-column-trashcan.component';

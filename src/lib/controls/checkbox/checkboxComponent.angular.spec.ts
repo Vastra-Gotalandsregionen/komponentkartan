@@ -169,7 +169,7 @@ describe('CheckboxComponent', () => {
                 expect(labelElement.nativeElement.id).toBe(component.labelledbyid);
             });
             it('checkbox has a label with an id', () => {
-                let checkbox = rootElement.query(By.css('.checkbox'));
+                checkbox = rootElement.query(By.css('.checkbox'));
                 expect(checkboximage.attributes['aria-labelledby']).toBe(labelElement.nativeElement.id);
             });
         });

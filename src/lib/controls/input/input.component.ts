@@ -126,7 +126,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     } else {
       this.value = this.displayValue;
     }
-    if (this.control.updateOn === 'blur') {
+    if (this.control && this.control.updateOn === 'blur') {
       this.control.setValue(this.value);
     }
   }

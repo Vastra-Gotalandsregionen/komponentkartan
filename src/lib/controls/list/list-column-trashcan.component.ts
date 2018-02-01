@@ -30,7 +30,6 @@ export class ListColumnTrashcanComponent extends ListColumnComponent {
     }
 
     onDelete(e: Event) {
-
         e.cancelBubble = true;
         if (this.disabled) {
             return;

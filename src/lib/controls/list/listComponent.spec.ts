@@ -1,4 +1,4 @@
-import { ListComponent, ListHeaderComponent, ListItemContentComponent, SortChangedArgs, SortDirection, ListItemComponent, ListItemJqeuryHelper } from '../../controls/index';
+import { ListComponent, ListHeaderComponent, ListItemContentComponent, SortChangedArgs, SortDirection, ListItemComponent, ListItemJqeuryHelper } from '../../index';
 import { QueryList, EventEmitter } from '@angular/core';
 
 
