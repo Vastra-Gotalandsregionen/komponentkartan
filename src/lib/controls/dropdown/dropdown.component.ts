@@ -39,7 +39,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
             displayName: this.showAllItemText
         } as DropdownItem<any>;
 
-        if (this.formControlName) {
+        if (this.formControlName && this.controlContainer) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
 
