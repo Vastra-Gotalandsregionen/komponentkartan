@@ -103,14 +103,11 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     copyPropertiesFromHeader(header: ListHeaderComponent) {
         this.columns.forEach((column, index) => {
             header.applyToColumn(column, index);
-
         });
 
         setTimeout(() => {
             this.columnsInitialized = true;
         }, 1);
-
-
     }
 
 
@@ -145,7 +142,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         if (this.isDeleted || this.notInteractable) {
             return;
         }
-        this.jqueryHelper.toggleContent(this.elementRef);
 
         const expandedChanged = !this._expanded;
         this._expanded = true;
@@ -158,65 +154,59 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private collapse(collapsingNotification?: NotificationType) {
         this.notInteractable = true;
-        const header = this.jqueryHelper.getHeader(this.elementRef);
 
         if (collapsingNotification) {
-            this.processNotification(header, collapsingNotification, () => {
-
-            });
+            this.processNotification(collapsingNotification);
         } else {
-            this.jqueryHelper.collapseContent(header, () => {
-                const expandedChanged = this._expanded;
-                this._expanded = false;
-                this.collapsed = true;
-                this.notInteractable = false;
-                if (expandedChanged) {
-                    this.expandedChanged.emit(this._expanded);
-                }
-            });
+            const expandedChanged = this._expanded;
+            this._expanded = false;
+            this.collapsed = true;
+            this.notInteractable = false;
+            if (expandedChanged) {
+                this.expandedChanged.emit(this._expanded);
+            }
+
         }
     }
 
-    private processNotification(header: JQuery, notificationType: NotificationType, callback: Function): void {
+    private processNotification(notificationType: NotificationType): void {
         if (notificationType === NotificationType.ShowOnCollapse) {
-            this.processShowOnCollapseNotification(header, callback);
+            this.processShowOnCollapseNotification();
         } else if (notificationType === NotificationType.ShowOnRemove) {
-            this.processShowOnRemoveNotification(header, callback);
+            this.processShowOnRemoveNotification();
         }
     }
 
-    private processShowOnCollapseNotification(header: JQuery, callback: Function) {
+    private processShowOnCollapseNotification() {
         this.notificationVisible = true;
         setTimeout(() => {
-            this.jqueryHelper.collapseContent(header, () => {
-                this._expanded = false;
-                this.collapsed = true;
-                this.expandedChanged.emit(this._expanded);
-                setTimeout(() => {
-                    this.notification.done = true;
-                    this.notificationVisible = false;
-                    this.notInteractable = false;
-                }, 2000);
-            });
+            this._expanded = false;
+            this.collapsed = true;
+            this.expandedChanged.emit(this._expanded);
+            setTimeout(() => {
+                this.notification.done = true;
+                this.notificationVisible = false;
+                this.notInteractable = false;
+            }, 2000);
+
         }, 1400);
 
     }
 
-    private processShowOnRemoveNotification(header: JQuery, callback: Function) {
+    private processShowOnRemoveNotification() {
         this.notificationVisible = true;
         setTimeout(() => {
-            this.jqueryHelper.collapseContent(header, () => {
-                this._expanded = false;
-                this.collapsed = true;
-                this.expandedChanged.emit(this._expanded);
-                setTimeout(() => {
-                    this.notification.done = true;
-                    this.notificationVisible = false;
-                    this.notInteractable = false;
-                    this.isDeleted = true;
-                    this.deleted.emit();
-                }, 2000);
-            });
+            this._expanded = false;
+            this.collapsed = true;
+            this.expandedChanged.emit(this._expanded);
+            setTimeout(() => {
+                this.notification.done = true;
+                this.notificationVisible = false;
+                this.notInteractable = false;
+                this.isDeleted = true;
+                this.deleted.emit();
+            }, 2000);
+
         }, 1400);
     }
 }
