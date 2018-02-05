@@ -13,8 +13,8 @@ export class ListColumnComponent {
         return 'list__column flex-column ' + this.getColumnWidthClass() + ' ' + this.getAlignClass();
     }
     @Input() text: string;
-    width: number;
-    align: string;
+    @Input() width: number;
+    @Input() align: string;
 
     private getColumnWidthClass(): string {
         return 'flex-column--' + (this.width ? this.width : 1);
@@ -24,12 +24,12 @@ export class ListColumnComponent {
         return 'column--align-' + (this.align ? this.align : 'left');
     }
 
-    setWidth(width: number) {
-        this.width = width;
+    // setWidth(width: number) {
+    //     this.width = width;
 
-    }
-    setAlignment(alignment: string) {
-        this.align = alignment;
-    }
+    // }
+    // setAlignment(alignment: string) {
+    //     this.align = alignment;
+    // }
 }
 

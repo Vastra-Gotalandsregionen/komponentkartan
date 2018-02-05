@@ -362,7 +362,8 @@ export class AppComponent {
               { title: 'Formulär', url: '/formexample' } as IMenuItem,
               { title: 'Snygg Layout', url: '/example-layout' } as IMenuItem,
               { title: 'List kolumner', url: '/list-columns' } as IMenuItem,
-              { title: 'Reactive Forms', url: '/reactiveforms' } as IMenuItem
+              { title: 'Reactive Forms', url: '/reactiveforms' } as IMenuItem,
+              { title: 'Lista prestanda', url: '/list-example' } as IMenuItem
             ] as IMenuItem[]
           } as IMenuGroup
         ] as IMenuGroup[]

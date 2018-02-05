@@ -22,15 +22,15 @@ export class ListHeaderComponent implements AfterContentInit {
         this.sortChanged.emit({ key: column.sortKey ? column.sortKey : column.text, direction: sort } as SortChangedArgs);
     }
 
-    applyToColumn(column: ListColumnComponent, index: number) {
-        setTimeout(() => {
-            const headerColumnArray = this.headerColumns.toArray();
-            if (headerColumnArray.length > index) {
-                column.setWidth(headerColumnArray[index].width);
-                column.setAlignment(headerColumnArray[index].align);
-            }
-        }, 1);
-    }
+    // applyToColumn(column: ListColumnComponent, index: number) {
+    //     setTimeout(() => {
+    //         const headerColumnArray = this.headerColumns.toArray();
+    //         if (headerColumnArray.length > index) {
+    //             column.setWidth(headerColumnArray[index].width);
+    //             column.setAlignment(headerColumnArray[index].align);
+    //         }
+    //     }, 1);
+    // }
 }
 
 export interface SortChangedArgs {

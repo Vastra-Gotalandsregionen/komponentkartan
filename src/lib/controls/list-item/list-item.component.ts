@@ -27,7 +27,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     @HostBinding('class.list-item--deleted') isDeleted: boolean;
     @HostBinding('class.list-item--notification-visible') notificationVisible: boolean;
     @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
-    @HostBinding('class.list-item--columns-initialized') columnsInitialized: boolean;
+    @HostBinding('class.list-item--columns-initialized') columnsInitialized = true;
 
     @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
     @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
@@ -100,15 +100,15 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         this.listItemHeader.setFocus();
     }
 
-    copyPropertiesFromHeader(header: ListHeaderComponent) {
-        this.columns.forEach((column, index) => {
-            header.applyToColumn(column, index);
-        });
+    // copyPropertiesFromHeader(header: ListHeaderComponent) {
+    //     this.columns.forEach((column, index) => {
+    //         header.applyToColumn(column, index);
+    //     });
 
-        setTimeout(() => {
-            this.columnsInitialized = true;
-        }, 1);
-    }
+    //     setTimeout(() => {
+    //         this.columnsInitialized = true;
+    //     }, 1);
+    // }
 
 
     showNotification() {
