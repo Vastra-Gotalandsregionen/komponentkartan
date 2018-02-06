@@ -20,7 +20,7 @@ export class ListComponent implements AfterContentInit {
 
     ngAfterContentInit() {
         this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
-        this.copyItemWidthsFromHeader();
+        // this.copyItemWidthsFromHeader();
         this.subscribeEvents();
         this.items.changes.subscribe(() => {
             this.subscribeEvents();
@@ -38,9 +38,9 @@ export class ListComponent implements AfterContentInit {
 
             });
         }
-        this.items.changes.subscribe(() => {
-            this.copyItemWidthsFromHeader();
-        });
+        // this.items.changes.subscribe(() => {
+        //     this.copyItemWidthsFromHeader();
+        // });
 
         this.items.forEach((item, index) => {
             item.setFocusOnFirstRow.subscribe(() => this.items.first.setFocusOnRow());
@@ -77,10 +77,9 @@ export class ListComponent implements AfterContentInit {
         }
     }
 
-    copyItemWidthsFromHeader() {
-        this.items.forEach(item => {
-            item.copyPropertiesFromHeader(this.listHeader);
-        });
-
-    }
+    // copyItemWidthsFromHeader() {
+    //     this.items.forEach(item => {
+    //         item.copyPropertiesFromHeader(this.listHeader);
+    //     });
+    // }
 }

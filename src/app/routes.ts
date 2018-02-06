@@ -12,6 +12,7 @@ import { FormExampleComponent } from './formexample/formexample.component';
 import { ExampleLayoutComponent } from './example-layout/example-layout.component';
 import { ListColumnsComponent } from './list-columns/list-columns.component';
 import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component';
+import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 
 
 export const appRoutes: Routes = [
@@ -25,5 +26,6 @@ export const appRoutes: Routes = [
     { path: 'formexample', component: FormExampleComponent },
     { path: 'example-layout', component: ExampleLayoutComponent },
     { path: 'list-columns', component: ListColumnsComponent },
+    { path: 'list-example', component: ExamplesListwithcardsComponent },
     { path: '**', component: KomponentkartaComponent }
 ];

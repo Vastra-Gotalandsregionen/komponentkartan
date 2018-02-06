@@ -31,6 +31,10 @@ import { ListColumnsComponent } from './list-columns/list-columns.component';
 
 import { appRoutes } from './routes';
 import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component';
+import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
+
+import { UnitFilterPipe } from './examples-listwithcards/UnitFilterPipe';
+
 
 @NgModule({
   imports: [
@@ -58,9 +62,11 @@ import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component'
     FakeCComponent,
     FullWidthCardComponent,
     ListColumnsComponent,
-    ReactiveformsComponent
-
+    ReactiveformsComponent,
+    ExamplesListwithcardsComponent,
+    UnitFilterPipe
   ],
+  exports: [UnitFilterPipe],
   providers: [
     CityService
   ],
