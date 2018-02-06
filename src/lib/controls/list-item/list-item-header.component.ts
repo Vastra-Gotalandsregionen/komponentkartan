@@ -45,10 +45,6 @@ export class ListItemHeaderComponent {
 
         this.renderer.invokeElementMethod(this.hostElement.nativeElement, 'focus');
     }
-
-
-
-
 }
 
 

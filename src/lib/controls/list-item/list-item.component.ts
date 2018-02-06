@@ -100,17 +100,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         this.listItemHeader.setFocus();
     }
 
-    // copyPropertiesFromHeader(header: ListHeaderComponent) {
-    //     this.columns.forEach((column, index) => {
-    //         header.applyToColumn(column, index);
-    //     });
-
-    //     setTimeout(() => {
-    //         this.columnsInitialized = true;
-    //     }, 1);
-    // }
-
-
     showNotification() {
         this.notificationVisible = true;
     }
