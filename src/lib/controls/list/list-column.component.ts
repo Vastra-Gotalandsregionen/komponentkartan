@@ -21,15 +21,13 @@ export class ListColumnComponent {
     }
 
     private getAlignClass(): string {
+        if (this.align !== 'right' &&
+            this.align !== 'left' &&
+            this.align !== 'center') {
+            this.align = 'left';
+        }
+
         return 'column--align-' + (this.align ? this.align : 'left');
     }
-
-    // setWidth(width: number) {
-    //     this.width = width;
-
-    // }
-    // setAlignment(alignment: string) {
-    //     this.align = alignment;
-    // }
 }
 
