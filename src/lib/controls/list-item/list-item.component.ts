@@ -142,6 +142,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         if (this.isDeleted || this.notInteractable) {
             return;
         }
+        this.jqueryHelper.toggleContent(this.elementRef);
 
         const expandedChanged = !this._expanded;
         this._expanded = true;
@@ -154,59 +155,65 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private collapse(collapsingNotification?: NotificationType) {
         this.notInteractable = true;
+        const header = this.jqueryHelper.getHeader(this.elementRef);
 
         if (collapsingNotification) {
-            this.processNotification(collapsingNotification);
+            this.processNotification(header, collapsingNotification, () => {
+
+            });
         } else {
-            const expandedChanged = this._expanded;
-            this._expanded = false;
-            this.collapsed = true;
-            this.notInteractable = false;
-            if (expandedChanged) {
-                this.expandedChanged.emit(this._expanded);
-            }
-
+            this.jqueryHelper.collapseContent(header, () => {
+                const expandedChanged = this._expanded;
+                this._expanded = false;
+                this.collapsed = true;
+                this.notInteractable = false;
+                if (expandedChanged) {
+                    this.expandedChanged.emit(this._expanded);
+                }
+            });
         }
     }
 
-    private processNotification(notificationType: NotificationType): void {
+    private processNotification(header: JQuery, notificationType: NotificationType, callback: Function): void {
         if (notificationType === NotificationType.ShowOnCollapse) {
-            this.processShowOnCollapseNotification();
+            this.processShowOnCollapseNotification(header, callback);
         } else if (notificationType === NotificationType.ShowOnRemove) {
-            this.processShowOnRemoveNotification();
+            this.processShowOnRemoveNotification(header, callback);
         }
     }
 
-    private processShowOnCollapseNotification() {
+    private processShowOnCollapseNotification(header: JQuery, callback: Function) {
         this.notificationVisible = true;
         setTimeout(() => {
-            this._expanded = false;
-            this.collapsed = true;
-            this.expandedChanged.emit(this._expanded);
-            setTimeout(() => {
-                this.notification.done = true;
-                this.notificationVisible = false;
-                this.notInteractable = false;
-            }, 2000);
-
+            this.jqueryHelper.collapseContent(header, () => {
+                this._expanded = false;
+                this.collapsed = true;
+                this.expandedChanged.emit(this._expanded);
+                setTimeout(() => {
+                    this.notification.done = true;
+                    this.notificationVisible = false;
+                    this.notInteractable = false;
+                }, 2000);
+            });
         }, 1400);
 
     }
 
-    private processShowOnRemoveNotification() {
+    private processShowOnRemoveNotification(header: JQuery, callback: Function) {
         this.notificationVisible = true;
         setTimeout(() => {
-            this._expanded = false;
-            this.collapsed = true;
-            this.expandedChanged.emit(this._expanded);
-            setTimeout(() => {
-                this.notification.done = true;
-                this.notificationVisible = false;
-                this.notInteractable = false;
-                this.isDeleted = true;
-                this.deleted.emit();
-            }, 2000);
-
+            this.jqueryHelper.collapseContent(header, () => {
+                this._expanded = false;
+                this.collapsed = true;
+                this.expandedChanged.emit(this._expanded);
+                setTimeout(() => {
+                    this.notification.done = true;
+                    this.notificationVisible = false;
+                    this.notInteractable = false;
+                    this.isDeleted = true;
+                    this.deleted.emit();
+                }, 2000);
+            });
         }, 1400);
     }
 }
