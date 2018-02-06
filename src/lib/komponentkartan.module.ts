@@ -137,7 +137,8 @@ import * as $ from 'jquery';
     type.ListItemJqeuryHelper,
     type.BrowserDetector,
     DecimalPipe,
-    type.ErrorHandler
+    type.ErrorHandler,
+    { provide: LOCALE_ID, useValue: 'sv-SE' }
   ]
 })
 export class KomponentkartanModule { }
