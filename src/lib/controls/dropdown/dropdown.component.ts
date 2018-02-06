@@ -105,10 +105,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         item.marked = true;
 
         this.selectedChanged.emit(item.value);
-
-        // Utan detectchanges får man "Value was changed after is was checked" i browser console.
         this.selectedItem = item;
-        this.changeDetectorRef.detectChanges();
         this.onChange(item.value);
     }
 
