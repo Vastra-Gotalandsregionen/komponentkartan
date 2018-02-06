@@ -406,7 +406,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
             this.previousMonth = false;
         } else if (currentYear >= maxYear && currentMonth >= maxMonth) {
             this.nextMonth = false;
-        } else if ((currentYear >= minYear && currentYear <= maxYear) && (currentMonth >= minMonth && currentMonth <= maxMonth)) {
+        } else {
             this.previousMonth = true;
             this.nextMonth = true;
         }
