@@ -78,6 +78,10 @@ export class ListColumnsComponent implements OnInit {
         console.log('deleted', item);
     }
 
+    onExpandedChanged(expanded: boolean, row: ExpandableRow<ExamplePersonWithUnit, any>) {
+        row.previewObject.expanded = expanded;
+    }
+
     removeRow(row: any) {
         this.modalService.openDialog('Ta bort raden', 'Vill du verkligen ta bort ' + row.previewObject.firstName + '?',
             new ModalButtonConfiguration('Ja', () => {
@@ -148,4 +152,5 @@ export interface ExamplePersonWithUnit {
     hsaid: string;
     committee: string;
     owner: string;
+    expanded?: boolean;
 }

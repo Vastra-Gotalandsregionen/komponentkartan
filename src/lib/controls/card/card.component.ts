@@ -14,8 +14,7 @@ export class CardComponent implements OnInit, AfterContentInit {
     constructor() {
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     ngAfterContentInit() {
         if (this.columns.length === 1) {
