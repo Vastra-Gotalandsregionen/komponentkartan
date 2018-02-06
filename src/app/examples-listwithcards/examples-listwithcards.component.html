@@ -188,9 +188,9 @@
         <vgr-list-item *ngFor="let row of exampleData" [notification]="row.notification" (expandedChanged)="onExpandedChanged($event,row)">
           <vgr-list-item-header>
             <vgr-list-column [text]="row.previewObject.enhet" width="5"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.hsaid" width="5"></vgr-list-column>
+            <vgr-list-column [text]="row.previewObject.hsaid" align="left" width="5"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.agare" width="3"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.enhetskod" width="2"></vgr-list-column>
+            <vgr-list-column [text]="row.previewObject.enhetskod" align="right" width="2"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.namnd" width="5"></vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>

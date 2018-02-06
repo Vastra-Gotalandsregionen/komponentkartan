@@ -114,17 +114,18 @@
         </vgr-list-header>
         <vgr-list-item *ngFor="let c of claimRows" [notification]="c.notification" (deleted)="onDeleted(c)">
           <vgr-list-item-header>
-            <vgr-list-column [text]="c.previewObject.identification"></vgr-list-column>
-            <vgr-list-column [text]="c.previewObject.invoiceId"></vgr-list-column>
-            <vgr-list-column [text]="c.previewObject.payableAmount"></vgr-list-column>
-            <vgr-list-column [text]="c.previewObject.issueDate"></vgr-list-column>
-            <vgr-list-column [text]="'Test'"></vgr-list-column>
-            <vgr-list-column [text]="'Test'"></vgr-list-column>
-            <vgr-list-column [text]="c.previewObject.visits?.length"></vgr-list-column>
-            <vgr-list-column [text]="'Test'"></vgr-list-column>
-            <vgr-list-column [text]="'Test'"></vgr-list-column>
-            <vgr-list-column-trashcan [disabled]="c.previewObject.deleted" (delete)="onDeleteRow(c)"></vgr-list-column-trashcan>
-            <vgr-list-column-checkbox [disabled]="c.previewObject.deleted" [checked]="c.previewObject.selected" (checkedChanged)="onSelectRowChanged(c,$event)"></vgr-list-column-checkbox>
+            <vgr-list-column [width]="2" [text]="c.previewObject.identification"></vgr-list-column>
+            <vgr-list-column [width]="3" [text]="c.previewObject.invoiceId"></vgr-list-column>
+            <vgr-list-column [align]="'right'" [width]="2" [text]="c.previewObject.payableAmount"></vgr-list-column>
+            <vgr-list-column [align]="'left'" [width]="2" [text]="c.previewObject.issueDate"></vgr-list-column>
+            <vgr-list-column [width]="2" [text]="'Test'"></vgr-list-column>
+            <vgr-list-column [width]="2" [text]="'Test'"></vgr-list-column>
+            <vgr-list-column [width]="2" [text]="c.previewObject.visits?.length"></vgr-list-column>
+            <vgr-list-column [align]="'center'" [width]="2" [text]="'Test'"></vgr-list-column>
+            <vgr-list-column [align]="'right'" [width]="2" [text]="'Test'"></vgr-list-column>
+            <vgr-list-column-trashcan [align]="'center'" [width]="1" [disabled]="c.previewObject.deleted" (delete)="onDeleteRow(c)"></vgr-list-column-trashcan>
+            <vgr-list-column-checkbox [align]="'center'" [width]="1" [disabled]="c.previewObject.deleted" [checked]="c.previewObject.selected"
+              (checkedChanged)="onSelectRowChanged(c,$event)"></vgr-list-column-checkbox>
           </vgr-list-item-header>
           <vgr-list-item-content>
             Hej
