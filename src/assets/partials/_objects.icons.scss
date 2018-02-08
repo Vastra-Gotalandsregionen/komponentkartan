@@ -1,13 +1,49 @@
 .vgr-icon-search {
   @extend .bg-image-icon-search;
-  display: block;
-  height: 30px;
-  width: 20px;
+  background-color: dimgrey;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  content: "";
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+  font-family: FontAwesome;
+  margin-top: 1px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.vgr-icon-message {
+  @extend .bg-image-icon-message;
+  background-color: white;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  content: "";
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  font-family: FontAwesome;
+  margin-top: 1px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .vgr-icon-lock-button {
   @extend .bg-image-lock-button__bottom;
-  display: block;
+  background-color: dimgrey;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  content: "";
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+  font-family: FontAwesome;
+  margin-top: 1px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .vgr-icon-pinkiepie {
@@ -28,7 +64,7 @@
   @extend .bg-image-icon-ok-check--green;
   display: block;
   height: 30px;
-  width: 20px;
+  width: 30px;
 }
 
 .vgr-icon-exclamation {
