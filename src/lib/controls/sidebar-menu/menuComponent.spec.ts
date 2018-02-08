@@ -1,13 +1,13 @@
-﻿import { MenuComponent } from '../../controls/sidebar-menu/menu.component';
+﻿import { MenuLegacyComponent } from '../../controls/sidebar-menu/menu.component';
 import { IMenu, IMenuGroup, IMenuItem } from '../../models/menu.model';
 import { BrowserDetector } from '../../services/browserDetector';
 
-let menuComponent: MenuComponent;
+let menuComponent: MenuLegacyComponent;
 let browserDetector: BrowserDetector;
 
 describe('When ngAfterViewInit is called', () => {
     it('onInitialized event is emitted', () => {
-        menuComponent = new MenuComponent(null);
+        menuComponent = new MenuLegacyComponent(null);
 
         spyOn(menuComponent.onInitialized, 'emit');
 
@@ -18,13 +18,13 @@ describe('When ngAfterViewInit is called', () => {
 });
 describe('When ngOnChanges is called', () => {
     beforeEach(() => {
-        menuComponent = new MenuComponent(null);
+        menuComponent = new MenuLegacyComponent(null);
     });
     describe('and menu is not initialized', () => {
         it('exception is not thrown', () => {
             const func = () => {
                 menuComponent.ngOnChanges();
-            }
+            };
             expect(func).not.toThrow();
         });
     });
@@ -440,7 +440,7 @@ describe('When ngOnChanges is called', () => {
                             beforeEach(() => {
                                 menuComponent.menu.expanded = false;
                                 menuComponent.ngOnChanges();
-                            })
+                            });
                             it('all three favourites are visible', () => {
                                 const visibleMenuItems = menuComponent.menuItems.filter(x => x.visible);
                                 const favouriteMenuItems = menuComponent.menuItems.filter(x => x.favourite);
@@ -905,7 +905,7 @@ describe('When ngOnChanges is called', () => {
 
 describe('when menu groups, items and childitems are unsorted', () => {
     beforeEach(() => {
-        menuComponent = new MenuComponent(null);
+        menuComponent = new MenuLegacyComponent(null);
         menuComponent.menu = {
             groups: [
                 {
@@ -946,23 +946,23 @@ describe('when menu groups, items and childitems are unsorted', () => {
 describe('when calling avaliableInThisBrowser', () => {
     beforeEach(() => {
         browserDetector = new BrowserDetector();
-        menuComponent = new MenuComponent(browserDetector);
+        menuComponent = new MenuLegacyComponent(browserDetector);
 
     });
     describe('and menu is Green', () => {
-        beforeEach(() => { menuComponent.menu = { title: 'Rehab', theme: 'Green' } as IMenu });
+        beforeEach(() => { menuComponent.menu = { title: 'Rehab', theme: 'Green' } as IMenu; });
         it('returns true', () => {
             expect(menuComponent.availableInThisBrowser()).toBeTruthy();
         });
     });
     describe('and menu is Blue', () => {
-        beforeEach(() => { menuComponent.menu = { title: 'BMM', theme: 'Blue' } as IMenu });
+        beforeEach(() => { menuComponent.menu = { title: 'BMM', theme: 'Blue' } as IMenu; });
         it('returns true', () => {
             expect(menuComponent.availableInThisBrowser()).toBeTruthy();
         });
     });
     describe('and menu is Red', () => {
-        beforeEach(() => { menuComponent.menu = { title: 'VGPV', theme: 'Red' } as IMenu });
+        beforeEach(() => { menuComponent.menu = { title: 'VGPV', theme: 'Red' } as IMenu; });
         describe('and browser is Internet Explorer', () => {
             beforeEach(() => {
                 spyOn(browserDetector, 'isInternetExplorer').and.returnValue(true);
@@ -985,7 +985,7 @@ describe('when calling avaliableInThisBrowser', () => {
 
 describe('When setActiveMenuItem is called', () => {
     it('selected menu item is set', () => {
-        menuComponent = new MenuComponent(null);
+        menuComponent = new MenuLegacyComponent(null);
 
         const menuItem = { title: 'menu' } as IMenuItem;
 
@@ -995,7 +995,7 @@ describe('When setActiveMenuItem is called', () => {
     });
     describe('and selected menuItem is a favourite that is a child menuItem', () => {
         it('the child menuItem is selected', () => {
-            menuComponent = new MenuComponent(null);
+            menuComponent = new MenuLegacyComponent(null);
 
             const virtualFavouriteMenuItem = {
                 title: 'undermenyalternativ',
@@ -1029,7 +1029,7 @@ describe('When toggleExpand is called', () => {
     describe('and menu is not a single menu and menuItems are more than three and menu is not expanded', () => {
         let virtualFavouriteMenuItem: IMenuItem;
         beforeEach(() => {
-            menuComponent = new MenuComponent(null);
+            menuComponent = new MenuLegacyComponent(null);
 
             menuComponent.isSingleMenu = false;
             menuComponent.menu = { expanded: false } as IMenu;

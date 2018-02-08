@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Rx';
 
 import { SidebarMenuComponent } from '../../controls/sidebar-menu/sidebarMenu.component';
-import { MenuComponent } from '../../controls/sidebar-menu/menu.component';
+import { MenuLegacyComponent } from '../../controls/sidebar-menu/menu.component';
 import { IMenu, IMenuGroup, IMenuItem } from '../../models/menu.model';
 import { BrowserDetector } from '../../services/browserDetector';
 
@@ -23,26 +23,26 @@ export class MenuCreator {
                 title: `Meny ${i}`,
                 groups: [{
                     menuItems:
-                        [{
-                            title: `Användare${i}`,
-                            url: `/anvandare${i}`,
-                            favourite: false,
-                            order: '1',
-                            menuItems: [
-                                {
-                                    title: `Användare 1${i}`,
-                                    url: `/anvandare1${i}`,
-                                    favourite: false,
-                                    order: '1'
-                                },
-                                {
-                                    title: `Användare 2${i}`,
-                                    url: `/anvandare2${i}`,
-                                    favourite: false,
-                                    order: '2'
-                                }
-                            ]
-                        }]
+                    [{
+                        title: `Användare${i}`,
+                        url: `/anvandare${i}`,
+                        favourite: false,
+                        order: '1',
+                        menuItems: [
+                            {
+                                title: `Användare 1${i}`,
+                                url: `/anvandare1${i}`,
+                                favourite: false,
+                                order: '1'
+                            },
+                            {
+                                title: `Användare 2${i}`,
+                                url: `/anvandare2${i}`,
+                                favourite: false,
+                                order: '2'
+                            }
+                        ]
+                    }]
                 } as IMenuGroup]
             } as IMenu);
         }
@@ -62,7 +62,7 @@ describe('SidebarMenuComponent',
             TestBed.resetTestEnvironment();
             TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
             TestBed.configureTestingModule({
-                declarations: [SidebarMenuComponent, MenuComponent],
+                declarations: [SidebarMenuComponent, MenuLegacyComponent],
                 imports: [CommonModule, RouterTestingModule.withRoutes([]), PerfectScrollbarModule],
                 providers: [BrowserDetector]
             });
@@ -74,7 +74,7 @@ describe('SidebarMenuComponent',
                     }
                 });
 
-            TestBed.overrideComponent(MenuComponent,
+            TestBed.overrideComponent(MenuLegacyComponent,
                 {
                     set: {
                         templateUrl: './menu.component.html'

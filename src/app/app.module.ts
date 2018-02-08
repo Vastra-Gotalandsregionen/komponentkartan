@@ -28,6 +28,7 @@ import { FullWidthCardComponent } from './fake/full-width-card.component';
 import { LoaderDemoComponent } from './loaderdemo/loaderdemo.component';
 import { CityService } from './inputFields/cityService';
 import { ListColumnsComponent } from './list-columns/list-columns.component';
+import { ExampleMenuComponent } from './example-menu/example-menu.component';
 
 import { appRoutes } from './routes';
 import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component';
@@ -64,7 +65,8 @@ import { UnitFilterPipe } from './examples-listwithcards/UnitFilterPipe';
     ListColumnsComponent,
     ReactiveformsComponent,
     ExamplesListwithcardsComponent,
-    UnitFilterPipe
+    UnitFilterPipe,
+    ExampleMenuComponent
   ],
   exports: [UnitFilterPipe],
   providers: [
