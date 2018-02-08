@@ -82,13 +82,6 @@
 }
 
 .vgr-icon-question {
-  @extend .bg-image-icon-exclamation;
-  display: block;
-  height: 30px;
-  width: 20px;
-}
-
-.vgr-icon-question {
   @extend .bg-image-icon-question;
   display: block;
   height: 30px;
@@ -116,9 +109,19 @@
   width: 20px;
 }
 
-.vgr-icon-white {
+.vgr-icon-arrow {
   @extend .bg-image-icon-arrow-white;
   display: block;
-  height: 30px;
-  width: 20px;
+  background-color: dimgrey;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  content: "";
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+  font-family: FontAwesome;
+  margin-top: 1px;
+  vertical-align: middle;
+  text-align: center;
 }
