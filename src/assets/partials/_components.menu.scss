@@ -37,32 +37,6 @@ vgr-menu-container {
   .menu-item {
     display: block;
   }
-  @media screen and (min-width: $desktop-width--medium) {
-    .menu {
-      border-right-width: 2px;
-      .menu__header {
-        padding-left: 0px;
-        border-left: $menu-border-width--medium solid $primary-color--default;
-        font-size: $menu-header-font-size--medium;
-        min-height: $menu-header-height--medium;
-        max-height: $menu-header-height--medium;
-        .menu__header__title {
-          padding-left: $menu-border-width--medium;
-          width: 100%;
-          margin-top: 0px;
-          height: 100%;
-        }
-      }
-      .menu-item {
-        border-left: $menu-border-width--medium solid;
-        font-size: $menu-text-font-size--medium;
-        padding-bottom: 6px;
-        padding-top: 6px; // &.menu-item--marked {
-        //   border-left: calc(#{ $menu-border-width--medium}) solid;
-        // }
-      }
-    }
-  }
   .menu-item {
     @extend .border-left-color--secondary;
     border-left: $menu-border-width--small solid;
@@ -90,9 +64,43 @@ vgr-menu-container {
     a:active {
       color: inherit;
       font-weight: inherit;
-    } // &.menu-item--marked {
-    //   @extend .border-left-color--primary;
-    //   border-left: calc(#{$menu-border-width--small}) solid;
-    // }
+    }
+    &:hover {
+      @extend .border-left-color--primary;
+      border-left: calc(#{$menu-border-width--small}) solid;
+      font-weight: bold;
+      letter-spacing: $font-size--small-letter-spacing-bold;
+      a {
+        letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .menu {
+    border-right-width: 2px;
+    .menu__header {
+      padding-left: 0px;
+      border-left: $menu-border-width--medium solid $primary-color--default;
+      font-size: $menu-header-font-size--medium;
+      min-height: $menu-header-height--medium;
+      max-height: $menu-header-height--medium;
+      .menu__header__title {
+        padding-left: $menu-border-width--medium;
+        width: 100%;
+        margin-top: 0px;
+        height: 100%;
+      }
+    }
+    .menu-item {
+      border-left: $menu-border-width--medium solid;
+      font-size: $menu-text-font-size--medium;
+      padding-bottom: 6px;
+      padding-top: 6px;
+      &:hover {
+        letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+      }
+    }
   }
 }
