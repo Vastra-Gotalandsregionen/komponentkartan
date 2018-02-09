@@ -10,6 +10,8 @@
 
 .vgr-icon-pinkiepie {
   @extend .bg-image-pinkie-pie--small;
+  background-repeat: no-repeat;
+  background-position: center;
   display: block;
   height: 140px;
   width: 140px;
