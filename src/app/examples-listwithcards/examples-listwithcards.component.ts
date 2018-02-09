@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow, NotificationIcon } from '../../lib/index';
+import { SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow } from '../../lib/index';
 import { ExampleUnit, ExampleUnitDetails, ExampleUnitJusteringar } from './unit.model';
 
 @Component({
@@ -11,7 +11,6 @@ import { ExampleUnit, ExampleUnitDetails, ExampleUnitJusteringar } from './unit.
 export class ExamplesListwithcardsComponent implements OnInit {
   exampleDetail: ExampleUnitDetails;
   sortDirections = SortDirection;
-  notificationIcon = NotificationIcon;
   exampleData: ExpandableRow<ExampleUnit, any>[] = [];
   filtertext = '';
   newUnits: DropdownItem<any>[] = [];
@@ -256,12 +255,12 @@ export class ExamplesListwithcardsComponent implements OnInit {
   }
   onCardCancel(row: ExpandableRow<ExampleUnit, any>) {
     this.cardLocked = true;
-    row.notifyOnCollapse('redigering av ' + row.previewObject.enhet + ' avbröts', NotificationIcon.Exclamation);
+    row.notifyOnCollapse('redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation');
   }
 
   onCardSave(row: ExpandableRow<ExampleUnit, any>) {
     this.cardLocked = true;
-    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', NotificationIcon.OkGreen);
+    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
   }
 
   onCardUnlocked() {
@@ -314,7 +313,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
       //   let unitTosave = this.newUnit
       const newRow = new ExpandableRow<ExampleUnit, ExampleUnit>(this.newUnit);
-      newRow.notifyOnCollapse(newRow.previewObject.enhet + ' sparades', NotificationIcon.OkGreen);
+      newRow.notifyOnCollapse(newRow.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
 
       this.exampleData.push(newRow);
 

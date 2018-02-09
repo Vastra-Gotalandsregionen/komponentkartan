@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, AfterContentInit, ContentChild } from '@angular/core';
 import {
-    ExpandableRow, NotificationIcon, RowNotification,
+    ExpandableRow, RowNotification,
     NotificationType, ModalService, ModalButtonConfiguration,
     SortDirection, SortChangedArgs, ListHeaderComponent
 } from '../../lib/index';
@@ -64,12 +64,12 @@ export class ListsComponent {
 
     cardSaved() {
         this.cardUnlocked = false;
-        this.cardRow.notifyOnCollapse('Användaren sparades', NotificationIcon.OkGreen);
+        this.cardRow.notifyOnCollapse('Användaren sparades', 'vgr-icon-ok-check-green');
     }
 
     cardCancelled() {
         this.cardUnlocked = false;
-        this.cardRow.notifyOnCollapse('Åtgärden avbröts', NotificationIcon.Ok);
+        this.cardRow.notifyOnCollapse('Åtgärden avbröts', 'vgr-icon-ok-check');
     }
 
     onCardUnlocked() {
@@ -89,7 +89,7 @@ export class ListsComponent {
     removeRow(row: ExpandableRow<any, any>) {
         this.modalService.openDialog('Ta bort raden', 'Vill du verkligen ta bort raden med identification ' + row.previewObject.identification + '?',
             new ModalButtonConfiguration('Ja', () => {
-                row.notifyOnRemove(row.previewObject.identification + ' togs bort', NotificationIcon.Ok);
+                row.notifyOnRemove(row.previewObject.identification + ' togs bort', 'vgr-icon-exclamation--red');
                 row.previewObject.selected = false;
                 row.previewObject.deleted = true;
             }),

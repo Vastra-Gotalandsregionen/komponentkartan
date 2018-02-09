@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SortDirection, SortChangedArgs, ModalService, ModalButtonConfiguration, NotificationIcon, ExpandableRow } from '../../lib/index';
+import { SortDirection, SortChangedArgs, ModalService, ModalButtonConfiguration, ExpandableRow } from '../../lib/index';
+import { RowNotification } from '../../lib/models/rowNotification.model';
+import { NotificationType } from '../../lib/models/notificationType.model';
 
 @Component({
     selector: 'vgr-list-columns-example',
@@ -58,6 +60,12 @@ export class ListColumnsComponent implements OnInit {
                 unitname: 'BVC & Mödravården Mölndal', unitcode: '23111', hsaid: 'SE2321000131-E000000011851', committee: '67 - Göteborgs hälso- och sjukvårdsnämnden', owner: 'Stefan Larsson'
             }),
         ];
+
+        this.peopleWithUnitRows[0].notification = {
+            message: 'En pony',
+            type: NotificationType.Permanent,
+            icon: 'vgr-icon-pinkiepie'
+        } as RowNotification;
     }
 
     onSelectRowChanged(row: any, checked: boolean) {
@@ -85,7 +93,7 @@ export class ListColumnsComponent implements OnInit {
     removeRow(row: any) {
         this.modalService.openDialog('Ta bort raden', 'Vill du verkligen ta bort ' + row.previewObject.firstName + '?',
             new ModalButtonConfiguration('Ja', () => {
-                row.notifyOnRemove(row.previewObject.firstName + ' togs bort', NotificationIcon.Ok);
+                row.notifyOnRemove(row.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
                 row.previewObject.selected = false;
                 row.previewObject.deleted = true;
 

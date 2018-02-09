@@ -1,6 +1,6 @@
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import {
-    SelectableItem, NotificationIcon, RowNotification, NotificationType
+    SelectableItem, RowNotification, NotificationType
 } from '../../lib/index';
 
 import { DropdownBaseComponent } from '../../lib/controls/dropdown-base/dropdown.base.component';
@@ -20,7 +20,7 @@ export class FormExampleComponent {
     constructor() {
         this.readonly = false;
         this.view = 'A';
-        this.notification = { message: 'Information saknas', icon: NotificationIcon.ExclamationRed, type: NotificationType.Permanent } as RowNotification;
+        this.notification = { message: 'Information saknas', icon: 'vgr-icon-exclamation--red', type: NotificationType.Permanent } as RowNotification;
     }
 }
 
