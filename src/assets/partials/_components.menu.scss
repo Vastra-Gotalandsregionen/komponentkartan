@@ -92,6 +92,13 @@ vgr-menu-container {
     &.menu-item--disabled{
       color: $secondary-color--default;
     }
+    .menu-item--notification{
+      height: 20px;
+      width: 20px;
+      background-color: $primary-color--default;
+      border-radius: 50%;
+       
+    }
   }
 }
 
