@@ -24,6 +24,13 @@
   width: 30px;
 }
 
+.vgr-icon-ok-check {
+  @extend .bg-image-icon-ok-check;
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+
 .vgr-icon-ok-check-green {
   @extend .bg-image-icon-ok-check--green;
   display: block;
