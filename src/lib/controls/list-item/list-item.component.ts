@@ -3,7 +3,6 @@ import {
     AfterContentInit, forwardRef
 } from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
-import { NotificationIcon } from '../../models/notificationIcon.model';
 import { RowNotification } from '../../models/rowNotification.model';
 import { ListItemJqeuryHelper } from './listItemJqueryHelper';
 import { ListColumnComponent } from '../list/list-column.component';
@@ -18,8 +17,6 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
     moduleId: module.id
 })
 export class ListItemComponent implements OnInit, AfterContentInit {
-    // För att kunna binda till Enum värde i markup
-    public NotificationIcons = NotificationIcon;
     readonly showNotificationDurationMs = 1500;
     @HostBinding('class.list-item') isContainer = true;
     @HostBinding('class.list-item--collapsed') collapsed = true;
