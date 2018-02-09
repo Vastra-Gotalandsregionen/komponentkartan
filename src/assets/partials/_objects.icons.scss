@@ -1,6 +1,6 @@
 .vgr-icon-search {
   @extend .bg-image-icon-search;
-  background-color: dimgrey;
+  @extend .background-color--primary;
   background-size: 60%;
   background-repeat: no-repeat;
   background-position: center;
@@ -20,11 +20,8 @@
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
-  content: "";
-  width: 36px;
-  height: 36px;
-  font-size: 16px;
-  font-family: FontAwesome;
+  width: 30px;
+  height: 30px;
   margin-top: 1px;
   vertical-align: middle;
   text-align: center;
@@ -32,7 +29,7 @@
 
 .vgr-icon-lock-button {
   @extend .bg-image-lock-button__bottom;
-  background-color: dimgrey;
+  @extend .background-color--primary;
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
@@ -57,7 +54,7 @@
   @extend .bg-image-icon-trashcan;
   display: block;
   height: 30px;
-  width: 20px;
+  width: 30px;
 }
 
 .vgr-icon-ok-check-green {
@@ -109,7 +106,7 @@
 .vgr-icon-arrow {
   @extend .bg-image-icon-arrow-white;
   display: block;
-  background-color: dimgrey;
+  @extend .background-color--primary;
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
