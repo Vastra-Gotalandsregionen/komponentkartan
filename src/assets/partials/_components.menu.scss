@@ -75,10 +75,9 @@ vgr-menu-container {
       color: inherit;
       font-weight: inherit;
     }
-    &:hover {
+    &:hover:not(.menu-item--disabled) {
       @extend .border-left-color--primary;
       font-weight: bold;
-      letter-spacing: $font-size--small-letter-spacing-bold;
       a {
         letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
       }
@@ -89,6 +88,9 @@ vgr-menu-container {
       color: $text-color--light;
       font-weight: bold;
       letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+    }
+    &.menu-item--disabled{
+      color: $secondary-color--default;
     }
   }
 }
@@ -115,7 +117,9 @@ vgr-menu-container {
         padding-bottom: 6px;
         padding-top: 6px;
         &:hover {
-          letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+          a {
+            letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+          }
         }
       }
     }
