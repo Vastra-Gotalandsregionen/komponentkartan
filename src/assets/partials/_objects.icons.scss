@@ -1,45 +1,10 @@
-.vgr-icon-search {
-  @extend .bg-image-icon-search;
-  @extend .background-color--primary;
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-  content: "";
-  width: 34px;
-  height: 34px;
-  font-size: 16px;
-  font-family: FontAwesome;
-  margin-top: 1px;
-  vertical-align: middle;
-  text-align: center;
-}
-
 .vgr-icon-message {
   @extend .bg-image-icon-message;
-  background-color: white;
-  background-size: 100%;
+  background-size: 90%;
   background-repeat: no-repeat;
   background-position: center;
   width: 30px;
   height: 30px;
-  margin-top: 1px;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.vgr-icon-lock-button {
-  @extend .bg-image-lock-button__bottom;
-  @extend .background-color--primary;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  content: "";
-  width: 34px;
-  height: 34px;
-  font-size: 16px;
-  font-family: FontAwesome;
-  margin-top: 1px;
-  vertical-align: middle;
   text-align: center;
 }
 
@@ -53,8 +18,10 @@
 .vgr-icon-trashcan {
   @extend .bg-image-icon-trashcan;
   display: block;
-  height: 34px;
-  width: 34px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30px;
+  width: 30px;
 }
 
 .vgr-icon-ok-check-green {
@@ -87,34 +54,28 @@
 
 .vgr-icon-plus {
   @extend .bg-image-icon-plus;
-  display: block;
-  height: 30px;
-  width: 20px;
-}
-
-.vgr-icon-minus {
-  @extend .bg-image-icon-minus;
-}
-
-.vgr-icon-edit {
-  @extend .bg-image-icon--edit;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
   display: block;
   height: 30px;
   width: 30px;
 }
 
-.vgr-icon-arrow {
-  @extend .bg-image-icon-arrow-white;
-  display: block;
-  @extend .background-color--primary;
-  background-size: 50%;
+.vgr-icon-minus {
+  @extend .bg-image-icon-minus;
+  background-size: 60%;
   background-repeat: no-repeat;
   background-position: center;
-  content: "";
-  width: 34px;
-  height: 34px;
-  font-size: 16px;
-  font-family: FontAwesome;
-  margin-top: 1px;
-  text-align: center;
+  height: 30px;
+  width: 30px;
+}
+
+.vgr-icon-edit {
+  @extend .bg-image-icon--edit;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  height: 30px;
+  width: 30px;
 }
