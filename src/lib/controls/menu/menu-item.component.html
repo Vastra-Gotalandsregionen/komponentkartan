@@ -1,5 +1,5 @@
-<a href="link" *ngIf="!disabled else disableditem">
-  {{text}}
+<a *ngIf="!disabled else disableditem" routerLinkActive="menu-item--selected menu-item--marked" routerLink="'/'" routerLink>
+  {{text}} {{link}}
 </a>
 
 
