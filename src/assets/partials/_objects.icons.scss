@@ -71,21 +71,21 @@
   @extend .bg-image-icon-exclamation;
   display: block;
   height: 30px;
-  width: 20px;
+  width: 30px;
 }
 
 .vgr-icon-exclamation--red {
   @extend .bg-image-icon-exclamation--red;
   display: block;
   height: 30px;
-  width: 20px;
+  width: 30px;
 }
 
 .vgr-icon-question {
   @extend .bg-image-icon-question;
   display: block;
   height: 30px;
-  width: 20px;
+  width: 30px;
 }
 
 .vgr-icon-plus {
@@ -97,9 +97,6 @@
 
 .vgr-icon-minus {
   @extend .bg-image-icon-minus;
-  display: block;
-  height: 30px;
-  width: 20px;
 }
 
 .vgr-icon-edit {
