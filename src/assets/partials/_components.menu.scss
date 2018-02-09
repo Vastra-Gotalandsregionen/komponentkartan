@@ -111,7 +111,7 @@ vgr-menu-container {
         }
       }
       .menu-item {
-        border-left: $menu-border-width--medium solid $primary-color--default;
+        border-left-width: $menu-border-width--medium;
         font-size: $menu-text-font-size--medium;
         padding-bottom: 6px;
         padding-top: 6px;
