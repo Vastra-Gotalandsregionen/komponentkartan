@@ -96,7 +96,6 @@ vgr-menu-container {
 @media screen and (min-width: $desktop-width--medium) {
   vgr-menu-container {
     .menu {
-      border-right-width: 2px;
       .menu__header {
         padding-left: 0px;
         border-left: $menu-border-width--medium solid $primary-color--default;
