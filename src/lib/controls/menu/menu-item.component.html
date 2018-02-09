@@ -1,0 +1,8 @@
+<a href="link" *ngIf="!disabled else disableditem">
+  {{text}}
+</a>
+
+
+<ng-template #disableditem>
+  <p title="{{disabledTooltip}}">{{text}}</p>
+</ng-template>
