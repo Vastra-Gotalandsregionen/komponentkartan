@@ -91,6 +91,14 @@ vgr-menu-container {
     &.menu-item--disabled {
       color: $secondary-color--default;
     }
+    &.menu-separator {
+      width: 100%;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      display: block;
+      height: 1px;
+      background-color: #dbdbdb;
+    }
     .menu-item--notification {
       height: 27px;
       width: 27px;
@@ -135,6 +143,10 @@ vgr-menu-container {
         font-size: $menu-text-font-size--medium;
         padding-bottom: 6px;
         padding-top: 6px;
+        &.menu-separator {
+          padding-top: 0px;
+          padding-bottom: 0px;
+        }
         &:hover {
           a {
             letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;

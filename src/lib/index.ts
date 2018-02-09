@@ -36,6 +36,7 @@ export { ListItemComponent } from './controls/list-item/list-item.component';
 export { ListItemJqeuryHelper } from './controls/list-item/listItemJqueryHelper';
 export { MenuComponent } from './controls/menu/menu.component';
 export { MenuItemComponent } from './controls/menu/menu-item.component';
+export { MenuSeparatorComponent } from './controls/menu/menu-separator.component';
 export { MenuContainerComponent } from './controls/menu/menu-container.component';
 
 export { PanelComponent } from './controls/panel/panel.component';
