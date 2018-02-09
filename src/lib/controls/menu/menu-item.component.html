@@ -1,8 +1,12 @@
-<a *ngIf="!disabled else disableditem" routerLinkActive="menu-item--selected menu-item--marked" routerLink="'/'" routerLink>
-  {{text}} {{link}}
-</a>
-
+<div class="menu-item" *ngIf="!disabled else disableditem" routerLinkActive="menu-item--selected menu-item--marked" routerLink={{link}}
+  routerLink [routerLinkActiveOptions]="{exact:true}">
+  <a>
+    {{text}}
+  </a>
+</div>
 
 <ng-template #disableditem>
-  <p title="{{disabledTooltip}}">{{text}}</p>
+  <div class="menu-item">
+    <p title="{{disabledTooltip}}">{{text}}</p>
+  </div>
 </ng-template>

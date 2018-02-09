@@ -5,7 +5,7 @@ import { Input, Component, HostBinding } from '@angular/core';
     templateUrl: './menu-item.component.html'
 })
 export class MenuItemComponent {
-    @HostBinding('class.menu-item') hasClass = true;
+    // @HostBinding('class.menu-item') hasClass = true;
 
 
     @Input() text: string;
