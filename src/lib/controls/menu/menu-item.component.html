@@ -1,7 +1,8 @@
 <div class="menu-item" *ngIf="!disabled else disableditem" routerLinkActive="menu-item--selected menu-item--marked" routerLink={{link}}
   routerLink [routerLinkActiveOptions]="{exact:true}">
   <a>
-    {{text}}<span class="menu-item--notification">3</span>
+    {{text}}
+    <span *ngIf="notification" class="menu-item--notification" [ngClass]="notificationColor" title={{notification.tooltip}}>{{ notification.text }}</span>
   </a>
 </div>
 

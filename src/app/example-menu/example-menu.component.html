@@ -5,8 +5,10 @@
       <vgr-menu-container>
         <vgr-menu title="Innehåll">
           <vgr-menu-item link="/" text="Menu item 1" notification></vgr-menu-item>
-          <vgr-menu-item link="/menu-example" text="Menu item 2"></vgr-menu-item>
-          <vgr-menu-item link="/" text="Menu item 2" disabled="true" disabledTooltip="Tooltip som visas vid disabled"></vgr-menu-item>
+          <vgr-menu-item link="/menu-example" text="Menu item 2" [notification]="{ text: '3', tooltip: 'Detta är en tooltip', color: 'green'}"></vgr-menu-item>
+          <vgr-menu-item link="/" text="Menu item 3" notification></vgr-menu-item>
+          <vgr-menu-item link="/" text="Menu item 4" [notification]="{ text: '69', tooltip: 'Detta är en tooltip', color: 'red'}"></vgr-menu-item>
+          <vgr-menu-item link="/" text="Menu item 5" disabled="true" disabledTooltip="Tooltip som visas vid disabled"></vgr-menu-item>
         </vgr-menu>
       </vgr-menu-container>
     </vgr-page-block>
