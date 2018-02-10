@@ -35,9 +35,16 @@ vgr-menu-container {
         align-items: center;
       }
     }
+    .menu__footer {
+      height: 100%;
+      width: 100%;
+      display: block;
+      @extend .border-left-color--secondary;
+      border-left: $menu-border-width--small solid;
+    }
     &:hover {
-      .menu-item {
-        &.menu-item--selected {
+      .menu__item {
+        &.menu__item--selected {
           @extend .border-left-color--secondary;
           &:hover {
             @extend .border-left-color--primary;
@@ -46,31 +53,31 @@ vgr-menu-container {
       }
     }
     .submenu {
-      .menu-item {
+      .menu__item {
         padding-right: 25px;
       }
       .submenu-content {
         overflow: hidden;
         max-height: 0;
         transition: max-height 0.4s ease;
-        .menu-item {
+        .menu__item {
           padding-left: $margin--fat;
         }
       }
-      .menu-item__expander {
+      .menu__item__expander {
         position: absolute;
         top: 5px;
         right: $margin--regular;
         font-size: 10px;
         padding-bottom: 26px;
       }
-      .menu-item__minus {
+      .menu__item__minus {
         @extend .bg-image-icon-minus;
         background-size: 9px 26px;
         background-repeat: no-repeat;
         background-position-x: center;
       }
-      .menu-item__plus {
+      .menu__item__plus {
         @extend .bg-image-icon-plus;
       }
       &.submenu--expanded {
@@ -80,14 +87,14 @@ vgr-menu-container {
         }
       }
       &.submenu--child-selected {
-        >.menu-item a {
+        >.menu__item a {
           font-weight: bold;
           letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
         }
       }
     }
   }
-  .menu-item {
+  .menu__item {
     @extend .border-left-color--secondary;
     position: relative;
     border-left: $menu-border-width--small solid;
@@ -119,7 +126,7 @@ vgr-menu-container {
       color: inherit;
       font-weight: inherit;
     }
-    &:hover:not(.menu-item--disabled) {
+    &:hover:not(.menu__item--disabled) {
       @extend .border-left-color--primary;
       cursor: pointer;
       font-weight: bold;
@@ -127,14 +134,14 @@ vgr-menu-container {
         letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
       }
     }
-    &.menu-item--selected {
+    &.menu__item--selected {
       @extend .border-left-color--primary;
       @extend .background-color--secondary;
       color: $text-color--light;
       font-weight: bold;
       letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
     }
-    &.menu-item--disabled {
+    &.menu__item--disabled {
       cursor: default;
       color: $secondary-color--default;
     }
@@ -146,7 +153,7 @@ vgr-menu-container {
       height: 1px;
       background-color: #dbdbdb;
     }
-    .menu-item--notification {
+    .menu__item--notification {
       height: 27px;
       width: 27px;
       line-height: 27px;
@@ -185,7 +192,7 @@ vgr-menu-container {
           height: 100%;
         }
       }
-      .menu-item {
+      .menu__item {
         border-left-width: $menu-border-width--medium;
         font-size: $menu-text-font-size--medium;
         padding-bottom: 6px;
@@ -199,14 +206,14 @@ vgr-menu-container {
             letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
           }
         }
-        .menu-item__expander {
+        .menu__item__expander {
           font-size: 11px;
           top: 7px;
         }
       }
       .submenu {
         &.submenu--child-selected {
-          >.menu-item a {
+          >.menu__item a {
             letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
           }
         }

@@ -17,362 +17,362 @@ export class AppComponent {
   private largeMenu: IMenu[];
   private singleMenu: IMenu[];
   constructor() {
-    this.largeMenu = [{
-      'title': 'Portal',
-      'groups': [{
-        'order': '1',
-        'menuItems': [{
-          'title': 'Startsida',
-          'url': '/dashboard',
-          'favourite': true,
-          'order': '1.1',
-          'menuItems': null
-        },
-        {
-          'title': 'Användare',
-          'url': '/anvandare',
-          'favourite': true,
-          'order': '1.2',
-          'menuItems': [{
-            'title': 'Enhetsanvändare',
-            'url': '/enhetsanvandare',
-            'favourite': true,
-            'order': '1.2.1',
-            'menuItems': null
-          },
-          {
-            'title': 'Sjukhusanvändare',
-            'url': 'sjukhusanvandare',
-            'favourite': false,
-            'order': '1.2.2',
-            'menuItems': null
-          },
-          {
-            'title': 'Övriga användare',
-            'url': '/ovrigaAnvandare',
-            'favourite': false,
-            'order': '1.2.3',
-            'menuItems': null
-          }
-          ]
-        }
-        ]
-      }]
-    },
-    {
-      'title': 'VGPV',
-      'theme': 'Red',
-      'groups': [{
-        'order': '1',
-        'menuItems': [{
-          'title': 'Tidplan',
-          'url': '/externalContent/vgpv/Tidplan',
-          'favourite': true,
-          'order': '1.1',
-          'menuItems': null
-        }]
-      },
-      {
-        'order': '2',
-        'menuItems': [{
-          'title': 'Vårdcentraler',
-          'url': '/externalContent/vgpv/Avtal',
-          'favourite': false,
-          'order': '2.1',
-          'menuItems': null
-        },
-        {
-          'title': 'Jourcentraler',
-          'url': '/externalContent/vgpv/JourcentralAvtal',
-          'favourite': false,
-          'order': '2.2',
-          'menuItems': null
-        },
-        {
-          'title': 'Användare',
-          'url': '/externalContent/vgpv/Användarlista',
-          'favourite': false,
-          'order': '2.3',
-          'menuItems': null
-        }
-        ]
-      },
-      {
-        'order': '3',
-        'menuItems': [{
-          'title': 'Vårdval',
-          'url': '/externalContent/vgpv/Vårdval',
-          'favourite': false,
-          'order': '3.4',
-          'menuItems': null
-        },
-        {
-          'title': 'Uppföljningsunderlag',
-          'url': '',
-          'favourite': false,
-          'order': '3.5',
-          'menuItems': [{
-            'title': 'Uppföljning',
-            'url': '/externalContent/vgpv/UppföljningPage',
-            'favourite': false,
-            'order': '3.5.1',
-            'menuItems': null
-          },
-          {
-            'title': 'Graf dag för dag',
-            'url': '/externalContent/vgpv/VårdvalspoängGraf',
-            'favourite': false,
-            'order': '3.5.2',
-            'menuItems': null
-          },
-          {
-            'title': 'Månatliga rapporter',
-            'url': '/externalContent/vgpv/Månatligarapporter',
-            'favourite': false,
-            'order': '3.5.3',
-            'menuItems': null
-          },
-          {
-            'title': 'Sammanställningar',
-            'url': '/externalContent/vgpv/Sammanställningar',
-            'favourite': false,
-            'order': '3.5.4',
-            'menuItems': null
-          }
-          ]
-        }
-        ]
-      },
-      {
-        'order': '4',
-        'menuItems': [{
-          'title': 'Webbformulär',
-          'url': '',
-          'favourite': false,
-          'order': '4.1',
-          'menuItems': [{
-            'title': 'Inmatning',
-            'url': '/externalContent/vgpv/KvalitetsmålInmatning',
-            'favourite': false,
-            'order': '4.1.1',
-            'menuItems': null
-          },
-          {
-            'title': 'Historik',
-            'url': '/externalContent/vgpv/KvalitetsmålHistorik',
-            'favourite': false,
-            'order': '4.1.2',
-            'menuItems': null
-          }
-          ]
-        },
-        {
-          'title': 'Förhandsgranska',
-          'url': '/externalContent/vgpv/SökUtbetalningsunderlagFörhandsgranska',
-          'favourite': false,
-          'order': '4.1',
-          'menuItems': null
-        },
-        {
-          'title': 'Utbetalningsunderlag',
-          'url': '/externalContent/vgpv/Utbetalningsunderlag',
-          'favourite': true,
-          'order': '4.2',
-          'menuItems': null
-        }
-        ]
-      },
-      {
-        'order': '5',
-        'menuItems': [{
-          'title': 'Filuppladdning',
-          'url': '',
-          'favourite': false,
-          'order': '5.6',
-          'menuItems': [{
-            'title': 'Uppladdning',
-            'url': '/externalContent/vgpv/Filuppladdning',
-            'favourite': true,
-            'order': '5.6.1',
-            'menuItems': null
-          },
-          {
-            'title': 'Övervakning',
-            'url': '/externalContent/vgpv/Övervakning',
-            'favourite': false,
-            'order': '5.6.2',
-            'menuItems': null
-          },
-          {
-            'title': 'Registervård',
-            'url': '/externalContent/vgpv/Registervård',
-            'favourite': false,
-            'order': '5.6.3',
-            'menuItems': null
-          },
-          {
-            'title': 'Undantag',
-            'url': '/externalContent/vgpv/Undantag',
-            'favourite': false,
-            'order': '5.6.4',
-            'menuItems': null
-          }
-          ]
-        }]
-      }
-      ]
-    },
-    {
-      'title': 'BMM',
-      'theme': 'Blue',
-      'groups': [{
-        'order': '1',
-        'menuItems': [{
-          'title': 'Enhet',
-          'url': '/bmmEnhet',
-          'favourite': true,
-          'order': '1.1',
-          'menuItems': null
-        },
-        {
-          'title': 'Utbetalningsunderlag',
-          'url': '/bmmUtbetalningsunderlag',
-          'favourite': true,
-          'order': '1.2',
-          'menuItems': null
-        },
-        {
-          'title': 'Konfiguration',
-          'url': '/bmmKonfiguration',
-          'favourite': true,
-          'order': '1.3',
-          'menuItems': null
-        },
-        {
-          'title': 'Månatliga rapporter',
-          'url': '/bmmManatligaRapporter',
-          'favourite': false,
-          'order': '1.4',
-          'menuItems': null
-        },
-        {
-          'title': 'Registervård',
-          'url': '/bmmRegistervard',
-          'favourite': false,
-          'order': '1.5',
-          'menuItems': null
-        }
-        ]
-      }]
-    },
-    {
-      'title': 'Rehab',
-      'theme': 'Green',
-      'groups': [{
-        'order': '1',
-        'menuItems': [{
-          'title': 'Enhet',
-          'url': '/externalContent/rehab/enhet',
-          'favourite': true,
-          'order': '2.1',
-          'menuItems': null
-        },
-        {
-          'title': 'Utbetalningsunderlag',
-          'url': '/externalContent/rehab/utbetalningsunderlag',
-          'favourite': true,
-          'order': '2.2',
-          'menuItems': null
-        },
-        {
-          'title': 'Konfiguration',
-          'url': '/externalContent/rehab/konfiguration',
-          'favourite': false,
-          'order': '2.3',
-          'menuItems': null
-        },
-        {
-          'title': 'Konfiguration Godkänn',
-          'url': '/externalContent/rehab/konfigurationGodkann',
-          'favourite': false,
-          'order': '2.4',
-          'menuItems': null
-        },
-        {
-          'title': 'Behörighet',
-          'url': '/externalContent/rehab/behorighet',
-          'favourite': false,
-          'order': '2.5',
-          'menuItems': null
-        },
-        {
-          'title': 'Filuppladdning',
-          'url': '/externalContent/rehab/filuppladdning',
-          'favourite': true,
-          'order': '2.6',
-          'menuItems': null
-        },
-        {
-          'title': 'Testuppladdning',
-          'url': '/externalContent/rehab/temporarTestuppladdning',
-          'favourite': false,
-          'order': '2.7',
-          'menuItems': null
-        },
-        {
-          'title': 'Öppna testuppladdning',
-          'url': '/externalContent/rehab/temporarTestuppladdningsperiod',
-          'favourite': false,
-          'order': '2.8',
-          'menuItems': null
-        },
-        {
-          'title': 'Rapporter',
-          'url': '/externalContent/rehab/report',
-          'favourite': false,
-          'order': '2.9',
-          'menuItems': null
-        },
-        {
-          'title': 'Enhetlig registering',
-          'url': '/externalContent/rehab/engangsbeloppEnhetligRegistrering',
-          'favourite': false,
-          'order': '2.10',
-          'menuItems': null
-        }
-        ]
-      }]
-    }
-    ] as IMenu[];
+    // this.largeMenu = [{
+    //   'title': 'Portal',
+    //   'groups': [{
+    //     'order': '1',
+    //     'menuItems': [{
+    //       'title': 'Startsida',
+    //       'url': '/dashboard',
+    //       'favourite': true,
+    //       'order': '1.1',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Användare',
+    //       'url': '/anvandare',
+    //       'favourite': true,
+    //       'order': '1.2',
+    //       'menuItems': [{
+    //         'title': 'Enhetsanvändare',
+    //         'url': '/enhetsanvandare',
+    //         'favourite': true,
+    //         'order': '1.2.1',
+    //         'menuItems': null
+    //       },
+    //       {
+    //         'title': 'Sjukhusanvändare',
+    //         'url': 'sjukhusanvandare',
+    //         'favourite': false,
+    //         'order': '1.2.2',
+    //         'menuItems': null
+    //       },
+    //       {
+    //         'title': 'Övriga användare',
+    //         'url': '/ovrigaAnvandare',
+    //         'favourite': false,
+    //         'order': '1.2.3',
+    //         'menuItems': null
+    //       }
+    //       ]
+    //     }
+    //     ]
+    //   }]
+    // },
+    // {
+    //   'title': 'VGPV',
+    //   'theme': 'Red',
+    //   'groups': [{
+    //     'order': '1',
+    //     'menuItems': [{
+    //       'title': 'Tidplan',
+    //       'url': '/externalContent/vgpv/Tidplan',
+    //       'favourite': true,
+    //       'order': '1.1',
+    //       'menuItems': null
+    //     }]
+    //   },
+    //   {
+    //     'order': '2',
+    //     'menuItems': [{
+    //       'title': 'Vårdcentraler',
+    //       'url': '/externalContent/vgpv/Avtal',
+    //       'favourite': false,
+    //       'order': '2.1',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Jourcentraler',
+    //       'url': '/externalContent/vgpv/JourcentralAvtal',
+    //       'favourite': false,
+    //       'order': '2.2',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Användare',
+    //       'url': '/externalContent/vgpv/Användarlista',
+    //       'favourite': false,
+    //       'order': '2.3',
+    //       'menuItems': null
+    //     }
+    //     ]
+    //   },
+    //   {
+    //     'order': '3',
+    //     'menuItems': [{
+    //       'title': 'Vårdval',
+    //       'url': '/externalContent/vgpv/Vårdval',
+    //       'favourite': false,
+    //       'order': '3.4',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Uppföljningsunderlag',
+    //       'url': '',
+    //       'favourite': false,
+    //       'order': '3.5',
+    //       'menuItems': [{
+    //         'title': 'Uppföljning',
+    //         'url': '/externalContent/vgpv/UppföljningPage',
+    //         'favourite': false,
+    //         'order': '3.5.1',
+    //         'menuItems': null
+    //       },
+    //       {
+    //         'title': 'Graf dag för dag',
+    //         'url': '/externalContent/vgpv/VårdvalspoängGraf',
+    //         'favourite': false,
+    //         'order': '3.5.2',
+    //         'menuItems': null
+    //       },
+    //       {
+    //         'title': 'Månatliga rapporter',
+    //         'url': '/externalContent/vgpv/Månatligarapporter',
+    //         'favourite': false,
+    //         'order': '3.5.3',
+    //         'menuItems': null
+    //       },
+    //       {
+    //         'title': 'Sammanställningar',
+    //         'url': '/externalContent/vgpv/Sammanställningar',
+    //         'favourite': false,
+    //         'order': '3.5.4',
+    //         'menuItems': null
+    //       }
+    //       ]
+    //     }
+    //     ]
+    //   },
+    //   {
+    //     'order': '4',
+    //     'menuItems': [{
+    //       'title': 'Webbformulär',
+    //       'url': '',
+    //       'favourite': false,
+    //       'order': '4.1',
+    //       'menuItems': [{
+    //         'title': 'Inmatning',
+    //         'url': '/externalContent/vgpv/KvalitetsmålInmatning',
+    //         'favourite': false,
+    //         'order': '4.1.1',
+    //         'menuItems': null
+    //       },
+    //       {
+    //         'title': 'Historik',
+    //         'url': '/externalContent/vgpv/KvalitetsmålHistorik',
+    //         'favourite': false,
+    //         'order': '4.1.2',
+    //         'menuItems': null
+    //       }
+    //       ]
+    //     },
+    //     {
+    //       'title': 'Förhandsgranska',
+    //       'url': '/externalContent/vgpv/SökUtbetalningsunderlagFörhandsgranska',
+    //       'favourite': false,
+    //       'order': '4.1',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Utbetalningsunderlag',
+    //       'url': '/externalContent/vgpv/Utbetalningsunderlag',
+    //       'favourite': true,
+    //       'order': '4.2',
+    //       'menuItems': null
+    //     }
+    //     ]
+    //   },
+    //   {
+    //     'order': '5',
+    //     'menuItems': [{
+    //       'title': 'Filuppladdning',
+    //       'url': '',
+    //       'favourite': false,
+    //       'order': '5.6',
+    //       'menuItems': [{
+    //         'title': 'Uppladdning',
+    //         'url': '/externalContent/vgpv/Filuppladdning',
+    //         'favourite': true,
+    //         'order': '5.6.1',
+    //         'menuItems': null
+    //       },
+    //       {
+    //         'title': 'Övervakning',
+    //         'url': '/externalContent/vgpv/Övervakning',
+    //         'favourite': false,
+    //         'order': '5.6.2',
+    //         'menuItems': null
+    //       },
+    //       {
+    //         'title': 'Registervård',
+    //         'url': '/externalContent/vgpv/Registervård',
+    //         'favourite': false,
+    //         'order': '5.6.3',
+    //         'menuItems': null
+    //       },
+    //       {
+    //         'title': 'Undantag',
+    //         'url': '/externalContent/vgpv/Undantag',
+    //         'favourite': false,
+    //         'order': '5.6.4',
+    //         'menuItems': null
+    //       }
+    //       ]
+    //     }]
+    //   }
+    //   ]
+    // },
+    // {
+    //   'title': 'BMM',
+    //   'theme': 'Blue',
+    //   'groups': [{
+    //     'order': '1',
+    //     'menuItems': [{
+    //       'title': 'Enhet',
+    //       'url': '/bmmEnhet',
+    //       'favourite': true,
+    //       'order': '1.1',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Utbetalningsunderlag',
+    //       'url': '/bmmUtbetalningsunderlag',
+    //       'favourite': true,
+    //       'order': '1.2',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Konfiguration',
+    //       'url': '/bmmKonfiguration',
+    //       'favourite': true,
+    //       'order': '1.3',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Månatliga rapporter',
+    //       'url': '/bmmManatligaRapporter',
+    //       'favourite': false,
+    //       'order': '1.4',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Registervård',
+    //       'url': '/bmmRegistervard',
+    //       'favourite': false,
+    //       'order': '1.5',
+    //       'menuItems': null
+    //     }
+    //     ]
+    //   }]
+    // },
+    // {
+    //   'title': 'Rehab',
+    //   'theme': 'Green',
+    //   'groups': [{
+    //     'order': '1',
+    //     'menuItems': [{
+    //       'title': 'Enhet',
+    //       'url': '/externalContent/rehab/enhet',
+    //       'favourite': true,
+    //       'order': '2.1',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Utbetalningsunderlag',
+    //       'url': '/externalContent/rehab/utbetalningsunderlag',
+    //       'favourite': true,
+    //       'order': '2.2',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Konfiguration',
+    //       'url': '/externalContent/rehab/konfiguration',
+    //       'favourite': false,
+    //       'order': '2.3',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Konfiguration Godkänn',
+    //       'url': '/externalContent/rehab/konfigurationGodkann',
+    //       'favourite': false,
+    //       'order': '2.4',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Behörighet',
+    //       'url': '/externalContent/rehab/behorighet',
+    //       'favourite': false,
+    //       'order': '2.5',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Filuppladdning',
+    //       'url': '/externalContent/rehab/filuppladdning',
+    //       'favourite': true,
+    //       'order': '2.6',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Testuppladdning',
+    //       'url': '/externalContent/rehab/temporarTestuppladdning',
+    //       'favourite': false,
+    //       'order': '2.7',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Öppna testuppladdning',
+    //       'url': '/externalContent/rehab/temporarTestuppladdningsperiod',
+    //       'favourite': false,
+    //       'order': '2.8',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Rapporter',
+    //       'url': '/externalContent/rehab/report',
+    //       'favourite': false,
+    //       'order': '2.9',
+    //       'menuItems': null
+    //     },
+    //     {
+    //       'title': 'Enhetlig registering',
+    //       'url': '/externalContent/rehab/engangsbeloppEnhetligRegistrering',
+    //       'favourite': false,
+    //       'order': '2.10',
+    //       'menuItems': null
+    //     }
+    //     ]
+    //   }]
+    // }
+    // ] as IMenu[];
 
-    this.singleMenu = [
-      {
-        title: 'Innehåll',
-        groups: [
-          {
-            order: '0',
-            menuItems: [
-              { title: 'Formatmall', url: '/formatmall' } as IMenuItem,
-              { title: 'Färgkarta', url: '/fargkarta' } as IMenuItem,
-              { title: 'Listor', url: '/lists' } as IMenuItem,
-              { title: 'Kalender', url: '/calendars' } as IMenuItem,
-              { title: 'Inputfält', url: '/inputFields' } as IMenuItem,
-              { title: 'Loader', url: '/loader' } as IMenuItem,
-              { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem,
-              { title: 'Formulär', url: '/formexample' } as IMenuItem,
-              { title: 'Snygg Layout', url: '/example-layout' } as IMenuItem,
-              { title: 'List kolumner', url: '/list-columns' } as IMenuItem,
-              { title: 'Reactive Forms', url: '/reactiveforms' } as IMenuItem,
-              { title: 'Lista prestanda', url: '/list-example' } as IMenuItem
-            ] as IMenuItem[]
-          } as IMenuGroup
-        ] as IMenuGroup[]
-      } as IMenu,
+    // this.singleMenu = [
+    //   {
+    //     title: 'Innehåll',
+    //     groups: [
+    //       {
+    //         order: '0',
+    //         menuItems: [
+    //           { title: 'Formatmall', url: '/formatmall' } as IMenuItem,
+    //           { title: 'Färgkarta', url: '/fargkarta' } as IMenuItem,
+    //           { title: 'Listor', url: '/lists' } as IMenuItem,
+    //           { title: 'Kalender', url: '/calendars' } as IMenuItem,
+    //           { title: 'Inputfält', url: '/inputFields' } as IMenuItem,
+    //           { title: 'Loader', url: '/loader' } as IMenuItem,
+    //           { title: 'Komponenter', url: '/komponentkartan' } as IMenuItem,
+    //           { title: 'Formulär', url: '/formexample' } as IMenuItem,
+    //           { title: 'Snygg Layout', url: '/example-layout' } as IMenuItem,
+    //           { title: 'List kolumner', url: '/list-columns' } as IMenuItem,
+    //           { title: 'Reactive Forms', url: '/reactiveforms' } as IMenuItem,
+    //           { title: 'Lista prestanda', url: '/list-example' } as IMenuItem
+    //         ] as IMenuItem[]
+    //       } as IMenuGroup
+    //     ] as IMenuGroup[]
+    //   } as IMenu,
 
 
-    ] as IMenu[];
+    // ] as IMenu[];
 
-    this.menus = this.singleMenu;
+    // this.menus = this.singleMenu;
 
     this.headerMenu = {
       menuItems: [
@@ -423,17 +423,6 @@ export class AppComponent {
     } as IHeaderMenu;
   }
 
-  onSelectedMenuChanged(newMenu: string) {
-  }
-
-  setSelectedMenu(menuSize: number) {
-    if (menuSize > 1) {
-      this.menus = this.largeMenu;
-    } else { this.menus = this.singleMenu; }
-
-    this.sidebarMenu.ngAfterViewInit();
-
-  }
   onActivate(e: any) {
     window.scrollTo(0, 0);
 

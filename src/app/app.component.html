@@ -1,8 +1,23 @@
 <div id="theme-root" class="theme--neutral">
   <div class="back-to-top"></div>
   <vgr-modal></vgr-modal>
-  <menu-selector (menuSelected)="setSelectedMenu($event)"></menu-selector>
-  <vgr-sidebar-menu [menus]="menus"></vgr-sidebar-menu>
+  <vgr-menu-container>
+    <vgr-menu title="Innehåll">
+      <vgr-menu-item link="/formatmall" text="Formatmall"></vgr-menu-item>
+      <vgr-menu-item link="/fargkarta" text="Färgkarta"></vgr-menu-item>
+      <vgr-menu-item link="/lists" text="Listor"></vgr-menu-item>
+      <vgr-menu-item link="/calendars" text="Kalender"></vgr-menu-item>
+      <vgr-menu-item link="/inputFields" text="Inputfält"></vgr-menu-item>
+      <vgr-menu-item link="/loader" text="Loader"></vgr-menu-item>
+      <vgr-menu-item link="/komponentkartan" text="Komponenter"></vgr-menu-item>
+      <vgr-menu-item link="/formexample" text="Formulär"></vgr-menu-item>
+      <vgr-menu-item link="/example-layout" text="Snygg Layout"></vgr-menu-item>
+      <vgr-menu-item link="/list-columns" text="List kolumner"></vgr-menu-item>
+      <vgr-menu-item link="/reactiveforms" text="Reactive Forms"></vgr-menu-item>
+      <vgr-menu-item link="/list-example" text="Lista prestanda"></vgr-menu-item>
+      <vgr-menu-item link="/menu-example" text="Meny exempel"></vgr-menu-item>
+    </vgr-menu>
+  </vgr-menu-container>
   <vgr-header [userName]="'Nico Åberg'" [headerMenu]="headerMenu"></vgr-header>
   <router-outlet (activate)="onActivate($event)"></router-outlet>
 </div>
