@@ -1,6 +1,7 @@
 vgr-menu-container {
-  width: 500px;
+  width: 300px;
   height: 100%;
+  display: block;
   .menu {
     width: 100%;
     display: block;
@@ -43,15 +44,55 @@ vgr-menu-container {
         }
       }
     }
+    .submenu {
+      .menu-item {
+        padding-right: 25px;
+      }
+      .submenu-content {
+        display: none;
+        .menu-item {
+          padding-left: $margin--fat;
+        }
+      }
+      .menu-item__expander {
+        position: absolute;
+        top: 5px;
+        right: $margin--regular;
+        font-size: 10px;
+        padding-bottom: 26px;
+      }
+      .menu-item__minus {
+        @extend .bg-image-icon-minus;
+        background-size: 9px 26px;
+        background-repeat: no-repeat;
+        background-position-x: center;
+      }
+      .menu-item__plus {
+        @extend .bg-image-icon-plus;
+      }
+      &.submenu--expanded {
+        .submenu-content {
+          display: block;
+        }
+      }
+      &.submenu--child-selected {
+        >.menu-item a {
+          font-weight: bold;
+          letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+        }
+      }
+    }
   }
   .menu-item {
     @extend .border-left-color--secondary;
+    position: relative;
     border-left: $menu-border-width--small solid;
     padding-left: $margin--slim;
     padding-top: $margin--xs-slim;
     padding-bottom: $margin--xs-slim;
     font-size: $menu-text-font-size--small;
     display: block;
+    word-wrap: break-word;
     cursor: pointer;
     a {
       position: relative;
@@ -90,6 +131,7 @@ vgr-menu-container {
       letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
     }
     &.menu-item--disabled {
+      cursor: default;
       color: $secondary-color--default;
     }
     &.menu-separator {
@@ -150,6 +192,17 @@ vgr-menu-container {
         }
         &:hover {
           a {
+            letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+          }
+        }
+        .menu-item__expander {
+          font-size: 11px;
+          top: 7px;
+        }
+      }
+      .submenu {
+        &.submenu--child-selected {
+          >.menu-item a {
             letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
           }
         }

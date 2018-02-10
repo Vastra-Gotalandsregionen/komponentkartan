@@ -38,6 +38,7 @@ export { MenuComponent } from './controls/menu/menu.component';
 export { MenuItemComponent } from './controls/menu/menu-item.component';
 export { MenuSeparatorComponent } from './controls/menu/menu-separator.component';
 export { MenuContainerComponent } from './controls/menu/menu-container.component';
+export { SubmenuComponent } from './controls/menu/submenu.component';
 
 export { PanelComponent } from './controls/panel/panel.component';
 export { PanelContainerComponent } from './controls/panel/panel-container.component';
