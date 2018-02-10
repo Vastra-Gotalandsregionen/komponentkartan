@@ -1,5 +1,5 @@
-vgr-menu-container {
-  width: 300px;
+vgr-menu-container,
+.example-menu-container {
   height: 100%;
   display: block;
   .menu {
@@ -177,7 +177,8 @@ vgr-menu-container {
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  vgr-menu-container {
+  vgr-menu-container,
+  .example-menu-container {
     .menu {
       .menu__header {
         padding-left: 0px;

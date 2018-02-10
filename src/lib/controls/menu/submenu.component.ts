@@ -25,7 +25,7 @@ export class SubmenuComponent implements DoCheck {
         if (this.submenuElement.nativeElement.children) {
             const nrOfOtems = this.submenuElement.nativeElement.children.length;
             for (let i = 0; i < nrOfOtems; i++) {
-                if (this.submenuElement.nativeElement.children[i].childNodes[1].classList && this.submenuElement.nativeElement.children[i].childNodes[1].classList.value.includes('menu-item--selected')) {
+                if (this.submenuElement.nativeElement.children[i].childNodes[1].classList && this.submenuElement.nativeElement.children[i].childNodes[1].classList.value.includes('menu__item--selected')) {
                     this._childSelected = true;
                 }
             }
