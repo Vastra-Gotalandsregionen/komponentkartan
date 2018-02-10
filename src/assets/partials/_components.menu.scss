@@ -4,8 +4,9 @@ vgr-menu-container {
   display: block;
   .menu {
     width: 100%;
+    height: 100%;
     display: block;
-    background: $background-color--default;
+    background: white;
     border-right: solid 1px $border-color;
     color: $menu-text-color;
     .menu__header {
