@@ -14,11 +14,6 @@ vgr-menu-container,
       border-left: $menu-border-width--small solid;
       padding-left: 0px;
       margin: 0;
-      font-size: $menu-header-font-size--small;
-      font-weight: bold;
-      font-style: normal;
-      font-stretch: normal;
-      letter-spacing: normal;
       min-height: $menu-header-height--small;
       max-height: $menu-header-height--small;
       display: flex;
@@ -27,12 +22,20 @@ vgr-menu-container,
       cursor: pointer;
       @extend .border-left-color--primary;
       .menu__header__title {
+        font-size: $menu-header-font-size--small;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
         padding-left: $margin--slim;
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: row;
         align-items: center;
+        &.menu__header__title--smaller-font-size {
+          font-size: $menu-header-font-size--smaller;
+        }
       }
     }
     .menu__footer {
@@ -59,7 +62,7 @@ vgr-menu-container,
       .submenu-content {
         overflow: hidden;
         max-height: 0;
-        transition: max-height 0.4s ease;
+        transition: max-height 0.6s ease-out;
         .menu__item {
           padding-left: $margin--fat;
         }
@@ -83,7 +86,7 @@ vgr-menu-container,
       &.submenu--expanded {
         .submenu-content {
           max-height: 999px;
-          transition: max-height 0.8s ease;
+          transition: max-height 1.0s ease-in;
         }
       }
       &.submenu--child-selected {
@@ -152,6 +155,9 @@ vgr-menu-container,
       display: block;
       height: 1px;
       background-color: #dbdbdb;
+      &:hover {
+        @extend .border-left-color--secondary;
+      }
     }
     .menu__item--notification {
       height: 27px;
@@ -183,14 +189,17 @@ vgr-menu-container,
       .menu__header {
         padding-left: 0px;
         border-left: $menu-border-width--medium solid $primary-color--default;
-        font-size: $menu-header-font-size--medium;
         min-height: $menu-header-height--medium;
         max-height: $menu-header-height--medium;
         .menu__header__title {
+          font-size: $menu-header-font-size--medium;
           padding-left: $menu-border-width--medium;
           width: 100%;
           margin-top: 0px;
           height: 100%;
+          &.menu__header__title--smaller-font-size {
+            font-size: $menu-header-font-size--small;
+          }
         }
       }
       .menu__item {
