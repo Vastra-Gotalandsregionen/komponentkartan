@@ -5,9 +5,9 @@ vgr-menu-container,
   .menu {
     width: 100%;
     height: 100%;
-    display: block;
+    display: flex;
+    flex-direction: column;
     background: white;
-    border-right: solid 1px $border-color;
     color: $menu-text-color;
     .menu__header {
       @extend .border-left-color--primary;
@@ -41,7 +41,7 @@ vgr-menu-container,
     .menu__footer {
       height: 100%;
       width: 100%;
-      display: block;
+      flex-grow: 1;
       @extend .border-left-color--secondary;
       border-left: $menu-border-width--small solid;
     }
@@ -108,7 +108,7 @@ vgr-menu-container,
     font-size: $menu-text-font-size--small;
     display: flex;
     word-wrap: break-word;
-    cursor: pointer;
+    cursor: pointer;    
     a {
       position: relative;
       color: inherit;
