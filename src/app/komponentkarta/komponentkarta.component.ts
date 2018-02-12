@@ -44,6 +44,8 @@ export class KomponentkartaComponent implements AfterViewInit {
     expanded: boolean;
     isReadonlyAndDisabled: boolean;
     isReadonlyAndDisabledMulti: boolean;
+    options: SelectableItem<any>[];
+
     constructor(private modalService: ModalService) {
         this.isReadonlyAndDisabled = true;
         this.isReadonlyAndDisabledMulti = true;
@@ -95,6 +97,11 @@ export class KomponentkartaComponent implements AfterViewInit {
         this.dropMultipleDownItems8[2].selected = true;
 
         this.dropDownItems9[7].selected = true;
+
+        this.options = [
+            { value: '1', displayName: 'Etta' }, { value: '2', displayName: 'Tvåa' } as SelectableItem<any>,
+            { value: '3', displayName: 'Trea' }, { value: '4', displayName: 'Fyra' } as SelectableItem<any>
+        ];
     }
 
     showOneButtonModal() {
@@ -164,6 +171,7 @@ export class KomponentkartaComponent implements AfterViewInit {
     onSelectedRadioOptionChanged(optionValue: number) {
         this.selectedRadioOption.value = optionValue;
     }
+
     consoleLog(logText: string) {
     }
 

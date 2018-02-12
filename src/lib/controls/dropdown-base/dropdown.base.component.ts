@@ -46,7 +46,7 @@ export abstract class DropdownBaseComponent {
     @Input() set items(value: DropdownItem<any>[]) {
         // The scrollbar component would not refresh when items were changed unless we added a timeout...
         // Ugly solution for sure, but until a better one comes along it will have to do :(
-        this._items = value;
+        this._items = JSON.parse(JSON.stringify(value));
 
         const selectedItems = this._items.filter(x => x.selected);
         if (selectedItems.length > 0) {

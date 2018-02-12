@@ -24,8 +24,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
 
     public radiogroupItems: RadioGroupItem<any>[] = [];
     @Input() set options(items: SelectableItem<any>[]) {
+        const _items = JSON.parse(JSON.stringify(items));
+
         let newItem: RadioGroupItem<any>;
-        items.forEach(item => {
+        _items.forEach(item => {
             newItem = item as RadioGroupItem<any>;
             newItem.ariaid = Guid.newGuid();
             this.radiogroupItems.push(newItem);
