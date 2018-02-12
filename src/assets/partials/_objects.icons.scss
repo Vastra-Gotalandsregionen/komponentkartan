@@ -20,6 +20,7 @@
 .vgr-icon-trashcan {
   @extend .bg-image-icon-trashcan;
   display: block;
+  background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
   height: 30px;
@@ -63,7 +64,7 @@
 
 .vgr-icon-plus {
   @extend .bg-image-icon-plus;
-  background-size: 60%;
+  background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
   display: block;
@@ -73,7 +74,7 @@
 
 .vgr-icon-minus {
   @extend .bg-image-icon-minus;
-  background-size: 60%;
+  background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
   height: 30px;
