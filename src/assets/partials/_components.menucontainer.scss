@@ -1,0 +1,22 @@
+.sidemenu {
+  display: block;
+  z-index: $layer-three;
+  height: calc(100vh - #{$header-height});
+  position: fixed;
+  top: $header-height;
+  min-width: $nav-width--small;
+  max-width: $nav-width--small;
+  left: 0;
+  background: white;
+  border-right: solid 1px $border-color;
+  .ps-content{
+    height: 100%;
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .sidemenu {
+    min-width: $nav-width--medium;
+    max-width: $nav-width--medium;
+  }
+}

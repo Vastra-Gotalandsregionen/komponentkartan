@@ -146,7 +146,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
       return;
     }
     this.invalidOnFocus = this.control && this.control.invalid && this.showValidation;
-    if (this.displayValue) {
+    if (this.isNumber(this.displayValue)) {
       this.displayValue = this.displayValue.toString().replace(/\s/g, '');
     }
     this.hasFocus = true;

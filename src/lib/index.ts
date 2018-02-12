@@ -14,7 +14,7 @@ export { SaveCancelComponent } from './controls/saveCancel/saveCancel.component'
 export { RadioGroupComponent } from './controls/radioGroup/radioGroup.component';
 export { HeaderComponent } from './controls/header/header.component';
 export { LoginInformationComponent } from './controls/loginInformation/loginInformation.component';
-export { MenuComponent } from './controls/sidebar-menu/menu.component';
+export { MenuLegacyComponent } from './controls/sidebar-menu/menu.component';
 export { SidebarMenuComponent } from './controls/sidebar-menu/sidebarMenu.component';
 export { HeaderMenuComponent } from './controls/headerMenu/headerMenu.component';
 export { ModalPlaceholderComponent } from './controls/modal/modal.component';
@@ -34,6 +34,12 @@ export { ListColumnCheckboxComponent } from './controls/list/list-column-checkbo
 export { ListColumnTrashcanComponent } from './controls/list/list-column-trashcan.component';
 export { ListItemComponent } from './controls/list-item/list-item.component';
 export { ListItemJqeuryHelper } from './controls/list-item/listItemJqueryHelper';
+export { MenuComponent } from './controls/menu/menu.component';
+export { MenuItemComponent } from './controls/menu/menu-item.component';
+export { MenuSeparatorComponent } from './controls/menu/menu-separator.component';
+export { MenuContainerComponent } from './controls/menu/menu-container.component';
+export { SubmenuComponent } from './controls/menu/submenu.component';
+
 export { PanelComponent } from './controls/panel/panel.component';
 export { PanelContainerComponent } from './controls/panel/panel-container.component';
 
