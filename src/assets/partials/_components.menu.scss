@@ -228,6 +228,9 @@ vgr-menu-container,
           }
         }
       }
+      .menu__footer {
+        border-left: $menu-border-width--medium solid;
+      }
     }
   }
 }
