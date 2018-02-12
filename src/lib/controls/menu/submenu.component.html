@@ -1,4 +1,4 @@
-<div class="menu__item" *ngIf="!disabled else disableditem" (click)="expanded = !expanded">
+<div class="menu__item" (click)="expanded = !expanded">
   <a>{{text}}</a>
   <span class="menu__item__expander" [ngClass]="{'menu__item__plus' : !expanded, 'menu__item__minus' : expanded}">
   </span>
@@ -6,8 +6,3 @@
 <div class="submenu-content" #submenu>
   <ng-content></ng-content>
 </div>
-<ng-template #disableditem>
-  <div class="menu__item menu__item--disabled ">
-    <p title="{{disabledTooltip}} ">{{text}}</p>
-  </div>
-</ng-template>
