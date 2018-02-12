@@ -1,5 +1,4 @@
 import { RowNotification } from './rowNotification.model';
-import { NotificationIcon } from './notificationIcon.model';
 import { NotificationType } from './notificationType.model';
 
 export class ExpandableRow<TPreview, TFull> {
@@ -10,11 +9,11 @@ export class ExpandableRow<TPreview, TFull> {
     constructor(previewObject: TPreview) {
         this.previewObject = previewObject;
     }
-    notifyOnCollapse(message: string, icon: NotificationIcon) {
+    notifyOnCollapse(message: string, icon: string) {
         this.notification = { icon: icon, message: message, type: NotificationType.ShowOnCollapse } as RowNotification;
     }
 
-    notifyOnRemove(message: string, icon: NotificationIcon) {
+    notifyOnRemove(message: string, icon: string) {
         this.notification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
     }
 }

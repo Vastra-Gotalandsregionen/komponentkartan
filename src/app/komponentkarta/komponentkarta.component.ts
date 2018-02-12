@@ -2,7 +2,7 @@ import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import {
     DropdownItem, SelectableItem, ModalService,
     ModalButtonConfiguration, IHeaderMenu,
-    IHeaderMenuItem, NotificationType, NotificationIcon
+    IHeaderMenuItem, NotificationType
 } from '../../lib/index';
 
 // 3rd Party
@@ -16,7 +16,6 @@ import * as $ from 'jquery';
 export class KomponentkartaComponent implements AfterViewInit {
     // Enum declarations
     public NotificationTypes = NotificationType;
-    public NotificationIcons = NotificationIcon;
 
     maxDate: Date = new Date(2018, 7, 1);
 
