@@ -8,7 +8,7 @@ import { MenuItemComponent } from './menu-item.component';
 export class SubmenuComponent implements DoCheck {
 
     @Input() text: string;
-    @Input() expanded = true;
+    @Input() expanded: boolean;
 
     @HostBinding('class.submenu') hasClass = true;
     @HostBinding('class.submenu--expanded') get expandedClass() {
