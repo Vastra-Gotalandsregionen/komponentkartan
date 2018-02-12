@@ -57,7 +57,7 @@ export class ListsComponent {
             new ExpandableRow<any, any>({ identification: '14ZVFf9023874sdpaföj', invoiceId: 'INV 122334534534', payableAmount: 122, issueDate: new Date(), visits: [1, 2, 3] }),
             new ExpandableRow<any, any>({ identification: '15ZVFf9023874sdpaföj', invoiceId: 'INV 122334534534', payableAmount: 43, issueDate: new Date(), visits: [1, 2, 3] })];
 
-        this.claimRows[0].notification = { message: 'Permanentrad skall alltid visas', icon: NotificationIcon.Exclamation, type: NotificationType.Permanent } as RowNotification;
+        this.claimRows[0].notification = { message: 'Permanentrad skall alltid visas', icon: 'vgr-icon-exclamation--red', type: NotificationType.Permanent } as RowNotification;
     }
 
     onDeleted(item: any) {
