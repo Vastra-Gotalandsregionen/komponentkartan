@@ -6,12 +6,12 @@
         <vgr-menu title="Innehåll">
           <vgr-menu-item link="/" text="Menu item 1"></vgr-menu-item>
           <vgr-menu-separator></vgr-menu-separator>
-          <vgr-menu-item link="/" text="Menu item 2" [notification]="{ text: '3', tooltip: 'Detta är en tooltip', color: 'green'}"></vgr-menu-item>
+          <vgr-menu-item link="/" text="Menu item 2 med extra långt namn" notification="69" notificationTooltip="Detta är en tooltip" notificationColor="green"></vgr-menu-item>
           <vgr-menu-item link="/" text="Menu item 3 med extra långt namn"></vgr-menu-item>
-          <vgr-menu-item link="/menu-example" text="Menu item 4" [notification]="{ text: '69', tooltip: 'Detta är en tooltip', color: 'red'}"></vgr-menu-item>
+          <vgr-menu-item link="/menu-example" text="Menu item 4" notification="422" notificationTooltip="Detta är en tooltip" notificationColor="default"></vgr-menu-item>
           <vgr-menu-item link="/" text="Menu item 5" disabled="true" disabledTooltip="Tooltip som visas vid disabled"></vgr-menu-item>
           <vgr-menu-item link="/" text="Menu item 6" collapsable="true" disabledTooltip="Tooltip som visas vid disabled"></vgr-menu-item>
-          <vgr-menu-item link="/" text="Menu item 7" disabled="true" [notification]="{ text: '69', tooltip: 'Detta är en tooltip', color: 'red'}"></vgr-menu-item>
+          <vgr-menu-item link="/" text="Menu item 7" disabled="true" notification="12" notificationTooltip="Detta är ytterligare en tooltip" notificationColor="error"></vgr-menu-item>
           <vgr-menu-separator></vgr-menu-separator>
           <vgr-submenu text="Submenu">
             <vgr-menu-item link="/" text="Sub menu item 1"></vgr-menu-item>

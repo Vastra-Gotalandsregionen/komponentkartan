@@ -102,8 +102,8 @@ vgr-menu-container,
     position: relative;
     border-left: $menu-border-width--small solid;
     padding-left: $margin--slim;
-    padding-top: $margin--xs-slim;
-    padding-bottom: $margin--xs-slim;
+    padding-top: 6px;
+    padding-bottom: 6px;
     font-size: $menu-text-font-size--small;
     display: block;
     word-wrap: break-word;
@@ -143,6 +143,8 @@ vgr-menu-container,
       color: $text-color--light;
       font-weight: bold;
       letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+      // padding-top: 7px;
+      // padding-bottom: 7px;
     }
     &.menu__item--disabled {
       cursor: default;
@@ -163,9 +165,9 @@ vgr-menu-container,
       }
     }
     .menu__item--notification {
-      height: 23px;
-      width: 23px;
-      line-height: 23px;
+      height: 21px;
+      width: 21px;
+      line-height: 21px;
       display: inline-block;
       background-color: $primary-color--default;
       color: $text-color--light;
@@ -174,12 +176,25 @@ vgr-menu-container,
       font-weight: normal;
       text-align: center;
       position: absolute;
-      top: -6px;
+      top: -5px;
+      margin-left: 2px;
       &.notification--green {
         background-color: $primary-color--green;
       }
       &.notification--red {
         background-color: $primary-color--red
+      }
+      &.notification--blue {
+        background-color: $primary-color--blue
+      }
+      &.notification--default {
+        background-color: $primary-color--default
+      }
+      &.notification--error {
+        background-color: $primary-color--error
+      }
+      &.notification--success {
+        background-color: $primary-color--success
       }
     }
   }
@@ -214,6 +229,10 @@ vgr-menu-container,
           padding-top: 0px;
           padding-bottom: 0px;
         }
+        // &.menu__item--selected {
+        //   padding-top: 10px;
+        //   padding-bottom: 10px;
+        // }
         &:hover {
           a {
             letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
@@ -222,6 +241,13 @@ vgr-menu-container,
         .menu__item__expander {
           font-size: 11px;
           top: 7px;
+        }
+        .menu__item--notification {
+          // height: 27px;
+          // width: 27px;
+          // line-height: 27px;
+          // font-size: $menu-text-font-size--medium;
+          top: -4px;
         }
       }
       .submenu {

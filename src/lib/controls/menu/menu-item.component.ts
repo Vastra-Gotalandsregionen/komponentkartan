@@ -9,19 +9,17 @@ export class MenuItemComponent {
     @Input() link: string;
     @Input() disabled = false;
     @Input() disabledTooltip?: boolean;
-    @Input() notification?: MenuItemNotification;
+    @Input() notification: string;
+    @Input() notificationColor: string;
+    @Input() notificationTooltip: string;
 
-    get notificationColor(): string {
-        return 'notification--' + this.notification.color;
+    get notificationColorClass(): string {
+        return 'notification--' + this.notificationColor;
     }
 
-    constructor() { }
+    get notificationText() : string{
+        return this.notification && this.notification.length > 2 ? "!" : this.notification;
+    }
 
-
-}
-
-class MenuItemNotification {
-    color: string;
-    text: string;
-    tooltip: string;
+    constructor() {}
 }
