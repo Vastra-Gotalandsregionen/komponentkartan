@@ -147,6 +147,9 @@ vgr-menu-container,
     &.menu__item--disabled {
       cursor: default;
       color: $secondary-color--default;
+      p {
+        position: relative;
+      }
     }
     &.menu-separator {
       width: 100%;
@@ -160,18 +163,18 @@ vgr-menu-container,
       }
     }
     .menu__item--notification {
-      height: 27px;
-      width: 27px;
-      line-height: 27px;
+      height: 23px;
+      width: 23px;
+      line-height: 23px;
       display: inline-block;
       background-color: $primary-color--default;
       color: $text-color--light;
       border-radius: 50%;
-      font-size: $menu-text-font-size--medium;
+      font-size: $menu-text-font-size--small;
       font-weight: normal;
       text-align: center;
       position: absolute;
-      top: -9px;
+      top: -6px;
       &.notification--green {
         background-color: $primary-color--green;
       }
