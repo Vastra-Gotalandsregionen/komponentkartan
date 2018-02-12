@@ -1,0 +1,15 @@
+<div class="menu__item" *ngIf="!disabled else disableditem" routerLinkActive="menu__item--selected menu__item--marked" routerLink={{link}}
+  routerLink [routerLinkActiveOptions]="{exact:true}">
+  <a>
+    {{text}}
+  </a>
+  <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass" title={{notificationTooltip}}>{{ notificationText }}</span>
+</div>
+
+<ng-template #disableditem>
+  <div class="menu__item menu__item--disabled">
+    <p title="{{disabledTooltip}}">{{text}}
+    </p>
+      <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass" title={{notificationTooltip}}>{{ notificationText }}</span>
+  </div>
+</ng-template>

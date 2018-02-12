@@ -1,6 +1,6 @@
-import { Input, Output, Component, AfterViewInit, ViewChildren, Query, QueryList, EventEmitter, ChangeDetectorRef } from '@angular/core'
+import { Input, Output, Component, AfterViewInit, ViewChildren, Query, QueryList, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { IMenu } from '../../models/menu.model';
-import { MenuComponent } from './menu.component';
+import { MenuLegacyComponent } from './menu.component';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BrowserDetector } from '../../services/browserDetector';
 
@@ -142,7 +142,7 @@ const scrollbarStyle = `
 })
 export class SidebarMenuComponent implements AfterViewInit {
     @Input() menus: IMenu[];
-    @ViewChildren(MenuComponent) menuComponents: QueryList<MenuComponent>;
+    @ViewChildren(MenuLegacyComponent) menuComponents: QueryList<MenuLegacyComponent>;
     @Output() selectedMenuChanged = new EventEmitter<string>();
     private selectedMenu: JQuery;
     public anyMenuExpanded: boolean;
@@ -198,7 +198,7 @@ export class SidebarMenuComponent implements AfterViewInit {
 
         this.changeDetectorRef.detectChanges();
 
-        setTimeout(() => { this.setupJQuery() }, 1000);
+        setTimeout(() => { this.setupJQuery(); }, 1000);
 
     }
 
@@ -251,7 +251,7 @@ export class SidebarMenuComponent implements AfterViewInit {
         return $('.menu-item--selected').closest('.menu');
     }
 
-    private getMenuComponent(menu: JQuery): MenuComponent {
+    private getMenuComponent(menu: JQuery): MenuLegacyComponent {
         const selectedTitle = menu.find('.menu__header__title').first().text();
         const matchingComponents = this.menuComponents.filter(x => x.menu.title === selectedTitle);
         if (matchingComponents.length === 1) {
@@ -263,7 +263,7 @@ export class SidebarMenuComponent implements AfterViewInit {
     private scrollToMenu(newSelectedMenu: JQuery) {
         // Calculate scrolling height by adding the heights of all menus above the selected one
         let totalHeight = 0;
-        newSelectedMenu.closest('vgr-menu').prevAll('vgr-menu').each(function () { totalHeight += $(this).children('.menu').height() });
+        newSelectedMenu.closest('vgr-menu').prevAll('vgr-menu').each(function () { totalHeight += $(this).children('.menu').height(); });
         const newScrollTopValue = totalHeight > 0 ? totalHeight - 50 : 0;
 
         if (!this.browserDetector.isInternetExplorer()) {

@@ -44,7 +44,7 @@ import * as $ from 'jquery';
     type.PageHeaderComponent,
     type.RadioGroupComponent,
     type.HeaderComponent,
-    type.MenuComponent,
+    type.MenuLegacyComponent,
     type.SidebarMenuComponent,
     type.LoginInformationComponent,
     type.HeaderMenuComponent,
@@ -74,11 +74,16 @@ import * as $ from 'jquery';
     type.ListHeaderComponent,
     type.ListItemContentComponent,
     type.ListItemHeaderComponent,
+    type.MenuContainerComponent,
+    type.MenuComponent,
+    type.MenuItemComponent,
+    type.MenuSeparatorComponent,
     type.ExpandableDivComponent,
     type.ExpandableDivHeaderComponent,
     type.ExpandableDivContentComponent,
     type.PanelComponent,
-    type.PanelContainerComponent
+    type.PanelContainerComponent,
+    type.SubmenuComponent
   ],
   exports: [
     type.SafePipe,
@@ -95,7 +100,7 @@ import * as $ from 'jquery';
     type.PageHeaderComponent,
     type.RadioGroupComponent,
     type.HeaderComponent,
-    type.MenuComponent,
+    type.MenuLegacyComponent,
     type.SidebarMenuComponent,
     type.LoginInformationComponent,
     type.HeaderMenuComponent,
@@ -125,11 +130,16 @@ import * as $ from 'jquery';
     type.ListHeaderComponent,
     type.ListItemContentComponent,
     type.ListItemHeaderComponent,
+    type.MenuComponent,
+    type.MenuContainerComponent,
+    type.MenuItemComponent,
+    type.MenuSeparatorComponent,
     type.ExpandableDivComponent,
     type.ExpandableDivHeaderComponent,
     type.ExpandableDivContentComponent,
     type.PanelComponent,
-    type.PanelContainerComponent
+    type.PanelContainerComponent,
+    type.SubmenuComponent
   ],
   providers: [
     type.ModalService,

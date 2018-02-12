@@ -13,6 +13,7 @@ import { ExampleLayoutComponent } from './example-layout/example-layout.componen
 import { ListColumnsComponent } from './list-columns/list-columns.component';
 import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
+import { ExampleMenuComponent } from './example-menu/example-menu.component';
 
 
 export const appRoutes: Routes = [
@@ -27,5 +28,6 @@ export const appRoutes: Routes = [
     { path: 'example-layout', component: ExampleLayoutComponent },
     { path: 'list-columns', component: ListColumnsComponent },
     { path: 'list-example', component: ExamplesListwithcardsComponent },
+    { path: 'menu-example', component: ExampleMenuComponent },
     { path: '**', component: KomponentkartaComponent }
 ];

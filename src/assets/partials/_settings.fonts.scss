@@ -1,7 +1,6 @@
 $font-family: "Calibri",
 sans-serif;
 $line-height: 1.5;
-
 /*------------------------------------*\
   #SMALL
 \*------------------------------------*/
@@ -12,8 +11,8 @@ $h1-font-size--small: 25px;
 $h2-font-size--small: 18px;
 $h3-font-size--small: 18px;
 $menu-header-font-size--small: 25px;
+$menu-header-font-size--smaller: 20px;
 $menu-text-font-size--small: 16px;
-
 /*------------------------------------*\
   #MEDIUM
 \*------------------------------------*/
@@ -23,9 +22,8 @@ $h1-font-size--medium: 30px;
 $h2-font-size--medium: 20px;
 $h3-font-size--medium: 20px;
 $menu-header-font-size--medium: 30px;
-$menu-text-font-size--medium: 20px;
-$menu-text-font-size--medium-letter-spacing-bold: -0.22px;
-
+$menu-text-font-size--medium: 18px;
+$menu-text-font-size--medium-letter-spacing-bold: -0.15px;
 /*------------------------------------*\
   #LARGE
 \*------------------------------------*/

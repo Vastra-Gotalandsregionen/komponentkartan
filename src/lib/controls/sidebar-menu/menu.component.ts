@@ -1,14 +1,14 @@
-import { Component, Input, Output, OnChanges, EventEmitter, AfterViewInit } from '@angular/core'
+import { Component, Input, Output, OnChanges, EventEmitter, AfterViewInit } from '@angular/core';
 import { IMenu, IMenuGroup, IMenuItem } from '../../models/menu.model';
 import { BrowserDetector } from '../../services/browserDetector';
 
 @Component({
-    selector: 'vgr-menu',
+    selector: 'vgr-menu-legacy',
     moduleId: module.id,
     templateUrl: './menu.component.html',
 })
 
-export class MenuComponent implements OnChanges, AfterViewInit {
+export class MenuLegacyComponent implements OnChanges, AfterViewInit {
     @Input() menu: IMenu;
     @Input() isSingleMenu: boolean;
 
@@ -139,7 +139,7 @@ export class MenuComponent implements OnChanges, AfterViewInit {
         }
 
         if (this.menu.expanded) {
-            this.menuItems.forEach(x => { x.visible = !x.isVirtualFavourite || x.isSeparator });
+            this.menuItems.forEach(x => { x.visible = !x.isVirtualFavourite || x.isSeparator; });
         } else {
             this.setVisibleFavourites(3);
         }
