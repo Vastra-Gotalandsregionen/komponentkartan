@@ -2,14 +2,14 @@
   routerLink [routerLinkActiveOptions]="{exact:true}">
   <a>
     {{text}}
-    <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass" title={{notificationTooltip}}>{{ notificationText }}</span>
   </a>
+  <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass" title={{notificationTooltip}}>{{ notificationText }}</span>
 </div>
 
 <ng-template #disableditem>
   <div class="menu__item menu__item--disabled">
     <p title="{{disabledTooltip}}">{{text}}
-      <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass" title={{notificationTooltip}}>{{ notificationText }}</span>
     </p>
+      <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass" title={{notificationTooltip}}>{{ notificationText }}</span>
   </div>
 </ng-template>
