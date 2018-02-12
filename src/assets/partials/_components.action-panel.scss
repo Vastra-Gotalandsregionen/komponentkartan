@@ -42,6 +42,7 @@
   padding-right: $margin--slim;
   border-bottom: 2px solid #99a3ad;
   font-weight: bold;
+  height: 30px;
 }
 
 .action-panel__notification {
@@ -98,5 +99,6 @@
     margin-right: -$margin--fat;
     padding-left: $margin--fat;
     padding-right: $margin--fat;
+    height: 35px;
   }
 }

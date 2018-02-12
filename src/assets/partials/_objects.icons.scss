@@ -1,0 +1,91 @@
+.vgr-icon-message {
+  @extend .bg-image-icon-message;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+
+.vgr-icon-pinkiepie {
+  @extend .bg-image-pinkie-pie--small;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  height: 140px;
+  width: 140px;
+}
+
+.vgr-icon-trashcan {
+  @extend .bg-image-icon-trashcan;
+  display: block;
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30px;
+  width: 30px;
+}
+
+.vgr-icon-ok-check {
+  @extend .bg-image-icon-ok-check;
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+
+.vgr-icon-ok-check-green {
+  @extend .bg-image-icon-ok-check--green;
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+
+.vgr-icon-exclamation {
+  @extend .bg-image-icon-exclamation;
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+
+.vgr-icon-exclamation--red {
+  @extend .bg-image-icon-exclamation--red;
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+
+.vgr-icon-question {
+  @extend .bg-image-icon-question;
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+
+.vgr-icon-plus {
+  @extend .bg-image-icon-plus;
+  background-size: 40%;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+
+.vgr-icon-minus {
+  @extend .bg-image-icon-minus;
+  background-size: 40%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30px;
+  width: 30px;
+}
+
+.vgr-icon-edit {
+  @extend .bg-image-icon--edit;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  height: 30px;
+  width: 30px;
+}
