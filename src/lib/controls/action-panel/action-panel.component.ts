@@ -1,6 +1,5 @@
 import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, AfterContentInit } from '@angular/core';
 import { NotificationType } from '../../models/notificationType.model';
-import { NotificationIcon } from '../../models/notificationIcon.model';
 import { RowNotification } from '../../models/rowNotification.model';
 import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
 
@@ -10,8 +9,6 @@ import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
     moduleId: module.id
 })
 export class ActionPanelComponent implements OnInit, AfterContentInit {
-    // För att kunna binda till Enum värde i markup
-    public NotificationIcons = NotificationIcon;
 
     readonly showNotificationDurationMs = 1500;
     private actualContentHeight: string;

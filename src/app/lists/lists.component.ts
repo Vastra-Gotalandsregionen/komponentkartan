@@ -33,6 +33,8 @@ export class ListsComponent {
 
     public claimRows: ExpandableRow<any, any>[];
 
+    panelNotification = { icon: 'vgr-icon-message', message: 'Exempeltext notifiering', type: NotificationType.Permanent } as RowNotification;
+
     constructor(private modalService: ModalService) {
         this.actionPanelVisible = true;
         this.grossAmount = 15000;
