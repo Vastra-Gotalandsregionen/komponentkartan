@@ -141,6 +141,17 @@ describe('[InputComponent]', () => {
                 expect(rootElement.classes['validation-error--fixed']).toEqual(true);
               });
             });
+
+            describe('When submit is triggered with string input', () => {
+              beforeEach(() => {
+                component.writeValue('abc def');
+                component.onFocus();
+                fixture.detectChanges();
+              });
+              it('Formatting is not triggered', () => {
+                expect(component.displayValue).toEqual('abc def');
+              });
+            });
           });
         });
       });
