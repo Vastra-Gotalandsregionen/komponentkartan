@@ -15,7 +15,6 @@ import { AppComponent } from './app.component';
 import { KomponentkartaComponent } from './komponentkarta/komponentkarta.component';
 import { FormatmallComponent } from './formatmall/formatmall.component';
 import { FargkartaComponent } from './fargkarta/fargkarta.component';
-import { MenuSelectorComponent } from './menuSelector/menuSelector.component';
 import { ListsComponent } from './lists/lists.component';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { InputFieldsComponent } from './inputFields/inputFields.component';
@@ -51,7 +50,6 @@ import { UnitFilterPipe } from './examples-listwithcards/UnitFilterPipe';
     KomponentkartaComponent,
     FormatmallComponent,
     FargkartaComponent,
-    MenuSelectorComponent,
     ListsComponent,
     CalendarsComponent,
     InputFieldsComponent,

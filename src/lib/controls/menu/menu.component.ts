@@ -11,7 +11,7 @@ export class MenuComponent {
     @HostBinding('class.menu') hasClass = true;
 
     get smallerFont(): boolean {
-        return this.title.length > 9;
+        return this.title && this.title.length > 9;
     }
 
     constructor() { }

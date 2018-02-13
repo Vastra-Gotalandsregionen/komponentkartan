@@ -1,11 +1,12 @@
-import { Input, Component, HostBinding, QueryList, DoCheck, ViewChild, ElementRef } from '@angular/core';
-import { MenuItemComponent } from './menu-item.component';
+import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+
 
 @Component({
     selector: 'vgr-submenu',
     templateUrl: './submenu.component.html'
 })
-export class SubmenuComponent implements DoCheck {
+export class SubmenuComponent implements AfterViewInit {
 
     @Input() text: string;
     @Input() expanded: boolean;
@@ -14,21 +15,29 @@ export class SubmenuComponent implements DoCheck {
     @HostBinding('class.submenu--expanded') get expandedClass() {
         return this.expanded;
     }
-    @HostBinding('class.submenu--child-selected') private _childSelected = false;
+    @HostBinding('class.submenu--child-selected') private childSelected: boolean;
 
-    @ViewChild('submenu') submenuElement: ElementRef;
+    constructor(public elementRef: ElementRef, private router: Router) { }
 
-
-    constructor() { }
-
-    ngDoCheck() {
-        if (this.submenuElement.nativeElement.children) {
-            const nrOfOtems = this.submenuElement.nativeElement.children.length;
-            for (let i = 0; i < nrOfOtems; i++) {
-                if (this.submenuElement.nativeElement.children[i].childNodes[1].classList && this.submenuElement.nativeElement.children[i].childNodes[1].classList.value.includes('menu__item--selected')) {
-                    this._childSelected = true;
-                }
-            }
+    setChildSelected() {
+        this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
+        if (this.childSelected) {
+            this.expanded = true;
         }
+    }
+
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.setChildSelected();
+
+        }, 10);
+
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                setTimeout(() => {
+                    this.setChildSelected();
+                }, 100);
+            }
+        });
     }
 }
