@@ -17,9 +17,9 @@ export class MenuItemComponent {
         return 'notification--' + this.notificationColor;
     }
 
-    get notificationText() : string{
-        return this.notification && this.notification.length > 2 ? "!" : this.notification;
+    get notificationText(): string {
+        return this.notification && this.notification.length > 2 ? '!' : this.notification;
     }
 
-    constructor() {}
+    constructor() { }
 }

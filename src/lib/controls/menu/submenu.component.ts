@@ -1,10 +1,12 @@
-import { Input, Component, DoCheck, ElementRef, HostBinding, ChangeDetectorRef } from '@angular/core';
+import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+
 
 @Component({
     selector: 'vgr-submenu',
     templateUrl: './submenu.component.html'
 })
-export class SubmenuComponent implements DoCheck {
+export class SubmenuComponent implements AfterViewInit {
 
     @Input() text: string;
     @Input() expanded: boolean;
@@ -13,13 +15,29 @@ export class SubmenuComponent implements DoCheck {
     @HostBinding('class.submenu--expanded') get expandedClass() {
         return this.expanded;
     }
-    @HostBinding('class.submenu--child-selected') private _childSelected: boolean;
+    @HostBinding('class.submenu--child-selected') private childSelected: boolean;
 
+    constructor(public elementRef: ElementRef, private router: Router) { }
 
+    setChildSelected() {
+        this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
+        if (this.childSelected) {
+            this.expanded = true;
+        }
+    }
 
-    constructor(public elementRef: ElementRef, private changeDetecor: ChangeDetectorRef) { }
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.setChildSelected();
 
-    ngDoCheck() {
-        this._childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
+        }, 10);
+
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                setTimeout(() => {
+                    this.setChildSelected();
+                }, 100);
+            }
+        });
     }
 }

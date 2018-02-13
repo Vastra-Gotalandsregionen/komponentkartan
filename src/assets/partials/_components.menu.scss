@@ -86,7 +86,7 @@ vgr-menu-container,
       &.submenu--expanded {
         .submenu-content {
           max-height: 999px;
-          transition: max-height 1.0s ease-in;
+          transition: max-height 0.6s ease-in;
         }
       }
       &.submenu--child-selected {
@@ -108,7 +108,7 @@ vgr-menu-container,
     font-size: $menu-text-font-size--small;
     display: flex;
     word-wrap: break-word;
-    cursor: pointer;    
+    cursor: pointer;
     a {
       position: relative;
       color: inherit;
