@@ -355,7 +355,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     onSelectedDate(event: Event, currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
         const clickedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
 
-
         if (!clickedDate || clickedDate.disabled) {
             return;
         }
@@ -368,6 +367,9 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         this.selectedDateChanged.emit(clickedDate.day);
         this.changeDetectorRef.detectChanges();
 
+        if (this.control) {
+            this.control.setValue(clickedDate.day);
+        }
     }
 
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {

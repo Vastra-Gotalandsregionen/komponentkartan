@@ -3,7 +3,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormControl, Validators } from '@angular/forms';
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
@@ -78,6 +78,35 @@ describe('[DatepickerComponent(Angular)]', () => {
                 });
                 it('onLeave is has been called', () => {
                     expect(component.onLeave).toHaveBeenCalled();
+                });
+            });
+
+            describe('calender is opened and in focus', () => {
+                beforeEach(() => {
+                    event = { cancelBubble: false } as Event;
+
+                    component.control = new FormControl(null, { validators: [Validators.required], updateOn: 'blur' });
+                    component.ngOnInit();
+                    component.onEnter();
+                    fixture.detectChanges();
+                });
+                it('validation-error--editing is active', () => {
+                    expect(rootElement.classes['validation-error--editing']).toEqual(true);
+                });
+
+                describe('date has been selected', () => {
+                    beforeEach(() => {
+                        event = { cancelBubble: false } as Event;
+
+                        component.control = new FormControl(null, { validators: [Validators.required], updateOn: 'blur' });
+                        component.ngOnInit();
+                        component.onEnter();
+                        component.onSelectedDate(event, 0, 0, 0);
+                        fixture.detectChanges();
+                    });
+                    it('validation-error--editing is no longer active', () => {
+                        expect(rootElement.classes['validation-error--editing']).toEqual(false);
+                    });
                 });
             });
 
