@@ -1,10 +1,10 @@
 import { Component, HostBinding } from '@angular/core';
 
 @Component({
-    selector: 'vgr-menu-container',
-    templateUrl: './menu-container.component.html'
+    selector: 'vgr-sidebar-menu',
+    templateUrl: './sidebar-menu.component.html'
 })
-export class MenuContainerComponent {
+export class SidebarMenuComponent {
     @HostBinding('class.sidemenu') hasClass = true;
 
     constructor() { }

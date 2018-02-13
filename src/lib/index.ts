@@ -14,8 +14,6 @@ export { SaveCancelComponent } from './controls/saveCancel/saveCancel.component'
 export { RadioGroupComponent } from './controls/radioGroup/radioGroup.component';
 export { HeaderComponent } from './controls/header/header.component';
 export { LoginInformationComponent } from './controls/loginInformation/loginInformation.component';
-export { MenuLegacyComponent } from './controls/sidebar-menu/menu.component';
-export { SidebarMenuComponent } from './controls/sidebar-menu/sidebarMenu.component';
 export { HeaderMenuComponent } from './controls/headerMenu/headerMenu.component';
 export { ModalPlaceholderComponent } from './controls/modal/modal.component';
 export { MonthpickerComponent } from './controls/monthpicker/monthpicker.component';
@@ -37,12 +35,10 @@ export { ListItemJqeuryHelper } from './controls/list-item/listItemJqueryHelper'
 export { MenuComponent } from './controls/menu/menu.component';
 export { MenuItemComponent } from './controls/menu/menu-item.component';
 export { MenuSeparatorComponent } from './controls/menu/menu-separator.component';
-export { MenuContainerComponent } from './controls/menu/menu-container.component';
+export { SidebarMenuComponent } from './controls/menu/sidebar-menu.component';
 export { SubmenuComponent } from './controls/menu/submenu.component';
-
 export { PanelComponent } from './controls/panel/panel.component';
 export { PanelContainerComponent } from './controls/panel/panel-container.component';
-
 export { PageComponent } from './controls/page/page.component';
 export { PageHeaderComponent } from './controls/pageHeader/pageHeader.component';
 export { PageBodyComponent } from './controls/page-body/page-body.component';
