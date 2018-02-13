@@ -1,0 +1,51 @@
+<vgr-page class="no-sort">
+  <vgr-page-header [title]="componentName">
+  </vgr-page-header>
+  <vgr-page-body>
+    <vgr-page-block>
+      <vgr-list [allowMultipleExpandedItems]="true">
+        <vgr-list-header>
+          <vgr-list-column-header [text]="'Dokumentation för ' + componentName" [width]="20"></vgr-list-column-header>
+        </vgr-list-header>
+        <vgr-list-item [expanded]="true">
+          <vgr-list-item-header>
+            <h4>Översikt</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <div class="content-overview">
+              <!-- Översikt -->
+              <ng-content select=".docs__overview"></ng-content>
+            </div>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false">
+          <vgr-list-item-header>
+            <h4>Exempel</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <!-- Exempel -->
+            <ng-content select=".docs__examples"></ng-content>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false">
+          <vgr-list-item-header>
+            <h4>API</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <!-- API -->
+            <ng-content select=".docs__api"></ng-content>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false">
+          <vgr-list-item-header>
+            <h4>Tillgänglighet</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <!-- tILLGÄNGLIGHET -->
+            <ng-content select=".docs__wcag"></ng-content>
+          </vgr-list-item-content>
+        </vgr-list-item>
+      </vgr-list>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>

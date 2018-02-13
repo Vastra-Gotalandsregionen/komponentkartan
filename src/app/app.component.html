@@ -3,21 +3,51 @@
   <vgr-modal></vgr-modal>
   <vgr-sidebar-menu>
     <vgr-menu title="Innehåll">
-      <vgr-menu-item link="/formatmall" text="Formatmall"></vgr-menu-item>
-      <vgr-menu-item link="/fargkarta" text="Färgkarta"></vgr-menu-item>
-      <vgr-menu-item link="/lists" text="Listor"></vgr-menu-item>
-      <vgr-menu-item link="/calendars" text="Kalender"></vgr-menu-item>
-      <vgr-menu-item link="/inputFields" text="Inputfält"></vgr-menu-item>
-      <vgr-menu-item link="/loader" text="Loader"></vgr-menu-item>
-      <vgr-menu-item link="/komponentkartan" text="Komponenter"></vgr-menu-item>
-      <vgr-menu-item link="/formexample" text="Formulär"></vgr-menu-item>
-      <vgr-menu-item link="/example-layout" text="Snygg Layout"></vgr-menu-item>
-      <vgr-menu-item link="/list-columns" text="List kolumner"></vgr-menu-item>
-      <vgr-menu-item link="/reactiveforms" text="Reactive Forms"></vgr-menu-item>
-      <vgr-menu-item link="/list-example" text="Lista prestanda"></vgr-menu-item>
-      <vgr-menu-item link="/menu-example" text="Meny exempel"></vgr-menu-item>
+      <vgr-menu-item link="/" text="Start"></vgr-menu-item>
+      <vgr-menu-item link="/theming" text="Temahantering"></vgr-menu-item>
+      <vgr-menu-item link="/pagestructure" text="Sidhantering"></vgr-menu-item>
+      <vgr-menu-item link="/formattemplate" text="Formatmall"></vgr-menu-item>
+      <vgr-menu-item link="/colours" text="Färgkarta"></vgr-menu-item>
+      <vgr-menu-item link="/icons" text="Ikoner"></vgr-menu-item>
+      <vgr-menu-item link="/sizes" text="Upplösning"></vgr-menu-item>
+      <vgr-menu-separator></vgr-menu-separator>
+      <vgr-submenu text="Komponenter">
+        <vgr-menu-item link="/backtotop" text="Back to top"></vgr-menu-item>
+        <vgr-menu-item link="/textbuttons" text="Button"></vgr-menu-item>
+        <vgr-menu-item link="/card" text="Card"></vgr-menu-item>
+        <vgr-menu-item link="/checkbox" text="Checkbox"></vgr-menu-item>
+        <vgr-menu-item link="/datepicker" text="Datepicker"></vgr-menu-item>
+        <vgr-menu-item link="/dropdowns" text="Dropdown"></vgr-menu-item>
+        <vgr-menu-item link="/dropdownmultiselect" text="Droprown multiselect"></vgr-menu-item>
+        <vgr-menu-item link="/expandablediv" text="Expandable div"></vgr-menu-item>
+        <vgr-menu-item link="/filtertextbox" text="Filter textbox"></vgr-menu-item>
+        <vgr-menu-item link="/headers" text="Header/header menu"></vgr-menu-item>
+        <vgr-menu-item link="/inputFields" text="Input"></vgr-menu-item>
+        <vgr-menu-item link="/lists" text="List"></vgr-menu-item>
+        <vgr-menu-item link="/loader" text="Loader"></vgr-menu-item>
+        <vgr-menu-item link="/lockbutton" text="Lock button"></vgr-menu-item>
+        <vgr-menu-item link="/menu" text="Menu"></vgr-menu-item>
+        <vgr-menu-item link="/modaldialog" text="Modal dialog"></vgr-menu-item>
+        <vgr-menu-item link="/monthpicker" text="Monthpicker"></vgr-menu-item>
+        <vgr-menu-item link="/panels" text="Panel/Dashboard"></vgr-menu-item>
+        <vgr-menu-item link="/titlevalue" text="Title-value"></vgr-menu-item>
+        <vgr-menu-item link="/savecancel" text="Save/Cancel"></vgr-menu-item>
+        <vgr-menu-item link="/radioButtons" text="Radio Group"></vgr-menu-item>
+      </vgr-submenu>
+      <vgr-menu-separator></vgr-menu-separator>
+      <vgr-submenu text="Kodexempel">
+        <vgr-menu-item link="/listexample-simple" text="Lista (enkel)"></vgr-menu-item>
+        <vgr-menu-item link="/listexample-expandable-div" text="Lista (expandable div)"></vgr-menu-item>
+        <vgr-menu-item link="/listexample-notifications" text="Lista (notifieringar)"></vgr-menu-item>
+        <vgr-menu-item link="/listexample-actionbuttons" text="Lista (checkbox & papperskorg)"></vgr-menu-item>
+        <vgr-menu-item link="/reactiveformsexample" text="Reactive Forms"></vgr-menu-item>
+      </vgr-submenu>
+      <vgr-menu-separator></vgr-menu-separator>
+      <vgr-submenu text="Exempelsidor">
+        <vgr-menu-item link="/examples-listwithcards" text="Lista med kort"></vgr-menu-item>
+      </vgr-submenu>
     </vgr-menu>
   </vgr-sidebar-menu>
-  <vgr-header [userName]="'Nico Åberg'" [headerMenu]="headerMenu"></vgr-header>
-  <router-outlet (activate)="onActivate($event)"></router-outlet>
+  <vgr-header></vgr-header>
+  <router-outlet></router-outlet>
 </div>

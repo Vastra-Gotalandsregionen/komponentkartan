@@ -1,33 +1,77 @@
-
+// Core
 import { Routes } from '@angular/router';
 
-import { KomponentkartaComponent } from './komponentkarta/komponentkarta.component';
-import { FormatmallComponent } from './formatmall/formatmall.component';
+// Domain
+import { InputfieldsComponent } from './inputfields/inputfields.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
+import { MonthpickerComponent } from './monthpicker/monthpicker.component';
+import { ColoursComponent } from './colours/colours.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { DropdownmultiselectComponent } from './dropdownmultiselect/dropdownmultiselect.component';
+import { DropdownsComponent } from './dropdowns/dropdowns.component';
+import { FormattemplateComponent } from './formattemplate/formattemplate.component';
+import { HeadersComponent } from './headers/headers.component';
 import { ListsComponent } from './lists/lists.component';
-import { CalendarsComponent } from './calendars/calendars.component';
-import { FargkartaComponent } from './fargkarta/fargkarta.component';
-import { InputFieldsComponent } from './inputFields/inputFields.component';
-import { LoaderDemoComponent } from './loaderdemo/loaderdemo.component';
-import { FormExampleComponent } from './formexample/formexample.component';
-import { ExampleLayoutComponent } from './example-layout/example-layout.component';
-import { ListColumnsComponent } from './list-columns/list-columns.component';
-import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component';
+import { LoaderComponent } from './loader/loader.component';
+import { LockbuttonComponent } from './lockbutton/lockbutton.component';
+import { ModaldialogComponent } from './modaldialog/modaldialog.component';
+import { PanelsComponent } from './panels/panels.component';
+import { RadiobuttonsComponent } from './radiobuttons/radiobuttons.component';
+import { TextbuttonsComponent } from './textbuttons/textbuttons.component';
+import { SavecancelComponent } from './savecancel/savecancel.component';
+import { BacktotopComponent } from './backtotop/backtotop.component';
+import { StartComponent } from './start/start.component';
+import { ThemingComponent } from './theming/theming.component';
+import { TitleValueComponent } from './title-value/title-value.component';
+import { FiltertexboxComponent } from './filtertexbox/filtertexbox.component';
+import { PageStructureComponent } from './page-structure/page-structure.component';
+import { CardComponent } from './card/card.component';
+import { SizesComponent } from './sizes/sizes.component';
+import { MenuComponent } from './menu/menu.component';
+import { ListexampleComponent } from './lists/examples/withnotifications/listexample.component';
+import { ListcodeexampleComponent } from './lists/examples/simple/listcodeexample.component';
+import { ListExampleWithActionButtonsComponent } from './lists/examples/withactionbuttons/listexamplewithactionbuttons.component';
+import { ReactiveformsexampleComponent } from './reactiveforms-example/reactiveforms-example.component';
+import { ExpandableDivComponent } from './expandable-div/expandable-div.component';
+import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
-import { ExampleMenuComponent } from './example-menu/example-menu.component';
-
+import { IconsComponent } from './icons/icons.component';
 
 export const appRoutes: Routes = [
-    { path: 'reactiveforms', component: ReactiveformsComponent },
-    { path: 'formatmall', component: FormatmallComponent },
-    { path: 'fargkarta', component: FargkartaComponent },
+
+    { path: 'inputFields', component: InputfieldsComponent },
+    { path: 'textbuttons', component: TextbuttonsComponent },
+    { path: 'radioButtons', component: RadiobuttonsComponent },
+    { path: 'checkbox', component: CheckboxComponent },
+    { path: 'colours', component: ColoursComponent },
+    { path: 'dropdownmultiselect', component: DropdownmultiselectComponent },
+    { path: 'dropdowns', component: DropdownsComponent },
+    { path: 'datepicker', component: DatepickerComponent },
+    { path: 'monthpicker', component: MonthpickerComponent },
+    { path: 'formattemplate', component: FormattemplateComponent },
+    { path: 'headers', component: HeadersComponent },
+    { path: 'loader', component: LoaderComponent },
     { path: 'lists', component: ListsComponent },
-    { path: 'calendars', component: CalendarsComponent },
-    { path: 'inputFields', component: InputFieldsComponent },
-    { path: 'loader', component: LoaderDemoComponent },
-    { path: 'formexample', component: FormExampleComponent },
-    { path: 'example-layout', component: ExampleLayoutComponent },
-    { path: 'list-columns', component: ListColumnsComponent },
-    { path: 'list-example', component: ExamplesListwithcardsComponent },
-    { path: 'menu-example', component: ExampleMenuComponent },
-    { path: '**', component: KomponentkartaComponent }
+    { path: 'listexample-notifications', component: ListexampleComponent },
+    { path: 'lockbutton', component: LockbuttonComponent },
+    { path: 'panels', component: PanelsComponent },
+    { path: 'modaldialog', component: ModaldialogComponent },
+    { path: 'savecancel', component: SavecancelComponent },
+    { path: 'backtotop', component: BacktotopComponent },
+    { path: '', component: StartComponent },
+    { path: 'theming', component: ThemingComponent },
+    { path: 'titlevalue', component: TitleValueComponent },
+    { path: 'filtertextbox', component: FiltertexboxComponent },
+    { path: 'pagestructure', component: PageStructureComponent },
+    { path: 'card', component: CardComponent },
+    { path: 'sizes', component: SizesComponent },
+    { path: 'menu', component: MenuComponent },
+    { path: 'listexample-simple', component: ListcodeexampleComponent },
+    { path: 'listexample-actionbuttons', component: ListExampleWithActionButtonsComponent },
+    { path: 'reactiveformsexample', component: ReactiveformsexampleComponent },
+    { path: 'expandablediv', component: ExpandableDivComponent },
+    { path: 'listexample-expandable-div', component: ListexamplewithexpandabledivComponent },
+    { path: 'examples-listwithcards', component: ExamplesListwithcardsComponent },
+    { path: 'icons', component: IconsComponent },
+    { path: '**', redirectTo: '/' }
 ];

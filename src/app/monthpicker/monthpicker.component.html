@@ -1,0 +1,199 @@
+<app-component-docs [componentName]="'Monthpicker'">
+  <div class="docs__overview">
+    <p>
+      <code>
+        &lt;vgr-monthpicker&gt;</code>
+    </p>
+    <br>
+    <p>Ger möjlighet att välja år och månad. Ställs in med min/maxdatum som kan vara hela eller del av år.
+    </p>
+    <div>
+      <vgr-monthpicker></vgr-monthpicker>
+    </div>
+    <br>
+    <p> Förändras med tema:
+      <strong>Ja</strong> (Knapp, header samt markering av månad)
+    </p>
+  </div>
+  <div class="docs__examples">
+    <div class="column-layout">
+      <div class="row-layout">
+        <div style="width:200px">
+          <p>Default datumformat</p>
+
+          <vgr-monthpicker (selectedDateChanged)="lastSelectedDate=$event"></vgr-monthpicker>
+        </div>
+        <div>
+          <p>Med defaultinställningar sätts min- och maxdatum till innevarande år.
+          </p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="column-layout">
+      <div class="row-layout">
+        <div style="width:200px">
+          <p>MMMM</p>
+
+          <vgr-monthpicker [selectedDateFormat]="'MMMM'" [selectedDate]="preselectedDate" (selectedDateChanged)="lastSelectedDate=$event"></vgr-monthpicker>
+        </div>
+        <div>
+          <p>Här är
+            <code>selectedDate</code> från 2015.
+            <code>minDate</code> blir då default 2015,
+            <code>maxDate</code> blir innevarande år.
+            <br> DatumFormat: MMMM
+          </p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="column-layout">
+      <div class="row-layout">
+        <div style="width:200px">
+          <p>Med min- och maxdatum</p>
+
+          <vgr-monthpicker [minDate]="firstOfMay2015" [maxDate]="lastOfMarch2016" (selectedDateChanged)="lastSelectedDate=$event"></vgr-monthpicker>
+        </div>
+        <div>
+          <p>Här är
+            <code>minDate</code> satt till 2015-05-01 och
+            <code>maxDate</code> är 2016-03-31. Från 2015 och fram till nuvarande år så visas samtliga månader, men endast månaderna
+            mellan maj 2015 - mars 2016 är valbara.</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="column-layout">
+      <div class="row-layout">
+        <div style="width:200px">
+          <p>Disabled</p>
+          <vgr-monthpicker style="margin-top: 20px" [disabled]="isReadonlyAndDisabled" [selectedDate]="preselectedDate"></vgr-monthpicker>
+        </div>
+        <div>
+          <p>Här är kalendern satt i disable-läge och
+            <code>selectedDate</code> satt till 2015-01-13.</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="column-layout">
+      <div class="row-layout">
+        <div style="width:200px">
+          <p>Readonly</p>
+          <vgr-monthpicker [selectedDate]="preselectedDate" [readonly]="isReadonlyAndDisabled"></vgr-monthpicker>
+        </div>
+        <div>
+          <p>Här är kalendern satt i readonly-läge och
+            <code>selectedDate</code> satt till 2015-01-13.</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="column-layout">
+      <div class="row-layout">
+        <div style="width:200px">
+          <p>Disabled inget valt datum</p>
+          <vgr-monthpicker style="margin-top: 20px" [disabled]="isReadonlyAndDisabled" [selectedDate]=""></vgr-monthpicker>
+        </div>
+        <div>
+          <p>Här är kalendern satt i disable-läge och inget datum valt</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="column-layout">
+      <div class="row-layout">
+        <div style="width:200px">
+          <p>Readonly</p>
+          <vgr-monthpicker [selectedDate]="" [readonly]="isReadonlyAndDisabled"></vgr-monthpicker>
+        </div>
+        <div>
+          <p>Här är kalendern satt i readonly-läge och inget datum valt</p>
+
+        </div>
+      </div>
+    </div>
+    <div>
+      <br>
+      <p>Växla readonly och disabled</p>
+      <vgr-lock-button [unlocked]="false" (lockChanged)="isReadonlyAndDisabled = !isReadonlyAndDisabled;"></vgr-lock-button>
+    </div>
+
+    <br>
+    <div style="margin-top:20px">
+      <span>Senast valt datum: </span>
+      <span>{{lastSelectedDate | date : 'yyyy MMM'}}</span>
+    </div>
+    <br>
+    <br> Under "kodexempel" finns exempel på hur monthpicker-komponenten kan användas i Angular Reactive Forms:
+    <br>
+    <a href="/reactiveformsexample">Reactive Forms exempel</a>
+  </div>
+  <div class="docs__api">
+    <table class="property-table" style="margin-bottom: 20px">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>selectedDateFormat : string</td>
+        <td>defaultvärde: 'MMM yyyy', här kan man sätta hur datumet skall presenteras i dropdownen</td>
+        <td>[selectedDateFormat]="'MM yyyy'"</td>
+      </tr>
+      <tr>
+        <td>toolTipDateFormat : string</td>
+        <td>defaultvärde: 'MMMM yyyy', här kan man sätta hur datumet skall presenteras när man hovrar över det</td>
+        <td>[toolTipDateFormat]="'MMMM'"</td>
+      </tr>
+      <tr>
+        <td>minDate : Date</td>
+        <td>Defaultvärdet är innevarande år. Om man förvalt ett datum innan dagens år så sätts minDate till det förvalda året.
+          Om man satt ett förvalt datum som är efter dagens år så sätts dagens år till minDate</td>
+        <td>[minDate]="minDate"</td>
+      </tr>
+      <tr>
+        <td>maxDate : Date</td>
+        <td>Defaultvärdet är innevarande år. Om man förvalt ett datum innan dagens år så sätts maxDate till det innevarande året.
+          Om man satt ett förvalt datum som är efter dagens år så sätts det förvalda året till maxDate.</td>
+        <td>[maxDate]="maxDate"</td>
+      </tr>
+      <tr>
+        <td>selectedDate : Date</td>
+        <td>Property för att kunna skicka in ett förvalt datum till komponenten</td>
+        <td>[selectedDate]="forvaltDatum"</td>
+      </tr>
+      <tr>
+        <td>disabled : boolean</td>
+        <td>true/false, defaultvärde: false. Möjlighet att sätta disabled på månadskalendern</td>
+        <td>[disabled]=true</td>
+      </tr>
+      <tr>
+        <td>selectedDateChanged : EventEmitter&lt;Date&gt;
+        </td>
+        <td>Event som triggas när man väljer ett nytt datum</td>
+        <td>(selectedDateChanged)=onselectedDateChanged($event)</td>
+      </tr>
+      <tr>
+        <td>readonly: boolean
+        </td>
+        <td>Om monthpicker är satt som readonly så ska bara textfält med datum visas. Om datum är förvalt så visas det som är
+          satt i
+          <code>selectedDate</code> annars visas ingenting. Datumet är formaterat på
+          <code>selectedDateFormat</code>.</td>
+        <td>
+          [readonly]="true/false"
+        </td>
+      </tr>
+      <tr>
+        <td>showValidation: boolean</td>
+        <td>Anger om valideringsfel ska visas eller ej. Default = true.</td>
+        <td>[showValidation]="true"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    <i>Under utveckling</i>
+  </div>
+</app-component-docs>

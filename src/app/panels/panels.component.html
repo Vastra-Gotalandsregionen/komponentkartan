@@ -1,0 +1,168 @@
+<app-component-docs [componentName]="'Panel/Dashboard'">
+  <div class="docs__overview">
+    <div class="content-overview">
+      <p>
+        <code>&lt;vgr-panel&gt;</code> är en panel som kan innehålla valfritt innehåll. Den har en fast höjd och kan visas med
+        eller utan ram. Paneler ska placeras i en
+        <code>&lt;vgr-panel-container&gt;</code>.
+      </p>
+      <br>
+      <vgr-panel-container>
+        <vgr-panel>
+          <p>Panel som tar upp hela bredden på sidan och är färgad utifrån temat.</p>
+        </vgr-panel>
+      </vgr-panel-container>
+    </div>
+    <br>
+    <p> Förändras med tema:
+      <strong>Ja</strong> Översta ramen färgas med tema, men går att sätta till en specifik tema-färg. Övriga delen utav ramen färgas
+      inte med tema utan är alltid neutral färg.
+    </p>
+  </div>
+  <div class="docs__examples ">
+    <vgr-panel-container>
+      <vgr-panel width="4" themecolor="green">
+        <div class="row-layout panel-heading">
+          <div class="groncirkel"></div>
+          <div class="file-info-text">
+            <strong>2 / 3 filuppladdningar</strong>
+          </div>
+        </div>
+        <p>Antal enheter som laddat upp A eller C-fil denna månaden i
+          <a>Rehab.</a>
+        </p>
+      </vgr-panel>
+      <vgr-panel width="8" themecolor="green">
+        <div class="row-layout">
+          <div>
+            <div class="row-layout panel-heading">
+              <div class="stetoskop"></div>
+              <div class="file-info-text">
+                <p>Genomsnitt 3 442 besök/månad</p>
+              </div>
+            </div>
+            <div class="panel-statistics-text">
+              <p>Genomsnitt på antal besök per månad beräknat på alla enheter de senaste två åren,
+                <a>läs mer om besöksstatistik</a>.
+              </p>
+            </div>
+          </div>
+          <div class="statistik"></div>
+        </div>
+      </vgr-panel>
+    </vgr-panel-container>
+    <vgr-panel-container>
+      <vgr-panel width="4" noborder="true">
+        <div class="row-layout">
+          <div class="panel-file-upload-text">
+            <h2>Filuppladdningar</h2>
+            <p>antal enheter som laddat upp A, B eller C-fil denna månaden i
+            </p>
+            <a>Vårdval vårdcentral</a>.
+          </div>
+          <div class="rodcirkel">
+          </div>
+        </div>
+      </vgr-panel>
+      <vgr-panel width="8" themecolor="red">
+        <div class="listings">
+          <h1>
+            <strong>+89</strong> Nya listningar denna månad
+          </h1>
+          <span class="line"></span>
+        </div>
+        <p class="details">Antal nya listningar denna månad sammanställt på alla dina enheter i
+          <a>VGPV</a>.
+        </p>
+      </vgr-panel>
+    </vgr-panel-container>
+    <vgr-panel-container>
+      <vgr-panel width="6">
+        <div class="listings">
+          <h1>
+            <strong>+154</strong> Nya listningar denna månad
+          </h1>
+          <span class="line"></span>
+        </div>
+        <p class="details">Antal nya listningar denna månad sammanställt på alla dina enheter i
+          <a>VGPV</a>.
+        </p>
+      </vgr-panel>
+      <vgr-panel width="6">
+        <div class="listings">
+          <h1>
+            <strong>+59</strong> Nya listningar denna månad
+          </h1>
+          <span class="line"></span>
+        </div>
+        <p class="details">Antal nya listningar denna månad sammanställt på alla dina enheter i
+          <a>Köpt vård</a>.
+        </p>
+      </vgr-panel>
+    </vgr-panel-container>
+    <vgr-panel-container>
+      <vgr-panel width="4" themecolor="green">
+        <div class="row-layout panel-heading">
+          <div class="groncirkel"></div>
+          <div class="file-info-text">
+            <strong>2 / 3 filuppladdningar</strong>
+          </div>
+        </div>
+        <p>Antal enheter som laddat upp A eller C-fil denna månaden i
+          <a>Rehab.</a>
+        </p>
+      </vgr-panel>
+      <vgr-panel width="4" themecolor="green">
+        <div class="row-layout panel-heading">
+          <div class="groncirkel"></div>
+          <div class="file-info-text">
+            <strong>2 / 3 filuppladdningar</strong>
+          </div>
+        </div>
+        <p>Antal enheter som laddat upp A eller C-fil denna månaden i
+          <a>Rehab.</a>
+        </p>
+      </vgr-panel>
+      <vgr-panel width="4" themecolor="green">
+        <div class="row-layout panel-heading">
+          <div class="groncirkel"></div>
+          <div class="file-info-text">
+            <strong>2 / 3 filuppladdningar</strong>
+          </div>
+        </div>
+        <p>Antal enheter som laddat upp A eller C-fil denna månaden i
+          <a>Rehab.</a>
+        </p>
+      </vgr-panel>
+    </vgr-panel-container>
+    <section [innerHTML]="htmlMarkup" highlight-js-content=".highlight"></section>
+  </div>
+  <div class="docs__api ">
+    <table class="property-table ">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>width : number</td>
+        <td>vgr-panel-container är baserad på en 12-kolumnslayout. Default-bredden för en panel är 4 kolumner.</td>
+        <td>[width]="8"</td>
+      </tr>
+      <tr>
+        <td>themecolor : string</td>
+        <td>Bestämmer vilken färg panelen ska ha på ramen. Tillgängliga färger är red, green, blue, neutral. Default är att färgen
+          följer temat.</td>
+        <td>[themecolor]="green"</td>
+      </tr>
+      <tr>
+        <td>noborder : boolean</td>
+        <td>Gör det möjligt att skapa en panel som inte har någon ram. Default är false.</td>
+        <td>[noborder]="true"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag ">
+    <i>Ej aktuellt, då detta enbart en yta med en ram.</i>
+  </div>
+</app-component-docs>

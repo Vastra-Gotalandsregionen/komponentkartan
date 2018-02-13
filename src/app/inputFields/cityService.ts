@@ -8986,13 +8986,13 @@ export class CityService {
     }
 
     getAsyncCities(): Observable<ICityInformation[]> {
-        let observable = Observable.create((observer: any) => {
+        const observable = Observable.create((observer: any) => {
             setTimeout(() => {
                 observer.next(this.cities);
                 observer.complete();
             }, 2000);
 
-        })
+        });
         return observable;
     }
 }
