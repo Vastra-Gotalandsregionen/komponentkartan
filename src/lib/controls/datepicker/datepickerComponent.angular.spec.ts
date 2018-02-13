@@ -101,7 +101,7 @@ describe('[DatepickerComponent(Angular)]', () => {
                         component.control = new FormControl(null, { validators: [Validators.required], updateOn: 'blur' });
                         component.ngOnInit();
                         component.onEnter();
-                        component.onSelectedDate(event, 0, 0, 0);
+                        component.onSelectedDate(event, 1, 1, 1);
                         fixture.detectChanges();
                     });
                     it('validation-error--editing is no longer active', () => {
