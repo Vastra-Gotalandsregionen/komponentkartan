@@ -1,5 +1,4 @@
-import { Input, Component, HostBinding, QueryList, DoCheck, ViewChild, ElementRef } from '@angular/core';
-import { MenuItemComponent } from './menu-item.component';
+import { Input, Component, DoCheck, ElementRef, HostBinding, ChangeDetectorRef } from '@angular/core';
 
 @Component({
     selector: 'vgr-submenu',
@@ -14,21 +13,13 @@ export class SubmenuComponent implements DoCheck {
     @HostBinding('class.submenu--expanded') get expandedClass() {
         return this.expanded;
     }
-    @HostBinding('class.submenu--child-selected') private _childSelected = false;
-
-    @ViewChild('submenu') submenuElement: ElementRef;
+    @HostBinding('class.submenu--child-selected') private _childSelected: boolean;
 
 
-    constructor() { }
+
+    constructor(public elementRef: ElementRef, private changeDetecor: ChangeDetectorRef) { }
 
     ngDoCheck() {
-        if (this.submenuElement.nativeElement.children) {
-            const nrOfOtems = this.submenuElement.nativeElement.children.length;
-            for (let i = 0; i < nrOfOtems; i++) {
-                if (this.submenuElement.nativeElement.children[i].childNodes[1].classList && this.submenuElement.nativeElement.children[i].childNodes[1].classList.value.includes('menu__item--selected')) {
-                    this._childSelected = true;
-                }
-            }
-        }
+        this._childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
     }
 }
