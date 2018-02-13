@@ -1,4 +1,4 @@
-vgr-menu-container,
+vgr-sidebar-menu,
 .example-menu-container {
   height: 100%;
   display: block;
@@ -202,7 +202,7 @@ vgr-menu-container,
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  vgr-menu-container,
+  vgr-sidebar-menu,
   .example-menu-container {
     .menu {
       .menu__header {

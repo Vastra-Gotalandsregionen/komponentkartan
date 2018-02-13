@@ -1,7 +1,7 @@
 <div id="theme-root" class="theme--neutral">
   <div class="back-to-top"></div>
   <vgr-modal></vgr-modal>
-  <vgr-menu-container>
+  <vgr-sidebar-menu>
     <vgr-menu title="Innehåll">
       <vgr-menu-item link="/formatmall" text="Formatmall"></vgr-menu-item>
       <vgr-menu-item link="/fargkarta" text="Färgkarta"></vgr-menu-item>
@@ -15,11 +15,9 @@
       <vgr-menu-item link="/list-columns" text="List kolumner"></vgr-menu-item>
       <vgr-menu-item link="/reactiveforms" text="Reactive Forms"></vgr-menu-item>
       <vgr-menu-item link="/list-example" text="Lista prestanda"></vgr-menu-item>
-      <vgr-menu-item link="/list-example" text="Lista prestanda"></vgr-menu-item>
-
       <vgr-menu-item link="/menu-example" text="Meny exempel"></vgr-menu-item>
     </vgr-menu>
-  </vgr-menu-container>
+  </vgr-sidebar-menu>
   <vgr-header [userName]="'Nico Åberg'" [headerMenu]="headerMenu"></vgr-header>
   <router-outlet (activate)="onActivate($event)"></router-outlet>
 </div>
