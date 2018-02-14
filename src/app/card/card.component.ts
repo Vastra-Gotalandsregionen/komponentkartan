@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
-import { RowNotification, NotificationType } from '@komponentkartan/index';
+import { RowNotification, NotificationType } from '@komponentkartan';
 
 @Component({
   selector: 'app-card',

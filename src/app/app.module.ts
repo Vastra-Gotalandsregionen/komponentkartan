@@ -8,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './routes';
 
 // Komponentkartan
-import { KomponentkartanModule } from '@komponentkartan/komponentkartan.module';
+import { KomponentkartanModule } from '@komponentkartan-module';
 
 // Vendors
 import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';

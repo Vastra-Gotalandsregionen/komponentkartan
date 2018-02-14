@@ -1,5 +1,5 @@
 import { ExampleUnit } from './unit.model';
-import { ExpandableRow } from '@komponentkartan/index';
+import { ExpandableRow } from '@komponentkartan';
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
     name: 'unitfilter',

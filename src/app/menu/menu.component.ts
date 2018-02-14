@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IMenu, IMenuItem, IMenuGroup } from '@komponentkartan/index';
+import { IMenu, IMenuItem, IMenuGroup } from '@komponentkartan';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({

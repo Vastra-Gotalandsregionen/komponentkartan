@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DropdownItem } from '@komponentkartan/index';
+import { DropdownItem } from '@komponentkartan';
 
 @Component({
   selector: 'app-dropdownmultiselect',

@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild, HostBinding } from '@angular/core';
-import { ModalService, IHeaderMenu, IHeaderMenuItem } from '@komponentkartan/index';
+import { ModalService, IHeaderMenu, IHeaderMenuItem } from '@komponentkartan';
 declare var require: any;
 
 @Component({

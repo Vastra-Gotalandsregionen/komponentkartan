@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService, ModalButtonConfiguration } from '@komponentkartan/index';
+import { ModalService, ModalButtonConfiguration } from '@komponentkartan';
 
 @Component({
   selector: 'app-modaldialog',

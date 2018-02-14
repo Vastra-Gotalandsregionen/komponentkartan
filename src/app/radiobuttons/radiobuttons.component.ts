@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NotificationType, SelectableItem } from '@komponentkartan/index';
+import { NotificationType, SelectableItem } from '@komponentkartan';
 @Component({
   selector: 'app-radiobuttons',
   templateUrl: './radiobuttons.component.html',

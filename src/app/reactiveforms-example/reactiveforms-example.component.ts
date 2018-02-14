@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { SelectableItem, DropdownItem } from '@komponentkartan/index';
+import { SelectableItem, DropdownItem } from '@komponentkartan';
 import { Examples } from './code-example';
 
 @Component({

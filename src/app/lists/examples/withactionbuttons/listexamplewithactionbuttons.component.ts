@@ -4,7 +4,7 @@ import { Examples } from '../examples';
 import {
     ModalService, ModalButtonConfiguration, ExpandableRow,
     SortDirection, SortChangedArgs
-} from '@komponentkartan/index';
+} from '@komponentkartan';
 
 @Component({
     selector: 'app-listexamplewithactionbuttons',

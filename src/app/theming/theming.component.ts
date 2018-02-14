@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectableItem } from '@komponentkartan/index';
+import { SelectableItem } from '@komponentkartan';
 
 @Component({
   selector: 'app-theming',

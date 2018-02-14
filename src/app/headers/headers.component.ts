@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { IHeaderMenu, IHeaderMenuItem, HeaderComponent } from '@komponentkartan/index';
+import { IHeaderMenu, IHeaderMenuItem, HeaderComponent } from '@komponentkartan';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({

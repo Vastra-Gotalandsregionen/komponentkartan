@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { ErrorHandler, InputComponent } from '@komponentkartan/index';
+import { ErrorHandler, InputComponent } from '@komponentkartan';
 import { FormGroup, FormBuilder, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { CityService } from './cityservice';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
