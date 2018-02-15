@@ -215,7 +215,7 @@
   margin-right: 6px;
 }
 
-.list-item__notification__message{
+.list-item__notification__message {
   font-size: 16px;
 }
 
@@ -263,9 +263,9 @@
       margin-left: 2px;
       transform: rotate(0deg);
       position: absolute;
-      top: 21px;
+      top: 18px;
       @media screen and (min-width: $desktop-width--medium) {
-        top: 23px;
+        top: 20px;
       }
     }
   }
@@ -282,9 +282,9 @@
       margin-left: 2px;
       transform: rotate(180deg);
       position: absolute;
-      top: 21px;
+      top: 18px;
       @media screen and (min-width: $desktop-width--medium) {
-        top: 24px;
+        top: 20px;
       }
     }
   }

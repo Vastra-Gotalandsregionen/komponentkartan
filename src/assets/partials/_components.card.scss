@@ -58,7 +58,7 @@
   justify-content: flex-start;
   border-bottom: 1px solid $border-color;
   cursor: pointer;
-  .card-section:first-child() & {
+  .card-section:first-child & {
     border-top: 1px solid $border-color;
   }
 }
