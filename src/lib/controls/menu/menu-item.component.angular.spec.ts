@@ -6,7 +6,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 
-describe('[ExpandableDivComponent]', () => {
+describe('[MenuItemComponent]', () => {
 
     class DummyComponent { }
 
@@ -87,11 +87,10 @@ describe('[ExpandableDivComponent]', () => {
             fixture.detectChanges();
             menuItemLink = rootElement.queryAll(By.css('p'))[0];
             notification = rootElement.query(By.css('.menu__item--notification'));
-            //disabledMenuItem = rootElement.query(By.css('.menu__item--disabled'));
-            
+            // disabledMenuItem = rootElement.query(By.css('.menu__item--disabled'));
         });
         it('disabled class is set', () => {
-            //expect(disabledMenuItem).toBe(true);
+            // expect(rootElement.classes['menu__item--disabled']).toBe(true);
         });
         it('disabled tooltip is set', () => {
             expect(menuItemLink.nativeElement.title).toBe('Tooltip for disabled menu item');
