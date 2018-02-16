@@ -83,14 +83,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         this._notifications.push(value);
         this._notification = value;
 
-        // if (this._notifications.length > 2) {
-        //     return;
-        // }
-
-        // if (value && this._notifications[this._notifications.length] === this._notification) {
-        //     return;
-        // }
-
         if (value) {
             if (value.type === NotificationType.ShowOnCollapse) {
                 this.collapse(value.type);
