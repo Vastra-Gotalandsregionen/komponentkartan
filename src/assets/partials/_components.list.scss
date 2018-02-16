@@ -215,27 +215,31 @@
   margin-right: 6px;
 }
 
-.list-item__notification__message{
+.list-item__notification__message {
   font-size: 16px;
 }
 
 .list-item__content {
+  display: block;
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   border-spacing: 10px;
-  display: none;
   width: calc(#{$content-width--small});
   .list-item--notification-visible & {
     border-top: none;
     padding-top: 0;
-  }
-  .list-item--expanded & {
-    // jQuery slideUp verkar sätta display inline. Blir ej bra.
-    // Lyckades inte overridea så detta löser problemet (om än inte på ett snyggt sätt)
-    display: block !important;
-  }
+  } // .list-item--collapsed & {
+  //   overflow: hidden;
+  //   max-height: 0;
+  //   padding-top: 0 !important;
+  //   padding-bottom: 0 !important;
+  // }
+  // .list-item--expanded & {
+  //   overflow: hidden;
+  //   max-height: 999px;
+  // }
 }
 
 .list__column-header {

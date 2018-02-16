@@ -1,26 +1,52 @@
 import {
-    Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, ContentChildren, ContentChild, QueryList,
+    Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter,
+    ElementRef, ChangeDetectorRef, ContentChildren, ContentChild, QueryList,
     AfterContentInit, forwardRef
 } from '@angular/core';
+import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
-import { ListItemJqeuryHelper } from './listItemJqueryHelper';
 import { ListColumnComponent } from '../list/list-column.component';
 import { ListColumnHeaderComponent } from '../list/list-column-header.component';
 import { ListHeaderComponent } from '../list/list-header.component';
 import { ListItemHeaderComponent } from '../list-item/list-item-header.component';
 import { ListItemContentComponent } from '../list-item/list-item-content.component';
 
+
 @Component({
     templateUrl: './list-item.component.html',
     selector: 'vgr-list-item',
-    moduleId: module.id
+    moduleId: module.id,
+    animations: [
+        trigger('slideListContent', [
+            state('collapsed', style({
+                overflow: 'hidden',
+                height: '0'
+            })),
+            state('expanded', style({
+                overflow: 'hidden',
+                height: '*'
+            })),
+            transition('expanded => collapsed',
+                animate('400ms ease-out')
+            ),
+            transition('collapsed => expanded',
+                animate('400ms ease-in')
+            ),
+        ])
+    ]
 })
+
 export class ListItemComponent implements OnInit, AfterContentInit {
     readonly showNotificationDurationMs = 1500;
+    get stateName() {
+        return this.expanded ? 'expanded' : 'collapsed';
+    }
+
     @HostBinding('class.list-item') isContainer = true;
     @HostBinding('class.list-item--collapsed') collapsed = true;
-    @HostBinding('class.list-item--expanded') private _expanded: boolean;
+    @HostBinding('class.list-item--expanded') _expanded: boolean;
     @HostBinding('class.list-item--deleted') isDeleted: boolean;
     @HostBinding('class.list-item--notification-visible') notificationVisible: boolean;
     @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
@@ -39,6 +65,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     get expanded(): boolean {
         return this._expanded;
     }
+
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() notificationChanged: EventEmitter<RowNotification> = new EventEmitter<RowNotification>();
     @Output() deleted: EventEmitter<any> = new EventEmitter();
@@ -55,10 +82,10 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         if (value) {
             if (value.type === NotificationType.ShowOnCollapse) {
                 this.collapse(value.type);
-                this.changeDetecor.detectChanges();
+                this.changeDetector.detectChanges();
             } else if (value.type === NotificationType.ShowOnRemove) {
                 this.collapse(value.type);
-                this.changeDetecor.detectChanges();
+                this.changeDetector.detectChanges();
             } else if (value.type === NotificationType.Permanent) {
                 this.showNotification();
             }
@@ -71,10 +98,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
-
-
-    constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ListItemJqeuryHelper) {
-
+    constructor(private elementRef: ElementRef, private changeDetector: ChangeDetectorRef) {
     }
 
     ngAfterContentInit() {
@@ -101,22 +125,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         this.notificationVisible = true;
     }
 
-
-    @HostListener('click', ['$event'])
-    toggleExpand(event: Event) {
-        if (this.notInteractable) {
-            return;
-        }
-
-        if (!this.jqueryHelper.isClickEventHeader(event)) {
-            return;
-        }
-
-        this.setExpandOrCollapsed();
-
-        event.cancelBubble = true;
-    }
-
     public setExpandOrCollapsed() {
         if (!this._expanded) {
             this.expand();
@@ -124,11 +132,15 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this.collapse();
         }
     }
+
     private expand() {
         if (this.isDeleted || this.notInteractable) {
             return;
         }
-        this.jqueryHelper.toggleContent(this.elementRef);
+
+        console.log('expand');
+
+        // this.jqueryHelper.toggleContent(this.elementRef);
 
         const expandedChanged = !this._expanded;
         this._expanded = true;
@@ -141,65 +153,85 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private collapse(collapsingNotification?: NotificationType) {
         this.notInteractable = true;
-        const header = this.jqueryHelper.getHeader(this.elementRef);
+        // const header = this.jqueryHelper.getHeader(this.elementRef);
 
         if (collapsingNotification) {
-            this.processNotification(header, collapsingNotification, () => {
+            this.processNotification(collapsingNotification);
+            // this.processNotification(header, collapsingNotification, () => {
 
-            });
+            // });
         } else {
-            this.jqueryHelper.collapseContent(header, () => {
-                const expandedChanged = this._expanded;
-                this._expanded = false;
+            const expandedChanged = this._expanded;
+            this._expanded = false;
+            setTimeout(() => {
                 this.collapsed = true;
-                this.notInteractable = false;
-                if (expandedChanged) {
-                    this.expandedChanged.emit(this._expanded);
-                }
-            });
+            }, 400);
+
+            this.notInteractable = false;
+            if (expandedChanged) {
+                this.expandedChanged.emit(this._expanded);
+            }
         }
     }
 
-    private processNotification(header: JQuery, notificationType: NotificationType, callback: Function): void {
+    private processNotification(notificationType: NotificationType): void {
         if (notificationType === NotificationType.ShowOnCollapse) {
-            this.processShowOnCollapseNotification(header, callback);
+            this.processShowOnCollapseNotification();
         } else if (notificationType === NotificationType.ShowOnRemove) {
-            this.processShowOnRemoveNotification(header, callback);
+            this.processShowOnRemoveNotification();
         }
     }
 
-    private processShowOnCollapseNotification(header: JQuery, callback: Function) {
+    private processShowOnCollapseNotification() {
         this.notificationVisible = true;
         setTimeout(() => {
-            this.jqueryHelper.collapseContent(header, () => {
-                this._expanded = false;
-                this.collapsed = true;
-                this.expandedChanged.emit(this._expanded);
-                setTimeout(() => {
-                    this.notification.done = true;
-                    this.notificationVisible = false;
-                    this.notInteractable = false;
-                }, 2000);
-            });
+            this._expanded = false;
+            this.collapsed = true;
+            this.expandedChanged.emit(this.expanded);
+
+            setTimeout(() => {
+                this.notification.done = true;
+                this.notificationVisible = false;
+                this.notInteractable = false;
+            }, 2000);
+            // this.jqueryHelper.collapseContent(header, () => {
+            //     // this._expanded = false;
+            //     // this.collapsed = true;
+            //     this.expandedChanged.emit(this.showListContent);
+            //     setTimeout(() => {
+            //         this.notification.done = true;
+            //         this.notificationVisible = false;
+            //         this.notInteractable = false;
+            //     }, 2000);
+            // });
         }, 1400);
 
     }
 
-    private processShowOnRemoveNotification(header: JQuery, callback: Function) {
+    private processShowOnRemoveNotification() {
         this.notificationVisible = true;
         setTimeout(() => {
-            this.jqueryHelper.collapseContent(header, () => {
-                this._expanded = false;
-                this.collapsed = true;
-                this.expandedChanged.emit(this._expanded);
-                setTimeout(() => {
-                    this.notification.done = true;
-                    this.notificationVisible = false;
-                    this.notInteractable = false;
-                    this.isDeleted = true;
-                    this.deleted.emit();
-                }, 2000);
-            });
+            this.expandedChanged.emit(this.expanded);
+            setTimeout(() => {
+                this.notification.done = true;
+                this.notificationVisible = false;
+                this.notInteractable = false;
+                this.isDeleted = true;
+                this.deleted.emit();
+            }, 2000);
+
+            // this.jqueryHelper.collapseContent(header, () => {
+            //     // this._expanded = false;
+            //     // this.collapsed = true;
+            //     this.expandedChanged.emit(this.showListContent);
+            //     setTimeout(() => {
+            //         this.notification.done = true;
+            //         this.notificationVisible = false;
+            //         this.notInteractable = false;
+            //         this.isDeleted = true;
+            //         this.deleted.emit();
+            //     }, 2000);
+            // });
         }, 1400);
     }
 }
