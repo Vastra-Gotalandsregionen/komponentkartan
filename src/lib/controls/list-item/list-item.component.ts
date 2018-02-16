@@ -1,7 +1,7 @@
 import {
     Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter,
     ElementRef, ChangeDetectorRef, ContentChildren, ContentChild, QueryList,
-    AfterContentInit, forwardRef
+    AfterContentInit, forwardRef, ChangeDetectionStrategy
 } from '@angular/core';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
 
@@ -77,8 +77,16 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     @Output() setFocusOnNextRowContent: EventEmitter<any> = new EventEmitter();
 
     private _notification: RowNotification;
+    private _notifications: RowNotification[] = [];
+
     @Input() set notification(value: RowNotification) {
+        this._notifications.push(value);
         this._notification = value;
+
+        // if (this._notifications[0] === this._notification) {
+        //     return;
+        // }
+
         if (value) {
             if (value.type === NotificationType.ShowOnCollapse) {
                 this.collapse(value.type);
@@ -90,6 +98,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
                 this.showNotification();
             }
         }
+
         this.notificationChanged.emit(value);
     }
     get notification(): RowNotification {
@@ -148,7 +157,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     private collapse(collapsingNotification?: NotificationType) {
-        console.log(collapsingNotification);
         this.notInteractable = true;
 
         if (collapsingNotification) {
@@ -183,11 +191,10 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
             setTimeout(() => {
                 this.notification.done = true;
-                this.notificationVisible = false;
                 this.notInteractable = false;
+                this.setOrignalNotification();
             }, 2000);
         }, 1400);
-
     }
 
     private processShowOnRemoveNotification() {
@@ -198,11 +205,22 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
                 this.notification.done = true;
-                this.notificationVisible = false;
-                this.notInteractable = false;
                 this.isDeleted = true;
+                this.notInteractable = false;
                 this.deleted.emit();
+                this.setOrignalNotification();
+                this.notificationVisible = false;
             }, 2000);
         }, 1400);
+    }
+
+    private setOrignalNotification() {
+        if (this._notifications[0]) {
+            this.notificationVisible = true;
+            this.notification = this._notifications[0];
+        } else {
+            this.notificationVisible = false;
+            this.notification = {} as RowNotification;
+        }
     }
 }
