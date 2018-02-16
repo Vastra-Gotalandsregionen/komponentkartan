@@ -83,7 +83,11 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         this._notifications.push(value);
         this._notification = value;
 
-        // if (this._notifications[0] === this._notification) {
+        // if (this._notifications.length > 2) {
+        //     return;
+        // }
+
+        // if (value && this._notifications[this._notifications.length] === this._notification) {
         //     return;
         // }
 
@@ -184,6 +188,11 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private processShowOnCollapseNotification() {
         this.notificationVisible = true;
+        if (this._notifications[this._notifications.length - 1].done) {
+            this.notificationVisible = false;
+            this.notInteractable = false;
+            return;
+        }
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
@@ -199,6 +208,11 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
+        if (this._notifications[this._notifications.length - 1].done) {
+            this.notificationVisible = false;
+            this.notInteractable = false;
+            return;
+        }
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
