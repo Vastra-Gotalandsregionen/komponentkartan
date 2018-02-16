@@ -43,10 +43,10 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
     }
-
+    private _expanded: boolean;
     @HostBinding('class.list-item') isContainer = true;
     @HostBinding('class.list-item--collapsed') collapsed = true;
-    @HostBinding('class.list-item--expanded') _expanded: boolean;
+    @HostBinding('class.list-item--expanded') get collapsedClass() { return !this.collapsed; }
     @HostBinding('class.list-item--deleted') isDeleted: boolean;
     @HostBinding('class.list-item--notification-visible') notificationVisible: boolean;
     @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
@@ -138,10 +138,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             return;
         }
 
-        console.log('expand');
-
-        // this.jqueryHelper.toggleContent(this.elementRef);
-
         const expandedChanged = !this._expanded;
         this._expanded = true;
         this.collapsed = false;
@@ -152,25 +148,21 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     private collapse(collapsingNotification?: NotificationType) {
+        console.log(collapsingNotification);
         this.notInteractable = true;
-        // const header = this.jqueryHelper.getHeader(this.elementRef);
 
         if (collapsingNotification) {
             this.processNotification(collapsingNotification);
-            // this.processNotification(header, collapsingNotification, () => {
-
-            // });
         } else {
             const expandedChanged = this._expanded;
             this._expanded = false;
             setTimeout(() => {
                 this.collapsed = true;
+                this.notInteractable = false;
+                if (expandedChanged) {
+                    this.expandedChanged.emit(this._expanded);
+                }
             }, 400);
-
-            this.notInteractable = false;
-            if (expandedChanged) {
-                this.expandedChanged.emit(this._expanded);
-            }
         }
     }
 
@@ -194,16 +186,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
                 this.notificationVisible = false;
                 this.notInteractable = false;
             }, 2000);
-            // this.jqueryHelper.collapseContent(header, () => {
-            //     // this._expanded = false;
-            //     // this.collapsed = true;
-            //     this.expandedChanged.emit(this.showListContent);
-            //     setTimeout(() => {
-            //         this.notification.done = true;
-            //         this.notificationVisible = false;
-            //         this.notInteractable = false;
-            //     }, 2000);
-            // });
         }, 1400);
 
     }
@@ -211,6 +193,8 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
         setTimeout(() => {
+            this._expanded = false;
+            this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
                 this.notification.done = true;
@@ -219,19 +203,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
                 this.isDeleted = true;
                 this.deleted.emit();
             }, 2000);
-
-            // this.jqueryHelper.collapseContent(header, () => {
-            //     // this._expanded = false;
-            //     // this.collapsed = true;
-            //     this.expandedChanged.emit(this.showListContent);
-            //     setTimeout(() => {
-            //         this.notification.done = true;
-            //         this.notificationVisible = false;
-            //         this.notInteractable = false;
-            //         this.isDeleted = true;
-            //         this.deleted.emit();
-            //     }, 2000);
-            // });
         }, 1400);
     }
 }
