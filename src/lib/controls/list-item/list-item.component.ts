@@ -77,11 +77,16 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     @Output() setFocusOnNextRowContent: EventEmitter<any> = new EventEmitter();
 
     private _notification: RowNotification;
-    private _notifications: RowNotification[] = [];
-    flag: boolean;
+
+    // private _notifications: RowNotification[] = [];
+    // flag: boolean;
+
+    @Input() notificationPermanent: RowNotification;
 
     @Input() set notification(value: RowNotification) {
-        this._notifications.push(value);
+        console.log('set notification Value', value);
+        // console.log('notifications', this._notifications);
+        // this._notifications.push(value);
         this._notification = value;
 
         if (value) {
@@ -94,6 +99,8 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             } else if (value.type === NotificationType.Permanent) {
                 this.showNotification();
             }
+        } else {
+            this.notificationVisible = false;
         }
 
         this.notificationChanged.emit(value);
@@ -180,9 +187,14 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     private processShowOnCollapseNotification() {
+
+        if (!this.notification) {
+            return;
+        }
+
         this.notificationVisible = true;
 
-        if (this._notifications[this._notifications.length - 1].done) {
+        if (this.notification.done) {
             this.notificationVisible = false;
         }
 
@@ -191,17 +203,27 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
 
+            if (this.notificationPermanent) {
+                this.notification = this.notificationPermanent;
+                this.changeDetector.detectChanges();
+                this.notificationVisible = true;
+                this.notInteractable = false;
+                return;
+            }
+
             setTimeout(() => {
-                console.log('processShowOnCollapseNotification');
-                if (this._notifications[this._notifications.length - 1].done) {
+                console.log('notificationPermanent', this.notificationPermanent);
+                if (this.notification !== this.notificationPermanent) {
                     this.notificationVisible = false;
                     this.notInteractable = false;
+                    this.notification.done = true;
                     return;
                 }
-                this.notification.done = true;
-                this.notInteractable = false;
-                this.setOrignalNotification();
+
+                // this.setOrignalNotification();
+                // this.notInteractable = false;
             }, 2000);
+
         }, 1400);
     }
 
@@ -222,12 +244,12 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     private setOrignalNotification() {
-        if (this._notifications[0]) {
+        console.log('setOrignalNotification', this.setOrignalNotification);
+        if (this.notificationPermanent) {
+            this.notification = this.notificationPermanent;
             this.notificationVisible = true;
-            this.notification = this._notifications[0];
         } else {
             this.notificationVisible = false;
-            this.notification = {} as RowNotification;
         }
     }
 }

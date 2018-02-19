@@ -5,6 +5,7 @@ export class ExpandableRow<TPreview, TFull> {
     previewObject: TPreview;
     fullObject: TFull;
     notification: RowNotification;
+    notificationPermanent: RowNotification;
 
     constructor(previewObject: TPreview) {
         this.previewObject = previewObject;

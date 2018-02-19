@@ -365,9 +365,14 @@ export class ExamplesListwithcardsComponent implements OnInit {
           icon: 'vgr-icon-exclamation--red',
           type: NotificationType.Permanent
         } as RowNotification;
+
+        element.notificationPermanent = {
+          message: 'Information saknas, medverkan i familjecentral ej ifylld',
+          icon: 'vgr-icon-exclamation--red',
+          type: NotificationType.Permanent
+        } as RowNotification;
       }
     });
-
   }
 
   onSelectedChangedVersion(selectedItem: string, row: ExampleUnit) {
@@ -556,7 +561,9 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.updateRowValues(row);
 
     this.cardLocked = true;
+
     row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
+    row.notificationPermanent = null;
   }
 
   onCardUnlocked() {
