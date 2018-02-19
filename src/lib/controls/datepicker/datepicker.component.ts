@@ -26,6 +26,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     @Input() selectedDate?: Date;
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() @HostBinding('class.readonly') readonly: boolean;
+
     @Input() selectedDateFormat = 'yyyy-MM-dd';
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
     @Output() selectedDateChanged = new EventEmitter<Date>();
@@ -33,6 +34,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
 
     @HostBinding('class.validated-input') hasClass = true;
+    @HostBinding('class.datepicker--open') expanded: boolean = false;
     @HostBinding('class.validation-error--active') get errorClass() {
         return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
     }
@@ -43,7 +45,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     hasFocus: boolean;
 
     control: AbstractControl;
-    expanded: boolean = false;
+
 
     today: Date;
     yearMonths: ICalendarYearMonth[] = [];
@@ -327,10 +329,13 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     }
 
     toggleCalendar(event: Event) {
+
         if (this.disabled || this.readonly) {
             return;
         }
         this.expanded = !this.expanded;
+
+        console.log(this.expanded);
     }
 
     onPreviousMonth(event: Event) {
