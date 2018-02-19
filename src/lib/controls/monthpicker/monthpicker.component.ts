@@ -88,6 +88,9 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     writeValue(value: any): void {
         this.selectedDate = value;
+        if (!value) {
+            this.years.forEach(y => y.months.forEach(m => m.selected = false));
+        }
     }
 
     registerOnChange(func: any): void {

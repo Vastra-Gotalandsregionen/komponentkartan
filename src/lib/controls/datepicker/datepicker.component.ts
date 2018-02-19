@@ -81,6 +81,14 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
     writeValue(value: any): void {
         this.selectedDate = value;
+
+        if (!value && this.selectedCalendarDay) {
+            // control was resetted
+            this.selectedCalendarDay.selected = false;
+            this.currentYearMonthIndex = 0;
+            this.setCurrentYearMonthOutput();
+            this.setPreviousAndNextMonthNavigation();
+        }
     }
 
     registerOnChange(func: any): void {

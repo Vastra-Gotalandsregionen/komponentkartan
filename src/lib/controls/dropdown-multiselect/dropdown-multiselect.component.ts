@@ -94,6 +94,10 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             this.selectedValues = values;
         } else {
             this.selectedValues = null;
+            this.items.forEach(i => {
+                i.selected = false;
+                i.marked = false;
+            });
         }
     }
 

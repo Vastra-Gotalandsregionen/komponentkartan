@@ -73,6 +73,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
         if (!value) {
             this.selectedItem = null;
+            this.items.forEach(x => { x.selected = false; x.marked = false; });
         }
     }
 
