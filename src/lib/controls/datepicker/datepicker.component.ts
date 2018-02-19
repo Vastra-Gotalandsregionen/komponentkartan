@@ -43,7 +43,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     hasFocus: boolean;
 
     control: AbstractControl;
-    expanded: boolean;
+    expanded: boolean = false;
 
     today: Date;
     yearMonths: ICalendarYearMonth[] = [];
@@ -103,11 +103,11 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     onLeave() {
         this.hasFocus = false;
         if (this.control) {
-            this.control.markAsTouched();
-            this.control.markAsDirty();
             if (this.control.updateOn === 'blur') {
                 this.control.setValue(this.selectedDate);
             }
+            this.control.markAsTouched();
+            this.control.markAsDirty();
         }
 
     }
@@ -321,12 +321,12 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
 
 
-    onCalendarClick(event: Event) {
+    onCalendarMousedown(event: Event) {
         // används för att stoppa events från att bubbla ut
         event.cancelBubble = true;
     }
 
-    onDatePickerClick(event: Event) {
+    toggleCalendar(event: Event) {
         if (this.disabled || this.readonly) {
             return;
         }
