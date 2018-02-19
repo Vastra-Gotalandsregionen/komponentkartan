@@ -235,13 +235,4 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             }, 2000);
         }, 1400);
     }
-
-    private setOrignalNotification() {
-        if (this.notificationPermanent) {
-            this.notification = this.notificationPermanent;
-            this.notificationVisible = true;
-        } else {
-            this.notificationVisible = false;
-        }
-    }
 }
