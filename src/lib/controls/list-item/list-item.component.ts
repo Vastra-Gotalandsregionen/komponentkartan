@@ -84,9 +84,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     @Input() notificationPermanent: RowNotification;
 
     @Input() set notification(value: RowNotification) {
-        console.log('set notification Value', value);
-        // console.log('notifications', this._notifications);
-        // this._notifications.push(value);
         this._notification = value;
 
         if (value) {
@@ -212,16 +209,12 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             }
 
             setTimeout(() => {
-                console.log('notificationPermanent', this.notificationPermanent);
                 if (this.notification !== this.notificationPermanent) {
                     this.notificationVisible = false;
                     this.notInteractable = false;
                     this.notification.done = true;
                     return;
                 }
-
-                // this.setOrignalNotification();
-                // this.notInteractable = false;
             }, 2000);
 
         }, 1400);
@@ -244,7 +237,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     private setOrignalNotification() {
-        console.log('setOrignalNotification', this.setOrignalNotification);
         if (this.notificationPermanent) {
             this.notification = this.notificationPermanent;
             this.notificationVisible = true;
