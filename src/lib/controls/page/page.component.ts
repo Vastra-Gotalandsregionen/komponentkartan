@@ -15,7 +15,7 @@ export class PageComponent implements AfterContentInit, AfterViewInit {
 
     @HostBinding('class.page') hasClass = true;
     @HostBinding('class.list--actions-visible') get actionPanelVisible() {
-        return this.actionPanelComponent.expanded;
+        return this.actionPanelComponent && this.actionPanelComponent.expanded;
     }
 
     ngAfterContentInit() {
