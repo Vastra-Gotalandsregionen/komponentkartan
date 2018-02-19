@@ -10,7 +10,7 @@
         <div class="datepicker__calendar__header">
           <div class="datepicker__calendar__header__previous-year" (mousedown)="onPreviousMonth($event)" [ngClass]="{'disabled': !previousMonth}"></div>
 
-          <div *ngIf="!displayedYear" class="datepicker__calendar__header__year">{{currentYearMonthOutput | date: 'MMMM y' }}</div>
+          <div class="datepicker__calendar__header__year">{{currentYearMonthOutput | date: 'MMMM y' }}</div>
 
           <div class="datepicker__calendar__header__next-year" (mousedown)="onNextMonth($event)" [ngClass]="{'disabled' : !nextMonth}"></div>
         </div>
