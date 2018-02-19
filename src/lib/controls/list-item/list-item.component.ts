@@ -78,6 +78,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private _notification: RowNotification;
     private _notifications: RowNotification[] = [];
+    flag: boolean;
 
     @Input() set notification(value: RowNotification) {
         this._notifications.push(value);
@@ -180,17 +181,23 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private processShowOnCollapseNotification() {
         this.notificationVisible = true;
+
         if (this._notifications[this._notifications.length - 1].done) {
             this.notificationVisible = false;
-            this.notInteractable = false;
-            return;
         }
+
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
 
             setTimeout(() => {
+                console.log('processShowOnCollapseNotification');
+                if (this._notifications[this._notifications.length - 1].done) {
+                    this.notificationVisible = false;
+                    this.notInteractable = false;
+                    return;
+                }
                 this.notification.done = true;
                 this.notInteractable = false;
                 this.setOrignalNotification();
@@ -200,11 +207,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
-        if (this._notifications[this._notifications.length - 1].done) {
-            this.notificationVisible = false;
-            this.notInteractable = false;
-            return;
-        }
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
@@ -213,9 +215,8 @@ export class ListItemComponent implements OnInit, AfterContentInit {
                 this.notification.done = true;
                 this.isDeleted = true;
                 this.notInteractable = false;
-                this.deleted.emit();
-                this.setOrignalNotification();
                 this.notificationVisible = false;
+                this.deleted.emit();
             }, 2000);
         }, 1400);
     }
