@@ -73,7 +73,7 @@ describe('[MenuItemComponent]', () => {
         it('the notification color class is set', () => {
             expect(notification.classes['notification--green']).toBe(true);
         });
-        
+
         it('the menu item title is set', () => {
             expect(menuItemLink.nativeElement.textContent).toBe('Menu item 1');
         });
@@ -87,10 +87,10 @@ describe('[MenuItemComponent]', () => {
             fixture.detectChanges();
             menuItemLink = rootElement.queryAll(By.css('p'))[0];
             notification = rootElement.query(By.css('.menu__item--notification'));
-            // disabledMenuItem = rootElement.query(By.css('.menu__item--disabled'));
+            disabledMenuItem = rootElement.query(By.css('.menu__item--disabled'));
         });
         it('disabled class is set', () => {
-            // expect(rootElement.classes['menu__item--disabled']).toBe(true);
+            expect(disabledMenuItem).toBeDefined;
         });
         it('disabled tooltip is set', () => {
             expect(menuItemLink.nativeElement.title).toBe('Tooltip for disabled menu item');
@@ -129,7 +129,7 @@ describe('[MenuItemComponent]', () => {
             component.notificationTooltip = 'Tooltip text for menu item 2';
             fixture.detectChanges();
             notification = rootElement.query(By.css('.menu__item--notification'));
-            menuItemLink = rootElement.queryAll(By.css('a'))[0];            
+            menuItemLink = rootElement.queryAll(By.css('a'))[0];
         });
         it('the notification text is "2"', () => {
             expect(component.notificationText).toBe('2');
