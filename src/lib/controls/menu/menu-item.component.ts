@@ -7,8 +7,8 @@ import { Input, Component } from '@angular/core';
 export class MenuItemComponent {
     @Input() text: string;
     @Input() link: string;
-    @Input() disabled = false;
-    @Input() disabledTooltip: boolean;
+    @Input() disabled: boolean;
+    @Input() disabledTooltip: string;
     @Input() notification: string;
     @Input() notificationColor: string;
     @Input() notificationTooltip: string;
