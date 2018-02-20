@@ -34,7 +34,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
 
     @HostBinding('class.validated-input') hasClass = true;
-    @HostBinding('class.datepicker--open') expanded: boolean = false;
+    @HostBinding('class.datepicker--open') expanded = false;
     @HostBinding('class.validation-error--active') get errorClass() {
         return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
     }
@@ -119,7 +119,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
             this.control.markAsTouched();
             this.control.markAsDirty();
         }
-
     }
 
     onEnter() {

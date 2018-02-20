@@ -16,7 +16,6 @@ describe('[DatepickerComponent(Angular)]', () => {
     let component: DatepickerComponent;
     let fixture: ComponentFixture<DatepickerComponent>;
     let rootElement: DebugElement;
-    let datepicker: DebugElement;
 
     beforeEach((done) => {
         TestBed.resetTestEnvironment();
@@ -46,42 +45,41 @@ describe('[DatepickerComponent(Angular)]', () => {
 
     describe('When initialized', () => {
 
-        // beforeEach(() => {
-        //     component.ngOnInit();
-        // });
+        beforeEach(() => {
+            component.ngOnInit();
+        });
 
         it('the calendar is not visible', () => {
-            let datepickerElement = fixture.debugElement.query(By.css('datepicker--open'));
+            const datepickerElement = fixture.debugElement.query(By.css('datepicker--open'));
             expect(datepickerElement).toBe(null);
         });
 
-        // describe('and the datepicker is clicked', () => {
-        //     beforeEach(() => {
+        describe('and the datepicker is clicked', () => {
+            beforeEach(() => {
 
-        //         let datepickerElement = fixture.debugElement.query(By.css('.datepicker'));
-        //         datepickerElement.triggerEventHandler('mousedown', { cancelBubble: false } as Event);
+                const datepickerElement = fixture.debugElement.query(By.css('.datepicker'));
+                datepickerElement.triggerEventHandler('mousedown', { cancelBubble: false } as Event);
+                fixture.detectChanges();
 
-        //     });
-        //     it('the calendar is visible', () => {
-        //         let datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
-        //         console.log(fixture.debugElement.classes);
-        //         expect(datepickerElement).not.toBe(null);
-        //     });
-        // });
-        // describe('and the datepicker is closed', () => {
-        //     beforeEach(() => {
+            });
+            it('the calendar is visible', () => {
+                const datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
+                expect(datepickerElement).not.toBe(null);
+            });
 
-        //         let datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
-        //         console.log(datepickerElement);
-        //         datepickerElement.triggerEventHandler('mousedown', event);
+            describe('and the datepicker is closed', () => {
+                beforeEach(() => {
+                    const datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
+                    datepickerElement.triggerEventHandler('mousedown', event);
+                    fixture.detectChanges();
 
-        //     });
-        //     it('the calendar is not visible', () => {
-        //         //     expect(component.expanded).toBe(false);
-        //         console.log(fixture.debugElement.classes);
-        //         //expect(fixture.debugElement.query(By.css('.datepicker__calendar'))).toBeNull();
-        //     });
-        // });
+                });
+                it('the calendar is not visible', () => {
+                    const datepickerElement = fixture.debugElement.query(By.css('datepicker--open'));
+                    expect(datepickerElement).toBe(null);
+                });
+            });
+        });
 
         describe('and the datepicker is focusout', () => {
             beforeEach(() => {
@@ -124,98 +122,98 @@ describe('[DatepickerComponent(Angular)]', () => {
         });
 
     });
+
+
+    describe('When initialized with empty Selected date and readonly-mode', () => {
+        beforeEach(() => {
+            component.readonly = true;
+            fixture.detectChanges();
+        });
+
+        it('has div class .readonly', () => {
+            expect(fixture.debugElement.classes['readonly']).toBe(true);
+        });
+        it('selected date is empty', () => {
+            const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
+            const content = selectedDateSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('');
+        });
+    });
+
+    describe('When initialized with existing Selected date and readonly-mode', () => {
+        beforeEach(() => {
+            component.selectedDate = new Date(2017, 1, 1);
+            component.readonly = true;
+            component.selectedDateFormat = 'yyyy-MM-dd';
+            fixture.detectChanges();
+        });
+
+        it('has div class .readonly', () => {
+            expect(fixture.debugElement.classes['readonly']).toBe(true);
+        });
+
+        it('selected date is new Date(2017,1,1) and displayed on format yyyy-MM-dd', () => {
+            const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
+            const content = selectedDateSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('2017-02-01');
+        });
+    });
+
+    describe('When initialized with readonly-mode set to false', () => {
+        beforeEach(() => {
+            component.readonly = false;
+            fixture.detectChanges();
+        });
+
+        it('does not have div class .readonly', () => {
+            expect(fixture.debugElement.classes['readonly']).toBe(false);
+        });
+    });
+
+    describe('When initialized with existing Selected date and disabled-mode', () => {
+        beforeEach(() => {
+            component.selectedDate = new Date(2017, 1, 1);
+            component.disabled = true;
+            component.selectedDateFormat = 'yyyy-MM-dd';
+            fixture.detectChanges();
+        });
+
+        it('has div class .readonly', () => {
+            expect(fixture.debugElement.classes['disabled']).toBe(true);
+        });
+
+        it('selected date is new Date(2017,1,1) and displayed on format yyyy-MM-dd', () => {
+            const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
+            const content = selectedDateSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('2017-02-01');
+        });
+    });
+
+    describe('When initialized with empty Selected date and disabled-mode', () => {
+        beforeEach(() => {
+            component.disabled = true;
+            fixture.detectChanges();
+        });
+
+        it('has div class .readonly', () => {
+            expect(fixture.debugElement.classes['disabled']).toBe(true);
+        });
+        it('selected date is empty', () => {
+            const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
+            const content = selectedDateSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('Välj datum');
+        });
+    });
+
+
+    describe('When initialized with disabled-mode set to false', () => {
+        beforeEach(() => {
+            component.disabled = false;
+            fixture.detectChanges();
+        });
+
+        it('does not have div class .readonly', () => {
+            expect(fixture.debugElement.classes['readonly']).toBe(false);
+        });
+    });
 });
-
-    // describe('When initialized with empty Selected date and readonly-mode', () => {
-    //     beforeEach(() => {
-    //         component.readonly = true;
-    //         fixture.detectChanges();
-    //     });
-
-    //     it('has div class .readonly', () => {
-    //         expect(fixture.debugElement.classes['readonly']).toBe(true);
-    //     });
-    //     it('selected date is empty', () => {
-    //         const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
-    //         const content = selectedDateSpan.nativeElement.textContent;
-    //         expect(content.trim()).toBe('');
-    //     });
-    // });
-
-    // describe('When initialized with existing Selected date and readonly-mode', () => {
-    //     beforeEach(() => {
-    //         component.selectedDate = new Date(2017, 1, 1);
-    //         component.readonly = true;
-    //         component.selectedDateFormat = 'yyyy-MM-dd';
-    //         fixture.detectChanges();
-    //     });
-
-    //     it('has div class .readonly', () => {
-    //         expect(fixture.debugElement.classes['readonly']).toBe(true);
-    //     });
-
-    //     it('selected date is new Date(2017,1,1) and displayed on format yyyy-MM-dd', () => {
-    //         const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
-    //         const content = selectedDateSpan.nativeElement.textContent;
-    //         expect(content.trim()).toBe('2017-02-01');
-    //     });
-    // });
-
-    // describe('When initialized with readonly-mode set to false', () => {
-    //     beforeEach(() => {
-    //         component.readonly = false;
-    //         fixture.detectChanges();
-    //     });
-
-    //     it('does not have div class .readonly', () => {
-    //         expect(fixture.debugElement.classes['readonly']).toBe(false);
-    //     });
-    // });
-
-    // describe('When initialized with existing Selected date and disabled-mode', () => {
-    //     beforeEach(() => {
-    //         component.selectedDate = new Date(2017, 1, 1);
-    //         component.disabled = true;
-    //         component.selectedDateFormat = 'yyyy-MM-dd';
-    //         fixture.detectChanges();
-    //     });
-
-    //     it('has div class .readonly', () => {
-    //         expect(fixture.debugElement.classes['disabled']).toBe(true);
-    //     });
-
-    //     it('selected date is new Date(2017,1,1) and displayed on format yyyy-MM-dd', () => {
-    //         const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
-    //         const content = selectedDateSpan.nativeElement.textContent;
-    //         expect(content.trim()).toBe('2017-02-01');
-    //     });
-    // });
-
-    // describe('When initialized with empty Selected date and disabled-mode', () => {
-    //     beforeEach(() => {
-    //         component.disabled = true;
-    //         fixture.detectChanges();
-    //     });
-
-    //     it('has div class .readonly', () => {
-    //         expect(fixture.debugElement.classes['disabled']).toBe(true);
-    //     });
-    //     it('selected date is empty', () => {
-    //         const selectedDateSpan = fixture.debugElement.query(By.css('.datepicker__calendar__selector'));
-    //         const content = selectedDateSpan.nativeElement.textContent;
-    //         expect(content.trim()).toBe('Välj datum');
-    //     });
-    // });
-
-
-    // describe('When initialized with disabled-mode set to false', () => {
-    //     beforeEach(() => {
-    //         component.disabled = false;
-    //         fixture.detectChanges();
-    //     });
-
-    //     it('does not have div class .readonly', () => {
-    //         expect(fixture.debugElement.classes['readonly']).toBe(false);
-    //     });
-    // });
-//});
