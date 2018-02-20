@@ -86,6 +86,10 @@ module.exports = function (wallaby) {
         ignore: true
       },
       {
+        pattern: 'src/**/index.ts',
+        ignore: true
+      },
+      {
         pattern: 'src/**/*spec.ts',
         ignore: true
       },

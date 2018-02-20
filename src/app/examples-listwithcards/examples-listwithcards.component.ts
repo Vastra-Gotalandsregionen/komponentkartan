@@ -554,16 +554,19 @@ export class ExamplesListwithcardsComponent implements OnInit {
   onCardSave(event: Event, row: ExpandableRow<ExampleUnit, any>) {
     this.submitted = true;
 
-    if (!this.editprivateOwnerForm.valid || !this.editUnitForm.valid) {
+    if (this.editUnitForm.valid) {
+      row.notificationPermanent = null;
+      row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
+
+    } else if (this.editUnitForm.invalid) {
+      row.notifyOnCollapsePermanent(row.previewObject.enhet + ' Gick inte att spara, fyll i alla uppgifter korrekt!', 'vgr-icon-exclamation--red');
       this.saveCancelComponent.unlocked = true;
       return;
     }
+
     this.updateRowValues(row);
 
     this.cardLocked = true;
-
-    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
-    row.notificationPermanent = null;
   }
 
   onCardUnlocked() {

@@ -78,9 +78,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private _notification: RowNotification;
 
-    // private _notifications: RowNotification[] = [];
-    // flag: boolean;
-
     @Input() notificationPermanent: RowNotification;
 
     @Input() set notification(value: RowNotification) {
@@ -200,15 +197,15 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
 
-            if (this.notificationPermanent) {
-                this.notification = this.notificationPermanent;
-                this.changeDetector.detectChanges();
-                this.notificationVisible = true;
-                this.notInteractable = false;
-                return;
-            }
-
             setTimeout(() => {
+                if (this.notificationPermanent) {
+                    this.notification = this.notificationPermanent;
+                    this.changeDetector.detectChanges();
+                    this.notificationVisible = true;
+                    this.notInteractable = false;
+                    return;
+                }
+
                 if (this.notification !== this.notificationPermanent) {
                     this.notificationVisible = false;
                     this.notInteractable = false;
