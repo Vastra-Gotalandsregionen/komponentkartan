@@ -26,6 +26,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     @Input() selectedDate?: Date;
     @Input() @HostBinding('class.disabled') disabled: boolean;
     @Input() @HostBinding('class.readonly') readonly: boolean;
+
     @Input() selectedDateFormat = 'yyyy-MM-dd';
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
     @Output() selectedDateChanged = new EventEmitter<Date>();
@@ -33,6 +34,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
 
     @HostBinding('class.validated-input') hasClass = true;
+    @HostBinding('class.datepicker--open') expanded: boolean = false;
     @HostBinding('class.validation-error--active') get errorClass() {
         return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
     }
@@ -43,7 +45,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     hasFocus: boolean;
 
     control: AbstractControl;
-    expanded: boolean;
+
 
     today: Date;
     yearMonths: ICalendarYearMonth[] = [];
@@ -111,11 +113,11 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     onLeave() {
         this.hasFocus = false;
         if (this.control) {
-            this.control.markAsTouched();
-            this.control.markAsDirty();
             if (this.control.updateOn === 'blur') {
                 this.control.setValue(this.selectedDate);
             }
+            this.control.markAsTouched();
+            this.control.markAsDirty();
         }
 
     }
@@ -329,16 +331,19 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
 
 
-    onCalendarClick(event: Event) {
+    onCalendarMousedown(event: Event) {
         // används för att stoppa events från att bubbla ut
         event.cancelBubble = true;
     }
 
-    onDatePickerClick(event: Event) {
+    toggleCalendar(event: Event) {
+
         if (this.disabled || this.readonly) {
             return;
         }
         this.expanded = !this.expanded;
+
+        console.log(this.expanded);
     }
 
     onPreviousMonth(event: Event) {

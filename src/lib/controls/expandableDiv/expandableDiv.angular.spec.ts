@@ -79,12 +79,15 @@ describe('[ExpandableDivComponent]', () => {
 
     describe('When component is initialized', () => {
         it('component has class expandable-div', () => {
+            console.log(rootElement.classes);
             expect(rootElement.classes['expandable-div']).toBe(true);
         });
         it('component has class expandable-div--collapsed', () => {
+            console.log(rootElement.classes);
             expect(rootElement.classes['expandable-div--collapsed']).toBe(true);
         });
         it('component does not have class expandable-div--expanded', () => {
+            console.log(rootElement.classes);
             expect(rootElement.classes['expandable-div--expanded']).toBe(false);
         });
 

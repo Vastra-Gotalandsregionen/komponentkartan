@@ -281,6 +281,7 @@ describe('[DatepickerComponent]', () => {
             expect(component.currentYearMonthIndex).toBe(0);
           });
         });
+
       });
     });
   });
@@ -320,7 +321,7 @@ describe('[DatepickerComponent]', () => {
     describe('and the datepicker is clicked', () => {
 
       beforeEach(() => {
-        component.onDatePickerClick({ cancelBubble: true } as Event);
+        component.toggleCalendar({ cancelBubble: true } as Event);
       });
     });
   });
@@ -424,6 +425,5 @@ describe('[DatepickerComponent]', () => {
       });
     });
   });
-
 });
 
