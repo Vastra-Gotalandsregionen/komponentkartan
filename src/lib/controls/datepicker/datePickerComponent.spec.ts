@@ -272,6 +272,15 @@ describe('[DatepickerComponent]', () => {
           });
         });
 
+        describe('and the component is reseted', () => {
+          beforeEach(() => {
+            component.writeValue(null);
+          });
+          it('no date is selected', () => {
+            expect(component.selectedCalendarDay.selected).toBe(false);
+            expect(component.currentYearMonthIndex).toBe(0);
+          });
+        });
       });
     });
   });
@@ -415,5 +424,6 @@ describe('[DatepickerComponent]', () => {
       });
     });
   });
+
 });
 
