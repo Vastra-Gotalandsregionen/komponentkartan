@@ -28,6 +28,17 @@ describe('[MonthpickerComponent]', () => {
             expect(component.years[0].year).toBe(2016);
         });
 
+        describe('when the component is resetted', () => {
+            beforeEach(() => {
+                component.writeValue(null);
+            });
+            it('Eva is selected on component1', () => {
+                component.years.forEach(y => y.months.forEach(m => {
+                    expect(m.selected).toBe(false);
+                }));
+            });
+        });
+
     });
 
     describe('When initialized with minDate currentYearPlusOneYear-01-01 and currentYearPlusOneYear-02-01', () => {
@@ -152,10 +163,10 @@ describe('[MonthpickerComponent]', () => {
             expect(currentMonth.isCurrentMonth).toBe(true);
         });
         it('previousYear is set', () => {
-            expect(component.previousYear).toBe(component.years[0])
+            expect(component.previousYear).toBe(component.years[0]);
         });
         it('nextYear is set', () => {
-            expect(component.nextYear).toBe(component.years[2])
+            expect(component.nextYear).toBe(component.years[2]);
         });
 
         it('Only one month is set current month', () => {

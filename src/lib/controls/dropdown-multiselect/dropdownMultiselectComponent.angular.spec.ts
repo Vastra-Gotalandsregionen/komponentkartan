@@ -497,5 +497,16 @@ describe("[DropdownMultiSelectComponent]", () => {
             });
         });
     });
+    describe('Compoennt is reseted', () => {
+        beforeEach(() => {
+            component.writeValue(null);
+        });
+        it('other options are is unselected and unmarked', () => {
+            component.items.forEach(i => {
+                expect(i.selected).toBe(false);
+                expect(i.marked).toBe(false);
+            });
+        });
+    });
 });
 

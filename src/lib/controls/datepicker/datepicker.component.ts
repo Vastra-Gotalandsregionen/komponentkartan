@@ -34,7 +34,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
 
     @HostBinding('class.validated-input') hasClass = true;
-    @HostBinding('class.datepicker--open') expanded: boolean = false;
+    @HostBinding('class.datepicker--open') expanded = false;
     @HostBinding('class.validation-error--active') get errorClass() {
         return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
     }
@@ -83,6 +83,14 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
     writeValue(value: any): void {
         this.selectedDate = value;
+
+        if (!value && this.selectedCalendarDay) {
+            // control was resetted
+            this.selectedCalendarDay.selected = false;
+            this.currentYearMonthIndex = 0;
+            this.setCurrentYearMonthOutput();
+            this.setPreviousAndNextMonthNavigation();
+        }
     }
 
     registerOnChange(func: any): void {
@@ -111,7 +119,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
             this.control.markAsTouched();
             this.control.markAsDirty();
         }
-
     }
 
     onEnter() {
