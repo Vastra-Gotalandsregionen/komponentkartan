@@ -1,8 +1,9 @@
 import {
-    Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, Renderer, OnChanges, AfterViewInit
+    Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, Renderer, OnChanges, AfterViewInit,
+    SkipSelf, Optional, Host
 } from '@angular/core';
 import { SelectableItem } from '../../models/selectableItem.model';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 import { Guid } from '../../utils/guid';
 
 @Component({
@@ -21,8 +22,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
     @Input() @HostBinding('class.disabled') disabled: boolean;
-
-    public radiogroupItems: RadioGroupItem<any>[] = [];
+    @Input() formControlName?: string;
     @Input() set options(items: SelectableItem<any>[]) {
         const _items = JSON.parse(JSON.stringify(items));
 
@@ -34,19 +34,21 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         });
     }
 
-
-
     @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
+    public radiogroupItems: RadioGroupItem<any>[] = [];
+    public control: AbstractControl;
+    public elements: any;
+    public selectedOption: RadioGroupItem<any>;
 
-    elements: any;
     get noSelectionFlag(): boolean {
         return this.radiogroupItems.every((x) => (x.selected === false || x.selected === undefined));
-    }
-    constructor(private elementRef: ElementRef, private renderer: Renderer) {
     }
 
     get classRenderer(): Renderer {
         return this.renderer;
+    }
+
+    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
     }
 
     ngOnChanges() {
@@ -56,11 +58,14 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
                 this.selectOption(preSelectedOption);
             }
         }
+
+        if (this.formControlName && this.controlContainer) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
     }
 
     ngAfterViewInit() {
         this.elements = this.elementRef.nativeElement.querySelectorAll(':not(.radio-button--disabled) .radio-button__icon');
-
     }
 
     optionClicked(option: RadioGroupItem<any>) {
@@ -69,6 +74,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         }
 
         this.selectOption(option);
+        if (this.renderer) {
+            const position = this.radiogroupItems.indexOf(option);
+            this.renderer.invokeElementMethod(this.elements[position], 'focus');
+        }
     }
 
     keyDown(event: KeyboardEvent, option: RadioGroupItem<any>): void {
@@ -144,7 +153,18 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
 
     onTouched() { }
 
+    onLeave() {
+        if (this.control) {
+            this.control.markAsTouched();
+            this.control.markAsDirty();
+            if (this.control.updateOn === 'blur' && this.selectedOption && this.selectedOption.value) {
+                this.control.setValue(this.selectedOption.value);
+            }
+        }
+    }
+
     private selectOption(option: RadioGroupItem<any>) {
+        this.selectedOption = option;
         this.radiogroupItems.forEach(o => {
             o.selected = (o === option);
         });

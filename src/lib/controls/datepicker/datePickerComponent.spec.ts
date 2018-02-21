@@ -271,17 +271,6 @@ describe('[DatepickerComponent]', () => {
             expect(component.yearMonths[0].weeks[3].days[2].selected).toBe(false);
           });
         });
-
-        describe('and the component is reseted', () => {
-          beforeEach(() => {
-            component.writeValue(null);
-          });
-          it('no date is selected', () => {
-            expect(component.selectedCalendarDay.selected).toBe(false);
-            expect(component.currentYearMonthIndex).toBe(0);
-          });
-        });
-
       });
     });
   });
@@ -327,17 +316,24 @@ describe('[DatepickerComponent]', () => {
   });
 
   describe(' When initialized with 3 months', () => {
+    const year = 2017;
+    const js_october_index = 9;
+    const internal_october_index = 10;
+
     beforeEach(() => {
       jasmine.clock().uninstall();
       jasmine.clock().install();
-      const year = 2017;
-      const october = 9;
-      jasmine.clock().mockDate(new Date(year, october - 1, 15));
+      jasmine.clock().mockDate(new Date(year, js_october_index - 1, 15));
       component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
-      component.minDate = new Date(year, october - 1, 1);
-      component.maxDate = new Date(year, october + 1, 30);
-      component.selectedDate = new Date(year, october, 1);
+      component.minDate = new Date(year, js_october_index - 1, 1);
+      component.maxDate = new Date(year, js_october_index + 1, 30);
+      component.selectedDate = new Date(year, js_october_index, 1);
       component.ngOnInit();
+    });
+
+    it('currentYearMonthIndex is set with todays date', () => {
+      expect(component.yearMonths[component.currentYearMonthIndex].year).toBe(year);
+      expect(component.yearMonths[component.currentYearMonthIndex].month).toBe(internal_october_index);
     });
 
     it('can navigate to previous month', () => {
@@ -373,6 +369,42 @@ describe('[DatepickerComponent]', () => {
 
       it('can navigate to next month', () => {
         expect(component.nextMonth).toBeTruthy();
+      });
+    });
+  });
+
+  describe(' When initialized with 3 months', () => {
+    const year = 2017;
+    const js_october_index = 9;
+    const internal_october_index = 10;
+
+    beforeEach(() => {
+      jasmine.clock().uninstall();
+      jasmine.clock().install();
+      jasmine.clock().mockDate(new Date(year, js_october_index, 15));
+      component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
+      component.minDate = new Date(year, js_october_index - 1, 1);
+      component.maxDate = new Date(year, js_october_index + 1, 30);
+      component.selectedDate = new Date(year, js_october_index + 1, 1);
+      component.ngOnInit();
+    });
+
+    it('currentYearMonthIndex is set with todays date', () => {
+      expect(component.yearMonths[component.currentYearMonthIndex].year).toBe(year);
+      expect(component.yearMonths[component.currentYearMonthIndex].month).toBe(internal_october_index + 1);
+    });
+
+
+    describe('and the component is reseted', () => {
+      beforeEach(() => {
+        component.writeValue(null);
+      });
+      it('no date is selected', () => {
+        expect(component.selectedCalendarDay.selected).toBe(false);
+      });
+      it('currentYearMonthIndex is set with todays date', () => {
+        expect(component.yearMonths[component.currentYearMonthIndex].year).toBe(year);
+        expect(component.yearMonths[component.currentYearMonthIndex].month).toBe(internal_october_index);
       });
     });
   });
