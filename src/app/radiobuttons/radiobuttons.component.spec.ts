@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RadiobuttonsComponent } from './radiobuttons.component';
+// import { RadiobuttonsComponent } from './radiobuttons.component';
 
-describe('RadiobuttonsComponent', () => {
-  let component: RadiobuttonsComponent;
-  let fixture: ComponentFixture<RadiobuttonsComponent>;
+// describe('RadiobuttonsComponent', () => {
+//   let component: RadiobuttonsComponent;
+//   let fixture: ComponentFixture<RadiobuttonsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RadiobuttonsComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ RadiobuttonsComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(RadiobuttonsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(RadiobuttonsComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
