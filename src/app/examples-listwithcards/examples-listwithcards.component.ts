@@ -366,7 +366,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
           type: NotificationType.Permanent
         } as RowNotification;
 
-        element.notificationPermanent = {
+        element.notification = {
           message: 'Information saknas, medverkan i familjecentral ej ifylld',
           icon: 'vgr-icon-exclamation--red',
           type: NotificationType.Permanent
@@ -555,11 +555,11 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.submitted = true;
 
     if (this.editUnitForm.valid) {
-      row.notificationPermanent = null;
+      row.notification = null;
       row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
 
     } else if (this.editUnitForm.invalid) {
-      row.notifyOnCollapsePermanent(row.previewObject.enhet + ' Gick inte att spara, fyll i alla uppgifter korrekt!', 'vgr-icon-exclamation--red');
+      row.notifyOnCollapse(row.previewObject.enhet + ' Gick inte att spara, fyll i alla uppgifter korrekt!', 'vgr-icon-exclamation--red');
       this.saveCancelComponent.unlocked = true;
       return;
     }

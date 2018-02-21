@@ -57,8 +57,8 @@ export class ListexampleComponent {
     this.peopleRows[0].notification = notification1;
     this.peopleRows[4].notification = notification2;
 
-    this.peopleRows[0].notificationPermanent = notification1;
-    this.peopleRows[4].notificationPermanent = notification2;
+    this.peopleRows[0].notification = notification1;
+    this.peopleRows[4].notification = notification2;
   }
 
   deleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {

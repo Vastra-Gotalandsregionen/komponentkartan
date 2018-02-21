@@ -78,19 +78,22 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private _notification: RowNotification;
 
-    @Input() notificationPermanent: RowNotification;
+    private notificationPermanent: RowNotification;
 
-    @Input() set notification(value: RowNotification) {
-        this._notification = value;
+    set notification(value: RowNotification) {
+
 
         if (value) {
             if (value.type === NotificationType.ShowOnCollapse) {
                 this.collapse(value.type);
+                this._notification = value;
                 this.changeDetector.detectChanges();
             } else if (value.type === NotificationType.ShowOnRemove) {
                 this.collapse(value.type);
+                this._notification = value;
                 this.changeDetector.detectChanges();
             } else if (value.type === NotificationType.Permanent) {
+                this.notificationPermanent = value;
                 this.showNotification();
             }
         } else {
@@ -119,7 +122,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     ngOnInit() {
-        if (this.notification && this.notification.type === NotificationType.Permanent) {
+        if (this.notificationPermanent && this.notification.type === NotificationType.Permanent) {
             this.showNotification();
         }
     }
