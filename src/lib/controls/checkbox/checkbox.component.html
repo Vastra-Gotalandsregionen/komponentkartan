@@ -1,6 +1,7 @@
-<div class="checkbox" [ngClass]="{'checkbox--checked' : checked, 'checkbox--disabled' : disabled }" (click)="onClick()" (keydown)="onKeyDown($event)">
+<div class="checkbox" [ngClass]="{'checkbox--checked' : checked, 'checkbox--disabled' : disabled }" (focusout)="onLeave()"
+  (click)="onClick()" (keydown)="onKeyDown($event)">
 
-    <div class="checkbox__image" [attr.aria-labelledby]="labelledbyid" role="checkbox" tabindex="0" [attr.aria-disabled]="disabled"
-        [attr.aria-checked]="checked"></div>
-    <label id="{{labelledbyid}}" class="checkbox__label">{{label}}</label>
+  <div class="checkbox__image" [attr.aria-labelledby]="labelledbyid" role="checkbox" tabindex="0" [attr.aria-disabled]="disabled"
+    [attr.aria-checked]="checked"></div>
+  <label id="{{labelledbyid}}" class="checkbox__label">{{label}}</label>
 </div>

@@ -87,7 +87,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         if (!value && this.selectedCalendarDay) {
             // control was resetted
             this.selectedCalendarDay.selected = false;
-            this.currentYearMonthIndex = 0;
+            this.updateYearMonths(this.minDate, this.maxDate, this.yearMonths);
             this.setCurrentYearMonthOutput();
             this.setPreviousAndNextMonthNavigation();
         }
@@ -291,7 +291,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
                     if (calendarDay != null) {
 
                         const currentDatePosition = calendarDay.day.toDateString();
-                        const currentselectedDate = this.selectedDate !== undefined ? this.selectedDate.toDateString() : this.selectedDate;
+                        const currentselectedDate = this.selectedDate ? this.selectedDate.toDateString() : this.selectedDate;
                         const currentTodayDate = this.today.toDateString();
 
                         // Set disabled dates

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 2.1.2
 - New component vgr-list-column-header-checkbox for checkboxes in list headers
 - New declarative menu component. The previous menu component is no lomger supported.
+- Implemented support for reactive forms reset in datepicker, montpicker and dropdowns.
 
 ## 2.1.1
 - Added support for AOT builds
