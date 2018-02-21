@@ -1,0 +1,61 @@
+<vgr-page>
+  <vgr-page-header [title]="'TEMAHANTERING'">
+  </vgr-page-header>
+  <vgr-page-body>
+    <vgr-page-block>
+
+
+      <h2>Välj nuvarande tema</h2>
+      <div class="row-layout">
+        <vgr-radio-group [options]="themes" (selectedChanged)="themeChanged($event)"></vgr-radio-group>
+      </div>
+      <h2>Använda tema från Komponentkartan</h2>
+      <p>För att återanvända stilar och teman från komponentkartan används primärt komponentkartans CSS / SASS filer. Importera
+        dem i index.html eller angular-cli.json.
+      </p>
+      <br>
+      <code>index.html==> &lt;link rel="stylesheet" type="text/css" href="node_modules/vgr-komponentkartan//Content/komponentkartan.css"
+        &gt;
+      </code>
+      <br>
+      <code>angular-cli.json==> "styles": [ "styles.scss", "../node_modules/vgr-komponentkartan//Content/komponentkartan.scss"
+        ],
+      </code>
+
+      <h2>Temadefinierande klasser</h2>
+      <p>För att välja tema för applikationen används klasserna
+        <i>.theme--neutral</i>,
+        <i>.theme--blue</i>,
+        <i>.theme--green</i> och
+        <i>.theme--red</i>. Sätt temat så högt upp i hierarkin som möjligt (t.ex body, applikation) för att slå igenom på samtliga
+        sidor och komponenter. </p>
+
+      <h2>Klasser som använder tema</h2>
+      <p>För att temafärgerna skall få effekt finns en rad klasser i komponentkartan som sätter den valda temafärgen på ett
+        element. Dessa följer standarden
+        <i>[css-egenskap]</i>--
+        <i>[primär/sekundärfärg]</i>. Se exempel nedan.
+      </p>
+      <br>
+      <ul>
+        <li>
+          <span>Högerkant i primärfärg</span>
+          <span class="css-classes">.border-right-color--primary</span>
+          <div class="example-div-1 border-right-color--primary"></div>
+        </li>
+        <li>
+          <span>Överkant i primärfärg, bakgrund i sekundärfärg</span>
+          <span class="css-classes">.border-top-color--primary .background-color--secondary</span>
+          <div class="example-div-2 border-top-color--primary background-color--secondary"></div>
+        </li>
+      </ul>
+      <h2>Använda SASS från komponentkartan</h2>
+      <p>Det är också möjligt att använda komponentkartans SASS-filer i applikationen. Man kan då få tillgång till standardfärger,
+        storlekar mm som komponentkartan använder.
+        <strong>OBS!</strong> Vid import av SASS-filer till egendefinierade SASS/CSS filer så kompileras innehållet utanför komponentkartan.
+        Detta kan medföra sidoeffekter så som att temat åsidosätts. Användning av klasser är att föredra.
+      </p>
+    </vgr-page-block>
+  </vgr-page-body>
+
+</vgr-page>

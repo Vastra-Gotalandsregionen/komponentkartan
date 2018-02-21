@@ -1,0 +1,111 @@
+<app-component-docs [componentName]="'header/header menu'">
+  <div class="docs__overview" style="height:420px">
+    <code>&lt;vgr-header&gt;</code> är en komponent som skall användas i huvudet på sidorna och ligga där fast när användaren navigerar
+    i systemet.
+    <br> Färgen kan sättas beroende på vilket system som är aktivt. I portalen beror färgen på om användaren har ett eller flera
+    system. Om bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent bild som gör att man
+    bara behöver sätta headerns bakgrundsfärg genom rätt klassnamn på headern eller på ett föräldraelement. I det "neutrala"
+    läget skall inte den transparenta bilden synas. Headern kan visas i olika utföranden, man kan ha den med eller utan användarinformation
+    samt med eller utan meny och olika kombinationer av dessa. I exemplet kan man se de olika vyerna.
+    <br>
+    <br> På headern kan man även lägga till en kontextmeny (
+    <code>&lt;vgr-header-menu&gt;</code>). Den menyn kan endast bo i headern.
+    <br>
+    <br>
+    <div class="column-layout">
+      <vgr-header class="header--inline" [userName]="'Neo Åhn'" [headerMenu]="headerMenu"></vgr-header>
+    </div>
+    <br>
+    <p> Förändras med tema:
+      <strong>Ja</strong>
+    </p>
+  </div>
+  <div class="docs__examples">
+    <div class="column-layout">
+      <h3>Header med user och meny (temad grön)</h3>
+      <vgr-header class="header--inline theme--green" [userName]="'Nova Åudit'" [headerMenu]="simpleHeaderMenu"></vgr-header>
+      <div>
+        <h3>Markup för en menyn i exemplet ovan, tryck på pilen i headern så ser du kontextmenyn</h3>
+        <section [innerHTML]="exampleCodeSimpleMenyMarkup" highlight-js-content=".highlight"></section>
+      </div>
+      <h3>Header med user utan meny (temad röd)</h3>
+      <vgr-header class="header--inline theme--red" [userName]="'Nils Åstrand'"></vgr-header>
+      <h3>Header utan user och meny (temad blå)</h3>
+      <vgr-header class="header--inline theme--blue"></vgr-header>
+      <h3>Header utan user och meny (Standard)</h3>
+      <vgr-header class="header--inline"></vgr-header>
+    </div>
+  </div>
+  <div class="docs__api">
+    <h3>Properties vgr-header</h3>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>headerMenu : IHeaderMenu</td>
+        <td>Menyn man vill visa (IHeaderMenu)</td>
+        <td>[headerMenu]="contextMenu"</td>
+      </tr>
+      <tr>
+        <td>userName : string</td>
+        <td>Sätter namnet på texten för den som är inloggad</td>
+        <td>[userName]="signedInUser"</td>
+      </tr>
+    </table>
+    <br>
+    <h3>IHeaderMenu</h3>
+    <table class="property-table" style="margin-bottom: 20px">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>menuItems: IHeaderMenuItem[]</td>
+        <td>menyalternativ.
+        </td>
+        <td></td>
+      </tr>
+    </table>
+    <h3>IHeaderMenuItem</h3>
+    <table class="property-table" style="margin-bottom: 20px">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>displayName: string</td>
+        <td>Menyalternativets rubrik</td>
+        <td>displayName: 'Min sida'</td>
+      </tr>
+      <tr>
+        <td>url: string</td>
+        <td>Länk att följa vid klick på länken.</td>
+        <td>url: "/my-route"</td>
+      </tr>
+      <tr>
+        <td>isInternalLink: boolean</td>
+        <td>Anger om alternativet skall öppnas i ett nytt fönster eller ej.</td>
+        <td>isInternalLink: true</td>
+      </tr>
+      <tr>
+        <td>isSeparator: boolean</td>
+        <td>Anger om alternativet är en horisontell linje eller ej.</td>
+        <td>isSeparator: true</td>
+      </tr>
+      <tr>
+        <td>menuItems: IHeaderMenuItem[]</td>
+        <td>Eventuella underalternativ för menyalternativet.
+          <strong>OBS!</strong> endast en undernivå är möjlig</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    <i>Under utveckling</i>
+  </div>
+</app-component-docs>

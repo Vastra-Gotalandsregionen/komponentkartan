@@ -1,0 +1,41 @@
+<vgr-page>
+  <vgr-page-header [title]="'Upplösning'">
+  </vgr-page-header>
+  <vgr-page-body>
+    <vgr-page-block>
+      <h3>Marginaler & brytgräns</h3>
+      <p>Komponenterna är definierade utifrån två fasta bredder. Dessa slår igenom automatiskt med skärmens upplösning, med
+        hjälp av CSS media queries. Storleken styr fontstorlekar, marginaler, padding och komponenters storlek. Marginaler
+        för den minsta upplösningen är generellt 10 px på och ökar till 20 px på den större storleken. Samma avstånd för
+        båda storlekarna är att innehållsdelen är 20 px från header och meny oavsett brytgräns. Headern växer alltid i bredd
+        efter webbläsarens fönster medans vänstermeny och innehåll och komponenter har ovan nämnda fasta format att växa
+        efter.
+        <br>
+        <br>
+        <p>
+          Liten storlek är bredd mellan 1366px och 1458px, stor storlek är bredd över 1458px.
+          <br>
+          <strong>Minsta upplösning för som stödjs är 1366x768. </strong>
+        </p>
+
+        <br>
+        <h3>Styra storlek med CSS media queries</h3>
+        <p>Storlekarna finns fördefinierade i komponentkartans css. Dessa går att återanvända i egna komponenter genom att importera
+          definitionerna via SASS.
+          <code>$desktop-width--small</code> är liten storlek.
+          <code>$desktop-width--medium</code> är stor storlek.
+        </p>
+        <br>
+
+        <h3>Exempel</h3>
+        Innehållet i denna label styrs beroende på aktiv brytgräns.
+        <br>
+        <span class="sizeInfo">Nuvarande storlek: </span>
+        <br>
+        <br>
+        <section [innerHTML]="mediaQueryExample" highlight-js-content=".highlight"></section>
+
+    </vgr-page-block>
+  </vgr-page-body>
+
+</vgr-page>

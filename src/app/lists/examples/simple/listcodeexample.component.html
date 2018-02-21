@@ -1,0 +1,51 @@
+<vgr-page>
+  <vgr-page-header [title]="'Kodexempel enkel lista'">
+  </vgr-page-header>
+  <vgr-page-body>
+    <vgr-page-block>
+      <h2>Enkel lista</h2>
+      <p>Här har vi exempel på en enkel lista med endast sortering implementerat och innehåll när man expanderar en rad. Observera
+        även bredden på kolumnerna är satta. För att se dokumentationen på komponenten, klicka
+        <a href="/lists">här.</a>
+      </p>
+    </vgr-page-block>
+    <vgr-page-block>
+      <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
+        <vgr-list-header>
+          <vgr-list-column-header text="Förnamn" width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
+          <vgr-list-column-header text="Efternamn" width="5" sortKey="lastName"></vgr-list-column-header>
+          <vgr-list-column-header text="Yrke" width="5" sortKey="occupation"></vgr-list-column-header>
+          <vgr-list-column-header text="Inkomst" align="right" width="5" sortKey="income"></vgr-list-column-header>
+        </vgr-list-header>
+        <vgr-list-item *ngFor="let row of peopleRowsSimpleList">
+          <vgr-list-item-header>
+            <vgr-list-column [text]="row.firstName" width="5"></vgr-list-column>
+            <vgr-list-column [text]="row.lastName" width="5"></vgr-list-column>
+            <vgr-list-column [text]="row.occupation" width="5"></vgr-list-column>
+            <vgr-list-column [text]="row.income| number:'2.2-2':'sv-SE'" width="5" align="right"></vgr-list-column>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <span>Förnamn: {{row.firstName}}</span>
+            <br>
+            <span>Efternamn: {{row.lastName}}</span>
+            <br>
+            <span>Yrke: {{row.occupation}}</span>
+            <br>
+            <span>Inkomst: {{row.income | currency : 'SEK'}}</span>
+          </vgr-list-item-content>
+        </vgr-list-item>
+      </vgr-list>
+    </vgr-page-block>
+    <vgr-page-block>
+      <div>
+        <h3>HTML</h3>
+        <section [innerHTML]="htmlSimpleListMarkup" highlight-js-content=".highlight"></section>
+      </div>
+      <br>
+      <div>
+        <h3>Typescript</h3>
+        <section [innerHTML]="typeScriptSimpleListMarkup" highlight-js-content=".highlight"></section>
+      </div>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>

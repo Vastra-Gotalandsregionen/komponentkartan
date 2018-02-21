@@ -1,0 +1,93 @@
+<app-component-docs [componentName]="'Button'">
+
+  <div class="docs__overview">
+    <p>
+      <code>
+        &lt;vgr-button&gt; </code> finns i två olika utföranden, primär och sekundär.
+      <br>
+      <br>
+      <vgr-button (click)="lastButtonPressed = 'Klicka här - primär'">Klicka här</vgr-button>
+      <vgr-button [secondary]="true" (click)="lastButtonPressed = 'Klicka här - sekundär'">Klicka här</vgr-button>
+    </p>
+    <p> Förändras med tema:
+      <strong>Ja</strong>
+    </p>
+  </div>
+
+  <div class="docs__examples">
+    <div class="column-layout">
+      <h2>Primärknappar</h2>
+      <div>
+
+        <vgr-button (click)="lastButtonPressed = 'OK - primär'">OK</vgr-button>
+
+        <vgr-button (click)="buttonDisabled=!buttonDisabled;">{{buttonDisabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
+        <vgr-button [disabled]="buttonDisabled">{{buttonDisabled ? 'Inaktiv' : 'Aktiv'}}</vgr-button>
+      </div>
+      <h2>Sekundärknappar</h2>
+      <div>
+
+        <vgr-button [secondary]="true" (click)="lastButtonPressed = 'OK - sekundär'">OK</vgr-button>
+        <vgr-button [secondary]="true" (click)="buttonSecondaryDisabled=!buttonSecondaryDisabled">{{buttonSecondaryDisabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
+        <vgr-button [secondary]="true" [disabled]="buttonSecondaryDisabled">{{buttonSecondaryDisabled ? 'Inaktiv' : 'Aktiv'}}</vgr-button>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div>Senaste knapptryck: {{lastButtonPressed}}</div>
+  </div>
+
+  <div class="docs__api">
+    <table class="property-table ">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>secondary : boolean</td>
+        <td>Visa sekundärt utseende. Default är false.</td>
+        <td>[secondary]="true"</td>
+      </tr>
+      <tr>
+        <td>disabled : boolean</td>
+        <td>Inaktivera knapp</td>
+        <td>[disabled]="true"</td>
+      </tr>
+      <tr>
+        <td>click = new EventEmitter</td>
+        <td>Event när knapp trycks ner</td>
+        <td>(click)="OnClick()"</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="docs__wcag">
+    <p>
+      <code>&lt;vgr-button&gt;</code> har en intern div vars roll är satt till button.
+    </p>
+    <br>
+    <p>Förutom rollen så används attributen:</p>
+    <ul class="doc-list">
+      <li>aria-disabled, om knappen är inaktiv eller aktiv </li>
+
+    </ul>
+    <br>
+    <p>Vid knappaktivering flyttas fokus beroende på vilken åtgärd som knappen utför. Till exempel:</p>
+    <ul class="doc-list">
+      <li>Om knappåtgärden öppnar en dialog, flyttas fokus till inuti dialogrutan.</li>
+      <li>Om knappåtgärden stänger en dialog, återgår fokus normalt till den knapp som öppnade dialogen, om inte funktionen som
+        utförts i dialogrutan leder till ett annat element. Om du till exempel aktiverar en avbrytningsknapp i en dialogruta
+        återgår fokus till knappen som öppnade dialogrutan. Om dialogrutan bekräftade åtgärden att radera den sida från vilken
+        den öppnades skulle emellertid fokusen logiskt gå över till ett nytt element.
+      </li>
+      <li>Om knappåtgärden inte avvisar det aktuella sammanhanget, är fokus normalt kvar på knappen efter aktivering, till exempel
+        en 'Tillämpa'-knapp.</li>
+      <li>Om knappåtgärden indikerar ett kontextbyte, till exempel att gå till nästa steg i en guide eller lägga till ett annat
+        sökkriterium, är det ofta lämpligt att flytta fokus till utgångspunkten för den åtgärden.</li>
+      <li>Om knappen aktiveras med ett kortkommando, förblir fokus normalt i det sammanhang som kortkommandot användes. Om till
+        exempel Alt + U aktiverar en "Upp" -knapp som flyttar det aktuella fokuserade objektet i en lista en position högre
+        upp i listan, kommer Alt + U när fokus är i listan inte att flytta fokus från listan.</li>
+    </ul>
+  </div>
+</app-component-docs>

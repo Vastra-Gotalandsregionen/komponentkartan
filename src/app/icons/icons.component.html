@@ -1,0 +1,121 @@
+<vgr-page>
+  <vgr-page-header [title]="'Ikoner'">
+  </vgr-page-header>
+  <vgr-page-body>
+    <vgr-page-block>
+      <h2>Dokumentation för tillgängliga ikoner i komponentkartan</h2>
+      <p>För att kunna använda sig utav de ikoner (svg-bilder) som finns i komponentkartan, så finns deras klassnamn representerade
+        i tabellen nedanför.
+        <br>
+        <br>Svg-bilderna är kopplade till en background-image för samtliga klasser i komponentkartans ikon-bibliotek.
+      </p>
+      <br>
+      <br>
+      <table class="property-table" style="width:50%">
+        <tr>
+          <th>Namn</th>
+          <th>Ikon</th>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-plus
+          </td>
+          <td>
+            <div class="vgr-icon-plus"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-minus
+          </td>
+          <td>
+            <div class="vgr-icon-minus"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-edit
+          </td>
+          <td>
+            <div class="vgr-icon-edit"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-message
+          </td>
+          <td>
+            <div class="vgr-icon-message"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-trashcan
+          </td>
+          <td>
+            <div class="vgr-icon-trashcan"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-ok-check-green
+          </td>
+          <td>
+            <div class="vgr-icon-ok-check-green"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-ok-check
+          </td>
+          <td>
+            <div class="vgr-icon-ok-check"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-question
+          </td>
+          <td>
+            <span class="vgr-icon-question"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-exclamation
+          </td>
+          <td>
+            <div class="vgr-icon-exclamation"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            vgr-icon-exclamation--red
+          </td>
+          <td>
+            <div class="vgr-icon-exclamation--red"></div>
+          </td>
+        </tr>
+
+      </table>
+      <br>
+      <h2>Exempel</h2>
+      <br> Lägga till en ikon i html:
+      <section style="width:50%" [innerHTML]="iconExamplesHTML" highlight-js-content=".highlight"></section>
+
+      <br> Skapa en notifiering i typescript:
+      <br>
+      <section style="width:70%" [innerHTML]="iconExamplesTS2" highlight-js-content=".highlight"></section>
+
+
+
+      <br> När man vill skicka med en ikon till en notifiering i typescript:
+      <br>
+      <section style="width:70%" [innerHTML]="iconExamplesTS" highlight-js-content=".highlight"></section>
+
+
+
+    </vgr-page-block>
+  </vgr-page-body>
+
+</vgr-page>

@@ -51,7 +51,7 @@
             <form [formGroup]="onChangeForm">
               <vgr-title-value-layout>
                 <vgr-title-value [title]=" 'Nämnd*'" [slim]="newCardLocked">
-                  <vgr-dropdown formControlName="namnd" [showValidation]="onChangeForm.controls.namnd.touched || submitted" [items]="newExamplenamnd"
+                  <vgr-dropdown formControlName="namnd" [showValidation]="onChangeForm.controls.namnd.touched || submitted" [items]="examplenamnd"
                     [noItemSelectedLabel]=" 'Välj nämnd'" [readonly]="newCardLocked"></vgr-dropdown>
                 </vgr-title-value>
                 <vgr-title-value [title]=" 'Avtalsperiod*'" [slim]="newCardLocked">
@@ -109,7 +109,7 @@
                 </vgr-title-value>
                 <vgr-title-value *ngIf="newUnitForm.controls.agarform.value==='Privat'" [title]=" 'Utbetalningssätt*'" [slim]="newCardLocked">
                   <vgr-dropdown formControlName="utbetalningssatt" [showValidation]="privateOwnerForm.controls.utbetalningssatt.touched || submitted"
-                    [items]="newExempelUtbetalningssatt" [noItemSelectedLabel]=" 'Välj Utbetalningssätt'" [readonly]="newCardLocked"></vgr-dropdown>
+                    [items]="exempelUtbetalningssatt" [noItemSelectedLabel]=" 'Välj Utbetalningssätt'" [readonly]="newCardLocked"></vgr-dropdown>
                 </vgr-title-value>
                 <vgr-title-value *ngIf="newUnitForm.controls.agarform.value==='Privat'" [title]=" 'Kontonummer*'" [slim]="newCardLocked">
                   <vgr-input formControlName="kontonummer" [showValidation]="privateOwnerForm.controls.kontonummer.touched || submitted" [readonly]="newCardLocked"></vgr-input>
@@ -160,7 +160,7 @@
           <vgr-card-section [title]=" 'Ersättningsgrundande information'" [expanded]="true" [readonly]="newCardLocked">
             <vgr-title-value-layout>
               <vgr-title-value [title]=" 'Medverkan i familjecentral'" [slim]="newCardLocked">
-                <vgr-dropdown formControlName="medverkanIFamiljecentral" [items]="newExempelMedverkanIfamiljecentral" [showValidation]="newUnitForm.controls.medverkanIFamiljecentral.touched || submitted"
+                <vgr-dropdown formControlName="medverkanIFamiljecentral" [items]="exempelMedverkanIfamiljecentral" [showValidation]="newUnitForm.controls.medverkanIFamiljecentral.touched || submitted"
                   [noItemSelectedLabel]=" 'Välj'" [readonly]="newCardLocked"></vgr-dropdown>
               </vgr-title-value>
               <vgr-title-value [title]=" 'Regionsövergripande grupper (kr/månad)'" [slim]="newCardLocked">
@@ -183,7 +183,7 @@
           <vgr-list-column-header text="Nämnd" width="5" sortKey="namnd"></vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of exampleData | unitfilter:filtertext: includeInactiveUnits" [notification]="row.notification"
-          (expandedChanged)="onExpandedChanged($event,row)">
+          [notificationPermanent]="row.notificationPermanent" (expandedChanged)="onExpandedChanged($event,row)">
           <vgr-list-item-header>
             <vgr-list-column [text]="row.previewObject.enhet" width="5"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.hsaid" width="5"></vgr-list-column>
