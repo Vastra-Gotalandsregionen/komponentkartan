@@ -1,32 +1,27 @@
 // import { TestBed, async } from '@angular/core/testing';
-// import { AppComponent } from './app.component';
-// import {
-//     ModalPlaceholderComponent, ModalService, HeaderComponent, SidebarMenuComponent, ButtonComponent, MenuComponent, MenuItemComponent
-// } from '../lib/index';
-
-// import { KomponentkartanModule } from '../lib/komponentkartan.module';
-
-// import { RouterModule } from '@angular/router';
-
+// import { KomponentkartanApplicationComponent } from './app.component';
 // describe('AppComponent', () => {
 //     beforeEach(async(() => {
 //         TestBed.configureTestingModule({
-//             imports: [RouterModule],
 //             declarations: [
-//                 AppComponent,
-//                 ModalPlaceholderComponent,
-//                 MenuItemComponent,
-//                 HeaderComponent,
-//                 MenuComponent,
-//                 ButtonComponent,
-//                 SidebarMenuComponent
+//                 KomponentkartanApplicationComponent
 //             ],
-//             providers: [ModalService]
 //         }).compileComponents();
 //     }));
 //     it('should create the app', async(() => {
-//         const fixture = TestBed.createComponent(AppComponent);
+//         const fixture = TestBed.createComponent(KomponentkartanApplicationComponent);
 //         const app = fixture.debugElement.componentInstance;
 //         expect(app).toBeTruthy();
+//     }));
+//     it(`should have as title 'app'`, async(() => {
+//         const fixture = TestBed.createComponent(KomponentkartanApplicationComponent);
+//         const app = fixture.debugElement.componentInstance;
+//         expect(app.title).toEqual('app');
+//     }));
+//     it('should render title in a h1 tag', async(() => {
+//         const fixture = TestBed.createComponent(KomponentkartanApplicationComponent);
+//         fixture.detectChanges();
+//         const compiled = fixture.debugElement.nativeElement;
+//         expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
 //     }));
 // });

@@ -1,0 +1,15 @@
+.property-table {
+  margin-top: 10px;
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  li {
+    ul {
+      li {
+        padding-left: 26px;
+      }
+    }
+  }
+}

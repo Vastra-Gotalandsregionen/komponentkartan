@@ -1,5 +1,7 @@
-<ng-content select="vgr-list-item-header">
-</ng-content>
+<div class="list-item__header_wrapper" (click)="expanded=!expanded">
+  <ng-content select="vgr-list-item-header">
+  </ng-content>
+</div>
 <div *ngIf="notification" class="list-item__notification">
   <span class="list-item__notification__icon" [ngClass]="notification.icon">
   </span>
@@ -7,4 +9,6 @@
     {{notification? notification.message : ''}}
   </div>
 </div>
-<ng-content select="vgr-list-item-content"></ng-content>
+<div [@slideListContent]="stateName">
+  <ng-content select="vgr-list-item-content"></ng-content>
+</div>

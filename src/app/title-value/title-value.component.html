@@ -1,0 +1,87 @@
+<app-component-docs [componentName]="'Title-value'">
+
+  <div class="docs__overview">
+    <p>
+      <code> &lt;vgr-title-value&gt; </code> används för att skapa title-value layouter, t.ex formulär.
+      <br> Placera title-value komponenterna i
+      <code> &lt;vgr-title-value-layout&gt; </code>.
+    </p>
+
+    <p> Förändras med tema:
+      <strong>Nej</strong>
+    </p>
+  </div>
+  <div class="docs__examples">
+    <vgr-card>
+      <vgr-card-column>
+        <vgr-card-section [title]="'Belopp readonly (slim)'" [expanded]="true">
+          <vgr-title-value-layout>
+            <vgr-title-value [title]="'Bruttobelopp'" [slim]="true">
+              <vgr-input [value]="1000" [suffix]="'kr'" [alignRight]="true" [readonly]="true"></vgr-input>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Skattesats'" [slim]="true">
+              <vgr-input [value]="32" [suffix]="'%'" [alignRight]="true" [readonly]="true"></vgr-input>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Nettobelopp'" [slim]="true">
+              <vgr-input [value]="32" [suffix]="'kr'" [alignRight]="true" [readonly]="true"></vgr-input>
+            </vgr-title-value>
+          </vgr-title-value-layout>
+        </vgr-card-section>
+      </vgr-card-column>
+      <vgr-card-column>
+        <vgr-card-section [title]="'Belopp'" [expanded]="true" class="card__right">
+          <vgr-title-value-layout>
+            <vgr-title-value [title]="'Bruttobelopp'">
+              <vgr-input [value]="10000" [suffix]="'kr'" [alignRight]="true"></vgr-input>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Skattesats'">
+              <vgr-input [value]="32" [suffix]="'%'" [alignRight]="true"></vgr-input>
+            </vgr-title-value>
+            <vgr-title-value [title]="'Nettobelopp'">
+              <vgr-input [value]="32" [suffix]="'kr'" [alignRight]="true"></vgr-input>
+            </vgr-title-value>
+          </vgr-title-value-layout>
+        </vgr-card-section>
+      </vgr-card-column>
+    </vgr-card>
+  </div>
+
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>title : string</td>
+        <td>Title(label) för title-value-paret.
+        </td>
+        <td>
+          [title]="'En titel'"
+        </td>
+      </tr>
+      <tr>
+        <td>slim : boolean</td>
+        <td>Om title-value är satt som slim så kommer title-value-raden ta så lite plats som möjligt i höjdled.
+          <br>Detta ska användas för en title-value komponent som endast visar readonly fält.
+        </td>
+        <td>
+          [readonly]="true/false"
+        </td>
+      </tr>
+    </table>
+    <br>
+    <p>
+
+      <strong>Tips!</strong> om man vill lägga två komponenter bredvid varandra som värde, lägg dem i en
+      <code>&lt;div&gt; class="row-layout row-layout--tight row-layout--component" &lt;/div&gt;</code>
+    </p>
+  </div>
+
+  <div class="docs__wcag">
+    <i>
+      Ej aktuellt.</i>
+  </div>
+
+</app-component-docs>

@@ -1,0 +1,89 @@
+<vgr-page>
+  <vgr-page-header [title]="'Kodexempel lista med notifieringar'">
+
+    <vgr-button (click)="actionsVisible = true">Öppna panel</vgr-button>
+  </vgr-page-header>
+  <vgr-action-panel [expanded]="actionsVisible" [title]="'Action-panel'" [notification]="panelNotification">
+
+    <vgr-card>
+      <vgr-card-header>
+        <div class="flex-right">
+          <vgr-button [secondary]="true" (click)="actionsVisible=false">Stäng</vgr-button>
+        </div>
+      </vgr-card-header>
+      <vgr-card-column>
+        <vgr-card-section [title]=" 'Information' " expanded="true" [readonly]="readonly">
+          <vgr-title-value-layout>
+            <vgr-title-value [title]=" 'Id' " [slim]="readonly">
+              <span>123456789-1234-546</span>
+            </vgr-title-value>
+            <vgr-title-value title="Kod* " [slim]="readonly">
+              <vgr-input></vgr-input>
+            </vgr-title-value>
+            <vgr-title-value [title]=" 'Nämnd*' " [slim]="readonly">
+              <vgr-dropdown [values]="['Nämnd 1', 'Nämnd 2', 'Nämnd 3', 'Nämnd 4', 'Nämnd 5', 'Nämnd 6', 'Nämnd 7']" [noItemSelectedLabel]=" 'Välj nämnd' "></vgr-dropdown>
+            </vgr-title-value>
+            <vgr-title-value [title]=" 'Datum*' " [slim]="readonly">
+              <div class="row-layout ">
+                <vgr-monthpicker></vgr-monthpicker>
+                <vgr-monthpicker></vgr-monthpicker>
+              </div>
+            </vgr-title-value>
+          </vgr-title-value-layout>
+        </vgr-card-section>
+
+      </vgr-card-column>
+      <vgr-card-column>
+        <vgr-card-section [title]=" 'Ersättningsgrundande information' " [readonly]="readonly " [expanded]="false ">
+          <vgr-title-value-layout>
+            <vgr-title-value [title]=" 'Medverkan i familjecentral' " [slim]="readonly">
+            </vgr-title-value>
+            <vgr-title-value [title]=" 'Regionsövergripande grupper (kr/månad)' " [slim]="readonly">
+              <vgr-input></vgr-input>
+            </vgr-title-value>
+          </vgr-title-value-layout>
+        </vgr-card-section>
+      </vgr-card-column>
+    </vgr-card>
+
+  </vgr-action-panel>
+  <vgr-page-body>
+    <vgr-page-block>
+      <h2>Lista med notifieringar</h2>
+      <p>Här har vi exempel på en lista med notifieringar. även bredden på kolumnerna är satta. För att se dokumentationen på
+        komponenten, klicka
+        <a href="/lists">här.</a>
+      </p>
+    </vgr-page-block>
+    <vgr-page-block>
+      <vgr-list [flexibleHeader]="true" [allowMultipleExpandedItems]="false" (sortChanged)="onSortChanged($event)">
+        <vgr-list-header>
+          <vgr-list-column-header [text]="'Förnamn'" [width]="10" [sortKey]="'firstName'" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
+          <vgr-list-column-header [text]="'Efternamn'" [width]="10" [sortKey]="'lastName'"></vgr-list-column-header>
+        </vgr-list-header>
+        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [notificationPermanent]="row.notificationPermanent"
+          [expanded]="row.expanded">
+          <vgr-list-item-header>
+            <vgr-list-column [text]="row.previewObject.firstName" [width]="10"></vgr-list-column>
+            <vgr-list-column [text]="row.previewObject.lastName" [width]="10"></vgr-list-column>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <vgr-button [secondary]="true" (click)="updateRow(row)">Uppdatera</vgr-button>
+            <vgr-button [secondary]="true" (click)="deleteRow(row)">Ta bort</vgr-button>
+          </vgr-list-item-content>
+        </vgr-list-item>
+      </vgr-list>
+    </vgr-page-block>
+    <vgr-page-block>
+      <div>
+        <h3>HTML</h3>
+        <section [innerHTML]="htmlAdvancedListMarkup" highlight-js-content=".highlight"></section>
+      </div>
+      <br>
+      <div>
+        <h3>Typescript</h3>
+        <section [innerHTML]="typeScriptAdvancedListMarkup" highlight-js-content=".highlight"></section>
+      </div>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>

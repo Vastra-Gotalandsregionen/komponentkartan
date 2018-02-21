@@ -1,0 +1,260 @@
+<vgr-page class="no-sort">
+  <vgr-page-header title="Card">
+  </vgr-page-header>
+  <vgr-page-body>
+    <vgr-page-block>
+      <vgr-list [allowMultipleExpandedItems]="true">
+        <vgr-list-header>
+          <vgr-list-column-header text="Dokumentation för Card" [width]="20"></vgr-list-column-header>
+        </vgr-list-header>
+        <vgr-list-item [expanded]="true">
+          <vgr-list-item-header>
+            <h4>Översikt</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content [width]="1">
+            <div class="content-overview">
+              <p>
+                <code>&lt;vgr-card&gt;</code> används för att skapa kort, ofta i listor som expanderat innehåll. Ett kort har tre
+                delar: Topp, vänster och höger. Dessa fylls med innehåll genom att använda css-klasser. Ett kort innehåller
+                en eller flera
+                <code>&lt;vgr-card-section&gt;</code> som kan expanderas.
+              </p>
+              <vgr-card>
+                <vgr-card-header>
+                  <vgr-button class="flex-right" [secondary]="true">Åtgärd</vgr-button>
+                </vgr-card-header>
+                <vgr-card-column>
+                  <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 1'">
+                    <span>Innehåll</span>
+                  </vgr-card-section>
+                  <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 2'">
+                    <span>Innehåll</span>
+                  </vgr-card-section>
+                </vgr-card-column>
+                <vgr-card-column>
+                  <vgr-card-section class="card__right" [expanded]="true" [title]="'Rubrik'" [subtitle]="'Höger 1'" [readonly]="false">
+                    <div>Innehåll</div>
+                  </vgr-card-section>
+                </vgr-card-column>
+              </vgr-card>
+
+              <p>Förändras med tema:
+                <strong>nej</strong>
+              </p>
+            </div>
+            <!-- Översikt -->
+          </vgr-list-item-content>
+
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false">
+          <vgr-list-item-header>
+            <h4>Exempel - två kolumner</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <!-- Exempel -->
+            <vgr-card>
+              <vgr-card-header>
+                <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="unlocked = true" (save)="unlocked = false" (cancel)="unlocked = false"></vgr-save-cancel>
+              </vgr-card-header>
+              <vgr-card-column>
+                <vgr-card-section [expanded]="true" [title]="'Rubrik'" [subtitle]="'Personuppgifter'" [readonly]="!unlocked">
+                  <vgr-title-value-layout>
+                    <vgr-title-value [title]="'Förnamn'" [slim]="!unlocked">
+                      <vgr-input [value]="'Per-Åke'" [readonly]="!unlocked"></vgr-input>
+                    </vgr-title-value>
+                    <vgr-title-value [title]="'Efternamn'" [slim]="!unlocked">
+                      <vgr-input [value]="'Berg'" [readonly]="!unlocked"></vgr-input>
+                    </vgr-title-value>
+                    <vgr-title-value [title]="'Boende'" [slim]="!unlocked">
+                      <vgr-dropdown [values]="['Hus','Lägenhet','Kartong']" [selectedValue]="'Hus'" [readonly]="!unlocked"></vgr-dropdown>
+                    </vgr-title-value>
+                    <vgr-title-value [title]="'Födelsedatum'" [slim]="!unlocked">
+                      <vgr-datepicker [selectedDate]="birthDate" [readonly]="!unlocked"></vgr-datepicker>
+                    </vgr-title-value>
+                    <vgr-title-value [title]="'Serienummer'" [slim]="!unlocked">
+                      <span>7a787b27-c2cc-441f-a732</span>
+                    </vgr-title-value>
+                  </vgr-title-value-layout>
+                </vgr-card-section>
+                <vgr-card-section [expanded]="true" [title]="'Rubrik'" [subtitle]="'Adressuppgifter'">
+                  <vgr-title-value-layout>
+
+                    <vgr-title-value [title]="'Kommun'" [slim]="true">
+                      <span>Vänersborg</span>
+                    </vgr-title-value>
+                    <vgr-title-value [title]="'Besöksaddress'" [slim]="true">
+                      <span>Duellvägen
+                        <br>462 60
+                        <br>Vänersborg
+                      </span>
+                    </vgr-title-value>
+                    <vgr-title-value [title]="'Geokod (PT90)'" [slim]="true">
+                      <span>x: 6471784</span>
+                    </vgr-title-value>
+                  </vgr-title-value-layout>
+                </vgr-card-section>
+              </vgr-card-column>
+              <vgr-card-column>
+                <vgr-card-section [expanded]="false" [title]="'Rubrik'" [subtitle]="'Övrig information'">
+                  <span>Innehåll</span>
+                </vgr-card-section>
+              </vgr-card-column>
+            </vgr-card>
+            <br>
+            <h3>Markup</h3>
+            <section [innerHTML]="cardExampleMarkup" highlight-js-content=".highlight"></section>
+            <br>
+
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false" [notification]="notification">
+          <vgr-list-item-header>
+            <h4>Exempel - en kolumn</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <!-- Exempel2 -->
+            <vgr-card>
+              <vgr-card-header>
+                <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="unlocked = true" (save)="unlocked = false" (cancel)="unlocked = false"></vgr-save-cancel>
+              </vgr-card-header>
+              <vgr-card-column>
+                <table style="width:100%;text-align:left">
+                  <thead>
+                    <th>Kolumn 1</th>
+                    <th>Kolumn 2</th>
+                    <th>Kolumn 3</th>
+                    <th>Kolumn 4</th>
+                    <th>Kolumn 5</th>
+                    <th>Kolumn 6</th>
+                    <th>Kolumn 7</th>
+                    <th>Kolumn 8</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Värde 1</td>
+                      <td>Värde 2</td>
+                      <td>Värde 3</td>
+                      <td>Värde 4</td>
+                      <td>Värde 5</td>
+                      <td>Värde 6</td>
+                      <td>Värde 7</td>
+                      <td>Värde 8</td>
+                    </tr>
+                    <tr>
+                      <td>Värde 1</td>
+                      <td>Värde 2</td>
+                      <td>Värde 3</td>
+                      <td>Värde 4</td>
+                      <td>Värde 5</td>
+                      <td>Värde 6</td>
+                      <td>Värde 7</td>
+                      <td>Värde 8</td>
+                    </tr>
+                    <tr>
+                      <td>Värde 1</td>
+                      <td>Värde 2</td>
+                      <td>Värde 3</td>
+                      <td>Värde 4</td>
+                      <td>Värde 5</td>
+                      <td>Värde 6</td>
+                      <td>Värde 7</td>
+                      <td>Värde 8</td>
+                    </tr>
+                    <tr>
+                      <td>Värde 1</td>
+                      <td>Värde 2</td>
+                      <td>Värde 3</td>
+                      <td>Värde 4</td>
+                      <td>Värde 5</td>
+                      <td>Värde 6</td>
+                      <td>Värde 7</td>
+                      <td>Värde 8</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </vgr-card-column>
+            </vgr-card>
+            <br>
+            <h3>Markup</h3>
+            <section [innerHTML]="cardExampleMarkup2" highlight-js-content=".highlight"></section>
+            <br>
+
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <!-- API -->
+            <h3>Templatestruktur</h3>
+            <ul>
+              <li>
+                <code>&lt;vgr-card&gt;</code>, första elementet som representerar hela kortet</li>
+              <li>
+                <code>&lt;vgr-card-header&gt;</code>, ger titelyta på en vgr-card. Plats för knappar och rubriker för hela kortet.</li>
+              <li>
+                <code>&lt;vgr-card-column&gt;</code>, kolumner i kortet.
+                <ul>
+                  <li>
+                    Om det bara finns en kolumn blir den fullbredd.
+                  </li>
+                  <li>
+                    Om det finns två kolumner så hamnar den första till vänster och den andra till höger.
+                  </li>
+                  <li>
+                    Fler än två kolumner stöds ej.
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <code>&lt;vgr-card-section&gt;</code>, expanderbar sektion som placeras i en kolumn.</li>
+            </ul>
+            <br>
+            <strong>OBS!</strong> API nedan avser
+            <code>&lt;vgr-card-section&gt;</code>
+
+
+            <table class="property-table">
+              <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Exempel</th>
+              </tr>
+              <tr>
+                <td>expanded: boolean</td>
+                <td>Anger om sektionen är expanderad eller ej</td>
+                <td>[expanded]="true"</td>
+              </tr>
+              <tr>
+                <td>title: string</td>
+                <td>Sektionens rubrik</td>
+                <td>[title]="'Rubrik'"</td>
+              </tr>
+              <tr>
+                <td>subTitle: string</td>
+                <td>Sektionens underrubrik</td>
+                <td>[title]="'Underrubrik'"</td>
+              </tr>
+              <tr>
+                <td>readonly: boolean</td>
+                <td>Anger om symbolen för redigeringsläge skall visas eller ej. False = visa. True = dölj. Default är TRUE.</td>
+                <td>[readonly]="true"</td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false">
+          <vgr-list-item-header>
+            <h4>Tillgänglighet</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <!-- tILLGÄNGLIGHET -->
+            <i>Under utveckling</i>
+          </vgr-list-item-content>
+        </vgr-list-item>
+      </vgr-list>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>

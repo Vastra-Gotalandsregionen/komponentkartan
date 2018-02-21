@@ -1,0 +1,73 @@
+@import 'assets/partials/_settings.colors.scss';
+.input-fields {
+  li {
+    list-style-type: circle;
+    margin-left: 20px;
+  }
+  &.input-fields--expanded {
+    top: 233px;
+  }
+  .one-third {
+    >div {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.property-table {
+  text-align: left;
+  width: 100%;
+  th,
+  td {
+    //   width: 400px;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  th:first-child,
+  td:first-child {
+    //width: 200px;
+  }
+  tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, .03);
+  }
+  td:last-child,
+  th:last-child {
+    border-right: none;
+  }
+  th {
+    font-weight: bold;
+  }
+}
+
+code {
+  font-family: Roboto Mono, monospace;
+  background: rgba(0, 0, 0, .03);
+  padding: 3px;
+  font-size: 13px;
+  &.css {
+    color: $primary-color--red;
+  }
+}
+
+.list__column-header--sorted-asc,
+.list__column-header--sorted-desc {
+  .no-sort & {
+    h2 {
+      &:after {
+        display: none;
+        content: "";
+      }
+    }
+  }
+}
+
+.doc-list {
+  list-style-type: disc;
+  list-style-position: inside;
+  li {
+    margin-bottom: 5px;
+    text-indent: -1em;
+    padding-left: 1em;
+  }
+}

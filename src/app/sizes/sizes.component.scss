@@ -1,0 +1,17 @@
+@import '../../assets/partials/_settings.sizes.scss';
+.sizeInfo {
+  &:after {
+    content: "Liten";
+    height: auto;
+    width: auto;
+    font-weight: bold;
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .sizeInfo {
+    &:after {
+      content: "Stor";
+    }
+  }
+}
