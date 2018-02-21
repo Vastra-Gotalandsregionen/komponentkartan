@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow } from '../../lib/index';
+import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow } from '@komponentkartan';
 import { ExampleUnit, ExampleUnitDetails, ExampleUnitJusteringar } from './unit.model';
 
 @Component({
@@ -22,16 +22,12 @@ export class ExamplesListwithcardsComponent implements OnInit {
   selectedUnit = '';
 
   examplenamnd: DropdownItem<string>[];
-  newExamplenamnd: DropdownItem<string>[];
 
   exampleagare: DropdownItem<string>[];
-  // newExampleagare: DropdownItem<string>[];
 
   exempelUtbetalningssatt: DropdownItem<string>[];
-  newExempelUtbetalningssatt: DropdownItem<string>[];
 
   exempelMedverkanIfamiljecentral: DropdownItem<string>[];
-  newExempelMedverkanIfamiljecentral: DropdownItem<string>[];
 
   cardLocked: boolean;
   newCardLocked: boolean;
@@ -100,19 +96,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
     { displayName: 'Närhälsan Rehab', value: 'Närhälsan Rehab' } as DropdownItem<any>,
     { displayName: 'Hemmabolaget', value: 'Hemmabolaget' } as DropdownItem<any>] as DropdownItem<any>[];
 
-
-    // this.newExampleagare = [{ displayName: 'Närhälsan', value: 'Närhälsan' } as DropdownItem<string>,
-    // { displayName: 'Hälsoakuten', value: 'Hälsoakuten' } as DropdownItem<any>,
-    // { displayName: 'Kalle Karlsson', value: 'Kalle Karlsson' } as DropdownItem<any>,
-    // { displayName: 'Närhälsan Rehab', value: 'Närhälsan Rehab' } as DropdownItem<any>,
-    // { displayName: 'Hemmabolaget', value: 'Hemmabolaget' } as DropdownItem<any>] as DropdownItem<any>[];
-
     this.examplenamnd = [{ displayName: 'Göteborgs hälso- och sjukvårdsnämnden', value: 'Göteborgs hälso- och sjukvårdsnämnden' } as DropdownItem<string>,
-    { displayName: 'Norra hälso- och sjukvårdsnämnden', value: 'Norra hälso- och sjukvårdsnämnden' } as DropdownItem<string>,
-    { displayName: 'Södra hälso- och sjukvårdsnämnden', value: 'Södra hälso- och sjukvårdsnämnden' } as DropdownItem<string>,
-    { displayName: 'Västra hälso- och sjukvårdsnämnden', value: 'Västra hälso- och sjukvårdsnämnden' } as DropdownItem<string>,
-    { displayName: 'Östra hälso- och sjukvårdsnämnden', value: 'Östra hälso- och sjukvårdsnämnden' } as DropdownItem<string>] as DropdownItem<string>[];
-    this.newExamplenamnd = [{ displayName: 'Göteborgs hälso- och sjukvårdsnämnden', value: 'Göteborgs hälso- och sjukvårdsnämnden' } as DropdownItem<string>,
     { displayName: 'Norra hälso- och sjukvårdsnämnden', value: 'Norra hälso- och sjukvårdsnämnden' } as DropdownItem<string>,
     { displayName: 'Södra hälso- och sjukvårdsnämnden', value: 'Södra hälso- och sjukvårdsnämnden' } as DropdownItem<string>,
     { displayName: 'Västra hälso- och sjukvårdsnämnden', value: 'Västra hälso- och sjukvårdsnämnden' } as DropdownItem<string>,
@@ -120,15 +104,9 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
     this.exempelUtbetalningssatt = [{ displayName: 'BG', value: 'BG' } as DropdownItem<string>,
     { displayName: 'PG', value: 'PG' } as DropdownItem<string>] as DropdownItem<string>[];
-    this.newExempelUtbetalningssatt = [{ displayName: 'BG', value: 'BG' } as DropdownItem<string>,
-    { displayName: 'PG', value: 'PG' } as DropdownItem<string>] as DropdownItem<string>[];
-
 
     this.exempelMedverkanIfamiljecentral = [{ value: 'ja', displayName: 'Ja' } as DropdownItem<string>,
     { value: 'nej', displayName: 'Nej' } as DropdownItem<string>] as DropdownItem<string>[];
-    this.newExempelMedverkanIfamiljecentral = [{ value: 'ja', displayName: 'Ja' } as DropdownItem<string>,
-    { value: 'nej', displayName: 'Nej' } as DropdownItem<string>] as DropdownItem<string>[];
-
 
     this.initExampleData();
 
@@ -387,9 +365,14 @@ export class ExamplesListwithcardsComponent implements OnInit {
           icon: 'vgr-icon-exclamation--red',
           type: NotificationType.Permanent
         } as RowNotification;
+
+        element.notification = {
+          message: 'Information saknas, medverkan i familjecentral ej ifylld',
+          icon: 'vgr-icon-exclamation--red',
+          type: NotificationType.Permanent
+        } as RowNotification;
       }
     });
-
   }
 
   onSelectedChangedVersion(selectedItem: string, row: ExampleUnit) {
@@ -501,8 +484,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
   updateNewCardForm() {
     const agare = this.newUnit.agare ? this.newUnit.agare : '';
-    if (agare !== '')
-      this.agarOwnerForm.controls.agare.setValue(agare);
+    this.agarOwnerForm.controls.agare.setValue(agare);
 
     this.newUnitForm.setValue({
       hsaid: this.newUnit.hsaid,
@@ -572,14 +554,19 @@ export class ExamplesListwithcardsComponent implements OnInit {
   onCardSave(event: Event, row: ExpandableRow<ExampleUnit, any>) {
     this.submitted = true;
 
-    if (!this.editprivateOwnerForm.valid || !this.editUnitForm.valid) {
+    if (this.editUnitForm.valid) {
+      row.notification = null;
+      row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
+
+    } else if (this.editUnitForm.invalid) {
+      row.notifyOnCollapse(row.previewObject.enhet + ' Gick inte att spara, fyll i alla uppgifter korrekt!', 'vgr-icon-exclamation--red');
       this.saveCancelComponent.unlocked = true;
       return;
     }
+
     this.updateRowValues(row);
 
     this.cardLocked = true;
-    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
   }
 
   onCardUnlocked() {

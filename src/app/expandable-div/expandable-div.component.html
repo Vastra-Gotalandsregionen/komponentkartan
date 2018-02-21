@@ -1,0 +1,68 @@
+<app-component-docs [componentName]="'expandable div'">
+  <div class=" docs__overview ">
+    <p>
+      <code> &lt;vgr-expandable-div&gt;</code> är en sektion/div med innehåll som kan öppnas och stängas.
+    </p>
+    <br>
+    <strong>OBS!</strong>
+    <p>Denna komponent har ingen vgr-specifik styling, utan ska ses som en stödkomponent.</p>
+    <br>
+    <p>
+      <a href="../listexample-expandable-div">Här</a> kan du se exempel på användning i en lista.</p>
+    <br>
+    <p>Förändras med tema:
+      <strong>nej</strong>
+    </p>
+  </div>
+  <div class="docs__examples ">
+    <h2>HTML</h2>
+    <section [innerHTML]="exampleCodeMarkup" highlight-js-content=".highlight"></section>
+    <h2>Resultat</h2>
+    <vgr-expandable-div [expanded]="false" (expandedChanged)="onExpandedChanged($event)">
+      <vgr-expandable-div-header>
+        <p>Denna div är collapsed från början</p>
+      </vgr-expandable-div-header>
+      <vgr-expandable-div-content>
+        <p>Lite innehåll</p>
+        <p>Mer innehåll</p>
+      </vgr-expandable-div-content>
+    </vgr-expandable-div>
+  </div>
+  <div class="docs__api ">
+    <!-- API -->
+    <h3>Templatestruktur</h3>
+    <ul>
+      <li>
+        <code>&lt;vgr-expandable-div&gt;</code>, första elementet som representerar hela containern</li>
+      <li>
+        <code>&lt;vgr-expandable-div-header&gt;</code>, ger headeryta på diven som är klickbar och är alltid synlig.</li>
+      <li>
+        <code>&lt;vgr-expandable-div-content&gt;</code>, innehåll som kan döljas och visas när man klickar på headern.
+      </li>
+    </ul>
+    <br>
+    <strong>OBS!</strong> API nedan avser
+    <code>&lt;vgr-expandable-div&gt;</code>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>expanded: boolean</td>
+        <td>Anger om sektionen är expanderad eller ej</td>
+        <td>[expanded]="true"</td>
+      </tr>
+      <tr>
+        <td>expandedChanged: EventEmitter&lt;boolean&gt;
+        </td>
+        <td>Event som triggras när sektionen expanderas/kollapsas.</td>
+        <td>(expandedChanged)="onExpandedChanged($event)</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag ">
+    <i>Under utveckling</i>
+  </div>
+</app-component-docs>

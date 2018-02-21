@@ -75,9 +75,9 @@ describe('ListComponent', () => {
         component.ngAfterContentInit();
       });
 
-      it('the component has the list-item class', () => {
-        expect(rootElement.classes['list']).toBe(true);
-      });
+      // it('the component has the list-item class', () => {
+      //   expect(rootElement.classes['list']).toBe(true);
+      // });
 
       // describe('when vgr-list-item-header is clicked', () => {
       //   beforeEach(() => {

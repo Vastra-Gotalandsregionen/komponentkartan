@@ -1,5 +1,5 @@
 import { ExampleUnit } from './unit.model';
-import { ExpandableRow } from '../../lib/index';
+import { ExpandableRow, NotificationType, RowNotification } from '@komponentkartan';
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
     name: 'unitfilter',
@@ -8,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class UnitFilterPipe implements PipeTransform {
     transform(items: ExpandableRow<ExampleUnit, any>[], searchword: string, includeInactiveUnits: boolean): any {
-
+        // items[0].notification = {} as RowNotification;
 
         if (!items) {
             return items;

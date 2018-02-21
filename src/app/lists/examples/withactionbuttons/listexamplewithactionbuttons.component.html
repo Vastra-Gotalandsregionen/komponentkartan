@@ -1,0 +1,57 @@
+<vgr-page>
+  <vgr-page-header [title]="'Kodexempel enkel lista'">
+  </vgr-page-header>
+  <vgr-page-body>
+    <vgr-page-block>
+      <div>
+        <h2>Lista med papperskorg och checkbox</h2>
+        <p>Här har vi exempel på en lista med kolumner för papperskorg och checkbox. I listan visas vänstersortering -
+          <code>align="left"</code>, högerjustering -
+          <code>align="right"</code> samt centerjustering -
+          <code>align="center"</code>. För att se dokumentationen på komponenten, klicka
+          <a href="/lists">här.</a>
+        </p>
+        <br>
+        <vgr-button (click)="loadData()">Ladda data</vgr-button>
+      </div>
+    </vgr-page-block>
+    <vgr-page-block>
+      <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
+        <vgr-list-header>
+          <vgr-list-column-header text="Förnamn" width="8" sortKey="firstName"></vgr-list-column-header>
+          <vgr-list-column-header text="Efternamn" width="5" sortKey="lastName"></vgr-list-column-header>
+          <vgr-list-column-header text="Årsbelopp" width="3" align="right" sortKey="amount"></vgr-list-column-header>
+          <vgr-list-column-header width="1"></vgr-list-column-header>
+          <vgr-list-column-header-checkbox width="3" text="Markera alla" [checked]="allChecked" (checkedChanged)="onSelectAllChanged($event)"></vgr-list-column-header-checkbox>
+        </vgr-list-header>
+        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" (deleted)="notifyOnDelete(row)">
+          <vgr-list-item-header>
+            <vgr-list-column [text]="row.previewObject.firstName" width="8"></vgr-list-column>
+            <vgr-list-column [text]="row.previewObject.lastName" width="5"></vgr-list-column>
+            <vgr-list-column [text]="row.previewObject.amount | number:'2.2-2':'sv'" width="3" align="right"></vgr-list-column>
+            <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (delete)="onDeleteRow(row)" width="1"></vgr-list-column-trashcan>
+            <vgr-list-column-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected" (checkedChanged)="onSelectRowChanged(row, $event)"
+              width="3"></vgr-list-column-checkbox>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <span>Mer information</span>
+          </vgr-list-item-content>
+        </vgr-list-item>
+      </vgr-list>
+      <br>
+      <p>Du har valt {{ getSelectedRows() }} rader</p>
+    </vgr-page-block>
+    <vgr-page-block>
+      <div>
+        <h3>HTML</h3>
+        <section [innerHTML]="htmlSimpleListMarkup" highlight-js-content=".highlight"></section>
+      </div>
+      <br>
+      <div>
+        <h3>Typescript</h3>
+        <section [innerHTML]="typeScriptSimpleListMarkup" highlight-js-content=".highlight"></section>
+      </div>
+      <br>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>

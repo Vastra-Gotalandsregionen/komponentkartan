@@ -1,0 +1,119 @@
+<app-component-docs [componentName]="'Modal dialog'">
+  <div class="docs__overview">
+    <code>&lt;vgr-modal&gt;</code>
+    <p>En modal dialog visar ett meddelande för användaren och inväntar svar / kvittering. Under tiden som meddelandet visas
+      är resten av applikationen inaktiverad.
+    </p>
+
+    <div style="margin-top: 20px;height:35px;">
+      <vgr-button (click)="showOneButtonModalOverview()">Visa dialog!</vgr-button>
+    </div>
+    <br>
+    <p> Förändras med tema:
+      <strong>Ja</strong> (Knappar)
+    </p>
+  </div>
+  <div class="docs__examples">
+    <div class="row-layout">
+      <div>
+        <vgr-button (click)="showOneButtonModal()">En knapp</vgr-button>
+      </div>
+      <div>
+        <vgr-button (click)="showTwoButtonModal()">Två knappar med lång text</vgr-button>
+      </div>
+      <div>
+        <vgr-button (click)="showThreeButtonModal()">Tre knappar</vgr-button>
+      </div>
+      <div class="column-layout">
+
+        <vgr-button (click)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt</vgr-button>
+        Modal där avbryt är defaultknapp
+      </div>
+    </div>
+    <div style="margin-top: 20px">
+      <span>Du svarade:</span>
+      <span>{{lastModalAnswer}}</span>
+    </div>
+  </div>
+  <div class="docs__api">
+    Modal består av två delar. En komponent som läggs ytterst i DOM, med
+    <code>&lt;vgr-modal&gt;</code>. Detta är en placeholder för det innehåll som sedan visas över applikationen. Den andra delen är en
+    <code>modalService</code> som injectas i de komponenter som vill visa en dialog. För att visa en dialog, använd
+    <code>modalService.openDialog()</code> eller någon av de andra metoderna. Se nedan.
+    <br>
+    <table class="property-table" style="margin-bottom: 20px">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>openDialog()</td>
+        <td>Öppnar en modal dialog med en rubrik -
+          <code>title</code>, en text -
+          <code>message</code> och knappar -
+          <code>button1Config</code>,
+          <code>button2Config</code>,
+          <code>button3Config</code>.
+        </td>
+        <td>
+          <code>ButtonConfiguration</code> innehåller text och
+          <code>callback</code> för knappen, samt om knappen är default,
+          <code>isDefault</code>, eller ej.
+        </td>
+      </tr>
+      <tr>
+        <td>openOneButtonDialog()</td>
+        <td>Öppnar en modal dialog med en rubrik -
+          <code>title</code>, en text -
+          <code>message</code> och EN knapp, med text -
+          <code>buttonText</code> och funktion som anropas vid knapptryck -
+          <code>callback</code>.</td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>openSaveDontSaveCancelDialog()</td>
+        <td>Öppnar en modal dialog som är förkonfigurerad med Spara, Spara inte och Avbryt.
+          <code>title</code>,
+          <code>message</code> och händelser för respektive åtgärd -
+          <code>saveCallback</code>,
+          <code>dontSaveCallback</code>,
+          <code>cancelCallback</code> är konfigurerbara. Avbryt är defaultknapp.
+        </td>
+
+        <td>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    Dialogen följer WCAG genom att man inte kan tabba ur dialogen utan att stänga den först.
+    <br> Tänk på följande riktlinjer vid implementation av en modal:
+    <br>
+    <br> If content is large enough that focusing the first interactive element could cause the beginning of content to scroll
+    out of view, it is advisable to add tabindex=-1 to a static element at the top of the dialog, such as the dialog title
+    or first paragraph, and initially focus that element.
+    <ul>
+      <li>If a dialog contains the final step in a process that is not easily reversible, such as deleting data or completing
+        a financial transaction, it may be advisable to set focus on the least destructive action, especially if undoing
+        the action is difficult or impossible. The Alert Dialog Pattern is often employed in such circumstances.</li>
+      <li>If a dialog is limited to interactions that either provide additional information or continue processing, it may be
+        advisable to set focus to the element that is likely to be most frequently used, such as an OK or Continue button.</li>
+    </ul>
+    <br> When a dialog closes, focus returns to the element that invoked the dialog unless either: The invoking element no longer
+    exists. Then, focus is set on another element that provides logical work flow.
+    <br>
+    <ul>
+      The work flow design includes the following conditions that can occasionally make focusing a different element a more logical
+      choice:
+      <li>It is very unlikely users need to immediately re-invoke the dialog.</li>
+      <li>The task completed in the dialog is directly related to a subsequent step in the work flow.</li>
+      <li>For example, a grid has an associated toolbar with a button for adding rows. The Add Rows button opens a dialog that
+        prompts for the number of rows. After the dialog closes, focus is placed in the first cell of the first new row.</li>
+    </ul>
+    <br> It is strongly recommended that the tab sequence of all dialogs include a visible element with role button that closes
+    the dialog, such as a close icon or cancel button.
+
+  </div>
+</app-component-docs>
