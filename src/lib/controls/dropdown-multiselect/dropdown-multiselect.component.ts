@@ -26,7 +26,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string;
     dropdownLabel: string;
-    selectAllItem: DropdownItem<any>;
 
     @Output() selectionChanged = new EventEmitter<DropdownItem<any>[]>();
     get filterActive(): boolean {
@@ -35,6 +34,15 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     get selectedItems(): DropdownItem<any>[] {
         return this._items.filter(x => x.selected);
     }
+
+    get selectAllItemsChecked() {
+        return !this._items.find(x => !x.selected);
+    }
+
+    get selectAllItemsMarked() {
+        return true;
+    }
+
 
     set selectedValues(values: any[]) {
 
@@ -57,12 +65,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.noItemSelectedLabel = 'Välj';
         this.showAllItemText = 'Visa alla';
         this.selectAllItemText = 'Välj alla';
-
-        this.selectAllItem = {
-            displayName: this.selectAllItemText,
-            displayNameWhenSelected: this.allItemsSelectedLabel,
-            selected: false
-        } as DropdownItem<any>;
     }
 
     ngOnChanges() {
@@ -71,9 +73,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         }
 
         this.showAllItem.displayName = this.showAllItemText;
-
-        this.selectAllItem.displayName = this.selectAllItemText;
-        this.selectAllItem.displayNameWhenSelected = this.allItemsSelectedLabel;
 
         if (this.formControlName) {
             this.control = this.controlContainer.control.get(this.formControlName);
@@ -135,8 +134,8 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.preventCollapse = true;
     }
 
-    selectAllItems() {
-        this.selectItem(this.selectAllItem);
+    selectAllItems(selected: boolean) {
+        this.items.forEach(i => selected ? this.selectItem(i) : this.deselectItem(i));
     }
 
     selectItem(item: DropdownItem<any>) {
@@ -146,17 +145,10 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         item.selected = true;
 
-        if (item === this.selectAllItem) {
-            this.items.forEach(x => x.selected = true);
-            this.selectionChanged.emit(this._items.map(x => x.value));
-            this.onChange(this._items.map(x => x.value));
-        } else {
-            this.selectAllItem.selected = this._items.filter(x => !x.selected).length === 0;
-            this.selectionChanged.emit(this._items.map(x => x.value));
-            this.onChange(this.selectedItems.map(x => x.value));
-        }
-        this.updateDropdownLabel();
+        this.selectionChanged.emit(this._items.map(x => x.value));
+        this.onChange(this.selectedItems.map(x => x.value));
 
+        this.updateDropdownLabel();
     }
 
     deselectItem(item: DropdownItem<any>) {
@@ -166,38 +158,22 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         item.selected = false;
 
-        if (item === this.selectAllItem) {
-            this.items.forEach(x => x.selected = false);
-        }
         this.selectionChanged.emit(this._items.filter(x => x.selected).map(x => x.value));
         this.onChange(this._items.filter(x => x.selected).map(x => x.displayName));
-
-        this.selectAllItem.selected = false;
         this.updateDropdownLabel();
-
     }
 
     private updateDropdownLabel() {
-        if (this.selectAllItem.selected) {
-            this.dropdownLabel = this.selectAllItem.displayNameWhenSelected;
+        const selectedCount = this.items.filter(x => x.selected).length;
+        if (selectedCount === 1) {
+            this.dropdownLabel = '1 vald';
+        } else if (selectedCount === 0) {
+            this.dropdownLabel = this.noItemSelectedLabel;
+        } else if (selectedCount === this.items.length) {
+            this.dropdownLabel = this.allItemsSelectedLabel;
         } else {
-            const selectedCount = this.items.filter(x => x.selected).length;
-            if (selectedCount === 1) {
-                this.dropdownLabel = '1 vald';
-            } else if (selectedCount === 0) {
-                this.dropdownLabel = this.noItemSelectedLabel;
-            } else {
-                this.dropdownLabel = selectedCount + ' valda';
-            }
+            this.dropdownLabel = selectedCount + ' valda';
         }
-    }
-
-    onMouseEnter(item: DropdownItem<any>) {
-        item.marked = true;
-    }
-
-    onMouseLeave(item: DropdownItem<any>) {
-        item.marked = false;
     }
 
     onEnter() {
@@ -216,9 +192,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     protected handleInitiallySelectedItems(selectedItems: DropdownItem<any>[]): void {
-        this.selectAllItem.selected = this.items.length === selectedItems.length;
         this.selectionChanged.emit(selectedItems.map(x => x.value));
-
         this.updateDropdownLabel();
     }
 }
