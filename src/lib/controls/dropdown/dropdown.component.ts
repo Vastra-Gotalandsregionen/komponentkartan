@@ -29,7 +29,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     selectedItem: DropdownItem<any>;
 
-    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
+    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
         this.noItemSelectedLabel = '';
     }
@@ -73,6 +73,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
         if (!value) {
             this.selectedItem = null;
+            this.items.forEach(x => { x.selected = false; x.marked = false; });
         }
     }
 
@@ -100,7 +101,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
             return;
         }
 
-        this.items.forEach(x => { x.selected = false; x.marked = false });
+        this.items.forEach(x => { x.selected = false; x.marked = false; });
 
         item.selected = true;
         item.marked = true;

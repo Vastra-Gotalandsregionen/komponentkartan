@@ -11,7 +11,7 @@ describe('[MonthpickerComponent(Angular)]', () => {
   let component: MonthpickerComponent;
   let fixture: ComponentFixture<MonthpickerComponent>;
   let rootElement: DebugElement;
-  let datepicker: DebugElement;
+  //let monthpicker: DebugElement;
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -32,7 +32,7 @@ describe('[MonthpickerComponent(Angular)]', () => {
       fixture = TestBed.createComponent(MonthpickerComponent);
       component = fixture.componentInstance;
       rootElement = fixture.debugElement;
-      datepicker = rootElement.query(By.css('.monthpicker'));
+      // monthpicker = rootElement.query(By.css('.monthpicker'));
       fixture.detectChanges();
 
       done();

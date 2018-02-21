@@ -5,7 +5,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 
-describe('[ExpandableDivComponent]', () => {
+describe('[MenuComponent]', () => {
 
     let component: MenuComponent;
     let fixture: ComponentFixture<MenuComponent>;

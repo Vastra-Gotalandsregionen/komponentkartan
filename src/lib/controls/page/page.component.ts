@@ -9,10 +9,14 @@ import { ActionPanelComponent } from '../action-panel/action-panel.component';
     templateUrl: './page.component.html'
 })
 export class PageComponent implements AfterContentInit, AfterViewInit {
-    @HostBinding('class.page') hasClass = true;
     @ContentChild(PageHeaderComponent, { read: ElementRef }) pageHeader: ElementRef;
     @ContentChild(PageBodyComponent, { read: ElementRef }) pageBody: ElementRef;
     @ContentChild(ActionPanelComponent) actionPanelComponent: ActionPanelComponent;
+
+    @HostBinding('class.page') hasClass = true;
+    @HostBinding('class.list--actions-visible') get actionPanelVisible() {
+        return this.actionPanelComponent && this.actionPanelComponent.expanded;
+    }
 
     ngAfterContentInit() {
         this.updateComponentHeights();

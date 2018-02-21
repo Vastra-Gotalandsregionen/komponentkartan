@@ -47,7 +47,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     expanded: boolean;
     control: AbstractControl;
-    preventCollapse: boolean;
 
     displayedYear: ICalendarYear = {} as ICalendarYear;
     previousYear: ICalendarYear;
@@ -88,6 +87,9 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     writeValue(value: any): void {
         this.selectedDate = value;
+        if (!value) {
+            this.years.forEach(y => y.months.forEach(m => m.selected = false));
+        }
     }
 
     registerOnChange(func: any): void {
@@ -242,13 +244,7 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     }
 
     private toggleCalendar(event: Event) {
-        if (this.preventCollapse) {
-            event.cancelBubble = true;
-            event.returnValue = false;
-            this.preventCollapse = false;
-        } else {
-            this.toggleExpand(event);
-        }
+        this.toggleExpand(event);
 
     }
 

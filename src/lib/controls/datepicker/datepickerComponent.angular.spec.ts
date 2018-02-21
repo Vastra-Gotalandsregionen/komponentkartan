@@ -16,7 +16,6 @@ describe('[DatepickerComponent(Angular)]', () => {
     let component: DatepickerComponent;
     let fixture: ComponentFixture<DatepickerComponent>;
     let rootElement: DebugElement;
-    let datepicker: DebugElement;
 
     beforeEach((done) => {
         TestBed.resetTestEnvironment();
@@ -37,7 +36,7 @@ describe('[DatepickerComponent(Angular)]', () => {
             fixture = TestBed.createComponent(DatepickerComponent);
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
-            datepicker = rootElement.query(By.css('.datepicker'));
+            //   datepicker = rootElement.query(By.css('.datepicker'));
             fixture.detectChanges();
 
             done();
@@ -50,68 +49,80 @@ describe('[DatepickerComponent(Angular)]', () => {
             component.ngOnInit();
         });
 
-        describe('and the datepicker is clicked', () => {
+        it('the calendar is not visible', () => {
+            const datepickerElement = fixture.debugElement.query(By.css('datepicker--open'));
+            expect(datepickerElement).toBe(null);
+        });
 
+        describe('and the datepicker is clicked', () => {
             beforeEach(() => {
-                component.onDatePickerClick({ cancelBubble: true } as Event);
+
+                const datepickerElement = fixture.debugElement.query(By.css('.datepicker'));
+                datepickerElement.triggerEventHandler('mousedown', { cancelBubble: false } as Event);
+                fixture.detectChanges();
+
             });
             it('the calendar is visible', () => {
-                expect(component.expanded).toBe(true);
+                const datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
+                expect(datepickerElement).not.toBe(null);
             });
 
             describe('and the datepicker is closed', () => {
                 beforeEach(() => {
                     const datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
-                    datepickerElement.triggerEventHandler('click', event);
+                    datepickerElement.triggerEventHandler('mousedown', event);
+                    fixture.detectChanges();
+
                 });
                 it('the calendar is not visible', () => {
-                    expect(component.expanded).toBe(false);
-                    expect(fixture.debugElement.query(By.css('.datepicker__calendar'))).toBeNull();
+                    const datepickerElement = fixture.debugElement.query(By.css('datepicker--open'));
+                    expect(datepickerElement).toBe(null);
                 });
             });
+        });
 
-            describe('and the datepicker is focusout', () => {
-                beforeEach(() => {
-                    spyOn(component, 'onLeave').and.callThrough();
-                    const datepickerElement = fixture.debugElement.query(By.css('.datepicker--open'));
-                    datepickerElement.triggerEventHandler('focusout', event);
-                });
-                it('onLeave is has been called', () => {
-                    expect(component.onLeave).toHaveBeenCalled();
-                });
+        describe('and the datepicker is focusout', () => {
+            beforeEach(() => {
+                spyOn(component, 'onLeave').and.callThrough();
+                const datepickerElement = fixture.debugElement.query(By.css('.datepicker'));
+                datepickerElement.triggerEventHandler('focusout', event);
+            });
+            it('onLeave is has been called', () => {
+                expect(component.onLeave).toHaveBeenCalled();
+            });
+        });
+
+        describe('calender is opened and in focus', () => {
+            beforeEach(() => {
+                event = { cancelBubble: false } as Event;
+
+                component.control = new FormControl(null, { validators: [Validators.required], updateOn: 'blur' });
+                component.ngOnInit();
+                component.onEnter();
+                fixture.detectChanges();
+            });
+            it('validation-error--editing is active', () => {
+                expect(rootElement.classes['validation-error--editing']).toEqual(true);
             });
 
-            describe('calender is opened and in focus', () => {
+            describe('date has been selected', () => {
                 beforeEach(() => {
                     event = { cancelBubble: false } as Event;
 
                     component.control = new FormControl(null, { validators: [Validators.required], updateOn: 'blur' });
                     component.ngOnInit();
                     component.onEnter();
+                    component.onSelectedDate(event, 1, 1, 1);
                     fixture.detectChanges();
                 });
-                it('validation-error--editing is active', () => {
-                    expect(rootElement.classes['validation-error--editing']).toEqual(true);
-                });
-
-                describe('date has been selected', () => {
-                    beforeEach(() => {
-                        event = { cancelBubble: false } as Event;
-
-                        component.control = new FormControl(null, { validators: [Validators.required], updateOn: 'blur' });
-                        component.ngOnInit();
-                        component.onEnter();
-                        component.onSelectedDate(event, 1, 1, 1);
-                        fixture.detectChanges();
-                    });
-                    it('validation-error--editing is no longer active', () => {
-                        expect(rootElement.classes['validation-error--editing']).toEqual(false);
-                    });
+                it('validation-error--editing is no longer active', () => {
+                    expect(rootElement.classes['validation-error--editing']).toEqual(false);
                 });
             });
-
         });
+
     });
+
 
     describe('When initialized with empty Selected date and readonly-mode', () => {
         beforeEach(() => {
