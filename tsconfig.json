@@ -15,7 +15,7 @@
       "es2017",
       "dom"
     ],
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "@komponentkartan": [
         "lib/index.ts"

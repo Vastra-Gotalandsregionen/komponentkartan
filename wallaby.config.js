@@ -59,14 +59,16 @@ module.exports = function (wallaby) {
 
     resolve: {
       extensions: ['.js', '.ts'],
-      alias: {
-        '@komponentkartan': 'komponentkartan'
-      },
       modules: [
         path.join(wallaby.projectCacheDir, 'src/app'),
+        path.join(wallaby.projectCacheDir, 'src/lib/'),
         path.join(wallaby.projectCacheDir, 'src'),
         'node_modules'
-      ]
+      ],
+      alias: {
+        '@komponentkartan': 'index',
+        '@komponentkartan-module': 'komponentkartan.module'
+      },
     },
     node: {
       fs: 'empty',
@@ -86,10 +88,6 @@ module.exports = function (wallaby) {
       },
       {
         pattern: 'src/**/*.d.ts',
-        ignore: true
-      },
-      {
-        pattern: 'src/**/index.ts',
         ignore: true
       },
       {
