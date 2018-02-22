@@ -12,10 +12,11 @@ export class ModalService {
     modalOpened$ = this.modalOpenedSource.asObservable();
 
     openDialog(title: string,
-        message: string,
+        elementId: string,
         button1Config: ModalButtonConfiguration,
         button2Config?: ModalButtonConfiguration,
-        button3Config?: ModalButtonConfiguration) {
+        button3Config?: ModalButtonConfiguration,
+        ) {
         let buttonConfigs = [button1Config];
         if (button2Config && button3Config) {
             buttonConfigs = [button1Config, button2Config, button3Config];
@@ -23,23 +24,23 @@ export class ModalService {
             buttonConfigs = [button1Config, button2Config];
         }
 
-        this.modalOpenedSource.next(new ModalConfiguration(title, message, buttonConfigs));
+        this.modalOpenedSource.next(new ModalConfiguration(title, elementId, buttonConfigs));
     }
 
-    openOneButtonDialog(title: string, message: string, buttonText: string, callback: () => void) {
-        this.openDialog(title, message, new ModalButtonConfiguration(buttonText, callback));
+    openOneButtonDialog(title: string, elementId:string, buttonText: string, callback: () => void) {
+        this.openDialog(title, elementId, new ModalButtonConfiguration(buttonText, callback));
     }
 
-    openSaveDontSaveCancelDialog(title: string, message: string,
+    openSaveDontSaveCancelDialog(title: string, elementId: string,
         saveCallback: () => void, dontSaveCallback: () => void, cancelCallback: () => void) {
-        this.openDialog(title, message, new ModalButtonConfiguration('Spara', saveCallback),
+        this.openDialog(title, elementId, new ModalButtonConfiguration('Spara', saveCallback),
             new ModalButtonConfiguration('Spara inte', dontSaveCallback), new ModalButtonConfiguration('Avbryt', cancelCallback, true));
 
     }
 }
 
 export class ModalConfiguration {
-    constructor(public title: string, public message: string, public buttons: ModalButtonConfiguration[]) {
+    constructor(public title: string, public elementId: string, public buttons: ModalButtonConfiguration[]) {
     }
 }
 

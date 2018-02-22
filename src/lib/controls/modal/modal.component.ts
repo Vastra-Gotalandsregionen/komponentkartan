@@ -13,7 +13,7 @@ import { ButtonComponent } from '../button/button.component';
 
 export class ModalPlaceholderComponent implements AfterViewChecked {
     isOpen: boolean;
-    message: string;
+    elementId: string;
     title: string;
     buttons: ModalButtonConfiguration[];
     modalInitialized: boolean;
@@ -34,7 +34,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
         this.isOpen = false;
         this.modalService.modalOpened$.subscribe(args => {
             this.modalInitialized = false;
-            this.message = args.message;
+            this.elementId = args.elementId;
             this.title = args.title;
             this.buttons = args.buttons;
             this.openModal();
@@ -71,11 +71,13 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
     private openModal() {
         this.isOpen = true;
         $('body').addClass('modal--open');
+        $('#'+ this.elementId).addClass('vgr-modal--open');
     }
 
     private closeModal() {
         this.isOpen = false;
         $('body').removeClass('modal--open');
+        $('#'+ this.elementId).removeClass('vgr-modal--open');
 
     }
 

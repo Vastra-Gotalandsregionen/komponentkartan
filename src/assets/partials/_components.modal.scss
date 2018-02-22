@@ -8,12 +8,12 @@
   height: 100%;
   overflow: auto;
   background-color: $modal-background-color;
-}
 
-.vgr-modal--open {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .vgr-modal--open & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .modal-content {
