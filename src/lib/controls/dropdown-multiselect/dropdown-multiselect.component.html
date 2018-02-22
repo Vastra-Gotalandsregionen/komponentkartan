@@ -10,14 +10,14 @@
           <!-- om det finns en showAllItem -->
           <li *ngIf="!filterActive" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : selectAllItemsMarked, 'dropdown-item--selected' : selectAllItemsChecked }">
             <!-- om listan inte är filtrerad -->
-            <a (mousedown)="onItemClicked(selectAllItem)" title="{{selectAllItemText}}">
+            <a (mousedown)="onItemClicked(selectAllItem)" title="{{selectAllItemText}}" (mouseenter)="selectAllItemsMarked = true" (mouseleave)="selectAllItemsMarked = false">
               <vgr-checkbox class="checkbox--inline" [checked]="selectAllItemsChecked" (checkedChanged)="selectAllItems($event)" [label]="selectAllItemText"></vgr-checkbox>
             </a>
           </li>
 
-          <li *ngIf="filterActive" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : showAllItem.marked}">
+          <li *ngIf="filterActive" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : selectAllItemsMarked}">
             <!-- om listan inte är filtrerad -->
-            <a (mousedown)="clearFilter()" title="{{showAllItemText}}" (mouseenter)="onMouseEnter(showAllItem)" (mouseleave)="onMouseLeave(showAllItem)">{{showAllItemText}}
+            <a (mousedown)="clearFilter()" title="{{showAllItemText}}" (mouseenter)="selectAllItemsMarked = true" (mouseleave)="selectAllItemsMarked = false">{{showAllItemText}}
             </a>
           </li>
 
