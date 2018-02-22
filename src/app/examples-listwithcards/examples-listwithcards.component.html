@@ -5,7 +5,7 @@
       <h3>Filtrera enheter</h3>
       <div class="row-layout row-layout--equal-height">
         <vgr-filter-textbox (valueChanged)="filtertext = $event"></vgr-filter-textbox>
-        <vgr-button (click)="showActionPanel = true">Lägg till ny enhet</vgr-button>
+        <vgr-button (click)="openActionPanel()">Lägg till ny enhet</vgr-button>
       </div>
       <vgr-checkbox (checkedChanged)="includeInactiveUnits = $event" [checked]="includeInactiveUnits" [label]="'Inkludera stängda enheter'"></vgr-checkbox>
     </div>
@@ -156,8 +156,9 @@
             </vgr-title-value>
           </vgr-title-value-layout>
         </vgr-card-section>
-        <form [formGroup]="newUnitForm">
-          <vgr-card-section [title]=" 'Ersättningsgrundande information'" [expanded]="true" [readonly]="newCardLocked">
+
+        <vgr-card-section [title]=" 'Ersättningsgrundande information'" [expanded]="true" [readonly]="newCardLocked">
+          <form [formGroup]="newUnitForm">
             <vgr-title-value-layout>
               <vgr-title-value [title]=" 'Medverkan i familjecentral'" [slim]="newCardLocked">
                 <vgr-dropdown formControlName="medverkanIFamiljecentral" [items]="exempelMedverkanIfamiljecentral" [showValidation]="newUnitForm.controls.medverkanIFamiljecentral.touched || submitted"
@@ -167,8 +168,9 @@
                 <vgr-input formControlName="regionsovergripandegrupper" [readonly]="newCardLocked"></vgr-input>
               </vgr-title-value>
             </vgr-title-value-layout>
-          </vgr-card-section>
-        </form>
+          </form>
+        </vgr-card-section>
+
       </vgr-card-column>
     </vgr-card>
   </vgr-action-panel>
@@ -183,7 +185,7 @@
           <vgr-list-column-header text="Nämnd" width="5" sortKey="namnd"></vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of exampleData | unitfilter:filtertext: includeInactiveUnits" [notification]="row.notification"
-          [notificationPermanent]="row.notificationPermanent" (expandedChanged)="onExpandedChanged($event,row)">
+          (expandedChanged)="onExpandedChanged($event,row)">
           <vgr-list-item-header>
             <vgr-list-column [text]="row.previewObject.enhet" width="5"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.hsaid" width="5"></vgr-list-column>
@@ -324,7 +326,6 @@
                   </vgr-card-section>
                   <vgr-card-section [title]=" 'Ersättningsgrundande information'" [expanded]="false" [readonly]="cardLocked">
                     <form [formGroup]="editUnitForm">
-
                       <vgr-title-value-layout>
                         <vgr-title-value [title]=" 'Medverkan i familjecentral'" [slim]="cardLocked">
                           <vgr-dropdown formControlName="medverkanIFamiljecentral" [items]="exempelMedverkanIfamiljecentral" [showValidation]="editUnitForm.controls.medverkanIFamiljecentral.touched || submitted"
@@ -335,7 +336,6 @@
                         </vgr-title-value>
                       </vgr-title-value-layout>
                     </form>
-
                   </vgr-card-section>
                 </vgr-card-column>
               </vgr-card>

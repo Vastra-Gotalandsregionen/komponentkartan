@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+
 import { ColoursComponent } from './colours.component';
 
 describe('ColoursComponent', () => {
@@ -8,10 +8,9 @@ describe('ColoursComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ColoursComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [ ColoursComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {

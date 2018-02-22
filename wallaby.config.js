@@ -66,8 +66,8 @@ module.exports = function (wallaby) {
         'node_modules'
       ],
       alias: {
-        '@komponentkartan': 'index',
-        '@komponentkartan-module': 'komponentkartan.module'
+        'vgr-komponentkartan': 'index',
+        'vgr-komponentkartan': 'komponentkartan.module'
       },
     },
     node: {

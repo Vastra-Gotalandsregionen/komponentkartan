@@ -17,7 +17,7 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@komponentkartan": [
+      "vgr-komponentkartan": [
         "lib/index.ts"
       ],
       "@komponentkartan-module": [

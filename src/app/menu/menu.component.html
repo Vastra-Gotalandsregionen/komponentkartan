@@ -1,163 +1,198 @@
-<app-component-docs [componentName]="'menu'">
-    <div class="docs__overview">
-        <p>
-            Komponentkartan använder en vänstermeny, som skapas med
-            <code>&lt;vgr-sidebar-menu&gt;</code>. Vänstermenyn består av en eller flera menyer, som i sin tur innehåller menyalternativ med eller utan underalternativ. Det är även möjligt att lägga ut avdelare mellan menyalternativ för att skapa sammanhang.
-        </p>
-        <div class="column-layout">
-            <div class="row-layout" style="height:500px; overflow:hidden">
-                <div class="half">
-                    <h2>Singel-meny</h2>
-                    <p>En applikation med ett system har en meny som täcker hela ytan vertikalt.</p>
-                    <img class="screenshot" src="/assets/images/sidebar-menu.single.png">
-                </div>
-                <div class="half">
-                    <h2>Multi-meny</h2>
-                    <p>En applikation med flera system innehåller flera menyer som kan öppnas och stängas.</p>
-                    <img class="screenshot" src="/assets/images/sidebar-menu.expandmenu.gif">
-                </div>
+<vgr-page class="no-sort">
+  <vgr-page-header [title]="'List'">
+  </vgr-page-header>
+  <vgr-page-body>
+    <vgr-page-block>
+      <vgr-list [allowMultipleExpandedItems]="true">
+        <vgr-list-header>
+          <vgr-list-column-header [text]="'Dokumentation för menu'" [width]="20"></vgr-list-column-header>
+        </vgr-list-header>
+        <vgr-list-item [expanded]="true">
+          <vgr-list-item-header>
+            <h4>Översikt</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <div class="content-overview">
+              <p>
+                <code>&lt;vgr-menu&gt;</code> är en meny bestående av
+                <code>&lt;vgr-menu-item&gt;</code> och
+                <code>&lt;vgr-submenu&gt;</code>.
+                <br> Menyval kan grupperas med hjälp av
+                <code>&lt;vgr-menu-separator&gt;</code>.
+                <br> En
+                <code>&lt;vgr-menu&gt;</code> kan placeras i en
+                <code>&lt;vgr-sidebar-menu&gt;</code> för att placeras i en fixed position till vänster i applikationen.
+              </p>
+              <br>
+              <p> Förändras med tema:
+                <strong>Ja</strong>
+              </p>
             </div>
-            <div class="row-layout" style="height:500px; overflow:hidden;margin-top:30px;">
-                <div class="half">
-                    <h2>Avdelare</h2>
-                    <p>För att indikera att menyalternativ är orelaterade kan en avdelare läggas in</p>
-                    <img class="screenshot" src="/assets/images/sidebar-menu.separator.png">
-                </div>
-                <div class="half">
-                    <h2>Underalternativ</h2>
-                    <p>Ett menyalternativ kan ha underalternativ som kan visas och döljas</p>
-                    <img class="screenshot" src="/assets/images/sidebar-menu.expandchild.gif">
-                </div>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false">
+          <vgr-list-item-header>
+            <h4>Exempel</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <div class="row-layout">
+              <div class="menu-container">
+                <vgr-menu title="Meny">
+                  <vgr-menu-item link="#" text="Menu item 1"></vgr-menu-item>
+                  <vgr-menu-item link="#" text="Menu item 2"></vgr-menu-item>
+                  <vgr-menu-separator></vgr-menu-separator>
+                  <vgr-menu-item link="#" text="Menu item 3 med extra långt namn"></vgr-menu-item>
+                  <vgr-menu-item link="/menu" text="Menu item 4" notification="422" notificationTooltip="Detta är en tooltip" notificationColor="default"></vgr-menu-item>
+                  <vgr-menu-item link="#" text="Menu item 5" [disabled]="!browserIsIE" disabledTooltip="Endast tillgängligt i IE"></vgr-menu-item>
+                  <vgr-menu-item link="#" text="Menu item 6" collapsable="true"></vgr-menu-item>
+                  <vgr-menu-item link="#" text="Menu item 7" disabled="true" disabledTooltip="Alltid inaktivt" notification="12" notificationTooltip="Detta är ytterligare en tooltip"
+                    notificationColor="error"></vgr-menu-item>
+                  <vgr-menu-separator></vgr-menu-separator>
+                  <vgr-submenu text="Submenu">
+                    <vgr-menu-item link="#" text="Sub menu item 1"></vgr-menu-item>
+                    <vgr-menu-item link="#" text=" Sub menu item 2 "></vgr-menu-item>
+                    <vgr-menu-item link="# " text="Sub menu item 3 "></vgr-menu-item>
+                  </vgr-submenu>
+                </vgr-menu>
+              </div>
+              <div class="code-container">
+                <h3>HTML</h3>
+                <section [innerHTML]="htmlMenuMarkup" highlight-js-content=".highlight"></section>
+                <h3>Typescript</h3>
+                <section [innerHTML]="typeScriptMenuMarkup" highlight-js-content=".highlight"></section>
+              </div>
             </div>
-            <h2>Tema</h2>
-            <p>
-                Varje meny har ett tema, baserat på det aktuella systemets färg. För applikationer med flera system, använd property
-                <i>theme</i> på
-                <code>&lt;vgr-menu&gt;</code>. För applikationer med ett system styrs tema av det övergripande temat som sätts "längst ut" i applikationen. Se
-                <a href="/theming">Temahantering</a>
-            </p>
-        </div>
-    </div>
-    <div class="docs__examples">
-        <div>
-            <div class="column-layout">
-                <div class="row-layout">
-                    <div style="width: 400px">
-                        <h2>Singel meny</h2>
-                        <img class="screenshot_example" src="/assets/images/sidebar-menu.example-for-code.single.png">
-                    </div>
-                    <div>
-                        <h2>Markup</h2>
-                        <section [innerHTML]="exampleCodeSimpleMenyMarkup" highlight-js-content=".highlight"></section>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div>
-            <div class="column-layout">
-                <div class="row-layout">
-                    <div style="width: 400px">
-                        <h2>Meny med undernivå</h2>
-                        <img class="screenshot_example" src="/assets/images/sidebar-menu-with-childern.example-for-code.single.png">
-                    </div>
-                    <div>
-                        <h2>Markup</h2>
-                        <section [innerHTML]="exampleCodeSimpleMenyWithChildrenMarkup" highlight-js-content=".highlight"></section>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div>
-            <div class="column-layout">
-                <div class="row-layout">
-                    <div style="width: 400px">
-                        <h2>Meny med avdelare/gruppering</h2>
-                        <img class="screenshot_example_large" src="/assets/images/sidebar-menu-with-groups.example-for-code.single.png">
-                    </div>
-                    <div>
-                        <h2>Markup</h2>
-                        <section [innerHTML]="exampleCodeSimpleMenyWithGroupsMarkup" highlight-js-content=".highlight"></section>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="docs__api">
-        <p><code>&lt;vgr-sidebar-menu&gt;</code> har en property som behöver sättas, <code>[menus]</code>. Menyer är en lista av <code>IMenu</code>, och är tänkt att hämtas från servern, som då kan bestämma vilka menyalternativ en användare får i systemet.
-            När [menus] sätts behandlas listan internt av komponenten som sätter ytterligare properties på den. Nedan listas de properties som är aktuella att fylla i för användande system.</p>
-
-        <br>
-        <h3>IMenu</h3>
-        <table class="property-table" style="margin-bottom: 20px">
-            <tr>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-menu</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
                 <th>Namn</th>
                 <th>Beskrivning</th>
                 <th>Exempel</th>
-            </tr>
-            <tr>
-                <td>title: string</td>
-                <td>menyns rubrik</td>
-                <td>title: 'System'</td>
-            </tr>
-            <tr>
-                <td>groups: IMenuGroup[]</td>
-                <td>Grupperade menyalternativ, separeras med vertikal linje</td>
-                <td></td>
-            </tr>
-        </table>
-
-        <h3>IMenuGroup</h3>
-        <table class="property-table" style="margin-bottom: 20px">
-            <tr>
+              </tr>
+              <tr>
+                <td>title : string</td>
+                <td>Sätter menyns titel.</td>
+                <td>[title]="Meny1"</td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-menu-item</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
                 <th>Namn</th>
                 <th>Beskrivning</th>
                 <th>Exempel</th>
-            </tr>
-            <tr>
-                <td>order: string</td>
-                <td>Soteringsordning för gruppen. Grupper visas efter order i alfanumerisk sortering</td>
-                <td>order: '1'</td>
-            </tr>
-            <tr>
-                <td>menuItems: IMenuItem[]</td>
-                <td>Gruppens menyalternativ</td>
-                <td></td>
-            </tr>
-        </table>
-
-        <h3>IMenuItem</h3>
-        <table class="property-table" style="margin-bottom: 20px">
-            <tr>
+              </tr>
+              <tr>
+                <td>text : string</td>
+                <td>Sätter namnet på menyvalet som kommer visas i menyn.</td>
+                <td>[text]="Menu item 1"</td>
+              </tr>
+              <tr>
+                <td>link : string</td>
+                <td>Sätter länken till menynalternativet.</td>
+                <td>[link]="/start"</td>
+              </tr>
+              <tr>
+                <td>disabled : boolean</td>
+                <td>Sätter om menyvalet ska vara inaktivt. Default är false.</td>
+                <td>[disabled]="true"</td>
+              </tr>
+              <tr>
+                <td>disabledTooltip : string</td>
+                <td>Sätter tooltip som visas vid inaktivt menyval.</td>
+                <td>[disabledTooltip]="Detta alternativ är inte tillgängligt i denna webbläsare"</td>
+              </tr>
+              <tr>
+                <td>notification : string</td>
+                <td>Sätter notifieringstext. Om texten är längre än 2 tecken kommer den bytas ut mot '!'.</td>
+                <td>[notification]="66"</td>
+              </tr>
+              <tr>
+                <td>notificationColor : string</td>
+                <td>Sätter färgen på notifieringen. Tillgängliga färger: red/green/blue/default/error/success</td>
+                <td>[notificationColor]="green"</td>
+              </tr>
+              <tr>
+                <td>notificationTooltip : string</td>
+                <td>Sätter tooltip som visas för notifieringen.</td>
+                <td>[notificationTooltip]="Detta är en tooltip"</td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-menu-separator</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
+                <th>Beskrivning</th>
+              </tr>
+              <tr>
+                <td>
+                  Avdelare i form av en linje som kan användas för att separera menyval i en meny. Har inga properties.
+                </td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-submenu</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
                 <th>Namn</th>
                 <th>Beskrivning</th>
                 <th>Exempel</th>
-            </tr>
-            <tr>
-                <td>title: string</td>
-                <td>Menyalternativets rubrik</td>
-                <td>title: 'Min sida'</td>
-            </tr>
-            <tr>
-                <td>url: string</td>
-                <td>Länk att följa vid klick på länken.</td>
-                <td>url: "/my-route"</td>
-            </tr>
-            <tr>
-                <td>order: string</td>
-                <td>Menyalternativets ordning, alternativets. Sorteras alfanumeriskt.</td>
-                <td>order: "2"</td>
-            </tr>
-            <tr>
-                <td>menuItems: IMenuItem[]</td>
-                <td>Eventuella underalternativ för menyalternativet.
-                    <strong>OBS!</strong> endast en undernivå är möjlig</td>
-                <td></td>
-            </tr>
-        </table>
-    </div>
-    <div class="docs__wcag">
-        <i>Under utveckling</i>
-    </div>
-</app-component-docs>
+              </tr>
+              <tr>
+                <td>text : string</td>
+                <td>Sätter namnet på undermenyn som kommer visas i menyn.</td>
+                <td>[text]="Sub menu 1"</td>
+              </tr>
+              <tr>
+                <td>expanded : boolean</td>
+                <td>Sätter huruvida undermenygruppen ska vara expanderad eller ej. Obs! Om ett menyval i undermenyn är aktivt
+                  kommer den att expandera automatiskt.</td>
+                <td>[expanded]="true"</td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-sidebar-menu</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
+                <th>Beskrivning</th>
+              </tr>
+              <tr>
+                <td>
+                  Container som placerar menyn till fixed till vänster i applikationen. Lägger även till en scrollbar om menyn blir högre än
+                  fönsterhöjden.
+                </td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+      </vgr-list>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>

@@ -21,6 +21,11 @@
       "./assets/komponentkartan.scss",
       "styles.scss"
     ],
+    "stylePreprocessorOptions": {
+      "includePaths": [
+        "./assets/"
+      ]
+    },
     "scripts": ["../node_modules/jquery/dist/jquery.min.js", "./lib/scripts/_objects.back-to-top.js"],
     "environmentSource": "environments/environment.ts",
     "environments": {

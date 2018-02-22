@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+
 import { DropdownmultiselectComponent } from './dropdownmultiselect.component';
 
 describe('DropdownmultiselectComponent', () => {
@@ -8,10 +8,9 @@ describe('DropdownmultiselectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DropdownmultiselectComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [ DropdownmultiselectComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
