@@ -59,6 +59,9 @@ module.exports = function (wallaby) {
 
     resolve: {
       extensions: ['.js', '.ts'],
+      alias: {
+        '@komponentkartan': 'komponentkartan'
+      },
       modules: [
         path.join(wallaby.projectCacheDir, 'src/app'),
         path.join(wallaby.projectCacheDir, 'src'),
