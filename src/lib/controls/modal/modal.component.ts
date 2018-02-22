@@ -35,7 +35,6 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
         this.modalService.modalOpened$.subscribe(args => {
             this.modalInitialized = false;
             this.elementId = args.elementId;
-            this.title = args.title;
             this.buttons = args.buttons;
             this.openModal();
 

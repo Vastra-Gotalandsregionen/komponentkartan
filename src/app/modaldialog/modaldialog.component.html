@@ -6,7 +6,7 @@
     </p>
 
     <div style="margin-top: 20px;height:35px;">
-      <vgr-button (click)="showOneButtonModalOverview()">Visa dialog!</vgr-button>
+      <vgr-button (click)="showOneButtonModalOverview()">Visa dialog! modal2</vgr-button>
     </div>
     <br>
     <p> Förändras med tema:
@@ -16,19 +16,36 @@
   <div class="docs__examples">
     <div class="row-layout">
       <div>
-        <vgr-button (click)="showOneButtonModal()">En knapp</vgr-button>
+        <vgr-button (click)="showOneButtonModal()">En knapp modal1</vgr-button>
       </div>
       <div>
-        <vgr-button (click)="showTwoButtonModal()">Två knappar med lång text</vgr-button>
+        <vgr-button (click)="showTwoButtonModal()">Två knappar med lång text modal3</vgr-button>
       </div>
       <div>
-        <vgr-button (click)="showThreeButtonModal()">Tre knappar</vgr-button>
+        <vgr-button (click)="showThreeButtonModal()">Tre knappar modal4</vgr-button>
       </div>
       <div class="column-layout">
 
-        <vgr-button (click)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt</vgr-button>
+        <vgr-button (click)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt modal4</vgr-button>
         Modal där avbryt är defaultknapp
       </div>
+    </div>
+    <div class="row-layout">
+        <div>
+          <vgr-button (click)="showChooseVardvalWithTextModal()">Vårdval 1</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="showChooseVardvalWithoutTextModal()">Vårdval 2</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="showCommentAnswerWithTextModal()">Kommentar 1</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="showCommentAnswerWithoutTextModal()">Kommentar 2</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="showCommentModal()">Kommentar 3</vgr-button>
+        </div>
     </div>
     <div style="margin-top: 20px">
       <span>Du svarade:</span>
