@@ -78,22 +78,33 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private _notification: RowNotification;
 
-    private notificationPermanent: RowNotification;
+    @Input() set notification(value: RowNotification) {
+        console.log('notification', value);
+        if (value) {
+            if (value.type === NotificationType.Permanent) {
+                this._notification = value;
+            }
+        }
+    }
 
-    set notification(value: RowNotification) {
+    get notification(): RowNotification {
+        return this._notification;
+    }
 
+    set eventNotification(value: RowNotification) {
+        console.log('eventNotification', value);
 
         if (value) {
             if (value.type === NotificationType.ShowOnCollapse) {
                 this.collapse(value.type);
-                this._notification = value;
+                this.notification = value;
                 this.changeDetector.detectChanges();
             } else if (value.type === NotificationType.ShowOnRemove) {
                 this.collapse(value.type);
-                this._notification = value;
+                this.notification = value;
                 this.changeDetector.detectChanges();
             } else if (value.type === NotificationType.Permanent) {
-                this.notificationPermanent = value;
+                this.notification = value;
                 this.showNotification();
             }
         } else {
@@ -102,8 +113,8 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
         this.notificationChanged.emit(value);
     }
-    get notification(): RowNotification {
-        return this._notification;
+    get eventNotification(): RowNotification {
+        return this.notification;
     }
 
     @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
@@ -122,7 +133,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     ngOnInit() {
-        if (this.notificationPermanent && this.notification.type === NotificationType.Permanent) {
+        if (this.notification && this.notification.type === NotificationType.Permanent) {
             this.showNotification();
         }
     }
@@ -185,13 +196,13 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private processShowOnCollapseNotification() {
 
-        if (!this.notification) {
+        if (!this.eventNotification) {
             return;
         }
 
         this.notificationVisible = true;
 
-        if (this.notification.done) {
+        if (this.eventNotification.done) {
             this.notificationVisible = false;
         }
 
@@ -201,18 +212,18 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this.expandedChanged.emit(this.expanded);
 
             setTimeout(() => {
-                if (this.notificationPermanent) {
-                    this.notification = this.notificationPermanent;
+                if (this.notification) {
+                    this.eventNotification = this.notification;
                     this.changeDetector.detectChanges();
                     this.notificationVisible = true;
                     this.notInteractable = false;
                     return;
                 }
 
-                if (this.notification !== this.notificationPermanent) {
+                if (this.eventNotification !== this.notification) {
                     this.notificationVisible = false;
                     this.notInteractable = false;
-                    this.notification.done = true;
+                    this.eventNotification.done = true;
                     return;
                 }
             }, 2000);
@@ -227,7 +238,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
-                this.notification.done = true;
+                this.eventNotification.done = true;
                 this.isDeleted = true;
                 this.notInteractable = false;
                 this.notificationVisible = false;
