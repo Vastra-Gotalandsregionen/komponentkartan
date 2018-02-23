@@ -14,7 +14,7 @@ export class StartComponent implements OnInit {
   constructor() {
     const { dependencies: appVersion } = require('../../../package.json');
     this.currentVersion = appVersion['vgr-komponentkartan'];
-    this.currentVersion = this.currentVersion.replace('^', '');
+    this.currentVersion = this.currentVersion ? this.currentVersion.replace('^', '') : this.currentVersion;
 
     const { version: angularVersion } = require('../../../node_modules/@angular/core/package.json');
     this.angularVersion = angularVersion;
