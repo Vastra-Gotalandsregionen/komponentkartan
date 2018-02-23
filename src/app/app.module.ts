@@ -53,6 +53,7 @@ import { HtmlEncodeService } from './html-encode.service';
 import { SizesComponent } from './sizes/sizes.component';
 import { MenuComponent } from './menu/menu.component';
 import { ExpandableDivComponent } from './expandable-div/expandable-div.component';
+import { AppModalComponent } from './modals/app-modal.component';
 
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
@@ -104,7 +105,8 @@ import { IconsComponent } from './icons/icons.component';
         ListexamplewithexpandabledivComponent,
         ExamplesListwithcardsComponent,
         IconsComponent,
-        UnitFilterPipe
+        UnitFilterPipe,
+        AppModalComponent
     ],
     exports: [UnitFilterPipe],
     providers: [

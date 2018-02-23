@@ -1,6 +1,6 @@
 
 import {
-    Component, ViewContainerRef, OnInit, ViewChildren, AfterViewChecked, QueryList, ElementRef
+    Component, ViewContainerRef, OnInit, AfterContentInit, QueryList, ElementRef, ContentChildren
 } from '@angular/core';
 import { ModalService, ModalConfiguration, ModalButtonConfiguration } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
@@ -11,7 +11,7 @@ import { ButtonComponent } from '../button/button.component';
     templateUrl: './modal.component.html'
 })
 
-export class ModalPlaceholderComponent implements AfterViewChecked {
+export class ModalPlaceholderComponent implements AfterContentInit {
     isOpen: boolean;
     elementId: string;
     title: string;
@@ -26,7 +26,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
     focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
 
 
-    @ViewChildren(ButtonComponent, { read: ElementRef }) buttonComponents: QueryList<ElementRef>;
+    @ContentChildren(ButtonComponent, { read: ElementRef }) buttonComponents: QueryList<ElementRef>;
     constructor(
         private modalService: ModalService, private elementRef: ElementRef) {
 
@@ -41,7 +41,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
         });
     }
 
-    ngAfterViewChecked() {
+    ngAfterContentInit() {
         if (!this.modalInitialized && this.isOpen && this.buttonComponents && this.buttonComponents.length > 0) {
             this.initFocusableElements();
             this.modalInitialized = true;

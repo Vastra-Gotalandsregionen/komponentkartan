@@ -50,6 +50,7 @@ export { ExpandableDivHeaderComponent } from './controls/expandableDiv/expandabl
 export { ExpandableDivContentComponent } from './controls/expandableDiv/expandableDiv-content.component';
 export { ModalContentComponent } from './controls/modal/modal-content.component';
 export { ModalHeaderComponent } from './controls/modal/modal-header.component';
+export { ModalFooterComponent } from './controls/modal/modal-footer.component';
 
 
 
