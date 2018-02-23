@@ -119,7 +119,8 @@
       true,
       "element",
       "vgr",
-      "kebab-case"
+      "kebab-case",
+      "app"
     ],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,

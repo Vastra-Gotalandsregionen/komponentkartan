@@ -2,7 +2,7 @@
 import {
     Component, ViewContainerRef, OnInit, AfterViewChecked, QueryList, ElementRef, ContentChildren
 } from '@angular/core';
-import { ModalService, ModalConfiguration } from '../../services/modalService';
+import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -30,13 +30,14 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
         private modalService: ModalService, private elementRef: ElementRef) {
 
         this.isOpen = false;
-        this.modalService.modalOpened$.subscribe(args => {
+        this.modalService.modalOpened$.subscribe(elementId => {
             this.modalInitialized = false;
-            this.elementId = args.elementId;
+            this.elementId = elementId;
             this.openModal();
         });
 
-        this.modalService.modalClosed$.subscribe(args => {
+        this.modalService.modalClosed$.subscribe(elementId => {
+            this.elementId = elementId;
             this.closeModal();
         });
     }
@@ -70,13 +71,13 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
     private openModal() {
         this.isOpen = true;
         $('body').addClass('modal--open');
-        $('#'+ this.elementId).addClass('vgr-modal--open');
+        $(`#${this.elementId}`).addClass('vgr-modal--open');
     }
 
     private closeModal() {
         this.isOpen = false;
         $('body').removeClass('modal--open');
-        $('#'+ this.elementId).removeClass('vgr-modal--open');
+        $(`#${this.elementId}`).removeClass('vgr-modal--open');
 
     }
 

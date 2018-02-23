@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 import { ModalPlaceholderComponent } from '../../controls/modal/modal.component';
 import { ButtonComponent } from '../../controls/button/button.component';
-import { ModalService, ModalConfiguration } from '../../services/modalService';
+import { ModalService } from '../../services/modalService';
 
 describe('ModalPlaceholderComponent', () => {
     let component: ModalPlaceholderComponent;

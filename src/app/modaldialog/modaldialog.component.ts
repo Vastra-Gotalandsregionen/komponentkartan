@@ -31,7 +31,7 @@ export class ModaldialogComponent implements OnInit {
   }
 
   showSaveDontSaveCancelModal() {
-    this.modalService.openSaveDontSaveCancelDialog('modal4');
+    this.modalService.openDialog('modal4');
   }
 
   showChooseVardvalWithTextModal() {

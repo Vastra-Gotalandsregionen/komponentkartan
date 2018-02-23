@@ -4,15 +4,15 @@ import { ModalService } from '@komponentkartan';
 @Component({
   selector: 'app-modals',
   moduleId: module.id,
-  templateUrl: "./app-modal.component.html"
+  templateUrl: './app-modal.component.html'
 })
 
 export class AppModalComponent {
   constructor(private modalService: ModalService) {
   }
-  
-  closeModal1(): void{
-    this.modalService.closeDialog();
+
+  closeModal(elementId: string): void {
+    this.modalService.closeDialog(elementId);
   }
 }
 

@@ -1,9 +1,9 @@
-import { ModalService, ModalConfiguration } from './modalService';
+import { ModalService } from './modalService';
 
 describe('ModalService', () => {
 
     let modalService: ModalService;
-    let publishedModals: ModalConfiguration[]
+    let publishedModals: string[];
     let dialogResult: string;
     beforeEach(() => {
         modalService = new ModalService();

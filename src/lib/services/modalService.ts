@@ -6,32 +6,19 @@ import { Subject } from 'rxjs/Subject';
 export class ModalService {
 
     // Observable string sources
-    private modalOpenedSource = new Subject<ModalConfiguration>();
-    private modalClosedSource = new Subject<ModalConfiguration>();
+    private modalOpenedSource = new Subject<string>();
+    private modalClosedSource = new Subject<string>();
 
     // Observable string streams
     modalOpened$ = this.modalOpenedSource.asObservable();
     modalClosed$ = this.modalClosedSource.asObservable();
 
     openDialog(elementId: string) {
-        this.modalOpenedSource.next(new ModalConfiguration(elementId));
+        this.modalOpenedSource.next(elementId);
     }
 
-    closeDialog(){
-        this.modalClosedSource.next();
-    }
-
-    openOneButtonDialog(elementId:string, buttonText: string, callback: () => void) {
-        this.openDialog(elementId);
-    }
-
-    openSaveDontSaveCancelDialog(elementId: string) {
-        this.openDialog(elementId);
-    }
-}
-
-export class ModalConfiguration {
-    constructor( public elementId: string) {
+    closeDialog(elementId: string) {
+        this.modalClosedSource.next(elementId);
     }
 }
 

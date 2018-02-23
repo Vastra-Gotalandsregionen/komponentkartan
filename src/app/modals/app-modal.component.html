@@ -7,17 +7,19 @@
       <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
     </vgr-modal-content>
     <vgr-modal-footer>
-        <vgr-button (click)="closeModal1()" tabindex="0">Knapp 1</vgr-button>
-        <vgr-button (click)="closeModal1()">Knapp 2</vgr-button>
+        <vgr-button [secondary]="true" (click)="closeModal('modal1')">Knapp</vgr-button>
     </vgr-modal-footer>
   </vgr-modal>
   <vgr-modal id="modal2">
-    <vgr-modal-header>Trycka på knappar</vgr-modal-header>
     <vgr-modal-header>Här kan du trycka på knappar om du gillar det.</vgr-modal-header>
     <vgr-modal-content>
       <vgr-button>Hahahah!</vgr-button>
       <vgr-button>Hohohoho!</vgr-button>
     </vgr-modal-content>
+    <vgr-modal-footer>
+        <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 1</vgr-button>
+        <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 2</vgr-button>
+    </vgr-modal-footer>
   </vgr-modal>
   <vgr-modal id="modal3">
     <vgr-modal-header>Här kan du se en lång text</vgr-modal-header>
@@ -34,12 +36,21 @@
         Notera även att alla register i verksamheten ska vara anmälda till utsett personuppgiftsombud eller Datainspektionen.
       </p>
     </vgr-modal-content>
+    <vgr-modal-footer>
+        <vgr-button [secondary]="true" (click)="closeModal('modal3')">Jag accepterar</vgr-button>
+        <vgr-button [secondary]="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
+    </vgr-modal-footer>
   </vgr-modal>
   <vgr-modal id="modal4">
     <vgr-modal-header>En header från app</vgr-modal-header>
     <vgr-modal-content>
       <p>Ändringarna går förlorade om du inte sparar dem</p>
     </vgr-modal-content>
+    <vgr-modal-footer>
+        <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara</vgr-button>
+        <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara inte</vgr-button>
+        <vgr-button [secondary]="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
+    </vgr-modal-footer>
   </vgr-modal>
   <vgr-modal id="vardvalWithTextModal">
     <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
@@ -51,6 +62,10 @@
       <h3>Välj vårdecentral</h3>
       <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
     </vgr-modal-content>
+    <vgr-modal-footer>
+        <vgr-button [secondary]="true" (click)="closeModal('vardvalWithTextModal')">Avbryt</vgr-button>
+        <vgr-button [secondary]="true" [disabled]="true" (click)="closeModal('vardvalWithTextModal')">Skriv ut</vgr-button>
+    </vgr-modal-footer>
   </vgr-modal>
   <vgr-modal id="vardvalWithoutTextModal">
     <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
@@ -58,6 +73,10 @@
       <h3>Välj vårdecentral</h3>
       <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
     </vgr-modal-content>
+    <vgr-modal-footer>
+        <vgr-button [secondary]="true" (click)="closeModal('vardvalWithoutTextModal')">Avbryt</vgr-button>
+        <vgr-button [secondary]="true" [disabled]="true" (click)="closeModal('vardvalWithoutTextModal')">Skriv ut</vgr-button>
+    </vgr-modal-footer>
   </vgr-modal>
    <vgr-modal id="commentAnswerWithTextModal">
     <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
@@ -70,6 +89,10 @@
       <p>Ditt svar:</p>
       <textarea></textarea>
     </vgr-modal-content>
+    <vgr-modal-footer>
+        <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Avbryt</vgr-button>
+        <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Svara</vgr-button>
+    </vgr-modal-footer>
   </vgr-modal>
   <vgr-modal id="commentAnswerWithoutTextModal">
     <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
@@ -77,6 +100,10 @@
       <p>Ditt svar:</p>
       <textarea></textarea>
     </vgr-modal-content>
+    <vgr-modal-footer>
+        <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Avbryt</vgr-button>
+        <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Svara</vgr-button>
+    </vgr-modal-footer>
   </vgr-modal>
   <vgr-modal id="commentModal">
     <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
@@ -86,4 +113,8 @@
         I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
       </p>
     </vgr-modal-content>
+    <vgr-modal-footer>
+        <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Avbryt</vgr-button>
+        <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Spara</vgr-button>
+    </vgr-modal-footer>
   </vgr-modal>
