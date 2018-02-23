@@ -556,7 +556,11 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.updateRowValues(row);
 
     this.cardLocked = true;
-    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
+    if (this.editUnitForm.valid) {
+      row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
+    } else {
+      row.notifyOnCollapsePermanent(row.previewObject.enhet + ' felaktiga uppgifter', 'vgr-icon-exclamation--red');
+    }
   }
 
   onCardUnlocked() {

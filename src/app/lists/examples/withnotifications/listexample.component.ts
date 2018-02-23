@@ -64,7 +64,11 @@ export class ListexampleComponent {
   }
 
   updateRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
-    row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green');
+    if (row.notification) {
+      row.notifyOnCollapsePermanent(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green');
+    } else {
+      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green');
+    }
   }
 
   onSortChanged(event: SortChangedArgs) {

@@ -10,9 +10,9 @@ export class ExpandableRow<TPreview, TFull> {
         this.previewObject = previewObject;
     }
 
-    // notifyOnCollapsePermanent(message: string, icon: string) {
-    //     this.notification = { icon: icon, message: message, type: NotificationType.Permanent } as RowNotification;
-    // }
+    notifyOnCollapsePermanent(message: string, icon: string) {
+        this.notification = { icon: icon, message: message, type: NotificationType.Permanent } as RowNotification;
+    }
 
     notifyOnCollapse(message: string, icon: string) {
         this.notification = { icon: icon, message: message, type: NotificationType.ShowOnCollapse } as RowNotification;
