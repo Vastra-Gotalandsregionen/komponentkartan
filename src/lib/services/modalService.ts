@@ -7,44 +7,31 @@ export class ModalService {
 
     // Observable string sources
     private modalOpenedSource = new Subject<ModalConfiguration>();
+    private modalClosedSource = new Subject<ModalConfiguration>();
 
     // Observable string streams
     modalOpened$ = this.modalOpenedSource.asObservable();
+    modalClosed$ = this.modalClosedSource.asObservable();
 
-    openDialog(elementId: string,
-        button1Config: ModalButtonConfiguration,
-        button2Config?: ModalButtonConfiguration,
-        button3Config?: ModalButtonConfiguration,
-        ) {
-        let buttonConfigs = [button1Config];
-        if (button2Config && button3Config) {
-            buttonConfigs = [button1Config, button2Config, button3Config];
-        } else if (button2Config) {
-            buttonConfigs = [button1Config, button2Config];
-        }
+    openDialog(elementId: string) {
+        this.modalOpenedSource.next(new ModalConfiguration(elementId));
+    }
 
-        this.modalOpenedSource.next(new ModalConfiguration(elementId, buttonConfigs));
+    closeDialog(){
+        this.modalClosedSource.next();
     }
 
     openOneButtonDialog(elementId:string, buttonText: string, callback: () => void) {
-        this.openDialog(elementId, new ModalButtonConfiguration(buttonText, callback));
+        this.openDialog(elementId);
     }
 
-    openSaveDontSaveCancelDialog(elementId: string,
-        saveCallback: () => void, dontSaveCallback: () => void, cancelCallback: () => void) {
-        this.openDialog(elementId, new ModalButtonConfiguration('Spara', saveCallback),
-            new ModalButtonConfiguration('Spara inte', dontSaveCallback), new ModalButtonConfiguration('Avbryt', cancelCallback, true));
-
+    openSaveDontSaveCancelDialog(elementId: string) {
+        this.openDialog(elementId);
     }
 }
 
 export class ModalConfiguration {
-    constructor( public elementId: string, public buttons: ModalButtonConfiguration[]) {
-    }
-}
-
-export class ModalButtonConfiguration {
-    constructor(public text: string, public callback: () => void, public isDefault = false) {
+    constructor( public elementId: string) {
     }
 }
 

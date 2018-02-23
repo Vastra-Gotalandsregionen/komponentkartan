@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ModalService } from '@komponentkartan';
 
 @Component({
   selector: 'app-modals',
@@ -7,6 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 
 export class AppModalComponent {
-  constructor() {
+  constructor(private modalService: ModalService) {
+  }
+  
+  closeModal1(): void{
+    this.modalService.closeDialog();
   }
 }
+
+

@@ -1,8 +1,8 @@
 
 import {
-    Component, ViewContainerRef, OnInit, AfterContentInit, QueryList, ElementRef, ContentChildren
+    Component, ViewContainerRef, OnInit, AfterViewChecked, QueryList, ElementRef, ContentChildren
 } from '@angular/core';
-import { ModalService, ModalConfiguration, ModalButtonConfiguration } from '../../services/modalService';
+import { ModalService, ModalConfiguration } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -11,11 +11,10 @@ import { ButtonComponent } from '../button/button.component';
     templateUrl: './modal.component.html'
 })
 
-export class ModalPlaceholderComponent implements AfterContentInit {
+export class ModalPlaceholderComponent implements AfterViewChecked {
     isOpen: boolean;
     elementId: string;
     title: string;
-    buttons: ModalButtonConfiguration[];
     modalInitialized: boolean;
     lastFocusedElement: any;
     firstTabStop: any;
@@ -30,18 +29,19 @@ export class ModalPlaceholderComponent implements AfterContentInit {
     constructor(
         private modalService: ModalService, private elementRef: ElementRef) {
 
-        this.buttons = [];
         this.isOpen = false;
         this.modalService.modalOpened$.subscribe(args => {
             this.modalInitialized = false;
             this.elementId = args.elementId;
-            this.buttons = args.buttons;
             this.openModal();
+        });
 
+        this.modalService.modalClosed$.subscribe(args => {
+            this.closeModal();
         });
     }
 
-    ngAfterContentInit() {
+    ngAfterViewChecked() {
         if (!this.modalInitialized && this.isOpen && this.buttonComponents && this.buttonComponents.length > 0) {
             this.initFocusableElements();
             this.modalInitialized = true;
@@ -78,11 +78,6 @@ export class ModalPlaceholderComponent implements AfterContentInit {
         $('body').removeClass('modal--open');
         $('#'+ this.elementId).removeClass('vgr-modal--open');
 
-    }
-
-    onButtonClick(callback: () => void) {
-        callback();
-        this.closeModal();
     }
 
     onKeyDown(e: any) {

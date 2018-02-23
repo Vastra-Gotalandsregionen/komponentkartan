@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService, ModalButtonConfiguration } from '@komponentkartan';
+import { ModalService } from '@komponentkartan';
 
 @Component({
   selector: 'app-modaldialog',
@@ -14,70 +14,43 @@ export class ModaldialogComponent implements OnInit {
   }
 
   showOneButtonModal() {
-    this.modalService.openDialog( 'modal1',
-      new ModalButtonConfiguration('OK', () => this.lastModalAnswer = 'OK'),
-    );
+    this.modalService.openDialog( 'modal1');
   }
 
   showOneButtonModalOverview() {
-    this.modalService.openDialog( 'modal2',
-      new ModalButtonConfiguration('OK', () => null)
-    );
+    this.modalService.openDialog( 'modal2');
   }
 
   showTwoButtonModal() {
-    this.modalService.openDialog('modal3',
-      new ModalButtonConfiguration('Jag accepterar', () => this.lastModalAnswer = 'Jag accepterar'),
-      new ModalButtonConfiguration('Avbryt', () => this.lastModalAnswer = 'Avbryt'),
-    );
+    this.modalService.openDialog('modal3');
   }
 
 
   showThreeButtonModal() {
-    this.modalService.openDialog( 'modal4',
-      new ModalButtonConfiguration('Ja', () => this.lastModalAnswer = 'Ja'),
-      new ModalButtonConfiguration('Nej', () => this.lastModalAnswer = 'Nej'),
-      new ModalButtonConfiguration('Avbryt', () => this.lastModalAnswer = 'Avbryt')
-    );
+    this.modalService.openDialog( 'modal4');
   }
 
   showSaveDontSaveCancelModal() {
-    this.modalService.openSaveDontSaveCancelDialog('modal4',
-      () => this.lastModalAnswer = 'Sparade', () => this.lastModalAnswer = 'Sparade inte', () => this.lastModalAnswer = 'Avbröt');
+    this.modalService.openSaveDontSaveCancelDialog('modal4');
   }
 
   showChooseVardvalWithTextModal() {
-    this.modalService.openDialog( 'vardvalWithTextModal',
-      new ModalButtonConfiguration('Avbryt', () => this.lastModalAnswer = 'Avbryt'),
-      new ModalButtonConfiguration('Skriv ut', () => this.lastModalAnswer = 'Skriv ut'),
-    );
+    this.modalService.openDialog( 'vardvalWithTextModal');
   }
 
   showChooseVardvalWithoutTextModal() {
-    this.modalService.openDialog( 'vardvalWithoutTextModal',
-      new ModalButtonConfiguration('Avbryt', () => this.lastModalAnswer = 'Avbryt'),
-      new ModalButtonConfiguration('Skriv ut', () => this.lastModalAnswer = 'Skriv ut'),
-    );
+    this.modalService.openDialog( 'vardvalWithoutTextModal');
   }
 
   showCommentAnswerWithTextModal() {
-    this.modalService.openDialog( 'commentAnswerWithTextModal',
-      new ModalButtonConfiguration('Avbryt', () => this.lastModalAnswer = 'Avbryt'),
-      new ModalButtonConfiguration('Svara', () => this.lastModalAnswer = 'Svara'),
-    );
+    this.modalService.openDialog( 'commentAnswerWithTextModal');
   }
 
   showCommentAnswerWithoutTextModal() {
-    this.modalService.openDialog( 'commentAnswerWithoutTextModal',
-      new ModalButtonConfiguration('Avbryt', () => this.lastModalAnswer = 'Avbryt'),
-      new ModalButtonConfiguration('Svara', () => this.lastModalAnswer = 'Svara'),
-    );
+    this.modalService.openDialog( 'commentAnswerWithoutTextModal');
   }
 
   showCommentModal() {
-    this.modalService.openDialog( 'commentModal',
-      new ModalButtonConfiguration('Avbryt', () => this.lastModalAnswer = 'Avbryt'),
-      new ModalButtonConfiguration('Spara', () => this.lastModalAnswer = 'Spara'),
-    );
+    this.modalService.openDialog( 'commentModal');
   }
 }

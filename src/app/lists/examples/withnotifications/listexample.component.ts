@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   ExpandableRow, RowNotification, NotificationType, ModalService,
-  ModalButtonConfiguration, SortChangedArgs, ListHeaderComponent, SortDirection
+  SortChangedArgs, ListHeaderComponent, SortDirection
 } from '@komponentkartan';
 import { Examples } from '../examples';
 import { HtmlEncodeService } from '../../../html-encode.service';

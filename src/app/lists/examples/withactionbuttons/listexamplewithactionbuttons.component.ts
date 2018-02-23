@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HtmlEncodeService } from '../../../html-encode.service';
 import { Examples } from '../examples';
 import {
-    ModalService, ModalButtonConfiguration, ExpandableRow,
+    ModalService, ExpandableRow,
     SortDirection, SortChangedArgs
 } from '@komponentkartan';
 

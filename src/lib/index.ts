@@ -77,6 +77,6 @@ export { ErrorMessagePipe } from './pipes/errorMessagePipe';
 
 export { BrowserDetector } from './services/browserDetector';
 export { ErrorHandler } from './services/errorhandler';
-export { ModalButtonConfiguration, ModalConfiguration, ModalService } from './services/modalService';
+export { ModalConfiguration, ModalService } from './services/modalService';
 
 export { Guid } from './utils/guid';
