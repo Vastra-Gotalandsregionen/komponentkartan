@@ -77,45 +77,36 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     @Output() setFocusOnNextRowContent: EventEmitter<any> = new EventEmitter();
 
     private _notification: RowNotification;
-
+    private _eventNotification: RowNotification;
+    private _permanentNotification: RowNotification;
     @Input() set notification(value: RowNotification) {
-        console.log('notification', value);
-        if (value) {
-            if (value.type === NotificationType.Permanent) {
-                this._notification = value;
-            }
-        }
-    }
-
-    get notification(): RowNotification {
-        return this._notification;
-    }
-
-    set eventNotification(value: RowNotification) {
-        console.log('eventNotification', value);
 
         if (value) {
             if (value.type === NotificationType.ShowOnCollapse) {
+                console.log('collapse' + value.message);
+                this._eventNotification = value;
                 this.collapse(value.type);
-                this.notification = value;
                 this.changeDetector.detectChanges();
+
             } else if (value.type === NotificationType.ShowOnRemove) {
                 this.collapse(value.type);
-                this.notification = value;
+                this._eventNotification = value;
                 this.changeDetector.detectChanges();
+
             } else if (value.type === NotificationType.Permanent) {
-                this.notification = value;
+                this._permanentNotification = value;
                 this.showNotification();
             }
         } else {
             this.notificationVisible = false;
         }
 
-        this.notificationChanged.emit(value);
     }
-    get eventNotification(): RowNotification {
-        return this.notification;
+
+    get notification(): RowNotification {
+        return this._notification;
     }
+
 
     @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
@@ -143,7 +134,10 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     showNotification() {
-        this.notificationVisible = true;
+        if (this._permanentNotification) {
+            this._notification = this._permanentNotification;
+            this.notificationVisible = true;
+        }
     }
 
     public setExpandOrCollapsed() {
@@ -195,15 +189,23 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     private processShowOnCollapseNotification() {
-
-        if (!this.eventNotification) {
+        console.log(this._eventNotification.message);
+        if (!this._eventNotification) {
             return;
         }
 
         this.notificationVisible = true;
 
-        if (this.eventNotification.done) {
+        if (this._eventNotification.done) {
             this.notificationVisible = false;
+        }
+
+        if (this._eventNotification) {
+            this._notification = this._eventNotification;
+            this.changeDetector.detectChanges();
+            this.notificationVisible = true;
+            this.notInteractable = true;
+            this.notification.done = true;
         }
 
         setTimeout(() => {
@@ -212,20 +214,16 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this.expandedChanged.emit(this.expanded);
 
             setTimeout(() => {
-                if (this.notification) {
-                    this.eventNotification = this.notification;
+
+
+                if (this._permanentNotification) {
+                    this._notification = this._permanentNotification;
                     this.changeDetector.detectChanges();
                     this.notificationVisible = true;
                     this.notInteractable = false;
                     return;
                 }
 
-                if (this.eventNotification !== this.notification) {
-                    this.notificationVisible = false;
-                    this.notInteractable = false;
-                    this.eventNotification.done = true;
-                    return;
-                }
             }, 2000);
 
         }, 1400);
@@ -238,7 +236,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
-                this.eventNotification.done = true;
+                this.notification.done = true;
                 this.isDeleted = true;
                 this.notInteractable = false;
                 this.notificationVisible = false;

@@ -4,7 +4,6 @@ import { NotificationType } from './notificationType.model';
 export class ExpandableRow<TPreview, TFull> {
     previewObject: TPreview;
     fullObject: TFull;
-    private eventNotification: RowNotification;
     notification: RowNotification; //the permanentNofication
 
     constructor(previewObject: TPreview) {
@@ -16,10 +15,10 @@ export class ExpandableRow<TPreview, TFull> {
     // }
 
     notifyOnCollapse(message: string, icon: string) {
-        this.eventNotification = { icon: icon, message: message, type: NotificationType.ShowOnCollapse } as RowNotification;
+        this.notification = { icon: icon, message: message, type: NotificationType.ShowOnCollapse } as RowNotification;
     }
 
     notifyOnRemove(message: string, icon: string) {
-        this.eventNotification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
+        this.notification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
     }
 }
