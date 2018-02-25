@@ -29,11 +29,11 @@
   margin-bottom: 30px;
 }
 
-.modal-content__message {
+.modal-content__content {
   margin-bottom: 36px;
 }
 
-.modal-content__buttons {
+.modal-content__footer {
   float: right;
   min-height: 30px;
   >* {
@@ -74,7 +74,7 @@ textarea {
   .modal-content__title {
     margin-bottom: 32px;
   }
-  .modal-content__message {
+  .modal-content__content {
     margin-bottom: 36px;
   }
 }

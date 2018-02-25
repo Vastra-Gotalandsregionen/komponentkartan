@@ -1,6 +1,6 @@
 
 import {
-    Component, ViewContainerRef, OnInit, AfterViewChecked, QueryList, ElementRef, ContentChildren
+    Component, ViewContainerRef, OnInit, AfterViewChecked, QueryList, ElementRef, ContentChildren, Renderer2
 } from '@angular/core';
 import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
@@ -27,7 +27,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
 
     @ContentChildren(ButtonComponent, { read: ElementRef }) buttonComponents: QueryList<ElementRef>;
     constructor(
-        private modalService: ModalService, private elementRef: ElementRef) {
+        private modalService: ModalService, private elementRef: ElementRef, private renderer: Renderer2) {
 
         this.isOpen = false;
         this.modalService.modalOpened$.subscribe(elementId => {
@@ -55,30 +55,30 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
             const focusableNodes: NodeList = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
             this.focusableElements = Array.from(focusableNodes);
 
+
             this.firstTabStop = this.focusableElements[0];
             this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
 
             // Set default button if one is defined
-            // const defaultButton = this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
-            // if (defaultButton) {
-            //     defaultButton.nativeElement.children[0].focus();
-            // } else {
+            const defaultButton = this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
+            if (defaultButton) {
+                defaultButton.nativeElement.children[0].focus();
+            } else {
                 this.firstTabStop.focus();
-            // }
-        }, 1);
+            }
+        }, 10);
     }
 
     private openModal() {
         this.isOpen = true;
-        $('body').addClass('modal--open');
-        $(`#${this.elementId}`).addClass('vgr-modal--open');
+        this.renderer.addClass(document.querySelector(`#${this.elementId}`), 'vgr-modal--open');
+        this.renderer.addClass(document.body, 'modal--open');
     }
 
     private closeModal() {
         this.isOpen = false;
-        $('body').removeClass('modal--open');
-        $(`#${this.elementId}`).removeClass('vgr-modal--open');
-
+        this.renderer.removeClass(document.querySelector(`#${this.elementId}`), 'vgr-modal--open');
+        this.renderer.removeClass(document.body, 'modal--open');
     }
 
     onKeyDown(e: any) {

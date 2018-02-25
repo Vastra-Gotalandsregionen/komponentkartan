@@ -1,120 +1,116 @@
 <vgr-modal id="modal1">
-    <vgr-modal-header>Välj i dropdown</vgr-modal-header>
-    <vgr-modal-content>
-      <p>Här kan du välja i en fin dropdownlista.</p>
-      <br/>
-      <h3>Välj här nedan</h3>
-      <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
-    </vgr-modal-content>
-    <vgr-modal-footer>
-        <vgr-button [secondary]="true" (click)="closeModal('modal1')">Knapp</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
-  <vgr-modal id="modal2">
-    <vgr-modal-header>Här kan du trycka på knappar om du gillar det.</vgr-modal-header>
-    <vgr-modal-content>
-      <vgr-button>Hahahah!</vgr-button>
-      <vgr-button>Hohohoho!</vgr-button>
-    </vgr-modal-content>
-    <vgr-modal-footer>
-        <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 1</vgr-button>
-        <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 2</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
-  <vgr-modal id="modal3">
-    <vgr-modal-header>Här kan du se en lång text</vgr-modal-header>
-    <vgr-modal-content>
-      <p>Denna fil innehåller personnummer på de personer som valt er vårdcentral tom 2017-01-31.
-        För nedladdning av filen gäller följande villkor
-        1. Innehållet i filen får inte behandlas i strid med personuppgiftslagen (PuL) och patient-datalagen (PdL). 
-        Informationen får därför inte användas för annat ändamål än det för vilket uppgifterna samlats in
-        (9 § punkt c och d PuL och 2 kap. 4 § PdL).
-        Detta innebär bland annat att uppgifterna inte får användas för massutskick eller marknadsföring.
-        2. Verksamhetschefen ansvarar för att endast den senaste månadens fil används för eventuell bearbetning av informationen.
-        För att acceptera båda villkoren ovan, tryck [Jag accepterar] annars tryck [Avbryt]
-        Notera att systemet bokför vem som accepterat villkoren och tidpunkten för detta.
-        Notera även att alla register i verksamheten ska vara anmälda till utsett personuppgiftsombud eller Datainspektionen.
-      </p>
-    </vgr-modal-content>
-    <vgr-modal-footer>
-        <vgr-button [secondary]="true" (click)="closeModal('modal3')">Jag accepterar</vgr-button>
-        <vgr-button [secondary]="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
-  <vgr-modal id="modal4">
-    <vgr-modal-header>En header från app</vgr-modal-header>
-    <vgr-modal-content>
-      <p>Ändringarna går förlorade om du inte sparar dem</p>
-    </vgr-modal-content>
-    <vgr-modal-footer>
-        <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara</vgr-button>
-        <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara inte</vgr-button>
-        <vgr-button [secondary]="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
-  <vgr-modal id="vardvalWithTextModal">
-    <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
-    <vgr-modal-content>
-      <p>Du har behörighet att registrera vårdval på flera olika vårdcentraler</p>
-      <br/>
-      <p>För att vårdvalet skall bli rätt för invånaren så måste du ange vilken vårdcentral som invånaren har valt.</p>
-      <br/>
-      <h3>Välj vårdecentral</h3>
-      <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
-    </vgr-modal-content>
-    <vgr-modal-footer>
-        <vgr-button [secondary]="true" (click)="closeModal('vardvalWithTextModal')">Avbryt</vgr-button>
-        <vgr-button [secondary]="true" [disabled]="true" (click)="closeModal('vardvalWithTextModal')">Skriv ut</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
-  <vgr-modal id="vardvalWithoutTextModal">
-    <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
-    <vgr-modal-content>
-      <h3>Välj vårdecentral</h3>
-      <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
-    </vgr-modal-content>
-    <vgr-modal-footer>
-        <vgr-button [secondary]="true" (click)="closeModal('vardvalWithoutTextModal')">Avbryt</vgr-button>
-        <vgr-button [secondary]="true" [disabled]="true" (click)="closeModal('vardvalWithoutTextModal')">Skriv ut</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
-   <vgr-modal id="commentAnswerWithTextModal">
-    <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
-    <vgr-modal-content>
-      <p>Kommentar:
-        <br/>
-        I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
-      </p>
-      <br/>
-      <p>Ditt svar:</p>
-      <textarea></textarea>
-    </vgr-modal-content>
-    <vgr-modal-footer>
-        <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Avbryt</vgr-button>
-        <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Svara</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
-  <vgr-modal id="commentAnswerWithoutTextModal">
-    <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
-    <vgr-modal-content>
-      <p>Ditt svar:</p>
-      <textarea></textarea>
-    </vgr-modal-content>
-    <vgr-modal-footer>
-        <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Avbryt</vgr-button>
-        <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Svara</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
-  <vgr-modal id="commentModal">
-    <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
-    <vgr-modal-content>
-      <p>Kommentar:
-        <br/>
-        I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
-      </p>
-    </vgr-modal-content>
-    <vgr-modal-footer>
-        <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Avbryt</vgr-button>
-        <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Spara</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
+  <vgr-modal-header>Välj i dropdown</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Här kan du välja i en fin dropdownlista.</p>
+    <br/>
+    <h3>Välj här nedan</h3>
+    <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" default="true" (click)="closeModal('modal1')">Knapp</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="modal2">
+  <vgr-modal-header>Här kan du trycka på knappar om du gillar det.</vgr-modal-header>
+  <vgr-modal-content>
+    <vgr-button>Hahahah!</vgr-button>
+    <vgr-button>Hohohoho!</vgr-button>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 1</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 2</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="modal3">
+  <vgr-modal-header>Här kan du se en lång text</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Denna fil innehåller personnummer på de personer som valt er vårdcentral tom 2017-01-31. För nedladdning av filen gäller
+      följande villkor 1. Innehållet i filen får inte behandlas i strid med personuppgiftslagen (PuL) och patient-datalagen
+      (PdL). Informationen får därför inte användas för annat ändamål än det för vilket uppgifterna samlats in (9 § punkt
+      c och d PuL och 2 kap. 4 § PdL). Detta innebär bland annat att uppgifterna inte får användas för massutskick eller
+      marknadsföring. 2. Verksamhetschefen ansvarar för att endast den senaste månadens fil används för eventuell bearbetning
+      av informationen. För att acceptera båda villkoren ovan, tryck [Jag accepterar] annars tryck [Avbryt] Notera att systemet
+      bokför vem som accepterat villkoren och tidpunkten för detta. Notera även att alla register i verksamheten ska vara
+      anmälda till utsett personuppgiftsombud eller Datainspektionen.
+    </p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('modal3')">Jag accepterar</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="modal4">
+  <vgr-modal-header>En header från app</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Ändringarna går förlorade om du inte sparar dem</p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara inte</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="vardvalWithTextModal">
+  <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Du har behörighet att registrera vårdval på flera olika vårdcentraler</p>
+    <br/>
+    <p>För att vårdvalet skall bli rätt för invånaren så måste du ange vilken vårdcentral som invånaren har valt.</p>
+    <br/>
+    <h3>Välj vårdecentral</h3>
+    <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('vardvalWithTextModal')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" [disabled]="true" (click)="closeModal('vardvalWithTextModal')">Skriv ut</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="vardvalWithoutTextModal">
+  <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
+  <vgr-modal-content>
+    <h3>Välj vårdecentral</h3>
+    <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('vardvalWithoutTextModal')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" [disabled]="true" (click)="closeModal('vardvalWithoutTextModal')">Skriv ut</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="commentAnswerWithTextModal">
+  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Kommentar:
+      <br/> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
+    </p>
+    <br/>
+    <p>Ditt svar:</p>
+    <textarea></textarea>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Svara</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="commentAnswerWithoutTextModal">
+  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Ditt svar:</p>
+    <textarea></textarea>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Svara</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="commentModal">
+  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Kommentar:
+      <br/> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
+    </p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Spara</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
