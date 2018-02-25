@@ -50,32 +50,37 @@
     <vgr-button [secondary]="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
-<vgr-modal id="vardvalWithTextModal">
-  <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
-  <vgr-modal-content>
-    <p>Du har behörighet att registrera vårdval på flera olika vårdcentraler</p>
-    <br/>
-    <p>För att vårdvalet skall bli rätt för invånaren så måste du ange vilken vårdcentral som invånaren har valt.</p>
-    <br/>
-    <h3>Välj vårdecentral</h3>
-    <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('vardvalWithTextModal')">Avbryt</vgr-button>
-    <vgr-button [secondary]="true" [disabled]="true" (click)="closeModal('vardvalWithTextModal')">Skriv ut</vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
-<vgr-modal id="vardvalWithoutTextModal">
-  <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
-  <vgr-modal-content>
-    <h3>Välj vårdecentral</h3>
-    <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('vardvalWithoutTextModal')">Avbryt</vgr-button>
-    <vgr-button [secondary]="true" [disabled]="true" (click)="closeModal('vardvalWithoutTextModal')">Skriv ut</vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
+<form [formGroup]="vardvalForm">
+  <vgr-modal id="vardvalWithTextModal">
+    <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
+    <vgr-modal-content>
+      <p>Du har behörighet att registrera vårdval på flera olika vårdcentraler</p>
+      <br/>
+      <p>För att vårdvalet skall bli rätt för invånaren så måste du ange vilken vårdcentral som invånaren har valt.</p>
+      <br/>
+      <h3>Välj vårdecentral</h3>
+      <vgr-dropdown formControlName="vardval" [showValidation]="vardvalForm.controls.vardval.dirty" [items]="dropdownItems"></vgr-dropdown>
+    </vgr-modal-content>
+    <vgr-modal-footer>
+      <vgr-button [secondary]="true" (click)="closeModal('vardvalWithTextModal')">Avbryt</vgr-button>
+      <vgr-button [secondary]="true" [disabled]="vardvalForm.invalid" (click)="closeModal('vardvalWithTextModal')">Skriv ut</vgr-button>
+    </vgr-modal-footer>
+  </vgr-modal>
+</form>
+<form [formGroup]="vardvalForm2">
+
+  <vgr-modal id="vardvalWithoutTextModal">
+    <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
+    <vgr-modal-content>
+      <h3>Välj vårdecentral</h3>
+      <vgr-dropdown formControlName="vardval" [showValidation]="vardvalForm.controls.vardval.dirty" [items]="dropdownItems"></vgr-dropdown>
+    </vgr-modal-content>
+    <vgr-modal-footer>
+      <vgr-button [secondary]="true" (click)="closeModal('vardvalWithoutTextModal')">Avbryt</vgr-button>
+      <vgr-button [secondary]="true" [disabled]="vardvalForm2.invalid" (click)="closeModal('vardvalWithoutTextModal')">Skriv ut</vgr-button>
+    </vgr-modal-footer>
+  </vgr-modal>
+</form>
 <vgr-modal id="commentAnswerWithTextModal">
   <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
   <vgr-modal-content>
