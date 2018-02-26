@@ -543,7 +543,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   onCardCancel(row: ExpandableRow<ExampleUnit, any>) {
     this.cardLocked = true;
 
-    row.notifyOnCollapse('Redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation');
+    row.notifyOnCollapsePermanent('Redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation');
   }
 
   onCardSave(event: Event, row: ExpandableRow<ExampleUnit, any>) {

@@ -234,14 +234,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this.expandedChanged.emit(this.expanded);
 
             setTimeout(() => {
-                // if (this.notificationPermanent) {
-                //     this.notification = this.notificationPermanent;
-                //     this.changeDetector.detectChanges();
-                //     this.notificationVisible = true;
-                //     this.notInteractable = false;
-                //     return;
-                // }
-
                 if (this.notification !== this.notificationPermanent) {
                     this.notificationVisible = false;
                     this.notInteractable = false;
