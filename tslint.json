@@ -11,7 +11,7 @@
       "check-space"
     ],
     "curly": true,
-    "eofline": true,
+    "eofline": false,
     "forin": true,
     "import-blacklist": [
       true,
@@ -119,7 +119,8 @@
       true,
       "element",
       "vgr",
-      "kebab-case"
+      "kebab-case",
+      "app"
     ],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,

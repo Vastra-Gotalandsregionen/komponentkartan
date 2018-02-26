@@ -2,7 +2,7 @@
   <div class="dropdown--edit" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible}" (mousedown)="onDropdownMouseDown($event)"
     (focusout)="onLeave()" (focusin)="onEnter()" tabindex="{{disabled ? -1 : 0}}">
     <span class="noselect" *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{ selectedItem | dropdownItemToSelectedText}}</span>
-    <span class="noselect" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{readonly ? '' : noItemSelectedLabel }}</span>
+    <span class="noselect" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{readonly || disabled ? '' : noItemSelectedLabel }}</span>
     <div class="dropdown__menu">
       <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
       <div *ngIf="dimmerTopVisible" class="dropdown__dimmer dropdown__dimmer--top"></div>

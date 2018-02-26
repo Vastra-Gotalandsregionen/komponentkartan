@@ -48,6 +48,9 @@ export { ListItemHeaderComponent } from './controls/list-item/list-item-header.c
 export { ExpandableDivComponent } from './controls/expandableDiv/expandableDiv.component';
 export { ExpandableDivHeaderComponent } from './controls/expandableDiv/expandableDiv-header.component';
 export { ExpandableDivContentComponent } from './controls/expandableDiv/expandableDiv-content.component';
+export { ModalContentComponent } from './controls/modal/modal-content.component';
+export { ModalHeaderComponent } from './controls/modal/modal-header.component';
+export { ModalFooterComponent } from './controls/modal/modal-footer.component';
 
 
 
@@ -74,6 +77,6 @@ export { ErrorMessagePipe } from './pipes/errorMessagePipe';
 
 export { BrowserDetector } from './services/browserDetector';
 export { ErrorHandler } from './services/errorhandler';
-export { ModalButtonConfiguration, ModalConfiguration, ModalService } from './services/modalService';
+export { ModalService } from './services/modalService';
 
 export { Guid } from './utils/guid';

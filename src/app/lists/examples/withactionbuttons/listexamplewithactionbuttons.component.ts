@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HtmlEncodeService } from '../../../html-encode.service';
 import { Examples } from '../examples';
 import {
-    ModalService, ModalButtonConfiguration, ExpandableRow,
+    ModalService, ExpandableRow,
     SortDirection, SortChangedArgs
 } from 'vgr-komponentkartan';
 
@@ -47,24 +47,24 @@ export class ListExampleWithActionButtonsComponent {
     }
 
     notifyOnDelete(row: any) {
-        this.modalService.openDialog('Info', 'Du tog bort detta objektet: ' + JSON.stringify(row, null, '\t'),
-            new ModalButtonConfiguration('Stäng', () => {
-            })
-        );
+        // this.modalService.openDialog('Info', 'Du tog bort detta objektet: ' + JSON.stringify(row, null, '\t'),
+        //     new ModalButtonConfiguration('Stäng', () => {
+        //     })
+        // );
     }
 
     removeRow(row: ExpandableRow<ExamplePerson, any>) {
-        this.modalService.openDialog('Ta bort raden', 'Vill du verkligen ta bort ' + row.previewObject.firstName + '?',
-            new ModalButtonConfiguration('Ja', () => {
-                row.notifyOnRemove(row.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
-                row.previewObject.selected = false;
-                row.previewObject.deleted = true;
+        // this.modalService.openDialog('Ta bort raden', 'Vill du verkligen ta bort ' + row.previewObject.firstName + '?',
+        //     new ModalButtonConfiguration('Ja', () => {
+        //         row.notifyOnRemove(row.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
+        //         row.previewObject.selected = false;
+        //         row.previewObject.deleted = true;
 
-                /*
-                  Remove for real...
-                */
-            }),
-            new ModalButtonConfiguration('Nej', () => { }));
+        //         /*
+        //           Remove for real...
+        //         */
+        //     }),
+        //     new ModalButtonConfiguration('Nej', () => { }));
     }
 
     getSelectedRows(): number {
