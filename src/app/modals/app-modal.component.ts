@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ModalService } from '@komponentkartan';
+import { ModalService } from 'vgr-komponentkartan';
 
 @Component({
   selector: 'app-modals',
