@@ -195,10 +195,8 @@ export class ListItemComponent implements AfterContentInit {
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
 
-
                 this.notInteractable = false;
-                if (this.notification)
-                    this.notification.done = true;
+                this.notification.done = true;
 
                 if (!this.permanentNotification)
                     this.notificationVisible = false;
@@ -220,6 +218,10 @@ export class ListItemComponent implements AfterContentInit {
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
+        if (this.eventNotification.done) {
+            this.notificationVisible = false;
+        }
+        this._notification = this.eventNotification;
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
