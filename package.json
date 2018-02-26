@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "2.1.2-rc31",
+  "version": "2.1.2-rc32",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
@@ -63,7 +63,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-spec-reporter": "~0.0.32",
     "karma-typescript": "~3.0.9",
-    "ng-packagr": "^1.6.0",
+    "ng-packagr": "^2.1.0",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",

@@ -26,6 +26,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string;
     dropdownLabel: string;
+    selectAllItemsMarked: boolean;
 
     @Output() selectionChanged = new EventEmitter<DropdownItem<any>[]>();
     get filterActive(): boolean {
@@ -38,11 +39,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     get selectAllItemsChecked() {
         return !this._items.find(x => !x.selected);
     }
-
-    get selectAllItemsMarked() {
-        return true;
-    }
-
 
     set selectedValues(values: any[]) {
 
@@ -83,7 +79,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         this.updateDropdownLabel();
     }
-
     controlHasErrors() {
         return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }

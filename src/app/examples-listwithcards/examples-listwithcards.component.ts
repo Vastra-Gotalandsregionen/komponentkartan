@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow } from '@komponentkartan';
+import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow } from 'vgr-komponentkartan';
 import { ExampleUnit, ExampleUnitDetails, ExampleUnitJusteringar } from './unit.model';
 
 @Component({
@@ -365,14 +365,9 @@ export class ExamplesListwithcardsComponent implements OnInit {
           icon: 'vgr-icon-exclamation--red',
           type: NotificationType.Permanent
         } as RowNotification;
-
-        element.notification = {
-          message: 'Information saknas, medverkan i familjecentral ej ifylld',
-          icon: 'vgr-icon-exclamation--red',
-          type: NotificationType.Permanent
-        } as RowNotification;
       }
     });
+
   }
 
   onSelectedChangedVersion(selectedItem: string, row: ExampleUnit) {
@@ -554,19 +549,14 @@ export class ExamplesListwithcardsComponent implements OnInit {
   onCardSave(event: Event, row: ExpandableRow<ExampleUnit, any>) {
     this.submitted = true;
 
-    if (this.editUnitForm.valid) {
-      row.notification = null;
-      row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
-
-    } else if (this.editUnitForm.invalid) {
-      row.notifyOnCollapse(row.previewObject.enhet + ' Gick inte att spara, fyll i alla uppgifter korrekt!', 'vgr-icon-exclamation--red');
+    if (!this.editprivateOwnerForm.valid || !this.editUnitForm.valid) {
       this.saveCancelComponent.unlocked = true;
       return;
     }
-
     this.updateRowValues(row);
 
     this.cardLocked = true;
+    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
   }
 
   onCardUnlocked() {
@@ -576,6 +566,15 @@ export class ExamplesListwithcardsComponent implements OnInit {
     if (this.unitVersions) {
       this.unitVersions.readonly = true;
     }
+  }
+
+  openActionPanel() {
+    this.showActionPanel = true;
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   onNewUnitClick() {

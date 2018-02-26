@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IMenu, IMenuItem, IMenuGroup } from '@komponentkartan';
+import { detect } from 'detect-browser';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
@@ -8,92 +8,56 @@ import { HtmlEncodeService } from '../html-encode.service';
     styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+    browserIsIE: boolean;
+    typeScriptMenuMarkup = `
+    import { Component, OnInit } from '@angular/core';
+    import { detect } from 'detect-browser';
 
-    exampleCodeSimpleMeny = ` this.menu = [
-    {
-        title: 'En nivå',
-        groups: [
-            {
-                order: '0',
-                menuItems: [
-                    { title: 'Sida 1', url: '/1' } as IMenuItem,
-                    { title: 'Sida 2', url: '/2' } as IMenuItem,
-                    { title: 'Sida 3', url: '/3' } as IMenuItem
-                ] as IMenuItem[]
-            } as IMenuGroup
-        ] as IMenuGroup[]
-    } as IMenu,
-] as IMenu[];`;
+    @Component({
+        selector: 'app-menu',
+        templateUrl: './menu.component.html',
+    })
+    export class MenuComponent implements OnInit {
+        browserIsIE: boolean;
 
-    exampleCodeSimpleMenyWithChildren = `this.menu = [
-    {
-        title: 'Med undernivå',
-        groups: [
-            {
-                order: '0',
-                menuItems: [
-                    { title: 'Sida 1', url: '/1' } as IMenuItem,
-                    { title: 'Sida 2', url: '/2' } as IMenuItem,
-                    {
-                        title: 'Sida 3', url: '/3', menuItems: [
-                            { title: 'Undersida 1', url: '/3.1' } as IMenuItem,
-                            { title: 'Undersida 2', url: '/3.2' } as IMenuItem,
-                            { title: 'Undersida 3', url: '/3.3' } as IMenuItem,
-                        ] ]
+        constructor() {}
 
-            } as IMenuGroup
-        ] as IMenuGroup[]
-    } as IMenu,
-] as IMenu[];`;
-
-    exampleCodeSimpleMenyWithGroups = `this.menu = [
-        {
-            title: 'Med gruppering',
-            groups: [
-                {
-                    menuItems: [
-                        { title: 'Grupp 1 Sida 1', url: '/1' } as IMenuItem,
-                        { title: 'Grupp 1 Sida 2', url: '/2' } as IMenuItem,
-                        {
-                            title: 'Grupp 1 Sida 3', url: '/3', menuItems: [
-                                { title: 'Grupp 1 Undersida 1', url: '/3.1' } as IMenuItem,
-                                { title: 'Grupp 1 Undersida 2', url: '/3.2' } as IMenuItem,
-                                { title: 'Grupp 1 Undersida 3', url: '/3.3' } as IMenuItem
-                            ]
-                        } as IMenuItem
-                    ]
-                } as IMenuGroup,
-                {
-                    menuItems: [
-                        { title: 'Grupp 2 Sida 4', url: '/4' } as IMenuItem,
-                        { title: 'Grupp 2 Sida 5', url: '/5' } as IMenuItem,
-                        {
-                            title: 'Grupp 2 Sida 6', url: '/6', menuItems: [
-                                { title: 'Grupp 2 Undersida 1', url: '/6.1' } as IMenuItem,
-                                { title: 'Grupp 1 Undersida 2', url: '/6.2' } as IMenuItem,
-                                { title: 'Grupp 1 Undersida 3', url: '/6.3' } as IMenuItem
-                            ]
-                        } as IMenuItem
-                    ]
-                } as IMenuGroup
-            ] as IMenuGroup[]
-        } as IMenu,
-    ] as IMenu[];`;
-
-    exampleCodeSimpleMenyMarkup: string;
-    exampleCodeSimpleMenyWithChildrenMarkup: string;
-    exampleCodeSimpleMenyWithGroupsMarkup: string;
+        ngOnInit() {
+            const browser = detect();
+            this.browserIsIE = browser && browser.name === 'ie';
+        }
+    }`;
+    htmlMenuMarkup = `
+    <vgr-menu title="Meny">
+        <vgr-menu-item link="#" text="Menu item 1"></vgr-menu-item>
+        <vgr-menu-item link="#" text="Menu item 2"></vgr-menu-item>
+        <vgr-menu-separator></vgr-menu-separator>
+        <vgr-menu-item link="#" text="Menu item 3 med extra långt namn"></vgr-menu-item>
+        <vgr-menu-item link="/menu" text="Menu item 4" notification="422"
+            notificationTooltip="Detta är en tooltip" notificationColor="default"></vgr-menu-item>
+        <vgr-menu-item link="#" text="Menu item 5" [disabled]="!browserIsIE"
+            disabledTooltip="Endast tillgängligt i IE"></vgr-menu-item>
+        <vgr-menu-item link="#" text="Menu item 6" collapsable="true"></vgr-menu-item>
+        <vgr-menu-item link="#" text="Menu item 7" disabled="true"
+            disabledTooltip="Alltid inaktivt" notification="12" notificationTooltip="Detta är ytterligare en tooltip"
+        notificationColor="error"></vgr-menu-item>
+        <vgr-menu-separator></vgr-menu-separator>
+        <vgr-submenu text="Submenu">
+            <vgr-menu-item link="#" text="Sub menu item 1"></vgr-menu-item>
+            <vgr-menu-item link="#" text=" Sub menu item 2 "></vgr-menu-item>
+            <vgr-menu-item link="# " text="Sub menu item 3 "></vgr-menu-item>
+        </vgr-submenu>
+    </vgr-menu>`;
 
     constructor(htmlEncoder: HtmlEncodeService) {
-        this.exampleCodeSimpleMenyMarkup =
-            htmlEncoder.prepareHighlightedSection(this.exampleCodeSimpleMeny, 'typescript');
-        this.exampleCodeSimpleMenyWithChildrenMarkup =
-            htmlEncoder.prepareHighlightedSection(this.exampleCodeSimpleMenyWithChildren, 'typescript');
-        this.exampleCodeSimpleMenyWithGroupsMarkup =
-            htmlEncoder.prepareHighlightedSection(this.exampleCodeSimpleMenyWithGroups, 'typescript');
+        this.typeScriptMenuMarkup =
+            htmlEncoder.prepareHighlightedSection(this.typeScriptMenuMarkup, 'typescript');
+        this.htmlMenuMarkup =
+            htmlEncoder.prepareHighlightedSection(this.htmlMenuMarkup);
     }
 
     ngOnInit() {
+        const browser = detect();
+        this.browserIsIE = browser && browser.name === 'ie';
     }
-
 }

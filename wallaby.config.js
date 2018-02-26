@@ -10,7 +10,7 @@ module.exports = function (wallaby) {
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
       'src/wallabyTest.js',
-      'src/**/*spec.js'
+      'src/lib/**/*spec.js'
     ],
     module: {
       loaders: [{
@@ -61,9 +61,14 @@ module.exports = function (wallaby) {
       extensions: ['.js', '.ts'],
       modules: [
         path.join(wallaby.projectCacheDir, 'src/app'),
+        path.join(wallaby.projectCacheDir, 'src/lib/'),
         path.join(wallaby.projectCacheDir, 'src'),
         'node_modules'
-      ]
+      ],
+      alias: {
+        'vgr-komponentkartan': 'index',
+        'vgr-komponentkartan': 'komponentkartan.module'
+      },
     },
     node: {
       fs: 'empty',
@@ -83,10 +88,6 @@ module.exports = function (wallaby) {
       },
       {
         pattern: 'src/**/*.d.ts',
-        ignore: true
-      },
-      {
-        pattern: 'src/**/index.ts',
         ignore: true
       },
       {

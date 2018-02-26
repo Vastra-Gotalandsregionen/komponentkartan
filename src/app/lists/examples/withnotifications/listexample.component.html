@@ -61,8 +61,7 @@
           <vgr-list-column-header [text]="'Förnamn'" [width]="10" [sortKey]="'firstName'" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
           <vgr-list-column-header [text]="'Efternamn'" [width]="10" [sortKey]="'lastName'"></vgr-list-column-header>
         </vgr-list-header>
-        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [notificationPermanent]="row.notificationPermanent"
-          [expanded]="row.expanded">
+        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
           <vgr-list-item-header>
             <vgr-list-column [text]="row.previewObject.firstName" [width]="10"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.lastName" [width]="10"></vgr-list-column>

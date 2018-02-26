@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from '@komponentkartan';
+import { ModalService } from 'vgr-komponentkartan';
 
 @Component({
   selector: 'app-modaldialog',

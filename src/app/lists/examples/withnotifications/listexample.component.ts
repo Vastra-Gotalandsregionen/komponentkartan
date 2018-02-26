@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   ExpandableRow, RowNotification, NotificationType, ModalService,
   SortChangedArgs, ListHeaderComponent, SortDirection
-} from '@komponentkartan';
+} from 'vgr-komponentkartan';
 import { Examples } from '../examples';
 import { HtmlEncodeService } from '../../../html-encode.service';
 
@@ -44,21 +44,14 @@ export class ListexampleComponent {
 
     this.peopleRows = this.examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
-    const notification1 = {
+    this.peopleRows[0].notification = {
       message: 'Meddelande: Text', icon: 'vgr-icon-message',
       type: NotificationType.Permanent
     } as RowNotification;
-
-    const notification2 = {
+    this.peopleRows[4].notification = {
       message: 'Personen är inaktiv', icon: 'vgr-icon-exclamation--red',
       type: NotificationType.Permanent
     } as RowNotification;
-
-    this.peopleRows[0].notification = notification1;
-    this.peopleRows[4].notification = notification2;
-
-    this.peopleRows[0].notification = notification1;
-    this.peopleRows[4].notification = notification2;
   }
 
   deleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {

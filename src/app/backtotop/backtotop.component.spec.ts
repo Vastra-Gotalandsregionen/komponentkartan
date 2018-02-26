@@ -8,9 +8,9 @@ describe('BacktotopComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BacktotopComponent]
+      declarations: [ BacktotopComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
