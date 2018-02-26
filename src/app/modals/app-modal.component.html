@@ -22,7 +22,7 @@
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="modal3">
-  <vgr-modal-header>Här kan du se en lång text</vgr-modal-header>
+  <vgr-modal-header tabindex="0">Här kan du se en lång text</vgr-modal-header>
   <vgr-modal-content>
     <p>Denna fil innehåller personnummer på de personer som valt er vårdcentral tom 2017-01-31. För nedladdning av filen gäller
       följande villkor 1. Innehållet i filen får inte behandlas i strid med personuppgiftslagen (PuL) och patient-datalagen
@@ -47,7 +47,7 @@
   <vgr-modal-footer>
     <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara</vgr-button>
     <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara inte</vgr-button>
-    <vgr-button [secondary]="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" default="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <form [formGroup]="vardvalForm">
