@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'vgr-modal-content',
@@ -7,9 +7,6 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 
 export class ModalContentComponent {
-//   @HostBinding('class.card__top') cardTopClass = true;
-//   @HostBinding('class.card-header') cardHeaderClass = true;
-
   constructor() {
   }
 }
