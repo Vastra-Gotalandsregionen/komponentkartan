@@ -55,9 +55,12 @@
   </div>
   <div class="docs__api">
     Modal består av två delar. En komponent som läggs ytterst i DOM, med
-    <code>&lt;vgr-modal&gt;</code>. Detta är en placeholder för det innehåll som sedan visas över applikationen. Den andra delen är en
+    <code>&lt;vgr-modal&gt;</code>. Detta är en placeholder för det innehåll som sedan visas över applikationen. 
+    Den består i sin tur av tre delar, <code>&lt;vgr-modal-header&gt;</code>, <code>&lt;vgr-modal-content&gt;</code> 
+    och <code>&lt;vgr-modal-footer&gt;</code>.
+    Den andra delen är en
     <code>modalService</code> som injectas i de komponenter som vill visa en dialog. För att visa en dialog, använd
-    <code>modalService.openDialog()</code> eller någon av de andra metoderna. Se nedan.
+    <code>modalService.openDialog()</code> och för att stänga dialogen, använd <code>modalService.closeDialog()</code>. Se nedan.
     <br>
     <table class="property-table" style="margin-bottom: 20px">
       <tr>
@@ -66,42 +69,18 @@
         <th>Exempel</th>
       </tr>
       <tr>
-        <td>openDialog()</td>
-        <td>Öppnar en modal dialog med en rubrik -
-          <code>title</code>, en text -
-          <code>message</code> och knappar -
-          <code>button1Config</code>,
-          <code>button2Config</code>,
-          <code>button3Config</code>.
+        <td>openDialog(elementId: string)</td>
+        <td>Öppnar den modal dialog som har det element id som skickats in - 
+          <code>elementId</code>.
         </td>
-        <td>
-          <code>ButtonConfiguration</code> innehåller text och
-          <code>callback</code> för knappen, samt om knappen är default,
-          <code>isDefault</code>, eller ej.
-        </td>
+        <td></td>
       </tr>
       <tr>
-        <td>openOneButtonDialog()</td>
-        <td>Öppnar en modal dialog med en rubrik -
-          <code>title</code>, en text -
-          <code>message</code> och EN knapp, med text -
-          <code>buttonText</code> och funktion som anropas vid knapptryck -
-          <code>callback</code>.</td>
-        <td>
+        <td>closeDialog(elementId: string)</td>
+        <td>Stänger den modal dialog som har det element id som skickats in - 
+          <code>elementId</code>.
         </td>
-      </tr>
-      <tr>
-        <td>openSaveDontSaveCancelDialog()</td>
-        <td>Öppnar en modal dialog som är förkonfigurerad med Spara, Spara inte och Avbryt.
-          <code>title</code>,
-          <code>message</code> och händelser för respektive åtgärd -
-          <code>saveCallback</code>,
-          <code>dontSaveCallback</code>,
-          <code>cancelCallback</code> är konfigurerbara. Avbryt är defaultknapp.
-        </td>
-
-        <td>
-        </td>
+        <td></td>
       </tr>
     </table>
   </div>
