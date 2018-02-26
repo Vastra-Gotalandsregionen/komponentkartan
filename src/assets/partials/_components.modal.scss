@@ -10,8 +10,6 @@
   background-color: $modal-background-color;
   .vgr-modal--open & {
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
 
@@ -23,6 +21,8 @@
   padding-bottom: 20px;
   border: 1px solid #888;
   width: 448px;
+  margin: auto;
+  align-self: flex-start;
 }
 
 .modal-content__title {
