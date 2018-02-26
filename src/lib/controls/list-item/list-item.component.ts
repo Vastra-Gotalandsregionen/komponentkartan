@@ -37,7 +37,7 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
     ]
 })
 
-export class ListItemComponent implements OnInit, AfterContentInit {
+export class ListItemComponent implements AfterContentInit {
     readonly showNotificationDurationMs = 1500;
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
@@ -83,6 +83,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     @Input() set notification(value: RowNotification) {
         if (value) {
+
             if (value.type === NotificationType.ShowOnCollapse) {
                 this.eventNotification = value;
                 this.collapse(value.type);
@@ -92,7 +93,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
                 this.collapse(value.type);
                 this.changeDetector.detectChanges();
             } else if (value.type === NotificationType.Permanent) {
-                console.log(value);
                 this.permanentNotification = value;
                 this.showNotification();
             }
@@ -119,9 +119,6 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         this.listContent.goDown.subscribe(() => this.setFocusOnNextRowContent.emit());
     }
 
-    ngOnInit() {
-        this.showNotification();
-    }
 
     setFocusOnRow() {
         this.listItemHeader.setFocus();
@@ -196,12 +193,12 @@ export class ListItemComponent implements OnInit, AfterContentInit {
             this._expanded = false;
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
-
             setTimeout(() => {
 
 
                 this.notInteractable = false;
-                this.notification.done = true;
+                if (this.notification)
+                    this.notification.done = true;
 
                 if (!this.permanentNotification)
                     this.notificationVisible = false;
