@@ -360,11 +360,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
     this.exampleData.forEach(element => {
       if (element.previewObject.details.medverkanfamiljecentral === '') {
-        element.notification = {
-          message: 'Information saknas, medverkan i familjecentral ej ifylld',
-          icon: 'vgr-icon-exclamation--red',
-          type: NotificationType.Permanent
-        } as RowNotification;
+        element.setNotification('Information saknas, medverkan i familjecentral ej ifylld', 'vgr-icon-exclamation--red');
       }
     });
 
@@ -543,7 +539,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   onCardCancel(row: ExpandableRow<ExampleUnit, any>) {
     this.cardLocked = true;
 
-    row.notifyOnCollapsePermanent('Redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation');
+    row.notifyOnCollapse('Redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation');
   }
 
   onCardSave(event: Event, row: ExpandableRow<ExampleUnit, any>) {
@@ -557,9 +553,8 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
     this.cardLocked = true;
     if (this.editUnitForm.valid) {
-      row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
-    } else {
-      row.notifyOnCollapsePermanent(row.previewObject.enhet + ' felaktiga uppgifter', 'vgr-icon-exclamation--red');
+      row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green', true);
+
     }
   }
 
