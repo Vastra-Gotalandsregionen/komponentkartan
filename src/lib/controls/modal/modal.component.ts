@@ -43,7 +43,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
     }
 
     ngAfterViewChecked() {
-        if (!this.modalInitialized && this.isOpen && this.buttonComponents && this.buttonComponents.length > 0) {
+        if (!this.modalInitialized) {
             this.initFocusableElements();
             this.modalInitialized = true;
         }
@@ -55,12 +55,11 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
             const focusableNodes: NodeList = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
             this.focusableElements = Array.from(focusableNodes);
 
-
             this.firstTabStop = this.focusableElements[0];
             this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
 
             // Set default button if one is defined
-            const defaultButton = this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
+            const defaultButton = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
             if (defaultButton) {
                 defaultButton.nativeElement.children[0].focus();
             } else {
