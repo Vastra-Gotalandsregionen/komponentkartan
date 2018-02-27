@@ -1,6 +1,6 @@
 
 import {
-    Component, ViewContainerRef, OnInit, AfterViewChecked, QueryList, ElementRef, ContentChildren, Renderer2
+    Component, ViewContainerRef, OnInit, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2
 } from '@angular/core';
 import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
@@ -23,9 +23,8 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
 
     // A list of elements that can recieve focus
     focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+    @ContentChildren(forwardRef(() => ButtonComponent), { read: ElementRef, descendants: true }) buttonComponents: QueryList<ElementRef>;
 
-
-    @ContentChildren(ButtonComponent, { read: ElementRef }) buttonComponents: QueryList<ElementRef>;
     constructor(
         private modalService: ModalService, private elementRef: ElementRef, private renderer: Renderer2) {
 
@@ -43,7 +42,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
     }
 
     ngAfterViewChecked() {
-        if (!this.modalInitialized) {
+        if (!this.modalInitialized && this.buttonComponents && this.buttonComponents.length > 0) {
             this.initFocusableElements();
             this.modalInitialized = true;
         }
@@ -62,7 +61,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
             const defaultButton = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
             if (defaultButton) {
                 defaultButton.nativeElement.children[0].focus();
-            } else if (this.firstTabStop) {
+            } else {
                 this.firstTabStop.focus();
             }
         }, 10);
