@@ -42,7 +42,7 @@ export class ListItemComponent implements AfterContentInit {
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
     }
-    private _expanded: boolean;
+    private _expanded: boolean = false;
     @HostBinding('class.list-item') isContainer = true;
     @HostBinding('class.list-item--collapsed') collapsed = true;
     @HostBinding('class.list-item--expanded') get collapsedClass() { return !this.collapsed; }
@@ -55,13 +55,17 @@ export class ListItemComponent implements AfterContentInit {
     @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
     @Input() set expanded(expandedValue: boolean) {
+
         if (expandedValue && !this._expanded) {
+            console.log(expandedValue + ' ' + !this._expanded);
             this.expand();
         } else if (!expandedValue && this._expanded) {
+            console.log('collapse');
             this.collapse();
         }
     }
     get expanded(): boolean {
+        console.log(this._expanded)
         return this._expanded;
     }
 
@@ -119,6 +123,12 @@ export class ListItemComponent implements AfterContentInit {
         this.listContent.goDown.subscribe(() => this.setFocusOnNextRowContent.emit());
     }
 
+    toggleExpand(event: Event) {
+        console.log();
+        event.cancelBubble = true;
+        this.expanded = !this.expanded;
+
+    }
 
     setFocusOnRow() {
         this.listItemHeader.setFocus();
@@ -133,17 +143,21 @@ export class ListItemComponent implements AfterContentInit {
         if (!this._expanded) {
             this.expand();
         } else {
+            console.log()
             this.collapse();
         }
     }
 
     private expand() {
         if (this.isDeleted || this.notInteractable) {
+            console.log(this.isDeleted);
+            console.log(this.notInteractable);
             return;
         }
 
         const expandedChanged = !this._expanded;
         this._expanded = true;
+        console.log(this._expanded);
         this.collapsed = false;
 
         if (expandedChanged) {
@@ -153,7 +167,7 @@ export class ListItemComponent implements AfterContentInit {
 
     private collapse(collapsingNotification?: NotificationType) {
         this.notInteractable = true;
-
+        console.log(this.notInteractable);
         if (collapsingNotification) {
             this.processNotification(collapsingNotification);
         } else {
