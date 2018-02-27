@@ -36,10 +36,10 @@
 .modal-content__footer {
   float: right;
   min-height: 30px;
-  >* {
+  .button {
     margin-right: 20px;
   }
-  >*:last-child {
+  .button:last-child {
     margin-right: 0px;
   }
 }
