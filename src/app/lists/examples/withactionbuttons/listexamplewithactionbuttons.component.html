@@ -61,16 +61,16 @@
     <p>Du tog bort detta objektet {{removedObjectString}}</p>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="modalService.closeModal('notifyDeleteModal')">Stäng</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('notifyDeleteModal')">Stäng</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="removeRowModal">
   <vgr-modal-header>Ta bort raden</vgr-modal-header>
   <vgr-modal-content>
-    <p>Vill du verkligen ta bort {{!rowToRemove || rowToRemove.previewObject.firstName}}?</p>
+    <p *ngIf="rowToRemove">Vill du verkligen ta bort {{rowToRemove.previewObject.firstName}}?</p>
   </vgr-modal-content>
   <vgr-modal-footer>
     <vgr-button (click)="removeSelectedRow()">Ja</vgr-button>
-    <vgr-button (click)="modalService.closeModal('removeRowModal')">Nej</vgr-button>
+    <vgr-button (click)="closeModal('removeRowModal')">Nej</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>

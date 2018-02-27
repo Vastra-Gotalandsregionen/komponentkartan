@@ -74,6 +74,10 @@ export class ListExampleWithActionButtonsComponent {
         }
     }
 
+    closeModal(modalId: string) {
+        this.modalService.closeDialog(modalId);
+    }
+
     removeSelectedRow() {
         this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
         this.rowToRemove.previewObject.selected = false;
