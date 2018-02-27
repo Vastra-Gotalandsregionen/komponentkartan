@@ -17,9 +17,19 @@ export class ListExampleWithActionButtonsComponent {
     typeScriptSimpleListMarkup: string;
     htmlSimpleListMarkup: string;
     examples: Examples = new Examples();
+    removedObjectString: string;
+    rowToRemove: ExpandableRow<ExamplePerson, any>;
 
     get allChecked() {
         return this.peopleRows && !this.peopleRows.filter(r => !r.previewObject.deleted).find(x => !x.previewObject.selected);
+    }
+
+    constructor(htmlEncoder: HtmlEncodeService, private modalService: ModalService) {
+
+        this.typeScriptSimpleListMarkup =
+            htmlEncoder.prepareHighlightedSection(this.examples.typeScriptActionButtonsListMarkup, 'typescript');
+        this.htmlSimpleListMarkup =
+            htmlEncoder.prepareHighlightedSection(this.examples.htmlActionButtonsListMarkup);
     }
 
     loadData() {
@@ -47,24 +57,13 @@ export class ListExampleWithActionButtonsComponent {
     }
 
     notifyOnDelete(row: any) {
-        // this.modalService.openDialog('Info', 'Du tog bort detta objektet: ' + JSON.stringify(row, null, '\t'),
-        //     new ModalButtonConfiguration('Stäng', () => {
-        //     })
-        // );
+        this.removedObjectString = JSON.stringify(row, null, '\t');
+        this.modalService.openDialog('notifyDeleteModal');
     }
 
     removeRow(row: ExpandableRow<ExamplePerson, any>) {
-        // this.modalService.openDialog('Ta bort raden', 'Vill du verkligen ta bort ' + row.previewObject.firstName + '?',
-        //     new ModalButtonConfiguration('Ja', () => {
-        //         row.notifyOnRemove(row.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
-        //         row.previewObject.selected = false;
-        //         row.previewObject.deleted = true;
-
-        //         /*
-        //           Remove for real...
-        //         */
-        //     }),
-        //     new ModalButtonConfiguration('Nej', () => { }));
+        this.rowToRemove = row;
+        this.modalService.openDialog('removeRowModal');
     }
 
     getSelectedRows(): number {
@@ -73,6 +72,16 @@ export class ListExampleWithActionButtonsComponent {
         } else {
             return this.peopleRows && this.peopleRows.filter(r => r.previewObject.selected).length;
         }
+    }
+
+    removeSelectedRow() {
+        this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
+        this.rowToRemove.previewObject.selected = false;
+        this.rowToRemove.previewObject.deleted = true;
+        /*
+          Remove for real...
+        */
+        this.modalService.closeDialog('removeRowModal');
     }
 
     onSortChanged(event: SortChangedArgs) {
@@ -95,15 +104,6 @@ export class ListExampleWithActionButtonsComponent {
                         (event.direction === SortDirection.Ascending ? -1 : 1) : 0;
             });
         }
-    }
-
-
-    constructor(htmlEncoder: HtmlEncodeService, private modalService: ModalService) {
-
-        this.typeScriptSimpleListMarkup =
-            htmlEncoder.prepareHighlightedSection(this.examples.typeScriptActionButtonsListMarkup, 'typescript');
-        this.htmlSimpleListMarkup =
-            htmlEncoder.prepareHighlightedSection(this.examples.htmlActionButtonsListMarkup);
     }
 
 }
