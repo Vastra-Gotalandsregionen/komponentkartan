@@ -1,4 +1,3 @@
-<app-modals></app-modals>
 <app-component-docs [componentName]="'Modal dialog'">
   <div class="docs__overview">
     <code>&lt;vgr-modal&gt;</code>
@@ -7,7 +6,7 @@
     </p>
 
     <div style="margin-top: 20px;height:35px;">
-      <vgr-button (click)="showOneButtonModalOverview()">Visa dialog! modal2</vgr-button>
+      <vgr-button (click)="showOneButtonModalOverview()">Visa dialog!</vgr-button>
     </div>
     <br>
     <p> Förändras med tema:
@@ -32,35 +31,44 @@
       </div>
     </div>
     <div class="row-layout">
-        <div>
-          <vgr-button (click)="showChooseVardvalWithTextModal()">Vårdval 1</vgr-button>
-        </div>
-        <div>
-          <vgr-button (click)="showChooseVardvalWithoutTextModal()">Vårdval 2</vgr-button>
-        </div>
-        <div>
-          <vgr-button (click)="showCommentAnswerWithTextModal()">Kommentar 1</vgr-button>
-        </div>
-        <div>
-          <vgr-button (click)="showCommentAnswerWithoutTextModal()">Kommentar 2</vgr-button>
-        </div>
-        <div>
-          <vgr-button (click)="showCommentModal()">Kommentar 3</vgr-button>
-        </div>
+      <div>
+        <vgr-button (click)="showCommentAnswerWithTextModal()">Kommentar 1</vgr-button>
+      </div>
+      <div>
+        <vgr-button (click)="showCommentAnswerWithoutTextModal()">Kommentar 2</vgr-button>
+      </div>
+      <div>
+        <vgr-button (click)="showCommentModal()">Kommentar 3</vgr-button>
+      </div>
     </div>
-    <div style="margin-top: 20px">
-      <span>Du svarade:</span>
-      <span>{{lastModalAnswer}}</span>
+    <div class="row-layout" style="margin-top: 10px;">
+      <div>
+        <vgr-button (click)="showChooseVardvalWithTextModal()">Vårdval 1</vgr-button>
+      </div>
+      <div>
+        Du valde: {{vardval1Answer}}
+      </div>
+    </div>
+    <div class="row-layout" style="margin-top: 10px;">
+      <div>
+        <vgr-button (click)="showChooseVardvalWithoutTextModal()">Vårdval 2</vgr-button>
+      </div>
+      <div>
+        Du valde: {{vardval2Answer}}
+      </div>
     </div>
   </div>
   <div class="docs__api">
     Modal består av två delar. En komponent som läggs ytterst i DOM, med
-    <code>&lt;vgr-modal&gt;</code>. Detta är en placeholder för det innehåll som sedan visas över applikationen. 
-    Den består i sin tur av tre delar, <code>&lt;vgr-modal-header&gt;</code>, <code>&lt;vgr-modal-content&gt;</code> 
-    och <code>&lt;vgr-modal-footer&gt;</code>.
-    Den andra delen är en
+    <code>&lt;vgr-modal&gt;</code>. Detta är en placeholder för det innehåll som sedan visas över applikationen. Den består i sin
+    tur av tre delar,
+    <code>&lt;vgr-modal-header&gt;</code>,
+    <code>&lt;vgr-modal-content&gt;</code>
+    och
+    <code>&lt;vgr-modal-footer&gt;</code>. Den andra delen är en
     <code>modalService</code> som injectas i de komponenter som vill visa en dialog. För att visa en dialog, använd
-    <code>modalService.openDialog()</code> och för att stänga dialogen, använd <code>modalService.closeDialog()</code>. Se nedan.
+    <code>modalService.openDialog()</code> och för att stänga dialogen, använd
+    <code>modalService.closeDialog()</code>. Se nedan.
     <br>
     <table class="property-table" style="margin-bottom: 20px">
       <tr>
@@ -70,14 +78,14 @@
       </tr>
       <tr>
         <td>openDialog(elementId: string)</td>
-        <td>Öppnar den modal dialog som har det element id som skickats in - 
+        <td>Öppnar den modal dialog som har det element id som skickats in -
           <code>elementId</code>.
         </td>
         <td></td>
       </tr>
       <tr>
         <td>closeDialog(elementId: string)</td>
-        <td>Stänger den modal dialog som har det element id som skickats in - 
+        <td>Stänger den modal dialog som har det element id som skickats in -
           <code>elementId</code>.
         </td>
         <td></td>
@@ -85,7 +93,9 @@
     </table>
   </div>
   <div class="docs__wcag">
-    Dialogen följer WCAG genom att man inte kan tabba ur dialogen utan att stänga den först.
+    Dialogen följer WCAG genom att man inte kan tabba ur dialogen utan att stänga den först. Som default läggs fokus på den första
+    knappen, eller element inne i modalen. Om fokus ska läggas på en annan knapp, sätt attributet default=true på den knapp
+    där fokus önskas.
     <br> Tänk på följande riktlinjer vid implementation av en modal:
     <br>
     <br> If content is large enough that focusing the first interactive element could cause the beginning of content to scroll
@@ -114,3 +124,124 @@
 
   </div>
 </app-component-docs>
+<vgr-modal id="modal1">
+  <vgr-modal-header>Välj i dropdown</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Här kan du välja i en fin dropdownlista.</p>
+    <br/>
+    <h3>Välj här nedan</h3>
+    <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" default="true" (click)="closeModal('modal1')">Knapp</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="modal2">
+  <vgr-modal-header>Här kan du trycka på knappar om du gillar det.</vgr-modal-header>
+  <vgr-modal-content>
+    <vgr-button>Hahahah!</vgr-button>
+    <vgr-button>Hohohoho!</vgr-button>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 1</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 2</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="modal3">
+  <vgr-modal-header tabindex="0">Här kan du se en lång text</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Denna fil innehåller personnummer på de personer som valt er vårdcentral tom 2017-01-31. För nedladdning av filen gäller
+      följande villkor 1. Innehållet i filen får inte behandlas i strid med personuppgiftslagen (PuL) och patient-datalagen
+      (PdL). Informationen får därför inte användas för annat ändamål än det för vilket uppgifterna samlats in (9 § punkt
+      c och d PuL och 2 kap. 4 § PdL). Detta innebär bland annat att uppgifterna inte får användas för massutskick eller
+      marknadsföring. 2. Verksamhetschefen ansvarar för att endast den senaste månadens fil används för eventuell bearbetning
+      av informationen. För att acceptera båda villkoren ovan, tryck [Jag accepterar] annars tryck [Avbryt] Notera att systemet
+      bokför vem som accepterat villkoren och tidpunkten för detta. Notera även att alla register i verksamheten ska vara
+      anmälda till utsett personuppgiftsombud eller Datainspektionen.
+    </p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('modal3')">Jag accepterar</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="modal4">
+  <vgr-modal-header>En header från app</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Ändringarna går förlorade om du inte sparar dem</p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara inte</vgr-button>
+    <vgr-button [secondary]="true" default="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<form [formGroup]="vardvalForm">
+  <vgr-modal id="vardvalWithTextModal">
+    <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
+    <vgr-modal-content>
+      <p>Du har behörighet att registrera vårdval på flera olika vårdcentraler</p>
+      <br/>
+      <p>För att vårdvalet skall bli rätt för invånaren så måste du ange vilken vårdcentral som invånaren har valt.</p>
+      <br/>
+      <h3>Välj vårdecentral</h3>
+      <vgr-dropdown formControlName="vardval" [showValidation]="false" [items]="dropdownItems"></vgr-dropdown>
+    </vgr-modal-content>
+    <vgr-modal-footer>
+      <vgr-button [secondary]="true" (click)="closeSelectVardval1()">Avbryt</vgr-button>
+      <vgr-button [secondary]="true" [disabled]="vardvalForm.invalid" (click)="selectVardval1()">Skriv ut</vgr-button>
+    </vgr-modal-footer>
+  </vgr-modal>
+</form>
+<form [formGroup]="vardvalForm2">
+
+  <vgr-modal id="vardvalWithoutTextModal">
+    <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
+    <vgr-modal-content>
+      <h3>Välj vårdecentral</h3>
+      <vgr-dropdown formControlName="vardval" [showValidation]="false" [items]="dropdownItems"></vgr-dropdown>
+    </vgr-modal-content>
+    <vgr-modal-footer>
+      <vgr-button [secondary]="true" (click)="closeSelectVardval2()">Avbryt</vgr-button>
+      <vgr-button [secondary]="true" [disabled]="vardvalForm2.invalid" (click)="selectVardval2()">Skriv ut</vgr-button>
+    </vgr-modal-footer>
+  </vgr-modal>
+</form>
+<vgr-modal id="commentAnswerWithTextModal">
+  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Kommentar:
+      <br/> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
+    </p>
+    <br/>
+    <p>Ditt svar:</p>
+    <textarea></textarea>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Svara</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="commentAnswerWithoutTextModal">
+  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Ditt svar:</p>
+    <textarea></textarea>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Svara</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="commentModal">
+  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Kommentar:
+      <br/> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
+    </p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Spara</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
