@@ -57,31 +57,4 @@ describe('ModalPlaceholderComponent', () => {
             expect(component.isOpen).toBe(false);
         });
     });
-
-    describe('When a two-button modal is opened', () => {
-        // beforeEach(() => {
-        //     component.elementId = 'modal';
-        //     modalService.openDialog('modal');
-        //     fixture.detectChanges();
-        // });
-        // it('modal is open', () => {
-        //     expect(component.isOpen).toBe(true);
-        // });
-        // it('modal is visible', () => {
-        //     const openModals = rootElement.queryAll(By.css('.vgr-modal--open'));
-        //     expect(openModals.length).toBe(1);
-        // });
-        // describe('and button 2 is clicked', () => {
-        //     beforeEach(() => {
-        //         const buttons = rootElement.queryAll(By.css('.button'));
-        //         buttons[1].triggerEventHandler('click', {});
-        //     });
-        //     it('modal is closed', () => {
-        //         expect(component.isOpen).toBe(false);
-        //     });
-        //     it('button 2 callback is called', () => {
-        //         expect(selectedButton).toBe('Button2');
-        //     });
-        // });
-    });
 });
