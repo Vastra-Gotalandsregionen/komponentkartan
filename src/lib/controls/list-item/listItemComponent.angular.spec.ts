@@ -22,7 +22,6 @@ describe('ListItemComponent', () => {
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
-    // TestBed.initTestEnvironment(BrowserAnimationsModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [
         ListItemComponent,
@@ -39,14 +38,16 @@ describe('ListItemComponent', () => {
     TestBed.overrideComponent(ListItemComponent, {
       set: {
         templateUrl: './list-item.component.html'
-        // template: `
-        //         <vgr-list-item-header>
-        //             <vgr-list-column [text]="'Testman'"></vgr-list-column>
-        //         </vgr-list-item-header>
-        //         <vgr-list-item-content>
-        //           <span> Mer information</span>
-        //         </vgr-list-item-content>
-        //   `
+        //   template: `
+        //                <vgr-list-item>
+        //                   <vgr-list-item-header>
+        //                       <vgr-list-column [text]="'Testman'"></vgr-list-column>
+        //                   </vgr-list-item-header>
+        //                   <vgr-list-item-content>
+        //                     <span> Mer information</span>
+        //                   </vgr-list-item-content>
+        //                 </vgr-list-item>
+        //       `
       }
     });
 
@@ -54,10 +55,10 @@ describe('ListItemComponent', () => {
       fixture = TestBed.createComponent(ListItemComponent);
 
       fixture.componentInstance.listItemHeader = <ListItemHeaderComponent>fixture.debugElement.children[0].componentInstance; // First element in list-item which is list-item-header;
-      fixture.componentInstance.listContent = <ListItemContentComponent>fixture.debugElement.children[1].componentInstance;  // Second element in list-item which is list-item-content;
+      // fixture.componentInstance.listContent = <ListItemContentComponent>fixture.debugElement.children[0].componentInstance;  // Second element in list-item which is list-item-content;
       component = fixture.componentInstance;
       rootElement = fixture.debugElement;
-      spyOn(component, 'toggleExpand').and.callThrough();
+      console.log(rootElement);
       component.ngAfterContentInit();
 
       fixture.detectChanges();
@@ -67,6 +68,10 @@ describe('ListItemComponent', () => {
 
 
   describe('When initialized', () => {
+    beforeEach(() => {
+      console.log(fixture.debugElement.children[0]);
+    });
+
     it('the component has the list-item class', () => {
       expect(rootElement.classes['list-item']).toBe(true);
     });
@@ -79,49 +84,50 @@ describe('ListItemComponent', () => {
       expect(rootElement.classes['list-item--expanded']).toBe(false);
     })
 
-    describe('and the list-item-header is clicked', () => {
-      const event: any = { cancelBubble: false };
-      let spy: any;
-      let element: DebugElement
+    // describe('and the list-item-header is clicked', () => {
+    //   const event: any = { cancelBubble: false };
+    //   let spy: any;
+    //   let element: DebugElement
 
-      beforeEach(() => {
-        component.expanded = false;
-        component.notInteractable = false;
-        component.isDeleted = false;
+    //   beforeEach(() => {
+    //     spyOn(component, 'toggleExpand').and.callThrough();
+    //     component.expanded = false;
+    //     component.notInteractable = false;
+    //     component.isDeleted = false;
 
-        element = rootElement.query(By.css('.list-item__header_wrapper'));
-        console.log('beforeAll');
+    //     element = rootElement.query(By.css('.list-item__header_wrapper'));
 
-        element.triggerEventHandler('click', event);
-        fixture.detectChanges();
-      });
+    //     element.triggerEventHandler('click', event);
+    //     fixture.detectChanges();
+    //   });
 
-      it('toggleExpand has been called once', () => {
-        expect(component.toggleExpand).toHaveBeenCalledTimes(1);
-      });
-      it('the component is collapsed', () => {
-        expect(rootElement.classes['list-item--collapsed']).toBe(false);
-      })
-      it('component is expanded', () => {
-        expect(rootElement.classes['list-item--expanded']).toBe(true);
-      });
-      it('click event is not bubbled', () => {
-        expect(true).toBeTruthy();
-      });
-      // describe('and the header is clicked again', () => {
-      //   beforeEach(() => {
-      //     spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
-      //     rootElement.triggerEventHandler('click', null);
-      //     fixture.detectChanges();
-      //   });
-      //   it('component is collapsed', () => {
-      //     expect(component.expanded).toBe(false);
-      //   });
-      //   it('content not visible', () => {
-      //     expect(jqueryHelper.toggleContent).toHaveBeenCalled();
-      //   });
-      // });
-    });
+    //   it('toggleExpand has been called once', () => {
+    //     //   expect(component.toggleExpand).toHaveBeenCalledTimes(1);
+    //   });
+    //   it('the component is collapsed', () => {
+    //     expect(rootElement.classes['list-item--collapsed']).toBe(false);
+    //   })
+    //   it('component is expanded', () => {
+    //     expect(rootElement.classes['list-item--expanded']).toBe(true);
+    //   });
+    //   it('click event is not bubbled', () => {
+    //     expect(true).toBeTruthy();
+    //   });
+
+    //   // describe('and the header is clicked again', () => {
+    //   //   beforeEach(() => {
+    //   //     spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
+    //   //     rootElement.triggerEventHandler('click', null);
+    //   //     fixture.detectChanges();
+    //   //   });
+    //   //   it('component is collapsed', () => {
+    //   //     expect(component.expanded).toBe(false);
+    //   //   });
+    //   //   it('content not visible', () => {
+    //   //     expect(jqueryHelper.toggleContent).toHaveBeenCalled();
+    //   //   });
+    //   // });
+    // });
 
     //   describe('and the list-item-header is in focus', () => {
     //     let header: DebugElement;
