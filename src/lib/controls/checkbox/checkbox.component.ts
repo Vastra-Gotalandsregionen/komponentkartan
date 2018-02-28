@@ -27,7 +27,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     public labelledbyid: string = Guid.newGuid();
     public element: any;
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
         this.disabled = false;
         this.checked = false;
 
@@ -43,18 +43,19 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
         this.element = this.elementRef.nativeElement.querySelector(':not(.checkbox--disabled) .checkbox__image');
     }
 
-    onClick(): void {
+    onClick(event: Event): void {
         if (!this.disabled) {
             this.checked = !this.checked;
             if (this.element) { this.renderer.invokeElementMethod(this.element, 'focus'); }
             this.onChange(this.checked);
             this.checkedChanged.emit(this.checked);
+            event.cancelBubble = true;
         }
     }
 
     onKeyDown(event: KeyboardEvent): void {
         if (event.keyCode === 13 || event.keyCode === 32) {
-            this.onClick();
+            this.onClick(event);
             event.preventDefault();
             event.cancelBubble = true;
         }
