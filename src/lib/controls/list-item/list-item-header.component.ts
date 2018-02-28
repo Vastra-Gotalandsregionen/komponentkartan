@@ -9,7 +9,7 @@ import { Component, HostBinding, HostListener, Input, Output, EventEmitter, Elem
 export class ListItemHeaderComponent {
     @HostBinding('class.list-item__header') listItemHeader = true;
     @HostBinding('tabIndex') tabIndex = 0;
-    @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
     @Output() goToFirst: EventEmitter<any> = new EventEmitter();
     @Output() goToLast: EventEmitter<any> = new EventEmitter();
     @Output() goUp: EventEmitter<any> = new EventEmitter();

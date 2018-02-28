@@ -4,4 +4,5 @@ export interface RowNotification {
     type: NotificationType;
     message: string;
     done: boolean;
+    removeWhenDone: boolean;
 }

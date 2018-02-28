@@ -13,7 +13,6 @@ import { ListHeaderComponent } from '../list/list-header.component';
 import { ListItemHeaderComponent } from '../list-item/list-item-header.component';
 import { ListItemContentComponent } from '../list-item/list-item-content.component';
 
-
 @Component({
     templateUrl: './list-item.component.html',
     selector: 'vgr-list-item',
@@ -38,12 +37,12 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
     ]
 })
 
-export class ListItemComponent implements OnInit, AfterContentInit {
+export class ListItemComponent implements AfterContentInit {
     readonly showNotificationDurationMs = 1500;
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
     }
-    private _expanded: boolean;
+    private _expanded: boolean = false;
     @HostBinding('class.list-item') isContainer = true;
     @HostBinding('class.list-item--collapsed') collapsed = true;
     @HostBinding('class.list-item--expanded') get collapsedClass() { return !this.collapsed; }
@@ -56,17 +55,21 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
     @Input() set expanded(expandedValue: boolean) {
+
         if (expandedValue && !this._expanded) {
+            console.log(expandedValue + ' ' + !this._expanded);
             this.expand();
         } else if (!expandedValue && this._expanded) {
+            console.log('collapse');
             this.collapse();
         }
     }
     get expanded(): boolean {
+        console.log(this._expanded)
         return this._expanded;
     }
 
-    @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
     @Output() notificationChanged: EventEmitter<RowNotification> = new EventEmitter<RowNotification>();
     @Output() deleted: EventEmitter<any> = new EventEmitter();
     @Output() setFocusOnFirstRow: EventEmitter<any> = new EventEmitter();
@@ -76,28 +79,27 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     @Output() setFocusOnPreviousRowContent: EventEmitter<any> = new EventEmitter();
     @Output() setFocusOnNextRowContent: EventEmitter<any> = new EventEmitter();
 
+    private isPermanent: boolean;
     private _notification: RowNotification;
 
-    private notificationPermanent: RowNotification;
+    private eventNotification: RowNotification;
+    private permanentNotification: RowNotification;
 
-    set notification(value: RowNotification) {
-
-
+    @Input() set notification(value: RowNotification) {
         if (value) {
+
             if (value.type === NotificationType.ShowOnCollapse) {
+                this.eventNotification = value;
                 this.collapse(value.type);
-                this._notification = value;
                 this.changeDetector.detectChanges();
             } else if (value.type === NotificationType.ShowOnRemove) {
+                this.eventNotification = value;
                 this.collapse(value.type);
-                this._notification = value;
                 this.changeDetector.detectChanges();
             } else if (value.type === NotificationType.Permanent) {
-                this.notificationPermanent = value;
+                this.permanentNotification = value;
                 this.showNotification();
             }
-        } else {
-            this.notificationVisible = false;
         }
 
         this.notificationChanged.emit(value);
@@ -112,19 +114,21 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     ngAfterContentInit() {
+        console.log(this.listItemHeader);
         this.listItemHeader.expandedChanged.subscribe(() => this.setExpandOrCollapsed());
-        this.listItemHeader.goToFirst.subscribe(() => this.setFocusOnFirstRow.emit());
-        this.listItemHeader.goToLast.subscribe(() => this.setFocusOnLastRow.emit());
-        this.listItemHeader.goUp.subscribe(() => this.setFocusOnPreviousRow.emit());
-        this.listItemHeader.goDown.subscribe(() => this.setFocusOnNextRow.emit());
-        this.listContent.goUp.subscribe(() => this.setFocusOnPreviousRowContent.emit());
-        this.listContent.goDown.subscribe(() => this.setFocusOnNextRowContent.emit());
+        // this.listItemHeader.goToFirst.subscribe(() => this.setFocusOnFirstRow.emit());
+        // this.listItemHeader.goToLast.subscribe(() => this.setFocusOnLastRow.emit());
+        // this.listItemHeader.goUp.subscribe(() => this.setFocusOnPreviousRow.emit());
+        // this.listItemHeader.goDown.subscribe(() => this.setFocusOnNextRow.emit());
+        // this.listContent.goUp.subscribe(() => this.setFocusOnPreviousRowContent.emit());
+        // this.listContent.goDown.subscribe(() => this.setFocusOnNextRowContent.emit());
     }
 
-    ngOnInit() {
-        if (this.notificationPermanent && this.notification.type === NotificationType.Permanent) {
-            this.showNotification();
-        }
+    toggleExpand(event: Event) {
+        console.log();
+        event.cancelBubble = true;
+        this.expanded = !this.expanded;
+
     }
 
     setFocusOnRow() {
@@ -132,6 +136,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
     }
 
     showNotification() {
+        this._notification = this.permanentNotification;
         this.notificationVisible = true;
     }
 
@@ -139,17 +144,21 @@ export class ListItemComponent implements OnInit, AfterContentInit {
         if (!this._expanded) {
             this.expand();
         } else {
+            console.log()
             this.collapse();
         }
     }
 
     private expand() {
         if (this.isDeleted || this.notInteractable) {
+            console.log(this.isDeleted);
+            console.log(this.notInteractable);
             return;
         }
 
         const expandedChanged = !this._expanded;
         this._expanded = true;
+        console.log(this._expanded);
         this.collapsed = false;
 
         if (expandedChanged) {
@@ -159,7 +168,7 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private collapse(collapsingNotification?: NotificationType) {
         this.notInteractable = true;
-
+        console.log(this.notInteractable);
         if (collapsingNotification) {
             this.processNotification(collapsingNotification);
         } else {
@@ -185,43 +194,49 @@ export class ListItemComponent implements OnInit, AfterContentInit {
 
     private processShowOnCollapseNotification() {
 
-        if (!this.notification) {
+        if (!this.eventNotification) {
             return;
         }
 
         this.notificationVisible = true;
 
-        if (this.notification.done) {
+        if (this.eventNotification.done) {
             this.notificationVisible = false;
         }
-
+        this._notification = this.eventNotification;
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
-
             setTimeout(() => {
-                if (this.notificationPermanent) {
-                    this.notification = this.notificationPermanent;
-                    this.changeDetector.detectChanges();
-                    this.notificationVisible = true;
-                    this.notInteractable = false;
-                    return;
-                }
 
-                if (this.notification !== this.notificationPermanent) {
+                this.notInteractable = false;
+                this.notification.done = true;
+
+                if (!this.permanentNotification)
                     this.notificationVisible = false;
-                    this.notInteractable = false;
-                    this.notification.done = true;
-                    return;
-                }
-            }, 2000);
 
+                if (this.eventNotification.removeWhenDone) {
+                    this._notification = null;
+                    this.permanentNotification = null;
+                }
+                else
+                    this._notification = this.permanentNotification;
+                return;
+
+
+            }, 2000);
         }, 1400);
+
+
     }
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
+        if (this.eventNotification.done) {
+            this.notificationVisible = false;
+        }
+        this._notification = this.eventNotification;
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
