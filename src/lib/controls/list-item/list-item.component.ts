@@ -112,12 +112,12 @@ export class ListItemComponent implements AfterContentInit {
 
     ngAfterContentInit() {
         this.listItemHeader.expandedChanged.subscribe(() => this.setExpandOrCollapsed());
-        // this.listItemHeader.goToFirst.subscribe(() => this.setFocusOnFirstRow.emit());
-        // this.listItemHeader.goToLast.subscribe(() => this.setFocusOnLastRow.emit());
-        // this.listItemHeader.goUp.subscribe(() => this.setFocusOnPreviousRow.emit());
-        // this.listItemHeader.goDown.subscribe(() => this.setFocusOnNextRow.emit());
-        // this.listContent.goUp.subscribe(() => this.setFocusOnPreviousRowContent.emit());
-        // this.listContent.goDown.subscribe(() => this.setFocusOnNextRowContent.emit());
+        this.listItemHeader.goToFirst.subscribe(() => this.setFocusOnFirstRow.emit());
+        this.listItemHeader.goToLast.subscribe(() => this.setFocusOnLastRow.emit());
+        this.listItemHeader.goUp.subscribe(() => this.setFocusOnPreviousRow.emit());
+        this.listItemHeader.goDown.subscribe(() => this.setFocusOnNextRow.emit());
+        this.listContent.goUp.subscribe(() => this.setFocusOnPreviousRowContent.emit());
+        this.listContent.goDown.subscribe(() => this.setFocusOnNextRowContent.emit());
     }
 
     toggleExpand(event: Event) {
