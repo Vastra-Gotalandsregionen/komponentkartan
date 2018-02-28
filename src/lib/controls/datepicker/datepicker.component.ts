@@ -341,8 +341,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
             return;
         }
         this.expanded = !this.expanded;
-
-        console.log(this.expanded);
     }
 
     onPreviousMonth(event: Event) {
