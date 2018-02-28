@@ -55,3 +55,22 @@
     </vgr-page-block>
   </vgr-page-body>
 </vgr-page>
+<vgr-modal id="notifyDeleteModal">
+  <vgr-modal-header>Info</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Du tog bort detta objektet {{removedObjectString}}</p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('notifyDeleteModal')">Stäng</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="removeRowModal">
+  <vgr-modal-header>Ta bort raden</vgr-modal-header>
+  <vgr-modal-content>
+    <p *ngIf="rowToRemove">Vill du verkligen ta bort {{rowToRemove.previewObject.firstName}}?</p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button (click)="removeSelectedRow()">Ja</vgr-button>
+    <vgr-button (click)="closeModal('removeRowModal')">Nej</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>

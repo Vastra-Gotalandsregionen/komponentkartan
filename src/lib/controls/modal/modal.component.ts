@@ -1,8 +1,8 @@
 
 import {
-    Component, ViewContainerRef, OnInit, ViewChildren, AfterViewChecked, QueryList, ElementRef
+    Component, ViewContainerRef, OnInit, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2
 } from '@angular/core';
-import { ModalService, ModalConfiguration, ModalButtonConfiguration } from '../../services/modalService';
+import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -13,9 +13,8 @@ import { ButtonComponent } from '../button/button.component';
 
 export class ModalPlaceholderComponent implements AfterViewChecked {
     isOpen: boolean;
-    message: string;
+    elementId: string;
     title: string;
-    buttons: ModalButtonConfiguration[];
     modalInitialized: boolean;
     lastFocusedElement: any;
     firstTabStop: any;
@@ -24,26 +23,26 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
 
     // A list of elements that can recieve focus
     focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+    @ContentChildren(forwardRef(() => ButtonComponent), { read: ElementRef, descendants: true }) buttonComponents: QueryList<ElementRef>;
 
-
-    @ViewChildren(ButtonComponent, { read: ElementRef }) buttonComponents: QueryList<ElementRef>;
     constructor(
-        private modalService: ModalService, private elementRef: ElementRef) {
+        private modalService: ModalService, private elementRef: ElementRef, private renderer: Renderer2) {
 
-        this.buttons = [];
         this.isOpen = false;
-        this.modalService.modalOpened$.subscribe(args => {
+        this.modalService.modalOpened$.subscribe(elementId => {
             this.modalInitialized = false;
-            this.message = args.message;
-            this.title = args.title;
-            this.buttons = args.buttons;
+            this.elementId = elementId;
             this.openModal();
+        });
 
+        this.modalService.modalClosed$.subscribe(elementId => {
+            this.elementId = elementId;
+            this.closeModal();
         });
     }
 
     ngAfterViewChecked() {
-        if (!this.modalInitialized && this.isOpen && this.buttonComponents && this.buttonComponents.length > 0) {
+        if (!this.modalInitialized && this.buttonComponents && this.buttonComponents.length > 0) {
             this.initFocusableElements();
             this.modalInitialized = true;
         }
@@ -59,29 +58,25 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
             this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
 
             // Set default button if one is defined
-            const defaultButton = this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
+            const defaultButton = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
             if (defaultButton) {
                 defaultButton.nativeElement.children[0].focus();
             } else {
                 this.firstTabStop.focus();
             }
-        }, 1);
+        }, 10);
     }
 
     private openModal() {
         this.isOpen = true;
-        $('body').addClass('modal--open');
+        this.renderer.addClass(document.querySelector(`#${this.elementId}`), 'vgr-modal--open');
+        this.renderer.addClass(document.body, 'modal--open');
     }
 
     private closeModal() {
         this.isOpen = false;
-        $('body').removeClass('modal--open');
-
-    }
-
-    onButtonClick(callback: () => void) {
-        callback();
-        this.closeModal();
+        this.renderer.removeClass(document.querySelector(`#${this.elementId}`), 'vgr-modal--open');
+        this.renderer.removeClass(document.body, 'modal--open');
     }
 
     onKeyDown(e: any) {

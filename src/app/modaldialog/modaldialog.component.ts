@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService, ModalButtonConfiguration } from 'vgr-komponentkartan';
+import { ModalService } from 'vgr-komponentkartan';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-modaldialog',
@@ -7,53 +8,103 @@ import { ModalService, ModalButtonConfiguration } from 'vgr-komponentkartan';
   styleUrls: ['./modaldialog.component.scss']
 })
 export class ModaldialogComponent implements OnInit {
-  constructor(private modalService: ModalService) { }
-  lastModalAnswer: string;
+  vardvalForm: FormGroup;
+  vardvalForm2: FormGroup;
+  vardval1Answer: string;
+  vardval2Answer: string;
+  dropdownItems = [];
+
+  constructor(private modalService: ModalService) {
+    this.dropdownItems = [
+      { displayName: 'Vårdcentral 1', value: '1' },
+      { displayName: 'Vårdcentral 2', value: '2' },
+      { displayName: 'Vårdcentral 3', value: '3' }
+    ];
+  }
 
   ngOnInit() {
+    this.createForms();
   }
 
   showOneButtonModal() {
-    this.modalService.openDialog('Detta är en dialog med en knapp', 'Här kan du bara välja ett alternativ',
-      new ModalButtonConfiguration('OK', () => this.lastModalAnswer = 'OK')
-    );
+    this.modalService.openDialog('modal1');
   }
+
   showOneButtonModalOverview() {
-    this.modalService.openDialog('Detta är en dialog med en knapp', 'Här kan du bara välja ett alternativ',
-      new ModalButtonConfiguration('OK', () => null)
-    );
+    this.modalService.openDialog('modal2');
   }
 
   showTwoButtonModal() {
-    this.modalService.openDialog('Acceptera villkor',
-      'Denna fil innehåller personnummer på de personer som valt er vårdcentral tom 2017-01-31. ' +
-      'För nedladdning av filen gäller följande villkor' +
-      '1. Innehållet i filen får inte behandlas i strid med personuppgiftslagen (PuL) och patient-datalagen (PdL). ' +
-      'Informationen får därför inte användas för annat ändamål än det för vilket uppgifterna samlats in ' +
-      '(9 § punkt c och d PuL och 2 kap. 4 § PdL). ' +
-      'Detta innebär bland annat att uppgifterna inte får användas för massutskick eller marknadsföring. ' +
-      '2. Verksamhetschefen ansvarar för att endast den senaste månadens fil används för eventuell bearbetning av informationen. ' +
-      'För att acceptera båda villkoren ovan, tryck [Jag accepterar] annars tryck [Avbryt]' +
-      'Notera att systemet bokför vem som accepterat villkoren och tidpunkten för detta.' +
-      'Notera även att alla register i verksamheten ska vara anmälda till utsett personuppgiftsombud eller Datainspektionen.',
-      new ModalButtonConfiguration('Jag accepterar', () => this.lastModalAnswer = 'Jag accepterar'),
-      new ModalButtonConfiguration('Avbryt', () => this.lastModalAnswer = 'Avbryt'),
-    );
+    this.modalService.openDialog('modal3');
   }
 
 
   showThreeButtonModal() {
-    this.modalService.openDialog('Vill du spara innan du stänger?', 'Ändringarna går förlorade om du inte sparar dem',
-      new ModalButtonConfiguration('Ja', () => this.lastModalAnswer = 'Ja'),
-      new ModalButtonConfiguration('Nej', () => this.lastModalAnswer = 'Nej'),
-      new ModalButtonConfiguration('Avbryt', () => this.lastModalAnswer = 'Avbryt')
-    );
+    this.modalService.openDialog('modal4');
   }
 
   showSaveDontSaveCancelModal() {
-    this.modalService.openSaveDontSaveCancelDialog('Vill du spara innan du stänger?', 'Ändringarna går förlorade om du inte sparar.',
-      () => this.lastModalAnswer = 'Sparade', () => this.lastModalAnswer = 'Sparade inte', () => this.lastModalAnswer = 'Avbröt');
+    this.modalService.openDialog('modal4');
   }
 
+  showChooseVardvalWithTextModal() {
+    this.modalService.openDialog('vardvalWithTextModal');
+  }
 
+  showChooseVardvalWithoutTextModal() {
+    this.modalService.openDialog('vardvalWithoutTextModal');
+  }
+
+  showCommentAnswerWithTextModal() {
+    this.modalService.openDialog('commentAnswerWithTextModal');
+  }
+
+  showCommentAnswerWithoutTextModal() {
+    this.modalService.openDialog('commentAnswerWithoutTextModal');
+  }
+
+  showCommentModal() {
+    this.modalService.openDialog('commentModal');
+  }
+
+  createForms() {
+    this.vardvalForm = new FormGroup({
+      vardval: new FormControl(null, { validators: [Validators.required] }),
+    }, { updateOn: 'change' });
+
+    this.vardvalForm2 = new FormGroup({
+      vardval: new FormControl(null, { validators: [Validators.required] }),
+    }, { updateOn: 'change' });
+  }
+
+  selectVardval1() {
+    const index = this.vardvalForm.controls.vardval.value - 1;
+    this.vardval1Answer = this.dropdownItems[index] ? this.dropdownItems[index].displayName : '';
+    this.modalService.closeDialog('vardvalWithTextModal');
+    this.vardvalForm.reset();
+
+  }
+
+  selectVardval2() {
+    const index = this.vardvalForm2.controls.vardval.value - 1;
+    this.vardval2Answer = this.dropdownItems[index] ? this.dropdownItems[index].displayName : '';
+    this.modalService.closeDialog('vardvalWithoutTextModal');
+    this.vardvalForm2.reset();
+  }
+
+  closeSelectVardval1() {
+    this.modalService.closeDialog('vardvalWithTextModal');
+    this.vardval1Answer = '';
+    this.vardvalForm.reset();
+  }
+
+  closeSelectVardval2() {
+    this.modalService.closeDialog('vardvalWithoutTextModal');
+    this.vardval2Answer = '';
+    this.vardvalForm2.reset();
+  }
+
+  closeModal(elementId: string): void {
+    this.modalService.closeDialog(elementId);
+  }
 }

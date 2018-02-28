@@ -49,6 +49,11 @@ describe('DropdownComponent', () => {
         it('dropdown is not expanded', () => {
             expect(dropdownElement.classes['dropdown--open']).toBe(false);
         });
+        it('should have Välj selected items text', () => {
+            const selectedItemsSpan = fixture.debugElement.query(By.css('.dropdown--edit > span'));
+            const content = selectedItemsSpan.nativeElement.textContent;
+            expect(content.trim()).toBe('Välj');
+        });
         describe('and dropdown is clicked', () => {
             it('dropdown is expanded', () => {
                 dropdownElement.triggerEventHandler('mousedown', { target: dropdownElement.nativeElement } as MouseEvent);
