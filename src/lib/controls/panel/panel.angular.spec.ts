@@ -41,7 +41,6 @@ describe('PanelComponent', () => {
         });
 
         it('should have the classes flex-width--4', () => {
-            console.log(component.classes);
             expect(component.classes).toContain('flex-width--4');
         });
     });
