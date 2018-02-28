@@ -84,7 +84,6 @@ export class ListItemComponent implements AfterContentInit {
 
     @Input() set notification(value: RowNotification) {
         if (value) {
-
             if (value.type === NotificationType.ShowOnCollapse) {
                 this.eventNotification = value;
                 this.collapse(value.type);
@@ -97,6 +96,10 @@ export class ListItemComponent implements AfterContentInit {
                 this.permanentNotification = value;
                 this.showNotification();
             }
+        } else {
+            this.permanentNotification = null;
+            this.eventNotification = null;
+            this._notification = null;
         }
 
         this.notificationChanged.emit(value);
