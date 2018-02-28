@@ -20,4 +20,8 @@ export class ExpandableRow<TPreview, TFull> {
     notifyOnRemove(message: string, icon: string) {
         this.notification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
     }
+
+    removeNotifiaction() {
+        this.notification = null;
+    }
 }
