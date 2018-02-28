@@ -37,28 +37,27 @@ describe('ListItemComponent', () => {
 
     TestBed.overrideComponent(ListItemComponent, {
       set: {
-        templateUrl: './list-item.component.html'
-        //   template: `
-        //                <vgr-list-item>
-        //                   <vgr-list-item-header>
-        //                       <vgr-list-column [text]="'Testman'"></vgr-list-column>
-        //                   </vgr-list-item-header>
-        //                   <vgr-list-item-content>
-        //                     <span> Mer information</span>
-        //                   </vgr-list-item-content>
-        //                 </vgr-list-item>
-        //       `
+        // templateUrl: './list-item.component.html'
+        template: `
+                <vgr-list-item>
+                  <vgr-list-item-header>
+                      <vgr-list-column [text]="'Testman'"></vgr-list-column>
+                  </vgr-list-item-header>
+                  <vgr-list-item-content>
+                    <span> Mer information</span>
+                  </vgr-list-item-content>
+                </vgr-list-item>
+                `
       }
     });
 
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(ListItemComponent);
 
-      fixture.componentInstance.listItemHeader = <ListItemHeaderComponent>fixture.debugElement.children[0].componentInstance; // First element in list-item which is list-item-header;
-      // fixture.componentInstance.listContent = <ListItemContentComponent>fixture.debugElement.children[0].componentInstance;  // Second element in list-item which is list-item-content;
+      fixture.componentInstance.listItemHeader = <ListItemHeaderComponent>fixture.debugElement.queryAll(By.directive(ListItemHeaderComponent))[0].componentInstance; // First element in list-item which is list-item-header;
+      fixture.componentInstance.listContent = <ListItemContentComponent>fixture.debugElement.queryAll(By.directive(ListItemContentComponent))[0].componentInstance;  // Second element in list-item which is list-item-content;
       component = fixture.componentInstance;
       rootElement = fixture.debugElement;
-      console.log(rootElement);
       component.ngAfterContentInit();
 
       fixture.detectChanges();
@@ -68,9 +67,9 @@ describe('ListItemComponent', () => {
 
 
   describe('When initialized', () => {
-    beforeEach(() => {
-      console.log(fixture.debugElement.children[0]);
-    });
+    // beforeEach(() => {
+    //   spyOn(component, 'toggleExpand').and.callThrough();
+    // });
 
     it('the component has the list-item class', () => {
       expect(rootElement.classes['list-item']).toBe(true);
@@ -90,7 +89,6 @@ describe('ListItemComponent', () => {
     //   let element: DebugElement
 
     //   beforeEach(() => {
-    //     spyOn(component, 'toggleExpand').and.callThrough();
     //     component.expanded = false;
     //     component.notInteractable = false;
     //     component.isDeleted = false;
@@ -102,7 +100,7 @@ describe('ListItemComponent', () => {
     //   });
 
     //   it('toggleExpand has been called once', () => {
-    //     //   expect(component.toggleExpand).toHaveBeenCalledTimes(1);
+    //     expect(component.toggleExpand).toHaveBeenCalledTimes(1);
     //   });
     //   it('the component is collapsed', () => {
     //     expect(rootElement.classes['list-item--collapsed']).toBe(false);
