@@ -2,6 +2,7 @@ import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angula
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow } from 'vgr-komponentkartan';
 import { ExampleUnit, ExampleUnitDetails, ExampleUnitJusteringar } from './unit.model';
+import { ActionPanelComponent } from '../../lib';
 
 @Component({
   selector: 'app-examples-listwithcards',
@@ -568,6 +569,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   }
 
   openActionPanel() {
+    console.log("Nu öppnar vi!");
     this.showActionPanel = true;
     window.scrollTo({
       top: 0,
@@ -650,6 +652,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   }
 
   actionPanelClose() {
+    console.log("Nu stänger vi");
     this.showActionPanel = false;
     this.addNewUnit = false;
     this.newUnits.forEach(u => u.selected = false);
@@ -662,6 +665,12 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.submitted = false;
 
   }
+
+onPanelChanged(expanded: boolean) {
+  if (!expanded) {
+    this.actionPanelClose();
+  }
+}
 
   onSortChanged(event: SortChangedArgs) {
     this.exampleData = this.exampleData.sort((row1, row2) => {
