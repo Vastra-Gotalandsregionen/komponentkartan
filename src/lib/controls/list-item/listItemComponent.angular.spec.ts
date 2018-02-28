@@ -181,307 +181,299 @@ describe('ContentProjectionComponent', () => {
         });
       });
 
-      //     describe('and the header is pressed with enter', () => {
-      //       beforeEach(() => {
-      //         header.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
-      //       });
+      describe('and the header is pressed with enter', () => {
+        beforeEach(() => {
+          header.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
+        });
 
-      //       it('expandedChanged event has been emitted', () => {
-      //         expect(component.listItemHeader.expandedChanged.emit).toHaveBeenCalledWith(true);
-      //       });
+        it('expandedChanged event has been emitted', () => {
+          expect(component.listItemHeader.expandedChanged.emit).toHaveBeenCalledWith(true);
+        });
 
-      //       it('component is expanded', () => {
-      //         expect(component.expanded).toBe(true);
-      //       });
-      //     });
+        it('component is expanded', () => {
+          expect(component.expanded).toBe(true);
+        });
+      });
 
-      //     describe('and the header is pressed with Home key', () => {
-      //       beforeEach(() => {
-      //         header.triggerEventHandler('keydown', { keyCode: 36 } as KeyboardEvent);
-      //       });
+      describe('and the header is pressed with Home key', () => {
+        beforeEach(() => {
+          header.triggerEventHandler('keydown', { keyCode: 36 } as KeyboardEvent);
+        });
 
-      //       it('goToFirst event has been emitted', () => {
-      //         expect(component.listItemHeader.goToFirst.emit).toHaveBeenCalled();
-      //       });
+        it('goToFirst event has been emitted', () => {
+          expect(component.listItemHeader.goToFirst.emit).toHaveBeenCalled();
+        });
 
-      //       it('setFocusOnFirstRow event is emitted', () => {
-      //         expect(component.setFocusOnFirstRow.emit).toHaveBeenCalled();
-      //       });
-      //     });
+        it('setFocusOnFirstRow event is emitted', () => {
+          expect(component.setFocusOnFirstRow.emit).toHaveBeenCalled();
+        });
+      });
 
-      //     describe('and the header is pressed with End key', () => {
-      //       beforeEach(() => {
-      //         header.triggerEventHandler('keydown', { keyCode: 35 } as KeyboardEvent);
-      //       });
+      describe('and the header is pressed with End key', () => {
+        beforeEach(() => {
+          header.triggerEventHandler('keydown', { keyCode: 35 } as KeyboardEvent);
+        });
 
-      //       it('goToLast event has been emitted', () => {
-      //         expect(component.listItemHeader.goToLast.emit).toHaveBeenCalled();
-      //       });
+        it('goToLast event has been emitted', () => {
+          expect(component.listItemHeader.goToLast.emit).toHaveBeenCalled();
+        });
 
-      //       it('setFocusOnLastRow event is emitted', () => {
-      //         expect(component.setFocusOnLastRow.emit).toHaveBeenCalled();
-      //       });
-      //     });
+        it('setFocusOnLastRow event is emitted', () => {
+          expect(component.setFocusOnLastRow.emit).toHaveBeenCalled();
+        });
+      });
 
-      //     describe('and the header is pressed with Ctrl + PageUp', () => {
-      //       beforeEach(() => {
-      //         header.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 33 } as KeyboardEvent);
-      //       });
+      describe('and the header is pressed with Ctrl + PageUp', () => {
+        beforeEach(() => {
+          header.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 33 } as KeyboardEvent);
+        });
 
-      //       it('goToLast event has been emitted', () => {
-      //         expect(component.listItemHeader.goUp.emit).toHaveBeenCalled();
-      //       });
+        it('goToLast event has been emitted', () => {
+          expect(component.listItemHeader.goUp.emit).toHaveBeenCalled();
+        });
 
-      //       it('setFocusOnPreviousRow event is emitted', () => {
-      //         expect(component.setFocusOnPreviousRow.emit).toHaveBeenCalled();
-      //       });
-      //     });
+        it('setFocusOnPreviousRow event is emitted', () => {
+          expect(component.setFocusOnPreviousRow.emit).toHaveBeenCalled();
+        });
+      });
 
-      //     describe('and the header is pressed with Ctrl + PageDown', () => {
-      //       beforeEach(() => {
-      //         header.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 34 } as KeyboardEvent);
-      //       });
+      describe('and the header is pressed with Ctrl + PageDown', () => {
+        beforeEach(() => {
+          header.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 34 } as KeyboardEvent);
+        });
 
-      //       it('goToLast event has been emitted', () => {
-      //         expect(component.listItemHeader.goDown.emit).toHaveBeenCalled();
-      //       });
+        it('goToLast event has been emitted', () => {
+          expect(component.listItemHeader.goDown.emit).toHaveBeenCalled();
+        });
 
-      //       it('setFocusOnNextRow event is emitted', () => {
-      //         expect(component.setFocusOnNextRow.emit).toHaveBeenCalled();
-      //       });
-      //     });
+        it('setFocusOnNextRow event is emitted', () => {
+          expect(component.setFocusOnNextRow.emit).toHaveBeenCalled();
+        });
+      });
 
-      //     describe('and the header is pressed with Arrow Up', () => {
-      //       beforeEach(() => {
-      //         header.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
-      //       });
+      describe('and the header is pressed with Arrow Up', () => {
+        beforeEach(() => {
+          header.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
+        });
 
-      //       it('goToLast event has been emitted', () => {
-      //         expect(component.listItemHeader.goUp.emit).toHaveBeenCalled();
-      //       });
+        it('goToLast event has been emitted', () => {
+          expect(component.listItemHeader.goUp.emit).toHaveBeenCalled();
+        });
 
-      //       it('setFocusOnPreviousRow event is emitted', () => {
-      //         expect(component.setFocusOnPreviousRow.emit).toHaveBeenCalled();
-      //       });
-      //     });
+        it('setFocusOnPreviousRow event is emitted', () => {
+          expect(component.setFocusOnPreviousRow.emit).toHaveBeenCalled();
+        });
+      });
 
-      //     describe('and the header is pressed with Arrow Down', () => {
-      //       beforeEach(() => {
-      //         header.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
-      //       });
+      describe('and the header is pressed with Arrow Down', () => {
+        beforeEach(() => {
+          header.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+        });
 
-      //       it('goToLast event has been emitted', () => {
-      //         expect(component.listItemHeader.goDown.emit).toHaveBeenCalled();
-      //       });
+        it('goToLast event has been emitted', () => {
+          expect(component.listItemHeader.goDown.emit).toHaveBeenCalled();
+        });
 
-      //       it('setFocusOnNextRow event is emitted', () => {
-      //         expect(component.setFocusOnNextRow.emit).toHaveBeenCalled();
-      //       });
-      //     });
+        it('setFocusOnNextRow event is emitted', () => {
+          expect(component.setFocusOnNextRow.emit).toHaveBeenCalled();
+        });
+      });
+    });
+
+    describe('and the list-item-content is in focus', () => {
+      let content: DebugElement;
+
+      beforeEach(() => {
+        content = testListItemComponentFixture.debugElement.query(By.directive(ListItemContentComponent)); // First element in list-item which is list-item-header;
+
+        spyOn(component.listContent.goUp, 'emit').and.callThrough();
+        spyOn(component.listContent.goDown, 'emit').and.callThrough();
+        spyOn(component.setFocusOnPreviousRowContent, 'emit');
+        spyOn(component.setFocusOnNextRowContent, 'emit');
+        component.ngAfterContentInit();
+      });
+
+      describe('and the content is pressed with Ctrl + PageUp', () => {
+        beforeEach(() => {
+          content.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 33 } as KeyboardEvent);
+        });
+
+        it('go up event is emitted', () => {
+          expect(component.listContent.goUp.emit).toHaveBeenCalled();
+        });
+        it('setFocusOnPreviousRowContent event is emitted', () => {
+          expect(component.setFocusOnPreviousRowContent.emit).toHaveBeenCalled();
+        });
+      });
+
+      describe('and the content is pressed with Ctrl + PageDown', () => {
+        beforeEach(() => {
+          content.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 34 } as KeyboardEvent);
+        });
+
+        it('go up event is emitted', () => {
+          expect(component.listContent.goDown.emit).toHaveBeenCalled();
+        });
+        it('setFocusOnNextRowContent event is emitted', () => {
+          expect(component.setFocusOnNextRowContent.emit).toHaveBeenCalled();
+        });
+      });
+    });
+
+    describe('the component is clicked outside of the list-item-header', () => {
+      beforeEach(() => {
+        spyOn(component, 'toggleExpand');
+        rootElement.triggerEventHandler('click', event);
+        listItemComponentFixture.detectChanges();
+      });
+      it('component is not expanded', () => {
+        expect(component.expanded).toBeFalsy();
+      });
+      it('content is not visible', () => {
+        expect(component.toggleExpand).toHaveBeenCalledTimes(0);
+      });
+    });
+  });
+
+  describe('When initialized with a Permanent notification is set,', () => {
+    beforeEach(() => {
+      component.notification = { message: 'Information', icon: 'vgr-icon-ok-check ', type: NotificationType.Permanent } as RowNotification;
+      component.ngAfterContentInit();
+    });
+    it('notification is displayed', () => {
+      expect(component.notificationVisible).toBe(true);
+    });
+  });
+
+  describe('When expanded is set to true', () => {
+    beforeEach(() => {
+      spyOn(component.expandedChanged, 'emit');
+      component.expanded = true;
+      listItemComponentFixture.detectChanges();
+    });
+
+    it('the property expanded is set to true', () => {
+      expect(component.expanded).toBe(true);
+    });
+
+    it('expandedChanged is called', () => {
+      expect(component.expandedChanged.emit).toHaveBeenCalled();
+    });
+
+    // describe('and a ShowOnCollapse notification is set', () => {
+    //   beforeEach(() => {
+    //     spyOn(component, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
+    //     component.notification = { message: 'Row saved', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnCollapse } as RowNotification;
+    //   });
+    //   it('notification is displayed', () => {
+    //     expect(component.notificationVisible).toBe(true);
+    //   });
+    //   it('component is collapsing', () => {
+    //     expect(component.notInteractable).toBe(true);
+    //   });
+
+      // describe('after 1,4 seconds', () => {
+      //   beforeEach(() => {
+      //     jasmine.clock().tick(1400);
       //   });
-
-      //   describe('and the list-item-content is in focus', () => {
-      //     let content: DebugElement;
-
-      //     beforeEach(() => {
-      //       content = rootElement.children[1];
-      //       spyOn(component.listContent.goUp, 'emit').and.callThrough();
-      //       spyOn(component.listContent.goDown, 'emit').and.callThrough();
-      //       spyOn(component.setFocusOnPreviousRowContent, 'emit');
-      //       spyOn(component.setFocusOnNextRowContent, 'emit');
-      //       component.ngOnInit();
-      //     });
-
-      //     describe('and the content is pressed with Ctrl + PageUp', () => {
-      //       beforeEach(() => {
-      //         content.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 33 } as KeyboardEvent);
-      //       });
-
-      //       it('go up event is emitted', () => {
-      //         expect(component.listContent.goUp.emit).toHaveBeenCalled();
-      //       });
-      //       it('setFocusOnPreviousRowContent event is emitted', () => {
-      //         expect(component.setFocusOnPreviousRowContent.emit).toHaveBeenCalled();
-      //       });
-      //     });
-
-      //     describe('and the content is pressed with Ctrl + PageDown', () => {
-      //       beforeEach(() => {
-      //         content.triggerEventHandler('keydown', { ctrlKey: true, keyCode: 34 } as KeyboardEvent);
-      //       });
-
-      //       it('go up event is emitted', () => {
-      //         expect(component.listContent.goDown.emit).toHaveBeenCalled();
-      //       });
-      //       it('setFocusOnNextRowContent event is emitted', () => {
-      //         expect(component.setFocusOnNextRowContent.emit).toHaveBeenCalled();
-      //       });
-      //     });
+      //   it('content is collapsed', () => {
+      //     expect(jqueryHelper.collapseContent).toHaveBeenCalled();
       //   });
-
-      //   describe('the component is clicked outside of the list-item-header', () => {
+      //   describe('after another 2 seconds', () => {
       //     beforeEach(() => {
-      //       spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(false);
-      //       spyOn(jqueryHelper, 'toggleContent');
-      //       rootElement.triggerEventHandler('click', null);
+      //       jasmine.clock().tick(2000);
       //       fixture.detectChanges();
+      //     });
+      //     it('the notification is hidden', () => {
+      //       expect(component.notificationVisible).toBe(false);
+      //     });
+      //     it('the notification is done', () => {
+      //       expect(component.notification.done).toBe(true);
       //     });
       //     it('component is not expanded', () => {
-      //       expect(component.expanded).toBeFalsy();
+      //       expect(component.expanded).toBe(false);
       //     });
-      //     it('content is not visible', () => {
-      //       expect(jqueryHelper.toggleContent).toHaveBeenCalledTimes(0);
-      //     });
-      //   });
-      // });
-
-      // describe('When initialized with a Permanent notification is set,', () => {
-      //   beforeEach(() => {
-      //     component.notification = { message: 'Information', icon: 'vgr-icon-ok-check ', type: NotificationType.Permanent } as RowNotification;
-      //     component.ngOnInit();
-      //   });
-      //   it('notification is displayed', () => {
-      //     expect(component.notificationVisible).toBe(true);
-      //   });
-      // });
-
-      // describe('When expanded is set to true', () => {
-      //   beforeEach(() => {
-      //     spyOn(jqueryHelper, 'toggleContent');
-      //     component.expanded = true;
-      //     fixture.detectChanges();
-      //   });
-      //   beforeAll(() => {
-      //     jasmine.clock().uninstall();
-      //     jasmine.clock().install();
-      //   });
-      //   afterAll(() => {
-      //     jasmine.clock().uninstall();
-      //   });
-
-      //   it('the property expanded is set to true', () => {
-      //     expect(component.expanded).toBe(true);
-      //   });
-      //   it('toggleContent is called', () => {
-      //     expect(jqueryHelper.toggleContent).toHaveBeenCalled();
-      //   });
-
-      //   describe('and a ShowOnCollapse notification is set', () => {
-      //     beforeEach(() => {
-      //       spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
-      //       component.notification = { message: 'Row saved', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnCollapse } as RowNotification;
-      //     });
-      //     it('notification is displayed', () => {
-      //       expect(component.notificationVisible).toBe(true);
-      //     });
-      //     it('component is collapsing', () => {
-      //       expect(component.notInteractable).toBe(true);
-      //     });
-
-      //     describe('after 1,4 seconds', () => {
-      //       beforeEach(() => {
-      //         jasmine.clock().tick(1400);
-      //       });
-      //       it('content is collapsed', () => {
-      //         expect(jqueryHelper.collapseContent).toHaveBeenCalled();
-      //       });
-      //       describe('after another 2 seconds', () => {
-      //         beforeEach(() => {
-      //           jasmine.clock().tick(2000);
-      //           fixture.detectChanges();
-      //         });
-      //         it('the notification is hidden', () => {
-      //           expect(component.notificationVisible).toBe(false);
-      //         });
-      //         it('the notification is done', () => {
-      //           expect(component.notification.done).toBe(true);
-      //         });
-      //         it('component is not expanded', () => {
-      //           expect(component.expanded).toBe(false);
-      //         });
-      //         it('component is not collapsing', () => {
-      //           expect(component.notInteractable).toBe(false);
-      //         });
-      //       });
-      //     });
-      //   });
-
-      //   describe('and a ShowOnRemove notification is set', () => {
-      //     beforeEach(() => {
-      //       spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
-      //       component.notification = { message: 'Row deleted', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnRemove } as RowNotification;
-      //     });
-      //     it('notification is displayed', () => {
-      //       expect(component.notificationVisible).toBe(true);
-      //     });
-      //     it('component is collapsing', () => {
-      //       expect(component.notInteractable).toBe(true);
-      //     });
-
-      //     describe('after 1,4 seconds', () => {
-      //       beforeEach(() => {
-      //         jasmine.clock().tick(1400);
-      //       });
-      //       it('content is collapsed', () => {
-      //         expect(jqueryHelper.collapseContent).toHaveBeenCalled();
-      //       });
-      //       describe('after another 2 seconds', () => {
-      //         beforeEach(() => {
-      //           jasmine.clock().tick(2000);
-      //           fixture.detectChanges();
-      //         });
-      //         it('the notification is hidden', () => {
-      //           expect(component.notificationVisible).toBe(false);
-      //         });
-      //         it('the notification is done', () => {
-      //           expect(component.notification.done).toBe(true);
-      //         });
-      //         it('component is not expanded', () => {
-      //           expect(component.expanded).toBe(false);
-      //         });
-      //         it('component is not collapsing', () => {
-      //           expect(component.notInteractable).toBe(false);
-      //         });
-      //         it('component is deleted', () => {
-      //           expect(component.isDeleted).toBe(true);
-      //         });
-      //       });
-      //     });
-      //   });
-
-      // });
-
-      // describe('When item is collapsing', () => {
-      //   beforeEach(() => {
-      //     spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(true);
-      //     spyOn(jqueryHelper, 'toggleContent');
-      //     component.notInteractable = true;
-      //   });
-      //   describe('and header is clicked', () => {
-      //     beforeEach(() => {
-      //       rootElement.triggerEventHandler('click', null);
-      //       fixture.detectChanges();
-      //     });
-      //     it('item is not expanded', () => {
-      //       expect(component.expanded).toBeFalsy();
-      //     });
-      //     it('content is not visible', () => {
-      //       expect(jqueryHelper.toggleContent).toHaveBeenCalledTimes(0);
-      //     });
-      //   });
-      //   describe('and expanded is set to true', () => {
-      //     beforeEach(() => {
-      //       component.expanded = true;
-      //       fixture.detectChanges();
-      //     });
-      //     it('item is not expanded', () => {
-      //       expect(component.expanded).toBeFalsy();
-      //     });
-      //     it('content is not visible', () => {
-      //       expect(jqueryHelper.toggleContent).toHaveBeenCalledTimes(0);
+      //     it('component is not collapsing', () => {
+      //       expect(component.notInteractable).toBe(false);
       //     });
       //   });
       // });
     });
-  });
+
+    // describe('and a ShowOnRemove notification is set', () => {
+    //   beforeEach(() => {
+    //     spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
+    //     component.notification = { message: 'Row deleted', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnRemove } as RowNotification;
+    //   });
+    //   it('notification is displayed', () => {
+    //     expect(component.notificationVisible).toBe(true);
+    //   });
+    //   it('component is collapsing', () => {
+    //     expect(component.notInteractable).toBe(true);
+    //   });
+
+    //   describe('after 1,4 seconds', () => {
+    //     beforeEach(() => {
+    //       jasmine.clock().tick(1400);
+    //     });
+    //     it('content is collapsed', () => {
+    //       expect(jqueryHelper.collapseContent).toHaveBeenCalled();
+    //     });
+    //     describe('after another 2 seconds', () => {
+    //       beforeEach(() => {
+    //         jasmine.clock().tick(2000);
+    //         fixture.detectChanges();
+    //       });
+    //       it('the notification is hidden', () => {
+    //         expect(component.notificationVisible).toBe(false);
+    //       });
+    //       it('the notification is done', () => {
+    //         expect(component.notification.done).toBe(true);
+    //       });
+    //       it('component is not expanded', () => {
+    //         expect(component.expanded).toBe(false);
+    //       });
+    //       it('component is not collapsing', () => {
+    //         expect(component.notInteractable).toBe(false);
+    //       });
+    //       it('component is deleted', () => {
+    //         expect(component.isDeleted).toBe(true);
+    //       });
+    //     });
+    //   });
+    // });
+
+  // });
+
+  // describe('When item is collapsing', () => {
+  //   beforeEach(() => {
+  //     spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(true);
+  //     spyOn(jqueryHelper, 'toggleContent');
+  //     component.notInteractable = true;
+  //   });
+  //   describe('and header is clicked', () => {
+  //     beforeEach(() => {
+  //       rootElement.triggerEventHandler('click', null);
+  //       fixture.detectChanges();
+  //     });
+  //     it('item is not expanded', () => {
+  //       expect(component.expanded).toBeFalsy();
+  //     });
+  //     it('content is not visible', () => {
+  //       expect(jqueryHelper.toggleContent).toHaveBeenCalledTimes(0);
+  //     });
+  //   });
+  //   describe('and expanded is set to true', () => {
+  //     beforeEach(() => {
+  //       component.expanded = true;
+  //       fixture.detectChanges();
+  //     });
+  //     it('item is not expanded', () => {
+  //       expect(component.expanded).toBeFalsy();
+  //     });
+  //     it('content is not visible', () => {
+  //       expect(jqueryHelper.toggleContent).toHaveBeenCalledTimes(0);
+  //     });
+  //   });
+  // });
 });
