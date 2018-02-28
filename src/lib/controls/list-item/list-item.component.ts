@@ -126,7 +126,6 @@ export class ListItemComponent implements AfterContentInit {
     toggleExpand(event: Event) {
         event.cancelBubble = true;
         this.expanded = !this.expanded;
-
     }
 
     setFocusOnRow() {
