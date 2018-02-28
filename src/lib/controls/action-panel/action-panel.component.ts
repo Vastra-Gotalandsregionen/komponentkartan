@@ -20,6 +20,8 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     @HostBinding('class.action-panel--notification-visible') notificationVisible: boolean;
     @HostBinding('class.action-panel--not-interactable') notInteractable: boolean;
 
+    @Input() showCloseButton: boolean;
+
     @Input() title: string;
     @Input() expansionSpeed: 'slow' | 'normal' | 'fast';
     get animationDelayMs(): number {
@@ -35,7 +37,6 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     }
 
     @Input() set expanded(expandedValue: boolean) {
-        console.log(expandedValue);
         if (expandedValue && !this._expanded) {
             this.expand();
         } else if (!expandedValue && this._expanded) {
@@ -103,26 +104,20 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         this.elementRef.nativeElement.style.height = this.actualContentHeight;
         this._expanded = true;
         this.collapsed = false;
-
         this.expandedChanged.emit(this._expanded);
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = 'auto';
             this.elementRef.nativeElement.style.overflow = 'visible';
         }, this.animationDelayMs);
-
-    }
-
-    closePanel(): void {
-        this.expanded = false; 
     }
 
     private collapse(collapsingNotification?: NotificationType) {
         this.updateActualContentHeight();
         this.elementRef.nativeElement.style.height = this.actualContentHeight;
-        this.expandedChanged.emit(false);
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = '0px';
             this.elementRef.nativeElement.style.overflow = 'hidden';
+            this.expandedChanged.emit(false);
             this._expanded = false;
             this.collapsed = true;
         }, 50);
@@ -142,6 +137,5 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
 
     private processShowOnRemoveNotification(callback: Function) {
         this.notificationVisible = true;
-
     }
 }

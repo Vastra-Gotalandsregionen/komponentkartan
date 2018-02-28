@@ -1,5 +1,5 @@
 <h3 *ngIf="title && title.length>0" class="action-panel__title">{{title}}</h3>
-<div class="action-panel__close" (click)="closePanel()">X</div>
+<div *ngIf="showCloseButton" tabindex="0" class="action-panel__close" (click)="expanded=false"></div>
 <div *ngIf="notification" class="action-panel__notification">
   <span class="action-panel__notification__icon" [ngClass]="notification.icon">
   </span>
