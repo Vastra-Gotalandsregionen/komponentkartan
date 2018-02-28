@@ -7,16 +7,6 @@ describe('[ListColumnComponent]', () => {
     component = new ListColumnComponent();
   });
 
-  describe('When set width is called', () => {
-    beforeEach(() => {
-      component.width = 20;
-    });
-    it('Width is set', () => {
-      expect(component.width).toEqual(20);
-    });
-
-  });
-
   describe('When getClasses is called', () => {
     describe('And width  and align is not set', () => {
       it('It returns the default classes', () => {
