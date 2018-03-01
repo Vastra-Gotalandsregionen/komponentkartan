@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button.component';
@@ -39,7 +39,6 @@ describe('[ButtonComponent - Angular]', () => {
         let textButtonElement: DebugElement;
         beforeEach(() => {
             textButtonElement = rootElement.query(By.css('.text-button'));
-
         });
 
         describe('And button is enabled', () => {
@@ -110,7 +109,6 @@ describe('[ButtonComponent - Angular]', () => {
                 beforeEach(() => {
                     spyOn(spacePressedEvent, 'preventDefault');
                     textButtonElement.triggerEventHandler('keydown', spacePressedEvent);
-
                 });
                 it('a clicked event is triggered', () => {
                     expect(component.click.emit).toHaveBeenCalled();

@@ -1,13 +1,12 @@
-import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/core'
+import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/core';
+import { ButtonBaseComponent } from '../button-base/button-base.component';
 
 @Component({
     selector: 'vgr-lock-button',
     moduleId: module.id,
     templateUrl: './lockButton.component.html'
 })
-export class LockButtonComponent {
-    @HostBinding('class.button') buttonClass = true;
-    @Input() disabled = false;
+export class LockButtonComponent extends ButtonBaseComponent {
     @Input() unlocked: boolean;
     @Output() lockChanged = new EventEmitter<boolean>();
 
@@ -17,8 +16,8 @@ export class LockButtonComponent {
     get locked(): boolean {
         return !this.unlocked;
     }
-    onClick(event: any): void {
 
+    onClick(event: any): void {
         if (!this.disabled) {
             if (this.unlocked) {
                 this.lock();
