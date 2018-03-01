@@ -44,17 +44,11 @@
   font-weight: bold;
   height: 30px;
 }
+
 .action-panel__close {
-  @extend .background-color--primary;
   position: absolute;
-  top: 3px;
+  top: 5px;
   right: 10px;
-  width: 34px;
-  height: 29px;
-  text-align: center;
-  color: $text-color--light;
-  font-size: 20px;
-  cursor: pointer;
 }
 
 .action-panel__notification {

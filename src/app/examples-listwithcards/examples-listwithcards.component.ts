@@ -383,7 +383,6 @@ export class ExamplesListwithcardsComponent implements OnInit {
   }
 
   onExpandedChanged(expanded: boolean, item: ExpandableRow<ExampleUnit, ExampleUnit>) {
-
     if (expanded && !item.previewObject.vald) {
       item.previewObject.vald = true;
       this.updateCardDropdowns(item.previewObject);
@@ -560,7 +559,6 @@ export class ExamplesListwithcardsComponent implements OnInit {
   }
 
   onCardUnlocked() {
-
     this.cardLocked = false;
     this.changeDetector.detectChanges();
     if (this.unitVersions) {
@@ -569,7 +567,6 @@ export class ExamplesListwithcardsComponent implements OnInit {
   }
 
   openActionPanel() {
-    console.log("Nu öppnar vi!");
     this.showActionPanel = true;
     window.scrollTo({
       top: 0,
@@ -638,7 +635,6 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.newUnit.details.versions = [1];
     this.newUnit.isActive = true;
 
-
     const newRow = new ExpandableRow<ExampleUnit, ExampleUnit>(this.newUnit);
     newRow.notifyOnCollapse(newRow.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
     this.exampleData.unshift(newRow);
@@ -652,7 +648,6 @@ export class ExamplesListwithcardsComponent implements OnInit {
   }
 
   actionPanelClose() {
-    console.log("Nu stänger vi");
     this.showActionPanel = false;
     this.addNewUnit = false;
     this.newUnits.forEach(u => u.selected = false);
@@ -663,14 +658,13 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.privateOwnerForm.reset();
     this.agarOwnerForm.reset();
     this.submitted = false;
-
   }
 
-onPanelChanged(expanded: boolean) {
-  if (!expanded) {
-    this.actionPanelClose();
+  onPanelExpandedChanged(expanded: boolean) {
+    if (!expanded) {
+      this.actionPanelClose();
+    }
   }
-}
 
   onSortChanged(event: SortChangedArgs) {
     this.exampleData = this.exampleData.sort((row1, row2) => {
@@ -678,7 +672,4 @@ onPanelChanged(expanded: boolean) {
         row1.previewObject[event.key] < row2.previewObject[event.key] ? (event.direction === SortDirection.Ascending ? -1 : 1) : 0;
     });
   }
-
-
-
 }
