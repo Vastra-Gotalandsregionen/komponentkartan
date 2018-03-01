@@ -2,7 +2,14 @@
   @extend .button__base;
   @extend .bg-image-close-button;
   padding: 0;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   min-width: 0;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .close-button {
+    width: 24px;
+    height: 24px;
+  }
 }
