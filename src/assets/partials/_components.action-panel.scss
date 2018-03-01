@@ -40,9 +40,15 @@
   margin-right: -$margin--slim;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
-  border-bottom: 2px solid #99a3ad;
+  border-bottom: 1px solid #99a3ad;
   font-weight: bold;
   height: 30px;
+}
+
+.action-panel__close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }
 
 .action-panel__notification {

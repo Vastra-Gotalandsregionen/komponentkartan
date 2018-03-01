@@ -84,7 +84,8 @@ import * as $ from 'jquery';
     type.ExpandableDivContentComponent,
     type.PanelComponent,
     type.PanelContainerComponent,
-    type.SubmenuComponent
+    type.SubmenuComponent,
+    type.CloseButtonComponent
   ],
   exports: [
     type.SafePipe,
@@ -141,7 +142,8 @@ import * as $ from 'jquery';
     type.ExpandableDivContentComponent,
     type.PanelComponent,
     type.PanelContainerComponent,
-    type.SubmenuComponent
+    type.SubmenuComponent,
+    type.CloseButtonComponent
   ],
   providers: [
     type.ModalService,

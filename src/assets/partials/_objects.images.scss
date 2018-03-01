@@ -16,6 +16,11 @@
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAALCAYAAACksgdhAAAAAXNSR0IArs4c6QAAAKZJREFUKBVj/P//Pz8DA8MHICYWmDIRqxJZHS5Nf4CK3gLxT2TFMDYuTZ6MjIwiQEXqMIXINC5Nz6CKniIrhrFBmv7DOMTSTEBnfAIqfoWmgRPKh9EwaZAFd8AcYLDPB2JkcBvI2QDE55EFgewjMN0MQI4IED9DU4DO/QYU0IJrAjGAAjJAvAeI/wExOgDZqAvTwAhjwGigpDCQrQHjA+kHQH+jhCIAJweJeurkghoAAAAASUVORK5CYII=);
 }
 
+.bg-image-close-button {
+  @extend .bg-image--icon;
+  background-image: url("data:image/svg+xml;charset=utf8,%3C?xml version='1.0' encoding='UTF-8'?%3E%3Csvg width='24px' height='24px' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3EKnapp/PrimärClose%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='square'%3E%3Cg id='Knapp/PrimärClose' stroke='%23FFFFFF' stroke-width='2'%3E%3Cpath d='M7,7 L17,17' id='Line'%3E%3C/path%3E%3Cpath d='M7,7 L17,17' id='Line' transform='translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) '%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
 .bg-image-lock-button__top {
   @extend .bg-image--icon;
   width: 13px;

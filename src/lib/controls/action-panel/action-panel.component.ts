@@ -1,4 +1,5 @@
 import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, AfterContentInit } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
 import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
@@ -6,6 +7,20 @@ import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
 @Component({
     templateUrl: './action-panel.component.html',
     selector: 'vgr-action-panel',
+    animations: [
+        trigger(
+            'enterAnimation', [
+                transition(':enter', [
+                    style({ opacity: 0 }),
+                    animate('400ms', style({ opacity: 1 }))
+                ]),
+                transition(':leave', [
+                    style({ opacity: 1 }),
+                    animate('400ms', style({ opacity: 0 }))
+                ])
+            ]
+        )
+    ],
     moduleId: module.id
 })
 export class ActionPanelComponent implements OnInit, AfterContentInit {
@@ -19,6 +34,8 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     @HostBinding('class.action-panel--deleted') deleted: boolean;
     @HostBinding('class.action-panel--notification-visible') notificationVisible: boolean;
     @HostBinding('class.action-panel--not-interactable') notInteractable: boolean;
+
+    @Input() showCloseButton: boolean;
 
     @Input() title: string;
     @Input() expansionSpeed: 'slow' | 'normal' | 'fast';
@@ -102,13 +119,11 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         this.elementRef.nativeElement.style.height = this.actualContentHeight;
         this._expanded = true;
         this.collapsed = false;
-
         this.expandedChanged.emit(this._expanded);
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = 'auto';
             this.elementRef.nativeElement.style.overflow = 'visible';
         }, this.animationDelayMs);
-
     }
 
     private collapse(collapsingNotification?: NotificationType) {
@@ -117,6 +132,7 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = '0px';
             this.elementRef.nativeElement.style.overflow = 'hidden';
+            this.expandedChanged.emit(false);
             this._expanded = false;
             this.collapsed = true;
         }, 50);
@@ -136,6 +152,5 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
 
     private processShowOnRemoveNotification(callback: Function) {
         this.notificationVisible = true;
-
     }
 }
