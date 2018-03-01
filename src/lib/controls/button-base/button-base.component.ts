@@ -3,16 +3,9 @@
 export abstract class ButtonBaseComponent {
     @HostBinding('class.button') buttonClass = true;
     @Input() disabled = false;
-
     @Output() click = new EventEmitter();
 
     constructor() { }
-    onClick(event: MouseEvent) {
-        if (this.disabled) {
-            event.stopPropagation();
-        }
-    }
-
     keyPressed(event: KeyboardEvent): void {
         if (this.disabled) {
             return;
@@ -24,4 +17,11 @@ export abstract class ButtonBaseComponent {
             this.click.emit();
         }
     }
+
+    onClick(event: any): void {
+        if (this.disabled) {
+            event.stopPropagation();
+        }
+    }
+
 }
