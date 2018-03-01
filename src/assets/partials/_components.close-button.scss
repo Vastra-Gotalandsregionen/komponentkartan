@@ -2,14 +2,21 @@
   @extend .button__base;
   @extend .bg-image-close-button;
   padding: 0;
+  background-size: 20px 20px;
   width: 20px;
   height: 20px;
   min-width: 0;
+  &:active:not(.button--disabled) {
+    height: 18px;
+  }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
   .close-button {
     width: 24px;
     height: 24px;
+    &:active:not(.button--disabled) {
+      height: 22px;
+    }
   }
 }
