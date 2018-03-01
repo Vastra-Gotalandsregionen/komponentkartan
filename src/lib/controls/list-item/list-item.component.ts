@@ -190,19 +190,17 @@ export class ListItemComponent implements AfterContentInit {
             return;
         }
 
-        this.notificationVisible = true;
 
-        if (this.eventNotification.done) {
-            this.notificationVisible = false;
-        }
+        this.notificationVisible = true;
         this._notification = this.eventNotification;
+
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
                 this.notInteractable = false;
-                this.notification.done = true;
+
 
                 if (this.eventNotification.removeWhenDone) {
                     this._notification = null;
@@ -222,16 +220,12 @@ export class ListItemComponent implements AfterContentInit {
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
-        if (this.eventNotification.done) {
-            this.notificationVisible = false;
-        }
         this._notification = this.eventNotification;
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
-                this.notification.done = true;
                 this.isDeleted = true;
                 this.notInteractable = false;
                 this.notificationVisible = false;

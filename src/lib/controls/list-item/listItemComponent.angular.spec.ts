@@ -351,7 +351,7 @@ describe('ListItemComponent', () => {
   });
 
 
-  describe('When initialized with a Permanent notification is set,', () => {
+  describe('When initialized with a Permanent notification', () => {
     beforeAll(() => {
       jasmine.clock().uninstall();
       jasmine.clock().install();
@@ -367,6 +367,10 @@ describe('ListItemComponent', () => {
     it('notification is displayed', () => {
       expect(component.notificationVisible).toBe(true);
     });
+    it('notification is displayed', () => {
+      expect(component.notification.message).toBe('Information');
+    });
+
     describe('and collapsenotification is triggered without removing permanentmessage,', () => {
       beforeEach(() => {
         component.notification = { message: 'Nu sparar vi', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnCollapse } as RowNotification;
@@ -379,15 +383,23 @@ describe('ListItemComponent', () => {
         expect(component.notification.message).toBe('Nu sparar vi');
       });
 
-      it('notification changes back to permanent notification after 2s', () => {
-        jasmine.clock().tick(3400);
-        expect(component.notification.message).toBe('Information');
+      describe('and permanent notification is restored after 3,4s,', () => {
+        beforeEach(() => {
+          jasmine.clock().tick(3400);
+          listItemComponentFixture.detectChanges();
+        });
+
+        it('notification changes back to permanent notification', () => {
+          expect(component.notification.message).toBe('Information');
+
+        });
 
       });
     });
 
     describe('and collapsenotification is triggered and removing permanentmessage,', () => {
       beforeEach(() => {
+        spyOn(component.expandedChanged, 'emit');
         component.notification = { message: 'Nu sparar vi', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnCollapse, removeWhenDone: true } as RowNotification;
       });
       it('notification is displayed', () => {
@@ -398,13 +410,26 @@ describe('ListItemComponent', () => {
         expect(component.notification.message).toBe('Nu sparar vi');
       });
 
+      describe('and notification is collapsing after 1,4s', () => {
+        beforeEach(() => {
+          jasmine.clock().tick(1400);
+        });
+        it('content is collapsed', () => {
+          expect(component.collapsed).toBe(true);
+        });
+
+        it('content is collapsed', () => {
+          expect(component.expandedChanged.emit).toHaveBeenCalled();
+        });
+      });
+
       describe('and notification should be removed after 3,4s,', () => {
         beforeEach(() => {
-          jasmine.clock().tick(4000);
+          jasmine.clock().tick(3400);
           listItemComponentFixture.detectChanges();
         });
 
-        it('notification to be removed after 4s', () => {
+        it('notification to be removed ', () => {
           expect(component.notification).toBe(null);
 
         });
@@ -430,13 +455,12 @@ describe('ListItemComponent', () => {
         expect(component.notification.message).toBe('Nu tar vi bort');
       });
 
-      describe('', () => {
+      describe('and notification is collapsing after 1,4s', () => {
         beforeEach(() => {
           jasmine.clock().tick(1400);
         });
         it('content is collapsed', () => {
           expect(component.collapsed).toBe(true);
-
         });
 
         it('content is collapsed', () => {
@@ -444,16 +468,19 @@ describe('ListItemComponent', () => {
         });
       });
 
-      it('notification changes back to permanent notification after 3,4s', () => {
-        jasmine.clock().tick(3400);
-        expect(component.deleted.emit).toHaveBeenCalled();
+      describe('and component is emitting deleted after 3,4s', () => {
+        beforeEach(() => {
+          jasmine.clock().tick(3400);
+        });
+        it('component deleted is emitted', () => {
+          expect(component.deleted.emit).toHaveBeenCalled();
+        });
+
+        it('is deleted is set to true', () => {
+          expect(component.isDeleted).toBe(true);
+        });
+
       });
-
-
-
-
-
-
     });
 
     describe('and notification is set to null', () => {
@@ -484,123 +511,6 @@ describe('ListItemComponent', () => {
     it('expandedChanged is called', () => {
       expect(component.expandedChanged.emit).toHaveBeenCalled();
     });
-
-    // describe('and a ShowOnCollapse notification is set', () => {
-    //   beforeEach(() => {
-    //     spyOn(component, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
-    //     component.notification = { message: 'Row saved', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnCollapse } as RowNotification;
-    //   });
-    //   it('notification is displayed', () => {
-    //     expect(component.notificationVisible).toBe(true);
-    //   });
-    //   it('component is collapsing', () => {
-    //     expect(component.notInteractable).toBe(true);
-    //   });
-
-    // describe('after 1,4 seconds', () => {
-    //   beforeEach(() => {
-    //     jasmine.clock().tick(1400);
-    //   });
-    //   it('content is collapsed', () => {
-    //     expect(jqueryHelper.collapseContent).toHaveBeenCalled();
-    //   });
-    //   describe('after another 2 seconds', () => {
-    //     beforeEach(() => {
-    //       jasmine.clock().tick(2000);
-    //       fixture.detectChanges();
-    //     });
-    //     it('the notification is hidden', () => {
-    //       expect(component.notificationVisible).toBe(false);
-    //     });
-    //     it('the notification is done', () => {
-    //       expect(component.notification.done).toBe(true);
-    //     });
-    //     it('component is not expanded', () => {
-    //       expect(component.expanded).toBe(false);
-    //     });
-    //     it('component is not collapsing', () => {
-    //       expect(component.notInteractable).toBe(false);
-    //     });
-    //   });
-    // });
-
-
-    //   describe('and a ShowOnRemove notification is set', () => {
-    //     beforeEach(() => {
-    //       spyOn(jqueryHelper, 'collapseContent').and.callFake((header: any, callback: Function) => { callback(); });
-    //       component.notification = { message: 'Row deleted', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnRemove } as RowNotification;
-    //     });
-    //     it('notification is displayed', () => {
-    //       expect(component.notificationVisible).toBe(true);
-    //     });
-    //     it('component is collapsing', () => {
-    //       expect(component.notInteractable).toBe(true);
-    //     });
-
-    //     describe('after 1,4 seconds', () => {
-    //       beforeEach(() => {
-    //         jasmine.clock().tick(1400);
-    //       });
-    //       it('content is collapsed', () => {
-    //         expect(jqueryHelper.collapseContent).toHaveBeenCalled();
-    //       });
-    //       describe('after another 2 seconds', () => {
-    //         beforeEach(() => {
-    //           jasmine.clock().tick(2000);
-    //           fixture.detectChanges();
-    //         });
-    //         it('the notification is hidden', () => {
-    //           expect(component.notificationVisible).toBe(false);
-    //         });
-    //         it('the notification is done', () => {
-    //           expect(component.notification.done).toBe(true);
-    //         });
-    //         it('component is not expanded', () => {
-    //           expect(component.expanded).toBe(false);
-    //         });
-    //         it('component is not collapsing', () => {
-    //           expect(component.notInteractable).toBe(false);
-    //         });
-    //         it('component is deleted', () => {
-    //           expect(component.isDeleted).toBe(true);
-    //         });
-    //       });
-    //     });
-    //   });
-
-    // });
-
-    // describe('When item is collapsing', () => {
-    //   beforeEach(() => {
-    //     spyOn(jqueryHelper, 'isClickEventHeader').and.returnValue(true);
-    //     spyOn(jqueryHelper, 'toggleContent');
-    //     component.notInteractable = true;
-    //   });
-    //   describe('and header is clicked', () => {
-    //     beforeEach(() => {
-    //       rootElement.triggerEventHandler('click', null);
-    //       fixture.detectChanges();
-    //     });
-    //     it('item is not expanded', () => {
-    //       expect(component.expanded).toBeFalsy();
-    //     });
-    //     it('content is not visible', () => {
-    //       expect(jqueryHelper.toggleContent).toHaveBeenCalledTimes(0);
-    //     });
-    //   });
-    //   describe('and expanded is set to true', () => {
-    //     beforeEach(() => {
-    //       component.expanded = true;
-    //       fixture.detectChanges();
-    //     });
-    //     it('item is not expanded', () => {
-    //       expect(component.expanded).toBeFalsy();
-    //     });
-    //     it('content is not visible', () => {
-    //       expect(jqueryHelper.toggleContent).toHaveBeenCalledTimes(0);
-    //     });
-    //   });
-    // });
 
   });
 });
