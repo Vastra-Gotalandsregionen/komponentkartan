@@ -10,7 +10,7 @@ import { ButtonBaseComponent } from './button-base.component';
 
 @Component({
     moduleId: module.id,
-    template: `<div role="button" class="test-button" (click)="onClick($event)" (keydown)="keyPressed($event)"></div>`
+    template: `<div role="button" class="test-button" (click)="onClick($event)" (keydown)="keyPressed($event)">Test</div>`
 })
 export class TestButtonComponent extends ButtonBaseComponent { }
 
@@ -41,6 +41,7 @@ describe('[ButtonBaseComponent - angular]', () => {
         beforeEach(() => {
             testButtonElement = rootElement.query(By.css('.test-button'));
             spyOn(component.click, 'emit');
+            spyOn(component, 'onClick').and.callThrough();
         });
         describe('When button is enabled', () => {
             describe('and space is pressed', () => {
@@ -68,6 +69,15 @@ describe('[ButtonBaseComponent - angular]', () => {
                     expect(component.click.emit).toHaveBeenCalledTimes(0);
                 });
             });
+            describe('and button is clicked', () => {
+                const clickEvent = { preventDefault: () => { } };
+                beforeEach(() => {
+                    testButtonElement.triggerEventHandler('click', clickEvent);
+                });
+                it('a clicked event is not triggered', () => {
+                    expect(component.onClick).toHaveBeenCalled();
+                });
+            });
         });
         describe('When button is disabled', () => {
             beforeEach(() => {
@@ -93,8 +103,17 @@ describe('[ButtonBaseComponent - angular]', () => {
                     expect(spacePressedEvent.preventDefault).not.toHaveBeenCalled();
                 });
             });
+            describe('and button is clicked', () => {
+                const clickEvent = { stopPropagation: () => { } };
+                beforeEach(() => {
+                    spyOn(clickEvent, 'stopPropagation');
+                    testButtonElement.triggerEventHandler('click', clickEvent as MouseEvent);
+                });
+                it('a clicked event is not triggered', () => {
+                    expect(clickEvent.stopPropagation).toHaveBeenCalled();
+                });
+            });
         });
     });
-
 });
 

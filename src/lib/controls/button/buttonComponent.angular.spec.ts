@@ -59,29 +59,6 @@ describe('[ButtonComponent - Angular]', () => {
             it('button is displayed as disabled', () => {
                 expect(textButtonElement.classes['button--disabled']).toBe(true);
             });
-
-            describe('and button is clicked', () => {
-                const mockEvent = { stopPropagation: () => { } };
-                beforeEach(() => {
-                    spyOn(mockEvent, 'stopPropagation');
-                    textButtonElement.triggerEventHandler('click', mockEvent);
-                });
-                it('the click event is not propagated', () => {
-                    expect(mockEvent.stopPropagation).toHaveBeenCalled();
-                });
-            });
-            describe('and space is pressed', () => {
-                it('no clicked event is triggered', () => {
-                    textButtonElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
-                    expect(component.click.emit).toHaveBeenCalledTimes(0);
-                });
-            });
-            describe('and Enter is pressed', () => {
-                it('no clicked event is triggered', () => {
-                    textButtonElement.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
-                    expect(component.click.emit).toHaveBeenCalledTimes(0);
-                });
-            });
         });
     });
 
@@ -89,7 +66,6 @@ describe('[ButtonComponent - Angular]', () => {
         let textButtonElement: DebugElement;
         beforeEach(() => {
             textButtonElement = rootElement.query(By.css('.text-button'));
-            spyOn(component.click, 'emit');
         });
         describe('When button is enabled', () => {
             it('button has tab stop', () => {
@@ -102,32 +78,6 @@ describe('[ButtonComponent - Angular]', () => {
 
             it('aria-disabled is false', () => {
                 expect(textButtonElement.attributes['aria-disabled']).toBe('false');
-            });
-
-            describe('and space is pressed', () => {
-                const spacePressedEvent = { preventDefault: () => { }, keyCode: 32 };
-                beforeEach(() => {
-                    spyOn(spacePressedEvent, 'preventDefault');
-                    textButtonElement.triggerEventHandler('keydown', spacePressedEvent);
-                });
-                it('a clicked event is triggered', () => {
-                    expect(component.click.emit).toHaveBeenCalled();
-                });
-                it('to prevent the default behaviour of SPACE, preventDefault is called', () => {
-                    expect(spacePressedEvent.preventDefault).toHaveBeenCalled();
-                });
-            });
-            describe('and Enter is pressed', () => {
-                it('a clicked event is triggered', () => {
-                    textButtonElement.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
-                    expect(component.click.emit).toHaveBeenCalled();
-                });
-            });
-            describe('and a letter is pressed', () => {
-                it('no clicked event is triggered', () => {
-                    textButtonElement.triggerEventHandler('keydown', { keyCode: 167 } as KeyboardEvent);
-                    expect(component.click.emit).toHaveBeenCalledTimes(0);
-                });
             });
         });
         describe('When button is disabled', () => {
