@@ -30,7 +30,7 @@ class TestListItemComponent { }
 
 
 
-describe('TestListItemComponent', () => {
+describe('ListItemComponent', () => {
   let component: ListItemComponent;
   let testListItemComponentFixture: ComponentFixture<TestListItemComponent>;
   let listItemComponentFixture: ComponentFixture<ListItemComponent>;
@@ -70,6 +70,7 @@ describe('TestListItemComponent', () => {
     let element: DebugElement
 
     it('the component has the list-item class', () => {
+
       expect(rootElement.classes['list-item']).toBe(true);
     });
 
@@ -104,9 +105,6 @@ describe('TestListItemComponent', () => {
         expect(component.toggleExpand).toHaveBeenCalledTimes(1);
       });
       it('the component is not collapsed', () => {
-
-        console.log(component.expanded);
-        console.log(rootElement.classes);
         expect(rootElement.classes['list-item--collapsed']).toBe(false);
       });
       it('component is expanded', () => {
@@ -354,6 +352,14 @@ describe('TestListItemComponent', () => {
 
 
   describe('When initialized with a Permanent notification is set,', () => {
+    beforeAll(() => {
+      jasmine.clock().uninstall();
+      jasmine.clock().install();
+
+    });
+    afterAll(() => {
+      jasmine.clock().uninstall();
+    });
     beforeEach(() => {
       component.notification = { message: 'Information', icon: 'vgr-icon-ok-check ', type: NotificationType.Permanent } as RowNotification;
       component.ngAfterContentInit();
@@ -361,8 +367,109 @@ describe('TestListItemComponent', () => {
     it('notification is displayed', () => {
       expect(component.notificationVisible).toBe(true);
     });
-  });
+    describe('and collapsenotification is triggered without removing permanentmessage,', () => {
+      beforeEach(() => {
+        component.notification = { message: 'Nu sparar vi', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnCollapse } as RowNotification;
+      });
+      it('notification is displayed', () => {
+        expect(component.notificationVisible).toBe(true);
+      });
 
+      it('collapse notification is displayed', () => {
+        expect(component.notification.message).toBe('Nu sparar vi');
+      });
+
+      it('notification changes back to permanent notification after 2s', () => {
+        jasmine.clock().tick(3400);
+        expect(component.notification.message).toBe('Information');
+
+      });
+    });
+
+    describe('and collapsenotification is triggered and removing permanentmessage,', () => {
+      beforeEach(() => {
+        component.notification = { message: 'Nu sparar vi', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnCollapse, removeWhenDone: true } as RowNotification;
+      });
+      it('notification is displayed', () => {
+        expect(component.notificationVisible).toBe(true);
+      });
+
+      it('collapse notification is displayed', () => {
+        expect(component.notification.message).toBe('Nu sparar vi');
+      });
+
+      describe('and notification should be removed after 3,4s,', () => {
+        beforeEach(() => {
+          jasmine.clock().tick(4000);
+          listItemComponentFixture.detectChanges();
+        });
+
+        it('notification to be removed after 4s', () => {
+          expect(component.notification).toBe(null);
+
+        });
+        it('notification is not displayed', () => {
+          expect(component.notificationVisible).toBe(false);
+        });
+
+      });
+
+    });
+
+    describe('and removenotification is triggered removing the notification,', () => {
+      beforeEach(() => {
+        spyOn(component.deleted, 'emit');
+        spyOn(component.expandedChanged, 'emit');
+        component.notification = { message: 'Nu tar vi bort', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnRemove } as RowNotification;
+      });
+      it('notification is displayed', () => {
+        expect(component.notificationVisible).toBe(true);
+      });
+
+      it('collapse notification is displayed', () => {
+        expect(component.notification.message).toBe('Nu tar vi bort');
+      });
+
+      describe('', () => {
+        beforeEach(() => {
+          jasmine.clock().tick(1400);
+        });
+        it('content is collapsed', () => {
+          expect(component.collapsed).toBe(true);
+
+        });
+
+        it('content is collapsed', () => {
+          expect(component.expandedChanged.emit).toHaveBeenCalled();
+        });
+      });
+
+      it('notification changes back to permanent notification after 3,4s', () => {
+        jasmine.clock().tick(3400);
+        expect(component.deleted.emit).toHaveBeenCalled();
+      });
+
+
+
+
+
+
+    });
+
+    describe('and notification is set to null', () => {
+      beforeEach(() => {
+        component.notification = null;
+
+      });
+      it('notification is set to null', () => {
+        expect(component.notification).toBe(null);
+      });
+
+      it('notification is not visible', () => {
+        expect(component.notificationVisible).toBe(false);
+      });
+    });
+  });
   describe('When expanded is set to true', () => {
     beforeEach(() => {
       spyOn(component.expandedChanged, 'emit');
@@ -494,5 +601,6 @@ describe('TestListItemComponent', () => {
     //     });
     //   });
     // });
+
   });
 });

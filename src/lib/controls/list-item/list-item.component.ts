@@ -99,6 +99,7 @@ export class ListItemComponent implements AfterContentInit {
             this.permanentNotification = null;
             this.eventNotification = null;
             this._notification = null;
+            this.notificationVisible = false;
         }
 
         this.notificationChanged.emit(value);
@@ -200,12 +201,8 @@ export class ListItemComponent implements AfterContentInit {
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
-
                 this.notInteractable = false;
                 this.notification.done = true;
-
-                if (!this.permanentNotification)
-                    this.notificationVisible = false;
 
                 if (this.eventNotification.removeWhenDone) {
                     this._notification = null;
@@ -213,9 +210,10 @@ export class ListItemComponent implements AfterContentInit {
                 }
                 else
                     this._notification = this.permanentNotification;
+
+                if (!this.permanentNotification)
+                    this.notificationVisible = false;
                 return;
-
-
             }, 2000);
         }, 1400);
 
