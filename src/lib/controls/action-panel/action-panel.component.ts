@@ -1,4 +1,5 @@
 import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectorRef, AfterContentInit } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
 import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
@@ -6,6 +7,20 @@ import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
 @Component({
     templateUrl: './action-panel.component.html',
     selector: 'vgr-action-panel',
+    animations: [
+        trigger(
+            'enterAnimation', [
+                transition(':enter', [
+                    style({ opacity: 0 }),
+                    animate('400ms', style({ opacity: 1 }))
+                ]),
+                transition(':leave', [
+                    style({ opacity: 1 }),
+                    animate('400ms', style({ opacity: 0 }))
+                ])
+            ]
+        )
+    ],
     moduleId: module.id
 })
 export class ActionPanelComponent implements OnInit, AfterContentInit {
