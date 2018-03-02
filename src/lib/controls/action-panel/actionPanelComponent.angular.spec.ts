@@ -84,11 +84,42 @@ describe('ActionPanelComponent', () => {
             beforeEach(() => {
                 spyOn(component.expandedChanged, 'emit');
                 component.expanded = true;
+                jasmine.clock().uninstall();
+                jasmine.clock().install();
                 fixture.detectChanges();
+                jasmine.clock().tick(2000);
             });
 
-            it('close button is visible', () => {
+            it('expandedChanged has been called', () => {
                 expect(component.expandedChanged.emit).toHaveBeenCalled();
+            });
+            it('component is not collapsed', () => {
+                expect(component.collapsed).toBe(false);
+            });
+            it('height is set to auto', () => {
+                expect(rootElement.nativeElement.style.height).not.toBe('0px');
+            });
+            it('height is set to 0px', () => {
+                // expect(rootElement.nativeElement.style.overflow).toBe('visible');
+            });
+            describe('the panel is collapsed', () => {
+                beforeEach(() => {
+                    component.expanded = false;
+                    fixture.detectChanges();
+                    jasmine.clock().tick(100);
+                });
+                it('expandedChanged has been called', () => {
+                    expect(component.expandedChanged.emit).toHaveBeenCalled();
+                });
+                it('component is collapsed', () => {
+                    expect(component.collapsed).toBe(true);
+                });
+                it('height is set to 0px', () => {
+                    expect(rootElement.nativeElement.style.height).toBe('0px');
+                });
+                it('height is set to 0px', () => {
+                    expect(rootElement.nativeElement.style.overflow).toBe('hidden');
+                });
             });
         });
         describe('the panel is deleted', () => {
