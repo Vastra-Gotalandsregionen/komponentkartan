@@ -12,15 +12,15 @@ export class StartComponent implements OnInit {
   angularVersion: string;
 
   constructor() {
-    const { dependencies: appVersion } = require('../../../package.json');
-    this.currentVersion = appVersion['vgr-komponentkartan'];
+  }
+
+  ngOnInit() {
+    const { version: appVersion } = require('../../../package.json');
+    this.currentVersion = appVersion;
     this.currentVersion = this.currentVersion ? this.currentVersion.replace('^', '') : this.currentVersion;
 
     const { version: angularVersion } = require('../../../node_modules/@angular/core/package.json');
     this.angularVersion = angularVersion;
-  }
-
-  ngOnInit() {
   }
 
 }
