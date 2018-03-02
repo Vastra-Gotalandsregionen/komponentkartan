@@ -86,14 +86,12 @@ describe('ListItemComponent', () => {
       const event: any = { cancelBubble: false };
 
       beforeEach(() => {
-        console.log(component.expanded);
         spyOn(component, 'toggleExpand').and.callThrough();
         component.notInteractable = false;
         component.isDeleted = false;
 
         element = rootElement.query(By.css('.list-item__header_wrapper'));
         element.triggerEventHandler('click', event);
-        console.log(component.expanded);
 
         listItemComponentFixture.detectChanges();
       });
