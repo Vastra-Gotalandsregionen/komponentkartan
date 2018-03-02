@@ -49,7 +49,6 @@ describe('ListItemComponent', () => {
         { provide: ElementRef },
         { provide: Renderer }]
     });
-    TestBed.compileComponents();
 
     TestBed.compileComponents().then(() => {
       testListItemComponentFixture = TestBed.createComponent(TestListItemComponent);
