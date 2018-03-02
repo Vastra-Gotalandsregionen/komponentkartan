@@ -66,7 +66,7 @@ describe('ListItemComponent', () => {
   });
 
   describe('When initialized', () => {
-    let element: DebugElement
+    let element: DebugElement;
 
     it('the component has the list-item class', () => {
 
@@ -110,26 +110,45 @@ describe('ListItemComponent', () => {
       it('click event is not bubbled', () => {
         expect(event.cancelBubble).toBeTruthy();
       });
+
+      describe('and the header is clicked again', () => {
+        const event: any = { cancelBubble: false };
+
+        beforeAll(() => {
+          jasmine.clock().uninstall();
+          jasmine.clock().install();
+
+        });
+        afterAll(() => {
+          jasmine.clock().uninstall();
+        });
+
+        beforeEach(() => {
+          component.notInteractable = false;
+          component.isDeleted = false;
+
+          element = rootElement.query(By.css('.list-item__header_wrapper'));
+          element.triggerEventHandler('click', event);
+
+          jasmine.clock().tick(5001);
+          listItemComponentFixture.detectChanges();
+
+        });
+        it('the component is collapsed', () => {
+          console.log(component.expanded);
+          expect(rootElement.classes['list-item--collapsed']).toBe(true);
+        });
+        it('component is not expanded', () => {
+          expect(rootElement.classes['list-item--expanded']).toBe(false);
+        });
+        it('toggleExpand has been called once again', () => {
+          expect(component.toggleExpand).toHaveBeenCalledTimes(2);
+        });
+      });
     });
 
-    describe('and the header is clicked again', () => {
-      beforeEach(() => {
-        spyOn(component, 'toggleExpand').and.callThrough();
-        element = rootElement.query(By.css('.list-item__header_wrapper'));
-        element.triggerEventHandler('click', event);
-        listItemComponentFixture.detectChanges();
-      });
-      it('the component is collapsed', () => {
-        expect(rootElement.classes['list-item--collapsed']).toBe(true);
-      });
-      it('component is not expanded', () => {
-        expect(rootElement.classes['list-item--expanded']).toBe(false);
-      });
-      it('toggleExpand has been called once again', () => {
-        expect(component.toggleExpand).toHaveBeenCalled();
-      });
-    });
   });
+
   describe('When the list-item-header is in focus', () => {
     let header: DebugElement;
     let toggleExpandSpy: jasmine.Spy;
