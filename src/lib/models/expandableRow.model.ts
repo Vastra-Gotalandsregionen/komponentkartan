@@ -4,24 +4,28 @@ import { NotificationType } from './notificationType.model';
 export class ExpandableRow<TPreview, TFull> {
     previewObject: TPreview;
     fullObject: TFull;
-    private notification: RowNotification; //the permanentNofication
+    private _notification: RowNotification; //the permanentNofication
 
     constructor(previewObject: TPreview) {
         this.previewObject = previewObject;
     }
-    setNotification(message: string, icon: string, ) {
-        this.notification = { icon: icon, message: message, type: NotificationType.Permanent } as RowNotification;
+    setNotification(message: string, icon: string) {
+        this._notification = { icon: icon, message: message, type: NotificationType.Permanent } as RowNotification;
+    }
+
+    notification(): RowNotification {
+        return this._notification;
     }
 
     notifyOnCollapse(message: string, icon: string, clearNotification: boolean = false) {
-        this.notification = { icon: icon, message: message, type: NotificationType.ShowOnCollapse, removeWhenDone: clearNotification } as RowNotification;
+        this._notification = { icon: icon, message: message, type: NotificationType.ShowOnCollapse, removeWhenDone: clearNotification } as RowNotification;
     }
 
     notifyOnRemove(message: string, icon: string) {
-        this.notification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
+        this._notification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
     }
 
     removeNotifiaction() {
-        this.notification = null;
+        this._notification = null;
     }
 }

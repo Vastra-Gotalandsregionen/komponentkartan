@@ -19,6 +19,7 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
     moduleId: module.id,
     animations: [
         trigger('slideListContent', [
+
             state('collapsed', style({
                 overflow: 'hidden',
                 height: '0'
@@ -111,6 +112,14 @@ export class ListItemComponent implements AfterContentInit {
     @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
     constructor(private elementRef: ElementRef, private changeDetector: ChangeDetectorRef) {
+    }
+
+    animationDone($event) {
+        this.elementRef.nativeElement.style["overflow"] = "visible";
+
+    }
+    animationStart($event) {
+        this.elementRef.nativeElement.style["overflow"] = "hidden";
     }
 
     ngAfterContentInit() {
