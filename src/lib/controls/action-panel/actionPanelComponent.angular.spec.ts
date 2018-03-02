@@ -54,21 +54,17 @@ describe('ActionPanelComponent', () => {
             component.title = 'MyTitle';
             fixture.detectChanges();
         });
-
         it('title is set', () => {
             titleElement = rootElement.query(By.css('.action-panel__title'));
             expect(titleElement.nativeElement.innerText).toBe('MyTitle');
         });
-
         it('close button is not visible', () => {
             closeButton = rootElement.query(By.css('.close-button'));
             expect(closeButton).toBeNull();
         });
-
         it('panel is collapsed', () => {
             expect(component.expanded).toBeUndefined();
         });
-
         describe('with a close button', () => {
             beforeEach(() => {
                 component.showCloseButton = true;
@@ -83,11 +79,12 @@ describe('ActionPanelComponent', () => {
         describe('the panel is expanded', () => {
             beforeEach(() => {
                 spyOn(component.expandedChanged, 'emit');
-                component.expanded = true;
                 jasmine.clock().uninstall();
                 jasmine.clock().install();
+                component.expanded = true;
+                component.expansionSpeed = 'fast';
                 fixture.detectChanges();
-                jasmine.clock().tick(2000);
+                jasmine.clock().tick(1000);
             });
 
             it('expandedChanged has been called', () => {
@@ -97,10 +94,10 @@ describe('ActionPanelComponent', () => {
                 expect(component.collapsed).toBe(false);
             });
             it('height is set to auto', () => {
-                expect(rootElement.nativeElement.style.height).not.toBe('0px');
+                expect(rootElement.nativeElement.style.height).toBe('auto');
             });
             it('height is set to 0px', () => {
-                // expect(rootElement.nativeElement.style.overflow).toBe('visible');
+                expect(rootElement.nativeElement.style.overflow).toBe('visible');
             });
             describe('the panel is collapsed', () => {
                 beforeEach(() => {
@@ -134,7 +131,6 @@ describe('ActionPanelComponent', () => {
                 expect(component.expandedChanged.emit).not.toHaveBeenCalled();
             });
         });
-
         describe('the panel is not interactable', () => {
             beforeEach(() => {
                 spyOn(component.expandedChanged, 'emit');
@@ -145,6 +141,33 @@ describe('ActionPanelComponent', () => {
 
             it('the panel is not expanded since it is not interactabvle', () => {
                 expect(component.expandedChanged.emit).not.toHaveBeenCalled();
+            });
+        });
+        describe('page header height is set', () => {
+            it('height is set on element', () => {
+                component.setPageHeaderHeight(100);
+                expect(rootElement.nativeElement.style.top).toBe('100px');
+            });
+        });
+        describe('expansion speed is set to fast', () => {
+            it('animation delay is set to 300', () => {
+                component.expansionSpeed = 'fast';
+                fixture.detectChanges();
+                expect(component.animationDelayMs).toBe(300);
+            });
+        });
+        describe('expansion speed is set to normal', () => {
+            it('animation delay is set to 600', () => {
+                component.expansionSpeed = 'normal';
+                fixture.detectChanges();
+                expect(component.animationDelayMs).toBe(600);
+            });
+        });
+        describe('expansion speed is set to slow', () => {
+            it('animation delay is set to 1000', () => {
+                component.expansionSpeed = 'slow';
+                fixture.detectChanges();
+                expect(component.animationDelayMs).toBe(1000);
             });
         });
     });
