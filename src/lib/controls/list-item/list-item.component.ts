@@ -24,7 +24,7 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
                 height: '0'
             })),
             state('expanded', style({
-                overflow: 'hidden',
+                overflow: 'visible',
                 height: '*'
             })),
             transition('expanded => collapsed',
