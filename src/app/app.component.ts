@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewChild, HostBinding, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-
 import { ModalService, IHeaderMenu, IHeaderMenuItem } from 'vgr-komponentkartan';
+declare var require: any;
 
 @Component({
     selector: 'app-komponentkartan',
@@ -9,9 +9,16 @@ import { ModalService, IHeaderMenu, IHeaderMenuItem } from 'vgr-komponentkartan'
 })
 
 export class KomponentkartanApplicationComponent implements OnInit {
-    constructor(private router: Router) { }
+    currentVersion: string;
+
+    constructor(private router: Router) {
+    }
 
     ngOnInit() {
+        const { version: appVersion } = require('../../package.json');
+        this.currentVersion = appVersion;
+        this.currentVersion = this.currentVersion ? this.currentVersion.replace('^', '') : this.currentVersion;
+
         this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
