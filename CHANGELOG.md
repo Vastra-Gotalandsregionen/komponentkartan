@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - New declarative menu component. The previous menu component is no lomger supported.
 - Implemented support for reactive forms reset in datepicker, montpicker and dropdowns.
 - Radiogroup and checkbox now updates their values when used in a Reactive Form with update mode set to blur.
-- Möjlighet att lägga till valfritt innehåll i modaler. Tagit bort ModalButtonConfiguration.
+- Possibility to att custom content to modals. Removed ModalButtonConfiguration
+- Added ptional close button to Action Panel
 
 ## 2.1.1
 - Added support for AOT builds
