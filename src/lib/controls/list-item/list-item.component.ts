@@ -19,12 +19,13 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
     moduleId: module.id,
     animations: [
         trigger('slideListContent', [
+
             state('collapsed', style({
                 overflow: 'hidden',
                 height: '0'
             })),
             state('expanded', style({
-                overflow: 'hidden',
+                overflow: 'visible',
                 height: '*'
             })),
             transition('expanded => collapsed',
@@ -55,7 +56,6 @@ export class ListItemComponent implements AfterContentInit {
     @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
     @Input() set expanded(expandedValue: boolean) {
-
         if (expandedValue && !this._expanded) {
             this.expand();
         } else if (!expandedValue && this._expanded) {
@@ -84,7 +84,6 @@ export class ListItemComponent implements AfterContentInit {
 
     @Input() set notification(value: RowNotification) {
         if (value) {
-
             if (value.type === NotificationType.ShowOnCollapse) {
                 this.eventNotification = value;
                 this.collapse(value.type);
@@ -97,6 +96,11 @@ export class ListItemComponent implements AfterContentInit {
                 this.permanentNotification = value;
                 this.showNotification();
             }
+        } else {
+            this.permanentNotification = null;
+            this.eventNotification = null;
+            this._notification = null;
+            this.notificationVisible = false;
         }
 
         this.notificationChanged.emit(value);
@@ -108,6 +112,14 @@ export class ListItemComponent implements AfterContentInit {
     @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
     constructor(private elementRef: ElementRef, private changeDetector: ChangeDetectorRef) {
+    }
+
+    animationDone($event) {
+        this.elementRef.nativeElement.style["overflow"] = "visible";
+
+    }
+    animationStart($event) {
+        this.elementRef.nativeElement.style["overflow"] = "hidden";
     }
 
     ngAfterContentInit() {
@@ -123,7 +135,6 @@ export class ListItemComponent implements AfterContentInit {
     toggleExpand(event: Event) {
         event.cancelBubble = true;
         this.expanded = !this.expanded;
-
     }
 
     setFocusOnRow() {
@@ -188,23 +199,17 @@ export class ListItemComponent implements AfterContentInit {
             return;
         }
 
-        this.notificationVisible = true;
 
-        if (this.eventNotification.done) {
-            this.notificationVisible = false;
-        }
+        this.notificationVisible = true;
         this._notification = this.eventNotification;
+
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
-
                 this.notInteractable = false;
-                this.notification.done = true;
 
-                if (!this.permanentNotification)
-                    this.notificationVisible = false;
 
                 if (this.eventNotification.removeWhenDone) {
                     this._notification = null;
@@ -212,9 +217,10 @@ export class ListItemComponent implements AfterContentInit {
                 }
                 else
                     this._notification = this.permanentNotification;
+
+                if (!this.permanentNotification)
+                    this.notificationVisible = false;
                 return;
-
-
             }, 2000);
         }, 1400);
 
@@ -223,16 +229,12 @@ export class ListItemComponent implements AfterContentInit {
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
-        if (this.eventNotification.done) {
-            this.notificationVisible = false;
-        }
         this._notification = this.eventNotification;
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
-                this.notification.done = true;
                 this.isDeleted = true;
                 this.notInteractable = false;
                 this.notificationVisible = false;

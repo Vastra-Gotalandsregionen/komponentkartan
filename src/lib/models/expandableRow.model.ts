@@ -9,7 +9,7 @@ export class ExpandableRow<TPreview, TFull> {
     constructor(previewObject: TPreview) {
         this.previewObject = previewObject;
     }
-    setNotification(message: string, icon: string, ) {
+    setNotification(message: string, icon: string) {
         this.notification = { icon: icon, message: message, type: NotificationType.Permanent } as RowNotification;
     }
 
@@ -19,5 +19,9 @@ export class ExpandableRow<TPreview, TFull> {
 
     notifyOnRemove(message: string, icon: string) {
         this.notification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
+    }
+
+    removeNotifiaction() {
+        this.notification = null;
     }
 }
