@@ -220,6 +220,8 @@ export class ListItemComponent implements AfterContentInit {
 
                 if (!this.permanentNotification)
                     this.notificationVisible = false;
+
+                this.eventNotification = null;
                 return;
             }, 2000);
         }, 1400);
@@ -238,6 +240,7 @@ export class ListItemComponent implements AfterContentInit {
                 this.isDeleted = true;
                 this.notInteractable = false;
                 this.notificationVisible = false;
+                this.eventNotification = null;
                 this.deleted.emit();
             }, 2000);
         }, 1400);
