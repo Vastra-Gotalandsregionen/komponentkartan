@@ -45,7 +45,7 @@ export class ListItemComponent implements AfterContentInit {
     }
     private _expanded = false;
     @HostBinding('class.list-item') isContainer = true;
-    @HostBinding('class.list-item--no-padding') get noPaddingClass() { return this.noPadding; }
+    @HostBinding('class.list-item--indent-content') get addPaddingClass() { return this.indentContent; }
     @HostBinding('class.list-item--collapsed') collapsed = true;
     @HostBinding('class.list-item--expanded') get collapsedClass() { return !this.collapsed; }
     @HostBinding('class.list-item--deleted') isDeleted: boolean;
@@ -57,7 +57,7 @@ export class ListItemComponent implements AfterContentInit {
     @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
     @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
-    @Input() noPadding: boolean;
+    @Input() indentContent = true;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
