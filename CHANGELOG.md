@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add option to have no indentation of list-item content
 - Add padding and hover effect to expandableDiv
 - Added support to keep permanent notification when applying an eventdriven notification (ie NotifyOnCollapse)
+- New version of Angular-Cli to 1.7.2
 ## 2.1.1
 - Added support for AOT builds
 
