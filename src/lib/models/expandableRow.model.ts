@@ -21,7 +21,7 @@ export class ExpandableRow<TPreview, TFull> {
         this.notification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
     }
 
-    removeNotifiaction() {
+    removeNotification() {
         this.notification = null;
     }
 }
