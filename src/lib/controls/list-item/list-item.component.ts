@@ -43,8 +43,9 @@ export class ListItemComponent implements AfterContentInit {
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
     }
-    private _expanded: boolean = false;
+    private _expanded = false;
     @HostBinding('class.list-item') isContainer = true;
+    @HostBinding('class.list-item--no-padding') get noPaddingClass() { return this.noPadding; }
     @HostBinding('class.list-item--collapsed') collapsed = true;
     @HostBinding('class.list-item--expanded') get collapsedClass() { return !this.collapsed; }
     @HostBinding('class.list-item--deleted') isDeleted: boolean;
@@ -52,8 +53,11 @@ export class ListItemComponent implements AfterContentInit {
     @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
     @HostBinding('class.list-item--columns-initialized') columnsInitialized = true;
 
+
     @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
     @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
+
+    @Input() noPadding: boolean;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
@@ -115,11 +119,11 @@ export class ListItemComponent implements AfterContentInit {
     }
 
     animationDone($event) {
-        this.elementRef.nativeElement.style["overflow"] = "visible";
+        this.elementRef.nativeElement.style['overflow'] = 'visible';
 
     }
     animationStart($event) {
-        this.elementRef.nativeElement.style["overflow"] = "hidden";
+        this.elementRef.nativeElement.style['overflow'] = 'hidden';
     }
 
     ngAfterContentInit() {

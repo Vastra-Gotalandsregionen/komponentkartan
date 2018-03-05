@@ -3,11 +3,16 @@
   display: block;
   min-height: 20px;
   .expandable-div-header {
-    cursor: pointer;
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
+    &:hover {
+      background-color: #eeeeee;
+      cursor: pointer;
+    }
     .expandable-div-chevron {
       position: absolute;
       top: 0;
-      right: 0;
+      right: $margin--slim;
       &.expanded {
         @extend .chevron-expanded;
       }
@@ -15,6 +20,10 @@
         @extend .chevron-collapsed;
       }
     }
+  }
+  .expandable-div-content {
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
   }
   &.expandable-div--collapsed {
     .expandable-div-content {
