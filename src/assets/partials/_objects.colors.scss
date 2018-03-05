@@ -1,52 +1,68 @@
 .blue--primary {
-    background-color: $primary-color--blue;
-    color: $text-color--light;
+  background-color: $primary-color--blue;
+  color: $text-color--light;
+}
+
+.blue--primary-dimmed {
+  background-color: $primary-color--blue-dimmed;
 }
 
 .blue--secondary {
-    background-color: $secondary-color--blue;
-    color: $text-color--light;
+  background-color: $secondary-color--blue;
+  color: $text-color--light;
 }
 
 .red--primary {
-    background-color: $primary-color--red;
-    color: $text-color--light;
+  background-color: $primary-color--red;
+  color: $text-color--light;
+}
+
+.red--primary-dimmed {
+  background-color: $primary-color--red-dimmed;
 }
 
 .red--secondary {
-    background-color: $secondary-color--red;
-    color: $text-color--light;
+  background-color: $secondary-color--red;
+  color: $text-color--light;
 }
 
 .green--primary {
-    background-color: $primary-color--green;
-    color: $text-color--light;
+  background-color: $primary-color--green;
+  color: $text-color--light;
+}
+
+.green--primary-dimmed {
+  background-color: $primary-color--green-dimmed;
 }
 
 .green--secondary {
-    background-color: $secondary-color--green;
-    color: $text-color--light;
+  background-color: $secondary-color--green;
+  color: $text-color--light;
 }
 
 .neutral--primary {
-    background-color: $primary-color--default;
-    color: $text-color--light;
+  background-color: $primary-color--default;
+  color: $text-color--light;
+}
+
+.neutral--primary-dimmed {
+  background-color: $primary-color--default-dimmed;
 }
 
 .neutral--secondary {
-    background-color: $secondary-color--default;
-    color: $text-color--light;
+  background-color: $secondary-color--default;
+  color: $text-color--light;
 }
 
 .read-only {
-    color: $text-color--read-only;
+  color: $text-color--read-only;
 }
 
 .background-color--default {
-    background-color: $background-color--default;
+  background-color: $background-color--default;
 }
 
 .background-color--text {
-    background-color: $text-color--default;
-    color: $text-color--light;
+  background-color: $text-color--default;
+  color: $text-color--light;
 }
