@@ -15,10 +15,10 @@
       top: -10px;
     }
     background-color: $secondary-color--error;
-    transition: background-color 0.3s linear,
-    padding-top 0.3s linear,
-    padding-bottom 0.3s linear,
-    top 0.3s linear;
+    transition: background-color 0.3s linear;
+    padding-top: 0.3s linear;
+    padding-bottom: 0.3s linear;
+    top: 0.3s linear;
   }
   .validation-error--editing & {
     max-height: unset;

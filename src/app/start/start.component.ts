@@ -23,7 +23,7 @@ export class StartComponent implements OnInit {
     const { version: angularVersion } = require('../../../node_modules/@angular/core/package.json');
     this.angularVersion = angularVersion;
 
-    const { devDependencies: cliVersion } = require('../../../package.json');
+    const { dependencies: cliVersion } = require('../../../package.json');
     this.angularCliVersion = cliVersion['@angular/cli'];
     this.angularCliVersion = this.angularCliVersion ? this.angularCliVersion.replace('^', '') : this.angularCliVersion;
   }
