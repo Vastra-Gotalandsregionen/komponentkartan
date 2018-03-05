@@ -75,11 +75,15 @@ describe('ListItemComponent', () => {
 
     it('the component is collapsed', () => {
       expect(rootElement.classes['list-item--collapsed']).toBe(true);
-    })
+    });
 
     it('the component is expanded', () => {
       expect(rootElement.classes['list-item--expanded']).toBe(false);
-    })
+    });
+
+    it('the component has indented content', () => {
+      expect(rootElement.classes['list-item--indent-content']).toBe(true);
+    });
 
     describe('and the list-item-header is clicked', () => {
       const event: any = { cancelBubble: false };
@@ -528,5 +532,15 @@ describe('ListItemComponent', () => {
       expect(component.expandedChanged.emit).toHaveBeenCalled();
     });
 
+  });
+  describe('When indent content is set to false', () => {
+    beforeEach(() => {
+      component.indentContent = false;
+      listItemComponentFixture.detectChanges();
+    });
+
+    it('the component has indented content', () => {
+      expect(rootElement.classes['list-item--indent-content']).toBe(false);
+    });
   });
 });
