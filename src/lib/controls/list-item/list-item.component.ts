@@ -43,8 +43,9 @@ export class ListItemComponent implements AfterContentInit {
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
     }
-    private _expanded: boolean = false;
+    private _expanded = false;
     @HostBinding('class.list-item') isContainer = true;
+    @HostBinding('class.list-item--indent-content') get addPaddingClass() { return this.indentContent; }
     @HostBinding('class.list-item--collapsed') collapsed = true;
     @HostBinding('class.list-item--expanded') get collapsedClass() { return !this.collapsed; }
     @HostBinding('class.list-item--deleted') isDeleted: boolean;
@@ -52,8 +53,11 @@ export class ListItemComponent implements AfterContentInit {
     @HostBinding('class.list-item--not-interactable') notInteractable: boolean;
     @HostBinding('class.list-item--columns-initialized') columnsInitialized = true;
 
+
     @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
     @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
+
+    @Input() indentContent = true;
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
@@ -115,11 +119,11 @@ export class ListItemComponent implements AfterContentInit {
     }
 
     animationDone($event) {
-        this.elementRef.nativeElement.style["overflow"] = "visible";
+        this.elementRef.nativeElement.style['overflow'] = 'visible';
 
     }
     animationStart($event) {
-        this.elementRef.nativeElement.style["overflow"] = "hidden";
+        this.elementRef.nativeElement.style['overflow'] = 'hidden';
     }
 
     ngAfterContentInit() {
@@ -199,8 +203,12 @@ export class ListItemComponent implements AfterContentInit {
             return;
         }
 
-
         this.notificationVisible = true;
+
+        if (this.eventNotification.done) {
+            this.notificationVisible = false;
+        }
+
         this._notification = this.eventNotification;
 
         setTimeout(() => {
@@ -209,7 +217,7 @@ export class ListItemComponent implements AfterContentInit {
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
                 this.notInteractable = false;
-
+                this._notification.done = true;
 
                 if (this.eventNotification.removeWhenDone) {
                     this._notification = null;
@@ -220,24 +228,29 @@ export class ListItemComponent implements AfterContentInit {
 
                 if (!this.permanentNotification)
                     this.notificationVisible = false;
+
                 return;
             }, 2000);
         }, 1400);
-
-
     }
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
+        if (this.eventNotification.done) {
+            this.notificationVisible = false;
+        }
+
         this._notification = this.eventNotification;
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
+                this.notification.done = true;
                 this.isDeleted = true;
                 this.notInteractable = false;
                 this.notificationVisible = false;
+                this.eventNotification = null;
                 this.deleted.emit();
             }, 2000);
         }, 1400);

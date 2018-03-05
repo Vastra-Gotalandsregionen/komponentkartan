@@ -7,6 +7,7 @@
 *
 * Example: @include theme(background-color) will produce
 * .background-color--primary
+* .background-color--primary-dimmed
 * .background-color--secondary
 * With themes for all defined colors.
 **********************************************************************************/
@@ -66,6 +67,33 @@
       #{$property}: $secondary-color--green;
     }
   }
+  .#{$property}--primary-dimmed {
+    #{$property}: $primary-color--default-dimmed;
+    .theme--neutral & {
+      #{$property}: $primary-color--default-dimmed;
+    }
+    .theme--blue & {
+      #{$property}: $primary-color--blue-dimmed;
+    }
+    .theme--red & {
+      #{$property}: $primary-color--red-dimmed;
+    }
+    .theme--green & {
+      #{$property}: $primary-color--green-dimmed;
+    }
+    &.theme--neutral {
+      #{$property}: $primary-color--default-dimmed;
+    }
+    &.theme--blue {
+      #{$property}: $primary-color--blue-dimmed;
+    }
+    &.theme--red {
+      #{$property}: $primary-color--red-dimmed;
+    }
+    &.theme--green {
+      #{$property}: $primary-color--green-dimmed;
+    }
+  }
 }
 
 @include theme(border-top-color);
@@ -75,7 +103,6 @@
 @include theme(border-color);
 @include theme(color);
 @include theme(background-color);
-
 /*********************************************************************************************
     Button animations
     Since animations cannot use the same type of class-based @extend theming, they need
