@@ -2,7 +2,7 @@
   <ng-content select="vgr-list-item-header">
   </ng-content>
 </div>
-<div *ngIf="notification" class="list-item__notification">
+<div *ngIf="notification" class="list-item__notification" [@slideNotificationMessage]="stateNotification">
   <span class="list-item__notification__icon" [ngClass]="notification.icon">
   </span>
   <div class="list-item__notification__message">

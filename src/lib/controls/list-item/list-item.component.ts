@@ -34,6 +34,22 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
             transition('collapsed => expanded',
                 animate('400ms ease-in')
             ),
+        ]),
+        trigger('slideNotificationMessage', [
+            state('visible', style({
+                overflow: 'visible',
+                display: 'visible',
+                height: '*'
+            })),
+            state('hidden', style({
+                display: 'hidden',
+                overflow: 'hidden',
+                height: '0',
+                padding: 0,
+            })),
+            transition('visible => hidden',
+                animate('400ms ease-in')
+            ),
         ])
     ]
 })
@@ -43,6 +59,9 @@ export class ListItemComponent implements AfterContentInit {
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
     }
+
+    stateNotification = 'visible';
+
     private _expanded = false;
     @HostBinding('class.list-item') isContainer = true;
     @HostBinding('class.list-item--indent-content') get addPaddingClass() { return this.indentContent; }
@@ -148,6 +167,7 @@ export class ListItemComponent implements AfterContentInit {
     showNotification() {
         this._notification = this.permanentNotification;
         this.notificationVisible = true;
+        this.stateNotification = 'visible';
     }
 
     public setExpandOrCollapsed() {
@@ -214,21 +234,18 @@ export class ListItemComponent implements AfterContentInit {
             setTimeout(() => {
                 this.notInteractable = false;
 
-
                 if (this.eventNotification.removeWhenDone) {
-                    this._notification = null;
                     this.permanentNotification = null;
+                    this.stateNotification = 'hidden';
+                } else {
+                    this.stateNotification = 'hidden';
                 }
-                else
-                    this._notification = this.permanentNotification;
 
-                if (!this.permanentNotification)
+                if (!this.permanentNotification) {
                     this.notificationVisible = false;
-                return;
+                }
             }, 2000);
         }, 1400);
-
-
     }
 
     private processShowOnRemoveNotification() {
