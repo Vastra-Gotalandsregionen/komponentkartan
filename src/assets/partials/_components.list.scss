@@ -223,10 +223,9 @@
   display: block;
   border-spacing: 10px;
   width: calc(#{$content-width--small});
-  padding: 0;
-  .list-item--indent-content & {
-    padding-top: $margin--slim;
-    padding-bottom: $margin--slim;
+  padding-bottom: $margin--slim;
+  padding-top: $margin--slim;
+  &.list-item__content--indent {
     padding-left: $margin--slim;
     padding-right: $margin--slim;
   }
@@ -319,8 +318,11 @@
   }
   .list-item__content {
     width: #{$content-width--medium};
-    .list-item--indent-content & {
-      padding: $margin--fat;
+    padding-bottom: $margin--fat;
+    padding-top: $margin--fat;
+    &.list-item__content--indent {
+      padding-left: $margin--fat;
+      padding-right: $margin--fat;
     }
   }
 }
