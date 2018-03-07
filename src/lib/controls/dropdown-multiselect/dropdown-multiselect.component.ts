@@ -41,7 +41,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     set selectedValues(values: any[]) {
-
         if (values) {
             const matchingItems = this.items.filter((x => values.indexOf(x.value) > -1));
             if (matchingItems.length > 0) {
@@ -51,7 +50,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         } else {
             this.items.forEach(x => x.selected = false);
             this.handleInitiallySelectedItems([]);
-
         }
     }
 
@@ -140,6 +138,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         item.selected = true;
 
+
         this.selectionChanged.emit(this._items.map(x => x.value));
         this.onChange(this.selectedItems.map(x => x.value));
 
@@ -154,7 +153,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         item.selected = false;
 
         this.selectionChanged.emit(this._items.filter(x => x.selected).map(x => x.value));
-        this.onChange(this._items.filter(x => x.selected).map(x => x.displayName));
+        this.onChange(this._items.filter(x => x.selected));
         this.updateDropdownLabel();
     }
 
@@ -181,7 +180,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             this.control.markAsTouched();
             this.control.markAsDirty();
             if (this.control.updateOn === 'blur' && this.selectedItems) {
-                this.control.setValue(this._items.filter(x => x.selected).map(x => x.displayName));
+                this.control.setValue(this._items.filter(x => x.selected));
             }
         }
     }

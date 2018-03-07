@@ -30,7 +30,8 @@
                   [items]="dropdownItems"></vgr-dropdown>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-multiselect formControlName="hobbies" [items]="dropdownItemsMulti" [showValidation]="updateOnBlurForm.controls.hobbies.touched"></vgr-dropdown-multiselect>
+                <vgr-dropdown-multiselect (selectionChanged)="multiChanged($event)" formControlName="hobbies" [items]="dropdownItemsMulti"
+                  [showValidation]="updateOnBlurForm.controls.hobbies.touched"></vgr-dropdown-multiselect>
               </vgr-title-value>
               <vgr-title-value title="Du måste kryssa i mig!">
                 <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>
@@ -51,7 +52,7 @@
               </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
-            <vgr-button [disabled]="false">Skapa användare</vgr-button>
+            <vgr-button [disabled]="false" (click)="onBlurFormSubmit()">Skapa användare</vgr-button>
           </form>
         </vgr-card-column>
         <vgr-card-column>
