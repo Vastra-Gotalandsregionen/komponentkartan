@@ -10,8 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Implemented support for reactive forms reset in datepicker, montpicker and dropdowns.
 - Radiogroup and checkbox now updates their values when used in a Reactive Form with update mode set to blur.
 - Possibility to att custom content to modals. Removed ModalButtonConfiguration
-- Added ptional close button to Action Panel
-
+- Added optional close button to Action Panel
+- Add option to have no indentation of list-item content
+- Add padding and hover effect to expandableDiv
+- Added support to keep permanent notification when applying an eventdriven notification (ie NotifyOnCollapse)
+- New version of Angular-Cli to 1.7.2
 ## 2.1.1
 - Added support for AOT builds
 
