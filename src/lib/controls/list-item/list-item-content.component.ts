@@ -10,8 +10,10 @@ export class ListItemContentComponent {
     @Output() goUp: EventEmitter<any> = new EventEmitter();
     @Output() goDown: EventEmitter<any> = new EventEmitter();
     @HostBinding('class.list-item__content') listItemContent = true;
-
+    @HostBinding('class.list-item__content--indent') get addPaddingClass() { return this.indentContent; }
     @HostBinding('tabIndex') tabIndex = 0;
+
+    @Input() indentContent = true;
 
     @HostListener('keydown', ['$event'])
     toggleExpand(event: KeyboardEvent) {
