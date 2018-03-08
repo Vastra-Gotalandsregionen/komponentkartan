@@ -314,7 +314,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
     const examplehsaid = 'SE2321000131-E000000011';
     const examplehenhetskod: number[] = [802200, 663300, 663200, 623300, 627600, 432300, 435600, 806600, 834500, 678500, 458700, 648900, 804500];
     let item: ExampleUnit;
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 200; i++) {
       const indexForNames = this.getRandomInt(0, 12);
       const indexForAgare = this.getRandomInt(0, 4);
       const indexForEnhetskod = this.getRandomInt(0, 12);
@@ -539,7 +539,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   onCardCancel(row: ExpandableRow<ExampleUnit, any>) {
     this.cardLocked = true;
 
-    row.notifyOnCollapse('Redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation');
+    row.notifyOnCollapse('Redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation', false);
   }
 
   onCardSave(event: Event, row: ExpandableRow<ExampleUnit, any>) {

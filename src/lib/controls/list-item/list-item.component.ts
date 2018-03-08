@@ -19,7 +19,6 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
     moduleId: module.id,
     animations: [
         trigger('slideListContent', [
-
             state('collapsed', style({
                 overflow: 'hidden',
                 height: '0'
@@ -44,8 +43,7 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
             state('hidden', style({
                 display: 'hidden',
                 overflow: 'hidden',
-                height: '0',
-                padding: 0,
+                height: '0'
             })),
             transition('visible => hidden',
                 animate('400ms ease-in')
@@ -231,6 +229,8 @@ export class ListItemComponent implements AfterContentInit {
 
         this._notification = this.eventNotification;
 
+        this.stateNotification = 'visible';
+
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
@@ -239,21 +239,30 @@ export class ListItemComponent implements AfterContentInit {
                 this.notInteractable = false;
 
                 if (this.eventNotification.removeWhenDone) {
+                    this.stateNotification = 'hidden';
+                    this.notificationVisible = false;
                     this.permanentNotification = null;
-                    this.stateNotification = 'hidden';
                 } else {
-                    this.stateNotification = 'hidden';
+                    if (!this.permanentNotification) {
+                        this.stateNotification = 'hidden';
+                        this.notificationVisible = false;
+                    } else {
+                        this._notification = this.permanentNotification;
+                        this.notificationVisible = true;
+                    }
                 }
 
-                if (!this.permanentNotification) {
-                    this.notificationVisible = false;
-                }
+                // if (!this.permanentNotification) {
+                //     this.notificationVisible = false;
+                // }
             }, 2000);
         }, 1400);
     }
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
+        this.stateNotification = 'visible';
+
         if (this.eventNotification.done) {
             this.notificationVisible = false;
         }
