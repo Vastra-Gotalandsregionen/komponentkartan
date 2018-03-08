@@ -19,7 +19,6 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
     moduleId: module.id,
     animations: [
         trigger('slideListContent', [
-
             state('collapsed', style({
                 overflow: 'hidden',
                 height: '0'
@@ -34,6 +33,21 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
             transition('collapsed => expanded',
                 animate('400ms ease-in')
             ),
+        ]),
+        trigger('slideNotificationMessage', [
+            state('visible', style({
+                overflow: 'visible',
+                display: 'visible',
+                height: '*'
+            })),
+            state('hidden', style({
+                display: 'hidden',
+                overflow: 'hidden',
+                height: '0'
+            })),
+            transition('visible => hidden',
+                animate('400ms ease-in')
+            ),
         ])
     ]
 })
@@ -43,6 +57,9 @@ export class ListItemComponent implements AfterContentInit {
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
     }
+
+    stateNotification = 'visible';
+
     private _expanded = false;
     @HostBinding('class.list-item') isContainer = true;
 
@@ -148,6 +165,7 @@ export class ListItemComponent implements AfterContentInit {
     showNotification() {
         this._notification = this.permanentNotification;
         this.notificationVisible = true;
+        this.stateNotification = 'visible';
     }
 
     public setExpandOrCollapsed() {
@@ -211,31 +229,40 @@ export class ListItemComponent implements AfterContentInit {
 
         this._notification = this.eventNotification;
 
+        this.stateNotification = 'visible';
+
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
             this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
                 this.notInteractable = false;
-                this._notification.done = true;
 
                 if (this.eventNotification.removeWhenDone) {
-                    this._notification = null;
-                    this.permanentNotification = null;
-                }
-                else
-                    this._notification = this.permanentNotification;
-
-                if (!this.permanentNotification)
+                    this.stateNotification = 'hidden';
                     this.notificationVisible = false;
+                    this.permanentNotification = null;
 
-                return;
+                    setTimeout(() => {
+                        this._notification = null;
+                    }, 1000);
+                } else {
+                    if (!this.permanentNotification) {
+                        this.stateNotification = 'hidden';
+                        this.notificationVisible = false;
+                    } else {
+                        this._notification = this.permanentNotification;
+                        this.notificationVisible = true;
+                    }
+                }
             }, 2000);
         }, 1400);
     }
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
+        this.stateNotification = 'visible';
+
         if (this.eventNotification.done) {
             this.notificationVisible = false;
         }
