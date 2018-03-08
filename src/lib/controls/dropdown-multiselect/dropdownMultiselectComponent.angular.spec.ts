@@ -57,9 +57,11 @@ describe("[DropdownMultiSelectComponent]", () => {
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
             component.showAllItemText = "Select all";
-            component.items = [{ displayName: "Option 1" } as DropdownItem<any>,
-            { displayName: "Option 2" } as DropdownItem<any>,
-            { displayName: "Option 3" } as DropdownItem<any>] as DropdownItem<any>[];
+            component.items = [
+                { displayName: "Option 1", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
+                { displayName: "Option 2", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
+                { displayName: "Option 3", value: { name: 'option 1', id: 1 } } as DropdownItem<object>
+            ] as DropdownItem<object>[];
             component.ngOnChanges();
             fixture.detectChanges();
             done();
@@ -93,9 +95,11 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         beforeEach(() => {
             spyOn(component.selectionChanged, "emit");
-            component.items = [{ displayName: "Option 1" } as DropdownItem<any>,
-            { displayName: "Option 2", selected: true } as DropdownItem<any>,
-            { displayName: "Option 3" } as DropdownItem<any>] as DropdownItem<any>[];
+            component.items = [
+                { displayName: "Option 1", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
+                { displayName: "Option 2", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
+                { displayName: "Option 3", value: { name: 'option 1', id: 1 } } as DropdownItem<object>
+            ] as DropdownItem<object>[];
             component.ngOnChanges();
             fixture.detectChanges();
         });
@@ -115,9 +119,11 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         beforeEach(() => {
             spyOn(component.selectionChanged, "emit");
-            component.items = [{ displayName: "Option 1", selected: true } as DropdownItem<any>,
-            { displayName: "Option 2", selected: true } as DropdownItem<any>,
-            { displayName: "Option 3" } as DropdownItem<any>] as DropdownItem<any>[];
+            component.items = [
+                { displayName: "Option 1", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
+                { displayName: "Option 2", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
+                { displayName: "Option 3", value: { name: 'option 1', id: 1 } } as DropdownItem<object>
+            ] as DropdownItem<object>[];
             component.ngOnChanges();
 
             fixture.detectChanges();

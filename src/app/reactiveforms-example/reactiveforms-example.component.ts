@@ -14,7 +14,7 @@ export class ReactiveformsexampleComponent implements OnInit {
     radioOptions2: SelectableItem<number>[];
     radioOptions3: SelectableItem<number>[];
     dropdownItems: DropdownItem<string>[];
-    dropdownItemsMulti: DropdownItem<string>[];
+    dropdownItemsMulti: DropdownItem<object>[];
 
     minDate = new Date('2015');
     maxDate = new Date('2025');
