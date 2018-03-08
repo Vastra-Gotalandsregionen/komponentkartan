@@ -242,6 +242,10 @@ export class ListItemComponent implements AfterContentInit {
                     this.stateNotification = 'hidden';
                     this.notificationVisible = false;
                     this.permanentNotification = null;
+
+                    setTimeout(() => {
+                        this._notification = null;
+                    }, 1000);
                 } else {
                     if (!this.permanentNotification) {
                         this.stateNotification = 'hidden';
@@ -251,10 +255,6 @@ export class ListItemComponent implements AfterContentInit {
                         this.notificationVisible = true;
                     }
                 }
-
-                // if (!this.permanentNotification) {
-                //     this.notificationVisible = false;
-                // }
             }, 2000);
         }, 1400);
     }

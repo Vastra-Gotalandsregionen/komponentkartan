@@ -443,9 +443,9 @@ describe('ListItemComponent', () => {
         });
       });
 
-      describe('and notification should be removed after 3,4s,', () => {
+      describe('and notification should be removed after 5s,', () => {
         beforeEach(() => {
-          jasmine.clock().tick(3400);
+          jasmine.clock().tick(5000);
           listItemComponentFixture.detectChanges();
         });
 
@@ -517,30 +517,50 @@ describe('ListItemComponent', () => {
       });
     });
   });
-  describe('When expanded is set to true', () => {
+
+  describe('When initialized with a Temporary notification', () => {
+    beforeAll(() => {
+      jasmine.clock().uninstall();
+      jasmine.clock().install();
+
+    });
+    afterAll(() => {
+      jasmine.clock().uninstall();
+    });
+
     beforeEach(() => {
-      spyOn(component.expandedChanged, 'emit');
-      component.expanded = true;
+      component.notification = { message: 'Temporär', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnCollapse } as RowNotification;
+      jasmine.clock().tick(5000);
       listItemComponentFixture.detectChanges();
     });
 
-    it('the property expanded is set to true', () => {
-      expect(component.expanded).toBe(true);
+    it('', () => {
+      expect(component.notificationVisible).toBe(false);
     });
 
-    it('expandedChanged is called', () => {
-      expect(component.expandedChanged.emit).toHaveBeenCalled();
-    });
+    describe('When expanded is set to true', () => {
+      beforeEach(() => {
+        spyOn(component.expandedChanged, 'emit');
+        component.expanded = true;
+        listItemComponentFixture.detectChanges();
+      });
 
+      it('the property expanded is set to true', () => {
+        expect(component.expanded).toBe(true);
+      });
+
+      it('expandedChanged is called', () => {
+        expect(component.expandedChanged.emit).toHaveBeenCalled();
+      });
+    });
+    describe('When indent content is set to false', () => {
+      beforeEach(() => {
+        component.indentContent = false;
+        listItemComponentFixture.detectChanges();
+      });
+
+      it('the component has indented content', () => {
+        expect(rootElement.classes['list-item--indent-content']).toBe(false);
+      });
+    });
   });
-  describe('When indent content is set to false', () => {
-    beforeEach(() => {
-      component.indentContent = false;
-      listItemComponentFixture.detectChanges();
-    });
-
-    it('the component has indented content', () => {
-      expect(rootElement.classes['list-item--indent-content']).toBe(false);
-    });
-  });
-});
