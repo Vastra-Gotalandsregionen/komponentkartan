@@ -1,7 +1,7 @@
 import {
     Component, Input, AfterViewInit, ElementRef, OnChanges, Output, SimpleChange,
     EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef,
-    SkipSelf, Optional, Host
+    SkipSelf, Optional, Host, Renderer2
 } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
@@ -28,7 +28,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     selectedItem: DropdownItem<any>;
 
-    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, private renderer: Renderer2) {
         super(elementRef);
         this.noItemSelectedLabel = 'Välj';
     }
@@ -89,6 +89,60 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     onTouched() { }
 
+    openDropdownItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+        console.log('keydown in list');
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.selectItem(item);
+        }
+    }
+
+    openDropdownKeyEvent(event: KeyboardEvent): void {
+        const target = event.target || event.srcElement || event.currentTarget;
+        const element = $(target);
+
+        console.log(element);
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.onToggleDropdown(event);
+        }
+
+        if (event.keyCode === 40) {
+            this.setFocusOnNextItem();
+        }
+        if (event.keyCode === 38) {
+            this.setFocusOnPreviousItem();
+        }
+
+        event.preventDefault();
+        //event.cancelBubble = true;
+    }
+
+    private focusedItemIndex = -1;
+
+    private setFocusOnNextItem() {
+
+
+        this.focusedItemIndex = this.focusedItemIndex < this.items.length - 1 ? this.focusedItemIndex + 1 : 0;
+
+        this.items.forEach(x => { x.marked = false; });
+        this.items[this.focusedItemIndex].marked = true;
+
+
+        //this.renderer.invokeElementMethod(this.elements[position], 'focus');
+        // const element = this.renderer.selectRootElement('.dropdown-item--marked');
+        //element.focus();
+
+        //this.elementRef.nativeElement.querySelectorAll('li a[href]')[this.focusedItemIndex].focus();
+        // console.log(element.hasFocus);
+
+    }
+
+    private setFocusOnPreviousItem() {
+        this.focusedItemIndex = this.focusedItemIndex > 0 ? this.focusedItemIndex - 1 : this.items.length - 1;
+
+        this.items.forEach(x => { x.marked = false; });
+        this.items[this.focusedItemIndex].marked = true;
+    }
+
     showAllItems() {
         this.preventCollapse = true;
         this.filter = '';
@@ -109,6 +163,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.selectedItem = item;
         this.onChange(item.value);
     }
+
 
     onMouseEnter(item: DropdownItem<any>) {
         this.items.forEach(x => x.marked = false);

@@ -127,7 +127,8 @@ export abstract class DropdownBaseComponent {
         const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
     }
 
-    onDropdownMouseDown(event: Event) {
+
+    onToggleDropdown(event: Event) {
         if (this.readonly || this.disabled) {
             return;
         }

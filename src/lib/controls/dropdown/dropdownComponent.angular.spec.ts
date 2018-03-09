@@ -328,7 +328,6 @@ describe('DropdownComponent', () => {
         });
     });
 
-
     describe('When component is initialized with two simple values and one selected item', () => {
         let element: DebugElement;
 
@@ -449,5 +448,85 @@ describe('DropdownComponent', () => {
             expect(fixture.debugElement.classes['disabled']).toBe(false);
             expect(fixture.debugElement.classes['readonly']).toBe(false);
         });
+    });
+
+
+    describe('WCAG Tests', () => {
+        let dropdownElement: DebugElement;
+        let listElement: DebugElement;
+        beforeEach(() => {
+            dropdownElement = rootElement.query(By.css('.dropdown--edit'));
+            component.values = ['one', 'two'];
+            component.ngOnChanges();
+            fixture.detectChanges();
+        });
+
+        it('The dropdown has role combobox.', () => {
+            expect(dropdownElement.attributes['role']).toBe('combobox');
+        });
+
+        it('Aria-expanded is false', () => {
+            console.log(dropdownElement
+            );
+            expect(dropdownElement.attributes['aria-expanded']).toBe('false');
+        })
+        describe('list is initialized with items', () => {
+            beforeEach(() => {
+                listElement = rootElement.query(By.css('.dropdown__menu__items'));
+                component.values = ['one', 'two', 'three'];
+                component.ngOnChanges();
+                fixture.detectChanges();
+            });
+            it('the list has role listbox', () => {
+                expect(listElement.attributes['role']).toBe('listbox');
+            });
+            describe('key arrow down, marks first item', () => {
+                beforeEach(() => {
+
+                    dropdownElement.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+
+                    fixture.detectChanges();
+                });
+
+                it('first element is marked', () => {
+                    expect(component.items[0].marked).toBe(true);
+                });
+                it('other elements is not marked', () => {
+                    expect(component.items.filter(x => x.marked).length).toEqual(1);
+                });
+                describe('and enter is pressed', () => {
+                    beforeEach(() => {
+
+                        dropdownElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
+
+                        fixture.detectChanges();
+                    });
+
+                    it('marked element is selected', () => {
+                        expect(component.items[0].marked).toBe(true);
+                        expect(component.items[0].selected).toBe(true);
+                    });
+                });
+
+            });
+
+            describe('key arrow up, marks last item', () => {
+                beforeEach(() => {
+
+                    dropdownElement.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
+
+                    fixture.detectChanges();
+                });
+
+                it('last element is marked', () => {
+                    expect(component.items[component.items.length - 1].marked).toBe(true);
+                });
+                it('other elements is not marked', () => {
+                    expect(component.items.filter(x => x.marked).length).toEqual(1);
+                });
+
+            });
+        })
+
     });
 });
