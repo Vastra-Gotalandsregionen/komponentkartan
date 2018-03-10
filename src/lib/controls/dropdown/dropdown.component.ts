@@ -92,44 +92,10 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     onTouched() { }
 
     openDropdownItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
-        if (event.keyCode === 13 || event.keyCode === 32) {
+        // space, enter, tab
+        if (event.keyCode === 13 || event.keyCode === 32 || event.keyCode === 9) {
             this.selectItem(item);
-            event.cancelBubble = true;
         }
-    }
-
-    openDropdownKeyEvent(event: KeyboardEvent): void {
-
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            this.onToggleDropdown(event);
-            this.focusedItemIndex = -1;
-        }
-
-        if (event.keyCode === 40) {
-            this.setFocusOnNextItem();
-        }
-        if (event.keyCode === 38) {
-            this.setFocusOnPreviousItem();
-        }
-
-        event.preventDefault();
-        event.cancelBubble = true;
-    }
-
-    private setFocusOnNextItem() {
-        this.focusedItemIndex = this.focusedItemIndex < this.items.length - 1 ? this.focusedItemIndex + 1 : 0;
-        this.setFocusOnItem();
-    }
-
-    private setFocusOnPreviousItem() {
-        this.focusedItemIndex = this.focusedItemIndex > 0 ? this.focusedItemIndex - 1 : this.items.length - 1;
-        this.setFocusOnItem();
-    }
-
-    setFocusOnItem() {
-        this.items.forEach(x => { x.marked = false; });
-        this.items[this.focusedItemIndex].marked = true;
-        this.elementRef.nativeElement.getElementsByTagName('li')[this.focusedItemIndex].focus();
     }
 
     showAllItems() {
@@ -153,6 +119,51 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.onChange(item.value);
     }
 
+
+    openDropdownKeyEvent(event: KeyboardEvent): void {
+        if (event.keyCode === 13 || event.keyCode === 32) {// space, enter
+            this.onToggleDropdown(event);
+            this.focusedItemIndex = -1;
+            this.focusDropdown();
+        } else if (event.altKey && event.keyCode === 40) {// alt + arrow dowm
+            this.expanded = true;
+            this.focusedItemIndex = -1;
+            event.preventDefault();
+        } else if (event.keyCode === 27 || // escape
+            event.altKey && event.keyCode === 38) { // alt + arrow up
+            this.expanded = false;
+            this.focusDropdown();
+            event.preventDefault();
+        } else if (event.keyCode === 40) { // arrow dowm
+            this.setFocusOnNextItem();
+            event.preventDefault();
+        } else if (event.keyCode === 38) { // arrow up
+            this.setFocusOnPreviousItem();
+            event.preventDefault();
+        } else if (event.keyCode === 9) { // tab
+            this.expanded = false;
+        }
+    }
+
+    private focusDropdown() {
+        this.elementRef.nativeElement.querySelector('.dropdown--edit').focus();
+    }
+
+    private setFocusOnNextItem() {
+        this.focusedItemIndex = this.focusedItemIndex < this.items.length - 1 ? this.focusedItemIndex + 1 : 0;
+        this.setFocusOnItem();
+    }
+
+    private setFocusOnPreviousItem() {
+        this.focusedItemIndex = this.focusedItemIndex > 0 ? this.focusedItemIndex - 1 : this.items.length - 1;
+        this.setFocusOnItem();
+    }
+
+    setFocusOnItem() {
+        this.items.forEach(x => { x.marked = false; });
+        this.items[this.focusedItemIndex].marked = true;
+        this.elementRef.nativeElement.getElementsByTagName('li')[this.focusedItemIndex].focus();
+    }
 
     onMouseEnter(item: DropdownItem<any>) {
         this.items.forEach(x => x.marked = false);
