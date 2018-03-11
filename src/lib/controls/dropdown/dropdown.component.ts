@@ -15,7 +15,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
     selector: 'vgr-dropdown',
     moduleId: module.id,
     templateUrl: './dropdown.component.html',
-    styleUrls: ['../dropdown-base/dropdown.scrollbar.css'],
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => DropdownComponent),
@@ -29,7 +28,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     selectedItem: DropdownItem<any>;
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
         this.noItemSelectedLabel = 'Välj';
     }

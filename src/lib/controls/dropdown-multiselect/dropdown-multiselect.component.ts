@@ -12,7 +12,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
     selector: 'vgr-dropdown-multiselect',
     moduleId: module.id,
     templateUrl: './dropdown-multiselect.component.html',
-    styleUrls: ['../dropdown-base/dropdown.scrollbar.css'],
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => DropdownMultiselectComponent),
@@ -53,7 +52,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         }
     }
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef) {
         super(elementRef);
         this.allItemsSelectedLabel = 'Alla';
         this.noItemSelectedLabel = 'Välj';
