@@ -89,6 +89,13 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         if (event.keyCode === 13) {
             this.clearFilter();
             event.preventDefault();
+            setTimeout(() => {
+                this.setFocusableItems();
+                this.focusedItemIndex = 1;
+                this.focusableItems[this.focusedItemIndex].focus();
+
+            }, 10);
+
             event.cancelBubble = true;
         } else if (event.keyCode === 32) {// space
             event.preventDefault();

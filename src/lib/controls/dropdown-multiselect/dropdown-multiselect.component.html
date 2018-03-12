@@ -1,7 +1,7 @@
 <div class="validation">
   <div class="dropdown--edit dropdown--multiselect" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible}"
     (mousedown)="onToggleDropdown($event)" (keydown)="openDropdownKeyEvent($event)" (focusout)="onLeave()" (focusin)="onEnter()"
-    tabindex="{{disabled ? -1 : 0}}">
+    tabindex="0">
     <span class="noselect" tabindex="0">{{dropdownLabel}}</span>
     <div class="dropdown__menu">
       <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
@@ -20,7 +20,7 @@
 
           <li *ngIf="filterActive" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : selectAllItemsMarked}" (keydown)="openDropdownShowAllItemKeyEvent($event, item)">
             <!-- om listan är filtrerad -->
-            <a (mousedown)="clearFilter()" title="{{showAllItemText}}" (mouseenter)="selectAllItemsMarked = true" (mouseleave)="selectAllItemsMarked = false"
+            <a tabindex="0" (mousedown)="clearFilter()" title="{{showAllItemText}}" (mouseenter)="selectAllItemsMarked = true" (mouseleave)="selectAllItemsMarked = false"
               (focusin)="selectAllItemsMarked = true" (focusout)="selectAllItemsMarked = false">{{showAllItemText}}
             </a>
           </li>
