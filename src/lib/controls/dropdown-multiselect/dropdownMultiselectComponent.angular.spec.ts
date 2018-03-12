@@ -45,6 +45,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                 }
             });
 
+
         TestBed.overrideComponent(CheckboxComponent,
             {
                 set: {
@@ -57,9 +58,11 @@ describe("[DropdownMultiSelectComponent]", () => {
             component = fixture.componentInstance;
             rootElement = fixture.debugElement;
             component.showAllItemText = "Select all";
-            component.items = [{ displayName: "Option 1" } as DropdownItem<any>,
-            { displayName: "Option 2" } as DropdownItem<any>,
-            { displayName: "Option 3" } as DropdownItem<any>] as DropdownItem<any>[];
+            component.items = [
+                { displayName: "Option 1", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
+                { displayName: "Option 2", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
+                { displayName: "Option 3", value: { name: 'option 1', id: 1 } } as DropdownItem<object>
+            ] as DropdownItem<object>[];
             component.ngOnChanges();
             fixture.detectChanges();
             done();
@@ -93,9 +96,11 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         beforeEach(() => {
             spyOn(component.selectionChanged, "emit");
-            component.items = [{ displayName: "Option 1" } as DropdownItem<any>,
-            { displayName: "Option 2", selected: true } as DropdownItem<any>,
-            { displayName: "Option 3" } as DropdownItem<any>] as DropdownItem<any>[];
+            component.items = [
+                { displayName: "Option 1", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
+                { displayName: "Option 2", value: { name: 'option 1', id: 1 }, selected: true } as DropdownItem<object>,
+                { displayName: "Option 3", value: { name: 'option 1', id: 1 } } as DropdownItem<object>
+            ] as DropdownItem<object>[];
             component.ngOnChanges();
             fixture.detectChanges();
         });
@@ -115,9 +120,11 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         beforeEach(() => {
             spyOn(component.selectionChanged, "emit");
-            component.items = [{ displayName: "Option 1", selected: true } as DropdownItem<any>,
-            { displayName: "Option 2", selected: true } as DropdownItem<any>,
-            { displayName: "Option 3" } as DropdownItem<any>] as DropdownItem<any>[];
+            component.items = [
+                { displayName: "Option 1", value: { name: 'option 1', id: 1 }, selected: true } as DropdownItem<object>,
+                { displayName: "Option 2", value: { name: 'option 2', id: 2 }, selected: true } as DropdownItem<object>,
+                { displayName: "Option 3", value: { name: 'option 3', id: 3 } } as DropdownItem<object>
+            ] as DropdownItem<object>[];
             component.ngOnChanges();
 
             fixture.detectChanges();
@@ -131,6 +138,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         it("dropdown text is 2 vald", () => {
             expect(component.dropdownLabel).toBe("2 valda")
         });
+
     });
 
 
@@ -157,6 +165,7 @@ describe("[DropdownMultiSelectComponent]", () => {
     describe("when one item is selected", () => {
         var dropdownElement: DebugElement;
         beforeEach(() => {
+            spyOn(component.selectionChanged, "emit");
             dropdownElement = rootElement.query(By.css(".dropdown"));
             component.expanded = true;
             component.selectItem(component.items[0]);
@@ -165,6 +174,9 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         it("dropdown text is '1 vald'", () => {
             expect(component.dropdownLabel).toBe("1 vald");
+        });
+        it('a selectedItemChanged is emitted', () => {
+            expect(component.selectionChanged.emit).toHaveBeenCalledWith([{ name: 'option 1', id: 1 }]);
         });
     });
 
@@ -188,6 +200,7 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         describe("and one item is deselected", () => {
             beforeEach(() => {
+                spyOn(component.selectionChanged, 'emit');
                 component.deselectItem(component.items[0]);
                 fixture.detectChanges();
             });
@@ -199,6 +212,9 @@ describe("[DropdownMultiSelectComponent]", () => {
             });
             it("dropdown text is '2 valda'", () => {
                 expect(component.dropdownLabel).toBe("2 valda");
+            });
+            it('a selectedItemChanged is emitted', () => {
+                expect(component.selectionChanged.emit).toHaveBeenCalledWith([component.items[1].value, component.items[2].value]);
             });
         });
     });
@@ -482,7 +498,7 @@ describe("[DropdownMultiSelectComponent]", () => {
 
             it('the matching drop down item is selected', () => {
                 expect(component.items[1].selected).toBe(true);
-                expect(component.control.value.toString()).toBe(['one', 'two', 'three'].toString());
+                expect(component.control.value.toString()).toBe([{ name: 'option 1', id: 1 }, { name: 'option 2', id: 2 }, { name: 'option 3', id: 3 }].toString());
             });
 
             it('the control is touched and dirty', () => {

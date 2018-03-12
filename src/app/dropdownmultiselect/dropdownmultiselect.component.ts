@@ -78,7 +78,7 @@ export class DropdownmultiselectComponent implements OnInit {
     return list;
   }
 
-  onMultipleSelectionChanged(selectedItems: string[]) {
+  onMultipleSelectionChanged(selectedItems: DropdownItem<string>[]) {
     this.lastMultipleSelection = selectedItems.join(',');
   }
 
