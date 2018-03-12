@@ -138,7 +138,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         item.selected = true;
 
 
-        this.selectionChanged.emit(this._items.map(x => x.value));
+        this.selectionChanged.emit(this.selectedItems.map(x => x.value));
         this.onChange(this.selectedItems.map(x => x.value));
 
         this.updateDropdownLabel();
@@ -151,7 +151,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
         item.selected = false;
 
-        this.selectionChanged.emit(this._items.filter(x => x.selected).map(x => x.value));
+        this.selectionChanged.emit(this.selectedItems.map(x => x.value));
         this.onChange(this._items.filter(x => x.selected));
         this.updateDropdownLabel();
     }

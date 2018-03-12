@@ -122,8 +122,8 @@ describe("[DropdownMultiSelectComponent]", () => {
             spyOn(component.selectionChanged, "emit");
             component.items = [
                 { displayName: "Option 1", value: { name: 'option 1', id: 1 }, selected: true } as DropdownItem<object>,
-                { displayName: "Option 2", value: { name: 'option 1', id: 1 }, selected: true } as DropdownItem<object>,
-                { displayName: "Option 3", value: { name: 'option 1', id: 1 } } as DropdownItem<object>
+                { displayName: "Option 2", value: { name: 'option 2', id: 2 }, selected: true } as DropdownItem<object>,
+                { displayName: "Option 3", value: { name: 'option 3', id: 3 } } as DropdownItem<object>
             ] as DropdownItem<object>[];
             component.ngOnChanges();
 
@@ -165,6 +165,7 @@ describe("[DropdownMultiSelectComponent]", () => {
     describe("when one item is selected", () => {
         var dropdownElement: DebugElement;
         beforeEach(() => {
+            spyOn(component.selectionChanged, "emit");
             dropdownElement = rootElement.query(By.css(".dropdown"));
             component.expanded = true;
             component.selectItem(component.items[0]);
@@ -173,6 +174,9 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         it("dropdown text is '1 vald'", () => {
             expect(component.dropdownLabel).toBe("1 vald");
+        });
+        it('a selectedItemChanged is emitted', () => {
+            expect(component.selectionChanged.emit).toHaveBeenCalledWith([{ name: 'option 1', id: 1 }]);
         });
     });
 
