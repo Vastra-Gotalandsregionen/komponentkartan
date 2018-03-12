@@ -19,13 +19,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
     }]
 })
 
-export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
+export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor, AfterViewInit {
 
     @Input() showAllItemText: string;
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string;
     dropdownLabel: string;
     selectAllItemsMarked: boolean;
+
+    focusableItems = [];
+    private focusedItemIndex = -1;
 
     @Output() selectionChanged = new EventEmitter<DropdownItem<any>[]>();
     get filterActive(): boolean {
@@ -61,6 +64,91 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.showAllItemText = 'Visa alla';
         this.selectAllItemText = 'Välj alla';
     }
+
+    ngAfterViewInit() {
+        this.setFocusableItems();
+    }
+
+    setFocusableItems() {
+        const nodes: NodeList = this.filterVisible ? this.elementRef.nativeElement.getElementsByTagName('input') : [];
+        const nodes2: NodeList = this.elementRef.nativeElement.getElementsByTagName('a');
+        this.focusableItems = [...Array.from(nodes), ...Array.from(nodes2)];
+    }
+
+    openDropdownItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+        // enter, tab
+        if (event.keyCode === 13 || event.keyCode === 9) {
+            this.onItemCheckChanged(item);
+            event.cancelBubble = true;
+        } else if (event.keyCode === 32) {// space
+            event.preventDefault();
+            event.cancelBubble = true;
+        }
+    }
+
+    openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+        // enter
+        if (event.keyCode === 13) {
+            this.clearFilter();
+            event.preventDefault();
+            event.cancelBubble = true;
+        } else if (event.keyCode === 32) {// space
+            event.preventDefault();
+            event.cancelBubble = true;
+        }
+    }
+
+    openDropdownSelectAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+        // enter
+        if (event.keyCode === 13) {
+            this.selectAllItems(!this.selectAllItemsChecked);
+            event.preventDefault();
+            event.cancelBubble = true;
+        } else if (event.keyCode === 32) {// space
+            event.preventDefault();
+            event.cancelBubble = true;
+        }
+    }
+
+    openDropdownKeyEvent(event: KeyboardEvent): void {
+        if (event.keyCode === 13 || event.keyCode === 32) {// space, enter
+            this.onToggleDropdown(event);
+            this.focusedItemIndex = -1;
+            this.focusDropdown();
+        } else if (event.altKey && event.keyCode === 40) {// alt + arrow dowm
+            this.expanded = true;
+            this.focusedItemIndex = -1;
+            event.preventDefault();
+        } else if (event.keyCode === 27 || // escape
+            event.altKey && event.keyCode === 38) { // alt + arrow up
+            this.expanded = false;
+            this.focusDropdown();
+            event.preventDefault();
+        } else if (event.keyCode === 40) { // arrow dowm
+            this.setFocusOnNextItem();
+            event.preventDefault();
+        } else if (event.keyCode === 38) { // arrow up
+            this.setFocusOnPreviousItem();
+            event.preventDefault();
+        } else if (event.keyCode === 9) { // tab
+            this.expanded = false;
+        }
+    }
+
+    private focusDropdown() {
+        this.elementRef.nativeElement.querySelector('.dropdown--edit').focus();
+    }
+
+    private setFocusOnNextItem() {
+        this.focusedItemIndex = this.focusedItemIndex < this.focusableItems.length - 1 ? this.focusedItemIndex + 1 : 0;
+        this.focusableItems[this.focusedItemIndex].focus();
+    }
+
+    private setFocusOnPreviousItem() {
+        this.focusedItemIndex = this.focusedItemIndex > 0 ? this.focusedItemIndex - 1 : this.focusableItems.length - 1;
+        this.focusableItems[this.focusedItemIndex].focus();
+    }
+
 
     ngOnChanges() {
         if (this.formControlName) {
@@ -111,6 +199,10 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.filter = '';
         this.filterTextboxComponent.clear();
         this.preventCollapse = true;
+
+        this.setFocusableItems();
+        this.focusedItemIndex = 1;
+        this.focusableItems[this.focusedItemIndex].focus();
     }
 
     onItemCheckChanged(item: DropdownItem<any>) {
@@ -143,10 +235,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.onChange(this.selectedItems.map(x => x.value));
 
         this.updateDropdownLabel();
-    }
-
-    setFocusableItems() {
-        // Not implemented
     }
 
     deselectItem(item: DropdownItem<any>) {
