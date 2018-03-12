@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0
+- Updated dropdownmulti to return full items instead of only displayname
+
 ## 2.1.2
 - New component vgr-list-column-header-checkbox for checkboxes in list headers
 - New declarative menu component. The previous menu component is no lomger supported.
