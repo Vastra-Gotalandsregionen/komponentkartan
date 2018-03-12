@@ -54,7 +54,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         }
     }
 
-    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef) {
+    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef) {
         super(elementRef);
         this.allItemsSelectedLabel = 'Alla';
         this.noItemSelectedLabel = 'Välj';
@@ -143,6 +143,10 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.onChange(this.selectedItems.map(x => x.value));
 
         this.updateDropdownLabel();
+    }
+
+    setFocusableItems() {
+        // Not implemented
     }
 
     deselectItem(item: DropdownItem<any>) {

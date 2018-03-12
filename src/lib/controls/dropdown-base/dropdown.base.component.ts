@@ -115,9 +115,18 @@ export abstract class DropdownBaseComponent {
     filterItems(filterValue: string) {
         this.filter = filterValue;
         this.updateScrolled();
+
+        setTimeout(() => {
+            this.setFocusableItems();
+        }, 100);
+
         // Scroll to top when filter is changed
         $('.container.ps').scrollTop(0);
         this.dimmerBottomVisible = false;
+    }
+
+    setFocusableItems() {
+        // Placeholder
     }
 
     updateScrolled() {

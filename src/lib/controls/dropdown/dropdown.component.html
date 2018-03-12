@@ -1,11 +1,11 @@
 <div class="validation">
   <div class="dropdown--edit" [attr.aria-expanded]="expanded" role="combobox" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible}"
     (mousedown)="onToggleDropdown($event)" (keydown)="openDropdownKeyEvent($event)" (focusout)="onLeave()" (focusin)="onEnter()"
-    tabindex="{{disabled ? -1 : 0}}">
+    tabindex="0">
     <span class="noselect" *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{ selectedItem | dropdownItemToSelectedText}}</span>
     <span class="noselect" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{readonly || disabled ? '' : noItemSelectedLabel }}</span>
     <div class="dropdown__menu">
-      <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
+      <vgr-filter-textbox tabindex="0" class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
       <div *ngIf="dimmerTopVisible" class="dropdown__dimmer dropdown__dimmer--top"></div>
       <perfect-scrollbar class="container" [config]="scrollbarConfig">
         <ul class="dropdown__menu__items" role="listbox">

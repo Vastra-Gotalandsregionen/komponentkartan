@@ -27,7 +27,8 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     @Input() noItemSelectedLabel: string;
 
     selectedItem: DropdownItem<any>;
-    focusableItems: any[];
+    focusableItems = [];
+
     private focusedItemIndex = -1;
 
     constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, private renderer: Renderer2) {
@@ -45,11 +46,19 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         }
 
         this.filterVisible = this.items && this.items.length > this.filterLimit;
+
+        this.setFocusableItems();
         this.updateScrolled();
     }
 
     ngAfterViewInit() {
-        this.focusableItems = this.elementRef.nativeElement.getElementsByTagName('li');
+        this.setFocusableItems();
+    }
+
+    setFocusableItems() {
+        const nodes: NodeList = this.filterVisible ? this.elementRef.nativeElement.getElementsByTagName('input') : [];
+        const nodes2: NodeList = this.elementRef.nativeElement.getElementsByTagName('li');
+        this.focusableItems = [...Array.from(nodes), ...Array.from(nodes2)];
     }
 
     onLeave() {
@@ -96,16 +105,24 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     onTouched() { }
 
     openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
-        // space, enter, tab
-        if (event.keyCode === 13 || event.keyCode === 32) {
+        // enter
+        if (event.keyCode === 13) {
             this.showAllItems();
+            event.preventDefault();
+            event.cancelBubble = true;
+        } else if (event.keyCode === 32) {// space
+            event.preventDefault();
+            event.cancelBubble = true;
         }
     }
 
     openDropdownItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
-        // space, enter, tab
-        if (event.keyCode === 13 || event.keyCode === 32 || event.keyCode === 9) {
+        // enter, tab
+        if (event.keyCode === 13 || event.keyCode === 9) {
             this.selectItem(item);
+        } else if (event.keyCode === 32) {// space
+            event.preventDefault();
+            event.cancelBubble = true;
         }
     }
 
@@ -113,6 +130,10 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.preventCollapse = true;
         this.filter = '';
         this.filterTextboxComponent.clear();
+
+        this.setFocusableItems();
+        this.focusedItemIndex = 1;
+        this.focusableItems[this.focusedItemIndex].focus();
     }
 
     selectItem(item: DropdownItem<any>) {
