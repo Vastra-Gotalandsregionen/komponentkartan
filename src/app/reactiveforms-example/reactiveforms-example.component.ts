@@ -14,7 +14,7 @@ export class ReactiveformsexampleComponent implements OnInit {
     radioOptions2: SelectableItem<number>[];
     radioOptions3: SelectableItem<number>[];
     dropdownItems: DropdownItem<string>[];
-    dropdownItemsMulti: DropdownItem<string>[];
+    dropdownItemsMulti: DropdownItem<object>[];
 
     minDate = new Date('2015');
     maxDate = new Date('2025');
@@ -90,9 +90,9 @@ export class ReactiveformsexampleComponent implements OnInit {
         ];
 
         this.dropdownItemsMulti = [
-            { displayName: 'Koda', value: 'Koda' },
-            { displayName: 'Äta', value: 'Äta' },
-            { displayName: 'Sova', value: 'Soa' }
+            { displayName: 'Koda', value: { name: 'Koda', id: 1 } },
+            { displayName: 'Äta', value: { name: 'Äta', id: 2 } },
+            { displayName: 'Sova', value: { name: 'Sova', id: 3 } }
         ];
     }
 
@@ -110,7 +110,7 @@ export class ReactiveformsexampleComponent implements OnInit {
             email: new FormControl('', { validators: [Validators.required, Validators.email] }),
             salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
             favourite_pet: new FormControl(null, { validators: [Validators.required] }),
-            hobbies: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
+            hobbies: new FormControl([this.dropdownItemsMulti[0].value], { validators: [Validators.required] }),
             check: new FormControl(true, { validators: [Validators.pattern('true')] }),
             optional: new FormControl(1),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
@@ -127,7 +127,7 @@ export class ReactiveformsexampleComponent implements OnInit {
             email: new FormControl('', { validators: [Validators.required, Validators.email] }),
             salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
             favourite_pet: new FormControl(null, { validators: [Validators.required] }),
-            hobbies: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
+            hobbies: new FormControl([this.dropdownItemsMulti[0].value], { validators: [Validators.required] }),
             check: new FormControl(true, { validators: [Validators.pattern('true')] }),
             optional: new FormControl(2),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
@@ -144,7 +144,7 @@ export class ReactiveformsexampleComponent implements OnInit {
             email: new FormControl('', { validators: [Validators.required, Validators.email] }),
             salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
             favourite_pet: new FormControl(null, { validators: [Validators.required] }),
-            hobbies: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
+            hobbies: new FormControl([this.dropdownItemsMulti[0].value], { validators: [Validators.required] }),
             check: new FormControl(true, { validators: [Validators.pattern('true')] }),
             optional: new FormControl(3),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
@@ -168,6 +168,14 @@ export class ReactiveformsexampleComponent implements OnInit {
 
     onResetUpdateOnChangeForm() {
         this.updateOnChangeForm.reset();
+    }
+
+    multiChanged(selection: any) {
+        console.log('selection: ', selection);
+    }
+
+    onBlurFormSubmit() {
+        console.log(this.updateOnBlurForm.controls.hobbies.value);
     }
 }
 
