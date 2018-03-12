@@ -22,12 +22,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
     }]
 })
 
-export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
+export class DropdownComponent extends DropdownBaseComponent implements OnChanges, AfterViewInit, ControlValueAccessor {
     @Output() selectedChanged = new EventEmitter<DropdownItem<any>>();
     @Input() noItemSelectedLabel: string;
 
     selectedItem: DropdownItem<any>;
-
+    focusableItems: any[];
     private focusedItemIndex = -1;
 
     constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, private renderer: Renderer2) {
@@ -46,6 +46,10 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
         this.filterVisible = this.items && this.items.length > this.filterLimit;
         this.updateScrolled();
+    }
+
+    ngAfterViewInit() {
+        this.focusableItems = this.elementRef.nativeElement.getElementsByTagName('li');
     }
 
     onLeave() {
@@ -90,6 +94,13 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     onTouched() { }
+
+    openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+        // space, enter, tab
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.showAllItems();
+        }
+    }
 
     openDropdownItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
         // space, enter, tab
@@ -150,19 +161,13 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
     }
 
     private setFocusOnNextItem() {
-        this.focusedItemIndex = this.focusedItemIndex < this.items.length - 1 ? this.focusedItemIndex + 1 : 0;
-        this.setFocusOnItem();
+        this.focusedItemIndex = this.focusedItemIndex < this.focusableItems.length - 1 ? this.focusedItemIndex + 1 : 0;
+        this.focusableItems[this.focusedItemIndex].focus();
     }
 
     private setFocusOnPreviousItem() {
-        this.focusedItemIndex = this.focusedItemIndex > 0 ? this.focusedItemIndex - 1 : this.items.length - 1;
-        this.setFocusOnItem();
-    }
-
-    setFocusOnItem() {
-        this.items.forEach(x => { x.marked = false; });
-        this.items[this.focusedItemIndex].marked = true;
-        this.elementRef.nativeElement.getElementsByTagName('li')[this.focusedItemIndex].focus();
+        this.focusedItemIndex = this.focusedItemIndex > 0 ? this.focusedItemIndex - 1 : this.focusableItems.length - 1;
+        this.focusableItems[this.focusedItemIndex].focus();
     }
 
     onMouseEnter(item: DropdownItem<any>) {

@@ -9,11 +9,12 @@
       <div *ngIf="dimmerTopVisible" class="dropdown__dimmer dropdown__dimmer--top"></div>
       <perfect-scrollbar class="container" [config]="scrollbarConfig">
         <ul class="dropdown__menu__items" role="listbox">
-          <li *ngIf="filterVisible" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : showAllItem.marked }">
+          <li *ngIf="filterVisible" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : showAllItem.marked }" tabindex="0"
+            (focusin)="onMouseEnter(showAllItem)" (focusout)="onMouseLeave(showAllItem)" (keydown)="openDropdownShowAllItemKeyEvent($event, item)">
             <a (mousedown)="showAllItems()" title="{{showAllItem.displayName}}" (mouseenter)="onMouseEnter(showAllItem)" (mouseleave)="onMouseLeave(showAllItem)">{{showAllItem.displayName}}</a>
           </li>
           <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }"
-            tabindex="0" (keydown)="openDropdownItemKeyEvent($event, item)">
+            tabindex="0" (keydown)="openDropdownItemKeyEvent($event, item)" (focusin)="onMouseEnter(item)" (focusout)="onMouseLeave(item)">
             <a (mousedown)="selectItem(item)" title={{item.displayName}} (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave(item)">{{item.displayName}}</a>
           </li>
         </ul>
