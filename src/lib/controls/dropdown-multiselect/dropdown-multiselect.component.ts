@@ -74,8 +74,8 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     openDropdownItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
-        // enter, tab
-        if (event.keyCode === 13 || event.keyCode === 9) {
+        // enter
+        if (event.keyCode === 13) {
             this.onItemCheckChanged(item);
             event.cancelBubble = true;
         } else if (event.keyCode === 32) {// space

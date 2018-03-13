@@ -114,7 +114,6 @@ export abstract class DropdownBaseComponent {
 
     filterItems(filterValue: string) {
         this.filter = filterValue;
-        this.setFocusableItems();
         this.updateScrolled();
 
         setTimeout(() => {

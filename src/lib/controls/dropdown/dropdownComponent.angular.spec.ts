@@ -4,7 +4,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { By } from '@angular/platform-browser';
 import { FormsModule, FormControl, Validators } from '@angular/forms';
 
-import { DebugElement } from '@angular/core';
+import { DebugElement, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DropdownComponent } from '../../controls/dropdown/dropdown.component';
@@ -15,6 +15,8 @@ import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelect
 import { DropdownItem } from '../../models/dropdownItem.model';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { filter } from 'rxjs/operator/filter';
+
 
 describe('DropdownComponent', () => {
     let component: DropdownComponent;
@@ -26,7 +28,10 @@ describe('DropdownComponent', () => {
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
             declarations: [DropdownComponent, FilterTextboxComponent, TruncatePipe, FilterPipe, DropdownItemToSelectedTextPipe],
-            imports: [CommonModule, FormsModule, PerfectScrollbarModule]
+            imports: [CommonModule, FormsModule, PerfectScrollbarModule],
+            providers: [
+                { provide: ElementRef }
+            ]
         });
 
         TestBed.compileComponents().then(() => {
@@ -466,67 +471,244 @@ describe('DropdownComponent', () => {
         });
 
         it('Aria-expanded is false', () => {
-            console.log(dropdownElement
-            );
             expect(dropdownElement.attributes['aria-expanded']).toBe('false');
-        })
+        });
         describe('list is initialized with items', () => {
+            let listItems;
             beforeEach(() => {
-                listElement = rootElement.query(By.css('.dropdown__menu__items'));
-                component.values = ['one', 'two', 'three'];
-                component.ngOnChanges();
+                component.expanded = false;
+                component.items = [{ displayName: 'one', value: 1 }, { displayName: 'two', value: 2 }, { displayName: 'three', value: 3 }];
                 fixture.detectChanges();
+
+                component.ngOnChanges();
+                listElement = rootElement.query(By.css('.dropdown__menu__items'));
+                dropdownElement = rootElement.query(By.css('.dropdown--edit'));
+                listItems = rootElement.queryAll(By.css('.dropdown-item'));
             });
             it('the list has role listbox', () => {
                 expect(listElement.attributes['role']).toBe('listbox');
             });
-            describe('key arrow down, marks first item', () => {
+            it('has three focusable items', () => {
+                expect(component.focusableItems.length).toBe(3);
+            });
+            describe('and space is pressed', () => {
                 beforeEach(() => {
-
-                    dropdownElement.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
-
+                    dropdownElement.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                     fixture.detectChanges();
                 });
+                it('dropdown is expanded', () => {
+                    expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                });
 
-                it('first element is marked', () => {
-                    expect(component.items[0].marked).toBe(true);
-                });
-                it('other elements is not marked', () => {
-                    expect(component.items.filter(x => x.marked).length).toEqual(1);
-                });
-                describe('and enter is pressed', () => {
+                describe('key arrow down, marks first item', () => {
                     beforeEach(() => {
-
-                        dropdownElement.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
-
+                        spyOn(component.focusableItems[0], 'focus').and.callThrough();
+                        dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
                         fixture.detectChanges();
                     });
 
-                    // it('marked element is selected', () => {
-                    //     expect(component.items[0].marked).toBe(true);
-                    //     expect(component.items[0].selected).toBe(true);
-                    // });
+                    it('first element has aria label "one"', () => {
+                        expect(listItems[0].attributes['aria-label']).toBe('one');
+                    });
+                    it('first element has focus', () => {
+                        expect(component.focusableItems[0].focus).toHaveBeenCalledTimes(1);
+                    });
+                    describe('and first element is focused', () => {
+                        beforeEach(() => {
+                            fixture.detectChanges();
+                        });
+
+                        it('and element is marked', () => {
+                            expect(component.items[0].marked).toBe(true);
+                        });
+                        describe('and space is pressed on list item', () => {
+                            beforeEach(() => {
+                                listItems[0].triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                                fixture.detectChanges();
+                            });
+
+                            it('element is not selected', () => {
+                                expect(component.items[0].selected).toBeFalsy();
+                            });
+
+                            it('dropdown is still open', () => {
+                                expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                            });
+                        });
+                        describe('and enter is pressed', () => {
+                            beforeEach(() => {
+                                listItems[0].triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                                dropdownElement.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                                fixture.detectChanges();
+                            });
+
+                            it('element is selected', () => {
+                                expect(component.items[0].selected).toBe(true);
+                            });
+
+                            it('dropdown is collapsed', () => {
+                                expect(dropdownElement.classes['dropdown--open']).toBe(false);
+                            });
+                        });
+                        describe('and arrow up is pressed', () => {
+                            beforeEach(() => {
+                                dropdownElement.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
+                                fixture.detectChanges();
+                            });
+
+                            it('last element is selected', () => {
+                                expect(component.items[2].marked).toBe(true);
+                            });
+                            describe('and arrow dowm is pressed', () => {
+                                beforeEach(() => {
+                                    dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+                                    fixture.detectChanges();
+                                });
+
+                                it('first element is selected', () => {
+                                    expect(component.items[0].marked).toBe(true);
+                                });
+                            });
+                            describe('and tab is pressed', () => {
+                                beforeEach(() => {
+                                    listItems[0].triggerEventHandler('keydown', { keyCode: 9, preventDefault: function () { } } as KeyboardEvent);
+                                    dropdownElement.triggerEventHandler('keydown', { keyCode: 9, preventDefault: function () { } } as KeyboardEvent);
+                                    fixture.detectChanges();
+                                });
+
+                                it('element is selected', () => {
+                                    expect(component.items[0].selected).toBe(true);
+                                });
+
+                                it('dropdown is collapsed', () => {
+                                    expect(dropdownElement.classes['dropdown--open']).toBe(false);
+                                });
+                            });
+                            describe('and arrow up is pressed', () => {
+                                beforeEach(() => {
+                                    dropdownElement.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
+                                    fixture.detectChanges();
+                                });
+
+                                it('element is selected', () => {
+                                    expect(component.items[1].marked).toBe(true);
+                                });
+                                describe('and esc is pressed', () => {
+                                    beforeEach(() => {
+                                        dropdownElement.triggerEventHandler('keydown', { keyCode: 27, preventDefault: function () { } } as KeyboardEvent);
+                                        fixture.detectChanges();
+                                    });
+                                    it('dropdown is collapsed', () => {
+                                        expect(dropdownElement.classes['dropdown--open']).toBe(false);
+                                    });
+                                });
+                                describe('and alt + arrow down is pressed', () => {
+                                    beforeEach(() => {
+                                        dropdownElement.triggerEventHandler('keydown', { keyCode: 40, altKey: true, preventDefault: function () { } } as KeyboardEvent);
+                                        fixture.detectChanges();
+                                    });
+                                    it('dropdown is collapsed', () => {
+                                        expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                                    });
+                                    describe('and alt + arrow up is pressed', () => {
+                                        beforeEach(() => {
+                                            dropdownElement.triggerEventHandler('keydown', { keyCode: 38, altKey: true, preventDefault: function () { } } as KeyboardEvent);
+                                            fixture.detectChanges();
+                                        });
+                                        it('dropdown is collapsed', () => {
+                                            expect(dropdownElement.classes['dropdown--open']).toBe(false);
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
                 });
-
             });
+        });
+        describe('When component is initialized with 25 items', () => {
+            beforeEach(() => {
+                jasmine.clock().uninstall();
+                jasmine.clock().install();
+                component.expanded = true;
+                component.items = generateItems(25);
+                fixture.detectChanges();
+                dropdownElement = rootElement.query(By.css('.dropdown--edit'));
 
-            describe('key arrow up, marks last item', () => {
+                component.ngOnChanges();
+            });
+            it('has 25 items', () => {
+                expect(component.items.length).toBe(25);
+            });
+            it('filter is visible', () => {
+                expect(component.filterVisible).toBe(true);
+            });
+            it('has 27 focusable elements (25 list items, one filterAll, and one filterbox)', () => {
+                expect(component.focusableItems.length).toBe(27);
+            });
+            describe('and arrow dowm is pressed twice', () => {
                 beforeEach(() => {
-
-                    dropdownElement.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
-
+                    spyOn(component.focusableItems[0], 'focus').and.callThrough();
+                    dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
                     fixture.detectChanges();
                 });
 
-                it('last element is marked', () => {
-                    expect(component.items[component.items.length - 1].marked).toBe(true);
+                it('first element is focused', () => {
+                    expect(component.focusableItems[0].focus).toHaveBeenCalledTimes(1);
                 });
-                it('other elements is not marked', () => {
-                    expect(component.items.filter(x => x.marked).length).toEqual(1);
+                it('and first listelement is not marked', () => {
+                    expect(component.items[0].marked).toBeFalsy();
                 });
+                describe('and items are filtered', () => {
+                    let showAll;
+                    beforeEach(() => {
+                        showAll = rootElement.query(By.css('.dropdown-item--select-all'));
+                        component.filterItems('13');
+                        fixture.detectChanges();
+                    });
+                    it('filter is set to "13"', () => {
+                        expect(component.filter).toBe('13');
+                    });
+                    it('there are three focusable items', () => {
+                        jasmine.clock().tick(200);
+                        expect(component.focusableItems.length).toBe(3);
+                    });
+                    describe('and space is pressed', () => {
+                        beforeEach(() => {
+                            showAll.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+                        it('filter is not cleared', () => {
+                            expect(component.filter).toBe('13');
+                        });
+                        it('dropdown is still expanded', () => {
+                            expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                        });
+                    });
+                    describe('and enter is pressed', () => {
+                        beforeEach(() => {
+                            showAll.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
 
+                        it('filter is cleared', () => {
+                            expect(component.filter).toBe('');
+                        });
+                        it('there are 27 focusable items', () => {
+                            jasmine.clock().tick(200);
+                            expect(component.focusableItems.length).toBe(27);
+                        });
+                    });
+                });
             });
-        })
-
+        });
     });
 });
+
+function generateItems(nrOfitems: number): DropdownItem<any>[] {
+    const items = [];
+    for (let index = 0; index < nrOfitems; index++) {
+        items.push({ displayName: 'item' + index, value: index });
+    }
+    return items;
+}

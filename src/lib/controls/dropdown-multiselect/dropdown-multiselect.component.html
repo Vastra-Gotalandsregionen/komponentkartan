@@ -2,7 +2,7 @@
   <div class="dropdown--edit dropdown--multiselect" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible}"
     (mousedown)="onToggleDropdown($event)" (keydown)="openDropdownKeyEvent($event)" (focusout)="onLeave()" (focusin)="onEnter()"
     tabindex="0">
-    <span class="noselect" tabindex="0">{{dropdownLabel}}</span>
+    <span class="noselect">{{dropdownLabel}}</span>
     <div class="dropdown__menu">
       <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
       <div *ngIf="dimmerTopVisible" class="dropdown__dimmer dropdown__dimmer--top"></div>

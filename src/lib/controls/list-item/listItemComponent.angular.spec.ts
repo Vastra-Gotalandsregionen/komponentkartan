@@ -83,7 +83,7 @@ describe('ListItemComponent', () => {
 
     it(' the indent on content is set to true', () => {
       expect(listItemComponentFixture.componentInstance.listContent.indentContent).toBe(true);
-    })
+    });
 
     describe('and the list-item-header is clicked', () => {
       const event: any = { cancelBubble: false };
@@ -119,7 +119,7 @@ describe('ListItemComponent', () => {
       });
 
       describe('and the header is clicked again', () => {
-        const event: any = { cancelBubble: false };
+        const event2: any = { cancelBubble: false };
 
         beforeAll(() => {
           jasmine.clock().uninstall();
@@ -135,7 +135,7 @@ describe('ListItemComponent', () => {
           component.isDeleted = false;
 
           element = rootElement.query(By.css('.list-item__header_wrapper'));
-          element.triggerEventHandler('click', event);
+          element.triggerEventHandler('click', event2);
 
           jasmine.clock().tick(5001);
           listItemComponentFixture.detectChanges();

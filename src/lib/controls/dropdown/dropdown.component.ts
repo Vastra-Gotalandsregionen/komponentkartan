@@ -1,7 +1,7 @@
 import {
     Component, Input, AfterViewInit, ElementRef, OnChanges, Output, SimpleChange,
     EventEmitter, ViewChild, HostBinding, ChangeDetectorRef, forwardRef,
-    SkipSelf, Optional, Host, Renderer2
+    SkipSelf, Optional, Host
 } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
@@ -31,7 +31,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     private focusedItemIndex = -1;
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, private renderer: Renderer2) {
+    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
         this.noItemSelectedLabel = 'Välj';
     }
@@ -44,7 +44,6 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         if (this.formControlName && this.controlContainer) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
-
         this.filterVisible = this.items && this.items.length > this.filterLimit;
 
         this.setFocusableItems();
