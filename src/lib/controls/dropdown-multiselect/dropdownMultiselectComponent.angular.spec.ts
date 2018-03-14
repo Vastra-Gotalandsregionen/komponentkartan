@@ -507,7 +507,8 @@ describe("[DropdownMultiSelectComponent]", () => {
             });
         });
     });
-    describe('Compoennt is reseted', () => {
+
+    describe('Component is reseted', () => {
         beforeEach(() => {
             component.writeValue(null);
         });
@@ -518,5 +519,68 @@ describe("[DropdownMultiSelectComponent]", () => {
             });
         });
     });
-});
 
+    describe('WCAG Tests', () => {
+        let dropdownElement: DebugElement;
+        let listElement: DebugElement;
+        beforeEach(() => {
+            dropdownElement = rootElement.query(By.css('.dropdown--edit'));
+            component.ngOnChanges();
+            fixture.detectChanges();
+        });
+
+        it('The dropdown has role combobox.', () => {
+            expect(dropdownElement.attributes['role']).toBe('combobox');
+        });
+
+        it('Aria-expanded is false', () => {
+            expect(dropdownElement.attributes['aria-expanded']).toBe('false');
+        });
+        describe('list is initialized with items', () => {
+            let listItems;
+            beforeEach(() => {
+                component.expanded = false;
+                component.items = [{ displayName: 'one', value: 1 }, { displayName: 'two', value: 2 }, { displayName: 'three', value: 3 }];
+                fixture.detectChanges();
+
+                component.ngOnChanges();
+                listElement = rootElement.query(By.css('.dropdown__menu__items'));
+                dropdownElement = rootElement.query(By.css('.dropdown--edit'));
+                listItems = rootElement.queryAll(By.css('.dropdown-item'));
+            });
+            it('the list has role listbox', () => {
+                expect(listElement.attributes['role']).toBe('listbox');
+            });
+            it('has four focusable items', () => {
+                expect(component.focusableItems.length).toBe(4);
+            });
+            it('first item is "Välja alla"', () => {
+                expect(listElement.children[0].classes['dropdown-item--select-all']).toBe(true);
+            });
+            // describe('and space is pressed', () => {
+            //     beforeEach(() => {
+            //         dropdownElement.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+            //         fixture.detectChanges();
+            //     });
+            //     it('dropdown is expanded', () => {
+            //         expect(dropdownElement.classes['dropdown--open']).toBe(true);
+            //     });
+
+            //     describe('key arrow down, marks first item', () => {
+            //         beforeEach(() => {
+            //             spyOn(component.focusableItems[0], 'focus').and.callThrough();
+            //             dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+            //             fixture.detectChanges();
+            //         });
+
+            //         it('first element has aria label "one"', () => {
+            //             expect(listItems[0].attributes['aria-label']).toBe('one');
+            //         });
+            //         it('first element has focus', () => {
+            //             expect(component.focusableItems[0].focus).toHaveBeenCalledTimes(1);
+            //         });
+            //     });
+            // });
+        });
+    });
+});

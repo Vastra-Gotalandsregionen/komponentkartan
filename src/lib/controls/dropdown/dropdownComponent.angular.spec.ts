@@ -632,10 +632,14 @@ describe('DropdownComponent', () => {
                 jasmine.clock().install();
                 component.expanded = true;
                 component.items = generateItems(25);
+                component.filterVisible = true;
                 fixture.detectChanges();
-                dropdownElement = rootElement.query(By.css('.dropdown--edit'));
 
                 component.ngOnChanges();
+
+                dropdownElement = rootElement.query(By.css('.dropdown--edit'));
+
+
             });
             it('has 25 items', () => {
                 expect(component.items.length).toBe(25);
