@@ -31,9 +31,16 @@
                 <h2>Barn</h2>
               </vgr-expandable-div-header>
               <vgr-expandable-div-content>
-                <span>Förnamn: {{row.firstName}}</span>
-                <br>
-                <span>Efternamn: {{row.lastName}}</span>
+                <vgr-expandable-div [expanded]="true">
+                  <vgr-expandable-div-header>
+                    <h2>Barn barn</h2>
+                  </vgr-expandable-div-header>
+                  <vgr-expandable-div-content>
+                    <span>Förnamn:</span>
+                    <br>
+                    <span>Efternamn: </span>
+                  </vgr-expandable-div-content>
+                </vgr-expandable-div>
               </vgr-expandable-div-content>
             </vgr-expandable-div>
           </vgr-list-item-content>
