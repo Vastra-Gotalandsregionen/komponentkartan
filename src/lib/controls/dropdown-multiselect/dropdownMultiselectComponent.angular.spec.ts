@@ -540,6 +540,7 @@ describe("[DropdownMultiSelectComponent]", () => {
             let listItems;
             beforeEach(() => {
                 component.expanded = false;
+
                 component.items = [{ displayName: 'one', value: 1 }, { displayName: 'two', value: 2 }, { displayName: 'three', value: 3 }];
                 fixture.detectChanges();
 
@@ -557,30 +558,37 @@ describe("[DropdownMultiSelectComponent]", () => {
             it('first item is "Välja alla"', () => {
                 expect(listElement.children[0].classes['dropdown-item--select-all']).toBe(true);
             });
-            // describe('and space is pressed', () => {
-            //     beforeEach(() => {
-            //         dropdownElement.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
-            //         fixture.detectChanges();
-            //     });
-            //     it('dropdown is expanded', () => {
-            //         expect(dropdownElement.classes['dropdown--open']).toBe(true);
-            //     });
+            describe('and space is pressed', () => {
+                beforeEach(() => {
+                    dropdownElement.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                    fixture.detectChanges();
+                });
+                it('dropdown is expanded', () => {
+                    expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                });
 
-            //     describe('key arrow down, marks first item', () => {
-            //         beforeEach(() => {
-            //             spyOn(component.focusableItems[0], 'focus').and.callThrough();
-            //             dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
-            //             fixture.detectChanges();
-            //         });
+                describe('key arrow down, marks first item', () => {
+                    beforeEach(() => {
+                        spyOn(component.focusableItems[0], 'focus').and.callThrough();
+                        dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+                        fixture.detectChanges();
+                    });
 
-            //         it('first element has aria label "one"', () => {
-            //             expect(listItems[0].attributes['aria-label']).toBe('one');
-            //         });
-            //         it('first element has focus', () => {
-            //             expect(component.focusableItems[0].focus).toHaveBeenCalledTimes(1);
-            //         });
-            //     });
-            // });
+                    it('first element has focus', () => {
+                        let focusedElement = rootElement.query(By.css(':focus'));
+                        expect(focusedElement.properties['title']).toBe('Välj alla');
+                    });
+                    it('first element has aria label "Välj alla"', () => {
+                        expect(listElement.children[0].attributes['aria-label']).toBe('Välj alla');
+                    });
+                    it('focusable items first object has focus', () => {
+                        expect(component.focusableItems[0].focus).toHaveBeenCalledTimes(1);
+                    });
+                    // it('and element is marked', () => {
+                    //     expect(component.items[0].marked).toBe(true);
+                    // });
+                });
+            });
         });
     });
 });

@@ -9,9 +9,9 @@
       <perfect-scrollbar class="container" [config]="scrollbarConfig">
         <ul class="dropdown__menu__items" role="listbox">
           <!-- om det finns en showAllItem -->
-          <li *ngIf="!filterActive" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : selectAllItemsMarked, 'dropdown-item--selected' : selectAllItemsChecked }">
+          <li *ngIf="!filterActive" class="dropdown-item--select-all" [attr.aria-label]="selectAllItemText" [ngClass]="{'dropdown-item--marked' : selectAllItemsMarked, 'dropdown-item--selected' : selectAllItemsChecked }">
             <!-- om listan inte är filtrerad -->
-            <a (mousedown)="onItemClicked(selectAllItem)" tabindex="0" title="{{selectAllItemText}}" (keydown)="openDropdownSelectAllItemKeyEvent($event, item)"
+            <a (mousedown)="onItemClicked(null)" tabindex="0" title="{{selectAllItemText}}" (keydown)="openDropdownSelectAllItemKeyEvent($event, item)"
               (mouseenter)="selectAllItemsMarked = true" (mouseleave)="selectAllItemsMarked = false" (focusin)="selectAllItemsMarked = true"
               (focusout)="selectAllItemsMarked = false">
               <vgr-checkbox class="checkbox--inline" [checked]="selectAllItemsChecked" (checkedChanged)="selectAllItems($event)" [label]="selectAllItemText"></vgr-checkbox>
@@ -25,7 +25,8 @@
             </a>
           </li>
 
-          <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
+          <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" class="dropdown-item" [attr.aria-label]="item.displayName"
+            [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
             <a title={{item.displayName}} tabindex="0" (keydown)="openDropdownItemKeyEvent($event, item)" (mousedown)="onItemClicked(item)"
               (mouseenter)="item.marked = true" (mouseleave)="item.marked = false" (focusin)="item.marked = true" (focusout)="item.marked = false">
               <vgr-checkbox class="checkbox--inline" [checked]="item.selected" (checkedChanged)="onItemCheckChanged(item)" [label]="item.displayName"></vgr-checkbox>
