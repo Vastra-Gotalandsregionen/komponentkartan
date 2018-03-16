@@ -69,8 +69,9 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
     setFocusableItems() {
         const nodes: NodeList = this.filterVisible ? this.elementRef.nativeElement.getElementsByTagName('input') : [];
-        const nodes2: NodeList = this.elementRef.nativeElement.getElementsByTagName('a');
+        const nodes2: NodeList = this.elementRef.nativeElement.getElementsByTagName('li');
         this.focusableItems = [...Array.from(nodes), ...Array.from(nodes2)];
+
     }
 
     openDropdownItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
@@ -223,6 +224,15 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
     onItemClicked(item: DropdownItem<any>) {
         this.preventCollapse = true;
+    }
+
+    markItem(item: DropdownItem<any>) {
+        this.items.forEach(x => x.marked = false);
+        item.marked = true;
+    }
+
+    unMarkItem(item: DropdownItem<any>) {
+        item.marked = false;
     }
 
     selectAllItems(selected: boolean) {

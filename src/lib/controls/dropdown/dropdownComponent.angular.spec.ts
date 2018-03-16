@@ -513,32 +513,62 @@ describe('DropdownComponent', () => {
                     it('first element has focus', () => {
                         expect(component.focusableItems[0].focus).toHaveBeenCalledTimes(1);
                     });
-                    describe('and first element is focused', () => {
+                    it('and first element is marked', () => {
+                        expect(component.items[0].marked).toBe(true);
+                    });
+
+                    describe('and space is pressed on list item', () => {
                         beforeEach(() => {
+                            listItems[0].triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                             fixture.detectChanges();
                         });
 
-                        it('and element is marked', () => {
-                            expect(component.items[0].marked).toBe(true);
+                        it('element is not selected', () => {
+                            expect(component.items[0].selected).toBeFalsy();
                         });
-                        describe('and space is pressed on list item', () => {
+
+                        it('dropdown is still open', () => {
+                            expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                        });
+                    });
+                    describe('and enter is pressed', () => {
+                        beforeEach(() => {
+                            listItems[0].triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                            dropdownElement.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+
+                        it('element is selected', () => {
+                            expect(component.items[0].selected).toBe(true);
+                        });
+
+                        it('dropdown is collapsed', () => {
+                            expect(dropdownElement.classes['dropdown--open']).toBe(false);
+                        });
+                    });
+                    describe('and arrow up is pressed', () => {
+                        beforeEach(() => {
+                            dropdownElement.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+
+                        it('last element is marked', () => {
+                            expect(component.items[2].marked).toBe(true);
+                        });
+                        describe('and arrow dowm is pressed', () => {
                             beforeEach(() => {
-                                listItems[0].triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                                dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
                                 fixture.detectChanges();
                             });
 
-                            it('element is not selected', () => {
-                                expect(component.items[0].selected).toBeFalsy();
-                            });
-
-                            it('dropdown is still open', () => {
-                                expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                            it('first element is marked', () => {
+                                expect(component.items[0].marked).toBe(true);
                             });
                         });
-                        describe('and enter is pressed', () => {
+                        describe('and tab is pressed', () => {
                             beforeEach(() => {
-                                listItems[0].triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
-                                dropdownElement.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                                listItems[0].triggerEventHandler('keydown', { keyCode: 9, preventDefault: function () { } } as KeyboardEvent);
+                                dropdownElement.triggerEventHandler('keydown', { keyCode: 9, preventDefault: function () { } } as KeyboardEvent);
                                 fixture.detectChanges();
                             });
 
@@ -556,68 +586,33 @@ describe('DropdownComponent', () => {
                                 fixture.detectChanges();
                             });
 
-                            it('last element is selected', () => {
-                                expect(component.items[2].marked).toBe(true);
+                            it('element is selected', () => {
+                                expect(component.items[1].marked).toBe(true);
                             });
-                            describe('and arrow dowm is pressed', () => {
+                            describe('and esc is pressed', () => {
                                 beforeEach(() => {
-                                    dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+                                    dropdownElement.triggerEventHandler('keydown', { keyCode: 27, preventDefault: function () { } } as KeyboardEvent);
                                     fixture.detectChanges();
                                 });
-
-                                it('first element is selected', () => {
-                                    expect(component.items[0].marked).toBe(true);
-                                });
-                            });
-                            describe('and tab is pressed', () => {
-                                beforeEach(() => {
-                                    listItems[0].triggerEventHandler('keydown', { keyCode: 9, preventDefault: function () { } } as KeyboardEvent);
-                                    dropdownElement.triggerEventHandler('keydown', { keyCode: 9, preventDefault: function () { } } as KeyboardEvent);
-                                    fixture.detectChanges();
-                                });
-
-                                it('element is selected', () => {
-                                    expect(component.items[0].selected).toBe(true);
-                                });
-
                                 it('dropdown is collapsed', () => {
                                     expect(dropdownElement.classes['dropdown--open']).toBe(false);
                                 });
                             });
-                            describe('and arrow up is pressed', () => {
+                            describe('and alt + arrow down is pressed', () => {
                                 beforeEach(() => {
-                                    dropdownElement.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
+                                    dropdownElement.triggerEventHandler('keydown', { keyCode: 40, altKey: true, preventDefault: function () { } } as KeyboardEvent);
                                     fixture.detectChanges();
                                 });
-
-                                it('element is selected', () => {
-                                    expect(component.items[1].marked).toBe(true);
+                                it('dropdown is collapsed', () => {
+                                    expect(dropdownElement.classes['dropdown--open']).toBe(true);
                                 });
-                                describe('and esc is pressed', () => {
+                                describe('and alt + arrow up is pressed', () => {
                                     beforeEach(() => {
-                                        dropdownElement.triggerEventHandler('keydown', { keyCode: 27, preventDefault: function () { } } as KeyboardEvent);
+                                        dropdownElement.triggerEventHandler('keydown', { keyCode: 38, altKey: true, preventDefault: function () { } } as KeyboardEvent);
                                         fixture.detectChanges();
                                     });
                                     it('dropdown is collapsed', () => {
                                         expect(dropdownElement.classes['dropdown--open']).toBe(false);
-                                    });
-                                });
-                                describe('and alt + arrow down is pressed', () => {
-                                    beforeEach(() => {
-                                        dropdownElement.triggerEventHandler('keydown', { keyCode: 40, altKey: true, preventDefault: function () { } } as KeyboardEvent);
-                                        fixture.detectChanges();
-                                    });
-                                    it('dropdown is collapsed', () => {
-                                        expect(dropdownElement.classes['dropdown--open']).toBe(true);
-                                    });
-                                    describe('and alt + arrow up is pressed', () => {
-                                        beforeEach(() => {
-                                            dropdownElement.triggerEventHandler('keydown', { keyCode: 38, altKey: true, preventDefault: function () { } } as KeyboardEvent);
-                                            fixture.detectChanges();
-                                        });
-                                        it('dropdown is collapsed', () => {
-                                            expect(dropdownElement.classes['dropdown--open']).toBe(false);
-                                        });
                                     });
                                 });
                             });

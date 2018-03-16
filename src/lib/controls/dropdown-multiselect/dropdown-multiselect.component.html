@@ -9,44 +9,44 @@
       <perfect-scrollbar class="container" [config]="scrollbarConfig">
         <ul class="dropdown__menu__items" role="listbox">
           <!-- om det finns en showAllItem -->
-          <li *ngIf="!filterActive" class="dropdown-item--select-all" [attr.aria-label]="selectAllItemText" [ngClass]="{'dropdown-item--marked' : selectAllItemsMarked, 'dropdown-item--selected' : selectAllItemsChecked }">
+          <li *ngIf="!filterActive" tabindex="0" class="dropdown-item--select-all" [attr.aria-label]="selectAllItemText" [ngClass]="{'dropdown-item--marked' : selectAllItemsMarked, 'dropdown-item--selected' : selectAllItemsChecked }"
+            (focusin)="selectAllItemsMarked=true" (focusout)="selectAllItemsMarked=false" (keydown)="openDropdownSelectAllItemKeyEvent($event,
+            item)">
             <!-- om listan inte är filtrerad -->
-            <a (mousedown)="onItemClicked(null)" tabindex="0" title="{{selectAllItemText}}" (keydown)="openDropdownSelectAllItemKeyEvent($event, item)"
-              (mouseenter)="selectAllItemsMarked = true" (mouseleave)="selectAllItemsMarked = false" (focusin)="selectAllItemsMarked = true"
-              (focusout)="selectAllItemsMarked = false">
+            <a (mousedown)="onItemClicked(null)" title="{{selectAllItemText}}" (mouseenter)="selectAllItemsMarked=true" (mouseleave)="selectAllItemsMarked=false">
               <vgr-checkbox class="checkbox--inline" [checked]="selectAllItemsChecked" (checkedChanged)="selectAllItems($event)" [label]="selectAllItemText"></vgr-checkbox>
             </a>
           </li>
 
-          <li *ngIf="filterActive" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : selectAllItemsMarked}" (keydown)="openDropdownShowAllItemKeyEvent($event, item)">
+          <li *ngIf="filterActive" tabindex="0" class="dropdown-item--select-all" [ngClass]="{ 'dropdown-item--marked' : selectAllItemsMarked}"
+            (keydown)="openDropdownShowAllItemKeyEvent($event, item)" (focusin)="selectAllItemsMarked=true" (focusout)="selectAllItemsMarked=false">
             <!-- om listan är filtrerad -->
-            <a tabindex="0" (mousedown)="clearFilter()" title="{{showAllItemText}}" (mouseenter)="selectAllItemsMarked = true" (mouseleave)="selectAllItemsMarked = false"
-              (focusin)="selectAllItemsMarked = true" (focusout)="selectAllItemsMarked = false">{{showAllItemText}}
+            <a (mousedown)="clearFilter()" title="{{showAllItemText}}" (mouseenter)="selectAllItemsMarked=true" (mouseleave)="selectAllItemsMarked=false">{{showAllItemText}}
             </a>
           </li>
 
-          <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" class="dropdown-item" [attr.aria-label]="item.displayName"
-            [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }">
-            <a title={{item.displayName}} tabindex="0" (keydown)="openDropdownItemKeyEvent($event, item)" (mousedown)="onItemClicked(item)"
-              (mouseenter)="item.marked = true" (mouseleave)="item.marked = false" (focusin)="item.marked = true" (focusout)="item.marked = false">
+          <li *ngFor="let item of items | filterByProperties: filter : [ 'displayName']" class="dropdown-item" [attr.aria-label]="item.displayName"
+            [ngClass]="{ 'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }" (focusin)="markItem(item) "
+            (focusout)="unMarkItem(item)" tabindex="0" (keydown)="openDropdownItemKeyEvent($event, item) ">
+            <a title={{item.displayName}} (mousedown)="onItemClicked(item)" (mouseenter)="item.marked=true" (mouseleave)="item.marked=false ">
               <vgr-checkbox class="checkbox--inline" [checked]="item.selected" (checkedChanged)="onItemCheckChanged(item)" [label]="item.displayName"></vgr-checkbox>
             </a>
           </li>
         </ul>
       </perfect-scrollbar>
 
-      <div *ngIf="dimmerBottomVisible" class="dropdown__dimmer dropdown__dimmer--bottom"></div>
+      <div *ngIf="dimmerBottomVisible" class="dropdown__dimmer dropdown__dimmer--bottom "></div>
     </div>
   </div>
-  <div class="validation__status" title="{{validationErrorMessage}}">
-    <div class="validation__status__icon"></div>
-    <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
+  <div class="validation__status" title="{{validationErrorMessage}} ">
+    <div class="validation__status__icon "></div>
+    <div class="validation__status__message ">{{validationErrorMessage | truncate:50}}</div>
   </div>
 
 </div>
 
-<div class="dropdown__multiselect-readonlylist">
+<div class="dropdown__multiselect-readonlylist ">
   <ul>
-    <li *ngFor="let selectedItem of selectedItems">{{selectedItem | dropdownItemToSelectedText}}</li>
+    <li *ngFor="let selectedItem of selectedItems ">{{selectedItem | dropdownItemToSelectedText}}</li>
   </ul>
 </div>
