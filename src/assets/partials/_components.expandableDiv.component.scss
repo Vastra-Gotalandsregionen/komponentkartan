@@ -6,13 +6,13 @@
     // padding-left: $margin--slim;
     // padding-right: $margin--slim;
     &:hover {
-      @extend .background-color--primary-dimmed;
+      //   @extend .background-color--primary-dimmed;
       cursor: pointer;
     }
     .expandable-div-chevron {
       position: absolute;
       top: 0;
-      right: $margin--slim;
+      right: 0px;
       &.expanded {
         @extend .chevron-expanded;
       }
@@ -37,7 +37,7 @@
       // padding-right: $margin--fat;
       // padding-left: $margin--fat;
       .expandable-div-chevron {
-        right: $margin--fat;
+        right: 0px;
       }
     } // .expandable-div-content {
     //   padding-right: $margin--fat;
