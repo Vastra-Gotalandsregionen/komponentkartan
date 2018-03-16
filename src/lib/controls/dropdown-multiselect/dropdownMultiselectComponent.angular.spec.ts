@@ -316,16 +316,45 @@ describe("[DropdownMultiSelectComponent]", () => {
         });
 
         describe("when the list has been filtered", () => {
+            let showAll;
             beforeEach(() => {
+                jasmine.clock().uninstall();
+                jasmine.clock().install();
                 component.filterTextboxComponent.value = "2";
                 fixture.detectChanges();
+                jasmine.clock().tick(100);
+                showAll = rootElement.query(By.css('.dropdown-item--select-all'));
             });
-            it("the select all item text is 'Välj alla'", () => {
-                let item = rootElement.query(By.css('.dropdown-item--select-all'));
-                let itemLink = item.query(By.css("a"));
-                expect(itemLink.nativeElement.title).toBe(component.showAllItemText);
+            it('there are five focusable items', () => {
+                jasmine.clock().tick(200);
+                expect(component.focusableItems.length).toBe(5);
             });
+            describe('and space is pressed', () => {
+                beforeEach(() => {
+                    showAll.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                    fixture.detectChanges();
+                });
+                it('filter is not cleared', () => {
+                    expect(component.filter).toBe('2');
+                });
+            });
+            describe('and enter is pressed', () => {
+                beforeEach(() => {
+                    jasmine.clock().uninstall();
+                    jasmine.clock().install();
+                    showAll.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                    fixture.detectChanges();
+                });
 
+                it('filter is cleared', () => {
+                    jasmine.clock().tick(100);
+                    expect(component.filter).toBe('');
+                });
+                it('there are 23 focusable items', () => {
+                    jasmine.clock().tick(100);
+                    expect(component.focusableItems.length).toBe(23);
+                });
+            });
         });
 
         describe("when all items are selected and the list is filtered", () => {
@@ -558,6 +587,24 @@ describe("[DropdownMultiSelectComponent]", () => {
             it('first item is "Välja alla"', () => {
                 expect(listElement.children[0].classes['dropdown-item--select-all']).toBe(true);
             });
+            describe('and alt + arrow down is pressed', () => {
+                beforeEach(() => {
+                    dropdownElement.triggerEventHandler('keydown', { keyCode: 40, altKey: true, preventDefault: function () { } } as KeyboardEvent);
+                    fixture.detectChanges();
+                });
+                it('dropdown is collapsed', () => {
+                    expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                });
+                describe('and alt + arrow up is pressed', () => {
+                    beforeEach(() => {
+                        dropdownElement.triggerEventHandler('keydown', { keyCode: 38, altKey: true, preventDefault: function () { } } as KeyboardEvent);
+                        fixture.detectChanges();
+                    });
+                    it('dropdown is collapsed', () => {
+                        expect(dropdownElement.classes['dropdown--open']).toBe(false);
+                    });
+                });
+            });
             describe('and space is pressed', () => {
                 beforeEach(() => {
                     dropdownElement.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
@@ -567,7 +614,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                     expect(dropdownElement.classes['dropdown--open']).toBe(true);
                 });
 
-                describe('key arrow down, marks first item', () => {
+                describe('key arrow down focuses first item', () => {
                     beforeEach(() => {
                         spyOn(component.focusableItems[0], 'focus').and.callThrough();
                         dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
@@ -584,11 +631,144 @@ describe("[DropdownMultiSelectComponent]", () => {
                     it('focusable items first object has focus', () => {
                         expect(component.focusableItems[0].focus).toHaveBeenCalledTimes(1);
                     });
-                    // it('and element is marked', () => {
-                    //     expect(component.items[0].marked).toBe(true);
-                    // });
+                    it('and select all items checkbox is marked', () => {
+                        expect(component.selectAllItemsMarked).toBe(true);
+                    });
+                    it('and select all items checkbox is not checked', () => {
+                        expect(component.selectAllItemsChecked).toBe(false);
+                    });
+                    describe('enter is pressed ', () => {
+                        let selectAll;
+                        beforeEach(() => {
+                            selectAll = rootElement.query(By.css('.dropdown-item--select-all a'));
+                            selectAll.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                        });
+                        it('and select all items checkbox is checked', () => {
+                            expect(component.selectAllItemsChecked).toBe(true);
+                        });
+                        describe('enter is pressed again ', () => {
+                            beforeEach(() => {
+                                selectAll.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                            });
+                            it('and select all items checkbox is unchecked', () => {
+                                expect(component.selectAllItemsChecked).toBe(false);
+                            });
+                        });
+                    });
+                    describe('space is pressed ', () => {
+                        let selectAll;
+                        beforeEach(() => {
+                            selectAll = rootElement.query(By.css('.dropdown-item--select-all a'));
+                            selectAll.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                        });
+                        it('and select all items checkbox is unchecked', () => {
+                            expect(component.selectAllItemsChecked).toBeFalsy();
+                        });
+                    });
+
+                    describe('key arrow down againn, focus on next item', () => {
+                        beforeEach(() => {
+                            spyOn(component.focusableItems[1], 'focus').and.callThrough();
+                            dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+                        it('second focusable element has aria label "one"', () => {
+                            expect(listElement.children[1].attributes['aria-label']).toBe('one');
+                        });
+                        it('focusable items first object has focus', () => {
+                            expect(component.focusableItems[1].focus).toHaveBeenCalledTimes(1);
+                        });
+                        describe('key arrow down pressed three times, focus is back to first element', () => {
+                            beforeEach(() => {
+                                dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+                                dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+                                dropdownElement.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+                                fixture.detectChanges();
+                            });
+                            it('focusable items first object has focus', () => {
+                                expect(component.focusableItems[0].focus).toHaveBeenCalledTimes(2);
+                            });
+                            it('and select all items checkbox is marked', () => {
+                                expect(component.selectAllItemsMarked).toBe(true);
+                            });
+                            it('and select all items checkbox is not checked', () => {
+                                expect(component.selectAllItemsChecked).toBe(false);
+                            });
+                        });
+                        describe('and tab is pressed', () => {
+                            beforeEach(() => {
+                                listItems[1].triggerEventHandler('keydown', { keyCode: 9, preventDefault: function () { } } as KeyboardEvent);
+                                dropdownElement.triggerEventHandler('keydown', { keyCode: 9, preventDefault: function () { } } as KeyboardEvent);
+                                fixture.detectChanges();
+                            });
+
+                            it('current element is not selected', () => {
+                                expect(component.items[1].selected).toBeFalsy();
+                            });
+
+                            it('dropdown is collapsed', () => {
+                                expect(dropdownElement.classes['dropdown--open']).toBe(false);
+                            });
+                        });
+                    });
+                });
+                describe('key arrow up focuses last item', () => {
+                    beforeEach(() => {
+                        spyOn(component.focusableItems[3], 'focus').and.callThrough();
+                        dropdownElement.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
+                        fixture.detectChanges();
+                    });
+                    it('last element has aria label "Välj alla"', () => {
+                        expect(listElement.children[3].attributes['aria-label']).toBe('three');
+                    });
+                    it('focusable items last object has focus', () => {
+                        expect(component.focusableItems[3].focus).toHaveBeenCalledTimes(1);
+                    });
+                    it('and last item checkbox is marked', () => {
+                        // expect(component.items[2].marked).toBe(true);
+                    });
+                    it('and last item is not selected', () => {
+                        expect(component.items[2].selected).toBeFalsy();
+                    });
+
+                    describe('enter is pressed', () => {
+                        let lastElement;
+                        beforeEach(() => {
+                            lastElement = rootElement.queryAll(By.css('a'))[3];
+                            lastElement.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+                        it('and last item checkbox is selected', () => {
+                            expect(component.items[2].selected).toBe(true);
+                        });
+                    });
+                    describe('space is pressed', () => {
+                        let lastElement;
+                        beforeEach(() => {
+                            lastElement = rootElement.queryAll(By.css('a'))[3];
+                            lastElement.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+                        it('and last item checkbox is unselected', () => {
+                            expect(component.items[2].selected).toBeFalsy();
+                        });
+                    });
+
+                    describe('key arrow up againn, focus on second last item', () => {
+                        beforeEach(() => {
+                            spyOn(component.focusableItems[2], 'focus').and.callThrough();
+                            dropdownElement.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+                        it('focusable items first object has focus', () => {
+                            expect(component.focusableItems[2].focus).toHaveBeenCalledTimes(1);
+                        });
+                        it('and second last item checkbox is marked', () => {
+                            // expect(component.items[1].marked).toBe(true);
+                        });
+                    });
                 });
             });
         });
-    });
+    })
 });
