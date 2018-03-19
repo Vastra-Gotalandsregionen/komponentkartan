@@ -71,6 +71,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         // enter & space
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.onItemCheckChanged(item);
+            event.preventDefault();
             event.cancelBubble = true;
         }
     }
