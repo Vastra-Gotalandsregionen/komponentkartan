@@ -738,11 +738,11 @@ describe('DropdownComponent', () => {
             });
         });
     });
-
-    function generateItems(nrOfitems: number): DropdownItem<any>[] {
-        const items = [];
-        for (let index = 0; index < nrOfitems; index++) {
-            items.push({ displayName: 'item' + index, value: index });
-        }
-        return items;
+});
+function generateItems(nrOfitems: number): DropdownItem<any>[] {
+    const items = [];
+    for (let index = 0; index < nrOfitems; index++) {
+        items.push({ displayName: 'item' + index, value: index });
     }
+    return items;
+}
