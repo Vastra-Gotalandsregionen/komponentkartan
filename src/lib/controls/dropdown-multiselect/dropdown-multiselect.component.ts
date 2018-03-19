@@ -26,7 +26,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     @Input() selectAllItemText: string;
     dropdownLabel: string;
     selectAllItemsMarked: boolean;
-
     focusableItems = [];
     private focusedItemIndex = -1;
 
@@ -72,6 +71,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         const nodes2: NodeList = this.elementRef.nativeElement.getElementsByTagName('li');
         this.focusableItems = [...Array.from(nodes), ...Array.from(nodes2)];
 
+
     }
 
     keyDownDropdownItem(event: KeyboardEvent, item: DropdownItem<any>) {
@@ -86,8 +86,8 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
-        // enter
-        if (event.keyCode === 13) {
+        // enter & space
+        if (event.keyCode === 13 || event.keyCode === 32) {
             this.clearFilter();
             event.preventDefault();
             setTimeout(() => {
@@ -98,19 +98,13 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             }, 10);
 
             event.cancelBubble = true;
-        } else if (event.keyCode === 32) {// space
-            event.preventDefault();
-            event.cancelBubble = true;
         }
     }
 
     openDropdownSelectAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
-        // enter
-        if (event.keyCode === 13) {
+        // enter & space
+        if (event.keyCode === 13 || event.keyCode === 32) {
             this.selectAllItems(!this.selectAllItemsChecked);
-            event.preventDefault();
-            event.cancelBubble = true;
-        } else if (event.keyCode === 32) {// space
             event.preventDefault();
             event.cancelBubble = true;
         }
@@ -121,7 +115,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             this.onToggleDropdown(event);
             this.focusedItemIndex = -1;
             this.focusDropdown();
-        } else if (event.altKey && event.keyCode === 40) {// alt + arrow dowm
+        } else if (event.altKey && event.keyCode === 40) {// alt + arrow down
             this.expanded = true;
             this.focusedItemIndex = -1;
             event.preventDefault();
@@ -130,7 +124,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             this.expanded = false;
             this.focusDropdown();
             event.preventDefault();
-        } else if (event.keyCode === 40) { // arrow dowm
+        } else if (event.keyCode === 40) { // arrow down
             this.setFocusOnNextItem();
             event.preventDefault();
         } else if (event.keyCode === 38) { // arrow up
@@ -148,6 +142,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     private setFocusOnNextItem() {
         this.focusedItemIndex = this.focusedItemIndex < this.focusableItems.length - 1 ? this.focusedItemIndex + 1 : 0;
         this.focusableItems[this.focusedItemIndex].focus();
+
     }
 
     private setFocusOnPreviousItem() {

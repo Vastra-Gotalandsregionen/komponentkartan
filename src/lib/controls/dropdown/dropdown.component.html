@@ -1,9 +1,9 @@
 <div class="validation">
-  <div class="dropdown--edit" [attr.aria-expanded]="expanded" [attr.aria-readonly]="disabled || readonly" role="combobox" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible}"
-    (mousedown)="onToggleDropdown($event)" (keydown)="openDropdownKeyEvent($event)" (focusout)="onLeave()" (focusin)="onEnter()"
-    tabindex="0">
-    <span class="noselect" *ngIf="selectedItem" title="{{selectedItem.displayName}}">{{ selectedItem | dropdownItemToSelectedText}}</span>
-    <span class="noselect" *ngIf="!selectedItem" title="{{noItemSelectedLabel}}">{{readonly || disabled ? '' : noItemSelectedLabel }}</span>
+  <div class="dropdown--edit" [attr.aria-expanded]="expanded" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
+    role="combobox" [ngClass]="{'dropdown--open' : expanded, 'dropdown--filter-visible' : filterVisible}" (mousedown)="onToggleDropdown($event)"
+    (keydown)="openDropdownKeyEvent($event)" (focusout)="onLeave()" (focusin)="onEnter()" tabindex="0" [attr.aria-labelledby]="labelledbyid">
+    <span class="noselect" *ngIf="selectedItem" id="{{labelledbyid}}" title="{{selectedItem.displayName}}">{{ selectedItem | dropdownItemToSelectedTextPipe}}</span>
+    <span class="noselect" *ngIf="!selectedItem" id="{{labelledbyid}}" title="{{noItemSelectedLabel}}">{{readonly || disabled ? '' : noItemSelectedLabel }}</span>
     <div class="dropdown__menu">
       <vgr-filter-textbox tabindex="0" class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
       <div *ngIf="dimmerTopVisible" class="dropdown__dimmer dropdown__dimmer--top"></div>
@@ -16,7 +16,7 @@
           </li>
           <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" class="dropdown-item" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }"
             tabindex="0" (keydown)="keyDownDropdownItem($event, item)" (focusin)="onMouseEnter(item)" (focusout)="onMouseLeave(item)"
-            [attr.aria-label]="item.displayName">
+            [attr.aria-label]="item.displayName" [attr.aria-selected]="item.selected">
             <a (mousedown)="selectItem(item)" title={{item.displayName}} (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave(item)">{{item.displayName}}</a>
           </li>
         </ul>

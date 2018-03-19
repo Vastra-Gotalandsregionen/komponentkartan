@@ -473,6 +473,15 @@ describe('DropdownComponent', () => {
         it('Aria-expanded is false', () => {
             expect(dropdownElement.attributes['aria-expanded']).toBe('false');
         });
+        it('aria-disabled is false', () => {
+            expect(dropdownElement.attributes['aria-disabled']).toBe('false');
+        });
+        it('aria-readonly is false', () => {
+            expect(dropdownElement.attributes['aria-readonly']).toBe('false');
+        });
+        it('tabindex to be 0', () => {
+            expect(dropdownElement.attributes['tabindex']).toBe('0');
+        });
         describe('list is initialized with items', () => {
             let listItems;
             beforeEach(() => {
@@ -700,6 +709,30 @@ describe('DropdownComponent', () => {
                     });
                 });
             });
+        });
+
+        describe('dropdown initialized as readonly', () => {
+            let dropdownElement: DebugElement;
+            beforeEach(() => {
+                component.expanded = false;
+
+                component.items = [{ displayName: 'one', value: 1, selected: true }, { displayName: 'two', value: 2 }, { displayName: 'three', value: 3 }];
+                component.readonly = true;
+                dropdownElement = rootElement.query(By.css('.dropdown--edit'));
+
+
+                component.ngOnChanges();
+                fixture.detectChanges();
+
+            });
+
+            it('aria-readonly set to true on readonly-items', () => {
+                expect(dropdownElement.attributes['aria-readonly']).toBe('true');
+            })
+
+            it('selectedItem is "one"', () => {
+                expect(component.selectedItem.displayName).toBe('one');
+            })
         });
     });
 });

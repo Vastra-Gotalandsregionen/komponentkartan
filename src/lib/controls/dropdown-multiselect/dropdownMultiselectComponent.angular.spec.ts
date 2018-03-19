@@ -331,11 +331,19 @@ describe("[DropdownMultiSelectComponent]", () => {
             });
             describe('and space is pressed', () => {
                 beforeEach(() => {
+                    jasmine.clock().uninstall();
+                    jasmine.clock().install();
                     showAll.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                     fixture.detectChanges();
                 });
-                it('filter is not cleared', () => {
-                    expect(component.filter).toBe('2');
+
+                it('filter is cleared', () => {
+                    jasmine.clock().tick(100);
+                    expect(component.filter).toBe('');
+                });
+                it('there are 23 focusable items', () => {
+                    jasmine.clock().tick(100);
+                    expect(component.focusableItems.length).toBe(23);
                 });
             });
             describe('and enter is pressed', () => {
@@ -373,7 +381,6 @@ describe("[DropdownMultiSelectComponent]", () => {
 
                 it("and select all item checkbox is visible", () => {
                     let selectAllItem = rootElement.query(By.css('.dropdown-item--select-all'));
-                    console.log(selectAllItem);
                     let selectAllCheckbox = selectAllItem.query(By.css("vgr-checkbox"));
                     expect(selectAllCheckbox).toBeDefined();
                 });
@@ -566,6 +573,13 @@ describe("[DropdownMultiSelectComponent]", () => {
         it('Aria-expanded is false', () => {
             expect(dropdownElement.attributes['aria-expanded']).toBe('false');
         });
+        it('aria-disabled is false', () => {
+            expect(dropdownElement.attributes['aria-disabled']).toBe('false');
+        });
+        it('tabindex to be 0', () => {
+            expect(dropdownElement.properties['tabIndex']).toBe('0');
+        });
+
         describe('list is initialized with items', () => {
             let listItems;
             beforeEach(() => {
@@ -665,8 +679,8 @@ describe("[DropdownMultiSelectComponent]", () => {
                             selectAll = rootElement.query(By.css('.dropdown-item--select-all'));
                             selectAll.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                         });
-                        it('and select all items checkbox is unchecked', () => {
-                            expect(component.selectAllItemsChecked).toBeFalsy();
+                        it('and select all items checkbox is checked', () => {
+                            expect(component.selectAllItemsChecked).toBe(true);
                         });
                     });
 
@@ -772,6 +786,43 @@ describe("[DropdownMultiSelectComponent]", () => {
                     });
                 });
             });
+        });
+
+        describe('dropdown initialized as readonly', () => {
+            let dropdownElement: DebugElement;
+            let readonlyDropdownElement: DebugElement;
+            let selectedItemsElement: DebugElement[];
+            beforeEach(() => {
+                component.expanded = false;
+
+                component.items = [{ displayName: 'one', value: 1, selected: true }, { displayName: 'two', value: 2 }, { displayName: 'three', value: 3 }];
+                component.readonly = true;
+                dropdownElement = rootElement.query(By.css('.dropdown--edit'));
+                readonlyDropdownElement = rootElement.query(By.css('.dropdown__multiselect-readonlylist'));
+
+                component.ngOnChanges();
+                fixture.detectChanges();
+                selectedItemsElement = readonlyDropdownElement.queryAll(By.css('li'));
+            });
+
+            it('aria-readonly set to true on readonly-items', () => {
+                expect(readonlyDropdownElement.attributes['aria-readonly']).toBe('true');
+            })
+
+            it('tabindex to be 0 on readonly-list', () => {
+                expect(readonlyDropdownElement.properties['tabIndex']).toBe('0');
+            });
+            it('tabindex to be -1 on dropdown', () => {
+                expect(dropdownElement.properties['tabIndex']).toBe('-1');
+            });
+
+            it('selectedItem is "one"', () => {
+                expect(selectedItemsElement.length).toBe(1);
+            })
+
+            it('selectedItem is "one"', () => {
+                expect(selectedItemsElement[0].nativeElement.innerText).toBe('one');
+            })
         });
     })
 });

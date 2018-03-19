@@ -5,18 +5,21 @@ import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { AbstractControl } from '@angular/forms';
+import { Guid } from '../../utils/guid';
 
 export abstract class DropdownBaseComponent {
 
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
+
+
     @Input() showValidation = true;
     @Input() formControlName?: string;
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
-    @Input() @HostBinding('class.readonly') readonly: boolean;
-    @Input() @HostBinding('class.disabled') disabled: boolean;
+    @Input() @HostBinding('class.readonly') readonly: boolean = false;
+    @Input() @HostBinding('class.disabled') disabled: boolean = false;
     @HostBinding('class.dropdown') dropdownClass = true;
 
     @HostBinding('class.validation-error--active') get errorClass() {
@@ -41,7 +44,7 @@ export abstract class DropdownBaseComponent {
     protected filterLimit = 20;
     protected filterPipe: FilterPipe;
     protected preventCollapse: boolean;
-
+    public labelledbyid: string = Guid.newGuid();
     protected _items: DropdownItem<any>[];
     @Input() set items(value: DropdownItem<any>[]) {
         // The scrollbar component would not refresh when items were changed unless we added a timeout...
