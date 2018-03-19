@@ -2,7 +2,7 @@
 import { DropdownItem } from '../models/dropdownItem.model';
 
 @Pipe({
-    name: 'dropdownItemToSelectedText'
+    name: 'dropdownItemToSelectedTextPipe'
 })
 
 export class DropdownItemToSelectedTextPipe implements PipeTransform {
