@@ -687,11 +687,13 @@ describe('DropdownComponent', () => {
                             showAll.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                             fixture.detectChanges();
                         });
-                        it('filter is not cleared', () => {
-                            expect(component.filter).toBe('13');
+
+                        it('filter is cleared', () => {
+                            expect(component.filter).toBe('');
                         });
-                        it('dropdown is still expanded', () => {
-                            expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                        it('there are 27 focusable items', () => {
+                            jasmine.clock().tick(200);
+                            expect(component.focusableItems.length).toBe(27);
                         });
                     });
                     describe('and enter is pressed', () => {
@@ -710,38 +712,37 @@ describe('DropdownComponent', () => {
                     });
                 });
             });
-        });
 
-        describe('dropdown initialized as readonly', () => {
-            let dropdownElement: DebugElement;
-            beforeEach(() => {
-                component.expanded = false;
+            describe('dropdown initialized as readonly', () => {
+                let dropdownElement: DebugElement;
+                beforeEach(() => {
+                    component.expanded = false;
 
-                component.items = [{ displayName: 'one', value: 1, selected: true }, { displayName: 'two', value: 2 }, { displayName: 'three', value: 3 }];
-                component.readonly = true;
-                dropdownElement = rootElement.query(By.css('.dropdown--edit'));
+                    component.items = [{ displayName: 'one', value: 1, selected: true }, { displayName: 'two', value: 2 }, { displayName: 'three', value: 3 }];
+                    component.readonly = true;
+                    dropdownElement = rootElement.query(By.css('.dropdown--edit'));
 
 
-                component.ngOnChanges();
-                fixture.detectChanges();
+                    component.ngOnChanges();
+                    fixture.detectChanges();
 
+                });
+
+                it('aria-readonly set to true on readonly-items', () => {
+                    expect(dropdownElement.attributes['aria-readonly']).toBe('true');
+                })
+
+                it('selectedItem is "one"', () => {
+                    expect(component.selectedItem.displayName).toBe('one');
+                })
             });
-
-            it('aria-readonly set to true on readonly-items', () => {
-                expect(dropdownElement.attributes['aria-readonly']).toBe('true');
-            })
-
-            it('selectedItem is "one"', () => {
-                expect(component.selectedItem.displayName).toBe('one');
-            })
         });
     });
-});
 
-function generateItems(nrOfitems: number): DropdownItem<any>[] {
-    const items = [];
-    for (let index = 0; index < nrOfitems; index++) {
-        items.push({ displayName: 'item' + index, value: index });
+    function generateItems(nrOfitems: number): DropdownItem<any>[] {
+        const items = [];
+        for (let index = 0; index < nrOfitems; index++) {
+            items.push({ displayName: 'item' + index, value: index });
+        }
+        return items;
     }
-    return items;
-}

@@ -4,7 +4,7 @@
     tabindex="{{readonly ? -1: 0}}" [attr.aria-labelledby]="labelledbyid" [attr.aria-disabled]="disabled">
     <span class="noselect" id="{{labelledbyid}}">{{dropdownLabel}}</span>
     <div class="dropdown__menu">
-      <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)"></vgr-filter-textbox>
+      <vgr-filter-textbox class="dropdown__filterTextbox" (valueChanged)="filterItems($event)" (keydown)="filterTextKeyDown($event)"></vgr-filter-textbox>
       <div *ngIf="dimmerTopVisible" class="dropdown__dimmer dropdown__dimmer--top"></div>
       <perfect-scrollbar class="container" [config]="scrollbarConfig">
         <ul class="dropdown__menu__items" role="listbox">

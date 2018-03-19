@@ -98,11 +98,8 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
         // enter
-        if (event.keyCode === 13) {
+        if (event.keyCode === 13 || event.keyCode === 32) {
             this.showAllItems();
-            event.preventDefault();
-            event.cancelBubble = true;
-        } else if (event.keyCode === 32) {// space
             event.preventDefault();
             event.cancelBubble = true;
         }

@@ -161,10 +161,12 @@ export abstract class DropdownBaseComponent {
     }
 
     openDropdownKeyEvent(event: KeyboardEvent): void {
+        this.preventCollapse = false;
         if (event.keyCode === 13 || event.keyCode === 32) {// space, enter
             this.onToggleDropdown(event);
             this.focusedItemIndex = -1;
             this.focusDropdown();
+            event.preventDefault();
         } else if (event.altKey && event.keyCode === 40) {// alt + arrow down
             this.expanded = true;
             this.focusedItemIndex = -1;
@@ -185,6 +187,11 @@ export abstract class DropdownBaseComponent {
         }
     }
 
+    filterTextKeyDown(event: KeyboardEvent): void {
+        if (event.keyCode === 32) {
+            event.cancelBubble = true;
+        }
+    }
 
 
     private focusDropdown() {
