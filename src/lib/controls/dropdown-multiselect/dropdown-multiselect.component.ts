@@ -55,7 +55,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         }
     }
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef) {
         super(elementRef);
         this.allItemsSelectedLabel = 'Alla';
         this.noItemSelectedLabel = 'Välj';
@@ -74,13 +74,13 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
     }
 
-    openDropdownItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+    keyDownDropdownItem(event: KeyboardEvent, item: DropdownItem<any>) {
         // enter
         if (event.keyCode === 13) {
             this.onItemCheckChanged(item);
             event.cancelBubble = true;
         } else if (event.keyCode === 32) {// space
-            event.preventDefault();
+            this.onItemCheckChanged(item);
             event.cancelBubble = true;
         }
     }

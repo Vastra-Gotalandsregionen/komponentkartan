@@ -31,7 +31,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     private focusedItemIndex = -1;
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
         this.noItemSelectedLabel = 'Välj';
     }
@@ -115,7 +115,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         }
     }
 
-    openDropdownItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+    keyDownDropdownItem(event: KeyboardEvent, item: DropdownItem<any>) {
         // enter, tab
         if (event.keyCode === 13 || event.keyCode === 9) {
             this.selectItem(item);

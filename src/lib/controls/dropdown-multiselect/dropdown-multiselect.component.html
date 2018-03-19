@@ -27,7 +27,7 @@
 
           <li *ngFor="let item of items | filterByProperties: filter : [ 'displayName']" class="dropdown-item" [attr.aria-label]="item.displayName"
             [ngClass]="{ 'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }" (focusin)="markItem(item) "
-            (focusout)="unMarkItem(item)" tabindex="0" (keydown)="openDropdownItemKeyEvent($event, item) ">
+            (focusout)="unMarkItem(item)" tabindex="0" (keydown)="keyDownDropdownItem($event, item) ">
             <a title={{item.displayName}} (mousedown)="onItemClicked(item)" (mouseenter)="item.marked=true" (mouseleave)="item.marked=false ">
               <vgr-checkbox class="checkbox--inline" [checked]="item.selected" (checkedChanged)="onItemCheckChanged(item)" [label]="item.displayName"></vgr-checkbox>
             </a>

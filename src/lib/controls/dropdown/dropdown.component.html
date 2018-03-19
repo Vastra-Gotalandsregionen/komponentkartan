@@ -15,7 +15,7 @@
             <a (mousedown)="showAllItems()" title="{{showAllItem.displayName}}" (mouseenter)="onMouseEnter(showAllItem)" (mouseleave)="onMouseLeave(showAllItem)">{{showAllItem.displayName}}</a>
           </li>
           <li *ngFor="let item of items | filterByProperties: filter : ['displayName']" class="dropdown-item" [ngClass]="{'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }"
-            tabindex="0" (keydown)="openDropdownItemKeyEvent($event, item)" (focusin)="onMouseEnter(item)" (focusout)="onMouseLeave(item)"
+            tabindex="0" (keydown)="keyDownDropdownItem($event, item)" (focusin)="onMouseEnter(item)" (focusout)="onMouseLeave(item)"
             [attr.aria-label]="item.displayName">
             <a (mousedown)="selectItem(item)" title={{item.displayName}} (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave(item)">{{item.displayName}}</a>
           </li>

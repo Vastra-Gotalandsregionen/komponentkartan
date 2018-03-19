@@ -720,7 +720,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                     beforeEach(() => {
                         spyOn(component.focusableItems[3], 'focus').and.callThrough();
                         dropdownElement.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
-                        //listItems[2].triggerEventHandler('focusin', {});
+                        listItems[2].triggerEventHandler('focusin', {});
                         fixture.detectChanges();
                     });
                     it('last element has aria label "Välj alla"', () => {
@@ -730,14 +730,13 @@ describe("[DropdownMultiSelectComponent]", () => {
                         expect(component.focusableItems[3].focus).toHaveBeenCalledTimes(1);
                     });
                     it('and last item checkbox is marked', () => {
-                        //expect(component.items[2].marked).toBe(true);
+                        expect(component.items[2].marked).toBe(true);
                     });
                     it('and last item is not selected', () => {
                         expect(component.items[2].selected).toBeFalsy();
                     });
 
                     describe('enter is pressed', () => {
-                        let lastElement;
                         beforeEach(() => {
                             listItems[2].triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
                             fixture.detectChanges();
@@ -747,29 +746,28 @@ describe("[DropdownMultiSelectComponent]", () => {
                         });
                     });
                     describe('space is pressed', () => {
-                        let lastElement;
                         beforeEach(() => {
-                            lastElement = rootElement.queryAll(By.css('a'))[3];
-                            lastElement.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                            listItems[2].triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                             fixture.detectChanges();
                         });
                         it('and last item checkbox is unselected', () => {
-                            expect(component.items[2].selected).toBeFalsy();
+                            expect(component.items[2].selected).toBe(true);
                         });
+
                     });
 
-                    describe('key arrow up againn, focus on second item', () => {
+                    describe('key arrow up again, focus on second item', () => {
                         beforeEach(() => {
                             spyOn(component.focusableItems[2], 'focus').and.callThrough();
                             dropdownElement.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
-                            //listItems[1].triggerEventHandler('focusin', {});
+                            listItems[1].triggerEventHandler('focusin', {});
                             fixture.detectChanges();
                         });
                         it('focusable items first object has focus', () => {
                             expect(component.focusableItems[2].focus).toHaveBeenCalledTimes(1);
                         });
                         it('and second last item checkbox is marked', () => {
-                            //expect(component.items[1].marked).toBe(true);
+                            expect(component.items[1].marked).toBe(true);
                         });
                     });
                 });
