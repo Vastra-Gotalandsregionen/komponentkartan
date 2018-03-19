@@ -529,15 +529,16 @@ describe('DropdownComponent', () => {
                     describe('and space is pressed on list item', () => {
                         beforeEach(() => {
                             listItems[0].triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                            dropdownElement.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                             fixture.detectChanges();
                         });
 
-                        it('element is not selected', () => {
-                            expect(component.items[0].selected).toBeFalsy();
+                        it('element is selected', () => {
+                            expect(component.items[0].selected).toBe(true);
                         });
 
-                        it('dropdown is still open', () => {
-                            expect(dropdownElement.classes['dropdown--open']).toBe(true);
+                        it('dropdown is collapsed', () => {
+                            expect(dropdownElement.classes['dropdown--open']).toBe(false);
                         });
                     });
                     describe('and enter is pressed', () => {

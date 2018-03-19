@@ -26,8 +26,8 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     @Input() selectAllItemText: string;
     dropdownLabel: string;
     selectAllItemsMarked: boolean;
-    focusableItems = [];
-    private focusedItemIndex = -1;
+
+
 
     @Output() selectionChanged = new EventEmitter<DropdownItem<any>[]>();
     get filterActive(): boolean {
@@ -66,20 +66,10 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.setFocusableItems();
     }
 
-    setFocusableItems() {
-        const nodes: NodeList = this.filterVisible ? this.elementRef.nativeElement.getElementsByTagName('input') : [];
-        const nodes2: NodeList = this.elementRef.nativeElement.getElementsByTagName('li');
-        this.focusableItems = [...Array.from(nodes), ...Array.from(nodes2)];
-
-
-    }
 
     keyDownDropdownItem(event: KeyboardEvent, item: DropdownItem<any>) {
-        // enter
-        if (event.keyCode === 13) {
-            this.onItemCheckChanged(item);
-            event.cancelBubble = true;
-        } else if (event.keyCode === 32) {// space
+        // enter & space
+        if (event.keyCode === 13 || event.keyCode === 32) {
             this.onItemCheckChanged(item);
             event.cancelBubble = true;
         }
@@ -109,47 +99,6 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
             event.cancelBubble = true;
         }
     }
-
-    openDropdownKeyEvent(event: KeyboardEvent): void {
-        if (event.keyCode === 13 || event.keyCode === 32) {// space, enter
-            this.onToggleDropdown(event);
-            this.focusedItemIndex = -1;
-            this.focusDropdown();
-        } else if (event.altKey && event.keyCode === 40) {// alt + arrow down
-            this.expanded = true;
-            this.focusedItemIndex = -1;
-            event.preventDefault();
-        } else if (event.keyCode === 27 || // escape
-            event.altKey && event.keyCode === 38) { // alt + arrow up
-            this.expanded = false;
-            this.focusDropdown();
-            event.preventDefault();
-        } else if (event.keyCode === 40) { // arrow down
-            this.setFocusOnNextItem();
-            event.preventDefault();
-        } else if (event.keyCode === 38) { // arrow up
-            this.setFocusOnPreviousItem();
-            event.preventDefault();
-        } else if (event.keyCode === 9) { // tab
-            this.expanded = false;
-        }
-    }
-
-    private focusDropdown() {
-        this.elementRef.nativeElement.querySelector('.dropdown--edit').focus();
-    }
-
-    private setFocusOnNextItem() {
-        this.focusedItemIndex = this.focusedItemIndex < this.focusableItems.length - 1 ? this.focusedItemIndex + 1 : 0;
-        this.focusableItems[this.focusedItemIndex].focus();
-
-    }
-
-    private setFocusOnPreviousItem() {
-        this.focusedItemIndex = this.focusedItemIndex > 0 ? this.focusedItemIndex - 1 : this.focusableItems.length - 1;
-        this.focusableItems[this.focusedItemIndex].focus();
-    }
-
 
     ngOnChanges() {
         if (this.formControlName) {
