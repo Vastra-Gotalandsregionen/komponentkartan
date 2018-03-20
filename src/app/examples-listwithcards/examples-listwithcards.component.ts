@@ -2,7 +2,6 @@ import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angula
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow } from 'vgr-komponentkartan';
 import { ExampleUnit, ExampleUnitDetails, ExampleUnitJusteringar } from './unit.model';
-import { ActionPanelComponent } from '../../lib';
 
 @Component({
   selector: 'app-examples-listwithcards',
@@ -383,6 +382,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   }
 
   onExpandedChanged(expanded: boolean, item: ExpandableRow<ExampleUnit, ExampleUnit>) {
+
     if (expanded && !item.previewObject.vald) {
       item.previewObject.vald = true;
       this.updateCardDropdowns(item.previewObject);
@@ -539,7 +539,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   onCardCancel(row: ExpandableRow<ExampleUnit, any>) {
     this.cardLocked = true;
 
-    row.notifyOnCollapse('Redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation', false);
+    row.notifyOnCollapse('Redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation');
   }
 
   onCardSave(event: Event, row: ExpandableRow<ExampleUnit, any>) {
@@ -552,13 +552,11 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.updateRowValues(row);
 
     this.cardLocked = true;
-    if (this.editUnitForm.valid) {
-      row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green', true);
-
-    }
+    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green', true);
   }
 
   onCardUnlocked() {
+
     this.cardLocked = false;
     this.changeDetector.detectChanges();
     if (this.unitVersions) {
@@ -630,7 +628,6 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.newUnit.enhetskod = this.newUnitForm.controls.enhetskod.value;
     this.newUnit.enhet = this.selectedUnit;
     this.newUnit.details.enhetschef = this.newUnitForm.controls.enhetschef.value;
-
     this.newUnit.details.medverkanfamiljecentral = this.newUnitForm.controls.medverkanIFamiljecentral.value;
     this.newUnit.details.versions = [1];
     this.newUnit.isActive = true;
@@ -660,6 +657,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.submitted = false;
   }
 
+
   onPanelExpandedChanged(expanded: boolean) {
     if (!expanded) {
       this.actionPanelClose();
@@ -672,4 +670,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
         row1.previewObject[event.key] < row2.previewObject[event.key] ? (event.direction === SortDirection.Ascending ? -1 : 1) : 0;
     });
   }
+
+
+
 }

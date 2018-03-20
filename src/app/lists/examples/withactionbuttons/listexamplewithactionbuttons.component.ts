@@ -74,10 +74,6 @@ export class ListExampleWithActionButtonsComponent {
         }
     }
 
-    closeModal(modalId: string) {
-        this.modalService.closeDialog(modalId);
-    }
-
     removeSelectedRow() {
         this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
         this.rowToRemove.previewObject.selected = false;
@@ -108,6 +104,10 @@ export class ListExampleWithActionButtonsComponent {
                         (event.direction === SortDirection.Ascending ? -1 : 1) : 0;
             });
         }
+    }
+
+    closeModal(modalId: string) {
+        this.modalService.closeDialog(modalId);
     }
 
 }

@@ -10,23 +10,22 @@
     </div>
     <br>
     <p> Förändras med tema:
-      <strong>Ja</strong> (Knappar)
+      <strong>ja</strong> (Knappar)
     </p>
   </div>
   <div class="docs__examples">
     <div class="row-layout">
       <div>
-        <vgr-button (click)="showOneButtonModal()">En knapp modal1</vgr-button>
+        <vgr-button (click)="showOneButtonModal()">En knapp</vgr-button>
       </div>
       <div>
-        <vgr-button (click)="showTwoButtonModal()">Två knappar med lång text modal3</vgr-button>
+        <vgr-button (click)="showTwoButtonModal()">Två knappar med lång text</vgr-button>
       </div>
       <div>
-        <vgr-button (click)="showThreeButtonModal()">Tre knappar modal4</vgr-button>
+        <vgr-button (click)="showThreeButtonModal()">Tre knappar</vgr-button>
       </div>
       <div class="column-layout">
-
-        <vgr-button (click)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt modal4</vgr-button>
+        <vgr-button (click)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt</vgr-button>
         Modal där avbryt är defaultknapp
       </div>
     </div>
@@ -57,6 +56,24 @@
         Du valde: {{vardval2Answer}}
       </div>
     </div>
+    <br>
+    <h2>HTML</h2>
+    <section [innerHTML]="exampleCodeMarkup" highlight-js-content=".highlight"></section>
+    <h2>TypeScript</h2>
+    <section [innerHTML]="exampleCodeTypescript" highlight-js-content=".highlight"></section>
+    <h2>Resultat</h2>
+    <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>
+    <br>
+    <vgr-modal id="myModalId">
+      <vgr-modal-header>En header från app</vgr-modal-header>
+      <vgr-modal-content>
+        <p>Ändringarna går förlorade om du inte sparar dem</p>
+      </vgr-modal-content>
+      <vgr-modal-footer>
+        <vgr-button [secondary]="true" (click)="doSomething()">Spara</vgr-button>
+        <vgr-button [secondary]="true" default="true" (click)="modalService.closeDialog('myModalId')">Avbryt</vgr-button>
+      </vgr-modal-footer>
+    </vgr-modal>
   </div>
   <div class="docs__api">
     Modal består av två delar. En komponent som läggs ytterst i DOM, med
@@ -129,11 +146,11 @@
   <vgr-modal-content>
     <p>Här kan du välja i en fin dropdownlista.</p>
     <br/>
-    <h3>Välj här nedan</h3>
+    <h3 style="margin-bottom: 10px;">Välj här nedan</h3>
     <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" default="true" (click)="closeModal('modal1')">Knapp</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModal('modal1')">Knapp</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="modal2">
@@ -162,7 +179,7 @@
   </vgr-modal-content>
   <vgr-modal-footer>
     <vgr-button [secondary]="true" (click)="closeModal('modal3')">Jag accepterar</vgr-button>
-    <vgr-button [secondary]="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" default="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="modal4">
@@ -184,7 +201,7 @@
       <br/>
       <p>För att vårdvalet skall bli rätt för invånaren så måste du ange vilken vårdcentral som invånaren har valt.</p>
       <br/>
-      <h3>Välj vårdecentral</h3>
+      <h3 style="margin-bottom: 10px;">Välj vårdcentral</h3>
       <vgr-dropdown formControlName="vardval" [showValidation]="false" [items]="dropdownItems"></vgr-dropdown>
     </vgr-modal-content>
     <vgr-modal-footer>
@@ -198,7 +215,7 @@
   <vgr-modal id="vardvalWithoutTextModal">
     <vgr-modal-header>Välj vårdcentral</vgr-modal-header>
     <vgr-modal-content>
-      <h3>Välj vårdecentral</h3>
+      <h3 style="margin-bottom: 10px;">Välj vårdcentral</h3>
       <vgr-dropdown formControlName="vardval" [showValidation]="false" [items]="dropdownItems"></vgr-dropdown>
     </vgr-modal-content>
     <vgr-modal-footer>

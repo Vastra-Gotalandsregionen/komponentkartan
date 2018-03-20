@@ -94,14 +94,14 @@ export class Examples {
     <vgr-list-column-header text="Yrke" width="5" sortKey="occupation"></vgr-list-column-header>
     <vgr-list-column-header text="Inkomst" align="right" width="5" sortKey="income"></vgr-list-column-header>
   </vgr-list-header>
-  <vgr-list-item *ngFor="let row of peopleRowsSimpleList" [indentContent]="false">
+  <vgr-list-item *ngFor="let row of peopleRowsSimpleList">
     <vgr-list-item-header>
       <vgr-list-column [text]="row.firstName" width="5"></vgr-list-column>
       <vgr-list-column [text]="row.lastName" width="5"></vgr-list-column>
       <vgr-list-column [text]="row.occupation" width="5"></vgr-list-column>
       <vgr-list-column [text]="row.income| number:'2.2-2':'sv-SE'" width="5" align="right"></vgr-list-column>
     </vgr-list-item-header>
-    <vgr-list-item-content>
+    <vgr-list-item-content [indentContent]="false">
       <vgr-expandable-div *ngFor="let row of row.children" [expanded]="false">
         <vgr-expandable-div-header>
           <h2>Barn</h2>
@@ -188,7 +188,7 @@ export class Examples {
   typeScriptAdvancedListMarkup = `import { Component, OnInit } from '@angular/core';
   import {
     ExpandableRow, RowNotification, NotificationType, ModalService,
-    ModalButtonConfiguration, SortChangedArgs, ListHeaderComponent, SortDirection
+    SortChangedArgs, ListHeaderComponent, SortDirection
   } from 'vgr-komponentkartan';
   import { Examples } from '../examples';
   import { HtmlEncodeService } from '../../../html-encode.service';
@@ -224,14 +224,8 @@ export class Examples {
 
       this.peopleRows = this.examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
-      this.peopleRows[0].notification = {
-        message: 'Meddelande: Text', icon: 'vgr-icon-message',
-        type: NotificationType.Permanent
-      } as RowNotification;
-      this.peopleRows[4].notification = {
-        message: 'Personen är inaktiv', icon: 'vgr-icon-exclamation--red',
-        type: NotificationType.Permanent
-      } as RowNotification;
+      this.peopleRows[0].setNotification('Meddelande: Text', 'vgr-icon-message');
+      this.peopleRows[4].setNotification('Personen är inaktiv', 'vgr-icon-exclamation--red');
     }
 
     deleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
@@ -241,6 +235,10 @@ export class Examples {
 
     updateRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
       row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green');
+    }
+
+    updateRow2(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
+      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green', true);
     }
 
     onSortChanged(event: SortChangedArgs) {
@@ -269,6 +267,7 @@ export class Examples {
     </vgr-list-item-header>
     <vgr-list-item-content>
       <vgr-button [secondary]="true" (click)="updateRow(row)">Uppdatera</vgr-button>
+      <vgr-button [secondary]="true" (click)="updateRow2(row)">Uppdatera och rensa meddelande</vgr-button>
       <vgr-button [secondary]="true" (click)="deleteRow(row)">Ta bort</vgr-button>
     </vgr-list-item-content>
   </vgr-list-item>
@@ -297,13 +296,34 @@ export class Examples {
   </vgr-list-item>
 </vgr-list>
 <br>
-<p>Du har valt {{ getSelectedRows() }} rader</p>`;
+<p>Du har valt {{ getSelectedRows() }} rader</p>
+
+<vgr-modal id="notifyDeleteModal">
+  <vgr-modal-header>Info</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Du tog bort detta objektet {{removedObjectString}}</p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="closeModal('notifyDeleteModal')">Stäng</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="removeRowModal">
+  <vgr-modal-header>Ta bort raden</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Vill du verkligen ta bort {{!rowToRemove || rowToRemove.previewObject.firstName}}?</p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button (click)="removeSelectedRow()">Ja</vgr-button>
+    <vgr-button (click)="closeModal('removeRowModal')">Nej</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+`;
 
   typeScriptActionButtonsListMarkup = `import { Component } from '@angular/core';
     import { HtmlEncodeService } from '../../../html-encode.service';
     import { Examples } from '../examples';
     import {
-        ModalService, ModalButtonConfiguration, ExpandableRow,
+        ModalService, ExpandableRow,
         SortDirection, SortChangedArgs
     } from 'vgr-komponentkartan/';
 
@@ -349,28 +369,31 @@ export class Examples {
         }
 
         notifyOnDelete(row: any) {
-          this.modalService.openDialog('Info', 'Du tog bort detta objektet: ' + JSON.stringify(row, null, "\\t"),
-              new ModalButtonConfiguration('Stäng', () => {
-              })
-          );
+          this.removedObjectString = JSON.stringify(row);
+          this.modalService.openDialog('notifyDeleteModal');
         }
 
-        removeRow(row: any) {
-            this.modalService.openDialog('Ta bort raden', 'Vill du verkligen ta bort ' + row.previewObject.firstName + '?',
-                new ModalButtonConfiguration('Ja', () => {
-                    row.notifyOnRemove(row.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
-                    row.previewObject.selected = false;
-                    row.previewObject.deleted = true;
+        removeRow(row: ExpandableRow<ExamplePerson, any>) {
+            this.rowToRemove = row;
+            this.modalService.openDialog('removeRowModal');
+        }
 
-                    /*
-                      Remove for real...
-                    */
-                }),
-                new ModalButtonConfiguration('Nej', () => { }));
+        removeSelectedRow() {
+            this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
+            this.rowToRemove.previewObject.selected = false;
+            this.rowToRemove.previewObject.deleted = true;
+            /*
+              Remove for real...
+            */
+            this.modalService.closeDialog('removeRowModal');
         }
 
         getSelectedRows(): number {
             return this.peopleRows && this.peopleRows.filter(r => r.previewObject.selected).length;
+        }
+
+        closeModal(modalId: string) {
+          this.modalService.closeDialog(modalId);
         }
 
         onSortChanged(event: SortChangedArgs) {

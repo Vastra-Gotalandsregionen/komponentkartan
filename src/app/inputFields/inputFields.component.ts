@@ -132,6 +132,7 @@ export class InputfieldsComponent implements OnInit {
   }
 
   toggleInputType(value: string) {
+    console.log(value);
     if (value === 'Stor') {
       this.isSmall = false;
     } else {

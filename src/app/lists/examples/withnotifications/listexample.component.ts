@@ -58,9 +58,8 @@ export class ListexampleComponent {
   }
 
   updateRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
-    row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green', false);
+    row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green');
   }
-
 
   updateRow2(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
     row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green', true);

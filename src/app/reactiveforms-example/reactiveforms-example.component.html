@@ -30,8 +30,7 @@
                   [items]="dropdownItems"></vgr-dropdown>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-multiselect (selectionChanged)="multiChanged($event)" formControlName="hobbies" [items]="dropdownItemsMulti"
-                  [showValidation]="updateOnBlurForm.controls.hobbies.touched"></vgr-dropdown-multiselect>
+                <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti" [showValidation]="updateOnBlurForm.controls.interests.touched"></vgr-dropdown-multiselect>
               </vgr-title-value>
               <vgr-title-value title="Du måste kryssa i mig!">
                 <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>
@@ -52,7 +51,7 @@
               </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
-            <vgr-button [disabled]="false" (click)="onBlurFormSubmit()">Skapa användare</vgr-button>
+            <vgr-button (click)="onSubmitUpdateOnBlurForm()" [disabled]="false">Skapa användare</vgr-button>
           </form>
         </vgr-card-column>
         <vgr-card-column>
@@ -79,7 +78,7 @@
                 <vgr-dropdown formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'" [showValidation]="formSubmitted" [items]="dropdownItems"></vgr-dropdown>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-multiselect formControlName="hobbies" [items]="dropdownItemsMulti" [showValidation]="formSubmitted"></vgr-dropdown-multiselect>
+                <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti" [showValidation]="formSubmitted"></vgr-dropdown-multiselect>
               </vgr-title-value>
               <vgr-title-value title="Du måste kryssa i mig!">
                 <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>
@@ -130,7 +129,7 @@
                   [items]="dropdownItems"></vgr-dropdown>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-multiselect formControlName="hobbies" [items]="dropdownItemsMulti" [showValidation]="updateOnChangeForm.controls.hobbies.dirty"></vgr-dropdown-multiselect>
+                <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti" [showValidation]="updateOnChangeForm.controls.interests.dirty"></vgr-dropdown-multiselect>
               </vgr-title-value>
               <vgr-title-value title="Du måste kryssa i mig!">
                 <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>

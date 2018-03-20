@@ -15,6 +15,8 @@ import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
 
 // Pipe
 import { UnitFilterPipe } from './examples-listwithcards/UnitFilterPipe';
+import { UnitFilter2Pipe } from './examples-listwithlists/UnitFilterPipe';
+
 
 // Domain
 import { KomponentkartanApplicationComponent } from './app.component';
@@ -31,6 +33,8 @@ import { FormattemplateComponent } from './formattemplate/formattemplate.compone
 import { HeadersComponent } from './headers/headers.component';
 import { ListsComponent } from './lists/lists.component';
 import { LockbuttonComponent } from './lockbutton/lockbutton.component';
+import { ClosebuttonComponent } from './closebutton/closebutton.component';
+
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { PanelsComponent } from './panels/panels.component';
 import { RadiobuttonsComponent } from './radiobuttons/radiobuttons.component';
@@ -53,20 +57,16 @@ import { HtmlEncodeService } from './html-encode.service';
 import { SizesComponent } from './sizes/sizes.component';
 import { MenuComponent } from './menu/menu.component';
 import { ExpandableDivComponent } from './expandable-div/expandable-div.component';
+import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
 
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
+import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
+import { UnitService } from './examples-listwithlists/unitService';
+
 import { IconsComponent } from './icons/icons.component';
 
 @NgModule({
-    imports: [
-        KomponentkartanModule,
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HighlightJsModule,
-        RouterModule.forRoot(appRoutes)
-    ],
     declarations: [
         KomponentkartanApplicationComponent,
         InputfieldsComponent,
@@ -103,17 +103,28 @@ import { IconsComponent } from './icons/icons.component';
         ExpandableDivComponent,
         ListexamplewithexpandabledivComponent,
         ExamplesListwithcardsComponent,
+        ExamplesListwithlistsComponent,
         IconsComponent,
-        UnitFilterPipe
+        UnitFilterPipe,
+        UnitFilter2Pipe,
+        ActionPanelsComponent,
+        ClosebuttonComponent
+    ],
+    imports: [
+        KomponentkartanModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HighlightJsModule,
+        RouterModule.forRoot(appRoutes)
     ],
     exports: [UnitFilterPipe],
     providers: [
         CityService,
         HighlightJsService,
-        HtmlEncodeService
+        HtmlEncodeService,
+        UnitService
     ],
-    schemas: [NO_ERRORS_SCHEMA],
-
     bootstrap: [KomponentkartanApplicationComponent]
 })
 export class AppModule { }
