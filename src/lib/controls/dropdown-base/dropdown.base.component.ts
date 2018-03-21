@@ -5,18 +5,21 @@ import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelect
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { AbstractControl } from '@angular/forms';
+import { Guid } from '../../utils/guid';
 
 export abstract class DropdownBaseComponent {
 
     @ViewChild(FilterTextboxComponent) filterTextboxComponent: FilterTextboxComponent;
     @ViewChild(PerfectScrollbarComponent) scrollbarComponent: PerfectScrollbarComponent;
 
+
+
     @Input() showValidation = true;
     @Input() formControlName?: string;
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
-    @Input() @HostBinding('class.readonly') readonly: boolean;
-    @Input() @HostBinding('class.disabled') disabled: boolean;
+    @Input() @HostBinding('class.readonly') readonly: boolean = false;
+    @Input() @HostBinding('class.disabled') disabled: boolean = false;
     @HostBinding('class.dropdown') dropdownClass = true;
 
     @HostBinding('class.validation-error--active') get errorClass() {
@@ -37,12 +40,15 @@ export abstract class DropdownBaseComponent {
     scrollbarConfig: PerfectScrollbarConfig;
     dimmerTopVisible: boolean;
     dimmerBottomVisible: boolean;
+    focusableItems = [];
 
     protected filterLimit = 20;
     protected filterPipe: FilterPipe;
     protected preventCollapse: boolean;
-
+    public labelledbyid: string = Guid.newGuid();
     protected _items: DropdownItem<any>[];
+    protected focusedItemIndex = -1;
+
     @Input() set items(value: DropdownItem<any>[]) {
         // The scrollbar component would not refresh when items were changed unless we added a timeout...
         // Ugly solution for sure, but until a better one comes along it will have to do :(
@@ -70,7 +76,6 @@ export abstract class DropdownBaseComponent {
     }
 
     constructor(protected elementRef: ElementRef) {
-        // super();
         this.expanded = false;
         this.filterVisible = false;
         this.filterPipe = new FilterPipe();
@@ -115,10 +120,17 @@ export abstract class DropdownBaseComponent {
     filterItems(filterValue: string) {
         this.filter = filterValue;
         this.updateScrolled();
+
+        setTimeout(() => {
+            this.setFocusableItems();
+        }, 100);
+
         // Scroll to top when filter is changed
         $('.container.ps').scrollTop(0);
         this.dimmerBottomVisible = false;
     }
+
+
 
     updateScrolled() {
         if (!this.items) {
@@ -127,7 +139,16 @@ export abstract class DropdownBaseComponent {
         const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
     }
 
-    onDropdownMouseDown(event: Event) {
+
+    setFocusableItems() {
+        const nodes: NodeList = this.filterVisible ? this.elementRef.nativeElement.getElementsByTagName('input') : [];
+        const nodes2: NodeList = this.elementRef.nativeElement.getElementsByTagName('li');
+        this.focusableItems = [...Array.from(nodes), ...Array.from(nodes2)];
+
+
+    }
+
+    onToggleDropdown(event: Event) {
         if (this.readonly || this.disabled) {
             return;
         }
@@ -138,6 +159,56 @@ export abstract class DropdownBaseComponent {
             this.toggleExpand(event);
         }
     }
+
+    openDropdownKeyEvent(event: KeyboardEvent): void {
+        this.preventCollapse = false;
+        if (event.keyCode === 13 || event.keyCode === 32) {// space, enter
+            this.onToggleDropdown(event);
+            this.focusedItemIndex = -1;
+            this.focusDropdown();
+            event.preventDefault();
+        } else if (event.altKey && event.keyCode === 40) {// alt + arrow down
+            this.expanded = true;
+            this.focusedItemIndex = -1;
+            event.preventDefault();
+        } else if (event.keyCode === 27 || // escape
+            event.altKey && event.keyCode === 38) { // alt + arrow up
+            this.expanded = false;
+            this.focusDropdown();
+            event.preventDefault();
+        } else if (event.keyCode === 40) { // arrow down
+            this.setFocusOnNextItem();
+            event.preventDefault();
+        } else if (event.keyCode === 38) { // arrow up
+            this.setFocusOnPreviousItem();
+            event.preventDefault();
+        } else if (event.keyCode === 9) { // tab
+            this.expanded = false;
+        }
+    }
+
+    filterTextKeyDown(event: KeyboardEvent): void {
+        if (event.keyCode === 32) {
+            event.cancelBubble = true;
+        }
+    }
+
+
+    private focusDropdown() {
+        this.elementRef.nativeElement.querySelector('.dropdown--edit').focus();
+    }
+
+    private setFocusOnNextItem() {
+        this.focusedItemIndex = this.focusedItemIndex < this.focusableItems.length - 1 ? this.focusedItemIndex + 1 : 0;
+        this.focusableItems[this.focusedItemIndex].focus();
+
+    }
+
+    private setFocusOnPreviousItem() {
+        this.focusedItemIndex = this.focusedItemIndex > 0 ? this.focusedItemIndex - 1 : this.focusableItems.length - 1;
+        this.focusableItems[this.focusedItemIndex].focus();
+    }
+
 
     private toggleExpand(event: Event) {
         const target = event.target || event.srcElement || event.currentTarget;

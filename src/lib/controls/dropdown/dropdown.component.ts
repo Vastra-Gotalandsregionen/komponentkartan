@@ -22,7 +22,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
     }]
 })
 
-export class DropdownComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
+export class DropdownComponent extends DropdownBaseComponent implements OnChanges, AfterViewInit, ControlValueAccessor {
     @Output() selectedChanged = new EventEmitter<DropdownItem<any>>();
     @Input() noItemSelectedLabel: string;
 
@@ -41,10 +41,17 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         if (this.formControlName && this.controlContainer) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
-
         this.filterVisible = this.items && this.items.length > this.filterLimit;
+
+        this.setFocusableItems();
         this.updateScrolled();
     }
+
+    ngAfterViewInit() {
+        this.setFocusableItems();
+    }
+
+
 
     onLeave() {
         this.hasFocus = false;
@@ -89,10 +96,30 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     onTouched() { }
 
+    openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+        // enter
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.showAllItems();
+            event.preventDefault();
+            event.cancelBubble = true;
+        }
+    }
+
+    keyDownDropdownItem(event: KeyboardEvent, item: DropdownItem<any>) {
+        // enter, tab & space
+        if (event.keyCode === 13 || event.keyCode === 9 || event.keyCode === 32) {
+            this.selectItem(item);
+        }
+    }
+
     showAllItems() {
         this.preventCollapse = true;
         this.filter = '';
         this.filterTextboxComponent.clear();
+
+        this.setFocusableItems();
+        this.focusedItemIndex = 1;
+        this.focusableItems[this.focusedItemIndex].focus();
     }
 
     selectItem(item: DropdownItem<any>) {
@@ -110,7 +137,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         this.onChange(item.value);
     }
 
-    onMouseEnter(item: DropdownItem<any>) {
+    onEnterItem(item: DropdownItem<any>) {
         this.items.forEach(x => x.marked = false);
 
         if (this.showAllItem) {
@@ -120,7 +147,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
         item.marked = true;
     }
 
-    onMouseLeave(item: DropdownItem<any>) {
+    onLeaveItem(item: DropdownItem<any>) {
         item.marked = false;
         if (this.selectedItem) {
             this.selectedItem.marked = true;

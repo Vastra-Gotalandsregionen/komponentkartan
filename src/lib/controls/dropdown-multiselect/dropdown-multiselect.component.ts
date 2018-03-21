@@ -19,13 +19,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
     }]
 })
 
-export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor {
+export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor, AfterViewInit {
 
     @Input() showAllItemText: string;
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string;
     dropdownLabel: string;
     selectAllItemsMarked: boolean;
+
+
 
     @Output() selectionChanged = new EventEmitter<DropdownItem<any>[]>();
     get filterActive(): boolean {
@@ -58,6 +60,45 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.noItemSelectedLabel = 'Välj';
         this.showAllItemText = 'Visa alla';
         this.selectAllItemText = 'Välj alla';
+    }
+
+    ngAfterViewInit() {
+        this.setFocusableItems();
+    }
+
+
+    keyDownDropdownItem(event: KeyboardEvent, item: DropdownItem<any>) {
+        // enter & space
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.onItemCheckChanged(item);
+            event.preventDefault();
+            event.cancelBubble = true;
+        }
+    }
+
+    openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+        // enter & space
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.clearFilter();
+            event.preventDefault();
+            setTimeout(() => {
+                this.setFocusableItems();
+                this.focusedItemIndex = 1;
+                this.focusableItems[this.focusedItemIndex].focus();
+
+            }, 10);
+
+            event.cancelBubble = true;
+        }
+    }
+
+    openDropdownSelectAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+        // enter & space
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            this.selectAllItems(!this.selectAllItemsChecked);
+            event.preventDefault();
+            event.cancelBubble = true;
+        }
     }
 
     ngOnChanges() {
@@ -109,6 +150,10 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.filter = '';
         this.filterTextboxComponent.clear();
         this.preventCollapse = true;
+
+        this.setFocusableItems();
+        this.focusedItemIndex = 1;
+        this.focusableItems[this.focusedItemIndex].focus();
     }
 
     onItemCheckChanged(item: DropdownItem<any>) {
@@ -124,6 +169,15 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
     onItemClicked(item: DropdownItem<any>) {
         this.preventCollapse = true;
+    }
+
+    markItem(item: DropdownItem<any>) {
+        this.items.forEach(x => x.marked = false);
+        item.marked = true;
+    }
+
+    unMarkItem(item: DropdownItem<any>) {
+        item.marked = false;
     }
 
     selectAllItems(selected: boolean) {
