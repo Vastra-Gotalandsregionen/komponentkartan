@@ -58,6 +58,7 @@ export class ListExampleWithActionButtonsComponent {
 
     notifyOnDelete(row: any) {
         this.removedObjectString = JSON.stringify(row, null, '\t');
+        this.peopleRows = this.peopleRows.filter(i => i !== row);
         this.modalService.openDialog('notifyDeleteModal');
     }
 

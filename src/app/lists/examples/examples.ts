@@ -370,6 +370,7 @@ export class Examples {
 
         notifyOnDelete(row: any) {
           this.removedObjectString = JSON.stringify(row);
+          this.peopleRows = this.peopleRows.filter(i => i !== row);
           this.modalService.openDialog('notifyDeleteModal');
         }
 

@@ -116,12 +116,6 @@ export class ExamplesListwithlistsComponent {
     this.rowToRemove.previewObject.vald = false;
     this.rowToRemove.previewObject.deleted = true;
     this.modalService.closeDialog('deleteRowModal');
-    console.log('listData', this.listData);
-  }
-
-  removeDataFromList(row: ExpandableRow<ExampleUnit, any>) {
-    this.listData = this.listData.filter(i => i !== row);
-    console.log('listData', this.listData);
   }
 
   removeSelectedRows() {
