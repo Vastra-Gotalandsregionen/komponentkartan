@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 2.2.0
 - Updated dropdownmulti to return full items instead of only displayname
+- dropdown-components are now WCAG-compatible
 
 ## 2.1.2
 - New component vgr-list-column-header-checkbox for checkboxes in list headers
