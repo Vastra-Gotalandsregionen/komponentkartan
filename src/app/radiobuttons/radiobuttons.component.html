@@ -1,93 +1,93 @@
 <app-component-docs [componentName]="'Radio group'">
-    <div class="docs__overview">
-        <p>
-            <code>
+  <div class="docs__overview">
+    <p>
+      <code>
         &lt;vgr-radio-group&gt;</code>
-        </p>
-        <br>
-        <p>En radiogroup innehåller flera radioknappar, där bara ett alternativ är valt åt gången, val kan vara förvalda och/eller
-            inaktiva. Vid val av alternativ triggas eventet
-            <code>selectedChanged</code>. Valbara items är av typen
-            <code>SelectableItem</code>. Det är genom att sätta properties på dessa objekt som man styr beteendet.
-            <br>
-            <vgr-radio-group [options]="[{value:'1', displayName:'Alternativ 1', selected:true},{value:'2', displayName:'Alternativ 2'}]">
-            </vgr-radio-group>
-        </p>
-        <br>
-        <p> Förändras med tema:
-            <strong>Nej</strong>
-        </p>
+    </p>
+    <br>
+    <p>En radiogroup innehåller flera radioknappar, där bara ett alternativ är valt åt gången, val kan vara förvalda och/eller
+      inaktiva. Vid val av alternativ triggas eventet
+      <code>selectedChanged</code>. Valbara items är av typen
+      <code>SelectableItem</code>. Det är genom att sätta properties på dessa objekt som man styr beteendet.
+      <br>
+      <vgr-radio-group [options]="[{value:'1', displayName:'Alternativ 1', selected:true},{value:'2', displayName:'Alternativ 2'}]">
+      </vgr-radio-group>
+    </p>
+    <br>
+    <p> Förändras med tema:
+      <strong>nej</strong>
+    </p>
+  </div>
+  <div class="docs__examples">
+    <div>
+      <vgr-radio-group [options]="[{value:'Förvald', displayName:'Förvald', selected:true},{value:'Ej förvald', displayName:'Ej förvald'}, {value:'3Inaktiv', displayName:'Inaktiv', disabled:true}]"
+        (selectedChanged)="onSelectedRadioOptionChanged($event)">
+      </vgr-radio-group>
+
+      <br>
+      <br>
+      <br>
+
+
+      <vgr-radio-group [options]="options" (selectedChanged)="onSelectedRadioOptionChanged($event)">
+      </vgr-radio-group>
+      <vgr-button (click)="rensaVal()">Rensa alternativ</vgr-button>
+      <br>
+
+      <br>
+      <br>
+      <div>Du har valt alternativ: {{selectedOption}}</div>
+
+
     </div>
-    <div class="docs__examples">
-        <div>
-            <vgr-radio-group [options]="[{value:'Förvald', displayName:'Förvald', selected:true},{value:'Ej förvald', displayName:'Ej förvald'}, {value:'3Inaktiv', displayName:'Inaktiv', disabled:true}]"
-                (selectedChanged)="onSelectedRadioOptionChanged($event)">
-            </vgr-radio-group>
+    <br>
+    <br> Under "kodexempel" finns exempel på hur radiogroup-komponenten kan användas i Angular Reactive Forms:
+    <br>
+    <a href="/reactiveformsexample">Reactive Forms exempel</a>
+  </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>
 
-           <br>
-           <br>
-           <br>
+          options : SelectableItem[]
+        </td>
+        <td>Samling av
+          <code>SelectableItem</code> som utgör valbara alternativ</td>
+        <td>[options]="[item1, item2, ...]"</td>
+      </tr>
+      <tr>
+        <td>
+          disabled : boolean
+        </td>
+        <td>Defaultvärde false. Sätter hela gruppen till disabled</td>
+        <td>[disabled]="true"</td>
+      </tr>
+      <tr>
+        <td> selectedChanged : EventEmitter&lt;SelectableItem&gt;</td>
+        <td>Event som triggas när man väljer ett nytt alternativ i radiogruppen</td>
+        <td>(selectedChanged)="onSelectedRadioOptionChanged($event)"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    <p>
+      <code>&lt;vgr-radiogroup&gt;</code> har en intern div vars roll är satt till radiogroup respektive radio för radioknapparna.
+      Förutom rollen så används attributen: attr.aria-checked (kryssad/ej ikryssad) och attr.aria-labelledby (pekning till
+      interna label i
+      <code>&lt;vgr-radiogroup&gt;</code>)
 
-
-            <vgr-radio-group [options]="options"
-            (selectedChanged)="onSelectedRadioOptionChanged($event)">
-        </vgr-radio-group>
-        <vgr-button (click)="rensaVal()" >Rensa alternativ</vgr-button>
-<br>
-
-<br>
-<br>
-        <div>Du har valt alternativ: {{selectedOption}}</div>
-        
-
-        </div>
-        <br>
-        <br> Under "kodexempel" finns exempel på hur radiogroup-komponenten kan användas i Angular Reactive Forms:
-        <br>
-        <a href="/reactiveformsexample">Reactive Forms exempel</a>
-    </div>
-    <div class="docs__api">
-        <table class="property-table">
-            <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-            </tr>
-            <tr>
-                <td>
-
-                    options : SelectableItem[]
-                </td>
-                <td>Samling av
-                    <code>SelectableItem</code> som utgör valbara alternativ</td>
-                <td>[options]="[item1, item2, ...]"</td>
-            </tr>
-            <tr>
-                <td>
-                    disabled : boolean
-                </td>
-                <td>Defaultvärde false. Sätter hela gruppen till disabled</td>
-                <td>[disabled]="true"</td>
-            </tr>
-            <tr>
-                <td> selectedChanged : EventEmitter&lt;SelectableItem&gt;</td>
-                <td>Event som triggas när man väljer ett nytt alternativ i radiogruppen</td>
-                <td>(selectedChanged)="onSelectedRadioOptionChanged($event)"</td>
-            </tr>
-        </table>
-    </div>
-    <div class="docs__wcag">
-        <p>
-            <code>&lt;vgr-radiogroup&gt;</code> har en intern div vars roll är satt till radiogroup respektive radio för radioknapparna. Förutom rollen så används
-            attributen: attr.aria-checked (kryssad/ej ikryssad) och attr.aria-labelledby (pekning till interna label i
-            <code>&lt;vgr-radiogroup&gt;</code>)
-
-        </p>
-        <br>
-        <p>
-            Vid tab in till radiogruppen så gäller nedan regler:
-            <br> - Om ingen av radioknapparna är valda så ställs in fokus på den första radioknappen i gruppen
-            <br> - Om en radioknapp är vald ställs fokus på den valda knappen
-        </p>
-    </div>
+    </p>
+    <br>
+    <p>
+      Vid tab in till radiogruppen så gäller nedan regler:
+      <br> - Om ingen av radioknapparna är valda så ställs in fokus på den första radioknappen i gruppen
+      <br> - Om en radioknapp är vald ställs fokus på den valda knappen
+    </p>
+  </div>
 </app-component-docs>

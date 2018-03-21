@@ -20,7 +20,7 @@
               </p>
               <br>
               <p> Förändras med tema:
-                <strong>Nej</strong>
+                <strong>nej</strong>
               </p>
             </div>
           </vgr-list-item-content>
@@ -83,11 +83,19 @@
                 <td>Anger om raden skall vara expanderad eller inte.</td>
                 <td>[expanded]="false"</td>
               </tr>
+
               <tr>
                 <td>notification : RowNotification</td>
                 <td>Ger möjligheten att lägga en notifiering på raden. En
-                  <code>RowNotification</code> har en icon property (string) och en typ. Notifieringar kan visas hela tiden. Ikoner
-                  att välja mellan finns angivna på sidan för ikoner.
+                  <code>RowNotification</code> har en icon property (string), removeWhenDone property (boolean) och en typ.
+                  <br>
+                  <i>-Icon</i> finns angivna på sidan för
+                  <a href="/icons">ikoner</a>
+                  <br>
+                  <i>-RemoveWhenDone</i> anger om notifieringen ska försvinna efter kollapsanimationen för notifiering är klar.
+                  Default är att notifieringen som är permanent är kvar efter att en annan notifering visats.
+                  <br>
+                  <i>-Notification.Type</i> att välja på är:
                   <code>NotificationType.Permanent</code>, visas i samband med att raden minimeras -
                   <code>NotificationType.ShowOnCollapse</code> eller när raden tas bort -
                   <code>NotificationType.ShowOnRemove</code>
@@ -143,9 +151,9 @@
                 <th style="width:600px">Beskrivning</th>
               </tr>
               <tr>
-                <td>
-                  Behållare för att ange innehåll i ett list-item. Har inga properties.
-                </td>
+                <td>indentContent: boolean</td>
+                <td>Anger om innehållet ska vara indenterat eller inte. Default är true.</td>
+                <td>[indentContent]="false"</td>
               </tr>
             </table>
           </vgr-list-item-content>

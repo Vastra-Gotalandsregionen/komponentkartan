@@ -14,6 +14,7 @@ import { HeadersComponent } from './headers/headers.component';
 import { ListsComponent } from './lists/lists.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LockbuttonComponent } from './lockbutton/lockbutton.component';
+import { ClosebuttonComponent } from './closebutton/closebutton.component';
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { PanelsComponent } from './panels/panels.component';
 import { RadiobuttonsComponent } from './radiobuttons/radiobuttons.component';
@@ -35,14 +36,19 @@ import { ReactiveformsexampleComponent } from './reactiveforms-example/reactivef
 import { ExpandableDivComponent } from './expandable-div/expandable-div.component';
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
+import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
+
 import { IconsComponent } from './icons/icons.component';
+import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
 
 export const appRoutes: Routes = [
 
     { path: 'inputFields', component: InputfieldsComponent },
+    { path: 'icons', component: IconsComponent },
     { path: 'textbuttons', component: TextbuttonsComponent },
     { path: 'radioButtons', component: RadiobuttonsComponent },
     { path: 'checkbox', component: CheckboxComponent },
+    { path: 'closebutton', component: ClosebuttonComponent },
     { path: 'colours', component: ColoursComponent },
     { path: 'dropdownmultiselect', component: DropdownmultiselectComponent },
     { path: 'dropdowns', component: DropdownsComponent },
@@ -72,6 +78,7 @@ export const appRoutes: Routes = [
     { path: 'expandablediv', component: ExpandableDivComponent },
     { path: 'listexample-expandable-div', component: ListexamplewithexpandabledivComponent },
     { path: 'examples-listwithcards', component: ExamplesListwithcardsComponent },
-    { path: 'icons', component: IconsComponent },
+    { path: 'examples-listwithlists', component: ExamplesListwithlistsComponent },
+    { path: 'actionPanels', component: ActionPanelsComponent },
     { path: '**', redirectTo: '/' }
 ];

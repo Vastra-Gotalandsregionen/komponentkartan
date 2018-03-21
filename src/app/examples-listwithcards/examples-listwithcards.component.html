@@ -18,6 +18,7 @@
         <vgr-dropdown [items]="newUnits" (selectedChanged)="onSelectedChangedUnit($event)"></vgr-dropdown>
         <vgr-button secondary=true [disabled]=!itemSelected (click)="onNewUnitClick()">Lägg till</vgr-button>
       </div>
+
     </div>
     <vgr-card *ngIf=addNewUnit>
       <vgr-card-header>
@@ -158,7 +159,7 @@
         <vgr-card-section [title]=" 'Ersättningsgrundande information'" [expanded]="true" [readonly]="newCardLocked">
           <form [formGroup]="newUnitForm">
             <vgr-title-value-layout>
-              <vgr-title-value [title]=" 'Medverkan i familjecentral'" [slim]="newCardLocked">
+              <vgr-title-value [title]=" 'Medverkan i familjecentral* '" [slim]="newCardLocked">
                 <vgr-dropdown formControlName="medverkanIFamiljecentral" [items]="exempelMedverkanIfamiljecentral" [showValidation]="newUnitForm.controls.medverkanIFamiljecentral.touched || submitted"
                   [noItemSelectedLabel]=" 'Välj'" [readonly]="newCardLocked"></vgr-dropdown>
               </vgr-title-value>
@@ -325,7 +326,7 @@
                   <vgr-card-section [title]=" 'Ersättningsgrundande information'" [expanded]="false" [readonly]="cardLocked">
                     <form [formGroup]="editUnitForm">
                       <vgr-title-value-layout>
-                        <vgr-title-value [title]=" 'Medverkan i familjecentral'" [slim]="cardLocked">
+                        <vgr-title-value [title]=" 'Medverkan i familjecentral*'" [slim]="cardLocked">
                           <vgr-dropdown formControlName="medverkanIFamiljecentral" [items]="exempelMedverkanIfamiljecentral" [showValidation]="editUnitForm.controls.medverkanIFamiljecentral.touched || submitted"
                             [noItemSelectedLabel]=" 'Välj'" [readonly]="cardLocked"></vgr-dropdown>
                         </vgr-title-value>

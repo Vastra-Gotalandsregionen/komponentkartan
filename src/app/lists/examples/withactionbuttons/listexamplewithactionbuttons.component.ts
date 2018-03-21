@@ -58,6 +58,7 @@ export class ListExampleWithActionButtonsComponent {
 
     notifyOnDelete(row: any) {
         this.removedObjectString = JSON.stringify(row, null, '\t');
+        this.peopleRows = this.peopleRows.filter(i => i !== row);
         this.modalService.openDialog('notifyDeleteModal');
     }
 
@@ -72,10 +73,6 @@ export class ListExampleWithActionButtonsComponent {
         } else {
             return this.peopleRows && this.peopleRows.filter(r => r.previewObject.selected).length;
         }
-    }
-
-    closeModal(modalId: string) {
-        this.modalService.closeDialog(modalId);
     }
 
     removeSelectedRow() {
@@ -108,6 +105,10 @@ export class ListExampleWithActionButtonsComponent {
                         (event.direction === SortDirection.Ascending ? -1 : 1) : 0;
             });
         }
+    }
+
+    closeModal(modalId: string) {
+        this.modalService.closeDialog(modalId);
     }
 
 }
