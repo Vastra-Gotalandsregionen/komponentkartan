@@ -1,0 +1,37 @@
+@import 'partials/_settings.sizes.scss';
+.loader-container {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.action-panel-buttons {
+  position: absolute;
+  right: $margin--slim;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: $margin--slim;
+  padding-bottom: $margin--slim;
+}
+
+// /deep/ .adjust-chevron .expandable-div-header .expandable-div-chevron {
+//   top: -3px;
+// }
+@media screen and (min-width: $desktop-width--medium) {
+  .loader-container {
+    padding-top: 40px;
+  }
+  .button-container {
+    padding-right: $margin--fat;
+    padding-bottom: $margin--fat;
+  }
+  .action-panel-buttons {
+    right: $margin--fat;
+  } // /deep/ .adjust-chevron .expandable-div-header .expandable-div-chevron {
+  //   top: 0px;
+  // }
+}

@@ -1,55 +1,56 @@
 <app-component-docs [componentName]="'Loader'">
-    <div class="docs__overview">
-        <p>
-            <code>
-        &lt;vgr-loader&gt;</code> används för att visa att en åtgärd pågår. Loader går alltid fulla varv innan stopp. Den finns i två olika storlekar, den sätts av via
-            <code>small</code> och är default false.
-            <br>
-            <br>
-            <vgr-loader [active]="true"></vgr-loader>
-        </p>
-        <br>
-        <p> Förändras med tema:
-            <strong>Nej</strong>
-        </p>
+  <div class="docs__overview">
+    <p>
+      <code>
+        &lt;vgr-loader&gt;</code> används för att visa att en åtgärd pågår. Loader går alltid fulla varv innan stopp. Den
+      finns i två olika storlekar, den sätts av via
+      <code>small</code> och är default false.
+      <br>
+      <br>
+      <vgr-loader [active]="true"></vgr-loader>
+    </p>
+    <br>
+    <p> Förändras med tema:
+      <strong>nej</strong>
+    </p>
+  </div>
+  <div class="docs__examples">
+    <div class="row-layout">
+      <div style="align-self:middle">
+        <span>Stor storlek</span>
+        <vgr-loader [active]="actionInProgress"></vgr-loader>
+      </div>
+      <div style="align-self:middle">
+        <span>Liten storlek</span>
+        <vgr-loader [active]="actionInProgress" [small]="true"></vgr-loader>
+      </div>
     </div>
-    <div class="docs__examples">
-        <div class="row-layout">
-            <div style="align-self:middle">
-                <span>Stor storlek</span>
-                <vgr-loader [active]="actionInProgress"></vgr-loader>
-            </div>
-            <div style="align-self:middle">
-                <span>Liten storlek</span>
-                <vgr-loader [active]="actionInProgress" [small]="true"></vgr-loader>
-            </div>
-        </div>
-        <br>
-        <div style="height:50px">
-            <vgr-button (click)="actionInProgress=!actionInProgress">{{buttonText}}</vgr-button>
-        </div>
+    <br>
+    <div style="height:50px">
+      <vgr-button (click)="actionInProgress=!actionInProgress">{{buttonText}}</vgr-button>
     </div>
-    <div class="docs__api">
-        <table class="property-table ">
-            <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-            </tr>
-            <tr>
-                <td>active : boolean</td>
-                <td>Anger om loader snurrar eller ej. Minsta tid som loader visas är 1 sekund. Inaktivering kan därför fördröjas.</td>
-                <td>[active]="true"</td>
-            </tr>
-            <tr>
-                <td>small : boolean</td>
-                <td>Visar loadern i liten storlek</td>
-                <td>[small]="true"</td>
-            </tr>
+  </div>
+  <div class="docs__api">
+    <table class="property-table ">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>active : boolean</td>
+        <td>Anger om loader snurrar eller ej. Minsta tid som loader visas är 1 sekund. Inaktivering kan därför fördröjas.</td>
+        <td>[active]="true"</td>
+      </tr>
+      <tr>
+        <td>small : boolean</td>
+        <td>Visar loadern i liten storlek</td>
+        <td>[small]="true"</td>
+      </tr>
 
-        </table>
-    </div>
-    <div class="docs__wcag">
-        <i>Under utveckling</i>
-    </div>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    <i>Under utveckling</i>
+  </div>
 </app-component-docs>

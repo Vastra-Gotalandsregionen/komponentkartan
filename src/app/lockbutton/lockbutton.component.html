@@ -1,59 +1,61 @@
 <app-component-docs [componentName]="'lock button'">
-    <div class="docs__overview">
-        <p>
-            <code>
+  <div class="docs__overview">
+    <p>
+      <code>
         &lt;vgr-lock-button&gt;</code>
-        </p>
-        <br>
-        <p>Låsknappen är en "toggle-knapp", som kan vara låst eller upplåst.
+    </p>
+    <br>
+    <p>Låsknappen är en "toggle-knapp", som kan vara låst eller upplåst.
 
-        </p>
-        <div style="height:35px; margin-top:20px; margin-bottom:20px">
-            <vgr-lock-button></vgr-lock-button>
-        </div>
-        <p> Förändras med tema:
-            <strong>Ja</strong> (bakgrundsfärg)
-        </p>
+    </p>
+    <div style="height:35px; margin-top:20px; margin-bottom:20px">
+      <vgr-lock-button></vgr-lock-button>
     </div>
-    <div class="docs__examples">
-        <vgr-lock-button (lockChanged)="lockMessage='Lås 1 ' + ($event ? 'låst':'upplåst')"></vgr-lock-button>
-        <vgr-lock-button [unlocked]="true" (lockChanged)="lockMessage='Lås 2 ' + ($event ? 'låst':'upplåst')"></vgr-lock-button>
-        <vgr-lock-button [disabled]="true"></vgr-lock-button>
-        <vgr-lock-button [disabled]="true" [unlocked]="true"></vgr-lock-button>
-        <br>
-        <br>
-        <span>Senaste händelse:&nbsp;
+    <p> Förändras med tema:
+      <strong>ja</strong> (bakgrundsfärg)
+    </p>
+  </div>
+  <div class="docs__examples">
+    <vgr-lock-button (lockChanged)="lockMessage='Lås 1 ' + ($event ? 'låst':'upplåst')"></vgr-lock-button>
+    <vgr-lock-button [unlocked]="true" (lockChanged)="lockMessage='Lås 2 ' + ($event ? 'låst':'upplåst')"></vgr-lock-button>
+    <vgr-lock-button [disabled]="true"></vgr-lock-button>
+    <vgr-lock-button [disabled]="true" [unlocked]="true"></vgr-lock-button>
+    <br>
+    <br>
+    <span>Senaste händelse:&nbsp;
       <strong>{{lockMessage}}</strong>
     </span>
-    </div>
-    <div class="docs__api">
-        <table class="property-table">
-            <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-            </tr>
-            <tr>
-                <td>unlocked : boolean</td>
-                <td>Om knappen ska vara upplåst. True/false, default är false.</td>
-                <td>[unlocked]="true"</td>
-            </tr>
-            <tr>
-                <td>disabled : boolean</td>
-                <td>Om knappen ska vara inaktiverad.</td>
-                <td>[disabled]="true"</td>
-            </tr>
-            <tr>
-                <td>onLockChanged : EventEmitter&lt;boolean&gt;</td>
-                <td>Event som triggas när knappen låses eller låses upp.
-                    <code>True</code> innebär låst,
-                    <code>false</code> upplåst.</td>
-                <td></td>
-            </tr>
-        </table>
-    </div>
-    <div class="docs__wcag">
-        <code>&lt;vgr-lock-button &gt;</code> har en intern div vars roll är satt till button. Förutom rollen så används attributeten: aria-disabled (inaktiv/aktiv), aria-label (lås/lås upp). Läs mer om hur fokus ska flyttas efter knappaktivering på dokumentationssidan
-        för <a href="../textbuttons">buttons</a> under Tillgänglighet.
-    </div>
+  </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>unlocked : boolean</td>
+        <td>Om knappen ska vara upplåst. True/false, default är false.</td>
+        <td>[unlocked]="true"</td>
+      </tr>
+      <tr>
+        <td>disabled : boolean</td>
+        <td>Om knappen ska vara inaktiverad.</td>
+        <td>[disabled]="true"</td>
+      </tr>
+      <tr>
+        <td>onLockChanged : EventEmitter&lt;boolean&gt;</td>
+        <td>Event som triggas när knappen låses eller låses upp.
+          <code>True</code> innebär låst,
+          <code>false</code> upplåst.</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    <code>&lt;vgr-lock-button &gt;</code> har en intern div vars roll är satt till button. Förutom rollen så används attributen:
+    aria-disabled (inaktiv/aktiv), aria-label (lås/lås upp). Läs mer om hur fokus ska flyttas efter knappaktivering på dokumentationssidan
+    för
+    <a href="../textbuttons">buttons</a> under Tillgänglighet.
+  </div>
 </app-component-docs>

@@ -1,0 +1,45 @@
+<app-component-docs [componentName]="'Close button'">
+  <div class="docs__overview">
+    <p>
+      <code>
+        &lt;vgr-close-button&gt;</code>
+    </p>
+    <div style="height:35px; margin-top:20px; margin-bottom:20px">
+      <vgr-close-button></vgr-close-button>
+    </div>
+    <p> Förändras med tema:
+      <strong>ja</strong> (bakgrundsfärg)
+    </p>
+  </div>
+  <div class="docs__examples">
+    <vgr-close-button></vgr-close-button>
+    <vgr-close-button [disabled]="true"></vgr-close-button>
+    <br>
+    <br>
+  </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>disabled : boolean</td>
+        <td>Om knappen ska vara inaktiverad.</td>
+        <td>[disabled]="true"</td>
+      </tr>
+      <tr>
+        <td>click : EventEmitter</td>
+        <td>Event som triggas när knappen trycks ner.
+          <td>(click)="OnClick()"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    <code>&lt;vgr-close-button&gt;</code> har en intern div vars roll är satt till button. Förutom rollen så används attributen:
+    aria-disabled (inaktiv/aktiv), aria-label (stäng). Läs mer om hur fokus ska flyttas efter knappaktivering på dokumentationssidan
+    för
+    <a href="../textbuttons">buttons</a> under Tillgänglighet.
+  </div>
+</app-component-docs>

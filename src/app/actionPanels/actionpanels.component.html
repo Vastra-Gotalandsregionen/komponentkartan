@@ -1,0 +1,89 @@
+<vgr-page class="no-sort">
+  <vgr-page-header title="Action panel">
+  </vgr-page-header>
+  <vgr-action-panel [showCloseButton]="true" (expandedChanged)="expanded=$event" [expanded]="expanded" [title]="'Ett exempel på en action panel'">
+    <vgr-button>En knapp</vgr-button>
+    <p>Lite text...</p>
+  </vgr-action-panel>
+  <vgr-page-body>
+    <vgr-page-block>
+      <vgr-list [allowMultipleExpandedItems]="true">
+        <vgr-list-header>
+          <vgr-list-column-header text="Dokumentation för Action panel" [width]="20"></vgr-list-column-header>
+        </vgr-list-header>
+        <vgr-list-item [expanded]="true">
+          <vgr-list-item-header>
+            <h4>Översikt</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <div class="content-overview">
+              <p>
+                <code>&lt;vgr-action-panel&gt;</code> visas alltid på en fixed position på sidan. För mer information, se dokumentation
+                för
+                <a href="../pagestructure">sidhantering</a>. Öppna och stäng panelen högst upp på denna sida med knappen nedan:
+              </p>
+              <br>
+              <vgr-button *ngIf="expanded" (click)="expanded=!expanded">Stäng panel</vgr-button>
+              <vgr-button *ngIf="!expanded" (click)="expanded=!expanded">Öppna panel</vgr-button>
+              <br>
+              <br>
+              <p>Förändras med tema:
+                <strong>nej</strong>
+              </p>
+            </div>
+            <!-- Översikt -->
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]=" false ">
+          <vgr-list-item-header>
+            <h4>Exempel</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <h2>HTML</h2>
+            <section [innerHTML]="exampleCodeMarkup" highlight-js-content=".highlight"></section>
+            <!-- Exempel -->
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]=" false ">
+          <vgr-list-item-header>
+            <h4>API</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <!-- API -->
+            <table class="property-table ">
+              <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Exempel</th>
+              </tr>
+              <tr>
+                <td>title: string</td>
+                <td>Anger action panelens titel.</td>
+                <td>[title]="'En titel'"</td>
+              </tr>
+              <tr>
+                <td>expanded: boolean</td>
+                <td>Anger om panelen ska vara öppen eller stängd.</td>
+                <td>[expanded]="true"</td>
+              </tr>
+              <tr>
+                <td>showCloseButton: boolean</td>
+                <td>Anger huruvida en stänga-knapp ska visas i övre högra hörnet av panelen. Default är false.</td>
+                <td>[showCloseButton]="true"</td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>Tillgänglighet</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <!-- Tillgänglighet -->
+            <i>Ej aktuellt.</i>
+          </vgr-list-item-content>
+        </vgr-list-item>
+      </vgr-list>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>

@@ -29,7 +29,7 @@ export class CardComponent implements OnInit {
           <vgr-input [value]="'Berg'" [readonly]="!unlocked"></vgr-input>
         </vgr-title-value>
         <vgr-title-value [title]="'Boende'" [slim]="!unlocked">
-          <vgr-dropdown [values]="['Hus','Lägenhet','Kartong']" [selectedValue]="'Hus'" [readonly]="!unlocked"></vgr-dropdown>
+          <vgr-dropdown [values]="['Hus','Lägenhet','Kartong']" [readonly]="!unlocked"></vgr-dropdown>
         </vgr-title-value>
         <vgr-title-value [title]="'Födelsedatum'" [slim]="!unlocked">
           <vgr-datepicker [selectedDate]="birthDate" [readonly]="!unlocked"></vgr-datepicker>

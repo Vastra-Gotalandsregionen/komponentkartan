@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HtmlEncodeService } from '../html-encode.service';
 import { ModalService } from 'vgr-komponentkartan';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -14,12 +15,43 @@ export class ModaldialogComponent implements OnInit {
   vardval2Answer: string;
   dropdownItems = [];
 
-  constructor(private modalService: ModalService) {
+  exampleCodeHtml = `
+  <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>
+
+  <vgr-modal id="myModalId">
+  <vgr-modal-header>En header från app</vgr-modal-header>
+  <vgr-modal-content>
+    <p>Ändringarna går förlorade om du inte sparar dem</p>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" (click)="doSomething()">Spara</vgr-button>
+    <vgr-button [secondary]="true" default="true" (click)="modalService.closeDialog('myModalId')">Avbryt</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>`;
+
+  exampleCodeTs = `
+  import { Component } from '@angular/core';
+  import { ModalService } from 'vgr-komponentkartan';
+
+  constructor(modalService: ModalService) {}
+
+  doSomething() { }
+`;
+
+
+  exampleCodeMarkup: string;
+  exampleCodeTypescript: string;
+
+  constructor(public modalService: ModalService, htmlEncoder: HtmlEncodeService) {
     this.dropdownItems = [
       { displayName: 'Vårdcentral 1', value: '1' },
       { displayName: 'Vårdcentral 2', value: '2' },
       { displayName: 'Vårdcentral 3', value: '3' }
     ];
+    this.exampleCodeMarkup =
+      htmlEncoder.prepareHighlightedSection(this.exampleCodeHtml, 'HTML');
+    this.exampleCodeTypescript =
+      htmlEncoder.prepareHighlightedSection(this.exampleCodeTs, 'typescript');
   }
 
   ngOnInit() {
@@ -107,4 +139,6 @@ export class ModaldialogComponent implements OnInit {
   closeModal(elementId: string): void {
     this.modalService.closeDialog(elementId);
   }
+
+  doSomething() { }
 }

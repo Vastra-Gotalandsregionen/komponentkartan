@@ -11,7 +11,7 @@
           <vgr-list-item-header>
             <h4>Översikt</h4>
           </vgr-list-item-header>
-          <vgr-list-item-content [width]="1">
+          <vgr-list-item-content>
             <div class="content-overview">
               <p>
                 <code>&lt;vgr-card&gt;</code> används för att skapa kort, ofta i listor som expanderat innehåll. Ett kort har tre
@@ -66,7 +66,7 @@
                       <vgr-input [value]="'Berg'" [readonly]="!unlocked"></vgr-input>
                     </vgr-title-value>
                     <vgr-title-value [title]="'Boende'" [slim]="!unlocked">
-                      <vgr-dropdown [values]="['Hus','Lägenhet','Kartong']" [selectedValue]="'Hus'" [readonly]="!unlocked"></vgr-dropdown>
+                      <vgr-dropdown [values]="['Hus','Lägenhet','Kartong']" [readonly]="!unlocked"></vgr-dropdown>
                     </vgr-title-value>
                     <vgr-title-value [title]="'Födelsedatum'" [slim]="!unlocked">
                       <vgr-datepicker [selectedDate]="birthDate" [readonly]="!unlocked"></vgr-datepicker>
