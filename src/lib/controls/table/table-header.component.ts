@@ -1,12 +1,12 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
-    selector: 'vgr-expandable-div-header',
+    selector: 'vgr-table-header',
     moduleId: module.id,
     template: `<ng-content></ng-content>`
 })
 
-export class ExpandableDivHeaderComponent {
+export class TableHeaderComponent {
     constructor() {
     }
 }

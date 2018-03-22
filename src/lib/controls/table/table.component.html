@@ -1,7 +1,7 @@
-<div class="expandable-div-header" (click)="expanded = !expanded">
+<div class="table-header" (click)="expanded = !expanded">
   <span [className]="chevron_class"></span>
-  <ng-content select="vgr-expandable-div-header"></ng-content>
+  <ng-content select="vgr-table-header"></ng-content>
 </div>
-<div class="expandable-div-content">
-  <ng-content select="vgr-expandable-div-content"></ng-content>
+<div class="table-row">
+  <ng-content select="vgr-table-row"></ng-content>
 </div>

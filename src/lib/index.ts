@@ -53,8 +53,11 @@ export { ModalHeaderComponent } from './controls/modal/modal-header.component';
 export { ModalFooterComponent } from './controls/modal/modal-footer.component';
 export { CloseButtonComponent } from './controls/closeButton/closeButton.component';
 
-
-
+export { TableComponent } from './controls/table/table.component';
+export { TableRowColumnComponent } from './controls/table/table-row-column.component';
+export { TableHeaderColumnComponent } from './controls/table/table-header-column.component';
+export { TableRowComponent } from './controls/table/table-row.component';
+export { TableHeaderComponent } from './controls/table/table-header.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';

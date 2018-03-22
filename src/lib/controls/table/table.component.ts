@@ -1,14 +1,14 @@
 import { Input, Component, HostBinding, ContentChild, ElementRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'vgr-expandable-div',
+    selector: 'vgr-table',
     moduleId: module.id,
-    templateUrl: './expandableDiv.component.html',
+    templateUrl: './table.component.html',
 })
-export class ExpandableDivComponent {
-    @HostBinding('class.expandable-div--collapsed') private collapsed = true;
-    @HostBinding('class.expandable-div--expanded') private _expanded: boolean;
-    @HostBinding('class.expandable-div') private expandableDivClass = true;
+export class TableComponent {
+    @HostBinding('class.table--collapsed') private collapsed = true;
+    @HostBinding('class.table--expanded') private _expanded: boolean;
+    @HostBinding('class.table') private expandableDivClass = true;
 
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -25,7 +25,7 @@ export class ExpandableDivComponent {
     }
 
     get chevron_class() {
-        return 'expandable-div-chevron '.concat(this.expanded ? 'expanded' : 'collapsed');
+        return 'table-chevron '.concat(this.expanded ? 'expanded' : 'collapsed');
     }
 
     constructor(private elementRef: ElementRef) { }

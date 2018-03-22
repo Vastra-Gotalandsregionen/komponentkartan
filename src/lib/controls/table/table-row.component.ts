@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'vgr-expandable-div-content',
+    selector: 'vgr-table-row',
     moduleId: module.id,
-    template: `<ng-content></ng-content>`
+    template: `<ng-content select="vgr-table-column"></ng-content>`
 })
 
-export class ExpandableDivContentComponent {
+export class TableRowComponent {
     constructor() {
     }
 }
