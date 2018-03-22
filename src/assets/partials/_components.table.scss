@@ -3,12 +3,18 @@
   display: block;
   min-height: 20px;
   .table-header {
-    background-color: green;
+    font-size: 0; // to avoid spacing between columns
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
+    font-weight: bold;
     cursor: pointer;
+    .table__column {
+      font-size: $font-size--small;
+    }
     .table-chevron {
       position: absolute;
       top: 0;
-      right: 0px;
+      right: $margin--slim;
       &.expanded {
         @extend .chevron-expanded;
       }
@@ -18,28 +24,38 @@
     }
   }
   .table-body {
-    background-color: red;
+    font-size: 0; // to avoid spacing between columns
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
+    .table__column {
+      font-size: $font-size--small;
+    }
   }
   &.table--collapsed {
     .table-content {
       display: none;
     }
   }
-  vgr-table-header-column,
-  vgr-table-row-column {
-    background-color: yellow;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .table {
+    .table-header {
+      padding-left: $margin--fat;
+      padding-right: $margin--fat;
+      .table-chevron {
+        right: $margin--fat;
+      }
+      .table__column {
+        font-size: $font-size--medium;
+      }
+    }
+    .table-body {
+      padding-left: $margin--fat;
+      padding-right: $margin--fat;
+      .table__column {
+        font-size: $font-size--medium;
+      }
+    }
   }
-} // @media screen and (min-width: $desktop-width--medium) {
-//   .expandable-div {
-//     .expandable-div-header {
-//       // padding-right: $margin--fat;
-//       // padding-left: $margin--fat;
-//       .expandable-div-chevron {
-//         right: 0px;
-//       }
-//     } // .expandable-div-content {
-//     //   padding-right: $margin--fat;
-//     //   padding-left: $margin--fat;
-//     // }
-//   }
-// }
+}
