@@ -2,6 +2,6 @@
   <span [className]="chevron_class"></span>
   <ng-content select="vgr-table-header"></ng-content>
 </div>
-<div class="table-row">
+<div class="table-body" [@slideTableContent]="stateName" (@slideTableContent.done)="animationDone($event)" (@slideTableContent.start)="animationStart($event)">
   <ng-content select="vgr-table-row"></ng-content>
 </div>

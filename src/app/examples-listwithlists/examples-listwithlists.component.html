@@ -54,14 +54,24 @@
             <div class="button-container">
               <vgr-button [secondary]="true">Text</vgr-button>
             </div>
-            <vgr-expandable-div *ngFor="let i of items" class="adjust-chevron">
+            <vgr-table>
+              <vgr-table-header>
+                <vgr-table-header-column>Header Column1 </vgr-table-header-column>
+              </vgr-table-header>
+              <vgr-table-row>
+                <vgr-table-row-column>Row Column 1</vgr-table-row-column>
+              </vgr-table-row>
+            </vgr-table>
+
+
+            <!-- <vgr-expandable-div *ngFor="let i of items" class="adjust-chevron">
               <vgr-expandable-div-header>
                 {{ row.previewObject.enhet }}
               </vgr-expandable-div-header>
               <vgr-expandable-div-content>
                 content
               </vgr-expandable-div-content>
-            </vgr-expandable-div>
+            </vgr-expandable-div> -->
           </vgr-list-item-content>
         </vgr-list-item>
       </vgr-list>

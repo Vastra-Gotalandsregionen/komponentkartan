@@ -3,12 +3,8 @@
   display: block;
   min-height: 20px;
   .table-header {
-    // padding-left: $margin--slim;
-    // padding-right: $margin--slim;
-    &:hover {
-      //   @extend .background-color--primary-dimmed;
-      cursor: pointer;
-    }
+    border: 1px solid green;
+    cursor: pointer;
     .table-chevron {
       position: absolute;
       top: 0;
@@ -21,10 +17,7 @@
       }
     }
   }
-  .table-row {
-    // padding-left: $margin--slim;
-    // padding-right: $margin--slim;
-  }
+  .table-row {}
   &.table--collapsed {
     .table-content {
       display: none;

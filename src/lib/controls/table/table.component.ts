@@ -1,18 +1,38 @@
 import { Input, Component, HostBinding, ContentChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
 
 @Component({
     selector: 'vgr-table',
     moduleId: module.id,
     templateUrl: './table.component.html',
+    animations: [
+        trigger('slideTableContent', [
+            state('collapsed', style({
+                overflow: 'hidden',
+                height: '0'
+            })),
+            state('expanded', style({
+                overflow: 'visible',
+                height: '*'
+            })),
+            transition('expanded => collapsed',
+                animate('400ms ease-out')
+            ),
+            transition('collapsed => expanded',
+                animate('400ms ease-in')
+            ),
+        ])
+    ]
 })
 export class TableComponent {
     @HostBinding('class.table--collapsed') private collapsed = true;
     @HostBinding('class.table--expanded') private _expanded: boolean;
-    @HostBinding('class.table') private expandableDivClass = true;
+    @HostBinding('class.table') private tableClass = true;
 
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @Input() set expanded(expandedValue: boolean) {
+        console.log('set expanded');
         if (expandedValue && !this._expanded) {
             this.expand();
         } else if (!expandedValue && this._expanded) {
@@ -28,37 +48,38 @@ export class TableComponent {
         return 'table-chevron '.concat(this.expanded ? 'expanded' : 'collapsed');
     }
 
+    get stateName() {
+        return this.expanded ? 'expanded' : 'collapsed';
+    }
+
     constructor(private elementRef: ElementRef) { }
 
+    animationDone($event) {
+        this.elementRef.nativeElement.style['overflow'] = 'visible';
+
+    }
+    animationStart($event) {
+        this.elementRef.nativeElement.style['overflow'] = 'hidden';
+    }
+
     collapse() {
-        this.collapseContent(() => {
-            const expandedChanged = this._expanded;
-            this._expanded = false;
-            this.collapsed = true;
-            if (expandedChanged) {
-                this.expandedChanged.emit(this._expanded);
-            }
-        });
+        console.log('collapse');
+        const expandedChanged = this._expanded;
+        this._expanded = false;
+        this.collapsed = true;
+        if (expandedChanged) {
+            this.expandedChanged.emit(this._expanded);
+        }
     }
 
     expand() {
-        this.expandContent();
+        console.log('expand');
         const expandedChanged = !this._expanded;
         this._expanded = true;
         this.collapsed = false;
         if (expandedChanged) {
             this.expandedChanged.emit(this._expanded);
         }
-    }
-
-    private collapseContent(callback?: any) {
-        const header = $(this.elementRef.nativeElement).children('.expandable-div-header');
-        header.siblings('.expandable-div-content').slideUp(400, callback);
-    }
-
-    private expandContent() {
-        const header = $(this.elementRef.nativeElement).children('.expandable-div-header');
-        header.siblings('.expandable-div-content').slideDown(400);
     }
 }
 
