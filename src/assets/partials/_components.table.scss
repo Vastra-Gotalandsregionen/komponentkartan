@@ -37,6 +37,9 @@
       }
       .table__column {
         font-size: $font-size--small;
+        &:first-child {
+          padding-left: $margin--slim;
+        }
       }
     }
   }

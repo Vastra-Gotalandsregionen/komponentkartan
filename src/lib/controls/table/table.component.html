@@ -4,5 +4,5 @@
 </div>
 <div class="table-body" [@slideTableContent]="stateName" (@slideTableContent.done)="animationDone($event)" (@slideTableContent.start)="animationStart($event)">
   <ng-content select="vgr-table-row"></ng-content>
-  <!-- <ng-content select="vgr-table"></ng-content> -->
+  <ng-content select="vgr-table"></ng-content>
 </div>
