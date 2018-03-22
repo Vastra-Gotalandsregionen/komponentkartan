@@ -3,7 +3,7 @@
   display: block;
   min-height: 20px;
   .table-header {
-    border: 1px solid green;
+    background-color: green;
     cursor: pointer;
     .table-chevron {
       position: absolute;
@@ -17,15 +17,19 @@
       }
     }
   }
-  .table-row {}
+  .table-body {
+    background-color: red;
+  }
   &.table--collapsed {
     .table-content {
       display: none;
     }
   }
-}
-
-// @media screen and (min-width: $desktop-width--medium) {
+  vgr-table-header-column,
+  vgr-table-row-column {
+    background-color: yellow;
+  }
+} // @media screen and (min-width: $desktop-width--medium) {
 //   .expandable-div {
 //     .expandable-div-header {
 //       // padding-right: $margin--fat;
