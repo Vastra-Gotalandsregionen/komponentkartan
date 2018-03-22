@@ -8,6 +8,9 @@
     padding-right: $margin--slim;
     font-weight: bold;
     cursor: pointer;
+    &:hover {
+      @extend .background-color--primary-dimmed;
+    }
     .table__column {
       font-size: $font-size--small;
     }
@@ -24,11 +27,17 @@
     }
   }
   .table-body {
-    font-size: 0; // to avoid spacing between columns
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
-    .table__column {
-      font-size: $font-size--small;
+    .table-row {
+      font-size: 0; // to avoid spacing between columns
+      display: block;
+      padding-left: $margin--slim;
+      padding-right: $margin--slim;
+      &:hover {
+        @extend .background-color--primary-dimmed;
+      }
+      .table__column {
+        font-size: $font-size--small;
+      }
     }
   }
   &.table--collapsed {
@@ -51,10 +60,13 @@
       }
     }
     .table-body {
-      padding-left: $margin--fat;
-      padding-right: $margin--fat;
-      .table__column {
-        font-size: $font-size--medium;
+      .table-row {
+        display: block;
+        padding-left: $margin--fat;
+        padding-right: $margin--fat;
+        .table__column {
+          font-size: $font-size--medium;
+        }
       }
     }
   }

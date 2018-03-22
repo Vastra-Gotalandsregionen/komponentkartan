@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'vgr-table-row',
@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 
 export class TableRowComponent {
+    @HostBinding('class.table-row') private tableRowClass = true;
+
     constructor() {
     }
 }
