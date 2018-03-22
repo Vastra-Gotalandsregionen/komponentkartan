@@ -13,7 +13,8 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
             })),
             state('expanded', style({
                 overflow: 'visible',
-                height: '*'
+                height: '*',
+                "margin-bottom": '10px'
             })),
             transition('expanded => collapsed',
                 animate('400ms ease-out')

@@ -13,6 +13,10 @@
     }
     .table__column {
       font-size: $font-size--small;
+      padding-right: $margin--fat;
+      &:last-child {
+        padding-right: 0;
+      }
     }
     .table-chevron {
       position: absolute;
@@ -37,8 +41,12 @@
       }
       .table__column {
         font-size: $font-size--small;
+        padding-right: $margin--fat;
         &:first-child {
           padding-left: $margin--slim;
+        }
+        &:last-child {
+          padding-right: 0;
         }
       }
     }
