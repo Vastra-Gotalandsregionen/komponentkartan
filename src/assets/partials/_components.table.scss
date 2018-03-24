@@ -6,6 +6,8 @@
     font-size: 0; // to avoid spacing between columns
     padding-left: $margin--slim;
     padding-right: $margin--slim;
+    padding-top: 4px;
+    padding-bottom: 2px;
     font-weight: bold;
     cursor: pointer;
     &:hover {
@@ -42,6 +44,7 @@
       .table__column {
         font-size: $font-size--small;
         padding-right: $margin--fat;
+        vertical-align: top;
         &:first-child {
           padding-left: $margin--slim;
         }
@@ -67,6 +70,8 @@
       }
     }
     .table-header {
+      padding-top: 0;
+      padding-bottom: 0;
       .table__column {
         &:first-child {
           padding-left: $margin--slim;
@@ -124,6 +129,7 @@
       padding-right: $margin--fat;
       .table-chevron {
         right: $margin--fat;
+        top: 2px;
       }
       .table__column {
         font-size: $font-size--medium;

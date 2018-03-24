@@ -1,5 +1,5 @@
 import { Input, Component, HostBinding, ContentChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+import { trigger, style, transition, animate, state } from '@angular/animations';
 
 @Component({
     selector: 'vgr-table',
@@ -14,7 +14,7 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
             state('expanded', style({
                 overflow: 'visible',
                 height: '*',
-                "margin-bottom": '10px'
+                'margin-bottom': '25px'
             })),
             transition('expanded => collapsed',
                 animate('400ms ease-out')
@@ -33,7 +33,6 @@ export class TableComponent {
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @Input() set expanded(expandedValue: boolean) {
-        console.log('set expanded');
         if (expandedValue && !this._expanded) {
             this.expand();
         } else if (!expandedValue && this._expanded) {
@@ -64,7 +63,6 @@ export class TableComponent {
     }
 
     collapse() {
-        console.log('collapse');
         const expandedChanged = this._expanded;
         this._expanded = false;
         this.collapsed = true;
@@ -74,7 +72,6 @@ export class TableComponent {
     }
 
     expand() {
-        console.log('expand');
         const expandedChanged = !this._expanded;
         this._expanded = true;
         this.collapsed = false;
