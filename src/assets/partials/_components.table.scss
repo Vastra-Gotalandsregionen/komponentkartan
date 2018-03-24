@@ -1,86 +1,63 @@
 .table {
-  position: relative;
-  display: block;
-  min-height: 20px;
-  .table-header {
-    font-size: 0; // to avoid spacing between columns
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
-    padding-top: 4px;
-    padding-bottom: 2px;
-    font-weight: bold;
-    cursor: pointer;
-    &:hover {
-      @extend .background-color--primary-dimmed;
-    }
-    .table__column {
-      font-size: $font-size--small;
-      padding-right: $margin--fat;
-      &:last-child {
-        padding-right: 0;
-      }
-    }
-    .table-chevron {
-      position: absolute;
-      top: 0;
-      right: $margin--slim;
-      &.expanded {
-        @extend .chevron-expanded;
-      }
-      &.collapsed {
-        @extend .chevron-collapsed;
-      }
-    }
-  }
-  .table-body {
-    .table-row {
+  .expandable-div {
+    position: relative;
+    display: block;
+    min-height: 20px;
+    .expandable-div-header {
       font-size: 0; // to avoid spacing between columns
-      display: block;
       padding-left: $margin--slim;
       padding-right: $margin--slim;
+      padding-top: 4px;
+      padding-bottom: 2px;
+      font-weight: bold;
+      cursor: pointer;
       &:hover {
         @extend .background-color--primary-dimmed;
       }
       .table__column {
         font-size: $font-size--small;
         padding-right: $margin--fat;
-        vertical-align: top;
-        &:first-child {
-          padding-left: $margin--slim;
-        }
         &:last-child {
           padding-right: 0;
         }
       }
+      .expandable-div-chevron {
+        position: absolute;
+        top: 0;
+        right: $margin--slim;
+        &.expanded {
+          @extend .chevron-expanded;
+        }
+        &.collapsed {
+          @extend .chevron-collapsed;
+        }
+      }
     }
-  }
-  &.table--collapsed {
-    .table-content {
-      display: none;
-    }
-  }
-  .table {
     .table-body {
       .table-row {
+        font-size: 0; // to avoid spacing between columns
+        display: block;
+        padding-left: $margin--slim;
+        padding-right: $margin--slim;
+        &:hover {
+          @extend .background-color--primary-dimmed;
+        }
         .table__column {
+          font-size: $font-size--small;
+          padding-right: $margin--fat;
+          vertical-align: top;
           &:first-child {
-            padding-left: $margin--slim*2;
+            padding-left: $margin--slim;
+          }
+          &:last-child {
+            padding-right: 0;
           }
         }
       }
     }
-    .table-header {
-      padding-top: 0;
-      padding-bottom: 0;
-      .table__column {
-        &:first-child {
-          padding-left: $margin--slim;
-        }
-      }
-    }
-    &.table--collapsed {
-      .table-header {
-        font-weight: normal;
+    &.expandable-div--collapsed {
+      .table-content {
+        display: none;
       }
     }
     .table {
@@ -88,16 +65,23 @@
         .table-row {
           .table__column {
             &:first-child {
-              padding-left: $margin--slim*3;
+              padding-left: $margin--slim*2;
             }
           }
         }
       }
-      .table-header {
+      .expandable-div-header {
+        padding-top: 0;
+        padding-bottom: 0;
         .table__column {
           &:first-child {
-            padding-left: $margin--slim*2;
+            padding-left: $margin--slim;
           }
+        }
+      }
+      &.expandable-div--collapsed {
+        .expandable-div-header {
+          font-weight: normal;
         }
       }
       .table {
@@ -105,15 +89,33 @@
           .table-row {
             .table__column {
               &:first-child {
-                padding-left: $margin--slim*4;
+                padding-left: $margin--slim*3;
               }
             }
           }
         }
-        .table-header {
+        .expandable-div-header {
           .table__column {
             &:first-child {
-              padding-left: $margin--slim*3;
+              padding-left: $margin--slim*2;
+            }
+          }
+        }
+        .table {
+          .table-body {
+            .table-row {
+              .table__column {
+                &:first-child {
+                  padding-left: $margin--slim*4;
+                }
+              }
+            }
+          }
+          .expandable-div-header {
+            .table__column {
+              &:first-child {
+                padding-left: $margin--slim*3;
+              }
             }
           }
         }
@@ -124,10 +126,10 @@
 
 @media screen and (min-width: $desktop-width--medium) {
   .table {
-    .table-header {
+    .expandable-div-header {
       padding-left: $margin--fat;
       padding-right: $margin--fat;
-      .table-chevron {
+      .expandable-div-chevron {
         right: $margin--fat;
         top: 2px;
       }

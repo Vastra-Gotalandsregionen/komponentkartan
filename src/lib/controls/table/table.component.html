@@ -1,8 +1,9 @@
-<div class="table-header" (click)="expanded = !expanded">
-  <span [className]="chevron_class"></span>
-  <ng-content select="vgr-table-header"></ng-content>
-</div>
-<div class="table-body" [@slideTableContent]="stateName" (@slideTableContent.done)="animationDone($event)" (@slideTableContent.start)="animationStart($event)">
-  <ng-content select="vgr-table-row"></ng-content>
-  <ng-content select="vgr-table"></ng-content>
-</div>
+<vgr-expandable-div [expanded]="expanded" (expandedChanged)="onExpandedChanged($event)">
+  <vgr-expandable-div-header>
+    <ng-content select="vgr-table-header"></ng-content>
+  </vgr-expandable-div-header>
+  <vgr-expandable-div-content class="table-body">
+    <ng-content select="vgr-table-row"></ng-content>
+    <ng-content select="vgr-table"></ng-content>
+  </vgr-expandable-div-content>
+</vgr-expandable-div>
