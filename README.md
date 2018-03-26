@@ -18,7 +18,7 @@ npm install vgr-komponentkartan
 ### 2. Uppsättning av vgr-komponentkartan
 Importera komponentkartanmodule i användande module.
 ```
-import { KomponentkartanModule } from 'vgr-komponentkartan/component-package/komponentkartan.module';
+import { KomponentkartanModule } from 'vgr-komponentkartan';
 @NgModule({
     imports: [
         KomponentkartanModule
@@ -30,7 +30,7 @@ import { KomponentkartanModule } from 'vgr-komponentkartan/component-package/kom
 Lägg till sökvägar till scss filen och jquery i angular-cli.json filen, som är beroenden för komponentkartan
 ```
 "styles": [
-    "../node_modules/vgr-komponentkartan/Content/komponentkartan.scss",
+    "../node_modules/vgr-komponentkartan/assets/komponentkartan.scss",
     "styles.css"
 ],
 "scripts": ["../node_modules/jquery/dist/jquery.min.js"],
