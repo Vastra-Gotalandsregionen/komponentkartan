@@ -5,9 +5,9 @@ import { TableHeaderColumnComponent } from './table-header-column.component';
 import { TableRowComponent } from './table-row.component';
 import { TableRowColumnComponent } from './table-row-column.component';
 
-import { ExpandableDivComponent } from '../expandablediv/expandablediv.component';
-import { ExpandableDivHeaderComponent } from '../expandablediv/expandablediv-header.component';
-import { ExpandableDivContentComponent } from '../expandablediv/expandablediv-content.component';
+import { ExpandableDivComponent } from '../expandableDiv/expandableDiv.component';
+import { ExpandableDivHeaderComponent } from '../expandableDiv/expandableDiv-header.component';
+import { ExpandableDivContentComponent } from '../expandableDiv/expandableDiv-content.component';
 
 import { ComponentFixture, TestBed, async, fakeAsync } from '@angular/core/testing';
 import { DebugElement, Component } from '@angular/core';
@@ -33,7 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 class TestTableComponent { }
 
 
-describe('[ExpandableDivComponent]', () => {
+describe('[TestTableComponent]', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TestTableComponent>;
 
@@ -61,7 +61,6 @@ describe('[ExpandableDivComponent]', () => {
       fixture = TestBed.createComponent(TestTableComponent);
       component = fixture.debugElement.query(By.directive(ExpandableDivComponent)).componentInstance;
       rootElement = fixture.debugElement.query(By.directive(ExpandableDivComponent));
-      console.log(rootElement);
       fixture.detectChanges();
       done();
     });

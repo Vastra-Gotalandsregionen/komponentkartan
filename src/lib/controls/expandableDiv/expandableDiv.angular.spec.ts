@@ -43,7 +43,6 @@ describe('[ExpandableDivComponent]', () => {
 
     describe('When component is initialized with expanded = true', () => {
         beforeEach(() => {
-            console.log(component);
             component.expanded = true;
             fixture.detectChanges();
         });
