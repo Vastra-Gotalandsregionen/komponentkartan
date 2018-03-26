@@ -2,6 +2,7 @@
   <span [className]="chevron_class"></span>
   <ng-content select="vgr-expandable-div-header"></ng-content>
 </div>
-<div class="expandable-div-content">
+<div class="expandable-div-content" [@slideExpandableContent]="stateName" (@slideExpandableContent.done)="animationDone($event)"
+  (@slideExpandableContent.start)="animationStart($event)">
   <ng-content select="vgr-expandable-div-content"></ng-content>
 </div>

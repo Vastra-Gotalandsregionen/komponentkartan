@@ -3,12 +3,7 @@
   display: block;
   min-height: 20px;
   .expandable-div-header {
-    // padding-left: $margin--slim;
-    // padding-right: $margin--slim;
-    &:hover {
-      //   @extend .background-color--primary-dimmed;
-      cursor: pointer;
-    }
+    cursor: pointer;
     .expandable-div-chevron {
       position: absolute;
       top: 0;
@@ -20,28 +15,10 @@
         @extend .chevron-collapsed;
       }
     }
-  } // .expandable-div-content {
-  //   padding-left: $margin--slim;
-  //   padding-right: $margin--slim;
-  // }
+  }
   &.expandable-div--collapsed {
     .expandable-div-content {
-      display: none;
+      //display: none;
     }
-  }
-}
-
-@media screen and (min-width: $desktop-width--medium) {
-  .expandable-div {
-    .expandable-div-header {
-      // padding-right: $margin--fat;
-      // padding-left: $margin--fat;
-      .expandable-div-chevron {
-        right: 0px;
-      }
-    } // .expandable-div-content {
-    //   padding-right: $margin--fat;
-    //   padding-left: $margin--fat;
-    // }
   }
 }

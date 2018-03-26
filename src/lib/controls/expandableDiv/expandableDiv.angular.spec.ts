@@ -1,3 +1,4 @@
+
 import { ExpandableDivComponent } from './expandableDiv.component';
 import { ExpandableDivHeaderComponent } from './expandableDiv-header.component';
 import { ExpandableDivContentComponent } from './expandableDiv-content.component';
@@ -6,8 +7,10 @@ import { DebugElement } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('[ExpandableDivComponent]', () => {
+
 
     let component: ExpandableDivComponent;
     let fixture: ComponentFixture<ExpandableDivComponent>;
@@ -19,7 +22,7 @@ describe('[ExpandableDivComponent]', () => {
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
             declarations: [ExpandableDivComponent],
-            imports: [CommonModule]
+            imports: [CommonModule, BrowserAnimationsModule]
         });
 
         TestBed.overrideComponent(ExpandableDivComponent, {
@@ -27,6 +30,7 @@ describe('[ExpandableDivComponent]', () => {
                 templateUrl: './expandableDiv.component.html'
             }
         });
+
 
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(ExpandableDivComponent);
@@ -39,9 +43,11 @@ describe('[ExpandableDivComponent]', () => {
 
     describe('When component is initialized with expanded = true', () => {
         beforeEach(() => {
+            console.log(component);
             component.expanded = true;
             fixture.detectChanges();
         });
+
         it('component has class expandable-div', () => {
             expect(rootElement.classes['expandable-div']).toBe(true);
         });
@@ -54,6 +60,15 @@ describe('[ExpandableDivComponent]', () => {
 
 
         describe('and header is clicked', () => {
+            beforeAll(() => {
+                jasmine.clock().uninstall();
+                jasmine.clock().install();
+
+            });
+            afterAll(() => {
+                jasmine.clock().uninstall();
+            });
+
             beforeEach(() => {
                 header = rootElement.query(By.css('.expandable-div-header'));
                 header.triggerEventHandler('click', null);
@@ -61,8 +76,8 @@ describe('[ExpandableDivComponent]', () => {
             });
 
             it('div is collapsed', () => {
-                // TODO: Test funkar inte pga fördröjning på 400ms
-                // expect(component.expanded).toBe(false);
+                jasmine.clock().tick(400);
+                expect(component.expanded).toBe(false);
             });
 
             describe('and header is clicked again', () => {
@@ -78,6 +93,15 @@ describe('[ExpandableDivComponent]', () => {
     });
 
     describe('When component is initialized', () => {
+        beforeAll(() => {
+            jasmine.clock().uninstall();
+            jasmine.clock().install();
+
+        });
+        afterAll(() => {
+            jasmine.clock().uninstall();
+        });
+
         it('component has class expandable-div', () => {
             expect(rootElement.classes['expandable-div']).toBe(true);
         });
@@ -104,8 +128,8 @@ describe('[ExpandableDivComponent]', () => {
                     fixture.detectChanges();
                 });
                 it('div is collapsed', () => {
-                    // TODO: Test funkar inte pga fördröjning på 400ms
-                    // expect(component.expanded).toBe(false);
+                    jasmine.clock().tick(400);
+                    expect(component.expanded).toBe(false);
                 });
             });
         });

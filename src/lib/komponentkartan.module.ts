@@ -85,7 +85,12 @@ import * as $ from 'jquery';
     type.PanelComponent,
     type.PanelContainerComponent,
     type.SubmenuComponent,
-    type.CloseButtonComponent
+    type.CloseButtonComponent,
+    type.TableRowColumnComponent,
+    type.TableHeaderColumnComponent,
+    type.TableHeaderComponent,
+    type.TableRowComponent,
+    type.TableComponent
   ],
   exports: [
     type.SafePipe,
@@ -143,7 +148,12 @@ import * as $ from 'jquery';
     type.PanelComponent,
     type.PanelContainerComponent,
     type.SubmenuComponent,
-    type.CloseButtonComponent
+    type.CloseButtonComponent,
+    type.TableComponent,
+    type.TableRowColumnComponent,
+    type.TableHeaderColumnComponent,
+    type.TableHeaderComponent,
+    type.TableRowComponent
   ],
   providers: [
     type.ModalService,

@@ -1,9 +1,28 @@
 import { Input, Component, HostBinding, ContentChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { trigger, style, transition, animate, state } from '@angular/animations';
 
 @Component({
     selector: 'vgr-expandable-div',
     moduleId: module.id,
     templateUrl: './expandableDiv.component.html',
+    animations: [
+        trigger('slideExpandableContent', [
+            state('collapsed', style({
+                overflow: 'hidden',
+                height: '0'
+            })),
+            state('expanded', style({
+                overflow: 'visible',
+                height: '*',
+            })),
+            transition('expanded => collapsed',
+                animate('400ms ease-out')
+            ),
+            transition('collapsed => expanded',
+                animate('400ms ease-in')
+            ),
+        ])
+    ]
 })
 export class ExpandableDivComponent {
     @HostBinding('class.expandable-div--collapsed') private collapsed = true;
@@ -28,37 +47,37 @@ export class ExpandableDivComponent {
         return 'expandable-div-chevron '.concat(this.expanded ? 'expanded' : 'collapsed');
     }
 
+    get stateName() {
+        return this.expanded ? 'expanded' : 'collapsed';
+    }
+
+
     constructor(private elementRef: ElementRef) { }
 
+    animationDone($event) {
+        this.elementRef.nativeElement.style['overflow'] = 'visible';
+
+    }
+    animationStart($event) {
+        this.elementRef.nativeElement.style['overflow'] = 'hidden';
+    }
+
     collapse() {
-        this.collapseContent(() => {
-            const expandedChanged = this._expanded;
-            this._expanded = false;
-            this.collapsed = true;
-            if (expandedChanged) {
-                this.expandedChanged.emit(this._expanded);
-            }
-        });
+        const expandedChanged = this._expanded;
+        this._expanded = false;
+        this.collapsed = true;
+        if (expandedChanged) {
+            this.expandedChanged.emit(this._expanded);
+        }
     }
 
     expand() {
-        this.expandContent();
         const expandedChanged = !this._expanded;
         this._expanded = true;
         this.collapsed = false;
         if (expandedChanged) {
             this.expandedChanged.emit(this._expanded);
         }
-    }
-
-    private collapseContent(callback?: any) {
-        const header = $(this.elementRef.nativeElement).children('.expandable-div-header');
-        header.siblings('.expandable-div-content').slideUp(400, callback);
-    }
-
-    private expandContent() {
-        const header = $(this.elementRef.nativeElement).children('.expandable-div-header');
-        header.siblings('.expandable-div-content').slideDown(400);
     }
 }
 
