@@ -6,7 +6,8 @@ import { ExpandableDivComponent } from '../expandableDiv/expandableDiv.component
     templateUrl: './table.component.html'
 })
 export class TableComponent extends ExpandableDivComponent {
-    @HostBinding('class.table') private tableClass = true;
+    @HostBinding('class') tableClass = 'table';
+
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     onExpandedChanged(expanded: boolean) {
