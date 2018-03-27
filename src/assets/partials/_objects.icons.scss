@@ -53,6 +53,62 @@
   width: 30px;
 }
 
+.vgr-icon-help {
+  @extend .bg-image-icon-help;
+  display: block;
+  height: 25px;
+  width: 25px;
+}
+
+.vgr-icon-help--red {
+  @extend .bg-image-icon-help--red;
+  display: block;
+  height: 25px;
+  width: 25px;
+}
+
+.vgr-icon-help--blue {
+  @extend .bg-image-icon-help--blue;
+  display: block;
+  height: 25px;
+  width: 25px;
+}
+
+.vgr-icon-help--green {
+  @extend .bg-image-icon-help--green;
+  display: block;
+  height: 25px;
+  width: 25px;
+}
+
+.vgr-icon-calendar-border {
+  @extend .bg-image-icon-calendar;
+  display: block;
+  height: 25px;
+  width: 25px;
+}
+
+.vgr-icon-calendar-border--red {
+  @extend .bg-image-icon-calendar-border--red;
+  display: block;
+  height: 25px;
+  width: 25px;
+}
+
+.vgr-icon-calendar-border--blue {
+  @extend .bg-image-icon-calendar-border--blue;
+  display: block;
+  height: 25px;
+  width: 25px;
+}
+
+.vgr-icon-calendar-border--green {
+  @extend .bg-image-icon-calendar-border--green;
+  display: block;
+  height: 25px;
+  width: 25px;
+}
+
 .vgr-icon-plus {
   @extend .bg-image-icon-plus;
   background-size: 40%;

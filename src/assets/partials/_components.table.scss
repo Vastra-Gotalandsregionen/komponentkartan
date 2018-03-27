@@ -20,6 +20,21 @@
         &:last-child {
           padding-right: 0;
         }
+        .bg-image--icon{
+          display: inline-block;
+          margin-left: 6px;
+          vertical-align: bottom;
+          .theme--blue & {
+            @extend .bg-image-icon-calendar-border--blue;
+          }
+          .theme--red & {
+            @extend .bg-image-icon-calendar-border--red;
+          }
+          .theme--green & {
+            background-color: $primary-color--green;
+            @extend .bg-image-icon-calendar-border--green;
+          }
+        }
       }
       .expandable-div-chevron {
         position: absolute;
