@@ -183,8 +183,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                                             monthNumber === 9 ? 'Okt' :
                                                 monthNumber === 10 ? 'Nov' :
                                                     monthNumber === 11 ? 'Dec' : '?';
-
-
     }
 
     controlHasErrors() {
@@ -229,49 +227,96 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         this.toggleCalendar(event);
     }
 
-
-    setFocusIn() {
-        console.log('FOCISIN');
-    }
-
     onKeyDown(event: KeyboardEvent) {
-        if (event.keyCode === 13 || event.keyCode === 32) { // space and enter
-            this.toggleCalendar(event);
-            event.preventDefault();
-        } else if (event.keyCode === 27) { // escape
-            this.expanded = false;
-            // this.focusDropdown();
-            event.preventDefault();
-        } else if (event.keyCode === 37) { // arrow left
-            if (this.currentFocusedMonth > 2) {
-                this.currentFocusedMonth = this.currentFocusedMonth - 3;
-            }
-            this.focusableMonths[this.currentFocusedMonth].focus();
-        } else if (event.keyCode === 39) { // arrow right
-            if (this.currentFocusedMonth < 9) {
-                this.currentFocusedMonth = this.currentFocusedMonth + 3;
-            }
-            this.focusableMonths[this.currentFocusedMonth].focus();
-        } else if (event.keyCode === 35) {
-            console.log('end');
-        } else if (event.keyCode === 36) {
-            console.log('home');
-        } else if (event.keyCode === 40) { // arrow dowm
-            if (this.currentFocusedMonth % 3 !== 2) {
-                this.currentFocusedMonth = this.currentFocusedMonth + 1;
-            }
-            this.focusableMonths[this.currentFocusedMonth].focus();
-            event.preventDefault();
-            event.cancelBubble = true;
-        } else if (event.keyCode === 38) { // arrow up
-            if (this.currentFocusedMonth % 3 !== 0) {
-                this.currentFocusedMonth = this.currentFocusedMonth - 1;
-            }
-            this.focusableMonths[this.currentFocusedMonth].focus();
-            event.preventDefault();
-            event.cancelBubble = true;
-        } else if (event.keyCode === 9) { // tab
-            this.expanded = false;
+        switch (event.keyCode) {
+            case 9: // tab
+                {
+                    this.expanded = false;
+                    break;
+                }
+            case 13: // enter
+            case 32: // space
+                {
+                    this.toggleCalendar(event);
+                    event.preventDefault();
+                    break;
+                }
+            case 27: // escape
+                {
+                    this.expanded = false;
+                    // this.focusDropdown();
+                    event.preventDefault();
+                    break;
+                }
+            case 33: // pageUp
+                {
+                    this.onPreviousMouseDown(event);
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    break;
+                }
+            case 34: // pageDown
+                {
+                    this.onNextMouseDown(event);
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    break;
+                }
+            case 35: // end
+                {
+                    this.currentFocusedMonth = 11;
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    break;
+                }
+            case 36: // home
+                {
+                    this.currentFocusedMonth = 0;
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    break;
+                }
+            case 37: // arrow left
+                {
+                    if (event.shiftKey) {
+                        this.onPreviousMouseDown(event);
+                    } else {
+                        if (this.currentFocusedMonth > 2) {
+                            this.currentFocusedMonth = this.currentFocusedMonth - 3;
+                        }
+                        this.focusableMonths[this.currentFocusedMonth].focus();
+                    }
+                    break;
+                }
+
+            case 38: // arrow up
+                {
+                    if (this.currentFocusedMonth % 3 !== 0) {
+                        this.currentFocusedMonth = this.currentFocusedMonth - 1;
+                    }
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 39: // arrow right
+                {
+                    if (event.shiftKey) {
+                        this.onNextMouseDown(event);
+                    } else {
+                        if (this.currentFocusedMonth < 9) {
+                            this.currentFocusedMonth = this.currentFocusedMonth + 3;
+                        }
+                        this.focusableMonths[this.currentFocusedMonth].focus();
+                    }
+                    break;
+                }
+            case 40: // arrow dowm
+                {
+                    if (this.currentFocusedMonth % 3 !== 2) {
+                        this.currentFocusedMonth = this.currentFocusedMonth + 1;
+                    }
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
         }
     }
 

@@ -243,7 +243,8 @@ vgr-monthpicker {
     color: $text-color--light;
   }
   &.disabled {
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $background-color--content;
     }
     color: $control-color--disabled;
