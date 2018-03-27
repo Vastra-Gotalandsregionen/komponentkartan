@@ -237,7 +237,8 @@ vgr-monthpicker {
   margin-top: 14px;
   padding-top: 7px;
   cursor: pointer;
-  &:hover {
+  &:hover,
+  &:focus {
     @extend .background-color--secondary;
     color: $text-color--light;
   }
