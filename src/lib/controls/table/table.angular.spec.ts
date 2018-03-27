@@ -1,136 +1,107 @@
 
-// import { ExpandableDivComponent } from './expandableDiv.component';
-// import { ExpandableDivHeaderComponent } from './expandableDiv-header.component';
-// import { ExpandableDivContentComponent } from './expandableDiv-content.component';
-// import { ComponentFixture, TestBed, async, fakeAsync } from '@angular/core/testing';
-// import { DebugElement } from '@angular/core';
-// import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-// import { CommonModule } from '@angular/common';
-// import { By } from '@angular/platform-browser';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TableComponent } from './table.component';
+import { TableHeaderComponent } from './table-header.component';
+import { TableHeaderColumnComponent } from './table-header-column.component';
+import { TableRowComponent } from './table-row.component';
+import { TableRowColumnComponent } from './table-row-column.component';
 
-// describe('[ExpandableDivComponent]', () => {
-//   let component: ExpandableDivComponent;
-//   let fixture: ComponentFixture<ExpandableDivComponent>;
-//   let rootElement: DebugElement;
-//   let header: DebugElement;
+import { ExpandableDivComponent } from '../expandableDiv/expandableDiv.component';
+import { ExpandableDivHeaderComponent } from '../expandableDiv/expandableDiv-header.component';
+import { ExpandableDivContentComponent } from '../expandableDiv/expandableDiv-content.component';
 
-//   beforeEach((done) => {
-//     TestBed.resetTestEnvironment();
-//     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
-//     TestBed.configureTestingModule({
-//       declarations: [ExpandableDivComponent],
-//       imports: [CommonModule, BrowserAnimationsModule]
-//     });
-
-//     TestBed.overrideComponent(ExpandableDivComponent, {
-//       set: {
-//         templateUrl: './expandableDiv.component.html'
-//       }
-//     });
+import { ComponentFixture, TestBed, async, fakeAsync } from '@angular/core/testing';
+import { DebugElement, Component } from '@angular/core';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { CommonModule } from '@angular/common';
+import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-//     TestBed.compileComponents().then(() => {
-//       fixture = TestBed.createComponent(ExpandableDivComponent);
-//       component = fixture.componentInstance;
-//       rootElement = fixture.debugElement;
-//       fixture.detectChanges();
-//       done();
-//     });
-//   });
-
-//   describe('When component is initialized with expanded = true', () => {
-//     beforeEach(() => {
-//       console.log(component);
-//       component.expanded = true;
-//       fixture.detectChanges();
-//     });
-
-//     it('component has class expandable-div', () => {
-//       expect(rootElement.classes['expandable-div']).toBe(true);
-//     });
-//     it('component has class expandable-div--collapsed', () => {
-//       expect(rootElement.classes['expandable-div--collapsed']).toBe(false);
-//     });
-//     it('component does not have class expandable-div--expanded', () => {
-//       expect(rootElement.classes['expandable-div--expanded']).toBe(true);
-//     });
+@Component({
+  selector: 'test',
+  template: `
+    <vgr-table>
+      <vgr-table-header>
+        <vgr-table-header-column>Header Column</vgr-table-header-column>
+      </vgr-table-header>
+      <vgr-table-row>
+        <vgr-table-row-column>Row Column</vgr-table-row-column>
+      </vgr-table-row>
+    </vgr-table>
+          `
+})
+class TestTableComponent { }
 
 
-//     describe('and header is clicked', () => {
-//       beforeAll(() => {
-//         jasmine.clock().uninstall();
-//         jasmine.clock().install();
+describe('[TestTableComponent]', () => {
+  let component: TableComponent;
+  let fixture: ComponentFixture<TestTableComponent>;
 
-//       });
-//       afterAll(() => {
-//         jasmine.clock().uninstall();
-//       });
+  let rootElement: DebugElement;
 
-//       beforeEach(() => {
-//         header = rootElement.query(By.css('.expandable-div-header'));
-//         header.triggerEventHandler('click', null);
-//         fixture.detectChanges();
-//       });
+  beforeEach((done) => {
+    TestBed.resetTestEnvironment();
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+    TestBed.configureTestingModule({
+      declarations: [
+        TestTableComponent,
+        TableComponent,
+        TableHeaderComponent,
+        TableHeaderColumnComponent,
+        TableRowComponent,
+        TableRowColumnComponent,
+        ExpandableDivComponent,
+        ExpandableDivHeaderComponent,
+        ExpandableDivContentComponent
+      ],
+      imports: [CommonModule, BrowserAnimationsModule]
+    });
 
-//       it('div is collapsed', () => {
-//         jasmine.clock().tick(400);
-//         expect(component.expanded).toBe(false);
-//       });
+    TestBed.compileComponents().then(() => {
+      fixture = TestBed.createComponent(TestTableComponent);
+      component = fixture.debugElement.query(By.directive(ExpandableDivComponent)).componentInstance;
+      rootElement = fixture.debugElement.query(By.directive(ExpandableDivComponent));
+      fixture.detectChanges();
+      done();
+    });
+  });
 
-//       describe('and header is clicked again', () => {
-//         beforeEach(() => {
-//           header.triggerEventHandler('click', null);
-//           fixture.detectChanges();
-//         });
-//         it('div is collapsed', () => {
-//           expect(component.expanded).toBe(true);
-//         });
-//       });
-//     });
-//   });
+  describe('When component is initialized with expanded = true', () => {
 
-//   describe('When component is initialized', () => {
-//     beforeAll(() => {
-//       jasmine.clock().uninstall();
-//       jasmine.clock().install();
+    // table class doesnt work
+    // it('component has class table', () => {
+    //   expect(rootElement.parent.classes['table']).toBe(true);
+    // });
+    it('component has class expandable-div', () => {
+      expect(rootElement.classes['expandable-div']).toBe(true);
+    });
+    it('component has class expandable-div--collapsed', () => {
+      expect(rootElement.classes['expandable-div--collapsed']).toBe(true);
+    });
+    it('component does not have class expandable-div--expanded', () => {
+      expect(rootElement.classes['expandable-div--expanded']).toBe(false);
+    });
 
-//     });
-//     afterAll(() => {
-//       jasmine.clock().uninstall();
-//     });
+    describe('and table header is clicked', () => {
+      beforeEach(() => {
+        spyOn(component.expandedChanged, 'emit').and.callThrough();
 
-//     it('component has class expandable-div', () => {
-//       expect(rootElement.classes['expandable-div']).toBe(true);
-//     });
-//     it('component has class expandable-div--collapsed', () => {
-//       expect(rootElement.classes['expandable-div--collapsed']).toBe(true);
-//     });
-//     it('component does not have class expandable-div--expanded', () => {
-//       expect(rootElement.classes['expandable-div--expanded']).toBe(false);
-//     });
+        rootElement.children[0].triggerEventHandler('click', event);
+        fixture.detectChanges();
+      });
 
-//     describe('and header is clicked', () => {
-//       beforeEach(() => {
-//         header = rootElement.query(By.css('.expandable-div-header'));
-//         header.triggerEventHandler('click', null);
-//         fixture.detectChanges();
-//       });
-
-//       it('div is expanded', () => {
-//         expect(component.expanded).toBe(true);
-//       });
-//       describe('and header is clicked again', () => {
-//         beforeEach(() => {
-//           header.triggerEventHandler('click', null);
-//           fixture.detectChanges();
-//         });
-//         it('div is collapsed', () => {
-//           jasmine.clock().tick(400);
-//           expect(component.expanded).toBe(false);
-//         });
-//       });
-//     });
-
-//   });
-// });
+      it('expandedChanged has been called', () => {
+        expect(component.expandedChanged.emit).toHaveBeenCalledWith(true);
+      });
+      it('component has class expandable-div', () => {
+        expect(rootElement.classes['expandable-div']).toBe(true);
+      });
+      it('component has class expandable-div--collapsed', () => {
+        expect(rootElement.classes['expandable-div--collapsed']).toBe(false);
+      });
+      it('component does not have class expandable-div--expanded', () => {
+        expect(rootElement.classes['expandable-div--expanded']).toBe(true);
+      });
+    });
+  });
+});
