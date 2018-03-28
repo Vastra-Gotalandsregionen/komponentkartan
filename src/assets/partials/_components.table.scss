@@ -20,6 +20,11 @@
         &:last-child {
           padding-right: 0;
         }
+        .bg-image--icon {
+          display: inline-block;
+          margin-left: 6px;
+          vertical-align: text-bottom;
+        }
       }
       .expandable-div-chevron {
         position: absolute;
@@ -99,6 +104,14 @@
       .expandable-div--collapsed {
         .expandable-div-header {
           font-weight: normal;
+          padding-top: 0px;
+          padding-bottom: 0px;
+        }
+      }
+      .expandable-div--expanded {
+        .expandable-div-header {
+          padding-top: 0px;
+          padding-bottom: 0px;
         }
       }
       .table {
