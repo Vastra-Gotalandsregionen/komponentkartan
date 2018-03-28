@@ -20,20 +20,10 @@
         &:last-child {
           padding-right: 0;
         }
-        .bg-image--icon{
+        .bg-image--icon {
           display: inline-block;
           margin-left: 6px;
-          vertical-align: bottom;
-          .theme--blue & {
-            @extend .bg-image-icon-calendar-border--blue;
-          }
-          .theme--red & {
-            @extend .bg-image-icon-calendar-border--red;
-          }
-          .theme--green & {
-            background-color: $primary-color--green;
-            @extend .bg-image-icon-calendar-border--green;
-          }
+          vertical-align: text-bottom;
         }
       }
       .expandable-div-chevron {
@@ -114,6 +104,14 @@
       .expandable-div--collapsed {
         .expandable-div-header {
           font-weight: normal;
+          padding-top: 0px;
+          padding-bottom: 0px;
+        }
+      }
+      .expandable-div--expanded {
+        .expandable-div-header {
+          padding-top: 0px;
+          padding-bottom: 0px;
         }
       }
       .table {
