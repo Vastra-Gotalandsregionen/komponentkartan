@@ -17,6 +17,12 @@ vgr-monthpicker {
 
 .monthpicker {
   height: $component-height;
+  &:focus {
+    outline: 0;
+    .monthpicker__dropdown {
+      border: 1px solid blue;
+    }
+  }
 }
 
 .monthpicker__dropdown {
@@ -238,14 +244,26 @@ vgr-monthpicker {
   padding-top: 7px;
   float: left;
   cursor: pointer;
-  &:hover,
-  &:focus {
+  &:hover {
     @extend .background-color--secondary;
     color: $text-color--light;
   }
+  &:focus {
+    outline: 0;
+    background-color: $background-color--content;
+    border-color: blue;
+    border-width: 2px;
+    border-style: solid;
+    margin-top: 14px;
+    padding-top: 5px;
+    &:hover:not(.disabled):not(.readonly) {
+      border: none;
+      margin-top: 14px;
+      padding-top: 7px;
+    }
+  }
   &.disabled {
-    &:hover,
-    &:focus {
+    &:hover {
       background-color: $background-color--content;
     }
     color: $control-color--disabled;

@@ -1,8 +1,8 @@
 <div class="validation">
   <div class="monthpicker" (mousedown)="onMouseDown($event)" (keydown)="onKeyDown($event)" (focusin)="onEnter()" (focusout)="onLeave()"
-    [ngClass]="{'monthpicker--open' : expanded}">
+    [ngClass]="{'monthpicker--open' : expanded}" tabindex="0">
 
-    <div class="monthpicker__dropdown" tabindex="{{disabled || readonly ? -1 : 0}}">
+    <div class="monthpicker__dropdown">
       <span *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date : selectedDateFormat}}</span>
       <span *ngIf="!selectedDate" title="{{ readonly ? '' : 'Välj månad' }}">{{ readonly ? '' : 'Välj månad' }}</span>
 

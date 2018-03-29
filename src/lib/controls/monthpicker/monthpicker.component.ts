@@ -243,8 +243,9 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                 }
             case 27: // escape
                 {
-                    this.expanded = false;
-                    // this.focusDropdown();
+                    if (this.expanded) {
+                        this.toggleCalendar(event);
+                    }
                     event.preventDefault();
                     break;
                 }
@@ -355,7 +356,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     private toggleCalendar(event: Event) {
         this.toggleExpand(event);
-
     }
 
     private toggleExpand(event: Event) {
@@ -366,12 +366,17 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
             return;
         }
 
-        if ((element.hasClass('monthpicker__calendar__month') && !element.hasClass('disabled')) ||
-            element.hasClass('monthpicker__dropdown') ||
-            element.parent().hasClass('monthpicker__dropdown')
-        ) {
-            this.setDisplayedYear(this.selectedDate);
-            this.expanded = !this.expanded;
+        this.setDisplayedYear(this.selectedDate);
+        this.expanded = !this.expanded;
+
+        if (this.expanded) {
+            setTimeout(() => {
+                this.focusableMonths[this.currentFocusedMonth].focus();
+
+            }, 50);
+        } else {
+            // set focus on component
+            this.elementRef.nativeElement.querySelector('.monthpicker').focus();
         }
     }
 
