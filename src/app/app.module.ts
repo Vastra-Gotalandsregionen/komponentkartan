@@ -65,6 +65,7 @@ import { ExamplesListwithlistsComponent } from './examples-listwithlists/example
 import { UnitService } from './examples-listwithlists/unitService';
 
 import { IconsComponent } from './icons/icons.component';
+import { TextareafieldComponent } from './textareaField/textareafield.component';
 
 @NgModule({
     declarations: [
@@ -108,7 +109,8 @@ import { IconsComponent } from './icons/icons.component';
         UnitFilterPipe,
         UnitFilter2Pipe,
         ActionPanelsComponent,
-        ClosebuttonComponent
+        ClosebuttonComponent,
+        TextareafieldComponent
     ],
     imports: [
         KomponentkartanModule,
