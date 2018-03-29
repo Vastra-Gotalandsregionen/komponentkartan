@@ -220,10 +220,10 @@ vgr-monthpicker {
 
 .monthpicker__calendar__content {
   margin-top: 6px;
-  margin-left: 9px;
-  margin-right: 9px;
+  margin-left: 8px;
+  margin-right: 8px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   text-align: center;
   vertical-align: middle;
 }
@@ -236,6 +236,7 @@ vgr-monthpicker {
   margin-right: 9px;
   margin-top: 14px;
   padding-top: 7px;
+  float: left;
   cursor: pointer;
   &:hover,
   &:focus {

@@ -277,18 +277,24 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                     if (event.shiftKey) {
                         this.onPreviousMouseDown(event);
                     } else {
-                        if (this.currentFocusedMonth > 2) {
-                            this.currentFocusedMonth = this.currentFocusedMonth - 3;
+                        if (this.currentFocusedMonth > 0) {
+                            this.currentFocusedMonth = this.currentFocusedMonth - 1;
+                        } else if (this.previousYear) {
+                            this.onPreviousMouseDown(event);
+                            this.currentFocusedMonth = 11;
                         }
-                        this.focusableMonths[this.currentFocusedMonth].focus();
                     }
+                    this.focusableMonths[this.currentFocusedMonth].focus();
                     break;
                 }
 
             case 38: // arrow up
                 {
-                    if (this.currentFocusedMonth % 3 !== 0) {
-                        this.currentFocusedMonth = this.currentFocusedMonth - 1;
+                    if (this.currentFocusedMonth > 3) {
+                        this.currentFocusedMonth = this.currentFocusedMonth - 4;
+                    } else if (this.previousYear) {
+                        this.onPreviousMouseDown(event);
+                        this.currentFocusedMonth = this.currentFocusedMonth + 8;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
                     event.preventDefault();
@@ -300,17 +306,24 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                     if (event.shiftKey) {
                         this.onNextMouseDown(event);
                     } else {
-                        if (this.currentFocusedMonth < 9) {
-                            this.currentFocusedMonth = this.currentFocusedMonth + 3;
+                        if (this.currentFocusedMonth < 11) {
+                            this.currentFocusedMonth = this.currentFocusedMonth + 1;
+                        } else if (this.nextYear) {
+                            this.onNextMouseDown(event);
+                            this.currentFocusedMonth = 0;
                         }
-                        this.focusableMonths[this.currentFocusedMonth].focus();
+
                     }
+                    this.focusableMonths[this.currentFocusedMonth].focus();
                     break;
                 }
             case 40: // arrow dowm
                 {
-                    if (this.currentFocusedMonth % 3 !== 2) {
-                        this.currentFocusedMonth = this.currentFocusedMonth + 1;
+                    if (this.currentFocusedMonth < 8) {
+                        this.currentFocusedMonth = this.currentFocusedMonth + 4;
+                    } else if (this.nextYear) {
+                        this.onNextMouseDown(event);
+                        this.currentFocusedMonth = this.currentFocusedMonth - 8;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
                     event.preventDefault();
