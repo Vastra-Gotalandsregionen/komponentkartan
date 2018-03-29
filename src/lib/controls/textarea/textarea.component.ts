@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'vgr-textarea',
@@ -7,16 +7,34 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TextareaComponent implements OnInit {
 
-  @Input() rows: number;
-  @Input() cols: number;
-  @Input() placeholder: number;
+  @Input() width: string;
+  @Input() height: string;
+  @Input() placeholder: string;
+
+  @HostBinding('class.validated-input') hasClass = true;
+  @HostBinding('class.validation-error--active') get errorClass() {
+    return true;
+  }
+  @HostBinding('class.validation-error--editing') get editingClass() {
+    return false;
+  }
+  @HostBinding('class.validation-error--fixed') get fixedClass() {
+    return false;
+  }
+
+  currentStyles: any;
 
   constructor() {
-    this.rows = 3999;
-    this.cols = 3999;
+    this.width = '100%';
+    this.height = '120px';
+    this.placeholder = '';
   }
 
   ngOnInit() {
+    this.currentStyles = {
+      'width': this.width,
+      'height': this.height
+    };
   }
 
 }
