@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-textareafield',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TextareafieldComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      control1: ['hejsan', Validators.required],
+      control2: ['', Validators.required],
+    });
   }
-
 }

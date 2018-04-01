@@ -1,4 +1,5 @@
 .textarea {
+  display: inline-block;
   .textarea-content {
     width: 100%;
     top: 0px;
@@ -12,18 +13,12 @@
     border: 1px solid #151515;
   }
   &-validation {
-    margin-bottom: 5px;
-    margin-top: 5px;
-    margin-right: 5px;
-    margin-left: 5px;
+    padding: $margin--slim;
     &-error--active & {
-      width: 100%;
-      padding: $margin--slim;
       background-color: $secondary-color--error;
       transition: background-color 0.3s linear;
     }
     &-error--editing & {
-      padding: $margin--slim;
       background-color: $background-color--default;
       transition: background-color 0.3s linear;
     }

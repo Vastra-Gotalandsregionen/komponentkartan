@@ -13,12 +13,27 @@
   </div>
 
   <div class="docs__examples">
-    <vgr-textarea></vgr-textarea>
-    <br>
-    <vgr-textarea [width]="'50%'" [height]="'200px'" [placeholder]="'hej'"></vgr-textarea>
+    <form [formGroup]="form">
+      <vgr-textarea formControlName="control1"></vgr-textarea>
+      <vgr-textarea formControlName="control2" [width]="'50%'" [height]="'200px'" [placeholder]="'hej'"></vgr-textarea>
+    </form>
+    <div class="row-layout">
+      <div class="full">
+        <h2>Notera</h2>
+        <ul>
+          <li>
+            För validering så använder vi Reactive Forms för att hantera detta. Validering kan ske på blur, change och submit.
+          </li>
+        </ul>
+        Under "kodexempel" finns exempel på hur input-komponenten kan användas i Angular Reactive Forms:
+        <br>
+        <a href="/reactiveformsexample">Reactive Forms exempel</a>
+      </div>
+    </div>
   </div>
 
   <div class="docs__api">
+    Api
   </div>
 
 
