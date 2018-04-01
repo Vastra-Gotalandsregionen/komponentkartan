@@ -11,18 +11,17 @@ export class TextareaComponent implements OnInit {
   @Input() height: string;
   @Input() placeholder: string;
 
-  @HostBinding('class.validated-input') hasClass = true;
-  @HostBinding('class.validation-error--active') get errorClass() {
+  @HostBinding('class.textarea-validation-error--active') get errorClass() {
     return true;
   }
-  @HostBinding('class.validation-error--editing') get editingClass() {
+  @HostBinding('class.textarea-validation-error--editing') get editingClass() {
     return false;
   }
-  @HostBinding('class.validation-error--fixed') get fixedClass() {
+  @HostBinding('class.textarea-validation-error--fixed') get fixedClass() {
     return false;
   }
 
-  currentStyles: any;
+  textareaDimension: any;
 
   constructor() {
     this.width = '100%';
@@ -31,7 +30,7 @@ export class TextareaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentStyles = {
+    this.textareaDimension = {
       'width': this.width,
       'height': this.height
     };

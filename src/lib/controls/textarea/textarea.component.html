@@ -1,3 +1,9 @@
-<div class="textarea-wrapper textarea-validation">
-  <textarea class="textarea" [ngStyle]="currentStyles" [placeholder]="placeholder"></textarea>
+<div class="textarea" [ngStyle]="textareaDimension">
+  <div class="textarea-validation">
+    <textarea class="textarea-content" [placeholder]="placeholder"></textarea>
+    <div class="textarea-validation_status" title="hepp">
+      <div class="textarea-validation_status__icon"></div>
+      <div class="textarea-validation_status__message">hej</div>
+    </div>
+  </div>
 </div>
