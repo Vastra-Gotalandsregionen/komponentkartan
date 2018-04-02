@@ -1,6 +1,7 @@
 .textarea {
   display: inline-block;
-  .textarea-content {
+  margin-bottom: 5px;
+  &-input {
     width: 100%;
     top: 0px;
     resize: none;

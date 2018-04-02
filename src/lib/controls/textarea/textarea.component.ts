@@ -53,7 +53,6 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.formControlName) {
-      console.log(this.controlContainer.control);
       this.control = this.controlContainer.control.get(this.formControlName);
     }
   }
