@@ -63,9 +63,9 @@ import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpa
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
 import { UnitService } from './examples-listwithlists/unitService';
-
-import { IconsComponent } from './icons/icons.component';
 import { TextareafieldComponent } from './textareaField/textareafield.component';
+import { IconsComponent } from './icons/icons.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
     declarations: [
@@ -110,6 +110,7 @@ import { TextareafieldComponent } from './textareaField/textareafield.component'
         UnitFilter2Pipe,
         ActionPanelsComponent,
         ClosebuttonComponent,
+        TableComponent,
         TextareafieldComponent
     ],
     imports: [

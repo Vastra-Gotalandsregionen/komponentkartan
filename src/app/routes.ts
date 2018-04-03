@@ -38,6 +38,7 @@ import { ExpandableDivComponent } from './expandable-div/expandable-div.componen
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
+import { TableComponent } from './table/table.component';
 
 import { IconsComponent } from './icons/icons.component';
 import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
@@ -67,6 +68,7 @@ export const appRoutes: Routes = [
     { path: 'savecancel', component: SavecancelComponent },
     { path: 'backtotop', component: BacktotopComponent },
     { path: '', component: StartComponent },
+    { path: 'table', component: TableComponent },
     { path: 'theming', component: ThemingComponent },
     { path: 'titlevalue', component: TitleValueComponent },
     { path: 'filtertextbox', component: FiltertexboxComponent },

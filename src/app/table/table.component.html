@@ -1,0 +1,204 @@
+<app-component-docs [componentName]="'table'">
+  <div class=" docs__overview ">
+    
+  </div>
+  <div class="docs__examples ">
+    
+  </div>
+  <div class="docs__api ">
+    <!-- API -->
+   
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>expanded: boolean</td>
+        <td>Anger om sektionen är expanderad eller ej</td>
+        <td>[expanded]="true"</td>
+      </tr>
+      <tr>
+        <td>expandedChanged: EventEmitter&lt;boolean&gt;
+        </td>
+        <td>Event som triggras när sektionen expanderas/kollapsas.</td>
+        <td>(expandedChanged)="onExpandedChanged($event)</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag ">
+    <i>Under utveckling</i>
+  </div>
+</app-component-docs>
+<vgr-page class="no-sort">
+  <vgr-page-header [title]="'Table'">
+  </vgr-page-header>
+  <vgr-page-body>
+    <vgr-page-block>
+      <vgr-list [allowMultipleExpandedItems]="true">
+        <vgr-list-header>
+          <vgr-list-column-header [text]="'Dokumentation för table'" [width]="20"></vgr-list-column-header>
+        </vgr-list-header>
+        <vgr-list-item [expanded]="true">
+          <vgr-list-item-header>
+            <h4>Översikt</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <div class="content-overview">
+              <p>
+                <code>&lt;vgr-table&gt;</code> består av 
+                <code>&lt;vgr-table-header&gt;</code> och <code>&lt;vgr-table-row&gt;</code>
+                Headern är alltid synlig och kan vid klick visa/dölja tabellens rader.
+                En vgr-table kan även innehålla en vgr-table i sig.
+              </p>
+              <br>
+              <p> Förändras med tema:
+                <strong>ja</strong>
+              </p>
+            </div>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false">
+          <vgr-list-item-header>
+            <h4>Exempel</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <section [innerHTML]="htmlMarkup" highlight-js-content=".highlight"></section>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-table</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Exempel</th>
+              </tr>
+              <tr>
+                <td>expanded: boolean</td>
+                <td>Anger om sektionen är expanderad eller ej</td>
+                <td>[expanded]="true"</td>
+              </tr>
+              <tr>
+                <td>expandedChanged: EventEmitter&lt;boolean&gt;
+                </td>
+                <td>Event som triggras när sektionen expanderas/kollapsas.</td>
+                <td>(expandedChanged)="onExpandedChanged($event)</td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-table-header</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
+                <th style="width:600px">Beskrivning</th>
+              </tr>
+              <tr>
+                <td>
+                  Behållare för vgr-table-header-column. Har inga properties.
+                </td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-table-header-column</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Exempel</th>
+              </tr>
+              <tr>
+                <td>width : number</td>
+                <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av width ska
+                  vara 20 för vgr-table.
+                </td>
+                <td>
+                  [width]="20"
+                </td>
+              </tr>
+              <tr>
+                <td>align : string</td>
+                <td>Man kan sätta en alignment på kolumnerna. Defaultvärde är left. Giltiga värden är right, left och center.
+                  <br>Om man sätter ett felaktigt värde så sätts defaultvärdet
+                </td>
+                <td>
+                  [align]="'right'"
+                </td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-table-row</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
+                <th style="width:600px">Beskrivning</th>
+              </tr>
+              <tr>
+                <td>
+                  Behållare för vgr-table-row. Har inga properties.
+                </td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false ">
+          <vgr-list-item-header>
+            <h4>API - vgr-table-row-column</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <table class="property-table">
+              <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Exempel</th>
+              </tr>
+              <tr>
+                <td>width : number</td>
+                <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av width ska
+                  vara 20 för vgr-table.
+                </td>
+                <td>
+                  [width]="20"
+                </td>
+              </tr>
+              <tr>
+                <td>align : string</td>
+                <td>Man kan sätta en alignment på kolumnerna. Defaultvärde är left. Giltiga värden är right, left och center.
+                  <br>Om man sätter ett felaktigt värde så sätts defaultvärdet
+                </td>
+                <td>
+                  [align]="'right'"
+                </td>
+              </tr>
+            </table>
+          </vgr-list-item-content>
+        </vgr-list-item>
+        <vgr-list-item [expanded]="false">
+          <vgr-list-item-header>
+            <h4>Tillgänglighet</h4>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+           <p>Ej implementerat</p>
+          </vgr-list-item-content>
+        </vgr-list-item>
+      </vgr-list>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>
