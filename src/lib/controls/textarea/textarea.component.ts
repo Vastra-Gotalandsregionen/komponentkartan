@@ -50,7 +50,7 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   control: AbstractControl;
   displayValue: any;
   hasFocus = false;
-  private validationErrorMessage = 'Obligatoriskt';
+  private validationErrorMessage = 'Obligatorisk';
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.width = '100%';
