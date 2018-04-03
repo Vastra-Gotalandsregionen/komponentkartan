@@ -308,6 +308,10 @@ vgr-monthpicker {
   }
   .monthpicker__calendar__month {
     padding-top: 5px;
+    &:focus {
+      margin-top: 14px;
+      padding-top: 3px;
+    }
   }
   .monthpicker__calendar__month--today {
     padding-top: 4px;
