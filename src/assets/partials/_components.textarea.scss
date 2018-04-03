@@ -1,6 +1,10 @@
 .textarea {
   display: inline-block;
   margin-bottom: 5px;
+  .readonly & {
+    border-color: $background-color--content;
+    cursor: text;
+  }
   &-input {
     width: 100%;
     top: 0px;

@@ -15,7 +15,6 @@ import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCES
 @Component({
   selector: 'vgr-textarea',
   templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.css'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => TextareaComponent),
@@ -31,21 +30,20 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input() formControlName: string;
   @Input() maxlength: number;
 
+  @Input() @HostBinding('class.readonly') readonly?: boolean;
+
   @HostBinding('class.textarea-validation-error--active') get errorClass() {
     return this.control && this.control.invalid && !this.hasFocus;
   }
   @HostBinding('class.textarea-validation-error--editing') get editingClass() {
     return this.control && this.control.invalid && this.hasFocus;;
   }
-  @HostBinding('class.textarea-validation-error--fixed') get fixedClass() {
-    return false;
-  }
 
   textareaDimension: any;
   control: AbstractControl;
   displayValue: any;
   hasFocus = false;
-  validationErrorMessage = 'Obligatoriskt';
+  private validationErrorMessage = 'Obligatoriskt';
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.width = '100%';
