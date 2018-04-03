@@ -1,10 +1,10 @@
-<div class="textarea" [ngStyle]="textareaDimension">
-  <div class="textarea-validation">
-    <textarea [ngStyle]="{ 'height': height }" [placeholder]="placeholder" class="textarea-input" [(ngModel)]="displayValue"
-      (ngModelChange)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus()"></textarea>
-    <div *ngIf="control" class="textarea-validation_status" title="hepp">
-      <div class="textarea-validation_status__icon"></div>
-      <div class="textarea-validation_status__message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid sint natus suscipit maiores, </div>
+<div class="textarea" [ngStyle]="{ 'width': width }">
+  <div class=" textarea-validation ">
+    <textarea [ngStyle]="{ 'height': height }" [maxlength]="maxlength" [placeholder]="placeholder " class="textarea-input " [(ngModel)]="displayValue "
+      (ngModelChange)="onChange($event) " (blur)="onBlur($event) " (focus)="onFocus() "></textarea>
+    <div *ngIf="control " class="textarea-validation_status " title="hepp ">
+      <div class="textarea-validation_status__icon "></div>
+      <div class="textarea-validation_status__message ">{{validationErrorMessage}}</div>
     </div>
   </div>
 </div>

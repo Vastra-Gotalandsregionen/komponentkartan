@@ -14,6 +14,7 @@
     border: 1px solid #151515;
   }
   &-validation {
+    max-height: none;
     padding: $margin--slim;
     &-error--active & {
       background-color: $secondary-color--error;
@@ -29,7 +30,10 @@
       }
     }
     &_status {
+      display: flex;
       &__message {
+        position: relative;
+        max-width: calc(100% - 30px);
         display: none;
         margin-left: 4px;
         vertical-align: middle;

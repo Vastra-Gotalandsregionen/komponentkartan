@@ -29,6 +29,7 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input() height: string;
   @Input() placeholder: string;
   @Input() formControlName: string;
+  @Input() maxlength: number;
 
   @HostBinding('class.textarea-validation-error--active') get errorClass() {
     return this.control && this.control.invalid && !this.hasFocus;
@@ -44,6 +45,7 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   control: AbstractControl;
   displayValue: any;
   hasFocus = false;
+  validationErrorMessage = 'Obligatoriskt';
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.width = '100%';

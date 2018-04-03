@@ -14,7 +14,7 @@ export class TextareafieldComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      control1: ['hejsan', Validators.required],
+      control1: ['', Validators.required],
       control2: ['', Validators.required],
     });
   }
