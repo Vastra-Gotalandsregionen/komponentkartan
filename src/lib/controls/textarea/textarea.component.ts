@@ -66,7 +66,6 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
       this.control = this.controlContainer.control.get(this.formControlName);
 
       this.control.statusChanges.subscribe((status) => {
-        console.log(status);
       });
     }
   }
