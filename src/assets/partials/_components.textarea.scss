@@ -16,10 +16,12 @@
     padding: 10px;
     border-radius: 1px;
     border: 1px solid #151515;
+    font-family: "Calibri", sans-serif;
   }
   &-validation {
     max-height: none;
     padding: $margin--slim;
+    margin-left: -$margin--slim;
     &-error--active & {
       background-color: $secondary-color--error;
       transition: background-color 0.3s linear;

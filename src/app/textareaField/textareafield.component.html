@@ -4,7 +4,7 @@
       <code>
         &lt;vgr-textarea&gt; </code> är ett fält för inmatning utav värden i t.ex. ett formulär. Sen har den även följande
       funktioner implementerade:
-      <br> - Valbar storlekar på textarean, stödjer % eller pixlar i höjd och bredd.
+      <br> - Valbara storlekar på textarean, stödjer procent eller pixlar i höjd och bredd.
     </p>
     <br>
     <form [formGroup]="form">
@@ -45,12 +45,12 @@
       </tr>
       <tr>
         <td>width: string</td>
-        <td>Bredd i % eller px</td>
+        <td>Bredd i % eller px. Default = 100%</td>
         <td>[width]="'45px'", [width]="'45%'",</td>
       </tr>
       <tr>
         <td>height: string</td>
-        <td>Höjd i % eller px</td>
+        <td>Höjd i % eller px. Default = 120px</td>
         <td>[height]="'45px'", [height]="'45%'",</td>
       </tr>
       <tr>
@@ -62,6 +62,11 @@
         <td>maxlength: string</td>
         <td>Max antal tecken. Begränsar antalet möjliga tecken att mata in. Default = obegränsat.</td>
         <td>[maxlength]="50"</td>
+      </tr>
+      <tr>
+        <td>readonly: boolean</td>
+        <td>Sätter textfältet i readonly-läge. </td>
+        <td>[readonly]="true"</td>
       </tr>
     </table>
   </div>

@@ -35,7 +35,6 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
 
-
   @HostBinding('class.textarea-validation-error--active') get errorClass() {
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
   }
@@ -51,6 +50,7 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   displayValue: any;
   hasFocus = false;
   private validationErrorMessage = 'Obligatorisk';
+  cancel: boolean;
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.width = '100%';
@@ -107,10 +107,13 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   }
 
   onBlur(event: Event) {
+    event.cancelBubble = true;
     this.hasFocus = false;
     this.blur.emit(event);
-    this.control.markAsTouched();
-    this.control.markAsDirty();
+    if (this.control) {
+      this.control.markAsTouched();
+      this.control.markAsDirty();
+    }
 
     this.onTouched(this.displayValue);
   }

@@ -14,6 +14,7 @@ export class ModaldialogComponent implements OnInit {
   vardval1Answer: string;
   vardval2Answer: string;
   dropdownItems = [];
+  validateOnSubmit: boolean;
 
   exampleCodeHtml = `
   <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>
@@ -34,13 +35,12 @@ export class ModaldialogComponent implements OnInit {
   import { ModalService } from 'vgr-komponentkartan';
 
   constructor(modalService: ModalService) {}
-
-  doSomething() { }
 `;
 
 
   exampleCodeMarkup: string;
   exampleCodeTypescript: string;
+  form: FormGroup;
 
   constructor(public modalService: ModalService, htmlEncoder: HtmlEncodeService) {
     this.dropdownItems = [
@@ -52,6 +52,9 @@ export class ModaldialogComponent implements OnInit {
       htmlEncoder.prepareHighlightedSection(this.exampleCodeHtml, 'HTML');
     this.exampleCodeTypescript =
       htmlEncoder.prepareHighlightedSection(this.exampleCodeTs, 'typescript');
+
+
+
   }
 
   ngOnInit() {
@@ -107,6 +110,10 @@ export class ModaldialogComponent implements OnInit {
     this.vardvalForm2 = new FormGroup({
       vardval: new FormControl(null, { validators: [Validators.required] }),
     }, { updateOn: 'change' });
+
+    this.form = new FormGroup({
+      textarea: new FormControl('', { validators: [Validators.required] })
+    }, { updateOn: 'blur' });
   }
 
   selectVardval1() {
@@ -140,5 +147,17 @@ export class ModaldialogComponent implements OnInit {
     this.modalService.closeDialog(elementId);
   }
 
-  doSomething() { }
+  closeModalSave(elementId: string): void {
+    this.validateOnSubmit = true;
+    if (this.form.valid) {
+      this.modalService.closeDialog(elementId);
+      this.validateOnSubmit = false;
+    }
+  }
+
+  closeModalCancel(elementId: string): void {
+    this.form.reset();
+    this.modalService.closeDialog(elementId);
+  }
+
 }
