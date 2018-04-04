@@ -253,24 +253,28 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                 {
                     this.onPreviousMouseDown(event);
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
                     break;
                 }
             case 34: // pageDown
                 {
                     this.onNextMouseDown(event);
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
                     break;
                 }
             case 35: // end
                 {
                     this.currentFocusedMonth = 11;
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
                     break;
                 }
             case 36: // home
                 {
                     this.currentFocusedMonth = 0;
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
                     break;
                 }
             case 37: // arrow left
