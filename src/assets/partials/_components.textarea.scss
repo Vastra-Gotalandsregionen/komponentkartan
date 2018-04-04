@@ -9,14 +9,7 @@
     width: 100%;
     top: 0px;
     resize: none;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
     padding: 10px;
-    border-radius: 1px;
-    border: 1px solid #151515;
-    font-family: "Calibri", sans-serif;
   }
   &-validation {
     max-height: none;
@@ -36,12 +29,10 @@
       }
     }
     &_status {
-      display: flex;
       &__message {
         position: relative;
         max-width: calc(100% - 30px);
         display: none;
-        margin-left: 4px;
         vertical-align: middle;
         .textarea-validation-error--active & {
           color: $primary-color--error;
@@ -54,7 +45,6 @@
       }
       &__icon {
         display: none;
-        margin-top: 2px;
         height: 30px;
         width: 30px;
         vertical-align: middle;
