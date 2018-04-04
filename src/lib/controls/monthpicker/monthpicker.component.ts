@@ -227,6 +227,15 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         this.toggleCalendar(event);
     }
 
+    onMonthKeyDown(event: KeyboardEvent, selectedMonth: ICalendarMonth) {
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            if (selectedMonth.disabled) {
+                event.cancelBubble = true;
+            }
+            this.selectDate(selectedMonth);
+        }
+    }
+
     onKeyDown(event: KeyboardEvent) {
         switch (event.keyCode) {
             case 9: // tab
@@ -340,12 +349,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     onSelectMonthMouseDown(selectedMonth: ICalendarMonth) {
         this.selectDate(selectedMonth);
-    }
-
-    onSelectMonthKeyDown(event: KeyboardEvent) {
-        if (event.keyCode === 13 || event.keyCode === 32) {
-
-        }
     }
 
     @HostListener('document:click', ['$event'])

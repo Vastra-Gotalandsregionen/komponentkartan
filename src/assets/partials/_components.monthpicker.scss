@@ -20,7 +20,7 @@ vgr-monthpicker {
   &:focus {
     outline: 0;
     .monthpicker__dropdown {
-      border: 1px solid blue;
+      outline: 3px solid #4a90e2;
     }
   }
 }
@@ -250,11 +250,10 @@ vgr-monthpicker {
   }
   &:focus {
     outline: 0;
-    background-color: $background-color--content;
-    border-color: blue;
-    border-width: 2px;
+    border-color: #4a90e2;
+    border-width: 3px;
     border-style: solid;
-    margin-top: 14px;
+    margin-top: 13px;
     padding-top: 5px;
     &:hover:not(.disabled):not(.readonly) {
       border: none;
@@ -309,7 +308,7 @@ vgr-monthpicker {
   .monthpicker__calendar__month {
     padding-top: 5px;
     &:focus {
-      margin-top: 14px;
+      margin-top: 13px;
       padding-top: 3px;
     }
   }
