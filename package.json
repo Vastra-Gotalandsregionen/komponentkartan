@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "2.3.0-rc15",
+  "version": "2.3.0",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
