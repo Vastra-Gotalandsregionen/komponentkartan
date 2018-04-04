@@ -1,8 +1,20 @@
-import { Component, Input, HostBinding, forwardRef, Host, EventEmitter, AfterViewChecked, Output, OnInit, Optional, SkipSelf, SimpleChanges, OnChanges } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
-import { concat } from 'rxjs/observable/concat';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Host,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit,
+  Optional,
+  Output,
+  SimpleChanges,
+  SkipSelf,
+} from '@angular/core';
+import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { ErrorHandler } from '../../services/errorhandler';
 
 @Component({

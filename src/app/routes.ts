@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 
 // Domain
 import { InputfieldsComponent } from './inputfields/inputfields.component';
+import { TextareafieldComponent } from './textareaField/textareafield.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { MonthpickerComponent } from './monthpicker/monthpicker.component';
 import { ColoursComponent } from './colours/colours.component';
@@ -37,6 +38,7 @@ import { ExpandableDivComponent } from './expandable-div/expandable-div.componen
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
+import { TableComponent } from './table/table.component';
 
 import { IconsComponent } from './icons/icons.component';
 import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
@@ -44,6 +46,7 @@ import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
 export const appRoutes: Routes = [
 
     { path: 'inputFields', component: InputfieldsComponent },
+    { path: 'textareaField', component: TextareafieldComponent },
     { path: 'icons', component: IconsComponent },
     { path: 'textbuttons', component: TextbuttonsComponent },
     { path: 'radioButtons', component: RadiobuttonsComponent },
@@ -65,6 +68,7 @@ export const appRoutes: Routes = [
     { path: 'savecancel', component: SavecancelComponent },
     { path: 'backtotop', component: BacktotopComponent },
     { path: '', component: StartComponent },
+    { path: 'table', component: TableComponent },
     { path: 'theming', component: ThemingComponent },
     { path: 'titlevalue', component: TitleValueComponent },
     { path: 'filtertextbox', component: FiltertexboxComponent },

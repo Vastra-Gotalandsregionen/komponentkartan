@@ -19,5 +19,90 @@
         gröna och blå färgen. När en användare har behörighet för fler än ett system kommer de gemensamma delarna att visa
         den neutrala färgen.</p>
     </vgr-page-block>
+    <vgr-page-block>
+      <h2>Utecklingsmiljö för Angular + komponentkartan</h2>
+      <ol>
+        <li>
+          Installera Node
+          <a href="https://nodejs.org/en/" target="new"> https://nodejs.org/en/</a>
+          <br/>Verifiera att node och npm är installerat genom att köra
+          <code>node -v</code> samt
+          <code>npm -v</code> i en kommandoprompt (eller terminalen i VS Code).
+        </li>
+        <li>
+          (Rekommenderat) Installera IDE Visual Studio Code.
+          <a href="https://code.visualstudio.com/" target="new">https://code.visualstudio.com/</a>
+        </li>
+        <li>
+          Installera angular-cli
+          <a href="https://cli.angular.io/" target="new">https://cli.angular.io/</a> globalt på din dator:
+          <code>npm i -g @angular/cli</code>.
+          <br/>Verifiera installationen genom att köra
+          <code>ng -v</code>
+        </li>
+      </ol>
+
+      <h2>Följ dessa steg om du sätter upp ett nytt projekt</h2>
+      <ol>
+        <li>Skapa ett nytt projekt genom
+          <code>ng new ProjectName</code>
+        </li>
+        <li>För att lägga till Komponentkartan i projektet, ställ dig i projektets root. Navigera till
+          <a href="https://github.com/Vastra-Gotalandsregionen/komponentkartan">Komponentkartans GitHub-sida</a> i din webbläsare och följ steg 1-2 på den sidan.
+          <li>
+            Kör
+            <code>ng -s -o</code> för att köra igång din applikation lokalt och öppna i ett webbläsarfönster.
+          </li>
+      </ol>
+      <p>Nu är det dags att börja bygga din applikation. Alla komponenter som finns i Komponentkartan finns dokumenterade under
+        'Komponenter' till vänster. Var noga med att
+        <a href="./pagestructure">sidstrukturen</a> blir korrekt när du skapar nya sidor.</p>
+
+      <h2>Följ dessa steg om du ska börja arbeta i ett befintligt projekt</h2>
+      <ol>
+        <li>
+          Hämta hem projektets repo från
+          <a href="https://github.com/Vastra-Gotalandsregionen/komponentkartan">Komponentkartans GitHub-sida</a>
+        </li>
+        <li>
+          Ställ dig i projektets root och kör
+          <code>npm i</code> för att installera alla node-paket som projektet behöver.
+        </li>
+        <li>
+          Kör
+          <code>ng -s -o</code> för att köra igång din applikation lokalt och öppna i ett webbläsarfönster.
+        </li>
+      </ol>
+    </vgr-page-block>
+
+    <vgr-page-block>
+      <h1>Versionshantering</h1>
+      <p>Versionsnummer för komponentkartan ska anges enligt
+        <a href="https://semver.org/">Semantic Versioning</a>
+      </p>
+      <p>MAJOR: Breaking changes</p>
+      <p>MINOR: Features</p>
+      <p>PATCH: Buggfixar</p>
+      <p>Under arbetetet med en story ska beta-version användas tills dess att storyn är helt klar och godkänd. Då ska en stable
+        version releasas.</p>
+    </vgr-page-block>
+    <vgr-page-block>
+      <h1>Nice to have</h1>
+      <h2>Extensions till Visual Studio Code</h2>
+      <ul>
+        <li>Beautify</li>
+        <li>Debugger for Chrome</li>
+        <li>TSLint</li>
+        <li>SCSS Intellisence</li>
+        <li>Wallaby.js</li>
+      </ul>
+    </vgr-page-block>
+    <vgr-page-block>
+      <h1>Troubleshooting</h1>
+      <p>Problem med npm-paket kan ibland lösas genom att ta bort katalogen node_modules samt package-lock.json och sen köra
+        om
+        <code>npm i</code>
+      </p>
+    </vgr-page-block>
   </vgr-page-body>
 </vgr-page>

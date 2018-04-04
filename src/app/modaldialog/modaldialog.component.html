@@ -232,7 +232,7 @@
     </p>
     <br/>
     <p>Ditt svar:</p>
-    <textarea></textarea>
+    <vgr-textarea></vgr-textarea>
   </vgr-modal-content>
   <vgr-modal-footer>
     <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Avbryt</vgr-button>
@@ -240,15 +240,19 @@
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="commentAnswerWithoutTextModal">
+
   <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
   <vgr-modal-content>
     <p>Ditt svar:</p>
-    <textarea></textarea>
+    <form [formGroup]="form">
+      <vgr-textarea formControlName="textarea" [showValidation]="form.controls.textarea.touched && validateOnSubmit"></vgr-textarea>
+    </form>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Avbryt</vgr-button>
-    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithoutTextModal')">Svara</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModalCancel('commentAnswerWithoutTextModal')">Avbryt</vgr-button>
+    <vgr-button [secondary]="true" (click)="closeModalSave('commentAnswerWithoutTextModal')">Svara</vgr-button>
   </vgr-modal-footer>
+
 </vgr-modal>
 <vgr-modal id="commentModal">
   <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
