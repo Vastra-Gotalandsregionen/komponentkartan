@@ -7,6 +7,7 @@ import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
+import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-monthpicker',
@@ -32,8 +33,8 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
-    @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() @HostBinding('class.readonly') readonly: boolean;
+    @Input() @HostBinding('class.disabled') disabled: boolean = false;
+    @Input() @HostBinding('class.readonly') readonly: boolean = false;
 
     @HostBinding('class.validated-input') hasClass = true;
     @HostBinding('class.validation-error--active') get errorClass() {
@@ -42,6 +43,9 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     @HostBinding('class.validation-error--editing') get editingClass() {
         return this.showValidation && this.control && this.control.invalid && this.hasFocus;
     }
+
+    labelledbyid: string = Guid.newGuid();
+
 
     hasFocus: boolean;
 
@@ -95,7 +99,16 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     setFocusableItems() {
         this.focusableMonths = this.elementRef.nativeElement.getElementsByTagName('li');
-        this.focusableMonths[0].focus();
+        this.setFocusedElement();
+    }
+
+    setFocusedElement() {
+        if (!this.selectedDate)
+            this.currentFocusedMonth = this.today.getMonth();
+        else {
+            this.currentFocusedMonth = this.selectedDate.getMonth();
+        }
+        this.focusableMonths[this.currentFocusedMonth].focus();
     }
 
     writeValue(value: any): void {
@@ -288,15 +301,11 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                 }
             case 37: // arrow left
                 {
-                    if (event.shiftKey) {
+                    if (this.currentFocusedMonth > 0) {
+                        this.currentFocusedMonth = this.currentFocusedMonth - 1;
+                    } else if (this.previousYear) {
                         this.onPreviousMouseDown(event);
-                    } else {
-                        if (this.currentFocusedMonth > 0) {
-                            this.currentFocusedMonth = this.currentFocusedMonth - 1;
-                        } else if (this.previousYear) {
-                            this.onPreviousMouseDown(event);
-                            this.currentFocusedMonth = 11;
-                        }
+                        this.currentFocusedMonth = 11;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
                     break;
@@ -317,21 +326,16 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                 }
             case 39: // arrow right
                 {
-                    if (event.shiftKey) {
+                    if (this.currentFocusedMonth < 11) {
+                        this.currentFocusedMonth = this.currentFocusedMonth + 1;
+                    } else if (this.nextYear) {
                         this.onNextMouseDown(event);
-                    } else {
-                        if (this.currentFocusedMonth < 11) {
-                            this.currentFocusedMonth = this.currentFocusedMonth + 1;
-                        } else if (this.nextYear) {
-                            this.onNextMouseDown(event);
-                            this.currentFocusedMonth = 0;
-                        }
-
+                        this.currentFocusedMonth = 0;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
                     break;
                 }
-            case 40: // arrow dowm
+            case 40: // arrow down
                 {
                     if (this.currentFocusedMonth < 8) {
                         this.currentFocusedMonth = this.currentFocusedMonth + 4;
@@ -378,8 +382,7 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
         if (this.expanded) {
             setTimeout(() => {
-                this.focusableMonths[this.currentFocusedMonth].focus();
-
+                this.setFocusedElement();
             }, 50);
         } else {
             // set focus on component
@@ -395,7 +398,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         if (selectedMonth.disabled) {
             return;
         }
-
 
         this.years.forEach(y => y.months.forEach(m => m.selected = false));
 
