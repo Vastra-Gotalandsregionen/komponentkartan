@@ -25,7 +25,7 @@ export class ModaldialogComponent implements OnInit {
     <p>Ändringarna går förlorade om du inte sparar dem</p>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="doSomething()">Spara</vgr-button>
+    <vgr-button [secondary]="true" >Spara</vgr-button>
     <vgr-button [secondary]="true" default="true" (click)="modalService.closeDialog('myModalId')">Avbryt</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>`;
