@@ -98,7 +98,7 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     }
 
     setFocusableItems() {
-        this.focusableMonths = this.elementRef.nativeElement.getElementsByTagName('li');
+        this.focusableMonths = this.elementRef.nativeElement.getElementsByClassName('monthpicker__calendar__month');
         this.setFocusedElement();
     }
 

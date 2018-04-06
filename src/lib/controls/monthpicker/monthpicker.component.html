@@ -1,7 +1,7 @@
 <div class="validation">
   <div class="monthpicker" (mousedown)="onMouseDown($event)" (keydown)="onKeyDown($event)" (focusin)="onEnter()" (focusout)="onLeave()"
-    [ngClass]="{'monthpicker--open' : expanded}" [attr.aria-expanded]="expanded" [attr.aria-disabled]="disabled" [attr.aria-labelledby]="labelledbyid"
-    tabindex="0">
+    [ngClass]="{'monthpicker--open' : expanded}" role="form" [attr.aria-disabled]="disabled" [attr.aria-expanded]="expanded"
+    [attr.aria-labelledby]="labelledbyid" tabindex="0">
 
     <div class="monthpicker__dropdown">
       <span *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}" id="{{labelledbyid}}">{{selectedDate | date : selectedDateFormat}}</span>
@@ -19,72 +19,84 @@
             [attr.aria-disabled]="!nextYear" role="button"></div>
         </div>
         <div class="monthpicker__calendar__content">
-          <ul>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[0])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[0])" [attr.aria-selected]="displayedYear.months[0].selected"
-              [attr.aria-label]="'Januari '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[0].disabled,
+          <div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[0])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[0])" [attr.aria-disabled]="displayedYear.months[0].disabled"
+              [attr.aria-selected]="displayedYear.months[0].selected" [attr.aria-label]="'Januari '+ displayedYear.year" role="gridcell"
+              [ngClass]="{'disabled':displayedYear.months[0].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[0].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[0].selected}">Jan</li>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[1])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[1])" [attr.aria-selected]="displayedYear.months[1].selected"
-              [attr.aria-label]="'Februari '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[1].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[0].selected}">Jan</div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[1])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[1])" [attr.aria-disabled]="displayedYear.months[1].disabled"
+              [attr.aria-selected]="displayedYear.months[1].selected" [attr.aria-label]="'Februari '+ displayedYear.year" role="gridcell"
+              [ngClass]="{'disabled':displayedYear.months[1].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[1].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[1].selected}">Feb</li>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[2])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[2])" [attr.aria-selected]="displayedYear.months[2].selected"
-              [attr.aria-label]="'Mars '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[2].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[1].selected}">Feb</div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[2])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[2])" [attr.aria-disabled]="displayedYear.months[2].disabled"
+              [attr.aria-selected]="displayedYear.months[2].selected" [attr.aria-label]="'Mars '+ displayedYear.year" role="gridcell"
+              [ngClass]="{'disabled':displayedYear.months[2].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[2].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[2].selected}">Mar</li>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[3])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[3])" [attr.aria-selected]="displayedYear.months[3].selected"
-              [attr.aria-label]="'April '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[3].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[2].selected}">Mar</div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[3])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[3])" [attr.aria-disabled]="displayedYear.months[3].disabled"
+              [attr.aria-selected]="displayedYear.months[3].selected" [attr.aria-label]="'April '+ displayedYear.year" role="gridcell"
+              [ngClass]="{'disabled':displayedYear.months[3].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[3].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[3].selected}">Apr</li>
-          </ul>
-          <ul>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[4])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[4])" [attr.aria-selected]="displayedYear.months[4].selected"
-              [attr.aria-label]="'Maj '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[4].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[3].selected}">Apr</div>
+          </div>
+          <div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[4])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[4])" [attr.aria-disabled]="displayedYear.months[4].disabled"
+              [attr.aria-selected]="displayedYear.months[4].selected" [attr.aria-label]="'Maj '+ displayedYear.year" role="gridcell"
+              [ngClass]="{'disabled':displayedYear.months[4].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[4].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[4].selected}">Maj</li>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[5])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[5])" [attr.aria-selected]="displayedYear.months[5].selected"
-              [attr.aria-label]="'Juni '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[5].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[4].selected}">Maj</div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[5])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[5])" [attr.aria-disabled]="displayedYear.months[5].disabled"
+              [attr.aria-selected]="displayedYear.months[5].selected" [attr.aria-label]="'Juni '+ displayedYear.year" role="gridcell"
+              [ngClass]="{'disabled':displayedYear.months[5].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[5].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[5].selected}">Jun</li>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[6])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[6])" [attr.aria-selected]="displayedYear.months[6].selected"
-              [attr.aria-label]="'Juli '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[6].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[5].selected}">Jun</div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[6])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[6])" [attr.aria-disabled]="displayedYear.months[6].disabled"
+              [attr.aria-selected]="displayedYear.months[6].selected" [attr.aria-label]="'Juli '+ displayedYear.year" role="gridcell"
+              [ngClass]="{'disabled':displayedYear.months[6].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[6].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[6].selected}">Jul</li>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[7])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[7])" [attr.aria-selected]="displayedYear.months[7].selected"
-              [attr.aria-label]="'Augusti '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[7].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[6].selected}">Jul</div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[7])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[7])" [attr.aria-disabled]="displayedYear.months[7].disabled"
+              [attr.aria-selected]="displayedYear.months[7].selected" [attr.aria-label]="'Augusti '+ displayedYear.year" role="gridcell"
+              [ngClass]="{'disabled':displayedYear.months[7].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[7].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[7].selected}">Aug</li>
-          </ul>
-          <ul>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[8])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[8])" [attr.aria-selected]="displayedYear.months[8].selected"
-              [attr.aria-label]="'September '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[8].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[7].selected}">Aug</div>
+          </div>
+          <div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[8])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[8])" [attr.aria-disabled]="displayedYear.months[8].disabled"
+              [attr.aria-selected]="displayedYear.months[8].selected" [attr.aria-label]="'September '+ displayedYear.year"
+              role="gridcell" [ngClass]="{'disabled':displayedYear.months[8].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[8].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[8].selected}">Sep</li>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[9])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[9])" [attr.aria-selected]="displayedYear.months[9].selected"
-              [attr.aria-label]="'Oktober '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[9].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[8].selected}">Sep</div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[9])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[9])" [attr.aria-disabled]="displayedYear.months[9].disabled"
+              [attr.aria-selected]="displayedYear.months[9].selected" [attr.aria-label]="'Oktober '+ displayedYear.year" role="gridcell"
+              [ngClass]="{'disabled':displayedYear.months[9].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[9].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[9].selected}">Okt</li>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[10])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[10])" [attr.aria-selected]="displayedYear.months[10].selected"
-              [attr.aria-label]="'November '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[10].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[9].selected}">Okt</div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[10])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[10])" [attr.aria-disabled]="displayedYear.months[10].disabled"
+              [attr.aria-selected]="displayedYear.months[10].selected" [attr.aria-label]="'November '+ displayedYear.year"
+              role="gridcell" [ngClass]="{'disabled':displayedYear.months[10].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[10].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[10].selected}">Nov</li>
-            <li tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[11])"
-              (keydown)="onMonthKeyDown($event, displayedYear.months[11])" [attr.aria-selected]="displayedYear.months[11].selected"
-              [attr.aria-label]="'December '+ displayedYear.year" role="gridcell" [ngClass]="{'disabled':displayedYear.months[11].disabled,
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[10].selected}">Nov</div>
+            <div tabindex="0" class="monthpicker__calendar__month" (mousedown)="onSelectMonthMouseDown($event, displayedYear.months[11])"
+              (keydown)="onMonthKeyDown($event, displayedYear.months[11])" [attr.aria-disabled]="displayedYear.months[11].disabled"
+              [attr.aria-selected]="displayedYear.months[11].selected" [attr.aria-label]="'December '+ displayedYear.year"
+              role="gridcell" [ngClass]="{'disabled':displayedYear.months[11].disabled,
                                     'monthpicker__calendar__month--today' :displayedYear.months[11].isCurrentMonth,
-                                    'monthpicker__calendar__month--selected' :displayedYear.months[11].selected}">Dec</li>
-          </ul>
+                                    'monthpicker__calendar__month--selected' :displayedYear.months[11].selected}">Dec</div>
+          </div>
         </div>
       </div>
     </div>

@@ -516,5 +516,38 @@ describe('[MonthpickerComponent(Angular)]', () => {
       });
     });
   });
+  describe('monthpicker is initialized with only two months active and expanded', () => {
+    let listItems;
+    let months: DebugElement[];
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth();
+    let currentYearElement;
+    let nextYearElement;
+    beforeEach(() => {
+      component.expanded = false;
+
+      component.minDate = new Date(currentYear, 0, 1);
+      component.maxDate = new Date(currentYear, 1, 31);
+      component.expanded = true;
+      component.ngOnInit();
+
+      fixture.detectChanges();
+
+      component.ngOnChanges(null);
+    });
+    it('focused cell is current month', () => {
+      let focusedElement = rootElement.query(By.css(':focus'));
+      expect(focusedElement.nativeElement.innerText).toBe(component.getMonthName(currentMonth));
+    });
+    it('focused cell is disabled', () => {
+      let focusedElement = rootElement.query(By.css(':focus'));
+      if (currentMonth > 1)
+        expect(focusedElement.attributes['aria-disabled']).toBe('true');
+      else
+        expect(focusedElement.attributes['aria-disabled']).toBe('false');
+    });
+
+
+  });
 });
 
