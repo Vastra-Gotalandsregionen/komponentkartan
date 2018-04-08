@@ -10,6 +10,9 @@ $suffix-width: 30px;
     max-width: $input-small-width--small;
     width: $input-small-width--small;
   }
+  &.input-container--focus {
+    outline: 3px solid $focus-color;
+  }
 }
 
 input.input-container__textbox {

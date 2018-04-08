@@ -31,7 +31,8 @@
     padding-left: 17px;
     padding-right: 17px;
   }
-  &:hover:not(.button--disabled), &:focus:not(.button--disabled) {
+  &:hover:not(.button--disabled),
+  &:focus:not(.button--disabled) {
     .button__focus-line {
       visibility: visible;
     }
@@ -42,8 +43,8 @@
     }
   }
   &:focus {
-    box-shadow: 0 0 1px 1px $focus-color;
-    border-bottom-color: $focus-color;
+    box-shadow: none;
+    outline: 3px solid $focus-color;
   }
   &:active:not(.button--disabled) {
     height: 28px;

@@ -16,6 +16,9 @@ vgr-datepicker {
 
 .datepicker {
   height: $component-height;
+  &:focus {
+    outline: 3px solid $focus-color;
+  }
 }
 
 .datepicker__dropdown {
@@ -134,7 +137,7 @@ vgr-datepicker {
   width: 250px;
   height: 60px;
   z-index: $layer-four;
-   :before {
+  :before {
     content: "";
     display: inline-block;
     vertical-align: middle;
