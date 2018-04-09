@@ -308,6 +308,7 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                         this.currentFocusedMonth = 11;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
                     break;
                 }
 
@@ -333,6 +334,7 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                         this.currentFocusedMonth = 0;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
                     break;
                 }
             case 40: // arrow down

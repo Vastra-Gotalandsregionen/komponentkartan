@@ -11,7 +11,6 @@ describe('[MonthpickerComponent(Angular)]', () => {
   let component: MonthpickerComponent;
   let fixture: ComponentFixture<MonthpickerComponent>;
   let rootElement: DebugElement;
-  //let monthpicker: DebugElement;
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -32,7 +31,6 @@ describe('[MonthpickerComponent(Angular)]', () => {
       fixture = TestBed.createComponent(MonthpickerComponent);
       component = fixture.componentInstance;
       rootElement = fixture.debugElement;
-      // monthpicker = rootElement.query(By.css('.monthpicker'));
       fixture.detectChanges();
 
       done();
@@ -53,6 +51,19 @@ describe('[MonthpickerComponent(Angular)]', () => {
 
     it('onLeave event is not triggered', () => {
       expect(component.onLeave).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('When in monthpicker and Jan is clicked', () => {
+    beforeEach(() => {
+      component.expanded = true;
+      const months = fixture.debugElement.queryAll(By.css('.monthpicker__calendar__month'));
+      months[0].triggerEventHandler('mousedown', event);
+      fixture.detectChanges();
+    });
+
+    it('Jan is selected', () => {
+      expect(component.selectedDate.getMonth()).toBe(0);
     });
   });
 

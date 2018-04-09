@@ -244,22 +244,17 @@ vgr-monthpicker {
   padding-top: 7px;
   float: left;
   cursor: pointer;
-  &:hover {
+  &:hover:not(.disabled):not(.readonly) {
     @extend .background-color--secondary;
     color: $text-color--light;
   }
   &:focus {
     outline: 0;
-    border-color: #4a90e2;
+    border-color: $focus-color;
     border-width: 3px;
     border-style: solid;
     margin-top: 13px;
     padding-top: 5px;
-    &:hover:not(.disabled):not(.readonly) {
-      border: none;
-      margin-top: 14px;
-      padding-top: 7px;
-    }
   }
   &.disabled {
     &:hover {
