@@ -1,6 +1,7 @@
 export { ActionPanelComponent } from './controls/action-panel/action-panel.component';
 export { ActionPanelJqeuryHelper } from './controls/action-panel/actionPanelJqueryHelper';
 
+export { TextareaComponent } from './controls/textarea/textarea.component';
 export { ButtonComponent } from './controls/button/button.component';
 export { CardComponent } from './controls/card/card.component';
 export { CardColumnComponent } from './controls/card/card-column.component';

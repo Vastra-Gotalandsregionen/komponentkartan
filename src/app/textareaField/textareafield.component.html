@@ -1,0 +1,81 @@
+<app-component-docs [componentName]="'Textarea'">
+  <div class="docs__overview">
+    <p>
+      <code>
+        &lt;vgr-textarea&gt; </code> är ett fält för inmatning utav värden i t.ex. ett formulär. Sen har den även följande
+      funktioner implementerade:
+      <br> - Valbara storlekar på textarean, stödjer procent eller pixlar i höjd och bredd.
+    </p>
+    <br>
+    <form [formGroup]="form">
+      <vgr-textarea formControlName="control1" [width]="'60%'" [height]="'120px'" [readonly]="false"></vgr-textarea>
+    </form>
+    <br>
+    <p>Förändras med tema:
+      <strong>nej</strong>
+    </p>
+  </div>
+
+  <div class="docs__examples">
+    <form [formGroup]="form">
+      <vgr-textarea formControlName="control2" [width]="'70%'" [height]="'100px'" [maxlength]="50" [placeholder]="'Vänligen fyll i text'"
+        [readonly]="false"></vgr-textarea>
+    </form>
+    <div class="row-layout">
+      <div class="full">
+        <h2>Notera</h2>
+        <ul>
+          <li>
+            För validering så använder vi Reactive Forms för att hantera detta. Validering kan ske på blur, change och submit.
+          </li>
+        </ul>
+        Under "kodexempel" finns exempel på hur input-komponenten kan användas i Angular Reactive Forms:
+        <br>
+        <a href="/reactiveformsexample">Reactive Forms exempel</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Property</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>width: string</td>
+        <td>Bredd i % eller px. Default = 100%</td>
+        <td>[width]="'45px'", [width]="'45%'",</td>
+      </tr>
+      <tr>
+        <td>height: string</td>
+        <td>Höjd i % eller px. Default = 120px</td>
+        <td>[height]="'45px'", [height]="'45%'",</td>
+      </tr>
+      <tr>
+        <td>placeholder: string</td>
+        <td>Förvald text. Default = tomt.</td>
+        <td>[placeholder]="'skriv här'"</td>
+      </tr>
+      <tr>
+        <td>maxlength: string</td>
+        <td>Max antal tecken. Begränsar antalet möjliga tecken att mata in. Default = obegränsat.</td>
+        <td>[maxlength]="50"</td>
+      </tr>
+      <tr>
+        <td>readonly: boolean</td>
+        <td>Sätter textfältet i readonly-läge. </td>
+        <td>[readonly]="true"</td>
+      </tr>
+    </table>
+  </div>
+
+
+  <div class="docs__wcag">
+    <p>
+      Stöds ej.
+    </p>
+  </div>
+
+</app-component-docs>

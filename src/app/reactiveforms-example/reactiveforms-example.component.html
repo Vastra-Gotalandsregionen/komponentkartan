@@ -49,6 +49,9 @@
               <vgr-title-value title="Registreringsdatum">
                 <vgr-datepicker formControlName="datepicker_preselected" [showValidation]="updateOnBlurForm.controls.datepicker_preselected.touched"></vgr-datepicker>
               </vgr-title-value>
+              <vgr-title-value title="Kommentar">
+                <vgr-textarea formControlName="textarea" [showValidation]="updateOnBlurForm.controls.textarea.touched"></vgr-textarea>
+              </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
             <vgr-button (click)="onSubmitUpdateOnBlurForm()" [disabled]="false">Skapa användare</vgr-button>
@@ -95,6 +98,9 @@
               </vgr-title-value>
               <vgr-title-value title="Registreringsdatum">
                 <vgr-datepicker formControlName="datepicker_preselected" [showValidation]="formSubmitted"></vgr-datepicker>
+              </vgr-title-value>
+              <vgr-title-value title="Kommentar">
+                <vgr-textarea formControlName="textarea" [showValidation]="formSubmitted"></vgr-textarea>
               </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnSubmitForm()">Reset form</vgr-button>
@@ -147,6 +153,9 @@
               </vgr-title-value>
               <vgr-title-value title="Registreringsdatum">
                 <vgr-datepicker formControlName="datepicker_preselected" [showValidation]="updateOnChangeForm.controls.datepicker_preselected.dirty"></vgr-datepicker>
+              </vgr-title-value>
+              <vgr-title-value title="Kommentar">
+                <vgr-textarea formControlName="textarea" [showValidation]="updateOnChangeForm.controls.textarea.dirty"></vgr-textarea>
               </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnChangeForm()">Reset form</vgr-button>

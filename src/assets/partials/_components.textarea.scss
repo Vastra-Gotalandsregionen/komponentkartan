@@ -1,0 +1,67 @@
+.textarea {
+  display: inline-block;
+  margin-bottom: 5px;
+  .readonly & {
+    border-color: $background-color--content;
+    cursor: text;
+  }
+  &-input {
+    width: 100%;
+    top: 0px;
+    resize: none;
+    padding: 10px;
+  }
+  &-validation {
+    max-height: none;
+    padding: $margin--slim;
+    padding-bottom: 8px;
+    margin-left: -$margin--slim;
+    margin-right: -$margin--slim;
+    &-error--active & {
+      background-color: $secondary-color--error;
+      transition: background-color 0.3s linear;
+    }
+    &-error--editing & {
+      background-color: $background-color--default;
+      transition: background-color 0.3s linear;
+    }
+    &-error--fixed & {
+      &:after {
+        visibility: visible;
+      }
+    }
+    &_status {
+      &__message {
+        position: relative;
+        top: -2px;
+        max-width: calc(100% - 30px);
+        display: none;
+        vertical-align: middle;
+        .textarea-validation-error--active & {
+          color: $primary-color--error;
+          display: inline-block;
+        }
+        .textarea-validation-error--editing & {
+          display: inline-block;
+          color: $text-color--default;
+        }
+      }
+      &__icon {
+        position: relative;
+        top: -2px;
+        display: none;
+        height: 30px;
+        width: 30px;
+        vertical-align: middle;
+        .textarea-validation-error--active & {
+          @extend .bg-image-icon-exclamation--red;
+          display: inline-block;
+        }
+        .textarea-validation-error--editing & {
+          display: inline-block;
+          @extend .bg-image-icon-exclamation;
+        }
+      }
+    }
+  }
+}

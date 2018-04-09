@@ -90,7 +90,8 @@ import * as $ from 'jquery';
     type.TableHeaderColumnComponent,
     type.TableHeaderComponent,
     type.TableRowComponent,
-    type.TableComponent
+    type.TableComponent,
+    type.TextareaComponent
   ],
   exports: [
     type.SafePipe,
@@ -153,7 +154,8 @@ import * as $ from 'jquery';
     type.TableRowColumnComponent,
     type.TableHeaderColumnComponent,
     type.TableHeaderComponent,
-    type.TableRowComponent
+    type.TableRowComponent,
+    type.TextareaComponent
   ],
   providers: [
     type.ModalService,

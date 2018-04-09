@@ -115,7 +115,8 @@ export class ReactiveformsexampleComponent implements OnInit {
             optional: new FormControl(1),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
             datepicker: new FormControl('', { validators: [Validators.required] }),
-            datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] })
+            datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
+            textarea: new FormControl('', { validators: [Validators.required] })
         }, { updateOn: 'blur' });
     }
 
@@ -132,7 +133,8 @@ export class ReactiveformsexampleComponent implements OnInit {
             optional: new FormControl(2),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
             datepicker: new FormControl('', { validators: [Validators.required] }),
-            datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] })
+            datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
+            textarea: new FormControl('', { validators: [Validators.required] })
         }, { updateOn: 'submit' });
     }
 
@@ -149,7 +151,8 @@ export class ReactiveformsexampleComponent implements OnInit {
             optional: new FormControl(3),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
             datepicker: new FormControl('', { validators: [Validators.required] }),
-            datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] })
+            datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
+            textarea: new FormControl('', { validators: [Validators.required] })
         }, { updateOn: 'change' });
     }
 
@@ -171,7 +174,6 @@ export class ReactiveformsexampleComponent implements OnInit {
     }
 
     onSubmitUpdateOnBlurForm() {
-        console.log(this.updateOnBlurForm.value);
     }
 }
 

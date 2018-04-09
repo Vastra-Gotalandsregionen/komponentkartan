@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.4.0-beta4
+- Added vgr-textarea component
+- Updated vgr-page-header to be more flexible
+
+## 2.3.0
+- Added vgr-table component
+
 ## 2.2.0
 - Updated dropdownmulti to return full items instead of only displayname
 - dropdown-components are now WCAG-compatible
