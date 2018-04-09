@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 2.4.0-beta4
 - Added vgr-textarea component
 - Updated vgr-page-header to be more flexible
+- Add WCAG compliance to Montpicker component
+- Add property noMonthSelectedLabel to Monthpicker
+- Add property noDateSelectedLabel to Datepicker
 
 ## 2.3.0
 - Added vgr-table component

@@ -1,12 +1,13 @@
 import {
     Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener, ElementRef, forwardRef,
-    ChangeDetectorRef, SkipSelf, Optional, Host, SimpleChanges
+    ChangeDetectorRef, SkipSelf, Optional, Host, SimpleChanges, AfterViewInit
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ICalendarMonth } from '../../models/calendarMonth.model';
 import { ICalendarYear } from '../../models/calendarYear.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
+import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-monthpicker',
@@ -20,7 +21,7 @@ import { AbstractControl } from '@angular/forms';
         }]
 
 })
-export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAccessor, AfterViewInit {
 
     @Input() showValidation = true;
     @Input() minDate: Date;
@@ -29,11 +30,12 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     @Input() tooltipDateFormat = 'MMMM yyyy';
     @Input() formControlName?: string;
     @Input() selectedDate?: Date;
+    @Input() noMonthSelectedLabel = 'Välj månad';
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
-    @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() @HostBinding('class.readonly') readonly: boolean;
+    @Input() @HostBinding('class.disabled') disabled: boolean = false;
+    @Input() @HostBinding('class.readonly') readonly: boolean = false;
 
     @HostBinding('class.validated-input') hasClass = true;
     @HostBinding('class.validation-error--active') get errorClass() {
@@ -43,7 +45,13 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         return this.showValidation && this.control && this.control.invalid && this.hasFocus;
     }
 
+    labelledbyid: string = Guid.newGuid();
+
+
     hasFocus: boolean;
+
+    focusableMonths = [];
+    currentFocusedMonth = 0;
 
     expanded: boolean;
     control: AbstractControl;
@@ -79,10 +87,29 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         this.setDisplayedYear(this.selectedDate);
     }
 
+    ngAfterViewInit() {
+        this.setFocusableItems();
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         if (this.formControlName) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
+        this.setFocusableItems();
+    }
+
+    setFocusableItems() {
+        this.focusableMonths = this.elementRef.nativeElement.getElementsByClassName('monthpicker__calendar__month');
+        this.setFocusedElement();
+    }
+
+    setFocusedElement() {
+        if (!this.selectedDate)
+            this.currentFocusedMonth = this.today.getMonth();
+        else {
+            this.currentFocusedMonth = this.selectedDate.getMonth();
+        }
+        this.focusableMonths[this.currentFocusedMonth].focus();
     }
 
     writeValue(value: any): void {
@@ -170,8 +197,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                                             monthNumber === 9 ? 'Okt' :
                                                 monthNumber === 10 ? 'Nov' :
                                                     monthNumber === 11 ? 'Dec' : '?';
-
-
     }
 
     controlHasErrors() {
@@ -207,7 +232,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     onPreviousMouseDown(event: Event) {
         event.cancelBubble = true;
-
         if (this.previousYear) {
             this.setDisplayedYear(new Date(this.previousYear.year, 0, 1));
         }
@@ -217,20 +241,121 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         this.toggleCalendar(event);
     }
 
-    onKeyDown(event: KeyboardEvent) {
+    onMonthKeyDown(event: KeyboardEvent, selectedMonth: ICalendarMonth) {
         if (event.keyCode === 13 || event.keyCode === 32) {
-            this.toggleCalendar(event);
+            if (selectedMonth.disabled) {
+                event.cancelBubble = true;
+            }
+            this.selectDate(selectedMonth);
+        }
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+        switch (event.keyCode) {
+            case 9: // tab
+                {
+                    this.expanded = false;
+                    break;
+                }
+            case 13: // enter
+            case 32: // space
+                {
+                    this.toggleCalendar(event);
+                    event.preventDefault();
+                    break;
+                }
+            case 27: // escape
+                {
+                    if (this.expanded) {
+                        this.toggleCalendar(event);
+                    }
+                    event.preventDefault();
+                    break;
+                }
+            case 33: // pageUp
+                {
+                    this.onPreviousMouseDown(event);
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    break;
+                }
+            case 34: // pageDown
+                {
+                    this.onNextMouseDown(event);
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    break;
+                }
+            case 35: // end
+                {
+                    this.currentFocusedMonth = 11;
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    break;
+                }
+            case 36: // home
+                {
+                    this.currentFocusedMonth = 0;
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    break;
+                }
+            case 37: // arrow left
+                {
+                    if (this.currentFocusedMonth > 0) {
+                        this.currentFocusedMonth = this.currentFocusedMonth - 1;
+                    } else if (this.previousYear) {
+                        this.onPreviousMouseDown(event);
+                        this.currentFocusedMonth = 11;
+                    }
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    break;
+                }
+
+            case 38: // arrow up
+                {
+                    if (this.currentFocusedMonth > 3) {
+                        this.currentFocusedMonth = this.currentFocusedMonth - 4;
+                    } else if (this.previousYear) {
+                        this.onPreviousMouseDown(event);
+                        this.currentFocusedMonth = this.currentFocusedMonth + 8;
+                    }
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 39: // arrow right
+                {
+                    if (this.currentFocusedMonth < 11) {
+                        this.currentFocusedMonth = this.currentFocusedMonth + 1;
+                    } else if (this.nextYear) {
+                        this.onNextMouseDown(event);
+                        this.currentFocusedMonth = 0;
+                    }
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    break;
+                }
+            case 40: // arrow down
+                {
+                    if (this.currentFocusedMonth < 8) {
+                        this.currentFocusedMonth = this.currentFocusedMonth + 4;
+                    } else if (this.nextYear) {
+                        this.onNextMouseDown(event);
+                        this.currentFocusedMonth = this.currentFocusedMonth - 8;
+                    }
+                    this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
         }
     }
 
     onSelectMonthMouseDown(selectedMonth: ICalendarMonth) {
         this.selectDate(selectedMonth);
-    }
-
-    onSelectMonthKeyDown(event: KeyboardEvent) {
-        if (event.keyCode === 13 || event.keyCode === 32) {
-
-        }
     }
 
     @HostListener('document:click', ['$event'])
@@ -245,7 +370,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     private toggleCalendar(event: Event) {
         this.toggleExpand(event);
-
     }
 
     private toggleExpand(event: Event) {
@@ -256,12 +380,16 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
             return;
         }
 
-        if ((element.hasClass('monthpicker__calendar__month') && !element.hasClass('disabled')) ||
-            element.hasClass('monthpicker__dropdown') ||
-            element.parent().hasClass('monthpicker__dropdown')
-        ) {
-            this.setDisplayedYear(this.selectedDate);
-            this.expanded = !this.expanded;
+        this.setDisplayedYear(this.selectedDate);
+        this.expanded = !this.expanded;
+
+        if (this.expanded) {
+            setTimeout(() => {
+                this.setFocusedElement();
+            }, 50);
+        } else {
+            // set focus on component
+            this.elementRef.nativeElement.querySelector('.monthpicker').focus();
         }
     }
 
@@ -273,7 +401,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         if (selectedMonth.disabled) {
             return;
         }
-
 
         this.years.forEach(y => y.months.forEach(m => m.selected = false));
 

@@ -18,8 +18,8 @@ export abstract class DropdownBaseComponent {
     @Input() formControlName?: string;
     @Input() noItemSelectedLabel: string;
     @Input() showAllItemText: string;
-    @Input() @HostBinding('class.readonly') readonly: boolean = false;
-    @Input() @HostBinding('class.disabled') disabled: boolean = false;
+    @Input() @HostBinding('class.readonly') readonly = false;
+    @Input() @HostBinding('class.disabled') disabled = false;
     @HostBinding('class.dropdown') dropdownClass = true;
 
     @HostBinding('class.validation-error--active') get errorClass() {
@@ -139,13 +139,10 @@ export abstract class DropdownBaseComponent {
         const visibleItemCount = this.filterPipe.transform(this.items, this.filter, ['displayName']).length;
     }
 
-
     setFocusableItems() {
         const nodes: NodeList = this.filterVisible ? this.elementRef.nativeElement.getElementsByTagName('input') : [];
         const nodes2: NodeList = this.elementRef.nativeElement.getElementsByTagName('li');
         this.focusableItems = [...Array.from(nodes), ...Array.from(nodes2)];
-
-
     }
 
     onToggleDropdown(event: Event) {
