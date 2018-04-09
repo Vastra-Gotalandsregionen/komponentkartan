@@ -50,6 +50,9 @@ vgr-datepicker {
     border-radius: 1px;
     transition: background-color 0.6s linear, border-color 0.6s linear;
     position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     .disabled & {
       background-color: $background-color--default;
       border-color: $control-color--disabled;
@@ -134,7 +137,7 @@ vgr-datepicker {
   width: 250px;
   height: 60px;
   z-index: $layer-four;
-   :before {
+  :before {
     content: "";
     display: inline-block;
     vertical-align: middle;

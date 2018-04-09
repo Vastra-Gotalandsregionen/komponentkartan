@@ -30,6 +30,7 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     @Input() tooltipDateFormat = 'MMMM yyyy';
     @Input() formControlName?: string;
     @Input() selectedDate?: Date;
+    @Input() noMonthSelectedLabel = 'Välj månad';
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 

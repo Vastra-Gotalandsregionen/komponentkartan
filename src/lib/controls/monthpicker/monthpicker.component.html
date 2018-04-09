@@ -5,7 +5,7 @@
 
     <div class="monthpicker__dropdown">
       <span *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}" id="{{labelledbyid}}">{{selectedDate | date : selectedDateFormat}}</span>
-      <span *ngIf="!selectedDate" title="{{ readonly ? '' : 'Välj månad' }}" id="{{labelledbyid}}">{{ readonly ? '' : 'Välj månad' }}</span>
+      <span *ngIf="!selectedDate" title="{{ readonly ? '' : noMonthSelectedLabel }}" id="{{labelledbyid}}">{{ readonly ? '' : noMonthSelectedLabel }}</span>
 
       <div class="monthpicker__calendar">
         <div class="monthpicker__calendar__header">
