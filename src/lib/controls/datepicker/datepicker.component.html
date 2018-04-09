@@ -3,7 +3,7 @@
     (focusout)="onLeave()">
     <div class="datepicker__dropdown">
       <span *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}">{{selectedDate | date: selectedDateFormat}}</span>
-      <span *ngIf="!selectedDate" class="datepicker__calendar__selector" title="{{ readonly ? '' : 'Välj datum' }}">{{ readonly ? '' : 'Välj datum' }}</span>
+      <span *ngIf="!selectedDate" class="datepicker__calendar__selector" title="{{ readonly ? '' : noDateSelectedLabel }}">{{ readonly ? '' : noDateSelectedLabel }}</span>
 
       <!-- *ngIf="expanded" -->
       <div class="datepicker__calendar" (mousedown)="onCalendarMousedown($event)">
