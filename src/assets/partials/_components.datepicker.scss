@@ -17,7 +17,7 @@ vgr-datepicker {
 .datepicker {
   height: $component-height;
   &:focus {
-    outline: 3px solid $focus-color;
+    outline: $focus-outline-width solid $focus-color;
   }
 }
 

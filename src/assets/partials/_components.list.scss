@@ -161,6 +161,9 @@
     transition: opacity 0.3s linear, height 0.3s linear;
     transition-delay: 0s, 0.2s;
   }
+  &:focus {
+    outline: $focus-outline-width solid $focus-color;
+  }
 }
 
 .list__column {
@@ -384,6 +387,12 @@ vgr-list-column-trashcan {
   &.disabled .list-item__trashcan__icon {
     @extend .bg-image-icon-trashcan--disabled;
     cursor: default;
+  }
+  &:focus {
+    outline: 0;
+    .list-item__trashcan__icon {
+      border: $focus-outline-width solid $focus-color;
+    }
   }
 }
 

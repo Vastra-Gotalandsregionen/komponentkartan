@@ -112,7 +112,7 @@ $filter-area-height: 60px;
     }
   }
   &:focus {
-    outline: 3px solid $focus-color;
+    outline: $focus-outline-width solid $focus-color;
   }
 }
 
@@ -199,7 +199,7 @@ $filter-area-height: 60px;
         margin-bottom: 7px;
       }
       &:focus {
-        outline: 3px solid $focus-color;
+        outline: $focus-outline-width solid $focus-color;
       }
     }
     li:last-child {

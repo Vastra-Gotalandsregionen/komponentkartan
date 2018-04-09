@@ -44,7 +44,7 @@
   }
   &:focus {
     box-shadow: none;
-    outline: 3px solid $focus-color;
+    outline: $focus-outline-width solid $focus-color;
   }
   &:active:not(.button--disabled) {
     height: 28px;

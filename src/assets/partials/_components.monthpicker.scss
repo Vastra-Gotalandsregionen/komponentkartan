@@ -20,7 +20,14 @@ vgr-monthpicker {
   &:focus {
     outline: 0;
     .monthpicker__dropdown {
-      outline: 3px solid #4a90e2;
+      outline: $focus-outline-width solid $focus-color;
+    }
+  }
+  &.monthpicker--open {
+    &:focus {
+      .monthpicker__dropdown {
+        outline: 0;
+      }
     }
   }
 }
@@ -254,7 +261,7 @@ vgr-monthpicker {
   &:focus {
     outline: 0;
     border-color: $focus-color;
-    border-width: 3px;
+    border-width: $focus-outline-width;
     border-style: solid;
     margin-top: 13px;
     padding-top: 5px;
