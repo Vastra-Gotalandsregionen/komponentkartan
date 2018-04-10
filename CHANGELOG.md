@@ -4,14 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 2.4.0-beta4
+## 2.4.0-betaX
 - Added vgr-textarea component
 - Updated vgr-page-header to be more flexible
 - Add WCAG compliance to Montpicker component
 - Add property noMonthSelectedLabel to Monthpicker
 - Add property noDateSelectedLabel to Datepicker
+- Added vgr-customized border to components on focus
 
-## 2.3.0
+
+## 2.3.0 (Stable)
 - Added vgr-table component
 
 ## 2.2.0
