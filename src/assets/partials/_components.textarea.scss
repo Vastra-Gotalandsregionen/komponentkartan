@@ -6,6 +6,8 @@
     cursor: text;
   }
   &-input {
+    display: block;
+    overflow: hidden;
     width: 100%;
     top: 0px;
     resize: none;
@@ -31,6 +33,7 @@
       }
     }
     &_status {
+      margin-top: 8px;
       &__message {
         position: relative;
         top: -2px;
