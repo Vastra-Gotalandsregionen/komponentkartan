@@ -1,15 +1,18 @@
 import {
   Component,
   forwardRef,
+  ElementRef,
   Host,
   HostBinding,
   Input,
   OnChanges,
   OnInit,
   Optional,
+  AfterViewInit,
   SimpleChanges,
   SkipSelf,
   EventEmitter,
+  ChangeDetectorRef,
   Output
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -24,7 +27,7 @@ import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCES
   }]
 
 })
-export class TextareaComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class TextareaComponent implements AfterViewInit, OnChanges, ControlValueAccessor {
 
   @Input() showValidation = true;
   @Input() width: string;
@@ -32,6 +35,7 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input() placeholder: string;
   @Input() formControlName: string;
   @Input() maxlength: number;
+  @Input() value: string;
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
 
@@ -45,14 +49,14 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
 
-  textareaDimension: any;
+  scrollHeight: string;
   control: AbstractControl;
-  displayValue: any;
   hasFocus = false;
-  private validationErrorMessage = 'Obligatorisk';
   cancel: boolean;
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
+  private validationErrorMessage = 'Obligatoriskt';
+
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private cdRef: ChangeDetectorRef) {
     this.width = '100%';
     this.height = '120px';
     this.placeholder = '';
@@ -64,21 +68,21 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   ngOnChanges(changes: SimpleChanges) {
     if (this.formControlName) {
       this.control = this.controlContainer.control.get(this.formControlName);
-
       this.control.statusChanges.subscribe((status) => {
       });
     }
   }
 
-  ngOnInit() {
-    this.textareaDimension = {
-      'width': this.width,
-      'height': this.height
-    };
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.scrollHeight = this.elementRef.nativeElement.querySelector('.textarea-input').scrollHeight + 'px';
+      this.cdRef.detectChanges();
+    }, 25)
+
   }
 
   writeValue(value: any): void {
-    this.displayValue = value;
+    this.value = value;
   }
 
   registerOnChange(func: any) {
@@ -88,7 +92,6 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
   registerOnTouched(func: any) {
     this.onTouched = func;
   }
-
 
   setDisabledState?(isDisabled: boolean): void {
     throw new Error("Method not implemented.");
@@ -115,7 +118,8 @@ export class TextareaComponent implements OnInit, OnChanges, ControlValueAccesso
       this.control.markAsDirty();
     }
 
-    this.onTouched(this.displayValue);
+    this.onTouched(this.value);
+    this.scrollHeight = this.elementRef.nativeElement.querySelector('.textarea-input').scrollHeight + 'px';
   }
 
   onFocus(event: Event): void {
