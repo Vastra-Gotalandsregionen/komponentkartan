@@ -16,6 +16,11 @@ $filter-area-height: 60px;
   .validation {
     max-width: $dropdown-width--medium + $margin--slim + $margin--slim;
   }
+  &.dropdown--focus {
+    .dropdown--edit {
+      outline: $focus-outline-width solid $focus-color;
+    }
+  }
 }
 
 .dropdown--readonly {
@@ -110,9 +115,6 @@ $filter-area-height: 60px;
       transition: all 0.3s ease;
       padding-left: 6px;
     }
-  }
-  &:focus {
-    outline: $focus-outline-width solid $focus-color;
   }
 }
 

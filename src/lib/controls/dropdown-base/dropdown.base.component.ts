@@ -29,6 +29,9 @@ export abstract class DropdownBaseComponent {
         return this.showValidation && this.control && this.control.invalid && this.hasFocus;
     }
 
+    @HostBinding('class.dropdown--focus') get FocusClass() {
+        return this.hasFocus;
+    }
     control: AbstractControl;
     hasFocus: boolean;
     expanded: boolean;
