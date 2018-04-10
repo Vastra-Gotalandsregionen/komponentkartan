@@ -38,7 +38,6 @@ describe('TextareaComponent', () => {
   describe('When textarea has readonly set to true', () => {
     beforeEach(() => {
       component.readonly = true;
-      component.ngOnInit();
       fixture.detectChanges();
     });
     it('CSS Class readonly is applied', () => {
@@ -49,7 +48,6 @@ describe('TextareaComponent', () => {
     beforeEach(() => {
       component.control = new FormControl('', { validators: [Validators.required], updateOn: 'submit' });
       component.readonly = false;
-      component.ngOnInit();
       fixture.detectChanges();
     });
 
