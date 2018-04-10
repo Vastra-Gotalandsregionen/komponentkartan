@@ -16,6 +16,11 @@ $filter-area-height: 60px;
   .validation {
     max-width: $dropdown-width--medium + $margin--slim + $margin--slim;
   }
+  &.dropdown--focus {
+    .dropdown--edit {
+      outline: $focus-outline-width solid $focus-color;
+    }
+  }
 }
 
 .dropdown--readonly {
@@ -40,6 +45,7 @@ $filter-area-height: 60px;
     cursor: default;
     width: auto;
     height: auto;
+    min-height: $component-height;
   }
   >span {
     padding-left: $margin--slim;
@@ -50,7 +56,7 @@ $filter-area-height: 60px;
     min-width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
     display: block;
     position: relative;
-    height: $component-height; //position: absolute;
+    height: $component-height;
     cursor: pointer;
     border-top: $border--single solid $control-border-color--default;
     border-left: $border--single solid $control-border-color--default;
@@ -90,11 +96,10 @@ $filter-area-height: 60px;
     cursor: pointer;
     transform: rotate(0deg);
     transition: all ease 0.3s;
-    padding-right: 3px; // UPPDAtERING
+    padding-right: 3px;
     position: absolute;
     top: 0px;
-    right: 0px; // margin-top: 0px;
-    // UPPDAtERING
+    right: 0px;
     &:not(.disabled):not(.readonly) {
       cursor: pointer;
     }
@@ -108,15 +113,9 @@ $filter-area-height: 60px;
   &.dropdown--open {
     &:after {
       transform: rotate(180deg);
-      transition: all 0.3s ease; // UPPDAtERING
-      // margin-top: 2px;
-      // UPPDAtERING
+      transition: all 0.3s ease;
       padding-left: 6px;
     }
-  }
-  &:focus {
-    //Tar bort highlight vid tabstop
-    outline-width: 0;
   }
 }
 
@@ -130,7 +129,6 @@ $filter-area-height: 60px;
     visibility: visible;
   }
 }
-
 
 /*******************************************************************************************************
  * .dropdown__menu
@@ -178,7 +176,7 @@ $filter-area-height: 60px;
     position: relative;
     max-height: calc(#{$dropdown-height--small} - #{$margin--fat});
     li {
-      width: calc(100% - 17px);
+      width: calc(100% - 3px);
       background: white;
       a {
         padding-right: 11px;
@@ -202,6 +200,9 @@ $filter-area-height: 60px;
       }
       &:last-child {
         margin-bottom: 7px;
+      }
+      &:focus {
+        outline: $focus-outline-width solid $focus-color;
       }
     }
     li:last-child {
@@ -246,7 +247,6 @@ $filter-area-height: 60px;
     position: relative;
   }
 }
-
 
 /*******************************************************************************************************
  * .dropdown__dimmer
@@ -327,7 +327,6 @@ $filter-area-height: 60px;
     }
   }
 }
-
 
 /*******************************************************************************
 * IE11 Specific styles

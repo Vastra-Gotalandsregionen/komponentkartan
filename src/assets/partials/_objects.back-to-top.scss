@@ -11,8 +11,11 @@
   background-color: transparent !important;
   display: none;
   &:hover {
-    border: 2px solid $focus-color;
+    border: $focus-outline-width solid $focus-color;
     transition: border-color 0.5s ease;
+  }
+  &:focus {
+    border: $focus-outline-width solid $focus-color;
   }
   z-index: $layer-five;
 }

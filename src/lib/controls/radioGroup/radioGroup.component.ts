@@ -48,7 +48,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         return this.renderer;
     }
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
     }
 
     ngOnChanges() {
@@ -69,11 +69,14 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     }
 
     optionClicked(option: RadioGroupItem<any>) {
-        if (this.disabled || option.disabled || option.selected) {
+        if (this.disabled || option.disabled) {
             return;
         }
 
-        this.selectOption(option);
+        if (!option.selected) {
+            this.selectOption(option);
+        }
+
         if (this.renderer) {
             const position = this.radiogroupItems.indexOf(option);
             this.renderer.invokeElementMethod(this.elements[position], 'focus');

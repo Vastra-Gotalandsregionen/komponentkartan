@@ -6,7 +6,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     templateUrl: './filterTextbox.component.html'
 })
 export class FilterTextboxComponent {
+    public hasFocus: boolean;
     private _value: string;
+
     @Output() valueChanged = new EventEmitter<string>();
     @Input() get value() {
         return this._value;

@@ -1,10 +1,6 @@
 .textarea {
   display: inline-block;
   margin-bottom: 5px;
-  .readonly & {
-    border-color: $background-color--content;
-    cursor: text;
-  }
   &-input {
     display: block;
     overflow: hidden;
@@ -12,6 +8,29 @@
     top: 0px;
     resize: none;
     padding: 10px;
+    transition: border-color 0.6s linear;
+    .readonly & {
+      border-color: $background-color--content;
+      cursor: text;
+      &::placeholder {
+        // Chrome, Firefox, Opera, Safari 10.1+ 
+        opacity: 0; // Firefox 
+        transition: opacity 0.6s linear;
+      }
+      &:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        opacity: 0;
+        transition: opacity 0.6s linear;
+      }
+      &::-ms-input-placeholder {
+        /* Microsoft Edge */
+        opacity: 0;
+        transition: opacity 0.6s linear;
+      }
+    }
+    &:focus {
+      outline: $focus-outline-width solid $focus-color;
+    }
   }
   &-validation {
     max-height: none;

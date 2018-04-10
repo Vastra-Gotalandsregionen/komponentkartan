@@ -8,7 +8,6 @@ $margin--slimmer: 6px;
 $margin--slim: 10px;
 $margin--regular: 15px;
 $margin--fat: 20px;
-
 /*------------------------------------*\
   #Borders
 \*------------------------------------*/
@@ -18,7 +17,6 @@ $border--xs-slim: 2px;
 $border--slim: 3px;
 $border--regular: 9px;
 $border--fat: 10px;
-
 /*------------------------------------*\
   #Components
 \*------------------------------------*/
@@ -27,7 +25,6 @@ $component-height: 30px;
 $icon-width: 34px;
 $input-width--small: 270px;
 $input-width--medium: 290px;
-
 /*------------------------------------*\
   #Misc
 \*------------------------------------*/
@@ -37,7 +34,7 @@ $header-height:79px;
 $header-menu-width-small: 200px;
 $header-menu-width-medium: 220px;
 $content-header-offset: $header-height;
-
+$focus-outline-width: 3px;
 /*------------------------------------*\
   #LAYERS
 \*------------------------------------*/
@@ -54,7 +51,6 @@ $layer-site-header: 200;
 $layer-page-header: 199;
 $layer-modal: 300;
 $layer-bottom: -999;
-
 /*------------------------------------*\
   #SMALL
 \*------------------------------------*/
