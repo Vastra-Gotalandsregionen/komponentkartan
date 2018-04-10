@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ViewChild, forwardRef, Optional, SkipSelf, Host, HostBinding } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ChangeDetectorRef, ViewChild, forwardRef, Optional, SkipSelf, Host, HostBinding } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -54,7 +54,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         }
     }
 
-    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, elementRef: ElementRef, private cdRef: ChangeDetectorRef) {
         super(elementRef);
         this.allItemsSelectedLabel = 'Alla';
         this.noItemSelectedLabel = 'Välj';
@@ -85,9 +85,8 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
                 this.setFocusableItems();
                 this.focusedItemIndex = 1;
                 this.focusableItems[this.focusedItemIndex].focus();
-
             }, 10);
-
+            this.cdRef.detectChanges();
             event.cancelBubble = true;
         }
     }
