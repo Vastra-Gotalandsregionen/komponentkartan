@@ -11,7 +11,7 @@ textarea {
   border: 1px solid $control-border-color--default;
   height: 30px;
   &:focus {
-    outline: none !important;
+    outline: none;
   }
 }
 

@@ -45,6 +45,7 @@ $filter-area-height: 60px;
     cursor: default;
     width: auto;
     height: auto;
+    min-height: $component-height;
   }
   >span {
     padding-left: $margin--slim;

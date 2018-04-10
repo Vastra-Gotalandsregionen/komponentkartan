@@ -21,6 +21,7 @@
           opacity: 0;
           width: 0;
           height: 0;
+          min-height: 0;
           transition: opacity 0.3s linear, height 1ms;
           transition-delay: 0, 0.3s;
         }
@@ -32,7 +33,7 @@
       transition: opacity 0.3s linear, max-height 0.3s linear;
       padding-top: 3px;
       width: auto;
-      max-height: 0px;
+      max-height: 0;
       ul {
         padding-left: 10px;
         list-style-type: disc;
@@ -47,11 +48,10 @@
         opacity: 1;
         max-height: 500px;
         transition: opacity 0.3s linear, max-height 0.3s linear;
-      }
-      .readonly & {
-        opacity: 1;
-        max-height: 500px;
-        transition: opacity 0.3s linear, max-height 0.3s linear;
+        min-height: $component-height;
+        &:focus {
+          outline: $focus-outline-width solid $focus-color;
+        }
       }
     }
 

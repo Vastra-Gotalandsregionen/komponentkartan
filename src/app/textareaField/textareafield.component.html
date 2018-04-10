@@ -20,6 +20,13 @@
     <form [formGroup]="form">
       <vgr-textarea formControlName="control2" [width]="'70%'" [height]="'100px'" [maxlength]="50" [placeholder]="'Vänligen fyll i text'"
         [readonly]="false"></vgr-textarea>
+
+      <br>
+      <br>
+      <vgr-textarea [width]="'70%'" [height]="'100px'" [maxlength]="50" [placeholder]="'Vänligen fyll i text'" [readonly]="isReadonly"></vgr-textarea>
+      <p>Växla readonly</p>
+      <vgr-lock-button [unlocked]="true" (lockChanged)="isReadonly = !isReadonly"></vgr-lock-button>
+
     </form>
     <div class="row-layout">
       <div class="full">

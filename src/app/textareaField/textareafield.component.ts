@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./textareafield.component.css']
 })
 export class TextareafieldComponent implements OnInit {
-
+  isReadonly: boolean = false;
   form: FormGroup;
 
   constructor(private fb: FormBuilder) { }
