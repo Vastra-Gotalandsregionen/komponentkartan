@@ -54,6 +54,11 @@
   color: $text-color--light;
 }
 
+.focus-color {
+  background-color: $focus-color;
+  color: $text-color--light;
+}
+
 .read-only {
   color: $text-color--read-only;
 }
