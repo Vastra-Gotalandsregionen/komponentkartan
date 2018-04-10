@@ -3,7 +3,7 @@
   margin-bottom: 5px;
   &-input {
     display: block;
-    overflow: hidden;
+    overflow: auto;
     width: 100%;
     top: 0px;
     resize: none;
@@ -11,6 +11,7 @@
     transition: border-color 0.6s linear;
     .readonly & {
       border-color: $background-color--content;
+      overflow: hidden;
       cursor: text;
       &::placeholder {
         // Chrome, Firefox, Opera, Safari 10.1+ 
