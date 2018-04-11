@@ -103,7 +103,6 @@
   padding-top: 6px;
   padding-bottom: 6px;
   font-size: $menu-text-font-size--small;
-  display: flex;
   word-wrap: break-word;
   cursor: pointer;
   a {
@@ -111,7 +110,6 @@
     color: inherit;
     border: none;
     padding: 0;
-    display: inline-block;
   }
   a:link {
     color: inherit;
@@ -166,7 +164,6 @@
     width: 21px;
     min-width: 21px;
     line-height: 21px;
-    flex-basis: auto;
     background-color: $primary-color--default;
     color: $text-color--light;
     border-radius: 50%;
@@ -176,6 +173,7 @@
     margin-left: 2px;
     vertical-align: top;
     margin-top: -4px;
+    display: inline-block;
     &.notification--green {
       background-color: $primary-color--green;
     }
