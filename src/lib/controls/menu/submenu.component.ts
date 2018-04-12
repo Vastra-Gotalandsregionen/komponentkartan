@@ -1,12 +1,14 @@
-import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit } from '@angular/core';
+import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, Renderer, forwardRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { MenuItemBase } from './menu-item-base';
 
 
 @Component({
     selector: 'vgr-submenu',
-    templateUrl: './submenu.component.html'
+    templateUrl: './submenu.component.html',
+    providers: [{ provide: MenuItemBase, useExisting: forwardRef(() => SubmenuComponent) }]
 })
-export class SubmenuComponent implements AfterViewInit {
+export class SubmenuComponent extends MenuItemBase implements AfterViewInit {
 
     @Input() text: string;
     @Input() expanded: boolean;
@@ -17,7 +19,9 @@ export class SubmenuComponent implements AfterViewInit {
     }
     @HostBinding('class.submenu--child-selected') private childSelected: boolean;
 
-    constructor(public elementRef: ElementRef, private router: Router) { }
+    constructor(private router: Router, elementRef: ElementRef, renderer: Renderer) {
+        super(elementRef, renderer);
+    }
 
     setChildSelected() {
         this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
