@@ -414,7 +414,10 @@ describe("[DropdownMultiSelectComponent]", () => {
     });
 
     describe('When component is initialized with two simple values', () => {
+        let element: DebugElement;
+
         beforeEach(() => {
+            element = rootElement.query(By.css('.dropdown--edit'));
             component.values = ['one', 'two'];
             fixture.detectChanges();
             spyOn(component.selectionChanged, 'emit');
@@ -432,6 +435,9 @@ describe("[DropdownMultiSelectComponent]", () => {
             it('a selectedItemChanged is emitted', () => {
                 expect(component.selectionChanged.emit).toHaveBeenCalledWith(['one']);
             });
+            it('textlabel is 1 vald', () => {
+                expect(component.dropdownLabel).toBe('1 vald')
+            });
         });
         describe('and both are selected', () => {
             beforeEach(() => {
@@ -448,7 +454,31 @@ describe("[DropdownMultiSelectComponent]", () => {
             it('select all is selected', () => {
                 expect(component.selectAllItemsChecked).toBe(true);
             });
+            it('component label is Alla', () => {
+                expect(component.dropdownLabel).toBe('Alla')
+            });
+            // it('html span text is Alla', () => {
+
+            //     expect(element.nativeElement.querySelector("span").innerText).toBe('Alla')
+            // });
         });
+        // describe('and both are selected', () => {
+        //     beforeEach(() => {
+        //         component.selectedValues = ['one', 'two'];
+        //     });
+        //     it('the matching drop down items are selected', () => {
+        //         expect(component.items[0].selected).toBe(true);
+        //         expect(component.items[1].selected).toBe(true);
+        //     });
+
+        //     it('a selectedItemChanged is emitted', () => {
+        //         expect(component.selectionChanged.emit).toHaveBeenCalledWith(['one', 'two']);
+        //     });
+        //     it('select all is selected', () => {
+        //         expect(component.selectAllItemsChecked).toBe(true);
+        //     });
+        // });
+
     });
 
     describe('When initialized with no selected items and disabled-mode', () => {
