@@ -438,6 +438,10 @@ describe("[DropdownMultiSelectComponent]", () => {
             it('textlabel is 1 vald', () => {
                 expect(component.dropdownLabel).toBe('1 vald')
             });
+            it('html span text is 1 vald', () => {
+
+                expect(element.nativeElement.querySelector("span").innerText).toBe('1 vald')
+            });
         });
         describe('and both are selected', () => {
             beforeEach(() => {
@@ -457,10 +461,10 @@ describe("[DropdownMultiSelectComponent]", () => {
             it('component label is Alla', () => {
                 expect(component.dropdownLabel).toBe('Alla')
             });
-            // it('html span text is Alla', () => {
+            it('html span text is Alla', () => {
 
-            //     expect(element.nativeElement.querySelector("span").innerText).toBe('Alla')
-            // });
+                expect(element.nativeElement.querySelector("span").innerText).toBe('Alla')
+            });
         });
         // describe('and both are selected', () => {
         //     beforeEach(() => {

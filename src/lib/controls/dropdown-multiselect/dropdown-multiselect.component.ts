@@ -37,6 +37,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         return this._items.filter(x => x.selected);
     }
 
+
     get selectAllItemsChecked() {
         return !this._items.find(x => !x.selected);
     }
@@ -209,7 +210,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.updateDropdownLabel();
     }
 
-    private updateDropdownLabel() {
+    updateDropdownLabel() {
         const selectedCount = this.items.filter(x => x.selected).length;
         if (selectedCount === 1) {
             this.dropdownLabel = '1 vald';
