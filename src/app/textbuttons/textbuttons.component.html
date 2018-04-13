@@ -6,7 +6,7 @@
         &lt;vgr-button&gt; </code> finns i två olika utföranden, primär och sekundär.
       <br>
       <br>
-      <vgr-button (click)="lastButtonPressed = 'Klicka här - primär'">Klicka här</vgr-button>
+      <vgr-button type="submit" (click)="lastButtonPressed = 'Klicka här - primär'">Klicka här</vgr-button>
       <vgr-button [secondary]="true" (click)="lastButtonPressed = 'Klicka här - sekundär'">Klicka här</vgr-button>
     </p>
     <p> Förändras med tema:
@@ -18,9 +18,7 @@
     <div class="column-layout">
       <h2>Primärknappar</h2>
       <div>
-
         <vgr-button (click)="lastButtonPressed = 'OK - primär'">OK</vgr-button>
-
         <vgr-button (click)="buttonDisabled=!buttonDisabled;">{{buttonDisabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
         <vgr-button [disabled]="buttonDisabled">{{buttonDisabled ? 'Inaktiv' : 'Aktiv'}}</vgr-button>
       </div>
