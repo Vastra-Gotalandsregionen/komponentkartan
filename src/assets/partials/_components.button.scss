@@ -81,11 +81,10 @@
     border-bottom-right-radius: 1px;
   }
   &.button--secondary {
-    position: relative;
-    top: 1px;
     background-color: $text-color--light;
     @extend .color--primary;
     @extend .border-color--primary;
+    line-height: calc(#{$component-height} - 1px); // To adjust to border
     border-width: 1px;
     border-style: solid;
   }
