@@ -25,11 +25,12 @@ export class MenuItemComponent extends MenuItemBase {
             this.goToFirst.emit();
             event.preventDefault();
         }
-        if ((event.ctrlKey && event.keyCode === 33) || event.keyCode === 38) { // Ctrl + PageUp and Arrow Up
+        if (event.keyCode === 38) { // Arrow Up
             this.goUp.emit();
             event.preventDefault();
         }
-        if ((event.ctrlKey && event.keyCode === 34) || event.keyCode === 40) { // PageDown and Arrow Down
+        if (event.keyCode === 40) {
+            console.log('menu-item');// Arrow Down
             this.goDown.emit();
             event.preventDefault();
         }
