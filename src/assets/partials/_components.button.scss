@@ -21,6 +21,7 @@
   line-height: $component-height;
   position: relative;
   border-radius: 1px;
+  border: 0;
   color: $text-color--light;
   text-align: center;
   cursor: pointer;
@@ -89,6 +90,8 @@
 
 .text-button {
   @extend .button__base;
+  font-size: $font-size--small;
+  font-family: $font-family;
 }
 
 .button--enabling {
@@ -100,6 +103,7 @@
   .text-button {
     padding-left: 22px;
     padding-right: 22px;
+    font-size: $font-size--medium;
     &.button--secondary {
       padding-left: 21px;
       padding-right: 21px;
