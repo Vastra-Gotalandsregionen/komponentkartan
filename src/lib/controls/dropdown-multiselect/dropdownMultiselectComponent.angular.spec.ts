@@ -428,6 +428,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         describe('and a selected value', () => {
             beforeEach(() => {
                 component.selectedValues = ['one'];
+                fixture.detectChanges();
             });
             it('the matching drop down item is selected', () => {
                 expect(component.items[0].selected).toBe(true);
@@ -446,6 +447,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         describe('and both are selected', () => {
             beforeEach(() => {
                 component.selectedValues = ['one', 'two'];
+                fixture.detectChanges();
             });
             it('the matching drop down items are selected', () => {
                 expect(component.items[0].selected).toBe(true);
