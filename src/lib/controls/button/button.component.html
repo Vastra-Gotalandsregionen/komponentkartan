@@ -1,6 +1,8 @@
 ﻿<!-- mousedown event används för att säkerställa att den overridar event som onleave i formulär -->
 <button type="{{type}}" class="text-button noselect" role="button" (click)="onClick($event)" (keydown)="keyPressed($event)"
   tabindex="0" [attr.aria-disabled]="disabled" [ngClass]="{'button--disabled' : disabled, 'button--enabling' : reenabled, 'button--secondary': secondary}">
-  <ng-content></ng-content>
+  <span>
+    <ng-content></ng-content>
+  </span>
   <div *ngIf="!secondary" class="button__focus-line"></div>
 </button>

@@ -94,6 +94,9 @@
   @extend .button__base;
   font-size: $font-size--small;
   font-family: $font-family;
+  span {
+    position: relative;
+  }
 }
 
 .button--enabling {

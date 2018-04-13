@@ -34,7 +34,7 @@ vgr-dropdown-multiselect {
   transition: opacity 0.3s linear, max-height 0.3s linear;
   padding-top: 3px;
   width: $dropdown-width--medium;
-  max-height: 27px;
+  max-height: 0px;
   overflow: hidden;
   ul {
     padding-left: 10px;
