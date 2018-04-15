@@ -63,6 +63,20 @@
   color: $text-color--read-only;
 }
 
+.primary-color--success {
+  background-color: $primary-color--success;
+  color: $text-color--light;
+}
+
+.primary-color--error {
+  background-color: $primary-color--error;
+  color: $text-color--light;
+}
+
+.secondary-color--error {
+  background-color: $secondary-color--error
+}
+
 .background-color--default {
   background-color: $background-color--default;
 }
