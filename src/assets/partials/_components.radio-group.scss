@@ -1,3 +1,20 @@
+.radio-group {
+  &.vertical {
+    display: inline-flex;
+    flex-direction: column;
+    .radio-button {
+      min-height: $component-height;
+      height: auto;
+      display: flex;
+      align-items: flex-start;
+      .radio-button__icon {
+        position: relative;
+        top: 3px;
+      }
+    }
+  }
+}
+
 .radio-button {
   display: inline-flex;
   flex-direction: row;
@@ -9,6 +26,7 @@
 
 .radio-button__icon {
   display: inline-block;
+  min-width: 18px;
   width: 18px;
   height: 18px;
   border: solid 2px #151515;
