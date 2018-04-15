@@ -42,6 +42,7 @@ $filter-area-height: 60px;
   }
   .readonly & {
     background-color: $background-color--content;
+    transition: background-color 0s linear;
     cursor: default;
     width: auto;
     height: auto;
