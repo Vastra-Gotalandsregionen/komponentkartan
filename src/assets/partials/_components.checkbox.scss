@@ -35,15 +35,14 @@
   }
   .checkbox--checked & {
     background: $control-color--enabled;
-    border: none;
     &:after {
       content: '';
       position: absolute;
       width: 9px;
       height: 5px;
       background: transparent;
-      top: 5px;
-      left: 4px;
+      top: 3px;
+      left: 2px;
       border: 2px solid white;
       border-top: none;
       border-right: none;
@@ -78,8 +77,8 @@
       &:after {
         width: 10px;
         height: 5px;
-        top: 6px;
-        left: 4px;
+        top: 4px;
+        left: 2px;
       }
     }
   }
