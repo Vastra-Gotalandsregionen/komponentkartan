@@ -130,7 +130,7 @@
     cursor: pointer;
     font-weight: bold;
     a {
-      letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+      letter-spacing: $menu-text-font-size--small-letter-spacing-bold;
     }
   }
   &.menu__item--selected {
@@ -138,7 +138,7 @@
     @extend .background-color--secondary;
     color: $text-color--light;
     font-weight: bold;
-    letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
+    letter-spacing: $menu-text-font-size--small-letter-spacing-bold;
   }
   &.menu__item--disabled {
     cursor: default;
