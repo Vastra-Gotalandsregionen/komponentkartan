@@ -48,9 +48,14 @@ describe('[MenuItemComponent]', () => {
             component.text = 'Menu item 1';
             fixture.detectChanges();
             notification = rootElement.query(By.css('.menu__item--notification'));
+
         });
         it('no notification visible', () => {
             expect(notification).toBeNull();
+        });
+        it('menuitem has role menuitem', () => {
+
+            expect(rootElement.attributes['role']).toBe('menuitem');
         });
     });
 

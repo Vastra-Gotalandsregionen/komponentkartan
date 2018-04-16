@@ -12,6 +12,7 @@ export class MenuComponent implements AfterContentInit {
 
     @Input() title: string;
     @HostBinding('class.menu') hasClass = true;
+    @HostBinding('attr.role') role = 'menu';
     @ContentChildren(MenuItemBase, { descendants: true }) menuItems: QueryList<MenuItemBase>;
 
     get smallerFont(): boolean {
@@ -36,10 +37,13 @@ export class MenuComponent implements AfterContentInit {
             });
 
             x.goDown.subscribe(() => {
-                console.log(i);
+
+                //if on last menuitem, set focus on first
                 if (i === menuItemArray.length - 1) {
-                    return;
+                    i = 0;
+                    menuItemArray[i].setFocus();
                 }
+
                 //om nästa är en menu-item
                 currentMenuItem = menuItemArray[i];
                 let myRef = currentMenuItem.elementRef;
@@ -47,13 +51,20 @@ export class MenuComponent implements AfterContentInit {
                 if (currentMenuItem instanceof SubmenuComponent) {
                     if (!(<SubmenuComponent>currentMenuItem).expanded) {
                         numberOfSubmenuItems = myRef.nativeElement.getElementsByTagName('vgr-menu-item').length;
+
+                        //if index gets higher than shown items, set focus on first
+                        if (i + 1 + numberOfSubmenuItems > menuItemArray.length - 1) {
+                            i = 0;
+                            menuItemArray[i].setFocus();
+                            return;
+                        }
                         menuItemArray[i + 1 + numberOfSubmenuItems].setFocus();
+
                         return;
                     }
                 }
+
                 menuItemArray[i + 1].setFocus();
-                console.log(i + 1 + ' is focused');
-                //eller om nästa är en submenu-item
             });
         });
     }

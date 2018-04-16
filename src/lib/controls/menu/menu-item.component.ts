@@ -1,4 +1,4 @@
-import { Input, Component, HostListener, Output, EventEmitter, ElementRef, Renderer, forwardRef } from '@angular/core';
+import { Input, Component, HostListener, Output, EventEmitter, ElementRef, Renderer, forwardRef, HostBinding, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
 
@@ -7,14 +7,16 @@ import { MenuItemBase } from './menu-item-base';
     templateUrl: './menu-item.component.html',
     providers: [{ provide: MenuItemBase, useExisting: forwardRef(() => MenuItemComponent) }]
 })
-export class MenuItemComponent extends MenuItemBase {
+export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @Input() text: string;
     @Input() link: string;
-    @Input() disabled: boolean;
+    @Input() disabled: boolean = false;
     @Input() disabledTooltip: string;
     @Input() notification: string;
     @Input() notificationColor: string;
     @Input() notificationTooltip: string;
+    @HostBinding('attr.role') role = 'menuitem';
+    @HostBinding('attr.aria-disabled') ariaDisabled = this.disabled;
 
     @HostListener('keyup', ['$event']) onKeyUp(event: KeyboardEvent) {
         if (event.keyCode === 13 || event.keyCode === 32) { // enter & space - navigera
@@ -46,5 +48,10 @@ export class MenuItemComponent extends MenuItemBase {
 
     constructor(private router: Router, elementRef: ElementRef, renderer: Renderer) {
         super(elementRef, renderer);
+
+    }
+
+    ngAfterViewInit() {
+        this.ariaDisabled = this.disabled;
     }
 }

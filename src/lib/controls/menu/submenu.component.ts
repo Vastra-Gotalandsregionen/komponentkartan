@@ -12,6 +12,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit {
 
     @Input() text: string;
     @Input() expanded: boolean;
+    @HostBinding('attr.aria-haspopup') hasAriaPopup = true;
 
     @HostBinding('class.submenu') hasClass = true;
     @HostBinding('class.submenu--expanded') get expandedClass() {

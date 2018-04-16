@@ -34,28 +34,33 @@ describe('[MenuComponent]', () => {
             done();
         });
     });
-
-    describe('When component is initialized with a title of length 10', () => {
+    describe('When component is initialized ', () => {
         beforeEach(() => {
-            component.title = 'Menyrubrik';
-            headerTitle = rootElement.query(By.css('.menu__header__title'));
-            fixture.detectChanges();
+
+            it('it should have the role menu', () => {
+                expect(rootElement.attributes['role']).toBe('menu');
+            });
+            describe('with a title of length 10', () => {
+                beforeEach(() => {
+                    component.title = 'Menyrubrik';
+                    headerTitle = rootElement.query(By.css('.menu__header__title'));
+                    fixture.detectChanges();
+                });
+                it('title should have smaller font', () => {
+                    expect(component.smallerFont).toBe(true);
+                    expect(headerTitle.classes['menu__header__title--smaller-font-size']).toBe(true);
+                });
+            });
         });
-        it('title should have smaller font', () => {
-            expect(component.smallerFont).toBe(true);
-            expect(headerTitle.classes['menu__header__title--smaller-font-size']).toBe(true);
+
+        describe('When component is initialized with a title of length 6', () => {
+            beforeEach(() => {
+                component.title = 'Rubrik';
+                fixture.detectChanges();
+            });
+            it('title should have smaller font', () => {
+                expect(component.smallerFont).toBe(false);
+                expect(rootElement.classes['menu__header__title--smaller-font-size']).toBeUndefined();
+            });
         });
     });
-
-
-    describe('When component is initialized with a title of length 6', () => {
-        beforeEach(() => {
-            component.title = 'Rubrik';
-            fixture.detectChanges();
-        });
-        it('title should have smaller font', () => {
-            expect(component.smallerFont).toBe(false);
-            expect(rootElement.classes['menu__header__title--smaller-font-size']).toBeUndefined();
-        });
-    });
-});
