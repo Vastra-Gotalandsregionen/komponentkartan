@@ -23,15 +23,17 @@ export class MenuItemComponent extends MenuItemBase {
         }
         if (event.keyCode === 36) { // Home
             this.goToFirst.emit();
+            event.cancelBubble = true;
             event.preventDefault();
         }
         if (event.keyCode === 38) { // Arrow Up
             this.goUp.emit();
+            event.cancelBubble = true;
             event.preventDefault();
         }
         if (event.keyCode === 40) {
-            console.log('menu-item');// Arrow Down
-            this.goDown.emit();
+            this.goDown.emit(); // Arrow Down
+            event.cancelBubble = true;
             event.preventDefault();
         }
     }
