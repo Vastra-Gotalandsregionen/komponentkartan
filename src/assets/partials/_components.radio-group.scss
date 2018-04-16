@@ -11,6 +11,9 @@
         position: relative;
         top: 3px;
       }
+      .radio-button__text {
+        padding-bottom: 6px;
+      }
     }
   }
 }
@@ -114,6 +117,20 @@
     cursor: default;
     .radio-button__text {
       color: $control-color--disabled;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .radio-group {
+    &.vertical {
+      display: inline-flex;
+      .radio-button {
+        .radio-button__text {
+          top: 0px;
+          padding-bottom: 4px;
+        }
+      }
     }
   }
 }
