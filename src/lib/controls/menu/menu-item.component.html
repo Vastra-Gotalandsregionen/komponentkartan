@@ -5,7 +5,7 @@
 </div>
 
 <ng-template #disableditem>
-  <div class="menu__item menu__item--disabled">
+  <div class="menu__item menu__item--disabled" tabindex="0">
     <p title="{{disabledTooltip}}">{{text}}</p>
       <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass" title={{notificationTooltip}}>{{ notificationText }}</span>
   </div>

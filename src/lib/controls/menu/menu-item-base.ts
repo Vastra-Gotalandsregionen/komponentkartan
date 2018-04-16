@@ -8,8 +8,7 @@ export class MenuItemBase {
     constructor(protected elementRef: ElementRef, private renderer: Renderer) {
     }
 
-    setFocus() {
+    setFocus(movingUp: boolean = false) {
         this.renderer.invokeElementMethod(this.elementRef.nativeElement.firstElementChild, 'focus');
     }
-
 }

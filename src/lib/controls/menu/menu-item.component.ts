@@ -16,7 +16,7 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @Input() notificationColor: string;
     @Input() notificationTooltip: string;
     @HostBinding('attr.role') role = 'menuitem';
-    @HostBinding('attr.aria-disabled') ariaDisabled = this.disabled;
+    @HostBinding('attr.aria-disabled') ariaDisabled;
 
     @HostListener('keyup', ['$event']) onKeyUp(event: KeyboardEvent) {
         if (event.keyCode === 13 || event.keyCode === 32) { // enter & space - navigera
@@ -25,15 +25,17 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
         }
         if (event.keyCode === 36) { // Home
             this.goToFirst.emit();
+            event.cancelBubble = true;
             event.preventDefault();
         }
         if (event.keyCode === 38) { // Arrow Up
             this.goUp.emit();
+            event.cancelBubble = true;
             event.preventDefault();
         }
         if (event.keyCode === 40) {
-            console.log('menu-item');// Arrow Down
-            this.goDown.emit();
+            this.goDown.emit(); // Arrow Down
+            event.cancelBubble = true;
             event.preventDefault();
         }
     }
@@ -52,6 +54,9 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.ariaDisabled = this.disabled;
+        setTimeout(() => {
+            this.ariaDisabled = this.disabled;
+        }, 25);
+
     }
 }
