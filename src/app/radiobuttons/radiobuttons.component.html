@@ -31,9 +31,19 @@
 
       <vgr-radio-group [options]="options" (selectedChanged)="onSelectedRadioOptionChanged($event)">
       </vgr-radio-group>
+
       <vgr-button (click)="rensaVal()">Rensa alternativ</vgr-button>
       <br>
+      <br>
+      <h2>Vertikal radiogroup</h2>
+      <vgr-radio-group style="max-width: 200px;" [options]="options2" [vertical]="true" (selectedChanged)="onSelectedRadioOptionChanged($event)">
+      </vgr-radio-group>
 
+      <br>
+      <h2>Horisontell radiogroup</h2>
+      <vgr-radio-group [options]="options" (selectedChanged)="onSelectedRadioOptionChanged($event)">
+      </vgr-radio-group>
+      <br>
       <br>
       <br>
       <div>Du har valt alternativ: {{selectedOption}}</div>
@@ -66,6 +76,13 @@
           disabled : boolean
         </td>
         <td>Defaultvärde false. Sätter hela gruppen till disabled</td>
+        <td>[disabled]="true"</td>
+      </tr>
+      <tr>
+        <td>
+          vertical : boolean
+        </td>
+        <td>Anger om radiogruppen ska ha horisontell eller vertikal layout. Defaultvärde false (horisontellt).</td>
         <td>[disabled]="true"</td>
       </tr>
       <tr>
