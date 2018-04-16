@@ -24,6 +24,11 @@
   height: $component-height;
 }
 
+.radio-button__text {
+  position: relative;
+  top: 1px;
+}
+
 .radio-button__icon {
   display: inline-block;
   min-width: 18px;
