@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add property noMonthSelectedLabel to Monthpicker
 - Add property noDateSelectedLabel to Datepicker
 - Added vgr-customized border to components on focus
-
+- Fixed bug that makes the dropdown-multi component to push other components to the right that lies next to it 
+- vgr-button now wraps an HTML-button and has a type-property
 
 ## 2.3.0 (Stable)
 - Added vgr-table component

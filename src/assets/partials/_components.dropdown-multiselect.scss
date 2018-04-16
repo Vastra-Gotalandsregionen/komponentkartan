@@ -1,64 +1,70 @@
-    .dropdown--multiselect {
-      .dropdown__menu {
-        a {
-          min-height: 38px;
-        }
-      }
-      &:focus {
-        outline: $focus-outline-width solid $focus-color;
-      }
+@import "partials/_components.dropdown.scss";
+.dropdown--multiselect {
+  .dropdown__menu {
+    a {
+      min-height: 38px;
     }
+  }
+  &:focus {
+    outline: $focus-outline-width solid $focus-color;
+  }
+}
 
-    vgr-dropdown-multiselect {
-      .dropdown--edit {
-        opacity: 1;
-        height: 30px;
-        transition: opacity 0.3s linear, height 1ms;
-        transition-delay: 0, 0.3s;
-      }
-      &.readonly {
-        .dropdown--edit {
-          opacity: 0;
-          width: 0;
-          height: 0;
-          min-height: 0;
-          transition: opacity 0.3s linear, height 1ms;
-          transition-delay: 0, 0.3s;
-        }
-      }
-    }
-
-    .dropdown__multiselect-readonlylist {
+vgr-dropdown-multiselect {
+  .dropdown--edit {
+    opacity: 1;
+    height: 30px;
+    transition: opacity 0.3s linear, height 1ms;
+    transition-delay: 0, 0.3s;
+  }
+  &.readonly {
+    .dropdown--edit {
       opacity: 0;
-      transition: opacity 0.3s linear, max-height 0.3s linear;
-      padding-top: 3px;
-      width: auto;
-      max-height: 0;
-      ul {
-        padding-left: 10px;
-        list-style-type: disc;
-        list-style-position: inside;
-        li {
-          margin-left: 10px;
-          text-indent: -25px;
-          padding-left: 25px;
-        }
-      }
-      .readonly & {
-        opacity: 1;
-        max-height: 500px;
-        transition: opacity 0.3s linear, max-height 0.3s linear;
-        min-height: $component-height;
-        &:focus {
-          outline: $focus-outline-width solid $focus-color;
-        }
-      }
+      width: 0;
+      height: 0;
+      min-height: 0;
+      transition: opacity 0.3s linear, height 1ms;
+      transition-delay: 0, 0.3s;
     }
+  }
+}
 
-    @media screen and (max-width: $desktop-width--small) {
-      .dropdown--multiselect {
-        .dropdown__menu {
-          max-height: 320px;
-        }
-      }
+.dropdown__multiselect-readonlylist {
+  opacity: 0;
+  transition: opacity 0.3s linear, max-height 0.3s linear;
+  padding-top: 3px;
+  width: $dropdown-width--medium;
+  max-height: 0px;
+  overflow: hidden;
+  ul {
+    padding-left: 10px;
+    list-style-type: disc;
+    list-style-position: inside;
+    li {
+      margin-left: 10px;
+      text-indent: -25px;
+      padding-left: 25px;
     }
+  }
+  .readonly & {
+    opacity: 1;
+    max-height: 500px;
+    width: auto;
+    transition: opacity 0.3s linear, max-height 0.3s linear;
+    min-height: $component-height;
+    &:focus {
+      outline: $focus-outline-width solid $focus-color;
+    }
+  }
+}
+
+@media screen and (max-width: $desktop-width--small) {
+  .dropdown--multiselect {
+    .dropdown__menu {
+      max-height: 320px;
+    }
+  }
+  .dropdown__multiselect-readonlylist {
+    width: $dropdown-width--medium;
+  }
+}
