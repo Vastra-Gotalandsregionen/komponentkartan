@@ -22,27 +22,22 @@ export class MenuComponent implements AfterContentInit {
     constructor() { }
 
     ngAfterContentInit() {
-        const menuItemArray = this.menuItems.toArray();
-        menuItemArray.forEach((x, i) => {
-            x.goToFirst.subscribe(() => menuItemArray[0].setFocus());
+        this.menuItems.forEach((x, i) => {
+            x.home.subscribe(() => this.menuItems.first.setFocus());
+            x.end.subscribe(() => this.menuItems.last.setFocus(true));
 
-            x.goUp.subscribe(() => {
+            x.arrowUp.subscribe(() => {
                 if (i === 0) {
                     return;
                 }
-
-                menuItemArray[i - 1].setFocus(true);
+                this.menuItems.toArray()[i - 1].setFocus(true);
             });
-
-            x.goDown.subscribe(() => {
-                if (i === menuItemArray.length - 1) {
-                    i = 0;
-                    menuItemArray[i].setFocus();
+            x.arrowDown.subscribe(() => {
+                if (i === this.menuItems.length - 1) {
+                    this.menuItems.first.setFocus();
                     return;
                 }
-
-                menuItemArray[i + 1].setFocus();
-
+                this.menuItems.toArray()[i + 1].setFocus();
             });
         });
     }

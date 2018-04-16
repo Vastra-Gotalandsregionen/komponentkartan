@@ -22,32 +22,33 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
     @HostBinding('class.submenu--child-selected') private childSelected: boolean;
 
     @HostListener('keyup', ['$event']) onKeyUp(event: KeyboardEvent) {
-        if (event.keyCode === 13 || event.keyCode === 32) { // enter & space - navigera
+        event.cancelBubble = true;
+        event.preventDefault();
+
+        if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
             this.expanded = !this.expanded;
             if (this.expanded) {
                 this.menuItems.toArray()[1].setFocus();
             }
-            event.cancelBubble = true;
-            event.preventDefault();
         }
         if (event.keyCode === 36) { // Home
-            this.goToFirst.emit();
-
+            this.home.emit();
+        }
+        if (event.keyCode === 35) { // End
+            this.end.emit();
         }
         if (event.keyCode === 40) { // Arrow Down
             if (this.expanded) {
                 this.menuItems.toArray()[1].setFocus();
             } else {
-                this.goDown.emit();
+                this.arrowDown.emit();
             }
-            event.cancelBubble = true;
-            event.preventDefault();
         }
-
         if (event.keyCode === 38) { // Arrow Up
-            this.goUp.emit();
-            event.cancelBubble = true;
-            event.preventDefault();
+            this.arrowUp.emit();
+        }
+        if (event.keyCode === 27) { // Escape
+            this.expanded = false;
         }
     }
 
@@ -55,8 +56,8 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
         super(elementRef, renderer);
     }
 
-    setFocus(movingUp: boolean = false) {
-        if (movingUp && this.expanded) {
+    setFocus(handle: boolean = false) {
+        if (handle && this.expanded) {
             this.menuItems.last.setFocus();
         } else {
             super.setFocus();
@@ -82,29 +83,29 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
         const menuItemArray = this.menuItems.toArray();
         menuItemArray.splice(0, 1);
         menuItemArray.forEach((x, i) => {
-
-            x.goToFirst.subscribe(() => {
-                this.goToFirst.emit();
-
+            x.home.subscribe(() => {
+                this.home.emit();
             });
-
-            x.goUp.subscribe(() => {
+            x.end.subscribe(() => {
+                this.end.emit();
+            });
+            x.arrowUp.subscribe(() => {
                 if (i === 0) {
                     this.setFocus();
                     return;
                 }
-
                 menuItemArray[i - 1].setFocus();
             });
-
-            x.goDown.subscribe(() => {
+            x.arrowDown.subscribe(() => {
                 if (i === menuItemArray.length - 1) {
-                    this.goDown.emit();
+                    this.arrowDown.emit();
                     return;
                 }
-
                 menuItemArray[i + 1].setFocus();
-
+            });
+            x.escape.subscribe(() => {
+                this.setFocus();
+                this.expanded = false;
             });
         });
     }

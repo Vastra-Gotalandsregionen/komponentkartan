@@ -1,9 +1,11 @@
 import { ElementRef, Renderer, Output, EventEmitter } from '@angular/core';
 
 export class MenuItemBase {
-    @Output() goToFirst: EventEmitter<null> = new EventEmitter();
-    @Output() goUp: EventEmitter<null> = new EventEmitter();
-    @Output() goDown: EventEmitter<null> = new EventEmitter();
+    @Output() home: EventEmitter<null> = new EventEmitter();
+    @Output() end: EventEmitter<null> = new EventEmitter();
+    @Output() escape: EventEmitter<null> = new EventEmitter();
+    @Output() arrowUp: EventEmitter<null> = new EventEmitter();
+    @Output() arrowDown: EventEmitter<null> = new EventEmitter();
 
     constructor(protected elementRef: ElementRef, private renderer: Renderer) {
     }
