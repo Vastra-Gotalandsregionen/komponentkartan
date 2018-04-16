@@ -55,6 +55,9 @@ describe('RadioGroupComponent', () => {
             const selectedOptions = rootElement.queryAll(By.css('.radio-button--checked'));
             expect(selectedOptions.length).toEqual(0);
         });
+        it('the options are displayed horizontally', () => {
+            expect(rootElement.classes['vertical']).toBeFalsy();
+        });
         describe('and an option is clicked', () => {
             beforeEach(() => {
                 selectedChangedSpy.calls.reset();
@@ -119,7 +122,22 @@ describe('RadioGroupComponent', () => {
                 expect(component.selectedChanged.emit).toHaveBeenCalledWith(component.radiogroupItems[2].value);
             });
         });
-
+    });
+    describe('When initialized with vertical set to true', () => {
+        let selectedChangedSpy: jasmine.Spy;
+        beforeEach(() => {
+            selectedChangedSpy = spyOn(component.selectedChanged, 'emit');
+            component.vertical = true;
+            component.options = [
+                { value: 'PÅ', displayName: 'Per Åkerberg' } as SelectableItem<any>,
+                { value: 'SH', displayName: 'Sofia Hejdenberg' } as SelectableItem<any>,
+                { value: 'CB', displayName: 'Caroline Bornsjö' } as SelectableItem<any>,
+            ] as SelectableItem<any>[];
+            fixture.detectChanges();
+        });
+        it('the options are displayed vertically', () => {
+            expect(rootElement.classes['vertical']).toBeTruthy();
+        });
     });
 
     describe('When initialized with one selected option', () => {
