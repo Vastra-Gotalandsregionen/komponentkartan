@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added vgr-customized border to components on focus
 - Fixed bug that makes the dropdown-multi component to push other components to the right that lies next to it 
 - vgr-button now wraps an HTML-button and has a type-property
+- Fixed issue with line breaks in menu in Safari
+- Possible to display radio group horizontally and vertically
+- Smoother transition in dropdowns from radonly to edit mode
+- Checkboxes in dropdown multi has the same height in checked and unchecked state
 
 ## 2.3.0 (Stable)
 - Added vgr-table component
