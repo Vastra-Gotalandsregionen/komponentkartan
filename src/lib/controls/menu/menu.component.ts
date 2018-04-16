@@ -38,6 +38,7 @@ export class MenuComponent implements AfterContentInit {
                 if (i === menuItemArray.length - 1) {
                     i = 0;
                     menuItemArray[i].setFocus();
+                    return;
                 }
 
                 menuItemArray[i + 1].setFocus();

@@ -21,6 +21,10 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @HostListener('keyup', ['$event']) onKeyUp(event: KeyboardEvent) {
         if (event.keyCode === 13 || event.keyCode === 32) { // enter & space - navigera
             event.preventDefault();
+            //funkar inte med denna då eventet går på submenu istället....
+            if (this.disabled)
+                return;
+
             this.router.navigate([this.link]);
         }
         if (event.keyCode === 36) { // Home

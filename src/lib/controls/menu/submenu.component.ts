@@ -30,7 +30,10 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
             event.cancelBubble = true;
             event.preventDefault();
         }
+        if (event.keyCode === 36) { // Home
+            this.goToFirst.emit();
 
+        }
         if (event.keyCode === 40) { // Arrow Down
             if (this.expanded) {
                 this.menuItems.toArray()[1].setFocus();
@@ -79,7 +82,11 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
         const menuItemArray = this.menuItems.toArray();
         menuItemArray.splice(0, 1);
         menuItemArray.forEach((x, i) => {
-            x.goToFirst.subscribe(() => menuItemArray[0].setFocus());
+
+            x.goToFirst.subscribe(() => {
+                this.goToFirst.emit();
+
+            });
 
             x.goUp.subscribe(() => {
                 if (i === 0) {
