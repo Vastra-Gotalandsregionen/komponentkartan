@@ -1,27 +1,44 @@
-import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, Renderer, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, Renderer, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, AnimationTransitionEvent } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
-
+import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
 
 @Component({
     selector: 'vgr-submenu',
     templateUrl: './submenu.component.html',
-    providers: [{ provide: MenuItemBase, useExisting: forwardRef(() => SubmenuComponent) }]
+    providers: [{ provide: MenuItemBase, useExisting: forwardRef(() => SubmenuComponent) }],
+    animations: [
+        trigger('toggleSubMenu', [
+            state('void', style({
+                height: '0'
+            })),
+            state('collapsed', style({
+                height: '0'
+            })),
+            state('expanded', style({
+                height: '*'
+            })),
+            transition('* => expanded', [animate('600ms  ease-in')]),
+            transition('expanded => collapsed', [animate('600ms ease-out')])
+        ])
+    ]
 })
-export class SubmenuComponent extends MenuItemBase implements AfterViewInit, AfterContentInit {
 
+export class SubmenuComponent extends MenuItemBase implements AfterViewInit, AfterContentInit {
     @Input() text: string;
-    @Input() expanded: boolean;
+    @Input() expanded: boolean = false;
+    state: string;
     @HostBinding('attr.aria-haspopup') hasAriaPopup = true;
 
     @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
     @HostBinding('class.submenu') hasClass = true;
-    @HostBinding('class.submenu--expanded') get expandedClass() {
-        return this.expanded;
-    }
     @HostBinding('class.submenu--child-selected') private childSelected: boolean;
 
-    @HostListener('keyup', ['$event']) onKeyUp(event: KeyboardEvent) {
+    @HostListener('keydown', ['$event']) onKeyUp(event: KeyboardEvent) {
+
+        if (event.keyCode === 9) { // Home
+            return;
+        }
         event.cancelBubble = true;
         event.preventDefault();
 
@@ -52,10 +69,32 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
         }
     }
 
+    private _showExpanded = this.expanded;
+
+    get showExpanded() {
+        return this._showExpanded;
+    }
+
+    set showExpanded(invalue: boolean) {
+        if (invalue) {
+            this._showExpanded = true;
+            this.expanded = true;
+            this.state = 'expanded';
+        } else {
+            this.state = 'collapsed';
+        }
+    }
+
     constructor(private router: Router, elementRef: ElementRef, renderer: Renderer) {
         super(elementRef, renderer);
     }
 
+    animationDone(event: AnimationTransitionEvent) {
+        if (event.fromState === 'expanded' && event.toState === 'collapsed') {
+            this._showExpanded = false;
+            this.expanded = false;
+        }
+    }
     setFocus(handle: boolean = false) {
         if (handle && this.expanded) {
             this.menuItems.last.setFocus();
@@ -67,6 +106,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
     ngAfterViewInit() {
         setTimeout(() => {
             this.setChildSelected();
+            this.showExpanded = this.expanded;
 
         }, 10);
 

@@ -57,8 +57,6 @@
     }
     .submenu-content {
       overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.6s ease-out;
       .menu__item {
         padding-left: $margin--fat;
       }
@@ -78,12 +76,6 @@
     }
     .menu__item__plus {
       @extend .bg-image-icon-plus;
-    }
-    &.submenu--expanded {
-      .submenu-content {
-        max-height: 999px;
-        transition: max-height 0.6s ease-in;
-      }
     }
     &.submenu--child-selected {
       >.menu__item a {
