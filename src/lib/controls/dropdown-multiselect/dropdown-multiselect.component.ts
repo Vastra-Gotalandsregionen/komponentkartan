@@ -82,6 +82,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         // this.showAllItem.displayName = this.showAllItemText;
 
         // this.setFocusableItems();
+        // test
         this.updateDropdownLabel();
     }
 
