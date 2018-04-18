@@ -74,10 +74,16 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     ngOnInit() {
-        this.control = this.controlContainer.control.get(this.formControlName);
+        if (this.formControlName && this.controlContainer) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
+        this.filterVisible = this.items && this.items.length > this.filterLimit;
         // this.updateScrolled();
         // this.showAllItem.displayName = this.showAllItemText;
-        // this.updateDropdownLabel();
+
+        // this.setFocusableItems();
+        // test
+        this.updateDropdownLabel();
     }
 
     ngAfterViewInit() {
@@ -231,6 +237,8 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     onLeave() {
         this.hasFocus = false;
         if (this.control) {
+            this.control.markAsDirty();
+            this.control.markAsTouched();
             this.onTouched();
         }
     }
