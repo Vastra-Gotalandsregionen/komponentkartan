@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Possible to display radio group horizontally and vertically
 - Smoother transition in dropdowns from radonly to edit mode
 - Checkboxes in dropdown multi has the same height in checked and unchecked state
+- Fixed bug with vgr-datepicker in vgr-actionpanel.
 
 ## 2.3.0 (Stable)
 - Added vgr-table component
