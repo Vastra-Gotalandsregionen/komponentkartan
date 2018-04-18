@@ -1,7 +1,8 @@
-import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, Renderer, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, AnimationTransitionEvent } from '@angular/core';
+import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, Renderer, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, AnimationTransitionEvent, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+import { MenuItemComponent } from '../..';
 
 @Component({
     selector: 'vgr-submenu',
@@ -24,11 +25,13 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
     ]
 })
 
-export class SubmenuComponent extends MenuItemBase implements AfterViewInit, AfterContentInit {
+export class SubmenuComponent extends MenuItemBase implements AfterContentInit, OnInit {
     @Input() text: string;
-    @Input() expanded: boolean = false;
+    @Input() expanded = false;
+    private _showExpanded: boolean;
     state: string;
     @HostBinding('attr.aria-haspopup') hasAriaPopup = true;
+    @HostBinding('attr.role') role = 'menuitem';
 
     @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
     @HostBinding('class.submenu') hasClass = true;
@@ -36,17 +39,22 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
 
     @HostListener('keydown', ['$event']) onKeyUp(event: KeyboardEvent) {
 
-        if (event.keyCode === 9) { // Home
+        if (event.keyCode === 9) { // Tab
             return;
         }
         event.cancelBubble = true;
         event.preventDefault();
 
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
-            this.expanded = !this.expanded;
-            if (this.expanded) {
-                this.menuItems.toArray()[1].setFocus();
-            }
+            this.showExpanded = !this.showExpanded;
+            // SetFocus after the animation is completed.
+            setTimeout(() => {
+                if (this.showExpanded) {
+                    this.menuItems.toArray()[1].setFocus();
+                } else {
+                    this.setFocus();
+                }
+            }, 650);
         }
         if (event.keyCode === 36) { // Home
             this.home.emit();
@@ -65,18 +73,16 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
             this.arrowUp.emit();
         }
         if (event.keyCode === 27) { // Escape
-            this.expanded = false;
+            this.showExpanded = false;
         }
     }
-
-    private _showExpanded = this.expanded;
 
     get showExpanded() {
         return this._showExpanded;
     }
 
-    set showExpanded(invalue: boolean) {
-        if (invalue) {
+    set showExpanded(show: boolean) {
+        if (show) {
             this._showExpanded = true;
             this.expanded = true;
             this.state = 'expanded';
@@ -103,18 +109,12 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
         }
     }
 
-    ngAfterViewInit() {
-        setTimeout(() => {
-            this.setChildSelected();
-            this.showExpanded = this.expanded;
-
-        }, 10);
+    ngOnInit() {
+        this._showExpanded = this.expanded;
 
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
-                setTimeout(() => {
-                    this.setChildSelected();
-                }, 100);
+                this.setChildSelected(event);
             }
         });
     }
@@ -145,17 +145,23 @@ export class SubmenuComponent extends MenuItemBase implements AfterViewInit, Aft
             });
             x.escape.subscribe(() => {
                 this.setFocus();
-                this.expanded = false;
+                this.showExpanded = false;
             });
         });
     }
 
-    private setChildSelected() {
-        this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
-        if (this.childSelected) {
-            this.expanded = true;
+    private setChildSelected(event: NavigationEnd) {
+        const itemArray = this.menuItems.toArray();
+        itemArray.splice(0, 1);
+        const menuItemArray = <MenuItemComponent[]>itemArray;
+        const matches = menuItemArray.filter(m => m.link === event.url);
+
+        if (matches.length === 1) {
+            this.showExpanded = true;
+            // SetFocus after the animation is completed.
+            setTimeout(() => {
+                matches[0].setFocus();
+            }, 650);
         }
     }
-
-
 }

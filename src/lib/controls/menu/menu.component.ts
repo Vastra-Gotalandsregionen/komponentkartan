@@ -28,6 +28,14 @@ export class MenuComponent implements AfterContentInit {
 
             x.arrowUp.subscribe(() => {
                 if (i === 0) {
+                    const lastMenuItem = this.menuItems.last;
+                    if (lastMenuItem instanceof SubmenuComponent) {
+                        if ((<SubmenuComponent>lastMenuItem).expanded) {
+                            (<SubmenuComponent>lastMenuItem).menuItems.last.setFocus();
+                            return;
+                        }
+                    }
+                    this.menuItems.last.setFocus();
                     return;
                 }
                 this.menuItems.toArray()[i - 1].setFocus(true);

@@ -20,10 +20,9 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
 
     @HostListener('keydown', ['$event']) onKeyUp(event: KeyboardEvent) {
 
-        if (event.keyCode === 9) { // Home
+        if (event.keyCode === 9) { // Tab
             return;
         }
-
 
         event.cancelBubble = true;
         event.preventDefault();
