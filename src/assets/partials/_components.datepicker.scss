@@ -122,11 +122,11 @@ vgr-datepicker {
   padding-bottom: 0px;
   width: 250px;
   height: 300px;
-  visibility: hidden;
+  display: none;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   cursor: default;
   .datepicker--open & {
-    visibility: visible;
+    display: inline-block;
   }
   &:focus {
     outline: 0;
