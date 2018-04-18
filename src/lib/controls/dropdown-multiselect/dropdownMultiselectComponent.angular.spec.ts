@@ -1,10 +1,10 @@
 ﻿/* tslint:disable */
-import { ComponentFixture, TestBed, async } from "@angular/core/testing";
+import { ComponentFixture, TestBed, async, } from "@angular/core/testing";
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
 import { By } from "@angular/platform-browser";
 import { FormsModule, FormControl, Validators } from "@angular/forms"
 
-import { DebugElement } from "@angular/core";
+import { DebugElement, forwardRef } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 
@@ -17,6 +17,8 @@ import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelect
 import { DropdownItem } from "../../models/dropdownItem.model";
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
+
 
 describe("[DropdownMultiSelectComponent]", () => {
     let component: DropdownMultiselectComponent;
@@ -28,7 +30,12 @@ describe("[DropdownMultiSelectComponent]", () => {
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
             declarations: [DropdownMultiselectComponent, FilterTextboxComponent, TruncatePipe, FilterPipe, DropdownItemToSelectedTextPipe, CheckboxComponent],
-            imports: [CommonModule, FormsModule, PerfectScrollbarModule]
+            imports: [CommonModule, FormsModule, PerfectScrollbarModule],
+            providers: [{
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => DropdownMultiselectComponent),
+                multi: true
+            }]
         });
 
         TestBed.overrideComponent(DropdownMultiselectComponent,
@@ -59,11 +66,11 @@ describe("[DropdownMultiSelectComponent]", () => {
             rootElement = fixture.debugElement;
             component.showAllItemText = "Select all";
             component.items = [
-                { displayName: "Option 1", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
-                { displayName: "Option 2", value: { name: 'option 1', id: 1 } } as DropdownItem<object>,
-                { displayName: "Option 3", value: { name: 'option 1', id: 1 } } as DropdownItem<object>
-            ] as DropdownItem<object>[];
-            component.ngOnChanges();
+                { displayName: "Option 1", value: 'option 1' } as DropdownItem<string>,
+                { displayName: "Option 2", value: 'option 2' } as DropdownItem<string>,
+                { displayName: "Option 3", value: 'option 3' } as DropdownItem<string>
+            ] as DropdownItem<string>[];
+
             fixture.detectChanges();
             done();
         });
@@ -72,6 +79,8 @@ describe("[DropdownMultiSelectComponent]", () => {
         var dropdownElement: DebugElement;
         beforeEach(() => {
             dropdownElement = rootElement.query(By.css(".dropdown--edit"));
+            component.ngOnInit();
+            fixture.detectChanges();
 
         });
         it("dropdown is not expanded", () => {
@@ -101,7 +110,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                 { displayName: "Option 2", value: { name: 'option 1', id: 1 }, selected: true } as DropdownItem<object>,
                 { displayName: "Option 3", value: { name: 'option 1', id: 1 } } as DropdownItem<object>
             ] as DropdownItem<object>[];
-            component.ngOnChanges();
+
             fixture.detectChanges();
         });
         it("selectAll is not selected", () => {
@@ -125,7 +134,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                 { displayName: "Option 2", value: { name: 'option 2', id: 2 }, selected: true } as DropdownItem<object>,
                 { displayName: "Option 3", value: { name: 'option 3', id: 3 } } as DropdownItem<object>
             ] as DropdownItem<object>[];
-            component.ngOnChanges();
+
 
             fixture.detectChanges();
         });
@@ -176,7 +185,7 @@ describe("[DropdownMultiSelectComponent]", () => {
             expect(component.dropdownLabel).toBe("1 vald");
         });
         it('a selectedItemChanged is emitted', () => {
-            expect(component.selectionChanged.emit).toHaveBeenCalledWith([{ name: 'option 1', id: 1 }]);
+            expect(component.selectionChanged.emit).toHaveBeenCalledWith(['option 1']);
         });
     });
 
@@ -304,10 +313,10 @@ describe("[DropdownMultiSelectComponent]", () => {
         beforeEach(() => {
             let dropdownItems = [] as DropdownItem<any>[];
             for (let i = 0; i <= 20; i++) {
-                dropdownItems.push({ displayName: `Name${i}` } as DropdownItem<any>);
+                dropdownItems.push({ displayName: `Name${i}`, value: 'option' } as DropdownItem<any>);
             }
             component.items = dropdownItems;
-            component.ngOnChanges();
+            component.ngOnInit();
             fixture.detectChanges();
         });
         it("the filter textbox is visible", () => {
@@ -404,7 +413,7 @@ describe("[DropdownMultiSelectComponent]", () => {
                 dropdownItems.push({ displayName: `Name${i}` } as DropdownItem<any>);
             }
             component.items = dropdownItems;
-            component.ngOnChanges();
+
             fixture.detectChanges();
         });
         it("the filter textbox is not visible", () => {
@@ -468,22 +477,23 @@ describe("[DropdownMultiSelectComponent]", () => {
                 expect(element.nativeElement.querySelector("span").innerText).toBe('Alla')
             });
         });
-        // describe('and both are selected', () => {
-        //     beforeEach(() => {
-        //         component.selectedValues = ['one', 'two'];
-        //     });
-        //     it('the matching drop down items are selected', () => {
-        //         expect(component.items[0].selected).toBe(true);
-        //         expect(component.items[1].selected).toBe(true);
-        //     });
+        describe('and both are selected', () => {
+            beforeEach(() => {
+                component.selectedValues = ['one', 'two'];
+                fixture.detectChanges();
+            });
+            it('the matching drop down items are selected', () => {
+                expect(component.items[0].selected).toBe(true);
+                expect(component.items[1].selected).toBe(true);
+            });
 
-        //     it('a selectedItemChanged is emitted', () => {
-        //         expect(component.selectionChanged.emit).toHaveBeenCalledWith(['one', 'two']);
-        //     });
-        //     it('select all is selected', () => {
-        //         expect(component.selectAllItemsChecked).toBe(true);
-        //     });
-        // });
+            it('a selectedItemChanged is emitted', () => {
+                expect(component.selectionChanged.emit).toHaveBeenCalledWith(['one', 'two']);
+            });
+            it('select all is selected', () => {
+                expect(component.selectAllItemsChecked).toBe(true);
+            });
+        });
 
     });
 
@@ -547,7 +557,7 @@ describe("[DropdownMultiSelectComponent]", () => {
             component.control = new FormControl(null, { validators: [Validators.required], updateOn: 'blur' });
             component.values = ['one', 'two', 'three'];
             component.selectAllItems(true);
-            component.ngOnChanges();
+
             element.triggerEventHandler('focusin', event);
             fixture.detectChanges();
         });
@@ -565,6 +575,7 @@ describe("[DropdownMultiSelectComponent]", () => {
 
         describe('when onLeave is triggered', () => {
             beforeEach(() => {
+                component.control = new FormControl([{ name: 'option 1', id: 1 }, { name: 'option 2', id: 2 }, { name: 'option 3', id: 3 }], { validators: [Validators.required], updateOn: 'blur' });
                 element.triggerEventHandler('focusout', event);
                 fixture.detectChanges();
             });
@@ -598,7 +609,7 @@ describe("[DropdownMultiSelectComponent]", () => {
         let listElement: DebugElement;
         beforeEach(() => {
             dropdownElement = rootElement.query(By.css('.dropdown--edit'));
-            component.ngOnChanges();
+
             fixture.detectChanges();
         });
 
@@ -624,7 +635,6 @@ describe("[DropdownMultiSelectComponent]", () => {
                 component.items = [{ displayName: 'one', value: 1 }, { displayName: 'two', value: 2 }, { displayName: 'three', value: 3 }];
                 fixture.detectChanges();
 
-                component.ngOnChanges();
                 listElement = rootElement.query(By.css('.dropdown__menu__items'));
                 dropdownElement = rootElement.query(By.css('.dropdown--edit'));
                 listItems = rootElement.queryAll(By.css('.dropdown-item'));
@@ -836,7 +846,6 @@ describe("[DropdownMultiSelectComponent]", () => {
                 dropdownElement = rootElement.query(By.css('.dropdown--edit'));
                 readonlyDropdownElement = rootElement.query(By.css('.dropdown__multiselect-readonlylist'));
 
-                component.ngOnChanges();
                 fixture.detectChanges();
                 selectedItemsElement = readonlyDropdownElement.queryAll(By.css('li'));
             });
