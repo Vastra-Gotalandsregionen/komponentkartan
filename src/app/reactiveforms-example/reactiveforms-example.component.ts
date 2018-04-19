@@ -174,7 +174,6 @@ export class ReactiveformsexampleComponent implements OnInit {
     }
 
     onSubmitUpdateOnBlurForm() {
-        this.updateOnBlurForm.get('interests').setValue(this.dropdownItemsMulti.map(x => x.value));
     }
 }
 
