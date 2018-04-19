@@ -1,6 +1,6 @@
 import { ElementRef, Renderer, Output, EventEmitter } from '@angular/core';
 
-export class MenuItemBase {
+export abstract class MenuItemBase {
     @Output() home: EventEmitter<null> = new EventEmitter();
     @Output() end: EventEmitter<null> = new EventEmitter();
     @Output() escape: EventEmitter<null> = new EventEmitter();
