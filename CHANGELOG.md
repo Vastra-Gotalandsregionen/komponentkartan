@@ -11,7 +11,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add property noMonthSelectedLabel to Monthpicker
 - Add property noDateSelectedLabel to Datepicker
 - Added vgr-customized border to components on focus
-- fixed bug that makes the dropdown-multi component to push other components to the right that lies next to it 
+- Fixed bug that makes the dropdown-multi component to push other components to the right that lies next to it 
+- vgr-button now wraps an HTML-button and has a type-property
+- Fixed issue with line breaks in menu in Safari
+- Possible to display radio group horizontally and vertically
+- Smoother transition in dropdowns from radonly to edit mode
+- Checkboxes in dropdown multi has the same height in checked and unchecked state
+- Fixed bug with vgr-datepicker in vgr-actionpanel.
 
 ## 2.3.0 (Stable)
 - Added vgr-table component

@@ -22,6 +22,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     @HostBinding('class.radio-group') hasClass = true;
     @HostBinding('attr.role') role = 'radiogroup';
     @Input() @HostBinding('class.disabled') disabled: boolean;
+    @Input() @HostBinding('class.vertical') vertical = false;
     @Input() formControlName?: string;
     @Input() set options(items: SelectableItem<any>[]) {
         const _items = JSON.parse(JSON.stringify(items));
@@ -48,7 +49,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         return this.renderer;
     }
 
-    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
+    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
     }
 
     ngOnChanges() {

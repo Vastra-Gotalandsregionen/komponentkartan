@@ -104,7 +104,7 @@
               </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnSubmitForm()">Reset form</vgr-button>
-            <button type="submit" (click)="onSubmit()">Submit</button>
+            <vgr-button type="submit" (click)="onSubmit()">Submit</vgr-button>
           </form>
         </vgr-card-column>
       </vgr-card>
@@ -135,7 +135,8 @@
                   [items]="dropdownItems"></vgr-dropdown>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti" [showValidation]="updateOnChangeForm.controls.interests.dirty"></vgr-dropdown-multiselect>
+                <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti" [showValidation]="updateOnChangeForm.controls.interests.dirty">
+                </vgr-dropdown-multiselect>
               </vgr-title-value>
               <vgr-title-value title="Du måste kryssa i mig!">
                 <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>

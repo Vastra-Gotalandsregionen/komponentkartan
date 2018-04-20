@@ -9,6 +9,8 @@ import { ButtonBaseComponent } from '../button-base/button-base.component';
 export class ButtonComponent extends ButtonBaseComponent implements OnChanges {
 
     @Input() secondary: boolean;
+    @Input() type = 'button';
+
     lastDisabledStatus: boolean;
     reenabled: boolean;
 

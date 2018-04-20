@@ -110,7 +110,7 @@ export class ReactiveformsexampleComponent implements OnInit {
             email: new FormControl('', { validators: [Validators.required, Validators.email] }),
             salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
             favourite_pet: new FormControl(null, { validators: [Validators.required] }),
-            interests: new FormControl(this.dropdownItemsMulti[0].value, { validators: [Validators.required] }),
+            interests: new FormControl([this.dropdownItemsMulti[0].value], { validators: [Validators.required] }),
             check: new FormControl(true, { validators: [Validators.pattern('true')] }),
             optional: new FormControl(1),
             monthpicker: new FormControl('', { validators: [Validators.required] }),

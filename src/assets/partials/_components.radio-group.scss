@@ -1,3 +1,23 @@
+.radio-group {
+  &.vertical {
+    display: inline-flex;
+    flex-direction: column;
+    .radio-button {
+      min-height: $component-height;
+      height: auto;
+      display: flex;
+      align-items: flex-start;
+      .radio-button__icon {
+        position: relative;
+        top: 3px;
+      }
+      .radio-button__text {
+        padding-bottom: 6px;
+      }
+    }
+  }
+}
+
 .radio-button {
   display: inline-flex;
   flex-direction: row;
@@ -7,8 +27,14 @@
   height: $component-height;
 }
 
+.radio-button__text {
+  position: relative;
+  top: 1px;
+}
+
 .radio-button__icon {
   display: inline-block;
+  min-width: 18px;
   width: 18px;
   height: 18px;
   border: solid 2px #151515;
@@ -91,6 +117,20 @@
     cursor: default;
     .radio-button__text {
       color: $control-color--disabled;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .radio-group {
+    &.vertical {
+      display: inline-flex;
+      .radio-button {
+        .radio-button__text {
+          top: 0px;
+          padding-bottom: 4px;
+        }
+      }
     }
   }
 }

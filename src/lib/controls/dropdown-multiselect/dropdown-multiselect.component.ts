@@ -1,4 +1,7 @@
-import { Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, ChangeDetectorRef, ViewChild, forwardRef, Optional, SkipSelf, Host, HostBinding } from '@angular/core';
+import {
+    Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, OnInit,
+    ChangeDetectorRef, ViewChild, forwardRef, Optional, SkipSelf, Host, HostBinding
+} from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
 import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
@@ -19,15 +22,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
     }]
 })
 
-export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnChanges, ControlValueAccessor, AfterViewInit {
+export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnInit, ControlValueAccessor, AfterViewInit {
 
     @Input() showAllItemText: string;
     @Input() allItemsSelectedLabel: string;
     @Input() selectAllItemText: string;
-    dropdownLabel: string;
+    dropdownLabel?: string;
     selectAllItemsMarked: boolean;
-
-
 
     @Output() selectionChanged = new EventEmitter<DropdownItem<any>[]>();
     get filterActive(): boolean {
@@ -43,11 +44,21 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
 
     set selectedValues(values: any[]) {
         if (values) {
+            this.items.forEach(x => {
+                x.selected = false;
+                x.marked = false;
+            });
             const matchingItems = this.items.filter((x => values.indexOf(x.value) > -1));
             if (matchingItems.length > 0) {
-                matchingItems.forEach(x => x.selected = true);
+                matchingItems.forEach(x => {
+                    x.selected = true;
+                    x.marked = true;
+                });
                 this.handleInitiallySelectedItems(matchingItems);
             }
+            this.updateScrolled();
+            this.showAllItem.displayName = this.showAllItemText;
+            this.updateDropdownLabel();
         } else {
             this.items.forEach(x => x.selected = false);
             this.handleInitiallySelectedItems([]);
@@ -60,6 +71,19 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.noItemSelectedLabel = 'Välj';
         this.showAllItemText = 'Visa alla';
         this.selectAllItemText = 'Välj alla';
+    }
+
+    ngOnInit() {
+        if (this.formControlName && this.controlContainer) {
+            this.control = this.controlContainer.control.get(this.formControlName);
+        }
+        this.filterVisible = this.items && this.items.length > this.filterLimit;
+        // this.updateScrolled();
+        // this.showAllItem.displayName = this.showAllItemText;
+
+        // this.setFocusableItems();
+        // test
+        this.updateDropdownLabel();
     }
 
     ngAfterViewInit() {
@@ -100,29 +124,13 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         }
     }
 
-    ngOnChanges() {
-        if (this.formControlName) {
-            this.control = this.controlContainer.control.get(this.formControlName);
-        }
-
-        this.showAllItem.displayName = this.showAllItemText;
-
-        if (this.formControlName) {
-            this.control = this.controlContainer.control.get(this.formControlName);
-        }
-
-        this.filterVisible = this.items && this.items.length > this.filterLimit;
-        this.updateScrolled();
-
-        this.updateDropdownLabel();
-    }
     controlHasErrors() {
         return (this.control && this.control.errors ? this.control.errors['required'] : false);
     }
 
-    writeValue(values: DropdownItem<any>[]): void {
-        if (values) {
-            this.selectedValues = values;
+    writeValue(value: any): void {
+        if (value) {
+            this.selectedValues = value;
         } else {
             this.selectedValues = null;
             this.items.forEach(i => {
@@ -209,7 +217,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         this.updateDropdownLabel();
     }
 
-    private updateDropdownLabel() {
+    updateDropdownLabel() {
         const selectedCount = this.items.filter(x => x.selected).length;
         if (selectedCount === 1) {
             this.dropdownLabel = '1 vald';
@@ -229,11 +237,9 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     onLeave() {
         this.hasFocus = false;
         if (this.control) {
-            this.control.markAsTouched();
             this.control.markAsDirty();
-            if (this.control.updateOn === 'blur' && this.selectedItems) {
-                this.control.setValue(this._items.filter(x => x.selected));
-            }
+            this.control.markAsTouched();
+            this.onTouched();
         }
     }
 

@@ -118,7 +118,10 @@
     "component-selector": [
       true,
       "element",
-      "vgr",
+      [
+        "vgr",
+        "app"
+      ],
       "kebab-case",
       "app"
     ],
