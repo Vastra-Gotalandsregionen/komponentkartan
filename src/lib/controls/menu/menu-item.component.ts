@@ -18,14 +18,12 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @HostBinding('attr.role') role = 'menuitem';
     @HostBinding('attr.aria-disabled') ariaDisabled;
 
-    @HostListener('keydown', ['$event']) onKeyUp(event: KeyboardEvent) {
+    @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
 
         if (event.keyCode === 9) { // Tab
             return;
         }
 
-        event.cancelBubble = true;
-        event.preventDefault();
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
             if (this.disabled) {
                 return;
@@ -42,11 +40,17 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
             this.arrowUp.emit();
         }
         if (event.keyCode === 40) { // Arrow Down
+
             this.arrowDown.emit();
         }
         if (event.keyCode === 27) { // Escape
             this.escape.emit();
         }
+
+        event.cancelBubble = true;
+        event.preventDefault();
+
+
     }
 
     get notificationColorClass(): string {

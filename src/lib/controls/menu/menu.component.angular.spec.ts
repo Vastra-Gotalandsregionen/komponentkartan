@@ -42,6 +42,7 @@ describe('[MenuComponent]', () => {
             component = fixture.debugElement.children[0].componentInstance;
             debugElement = fixture.debugElement;
             rootElement = fixture.debugElement.nativeElement;
+            //      component.ngAfterContentInit();
 
             fixture.detectChanges();
             done();
@@ -94,7 +95,6 @@ describe('[MenuComponent]', () => {
 
     describe('WCAG Tests', () => {
         let menu: HTMLElement;
-        let listElement: DebugElement;
         let menuItem: HTMLElement;
         let submenuItem: HTMLElement;
         beforeEach(() => {
@@ -148,7 +148,17 @@ describe('[MenuComponent]', () => {
 
         });
         describe('and first menuitem has focus', () => {
+            beforeAll(() => {
+                jasmine.clock().uninstall();
+                jasmine.clock().install();
+
+            });
+            afterAll(() => {
+                jasmine.clock().uninstall();
+            });
             beforeEach(() => {
+                spyOn(component.menuItems.first.arrowDown, 'emit').and.callThrough();
+
                 (<MenuItemComponent>component.menuItems.first).setFocus();
                 fixture.detectChanges();
             })
@@ -156,10 +166,35 @@ describe('[MenuComponent]', () => {
                 let focusedElement = rootElement.querySelector(':focus');
                 expect(focusedElement.querySelector('a').innerHTML).toBe('Start');
             })
-            it('menuitem has focus', () => {
+            describe('Keydown is pressed', () => {
+                beforeEach(() => {
+                    let menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
+                    menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+                    fixture.detectChanges();
+                });
+                it('godown event is emitted', () => {
+                    expect(component.menuItems.first.arrowDown.emit).toHaveBeenCalled();
+                });
+                it('submenuitem has focus', () => {
+                    let focusedElement = rootElement.querySelector(':focus');
+                    expect(focusedElement.querySelector('.menu__item a').innerHTML).toBe('Komponenter');
+                });
 
-            })
+                describe('Enter is pressed', () => {
+                    beforeEach(() => {
+                        let menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
+                        jasmine.clock().tick(651);
+                        fixture.detectChanges();
+                    });
+                    //KOmmer till setfocus i basklassen....
+                    it('first item in the submenuitem has focus', () => {
+                        let focusedElement = rootElement.querySelector(':focus');
+                        expect(focusedElement.querySelector('.menu__item a').innerHTML).toBe('Action panel');
+                    });
+                });
+
+            });
+
         });
-
     });
-});

@@ -37,13 +37,12 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
     @HostBinding('class.submenu') hasClass = true;
     @HostBinding('class.submenu--child-selected') private childSelected: boolean;
 
-    @HostListener('keydown', ['$event']) onKeyUp(event: KeyboardEvent) {
+    @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
 
         if (event.keyCode === 9) { // Tab
             return;
         }
-        event.cancelBubble = true;
-        event.preventDefault();
+
 
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
             this.showExpanded = !this.showExpanded;
@@ -75,6 +74,9 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         if (event.keyCode === 27) { // Escape
             this.showExpanded = false;
         }
+
+        event.cancelBubble = true;
+        event.preventDefault();
     }
 
     get showExpanded() {
