@@ -9,7 +9,7 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
-    selector: 'test',
+    selector: 'vgr-test',
     template: `
         <vgr-menu title="Menyrubrik">
           <vgr-menu-item link="/sizes" text="Start"></vgr-menu-item>
@@ -23,107 +23,143 @@ import { RouterTestingModule } from '@angular/router/testing';
 class TestMenuComponent { }
 
 describe('[MenuComponent]', () => {
-    let testMenuComponentFixture: ComponentFixture<TestMenuComponent>;
-    let menuComponentFixture: ComponentFixture<MenuComponent>;
-
-    let menuItemComponentFixture: ComponentFixture<MenuItemComponent>;
-    let submenuItemComponentFixture: ComponentFixture<SubmenuComponent>;
+    let fixture: ComponentFixture<TestMenuComponent>;
     let component: MenuComponent;
-    //let fixture: ComponentFixture<MenuComponent>;
-    let rootElement: DebugElement;
-    let headerTitle: DebugElement;
-
+    let rootElement: HTMLElement;
+    let debugElement: DebugElement;
 
     beforeEach((done) => {
-        //   TestBed.resetTestEnvironment();
-        TestBed.resetTestingModule();
-
         TestBed.configureTestingModule({
             declarations: [TestMenuComponent, MenuComponent, MenuItemComponent, SubmenuComponent],
             imports: [CommonModule,
-
                 BrowserAnimationsModule,
                 BrowserDynamicTestingModule,
-                RouterTestingModule.withRoutes([]),],
-            // providers: [
-            //     { provide: ElementRef },
-            //     { provide: Renderer }]
+                RouterTestingModule.withRoutes([])]
         });
 
-
-
         TestBed.compileComponents().then(() => {
-            testMenuComponentFixture = TestBed.createComponent(TestMenuComponent)
-            menuComponentFixture = TestBed.createComponent(MenuComponent);
-            menuItemComponentFixture = TestBed.createComponent(MenuItemComponent);
-            submenuItemComponentFixture = TestBed.createComponent(SubmenuComponent);
+            fixture = TestBed.createComponent(TestMenuComponent);
+            component = fixture.debugElement.children[0].componentInstance;
+            debugElement = fixture.debugElement;
+            rootElement = fixture.debugElement.nativeElement;
 
-            component = testMenuComponentFixture.debugElement.children[0].componentInstance; //debugElement.query(By.directive(MenuItemComponent)).componentInstance; // First element in list-item which is list-item-header;
-
-            rootElement = menuComponentFixture.debugElement;
-
-
-            // component.ngAfterContentInit();
-            // fixture = TestBed.createComponent(MenuComponent);
-
-            testMenuComponentFixture.detectChanges();
-            menuComponentFixture.detectChanges();
+            fixture.detectChanges();
             done();
         });
     });
     describe('When component is initialized with two menuitems', () => {
-        it('should have the role menu', () => {
-            expect(rootElement.attributes['role']).toBe('menu');
-        });
+        let headerTitle: HTMLElement;
         it('should contain two menuitems ', () => {
             expect(component.menuItems.length).toBe(2);
         });
-        describe('with a menu title of length 10', () => {
-            let headerTitle;
-            beforeEach(() => {
-                component.title = 'Menyrubrik'
-                headerTitle = rootElement.query(By.css('.menu__header'));
-                testMenuComponentFixture.detectChanges();
+        describe('with a menu title longer than 9 characters', () => {
 
+            beforeEach(() => {
+                component.title = 'Menyrubrik';
+                headerTitle = rootElement.querySelector('.menu__header__title');
+                fixture.detectChanges();
             });
             it('title should have smaller font', () => {
                 expect(component.smallerFont).toBe(true);
             });
-            fit('title should have class for smaller font', () => {
-                console.log(headerTitle.nativeElement.innerHTML);
-                console.log(headerTitle.nativeElement);
-                expect(headerTitle.classes['menu__header__title--smaller-font-size']).toBe(true);
+            it('title should be Menyrubrik', () => {
+                expect(headerTitle.innerHTML).toBe('Menyrubrik');
             });
-            //     it('first menuitem is Start ', () => {
-            //         expect((<MenuItemComponent>component.menuItems.first).text).toBe('Start');
-            //     });
-            //     it('second menuitem is Upplösning ', () => {
-            //         expect((<MenuItemComponent>component.menuItems.last).text).toBe('Komponenter');
-            //     });
+
+            it('title should have class for smaller font', () => {
+                expect(headerTitle.classList).toContain('menu__header__title--smaller-font-size');
+            });
+
 
         });
+        describe('When component is initialized with a title of length 6', () => {
+            beforeEach(() => {
+                component.title = 'Rubrik';
+                headerTitle = rootElement.querySelector('.menu__header__title');
+                fixture.detectChanges();
+            });
+            it('title should have smaller font', () => {
+                expect(component.smallerFont).toBe(false);
 
-        // describe('with a title of length 10', () => {
-        //     beforeEach(() => {
-        //         component.title = 'Menyrubrik';
-        //         headerTitle = rootElement.query(By.css('.menu__header__title'));
-        //         fixture.detectChanges();
-        //     });
-        //     it('title should have smaller font', () => {
-        //         expect(component.smallerFont).toBe(true);
-        //         expect(headerTitle.classes['menu__header__title--smaller-font-size']).toBe(true);
-        //     });
-        // });
+            });
+            it('title should be Rubrik', () => {
+                expect(headerTitle.innerHTML).toBe('Rubrik');
+            });
+            it('title should have class for smaller font', () => {
+                expect(headerTitle.classList).not.toContain('menu__header__title--smaller-font-size');
+            });
+        });
+
     });
 
-    // describe('When component is initialized with a title of length 6', () => {
-    //     beforeEach(() => {
-    //         component.title = 'Rubrik';
-    //         fixture.detectChanges();
-    //     });
-    //     it('title should have smaller font', () => {
-    //         expect(component.smallerFont).toBe(false);
-    //         expect(rootElement.classes['menu__header__title--smaller-font-size']).toBeUndefined();
-    //     });
-    // });
+    describe('WCAG Tests', () => {
+        let menu: HTMLElement;
+        let listElement: DebugElement;
+        let menuItem: HTMLElement;
+        let submenuItem: HTMLElement;
+        beforeEach(() => {
+            menuItem = rootElement.querySelector('vgr-menu-item');
+            submenuItem = rootElement.querySelector('vgr-submenu');
+            let focusedElement = rootElement.querySelector(':focus');
+            console.log(focusedElement);
+        });
+        describe('When menu is initialized with two menuitems', () => {
+
+            it('should have the role menu', () => {
+                expect(rootElement.querySelector('vgr-menu').getAttribute('role')).toBe('menu');
+            });
+            it('first menuitem is Start ', () => {
+                expect(menuItem.querySelector('a').innerHTML).toBe('Start');
+            });
+            it('second menuitem is Komponenter ', () => {
+                expect(submenuItem.querySelector('.menu__item a').innerHTML).toBe('Komponenter');
+            });
+            describe('menuitem should have ', () => {
+
+                it('should have the role menuitem', () => {
+                    expect(menuItem.getAttribute('role')).toBe('menuitem');
+                });
+                describe('menuitem is disabled ', () => {
+                    beforeEach(() => {
+                        (<MenuItemComponent>component.menuItems.first).disabled = true;
+                        fixture.detectChanges();
+                    })
+                    // it('tabIndex = 0', () => {
+                    //     console.log(menuItem.querySelector('menu__item menu__item--disabled'))
+                    //     expect(menuItem.querySelector('menu__item menu__item--disabled').tabIndex).toBe(0);
+                    // });
+                })
+            });
+            describe('submenu should have ', () => {
+                let submenuMenuItem: HTMLElement;
+                beforeEach(() => {
+                    submenuMenuItem = submenuItem.querySelector('.menu__item');
+                });
+                it('aria-haspopup true ', () => {
+                    expect(submenuItem.getAttribute('aria-haspopup')).toBe('true');
+                });
+                it('tabIndex = 0', () => {
+                    expect(submenuMenuItem.tabIndex).toBe(0);
+                });
+                it('should have the role menuitem', () => {
+                    expect(submenuItem.getAttribute('role')).toBe('menuitem');
+                });
+            });
+
+        });
+        describe('and first menuitem has focus', () => {
+            beforeEach(() => {
+                (<MenuItemComponent>component.menuItems.first).setFocus();
+                fixture.detectChanges();
+            })
+            it('menuitem has focus', () => {
+                let focusedElement = rootElement.querySelector(':focus');
+                expect(focusedElement.querySelector('a').innerHTML).toBe('Start');
+            })
+            it('menuitem has focus', () => {
+
+            })
+        });
+
+    });
 });
