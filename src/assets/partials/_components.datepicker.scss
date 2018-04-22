@@ -236,6 +236,12 @@ vgr-datepicker {
     color: $control-color--disabled;
     cursor: default;
   }
+  &:focus {
+    outline: 0;
+    border-color: $focus-color;
+    border-width: $focus-outline-width;
+    border-style: solid;
+  }
 }
 
 div.datepicker__calendar__day--today:not(.datepicker__calendar__day--selected) {

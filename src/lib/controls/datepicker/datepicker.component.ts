@@ -1,6 +1,6 @@
 import {
     Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener,
-    ElementRef, forwardRef, SkipSelf, Optional, Host, ChangeDetectorRef
+    ElementRef, forwardRef, SkipSelf, Optional, Host, ChangeDetectorRef, AfterViewInit
 } from '@angular/core';
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
@@ -18,7 +18,7 @@ import { AbstractControl } from '@angular/forms';
         multi: true
     }]
 })
-export class DatepickerComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
     @Input() showValidation = true;
 
     @Input() minDate: Date;
@@ -43,6 +43,9 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     expanded: boolean;
     hasFocus: boolean;
     control: AbstractControl;
+
+    focusableDays = [];
+    currentFocusedDayIndex = 0;
 
 
     today: Date;
@@ -77,6 +80,25 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         if (this.formControlName) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
+        this.setFocusableItems();
+    }
+
+    ngAfterViewInit() {
+        this.setFocusableItems();
+    }
+
+    setFocusableItems() {
+        this.focusableDays = this.elementRef.nativeElement.getElementsByClassName('datepicker__calendar__day');
+        // this.setFocusedElement();
+    }
+
+    setFocusedElement() {
+        if (!this.selectedDate) {
+            this.currentFocusedDayIndex = this.today.getDate() - 1;
+        } else {
+            this.currentFocusedDayIndex = this.selectedDate.getDate() - 1;
+        }
+        this.focusableDays[this.currentFocusedDayIndex].focus();
     }
 
     writeValue(value: any): void {
@@ -339,6 +361,14 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
             return;
         }
         this.expanded = !this.expanded;
+        if (this.expanded) {
+            setTimeout(() => {
+                this.setFocusedElement();
+            }, 50);
+        } else {
+            // set focus on component
+            this.elementRef.nativeElement.querySelector('.datepicker').focus();
+        }
     }
 
     onPreviousMonth(event: Event) {
@@ -419,6 +449,128 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         } else {
             this.previousMonth = true;
             this.nextMonth = true;
+        }
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+        switch (event.keyCode) {
+            case 9: // tab
+                {
+                    this.expanded = false;
+                    break;
+                }
+            case 13: // enter
+            case 32: // space
+                {
+                    this.toggleCalendar(event);
+                    event.preventDefault();
+                    break;
+                }
+            case 27: // escape
+                {
+                    if (this.expanded) {
+                        this.toggleCalendar(event);
+                    }
+                    event.preventDefault();
+                    break;
+                }
+            // case 33: // pageUp
+            //     {
+            //         this.onPreviousMonth(event);
+            //         this.focusableDays[this.currentFocusedDay].focus();
+            //         event.preventDefault();
+            //         break;
+            //     }
+            // case 34: // pageDown
+            //     {
+            //         this.onNextMonth(event);
+            //         this.focusableDays[this.currentFocusedDay].focus();
+            //         event.preventDefault();
+            //         break;
+            //     }
+            case 35: // end
+                {
+                    this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                    this.focusableDays[this.currentFocusedDayIndex].focus();
+                    event.preventDefault();
+                    break;
+                }
+            case 36: // home
+                {
+                    this.currentFocusedDayIndex = 0;
+                    this.focusableDays[this.currentFocusedDayIndex].focus();
+                    event.preventDefault();
+                    break;
+                }
+            case 37: // arrow left
+                {
+                    if (this.currentFocusedDayIndex > 0) {
+                        this.currentFocusedDayIndex = this.currentFocusedDayIndex - 1;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    } else if (this.previousMonth) {
+                        this.onPreviousMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 50);
+                    }
+                    event.preventDefault();
+                    break;
+                }
+
+            case 38: // arrow up
+                {
+                    if (this.currentFocusedDayIndex < 6) {
+                        this.onPreviousMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 50);
+                    } else {
+                        this.currentFocusedDayIndex = this.currentFocusedDayIndex - 7;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 39: // arrow right
+                {
+                    if (this.currentFocusedDayIndex < this.focusableDays.length - 1) {
+                        this.currentFocusedDayIndex = this.currentFocusedDayIndex + 1;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    } else if (this.nextMonth) {
+                        this.onNextMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = 0;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 50);
+                    }
+
+                    event.preventDefault();
+                    break;
+                }
+            case 40: // arrow down
+                {
+                    const tempDate = this.currentFocusedDayIndex + 7;
+                    if (tempDate > this.focusableDays.length - 1) {
+                        this.onNextMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = 0;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 50);
+                    } else {
+                        this.currentFocusedDayIndex = tempDate;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
         }
     }
 }
