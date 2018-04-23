@@ -373,9 +373,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     }
 
     private toggleExpand(event: Event) {
-        const target = event.target || event.srcElement || event.currentTarget;
-        const element = $(target);
-
         if (this.disabled || this.readonly) {
             return;
         }

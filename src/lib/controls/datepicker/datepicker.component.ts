@@ -89,7 +89,6 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
 
     setFocusableItems() {
         this.focusableDays = this.elementRef.nativeElement.getElementsByClassName('datepicker__calendar__day');
-        // this.setFocusedElement();
     }
 
     setFocusedElement() {
@@ -444,8 +443,10 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
             this.nextMonth = false;
         } else if (currentYear <= minYear && currentMonth <= minMonth) {
             this.previousMonth = false;
+            this.nextMonth = true;
         } else if (currentYear >= maxYear && currentMonth >= maxMonth) {
             this.nextMonth = false;
+            this.previousMonth = true;
         } else {
             this.previousMonth = true;
             this.nextMonth = true;
@@ -484,10 +485,9 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                                 this.currentFocusedDayIndex = this.focusableDays.length - 1;
                             }
                             this.focusableDays[this.currentFocusedDayIndex].focus();
-
-                            event.preventDefault();
                         }, 50);
                     }
+                    event.preventDefault();
                     break;
                 }
             case 34: // pageDown
@@ -500,22 +500,58 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                                 this.currentFocusedDayIndex = this.focusableDays.length - 1;
                             }
                             this.focusableDays[this.currentFocusedDayIndex].focus();
-                            event.preventDefault();
+
                         }, 50);
                     }
+                    event.preventDefault();
                     break;
                 }
             case 35: // end
                 {
-                    this.currentFocusedDayIndex = this.focusableDays.length - 1;
-                    this.focusableDays[this.currentFocusedDayIndex].focus();
+                    if (event.ctrlKey) {
+                        let currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
+
+                        this.currentYearMonthIndex = this.currentYearMonthIndex + (12 - currentMonth);
+                        if (this.currentYearMonthIndex > this.yearMonths.length - 1) {
+                            this.currentYearMonthIndex = this.yearMonths.length - 1
+                        }
+
+                        this.setCurrentYearMonthOutput();
+                        this.setPreviousAndNextMonthNavigation();
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+
+                        }, 10);
+                    } else {
+                        this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    }
                     event.preventDefault();
                     break;
                 }
             case 36: // home
                 {
-                    this.currentFocusedDayIndex = 0;
-                    this.focusableDays[this.currentFocusedDayIndex].focus();
+
+                    if (event.ctrlKey) {
+                        let currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
+
+                        this.currentYearMonthIndex = this.currentYearMonthIndex - (currentMonth - 1);
+                        if (this.currentYearMonthIndex < 0) {
+                            this.currentYearMonthIndex = 0;
+                        }
+                        this.setCurrentYearMonthOutput();
+                        this.setPreviousAndNextMonthNavigation();
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = 0;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 10);
+                    } else {
+                        this.currentFocusedDayIndex = 0;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    }
                     event.preventDefault();
                     break;
                 }
@@ -530,7 +566,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                             this.setFocusableItems();
                             this.currentFocusedDayIndex = this.focusableDays.length - 1;
                             this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 50);
+                        }, 10);
                     }
                     event.preventDefault();
                     break;
@@ -545,7 +581,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                                 this.setFocusableItems();
                                 this.currentFocusedDayIndex = this.focusableDays.length - (7 - this.currentFocusedDayIndex);
                                 this.focusableDays[this.currentFocusedDayIndex].focus();
-                            }, 50);
+                            }, 10);
                         }
                     } else {
                         this.currentFocusedDayIndex = this.currentFocusedDayIndex - 7;
@@ -566,9 +602,8 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                             this.setFocusableItems();
                             this.currentFocusedDayIndex = 0;
                             this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 50);
+                        }, 10);
                     }
-
                     event.preventDefault();
                     break;
                 }
@@ -582,7 +617,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                                 this.setFocusableItems();
                                 this.currentFocusedDayIndex = this.currentFocusedDayIndex + 7 - daysInCurrentMonth;
                                 this.focusableDays[this.currentFocusedDayIndex].focus();
-                            }, 50);
+                            }, 10);
                         }
                     } else {
                         this.currentFocusedDayIndex = this.currentFocusedDayIndex + 7;
