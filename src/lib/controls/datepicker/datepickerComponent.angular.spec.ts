@@ -216,4 +216,129 @@ describe('[DatepickerComponent(Angular)]', () => {
             expect(fixture.debugElement.classes['readonly']).toBe(false);
         });
     });
+
+    describe('WCAG Tests', () => {
+        let datepicker: DebugElement;
+        let listElement: DebugElement;
+        beforeEach(() => {
+            datepicker = rootElement.query(By.css('.datepicker'));
+            fixture.detectChanges();
+        });
+
+        it('aria-expanded is false', () => {
+            expect(datepicker.attributes['aria-expanded']).toBe('false');
+        });
+        it('aria-disabled is false', () => {
+            expect(datepicker.attributes['aria-disabled']).toBe('false');
+        });
+        it('tabindex to be 0', () => {
+            expect(datepicker.attributes['tabindex']).toBe('0');
+        });
+        it('areia-labelledby is set to', () => {
+            expect(datepicker.attributes['aria-labelledby']).toBe(component.labelledbyid);
+        });
+        describe('datepicker is initialized with two years', () => {
+            let daysInCurrentMonth: DebugElement[];
+            let currentYear = new Date().getFullYear();
+            let currentMonth = new Date().getMonth();
+            let currentYearElement;
+            let nextMonthElement;
+
+            let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            beforeEach(() => {
+                component.expanded = false;
+
+                component.minDate = new Date(currentYear - 2, 5, 1);
+                component.maxDate = new Date(currentYear, 11, 31);
+                component.ngOnInit();
+                fixture.detectChanges();
+
+                nextMonthElement = fixture.debugElement.query(By.css('.datepicker__calendar__header__next-year'));
+
+                daysInCurrentMonth = rootElement.queryAll(By.css('.datepicker__calendar__day'));
+                currentYearElement = rootElement.query(By.css('.datepicker__calendar__header__year'));
+            });
+
+            it('focusableDays is set', () => {
+                expect(component.focusableDays.length).toBe(daysInMonth);
+            });
+            it('current month and year is in view', () => {
+                expect(currentYearElement.nativeElement.innerText).toContain(currentYear.toString());
+            });
+
+            it('12 months is in view', () => {
+                expect(daysInCurrentMonth.length).toBe(daysInMonth);
+            });
+            it('the days in view has the [attr.aria-selected] set to false', () => {
+                expect(daysInCurrentMonth.filter(d => d.attributes['aria-selected'] === 'false').length).toBe(daysInMonth);
+            });
+
+            it('next month has role button', () => {
+                expect(nextMonthElement.attributes['role']).toBe('button');
+            })
+
+            it('the days has role set to gridcell', () => {
+                expect(daysInCurrentMonth.filter(m => m.attributes['role'] === 'gridcell').length).toEqual(daysInMonth);
+            })
+            it('the days have aria-labels that contains year', () => {
+                expect(daysInCurrentMonth[0].attributes['aria-label']).toContain(currentYear.toString());
+            })
+            describe('enter is pressed', () => {
+                beforeEach(() => {
+                    // jasmine.clock().uninstall();
+                    // jasmine.clock().install();
+                    datepicker.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                    fixture.detectChanges();
+                });
+                it('datepicker is expanded', () => {
+                    expect(component.expanded).toBe(true);
+                });
+                it('attr.aria-expanded is true', () => {
+                    expect(datepicker.attributes['aria-expanded']).toBe('true');
+                });
+                describe('and home is pressed', () => {
+                    beforeEach(() => {
+                        datepicker.triggerEventHandler('keydown', { keyCode: 36, preventDefault: function () { } } as KeyboardEvent);
+                        fixture.detectChanges();
+                    });
+                    it('First day in month has focus', () => {
+                        let focusedElement = rootElement.query(By.css(':focus'));
+                        expect(focusedElement.nativeElement.innerText).toBe('1');
+                    });
+                    describe('Arrow right is pressed', () => {
+                        beforeEach(() => {
+                            datepicker.triggerEventHandler('keydown', { keyCode: 39, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+                        it('Second day in month has focus', () => {
+                            let focusedElement = rootElement.query(By.css(':focus'));
+                            expect(focusedElement.nativeElement.innerText).toBe('2');
+                        });
+                    })
+                });
+                describe('and end is pressed', () => {
+                    beforeEach(() => {
+                        datepicker.triggerEventHandler('keydown', { keyCode: 35, preventDefault: function () { } } as KeyboardEvent);
+                        fixture.detectChanges();
+                    });
+                    it('Last day in month has focus', () => {
+                        let focusedElement = rootElement.query(By.css(':focus'));
+                        let focusedDate = focusedElement.nativeElement.innerText;
+                        expect(focusedDate).toBe(daysInMonth.toString());
+                    });
+                    describe('arrow left is pressed', () => {
+                        beforeEach(() => {
+                            datepicker.triggerEventHandler('keydown', { keyCode: 37, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+                        it('second last day in month has focus', () => {
+                            let focusedElement = rootElement.query(By.css(':focus'));
+                            expect(focusedElement.nativeElement.innerText).toBe((daysInMonth - 1).toString());
+                        });
+                    });
+                });
+            });
+        });
+    });
 });

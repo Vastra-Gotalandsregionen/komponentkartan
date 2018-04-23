@@ -7,6 +7,7 @@ import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
+import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-datepicker',
@@ -24,8 +25,8 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
     @Input() minDate: Date;
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
-    @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() @HostBinding('class.readonly') readonly: boolean;
+    @Input() @HostBinding('class.disabled') disabled: boolean = false;
+    @Input() @HostBinding('class.readonly') readonly: boolean = false;
     @Input() noDateSelectedLabel = 'Välj datum';
     @Input() selectedDateFormat = 'yyyy-MM-dd';
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
@@ -39,6 +40,9 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
     @HostBinding('class.validation-error--editing') get editingClass() {
         return this.showValidation && this.control && this.control.invalid && this.hasFocus;
     }
+
+    labelledbyid: string = Guid.newGuid();
+
 
     expanded: boolean;
     hasFocus: boolean;
@@ -60,6 +64,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
 
 
     constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
+        this.expanded = false;
         this.today = new Date();
         this.nextMonth = true;
         this.previousMonth = true;
@@ -418,7 +423,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
     }
 
     checkSelectedDate(weekIndex: number, dayIndex: number): boolean {
-        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].selected;
+        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && !!this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].selected;
     }
 
     setPreviousAndNextMonthNavigation() {
@@ -464,7 +469,6 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
             case 32: // space
                 {
                     this.toggleCalendar(event);
-                    event.preventDefault();
                     break;
                 }
             case 27: // escape
@@ -472,7 +476,6 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                     if (this.expanded) {
                         this.toggleCalendar(event);
                     }
-                    event.preventDefault();
                     break;
                 }
             case 33: // pageUp
@@ -487,7 +490,6 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                             this.focusableDays[this.currentFocusedDayIndex].focus();
                         }, 50);
                     }
-                    event.preventDefault();
                     break;
                 }
             case 34: // pageDown
@@ -503,7 +505,6 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
 
                         }, 50);
                     }
-                    event.preventDefault();
                     break;
                 }
             case 35: // end
@@ -528,12 +529,10 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                         this.currentFocusedDayIndex = this.focusableDays.length - 1;
                         this.focusableDays[this.currentFocusedDayIndex].focus();
                     }
-                    event.preventDefault();
                     break;
                 }
             case 36: // home
                 {
-
                     if (event.ctrlKey) {
                         let currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
 
@@ -552,7 +551,6 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                         this.currentFocusedDayIndex = 0;
                         this.focusableDays[this.currentFocusedDayIndex].focus();
                     }
-                    event.preventDefault();
                     break;
                 }
             case 37: // arrow left
@@ -568,10 +566,8 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                             this.focusableDays[this.currentFocusedDayIndex].focus();
                         }, 10);
                     }
-                    event.preventDefault();
                     break;
                 }
-
             case 38: // arrow up
                 {
                     if (this.currentFocusedDayIndex < 7) {
@@ -587,8 +583,6 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                         this.currentFocusedDayIndex = this.currentFocusedDayIndex - 7;
                         this.focusableDays[this.currentFocusedDayIndex].focus();
                     }
-                    event.preventDefault();
-                    event.cancelBubble = true;
                     break;
                 }
             case 39: // arrow right
@@ -604,7 +598,6 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                             this.focusableDays[this.currentFocusedDayIndex].focus();
                         }, 10);
                     }
-                    event.preventDefault();
                     break;
                 }
             case 40: // arrow down
@@ -623,10 +616,10 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                         this.currentFocusedDayIndex = this.currentFocusedDayIndex + 7;
                         this.focusableDays[this.currentFocusedDayIndex].focus();
                     }
-                    event.preventDefault();
-                    event.cancelBubble = true;
                     break;
                 }
         }
+        event.preventDefault();
+        event.cancelBubble = true;
     }
 }
