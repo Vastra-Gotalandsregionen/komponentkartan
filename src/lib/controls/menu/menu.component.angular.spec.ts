@@ -93,11 +93,13 @@ describe('[MenuComponent]', () => {
         const menu: HTMLElement = null;
         let menuItem: HTMLElement;
         let submenuItem: HTMLElement;
+        let submenucomponent: SubmenuComponent;
         beforeEach(() => {
             menuItem = rootElement.querySelector('vgr-menu-item');
             submenuItem = rootElement.querySelector('vgr-submenu');
             const focusedElement = rootElement.querySelector(':focus');
-            console.log(focusedElement);
+            submenucomponent = <SubmenuComponent>component.menuItems.toArray().filter(mi => mi instanceof SubmenuComponent)[0];
+
         });
         describe('When menu is initialized with two menuitems', () => {
             it('should have the role menu', () => {
@@ -171,18 +173,44 @@ describe('[MenuComponent]', () => {
                     const focusedElement = rootElement.querySelector(':focus');
                     expect(focusedElement.querySelector('.menu__item a').innerHTML).toBe('Komponenter');
                 });
+                it('submenu should not be expanded', () => {
+                    expect(submenucomponent.expanded).toBe(false);
+                });
                 describe('Enter is pressed', () => {
                     beforeEach(() => {
                         const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
                         menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
-                        jasmine.clock().tick(651);
+
                         fixture.detectChanges();
+                        jasmine.clock().tick(650);
+
                     });
-                    // Kommer till setfocus i basklassen....
+                    it('submenu should be expanded', () => {
+                        expect(submenucomponent.expanded).toBe(true);
+                    });
                     it('first item in the submenuitem has focus', () => {
                         const focusedElement = rootElement.querySelector(':focus');
                         expect(focusedElement.querySelector('.menu__item a').innerHTML).toBe('Action panel');
                     });
+
+                });
+                describe('Space is pressed', () => {
+                    beforeEach(() => {
+                        const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
+
+                        fixture.detectChanges();
+                        jasmine.clock().tick(650);
+
+                    });
+                    it('submenu should be expanded', () => {
+                        expect(submenucomponent.expanded).toBe(true);
+                    });
+                    it('first item in the submenuitem has focus', () => {
+                        const focusedElement = rootElement.querySelector(':focus');
+                        expect(focusedElement.querySelector('.menu__item a').innerHTML).toBe('Action panel');
+                    });
+
                 });
             });
         });
