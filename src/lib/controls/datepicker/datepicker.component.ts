@@ -476,29 +476,33 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                 }
             case 33: // pageUp
                 {
-                    this.onPreviousMonth(event);
-                    setTimeout(() => {
-                        this.setFocusableItems();
-                        if (this.currentFocusedDayIndex >= this.focusableDays.length) {
-                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
-                        }
-                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    if (this.previousMonth) {
+                        this.onPreviousMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            if (this.currentFocusedDayIndex >= this.focusableDays.length) {
+                                this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            }
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
 
-                        event.preventDefault();
-                    }, 50);
+                            event.preventDefault();
+                        }, 50);
+                    }
                     break;
                 }
             case 34: // pageDown
                 {
-                    this.onNextMonth(event);
-                    setTimeout(() => {
-                        this.setFocusableItems();
-                        if (this.currentFocusedDayIndex >= this.focusableDays.length) {
-                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
-                        }
-                        this.focusableDays[this.currentFocusedDayIndex].focus();
-                        event.preventDefault();
-                    }, 50);
+                    if (this.nextMonth) {
+                        this.onNextMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            if (this.currentFocusedDayIndex >= this.focusableDays.length) {
+                                this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            }
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                            event.preventDefault();
+                        }, 50);
+                    }
                     break;
                 }
             case 35: // end
@@ -534,11 +538,11 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
 
             case 38: // arrow up
                 {
-                    if (this.currentFocusedDayIndex < 6) {
+                    if (this.currentFocusedDayIndex < 6 && this.previousMonth) {
                         this.onPreviousMonth(event);
                         setTimeout(() => {
                             this.setFocusableItems();
-                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            this.currentFocusedDayIndex = this.focusableDays.length - (6 - this.currentFocusedDayIndex);
                             this.focusableDays[this.currentFocusedDayIndex].focus();
                         }, 50);
                     } else {
@@ -569,7 +573,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
             case 40: // arrow down
                 {
                     const tempDate = this.currentFocusedDayIndex + 7;
-                    if (tempDate > this.focusableDays.length - 1) {
+                    if (tempDate > this.focusableDays.length - 1 && this.nextMonth) {
                         this.onNextMonth(event);
                         setTimeout(() => {
                             this.setFocusableItems();
