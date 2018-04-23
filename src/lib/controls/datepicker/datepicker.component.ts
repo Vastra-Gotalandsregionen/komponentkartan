@@ -474,20 +474,33 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                     event.preventDefault();
                     break;
                 }
-            // case 33: // pageUp
-            //     {
-            //         this.onPreviousMonth(event);
-            //         this.focusableDays[this.currentFocusedDay].focus();
-            //         event.preventDefault();
-            //         break;
-            //     }
-            // case 34: // pageDown
-            //     {
-            //         this.onNextMonth(event);
-            //         this.focusableDays[this.currentFocusedDay].focus();
-            //         event.preventDefault();
-            //         break;
-            //     }
+            case 33: // pageUp
+                {
+                    this.onPreviousMonth(event);
+                    setTimeout(() => {
+                        this.setFocusableItems();
+                        if (this.currentFocusedDayIndex >= this.focusableDays.length) {
+                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                        }
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+
+                        event.preventDefault();
+                    }, 50);
+                    break;
+                }
+            case 34: // pageDown
+                {
+                    this.onNextMonth(event);
+                    setTimeout(() => {
+                        this.setFocusableItems();
+                        if (this.currentFocusedDayIndex >= this.focusableDays.length) {
+                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                        }
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                        event.preventDefault();
+                    }, 50);
+                    break;
+                }
             case 35: // end
                 {
                     this.currentFocusedDayIndex = this.focusableDays.length - 1;
