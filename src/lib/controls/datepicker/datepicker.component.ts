@@ -538,13 +538,15 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
 
             case 38: // arrow up
                 {
-                    if (this.currentFocusedDayIndex < 6 && this.previousMonth) {
-                        this.onPreviousMonth(event);
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            this.currentFocusedDayIndex = this.focusableDays.length - (6 - this.currentFocusedDayIndex);
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 50);
+                    if (this.currentFocusedDayIndex < 7) {
+                        if (this.previousMonth) {
+                            this.onPreviousMonth(event);
+                            setTimeout(() => {
+                                this.setFocusableItems();
+                                this.currentFocusedDayIndex = this.focusableDays.length - (7 - this.currentFocusedDayIndex);
+                                this.focusableDays[this.currentFocusedDayIndex].focus();
+                            }, 50);
+                        }
                     } else {
                         this.currentFocusedDayIndex = this.currentFocusedDayIndex - 7;
                         this.focusableDays[this.currentFocusedDayIndex].focus();
@@ -572,16 +574,18 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
                 }
             case 40: // arrow down
                 {
-                    const tempDate = this.currentFocusedDayIndex + 7;
-                    if (tempDate > this.focusableDays.length - 1 && this.nextMonth) {
-                        this.onNextMonth(event);
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            this.currentFocusedDayIndex = 0;
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 50);
+                    if ((this.currentFocusedDayIndex + 7) > (this.focusableDays.length - 1)) {
+                        let daysInCurrentMonth = this.focusableDays.length;
+                        if (this.nextMonth) {
+                            this.onNextMonth(event);
+                            setTimeout(() => {
+                                this.setFocusableItems();
+                                this.currentFocusedDayIndex = this.currentFocusedDayIndex + 7 - daysInCurrentMonth;
+                                this.focusableDays[this.currentFocusedDayIndex].focus();
+                            }, 50);
+                        }
                     } else {
-                        this.currentFocusedDayIndex = tempDate;
+                        this.currentFocusedDayIndex = this.currentFocusedDayIndex + 7;
                         this.focusableDays[this.currentFocusedDayIndex].focus();
                     }
                     event.preventDefault();
