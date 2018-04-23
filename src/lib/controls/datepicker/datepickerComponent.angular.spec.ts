@@ -238,13 +238,18 @@ describe('[DatepickerComponent(Angular)]', () => {
             expect(datepicker.attributes['aria-labelledby']).toBe(component.labelledbyid);
         });
         describe('datepicker is initialized with two years', () => {
+            jasmine.clock().uninstall();
+            jasmine.clock().install();
+            let currentYear = 2018;
+            let currentMonth = 4; //mars
+            let daysInMonth = 31;
+
+            jasmine.clock().mockDate(new Date(currentYear, currentMonth, 15));
+
             let daysInCurrentMonth: DebugElement[];
-            let currentYear = new Date().getFullYear();
-            let currentMonth = new Date().getMonth();
+
             let currentYearElement;
             let nextMonthElement;
-
-            let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
             beforeEach(() => {
                 component.expanded = false;
@@ -286,8 +291,6 @@ describe('[DatepickerComponent(Angular)]', () => {
             })
             describe('enter is pressed', () => {
                 beforeEach(() => {
-                    // jasmine.clock().uninstall();
-                    // jasmine.clock().install();
                     datepicker.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
                     fixture.detectChanges();
                 });
@@ -316,6 +319,16 @@ describe('[DatepickerComponent(Angular)]', () => {
                             expect(focusedElement.nativeElement.innerText).toBe('2');
                         });
                     })
+                    describe('arrow down is pressed ', () => {
+                        beforeEach(() => {
+                            datepicker.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+                        it('the 8th is focused', () => {
+                            let focusedElement = rootElement.query(By.css(':focus'));
+                            expect(focusedElement.nativeElement.innerText).toBe('8');
+                        });
+                    });
                 });
                 describe('and end is pressed', () => {
                     beforeEach(() => {
@@ -335,6 +348,28 @@ describe('[DatepickerComponent(Angular)]', () => {
                         it('second last day in month has focus', () => {
                             let focusedElement = rootElement.query(By.css(':focus'));
                             expect(focusedElement.nativeElement.innerText).toBe((daysInMonth - 1).toString());
+                        });
+                    });
+                    describe('arrow up is pressed ', () => {
+                        beforeEach(() => {
+                            datepicker.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
+
+                            fixture.detectChanges();
+                        });
+                        it('the 24th is focused', () => {
+                            let focusedElement = rootElement.query(By.css(':focus'));
+                            expect(focusedElement.nativeElement.innerText).toBe('24');
+                        });
+                        describe('page up is pressed ', () => {
+                            beforeEach(() => {
+                                datepicker.triggerEventHandler('keydown', { keyCode: 33, preventDefault: function () { } } as KeyboardEvent);
+                                fixture.detectChanges();
+                                jasmine.clock().tick(100);
+                            });
+                            it('the 24th is focused', () => {
+                                let focusedElement = rootElement.query(By.css(':focus'));
+                                // expect(focusedElement.nativeElement.innerText).toBe('24');
+                            });
                         });
                     });
                 });
