@@ -241,7 +241,7 @@ describe('[DatepickerComponent(Angular)]', () => {
             jasmine.clock().uninstall();
             jasmine.clock().install();
             let currentYear = 2018;
-            let currentMonth = 4; //mars
+            let currentMonth = 2; //mars
             let daysInMonth = 31;
 
             jasmine.clock().mockDate(new Date(currentYear, currentMonth, 15));
@@ -334,6 +334,7 @@ describe('[DatepickerComponent(Angular)]', () => {
                     beforeEach(() => {
                         datepicker.triggerEventHandler('keydown', { keyCode: 35, preventDefault: function () { } } as KeyboardEvent);
                         fixture.detectChanges();
+                        jasmine.clock().tick(100);
                     });
                     it('Last day in month has focus', () => {
                         let focusedElement = rootElement.query(By.css(':focus'));
@@ -344,6 +345,7 @@ describe('[DatepickerComponent(Angular)]', () => {
                         beforeEach(() => {
                             datepicker.triggerEventHandler('keydown', { keyCode: 37, preventDefault: function () { } } as KeyboardEvent);
                             fixture.detectChanges();
+                            jasmine.clock().tick(100);
                         });
                         it('second last day in month has focus', () => {
                             let focusedElement = rootElement.query(By.css(':focus'));
@@ -353,23 +355,30 @@ describe('[DatepickerComponent(Angular)]', () => {
                     describe('arrow up is pressed ', () => {
                         beforeEach(() => {
                             datepicker.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
-
                             fixture.detectChanges();
+                            jasmine.clock().tick(100);
                         });
                         it('the 24th is focused', () => {
                             let focusedElement = rootElement.query(By.css(':focus'));
                             expect(focusedElement.nativeElement.innerText).toBe('24');
                         });
+                        it('current year is 2018 and month is March', () => {
+                            expect(currentYearElement.nativeElement.innerText).toBe('March 2018');
+                        });
                         describe('page up is pressed ', () => {
                             beforeEach(() => {
-                                datepicker.triggerEventHandler('keydown', { keyCode: 33, preventDefault: function () { } } as KeyboardEvent);
+                                //datepicker.triggerEventHandler('keydown', { keyCode: 33, preventDefault: function () { } } as KeyboardEvent);
                                 fixture.detectChanges();
                                 jasmine.clock().tick(100);
                             });
                             it('the 24th is focused', () => {
                                 let focusedElement = rootElement.query(By.css(':focus'));
-                                // expect(focusedElement.nativeElement.innerText).toBe('24');
+                                expect(focusedElement.nativeElement.innerText).toBe('24');
                             });
+                            it('current year is 2018 and month is February', () => {
+                                expect(currentYearElement.nativeElement.innerText).toBe('February 2018');
+                            });
+
                         });
                     });
                 });
