@@ -43,7 +43,6 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
             return;
         }
 
-
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
             this.showExpanded = !this.showExpanded;
             // SetFocus after the animation is completed.
@@ -99,8 +98,10 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
 
     animationDone(event: AnimationTransitionEvent) {
         if (event.fromState === 'expanded' && event.toState === 'collapsed') {
+            console.log('i if');
             this._showExpanded = false;
             this.expanded = false;
+            console.log('i if2: ' + this.expanded);
         }
     }
     setFocus(handle: boolean = false) {

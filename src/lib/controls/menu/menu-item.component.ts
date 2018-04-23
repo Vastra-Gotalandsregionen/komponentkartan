@@ -40,7 +40,6 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
             this.arrowUp.emit();
         }
         if (event.keyCode === 40) { // Arrow Down
-
             this.arrowDown.emit();
         }
         if (event.keyCode === 27) { // Escape
@@ -49,8 +48,6 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
 
         event.cancelBubble = true;
         event.preventDefault();
-
-
     }
 
     get notificationColorClass(): string {
@@ -63,13 +60,11 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
 
     constructor(private router: Router, elementRef: ElementRef, renderer: Renderer) {
         super(elementRef, renderer);
-
     }
 
     ngAfterViewInit() {
         setTimeout(() => {
             this.ariaDisabled = this.disabled;
         }, 25);
-
     }
 }

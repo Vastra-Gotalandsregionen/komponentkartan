@@ -11,7 +11,6 @@ export abstract class MenuItemBase {
     }
 
     setFocus(movingUp: boolean = false) {
-        //console.log('Sätt fokus:' + (<HTMLElement>this.elementRef.nativeElement.firstElementChild).querySelector('.menu__item a').innerHTML);
         this.renderer.invokeElementMethod(this.elementRef.nativeElement.firstElementChild, 'focus');
     }
 }
