@@ -237,14 +237,11 @@ describe('[DatepickerComponent(Angular)]', () => {
             expect(datepicker.attributes['aria-labelledby']).toBe(component.labelledbyid);
         });
         describe('datepicker is initialized with two years', () => {
-            jasmine.clock().uninstall();
-            jasmine.clock().install();
+            
             const currentYear = 2018;
             const currentMonth = 2; // mars
             const currentDate = 15;
             const daysInMonth = 31;
-
-            jasmine.clock().mockDate(new Date(currentYear, currentMonth, currentDate));
 
             let daysInCurrentMonth: DebugElement[];
 
@@ -252,6 +249,9 @@ describe('[DatepickerComponent(Angular)]', () => {
             let nextMonthElement;
 
             beforeEach(() => {
+                jasmine.clock().uninstall();
+                jasmine.clock().install();
+                jasmine.clock().mockDate(new Date(currentYear, currentMonth, currentDate));
                 component.expanded = false;
 
                 component.minDate = new Date(currentYear - 2, 5, 1);
@@ -266,6 +266,7 @@ describe('[DatepickerComponent(Angular)]', () => {
             });
 
             it('focusableDays is set', () => {
+                console.log(new Date());
                 expect(component.focusableDays.length).toBe(daysInMonth);
             });
 
@@ -273,11 +274,12 @@ describe('[DatepickerComponent(Angular)]', () => {
                 expect(currentYearElement.nativeElement.innerText).toContain(currentYear.toString());
             });
 
-            it('12 months is in view', () => {
+            it('the month contains 30 days', () => {
                 expect(daysInCurrentMonth.length).toBe(daysInMonth);
             });
 
             it('the days in view has the [attr.aria-selected] set to false', () => {
+                jasmine.clock().tick(100);
                 expect(daysInCurrentMonth.filter(d => d.attributes['aria-selected'] === 'false').length).toBe(daysInMonth);
             });
 
@@ -542,14 +544,11 @@ describe('[DatepickerComponent(Angular)]', () => {
             });
         });
         describe('datepicker is initialized with three months', () => {
-            jasmine.clock().uninstall();
-            jasmine.clock().install();
+            
             const currentYear = 2018;
             const currentMonth = 2; // mars
             const currentDate = 15;
             const daysInMonth = 31;
-
-            jasmine.clock().mockDate(new Date(currentYear, currentMonth, currentDate));
 
             let daysInCurrentMonth: DebugElement[];
 
@@ -557,6 +556,9 @@ describe('[DatepickerComponent(Angular)]', () => {
             let nextMonthElement;
 
             beforeEach(() => {
+                jasmine.clock().uninstall();
+                jasmine.clock().install();
+                jasmine.clock().mockDate(new Date(currentYear, currentMonth, currentDate));
                 component.expanded = false;
 
                 component.minDate = new Date(currentYear, currentMonth - 1, 1);
@@ -574,6 +576,7 @@ describe('[DatepickerComponent(Angular)]', () => {
                 expect(component.focusableDays.length).toBe(daysInMonth);
             });
             describe('space is pressed', () => {
+                let focusedElement: DebugElement;
                 beforeEach(() => {
                     datepicker.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                     fixture.detectChanges();
@@ -586,11 +589,22 @@ describe('[DatepickerComponent(Angular)]', () => {
                     expect(datepicker.attributes['aria-expanded']).toBe('true');
                 });
                 it('Current day in has focus', () => {
-                    const focusedElement = rootElement.query(By.css(':focus'));
+                    focusedElement = rootElement.query(By.css(':focus'));
                     expect(focusedElement.nativeElement.innerText).toBe('15');
                 });
                 it('current year is 2018 and month is March', () => {
                     expect(currentYearElement.nativeElement.innerText).toBe('March 2018');
+                });
+
+                describe('enter is pressed when a date is focused', ()=>{
+                    beforeEach(() => {
+                        daysInCurrentMonth[currentDate-1].triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                        fixture.detectChanges();
+                    });
+                    it('The focused date is selected', () => {
+                        let date = new Date(2018,2,15);
+                        expect(component.selectedDate).toEqual(date);
+                    });
                 });
 
                 describe('and ctrl + home is pressed', () => {
@@ -607,7 +621,20 @@ describe('[DatepickerComponent(Angular)]', () => {
                     it('current year is 2018 and month is February', () => {
                         expect(currentYearElement.nativeElement.innerText).toBe('February 2018');
                     });
+                    describe('enter is pressed when a date is focused', ()=>{
+                        beforeEach(() => {
+                            daysInCurrentMonth[0].triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                            fixture.detectChanges();
+                        });
+                        it('The focused date is selected', () => {
+                            let date = new Date(2018,1,1);
+                            expect(component.selectedDate).toEqual(date);
+                        });
+                    });
                 });
+
+
+
                 describe('and ctrl + end is pressed', () => {
                     beforeEach(() => {
                         datepicker.triggerEventHandler('keydown', { keyCode: 35, ctrlKey: true, preventDefault: function () { } } as KeyboardEvent);
