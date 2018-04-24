@@ -19,13 +19,15 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @HostBinding('attr.aria-disabled') ariaDisabled;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
-
         if (event.keyCode === 9) { // Tab
             return;
         }
 
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
             if (this.disabled) {
+
+                event.cancelBubble = true;
+                event.preventDefault();
                 return;
             }
             this.router.navigate([this.link]);

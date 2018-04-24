@@ -32,6 +32,7 @@ export class MenuComponent implements AfterContentInit {
                     if (lastMenuItem instanceof SubmenuComponent) {
                         if ((<SubmenuComponent>lastMenuItem).expanded) {
                             (<SubmenuComponent>lastMenuItem).menuItems.last.setFocus();
+
                             return;
                         }
                     }

@@ -7,6 +7,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'vgr-test',
@@ -22,6 +23,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 })
 class TestMenuComponent { }
 
+
+
 describe('[MenuComponent]', () => {
     let fixture: ComponentFixture<TestMenuComponent>;
     let component: MenuComponent;
@@ -29,13 +32,18 @@ describe('[MenuComponent]', () => {
     let debugElement: DebugElement;
 
     beforeEach((done) => {
+        //   TestBed.resetTestEnvironment();
+        //  TestBed.initTestEnvironment([BrowserDynamicTestingModule, NoopAnimationsModule], platformBrowserDynamicTesting())
         TestBed.configureTestingModule({
             declarations: [TestMenuComponent, MenuComponent, MenuItemComponent, SubmenuComponent],
             imports: [CommonModule,
                 BrowserAnimationsModule,
                 BrowserDynamicTestingModule,
                 NoopAnimationsModule,
-                RouterTestingModule.withRoutes([])]
+                RouterTestingModule.withRoutes([])
+            ],
+
+
         });
 
         TestBed.compileComponents().then(() => {
@@ -96,10 +104,17 @@ describe('[MenuComponent]', () => {
         let disabledMenuItem: HTMLElement;
         let submenuItem: HTMLElement;
         let submenucomponent: SubmenuComponent;
+        beforeAll(() => {
+            jasmine.clock().uninstall();
+            jasmine.clock().install();
+        });
+        afterAll(() => {
+            jasmine.clock().uninstall();
+        });
         beforeEach(() => {
             menuItem = rootElement.querySelector('vgr-menu-item');
             submenuItem = rootElement.querySelector('vgr-submenu');
-          
+
             //  const focusedElement = rootElement.querySelector(':focus');
             submenucomponent = <SubmenuComponent>component.menuItems.toArray().filter(mi => mi instanceof SubmenuComponent)[0];
 
@@ -118,17 +133,22 @@ describe('[MenuComponent]', () => {
                 it('should have the role menuitem', () => {
                     expect(menuItem.getAttribute('role')).toBe('menuitem');
                 });
-                // describe('menuitem is disabled ', () => {
-                //     beforeEach(() => {
-                //         submenucomponent.expanded = true;
-                //         //(<MenuItemComponent>component.menuItems.first).disabled = true;
-                //         fixture.detectChanges();
-                //     });
-                //     it('tabIndex = 0', () => {
-                //         console.log(menuItem.querySelector('menu__item menu__item--disabled'))
-                //         expect(menuItem.querySelector('menu__item menu__item--disabled').tabIndex).toBe(0);
-                //     });
-                // });
+                describe('menuitem is disabled ', () => {
+
+                    beforeEach(() => {
+                        submenucomponent.expanded = true;
+                        submenucomponent.ngOnInit();
+                        fixture.detectChanges();
+                        disabledMenuItem = submenuItem.querySelector('div.menu__item--disabled');
+
+                    });
+                    it('disabled menuitem is back to top', () => {
+                        expect(disabledMenuItem.querySelector('p').innerHTML).toBe('Back to top');
+                    });
+                    it('tabIndex = 0', () => {
+                        expect((<HTMLElement>disabledMenuItem).tabIndex).toBe(0);
+                    });
+                });
             });
             describe('submenu ', () => {
                 let submenuMenuItem: HTMLElement;
@@ -145,17 +165,56 @@ describe('[MenuComponent]', () => {
                     expect(submenuItem.getAttribute('role')).toBe('menuitem');
                 });
             });
-           
-            describe('and first menuitem (Start) has focus', () => {
-                beforeAll(() => {
-                    jasmine.clock().uninstall();
-                    jasmine.clock().install();
-                });
-                afterAll(() => {
-                    jasmine.clock().uninstall();
-                });
+
+            describe('When an inactive menuitem has focus in an opened submenu ', () => {
+                let disabledMenuItemComponent;
                 beforeEach(() => {
-                    spyOn(component.menuItems.first.arrowDown, 'emit').and.callThrough();
+                    submenucomponent.expanded = true;
+                    submenucomponent.ngOnInit();
+
+                    fixture.detectChanges();
+
+                    disabledMenuItemComponent = submenucomponent.menuItems.filter(mu => (<MenuItemComponent>mu).disabled)[0];
+                    disabledMenuItemComponent.setFocus();
+
+                    fixture.detectChanges();
+                });
+                it(('submenu is expanded'), () => {
+                    expect(submenucomponent.expanded).toBe(true);
+                });
+                it('disabled menuitem is focused', () => {
+                    const focusedElement = rootElement.querySelector('.menu__item:focus p');
+                    expect(focusedElement.innerHTML).toBe('Back to top');
+                });
+                describe('and enter is pressed', () => {
+                    let focusedElement
+
+                    beforeEach(() => {
+                        focusedElement = debugElement.query(By.css(':focus'));
+                        focusedElement.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+
+                        fixture.detectChanges();
+                        jasmine.clock().tick(650);
+                    });
+
+                    it('item has disabled set to true', () => {
+                        expect(focusedElement.componentInstance.disabled).toBe('true');
+                    })
+                    it(('submenu is still expanded'), () => {
+                        expect(submenucomponent.expanded).toBe(true);
+                    });
+
+                    it('last submenuitem has focus', () => {
+                        const focusedElement = rootElement.querySelector('.menu__item:focus p');
+                        expect(focusedElement.innerHTML).toBe('Back to top');
+                    });
+                });
+
+            });
+            describe('and first menuitem (Start) has focus', () => {
+
+                beforeEach(() => {
+
                     (<MenuItemComponent>component.menuItems.first).setFocus();
                     fixture.detectChanges();
                 });
@@ -163,8 +222,23 @@ describe('[MenuComponent]', () => {
                     const focusedElement = rootElement.querySelector(':focus a');
                     expect(focusedElement.innerHTML).toBe('Start');
                 });
+                describe('enter is pressed', () => {
+                    let firstMenuItemComponent;
+                    let navigateSpy;
+                    beforeEach(() => {
+                        firstMenuItemComponent = (<MenuItemComponent>component.menuItems.first);
+                        navigateSpy = spyOn((<any>component).router, 'navigate')
+                        const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
+                        fixture.detectChanges();
+                    });
+                    it('router is activated', () => {
+                        expect(navigateSpy).toHaveBeenCalledWith(['/sizes']);
+                    })
+                });
                 describe('Arrow down is pressed', () => {
                     beforeEach(() => {
+                        spyOn(component.menuItems.first.arrowDown, 'emit').and.callThrough();
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
                         menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
                         fixture.detectChanges();
@@ -236,32 +310,31 @@ describe('[MenuComponent]', () => {
                             describe('escape is pressed', () => {
                                 let mySub: SubmenuComponent;
                                 beforeEach(() => {
-                                //    jasmine.clock().uninstall();
-                                //    jasmine.clock().install();
                                     backToTopElement = submenuDebugElement.queryAll(By.directive(MenuItemComponent)).filter(mi => mi.componentInstance.text === 'Back to top')[0];
 
                                     mySub = <SubmenuComponent>component.menuItems.toArray()[1];
                                     spyOn(backToTopElement.componentInstance.escape, 'emit').and.callThrough();
-                                    spyOn(submenuDebugElement.componentInstance, 'animationDone').and.callThrough();
+
                                     backToTopElement.triggerEventHandler('keydown', { keyCode: 27 } as KeyboardEvent);
+                                    submenucomponent.ngOnInit();
+
 
                                     fixture.detectChanges();
-                                    jasmine.clock().tick(1700);
 
+                                    jasmine.clock().tick(650);
                                 });
                                 it('escape event is emitted', () => {
                                     expect(backToTopElement.componentInstance.escape.emit).toHaveBeenCalled();
                                 });
-                                // it('escape event is emitted', () => {
-                                //     expect(submenuDebugElement.componentInstance.animationDone).toHaveBeenCalled();
-                                // });
                                 it('submenu is focused', () => {
                                     const focusedElement = rootElement.querySelector('.menu__item:focus a');
                                     expect(focusedElement.innerHTML).toBe('Komponenter');
                                 });
-                                // it('submenu is collapsed', () => {
-                                //   expect(submenucomponent.expanded).toBe(false);
-                                // });
+                                it('submenu is collapsed', () => {
+                                    const submenu = debugElement.query(By.directive(SubmenuComponent));
+                                    expect(submenu.componentInstance.expanded).toBe(true);
+
+                                });
                             });
                             describe('home is pressed', () => {
                                 beforeEach(() => {
@@ -339,22 +412,28 @@ describe('[MenuComponent]', () => {
                 });
                 describe('Arrow up is pressed with opened submenu', () => {
                     beforeEach(() => {
-                        submenucomponent.showExpanded = true;
+                        submenucomponent.expanded = true;
+                        submenucomponent.ngOnInit();
+
+                        fixture.detectChanges();
+
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
                         menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
-                        fixture.detectChanges();
-                        jasmine.clock().tick(650);
+
                     });
-                    it(('submenu is expanded') , () => {
+                    it(('submenu is expanded'), () => {
                         expect(submenucomponent.expanded).toBe(true);
                     });
-                    it('submenuitem has focus', () => {
-                        const focusedElement = rootElement.querySelector('.menu__item:focus a');
+                    it('last submenuitem has focus', () => {
+                        const focusedElement = rootElement.querySelector('.menu__item:focus p');
                         expect(focusedElement.innerHTML).toBe('Back to top');
                     });
                 });
 
+
+
             });
+
         });
     });
 });
