@@ -34,8 +34,8 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
 
     @Output() selectedDateChanged = new EventEmitter<Date>();
 
-    @Input() @HostBinding('class.disabled') disabled: boolean = false;
-    @Input() @HostBinding('class.readonly') readonly: boolean = false;
+    @Input() @HostBinding('class.disabled') disabled = false;
+    @Input() @HostBinding('class.readonly') readonly = false;
 
     @HostBinding('class.validated-input') hasClass = true;
     @HostBinding('class.validation-error--active') get errorClass() {
@@ -261,6 +261,8 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
             case 32: // space
                 {
                     this.toggleCalendar(event);
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
             case 27: // escape
@@ -268,30 +270,40 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                     if (this.expanded) {
                         this.toggleCalendar(event);
                     }
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
             case 33: // pageUp
                 {
                     this.onPreviousMouseDown(event);
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
             case 34: // pageDown
                 {
                     this.onNextMouseDown(event);
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
             case 35: // end
                 {
                     this.currentFocusedMonth = 11;
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
             case 36: // home
                 {
                     this.currentFocusedMonth = 0;
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
             case 37: // arrow left
@@ -303,6 +315,8 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                         this.currentFocusedMonth = 11;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
 
@@ -315,6 +329,8 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                         this.currentFocusedMonth = this.currentFocusedMonth + 8;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
             case 39: // arrow right
@@ -326,6 +342,8 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                         this.currentFocusedMonth = 0;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
             case 40: // arrow down
@@ -337,11 +355,11 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
                         this.currentFocusedMonth = this.currentFocusedMonth - 8;
                     }
                     this.focusableMonths[this.currentFocusedMonth].focus();
+                    event.cancelBubble = true;
+                    event.preventDefault();
                     break;
                 }
         }
-        event.cancelBubble = true;
-        event.preventDefault();
     }
 
     onSelectMonthMouseDown(selectedMonth: ICalendarMonth) {

@@ -30,8 +30,9 @@
             <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
               <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index" (mousedown)="onSelectedDate($event, currentYearMonthIndex, weekIndex,dayIndex)">
                 <div *ngIf="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex]" class="datepicker__calendar__day" tabindex="0"
-                  [attr.aria-selected]="checkSelectedDate(weekIndex, dayIndex)" role="gridcell" [attr.aria-label]="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d MMMM y, (EEEE)'"
-                  [ngClass]="{
+                  (keydown)="onDateKeyDown($event, currentYearMonthIndex, weekIndex,dayIndex)" [attr.aria-selected]="checkSelectedDate(weekIndex, dayIndex)"
+                  role="gridcell" [attr.aria-label]="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d MMMM y, (EEEE)'"
+                  [attr.aria-disabled]="checkDisabledDate(weekIndex, dayIndex)" [ngClass]="{
                 'disabled': checkDisabledDate(weekIndex, dayIndex),
                 'datepicker__calendar__day--today' : checkTodayDate(weekIndex, dayIndex),
                 'datepicker__calendar__day--selected' : checkSelectedDate(weekIndex, dayIndex)}">{{yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d'}}</div>
