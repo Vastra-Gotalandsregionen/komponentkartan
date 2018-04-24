@@ -18,6 +18,9 @@ describe('[DatepickerComponent(Angular)]', () => {
     let rootElement: DebugElement;
 
     beforeEach((done) => {
+        jasmine.clock().uninstall();
+        jasmine.clock().install();
+        jasmine.clock().mockDate(new Date(2018, 2, 15));
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
@@ -265,9 +268,9 @@ describe('[DatepickerComponent(Angular)]', () => {
                 currentYearElement = rootElement.query(By.css('.datepicker__calendar__header__year'));
             });
 
-            it('focusableDays is set', () => {
-                console.log(new Date());
-                expect(component.focusableDays.length).toBe(daysInMonth);
+            it('current year is 2018 and month is March', () => {
+                console.log(component.today);
+                expect(currentYearElement.nativeElement.innerText).toBe('March 2018');
             });
 
             it('current month and year is in view', () => {
@@ -621,7 +624,7 @@ describe('[DatepickerComponent(Angular)]', () => {
                     it('current year is 2018 and month is February', () => {
                         expect(currentYearElement.nativeElement.innerText).toBe('February 2018');
                     });
-                    describe('enter is pressed when a date is focused', ()=>{
+                    describe('space is pressed when a date is focused', ()=>{
                         beforeEach(() => {
                             daysInCurrentMonth[0].triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                             fixture.detectChanges();
