@@ -248,10 +248,11 @@ vgr-datepicker {
     border-color: $focus-color;
     border-width: $focus-outline-width;
     border-style: solid;
+    line-height: 25px;
   }
 }
 
-div.datepicker__calendar__day--today:not(.datepicker__calendar__day--selected) {
+div.datepicker__calendar__day--today:not(.datepicker__calendar__day--selected,:focus) {
   @extend .border-color--primary;
   background-color: $background-color--content;
 }
@@ -285,6 +286,9 @@ div.datepicker__calendar__day--today:not(.datepicker__calendar__day--selected) {
     width: 32px;
     height: 32px;
     line-height: 31px;
+    &:focus {
+      line-height: 27px;
+    }
   }
   .datepicker__calendar__content {
     margin-left: 10px;
