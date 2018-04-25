@@ -1,6 +1,7 @@
 <div class="validation">
   <div [ngClass]="{'datepicker--open' : expanded}" tabindex="0" class="datepicker" (mousedown)="toggleCalendar($event)" (focusin)="onEnter()"
-    (focusout)="onLeave()" (keydown)="onKeyDown($event)" [attr.aria-disabled]="disabled" [attr.aria-expanded]="expanded" [attr.aria-labelledby]="labelledbyid">
+    (focusout)="onLeave()" (keydown)="onKeyDown($event)" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly" role="form"
+    [attr.aria-expanded]="expanded" [attr.aria-labelledby]="labelledbyid">
     <div class="datepicker__dropdown">
       <span *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}" id="{{labelledbyid}}">{{selectedDate | date: selectedDateFormat}}</span>
       <span *ngIf="!selectedDate" class="datepicker__calendar__selector" title="{{ readonly ? '' : noDateSelectedLabel }}" id="{{labelledbyid}}">{{ readonly ? '' : noDateSelectedLabel }}</span>
