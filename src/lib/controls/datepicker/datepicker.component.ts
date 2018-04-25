@@ -152,7 +152,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
         this.hasFocus = true;
     }
 
-    @HostListener('document:click', ['$event'])
+    @HostListener('document:mousedown', ['$event'])
     onDocumentClick(event: any) {
         const target = event.target || event.srcElement || event.currentTarget;
         if (!this.elementRef.nativeElement.contains(target)) {

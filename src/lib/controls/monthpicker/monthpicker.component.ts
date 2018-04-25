@@ -366,7 +366,7 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         this.selectDate(selectedMonth);
     }
 
-    @HostListener('document:click', ['$event'])
+    @HostListener('document:mousedown', ['$event'])
     onDocumentClick(event: any) {
 
         const target = event.target || event.srcElement || event.currentTarget;
