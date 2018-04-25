@@ -203,7 +203,7 @@ describe('ListItemComponent', () => {
         expect(listItemComponentFixture.componentInstance.listItemHeader.toggleExpand).toHaveBeenCalled();
       });
 
-      it('listItemHeaderComponent listItemHeader toggleExpand has been called', () => {
+      it('listItemHeaderComponent listItemHeader setExpandOrCollapsed has been called', () => {
         expect(component.setExpandOrCollapsed).toHaveBeenCalled();
       });
 
