@@ -392,6 +392,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
             const clickedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
 
             if (!clickedDate || clickedDate.disabled) {
+                event.cancelBubble = true;
                 return;
             }
             this.selectedDate = clickedDate.day;
