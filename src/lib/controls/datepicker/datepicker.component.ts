@@ -1,12 +1,13 @@
 import {
     Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener,
-    ElementRef, forwardRef, SkipSelf, Optional, Host, ChangeDetectorRef
+    ElementRef, forwardRef, SkipSelf, Optional, Host, ChangeDetectorRef, AfterViewInit
 } from '@angular/core';
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
+import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-datepicker',
@@ -18,14 +19,14 @@ import { AbstractControl } from '@angular/forms';
         multi: true
     }]
 })
-export class DatepickerComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
     @Input() showValidation = true;
 
     @Input() minDate: Date;
     @Input() maxDate: Date;
     @Input() selectedDate?: Date;
-    @Input() @HostBinding('class.disabled') disabled: boolean;
-    @Input() @HostBinding('class.readonly') readonly: boolean;
+    @Input() @HostBinding('class.disabled') disabled = false;
+    @Input() @HostBinding('class.readonly') readonly = false;
     @Input() noDateSelectedLabel = 'Välj datum';
     @Input() selectedDateFormat = 'yyyy-MM-dd';
     @Input() tooltipDateFormat = 'yyyy-MM-dd';
@@ -40,9 +41,15 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         return this.showValidation && this.control && this.control.invalid && this.hasFocus;
     }
 
+    labelledbyid: string = Guid.newGuid();
+
+
     expanded: boolean;
     hasFocus: boolean;
     control: AbstractControl;
+
+    focusableDays = [];
+    currentFocusedDayIndex = 0;
 
 
     today: Date;
@@ -57,6 +64,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
 
 
     constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
+        this.expanded = false;
         this.today = new Date();
         this.nextMonth = true;
         this.previousMonth = true;
@@ -77,6 +85,24 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         if (this.formControlName) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
+        this.setFocusableItems();
+    }
+
+    ngAfterViewInit() {
+        this.setFocusableItems();
+    }
+
+    setFocusableItems() {
+        this.focusableDays = this.elementRef.nativeElement.getElementsByClassName('datepicker__calendar__day');
+    }
+
+    setFocusedElement() {
+        if (!this.selectedDate) {
+            this.currentFocusedDayIndex = this.today.getDate() - 1;
+        } else {
+            this.currentFocusedDayIndex = this.selectedDate.getDate() - 1;
+        }
+        this.focusableDays[this.currentFocusedDayIndex].focus();
     }
 
     writeValue(value: any): void {
@@ -126,11 +152,9 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         this.hasFocus = true;
     }
 
-    @HostListener('document:click', ['$event'])
+    @HostListener('document:mousedown', ['$event'])
     onDocumentClick(event: any) {
-
         const target = event.target || event.srcElement || event.currentTarget;
-
         if (!this.elementRef.nativeElement.contains(target)) {
             this.expanded = false;
         }
@@ -162,7 +186,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
                 }
             }
         }
-
 
         return yearMonths;
     }
@@ -257,29 +280,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     }
 
     getSwedishDayNumbersInWeek(weekNumber: number): number {
-        switch (weekNumber) {
-            case 0: {
-                return 6;
-            }
-            case 1: {
-                return 0;
-            }
-            case 2: {
-                return 1;
-            }
-            case 3: {
-                return 2;
-            }
-            case 4: {
-                return 3;
-            }
-            case 5: {
-                return 4;
-            }
-            case 6: {
-                return 5;
-            }
-        }
+        return weekNumber > 0 ? weekNumber - 1 : 6;
     }
 
     private updateYearMonths(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]) {
@@ -326,8 +327,6 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         this.setPreviousAndNextMonthNavigation();
     }
 
-
-
     onCalendarMousedown(event: Event) {
         // används för att stoppa events från att bubbla ut
         event.cancelBubble = true;
@@ -339,6 +338,14 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
             return;
         }
         this.expanded = !this.expanded;
+        if (this.expanded) {
+            setTimeout(() => {
+                this.setFocusedElement();
+            }, 50);
+        } else {
+            // set focus on component
+            this.elementRef.nativeElement.querySelector('.datepicker').focus();
+        }
     }
 
     onPreviousMonth(event: Event) {
@@ -380,6 +387,26 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
         }
     }
 
+    onDateKeyDown(event: KeyboardEvent, currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
+        if (event.keyCode === 13 || event.keyCode === 32) {
+            const clickedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
+
+            if (!clickedDate || clickedDate.disabled) {
+                return;
+            }
+            this.selectedDate = clickedDate.day;
+            this.setSelectedDay(clickedDate);
+
+            this.onChange(clickedDate.day);
+            this.selectedDateChanged.emit(clickedDate.day);
+            this.changeDetectorRef.detectChanges();
+
+            if (this.control) {
+                this.control.setValue(clickedDate.day);
+            }
+        }
+    }
+
     checkDisabledDate(weekIndex: number, dayIndex: number): boolean {
         return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] === null || this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].disabled;
     }
@@ -389,7 +416,7 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
     }
 
     checkSelectedDate(weekIndex: number, dayIndex: number): boolean {
-        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].selected;
+        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && !!this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].selected;
     }
 
     setPreviousAndNextMonthNavigation() {
@@ -414,11 +441,212 @@ export class DatepickerComponent implements OnInit, OnChanges, ControlValueAcces
             this.nextMonth = false;
         } else if (currentYear <= minYear && currentMonth <= minMonth) {
             this.previousMonth = false;
+            this.nextMonth = true;
         } else if (currentYear >= maxYear && currentMonth >= maxMonth) {
             this.nextMonth = false;
+            this.previousMonth = true;
         } else {
             this.previousMonth = true;
             this.nextMonth = true;
+        }
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+        switch (event.keyCode) {
+            case 9: // tab
+                {
+                    this.expanded = false;
+                    break;
+                }
+            case 13: // enter
+            case 32: // space
+                {
+                    this.toggleCalendar(event);
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 27: // escape
+                {
+                    if (this.expanded) {
+                        this.toggleCalendar(event);
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 33: // pageUp
+                {
+                    if (event.shiftKey && this.currentYearMonthIndex - 12 >= 0) {
+                        this.currentYearMonthIndex = this.currentYearMonthIndex - 12;
+                        this.setCurrentYearMonthOutput();
+                        this.setPreviousAndNextMonthNavigation();
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 10);
+                    } else if (!event.shiftKey && this.previousMonth) {
+                        this.onPreviousMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            if (this.currentFocusedDayIndex >= this.focusableDays.length) {
+                                this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            }
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 10);
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 34: // pageDown
+                {
+                    if (event.shiftKey && this.currentYearMonthIndex + 12 < this.yearMonths.length) {
+                        this.currentYearMonthIndex = this.currentYearMonthIndex + 12;
+                        this.setCurrentYearMonthOutput();
+                        this.setPreviousAndNextMonthNavigation();
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 10);
+                    } else if (!event.shiftKey && this.nextMonth) {
+                        this.onNextMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            if (this.currentFocusedDayIndex >= this.focusableDays.length) {
+                                this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            }
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+
+                        }, 10);
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 35: // end
+                {
+                    if (event.ctrlKey) {
+                        const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
+
+                        this.currentYearMonthIndex = this.currentYearMonthIndex + (12 - currentMonth);
+                        if (this.currentYearMonthIndex > this.yearMonths.length - 1) {
+                            this.currentYearMonthIndex = this.yearMonths.length - 1;
+                        }
+
+                        this.setCurrentYearMonthOutput();
+                        this.setPreviousAndNextMonthNavigation();
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+
+                        }, 10);
+                    } else {
+                        this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 36: // home
+                {
+                    if (event.ctrlKey) {
+                        const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
+
+                        this.currentYearMonthIndex = this.currentYearMonthIndex - (currentMonth - 1);
+                        if (this.currentYearMonthIndex < 0) {
+                            this.currentYearMonthIndex = 0;
+                        }
+                        this.setCurrentYearMonthOutput();
+                        this.setPreviousAndNextMonthNavigation();
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = 0;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 10);
+                    } else {
+                        this.currentFocusedDayIndex = 0;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 37: // arrow left
+                {
+                    if (this.currentFocusedDayIndex > 0) {
+                        this.currentFocusedDayIndex = this.currentFocusedDayIndex - 1;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    } else if (this.previousMonth) {
+                        this.onPreviousMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 10);
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 38: // arrow up
+                {
+                    if (this.currentFocusedDayIndex < 7) {
+                        if (this.previousMonth) {
+                            this.onPreviousMonth(event);
+                            setTimeout(() => {
+                                this.setFocusableItems();
+                                this.currentFocusedDayIndex = this.focusableDays.length - (7 - this.currentFocusedDayIndex);
+                                this.focusableDays[this.currentFocusedDayIndex].focus();
+                            }, 10);
+                        }
+                    } else {
+                        this.currentFocusedDayIndex = this.currentFocusedDayIndex - 7;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 39: // arrow right
+                {
+                    if (this.currentFocusedDayIndex < this.focusableDays.length - 1) {
+                        this.currentFocusedDayIndex = this.currentFocusedDayIndex + 1;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    } else if (this.nextMonth) {
+                        this.onNextMonth(event);
+                        setTimeout(() => {
+                            this.setFocusableItems();
+                            this.currentFocusedDayIndex = 0;
+                            this.focusableDays[this.currentFocusedDayIndex].focus();
+                        }, 10);
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
+            case 40: // arrow down
+                {
+                    if ((this.currentFocusedDayIndex + 7) > (this.focusableDays.length - 1)) {
+                        const daysInCurrentMonth = this.focusableDays.length;
+                        if (this.nextMonth) {
+                            this.onNextMonth(event);
+                            setTimeout(() => {
+                                this.setFocusableItems();
+                                this.currentFocusedDayIndex = this.currentFocusedDayIndex + 7 - daysInCurrentMonth;
+                                this.focusableDays[this.currentFocusedDayIndex].focus();
+                            }, 10);
+                        }
+                    } else {
+                        this.currentFocusedDayIndex = this.currentFocusedDayIndex + 7;
+                        this.focusableDays[this.currentFocusedDayIndex].focus();
+                    }
+                    event.preventDefault();
+                    event.cancelBubble = true;
+                    break;
+                }
         }
     }
 }
