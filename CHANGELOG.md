@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 2.4.0-betaX
+## 2.4.0 (Stable)
 - Added vgr-textarea component
 - Updated vgr-page-header to be more flexible
 - Add WCAG compliance to Montpicker component
@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Checkboxes in dropdown multi has the same height in checked and unchecked state
 - Fixed bug with vgr-datepicker in vgr-actionpanel.
 
-## 2.3.0 (Stable)
+## 2.3.0 
 - Added vgr-table component
 
 ## 2.2.0
