@@ -32,8 +32,6 @@ describe('[MenuComponent]', () => {
     let debugElement: DebugElement;
 
     beforeEach((done) => {
-        //   TestBed.resetTestEnvironment();
-        //  TestBed.initTestEnvironment([BrowserDynamicTestingModule, NoopAnimationsModule], platformBrowserDynamicTesting())
         TestBed.configureTestingModule({
             declarations: [TestMenuComponent, MenuComponent, MenuItemComponent, SubmenuComponent],
             imports: [CommonModule,
@@ -51,7 +49,6 @@ describe('[MenuComponent]', () => {
             component = fixture.debugElement.children[0].componentInstance;
             debugElement = fixture.debugElement;
             rootElement = fixture.debugElement.nativeElement;
-            //      component.ngAfterContentInit();
 
             fixture.detectChanges();
             done();
@@ -115,7 +112,6 @@ describe('[MenuComponent]', () => {
             menuItem = rootElement.querySelector('vgr-menu-item');
             submenuItem = rootElement.querySelector('vgr-submenu');
 
-            //  const focusedElement = rootElement.querySelector(':focus');
             submenucomponent = <SubmenuComponent>component.menuItems.toArray().filter(mi => mi instanceof SubmenuComponent)[0];
 
         });
@@ -225,11 +221,29 @@ describe('[MenuComponent]', () => {
                 describe('enter is pressed', () => {
                     let firstMenuItemComponent;
                     let navigateSpy;
+                    let test;
                     beforeEach(() => {
                         firstMenuItemComponent = (<MenuItemComponent>component.menuItems.first);
-                        navigateSpy = spyOn((<any>component).router, 'navigate')
+
+                        navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate')
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
                         menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
+                        fixture.detectChanges();
+                    });
+                    it('router is activated', () => {
+                        expect(navigateSpy).toHaveBeenCalledWith(['/sizes']);
+                    })
+                });
+                describe('space is pressed', () => {
+                    let firstMenuItemComponent;
+                    let navigateSpy;
+                    let test;
+                    beforeEach(() => {
+                        firstMenuItemComponent = (<MenuItemComponent>component.menuItems.first);
+
+                        navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate')
+                        const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
                         fixture.detectChanges();
                     });
                     it('router is activated', () => {
@@ -272,7 +286,7 @@ describe('[MenuComponent]', () => {
                     describe('Space is pressed', () => {
                         let submenuDebugElement;
                         let actionPanelDebugElement;
-                        let backToTopElement;
+
                         beforeEach(() => {
                             const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
                             menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
@@ -307,8 +321,30 @@ describe('[MenuComponent]', () => {
                             it('submenu should be expanded', () => {
                                 expect(submenucomponent.expanded).toBe(true);
                             });
+                            describe('arrow up is pressed', () => {
+                                let backToTopDebugElement;
+                                beforeEach(() => {
+                                    backToTopDebugElement = submenuDebugElement.queryAll(By.directive(MenuItemComponent)).filter(mi => mi.componentInstance.text === 'Back to top')[0];
+
+                                    spyOn(backToTopDebugElement.componentInstance.arrowUp, 'emit').and.callThrough();
+
+                                    backToTopDebugElement.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
+                                    fixture.detectChanges();
+                                });
+                                it('previous menuitem has focus', () => {
+                                    const focusedElement = rootElement.querySelector('.menu__item:focus a');
+                                    expect(focusedElement.innerHTML).toBe('Action panel');
+                                });
+                                it('arrowUp event is emitted', () => {
+                                    expect(backToTopDebugElement.componentInstance.arrowUp.emit).toHaveBeenCalled();
+                                });
+                                it('submenu should still be expanded', () => {
+                                    expect(submenucomponent.expanded).toBe(true);
+                                });
+                            });
                             describe('escape is pressed', () => {
                                 let mySub: SubmenuComponent;
+                                let backToTopElement;
                                 beforeEach(() => {
                                     backToTopElement = submenuDebugElement.queryAll(By.directive(MenuItemComponent)).filter(mi => mi.componentInstance.text === 'Back to top')[0];
 
@@ -399,7 +435,18 @@ describe('[MenuComponent]', () => {
                         });
                     });
                 });
-                describe('Arrow up is pressed with closed submenu', () => {
+                describe('Arrow down is pressed on last visible menuitem', () => {
+                    beforeEach(() => {
+                        const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+                        fixture.detectChanges();
+                    });
+                    it('first menuItems has focus', () => {
+                        const focusedElement = rootElement.querySelector('.menu__item:focus a');
+                        expect(focusedElement.innerHTML).toBe('Start');
+                    });
+                });
+                describe('Arrow up is pressed on first menuitem with closed submenu', () => {
                     beforeEach(() => {
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
                         menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
@@ -410,7 +457,7 @@ describe('[MenuComponent]', () => {
                         expect(focusedElement.innerHTML).toBe('Komponenter');
                     });
                 });
-                describe('Arrow up is pressed with opened submenu', () => {
+                describe('Arrow up is pressed on first menuitem with opened submenu', () => {
                     beforeEach(() => {
                         submenucomponent.expanded = true;
                         submenucomponent.ngOnInit();
