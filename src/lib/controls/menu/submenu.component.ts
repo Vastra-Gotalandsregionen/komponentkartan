@@ -152,6 +152,10 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         });
     }
 
+    ngAfterViewInit() {
+        this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
+    }
+
     private setChildSelected(event: NavigationEnd) {
         const itemArray = this.menuItems.toArray();
         itemArray.splice(0, 1);
@@ -162,6 +166,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
             this.showExpanded = true;
             // SetFocus after the animation is completed.
             setTimeout(() => {
+                this.childSelected = true; //!!this.elementRef.nativeElement.querySelector('.menu__item--selected');
                 matches[0].setFocus();
             }, 650);
         }

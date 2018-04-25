@@ -15,8 +15,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    cursor: pointer;
-    @extend .border-left-color--primary;
+    cursor: pointer; // @extend .border-left-color--primary;
     .menu__header__title {
       font-size: $menu-header-font-size--small;
       font-weight: bold;
@@ -116,6 +115,10 @@
   a:active {
     color: inherit;
     font-weight: inherit;
+  }
+  &:focus {
+    outline: 0; // z-index: 999;
+    box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
   }
   &:hover:not(.menu__item--disabled) {
     @extend .border-left-color--primary;
