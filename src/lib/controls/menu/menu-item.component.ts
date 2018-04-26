@@ -1,4 +1,4 @@
-import { Input, Component, HostListener, Output, EventEmitter, ElementRef, Renderer, forwardRef, HostBinding, AfterViewInit } from '@angular/core';
+import { Input, Component, HostListener, Output, EventEmitter, ElementRef, Renderer, forwardRef, HostBinding, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
 
@@ -17,6 +17,7 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @Input() notificationTooltip: string;
     @HostBinding('attr.role') role = 'menuitem';
     @HostBinding('attr.aria-disabled') ariaDisabled;
+    @ViewChild('menuitem') menuitem: ElementRef;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
         if (event.keyCode === 9) { // Tab
@@ -60,8 +61,12 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
         return this.notification && this.notification.length > 2 ? '!' : this.notification;
     }
 
-    constructor(private router: Router, elementRef: ElementRef, renderer: Renderer) {
-        super(elementRef, renderer);
+    constructor(private router: Router, private renderer: Renderer) {
+        super();
+    }
+
+    setFocus(movingUp: boolean = false) {
+        this.renderer.invokeElementMethod(this.menuitem.nativeElement, 'focus');
     }
 
     ngAfterViewInit() {
