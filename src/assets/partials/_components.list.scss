@@ -162,7 +162,8 @@
     transition-delay: 0s, 0.2s;
   }
   &:focus {
-    outline: $focus-outline-width solid $focus-color;
+    outline: 0;
+    box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
   }
 }
 
