@@ -1,4 +1,4 @@
-import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, Renderer, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, AnimationTransitionEvent, OnInit } from '@angular/core';
+import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, AnimationTransitionEvent, OnInit, Renderer, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
@@ -36,6 +36,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
     @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
     @HostBinding('class.submenu') hasClass = true;
     @HostBinding('class.submenu--child-selected') private childSelected: boolean;
+    @ViewChild('menuitem') menuitem: ElementRef;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
 
@@ -92,8 +93,8 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         }
     }
 
-    constructor(private router: Router, elementRef: ElementRef, renderer: Renderer) {
-        super(elementRef, renderer);
+    constructor(private router: Router, private elementRef: ElementRef, private renderer: Renderer) {
+        super();
     }
 
     animationDone(event: AnimationTransitionEvent) {
@@ -107,7 +108,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         if (handle && this.expanded) {
             this.menuItems.last.setFocus();
         } else {
-            super.setFocus();
+            this.renderer.invokeElementMethod(this.menuitem.nativeElement, 'focus');
         }
     }
 

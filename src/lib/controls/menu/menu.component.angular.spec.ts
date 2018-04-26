@@ -183,7 +183,7 @@ describe('[MenuComponent]', () => {
                     expect(focusedElement.innerHTML).toBe('Back to top');
                 });
                 describe('and enter is pressed', () => {
-                    let focusedElement
+                    let focusedElement;
 
                     beforeEach(() => {
                         focusedElement = debugElement.query(By.css(':focus'));
@@ -195,13 +195,13 @@ describe('[MenuComponent]', () => {
 
                     it('item has disabled set to true', () => {
                         expect(focusedElement.componentInstance.disabled).toBe('true');
-                    })
+                    });
                     it(('submenu is still expanded'), () => {
                         expect(submenucomponent.expanded).toBe(true);
                     });
 
                     it('last submenuitem has focus', () => {
-                        const focusedElement = rootElement.querySelector('.menu__item:focus p');
+                        focusedElement = rootElement.querySelector('.menu__item:focus p');
                         expect(focusedElement.innerHTML).toBe('Back to top');
                     });
                 });
@@ -221,34 +221,32 @@ describe('[MenuComponent]', () => {
                 describe('enter is pressed', () => {
                     let firstMenuItemComponent;
                     let navigateSpy;
-                    let test;
                     beforeEach(() => {
                         firstMenuItemComponent = (<MenuItemComponent>component.menuItems.first);
 
-                        navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate')
+                        navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate');
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
                         menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
                         fixture.detectChanges();
                     });
                     it('router is activated', () => {
                         expect(navigateSpy).toHaveBeenCalledWith(['/sizes']);
-                    })
+                    });
                 });
                 describe('space is pressed', () => {
                     let firstMenuItemComponent;
                     let navigateSpy;
-                    let test;
                     beforeEach(() => {
                         firstMenuItemComponent = (<MenuItemComponent>component.menuItems.first);
 
-                        navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate')
+                        navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate');
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
                         menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
                         fixture.detectChanges();
                     });
                     it('router is activated', () => {
                         expect(navigateSpy).toHaveBeenCalledWith(['/sizes']);
-                    })
+                    });
                 });
                 describe('Arrow down is pressed', () => {
                     beforeEach(() => {
@@ -367,7 +365,7 @@ describe('[MenuComponent]', () => {
                                     expect(focusedElement.innerHTML).toBe('Komponenter');
                                 });
 
-                                //eventet går igenom, men kan inte få den att påvisa att den är collapsad igen
+                                // eventet går igenom, men kan inte få den att påvisa att den är collapsad igen
                                 // it('submenu is collapsed', () => {
                                 //     const submenu = debugElement.query(By.directive(SubmenuComponent));
                                 //     expect(submenu.componentInstance.expanded).toBe(false);

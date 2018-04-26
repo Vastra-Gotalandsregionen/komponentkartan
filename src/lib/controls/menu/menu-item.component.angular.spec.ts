@@ -95,7 +95,7 @@ describe('[MenuItemComponent]', () => {
             disabledMenuItem = rootElement.query(By.css('.menu__item--disabled'));
         });
         it('disabled class is set', () => {
-            expect(disabledMenuItem).toBeDefined;
+            expect(disabledMenuItem).toBeDefined();
         });
         it('disabled tooltip is set', () => {
             expect(menuItemLink.nativeElement.title).toBe('Tooltip for disabled menu item');
