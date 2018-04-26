@@ -2,7 +2,6 @@ import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitt
 import { trigger, style, animate, transition } from '@angular/animations';
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
-import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
 
 @Component({
     templateUrl: './action-panel.component.html',
@@ -84,7 +83,7 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         return this._notification;
     }
 
-    constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ActionPanelJqeuryHelper) {
+    constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef) {
         this.pageHeaderHeight = 0;
     }
 
