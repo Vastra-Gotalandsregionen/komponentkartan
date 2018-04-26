@@ -2,7 +2,7 @@
   <div class="back-to-top"></div>
   <vgr-modal></vgr-modal>
   <vgr-sidebar-menu>
-    <vgr-menu title="Utv {{currentVersion}}">
+    <vgr-menu title="Innehåll {{currentVersion}}">
       <vgr-menu-item link="/" text="Start"></vgr-menu-item>
       <vgr-menu-item link="/theming" text="Temahantering"></vgr-menu-item>
       <vgr-menu-item link="/pagestructure" text="Sidhantering"></vgr-menu-item>
@@ -37,6 +37,7 @@
         <vgr-menu-item link="/titlevalue" text="Title-value"></vgr-menu-item>
         <vgr-menu-item link="/savecancel" text="Save/Cancel"></vgr-menu-item>
         <vgr-menu-item link="/radioButtons" text="Radio Group"></vgr-menu-item>
+        <vgr-menu-item link="/radioButtons" text="Inaktivt Menyval" [disabled]="true"></vgr-menu-item>
       </vgr-submenu>
       <vgr-submenu text="Kodexempel">
         <vgr-menu-item link="/listexample-simple" text="Lista (enkel)"></vgr-menu-item>

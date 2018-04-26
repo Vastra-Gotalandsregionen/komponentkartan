@@ -15,8 +15,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    cursor: pointer;
-    @extend .border-left-color--primary;
+    cursor: pointer; // @extend .border-left-color--primary;
     .menu__header__title {
       font-size: $menu-header-font-size--small;
       font-weight: bold;
@@ -57,8 +56,6 @@
     }
     .submenu-content {
       overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.6s ease-out;
       .menu__item {
         padding-left: $margin--fat;
       }
@@ -78,12 +75,6 @@
     }
     .menu__item__plus {
       @extend .bg-image-icon-plus;
-    }
-    &.submenu--expanded {
-      .submenu-content {
-        max-height: 999px;
-        transition: max-height 0.6s ease-in;
-      }
     }
     &.submenu--child-selected {
       >.menu__item a {
@@ -125,6 +116,10 @@
     color: inherit;
     font-weight: inherit;
   }
+  &:focus {
+    outline: 0; // z-index: 999;
+    box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+  }
   &:hover:not(.menu__item--disabled) {
     @extend .border-left-color--primary;
     cursor: pointer;
@@ -135,8 +130,7 @@
   }
   &.menu__item--selected {
     @extend .border-left-color--primary;
-    @extend .background-color--secondary;
-    color: $text-color--light;
+    @extend .background-color--primary-dimmed;
     font-weight: bold;
     letter-spacing: $menu-text-font-size--small-letter-spacing-bold;
   }

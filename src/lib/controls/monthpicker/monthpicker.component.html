@@ -1,7 +1,7 @@
 <div class="validation">
   <div class="monthpicker" (mousedown)="onMouseDown($event)" (keydown)="onKeyDown($event)" (focusin)="onEnter()" (focusout)="onLeave()"
-    [ngClass]="{'monthpicker--open' : expanded}" role="form" [attr.aria-disabled]="disabled" [attr.aria-expanded]="expanded"
-    [attr.aria-labelledby]="labelledbyid" tabindex="0">
+    [ngClass]="{'monthpicker--open' : expanded}" role="form" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
+    [attr.aria-expanded]="expanded" [attr.aria-labelledby]="labelledbyid" tabindex="0">
 
     <div class="monthpicker__dropdown">
       <span *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}" id="{{labelledbyid}}">{{selectedDate | date : selectedDateFormat}}</span>
