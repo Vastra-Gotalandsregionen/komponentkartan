@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 2.5.0-beta1
 - WCAG-support for datepickern
+- WCAG-support for the menu
 
 ## 2.4.0 (Stable)
 - Added vgr-textarea component
