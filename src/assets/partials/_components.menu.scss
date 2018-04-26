@@ -130,8 +130,7 @@
   }
   &.menu__item--selected {
     @extend .border-left-color--primary;
-    @extend .background-color--secondary;
-    color: $text-color--light;
+    @extend .background-color--primary-dimmed;
     font-weight: bold;
     letter-spacing: $menu-text-font-size--small-letter-spacing-bold;
   }

@@ -38,8 +38,8 @@ export class MenuComponent implements OnInit {
         <vgr-menu-item link="#" text="Menu item 5" [disabled]="!browserIsIE"
             disabledTooltip="Endast tillgängligt i IE"></vgr-menu-item>
         <vgr-menu-item link="#" text="Menu item 6" collapsable="true"></vgr-menu-item>
-        <vgr-menu-item link="#" text="Menu item 7" disabled="true"
-            disabledTooltip="Alltid inaktivt" notification="12" notificationTooltip="Detta är ytterligare en tooltip"
+        <vgr-menu-item link="#" text="Menu item 7" [disabled]="true"
+            [disabledTooltip]="Alltid inaktivt" notification="12" notificationTooltip="Detta är ytterligare en tooltip"
         notificationColor="error"></vgr-menu-item>
         <vgr-menu-separator></vgr-menu-separator>
         <vgr-submenu text="Submenu">
