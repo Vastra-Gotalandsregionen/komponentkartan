@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 2.4.0 (Stable)
+## 2.4.1 (Stable)
+- Fix bug with deselect on dropdown multi
+
+## 2.4.0
 - Added vgr-textarea component
 - Updated vgr-page-header to be more flexible
 - Add WCAG compliance to Montpicker component

@@ -192,28 +192,22 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
     }
 
     selectItem(item: DropdownItem<any>) {
-        if (!item) {
-            return;
-        }
-
-        item.selected = true;
-
-
-        this.selectionChanged.emit(this.selectedItems.map(x => x.value));
-        this.onChange(this.selectedItems.map(x => x.value));
-
-        this.updateDropdownLabel();
+        this.setSelected(item, true);
     }
 
     deselectItem(item: DropdownItem<any>) {
+        this.setSelected(item, false);
+    }
+
+    private setSelected(item: DropdownItem<any>, selected: boolean) {
         if (!item) {
             return;
         }
 
-        item.selected = false;
+        item.selected = selected;
 
         this.selectionChanged.emit(this.selectedItems.map(x => x.value));
-        this.onChange(this._items.filter(x => x.selected));
+        this.onChange(this.selectedItems.map(x => x.value));
         this.updateDropdownLabel();
     }
 
