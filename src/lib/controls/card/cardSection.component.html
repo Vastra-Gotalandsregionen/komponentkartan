@@ -4,7 +4,7 @@
   <div class="card-section__header__icon"></div>
   <div class="card-section__header__expander"></div>
 </div>
-<div class="card-section__content" *ngIf="showExpanded" [@toggleContent]="state" (@toggleContent.done)="animationDone($event)">
+<div class="card-section__content" *ngIf="showExpanded" [@toggleContent]="state" (@toggleContent.done)="animationDone($event)" (@toggleContent.start)="animationStart($event)">
   <div class="add-padding">
     <ng-content></ng-content>
   </div>

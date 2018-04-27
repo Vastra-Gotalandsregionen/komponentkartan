@@ -16,16 +16,16 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
                 overflow: 'hidden',
             })),
             state('expanded', style({
-                height: '*',
+                height: '*'
             })),
             transition('* => expanded', [animate('600ms  ease-in')]),
-            transition('expanded => collapsed', [animate('600ms ease-out')])
+            transition('* => collapsed', [animate('600ms ease-out')])
         ])
     ]
 })
 export class CardSectionComponent implements OnInit {
     @HostBinding('class.card-section') cardSectionClass = true;
-    @HostBinding('class.card-section--expanded') private _expanded: boolean;
+    @HostBinding('class.card-section--expanded') private _expanded = false;
     @Input() @HostBinding('class.card-section--readonly') readonly: boolean;
     @Input() title: string;
     @Input() subtitle: string;
@@ -62,10 +62,15 @@ export class CardSectionComponent implements OnInit {
     }
 
     animationDone(event: AnimationTransitionEvent) {
-        if (event.fromState === 'expanded' && event.toState === 'collapsed') {
-
+        if (event.toState === 'collapsed') {
             this._showExpanded = false;
             this.expanded = false;
         }
+        this.elementRef.nativeElement.cardSection.style['overflow'] = 'visible';
     }
+
+    animationStart($event) {
+        this.elementRef.nativeElement.cardSection.style['overflow'] = 'hidden';
+    }
+
 }
