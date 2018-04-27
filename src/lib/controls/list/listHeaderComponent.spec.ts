@@ -1,4 +1,4 @@
-import { ListHeaderComponent, ListColumnHeaderComponent, ListColumnComponent, SortChangedArgs, SortDirection, ListItemComponent, ListItemJqeuryHelper } from '../../index';
+import { ListHeaderComponent, ListColumnHeaderComponent, ListColumnComponent, SortChangedArgs, SortDirection, ListItemComponent } from '../../index';
 import { QueryList, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 describe('[ListHeaderComponent]', () => {
