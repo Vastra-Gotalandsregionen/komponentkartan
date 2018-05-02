@@ -66,11 +66,11 @@ export class CardSectionComponent implements OnInit {
             this._showExpanded = false;
             this.expanded = false;
         }
-        this.elementRef.nativeElement.cardSection.style['overflow'] = 'visible';
+        this.elementRef.nativeElement.style['overflow'] = 'visible';
     }
 
     animationStart($event) {
-        this.elementRef.nativeElement.cardSection.style['overflow'] = 'hidden';
+        this.elementRef.nativeElement.style['overflow'] = 'hidden';
     }
 
 }

@@ -18,7 +18,7 @@ import localeSv from '@angular/common/locales/sv';
 registerLocaleData(localeSv);
 
 // jquery
-// import * as $ from 'jquery';
+import * as $ from 'jquery';
 
 @NgModule({
   imports: [
