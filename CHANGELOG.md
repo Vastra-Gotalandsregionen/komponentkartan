@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - WCAG-support for datepickern
 - WCAG-support for the menu
 
-## 2.4.1 (Stable)
+## 2.4.1 
 - Fix bug with deselect on dropdown multi
 
 ## 2.4.0
