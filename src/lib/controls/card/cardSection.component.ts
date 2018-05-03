@@ -8,18 +8,26 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
     animations: [
         trigger('toggleContent', [
             state('void', style({
-                height: '0',
-                overflow: 'hidden',
+                height: '0'
             })),
             state('collapsed', style({
-                height: '0',
-                overflow: 'hidden',
+                height: '0'
             })),
             state('expanded', style({
                 height: '*'
             })),
-            transition('* => expanded', [animate('600ms  ease-in')]),
-            transition('* => collapsed', [animate('600ms ease-out')])
+            transition('* => expanded', [
+                style({height: 0, overflow: 'hidden'}),
+                  animate('0.4s ease', style({
+                    height: '*'
+                  }))
+              ]),
+            transition('* => collapsed', [
+              style({ overflow: 'hidden'}),
+                animate('0.4s ease', style({
+                  height: 0
+                }))
+            ])
         ])
     ]
 })
@@ -66,11 +74,5 @@ export class CardSectionComponent implements OnInit {
             this._showExpanded = false;
             this.expanded = false;
         }
-        this.elementRef.nativeElement.style['overflow'] = 'visible';
     }
-
-    animationStart($event) {
-        this.elementRef.nativeElement.style['overflow'] = 'hidden';
-    }
-
 }
