@@ -31,7 +31,7 @@ export class ExamplesListwithlistsComponent {
   }
 
   ngOnInit() {
-    this.searchForUnits();
+    // this.searchForUnits();
   }
 
   get allChecked() {

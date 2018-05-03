@@ -10,12 +10,6 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
             state('void', style({
                 height: '0'
             })),
-            state('collapsed', style({
-                height: '0'
-            })),
-            state('expanded', style({
-                height: '*'
-            })),
             transition('* => expanded', [
                 style({height: 0, overflow: 'hidden'}),
                   animate('0.4s ease', style({
@@ -23,11 +17,24 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
                   }))
               ]),
             transition('* => collapsed', [
-              style({ overflow: 'hidden'}),
+                style({ overflow: 'hidden'}),
                 animate('0.4s ease', style({
                   height: 0
                 }))
             ])
+        ]),
+        trigger('animateChevron', [
+            state('void', style({
+                transform: 'rotate(0deg)'
+            })),
+            state('collapsed', style({
+                transform: 'rotate(0deg)'
+            })),
+            state('expanded', style({
+                transform: 'rotate(-180deg)'
+            })),
+            transition('* => expanded', [animate('0.4s ease')]),
+            transition('* => collapsed', [animate('0.4s ease')])
         ])
     ]
 })
