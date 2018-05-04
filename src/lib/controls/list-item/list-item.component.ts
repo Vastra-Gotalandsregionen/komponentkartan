@@ -52,23 +52,23 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
                 animate('400ms ease-in')
             )
         ]),
-        trigger('showContent', [
-            state('void', style({
-                height: '0'
-            })),
-            transition('* => true', [
-                style({height: 0, overflow: 'hidden'}),
-                  animate('600ms ease', style({
-                    height: '*'
-                  }))
-              ]),
-            transition('* => false', [
-                style({ overflow: 'hidden'}),
-                animate('0.6s ease', style({
-                    height: '0'
-                }))
-            ])
-        ])
+        // trigger('showContent', [
+        //     state('void', style({
+        //         height: '0'
+        //     })),
+        //     transition('* => true', [
+        //         style({height: 0, overflow: 'hidden'}),
+        //           animate('600ms ease', style({
+        //             height: '*'
+        //           }))
+        //       ]),
+        //     transition('* => false', [
+        //         style({ overflow: 'hidden'}),
+        //         animate('0.6s ease', style({
+        //             height: '0'
+        //         }))
+        //     ])
+        // ])
     ]
 })
 

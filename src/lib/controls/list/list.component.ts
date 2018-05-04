@@ -1,11 +1,78 @@
 import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 
 @Component({
     templateUrl: './list.component.html',
     moduleId: module.id,
-    selector: 'vgr-list'
+    selector: 'vgr-list',
+    animations: [
+         trigger('listAnimation', [
+            state('void', style({
+                height: '0'
+            })),
+            transition('* => small', [
+                style({height: 0, overflow: 'hidden'}),
+                  animate('600ms ease', style({
+                    height: '*'
+                  }))
+              ]),
+              transition('* => medium', [
+                style({height: 0, overflow: 'hidden'}),
+                  animate('400ms ease', style({
+                    height: '*'
+                  }))
+              ]),
+              transition('* => large', [
+                style({height: 0, overflow: 'hidden'}),
+                  animate('200ms ease', style({
+                    height: '*'
+                  }))
+              ]),
+            // transition('* => medium', [
+            //     style({ overflow: 'hidden'}),
+            //     animate('0.6s ease', style({
+            //         height: '0'
+            //     }))
+            // ])
+        ]),
+        // trigger('mediumListAnimation', [
+        //     state('void', style({
+        //         height: '0'
+        //     })),
+        //     transition('* => true', [
+        //         style({height: 0, overflow: 'hidden'}),
+        //           animate('400ms ease', style({
+        //             height: '*'
+        //           }))
+        //       ]),
+        //     transition('* => false', [
+        //         style({ overflow: 'hidden'}),
+        //         animate('0.4s ease', style({
+        //             height: '0'
+        //         }))
+        //     ])
+        // ]),
+        // trigger('largeListAnimation', [
+        //     state('void', style({
+        //         height: '0'
+        //     })),
+        //     transition('* => true', [
+        //         style({height: 0, overflow: 'hidden'}),
+        //           animate('200ms ease', style({
+        //             height: '*'
+        //           }))
+        //       ]),
+        //     transition('* => false', [
+        //         style({ overflow: 'hidden'}),
+        //         animate('0.2s ease', style({
+        //             height: '0'
+        //         }))
+        //     ])
+        // ])
+    ]
 })
 export class ListComponent implements AfterContentInit {
     @HostBinding('class.list') hasClass = true;
@@ -15,7 +82,18 @@ export class ListComponent implements AfterContentInit {
     @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
 
+    contentLoad: string;
+
     constructor() {
+        if (this.items.length <= 10) {
+            this.contentLoad = 'small';
+        }
+        if (this.items.length > 10 && this.items.length <= 100) {
+            this.contentLoad = 'medium';
+        }
+        if (this.items.length > 100) {
+            this.contentLoad = 'large';
+        }
     }
 
     ngAfterContentInit() {
@@ -25,7 +103,6 @@ export class ListComponent implements AfterContentInit {
             this.subscribeEvents();
         });
     }
-
     subscribeEvents() {
         if (!this.allowMultipleExpandedItems) {
             this.items.forEach(changedContainer => {
