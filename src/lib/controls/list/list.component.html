@@ -1,5 +1,5 @@
 <ng-content select="vgr-list-header"></ng-content>
-<div class="list__items" [@listAnimation]="contentLoad">
+<div class="list__items" [@loadContent]="loaded">
   <ng-content select="vgr-list-item"></ng-content>
   <!-- <ng-content select="vgr-list-item" *ngIf="items.length > 10 && items.length <= 100" [@mediumListAnimation]="contentLoad"></ng-content>
   <ng-content select="vgr-list-item" *ngIf="items.length > 100" [@largeListAnimation]="contentLoad"></ng-content> -->

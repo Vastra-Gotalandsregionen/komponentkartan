@@ -9,69 +9,17 @@ import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.compon
     moduleId: module.id,
     selector: 'vgr-list',
     animations: [
-         trigger('listAnimation', [
+        trigger('loadContent', [
             state('void', style({
-                height: '0'
+                height: '35px'
             })),
-            transition('* => small', [
+            transition('* => true', [
                 style({height: 0, overflow: 'hidden'}),
-                  animate('600ms ease', style({
-                    height: '*'
+                  animate('2s ease-in', style({
+                    height: '100vh',
                   }))
-              ]),
-              transition('* => medium', [
-                style({height: 0, overflow: 'hidden'}),
-                  animate('400ms ease', style({
-                    height: '*'
-                  }))
-              ]),
-              transition('* => large', [
-                style({height: 0, overflow: 'hidden'}),
-                  animate('200ms ease', style({
-                    height: '*'
-                  }))
-              ]),
-            // transition('* => medium', [
-            //     style({ overflow: 'hidden'}),
-            //     animate('0.6s ease', style({
-            //         height: '0'
-            //     }))
-            // ])
-        ]),
-        // trigger('mediumListAnimation', [
-        //     state('void', style({
-        //         height: '0'
-        //     })),
-        //     transition('* => true', [
-        //         style({height: 0, overflow: 'hidden'}),
-        //           animate('400ms ease', style({
-        //             height: '*'
-        //           }))
-        //       ]),
-        //     transition('* => false', [
-        //         style({ overflow: 'hidden'}),
-        //         animate('0.4s ease', style({
-        //             height: '0'
-        //         }))
-        //     ])
-        // ]),
-        // trigger('largeListAnimation', [
-        //     state('void', style({
-        //         height: '0'
-        //     })),
-        //     transition('* => true', [
-        //         style({height: 0, overflow: 'hidden'}),
-        //           animate('200ms ease', style({
-        //             height: '*'
-        //           }))
-        //       ]),
-        //     transition('* => false', [
-        //         style({ overflow: 'hidden'}),
-        //         animate('0.2s ease', style({
-        //             height: '0'
-        //         }))
-        //     ])
-        // ])
+              ])
+        ])
     ]
 })
 export class ListComponent implements AfterContentInit {
@@ -82,18 +30,9 @@ export class ListComponent implements AfterContentInit {
     @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
 
-    contentLoad: string;
+    loaded: boolean = false;
 
     constructor() {
-        if (this.items.length <= 10) {
-            this.contentLoad = 'small';
-        }
-        if (this.items.length > 10 && this.items.length <= 100) {
-            this.contentLoad = 'medium';
-        }
-        if (this.items.length > 100) {
-            this.contentLoad = 'large';
-        }
     }
 
     ngAfterContentInit() {
@@ -113,6 +52,9 @@ export class ListComponent implements AfterContentInit {
                 });
 
             });
+        }
+        if(this.items.length > 0){
+            this.loaded = true;
         }
 
         this.items.forEach((item, index) => {
