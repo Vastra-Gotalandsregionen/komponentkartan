@@ -15,7 +15,7 @@ import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.compon
             })),
             transition('* => true', [
                 style({height: 0, overflow: 'hidden'}),
-                  animate('2s ease-in', style({
+                  animate('0.4s ease-in', style({
                     height: '100vh',
                   }))
               ])

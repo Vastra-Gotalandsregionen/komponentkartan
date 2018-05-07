@@ -56,7 +56,7 @@
               <vgr-button [secondary]="true">Text</vgr-button>
               <span class="vgr-icon-calendar--green"></span>
             </div>
-            <vgr-table>
+            <vgr-table *ngIf="row.expanded">
               <vgr-table-header>
                 <vgr-table-header-column [width]="10">Header Column 1
                   <span class="vgr-icon-help"></span>
