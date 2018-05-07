@@ -1,6 +1,5 @@
 export { ActionPanelComponent } from './controls/action-panel/action-panel.component';
 export { ActionPanelJqeuryHelper } from './controls/action-panel/actionPanelJqueryHelper';
-
 export { TextareaComponent } from './controls/textarea/textarea.component';
 export { ButtonComponent } from './controls/button/button.component';
 export { CardComponent } from './controls/card/card.component';
@@ -53,12 +52,13 @@ export { ModalContentComponent } from './controls/modal/modal-content.component'
 export { ModalHeaderComponent } from './controls/modal/modal-header.component';
 export { ModalFooterComponent } from './controls/modal/modal-footer.component';
 export { CloseButtonComponent } from './controls/closeButton/closeButton.component';
-
 export { TableComponent } from './controls/table/table.component';
 export { TableRowColumnComponent } from './controls/table/table-row-column.component';
 export { TableHeaderColumnComponent } from './controls/table/table-header-column.component';
 export { TableRowComponent } from './controls/table/table-row.component';
 export { TableHeaderComponent } from './controls/table/table-header.component';
+export { FilterTagComponent } from './controls/filter-tag/filter-tag.component';
+export { FilterTagGroupComponent } from './controls/filter-tag/filter-tag-group.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';

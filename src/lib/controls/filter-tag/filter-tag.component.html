@@ -1,0 +1,7 @@
+<button #filtertag type="button" class="filter-tag noselect" role="button" (click)="onClick($event)" (keydown)="onKeydown($event)" tabindex="-1"
+    [attr.aria-disabled]="disabled" [ngClass]="{'button--disabled' : disabled, 'button--enabling' : reenabled, 'button--secondary': secondary}">
+    <span>
+        <ng-content></ng-content>
+    </span>
+    <span class="close-icon">&nbsp;</span>
+</button>

@@ -28,7 +28,6 @@ export class LockButtonComponent extends ButtonBaseComponent implements AfterVie
     }
 
     onClick(event: any): void {
-
         if (this.renderer) {
             this.renderer.invokeElementMethod(this.lockButton, 'focus');
         }
@@ -51,7 +50,7 @@ export class LockButtonComponent extends ButtonBaseComponent implements AfterVie
         this.lockChanged.emit(this.locked);
     }
 
-    keyPressed(event: KeyboardEvent): void {
+    onKeydown(event: KeyboardEvent): void {
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.onClick(event);
             event.preventDefault();

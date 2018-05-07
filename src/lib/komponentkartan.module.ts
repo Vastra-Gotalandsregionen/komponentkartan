@@ -91,7 +91,9 @@ import * as $ from 'jquery';
     type.TableHeaderComponent,
     type.TableRowComponent,
     type.TableComponent,
-    type.TextareaComponent
+    type.TextareaComponent,
+    type.FilterTagComponent,
+    type.FilterTagGroupComponent
   ],
   exports: [
     type.SafePipe,
@@ -155,7 +157,9 @@ import * as $ from 'jquery';
     type.TableHeaderColumnComponent,
     type.TableHeaderComponent,
     type.TableRowComponent,
-    type.TextareaComponent
+    type.TextareaComponent,
+    type.FilterTagComponent,
+    type.FilterTagGroupComponent
   ],
   providers: [
     type.ModalService,

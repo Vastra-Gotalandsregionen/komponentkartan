@@ -6,7 +6,7 @@ export abstract class ButtonBaseComponent {
     @Output() click = new EventEmitter();
 
     constructor() { }
-    keyPressed(event: KeyboardEvent): void {
+    onKeydown(event: KeyboardEvent): void {
         if (this.disabled) {
             return;
         }

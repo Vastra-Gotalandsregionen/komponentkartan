@@ -10,7 +10,7 @@ import { ButtonBaseComponent } from './button-base.component';
 
 @Component({
     moduleId: module.id,
-    template: `<div role="button" class="test-button" (click)="onClick($event)" (keydown)="keyPressed($event)">Test</div>`
+    template: `<div role="button" class="test-button" (click)="onClick($event)" (keydown)="onKeydown($event)">Test</div>`
 })
 export class TestButtonComponent extends ButtonBaseComponent { }
 
