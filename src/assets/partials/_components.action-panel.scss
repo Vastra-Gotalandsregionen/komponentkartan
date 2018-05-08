@@ -28,6 +28,9 @@
   &.action-panel--fast {
     transition: height 0.3s ease, box-shadow 0.3s ease;
   }
+  &.action-panel--noanimation {
+    transition:none;
+  }
 }
 
 .action-panel__content {

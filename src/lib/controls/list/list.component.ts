@@ -24,11 +24,14 @@ import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.compon
 })
 export class ListComponent implements AfterContentInit {
     @HostBinding('class.list') hasClass = true;
+    @HostBinding('class.list--new-item-added') moveHeader = false;
+    @HostBinding('class.animate')  animate = false;
     @Input() @HostBinding('class.list--inline') flexibleHeader: boolean;
     @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
     @Input() allowMultipleExpandedItems = false;
     @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
+    listlength: number = 0;
 
     loaded: boolean = false;
 
@@ -37,8 +40,20 @@ export class ListComponent implements AfterContentInit {
 
     ngAfterContentInit() {
         this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+        this.listlength = this.items.length;
         this.subscribeEvents();
-        this.items.changes.subscribe(() => {
+        this.items.changes.subscribe((changes) => {
+            if(changes.length === this.listlength + 1){
+                this.moveHeader = true;
+                setTimeout(()=>{
+                    this.animate = true;
+                    setTimeout(()=>{
+                        this.animate = false;
+                        this.moveHeader = false;
+                    },1600);
+                },300);
+                this.listlength++;
+            }
             this.subscribeEvents();
         });
     }
