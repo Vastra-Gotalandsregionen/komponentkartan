@@ -11,7 +11,7 @@
     </div>
   </vgr-page-header>
   <vgr-action-panel (expandedChanged)="onPanelExpandedChanged($event)" [showCloseButton]="!addNewUnit && showActionPanel" [expanded]="showActionPanel"
-    [title]="'Lägg till ny enhet'" expansionSpeed="noanimation">
+    [title]="'Lägg till ny enhet'" expansionSpeed="slow">
     <div *ngIf=!addNewUnit>
       <div class="row-layout">
         <label style="width: 150px">Välj enhet</label>
@@ -130,28 +130,28 @@
         <vgr-card-section [title]=" 'Adressinformation'" [readonly]="true" [expanded]="true">
           <vgr-title-value-layout>
             <vgr-title-value [title]=" 'Kommun'" [slim]="newCardLocked">
-              <span>{{newUnit.details.kommun}}</span>
+              <span>{{newUnit?.details.kommun}}</span>
             </vgr-title-value>
             <vgr-title-value [title]=" 'Kommunkod'" [slim]="newCardLocked">
-              <span>{{newUnit.details.kommunkod}}</span>
+              <span>{{newUnit?.details.kommunkod}}</span>
             </vgr-title-value>
             <vgr-title-value [title]=" 'Postadress'" [slim]="true">
-              <span>{{newUnit.details.postadress_gata}}
-                <br> {{newUnit.details.postadress_postnummer}}
-                <br> {{newUnit.details.postadress_stad}}
+              <span>{{newUnit?.details.postadress_gata}}
+                <br> {{newUnit?.details.postadress_postnummer}}
+                <br> {{newUnit?.details.postadress_stad}}
               </span>
             </vgr-title-value>
             <vgr-title-value [title]=" 'Besöksadress'" [slim]="true">
-              <span>{{newUnit.details.besoksadress_gata}}
-                <br> {{newUnit.details.besoksadress_postnummer}}
-                <br> {{newUnit.details.besoksadress_stad}}
+              <span>{{newUnit?.details.besoksadress_gata}}
+                <br> {{newUnit?.details.besoksadress_postnummer}}
+                <br> {{newUnit?.details.besoksadress_stad}}
               </span>
             </vgr-title-value>
             <vgr-title-value [title]=" 'Geokod (PT90)'" [slim]="newCardLocked">
-              <span>{{newUnit.details.geokod}}</span>
+              <span>{{newUnit?.details.geokod}}</span>
             </vgr-title-value>
             <vgr-title-value [title]=" 'Telefon'" [slim]="newCardLocked">
-              <span>{{newUnit.details.telefon}}</span>
+              <span>{{newUnit?.details.telefon}}</span>
             </vgr-title-value>
           </vgr-title-value-layout>
         </vgr-card-section>

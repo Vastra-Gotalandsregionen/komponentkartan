@@ -132,6 +132,7 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = 'auto';
             this.elementRef.nativeElement.style.overflow = 'visible';
+            this.elementRef.nativeElement.style.opacity = 1;
         }, this.animationDelayMs);
     }
 
@@ -141,6 +142,7 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = '0px';
             this.elementRef.nativeElement.style.overflow = 'hidden';
+            this.elementRef.nativeElement.style.opacity = 0;
             this.expandedChanged.emit(false);
             this._expanded = false;
             this.collapsed = true;
