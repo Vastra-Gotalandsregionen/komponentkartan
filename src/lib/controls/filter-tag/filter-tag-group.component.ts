@@ -3,11 +3,11 @@ import { FilterTagComponent } from './filter-tag.component';
 
 @Component({
     selector: 'vgr-filter-tag-group',
+    moduleId: module.id,
     templateUrl: './filter-tag-group.component.html'
 })
 export class FilterTagGroupComponent implements AfterContentInit {
 
-    selectedIndex = 0;
     @ContentChildren(FilterTagComponent) filterTags: QueryList<FilterTagComponent>;
 
     constructor(private renderer: Renderer) { }
@@ -16,26 +16,23 @@ export class FilterTagGroupComponent implements AfterContentInit {
         if (this.filterTags.length) {
             this.renderer.setElementAttribute(this.filterTags.first.filtertag.nativeElement, 'tabindex', '0');
         }
-    }
 
-    @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
-        if (!this.filterTags.length) {
-            return;
-        }
+        this.filterTags.forEach((x, i) => {
+            x.previous.subscribe(() => {
+                if (i > 0) {
+                    this.filterTags.toArray()[i - 1].setFocus();
+                } else {
+                    this.filterTags.last.setFocus();
+                }
+            });
 
-        if (event.keyCode === 37 || event.keyCode === 38) { // Arrow Left, Arrow Up
-            event.preventDefault();
-            if (this.selectedIndex > 0) {
-                this.selectedIndex--;
-                this.filterTags.toArray()[this.selectedIndex].setFocus();
-            }
-        }
-        if (event.keyCode === 39 || event.keyCode === 40) { // Arrow Right, Arrow Down
-            event.preventDefault();
-            if (this.selectedIndex < this.filterTags.length - 1) {
-                this.selectedIndex++;
-                this.filterTags.toArray()[this.selectedIndex].setFocus();
-            }
-        }
+            x.next.subscribe(() => {
+                if (i < this.filterTags.length - 1) {
+                    this.filterTags.toArray()[i + 1].setFocus();
+                } else {
+                    this.filterTags.first.setFocus();
+                }
+            });
+        });
     }
 }
