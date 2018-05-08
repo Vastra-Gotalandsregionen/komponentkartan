@@ -46,6 +46,11 @@ export class CardSectionComponent implements OnInit {
     @Input() subtitle: string;
     @Input() set expanded(value: boolean) {
         this._expanded = value;
+        if (value) {
+            this.state = 'expanded';
+        } else {
+            this.state = 'collapsed';
+        }
     }
     get expanded(): boolean {
         return this._expanded;
