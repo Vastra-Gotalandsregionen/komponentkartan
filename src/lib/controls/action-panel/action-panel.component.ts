@@ -37,17 +37,26 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     @Input() showCloseButton: boolean;
 
     @Input() title: string;
-    @Input() expansionSpeed: 'slow' | 'normal' | 'fast';
+    @Input() expansionSpeed: 'slow' | 'normal' | 'fast' | 'noanimation';
     get animationDelayMs(): number {
-        return this.expansionSpeed === 'slow' ? 1000 :
-            this.expansionSpeed === 'fast' ? 300 : 600;
-
+        if(this.expansionSpeed === 'slow'){
+            return 1000;
+        }else if(this.expansionSpeed === 'fast'){
+            return 300;
+        }else if(this.expansionSpeed === 'noanimation'){
+            return 0;
+        }else{
+            return 600;
+        }
     }
     @HostBinding('class.action-panel--slow') get slow() {
         return this.expansionSpeed === 'slow';
     }
     @HostBinding('class.action-panel--fast') get fast() {
         return this.expansionSpeed === 'fast';
+    }
+    @HostBinding('class.action-panel--noanimation') get noanimation() {
+        return this.expansionSpeed === 'noanimation';
     }
 
     @Input() set expanded(expandedValue: boolean) {
@@ -104,6 +113,7 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         if (this.notification && this.notification.type === NotificationType.Permanent) {
             this.showNotification();
         }
+        
     }
 
     showNotification() {

@@ -15,6 +15,30 @@
   }
 }
 
+vgr-list.list--new-item-added {
+  vgr-list-header {
+    //transform: translateY(45px);
+    transform: translateY(90px);
+  }
+  .list__items vgr-list-item:first-child {
+    transform: translateY(-35px);
+    margin-bottom: 17px;
+  }
+  &.animate {
+    vgr-list-header {
+      transition: all .5s;
+      transform: translateY(0px);
+      transition-delay: 1s;
+    }
+    .list__items vgr-list-item:first-child {
+      transition: all .5s;
+      transition-delay: 1s;
+      transform: translateY(0px);
+      margin-bottom: 0px;
+    }
+  }
+}
+
 .list__header {
   background-color: $background-color--content;
   z-index: $layer-one;
@@ -412,6 +436,11 @@ vgr-list-column-trashcan {
   .list__header {
     position: absolute;
     top: 0px;
+  }
+  vgr-list.list--new-item-added {
+    vgr-list-header {
+      transform: translateY(84px);
+    }
   }
 }
 
