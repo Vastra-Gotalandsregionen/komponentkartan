@@ -3,36 +3,56 @@ import { FilterTagComponent } from './filter-tag.component';
 
 @Component({
     selector: 'vgr-filter-tag-group',
-    moduleId: module.id,
     templateUrl: './filter-tag-group.component.html'
 })
 export class FilterTagGroupComponent implements AfterContentInit {
 
     @ContentChildren(FilterTagComponent) filterTags: QueryList<FilterTagComponent>;
+    filterTagSubscriptions = [];
 
     constructor(private renderer: Renderer) { }
 
     ngAfterContentInit() {
-        if (this.filterTags.length) {
-            this.renderer.setElementAttribute(this.filterTags.first.filtertag.nativeElement, 'tabindex', '0');
-        }
+        this.setFilterTagTabIndexes();
+        this.addFilterTagSubscriptions();
+
+        this.filterTags.changes.subscribe(
+            _ => {
+                this.setFilterTagTabIndexes();
+                this.addFilterTagSubscriptions();
+            }
+        );
+    }
+
+    setFilterTagTabIndexes() {
+        this.filterTags.forEach((x, i) => {
+            const tabindex = i ? '-1' : '0';
+            this.renderer.setElementAttribute(x.filtertag.nativeElement, 'tabindex', tabindex);
+        });
+    }
+
+    addFilterTagSubscriptions() {
+        this.filterTagSubscriptions.forEach(x => x.unsubscribe());
+        this.filterTagSubscriptions = [];
 
         this.filterTags.forEach((x, i) => {
-            x.previous.subscribe(() => {
+            const previousSubscription = x.previous.subscribe(() => {
                 if (i > 0) {
                     this.filterTags.toArray()[i - 1].setFocus();
                 } else {
                     this.filterTags.last.setFocus();
                 }
             });
+            this.filterTagSubscriptions.push(previousSubscription);
 
-            x.next.subscribe(() => {
+            const nextSubscription = x.next.subscribe(() => {
                 if (i < this.filterTags.length - 1) {
                     this.filterTags.toArray()[i + 1].setFocus();
                 } else {
                     this.filterTags.first.setFocus();
                 }
             });
+            this.filterTagSubscriptions.push(nextSubscription);
         });
     }
 }

@@ -3,7 +3,6 @@ import { ButtonBaseComponent } from '../button-base/button-base.component';
 
 @Component({
     selector: 'vgr-filter-tag',
-    moduleId: module.id,
     templateUrl: './filter-tag.component.html'
 })
 export class FilterTagComponent extends ButtonBaseComponent {
