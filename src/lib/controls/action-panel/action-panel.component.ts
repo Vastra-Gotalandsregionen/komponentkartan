@@ -39,13 +39,13 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     @Input() title: string;
     @Input() expansionSpeed: 'slow' | 'normal' | 'fast' | 'noanimation';
     get animationDelayMs(): number {
-        if(this.expansionSpeed === 'slow'){
+        if (this.expansionSpeed === 'slow') {
             return 1000;
-        }else if(this.expansionSpeed === 'fast'){
+        } else if (this.expansionSpeed === 'fast') {
             return 300;
-        }else if(this.expansionSpeed === 'noanimation'){
+        } else if (this.expansionSpeed === 'noanimation') {
             return 0;
-        }else{
+        } else {
             return 600;
         }
     }
@@ -60,6 +60,8 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     }
 
     @Input() set expanded(expandedValue: boolean) {
+        //this.elementRef.nativeElement.style.opacity = 0;
+
         if (expandedValue && !this._expanded) {
             this.expand();
         } else if (!expandedValue && this._expanded) {
@@ -113,7 +115,6 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         if (this.notification && this.notification.type === NotificationType.Permanent) {
             this.showNotification();
         }
-        
     }
 
     showNotification() {
@@ -132,20 +133,18 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = 'auto';
             this.elementRef.nativeElement.style.overflow = 'visible';
-            this.elementRef.nativeElement.style.opacity = 1;
         }, this.animationDelayMs);
     }
 
     private collapse(collapsingNotification?: NotificationType) {
         this.updateActualContentHeight();
         this.elementRef.nativeElement.style.height = this.actualContentHeight;
+        this._expanded = false;
+        this.collapsed = true;
+        this.expandedChanged.emit(false);
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = '0px';
             this.elementRef.nativeElement.style.overflow = 'hidden';
-            this.elementRef.nativeElement.style.opacity = 0;
-            this.expandedChanged.emit(false);
-            this._expanded = false;
-            this.collapsed = true;
         }, 50);
     }
 
