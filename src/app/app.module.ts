@@ -1,10 +1,9 @@
 // Core
 import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID } from '@angular/core';
-import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// Core
 import { appRoutes } from './routes';
 
 // Komponentkartan
@@ -115,7 +114,7 @@ import { TableComponent } from './table/table.component';
     ],
     imports: [
         KomponentkartanModule,
-        BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
         HighlightJsModule,
