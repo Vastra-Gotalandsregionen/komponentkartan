@@ -65,7 +65,7 @@ describe('[ListComponent]', () => {
       });
     });
 
-    describe('if focus is on the first list-item header', () => {
+    describe('and focus is on the first list-item header', () => {
       beforeEach(() => {
         spyOn(childItem3, 'setFocusOnRow').and.callThrough();
         listComponent.setFocusOnPreviousRow(0);
@@ -80,7 +80,7 @@ describe('[ListComponent]', () => {
       });
     });
 
-    describe('if focus is on the second list-item header', () => {
+    describe('and focus is on the second list-item header', () => {
       beforeEach(() => {
         spyOn(childItem1, 'setFocusOnRow');
         listComponent.setFocusOnPreviousRow(1);
@@ -95,7 +95,7 @@ describe('[ListComponent]', () => {
       });
     });
 
-    describe('if focus is on the second item list-item header', () => {
+    describe('and focus is on the second item list-item header', () => {
       beforeEach(() => {
         spyOn(childItem3, 'setFocusOnRow');
         listComponent.setFocusOnNextRow(1);
@@ -108,7 +108,7 @@ describe('[ListComponent]', () => {
       });
     });
 
-    describe('if focus is on the last item list-item header', () => {
+    describe('and focus is on the last item list-item header', () => {
       beforeEach(() => {
         spyOn(childItem1, 'setFocusOnRow');
         listComponent.setFocusOnNextRow(2);
@@ -121,7 +121,7 @@ describe('[ListComponent]', () => {
       });
     });
 
-    describe('if focus is on the last item list-item content and item is not collapsed', () => {
+    describe('and focus is on the last item list-item content and item is not collapsed', () => {
       beforeEach(() => {
         spyOn(listComponent, 'setFocusOnPreviousRowContent').and.callThrough();
         spyOn(childItem1, 'setFocusOnRow');

@@ -43,11 +43,11 @@ export class ListComponent implements AfterContentInit {
         this.listlength = this.items.length;
         this.subscribeEvents();
         this.items.changes.subscribe((changes) => {
-            if(changes.length === this.listlength + 1){
+            if (changes.length === this.listlength + 1) {
                 this.moveHeader = true;
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.moveHeader = false;
-                },1600);
+                }, 1600);
                 this.listlength++;
             }
             this.subscribeEvents();
@@ -64,7 +64,7 @@ export class ListComponent implements AfterContentInit {
 
             });
         }
-        if(this.items.length > 0){
+        if (this.items.length > 0) {
             this.loaded = true;
         }
 
@@ -78,7 +78,6 @@ export class ListComponent implements AfterContentInit {
         });
     }
 
-    // TODO: skapa test
     setFocusOnPreviousRow(index: number): any {
         if (index === 0) {
             this.items.toArray()[this.items.toArray().length - 1].setFocusOnRow();
@@ -86,8 +85,6 @@ export class ListComponent implements AfterContentInit {
             this.items.toArray()[index - 1].setFocusOnRow();
         }
     }
-
-    // TODO: skapa test
     setFocusOnNextRow(index: number) {
         if (index + 1 === this.items.toArray().length) {
             this.items.toArray()[0].setFocusOnRow();
@@ -96,7 +93,6 @@ export class ListComponent implements AfterContentInit {
         }
     }
 
-    // TODO: skapa test
     setFocusOnPreviousRowContent(item: ListItemComponent) {
         if (!item.collapsed) {
             item.setFocusOnRow();
