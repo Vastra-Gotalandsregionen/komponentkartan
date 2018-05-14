@@ -6,19 +6,12 @@
   border-top: solid 7px #314152;
   border-radius: 50%;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  animation: spin 1s linear infinite;
   &.loader--small {
     width: 22px;
     height: 22px;
     border: solid 4px #dbdbdb;
     border-top: solid 4px #314152;
-  }
-  .loader--visible & {
-    opacity: 1;
-    transition: opacity 0.8s ease;
-  }
-  .loader--spinning & {
-    animation: spin 1s linear infinite;
   }
 }
 
