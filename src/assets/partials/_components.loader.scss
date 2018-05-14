@@ -15,8 +15,7 @@
   }
   .loader--visible & {
     opacity: 1;
-    transition: opacity 0.4s ease;
-    transition-delay: 0.1s;
+    transition: opacity 0.8s ease;
   }
   .loader--spinning & {
     animation: spin 1s linear infinite;
