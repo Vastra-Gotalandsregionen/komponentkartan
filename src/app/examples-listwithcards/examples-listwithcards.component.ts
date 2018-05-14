@@ -604,10 +604,9 @@ export class ExamplesListwithcardsComponent implements OnInit {
   onNewUnitSave() {
     this.submitted = true;
 
-    /*/ TODO: Stoppa tillbaka innan du är färdig!
     if (!this.privateOwnerForm.valid || !this.newUnitForm.valid) {
       return;
-    }*/
+    }
 
     this.newUnit.details.avtalskod = this.newUnitForm.controls.avtalskod.value;
 

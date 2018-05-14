@@ -15,28 +15,37 @@
   }
 }
 
+$animation-time: 1s;
 vgr-list.list--new-item-added {
   vgr-list-header {
-    //transform: translateY(45px);
     transform: translateY(90px);
+    animation-name: animate-list-header;
+    animation-duration: $animation-time;
+    animation-fill-mode: forwards;
+    animation-delay: $animation-time;
+
   }
   .list__items vgr-list-item:first-child {
+    opacity: 0;
     transform: translateY(-35px);
     margin-bottom: 17px;
+
+    animation-name: animate-new-row;
+    animation-duration: $animation-time * 2;
+    animation-fill-mode: forwards;
+    animation-delay: 0s;
   }
-  &.animate {
-    vgr-list-header {
-      transition: all .5s;
-      transform: translateY(0px);
-      transition-delay: 1s;
-    }
-    .list__items vgr-list-item:first-child {
-      transition: all .5s;
-      transition-delay: 1s;
-      transform: translateY(0px);
-      margin-bottom: 0px;
-    }
-  }
+}
+
+@keyframes animate-new-row {
+  0%   { opacity: 0; margin-bottom: 17px; }
+  50%  { transform: translateY(-35px); opacity: 1; margin-bottom: 17px; }
+  100% { transform: translateY(0px); opacity: 1; margin-bottom: 0px; }
+}
+
+@keyframes animate-list-header {
+  0%   { transform: translateY(90px); }
+  100% { transform: translateY(0px); }
 }
 
 .list__header {
