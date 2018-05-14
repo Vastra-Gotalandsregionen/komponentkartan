@@ -84,7 +84,7 @@
     background-color: $text-color--light;
     @extend .color--primary;
     @extend .border-color--primary;
-    line-height: calc(#{$component-height} - 1px); // To adjust to border
+    line-height: calc(#{$component-height} - 2px); // To adjust to border
     border-width: 1px;
     border-style: solid;
   }

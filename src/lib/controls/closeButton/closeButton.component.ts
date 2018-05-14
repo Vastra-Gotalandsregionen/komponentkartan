@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { ButtonBaseComponent } from '../button-base/button-base.component';
+import { ButtonBase } from '../button-base/button-base';
 
 @Component({
     selector: 'vgr-close-button',
-    moduleId: module.id,
     templateUrl: './closeButton.component.html'
 })
-export class CloseButtonComponent extends ButtonBaseComponent {
+export class CloseButtonComponent extends ButtonBase {
     label = 'stäng';
 }

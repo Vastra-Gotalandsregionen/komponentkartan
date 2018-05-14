@@ -1,18 +1,16 @@
-﻿
-
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+﻿import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { DebugElement, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonBaseComponent } from './button-base.component';
+import { ButtonBase } from './button-base';
 
 @Component({
     moduleId: module.id,
     template: `<div role="button" class="test-button" (click)="onClick($event)" (keydown)="onKeydown($event)">Test</div>`
 })
-export class TestButtonComponent extends ButtonBaseComponent { }
+export class TestButtonComponent extends ButtonBase { }
 
 describe('[ButtonBaseComponent - angular]', () => {
     let component: TestButtonComponent;

@@ -1,59 +1,38 @@
-import { Component, Input, EventEmitter, Output, HostBinding, Renderer, ElementRef, AfterViewInit } from '@angular/core';
-import { ButtonBaseComponent } from '../button-base/button-base.component';
+import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/core';
+import { ButtonBase } from '../button-base/button-base';
 
 @Component({
-    selector: 'vgr-lock-button',
-    moduleId: module.id,
-    templateUrl: './lockButton.component.html'
+  selector: 'vgr-lock-button',
+  templateUrl: './lockButton.component.html'
 })
-export class LockButtonComponent extends ButtonBaseComponent implements AfterViewInit {
-    @Input() unlocked: boolean;
-    @Output() lockChanged = new EventEmitter<boolean>();
+export class LockButtonComponent extends ButtonBase {
+  @Input() unlocked: boolean;
+  @Output() lockChanged = new EventEmitter<boolean>();
 
-    public lockButton: any;
+  get label(): string {
+    return this.unlocked ? 'lås' : 'lås upp';
+  }
+  get locked(): boolean {
+    return !this.unlocked;
+  }
 
-    constructor(private renderer: Renderer, private elementRef: ElementRef) {
-        super();
+  toggleLocked() {
+    if (!this.disabled) {
+      if (this.unlocked) {
+        this.lock();
+      } else {
+        this.unlock();
+      }
     }
+  }
 
-    get label(): string {
-        return this.unlocked ? 'lås' : 'lås upp';
-    }
-    get locked(): boolean {
-        return !this.unlocked;
-    }
+  lock() {
+    this.unlocked = false;
+    this.lockChanged.emit(this.locked);
+  }
 
-    ngAfterViewInit() {
-        this.lockButton = this.elementRef.nativeElement.querySelector('.lock-button');
-    }
-
-    onClick(event: any): void {
-        if (this.renderer) {
-            this.renderer.invokeElementMethod(this.lockButton, 'focus');
-        }
-        if (!this.disabled) {
-            if (this.unlocked) {
-                this.lock();
-            } else {
-                this.unlock();
-            }
-        }
-    }
-
-    lock() {
-        this.unlocked = false;
-        this.lockChanged.emit(this.locked);
-    }
-
-    unlock() {
-        this.unlocked = true;
-        this.lockChanged.emit(this.locked);
-    }
-
-    onKeydown(event: KeyboardEvent): void {
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            this.onClick(event);
-            event.preventDefault();
-        }
-    }
+  unlock() {
+    this.unlocked = true;
+    this.lockChanged.emit(this.locked);
+  }
 }
