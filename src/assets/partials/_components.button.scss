@@ -10,92 +10,17 @@
   }
 }
 
-.button {
-  height: $component-height;
-  display: inline-block;
-}
-
-.button__base {
-  @extend .background-color--primary;
-  height: $component-height;
-  line-height: $component-height;
-  position: relative;
-  border-radius: 1px;
-  border: 0;
-  box-sizing: border-box;
-  color: $text-color--light;
-  text-align: center;
-  cursor: pointer;
+.text-button {
+  @extend .button__base;
+  font-size: $font-size--small;
+  font-family: $font-family;
+  height: 30px;
   min-width: 87px;
   padding-left: 18px;
   padding-right: 18px;
   &.button--secondary {
     padding-left: 17px;
     padding-right: 17px;
-  }
-  &:hover:not(.button--disabled),
-  &:focus:not(.button--disabled) {
-    .button__focus-line {
-      visibility: visible;
-    }
-    &.button--secondary {
-      @extend .background-color--primary;
-      color: $text-color--light;
-      transition: background-color 0.5s ease, color 0.5s ease;
-    }
-  }
-  &:focus {
-    box-shadow: none;
-    outline: $focus-outline-width solid $focus-color;
-  }
-  &:active:not(.button--disabled) {
-    height: 28px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-    transform: scaleX(0.96);
-    outline: 0;
-    .button__focus-line {
-      background-color: transparentize($secondary-color--default, 0.4);
-    }
-  }
-  &.button--disabled {
-    background-color: $secondary-color--default;
-    cursor: default;
-    &.button--secondary {
-      border-color: $secondary-color--default;
-      color: $secondary-color--default;
-      border-width: 1px;
-      border-style: solid;
-      background-color: $text-color--light;
-    }
-  }
-  .button__focus-line {
-    visibility: hidden;
-    height: 4px;
-    width: 100%;
-    @extend .background-color--secondary;
-    position: absolute;
-    z-index: $layer-two;
-    bottom: 0;
-    left: 0;
-    border-bottom-left-radius: 1px;
-    border-bottom-right-radius: 1px;
-  }
-  &.button--secondary {
-    background-color: $text-color--light;
-    @extend .color--primary;
-    @extend .border-color--primary;
-    line-height: calc(#{$component-height} - 2px); // To adjust to border
-    border-width: 1px;
-    border-style: solid;
-  }
-}
-
-.text-button {
-  @extend .button__base;
-  font-size: $font-size--small;
-  font-family: $font-family;
-  span {
-    position: relative;
   }
 }
 

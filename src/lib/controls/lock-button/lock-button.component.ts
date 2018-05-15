@@ -1,11 +1,11 @@
 import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/core';
-import { ButtonBase } from '../button-base/button-base';
 
 @Component({
   selector: 'vgr-lock-button',
-  templateUrl: './lockButton.component.html'
+  templateUrl: './lock-button.component.html'
 })
-export class LockButtonComponent extends ButtonBase {
+export class LockButtonComponent {
+  @Input() disabled = false;
   @Input() unlocked: boolean;
   @Output() lockChanged = new EventEmitter<boolean>();
 
@@ -34,5 +34,11 @@ export class LockButtonComponent extends ButtonBase {
   unlock() {
     this.unlocked = true;
     this.lockChanged.emit(this.locked);
+  }
+
+  checkDisabled(event: MouseEvent) {
+    if (this.disabled) {
+      event.stopPropagation();
+    }
   }
 }

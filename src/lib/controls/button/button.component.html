@@ -1,6 +1,6 @@
-﻿<div (click)="checkDisabled($event)">
-  <button type="{{type}}" [disabled]="disabled" class="text-button noselect" [attr.aria-disabled]="disabled" [ngClass]="{'button--disabled' : disabled, 'button--enabling' : reenabled, 'button--secondary': secondary}">
+﻿<span (click)="checkDisabled($event)">
+  <button type="{{type}}" class="text-button noselect" [attr.aria-disabled]="disabled" [ngClass]="{'button--disabled' : disabled, 'button--enabling' : reenabled, 'button--secondary': secondary}">
     <ng-content></ng-content>
     <div *ngIf="!secondary" class="button__focus-line"></div>
   </button>
-</div>
+</span>

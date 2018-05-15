@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LockButtonComponent } from '../../controls/lockButton/lockButton.component';
+import { LockButtonComponent } from '../../controls/lock-button/lock-button.component';
 
 
 

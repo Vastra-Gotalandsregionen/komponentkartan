@@ -1,0 +1,69 @@
+.button__base {
+  @extend .background-color--primary;
+  position: relative;
+  height: $component-height;
+  line-height: $component-height;
+  padding: 0;
+  border-radius: 1px;
+  border: 0;
+  box-sizing: border-box;
+  color: $text-color--light;
+  vertical-align: top;
+  text-align: center;
+  cursor: pointer;
+  &:hover:not(.button--disabled),
+  &:focus:not(.button--disabled) {
+    .button__focus-line {
+      visibility: visible;
+    }
+    &.button--secondary {
+      @extend .background-color--primary;
+      color: $text-color--light;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+  }
+  &:focus {
+    box-shadow: none;
+    outline: $focus-outline-width solid $focus-color;
+  }
+  &:active:not(.button--disabled) {
+    height: 28px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+    transform: scaleX(0.96);
+    outline: 0;
+    .button__focus-line {
+      background-color: transparentize($secondary-color--default, 0.4);
+    }
+  }
+  &.button--disabled {
+    background-color: $secondary-color--default;
+    cursor: default;
+    &.button--secondary {
+      border-color: $secondary-color--default;
+      color: $secondary-color--default;
+      border-width: 1px;
+      border-style: solid;
+      background-color: $text-color--light;
+    }
+  }
+  &.button--secondary {
+    background-color: $text-color--light;
+    @extend .color--primary;
+    @extend .border-color--primary;
+    line-height: $component-height - 2px; // To adjust to border
+    border-width: 1px;
+    border-style: solid;
+  }
+  .button__focus-line {
+    visibility: hidden;
+    height: 4px;
+    width: 100%;
+    @extend .background-color--secondary;
+    position: absolute;
+    z-index: $layer-two;
+    bottom: 0;
+    left: 0;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+  }
+}

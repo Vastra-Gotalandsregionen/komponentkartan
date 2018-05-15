@@ -1,11 +1,11 @@
 ﻿import { Component, Input, OnChanges } from '@angular/core';
-import { ButtonBase } from '../button-base/button-base';
 
 @Component({
   selector: 'vgr-button',
   templateUrl: './button.component.html'
 })
-export class ButtonComponent extends ButtonBase implements OnChanges {
+export class ButtonComponent implements OnChanges {
+  @Input() disabled = false;
   @Input() secondary = false;
   @Input() type = 'button';
   lastDisabledStatus: boolean;
@@ -14,5 +14,11 @@ export class ButtonComponent extends ButtonBase implements OnChanges {
   ngOnChanges() {
     this.reenabled = this.lastDisabledStatus === true && this.disabled === false;
     this.lastDisabledStatus = this.disabled;
+  }
+
+  checkDisabled(event: MouseEvent) {
+    if (this.disabled) {
+      event.stopPropagation();
+    }
   }
 }

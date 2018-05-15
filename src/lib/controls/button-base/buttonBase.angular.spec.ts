@@ -12,7 +12,7 @@ import { ButtonBase } from './button-base';
 })
 export class TestButtonComponent extends ButtonBase { }
 
-describe('[ButtonBaseComponent - angular]', () => {
+describe('[ButtonBase - angular]', () => {
     let component: TestButtonComponent;
     let fixture: ComponentFixture<TestButtonComponent>;
     let rootElement: DebugElement;

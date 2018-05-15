@@ -1,20 +1,18 @@
-import { Component, Output, EventEmitter, ViewChild, ElementRef, Renderer, HostListener } from '@angular/core';
-import { ButtonBase } from '../button-base/button-base';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, Renderer } from '@angular/core';
 
 @Component({
   selector: 'vgr-filter-tag',
   templateUrl: './filter-tag.component.html'
 })
-export class FilterTagComponent extends ButtonBase {
+export class FilterTagComponent {
+  @Input() disabled = false;
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
+  @Output() click = new EventEmitter();
   @ViewChild('filtertag') filtertag: ElementRef;
 
-  constructor(private renderer: Renderer) {
-    super();
-  }
+  constructor(private renderer: Renderer) {}
 
-  @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'ArrowLeft' || event.key === 'Left' || event.key === 'ArrowUp' || event.key === 'Up') {
       this.previous.emit();
@@ -25,5 +23,15 @@ export class FilterTagComponent extends ButtonBase {
 
   setFocus() {
     this.renderer.invokeElementMethod(this.filtertag.nativeElement, 'focus');
+  }
+
+  emitClick() {
+    this.click.emit();
+  }
+
+  checkDisabled(event: MouseEvent) {
+    if (this.disabled) {
+      event.stopPropagation();
+    }
   }
 }

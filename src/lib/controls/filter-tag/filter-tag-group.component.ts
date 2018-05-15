@@ -1,14 +1,17 @@
-import { Component, AfterContentInit, HostListener, ContentChildren, QueryList, Renderer } from '@angular/core';
+import { Component, AfterContentInit, OnDestroy, ContentChildren, QueryList, Renderer } from '@angular/core';
 import { FilterTagComponent } from './filter-tag.component';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'vgr-filter-tag-group',
   templateUrl: './filter-tag-group.component.html'
 })
-export class FilterTagGroupComponent implements AfterContentInit {
+export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
 
   @ContentChildren(FilterTagComponent) filterTags: QueryList<FilterTagComponent>;
   filterTagSubscriptions = [];
+  lastSelectedIndex: number;
+  private ngUnsubscribe = new Subject();
 
   constructor(private renderer: Renderer) { }
 
@@ -16,12 +19,20 @@ export class FilterTagGroupComponent implements AfterContentInit {
     this.setFilterTagTabIndexes();
     this.addFilterTagSubscriptions();
 
-    this.filterTags.changes.subscribe(
+    this.filterTags.changes
+    .takeUntil(this.ngUnsubscribe)
+    .subscribe(
       _ => {
         this.setFilterTagTabIndexes();
+        this.setFilterTagFocus();
         this.addFilterTagSubscriptions();
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   setFilterTagTabIndexes() {
@@ -31,12 +42,24 @@ export class FilterTagGroupComponent implements AfterContentInit {
     });
   }
 
+  setFilterTagFocus() {
+    if (this.lastSelectedIndex >= 0) {
+      if (this.lastSelectedIndex < this.filterTags.length) {
+        this.filterTags.toArray()[this.lastSelectedIndex].setFocus();
+      } else if (this.filterTags.length) {
+        this.filterTags.last.setFocus();
+      }
+    }
+  }
+
   addFilterTagSubscriptions() {
     this.filterTagSubscriptions.forEach(x => x.unsubscribe());
     this.filterTagSubscriptions = [];
 
     this.filterTags.forEach((x, i) => {
-      const previousSubscription = x.previous.subscribe(() => {
+      const previousSubscription = x.previous
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(() => {
         if (i > 0) {
           this.filterTags.toArray()[i - 1].setFocus();
         } else {
@@ -45,7 +68,9 @@ export class FilterTagGroupComponent implements AfterContentInit {
       });
       this.filterTagSubscriptions.push(previousSubscription);
 
-      const nextSubscription = x.next.subscribe(() => {
+      const nextSubscription = x.next
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(() => {
         if (i < this.filterTags.length - 1) {
           this.filterTags.toArray()[i + 1].setFocus();
         } else {
@@ -53,6 +78,13 @@ export class FilterTagGroupComponent implements AfterContentInit {
         }
       });
       this.filterTagSubscriptions.push(nextSubscription);
+
+      const clickSubscription = x.click
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(() => {
+        this.lastSelectedIndex = i;
+      });
+      this.filterTagSubscriptions.push(clickSubscription);
     });
   }
 }

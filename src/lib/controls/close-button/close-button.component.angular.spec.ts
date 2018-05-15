@@ -6,9 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CloseButtonComponent } from '../../controls/closeButton/closeButton.component';
-
-
+import { CloseButtonComponent } from '../../controls/close-button/close-button.component';
 
 describe('CloseButtonComponent', () => {
     let component: CloseButtonComponent;

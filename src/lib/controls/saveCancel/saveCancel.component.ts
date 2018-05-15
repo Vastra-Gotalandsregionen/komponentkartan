@@ -1,7 +1,7 @@
 ﻿import { Component, Input, EventEmitter, Output, QueryList, OnInit } from '@angular/core'
 
 import { ButtonComponent } from '../button/button.component';
-import { LockButtonComponent } from '../lockButton/lockButton.component';
+import { LockButtonComponent } from '../lock-button/lock-button.component';
 
 @Component({
     selector: 'vgr-save-cancel',
