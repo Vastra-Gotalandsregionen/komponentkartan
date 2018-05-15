@@ -14,7 +14,7 @@ import { trigger, state, animate, style, transition } from '@angular/animations'
       state('false', style({
         opacity: 0
       })),
-      transition('* => *', animate('400ms ease'))
+      transition('* => *', animate('900ms ease'))
     ])
   ]
 })
@@ -45,15 +45,12 @@ export class LoaderComponent {
   constructor(private changeDetector: ChangeDetectorRef) { }
 
   private startSpinning() {
-    this.spinning = true;
     this.visible = true;
   }
   private stopSpinning() {
     setTimeout(() => {
       if (this._active) {
         this.startSpinning();
-      } else {
-        this.spinning = false;
       }
     }, 400);
     this.visible = false;
