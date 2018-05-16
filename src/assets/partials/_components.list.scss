@@ -331,6 +331,11 @@
   }
 }
 
+.list__notification {
+  background: $background-color--content;
+  //border: 1px solid red;
+}
+
 .column--align-left {
   text-align: left;
 }
