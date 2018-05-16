@@ -21,6 +21,11 @@
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23FFF' stroke-width='2' fill='none' fill-rule='evenodd' stroke-linecap='square'%3E%3Cpath d='M7 7l10 10M17 7L7 17'/%3E%3C/g%3E%3C/svg%3E");
 }
 
+.bg-image-filter-tag__close {
+  @extend .bg-image--icon;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23FFF' stroke-width='2' fill='none' fill-rule='evenodd' stroke-linecap='square'%3E%3Cpath d='M 5 5 L 15 15 M 15 5 L 5 15'/%3E%3C/g%3E%3C/svg%3E");
+}
+
 .bg-image-lock-button__top {
   @extend .bg-image--icon;
   width: 13px;

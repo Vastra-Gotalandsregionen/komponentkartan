@@ -1,4 +1,36 @@
-﻿@keyframes button-enabling {
+﻿.text-button {
+  @extend .button__base;
+  font-size: $font-size--small;
+  font-family: $font-family;
+  height: 30px;
+  line-height: 30px;
+  min-width: 87px;
+  padding-left: 18px;
+  padding-right: 18px;
+  &.button--secondary {
+    @extend .color--primary;
+    @extend .border-color--primary;
+    background-color: $text-color--light;
+    line-height: 28px;
+    border-width: 1px;
+    border-style: solid;
+    padding-left: 17px;
+    padding-right: 17px;
+    &.button--disabled {
+      color: $secondary-color--default;
+      background-color: $text-color--light;
+      border-color: $secondary-color--default;
+    }
+    &:hover:not(.button--disabled),
+    &:focus:not(.button--disabled) {
+      @extend .background-color--primary;
+      color: $text-color--light;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+  }
+}
+
+@keyframes button-enabling {
   0% {
     box-shadow: none;
   }
@@ -7,20 +39,6 @@
   }
   100% {
     box-shadow: none;
-  }
-}
-
-.text-button {
-  @extend .button__base;
-  font-size: $font-size--small;
-  font-family: $font-family;
-  height: 30px;
-  min-width: 87px;
-  padding-left: 18px;
-  padding-right: 18px;
-  &.button--secondary {
-    padding-left: 17px;
-    padding-right: 17px;
   }
 }
 

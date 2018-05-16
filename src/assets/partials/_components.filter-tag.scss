@@ -2,9 +2,9 @@
   display: flex;
 }
 
-$filter-tag-height--medium: 30px;
+$filter-tag-height--medium: 28px;
 $filter-tag-height--small: 25px;
-$close-icon-margin: 3px;
+$filter-tag__close-icon-margin: 5px;
 
 .filter-tag {
   @extend .button__base;
@@ -15,21 +15,19 @@ $close-icon-margin: 3px;
   margin-right: 5px;
   
   .filter-tag__content {
-    display: inline-block;
-    height: $filter-tag-height--small;
     padding-left: 10px; 
-    padding-right: 7px; 
+    padding-right: 7px;
   }
 
   .filter-tag__close-icon {
-    @extend .bg-image-close-button;
+    @extend .bg-image-filter-tag__close;
     display: inline-block;
-    border-left: white solid 1px;
-    background-size: 15px 15px;
-    margin-top: $close-icon-margin; 
-    margin-bottom: $close-icon-margin; 
     width: 30px;
-    height: $filter-tag-height--small - 2 * $close-icon-margin;
+    height: $filter-tag-height--small - 2 * $filter-tag__close-icon-margin;
+    margin-top: $filter-tag__close-icon-margin; 
+    margin-bottom: $filter-tag__close-icon-margin; 
+    border-left: $text-color--light solid 1px;
+    vertical-align: top;
   }
 }
   
@@ -46,8 +44,7 @@ $close-icon-margin: 3px;
     }
 
     .filter-tag__close-icon {
-      background-size: 17px 17px;
-      height: $filter-tag-height--medium - 2 * $close-icon-margin;
+      height: $filter-tag-height--medium - 2 * $filter-tag__close-icon-margin;
     }
   }
 }

@@ -8,12 +8,12 @@ export class ButtonComponent implements OnChanges {
   @Input() disabled = false;
   @Input() secondary = false;
   @Input() type = 'button';
-  lastDisabledStatus: boolean;
   reenabled: boolean;
+  private wasDisabled: boolean;
 
   ngOnChanges() {
-    this.reenabled = this.lastDisabledStatus === true && this.disabled === false;
-    this.lastDisabledStatus = this.disabled;
+    this.reenabled = this.wasDisabled && !this.disabled;
+    this.wasDisabled = this.disabled;
   }
 
   checkDisabled(event: MouseEvent) {
