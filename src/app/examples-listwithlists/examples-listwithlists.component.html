@@ -27,7 +27,7 @@
           <vgr-list-column-header-checkbox width="1" align="center" [checked]="false"></vgr-list-column-header-checkbox>
         </vgr-list-header>
       </vgr-list>
-      <div class="loader-container" [hidden]="!loading">
+      <div class="loader-container" *ngIf="loading">
         <vgr-loader [active]="loading"></vgr-loader>
       </div>
       <div class="loader-container" *ngIf="noSearchResult">

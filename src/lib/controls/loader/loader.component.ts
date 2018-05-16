@@ -14,7 +14,7 @@ import { trigger, state, animate, style, transition } from '@angular/animations'
       state('false', style({
         opacity: 0
       })),
-      transition('* => *', animate('900ms ease'))
+      transition('* => *', animate('400ms ease'))
     ])
   ]
 })
