@@ -211,6 +211,17 @@
   }
 }
 
+.list__notification {
+  padding: 5px 10px;
+  .list-item__notification__icon {
+    float: left;
+  }
+  .list-item__notification__message {
+    margin-left: 36px;
+    margin-top: 4px;
+  }
+}
+
 // .list-item__notification {}
 .list-item__notification__icon {
   width: 30px;
