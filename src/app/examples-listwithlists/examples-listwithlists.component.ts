@@ -60,15 +60,13 @@ export class ExamplesListwithlistsComponent {
         if (units.length > 0) {
           this.mapToListItems(units);
           this.sortlistData('enhet', SortDirection.Ascending);
-          setTimeout(()=>{
-            this.loading = false;
-          },400);
-          
         } else {
           this.listData = [];
           this.noSearchResult = true;
         }
-        
+        setTimeout(() => {
+          this.loading = false;
+        }, 400);
       });
   }
 
