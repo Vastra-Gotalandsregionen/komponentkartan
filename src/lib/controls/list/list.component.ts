@@ -12,6 +12,7 @@ export class ListComponent implements AfterContentInit {
     @Input() @HostBinding('class.list--inline') flexibleHeader: boolean;
     @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
     @Input() allowMultipleExpandedItems = false;
+    @Input() notification = null;
     @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
 
@@ -27,6 +28,16 @@ export class ListComponent implements AfterContentInit {
     }
 
     subscribeEvents() {
+        if (this.items.length === 0) {
+            this.notification = {
+                icon: 'vgr-icon-exclamation--red',
+                message: 'Det finns inga matchningar med aktuell fitlrering, testa att filtrera på något annat!'
+              };
+        } else {
+            this.notification = null;
+        }
+
+
         if (!this.allowMultipleExpandedItems) {
             this.items.forEach(changedContainer => {
                 changedContainer.expandedChanged.subscribe((expanded: boolean) => {

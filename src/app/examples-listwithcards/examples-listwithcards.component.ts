@@ -43,6 +43,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   agarOwnerForm: FormGroup;
   onChangeForm: FormGroup;
   userFormSubmitted = false;
+  listNotification = null;
 
   @ViewChild(SaveCancelComponent) saveCancelComponent: SaveCancelComponent;
   @ViewChild('unitVersions') unitVersions: DropdownComponent;
@@ -125,6 +126,13 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.createOnChangeForm();
 
     this.onSortChanged({ key: 'enhet', direction: SortDirection.Ascending } as SortChangedArgs);
+
+    /*setTimeout(() => {
+      this.listNotification = {
+        message: 'Hej kompis',
+        icon: 'vgr-icon-ok-check-green'
+      };
+    }, 7000);*/
   }
 
   createOnChangeForm() {
