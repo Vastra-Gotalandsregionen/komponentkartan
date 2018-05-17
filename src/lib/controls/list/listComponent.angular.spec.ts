@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import {
   ListComponent,
   ListItemComponent, ListItemHeaderComponent, ListColumnComponent, ListHeaderComponent,
-  ListItemContentComponent, ListItemJqeuryHelper, ListColumnHeaderComponent
+  ListItemContentComponent, ListColumnHeaderComponent
 } from '../../index';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -16,7 +16,6 @@ describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
   let rootElement: DebugElement;
-  const jqueryHelper: ListItemJqeuryHelper = new ListItemJqeuryHelper();
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -34,8 +33,7 @@ describe('ListComponent', () => {
       imports: [CommonModule],
       providers: [
         { provide: ElementRef },
-        { provide: Renderer },
-        { provide: ListItemJqeuryHelper, useValue: jqueryHelper }]
+        { provide: Renderer }]
     });
 
     TestBed.overrideComponent(ListComponent, {

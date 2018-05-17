@@ -37,18 +37,38 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
         trigger('slideNotificationMessage', [
             state('visible', style({
                 overflow: 'visible',
-                display: 'visible',
+                // display: 'visible',
                 height: '*'
             })),
             state('hidden', style({
-                display: 'hidden',
+                // display: 'hidden',
                 overflow: 'hidden',
                 height: '0'
             })),
-            transition('visible => hidden',
+            transition('* => hidden',
                 animate('400ms ease-in')
             ),
-        ])
+            transition('* => visible',
+                animate('400ms ease-in')
+            )
+        ]),
+        // trigger('showContent', [
+        //     state('void', style({
+        //         height: '0'
+        //     })),
+        //     transition('* => true', [
+        //         style({height: 0, overflow: 'hidden'}),
+        //           animate('600ms ease', style({
+        //             height: '*'
+        //           }))
+        //       ]),
+        //     transition('* => false', [
+        //         style({ overflow: 'hidden'}),
+        //         animate('0.6s ease', style({
+        //             height: '0'
+        //         }))
+        //     ])
+        // ])
     ]
 })
 
@@ -131,8 +151,10 @@ export class ListItemComponent implements AfterContentInit {
     }
 
     @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
+    itemLoaded: boolean;
 
     constructor(private elementRef: ElementRef, private changeDetector: ChangeDetectorRef) {
+        this.itemLoaded = true;
     }
 
     animationDone($event) {
@@ -234,10 +256,10 @@ export class ListItemComponent implements AfterContentInit {
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
-            this.expandedChanged.emit(this.expanded);
+            // this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
                 this.notInteractable = false;
-
+                this.expandedChanged.emit(this.expanded);
                 if (this.eventNotification.removeWhenDone) {
                     this.stateNotification = 'hidden';
                     this.notificationVisible = false;
@@ -245,6 +267,7 @@ export class ListItemComponent implements AfterContentInit {
 
                     setTimeout(() => {
                         this._notification = null;
+                        console.log('step3');
                     }, 1000);
                 } else {
                     if (!this.permanentNotification) {

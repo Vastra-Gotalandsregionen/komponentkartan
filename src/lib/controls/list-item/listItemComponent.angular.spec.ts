@@ -11,11 +11,11 @@ import { NotificationType } from '../../models/notificationType.model';
 
 import {
   ListItemComponent, ListItemHeaderComponent, ListColumnComponent,
-  ListItemContentComponent, ListItemJqeuryHelper
+  ListItemContentComponent
 } from '../../index';
 
 @Component({
-  selector: 'test',
+  selector: 'vgr-test',
   template: `
           <vgr-list-item>
             <vgr-list-item-header>

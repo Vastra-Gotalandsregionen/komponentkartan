@@ -1,31 +1,58 @@
 import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 
 @Component({
     templateUrl: './list.component.html',
     moduleId: module.id,
-    selector: 'vgr-list'
+    selector: 'vgr-list',
+    animations: [
+        trigger('loadContent', [
+            state('void', style({
+                height: '35px'
+            })),
+            transition('* => true', [
+                style({height: 0, overflow: 'hidden'}),
+                  animate('0.4s ease-in', style({
+                    height: '100vh',
+                  }))
+              ])
+        ])
+    ]
 })
 export class ListComponent implements AfterContentInit {
     @HostBinding('class.list') hasClass = true;
+    @HostBinding('class.list--new-item-added') moveHeader = false;
+    @HostBinding('class.animate')  animate = false;
     @Input() @HostBinding('class.list--inline') flexibleHeader: boolean;
     @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
     @Input() allowMultipleExpandedItems = false;
     @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
+    listlength: number = 0;
+
+    loaded: boolean = false;
 
     constructor() {
     }
 
     ngAfterContentInit() {
         this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+        this.listlength = this.items.length;
         this.subscribeEvents();
-        this.items.changes.subscribe(() => {
+        this.items.changes.subscribe((changes) => {
+            if (changes.length === this.listlength + 1) {
+                this.moveHeader = true;
+                setTimeout(() => {
+                    this.moveHeader = false;
+                }, 2600);
+                this.listlength++;
+            }
             this.subscribeEvents();
         });
     }
-
     subscribeEvents() {
         if (!this.allowMultipleExpandedItems) {
             this.items.forEach(changedContainer => {
@@ -36,6 +63,9 @@ export class ListComponent implements AfterContentInit {
                 });
 
             });
+        }
+        if (this.items.length > 0) {
+            this.loaded = true;
         }
 
         this.items.forEach((item, index) => {
@@ -48,7 +78,6 @@ export class ListComponent implements AfterContentInit {
         });
     }
 
-    // TODO: skapa test
     setFocusOnPreviousRow(index: number): any {
         if (index === 0) {
             this.items.toArray()[this.items.toArray().length - 1].setFocusOnRow();
@@ -56,8 +85,6 @@ export class ListComponent implements AfterContentInit {
             this.items.toArray()[index - 1].setFocusOnRow();
         }
     }
-
-    // TODO: skapa test
     setFocusOnNextRow(index: number) {
         if (index + 1 === this.items.toArray().length) {
             this.items.toArray()[0].setFocusOnRow();
@@ -66,7 +93,6 @@ export class ListComponent implements AfterContentInit {
         }
     }
 
-    // TODO: skapa test
     setFocusOnPreviousRowContent(item: ListItemComponent) {
         if (!item.collapsed) {
             item.setFocusOnRow();
