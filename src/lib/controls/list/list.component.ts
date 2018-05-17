@@ -47,7 +47,7 @@ export class ListComponent implements AfterContentInit {
                 this.moveHeader = true;
                 setTimeout(() => {
                     this.moveHeader = false;
-                }, 1600);
+                }, 2600);
                 this.listlength++;
             }
             this.subscribeEvents();
