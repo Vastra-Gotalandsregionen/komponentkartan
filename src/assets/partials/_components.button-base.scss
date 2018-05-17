@@ -15,7 +15,7 @@
   }
   &:active:not(.button--disabled) {
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-    transform: scaleX(0.96);
+    transform: scale(0.96);
     outline: 0;
     .button__focus-line {
       background-color: transparentize($secondary-color--default, 0.4);

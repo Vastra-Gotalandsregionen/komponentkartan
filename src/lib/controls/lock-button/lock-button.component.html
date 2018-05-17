@@ -1,5 +1,5 @@
 ﻿<span (click)="checkDisabled($event)">
-  <button type="button" (click)="toggleLocked()" [disabled]="disabled" class="lock-button noselect" [ngClass]="{'lock-button--unlocked' : unlocked, 'button--disabled' : disabled}"
+  <button type="button" (click)="toggleLocked()" class="lock-button noselect" [ngClass]="{'lock-button--unlocked' : unlocked, 'button--disabled' : disabled}"
     [attr.aria-disabled]="disabled" [attr.aria-label]="label">
     <div class="lock-button__top"></div>
     <div class="lock-button__bottom"></div>
