@@ -22,7 +22,7 @@ export class LoaderComponent {
   private _minimumTimeMs = 1000;
   private lastActivated: Date;
   private _active = false;
-  private visible = false;
+  visible = false;
 
 
   @Input() set active(value: boolean) {
