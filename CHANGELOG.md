@@ -4,11 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 2.5.0-beta1
+## 2.6.0 
+- 
+
+## 2.5.0 (Stable)
 - WCAG-support for datepickern
 - WCAG-support for the menu
 
-## 2.4.1 (Stable)
+## 2.4.1 
 - Fix bug with deselect on dropdown multi
 
 ## 2.4.0

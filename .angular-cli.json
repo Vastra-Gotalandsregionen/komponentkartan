@@ -16,7 +16,7 @@
     "test": "test.ts",
     "tsconfig": "tsconfig.app.json",
     "testTsconfig": "tsconfig.spec.json",
-    "prefix": "app",
+    "prefix": "vgr",
     "styles": [
       "./assets/komponentkartan.scss",
       "styles.scss"
