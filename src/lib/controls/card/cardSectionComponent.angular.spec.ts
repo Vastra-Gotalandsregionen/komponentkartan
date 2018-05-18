@@ -7,6 +7,7 @@ import { TruncatePipe } from '../../pipes/truncatePipe';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardSectionComponent } from './cardSection.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('[CardSectionComponent]', () => {
@@ -19,7 +20,7 @@ describe('[CardSectionComponent]', () => {
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
             declarations: [CardSectionComponent, TruncatePipe],
-            imports: [CommonModule]
+            imports: [CommonModule, BrowserAnimationsModule]
         });
 
         TestBed.overrideComponent(CardSectionComponent, {
@@ -48,7 +49,7 @@ describe('[CardSectionComponent]', () => {
             beforeEach(() => {
                 component.title = 'Section 1';
                 fixture.detectChanges();
-            })
+            }),
             it('title is displayed', () => {
                 const header = rootElement.query(By.css('h2'));
                 expect(header.nativeElement.innerText).toBe('Section 1');

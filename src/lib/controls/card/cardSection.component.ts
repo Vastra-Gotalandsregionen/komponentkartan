@@ -12,13 +12,13 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
             })),
             transition('* => expanded', [
                 style({height: 0, overflow: 'hidden'}),
-                  animate('0.4s ease', style({
+                  animate('0.4s ease-in', style({
                     height: '*'
                   }))
               ]),
             transition('* => collapsed', [
                 style({ overflow: 'hidden'}),
-                animate('0.4s ease', style({
+                animate('0.4s ease-out', style({
                   height: 0
                 }))
             ])
@@ -62,13 +62,13 @@ export class CardSectionComponent implements OnInit {
     }
 
     set showExpanded(show: boolean) {
-        if (show) {
+        // if (show) {
             this._showExpanded = true;
-            this.expanded = true;
-            this.state = 'expanded';
-        } else {
-            this.state = 'collapsed';
-        }
+            this.expanded = show;
+            // this.state = 'expanded';
+        // } else {
+        //     // this.state = 'collapsed';
+        // }
     }
 
     state: string;

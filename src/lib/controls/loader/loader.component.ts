@@ -16,14 +16,18 @@ import { trigger, state, animate, style, transition } from '@angular/animations'
       })),
       transition('* => *', animate('400ms ease'))
     ])
-  ]
+  ] Resolved all conflicts
+1 conflicting file
+loader.component.ts
+...b/controls/loader/loader.component.ts
+src/lib/controls/loader/loader.component.ts  Resolved
+
 })
 export class LoaderComponent {
   private _minimumTimeMs = 1000;
   private lastActivated: Date;
   private _active = false;
   visible = false;
-
 
   @Input() set active(value: boolean) {
     if ((this._active && !value) || (!this._active && value)) {

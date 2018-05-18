@@ -24,9 +24,6 @@ describe('[LoaderComponent]', () => {
         it('loader is not visible', () => {
             expect(loader.visible).toBe(false);
         });
-        it('loader is not spinning', () => {
-            expect(loader.spinning).toBe(false);
-        });
     });
     describe('When activated', () => {
         beforeEach(() => {
@@ -34,9 +31,6 @@ describe('[LoaderComponent]', () => {
         });
         it('loader is visible', () => {
             expect(loader.visible).toBe(true);
-        });
-        it('loader is spinning', () => {
-            expect(loader.spinning).toBe(true);
         });
         describe('and deactivated after 0.5s', () => {
             beforeEach(() => {
@@ -46,26 +40,12 @@ describe('[LoaderComponent]', () => {
             it('loader is still visible', () => {
                 expect(loader.visible).toBe(true);
             });
-            it('loader is still spinning', () => {
-                expect(loader.spinning).toBe(true);
-            });
             describe('after an additional 0.5s', () => {
                 beforeEach(() => {
                     jasmine.clock().tick(500);
                 });
                 it('the loader is hidden', () => {
                     expect(loader.visible).toBe(false);
-                });
-                it('loader is still spinning', () => {
-                    expect(loader.spinning).toBe(true);
-                });
-                describe('after an additional 0.4s', () => {
-                    beforeEach(() => {
-                        jasmine.clock().tick(400);
-                    });
-                    it('loader is not spinning', () => {
-                        expect(loader.spinning).toBe(false);
-                    });
                 });
             });
             describe('and reactivated after 100ms', () => {
@@ -76,15 +56,9 @@ describe('[LoaderComponent]', () => {
                 it('the loader is visible', () => {
                     expect(loader.visible).toBe(true);
                 });
-                it('loader is spinning', () => {
-                    expect(loader.spinning).toBe(true);
-                });
                 describe('after 1s', () => {
                     beforeEach(() => {
                         jasmine.clock().tick(1000);
-                    });
-                    it('loader is still spinning', () => {
-                        expect(loader.spinning).toBe(true);
                     });
                     describe('and deactivated after 1s', () => {
                         beforeEach(() => {
@@ -93,17 +67,6 @@ describe('[LoaderComponent]', () => {
                         });
                         it('the loader is hidden', () => {
                             expect(loader.visible).toBe(false);
-                        });
-                        it('loader is still spinning', () => {
-                            expect(loader.spinning).toBe(true);
-                        });
-                        describe('after an additional 0.4s', () => {
-                            beforeEach(() => {
-                                jasmine.clock().tick(400);
-                            });
-                            it('loader is not spinning', () => {
-                                expect(loader.spinning).toBe(false);
-                            });
                         });
                     });
                 });
@@ -116,17 +79,6 @@ describe('[LoaderComponent]', () => {
             });
             it('the loader is hidden', () => {
                 expect(loader.visible).toBe(false);
-            });
-            it('loader is still spinning', () => {
-                expect(loader.spinning).toBe(true);
-            });
-            describe('after an additional 0.4s', () => {
-                beforeEach(() => {
-                    jasmine.clock().tick(400);
-                });
-                it('loader is not spinning', () => {
-                    expect(loader.spinning).toBe(false);
-                });
             });
         });
 
