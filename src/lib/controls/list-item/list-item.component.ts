@@ -238,6 +238,7 @@ export class ListItemComponent implements AfterContentInit {
     }
 
     private processShowOnCollapseNotification() {
+        this.expandedChanged.emit(this.expanded);
 
         if (!this.eventNotification) {
             return;

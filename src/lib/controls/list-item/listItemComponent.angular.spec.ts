@@ -424,6 +424,7 @@ describe('ListItemComponent', () => {
       beforeEach(() => {
         spyOn(component.expandedChanged, 'emit');
         component.notification = { message: 'Nu sparar vi', icon: 'vgr-icon-ok-check ', type: NotificationType.ShowOnCollapse, removeWhenDone: true } as RowNotification;
+        listItemComponentFixture.detectChanges();
       });
       it('notification is displayed', () => {
         expect(component.notificationVisible).toBe(true);
@@ -436,6 +437,7 @@ describe('ListItemComponent', () => {
       describe('and notification is collapsing after 1,4s', () => {
         beforeEach(() => {
           jasmine.clock().tick(1400);
+
         });
         it('content is collapsed', () => {
           expect(component.collapsed).toBe(true);
