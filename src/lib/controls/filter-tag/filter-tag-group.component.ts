@@ -44,10 +44,11 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
 
   setFilterTagFocus() {
     if (this.lastSelectedIndex >= 0) {
-      if (this.lastSelectedIndex < this.filterTags.length) {
-        this.filterTags.toArray()[this.lastSelectedIndex].setFocus();
-      } else if (this.filterTags.length) {
-        this.filterTags.last.setFocus();
+      const nonRemovedFilterTags = this.filterTags.filter(x => !x.removed);
+      if (this.lastSelectedIndex < nonRemovedFilterTags.length) {
+        nonRemovedFilterTags[this.lastSelectedIndex].setFocus();
+      } else if (nonRemovedFilterTags.length) {
+        nonRemovedFilterTags[nonRemovedFilterTags.length - 1].setFocus();
       }
     }
   }
@@ -79,12 +80,13 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
       });
       this.filterTagSubscriptions.push(nextSubscription);
 
-      const clickSubscription = x.click
+      const removeSubscription = x.remove
       .takeUntil(this.ngUnsubscribe)
       .subscribe(() => {
         this.lastSelectedIndex = i;
+        this.setFilterTagFocus();
       });
-      this.filterTagSubscriptions.push(clickSubscription);
+      this.filterTagSubscriptions.push(removeSubscription);
     });
   }
 }

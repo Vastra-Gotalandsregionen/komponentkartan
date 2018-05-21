@@ -43,6 +43,16 @@ $filter-tag__close-icon-margin: 6px;
     border-left: $text-color--light solid 1px;
     vertical-align: top;
   }
+
+  &.filter-tag--removing {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    cursor: default;
+  }
+
+  &.filter-tag--removed {
+    display: none;
+  }
 }
   
 @media screen and (min-width: $desktop-width--medium) {
