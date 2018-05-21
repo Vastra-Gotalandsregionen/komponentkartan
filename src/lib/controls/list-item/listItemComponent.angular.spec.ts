@@ -436,7 +436,7 @@ describe('ListItemComponent', () => {
 
       describe('and notification is collapsing after 1,4s', () => {
         beforeEach(() => {
-          jasmine.clock().tick(1400);
+          jasmine.clock().tick(3401);
 
         });
         it('content is collapsed', () => {
