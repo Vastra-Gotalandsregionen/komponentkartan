@@ -238,7 +238,6 @@ export class ListItemComponent implements AfterContentInit {
     }
 
     private processShowOnCollapseNotification() {
-        this.expandedChanged.emit(this.expanded);
 
         if (!this.eventNotification) {
             return;
@@ -257,7 +256,6 @@ export class ListItemComponent implements AfterContentInit {
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
-            // this.expandedChanged.emit(this.expanded);
             setTimeout(() => {
                 this.notInteractable = false;
                 this.expandedChanged.emit(this.expanded);
@@ -268,7 +266,6 @@ export class ListItemComponent implements AfterContentInit {
 
                     setTimeout(() => {
                         this._notification = null;
-                        console.log('step3');
                     }, 1000);
                 } else {
                     if (!this.permanentNotification) {
