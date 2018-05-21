@@ -219,6 +219,7 @@
   .list-item__notification__message {
     margin-left: 36px;
     margin-top: 4px;
+    font-size: 16px;
   }
 }
 
@@ -338,6 +339,11 @@
     &.list-item__content--indent {
       padding-left: $margin--fat;
       padding-right: $margin--fat;
+    }
+  }
+  .list__notification {
+    .list-item__notification__message {
+      font-size: 18px;
     }
   }
 }

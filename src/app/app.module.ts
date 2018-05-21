@@ -43,7 +43,8 @@ import { BacktotopComponent } from './backtotop/backtotop.component';
 import { LoaderComponent } from './loader/loader.component';
 import { StartComponent } from './start/start.component';
 import { ThemingComponent } from './theming/theming.component';
-import { ListexampleComponent } from './lists/examples/withnotifications/listexample.component';
+import { ListexampleComponent } from './lists/examples/withnotification/listexample.component';
+import { ListexamplewithrownotificationComponent } from './lists/examples/withrownotifications/listexamplewithrownotification.component';
 import { ListcodeexampleComponent } from './lists/examples/simple/listcodeexample.component';
 import { ListExampleWithActionButtonsComponent } from './lists/examples/withactionbuttons/listexamplewithactionbuttons.component';
 import { ReactiveformsexampleComponent } from './reactiveforms-example/reactiveforms-example.component';
@@ -90,6 +91,7 @@ import { TableComponent } from './table/table.component';
         StartComponent,
         ThemingComponent,
         ListexampleComponent,
+        ListexamplewithrownotificationComponent,
         ComponentDocsComponent,
         TitleValueComponent,
         FiltertexboxComponent,

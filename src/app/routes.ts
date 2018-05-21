@@ -30,7 +30,8 @@ import { PageStructureComponent } from './page-structure/page-structure.componen
 import { CardComponent } from './card/card.component';
 import { SizesComponent } from './sizes/sizes.component';
 import { MenuComponent } from './menu/menu.component';
-import { ListexampleComponent } from './lists/examples/withnotifications/listexample.component';
+import { ListexampleComponent } from './lists/examples/withnotification/listexample.component';
+import { ListexamplewithrownotificationComponent } from './lists/examples/withrownotifications/listexamplewithrownotification.component';
 import { ListcodeexampleComponent } from './lists/examples/simple/listcodeexample.component';
 import { ListExampleWithActionButtonsComponent } from './lists/examples/withactionbuttons/listexamplewithactionbuttons.component';
 import { ReactiveformsexampleComponent } from './reactiveforms-example/reactiveforms-example.component';
@@ -61,7 +62,8 @@ export const appRoutes: Routes = [
     { path: 'headers', component: HeadersComponent },
     { path: 'loader', component: LoaderComponent },
     { path: 'lists', component: ListsComponent },
-    { path: 'listexample-notifications', component: ListexampleComponent },
+    { path: 'listexample-notification', component: ListexampleComponent },
+    { path: 'listexample-notifications', component: ListexamplewithrownotificationComponent },
     { path: 'lockbutton', component: LockbuttonComponent },
     { path: 'panels', component: PanelsComponent },
     { path: 'modaldialog', component: ModaldialogComponent },

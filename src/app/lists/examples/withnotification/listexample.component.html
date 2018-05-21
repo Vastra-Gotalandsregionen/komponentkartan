@@ -1,0 +1,32 @@
+<vgr-page>
+  <vgr-page-header [title]="'Kodexempel lista med notifiering'"></vgr-page-header>
+
+  <vgr-page-body>
+    <vgr-page-block>
+      <h2>Lista med notifiering</h2>
+      <p>Här har vi exempel på en lista med notifiering. För att se dokumentationen på
+        komponenten, klicka
+        <a href="/lists">här.</a>
+      </p>
+    </vgr-page-block>
+    <vgr-page-block>
+      <vgr-list [flexibleHeader]="true" [allowMultipleExpandedItems]="false" [notification]="listNotification">
+        <vgr-list-header>
+          <vgr-list-column-header [text]="'Förnamn'" [width]="10" [sortKey]="'firstName'" ></vgr-list-column-header>
+          <vgr-list-column-header [text]="'Efternamn'" [width]="10" [sortKey]="'lastName'"></vgr-list-column-header>
+        </vgr-list-header>
+      </vgr-list>
+    </vgr-page-block>
+    <vgr-page-block>
+      <div>
+        <h3>HTML</h3>
+        <section [innerHTML]="htmlAdvancedListMarkup" highlight-js-content=".highlight"></section>
+      </div>
+      <br>
+      <div>
+        <h3>Typescript</h3>
+        <section [innerHTML]="typeScriptAdvancedListMarkup" highlight-js-content=".highlight"></section>
+      </div>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>

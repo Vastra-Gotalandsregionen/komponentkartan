@@ -8,10 +8,10 @@ import { HtmlEncodeService } from '../../../html-encode.service';
 
 @Component({
   selector: 'app-listexample',
-  templateUrl: './listexample.component.html',
-  styleUrls: ['./listexample.component.scss']
+  templateUrl: './listexamplewithrownotification.component.html',
+  styleUrls: ['./listexamplewithrownotification.component.scss']
 })
-export class ListexampleComponent {
+export class ListexamplewithrownotificationComponent {
   sortDirections = SortDirection;
   public peopleRows: ExpandableRow<ExamplePerson, ExamplePerson>[];
   examplePeople: ExamplePerson[];

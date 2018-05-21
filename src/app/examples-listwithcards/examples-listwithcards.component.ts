@@ -127,12 +127,12 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
     this.onSortChanged({ key: 'enhet', direction: SortDirection.Ascending } as SortChangedArgs);
 
-    /*setTimeout(() => {
+    setTimeout(() => {
       this.listNotification = {
-        message: 'Hej kompis',
-        icon: 'vgr-icon-ok-check-green'
+        message: 'Allt gick fel! Detta är en komponentkarta av ersättningssystemen i Västra Götalandsregionen. Anledningen till att följa gemensamma riktlinjer vid navigation, kontroller och struktur är dels för att skapa en enhetlighet och dels kunna hantera flera system för samma inloggning. Innehållet i de olika ersättningssystemen är och kommer fortsättningsvis att vara systemspecifikt. Ersättningssystemen med gemensamt inloggning har en gemensam portal med en neutral färg som är skild från den röda, gröna och blå färgen. När en användare har behörighet för fler än ett system kommer de gemensamma delarna att visa den neutrala färgen.',
+        icon: 'vgr-icon-message'
       };
-    }, 7000);*/
+    }, 1000);
   }
 
   createOnChangeForm() {
