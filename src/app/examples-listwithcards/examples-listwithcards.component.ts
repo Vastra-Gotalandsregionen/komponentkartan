@@ -552,7 +552,13 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.updateRowValues(row);
 
     this.cardLocked = true;
-    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green', true);
+    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
+  }
+
+  removeNotification(event, row){
+    if (event === null) {
+      row.removeNotification();
+    }
   }
 
   onCardUnlocked() {
@@ -654,9 +660,9 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.privateOwnerForm.reset();
     this.agarOwnerForm.reset();
     this.submitted = false;
-    setTimeout(()=>{
+    setTimeout(() => {
       this.addNewUnit = false;
-    },1100);
+    }, 1100);
   }
 
 

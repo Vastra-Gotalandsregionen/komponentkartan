@@ -271,6 +271,9 @@ export class ListItemComponent implements AfterContentInit {
                     if (!this.permanentNotification) {
                         this.stateNotification = 'hidden';
                         this.notificationVisible = false;
+                        setTimeout(() => {
+                            this.notificationChanged.emit(null);
+                        }, 1000);
                     } else {
                         this._notification = this.permanentNotification;
                         this.notificationVisible = true;

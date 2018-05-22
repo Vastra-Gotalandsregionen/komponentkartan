@@ -184,7 +184,7 @@
           <vgr-list-column-header text="Nämnd" width="5" sortKey="namnd"></vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of exampleData | unitfilter:filtertext: includeInactiveUnits" [notification]="row.notification"
-          (expandedChanged)="onExpandedChanged($event,row)">
+          (expandedChanged)="onExpandedChanged($event,row)" (notificationChanged)="removeNotification($event,row)">
           <vgr-list-item-header>
             <vgr-list-column [text]="row.previewObject.enhet" width="5"></vgr-list-column>
             <vgr-list-column [text]="row.previewObject.hsaid" width="5"></vgr-list-column>
