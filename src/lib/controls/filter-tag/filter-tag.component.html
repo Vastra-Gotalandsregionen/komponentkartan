@@ -1,6 +1,6 @@
 <span (click)="checkDisabled($event)" (keydown)="onKeydown($event)">
   <button #filtertag type="button" (click)="emitRemove()" class="filter-tag noselect"
-    [ngClass]="{'button--disabled' : disabled, 'filter-tag--removing' : removing, 'filter-tag--removed' : removed}"
+    [ngClass]="{'button--disabled': disabled, 'filter-tag--removing': removing, 'filter-tag--removed': removed}"
     [attr.aria-disabled]="disabled" [attr.aria-label]="label">
     <span class="button__fixIE">
       <span #content class="filter-tag__content">

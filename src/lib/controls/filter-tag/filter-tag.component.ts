@@ -19,7 +19,8 @@ export class FilterTagComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     if (!this.label) {
-      this.label = `Ta bort filtrering ${this.content.nativeElement.innerText}`;
+      Promise.resolve(null).then(() =>
+        this.label = `Ta bort filtrering ${this.content.nativeElement.innerText}`);
     }
   }
 
