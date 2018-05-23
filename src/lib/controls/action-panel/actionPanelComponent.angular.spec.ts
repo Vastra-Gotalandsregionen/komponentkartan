@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
 import { ActionPanelComponent } from './action-panel.component';
-import { CloseButtonComponent } from '../closeButton/closeButton.component';
+import { CloseButtonComponent } from '../close-button/close-button.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ActionPanelComponent', () => {
@@ -34,7 +34,7 @@ describe('ActionPanelComponent', () => {
 
         TestBed.overrideComponent(CloseButtonComponent, {
             set: {
-                templateUrl: '../closeButton/closeButton.component.html'
+                templateUrl: '../close-button/close-button.component.html'
             }
         });
 

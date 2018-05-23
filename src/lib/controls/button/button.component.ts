@@ -8,8 +8,8 @@ export class ButtonComponent implements OnChanges {
   @Input() disabled = false;
   @Input() secondary = false;
   @Input() type = 'button';
-  reenabled: boolean;
-  private wasDisabled: boolean;
+  reenabled = false;
+  private wasDisabled = false;
 
   ngOnChanges() {
     this.reenabled = this.wasDisabled && !this.disabled;

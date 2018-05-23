@@ -6,34 +6,18 @@ import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/co
 })
 export class LockButtonComponent {
   @Input() disabled = false;
-  @Input() unlocked: boolean;
+  @Input() locked = true;
   @Output() lockChanged = new EventEmitter<boolean>();
 
   get label(): string {
-    return this.unlocked ? 'lås' : 'lås upp';
-  }
-  get locked(): boolean {
-    return !this.unlocked;
+    return this.locked ? 'lås upp' : 'lås';
   }
 
   toggleLocked() {
     if (!this.disabled) {
-      if (this.unlocked) {
-        this.lock();
-      } else {
-        this.unlock();
-      }
+      this.locked = !this.locked;
+      this.lockChanged.emit(this.locked);
     }
-  }
-
-  lock() {
-    this.unlocked = false;
-    this.lockChanged.emit(this.locked);
-  }
-
-  unlock() {
-    this.unlocked = true;
-    this.lockChanged.emit(this.locked);
   }
 
   checkDisabled(event: MouseEvent) {

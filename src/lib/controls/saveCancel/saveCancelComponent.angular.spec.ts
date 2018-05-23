@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 import { SaveCancelComponent } from '../../controls/saveCancel/saveCancel.component';
 import { ButtonComponent } from '../../controls/button/button.component';
-import { LockButtonComponent } from '../../controls/lockButton/lockButton.component';
+import { LockButtonComponent } from '../../controls/lock-button/lock-button.component';
 
 describe('SaveCancelComponent', () => {
     let component: SaveCancelComponent;
@@ -35,7 +35,7 @@ describe('SaveCancelComponent', () => {
         });
         TestBed.overrideComponent(LockButtonComponent, {
             set: {
-                templateUrl: '../lockButton/lockButton.component.html'
+                templateUrl: '../lock-button/lock-button.component.html'
             }
         });
 

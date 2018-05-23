@@ -6,7 +6,6 @@ import { Component, Input } from '@angular/core';
 })
 export class CloseButtonComponent {
   @Input() disabled = false;
-  label = 'stäng';
 
   checkDisabled(event: MouseEvent) {
     if (this.disabled) {
