@@ -218,7 +218,7 @@
   }
   .list-item__notification__message {
     margin-left: 36px;
-    margin-top: 4px;
+    margin-top: 2px;
     font-size: 16px;
   }
 }
@@ -344,6 +344,7 @@
   .list__notification {
     .list-item__notification__message {
       font-size: 18px;
+      margin-top: 1px;
     }
   }
 }
