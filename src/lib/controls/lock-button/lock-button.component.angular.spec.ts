@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 
 import { LockButtonComponent } from '../../controls/lock-button/lock-button.component';
 
-fdescribe('[LockButtonComponent - Angular]', () => {
+describe('[LockButtonComponent - Angular]', () => {
   let component: LockButtonComponent;
   let fixture: ComponentFixture<LockButtonComponent>;
   let rootElement: DebugElement;

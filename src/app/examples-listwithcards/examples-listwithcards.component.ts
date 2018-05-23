@@ -546,7 +546,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.submitted = true;
 
     if (!this.editprivateOwnerForm.valid || !this.editUnitForm.valid) {
-      this.saveCancelComponent.unlocked = true;
+      this.saveCancelComponent.locked = false;
       return;
     }
     this.updateRowValues(row);

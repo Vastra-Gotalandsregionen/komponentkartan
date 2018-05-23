@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, ViewChild, HostBinding } from '@angular/core';
-import { SaveCancelComponent } from '../saveCancel/saveCancel.component';
+import { SaveCancelComponent } from '../save-cancel/save-cancel.component';
 
 @Component({
     selector: 'vgr-page-header',
@@ -21,7 +21,7 @@ export class PageHeaderComponent {
         this.expanded = true;
         this.actionStarted.emit();
         if (this.saveCancelComponent) {
-            this.saveCancelComponent.unlocked = true;
+            this.saveCancelComponent.locked = false;
         }
     }
 

@@ -10,7 +10,7 @@ export { DropdownComponent } from './controls/dropdown/dropdown.component';
 export { DropdownMultiselectComponent } from './controls/dropdown-multiselect/dropdown-multiselect.component';
 export { FilterTextboxComponent } from './controls/filterTextbox/filterTextbox.component';
 export { LockButtonComponent } from './controls/lock-button/lock-button.component';
-export { SaveCancelComponent } from './controls/saveCancel/saveCancel.component';
+export { SaveCancelComponent } from './controls/save-cancel/save-cancel.component';
 export { RadioGroupComponent } from './controls/radioGroup/radioGroup.component';
 export { HeaderComponent } from './controls/header/header.component';
 export { LoginInformationComponent } from './controls/loginInformation/loginInformation.component';

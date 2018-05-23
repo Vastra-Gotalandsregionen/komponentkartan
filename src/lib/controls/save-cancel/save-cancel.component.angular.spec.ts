@@ -6,11 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SaveCancelComponent } from '../../controls/saveCancel/saveCancel.component';
+import { SaveCancelComponent } from '../../controls/save-cancel/save-cancel.component';
 import { ButtonComponent } from '../../controls/button/button.component';
 import { LockButtonComponent } from '../../controls/lock-button/lock-button.component';
 
-describe('SaveCancelComponent', () => {
+describe('[SaveCancelComponent - Angular]', () => {
     let component: SaveCancelComponent;
     let fixture: ComponentFixture<SaveCancelComponent>;
     let rootElement: DebugElement;
@@ -25,7 +25,7 @@ describe('SaveCancelComponent', () => {
 
         TestBed.overrideComponent(SaveCancelComponent, {
             set: {
-                templateUrl: 'saveCancel.component.html'
+                templateUrl: 'save-cancel.component.html'
             }
         });
         TestBed.overrideComponent(ButtonComponent, {
@@ -58,7 +58,7 @@ describe('SaveCancelComponent', () => {
             fixture.detectChanges();
         });
         it('lock button is enabled', () => {
-            expect(lockButton.attributes['ng-reflect-disabled']).toBeNull();
+            expect(lockButton.attributes['ng-reflect-disabled']).toBe('false');
         });
         describe('When unlock button is clicked', () => {
             beforeEach(() => {
@@ -69,7 +69,7 @@ describe('SaveCancelComponent', () => {
                 expect(lockButton.attributes['ng-reflect-disabled']).toEqual('true');
             });
             it('component is unlocked', () => {
-                expect(component.unlocked).toBe(true);
+                expect(component.locked).toBe(false);
             });
             it('lock button is disabled', () => {
                 expect(lockButton.attributes['ng-reflect-disabled']).toEqual('true');
@@ -81,7 +81,7 @@ describe('SaveCancelComponent', () => {
                     saveButton.triggerEventHandler('click', {});
                 });
                 it('component is locked', () => {
-                    expect(component.unlocked).toBeFalsy();
+                    expect(component.locked).toBe(true);
                 });
                 it('a save event is sent', () => {
                     expect(component.save.emit).toHaveBeenCalled();
@@ -94,7 +94,7 @@ describe('SaveCancelComponent', () => {
                     cancelButton.triggerEventHandler('click', {});
                 });
                 it('lock button is locked', () => {
-                    expect(component.unlocked).toBeFalsy();
+                    expect(component.locked).toBe(true);
                 });
                 it('a cancel event is sent', () => {
                     expect(component.cancel.emit).toHaveBeenCalled();
@@ -109,7 +109,7 @@ describe('SaveCancelComponent', () => {
                     expect(component.save.emit).toHaveBeenCalled();
                 });
                 it('component is locked', () => {
-                    expect(component.unlocked).toBe(false);
+                    expect(component.locked).toBe(true);
                 });
             });
         });
@@ -131,7 +131,7 @@ describe('SaveCancelComponent', () => {
             expect(component.unlock.emit).toHaveBeenCalledTimes(0);
         });
         it('component is unlocked', () => {
-            expect(component.unlocked).toBeTruthy();
+            expect(component.locked).toBe(false);
         });
         describe('and save button is clicked', () => {
             beforeEach(() => {
@@ -139,7 +139,7 @@ describe('SaveCancelComponent', () => {
                 saveButton.triggerEventHandler('click', {});
             });
             it('component remains unlocked', () => {
-                expect(component.unlocked).toBeTruthy();
+                expect(component.locked).toBe(false);
             });
             it('no unlock event is emitted', () => {
                 expect(component.unlock.emit).toHaveBeenCalledTimes(0);
@@ -155,7 +155,7 @@ describe('SaveCancelComponent', () => {
             });
 
             it('component remains unlocked', () => {
-                expect(component.unlocked).toBeTruthy();
+                expect(component.locked).toBe(false);
             });
             it('no unlock event is emitted', () => {
                 expect(component.unlock.emit).toHaveBeenCalledTimes(0);

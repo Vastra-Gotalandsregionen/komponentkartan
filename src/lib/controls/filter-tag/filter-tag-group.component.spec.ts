@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterTagGroupComponent } from './filter-tag-group.component';
+// import { FilterTagGroupComponent } from './filter-tag-group.component';
 
-describe('FilterTagGroupComponent', () => {
-  let component: FilterTagGroupComponent;
-  let fixture: ComponentFixture<FilterTagGroupComponent>;
+// describe('FilterTagGroupComponent', () => {
+//   let component: FilterTagGroupComponent;
+//   let fixture: ComponentFixture<FilterTagGroupComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FilterTagGroupComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ FilterTagGroupComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FilterTagGroupComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(FilterTagGroupComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
