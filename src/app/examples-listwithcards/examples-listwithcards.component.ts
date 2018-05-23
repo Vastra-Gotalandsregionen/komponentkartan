@@ -555,7 +555,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
     row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
   }
 
-  removeNotification(event, row){
+  removeNotification(event, row) {
     if (event === null) {
       row.removeNotification();
     }
