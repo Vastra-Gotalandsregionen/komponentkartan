@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 2.6.0 
 - Fixed smoother animations in list component
+- Error message in list component
 
 ## 2.5.0 (Stable)
 - WCAG-support for datepickern
