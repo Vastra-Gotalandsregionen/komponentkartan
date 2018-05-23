@@ -29,6 +29,7 @@ export class ListComponent implements AfterContentInit {
     @Input() @HostBinding('class.list--inline') flexibleHeader: boolean;
     @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
     @Input() allowMultipleExpandedItems = false;
+    @Input() notification;
     @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
     listlength: number = 0;
@@ -54,6 +55,7 @@ export class ListComponent implements AfterContentInit {
         });
     }
     subscribeEvents() {
+
         if (!this.allowMultipleExpandedItems) {
             this.items.forEach(changedContainer => {
                 changedContainer.expandedChanged.subscribe((expanded: boolean) => {
