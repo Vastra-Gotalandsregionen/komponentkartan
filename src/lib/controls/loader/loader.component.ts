@@ -1,18 +1,28 @@
 import { Component, Input, ChangeDetectorRef, HostBinding } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { trigger, state, animate, style, transition } from '@angular/animations';
 
 @Component({
   selector: 'vgr-loader',
   moduleId: module.id,
-  templateUrl: './loader.component.html'
+  templateUrl: './loader.component.html',
+  animations: [
+    trigger('fadeInOut', [
+      state('true', style({
+        opacity: 1
+      })),
+      state('false', style({
+        opacity: 0
+      })),
+      transition('* => *', animate('400ms ease'))
+    ])
+  ]
 })
 export class LoaderComponent {
   private _minimumTimeMs = 1000;
   private lastActivated: Date;
   private _active = false;
-
-  @HostBinding('class.loader--visible') visible = false;
-  @HostBinding('class.loader--spinning') spinning = false;
+  visible = false;
 
   @Input() set active(value: boolean) {
     if ((this._active && !value) || (!this._active && value)) {
@@ -34,15 +44,12 @@ export class LoaderComponent {
   constructor(private changeDetector: ChangeDetectorRef) { }
 
   private startSpinning() {
-    this.spinning = true;
     this.visible = true;
   }
   private stopSpinning() {
     setTimeout(() => {
       if (this._active) {
         this.startSpinning();
-      } else {
-        this.spinning = false;
       }
     }, 400);
     this.visible = false;

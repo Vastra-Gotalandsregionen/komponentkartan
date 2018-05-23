@@ -1,5 +1,5 @@
-import { Component, Input, ElementRef, HostListener } from '@angular/core'
-import { IHeaderMenu, IHeaderMenuItem } from '../../models/headerMenu.model'
+import { Component, Input, ElementRef, HostListener } from '@angular/core';
+import { IHeaderMenu, IHeaderMenuItem } from '../../models/headerMenu.model';
 
 @Component({
     selector: 'vgr-header-menu',
@@ -17,11 +17,7 @@ export class HeaderMenuComponent {
     }
 
     toggleHeaderMenu(event: Event) {
-        const target = event.target || event.srcElement || event.currentTarget;
-        const element = $(target);
-        if (!element.is('.header-menu__submenu-header')) {
-            this.hidden = !this.hidden;
-        }
+        this.hidden = !this.hidden;
 
         if (!this.hidden) {
             event.cancelBubble = true;
@@ -30,9 +26,11 @@ export class HeaderMenuComponent {
 
     toggleSubMenu(item: IHeaderMenuItem) {
         item.expanded = !item.expanded;
+
+        event.cancelBubble = true;
     }
 
-    @HostListener('document:click', ['$event'])
+    @HostListener('document:mousedown', ['$event'])
     onDocumentClick(event: any) {
         const target = event.target || event.srcElement || event.currentTarget;
 

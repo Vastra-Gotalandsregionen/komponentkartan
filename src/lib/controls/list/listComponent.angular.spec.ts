@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   ListComponent,
   ListItemComponent, ListItemHeaderComponent, ListColumnComponent, ListHeaderComponent,
-  ListItemContentComponent, ListItemJqeuryHelper, ListColumnHeaderComponent
+  ListItemContentComponent, ListColumnHeaderComponent
 } from '../../index';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -17,7 +17,6 @@ describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
   let rootElement: DebugElement;
-  const jqueryHelper: ListItemJqeuryHelper = new ListItemJqeuryHelper();
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -35,8 +34,7 @@ describe('ListComponent', () => {
       imports: [CommonModule, BrowserAnimationsModule],
       providers: [
         { provide: ElementRef },
-        { provide: Renderer },
-        { provide: ListItemJqeuryHelper, useValue: jqueryHelper }]
+        { provide: Renderer }]
     });
 
     TestBed.overrideComponent(ListComponent, {

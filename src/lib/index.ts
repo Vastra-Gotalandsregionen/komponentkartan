@@ -1,6 +1,4 @@
 export { ActionPanelComponent } from './controls/action-panel/action-panel.component';
-export { ActionPanelJqeuryHelper } from './controls/action-panel/actionPanelJqueryHelper';
-
 export { TextareaComponent } from './controls/textarea/textarea.component';
 export { ButtonComponent } from './controls/button/button.component';
 export { CardComponent } from './controls/card/card.component';
@@ -32,7 +30,6 @@ export { ListColumnComponent } from './controls/list/list-column.component';
 export { ListColumnCheckboxComponent } from './controls/list/list-column-checkbox.component';
 export { ListColumnTrashcanComponent } from './controls/list/list-column-trashcan.component';
 export { ListItemComponent } from './controls/list-item/list-item.component';
-export { ListItemJqeuryHelper } from './controls/list-item/listItemJqueryHelper';
 export { MenuComponent } from './controls/menu/menu.component';
 export { MenuItemComponent } from './controls/menu/menu-item.component';
 export { MenuSeparatorComponent } from './controls/menu/menu-separator.component';

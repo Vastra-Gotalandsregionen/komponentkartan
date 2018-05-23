@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { DebugElement, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
 import { ActionPanelComponent } from './action-panel.component';
 import { CloseButtonComponent } from '../closeButton/closeButton.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,8 +22,7 @@ describe('ActionPanelComponent', () => {
             imports: [CommonModule, FormsModule, BrowserAnimationsModule],
             providers: [
                 { provide: ElementRef },
-                { provide: ChangeDetectorRef },
-                { provide: ActionPanelJqeuryHelper }]
+                { provide: ChangeDetectorRef }]
         });
         TestBed.overrideComponent(ActionPanelComponent, {
             set: {

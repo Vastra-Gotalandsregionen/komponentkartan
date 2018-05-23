@@ -157,8 +157,6 @@ import * as $ from 'jquery';
   ],
   providers: [
     type.ModalService,
-    type.ActionPanelJqeuryHelper,
-    type.ListItemJqeuryHelper,
     type.BrowserDetector,
     DecimalPipe,
     type.ErrorHandler,

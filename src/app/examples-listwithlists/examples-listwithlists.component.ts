@@ -31,7 +31,7 @@ export class ExamplesListwithlistsComponent {
   }
 
   ngOnInit() {
-    this.searchForUnits();
+    // this.searchForUnits();
   }
 
   get allChecked() {
@@ -64,16 +64,18 @@ export class ExamplesListwithlistsComponent {
           this.listData = [];
           this.noSearchResult = true;
         }
-        this.loading = false;
+        setTimeout(() => {
+          this.loading = false;
+        }, 400);
       });
   }
 
   private mapToListItems(enheter: ExampleUnit[]) {
     this.listData = enheter.filter(x => !x.deleted).map(x => new ExpandableRow<ExampleUnit, any>(x));
     this.listData.forEach(element => {
-      if (this.getRandomInt(0, 5) === 2) {
-        element.setNotification('Meddelande om denna rad som ligger permanent', 'vgr-icon-exclamation');
-      }
+      // if (this.getRandomInt(0, 5) === 2) {
+      //   element.setNotification('Meddelande om denna rad som ligger permanent', 'vgr-icon-exclamation');
+      // }
     });
   }
 

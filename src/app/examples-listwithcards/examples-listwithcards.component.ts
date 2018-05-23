@@ -560,7 +560,13 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.updateRowValues(row);
 
     this.cardLocked = true;
-    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green', true);
+    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
+  }
+
+  removeNotification(event, row){
+    if (event === null) {
+      row.removeNotification();
+    }
   }
 
   onCardUnlocked() {
@@ -654,7 +660,6 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
   actionPanelClose() {
     this.showActionPanel = false;
-    this.addNewUnit = false;
     this.newUnits.forEach(u => u.selected = false);
     this.itemSelected = false;
     this.newCardLocked = true;
@@ -663,6 +668,9 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.privateOwnerForm.reset();
     this.agarOwnerForm.reset();
     this.submitted = false;
+    setTimeout(() => {
+      this.addNewUnit = false;
+    }, 1100);
   }
 
 
