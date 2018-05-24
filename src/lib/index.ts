@@ -50,6 +50,7 @@ export { ModalContentComponent } from './controls/modal/modal-content.component'
 export { ModalHeaderComponent } from './controls/modal/modal-header.component';
 export { ModalFooterComponent } from './controls/modal/modal-footer.component';
 export { CloseButtonComponent } from './controls/closeButton/closeButton.component';
+export { RingWithTextComponent } from './controls/ring-with-text/ring-with-text.component';
 
 export { TableComponent } from './controls/table/table.component';
 export { TableRowColumnComponent } from './controls/table/table-row-column.component';
