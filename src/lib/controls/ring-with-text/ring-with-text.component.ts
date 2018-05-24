@@ -16,6 +16,7 @@ export class RingWithTextComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.text = this.text.substr(0, 2);
     this.ringSize = this.size === 'large'  ? 'ring-with-text--large' : 'ring-with-text--small';
   }
 
