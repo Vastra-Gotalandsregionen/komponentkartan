@@ -11,13 +11,14 @@ export class RingWithTextComponent implements OnInit {
   @Input() text: string;
   @Input() textColor: string;
   @Input() circleColor: string;
-  ringSize: string;
+  private ringSize: string;
 
   constructor() { }
 
   ngOnInit() {
-    this.text = this.text.substr(0, 2);
+    if (this.text) {
+      this.text = this.text.substr(0, 2);
+    }
     this.ringSize = this.size === 'large'  ? 'ring-with-text--large' : 'ring-with-text--small';
   }
-
 }

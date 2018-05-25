@@ -1,1 +1,1 @@
-<div class="ring-with-text" [ngClass]="ringSize" [ngStyle]="{color: textColor, backgroundColor: circleColor}" >{{text}}</div>
+<div *ngIf="text" class="ring-with-text" [ngClass]="ringSize" [ngStyle]="{color: textColor, backgroundColor: circleColor}" >{{text}}</div>
