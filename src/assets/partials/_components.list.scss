@@ -245,13 +245,13 @@ vgr-list.list--new-item-added {
 }
 
 .list__notification {
-  padding: 5px 20px;
+  padding: 5px 10px;
   .list-item__notification__icon {
     float: left;
   }
   .list-item__notification__message {
     margin-left: 36px;
-    margin-top: 2px;
+    margin-top: 3px;
     font-size: 16px;
   }
 }
@@ -375,6 +375,7 @@ vgr-list.list--new-item-added {
     }
   }
   .list__notification {
+    padding: 5px 20px;
     .list-item__notification__message {
       font-size: 18px;
       margin-top: 1px;
