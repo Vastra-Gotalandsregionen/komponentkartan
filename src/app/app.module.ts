@@ -58,6 +58,7 @@ import { SizesComponent } from './sizes/sizes.component';
 import { MenuComponent } from './menu/menu.component';
 import { ExpandableDivComponent } from './expandable-div/expandable-div.component';
 import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
+import { FilterTagComponent } from './filter-tag/filter-tag.component';
 
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
@@ -111,7 +112,8 @@ import { TableComponent } from './table/table.component';
         ActionPanelsComponent,
         ClosebuttonComponent,
         TableComponent,
-        TextareafieldComponent
+        TextareafieldComponent,
+        FilterTagComponent
     ],
     imports: [
         KomponentkartanModule,
