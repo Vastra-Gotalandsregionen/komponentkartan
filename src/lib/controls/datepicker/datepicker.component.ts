@@ -43,14 +43,12 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
 
     labelledbyid: string = Guid.newGuid();
 
-
     expanded: boolean;
     hasFocus: boolean;
     control: AbstractControl;
 
     focusableDays = [];
     currentFocusedDayIndex = 0;
-
 
     today: Date;
     yearMonths: ICalendarYearMonth[] = [];
@@ -70,9 +68,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
         this.previousMonth = true;
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
-
     }
-
 
     ngOnInit() {
         this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
