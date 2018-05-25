@@ -10,32 +10,38 @@ describe('RingWithTextComponent', () => {
   let rootElement: DebugElement;
   let circleElement: DebugElement;
 
-  beforeEach(async(() => {
+  beforeEach((done) => {
     TestBed.configureTestingModule({
       declarations: [ RingWithTextComponent ]
     }).compileComponents();
-  }));
+    done();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RingWithTextComponent);
     component = fixture.componentInstance;
     rootElement = fixture.debugElement;
     component.text = 'HE';
-
     fixture.detectChanges();
-
     circleElement = rootElement.query(By.css('.ring-with-text'));
   });
 
   it('circle color is set', () => {
     component.circleColor = 'red';
     fixture.detectChanges();
-
     expect(circleElement.nativeElement.style.backgroundColor).toBe('red');
   });
+
+  it('text color is set', () => {
+    component.textColor = 'blue';
+    fixture.detectChanges();
+    expect(circleElement.nativeElement.style.color).toBe('blue');
+  });
+
   it('size is small by default', () => {
     expect(circleElement.classes['ring-with-text--small']).toBe(true);
   });
+
   it('size is set to large', () => {
     component.size = 'large';
     component.ngOnInit();
@@ -43,11 +49,27 @@ describe('RingWithTextComponent', () => {
 
     expect(circleElement.classes['ring-with-text--large']).toBe(true);
   });
-  // it('not loaded if no text is provided', () => {
-  //   // component.text = 'vj';
-  //   // fixture.detectChanges();
-  //   console.log(circleElement);
 
-  //   expect(rootElement.query(By.css('.ring-with-text'))).toBeUndefined();
-  // });
+  it('size is set to small', () => {
+    component.size = 'small';
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(circleElement.classes['ring-with-text--small']).toBe(true);
+  });
+
+  it('not visible if no text provided', () => {
+    component.text = '';
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(rootElement.children.length).toBe(0);
+  });
+
+  it('text should be max two characters long', () => {
+    component.text = 'kompontentkartan';
+    component.ngOnInit();
+    fixture.detectChanges();
+    const localCircle = rootElement.query(By.css('.ring-with-text'));
+    expect(localCircle.nativeElement.textContent).toBe('ko');
+  });
 });
