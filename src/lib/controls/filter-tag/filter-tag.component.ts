@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, Renderer, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'vgr-filter-tag',
@@ -7,6 +7,7 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, Renderer
 export class FilterTagComponent implements AfterViewInit {
   @Input() disabled = false;
   @Input() label: string;
+  @Input() tabable = true;
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
   @Output() remove = new EventEmitter();
@@ -15,7 +16,9 @@ export class FilterTagComponent implements AfterViewInit {
   removed = false;
   private removing = false;
 
-  constructor(private renderer: Renderer) {}
+  get tabindex(): number {
+    return this.tabable ? 0 : -1;
+  }
 
   ngAfterViewInit() {
     if (!this.label) {
@@ -32,8 +35,8 @@ export class FilterTagComponent implements AfterViewInit {
     }
   }
 
-  setFocus() {
-    this.renderer.invokeElementMethod(this.filtertag.nativeElement, 'focus');
+  focus() {
+    this.filtertag.nativeElement.focus();
   }
 
   emitRemove() {

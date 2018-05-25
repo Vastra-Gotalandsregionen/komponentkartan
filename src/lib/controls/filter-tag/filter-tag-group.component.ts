@@ -1,6 +1,7 @@
-import { Component, AfterContentInit, OnDestroy, ContentChildren, QueryList, Renderer } from '@angular/core';
+import { Component, AfterContentInit, OnDestroy, ContentChildren, QueryList } from '@angular/core';
 import { FilterTagComponent } from './filter-tag.component';
 import { Subject } from 'rxjs/Subject';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'vgr-filter-tag-group',
@@ -13,14 +14,12 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
   lastSelectedIndex: number;
   private ngUnsubscribe = new Subject();
 
-  constructor(private renderer: Renderer) { }
-
   ngAfterContentInit() {
     this.setFilterTagTabIndexes();
     this.addFilterTagSubscriptions();
 
     this.filterTags.changes
-    .takeUntil(this.ngUnsubscribe)
+    .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(
       _ => {
         this.setFilterTagTabIndexes();
@@ -37,8 +36,7 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
 
   setFilterTagTabIndexes() {
     this.filterTags.forEach((x, i) => {
-      const tabindex = i ? '-1' : '0';
-      this.renderer.setElementAttribute(x.filtertag.nativeElement, 'tabindex', tabindex);
+      x.tabable = i ? false : true;
     });
   }
 
@@ -46,9 +44,9 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
     if (this.lastSelectedIndex >= 0) {
       const nonRemovedFilterTags = this.filterTags.filter(x => !x.removed);
       if (this.lastSelectedIndex < nonRemovedFilterTags.length) {
-        nonRemovedFilterTags[this.lastSelectedIndex].setFocus();
+        nonRemovedFilterTags[this.lastSelectedIndex].focus();
       } else if (nonRemovedFilterTags.length) {
-        nonRemovedFilterTags[nonRemovedFilterTags.length - 1].setFocus();
+        nonRemovedFilterTags[nonRemovedFilterTags.length - 1].focus();
       }
     }
   }
@@ -59,29 +57,29 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
 
     this.filterTags.forEach((x, i) => {
       const previousSubscription = x.previous
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         if (i > 0) {
-          this.filterTags.toArray()[i - 1].setFocus();
+          this.filterTags.toArray()[i - 1].focus();
         } else {
-          this.filterTags.last.setFocus();
+          this.filterTags.last.focus();
         }
       });
       this.filterTagSubscriptions.push(previousSubscription);
 
       const nextSubscription = x.next
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         if (i < this.filterTags.length - 1) {
-          this.filterTags.toArray()[i + 1].setFocus();
+          this.filterTags.toArray()[i + 1].focus();
         } else {
-          this.filterTags.first.setFocus();
+          this.filterTags.first.focus();
         }
       });
       this.filterTagSubscriptions.push(nextSubscription);
 
       const removeSubscription = x.remove
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         this.lastSelectedIndex = i;
         this.setFilterTagFocus();
