@@ -46,8 +46,6 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     }
 
     labelledbyid: string = Guid.newGuid();
-
-
     hasFocus: boolean;
 
     focusableMonths = [];
@@ -72,7 +70,27 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     }
 
     ngOnInit() {
-        this.years = [];
+        this.setCalendar();
+    }
+
+    ngAfterViewInit() {
+        this.setFocusableItems();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes) {
+            if (changes['maxDate'] || changes['minDate']) {
+                this.setCalendar();
+            }
+
+            if (this.formControlName) {
+                this.control = this.controlContainer.control.get(this.formControlName);
+            }
+            this.setFocusableItems();
+        }
+    }
+
+    setCalendar() {
         if (this.selectedDate) {
             if (this.selectedDate.getFullYear() < this.today.getFullYear()) {
                 this.minDate = new Date(this.selectedDate.getFullYear(), 0, 1);
@@ -81,21 +99,11 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
             if (this.selectedDate.getFullYear() > this.today.getFullYear()) {
                 this.maxDate = new Date(this.selectedDate.getFullYear(), 11, 1);
             }
-
         }
+
+        this.years = [];
         this.createYears();
         this.setDisplayedYear(this.selectedDate);
-    }
-
-    ngAfterViewInit() {
-        this.setFocusableItems();
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        if (this.formControlName) {
-            this.control = this.controlContainer.control.get(this.formControlName);
-        }
-        this.setFocusableItems();
     }
 
     setFocusableItems() {
@@ -104,9 +112,9 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
     }
 
     setFocusedElement() {
-        if (!this.selectedDate)
+        if (!this.selectedDate) {
             this.currentFocusedMonth = this.today.getMonth();
-        else {
+        } else {
             this.currentFocusedMonth = this.selectedDate.getMonth();
         }
         this.focusableMonths[this.currentFocusedMonth].focus();
