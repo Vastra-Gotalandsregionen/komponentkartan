@@ -43,6 +43,7 @@ import { TableComponent } from './table/table.component';
 
 import { IconsComponent } from './icons/icons.component';
 import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
+import { RingWithTextComponent } from './ring-with-text/ring-with-text.component';
 
 export const appRoutes: Routes = [
 
@@ -86,5 +87,6 @@ export const appRoutes: Routes = [
     { path: 'examples-listwithcards', component: ExamplesListwithcardsComponent },
     { path: 'examples-listwithlists', component: ExamplesListwithlistsComponent },
     { path: 'actionPanels', component: ActionPanelsComponent },
+    { path: 'ring-with-text', component: RingWithTextComponent },
     { path: '**', redirectTo: '/' }
 ];
