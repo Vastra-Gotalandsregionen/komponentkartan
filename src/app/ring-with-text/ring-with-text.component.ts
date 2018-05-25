@@ -10,7 +10,6 @@ export class RingWithTextComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('hejsan');
   }
 
 }
