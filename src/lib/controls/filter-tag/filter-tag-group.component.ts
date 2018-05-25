@@ -15,14 +15,14 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   ngAfterContentInit() {
-    this.setFilterTagTabIndexes();
+    this.setFilterTagTabFocusability();
     this.addFilterTagSubscriptions();
 
     this.filterTags.changes
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(
       _ => {
-        this.setFilterTagTabIndexes();
+        this.setFilterTagTabFocusability();
         this.setFilterTagFocus();
         this.addFilterTagSubscriptions();
       }
@@ -34,9 +34,10 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  setFilterTagTabIndexes() {
+  setFilterTagTabFocusability() {
     this.filterTags.forEach((x, i) => {
-      x.tabable = i ? false : true;
+      const focusable = i ? false : true;
+      x.makeTabFocusable(focusable);
     });
   }
 

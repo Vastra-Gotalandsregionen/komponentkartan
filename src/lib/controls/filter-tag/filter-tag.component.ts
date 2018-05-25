@@ -6,25 +6,28 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterVie
 })
 export class FilterTagComponent implements AfterViewInit {
   @Input() disabled = false;
-  @Input() label: string;
-  @Input() tabable = true;
+  @Input() ariaLabel: string;
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
   @Output() remove = new EventEmitter();
   @ViewChild('filtertag') filtertag: ElementRef;
   @ViewChild('content') content: ElementRef;
+  tabindex = 0;
   removed = false;
   removing = false;
 
-  get tabindex(): number {
-    return this.tabable ? 0 : -1;
+  ngAfterViewInit() {
+    if (!this.ariaLabel) {
+      Promise.resolve(null).then(() =>
+        this.ariaLabel = `Ta bort filtrering ${this.content.nativeElement.innerText}`
+      );
+    }
   }
 
-  ngAfterViewInit() {
-    if (!this.label) {
-      Promise.resolve(null).then(() =>
-        this.label = `Ta bort filtrering ${this.content.nativeElement.innerText}`);
-    }
+  makeTabFocusable(focusable: boolean) {
+    Promise.resolve(null).then(() =>
+      this.tabindex = focusable ? 0 : -1
+    );
   }
 
   onKeydown(event: KeyboardEvent) {
