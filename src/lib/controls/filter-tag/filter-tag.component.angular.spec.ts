@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, flushMicrotasks } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { Component, DebugElement } from '@angular/core';
+import { DebugElement } from '@angular/core';
 
 import { FilterTagComponent } from './filter-tag.component';
 
@@ -9,7 +9,6 @@ describe('[FilterTagComponent - Angular]', () => {
   let component: FilterTagComponent;
   let fixture: ComponentFixture<FilterTagComponent>;
   let rootElement: DebugElement;
-  let outerSpanElement: DebugElement;
   let buttonElement: DebugElement;
 
   beforeEach((done) => {
@@ -29,7 +28,6 @@ describe('[FilterTagComponent - Angular]', () => {
       fixture = TestBed.createComponent(FilterTagComponent);
       component = fixture.componentInstance;
       rootElement = fixture.debugElement;
-      outerSpanElement = rootElement.query(By.css('span'));
       buttonElement = rootElement.query(By.css('button'));
       fixture.detectChanges();
 
@@ -70,79 +68,6 @@ describe('[FilterTagComponent - Angular]', () => {
       buttonElement.nativeElement.click();
       rootElement.nativeElement.removeEventListener('click', handleClick);
       expect(clickBubbled).toBe(true);
-    });
-  });
-
-  describe('When pressing arrow left key', () => {
-    beforeEach(() => {
-      spyOn(component.previous, 'emit');
-      outerSpanElement.triggerEventHandler('keydown', { key: 'ArrowLeft' });
-    });
-    it('previous is emitted', () => {
-      expect(component.previous.emit).toHaveBeenCalledTimes(1);
-    });
-  });
-  describe('When pressing arrow left key in IE', () => {
-    beforeEach(() => {
-      spyOn(component.previous, 'emit');
-      outerSpanElement.triggerEventHandler('keydown', { key: 'Left' });
-    });
-    it('previous is emitted', () => {
-      expect(component.previous.emit).toHaveBeenCalledTimes(1);
-    });
-  });
-  describe('When pressing arrow up key', () => {
-    beforeEach(() => {
-      spyOn(component.previous, 'emit');
-      outerSpanElement.triggerEventHandler('keydown', { key: 'ArrowUp' });
-    });
-    it('previous is emitted', () => {
-      expect(component.previous.emit).toHaveBeenCalledTimes(1);
-    });
-  });
-  describe('When pressing arrow up key in IE', () => {
-    beforeEach(() => {
-      spyOn(component.previous, 'emit');
-      outerSpanElement.triggerEventHandler('keydown', { key: 'Up' });
-    });
-    it('previous is emitted', () => {
-      expect(component.previous.emit).toHaveBeenCalledTimes(1);
-    });
-  });
-  describe('When pressing arrow right key', () => {
-    beforeEach(() => {
-      spyOn(component.next, 'emit');
-      outerSpanElement.triggerEventHandler('keydown', { key: 'ArrowRight' });
-    });
-    it('next is emitted', () => {
-      expect(component.next.emit).toHaveBeenCalledTimes(1);
-    });
-  });
-  describe('When pressing arrow right key in IE', () => {
-    beforeEach(() => {
-      spyOn(component.next, 'emit');
-      outerSpanElement.triggerEventHandler('keydown', { key: 'Right' });
-    });
-    it('next is emitted', () => {
-      expect(component.next.emit).toHaveBeenCalledTimes(1);
-    });
-  });
-  describe('When pressing arrow down key', () => {
-    beforeEach(() => {
-      spyOn(component.next, 'emit');
-      outerSpanElement.triggerEventHandler('keydown', { key: 'ArrowDown' });
-    });
-    it('next is emitted', () => {
-      expect(component.next.emit).toHaveBeenCalledTimes(1);
-    });
-  });
-  describe('When pressing arrow down key in IE', () => {
-    beforeEach(() => {
-      spyOn(component.next, 'emit');
-      outerSpanElement.triggerEventHandler('keydown', { key: 'Down' });
-    });
-    it('next is emitted', () => {
-      expect(component.next.emit).toHaveBeenCalledTimes(1);
     });
   });
 
