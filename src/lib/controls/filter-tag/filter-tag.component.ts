@@ -14,7 +14,7 @@ export class FilterTagComponent implements AfterViewInit {
   @ViewChild('filtertag') filtertag: ElementRef;
   @ViewChild('content') content: ElementRef;
   removed = false;
-  private removing = false;
+  removing = false;
 
   get tabindex(): number {
     return this.tabable ? 0 : -1;

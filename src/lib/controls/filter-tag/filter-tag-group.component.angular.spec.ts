@@ -60,7 +60,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
 
   describe('When navigating with keyboard', () => {
     beforeEach(() => {
-      firstFilterTag.componentInstance.setFocus();
+      firstFilterTag.componentInstance.focus();
     });
     describe('and pressing arrow right key', () => {
       beforeEach(() => {
