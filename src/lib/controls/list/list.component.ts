@@ -32,7 +32,6 @@ export class ListComponent implements AfterContentInit {
     @Input() notification;
     @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
-    listlength: number = 0;
 
     loaded: boolean = false;
 
@@ -41,16 +40,8 @@ export class ListComponent implements AfterContentInit {
 
     ngAfterContentInit() {
         this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
-        this.listlength = this.items.length;
         this.subscribeEvents();
         this.items.changes.subscribe((changes) => {
-            if (changes.length === this.listlength + 1) {
-                this.moveHeader = true;
-                setTimeout(() => {
-                    this.moveHeader = false;
-                }, 2600);
-                this.listlength++;
-            }
             this.subscribeEvents();
         });
     }
@@ -78,6 +69,13 @@ export class ListComponent implements AfterContentInit {
             item.setFocusOnPreviousRowContent.subscribe(() => this.setFocusOnPreviousRowContent(item));
             item.setFocusOnNextRowContent.subscribe(() => this.setFocusOnNextRow(index));
         });
+    }
+
+    animateHeader() {
+        this.moveHeader = true;
+        setTimeout(() => {
+            this.moveHeader = false;
+        }, 2600);
     }
 
     setFocusOnPreviousRow(index: number): any {
