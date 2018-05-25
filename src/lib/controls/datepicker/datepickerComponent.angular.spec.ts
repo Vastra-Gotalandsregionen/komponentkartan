@@ -240,7 +240,7 @@ describe('[DatepickerComponent(Angular)]', () => {
             expect(datepicker.attributes['aria-labelledby']).toBe(component.labelledbyid);
         });
         describe('datepicker is initialized with two years', () => {
-            
+
             const currentYear = 2018;
             const currentMonth = 2; // mars
             const currentDate = 15;
@@ -547,7 +547,7 @@ describe('[DatepickerComponent(Angular)]', () => {
             });
         });
         describe('datepicker is initialized with three months', () => {
-            
+
             const currentYear = 2018;
             const currentMonth = 2; // mars
             const currentDate = 15;
@@ -599,13 +599,13 @@ describe('[DatepickerComponent(Angular)]', () => {
                     expect(currentYearElement.nativeElement.innerText).toBe('March 2018');
                 });
 
-                describe('enter is pressed when a date is focused', ()=>{
+                describe('enter is pressed when a date is focused', () => {
                     beforeEach(() => {
-                        daysInCurrentMonth[currentDate-1].triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                        daysInCurrentMonth[currentDate - 1].triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
                         fixture.detectChanges();
                     });
                     it('The focused date is selected', () => {
-                        let date = new Date(2018,2,15);
+                        const date = new Date(2018, 2, 15);
                         expect(component.selectedDate).toEqual(date);
                     });
                 });
@@ -624,13 +624,13 @@ describe('[DatepickerComponent(Angular)]', () => {
                     it('current year is 2018 and month is February', () => {
                         expect(currentYearElement.nativeElement.innerText).toBe('February 2018');
                     });
-                    describe('space is pressed when a date is focused', ()=>{
+                    describe('space is pressed when a date is focused', () => {
                         beforeEach(() => {
                             daysInCurrentMonth[0].triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
                             fixture.detectChanges();
                         });
                         it('The focused date is selected', () => {
-                            let date = new Date(2018,1,1);
+                            const date = new Date(2018, 1, 1);
                             expect(component.selectedDate).toEqual(date);
                         });
                     });

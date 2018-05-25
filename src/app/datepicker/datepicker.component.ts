@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatepickerComponent implements OnInit {
 
-  minDate20160515: Date;
-  maxDate20161225: Date;
+  minDate20160515: Date = new Date();
+  maxDate20161225: Date = new Date();
   tomorrow: Date = new Date();
   lastselectedDate: Date;
   selectedDate: Date;
@@ -16,12 +16,15 @@ export class DatepickerComponent implements OnInit {
 
   constructor() {
     const today = new Date();
-    this.minDate20160515 = new Date(2016, 4, 15);
-    this.maxDate20161225 = new Date(2016, 11, 25);
     this.tomorrow.setDate(today.getDate() + 1);
     this.selectedDate = new Date(2017, 6, 25);
     this.isReadonlyAndDisabled = true;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    setTimeout(() => {
+      this.minDate20160515 = new Date(2016, 4, 15);
+      this.maxDate20161225 = new Date(2016, 11, 25);
+    }, 5000);
+  }
 }
