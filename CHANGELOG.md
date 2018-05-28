@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added ring with text component
 - Bugfix in monthpicker and datepicker
 - Bugfix in list component
+- Added vgr-filter-tag and vgr-filter-tag-group components
+- *Breaking change* vgr-lock-button unlocked input replaced with locked input
+- *Breaking change* vgr-save-cancel unlocked input replaced with locked input
 
 ## 2.5.0 (Stable)
 - WCAG-support for datepickern
