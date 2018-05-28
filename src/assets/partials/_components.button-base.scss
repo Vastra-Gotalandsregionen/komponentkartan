@@ -1,0 +1,49 @@
+.button__base {
+  @extend .background-color--primary;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  border-radius: 1px;
+  color: $text-color--light;
+  vertical-align: top;
+  text-align: center;
+  cursor: pointer;
+  &:focus {
+    box-shadow: none;
+    outline: $focus-outline-width solid $focus-color;
+  }
+  &:active:not(.button--disabled) {
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+    transform: scale(0.96);
+    outline: 0;
+    .button__focus-line {
+      background-color: transparentize($secondary-color--default, 0.4);
+    }
+  }
+  &:hover:not(.button--disabled),
+  &:focus:not(.button--disabled) {
+    .button__focus-line {
+      visibility: visible;
+    }
+  }
+  &.button--disabled {
+    background-color: $secondary-color--default;
+    cursor: default;
+  }
+  .button__focus-line {
+    @extend .background-color--secondary;
+    visibility: hidden;
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    z-index: $layer-two;
+    bottom: 0;
+    left: 0;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+  }
+  .button__fixIE {
+    position: relative;
+  }
+}

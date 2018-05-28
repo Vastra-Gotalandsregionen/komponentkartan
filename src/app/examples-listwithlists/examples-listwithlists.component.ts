@@ -1,7 +1,6 @@
 import { Component, Output, ChangeDetectorRef } from '@angular/core';
-import { RowNotification, NotificationType, SortDirection, SortChangedArgs, ExpandableRow } from 'vgr-komponentkartan';
+import { RowNotification, NotificationType, SortDirection, SortChangedArgs, ExpandableRow, ModalService } from 'vgr-komponentkartan';
 import { ExampleUnit } from './unit.model';
-import { ModalService } from 'vgr-komponentkartan';
 import { UnitService } from './unitService';
 
 @Component({

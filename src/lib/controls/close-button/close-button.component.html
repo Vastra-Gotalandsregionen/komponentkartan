@@ -1,0 +1,6 @@
+﻿<span (click)="checkDisabled($event)">
+  <button type="button" class="close-button noselect" [ngClass]="{'button--disabled' : disabled}"
+  [attr.aria-disabled]="disabled" aria-label="stäng">
+    <div class="button__focus-line"></div>
+  </button>
+</span>

@@ -40,6 +40,7 @@ import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpa
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
 import { TableComponent } from './table/table.component';
+import { FilterTagComponent } from './filter-tag/filter-tag.component';
 
 import { IconsComponent } from './icons/icons.component';
 import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
@@ -87,6 +88,7 @@ export const appRoutes: Routes = [
     { path: 'examples-listwithcards', component: ExamplesListwithcardsComponent },
     { path: 'examples-listwithlists', component: ExamplesListwithlistsComponent },
     { path: 'actionPanels', component: ActionPanelsComponent },
+    { path: 'filter-tag', component: FilterTagComponent },
     { path: 'ring-with-text', component: RingWithTextComponent },
     { path: '**', redirectTo: '/' }
 ];

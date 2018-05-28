@@ -90,7 +90,9 @@ import * as $ from 'jquery';
     type.TableRowComponent,
     type.TableComponent,
     type.TextareaComponent,
-    type.RingWithTextComponent
+    type.FilterTagComponent,
+    type.RingWithTextComponent,
+    type.FilterTagGroupComponent
   ],
   exports: [
     type.SafePipe,
@@ -155,7 +157,9 @@ import * as $ from 'jquery';
     type.TableHeaderComponent,
     type.TableRowComponent,
     type.TextareaComponent,
-    type.RingWithTextComponent
+    type.FilterTagComponent,
+    type.RingWithTextComponent,
+    type.FilterTagGroupComponent
   ],
   providers: [
     type.ModalService,

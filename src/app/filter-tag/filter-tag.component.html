@@ -1,0 +1,59 @@
+<app-component-docs [componentName]="'Filter tag'">
+  <div class="docs__overview">
+    <p>
+      <code>&lt;vgr-filter-tag&gt;</code> är avsedd att användas för att representera filter i en sökning. I kombination med
+      <code>&lt;vgr-filter-tag-group&gt;</code> kan filtren navigeras med piltangenterna.
+    </p>
+    <br>
+    <vgr-filter-tag>Filter</vgr-filter-tag>
+    <br>
+    <br>
+    <p>Förändras med tema:
+      <strong>ja</strong>
+    </p>
+  </div>
+  <div class="docs__examples">
+    <div style="margin-bottom: 20px">
+      <vgr-input style="display: inline-block" #filterInput></vgr-input>
+      <vgr-button (click)="addFilter(filterInput.value)">Lägg till filter</vgr-button>
+      <vgr-button (click)="removeAllFilters()">Ta bort alla filter</vgr-button>      
+    </div>
+    <div style="margin-bottom: 20px" *ngIf="filters.length">
+      <vgr-filter-tag-group>
+        <vgr-filter-tag *ngFor="let filter of filters" (remove)="removeFilter(filter)">{{filter}}</vgr-filter-tag>
+      </vgr-filter-tag-group>
+    </div>
+    <ul>
+      <li *ngFor="let value of filteredValues">{{value}}</li>
+    </ul>
+  </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>disabled: boolean</td>
+        <td>Inaktivera filter tag. Förvalt värde är
+          <code>false</code>.</td>
+        <td>[disabled]="true"</td>
+      </tr>
+      <tr>
+        <td>ariaLabel: string</td>
+        <td>Värde för
+          <code>aria-label</code>. Förvalt värde är "Ta bort filtrering [text]", där [text] är text content för
+          <code>&lt;vgr-filter-tag&gt;</code>.</td>
+        <td>[ariaLabel]="En alternativ beskrivning."</td>
+      </tr>
+      <tr>
+        <td>remove: EventEmitter</td>
+        <td>Event som triggas efter att animationen för bortagning av filter är klar. Bör kopplas till uppdatering av tillstånd
+          för den bakomliggande filtreringen.</td>
+        <td>(remove)="removeFilter()"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag"></div>
+</app-component-docs>

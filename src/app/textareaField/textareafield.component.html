@@ -27,7 +27,7 @@
     <br>
     <vgr-textarea [width]="'70%'" [height]="'20px'" [value]="initValue" [placeholder]="'Vänligen fyll i text om du vill'" [readonly]="isReadonly"></vgr-textarea>
     <p>Växla readonly</p>
-    <vgr-lock-button [unlocked]="true" (lockChanged)="isReadonly = !isReadonly"></vgr-lock-button>
+    <vgr-lock-button [locked]="false" (lockChanged)="isReadonly = !isReadonly"></vgr-lock-button>
     <div class="row-layout">
       <div class="full">
         <h2>Notera</h2>

@@ -201,7 +201,7 @@
                     <vgr-dropdown #unitVersions (selectedChanged)="onSelectedChangedVersion($event, row.previewObject)" [items]="exempelVersions"></vgr-dropdown>
                   </div>
                   <div class="flex-right">
-                    <vgr-save-cancel [secondary]="true" [unlocked]="!cardLocked" (cancel)="onCardCancel(row)" (save)="onCardSave($event, row)"
+                    <vgr-save-cancel [secondary]="true" [locked]="cardLocked" (cancel)="onCardCancel(row)" (save)="onCardSave($event, row)"
                       (unlock)="onCardUnlocked(row)"></vgr-save-cancel>
                   </div>
                 </vgr-card-header>

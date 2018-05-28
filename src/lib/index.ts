@@ -8,8 +8,8 @@ export { CheckboxComponent } from './controls/checkbox/checkbox.component';
 export { DropdownComponent } from './controls/dropdown/dropdown.component';
 export { DropdownMultiselectComponent } from './controls/dropdown-multiselect/dropdown-multiselect.component';
 export { FilterTextboxComponent } from './controls/filterTextbox/filterTextbox.component';
-export { LockButtonComponent } from './controls/lockButton/lockButton.component';
-export { SaveCancelComponent } from './controls/saveCancel/saveCancel.component';
+export { LockButtonComponent } from './controls/lock-button/lock-button.component';
+export { SaveCancelComponent } from './controls/save-cancel/save-cancel.component';
 export { RadioGroupComponent } from './controls/radioGroup/radioGroup.component';
 export { HeaderComponent } from './controls/header/header.component';
 export { LoginInformationComponent } from './controls/loginInformation/loginInformation.component';
@@ -49,14 +49,15 @@ export { ExpandableDivContentComponent } from './controls/expandableDiv/expandab
 export { ModalContentComponent } from './controls/modal/modal-content.component';
 export { ModalHeaderComponent } from './controls/modal/modal-header.component';
 export { ModalFooterComponent } from './controls/modal/modal-footer.component';
-export { CloseButtonComponent } from './controls/closeButton/closeButton.component';
+export { CloseButtonComponent } from './controls/close-button/close-button.component';
 export { RingWithTextComponent } from './controls/ring-with-text/ring-with-text.component';
-
 export { TableComponent } from './controls/table/table.component';
 export { TableRowColumnComponent } from './controls/table/table-row-column.component';
 export { TableHeaderColumnComponent } from './controls/table/table-header-column.component';
 export { TableRowComponent } from './controls/table/table-row.component';
 export { TableHeaderComponent } from './controls/table/table-header.component';
+export { FilterTagComponent } from './controls/filter-tag/filter-tag.component';
+export { FilterTagGroupComponent } from './controls/filter-tag/filter-tag-group.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';

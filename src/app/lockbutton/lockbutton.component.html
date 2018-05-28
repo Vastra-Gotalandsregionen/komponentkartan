@@ -17,9 +17,9 @@
   </div>
   <div class="docs__examples">
     <vgr-lock-button (lockChanged)="lockMessage='Lås 1 ' + ($event ? 'låst':'upplåst')"></vgr-lock-button>
-    <vgr-lock-button [unlocked]="true" (lockChanged)="lockMessage='Lås 2 ' + ($event ? 'låst':'upplåst')"></vgr-lock-button>
+    <vgr-lock-button [locked]="false" (lockChanged)="lockMessage='Lås 2 ' + ($event ? 'låst':'upplåst')"></vgr-lock-button>
     <vgr-lock-button [disabled]="true"></vgr-lock-button>
-    <vgr-lock-button [disabled]="true" [unlocked]="true"></vgr-lock-button>
+    <vgr-lock-button [disabled]="true" [locked]="false"></vgr-lock-button>
     <br>
     <br>
     <span>Senaste händelse:&nbsp;
@@ -34,9 +34,9 @@
         <th>Exempel</th>
       </tr>
       <tr>
-        <td>unlocked : boolean</td>
-        <td>Om knappen ska vara upplåst. True/false, default är false.</td>
-        <td>[unlocked]="true"</td>
+        <td>locked : boolean</td>
+        <td>Om knappen ska vara låst eller upplåst. Default är true.</td>
+        <td>[locked]="false"</td>
       </tr>
       <tr>
         <td>disabled : boolean</td>
@@ -46,7 +46,7 @@
       <tr>
         <td>onLockChanged : EventEmitter&lt;boolean&gt;</td>
         <td>Event som triggas när knappen låses eller låses upp.
-          <code>True</code> innebär låst,
+          <code>true</code> innebär låst,
           <code>false</code> upplåst.</td>
         <td></td>
       </tr>

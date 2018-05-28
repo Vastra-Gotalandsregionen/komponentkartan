@@ -1,21 +1,24 @@
 ﻿import { Component, Input, OnChanges } from '@angular/core';
-import { ButtonBaseComponent } from '../button-base/button-base.component';
 
 @Component({
-    selector: 'vgr-button',
-    moduleId: module.id,
-    templateUrl: './button.component.html'
+  selector: 'vgr-button',
+  templateUrl: './button.component.html'
 })
-export class ButtonComponent extends ButtonBaseComponent implements OnChanges {
+export class ButtonComponent implements OnChanges {
+  @Input() disabled = false;
+  @Input() secondary = false;
+  @Input() type = 'button';
+  reenabled = false;
+  private wasDisabled = false;
 
-    @Input() secondary: boolean;
-    @Input() type = 'button';
+  ngOnChanges() {
+    this.reenabled = this.wasDisabled && !this.disabled;
+    this.wasDisabled = this.disabled;
+  }
 
-    lastDisabledStatus: boolean;
-    reenabled: boolean;
-
-    ngOnChanges() {
-        this.reenabled = this.lastDisabledStatus === true && this.disabled === false;
-        this.lastDisabledStatus = this.disabled;
+  checkDisabled(event: MouseEvent) {
+    if (this.disabled) {
+      event.stopPropagation();
     }
+  }
 }
