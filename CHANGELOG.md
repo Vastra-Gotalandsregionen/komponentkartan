@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Error message in list component
 - Added ring with text component
 - Bugfix in monthpicker and datepicker
+- Bugfix in list component
 
 ## 2.5.0 (Stable)
 - WCAG-support for datepickern
