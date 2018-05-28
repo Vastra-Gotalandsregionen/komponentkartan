@@ -26,7 +26,7 @@ export class UnitService {
         const examplehenhetskod: number[] = [802200, 663300, 663200, 623300, 627600, 432300, 435600, 806600, 834500, 678500, 458700, 648900, 804500];
         let item: ExampleUnit;
 
-        for (let i = 1; i <= 20; i++) {
+        for (let i = 1; i <= 104; i++) {
             const indexForNames = this.getRandomInt(0, 12);
             const indexForAgare = this.getRandomInt(0, 4);
             const indexForEnhetskod = this.getRandomInt(0, 12);

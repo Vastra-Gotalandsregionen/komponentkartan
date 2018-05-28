@@ -98,16 +98,13 @@
   vertical-align: middle;
   margin-left: auto;
   transform: rotate(0deg);
-  transition: transform 0.4s;
   .card-section--expanded & {
-    transform: rotate(-180deg);
-    transition: transform 0.4s;
+     transform: rotate(-180deg);
   }
 }
 
-.card-section__content {
+.card-section__content .add-padding {
   padding-bottom: $margin--slim;
-  display: none;
   padding-top: $margin--slim;
 }
 

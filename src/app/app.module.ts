@@ -1,10 +1,9 @@
 // Core
 import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID } from '@angular/core';
-import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// Core
 import { appRoutes } from './routes';
 
 // Komponentkartan
@@ -44,7 +43,8 @@ import { BacktotopComponent } from './backtotop/backtotop.component';
 import { LoaderComponent } from './loader/loader.component';
 import { StartComponent } from './start/start.component';
 import { ThemingComponent } from './theming/theming.component';
-import { ListexampleComponent } from './lists/examples/withnotifications/listexample.component';
+import { ListexampleComponent } from './lists/examples/withnotification/listexample.component';
+import { ListexamplewithrownotificationComponent } from './lists/examples/withrownotifications/listexamplewithrownotification.component';
 import { ListcodeexampleComponent } from './lists/examples/simple/listcodeexample.component';
 import { ListExampleWithActionButtonsComponent } from './lists/examples/withactionbuttons/listexamplewithactionbuttons.component';
 import { ReactiveformsexampleComponent } from './reactiveforms-example/reactiveforms-example.component';
@@ -67,6 +67,7 @@ import { UnitService } from './examples-listwithlists/unitService';
 import { TextareafieldComponent } from './textareaField/textareafield.component';
 import { IconsComponent } from './icons/icons.component';
 import { TableComponent } from './table/table.component';
+import { RingWithTextComponent } from './ring-with-text/ring-with-text.component';
 
 @NgModule({
     declarations: [
@@ -92,6 +93,7 @@ import { TableComponent } from './table/table.component';
         StartComponent,
         ThemingComponent,
         ListexampleComponent,
+        ListexamplewithrownotificationComponent,
         ComponentDocsComponent,
         TitleValueComponent,
         FiltertexboxComponent,
@@ -113,11 +115,12 @@ import { TableComponent } from './table/table.component';
         ClosebuttonComponent,
         TableComponent,
         TextareafieldComponent,
-        FilterTagComponent
+        FilterTagComponent,
+        RingWithTextComponent
     ],
     imports: [
         KomponentkartanModule,
-        BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
         HighlightJsModule,

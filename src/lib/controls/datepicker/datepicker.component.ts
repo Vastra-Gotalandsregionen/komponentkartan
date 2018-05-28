@@ -1,6 +1,6 @@
 import {
     Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener,
-    ElementRef, forwardRef, SkipSelf, Optional, Host, ChangeDetectorRef, AfterViewInit
+    ElementRef, forwardRef, SkipSelf, Optional, Host, ChangeDetectorRef, AfterViewInit, SimpleChanges
 } from '@angular/core';
 import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
 import { ICalendarWeek } from '../../models/calendarWeek.model';
@@ -43,14 +43,12 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
 
     labelledbyid: string = Guid.newGuid();
 
-
     expanded: boolean;
     hasFocus: boolean;
     control: AbstractControl;
 
     focusableDays = [];
     currentFocusedDayIndex = 0;
-
 
     today: Date;
     yearMonths: ICalendarYearMonth[] = [];
@@ -70,26 +68,35 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
         this.previousMonth = true;
         this.minDate = new Date(this.today.getFullYear(), 0, 1);
         this.maxDate = new Date(this.today.getFullYear(), 11, 31);
-
     }
-
 
     ngOnInit() {
-        this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
-        this.updateYearMonths(this.minDate, this.maxDate, this.yearMonths);
-        this.setCurrentYearMonthOutput();
-        this.setPreviousAndNextMonthNavigation();
+        this.setCalendar();
     }
 
-    ngOnChanges() {
-        if (this.formControlName) {
-            this.control = this.controlContainer.control.get(this.formControlName);
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes) {
+            if (changes['maxDate'] || changes['minDate']) {
+                this.setCalendar();
+            }
+
+            if (this.formControlName) {
+                this.control = this.controlContainer.control.get(this.formControlName);
+            }
+            this.setFocusableItems();
         }
-        this.setFocusableItems();
     }
 
     ngAfterViewInit() {
         this.setFocusableItems();
+    }
+
+    setCalendar() {
+        this.yearMonths = null;
+        this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
+        this.updateYearMonths(this.minDate, this.maxDate, this.yearMonths);
+        this.setCurrentYearMonthOutput();
+        this.setPreviousAndNextMonthNavigation();
     }
 
     setFocusableItems() {

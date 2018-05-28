@@ -1,0 +1,23 @@
+﻿.ring-with-text {
+    display: inline-block;
+    border-radius: 50%;
+    background: black;
+    color: white;
+    font-family: $font-family;
+    text-align: center;
+    text-transform: uppercase;
+    
+    &--large {
+        width: 77px;
+        height: 77px;
+        line-height: 77px;
+        font-size: 40px;
+    }
+
+    &--small {
+        width: 41px;
+        height: 41px;
+        line-height: 41px;
+        font-size: 22px;
+    }
+}

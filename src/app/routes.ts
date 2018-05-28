@@ -30,7 +30,8 @@ import { PageStructureComponent } from './page-structure/page-structure.componen
 import { CardComponent } from './card/card.component';
 import { SizesComponent } from './sizes/sizes.component';
 import { MenuComponent } from './menu/menu.component';
-import { ListexampleComponent } from './lists/examples/withnotifications/listexample.component';
+import { ListexampleComponent } from './lists/examples/withnotification/listexample.component';
+import { ListexamplewithrownotificationComponent } from './lists/examples/withrownotifications/listexamplewithrownotification.component';
 import { ListcodeexampleComponent } from './lists/examples/simple/listcodeexample.component';
 import { ListExampleWithActionButtonsComponent } from './lists/examples/withactionbuttons/listexamplewithactionbuttons.component';
 import { ReactiveformsexampleComponent } from './reactiveforms-example/reactiveforms-example.component';
@@ -43,6 +44,7 @@ import { FilterTagComponent } from './filter-tag/filter-tag.component';
 
 import { IconsComponent } from './icons/icons.component';
 import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
+import { RingWithTextComponent } from './ring-with-text/ring-with-text.component';
 
 export const appRoutes: Routes = [
 
@@ -62,7 +64,8 @@ export const appRoutes: Routes = [
     { path: 'headers', component: HeadersComponent },
     { path: 'loader', component: LoaderComponent },
     { path: 'lists', component: ListsComponent },
-    { path: 'listexample-notifications', component: ListexampleComponent },
+    { path: 'listexample-notification', component: ListexampleComponent },
+    { path: 'listexample-notifications', component: ListexamplewithrownotificationComponent },
     { path: 'lockbutton', component: LockbuttonComponent },
     { path: 'panels', component: PanelsComponent },
     { path: 'modaldialog', component: ModaldialogComponent },
@@ -86,5 +89,6 @@ export const appRoutes: Routes = [
     { path: 'examples-listwithlists', component: ExamplesListwithlistsComponent },
     { path: 'actionPanels', component: ActionPanelsComponent },
     { path: 'filter-tag', component: FilterTagComponent },
+    { path: 'ring-with-text', component: RingWithTextComponent },
     { path: '**', redirectTo: '/' }
 ];

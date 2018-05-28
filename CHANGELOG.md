@@ -5,7 +5,10 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 2.6.0 
-- 
+- Fixed smoother animations in list component
+- Error message in list component
+- Added ring with text component
+- Bugfix in monthpicker and datepicker
 
 ## 2.5.0 (Stable)
 - WCAG-support for datepickern

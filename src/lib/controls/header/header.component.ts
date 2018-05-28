@@ -1,7 +1,7 @@
-import { Component, AfterViewInit, Input, ElementRef, ViewChild } from '@angular/core'
+import { Component, AfterViewInit, Input, ElementRef, ViewChild } from '@angular/core';
 
-import { IHeaderMenu, IHeaderMenuGroup, IHeaderMenuItem } from '../../models/headerMenu.model'
-import { HeaderMenuComponent } from '../headerMenu/headerMenu.component'
+import { IHeaderMenu, IHeaderMenuGroup, IHeaderMenuItem } from '../../models/headerMenu.model';
+import { HeaderMenuComponent } from '../headerMenu/headerMenu.component';
 
 @Component({
     selector: 'vgr-header',

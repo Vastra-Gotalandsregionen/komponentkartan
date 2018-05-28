@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow } from 'vgr-komponentkartan';
+import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow, ListComponent } from 'vgr-komponentkartan';
 import { ExampleUnit, ExampleUnitDetails, ExampleUnitJusteringar } from './unit.model';
 
 @Component({
@@ -43,8 +43,10 @@ export class ExamplesListwithcardsComponent implements OnInit {
   agarOwnerForm: FormGroup;
   onChangeForm: FormGroup;
   userFormSubmitted = false;
+  listNotification = null;
 
   @ViewChild(SaveCancelComponent) saveCancelComponent: SaveCancelComponent;
+  @ViewChild(ListComponent) listComponent: ListComponent;
   @ViewChild('unitVersions') unitVersions: DropdownComponent;
 
   validationMessages = {
@@ -552,7 +554,13 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.updateRowValues(row);
 
     this.cardLocked = true;
-    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green', true);
+    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
+  }
+
+  removeNotification(event, row){
+    if (event === null) {
+      row.removeNotification();
+    }
   }
 
   onCardUnlocked() {
@@ -638,6 +646,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
     this.actionPanelClose();
     this.newUnit = null;
+    this.listComponent.animateHeader();
   }
 
   onActionPanelClose() {
@@ -646,7 +655,6 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
   actionPanelClose() {
     this.showActionPanel = false;
-    this.addNewUnit = false;
     this.newUnits.forEach(u => u.selected = false);
     this.itemSelected = false;
     this.newCardLocked = true;
@@ -655,6 +663,9 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.privateOwnerForm.reset();
     this.agarOwnerForm.reset();
     this.submitted = false;
+    setTimeout(() => {
+      this.addNewUnit = false;
+    }, 1100);
   }
 
 

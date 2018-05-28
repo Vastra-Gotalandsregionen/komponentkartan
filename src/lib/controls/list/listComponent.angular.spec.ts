@@ -3,11 +3,12 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { By } from '@angular/platform-browser';
 import { DebugElement, Renderer, ElementRef, Component, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   ListComponent,
   ListItemComponent, ListItemHeaderComponent, ListColumnComponent, ListHeaderComponent,
-  ListItemContentComponent, ListItemJqeuryHelper, ListColumnHeaderComponent
+  ListItemContentComponent, ListColumnHeaderComponent
 } from '../../index';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -16,7 +17,6 @@ describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
   let rootElement: DebugElement;
-  const jqueryHelper: ListItemJqeuryHelper = new ListItemJqeuryHelper();
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -31,29 +31,15 @@ describe('ListComponent', () => {
         ListColumnComponent,
         ListItemContentComponent
       ],
-      imports: [CommonModule],
+      imports: [CommonModule, BrowserAnimationsModule],
       providers: [
         { provide: ElementRef },
-        { provide: Renderer },
-        { provide: ListItemJqeuryHelper, useValue: jqueryHelper }]
+        { provide: Renderer }]
     });
 
     TestBed.overrideComponent(ListComponent, {
       set: {
-        template: `
-        <vgr-list-header>
-          <vgr-list-column-header>
-          </vgr-list-column-header>
-        </vgr-list-header>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column></vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-              <span> Mer information</span>
-          </vgr-list-item-content>
-        < /vgr-list-item>
-        `
+        templateUrl: './list.component.html'
       }
     });
 
@@ -63,34 +49,37 @@ describe('ListComponent', () => {
       fixture.componentInstance.items = fixture.debugElement.children[0].componentInstance as QueryList<ListItemComponent>;
       component = fixture.componentInstance;
       rootElement = fixture.debugElement;
-
       fixture.detectChanges();
       done();
     });
   });
 
   describe('[ListComponent', () => {
-    describe('When initialized', () => {
+    describe('When notification is not set', () => {
+      it('notification is not visible', () => {
+        expect(rootElement.queryAll(By.css('.list__notification')).length).toBe(0);
+      });
+    });
+
+    describe('When notification is set', () => {
       beforeEach(() => {
-        component.ngAfterContentInit();
+        component.notification = {message: 'Detta är en notifikation', icon: 'vgr-icon-plus'};
+        fixture.detectChanges();
       });
 
-      // it('the component has the list-item class', () => {
-      //   expect(rootElement.classes['list']).toBe(true);
-      // });
+      it('notification is visible', () => {
+        expect(rootElement.queryAll(By.css('.list__notification')).length).toBe(1);
+      });
 
-      // describe('when vgr-list-item-header is clicked', () => {
-      //   beforeEach(() => {
-      //     let header: DebugElement;
-      //     header = rootElement.children[0];
-      //     spyOn(component.items.first.setFocusOnFirstRow, 'emit');
-      //     header.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
-      //   });
-
-      //   it('component is expanded', () => {
-      //     expect(component.items.first.listItemHeader.expandedChanged).toBe(true);
-      //   });
-      // });
+      describe('and when notification is removed', () => {
+        beforeEach(() => {
+          component.notification = null;
+          fixture.detectChanges();
+        });
+        it('notification is not visible', () => {
+          expect(rootElement.queryAll(By.css('.list__notification')).length).toBe(0);
+        });
+      });
     });
   });
 

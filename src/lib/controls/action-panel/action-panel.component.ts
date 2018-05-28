@@ -2,7 +2,6 @@ import { Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitt
 import { trigger, style, animate, transition } from '@angular/animations';
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
-import { ActionPanelJqeuryHelper } from './actionPanelJqueryHelper';
 
 @Component({
     templateUrl: './action-panel.component.html',
@@ -38,11 +37,17 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     @Input() showCloseButton: boolean;
 
     @Input() title: string;
-    @Input() expansionSpeed: 'slow' | 'normal' | 'fast';
+    @Input() expansionSpeed: 'slow' | 'normal' | 'fast' | 'noanimation';
     get animationDelayMs(): number {
-        return this.expansionSpeed === 'slow' ? 1000 :
-            this.expansionSpeed === 'fast' ? 300 : 600;
-
+        if (this.expansionSpeed === 'slow') {
+            return 1000;
+        } else if (this.expansionSpeed === 'fast') {
+            return 300;
+        } else if (this.expansionSpeed === 'noanimation') {
+            return 0;
+        } else {
+            return 600;
+        }
     }
     @HostBinding('class.action-panel--slow') get slow() {
         return this.expansionSpeed === 'slow';
@@ -50,8 +55,13 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     @HostBinding('class.action-panel--fast') get fast() {
         return this.expansionSpeed === 'fast';
     }
+    @HostBinding('class.action-panel--noanimation') get noanimation() {
+        return this.expansionSpeed === 'noanimation';
+    }
 
     @Input() set expanded(expandedValue: boolean) {
+        //this.elementRef.nativeElement.style.opacity = 0;
+
         if (expandedValue && !this._expanded) {
             this.expand();
         } else if (!expandedValue && this._expanded) {
@@ -84,7 +94,7 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
         return this._notification;
     }
 
-    constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef, private jqueryHelper: ActionPanelJqeuryHelper) {
+    constructor(private elementRef: ElementRef, private changeDetecor: ChangeDetectorRef) {
         this.pageHeaderHeight = 0;
     }
 
@@ -129,12 +139,12 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     private collapse(collapsingNotification?: NotificationType) {
         this.updateActualContentHeight();
         this.elementRef.nativeElement.style.height = this.actualContentHeight;
+        this._expanded = false;
+        this.collapsed = true;
+        this.expandedChanged.emit(false);
         setTimeout(() => {
             this.elementRef.nativeElement.style.height = '0px';
             this.elementRef.nativeElement.style.overflow = 'hidden';
-            this.expandedChanged.emit(false);
-            this._expanded = false;
-            this.collapsed = true;
         }, 50);
     }
 

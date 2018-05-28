@@ -9,8 +9,8 @@ export class MonthpickerComponent implements OnInit {
   lastSelectedDate: Date;
   preselectedDate: Date = new Date(2015, 0, 13);
   maxDate: Date = new Date(2018, 7, 1);
-  firstOfMay2015 = new Date(2015, 4, 1);
-  lastOfMarch2016 = new Date(2016, 2, 31);
+  firstOfMay2015: Date = new Date();
+  lastOfMarch2016: Date = new Date();
   minDate20160515: Date;
   maxDate20170326: Date;
   isReadonlyAndDisabled: boolean;
@@ -22,6 +22,10 @@ export class MonthpickerComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.firstOfMay2015 = new Date(2015, 4, 1);
+      this.lastOfMarch2016 = new Date(2016, 2, 31);
+    }, 5000);
   }
 
 }

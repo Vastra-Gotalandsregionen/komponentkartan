@@ -1,0 +1,66 @@
+<app-component-docs [componentName]="'Ring med text'">
+
+  <div class="docs__overview">
+    <p>
+      <code>
+        &lt;vgr-ring-with-textn&gt; </code> Kan användas tillexempel för att visa upp en inloggad användares initialer. Det går att styra både text, färg och storlek. <br>Här är ett exampel, det går att se fler under exempel här under. <vgr-ring-with-text text="NE" size="small" textColor="white" circleColor="#314152"></vgr-ring-with-text>
+      <br>
+    </p>
+    <p> Förändras med tema:
+      <strong>nej</strong>
+    </p>
+  </div>
+
+  <div class="docs__examples">
+    <div class="column-layout">
+      <h2>Lilla storleken</h2>
+      <div>
+        <vgr-ring-with-text text="NE" size="small" textColor="white" circleColor="#9D2235"></vgr-ring-with-text>
+        <vgr-ring-with-text text="FP" size="small" textColor="white" circleColor="#7fa276"></vgr-ring-with-text>
+        <vgr-ring-with-text text="MW" size="small" textColor="white" circleColor="#006298"></vgr-ring-with-text>
+        <vgr-ring-with-text text="G" size="small" textColor="#000" circleColor="#ECF1EB"></vgr-ring-with-text>
+      </div>
+      <h2>Stora storleken</h2>
+      <div>
+        <vgr-ring-with-text text="CK" size="large" textColor="white" circleColor="#4A773C"></vgr-ring-with-text>
+        <vgr-ring-with-text text="Q" size="large" textColor="white" circleColor="151515"></vgr-ring-with-text>
+        <vgr-ring-with-text text="WM" size="large" textColor="black" circleColor="#f9dede"></vgr-ring-with-text>
+      </div>
+    </div>
+    <br>
+  </div>
+
+  <div class="docs__api">
+    <table class="property-table ">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>text : string</td>
+        <td>Texten som skall stå i ringen (ett eller två tecken). Skriver man fler tecken så visas endast de två första och skriver man ingen text visas ingen ring.</td>
+        <td>text="NE"</td>
+      </tr>
+      <tr>
+        <td>size : string</td>
+        <td>Storleken på cirkeln. Värdena den accepterar är "small" (default) och "large".</td>
+        <td>size="small"</td>
+      </tr>
+      <tr>
+        <td>textColor : string</td>
+        <td>Färgen på texten i ringen. Accepterar html-kompatibla färgväden (HEX eller färgnamn)</td>
+        <td>textColor="white"</td>
+      </tr>
+      <tr>
+        <td>circleColor : string</td>
+        <td>Färgen på cirkeln. Accepterar html-kompatibla färgväden (HEX eller färgnamn)</td>
+        <td>circleColor="#000000"</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="docs__wcag">
+    <i>Ej tillgängligt.</i>
+  </div>
+</app-component-docs>

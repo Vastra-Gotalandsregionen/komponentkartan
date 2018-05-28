@@ -1,10 +1,9 @@
 // Core
 import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID } from '@angular/core';
-import { BrowserModule, Title } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, CommonModule } from '@angular/common';
 
 // Common
 import * as type from './index';
@@ -22,11 +21,10 @@ import * as $ from 'jquery';
 
 @NgModule({
   imports: [
-    BrowserModule,
     FormsModule,
     RouterModule,
     PerfectScrollbarModule,
-    BrowserAnimationsModule,
+    CommonModule,
     ReactiveFormsModule
   ],
   declarations: [
@@ -93,6 +91,7 @@ import * as $ from 'jquery';
     type.TableComponent,
     type.TextareaComponent,
     type.FilterTagComponent,
+    type.RingWithTextComponent,
     type.FilterTagGroupComponent
   ],
   exports: [
@@ -159,12 +158,11 @@ import * as $ from 'jquery';
     type.TableRowComponent,
     type.TextareaComponent,
     type.FilterTagComponent,
+    type.RingWithTextComponent,
     type.FilterTagGroupComponent
   ],
   providers: [
     type.ModalService,
-    type.ActionPanelJqeuryHelper,
-    type.ListItemJqeuryHelper,
     type.BrowserDetector,
     DecimalPipe,
     type.ErrorHandler,
