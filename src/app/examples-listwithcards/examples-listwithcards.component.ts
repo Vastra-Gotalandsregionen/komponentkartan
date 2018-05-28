@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow } from 'vgr-komponentkartan';
+import { RowNotification, NotificationType, DropdownComponent, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, DropdownItem, ExpandableRow, ListComponent } from 'vgr-komponentkartan';
 import { ExampleUnit, ExampleUnitDetails, ExampleUnitJusteringar } from './unit.model';
 
 @Component({
@@ -46,6 +46,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   listNotification = null;
 
   @ViewChild(SaveCancelComponent) saveCancelComponent: SaveCancelComponent;
+  @ViewChild(ListComponent) listComponent: ListComponent;
   @ViewChild('unitVersions') unitVersions: DropdownComponent;
 
   validationMessages = {
@@ -126,13 +127,6 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.createOnChangeForm();
 
     this.onSortChanged({ key: 'enhet', direction: SortDirection.Ascending } as SortChangedArgs);
-
-    setTimeout(() => {
-      this.listNotification = {
-        message: 'Allt gick fel! Detta är en komponentkarta av ersättningssystemen i Västra Götalandsregionen. Anledningen till att följa gemensamma riktlinjer vid navigation, kontroller och struktur är dels för att skapa en enhetlighet och dels kunna hantera flera system för samma inloggning. Innehållet i de olika ersättningssystemen är och kommer fortsättningsvis att vara systemspecifikt. Ersättningssystemen med gemensamt inloggning har en gemensam portal med en neutral färg som är skild från den röda, gröna och blå färgen. När en användare har behörighet för fler än ett system kommer de gemensamma delarna att visa den neutrala färgen.',
-        icon: 'vgr-icon-message'
-      };
-    }, 1000);
   }
 
   createOnChangeForm() {
@@ -652,6 +646,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
     this.actionPanelClose();
     this.newUnit = null;
+    this.listComponent.animateHeader();
   }
 
   onActionPanelClose() {
