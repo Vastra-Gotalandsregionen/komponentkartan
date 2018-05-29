@@ -33,42 +33,7 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
             transition('collapsed => expanded',
                 animate('400ms ease-in')
             ),
-        ]),
-        trigger('slideNotificationMessage', [
-            state('visible', style({
-                overflow: 'visible',
-                // display: 'visible',
-                height: '*'
-            })),
-            state('hidden', style({
-                // display: 'hidden',
-                overflow: 'hidden',
-                height: '0'
-            })),
-            transition('* => hidden',
-                animate('400ms ease-in')
-            ),
-            transition('* => visible',
-                animate('400ms ease-in')
-            )
-        ]),
-        // trigger('showContent', [
-        //     state('void', style({
-        //         height: '0'
-        //     })),
-        //     transition('* => true', [
-        //         style({height: 0, overflow: 'hidden'}),
-        //           animate('600ms ease', style({
-        //             height: '*'
-        //           }))
-        //       ]),
-        //     transition('* => false', [
-        //         style({ overflow: 'hidden'}),
-        //         animate('0.6s ease', style({
-        //             height: '0'
-        //         }))
-        //     ])
-        // ])
+        ])
     ]
 })
 
@@ -77,8 +42,6 @@ export class ListItemComponent implements AfterContentInit {
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
     }
-
-    stateNotification = 'visible';
 
     private _expanded = false;
     @HostBinding('class.list-item') isContainer = true;
@@ -187,7 +150,6 @@ export class ListItemComponent implements AfterContentInit {
     showNotification() {
         this._notification = this.permanentNotification;
         this.notificationVisible = true;
-        this.stateNotification = 'visible';
     }
 
     public setExpandOrCollapsed() {
@@ -251,8 +213,6 @@ export class ListItemComponent implements AfterContentInit {
 
         this._notification = this.eventNotification;
 
-        this.stateNotification = 'visible';
-
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
@@ -260,7 +220,6 @@ export class ListItemComponent implements AfterContentInit {
                 this.notInteractable = false;
                 this.expandedChanged.emit(this.expanded);
                 if (this.eventNotification.removeWhenDone) {
-                    this.stateNotification = 'hidden';
                     this.notificationVisible = false;
                     this.permanentNotification = null;
 
@@ -269,7 +228,6 @@ export class ListItemComponent implements AfterContentInit {
                     }, 1000);
                 } else {
                     if (!this.permanentNotification) {
-                        this.stateNotification = 'hidden';
                         this.notificationVisible = false;
                         setTimeout(() => {
                             this.notificationChanged.emit(null);
@@ -285,7 +243,6 @@ export class ListItemComponent implements AfterContentInit {
 
     private processShowOnRemoveNotification() {
         this.notificationVisible = true;
-        this.stateNotification = 'visible';
 
         if (this.eventNotification.done) {
             this.notificationVisible = false;
