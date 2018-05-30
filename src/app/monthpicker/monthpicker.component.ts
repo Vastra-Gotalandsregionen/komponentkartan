@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MonthpickerComponent implements OnInit {
   lastSelectedDate: Date;
-  preselectedDate: Date = new Date(2015, 0, 13);
+  preselectedDate: Date;
   maxDate: Date = new Date(2018, 7, 1);
   firstOfMay2015: Date = new Date();
   lastOfMarch2016: Date = new Date();
