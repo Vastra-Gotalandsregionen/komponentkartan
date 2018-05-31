@@ -8,9 +8,6 @@ import { DecimalPipe, CommonModule } from '@angular/common';
 // Common
 import * as type from './index';
 
-// UI Components,
-// import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
 // Locale registration
 import { registerLocaleData } from '@angular/common';
 import localeSv from '@angular/common/locales/sv';
@@ -19,11 +16,17 @@ registerLocaleData(localeSv);
 // jquery
 import * as $ from 'jquery';
 
+// Perfect Scrollbar
+import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
+
 @NgModule({
   imports: [
     FormsModule,
     RouterModule,
-    // PerfectScrollbarModule,
+    PerfectScrollbarModule,
     CommonModule,
     ReactiveFormsModule
   ],
@@ -166,7 +169,11 @@ import * as $ from 'jquery';
     type.BrowserDetector,
     DecimalPipe,
     type.ErrorHandler,
-    { provide: LOCALE_ID, useValue: 'sv-SE' }
+    { provide: LOCALE_ID, useValue: 'sv-SE' },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ]
 })
 export class KomponentkartanModule { }

@@ -81,10 +81,10 @@ export class CardSectionComponent implements OnInit {
         this._showExpanded = this.expanded;
     }
 
-    // animationDone(event: AnimationTransitionEvent) {
-    //     if (event.toState === 'collapsed') {
-    //         this._showExpanded = false;
-    //         this.expanded = false;
-    //     }
-    // }
+    animationDone(event: any) {
+        if (event.toState === 'collapsed') {
+            this._showExpanded = false;
+            this.expanded = false;
+        }
+    }
 }
