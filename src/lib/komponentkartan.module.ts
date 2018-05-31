@@ -9,7 +9,7 @@ import { DecimalPipe, CommonModule } from '@angular/common';
 import * as type from './index';
 
 // UI Components,
-import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarModule, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 // Locale registration
 import { registerLocaleData } from '@angular/common';
@@ -23,7 +23,7 @@ import * as $ from 'jquery';
   imports: [
     FormsModule,
     RouterModule,
-    PerfectScrollbarModule,
+    // PerfectScrollbarModule,
     CommonModule,
     ReactiveFormsModule
   ],

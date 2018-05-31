@@ -1,4 +1,4 @@
-import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, AnimationTransitionEvent, OnInit, Renderer, ViewChild } from '@angular/core';
+import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, OnInit, Renderer, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
@@ -97,13 +97,13 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         super();
     }
 
-    animationDone(event: AnimationTransitionEvent) {
-        if (event.fromState === 'expanded' && event.toState === 'collapsed') {
+    // animationDone(event: AnimationTransitionEvent) {
+    //     if (event.fromState === 'expanded' && event.toState === 'collapsed') {
 
-            this._showExpanded = false;
-            this.expanded = false;
-        }
-    }
+    //         this._showExpanded = false;
+    //         this.expanded = false;
+    //     }
+    // }
     setFocus(handle: boolean = false) {
         if (handle && this.expanded) {
             this.menuItems.last.setFocus();

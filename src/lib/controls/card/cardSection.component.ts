@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, ElementRef, AnimationTransitionEvent, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, ElementRef, OnInit } from '@angular/core';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
 
 @Component({
@@ -11,15 +11,15 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
                 height: '0'
             })),
             transition('* => expanded', [
-                style({height: 0, overflow: 'hidden'}),
-                  animate('0.4s ease-in', style({
+                style({ height: 0, overflow: 'hidden' }),
+                animate('0.4s ease-in', style({
                     height: '*'
-                  }))
-              ]),
+                }))
+            ]),
             transition('* => collapsed', [
-                style({ overflow: 'hidden'}),
+                style({ overflow: 'hidden' }),
                 animate('0.4s ease-out', style({
-                  height: 0
+                    height: 0
                 }))
             ])
         ]),
@@ -63,9 +63,9 @@ export class CardSectionComponent implements OnInit {
 
     set showExpanded(show: boolean) {
         // if (show) {
-            this._showExpanded = true;
-            this.expanded = show;
-            // this.state = 'expanded';
+        this._showExpanded = true;
+        this.expanded = show;
+        // this.state = 'expanded';
         // } else {
         //     // this.state = 'collapsed';
         // }
@@ -81,10 +81,10 @@ export class CardSectionComponent implements OnInit {
         this._showExpanded = this.expanded;
     }
 
-    animationDone(event: AnimationTransitionEvent) {
-        if (event.toState === 'collapsed') {
-            this._showExpanded = false;
-            this.expanded = false;
-        }
-    }
+    // animationDone(event: AnimationTransitionEvent) {
+    //     if (event.toState === 'collapsed') {
+    //         this._showExpanded = false;
+    //         this.expanded = false;
+    //     }
+    // }
 }

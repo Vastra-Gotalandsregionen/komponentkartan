@@ -1,6 +1,6 @@
-﻿import { Injectable, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/rx';
-import { Subject } from 'rxjs/Subject';
+import { Injectable, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class ModalService {

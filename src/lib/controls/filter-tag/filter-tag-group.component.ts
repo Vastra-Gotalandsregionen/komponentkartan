@@ -1,6 +1,6 @@
 import { Component, AfterContentInit, OnDestroy, ContentChildren, QueryList } from '@angular/core';
 import { FilterTagComponent } from './filter-tag.component';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
