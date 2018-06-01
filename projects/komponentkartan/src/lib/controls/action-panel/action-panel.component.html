@@ -1,0 +1,12 @@
+<h3 *ngIf="title && title.length>0" class="action-panel__title">{{title}}</h3>
+<vgr-close-button *ngIf="showCloseButton" [@enterAnimation] class="action-panel__close" (click)="expanded=false"></vgr-close-button>
+<div *ngIf="notification" class="action-panel__notification">
+  <span class="action-panel__notification__icon" [ngClass]="notification.icon">
+  </span>
+  <div class="action-panel__notification__message">
+    {{notification? notification.message : ''}}
+  </div>
+</div>
+<div class="action-panel__content">
+  <ng-content></ng-content>
+</div>
