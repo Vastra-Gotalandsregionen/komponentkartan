@@ -10,7 +10,7 @@ module.exports = function (wallaby) {
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
       'src/wallabyTest.js',
-      'src/lib/**/*spec.js'
+      'projects/komponentkartan/src/lib/**/*spec.js'
     ],
     module: {
       loaders: [{
@@ -61,7 +61,7 @@ module.exports = function (wallaby) {
       extensions: ['.js', '.ts'],
       modules: [
         path.join(wallaby.projectCacheDir, 'src/app'),
-        path.join(wallaby.projectCacheDir, 'src/lib/'),
+        path.join(wallaby.projectCacheDir, 'projects/komponentkartan/src/lib/'),
         path.join(wallaby.projectCacheDir, 'src'),
         'node_modules'
       ],
@@ -87,17 +87,17 @@ module.exports = function (wallaby) {
         load: false
       },
       {
-        pattern: 'src/**/*.d.ts',
+        pattern: 'projects/komponentkartan/src/**/*.d.ts',
         ignore: true
       },
       {
-        pattern: 'src/**/*spec.ts',
+        pattern: 'projects/komponentkartan/src/**/*spec.ts',
         ignore: true
       }
     ],
 
     tests: [{
-      pattern: 'src/**/*spec.ts',
+      pattern: 'projects/komponentkartan/src/**/*spec.ts',
       load: false
     }],
 
@@ -109,8 +109,8 @@ module.exports = function (wallaby) {
 
     middleware: function (app, express) {
       var path = require('path');
-      app.use('/favicon.ico', express.static(path.join(__dirname, 'src/favicon.ico')));
-      app.use('/assets', express.static(path.join(__dirname, 'src/assets')));
+      app.use('/favicon.ico', express.static(path.join(__dirname, 'projects/komponentkartan/src/favicon.ico')));
+      app.use('/assets', express.static(path.join(__dirname, 'projects/komponentkartan/src/assets')));
     },
 
     env: {

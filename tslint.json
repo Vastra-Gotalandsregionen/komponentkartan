@@ -118,7 +118,6 @@
       true,
       "element",
       [
-        "vgr",
         "app"
       ],
       "kebab-case",

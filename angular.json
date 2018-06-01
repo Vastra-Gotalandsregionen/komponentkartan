@@ -72,9 +72,9 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
+            "main": "projects/komponentkartan/src/test.ts",
             "karmaConfig": "./karma.conf.js",
-            // "polyfills": "src/polyfills.ts",
+            // "polyfills": "projects/komponentkartan/src/polyfills.ts",
             "tsConfig": "projects/komponentkartan/tsconfig.spec.json",
             "scripts": [
               "projects/komponentkartan/src/lib/scripts/_objects.back-to-top.js"
