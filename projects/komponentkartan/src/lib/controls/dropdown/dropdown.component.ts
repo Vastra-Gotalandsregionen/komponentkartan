@@ -13,7 +13,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angu
 
 @Component({
     selector: 'vgr-dropdown',
-    moduleId: module.id,
     templateUrl: './dropdown.component.html',
     providers: [{
         provide: NG_VALUE_ACCESSOR,
@@ -96,7 +95,7 @@ export class DropdownComponent extends DropdownBaseComponent implements OnChange
 
     onTouched() { }
 
-    openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+    openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item?: DropdownItem<any>) {
         // enter
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.showAllItems();

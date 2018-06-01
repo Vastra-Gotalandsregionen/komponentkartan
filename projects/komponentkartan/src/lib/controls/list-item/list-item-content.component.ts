@@ -2,7 +2,6 @@ import { Component, HostBinding, Input, Output, EventEmitter, HostListener, Elem
 
 @Component({
     selector: 'vgr-list-item-content',
-    moduleId: module.id,
     template: `<ng-content></ng-content>`
 })
 

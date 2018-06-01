@@ -7,7 +7,6 @@ import { ButtonComponent } from '../button/button.component';
 
 @Component({
     selector: 'vgr-modal',
-    moduleId: module.id,
     templateUrl: './modal.component.html'
 })
 

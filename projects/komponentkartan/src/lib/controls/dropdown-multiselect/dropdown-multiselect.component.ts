@@ -13,7 +13,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
 
 @Component({
     selector: 'vgr-dropdown-multiselect',
-    moduleId: module.id,
     templateUrl: './dropdown-multiselect.component.html',
     providers: [{
         provide: NG_VALUE_ACCESSOR,
@@ -100,7 +99,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         }
     }
 
-    openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+    openDropdownShowAllItemKeyEvent(event: KeyboardEvent, item?: DropdownItem<any>) {
         // enter & space
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.clearFilter();
@@ -115,7 +114,7 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         }
     }
 
-    openDropdownSelectAllItemKeyEvent(event: KeyboardEvent, item: DropdownItem<any>) {
+    openDropdownSelectAllItemKeyEvent(event: KeyboardEvent, item?: DropdownItem<any>) {
         // enter & space
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.selectAllItems(!this.selectAllItemsChecked);

@@ -3,7 +3,6 @@ import { IHeaderMenu, IHeaderMenuItem } from '../../models/headerMenu.model';
 
 @Component({
     selector: 'vgr-header-menu',
-    moduleId: module.id,
     templateUrl: './headerMenu.component.html'
 })
 

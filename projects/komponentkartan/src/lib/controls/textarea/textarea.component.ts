@@ -43,7 +43,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
   }
   @HostBinding('class.textarea-validation-error--editing') get editingClass() {
-    return this.showValidation && this.control && this.control.invalid && this.hasFocus;;
+    return this.showValidation && this.control && this.control.invalid && this.hasFocus;
   }
 
   @Output() blur: EventEmitter<any>;
@@ -54,7 +54,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   hasFocus = false;
   cancel: boolean;
 
-  private validationErrorMessage = 'Obligatoriskt';
+  validationErrorMessage = 'Obligatoriskt';
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private cdRef: ChangeDetectorRef) {
     this.width = '100%';

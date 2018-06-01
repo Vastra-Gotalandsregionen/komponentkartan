@@ -16,7 +16,6 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
 @Component({
     templateUrl: './list-item.component.html',
     selector: 'vgr-list-item',
-    moduleId: module.id,
     animations: [
         trigger('slideListContent', [
             state('collapsed', style({

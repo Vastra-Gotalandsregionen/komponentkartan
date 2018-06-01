@@ -2,7 +2,6 @@ import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'vgr-login-information',
-    moduleId: module.id,
     templateUrl: './loginInformation.component.html'
 })
 

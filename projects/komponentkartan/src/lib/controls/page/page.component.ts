@@ -5,7 +5,6 @@ import { ActionPanelComponent } from '../action-panel/action-panel.component';
 
 @Component({
     selector: 'vgr-page',
-    moduleId: module.id,
     templateUrl: './page.component.html'
 })
 export class PageComponent implements AfterContentInit, AfterViewInit {

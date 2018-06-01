@@ -2,11 +2,10 @@ import { Input, Component, HostBinding, ContentChild, ElementRef } from '@angula
 
 @Component({
     selector: 'vgr-panel-container',
-    moduleId: module.id,
     template: `<ng-content select="vgr-panel"></ng-content>`,
 })
 export class PanelContainerComponent {
-    @HostBinding('class.panel-container') private panelContainerClass = true;
+    @HostBinding('class.panel-container') panelContainerClass = true;
 
     constructor(private elementRef: ElementRef) { }
 }

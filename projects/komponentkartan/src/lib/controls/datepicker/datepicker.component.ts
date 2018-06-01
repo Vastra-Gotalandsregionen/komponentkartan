@@ -11,7 +11,6 @@ import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-datepicker',
-    moduleId: module.id,
     templateUrl: './datepicker.component.html',
     providers: [{
         provide: NG_VALUE_ACCESSOR,

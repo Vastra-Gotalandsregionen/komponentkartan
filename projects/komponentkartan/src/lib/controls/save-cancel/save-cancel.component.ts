@@ -5,7 +5,6 @@ import { LockButtonComponent } from '../lock-button/lock-button.component';
 
 @Component({
   selector: 'vgr-save-cancel',
-  moduleId: module.id,
   templateUrl: './save-cancel.component.html'
 })
 export class SaveCancelComponent implements OnInit {

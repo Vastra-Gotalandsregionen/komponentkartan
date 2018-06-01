@@ -10,7 +10,7 @@
       <perfect-scrollbar class="container" [config]="scrollbarConfig">
         <ul class="dropdown__menu__items" role="listbox">
           <li *ngIf="filterVisible" class="dropdown-item--select-all" [ngClass]="{'dropdown-item--marked' : showAllItem.marked }" tabindex="0"
-            (focusin)="onEnterItem(showAllItem)" (focusout)="onLeaveItem(showAllItem)" (keydown)="openDropdownShowAllItemKeyEvent($event, item)"
+            (focusin)="onEnterItem(showAllItem)" (focusout)="onLeaveItem(showAllItem)" (keydown)="openDropdownShowAllItemKeyEvent($event)"
             [attr.aria-label]="showAllItem.displayName">
             <a (mousedown)="showAllItems()" title="{{showAllItem.displayName}}" (mouseenter)="onEnterItem(showAllItem)" (mouseleave)="onLeaveItem(showAllItem)">{{showAllItem.displayName}}</a>
           </li>

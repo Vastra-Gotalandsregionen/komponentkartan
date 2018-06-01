@@ -5,7 +5,6 @@ import { ListColumnComponent } from './list-column.component';
 
 @Component({
     templateUrl: './list-column-trashcan.component.html',
-    moduleId: module.id,
     selector: 'vgr-list-column-trashcan',
     providers: [{
         provide: ListColumnComponent,

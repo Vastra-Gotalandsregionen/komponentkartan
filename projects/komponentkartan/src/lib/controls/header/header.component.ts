@@ -5,7 +5,6 @@ import { HeaderMenuComponent } from '../headerMenu/headerMenu.component';
 
 @Component({
     selector: 'vgr-header',
-    moduleId: module.id,
     templateUrl: './header.component.html'
 })
 

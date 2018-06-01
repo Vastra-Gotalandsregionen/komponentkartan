@@ -4,7 +4,6 @@ import { ListColumnHeaderComponent } from './list-column-header.component';
 
 @Component({
   templateUrl: './list-column-header-checkbox.component.html',
-  moduleId: module.id,
   selector: 'vgr-list-column-header-checkbox'
 })
 export class ListColumnHeaderCheckboxComponent extends ListColumnHeaderComponent {

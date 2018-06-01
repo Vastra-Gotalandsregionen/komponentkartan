@@ -11,8 +11,7 @@
           <!-- om det finns en showAllItem -->
           <li *ngIf="!filterActive" tabindex="0" class="dropdown-item--select-all" [attr.aria-label]="selectAllItemText" [attr.aria-checked]="selectAllItemsChecked"
             [ngClass]="{'dropdown-item--marked' : selectAllItemsMarked, 'dropdown-item--selected' : selectAllItemsChecked }"
-            (focusin)="selectAllItemsMarked=true" (focusout)="selectAllItemsMarked=false" (keydown)="openDropdownSelectAllItemKeyEvent($event,
-            item)">
+            (focusin)="selectAllItemsMarked=true" (focusout)="selectAllItemsMarked=false" (keydown)="openDropdownSelectAllItemKeyEvent($event)">
             <!-- om listan inte är filtrerad -->
             <a (mousedown)="onItemClicked(null)" title="{{selectAllItemText}}" (mouseenter)="selectAllItemsMarked=true" (mouseleave)="selectAllItemsMarked=false">
               <vgr-checkbox class="checkbox--inline" [checked]="selectAllItemsChecked" (checkedChanged)="selectAllItems($event)" [label]="selectAllItemText"></vgr-checkbox>
@@ -20,7 +19,7 @@
           </li>
 
           <li *ngIf="filterActive" tabindex="0" class="dropdown-item--select-all" [ngClass]="{ 'dropdown-item--marked' : selectAllItemsMarked}"
-            (keydown)="openDropdownShowAllItemKeyEvent($event, item)" (focusin)="selectAllItemsMarked=true" (focusout)="selectAllItemsMarked=false">
+            (keydown)="openDropdownShowAllItemKeyEvent($event)" (focusin)="selectAllItemsMarked=true" (focusout)="selectAllItemsMarked=false">
             <!-- om listan är filtrerad -->
             <a (mousedown)="clearFilter()" title="{{showAllItemText}}" (mouseenter)="selectAllItemsMarked=true" (mouseleave)="selectAllItemsMarked=false">{{showAllItemText}}
             </a>

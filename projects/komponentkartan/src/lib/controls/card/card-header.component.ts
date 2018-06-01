@@ -2,7 +2,6 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'vgr-card-header',
-  moduleId: module.id,
   template: `<ng-content></ng-content>`
 })
 

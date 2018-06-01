@@ -3,7 +3,6 @@ import { Component, HostBinding, ContentChildren, AfterViewInit, QueryList, Inpu
 
 @Component({
   templateUrl: './list-column-header.component.html',
-  moduleId: module.id,
   selector: 'vgr-list-column-header'
 })
 export class ListColumnHeaderComponent {

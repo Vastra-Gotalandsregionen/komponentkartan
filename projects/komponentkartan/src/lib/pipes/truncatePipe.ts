@@ -1,9 +1,9 @@
-﻿import { Pipe, PipeTransform } from '@angular/core'
+﻿import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({ name: 'truncate' })
 export class TruncatePipe implements PipeTransform {
-    transform(value: string, maxLength?: string): string {
+    transform(value: string, maxLength?: number): string {
         const trail = '...';
 
         if (!value) {
@@ -14,7 +14,7 @@ export class TruncatePipe implements PipeTransform {
             return value;
         }
 
-        let limit = parseInt(maxLength, null);
+        let limit = maxLength;
         if (!limit) {
             return value;
         }

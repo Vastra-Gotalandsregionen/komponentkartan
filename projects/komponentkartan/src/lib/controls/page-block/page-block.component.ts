@@ -2,7 +2,6 @@ import { Component, Input, EventEmitter, Output, AfterViewInit, ContentChild, Vi
 
 @Component({
     selector: 'vgr-page-block',
-    moduleId: module.id,
     templateUrl: './page-block.component.html'
 })
 export class PageBlockComponent {

@@ -19,17 +19,17 @@ import { RowNotification } from '../../models/rowNotification.model';
                 ])
             ]
         )
-    ],
-    moduleId: module.id
+    ]
 })
 export class ActionPanelComponent implements OnInit, AfterContentInit {
 
     readonly showNotificationDurationMs = 1500;
     private actualContentHeight: string;
     private pageHeaderHeight: number;
+
     @HostBinding('class.action-panel') isContainer = true;
     @HostBinding('class.action-panel--collapsed') collapsed = true;
-    @HostBinding('class.action-panel--expanded') private _expanded: boolean;
+    @HostBinding('class.action-panel--expanded') _expanded: boolean;
     @HostBinding('class.action-panel--deleted') deleted: boolean;
     @HostBinding('class.action-panel--notification-visible') notificationVisible: boolean;
     @HostBinding('class.action-panel--not-interactable') notInteractable: boolean;

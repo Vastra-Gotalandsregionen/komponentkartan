@@ -35,7 +35,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
 
     @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
     @HostBinding('class.submenu') hasClass = true;
-    @HostBinding('class.submenu--child-selected') private childSelected: boolean;
+    @HostBinding('class.submenu--child-selected') childSelected: boolean;
     @ViewChild('menuitem') menuitem: ElementRef;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {

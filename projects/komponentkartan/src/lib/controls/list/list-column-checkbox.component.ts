@@ -5,7 +5,6 @@ import { ListColumnComponent } from './list-column.component';
 
 @Component({
     templateUrl: './list-column-checkbox.component.html',
-    moduleId: module.id,
     selector: 'vgr-list-column-checkbox',
     providers: [{
         provide: ListColumnComponent,

@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "2.6.0-beta14",
+  "version": "3.0.0",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
@@ -17,7 +17,7 @@
     "publish-demo": "npm run packagr && cd dist && npm publish --tag demo && cd ..",
     "publish-dev": "npm run packagr && cd dist && npm publish --tag dev && cd ..",
     "publish-stable": "npm run packagr && cd dist && npm publish && cd ..",
-    "publish-local": "npm run packagr && npm pack",
+    "publish-local": "ng build komponentkartan --prod  && cd dist/komponentkartan && npm pack",
     "test-ci": "karma start ./karma.conf.server.js"
   },
   "dependencies": {
@@ -69,6 +69,7 @@
     "tslib": "^1.7.1",
     "tslint": "~5.7.0",
     "typescript": "2.7.2",
-    "wallaby-webpack": "^3.9.9"
+    "wallaby-webpack": "^3.9.9",
+    "ng-packagr": "^3.0.0-rc.2"
   }
 }

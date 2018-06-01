@@ -3,7 +3,6 @@ import { trigger, style, transition, animate, state } from '@angular/animations'
 
 @Component({
     selector: 'vgr-expandable-div',
-    moduleId: module.id,
     templateUrl: './expandableDiv.component.html',
     animations: [
         trigger('slideExpandableContent', [
@@ -25,9 +24,9 @@ import { trigger, style, transition, animate, state } from '@angular/animations'
     ]
 })
 export class ExpandableDivComponent {
-    @HostBinding('class.expandable-div--collapsed') private collapsed = true;
-    @HostBinding('class.expandable-div--expanded') private _expanded: boolean;
-    @HostBinding('class.expandable-div') private expandableDivClass = true;
+    @HostBinding('class.expandable-div--collapsed') collapsed = true;
+    @HostBinding('class.expandable-div--expanded') _expanded: boolean;
+    @HostBinding('class.expandable-div') expandableDivClass = true;
 
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 

@@ -3,7 +3,6 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
 
 @Component({
     selector: 'vgr-card-section',
-    moduleId: module.id,
     templateUrl: './cardSection.component.html',
     animations: [
         trigger('toggleContent', [
@@ -40,7 +39,7 @@ import { trigger, style, transition, animate, group, state, query } from '@angul
 })
 export class CardSectionComponent implements OnInit {
     @HostBinding('class.card-section') cardSectionClass = true;
-    @HostBinding('class.card-section--expanded') private _expanded = false;
+    @HostBinding('class.card-section--expanded') _expanded = false;
     @Input() @HostBinding('class.card-section--readonly') readonly: boolean;
     @Input() title: string;
     @Input() subtitle: string;

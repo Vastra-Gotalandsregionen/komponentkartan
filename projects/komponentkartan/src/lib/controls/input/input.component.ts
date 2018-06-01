@@ -19,7 +19,6 @@ import { ErrorHandler } from '../../services/errorhandler';
 
 @Component({
   selector: 'vgr-input',
-  moduleId: module.id,
   templateUrl: './input.component.html',
 
   providers: [{

@@ -2,7 +2,6 @@ import { Input, Component, HostBinding, ContentChild, ElementRef } from '@angula
 
 @Component({
     selector: 'vgr-panel',
-    moduleId: module.id,
     templateUrl: './panel.component.html',
 })
 export class PanelComponent {

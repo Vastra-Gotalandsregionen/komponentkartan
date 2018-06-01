@@ -5,7 +5,6 @@ import { CardColumnComponent } from './card-column.component';
 
 @Component({
     selector: 'vgr-card',
-    moduleId: module.id,
     templateUrl: './card.component.html'
 })
 export class CardComponent implements OnInit, AfterContentInit {

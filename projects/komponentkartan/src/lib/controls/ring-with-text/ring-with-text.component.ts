@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'vgr-ring-with-text',
-  moduleId: module.id,
   templateUrl: './ring-with-text.component.html',
 })
 export class RingWithTextComponent implements OnInit {
@@ -11,7 +10,7 @@ export class RingWithTextComponent implements OnInit {
   @Input() text: string;
   @Input() textColor: string;
   @Input() circleColor: string;
-  private ringSize: string;
+  ringSize: string;
 
   constructor() { }
 

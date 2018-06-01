@@ -3,7 +3,6 @@ import { PageHeaderComponent } from '../pageHeader/pageHeader.component';
 
 @Component({
     selector: 'vgr-page-body',
-    moduleId: module.id,
     templateUrl: './page-body.component.html'
 })
 export class PageBodyComponent {

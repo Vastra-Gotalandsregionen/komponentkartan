@@ -4,7 +4,6 @@ import { ListColumnComponent } from './list-column.component';
 
 @Component({
     templateUrl: './list-header.component.html',
-    moduleId: module.id,
     selector: 'vgr-list-header'
 })
 export class ListHeaderComponent implements AfterContentInit {

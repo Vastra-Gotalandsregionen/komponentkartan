@@ -6,7 +6,6 @@ import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.compon
 
 @Component({
     templateUrl: './list.component.html',
-    moduleId: module.id,
     selector: 'vgr-list',
     animations: [
         trigger('loadContent', [

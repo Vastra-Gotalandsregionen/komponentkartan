@@ -11,7 +11,6 @@ import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-monthpicker',
-    moduleId: module.id,
     templateUrl: './monthpicker.component.html',
     providers: [
         {
