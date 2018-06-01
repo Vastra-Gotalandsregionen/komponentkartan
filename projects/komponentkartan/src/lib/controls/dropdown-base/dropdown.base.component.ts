@@ -95,13 +95,12 @@ export abstract class DropdownBaseComponent {
     protected abstract handleInitiallySelectedItems(selectedItems: DropdownItem<any>[]): void;
 
     private listenToScrollbarEvents() {
-        $(this.scrollbarComponent.directiveRef.elementRef.nativeElement).scroll((e) => {
+        this.scrollbarComponent.directiveRef.elementRef.nativeElement.addEventListener('scroll', (e) => {
             this.hideDimmersIfScrollIsAtBottomOrTop(e.target);
         });
     }
 
     private hideDimmersIfScrollIsAtBottomOrTop(scrollElement: Element) {
-        const scrollbar = $(scrollElement);
         const margintolerance = 20;
 
         const scrollHeight = scrollElement.scrollHeight - margintolerance;
@@ -129,11 +128,9 @@ export abstract class DropdownBaseComponent {
         }, 100);
 
         // Scroll to top when filter is changed
-        $('.container.ps').scrollTop(0);
+        this.elementRef.nativeElement.querySelector('.container.ps').scrollTop(0);
         this.dimmerBottomVisible = false;
     }
-
-
 
     updateScrolled() {
         if (!this.items) {
@@ -211,9 +208,12 @@ export abstract class DropdownBaseComponent {
 
 
     private toggleExpand(event: Event) {
+        const hasClass = (el, className) => {
+            return el.classList ? el.classList.contains(className) : new RegExp('\\b' + className + '\\b').test(el.className);
+        };
         const target = event.target || event.srcElement || event.currentTarget;
-        const element = $(target);
-        if (!element.is('input') && !element.is('.scroll-bar')) {
+        const element = target;
+        if (element['tagName'] !== 'INPUT' && !hasClass(element, 'scrollbar')) {
             this.expanded = !this.expanded;
             if (this.expanded) {
                 setTimeout(() => {

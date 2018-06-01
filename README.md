@@ -27,13 +27,12 @@ import { KomponentkartanModule } from 'vgr-komponentkartan';
 })
 ```
 
-Lägg till sökvägar till scss filen och jquery i angular-cli.json filen, som är beroenden för komponentkartan
+Lägg till sökvägar till scss filen i angular.json filen, som är beroenden för komponentkartan
 ```
 "styles": [
     "../node_modules/vgr-komponentkartan/assets/komponentkartan.scss",
     "styles.css"
 ],
-"scripts": ["../node_modules/jquery/dist/jquery.min.js"],
 ```
 
 Börja använda komponenterna t.ex.

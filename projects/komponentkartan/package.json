@@ -2,7 +2,6 @@
   "name": "komponentkartan",
   "version": "3.0.0",
   "dependencies": {
-    "jquery": "^3.1.1",
     "ngx-perfect-scrollbar": "^5.3.5"
   },
   "peerDependencies": {

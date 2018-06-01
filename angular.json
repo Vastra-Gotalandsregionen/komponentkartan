@@ -18,7 +18,7 @@
             "polyfills": "src/polyfills.ts",
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/assets"
+                "projects/komponentkartan/src/assets"
               ]
             },
             "assets": [
@@ -26,11 +26,10 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/assets/komponentkartan.scss",
+              "projects/komponentkartan/src/assets/komponentkartan.scss",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
               "projects/komponentkartan/src/lib/scripts/_objects.back-to-top.js"
             ]
           },
@@ -75,18 +74,16 @@
           "options": {
             "main": "src/test.ts",
             "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
+            // "polyfills": "src/polyfills.ts",
+            "tsConfig": "projects/komponentkartan/tsconfig.spec.json",
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "src/lib/scripts/_objects.back-to-top.js"
+              "projects/komponentkartan/src/lib/scripts/_objects.back-to-top.js"
             ],
             "styles": [
-              "src/assets/komponentkartan.scss",
+              "projects/komponentkartan/assets/komponentkartan.scss",
               "src/styles.scss"
             ],
             "assets": [
-              "src/assets",
               "src/favicon.ico"
             ]
           }

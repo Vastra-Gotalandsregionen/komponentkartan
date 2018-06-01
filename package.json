@@ -40,7 +40,6 @@
     "wallaby-webpack": "^3.9.5",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.26",
-    "jquery": "^3.1.1",
     "ngx-perfect-scrollbar": "^5.3.5"
   },
   "devDependencies": {
@@ -55,7 +54,6 @@
     "@angular/language-service": "6.0.3",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
-    "@types/jquery": "^3.2.17",
     "@types/node": "^6.0.100",
     "angular2-template-loader": "^0.6.2",
     "codelyzer": "^4.0.1",
