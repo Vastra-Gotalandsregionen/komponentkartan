@@ -22,7 +22,6 @@
               ]
             },
             "assets": [
-              "src/assets",
               "src/favicon.ico"
             ],
             "styles": [
