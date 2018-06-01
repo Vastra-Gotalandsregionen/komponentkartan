@@ -1,0 +1,11 @@
+<div class="card-section__header" (click)="showExpanded = !showExpanded">
+  <h2 class="card-section__header__title noselect">{{title}}</h2>
+  <h4 class="card-section__header__subtitle" *ngIf="subtitle && subtitle.length>0" title="{{subtitle}}">{{subtitle|truncate:30}}</h4>
+  <div class="card-section__header__icon"></div>
+  <div class="card-section__header__expander" [@animateChevron]="state"></div>
+</div>
+<div class="card-section__content" *ngIf="showExpanded" [@toggleContent]="state" (@toggleContent.done)="animationDone($event)">
+  <div class="add-padding">
+    <ng-content></ng-content>
+  </div>
+</div>

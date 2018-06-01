@@ -1,0 +1,349 @@
+$dropdown-height--small: 285px;
+$dropdown-height--medium: 340px;
+$dropdown-height--medium-with-filter: 360px;
+$dropdown-width--medium: 160px;
+$dropdown-width--small: 100px;
+$filter-area-height: 60px;
+.dropdown {
+  .dropdown--readonly {
+    display: block;
+    opacity: 0;
+    max-height: 0;
+    max-width: 0;
+    transition: opacity 0.3s linear, max-height 0.3s linear, max-width 0.6s linear;
+    transition-delay: 0s;
+  }
+  .validation {
+    max-width: $dropdown-width--medium + $margin--slim + $margin--slim;
+  }
+  &.dropdown--focus {
+    .dropdown--edit {
+      outline: $focus-outline-width solid $focus-color;
+    }
+  }
+}
+
+.dropdown--readonly {
+  padding-left: $border--single + $margin--slim;
+}
+
+.dropdown--edit {
+  @extend .background-color--primary;
+  position: relative;
+  display: block;
+  height: $component-height;
+  width: $dropdown-width--medium;
+  padding: 0px;
+  transition: background-color 0.6s linear;
+  cursor: pointer;
+  .disabled & {
+    background-color: $control-color--disabled;
+    cursor: default;
+  }
+  .readonly & {
+    background-color: $background-color--content;
+    transition: background-color 0s linear;
+    cursor: default;
+    width: auto;
+    height: auto;
+    min-height: $component-height;
+  }
+  >span {
+    padding-left: $margin--slim;
+    padding-top: 2px;
+    vertical-align: middle;
+    background-color: white;
+    max-width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
+    min-width: calc(#{$dropdown-width--medium} - #{$icon-width} - #{$border--single} - #{$border--single});
+    display: block;
+    position: relative;
+    height: $component-height;
+    cursor: pointer;
+    border-top: $border--single solid $control-border-color--default;
+    border-left: $border--single solid $control-border-color--default;
+    border-bottom: $border--single solid $control-border-color--default;
+    border-radius: 1px;
+    transition: background-color 0.6s linear, border-color 0.6s linear;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    .disabled & {
+      background-color: $background-color--default;
+      border-color: $control-color--disabled;
+      cursor: default;
+    }
+    .readonly & {
+      background-color: $background-color--content;
+      border-color: $background-color--content;
+      outline: none;
+      cursor: text;
+      transition: max-width 0.3s linear;
+      word-wrap: break-word;
+      overflow: visible;
+      white-space: normal;
+      height: auto;
+      display: block;
+      max-width: none;
+    }
+  } //Ikon, uppåt- eller nedåtpil
+  &:after {
+    @extend .bg-image-icon-chevron-inverted;
+    display: block;
+    content: "";
+    vertical-align: middle;
+    text-align: center;
+    float: right;
+    background-color: transparent;
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: all ease 0.3s;
+    padding-right: 3px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    &:not(.disabled):not(.readonly) {
+      cursor: pointer;
+    }
+    .readonly & {
+      display: none;
+    }
+  }
+  &.dropdown--small {
+    width: $dropdown-width--small;
+  }
+  &.dropdown--open {
+    &:after {
+      transform: rotate(180deg);
+      transition: all 0.3s ease;
+      padding-left: 6px;
+    }
+  }
+}
+
+.dropdown__filterTextbox {
+  position: absolute;
+  margin-left: 30px;
+  margin-right: 30px;
+  width: calc(100% - 60px);
+  visibility: hidden;
+  .dropdown--filter-visible.dropdown--open & {
+    visibility: visible;
+  }
+}
+
+/*******************************************************************************************************
+ * .dropdown__menu
+ *  Hela den yta som "droppar" ner från kontrollen. Här läggs listan, filtrering mm
+ *
+ *******************************************************************************************************/
+
+.dropdown__menu {
+  position: absolute;
+  top: 42px;
+  text-align: left;
+  z-index: $layer-four;
+  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
+  background-color: $background-color--content;
+  border: none;
+  padding-top: $margin--regular;
+  padding-bottom: 0px;
+  width: 330px;
+  max-height: $dropdown-height--small;
+  display: none;
+  cursor: default;
+  &:before {
+    @extend .bg-image-menu-arrow;
+    content: "";
+    position: absolute;
+    display: inline-block;
+    z-index: $layer-two;
+    margin-top: -32px;
+    left: 20px;
+  }
+  a {
+    color: $menu-text-color;
+    text-decoration: none;
+    display: block;
+    border-bottom: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: $margin--regular;
+    padding-right: $margin--regular;
+  }
+  .dropdown--open & {
+    display: inline-block;
+  }
+  .dropdown__menu__items {
+    position: relative;
+    max-height: calc(#{$dropdown-height--small} - #{$margin--fat});
+    li {
+      width: calc(100% - 3px);
+      background: white;
+      a {
+        padding-right: 11px;
+        padding-left: 15px;
+      }
+      &.dropdown-item--selected {
+        a {
+          font-weight: bold;
+          letter-spacing: $font-size--small-letter-spacing-bold;
+        }
+      }
+      &.dropdown-item--marked {
+        a {
+          padding-left: 11px;
+          border-left-width: 4px;
+          border-left-style: solid;
+          font-weight: bold;
+          letter-spacing: $font-size--small-letter-spacing-bold;
+          @extend .border-left-color--primary;
+        }
+      }
+      &:last-child {
+        margin-bottom: 7px;
+      }
+      &:focus {
+        outline: $focus-outline-width solid $focus-color;
+      }
+    }
+    li:last-child {
+      margin-bottom: 0px;
+    }
+    li:first-child {
+      margin-top: 4px;
+    }
+  }
+  .dropdown--filter-visible & {
+    .dropdown__menu__items {
+      position: relative; //
+      max-height: calc(#{$dropdown-height--small} - #{$filter-area-height});
+    }
+    .container {
+      margin-top: 40px;
+    }
+  }
+}
+
+.dropdown__filterTextbox {
+  position: absolute;
+  margin-left: 30px;
+  margin-right: 30px;
+  width: calc(100% - 60px);
+  visibility: hidden;
+  .dropdown--filter-visible.dropdown--open & {
+    visibility: visible;
+  }
+}
+
+.dropdown-item--select-all {
+  &:after {
+    content: "";
+    height: 0px;
+    display: block;
+    border-top: 1px solid $border-color;
+    margin-right: -3px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    z-index: $layer-one;
+    position: relative;
+  }
+}
+
+/*******************************************************************************************************
+ * .dropdown__dimmer
+ * Det transparenta området överst och underst i listan som visar att det finns mer items
+ * Finns i både --top och --bottom varianter
+ *******************************************************************************************************/
+
+.dropdown__dimmer {
+  display: block;
+  height: 24px;
+  width: calc(100% - 20px); //Widht is 100% - scrollbar width
+  position: absolute;
+  z-index: $layer-five;
+}
+
+.dropdown__dimmer--top {
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.38) 19%, rgba(255, 255, 255, 0.74) 52%, rgba(255, 255, 255, 0.9) 72%, #ffffff);
+  top: 8px;
+  .dropdown--filter-visible & {
+    top: 47px;
+  }
+}
+
+.dropdown__dimmer--bottom {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), #FFFFFF);
+  display: block;
+  top: calc(#{$dropdown-height--small} - 25px);
+  .dropdown--filter-visible & {
+    display: block;
+    top: calc(#{$dropdown-height--small} - 25px);
+  }
+}
+
+.scroll-element.scroll-x {
+  display: none !important;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .dropdown {
+    .validation {
+      max-width: $dropdown-width--medium + $margin--regular + $margin--regular;
+    }
+  }
+  .dropdown--edit {
+    width: $dropdown-width--medium + $margin--slim;
+    span {
+      max-width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
+      min-width: calc(#{$dropdown-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
+    }
+  }
+  .dropdown__menu {
+    max-height: $dropdown-height--medium;
+    .dropdown__menu__items {
+      max-height: calc(#{$dropdown-height--medium} - #{$margin--fat});
+    }
+    .dropdown--filter-visible & {
+      max-height: $dropdown-height--medium-with-filter;
+      .dropdown__menu__items {
+        max-height: calc(#{$dropdown-height--medium-with-filter} - #{$filter-area-height});
+      }
+      .scroll-wrapper {
+        margin-top: 40px;
+      }
+    }
+    .dropdown--filter-visible & {
+      max-height: $dropdown-height--medium-with-filter;
+    }
+  }
+  .dropdown__dimmer--bottom {
+    top: calc(#{$dropdown-height--medium} - 25px);
+    .dropdown--filter-visible & {
+      top: calc(#{$dropdown-height--medium-with-filter} - 25px);
+    }
+  }
+  .dropdown__filterTextbox {
+    .filter-textbox {
+      width: $input-width--small;
+    }
+  }
+}
+
+/*******************************************************************************
+* IE11 Specific styles
+* 1. Disable chevron animation, since it is too slow in IE11
+*******************************************************************************/
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+  .dropdown--edit {
+    &:after {
+      transition: none;
+    }
+    &.dropdown--open {
+      &:after {
+        transition: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "app": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/app",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/komponentkartan/src/assets"
+              ]
+            },
+            "assets": [
+              "src/favicon.ico"
+            ],
+            "styles": [
+              "projects/komponentkartan/src/assets/komponentkartan.scss",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "projects/komponentkartan/src/lib/scripts/_objects.back-to-top.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "app:build",
+            "port": 3000
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/komponentkartan/src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "projects/komponentkartan/src/polyfills.ts",
+            "tsConfig": "projects/komponentkartan/tsconfig.spec.json",
+            "scripts": [
+              "projects/komponentkartan/src/lib/scripts/_objects.back-to-top.js"
+            ],
+            "styles": [
+              "projects/komponentkartan/assets/komponentkartan.scss",
+              "src/styles.scss"
+            ],
+            "assets": [
+              "src/favicon.ico"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "komponentkartan-e2e": {
+      "root": "",
+      "sourceRoot": "",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "./protractor.conf.js",
+            "devServerTarget": "komponentkartan:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "komponentkartan": {
+      "root": "projects/komponentkartan",
+      "sourceRoot": "projects/komponentkartan/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/komponentkartan/tsconfig.lib.json",
+            "project": "projects/komponentkartan/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/komponentkartan/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/komponentkartan/src/test.ts",
+            "tsConfig": "projects/komponentkartan/tsconfig.spec.json",
+            "karmaConfig": "projects/komponentkartan/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/komponentkartan/tsconfig.lib.json",
+              "projects/komponentkartan/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "komponentkartan",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "vgr",
+      "styleext": "css"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "vgr"
+    }
+  }
+}

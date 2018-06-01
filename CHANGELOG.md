@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 3.0.0
+- Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6
+- Read https://update.angular.io/ on how to upgrade
+- Moved komponentkartan lib folder from src/lib to projects/komponentkartan/lib
+
 ## 2.6.0 
 - Fixed smoother animations in list component
 - Error message in list component
