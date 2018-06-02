@@ -1,6 +1,6 @@
 {
-  "name": "vgr-komponentkartan",
-  "version": "3.0.0-beta1",
+  "name": "app",
+  "version": "1.0.0",
   "author": "Västra Götalandsregionen",
   "license": "MIT",
   "scripts": {
@@ -10,14 +10,14 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "copy-assets": "cp -r src/assets dist",
-    "copy-scripts": "cp -r src/lib/scripts dist/scripts",
-    "copy-changelog": "cp -rf CHANGELOG.md dist",
-    "packagr": "ng-packagr -p ng-package.json && npm run copy-assets && npm run copy-scripts && npm run copy-changelog",
-    "publish-demo": "npm run packagr && cd dist && npm publish --tag demo && cd ..",
-    "publish-dev": "npm run packagr && cd dist && npm publish --tag dev && cd ..",
-    "publish-stable": "npm run packagr && cd dist && npm publish && cd ..",
-    "publish-local": "ng build komponentkartan --prod  && cd dist/komponentkartan && npm pack",
+    "copy-assets": "cp -r projects/komponentkartan/src/assets dist/komponentkartan",
+    "copy-scripts": "cp -r projects/komponentkartan/src/lib/scripts dist/komponentkartan/lib/",
+    "copy-changelog": "cp -rf CHANGELOG.md dist/komponentkartan",
+    "packagr": "ng build komponentkartan --prod && npm run copy-assets && npm run copy-scripts && npm run copy-changelog",
+    "publish-demo": "npm run packagr && npm publish --tag demo dist/komponentkartan/",
+    "publish-dev": "npm run packagr && npm publish --tag dev dist/komponentkartan/",
+    "publish-stable": "npm run packagr && npm publish dist/komponentkartan/",
+    "publish-local": "npm run packagr && npm pack dist/komponentkartan/",
     "test-ci": "karma start ./karma.conf.server.js"
   },
   "dependencies": {
