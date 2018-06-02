@@ -18,7 +18,7 @@ describe('truncatePipe test', () => {
         describe('and limit is 10 characters', () => {
             let result: string;
             beforeEach(() => {
-                result = truncatePipe.transform(text, '10');
+                result = truncatePipe.transform(text, 10);
             });
 
             it('text should be 10 characters long',
@@ -44,7 +44,7 @@ describe('truncatePipe test', () => {
 
                 it('text should not be modified',
                     () => {
-                        expect(truncatePipe.transform(text, 'ten')).toBe(text);
+                        expect(truncatePipe.transform(text, 10)).toBe(text);
                     });
 
             });
@@ -54,7 +54,7 @@ describe('truncatePipe test', () => {
 
                 it('text should not be modified',
                     () => {
-                        expect(truncatePipe.transform(text, (text.length + 1).toString())).toBe(text);
+                        expect(truncatePipe.transform(text, (text.length + 1))).toBe(text);
                     });
 
             });
@@ -63,7 +63,7 @@ describe('truncatePipe test', () => {
 
                 it('text should not be modified',
                     () => {
-                        expect(truncatePipe.transform(text, text.length.toString())).toBe(text);
+                        expect(truncatePipe.transform(text, text.length)).toBe(text);
                     });
 
             });

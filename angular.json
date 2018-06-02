@@ -73,7 +73,7 @@
           "options": {
             "main": "projects/komponentkartan/src/test.ts",
             "karmaConfig": "./karma.conf.js",
-            "polyfills": "projects/komponentkartan/src/polyfills.ts",
+            // "polyfills": "projects/komponentkartan/src/polyfills.ts",
             "tsConfig": "projects/komponentkartan/tsconfig.spec.json",
             "scripts": [
               "projects/komponentkartan/src/lib/scripts/_objects.back-to-top.js"
