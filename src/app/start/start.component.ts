@@ -13,7 +13,7 @@ export class StartComponent implements OnInit {
   angularCliVersion: string;
 
   constructor() {
-    const { version: appVersion } = require('../../../package.json');
+    const { version: appVersion } = require('../../../projects/komponentkartan/package.json');
     this.currentVersion = appVersion;
 
     const { version: angularVersion } = require('../../../node_modules/@angular/core/package.json');
