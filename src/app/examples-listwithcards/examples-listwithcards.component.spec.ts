@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExamplesListwithcardsComponent } from './examples-listwithcards.component';
+// import { ExamplesListwithcardsComponent } from './examples-listwithcards.component';
 
-describe('ExamplesListwithcardsComponent', () => {
-  let component: ExamplesListwithcardsComponent;
-  let fixture: ComponentFixture<ExamplesListwithcardsComponent>;
+// describe('ExamplesListwithcardsComponent', () => {
+//   let component: ExamplesListwithcardsComponent;
+//   let fixture: ComponentFixture<ExamplesListwithcardsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ExamplesListwithcardsComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ExamplesListwithcardsComponent]
+//     })
+//       .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ExamplesListwithcardsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(ExamplesListwithcardsComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

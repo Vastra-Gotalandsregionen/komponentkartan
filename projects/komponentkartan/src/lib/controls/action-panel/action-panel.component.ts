@@ -60,7 +60,7 @@ export class ActionPanelComponent implements OnInit, AfterContentInit {
     }
 
     @Input() set expanded(expandedValue: boolean) {
-        //this.elementRef.nativeElement.style.opacity = 0;
+        // this.elementRef.nativeElement.style.opacity = 0;
 
         if (expandedValue && !this._expanded) {
             this.expand();

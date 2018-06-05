@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListexamplewithrownotificationComponent } from './listexamplewithrownotification.component';
+// import { ListexamplewithrownotificationComponent } from './listexamplewithrownotification.component';
 
-describe('ListexampleComponent', () => {
-  let component: ListexamplewithrownotificationComponent;
-  let fixture: ComponentFixture<ListexamplewithrownotificationComponent>;
+// describe('ListexampleComponent', () => {
+//   let component: ListexamplewithrownotificationComponent;
+//   let fixture: ComponentFixture<ListexamplewithrownotificationComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ListexamplewithrownotificationComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ ListexamplewithrownotificationComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ListexamplewithrownotificationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(ListexamplewithrownotificationComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

@@ -5,17 +5,21 @@ var compilerOptions = Object.assign(
   require('./tsconfig.json').compilerOptions,
   require('./src/tsconfig.spec.json').compilerOptions);
 
+compilerOptions.module = 'CommonJs';
+
 module.exports = function (wallaby) {
 
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
       'src/wallabyTest.js',
-      'projects/komponentkartan/src/lib/**/*spec.js'
+      'src/**/*spec.js',
+      'projects/komponentkartan/src/lib/**/*spec.js',
     ],
+
     module: {
-      loaders: [{
+      rules: [{
           test: /\.css$/,
-          loader: ['raw-loader', 'css-loader']
+          loader: ['raw-loader']
         },
         {
           test: /\.html$/,
@@ -61,13 +65,12 @@ module.exports = function (wallaby) {
       extensions: ['.js', '.ts'],
       modules: [
         path.join(wallaby.projectCacheDir, 'src/app'),
-        path.join(wallaby.projectCacheDir, 'projects/komponentkartan/src/lib/'),
-        path.join(wallaby.projectCacheDir, 'src'),
-        'node_modules'
+        path.join(wallaby.projectCacheDir, 'projects/komponentkartan/'),
+        'node_modules',
       ],
       alias: {
         'vgr-komponentkartan': 'index',
-        'vgr-komponentkartan': 'komponentkartan.module'
+        '@komponentkartan-module': 'komponentkartan.module'
       },
     },
     node: {
@@ -79,27 +82,33 @@ module.exports = function (wallaby) {
   });
 
   return {
-    hints: {
-      commentAutoLog: 'out:'
-    },
     files: [{
         pattern: 'src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)',
         load: false
       },
       {
-        pattern: 'projects/komponentkartan/src/**/*.d.ts',
+        pattern: 'src/**/*spec.ts',
         ignore: true
       },
       {
-        pattern: 'projects/komponentkartan/src/**/*spec.ts',
+        pattern: 'projects/komponentkartan/src/lib/**/*',
         ignore: true
-      }
+      },
     ],
 
     tests: [{
-      pattern: 'projects/komponentkartan/src/**/*spec.ts',
-      load: false
-    }],
+        pattern: 'src/**/*spec.ts',
+        load: false
+      },
+      {
+        pattern: 'projects/komponentkartan/src/lib/**/*spec.ts',
+        load: false
+      },
+      {
+        pattern: 'src/**/*e2e-spec.ts',
+        ignore: true
+      }
+    ],
 
     testFramework: 'jasmine',
 
@@ -109,8 +118,8 @@ module.exports = function (wallaby) {
 
     middleware: function (app, express) {
       var path = require('path');
-      app.use('/favicon.ico', express.static(path.join(__dirname, 'projects/komponentkartan/src/favicon.ico')));
-      app.use('/assets', express.static(path.join(__dirname, 'projects/komponentkartan/src/assets')));
+      app.use('/favicon.ico', express.static(path.join(__dirname, 'src/favicon.ico')));
+      app.use('/assets', express.static(path.join(__dirname, 'src/assets')));
     },
 
     env: {
