@@ -15,7 +15,7 @@
     "polyfills.ts"
   ],
   "include": [
-    "projects/komponentkartan/src/lib/**/*.spec.ts",
+    "src/**/*.spec.ts",
     "**/*.d.ts"
   ]
 }

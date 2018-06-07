@@ -11,11 +11,9 @@ module.exports = function (wallaby) {
 
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
-      'src/wallabyTest.js',
-      'src/**/*spec.js',
+      'projects/komponentkartan/src/wallabyTest.js',
       'projects/komponentkartan/src/lib/**/*spec.js',
     ],
-
     module: {
       rules: [{
           test: /\.css$/,
@@ -83,29 +81,21 @@ module.exports = function (wallaby) {
 
   return {
     files: [{
-        pattern: 'src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)',
+        pattern: 'projects/komponentkartan/src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg|js)',
         load: false
       },
       {
-        pattern: 'src/**/*spec.ts',
-        ignore: true
-      },
-      {
-        pattern: 'projects/komponentkartan/src/lib/**/*',
+        pattern: 'projects/komponentkartan/src/lib/**/*.spec.ts',
         ignore: true
       },
     ],
 
     tests: [{
-        pattern: 'src/**/*spec.ts',
-        load: false
-      },
-      {
         pattern: 'projects/komponentkartan/src/lib/**/*spec.ts',
         load: false
       },
       {
-        pattern: 'src/**/*e2e-spec.ts',
+        pattern: 'e2e/**/*e2e-spec.ts',
         ignore: true
       }
     ],
