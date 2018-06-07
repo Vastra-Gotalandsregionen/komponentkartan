@@ -212,6 +212,8 @@ export class ListItemComponent implements AfterContentInit {
 
         this._notification = this.eventNotification;
 
+        // console.log(this.permanentNotification, this.notificationVisible, this._notification);
+
         setTimeout(() => {
             this._expanded = false;
             this.collapsed = true;
@@ -224,6 +226,7 @@ export class ListItemComponent implements AfterContentInit {
 
                     setTimeout(() => {
                         this._notification = null;
+                        this.notificationChanged.emit(null);
                     }, 1000);
                 } else {
                     if (!this.permanentNotification) {
@@ -234,6 +237,7 @@ export class ListItemComponent implements AfterContentInit {
                     } else {
                         this._notification = this.permanentNotification;
                         this.notificationVisible = true;
+                        //this.notificationChanged.emit(this.permanentNotification);
                     }
                 }
             }, 2000);
