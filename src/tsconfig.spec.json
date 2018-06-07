@@ -11,10 +11,11 @@
     ]
   },
   "files": [
-    "test.ts"
+    "test.ts",
+    "polyfills.ts"
   ],
   "include": [
-    "**/*.spec.ts",
+    "src/**/*.spec.ts",
     "**/*.d.ts"
   ]
 }

@@ -18,10 +18,10 @@
     "baseUrl": ".",
     "paths": {
       "vgr-komponentkartan": [
-        "lib/index.ts"
+        "../projects/komponentkartan/src/lib/index.ts"
       ],
       "@komponentkartan-module": [
-        "lib/komponentkartan.module"
+        "../projects/komponentkartan/src/lib/komponentkartan.module"
       ]
     }
   }

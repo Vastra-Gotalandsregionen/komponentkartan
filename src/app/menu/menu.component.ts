@@ -57,7 +57,7 @@ export class MenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        const browser = detect();
-        this.browserIsIE = browser && browser.name === 'ie';
+        // const browser = detect();
+        // this.browserIsIE = browser && browser.name === 'ie';
     }
 }

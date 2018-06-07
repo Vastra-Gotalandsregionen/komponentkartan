@@ -5,55 +5,57 @@ var compilerOptions = Object.assign(
   require('./tsconfig.json').compilerOptions,
   require('./src/tsconfig.spec.json').compilerOptions);
 
+compilerOptions.module = 'CommonJs';
+
 module.exports = function (wallaby) {
 
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
-      'src/wallabyTest.js',
-      'src/lib/**/*spec.js'
+      'projects/komponentkartan/src/wallabyTest.js',
+      'projects/komponentkartan/src/lib/**/*spec.js',
     ],
     module: {
-      loaders: [{
-        test: /\.css$/,
-        loader: ['raw-loader', 'css-loader']
-      },
-      {
-        test: /\.html$/,
-        loader: 'raw-loader'
-      },
-      {
-        test: /\.ts$/,
-        loader: '@ngtools/webpack',
-        include: /node_modules/,
-        query: {
-          tsConfigPath: 'tsconfig.json'
+      rules: [{
+          test: /\.css$/,
+          loader: ['raw-loader']
+        },
+        {
+          test: /\.html$/,
+          loader: 'raw-loader'
+        },
+        {
+          test: /\.ts$/,
+          loader: '@ngtools/webpack',
+          include: /node_modules/,
+          query: {
+            tsConfigPath: 'tsconfig.json'
+          }
+        },
+        {
+          test: /\.js$/,
+          loader: 'angular2-template-loader',
+          exclude: /node_modules/
+        },
+        {
+          test: /\.json$/,
+          loader: 'json-loader'
+        },
+        {
+          test: /\.styl$/,
+          loaders: ['raw-loader', 'stylus-loader']
+        },
+        {
+          test: /\.less$/,
+          loaders: ['raw-loader', 'less-loader']
+        },
+        {
+          test: /\.scss$|\.sass$/,
+          loaders: ['raw-loader', 'sass-loader']
+        },
+        {
+          test: /\.(jpg|png)$/,
+          loader: 'url-loader?limit=128000'
         }
-      },
-      {
-        test: /\.js$/,
-        loader: 'angular2-template-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
-      {
-        test: /\.styl$/,
-        loaders: ['raw-loader', 'stylus-loader']
-      },
-      {
-        test: /\.less$/,
-        loaders: ['raw-loader', 'less-loader']
-      },
-      {
-        test: /\.scss$|\.sass$/,
-        loaders: ['raw-loader', 'sass-loader']
-      },
-      {
-        test: /\.(jpg|png)$/,
-        loader: 'url-loader?limit=128000'
-      }
       ]
     },
 
@@ -61,13 +63,12 @@ module.exports = function (wallaby) {
       extensions: ['.js', '.ts'],
       modules: [
         path.join(wallaby.projectCacheDir, 'src/app'),
-        path.join(wallaby.projectCacheDir, 'src/lib/'),
-        path.join(wallaby.projectCacheDir, 'src'),
-        'node_modules'
+        path.join(wallaby.projectCacheDir, 'projects/komponentkartan/'),
+        'node_modules',
       ],
       alias: {
         'vgr-komponentkartan': 'index',
-        'vgr-komponentkartan': 'komponentkartan.module'
+        '@komponentkartan-module': 'komponentkartan.module'
       },
     },
     node: {
@@ -79,31 +80,25 @@ module.exports = function (wallaby) {
   });
 
   return {
-    hints: {
-      commentAutoLog: 'out:'
-    },
     files: [{
-      pattern: 'src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)',
-      load: false
-    },
-    {
-      pattern: 'src/**/*.d.ts',
-      ignore: true
-    },
-    {
-      pattern: 'src/**/*spec.ts',
-      ignore: true
-    },
-    {
-      pattern: 'node_modules/jquery/dist/jquery.min.js',
-      instrument: false
-    },
+        pattern: 'projects/komponentkartan/src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg|js)',
+        load: false
+      },
+      {
+        pattern: 'projects/komponentkartan/src/lib/**/*.spec.ts',
+        ignore: true
+      },
     ],
 
     tests: [{
-      pattern: 'src/**/*spec.ts',
-      load: false
-    }],
+        pattern: 'projects/komponentkartan/src/lib/**/*spec.ts',
+        load: false
+      },
+      {
+        pattern: 'e2e/**/*e2e-spec.ts',
+        ignore: true
+      }
+    ],
 
     testFramework: 'jasmine',
 

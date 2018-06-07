@@ -14,8 +14,7 @@
     "eofline": false,
     "forin": true,
     "import-blacklist": [
-      true,
-      "rxjs"
+      true
     ],
     "import-spacing": true,
     "indent": [
@@ -119,7 +118,6 @@
       true,
       "element",
       [
-        "vgr",
         "app"
       ],
       "kebab-case",

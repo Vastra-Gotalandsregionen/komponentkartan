@@ -13,8 +13,8 @@ import { KomponentkartanModule } from '@komponentkartan-module';
 import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
 
 // Pipe
-import { UnitFilterPipe } from './examples-listwithcards/UnitFilterPipe';
-import { UnitFilter2Pipe } from './examples-listwithlists/UnitFilterPipe';
+import { UnitFilterPipe } from './examples-listwithcards/unitFilterPipe';
+import { UnitFilter2Pipe } from './examples-listwithlists/unitFilterPipe';
 
 
 // Domain

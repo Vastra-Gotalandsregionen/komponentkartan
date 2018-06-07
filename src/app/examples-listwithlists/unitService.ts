@@ -1,5 +1,9 @@
+
+import { of as observableOf } from 'rxjs';
+
+import { delay } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { ExampleUnit } from './unit.model';
 
 @Injectable()
@@ -49,7 +53,7 @@ export class UnitService {
 
     getUnits(searchString: string): Observable<ExampleUnit[]> {
         searchString = searchString.toLowerCase();
-        return Observable.of(
+        return observableOf(
             this.items.filter(item => {
                 return (
                     (item.enhet.toLowerCase().indexOf(searchString) !== -1 ||
@@ -57,6 +61,6 @@ export class UnitService {
                         item.belopp.toString().indexOf(searchString) !== -1)
                 );
             })
-        ).delay(0);
+        ).pipe(delay(0));
     }
 }

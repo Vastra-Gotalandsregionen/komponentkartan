@@ -1,0 +1,27 @@
+﻿input,
+textarea {
+  font-family: $font-family;
+  font-size: $font-size--small;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  border-radius: 1px;
+  border: 1px solid $control-border-color--default;
+  height: 30px;
+  &:focus {
+    outline: none;
+  }
+}
+
+input[type=text]::-ms-clear {
+  display: none;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  input,
+  textarea {
+    font-size: $font-size--medium;
+  }
+}
