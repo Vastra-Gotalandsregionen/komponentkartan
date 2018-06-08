@@ -82,12 +82,17 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/komponentkartan/src/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "tsConfig": "projects/komponentkartan/tsconfig.spec.json",
+            "main": "src/test.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
             "scripts": [
               "projects/komponentkartan/src/lib/scripts/_objects.back-to-top.js"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/komponentkartan/src/assets"
+              ]
+            },
             "styles": [
               "projects/komponentkartan/assets/komponentkartan.scss",
               "src/styles.scss"
@@ -159,7 +164,10 @@
           "options": {
             "main": "projects/komponentkartan/src/test.ts",
             "tsConfig": "projects/komponentkartan/tsconfig.spec.json",
-            "karmaConfig": "projects/komponentkartan/karma.conf.js"
+            "karmaConfig": "projects/komponentkartan/karma.conf.js",
+            "scripts": [
+              "projects/komponentkartan/src/lib/scripts/_objects.back-to-top.js"
+            ]
           }
         },
         "lint": {
