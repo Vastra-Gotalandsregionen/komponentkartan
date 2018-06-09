@@ -3,7 +3,7 @@
 ![npm](https://img.shields.io/npm/v/vgr-komponentkartan.svg)
 ![npm](https://img.shields.io/npm/v/vgr-komponentkartan/demo.svg)
 
-Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular 5
+Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular
 
 ## Komma igång
 
