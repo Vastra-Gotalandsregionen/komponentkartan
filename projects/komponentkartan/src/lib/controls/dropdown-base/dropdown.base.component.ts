@@ -128,7 +128,7 @@ export abstract class DropdownBaseComponent {
         }, 100);
 
         // Scroll to top when filter is changed
-        // this.elementRef.nativeElement.querySelector('.container.ps').scrollTop(0);
+        this.elementRef.nativeElement.querySelector('.container .ps').scrollTop = 0;
         this.dimmerBottomVisible = false;
     }
 
