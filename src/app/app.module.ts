@@ -133,7 +133,10 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
         CityService,
         HighlightJsService,
         HtmlEncodeService,
-        UnitService
+        UnitService,
+        {
+            provide: LOCALE_ID, useValue: 'sv-SE'
+        },
     ],
     bootstrap: [KomponentkartanApplicationComponent]
 })
