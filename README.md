@@ -35,6 +35,15 @@ Lägg till sökvägar till scss filen i angular.json filen, som är beroenden f�
 ],
 ```
 
+Ange dependency för ngx-perfect-scrollbar i package.json.
+Om du använder npm v3 så måste detta göras.
+Mer förklaring:https://github.com/npm/npm/releases/tag/v3.0.0
+```
+"dependencies": {
+    "ngx-perfect-scrollbar": "^5.3.5"
+  },
+```
+
 Börja använda komponenterna t.ex.
 ```
 <vgr-header></vgr-header>
