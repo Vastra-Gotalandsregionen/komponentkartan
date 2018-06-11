@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6
 - Read https://update.angular.io/ on how to upgrade
 - Moved komponentkartan lib folder from src/lib to projects/komponentkartan/lib
+- Removed jquery
+- Refactored back-to-top from javascript to Angular component
 
 ## 2.6.0 
 - Fixed smoother animations in list component
