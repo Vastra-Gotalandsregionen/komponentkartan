@@ -1,0 +1,90 @@
+$toggle-button-height: 28px;
+
+.toggle-button-group {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-around;
+  & > * {
+    flex-grow: 1; 
+    flex-basis: 0;
+  }
+  .toggle-button {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 0;
+    &:focus:not(:active) {
+      outline-offset: -3px;
+    }
+    &.button--secondary:not(:focus) {
+      border-right-width: 0;
+    }    
+  }
+  :first-child .toggle-button-container {
+    .toggle-button {
+      border-top-left-radius: 1px;
+      border-bottom-left-radius: 1px;  
+    }
+  }
+  :last-child .toggle-button-container {
+    .toggle-button {
+      border-right-width: 1px;
+      border-top-right-radius: 1px;
+      border-bottom-right-radius: 1px;
+    }
+  }
+}
+
+.toggle-button {
+  @extend .button__base;
+  font-family: $font-family;
+  font-size: $font-size--small;
+  height: $toggle-button-height;
+  line-height: $toggle-button-height;
+  border-width: 1px;
+  border-style: solid;
+  @extend  .border-color--primary;
+  &:active:not(.button--disabled) {
+    box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.5); 
+    transform: scale(1);
+  } 
+  &:focus:not(:active) {
+    outline-offset: -3px;
+  }
+  &.button--secondary {
+    @extend .color--primary;
+    background-color: $text-color--light;
+    &.button--disabled {
+      color: $secondary-color--default;
+      background-color: $text-color--light;
+      border-color: $secondary-color--default;
+    }
+    &:hover:not(.button--disabled),
+    &:focus:not(.button--disabled) {
+      @extend .background-color--primary;
+      color: $text-color--light;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    } 
+  }
+  
+  .toggle-button__content {
+    padding-left: 17px; 
+    padding-right: 17px;
+  }
+}
+  
+@media screen and (min-width: $desktop-width--medium) {
+  .toggle-button-group {
+    margin-bottom: -15px; 
+    .toggle-button {
+      margin-bottom: 15px;
+    }
+  }
+
+  .toggle-button {
+    font-size: $font-size--medium;    
+    .toggle-button__content {
+      padding-left: 21px;
+      padding-right: 21px;
+    }
+  }
+}

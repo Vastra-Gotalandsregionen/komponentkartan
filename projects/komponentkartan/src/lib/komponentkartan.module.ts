@@ -93,7 +93,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.FilterTagComponent,
     type.RingWithTextComponent,
     type.FilterTagGroupComponent,
-    type.ScrollToTopComponent
+    type.ScrollToTopComponent,
+    type.ToggleButtonComponent,
+    type.ToggleButtonGroupComponent
   ],
   exports: [
     type.SafePipe,
@@ -161,7 +163,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.FilterTagComponent,
     type.RingWithTextComponent,
     type.FilterTagGroupComponent,
-    type.ScrollToTopComponent
+    type.ScrollToTopComponent,
+    type.ToggleButtonComponent,
+    type.ToggleButtonGroupComponent
   ],
   providers: [
     type.ModalService,

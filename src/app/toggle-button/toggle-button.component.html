@@ -1,0 +1,43 @@
+<app-component-docs [componentName]="'Toggle button'">
+  <div class="docs__overview">
+    <div>
+      <vgr-toggle-button-group [width]="'500px'">
+        <vgr-toggle-button *ngFor="let state of states" [pressed]="state.state" (click)="toggleStates(state)">{{state.text}}</vgr-toggle-button>
+      </vgr-toggle-button-group>
+    </div>
+  </div>
+  <div class="docs__examples">
+    <vgr-toggle-button [pressed]="state" (click)="toggle()">Single toggle button</vgr-toggle-button>
+    <vgr-toggle-button [disabled]="true">Disabled toggle button</vgr-toggle-button>
+    <br>
+    <br>
+    <div style="width: 400px;">
+      <vgr-toggle-button-group>
+        <vgr-toggle-button *ngFor="let state of states" [pressed]="state.state" (click)="toggleStates(state)">{{state.text}}</vgr-toggle-button>
+      </vgr-toggle-button-group>
+    </div>
+  </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>disabled: boolean</td>
+        <td>Inaktivera toggle button. Förvalt värde är
+          <code>false</code>.</td>
+        <td>[disabled]="true"</td>
+      </tr>
+      <tr>
+        <td>ariaLabel: string</td>
+        <td>Värde för
+          <code>aria-label</code>. Förvalt värde är "Aktivera [text]", där [text] är text content för
+          <code>&lt;vgr-toggle-button&gt;</code>.</td>
+        <td>[ariaLabel]="En alternativ beskrivning."</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag"></div>
+</app-component-docs>
