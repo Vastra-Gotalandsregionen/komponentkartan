@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Moved komponentkartan lib folder from src/lib to projects/komponentkartan/lib
 - Removed jquery
 - Refactored back-to-top from javascript to Angular component
+- Added toggle-button component 
 
 ## 2.6.0 
 - Fixed smoother animations in list component
