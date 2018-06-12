@@ -68,6 +68,7 @@ import { TextareafieldComponent } from './textareaField/textareafield.component'
 import { IconsComponent } from './icons/icons.component';
 import { TableComponent } from './table/table.component';
 import { RingWithTextComponent } from './ring-with-text/ring-with-text.component';
+import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 
 @NgModule({
     declarations: [
@@ -116,7 +117,8 @@ import { RingWithTextComponent } from './ring-with-text/ring-with-text.component
         TableComponent,
         TextareafieldComponent,
         FilterTagComponent,
-        RingWithTextComponent
+        RingWithTextComponent,
+        ToggleButtonComponent
     ],
     imports: [
         KomponentkartanModule,
@@ -131,7 +133,10 @@ import { RingWithTextComponent } from './ring-with-text/ring-with-text.component
         CityService,
         HighlightJsService,
         HtmlEncodeService,
-        UnitService
+        UnitService,
+        {
+            provide: LOCALE_ID, useValue: 'sv-SE'
+        },
     ],
     bootstrap: [KomponentkartanApplicationComponent]
 })

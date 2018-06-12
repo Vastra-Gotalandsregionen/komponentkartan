@@ -59,6 +59,8 @@ export { TableHeaderComponent } from './controls/table/table-header.component';
 export { FilterTagComponent } from './controls/filter-tag/filter-tag.component';
 export { FilterTagGroupComponent } from './controls/filter-tag/filter-tag-group.component';
 export { ScrollToTopComponent } from './controls/scroll-to-top/scroll-to-top.component';
+export { ToggleButtonComponent } from './controls/toggle-button/toggle-button.component';
+export { ToggleButtonGroupComponent } from './controls/toggle-button/toggle-button-group.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';
