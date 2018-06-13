@@ -7,12 +7,12 @@
     </div>
   </div>
   <div class="docs__examples">
-    <vgr-toggle-button [pressed]="state" (click)="toggle()">Single toggle button</vgr-toggle-button>
+    <vgr-toggle-button [pressed]="state" (click)="toggle()">{{state ? 'På' : 'Av'}}</vgr-toggle-button>&nbsp;
     <vgr-toggle-button [disabled]="true">Disabled toggle button</vgr-toggle-button>
     <br>
     <br>
-    <div style="width: 400px;">
-      <vgr-toggle-button-group>
+    <div>
+      <vgr-toggle-button-group [width]="'400px'">
         <vgr-toggle-button *ngFor="let state of states" [pressed]="state.state" (click)="toggleStates(state)">{{state.text}}</vgr-toggle-button>
       </vgr-toggle-button-group>
     </div>

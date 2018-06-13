@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'vgr-toggle-button',
   templateUrl: './toggle-button.component.html'
 })
-export class ToggleButtonComponent implements AfterViewInit {
+export class ToggleButtonComponent implements AfterViewInit, OnChanges {
   @Input() disabled = false;
   @Input() pressed = false;
   @Input() ariaLabel: string;
@@ -16,17 +16,22 @@ export class ToggleButtonComponent implements AfterViewInit {
   tabindex = 0;
   ariaPressed: boolean;
 
+  ngOnChanges() {
+    Promise.resolve(null).then(() =>
+      this.ariaPressed = this.pressed
+    );
+  }
+
   ngAfterViewInit() {
     if (!this.ariaLabel) {
       Promise.resolve(null).then(() =>
-        this.ariaLabel = `${this.content.nativeElement.innerText}`
+        this.ariaLabel = `${this.content.nativeElement.innerHTML} toggle button`
       );
     }
-    if (!this.ariaPressed) {
-      Promise.resolve(null).then(() =>
-        this.ariaPressed = this.pressed
-      );
-    }
+
+    Promise.resolve(null).then(() =>
+      this.ariaPressed = this.pressed
+    );
   }
 
   makeTabFocusable(focusable: boolean) {
