@@ -1,6 +1,7 @@
-$toggle-button-height: 28px;
+$toggle-button-height: 30px;
 
 .toggle-button-group {
+  margin-bottom: -10px; 
   width: 100%;
   display: inline-flex;
   justify-content: space-around;
@@ -12,12 +13,16 @@ $toggle-button-height: 28px;
     width: 100%;
     margin-bottom: 10px;
     border-radius: 0;
-    &:focus:not(:active) {
-      outline-offset: -3px;
-    }
-    &.button--secondary:not(:focus) {
+    border-right-width: 0;
+    
+    // &:focus:not(:active) {
+    //   outline-offset: -3px;
+    // }
+    &.button--secondary{
       border-right-width: 0;
-    }    
+      padding-left: 17px;
+      padding-right: 18px;
+    }   
   }
   :first-child .toggle-button-container {
     .toggle-button {
@@ -28,6 +33,9 @@ $toggle-button-height: 28px;
   :last-child .toggle-button-container {
     .toggle-button {
       border-right-width: 1px;
+      padding-left: 18px;
+      padding-right: 18px;
+      @extend .border-right-color--primary;
       border-top-right-radius: 1px;
       border-bottom-right-radius: 1px;
     }
@@ -40,19 +48,22 @@ $toggle-button-height: 28px;
   font-size: $font-size--small;
   height: $toggle-button-height;
   line-height: $toggle-button-height;
-  border-width: 1px;
-  border-style: solid;
-  @extend  .border-color--primary;
+  padding-left: 18px;
+  padding-right: 18px;
   &:active:not(.button--disabled) {
     box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.5); 
     transform: scale(1);
   } 
-  &:focus:not(:active) {
-    outline-offset: -3px;
-  }
   &.button--secondary {
-    @extend .color--primary;
     background-color: $text-color--light;
+    @extend .color--primary;
+    @extend .border-color--primary;
+    line-height: 28px;
+    border-width: 1px;
+    border-style: solid;
+    padding-left: 17px;
+    padding-right: 17px;
+
     &.button--disabled {
       color: $secondary-color--default;
       background-color: $text-color--light;
@@ -65,11 +76,6 @@ $toggle-button-height: 28px;
       transition: background-color 0.5s ease, color 0.5s ease;
     } 
   }
-  
-  .toggle-button__content {
-    padding-left: 17px; 
-    padding-right: 17px;
-  }
 }
   
 @media screen and (min-width: $desktop-width--medium) {
@@ -77,14 +83,28 @@ $toggle-button-height: 28px;
     margin-bottom: -15px; 
     .toggle-button {
       margin-bottom: 15px;
+      padding-left: 22px;
+      padding-right: 22px;      
+      &.button--secondary{
+        padding-left: 21px;
+        padding-right: 22px;
+      } 
     }
+    :last-child .toggle-button-container {
+      .toggle-button {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+    } 
   }
 
   .toggle-button {
-    font-size: $font-size--medium;    
-    .toggle-button__content {
+    font-size: $font-size--medium; 
+    padding-left: 22px;
+    padding-right: 22px;    
+    &.button--secondary{
       padding-left: 21px;
       padding-right: 21px;
-    }
+    } 
   }
 }

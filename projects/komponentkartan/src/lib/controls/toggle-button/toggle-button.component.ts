@@ -19,7 +19,7 @@ export class ToggleButtonComponent implements AfterViewInit {
   ngAfterViewInit() {
     if (!this.ariaLabel) {
       Promise.resolve(null).then(() =>
-        this.ariaLabel = `${this.content.nativeElement.innerText}`
+        this.ariaLabel = `${this.content.nativeElement.innerHTML}`
       );
     }
     if (!this.ariaPressed) {
