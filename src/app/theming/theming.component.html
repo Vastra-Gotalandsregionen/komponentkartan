@@ -59,3 +59,17 @@
   </vgr-page-body>
 
 </vgr-page>
+
+
+<vgr-modal id="myModalId">
+  <vgr-modal-header>
+    <h1>Pinkie Mode Activated!!!</h1>
+  </vgr-modal-header>
+  <vgr-modal-content>
+    <p>Grattis du har hittat ett påskägg!</p>
+    <i>Aktiverad genom att trycka på "Rött" 3 gånger</i>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [secondary]="true" default="true" (click)="modalService.closeDialog('myModalId')">Ja, det var ju kul..</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>

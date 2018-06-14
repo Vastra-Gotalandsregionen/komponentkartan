@@ -36,7 +36,12 @@ vgr-header {
     @extend .bg-image-vgr-header;
   }
   .theme--green & {
+    
     @extend .bg-image-vgr-header;
+  }
+  .theme--pinkie & {
+    @extend .bg-image-pinkie-header;
+    background-position: right center;
   }
 }
 

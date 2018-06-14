@@ -27,6 +27,9 @@
     .theme--green & {
       #{$property}: $primary-color--green;
     }
+    .theme--pinkie & {
+      #{$property}: $primary-color--pinkie;
+    }
     &.theme--neutral {
       #{$property}: $primary-color--default;
     }
@@ -38,6 +41,9 @@
     }
     &.theme--green {
       #{$property}: $primary-color--green;
+    }
+    &.theme--pinkie {
+      #{$property}: $primary-color--pinkie;
     }
   }
   .#{$property}--secondary {
@@ -54,6 +60,9 @@
     .theme--green & {
       #{$property}: $secondary-color--green;
     }
+    .theme--pinkie & {
+      #{$property}: $secondary-color--pinkie;
+    }
     &.theme--neutral {
       #{$property}: $secondary-color--default;
     }
@@ -65,6 +74,9 @@
     }
     &.theme--green {
       #{$property}: $secondary-color--green;
+    }
+    &.theme--pinkie {
+      #{$property}: $secondary-color--pinkie;
     }
   }
   .#{$property}--primary-dimmed {
@@ -81,6 +93,9 @@
     .theme--green & {
       #{$property}: $primary-color--green-dimmed;
     }
+    .theme--pinkie & {
+      #{$property}: $primary-color--pinkie-dimmed;
+    }
     &.theme--neutral {
       #{$property}: $primary-color--default-dimmed;
     }
@@ -92,6 +107,9 @@
     }
     &.theme--green {
       #{$property}: $primary-color--green-dimmed;
+    }
+    &.theme--pinkie {
+      #{$property}: $primary-color--pinkie-dimmed;
     }
   }
 }
@@ -132,6 +150,7 @@
 @include button-enabling--secondary(button-enabling--secondary-neutral, $primary-color--default);
 @include button-enabling--secondary(button-enabling--secondary-blue, $primary-color--blue);
 @include button-enabling--secondary(button-enabling--secondary-green, $primary-color--green);
+@include button-enabling--secondary(button-enabling--secondary-pinkie, $primary-color--pinkie);
 .button--enabling.button--secondary {
   transition: background-color 0.5s ease, color 0.5s ease;
   animation: button-enabling--secondary-neutral 0.9s;
@@ -143,5 +162,8 @@
   }
   .theme--green & {
     animation: button-enabling--secondary-green 0.9s;
+  }
+  .theme--pinkie & {
+    animation: button-enabling--secondary-pinkie 0.9s;
   }
 }

@@ -105,6 +105,10 @@ vgr-monthpicker {
       background-color: $primary-color--green;
       @extend .bg-image-icon-calendar--green;
     }
+    .theme--pinkie & {
+      background-color: $primary-color--pinkie;
+      @extend .bg-image-icon-calendar--red;
+    }
     .disabled & {
       @extend .bg-image-icon-calendar--inactive;
       background-color: $control-color--disabled;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectableItem } from 'vgr-komponentkartan';
+import { SelectableItem, ModalService } from 'vgr-komponentkartan';
 
 @Component({
   selector: 'app-theming',
@@ -9,7 +9,9 @@ import { SelectableItem } from 'vgr-komponentkartan';
 export class ThemingComponent implements OnInit {
 
   themes: SelectableItem<string>[];
-  constructor() {
+  pinkieMeter = 0;
+
+  constructor(private modalService: ModalService) {
     this.themes = [
       { displayName: 'Neutralt', value: 'theme--neutral' } as SelectableItem<string>,
       { displayName: 'Blått', value: 'theme--blue' } as SelectableItem<string>,
@@ -27,11 +29,30 @@ export class ThemingComponent implements OnInit {
     document.getElementById('theme-root').classList.remove('theme--blue');
     document.getElementById('theme-root').classList.remove('theme--red');
     document.getElementById('theme-root').classList.remove('theme--green');
-    document.getElementById('theme-root').classList.add(theme);
+    document.getElementById('theme-root').classList.remove('theme--pinkie');
+
+    if (this.isPinkeModeActive(theme)) {
+      document.getElementById('theme-root').classList.add('theme--pinkie');
+      this.modalService.openDialog('myModalId');
+    } else {
+      document.getElementById('theme-root').classList.add(theme);
+    }
   }
 
   isThemeActive(themeName: string): boolean {
     return document.getElementById('theme-root').classList.contains(themeName);
+  }
+
+  isPinkeModeActive(theme: string): boolean {
+    if (this.pinkieMeter >= 3) {
+      this.pinkieMeter = 0;
+    }
+
+    if (theme === 'theme--red') {
+      this.pinkieMeter++;
+    }
+
+    return this.pinkieMeter === 3;
   }
 
 }
