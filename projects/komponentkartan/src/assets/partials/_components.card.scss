@@ -15,6 +15,10 @@
   flex-direction: row;
 }
 
+.card-section__content {
+  overflow:hidden;
+}
+
 .card__section-container {
   padding-top: $margin--slim;
   padding-bottom: $margin--slim;

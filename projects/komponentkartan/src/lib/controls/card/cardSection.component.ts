@@ -1,89 +1,48 @@
-import { Component, HostBinding, Input, ElementRef, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
 
 @Component({
     selector: 'vgr-card-section',
     templateUrl: './cardSection.component.html',
     animations: [
-        trigger('toggleContent', [
-            state('void', style({
-                height: '0'
-            })),
-            transition('* => expanded', [
-                style({ height: 0, overflow: 'hidden' }),
-                animate('0.4s ease-in', style({
-                    height: '*'
-                }))
+        trigger('toggleExpandedState', [
+            transition(':enter', [
+                style({ height: '0'}),
+                animate('0.4s ease', style({ height: '*' })),
             ]),
-            transition('* => collapsed', [
-                style({ overflow: 'hidden' }),
-                animate('0.4s ease-out', style({
-                    height: 0
-                }))
-            ])
+            transition(':leave', [
+                style({ height: '*'}),
+                animate('0.4s ease', style({ height: '0' })),
+            ]),
         ]),
         trigger('animateChevron', [
             state('void', style({
                 transform: 'rotate(0deg)'
             })),
-            state('collapsed', style({
+            state('false', style({
                 transform: 'rotate(0deg)'
             })),
-            state('expanded', style({
+            state('true', style({
                 transform: 'rotate(-180deg)'
             })),
-            transition('* => expanded', [animate('0.4s ease')]),
-            transition('* => collapsed', [animate('0.4s ease')])
+            transition('* => true', [animate('0.4s ease')]),
+            transition('* => false', [animate('0.4s ease')])
         ])
     ]
 })
-export class CardSectionComponent implements OnInit {
+export class CardSectionComponent {
     @HostBinding('class.card-section') cardSectionClass = true;
-    @HostBinding('class.card-section--expanded') _expanded = false;
+    @Input() @HostBinding('class.card-section--expanded') expanded = false;
     @Input() @HostBinding('class.card-section--readonly') readonly: boolean;
     @Input() title: string;
     @Input() subtitle: string;
-    @Input() set expanded(value: boolean) {
-        this._expanded = value;
-        if (value) {
-            this.state = 'expanded';
-        } else {
-            this.state = 'collapsed';
-        }
-    }
-    get expanded(): boolean {
-        return this._expanded;
-    }
-    private _showExpanded: boolean;
 
-    get showExpanded() {
-        return this._showExpanded;
+    toggleExpanded() {
+        this.expanded = !this.expanded;
     }
 
-    set showExpanded(show: boolean) {
-        // if (show) {
-        this._showExpanded = true;
-        this.expanded = show;
-        // this.state = 'expanded';
-        // } else {
-        //     // this.state = 'collapsed';
-        // }
-    }
-
-    state: string;
-
-    constructor(private elementRef: ElementRef) {
+    constructor() {
         this.readonly = true;
     }
 
-    ngOnInit() {
-        this._showExpanded = this.expanded;
-    }
-
-    animationDone(event: any) {
-        if (event.toState === 'collapsed') {
-            this._showExpanded = false;
-            this.expanded = false;
-        }
-    }
 }

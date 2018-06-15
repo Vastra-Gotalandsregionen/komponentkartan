@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Refactored back-to-top from javascript to Angular component
 - Added toggle-button component 
 - Fixed a bug were elements were focused in collapsed action panels.
+- Bugfix for card-section animation in IE.
 
 ## 2.6.0 
 - Fixed smoother animations in list component
