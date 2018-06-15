@@ -15,9 +15,9 @@ $toggle-button-height: 30px;
     border-radius: 0;
     border-right-width: 0;
     
-    // &:focus:not(:active) {
-    //   outline-offset: -3px;
-    // }
+    &:focus:not(:active) {
+      z-index: $layer-three;
+    }
     &.button--secondary{
       border-right-width: 0;
       padding-left: 17px;
