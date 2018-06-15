@@ -1,0 +1,81 @@
+<app-component-docs [componentName]="'Search results'">
+  <div class="docs__overview">
+    <p>
+      <code>
+        &lt;vgr-search-result&gt;</code>
+    </p>
+    <br>
+    <p>En panel som innehåller spara, avbryt samt låsknapp. Spara och avbryt är inaktiverade i låst läge. De kan aktiveras genom
+      att låsa upp. När spara eller avbryt sedan trycks ned, låses panelen igen. Låsknappen är inaktiverad när låset är upplåst.
+    </p>
+    <br>
+    <div class="search-result-wrapper">
+      <input type="text" (click)="dropdownVisible = true">
+      <vgr-search-result [items]="items" [visible]="dropdownVisible" (itemClick)="click($event)"></vgr-search-result>
+    </div>
+    <br>
+    <p> Förändras med tema:
+      <strong>ja</strong>
+    </p>
+  </div>
+  <div class="docs__examples">
+    <div>
+      <vgr-save-cancel (save)="saveCancelMessage='Sparade!'" (cancel)="saveCancelMessage='Avbröt.'" (unlock)="saveCancelMessage='Låste upp'"></vgr-save-cancel>
+      <br>
+      <span>Senaste händelse:&nbsp;
+        <strong>{{saveCancelMessage}}</strong>
+      </span>
+    </div>
+  </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>
+          locked : boolean
+        </td>
+        <td>
+          <code>true</code> betyder att låset är låst, spara och avbryt är inaktiva.
+          <code>false</code> betyder att låset upplåst, spara och avbryt är aktiva. Default är
+          <code>true</code>.</td>
+        <td>[locked]="false"</td>
+      </tr>
+      <tr>
+        <td>
+          secondary : boolean
+        </td>
+        <td>Om knappar ska vara sekundärknappar eller ej. Default är
+          <code>false</code>.</td>
+        <td>[secondary]="true"</td>
+      </tr>
+      <tr>
+        <td>
+          cancel : EventEmitter
+        </td>
+        <td>Triggas då användaren klickar på avbryt</td>
+        <td>(cancel)="cancel()"</td>
+      </tr>
+      <tr>
+        <td>
+          save : EventEmitter
+        </td>
+        <td>Triggas då användaren klickar på spara</td>
+        <td>(save)="save()"</td>
+      </tr>
+      <tr>
+        <td>
+          unlock : EventEmitter
+        </td>
+        <td>Triggas då användaren låser upp låset</td>
+        <td>(unlock)="unlock()"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    <i>Under utveckling</i>
+  </div>
+</app-component-docs>

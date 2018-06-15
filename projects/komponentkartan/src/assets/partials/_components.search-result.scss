@@ -1,0 +1,235 @@
+$search-results-height--small: 285px;
+$search-results-height--medium: 340px;
+$search-results-height--medium-with-filter: 360px;
+$search-results-width--medium: 160px;
+$search-results-width--small: 100px;
+$filter-area-height: 60px;
+
+.search-result-wrapper {
+    position: relative;
+}
+
+.search-results {
+  &.search-results--focus {
+    .search-results--edit {
+      outline: $focus-outline-width solid $focus-color;
+    }
+  }
+}
+/*******************************************************************************************************
+ * .search-results__menu
+ *  Hela den yta som "droppar" ner från kontrollen. Här läggs listan, filtrering mm
+ *
+ *******************************************************************************************************/
+
+.search-results__menu {
+  position: absolute;
+  top: 42px;
+  left:0;
+  text-align: left;
+  z-index: $layer-four;
+  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
+  background-color: $background-color--content;
+  border: none;
+  padding-top: $margin--regular;
+  padding-bottom: 0px;
+  width: 330px;
+  max-height: $search-results-height--small;
+  display: none;
+  cursor: default;
+  &:before {
+    @extend .bg-image-menu-arrow;
+    content: "";
+    position: absolute;
+    display: inline-block;
+    z-index: $layer-two;
+    margin-top: -32px;
+    left: 20px;
+  }
+  a {
+    color: $menu-text-color;
+    text-decoration: none;
+    display: block;
+    border-bottom: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: $margin--regular;
+    padding-right: $margin--regular;
+  }
+  .search-results--open & {
+    display: inline-block;
+  }
+  .search-results__menu__items {
+    position: relative;
+    max-height: calc(#{$search-results-height--small} - #{$margin--fat});
+    li {
+      width: calc(100% - 3px);
+      background: white;
+      a {
+        padding-right: 11px;
+        padding-left: 15px;
+      }
+      &.search-results-item--selected {
+        a {
+          font-weight: bold;
+          letter-spacing: $font-size--small-letter-spacing-bold;
+        }
+      }
+      &.search-results-item--marked {
+        a {
+          padding-left: 11px;
+          border-left-width: 4px;
+          border-left-style: solid;
+          font-weight: bold;
+          letter-spacing: $font-size--small-letter-spacing-bold;
+          @extend .border-left-color--primary;
+        }
+      }
+      &:last-child {
+        margin-bottom: 7px;
+      }
+      &:focus {
+        outline: $focus-outline-width solid $focus-color;
+      }
+    }
+    li:last-child {
+      margin-bottom: 0px;
+    }
+    li:first-child {
+      margin-top: 4px;
+    }
+  }
+  .search-results--filter-visible & {
+    .search-results__menu__items {
+      position: relative; //
+      max-height: calc(#{$search-results-height--small} - #{$filter-area-height});
+    }
+    .container {
+      margin-top: 40px;
+    }
+  }
+}
+
+.search-results__filterTextbox {
+  position: absolute;
+  margin-left: 30px;
+  margin-right: 30px;
+  width: calc(100% - 60px);
+  visibility: hidden;
+  .search-results--filter-visible.search-results--open & {
+    visibility: visible;
+  }
+}
+
+.search-results-item--select-all {
+  &:after {
+    content: "";
+    height: 0px;
+    display: block;
+    border-top: 1px solid $border-color;
+    margin-right: -3px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    z-index: $layer-one;
+    position: relative;
+  }
+}
+
+/*******************************************************************************************************
+ * .search-results__dimmer
+ * Det transparenta området överst och underst i listan som visar att det finns mer items
+ * Finns i både --top och --bottom varianter
+ *******************************************************************************************************/
+
+.search-results__dimmer {
+  display: block;
+  height: 24px;
+  width: calc(100% - 20px); //Widht is 100% - scrollbar width
+  position: absolute;
+  z-index: $layer-five;
+}
+
+.search-results__dimmer--top {
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.38) 19%, rgba(255, 255, 255, 0.74) 52%, rgba(255, 255, 255, 0.9) 72%, #ffffff);
+  top: 8px;
+  .search-results--filter-visible & {
+    top: 47px;
+  }
+}
+
+.search-results__dimmer--bottom {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), #FFFFFF);
+  display: block;
+  top: calc(#{$search-results-height--small} - 25px);
+  .search-results--filter-visible & {
+    display: block;
+    top: calc(#{$search-results-height--small} - 25px);
+  }
+}
+
+.scroll-element.scroll-x {
+  display: none !important;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .search-results {
+    .validation {
+      max-width: $search-results-width--medium + $margin--regular + $margin--regular;
+    }
+  }
+  .search-results--edit {
+    width: $search-results-width--medium + $margin--slim;
+    span {
+      max-width: calc(#{$search-results-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
+      min-width: calc(#{$search-results-width--medium} + 10px - #{$icon-width} - #{$border--single} - #{$border--single});
+    }
+  }
+  .search-results__menu {
+    max-height: $search-results-height--medium;
+    .search-results__menu__items {
+      max-height: calc(#{$search-results-height--medium} - #{$margin--fat});
+    }
+    .search-results--filter-visible & {
+      max-height: $search-results-height--medium-with-filter;
+      .search-results__menu__items {
+        max-height: calc(#{$search-results-height--medium-with-filter} - #{$filter-area-height});
+      }
+      .scroll-wrapper {
+        margin-top: 40px;
+      }
+    }
+    .search-results--filter-visible & {
+      max-height: $search-results-height--medium-with-filter;
+    }
+  }
+  .search-results__dimmer--bottom {
+    top: calc(#{$search-results-height--medium} - 25px);
+    .search-results--filter-visible & {
+      top: calc(#{$search-results-height--medium-with-filter} - 25px);
+    }
+  }
+  .search-results__filterTextbox {
+    .filter-textbox {
+      width: $input-width--small;
+    }
+  }
+}
+
+/*******************************************************************************
+* IE11 Specific styles
+* 1. Disable chevron animation, since it is too slow in IE11
+*******************************************************************************/
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+  .search-results--edit {
+    &:after {
+      transition: none;
+    }
+    &.search-results--open {
+      &:after {
+        transition: none;
+      }
+    }
+  }
+}

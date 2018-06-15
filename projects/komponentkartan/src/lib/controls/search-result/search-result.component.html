@@ -1,0 +1,12 @@
+<div class="search-results__menu">
+  <div *ngIf="dimmerTopVisible" class="search-results__dimmer search-results__dimmer--top"></div>
+  <perfect-scrollbar class="container" [config]="scrollbarConfig">
+    <ul class="search-results__menu__items" role="listbox">
+      <li *ngFor="let item of items" class="search-results-item" [ngClass]="{'search-results-item--marked' : item.marked, 'search-results-item--selected' : item.selected }"
+        tabindex="0" [attr.aria-label]="item.displayName" [attr.aria-selected]="item.selected">
+        <a (click)="onItemClick(item)" title={{item.displayName}}>{{item.displayName}}</a>
+      </li>
+    </ul>
+  </perfect-scrollbar>
+  <div *ngIf="dimmerBottomVisible" class="search-results__dimmer search-results__dimmer--bottom"></div>
+</div>

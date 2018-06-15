@@ -95,7 +95,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.FilterTagGroupComponent,
     type.ScrollToTopComponent,
     type.ToggleButtonComponent,
-    type.ToggleButtonGroupComponent
+    type.ToggleButtonGroupComponent,
+    type.SearchResultComponent
   ],
   exports: [
     type.SafePipe,
@@ -165,7 +166,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.FilterTagGroupComponent,
     type.ScrollToTopComponent,
     type.ToggleButtonComponent,
-    type.ToggleButtonGroupComponent
+    type.ToggleButtonGroupComponent,
+    type.SearchResultComponent
+
   ],
   providers: [
     type.ModalService,

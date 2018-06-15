@@ -69,6 +69,7 @@ import { IconsComponent } from './icons/icons.component';
 import { TableComponent } from './table/table.component';
 import { RingWithTextComponent } from './ring-with-text/ring-with-text.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 @NgModule({
     declarations: [
@@ -118,7 +119,8 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
         TextareafieldComponent,
         FilterTagComponent,
         RingWithTextComponent,
-        ToggleButtonComponent
+        ToggleButtonComponent,
+        SearchResultsComponent
     ],
     imports: [
         KomponentkartanModule,
