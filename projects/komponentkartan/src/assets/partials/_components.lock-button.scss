@@ -7,9 +7,9 @@
 .lock-button__top {
   @extend .bg-image-lock-button__top;
   position: absolute;
-  top: 5px;
-  left: 11px;
-  background-position: -5px 0px;
+  top: 6px;
+  left: 10px;
+  //background-position: -5px 0px;
   transition: left 0.2s linear;
   .lock-button--unlocked & {
     left: 17px;
@@ -20,6 +20,6 @@
   @extend .bg-image-lock-button__bottom;
   position: absolute;
   top: 13px;
-  left: 11px;
-  background-position: -5px -8px;
+  left: 10px;
+  background-position: bottom center;
 }
