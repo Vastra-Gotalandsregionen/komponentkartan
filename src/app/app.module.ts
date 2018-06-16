@@ -21,7 +21,7 @@ import { UnitFilter2Pipe } from './examples-listwithlists/unitFilterPipe';
 import { KomponentkartanApplicationComponent } from './app.component';
 
 import { InputfieldsComponent } from './inputfields/inputfields.component';
-import { CityService } from './inputfields/cityservice';
+import { CityService } from './inputfields/cityService';
 import { MonthpickerComponent } from './monthpicker/monthpicker.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
@@ -141,5 +141,3 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
     bootstrap: [KomponentkartanApplicationComponent]
 })
 export class AppModule { }
-
-

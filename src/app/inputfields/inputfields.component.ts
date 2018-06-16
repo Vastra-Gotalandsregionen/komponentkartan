@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ErrorHandler, InputComponent } from 'vgr-komponentkartan';
 import { FormGroup, FormBuilder, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
-import { CityService } from './cityservice';
+import { CityService } from './cityService';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import { Observable } from 'rxjs';
