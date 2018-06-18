@@ -8,8 +8,11 @@ import { DropdownItem } from 'vgr-komponentkartan';
 })
 export class SearchResultsComponent implements OnInit {
 
-  items: any = this.getDemoItems(25);
+  items: any = this.getDemoItems(55);
+  filteredItems: any;
   dropdownVisible = false;
+  filterBoxValue: string;
+  searchDescription = null;
 
   constructor() { }
 
@@ -21,8 +24,20 @@ export class SearchResultsComponent implements OnInit {
     return items;
   }
 
+  filterSearch(searchText: string = '') {
+    if (!searchText || searchText.length < 3) {
+      this.dropdownVisible = false;
+      return;
+    }
+    this.filteredItems = this.items.filter(item => item.displayName.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
+    this.searchDescription = this.filteredItems.length + ' träffar i "VGR" KIV.';
+    this.dropdownVisible = true;
+  }
+
   click(item) {
-    console.log('test', item);
+    console.log(item);
+    this.filterBoxValue = item.value;
+    this.dropdownVisible = false;
   }
 
   ngOnInit() {

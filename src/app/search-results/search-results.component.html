@@ -1,17 +1,25 @@
 <app-component-docs [componentName]="'Search results'">
   <div class="docs__overview">
     <p>
-      <code>
-        &lt;vgr-search-result&gt;</code>
+      <code>&lt;vgr-search-result&gt;</code>
     </p>
     <br>
-    <p>En panel som innehåller spara, avbryt samt låsknapp. Spara och avbryt är inaktiverade i låst läge. De kan aktiveras genom
-      att låsa upp. När spara eller avbryt sedan trycks ned, låses panelen igen. Låsknappen är inaktiverad när låset är upplåst.
+    <p>En "dropdown"-lista som går at koppla till en input-komponent. För att den skall placera sig rätt behöver man wrappa
+      både komponenten och "trigger"-komponenten i en div med klassen
+      <code>search-result-wrapper</code>. Se exampel nedan:
+      <br>
     </p>
+    <pre>
+&lt;div class=&quot;search-result-wrapper&quot;&gt;
+  &lt;vgr-filter-textbox (valueChanged)=&quot;filterSearch($event)&quot; [value]=&quot;filterBoxValue&quot;&gt;&lt;/vgr-filter-textbox&gt;
+  &lt;vgr-search-result [items]=&quot;filteredItems&quot; [visible]=&quot;dropdownVisible&quot; maxItems=&quot;15&quot; (itemClick)=&quot;click($event)&quot; [description]=&quot;searchDescription&quot;&gt;&lt;/vgr-search-result&gt;   
+&lt;/div&gt;
+  </pre>
     <br>
     <div class="search-result-wrapper">
-      <input type="text" (click)="dropdownVisible = true">
-      <vgr-search-result [items]="items" [visible]="dropdownVisible" (itemClick)="click($event)"></vgr-search-result>
+      <!--input type="text" -->
+      <vgr-filter-textbox (valueChanged)="filterSearch($event)" [value]="filterBoxValue"></vgr-filter-textbox>
+      <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible" maxItems="15" (itemClick)="click($event)" [description]="searchDescription"></vgr-search-result>
     </div>
     <br>
     <p> Förändras med tema:
@@ -34,44 +42,53 @@
         <th>Beskrivning</th>
         <th>Exempel</th>
       </tr>
+      <!--
+ @Input() @HostBinding('class.search-results--open') visible = false;
+
+      -->
       <tr>
         <td>
-          locked : boolean
+          description : string
         </td>
         <td>
-          <code>true</code> betyder att låset är låst, spara och avbryt är inaktiva.
-          <code>false</code> betyder att låset upplåst, spara och avbryt är aktiva. Default är
-          <code>true</code>.</td>
-        <td>[locked]="false"</td>
+          En text som visas ovanför sökträffarna.
+        </td>
+        <td>[description]="55 träffar i "VGR" KIV."</td>
       </tr>
       <tr>
         <td>
-          secondary : boolean
+          noResultsText : string
         </td>
-        <td>Om knappar ska vara sekundärknappar eller ej. Default är
-          <code>false</code>.</td>
-        <td>[secondary]="true"</td>
+        <td>en text som visas om inga sökträffar hittas.</td>
+        <td>[noResultsText]="Inga sökträffar hittades."</td>
       </tr>
       <tr>
         <td>
-          cancel : EventEmitter
+          items : array
         </td>
-        <td>Triggas då användaren klickar på avbryt</td>
-        <td>(cancel)="cancel()"</td>
+        <td>Listan på sökträffar i rätt format.</td>
+        <td>[items]="['{{'{'}}value: "123", displayName: " Min mottagning"{{'}'}}, ...]"</td>
       </tr>
       <tr>
         <td>
-          save : EventEmitter
+          maxItems : number
         </td>
-        <td>Triggas då användaren klickar på spara</td>
-        <td>(save)="save()"</td>
+        <td>Antalet sökträffar som maximalt skall visas i listan. 25st är default.</td>
+        <td>[maxItems]="25"</td>
       </tr>
       <tr>
         <td>
-          unlock : EventEmitter
+          visible : boolean
         </td>
-        <td>Triggas då användaren låser upp låset</td>
-        <td>(unlock)="unlock()"</td>
+        <td>Styr hurvida listanvisas eller ej.</td>
+        <td>[visible]="isListVisible"</td>
+      </tr>
+      <tr>
+        <td>
+          itemClick : event
+        </td>
+        <td>Event som triggas när man klickar på en listitem, skickar med datan för det listitemet.</td>
+        <td>(itemClick)="doSomething($event)"</td>
       </tr>
     </table>
   </div>
