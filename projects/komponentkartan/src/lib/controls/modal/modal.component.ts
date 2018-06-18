@@ -56,10 +56,16 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
             this.firstTabStop = this.focusableElements[0];
             this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
 
-            // Set default button if one is defined
-            const defaultButton = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
-            if (defaultButton) {
-                defaultButton.nativeElement.children[0].focus();
+            // Set focus default button if one is defined
+            const defaultButtonComponent = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
+            if (defaultButtonComponent) {
+                const spanElement = defaultButtonComponent.nativeElement.children[0];
+                if (spanElement) {
+                    // wait one lifecycle and set focus on the button element wrapped insde the span
+                    Promise.resolve(null).then(() => {
+                        spanElement.children[0].focus();
+                    });
+                }
             } else {
                 this.firstTabStop.focus();
             }
