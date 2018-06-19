@@ -1,5 +1,6 @@
-import { Component, OnInit, ContentChild, ViewChild } from '@angular/core';
-import { SearchResultItem, SearchResultComponent } from 'vgr-komponentkartan';
+import { Component, OnInit } from '@angular/core';
+import { SearchResultItem } from 'vgr-komponentkartan';
+import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
   selector: 'app-search-results',
@@ -16,18 +17,21 @@ export class SearchResultsComponent implements OnInit {
   dropdownVisible_e1 = false;
   dropdownVisible_e2 = false;
   filterBoxValue_e1: string;
+  filterBoxValue_e2: string;
   searchDescription_e1 = null;
+  htmlExample1;
 
-  //@ViewChild(SearchResultComponent) searchResult: SearchResultComponent;
-
-
-  constructor() {
+  constructor(htmlEncoder: HtmlEncodeService) {
+    this.htmlExample1 = htmlEncoder.prepareHighlightedSection(`<div class="search-result-wrapper">
+    <vgr-filter-textbox (keyup)="filterSearch($event)" [value]="filterBoxValue_e1"></vgr-filter-textbox>
+    <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible_e1" maxItems="15" [description]="searchDescription_e1" (itemClick)="setResult($event)"></vgr-search-result>
+  </div>`, 'html');
   }
 
   private getDemoItems(numberOfItems: number, addSecondRow: boolean = false): SearchResultItem[] {
     const items: SearchResultItem[] = [];
     for (let i = 1; i <= numberOfItems; i++) {
-      const name = `${i} - Min mottagning`;
+      const name = Math.random() > 0.7 ? `${i} - Min mottagning har ett jättelångt namn` : `${i} - Min mottagning`;
       const displayName = new Array(name);
       if (addSecondRow) {
         displayName.push('Placering');
@@ -51,15 +55,8 @@ export class SearchResultsComponent implements OnInit {
   }
 
   filterSearch_e2(event) {
-    const searchText = event.target.value;
-    console.log(searchText);
-
-    if (!searchText || searchText.length < 3) {
-      this.dropdownVisible_e2 = false;
-      return;
-    }
+    const searchText = this.filterBoxValue_e2;
     this.filteredItems_e2 = this.items_e2.filter(item => item.displayName.toString().toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
-    console.log(this.filteredItems_e2);
     //this.searchDescription_e2 = this.filteredItems.length + ' träffar i "VGR" KIV.';
     this.dropdownVisible_e2 = true;
   }
@@ -69,8 +66,17 @@ export class SearchResultsComponent implements OnInit {
     this.dropdownVisible_e1 = false;
   }
 
+  setResult_e2(item) {
+    this.filterBoxValue_e2 = item.value;
+    this.dropdownVisible_e2 = false;
+  }
+
+  closeDropdown() {
+    this.dropdownVisible = false;
+  }
+
   ngOnInit() {
-    //this.searchResult.itemClick.subscribe((item) => this.setResult(item));
+
   }
 
 }

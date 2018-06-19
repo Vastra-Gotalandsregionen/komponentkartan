@@ -43,7 +43,7 @@ $filter-area-height: 60px;
     position: absolute;
     display: inline-block;
     z-index: $layer-two;
-    margin-top: -32px;
+    margin-top: -31px;
     left: 20px;
   }
   a {
@@ -127,9 +127,13 @@ $filter-area-height: 60px;
   }
 }
 
-.search-results__description {
+.search-results__description,
+.search-results__noresults {
   padding-left: 15px;
   padding-right: 21px;
+}
+
+.search-results__description {
   &:after {
     content: "";
     height: 0px;

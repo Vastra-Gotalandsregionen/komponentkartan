@@ -13,7 +13,7 @@
     <div class="search-result-wrapper">
       <!--input type="text" -->
       <vgr-input (click)="dropdownVisible=true"> </vgr-input>
-      <vgr-search-result [items]="items" [visible]="dropdownVisible" maxItems="15"></vgr-search-result>
+      <vgr-search-result [items]="items" [visible]="dropdownVisible" maxItems="15" (itemClick)="closeDropdown()"></vgr-search-result>
     </div>
     <br>
     <p> Förändras med tema:
@@ -28,24 +28,17 @@
           <vgr-filter-textbox (keyup)="filterSearch($event)" [value]="filterBoxValue_e1"></vgr-filter-textbox>
           <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible_e1" maxItems="15" [description]="searchDescription_e1" (itemClick)="setResult($event)"></vgr-search-result>
         </div>
-
-
       </div>
       <div>
         <p>Exempel på sökning 2</p>
         <div class="search-result-wrapper">
-          <vgr-input (keyup)="filterSearch_e2($event)" [value]="filterBoxValue_e2"></vgr-input>
-          <vgr-search-result [items]="filteredItems_e2" [visible]="dropdownVisible_e2" maxItems="15"></vgr-search-result>
+          <vgr-input [(ngModel)]="filterBoxValue_e2" style="display: inline-flex;"></vgr-input><vgr-button (click)="filterSearch_e2($event)">Sök</vgr-button>
+          <vgr-search-result [items]="filteredItems_e2" [visible]="dropdownVisible_e2" maxItems="15" noResultsText="Inga resultat hittades." (itemClick)="setResult_e2($event)"></vgr-search-result>
         </div>
 
       </div>
     </div>
-    <pre>
-      &lt;div class=&quot;search-result-wrapper&quot;&gt;
-        &lt;vgr-filter-textbox (valueChanged)=&quot;filterSearch($event)&quot; [value]=&quot;filterBoxValue&quot;&gt;&lt;/vgr-filter-textbox&gt;
-        &lt;vgr-search-result [items]=&quot;filteredItems&quot; [visible]=&quot;dropdownVisible&quot; (itemClick)=&quot;click($event)&quot; [description]=&quot;searchDescription&quot;&gt;&lt;/vgr-search-result&gt;   
-      &lt;/div&gt;
-        </pre>
+    <section [innerHTML]="htmlExample1" highlight-js-content=".highlight"></section>
   </div>
   <div class="docs__api">
     <table class="property-table">
