@@ -4,36 +4,50 @@
       <code>&lt;vgr-search-result&gt;</code>
     </p>
     <br>
-    <p>En "dropdown"-lista som går at koppla till en input-komponent. För att den skall placera sig rätt behöver man wrappa
-      både komponenten och "trigger"-komponenten i en div med klassen
-      <code>search-result-wrapper</code>. Se exampel nedan:
-      <br>
+    <p>En sökresultat-lista som går att koppla till en input-komponent. För att den skall placera sig rätt behöver man wrappa
+      båda komponenterna i en div med klassen
+      <code>search-result-wrapper</code>. Klicka i input-fältet för att visa ett exempel på sökresultatlistan.
     </p>
-    <pre>
-&lt;div class=&quot;search-result-wrapper&quot;&gt;
-  &lt;vgr-filter-textbox (valueChanged)=&quot;filterSearch($event)&quot; [value]=&quot;filterBoxValue&quot;&gt;&lt;/vgr-filter-textbox&gt;
-  &lt;vgr-search-result [items]=&quot;filteredItems&quot; [visible]=&quot;dropdownVisible&quot; maxItems=&quot;15&quot; (itemClick)=&quot;click($event)&quot; [description]=&quot;searchDescription&quot;&gt;&lt;/vgr-search-result&gt;   
-&lt;/div&gt;
-  </pre>
+
     <br>
     <div class="search-result-wrapper">
       <!--input type="text" -->
-      <vgr-filter-textbox (valueChanged)="filterSearch($event)" [value]="filterBoxValue"></vgr-filter-textbox>
-      <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible" maxItems="15" (itemClick)="click($event)" [description]="searchDescription"></vgr-search-result>
+      <vgr-input (click)="dropdownVisible=true"> </vgr-input>
+      <vgr-search-result [items]="items" [visible]="dropdownVisible" maxItems="15"></vgr-search-result>
     </div>
     <br>
     <p> Förändras med tema:
-      <strong>ja</strong>
+      <strong>nej</strong>
     </p>
   </div>
   <div class="docs__examples">
-    <div>
-      <vgr-save-cancel (save)="saveCancelMessage='Sparade!'" (cancel)="saveCancelMessage='Avbröt.'" (unlock)="saveCancelMessage='Låste upp'"></vgr-save-cancel>
-      <br>
-      <span>Senaste händelse:&nbsp;
-        <strong>{{saveCancelMessage}}</strong>
-      </span>
+    <div class="row-layout">
+      <div>
+        <p>Exempel på sökning 1</p>
+        <div class="search-result-wrapper">
+          <!--input type="text" -->
+          <vgr-filter-textbox (keyup)="filterSearch($event)" [value]="filterBoxValue"></vgr-filter-textbox>
+          <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible_e1" maxItems="15" [description]="searchDescription"></vgr-search-result>
+        </div>
+
+
+      </div>
+      <div>
+        <p>Exempel på sökning 2</p>
+        <div class="search-result-wrapper">
+          <!--input type="text" -->
+          <vgr-input (keyup)="filterSearch($event)" [value]="filterBoxValue"></vgr-input>
+          <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible_e1" maxItems="15" [description]="searchDescription"></vgr-search-result>
+        </div>
+
+      </div>
     </div>
+    <pre>
+      &lt;div class=&quot;search-result-wrapper&quot;&gt;
+        &lt;vgr-filter-textbox (valueChanged)=&quot;filterSearch($event)&quot; [value]=&quot;filterBoxValue&quot;&gt;&lt;/vgr-filter-textbox&gt;
+        &lt;vgr-search-result [items]=&quot;filteredItems&quot; [visible]=&quot;dropdownVisible&quot; (itemClick)=&quot;click($event)&quot; [description]=&quot;searchDescription&quot;&gt;&lt;/vgr-search-result&gt;   
+      &lt;/div&gt;
+        </pre>
   </div>
   <div class="docs__api">
     <table class="property-table">
