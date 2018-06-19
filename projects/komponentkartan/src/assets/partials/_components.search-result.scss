@@ -68,6 +68,12 @@ $filter-area-height: 60px;
       a {
         padding-right: 11px;
         padding-left: 15px;
+        span {
+          display: block;
+          &.italic {
+            font-style: italic;
+          }
+        }
       }
       &.search-results-item--selected {
         a {

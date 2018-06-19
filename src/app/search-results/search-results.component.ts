@@ -1,5 +1,5 @@
 import { Component, OnInit, ContentChild, ViewChild } from '@angular/core';
-import { DropdownItem, SearchResultComponent } from 'vgr-komponentkartan';
+import { SearchResultItem, SearchResultComponent } from 'vgr-komponentkartan';
 
 @Component({
   selector: 'app-search-results',
@@ -8,25 +8,32 @@ import { DropdownItem, SearchResultComponent } from 'vgr-komponentkartan';
 })
 export class SearchResultsComponent implements OnInit {
 
-  items: any = this.getDemoItems(55);
+  items: SearchResultItem[] = this.getDemoItems(55);
+  items_e2: SearchResultItem[] = this.getDemoItems(13, true);
   filteredItems: any;
+  filteredItems_e2: any;
   dropdownVisible = false;
   dropdownVisible_e1 = false;
-  filterBoxValue: string;
-  searchDescription = null;
+  dropdownVisible_e2 = false;
+  filterBoxValue_e1: string;
+  searchDescription_e1 = null;
 
-  @ViewChild(SearchResultComponent) searchResult: SearchResultComponent;
+  //@ViewChild(SearchResultComponent) searchResult: SearchResultComponent;
 
 
   constructor() {
-
-
   }
 
-  private getDemoItems(numberOfItems: number): DropdownItem<string>[] {
-    const items: DropdownItem<string>[] = [];
+  private getDemoItems(numberOfItems: number, addSecondRow: boolean = false): SearchResultItem[] {
+    const items: SearchResultItem[] = [];
     for (let i = 1; i <= numberOfItems; i++) {
-      items.push({ value: `${i} - Min mottagning`, displayName: `${i} - Min mottagning`, displayNameWhenSelected: `Alt ${i}` } as DropdownItem<string>);
+      const name = `${i} - Min mottagning`;
+      const displayName = new Array(name);
+      if (addSecondRow) {
+        displayName.push('Placering');
+      }
+
+      items.push({ value: name, displayName: displayName, secondRowItalic: true } as SearchResultItem);
     }
     return items;
   }
@@ -38,26 +45,32 @@ export class SearchResultsComponent implements OnInit {
       this.dropdownVisible_e1 = false;
       return;
     }
-    this.filteredItems = this.items.filter(item => item.displayName.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
-    this.searchDescription = this.filteredItems.length + ' träffar i "VGR" KIV.';
+    this.filteredItems = this.items.filter(item => item.displayName.toString().toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
+    this.searchDescription_e1 = this.filteredItems.length + ' träffar i "VGR" KIV.';
     this.dropdownVisible_e1 = true;
   }
 
-  // click(item) {
-  //   //console.log(item);
-  //   //this.filterBoxValue = item.value;
-  //   this.dropdownVisible = false;
+  filterSearch_e2(event) {
+    const searchText = event.target.value;
+    console.log(searchText);
 
-  // }
+    if (!searchText || searchText.length < 3) {
+      this.dropdownVisible_e2 = false;
+      return;
+    }
+    this.filteredItems_e2 = this.items_e2.filter(item => item.displayName.toString().toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
+    console.log(this.filteredItems_e2);
+    //this.searchDescription_e2 = this.filteredItems.length + ' träffar i "VGR" KIV.';
+    this.dropdownVisible_e2 = true;
+  }
 
   setResult(item) {
-    this.filterBoxValue = item.value;
+    this.filterBoxValue_e1 = item.value;
     this.dropdownVisible_e1 = false;
-    console.log(item.displayName);
   }
 
   ngOnInit() {
-    this.searchResult.itemClick.subscribe((item) => this.setResult(item));
+    //this.searchResult.itemClick.subscribe((item) => this.setResult(item));
   }
 
 }

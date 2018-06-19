@@ -25,9 +25,8 @@
       <div>
         <p>Exempel på sökning 1</p>
         <div class="search-result-wrapper">
-          <!--input type="text" -->
-          <vgr-filter-textbox (keyup)="filterSearch($event)" [value]="filterBoxValue"></vgr-filter-textbox>
-          <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible_e1" maxItems="15" [description]="searchDescription"></vgr-search-result>
+          <vgr-filter-textbox (keyup)="filterSearch($event)" [value]="filterBoxValue_e1"></vgr-filter-textbox>
+          <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible_e1" maxItems="15" [description]="searchDescription_e1" (itemClick)="setResult($event)"></vgr-search-result>
         </div>
 
 
@@ -35,9 +34,8 @@
       <div>
         <p>Exempel på sökning 2</p>
         <div class="search-result-wrapper">
-          <!--input type="text" -->
-          <vgr-input (keyup)="filterSearch($event)" [value]="filterBoxValue"></vgr-input>
-          <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible_e1" maxItems="15" [description]="searchDescription"></vgr-search-result>
+          <vgr-input (keyup)="filterSearch_e2($event)" [value]="filterBoxValue_e2"></vgr-input>
+          <vgr-search-result [items]="filteredItems_e2" [visible]="dropdownVisible_e2" maxItems="15"></vgr-search-result>
         </div>
 
       </div>
@@ -56,10 +54,6 @@
         <th>Beskrivning</th>
         <th>Exempel</th>
       </tr>
-      <!--
- @Input() @HostBinding('class.search-results--open') visible = false;
-
-      -->
       <tr>
         <td>
           description : string

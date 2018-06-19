@@ -77,6 +77,7 @@ export { NotificationType } from './models/notificationType.model';
 export { RowNotification } from './models/rowNotification.model';
 export { Notification } from './models/notification.model';
 export { ISelectableItem, SelectableItem } from './models/selectableItem.model';
+export { SearchResultItem } from './models/searchResultItem.model';
 
 export { DropdownItemToSelectedTextPipe } from './pipes/dropdownItemToSelectedTextPipe';
 export { FilterPipe } from './pipes/filterPipe';
