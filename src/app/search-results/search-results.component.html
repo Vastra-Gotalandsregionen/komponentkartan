@@ -12,8 +12,8 @@
     <br>
     <div class="search-result-wrapper">
       <!--input type="text" -->
-      <vgr-input (click)="dropdownVisible=true"> </vgr-input>
-      <vgr-search-result [items]="items" [visible]="dropdownVisible" maxItems="15" (itemClick)="closeDropdown()"></vgr-search-result>
+      <vgr-input (click)="openDropdown()"> </vgr-input>
+      <vgr-search-result [items]="items" [visible]="dropdownVisible" (itemClick)="closeDropdown()"></vgr-search-result>
     </div>
     <br>
     <p> Förändras med tema:

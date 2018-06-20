@@ -75,6 +75,11 @@ export class SearchResultsComponent implements OnInit {
     this.dropdownVisible = false;
   }
 
+  openDropdown() {
+    console.log('visa dig');
+    this.dropdownVisible = true;
+  }
+
   ngOnInit() {
 
   }
