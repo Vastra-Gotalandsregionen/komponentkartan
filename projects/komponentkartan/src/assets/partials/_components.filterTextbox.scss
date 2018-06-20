@@ -1,5 +1,4 @@
 .filter-textbox {
-  @extend .background-color--primary;
   height: $component-height;
   font-size: 16px;
   width: $input-width--small;
@@ -11,27 +10,39 @@
     height: 100%;
     border: $border--single solid $control-border-color--default;
     border-right: none;
+    border-radius:0px;
   }
   &:after {
-    @extend .bg-image-icon-search;
+    @extend .bg-image-icon-search--neutral;
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
     content: "";
     width: 34px;
-    height: 28px;
+    height: $component-height;
     font-size: 16px;
     font-family: FontAwesome;
-    color: white;
-    margin-top: 1px;
     vertical-align: middle;
-    text-align: center;
     float: right;
+    border: $border--single solid $control-border-color--default;
+    border-left: none;
+    .theme--blue & {
+      @extend .bg-image-icon-search--blue;
+    }
+    .theme--red & {
+      @extend .bg-image-icon-search--red;
+    }
+    .theme--green & {
+      @extend .bg-image-icon-search--green;
+    }
+    .theme--pinkie & {
+      @extend .bg-image-icon-search--red;
+    }
   }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
   .filter-textbox {
     width: $input-width--medium;
-  }
+    }
 }
