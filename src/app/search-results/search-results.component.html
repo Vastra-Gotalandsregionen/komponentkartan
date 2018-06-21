@@ -11,7 +11,6 @@
 
     <br>
     <div class="search-result-wrapper">
-      <!--input type="text" -->
       <vgr-input (click)="openDropdown()"> </vgr-input><p>Event emittat: {{output | json}}</p>
       <vgr-search-result [items]="items" [(visible)]="dropdownVisible" (itemClick)="closeDropdown($event)"></vgr-search-result>
     </div>

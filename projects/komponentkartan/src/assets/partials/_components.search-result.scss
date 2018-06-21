@@ -60,7 +60,7 @@ $filter-area-height: 60px;
   .search-results--open & {
     display: inline-block;
   }
-  .search-results__menu__items {
+  .search-results__items {
     position: relative;
     max-height: 285px;//calc(#{$search-results-height--small} - #{$margin--fat});
     li {
@@ -109,6 +109,10 @@ $filter-area-height: 60px;
   padding-right: 21px;
 }
 
+.search-results__noresults {
+  margin-bottom: 15px;
+}
+
 .search-results__description {
   &:after {
     content: "";
@@ -140,7 +144,7 @@ $filter-area-height: 60px;
   }
   .search-results__menu {
     //max-height: $search-results-height--medium;
-    .search-results__menu__items {
+    .search-results__items {
       max-height: calc(#{$search-results-height--medium} - #{$margin--fat});
     }
   }

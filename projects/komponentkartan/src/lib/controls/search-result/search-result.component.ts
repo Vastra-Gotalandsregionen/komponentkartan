@@ -19,7 +19,7 @@ export enum KEY_CODE {
 export class SearchResultComponent implements OnChanges, OnInit {
 
   @Input() description: string;
-  @Input() noResultsText: string;
+  @Input() noResultsText = 'Inget resultat';
   @Input() items: any;
   @Input() maxItems = 25;
   displayItems: any;
@@ -41,7 +41,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
 
   constructor(private elementRef: ElementRef) { }
 
-  ngOnChanges(changes) {
+  ngOnChanges() {
     if (this.items) {
       this.filterItems();
       setTimeout(() => {
@@ -60,12 +60,12 @@ export class SearchResultComponent implements OnChanges, OnInit {
       this.visible = false;
       this.visibleChange.emit(this.visible);
     } else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
-      const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__menu__items li');
+      const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__items li');
 
       if (event.keyCode === KEY_CODE.DOWN_ARROW) {
-        if (this.focusItem === nodes.length - 1){
+        if (this.focusItem === nodes.length - 1) {
           this.focusItem = 0;
-        }else{
+        } else {
           this.focusItem++;
         }
       } else if (event.keyCode === KEY_CODE.UP_ARROW) {
@@ -99,10 +99,18 @@ export class SearchResultComponent implements OnChanges, OnInit {
     this.focusItem = node ? this.indexInParent(node) : -1;
   }
 
+  getParentNode() {
+    return this.elementRef.nativeElement.parentNode;
+  }
+
   ngOnInit() {
     // Kanske använda closest?
-    const parent = this.elementRef.nativeElement.parentNode;
-    parent.onkeyup = () => this.handleKeyevents(event);
+    const parent = this.getParentNode();
+    if (parent.classList.value.indexOf('search-result-wrapper') !== -1) {
+      parent.onkeyup = () => this.handleKeyevents(event);
+    } else {
+      throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
+    }
   }
 
   getHeight() {
@@ -111,6 +119,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   filterItems() {
+    console.log(this.items);
     this.displayItems = this.items.slice(0, this.maxItems);
   }
 

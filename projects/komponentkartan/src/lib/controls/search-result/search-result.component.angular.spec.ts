@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DebugElement, ElementRef } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { By } from '@angular/platform-browser';
 
 import { SearchResultItem } from 'vgr-komponentkartan';
 import { SearchResultComponent } from './search-result.component';
@@ -36,51 +37,51 @@ describe('SearchResultComponent', () => {
     fixture.detectChanges();
   });
 
-
-  describe('When component is initialized without values ', () => {
-    beforeEach(() => {
-      component.ngOnInit();
-    });
-
-    it('searchresult is not expanded', () => {
-        expect(component.visible).toBe(false);
-    });
-
-    it('noResultsText is the default value', () => {
-      expect(component.noResultsText).toBe('Inget resultat');
-    });
-
-    it('maxItems has the default value (25)', () => {
-      expect(component.maxItems).toBe(25);
-    });
-
-  });
-
   describe('When component is initialized with values ', () => {
     beforeEach(() => {
       component.maxItems = 15;
       component.visible = true;
       component.noResultsText = 'Det fanns inte träffar hos KIV.';
       component.items = dummyData;
+      component.description = 'Här är en description till sökresultatet';
       component.ngOnInit();
+      component.ngOnChanges();
+      fixture.detectChanges();
     });
 
-    it('expanded is true ', () => {
-        expect(component.visible).toBe(true);
+    it('searchresult has class search-results--open', () => {
+        expect(rootElement.classes['search-results--open']).toBe(true);
     });
 
-    it('noResultsText is not the default', () => {
-      expect(component.noResultsText).toBe('Det fanns inte träffar hos KIV.');
+    it('should not have more elements then maxItem', () => {
+        const list = rootElement.query(By.css('ul.search-results__items'));
+        console.log(list.nativeElement.children.length);
+        expect(list.nativeElement.children.length).toBeLessThanOrEqual(component.maxItems);
     });
 
-    it('maxItems has the value 15', () => {
-      expect(component.maxItems).toBe(15);
+    it('should not show a no items message', () => {
+        const noMatchesMessage = rootElement.query(By.css('div.search-results__noresults'));
+        console.log(noMatchesMessage);
+        expect(noMatchesMessage).toBe(false);
+    });
+  });
+
+  describe('When component is provided with an empty list ', () => {
+    beforeEach(() => {
+      component.maxItems = 15;
+      component.visible = true;
+      component.noResultsText = 'Det fanns inte träffar hos KIV.';
+      component.items = [];
+      // component.description = 'Här är en description till sökresultatet';
+      component.ngOnChanges();
+      fixture.detectChanges();
     });
 
-    it('items is set', () => {
-      expect(component.items).toBe(dummyData);
+    it('should show a no items message if items is empty', () => {
+        const noMatchesMessage = rootElement.query(By.css('div.search-results__noresults'));
+        console.log(noMatchesMessage);
+        expect(noMatchesMessage).toBe(true);
     });
-
   });
 
 });
