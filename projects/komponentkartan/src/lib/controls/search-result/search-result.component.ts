@@ -6,7 +6,10 @@ export enum KEY_CODE {
   LEFT_ARROW = 37,
   DOWN_ARROW = 40,
   UP_ARROW = 38,
-  ESCAPE = 27
+  ESCAPE = 27,
+  SPACE = 13,
+  ENTER = 32,
+  TAB = 9
 }
 
 @Component({
@@ -22,23 +25,23 @@ export class SearchResultComponent implements OnChanges, OnInit {
   displayItems: any;
   focusItem = -1;
   @Input() @HostBinding('class.search-results--open') visible = false;
+  @Output() visibleChange = new EventEmitter();
   @Output() itemClick = new EventEmitter();
   scrollbarConfig: PerfectScrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
   descriptionHeight: number;
 
-  /*@HostListener('document:click', ['$event'])
+  @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {
       const target = event.target || event.srcElement || event.currentTarget;
       if (!this.elementRef.nativeElement.parentNode.contains(target)) {
-          console.log('inne i if');
           this.visible = false;
+          this.visibleChange.emit(this.visible);
       }
-  }*/
+  }
 
   constructor(private elementRef: ElementRef) { }
 
   ngOnChanges(changes) {
-    console.log(changes);
     if (this.items) {
       this.filterItems();
       setTimeout(() => {
@@ -52,24 +55,33 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   handleKeyevents(event) {
-    console.log('handlekeyevents', this.visible, this.displayItems);
     this.setFocusedElement();
-    if (event.keyCode === KEY_CODE.ESCAPE) {
+    if (event.keyCode === KEY_CODE.ESCAPE || event.keyCode === KEY_CODE.TAB) {
       this.visible = false;
+      this.visibleChange.emit(this.visible);
     } else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
       const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__menu__items li');
 
-      if (event.keyCode === KEY_CODE.DOWN_ARROW && this.focusItem < nodes.length - 1) {
-        this.focusItem++;
-      } else if (event.keyCode === KEY_CODE.UP_ARROW && this.focusItem > 0) {
-        this.focusItem--;
+      if (event.keyCode === KEY_CODE.DOWN_ARROW) {
+        if (this.focusItem === nodes.length - 1){
+          this.focusItem = 0;
+        }else{
+          this.focusItem++;
+        }
+      } else if (event.keyCode === KEY_CODE.UP_ARROW) {
+        if (this.focusItem === 0) {
+          this.focusItem = nodes.length - 1;
+        } else {
+          this.focusItem--;
+        }
       }
-
       const activeNode = nodes[this.focusItem];
-      console.log(this.focusItem);
       activeNode.focus();
+    } else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
+      this.visible = false;
+      this.visibleChange.emit(this.visible);
+      this.onItemClick(this.displayItems[this.focusItem]);
     }
-    console.log(this.focusItem);
   }
 
   indexInParent(node) {

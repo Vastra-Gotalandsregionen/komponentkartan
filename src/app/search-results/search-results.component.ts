@@ -11,6 +11,7 @@ export class SearchResultsComponent implements OnInit {
 
   items: SearchResultItem[] = this.getDemoItems(55);
   items_e2: SearchResultItem[] = this.getDemoItems(13, true);
+  output: SearchResultItem;
   filteredItems: any;
   filteredItems_e2: any;
   dropdownVisible = false;
@@ -33,11 +34,14 @@ export class SearchResultsComponent implements OnInit {
     for (let i = 1; i <= numberOfItems; i++) {
       const name = Math.random() > 0.7 ? `${i} - Min mottagning har ett jättelångt namn` : `${i} - Min mottagning`;
       const displayName = new Array(name);
+      const item: any = {};
       if (addSecondRow) {
         displayName.push('Placering');
+        item.secondRowItalic = true;
       }
-
-      items.push({ value: name, displayName: displayName, secondRowItalic: true } as SearchResultItem);
+      item.value = name;
+      item.displayName = displayName;
+      items.push( item as SearchResultItem);
     }
     return items;
   }
@@ -71,12 +75,12 @@ export class SearchResultsComponent implements OnInit {
     this.dropdownVisible_e2 = false;
   }
 
-  closeDropdown() {
+  closeDropdown(value) {
     this.dropdownVisible = false;
+    this.output = value;
   }
 
   openDropdown() {
-    console.log('visa dig');
     this.dropdownVisible = true;
   }
 
