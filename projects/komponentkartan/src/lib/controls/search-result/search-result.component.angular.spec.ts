@@ -55,7 +55,6 @@ describe('SearchResultComponent', () => {
 
     it('should not have more elements then maxItem', () => {
         const list = rootElement.query(By.css('ul.search-results__items'));
-        console.log();
         expect(list.nativeElement.children.length).toBeLessThanOrEqual(component.maxItems);
     });
 
@@ -64,23 +63,32 @@ describe('SearchResultComponent', () => {
         console.log(noMatchesMessage);
         expect(noMatchesMessage).toBeFalsy(false);
     });
+
+    it('should show the description when it\'s provided', () => {
+      const description = rootElement.query(By.css('.search-results__description-field'));
+      console.log(description.nativeElement.innerHTML);
+      expect(description.nativeElement.innerHTML.trim()).toBe(component.description);
+    });
   });
 
   describe('When component is provided with an empty list ', () => {
     beforeEach(() => {
       component.visible = true;
-      //component.items = [];
       // component.description = 'Här är en description till sökresultatet';
       component.ngOnChanges();
       fixture.detectChanges();
     });
 
-/*     it('should show a no items message if items is empty', () => {
-        const noMatchesMessage = rootElement.query(By.css('div.search-results__noresults'));
-        console.log('hej');
-        expect(noMatchesMessage).toBe(true);
-    }); */
-  });
+    it('should show a message when no items in result', () => {
+      const message = rootElement.query(By.css('.search-results__noresults'));
+      expect(message.nativeElement.innerHTML.trim()).toBe(component.noResultsText);
+    });
+
+    it('should not show the description when it\'s not provided', () => {
+      const description = rootElement.query(By.css('.search-results__description-field'));
+      console.log(description);
+      expect(description).toBeFalsy();
+    });
 
 });
 
