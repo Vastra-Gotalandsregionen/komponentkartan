@@ -1,5 +1,5 @@
-<div class="search-results__menu">
-  <div class="search-results__noresults" *ngIf="items?.length === 0">
+<div class="search-results">
+  <div class="search-results__noresults" *ngIf="!items || items?.length === 0">
     {{noResultsText}}
   </div>
   <div class="search-results__description" *ngIf="description || items?.length > maxItems">

@@ -12,7 +12,7 @@
     <br>
     <div class="search-result-wrapper">
       <vgr-input (click)="openDropdown()"> </vgr-input><p>Event emittat: {{output | json}}</p>
-      <vgr-search-result [items]="items" [(visible)]="dropdownVisible" (itemClick)="closeDropdown($event)"></vgr-search-result>
+      <vgr-search-result  [(visible)]="dropdownVisible" (itemClick)="closeDropdown($event)"></vgr-search-result>
     </div>
     <br>
     <p> Förändras med tema:

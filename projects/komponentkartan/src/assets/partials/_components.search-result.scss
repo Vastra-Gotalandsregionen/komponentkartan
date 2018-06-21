@@ -18,12 +18,12 @@ $filter-area-height: 60px;
   }
 }
 /*******************************************************************************************************
- * .search-results__menu
+ * .search-results
  *  Hela den yta som "droppar" ner från kontrollen. Här läggs listan, filtrering mm
  *
  *******************************************************************************************************/
 
-.search-results__menu {
+.search-results {
   position: absolute;
   top: 42px;
   left:0;
@@ -142,7 +142,7 @@ $filter-area-height: 60px;
       max-width: $search-results-width--medium + $margin--regular + $margin--regular;
     }
   }
-  .search-results__menu {
+  .search-results {
     //max-height: $search-results-height--medium;
     .search-results__items {
       max-height: calc(#{$search-results-height--medium} - #{$margin--fat});
