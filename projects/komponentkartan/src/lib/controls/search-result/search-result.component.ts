@@ -32,14 +32,24 @@ export class SearchResultComponent implements OnChanges, OnInit {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {
-      const target = event.target || event.srcElement || event.currentTarget;
-      if (!this.elementRef.nativeElement.parentNode.contains(target)) {
-          this.visible = false;
-          this.visibleChange.emit(this.visible);
-      }
+    const target = event.target || event.srcElement || event.currentTarget;
+    if (!this.elementRef.nativeElement.parentNode.contains(target)) {
+      this.visible = false;
+      this.visibleChange.emit(this.visible);
+    }
   }
 
   constructor(private elementRef: ElementRef) { }
+
+  ngOnInit() {
+    // Kanske använda closest?
+    const parent = this.getParentNode();
+    if (parent.classList.contains('search-result-wrapper')) {
+      parent.onkeyup = () => this.handleKeyevents(event);
+    } else {
+      throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
+    }
+  }
 
   ngOnChanges() {
     if (this.items) {
@@ -88,8 +98,8 @@ export class SearchResultComponent implements OnChanges, OnInit {
     const children = node.parentNode.childNodes;
     let num = 0;
     for (let i = 0; i < children.length; i++) {
-        if (children[i] === node) { return num; }
-        if (children[i].nodeType === 1) { num++; }
+      if (children[i] === node) { return num; }
+      if (children[i].nodeType === 1) { num++; }
     }
     return -1;
   }
@@ -103,27 +113,16 @@ export class SearchResultComponent implements OnChanges, OnInit {
     return this.elementRef.nativeElement.parentNode;
   }
 
-  ngOnInit() {
-    // Kanske använda closest?
-    const parent = this.getParentNode();
-    if (parent.classList.value.indexOf('search-result-wrapper') !== -1) {
-      parent.onkeyup = () => this.handleKeyevents(event);
-    } else {
-      throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
-    }
-  }
-
   getHeight() {
     // 264px Is the size of the viewport that's available.
     return 264 + this.descriptionHeight;
   }
 
   filterItems() {
-    console.log(this.items);
     this.displayItems = this.items.slice(0, this.maxItems);
   }
 
-  onItemClick (item) {
+  onItemClick(item) {
     this.itemClick.emit(item);
   }
 
