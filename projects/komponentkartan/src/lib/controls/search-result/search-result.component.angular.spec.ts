@@ -4,7 +4,7 @@ import { DebugElement, ElementRef } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
-import { SearchResultItem } from 'vgr-komponentkartan';
+import { SearchResultItem } from '../../models/searchResultItem.model';
 import { SearchResultComponent } from './search-result.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
