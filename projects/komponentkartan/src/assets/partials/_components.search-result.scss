@@ -4,10 +4,9 @@ $search-results-height--medium-with-filter: 360px;
 $search-results-width--medium: 160px;
 $search-results-width--small: 100px;
 $filter-area-height: 60px;
-
 .search-result-wrapper {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .search-results {
@@ -17,6 +16,7 @@ $filter-area-height: 60px;
     }
   }
 }
+
 /*******************************************************************************************************
  * .search-results
  *  Hela den yta som "droppar" ner från kontrollen. Här läggs listan, filtrering mm
@@ -26,7 +26,7 @@ $filter-area-height: 60px;
 .search-results {
   position: absolute;
   top: 42px;
-  left:0;
+  left: 0;
   text-align: left;
   z-index: $layer-four;
   box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
@@ -34,8 +34,7 @@ $filter-area-height: 60px;
   border: none;
   padding-top: $margin--regular;
   padding-bottom: 0px;
-  width: 330px;
-  //max-height: $search-results-height--small;
+  width: 330px; //max-height: $search-results-height--small;
   display: none;
   cursor: default;
   &:before {
@@ -62,7 +61,7 @@ $filter-area-height: 60px;
   }
   .search-results__items {
     position: relative;
-    max-height: 285px;//calc(#{$search-results-height--small} - #{$margin--fat});
+    max-height: 285px; //calc(#{$search-results-height--small} - #{$margin--fat});
     li {
       width: calc(100% - 3px);
       background: white;
@@ -94,9 +93,6 @@ $filter-area-height: 60px;
         outline: $focus-outline-width solid $focus-color;
       }
     }
-    li:last-child {
-      margin-bottom: 0px;
-    }
     li:first-child {
       margin-top: 4px;
     }
@@ -120,8 +116,7 @@ $filter-area-height: 60px;
     display: block;
     height: 2px;
     opacity: 0.5;
-    border-top: solid 0.5px #99a3ad;
-    //border-top: 1px solid $border-color;
+    border-top: solid 0.5px #99a3ad; //border-top: 1px solid $border-color;
     margin-left: -15px;
     margin-right: -21px;
     margin-top: 6px;
@@ -130,7 +125,6 @@ $filter-area-height: 60px;
     position: relative;
   }
 }
-
 
 .scroll-element.scroll-x {
   display: none !important;
