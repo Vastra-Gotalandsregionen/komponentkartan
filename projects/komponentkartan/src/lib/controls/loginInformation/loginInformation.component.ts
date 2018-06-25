@@ -8,6 +8,7 @@ import { Component, Input, HostBinding } from '@angular/core';
 export class LoginInformationComponent {
     @HostBinding('class.login-info')
     @Input() userName: string;
+    @Input() initials: string;
     @Input() textColor: string;
     @Input() circleColor: string;
     constructor() {
