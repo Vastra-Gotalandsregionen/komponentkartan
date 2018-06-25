@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement, ElementRef } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 
-import { SearchResultItem } from 'vgr-komponentkartan';
+import { SearchResultItem } from '../../models/searchResultItem.model';
 import { SearchResultComponent } from './search-result.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
@@ -11,19 +11,19 @@ describe('SearchResultComponent', () => {
   let component: SearchResultComponent;
   let fixture: ComponentFixture<SearchResultComponent>;
   let rootElement: DebugElement;
-  const dummyData : SearchResultItem[] = getDemoItems(50);
+  const dummyData: SearchResultItem[] = getDemoItems(50);
 
   beforeEach(async(() => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [ SearchResultComponent ],
+      declarations: [SearchResultComponent],
       imports: [PerfectScrollbarModule],
       providers: [
         { provide: ElementRef }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe('SearchResultComponent', () => {
     element.className = 'search-result-wrapper';
     fixture = TestBed.createComponent(SearchResultComponent);
     component = fixture.componentInstance;
-    spyOn(component, 'getParentNode' ).and.returnValue(element);
+    spyOn(component, 'getParentNode').and.returnValue(element);
     rootElement = fixture.debugElement;
     fixture.detectChanges();
   });
@@ -43,7 +43,7 @@ describe('SearchResultComponent', () => {
     });
 
     it('searchresult is not expanded', () => {
-        expect(component.visible).toBe(false);
+      expect(component.visible).toBe(false);
     });
 
     it('noResultsText is the default value', () => {
@@ -66,7 +66,7 @@ describe('SearchResultComponent', () => {
     });
 
     it('expanded is true ', () => {
-        expect(component.visible).toBe(true);
+      expect(component.visible).toBe(true);
     });
 
     it('noResultsText is not the default', () => {
@@ -98,7 +98,7 @@ function getDemoItems(numberOfItems: number, addSecondRow: boolean = false) {
     }
     item.value = name;
     item.displayName = displayName;
-    items.push( item as SearchResultItem);
+    items.push(item as SearchResultItem);
   }
   return items;
 }
