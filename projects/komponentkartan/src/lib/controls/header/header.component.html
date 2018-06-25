@@ -5,13 +5,13 @@
   </div>
   <div *ngIf="userName && headerMenu" class="header__info-box header-menu__trigger" tabindex="1" (mousedown)="toggleHeaderMenu($event)"
     (keydown)="keyDown($event)">
-    <vgr-login-information [userName]="userName"></vgr-login-information>
+    <vgr-login-information [userName]="initials"></vgr-login-information>
     <div class="header__info-header-menu-arrow"></div>
     <vgr-header-menu [menu]="headerMenu"></vgr-header-menu>
   </div>
 
   <div *ngIf="userName && !headerMenu" class="header__info-box" tabindex="1">
-    <vgr-login-information [initials]="setInitials()" [userName]="userName" [textColor]="textColor" [circleColor]="circleColor"></vgr-login-information>
+    <vgr-login-information [userName]="setInitials()" [textColor]="textColor" [circleColor]="circleColor"></vgr-login-information>
   </div>
 
 </header>
