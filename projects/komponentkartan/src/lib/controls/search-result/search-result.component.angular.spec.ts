@@ -44,14 +44,14 @@ describe('SearchResultComponent', () => {
     });
 
     TestBed.compileComponents()
-    .then(() => {
-      testSearchResultsComponentFixture = TestBed.createComponent(TestSearchResultComponent);
-      component = testSearchResultsComponentFixture.debugElement.query(By.directive(SearchResultComponent)).componentInstance;
-      rootElement = testSearchResultsComponentFixture.debugElement;
+      .then(() => {
+        testSearchResultsComponentFixture = TestBed.createComponent(TestSearchResultComponent);
+        component = testSearchResultsComponentFixture.debugElement.query(By.directive(SearchResultComponent)).componentInstance;
+        rootElement = testSearchResultsComponentFixture.debugElement;
 
-      testSearchResultsComponentFixture.detectChanges();
-      done();
-    });
+        testSearchResultsComponentFixture.detectChanges();
+        done();
+      });
   });
 
 
@@ -69,19 +69,19 @@ describe('SearchResultComponent', () => {
     });
 
     it('searchresult has class search-results--open', () => {
-        const vgrSearchResult = rootElement.query(By.css('vgr-search-result'));
-        expect(vgrSearchResult.classes['search-results--open']).toBe(true);
+      const vgrSearchResult = rootElement.query(By.css('vgr-search-result'));
+      expect(vgrSearchResult.classes['search-results--open']).toBe(true);
     });
 
     it('should not have more elements then maxItem', () => {
-        const list = rootElement.query(By.css('ul.search-results__items'));
-        expect(list.nativeElement.children.length).toBeLessThanOrEqual(component.maxItems);
+      const list = rootElement.query(By.css('ul.search-results__items'));
+      expect(list.nativeElement.children.length).toBeLessThanOrEqual(component.maxItems);
     });
 
     it('should not show a no items message', () => {
-        const noMatchesMessage = rootElement.query(By.css('div.search-results__noresults'));
-        console.log(noMatchesMessage);
-        expect(noMatchesMessage).toBeFalsy(false);
+      const noMatchesMessage = rootElement.query(By.css('div.search-results__noresults'));
+      console.log(noMatchesMessage);
+      expect(noMatchesMessage).toBeFalsy(false);
     });
 
     it('should show the description when it\'s provided', () => {
@@ -125,7 +125,7 @@ function getDemoItems(numberOfItems: number, addSecondRow: boolean = false) {
     }
     item.value = name;
     item.displayName = displayName;
-    items.push( item as SearchResultItem);
+    items.push(item as SearchResultItem);
   }
   return items;
 }

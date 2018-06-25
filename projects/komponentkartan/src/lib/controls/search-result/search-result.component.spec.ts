@@ -13,7 +13,7 @@ describe('SearchResultComponent1', () => {
   describe('When component is initialized without values ', () => {
 
     it('searchresult is not expanded', () => {
-        expect(component.visible).toBe(false);
+      expect(component.visible).toBe(false);
     });
 
     it('noResultsText is the default value', () => {
@@ -35,7 +35,7 @@ describe('SearchResultComponent1', () => {
     });
 
     it('expanded is true ', () => {
-        expect(component.visible).toBe(true);
+      expect(component.visible).toBe(true);
     });
 
     it('noResultsText is not the default', () => {
@@ -67,7 +67,7 @@ function getDemoItems(numberOfItems: number, addSecondRow: boolean = false) {
     }
     item.value = name;
     item.displayName = displayName;
-    items.push( item as SearchResultItem);
+    items.push(item as SearchResultItem);
   }
   return items;
 }

@@ -65,6 +65,10 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   handleKeyevents(event) {
+    if (!this.visible) {
+      return;
+    }
+
     this.setFocusedElement();
     if (event.keyCode === KEY_CODE.ESCAPE || event.keyCode === KEY_CODE.TAB) {
       this.visible = false;
