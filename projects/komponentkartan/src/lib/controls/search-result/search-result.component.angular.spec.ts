@@ -1,41 +1,59 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DebugElement, ElementRef } from '@angular/core';
+import { DebugElement, ElementRef, Component } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
-import { SearchResultItem } from 'vgr-komponentkartan';
-import { SearchResultComponent } from './search-result.component';
+import { SearchResultItem } from '../../models/searchResultItem.model';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+
+import {
+  SearchResultComponent
+} from '../../index';
+
+
+@Component({
+  selector: 'vgr-test',
+  template: `
+          <div class="search-result-wrapper">
+            <input (click)="dropdownVisible=true" type="text" />
+            <vgr-search-result  [(visible)]="dropdownVisible" (itemClick)="dropdownVisible=false"></vgr-search-result>
+          </div>
+          `
+})
+class TestSearchResultComponent { }
 
 describe('SearchResultComponent', () => {
   let component: SearchResultComponent;
-  let fixture: ComponentFixture<SearchResultComponent>;
+  let testSearchResultsComponentFixture: ComponentFixture<TestSearchResultComponent>;
   let rootElement: DebugElement;
-  const dummyData : SearchResultItem[] = getDemoItems(50);
+  const dummyData: SearchResultItem[] = getDemoItems(50);
 
-  beforeEach(async(() => {
+  beforeEach((done) => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [ SearchResultComponent ],
-      imports: [PerfectScrollbarModule],
+      declarations: [
+        TestSearchResultComponent,
+        SearchResultComponent
+      ],
+      imports: [PerfectScrollbarModule, BrowserDynamicTestingModule],
       providers: [
         { provide: ElementRef }
       ]
-    })
-    .compileComponents();
-  }));
+    });
 
-  beforeEach(() => {
-    const element = document.createElement('DIV');
-    element.className = 'search-result-wrapper';
-    fixture = TestBed.createComponent(SearchResultComponent);
-    component = fixture.componentInstance;
-    spyOn(component, 'getParentNode' ).and.returnValue(element);
-    rootElement = fixture.debugElement;
-    fixture.detectChanges();
+    TestBed.compileComponents()
+    .then(() => {
+      testSearchResultsComponentFixture = TestBed.createComponent(TestSearchResultComponent);
+      component = testSearchResultsComponentFixture.debugElement.query(By.directive(SearchResultComponent)).componentInstance;
+      rootElement = testSearchResultsComponentFixture.debugElement;
+
+      testSearchResultsComponentFixture.detectChanges();
+      done();
+    });
   });
+
 
   describe('When component is initialized with values ', () => {
     beforeEach(() => {
@@ -45,12 +63,14 @@ describe('SearchResultComponent', () => {
       component.items = dummyData;
       component.description = 'Här är en description till sökresultatet';
       component.ngOnInit();
-      component.ngOnChanges();
-      fixture.detectChanges();
+      // component.ngOnChanges();
+      // searchResultsComponentFixture.detectChanges();
+      testSearchResultsComponentFixture.detectChanges();
     });
 
     it('searchresult has class search-results--open', () => {
-        expect(rootElement.classes['search-results--open']).toBe(true);
+        const vgrSearchResult = rootElement.query(By.css('vgr-search-result'));
+        expect(vgrSearchResult.classes['search-results--open']).toBe(true);
     });
 
     it('should not have more elements then maxItem', () => {
@@ -66,7 +86,6 @@ describe('SearchResultComponent', () => {
 
     it('should show the description when it\'s provided', () => {
       const description = rootElement.query(By.css('.search-results__description-field'));
-      console.log(description.nativeElement.innerHTML);
       expect(description.nativeElement.innerHTML.trim()).toBe(component.description);
     });
   });
@@ -76,7 +95,7 @@ describe('SearchResultComponent', () => {
       component.visible = true;
       // component.description = 'Här är en description till sökresultatet';
       component.ngOnChanges();
-      fixture.detectChanges();
+      testSearchResultsComponentFixture.detectChanges();
     });
 
     it('should show a message when no items in result', () => {
@@ -86,11 +105,12 @@ describe('SearchResultComponent', () => {
 
     it('should not show the description when it\'s not provided', () => {
       const description = rootElement.query(By.css('.search-results__description-field'));
-      console.log(description);
       expect(description).toBeFalsy();
     });
+  });
 
 });
+
 
 
 function getDemoItems(numberOfItems: number, addSecondRow: boolean = false) {
