@@ -40,7 +40,7 @@ export class KomponentkartanApplicationComponent implements OnInit {
 
         Observable.of('Göte Borg').delay(1000).subscribe(x => { this.userName = x; });
 
-        this.systemText = `ENV: <localhost> VERSION: (komponentkartan: ${this.komponentkartanVersion}/angular: ${this.angularVersion}/angular-cli: ${this.angularCliVersion})`;
+        this.systemText = `<localhost> vgr-komponentkartan version: ${this.komponentkartanVersion}, Angular: ${this.angularVersion} och Angular-Cli: ${this.angularCliVersion}`;
 
     }
 
