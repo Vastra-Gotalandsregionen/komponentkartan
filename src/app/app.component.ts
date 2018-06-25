@@ -1,6 +1,8 @@
-import { Component, AfterViewInit, ViewChild, HostBinding, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { ModalService, IHeaderMenu, IHeaderMenuItem } from 'vgr-komponentkartan';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/delay';
+import { Observable } from 'rxjs/Observable';
 declare var require: any;
 
 @Component({
@@ -9,21 +11,36 @@ declare var require: any;
 })
 
 export class KomponentkartanApplicationComponent implements OnInit {
-    currentVersion: string;
+    komponentkartanVersion: string;
+    angularVersion: string;
+    angularCliVersion: string;
 
-    constructor(private router: Router) { }
+    userName: string;
+    systemText: string;
+
+    constructor(private router: Router) {
+        const { version: appVersion } = require('../../projects/komponentkartan/package.json');
+        this.komponentkartanVersion = appVersion;
+
+        const { version: angularVersion } = require('../../node_modules/@angular/core/package.json');
+        this.angularVersion = angularVersion;
+
+        const { devDependencies: cliVersion } = require('../../package.json');
+        this.angularCliVersion = cliVersion['@angular/cli'];
+        this.angularCliVersion = this.angularCliVersion ? this.angularCliVersion.replace('^', '') : this.angularCliVersion;
+    }
 
     ngOnInit() {
-        const { version: appVersion } = require('../../package.json');
-        this.currentVersion = appVersion;
-        this.currentVersion = this.currentVersion ? this.currentVersion.replace('^', '') : this.currentVersion;
-
         this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
             }
             window.scrollTo(0, 0);
         });
+
+        Observable.of('Göte Borg').delay(1000).subscribe(x => { this.userName = x; });
+
+        this.systemText = `<localhost> vgr-komponentkartan version: ${this.komponentkartanVersion}, Angular: ${this.angularVersion} och Angular-Cli: ${this.angularCliVersion}`;
 
     }
 
