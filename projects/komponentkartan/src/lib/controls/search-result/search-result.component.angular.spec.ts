@@ -12,19 +12,19 @@ describe('SearchResultComponent', () => {
   let component: SearchResultComponent;
   let fixture: ComponentFixture<SearchResultComponent>;
   let rootElement: DebugElement;
-  const dummyData : SearchResultItem[] = getDemoItems(50);
+  const dummyData: SearchResultItem[] = getDemoItems(50);
 
   beforeEach(async(() => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [ SearchResultComponent ],
+      declarations: [SearchResultComponent],
       imports: [PerfectScrollbarModule],
       providers: [
         { provide: ElementRef }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -32,7 +32,7 @@ describe('SearchResultComponent', () => {
     element.className = 'search-result-wrapper';
     fixture = TestBed.createComponent(SearchResultComponent);
     component = fixture.componentInstance;
-    spyOn(component, 'getParentNode' ).and.returnValue(element);
+    spyOn(component, 'getParentNode').and.returnValue(element);
     rootElement = fixture.debugElement;
     fixture.detectChanges();
   });
@@ -50,18 +50,18 @@ describe('SearchResultComponent', () => {
     });
 
     it('searchresult has class search-results--open', () => {
-        expect(rootElement.classes['search-results--open']).toBe(true);
+      expect(rootElement.classes['search-results--open']).toBe(true);
     });
 
     it('should not have more elements then maxItem', () => {
-        const list = rootElement.query(By.css('ul.search-results__items'));
-        expect(list.nativeElement.children.length).toBeLessThanOrEqual(component.maxItems);
+      const list = rootElement.query(By.css('ul.search-results__items'));
+      expect(list.nativeElement.children.length).toBeLessThanOrEqual(component.maxItems);
     });
 
     it('should not show a no items message', () => {
-        const noMatchesMessage = rootElement.query(By.css('div.search-results__noresults'));
-        console.log(noMatchesMessage);
-        expect(noMatchesMessage).toBeFalsy(false);
+      const noMatchesMessage = rootElement.query(By.css('div.search-results__noresults'));
+      console.log(noMatchesMessage);
+      expect(noMatchesMessage).toBeFalsy(false);
     });
 
     it('should show the description when it\'s provided', () => {
@@ -90,8 +90,8 @@ describe('SearchResultComponent', () => {
       expect(description).toBeFalsy();
     });
 
+  });
 });
-
 
 function getDemoItems(numberOfItems: number, addSecondRow: boolean = false) {
   const items: SearchResultItem[] = [];
@@ -105,7 +105,7 @@ function getDemoItems(numberOfItems: number, addSecondRow: boolean = false) {
     }
     item.value = name;
     item.displayName = displayName;
-    items.push( item as SearchResultItem);
+    items.push(item as SearchResultItem);
   }
   return items;
 }
