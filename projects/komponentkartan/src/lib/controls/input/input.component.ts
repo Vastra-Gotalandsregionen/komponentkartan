@@ -75,6 +75,8 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.formControlName) {
       this.control = this.controlContainer.control.get(this.formControlName);
+    } else {
+      this.setDisplayValue();
     }
   }
 

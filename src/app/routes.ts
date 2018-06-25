@@ -41,11 +41,11 @@ import { ExamplesListwithcardsComponent } from './examples-listwithcards/example
 import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
 import { TableComponent } from './table/table.component';
 import { FilterTagComponent } from './filter-tag/filter-tag.component';
-
 import { IconsComponent } from './icons/icons.component';
 import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
 import { RingWithTextComponent } from './ring-with-text/ring-with-text.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 export const appRoutes: Routes = [
 
@@ -92,5 +92,6 @@ export const appRoutes: Routes = [
     { path: 'actionPanels', component: ActionPanelsComponent },
     { path: 'filter-tag', component: FilterTagComponent },
     { path: 'ring-with-text', component: RingWithTextComponent },
+    { path: 'search-results', component: SearchResultsComponent },
     { path: '**', redirectTo: '/' }
 ];
