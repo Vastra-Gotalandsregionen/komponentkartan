@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Bugfix for card-section animation in IE.
 - FilterText updated with new icon (themebased)
 - Added a new component Searchresult
+- Changed some icons to use SVG inseat of PNG
 
 ## 2.6.0 
 - Fixed smoother animations in list component
