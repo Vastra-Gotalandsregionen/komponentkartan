@@ -16,12 +16,23 @@ import {
   selector: 'vgr-test',
   template: `
           <div class="search-result-wrapper">
-            <input (click)="dropdownVisible=true" type="text" />
-            <vgr-search-result  [(visible)]="dropdownVisible" (itemClick)="dropdownVisible=false"></vgr-search-result>
+            <input (click)="show()" type="text" />
+            <vgr-search-result  [(visible)]="dropdownVisible" (itemClick)="hide()"></vgr-search-result>
           </div>
           `
 })
-class TestSearchResultComponent { }
+class TestSearchResultComponent {
+  dropdownVisible = false;
+
+  show() {
+    this.dropdownVisible = true;
+  }
+
+  hide() {
+    this.dropdownVisible = false;
+  }
+
+}
 
 describe('SearchResultComponent', () => {
   let component: SearchResultComponent;
@@ -44,14 +55,14 @@ describe('SearchResultComponent', () => {
     });
 
     TestBed.compileComponents()
-      .then(() => {
-        testSearchResultsComponentFixture = TestBed.createComponent(TestSearchResultComponent);
-        component = testSearchResultsComponentFixture.debugElement.query(By.directive(SearchResultComponent)).componentInstance;
-        rootElement = testSearchResultsComponentFixture.debugElement;
+    .then(() => {
+      testSearchResultsComponentFixture = TestBed.createComponent(TestSearchResultComponent);
+      component = testSearchResultsComponentFixture.debugElement.query(By.directive(SearchResultComponent)).componentInstance;
+      rootElement = testSearchResultsComponentFixture.debugElement;
 
-        testSearchResultsComponentFixture.detectChanges();
-        done();
-      });
+      testSearchResultsComponentFixture.detectChanges();
+      done();
+    });
   });
 
 
@@ -69,25 +80,86 @@ describe('SearchResultComponent', () => {
     });
 
     it('searchresult has class search-results--open', () => {
-      const vgrSearchResult = rootElement.query(By.css('vgr-search-result'));
-      expect(vgrSearchResult.classes['search-results--open']).toBe(true);
+        const vgrSearchResult = rootElement.query(By.css('vgr-search-result'));
+        expect(vgrSearchResult.classes['search-results--open']).toBe(true);
     });
 
     it('should not have more elements then maxItem', () => {
-      const list = rootElement.query(By.css('ul.search-results__items'));
-      expect(list.nativeElement.children.length).toBeLessThanOrEqual(component.maxItems);
+        const list = rootElement.query(By.css('ul.search-results__items'));
+        expect(list.nativeElement.children.length).toBeLessThanOrEqual(component.maxItems);
     });
 
     it('should not show a no items message', () => {
-      const noMatchesMessage = rootElement.query(By.css('div.search-results__noresults'));
-      console.log(noMatchesMessage);
-      expect(noMatchesMessage).toBeFalsy(false);
+        const noMatchesMessage = rootElement.query(By.css('div.search-results__noresults'));
+        expect(noMatchesMessage).toBeFalsy(false);
     });
 
     it('should show the description when it\'s provided', () => {
       const description = rootElement.query(By.css('.search-results__description-field'));
       expect(description.nativeElement.innerHTML.trim()).toBe(component.description);
     });
+  });
+
+  describe(' testing key event', () => {
+    beforeEach(() => {
+      component.visible = true;
+      component.items = dummyData;
+      component.ngOnInit();
+      component.ngOnChanges();
+      testSearchResultsComponentFixture.detectChanges();
+    });
+
+    fit('should close the search result when you press escape', () => {
+      const keyEvent = new KeyboardEvent('keydown', {key: 'Escape'});
+      Object.defineProperty(keyEvent, 'keyCode', {'value' : 27});
+      component.handleKeyevents(keyEvent);
+      testSearchResultsComponentFixture.detectChanges();
+      expect(component.visible).toBe(false);
+    });
+
+    fit('should close the search result when you press escape', () => {
+      const keyEvent = new KeyboardEvent('keydown', {key: 'Tab'});
+      Object.defineProperty(keyEvent, 'keyCode', {'value' : 9});
+      component.handleKeyevents(keyEvent);
+      testSearchResultsComponentFixture.detectChanges();
+      expect(component.visible).toBe(false);
+    });
+
+    fit('should focus on the first item in the list when you press arrow down', () => {
+      const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowDown'});
+      Object.defineProperty(keyEvent, 'keyCode', {'value' : 40});
+      component.handleKeyevents(keyEvent);
+      testSearchResultsComponentFixture.detectChanges();
+      expect(component.focusItem).toBe(0);
+    });
+
+    fit('should focus on the last item in the list when you press arrow up', () => {
+      const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowUp'});
+      Object.defineProperty(keyEvent, 'keyCode', {'value' : 38});
+      component.handleKeyevents(keyEvent);
+      testSearchResultsComponentFixture.detectChanges();
+      expect(component.focusItem).toBe(24);
+    });
+
+    describe(' focus is on the the first item', () => {
+      beforeEach(() => {
+        component.visible = true;
+        component.items = dummyData;
+        component.ngOnInit();
+        component.ngOnChanges();
+        testSearchResultsComponentFixture.detectChanges();
+      });
+
+      fit('and you select it with space', () => {
+        const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowUp'});
+        Object.defineProperty(keyEvent, 'keyCode', {'value' : 38});
+        component.handleKeyevents(keyEvent);
+        testSearchResultsComponentFixture.detectChanges();
+        expect(component.focusItem).toBe(24);
+      });
+    });
+
+
   });
 
   describe('When component is provided with an empty list ', () => {
@@ -125,7 +197,7 @@ function getDemoItems(numberOfItems: number, addSecondRow: boolean = false) {
     }
     item.value = name;
     item.displayName = displayName;
-    items.push(item as SearchResultItem);
+    items.push( item as SearchResultItem);
   }
   return items;
 }
