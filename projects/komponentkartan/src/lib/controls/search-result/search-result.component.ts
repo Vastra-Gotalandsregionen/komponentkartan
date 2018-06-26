@@ -65,7 +65,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   handleKeyevents(event) {
-    console.log('keyevent', event, event.keyCode);
     if (!this.visible) {
       return;
     }
@@ -96,7 +95,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
           this.focusItem--;
         }
       }
-      console.log(this.focusItem);
       const activeNode = nodes[this.focusItem];
       activeNode.focus();
     }
@@ -118,7 +116,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   setFocusedElement() {
-    console.log('setfocuselement');
     const node = this.elementRef.nativeElement.querySelector('li:focus');
     this.focusItem = node ? this.indexInParent(node) : -1;
   }
