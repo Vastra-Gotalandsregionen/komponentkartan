@@ -23,7 +23,7 @@
   <div class="docs__examples">
     <div class="column-layout">
       <h3>Header med user och meny (temad grön)</h3>
-      <vgr-header class="header--inline theme--green" [userName]="'Nova Åudit'" [headerMenu]="simpleHeaderMenu"></vgr-header>
+      <vgr-header class="header--inline theme--green" [userName]="'Nova Audit'" [headerMenu]="simpleHeaderMenu"></vgr-header>
       <div>
         <h3>Markup för en menyn i exemplet ovan, tryck på pilen i headern så ser du kontextmenyn</h3>
         <section [innerHTML]="exampleCodeSimpleMenyMarkup" highlight-js-content=".highlight"></section>
@@ -34,6 +34,8 @@
       <vgr-header class="header--inline theme--blue"></vgr-header>
       <h3>Header utan user och meny (Standard)</h3>
       <vgr-header class="header--inline"></vgr-header>
+      <h3>Header med systeminformation</h3>
+      <vgr-header [systemText]="'Development'" class="header--inline"></vgr-header>
     </div>
   </div>
   <div class="docs__api">
@@ -51,8 +53,29 @@
       </tr>
       <tr>
         <td>userName : string</td>
-        <td>Sätter namnet på texten för den som är inloggad</td>
+        <td>Sätter namnet på texten för den som är inloggad. Intialerna för cirkeln är default först bokstaven i första och sista
+          namnet. Exemepel: "Göte Borg" får initialerna GB, och "Göte Borg Stad" får GS</td>
         <td>[userName]="signedInUser"</td>
+      </tr>
+      <tr>
+        <td>initials : string</td>
+        <td>Skriver över initialerna med egna initialer</td>
+        <td>[initials]="GB"</td>
+      </tr>
+      <tr>
+        <td>textColor : string</td>
+        <td>Färgen på texten i ringen. Accepterar html-kompatibla färgväden (HEX eller färgnamn)</td>
+        <td>[textColor]="white"</td>
+      </tr>
+      <tr>
+        <td>circleColor : string</td>
+        <td>Färgen på cirkeln. Accepterar html-kompatibla färgväden (HEX eller färgnamn)</td>
+        <td>[circleColor]="'#f9dede'"</td>
+      </tr>
+      <tr>
+        <td>systemText : string</td>
+        <td>Text för att påvisa vilken miljö man befinner sig i. Ska inte visas i produktion. Upp till immplementatören. </td>
+        <td>[systemtext]="'development'"</td>
       </tr>
     </table>
     <br>

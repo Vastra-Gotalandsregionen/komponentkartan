@@ -1,6 +1,5 @@
-import { Component, AfterViewInit, Input, ElementRef, ViewChild } from '@angular/core';
-
-import { IHeaderMenu, IHeaderMenuGroup, IHeaderMenuItem } from '../../models/headerMenu.model';
+import { Component, Input, ViewChild } from '@angular/core';
+import { IHeaderMenu } from '../../models/headerMenu.model';
 import { HeaderMenuComponent } from '../headerMenu/headerMenu.component';
 
 @Component({
@@ -12,12 +11,33 @@ export class HeaderComponent {
     systemColor: string;
     @Input() headerMenu: IHeaderMenu;
     @Input() userName: string;
+    @Input() initials: string;
+    @Input() systemText: string;
+    @Input() textColor: string;
+    @Input() circleColor: string;
 
     @ViewChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
 
-    constructor(private elementRef: ElementRef) {
+    constructor() {
         this.systemColor = 'neutral';
+    }
 
+    setInitials(): string {
+        if (this.initials) {
+            return this.initials;
+        } else {
+            return this.initials = this.getInitials(this.userName);
+        }
+    }
+
+    getInitials(username: string) {
+        const name = username.split(' ');
+        let initials = name[0].substring(0, 1).toUpperCase();
+
+        if (name.length > 1) {
+            initials += name[name.length - 1].substring(0, 1).toUpperCase();
+        }
+        return initials;
     }
 
     toggleHeaderMenu(event: Event): void {
