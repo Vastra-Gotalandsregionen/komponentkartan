@@ -55,6 +55,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
     if (this.items) {
       this.filterItems();
       setTimeout(() => {
+        console.log('inne');
         if (this.elementRef.nativeElement.querySelector('.search-results__description')) {
           this.descriptionHeight = this.elementRef.nativeElement.querySelector('.search-results__description').offsetHeight;
         } else {
@@ -65,7 +66,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   handleKeyevents(event) {
-    console.log('keyevent', event, event.keyCode);
     if (!this.visible) {
       return;
     }
@@ -75,8 +75,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
     if (event.keyCode === KEY_CODE.ESCAPE || event.keyCode === KEY_CODE.TAB) {
       this.visible = false;
       this.visibleChange.emit(this.visible);
-    }
-    else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
+    } else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
       const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__items li');
 
       if (nodes.length === 0) {
@@ -96,11 +95,9 @@ export class SearchResultComponent implements OnChanges, OnInit {
           this.focusItem--;
         }
       }
-      console.log(this.focusItem);
       const activeNode = nodes[this.focusItem];
       activeNode.focus();
-    }
-    else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
+    } else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
       this.visible = false;
       this.visibleChange.emit(this.visible);
       this.onItemClick(this.displayItems[this.focusItem]);
@@ -114,11 +111,9 @@ export class SearchResultComponent implements OnChanges, OnInit {
       if (children[i] === node) { return num; }
       if (children[i].nodeType === 1) { num++; }
     }
-    return -1;
   }
 
   setFocusedElement() {
-    console.log('setfocuselement');
     const node = this.elementRef.nativeElement.querySelector('li:focus');
     this.focusItem = node ? this.indexInParent(node) : -1;
   }

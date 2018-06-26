@@ -37,6 +37,7 @@ class TestSearchResultComponent {
 describe('SearchResultComponent', () => {
   let component: SearchResultComponent;
   let testSearchResultsComponentFixture: ComponentFixture<TestSearchResultComponent>;
+  let onlyComponentFixture: ComponentFixture<SearchResultComponent>;
   let rootElement: DebugElement;
   const dummyData: SearchResultItem[] = getDemoItems(50);
 
@@ -56,6 +57,7 @@ describe('SearchResultComponent', () => {
 
     TestBed.compileComponents()
     .then(() => {
+      onlyComponentFixture = TestBed.createComponent(SearchResultComponent);
       testSearchResultsComponentFixture = TestBed.createComponent(TestSearchResultComponent);
       component = testSearchResultsComponentFixture.debugElement.query(By.directive(SearchResultComponent)).componentInstance;
       rootElement = testSearchResultsComponentFixture.debugElement;
@@ -74,8 +76,6 @@ describe('SearchResultComponent', () => {
       component.items = dummyData;
       component.description = 'Här är en description till sökresultatet';
       component.ngOnInit();
-      // component.ngOnChanges();
-      // searchResultsComponentFixture.detectChanges();
       testSearchResultsComponentFixture.detectChanges();
     });
 
@@ -98,6 +98,19 @@ describe('SearchResultComponent', () => {
       const description = rootElement.query(By.css('.search-results__description-field'));
       expect(description.nativeElement.innerHTML.trim()).toBe(component.description);
     });
+
+    describe(' and you click outside ', () => {
+      beforeEach(() => {
+        document.body.click();
+      });
+
+      it('should close the list', () => {
+        expect(component.visible).toBe(false);
+      });
+
+    });
+
+
   });
 
   describe(' testing key event', () => {
@@ -109,63 +122,146 @@ describe('SearchResultComponent', () => {
       testSearchResultsComponentFixture.detectChanges();
     });
 
-    fit('should close the search result when you press escape', () => {
-      const keyEvent = new KeyboardEvent('keydown', {key: 'Escape'});
-      Object.defineProperty(keyEvent, 'keyCode', {'value' : 27});
-      component.handleKeyevents(keyEvent);
-      testSearchResultsComponentFixture.detectChanges();
-      expect(component.visible).toBe(false);
-    });
-
-    fit('should close the search result when you press escape', () => {
-      const keyEvent = new KeyboardEvent('keydown', {key: 'Tab'});
-      Object.defineProperty(keyEvent, 'keyCode', {'value' : 9});
-      component.handleKeyevents(keyEvent);
-      testSearchResultsComponentFixture.detectChanges();
-      expect(component.visible).toBe(false);
-    });
-
-    fit('should focus on the first item in the list when you press arrow down', () => {
-      const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowDown'});
-      Object.defineProperty(keyEvent, 'keyCode', {'value' : 40});
-      component.handleKeyevents(keyEvent);
-      testSearchResultsComponentFixture.detectChanges();
-      expect(component.focusItem).toBe(0);
-    });
-
-    fit('should focus on the last item in the list when you press arrow up', () => {
-      const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowUp'});
-      Object.defineProperty(keyEvent, 'keyCode', {'value' : 38});
-      component.handleKeyevents(keyEvent);
-      testSearchResultsComponentFixture.detectChanges();
-      expect(component.focusItem).toBe(24);
-    });
-
-    describe(' focus is on the the first item', () => {
+    describe(' when you press escape ', () => {
       beforeEach(() => {
-        component.visible = true;
-        component.items = dummyData;
-        component.ngOnInit();
-        component.ngOnChanges();
+        const keyEvent = new KeyboardEvent('keydown', {key: 'Escape'});
+        Object.defineProperty(keyEvent, 'keyCode', {'value' : 27});
+        component.handleKeyevents(keyEvent);
         testSearchResultsComponentFixture.detectChanges();
       });
 
-      fit('and you select it with space', () => {
+      it('should close the list', () => {
+        expect(component.visible).toBe(false);
+      });
+
+    });
+
+    describe(' when you press arrow down ', () => {
+      beforeEach(() => {
+        const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowDown'});
+        Object.defineProperty(keyEvent, 'keyCode', {'value' : 40});
+        component.handleKeyevents(keyEvent);
+        testSearchResultsComponentFixture.detectChanges();
+        spyOn(component, 'onItemClick').and.callThrough();
+      });
+
+      it(' should focus on the first item in the list', () => {
+        expect(component.focusItem).toBe(0);
+      });
+
+      describe(' and you press space ', () => {
+        beforeEach(() => {
+          const keyEvent = new KeyboardEvent('keydown', {key: 'Space'});
+          Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
+          component.handleKeyevents(keyEvent);
+          testSearchResultsComponentFixture.detectChanges();
+        });
+
+        it(' it should trigger the itemClick event', () => {
+          expect(component.onItemClick).toHaveBeenCalled();
+        });
+
+        it(' and be closed', () => {
+          expect(component.visible).toBe(false);
+        });
+
+      });
+
+      describe(' and you press enter ', () => {
+        beforeEach(() => {
+          const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
+          Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
+          component.handleKeyevents(keyEvent);
+          testSearchResultsComponentFixture.detectChanges();
+        });
+
+        it(' it should trigger the itemClick event', () => {
+          expect(component.onItemClick).toHaveBeenCalled();
+        });
+
+        it(' and be closed', () => {
+          expect(component.visible).toBe(false);
+        });
+
+        describe(' when you press arrow up ', () => {
+          beforeEach(() => {
+            const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowUp'});
+            Object.defineProperty(keyEvent, 'keyCode', {'value' : 38});
+            component.handleKeyevents(keyEvent);
+            testSearchResultsComponentFixture.detectChanges();
+            spyOn(component, 'setFocusedElement');
+          });
+          it(' focusitem should ramin the same', () => {
+            expect(component.setFocusedElement).toHaveBeenCalledTimes(0);
+          });
+        });
+      });
+
+
+    });
+
+    describe(' when you press arrow up ', () => {
+      beforeEach(() => {
         const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowUp'});
         Object.defineProperty(keyEvent, 'keyCode', {'value' : 38});
         component.handleKeyevents(keyEvent);
         testSearchResultsComponentFixture.detectChanges();
+
+      });
+
+      it(' should focus on the last item in the list', () => {
         expect(component.focusItem).toBe(24);
       });
+
+      describe(' and then press arrow down ', () => {
+        beforeEach(() => {
+          const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowDown'});
+          Object.defineProperty(keyEvent, 'keyCode', {'value' : 40});
+          component.handleKeyevents(keyEvent);
+          testSearchResultsComponentFixture.detectChanges();
+
+        });
+        it(' should focus on the last item in the list', () => {
+          expect(component.focusItem).toBe(0);
+        });
+      });
+
+      describe(' when you press arrow up ', () => {
+        beforeEach(() => {
+          const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowUp'});
+          Object.defineProperty(keyEvent, 'keyCode', {'value' : 38});
+          component.handleKeyevents(keyEvent);
+          testSearchResultsComponentFixture.detectChanges();
+        });
+        it(' should focus on the last item in the list', () => {
+          expect(component.focusItem).toBe(23);
+        });
+      });
+
     });
 
+  });
 
+  describe(' when you have a list with items but no description ', () => {
+    beforeEach(() => {
+      component.items = dummyData;
+      component.maxItems = 200;
+      jasmine.clock().uninstall();
+      jasmine.clock().install();
+      component.ngOnChanges();
+      testSearchResultsComponentFixture.detectChanges();
+    });
+    it(' should focus on the last item in the list', () => {
+      jasmine.clock().tick(30);
+      expect(component.descriptionHeight).toBe(0);
+    });
   });
 
   describe('When component is provided with an empty list ', () => {
     beforeEach(() => {
       component.visible = true;
       // component.description = 'Här är en description till sökresultatet';
+      component.ngOnInit();
       component.ngOnChanges();
       testSearchResultsComponentFixture.detectChanges();
     });
@@ -179,7 +275,38 @@ describe('SearchResultComponent', () => {
       const description = rootElement.query(By.css('.search-results__description-field'));
       expect(description).toBeFalsy();
     });
+
+    describe(' when you press arrow down ', () => {
+      beforeEach(() => {
+        const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowDown'});
+        Object.defineProperty(keyEvent, 'keyCode', {'value' : 40});
+        component.handleKeyevents(keyEvent);
+        testSearchResultsComponentFixture.detectChanges();
+        spyOn(component, 'onItemClick').and.callThrough();
+      });
+
+      it(' it should not change the focusitem since there is no item to focus on', () => {
+        console.log(component.focusItem);
+        expect(component.focusItem).toBe(-1);
+      });
+
+    });
+
+
   });
+
+  /*describe('When component is places outside of wrapper', () => {
+    beforeEach(() => {
+      const onlycomponent = onlyComponentFixture.componentInstance;
+      onlycomponent.items = dummyData;
+      onlycomponent.maxItems = 200;
+      testSearchResultsComponentFixture.detectChanges();
+    });
+    it(' it should throw an error', () => {
+      const onlycomponent = onlyComponentFixture.componentInstance;
+      expect(onlycomponent.ngOnInit).toThrow(new Error('Du har glömt att lägga din search-result komponent i en wrapper'));
+    });
+  });*/
 
 });
 
