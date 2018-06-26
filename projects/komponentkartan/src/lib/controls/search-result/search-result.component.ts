@@ -66,12 +66,22 @@ export class SearchResultComponent implements OnChanges, OnInit {
 
   handleKeyevents(event) {
     console.log('keyevent', event, event.keyCode);
+    if (!this.visible) {
+      return;
+    }
+
     this.setFocusedElement();
+
     if (event.keyCode === KEY_CODE.ESCAPE || event.keyCode === KEY_CODE.TAB) {
       this.visible = false;
       this.visibleChange.emit(this.visible);
-    } else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
+    }
+    else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
       const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__items li');
+
+      if (nodes.length === 0) {
+        return;
+      }
 
       if (event.keyCode === KEY_CODE.DOWN_ARROW) {
         if (this.focusItem === nodes.length - 1) {
@@ -89,7 +99,8 @@ export class SearchResultComponent implements OnChanges, OnInit {
       console.log(this.focusItem);
       const activeNode = nodes[this.focusItem];
       activeNode.focus();
-    } else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
+    }
+    else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
       this.visible = false;
       this.visibleChange.emit(this.visible);
       this.onItemClick(this.displayItems[this.focusItem]);

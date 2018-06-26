@@ -44,6 +44,14 @@ Mer förklaring:https://github.com/npm/npm/releases/tag/v3.0.0
   },
 ```
 
+Ifall du får ngx-perfect-scrollbar error med rxjs så lägg till rxjs-compat:
+```
+"dependencies": {
+    "ngx-perfect-scrollbar": "^5.3.5",    
+    "rxjs-compat": "^6.2.0",
+  },
+```
+
 Börja använda komponenterna t.ex.
 ```
 <vgr-header></vgr-header>
