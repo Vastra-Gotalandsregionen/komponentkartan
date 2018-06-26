@@ -45,7 +45,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
     // Kanske använda closest?
     const parent = this.getParentNode();
     if (parent.classList.contains('search-result-wrapper')) {
-      parent.onkeyup = () => this.handleKeyevents(event);
+      parent.keydown = () => this.handleKeyevents(event);
     } else {
       throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
     }
@@ -65,6 +65,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   handleKeyevents(event) {
+    console.log('keyevent', event, event.keyCode);
     this.setFocusedElement();
     if (event.keyCode === KEY_CODE.ESCAPE || event.keyCode === KEY_CODE.TAB) {
       this.visible = false;
@@ -79,12 +80,13 @@ export class SearchResultComponent implements OnChanges, OnInit {
           this.focusItem++;
         }
       } else if (event.keyCode === KEY_CODE.UP_ARROW) {
-        if (this.focusItem === 0) {
+        if (this.focusItem === 0 || this.focusItem === -1) {
           this.focusItem = nodes.length - 1;
         } else {
           this.focusItem--;
         }
       }
+      console.log(this.focusItem);
       const activeNode = nodes[this.focusItem];
       activeNode.focus();
     } else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
@@ -105,6 +107,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   setFocusedElement() {
+    console.log('setfocuselement');
     const node = this.elementRef.nativeElement.querySelector('li:focus');
     this.focusItem = node ? this.indexInParent(node) : -1;
   }
