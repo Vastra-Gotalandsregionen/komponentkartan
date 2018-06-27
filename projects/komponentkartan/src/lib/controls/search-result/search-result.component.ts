@@ -45,7 +45,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
     // Kanske använda closest?
     const parent = this.getParentNode();
     if (parent.classList.contains('search-result-wrapper')) {
-      parent.keydown = () => this.handleKeyevents(event);
+      parent.onkeydown = () => this.handleKeyevents(event);
     } else {
       throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
     }
@@ -99,9 +99,12 @@ export class SearchResultComponent implements OnChanges, OnInit {
       activeNode.focus();
     }
     else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
-      this.visible = false;
-      this.visibleChange.emit(this.visible);
-      this.onItemClick(this.displayItems[this.focusItem]);
+      const target = event.target || event.srcElement || event.currentTarget;
+      if (this.elementRef.nativeElement.contains(target)) {
+        this.visible = false;
+        this.visibleChange.emit(this.visible);
+        this.onItemClick(this.displayItems[this.focusItem]);
+      }
     }
   }
 
