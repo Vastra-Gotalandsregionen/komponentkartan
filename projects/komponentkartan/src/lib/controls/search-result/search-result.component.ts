@@ -33,9 +33,10 @@ export class SearchResultComponent implements OnChanges, OnInit {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {
     const target = event.target || event.srcElement || event.currentTarget;
-    if (!this.elementRef.nativeElement.parentNode.contains(target)) {
+    if (!this.elementRef.nativeElement.parentNode.contains(target) && this.visible) {
       this.visible = false;
       this.visibleChange.emit(this.visible);
+      this.focusItem = -1;
     }
   }
 
@@ -64,7 +65,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   handleKeyevents(event) {
-    console.log(event, event.keyCode);
     if (!this.visible) {
       return;
     }
@@ -73,6 +73,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
 
     if (event.keyCode === KEY_CODE.ESCAPE || event.keyCode === KEY_CODE.TAB) {
       this.visible = false;
+      this.focusItem = -1;
       this.visibleChange.emit(this.visible);
     } else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
       const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__items li');
@@ -97,7 +98,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
       const activeNode = nodes[this.focusItem];
       activeNode.focus();
     } else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
-      console.log(event, event.target);
       const target = event.target || event.srcElement || event.currentTarget;
       if (this.elementRef.nativeElement.contains(target)) {
         this.visible = false;
@@ -135,7 +135,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   onItemClick(item) {
-    console.log('vi kör funktionen');
     this.itemClick.emit(item);
   }
 
