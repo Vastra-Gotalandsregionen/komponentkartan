@@ -43,9 +43,14 @@ export class SearchResultComponent implements OnChanges, OnInit {
 
   ngOnInit() {
     const parent = this.getParentNode();
+<<<<<<< HEAD
     if (parent && parent.classList.contains('search-result-wrapper')) {
       parent.onkeydown = () => this.handleKeyevents(event);
       // parent.addEventListener('keydown', () => this.handleKeyevents);
+=======
+    if (parent.classList.contains('search-result-wrapper')) {
+      parent.onkeydown = () => this.handleKeyevents(event);
+>>>>>>> search-results
     } else {
       throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
     }
@@ -96,10 +101,21 @@ export class SearchResultComponent implements OnChanges, OnInit {
       }
       const activeNode = nodes[this.focusItem];
       activeNode.focus();
+<<<<<<< HEAD
     } else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
       this.visible = false;
       this.visibleChange.emit(this.visible);
       this.onItemClick(this.displayItems[this.focusItem]);
+=======
+    }
+    else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
+      const target = event.target || event.srcElement || event.currentTarget;
+      if (this.elementRef.nativeElement.contains(target)) {
+        this.visible = false;
+        this.visibleChange.emit(this.visible);
+        this.onItemClick(this.displayItems[this.focusItem]);
+      }
+>>>>>>> search-results
     }
   }
 
