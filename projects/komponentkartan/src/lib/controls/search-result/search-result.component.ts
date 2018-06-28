@@ -97,6 +97,8 @@ export class SearchResultComponent implements OnChanges, OnInit {
       }
       const activeNode = nodes[this.focusItem];
       activeNode.focus();
+      event.preventDefault();
+      event.cancelBubble = true;
     } else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
       const target = event.target || event.srcElement || event.currentTarget;
       if (this.elementRef.nativeElement.contains(target)) {
@@ -105,8 +107,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
         this.onItemClick(this.displayItems[this.focusItem]);
       }
     }
-    event.preventDefault();
-    event.cancelBubble = true;
   }
 
   indexInParent(node) {
