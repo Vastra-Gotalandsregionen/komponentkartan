@@ -42,10 +42,10 @@ export class SearchResultComponent implements OnChanges, OnInit {
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
-    // Kanske använda closest?
     const parent = this.getParentNode();
-    if (parent.classList.contains('search-result-wrapper')) {
-      parent.keydown = () => this.handleKeyevents(event);
+    if (parent && parent.classList.contains('search-result-wrapper')) {
+      parent.onkeydown = () => this.handleKeyevents(event);
+      // parent.addEventListener('keydown', () => this.handleKeyevents);
     } else {
       throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
     }
@@ -55,7 +55,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
     if (this.items) {
       this.filterItems();
       setTimeout(() => {
-        console.log('inne');
         if (this.elementRef.nativeElement.querySelector('.search-results__description')) {
           this.descriptionHeight = this.elementRef.nativeElement.querySelector('.search-results__description').offsetHeight;
         } else {
@@ -118,7 +117,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
     this.focusItem = node ? this.indexInParent(node) : -1;
   }
 
-  getParentNode() {
+  public getParentNode() {
     return this.elementRef.nativeElement.parentNode;
   }
 

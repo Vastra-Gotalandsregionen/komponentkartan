@@ -286,7 +286,6 @@ describe('SearchResultComponent', () => {
       });
 
       it(' it should not change the focusitem since there is no item to focus on', () => {
-        console.log(component.focusItem);
         expect(component.focusItem).toBe(-1);
       });
 
@@ -295,24 +294,18 @@ describe('SearchResultComponent', () => {
 
   });
 
-  /*describe('When component is places outside of wrapper', () => {
-    beforeEach(() => {
-      const onlycomponent = onlyComponentFixture.componentInstance;
-      onlycomponent.items = dummyData;
-      onlycomponent.maxItems = 200;
-      testSearchResultsComponentFixture.detectChanges();
-    });
+  describe('When component is places outside of wrapper', () => {
     it(' it should throw an error', () => {
-      const onlycomponent = onlyComponentFixture.componentInstance;
-      expect(onlycomponent.ngOnInit).toThrow(new Error('Du har glömt att lägga din search-result komponent i en wrapper'));
+      const onlyComponent = onlyComponentFixture.componentInstance;
+      expect(() => onlyComponent.ngOnInit()).toThrow(new Error('Du har glömt att lägga din search-result komponent i en wrapper'));
     });
-  });*/
+  });
 
 });
 
 
 
-function getDemoItems(numberOfItems: number, addSecondRow: boolean = false) {
+function getDemoItems(numberOfItems: number, addSecondRow: boolean = true) {
   const items: SearchResultItem[] = [];
   for (let i = 1; i <= numberOfItems; i++) {
     const name = Math.random() > 0.7 ? `${i} - Min mottagning har ett jättelångt namn` : `${i} - Min mottagning`;
