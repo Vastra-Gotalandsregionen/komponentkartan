@@ -42,9 +42,8 @@ export class SearchResultComponent implements OnChanges, OnInit {
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
-    // Kanske använda closest?
     const parent = this.getParentNode();
-    if (parent.classList.contains('search-result-wrapper')) {
+    if (parent && parent.classList.contains('search-result-wrapper')) {
       parent.onkeydown = () => this.handleKeyevents(event);
     } else {
       throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
@@ -65,6 +64,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   handleKeyevents(event) {
+    console.log(event, event.keyCode);
     if (!this.visible) {
       return;
     }
@@ -74,8 +74,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
     if (event.keyCode === KEY_CODE.ESCAPE || event.keyCode === KEY_CODE.TAB) {
       this.visible = false;
       this.visibleChange.emit(this.visible);
-    }
-    else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
+    } else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
       const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__items li');
 
       if (nodes.length === 0) {
@@ -97,8 +96,8 @@ export class SearchResultComponent implements OnChanges, OnInit {
       }
       const activeNode = nodes[this.focusItem];
       activeNode.focus();
-    }
-    else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
+    } else if (event.keyCode === KEY_CODE.SPACE || event.keyCode === KEY_CODE.ENTER) {
+      console.log(event, event.target);
       const target = event.target || event.srcElement || event.currentTarget;
       if (this.elementRef.nativeElement.contains(target)) {
         this.visible = false;
@@ -115,7 +114,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
       if (children[i] === node) { return num; }
       if (children[i].nodeType === 1) { num++; }
     }
-    return -1;
   }
 
   setFocusedElement() {
@@ -123,7 +121,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
     this.focusItem = node ? this.indexInParent(node) : -1;
   }
 
-  getParentNode() {
+  public getParentNode() {
     return this.elementRef.nativeElement.parentNode;
   }
 
@@ -137,6 +135,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   onItemClick(item) {
+    console.log('vi kör funktionen');
     this.itemClick.emit(item);
   }
 

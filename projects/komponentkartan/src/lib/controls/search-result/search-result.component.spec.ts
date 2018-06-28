@@ -3,7 +3,7 @@ import { SearchResultComponent } from './search-result.component';
 
 describe('SearchResultComponent1', () => {
   let component: SearchResultComponent;
-  const dummyData: SearchResultItem[] = getDemoItems(50);
+  const dummyData: SearchResultItem[] = getDemoItems(50, true);
 
   beforeEach(() => {
     component = new SearchResultComponent(null);
