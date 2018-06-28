@@ -36,7 +36,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
     if (!this.elementRef.nativeElement.parentNode.contains(target) && this.visible) {
       this.visible = false;
       this.visibleChange.emit(this.visible);
-      this.focusItem = -1;
+      this.resetScrollPosition();
     }
   }
 
@@ -64,6 +64,12 @@ export class SearchResultComponent implements OnChanges, OnInit {
     }
   }
 
+  resetScrollPosition() {
+    const psNode = this.elementRef.nativeElement.querySelector('div.ps');
+    psNode.scrollTop = 0;
+    this.focusItem = -1;
+  }
+
   handleKeyevents(event) {
     if (!this.visible) {
       return;
@@ -73,8 +79,8 @@ export class SearchResultComponent implements OnChanges, OnInit {
 
     if (event.keyCode === KEY_CODE.ESCAPE || event.keyCode === KEY_CODE.TAB) {
       this.visible = false;
-      this.focusItem = -1;
       this.visibleChange.emit(this.visible);
+      this.resetScrollPosition();
     } else if (event.keyCode === KEY_CODE.DOWN_ARROW || event.keyCode === KEY_CODE.UP_ARROW) {
       const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__items li');
 
