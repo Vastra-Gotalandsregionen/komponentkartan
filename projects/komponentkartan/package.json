@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "3.0.0-beta24",
+  "version": "3.0.0-beta25",
   "peerDependencies": {
     "ngx-perfect-scrollbar": "^5.3.5",
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
