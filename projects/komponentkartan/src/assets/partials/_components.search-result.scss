@@ -143,22 +143,3 @@ $filter-area-height: 60px;
     }
   }
 }
-
-/*******************************************************************************
-* IE11 Specific styles
-* 1. Disable chevron animation, since it is too slow in IE11
-*******************************************************************************/
-
-@media all and (-ms-high-contrast: none),
-(-ms-high-contrast: active) {
-  .search-results--edit {
-    &:after {
-      transition: none;
-    }
-    &.search-results--open {
-      &:after {
-        transition: none;
-      }
-    }
-  }
-}

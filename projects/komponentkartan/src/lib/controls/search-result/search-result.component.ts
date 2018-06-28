@@ -105,6 +105,8 @@ export class SearchResultComponent implements OnChanges, OnInit {
         this.onItemClick(this.displayItems[this.focusItem]);
       }
     }
+    event.preventDefault();
+    event.cancelBubble = true;
   }
 
   indexInParent(node) {
