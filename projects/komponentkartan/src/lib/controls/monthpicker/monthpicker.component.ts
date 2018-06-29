@@ -252,6 +252,7 @@ export class MonthpickerComponent implements OnInit, OnChanges, ControlValueAcce
         if (event.keyCode === 13 || event.keyCode === 32) {
             if (selectedMonth.disabled) {
                 event.cancelBubble = true;
+                event.preventDefault();
             }
             this.selectDate(selectedMonth);
         }
