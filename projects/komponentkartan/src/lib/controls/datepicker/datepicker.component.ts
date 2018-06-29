@@ -399,6 +399,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, Co
 
             if (!clickedDate || clickedDate.disabled) {
                 event.cancelBubble = true;
+                event.preventDefault();
                 return;
             }
             this.selectedDate = clickedDate.day;
