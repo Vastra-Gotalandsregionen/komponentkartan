@@ -77,7 +77,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
     setTimeout(() => {
       this.scrollHeight = this.elementRef.nativeElement.querySelector('.textarea-input').scrollHeight + 'px';
       this.cdRef.detectChanges();
-    }, 25)
+    }, 25);
 
   }
 
@@ -94,7 +94,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   onChange(input: any) {
