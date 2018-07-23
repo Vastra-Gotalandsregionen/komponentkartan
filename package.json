@@ -38,8 +38,7 @@
     "rxjs": "^6.2.0",
     "rxjs-compat": "^6.2.0",
     "web-animations-js": "^2.3.1",
-    "zone.js": "^0.8.26",
-    "smoothscroll-polyfill": "^0.4.3"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.6.7",
@@ -70,6 +69,7 @@
     "tslint": "~5.7.0",
     "typescript": "2.7.2",
     "wallaby-webpack": "^3.9.9",
-    "ng-packagr": "^3.0.0-rc.2"
+    "ng-packagr": "^3.0.0-rc.2",
+    "smoothscroll-polyfill": "^0.4.3"
   }
 }
