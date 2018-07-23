@@ -145,8 +145,7 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/komponentkartan/tsconfig.lib.json",
-            "project": "projects/komponentkartan/ng-package.json",
-            "polyfills": "projects/komponentkartan/polyfills.ts"
+            "project": "projects/komponentkartan/ng-package.json"
           },
           "configurations": {
             "production": {
