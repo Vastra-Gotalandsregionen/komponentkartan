@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 3.0.0
+## 3.0.1
+- Added a polyfill for smooth scrolling in back to top component. (is added in demo-page)
+
+## 3.0.0 (Stable)
 - Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6
 - Read https://update.angular.io/ on how to upgrade
 - Moved komponentkartan lib folder from src/lib to projects/komponentkartan/lib
@@ -27,7 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - *Breaking change* vgr-lock-button unlocked input replaced with locked input
 - *Breaking change* vgr-save-cancel unlocked input replaced with locked input
 
-## 2.5.0 (Stable)
+## 2.5.0
 - WCAG-support for datepickern
 - WCAG-support for the menu
 
