@@ -17,6 +17,9 @@
 
 .card-section__content {
   overflow:hidden;
+  &.overflow-visible {
+    overflow: visible;
+  }
 }
 
 .card__section-container {

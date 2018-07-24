@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 3.0.1
 - Added a polyfill for smooth scrolling in back to top component. (is added in demo-page)
+- Fixed a bug with overflow inside of card-sections. 
 
 ## 3.0.0 (Stable)
 - Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6
