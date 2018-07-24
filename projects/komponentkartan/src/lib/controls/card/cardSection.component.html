@@ -4,7 +4,7 @@
   <div class="card-section__header__icon"></div>
   <div class="card-section__header__expander" [@animateChevron]="expanded"></div>
 </div>
-<div class="card-section__content" *ngIf="expanded" [@toggleExpandedState] (@toggleExpandedState.done)="allowOverflow($event)" [ngClass]="{'overflow-visible': overflow}">
+<div class="card-section__content" *ngIf="expanded" [@toggleExpandedState] (@toggleExpandedState.done)="allowOverflow()" [ngClass]="{'overflow-visible': overflow}">
   <div class="add-padding">
     <ng-content></ng-content>
   </div>
