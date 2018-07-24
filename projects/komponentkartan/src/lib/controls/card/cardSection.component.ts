@@ -40,7 +40,7 @@ export class CardSectionComponent {
 
     toggleExpanded() {
         this.overflow = false;
-        setTimeout(()=> {
+        setTimeout(() => {
             this.expanded = !this.expanded;
         });
     }

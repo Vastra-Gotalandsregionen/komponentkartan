@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 import { TruncatePipe } from '../../pipes/truncatePipe';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -60,7 +60,9 @@ describe('[CardSectionComponent]', () => {
         rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', null);
       });
       it('section is expanded', () => {
-        expect(component.expanded).toBe(true);
+        setTimeout(() => {
+          expect(component.expanded).toBe(true);
+        }, 10);
       });
       describe('and header is clicked again', () => {
         beforeEach(() => {
