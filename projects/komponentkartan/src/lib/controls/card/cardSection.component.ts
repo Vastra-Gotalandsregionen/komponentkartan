@@ -36,13 +36,21 @@ export class CardSectionComponent {
     @Input() @HostBinding('class.card-section--readonly') readonly: boolean;
     @Input() title: string;
     @Input() subtitle: string;
+    overflow = false;
 
     toggleExpanded() {
-        this.expanded = !this.expanded;
+        this.overflow = false;
+        setTimeout(()=> {
+            this.expanded = !this.expanded;
+        });
     }
 
     constructor() {
         this.readonly = true;
+    }
+
+    allowOverflow() {
+        this.overflow = true;
     }
 
 }
