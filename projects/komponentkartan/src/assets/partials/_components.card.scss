@@ -68,6 +68,10 @@
   .card-section:first-child & {
     border-top: 1px solid $border-color;
   }
+  &:focus{
+    outline: 0; // z-index: 999;
+    box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+  }
 }
 
 .card-section__header__title {
