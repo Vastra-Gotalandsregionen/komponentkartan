@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, HostListener, Input } from '@angular/core';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
 
 @Component({
@@ -37,6 +37,14 @@ export class CardSectionComponent {
     @Input() title: string;
     @Input() subtitle: string;
     overflow = false;
+
+    @HostListener('keydown', ['$event'])
+    toggleExpand(event: KeyboardEvent) {
+        if (event.keyCode === 13 || event.keyCode === 32) { // enter & space
+            this.toggleExpanded();
+            event.preventDefault();
+        }
+    }
 
     toggleExpanded() {
         this.overflow = false;

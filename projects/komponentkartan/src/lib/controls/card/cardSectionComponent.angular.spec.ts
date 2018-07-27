@@ -14,6 +14,7 @@ describe('[CardSectionComponent]', () => {
   let component: CardSectionComponent;
   let fixture: ComponentFixture<CardSectionComponent>;
   let rootElement: DebugElement;
+  let header: DebugElement;
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -57,16 +58,18 @@ describe('[CardSectionComponent]', () => {
     });
     describe('and header is clicked', () => {
       beforeEach(() => {
+        jasmine.clock().uninstall();
+        jasmine.clock().install();
         rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', null);
+        jasmine.clock().tick(10);
       });
       it('section is expanded', () => {
-        setTimeout(() => {
-          expect(component.expanded).toBe(true);
-        }, 10);
+        expect(component.expanded).toBe(true);
       });
       describe('and header is clicked again', () => {
         beforeEach(() => {
           rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', null);
+          jasmine.clock().tick(10);
         });
         it('section is collapsed', () => {
           expect(component.expanded).toBe(false);
@@ -93,6 +96,34 @@ describe('[CardSectionComponent]', () => {
           expect(rootElement.classes['card-section--expanded']).toBe(false);
         });
         it('expanded is false', () => {
+          expect(component.expanded).toBe(false);
+        });
+      });
+    });
+    describe('header is focused and space is pressed', () => {
+      beforeEach(() => {
+        const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
+        const focusedElement = rootElement.query(By.css('.card-section__header'));
+        Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
+        Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
+        component.toggleExpand(keyEvent);
+        jasmine.clock().tick(10);
+      });
+      it('section is expanded', () => {
+        expect(component.expanded).toBe(true);
+      });
+      describe('header is focused and enter is pressed', () => {
+        beforeEach(() => {
+          console.log(component.expanded);
+          const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
+          const focusedElement = rootElement.query(By.css('.card-section__header'));
+          Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
+          Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
+          component.toggleExpand(keyEvent);
+          jasmine.clock().tick(10);
+        });
+
+        it('section is compressed', () => {
           expect(component.expanded).toBe(false);
         });
       });
