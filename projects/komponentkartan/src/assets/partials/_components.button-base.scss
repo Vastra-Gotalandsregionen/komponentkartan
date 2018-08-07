@@ -47,3 +47,11 @@
     position: relative;
   }
 }
+
+vgr-button + vgr-button,
+vgr-lock-button + vgr-button,
+vgr-button + vgr-lock-button,
+vgr-lock-button + vgr-lock-button,
+vgr-close-button + vgr-close-button {
+  padding-left: 20px;
+}
