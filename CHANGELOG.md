@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added a polyfill for smooth scrolling in back to top component. (is added in demo-page)
 - Fixed a bug with overflow inside of card-sections. 
 - Added WCAG for cardSection.
+- Fixed spacing between buttons laying next to each other.
 
 ## 3.0.0 (Stable)
 - Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6
