@@ -1,5 +1,5 @@
 <header class="site-header-vgr">
-  <div alt="VG_Ne" class="header__vgr-logo"></div>
+  <div alt="VG_Ne" class="header__vgr-logo" [style.background-image]="logoImageString" [class.customLogo]="customLogo"></div>
   <div *ngIf="systemText" class="header__system-text-box" tabindex="1">
     {{systemText}}
   </div>

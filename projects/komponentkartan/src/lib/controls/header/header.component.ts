@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, HostBinding, OnInit} from '@angular/core';
 import { IHeaderMenu } from '../../models/headerMenu.model';
 import { HeaderMenuComponent } from '../headerMenu/headerMenu.component';
 
@@ -7,7 +7,7 @@ import { HeaderMenuComponent } from '../headerMenu/headerMenu.component';
     templateUrl: './header.component.html'
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
     systemColor: string;
     @Input() headerMenu: IHeaderMenu;
     @Input() userName: string;
@@ -15,11 +15,22 @@ export class HeaderComponent {
     @Input() systemText: string;
     @Input() textColor: string;
     @Input() circleColor: string;
+    @Input() @HostBinding('class.hide-swosh') hideSwosh = false;
+    @Input() logoImage: string;
+    logoImageString: string;
+    customLogo = false;
 
     @ViewChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
 
     constructor() {
         this.systemColor = 'neutral';
+    }
+
+    ngOnInit() {
+        if (this.logoImage) {
+            this.logoImageString = `url(${this.logoImage})`;
+            this.customLogo = true;
+        }
     }
 
     setInitials(): string {

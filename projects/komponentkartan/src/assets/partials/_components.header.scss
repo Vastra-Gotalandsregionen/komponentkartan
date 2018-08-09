@@ -42,6 +42,9 @@ vgr-header {
     @extend .bg-image-pinkie-header;
     background-position: right center;
   }
+  .hide-swosh & {
+    background-image: none;
+  }
 }
 
 //THEMING
@@ -49,7 +52,11 @@ vgr-header {
   @extend .bg-image-vgr-logo;
   margin-left: 16px;
   margin-top: 16px;
+  width: 300px;
   align-self: flex-start;
+  &.customLogo {
+    background-size: auto;
+  }
 }
 
 .header__info-box {
