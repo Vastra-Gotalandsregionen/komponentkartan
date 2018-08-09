@@ -32,6 +32,10 @@
     border: 2px solid $control-color--disabled;
     box-shadow: none;
     transition: border-color 0.6s linear;
+    &:after {
+      left: 4px !important;
+      top: 5px !important;
+    }
   }
   .checkbox--checked & {
     background: $control-color--enabled;
