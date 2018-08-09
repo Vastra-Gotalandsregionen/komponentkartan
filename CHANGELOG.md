@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed a bug with overflow inside of card-sections. 
 - Added WCAG for cardSection.
 - Fixed spacing between buttons laying next to each other.
+- Added more options for how the header is displayed.
 
 ## 3.0.0 (Stable)
 - Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6
