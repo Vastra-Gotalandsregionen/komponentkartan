@@ -1,8 +1,8 @@
-<vgr-expandable-div [expanded]="expanded" (expandedChanged)="onExpandedChanged($event)">
+<vgr-expandable-div [expanded]="expanded" (expandedChanged)="onExpandedChanged($event)" tabindex="0">
   <vgr-expandable-div-header>
     <ng-content select="vgr-table-header"></ng-content>
   </vgr-expandable-div-header>
-  <vgr-expandable-div-content class="table-body">
+  <vgr-expandable-div-content class="table-body" *ngIf="expanded">
     <ng-content select="vgr-table-row"></ng-content>
     <ng-content select="vgr-table"></ng-content>
   </vgr-expandable-div-content>
