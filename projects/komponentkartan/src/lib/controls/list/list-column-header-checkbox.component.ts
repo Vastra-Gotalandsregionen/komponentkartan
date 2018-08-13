@@ -11,6 +11,7 @@ export class ListColumnHeaderCheckboxComponent extends ListColumnHeaderComponent
   @Input() checked: boolean;
   @Input() disabled: boolean;
   @Output() checkedChanged = new EventEmitter<boolean>();
+  @Input() text: string;
 
   onItemCheckChanged(event: boolean) {
     this.checked = event;

@@ -26,9 +26,9 @@
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" (deleted)="notifyOnDelete(row)">
           <vgr-list-item-header>
-            <vgr-list-column [text]="row.previewObject.firstName" width="8"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.lastName" width="5"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.amount | number:'2.2-2':'sv'" width="3" align="right"></vgr-list-column>
+            <vgr-list-column width="8">{{row.previewObject.firstName}}</vgr-list-column>
+            <vgr-list-column width="5">{{row.previewObject.lastName}}</vgr-list-column>
+            <vgr-list-column width="3" align="right">{{row.previewObject.amount | number:'2.2-2':'sv'}}</vgr-list-column>
             <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (delete)="onDeleteRow(row)" width="1"></vgr-list-column-trashcan>
             <vgr-list-column-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected" (checkedChanged)="onSelectRowChanged(row, $event)"
               width="3"></vgr-list-column-checkbox>

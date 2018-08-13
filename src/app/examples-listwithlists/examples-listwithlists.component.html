@@ -20,9 +20,9 @@
     <vgr-page-block>
       <vgr-list (sortChanged)="onSortChanged($event)" *ngIf="loading || noSearchResult">
         <vgr-list-header>
-          <vgr-list-column-header text="Enhet" width="10" sortKey="enhet" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
-          <vgr-list-column-header text="HSA-id" width="5" align="left" sortKey="hsaid"></vgr-list-column-header>
-          <vgr-list-column-header text="Belopp" width="3" align="right" sortKey="belopp"></vgr-list-column-header>
+          <vgr-list-column-header width="10" sortKey="enhet" [sortDirection]="sortDirections.Ascending">Enhet</vgr-list-column-header>
+          <vgr-list-column-header width="5" align="left" sortKey="hsaid">HSA-id</vgr-list-column-header>
+          <vgr-list-column-header width="3" align="right" sortKey="belopp">Belopp</vgr-list-column-header>
           <vgr-list-column-header width="1" align="center"></vgr-list-column-header>
           <vgr-list-column-header-checkbox width="1" align="center" [checked]="false"></vgr-list-column-header-checkbox>
         </vgr-list-header>
@@ -35,18 +35,18 @@
       </div>
       <vgr-list (sortChanged)="onSortChanged($event)" *ngIf="!loading && !noSearchResult">
         <vgr-list-header>
-          <vgr-list-column-header text="Enhet" width="10" sortKey="enhet" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
-          <vgr-list-column-header text="HSA-id" width="5" align="left" sortKey="hsaid"></vgr-list-column-header>
-          <vgr-list-column-header text="Belopp" width="3" align="right" sortKey="belopp"></vgr-list-column-header>
+          <vgr-list-column-header width="10" sortKey="enhet" [sortDirection]="sortDirections.Ascending">Enhet</vgr-list-column-header>
+          <vgr-list-column-header width="5" align="left" sortKey="hsaid">HSA-id</vgr-list-column-header>
+          <vgr-list-column-header width="3" align="right" sortKey="belopp">Belopp</vgr-list-column-header>
           <vgr-list-column-header width="1" align="center"></vgr-list-column-header>
           <vgr-list-column-header-checkbox width="1" align="center" [checked]="allChecked" (checkedChanged)="onListCheckedChanged($event)"></vgr-list-column-header-checkbox>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of listData | unitfilter2: includeInactiveUnits" [expanded]="row.expanded" [notification]="row.notification"
           (deleted)="removeDataFromList(row)">
           <vgr-list-item-header>
-            <vgr-list-column [text]="row.previewObject.enhet" width="10"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.hsaid" width="5"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.belopp | number : '1.2-2'" width="3" align="right"></vgr-list-column>
+            <vgr-list-column width="10">{{row.previewObject.enhet}}</vgr-list-column>
+            <vgr-list-column width="5">{{row.previewObject.hsaid}}</vgr-list-column>
+            <vgr-list-column width="3" align="right">{{row.previewObject.belopp | number : '1.2-2'}}</vgr-list-column>
             <vgr-list-column-trashcan width="1" align="center" [disabled]="row.previewObject.deleted" (delete)="onDeleteRow(row)"></vgr-list-column-trashcan>
             <vgr-list-column-checkbox width="1" align="center" [disabled]="row.previewObject.deleted" [checked]="row.previewObject.vald"
               (checkedChanged)="onSelectRowChanged(row, $event)"></vgr-list-column-checkbox>

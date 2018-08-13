@@ -17,21 +17,21 @@ describe('[ListColumnHeaderComponent]', () => {
     });
     describe('and clicked', () => {
       beforeEach(() => {
-        component.onClick();
+        component.changeSort();
       });
       it('the sortdirection is Ascending', () => {
         expect(component.sortDirection).toBe(SortDirection.Ascending);
       });
       describe('and clicked again', () => {
         beforeEach(() => {
-          component.onClick();
+          component.changeSort();
         });
         it('the sortdirection is Descending', () => {
           expect(component.sortDirection).toBe(SortDirection.Descending);
         });
         describe('and clicked for the last time', () => {
           beforeEach(() => {
-            component.onClick();
+            component.changeSort();
           });
           it('the sortdirection is Ascending', () => {
             expect(component.sortDirection).toBe(SortDirection.Ascending);
