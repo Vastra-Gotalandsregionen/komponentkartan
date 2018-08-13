@@ -96,10 +96,10 @@ export class Examples {
   </vgr-list-header>
   <vgr-list-item *ngFor="let row of peopleRowsSimpleList">
     <vgr-list-item-header>
-      <vgr-list-column [text]="row.firstName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.lastName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.occupation" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.income| number:'2.2-2':'sv-SE'" width="5" align="right"></vgr-list-column>
+      <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.occupation}}</vgr-list-column>
+      <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
     </vgr-list-item-header>
     <vgr-list-item-content [indentContent]="false">
       <vgr-expandable-div *ngFor="let row of row.children" [expanded]="false">
@@ -168,10 +168,10 @@ export class Examples {
   </vgr-list-header>
   <vgr-list-item *ngFor="let row of peopleRowsSimpleList">
     <vgr-list-item-header>
-      <vgr-list-column [text]="row.firstName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.lastName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.occupation" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.income| number:'2.2-2':'sv-SE'" align="right" width="5"></vgr-list-column>
+      <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.occupation}}</vgr-list-column>
+      <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
     </vgr-list-item-header>
     <vgr-list-item-content>
         <span>Förnamn: {{row.firstName}}</span>
@@ -262,8 +262,8 @@ export class Examples {
   </vgr-list-header>
   <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
     <vgr-list-item-header>
-      <vgr-list-column [text]="row.previewObject.firstName" [width]="10"></vgr-list-column>
-      <vgr-list-column [text]="row.previewObject.lastName" [width]="10"></vgr-list-column>
+      <vgr-list-column [width]="10">{{row.previewObject.firstName}}</vgr-list-column>
+      <vgr-list-column [width]="10">{{row.previewObject.lastName}}</vgr-list-column>
     </vgr-list-item-header>
     <vgr-list-item-content>
       <vgr-button [secondary]="true" (click)="updateRow(row)">Uppdatera</vgr-button>
@@ -283,9 +283,9 @@ export class Examples {
   </vgr-list-header>
   <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" (deleted)="notifyOnDelete(row)">
     <vgr-list-item-header>
-      <vgr-list-column [text]="row.previewObject.firstName" width="8"></vgr-list-column>
-      <vgr-list-column [text]="row.previewObject.lastName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.previewObject.amount | number:'2.2-2':'sv'" width="3" align="right"></vgr-list-column>
+      <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
+      <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
       <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (delete)="onDeleteRow(row)" width="1"></vgr-list-column-trashcan>
       <vgr-list-column-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected" (checkedChanged)="onSelectRowChanged(row, $event)"
         width="3"></vgr-list-column-checkbox>

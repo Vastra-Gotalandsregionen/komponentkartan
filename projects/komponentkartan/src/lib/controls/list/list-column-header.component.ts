@@ -48,7 +48,7 @@ export class ListColumnHeaderComponent {
     return 'column--align-' + (this.align ? this.align : 'left');
   }
 
-  onClick() {
+  changeSort() {
     if (this.sortDirection === SortDirection.None) {
       this.sortDirection = SortDirection.Ascending;
     } else if (this.sortDirection === SortDirection.Ascending) {

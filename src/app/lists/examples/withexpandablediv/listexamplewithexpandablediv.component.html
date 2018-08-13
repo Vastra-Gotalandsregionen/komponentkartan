@@ -13,17 +13,17 @@
     <vgr-page-block>
       <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
-          <vgr-list-column-header text="Förnamn" width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
-          <vgr-list-column-header text="Efternamn" width="5" sortKey="lastName"></vgr-list-column-header>
-          <vgr-list-column-header text="Yrke" width="5" sortKey="occupation"></vgr-list-column-header>
-          <vgr-list-column-header text="Inkomst" align="right" width="5" sortKey="income"></vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="lastName">Efternamn</vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="occupation">Yrke</vgr-list-column-header>
+          <vgr-list-column-header align="right" width="5" sortKey="income">Inkomst</vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of peopleRowsSimpleList">
           <vgr-list-item-header>
-            <vgr-list-column [text]="row.firstName" width="5"></vgr-list-column>
-            <vgr-list-column [text]="row.lastName" width="5"></vgr-list-column>
-            <vgr-list-column [text]="row.occupation" width="5"></vgr-list-column>
-            <vgr-list-column [text]="row.income| number:'2.2-2':'sv-SE'" width="5" align="right"></vgr-list-column>
+            <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
+            <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
+            <vgr-list-column width="5">{{row.occupation}}</vgr-list-column>
+            <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content [indentContent]="false">
             <vgr-expandable-div *ngFor="let row of row.children" [expanded]="false">
