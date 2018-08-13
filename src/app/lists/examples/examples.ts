@@ -89,17 +89,17 @@ export class Examples {
 
   htmlListWithExpandableDiv = `<vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
   <vgr-list-header>
-    <vgr-list-column-header text="Förnamn" width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
-    <vgr-list-column-header text="Efternamn" width="5" sortKey="lastName"></vgr-list-column-header>
-    <vgr-list-column-header text="Yrke" width="5" sortKey="occupation"></vgr-list-column-header>
-    <vgr-list-column-header text="Inkomst" align="right" width="5" sortKey="income"></vgr-list-column-header>
+    <vgr-list-column-header width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
+    <vgr-list-column-header width="5" sortKey="lastName">Efternamn</vgr-list-column-header>
+    <vgr-list-column-header width="5" sortKey="occupation">Yrke</vgr-list-column-header>
+    <vgr-list-column-header align="right" width="5" sortKey="income">Inkomst</vgr-list-column-header>
   </vgr-list-header>
   <vgr-list-item *ngFor="let row of peopleRowsSimpleList">
     <vgr-list-item-header>
-      <vgr-list-column [text]="row.firstName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.lastName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.occupation" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.income| number:'2.2-2':'sv-SE'" width="5" align="right"></vgr-list-column>
+      <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.occupation}}</vgr-list-column>
+      <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
     </vgr-list-item-header>
     <vgr-list-item-content [indentContent]="false">
       <vgr-expandable-div *ngFor="let row of row.children" [expanded]="false">
@@ -160,18 +160,17 @@ export class Examples {
 
   htmltSimpleListMarkup = ` <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
   <vgr-list-header>
-    <vgr-list-column-header text="Förnamn" width="5" sortKey="firstName"
-     [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
-    <vgr-list-column-header text="Efternamn" width="5" align="left" sortKey="lastName"></vgr-list-column-header>
-    <vgr-list-column-header text="Yrke" width="5" sortKey="occupation"></vgr-list-column-header>
-    <vgr-list-column-header text="Inkomst" align="right" width="5" sortKey="income"></vgr-list-column-header>
+    <vgr-list-column-header width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
+    <vgr-list-column-header width="5" sortKey="lastName">Efternamn</vgr-list-column-header>
+    <vgr-list-column-header width="5" sortKey="occupation">Yrke</vgr-list-column-header>
+    <vgr-list-column-header align="right" width="5" sortKey="income">Inkomst</vgr-list-column-header>
   </vgr-list-header>
   <vgr-list-item *ngFor="let row of peopleRowsSimpleList">
     <vgr-list-item-header>
-      <vgr-list-column [text]="row.firstName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.lastName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.occupation" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.income| number:'2.2-2':'sv-SE'" align="right" width="5"></vgr-list-column>
+      <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.occupation}}</vgr-list-column>
+      <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
     </vgr-list-item-header>
     <vgr-list-item-content>
         <span>Förnamn: {{row.firstName}}</span>
@@ -257,13 +256,13 @@ export class Examples {
   `;
   htmlAdvancedListMarkup = `<vgr-list [flexibleHeader]="true" [allowMultipleExpandedItems]="false" (sortChanged)="onSortChanged($event)">
   <vgr-list-header>
-    <vgr-list-column-header [text]="'Förnamn'" [width]="10" [sortKey]="'firstName'" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
-    <vgr-list-column-header [text]="'Efternamn'" [width]="10" [sortKey]="'lastName'"></vgr-list-column-header>
+    <vgr-list-column-header [width]="10" [sortKey]="'firstName'" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
+    <vgr-list-column-header [width]="10" [sortKey]="'lastName'">Efternamn</vgr-list-column-header>
   </vgr-list-header>
   <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded">
     <vgr-list-item-header>
-      <vgr-list-column [text]="row.previewObject.firstName" [width]="10"></vgr-list-column>
-      <vgr-list-column [text]="row.previewObject.lastName" [width]="10"></vgr-list-column>
+      <vgr-list-column [width]="10">{{row.previewObject.firstName}}</vgr-list-column>
+      <vgr-list-column [width]="10">{{row.previewObject.lastName}}</vgr-list-column>
     </vgr-list-item-header>
     <vgr-list-item-content>
       <vgr-button [secondary]="true" (click)="updateRow(row)">Uppdatera</vgr-button>
@@ -275,17 +274,17 @@ export class Examples {
 
   htmlActionButtonsListMarkup = `<vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
   <vgr-list-header>
-    <vgr-list-column-header text="Förnamn" width="8" sortKey="firstName"></vgr-list-column-header>
-    <vgr-list-column-header text="Efternamn" width="5" sortKey="lastName"></vgr-list-column-header>
-    <vgr-list-column-header text="Årsbelopp" width="3" align="right" sortKey="amount"></vgr-list-column-header>
+    <vgr-list-column-header width="8" sortKey="firstName" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
+    <vgr-list-column-header width="5" sortKey="lastName">Efternamn</vgr-list-column-header>
+    <vgr-list-column-header width="3" sortKey="amount">Årsbelopp</vgr-list-column-header>
     <vgr-list-column-header width="1"></vgr-list-column-header>
     <vgr-list-column-header-checkbox width="3" text="Markera alla" [checked]="allChecked" (checkedChanged)="onSelectAllChanged($event)"></vgr-list-column-header-checkbox>
   </vgr-list-header>
   <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" (deleted)="notifyOnDelete(row)">
     <vgr-list-item-header>
-      <vgr-list-column [text]="row.previewObject.firstName" width="8"></vgr-list-column>
-      <vgr-list-column [text]="row.previewObject.lastName" width="5"></vgr-list-column>
-      <vgr-list-column [text]="row.previewObject.amount | number:'2.2-2':'sv'" width="3" align="right"></vgr-list-column>
+      <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
+      <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
+      <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
       <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (delete)="onDeleteRow(row)" width="1"></vgr-list-column-trashcan>
       <vgr-list-column-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected" (checkedChanged)="onSelectRowChanged(row, $event)"
         width="3"></vgr-list-column-checkbox>
@@ -435,16 +434,16 @@ export class Examples {
 
     `;
 
-    htmlListNotificationMarkup = `
+  htmlListNotificationMarkup = `
       <vgr-list [flexibleHeader]="true" [allowMultipleExpandedItems]="false" [notification]="listNotification">
         <vgr-list-header>
-          <vgr-list-column-header [text]="'Förnamn'" [width]="10" [sortKey]="'firstName'" ></vgr-list-column-header>
-          <vgr-list-column-header [text]="'Efternamn'" [width]="10" [sortKey]="'lastName'"></vgr-list-column-header>
+          <vgr-list-column-header [width]="10" [sortKey]="'firstName'" >Förnamn</vgr-list-column-header>
+          <vgr-list-column-header [width]="10" [sortKey]="'lastName'">Efternamn</vgr-list-column-header>
         </vgr-list-header>
       </vgr-list>
     `;
 
-    typescriptListNotificationMarkup = `
+  typescriptListNotificationMarkup = `
     import { Component, OnInit } from '@angular/core';
     import {
       ExpandableRow, RowNotification, NotificationType, ModalService,
@@ -452,7 +451,7 @@ export class Examples {
     } from 'vgr-komponentkartan';
     import { Examples } from '../examples';
     import { HtmlEncodeService } from '../../../html-encode.service';
-    
+
     @Component({
       selector: 'app-listexample',
       templateUrl: './listexample.component.html',
@@ -464,18 +463,18 @@ export class Examples {
       examples: Examples = new Examples();
       panelNotification: RowNotification;
       listNotification: Notification;
-    
+
       constructor(htmlEncoder: HtmlEncodeService) {
         this.typeScriptAdvancedListMarkup =
           htmlEncoder.prepareHighlightedSection(this.examples.typeScriptAdvancedListMarkup, 'typescript');
         this.htmlAdvancedListMarkup =
           htmlEncoder.prepareHighlightedSection(this.examples.htmlListNotificationMarkup);
-    
+
         this.listNotification = {
           message: 'Här är ett exempel på en list-notifikation. De kan användas om det t.ex. blir något fel när man hämtar datan från servicen.',
           icon: 'vgr-icon-exclamation--red'
         };
-    
+
       }
     }
     `;

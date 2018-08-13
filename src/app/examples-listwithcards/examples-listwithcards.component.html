@@ -177,20 +177,20 @@
     <vgr-page-block>
       <vgr-list (sortChanged)="onSortChanged($event)" [notification]="listNotification">
         <vgr-list-header>
-          <vgr-list-column-header text="Enhet" width="5" sortKey="enhet" [sortDirection]="sortDirections.Ascending"></vgr-list-column-header>
-          <vgr-list-column-header text="HSA-ID" width="5" align="left" sortKey="hsaid"></vgr-list-column-header>
-          <vgr-list-column-header text="Ägare" width="3" sortKey="agare"></vgr-list-column-header>
-          <vgr-list-column-header text="Enhetskod" align="right" width="2" sortKey="enhetskod"></vgr-list-column-header>
-          <vgr-list-column-header text="Nämnd" width="5" sortKey="namnd"></vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="enhet" [sortDirection]="sortDirections.Ascending">Enhet</vgr-list-column-header>
+          <vgr-list-column-header width="5" align="left" sortKey="hsaid">HSA-ID</vgr-list-column-header>
+          <vgr-list-column-header width="3" sortKey="agare">Ägare</vgr-list-column-header>
+          <vgr-list-column-header align="right" width="2" sortKey="enhetskod">Enhetskod</vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="namnd">Nämnd</vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of exampleData | unitfilter:filtertext: includeInactiveUnits" [notification]="row.notification"
           (expandedChanged)="onExpandedChanged($event,row)" (notificationChanged)="removeNotification($event,row)">
           <vgr-list-item-header>
-            <vgr-list-column [text]="row.previewObject.enhet" width="5"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.hsaid" width="5"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.agare" width="3"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.enhetskod" align="right" width="2"></vgr-list-column>
-            <vgr-list-column [text]="row.previewObject.namnd" width="5"></vgr-list-column>
+            <vgr-list-column width="5">{{row.previewObject.enhet}}</vgr-list-column>
+            <vgr-list-column width="5">{{row.previewObject.hsaid}}</vgr-list-column>
+            <vgr-list-column width="3">{{row.previewObject.agare}}</vgr-list-column>
+            <vgr-list-column align="right" width="2">{{row.previewObject.enhetskod}}</vgr-list-column>
+            <vgr-list-column width="5">{{row.previewObject.namnd}}</vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>
             <div *ngIf="row.previewObject.vald">

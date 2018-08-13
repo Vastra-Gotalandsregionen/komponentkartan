@@ -201,12 +201,12 @@ vgr-list.list--new-item-added {
 }
 
 .list__column {
-  span {
+  //span {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     display: block;
-  }
+  //}
   padding-right: $margin--fat;
   &:last-child() {
     padding-right: 0;

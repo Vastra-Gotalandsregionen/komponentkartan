@@ -11,7 +11,7 @@ describe('[ListHeaderComponent]', () => {
     columnHeader1.sortKey = 'column1.key';
     columnHeader1.width = 1;
     columnHeader2 = new ListColumnHeaderComponent();
-    columnHeader2.text = 'column2.text';
+    columnHeader2.sortKey = 'column2.key';
     columnHeader2.width = 2;
     columnHeader3 = new ListColumnHeaderComponent();
     columnHeader3.sortKey = 'column3.key';
@@ -41,8 +41,8 @@ describe('[ListHeaderComponent]', () => {
     beforeEach(() => {
       columnHeader2.sortChanged.emit(SortDirection.Descending);
     });
-    it('a sortchanged event is emitted for that column with text as key', () => {
-      expect(listHeaderComponent.sortChanged.emit).toHaveBeenCalledWith({ key: 'column2.text', direction: SortDirection.Descending });
+    it('a sortchanged event is emitted for that column with sortKey as key', () => {
+      expect(listHeaderComponent.sortChanged.emit).toHaveBeenCalledWith({ key: 'column2.key', direction: SortDirection.Descending });
     });
   });
 });

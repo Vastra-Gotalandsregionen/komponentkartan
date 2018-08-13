@@ -11,7 +11,6 @@ export class ListColumnHeaderComponent {
     return 'list__column-header flex-column ' + this.getColumnWidthClass() + ' ' + this.getAlignClass();
   }
 
-  @Input() text: string;
   @Input() sortDirection: SortDirection;
   @Input() width: number;
   @Input() sortKey: string;
@@ -48,7 +47,7 @@ export class ListColumnHeaderComponent {
     return 'column--align-' + (this.align ? this.align : 'left');
   }
 
-  onClick() {
+  changeSort() {
     if (this.sortDirection === SortDirection.None) {
       this.sortDirection = SortDirection.Ascending;
     } else if (this.sortDirection === SortDirection.Ascending) {

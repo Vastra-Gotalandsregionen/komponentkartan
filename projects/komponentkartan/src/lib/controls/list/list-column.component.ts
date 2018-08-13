@@ -11,7 +11,6 @@ export class ListColumnComponent {
     get classes(): string {
         return 'list__column flex-column ' + this.getColumnWidthClass() + ' ' + this.getAlignClass();
     }
-    @Input() text: string;
     @Input() width: number;
     @Input() align: string;
 
