@@ -22,17 +22,6 @@ export class TableComponent extends ExpandableDivComponent {
 
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
     rowExpanded = false;
-    @HostListener('keydown', ['$event']) toggleRow(event: KeyboardEvent) {
-        if (event.keyCode === 13 || event.keyCode === 32) { // enter & space
-            event.preventDefault();
-            event.stopPropagation();
-            if (!this.rowExpanded) {
-                this.expand();
-            } else {
-                this.collapse();
-            }
-        }
-    }
 
     onExpandedChanged(expanded: boolean) {
         this.rowExpanded = expanded;
