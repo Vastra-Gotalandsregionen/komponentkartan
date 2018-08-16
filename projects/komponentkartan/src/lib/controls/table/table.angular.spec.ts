@@ -69,7 +69,6 @@ describe('[TestTableComponent]', () => {
   describe('When component is initialized with expanded = true', () => {
 
     it('component has class expandable-div', () => {
-      console.log(rootElement.classes);
       expect(rootElement.classes['expandable-div']).toBe(true);
     });
     it('component does not have class expandable-div--collapsed', () => {
@@ -106,14 +105,11 @@ describe('[TestTableComponent]', () => {
       beforeEach(() => {
         spyOn(component.expandedChanged, 'emit').and.callThrough();
 
-        console.log(rootElement.classes);
-
         const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
         const focusedElement = rootElement.children[0];
         Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
         Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
         component.toggleRow(keyEvent);
-        console.log(component._expanded);
         fixture.detectChanges();
       });
 
@@ -138,7 +134,6 @@ describe('[TestTableComponent]', () => {
           Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
           Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
           component.toggleRow(keyEvent);
-          console.log(component._expanded);
           fixture.detectChanges();
         });
 
