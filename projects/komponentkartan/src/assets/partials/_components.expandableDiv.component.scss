@@ -26,3 +26,8 @@
     box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
   }
 }
+
+.expandable-div-header:focus {
+  outline: 0;
+  box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+}
