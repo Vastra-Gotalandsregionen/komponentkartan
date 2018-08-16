@@ -1,4 +1,4 @@
-import { Input, Component, HostBinding, ContentChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Input, Component, HostBinding, HostListener, ContentChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 
 @Component({
@@ -25,10 +25,21 @@ import { trigger, style, transition, animate, state } from '@angular/animations'
 })
 export class ExpandableDivComponent {
     @HostBinding('class.expandable-div--collapsed') collapsed = true;
-    @HostBinding('class.expandable-div--expanded') _expanded: boolean;
+    @HostBinding('class.expandable-div--expanded') _expanded: boolean = false;
     @HostBinding('class.expandable-div') expandableDivClass = true;
-
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    @HostListener('keydown', ['$event']) toggleRow(event: KeyboardEvent) {
+        if (event.keyCode === 13 || event.keyCode === 32) { // enter & space
+            event.preventDefault();
+            event.stopPropagation();
+            if (!this._expanded) {
+                this.expand();
+            } else {
+                this.collapse();
+            }
+        }
+    }
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
