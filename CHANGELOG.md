@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - *Breaking change* vgr-list-column & vgr-list-column-header now renders flexible content insted of a fixed text (and fixed tooltip).
 - Added a polyfill for smooth scrolling in back to top component. (is added in demo-page)
 - Fixed a bug with overflow inside of card-sections. 
-- Added WCAG for cardSection.
+- Added WCAG for cardSection and vgr-table.
 - Fixed spacing between buttons laying next to each other.
 - Added more options for how the header is displayed.
 

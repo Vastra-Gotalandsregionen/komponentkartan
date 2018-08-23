@@ -1,36 +1,3 @@
-<app-component-docs [componentName]="'table'">
-  <div class=" docs__overview ">
-    
-  </div>
-  <div class="docs__examples ">
-    
-  </div>
-  <div class="docs__api ">
-    <!-- API -->
-   
-    <table class="property-table">
-      <tr>
-        <th>Namn</th>
-        <th>Beskrivning</th>
-        <th>Exempel</th>
-      </tr>
-      <tr>
-        <td>expanded: boolean</td>
-        <td>Anger om sektionen är expanderad eller ej</td>
-        <td>[expanded]="true"</td>
-      </tr>
-      <tr>
-        <td>expandedChanged: EventEmitter&lt;boolean&gt;
-        </td>
-        <td>Event som triggras när sektionen expanderas/kollapsas.</td>
-        <td>(expandedChanged)="onExpandedChanged($event)</td>
-      </tr>
-    </table>
-  </div>
-  <div class="docs__wcag ">
-    <i>Under utveckling</i>
-  </div>
-</app-component-docs>
 <vgr-page class="no-sort">
   <vgr-page-header [title]="'Table'">
   </vgr-page-header>
@@ -53,6 +20,121 @@
                 En vgr-table kan även innehålla en vgr-table i sig.
               </p>
               <br>
+              <vgr-table>
+                <vgr-table-header>
+                  <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
+                  <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
+                  <vgr-table-header-column [width]="3" [align]="'right'">Header Column3</vgr-table-header-column>
+                </vgr-table-header>
+                <vgr-table-row tabindex="0">
+                  <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+                  <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                  <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                </vgr-table-row>
+                <vgr-table-row tabindex="0">
+                  <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+                  <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                  <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                </vgr-table-row>
+                <vgr-table>
+                  <vgr-table-header>
+                    <vgr-table-header-column [width]="10">Row Column
+                      <span class="vgr-icon-calendar-border"></span>
+                    </vgr-table-header-column>
+                    <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
+                    <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+                  </vgr-table-header>
+                  <vgr-table-row tabindex="0">
+                    <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+                    <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                    <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                  </vgr-table-row>
+                  <vgr-table-row tabindex="0">
+                    <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+                    <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                    <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                  </vgr-table-row>
+                  <vgr-table>
+                    <vgr-table-header>
+                      <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
+                      <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
+                      <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+                    </vgr-table-header>
+                    <vgr-table-row tabindex="0">
+                      <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+                      <vgr-table-row-column [width]="5"> Donec eu est eros. Suspendisse eget dolor porta, volutpat ligula a, euismod tellus. Quisque posuere nisi
+                        vitae nisi commodo mollis. Vivamus interdum dolor at neque blandit sollicitudin. Pellentesque ac ornare</vgr-table-row-column>
+                      <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                    </vgr-table-row>
+                    <vgr-table-row tabindex="0">
+                      <vgr-table-row-column [width]="10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu ante ac tortor ornare efficitur non a
+                        nisi. Donec turpis sapien, semper a posuere ac, luctus et urna.</vgr-table-row-column>
+                      <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                      <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                    </vgr-table-row>
+                    <vgr-table>
+                      <vgr-table-header>
+                        <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
+                        <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
+                        <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+                      </vgr-table-header>
+                      <vgr-table-row tabindex="0">
+                        <vgr-table-row-column [width]="7">Row Column</vgr-table-row-column>
+                        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                      </vgr-table-row>
+                      <vgr-table-row tabindex="0">
+                        <vgr-table-row-column [width]="7">Row Column</vgr-table-row-column>
+                        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                      </vgr-table-row>
+                      <vgr-table>
+                        <vgr-table-header>
+                          <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
+                          <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
+                          <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+                        </vgr-table-header>
+                        <vgr-table-row tabindex="0">
+                          <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+                          <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                          <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                        </vgr-table-row>
+                        <vgr-table-row tabindex="0">
+                          <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+                          <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                          <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                        </vgr-table-row>
+                        <vgr-table>
+                          <vgr-table-header>
+                            <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
+                            <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
+                            <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+                          </vgr-table-header>
+                          <vgr-table-row tabindex="0">
+                            <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+                            <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                            <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                          </vgr-table-row>
+                        </vgr-table>
+                      </vgr-table>
+                    </vgr-table>
+                  </vgr-table>
+                </vgr-table>
+              </vgr-table>
+              <vgr-table>
+                <vgr-table-header>
+                  <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
+                  <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
+                  <vgr-table-header-column [width]="3" [align]="'right'">Header Column3</vgr-table-header-column>
+                </vgr-table-header>
+                <vgr-table-row tabindex="0">
+                  <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+                  <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                  <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                </vgr-table-row>
+              </vgr-table>
               <p> Förändras med tema:
                 <strong>ja</strong>
               </p>

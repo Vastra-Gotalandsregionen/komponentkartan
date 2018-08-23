@@ -18,9 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @Component({
-  selector: 'test',
+  selector: 'vgr-test-table-component',
   template: `
-    <vgr-table>
+    <vgr-table [expanded]="true">
       <vgr-table-header>
         <vgr-table-header-column>Header Column</vgr-table-header-column>
       </vgr-table-header>
@@ -68,18 +68,14 @@ describe('[TestTableComponent]', () => {
 
   describe('When component is initialized with expanded = true', () => {
 
-    // table class doesnt work
-    // it('component has class table', () => {
-    //   expect(rootElement.parent.classes['table']).toBe(true);
-    // });
     it('component has class expandable-div', () => {
       expect(rootElement.classes['expandable-div']).toBe(true);
     });
-    it('component has class expandable-div--collapsed', () => {
-      expect(rootElement.classes['expandable-div--collapsed']).toBe(true);
+    it('component does not have class expandable-div--collapsed', () => {
+      expect(rootElement.classes['expandable-div--collapsed']).toBe(false);
     });
     it('component does not have class expandable-div--expanded', () => {
-      expect(rootElement.classes['expandable-div--expanded']).toBe(false);
+      expect(rootElement.classes['expandable-div--expanded']).toBe(true);
     });
 
     describe('and table header is clicked', () => {
@@ -91,17 +87,71 @@ describe('[TestTableComponent]', () => {
       });
 
       it('expandedChanged has been called', () => {
-        expect(component.expandedChanged.emit).toHaveBeenCalledWith(true);
+        console.log(rootElement.classes);
+        expect(component.expandedChanged.emit).toHaveBeenCalledWith(false);
       });
       it('component has class expandable-div', () => {
         expect(rootElement.classes['expandable-div']).toBe(true);
       });
       it('component has class expandable-div--collapsed', () => {
-        expect(rootElement.classes['expandable-div--collapsed']).toBe(false);
+        expect(rootElement.classes['expandable-div--collapsed']).toBe(true);
       });
       it('component does not have class expandable-div--expanded', () => {
-        expect(rootElement.classes['expandable-div--expanded']).toBe(true);
+        expect(rootElement.classes['expandable-div--expanded']).toBe(false);
       });
     });
+
+    describe('table is expanded, row is focused and enter is pressed', () => {
+      beforeEach(() => {
+        spyOn(component.expandedChanged, 'emit').and.callThrough();
+
+        const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
+        const focusedElement = rootElement.children[0];
+        Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
+        Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
+        component.toggleRow(keyEvent);
+        fixture.detectChanges();
+      });
+
+      it('expandedChanged has been called', () => {
+        expect(component.expandedChanged.emit).toHaveBeenCalledWith(false);
+      });
+      it('component has class expandable-div', () => {
+        expect(rootElement.classes['expandable-div']).toBe(true);
+      });
+      it('component has class expandable-div--collapsed', () => {
+        expect(rootElement.classes['expandable-div--collapsed']).toBe(true);
+      });
+      it('component does not have class expandable-div--expanded', () => {
+        expect(rootElement.classes['expandable-div--expanded']).toBe(false);
+      });
+
+      describe('table is collapsed, row is focused and enter is space', () => {
+        beforeEach(() => {
+
+          const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
+          const focusedElement = rootElement.children[0];
+          Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
+          Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
+          component.toggleRow(keyEvent);
+          fixture.detectChanges();
+        });
+
+        it('expandedChanged has been called', () => {
+          expect(component.expandedChanged.emit).toHaveBeenCalledWith(false);
+        });
+        it('component has class expandable-div', () => {
+          expect(rootElement.classes['expandable-div']).toBe(true);
+        });
+        it('component does not have class expandable-div--collapsed', () => {
+          expect(rootElement.classes['expandable-div--collapsed']).toBe(false);
+        });
+        it('component has class expandable-div--expanded', () => {
+          expect(rootElement.classes['expandable-div--expanded']).toBe(true);
+        });
+      });
+
+    });
+
   });
 });
