@@ -71,3 +71,16 @@ code {
     padding-left: 1em;
   }
 }
+
+.header--inline {
+  .header {
+    position: relative;
+    z-index: auto;
+  }
+}
+
+.custom-logo {
+  background-image: url('https://www.quickdata.ae/wp-content/uploads/Quickdata-Network-Logo.png');
+  width: 250px;
+  height: 50px;
+}

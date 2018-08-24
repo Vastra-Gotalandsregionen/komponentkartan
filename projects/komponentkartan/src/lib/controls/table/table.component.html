@@ -3,7 +3,7 @@
     <ng-content select="vgr-table-header"></ng-content>
   </vgr-expandable-div-header>
   <vgr-expandable-div-content class="table-body" [@toggleExpandedState] *ngIf="rowExpanded">
-      <ng-content select="vgr-table-row"></ng-content>
+    <ng-content select="vgr-table-row"></ng-content>
     <ng-content select="vgr-table"></ng-content>
   </vgr-expandable-div-content>
 </vgr-expandable-div>

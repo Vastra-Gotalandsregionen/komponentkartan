@@ -1,63 +1,44 @@
-import { Component, Input, ViewChild, HostBinding, OnInit} from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { IHeaderMenu } from '../../models/headerMenu.model';
 import { HeaderMenuComponent } from '../headerMenu/headerMenu.component';
 
 @Component({
-    selector: 'vgr-header',
-    templateUrl: './header.component.html'
+  selector: 'vgr-header',
+  templateUrl: './header.component.html'
 })
 
-export class HeaderComponent implements OnInit {
-    systemColor: string;
-    @Input() headerMenu: IHeaderMenu;
-    @Input() userName: string;
-    @Input() initials: string;
-    @Input() systemText: string;
-    @Input() textColor: string;
-    @Input() circleColor: string;
-    @Input() @HostBinding('class.hide-swosh') hideSwosh = false;
-    @Input() logoImage: string;
-    logoImageString: string;
-    customLogo = false;
+export class HeaderComponent {
+  @Input() headerMenu: IHeaderMenu;
+  @Input() userName: string;
+  @Input() initials: string;
+  @Input() systemText: string;
+  @Input() textColor: string;
+  @Input() circleColor: string;
+  @Input() hideSwosh = false;
+  @Input() logoClass: string;
+  defaultInitials: string;
+  @ViewChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
 
-    @ViewChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
-
-    constructor() {
-        this.systemColor = 'neutral';
+  setInitials(): string {
+    if (!this.initials) {
+      const names = this.userName.split(' ');
+      if (names.length > 1) {
+        this.initials = names[0].substring(0, 1) + names[names.length - 1].substring(0, 1);
+      } else {
+        this.initials = names[0].substring(0, 1);
+      }
     }
 
-    ngOnInit() {
-        if (this.logoImage) {
-            this.logoImageString = `url(${this.logoImage})`;
-            this.customLogo = true;
-        }
-    }
+    return this.initials;
+  }
 
-    setInitials(): string {
-        if (this.initials) {
-            return this.initials;
-        } else {
-            return this.initials = this.getInitials(this.userName);
-        }
-    }
+  clickToggleHeaderMenu(event: Event) {
+    this.headerMenuComponent.toggleHeaderMenu(event);
+  }
 
-    getInitials(username: string) {
-        const name = username.split(' ');
-        let initials = name[0].substring(0, 1).toUpperCase();
-
-        if (name.length > 1) {
-            initials += name[name.length - 1].substring(0, 1).toUpperCase();
-        }
-        return initials;
+  keyToggleHeaderMenu(event: KeyboardEvent) {
+    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+      this.headerMenuComponent.toggleHeaderMenu(event);
     }
-
-    toggleHeaderMenu(event: Event): void {
-        this.headerMenuComponent.toggleHeaderMenu(event);
-    }
-
-    keyDown(event: KeyboardEvent): void {
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            this.headerMenuComponent.toggleHeaderMenu(event);
-        }
-    }
+  }
 }
