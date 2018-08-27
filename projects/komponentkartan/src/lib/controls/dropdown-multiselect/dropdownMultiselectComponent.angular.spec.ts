@@ -278,7 +278,7 @@ describe("[DropdownMultiSelectComponent]", () => {
       describe("and select all is clicked", () => {
         beforeEach(() => {
           let selectAllItem = rootElement.query(By.css('.dropdown-item--select-all'));
-          let selectAllCheckbox = selectAllItem.query(By.css('.checkbox--inline')).query(By.css('.checkbox'));
+          let selectAllCheckbox = selectAllItem.query(By.css('.checkbox'));
           let selectAllLink = selectAllItem.query(By.css('a'));
           selectAllLink.triggerEventHandler("mousedown", { target: selectAllLink.nativeElement } as MouseEvent);
           dropdownElement.triggerEventHandler("mousedown", { target: dropdownElement.nativeElement } as MouseEvent);
@@ -296,7 +296,7 @@ describe("[DropdownMultiSelectComponent]", () => {
       describe("and select all is clicked", () => {
         beforeEach(() => {
           let selectAllItem = rootElement.query(By.css('.dropdown-item--select-all'));
-          let selectAllCheckbox = selectAllItem.query(By.css('.checkbox--inline')).query(By.css('.checkbox'));
+          let selectAllCheckbox = selectAllItem.query(By.css('.checkbox'));
           let selectAllLink = selectAllItem.query(By.css('a'));
           selectAllLink.triggerEventHandler("mousedown", { target: selectAllLink.nativeElement } as MouseEvent);
           dropdownElement.triggerEventHandler("mousedown", { target: dropdownElement.nativeElement } as MouseEvent);

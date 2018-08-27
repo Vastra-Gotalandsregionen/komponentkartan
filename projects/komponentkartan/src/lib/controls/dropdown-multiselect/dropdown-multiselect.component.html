@@ -14,7 +14,7 @@
             (focusin)="selectAllItemsMarked=true" (focusout)="selectAllItemsMarked=false" (keydown)="openDropdownSelectAllItemKeyEvent($event)">
             <!-- om listan inte är filtrerad -->
             <a (mousedown)="onItemClicked(null)" title="{{selectAllItemText}}" (mouseenter)="selectAllItemsMarked=true" (mouseleave)="selectAllItemsMarked=false">
-              <vgr-checkbox class="checkbox--inline" [checked]="selectAllItemsChecked" (checkedChanged)="selectAllItems($event)" [label]="selectAllItemText"></vgr-checkbox>
+              <vgr-checkbox [checked]="selectAllItemsChecked" (checkedChanged)="selectAllItems($event)" [label]="selectAllItemText"></vgr-checkbox>
             </a>
           </li>
 
@@ -29,7 +29,7 @@
             [ngClass]="{ 'dropdown-item--marked' : item.marked, 'dropdown-item--selected' : item.selected }" (focusin)="markItem(item)"
             (focusout)="unMarkItem(item)" role="option" tabindex="0" (keydown)="keyDownDropdownItem($event, item)" [attr.aria-checked]="item.selected">
             <a title={{item.displayName}} (mousedown)="onItemClicked(item)" (mouseenter)="item.marked=true" (mouseleave)="item.marked=false">
-              <vgr-checkbox class="checkbox--inline" [checked]="item.selected" (checkedChanged)="onItemCheckChanged(item)" [label]="item.displayName"></vgr-checkbox>
+              <vgr-checkbox [checked]="item.selected" (checkedChanged)="onItemCheckChanged(item)" [label]="item.displayName"></vgr-checkbox>
             </a>
           </li>
         </ul>
