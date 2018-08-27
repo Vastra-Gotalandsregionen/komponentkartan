@@ -1,40 +1,28 @@
 .page-header {
-  background-color: white;
   position: fixed;
-  top: $content-header-offset;
-  margin-top: 0 !important;
   z-index: $layer-page-header;
+  top: $header-height;
+  width: $content-width--small;
   border-bottom: $margin--slim solid $background-color--default;
   border-top: $margin--fat solid $background-color--default;
-  border-left: $margin--fat solid $background-color--default;
-  border-right: $margin--fat solid $background-color--default;
-  width: calc(#{$content-width--small} + #{$margin--fat} + #{$margin--fat});
   padding: $margin--slim;
-  margin-top: $margin--fat;
-}
-
-.page-header__title {
-  float: right;
-  margin-left: auto;
-  h1 {
-    font-size: 25px;
-    text-transform: uppercase;
-    text-align: right;
+  background-color: white;
+  .page-header__title {
+    float: right;
+    margin-left: auto;
+    h1 {
+      font-size: 25px;
+      text-transform: uppercase;
+      text-align: right;
+    }
   }
 }
+
 
 @media screen and (min-width: $desktop-width--medium) {
   .page-header {
-    width: calc(#{$content-width--medium} + #{$margin--fat} + #{$margin--fat});
+    width: $content-width--medium;
     padding-left: $margin--fat;
     padding-right: $margin--fat;
-  }
-}
-
-@media screen and (max-width: $desktop-width--small - 1) {
-  .page-header {
-    position: absolute;
-    top: 0px;
-    z-index: $layer-one;
   }
 }

@@ -1,32 +1,18 @@
 .page {
     position: relative;
-    top: $content-header-offset;
+    top: $header-height;
     left: $nav-width--small;
-    width: $content-width--small;
+    width: $content-width--small + $margin--fat;
+    padding-left: $margin--fat;
     .page__page-body-container {
         position: relative;
-    }
-}
-
-.page-body {
-    margin-left: $margin--fat;
-}
-
-.page-block {
-    padding: $margin--slim;
-    background-color: white;
-    display: block;
-    width: $content-width--small;
-    margin-bottom: $margin--slim;
-    &.page-block--transparent {
-      background-color: transparent;
     }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
     .page {
         left: $nav-width--medium;
-        width: $content-width--medium;
+        width: $content-width--medium + $margin--fat;
     }
     .page-block {
         padding: $margin--fat;
