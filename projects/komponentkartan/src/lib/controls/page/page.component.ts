@@ -1,5 +1,5 @@
 import { Component, AfterContentInit, AfterViewInit, AfterViewChecked, ContentChild, HostListener, ElementRef } from '@angular/core';
-import { PageHeaderComponent } from '../pageHeader/pageHeader.component';
+import { PageHeaderComponent } from '../page-header/page-header.component';
 
 @Component({
   selector: 'vgr-page',

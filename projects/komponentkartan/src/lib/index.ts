@@ -38,7 +38,7 @@ export { SubmenuComponent } from './controls/menu/submenu.component';
 export { PanelComponent } from './controls/panel/panel.component';
 export { PanelContainerComponent } from './controls/panel/panel-container.component';
 export { PageComponent } from './controls/page/page.component';
-export { PageHeaderComponent } from './controls/pageHeader/pageHeader.component';
+export { PageHeaderComponent } from './controls/page-header/page-header.component';
 export { PageBodyComponent } from './controls/page-body/page-body.component';
 export { PageBlockComponent } from './controls/page-block/page-block.component';
 export { ListItemContentComponent } from './controls/list-item/list-item-content.component';

@@ -2,7 +2,7 @@ import { Component, Input, ViewChild, AfterViewChecked, ElementRef } from '@angu
 
 @Component({
   selector: 'vgr-page-header',
-  templateUrl: './pageHeader.component.html'
+  templateUrl: './page-header.component.html'
 })
 export class PageHeaderComponent implements AfterViewChecked {
   @Input() title: string;
