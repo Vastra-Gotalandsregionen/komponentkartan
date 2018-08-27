@@ -1,6 +1,6 @@
 //A list of expandable containers
 .list {
-  position: relative;
+  position: static;
   display: block;
   background-color: $background-color--default;
   .list-item {
@@ -8,10 +8,10 @@
   }
   .page-block & {
     margin: -$margin--slim;
-    &.list--inline {
-      margin-top: -$margin--slim;
-      margin-bottom: -$margin--slim;
-    }
+    // &.list--inline {
+    //   margin-top: -$margin--slim;
+    //   margin-bottom: -$margin--slim;
+    // }
   }
 }
 
@@ -51,7 +51,7 @@ vgr-list.list--new-item-added {
 .list__header {
   background-color: $background-color--content;
   z-index: $layer-one;
-  position: fixed;
+  position: static;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -66,14 +66,14 @@ vgr-list.list--new-item-added {
   width: calc(#{$content-width--small} + #{$margin--slim} + #{$margin--slim}); //The borders cover the scrolling shadows from below
   border-right: $margin--slim solid $background-color--default;
   border-left: $margin--slim solid $background-color--default;
-  .list--inline & {
-    position: relative;
-    border-bottom: none;
-  }
-  .list--actions-visible & {
-    position: relative;
-    border-bottom: none;
-  }
+  // .list--inline & {
+  //   position: relative;
+  //   border-bottom: none;
+  // }
+  // .list--actions-visible & {
+  //   position: relative;
+  //   border-bottom: none;
+  // }
   &:after {
     content: "";
     margin-left: auto;
@@ -83,25 +83,25 @@ vgr-list.list--new-item-added {
 }
 
 .list__items {
-  position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
-  &:before {
-    content: "";
-    width: $content-width--small;
-    height: 35px;
-    display: block;
-  }
-  .list--actions-visible & {
-    &:before {
-      height: 0px;
-      display: none;
-    }
-  }
-  .list--inline & {
-    &:before {
-      height: 0px;
-      display: none;
-    }
-  }
+  position: static; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
+  // &:before {
+  //   content: "";
+  //   width: $content-width--small;
+  //   height: 35px;
+  //   display: block;
+  // }
+  // .list--actions-visible & {
+  //   &:before {
+  //     height: 0px;
+  //     display: none;
+  //   }
+  // }
+  // .list--inline & {
+  //   &:before {
+  //     height: 0px;
+  //     display: none;
+  //   }
+  // }
   .list-item:last-child() {
     &.list-item--expanded {
       margin-bottom: 0;
@@ -157,7 +157,7 @@ vgr-list.list--new-item-added {
     }
   } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
   &.list-item--collapsed:not(.list-item--compact):hover {
-    position: relative;
+    position: static;
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
   }
   &.list-item--deleted {
@@ -340,10 +340,10 @@ vgr-list.list--new-item-added {
   .list {
     .page-block & {
       margin: -$margin--fat;
-      &.list--inline {
-        margin-top: -$margin--fat;
-        margin-bottom: -$margin--fat;
-      }
+      // &.list--inline {
+      //   margin-top: -$margin--fat;
+      //   margin-bottom: -$margin--fat;
+      // }
     }
   }
   .list__header {
@@ -466,10 +466,10 @@ vgr-list-column-trashcan {
 }
 
 @media screen and (max-width: $desktop-width--small - 1) {
-  .list__header {
-    position: absolute;
-    top: 0px;
-  }
+  // .list__header {
+  //   position: absolute;
+  //   top: 0px;
+  // }
   vgr-list.list--new-item-added {
     vgr-list-header {
       transform: translateY(84px);
