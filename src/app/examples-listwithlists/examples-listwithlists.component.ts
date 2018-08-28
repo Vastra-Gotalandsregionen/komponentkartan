@@ -29,10 +29,6 @@ export class ExamplesListwithlistsComponent {
     this.items = Array(3).fill(0).map((x, i) => i);
   }
 
-  ngOnInit() {
-    // this.searchForUnits();
-  }
-
   get allChecked() {
     if (this.listData.length === 0 || this.listData.every(r => r.previewObject.deleted)) {
       return false;
