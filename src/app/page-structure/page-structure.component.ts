@@ -14,12 +14,6 @@ export class PageStructureComponent implements OnInit {
     <vgr-page-header>
       <!-- Lägg innehåll i header här -->
     </vgr-page-header>
-    <vgr-action-panel [expanded]="actionPanelVisible">
-      <!--
-          Om sidan skall ha en action-panel, som kan öppnas från header, definiera dess innehåll här.
-          Öppna genom att sätta expanded = true
-      -->
-    </vgr-action-panel>
     <vgr-page-body>
       <!--Detta är en container för sidans olika block -->
       <vgr-page-block>

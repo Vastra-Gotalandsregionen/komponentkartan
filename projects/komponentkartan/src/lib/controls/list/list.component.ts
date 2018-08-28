@@ -32,7 +32,7 @@ export class ListComponent implements AfterContentInit {
     @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
 
-    loaded: boolean = false;
+    loaded = false;
 
     constructor() {
     }
