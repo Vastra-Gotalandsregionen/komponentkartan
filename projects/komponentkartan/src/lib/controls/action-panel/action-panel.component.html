@@ -1,14 +1,9 @@
-<div class="action-panel__header">
-  <h3 class="action-panel__title">{{title ? title : ''}}</h3>
-  <vgr-close-button *ngIf="showCloseButton" [@enterAnimation] class="action-panel__close" (click)="expanded=false"></vgr-close-button>
-</div>
-<div *ngIf="notification" class="action-panel__notification">
-  <span class="action-panel__notification__icon" [ngClass]="notification.icon">
-  </span>
-  <div class="action-panel__notification__message">
-    {{notification? notification.message : ''}}
+<div class="action-panel" [ngClass]="{ 'action-panel--collapsed': collapsed, 'action-panel--expanded': expanded }">
+  <div class="action-panel__header">
+    <h3 class="action-panel__title">{{title}}</h3>
+    <vgr-close-button *ngIf="showCloseButton" [@enterAnimation] class="action-panel__close" (click)="expanded = false"></vgr-close-button>
   </div>
-</div>
-<div class="action-panel__content">
-  <ng-content></ng-content>
+  <div class="action-panel__content">
+    <ng-content></ng-content>
+  </div>
 </div>
