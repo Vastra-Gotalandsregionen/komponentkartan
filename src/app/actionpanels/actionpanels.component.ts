@@ -10,7 +10,7 @@ import { HtmlEncodeService } from '../html-encode.service';
 export class ActionPanelsComponent {
 
   expanded1 = false;
-  expanded2 = false;
+  expanded2 = true;
 
   exampleCode = `
   <vgr-action-panel [showCloseButton]="true" (expandedChanged)="expanded=$event" [expanded]="expanded"

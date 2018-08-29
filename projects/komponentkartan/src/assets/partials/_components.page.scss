@@ -2,20 +2,16 @@
     position: relative;
     top: $header-height;
     left: $nav-width--small;
-    width: $content-width--small + $margin--fat;
-    padding-left: $margin--fat;
+    width: $content-width--small + 48px;
     .page__page-body-container {
         position: relative;
+        padding-left: $margin--fat;
     }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
     .page {
         left: $nav-width--medium;
-        width: $content-width--medium + $margin--fat;
-    }
-    .page-block {
-        padding: $margin--fat;
-        width: $content-width--medium;
+        width: $content-width--medium + 44px;
     }
 }

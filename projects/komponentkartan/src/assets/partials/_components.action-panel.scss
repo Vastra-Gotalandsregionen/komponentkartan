@@ -1,118 +1,36 @@
 .action-panel {
   background-color: white;
-  box-shadow: none;
   width: $content-width--small;
-  // display: block;
-  height: 0px;
-  visibility: hidden;
+  padding: 0;
   overflow: hidden;
-  transition: height 0.6s ease, box-shadow 0.6s ease, opacity 0.6s ease, visibility 0s linear 1s;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: $margin--slim;
-  padding-right: $margin--slim;
-  &.action-panel--expanded {
-    box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-    margin-bottom: 14px;
-    visibility: visible;
-    transition: height 0.6s ease, box-shadow 0.6s ease, opacity 0.6s ease;
-  }
-  &.action-panel--collapsed:hover {
-    position: relative;
-    box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-  }
-  &.action-panel--slow {
-    transition: height 1s ease, box-shadow 1s ease, opacity 1s ease;
-  }
-  &.action-panel--fast {
-    transition: height 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-  }
-  &.action-panel--noanimation {
-    transition:none;
-  }
-}
-
-.action-panel__header {
-  display: flex; 
-  justify-content: space-between;
-  margin-left: -$margin--slim;
-  margin-right: -$margin--slim;
-  height: 30px;
-  border-bottom: 1px solid #99a3ad;
-  .action-panel__title {
+ .action-panel__header {
+    display: flex; 
+    justify-content: space-between;
     padding-left: $margin--slim;
+    padding-top: $margin--slim;
+    padding-bottom: $margin--slim;
     padding-right: $margin--slim;
-    font-weight: bold;
+    border-bottom: 1px solid #99a3ad;
+    .action-panel__title {
+      font-weight: bold;
+    }
   }
-  .action-panel__close {
-    margin-top: 5px;
-    margin-right: $margin--slim;
+  .action-panel__content {
+    padding: $margin--slim;
   }
 }
-
-.action-panel__content {
-  padding-top: $margin--slim;
-  padding-bottom: $margin--slim;
-}
-
-// .action-panel__notification {
-//   opacity: 0;
-//   max-height: 0px;
-//   padding-top: 0px;
-//   padding-bottom: 0px;
-//   padding-left: $margin--slim;
-//   padding-right: $margin--slim;
-//   border-spacing: 10px;
-//   transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
-//   transition-delay: 0s, 0.2s, 0.2s, 0.2s;
-//   .action-panel--notification-visible & {
-//     opacity: 1;
-//     max-height: 40px;
-//     padding-top: $margin--xs-slim;
-//     padding-bottom: $margin--xs-slim;
-//     transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
-//     transition-delay: 0.2s, 0s, 0s, 0s;
-//   }
-//   display: flex;
-//   align-items: center;
-//   flex-direction: row;
-//   cursor: pointer;
-// }
-
-// .action-panel__notification__icon {
-//   width: 30px;
-//   height: 30px;
-//   display: inline-block;
-//   margin-right: 6px;
-// }
 
 @media screen and (min-width: $desktop-width--medium) {
   .action-panel {
     width: $content-width--medium;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: $margin--fat;
-    padding-right: $margin--fat;
-  }
-
-  .action-panel__header {
-    margin-left: -$margin--fat;
-    margin-right: -$margin--fat;
-    height: 35px;
-    .action-panel__title {
+    .action-panel__header {
       padding-left: $margin--fat;
-      padding-right: $margin--fat;
+      padding-top: 5px;
+      padding-bottom: 0;
+      padding-right: 10px;
+    }
+    .action-panel__content {
+      padding: $margin--fat;
     }
   }
-
-  .action-panel__content {
-    padding-top: $margin--fat;
-    padding-bottom: $margin--fat;
-  }
-
-  // .action-panel__notification {
-  //   padding-left: 20px;
-  //   padding-right: 20px;
-  //   border-spacing: 10px;
-  // }
 }

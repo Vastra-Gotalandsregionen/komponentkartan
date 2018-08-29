@@ -1,8 +1,7 @@
 <vgr-page class="no-sort">
-  <vgr-page-header title="Action panel">
-  </vgr-page-header>
+  <vgr-page-header title="Action panel"></vgr-page-header>
   <vgr-page-body>
-    <vgr-action-panel [expansionSpeed]="'slow'" [showCloseButton]="true" (expandedChanged)="expanded1=$event" [expanded]="expanded1" [title]="'Ett exempel på en action panel'">
+    <vgr-action-panel [expanded]="expanded1" [title]="'Ett exempel på en action panel'">
       <vgr-button>En knapp</vgr-button>
       <p>Lite text...</p>
       <vgr-datepicker></vgr-datepicker>
@@ -89,7 +88,7 @@
         </vgr-list-item>
       </vgr-list>
     </vgr-page-block>
-    <vgr-action-panel [expansionSpeed]="'fast'" [showCloseButton]="true" (expandedChanged)="expanded2=$event" [expanded]="expanded2" [title]="'Ett exempel till ....'">
+    <vgr-action-panel [expanded]="expanded2" [title]="'Ett exempel till ....'">
       <vgr-button>En knapp</vgr-button>
       <p>Lite text...</p>
       <vgr-datepicker></vgr-datepicker>

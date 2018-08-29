@@ -1,94 +1,63 @@
-import { Component, HostBinding, Input, Output, EventEmitter, ElementRef } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { Component, HostBinding, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { trigger, style, animate, transition, state } from '@angular/animations';
 
 @Component({
   templateUrl: './action-panel.component.html',
   selector: 'vgr-action-panel',
   animations: [
-    trigger(
-      'enterAnimation', [
-        transition(':enter', [
-          style({ opacity: 0 }),
-          animate('400ms', style({ opacity: 1 }))
-        ]),
-        transition(':leave', [
-          style({ opacity: 1 }),
-          animate('400ms', style({ opacity: 0 }))
-        ])
-      ]
-    )
+    trigger('slide', [
+      state('closed', style({
+        height: 0,
+        marginBottom: 0
+      })),
+      state('open', style({
+        height: '*',
+        marginBottom: '14px',
+        boxShadow: '3px 3px 9px 0 rgba(0, 0, 0, 0.5)'
+      })),
+      transition('closed <=> open', animate('600ms ease'))
+    ]),
+    trigger('fade', [
+      state('out', style({
+        opacity: 0
+      })),
+      state('in', style({
+        opacity: 1
+      })),
+      transition('out <=> in', animate('600ms ease'))
+    ])
   ]
 })
-export class ActionPanelComponent {
+export class ActionPanelComponent implements OnChanges {
 
   @Input() title: string;
+  @Input() expanded = false;
   @Input() showCloseButton = true;
-  @Input() expansionSpeed: 'slow' | 'normal' | 'fast' | 'noanimation';
-  @Input() set expanded(value: boolean) {
-    if (value && !this._expanded) {
-      this.expand();
-    } else if (!value && this._expanded) {
-      this.collapse();
-    }
-  }
-  get expanded(): boolean {
-    return this._expanded;
-  }
-  readonly showNotificationDurationMs = 1500;
-  collapsed = true;
-  private pageHeaderHeight = 0;
-  private _expanded: boolean;
-
-  get animationDelayMs(): number {
-    if (this.expansionSpeed === 'slow') {
-      return 1000;
-    } else if (this.expansionSpeed === 'fast') {
-      return 300;
-    } else if (this.expansionSpeed === 'noanimation') {
-      return 0;
-    } else {
-      return 600;
-    }
-  }
-
-  @HostBinding('class.action-panel--slow') get slow() {
-    return this.expansionSpeed === 'slow';
-  }
-  @HostBinding('class.action-panel--fast') get fast() {
-    return this.expansionSpeed === 'fast';
-  }
-  @HostBinding('class.action-panel--noanimation') get noanimation() {
-    return this.expansionSpeed === 'noanimation';
-  }
-
   @Output() expandedChanged = new EventEmitter<boolean>();
+  @ViewChild('actionPanel') actionPanelElement;
+  slideState = 'closed';
+  fadeState = 'out';
 
-  constructor(private elementRef: ElementRef) { }
-
-  public setPageHeaderHeight(height: number) {
-    this.pageHeaderHeight = height;
-    this.elementRef.nativeElement.children[0].style.top = height + 'px';
+  ngOnChanges(changes: SimpleChanges) {
+    const expandedChange = changes['expanded'];
+    if (expandedChange) {
+      if (expandedChange.currentValue) {
+        this.expand();
+      } else {
+        this.collapse();
+      }
+    }
   }
 
   private expand() {
-    this.elementRef.nativeElement.children[0].style.height = this.elementRef.nativeElement.children[0].scrollHeight + 'px';
-    this._expanded = true;
-    this.collapsed = false;
-    this.expandedChanged.emit(this.expanded);
-    setTimeout(() => {
-      this.elementRef.nativeElement.children[0].style.height = 'auto';
-      this.elementRef.nativeElement.children[0].style.overflow = 'visible';
-    }, this.animationDelayMs);
+    this.slideState = 'open';
+    this.fadeState = 'in';
+    this.expandedChanged.emit(true);
   }
 
   private collapse() {
-    this.elementRef.nativeElement.children[0].style.height = this.elementRef.nativeElement.children[0].scrollHeight + 'px';
-    this._expanded = false;
-    this.collapsed = true;
+    this.slideState = 'closed';
+    this.fadeState = 'out';
     this.expandedChanged.emit(false);
-    setTimeout(() => {
-      this.elementRef.nativeElement.children[0].style.height = '0px';
-      this.elementRef.nativeElement.children[0].style.overflow = 'hidden';
-    }, 50);
   }
 }

@@ -1,9 +1,11 @@
-<div class="action-panel" [ngClass]="{ 'action-panel--collapsed': collapsed, 'action-panel--expanded': expanded }">
-  <div class="action-panel__header">
-    <h3 class="action-panel__title">{{title}}</h3>
-    <vgr-close-button *ngIf="showCloseButton" [@enterAnimation] class="action-panel__close" (click)="expanded = false"></vgr-close-button>
-  </div>
-  <div class="action-panel__content">
-    <ng-content></ng-content>
+<div #actionPanel class="action-panel" [@slide]="slideState">
+  <div [@fade]="fadeState">
+    <div class="action-panel__header">
+      <h3 class="action-panel__title">{{title}}</h3>
+      <vgr-close-button *ngIf="showCloseButton" class="action-panel__close-button" (click)="expanded = false"></vgr-close-button>
+    </div>
+    <div class="action-panel__content">
+      <ng-content></ng-content>
+    </div>
   </div>
 </div>
