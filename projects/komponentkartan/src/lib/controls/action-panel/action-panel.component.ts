@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { trigger, style, animate, transition, state } from '@angular/animations';
+import { trigger, style, animate, transition, state, query, animateChild, group } from '@angular/animations';
 
 @Component({
   templateUrl: './action-panel.component.html',
@@ -8,23 +8,27 @@ import { trigger, style, animate, transition, state } from '@angular/animations'
     trigger('slide', [
       state('closed', style({
         height: 0,
-        marginBottom: 0
+        marginBottom: 0,
+        boxShadow: '3px 3px 9px 0 rgba(0, 0, 0, 0)'
       })),
       state('open', style({
         height: '*',
         marginBottom: '14px',
         boxShadow: '3px 3px 9px 0 rgba(0, 0, 0, 0.5)'
       })),
-      transition('closed <=> open', animate('600ms ease'))
+      transition('closed <=> open', group([
+        query('@fade', animateChild()),
+        animate('600ms ease')
+      ]))
     ]),
     trigger('fade', [
-      state('out', style({
+      state('closed', style({
         opacity: 0
       })),
-      state('in', style({
+      state('open', style({
         opacity: 1
       })),
-      transition('out <=> in', animate('600ms ease'))
+      transition('closed <=> open', animate('600ms ease'))
     ])
   ]
 })
@@ -35,29 +39,18 @@ export class ActionPanelComponent implements OnChanges {
   @Input() showCloseButton = true;
   @Output() expandedChanged = new EventEmitter<boolean>();
   @ViewChild('actionPanel') actionPanelElement;
-  slideState = 'closed';
-  fadeState = 'out';
+  state = 'closed';
 
   ngOnChanges(changes: SimpleChanges) {
     const expandedChange = changes['expanded'];
     if (expandedChange) {
       if (expandedChange.currentValue) {
-        this.expand();
+        this.state = 'open';
+        this.expandedChanged.emit(true);
       } else {
-        this.collapse();
+        this.state = 'closed';
+        this.expandedChanged.emit(false);
       }
     }
-  }
-
-  private expand() {
-    this.slideState = 'open';
-    this.fadeState = 'in';
-    this.expandedChanged.emit(true);
-  }
-
-  private collapse() {
-    this.slideState = 'closed';
-    this.fadeState = 'out';
-    this.expandedChanged.emit(false);
   }
 }

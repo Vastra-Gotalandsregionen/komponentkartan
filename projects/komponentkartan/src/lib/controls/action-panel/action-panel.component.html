@@ -1,5 +1,5 @@
-<div #actionPanel class="action-panel" [@slide]="slideState">
-  <div [@fade]="fadeState">
+<div #actionPanel class="action-panel" [@slide]="state">
+  <div [@fade]="state">
     <div class="action-panel__header">
       <h3 class="action-panel__title">{{title}}</h3>
       <vgr-close-button *ngIf="showCloseButton" class="action-panel__close-button" (click)="expanded = false"></vgr-close-button>
