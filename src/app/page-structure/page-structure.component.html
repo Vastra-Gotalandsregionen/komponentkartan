@@ -10,23 +10,30 @@
         <a href="./menu">meny</a>, en
         <a href="./headers">header</a> och ett antal sidor.
       </p>
+      <br>
+      <h2>Struktur</h2>
       <ul>
-        <h3>Obligatoriska element</h3>
         <li>
           <strong>vgr-page</strong> är rotelement, som rymmer hela sidans innehåll.
         </li>
         <li>
-          <strong>vgr-page-header</strong> är sidans header
+          <strong>vgr-page-header</strong> är sidans header.
         </li>
         <li>
-          <strong>vgr-page-body</strong> är en container för sidans block
+          <strong>vgr-page-body</strong> är en container för sidans block.
         </li>
-        <li>
-          <strong>vgr-page-block</strong> definierar sidans block. En sida kan innehålla ett eller flera block, som placeras under
-          varandra.
-        </li>
-        <br>        
       </ul>
+      <br>
+      <p>Body består vidare av ett antal block och action panels.</p>
+      <ul>
+        <li>
+          <strong>vgr-page-block</strong> definierar sidans block. En sida kan innehålla ett eller flera block.
+        </li>
+        <li>
+          <strong>vgr-action-panel</strong> definierar ett block som kan döljas. En sida kan innehålla en eller flera action panels.
+        </li>
+      </ul>
+      <br>
       <h2>Exempel</h2>
       <section [innerHTML]="samplePageStructure" highlight-js-content=".highlight">
       </section>

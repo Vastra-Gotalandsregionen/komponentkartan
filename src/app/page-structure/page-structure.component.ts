@@ -19,11 +19,11 @@ export class PageStructureComponent implements OnInit {
       <vgr-page-block>
         <!--Sidans första block-->
       </vgr-page-block>
+      <vgr-action-panel>
+        <!--Sidans första action panel-->
+      </vgr-action-panel>
       <vgr-page-block>
         <!--Sidans andra block-->
-      </vgr-page-block>
-      <vgr-page-block>
-        <!--Sidans n:te block -->
       </vgr-page-block>
     </vgr-page-body>
   </vgr-page>`;

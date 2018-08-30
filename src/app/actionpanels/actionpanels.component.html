@@ -1,7 +1,7 @@
 <vgr-page class="no-sort">
   <vgr-page-header title="Action panel"></vgr-page-header>
   <vgr-page-body>
-    <vgr-action-panel [expanded]="expanded1" [title]="'Ett exempel på en action panel'" (expandedChanged)="expanded1=$event">
+    <vgr-action-panel [expanded]="expanded" [title]="'Ett exempel på en action panel'" (expandedChanged)="expanded = $event">
       <vgr-button>En knapp</vgr-button>
       <p>Lite text ...</p>
       <vgr-datepicker></vgr-datepicker>
@@ -18,18 +18,15 @@
           <vgr-list-item-content>
             <div class="content-overview">
               <p>
-                <code>&lt;vgr-action-panel&gt;</code> visas alltid på en fixed position på sidan. För mer information, se
+                <code>&lt;vgr-action-panel&gt;</code> är en panel som kan öppnas och stängas. För mer information, se
                 dokumentation för
                 <a href="../pagestructure">sidhantering</a>. Öppna och stäng panelen högst upp på denna sida med knappen
                 nedan:
               </p>
               <br>
-              <vgr-button *ngIf="expanded1" (click)="expanded1=!expanded1">Stäng panel 1</vgr-button>
-              <vgr-button *ngIf="!expanded1" (click)="expanded1=!expanded1">Öppna panel 1</vgr-button>
+              <vgr-button *ngIf="expanded1" (click)="expanded =! expanded">Stäng panel</vgr-button>
+              <vgr-button *ngIf="!expanded1" (click)="expanded =! expanded">Öppna panel</vgr-button>
               <br>
-              <br>
-              <vgr-button *ngIf="expanded2" (click)="expanded2=!expanded2">Stäng panel 2</vgr-button>
-              <vgr-button *ngIf="!expanded2" (click)="expanded2=!expanded2">Öppna panel 2</vgr-button>
               <p>Förändras med tema:
                 <strong>nej</strong>
               </p>
@@ -88,10 +85,5 @@
         </vgr-list-item>
       </vgr-list>
     </vgr-page-block>
-    <vgr-action-panel [expanded]="expanded2" [title]="'Ett exempel till ....'" (expandedChanged)="expanded2=$event">
-      <vgr-button>En knapp</vgr-button>
-      <p>Lite text ...</p>
-      <vgr-datepicker></vgr-datepicker>
-    </vgr-action-panel>
   </vgr-page-body>
 </vgr-page>

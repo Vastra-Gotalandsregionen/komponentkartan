@@ -70,6 +70,7 @@ import { TableComponent } from './table/table.component';
 import { RingWithTextComponent } from './ring-with-text/ring-with-text.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { PageBlockDocumentationComponent } from './page-block-documentation/page-block-documentation.component';
 
 @NgModule({
     declarations: [
@@ -120,7 +121,8 @@ import { SearchResultsComponent } from './search-results/search-results.componen
         FilterTagComponent,
         RingWithTextComponent,
         ToggleButtonComponent,
-        SearchResultsComponent
+        SearchResultsComponent,
+        PageBlockDocumentationComponent
     ],
     imports: [
         KomponentkartanModule,

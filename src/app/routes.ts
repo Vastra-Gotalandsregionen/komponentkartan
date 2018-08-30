@@ -46,6 +46,7 @@ import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
 import { RingWithTextComponent } from './ring-with-text/ring-with-text.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { PageBlockDocumentationComponent } from './page-block-documentation/page-block-documentation.component';
 
 export const appRoutes: Routes = [
 
@@ -93,5 +94,6 @@ export const appRoutes: Routes = [
     { path: 'filter-tag', component: FilterTagComponent },
     { path: 'ring-with-text', component: RingWithTextComponent },
     { path: 'search-results', component: SearchResultsComponent },
+    { path: 'page-block', component: PageBlockDocumentationComponent },
     { path: '**', redirectTo: '/' }
 ];
