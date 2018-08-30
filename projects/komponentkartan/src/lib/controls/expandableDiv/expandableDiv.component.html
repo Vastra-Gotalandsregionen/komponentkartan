@@ -1,4 +1,4 @@
-<div class="expandable-div-header" (click)="expanded = !expanded" tabindex="0">
+<div class="expandable-div-header" (click)="expanded = !expanded" tabindex="0" [attr.aria-expanded]="_expanded" role="button">
     <span [className]="chevron_class"></span>
     <ng-content select="vgr-expandable-div-header"></ng-content>
   </div>

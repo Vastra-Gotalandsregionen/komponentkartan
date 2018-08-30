@@ -17,7 +17,7 @@
     "publish-dev": "npm run packagr && npm publish --tag dev dist/komponentkartan/",
     "publish-stable": "npm run packagr && npm publish dist/komponentkartan/",
     "publish-local": "npm run packagr && npm pack dist/komponentkartan/",
-    "test-ci": "ng test komponentkartan --watch=false"
+    "test-ci": "ng test komponentkartan --watch=false --source-map=false"
   },
   "dependencies": {
     "@angular/animations": "6.0.3",
@@ -51,10 +51,10 @@
     "@types/node": "^6.0.100",
     "angular2-template-loader": "^0.6.2",
     "codelyzer": "^4.0.1",
-    "electron": "^2.0.2",
+    "electron": "^2.0.8",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
-    "karma": "^1.7.1",
+    "karma": "^3.0.0",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
     "karma-coverage-istanbul-reporter": "^1.2.1",

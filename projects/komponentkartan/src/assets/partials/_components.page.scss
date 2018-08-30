@@ -6,6 +6,7 @@
     .page__page-body-container {
         position: relative;
         padding-left: $margin--fat;
+    z-index: 1;
     }
 }
 

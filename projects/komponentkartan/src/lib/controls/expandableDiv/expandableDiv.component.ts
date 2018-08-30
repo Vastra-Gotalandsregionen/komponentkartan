@@ -30,7 +30,9 @@ export class ExpandableDivComponent {
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @HostListener('keydown', ['$event']) toggleRow(event: KeyboardEvent) {
-        if (event.keyCode === 13 || event.keyCode === 32) { // enter & space
+        const target = <HTMLDivElement>event.target;
+        const targetClass = target.className;
+        if (targetClass === 'expandable-div-header' && (event.keyCode === 13 || event.keyCode === 32)) { // enter & space
             event.preventDefault();
             event.stopPropagation();
             if (!this._expanded) {
