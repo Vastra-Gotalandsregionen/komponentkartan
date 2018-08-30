@@ -10,7 +10,8 @@
       <vgr-checkbox (checkedChanged)="includeInactiveUnits = $event" [checked]="includeInactiveUnits" [label]="'Inkludera stängda enheter'"></vgr-checkbox>
     </div>
   </vgr-page-header>
-  <vgr-action-panel (expandedChanged)="onPanelExpandedChanged($event)" [showCloseButton]="!addNewUnit && showActionPanel" [expanded]="showActionPanel"
+  <vgr-page-body>
+      <vgr-action-panel (expandedChanged)="onPanelExpandedChanged($event)" [showCloseButton]="!addNewUnit && showActionPanel" [expanded]="showActionPanel"
     [title]="'Lägg till ny enhet'">
     <div *ngIf=!addNewUnit>
       <div class="row-layout">
@@ -173,7 +174,6 @@
       </vgr-card-column>
     </vgr-card>
   </vgr-action-panel>
-  <vgr-page-body>
     <vgr-page-block>
       <vgr-list (sortChanged)="onSortChanged($event)" [notification]="listNotification">
         <vgr-list-header>

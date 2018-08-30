@@ -46,7 +46,7 @@ export class HeadersComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.headerComponent.toggleHeaderMenu(new Event(null));
+      this.headerComponent.clickToggleHeaderMenu(new Event(null));
     }, 200);
   }
 

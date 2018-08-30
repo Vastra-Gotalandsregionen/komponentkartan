@@ -1,10 +1,11 @@
-import { Component, Input, EventEmitter, Output, AfterViewInit, ContentChild, ViewChild, HostBinding, HostListener, ElementRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'vgr-page-block',
     templateUrl: './page-block.component.html'
 })
 export class PageBlockComponent {
-    @HostBinding('class.page-block') hasClass = true;
+
+  @Input() transparent = false;
 
 }

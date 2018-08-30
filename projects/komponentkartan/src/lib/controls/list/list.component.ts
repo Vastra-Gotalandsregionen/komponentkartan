@@ -25,14 +25,14 @@ export class ListComponent implements AfterContentInit {
     @HostBinding('class.list') hasClass = true;
     @HostBinding('class.list--new-item-added') moveHeader = false;
     @HostBinding('class.animate')  animate = false;
-    @Input() @HostBinding('class.list--inline') flexibleHeader: boolean;
+    @Input() flexibleHeader = false;
     @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
     @Input() allowMultipleExpandedItems = false;
     @Input() notification;
     @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
 
-    loaded: boolean = false;
+    loaded = false;
 
     constructor() {
     }

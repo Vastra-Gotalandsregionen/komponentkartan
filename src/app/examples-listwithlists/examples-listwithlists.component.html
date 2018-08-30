@@ -41,8 +41,7 @@
           <vgr-list-column-header width="1" align="center"></vgr-list-column-header>
           <vgr-list-column-header-checkbox width="1" align="center" [checked]="allChecked" (checkedChanged)="onListCheckedChanged($event)"></vgr-list-column-header-checkbox>
         </vgr-list-header>
-        <vgr-list-item *ngFor="let row of listData | unitfilter2: includeInactiveUnits" [expanded]="row.expanded" [notification]="row.notification"
-          (deleted)="removeDataFromList(row)">
+        <vgr-list-item *ngFor="let row of listData | unitfilter2: includeInactiveUnits" [expanded]="row.expanded" [notification]="row.notification">
           <vgr-list-item-header>
             <vgr-list-column width="10">{{row.previewObject.enhet}}</vgr-list-column>
             <vgr-list-column width="5">{{row.previewObject.hsaid}}</vgr-list-column>

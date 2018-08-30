@@ -1,12 +1,9 @@
-.sidemenu {
-  display: block;
-  z-index: $layer-three;
-  height: calc(100vh - #{$header-height});
+.sidebar-menu {
   position: fixed;
+  z-index: $layer-three;
   top: $header-height;
-  min-width: $nav-width--small;
-  max-width: $nav-width--small;
-  left: 0;
+  height: calc(100vh - #{$header-height});
+  width: $nav-width--small;
   background: white;
   border-right: solid 1px $border-color;
   .ps-content {
@@ -15,8 +12,7 @@
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .sidemenu {
-    min-width: $nav-width--medium;
-    max-width: $nav-width--medium;
+  .sidebar-menu {
+    width: $nav-width--medium;
   }
 }

@@ -1,11 +1,7 @@
-import { Component, Input, EventEmitter, Output, AfterViewInit, ContentChild, ViewChild, HostBinding, HostListener, ElementRef } from '@angular/core';
-import { PageHeaderComponent } from '../pageHeader/pageHeader.component';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'vgr-page-body',
-    templateUrl: './page-body.component.html'
+  selector: 'vgr-page-body',
+  templateUrl: './page-body.component.html'
 })
-export class PageBodyComponent {
-    @HostBinding('class.page__body') hasClass = true;
-
-}
+export class PageBodyComponent { }

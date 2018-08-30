@@ -1,13 +1,13 @@
 <app-component-docs [componentName]="'header/header menu'">
   <div class="docs__overview" style="height:420px">
-      <vgr-header class="header--inline theme--red" logoImage="https://www.quickdata.ae/wp-content/uploads/Quickdata-Network-Logo.png" hideSwosh="true"></vgr-header>
-    <code>&lt;vgr-header&gt;</code> är en komponent som skall användas i huvudet på sidorna och ligga där fast när användaren navigerar
-    i systemet.
-    <br> Färgen kan sättas beroende på vilket system som är aktivt. I portalen beror färgen på om användaren har ett eller flera
-    system. Om bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent bild som gör att man
-    bara behöver sätta headerns bakgrundsfärg genom rätt klassnamn på headern eller på ett föräldraelement. I det "neutrala"
-    läget skall inte den transparenta bilden synas. Headern kan visas i olika utföranden, man kan ha den med eller utan användarinformation
-    samt med eller utan meny och olika kombinationer av dessa. I exemplet kan man se de olika vyerna.
+    <vgr-header class="header--inline theme--red" [hideSwosh]="true" [logoClass]="'custom-logo'"></vgr-header>
+    <code>&lt;vgr-header&gt;</code> är en komponent som skall användas i huvudet på sidorna och ligga där fast när användaren
+    navigerar i systemet.
+    <br> Färgen kan sättas beroende på vilket system som är aktivt. I portalen beror färgen på om användaren har ett eller
+    flera system. Om bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent bild som gör
+    att man bara behöver sätta headerns bakgrundsfärg genom rätt klassnamn på headern eller på ett föräldraelement. I det
+    "neutrala" läget skall inte den transparenta bilden synas. Headern kan visas i olika utföranden, man kan ha den med eller
+    utan användarinformation samt med eller utan meny och olika kombinationer av dessa. I exemplet kan man se de olika vyerna.
     <br>
     <br> På headern kan man även lägga till en kontextmeny (
     <code>&lt;vgr-header-menu&gt;</code>). Den menyn kan endast bo i headern.
@@ -54,8 +54,8 @@
       </tr>
       <tr>
         <td>userName : string</td>
-        <td>Sätter namnet på texten för den som är inloggad. Intialerna för cirkeln är default först bokstaven i första och sista
-          namnet. Exemepel: "Göte Borg" får initialerna GB, och "Göte Borg Stad" får GS</td>
+        <td>Sätter namnet på texten för den som är inloggad. Intialerna för cirkeln är default först bokstaven i första och
+          sista namnet. Exemepel: "Göte Borg" får initialerna GB, och "Göte Borg Stad" får GS</td>
         <td>[userName]="signedInUser"</td>
       </tr>
       <tr>
@@ -75,7 +75,8 @@
       </tr>
       <tr>
         <td>systemText : string</td>
-        <td>Text för att påvisa vilken miljö man befinner sig i. Ska inte visas i produktion. Upp till immplementatören. </td>
+        <td>Text för att påvisa vilken miljö man befinner sig i. Ska inte visas i produktion. Upp till immplementatören.
+          </td>
         <td>[systemtext]="'development'"</td>
       </tr>
     </table>

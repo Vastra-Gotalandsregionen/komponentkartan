@@ -1,63 +1,70 @@
-import { Component, Input, ViewChild, HostBinding, OnInit} from '@angular/core';
+import { Component, Input, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { IHeaderMenu } from '../../models/headerMenu.model';
 import { HeaderMenuComponent } from '../headerMenu/headerMenu.component';
 
 @Component({
-    selector: 'vgr-header',
-    templateUrl: './header.component.html'
+  selector: 'vgr-header',
+  templateUrl: './header.component.html'
 })
 
-export class HeaderComponent implements OnInit {
-    systemColor: string;
-    @Input() headerMenu: IHeaderMenu;
-    @Input() userName: string;
-    @Input() initials: string;
-    @Input() systemText: string;
-    @Input() textColor: string;
-    @Input() circleColor: string;
-    @Input() @HostBinding('class.hide-swosh') hideSwosh = false;
-    @Input() logoImage: string;
-    logoImageString: string;
-    customLogo = false;
+export class HeaderComponent implements OnChanges {
+  @Input() headerMenu: IHeaderMenu;
+  @Input() userName: string;
+  @Input() initials: string;
+  @Input() systemText: string;
+  @Input() textColor: string;
+  @Input() circleColor: string;
+  @Input() hideSwosh = false;
+  @Input() logoClass: string;
+  @ViewChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
+  internalInitials: string;
 
-    @ViewChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
+  ngOnChanges(changes: SimpleChanges) {
+    const initialsChange = changes['initials'];
+    const userNameChange = changes['userName'];
 
-    constructor() {
-        this.systemColor = 'neutral';
+    if (initialsChange) {
+      if (initialsChange.previousValue && !initialsChange.currentValue) {
+        this.internalInitials = this.getInitialsFromUserName();
+      } else {
+        this.internalInitials = initialsChange.currentValue;
+      }
+      return;
     }
 
-    ngOnInit() {
-        if (this.logoImage) {
-            this.logoImageString = `url(${this.logoImage})`;
-            this.customLogo = true;
-        }
+    if (userNameChange && !this.initials) {
+      this.internalInitials = this.getInitialsFromUserName();
+    }
+  }
+
+  clickToggleHeaderMenu(event: Event) {
+    if (!this.headerMenuComponent) {
+      return;
     }
 
-    setInitials(): string {
-        if (this.initials) {
-            return this.initials;
-        } else {
-            return this.initials = this.getInitials(this.userName);
-        }
+    this.headerMenuComponent.toggleHeaderMenu(event);
+  }
+
+  keyToggleHeaderMenu(event: KeyboardEvent) {
+    if (!this.headerMenuComponent) {
+      return;
     }
 
-    getInitials(username: string) {
-        const name = username.split(' ');
-        let initials = name[0].substring(0, 1).toUpperCase();
+    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+      this.headerMenuComponent.toggleHeaderMenu(event);
+    }
+  }
 
-        if (name.length > 1) {
-            initials += name[name.length - 1].substring(0, 1).toUpperCase();
-        }
-        return initials;
+  private getInitialsFromUserName(): string {
+    if (!this.userName) {
+      return '';
     }
 
-    toggleHeaderMenu(event: Event): void {
-        this.headerMenuComponent.toggleHeaderMenu(event);
+    const names = this.userName.split(' ');
+    if (names.length > 1) {
+      return names[0].substring(0, 1) + names[names.length - 1].substring(0, 1);
+    } else {
+      return names[0].substring(0, 1);
     }
-
-    keyDown(event: KeyboardEvent): void {
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            this.headerMenuComponent.toggleHeaderMenu(event);
-        }
-    }
+  }
 }
