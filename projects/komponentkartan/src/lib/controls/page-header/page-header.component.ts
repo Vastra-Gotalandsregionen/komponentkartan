@@ -10,6 +10,8 @@ export class PageHeaderComponent implements AfterViewChecked {
   height: number;
 
   ngAfterViewChecked() {
-    this.height = this.pageHeader.nativeElement.offsetHeight;
+    this.height = this.pageHeader.nativeElement.offsetTop
+      ? this.pageHeader.nativeElement.offsetHeight
+      : 0;
   }
 }

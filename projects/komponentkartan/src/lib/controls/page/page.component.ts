@@ -14,5 +14,4 @@ export class PageComponent implements AfterViewChecked {
       setTimeout(() => this.pageHeaderHeight = this.pageHeader.height);
     }
   }
-
 }
