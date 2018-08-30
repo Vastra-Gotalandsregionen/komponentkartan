@@ -53,4 +53,10 @@ export class ActionPanelComponent implements OnChanges {
       }
     }
   }
+
+  close() {
+    this.expanded = false;
+    this.state = 'closed';
+    this.expandedChanged.emit(false);
+  }
 }
