@@ -1,10 +1,9 @@
-<div class="expandable-div" (keydown)="onKeydown($event)">
-  <div class="expandable-div-header" (click)="expanded = !expanded" tabindex="0">
-    <span class="expandable-div-chevron" [ngClass]="{ 'expanded': expanded, 'collapsed': !expanded }"></span>
+<div class="expandable-div-header" (click)="expanded = !expanded" tabindex="0">
+    <span [className]="chevron_class"></span>
     <ng-content select="vgr-expandable-div-header"></ng-content>
   </div>
   <div class="expandable-div-content" [@slideExpandableContent]="stateName" (@slideExpandableContent.done)="animationDone($event)"
     (@slideExpandableContent.start)="animationStart($event)">
     <ng-content select="vgr-expandable-div-content"></ng-content>
   </div>
-</div>
+  
