@@ -21,7 +21,7 @@
       </div>
 
     </div>
-    <vgr-card *ngIf=addNewUnit>
+    <vgr-card *ngIf="addNewUnit">
       <vgr-card-header>
         <div class="row-layout">
           <label style="width:200px">Enhet</label>
@@ -175,7 +175,7 @@
     </vgr-card>
   </vgr-action-panel>
     <vgr-page-block>
-      <vgr-list (sortChanged)="onSortChanged($event)" [notification]="listNotification">
+      <vgr-list (sortChanged)="onSortChanged($event)" [notification]="listNotification" [flexibleHeader]="showActionPanel">
         <vgr-list-header>
           <vgr-list-column-header width="5" sortKey="enhet" [sortDirection]="sortDirections.Ascending">Enhet</vgr-list-column-header>
           <vgr-list-column-header width="5" align="left" sortKey="hsaid">HSA-ID</vgr-list-column-header>
