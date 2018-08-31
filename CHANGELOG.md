@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added more options for how the header is displayed.
 - Fixed a bug with dropdown multiselect options not being fully clickable.
 - Fixed a bug in IE which made it impossible to click on page list rows
+- Allowing list to not have a list header.
 
 ## 3.0.0 (Stable)
 - Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6

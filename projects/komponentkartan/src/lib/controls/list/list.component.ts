@@ -38,7 +38,9 @@ export class ListComponent implements AfterContentInit {
     }
 
     ngAfterContentInit() {
-        this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+        if (this.listHeader) {
+            this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+        }
         this.subscribeEvents();
         this.items.changes.subscribe((changes) => {
             this.subscribeEvents();
