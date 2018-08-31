@@ -3,6 +3,9 @@
   width: $content-width--small;
   padding: 0;
   overflow: hidden;
+  &.action-panel--open {
+    overflow: visible;
+  }
  .action-panel__header {
     display: flex; 
     justify-content: space-between;

@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { trigger, style, animate, transition, state, query, animateChild, group } from '@angular/animations';
+import { trigger, style, animate, transition, state, AnimationEvent } from '@angular/animations';
 
 @Component({
   templateUrl: './action-panel.component.html',
@@ -16,19 +16,16 @@ import { trigger, style, animate, transition, state, query, animateChild, group 
         marginBottom: '14px',
         boxShadow: '3px 3px 9px 0 rgba(0, 0, 0, 0.5)'
       })),
-      transition('closed <=> open', group([
-        query('@fade', animateChild()),
-        animate('600ms ease')
-      ]))
+      transition('closed <=> open', animate('600ms ease'))
     ]),
     trigger('fade', [
-      state('closed', style({
+      state('hide', style({
         opacity: 0
       })),
-      state('open', style({
+      state('show', style({
         opacity: 1
       })),
-      transition('closed <=> open', animate('600ms ease'))
+      transition('hide <=> show', animate('400ms ease'))
     ])
   ]
 })
@@ -39,24 +36,47 @@ export class ActionPanelComponent implements OnChanges {
   @Input() showCloseButton = true;
   @Output() expandedChanged = new EventEmitter<boolean>();
   @ViewChild('actionPanel') actionPanelElement;
-  state = 'closed';
+  slideState = 'closed';
+  fadeState = 'show';
+  open = false;
 
   ngOnChanges(changes: SimpleChanges) {
     const expandedChange = changes['expanded'];
     if (expandedChange) {
       if (expandedChange.currentValue) {
-        this.state = 'open';
+        this.slideState = 'open';
         this.expandedChanged.emit(true);
       } else {
-        this.state = 'closed';
+        this.slideState = 'closed';
         this.expandedChanged.emit(false);
+      }
+    }
+
+    const showCloseButtonChange = changes['showCloseButton'];
+    if (showCloseButtonChange) {
+      if (showCloseButtonChange.currentValue) {
+        this.fadeState = 'show';
+      } else {
+        this.fadeState = 'hide';
       }
     }
   }
 
   close() {
     this.expanded = false;
-    this.state = 'closed';
+    this.slideState = 'closed';
     this.expandedChanged.emit(false);
+  }
+
+  onSlideStart(event: AnimationEvent) {
+    if (event.fromState === 'open') {
+      this.open = false;
+    }
+  }
+
+  onSlideEnd(event: AnimationEvent) {
+    if (event.fromState === 'closed') {
+      this.open = true;
+    }
   }
 }
