@@ -1,59 +1,121 @@
 <app-component-docs [componentName]="'Filter tag'">
-  <div class="docs__overview">
-    <p>
-      <code>&lt;vgr-filter-tag&gt;</code> är avsedd att användas för att representera filter i en sökning. I kombination med
-      <code>&lt;vgr-filter-tag-group&gt;</code> kan filtren navigeras med piltangenterna.
-    </p>
-    <br>
-    <vgr-filter-tag>Filter</vgr-filter-tag>
-    <br>
-    <br>
-    <p>Förändras med tema:
-      <strong>ja</strong>
-    </p>
-  </div>
-  <div class="docs__examples">
-    <div style="margin-bottom: 20px">
-      <vgr-input style="display: inline-block" #filterInput></vgr-input>
-      <vgr-button (click)="addFilter(filterInput.value)">Lägg till filter</vgr-button>
-      <vgr-button (click)="removeAllFilters()">Ta bort alla filter</vgr-button>      
+    <div class="docs__overview">
+      <p>
+        <code>&lt;vgr-filter-tag&gt;</code> är avsedd att användas för att representera filter i en sökning. I kombination med
+        <code>&lt;vgr-filter-tag-group&gt;</code> kan filtren navigeras med piltangenterna.
+      </p>
+      <br>
+      <vgr-filter-tag>Filter</vgr-filter-tag>
+      <br>
+      <br>
+      <p>Förändras med tema:
+        <strong>ja</strong>
+      </p>
     </div>
-    <div style="margin-bottom: 20px" *ngIf="filters.length">
-      <vgr-filter-tag-group>
-        <vgr-filter-tag *ngFor="let filter of filters" (remove)="removeFilter(filter)">{{filter}}</vgr-filter-tag>
-      </vgr-filter-tag-group>
+    <div class="docs__examples">
+      <div style="margin-bottom: 20px">
+        <div><span style="font-weight: bold">Enkelt exempel</span> - den filtrerade texten finns i För- eller Efternamn.</div>
+        <vgr-input [small]="true" style="display: inline-block; " #filterInput></vgr-input>
+        <vgr-button (click)="addFilter(filterInput.value)">Lägg till filter</vgr-button>
+        <vgr-button (click)="removeAllFilters()" style="margin-left: 20px;">Ta bort alla filter</vgr-button>
+        <vgr-button (click)="toggleDisableFilters()" style="margin-left: 20px;">{{filtersDisabled ? 'Aktivera' : 'Inaktivera'}} filtertaggar</vgr-button>
+      </div>
+      <div style="margin-bottom: 20px" *ngIf="filterTags.length">
+        <vgr-filter-tag-group>
+          <vgr-filter-tag *ngFor="let filter of filterTags" (remove)="filter.remove(filter)" [disabled]="filtersDisabled">{{filter.text}}</vgr-filter-tag>
+        </vgr-filter-tag-group>
+      </div>
+      <ul>
+        <div *ngIf="filteredPersons.length > 0" class="list-row">
+          <div class="list-column list-header">Förnamn</div>
+          <div class="list-column list-header">Efternamn</div>
+        </div>
+        <li *ngFor="let person of filteredPersons">
+          <div class="list-row">
+            <div class="list-column">{{person.firstName}}</div>
+            <div class="list-column">{{person.surname}}</div>
+          </div>
+        </li>
+      </ul>
+      <br>
+      <div><span style="font-weight: bold">Avancerat exempel</span> - Filtrera på Namn (För- eller Efternamn) samt möjlighet att filtrera på minimiålder och kön.</div>
+      <form [formGroup]="advancedSearchForm" (ngSubmit)="advancedFilter()" novalidate>
+        <div style="margin-bottom: 20px">
+          <div style="display: flex; align-items: flex-end">
+            <div>
+              <div>Namn:</div>
+              <div>
+                <vgr-input formControlName="name"></vgr-input>
+              </div>
+            </div>
+            <div>
+              <div>Minimiålder:</div>
+              <div>
+                <vgr-input formControlName="minimumAge" [small]="true"></vgr-input>
+              </div>
+            </div>
+            <div>            
+              <vgr-checkbox formControlName="women" [label]="'Kvinnor'" style="display: inline-block;"></vgr-checkbox>
+              <vgr-checkbox formControlName="men" [label]="'Män'" style="display: inline-block; margin-left: 10px;"></vgr-checkbox>
+            </div>
+            <vgr-button (click)="advancedFilter()" style="margin-left: 20px;">Filtrera</vgr-button>
+            <vgr-button (click)="removeAllAdvancedFilters()" style="margin-left: 20px;">Ta bort alla filter</vgr-button>
+          </div>
+        </div>
+      </form>
+      <div style="margin-bottom: 20px" *ngIf="advancedFilterTags.length">
+        <vgr-filter-tag-group>
+          <vgr-filter-tag *ngFor="let tag of advancedFilterTags" (remove)="tag.remove()">{{tag.text}}</vgr-filter-tag>
+        </vgr-filter-tag-group>
+      </div>
+      <ul style="margin-bottom: 20px;">
+        <div *ngIf="advancedFilteredPersons.length > 0" class="list-row">
+          <div class="list-column list-header">Förnamn</div>
+          <div class="list-column list-header">Efternamn</div>
+          <div class="list-column list-header">Ålder</div>
+        </div>
+        <li *ngFor="let person of advancedFilteredPersons">
+          <div class="list-row">
+            <div class="list-column">{{person.firstName}}</div>
+            <div class="list-column">{{person.surname}}</div>
+            <div class="list-column">{{person.age}}</div>
+          </div>
+        </li>
+      </ul>
     </div>
-    <ul>
-      <li *ngFor="let value of filteredValues">{{value}}</li>
-    </ul>
-  </div>
-  <div class="docs__api">
-    <table class="property-table">
-      <tr>
-        <th>Namn</th>
-        <th>Beskrivning</th>
-        <th>Exempel</th>
-      </tr>
-      <tr>
-        <td>disabled: boolean</td>
-        <td>Inaktivera filter tag. Förvalt värde är
-          <code>false</code>.</td>
-        <td>[disabled]="true"</td>
-      </tr>
-      <tr>
-        <td>ariaLabel: string</td>
-        <td>Värde för
-          <code>aria-label</code>. Förvalt värde är "Ta bort filtrering [text]", där [text] är text content för
-          <code>&lt;vgr-filter-tag&gt;</code>.</td>
-        <td>[ariaLabel]="En alternativ beskrivning."</td>
-      </tr>
-      <tr>
-        <td>remove: EventEmitter</td>
-        <td>Event som triggas efter att animationen för bortagning av filter är klar. Bör kopplas till uppdatering av tillstånd
-          för den bakomliggande filtreringen.</td>
-        <td>(remove)="removeFilter()"</td>
-      </tr>
-    </table>
-  </div>
-  <div class="docs__wcag"></div>
-</app-component-docs>
+    <div class="docs__api">
+      <table class="property-table">
+        <tr>
+          <th>Namn</th>
+          <th>Beskrivning</th>
+          <th>Exempel</th>
+        </tr>
+        <tr>
+          <td>disabled: boolean</td>
+          <td>Inaktivera filter tag. Förvalt värde är
+            <code>false</code>.</td>
+          <td>[disabled]="true"</td>
+        </tr>
+        <tr>
+          <td>ariaLabel: string</td>
+          <td>Värde för
+            <code>aria-label</code>. Förvalt värde är "Ta bort filtrering [text]", där [text] är text content för
+            <code>&lt;vgr-filter-tag&gt;</code>.</td>
+          <td>[ariaLabel]="En alternativ beskrivning."</td>
+        </tr>
+        <tr>
+          <td>remove: EventEmitter</td>
+          <td>Event som triggas efter att animationen för bortagning av filter är klar. Bör kopplas till uppdatering av tillstånd
+            för den bakomliggande filtreringen.</td>
+          <td>(remove)="removeFilter()"</td>
+        </tr>
+      </table>
+    </div>
+    <div class="docs__wcag">
+      <p>
+        <code>&lt;vgr-filter-tag&gt;</code> har ett intern element av typen button och har alla dess WCAG egenskaper. 
+        Default sätts <code>attr.aria-label</code> till "Ta bort filtrering [text]", där [text] är content för <code>&lt;vgr-filter-tag&gt;</code>. 
+        Om input variabeln [disabled] sätts till <code>true</code> sätts även <code> aria.aria-disabled</code> till <code>true</code>
+      </p>
+    </div>
+  </app-component-docs>
