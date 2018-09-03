@@ -71,6 +71,7 @@ import { RingWithTextComponent } from './ring-with-text/ring-with-text.component
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { PageBlockDocumentationComponent } from './page-block-documentation/page-block-documentation.component';
+import { ExamplesListwithpageblockComponent } from './examples-listwithpageblock/examples-listwithpageblock.component';
 
 @NgModule({
     declarations: [
@@ -122,7 +123,8 @@ import { PageBlockDocumentationComponent } from './page-block-documentation/page
         RingWithTextComponent,
         ToggleButtonComponent,
         SearchResultsComponent,
-        PageBlockDocumentationComponent
+        PageBlockDocumentationComponent,
+        ExamplesListwithpageblockComponent
     ],
     imports: [
         KomponentkartanModule,

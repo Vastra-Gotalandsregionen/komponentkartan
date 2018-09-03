@@ -39,6 +39,7 @@ import { ExpandableDivComponent } from './expandable-div/expandable-div.componen
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
+import { ExamplesListwithpageblockComponent } from './examples-listwithpageblock/examples-listwithpageblock.component';
 import { TableComponent } from './table/table.component';
 import { FilterTagComponent } from './filter-tag/filter-tag.component';
 import { IconsComponent } from './icons/icons.component';
@@ -89,6 +90,7 @@ export const appRoutes: Routes = [
     { path: 'listexample-expandable-div', component: ListexamplewithexpandabledivComponent },
     { path: 'examples-listwithcards', component: ExamplesListwithcardsComponent },
     { path: 'examples-listwithlists', component: ExamplesListwithlistsComponent },
+    { path: 'examples-listwithpageblock', component: ExamplesListwithpageblockComponent },
     { path: 'toggle-button', component: ToggleButtonComponent},
     { path: 'actionPanels', component: ActionPanelsComponent },
     { path: 'filter-tag', component: FilterTagComponent },
