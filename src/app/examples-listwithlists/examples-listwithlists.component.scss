@@ -8,7 +8,7 @@
 
 .action-panel-buttons {
   position: absolute;
-  right: $margin--slim;
+  right:30px;
 }
 
 .button-container {
@@ -31,7 +31,7 @@
     padding-bottom: $margin--fat;
   }
   .action-panel-buttons {
-    right: $margin--fat;
+    right: 40px;
   } // /deep/ .adjust-chevron .expandable-div-header .expandable-div-chevron {
   //   top: 0px;
   // }
