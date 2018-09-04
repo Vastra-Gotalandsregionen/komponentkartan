@@ -32,6 +32,16 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
             transition('collapsed => expanded',
                 animate('400ms ease-in')
             ),
+        ]),
+        trigger('toggleExpandedState', [
+            transition(':enter', [
+                style({ height: '0'}),
+                animate('0.4s ease', style({ height: '*' })),
+            ]),
+            transition(':leave', [
+                style({ height: '*'}),
+                animate('0.4s ease', style({ height: '0' })),
+            ]),
         ])
     ]
 })

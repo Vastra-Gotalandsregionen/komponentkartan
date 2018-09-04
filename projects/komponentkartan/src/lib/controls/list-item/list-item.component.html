@@ -1,4 +1,4 @@
-<div class="list-item__header_wrapper" (click)="toggleExpand($event)">
+<div class="list-item__header_wrapper" (click)="toggleExpand($event)" [attr.aria-expanded]="_expanded" role="button">
   <ng-content select="vgr-list-item-header">
   </ng-content>
 </div>
@@ -9,6 +9,6 @@
     {{notification? notification.message : ''}}
   </div>
 </div>
-<div [@slideListContent]="stateName" (@slideListContent.done)="animationDone($event)" (@slideListContent.start)="animationStart($event)">
+<div [@toggleExpandedState] *ngIf="_expanded" (@toggleExpandedState.done)="animationDone($event)" (@toggleExpandedState.start)="animationStart($event)">
   <ng-content select="vgr-list-item-content"></ng-content>
 </div>
