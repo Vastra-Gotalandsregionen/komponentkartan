@@ -1,7 +1,7 @@
 <vgr-page class="no-sort">
   <vgr-page-header title="Action panel"></vgr-page-header>
   <vgr-page-body>
-    <vgr-action-panel [expanded]="expanded1" [title]="'Ett exempel på en action panel'" (expandedChanged)="expanded1 = $event">
+    <vgr-action-panel [open]="open1" [title]="'Ett exempel på en action panel'" (openChanged)="open1 = $event">
       <vgr-button>En knapp</vgr-button>
       <p>Lite text ...</p>
       <vgr-datepicker></vgr-datepicker>
@@ -24,12 +24,12 @@
                 nedan:
               </p>
               <br>
-              <vgr-button *ngIf="expanded1" (click)="expanded1 =! expanded1">Stäng panel 1</vgr-button>
-              <vgr-button *ngIf="!expanded1" (click)="expanded1 =! expanded1">Öppna panel 1</vgr-button>
+              <vgr-button *ngIf="open1" (click)="open1 = !open1">Stäng panel 1</vgr-button>
+              <vgr-button *ngIf="!open1" (click)="open1 = !open1">Öppna panel 1</vgr-button>
               <br>
               <br>
-              <vgr-button *ngIf="expanded2" (click)="expanded2 =! expanded2">Stäng panel 2</vgr-button>
-              <vgr-button *ngIf="!expanded2" (click)="expanded2 =! expanded2">Öppna panel 2</vgr-button>
+              <vgr-button *ngIf="open2" (click)="open2 = !open2">Stäng panel 2</vgr-button>
+              <vgr-button *ngIf="!open2" (click)="open2 = !open2">Öppna panel 2</vgr-button>
               <br>
               <p>Förändras med tema:
                 <strong>nej</strong>
@@ -48,13 +48,13 @@
             <!-- Exempel -->
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]=" false ">
+        <vgr-list-item [expanded]="false">
           <vgr-list-item-header>
             <h4>API</h4>
           </vgr-list-item-header>
           <vgr-list-item-content>
             <!-- API -->
-            <table class="property-table ">
+            <table class="property-table">
               <tr>
                 <th>Namn</th>
                 <th>Beskrivning</th>
@@ -66,9 +66,9 @@
                 <td>[title]="'En titel'"</td>
               </tr>
               <tr>
-                <td>expanded: boolean</td>
+                <td>open: boolean</td>
                 <td>Anger om panelen ska vara öppen eller stängd.</td>
-                <td>[expanded]="true"</td>
+                <td>[open]="true"</td>
               </tr>
               <tr>
                 <td>showCloseButton: boolean</td>
@@ -89,7 +89,7 @@
         </vgr-list-item>
       </vgr-list>
     </vgr-page-block>
-    <vgr-action-panel [expanded]="expanded2" [title]="'Ett exempel på en annan action panel'" (expandedChanged)="expanded2 = $event">
+    <vgr-action-panel [open]="open2" [title]="'Ett exempel på en annan action panel'" (openChanged)="open2 = $event">
       <vgr-button>En knapp</vgr-button>
       <p>Lite text ...</p>
       <vgr-datepicker></vgr-datepicker>

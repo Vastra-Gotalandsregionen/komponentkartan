@@ -11,7 +11,7 @@
     </div>
   </vgr-page-header>
   <vgr-page-body>
-      <vgr-action-panel (expandedChanged)="onPanelExpandedChanged($event)" [showCloseButton]="!addNewUnit && showActionPanel" [expanded]="showActionPanel"
+      <vgr-action-panel (openChanged)="onPanelExpandedChanged($event)" [showCloseButton]="!addNewUnit && showActionPanel" [open]="showActionPanel"
     [title]="'Lägg till ny enhet'">
     <div *ngIf=!addNewUnit>
       <div class="row-layout">

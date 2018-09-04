@@ -19,64 +19,68 @@ import { trigger, style, animate, transition, state, AnimationEvent } from '@ang
       transition('closed <=> open', animate('600ms ease'))
     ]),
     trigger('fade', [
-      state('hide', style({
+      state('hidden', style({
         opacity: 0
       })),
-      state('show', style({
+      state('visible', style({
         opacity: 1
       })),
-      transition('hide <=> show', animate('400ms ease'))
+      transition('hidden <=> visible', animate('400ms ease'))
     ])
   ]
 })
 export class ActionPanelComponent implements OnChanges {
 
   @Input() title: string;
-  @Input() expanded = false;
+  @Input() open = false;
   @Input() showCloseButton = true;
-  @Output() expandedChanged = new EventEmitter<boolean>();
+  @Output() openChanged = new EventEmitter<boolean>();
   @ViewChild('actionPanel') actionPanelElement;
-  slideState = 'closed';
-  fadeState = 'show';
-  open = false;
+  private readonly slideStateOpen = 'open';
+  private readonly slideStateClosed = 'closed';
+  private readonly fadeStateVisible = 'visible';
+  private readonly fadeStateHidden = 'hidden';
+  slideState = this.slideStateClosed;
+  fadeState = this.fadeStateVisible;
+  isOpened = false;
 
   ngOnChanges(changes: SimpleChanges) {
-    const expandedChange = changes['expanded'];
-    if (expandedChange) {
-      if (expandedChange.currentValue) {
-        this.slideState = 'open';
-        this.expandedChanged.emit(true);
+    const openChange = changes['open'];
+    if (openChange) {
+      if (openChange.currentValue) {
+        this.slideState = this.slideStateOpen;
+        this.openChanged.emit(true);
       } else {
-        this.slideState = 'closed';
-        this.expandedChanged.emit(false);
+        this.slideState = this.slideStateClosed;
+        this.openChanged.emit(false);
       }
     }
 
     const showCloseButtonChange = changes['showCloseButton'];
     if (showCloseButtonChange) {
       if (showCloseButtonChange.currentValue) {
-        this.fadeState = 'show';
+        this.fadeState = this.fadeStateVisible;
       } else {
-        this.fadeState = 'hide';
+        this.fadeState = this.fadeStateHidden;
       }
     }
   }
 
   close() {
-    this.expanded = false;
-    this.slideState = 'closed';
-    this.expandedChanged.emit(false);
+    this.open = false;
+    this.slideState = this.slideStateClosed;
+    this.openChanged.emit(false);
   }
 
   onSlideStart(event: AnimationEvent) {
-    if (event.fromState === 'open') {
-      this.open = false;
+    if (event.fromState === this.slideStateOpen) {
+      this.isOpened = false;
     }
   }
 
   onSlideEnd(event: AnimationEvent) {
-    if (event.fromState === 'closed') {
-      this.open = true;
+    if (event.fromState === this.slideStateClosed) {
+      this.isOpened = true;
     }
   }
 }
