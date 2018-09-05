@@ -48,6 +48,7 @@ import { RingWithTextComponent } from './ring-with-text/ring-with-text.component
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { PageBlockDocumentationComponent } from './page-block-documentation/page-block-documentation.component';
+import { PageHeaderDocumentationComponent } from './page-header-documentation/page-header-documentation.component';
 
 export const appRoutes: Routes = [
 
@@ -97,5 +98,7 @@ export const appRoutes: Routes = [
     { path: 'ring-with-text', component: RingWithTextComponent },
     { path: 'search-results', component: SearchResultsComponent },
     { path: 'page-block', component: PageBlockDocumentationComponent },
+    { path: 'page-header', component: PageHeaderDocumentationComponent },
+
     { path: '**', redirectTo: '/' }
 ];

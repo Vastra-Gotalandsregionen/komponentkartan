@@ -72,6 +72,7 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { PageBlockDocumentationComponent } from './page-block-documentation/page-block-documentation.component';
 import { ExamplesListwithpageblockComponent } from './examples-listwithpageblock/examples-listwithpageblock.component';
+import { PageHeaderDocumentationComponent } from './page-header-documentation/page-header-documentation.component';
 
 @NgModule({
     declarations: [
@@ -124,6 +125,7 @@ import { ExamplesListwithpageblockComponent } from './examples-listwithpageblock
         ToggleButtonComponent,
         SearchResultsComponent,
         PageBlockDocumentationComponent,
+        PageHeaderDocumentationComponent,
         ExamplesListwithpageblockComponent
     ],
     imports: [
