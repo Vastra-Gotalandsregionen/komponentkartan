@@ -11,7 +11,6 @@ export class ActionPanelsComponent {
   open1 = false;
   showCloseButton1 = true;
   open2 = false;
-  stuff = [];
 
   exampleCode = `
   <vgr-action-panel [showCloseButton]="true" (openChanged)="open=$event" [open]="open"
@@ -25,10 +24,6 @@ export class ActionPanelsComponent {
   constructor(htmlEncoder: HtmlEncodeService) {
     this.exampleCodeMarkup =
       htmlEncoder.prepareHighlightedSection(this.exampleCode, 'HTML');
-  }
-
-  addStuff() {
-    this.stuff.push('Grejer');
   }
 
 }
