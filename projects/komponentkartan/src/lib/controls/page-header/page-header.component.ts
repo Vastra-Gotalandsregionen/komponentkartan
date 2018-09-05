@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, AfterViewChecked, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewChecked, ElementRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'vgr-page-header',
@@ -7,11 +7,21 @@ import { Component, Input, ViewChild, AfterViewChecked, ElementRef } from '@angu
 export class PageHeaderComponent implements AfterViewChecked {
   @Input() title: string;
   @ViewChild('pageHeader') pageHeader: ElementRef;
-  height: number;
+  @Output() heightChanged = new EventEmitter<number>();
+  private previousHeight = 0;
 
   ngAfterViewChecked() {
-    this.height = this.pageHeader.nativeElement.offsetTop
+    this.setHeight();
+  }
+
+  setHeight() {
+    const height = this.pageHeader.nativeElement.offsetTop
       ? this.pageHeader.nativeElement.offsetHeight
       : 0;
+
+    if (height !== this.previousHeight) {
+      this.previousHeight = height;
+      this.heightChanged.emit(height);
+    }
   }
 }

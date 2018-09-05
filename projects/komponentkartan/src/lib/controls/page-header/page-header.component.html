@@ -1,4 +1,4 @@
-<div #pageHeader class="page-header">
+<div #pageHeader class="page-header" (window:resize)="setHeight()">
   <div class="page-header__block">
     <h1 class="page-header__title">{{title}}</h1>
     <ng-content></ng-content>
