@@ -9,13 +9,15 @@
  .action-panel__header {
     display: flex; 
     justify-content: space-between;
+    align-items: center;
     padding-left: $margin--slim;
-    padding-top: $margin--slim;
-    padding-bottom: $margin--slim;
     padding-right: $margin--slim;
     border-bottom: 1px solid #99a3ad;
     .action-panel__title {
       font-weight: bold;
+    }
+    .action-panel__close-button {
+      padding-top: 5px;
     }
   }
   .action-panel__content {
@@ -27,8 +29,7 @@
   .action-panel {
     width: $content-width--medium;
     .action-panel__header {
-      padding-left: $margin--fat;
-      padding-top: 5px;
+      padding-left: $margin--fat;      
       padding-bottom: 0;
       padding-right: 10px;
     }

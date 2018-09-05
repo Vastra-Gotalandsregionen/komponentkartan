@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { trigger, style, animate, transition, state, AnimationEvent } from '@angular/animations';
 
 @Component({
