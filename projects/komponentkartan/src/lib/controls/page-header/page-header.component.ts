@@ -8,20 +8,23 @@ export class PageHeaderComponent implements AfterViewChecked {
   @Input() title: string;
   @ViewChild('pageHeader') pageHeader: ElementRef;
   @Output() heightChanged = new EventEmitter<number>();
+  height = 0;
   private previousHeight = 0;
 
   ngAfterViewChecked() {
-    this.setHeight();
+    this.setHeight(false);
   }
 
-  setHeight() {
-    const height = this.pageHeader.nativeElement.offsetTop
+  setHeight(emit = true) {
+    this.height = this.pageHeader.nativeElement.offsetTop
       ? this.pageHeader.nativeElement.offsetHeight
       : 0;
 
-    if (height !== this.previousHeight) {
-      this.previousHeight = height;
-      this.heightChanged.emit(height);
+    if (this.height !== this.previousHeight) {
+      this.previousHeight = this.height;
+      if (emit) {
+        this.heightChanged.emit(this.height);
+      }
     }
   }
 }

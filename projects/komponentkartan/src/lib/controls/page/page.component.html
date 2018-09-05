@@ -1,6 +1,6 @@
 <div class="page">
   <ng-content select="vgr-page-header"></ng-content>
-  <div class="page__page-body-container" [ngStyle]="{ 'top.px': pageHeaderHeight }">
+  <div #bodyContainer class="page__page-body-container">
     <ng-content select="vgr-page-body"></ng-content>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, ContentChild } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, OnDestroy, ContentChild, ViewChild, ElementRef } from '@angular/core';
 import { PageHeaderComponent } from '../page-header/page-header.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -7,18 +7,25 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'vgr-page',
   templateUrl: './page.component.html'
 })
-export class PageComponent implements AfterViewInit, OnDestroy {
+export class PageComponent implements OnInit, AfterViewChecked, OnDestroy {
   @ContentChild(PageHeaderComponent) pageHeader: PageHeaderComponent;
+  @ViewChild('bodyContainer') bodyContainer: ElementRef;
   pageHeaderHeight = 0;
   private ngUnsubscribe = new Subject();
 
-  ngAfterViewInit() {
+  ngOnInit() {
     if (this.pageHeader) {
       this.pageHeader.heightChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
-        value =>  this.pageHeaderHeight = value
+        value => this.bodyContainer.nativeElement.style.top = `${value}px`
       );
+    }
+  }
+
+  ngAfterViewChecked() {
+    if (this.pageHeader && this.pageHeaderHeight !== this.pageHeader.height) {
+      this.bodyContainer.nativeElement.style.top = `${this.pageHeader.height}px`;
     }
   }
 

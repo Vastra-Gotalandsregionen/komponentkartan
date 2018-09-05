@@ -1,5 +1,10 @@
 <vgr-page class="no-sort">
-  <vgr-page-header title="Action panel"></vgr-page-header>
+  <vgr-page-header title="Action panel">
+    <div>
+      <vgr-button (click)="addStuff()">Lägg till grejer</vgr-button>
+    </div>
+    <div *ngFor="let s of stuff">{{s}}</div>
+  </vgr-page-header>
   <vgr-page-body>
     <vgr-action-panel [open]="open1" [title]="'Ett exempel på en action panel'" (openChanged)="open1 = $event">
       <vgr-button>En knapp</vgr-button>
