@@ -669,8 +669,8 @@ export class ExamplesListwithcardsComponent implements OnInit {
   }
 
 
-  onPanelExpandedChanged(expanded: boolean) {
-    if (!expanded) {
+  onActionPanelOpenChanged(open: boolean) {
+    if (!open) {
       this.actionPanelClose();
     }
   }
