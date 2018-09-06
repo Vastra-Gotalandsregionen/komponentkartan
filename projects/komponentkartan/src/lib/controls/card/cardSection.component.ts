@@ -40,7 +40,7 @@ export class CardSectionComponent {
 
     @HostListener('keydown', ['$event'])
     toggleExpand(event: KeyboardEvent) {
-        if (event.keyCode === 13 || event.keyCode === 32) { // enter & space
+        if ((event.keyCode === 13 || event.keyCode === 32) && event.srcElement.className === 'card-section__header') { // enter & space
             this.toggleExpanded();
             event.preventDefault();
         }
