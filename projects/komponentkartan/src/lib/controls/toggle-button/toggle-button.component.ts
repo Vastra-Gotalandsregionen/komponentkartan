@@ -47,6 +47,8 @@ export class ToggleButtonComponent implements AfterViewInit, OnChanges {
     } else if (event.key === 'ArrowRight' || event.key === 'Right' || event.key === 'ArrowDown' || event.key === 'Down') {
       this.next.emit();
       event.preventDefault();
+    } else if (event.keyCode === 13 || event.keyCode === 32) {
+      event.stopPropagation();
     }
   }
 

@@ -88,6 +88,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         if (event.keyCode === 13 || event.keyCode === 32) {
             this.optionClicked(option);
             event.preventDefault();
+            event.stopPropagation();
         }
 
         if (event.keyCode === 39 || event.keyCode === 40) {

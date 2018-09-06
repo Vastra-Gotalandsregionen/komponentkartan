@@ -112,6 +112,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
         this.visibleChange.emit(this.visible);
         this.onItemClick(this.displayItems[this.focusItem]);
         event.preventDefault();
+        event.stopPropagation();
       }
     }
   }

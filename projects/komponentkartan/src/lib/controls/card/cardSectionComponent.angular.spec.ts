@@ -106,6 +106,7 @@ describe('[CardSectionComponent]', () => {
         const focusedElement = rootElement.query(By.css('.card-section__header'));
         Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
         Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
+        Object.defineProperty(keyEvent, 'srcElement', {'value' : focusedElement.nativeElement});
         component.toggleExpand(keyEvent);
         jasmine.clock().tick(10);
       });
@@ -119,6 +120,7 @@ describe('[CardSectionComponent]', () => {
           const focusedElement = rootElement.query(By.css('.card-section__header'));
           Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
           Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
+          Object.defineProperty(keyEvent, 'srcElement', {'value' : focusedElement.nativeElement});
           component.toggleExpand(keyEvent);
           jasmine.clock().tick(10);
         });
