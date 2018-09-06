@@ -5,7 +5,7 @@
     <vgr-page-block>
       <vgr-list [allowMultipleExpandedItems]="true">
         <vgr-list-header>
-          <vgr-list-column-header text="Dokumentation för Card" [width]="20"></vgr-list-column-header>
+          <vgr-list-column-header [width]="20">Dokumentation för Card</vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item [expanded]="true">
           <vgr-list-item-header>
@@ -14,8 +14,10 @@
           <vgr-list-item-content>
             <div class="content-overview">
               <p>
-                <code>&lt;vgr-card&gt;</code> används för att skapa kort, ofta i listor som expanderat innehåll. Ett kort har tre
-                delar: Topp, vänster och höger. Dessa fylls med innehåll genom att använda css-klasser. Ett kort innehåller
+                <code>&lt;vgr-card&gt;</code> används för att skapa kort, ofta i listor som expanderat innehåll. Ett
+                kort har tre
+                delar: Topp, vänster och höger. Dessa fylls med innehåll genom att använda css-klasser. Ett kort
+                innehåller
                 en eller flera
                 <code>&lt;vgr-card-section&gt;</code> som kan expanderas.
               </p>
@@ -32,7 +34,8 @@
                   </vgr-card-section>
                 </vgr-card-column>
                 <vgr-card-column>
-                  <vgr-card-section class="card__right" [expanded]="true" [title]="'Rubrik'" [subtitle]="'Höger 1'" [readonly]="false">
+                  <vgr-card-section class="card__right" [expanded]="true" [title]="'Rubrik'" [subtitle]="'Höger 1'"
+                    [readonly]="false">
                     <div>Innehåll</div>
                   </vgr-card-section>
                 </vgr-card-column>
@@ -54,7 +57,8 @@
             <!-- Exempel -->
             <vgr-card>
               <vgr-card-header>
-                <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="unlocked = true" (save)="unlocked = false" (cancel)="unlocked = false"></vgr-save-cancel>
+                <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="unlocked = true" (save)="unlocked = false"
+                  (cancel)="unlocked = false"></vgr-save-cancel>
               </vgr-card-header>
               <vgr-card-column>
                 <vgr-card-section [expanded]="true" [title]="'Rubrik'" [subtitle]="'Personuppgifter'" [readonly]="!unlocked">
@@ -115,7 +119,8 @@
             <!-- Exempel2 -->
             <vgr-card>
               <vgr-card-header>
-                <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="unlocked = true" (save)="unlocked = false" (cancel)="unlocked = false"></vgr-save-cancel>
+                <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="unlocked = true" (save)="unlocked = false"
+                  (cancel)="unlocked = false"></vgr-save-cancel>
               </vgr-card-header>
               <vgr-card-column>
                 <table style="width:100%;text-align:left">
@@ -192,7 +197,8 @@
               <li>
                 <code>&lt;vgr-card&gt;</code>, första elementet som representerar hela kortet</li>
               <li>
-                <code>&lt;vgr-card-header&gt;</code>, ger titelyta på en vgr-card. Plats för knappar och rubriker för hela kortet.</li>
+                <code>&lt;vgr-card-header&gt;</code>, ger titelyta på en vgr-card. Plats för knappar och rubriker för
+                hela kortet.</li>
               <li>
                 <code>&lt;vgr-card-column&gt;</code>, kolumner i kortet.
                 <ul>
@@ -239,7 +245,8 @@
               </tr>
               <tr>
                 <td>readonly: boolean</td>
-                <td>Anger om symbolen för redigeringsläge skall visas eller ej. False = visa. True = dölj. Default är TRUE.</td>
+                <td>Anger om symbolen för redigeringsläge skall visas eller ej. False = visa. True = dölj. Default är
+                  TRUE.</td>
                 <td>[readonly]="true"</td>
               </tr>
             </table>

@@ -78,7 +78,7 @@ export class CardComponent implements OnInit {
   notification: RowNotification;
   constructor(htmlEncoder: HtmlEncodeService) {
     this.notification = {
-      message: 'Meddelande som visas här, visas även när kortet är öppet. Meddelande som visas här, visas även när kortet är öppet. Meddelande som visas här,', icon: 'vgr-icon-exclamation',
+      message: 'Meddelande som visas här, visas även när kortet är öppet.', icon: 'vgr-icon-exclamation',
       type: NotificationType.Permanent
     } as RowNotification;
 
