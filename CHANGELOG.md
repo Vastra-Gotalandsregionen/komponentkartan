@@ -5,6 +5,9 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 3.1.0
+- *Breaking change* Action panel should now be placed inside Page body, rather than directly inside Page.
+- *Breaking change* Action panel has renamed inputs and outputs.
+- *Breaking change* List flexible header is no longer bound to the state of an Action panel on the same page. To replicate the old behavior, bind the List flexibleHeader input to the same value as the Action panel open input.
 - *Breaking change* vgr-list-column & vgr-list-column-header now renders flexible content insted of a fixed text (and fixed tooltip).
 - Added a polyfill for smooth scrolling in back to top component. (is added in demo-page)
 - Fixed a bug with overflow inside of card-sections. 
@@ -15,6 +18,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed a bug in IE which made it impossible to click on page list rows
 - Allowing list to not have a list header.
 - Fixing bugs with events bubbeling down and closing card sections.
+- It is now possible to freely place Action panels within a page, as well as have more than one Action panel.
+- Page block can now be transparent.
 
 ## 3.0.0 (Stable)
 - Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6
