@@ -164,6 +164,7 @@ export abstract class DropdownBaseComponent {
             this.focusedItemIndex = -1;
             this.focusDropdown();
             event.preventDefault();
+            event.stopPropagation();
         } else if (event.altKey && event.keyCode === 40) {// alt + arrow down
             this.expanded = true;
             this.focusedItemIndex = -1;
