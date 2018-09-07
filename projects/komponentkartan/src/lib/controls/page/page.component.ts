@@ -17,16 +17,14 @@ export class PageComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (this.pageHeader) {
       this.pageHeader.heightChanged
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe((value) => {
-          if (this.bodyContainer) {
-            this.bodyContainer.nativeElement.style.top = `${value}px`;
-          }
-        });
+        .subscribe(value =>
+          this.bodyContainer.nativeElement.style.top = `${value}px`
+        );
     }
   }
 
   ngAfterViewChecked() {
-    if (this.bodyContainer && this.pageHeader && this.pageHeaderHeight !== this.pageHeader.height) {
+    if (this.pageHeader && this.pageHeaderHeight !== this.pageHeader.height) {
       this.bodyContainer.nativeElement.style.top = `${this.pageHeader.height}px`;
     }
   }
