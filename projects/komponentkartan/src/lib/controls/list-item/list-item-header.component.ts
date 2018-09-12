@@ -46,7 +46,6 @@ export class ListItemHeaderComponent implements AfterViewInit {
     ngAfterViewInit() {
         setTimeout(() => {
             this.expanded = this.hostElement.nativeElement.parentNode.parentNode.className.indexOf('list-item--expanded') > 0;
-            console.log(this.expanded);
         });
     }
 
