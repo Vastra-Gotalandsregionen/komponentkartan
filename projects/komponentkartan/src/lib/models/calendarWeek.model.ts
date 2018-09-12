@@ -1,4 +1,4 @@
-import { ICalendarDay } from './calendarDay.model'
+import { ICalendarDay } from './calendarDay.model';
 export interface ICalendarWeek {
     days: ICalendarDay[];
 }

@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixing bugs with events bubbeling down and closing card sections.
 - It is now possible to freely place Action panels within a page, as well as have more than one Action panel.
 - Page block can now be transparent.
+- Readspeakers are now talking to you in list component.
 
 ## 3.0.0 (Stable)
 - Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6
