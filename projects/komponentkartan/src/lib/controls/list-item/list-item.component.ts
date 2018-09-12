@@ -20,18 +20,21 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
         trigger('slideListContent', [
             state('collapsed', style({
                 overflow: 'hidden',
-                height: '0'
+                height: '0',
+                display: 'none'
             })),
             state('expanded', style({
                 overflow: 'visible',
                 height: '*'
             })),
-            transition('expanded => collapsed',
+            transition('expanded => collapsed', [
+                style({overflow: 'hidden'}),
                 animate('400ms ease-out')
-            ),
-            transition('collapsed => expanded',
+            ]),
+            transition('collapsed => expanded', [
+                style({overflow: 'hidden'}),
                 animate('400ms ease-in')
-            ),
+            ]),
         ])
     ]
 })
@@ -123,6 +126,7 @@ export class ListItemComponent implements AfterContentInit {
         this.elementRef.nativeElement.style['overflow'] = 'visible';
 
     }
+
     animationStart($event) {
         this.elementRef.nativeElement.style['overflow'] = 'hidden';
     }
@@ -237,7 +241,7 @@ export class ListItemComponent implements AfterContentInit {
                     } else {
                         this._notification = this.permanentNotification;
                         this.notificationVisible = true;
-                        //this.notificationChanged.emit(this.permanentNotification);
+                        // this.notificationChanged.emit(this.permanentNotification);
                     }
                 }
             }, 2000);

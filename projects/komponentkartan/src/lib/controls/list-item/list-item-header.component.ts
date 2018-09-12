@@ -1,13 +1,15 @@
-import { Component, HostBinding, HostListener, Input, Output, EventEmitter, ElementRef, Renderer } from '@angular/core';
+import { Component, HostBinding, HostListener, Input, Output, EventEmitter, ElementRef, Renderer, AfterViewInit } from '@angular/core';
 
 @Component({
     selector: 'vgr-list-item-header',
     template: `<ng-content></ng-content>`
 })
 
-export class ListItemHeaderComponent {
+export class ListItemHeaderComponent implements AfterViewInit {
     @HostBinding('class.list-item__header') listItemHeader = true;
     @HostBinding('tabIndex') tabIndex = 0;
+    @HostBinding('attr.aria-expanded') expanded = false;
+    @HostBinding('attr.role') role = 'button';
     @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
     @Output() goToFirst: EventEmitter<any> = new EventEmitter();
     @Output() goToLast: EventEmitter<any> = new EventEmitter();
@@ -18,6 +20,7 @@ export class ListItemHeaderComponent {
     toggleExpand(event: KeyboardEvent) {
         if (event.keyCode === 13 || event.keyCode === 32) { // enter & space
             this.expandedChanged.emit(true);
+            this.expanded = !this.expanded;
             event.preventDefault();
         }
         if (event.keyCode === 36) { // Home
@@ -40,8 +43,13 @@ export class ListItemHeaderComponent {
     constructor(private hostElement: ElementRef, private renderer: Renderer) {
     }
 
-    setFocus() {
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.expanded = this.hostElement.nativeElement.parentNode.parentNode.className.indexOf('list-item--expanded') > 0;
+        });
+    }
 
+    setFocus() {
         this.renderer.invokeElementMethod(this.hostElement.nativeElement, 'focus');
     }
 }
