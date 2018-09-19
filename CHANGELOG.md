@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 3.1.0
+## 3.1.0 (Stable)
 - *Breaking change* Action panel should now be placed inside Page body, rather than directly inside Page.
 - *Breaking change* Action panel has renamed inputs and outputs.
 - *Breaking change* List flexible header is no longer bound to the state of an Action panel on the same page. To replicate the old behavior, bind the List flexibleHeader input to the same value as the Action panel open input.
@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Readspeakers are now talking to you in list component.
 - Fixed a bug with chevrons on nested tables beeing placed to low.
 
-## 3.0.0 (Stable)
+## 3.0.0
 - Breaking change, uppgraded all dependencies to use Angular 6 and Angular-Cli 6
 - Read https://update.angular.io/ on how to upgrade
 - Moved komponentkartan lib folder from src/lib to projects/komponentkartan/lib
