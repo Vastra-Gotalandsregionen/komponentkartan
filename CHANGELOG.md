@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 3.1.1
+- Expandable nested vgr-tables ane now bold on hover.
+
 ## 3.1.0 (Stable)
 - *Breaking change* Action panel should now be placed inside Page body, rather than directly inside Page.
 - *Breaking change* Action panel has renamed inputs and outputs.
