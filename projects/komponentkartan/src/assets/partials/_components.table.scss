@@ -3,15 +3,153 @@
     position: relative;
     display: block;
     min-height: 20px;
+
+    .expandable-div-header {
+      font-size: 0;
+      padding: 4px $margin--slim 2px;
+      cursor: pointer;
+
+      &:hover {
+        font-weight: bold !important;
+        @extend .background-color--primary-dimmed;
+      }
+    }
+  }
+  .table__column {
+    &:not(.column--align-right) {
+      padding-right: $margin--slim;
+    }
+    font-size: $font-size--small;
+    span[class^=vgr-icon]{
+      display: inline-block;
+      margin-left: 6px;
+      vertical-align: text-bottom;
+    }
+  }
+  vgr-table-row-column {
+    vertical-align: top;
+  }
+  .table-row{
+    display: block;
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
+    &:focus {
+      outline: 0;
+      box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+    }
+  }
+
+
+  .expandable-div.expandable-div--expanded>.expandable-div-content{
+    padding-bottom: 15px;
+    transition: padding-bottom .4s ease-in;
+  }
+  .table .expandable-div.expandable-div--expanded>.expandable-div-content{
+    padding-bottom: 0px;
+  }
+
+  .table {
+    .expandable-div-header {
+      padding: 0 $margin--slim;
+    }
+    .expandable-div-chevron {
+      margin-top: -4px;
+    }
+  }
+
+  .expandable-div .expandable-div-header .expandable-div-chevron {
+    right: $margin--slim;
+    top: 2px;
+  }
+
+  .expandable-div--expanded {
+    .expandable-div-header {
+      font-weight: bold;
+    }
+    .expandable-div--collapsed {
+      > .expandable-div-header {
+        font-weight: normal;
+      }
+    }
+  }
+
+  .expandable-div-content {
+    .table-row, .table {
+      font-size: 0;
+      .table__column:first-child { padding-left: 10px; }
+      .table-row, .table {
+        .table__column:first-child { padding-left: 20px; }
+        .table-row, .table {
+          .table__column:first-child { padding-left: 30px; }
+          .table-row, .table {
+            .table__column:first-child { padding-left: 40px; }
+            .table-row, .table {
+              .table__column:first-child { padding-left: 50px; }
+              .table-row, .table {
+                .table__column:first-child { padding-left: 60px; }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .table {
+      .expandable-div {
+        .expandable-div-header {
+          padding-left: $margin--fat;
+          padding-right: $margin--fat;
+
+          .expandable-div-chevron {
+            right: $margin--fat;
+            top: 2px;
+          }
+
+          .table__column {
+            font-size: $font-size--medium;
+            &:not(.column--align-right) {
+              padding-right: $margin--fat;
+            }
+          }
+        }
+
+        .table-body {
+          .table-row {
+            display: block;
+            padding-left: $margin--fat;
+            padding-right: $margin--fat;
+
+            .table__column {
+              font-size: $font-size--medium;
+              &:not(.column--align-right) {
+                padding-right: $margin--fat;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /*.table {
+  .expandable-div {
+    position: relative;
+    display: block;
+    min-height: 20px;
     .expandable-div-header {
       font-size: 0; // to avoid spacing between columns
       padding-left: $margin--slim;
       padding-right: $margin--slim;
       padding-top: 4px;
       padding-bottom: 2px;
-      font-weight: bold;
+      //font-weight: bold;
       cursor: pointer;
       &:hover {
+        font-weight: bold;
         @extend .background-color--primary-dimmed;
       }
       .table__column {
@@ -87,10 +225,6 @@
           .expandable-div-content {
             padding-bottom: 0px !important;
           }
-        }
-        .expandable-div-header:hover {
-          //background: red;
-          font-weight: bold;
         }
       }
       .table-body {
@@ -199,8 +333,9 @@
       }
     }
   }
-}
+}*/
 
+  /*
 @media screen and (min-width: $desktop-width--medium) {
   .table {
     .expandable-div {
@@ -228,3 +363,5 @@
     }
   }
 }
+
+*/
