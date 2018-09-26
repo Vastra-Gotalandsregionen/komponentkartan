@@ -4,7 +4,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@ang
 import { By } from "@angular/platform-browser";
 import { FormsModule, FormControl, Validators } from "@angular/forms"
 
-import { DebugElement, forwardRef } from "@angular/core";
+import { DebugElement, forwardRef, SimpleChange } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 
@@ -16,8 +16,7 @@ import { FilterPipe } from "../../pipes/filterPipe";
 import { DropdownItemToSelectedTextPipe } from "../../pipes/dropdownItemToSelectedTextPipe";
 import { DropdownItem } from "../../models/dropdownItem.model";
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
 describe("[DropdownMultiSelectComponent]", () => {
@@ -79,7 +78,9 @@ describe("[DropdownMultiSelectComponent]", () => {
     var dropdownElement: DebugElement;
     beforeEach(() => {
       dropdownElement = rootElement.query(By.css(".dropdown--edit"));
-      component.ngOnInit();
+      component.ngOnChanges({
+        items: new SimpleChange(null, component.items, true)
+      });
       fixture.detectChanges();
 
     });
@@ -316,7 +317,9 @@ describe("[DropdownMultiSelectComponent]", () => {
         dropdownItems.push({ displayName: `Name${i}`, value: 'option' } as DropdownItem<any>);
       }
       component.items = dropdownItems;
-      component.ngOnInit();
+      component.ngOnChanges({
+        items: new SimpleChange(null, component.items, true)
+      });
       fixture.detectChanges();
     });
     it("the filter textbox is visible", () => {

@@ -1,12 +1,8 @@
 import {
     Component, Input, AfterViewInit, ElementRef, OnChanges, Output, EventEmitter, OnInit,
-    ChangeDetectorRef, ViewChild, forwardRef, Optional, SkipSelf, Host, HostBinding
+    ChangeDetectorRef, forwardRef, Optional, SkipSelf, Host, SimpleChanges
 } from '@angular/core';
 import { DropdownItem } from '../../models/dropdownItem.model';
-import { FilterPipe } from '../../pipes/filterPipe';
-import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
-import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
-import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { DropdownBaseComponent } from '../dropdown-base/dropdown.base.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 
@@ -21,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
     }]
 })
 
-export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnInit, ControlValueAccessor, AfterViewInit {
+export class DropdownMultiselectComponent extends DropdownBaseComponent implements OnInit, OnChanges, ControlValueAccessor, AfterViewInit {
 
     @Input() showAllItemText: string;
     @Input() allItemsSelectedLabel: string;
@@ -76,13 +72,13 @@ export class DropdownMultiselectComponent extends DropdownBaseComponent implemen
         if (this.formControlName && this.controlContainer) {
             this.control = this.controlContainer.control.get(this.formControlName);
         }
-        this.filterVisible = this.items && this.items.length > this.filterLimit;
-        // this.updateScrolled();
-        // this.showAllItem.displayName = this.showAllItemText;
-
-        // this.setFocusableItems();
-        // test
         this.updateDropdownLabel();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['items']) {
+            this.filterVisible = this.items && this.items.length > this.filterLimit;
+        }
     }
 
     ngAfterViewInit() {
