@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 3.2.0
+- Made ngx-perfect-scrollbar a dependency instead of a peer dependency.
+
 ## 3.1.1
 - Expandable nested vgr-tables ane now bold on hover.
+- Fixed a bug with dropdown multiselect search/filter not showing up.
 
 ## 3.1.0 (Stable)
 - *Breaking change* Action panel should now be placed inside Page body, rather than directly inside Page.

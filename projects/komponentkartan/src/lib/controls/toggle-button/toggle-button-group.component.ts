@@ -1,6 +1,6 @@
 import { Component, AfterContentInit, OnDestroy, ContentChildren, QueryList, Input } from '@angular/core';
 import { ToggleButtonComponent } from './toggle-button.component';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
