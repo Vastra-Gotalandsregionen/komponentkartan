@@ -16,14 +16,15 @@
     }
   }
   .table__column {
-    &:not(.column--align-right) {
-      padding-right: $margin--slim;
-    }
+    padding-right: $margin--slim;
     font-size: $font-size--small;
     span[class^=vgr-icon]{
       display: inline-block;
       margin-left: 6px;
       vertical-align: text-bottom;
+    }
+    &:last-child{
+      padding-right: 0px;
     }
   }
   vgr-table-row-column {
@@ -110,9 +111,7 @@
 
         .table__column {
           font-size: $font-size--medium;
-          &:not(.column--align-right) {
-            padding-right: $margin--fat;
-          }
+          padding-right: $margin--fat;
         }
       }
 
@@ -124,9 +123,7 @@
 
           .table__column {
             font-size: $font-size--medium;
-            &:not(.column--align-right) {
-              padding-right: $margin--fat;
-            }
+            padding-right: $margin--fat;
           }
         }
       }
