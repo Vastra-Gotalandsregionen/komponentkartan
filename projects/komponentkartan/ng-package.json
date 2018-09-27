@@ -2,9 +2,8 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/komponentkartan",
   "deleteDestPath": false,
-  "whitelistedNonPeerDependencies": ["ngx-perfect-scrollbar"],
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
-  
+  },
+  "whitelistedNonPeerDependencies": ["ngx-perfect-scrollbar"]
 }
