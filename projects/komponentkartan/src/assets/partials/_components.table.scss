@@ -39,7 +39,6 @@
     }
   }
 
-
   .expandable-div.expandable-div--expanded>.expandable-div-content{
     padding-bottom: 15px;
     transition: padding-bottom .4s ease-in;
@@ -76,17 +75,17 @@
   .expandable-div-content {
     .table-row, .table {
       font-size: 0;
-      .table__column:first-child { padding-left: 10px; }
+      .table__column:first-child { padding-left: $margin--slim * 1; }
       .table-row, .table {
-        .table__column:first-child { padding-left: 20px; }
+        .table__column:first-child { padding-left: $margin--slim * 2 }
         .table-row, .table {
-          .table__column:first-child { padding-left: 30px; }
+          .table__column:first-child { padding-left: $margin--slim * 3 }
           .table-row, .table {
-            .table__column:first-child { padding-left: 40px; }
+            .table__column:first-child { padding-left: $margin--slim * 4 }
             .table-row, .table {
-              .table__column:first-child { padding-left: 50px; }
+              .table__column:first-child { padding-left: $margin--slim * 5 }
               .table-row, .table {
-                .table__column:first-child { padding-left: 60px; }
+                .table__column:first-child { padding-left: $margin--slim * 6 }
               }
             }
           }
@@ -97,17 +96,31 @@
 
 }
 
-  @media screen and (min-width: $desktop-width--medium) {
-    .table {
-      .expandable-div {
-        .expandable-div-header {
+@media screen and (min-width: $desktop-width--medium) {
+  .table {
+    .expandable-div {
+      .expandable-div-header {
+        padding-left: $margin--fat;
+        padding-right: $margin--fat;
+
+        .expandable-div-chevron {
+          right: $margin--fat;
+          top: 2px;
+        }
+
+        .table__column {
+          font-size: $font-size--medium;
+          &:not(.column--align-right) {
+            padding-right: $margin--fat;
+          }
+        }
+      }
+
+      .table-body {
+        .table-row {
+          display: block;
           padding-left: $margin--fat;
           padding-right: $margin--fat;
-
-          .expandable-div-chevron {
-            right: $margin--fat;
-            top: 2px;
-          }
 
           .table__column {
             font-size: $font-size--medium;
@@ -116,252 +129,7 @@
             }
           }
         }
-
-        .table-body {
-          .table-row {
-            display: block;
-            padding-left: $margin--fat;
-            padding-right: $margin--fat;
-
-            .table__column {
-              font-size: $font-size--medium;
-              &:not(.column--align-right) {
-                padding-right: $margin--fat;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  /*.table {
-  .expandable-div {
-    position: relative;
-    display: block;
-    min-height: 20px;
-    .expandable-div-header {
-      font-size: 0; // to avoid spacing between columns
-      padding-left: $margin--slim;
-      padding-right: $margin--slim;
-      padding-top: 4px;
-      padding-bottom: 2px;
-      //font-weight: bold;
-      cursor: pointer;
-      &:hover {
-        font-weight: bold;
-        @extend .background-color--primary-dimmed;
-      }
-      .table__column {
-        font-size: $font-size--small;
-        padding-right: $margin--fat;
-        &:last-child {
-          padding-right: 0;
-        }
-        .bg-image--icon {
-          display: inline-block;
-          margin-left: 6px;
-          vertical-align: text-bottom;
-        }
-      }
-      .expandable-div-chevron {
-        position: absolute;
-        top: 0;
-        right: $margin--slim;
-        &.expanded {
-          @extend .chevron-expanded;
-        }
-        &.collapsed {
-          @extend .chevron-collapsed;
-        }
-      }
-    }
-    .table-body {
-      .table-row {
-        font-size: 0; // to avoid spacing between columns
-        display: block;
-        padding-left: $margin--slim;
-        padding-right: $margin--slim;
-        &:hover {
-          @extend .background-color--primary-dimmed;
-        }
-        .table__column {
-          font-size: $font-size--small;
-          padding-right: $margin--fat;
-          vertical-align: top;
-          &:first-child {
-            padding-left: $margin--slim;
-          }
-          &:last-child {
-            padding-right: 0;
-          }
-        }
-        &:focus {
-          outline: 0;
-          box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
-        }
-      }
-    }
-    &.expandable-div--collapsed {
-      >.expandable-div-content {
-        padding-bottom: 0;
-        transition: padding-bottom 400ms ease-in;
-      }
-    }
-    &.expandable-div--expanded {
-      >.expandable-div-content {
-        padding-bottom: 15px;
-        transition: padding-bottom 400ms ease-in;
-      }
-    }
-    .table {
-      .expandable-div {
-        &.expandable-div--collapsed {
-          .expandable-div-content {
-            padding-bottom: 0 !important;
-          }
-        }
-        &.expandable-div--expanded {
-          .expandable-div-content {
-            padding-bottom: 0px !important;
-          }
-        }
-      }
-      .table-body {
-        .table-row {
-          .table__column {
-            &:first-child {
-              padding-left: $margin--slim*2;
-            }
-          }
-        }
-      }
-      .expandable-div-header {
-        .table__column {
-          &:first-child {
-            padding-left: $margin--slim;
-          }
-        }
-      }
-      .expandable-div--collapsed {
-        .expandable-div-header {
-          font-weight: normal;
-          padding-top: 0px;
-          padding-bottom: 0px;
-        }
-      }
-      .expandable-div--expanded {
-        .expandable-div-header {
-          padding-top: 0px;
-          padding-bottom: 0px;
-        }
-      }
-      .table {
-        .table-body {
-          .table-row {
-            .table__column {
-              &:first-child {
-                padding-left: $margin--slim*3;
-              }
-            }
-          }
-        }
-        .expandable-div-header {
-          .table__column {
-            &:first-child {
-              padding-left: $margin--slim*2;
-            }
-          }
-        }
-        .table {
-          .table-body {
-            .table-row {
-              .table__column {
-                &:first-child {
-                  padding-left: $margin--slim*4;
-                }
-              }
-            }
-          }
-          .expandable-div-header {
-            .table__column {
-              &:first-child {
-                padding-left: $margin--slim*3;
-              }
-            }
-          }
-          .table {
-            .table-body {
-              .table-row {
-                .table__column {
-                  &:first-child {
-                    padding-left: $margin--slim*5;
-                  }
-                }
-              }
-            }
-            .expandable-div-header {
-              .table__column {
-                &:first-child {
-                  padding-left: $margin--slim*4;
-                }
-              }
-            }
-            .table {
-              .table-body {
-                .table-row {
-                  .table__column {
-                    &:first-child {
-                      padding-left: $margin--slim*6;
-                    }
-                  }
-                }
-              }
-              .expandable-div-header {
-                .table__column {
-                  &:first-child {
-                    padding-left: $margin--slim*5;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      .expandable-div-chevron {
-        margin-top: -4px;
-      }
-    }
-  }
-}*/
-
-  /*
-@media screen and (min-width: $desktop-width--medium) {
-  .table {
-    .expandable-div {
-      .expandable-div-header {
-        padding-left: $margin--fat;
-        padding-right: $margin--fat;
-        .expandable-div-chevron {
-          right: $margin--fat;
-          top: 2px;
-        }
-        .table__column {
-          font-size: $font-size--medium;
-        }
-      }
-      .table-body {
-        .table-row {
-          display: block;
-          padding-left: $margin--fat;
-          padding-right: $margin--fat;
-          .table__column {
-            font-size: $font-size--medium;
-          }
-        }
       }
     }
   }
 }
-
-*/
