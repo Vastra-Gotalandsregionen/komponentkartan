@@ -61,7 +61,7 @@ describe('[TestTableComponent]', () => {
   describe('When component is initialized with expanded = true', () => {
 
     it('headerrow does not have class collapsed', () => {
-      expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(undefined);
+      expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(false);
     });
     it('headerrow do have class expanded', () => {
       expect(rootElement.query(By.css('.table-header')).classes['expanded']).toBe(true);
