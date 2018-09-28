@@ -1,131 +1,143 @@
 .table {
-  .expandable-div {
+  .table-header {
     position: relative;
-    display: block;
-    min-height: 20px;
+    padding: 4px $margin--slim 2px;
 
-    .expandable-div-header {
-      font-size: 0;
-      padding: 4px $margin--slim 2px;
+    &.expandable {
       cursor: pointer;
 
       &:hover {
-        font-weight: bold !important;
-        @extend .background-color--primary-dimmed;
+        font-weight: bold;
       }
     }
-  }
-  .table__column {
-    padding-right: $margin--slim;
-    font-size: $font-size--small;
-    span[class^=vgr-icon]{
-      display: inline-block;
-      margin-left: 6px;
-      vertical-align: text-bottom;
+
+    &.expanded {
+      font-weight: bold;
     }
-    &:last-child{
-      padding-right: 0px;
-    }
-  }
-  vgr-table-row-column {
-    vertical-align: top;
-  }
-  .table-row{
-    display: block;
-    padding-left: $margin--slim;
-    padding-right: $margin--slim;
-    &:focus {
-      outline: 0;
-      box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+    &:hover {
+      @extend .background-color--primary-dimmed;
     }
   }
 
-  .expandable-div.expandable-div--expanded>.expandable-div-content{
-    padding-bottom: 15px;
-    transition: padding-bottom .4s ease-in;
-  }
-  .table .expandable-div.expandable-div--expanded>.expandable-div-content{
-    padding-bottom: 0px;
+  .table-content {
+    overflow: hidden;
   }
 
   .table {
-    .expandable-div-header {
+    .table-header {
       padding: 0 $margin--slim;
     }
-    .expandable-div-chevron {
+    .table-chevron {
       margin-top: -4px;
     }
   }
+}
 
-  .expandable-div .expandable-div-header .expandable-div-chevron {
-    right: $margin--slim;
-    top: 2px;
+.table-header:focus,
+.table-row:focus {
+  outline: 0;
+  box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+}
+
+.table-header .table__column {
+  vertical-align: bottom;
+}
+
+.table__column {
+  vertical-align:  top;
+  padding-right: $margin--slim;
+  font-size: $font-size--small;
+  span[class^=vgr-icon]{
+    display: inline-block;
+    margin-left: 6px;
+    vertical-align: text-bottom;
+  }
+  &:last-child{
+    padding-right: 0px;
+  }
+}
+
+.table-row{
+  display: block;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  &:hover {
+    @extend .background-color--primary-dimmed;
+  }
+}
+
+
+.table-chevron {
+  position: absolute;
+  top: 0;
+  right: $margin--slim;
+
+  &.expanded {
+    @extend .chevron-expanded;
   }
 
-  .expandable-div--expanded {
-    .expandable-div-header {
-      font-weight: bold;
-    }
-    .expandable-div--collapsed {
-      > .expandable-div-header {
-        font-weight: normal;
-      }
-    }
+  &.collapsed {
+    @extend .chevron-collapsed;
   }
+}
 
-  .expandable-div-content {
+.table > .table-header.expanded + .table-content{
+  padding-bottom: 15px;
+  transition: padding-bottom .4s ease-in;
+}
+
+.table .table > .table-header.expanded + .table-content{
+  padding-bottom: 0px;
+}
+
+.table-content {
+  .table-row, .table {
+    font-size: 0;
+    .table__column:first-child { padding-left: $margin--slim * 1; }
     .table-row, .table {
-      font-size: 0;
-      .table__column:first-child { padding-left: $margin--slim * 1; }
+      .table__column:first-child { padding-left: $margin--slim * 2 }
       .table-row, .table {
-        .table__column:first-child { padding-left: $margin--slim * 2 }
+        .table__column:first-child { padding-left: $margin--slim * 3 }
         .table-row, .table {
-          .table__column:first-child { padding-left: $margin--slim * 3 }
+          .table__column:first-child { padding-left: $margin--slim * 4 }
           .table-row, .table {
-            .table__column:first-child { padding-left: $margin--slim * 4 }
+            .table__column:first-child { padding-left: $margin--slim * 5 }
             .table-row, .table {
-              .table__column:first-child { padding-left: $margin--slim * 5 }
-              .table-row, .table {
-                .table__column:first-child { padding-left: $margin--slim * 6 }
-              }
+              .table__column:first-child { padding-left: $margin--slim * 6 }
             }
           }
         }
       }
     }
   }
-
 }
 
 @media screen and (min-width: $desktop-width--medium) {
   .table {
-    .expandable-div {
-      .expandable-div-header {
-        padding-left: $margin--fat;
-        padding-right: $margin--fat;
+    .table-header {
+      padding-left: $margin--fat !important;
+      padding-right: $margin--fat;
 
-        .expandable-div-chevron {
-          right: $margin--fat;
-          top: 2px;
-        }
+      .table-chevron {
+        right: $margin--fat;
+        top: 2px;
+      }
+    }
 
-        .table__column {
-          font-size: $font-size--medium;
-          padding-right: $margin--fat;
-        }
+    .table__column {
+      font-size: $font-size--medium;
+      padding-right: $margin--fat;
+      &:last-child{
+        padding-right: 0px;
       }
 
-      .table-body {
-        .table-row {
-          display: block;
-          padding-left: $margin--fat;
-          padding-right: $margin--fat;
+    }
 
-          .table__column {
-            font-size: $font-size--medium;
-            padding-right: $margin--fat;
-          }
-        }
+    .table-content {
+      .table-row {
+        display: block;
+        padding-left: $margin--fat;
+        padding-right: $margin--fat;
       }
     }
   }
