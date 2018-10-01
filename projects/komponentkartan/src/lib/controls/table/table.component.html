@@ -1,4 +1,4 @@
-<div class="table-header" (click)="toggleExpansion(expandable)" [ngClass]="{'expanded': expanded, 'collapsed': !expanded, 'expandable': expandable }" tabindex="0" [attr.aria-expanded]="expanded" role="button">
+<div class="table-header" (click)="toggleExpansion(expandable)" [ngClass]="{'expanded': expanded, 'collapsed': !expanded, 'expandable': expandable }" tabindex="0" [attr.aria-expanded]="expandable ? expanded : 'null'" [attr.role]="expandable ? 'button' : 'null'">
   <ng-content select="vgr-table-header"></ng-content>
   <span class="table-chevron" [ngClass]="expanded ? 'expanded' : 'collapsed'" *ngIf="expandable"></span>
 </div>
