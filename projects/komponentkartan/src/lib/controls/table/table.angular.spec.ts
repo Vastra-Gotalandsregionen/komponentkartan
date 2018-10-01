@@ -1,13 +1,8 @@
-
 import { TableComponent } from './table.component';
 import { TableHeaderComponent } from './table-header.component';
 import { TableHeaderColumnComponent } from './table-header-column.component';
 import { TableRowComponent } from './table-row.component';
 import { TableRowColumnComponent } from './table-row-column.component';
-
-import { ExpandableDivComponent } from '../expandableDiv/expandableDiv.component';
-import { ExpandableDivHeaderComponent } from '../expandableDiv/expandableDiv-header.component';
-import { ExpandableDivContentComponent } from '../expandableDiv/expandableDiv-content.component';
 
 import { ComponentFixture, TestBed, async, fakeAsync } from '@angular/core/testing';
 import { DebugElement, Component } from '@angular/core';
@@ -49,18 +44,15 @@ describe('[TestTableComponent]', () => {
         TableHeaderComponent,
         TableHeaderColumnComponent,
         TableRowComponent,
-        TableRowColumnComponent,
-        ExpandableDivComponent,
-        ExpandableDivHeaderComponent,
-        ExpandableDivContentComponent
+        TableRowColumnComponent
       ],
       imports: [CommonModule, BrowserAnimationsModule]
     });
 
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(TestTableComponent);
-      component = fixture.debugElement.query(By.directive(ExpandableDivComponent)).componentInstance;
-      rootElement = fixture.debugElement.query(By.directive(ExpandableDivComponent));
+      component = fixture.debugElement.query(By.directive(TableComponent)).componentInstance;
+      rootElement = fixture.debugElement.query(By.directive(TableComponent));
       fixture.detectChanges();
       done();
     });
@@ -68,14 +60,11 @@ describe('[TestTableComponent]', () => {
 
   describe('When component is initialized with expanded = true', () => {
 
-    it('component has class expandable-div', () => {
-      expect(rootElement.classes['expandable-div']).toBe(true);
+    it('headerrow does not have class collapsed', () => {
+      expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(false);
     });
-    it('component does not have class expandable-div--collapsed', () => {
-      expect(rootElement.classes['expandable-div--collapsed']).toBe(false);
-    });
-    it('component does not have class expandable-div--expanded', () => {
-      expect(rootElement.classes['expandable-div--expanded']).toBe(true);
+    it('headerrow do have class expanded', () => {
+      expect(rootElement.query(By.css('.table-header')).classes['expanded']).toBe(true);
     });
 
     describe('and table header is clicked', () => {
@@ -87,17 +76,13 @@ describe('[TestTableComponent]', () => {
       });
 
       it('expandedChanged has been called', () => {
-        console.log(rootElement.classes);
         expect(component.expandedChanged.emit).toHaveBeenCalledWith(false);
       });
-      it('component has class expandable-div', () => {
-        expect(rootElement.classes['expandable-div']).toBe(true);
+      it('headerrow does not have class collapsed', () => {
+        expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(true);
       });
-      it('component has class expandable-div--collapsed', () => {
-        expect(rootElement.classes['expandable-div--collapsed']).toBe(true);
-      });
-      it('component does not have class expandable-div--expanded', () => {
-        expect(rootElement.classes['expandable-div--expanded']).toBe(false);
+      it('headerrow do have class expanded', () => {
+        expect(rootElement.query(By.css('.table-header')).classes['expanded']).toBe(false);
       });
     });
 
@@ -116,14 +101,11 @@ describe('[TestTableComponent]', () => {
       it('expandedChanged has been called', () => {
         expect(component.expandedChanged.emit).toHaveBeenCalledWith(false);
       });
-      it('component has class expandable-div', () => {
-        expect(rootElement.classes['expandable-div']).toBe(true);
+      it('headerrow do have class collapsed', () => {
+        expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(true);
       });
-      it('component has class expandable-div--collapsed', () => {
-        expect(rootElement.classes['expandable-div--collapsed']).toBe(true);
-      });
-      it('component does not have class expandable-div--expanded', () => {
-        expect(rootElement.classes['expandable-div--expanded']).toBe(false);
+      it('headerrow does not have class expanded', () => {
+        expect(rootElement.query(By.css('.table-header')).classes['expanded']).toBe(false);
       });
 
       describe('table is collapsed, row is focused and enter is space', () => {
@@ -140,14 +122,11 @@ describe('[TestTableComponent]', () => {
         it('expandedChanged has been called', () => {
           expect(component.expandedChanged.emit).toHaveBeenCalledWith(false);
         });
-        it('component has class expandable-div', () => {
-          expect(rootElement.classes['expandable-div']).toBe(true);
+        it('headerrow do have class expanded', () => {
+          expect(rootElement.query(By.css('.table-header')).classes['expanded']).toBe(true);
         });
-        it('component does not have class expandable-div--collapsed', () => {
-          expect(rootElement.classes['expandable-div--collapsed']).toBe(false);
-        });
-        it('component has class expandable-div--expanded', () => {
-          expect(rootElement.classes['expandable-div--expanded']).toBe(true);
+        it('headerrow does not have class collapsed', () => {
+          expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(false);
         });
       });
 
