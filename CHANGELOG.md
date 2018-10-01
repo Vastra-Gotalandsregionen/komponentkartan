@@ -6,12 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 3.2.0
 - Made ngx-perfect-scrollbar a dependency instead of a peer dependency.
+- Remade Tabel-component to not depend on expandable-div and added possibility to have non expanded rows on level 1.
 
-## 3.1.1
+## 3.1.1 (Stable)
 - Expandable nested vgr-tables ane now bold on hover.
 - Fixed a bug with dropdown multiselect search/filter not showing up.
 
-## 3.1.0 (Stable)
+## 3.1.0
 - *Breaking change* Action panel should now be placed inside Page body, rather than directly inside Page.
 - *Breaking change* Action panel has renamed inputs and outputs.
 - *Breaking change* List flexible header is no longer bound to the state of an Action panel on the same page. To replicate the old behavior, bind the List flexibleHeader input to the same value as the Action panel open input.
