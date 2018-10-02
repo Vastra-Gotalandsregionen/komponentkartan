@@ -24,8 +24,31 @@ describe('[ActionPanelComponent]', () => {
     it('fadeState is correct', () => {
       expect(component.fadeState).toBe('visible');
     });
-    it('isOpened is correct', () => {
-      expect(component.isOpened).toBe(false);
+  });
+  describe('ngOnInit', () => {
+    describe('open is true', () => {
+      beforeEach(() => {
+        component.open = true;
+        component.ngOnInit();
+      });
+      it('isOpened is correct', () => {
+        expect(component.isOpened).toBe(true);
+      });
+      it('isClosed is correct', () => {
+        expect(component.isClosed).toBe(false);
+      });
+    });
+    describe('open is false', () => {
+      beforeEach(() => {
+        component.open = false;
+        component.ngOnInit();
+      });
+      it('isOpened is correct', () => {
+        expect(component.isOpened).toBe(false);
+      });
+      it('isClosed is correct', () => {
+        expect(component.isClosed).toBe(true);
+      });
     });
   });
   describe('ngOnChanges', () => {

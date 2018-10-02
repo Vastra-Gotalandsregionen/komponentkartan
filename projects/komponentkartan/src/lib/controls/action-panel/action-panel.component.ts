@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, OnInit } from '@angular/core';
 import { trigger, style, animate, transition, state, AnimationEvent } from '@angular/animations';
 
 @Component({
@@ -29,7 +29,7 @@ import { trigger, style, animate, transition, state, AnimationEvent } from '@ang
     ])
   ]
 })
-export class ActionPanelComponent implements OnChanges {
+export class ActionPanelComponent implements OnChanges, OnInit {
 
   @Input() title: string;
   @Input() open = false;
@@ -42,7 +42,13 @@ export class ActionPanelComponent implements OnChanges {
   private readonly fadeStateHidden = 'hidden';
   slideState = this.slideStateClosed;
   fadeState = this.fadeStateVisible;
-  isOpened = false;
+  isOpened: boolean;
+  isClosed: boolean;
+
+  ngOnInit() {
+    this.isOpened = this.open;
+    this.isClosed = !this.open;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const openChange = changes['open'];
@@ -76,11 +82,17 @@ export class ActionPanelComponent implements OnChanges {
     if (event.fromState === this.slideStateOpen) {
       this.isOpened = false;
     }
+    if (event.fromState === this.slideStateClosed) {
+      this.isClosed = false;
+    }
   }
 
   onSlideEnd(event: AnimationEvent) {
     if (event.fromState === this.slideStateClosed) {
       this.isOpened = true;
+    }
+    if (event.fromState === this.slideStateOpen) {
+      this.isClosed = true;
     }
   }
 }
