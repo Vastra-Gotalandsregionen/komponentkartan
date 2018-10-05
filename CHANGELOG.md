@@ -4,12 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 3.2.0
+## 3.2.1
+- Removed large font-size on long menu-headers
+- Adjusted hover-effects on vgr-table.
+
+## 3.2.0 (Stable, 2018-10-04)
 - Made ngx-perfect-scrollbar a dependency instead of a peer dependency.
 - Remade Tabel-component to not depend on expandable-div and added possibility to have non expanded rows on level 1.
 - Fixed a bug with action panel content being tabable when closed.
 
-## 3.1.1 (Stable)
+## 3.1.1 (2018-09-26)
 - Expandable nested vgr-tables ane now bold on hover.
 - Fixed a bug with dropdown multiselect search/filter not showing up.
 
