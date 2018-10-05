@@ -8,11 +8,13 @@
 
       &:hover {
         font-weight: bold;
+        letter-spacing: -0.17px//$font-size--small-letter-spacing-bold;
       }
     }
 
     &.expanded {
       font-weight: bold;
+      letter-spacing: -0.17px // $font-size--small-letter-spacing-bold;
     }
     &:hover {
       @extend .background-color--primary-dimmed;
@@ -117,6 +119,16 @@
     .table-header {
       padding-left: $margin--fat !important;
       padding-right: $margin--fat;
+
+      &.expandable{
+        &:hover {
+          letter-spacing: $font-size--medium-letter-spacing-bold;
+        }
+      }
+
+      &.expanded {
+        letter-spacing: $font-size--medium-letter-spacing-bold;
+      }
 
       .table-chevron {
         right: $margin--fat;
