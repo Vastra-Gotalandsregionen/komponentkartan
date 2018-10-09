@@ -8,6 +8,18 @@
 
     <div style="margin-top: 20px;height:35px;">
       <vgr-button (click)="showOneButtonModalOverview()">Visa dialog!</vgr-button>
+      <vgr-modal id="modal1">
+        <vgr-modal-header>Välj i dropdown</vgr-modal-header>
+        <vgr-modal-content>
+          <p>Här kan du välja i en fin dropdownlista.</p>
+          <br />
+          <h3 style="margin-bottom: 10px;">Välj här nedan</h3>
+          <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
+        </vgr-modal-content>
+        <vgr-modal-footer>
+          <vgr-button [secondary]="true" (click)="closeModal('modal1')">Knapp</vgr-button>
+        </vgr-modal-footer>
+      </vgr-modal>
     </div>
     <br>
     <p> Förändras med tema:
@@ -146,18 +158,7 @@
 
   </div>
 </app-component-docs>
-<vgr-modal id="modal1">
-  <vgr-modal-header>Välj i dropdown</vgr-modal-header>
-  <vgr-modal-content>
-    <p>Här kan du välja i en fin dropdownlista.</p>
-    <br />
-    <h3 style="margin-bottom: 10px;">Välj här nedan</h3>
-    <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('modal1')">Knapp</vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
+
 <vgr-modal id="modal2">
   <vgr-modal-header>Här kan du trycka på knappar om du gillar det.</vgr-modal-header>
   <vgr-modal-content>

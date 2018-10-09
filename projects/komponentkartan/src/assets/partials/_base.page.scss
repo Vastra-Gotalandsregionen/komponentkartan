@@ -28,5 +28,8 @@ body {
   margin: 0;
   &.modal--open {
     overflow: hidden;
+    .page__page-body-container {
+      position: static;
+    }
   }
 }

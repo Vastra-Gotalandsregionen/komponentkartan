@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 3.2.2 (beta)
+- Changed modal-css to allow it to be placed outside of root.
+
 ## 3.2.1 (Stable, 2018-10-05)
 - Removed large font-size on long menu-headers
 - Adjusted hover-effects on vgr-table.
