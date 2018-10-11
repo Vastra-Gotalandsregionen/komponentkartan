@@ -1,13 +1,13 @@
 
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 import {
   FormsModule, ReactiveFormsModule, ControlContainer,
-  FormGroup, FormControl, Validators, AbstractControl, Form
+  FormControl, Validators
 } from '@angular/forms';
 import { DebugElement } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { InputComponent } from '../../controls/input/input.component';
 
@@ -21,8 +21,6 @@ import localeSe from '@angular/common/locales/se';
 import localeSerExtra from '@angular/common/locales/extra/se';
 registerLocaleData(localeSe, 'sv-SE', localeSerExtra);
 
-import { combineAll } from 'rxjs/operator/combineAll';
-import { Observable } from 'rxjs/Observable';
 
 describe('[InputComponent]', () => {
   let component: InputComponent;

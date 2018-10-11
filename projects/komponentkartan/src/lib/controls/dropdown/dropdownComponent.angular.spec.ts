@@ -1,5 +1,5 @@
 ﻿
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 import { FormsModule, FormControl, Validators } from '@angular/forms';
@@ -14,8 +14,7 @@ import { FilterPipe } from '../../pipes/filterPipe';
 import { DropdownItemToSelectedTextPipe } from '../../pipes/dropdownItemToSelectedTextPipe';
 import { DropdownItem } from '../../models/dropdownItem.model';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { filter } from 'rxjs/operator/filter';
+
 
 
 describe('DropdownComponent', () => {
