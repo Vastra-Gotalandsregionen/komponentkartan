@@ -1,9 +1,8 @@
 
-import { of as observableOf } from 'rxjs';
+import { of as observableOf ,  Observable } from 'rxjs';
 
 import { delay } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ExampleUnit } from './unit.model';
 
 @Injectable()

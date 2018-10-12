@@ -1,17 +1,17 @@
 import {
-    Component, HostListener, HostBinding, OnInit, Input, Output, EventEmitter,
+    Component, HostBinding, OnInit, Input, Output, EventEmitter,
     ElementRef, ChangeDetectorRef, ContentChildren, ContentChild, QueryList,
-    AfterContentInit, forwardRef, ChangeDetectionStrategy
+    AfterContentInit, forwardRef, OnDestroy
 } from '@angular/core';
-import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+import { trigger, style, transition, animate, state } from '@angular/animations';
 
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
 import { ListColumnComponent } from '../list/list-column.component';
-import { ListColumnHeaderComponent } from '../list/list-column-header.component';
-import { ListHeaderComponent } from '../list/list-header.component';
 import { ListItemHeaderComponent } from '../list-item/list-item-header.component';
 import { ListItemContentComponent } from '../list-item/list-item-content.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     templateUrl: './list-item.component.html',
@@ -39,7 +39,7 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
     ]
 })
 
-export class ListItemComponent implements AfterContentInit {
+export class ListItemComponent implements AfterContentInit, OnDestroy {
     readonly showNotificationDurationMs = 1500;
     get stateName() {
         return this.expanded ? 'expanded' : 'collapsed';
@@ -87,6 +87,7 @@ export class ListItemComponent implements AfterContentInit {
 
     private eventNotification: RowNotification;
     private permanentNotification: RowNotification;
+    private ngUnsubscribe = new Subject();
 
     @Input() set notification(value: RowNotification) {
         if (value) {
@@ -132,13 +133,13 @@ export class ListItemComponent implements AfterContentInit {
     }
 
     ngAfterContentInit() {
-        this.listItemHeader.expandedChanged.subscribe(() => this.setExpandOrCollapsed());
-        this.listItemHeader.goToFirst.subscribe(() => this.setFocusOnFirstRow.emit());
-        this.listItemHeader.goToLast.subscribe(() => this.setFocusOnLastRow.emit());
-        this.listItemHeader.goUp.subscribe(() => this.setFocusOnPreviousRow.emit());
-        this.listItemHeader.goDown.subscribe(() => this.setFocusOnNextRow.emit());
-        this.listContent.goUp.subscribe(() => this.setFocusOnPreviousRowContent.emit());
-        this.listContent.goDown.subscribe(() => this.setFocusOnNextRowContent.emit());
+        this.listItemHeader.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setExpandOrCollapsed());
+        this.listItemHeader.goToFirst.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnFirstRow.emit());
+        this.listItemHeader.goToLast.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnLastRow.emit());
+        this.listItemHeader.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow.emit());
+        this.listItemHeader.goDown.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow.emit());
+        this.listContent.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRowContent.emit());
+        this.listContent.goDown.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRowContent.emit());
     }
 
     toggleExpand(event: Event) {
@@ -192,6 +193,11 @@ export class ListItemComponent implements AfterContentInit {
                 }
             }, 400);
         }
+    }
+
+    ngOnDestroy() {
+      this.ngUnsubscribe.next();
+      this.ngUnsubscribe.complete();
     }
 
     private processNotification(notificationType: NotificationType): void {

@@ -1,8 +1,11 @@
-import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
 
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 
 @Component({
     templateUrl: './list.component.html',
@@ -21,7 +24,7 @@ import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.compon
         ])
     ]
 })
-export class ListComponent implements AfterContentInit {
+export class ListComponent implements AfterContentInit, OnDestroy {
     @HostBinding('class.list') hasClass = true;
     @HostBinding('class.list--new-item-added') moveHeader = false;
     @HostBinding('class.animate')  animate = false;
@@ -33,16 +36,17 @@ export class ListComponent implements AfterContentInit {
     @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
 
     loaded = false;
+    private ngUnsubscribe = new Subject();
 
     constructor() {
     }
 
     ngAfterContentInit() {
         if (this.listHeader) {
-            this.listHeader.sortChanged.subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+            this.listHeader.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
         }
         this.subscribeEvents();
-        this.items.changes.subscribe((changes) => {
+        this.items.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((changes) => {
             this.subscribeEvents();
         });
     }
@@ -50,7 +54,7 @@ export class ListComponent implements AfterContentInit {
 
         if (!this.allowMultipleExpandedItems) {
             this.items.forEach(changedContainer => {
-                changedContainer.expandedChanged.subscribe((expanded: boolean) => {
+                changedContainer.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((expanded: boolean) => {
                     if (expanded) {
                         this.items.filter(container => container !== changedContainer).forEach(otherContainer => otherContainer.expanded = false);
                     }
@@ -63,12 +67,12 @@ export class ListComponent implements AfterContentInit {
         }
 
         this.items.forEach((item, index) => {
-            item.setFocusOnFirstRow.subscribe(() => this.items.first.setFocusOnRow());
-            item.setFocusOnLastRow.subscribe(() => this.items.last.setFocusOnRow());
-            item.setFocusOnPreviousRow.subscribe(() => this.setFocusOnPreviousRow(index));
-            item.setFocusOnNextRow.subscribe(() => this.setFocusOnNextRow(index));
-            item.setFocusOnPreviousRowContent.subscribe(() => this.setFocusOnPreviousRowContent(item));
-            item.setFocusOnNextRowContent.subscribe(() => this.setFocusOnNextRow(index));
+            item.setFocusOnFirstRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.items.first.setFocusOnRow());
+            item.setFocusOnLastRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.items.last.setFocusOnRow());
+            item.setFocusOnPreviousRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow(index));
+            item.setFocusOnNextRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow(index));
+            item.setFocusOnPreviousRowContent.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRowContent(item));
+            item.setFocusOnNextRowContent.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow(index));
         });
     }
 
@@ -98,5 +102,10 @@ export class ListComponent implements AfterContentInit {
         if (!item.collapsed) {
             item.setFocusOnRow();
         }
+    }
+
+    ngOnDestroy() {
+      this.ngUnsubscribe.next();
+      this.ngUnsubscribe.complete();
     }
 }

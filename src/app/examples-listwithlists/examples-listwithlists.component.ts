@@ -1,7 +1,9 @@
-import { Component, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, Output, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { RowNotification, NotificationType, SortDirection, SortChangedArgs, ExpandableRow, ModalService } from 'vgr-komponentkartan';
 import { ExampleUnit } from './unit.model';
 import { UnitService } from './unitService';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-examples-listwithlists',
@@ -9,7 +11,7 @@ import { UnitService } from './unitService';
   styleUrls: ['./examples-listwithlists.component.scss']
 
 })
-export class ExamplesListwithlistsComponent {
+export class ExamplesListwithlistsComponent implements OnDestroy {
   sortDirections = SortDirection;
   items = [];
   listData: ExpandableRow<ExampleUnit, any>[] = [];
@@ -23,6 +25,8 @@ export class ExamplesListwithlistsComponent {
   includeInactiveUnits = false;
   startdate: Date;
   enddate: Date;
+
+  private ngUnsubscribe = new Subject();
 
   constructor(private changeDetector: ChangeDetectorRef, private unitService: UnitService, public modalService: ModalService) {
     this.includeInactiveUnits = false;
@@ -51,6 +55,7 @@ export class ExamplesListwithlistsComponent {
     this.noSearchResult = false;
 
     this.unitService.getUnits(this.filtertext)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(units => {
         if (units.length > 0) {
           this.mapToListItems(units);
@@ -148,5 +153,10 @@ export class ExamplesListwithlistsComponent {
       return row1.previewObject[key] > row2.previewObject[key] ? (direction === SortDirection.Ascending ? 1 : -1) :
         row1.previewObject[key] < row2.previewObject[key] ? (direction === SortDirection.Ascending ? -1 : 1) : 0;
     });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

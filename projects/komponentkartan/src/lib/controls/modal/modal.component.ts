@@ -1,16 +1,18 @@
 
 import {
-    Component, ViewContainerRef, OnInit, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2
+    Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy
 } from '@angular/core';
 import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'vgr-modal',
     templateUrl: './modal.component.html'
 })
 
-export class ModalPlaceholderComponent implements AfterViewChecked {
+export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
     isOpen: boolean;
     elementId: string;
     title: string;
@@ -19,6 +21,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
     firstTabStop: any;
     lastTabStop: any;
     focusableElements: any;
+    private ngUnsubscribe = new Subject();
 
     // A list of elements that can recieve focus
     focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
@@ -28,16 +31,25 @@ export class ModalPlaceholderComponent implements AfterViewChecked {
         private modalService: ModalService, private elementRef: ElementRef, private renderer: Renderer2) {
 
         this.isOpen = false;
-        this.modalService.modalOpened$.subscribe(elementId => {
-            this.modalInitialized = false;
-            this.elementId = elementId;
-            this.openModal();
-        });
+        this.modalService.modalOpened$
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(elementId => {
+                this.modalInitialized = false;
+                this.elementId = elementId;
+                this.openModal();
+            });
 
-        this.modalService.modalClosed$.subscribe(elementId => {
-            this.elementId = elementId;
-            this.closeModal();
-        });
+        this.modalService.modalClosed$
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(elementId => {
+                this.elementId = elementId;
+                this.closeModal();
+            });
+    }
+
+    ngOnDestroy() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 
     ngAfterViewChecked() {

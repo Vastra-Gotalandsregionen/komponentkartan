@@ -1,13 +1,11 @@
 import { MenuComponent, MenuItemComponent, SubmenuComponent } from '../../index';
-import { MenuItemBase } from '../menu/menu-item-base';
-import { ComponentFixture, TestBed, async, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement, Component } from '@angular/core';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'vgr-test',

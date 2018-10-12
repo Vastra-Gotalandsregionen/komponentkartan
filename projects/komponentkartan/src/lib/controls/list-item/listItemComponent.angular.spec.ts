@@ -6,7 +6,6 @@ import { By } from '@angular/platform-browser';
 import { DebugElement, Renderer, ElementRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RowNotification } from '../../models/rowNotification.model';
-import { NotificationIcon } from '../../models/notificationIcon.model';
 import { NotificationType } from '../../models/notificationType.model';
 
 import {

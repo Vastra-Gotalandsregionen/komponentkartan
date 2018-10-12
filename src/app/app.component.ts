@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/delay';
-import { Observable } from 'rxjs/Observable';
+
 declare var require: any;
 
 @Component({
