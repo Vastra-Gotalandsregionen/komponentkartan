@@ -4,7 +4,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
   selector: 'vgr-scroll-to-top',
   templateUrl: './scroll-to-top.component.html',
 })
-export class ScrollToTopComponent implements OnInit {
+export class ScrollToTopComponent {
 
   visibleState = false;
 
@@ -19,9 +19,6 @@ export class ScrollToTopComponent implements OnInit {
   }
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   scrollToTop () {
     window.scroll({

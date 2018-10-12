@@ -44,7 +44,7 @@ describe('RingWithTextComponent', () => {
 
   it('size is set to large', () => {
     component.size = 'large';
-    component.ngOnInit();
+    component.ngOnChanges();
     fixture.detectChanges();
 
     expect(circleElement.classes['ring-with-text--large']).toBe(true);
@@ -52,7 +52,7 @@ describe('RingWithTextComponent', () => {
 
   it('size is set to small', () => {
     component.size = 'small';
-    component.ngOnInit();
+    component.ngOnChanges();
     fixture.detectChanges();
 
     expect(circleElement.classes['ring-with-text--small']).toBe(true);
@@ -60,14 +60,14 @@ describe('RingWithTextComponent', () => {
 
   it('not visible if no text provided', () => {
     component.text = '';
-    component.ngOnInit();
+    component.ngOnChanges();
     fixture.detectChanges();
     expect(rootElement.children.length).toBe(0);
   });
 
   it('text should be max two characters long', () => {
     component.text = 'kompontentkartan';
-    component.ngOnInit();
+    component.ngOnChanges();
     fixture.detectChanges();
     const localCircle = rootElement.query(By.css('.ring-with-text'));
     expect(localCircle.nativeElement.textContent).toBe('ko');

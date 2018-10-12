@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { CardColumnComponent } from './card-column.component';
 
 
@@ -7,13 +7,11 @@ import { CardColumnComponent } from './card-column.component';
     selector: 'vgr-card',
     templateUrl: './card.component.html'
 })
-export class CardComponent implements OnInit, AfterContentInit {
+export class CardComponent implements AfterContentInit {
     @ContentChildren(CardColumnComponent) columns: QueryList<CardColumnComponent>;
 
     constructor() {
     }
-
-    ngOnInit() { }
 
     ngAfterContentInit() {
         if (this.columns.length === 1) {
