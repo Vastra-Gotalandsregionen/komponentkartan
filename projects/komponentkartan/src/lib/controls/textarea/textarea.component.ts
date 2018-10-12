@@ -6,17 +6,18 @@ import {
   HostBinding,
   Input,
   OnChanges,
-  OnInit,
   Optional,
   AfterViewInit,
   SimpleChanges,
   SkipSelf,
   EventEmitter,
   ChangeDetectorRef,
-  Output
+  Output,
+  OnDestroy
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'vgr-textarea',
   templateUrl: './textarea.component.html',
@@ -27,7 +28,7 @@ import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCES
   }]
 
 })
-export class TextareaComponent implements AfterViewInit, OnChanges, ControlValueAccessor {
+export class TextareaComponent implements AfterViewInit, OnChanges, ControlValueAccessor, OnDestroy {
 
   @Input() showValidation = true;
   @Input() width: string;
@@ -55,6 +56,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   cancel: boolean;
 
   validationErrorMessage = 'Obligatoriskt';
+  private ngUnsubscribe = new Subject();
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private cdRef: ChangeDetectorRef) {
     this.width = '100%';
@@ -68,8 +70,10 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   ngOnChanges(changes: SimpleChanges) {
     if (this.formControlName) {
       this.control = this.controlContainer.control.get(this.formControlName);
-      this.control.statusChanges.subscribe((status) => {
-      });
+      this.control.statusChanges
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((status) => {
+        });
     }
   }
 
@@ -125,5 +129,10 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   onFocus(event: Event): void {
     this.hasFocus = true;
     this.focus.emit(event);
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
