@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 3.2.2 (beta)
 - Changed modal-css to allow it to be placed outside of root.
+- Removed the need fo rxjs-compat, all should be upgraded for rxjs6.
 
 ## 3.2.1 (Stable, 2018-10-05)
 - Removed large font-size on long menu-headers
@@ -13,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 3.2.0 (2018-10-04)
 - Made ngx-perfect-scrollbar a dependency instead of a peer dependency.
-- Remade Tabel-component to not depend on expandable-div and added possibility to have non expanded rows on level 1.
+- Remade Table-component to not depend on expandable-div and added possibility to have non expanded rows on level 1.
 - Fixed a bug with action panel content being tabable when closed.
 
 ## 3.1.1 (2018-09-26)
