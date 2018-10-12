@@ -7,14 +7,15 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, AsyncValidatorFn }
 import { CityService } from './cityService';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-inputfields',
   templateUrl: './inputfields.component.html',
   styleUrls: ['./inputfields.component.scss']
 })
-export class InputfieldsComponent implements OnInit {
+export class InputfieldsComponent implements OnInit, OnDestroy {
   form: FormGroup;
   isSmall: boolean;
   cityName: string;
@@ -29,6 +30,7 @@ export class InputfieldsComponent implements OnInit {
   allCities: any;
 
   value: any = 81273128739;
+  private ngUnsubscribe = new Subject();
 
   formErrors = {
     'control1': '',
@@ -102,10 +104,16 @@ export class InputfieldsComponent implements OnInit {
     }
 
     this.form.valueChanges
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(data => {
         this.errorHandler.getErrorMessagesReactiveForms(this.formErrors, this.validationMessages, this.form, this.isSmall);
       });
 
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   createForm() {
