@@ -9,6 +9,6 @@
     {{notification? notification.message : ''}}
   </div>
 </div>
-<div [@slideListContent]="stateName" (@slideListContent.done)="animationDone($event)" (@slideListContent.start)="animationStart($event)">
+<div [@slideListContent]="{value: stateName, params: {animationSpeed: animationSpeed}}" (@slideListContent.done)="animationDone($event)" (@slideListContent.start)="animationStart($event)">
   <ng-content select="vgr-list-item-content"></ng-content>
 </div>

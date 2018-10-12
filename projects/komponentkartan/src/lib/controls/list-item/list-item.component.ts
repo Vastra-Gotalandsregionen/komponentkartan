@@ -29,11 +29,11 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
             })),
             transition('expanded => collapsed', [
                 style({overflow: 'hidden'}),
-                animate('400ms ease-out')
+                animate('{{animationSpeed}}ms ease-out')
             ]),
             transition('collapsed => expanded', [
                 style({overflow: 'hidden'}),
-                animate('400ms ease-in')
+                animate('{{animationSpeed}}ms ease-in')
             ]),
         ])
     ]
@@ -59,7 +59,7 @@ export class ListItemComponent implements AfterContentInit {
     @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
     @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
-
+    @Input() animationSpeed = 400; // Default
 
     @Input() set expanded(expandedValue: boolean) {
         if (expandedValue && !this._expanded) {
@@ -190,7 +190,7 @@ export class ListItemComponent implements AfterContentInit {
                 if (expandedChanged) {
                     this.expandedChanged.emit(this._expanded);
                 }
-            }, 400);
+            }, this.animationSpeed);
         }
     }
 
