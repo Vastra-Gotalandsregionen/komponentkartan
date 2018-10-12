@@ -1,8 +1,10 @@
-import { Input, Component, DoCheck, ElementRef, HostBinding, AfterViewInit, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, OnInit, Renderer, ViewChild } from '@angular/core';
+import { Input, Component, ElementRef, HostBinding, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, OnInit, Renderer, ViewChild, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
-import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+import { trigger, style, transition, animate, state } from '@angular/animations';
 import { MenuItemComponent } from '../..';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'vgr-submenu',
@@ -25,11 +27,13 @@ import { MenuItemComponent } from '../..';
     ]
 })
 
-export class SubmenuComponent extends MenuItemBase implements AfterContentInit, OnInit {
+export class SubmenuComponent extends MenuItemBase implements AfterContentInit, OnInit, OnDestroy {
     @Input() text: string;
     @Input() expanded = false;
     private _showExpanded: boolean;
+    private ngUnsubscribe = new Subject();
     state: string;
+
     @HostBinding('attr.aria-haspopup') hasAriaPopup = true;
     @HostBinding('attr.role') role = 'menuitem';
 
@@ -115,11 +119,13 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
     ngOnInit() {
         this._showExpanded = this.expanded;
 
-        this.router.events.subscribe((event) => {
-            if (event instanceof NavigationEnd) {
-                this.setChildSelected(event);
-            }
-        });
+        this.router.events
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((event) => {
+                if (event instanceof NavigationEnd) {
+                    this.setChildSelected(event);
+                }
+            });
 
         this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
     }
@@ -128,30 +134,40 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         const menuItemArray = this.menuItems.toArray();
         menuItemArray.splice(0, 1);
         menuItemArray.forEach((x, i) => {
-            x.home.subscribe(() => {
-                this.home.emit();
-            });
-            x.end.subscribe(() => {
-                this.end.emit();
-            });
-            x.arrowUp.subscribe(() => {
-                if (i === 0) {
+            x.home
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
+                    this.home.emit();
+                });
+            x.end
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
+                    this.end.emit();
+                });
+            x.arrowUp
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
+                    if (i === 0) {
+                        this.setFocus();
+                        return;
+                    }
+                    menuItemArray[i - 1].setFocus();
+                });
+            x.arrowDown
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
+                    if (i === menuItemArray.length - 1) {
+                        this.arrowDown.emit();
+                        return;
+                    }
+                    menuItemArray[i + 1].setFocus();
+                });
+            x.escape
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
                     this.setFocus();
-                    return;
-                }
-                menuItemArray[i - 1].setFocus();
-            });
-            x.arrowDown.subscribe(() => {
-                if (i === menuItemArray.length - 1) {
-                    this.arrowDown.emit();
-                    return;
-                }
-                menuItemArray[i + 1].setFocus();
-            });
-            x.escape.subscribe(() => {
-                this.setFocus();
-                this.showExpanded = false;
-            });
+                    this.showExpanded = false;
+                });
         });
     }
 
@@ -171,5 +187,10 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         } else {
             this.childSelected = false;
         }
+    }
+
+    ngOnDestroy() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 }

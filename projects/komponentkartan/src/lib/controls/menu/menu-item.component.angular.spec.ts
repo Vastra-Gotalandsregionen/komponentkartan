@@ -1,12 +1,12 @@
 import { MenuItemComponent } from '../../index';
-import { ComponentFixture, TestBed, async, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DebugElement } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 
-describe('[MenuItemComponent]', () => {
+fdescribe('[MenuItemComponent]', () => {
 
     class DummyComponent { }
 

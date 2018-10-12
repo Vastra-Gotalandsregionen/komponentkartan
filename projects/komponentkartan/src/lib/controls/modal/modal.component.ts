@@ -1,6 +1,6 @@
 
 import {
-    Component, ViewContainerRef, OnInit, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy
+    Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy
 } from '@angular/core';
 import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
@@ -32,24 +32,24 @@ export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
 
         this.isOpen = false;
         this.modalService.modalOpened$
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(elementId => {
-            this.modalInitialized = false;
-            this.elementId = elementId;
-            this.openModal();
-        });
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(elementId => {
+                this.modalInitialized = false;
+                this.elementId = elementId;
+                this.openModal();
+            });
 
         this.modalService.modalClosed$
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(elementId => {
-            this.elementId = elementId;
-            this.closeModal();
-        });
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(elementId => {
+                this.elementId = elementId;
+                this.closeModal();
+            });
     }
 
     ngOnDestroy() {
-      this.ngUnsubscribe.next();
-      this.ngUnsubscribe.complete();
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 
     ngAfterViewChecked() {
