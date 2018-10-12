@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TextareaComponent } from './textarea.component';
 import {
   FormsModule, ReactiveFormsModule, ControlContainer,
-  FormGroup, FormControl, Validators, AbstractControl, Form
+  FormControl, Validators
 } from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';

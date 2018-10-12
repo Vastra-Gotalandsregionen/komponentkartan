@@ -23,7 +23,7 @@ class TestMenuComponent { }
 
 
 
-fdescribe('[MenuComponent]', () => {
+describe('[MenuComponent]', () => {
     let fixture: ComponentFixture<TestMenuComponent>;
     let component: MenuComponent;
     let rootElement: HTMLElement;
