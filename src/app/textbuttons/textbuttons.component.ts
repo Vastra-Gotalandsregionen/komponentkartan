@@ -9,6 +9,7 @@ export class TextbuttonsComponent implements OnInit {
   lastButtonPressed: string;
   buttonDisabled = true;
   buttonSecondaryDisabled = true;
+  buttonDiscreteDisabled = true;
   constructor() {
     this.lastButtonPressed = '';
   }

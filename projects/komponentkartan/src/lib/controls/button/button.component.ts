@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnChanges } from '@angular/core';
+﻿import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'vgr-button',
@@ -6,7 +6,7 @@
 })
 export class ButtonComponent implements OnChanges {
   @Input() disabled = false;
-  @Input() secondary = false;
+  @Input() buttonStyle = 'primary';
   @Input() type = 'button';
   reenabled = false;
   private wasDisabled = false;

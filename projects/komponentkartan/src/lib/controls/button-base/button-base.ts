@@ -1,4 +1,4 @@
-﻿import { Input, EventEmitter, Output, HostBinding } from '@angular/core';
+﻿import { Input, HostBinding } from '@angular/core';
 
 export abstract class ButtonBase {
   @HostBinding('class.button') buttonClass = true;

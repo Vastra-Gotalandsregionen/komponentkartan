@@ -29,8 +29,8 @@
             <label>{{selectedUnit}}</label>
           </div>
           <div class="flex-right">
-            <vgr-button class="enhet-card__abort-button" (click)="onNewUnitCancel()" [secondary]="true">Avbryt</vgr-button>
-            <vgr-button [secondary]="true" (click)="onNewUnitSave()">Spara enhet</vgr-button>
+            <vgr-button class="enhet-card__abort-button" (click)="onNewUnitCancel()" [buttonStyle]="'secondary'">Avbryt</vgr-button>
+            <vgr-button [buttonStyle]="'secondary'" (click)="onNewUnitSave()">Spara enhet</vgr-button>
           </div>
         </vgr-card-header>
         <vgr-card-column>
@@ -71,7 +71,7 @@
                 <!-- <vgr-title-value [title]=" 'Lägg till enhetschef*'" *ngIf="!cardLocked">
                   <div class="column-layout column-layout--pull-left column-layout--component">
                     <vgr-filter-textbox></vgr-filter-textbox>
-                    <vgr-button style="padding-left:63%" [secondary]="true" (click)="onAddEnhetschef(newUnit)">Lägg till</vgr-button>
+                    <vgr-button style="padding-left:63%" [buttonStyle]="'secondary'" (click)="onAddEnhetschef(newUnit)">Lägg till</vgr-button>
                   </div>
                 </vgr-title-value> -->
                 <vgr-title-value [title]=" 'Enhetschef*'" [slim]="newCardLocked">
@@ -248,7 +248,7 @@
                         <!-- <vgr-title-value [title]=" 'Lägg till enhetschef*'" *ngIf="!cardLocked">
                           <div class="column-layout column-layout--pull-left column-layout--component">
                             <vgr-filter-textbox></vgr-filter-textbox>
-                            <vgr-button style="padding-left:63%" [secondary]="true" (click)="onAddEnhetschef(newUnit)">Lägg till</vgr-button>
+                            <vgr-button style="padding-left:63%" [buttonStyle]="'secondary'" (click)="onAddEnhetschef(newUnit)">Lägg till</vgr-button>
                           </div>
                         </vgr-title-value> -->
                         <vgr-title-value [title]=" 'Enhetschef*'" [slim]="cardLocked">

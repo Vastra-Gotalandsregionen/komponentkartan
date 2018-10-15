@@ -7,7 +7,8 @@
       <br>
       <br>
       <vgr-button type="submit" (click)="lastButtonPressed = 'Klicka här - primär'">Klicka här</vgr-button>
-      <vgr-button [secondary]="true" (click)="lastButtonPressed = 'Klicka här - sekundär'">Klicka här</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" (click)="lastButtonPressed = 'Klicka här - sekundär'">Klicka här</vgr-button>
+      <vgr-button [buttonStyle]="'descrete'" (click)="lastButtonPressed = 'Klicka här - diskret'">Klicka här</vgr-button>
     </p>
     <p> Förändras med tema:
       <strong>ja</strong>
@@ -24,11 +25,16 @@
       </div>
       <h2>Sekundärknappar</h2>
       <div>
-
-        <vgr-button [secondary]="true" (click)="lastButtonPressed = 'OK - sekundär'">OK</vgr-button>
-        <vgr-button [secondary]="true" (click)="buttonSecondaryDisabled=!buttonSecondaryDisabled">{{buttonSecondaryDisabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
-        <vgr-button [secondary]="true" [disabled]="buttonSecondaryDisabled">{{buttonSecondaryDisabled ? 'Inaktiv' : 'Aktiv'}}</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" (click)="lastButtonPressed = 'OK - sekundär'">OK</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" (click)="buttonSecondaryDisabled=!buttonSecondaryDisabled">{{buttonSecondaryDisabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" [disabled]="buttonSecondaryDisabled">{{buttonSecondaryDisabled ? 'Inaktiv' : 'Aktiv'}}</vgr-button>
       </div>
+      <h2>Transparanta knappar</h2>
+      <div>
+        <vgr-button [buttonStyle]="'discrete'" (click)="lastButtonPressed = 'OK - diskret'">OK</vgr-button>
+        <vgr-button [buttonStyle]="'discrete'" (click)="buttonDiscreteDisabled=!buttonDiscreteDisabled">{{buttonDiscreteDisabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
+        <vgr-button [buttonStyle]="'discrete'" [disabled]="buttonDiscreteDisabled">{{buttonDiscreteDisabled ? 'Inaktiv' : 'Aktiv'}}</vgr-button>
+      </div>      
     </div>
     <br>
     <br>
@@ -43,9 +49,9 @@
         <th>Exempel</th>
       </tr>
       <tr>
-        <td>secondary : boolean</td>
-        <td>Visa sekundärt utseende. Default är false.</td>
-        <td>[secondary]="true"</td>
+        <td>buttonStyle : string</td>
+        <td>Ändra utseende. Möjliga värden är primary/secondary/discrete. Default är primary.</td>
+        <td>[buttonStyle]="'secondary'"</td>
       </tr>
       <tr>
         <td>disabled : boolean</td>
@@ -67,6 +73,7 @@
     <br>
     <p>Förutom rollen så används attributen:</p>
     <ul class="doc-list">
+
       <li>aria-disabled, om knappen är inaktiv eller aktiv </li>
 
     </ul>
