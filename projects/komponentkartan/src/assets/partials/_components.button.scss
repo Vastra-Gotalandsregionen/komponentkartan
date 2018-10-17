@@ -40,6 +40,10 @@
     &.button--disabled {
       color: $secondary-color--default;
     }
+    &.button--enabling {
+      animation: none;
+      transition: color 0.6s ease;
+    }
     &:hover:not(.button--disabled),
     &:focus:not(.button--disabled) {
       @extend .background-color--primary-dimmed;

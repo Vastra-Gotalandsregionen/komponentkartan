@@ -3,12 +3,12 @@
   <div class="docs__overview">
     <p>
       <code>
-        &lt;vgr-button&gt; </code> finns i två olika utföranden, primär och sekundär.
+        &lt;vgr-button&gt; </code> finns i tre olika utföranden, primär, sekundär och diskret.
       <br>
       <br>
       <vgr-button type="submit" (click)="lastButtonPressed = 'Klicka här - primär'">Klicka här</vgr-button>
       <vgr-button [buttonStyle]="'secondary'" (click)="lastButtonPressed = 'Klicka här - sekundär'">Klicka här</vgr-button>
-      <vgr-button [buttonStyle]="'descrete'" (click)="lastButtonPressed = 'Klicka här - diskret'">Klicka här</vgr-button>
+      <vgr-button [buttonStyle]="'discrete'" (click)="lastButtonPressed = 'Klicka här - diskret'">Klicka här</vgr-button>
     </p>
     <p> Förändras med tema:
       <strong>ja</strong>
@@ -34,7 +34,15 @@
         <vgr-button [buttonStyle]="'discrete'" (click)="lastButtonPressed = 'OK - diskret'">OK</vgr-button>
         <vgr-button [buttonStyle]="'discrete'" (click)="buttonDiscreteDisabled=!buttonDiscreteDisabled">{{buttonDiscreteDisabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
         <vgr-button [buttonStyle]="'discrete'" [disabled]="buttonDiscreteDisabled">{{buttonDiscreteDisabled ? 'Inaktiv' : 'Aktiv'}}</vgr-button>
-      </div>      
+      </div>    
+      <div>
+          <vgr-button [buttonStyle]="'discrete'" (click)="lastButtonPressed = 'Ändra - diskret med ikon'">
+              <div style="display: flex; align-items: center;">
+                <span style="display:inline-block; background-size: 70%;" class="vgr-icon-edit"></span>
+                <span style="padding-right: 10px;">Ändra</span> 
+              </div>
+            </vgr-button>
+      </div>  
     </div>
     <br>
     <br>
