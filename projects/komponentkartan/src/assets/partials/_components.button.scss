@@ -1,4 +1,41 @@
-﻿.button {
+﻿@mixin button-enabling--secondary($name, $color) {
+  @keyframes #{$name} {
+    0% {
+      background-color: $text-color--light;
+    }
+    50% {
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+      background-color: $color;
+      border-color: $color;
+      border-width: 1px;
+      border-style: solid;
+      color: $text-color--light;
+    }
+    100% {
+      background-color: $text-color--light;
+    }
+  }
+}
+
+@include button-enabling--secondary(button-enabling--secondary-red, $primary-color--red);
+@include button-enabling--secondary(button-enabling--secondary-neutral, $primary-color--default);
+@include button-enabling--secondary(button-enabling--secondary-blue, $primary-color--blue);
+@include button-enabling--secondary(button-enabling--secondary-green, $primary-color--green);
+@include button-enabling--secondary(button-enabling--secondary-pinkie, $primary-color--pinkie);
+
+@keyframes button-enabling {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+.button {
   @extend .button__base;
   font-size: $font-size--small;
   font-family: $font-family;
@@ -7,6 +44,10 @@
   min-width: 87px;
   padding-left: 18px;
   padding-right: 18px;
+  &.button--enabling {
+    animation: button-enabling 0.6s;
+    transition: background-color 0.4s ease;
+  }
   &.button--secondary {
     @extend .color--primary;
     @extend .border-color--primary;
@@ -26,6 +67,21 @@
       @extend .background-color--primary;
       color: $text-color--light;
       transition: background-color 0.5s ease, color 0.5s ease;
+    }
+    &.button--enabling {
+      animation: button-enabling--secondary-neutral 0.9s;
+      .theme--red & {
+        animation: button-enabling--secondary-red 0.9s;
+      }
+      .theme--blue & {
+        animation: button-enabling--secondary-blue 0.9s;
+      }
+      .theme--green & {
+        animation: button-enabling--secondary-green 0.9s;
+      }
+      .theme--pinkie & {
+        animation: button-enabling--secondary-pinkie 0.9s;
+      }
     }
   }
   &.button--discrete {
@@ -51,23 +107,6 @@
       transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
     }
   }
-}
-
-@keyframes button-enabling {
-  0% {
-    box-shadow: none;
-  }
-  50% {
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-  }
-  100% {
-    box-shadow: none;
-  }
-}
-
-.button--enabling {
-  animation: button-enabling 0.6s;
-  transition: background-color 0.4s ease;
 }
 
 @media screen and (min-width: $desktop-width--medium) {
