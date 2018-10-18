@@ -6,7 +6,7 @@
 })
 export class ButtonComponent implements OnChanges {
   @Input() disabled = false;
-  @Input() secondary = false;
+  @Input() buttonStyle = 'primary';
   @Input() type = 'button';
   reenabled = false;
   private wasDisabled = false;

@@ -121,49 +121,4 @@
 @include theme(border-color);
 @include theme(color);
 @include theme(background-color);
-/*********************************************************************************************
-    Button animations
-    Since animations cannot use the same type of class-based @extend theming, they need
-    special handling. They are declared here to centralize theming
-*********************************************************************************************/
 
-@mixin button-enabling--secondary($name, $color) {
-  @keyframes #{$name} {
-    0% {
-      background-color: $text-color--light;
-    }
-    50% {
-      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-      background-color: $color;
-      border-color: $color;
-      border-width: 1px;
-      border-style: solid;
-      color: $text-color--light;
-    }
-    100% {
-      background-color: $text-color--light;
-    }
-  }
-}
-
-@include button-enabling--secondary(button-enabling--secondary-red, $primary-color--red);
-@include button-enabling--secondary(button-enabling--secondary-neutral, $primary-color--default);
-@include button-enabling--secondary(button-enabling--secondary-blue, $primary-color--blue);
-@include button-enabling--secondary(button-enabling--secondary-green, $primary-color--green);
-@include button-enabling--secondary(button-enabling--secondary-pinkie, $primary-color--pinkie);
-.button--enabling.button--secondary {
-  transition: background-color 0.5s ease, color 0.5s ease;
-  animation: button-enabling--secondary-neutral 0.9s;
-  .theme--red & {
-    animation: button-enabling--secondary-red 0.9s;
-  }
-  .theme--blue & {
-    animation: button-enabling--secondary-blue 0.9s;
-  }
-  .theme--green & {
-    animation: button-enabling--secondary-green 0.9s;
-  }
-  .theme--pinkie & {
-    animation: button-enabling--secondary-pinkie 0.9s;
-  }
-}

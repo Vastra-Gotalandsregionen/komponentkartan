@@ -1,9 +1,14 @@
 <app-component-docs [componentName]="'Modal dialog'">
   <div class="docs__overview">
+    
     <code>&lt;vgr-modal&gt;</code>
-    <p>En modal dialog visar ett meddelande för användaren och inväntar svar / kvittering. Under tiden som meddelandet
-      visas
-      är resten av applikationen inaktiverad.
+    <p>En modal dialog visar ett meddelande för användaren och inväntar svar / kvittering. 
+      Under tiden som meddelandet visas är resten av applikationen inaktiverad.<br><br>
+    </p>
+    <p>
+        I modaler placeras knappar som alternativ för att gå vidare till höger och “avbryt” till vänster. 
+        Fokus alltid på det som ger minst skada om det är svårt att återkalla/vid säkerhetsfall. 
+        Modaler bör endast användas när det är oåterkalleliga handlingar, allvarlig konsekvens om det blir fel eller vid automatiskt triggade handlingar.
     </p>
 
     <div style="margin-top: 20px;height:35px;">
@@ -17,7 +22,7 @@
           <vgr-dropdown [values]="['hej', 'på', 'dig', 'din', 'kodapa', ':)']"></vgr-dropdown>
         </vgr-modal-content>
         <vgr-modal-footer>
-          <vgr-button [secondary]="true" (click)="closeModal('modal1')">Knapp</vgr-button>
+          <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal1')">Knapp</vgr-button>
         </vgr-modal-footer>
       </vgr-modal>
     </div>
@@ -166,8 +171,8 @@
     <vgr-button>Hohohoho!</vgr-button>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 1</vgr-button>
-    <vgr-button [secondary]="true" (click)="closeModal('modal2')">Knapp 2</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal2')">Knapp 1</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal2')">Knapp 2</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="modal3">
@@ -191,8 +196,8 @@
     </p>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('modal3')">Jag accepterar</vgr-button>
-    <vgr-button [secondary]="true" default="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal3')">Jag accepterar</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" default="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="modal4">
@@ -201,9 +206,9 @@
     <p>Ändringarna går förlorade om du inte sparar dem</p>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara</vgr-button>
-    <vgr-button [secondary]="true" (click)="closeModal('modal4')">Spara inte</vgr-button>
-    <vgr-button [secondary]="true" default="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal4')">Spara</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" default="true" (click)="closeModal('modal4')">Spara inte</vgr-button>
+    <vgr-button [buttonStyle]="'discrete'" (click)="closeModal('modal4')">Avbryt</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <form [formGroup]="vardvalForm">
@@ -218,8 +223,8 @@
       <vgr-dropdown formControlName="vardval" [showValidation]="false" [items]="dropdownItems"></vgr-dropdown>
     </vgr-modal-content>
     <vgr-modal-footer>
-      <vgr-button [secondary]="true" (click)="closeSelectVardval1()">Avbryt</vgr-button>
-      <vgr-button [secondary]="true" [disabled]="vardvalForm.invalid" (click)="selectVardval1()">Skriv ut</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" (click)="closeSelectVardval1()">Avbryt</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" [disabled]="vardvalForm.invalid" (click)="selectVardval1()">Skriv ut</vgr-button>
     </vgr-modal-footer>
   </vgr-modal>
 </form>
@@ -232,8 +237,8 @@
       <vgr-dropdown formControlName="vardval" [showValidation]="false" [items]="dropdownItems"></vgr-dropdown>
     </vgr-modal-content>
     <vgr-modal-footer>
-      <vgr-button [secondary]="true" (click)="closeSelectVardval2()">Avbryt</vgr-button>
-      <vgr-button [secondary]="true" [disabled]="vardvalForm2.invalid" (click)="selectVardval2()">Skriv ut</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" (click)="closeSelectVardval2()">Avbryt</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" [disabled]="vardvalForm2.invalid" (click)="selectVardval2()">Skriv ut</vgr-button>
     </vgr-modal-footer>
   </vgr-modal>
 </form>
@@ -248,8 +253,8 @@
     <vgr-textarea></vgr-textarea>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Avbryt</vgr-button>
-    <vgr-button [secondary]="true" (click)="closeModal('commentAnswerWithTextModal')">Svara</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentAnswerWithTextModal')">Avbryt</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentAnswerWithTextModal')">Svara</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="commentAnswerWithoutTextModal">
@@ -262,8 +267,8 @@
     </form>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModalCancel('commentAnswerWithoutTextModal')">Avbryt</vgr-button>
-    <vgr-button [secondary]="true" (click)="closeModalSave('commentAnswerWithoutTextModal')">Svara</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModalCancel('commentAnswerWithoutTextModal')">Avbryt</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModalSave('commentAnswerWithoutTextModal')">Svara</vgr-button>
   </vgr-modal-footer>
 
 </vgr-modal>
@@ -275,8 +280,8 @@
     </p>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Avbryt</vgr-button>
-    <vgr-button [secondary]="true" (click)="closeModal('commentModal')">Spara</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Avbryt</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Spara</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="myModalId">
@@ -285,7 +290,7 @@
     <p>Ändringarna går förlorade om du inte sparar dem</p>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true">Spara</vgr-button>
-    <vgr-button [secondary]="true" default="true" (click)="modalService.closeDialog('myModalId')">Avbryt</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'">Spara</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('myModalId')">Avbryt</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
