@@ -1,9 +1,14 @@
 <app-component-docs [componentName]="'Modal dialog'">
   <div class="docs__overview">
+    
     <code>&lt;vgr-modal&gt;</code>
-    <p>En modal dialog visar ett meddelande för användaren och inväntar svar / kvittering. Under tiden som meddelandet
-      visas
-      är resten av applikationen inaktiverad.
+    <p>En modal dialog visar ett meddelande för användaren och inväntar svar / kvittering. 
+      Under tiden som meddelandet visas är resten av applikationen inaktiverad.<br><br>
+    </p>
+    <p>
+        I modaler placeras knappar som alternativ för att gå vidare till höger och “avbryt” till vänster. 
+        Fokus alltid på det som ger minst skada om det är svårt att återkalla/vid säkerhetsfall. 
+        Modaler bör endast användas när det är oåterkalleliga handlingar, allvarlig konsekvens om det blir fel eller vid automatiskt triggade handlingar.
     </p>
 
     <div style="margin-top: 20px;height:35px;">
