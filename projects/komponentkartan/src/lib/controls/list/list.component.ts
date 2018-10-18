@@ -99,7 +99,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     }
 
     setFocusOnPreviousRowContent(item: ListItemComponent) {
-        if (!item.collapsed) {
+        if (item.expanded) {
             item.setFocusOnRow();
         }
     }

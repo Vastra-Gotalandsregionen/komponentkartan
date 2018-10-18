@@ -15,6 +15,10 @@
   }
 }
 
+.list-item-content{
+  overflow:hidden;
+}
+
 $animation-time: 1.4s;
 vgr-list.list--new-item-added {
   vgr-list-header {
@@ -137,9 +141,9 @@ vgr-list.list--new-item-added {
   display: none;
   margin-top: 2px;
   box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
-  &.list-item--columns-initialized {
-    display: block;
-  }
+  display: block;
+  border-left: 5px solid white;
+
   .list-item__header:after {
     @extend .chevron-expanded;
     margin-left: auto;
@@ -166,6 +170,10 @@ vgr-list.list--new-item-added {
     transition: visibility 0.3s ease-out, margin-top 0.3s ease-out;
     transition-delay: 0.3s;
   }
+  &.list-item--notification-visible {
+    border-left-color: $text-color--default;
+    margin: 5px 0px;
+  }
 }
 
 .list-item__header {
@@ -175,7 +183,7 @@ vgr-list.list--new-item-added {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: $margin--slim;
+  padding-left: $margin--slim - 5px;
   padding-right: $margin--slim;
   transition: opacity 0.3s linear, height 0.3s linear;
   transition-delay: 0.2s, 0s;
@@ -214,10 +222,28 @@ vgr-list.list--new-item-added {
 }
 
 .list-item__notification {
-  opacity: 0;
-  max-height: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-left: $margin--slim - 5;
+  padding-right: $margin--slim;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+  border-top: 1px solid $background-color--default;
+  .list-item__notification__icon {
+    width: 15px;
+    height: 15px;
+    background-size: 17px;
+  }
+  .list-item__notification__message {
+    padding: 3px 0;
+  }
+}
+
+/*.list-item__notification {
+  //opacity: 0;
+  //max-height: 0px;
+  //padding-top: 0px;
+  //padding-bottom: 0px;
   padding-left: $margin--slim;
   padding-right: $margin--slim;
   border-spacing: 10px;
@@ -243,6 +269,7 @@ vgr-list.list--new-item-added {
     cursor: default;
   }
 }
+*/
 
 .list__notification {
   padding: 5px 10px;
