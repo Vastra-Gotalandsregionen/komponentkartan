@@ -1,0 +1,32 @@
+<div class="dropdown-x" [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
+  <div class="validation">
+    <div #dropdown class="dropdown__control" role="combobox" tabindex="0"
+      [attr.aria-labelledby]="labelledbyid" [attr.aria-expanded]="expanded" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
+      [ngClass]="{ 'dropdown--focus': hasFocus, 'dropdown--readonly': readonly, 'dropdown--disabled': disabled, 'dropdown--open': expanded, 'dropdown--filter-visible': filterVisible }"
+      (mousedown)="toggleExpand()" (keydown)="onKeydown($event)" (focus)="onFocus()" (blur)="onBlur()">
+      <div class="dropdown__header">
+        <div class="dropdown__header__label noselect" id="{{labelledbyid}}" title="{{label}}">{{label}}</div>
+        <div class="dropdown__header__button">
+            <div class="dropdown__header__button__icon"></div>
+        </div>
+      </div>
+      <div class="dropdown__menu-x" *ngIf="expanded && !readonly && !disabled" (mousedown)="onMenuMousedown()">
+        <div *ngIf="filterVisible" class="dropdown__menu__filter-textbox">
+          <vgr-filter-textbox tabindex="0" (valueChanged)="filterItems($event)" (keydown)="onFilterKeydown($event)"></vgr-filter-textbox>
+        </div>
+        <div *ngIf="dimmerTopVisible" class="dropdown__menu__dimmer dropdown__menu__dimmer-top"></div>
+        <perfect-scrollbar #scrollbar class="dropdown__menu__scrollbar" [config]="scrollbarConfig" (psScrollDown)="showTopScrollDimmer()" (psScrollUp)="showBottomScrollDimmer()" (psYReachStart)="hideTopScrollDimmer()" (psYReachEnd)="hideBottomScrollDimmer()">
+          <div class="dropdown__menu__items" role="listbox">
+            <div *ngIf="filterVisible" class="dropdown__menu__items__item dropdown__menu__items__select-all" (mousedown)="showAllItems()" (keydown)="onSelectAllKeydown($event)" title="{{showAllItemText}}">{{showAllItemText}}</div>
+            <ng-content></ng-content>
+          </div>
+        </perfect-scrollbar>
+        <div *ngIf="dimmerBottomVisible" class="dropdown__menu__dimmer dropdown__menu__dimmer-bottom"></div>
+      </div>
+    </div>
+    <div class="validation__status" title="{{validationErrorMessage}}">
+      <div class="validation__status__icon"></div>
+      <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
+    </div>
+  </div>
+</div>

@@ -62,6 +62,8 @@ export { ScrollToTopComponent } from './controls/scroll-to-top/scroll-to-top.com
 export { SearchResultComponent } from './controls/search-result/search-result.component';
 export { ToggleButtonComponent } from './controls/toggle-button/toggle-button.component';
 export { ToggleButtonGroupComponent } from './controls/toggle-button/toggle-button-group.component';
+export { DropdownItemComponent } from './controls/dropdown-item/dropdown-item.component';
+export { DeclarativeDropdownComponent } from './controls/declarative-dropdown/declarative-dropdown.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';
