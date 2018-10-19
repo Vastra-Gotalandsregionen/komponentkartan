@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 4.0.0 (beta)
+- Added new discrete style to vgr-button with transparent background. The button can now have three different styles: Primary, Secondary or Discrete.
+- vgr-button has a new input buttonStyle (string). Allowed values are 'primary' (default), 'secondary' and 'descrete'. 
+- *Breaking change* vgr-button boolean input Secondary is removed and replaced by a new input named buttonStyle. Replace Secondary="true" with buttonStyle="'secondary'". 
+
 ## 3.2.2 (beta)
 - Changed modal-css to allow it to be placed outside of root.
 - Removed the need fo rxjs-compat, all should be upgraded for rxjs6.
