@@ -560,6 +560,8 @@ export class ExamplesListwithcardsComponent implements OnInit {
   removeNotification(event, row) {
     if (event === null) {
       row.removeNotification();
+    } else {
+      row.setNotification(event.message, event.icon);
     }
   }
 

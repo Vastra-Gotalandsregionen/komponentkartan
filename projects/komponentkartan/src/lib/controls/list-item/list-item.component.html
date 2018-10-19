@@ -1,20 +1,20 @@
-<div class="list-item" [class.list-item--notification-visible]="temporaryNotification || permanentNotification">
+<div class="list-item" [class.list-item--notification-visible]="temporaryNotification || permanentNotification" [class.list-item--expanded]="expanded" [ngClass]="notificationColor" [@deleted] *ngIf="!isDeleted">
   <div class="list-item__header_wrapper" (click)="toggleExpand()">
     <ng-content select="vgr-list-item-header">
     </ng-content>
   </div>
-  <div *ngIf="permanentNotification" class="list-item__notification">
-    <span class="list-item__notification__icon" [ngClass]="notification.icon">
+  <div *ngIf="permanentNotification && !temporaryNotificationVisible" class="list-item__notification" (click)="toggleExpand()">
+    <span class="list-item__notification__icon" [ngClass]="permanentNotification.icon">
     </span>
     <div class="list-item__notification__message">
-      {{notification? notification.message : ''}}
+      {{permanentNotification? permanentNotification.message : ''}}
     </div>
   </div>
-  <div *ngIf="temporaryNotification" class="list-item__notification">
-    <span class="list-item__notification__icon" [ngClass]="notification.icon">
+  <div *ngIf="temporaryNotification" class="list-item__notification" [@toggleFadedState] (@toggleFadedState.done)="closeTemporary(notification.type)" (click)="toggleExpand()">
+    <span class="list-item__notification__icon" [ngClass]="temporaryNotification.icon">
     </span>
     <div class="list-item__notification__message">
-      {{notification? notification.message : ''}}
+      {{temporaryNotification? temporaryNotification.message : ''}}
     </div>
   </div>
   <div [@toggleState]="expanded" class="list-item-content">
