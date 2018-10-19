@@ -144,13 +144,13 @@ vgr-list.list--new-item-added {
   box-shadow: none; //Visa uppåt-pil i headern när containern är expanderad
   display: block;
   border-left: 5px solid white;
-  transition: border-left-color 2s ease;
+  transition: border-left-color 0.2s ease, margin-top 0.2s ease-in;
 
   .list-item__header:after {
     @extend .chevron-collapsed;
     margin-left: auto;
   } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
-  transition: margin-top 0.2s ease-in;
+
   &.list-item--expanded:not(.list-item--compact) {
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
     margin-top: 14px;
@@ -165,12 +165,6 @@ vgr-list.list--new-item-added {
   &.list-item--collapsed:not(.list-item--compact):hover {
     position: relative;
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-  }
-  &.list-item--deleted {
-    margin-top: 0px;
-    visibility: hidden;
-    transition: visibility 0.3s ease-out, margin-top 0.3s ease-out;
-    transition-delay: 0.3s;
   }
   &.list-item--notification-visible {
     border-left-color: $text-color--default;
@@ -216,6 +210,15 @@ vgr-list.list--new-item-added {
   }
 }
 
+.list-item:not(.list-item--notification-visible){
+  .list-item__header:focus{
+    margin-left: -5px;
+    .list__column:first-child {
+      padding-left: 5px;
+    }
+  }
+}
+
 .list__column {
   //span {
     text-overflow: ellipsis;
@@ -247,37 +250,6 @@ vgr-list.list--new-item-added {
   }
 }
 
-/*.list-item__notification {
-  //opacity: 0;
-  //max-height: 0px;
-  //padding-top: 0px;
-  //padding-bottom: 0px;
-  padding-left: $margin--slim;
-  padding-right: $margin--slim;
-  border-spacing: 10px;
-  transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
-  transition-delay: 0s, 0.2s, 0.2s, 0.2s;
-  .list-item--notification-visible & {
-    opacity: 1;
-    border-top: 1px solid $secondary-color--default;
-    max-height: 40px;
-    padding-top: $margin--xs-slim;
-    padding-bottom: $margin--xs-slim;
-    transition: opacity 0.3s linear, max-height 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear;
-    transition-delay: 0.2s, 0s, 0s, 0s;
-  }
-  .list-item--expanded & {
-    border-top: none;
-  }
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  cursor: pointer;
-  .list-item--deleted & {
-    cursor: default;
-  }
-}
-*/
 
 .list__notification {
   padding: 5px 10px;
