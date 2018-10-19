@@ -15,8 +15,8 @@
     <p>
       <vgr-button type="submit" (click)="lastButtonPressed = 'Klicka här - primär'">Klicka här</vgr-button>
       <vgr-button [buttonStyle]="'secondary'" (click)="lastButtonPressed = 'Klicka här - sekundär'">Klicka här</vgr-button>
-      <vgr-button [buttonStyle]="'discrete'" (click)="lastButtonPressed = 'Klicka här - diskret'">Klicka här</vgr-button>
-      <vgr-button [buttonStyle]="'discrete'" (click)="lastButtonPressed = 'Ändra - diskret med ikon'">
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Klicka här</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Ändra - diskret med ikon'">
           <div style="display: flex; align-items: center;">
             <span style="display:inline-block; background-size: 70%;" class="vgr-icon-edit"></span>
             <span style="padding-right: 10px;">Ändra</span>
@@ -47,10 +47,10 @@
       </div>
       <h2>Diskreta knappar</h2>
       <div>
-        <vgr-button [buttonStyle]="'discrete'" (click)="lastButtonPressed = 'OK - diskret'">OK</vgr-button>
-        <vgr-button [buttonStyle]="'discrete'" (click)="buttonDiscreteDisabled=!buttonDiscreteDisabled">{{buttonDiscreteDisabled
+        <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'OK - diskret'">OK</vgr-button>
+        <vgr-button [buttonStyle]="'discreet'" (click)="buttonDiscreetDisabled=!buttonDiscreetDisabled">{{buttonDiscreetDisabled
           ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
-        <vgr-button [buttonStyle]="'discrete'" [disabled]="buttonDiscreteDisabled">{{buttonDiscreteDisabled ? 'Inaktiv'
+        <vgr-button [buttonStyle]="'discreet'" [disabled]="buttonDiscreetDisabled">{{buttonDiscreetDisabled ? 'Inaktiv'
           : 'Aktiv'}}</vgr-button>
       </div>
     </div>
@@ -68,7 +68,7 @@
       </tr>
       <tr>
         <td>buttonStyle : string</td>
-        <td>Ändra utseende. Möjliga värden är primary/secondary/discrete. Default är primary.</td>
+        <td>Ändra utseende. Möjliga värden är primary/secondary/discreet. Default är primary.</td>
         <td>[buttonStyle]="'secondary'"</td>
       </tr>
       <tr>
