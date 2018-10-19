@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DropdownItem } from 'vgr-komponentkartan';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-dropdowns',
   templateUrl: './dropdowns.component.html',
@@ -15,6 +16,16 @@ export class DropdownsComponent implements OnInit {
   dropDownItems25All: DropdownItem<string>[];
   dropDownItems8: DropdownItem<string>[];
   isReadonlyAndDisabled: boolean;
+  dropdownForm1: FormControl;
+  dropdownForm2: FormControl;
+  dropdownForm3: FormControl;
+  dropdownForm4: FormControl;
+  dropdownForm5: FormControl;
+  dropdownForm6: FormControl;
+  dropdownForm7: FormControl;
+  dropdownForm8: FormControl;
+  dropdownForm9: FormControl;
+  values = [{}, {}, {}, {}, {}];
 
   constructor() {
     this.dropDownItems25 = this.getDemoItems(25);
@@ -24,6 +35,16 @@ export class DropdownsComponent implements OnInit {
     this.dropDownItems9 = this.getDemoItemsLongName(9);
     this.dropDownItems25All = this.getDemoItemsMixedName(25);
     this.isReadonlyAndDisabled = true;
+
+    this.dropdownForm1 = new FormControl(1);
+    this.dropdownForm2 = new FormControl();
+    this.dropdownForm3 = new FormControl([1, 5, 10]);
+    this.dropdownForm4 = new FormControl();
+    this.dropdownForm5 = new FormControl(1);
+    this.dropdownForm6 = new FormControl(1);
+    this.dropdownForm7 = new FormControl();
+    this.dropdownForm8 = new FormControl();
+    this.dropdownForm9 = new FormControl([this.values[0], this.values[2]]);
   }
 
   ngOnInit() {

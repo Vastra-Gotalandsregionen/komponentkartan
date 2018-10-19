@@ -18,6 +18,90 @@
   <div class="docs__examples">
     <div class="row-layout">
       <div>
+        <p>Deklarativ 8 (förvald)</p>
+        <vgr-declarative-dropdown [small]="true" [formControl]="dropdownForm1">
+          <vgr-dropdown-item [label]="'Val 1'" [value]="1"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 2'" [value]="2"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 3'" [value]="3"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 4'" [value]="4"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 5'" [value]="5"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 6'" [value]="6"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 7'" [value]="7"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 8'" [value]="8"></vgr-dropdown-item>
+        </vgr-declarative-dropdown>
+        <div>{{dropdownForm1.value}}</div>
+      </div>
+      <!-- <div>
+        <p>Deklarativ dynamisk (förvald)</p>
+        <vgr-declarative-dropdown [multi]="true" [formControl]="dropdownForm9">
+          <vgr-dropdown-item *ngFor="let v of values; let i = index" [label]="i" [value]="v"></vgr-dropdown-item>
+        </vgr-declarative-dropdown>
+        <div>{{dropdownForm9.value}}</div>
+      </div> -->
+      <div>
+        <p>Deklarativ 25</p>
+        <vgr-declarative-dropdown [multi]="true" [noItemSelectedLabel]="'Välj alternativ'" [formControl]="dropdownForm3">
+          <vgr-dropdown-item [label]="'Val 1'" [value]="1"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 2'" [value]="2"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 3'" [value]="3"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 4'" [value]="4"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 5'" [value]="5"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 6'" [value]="6"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 7'" [value]="7"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 8'" [value]="8"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 9'" [value]="9"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 10'" [value]="10"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 11'" [value]="11"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 12'" [value]="12"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 13'" [value]="13"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 14'" [value]="14"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 15'" [value]="15"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 16'" [value]="16"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 17'" [value]="17"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 18'" [value]="18"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 19'" [value]="19"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 20'" [value]="20"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 21'" [value]="21"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 22'" [value]="22"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 23'" [value]="23"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 24'" [value]="24"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 25'" [value]="25"></vgr-dropdown-item>
+        </vgr-declarative-dropdown>
+        <div>{{dropdownForm3.value}}</div>
+      </div>
+    </div>
+    <div class="row-layout">
+      <div>
+        <p>Deklarativ disabled</p>
+        <vgr-declarative-dropdown [small]="true" [formControl]="dropdownForm5" [disabled]="isReadonlyAndDisabled">
+          <vgr-dropdown-item [label]="'Val 1'" [value]="1"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 2'" [value]="2"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 3'" [value]="3"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 4'" [value]="4"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 5'" [value]="5"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 6'" [value]="6"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 7'" [value]="7"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 8'" [value]="8"></vgr-dropdown-item>
+        </vgr-declarative-dropdown>
+        <div>{{dropdownForm5.value}}</div>
+      </div>
+      <div>
+        <p>Deklarativ readonly</p>
+        <vgr-declarative-dropdown [small]="true" [formControl]="dropdownForm6" [readonly]="isReadonlyAndDisabled">
+          <vgr-dropdown-item [label]="'Val 1'" [value]="1"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 2'" [value]="2"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 3'" [value]="3"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 4'" [value]="4"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 5'" [value]="5"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 6'" [value]="6"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 7'" [value]="7"></vgr-dropdown-item>
+          <vgr-dropdown-item [label]="'Val 8'" [value]="8"></vgr-dropdown-item>
+        </vgr-declarative-dropdown>
+        <div>{{dropdownForm6.value}}</div>
+      </div>
+    </div>
+    <div class="row-layout">
+      <div>
         <p>8 items (förvald)</p>
         <vgr-dropdown [items]="dropDownItems8AndSelected" (selectedChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
       </div>
@@ -48,11 +132,13 @@
       </div>
       <div>
         <p>Disabled (inget valt)</p>
-        <vgr-dropdown [items]="dropDownItems9" [noItemSelectedLabel]="'Välj alternativ'" [disabled]="isReadonlyAndDisabled" (selectedChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
+        <vgr-dropdown [items]="dropDownItems9" [noItemSelectedLabel]="'Välj alternativ'" [disabled]="isReadonlyAndDisabled"
+          (selectedChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
       </div>
       <div>
         <p>Readonly (inget valt)</p>
-        <vgr-dropdown [items]="dropDownItems9" [noItemSelectedLabel]="'Välj alternativ'" [readonly]="isReadonlyAndDisabled" (selectedChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
+        <vgr-dropdown [items]="dropDownItems9" [noItemSelectedLabel]="'Välj alternativ'" [readonly]="isReadonlyAndDisabled"
+          (selectedChanged)="onSingleSelectionChanged($event)"></vgr-dropdown>
       </div>
       <div>
         <p>Växla readonly och disabled</p>
@@ -97,7 +183,8 @@
         <td>
           showAllItemText : string
         </td>
-        <td>Värde för att sätta vilken text det skall stå på raden för att ta bort filtrering och visa alla. Defaultvärde"Visa
+        <td>Värde för att sätta vilken text det skall stå på raden för att ta bort filtrering och visa alla.
+          Defaultvärde"Visa
           alla"
         </td>
         <td>[showAllItemText]="Visa alla alternativ"</td>
@@ -122,7 +209,8 @@
       </tr>
       <tr>
         <td>readonly : boolean</td>
-        <td>Om dropdownen är satt som readonly så ska bara textfält med valt värde visas. Om inget värde är satt så visas ingenting.
+        <td>Om dropdownen är satt som readonly så ska bara textfält med valt värde visas. Om inget värde är satt så
+          visas ingenting.
         </td>
         <td>
           [readonly]="true/false"
@@ -133,7 +221,8 @@
 
   <div class="docs__wcag">
     <p>
-      <code>&lt;vgr-dropdown&gt;</code> har en intern div vars roll är satt till combobox. Förutom rollen så används attributen:
+      <code>&lt;vgr-dropdown&gt;</code> har en intern div vars roll är satt till combobox. Förutom rollen så används
+      attributen:
       attr.aria-disabled (inaktiv/aktiv) och attr.aria-readonly (skrivskyddad/ej skrivskyddad)
     </p>
   </div>
