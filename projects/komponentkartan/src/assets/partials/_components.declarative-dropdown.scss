@@ -7,35 +7,33 @@ $filter-area-height: 45px;
 
 .dropdown-x {
   .validation {
-    max-width: $dropdown-width--medium + $margin--slim + $margin--slim;
+    // width: 280px;
   }
   .dropdown__control {
-    height: $component-height;
-    width: 270px;
-    transition: background-color 0.6s linear;
-    cursor: pointer;
-
+    
     .dropdown__header {
-      display: flex;
       height: $component-height;
+      width: 270px;
+      cursor: pointer;
+      display: flex;
 
       .dropdown__header__label {
-        width: 270px - $icon-width - $border--single - $border--single;
+        width: 270px - $icon-width;
         padding-left: $margin--slim;
         padding-top: 2px;
-        background-color: white;
+        background-color: $background-color--content;
         border-top: $border--single solid $control-border-color--default;
         border-left: $border--single solid $control-border-color--default;
         border-bottom: $border--single solid $control-border-color--default;
-        border-radius: 1px;
-        transition: background-color 0.6s linear, border-color 0.6s linear;
-        text-overflow: ellipsis;
+        transition: all 0.6s linear;
         overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
       }
 
       .dropdown__header__button {
         @extend .background-color--primary;
+        transition: all 0.6s linear;
 
         .dropdown__header__button__icon {
           @extend .bg-image-icon-chevron-inverted;
@@ -135,10 +133,10 @@ $filter-area-height: 45px;
 
 
     &.dropdown--small {
-      width: 160px;
       .dropdown__header {
+        width: 160px;
         .dropdown__header__label {
-          width: 160px  - $icon-width - $border--single - $border--single;
+          width: 160px - $icon-width;
         }
       }
     }
@@ -154,39 +152,40 @@ $filter-area-height: 45px;
     }
 
     &.dropdown--disabled {
-      background-color: $control-color--disabled;
       cursor: default;
-
+      
       .dropdown__header {
+        background-color: $control-color--disabled;
+
         .dropdown__header__label {
           background-color: $background-color--default;
           border-color: $control-color--disabled;
           cursor: default;
         }
+
+        .dropdown__header__button {
+          background-color: $control-color--disabled;
+        }
       }
     }
 
-    &.dropdown--readonly {
-      background-color: $background-color--content;
-      transition: background-color 0s linear;
+    &.dropdown--readonly-x {
       cursor: default;
-      width: auto;
-      height: auto;
-      min-height: $component-height;
-
+      
       .dropdown__header {      
+        height: auto;
+        width: auto;
+
         .dropdown__header__label {
-          background-color: $background-color--content;
-          border-color: $background-color--content;
-          outline: none;
-          cursor: text;
-          transition: max-width 0.3s linear;
-          word-wrap: break-word;
-          overflow: visible;
-          white-space: normal;
           height: auto;
-          display: block;
-          max-width: none;
+          width: auto;
+          transition: max-width 0.3s linear;
+          border-color: $background-color--content;
+          // outline: none;
+          overflow: visible;
+          word-wrap: break-word;
+          white-space: normal;
+          cursor: text;
         }
         
         .dropdown__header__button {
@@ -221,19 +220,30 @@ $filter-area-height: 45px;
 @media screen and (min-width: $desktop-width--medium) {
   .dropdown-x {
     .dropdown__control {
-      width: 287px;
-
       .dropdown__header {
+        width: 287px;
+
         .dropdown__header__label {
-          width: 287px  - $icon-width - $border--single - $border--single;
+          width: 287px - $icon-width;
         }
       }
       
       &.dropdown--small {
-        width: 170px;
         .dropdown__header {
+          width: 170px;
+
           .dropdown__header__label {
-            width: 170px  - $icon-width - $border--single - $border--single;
+            width: 170px - $icon-width;
+          }
+        }
+      }
+
+      &.dropdown--readonly-x {
+        .dropdown__header {
+          width: auto;
+
+          .dropdown__header__label {
+            width: auto;
           }
         }
       }

@@ -2,7 +2,7 @@
   <div class="validation">
     <div #dropdown class="dropdown__control" role="combobox" tabindex="0"
       [attr.aria-labelledby]="labelledbyid" [attr.aria-expanded]="expanded" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
-      [ngClass]="{ 'dropdown--focus': hasFocus, 'dropdown--small': small, 'dropdown--readonly': readonly, 'dropdown--disabled': disabled, 'dropdown--open': expanded, 'dropdown--filter-visible': filterVisible }"
+      [ngClass]="{ 'dropdown--focus': hasFocus, 'dropdown--small': small, 'dropdown--readonly-x': readonly, 'dropdown--disabled': disabled, 'dropdown--open': expanded, 'dropdown--filter-visible': filterVisible }"
       (mousedown)="toggleExpand()" (keydown)="onKeydown($event)" (focus)="onFocus()" (blur)="onBlur()">
       <div class="dropdown__header">
         <div class="dropdown__header__label noselect" id="{{labelledbyid}}" title="{{label}}">{{label}}</div>

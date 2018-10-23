@@ -2,6 +2,7 @@ import {
   Component,
   OnChanges,
   AfterContentInit,
+  AfterViewInit,
   OnDestroy,
   ViewChild,
   ContentChildren,
@@ -39,7 +40,7 @@ function _defaultCompare(o1: any, o2: any): boolean {
     multi: true
   }]
 })
-export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 
   @Input() multi = false;
   @Input() small = false;
@@ -68,7 +69,7 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
   label: string;
   hasFocus: boolean;
   scrollbarConfig: PerfectScrollbarConfig;
-  dimmerTopVisible = true; // false;
+  dimmerTopVisible = false;
   dimmerBottomVisible = true;
 
   get errorActive() {
@@ -96,17 +97,23 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
   }
 
   ngAfterContentInit() {
-    if (this.formControl) {
-      this.writeValue(this.formControl.value);
-    }
-
     this.setFilterVisibility();
     this.subscribeToItems();
 
-    this.items.changes.subscribe(_ => {
-      this.setFilterVisibility();
-      this.subscribeToItems();
-    });
+    this.items.changes
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(_ => {
+        this.setFilterVisibility();
+        this.subscribeToItems();
+      });
+  }
+
+  ngAfterViewInit() {
+    if (this.formControl) {
+      setTimeout(() => {
+        this.writeValue(this.formControl.value);
+      });
+    }
   }
 
   ngOnDestroy() {
@@ -360,23 +367,4 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
         || this.noItemSelectedLabel;
     }
   }
-
-  // private hideDimmersIfScrollIsAtBottomOrTop(scrollElement: Element) {
-  //   const marginTolerance = 20;
-
-  //   const scrollHeight = scrollElement.scrollHeight - marginTolerance;
-  //   const clientHeight = scrollElement.clientHeight;
-  //   const scrollTop = scrollElement.scrollTop;
-
-  //   if (clientHeight + scrollTop >= scrollHeight) {
-  //     this.dimmerBottomVisible = false;
-  //   } else {
-  //     this.dimmerBottomVisible = true;
-  //   }
-  //   if (scrollTop === 0) {
-  //     this.dimmerTopVisible = false;
-  //   } else {
-  //     this.dimmerTopVisible = true;
-  //   }
-  // }
 }
