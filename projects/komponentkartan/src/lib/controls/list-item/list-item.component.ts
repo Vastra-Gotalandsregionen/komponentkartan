@@ -30,7 +30,7 @@ import { takeUntil } from 'rxjs/operators';
         display: 'none'
       })),
       transition('* <=> true', [
-        animate('0.4s ease')
+        animate('{{animationSpeed}}ms ease')
       ])
     ]),
     trigger('toggleFadedState', [
@@ -54,18 +54,19 @@ import { takeUntil } from 'rxjs/operators';
 
 export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges {
   readonly showNotificationDurationMs = 1500;
-  private ngUnsubscribe = new Subject();
-  private temporaryNotification: RowNotification;
-  private permanentNotification: RowNotification;
-  private notificationColor: string;
-  private temporaryNotificationVisible = false;
-  private isDeleted = false;
-  private notInteractable = false;
+  ngUnsubscribe = new Subject();
+  temporaryNotification: RowNotification;
+  permanentNotification: RowNotification;
+  notificationColor: string;
+  temporaryNotificationVisible = false;
+  isDeleted = false;
+  notInteractable = false;
 
   @Input() expanded = false;
   @Input() notification: RowNotification;
+  @Input() animationSpeed = 400;
 
-  @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
+  @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent = null;
   @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
@@ -79,10 +80,8 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   @Output() setFocusOnNextRowContent: EventEmitter<any> = new EventEmitter();
 
   @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
-  itemLoaded: boolean;
 
   constructor() {
-    this.itemLoaded = true;
     this.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.hideNotifications());
   }
 
@@ -93,13 +92,17 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   }
 
   ngAfterContentInit() {
-    this.listItemHeader.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.toggleExpand());
-    this.listItemHeader.goToFirst.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnFirstRow.emit());
-    this.listItemHeader.goToLast.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnLastRow.emit());
-    this.listItemHeader.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow.emit());
-    this.listItemHeader.goDown.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow.emit());
-    this.listContent.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRowContent.emit());
-    this.listContent.goDown.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRowContent.emit());
+    if (this.listItemHeader) {
+      this.listItemHeader.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.toggleExpand());
+      this.listItemHeader.goToFirst.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnFirstRow.emit());
+      this.listItemHeader.goToLast.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnLastRow.emit());
+      this.listItemHeader.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow.emit());
+      this.listItemHeader.goDown.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow.emit());
+    }
+    if (this.listContent) {
+      this.listContent.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRowContent.emit());
+      this.listContent.goDown.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRowContent.emit());
+    }
   }
 
   toggleExpand(forceclose = false) {

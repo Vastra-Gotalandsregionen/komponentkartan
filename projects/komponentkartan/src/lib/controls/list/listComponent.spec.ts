@@ -125,7 +125,7 @@ describe('[ListComponent]', () => {
       beforeEach(() => {
         spyOn(listComponent, 'setFocusOnPreviousRowContent').and.callThrough();
         spyOn(childItem1, 'setFocusOnRow');
-        childItem1.collapsed = false;
+        // childItem1.collapsed = false;
         listComponent.setFocusOnPreviousRowContent(childItem1);
       });
       it('setFocusOnNextRow toHaveBeenCalled ', () => {
