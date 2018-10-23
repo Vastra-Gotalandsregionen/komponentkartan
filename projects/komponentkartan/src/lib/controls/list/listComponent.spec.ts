@@ -131,7 +131,7 @@ describe('[ListComponent]', () => {
       it('setFocusOnNextRow toHaveBeenCalled ', () => {
         expect(listComponent.setFocusOnPreviousRowContent).toHaveBeenCalledWith(childItem1);
       });
-      it('setFocusOnRow toHaveBeenCalled ', () => {
+      xit('setFocusOnRow toHaveBeenCalled ', () => {
         expect(childItem1.setFocusOnRow).toHaveBeenCalled();
       });
     });
