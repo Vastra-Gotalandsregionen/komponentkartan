@@ -57,7 +57,7 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
   @Output() selectedChanged = new EventEmitter<any>();
 
   @ViewChild('dropdown') dropdown: ElementRef;
-  @ViewChild('selectAll') selectAll: ElementRef;
+  @ViewChild('showAll') showAll: ElementRef;
   @ViewChild(FilterTextboxComponent) filterTextbox: FilterTextboxComponent;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
@@ -164,7 +164,7 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
 
   onTouched() { }
 
-  toggleExpand() {
+  toggleExpanded() {
     if (this.readonly || this.disabled) {
       return;
     }
@@ -202,19 +202,25 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
   }
 
   onKeydown(event: KeyboardEvent) {
-    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-      this.toggleExpand();
-      this.focusDropdown();
-      event.preventDefault();
-      event.stopPropagation();
-    } else if (event.altKey && (event.key === 'ArrowDown' || event.key === 'Down')) {
+    if (event.altKey && (event.key === 'ArrowDown' || event.key === 'Down')) {
       this.expanded = true;
       event.preventDefault();
       event.stopPropagation();
     } else if (event.key === 'Escape' ||
       event.altKey && (event.key === 'ArrowUp' || event.key === 'Up')) {
       this.expanded = false;
-      this.focusDropdown();
+      this.dropdown.nativeElement.focus();
+      event.preventDefault();
+      event.stopPropagation();
+    } else if (event.key === 'Tab') {
+      // this.expanded = false;
+    }
+  }
+
+  onHeaderKeydown(event: KeyboardEvent) {
+    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+      this.toggleExpanded();
+      this.dropdown.nativeElement.focus();
       event.preventDefault();
       event.stopPropagation();
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
@@ -227,26 +233,25 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
       }
       event.preventDefault();
       event.stopPropagation();
-    } else if (event.key === 'Tab') {
-      this.expanded = false;
     }
-  }
-
-  onMenuMousedown() {
-    event.stopPropagation();
   }
 
   onFilterKeydown(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+      event.preventDefault();
       event.stopPropagation();
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
-      this.selectAll.nativeElement.focus();
+      this.showAll.nativeElement.focus();
+      event.preventDefault();
+      event.stopPropagation();
+    } else if (event.key === 'ArrowUp' || event.key === 'Up') {
+      this.dropdown.nativeElement.focus();
       event.preventDefault();
       event.stopPropagation();
     }
   }
 
-  onSelectAllKeydown(event: KeyboardEvent) {
+  onShowAllKeydown(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       this.showAllItems();
       event.preventDefault();
@@ -331,15 +336,11 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
     });
   }
 
-  private focusDropdown() {
-    this.dropdown.nativeElement.focus();
-  }
-
   private focusPreviousItem(itemIndex: number) {
     if (itemIndex > 0) {
       this.items.toArray()[itemIndex - 1].focus();
     } else if (this.filterVisible) {
-      this.selectAll.nativeElement.focus();
+      this.showAll.nativeElement.focus();
     } else {
       this.items.toArray()[this.items.length - 1].focus();
     }

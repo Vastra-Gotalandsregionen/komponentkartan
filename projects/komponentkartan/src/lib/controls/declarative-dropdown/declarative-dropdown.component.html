@@ -1,23 +1,23 @@
 <div class="dropdown-x" [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
   <div class="validation">
-    <div #dropdown class="dropdown__control" role="combobox" tabindex="0"
-      [attr.aria-labelledby]="labelledbyid" [attr.aria-expanded]="expanded" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
-      [ngClass]="{ 'dropdown--focus': hasFocus, 'dropdown--small': small, 'dropdown--readonly-x': readonly, 'dropdown--disabled': disabled, 'dropdown--open': expanded, 'dropdown--filter-visible': filterVisible }"
-      (mousedown)="toggleExpand()" (keydown)="onKeydown($event)" (focus)="onFocus()" (blur)="onBlur()">
-      <div class="dropdown__header">
+    <div #dropdown class="dropdown__control" role="listbox" tabindex="0"
+      [attr.aria-labelledby]="labelledbyid" [attr.aria-multiselectable]="multi" [attr.aria-expanded]="expanded" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
+      [ngClass]="{ 'dropdown--small': small, 'dropdown--readonly-x': readonly, 'dropdown--disabled': disabled, 'dropdown--expanded': expanded, 'dropdown--filter-visible': filterVisible }"
+      (keydown)="onKeydown($event)" (focus)="onFocus()" (blur)="onBlur()">
+      <div class="dropdown__header" (click)="toggleExpanded()" (keydown)="onHeaderKeydown($event)">
         <div class="dropdown__header__label noselect" id="{{labelledbyid}}" title="{{label}}">{{label}}</div>
         <div class="dropdown__header__button">
             <div class="dropdown__header__button__icon"></div>
         </div>
       </div>
-      <div class="dropdown__menu-x" *ngIf="expanded && !readonly && !disabled" (mousedown)="onMenuMousedown()">
+      <div class="dropdown__menu-x" *ngIf="expanded && !readonly && !disabled">
         <div *ngIf="filterVisible" class="dropdown__menu__filter-textbox" (keydown)="onFilterKeydown($event)">
           <vgr-filter-textbox (valueChanged)="filterItems($event)"></vgr-filter-textbox>
         </div>
         <div *ngIf="dimmerTopVisible" class="dropdown__menu__dimmer dropdown__menu__dimmer-top"></div>
         <perfect-scrollbar class="dropdown__menu__scrollbar" [config]="scrollbarConfig" (psScrollDown)="showTopScrollDimmer()" (psScrollUp)="showBottomScrollDimmer()" (psYReachStart)="hideTopScrollDimmer()" (psYReachEnd)="hideBottomScrollDimmer()">
           <div class="dropdown__menu__items" role="listbox">
-            <div #selectAll tabindex="0" *ngIf="filterVisible" class="dropdown__menu__items__item dropdown__menu__items__select-all" (mousedown)="showAllItems()" (keydown)="onSelectAllKeydown($event)" title="{{showAllItemText}}">{{showAllItemText}}</div>
+            <div #showAll tabindex="0" *ngIf="filterVisible" class="dropdown__menu__items__item dropdown__menu__items__show-all" (click)="showAllItems()" (keydown)="onShowAllKeydown($event)" title="{{showAllItemText}}">{{showAllItemText}}</div>
             <ng-content></ng-content>
           </div>
         </perfect-scrollbar>
