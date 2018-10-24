@@ -45,6 +45,7 @@ export class ListexamplewithrownotificationComponent {
     this.peopleRows = this.examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
     this.peopleRows[0].setNotification('Meddelande: Text', 'vgr-icon-message');
+    this.peopleRows[2].setNotification('tillfällig', 'vgr-icon-message', true);
     this.peopleRows[4].setNotification('Personen är inaktiv', 'vgr-icon-exclamation--red');
   }
 

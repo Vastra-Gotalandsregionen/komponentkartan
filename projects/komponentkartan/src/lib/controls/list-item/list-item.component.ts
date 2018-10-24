@@ -18,7 +18,7 @@ import { takeUntil } from 'rxjs/operators';
   animations: [
     trigger('toggleState', [
       state('*', style({
-        height: '0',
+        height: 0,
         display: 'none'
       })),
       state('true', style({
@@ -36,11 +36,11 @@ import { takeUntil } from 'rxjs/operators';
     trigger('toggleFadedState', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('0.4s ease', style({ opacity: 1 })),
+        animate('400ms ease', style({ opacity: 1 })),
       ]),
       transition(':leave', [
         style({ opacity: 1 }),
-        animate('0.4s ease', style({ opacity: 0 })),
+        animate('400ms ease', style({ opacity: 0 })),
       ]),
     ]),
     trigger('deleted', [
@@ -61,6 +61,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   temporaryNotificationVisible = false;
   isDeleted = false;
   notInteractable = false;
+  overflow = false;
 
   @Input() expanded = false;
   @Input() notification: RowNotification;

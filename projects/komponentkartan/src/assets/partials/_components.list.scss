@@ -17,6 +17,9 @@
 
 .list-item-content{
   overflow:hidden;
+  &.overflow-visible {
+    overflow: visible;
+  }
 }
 
 $animation-time: 1.4s;
@@ -170,6 +173,9 @@ vgr-list.list--new-item-added {
     border-left-color: $text-color--default;
     margin: 5px 0px;
   }
+  &:last-child.list-item--notification-visible {
+    margin-bottom: 0;
+  }
   &.notification-error {
     border-left-color: $primary-color--error;
   }
@@ -233,6 +239,7 @@ vgr-list.list--new-item-added {
 }
 
 .list-item__notification {
+  overflow: hidden;
   padding-left: $margin--slim - 5;
   padding-right: $margin--slim;
   display: flex;
