@@ -109,11 +109,9 @@ vgr-list.list--new-item-added {
       display: none;
     }
   }
-  vgr-list-item:last-child() {
+  vgr-list-item:last-of-type {
     .list-item {
-      &.list-item--expanded {
-        margin-bottom: 0;
-      }
+       margin-bottom: 0;
     }
   }
 }
@@ -172,9 +170,6 @@ vgr-list.list--new-item-added {
   &.list-item--notification-visible {
     border-left-color: $text-color--default;
     margin: 5px 0px;
-  }
-  &:last-child.list-item--notification-visible {
-    margin-bottom: 0;
   }
   &.notification-error {
     border-left-color: $primary-color--error;
@@ -363,7 +358,7 @@ vgr-list.list--new-item-added {
     }
   }
   .list__header {
-    padding-left: $margin--fat;
+    padding-left: $margin--fat + 5;
     padding-right: $margin--fat;
     width: calc(#{$content-width--medium} + #{$margin--slim} + 12px);
     border-right-width: 12px;

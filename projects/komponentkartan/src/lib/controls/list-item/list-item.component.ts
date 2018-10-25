@@ -55,8 +55,8 @@ import { takeUntil } from 'rxjs/operators';
     ]),
     trigger('deleted', [
       transition(':leave', [
-        style({ opacity: 1, height: '*' }),
-        animate('0.4s ease', style({ opacity: 0, height: 0 })),
+        style({ opacity: 1, height: '*', overflow: 'hidden' }),
+        animate('0.4s ease', style({ opacity: 0, height: 0, overflow: 'hidden' })),
       ]),
     ])
   ]
@@ -131,13 +131,20 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   hideNotifications() {
     if (this.temporaryNotificationVisible) {
-      setTimeout(() => {
-        this.temporaryNotification = null;
-      }, this.showNotificationDurationMs);
+      if (this.notification.type === 2) {
+        setTimeout(() => {
+          this.isDeleted = true;
+        }, this.showNotificationDurationMs);
+      } else {
+        setTimeout(() => {
+          this.temporaryNotification = null;
+        }, this.showNotificationDurationMs);
+      }
     }
   }
 
   closeTemporary(type) {
+    // console.log(type);
     if (!this.temporaryNotification) {
       this.temporaryNotificationVisible = false;
       this.handleNotificatonColor();
@@ -145,8 +152,6 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
         this.toggleExpand(true);
         this.notification = this.permanentNotification ? this.permanentNotification : null;
         this.notificationChanged.emit(this.notification);
-      } else if (type === NotificationType.ShowOnRemove) {
-        this.isDeleted = true;
       }
     }
   }
