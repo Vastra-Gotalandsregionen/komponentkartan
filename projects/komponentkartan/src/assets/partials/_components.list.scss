@@ -221,6 +221,7 @@ vgr-list.list--new-item-added {
     margin-left: -5px;
     .list__column:first-child {
       padding-left: 5px;
+      margin-right: 5px;
     }
   }
 }
@@ -283,6 +284,7 @@ vgr-list.list--new-item-added {
 }
 
 .list-item__content {
+  margin-left: -5px;
   display: block;
   border-spacing: 10px;
   width: calc(#{$content-width--small});
