@@ -39,8 +39,18 @@ import { takeUntil } from 'rxjs/operators';
         animate('400ms ease', style({ opacity: 1 })),
       ]),
       transition(':leave', [
-        style({ opacity: 1 }),
-        animate('400ms ease', style({ opacity: 0 })),
+        style({ opacity: 1, height: '*' }),
+        animate('400ms ease', style({ opacity: 0, height: 0 })),
+      ]),
+    ]),
+    trigger('toggleFadedState0ms', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('0ms ease', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ opacity: 1, height: '*' }),
+        animate('0ms ease', style({ opacity: 0, height: 0 })),
       ]),
     ]),
     trigger('deleted', [
