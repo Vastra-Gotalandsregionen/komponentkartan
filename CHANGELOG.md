@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added new discrete style to vgr-button with transparent background. The button can now have three different styles: Primary, Secondary or Discrete.
 - vgr-button has a new input buttonStyle (string). Allowed values are 'primary' (default), 'secondary' and 'discrete'. 
 - *Breaking change* vgr-button boolean input Secondary is removed and replaced by a new input named buttonStyle. Replace Secondary="true" with buttonStyle="'secondary'". 
+- List (specially the notifications) have been remade and restyled.
 
 ## 3.2.2 (beta)
 - Changed modal-css to allow it to be placed outside of root.
