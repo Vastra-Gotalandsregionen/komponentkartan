@@ -15,15 +15,22 @@
     <p>
       <vgr-button type="submit" (click)="lastButtonPressed = 'Klicka här - primär'">Klicka här</vgr-button>
       <vgr-button [buttonStyle]="'secondary'" (click)="lastButtonPressed = 'Klicka här - sekundär'">Klicka här</vgr-button>
-      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Klicka här</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">A</vgr-button>
       <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Ändra - diskret med ikon'">
           <div style="display: flex; align-items: center;">
             <span style="display:inline-block; background-size: 70%;" class="vgr-icon-edit"></span>
-            <span style="padding-right: 10px;">Ändra</span>
+            <!-- <span style="padding-right: 10px;">Ändra</span> -->
           </div>
         </vgr-button>
       <br>
       <br>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Klicka här</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Knapp 1</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Knapp 2</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Knapp 3</vgr-button>
+        <br>
+        <br>
+
     </p>
     <p> Förändras med tema:
       <strong>ja</strong>
