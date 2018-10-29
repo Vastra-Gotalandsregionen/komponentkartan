@@ -1,5 +1,5 @@
 ﻿<span (click)="checkDisabled($event)">
-  <button [type]="type" class="button noselect" [attr.aria-disabled]="disabled" [ngClass]="{'button--disabled' : disabled, 'button--enabling' : reenabled, 'button--secondary': buttonStyle === 'secondary', 'button--discrete': buttonStyle === 'discrete'}">
+  <button [type]="type" class="button noselect" [attr.aria-disabled]="disabled" [ngClass]="{'button--disabled' : disabled, 'button--enabling' : reenabled, 'button--secondary': buttonStyle === 'secondary', 'button--discreet': buttonStyle === 'discreet'}">
     <span class="button__fixIE">
       <ng-content></ng-content>
     </span>

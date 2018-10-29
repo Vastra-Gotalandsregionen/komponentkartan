@@ -84,7 +84,7 @@
       }
     }
   }
-  &.button--discrete {
+  &.button--discreet {
     @extend .color--primary;
     border-color: transparent;
     background-color: transparent;
@@ -118,7 +118,7 @@
       padding-left: 21px;
       padding-right: 21px;
     }
-    &.button--discrete {
+    &.button--discreet {
       padding-left: 21px;
       padding-right: 21px;
     }

@@ -5,8 +5,8 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 4.0.0 (beta)
-- Added new discrete style to vgr-button with transparent background. The button can now have three different styles: Primary, Secondary or Discrete.
-- vgr-button has a new input buttonStyle (string). Allowed values are 'primary' (default), 'secondary' and 'discrete'. 
+- Added new discreet style to vgr-button with transparent background. The button can now have three different styles: Primary, Secondary or Discreet.
+- vgr-button has a new input buttonStyle (string). Allowed values are 'primary' (default), 'secondary' and 'discreet'. 
 - *Breaking change* vgr-button boolean input Secondary is removed and replaced by a new input named buttonStyle. Replace Secondary="true" with buttonStyle="'secondary'". 
 - List (specially the notifications) have been remade and restyled.
 
