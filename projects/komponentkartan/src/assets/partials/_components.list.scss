@@ -152,7 +152,7 @@ vgr-list.list--new-item-added {
     margin-left: auto;
   } //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
 
-  &.list-item--expanded:not(.list-item--compact) {
+  &.list-item--expanded:not(.list-item--compact){
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
     margin-top: 14px;
     margin-bottom: 14px;
@@ -163,7 +163,7 @@ vgr-list.list--new-item-added {
       @extend .chevron-expanded;
     }
   } //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
-  &.list-item--collapsed:not(.list-item--compact):hover {
+  &:not(.list-item--compact):hover {
     position: relative;
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
   }
@@ -287,7 +287,7 @@ vgr-list.list--new-item-added {
   margin-left: -5px;
   display: block;
   border-spacing: 10px;
-  width: calc(#{$content-width--small});
+  width: $content-width--small;
   padding-bottom: $margin--slim;
   padding-top: $margin--slim;
   &.list-item__content--indent {
@@ -297,6 +297,8 @@ vgr-list.list--new-item-added {
   .list-item--notification-visible & {
     border-top: none;
     padding-top: 0;
+    margin-left:0;
+    width: $content-width--small - 5;
   }
 }
 
@@ -365,7 +367,7 @@ vgr-list.list--new-item-added {
   .list__header {
     padding-left: $margin--fat + 5;
     padding-right: $margin--fat;
-    width: calc(#{$content-width--medium} + #{$margin--slim} + 12px);
+    width: $content-width--medium + $margin--slim + 12px;
     border-right-width: 12px;
   }
   .list-item__header {
@@ -382,12 +384,15 @@ vgr-list.list--new-item-added {
     border-spacing: 10px;
   }
   .list-item__content {
-    width: #{$content-width--medium};
+    width: $content-width--medium;
     padding-bottom: $margin--fat;
     padding-top: $margin--fat;
     &.list-item__content--indent {
       padding-left: $margin--fat;
       padding-right: $margin--fat;
+    }
+    .list-item--notification-visible & {
+      width: $content-width--medium - 5;
     }
   }
   .list__notification {

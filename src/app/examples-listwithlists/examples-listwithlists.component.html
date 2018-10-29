@@ -33,7 +33,7 @@
       <div class="loader-container" *ngIf="noSearchResult">
         <p>Inga resultat hittades för '{{ filtertext }}'</p>
       </div>
-      <vgr-list (sortChanged)="onSortChanged($event)" *ngIf="!loading && !noSearchResult">
+      <vgr-list (sortChanged)="onSortChanged($event)" *ngIf="!loading && !noSearchResult" [allowMultipleExpandedItems]="true">
         <vgr-list-header>
           <vgr-list-column-header width="10" sortKey="enhet" [sortDirection]="sortDirections.Ascending">Enhet</vgr-list-column-header>
           <vgr-list-column-header width="5" [align]="'left'" sortKey="hsaid">HSA-id</vgr-list-column-header>

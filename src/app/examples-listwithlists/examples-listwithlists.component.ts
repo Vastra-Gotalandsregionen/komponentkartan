@@ -73,9 +73,9 @@ export class ExamplesListwithlistsComponent implements OnDestroy {
   private mapToListItems(enheter: ExampleUnit[]) {
     this.listData = enheter.filter(x => !x.deleted).map(x => new ExpandableRow<ExampleUnit, any>(x));
     this.listData.forEach(element => {
-      // if (this.getRandomInt(0, 5) === 2) {
-      //   element.setNotification('Meddelande om denna rad som ligger permanent', 'vgr-icon-exclamation');
-      // }
+      if (this.getRandomInt(0, 5) === 2) {
+        element.setNotification('Meddelande om denna rad som ligger permanent', 'vgr-icon-exclamation');
+      }
     });
   }
 
