@@ -32,16 +32,11 @@ export class DropdownItemComponent implements AfterViewInit {
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'ArrowUp' || event.key === 'Up') {
       this.previous.emit();
-      event.preventDefault();
-      event.stopPropagation();
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
       this.next.emit();
-      event.preventDefault();
-      event.stopPropagation();
     } else if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       this.toggleSelect();
       event.preventDefault();
-      event.stopPropagation();
     }
   }
 

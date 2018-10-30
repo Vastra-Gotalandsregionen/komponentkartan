@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DropdownItem } from 'vgr-komponentkartan';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-dropdowns',
   templateUrl: './dropdowns.component.html',

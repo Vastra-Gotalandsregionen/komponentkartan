@@ -44,9 +44,9 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
 
   @Input() multi = false;
   @Input() small = false;
+  @Input() deselectable = false;
   @Input() simpleLabel = false;
   @Input() noItemSelectedLabel = 'Välj';
-  @Input() showAllItemText = 'Visa alla';
   @Input() readonly = false;
   @Input() disabled = false;
   @Input() showValidation = true;
@@ -57,7 +57,8 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
   @Output() selectedChanged = new EventEmitter<any>();
 
   @ViewChild('dropdown') dropdown: ElementRef;
-  @ViewChild('showAll') showAll: ElementRef;
+  @ViewChild('header') header: ElementRef;
+  @ViewChild('deselect') deselect: ElementRef;
   @ViewChild(FilterTextboxComponent) filterTextbox: FilterTextboxComponent;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
@@ -69,14 +70,12 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
   label: string;
   hasFocus: boolean;
   scrollbarConfig: PerfectScrollbarConfig;
-  dimmerTopVisible = false;
-  dimmerBottomVisible = true;
 
   get errorActive() {
     return this.showValidation && this.formControl && this.formControl.invalid && !this.hasFocus;
   }
 
-  get editingEditing() {
+  get errorEditing() {
     return this.showValidation && this.formControl && this.formControl.invalid && this.hasFocus;
   }
 
@@ -169,7 +168,11 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
       return;
     }
 
-    this.expanded = !this.expanded;
+    if (this.expanded) {
+      this.collapse();
+    } else {
+      this.expand();
+    }
   }
 
   filterItems(filterValue: string) {
@@ -181,108 +184,115 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
 
     // Scroll to top when filter is changed
     this.dropdown.nativeElement.querySelector('.ps').scrollTop = 0;
-    this.dimmerBottomVisible = false;
-  }
-
-  showAllItems() {
-    if (this.filterTextbox) {
-      this.filterTextbox.clear();
-    }
   }
 
   onFocus() {
     this.hasFocus = true;
   }
 
-  onBlur() {
+  onBlur(event: FocusEvent) {
+    const dropdownElement = this.dropdown.nativeElement as HTMLElement;
+    const focusedNode = event.relatedTarget as Node;
+    if (dropdownElement.contains(focusedNode)) {
+      return;
+    }
+
     this.hasFocus = false;
+    this.collapse(false);
+
     if (this.formControl) {
-      this.onTouched();
+      setTimeout(() => {
+        this.onTouched();
+      });
     }
   }
 
   onKeydown(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown' || event.key === 'Down' || event.key === 'ArrowUp' || event.key === 'Up') {
+      event.preventDefault();
+    }
+
     if (event.altKey && (event.key === 'ArrowDown' || event.key === 'Down')) {
-      this.expanded = true;
-      event.preventDefault();
-      event.stopPropagation();
-    } else if (event.key === 'Escape' ||
+      this.expand();
+    } else if (event.key === 'Escape' || event.key === 'Esc' ||
       event.altKey && (event.key === 'ArrowUp' || event.key === 'Up')) {
-      this.expanded = false;
-      this.dropdown.nativeElement.focus();
-      event.preventDefault();
-      event.stopPropagation();
+      this.collapse();
     } else if (event.key === 'Tab') {
-      // this.expanded = false;
+      this.collapse(false);
     }
   }
 
   onHeaderKeydown(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       this.toggleExpanded();
-      this.dropdown.nativeElement.focus();
-      event.preventDefault();
-      event.stopPropagation();
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
       if (this.expanded) {
         if (this.filterVisible) {
           this.filterTextbox.focus();
+        } else if (this.deselectable) {
+          this.deselect.nativeElement.focus();
         } else if (this.items.length) {
           this.items.toArray()[0].focus();
         }
       }
-      event.preventDefault();
-      event.stopPropagation();
     }
   }
 
   onFilterKeydown(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-      event.preventDefault();
       event.stopPropagation();
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
-      this.showAll.nativeElement.focus();
-      event.preventDefault();
-      event.stopPropagation();
-    } else if (event.key === 'ArrowUp' || event.key === 'Up') {
-      this.dropdown.nativeElement.focus();
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  }
-
-  onShowAllKeydown(event: KeyboardEvent) {
-    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-      this.showAllItems();
-      event.preventDefault();
-      event.stopPropagation();
-    } else if (event.key === 'ArrowDown' || event.key === 'Down') {
-      if (this.items.length) {
+      if (this.deselectable) {
+        this.deselect.nativeElement.focus();
+      } else if (this.items.length) {
         this.items.toArray()[0].focus();
       }
-      event.preventDefault();
-      event.stopPropagation();
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
-      this.filterTextbox.focus();
-      event.preventDefault();
-      event.stopPropagation();
+      if (this.items.length) {
+        this.items.toArray()[this.items.length - 1].focus();
+      } else if (this.deselectable) {
+        this.deselect.nativeElement.focus();
+      }
     }
   }
 
-  showTopScrollDimmer() {
-    this.dimmerTopVisible = true;
+  onDeselectKeydown(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown' || event.key === 'Down') {
+      if (this.items.length) {
+        this.items.toArray()[0].focus();
+      } else if (this.filterVisible) {
+        this.filterTextbox.focus();
+      }
+    } else if (event.key === 'ArrowUp' || event.key === 'Up') {
+      if (this.filterVisible) {
+        this.filterTextbox.focus();
+      } else if (this.items.length) {
+        this.items.toArray()[this.items.length - 1].focus();
+      }
+    }
   }
 
-  hideTopScrollDimmer() {
-    this.dimmerTopVisible = false;
+  private expand() {
+    this.expanded = true;
+
+    const selectedItems = this.items.filter(x => x.selected);
+    if (selectedItems.length) {
+      setTimeout(() => {
+        selectedItems[0].focus();
+      });
+    }
   }
 
-  showBottomScrollDimmer() {
-    this.dimmerBottomVisible = true;
-  }
+  private collapse(focusHeader = true) {
+    this.expanded = false;
 
-  hideBottomScrollDimmer() {
-    this.dimmerBottomVisible = false;
+    if (this.filterTextbox) {
+      this.filterTextbox.clear();
+    }
+
+    if (focusHeader) {
+      this.header.nativeElement.focus();
+    }
   }
 
   private setFilterVisibility() {
@@ -329,8 +339,7 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
               this.label = this.noItemSelectedLabel;
               this.onChange(null);
             }
-            this.dropdown.nativeElement.focus();
-            this.expanded = false;
+            this.collapse();
           }
         });
     });
@@ -339,8 +348,10 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
   private focusPreviousItem(itemIndex: number) {
     if (itemIndex > 0) {
       this.items.toArray()[itemIndex - 1].focus();
+    } else if (this.deselectable) {
+      this.deselect.nativeElement.focus();
     } else if (this.filterVisible) {
-      this.showAll.nativeElement.focus();
+      this.filterTextbox.focus();
     } else {
       this.items.toArray()[this.items.length - 1].focus();
     }
@@ -349,6 +360,10 @@ export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit
   private focusNextItem(itemIndex: number) {
     if (itemIndex < (this.items.length - 1)) {
       this.items.toArray()[itemIndex + 1].focus();
+    } else if (this.filterVisible) {
+      this.filterTextbox.focus();
+    } else if (this.deselectable) {
+      this.deselect.nativeElement.focus();
     } else {
       this.items.toArray()[0].focus();
     }

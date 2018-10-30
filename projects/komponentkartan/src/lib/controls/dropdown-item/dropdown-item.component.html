@@ -1,3 +1,3 @@
-<div #item *ngIf="visible" class="dropdown__menu__items__item" role="option" [attr.aria-selected]="selected" [ngClass]="{ 'dropdown-item--selected': selected }" (click)="toggleSelect()" (keydown)="onKeydown($event)">
+<div #item *ngIf="visible" class="dropdown__menu__items__item" tabindex="0" role="option" [attr.aria-selected]="selected" [ngClass]="{ 'dropdown-item--selected': selected }" (click)="toggleSelect()" (keydown)="onKeydown($event)">
   <ng-content></ng-content>
 </div>
