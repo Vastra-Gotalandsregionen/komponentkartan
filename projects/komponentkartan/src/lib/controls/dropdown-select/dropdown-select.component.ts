@@ -32,15 +32,15 @@ function _defaultCompare(o1: any, o2: any): boolean {
 }
 
 @Component({
-  selector: 'vgr-declarative-dropdown',
-  templateUrl: './declarative-dropdown.component.html',
+  selector: 'vgr-dropdown-select',
+  templateUrl: './dropdown-select.component.html',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DeclarativeDropdownComponent),
+    useExisting: forwardRef(() => DropdownSelectComponent),
     multi: true
   }]
 })
-export class DeclarativeDropdownComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {
+export class DropdownSelectComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 
   @Input() multi = false;
   @Input() small = false;

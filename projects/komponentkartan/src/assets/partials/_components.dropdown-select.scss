@@ -1,10 +1,10 @@
-.dropdown-x {
+.dropdown-select {
   .validation {
     // width: 280px;
   }
-  .dropdown__control {
+  .dropdown-select__control {
     
-    .dropdown__header {
+    .dropdown-select__header {
       height: $component-height;
       width: 270px;
       cursor: pointer;
@@ -14,7 +14,7 @@
         outline: $focus-outline-width solid $focus-color;
       }
 
-      .dropdown__header__label {
+      .dropdown-select__header__label {
         width: 270px - $icon-width;
         padding-left: $margin--slim;
         background-color: $background-color--content;
@@ -27,11 +27,11 @@
         white-space: nowrap;
       }
 
-      .dropdown__header__button {
+      .dropdown-select__header__button {
         @extend .background-color--primary;
         transition: all 0.6s linear;
 
-        .dropdown__header__button__icon {
+        .dropdown-select__header__button__icon {
           @extend .bg-image-icon-chevron-inverted;
           transform: rotate(0deg);
           transition: all ease 0.3s;
@@ -39,7 +39,7 @@
       }
     }
 
-    .dropdown__menu-x {
+    .dropdown-select__menu {
       position: absolute;
       top: 42px;
       z-index: $layer-four;
@@ -58,26 +58,26 @@
         left: 20px;
       }
       
-      .dropdown__menu__header {
+      .dropdown-select__menu__header {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-top: 15px;
         border-bottom: 1px solid $border-color;
 
-        .dropdown__menu__header__select-all {
+        .dropdown-select__menu__header__select-all {
           align-self: flex-start;
         }
       }
       
-      .dropdown__menu__items {
+      .dropdown-select__menu__items {
         max-height: 285px;
 
-        .dropdown__menu__items__dimmer-padding {
+        .dropdown-select__menu__items__dimmer-padding {
           height: 20px;
         }
 
-        .dropdown__menu__items__item {
+        .dropdown-select__menu__items__item {
           color: $menu-text-color;
           padding-top: 5px;
           padding-bottom: 5px;
@@ -103,7 +103,7 @@
         }
       }
 
-      .dropdown__menu__dimmer {
+      .dropdown-select__menu__dimmer {
         position: absolute;
         height: 20px;
         width: 300px;
@@ -112,20 +112,20 @@
         z-index: $layer-five;
       }
       
-      .dropdown__menu__dimmer-top {
+      .dropdown-select__menu__dimmer-top {
         background: linear-gradient(white, rgba(255, 255, 255, 0));
       }
       
-      .dropdown__menu__dimmer-bottom {
+      .dropdown-select__menu__dimmer-bottom {
         background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
         bottom: 0;
       }
     }
 
-    &.dropdown--multi {
-      .dropdown__menu-x {
-        .dropdown__menu__items {
-          .dropdown__menu__items__item {
+    &.dropdown-select--multi {
+      .dropdown-select__menu {
+        .dropdown-select__menu__items {
+          .dropdown-select__menu__items__item {
             &::before {
               content: "O";
             }
@@ -140,51 +140,51 @@
       }
     }
 
-    &.dropdown--small {
-      .dropdown__header {
+    &.dropdown-select--small {
+      .dropdown-select__header {
         width: 160px;
-        .dropdown__header__label {
+        .dropdown-select__header__label {
           width: 160px - $icon-width;
         }
       }
     }
 
-    &.dropdown--expanded {
-      .dropdown__header {      
-        .dropdown__header__button {
-          .dropdown__header__button__icon {
+    &.dropdown-select--expanded {
+      .dropdown-select__header {      
+        .dropdown-select__header__button {
+          .dropdown-select__header__button__icon {
             transform: rotate(180deg);
           }
         }
       }
     }
 
-    &.dropdown--disabled {
+    &.dropdown-select--disabled {
       cursor: default;
       
-      .dropdown__header {
+      .dropdown-select__header {
         background-color: $control-color--disabled;
 
-        .dropdown__header__label {
+        .dropdown-select__header__label {
           background-color: $background-color--default;
           border-color: $control-color--disabled;
           cursor: default;
         }
 
-        .dropdown__header__button {
+        .dropdown-select__header__button {
           background-color: $control-color--disabled;
         }
       }
     }
 
-    &.dropdown--readonly-x {
+    &.dropdown-select--readonly {
       cursor: default;
       
-      .dropdown__header {      
+      .dropdown-select__header {      
         height: auto;
         width: auto;
 
-        .dropdown__header__label {
+        .dropdown-select__header__label {
           height: auto;
           width: auto;
           transition: max-width 0.3s linear;
@@ -195,7 +195,7 @@
           cursor: text;
         }
         
-        .dropdown__header__button {
+        .dropdown-select__header__button {
           display: none;
         }
       }
@@ -204,37 +204,37 @@
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .dropdown-x {
-    .dropdown__control {
-      .dropdown__header {
+  .dropdown-select {
+    .dropdown-select__control {
+      .dropdown-select__header {
         width: 287px;
 
-        .dropdown__header__label {
+        .dropdown-select__header__label {
           width: 287px - $icon-width;
         }
       }
 
-      .dropdown__menu-x {
-        .dropdown__menu__items {
+      .dropdown-select__menu {
+        .dropdown-select__menu__items {
           max-height: 340px;
         }
       }
       
-      &.dropdown--small {
-        .dropdown__header {
+      &.dropdown-select--small {
+        .dropdown-select__header {
           width: 170px;
 
-          .dropdown__header__label {
+          .dropdown-select__header__label {
             width: 170px - $icon-width;
           }
         }
       }
 
-      &.dropdown--readonly-x {
-        .dropdown__header {
+      &.dropdown-select--readonly {
+        .dropdown-select__header {
           width: auto;
 
-          .dropdown__header__label {
+          .dropdown-select__header__label {
             width: auto;
           }
         }

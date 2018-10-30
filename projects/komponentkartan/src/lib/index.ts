@@ -63,7 +63,7 @@ export { SearchResultComponent } from './controls/search-result/search-result.co
 export { ToggleButtonComponent } from './controls/toggle-button/toggle-button.component';
 export { ToggleButtonGroupComponent } from './controls/toggle-button/toggle-button-group.component';
 export { DropdownItemComponent } from './controls/dropdown-item/dropdown-item.component';
-export { DeclarativeDropdownComponent } from './controls/declarative-dropdown/declarative-dropdown.component';
+export { DropdownSelectComponent } from './controls/dropdown-select/dropdown-select.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';

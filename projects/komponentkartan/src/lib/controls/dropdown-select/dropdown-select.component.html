@@ -1,0 +1,38 @@
+<div class="dropdown-select" [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
+  <div class="validation">
+    <div #dropdown class="dropdown-select__control" [attr.aria-labelledby]="labelledbyid" [attr.aria-multiselectable]="multi"
+      [attr.aria-expanded]="expanded" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly" [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly-x': readonly, 'dropdown-select--disabled': disabled, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
+      (keydown)="onKeydown($event)" (focusin)="onFocus()" (focusout)="onBlur($event)">
+      <div #header class="dropdown-select__header" tabindex="0" aria-haspopup="listbox" (click)="toggleExpanded()"
+        (keydown)="onHeaderKeydown($event)">
+        <div class="dropdown-select__header__label noselect" id="{{labelledbyid}}" title="{{label}}">{{label}}</div>
+        <div class="dropdown-select__header__button">
+          <div class="dropdown-select__header__button__icon"></div>
+        </div>
+      </div>
+      <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu-x">
+        <div *ngIf="multi || filterVisible || deselect" class="dropdown-select__menu__header">
+          <div *ngIf="filterVisible" class="dropdown-select__menu__header__filter" (keydown)="onFilterKeydown($event)">
+            <vgr-filter-textbox (valueChanged)="filterItems($event)"></vgr-filter-textbox>
+          </div>
+          <vgr-button *ngIf="deselect && !multi" (click)="deselectItems()">Ta bort val</vgr-button>
+          <div #selectAll *ngIf="multi" class="dropdown-select__menu__header__select-all" tabindex="0" (click)="toggleSelectAll()"
+            (keydown)="onSelectAllKeydown($event)">Välj alla</div>
+        </div>
+        <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-top"></div>
+        <perfect-scrollbar [config]="scrollbarConfig">
+          <div class="dropdown-select__menu__items" role="listbox">
+            <div class="dropdown-select__menu__items__dimmer-padding"></div>
+            <ng-content></ng-content>
+            <div class="dropdown-select__menu__items__dimmer-padding"></div>
+          </div>
+        </perfect-scrollbar>
+        <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-bottom"></div>
+      </div>
+    </div>
+    <div class="validation__status" title="{{validationErrorMessage}}">
+      <div class="validation__status__icon"></div>
+      <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
+    </div>
+  </div>
+</div>
