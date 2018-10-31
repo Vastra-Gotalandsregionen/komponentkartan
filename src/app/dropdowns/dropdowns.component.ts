@@ -50,6 +50,10 @@ export class DropdownsComponent implements OnInit {
   ngOnInit() {
   }
 
+  addValue() {
+    this.values.push({});
+  }
+
   private getDemoItems(numberOfItems: number): DropdownItem<string>[] {
     const items: DropdownItem<string>[] = [];
     for (let i = 1; i <= numberOfItems; i++) {

@@ -64,6 +64,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   expanded = false;
   filterVisible = false;
+  allSelected = false;
   validationErrorMessage = 'Obligatorisk';
   labelledbyid: string = Guid.newGuid();
 
@@ -80,6 +81,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   private ngUnsubscribe = new Subject();
+  private ngUnsubscribeItems = new Subject();
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
@@ -118,6 +120,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
   }
 
   writeValue(value: any) {
@@ -184,6 +189,30 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     // Scroll to top when filter is changed
     this.dropdown.nativeElement.querySelector('.ps').scrollTop = 0;
+  }
+
+  deselectItems() {
+    const selecedItem = this.items.find(x => x.selected);
+    if (selecedItem) {
+      selecedItem.selected = false;
+      this.label = this.noItemSelectedLabel;
+      this.onChange(null);
+    }
+  }
+
+  toggleSelectAll() {
+    if (this.allSelected) {
+      this.allSelected = false;
+      this.items.forEach(x => x.selected = false);
+      this.label = this.noItemSelectedLabel;
+      this.onChange(null);
+    } else {
+      this.allSelected = true;
+      this.items.forEach(x => x.selected = true);
+      this.setLabel(this.items.toArray());
+      const values = this.items.map(x => x.value);
+      this.onChange(values);
+    }
   }
 
   onFocus() {
@@ -300,29 +329,31 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   private subscribeToItems() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-    this.ngUnsubscribe = new Subject();
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
+    this.ngUnsubscribeItems = new Subject();
 
     this.items.forEach((item, index) => {
       item.previous
-        .pipe(takeUntil(this.ngUnsubscribe))
+        .pipe(takeUntil(this.ngUnsubscribeItems))
         .subscribe(() => this.focusPreviousItem(index));
 
       item.next
-        .pipe(takeUntil(this.ngUnsubscribe))
+        .pipe(takeUntil(this.ngUnsubscribeItems))
         .subscribe(() => this.focusNextItem(index));
 
       item.selectedChanged
-        .pipe(takeUntil(this.ngUnsubscribe))
+        .pipe(takeUntil(this.ngUnsubscribeItems))
         .subscribe(selected => {
           if (this.multi) {
             const selectedItems = this.items.filter(x => x.selected);
             if (selectedItems.length) {
+              this.allSelected = selectedItems.length === this.items.length;
               this.setLabel(selectedItems);
               const values = selectedItems.map(x => x.value);
               this.onChange(values);
             } else {
+              this.allSelected = false;
               this.label = this.noItemSelectedLabel;
               this.onChange(null);
             }

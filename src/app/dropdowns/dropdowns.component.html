@@ -19,23 +19,23 @@
     <div class="row-layout">
       <div>
         <p>Deklarativ 8 (förvald)</p>
-        <vgr-dropdown-select [small]="true" [formControl]="dropdownForm1">
-          <vgr-dropdown-item [value]="1">Val 1 gsfdg gsfdhfsd hsdfhfsd hsdfhfhss ii hsfdh</vgr-dropdown-item>
+        <vgr-dropdown-select [small]="true" [deselectable]="true" [formControl]="dropdownForm1">
+          <vgr-dropdown-item [value]="1">Val 1</vgr-dropdown-item>
           <vgr-dropdown-item [value]="2">Val 2</vgr-dropdown-item>
           <vgr-dropdown-item [value]="3">Val 3</vgr-dropdown-item>
           <vgr-dropdown-item [value]="4">Val 4</vgr-dropdown-item>
           <vgr-dropdown-item [value]="5">Val 5</vgr-dropdown-item>
           <vgr-dropdown-item [value]="6">Val 6</vgr-dropdown-item>
           <vgr-dropdown-item [value]="7">Val 7</vgr-dropdown-item>
-          <vgr-dropdown-item [value]="8">Val 8 gsfdg gsfdhfsd hsdfhfsd hsdfhfhss hsdhfsdhs hsfdh</vgr-dropdown-item>
+          <vgr-dropdown-item [value]="8">Val 8</vgr-dropdown-item>
         </vgr-dropdown-select>
-        <div>{{dropdownForm1.value}} {{dropdownForm1.touched}}</div>
       </div>
       <div>
         <p>Deklarativ dynamisk (förvald)</p>
         <vgr-dropdown-select [small]="true" [multi]="true" [formControl]="dropdownForm9">
           <vgr-dropdown-item *ngFor="let v of values; let i = index" [value]="v">Val {{ i }}</vgr-dropdown-item>
         </vgr-dropdown-select>
+        <vgr-button (click)="addValue()">Lägg till</vgr-button>
       </div>
       <div>
         <p>Deklarativ 25</p>
@@ -85,7 +85,7 @@
       <div>
         <p>Deklarativ readonly</p>
         <vgr-dropdown-select [small]="true" [formControl]="dropdownForm6" [readonly]="isReadonlyAndDisabled">
-          <vgr-dropdown-item [value]="1">Val 1 fcsajfn gadsfgfsd gasfdgfd gsardfgshg hsfdhfdsh</vgr-dropdown-item>
+          <vgr-dropdown-item [value]="1">Val 1</vgr-dropdown-item>
           <vgr-dropdown-item [value]="2">Val 2</vgr-dropdown-item>
           <vgr-dropdown-item [value]="3">Val 3</vgr-dropdown-item>
           <vgr-dropdown-item [value]="4">Val 4</vgr-dropdown-item>

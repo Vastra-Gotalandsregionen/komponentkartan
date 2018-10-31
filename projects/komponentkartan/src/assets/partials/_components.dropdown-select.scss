@@ -1,4 +1,18 @@
 .dropdown-select {
+  .icon-checkbox-unchecked {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect x='10' y='10' width='160' height='160' stroke='%23151515' stroke-width='20' fill='none' /%3E%3C/svg%3E");
+  }
+
+  .icon-checkbox-checked {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect x='0' y='0' width='180' height='180' stroke='none' fill='%23151515' /%3E%3Cpolyline points='40 85, 75 120, 139 56' stroke='white' stroke-width='20' fill='none' /%3E%3C/svg%3E");
+  }
+
   .validation {
     // width: 280px;
   }
@@ -65,8 +79,52 @@
         padding-top: 15px;
         border-bottom: 1px solid $border-color;
 
+        .dropdown-select__menu__header__filter {
+          margin-bottom: 10px;
+        }
+
+        .dropdown-select__menu__header__deselect {
+          margin-bottom: 10px;
+        }
+
         .dropdown-select__menu__header__select-all {
           align-self: flex-start;
+          color: $menu-text-color;
+          margin-bottom: 10px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          padding-left: $margin--regular;
+          padding-right: $margin--regular;
+          background: white;
+          
+          &::before {
+            @extend .icon-checkbox-unchecked;
+            content: "";
+            vertical-align: middle;
+            margin-right: 15px;
+          }
+
+          &.select-all--selected {
+            &::before {
+              @extend .icon-checkbox-checked;
+              content: "";
+              vertical-align: middle;
+              margin-right: 15px;
+            }
+          }
+
+          &:focus {
+            outline: $focus-outline-width solid $focus-color;
+          }
+          
+          &:focus, &:hover {
+            font-weight: bold;
+            letter-spacing: $font-size--small-letter-spacing-bold;
+            padding-left: $margin--regular - 4px;
+            border-left-width: 4px;
+            border-left-style: solid;
+            @extend .border-left-color--primary;
+          }
         }
       }
       
@@ -127,12 +185,18 @@
         .dropdown-select__menu__items {
           .dropdown-select__menu__items__item {
             &::before {
-              content: "O";
+              @extend .icon-checkbox-unchecked;
+              content: "";
+              vertical-align: middle;
+              margin-right: 15px;
             }
 
             &.dropdown-item--selected {
               &::before {
-                content: "X";
+                @extend .icon-checkbox-checked;
+                content: "";
+                vertical-align: middle;
+                margin-right: 15px;
               } 
             }
           }
