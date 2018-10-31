@@ -36,7 +36,7 @@ export class DropdownsComponent implements OnInit {
     this.dropDownItems25All = this.getDemoItemsMixedName(25);
     this.isReadonlyAndDisabled = true;
 
-    this.dropdownForm1 = new FormControl(1);
+    this.dropdownForm1 = new FormControl(1, Validators.required);
     this.dropdownForm2 = new FormControl();
     this.dropdownForm3 = new FormControl([1, 5, 10]);
     this.dropdownForm4 = new FormControl();

@@ -32,14 +32,14 @@
       </div>
       <div>
         <p>Deklarativ dynamisk (förvald)</p>
-        <vgr-dropdown-select [small]="true" [multi]="true" [formControl]="dropdownForm9">
+        <vgr-dropdown-select [small]="true" [simpleLabel]="true" [multi]="true" [formControl]="dropdownForm9">
           <vgr-dropdown-item *ngFor="let v of values; let i = index" [value]="v">Val {{ i }}</vgr-dropdown-item>
         </vgr-dropdown-select>
         <vgr-button (click)="addValue()">Lägg till</vgr-button>
       </div>
       <div>
         <p>Deklarativ 25</p>
-        <vgr-dropdown-select [small]="true" [multi]="true" [noItemSelectedLabel]="'Välj alternativ'" [formControl]="dropdownForm3">
+        <vgr-dropdown-select [multi]="true" [noItemSelectedLabel]="'Välj alternativ'" [formControl]="dropdownForm3">
           <vgr-dropdown-item [value]="1">Val 1</vgr-dropdown-item>
           <vgr-dropdown-item [value]="2">Val 2</vgr-dropdown-item>
           <vgr-dropdown-item [value]="3">Val 3</vgr-dropdown-item>
