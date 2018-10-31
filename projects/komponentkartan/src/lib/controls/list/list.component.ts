@@ -1,4 +1,4 @@
-import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
 
 import { ListItemComponent } from '../list-item/list-item.component';
@@ -6,6 +6,11 @@ import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.compon
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+interface PageItem {
+  label: string;
+  active: boolean;
+  action: () => void;
+}
 
 @Component({
   templateUrl: './list.component.html',
@@ -24,7 +29,7 @@ import { takeUntil } from 'rxjs/operators';
     ])
   ]
 })
-export class ListComponent implements AfterContentInit, OnDestroy {
+export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
   @HostBinding('class.list') hasClass = true;
   @HostBinding('class.list--new-item-added') moveHeader = false;
   @HostBinding('class.animate') animate = false;
@@ -32,13 +37,161 @@ export class ListComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
   @Input() allowMultipleExpandedItems = false;
   @Input() notification;
+  @Input() pages = 0;
   @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
   @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
+  @Output() pageChanged: EventEmitter<number> = new EventEmitter();
 
   loaded = false;
+  pageItems: PageItem[] = [];
   private ngUnsubscribe = new Subject();
 
-  constructor() {
+  private showPage(page: number) {
+    this.setPageItems(page);
+    this.pageChanged.emit(page);
+  }
+
+  private setPageItems(activePage: number) {
+    const previousPageItem = {
+      label: '< Föregående sida'
+    } as PageItem;
+
+    if (activePage !== 1) {
+      previousPageItem.action = () => { this.showPage(activePage - 1); };
+    }
+    this.pageItems.push(previousPageItem);
+
+    if (this.pages <= 7) {
+      for (let item = 1; item <= this.pages; item++) {
+        this.pageItems.push({
+          label: item.toString(),
+          active: item === activePage,
+          action: () => { this.showPage(item); }
+        });
+      }
+    } else if (this.pages === 8) {
+      if (activePage <= 4) {
+
+        for (let item = 1; item <= 5; item++) {
+          this.pageItems.push({
+            label: item.toString(),
+            active: item === activePage,
+            action: () => { this.showPage(item); }
+          });
+        }
+
+        this.pageItems.push({
+          label: '...'
+        } as PageItem);
+
+        this.pageItems.push({
+          label: '8',
+          action: () => { this.showPage(8); }
+        } as PageItem);
+
+      } else {
+
+        this.pageItems.push({
+          label: '1',
+          action: () => { this.showPage(1); }
+        } as PageItem);
+
+        this.pageItems.push({
+          label: '...'
+        } as PageItem);
+
+        for (let item = 4; item <= 8; item++) {
+          this.pageItems.push({
+            label: item.toString(),
+            active: item === activePage,
+            action: () => { this.showPage(item); }
+          });
+        }
+      }
+    } else {
+      if (activePage <= 4) {
+
+        for (let item = 1; item <= 5; item++) {
+          this.pageItems.push({
+            label: item.toString(),
+            active: item === activePage,
+            action: () => { this.showPage(item); }
+          });
+        }
+
+        this.pageItems.push({
+          label: '...'
+        } as PageItem);
+
+        this.pageItems.push({
+          label: this.pages.toString(),
+          action: () => { this.showPage(this.pages); }
+        } as PageItem);
+
+      } else if (activePage >= this.pages - 4) {
+
+        this.pageItems.push({
+          label: '1',
+          action: () => { this.showPage(1); }
+        } as PageItem);
+
+        this.pageItems.push({
+          label: '...'
+        } as PageItem);
+
+        for (let item = this.pages - 4; item <= this.pages; item++) {
+          this.pageItems.push({
+            label: item.toString(),
+            active: item === activePage,
+            action: () => { this.showPage(item); }
+          });
+        }
+
+      } else {
+
+        this.pageItems.push({
+          label: '1',
+          action: () => { this.showPage(1); }
+        } as PageItem);
+
+        this.pageItems.push({
+          label: '...'
+        } as PageItem);
+
+        for (let item = activePage - 1; item <= activePage + 1; item++) {
+          this.pageItems.push({
+            label: item.toString(),
+            active: item === activePage,
+            action: () => { this.showPage(item); }
+          });
+        }
+
+        this.pageItems.push({
+          label: '...'
+        } as PageItem);
+
+        this.pageItems.push({
+          label: this.pages.toString(),
+          action: () => { this.showPage(this.pages); }
+        } as PageItem);
+      }
+    }
+
+    const nextPageItem = {
+      label: 'Nästa sida >'
+    } as PageItem;
+
+    if (activePage !== this.pages) {
+      nextPageItem.action = () => { this.showPage(activePage + 1); };
+    }
+    this.pageItems.push(nextPageItem);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const pagesChange = changes['pages'];
+    if (pagesChange) {
+      this.setPageItems(1);
+    }
   }
 
   ngAfterContentInit() {
