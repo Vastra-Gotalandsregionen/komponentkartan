@@ -14,7 +14,8 @@
         <div *ngIf="filterVisible || deselectable || multi" class="dropdown-select__menu__header">
           <vgr-filter-textbox *ngIf="filterVisible" class="dropdown-select__menu__header__filter" (keydown)="onFilterKeydown($event)"
             (valueChanged)="filterItems($event)"></vgr-filter-textbox>
-          <vgr-button *ngIf="deselectable && !multi" class="dropdown-select__menu__header__deselect" (click)="deselectItems()">Ta bort val</vgr-button>
+          <vgr-button *ngIf="deselectable && !multi" class="dropdown-select__menu__header__deselect" [buttonStyle]="'discreet'"
+            (click)="deselectItems()">Ta bort val</vgr-button>
           <div *ngIf="multi" class="dropdown-select__menu__header__select-all" tabindex="0" [ngClass]="{ 'select-all--selected': allSelected }"
             (click)="toggleSelectAll()" (keydown)="onSelectAllKeydown($event)">Välj alla</div>
         </div>
