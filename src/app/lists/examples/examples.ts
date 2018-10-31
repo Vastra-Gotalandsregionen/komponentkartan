@@ -101,7 +101,7 @@ export class Examples {
       <vgr-list-column width="5">{{row.occupation}}</vgr-list-column>
       <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
     </vgr-list-item-header>
-    <vgr-list-item-content [indentContent]="false">
+    <vgr-list-item-content>
       <vgr-expandable-div *ngFor="let row of row.children" [expanded]="false">
         <vgr-expandable-div-header>
           <h2>Barn</h2>
