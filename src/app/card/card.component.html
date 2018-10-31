@@ -9,7 +9,9 @@
         </vgr-list-header>
         <vgr-list-item [expanded]="true">
           <vgr-list-item-header>
-            <h4>Översikt</h4>
+            <vgr-list-column width="20">
+              <h4>Översikt</h4>
+            </vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>
             <div class="content-overview">
@@ -23,7 +25,7 @@
               </p>
               <vgr-card>
                 <vgr-card-header>
-                  <vgr-button class="flex-right" [secondary]="true">Åtgärd</vgr-button>
+                  <vgr-button class="flex-right" [buttonStyle]="'secondary'">Åtgärd</vgr-button>
                 </vgr-card-header>
                 <vgr-card-column>
                   <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 1'">
@@ -51,7 +53,9 @@
         </vgr-list-item>
         <vgr-list-item [expanded]="false">
           <vgr-list-item-header>
-            <h4>Exempel - två kolumner</h4>
+            <vgr-list-column width="20">
+              <h4>Exempel - två kolumner</h4>
+            </vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>
             <!-- Exempel -->
@@ -113,7 +117,9 @@
         </vgr-list-item>
         <vgr-list-item [expanded]="false" [notification]="notification">
           <vgr-list-item-header>
-            <h4>Exempel - en kolumn</h4>
+            <vgr-list-column width="20">
+              <h4>Exempel - en kolumn</h4>
+            </vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>
             <!-- Exempel2 -->
@@ -188,7 +194,9 @@
         </vgr-list-item>
         <vgr-list-item [expanded]="false ">
           <vgr-list-item-header>
-            <h4>API</h4>
+            <vgr-list-column width="20">
+              <h4>API</h4>
+            </vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>
             <!-- API -->
@@ -254,11 +262,16 @@
         </vgr-list-item>
         <vgr-list-item [expanded]="false">
           <vgr-list-item-header>
-            <h4>Tillgänglighet</h4>
+            <vgr-list-column width="20">
+              <h4>Tillgänglighet</h4>
+            </vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>
-            <!-- tILLGÄNGLIGHET -->
-            <i>Under utveckling</i>
+            <p>
+              Navigering i kortet:
+              <br>
+              <br> - Enter och Space: När fokus är på listradens header togglas kortraden expanderad / kollapsad.
+            </p>
           </vgr-list-item-content>
         </vgr-list-item>
       </vgr-list>

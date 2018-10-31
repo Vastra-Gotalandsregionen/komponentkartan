@@ -101,7 +101,7 @@ export class Examples {
       <vgr-list-column width="5">{{row.occupation}}</vgr-list-column>
       <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
     </vgr-list-item-header>
-    <vgr-list-item-content [indentContent]="false">
+    <vgr-list-item-content>
       <vgr-expandable-div *ngFor="let row of row.children" [expanded]="false">
         <vgr-expandable-div-header>
           <h2>Barn</h2>
@@ -265,9 +265,9 @@ export class Examples {
       <vgr-list-column [width]="10">{{row.previewObject.lastName}}</vgr-list-column>
     </vgr-list-item-header>
     <vgr-list-item-content>
-      <vgr-button [secondary]="true" (click)="updateRow(row)">Uppdatera</vgr-button>
-      <vgr-button [secondary]="true" (click)="updateRow2(row)">Uppdatera och rensa meddelande</vgr-button>
-      <vgr-button [secondary]="true" (click)="deleteRow(row)">Ta bort</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(row)">Uppdatera</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" (click)="updateRow2(row)">Uppdatera och rensa meddelande</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" (click)="deleteRow(row)">Ta bort</vgr-button>
     </vgr-list-item-content>
   </vgr-list-item>
 </vgr-list>`;
@@ -303,7 +303,7 @@ export class Examples {
     <p>Du tog bort detta objektet {{removedObjectString}}</p>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('notifyDeleteModal')">Stäng</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('notifyDeleteModal')">Stäng</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="removeRowModal">

@@ -33,7 +33,7 @@
       <div class="loader-container" *ngIf="noSearchResult">
         <p>Inga resultat hittades för '{{ filtertext }}'</p>
       </div>
-      <vgr-list (sortChanged)="onSortChanged($event)" *ngIf="!loading && !noSearchResult">
+      <vgr-list (sortChanged)="onSortChanged($event)" *ngIf="!loading && !noSearchResult" [allowMultipleExpandedItems]="true">
         <vgr-list-header>
           <vgr-list-column-header width="10" sortKey="enhet" [sortDirection]="sortDirections.Ascending">Enhet</vgr-list-column-header>
           <vgr-list-column-header width="5" [align]="'left'" sortKey="hsaid">HSA-id</vgr-list-column-header>
@@ -52,7 +52,7 @@
           </vgr-list-item-header>
           <vgr-list-item-content [indentContent]="false">
             <div class="button-container">
-              <vgr-button [secondary]="true">Text</vgr-button>
+              <vgr-button [buttonStyle]="'secondary'">Text</vgr-button>
               <span class="vgr-icon-calendar--green"></span>
             </div>
             <vgr-table *ngIf="row.expanded">
@@ -252,8 +252,8 @@
   <vgr-modal-header>Skriv ut</vgr-modal-header>
   <vgr-modal-content>Vill du skriva ut {{getPrintText()}}?</vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="closeModal('printModal')">Avbryt</vgr-button>
-    <vgr-button [secondary]="true" (click)="printSelectedRows()">Skriv ut</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="printSelectedRows()">Skriv ut</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('printModal')">Avbryt</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="deleteRowModal">
@@ -262,7 +262,7 @@
     <p *ngIf="rowToRemove">Vill du verkligen ta bort {{rowToRemove.previewObject.enhet}}?</p>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [secondary]="true" (click)="removeSelectedRow()">Ja</vgr-button>
-    <vgr-button [secondary]="true" default="true" (click)="closeModal('deleteRowModal')">Nej</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="removeSelectedRow()">Ja</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" default="true" (click)="closeModal('deleteRowModal')">Nej</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>

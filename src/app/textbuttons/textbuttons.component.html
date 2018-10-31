@@ -2,18 +2,40 @@
 
   <div class="docs__overview">
     <p>
-      <code>
-        &lt;vgr-button&gt; </code> finns i två olika utföranden, primär och sekundär.
-      <br>
-      <br>
+      <code>&lt;vgr-button&gt; </code><br>
+      Finns i tre olika utföranden, primär, sekundär och diskret.
+      Primär knapp används för att indikera x, sekundär för att indikera y och textknappen används för z.
+      Primär - visar den action du “borde” ta, troligaste valet.<br>   
+      Sekundär för mindre troligt alternativ som ändå måste finnas. Textknappen används i samma syfte som sekundär
+        men när man vill ha mindre visuellt fokus. (Likt
+        https://material.io/design/components/buttons.html#hierarchy-placement)<br><br>
+      Det är tillåtet att ha text och ikon i knappen.<br>
+    </p>
+    <br>
+    <p>
       <vgr-button type="submit" (click)="lastButtonPressed = 'Klicka här - primär'">Klicka här</vgr-button>
-      <vgr-button [secondary]="true" (click)="lastButtonPressed = 'Klicka här - sekundär'">Klicka här</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" (click)="lastButtonPressed = 'Klicka här - sekundär'">Klicka här</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">A</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Ändra - diskret med ikon'">
+          <div style="display: flex; align-items: center;">
+            <span style="display:inline-block; background-size: 70%;" class="vgr-icon-edit"></span>
+            <!-- <span style="padding-right: 10px;">Ändra</span> -->
+          </div>
+        </vgr-button>
+      <br>
+      <br>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Klicka här</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Knapp 1</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Knapp 2</vgr-button>
+      <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'Klicka här - diskret'">Knapp 3</vgr-button>
+        <br>
+        <br>
+
     </p>
     <p> Förändras med tema:
       <strong>ja</strong>
     </p>
   </div>
-
   <div class="docs__examples">
     <div class="column-layout">
       <h2>Primärknappar</h2>
@@ -24,10 +46,19 @@
       </div>
       <h2>Sekundärknappar</h2>
       <div>
-
-        <vgr-button [secondary]="true" (click)="lastButtonPressed = 'OK - sekundär'">OK</vgr-button>
-        <vgr-button [secondary]="true" (click)="buttonSecondaryDisabled=!buttonSecondaryDisabled">{{buttonSecondaryDisabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
-        <vgr-button [secondary]="true" [disabled]="buttonSecondaryDisabled">{{buttonSecondaryDisabled ? 'Inaktiv' : 'Aktiv'}}</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" (click)="lastButtonPressed = 'OK - sekundär'">OK</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" (click)="buttonSecondaryDisabled=!buttonSecondaryDisabled">{{buttonSecondaryDisabled
+          ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" [disabled]="buttonSecondaryDisabled">{{buttonSecondaryDisabled ?
+          'Inaktiv' : 'Aktiv'}}</vgr-button>
+      </div>
+      <h2>Diskreta knappar</h2>
+      <div>
+        <vgr-button [buttonStyle]="'discreet'" (click)="lastButtonPressed = 'OK - diskret'">OK</vgr-button>
+        <vgr-button [buttonStyle]="'discreet'" (click)="buttonDiscreetDisabled=!buttonDiscreetDisabled">{{buttonDiscreetDisabled
+          ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
+        <vgr-button [buttonStyle]="'discreet'" [disabled]="buttonDiscreetDisabled">{{buttonDiscreetDisabled ? 'Inaktiv'
+          : 'Aktiv'}}</vgr-button>
       </div>
     </div>
     <br>
@@ -43,9 +74,9 @@
         <th>Exempel</th>
       </tr>
       <tr>
-        <td>secondary : boolean</td>
-        <td>Visa sekundärt utseende. Default är false.</td>
-        <td>[secondary]="true"</td>
+        <td>buttonStyle : string</td>
+        <td>Ändra utseende. Möjliga värden är primary/secondary/discreet. Default är primary.</td>
+        <td>[buttonStyle]="'secondary'"</td>
       </tr>
       <tr>
         <td>disabled : boolean</td>
@@ -67,6 +98,7 @@
     <br>
     <p>Förutom rollen så används attributen:</p>
     <ul class="doc-list">
+
       <li>aria-disabled, om knappen är inaktiv eller aktiv </li>
 
     </ul>
@@ -74,17 +106,24 @@
     <p>Vid knappaktivering flyttas fokus beroende på vilken åtgärd som knappen utför. Till exempel:</p>
     <ul class="doc-list">
       <li>Om knappåtgärden öppnar en dialog, flyttas fokus till inuti dialogrutan.</li>
-      <li>Om knappåtgärden stänger en dialog, återgår fokus normalt till den knapp som öppnade dialogen, om inte funktionen som
-        utförts i dialogrutan leder till ett annat element. Om du till exempel aktiverar en avbrytningsknapp i en dialogruta
-        återgår fokus till knappen som öppnade dialogrutan. Om dialogrutan bekräftade åtgärden att radera den sida från vilken
+      <li>Om knappåtgärden stänger en dialog, återgår fokus normalt till den knapp som öppnade dialogen, om inte
+        funktionen som
+        utförts i dialogrutan leder till ett annat element. Om du till exempel aktiverar en avbrytningsknapp i en
+        dialogruta
+        återgår fokus till knappen som öppnade dialogrutan. Om dialogrutan bekräftade åtgärden att radera den sida från
+        vilken
         den öppnades skulle emellertid fokusen logiskt gå över till ett nytt element.
       </li>
-      <li>Om knappåtgärden inte avvisar det aktuella sammanhanget, är fokus normalt kvar på knappen efter aktivering, till exempel
+      <li>Om knappåtgärden inte avvisar det aktuella sammanhanget, är fokus normalt kvar på knappen efter aktivering,
+        till exempel
         en 'Tillämpa'-knapp.</li>
-      <li>Om knappåtgärden indikerar ett kontextbyte, till exempel att gå till nästa steg i en guide eller lägga till ett annat
+      <li>Om knappåtgärden indikerar ett kontextbyte, till exempel att gå till nästa steg i en guide eller lägga till
+        ett annat
         sökkriterium, är det ofta lämpligt att flytta fokus till utgångspunkten för den åtgärden.</li>
-      <li>Om knappen aktiveras med ett kortkommando, förblir fokus normalt i det sammanhang som kortkommandot användes. Om till
-        exempel Alt + U aktiverar en "Upp" -knapp som flyttar det aktuella fokuserade objektet i en lista en position högre
+      <li>Om knappen aktiveras med ett kortkommando, förblir fokus normalt i det sammanhang som kortkommandot användes.
+        Om till
+        exempel Alt + U aktiverar en "Upp" -knapp som flyttar det aktuella fokuserade objektet i en lista en position
+        högre
         upp i listan, kommer Alt + U när fokus är i listan inte att flytta fokus från listan.</li>
     </ul>
   </div>
