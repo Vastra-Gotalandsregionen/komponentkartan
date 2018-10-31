@@ -9,10 +9,10 @@
   </div>
   <ng-content select="vgr-list-item"></ng-content>
 </div>
-<div *ngIf="pages > 1" style="background-color:white; text-align:center; padding-top: 10px; padding-bottom:10px; ">
-    <vgr-button [buttonStyle]="'discreet'">&lt;</vgr-button>
-    <vgr-button [buttonStyle]="'discreet'">Föregåend sida</vgr-button> 
-    <!-- <vgr-button [buttonStyle]="'discreet'" *ngFor="let page of pages"></vgr-button> -->
-    <vgr-button [buttonStyle]="'discreet'">Nästa sida</vgr-button>    
-    <vgr-button [buttonStyle]="'discreet'">&gt;</vgr-button>  
+<div class="list__footer" *ngIf="pages > 1" style="background-color:white; text-align:center; padding-top: 10px; padding-bottom:10px; ">
+  <div class="pagination" [ngClass]="{'page--active' : item.active }" *ngFor="let item of pageItems">
+    <vgr-button [buttonStyle]="'discreet'" (click)="item.action()">
+      <span [ngClass]="{'label--active' : item.active }">{{ item.label }}</span>
+    </vgr-button>
+  </div>
 </div>

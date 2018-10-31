@@ -89,6 +89,21 @@ vgr-list.list--new-item-added {
   } //Pop-out b
 }
 
+.list__footer {
+  .pagination {
+    display: inline;
+    // background-color: transparent;
+    // font-weight: normal;
+    &.page--active {
+      @extend .background-color--primary;
+    }
+    .label--active {
+      color: $text-color--light;
+      font-weight: bold;
+    }
+  }
+}
+
 .list__items {
   position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
   &:before {

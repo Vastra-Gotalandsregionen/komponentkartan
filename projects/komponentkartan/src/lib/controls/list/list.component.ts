@@ -52,6 +52,7 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
   }
 
   private setPageItems(activePage: number) {
+    this.pageItems = [];
     const previousPageItem = {
       label: '< Föregående sida'
     } as PageItem;
