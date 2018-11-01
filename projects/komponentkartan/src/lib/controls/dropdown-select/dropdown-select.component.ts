@@ -1,32 +1,16 @@
 import {
-  Component,
-  OnChanges,
-  AfterContentInit,
-  AfterViewInit,
-  OnDestroy,
-  ViewChild,
-  ContentChildren,
-  ElementRef,
-  QueryList,
-  Input,
-  Output,
-  EventEmitter,
-  HostListener,
-  HostBinding,
-  forwardRef,
-  Optional,
-  Host,
-  SkipSelf,
-  SimpleChanges
+  Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
+  Input, Output, EventEmitter, Optional, Host, SkipSelf, SimpleChanges, forwardRef
 } from '@angular/core';
-import { DropdownItemComponent } from '../dropdown-item/dropdown-item.component';
-import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
-import { Guid } from '../../utils/guid';
-import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ButtonComponent } from '../..';
+
+import { DropdownItemComponent } from '../dropdown-item/dropdown-item.component';
+import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
+import { ButtonComponent } from '../button/button.component';
+import { Guid } from '../../utils/guid';
 
 function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
