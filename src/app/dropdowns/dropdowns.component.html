@@ -20,7 +20,11 @@
       <div>
         <p>Deklarativ 8 (förvald)</p>
         <vgr-dropdown-select [small]="true" [deselectable]="true" [formControl]="dropdownForm1">
-          <vgr-dropdown-item [value]="1">Val 1</vgr-dropdown-item>
+          <vgr-dropdown-item [value]="1">
+            <div>Val 1</div>
+            <div style="font-style: italic">Pretty cool</div>
+            <div style="font-weight: bold">Right?</div>
+          </vgr-dropdown-item>
           <vgr-dropdown-item [value]="2">Val 2</vgr-dropdown-item>
           <vgr-dropdown-item [value]="3">Val 3</vgr-dropdown-item>
           <vgr-dropdown-item [value]="4">Val 4</vgr-dropdown-item>
@@ -40,8 +44,12 @@
       <div>
         <p>Deklarativ 25</p>
         <vgr-dropdown-select [multi]="true" [noItemSelectedLabel]="'Välj alternativ'" [formControl]="dropdownForm3">
-          <vgr-dropdown-item [value]="1">Val 1</vgr-dropdown-item>
-          <vgr-dropdown-item [value]="2">Val 2</vgr-dropdown-item>
+          <vgr-dropdown-item [value]="1">Val 1 med ett väldigt, väldigt långt namn</vgr-dropdown-item>
+          <vgr-dropdown-item [value]="2">
+              <div>Val 2</div>
+              <div style="font-style: italic">Pretty cool</div>
+              <div style="font-weight: bold">Right?</div>
+          </vgr-dropdown-item>
           <vgr-dropdown-item [value]="3">Val 3</vgr-dropdown-item>
           <vgr-dropdown-item [value]="4">Val 4</vgr-dropdown-item>
           <vgr-dropdown-item [value]="5">Val 5</vgr-dropdown-item>

@@ -26,6 +26,7 @@ import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConf
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ButtonComponent } from '../..';
 
 function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
@@ -58,7 +59,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   @ViewChild('dropdown') dropdown: ElementRef;
   @ViewChild('header') header: ElementRef;
-  @ViewChild('deselect') deselect: ElementRef;
+  @ViewChild('selectAll') selectAll: ElementRef;
+  @ViewChild('deselectButton') deselectButton: ButtonComponent;
   @ViewChild(FilterTextboxComponent) filterTextbox: FilterTextboxComponent;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
@@ -259,7 +261,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         if (this.filterVisible) {
           this.filterTextbox.focus();
         } else if (this.deselectable) {
-          this.deselect.nativeElement.focus();
+          this.deselectButton.focus();
         } else if (this.items.length) {
           this.items.toArray()[0].focus();
         }
@@ -271,21 +273,41 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       event.stopPropagation();
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
-      if (this.deselectable) {
-        this.deselect.nativeElement.focus();
+      if (this.multi) {
+        this.selectAll.nativeElement.focus();
+      } else if (this.deselectable) {
+        this.deselectButton.focus();
       } else if (this.items.length) {
         this.items.toArray()[0].focus();
       }
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
       if (this.items.length) {
         this.items.toArray()[this.items.length - 1].focus();
+      } else if (this.multi) {
+        this.selectAll.nativeElement.focus();
       } else if (this.deselectable) {
-        this.deselect.nativeElement.focus();
+        this.deselectButton.focus();
       }
     }
   }
 
   onDeselectKeydown(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown' || event.key === 'Down') {
+      if (this.items.length) {
+        this.items.toArray()[0].focus();
+      } else if (this.filterVisible) {
+        this.filterTextbox.focus();
+      }
+    } else if (event.key === 'ArrowUp' || event.key === 'Up') {
+      if (this.filterVisible) {
+        this.filterTextbox.focus();
+      } else if (this.items.length) {
+        this.items.toArray()[this.items.length - 1].focus();
+      }
+    }
+  }
+
+  onSelectAllKeydown(event: KeyboardEvent) {
     if (event.key === 'ArrowDown' || event.key === 'Down') {
       if (this.items.length) {
         this.items.toArray()[0].focus();
@@ -379,8 +401,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private focusPreviousItem(itemIndex: number) {
     if (itemIndex > 0) {
       this.items.toArray()[itemIndex - 1].focus();
+    } else if (this.multi) {
+      this.selectAll.nativeElement.focus();
     } else if (this.deselectable) {
-      this.deselect.nativeElement.focus();
+      this.deselectButton.focus();
     } else if (this.filterVisible) {
       this.filterTextbox.focus();
     } else {
@@ -393,8 +417,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       this.items.toArray()[itemIndex + 1].focus();
     } else if (this.filterVisible) {
       this.filterTextbox.focus();
+    } else if (this.multi) {
+      this.selectAll.nativeElement.focus();
     } else if (this.deselectable) {
-      this.deselect.nativeElement.focus();
+      this.deselectButton.focus();
     } else {
       this.items.toArray()[0].focus();
     }
