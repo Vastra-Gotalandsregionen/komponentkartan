@@ -11,10 +11,8 @@
 </div>
 <div class="list__footer" *ngIf="pages > 1">
   <div class="pagination">
-    <div class="page-item" [ngClass]="{'page--active' : item.active }" *ngFor="let item of pageItems">
-      <vgr-button [buttonStyle]="'discreet'" (click)="item.action()">
-        <span [ngClass]="{'label--active' : item.active }">{{ item.label }}</span>
-      </vgr-button>
-    </div>
+    <button [type]="button" class="page-button" [ngClass]="{'active' : item.active }" *ngFor="let item of pageItems" (click)="item.action()">
+        {{ item.label }}
+    </button>
   </div>
 </div>

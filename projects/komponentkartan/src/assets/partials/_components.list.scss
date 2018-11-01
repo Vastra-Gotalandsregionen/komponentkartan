@@ -96,18 +96,52 @@ vgr-list.list--new-item-added {
   .pagination {
     display: flex;
     justify-content: center;
-    &.page-item {
-      display: flex;
-    }
-    .page--active {
-      @extend .background-color--primary;
-    }
-    .label--active {
-      color: $text-color--light;
-      font-weight: bold;
+    .page-button {         
+      position: relative;
+      box-sizing: border-box;
+      padding: 0;
+      border: 0;
+      border-radius: 1px;
+      vertical-align: top;
+      text-align: center;
+      cursor: pointer;
+      @extend .color--primary;
+      font-size: $font-size--small;
+      font-family: $font-family;
+      border-color: transparent;
+      background-color: transparent;
+      line-height: 28px;
+      border-width: 1px;
+      border-style: solid;
+      min-width: 10px;
+      padding-left: 5px;
+      padding-right: 5px;
+      &:hover:not(.page-button--disabled),
+      &:focus:not(.page-button--disabled) {
+        @extend .background-color--primary-dimmed;
+        border-color: $primary-color--default-dimmed;
+      } 
+      &.active:not(.page-button--disabled) {
+        @extend .background-color--primary;
+        color: $text-color--light;
+        font-weight: bold;
+      }  
     }
   }
 }
+// @media screen and (min-width: $desktop-width--medium) {
+//   .list__footer {
+//     .pagination {
+//       display: flex;
+//       justify-content: center;
+//       &.button {               
+//         min-width: 20px;
+//         padding-left: 10px;
+//         padding-right: 10px;
+//       }
+//     }
+//   }
+// }
 
 .list__items {
   position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
