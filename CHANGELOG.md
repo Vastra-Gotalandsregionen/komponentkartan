@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - vgr-button has a new input buttonStyle (string). Allowed values are 'primary' (default), 'secondary' and 'discreet'. 
 - *Breaking change* vgr-button boolean input Secondary is removed and replaced by a new input named buttonStyle. Replace Secondary="true" with buttonStyle="'secondary'". 
 - List (specially the notifications) have been remade and restyled.
+- Fixed a CSS-bug in vgr-table component.
 
 ## 3.2.2 (beta)
 - Changed modal-css to allow it to be placed outside of root.
