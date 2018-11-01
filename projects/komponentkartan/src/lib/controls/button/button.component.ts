@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnChanges } from '@angular/core';
+﻿import { Component, Input, OnChanges, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'vgr-button',
@@ -8,6 +8,7 @@ export class ButtonComponent implements OnChanges {
   @Input() disabled = false;
   @Input() buttonStyle = 'primary';
   @Input() type = 'button';
+  @ViewChild('button') button: ElementRef;
   reenabled = false;
   private wasDisabled = false;
 
@@ -20,5 +21,9 @@ export class ButtonComponent implements OnChanges {
     if (this.disabled) {
       event.stopPropagation();
     }
+  }
+
+  focus() {
+    this.button.nativeElement.focus();
   }
 }
