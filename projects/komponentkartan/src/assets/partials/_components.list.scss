@@ -93,10 +93,10 @@ vgr-list.list--new-item-added {
   background-color:white; 
   padding-top: 10px; 
   padding-bottom:10px; 
-  .pagination {
+  .list__footer__pagination {
     display: flex;
     justify-content: center;
-    .page-button {         
+    .list__footer__pagination__page-button {         
       position: relative;
       box-sizing: border-box;
       padding: 0;
@@ -116,20 +116,22 @@ vgr-list.list--new-item-added {
       min-width: 10px;
       padding-left: 5px;
       padding-right: 5px;
-      &.page-button--disabled {
-        background-color: $secondary-color--default;
-        cursor: default;
-      }
-      &:hover:not(.page-button--disabled),
-      &:focus:not(.page-button--disabled) {
+      &:hover:not(.active),
+      &:focus:not(.active) {
         @extend .background-color--primary-dimmed;
         border-color: $primary-color--default-dimmed;
+        @extend .color--primary;
+        outline: $focus-outline-width solid $focus-color;
       } 
-      &.active:not(.page-button--disabled) {
+      &.active {
         @extend .background-color--primary;
         color: $text-color--light;
-        &:hover:not(.page-button--disabled){
+        &:hover {
+          @extend .background-color--primary-dimmed;
           @extend .color--primary;
+        }
+        &:focus {
+          outline: $focus-outline-width solid $focus-color;
         }
       }  
     }

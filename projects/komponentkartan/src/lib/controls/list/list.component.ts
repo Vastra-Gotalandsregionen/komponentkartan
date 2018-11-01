@@ -1,10 +1,11 @@
-import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy, OnChanges, SimpleChanges, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
 import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
 
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Button } from 'protractor';
 
 interface PageItem {
   label: string;
@@ -29,7 +30,7 @@ interface PageItem {
     ])
   ]
 })
-export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
+export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy {
   @HostBinding('class.list') hasClass = true;
   @HostBinding('class.list--new-item-added') moveHeader = false;
   @HostBinding('class.animate') animate = false;
@@ -41,12 +42,15 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
   @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
   @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
+  @ViewChildren('pageButton') pageButtons: QueryList<ElementRef>;
 
   loaded = false;
   pageItems: PageItem[] = [];
+  focusedPageLabel: string;
   private ngUnsubscribe = new Subject();
 
-  private showPage(page: number) {
+  private showPage(page: number, label?: string) {
+    this.focusedPageLabel = label || page.toString();
     this.setPageItems(page);
     this.pageChanged.emit(page);
   }
@@ -59,7 +63,7 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
 
     previousPageItem.action = () => {
       if (activePage !== 1) {
-        this.showPage(activePage - 1);
+        this.showPage(activePage - 1, previousPageItem.label);
       }
     };
 
@@ -193,7 +197,7 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
 
     nextPageItem.action = () => {
       if (activePage !== this.pages) {
-        this.showPage(activePage + 1);
+        this.showPage(activePage + 1, nextPageItem.label);
       }
     };
     this.pageItems.push(nextPageItem);
@@ -211,12 +215,21 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
       this.listHeader.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
     }
     this.subscribeEvents();
-    this.items.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((changes) => {
+    this.items.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
       this.subscribeEvents();
     });
   }
-  subscribeEvents() {
 
+  ngAfterViewInit() {
+    this.pageButtons.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
+      const focusedPageButton = this.pageButtons.find(button => button.nativeElement.textContent.trim() === this.focusedPageLabel);
+      if (focusedPageButton) {
+        focusedPageButton.nativeElement.focus();
+      }
+    });
+  }
+
+  subscribeEvents() {
     if (!this.allowMultipleExpandedItems) {
       this.items.forEach(changedContainer => {
         changedContainer.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((expanded: boolean) => {
