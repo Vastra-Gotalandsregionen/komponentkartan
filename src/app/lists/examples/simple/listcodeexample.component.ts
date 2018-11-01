@@ -18,6 +18,17 @@ export class ListcodeexampleComponent implements OnInit {
     typeScriptSimpleListMarkup: string;
     htmlSimpleListMarkup: string;
     examples: Examples = new Examples();
+    pages = 0;
+    activePage = 0;
+
+    setPages() {
+        this.pages += 1;
+        this.activePage = 1;
+    }
+
+    jumpToPage() {
+        this.activePage = Math.ceil(this.pages / 2);
+    }
 
     onSortChanged(event: SortChangedArgs) {
         this.peopleRowsSimpleList = this.peopleRowsSimpleList.sort((row1, row2) => {

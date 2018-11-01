@@ -1,11 +1,10 @@
-import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy, OnChanges, SimpleChanges, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
-import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, OnDestroy, OnChanges, SimpleChanges, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
+import { trigger, style, transition, animate, state } from '@angular/animations';
 
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Button } from 'protractor';
 
 interface PageItem {
   label: string;
@@ -31,26 +30,129 @@ interface PageItem {
   ]
 })
 export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy {
+  @Input() allowMultipleExpandedItems = false;
+  @Input() notification;
+  @Input() pages: number;
+  @Input() activePage: number;
+  @Input() @HostBinding('class.list--inline') flexibleHeader = false;
+
+  @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
+  @Output() pageChanged: EventEmitter<number> = new EventEmitter();
+
   @HostBinding('class.list') hasClass = true;
   @HostBinding('class.list--new-item-added') moveHeader = false;
   @HostBinding('class.animate') animate = false;
-  @Input() @HostBinding('class.list--inline') flexibleHeader = false;
-  @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
-  @Input() allowMultipleExpandedItems = false;
-  @Input() notification;
-  @Input() pages = 0;
+
   @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
-  @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
-  @Output() pageChanged: EventEmitter<number> = new EventEmitter();
+  @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
   @ViewChildren('pageButton') pageButtons: QueryList<ElementRef>;
 
   loaded = false;
   pageItems: PageItem[] = [];
   focusedPageLabel: string;
+
   private ngUnsubscribe = new Subject();
 
-  private showPage(page: number, label?: string) {
-    this.focusedPageLabel = label || page.toString();
+  ngOnChanges(changes: SimpleChanges) {
+    const pagesChange = changes['pages'];
+    const activePageChange = changes['activePage'];
+    if (pagesChange || activePageChange) {
+      this.setPageItems(this.activePage);
+    }
+  }
+
+  ngAfterContentInit() {
+    if (this.listHeader) {
+      this.listHeader.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+    }
+    this.subscribeEvents();
+    this.items.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
+      this.subscribeEvents();
+    });
+  }
+
+  ngAfterViewInit() {
+    this.pageButtons.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
+      const focusedPageButton = this.pageButtons.find(button => button.nativeElement.textContent === this.focusedPageLabel);
+      if (focusedPageButton) {
+        focusedPageButton.nativeElement.focus();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  subscribeEvents() {
+    if (!this.allowMultipleExpandedItems) {
+      this.items.forEach(changedContainer => {
+        changedContainer.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((expanded: boolean) => {
+          if (expanded) {
+            this.items.filter(container => container !== changedContainer).forEach(otherContainer => otherContainer.expanded = false);
+          }
+        });
+
+      });
+    }
+    if (this.items.length > 0) {
+      this.loaded = true;
+    }
+
+    this.items.forEach((item, index) => {
+      item.setFocusOnFirstRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.items.first.setFocusOnRow());
+      item.setFocusOnLastRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.items.last.setFocusOnRow());
+      item.setFocusOnPreviousRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow(index));
+      item.setFocusOnNextRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow(index));
+      item.setFocusOnPreviousRowContent.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRowContent(item));
+      item.setFocusOnNextRowContent.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow(index));
+    });
+  }
+
+  animateHeader() {
+    this.moveHeader = true;
+    setTimeout(() => {
+      this.moveHeader = false;
+    }, 2600);
+  }
+
+  setFocusOnPreviousRow(index: number): any {
+    if (index === 0) {
+      this.items.toArray()[this.items.toArray().length - 1].setFocusOnRow();
+    } else {
+      this.items.toArray()[index - 1].setFocusOnRow();
+    }
+  }
+
+  setFocusOnNextRow(index: number) {
+    if (index + 1 === this.items.toArray().length) {
+      this.items.toArray()[0].setFocusOnRow();
+    } else {
+      this.items.toArray()[index + 1].setFocusOnRow();
+    }
+  }
+
+  setFocusOnPreviousRowContent(item: ListItemComponent) {
+    if (item.expanded) {
+      item.setFocusOnRow();
+    }
+  }
+
+  onPageButtonFocus(event: FocusEvent) {
+    const buttonElement = event.target as HTMLElement;
+    if (buttonElement) {
+      this.focusedPageLabel = buttonElement.textContent;
+    }
+  }
+
+  onPageButtonBlur(event: FocusEvent) {
+    if (event.relatedTarget) {
+      this.focusedPageLabel = '';
+    }
+  }
+
+  private showPage(page: number) {
     this.setPageItems(page);
     this.pageChanged.emit(page);
   }
@@ -63,7 +165,7 @@ export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit
 
     previousPageItem.action = () => {
       if (activePage !== 1) {
-        this.showPage(activePage - 1, previousPageItem.label);
+        this.showPage(activePage - 1);
       }
     };
 
@@ -197,94 +299,9 @@ export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit
 
     nextPageItem.action = () => {
       if (activePage !== this.pages) {
-        this.showPage(activePage + 1, nextPageItem.label);
+        this.showPage(activePage + 1);
       }
     };
     this.pageItems.push(nextPageItem);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    const pagesChange = changes['pages'];
-    if (pagesChange) {
-      this.setPageItems(1);
-    }
-  }
-
-  ngAfterContentInit() {
-    if (this.listHeader) {
-      this.listHeader.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
-    }
-    this.subscribeEvents();
-    this.items.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
-      this.subscribeEvents();
-    });
-  }
-
-  ngAfterViewInit() {
-    this.pageButtons.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
-      const focusedPageButton = this.pageButtons.find(button => button.nativeElement.textContent.trim() === this.focusedPageLabel);
-      if (focusedPageButton) {
-        focusedPageButton.nativeElement.focus();
-      }
-    });
-  }
-
-  subscribeEvents() {
-    if (!this.allowMultipleExpandedItems) {
-      this.items.forEach(changedContainer => {
-        changedContainer.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((expanded: boolean) => {
-          if (expanded) {
-            this.items.filter(container => container !== changedContainer).forEach(otherContainer => otherContainer.expanded = false);
-          }
-        });
-
-      });
-    }
-    if (this.items.length > 0) {
-      this.loaded = true;
-    }
-
-    this.items.forEach((item, index) => {
-      item.setFocusOnFirstRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.items.first.setFocusOnRow());
-      item.setFocusOnLastRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.items.last.setFocusOnRow());
-      item.setFocusOnPreviousRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow(index));
-      item.setFocusOnNextRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow(index));
-      item.setFocusOnPreviousRowContent.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRowContent(item));
-      item.setFocusOnNextRowContent.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow(index));
-    });
-  }
-
-
-  animateHeader() {
-    this.moveHeader = true;
-    setTimeout(() => {
-      this.moveHeader = false;
-    }, 2600);
-  }
-
-  setFocusOnPreviousRow(index: number): any {
-    if (index === 0) {
-      this.items.toArray()[this.items.toArray().length - 1].setFocusOnRow();
-    } else {
-      this.items.toArray()[index - 1].setFocusOnRow();
-    }
-  }
-  setFocusOnNextRow(index: number) {
-    if (index + 1 === this.items.toArray().length) {
-      this.items.toArray()[0].setFocusOnRow();
-    } else {
-      this.items.toArray()[index + 1].setFocusOnRow();
-    }
-  }
-
-  setFocusOnPreviousRowContent(item: ListItemComponent) {
-    if (item.expanded) {
-      item.setFocusOnRow();
-    }
-  }
-
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
 }
