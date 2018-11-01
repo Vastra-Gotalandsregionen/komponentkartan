@@ -90,11 +90,16 @@ vgr-list.list--new-item-added {
 }
 
 .list__footer {
+  background-color:white; 
+  padding-top: 10px; 
+  padding-bottom:10px; 
   .pagination {
-    display: inline;
-    // background-color: transparent;
-    // font-weight: normal;
-    &.page--active {
+    display: flex;
+    justify-content: center;
+    &.page-item {
+      display: flex;
+    }
+    .page--active {
       @extend .background-color--primary;
     }
     .label--active {

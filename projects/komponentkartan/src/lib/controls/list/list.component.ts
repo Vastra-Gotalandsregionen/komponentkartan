@@ -57,9 +57,12 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
       label: '< Föregående sida'
     } as PageItem;
 
-    if (activePage !== 1) {
-      previousPageItem.action = () => { this.showPage(activePage - 1); };
-    }
+    previousPageItem.action = () => {
+      if (activePage !== 1) {
+        this.showPage(activePage - 1);
+      }
+    };
+
     this.pageItems.push(previousPageItem);
 
     if (this.pages <= 7) {
@@ -82,7 +85,8 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
         }
 
         this.pageItems.push({
-          label: '...'
+          label: '...',
+          action: () => { }
         } as PageItem);
 
         this.pageItems.push({
@@ -98,7 +102,8 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
         } as PageItem);
 
         this.pageItems.push({
-          label: '...'
+          label: '...',
+          action: () => { }
         } as PageItem);
 
         for (let item = 4; item <= 8; item++) {
@@ -121,7 +126,8 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
         }
 
         this.pageItems.push({
-          label: '...'
+          label: '...',
+          action: () => { }
         } as PageItem);
 
         this.pageItems.push({
@@ -137,7 +143,8 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
         } as PageItem);
 
         this.pageItems.push({
-          label: '...'
+          label: '...',
+          action: () => { }
         } as PageItem);
 
         for (let item = this.pages - 4; item <= this.pages; item++) {
@@ -156,7 +163,8 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
         } as PageItem);
 
         this.pageItems.push({
-          label: '...'
+          label: '...',
+          action: () => { }
         } as PageItem);
 
         for (let item = activePage - 1; item <= activePage + 1; item++) {
@@ -168,7 +176,8 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
         }
 
         this.pageItems.push({
-          label: '...'
+          label: '...',
+          action: () => { }
         } as PageItem);
 
         this.pageItems.push({
@@ -182,9 +191,11 @@ export class ListComponent implements OnChanges, AfterContentInit, OnDestroy {
       label: 'Nästa sida >'
     } as PageItem;
 
-    if (activePage !== this.pages) {
-      nextPageItem.action = () => { this.showPage(activePage + 1); };
-    }
+    nextPageItem.action = () => {
+      if (activePage !== this.pages) {
+        this.showPage(activePage + 1);
+      }
+    };
     this.pageItems.push(nextPageItem);
   }
 
