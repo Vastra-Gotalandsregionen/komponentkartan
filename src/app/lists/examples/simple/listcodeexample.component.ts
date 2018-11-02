@@ -21,13 +21,9 @@ export class ListcodeexampleComponent implements OnInit {
     pages = 0;
     activePage = 0;
 
-    setPages() {
-        this.pages += 1;
+    setPages(pageNumber: number) {
+        this.pages = pageNumber;
         this.activePage = 1;
-    }
-
-    jumpToPage() {
-        this.activePage = Math.ceil(this.pages / 2);
     }
 
     onSortChanged(event: SortChangedArgs) {

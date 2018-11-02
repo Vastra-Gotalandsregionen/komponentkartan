@@ -12,7 +12,7 @@
 <div class="list__footer" *ngIf="pages > 1">
   <div class="list__footer__pagination">
     <div *ngFor="let item of pageItems">
-        <button *ngIf="item.label !== '...'" #pageButton [type]="button" class="list__footer__pagination__page-button" [ngClass]="{'active' : item.active }" (click)="item.action()" (focus)="onPageButtonFocus($event)" (blur)="onPageButtonBlur($event)">
+        <button *ngIf="item.label !== '...'" #pageButton [type]="button" class="list__footer__pagination__page-button" [ngClass]="{'page-active' : item.active }" (click)="item.action()" (focus)="onPageButtonFocus($event)" (blur)="onPageButtonBlur($event)">
             {{ item.label }}
         </button>
         <span class="noselect" *ngIf="item.label === '...'">{{ item.label }}</span>
