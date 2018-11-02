@@ -160,7 +160,7 @@ export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit
   private setPageItems(activePage: number) {
     this.pageItems = [];
     const previousPageItem = {
-      label: '< Föregående sida'
+      label: 'Föregående sida'
     } as PageItem;
 
     previousPageItem.action = () => {
@@ -294,7 +294,7 @@ export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit
     }
 
     const nextPageItem = {
-      label: 'Nästa sida >'
+      label: 'Nästa sida'
     } as PageItem;
 
     nextPageItem.action = () => {

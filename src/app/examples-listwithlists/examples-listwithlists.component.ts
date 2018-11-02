@@ -15,6 +15,7 @@ export class ExamplesListwithlistsComponent implements OnDestroy {
   sortDirections = SortDirection;
   items = [];
   listData: ExpandableRow<ExampleUnit, any>[] = [];
+  pagingListData: ExpandableRow<ExampleUnit, any>[] = [];
   filtertext = '';
   itemSelected = false;
   selectedUnit = '';
@@ -27,6 +28,7 @@ export class ExamplesListwithlistsComponent implements OnDestroy {
   enddate: Date;
 
   pages = 0;
+  itemsPerPage = 8;
   activePage = 0;
   start = 0;
   end = 10;
@@ -54,23 +56,26 @@ export class ExamplesListwithlistsComponent implements OnDestroy {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  searchForUnits(pageNumber?: number) {
+  getPage(pageNumber: number) {
+    this.start = (pageNumber - 1) * this.itemsPerPage;
+    this.end = this.start + this.itemsPerPage;
+    this.listData = this.pagingListData.slice(this.start, this.end);
+    this.activePage = pageNumber;
+  }
+
+  searchForUnits() {
     this.loading = true;
     this.noSearchResult = false;
-    this.activePage = pageNumber ? pageNumber : 1;
-
     this.unitService.getUnits(this.filtertext)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(units => {
         if (units.length > 0) {
           this.mapToListItems(units);
           this.sortlistData('enhet', SortDirection.Ascending);
-          this.pages = Math.ceil(this.listData.length / 10);
-          this.start = pageNumber ? (pageNumber - 1) * 10 : 0;
-          this.end = this.start + 10;
-          this.listData = this.listData.slice(this.start, this.end);
+          this.pages = Math.ceil(this.pagingListData.length / this.itemsPerPage);
+          this.getPage(1);
         } else {
-          this.listData = [];
+          this.pagingListData = [];
           this.noSearchResult = true;
         }
         setTimeout(() => {
@@ -80,8 +85,8 @@ export class ExamplesListwithlistsComponent implements OnDestroy {
   }
 
   private mapToListItems(enheter: ExampleUnit[]) {
-    this.listData = enheter.filter(x => !x.deleted).map(x => new ExpandableRow<ExampleUnit, any>(x));
-    this.listData.forEach(element => {
+    this.pagingListData = enheter.filter(x => !x.deleted).map(x => new ExpandableRow<ExampleUnit, any>(x));
+    this.pagingListData.forEach(element => {
       if (this.getRandomInt(0, 5) === 2) {
         element.setNotification('Meddelande om denna rad som ligger permanent', 'vgr-icon-exclamation');
       }
@@ -158,7 +163,7 @@ export class ExamplesListwithlistsComponent implements OnDestroy {
   }
 
   sortlistData(key: string, direction: SortDirection) {
-    this.listData = this.listData.sort((row1, row2) => {
+    this.pagingListData = this.pagingListData.sort((row1, row2) => {
       return row1.previewObject[key] > row2.previewObject[key] ? (direction === SortDirection.Ascending ? 1 : -1) :
         row1.previewObject[key] < row2.previewObject[key] ? (direction === SortDirection.Ascending ? -1 : 1) : 0;
     });

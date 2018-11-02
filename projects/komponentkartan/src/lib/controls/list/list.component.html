@@ -11,11 +11,13 @@
 </div>
 <div class="list__footer" *ngIf="pages > 1">
   <div class="list__footer__pagination">
-    <div *ngFor="let item of pageItems">
-        <button *ngIf="item.label !== '...'" #pageButton [type]="button" class="list__footer__pagination__page-button" [ngClass]="{'page-active' : item.active }" (click)="item.action()" (focus)="onPageButtonFocus($event)" (blur)="onPageButtonBlur($event)">
-            {{ item.label }}
+    <div *ngFor="let item of pageItems; first as isPrevious; last as isNext;">
+        <button *ngIf="item.label !== '...'" #pageButton [type]="button" class="list__footer__pagination__page-button" [ngClass]="{'page-active' : item.active, 'previous' : isPrevious, 'next' : isNext }" (click)="item.action()" (focus)="onPageButtonFocus($event)" (blur)="onPageButtonBlur($event)">
+          <span *ngIf="isPrevious" class="previous-icon button-text">&lt;&nbsp;&nbsp;</span>
+          <span class="button-text">{{ item.label }} </span>
+          <span *ngIf="isNext" class="next-icon button-text">&nbsp;&nbsp;&gt;</span>
         </button>
-        <span class="noselect" *ngIf="item.label === '...'">{{ item.label }}</span>
+        <span class="noselect list__footer__pagination__dots" *ngIf="item.label === '...'">{{ item.label }}</span>
     </div>
   </div>
 </div>
