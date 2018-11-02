@@ -3,7 +3,7 @@ import { RowNotification, NotificationType, SortDirection, SortChangedArgs, Expa
 import { ExampleUnit } from './unit.model';
 import { UnitService } from './unitService';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, skip, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-examples-listwithlists',
@@ -26,6 +26,10 @@ export class ExamplesListwithlistsComponent implements OnDestroy {
   startdate: Date;
   enddate: Date;
 
+  pages = 0;
+  activePage = 0;
+  start = 0;
+  end = 10;
   private ngUnsubscribe = new Subject();
 
   constructor(private changeDetector: ChangeDetectorRef, private unitService: UnitService, public modalService: ModalService) {
@@ -50,9 +54,10 @@ export class ExamplesListwithlistsComponent implements OnDestroy {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  searchForUnits() {
+  searchForUnits(pageNumber?: number) {
     this.loading = true;
     this.noSearchResult = false;
+    this.activePage = pageNumber ? pageNumber : 1;
 
     this.unitService.getUnits(this.filtertext)
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -60,6 +65,10 @@ export class ExamplesListwithlistsComponent implements OnDestroy {
         if (units.length > 0) {
           this.mapToListItems(units);
           this.sortlistData('enhet', SortDirection.Ascending);
+          this.pages = Math.ceil(this.listData.length / 10);
+          this.start = pageNumber ? (pageNumber - 1) * 10 : 0;
+          this.end = this.start + 10;
+          this.listData = this.listData.slice(this.start, this.end);
         } else {
           this.listData = [];
           this.noSearchResult = true;
