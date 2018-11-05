@@ -1,16 +1,10 @@
-import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, OnDestroy, OnChanges, SimpleChanges, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-interface PageItem {
-  label: string;
-  active: boolean;
-  action: () => void;
-}
 
 @Component({
   templateUrl: './list.component.html',
@@ -29,7 +23,7 @@ interface PageItem {
     ])
   ]
 })
-export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy {
+export class ListComponent implements AfterContentInit, OnDestroy {
   @Input() allowMultipleExpandedItems = false;
   @Input() notification;
   @Input() pages: number;
@@ -45,21 +39,10 @@ export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit
 
   @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
   @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
-  @ViewChildren('pageButton') pageButtons: QueryList<ElementRef>;
 
   loaded = false;
-  pageItems: PageItem[] = [];
-  focusedPageLabel: string;
 
   private ngUnsubscribe = new Subject();
-
-  ngOnChanges(changes: SimpleChanges) {
-    const pagesChange = changes['pages'];
-    const activePageChange = changes['activePage'];
-    if (pagesChange || activePageChange) {
-      this.setPageItems(this.activePage);
-    }
-  }
 
   ngAfterContentInit() {
     if (this.listHeader) {
@@ -68,15 +51,6 @@ export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit
     this.subscribeEvents();
     this.items.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
       this.subscribeEvents();
-    });
-  }
-
-  ngAfterViewInit() {
-    this.pageButtons.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
-      const focusedPageButton = this.pageButtons.find(button => button.nativeElement.textContent === this.focusedPageLabel);
-      if (focusedPageButton) {
-        focusedPageButton.nativeElement.focus();
-      }
     });
   }
 
@@ -139,169 +113,7 @@ export class ListComponent implements OnChanges, AfterContentInit, AfterViewInit
     }
   }
 
-  onPageButtonFocus(event: FocusEvent) {
-    const buttonElement = event.target as HTMLElement;
-    if (buttonElement) {
-      this.focusedPageLabel = buttonElement.textContent;
-    }
-  }
-
-  onPageButtonBlur(event: FocusEvent) {
-    if (event.relatedTarget) {
-      this.focusedPageLabel = '';
-    }
-  }
-
-  private showPage(page: number) {
-    this.setPageItems(page);
-    this.pageChanged.emit(page);
-  }
-
-  private setPageItems(activePage: number) {
-    this.pageItems = [];
-    const previousPageItem = {
-      label: 'Föregående sida'
-    } as PageItem;
-
-    previousPageItem.action = () => {
-      if (activePage !== 1) {
-        this.showPage(activePage - 1);
-      }
-    };
-
-    this.pageItems.push(previousPageItem);
-
-    if (this.pages <= 7) {
-      for (let item = 1; item <= this.pages; item++) {
-        this.pageItems.push({
-          label: item.toString(),
-          active: item === activePage,
-          action: () => { this.showPage(item); }
-        });
-      }
-    } else if (this.pages === 8) {
-      if (activePage <= 4) {
-
-        for (let item = 1; item <= 5; item++) {
-          this.pageItems.push({
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
-        }
-
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
-
-        this.pageItems.push({
-          label: '8',
-          action: () => { this.showPage(8); }
-        } as PageItem);
-
-      } else {
-
-        this.pageItems.push({
-          label: '1',
-          action: () => { this.showPage(1); }
-        } as PageItem);
-
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
-
-        for (let item = 4; item <= 8; item++) {
-          this.pageItems.push({
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
-        }
-      }
-    } else {
-      if (activePage <= 4) {
-
-        for (let item = 1; item <= 5; item++) {
-          this.pageItems.push({
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
-        }
-
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
-
-        this.pageItems.push({
-          label: this.pages.toString(),
-          action: () => { this.showPage(this.pages); }
-        } as PageItem);
-
-      } else if (activePage >= this.pages - 4) {
-
-        this.pageItems.push({
-          label: '1',
-          action: () => { this.showPage(1); }
-        } as PageItem);
-
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
-
-        for (let item = this.pages - 4; item <= this.pages; item++) {
-          this.pageItems.push({
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
-        }
-
-      } else {
-
-        this.pageItems.push({
-          label: '1',
-          action: () => { this.showPage(1); }
-        } as PageItem);
-
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
-
-        for (let item = activePage - 1; item <= activePage + 1; item++) {
-          this.pageItems.push({
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
-        }
-
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
-
-        this.pageItems.push({
-          label: this.pages.toString(),
-          action: () => { this.showPage(this.pages); }
-        } as PageItem);
-      }
-    }
-
-    const nextPageItem = {
-      label: 'Nästa sida'
-    } as PageItem;
-
-    nextPageItem.action = () => {
-      if (activePage !== this.pages) {
-        this.showPage(activePage + 1);
-      }
-    };
-    this.pageItems.push(nextPageItem);
+  onPageChanged(event: number) {
+    this.pageChanged.emit(event);
   }
 }
