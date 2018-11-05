@@ -102,7 +102,7 @@ vgr-list.list--new-item-added {
       padding: 0;
       border: 0;
       border-radius: 1px;
-      // vertical-align: baseline;
+      vertical-align: baseline;
       text-align: center;
       cursor: pointer;
       @extend .color--primary;
@@ -137,24 +137,23 @@ vgr-list.list--new-item-added {
       }  
       &.previous {
         margin-right: 33px;
-        .previous-icon {
+        & > span:first-child {
           font-weight: bold;
+          padding-right: 8px;
         }
       }
       &.next {
         margin-left: 33px;
-        .next-icon {
+        & > span:last-child {
           font-weight: bold;
+          padding-left: 8px;
         }
       }    
-      .button-text {
-        vertical-align: middle;
-      }  
     }
     .list__footer__pagination__dots {
+      font-size: $font-size--small;
+      font-family: $font-family;
       line-height: 30px;
-      height: 30px;
-      vertical-align: bottom;
       margin-left: 10px;
       margin-right: 10px;
     }
