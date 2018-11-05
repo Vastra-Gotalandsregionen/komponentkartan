@@ -3,12 +3,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PageItem } from './page-item';
 
-// interface PageItem {
-//   label: string;
-//   active: boolean;
-//   action: () => void;
-// }
-
 @Component({
   selector: 'vgr-pagination',
   templateUrl: './pagination.component.html'
@@ -21,6 +15,8 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
   pageItems: PageItem[] = [];
   focusedPageLabel: string;
+  nextPage = new EventEmitter();
+  previousPage = new EventEmitter();
 
   private ngUnsubscribe = new Subject();
 
@@ -59,6 +55,22 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     }
   }
 
+  setTabFocusability() {
+    this.pageItems.forEach((x, i) => {
+      x.tabindex = x.label === this.focusedPageLabel ? 0 : -1;
+    });
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft' || event.key === 'Left' || event.key === 'ArrowUp' || event.key === 'Up') {
+      // this.previous.emit();
+      event.preventDefault();
+    } else if (event.key === 'ArrowRight' || event.key === 'Right' || event.key === 'ArrowDown' || event.key === 'Down') {
+      // this.next.emit();
+      event.preventDefault();
+    }
+  }
+
   private showPage(page: number) {
     this.setPageItems(page);
     this.pageChanged.emit(page);
@@ -67,6 +79,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   private setPageItems(activePage: number) {
     this.pageItems = [];
     const previousPageItem = {
+      tabindex: -1,
       label: 'Föregående sida'
     } as PageItem;
 
@@ -81,6 +94,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     if (this.pages <= 7) {
       for (let item = 1; item <= this.pages; item++) {
         this.pageItems.push({
+          tabindex: this.activePage === item ? 0 : -1,
           label: item.toString(),
           active: item === activePage,
           action: () => { this.showPage(item); }
@@ -91,6 +105,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
         for (let item = 1; item <= 5; item++) {
           this.pageItems.push({
+            tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
             action: () => { this.showPage(item); }
@@ -103,14 +118,18 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
         } as PageItem);
 
         this.pageItems.push({
+          tabindex: this.activePage === 8 ? 0 : -1,
           label: '8',
+          active: activePage === 8,
           action: () => { this.showPage(8); }
         } as PageItem);
 
       } else {
 
         this.pageItems.push({
+          tabindex: this.activePage === 1 ? 0 : -1,
           label: '1',
+          active: activePage === 1,
           action: () => { this.showPage(1); }
         } as PageItem);
 
@@ -121,6 +140,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
         for (let item = 4; item <= 8; item++) {
           this.pageItems.push({
+            tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
             action: () => { this.showPage(item); }
@@ -132,6 +152,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
         for (let item = 1; item <= 5; item++) {
           this.pageItems.push({
+            tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
             action: () => { this.showPage(item); }
@@ -144,14 +165,18 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
         } as PageItem);
 
         this.pageItems.push({
+          tabindex: this.activePage === this.pages ? 0 : -1,
           label: this.pages.toString(),
+          active: activePage === this.pages,
           action: () => { this.showPage(this.pages); }
         } as PageItem);
 
       } else if (activePage >= this.pages - 4) {
 
         this.pageItems.push({
+          tabindex: this.activePage === 1 ? 0 : -1,
           label: '1',
+          active: activePage === 1,
           action: () => { this.showPage(1); }
         } as PageItem);
 
@@ -162,6 +187,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
         for (let item = this.pages - 4; item <= this.pages; item++) {
           this.pageItems.push({
+            tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
             action: () => { this.showPage(item); }
@@ -171,7 +197,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       } else {
 
         this.pageItems.push({
+          tabindex: this.activePage === 1 ? 0 : -1,
           label: '1',
+          active: activePage === 1,
           action: () => { this.showPage(1); }
         } as PageItem);
 
@@ -182,6 +210,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
         for (let item = activePage - 1; item <= activePage + 1; item++) {
           this.pageItems.push({
+            tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
             action: () => { this.showPage(item); }
@@ -194,13 +223,16 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
         } as PageItem);
 
         this.pageItems.push({
+          tabindex: this.activePage === this.pages ? 0 : -1,
           label: this.pages.toString(),
+          active: activePage === this.pages,
           action: () => { this.showPage(this.pages); }
         } as PageItem);
       }
     }
 
     const nextPageItem = {
+      tabindex: -1,
       label: 'Nästa sida'
     } as PageItem;
 
