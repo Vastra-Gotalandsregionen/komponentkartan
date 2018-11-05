@@ -142,15 +142,20 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
   }
 
-  registerOnChange(func: any) {
-    this.onChange = func;
+  registerOnChange(func: (value: any) => any) {
+    this.onChange = (value: any) => {
+      this.selectedChanged.emit(value);
+      func(value);
+    };
   }
 
-  registerOnTouched(func: any) {
+  registerOnTouched(func: () => any) {
     this.onTouched = func;
   }
 
-  onChange(_: any) { }
+  onChange(value: any) {
+    this.selectedChanged.emit(value);
+  }
 
   onTouched() { }
 
