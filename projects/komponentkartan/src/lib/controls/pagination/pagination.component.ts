@@ -55,19 +55,29 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     }
   }
 
-  setTabFocusability() {
-    this.pageItems.forEach((x, i) => {
-      x.tabindex = x.label === this.focusedPageLabel ? 0 : -1;
-    });
+  onKeydown(event: KeyboardEvent, index: number) {
+    if (event.key === 'ArrowLeft' || event.key === 'Left') {
+      this.focusPreviousPageItem(index);
+      event.preventDefault();
+    } else if (event.key === 'ArrowRight' || event.key === 'Right') {
+      this.focusNextPageItem(index);
+      event.preventDefault();
+    }
   }
 
-  onKeydown(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft' || event.key === 'Left' || event.key === 'ArrowUp' || event.key === 'Up') {
-      // this.previous.emit();
-      event.preventDefault();
-    } else if (event.key === 'ArrowRight' || event.key === 'Right' || event.key === 'ArrowDown' || event.key === 'Down') {
-      // this.next.emit();
-      event.preventDefault();
+  private focusPreviousPageItem(itemIndex: number) {
+    if (itemIndex > 0) {
+      this.pageButtons.toArray()[itemIndex - 1].nativeElement.focus();
+    } else {
+      this.pageButtons.toArray()[this.pageButtons.length - 1].nativeElement.focus();
+    }
+  }
+
+  private focusNextPageItem(itemIndex: number) {
+    if (itemIndex < (this.pageButtons.length - 1)) {
+      this.pageButtons.toArray()[itemIndex + 1].nativeElement.focus();
+    } else {
+      this.pageButtons.toArray()[0].nativeElement.focus();
     }
   }
 
@@ -77,6 +87,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   }
 
   private setPageItems(activePage: number) {
+
     this.pageItems = [];
     const previousPageItem = {
       tabindex: -1,
