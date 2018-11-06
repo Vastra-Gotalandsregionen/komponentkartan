@@ -14,7 +14,6 @@ describe('[CardSectionComponent]', () => {
   let component: CardSectionComponent;
   let fixture: ComponentFixture<CardSectionComponent>;
   let rootElement: DebugElement;
-  let header: DebugElement;
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -102,6 +101,8 @@ describe('[CardSectionComponent]', () => {
     });
     describe('header is focused and space is pressed', () => {
       beforeEach(() => {
+        jasmine.clock().uninstall();
+        jasmine.clock().install();
         const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
         const focusedElement = rootElement.query(By.css('.card-section__header'));
         Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
