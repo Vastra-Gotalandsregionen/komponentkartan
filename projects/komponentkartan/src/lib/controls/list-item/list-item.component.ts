@@ -131,7 +131,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   hideNotifications() {
     if (this.temporaryNotificationVisible) {
-      if (this.notification.type === 2) {
+      if (this.notification && this.notification.type === 2) {
         setTimeout(() => {
           this.isDeleted = true;
         }, this.showNotificationDurationMs);
@@ -143,16 +143,10 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  closeTemporary(type) {
-    // console.log(type);
+  closeTemporary() {
     if (!this.temporaryNotification) {
       this.temporaryNotificationVisible = false;
       this.handleNotificatonColor();
-      if (type === NotificationType.ShowOnCollapse) {
-        this.toggleExpand(true);
-        this.notification = this.permanentNotification ? this.permanentNotification : null;
-        this.notificationChanged.emit(this.notification);
-      }
     }
   }
 
