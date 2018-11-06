@@ -68,16 +68,12 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   private focusPreviousPageItem(itemIndex: number) {
     if (itemIndex > 0) {
       this.pageButtons.toArray()[itemIndex - 1].nativeElement.focus();
-    } else {
-      this.pageButtons.toArray()[this.pageButtons.length - 1].nativeElement.focus();
     }
   }
 
   private focusNextPageItem(itemIndex: number) {
-    if (itemIndex < (this.pageButtons.length - 1)) {
+    if (itemIndex < this.pageButtons.length - 1) {
       this.pageButtons.toArray()[itemIndex + 1].nativeElement.focus();
-    } else {
-      this.pageButtons.toArray()[0].nativeElement.focus();
     }
   }
 
@@ -87,9 +83,11 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   }
 
   private setPageItems(activePage: number) {
-
     this.pageItems = [];
+    let index = 0;
+
     const previousPageItem = {
+      buttonIndex: index,
       tabindex: -1,
       label: 'Föregående sida'
     } as PageItem;
@@ -104,7 +102,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
     if (this.pages <= 7) {
       for (let item = 1; item <= this.pages; item++) {
+        index++;
         this.pageItems.push({
+          buttonIndex: index,
           tabindex: this.activePage === item ? 0 : -1,
           label: item.toString(),
           active: item === activePage,
@@ -115,7 +115,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       if (activePage <= 4) {
 
         for (let item = 1; item <= 5; item++) {
+          index++;
           this.pageItems.push({
+            buttonIndex: index,
             tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
@@ -128,16 +130,19 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
           action: () => { }
         } as PageItem);
 
+        index++;
         this.pageItems.push({
           tabindex: this.activePage === 8 ? 0 : -1,
+          buttonIndex: index,
           label: '8',
           active: activePage === 8,
           action: () => { this.showPage(8); }
         } as PageItem);
 
       } else {
-
+        index++;
         this.pageItems.push({
+          buttonIndex: index,
           tabindex: this.activePage === 1 ? 0 : -1,
           label: '1',
           active: activePage === 1,
@@ -150,7 +155,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
         } as PageItem);
 
         for (let item = 4; item <= 8; item++) {
+          index++;
           this.pageItems.push({
+            buttonIndex: index,
             tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
@@ -162,7 +169,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       if (activePage <= 4) {
 
         for (let item = 1; item <= 5; item++) {
+          index++;
           this.pageItems.push({
+            buttonIndex: index,
             tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
@@ -175,7 +184,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
           action: () => { }
         } as PageItem);
 
+        index++;
         this.pageItems.push({
+          buttonIndex: index,
           tabindex: this.activePage === this.pages ? 0 : -1,
           label: this.pages.toString(),
           active: activePage === this.pages,
@@ -184,7 +195,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
       } else if (activePage >= this.pages - 4) {
 
+        index++;
         this.pageItems.push({
+          buttonIndex: index,
           tabindex: this.activePage === 1 ? 0 : -1,
           label: '1',
           active: activePage === 1,
@@ -197,7 +210,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
         } as PageItem);
 
         for (let item = this.pages - 4; item <= this.pages; item++) {
+          index++;
           this.pageItems.push({
+            buttonIndex: index,
             tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
@@ -206,8 +221,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
         }
 
       } else {
-
+        index++;
         this.pageItems.push({
+          buttonIndex: index,
           tabindex: this.activePage === 1 ? 0 : -1,
           label: '1',
           active: activePage === 1,
@@ -220,7 +236,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
         } as PageItem);
 
         for (let item = activePage - 1; item <= activePage + 1; item++) {
+          index++;
           this.pageItems.push({
+            buttonIndex: index,
             tabindex: this.activePage === item ? 0 : -1,
             label: item.toString(),
             active: item === activePage,
@@ -233,7 +251,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
           action: () => { }
         } as PageItem);
 
+        index++;
         this.pageItems.push({
+          buttonIndex: index,
           tabindex: this.activePage === this.pages ? 0 : -1,
           label: this.pages.toString(),
           active: activePage === this.pages,
@@ -242,7 +262,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       }
     }
 
+    index++;
     const nextPageItem = {
+      buttonIndex: index,
       tabindex: -1,
       label: 'Nästa sida'
     } as PageItem;
