@@ -8,15 +8,12 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { MonthpickerComponent } from './monthpicker/monthpicker.component';
 import { ColoursComponent } from './colours/colours.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
-import { DropdownmultiselectComponent } from './dropdownmultiselect/dropdownmultiselect.component';
-import { DropdownsComponent } from './dropdowns/dropdowns.component';
 import { FormattemplateComponent } from './formattemplate/formattemplate.component';
 import { HeadersComponent } from './headers/headers.component';
 import { ListsComponent } from './lists/lists.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LockbuttonComponent } from './lockbutton/lockbutton.component';
 import { ClosebuttonComponent } from './closebutton/closebutton.component';
-import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { PanelsComponent } from './panels/panels.component';
 import { RadiobuttonsComponent } from './radiobuttons/radiobuttons.component';
 import { TextbuttonsComponent } from './textbuttons/textbuttons.component';
@@ -37,8 +34,6 @@ import { ListExampleWithActionButtonsComponent } from './lists/examples/withacti
 import { ReactiveformsexampleComponent } from './reactiveforms-example/reactiveforms-example.component';
 import { ExpandableDivComponent } from './expandable-div/expandable-div.component';
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
-import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
-import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
 import { ExamplesListwithpageblockComponent } from './examples-listwithpageblock/examples-listwithpageblock.component';
 import { TableComponent } from './table/table.component';
 import { FilterTagComponent } from './filter-tag/filter-tag.component';
@@ -49,6 +44,7 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { PageBlockDocumentationComponent } from './page-block-documentation/page-block-documentation.component';
 import { PageHeaderDocumentationComponent } from './page-header-documentation/page-header-documentation.component';
+import { DropdownSelectDocumentationComponent } from './dropdown-select-documentation/dropdown-select-documentation.component';
 
 export const appRoutes: Routes = [
 
@@ -60,8 +56,6 @@ export const appRoutes: Routes = [
     { path: 'checkbox', component: CheckboxComponent },
     { path: 'closebutton', component: ClosebuttonComponent },
     { path: 'colours', component: ColoursComponent },
-    { path: 'dropdownmultiselect', component: DropdownmultiselectComponent },
-    { path: 'dropdowns', component: DropdownsComponent },
     { path: 'datepicker', component: DatepickerComponent },
     { path: 'monthpicker', component: MonthpickerComponent },
     { path: 'formattemplate', component: FormattemplateComponent },
@@ -72,7 +66,6 @@ export const appRoutes: Routes = [
     { path: 'listexample-notifications', component: ListexamplewithrownotificationComponent },
     { path: 'lockbutton', component: LockbuttonComponent },
     { path: 'panels', component: PanelsComponent },
-    { path: 'modaldialog', component: ModaldialogComponent },
     { path: 'savecancel', component: SavecancelComponent },
     { path: 'backtotop', component: BacktotopComponent },
     { path: '', component: StartComponent },
@@ -89,8 +82,6 @@ export const appRoutes: Routes = [
     { path: 'reactiveformsexample', component: ReactiveformsexampleComponent },
     { path: 'expandablediv', component: ExpandableDivComponent },
     { path: 'listexample-expandable-div', component: ListexamplewithexpandabledivComponent },
-    { path: 'examples-listwithcards', component: ExamplesListwithcardsComponent },
-    { path: 'examples-listwithlists', component: ExamplesListwithlistsComponent },
     { path: 'examples-listwithpageblock', component: ExamplesListwithpageblockComponent },
     { path: 'toggle-button', component: ToggleButtonComponent},
     { path: 'actionPanels', component: ActionPanelsComponent },
@@ -99,6 +90,7 @@ export const appRoutes: Routes = [
     { path: 'search-results', component: SearchResultsComponent },
     { path: 'page-block', component: PageBlockDocumentationComponent },
     { path: 'page-header', component: PageHeaderDocumentationComponent },
+    { path: 'dropdown-select', component: DropdownSelectDocumentationComponent },
 
     { path: '**', redirectTo: '/' }
 ];

@@ -22,7 +22,15 @@
                 <vgr-input></vgr-input>
               </vgr-title-value>
               <vgr-title-value [title]=" 'Nämnd*' " [slim]="readonly">
-                <vgr-dropdown [values]="['Nämnd 1', 'Nämnd 2', 'Nämnd 3', 'Nämnd 4', 'Nämnd 5', 'Nämnd 6', 'Nämnd 7']" [noItemSelectedLabel]=" 'Välj nämnd' "></vgr-dropdown>
+                <vgr-dropdown-select [noItemSelectedLabel]=" 'Välj nämnd' ">
+                  <vgr-dropdown-item>Nämnd 1</vgr-dropdown-item>
+                  <vgr-dropdown-item>Nämnd 2</vgr-dropdown-item>
+                  <vgr-dropdown-item>Nämnd 3</vgr-dropdown-item>
+                  <vgr-dropdown-item>Nämnd 4</vgr-dropdown-item>
+                  <vgr-dropdown-item>Nämnd 5</vgr-dropdown-item>
+                  <vgr-dropdown-item>Nämnd 6</vgr-dropdown-item>
+                  <vgr-dropdown-item>Nämnd 7</vgr-dropdown-item>
+                </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value [title]=" 'Datum*' " [slim]="readonly">
                 <div class="row-layout ">

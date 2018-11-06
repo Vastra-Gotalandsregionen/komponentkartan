@@ -74,7 +74,11 @@
                       <vgr-input [value]="'Berg'" [readonly]="!unlocked"></vgr-input>
                     </vgr-title-value>
                     <vgr-title-value [title]="'Boende'" [slim]="!unlocked">
-                      <vgr-dropdown [values]="['Hus','Lägenhet','Kartong']" [readonly]="!unlocked"></vgr-dropdown>
+                      <vgr-dropdown-select [readonly]="!unlocked">
+                        <vgr-dropdown-item>Hus</vgr-dropdown-item>
+                        <vgr-dropdown-item>Lägenhet</vgr-dropdown-item>
+                        <vgr-dropdown-item>Kartong</vgr-dropdown-item>
+                      </vgr-dropdown-select>
                     </vgr-title-value>
                     <vgr-title-value [title]="'Födelsedatum'" [slim]="!unlocked">
                       <vgr-datepicker [selectedDate]="birthDate" [readonly]="!unlocked"></vgr-datepicker>

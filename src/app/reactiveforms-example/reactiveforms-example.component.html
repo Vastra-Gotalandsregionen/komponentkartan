@@ -9,28 +9,39 @@
           <form [formGroup]="updateOnBlurForm">
             <vgr-title-value-layout>
               <vgr-title-value title="Förnamn">
-                <vgr-input formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched" [errorMessage]="validationMessages.firstname"></vgr-input>
+                <vgr-input formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched"
+                  [errorMessage]="validationMessages.firstname"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Efternamn">
-                <vgr-input formControlName="lastname" [showValidation]="updateOnBlurForm.controls.lastname.touched" [errorMessage]="validationMessages.lastname"></vgr-input>
+                <vgr-input formControlName="lastname" [showValidation]="updateOnBlurForm.controls.lastname.touched"
+                  [errorMessage]="validationMessages.lastname"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Ålder">
-                <vgr-input formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched" [alignRight]="true" [suffix]="'år'"
-                  [errorMessage]="validationMessages.age"></vgr-input>
+                <vgr-input formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched" [alignRight]="true"
+                  [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="E-post">
-                <vgr-input formControlName="email" [showValidation]="updateOnBlurForm.controls.email.touched" [errorMessage]="validationMessages.email"></vgr-input>
+                <vgr-input formControlName="email" [showValidation]="updateOnBlurForm.controls.email.touched"
+                  [errorMessage]="validationMessages.email"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Inkomst">
-                <vgr-input formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched" [errorMessage]="validationMessages.salary"
-                  [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
+                <vgr-input formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched"
+                  [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Favoritdjur">
-                <vgr-dropdown formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'" [showValidation]="updateOnBlurForm.controls.favourite_pet.touched"
-                  [items]="dropdownItems"></vgr-dropdown>
+                <vgr-dropdown-select formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
+                  [showValidation]="updateOnBlurForm.controls.favourite_pet.touched">
+                  <vgr-dropdown-item [value]="'Hund'">Hund</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Katt'">Katt</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Guldfisk'">Guldfisk</vgr-dropdown-item>
+                </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti" [showValidation]="updateOnBlurForm.controls.interests.touched"></vgr-dropdown-multiselect>
+                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="updateOnBlurForm.controls.interests.touched">
+                  <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
+                </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Du måste kryssa i mig!">
                 <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>
@@ -40,8 +51,8 @@
                 </vgr-radio-group>
               </vgr-title-value>
               <vgr-title-value title="Välj Månad">
-                <vgr-monthpicker formControlName="monthpicker" [showValidation]="updateOnBlurForm.controls.monthpicker.touched" [minDate]="minDate"
-                  [maxDate]="maxDate"></vgr-monthpicker>
+                <vgr-monthpicker formControlName="monthpicker" [showValidation]="updateOnBlurForm.controls.monthpicker.touched"
+                  [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
               </vgr-title-value>
               <vgr-title-value title="Välj Dag">
                 <vgr-datepicker formControlName="datepicker" [showValidation]="updateOnBlurForm.controls.datepicker.touched"></vgr-datepicker>
@@ -68,20 +79,30 @@
                 <vgr-input formControlName="lastname" [showValidation]="formSubmitted" [errorMessage]="validationMessages.lastname"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Ålder">
-                <vgr-input formControlName="age" [showValidation]="formSubmitted" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+                <vgr-input formControlName="age" [showValidation]="formSubmitted" [alignRight]="true" [suffix]="'år'"
+                  [errorMessage]="validationMessages.age"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="E-post">
                 <vgr-input formControlName="email" [showValidation]="formSubmitted" [errorMessage]="validationMessages.email"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Inkomst">
-                <vgr-input formControlName="salary" [showValidation]="formSubmitted" [errorMessage]="validationMessages.salary" [formatNumber]="true"
-                  [nrOfDecimals]="0"></vgr-input>
+                <vgr-input formControlName="salary" [showValidation]="formSubmitted" [errorMessage]="validationMessages.salary"
+                  [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Favoritdjur">
-                <vgr-dropdown formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'" [showValidation]="formSubmitted" [items]="dropdownItems"></vgr-dropdown>
+                <vgr-dropdown-select formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
+                  [showValidation]="formSubmitted">
+                  <vgr-dropdown-item [value]="'Hund'">Hund</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Katt'">Katt</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Guldfisk'">Guldfisk</vgr-dropdown-item>
+                </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti" [showValidation]="formSubmitted"></vgr-dropdown-multiselect>
+                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="formSubmitted">
+                  <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
+                </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Du måste kryssa i mig!">
                 <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>
@@ -91,7 +112,8 @@
                 </vgr-radio-group>
               </vgr-title-value>
               <vgr-title-value title="Välj Månad">
-                <vgr-monthpicker formControlName="monthpicker" [showValidation]="formSubmitted" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
+                <vgr-monthpicker formControlName="monthpicker" [showValidation]="formSubmitted" [minDate]="minDate"
+                  [maxDate]="maxDate"></vgr-monthpicker>
               </vgr-title-value>
               <vgr-title-value title="Välj Dag">
                 <vgr-datepicker formControlName="datepicker" [showValidation]="formSubmitted"></vgr-datepicker>
@@ -114,29 +136,39 @@
           <form [formGroup]="updateOnChangeForm">
             <vgr-title-value-layout>
               <vgr-title-value title="Förnamn">
-                <vgr-input formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty" [errorMessage]="validationMessages.firstname"></vgr-input>
+                <vgr-input formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty"
+                  [errorMessage]="validationMessages.firstname"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Efternamn">
-                <vgr-input formControlName="lastname" [showValidation]="updateOnChangeForm.controls.lastname.dirty" [errorMessage]="validationMessages.lastname"></vgr-input>
+                <vgr-input formControlName="lastname" [showValidation]="updateOnChangeForm.controls.lastname.dirty"
+                  [errorMessage]="validationMessages.lastname"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Ålder">
-                <vgr-input formControlName="age" [showValidation]="updateOnChangeForm.controls.age.dirty" [alignRight]="true" [suffix]="'år'"
-                  [errorMessage]="validationMessages.age"></vgr-input>
+                <vgr-input formControlName="age" [showValidation]="updateOnChangeForm.controls.age.dirty" [alignRight]="true"
+                  [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="E-post">
-                <vgr-input formControlName="email" [showValidation]="updateOnChangeForm.controls.email.dirty" [errorMessage]="validationMessages.email"></vgr-input>
+                <vgr-input formControlName="email" [showValidation]="updateOnChangeForm.controls.email.dirty"
+                  [errorMessage]="validationMessages.email"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Inkomst">
-                <vgr-input formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty" [errorMessage]="validationMessages.salary"
-                  [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
+                <vgr-input formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty"
+                  [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
               </vgr-title-value>
               <vgr-title-value title="Favoritdjur">
-                <vgr-dropdown formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'" [showValidation]="updateOnChangeForm.controls.favourite_pet.dirty"
-                  [items]="dropdownItems"></vgr-dropdown>
+                <vgr-dropdown-select formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
+                  [showValidation]="updateOnChangeForm.controls.favourite_pet.dirty">
+                  <vgr-dropdown-item [value]="'Hund'">Hund</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Katt'">Katt</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Guldfisk'">Guldfisk</vgr-dropdown-item>
+                </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-multiselect formControlName="interests" [items]="dropdownItemsMulti" [showValidation]="updateOnChangeForm.controls.interests.dirty">
-                </vgr-dropdown-multiselect>
+                <vgr-dropdown-select formControlName="interests" [simpleLabel]="true" [multi]="true" [showValidation]="updateOnChangeForm.controls.interests.dirty">
+                  <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
+                  <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
+                </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Du måste kryssa i mig!">
                 <vgr-checkbox formControlName="check" [label]=" 'Ok!' "></vgr-checkbox>
@@ -146,8 +178,8 @@
                 </vgr-radio-group>
               </vgr-title-value>
               <vgr-title-value title="Välj Månad">
-                <vgr-monthpicker formControlName="monthpicker" [showValidation]="updateOnChangeForm.controls.monthpicker.dirty" [minDate]="minDate"
-                  [maxDate]="maxDate"></vgr-monthpicker>
+                <vgr-monthpicker formControlName="monthpicker" [showValidation]="updateOnChangeForm.controls.monthpicker.dirty"
+                  [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
               </vgr-title-value>
               <vgr-title-value title="Välj Dag">
                 <vgr-datepicker formControlName="datepicker" [showValidation]="updateOnChangeForm.controls.datepicker.dirty"></vgr-datepicker>
@@ -169,26 +201,11 @@
     </vgr-page-block>
     <vgr-page-block>
       <div>
-        <h3>HTML On Blur</h3>
-        <section [innerHTML]="htmlOnBlur" highlight-js-content=".highlight"></section>
-      </div>
-    </vgr-page-block>
-    <vgr-page-block>
-      <div>
-        <h3>HTML On Submit</h3>
-        <section [innerHTML]="htmlOnSubmit" highlight-js-content=".highlight"></section>
-      </div>
-    </vgr-page-block>
-    <vgr-page-block>
-      <div>
-        <h3>HTML On Change</h3>
-        <section [innerHTML]="htmlOnChange" highlight-js-content=".highlight"></section>
-      </div>
-    </vgr-page-block>
-    <vgr-page-block>
-      <div>
-        <h3>Typescript samtliga</h3>
-        <section [innerHTML]="typeScriptSimpleListMarkup" highlight-js-content=".highlight"></section>
+        <h3>Källkod</h3>
+        <section>
+          <a href="https://github.com/Vastra-Gotalandsregionen/komponentkartan-demo/tree/master/src/app/reactiveforms-example">Källkod
+            för ovanstånde exempel.</a>
+        </section>
       </div>
     </vgr-page-block>
   </vgr-page-body>
