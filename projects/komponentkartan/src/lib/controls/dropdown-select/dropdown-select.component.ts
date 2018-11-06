@@ -415,15 +415,19 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
   }
 
-  private setLabel(items: DropdownItemComponent[]) {
+  private setLabel(selectedItems: DropdownItemComponent[]) {
     if (this.simpleLabel) {
-      this.label = items.length
-        ? items.length === 1
-          ? `${items.length} vald`
-          : `${items.length} valda`
-        : this.noItemSelectedLabel;
+      if (!selectedItems.length) {
+        this.label = this.noItemSelectedLabel;
+      } else if (selectedItems.length === this.items.length) {
+        this.label = 'Alla';
+      } else if (selectedItems.length === 1) {
+        this.label = '1 vald';
+      } else {
+        this.label = `${selectedItems.length} valda`;
+      }
     } else {
-      this.label = items
+      this.label = selectedItems
         .map(x => x.selectedLabel || x.label)
         .reduce((xs, x) => xs = `${xs}, ${x}`)
         || this.noItemSelectedLabel;
