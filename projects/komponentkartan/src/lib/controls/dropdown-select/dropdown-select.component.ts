@@ -53,8 +53,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   allSelected = false;
   validationErrorMessage = 'Obligatorisk';
   labelledbyid: string = Guid.newGuid();
+  label = this.noItemSelectedLabel;
 
-  label: string;
   hasFocus: boolean;
   scrollbarConfig: PerfectScrollbarConfig;
 
