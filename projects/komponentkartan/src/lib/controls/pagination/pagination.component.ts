@@ -103,66 +103,30 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     if (this.pages <= 7) {
       for (let item = 1; item <= this.pages; item++) {
         index++;
-        this.pageItems.push({
-          buttonIndex: index,
-          tabindex: this.activePage === item ? 0 : -1,
-          label: item.toString(),
-          active: item === activePage,
-          action: () => { this.showPage(item); }
-        });
+        this.addPageItem(index, item, activePage);
       }
     } else if (this.pages === 8) {
       if (activePage <= 4) {
 
         for (let item = 1; item <= 5; item++) {
           index++;
-          this.pageItems.push({
-            buttonIndex: index,
-            tabindex: this.activePage === item ? 0 : -1,
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
+          this.addPageItem(index, item, activePage);
         }
 
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
+        this.addDots();
 
         index++;
-        this.pageItems.push({
-          tabindex: this.activePage === 8 ? 0 : -1,
-          buttonIndex: index,
-          label: '8',
-          active: activePage === 8,
-          action: () => { this.showPage(8); }
-        } as PageItem);
+        this.addLastPageItem(index, activePage);
 
       } else {
         index++;
-        this.pageItems.push({
-          buttonIndex: index,
-          tabindex: this.activePage === 1 ? 0 : -1,
-          label: '1',
-          active: activePage === 1,
-          action: () => { this.showPage(1); }
-        } as PageItem);
+        this.addFirstPageItem(index, activePage);
 
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
+        this.addDots();
 
         for (let item = 4; item <= 8; item++) {
           index++;
-          this.pageItems.push({
-            buttonIndex: index,
-            tabindex: this.activePage === item ? 0 : -1,
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
+          this.addPageItem(index, item, activePage);
         }
       }
     } else {
@@ -170,95 +134,41 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
         for (let item = 1; item <= 5; item++) {
           index++;
-          this.pageItems.push({
-            buttonIndex: index,
-            tabindex: this.activePage === item ? 0 : -1,
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
+          this.addPageItem(index, item, activePage);
         }
 
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
+        this.addDots();
 
         index++;
-        this.pageItems.push({
-          buttonIndex: index,
-          tabindex: this.activePage === this.pages ? 0 : -1,
-          label: this.pages.toString(),
-          active: activePage === this.pages,
-          action: () => { this.showPage(this.pages); }
-        } as PageItem);
+        this.addLastPageItem(index, activePage);
 
-      } else if (activePage >= this.pages - 4) {
+      } else if (activePage >= this.pages - 3) {
 
         index++;
-        this.pageItems.push({
-          buttonIndex: index,
-          tabindex: this.activePage === 1 ? 0 : -1,
-          label: '1',
-          active: activePage === 1,
-          action: () => { this.showPage(1); }
-        } as PageItem);
+        this.addFirstPageItem(index, activePage);
 
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
+        this.addDots();
 
         for (let item = this.pages - 4; item <= this.pages; item++) {
           index++;
-          this.pageItems.push({
-            buttonIndex: index,
-            tabindex: this.activePage === item ? 0 : -1,
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
+          this.addPageItem(index, item, activePage);
         }
 
       } else {
         index++;
-        this.pageItems.push({
-          buttonIndex: index,
-          tabindex: this.activePage === 1 ? 0 : -1,
-          label: '1',
-          active: activePage === 1,
-          action: () => { this.showPage(1); }
-        } as PageItem);
+        this.addFirstPageItem(index, activePage);
 
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
+        this.addDots();
 
         for (let item = activePage - 1; item <= activePage + 1; item++) {
           index++;
-          this.pageItems.push({
-            buttonIndex: index,
-            tabindex: this.activePage === item ? 0 : -1,
-            label: item.toString(),
-            active: item === activePage,
-            action: () => { this.showPage(item); }
-          });
+          this.addPageItem(index, item, activePage);
         }
 
-        this.pageItems.push({
-          label: '...',
-          action: () => { }
-        } as PageItem);
+        this.addDots();
 
         index++;
-        this.pageItems.push({
-          buttonIndex: index,
-          tabindex: this.activePage === this.pages ? 0 : -1,
-          label: this.pages.toString(),
-          active: activePage === this.pages,
-          action: () => { this.showPage(this.pages); }
-        } as PageItem);
+        this.addLastPageItem(index, activePage);
       }
     }
 
@@ -275,5 +185,42 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       }
     };
     this.pageItems.push(nextPageItem);
+  }
+
+  private addFirstPageItem(index: number, activePage: number) {
+    this.pageItems.push({
+      buttonIndex: index,
+      tabindex: this.activePage === 1 ? 0 : -1,
+      label: '1',
+      active: activePage === 1,
+      action: () => { this.showPage(1); }
+    } as PageItem);
+  }
+
+  private addLastPageItem(index: number, activePage: number) {
+    this.pageItems.push({
+      buttonIndex: index,
+      tabindex: this.activePage === this.pages ? 0 : -1,
+      label: this.pages.toString(),
+      active: activePage === this.pages,
+      action: () => { this.showPage(this.pages); }
+    } as PageItem);
+  }
+
+  private addPageItem(index: number, item: number, activePage: number) {
+    this.pageItems.push({
+      buttonIndex: index,
+      tabindex: this.activePage === item ? 0 : -1,
+      label: item.toString(),
+      active: item === activePage,
+      action: () => { this.showPage(item); }
+    });
+  }
+
+  private addDots() {
+    this.pageItems.push({
+      label: '...',
+      action: () => { }
+    } as PageItem);
   }
 }
