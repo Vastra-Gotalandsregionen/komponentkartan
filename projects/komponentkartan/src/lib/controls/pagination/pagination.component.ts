@@ -98,6 +98,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
   private setPageItems(activePage: number) {
     this.pageItems = [];
+    if (!this.pages || !activePage) { return; }
     let index = 0;
 
     const previousPageItem = {
