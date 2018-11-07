@@ -1,24 +1,105 @@
 <app-component-docs [componentName]="'Dropdown select'">
   <div class="docs__overview">
-    <p>
-      <code>&lt;vgr-dropdown-select&gt;</code> innehåller en lista över valbara alternativ.
-      <br>- Kompletteras med filter över 20 items.
-      <br>- Kompletteras med scroll vid många val.
-      <br>
-      <vgr-dropdown-select>
-        <vgr-dropdown-item>Val 1</vgr-dropdown-item>
-        <vgr-dropdown-item>Val 2</vgr-dropdown-item>
-        <vgr-dropdown-item>Val 3</vgr-dropdown-item>
-        <vgr-dropdown-item>Val 4</vgr-dropdown-item>
-        <vgr-dropdown-item>Val 5</vgr-dropdown-item>
-        <vgr-dropdown-item>Val 6</vgr-dropdown-item>
-        <vgr-dropdown-item>Val 7</vgr-dropdown-item>
-        <vgr-dropdown-item>Val 8</vgr-dropdown-item>
-      </vgr-dropdown-select>
-    </p>
+    <p>Dropdown select finns i två bredder, har en rad olika alternativ och följer temafärg.</p>
+    <p>Detta händer automatiskt:</p>
+    <ul>
+      <li>Scroll visas när listan blir för lång (ca. 8 alternativ). Den krymper för att passa antalet alternativ, om de
+        är få.</li>
+      <li>Sökfält för filtrering visas vid över 20 val.</li>
+      <li>Om alternativets text är lång, bryts texten på flera rader.</li>
+    </ul>
+    <p>Detta kan ställas in vid implementation:</p>
+    <ul>
+      <li>Val av ett alternativ åt gången eller flera (multiselect).</li>
+      <li>Visning av valda alternativ antingen i klartext eller antal valda alternativ. Om klartext väljs, skapas en
+        lista av alla valda alternativ som är synlig i sin helhet i tooltip på hover. Om det är lämpligt att ställa in
+        en annan visningstext för den listan, går det att lägga in per alternativ.</li>
+      <li>Alternativen kan utformas så som är lämpligt för det specifika fallet. T.ex. kan varje alternativ kan ha
+        flera informationsbitar, om en stödinformation behövs för att göra valet.</li>
+      <li>Texten som visas innan val gjorts kan ställas in fritt.</li>
+    </ul>
     <p> Förändras med tema:
       <strong>ja</strong>
     </p>
+  </div>
+  <div class="docs__examples">
+    <div style="display: flex">
+      <div style="margin-right: 20px">
+        <div>
+          Liten, 5 alternativ
+        </div>
+        <div>
+          <vgr-dropdown-select [small]="true" [deselectable]="true">
+            <vgr-dropdown-item *ngFor="let item of items5">{{item}}</vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </div>
+      </div>
+      <div style="margin-right: 20px">
+        <div>
+          Stor, 50 alternativ
+        </div>
+        <div>
+          <vgr-dropdown-select>
+            <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </div>
+      </div>
+      <div style="margin-right: 20px">
+        <div>
+          Val av flera alternativ
+        </div>
+        <div>
+          <vgr-dropdown-select [multi]="true">
+            <vgr-dropdown-item *ngFor="let item of items10">{{item}}</vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </div>
+      </div>
+      <div>
+        <div>
+          Alternativ med extra information
+        </div>
+        <div>
+          <vgr-dropdown-select [multi]="true">
+            <vgr-dropdown-item *ngFor="let item of items50" [selectedLabel]="item">
+              <div>{{item}}</div>
+              <div style="font-style: italic">Information</div>
+            </vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; margin-top: 20px">
+      <div style="margin-right: 20px">
+        <div>
+          Aktiv
+        </div>
+        <div>
+          <vgr-dropdown-select [small]="true" [formControl]="form">
+              <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </div>
+      </div>
+      <div style="margin-right: 20px">
+        <div>
+          Endast visning
+        </div>
+        <div>
+          <vgr-dropdown-select [small]="true" [readonly]="true" [formControl]="form">
+              <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </div>
+      </div>
+      <div>
+        <div>
+          Inaktiv
+        </div>
+        <div>
+          <vgr-dropdown-select [small]="true" [disabled]="true" [formControl]="form">
+            <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="docs__api">
     <h2>DropdownSelect</h2>
@@ -115,7 +196,8 @@
       </tr>
       <tr>
         <td>selectedChanged: EventEmitter&lt;any&gt;</td>
-        <td>Event som triggas när val ändras av användaren. Värdet är <code>true</code> om alternativet valts och <code>false</code> om det avvalts. Används av <code>&lt;vgr-dropdown-select&gt;</code>.</td>
+        <td>Event som triggas när val ändras av användaren. Värdet är <code>true</code> om alternativet valts och <code>false</code>
+          om det avvalts. Används av <code>&lt;vgr-dropdown-select&gt;</code>.</td>
         <td></td>
       </tr>
       <tr>
