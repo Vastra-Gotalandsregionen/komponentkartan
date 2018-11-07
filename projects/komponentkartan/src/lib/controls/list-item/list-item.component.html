@@ -12,7 +12,7 @@
     </div>
   </div>
   <!-- Denna notis visas när det endast finns en temporär notis -->
-  <div *ngIf="temporaryNotification && !permanentNotification" class="list-item__notification" [@toggleFadedState] (@toggleFadedState.done)="closeTemporary(notification.type)" (click)="toggleExpand()">
+  <div *ngIf="temporaryNotification && !permanentNotification" class="list-item__notification" [@toggleFadedState] (@toggleFadedState.done)="closeTemporary()" (click)="toggleExpand()">
     <span class="list-item__notification__icon" [ngClass]="temporaryNotification.icon">
     </span>
     <div class="list-item__notification__message">
@@ -20,7 +20,7 @@
     </div>
   </div>
   <!-- Denna notis visas när det finns en permanent notis som skall ses åter när den temorärar är klar -->
-  <div *ngIf="temporaryNotification && permanentNotification" class="list-item__notification" [@toggleFadedState0ms] (@toggleFadedState0ms.done)="closeTemporary(notification.type)" (click)="toggleExpand()">
+  <div *ngIf="temporaryNotification && permanentNotification" class="list-item__notification" [@toggleFadedState0ms] (@toggleFadedState0ms.done)="closeTemporary()" (click)="toggleExpand()">
     <span class="list-item__notification__icon" [ngClass]="temporaryNotification?.icon">
     </span>
     <div class="list-item__notification__message">
