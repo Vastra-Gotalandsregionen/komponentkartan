@@ -62,6 +62,12 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     } else if (event.key === 'ArrowRight' || event.key === 'Right') {
       this.focusNextPageItem(index);
       event.preventDefault();
+    } else if (event.key === 'Home') {
+      this.focusPreviousButton();
+      event.preventDefault();
+    } else if (event.key === 'End') {
+      this.focusNextButton();
+      event.preventDefault();
     }
   }
 
@@ -77,6 +83,14 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     }
   }
 
+  private focusPreviousButton() {
+    this.pageButtons.toArray()[0].nativeElement.focus();
+  }
+
+  private focusNextButton() {
+    this.pageButtons.toArray()[this.pageButtons.length - 1].nativeElement.focus();
+  }
+
   private showPage(page: number) {
     this.setPageItems(page);
     this.pageChanged.emit(page);
@@ -89,7 +103,8 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     const previousPageItem = {
       buttonIndex: index,
       tabindex: -1,
-      label: 'Föregående sida'
+      label: 'Föregående sida',
+      ariaLabel: `Gå till föregående sida, sida ${activePage - 1} av ${this.pages}`
     } as PageItem;
 
     previousPageItem.action = () => {
@@ -176,7 +191,8 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     const nextPageItem = {
       buttonIndex: index,
       tabindex: -1,
-      label: 'Nästa sida'
+      label: 'Nästa sida',
+      ariaLabel: `Gå till nästa sida, sida ${activePage + 1} av ${this.pages}`
     } as PageItem;
 
     nextPageItem.action = () => {
@@ -190,9 +206,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   private addFirstPageItem(index: number, activePage: number) {
     this.pageItems.push({
       buttonIndex: index,
-      tabindex: this.activePage === 1 ? 0 : -1,
+      tabindex: activePage === 1 ? 0 : -1,
       label: '1',
-      ariaLabel: activePage !== 1 ? `Gå till första sidan, sida 1 av ${this.pages}` : '',
+      ariaLabel: activePage !== 1 ? `Gå till första sidan, sida 1 av ${this.pages}` : `Du är på sida 1 av ${this.pages}`,
       active: activePage === 1,
       action: () => { this.showPage(1); }
     } as PageItem);
@@ -201,9 +217,9 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   private addLastPageItem(index: number, activePage: number) {
     this.pageItems.push({
       buttonIndex: index,
-      tabindex: this.activePage === this.pages ? 0 : -1,
+      tabindex: activePage === this.pages ? 0 : -1,
       label: this.pages.toString(),
-      ariaLabel: activePage !== this.pages ? `Gå till sista sidan, sida ${this.pages} av ${this.pages}` : '',
+      ariaLabel: activePage !== this.pages ? `Gå till sista sidan, sida ${this.pages} av ${this.pages}` : `Du är på sida ${this.pages} av ${this.pages}`,
       active: activePage === this.pages,
       action: () => { this.showPage(this.pages); }
     } as PageItem);
@@ -212,7 +228,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
   private addPageItem(index: number, item: number, activePage: number) {
     this.pageItems.push({
       buttonIndex: index,
-      tabindex: this.activePage === item ? 0 : -1,
+      tabindex: activePage === item ? 0 : -1,
       label: item.toString(),
       ariaLabel: activePage !== item ? `Gå till sida ${item} av ${this.pages}` : `Du är på sida ${item} av ${this.pages}`,
       active: item === activePage,
