@@ -192,6 +192,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       buttonIndex: index,
       tabindex: this.activePage === 1 ? 0 : -1,
       label: '1',
+      ariaLabel: activePage !== 1 ? `Gå till första sidan, sida 1 av ${this.pages}` : '',
       active: activePage === 1,
       action: () => { this.showPage(1); }
     } as PageItem);
@@ -202,6 +203,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       buttonIndex: index,
       tabindex: this.activePage === this.pages ? 0 : -1,
       label: this.pages.toString(),
+      ariaLabel: activePage !== this.pages ? `Gå till sista sidan, sida ${this.pages} av ${this.pages}` : '',
       active: activePage === this.pages,
       action: () => { this.showPage(this.pages); }
     } as PageItem);
@@ -212,6 +214,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       buttonIndex: index,
       tabindex: this.activePage === item ? 0 : -1,
       label: item.toString(),
+      ariaLabel: activePage !== item ? `Gå till sida ${item} av ${this.pages}` : `Du är på sida ${item} av ${this.pages}`,
       active: item === activePage,
       action: () => { this.showPage(item); }
     });
