@@ -1,7 +1,7 @@
-.list__footer__pagination {
+.pagination {
     display: flex;
     justify-content: center;
-    .list__footer__pagination__page-button {         
+    .pagination__page-button {         
       position: relative;
       box-sizing: border-box;
       padding: 0;
@@ -55,7 +55,7 @@
         }
       }    
     }
-    .list__footer__pagination__dots {
+    .pagination__dots {
       font-size: $font-size--small;
       font-family: $font-family;
       line-height: 30px;
@@ -65,8 +65,8 @@
   }
 
   @media screen and (min-width: $desktop-width--medium) {
-    .list__footer__pagination {
-      .list__footer__pagination__page-button {     
+    .pagination {
+      .pagination__page-button {     
         font-size: $font-size--medium;
       }
     }
