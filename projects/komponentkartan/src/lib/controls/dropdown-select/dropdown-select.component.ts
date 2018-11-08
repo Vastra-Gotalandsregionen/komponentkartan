@@ -117,28 +117,28 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
 
     if (this.multi) {
-      const items: DropdownItemComponent[] = [];
+      const selectedItems: DropdownItemComponent[] = [];
       const values = value as any[];
       this.items.forEach(i => {
         if (values.some(v => this.compareWith(v, i.value))) {
           i.selected = true;
-          items.push(i);
+          selectedItems.push(i);
         } else {
           i.selected = false;
         }
       });
-      this.setLabel(items);
+      this.setLabel(selectedItems);
     } else {
-      let item: DropdownItemComponent;
+      let selectedItem: DropdownItemComponent;
       this.items.forEach(i => {
         if (this.compareWith(value, i.value)) {
           i.selected = true;
-          item = i;
+          selectedItem = i;
         } else {
           i.selected = false;
         }
       });
-      this.label = item ? item.selectedLabel || item.label : this.noItemSelectedLabel;
+      this.label = selectedItem ? selectedItem.selectedLabel || selectedItem.label : this.noItemSelectedLabel;
     }
   }
 
@@ -245,16 +245,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   onHeaderKeydown(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       this.toggleExpanded();
-    } else if (event.key === 'ArrowDown' || event.key === 'Down') {
-      if (this.expanded) {
-        if (this.filterVisible) {
-          this.filterTextbox.focus();
-        } else if (this.deselectable) {
-          this.deselectButton.focus();
-        } else if (this.items.length) {
-          this.items.toArray()[0].focus();
-        }
-      }
     }
   }
 
@@ -320,6 +310,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       setTimeout(() => {
         selectedItems[0].focus();
       });
+    } else if (this.items.length) {
+      setTimeout(() => {
+        this.items.toArray()[0].focus();
+      });
     }
   }
 
@@ -378,8 +372,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
               this.label = item.selectedLabel || item.label;
               this.onChange(item.value);
             } else {
-              this.label = this.noItemSelectedLabel;
-              this.onChange(null);
+              item.selected = true;
             }
             this.collapse();
           }

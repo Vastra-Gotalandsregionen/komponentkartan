@@ -36,7 +36,6 @@ export class DropdownItemComponent implements AfterViewInit {
       this.next.emit();
     } else if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       this.toggleSelect();
-      event.preventDefault();
     }
   }
 
