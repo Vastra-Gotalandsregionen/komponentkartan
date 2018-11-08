@@ -105,7 +105,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       buttonIndex: index,
       tabindex: -1,
       label: 'Föregående sida',
-      ariaLabel: `Gå till föregående sida, sida ${activePage - 1} av ${this.pages}`
+      ariaLabel: activePage !== 1 ? `Gå till föregående sida, sida ${activePage - 1} av ${this.pages}` : ''
     } as PageItem;
 
     previousPageItem.action = () => {
@@ -193,7 +193,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       buttonIndex: index,
       tabindex: -1,
       label: 'Nästa sida',
-      ariaLabel: `Gå till nästa sida, sida ${activePage + 1} av ${this.pages}`
+      ariaLabel: activePage !== this.pages ? `Gå till nästa sida, sida ${activePage + 1} av ${this.pages}` : ''
     } as PageItem;
 
     nextPageItem.action = () => {
@@ -209,7 +209,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       buttonIndex: index,
       tabindex: activePage === 1 ? 0 : -1,
       label: '1',
-      ariaLabel: activePage !== 1 ? `Gå till första sidan, sida 1 av ${this.pages}` : `Du är på sida 1 av ${this.pages}`,
+      ariaLabel: this.setAriaLabel(activePage, 1),
       active: activePage === 1,
       action: () => { this.showPage(1); }
     } as PageItem);
@@ -220,7 +220,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       buttonIndex: index,
       tabindex: activePage === this.pages ? 0 : -1,
       label: this.pages.toString(),
-      ariaLabel: activePage !== this.pages ? `Gå till sista sidan, sida ${this.pages} av ${this.pages}` : `Du är på sida ${this.pages} av ${this.pages}`,
+      ariaLabel: this.setAriaLabel(activePage, this.pages),
       active: activePage === this.pages,
       action: () => { this.showPage(this.pages); }
     } as PageItem);
@@ -231,10 +231,22 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
       buttonIndex: index,
       tabindex: activePage === item ? 0 : -1,
       label: item.toString(),
-      ariaLabel: activePage !== item ? `Gå till sida ${item} av ${this.pages}` : `Du är på sida ${item} av ${this.pages}`,
+      ariaLabel: this.setAriaLabel(activePage, item),
       active: item === activePage,
       action: () => { this.showPage(item); }
     });
+  }
+
+  private setAriaLabel(activePage: number, item: number): string {
+    if (activePage === item) {
+      return `Du är på sida ${item} av ${this.pages}`;
+    } else if (item === 1) {
+      return `Gå till första sidan, sida 1 av ${this.pages}`;
+    } else if (item === this.pages) {
+        return `Gå till sista sidan, sida ${this.pages} av ${this.pages}`;
+    } else {
+      return `Gå till sida ${item} av ${this.pages}`;
+    }
   }
 
   private addDots() {
