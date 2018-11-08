@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DropdownItemComponent } from './dropdown-item.component';
 
-describe('[DropdownItemComponent - Angular]', () => {
+fdescribe('[DropdownItemComponent - Angular]', () => {
   let component: DropdownItemComponent;
   let fixture: ComponentFixture<DropdownItemComponent>;
 

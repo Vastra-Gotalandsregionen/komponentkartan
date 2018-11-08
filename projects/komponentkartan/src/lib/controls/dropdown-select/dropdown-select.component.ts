@@ -7,7 +7,7 @@ import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConf
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DropdownItemComponent } from '../dropdown-item/dropdown-item.component';
+import { DropdownItemComponent } from './dropdown-item.component';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { ButtonComponent } from '../button/button.component';
 import { Guid } from '../../utils/guid';
