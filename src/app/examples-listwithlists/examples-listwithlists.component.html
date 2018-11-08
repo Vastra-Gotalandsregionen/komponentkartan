@@ -33,7 +33,7 @@
       <div class="loader-container" *ngIf="noSearchResult">
         <p>Inga resultat hittades för '{{ filtertext }}'</p>
       </div>
-      <vgr-list (sortChanged)="onSortChanged($event)" *ngIf="!loading && !noSearchResult" [allowMultipleExpandedItems]="true">
+      <vgr-list [pages]="pages" [activePage]="activePage" (pageChanged)="getPage($event)"  (sortChanged)="onSortChanged($event)" *ngIf="!loading && !noSearchResult" [allowMultipleExpandedItems]="true">
         <vgr-list-header>
           <vgr-list-column-header width="10" sortKey="enhet" [sortDirection]="sortDirections.Ascending">Enhet</vgr-list-column-header>
           <vgr-list-column-header width="5" [align]="'left'" sortKey="hsaid">HSA-id</vgr-list-column-header>
@@ -41,7 +41,7 @@
           <vgr-list-column-header width="1" [align]="'center'"></vgr-list-column-header>
           <vgr-list-column-header-checkbox width="1" [align]="'center'" [checked]="allChecked" (checkedChanged)="onListCheckedChanged($event)"></vgr-list-column-header-checkbox>
         </vgr-list-header>
-        <vgr-list-item *ngFor="let row of listData | unitfilter2: includeInactiveUnits" [expanded]="row.expanded" [notification]="row.notification">
+        <vgr-list-item *ngFor="let row of listData" [expanded]="row.expanded" [notification]="row.notification">
           <vgr-list-item-header>
             <vgr-list-column width="10">{{row.previewObject.enhet}}</vgr-list-column>
             <vgr-list-column width="5">{{row.previewObject.hsaid}}</vgr-list-column>

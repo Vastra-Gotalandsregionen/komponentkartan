@@ -1,8 +1,8 @@
 import {
-  ListComponent, ListHeaderComponent, ListItemContentComponent, SortChangedArgs,
+  ListComponent, ListHeaderComponent, SortChangedArgs,
   SortDirection, ListItemComponent
 } from '../../index';
-import { QueryList, EventEmitter } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 
 describe('[ListComponent]', () => {

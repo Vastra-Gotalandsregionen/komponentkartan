@@ -9,8 +9,12 @@
         <a href="/lists">här.</a>
       </p>
     </vgr-page-block>
-    <vgr-page-block>
-      <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
+    <div style="display:flex">
+    <vgr-input #pagesInput [small]="true" value="{{pages}}"></vgr-input>
+    <vgr-button (click)="setPages(pagesInput.value)">Sätt antal sidor</vgr-button>
+    </div>
+    <vgr-page-block>      
+      <vgr-list [flexibleHeader]="true" [pages]="pages" [activePage]="activePage" (pageChanged)="activePage = $event" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
           <vgr-list-column-header width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
           <vgr-list-column-header width="5" sortKey="lastName">Efternamn</vgr-list-column-header>

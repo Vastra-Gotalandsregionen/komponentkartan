@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   ListComponent,
   ListItemComponent, ListItemHeaderComponent, ListColumnComponent, ListHeaderComponent,
-  ListItemContentComponent, ListColumnHeaderComponent
+  ListItemContentComponent, ListColumnHeaderComponent, PaginationComponent
 } from '../../index';
 
 describe('ListComponent', () => {
@@ -27,7 +27,8 @@ describe('ListComponent', () => {
         ListItemComponent,
         ListItemHeaderComponent,
         ListColumnComponent,
-        ListItemContentComponent
+        ListItemContentComponent,
+        PaginationComponent
       ],
       imports: [CommonModule, BrowserAnimationsModule],
       providers: [

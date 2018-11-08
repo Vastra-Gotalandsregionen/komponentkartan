@@ -9,3 +9,6 @@
   </div>
   <ng-content select="vgr-list-item"></ng-content>
 </div>
+<div class="list__footer" *ngIf="pages > 1">
+  <vgr-pagination [pages]="pages" [activePage]="activePage" (pageChanged)="onPageChanged($event)"></vgr-pagination>
+</div>

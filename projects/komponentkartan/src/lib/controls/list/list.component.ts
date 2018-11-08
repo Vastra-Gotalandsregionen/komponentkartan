@@ -1,11 +1,10 @@
-import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { trigger, style, transition, animate, state } from '@angular/animations';
 
 import { ListItemComponent } from '../list-item/list-item.component';
 import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
 
 @Component({
   templateUrl: './list.component.html',
@@ -25,33 +24,42 @@ import { takeUntil } from 'rxjs/operators';
   ]
 })
 export class ListComponent implements AfterContentInit, OnDestroy {
+  @Input() allowMultipleExpandedItems = false;
+  @Input() notification;
+  @Input() pages: number;
+  @Input() activePage: number;
+  @Input() @HostBinding('class.list--inline') flexibleHeader = false;
+
+  @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
+  @Output() pageChanged: EventEmitter<number> = new EventEmitter();
+
   @HostBinding('class.list') hasClass = true;
   @HostBinding('class.list--new-item-added') moveHeader = false;
   @HostBinding('class.animate') animate = false;
-  @Input() @HostBinding('class.list--inline') flexibleHeader = false;
-  @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
-  @Input() allowMultipleExpandedItems = false;
-  @Input() notification;
+
   @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
-  @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
+  @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
 
   loaded = false;
-  private ngUnsubscribe = new Subject();
 
-  constructor() {
-  }
+  private ngUnsubscribe = new Subject();
 
   ngAfterContentInit() {
     if (this.listHeader) {
       this.listHeader.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
     }
     this.subscribeEvents();
-    this.items.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((changes) => {
+    this.items.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
       this.subscribeEvents();
     });
   }
-  subscribeEvents() {
 
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  subscribeEvents() {
     if (!this.allowMultipleExpandedItems) {
       this.items.forEach(changedContainer => {
         changedContainer.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((expanded: boolean) => {
@@ -76,7 +84,6 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     });
   }
 
-
   animateHeader() {
     this.moveHeader = true;
     setTimeout(() => {
@@ -91,6 +98,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
       this.items.toArray()[index - 1].setFocusOnRow();
     }
   }
+
   setFocusOnNextRow(index: number) {
     if (index + 1 === this.items.toArray().length) {
       this.items.toArray()[0].setFocusOnRow();
@@ -105,8 +113,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+  onPageChanged(event: number) {
+    this.pageChanged.emit(event);
   }
 }

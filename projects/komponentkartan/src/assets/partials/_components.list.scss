@@ -118,6 +118,13 @@ vgr-list.list--new-item-added {
   //Pop-out b
 }
 
+.list__footer {
+  margin-top: 2px;
+  background-color:white; 
+  padding-top: 10px; 
+  padding-bottom:10px; 
+}
+
 .list__items {
   position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
 
