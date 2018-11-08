@@ -7,8 +7,6 @@ export { CardComponent } from './controls/card/card.component';
 export { CardColumnComponent } from './controls/card/card-column.component';
 export { CardHeaderComponent } from './controls/card/card-header.component';
 export { CheckboxComponent } from './controls/checkbox/checkbox.component';
-export { DropdownComponent } from './controls/dropdown/dropdown.component';
-export { DropdownMultiselectComponent } from './controls/dropdown-multiselect/dropdown-multiselect.component';
 export { FilterTextboxComponent } from './controls/filterTextbox/filterTextbox.component';
 export { LockButtonComponent } from './controls/lock-button/lock-button.component';
 export { SaveCancelComponent } from './controls/save-cancel/save-cancel.component';
@@ -65,13 +63,14 @@ export { SearchResultComponent } from './controls/search-result/search-result.co
 export { ToggleButtonComponent } from './controls/toggle-button/toggle-button.component';
 export { ToggleButtonGroupComponent } from './controls/toggle-button/toggle-button-group.component';
 export { PaginationComponent } from './controls/pagination/pagination.component';
+export { DropdownSelectComponent } from './controls/dropdown-select/dropdown-select.component';
+export { DropdownItemComponent } from './controls/dropdown-select/dropdown-item.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';
 export { ICalendarWeek } from './models/calendarWeek.model';
 export { ICalendarYear } from './models/calendarYear.model';
 export { ICalendarYearMonth } from './models/calendarYearMonth.model';
-export { DropdownItem } from './models/dropdownItem.model';
 export { ExpandableRow } from './models/expandableRow.model';
 export { IHeaderMenu, IHeaderMenuGroup, IHeaderMenuItem } from './models/headerMenu.model';
 export { IMenu, IMenuGroup, IMenuItem } from './models/menu.model';
@@ -82,7 +81,6 @@ export { Notification } from './models/notification.model';
 export { ISelectableItem, SelectableItem } from './models/selectableItem.model';
 export { SearchResultItem } from './models/searchResultItem.model';
 
-export { DropdownItemToSelectedTextPipe } from './pipes/dropdownItemToSelectedTextPipe';
 export { FilterPipe } from './pipes/filterPipe';
 export { SafePipe } from './pipes/safePipe';
 export { TruncatePipe } from './pipes/truncatePipe';

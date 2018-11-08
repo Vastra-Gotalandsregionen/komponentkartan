@@ -12,10 +12,6 @@ import { KomponentkartanModule } from '@komponentkartan-module';
 // Vendors
 import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
 
-// Pipe
-import { UnitFilterPipe } from './examples-listwithcards/unitFilterPipe';
-import { UnitFilter2Pipe } from './examples-listwithlists/unitFilterPipe';
-
 
 // Domain
 import { KomponentkartanApplicationComponent } from './app.component';
@@ -26,15 +22,12 @@ import { MonthpickerComponent } from './monthpicker/monthpicker.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ColoursComponent } from './colours/colours.component';
-import { DropdownmultiselectComponent } from './dropdownmultiselect/dropdownmultiselect.component';
-import { DropdownsComponent } from './dropdowns/dropdowns.component';
 import { FormattemplateComponent } from './formattemplate/formattemplate.component';
 import { HeadersComponent } from './headers/headers.component';
 import { ListsComponent } from './lists/lists.component';
 import { LockbuttonComponent } from './lockbutton/lockbutton.component';
 import { ClosebuttonComponent } from './closebutton/closebutton.component';
 
-import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { PanelsComponent } from './panels/panels.component';
 import { RadiobuttonsComponent } from './radiobuttons/radiobuttons.component';
 import { TextbuttonsComponent } from './textbuttons/textbuttons.component';
@@ -61,9 +54,6 @@ import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
 import { FilterTagComponent } from './filter-tag/filter-tag.component';
 
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
-import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
-import { ExamplesListwithlistsComponent } from './examples-listwithlists/examples-listwithlists.component';
-import { UnitService } from './examples-listwithlists/unitService';
 import { TextareafieldComponent } from './textareaField/textareafield.component';
 import { IconsComponent } from './icons/icons.component';
 import { TableComponent } from './table/table.component';
@@ -73,6 +63,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { PageBlockDocumentationComponent } from './page-block-documentation/page-block-documentation.component';
 import { ExamplesListwithpageblockComponent } from './examples-listwithpageblock/examples-listwithpageblock.component';
 import { PageHeaderDocumentationComponent } from './page-header-documentation/page-header-documentation.component';
+import { DropdownSelectDocumentationComponent } from './dropdown-select-documentation/dropdown-select-documentation.component';
 
 @NgModule({
     declarations: [
@@ -84,13 +75,10 @@ import { PageHeaderDocumentationComponent } from './page-header-documentation/pa
         SavecancelComponent,
         CheckboxComponent,
         ColoursComponent,
-        DropdownmultiselectComponent,
-        DropdownsComponent,
         FormattemplateComponent,
         HeadersComponent,
         ListsComponent,
         LockbuttonComponent,
-        ModaldialogComponent,
         PanelsComponent,
         RadiobuttonsComponent,
         TextbuttonsComponent,
@@ -111,11 +99,7 @@ import { PageHeaderDocumentationComponent } from './page-header-documentation/pa
         ReactiveformsexampleComponent,
         ExpandableDivComponent,
         ListexamplewithexpandabledivComponent,
-        ExamplesListwithcardsComponent,
-        ExamplesListwithlistsComponent,
         IconsComponent,
-        UnitFilterPipe,
-        UnitFilter2Pipe,
         ActionPanelsComponent,
         ClosebuttonComponent,
         TableComponent,
@@ -126,7 +110,8 @@ import { PageHeaderDocumentationComponent } from './page-header-documentation/pa
         SearchResultsComponent,
         PageBlockDocumentationComponent,
         PageHeaderDocumentationComponent,
-        ExamplesListwithpageblockComponent
+        ExamplesListwithpageblockComponent,
+        DropdownSelectDocumentationComponent
     ],
     imports: [
         KomponentkartanModule,
@@ -136,12 +121,10 @@ import { PageHeaderDocumentationComponent } from './page-header-documentation/pa
         HighlightJsModule,
         RouterModule.forRoot(appRoutes)
     ],
-    exports: [UnitFilterPipe],
     providers: [
         CityService,
         HighlightJsService,
         HtmlEncodeService,
-        UnitService,
         {
             provide: LOCALE_ID, useValue: 'sv-SE'
         },

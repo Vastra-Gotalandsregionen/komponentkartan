@@ -32,9 +32,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.TruncatePipe,
     type.FilterPipe,
     type.ErrorMessagePipe,
-    type.DropdownItemToSelectedTextPipe,
     type.ActionPanelComponent,
-    type.DropdownComponent,
     type.FilterTextboxComponent,
     type.ButtonComponent,
     type.LockButtonComponent,
@@ -49,7 +47,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ModalContentComponent,
     type.ModalHeaderComponent,
     type.ModalFooterComponent,
-    type.DropdownMultiselectComponent,
     type.MonthpickerComponent,
     type.DatepickerComponent,
     type.InputComponent,
@@ -97,16 +94,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ToggleButtonComponent,
     type.ToggleButtonGroupComponent,
     type.SearchResultComponent,
-    type.PaginationComponent
+    type.DropdownItemComponent,
+    type.PaginationComponent,
+    type.DropdownSelectComponent
   ],
   exports: [
     type.SafePipe,
     type.TruncatePipe,
     type.FilterPipe,
     type.ErrorMessagePipe,
-    type.DropdownItemToSelectedTextPipe,
     type.ActionPanelComponent,
-    type.DropdownComponent,
     type.FilterTextboxComponent,
     type.ButtonComponent,
     type.LockButtonComponent,
@@ -121,7 +118,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ModalContentComponent,
     type.ModalHeaderComponent,
     type.ModalFooterComponent,
-    type.DropdownMultiselectComponent,
     type.MonthpickerComponent,
     type.DatepickerComponent,
     type.InputComponent,
@@ -169,12 +165,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ToggleButtonComponent,
     type.ToggleButtonGroupComponent,
     type.SearchResultComponent,
-    type.PaginationComponent
+    type.DropdownItemComponent,
+    type.PaginationComponent,
+    type.DropdownSelectComponent
   ],
   providers: [
     type.ModalService,
     type.BrowserDetector,
-    DecimalPipe,
     type.ErrorHandler,
     { provide: LOCALE_ID, useValue: 'sv-SE' },
     {
