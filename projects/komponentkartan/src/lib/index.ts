@@ -1,3 +1,5 @@
+import { from } from 'rxjs';
+
 export { ActionPanelComponent } from './controls/action-panel/action-panel.component';
 export { TextareaComponent } from './controls/textarea/textarea.component';
 export { ButtonComponent } from './controls/button/button.component';
@@ -61,6 +63,7 @@ export { SearchResultComponent } from './controls/search-result/search-result.co
 export { ToggleButtonComponent } from './controls/toggle-button/toggle-button.component';
 export { ToggleButtonGroupComponent } from './controls/toggle-button/toggle-button-group.component';
 export { DropdownItemComponent } from './controls/dropdown-item/dropdown-item.component';
+export { PaginationComponent } from './controls/pagination/pagination.component';
 export { DropdownSelectComponent } from './controls/dropdown-select/dropdown-select.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
