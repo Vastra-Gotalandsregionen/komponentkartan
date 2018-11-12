@@ -1,7 +1,6 @@
 import { SimpleChanges, SimpleChange } from '@angular/core';
 
 import { PaginationComponent } from './pagination.component';
-import { QueryList } from '@angular/core/src/render3';
 
 describe('[PaginationComponent]', () => {
     let component: PaginationComponent;
@@ -10,10 +9,10 @@ describe('[PaginationComponent]', () => {
     });
     describe('Instatiate', () => {
         it('pages is correct', () => {
-            expect(component.pages).toBeFalsy();
+            expect(component.pages).toBe(1);
         });
         it('activePage is correct', () => {
-            expect(component.activePage).toBeFalsy();
+            expect(component.activePage).toBe(1);
         });
         it('pagesItems to be correct', () => {
             expect(component.pageItems).toEqual([]);
@@ -27,15 +26,15 @@ describe('[PaginationComponent]', () => {
         let changes: SimpleChanges;
         describe('pages is not changed', () => {
             beforeEach(() => {
-                component.pages = 0;
+                component.pages = 1;
                 changes = { 'pages': {} as SimpleChange };
                 component.ngOnChanges(changes);
             });
             it('pages is correct', () => {
-                expect(component.pages).toBe(0);
+                expect(component.pages).toBe(1);
             });
             it('pageItems is correct', () => {
-                expect(component.pageItems).toEqual([]);
+                expect(component.pageItems.length).toBe(3);
             });
         });
         describe('pages is changed', () => {
@@ -44,7 +43,10 @@ describe('[PaginationComponent]', () => {
                     beforeEach(() => {
                         component.pages = 2;
                         component.activePage = 1;
-                        changes = { 'pages': {} as SimpleChange, 'activePage': {} as SimpleChange };
+                        changes = {
+                            'pages': { currentValue: 2 } as SimpleChange,
+                            'activePage': { currentValue: 1 } as SimpleChange
+                        };
                         component.ngOnChanges(changes);
                     });
                     it('pageItems length is correct', () => {
@@ -77,7 +79,10 @@ describe('[PaginationComponent]', () => {
                     beforeEach(() => {
                         component.pages = 8;
                         component.activePage = 2;
-                        changes = { 'pages': {} as SimpleChange, 'activePage': {} as SimpleChange };
+                        changes = {
+                            'pages': { currentValue: 8 } as SimpleChange,
+                            'activePage': { currentValue: 2 } as SimpleChange
+                        };
                         component.ngOnChanges(changes);
                     });
                     it('pageItems length is correct', () => {
@@ -108,7 +113,10 @@ describe('[PaginationComponent]', () => {
                     beforeEach(() => {
                         component.pages = 8;
                         component.activePage = 6;
-                        changes = { 'pages': {} as SimpleChange, 'activePage': {} as SimpleChange };
+                        changes = {
+                            'pages': { currentValue: 8 } as SimpleChange,
+                            'activePage': { currentValue: 6 } as SimpleChange
+                        };
                         component.ngOnChanges(changes);
                     });
                     it('pageItems length is correct', () => {
@@ -141,7 +149,10 @@ describe('[PaginationComponent]', () => {
                     beforeEach(() => {
                         component.pages = 21;
                         component.activePage = 4;
-                        changes = { 'pages': {} as SimpleChange, 'activePage': {} as SimpleChange };
+                        changes = {
+                            'pages': { currentValue: 21 } as SimpleChange,
+                            'activePage': { currentValue: 4 } as SimpleChange
+                        };
                         component.ngOnChanges(changes);
                     });
                     it('pageItems length is correct', () => {
@@ -172,7 +183,10 @@ describe('[PaginationComponent]', () => {
                     beforeEach(() => {
                         component.pages = 99;
                         component.activePage = 97;
-                        changes = { 'pages': {} as SimpleChange, 'activePage': {} as SimpleChange };
+                        changes = {
+                            'pages': { currentValue: 99 } as SimpleChange,
+                            'activePage': { currentValue: 97 } as SimpleChange
+                        };
                         component.ngOnChanges(changes);
                     });
                     it('pageItems length is correct', () => {
@@ -204,7 +218,10 @@ describe('[PaginationComponent]', () => {
                 beforeEach(() => {
                     component.pages = 57;
                     component.activePage = 17;
-                    changes = { 'pages': {} as SimpleChange, 'activePage': {} as SimpleChange };
+                    changes = {
+                        'pages': { currentValue: 57 } as SimpleChange,
+                        'activePage': { currentValue: 17 } as SimpleChange
+                    };
                     component.ngOnChanges(changes);
                 });
                 it('pageItems length is correct', () => {

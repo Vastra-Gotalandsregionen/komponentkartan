@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, Input, Output, EventEmitter, OnDestroy, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input, Output, EventEmitter, OnDestroy, AfterViewInit, ViewChildren, QueryList, ElementRef, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PageItem } from './page-item';
@@ -7,9 +7,9 @@ import { PageItem } from './page-item';
   selector: 'vgr-pagination',
   templateUrl: './pagination.component.html'
 })
-export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy {
-  @Input() pages: number;
-  @Input() activePage: number;
+export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+  @Input() pages = 1;
+  @Input() activePage = 1;
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @ViewChildren('pageButton') pageButtons: QueryList<ElementRef>;
 
@@ -20,11 +20,22 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
   private ngUnsubscribe = new Subject();
 
+  ngOnInit() {
+    this.setPageItems(this.activePage);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     const pagesChange = changes['pages'];
     const activePageChange = changes['activePage'];
     if (pagesChange || activePageChange) {
-      this.setPageItems(this.activePage);
+      if (this.activePage > this.pages) {
+        this.showPage(this.pages);
+      } else {
+        this.setPageItems(this.activePage);
+        if (activePageChange) {
+          this.pageChanged.emit(activePageChange.currentValue);
+        }
+      }
     }
   }
 
@@ -93,12 +104,14 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
 
   private showPage(page: number) {
     this.setPageItems(page);
-    this.pageChanged.emit(page);
+    if (this.activePage !== page) {
+      this.activePage = page;
+      this.pageChanged.emit(page);
+    }
   }
 
   private setPageItems(activePage: number) {
     this.pageItems = [];
-    if (!this.pages || !activePage) { return; }
     let index = 0;
 
     const previousPageItem = {
@@ -109,7 +122,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     } as PageItem;
 
     previousPageItem.action = () => {
-      if (activePage !== 1) {
+      if (activePage > 1) {
         this.showPage(activePage - 1);
       }
     };
@@ -197,7 +210,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     } as PageItem;
 
     nextPageItem.action = () => {
-      if (activePage !== this.pages) {
+      if (activePage < this.pages) {
         this.showPage(activePage + 1);
       }
     };
@@ -243,7 +256,7 @@ export class PaginationComponent implements OnChanges, AfterViewInit, OnDestroy 
     } else if (item === 1) {
       return `Gå till första sidan, sida 1 av ${this.pages}`;
     } else if (item === this.pages) {
-        return `Gå till sista sidan, sida ${this.pages} av ${this.pages}`;
+      return `Gå till sista sidan, sida ${this.pages} av ${this.pages}`;
     } else {
       return `Gå till sida ${item} av ${this.pages}`;
     }
