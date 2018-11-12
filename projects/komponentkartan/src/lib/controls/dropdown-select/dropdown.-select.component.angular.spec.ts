@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 
 import { DropdownSelectComponent } from './dropdown-select.component';
@@ -25,7 +25,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
   let component: DropdownSelectComponent;
   let fixture: ComponentFixture<DropdownSelectComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         DropdownSelectComponent,
@@ -34,11 +34,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
         MockPerfectScrollbarComponent,
         TruncatePipe
       ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
+    });
     fixture = TestBed.createComponent(DropdownSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
