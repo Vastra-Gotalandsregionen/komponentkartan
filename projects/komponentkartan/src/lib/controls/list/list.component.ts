@@ -26,8 +26,8 @@ import { takeUntil } from 'rxjs/operators';
 export class ListComponent implements AfterContentInit, OnDestroy {
   @Input() allowMultipleExpandedItems = false;
   @Input() notification;
-  @Input() pages: number;
-  @Input() activePage: number;
+  @Input() pages = 1;
+  @Input() activePage = 1;
   @Input() @HostBinding('class.list--inline') flexibleHeader = false;
 
   @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();

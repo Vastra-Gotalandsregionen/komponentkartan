@@ -43,7 +43,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
     this.pageButtons.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
       const focusedPageButton = this.pageButtons.find(button => button.nativeElement.textContent === this.focusedPageLabel);
       if (focusedPageButton) {
-        focusedPageButton.nativeElement.focus();
+        setTimeout(() => focusedPageButton.nativeElement.focus());
       }
     });
   }
