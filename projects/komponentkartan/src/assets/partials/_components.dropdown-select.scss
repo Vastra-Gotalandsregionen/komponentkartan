@@ -1,11 +1,22 @@
 .dropdown-select {
   display: inline-block;
 
+  .icon-search {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='35' cy='35' r='30' stroke='%23314152' fill='none' stroke-width='10' /%3E%3Cline x1='60' y1='60' x2='90' y2='90' stroke='%23314152' stroke-linecap='round' stroke-width='12' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
   .icon-checkbox-unchecked {
     display: inline-block;
     width: 18px;
     height: 18px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect x='10' y='10' width='160' height='160' stroke='%23151515' stroke-width='20' fill='none' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   .icon-checkbox-checked {
@@ -13,6 +24,8 @@
     width: 18px;
     height: 18px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect x='0' y='0' width='180' height='180' stroke='none' fill='%23151515' /%3E%3Cpolyline points='40 85, 75 120, 139 56' stroke='white' stroke-width='20' fill='none' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   .dropdown-select__control {
@@ -34,7 +47,6 @@
         border-top: $border--single solid $control-border-color--default;
         border-left: $border--single solid $control-border-color--default;
         border-bottom: $border--single solid $control-border-color--default;
-        transition: all 0.6s linear;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -79,7 +91,28 @@
         border-bottom: 1px solid $border-color;
 
         .dropdown-select__menu__header__filter {
+          display: flex;
+          align-items: center;
+          height: $component-height;
+          border: $border--single solid $control-border-color--default;
+          border-radius: 0px;
           margin-bottom: 10px;
+
+          &.dropdown-select__menu__header__filter--focus {
+            outline: $focus-outline-width solid $focus-color;
+          }
+
+          input {
+            height: $component-height - 4px;
+            width: 240px;
+            border: none;
+          }
+
+          &::after {
+            @extend .icon-search;
+            content: "";
+            margin-right: 10px;
+          }
         }
 
         .dropdown-select__menu__header__deselect {

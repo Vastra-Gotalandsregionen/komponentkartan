@@ -8,7 +8,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DropdownItemComponent } from './dropdown-item.component';
-import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { ButtonComponent } from '../button/button.component';
 import { Guid } from '../../utils/guid';
 
@@ -45,7 +44,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @ViewChild('header') header: ElementRef;
   @ViewChild('selectAll') selectAll: ElementRef;
   @ViewChild('deselectButton') deselectButton: ButtonComponent;
-  @ViewChild(FilterTextboxComponent) filterTextbox: FilterTextboxComponent;
+  @ViewChild('filter') filter: ElementRef;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
   expanded = false;
@@ -56,6 +55,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   label = this.noItemSelectedLabel;
 
   hasFocus: boolean;
+  filterHasFocus: boolean;
   scrollbarConfig: PerfectScrollbarConfig;
 
   get errorActive() {
@@ -171,10 +171,12 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
   }
 
-  filterItems(filterValue: string) {
+  filterItems() {
+    const value = this.filter.nativeElement.value;
+
     if (this.items) {
       this.items.forEach(item => {
-        item.visible = item.label.toLowerCase().includes(filterValue.toLowerCase());
+        item.visible = item.label.toLowerCase().includes(value.toLowerCase());
       });
     }
 
@@ -248,6 +250,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
   }
 
+  onFilterFocus() {
+    this.filterHasFocus = true;
+  }
+
+  onFilterBlur() {
+    this.filterHasFocus = false;
+  }
+
   onFilterKeydown(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       event.stopPropagation();
@@ -275,11 +285,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       if (this.items.length) {
         this.items.toArray()[0].focus();
       } else if (this.filterVisible) {
-        this.filterTextbox.focus();
+        this.filter.nativeElement.focus();
       }
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
       if (this.filterVisible) {
-        this.filterTextbox.focus();
+        this.filter.nativeElement.focus();
       } else if (this.items.length) {
         this.items.toArray()[this.items.length - 1].focus();
       }
@@ -291,11 +301,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       if (this.items.length) {
         this.items.toArray()[0].focus();
       } else if (this.filterVisible) {
-        this.filterTextbox.focus();
+        this.filter.nativeElement.focus();
       }
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
       if (this.filterVisible) {
-        this.filterTextbox.focus();
+        this.filter.nativeElement.focus();
       } else if (this.items.length) {
         this.items.toArray()[this.items.length - 1].focus();
       }
@@ -320,8 +330,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private collapse(focusHeader = true) {
     this.expanded = false;
 
-    if (this.filterTextbox) {
-      this.filterTextbox.clear();
+    if (this.filter) {
+      this.filter.nativeElement.value = '';
+      this.filterItems();
     }
 
     if (focusHeader) {
@@ -388,7 +399,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     } else if (this.deselectable) {
       this.deselectButton.focus();
     } else if (this.filterVisible) {
-      this.filterTextbox.focus();
+      this.filter.nativeElement.focus();
     } else {
       this.items.toArray()[this.items.length - 1].focus();
     }
@@ -398,7 +409,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (itemIndex < (this.items.length - 1)) {
       this.items.toArray()[itemIndex + 1].focus();
     } else if (this.filterVisible) {
-      this.filterTextbox.focus();
+      this.filter.nativeElement.focus();
     } else if (this.multi) {
       this.selectAll.nativeElement.focus();
     } else if (this.deselectable) {
