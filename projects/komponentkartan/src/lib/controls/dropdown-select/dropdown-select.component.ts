@@ -118,7 +118,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     if (this.multi) {
       const selectedItems: DropdownItemComponent[] = [];
-      const values = value as any[];
+      const values = value as any[] || [];
       this.items.forEach(i => {
         if (values.some(v => this.compareWith(v, i.value))) {
           i.selected = true;
@@ -431,10 +431,12 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         this.label = `${selectedItems.length} valda`;
       }
     } else {
-      this.label = selectedItems
-        .map(x => x.selectedLabel || x.label)
-        .reduce((xs, x) => xs = `${xs}, ${x}`)
-        || this.noItemSelectedLabel;
+      const labels = selectedItems.map(x => x.selectedLabel || x.label);
+      if (labels.length) {
+        this.label = labels.reduce((xs, x) => xs = `${xs}, ${x}`);
+      } else {
+        this.label = this.noItemSelectedLabel;
+      }
     }
   }
 }
