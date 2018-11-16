@@ -65,6 +65,7 @@ import { PageBlockDocumentationComponent } from './page-block-documentation/page
 import { ExamplesListwithpageblockComponent } from './examples-listwithpageblock/examples-listwithpageblock.component';
 import { PageHeaderDocumentationComponent } from './page-header-documentation/page-header-documentation.component';
 import { DropdownSelectDocumentationComponent } from './dropdown-select-documentation/dropdown-select-documentation.component';
+import { PaginationDocumentationComponent } from './pagination-documentation/pagination-documentation.component';
 
 @NgModule({
     declarations: [
@@ -113,7 +114,8 @@ import { DropdownSelectDocumentationComponent } from './dropdown-select-document
         PageBlockDocumentationComponent,
         PageHeaderDocumentationComponent,
         ExamplesListwithpageblockComponent,
-        DropdownSelectDocumentationComponent
+        DropdownSelectDocumentationComponent,
+        PaginationDocumentationComponent
     ],
     imports: [
         KomponentkartanModule,

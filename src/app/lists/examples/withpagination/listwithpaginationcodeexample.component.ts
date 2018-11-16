@@ -35,7 +35,27 @@ export class ListwithpaginationcodeexampleComponent implements OnInit {
         { id: '17', firstName: 'Stina', lastName: 'Jönsson', occupation: 'Skistar', income: 300000 } as ExamplePerson,
         { id: '18', firstName: 'Josefin', lastName: 'Björgen', occupation: 'Skistar', income: 450000 } as ExamplePerson,
         { id: '19', firstName: 'John', lastName: 'Borg', occupation: 'Tennis wizard', income: 230000 } as ExamplePerson,
-        { id: '20', firstName: 'Mats', lastName: 'Edberg', occupation: 'Tennis data', income: 600000 } as ExamplePerson
+        { id: '20', firstName: 'Mats', lastName: 'Edberg', occupation: 'Tennis data', income: 600000 } as ExamplePerson,
+        { id: '21', firstName: 'Git', lastName: 'Hubsson', occupation: 'Ninja codewarrior', income: 300000 } as ExamplePerson,
+        { id: '22', firstName: 'Stud', lastName: 'Visualizer', occupation: 'Black Dragon', income: 450000 } as ExamplePerson,
+        { id: '23', firstName: 'See', lastName: 'Charper', occupation: 'Chrome wizard', income: 230000 } as ExamplePerson,
+        { id: '24', firstName: 'IT-Lasse', lastName: 'Andersson', occupation: 'Data', income: 600000 } as ExamplePerson,
+        { id: '25', firstName: 'Zlatan', lastName: 'Abrahamsson', occupation: 'Ninja codewarrior', income: 300000 } as ExamplePerson,
+        { id: '26', firstName: 'Henke', lastName: 'Olsson', occupation: 'Black Dragon', income: 450000 } as ExamplePerson,
+        { id: '27', firstName: 'Tom', lastName: 'Hyssen', occupation: 'Chrome forward', income: 230000 } as ExamplePerson,
+        { id: '28', firstName: 'Glenn', lastName: 'Ströming', occupation: 'Data back', income: 600000 } as ExamplePerson,
+        { id: '29', firstName: 'Olle', lastName: 'Solkjaer', occupation: 'Ninja forward', income: 300000 } as ExamplePerson,
+        { id: '30', firstName: 'Ralf', lastName: 'Salah', occupation: 'Ninja forward', income: 450000 } as ExamplePerson,
+        { id: '31', firstName: 'Roland', lastName: 'Ronaldo', occupation: 'Soccer wizard', income: 230000 } as ExamplePerson,
+        { id: '32', firstName: 'Tor', lastName: 'Carew', occupation: 'Data forward', income: 600000 } as ExamplePerson,
+        { id: '33', firstName: 'Tommy', lastName: 'Brolin', occupation: 'Soccer warrior', income: 300000 } as ExamplePerson,
+        { id: '34', firstName: 'Martin', lastName: 'Sundin', occupation: 'Black Dragon', income: 450000 } as ExamplePerson,
+        { id: '35', firstName: 'Peder', lastName: 'Northug', occupation: 'Skistar wizard', income: 230000 } as ExamplePerson,
+        { id: '36', firstName: 'Lotten', lastName: 'Calla', occupation: 'Skistar', income: 600000 } as ExamplePerson,
+        { id: '37', firstName: 'Stina', lastName: 'Jönsson', occupation: 'Skistar', income: 300000 } as ExamplePerson,
+        { id: '38', firstName: 'Josefin', lastName: 'Björgen', occupation: 'Skistar', income: 450000 } as ExamplePerson,
+        { id: '39', firstName: 'John', lastName: 'Borg', occupation: 'Tennis wizard', income: 230000 } as ExamplePerson,
+        { id: '40', firstName: 'Mats', lastName: 'Edberg', occupation: 'Tennis data', income: 600000 } as ExamplePerson
     ];
 
     ngOnInit() {

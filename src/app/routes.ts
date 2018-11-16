@@ -46,6 +46,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { PageBlockDocumentationComponent } from './page-block-documentation/page-block-documentation.component';
 import { PageHeaderDocumentationComponent } from './page-header-documentation/page-header-documentation.component';
 import { DropdownSelectDocumentationComponent } from './dropdown-select-documentation/dropdown-select-documentation.component';
+import { PaginationDocumentationComponent } from './pagination-documentation/pagination-documentation.component';
 
 export const appRoutes: Routes = [
 
@@ -93,6 +94,7 @@ export const appRoutes: Routes = [
     { path: 'page-block', component: PageBlockDocumentationComponent },
     { path: 'page-header', component: PageHeaderDocumentationComponent },
     { path: 'dropdown-select', component: DropdownSelectDocumentationComponent },
+    { path: 'pagination-documentation', component: PaginationDocumentationComponent},
 
     { path: '**', redirectTo: '/' }
 ];

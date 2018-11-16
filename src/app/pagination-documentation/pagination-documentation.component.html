@@ -1,0 +1,86 @@
+<app-component-docs [componentName]="'Pagination'">
+
+  <div class="docs__overview">
+    <p>
+      Paging <code>&lt;vgr-pagination&gt;</code> är en grupp av kontroller
+      som används för att dela upp innehåll på flera sidor och navigera mellan dem.<br>
+    </p>
+    <br>
+    <!-- (lägg till som ny sektion) -->
+    <vgr-expandable-div [expanded]="true">
+      <vgr-expandable-div-header>
+        <span style="font-weight: bold">Design</span>
+      </vgr-expandable-div-header>
+      <vgr-expandable-div-content>
+        <p>
+          Paging används för att dela upp innehåll i flera sidor och får användas oavsett vilken typ av innehåll det
+          är.
+          Det är ett alternativ till andra sätt att dela upp innehåll såsom lazy loading.<br><br>
+
+          Paging visar max 7 sidnummer åt gången för att komponenten ska bli överblickbar.
+          Om det är fler än 7 sidor visas steg som inte syns som punkter (...). Första och sista sidnumret visas alltid
+          för att man snabbt ska kunna gå till första och sista sidan.
+          Det går att navigera mellan sidorna med antingen siffrorna eller knapparna längst ut. <br><br>
+
+          Antalet sidor sätts av implementatören.
+        </p>
+      </vgr-expandable-div-content>
+    </vgr-expandable-div>
+    <p> 
+      <br>Förändras med tema:
+      <strong>ja</strong>
+    </p> 
+  </div>
+
+  <div class="docs__examples">
+    <div class="column-layout">
+      <p><b>Kodexempel: </b></p>
+      <section [innerHTML]="samplePagination" highlight-js-content=".highlight"></section><br>
+    </div>
+    <p>
+      <a href="/listexample-pagination">Exempel på lista med paginering.</a>
+    </p>
+  </div>
+
+  <div class="docs__api">
+    <table class="property-table ">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>pages : number</td>
+        <td>Om paginering ska visas anges antal sidor som ska hanteras. Giltigt värde är ett eller större. Paginering
+          visas endast om värdet är strörre än ett.</td>
+        <td>[pages]="10"</td>
+      </tr>
+      <tr>
+        <td>activePage : number</td>
+        <td>Styr aktiv sida om paginering är vald ([pages] är satt). Giltigt värde är ett till [pages].</td>
+        <td>[activePage]="1"</td>
+      </tr>
+      <tr>
+        <td>pageChanged :<br> EventEmitter &lt;number&gt;</td>
+        <td>Event som triggas när aktiv sida ändras.</td>
+        <td>(pageChanged)="onPageChanged($event)"</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="docs__wcag">
+    <p>
+      Paging <code>&lt;vgr-pagination&gt;</code> består internt av ett antal element av typen button och har alla de
+      WCAG-egenskaper som
+      den typen har.<br><br>
+
+      Paging nås med tab och inom komponenten används piltangenterna för att förflytta fokus. Enter/space byter sida.
+      Det går inte att navigera till de punktade stegen.<br><br>
+
+      Internt sätts attributet aria-label för de olika knapparna för att förklara vilken sida som är aktiv och var
+      man hamnar om man byter sida. På det sidnummer som är aktivt ska aria-label sättas till “Du är på sida x av y”.
+      På ett inaktivt sidnummer ska aria-label sättas till “Gå till sida x av y”. På sista och första sidnumret ska
+      aria-label sättas till “Gå till första/sista sidan, sida x av y”
+    </p>
+  </div>
+</app-component-docs>
