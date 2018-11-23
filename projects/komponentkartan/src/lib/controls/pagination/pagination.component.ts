@@ -34,7 +34,9 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
       } else {
         this.setPageItems(this.activePage);
         if (activePageChange) {
-          this.focusedPageLabel = this.activePage.toString();
+          if (this.focusedPageLabel && (!this.focusedPageLabel.startsWith('Nästa sida') && !this.focusedPageLabel.endsWith('Föregående sida'))) {
+            this.focusedPageLabel = this.activePage.toString();
+          }
           this.pageChanged.emit(activePageChange.currentValue);
         }
       }
