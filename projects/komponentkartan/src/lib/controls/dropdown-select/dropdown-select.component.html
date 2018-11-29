@@ -1,29 +1,31 @@
 <div class="dropdown-select" [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
   <div class="validation">
-    <div #dropdown class="dropdown-select__control" [attr.aria-labelledby]="labelledbyid" [attr.aria-multiselectable]="multi"
-      [attr.aria-expanded]="expanded" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly" [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly': readonly, 'dropdown-select--disabled': disabled, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
+    <div #dropdown class="dropdown-select__control" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
+      [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly': readonly, 'dropdown-select--disabled': disabled, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
       (keydown)="onKeydown($event)" (focusin)="onFocus()" (focusout)="onBlur($event)">
-      <div #header class="dropdown-select__header" tabindex="0" aria-haspopup="listbox" (click)="toggleExpanded()"
-        (keydown)="onHeaderKeydown($event)">
-        <div class="dropdown-select__header__label noselect" id="{{labelledbyid}}" title="{{label}}">{{label}}</div>
+      <div #header class="dropdown-select__header" tabindex="0" aria-haspopup="listbox" [attr.aria-expanded]="expanded"
+        [attr.aria-labelledby]="combinedLabelIds" (click)="toggleExpanded()" (keydown)="onHeaderKeydown($event)">
+        <div class="dropdown-select__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
         <div class="dropdown-select__header__button">
           <div class="dropdown-select__header__button__icon"></div>
         </div>
       </div>
-      <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu">
+      <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu" role="listbox"
+        [attr.aria-labelledby]="labelId" [attr.aria-multiselectable]="multi">
         <div *ngIf="filterVisible || deselectable || multi" class="dropdown-select__menu__header">
           <div *ngIf="filterVisible" class="dropdown-select__menu__header__filter" [ngClass]="{ 'dropdown-select__menu__header__filter--focus': filterHasFocus }"
             (focusin)="onFilterFocus()" (focusout)="onFilterBlur()">
             <input #filter type="text" (keydown)="onFilterKeydown($event)" (input)="filterItems()">
           </div>
           <vgr-button #deselectButton *ngIf="deselectable && !multi" class="dropdown-select__menu__header__deselect"
-            [buttonStyle]="'discreet'" (click)="deselectItems()" (keydown)="onDeselectKeydown($event)">Ta bort val</vgr-button>
+            [buttonStyle]="'discreet'" [disabled]="deselectDisabled" (click)="deselectItems()" (keydown)="onDeselectKeydown($event)">Ta
+            bort val</vgr-button>
           <div #selectAll *ngIf="multi" class="dropdown-select__menu__header__select-all" tabindex="0" [ngClass]="{ 'select-all--selected': allSelected }"
             (click)="toggleSelectAll()" (keydown)="onSelectAllKeydown($event)">Välj alla</div>
         </div>
         <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-top"></div>
         <perfect-scrollbar [config]="scrollbarConfig">
-          <div class="dropdown-select__menu__items" role="listbox">
+          <div class="dropdown-select__menu__items">
             <div class="dropdown-select__menu__items__dimmer-padding"></div>
             <ng-content></ng-content>
             <div class="dropdown-select__menu__items__dimmer-padding"></div>

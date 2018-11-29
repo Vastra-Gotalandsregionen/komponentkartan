@@ -38,6 +38,9 @@ describe('[DropdownSelectComponent]', () => {
     it('formControlName is correct', () => {
       expect(component.formControlName).toBe(undefined);
     });
+    it('labelId is correct', () => {
+      expect(component.labelId).toBe(undefined);
+    });
     it('expanded is correct', () => {
       expect(component.expanded).toBe(false);
     });
@@ -46,6 +49,9 @@ describe('[DropdownSelectComponent]', () => {
     });
     it('allSelected is correct', () => {
       expect(component.allSelected).toBe(false);
+    });
+    it('deselectDisabled is correct', () => {
+      expect(component.deselectDisabled).toBe(true);
     });
     it('validationErrorMessage is correct', () => {
       expect(component.validationErrorMessage).toBe('Obligatorisk');
@@ -84,6 +90,14 @@ describe('[DropdownSelectComponent]', () => {
         expect(sameResult).toBe(true);
         expect(differentResult).toBe(false);
       });
+    });
+  });
+
+  describe('combinedLabelIds', () => {
+    it('is labelId and headerLabelId', () => {
+      component.labelId = 'someid';
+      const expectedValue = `${component.labelId} ${component.headerLabelId}`;
+      expect(component.combinedLabelIds).toBe(expectedValue);
     });
   });
 

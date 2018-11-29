@@ -3,7 +3,7 @@ import {
   Input, Output, EventEmitter, Optional, Host, SkipSelf, SimpleChanges, forwardRef
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -37,6 +37,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() compareWith = _defaultCompare;
   @Input() formControl: AbstractControl;
   @Input() formControlName: string;
+  @Input() labelId: string;
 
   @Output() selectedChanged = new EventEmitter<any>();
 
@@ -50,13 +51,20 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   expanded = false;
   filterVisible = false;
   allSelected = false;
+  deselectDisabled = true;
   validationErrorMessage = 'Obligatorisk';
-  labelledbyid: string = Guid.newGuid();
+  headerLabelId = Guid.newGuid();
   label = this.noItemSelectedLabel;
 
   hasFocus: boolean;
   filterHasFocus: boolean;
   scrollbarConfig: PerfectScrollbarConfig;
+
+  private matchQuery = '';
+
+  get combinedLabelIds() {
+    return `${this.labelId} ${this.headerLabelId}`;
+  }
 
   get errorActive() {
     return this.showValidation && this.formControl && this.formControl.invalid && !this.hasFocus;
@@ -81,17 +89,27 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         this.formControl = null;
       }
     }
+
+    if (changes['multi'] && this.items) {
+      this.setMultiOnItems();
+    }
   }
 
   ngAfterContentInit() {
     this.setFilterVisibility();
     this.subscribeToItems();
+    if (this.multi) {
+      this.setMultiOnItems();
+    }
 
     this.items.changes
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(_ => {
         this.setFilterVisibility();
         this.subscribeToItems();
+        if (this.multi) {
+          this.setMultiOnItems();
+        }
       });
   }
 
@@ -127,6 +145,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
           i.selected = false;
         }
       });
+      this.allSelected = selectedItems.length === this.items.length;
       this.setLabel(selectedItems);
     } else {
       let selectedItem: DropdownItemComponent;
@@ -139,6 +158,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         }
       });
       this.label = selectedItem ? selectedItem.selectedLabel || selectedItem.label : this.noItemSelectedLabel;
+      if (value) {
+        this.deselectDisabled = false;
+      } else {
+        this.disabled = true;
+      }
     }
   }
 
@@ -167,7 +191,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (this.expanded) {
       this.collapse();
     } else {
-      this.expand();
+      this.expanded = true;
     }
   }
 
@@ -189,8 +213,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (selecedItem) {
       selecedItem.selected = false;
       this.label = this.noItemSelectedLabel;
+      this.deselectDisabled = true;
       this.onChange(null);
     }
+    this.collapse();
   }
 
   toggleSelectAll() {
@@ -230,23 +256,112 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   onKeydown(event: KeyboardEvent) {
-    if (event.key === 'ArrowDown' || event.key === 'Down' || event.key === 'ArrowUp' || event.key === 'Up') {
+    if (event.key === 'ArrowDown' || event.key === 'Down' ||
+      event.key === 'ArrowUp' || event.key === 'Up') {
       event.preventDefault();
     }
 
-    if (event.altKey && (event.key === 'ArrowDown' || event.key === 'Down')) {
-      this.expand();
-    } else if (event.key === 'Escape' || event.key === 'Esc' ||
-      event.altKey && (event.key === 'ArrowUp' || event.key === 'Up')) {
+    if (event.key === 'Escape' || event.key === 'Esc') {
       this.collapse();
     } else if (event.key === 'Tab') {
       this.collapse(false);
+    } else if (this.multi && event.altKey && event.key === 'a') {
+      this.toggleSelectAll();
+    } else if (event.key === 'Home') {
+      if (this.filterVisible) {
+        setTimeout(() => {
+          this.filter.nativeElement.focus();
+        });
+      } else {
+        const filteredItems = this.items.filter(x => x.visible);
+        if (filteredItems.length) {
+          setTimeout(() => {
+            filteredItems[0].focus();
+          });
+        }
+      }
+    } else if (event.key === 'End') {
+      const filteredItems = this.items.filter(x => x.visible);
+      if (filteredItems.length) {
+        setTimeout(() => {
+          filteredItems[filteredItems.length - 1].focus();
+        });
+      }
     }
   }
 
   onHeaderKeydown(event: KeyboardEvent) {
-    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-      this.toggleExpanded();
+    if (event.key === 'Enter') {
+      this.expanded = true;
+
+      const selectedItems = this.items.filter(x => x.selected);
+      if (selectedItems.length) {
+        setTimeout(() => {
+          selectedItems[0].focus();
+        });
+      } else if (this.filterVisible) {
+        setTimeout(() => {
+          this.filter.nativeElement.focus();
+        });
+      } else if (this.items.length) {
+        setTimeout(() => {
+          this.items.toArray()[0].focus();
+        });
+      }
+    } else if (event.key === 'ArrowDown' || event.key === 'Down') {
+      this.expanded = true;
+
+      let lastSelectedIndex = -1;
+      const itemsArray = this.items.toArray();
+      for (let index = itemsArray.length - 1; index >= 0; index--) {
+        if (itemsArray[index].selected) {
+          lastSelectedIndex = index;
+          break;
+        }
+      }
+      if (lastSelectedIndex >= 0) {
+        const focusedIndex = lastSelectedIndex < this.items.length - 1
+          ? lastSelectedIndex + 1
+          : lastSelectedIndex;
+        setTimeout(() => {
+          itemsArray[focusedIndex].focus();
+        });
+      } else if (this.filterVisible) {
+        setTimeout(() => {
+          this.filter.nativeElement.focus();
+        });
+      } else if (this.items.length) {
+        setTimeout(() => {
+          itemsArray[0].focus();
+        });
+      }
+    } else if (event.key === 'ArrowUp' || event.key === 'Up') {
+      this.expanded = true;
+
+      let firstSelectedIndex = -1;
+      const itemsArray = this.items.toArray();
+      for (let index = 0; index < itemsArray.length; index++) {
+        if (itemsArray[index].selected) {
+          firstSelectedIndex = index;
+          break;
+        }
+      }
+      if (firstSelectedIndex >= 0) {
+        const focusedIndex = firstSelectedIndex > 0
+          ? firstSelectedIndex - 1
+          : 0;
+        setTimeout(() => {
+          itemsArray[focusedIndex].focus();
+        });
+      } else if (this.filterVisible) {
+        setTimeout(() => {
+          this.filter.nativeElement.focus();
+        });
+      } else if (this.items.length) {
+        setTimeout(() => {
+          itemsArray[0].focus();
+        });
+      }
     }
   }
 
@@ -259,6 +374,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   onFilterKeydown(event: KeyboardEvent) {
+    const filteredItems = this.items.filter(x => x.visible);
+
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       event.stopPropagation();
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
@@ -266,64 +383,42 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         this.selectAll.nativeElement.focus();
       } else if (this.deselectable) {
         this.deselectButton.focus();
-      } else if (this.items.length) {
-        this.items.toArray()[0].focus();
-      }
-    } else if (event.key === 'ArrowUp' || event.key === 'Up') {
-      if (this.items.length) {
-        this.items.toArray()[this.items.length - 1].focus();
-      } else if (this.multi) {
-        this.selectAll.nativeElement.focus();
-      } else if (this.deselectable) {
-        this.deselectButton.focus();
+      } else if (filteredItems.length) {
+        filteredItems[0].focus();
       }
     }
   }
 
   onDeselectKeydown(event: KeyboardEvent) {
+    const filteredItems = this.items.filter(x => x.visible);
+
     if (event.key === 'ArrowDown' || event.key === 'Down') {
-      if (this.items.length) {
-        this.items.toArray()[0].focus();
-      } else if (this.filterVisible) {
-        this.filter.nativeElement.focus();
+      if (filteredItems.length) {
+        filteredItems[0].focus();
       }
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
       if (this.filterVisible) {
         this.filter.nativeElement.focus();
-      } else if (this.items.length) {
-        this.items.toArray()[this.items.length - 1].focus();
       }
     }
   }
 
   onSelectAllKeydown(event: KeyboardEvent) {
+    const filteredItems = this.items.filter(x => x.visible);
+
     if (event.key === 'ArrowDown' || event.key === 'Down') {
-      if (this.items.length) {
-        this.items.toArray()[0].focus();
-      } else if (this.filterVisible) {
-        this.filter.nativeElement.focus();
+      if (filteredItems.length) {
+        filteredItems[0].focus();
       }
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
       if (this.filterVisible) {
         this.filter.nativeElement.focus();
-      } else if (this.items.length) {
-        this.items.toArray()[this.items.length - 1].focus();
       }
-    }
-  }
-
-  private expand() {
-    this.expanded = true;
-
-    const selectedItems = this.items.filter(x => x.selected);
-    if (selectedItems.length) {
-      setTimeout(() => {
-        selectedItems[0].focus();
-      });
-    } else if (this.items.length) {
-      setTimeout(() => {
-        this.items.toArray()[0].focus();
-      });
+    } else if (event.key === ' ' || event.key === 'Spacebar') {
+      this.toggleSelectAll();
+    } else if (event.key === 'Enter') {
+      this.toggleSelectAll();
+      this.collapse();
     }
   }
 
@@ -344,78 +439,110 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     this.filterVisible = this.items && this.items.length > 20;
   }
 
+  private setMultiOnItems() {
+    this.items.forEach(x => x.multi = this.multi);
+  }
+
   private subscribeToItems() {
     this.ngUnsubscribeItems.next();
     this.ngUnsubscribeItems.complete();
     this.ngUnsubscribeItems = new Subject();
 
-    this.items.forEach((item, index) => {
+    this.items.forEach(item => {
       item.previous
         .pipe(takeUntil(this.ngUnsubscribeItems))
-        .subscribe(() => this.focusPreviousItem(index));
+        .subscribe(() => this.focusPreviousItem(item));
 
       item.next
         .pipe(takeUntil(this.ngUnsubscribeItems))
-        .subscribe(() => this.focusNextItem(index));
+        .subscribe(() => this.focusNextItem(item));
 
-      item.selectedChanged
+      item.nextMatch
         .pipe(takeUntil(this.ngUnsubscribeItems))
-        .subscribe(selected => {
+        .subscribe(value => this.focusNextMatchingItem(item, value));
+
+      item.toggle
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(() => {
+          const selectedItems = this.items.filter(x => x.selected);
+          if (selectedItems.length) {
+            this.allSelected = selectedItems.length === this.items.length;
+            this.setLabel(selectedItems);
+            const values = selectedItems.map(x => x.value);
+            this.onChange(values);
+          } else {
+            this.allSelected = false;
+            this.label = this.noItemSelectedLabel;
+            this.onChange(null);
+          }
+        });
+
+      item.confirm
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(() => {
           if (this.multi) {
             const selectedItems = this.items.filter(x => x.selected);
-            if (selectedItems.length) {
-              this.allSelected = selectedItems.length === this.items.length;
-              this.setLabel(selectedItems);
-              const values = selectedItems.map(x => x.value);
-              this.onChange(values);
-            } else {
-              this.allSelected = false;
-              this.label = this.noItemSelectedLabel;
-              this.onChange(null);
-            }
+            this.allSelected = selectedItems.length === this.items.length;
+            this.setLabel(selectedItems);
+            const values = selectedItems.map(x => x.value);
+            this.onChange(values);
           } else {
-            if (selected) {
-              this.items.forEach(x => {
-                if (x !== item) {
-                  x.selected = false;
-                }
-              });
-              this.label = item.selectedLabel || item.label;
-              this.onChange(item.value);
-            } else {
-              item.selected = true;
-            }
-            this.collapse();
+            this.items.forEach(x => {
+              if (x !== item) {
+                x.selected = false;
+              }
+            });
+            this.label = item.selectedLabel || item.label;
+            this.deselectDisabled = false;
+            this.onChange(item.value);
           }
+          this.collapse();
         });
     });
   }
 
-  private focusPreviousItem(itemIndex: number) {
+  private focusPreviousItem(item: DropdownItemComponent) {
+    const filteredItems = this.items.filter(x => x.visible);
+    const itemIndex = filteredItems.findIndex(x => x === item);
+
     if (itemIndex > 0) {
-      this.items.toArray()[itemIndex - 1].focus();
+      filteredItems[itemIndex - 1].focus();
     } else if (this.multi) {
       this.selectAll.nativeElement.focus();
     } else if (this.deselectable) {
       this.deselectButton.focus();
     } else if (this.filterVisible) {
       this.filter.nativeElement.focus();
-    } else {
-      this.items.toArray()[this.items.length - 1].focus();
     }
   }
 
-  private focusNextItem(itemIndex: number) {
-    if (itemIndex < (this.items.length - 1)) {
-      this.items.toArray()[itemIndex + 1].focus();
-    } else if (this.filterVisible) {
-      this.filter.nativeElement.focus();
-    } else if (this.multi) {
-      this.selectAll.nativeElement.focus();
-    } else if (this.deselectable) {
-      this.deselectButton.focus();
-    } else {
-      this.items.toArray()[0].focus();
+  private focusNextItem(item: DropdownItemComponent) {
+    const filteredItems = this.items.filter(x => x.visible);
+    const itemIndex = filteredItems.findIndex(x => x === item);
+
+    if (itemIndex < (filteredItems.length - 1)) {
+      filteredItems[itemIndex + 1].focus();
+    }
+  }
+
+  private focusNextMatchingItem(item: DropdownItemComponent, query: string) {
+    if (!this.matchQuery) {
+      setTimeout(() => {
+        this.matchQuery = '';
+      }, 500);
+    }
+    this.matchQuery += query;
+    console.log(this.matchQuery);
+
+    const filteredItems = this.items.filter(x => x.visible);
+    const itemIndex = filteredItems.findIndex(x => x === item);
+
+    if (itemIndex < (filteredItems.length - 1)) {
+      const match = filteredItems.slice(itemIndex + 1).find(x => x.label.toLowerCase().startsWith(this.matchQuery));
+      if (match) {
+        const matchIndex = filteredItems.findIndex(x => x === match);
+        filteredItems[matchIndex].focus();
+      }
     }
   }
 

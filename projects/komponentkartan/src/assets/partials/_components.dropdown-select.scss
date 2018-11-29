@@ -172,16 +172,16 @@
           padding-right: $margin--regular;
           background: white;
           
-          &.dropdown-item--selected, &:focus, &:hover {
+          &.dropdown-item--selected, &.dropdown-item--focus, &:hover {
             font-weight: bold;
             letter-spacing: $font-size--small-letter-spacing-bold;
           }
           
-          &:focus {
+          &.dropdown-item--focus {
             outline: $focus-outline-width solid $focus-color;
           }
           
-          &:focus, &:hover {
+          &.dropdown-item--focus, &:hover {
             padding-left: $margin--regular - 4px;
             border-left-width: 4px;
             border-left-style: solid;
