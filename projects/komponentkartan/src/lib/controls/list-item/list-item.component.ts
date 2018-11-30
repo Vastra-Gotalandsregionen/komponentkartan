@@ -164,6 +164,12 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
+  triggerDeletedEvent() {
+    if (this.isDeleted) {
+      this.deleted.emit();
+    }
+  }
+
 
   handleNotifications(notification: SimpleChange) {
     // Hantera de olika notifieringstyperna
