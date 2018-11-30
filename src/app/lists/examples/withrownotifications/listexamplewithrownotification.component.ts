@@ -58,6 +58,10 @@ export class ListexamplewithrownotificationComponent {
     */
   }
 
+  deleteEvent() {
+    console.log('Delete event emittat');
+  }
+
   updateRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
     row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green');
   }
