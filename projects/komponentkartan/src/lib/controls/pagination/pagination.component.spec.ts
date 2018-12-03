@@ -58,7 +58,7 @@ describe('[PaginationComponent]', () => {
                     });
                     it('pageItem aria-labels are correct', () => {
                         const ariaLabels = component.pageItems.map(x => x.ariaLabel).toString();
-                        expect(ariaLabels).toBe(',Du är på sida 1 av 2,Gå till sista sidan, sida 2 av 2,Gå till nästa sida, sida 2 av 2');
+                        expect(ariaLabels).toBe('Gå till föregående sida,Du är på sida 1 av 2,Gå till sista sidan, sida 2 av 2,Gå till nästa sida, sida 2 av 2');
                     });
                     it('pageItem buttonIndexes are correct', () => {
                         const buttonIndexes = component.pageItems.map(x => x.buttonIndex);
