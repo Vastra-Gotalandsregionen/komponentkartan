@@ -265,9 +265,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       this.collapse();
     } else if (event.key === 'Tab') {
       this.collapse(false);
-    } else if (this.multi && event.altKey && event.key === 'a') {
+    } else if (this.multi && event.ctrlKey && event.key === 'a') {
+      event.preventDefault();
       this.toggleSelectAll();
     } else if (event.key === 'Home') {
+      event.preventDefault();
       if (this.filterVisible) {
         setTimeout(() => {
           this.filter.nativeElement.focus();
@@ -281,6 +283,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         }
       }
     } else if (event.key === 'End') {
+      event.preventDefault();
       const filteredItems = this.items.filter(x => x.visible);
       if (filteredItems.length) {
         setTimeout(() => {
@@ -528,22 +531,22 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private focusNextMatchingItem(item: DropdownItemComponent, query: string) {
     if (!this.matchQuery) {
       setTimeout(() => {
+        const filteredItems = this.items.filter(x => x.visible);
+        const itemIndex = filteredItems.findIndex(x => x === item);
+
+        if (itemIndex < (filteredItems.length - 1)) {
+          const match = filteredItems.slice(itemIndex + 1).find(x => x.label.toLowerCase().startsWith(this.matchQuery));
+          if (match) {
+            const matchIndex = filteredItems.findIndex(x => x === match);
+            filteredItems[matchIndex].focus();
+          }
+        }
+
         this.matchQuery = '';
-      }, 500);
+      }, 300);
     }
+
     this.matchQuery += query;
-    console.log(this.matchQuery);
-
-    const filteredItems = this.items.filter(x => x.visible);
-    const itemIndex = filteredItems.findIndex(x => x === item);
-
-    if (itemIndex < (filteredItems.length - 1)) {
-      const match = filteredItems.slice(itemIndex + 1).find(x => x.label.toLowerCase().startsWith(this.matchQuery));
-      if (match) {
-        const matchIndex = filteredItems.findIndex(x => x === match);
-        filteredItems[matchIndex].focus();
-      }
-    }
   }
 
   private setLabel(selectedItems: DropdownItemComponent[]) {
