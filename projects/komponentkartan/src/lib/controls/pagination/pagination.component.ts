@@ -122,7 +122,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
       buttonIndex: index,
       tabindex: -1,
       label: 'Föregående sida',
-      ariaLabel: activePage !== 1 ? `Gå till föregående sida, sida ${activePage - 1} av ${this.pages}` : ''
+      ariaLabel: activePage !== 1 ? `Gå till föregående sida, sida ${activePage - 1} av ${this.pages}` : 'Gå till föregående sida'
     } as PageItem;
 
     previousPageItem.action = () => {
@@ -210,7 +210,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
       buttonIndex: index,
       tabindex: -1,
       label: 'Nästa sida',
-      ariaLabel: activePage !== this.pages ? `Gå till nästa sida, sida ${activePage + 1} av ${this.pages}` : ''
+      ariaLabel: activePage !== this.pages ? `Gå till nästa sida, sida ${activePage + 1} av ${this.pages}` : 'Gå till nästa sida'
     } as PageItem;
 
     nextPageItem.action = () => {
