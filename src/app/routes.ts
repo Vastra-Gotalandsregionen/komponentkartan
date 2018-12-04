@@ -47,6 +47,8 @@ import { PageBlockDocumentationComponent } from './page-block-documentation/page
 import { PageHeaderDocumentationComponent } from './page-header-documentation/page-header-documentation.component';
 import { DropdownSelectDocumentationComponent } from './dropdown-select-documentation/dropdown-select-documentation.component';
 import { PaginationDocumentationComponent } from './pagination-documentation/pagination-documentation.component';
+import { ModaldialogComponent } from './modaldialog/modaldialog.component';
+import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 
 export const appRoutes: Routes = [
 
@@ -86,6 +88,7 @@ export const appRoutes: Routes = [
     { path: 'expandablediv', component: ExpandableDivComponent },
     { path: 'listexample-expandable-div', component: ListexamplewithexpandabledivComponent },
     { path: 'examples-listwithpageblock', component: ExamplesListwithpageblockComponent },
+    { path: 'examples-listwithcards', component: ExamplesListwithcardsComponent },
     { path: 'toggle-button', component: ToggleButtonComponent },
     { path: 'actionPanels', component: ActionPanelsComponent },
     { path: 'filter-tag', component: FilterTagComponent },
@@ -95,6 +98,7 @@ export const appRoutes: Routes = [
     { path: 'page-header', component: PageHeaderDocumentationComponent },
     { path: 'dropdown-select', component: DropdownSelectDocumentationComponent },
     { path: 'pagination-documentation', component: PaginationDocumentationComponent},
+    { path: 'modaldialog', component: ModaldialogComponent },
 
     { path: '**', redirectTo: '/' }
 ];

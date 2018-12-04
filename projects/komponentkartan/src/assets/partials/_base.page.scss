@@ -28,8 +28,11 @@ body {
   margin: 0;
   &.modal--open {
     overflow: hidden;
-    .page__page-body-container {
-      position: static;
+    /*.page__page-body-container {
+      position: absolute;
+    }*/
+    header.header, .sidebar-menu, .page-header {
+      z-index: auto;
     }
   }
 }
