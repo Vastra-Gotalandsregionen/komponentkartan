@@ -143,10 +143,15 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  closeTemporary() {
+  closeTemporary(notification) {
+    const type = notification ? notification.type : null;
     if (!this.temporaryNotification) {
       this.temporaryNotificationVisible = false;
       this.handleNotificatonColor();
+      if (type && type === NotificationType.ShowOnCollapse) {
+        this.notification = this.permanentNotification ? this.permanentNotification : null;
+        this.notificationChanged.emit(this.notification);
+      }
     }
   }
 

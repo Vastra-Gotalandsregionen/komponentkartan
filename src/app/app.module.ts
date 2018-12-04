@@ -66,6 +66,9 @@ import { ExamplesListwithpageblockComponent } from './examples-listwithpageblock
 import { PageHeaderDocumentationComponent } from './page-header-documentation/page-header-documentation.component';
 import { DropdownSelectDocumentationComponent } from './dropdown-select-documentation/dropdown-select-documentation.component';
 import { PaginationDocumentationComponent } from './pagination-documentation/pagination-documentation.component';
+import { ModaldialogComponent } from './modaldialog/modaldialog.component';
+import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
+import { UnitFilterPipe } from './examples-listwithcards/unitfilterpipe';
 
 @NgModule({
     declarations: [
@@ -114,8 +117,11 @@ import { PaginationDocumentationComponent } from './pagination-documentation/pag
         PageBlockDocumentationComponent,
         PageHeaderDocumentationComponent,
         ExamplesListwithpageblockComponent,
+        ExamplesListwithcardsComponent,
         DropdownSelectDocumentationComponent,
-        PaginationDocumentationComponent
+        PaginationDocumentationComponent,
+        ModaldialogComponent,
+        UnitFilterPipe
     ],
     imports: [
         KomponentkartanModule,
