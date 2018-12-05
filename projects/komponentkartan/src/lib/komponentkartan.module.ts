@@ -5,6 +5,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DecimalPipe, CommonModule } from '@angular/common';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
 // Common
 import * as type from './index';
 
@@ -25,7 +29,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RouterModule,
     PerfectScrollbarModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   declarations: [
     type.SafePipe,
@@ -96,7 +101,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.SearchResultComponent,
     type.DropdownItemComponent,
     type.PaginationComponent,
-    type.DropdownSelectComponent
+    type.DropdownSelectComponent,
+    type.IconComponent
   ],
   exports: [
     type.SafePipe,
@@ -167,7 +173,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.SearchResultComponent,
     type.DropdownItemComponent,
     type.PaginationComponent,
-    type.DropdownSelectComponent
+    type.DropdownSelectComponent,
+    type.IconComponent
   ],
   providers: [
     type.ModalService,
@@ -180,4 +187,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }
   ]
 })
-export class KomponentkartanModule { }
+export class KomponentkartanModule {
+  constructor() {
+    // Add an icon to the library for convenient access in other components
+    library.add(faCoffee);
+  }
+ }

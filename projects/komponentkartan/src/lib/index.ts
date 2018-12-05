@@ -65,6 +65,7 @@ export { ToggleButtonGroupComponent } from './controls/toggle-button/toggle-butt
 export { PaginationComponent } from './controls/pagination/pagination.component';
 export { DropdownSelectComponent } from './controls/dropdown-select/dropdown-select.component';
 export { DropdownItemComponent } from './controls/dropdown-select/dropdown-item.component';
+export { IconComponent } from './controls/icon/icon.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';
