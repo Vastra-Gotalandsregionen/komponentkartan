@@ -7,7 +7,8 @@ import { DecimalPipe, CommonModule } from '@angular/common';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 
 // Common
 import * as type from './index';
@@ -190,6 +191,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 export class KomponentkartanModule {
   constructor() {
     // Add an icon to the library for convenient access in other components
-    library.add(faCoffee);
+    library.add(fas, far);
   }
  }

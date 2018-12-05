@@ -10,6 +10,14 @@
         <br>Svg-bilderna är kopplade till en background-image för samtliga klasser i komponentkartans ikon-bibliotek.
       </p>
       <br>
+      <div >
+        <vgr-icon [faIcon]="'coffee'" [prefix]="'fas'" [size]="'xs'" [neutral]="true"></vgr-icon><br>
+        <vgr-icon [faIcon]="'coffee'" [disabled]="true" [prefix]="'fas'" [size]="'m'"></vgr-icon><br>
+        <vgr-icon [faIcon]="'star'" [prefix]="'fas'" [size]="'xs'"></vgr-icon><br>
+        <span (click)="fav = !fav" style="cursor: pointer;">
+          <vgr-icon [faIcon]="'star'" [prefix]="fav? 'fas' : 'far' " [size]="'m'"></vgr-icon>
+        </span><br>
+      </div>
       <br>
       <table class="property-table" style="width:50%">
         <tr>

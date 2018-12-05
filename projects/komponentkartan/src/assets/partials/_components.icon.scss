@@ -1,0 +1,11 @@
+﻿
+.icon {
+  @extend .color--primary;
+  &.icon--disabled {
+    color: $secondary-color--default;
+    cursor: default;
+  }
+  &.icon-neutral {
+    color:  $primary-color--default;
+  }
+}

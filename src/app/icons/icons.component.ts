@@ -18,6 +18,8 @@ export class IconsComponent implements OnInit {
   iconExamplesTS: string;
   iconExamplesTS2: string;
 
+  fav = false;
+
   constructor(htmlEncoder: HtmlEncodeService) {
 
     this.iconExamplesTS = htmlEncoder.prepareHighlightedSection(this.code, 'typescript');

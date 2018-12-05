@@ -1,17 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'vgr-icon',
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.css']
+  templateUrl: './icon.component.html'
 })
-export class IconComponent implements OnInit {
+export class IconComponent {
+  @Input() prefix: string;
   @Input() faIcon: string;
   @Input() size: string;
-
-  prefix = 'fas';
-
-  ngOnInit() {
-    // console.log(this.size);
-  }
+  @Input() neutral = false;
+  @Input() disabled = false;
 }
