@@ -5,9 +5,15 @@ import { Component, Input } from '@angular/core';
   templateUrl: './icon.component.html'
 })
 export class IconComponent {
-  @Input() prefix: string;
-  @Input() faIcon: string;
-  @Input() size: string;
+  @Input() icon: string;
+  @Input() prefix = 'fas';
+  @Input() size = '';
   @Input() neutral = false;
   @Input() disabled = false;
+  @Input() focusable = true;
+  @Input() ariaLabel = '';
+
+  get tabindex(): number {
+    return this.focusable ? 0 : -1;
+  }
 }

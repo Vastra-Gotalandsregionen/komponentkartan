@@ -19,6 +19,7 @@ export class IconsComponent implements OnInit {
   iconExamplesTS2: string;
 
   fav = false;
+  favButton = false;
 
   constructor(htmlEncoder: HtmlEncodeService) {
 
