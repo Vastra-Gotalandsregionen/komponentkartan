@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { IconComponent } from './icon.component';
 
@@ -6,20 +8,26 @@ describe('IconComponent', () => {
   let component: IconComponent;
   let fixture: ComponentFixture<IconComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((done) => {
+    TestBed.resetTestEnvironment();
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [ IconComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [IconComponent],
+      imports: [FontAwesomeModule]
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(IconComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    TestBed.overrideComponent(IconComponent, {
+      set: {
+        templateUrl: 'icon.component.html'
+      }
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    TestBed.compileComponents().then(() => {
+      fixture = TestBed.createComponent(IconComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+
+      done();
+    });
   });
 });
