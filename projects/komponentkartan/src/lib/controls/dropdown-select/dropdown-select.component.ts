@@ -161,7 +161,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       if (value) {
         this.deselectDisabled = false;
       } else {
-        this.disabled = true;
+        this.deselectDisabled = true;
       }
     }
   }
