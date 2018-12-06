@@ -4,12 +4,32 @@
   <vgr-page-body>
     <vgr-page-block>
       <h2>Dokumentation för tillgängliga ikoner i komponentkartan</h2>
-      <p>För att kunna använda sig utav de ikoner (svg-bilder) som finns i komponentkartan, så finns deras klassnamn representerade
+      <p>För att kunna använda sig utav de ikoner (svg-bilder) som finns i komponentkartan, så finns deras klassnamn
+        representerade
         i tabellen nedanför.
         <br>
         <br>Svg-bilderna är kopplade till en background-image för samtliga klasser i komponentkartans ikon-bibliotek.
       </p>
       <br>
+      <div>
+        <vgr-icon [icon]="'coffee'" [size]="'xs'" [ariaLabel]="'min kaffekopp'" [neutral]="true" ></vgr-icon> Solid [size]="'xs'", [neutral]="true"<br>
+        <vgr-icon [icon]="'coffee'" [disabled]="true"></vgr-icon> Solid [disabled]="true"<br>
+        <vgr-icon [icon]="'comment-dots'" [prefix]="'far'" [size]="'lg'"></vgr-icon> Regular [prefix]="'far'"
+        [size]="'lg'"<br>
+        <vgr-icon class="theme--red" [icon]="'star'" [focusable]="true"></vgr-icon><br>
+        <span (click)="fav = !fav" style="cursor: pointer;">
+          <vgr-icon [icon]="'star'" [prefix]="fav? 'fas' : 'far' "></vgr-icon>
+        </span><br><br>
+        Descreet button med ikon.<br>
+        <vgr-button [buttonStyle]="'discreet'" (click)="favButton = !favButton">
+          <vgr-icon [focusable]="false" [icon]="'star'" [prefix]="favButton ? 'fas' : 'far' "></vgr-icon>
+          Min favoritknapp
+        </vgr-button>
+        <vgr-button [buttonStyle]="'discreet'">
+            <vgr-icon [focusable]="false" [icon]="'coffee'"></vgr-icon>
+            Kaffe
+          </vgr-button><br>
+      </div>
       <br>
       <table class="property-table" style="width:50%">
         <tr>
