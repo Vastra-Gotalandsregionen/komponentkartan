@@ -93,6 +93,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (changes['multi'] && this.items) {
       this.setMultiOnItems();
     }
+
+    if (changes['noItemSelectedLabel'] && changes['noItemSelectedLabel'].firstChange || (this.items && !this.items.some(x => x.selected))) {
+      this.label = this.noItemSelectedLabel;
+    }
   }
 
   ngAfterContentInit() {
