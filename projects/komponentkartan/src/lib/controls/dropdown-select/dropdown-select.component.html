@@ -1,7 +1,7 @@
 <div class="dropdown-select" [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
   <div class="validation">
     <div #dropdown class="dropdown-select__control" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
-      [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly': readonly, 'dropdown-select--disabled': disabled, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
+      [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly': readonly, 'dropdown-select--disabled': disabled && !readonly, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
       (keydown)="onKeydown($event)" (focusin)="onFocus()" (focusout)="onBlur($event)">
       <div #header class="dropdown-select__header" tabindex="0" aria-haspopup="listbox" [attr.aria-expanded]="expanded"
         [attr.aria-labelledby]="combinedLabelIds" (click)="toggleExpanded()" (keydown)="onHeaderKeydown($event)">
