@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
 })
 export class IconComponent {
   @Input() icon: string;
-  @Input() prefix = 'fas';
+  @Input() solid = true;
   @Input() size = '';
   @Input() neutral = false;
   @Input() disabled = false;
@@ -15,5 +15,9 @@ export class IconComponent {
 
   get tabindex(): number {
     return this.focusable ? 0 : -1;
+  }
+
+  get prefix(): string {
+    return this.solid ? 'fas' : 'far';
   }
 }

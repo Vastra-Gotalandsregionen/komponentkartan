@@ -49,12 +49,14 @@ import { DropdownSelectDocumentationComponent } from './dropdown-select-document
 import { PaginationDocumentationComponent } from './pagination-documentation/pagination-documentation.component';
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
+import { IconDocumentationComponent } from './icon-documentation/icon-documentation.component';
 
 export const appRoutes: Routes = [
 
     { path: 'inputFields', component: InputfieldsComponent },
     { path: 'textareaField', component: TextareafieldComponent },
-    { path: 'icons', component: IconsComponent },
+    { path: 'icons-overview', component: IconsComponent },
+    { path: 'icons', component: IconDocumentationComponent },
     { path: 'textbuttons', component: TextbuttonsComponent },
     { path: 'radioButtons', component: RadiobuttonsComponent },
     { path: 'checkbox', component: CheckboxComponent },

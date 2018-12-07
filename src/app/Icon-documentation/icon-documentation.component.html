@@ -1,0 +1,145 @@
+<app-component-docs [componentName]="'Icon'">
+
+  <div class="docs__overview">
+    <p>
+      <code>&lt;vgr-icon&gt; </code><br><br>
+      <vgr-icon [icon]="'star'"></vgr-icon>
+    </p>
+    <br>
+    <p> Förändras med tema:
+      <strong>ja</strong>
+    </p>
+  </div>
+  <div class="docs__examples">
+    <div class="column-layout">
+      <div style="display: flex">
+        <div style="width: 40px">
+          <vgr-icon [icon]="'coffee'" [size]="'xs'" [ariaLabel]="'min kaffekopp'" [neutral]="true"></vgr-icon>
+        </div>
+        <div>
+          [icon]="'coffee'" [size]="'xs'" [neutral]="true"
+        </div>
+      </div>
+      <div style="display: flex">
+        <div style="width: 40px">
+          <vgr-icon [icon]="'coffee'" [disabled]="true"></vgr-icon>
+        </div>
+        <div>[icon]="'coffee'" [disabled]="true"</div>
+      </div>
+      <div style="display: flex">
+        <div style="width: 40px">
+          <vgr-icon [icon]="'comment-dots'" [solid]="false" [size]="'lg'"></vgr-icon>
+        </div>
+        <div>[icon]="'comment-dots'" [solid]="false" [size]="'lg'"</div>
+      </div>
+      <div style="display: flex">
+        <div style="width: 40px">
+          <vgr-icon class="theme--red" [icon]="'exclamation-circle'" [focusable]="true"></vgr-icon>
+        </div>
+        <div>[icon]="'star'" [focusable]="true" class="theme--red"</div>
+      </div>
+      <div style="display: flex">
+        <div style="width: 40px">
+          <span (click)="fav = !fav" style="cursor: pointer;">
+            <vgr-icon [icon]="'star'" [solid]="fav"></vgr-icon>
+          </span>
+        </div>
+        <div>[icon]="'star'" [solid]="favorite = !favorite"</div>
+      </div>
+      <h2>Diskreta knappar med ikon</h2>
+      <div>
+        <vgr-button [buttonStyle]="'discreet'" (click)="myFavoriteButton = !myFavoriteButton">
+          <vgr-icon [focusable]="false" [icon]="'star'" [solid]="myFavoriteButton"></vgr-icon>
+          Min favoritknapp
+        </vgr-button>
+        <vgr-button [buttonStyle]="'discreet'">
+          <vgr-icon [focusable]="false" [icon]="'trash-alt'" [solid]="false"></vgr-icon>
+        </vgr-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="docs__api">
+    <table class="property-table ">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>icon : string</td>
+        <td>Ikonens textkod. Möjliga värden är koder enligt Font Awsomes dokumetation för gratisikoner. Default inget
+          värde.</td>
+        <td>[icon]="'star'"</td>
+      </tr>
+      <tr>
+        <td>solid : boolean</td>
+        <td>Sätter om ikonen skall vara solid. Möjliga värden är true (solid) eller false (regular). Default är true.</td>
+        <td>[solid]="false"</td>
+      </tr>
+      <tr>
+        <td>size : string</td>
+        <td>Ikonens storlek. Möjliga värden är Font Awsomes dokumentation. Default tom sträng (följer elemetets
+          fontstorlek).</td>
+        <td>[size]="'xs'"</td>
+      </tr>
+      <tr>
+        <td>neutral : boolean</td>
+        <td>Tvingar ikonens färg till det neutrala temat. Default är false (följer temat).</td>
+        <td>[neutral]="false"</td>
+      </tr>
+      <tr>
+        <td>disabled : boolean</td>
+        <td>Visa ikon i som inaktiv. Default är false.</td>
+        <td>[disabled]="true"</td>
+      </tr>
+      <tr>
+        <td>focusable : boolean</td>
+        <td>Styr om ikonen skall vara fokuserbar. Default är true.</td>
+        <td>[focusable]="false"</td>
+      </tr>
+      <tr>
+        <td>areaLabel : string</td>
+        <td>Möjlighet att sätta en eget röstmeddelande på ikonens area-label. Default tom sträng .</td>
+        <td>[size]="'xs'"</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="docs__wcag">
+    <p>
+      <code>&lt;vgr-button&gt;</code> har en intern div vars roll är satt till button.
+    </p>
+    <br>
+    <p>Förutom rollen så används attributen:</p>
+    <ul class="doc-list">
+
+      <li>aria-disabled, om knappen är inaktiv eller aktiv </li>
+
+    </ul>
+    <br>
+    <p>Vid knappaktivering flyttas fokus beroende på vilken åtgärd som knappen utför. Till exempel:</p>
+    <ul class="doc-list">
+      <li>Om knappåtgärden öppnar en dialog, flyttas fokus till inuti dialogrutan.</li>
+      <li>Om knappåtgärden stänger en dialog, återgår fokus normalt till den knapp som öppnade dialogen, om inte
+        funktionen som
+        utförts i dialogrutan leder till ett annat element. Om du till exempel aktiverar en avbrytningsknapp i en
+        dialogruta
+        återgår fokus till knappen som öppnade dialogrutan. Om dialogrutan bekräftade åtgärden att radera den sida från
+        vilken
+        den öppnades skulle emellertid fokusen logiskt gå över till ett nytt element.
+      </li>
+      <li>Om knappåtgärden inte avvisar det aktuella sammanhanget, är fokus normalt kvar på knappen efter aktivering,
+        till exempel
+        en 'Tillämpa'-knapp.</li>
+      <li>Om knappåtgärden indikerar ett kontextbyte, till exempel att gå till nästa steg i en guide eller lägga till
+        ett annat
+        sökkriterium, är det ofta lämpligt att flytta fokus till utgångspunkten för den åtgärden.</li>
+      <li>Om knappen aktiveras med ett kortkommando, förblir fokus normalt i det sammanhang som kortkommandot användes.
+        Om till
+        exempel Alt + U aktiverar en "Upp" -knapp som flyttar det aktuella fokuserade objektet i en lista en position
+        högre
+        upp i listan, kommer Alt + U när fokus är i listan inte att flytta fokus från listan.</li>
+    </ul>
+  </div>
+</app-component-docs>

@@ -3,6 +3,14 @@ td {
   padding-right: 0;
 }
 
+.fa-icons {
+  display: flex;
+  margin-bottom: 4px;
+  & > *:first-child {
+    width: 40px;
+  }  
+}
+
 vgr-icon-question {
   width: 60px !important;
 }

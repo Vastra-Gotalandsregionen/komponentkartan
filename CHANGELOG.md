@@ -5,12 +5,15 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 4.0.0 (beta)
+- *Breaking change* Angular is upgraded to version 7.
 - *Breaking change* Dropdown and dropdown multiselect have been replaced by a declarative component called dropdown select.
 - *Breaking change* Added new discreet style to vgr-button. Input secondary is removed and replaced by buttonStyle. 
 - *Breaking change* In vgr-list the sort ascending/descening icons have been switched around to reflect how it's usually used.
+- *Breaking change* Added support for Font Awsome (free) as a pair dependency.
 - List (specially the notifications) have been remade and restyled.
 - Added a new component pagination.
 - Added pagination to list component.
+- Added a new component vgr-icon.
 - Fixed a CSS-bug in vgr-table component.
 
 ## 3.2.2 (beta)

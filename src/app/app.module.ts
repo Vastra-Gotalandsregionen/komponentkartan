@@ -46,6 +46,7 @@ import { ComponentDocsComponent } from './component-docs/component-docs.componen
 import { TitleValueComponent } from './title-value/title-value.component';
 import { FiltertexboxComponent } from './filtertexbox/filtertexbox.component';
 import { PageStructureComponent } from './page-structure/page-structure.component';
+import { IconDocumentationComponent } from './icon-documentation/icon-documentation.component';
 import { CardComponent } from './card/card.component';
 import { HtmlEncodeService } from './html-encode.service';
 import { SizesComponent } from './sizes/sizes.component';
@@ -53,7 +54,6 @@ import { MenuComponent } from './menu/menu.component';
 import { ExpandableDivComponent } from './expandable-div/expandable-div.component';
 import { ActionPanelsComponent } from './actionpanels/actionpanels.component';
 import { FilterTagComponent } from './filter-tag/filter-tag.component';
-
 import { ListexamplewithexpandabledivComponent } from './lists/examples/withexpandablediv/listexamplewithexpandablediv.component';
 import { TextareafieldComponent } from './textareaField/textareafield.component';
 import { IconsComponent } from './icons/icons.component';
@@ -96,6 +96,7 @@ import { UnitFilterPipe } from './examples-listwithcards/unitfilterpipe';
         TitleValueComponent,
         FiltertexboxComponent,
         PageStructureComponent,
+        IconDocumentationComponent,
         CardComponent,
         SizesComponent,
         MenuComponent,
