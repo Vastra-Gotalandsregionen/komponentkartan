@@ -13,8 +13,8 @@
       <br>
       <div><strong>Exempel på Font Awsome ikoner</strong></div>
       <div class="fa-icons">
-        <vgr-icon [icon]="'coffee'" [size]="'xs'" [ariaLabel]="'min kaffekopp'" [neutral]="true"></vgr-icon>
-        <span>[icon]="'coffee'" [size]="'xs'" [neutral]="true"</span>
+        <vgr-icon [icon]="'coffee'" [size]="'xs'" [ariaLabel]="'min kaffekopp'" [color]="'text'"></vgr-icon>
+        <span>[icon]="'coffee'" [size]="'xs'" [color]="'text'"</span>
       </div>
       <div class="fa-icons">
         <vgr-icon [icon]="'coffee'" [disabled]="true"></vgr-icon>
@@ -29,44 +29,44 @@
         <span>[icon]="'star'" [solid]="false"</span>
       </div>
       <div class="fa-icons">
-        <vgr-icon [neutral]="true" [icon]="'plus'" [size]="'xs'"></vgr-icon>
-        <span>[icon]="'plus'" [neutral]="true" [size]="'xs'"</span>
+        <vgr-icon [color]="'text'" [icon]="'plus'" [size]="'xs'"></vgr-icon>
+        <span>[icon]="'plus'" [color]="'text'" [size]="'xs'"</span>
       </div>
       <div class="fa-icons">
-        <vgr-icon [neutral]="true" [icon]="'minus'" [size]="'xs'"></vgr-icon>
-        <span>[icon]="'minus'" [neutral]="true" [size]="'xs'"</span>
+        <vgr-icon [color]="'text'" [icon]="'minus'" [size]="'xs'"></vgr-icon>
+        <span>[icon]="'minus'" [color]="'text'" [size]="'xs'"</span>
       </div>
       <div class="fa-icons">
-        <vgr-icon [neutral]="true" [icon]="'pen'"></vgr-icon>
-        <span>[icon]="'pen'" [neutral]="true"</span>
+        <vgr-icon [color]="'text'" [icon]="'pen'"></vgr-icon>
+        <span>[icon]="'pen'" [color]="'text'"</span>
       </div>
       <div class="fa-icons">
         <vgr-icon [icon]="'comment-dots'" [solid]="false" [size]="'lg'"></vgr-icon>
         <span>[icon]="'comment-dots'" [solid]="false" [size]="'lg'"</span>
       </div>
       <div class="fa-icons">
-        <vgr-icon [icon]="'trash-alt'" [solid]="false" [neutral]="true" [size]="'lg'"></vgr-icon>
-        <span>[icon]="'trash-alt'" [solid]="false" [neutral]="true" [size]="'lg'"</span>
+        <vgr-icon [icon]="'trash-alt'" [solid]="false" [color]="'text'" [size]="'lg'"></vgr-icon>
+        <span>[icon]="'trash-alt'" [solid]="false" [color]="'text'" [size]="'lg'"</span>
       </div>
       <div class="fa-icons">
-        <vgr-icon [icon]="'check-circle'" class="theme--green" [size]="'lg'"></vgr-icon>
-        <span>[icon]="'check-circle'" class="theme--green" [size]="'lg'"</span>
+        <vgr-icon [icon]="'check-circle'" [color]="'success'" [size]="'lg'"></vgr-icon>
+        <span>[icon]="'check-circle'" [color]="'success'" [size]="'lg'"</span>
       </div>
       <div class="fa-icons">
-        <vgr-icon [icon]="'check-circle'" [neutral]="true" [size]="'lg'"></vgr-icon>
-        <span>[icon]="'check-circle'" [neutral]="true" [size]="'lg'"</span>
+        <vgr-icon [icon]="'check-circle'" [color]="'text'" [size]="'lg'"></vgr-icon>
+        <span>[icon]="'check-circle'" [color]="'text'" [size]="'lg'"</span>
       </div>
       <div class="fa-icons">
-        <vgr-icon [icon]="'question-circle'" [neutral]="true" [size]="'lg'"></vgr-icon>
-        <span>[icon]="'question-circle'" [neutral]="true" [size]="'lg'"</span>
+        <vgr-icon [icon]="'question-circle'" [color]="'text'" [size]="'lg'"></vgr-icon>
+        <span>[icon]="'question-circle'" [color]="'text'" [size]="'lg'"</span>
       </div>
       <div class="fa-icons">
-        <vgr-icon [icon]="'exclamation-circle'" [neutral]="true" [size]="'lg'"></vgr-icon>
-        <span>[icon]="'exclamation-circle'" [neutral]="true" [size]="'lg'"</span>
+        <vgr-icon [icon]="'exclamation-circle'" [color]="'text'" [size]="'lg'"></vgr-icon>
+        <span>[icon]="'exclamation-circle'" [color]="'text'" [size]="'lg'"</span>
       </div>
       <div class="fa-icons">
-        <vgr-icon [icon]="'exclamation-circle'" [size]="'lg'" class="theme--red"></vgr-icon>
-        <span>[icon]="'exclamation-circle'" [size]="'lg'" class="theme--red"</span>
+        <vgr-icon [icon]="'exclamation-circle'" [size]="'lg'" [color]="'error'"></vgr-icon>
+        <span>[icon]="'exclamation-circle'" [size]="'lg'" [color]="'error'"</span>
       </div>
       <div>
         <br>
@@ -74,10 +74,6 @@
         <vgr-button [buttonStyle]="'discreet'" (click)="favoriteValue = !favoriteValue">
           <vgr-icon [focusable]="false" [icon]="'star'" [solid]="favoriteValue"></vgr-icon>
           Min favoritknapp
-        </vgr-button>
-        <vgr-button [buttonStyle]="'discreet'">
-          <vgr-icon [focusable]="false" [icon]="'coffee'"></vgr-icon>
-          Kaffe
         </vgr-button>
       </div>
       <br>

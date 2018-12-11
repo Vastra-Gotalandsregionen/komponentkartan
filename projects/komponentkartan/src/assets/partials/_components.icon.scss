@@ -1,11 +1,21 @@
 ﻿
-.icon {
+.icon {  
   @extend .color--primary;
+  outline: none;
+  &.icon-focusable:focus {
+    outline: $focus-outline-width solid $focus-color;
+  }
+  &.icon-color--text {
+    color: $text-color--default;
+  }
+  &.icon-color--success {
+    color: $primary-color--success;
+  }  
+  &.icon-color--error {
+    color: $primary-color--error;
+  }   
   &.icon--disabled {
     color: $secondary-color--default;
     cursor: default;
-  }
-  &.icon-neutral {
-    color:  $primary-color--default;
-  }
+  }   
 }

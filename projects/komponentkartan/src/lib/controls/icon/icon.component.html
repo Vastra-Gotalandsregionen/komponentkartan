@@ -1,3 +1,21 @@
-<span [ngClass]="{'icon-neutral': neutral, 'icon--disabled': disabled}" class="icon" [attr.aria-disabled]="disabled" tabindex="{{tabindex}}" [attr.aria-label]="'ikon ' + ariaLabel">
-  <fa-icon [icon]="[prefix, icon]" size="{{size}}"></fa-icon>
+<span class="icon" [ngClass]="{ 
+    'icon-color--text': color==='text', 
+    'icon-color--success': color==='success', 
+    'icon-color--error': color==='error',  
+    'icon--disabled': disabled,
+    'icon-focusable': focusable
+  }"
+  [attr.aria-disabled]="disabled" tabindex="{{tabindex}}" [attr.aria-label]="'ikon ' + ariaLabel">
+  <fa-icon 
+    [icon]="[prefix, icon]" 
+    [fixedWidth]="fixedWidth" 
+    [border]="border" 
+    [spin]="spin" 
+    [pulse]="pulse"
+    size="{{size}}" 
+    flip="{{flip}}" 
+    rotate="{{rotate}}" 
+    pull="{{pull}}"
+    >
+  </fa-icon>
 </span>

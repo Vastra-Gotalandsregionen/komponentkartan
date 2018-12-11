@@ -7,10 +7,17 @@ import { Component, Input } from '@angular/core';
 export class IconComponent {
   @Input() icon: string;
   @Input() solid = true;
+  @Input() color: 'primary';
   @Input() size = '';
-  @Input() neutral = false;
+  @Input() fixedWidth = false;
+  @Input() rotate: number;
+  @Input() flip: string;
+  @Input() pull: string;
+  @Input() spin = false;
+  @Input() pulse = false;
+  @Input() border = false;
   @Input() disabled = false;
-  @Input() focusable = true;
+  @Input() focusable = false;
   @Input() ariaLabel = '';
 
   get tabindex(): number {

@@ -1,0 +1,6 @@
+.icons-exemple {
+    display: flex;
+    & > *:first-child {
+        width: 40px;
+    }  
+}
