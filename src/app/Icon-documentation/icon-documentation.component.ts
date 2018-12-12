@@ -12,10 +12,10 @@ export class IconDocumentationComponent {
   iconHtmlExample: string;
   buttonHtmlExample: string;
   iconHtml = `  <vgr-icon (click)="setFavorite()" (keydown)="onKeydown($event)" style="cursor: pointer;" role="button"
-    [icon]="'star'" [solid]="fav" [focusable]="true" [ariaLabel]=" !fav? 'lägg till favorit' : 'ta bort favorit'">
+    [icon]="'star'" [solid]="fav" [ariaLabel]=" !fav? 'lägg till favorit' : 'ta bort favorit'">
   </vgr-icon>`;
   buttonHtml = `  <vgr-button [buttonStyle]="'discreet'" (click)="isMyFavorite = !isMyFavorite">
-    <vgr-icon [icon]="'star'" [focusable]="false" [solid]="isMyFavorite"></vgr-icon>Min favoritknapp
+    <vgr-icon [icon]="'star'" [solid]="isMyFavorite"></vgr-icon>Min favoritknapp
   </vgr-button>`;
 
   constructor(htmlEncoder: HtmlEncodeService) {

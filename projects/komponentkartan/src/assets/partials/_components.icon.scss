@@ -2,9 +2,6 @@
 .icon {  
   @extend .color--primary;
   outline: none;
-  &.icon-focusable:focus {
-    outline: $focus-outline-width solid $focus-color;
-  }
   &.icon-color--text {
     color: $text-color--default;
   }

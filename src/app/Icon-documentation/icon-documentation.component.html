@@ -18,34 +18,6 @@
   <div class="docs__examples">
     <div class="column-layout">
       <div class="icons-exemple">
-        <vgr-icon [icon]="'spinner'" [color]="'text'" [pulse]="true"></vgr-icon>
-        <span>[icon]="'spinner'" [color]="'text'" [pulse]="true"</span>
-      </div>
-      <div class="icons-exemple">
-        <vgr-icon [icon]="'circle-notch'" [color]="'text'" [spin]="true"></vgr-icon>
-        <span>[icon]="'spinner'" [color]="'text'" [spin]="true"</span>
-      </div>
-      <div class="icons-exemple">
-        <vgr-icon [icon]="'coffee'" [size]="'xs'" [color]="'text'" [flip]="'vertical'"></vgr-icon>
-        <span>[icon]="'coffee'" [size]="'xs'" [color]="'text'" [flip]="'vertical'"</span>
-      </div>
-      <div class="icons-exemple">
-        <vgr-icon [icon]="'coffee'" [size]="'lg'" [border]="true"></vgr-icon>
-        <span>[icon]="'coffee'" [border]="true"</span>
-      </div>
-      <div class="icons-exemple">
-        <vgr-icon [icon]="'coffee'" [color]="'text'" [pull]="'right'"></vgr-icon>
-        <span>[icon]="'coffee'" [color]="'text'" [pull]="'right'"</span>
-      </div>
-      <div class="icons-exemple">
-        <vgr-icon [icon]="'coffee'" [size]="'xs'" [color]="'text'" [rotate]="90"></vgr-icon>
-        <span>[icon]="'coffee'" [size]="'xs'" [color]="'text'" [rotate]="90"</span>
-      </div>
-      <div class="icons-exemple">
-        <span></span>
-        <span>-----------</span>
-      </div>
-      <div class="icons-exemple">
         <vgr-icon [icon]="'coffee'" [color]="'text'" [ariaLabel]="'min kaffekopp'"></vgr-icon>
         <span>[icon]="'coffee'" [color]="'text'" [ariaLabel]="'min kaffekopp'" </span>
       </div>
@@ -65,21 +37,21 @@
         <vgr-icon [icon]="'star'"></vgr-icon>
         <span>[icon]="'star'"</span>
       </div>
-      <strong>Klickbar ikon</strong>
+      <!-- <strong>Klickbar ikon</strong>
       <div>
         <div style="width: 40px">
           <vgr-icon (click)="setFavorite()" (keydown)="onKeydown($event)" style="cursor: pointer;" role="button" [icon]="'star'"
-            [solid]="fav" [focusable]="true" [ariaLabel]=" !fav? 'lägg till favorit' : 'ta bort favorit'">
+            [solid]="fav" [ariaLabel]=" !fav? 'lägg till favorit' : 'ta bort favorit'">
           </vgr-icon>
         </div>
       </div>
       <div>
         <section [innerHTML]="iconHtmlExample" highlight-js-content=".highlight"></section>
-      </div>
+      </div> -->
       <strong>Diskret knapp med ikon</strong>
       <div>
         <vgr-button [buttonStyle]="'discreet'" (click)="isMyFavorite = !isMyFavorite">
-          <vgr-icon [focusable]="false" [icon]="'star'" [solid]="isMyFavorite"></vgr-icon>
+          <vgr-icon [icon]="'star'" [solid]="isMyFavorite"></vgr-icon>
           Min favoritknapp
         </vgr-button>
       </div>
@@ -125,11 +97,6 @@
         <td>disabled: boolean</td>
         <td>Visar ikon i som inaktiv. Default är false.</td>
         <td>[disabled]="true"</td>
-      </tr>
-      <tr>
-        <td>focusable: boolean</td>
-        <td>Styr om ikonen skall vara fokuserbar. Default är false.</td>
-        <td>[focusable]="true"</td>
       </tr>
       <tr>
         <td>ariaLabel: string</td>

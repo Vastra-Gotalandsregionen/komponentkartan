@@ -2,10 +2,8 @@
     'icon-color--text': color==='text', 
     'icon-color--success': color==='success', 
     'icon-color--error': color==='error',  
-    'icon--disabled': disabled,
-    'icon-focusable': focusable
-  }"
-  [attr.aria-disabled]="disabled" tabindex="{{tabindex}}" [attr.aria-label]="'ikon ' + ariaLabel">
+    'icon--disabled': disabled
+  }" [attr.aria-disabled]="disabled" [attr.aria-label]="ariaLabel">
   <fa-icon 
     [icon]="[prefix, icon]" 
     [fixedWidth]="fixedWidth" 
