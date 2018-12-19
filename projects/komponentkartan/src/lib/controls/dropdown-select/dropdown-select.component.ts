@@ -149,7 +149,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
           i.selected = false;
         }
       });
-      this.allSelected = selectedItems.length === this.items.length;
+      this.allSelected = this.items.length && this.items.length === selectedItems.length;
       this.setLabel(selectedItems);
     } else {
       let selectedItem: DropdownItemComponent;
@@ -261,7 +261,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'ArrowDown' || event.key === 'Down' ||
-      event.key === 'ArrowUp' || event.key === 'Up') {
+      event.key === 'ArrowUp' || event.key === 'Up' ||
+      event.key === ' ' || event.key === 'Spacebar') {
       event.preventDefault();
     }
 
@@ -399,7 +400,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   onDeselectKeydown(event: KeyboardEvent) {
     const filteredItems = this.items.filter(x => x.visible);
 
-    if (event.key === 'ArrowDown' || event.key === 'Down') {
+    if (event.key === ' ' || event.key === 'Spacebar') {
+      this.deselectItems();
+    } else if (event.key === 'ArrowDown' || event.key === 'Down') {
       if (filteredItems.length) {
         filteredItems[0].focus();
       }
@@ -538,12 +541,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         const filteredItems = this.items.filter(x => x.visible);
         const itemIndex = filteredItems.findIndex(x => x === item);
 
-        if (itemIndex < (filteredItems.length - 1)) {
-          const match = filteredItems.slice(itemIndex + 1).find(x => x.label.toLowerCase().startsWith(this.matchQuery));
-          if (match) {
-            const matchIndex = filteredItems.findIndex(x => x === match);
-            filteredItems[matchIndex].focus();
-          }
+        const match =
+          filteredItems.slice(itemIndex + 1)
+            .concat(filteredItems.slice(0, itemIndex))
+            .find(x => x.label.toLowerCase().startsWith(this.matchQuery));
+
+        if (match) {
+          const matchIndex = filteredItems.findIndex(x => x === match);
+          filteredItems[matchIndex].focus();
         }
 
         this.matchQuery = '';
