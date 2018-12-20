@@ -55,6 +55,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   validationErrorMessage = 'Obligatorisk';
   headerLabelId = Guid.newGuid();
   label = this.noItemSelectedLabel;
+  selectAllLabel = 'Markera alla';
+  deselectAllLabel = 'Avmarkera alla';
+  toggleSelectAllLabel = this.selectAllLabel;
 
   hasFocus: boolean;
   filterHasFocus: boolean;
@@ -150,6 +153,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         }
       });
       this.allSelected = this.items.length && this.items.length === selectedItems.length;
+      this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
       this.setLabel(selectedItems);
     } else {
       let selectedItem: DropdownItemComponent;
@@ -228,11 +232,13 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       this.allSelected = false;
       this.items.forEach(x => x.selected = false);
       this.label = this.noItemSelectedLabel;
+      this.toggleSelectAllLabel = this.selectAllLabel;
       this.onChange(null);
     } else {
       this.allSelected = true;
       this.items.forEach(x => x.selected = true);
       this.setLabel(this.items.toArray());
+      this.toggleSelectAllLabel = this.deselectAllLabel;
       const values = this.items.map(x => x.value);
       this.onChange(values);
     }
@@ -477,6 +483,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
           const selectedItems = this.items.filter(x => x.selected);
           if (selectedItems.length) {
             this.allSelected = selectedItems.length === this.items.length;
+            this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
             this.setLabel(selectedItems);
             const values = selectedItems.map(x => x.value);
             this.onChange(values);
@@ -493,6 +500,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
           if (this.multi) {
             const selectedItems = this.items.filter(x => x.selected);
             this.allSelected = selectedItems.length === this.items.length;
+            this.toggleSelectAllLabel = this.allSelected ? this.selectAllLabel : this.deselectAllLabel;
             this.setLabel(selectedItems);
             const values = selectedItems.map(x => x.value);
             this.onChange(values);

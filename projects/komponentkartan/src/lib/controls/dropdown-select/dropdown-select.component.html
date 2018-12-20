@@ -20,8 +20,8 @@
           <vgr-button #deselectButton *ngIf="deselectable && !multi" class="dropdown-select__menu__header__deselect"
             [buttonStyle]="'discreet'" [disabled]="deselectDisabled" (click)="deselectItems()" (keydown)="onDeselectKeydown($event)">Ta
             bort val</vgr-button>
-          <div #selectAll *ngIf="multi" class="dropdown-select__menu__header__select-all" tabindex="0" [ngClass]="{ 'select-all--selected': allSelected }"
-            (click)="toggleSelectAll()" (keydown)="onSelectAllKeydown($event)">Välj alla</div>
+          <div #selectAll *ngIf="multi" class="dropdown-select__menu__header__select-all" tabindex="0" role="button"
+            [ngClass]="{ 'select-all--selected': allSelected }" (click)="toggleSelectAll()" (keydown)="onSelectAllKeydown($event)">{{toggleSelectAllLabel}}</div>
         </div>
         <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-top"></div>
         <perfect-scrollbar [config]="scrollbarConfig">
