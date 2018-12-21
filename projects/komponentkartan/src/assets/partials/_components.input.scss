@@ -2,6 +2,33 @@ $input-small-width--small: 130px;
 $input-small-width--medium: 140px;
 $validation-icon-size: 18px;
 $suffix-width: 30px;
+
+.readonly-container {  
+  min-height: 30px;
+  padding-right: $margin--slim;
+  padding-top: 2px;
+  border-width: 1px;  
+  border-color: $background-color--content;
+  cursor: text;
+  width: 100%;
+  max-width: none; 
+  .align-right & {
+    text-align: right;
+    width: $input-width--small + $suffix-width;
+    padding-right: $margin--slim;   
+    & .readonly-container__display-value  {
+      width: $input-width--small;
+      padding-right: 3px;     
+    } 
+  }
+  & .readonly-container__suffix {
+    padding-right: 15px;
+    width: $suffix-width;
+    font-style: italic;
+  }
+}
+
+
 .input-container {
   max-width: $input-width--small;
   width: $input-width--small;
@@ -32,12 +59,6 @@ input.input-container__textbox {
   .input-validation--suffixed & {
     padding-right: 5px;
   }
-  .readonly & {
-    border-color: $background-color--content;
-    cursor: text;
-  }
-  transition: border-color 0.6s linear;
-  padding-left: 0.6s linear;
 }
 
 .input-container__suffix-container {
@@ -55,10 +76,6 @@ input.input-container__textbox {
   padding-right: $margin--slim;
   padding-top: 2px;
   width: $suffix-width;
-  .readonly & {
-    border-color: $background-color--content;
-  }
-  transition: border-color 0.6s linear;
 }
 
 .input-container__suffix-container__suffix {
@@ -128,6 +145,8 @@ input.input-container__textbox {
     }
   }
 }
+
+
 
 .input-validation_status {
   margin-top: 4px;
