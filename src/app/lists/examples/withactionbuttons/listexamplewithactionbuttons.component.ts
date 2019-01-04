@@ -58,7 +58,8 @@ export class ListExampleWithActionButtonsComponent {
         }
     }
 
-    onDeleteRow(row: any) {
+    onDeleteRow(event, row: any) {
+        event.stopPropagation();
         this.removeRow(row);
     }
 
