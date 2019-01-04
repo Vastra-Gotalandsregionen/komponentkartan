@@ -1,5 +1,10 @@
 import { Component, HostBinding, ContentChildren, AfterViewInit, QueryList, Input, Output, EventEmitter } from '@angular/core';
 
+export enum SortDirection {
+  None,
+  Ascending,
+  Descending
+}
 
 @Component({
   templateUrl: './list-column-header.component.html',
@@ -57,10 +62,4 @@ export class ListColumnHeaderComponent {
     }
     this.sortChanged.emit(this.sortDirection);
   }
-}
-
-export enum SortDirection {
-  None,
-  Ascending,
-  Descending
 }

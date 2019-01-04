@@ -25,7 +25,7 @@ import { trigger, style, transition, animate, state } from '@angular/animations'
 })
 export class ExpandableDivComponent {
     @HostBinding('class.expandable-div--collapsed') collapsed = true;
-    @HostBinding('class.expandable-div--expanded') _expanded: boolean = false;
+    @HostBinding('class.expandable-div--expanded') _expanded = false;
     @HostBinding('class.expandable-div') expandableDivClass = true;
     @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 

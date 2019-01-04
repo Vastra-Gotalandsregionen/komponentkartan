@@ -5,7 +5,7 @@ export class BrowserDetector {
 
     constructor() {
 
-    };
+    }
 
     isInternetExplorer(): boolean {
         const ua = window.navigator.userAgent;
