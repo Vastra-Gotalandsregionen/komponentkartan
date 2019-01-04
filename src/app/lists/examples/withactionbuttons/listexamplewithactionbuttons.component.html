@@ -18,6 +18,32 @@
     <vgr-page-block>
       <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
+          <vgr-list-column-header width="4" sortKey="firstName">Förnamn</vgr-list-column-header>
+          <vgr-list-column-header width="3" sortKey="lastName">Efternamn</vgr-list-column-header>
+          <vgr-list-column-header width="3" align="right" sortKey="amount"><vgr-checkbox class="checkbox--inline"></vgr-checkbox>Årsbelopp</vgr-list-column-header>
+          <vgr-list-column-header width="1"></vgr-list-column-header>
+          <vgr-list-column-header-checkbox width="3" text="Markera alla" [checked]="allChecked" (checkedChanged)="onSelectAllChanged($event)"></vgr-list-column-header-checkbox>
+          <vgr-list-column-header width="3"><vgr-checkbox [checked]="allChecked" (checkedChanged)="onSelectAllChanged($event)" label="Markera alla"></vgr-checkbox></vgr-list-column-header>
+        </vgr-list-header>
+        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" (deleted)="notifyOnDelete(row)">
+          <vgr-list-item-header>
+            <vgr-list-column width="4">{{row.previewObject.firstName}}</vgr-list-column>
+            <vgr-list-column width="3">{{row.previewObject.lastName}}</vgr-list-column>
+            <vgr-list-column width="3" align="right">{{row.previewObject.amount | number:'2.2-2':'sv'}}</vgr-list-column>
+            <!-- <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (delete)="onDeleteRow(row)" width="1"></vgr-list-column-trashcan> -->
+            <vgr-list-column><vgr-icon icon="trash-alt" [solid]="false" color="text" size="lg" [disabled]="row.previewObject.deleted" (click)="onDeleteRow($event,row)"></vgr-icon></vgr-list-column>
+            <vgr-list-column-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected"
+              (checkedChanged)="onSelectRowChanged(row, $event)" width="3"></vgr-list-column-checkbox>
+            <vgr-list-column width="3"><vgr-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected" (checkedChanged)="onSelectRowChanged(row, $event)"></vgr-checkbox></vgr-list-column>
+          </vgr-list-item-header>
+          <vgr-list-item-content>
+            <span>Mer information</span>
+          </vgr-list-item-content>
+        </vgr-list-item>
+      </vgr-list>
+
+      <!-- <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
+        <vgr-list-header>
           <vgr-list-column-header width="8" sortKey="firstName">Förnamn</vgr-list-column-header>
           <vgr-list-column-header width="5" sortKey="lastName">Efternamn</vgr-list-column-header>
           <vgr-list-column-header width="3" align="right" sortKey="amount">Årsbelopp</vgr-list-column-header>
@@ -30,14 +56,14 @@
             <vgr-list-column width="5">{{row.previewObject.lastName}}</vgr-list-column>
             <vgr-list-column width="3" align="right">{{row.previewObject.amount | number:'2.2-2':'sv'}}</vgr-list-column>
             <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (delete)="onDeleteRow(row)" width="1"></vgr-list-column-trashcan>
-            <vgr-list-column-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected" (checkedChanged)="onSelectRowChanged(row, $event)"
-              width="3"></vgr-list-column-checkbox>
+            <vgr-list-column-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected"
+              (checkedChanged)="onSelectRowChanged(row, $event)" width="3"></vgr-list-column-checkbox>
           </vgr-list-item-header>
           <vgr-list-item-content>
             <span>Mer information</span>
           </vgr-list-item-content>
         </vgr-list-item>
-      </vgr-list>
+      </vgr-list> -->
       <br>
       <p>Du har valt {{ getSelectedRows() }} rader</p>
     </vgr-page-block>

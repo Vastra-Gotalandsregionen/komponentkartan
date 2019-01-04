@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added pagination to list component.
 - Added a new component vgr-icon.
 - Fixed a CSS-bug in vgr-table component.
+- Prepared for deprecating vgr-list-column-checkbox & vgr-list-column-header-checkbox.
 
 ## 3.2.2 (beta)
 - Changed modal-css to allow it to be placed outside of root.
