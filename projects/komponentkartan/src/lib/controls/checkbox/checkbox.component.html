@@ -3,5 +3,5 @@
 
   <div class="checkbox__image" [attr.aria-labelledby]="labelledbyid" role="checkbox" tabindex="0" [attr.aria-disabled]="disabled"
     [attr.aria-checked]="checked"></div>
-  <label id="{{labelledbyid}}" class="checkbox__label">{{label}}</label>
+  <label id="{{labelledbyid}}" class="checkbox__label" *ngIf="label">{{label}}</label>
 </div>

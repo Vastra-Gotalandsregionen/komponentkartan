@@ -2,10 +2,10 @@
  * Instead, we will use the "label" that is associated with our textbox.
  * It will contain all of the checkbox graphics and behaviour */
 
-.checkbox {
+vgr-checkbox .checkbox {
   position: relative;
-  align-items: flex-start;
-  display: flex;
+  align-items: center;
+  display: flex !important;
   cursor: pointer;
   min-height: $component-height;
   &.checkbox--disabled {
@@ -21,10 +21,10 @@
   min-width: 16px;
   min-height: 16px;
   background: white;
-  margin-top: 7px;
   border: 2px solid $control-color--enabled;
   transition: border-color 0.6s linear;
   position: relative;
+  margin-right: $margin--slim;
   &:focus {
     outline: $focus-outline-width solid $focus-color;
   }
@@ -61,9 +61,9 @@
 }
 
 .checkbox__label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
   display: inline-block;
-  margin-left: $margin--slim;
-  margin-top: 3px;
   transition: color 0.6s linear;
   cursor: pointer;
   .checkbox--disabled & {
@@ -86,7 +86,7 @@
       }
     }
   }
-  .checkbox__label {
-    margin-left: $margin--regular;
+  .checkbox__image {
+    margin-right: $margin--regular;
   }
 }
