@@ -13,13 +13,7 @@ import {
 })
 export class ListExampleWithActionButtonsComponent {
 
-    public peopleRows: ExpandableRow<ExamplePerson, any>[] = [
-        new ExpandableRow<ExamplePerson, any>({ id: '1', firstName: 'Git', lastName: 'Hubsson', amount: 125000 }),
-        new ExpandableRow<ExamplePerson, any>({ id: '2', firstName: 'Adam', lastName: 'Lind', amount: 235000 }),
-        new ExpandableRow<ExamplePerson, any>({ id: '3', firstName: 'Bjarne', lastName: 'Chi', amount: 25000 }),
-        new ExpandableRow<ExamplePerson, any>({ id: '4', firstName: 'Carola', lastName: 'Bengtsson', amount: 720000 }),
-        new ExpandableRow<ExamplePerson, any>({ id: '5', firstName: 'Erik', lastName: 'Karlsson', amount: 401200 }),
-    ];
+    public peopleRows: ExpandableRow<ExamplePerson, any>[];
     typeScriptSimpleListMarkup: string;
     htmlSimpleListMarkup: string;
     examples: Examples = new Examples();
