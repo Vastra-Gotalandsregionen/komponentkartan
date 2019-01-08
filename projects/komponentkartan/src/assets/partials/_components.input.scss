@@ -170,7 +170,7 @@ input.input-container__textbox {
   width: auto;
   max-width: none;   
   & .readonly-container__suffix {
-    padding-right: 15px;
+    padding-right: 16px;
     width: $suffix-width;
     font-style: italic;
   }
@@ -183,8 +183,6 @@ input.input-container__textbox {
     width: $input-width--small + $suffix-width;
     padding-right: 31px; 
     & .readonly-container__display-value  {
-      // margin-left: -1px;
-      // margin-right: -1px;
       width: $input-width--small;
       padding-right: 4px;     
     } 
