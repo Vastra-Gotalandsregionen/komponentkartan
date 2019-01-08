@@ -174,9 +174,6 @@ input.input-container__textbox {
     width: $suffix-width;
     font-style: italic;
   }
-  & .no-wrap {
-    white-space: nowrap;
-  }
   .align-right & {
     text-align: right;
     padding-left: 0px;

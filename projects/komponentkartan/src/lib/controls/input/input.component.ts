@@ -40,7 +40,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() readonly?: boolean;
   @Input() small: boolean;
   @Input() alignRight: boolean;
-  @Input() wrapText = true;
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
