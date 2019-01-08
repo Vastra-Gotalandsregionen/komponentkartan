@@ -10,7 +10,10 @@
       <br> - Visar suffix.
     </p>
     <br>
-    <vgr-input></vgr-input>
+    <div style="width: 700px">
+      <vgr-input [readonly]="readonly" ></vgr-input><br> 
+      <vgr-button (click)="readonly = !readonly">Readonly</vgr-button>
+    </div>
     <br>
     <p>Förändras med tema:
       <strong>nej</strong>
@@ -18,7 +21,8 @@
   </div>
 
   <div class="docs__examples">
-    <p>Ändra storleken på inputfälten:</p>
+      <vgr-button (click)="readonly = !readonly">Readonly</vgr-button>
+      <p>Ändra storleken på inputfälten:</p>
     <vgr-radio-group [options]="[{value:'Stor', displayName:'Stor', selected:true},{value:'Liten', displayName:'Liten'}]" (selectedChanged)="toggleInputType($event)">
     </vgr-radio-group>
     <form [formGroup]="form">
@@ -26,7 +30,7 @@
         <div class="one-third">
           <div>
             Belopp 1 (2 decimaler)
-            <vgr-input formControlName="control1" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
+            <vgr-input [readonly]="readonly" formControlName="control1" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
               [errorMessage]="validationMessages.control1" [showValidation]="form.controls.control1.touched"></vgr-input>
             <span>Belopp 1: </span>
             <span>{{formatNumericValue(form.controls.control1.value)}}</span>
@@ -63,7 +67,7 @@
         <div class="one-third">
           <div>
             Max-längd 5 tecken
-            <vgr-input formControlName="control6" [maxlength]=5 [small]="isSmall" [showValidation]="form.controls.control6.touched"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control6" [maxlength]=5 [small]="isSmall" [showValidation]="form.controls.control6.touched"></vgr-input>
           </div>
           <div>
             Exakt 3 VERSALER (validera vid initiering)
@@ -84,7 +88,7 @@
           </div>
           <div>
             Långa felmeddelanden
-            <vgr-input formControlName="control10" [errorMessage]="validationMessages.control10" [small]="isSmall" [showValidation]="form.controls.control10.touched"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control10" [errorMessage]="validationMessages.control10" [small]="isSmall" [showValidation]="form.controls.control10.touched"></vgr-input>
           </div>
           <div>
             Readonly fält
@@ -92,14 +96,14 @@
           </div>
           <div>
             Ingen validering
-            <vgr-input formControlName="control12" [small]="isSmall"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control12" [small]="isSmall"></vgr-input>
           </div>
 
         </div>
         <div class="one-third">
           <div>
             Ange en storstad i USA (validera vid initiering)
-            <vgr-input formControlName="control13" [small]="isSmall" [errorMessage]="validationMessages.control13" [showValidation]="true"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control13" [small]="isSmall" [errorMessage]="validationMessages.control13" [showValidation]="true"></vgr-input>
             <span>Din stad: {{form.controls.control13.value}}</span>
           </div>
           <div>

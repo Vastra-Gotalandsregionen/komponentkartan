@@ -26,6 +26,7 @@ describe('[InputComponent]', () => {
   let component: InputComponent;
   let fixture: ComponentFixture<InputComponent>;
   let rootElement: DebugElement;
+  let validatedInputElement: DebugElement;
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -58,6 +59,7 @@ describe('[InputComponent]', () => {
   // Emulate OnSubmit
   describe('When initialized with invalid state and showValidation is false', () => {
     beforeEach(() => {
+      validatedInputElement = rootElement.query(By.css('.validated-input'));
       component.control = new FormControl('', { validators: [Validators.required], updateOn: 'submit' });
       component.errorMessage = 'error';
       component.formatNumber = true;
@@ -68,13 +70,13 @@ describe('[InputComponent]', () => {
     });
 
     it('CSS Class validated-input has been applied', () => {
-      expect(rootElement.classes['validated-input']).toEqual(true);
+      expect(validatedInputElement).toBeTruthy();
     });
 
     it('no CSS Class validation-error has been applied', () => {
-      expect(rootElement.classes['validation-error--editing']).toEqual(false);
-      expect(rootElement.classes['validation-error--active']).toEqual(false);
-      expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+      expect(validatedInputElement.classes['validation-error--editing']).toEqual(false);
+      expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
+      expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
     });
 
     it('There is an error message section', () => {
@@ -90,7 +92,7 @@ describe('[InputComponent]', () => {
       });
 
       it('CSS Class validation-error--active has been applied', () => {
-        expect(rootElement.classes['validation-error--active']).toEqual(true);
+        expect(validatedInputElement.classes['validation-error--active']).toEqual(true);
       });
 
       describe('When input is focused', () => {
@@ -100,9 +102,9 @@ describe('[InputComponent]', () => {
           fixture.detectChanges();
         });
         it('CSS Class validation-error--editing has been applied', () => {
-          expect(rootElement.classes['validation-error--editing']).toEqual(true);
-          expect(rootElement.classes['validation-error--active']).toEqual(false);
-          expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+          expect(validatedInputElement.classes['validation-error--editing']).toEqual(true);
+          expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
+          expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
         });
 
         describe('When input is focused and corrected', () => {
@@ -111,9 +113,9 @@ describe('[InputComponent]', () => {
             fixture.detectChanges();
           });
           it('CSS Class validation-error--editing has been applied', () => {
-            expect(rootElement.classes['validation-error--editing']).toEqual(true);
-            expect(rootElement.classes['validation-error--active']).toEqual(false);
-            expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+            expect(validatedInputElement.classes['validation-error--editing']).toEqual(true);
+            expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
+            expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
           });
 
           describe('When input is out of focus and still corrected', () => {
@@ -122,9 +124,9 @@ describe('[InputComponent]', () => {
               fixture.detectChanges();
             });
             it('CSS Class validation-error--active is still active', () => {
-              expect(rootElement.classes['validation-error--editing']).toEqual(false);
-              expect(rootElement.classes['validation-error--active']).toEqual(true);
-              expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+              expect(validatedInputElement.classes['validation-error--editing']).toEqual(false);
+              expect(validatedInputElement.classes['validation-error--active']).toEqual(true);
+              expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
             });
 
             describe('When submit is triggered with valid input', () => {
@@ -134,9 +136,9 @@ describe('[InputComponent]', () => {
                 rootElement.triggerEventHandler('submit', event);
               });
               it('Validation is not triggered', () => {
-                expect(rootElement.classes['validation-error--editing']).toEqual(false);
-                expect(rootElement.classes['validation-error--active']).toEqual(false);
-                expect(rootElement.classes['validation-error--fixed']).toEqual(true);
+                expect(validatedInputElement.classes['validation-error--editing']).toEqual(false);
+                expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
+                expect(validatedInputElement.classes['validation-error--fixed']).toEqual(true);
               });
             });
 
@@ -168,9 +170,9 @@ describe('[InputComponent]', () => {
         it('Validation is not triggered', () => {
           const element = rootElement.query(By.css('.input-validation_status__message'));
           expect(element.nativeElement.innerText).toEqual('error');
-          expect(rootElement.classes['validation-error--editing']).toEqual(false);
-          expect(rootElement.classes['validation-error--active']).toEqual(false);
-          expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+          expect(validatedInputElement.classes['validation-error--editing']).toEqual(false);
+          expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
+          expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
         });
 
         describe('When error is corrected first time', () => {
@@ -182,9 +184,9 @@ describe('[InputComponent]', () => {
             fixture.detectChanges();
           });
           it('Validation is not triggered', () => {
-            expect(rootElement.classes['validation-error--editing']).toEqual(false);
-            expect(rootElement.classes['validation-error--active']).toEqual(false);
-            expect(rootElement.classes['validation-error--fixed']).toEqual(false);
+            expect(validatedInputElement.classes['validation-error--editing']).toEqual(false);
+            expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
+            expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
           });
         });
       });

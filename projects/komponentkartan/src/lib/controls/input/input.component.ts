@@ -4,7 +4,6 @@ import {
   EventEmitter,
   forwardRef,
   Host,
-  HostBinding,
   Input,
   OnChanges,
   OnInit,
@@ -38,32 +37,30 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() value?: any;
   @Input() maxlength?: number;
   @Input() errorMessage = {};
-
-  @Input() @HostBinding('class.readonly') readonly?: boolean;
-  @Input() @HostBinding('class.input--small') small: boolean;
-  @Input() @HostBinding('class.align-right') alignRight: boolean;
+  @Input() readonly?: boolean;
+  @Input() small: boolean;
+  @Input() alignRight: boolean;
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
 
-  @HostBinding('class.validated-input') hasClass = true;
-  @HostBinding('class.validation-error--active') get errorClass() {
+  get errorClass() {
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
   }
-  @HostBinding('class.validation-error--editing') get editingClass() {
+  get editingClass() {
     return this.showValidation && this.control && this.control.invalid && this.hasFocus;
   }
-  @HostBinding('class.validation-error--fixed') get fixedClass() {
+  get fixedClass() {
     return this.showValidation && this.invalidOnFocus && this.control && this.control.valid && !this.hasFocus;
   }
 
+  control: AbstractControl;
   invalidOnFocus = false;
   hasFocus = false;
   swedishDecimalPipe: DecimalPipe;
   displayValue: string;
   currentErrorMessage: string;
   selectedErrorMessage: string;
-  control: AbstractControl;
 
   constructor(private errorHandler: ErrorHandler, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.blur = new EventEmitter<any>();
@@ -149,9 +146,9 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
 
   isNumber(value: any): boolean {
-    const pattern = '^[-,−]{0,1}(\\d{1,3}([,\\s.]\\d{3})*|\\d+)([.,]\\d+)?$';
-    const regexp = new RegExp(pattern);
-    return regexp.test(value);
+    // const pattern = /^[-−]?(\d{1,3}(\s\d{3})*|\d+)(,\d+)?$/; //TODO: (if we only will allow swedish format ?)
+    const pattern = /^[-,−]?(\d{1,3}([,.\s]\d{3})*|\d+)([.,]\d+)?$/;
+    return pattern.test(value);
   }
 
   onFocus(): void {
@@ -172,13 +169,13 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     return floatVal;
   }
 
-  private roundNumber(number: number) {
-    if (isNaN(number)) {
-      return number;
+  private roundNumber(value: number) {
+    if (isNaN(value)) {
+      return value;
     }
 
     const factor = Math.pow(10, this.nrOfDecimals);
-    const tempNumber = number * factor;
+    const tempNumber = value * factor;
     const roundedTempNumber = Math.round(tempNumber);
     return roundedTempNumber / factor;
   }
