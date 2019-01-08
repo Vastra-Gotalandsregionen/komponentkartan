@@ -151,7 +151,7 @@ describe('CheckboxComponent', () => {
     let checkboximage: DebugElement;
 
     beforeEach(() => {
-
+      component.label = 'Ettikett';
       checkboximage = rootElement.query(By.css('.checkbox__image'));
       fixture.detectChanges();
     });
