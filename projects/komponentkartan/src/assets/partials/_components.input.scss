@@ -34,9 +34,6 @@ input.input-container__textbox {
   .input-validation--suffixed & {
     padding-right: 5px;
   }
-  .readonly & {
-    transition: border-color 0.6s linear;
-  }
 }
 
 .input-container__suffix-container {
