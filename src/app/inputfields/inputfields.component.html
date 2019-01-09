@@ -11,8 +11,7 @@
     </p>
     <br>
     <div style="width: 700px">
-      <vgr-input [readonly]="readonly" ></vgr-input><br> 
-      <vgr-button (click)="readonly = !readonly">Readonly</vgr-button>
+      <vgr-input></vgr-input><br> 
     </div>
     <br>
     <p>Förändras med tema:
@@ -37,28 +36,28 @@
           </div>
           <div>
             Belopp 2 (2 decimaler)
-            <vgr-input formControlName="control2" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
+            <vgr-input [readonly]="readonly" formControlName="control2" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'kr'" [alignRight]="true" [small]="isSmall"
               [errorMessage]="validationMessages.control2" [showValidation]="form.controls.control2.touched"></vgr-input>
             <span>Belopp 2: </span>
             <span>{{formatNumericValue(form.controls.control2.value)}}</span>
           </div>
           <div>
             Procent (2 decimaler)
-            <vgr-input formControlName="control3" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'%'" [alignRight]="true" [small]="isSmall"
+            <vgr-input [readonly]="readonly" formControlName="control3" [formatNumber]="true" [nrOfDecimals]="2" [suffix]="'%'" [alignRight]="true" [small]="isSmall"
               [errorMessage]="validationMessages.control3" [showValidation]="form.controls.control3.touched"></vgr-input>
             <span>Procent: </span>
             <span>{{formatNumericValue(form.controls.control3.value)}}</span>
           </div>
           <div>
             Km (inga decimaler)
-            <vgr-input formControlName="control4" [formatNumber]="true" [nrOfDecimals]="0" [suffix]="'km'" [alignRight]="true" [small]="isSmall"
+            <vgr-input [readonly]="readonly" formControlName="control4" [formatNumber]="true" [nrOfDecimals]="0" [suffix]="'km'" [alignRight]="true" [small]="isSmall"
               [errorMessage]="validationMessages.control4" [showValidation]="form.controls.control4.touched"></vgr-input>
             <span>Km: </span>
             <span>{{formatNumericValue(form.controls.control4.value)}}</span>
           </div>
           <div>
             Numeriskt värde utan enhet
-            <vgr-input formControlName="control5" [formatNumber]="true" [alignRight]="true" [small]="isSmall" [errorMessage]="validationMessages.control5"
+            <vgr-input [readonly]="readonly" formControlName="control5" [formatNumber]="true" [alignRight]="true" [small]="isSmall" [errorMessage]="validationMessages.control5"
               [showValidation]="form.controls.control5.touched"></vgr-input>
             <span>Värde: </span>
             <span>{{formatNumericValue(form.controls.control5.value)}}</span>
@@ -71,17 +70,17 @@
           </div>
           <div>
             Exakt 3 VERSALER (validera vid initiering)
-            <vgr-input formControlName="control7" [errorMessage]="validationMessages.control7" [maxlength]="3" [small]="isSmall" [showValidation]="true"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control7" [errorMessage]="validationMessages.control7" [maxlength]="3" [small]="isSmall" [showValidation]="true"></vgr-input>
             <span>Värde: </span>
             <span>{{form.controls.control7.value}}</span>
           </div>
           <div>
             Mellan 2 och 6 tecken
-            <vgr-input formControlName="control8" [maxlength]=6 [errorMessage]="validationMessages.control8" [small]="isSmall" [showValidation]="form.controls.control8.touched"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control8" [maxlength]=6 [errorMessage]="validationMessages.control8" [small]="isSmall" [showValidation]="form.controls.control8.touched"></vgr-input>
           </div>
           <div>
             Heltal med enhet
-            <vgr-input formControlName="control9" [formatNumber]="true" [nrOfDecimals]="0" [suffix]="'st'" [errorMessage]="validationMessages.control9"
+            <vgr-input [readonly]="readonly" formControlName="control9" [formatNumber]="true" [nrOfDecimals]="0" [suffix]="'st'" [errorMessage]="validationMessages.control9"
               [alignRight]="true" [small]="isSmall"></vgr-input>
             <span>Antal: </span>
             <span>{{intValue + 0}}</span>
@@ -92,7 +91,7 @@
           </div>
           <div>
             Readonly fält
-            <vgr-input formControlName="control11" [readonly]="true" [small]="isSmall" [showValidation]="form.controls.control11.touched"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control11" [readonly]="true" [small]="isSmall" [showValidation]="form.controls.control11.touched"></vgr-input>
           </div>
           <div>
             Ingen validering
@@ -108,7 +107,7 @@
           </div>
           <div>
             E-postadress
-            <vgr-input formControlName="control14" [small]="isSmall" [errorMessage]="validationMessages.control14" [showValidation]="form.controls.control14.touched"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control14" [small]="isSmall" [errorMessage]="validationMessages.control14" [showValidation]="form.controls.control14.touched"></vgr-input>
           </div>
         </div>
       </div>

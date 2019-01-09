@@ -29,9 +29,13 @@ input.input-container__textbox {
   }
   .align-right & {
     text-align: right;
+    padding-right: 5px;
   }
   .input-validation--suffixed & {
     padding-right: 5px;
+  }
+  .readonly & {
+    transition: border-color 0.6s linear;
   }
 }
 
@@ -160,29 +164,32 @@ input.input-container__textbox {
 }
 
 .readonly-container {  
+  display: flex;
+  align-items: center;
   cursor: default;
   min-height: 30px;
   padding-right: $margin--slim;
   padding-left: 10px;
-  padding-top: 4px;
+  padding-top: 2px;
   border-width: 1px;  
   border-color: $background-color--content;
   width: auto;
   max-width: none;   
-  & .readonly-container__suffix {
-    padding-right: 16px;
-    width: $suffix-width;
-    font-style: italic;
-  }
   .align-right & {
-    text-align: right;
     padding-left: 0px;
     width: $input-width--small + $suffix-width;
-    padding-right: 31px; 
+    padding-right: 30px; 
     & .readonly-container__display-value  {
+      flex: 1;
+      text-align: right;
       width: $input-width--small;
       padding-right: 4px;     
     } 
+    & .readonly-container__suffix {
+      width: $suffix-width;
+      min-width: $suffix-width;
+      font-style: italic;
+    }
   }
   .input--small.align-right & {
     width: $input-small-width--small + $suffix-width;
@@ -223,7 +230,7 @@ input.input-container__textbox {
     }
   }
   .readonly-container {  
-    padding-top: 2px;
+    padding-top: 1px;
     .align-right & {
       width: $input-width--medium + $suffix-width;
       padding-right: 30px; 
