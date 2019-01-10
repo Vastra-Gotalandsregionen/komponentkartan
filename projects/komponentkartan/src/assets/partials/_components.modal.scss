@@ -20,7 +20,8 @@
   padding-top: 30px;
   padding-bottom: 20px;
   border: 1px solid #888;
-  width: 448px;
+  min-width: 450px;
+  max-width: 1080px;
   margin: auto;
   align-self: flex-start;
 }
@@ -52,6 +53,8 @@
 @media screen and (min-width: $desktop-width--medium) {
   .modal-content {
     padding-top: 38px;
+    min-width: 500px;
+    max-width: 1130px;
   }
   .modal-content__title {
     margin-bottom: 32px;
