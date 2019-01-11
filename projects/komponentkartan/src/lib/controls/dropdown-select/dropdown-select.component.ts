@@ -117,6 +117,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         if (this.multi) {
           this.setMultiOnItems();
         }
+        setTimeout(() => {
+          this.selectDefaultItems();
+        });
       });
   }
 
@@ -126,6 +129,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         this.writeValue(this.formControl.value);
       });
     }
+    setTimeout(() => {
+      this.selectDefaultItems();
+    });
   }
 
   ngOnDestroy() {
@@ -583,6 +589,25 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         this.label = labels.reduce((xs, x) => xs = `${xs}, ${x}`);
       } else {
         this.label = this.noItemSelectedLabel;
+      }
+    }
+  }
+
+  private selectDefaultItems() {
+    if (this.multi) {
+      const defaultItems = this.items.filter(x => x.default);
+      this.allSelected = defaultItems.length === this.items.length;
+      this.toggleSelectAllLabel = this.allSelected ? this.selectAllLabel : this.deselectAllLabel;
+      this.setLabel(defaultItems);
+      const values = defaultItems.map(x => x.value);
+      this.onChange(values);
+    } else {
+      const defaultItems = this.items.filter(x => x.default);
+      if (defaultItems.length) {
+        defaultItems[0].selected = true;
+        this.label = defaultItems[0].selectedLabel || defaultItems[0].label;
+        this.deselectDisabled = false;
+        this.onChange(defaultItems[0].value);
       }
     }
   }

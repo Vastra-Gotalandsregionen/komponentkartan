@@ -8,6 +8,7 @@ export class DropdownItemComponent implements AfterViewInit {
 
   @Input() selectedLabel: string;
   @Input() value: any;
+  @Input() default = false;
   @Output() toggle = new EventEmitter();
   @Output() confirm = new EventEmitter();
   @Output() previous = new EventEmitter();
@@ -59,7 +60,7 @@ export class DropdownItemComponent implements AfterViewInit {
     } else if (event.key === 'Enter') {
       this.selected = true;
       this.confirm.emit();
-    } else if (/^\w$/.test(event.key) && !event.ctrlKey && !event.altKey) {
+    } else if (/^[\wåäöÅÄÖ]$/.test(event.key) && !event.ctrlKey && !event.altKey) {
       this.nextMatch.emit(event.key);
     }
   }
