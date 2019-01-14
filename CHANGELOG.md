@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed a CSS-bug in vgr-table component.
 - Prepared for deprecating vgr-list-column-checkbox & vgr-list-column-header-checkbox.
 - The width for vgr-modal can increase between a min and max width by it's content.
+- Changed Input Readonly mode to handle text longer than the input width. Longer texts will wrap in its own containing element.
 
 ## 3.2.2 (beta)
 - Changed modal-css to allow it to be placed outside of root.
