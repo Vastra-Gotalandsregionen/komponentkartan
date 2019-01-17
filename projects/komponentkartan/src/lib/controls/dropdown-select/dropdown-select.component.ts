@@ -117,9 +117,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         if (this.multi) {
           this.setMultiOnItems();
         }
-        setTimeout(() => {
-          this.selectDefaultItems();
-        });
+        if (!this.formControl) {
+          setTimeout(() => {
+            this.selectDefaultItems();
+          });
+        }
       });
   }
 
@@ -128,10 +130,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       setTimeout(() => {
         this.writeValue(this.formControl.value);
       });
+    } else {
+      setTimeout(() => {
+        this.selectDefaultItems();
+      });
     }
-    setTimeout(() => {
-      this.selectDefaultItems();
-    });
   }
 
   ngOnDestroy() {
@@ -596,6 +599,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private selectDefaultItems() {
     if (this.multi) {
       const defaultItems = this.items.filter(x => x.default);
+      defaultItems.forEach(x => x.selected = true);
       this.allSelected = defaultItems.length === this.items.length;
       this.toggleSelectAllLabel = this.allSelected ? this.selectAllLabel : this.deselectAllLabel;
       this.setLabel(defaultItems);
