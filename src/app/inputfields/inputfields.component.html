@@ -11,26 +11,7 @@
       <br> - Visar suffix.
     </p>
     <br>
-    <div style="width: 600px">
-      <vgr-input [readonly]="readonly"></vgr-input><br>
-      <div style="display: flex">
-        <div><vgr-input [readonly]="readonly"></vgr-input></div><span>medium</span>
-      </div><br>
-      <div style="display: flex">
-        <vgr-input [small]="true" [readonly]="readonly"></vgr-input> <span>small</span>
-      </div><br>
-      <div style="display: flex">
-        <vgr-input [small]="true" [alignRight]="true" [readonly]="readonly"></vgr-input> <span>small alignRight</span>
-      </div><br>
-      <div style="display: flex">
-        <vgr-input [small]="true" [alignRight]="true" [suffix]="'SEK'" [readonly]="readonly"></vgr-input> <span>small alignRight</span>
-      </div><br>
-      <div style="display: flex">
-          <div ><vgr-input [alignRight]="true" [suffix]="'kr'" [readonly]="readonly"></vgr-input></div> <span>medium</span>
-      </div><br>
-    </div>
-    <br>
-    <vgr-button (click)="readonly = !readonly">Readonly</vgr-button>
+    <vgr-input [readonly]="readonly"></vgr-input><br>
     <p>Förändras med tema:
       <strong>nej</strong>
     </p>
