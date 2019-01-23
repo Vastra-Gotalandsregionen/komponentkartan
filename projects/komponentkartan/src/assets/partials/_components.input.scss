@@ -171,15 +171,15 @@ input.input-container__textbox {
   border-width: 1px;  
   border-color: $background-color--content;
   width: auto;
+  min-width: $input-width--small + $margin--fat;
   max-width: none;   
   .align-right & {
     padding-left: 0px;
-    width: $input-width--small + $suffix-width;
-    padding-right: 30px; 
+    padding-right: 20px; 
+    max-width: $input-width--small + $margin--fat;
     & .readonly-container__display-value  {
       flex: 1;
       text-align: right;
-      width: $input-width--small;
       padding-right: 4px;     
     } 
     & .readonly-container__suffix {
@@ -188,9 +188,10 @@ input.input-container__textbox {
       font-style: italic;
     }
   }
-  .input--small.align-right & {
-    width: $input-small-width--small + $suffix-width;
-  }  
+  .input--small & {
+    min-width: $input-small-width--small  + $margin--fat;
+    max-width: $input-small-width--small  + $margin--fat;
+  }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
@@ -228,17 +229,17 @@ input.input-container__textbox {
   }
   .readonly-container {  
     padding-top: 1px;
+    min-width: $input-width--medium + $margin--fat;
     .align-right & {
-      width: $input-width--medium + $suffix-width;
-      padding-right: 30px; 
+      max-width: $input-width--medium + $margin--fat;
       & .readonly-container__display-value  {
-        width: $input-width--medium;
         padding-right: 4px;     
       } 
     }
-    .input--small.align-right & {
-      width: $input-small-width--medium + $suffix-width;
-    }  
+    .input--small & {
+      min-width: $input-small-width--medium  + $margin--fat;
+      max-width: $input-small-width--medium  + $margin--fat;
+    } 
   }
 }
 
