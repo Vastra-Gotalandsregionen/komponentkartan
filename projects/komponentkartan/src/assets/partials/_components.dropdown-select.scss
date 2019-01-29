@@ -121,7 +121,7 @@
 
         .dropdown-select__menu__header__select-all {
           align-self: stretch;
-          color: $menu-text-color;
+          color: $text-color--default;
           margin-bottom: 10px;
           padding-top: 5px;
           padding-bottom: 5px;
@@ -165,7 +165,7 @@
         }
 
         .dropdown-select__menu__items__item {
-          color: $menu-text-color;
+          color: $text-color--default;
           padding-top: 5px;
           padding-bottom: 5px;
           padding-left: $margin--regular;
