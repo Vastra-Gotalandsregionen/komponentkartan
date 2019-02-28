@@ -24,9 +24,39 @@ describe('[ListComponent]', () => {
   });
   describe('when list is initialized with three items', () => {
 
-    const childItem1 = { setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
-    const childItem2 = { setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
-    const childItem3 = { setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), expandedChanged: new EventEmitter<boolean>() } as ListItemComponent;
+    const childItem1 = {
+      setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), expandedChanged: new EventEmitter<boolean>(),
+      toggleExpand(forceclose = false) {
+        if (!this.notInteractable) {
+          this.expanded = forceclose ? false : !this.expanded;
+          this.expandedChanged.emit(this.expanded);
+          this.notInteractable = true;
+          setTimeout(() => { this.notInteractable = false; }, 400);
+        }
+      }
+    } as ListItemComponent;
+    const childItem2 = {
+      setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), expandedChanged: new EventEmitter<boolean>(),
+      toggleExpand(forceclose = false) {
+        if (!this.notInteractable) {
+          this.expanded = forceclose ? false : !this.expanded;
+          this.expandedChanged.emit(this.expanded);
+          this.notInteractable = true;
+          setTimeout(() => { this.notInteractable = false; }, 400);
+        }
+      }
+    } as ListItemComponent;
+    const childItem3 = {
+      setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), expandedChanged: new EventEmitter<boolean>(),
+      toggleExpand(forceclose = false) {
+        if (!this.notInteractable) {
+          this.expanded = forceclose ? false : !this.expanded;
+          this.expandedChanged.emit(this.expanded);
+          this.notInteractable = true;
+          setTimeout(() => { this.notInteractable = false; }, 400);
+        }
+      }
+    } as ListItemComponent;
 
     beforeEach(() => {
       spyOn(listComponent.items, 'forEach').and.callFake(((callback: any) => [childItem1, childItem2, childItem3].forEach(callback)));
@@ -42,22 +72,37 @@ describe('[ListComponent]', () => {
     describe('and multiple expanded items is not allowed', () => {
       beforeEach(() => {
         listComponent.allowMultipleExpandedItems = false;
+        childItem1.notInteractable = false;
+        childItem2.notInteractable = false;
+        childItem3.notInteractable = false;
+        childItem1.expanded = false;
+        childItem2.expanded = false;
+        childItem3.expanded = false;
+        spyOn(childItem1, 'toggleExpand').and.callThrough();
+        spyOn(childItem2, 'toggleExpand').and.callThrough();
+        spyOn(childItem3, 'toggleExpand').and.callThrough();
       });
       describe('and a child item is expanded', () => {
         beforeEach(() => {
-          childItem1.expanded = true;
-          childItem1.expandedChanged.emit(true);
+          childItem1.toggleExpand();
         });
         it('the other items are collapsed', () => {
+          expect(childItem1.toggleExpand).toHaveBeenCalled();
+          expect(childItem1.expanded).toBe(true);
           expect(childItem2.expanded).toBe(false);
           expect(childItem3.expanded).toBe(false);
         });
         describe('and a different child item is expanded', () => {
           beforeEach(() => {
-            childItem2.expanded = true;
-            childItem2.expandedChanged.emit(true);
+            childItem1.expanded = false;
+            childItem2.expanded = false;
+            childItem3.expanded = true;
+            childItem2.toggleExpand();
           });
           it('the other items are collapsed', () => {
+            expect(childItem3.toggleExpand).toHaveBeenCalledWith(true);
+            expect(childItem2.toggleExpand).toHaveBeenCalled();
+            expect(childItem2.expanded).toBe(true);
             expect(childItem1.expanded).toBe(false);
             expect(childItem3.expanded).toBe(false);
           });
