@@ -61,10 +61,13 @@ export class ListComponent implements AfterContentInit, OnDestroy {
 
   subscribeEvents() {
     if (!this.allowMultipleExpandedItems) {
-      this.items.forEach(changedContainer => {
-        changedContainer.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((expanded: boolean) => {
+      this.items.forEach(listItem => {
+        listItem.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((expanded: boolean) => {
           if (expanded) {
-            this.items.filter(container => container !== changedContainer).forEach(otherContainer => otherContainer.expanded = false);
+            this.items.filter(x => x !== listItem && x.expanded === true)
+              .forEach(otherItem => {
+                otherItem.toggleExpand(true);
+              });
           }
         });
 
