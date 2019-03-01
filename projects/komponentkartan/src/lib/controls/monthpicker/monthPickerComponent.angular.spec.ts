@@ -536,8 +536,8 @@ describe('[MonthpickerComponent(Angular)]', () => {
     beforeEach(() => {
       component.expanded = false;
 
-      component.minDate = new Date(currentYear, 0, 1);
-      component.maxDate = new Date(currentYear, 1, 31);
+      component.minDate = new Date(currentYear, 2, 1);  // 1th of March
+      component.maxDate = new Date(currentYear, 3, 30); // 30th of April
       component.expanded = true;
       component.ngOnInit();
 
@@ -551,7 +551,7 @@ describe('[MonthpickerComponent(Angular)]', () => {
     });
     it('focused cell is disabled', () => {
       const focusedElement = rootElement.query(By.css(':focus'));
-      if (currentMonth > 1) {
+      if (currentMonth > 3) {
         expect(focusedElement.attributes['aria-disabled']).toBe('true');
       } else {
         expect(focusedElement.attributes['aria-disabled']).toBe('false');

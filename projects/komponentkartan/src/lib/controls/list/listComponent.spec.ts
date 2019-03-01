@@ -75,37 +75,38 @@ describe('[ListComponent]', () => {
         childItem1.notInteractable = false;
         childItem2.notInteractable = false;
         childItem3.notInteractable = false;
-        childItem1.expanded = false;
-        childItem2.expanded = false;
-        childItem3.expanded = false;
         spyOn(childItem1, 'toggleExpand').and.callThrough();
         spyOn(childItem2, 'toggleExpand').and.callThrough();
         spyOn(childItem3, 'toggleExpand').and.callThrough();
       });
       describe('and a child item is expanded', () => {
         beforeEach(() => {
+          childItem1.expanded = false;
+          childItem2.expanded = false;
+          childItem3.expanded = false;
           childItem1.toggleExpand();
         });
         it('the other items are collapsed', () => {
-          expect(childItem1.toggleExpand).toHaveBeenCalled();
+          expect(childItem1.toggleExpand).toHaveBeenCalledWith();
           expect(childItem1.expanded).toBe(true);
           expect(childItem2.expanded).toBe(false);
           expect(childItem3.expanded).toBe(false);
         });
-        describe('and a different child item is expanded', () => {
-          beforeEach(() => {
-            childItem1.expanded = false;
-            childItem2.expanded = false;
-            childItem3.expanded = true;
-            childItem2.toggleExpand();
-          });
-          it('the other items are collapsed', () => {
-            expect(childItem3.toggleExpand).toHaveBeenCalledWith(true);
-            expect(childItem2.toggleExpand).toHaveBeenCalled();
-            expect(childItem2.expanded).toBe(true);
-            expect(childItem1.expanded).toBe(false);
-            expect(childItem3.expanded).toBe(false);
-          });
+      });
+      describe('and a different child item is expanded', () => {
+        beforeEach(() => {
+          childItem1.expanded = true;
+          childItem2.expanded = false;
+          childItem3.expanded = true;
+          childItem2.toggleExpand();
+        });
+        it('the other items are collapsed', () => {
+          expect(childItem2.toggleExpand).toHaveBeenCalledWith();
+          expect(childItem2.expanded).toBe(true);
+          expect(childItem1.toggleExpand).toHaveBeenCalledWith(true);
+          expect(childItem3.toggleExpand).toHaveBeenCalledWith(true);
+          expect(childItem1.expanded).toBe(false);
+          expect(childItem3.expanded).toBe(false);
         });
       });
     });
@@ -114,7 +115,6 @@ describe('[ListComponent]', () => {
       beforeEach(() => {
         spyOn(childItem3, 'setFocusOnRow').and.callThrough();
         listComponent.setFocusOnPreviousRow(0);
-
       });
       it('setFocusOnPreviousRow toHaveBeenCalled ', () => {
         expect(listComponent.setFocusOnPreviousRow).toHaveBeenCalledWith(0);
