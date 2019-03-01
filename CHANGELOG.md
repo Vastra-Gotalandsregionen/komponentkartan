@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 4.0.1
+- Fixed a bug in List when multipleExpandedItems are not allowed and closing list-items did not emit any event. 
+
 ## 4.0.0 (beta)
 - *Breaking change* Angular is upgraded to version 7.
 - *Breaking change* Dropdown and dropdown multiselect have been replaced by a declarative component called dropdown select.
