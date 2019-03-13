@@ -5,6 +5,26 @@
 
 Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular
 
+# Releaser för Komponentkartan
+Komponentkartan planeras släppas i major-version fyra gånger per år, förutsatt att det finns någon funktionalitet som leder till breaking changes att släppa. 
+
+## Planerade släpp
+Under 2019 har följande datum satt för release av major-versioner
+* Version 5: 20 mars 2019 **utgår då det inte finns någon funktionalitet som medför major-version
+* Version 6: 22 maj 2019
+
+Det som kommer att ingå i de olika versionerna är ännu inte beslutat, men nedan finns en beskrivning av funktionalitet som troligtvis kan komma med i de släpp vi planerat under våren 2019. 
+
+### Version 5
+* Förbättringar i felmeddelande, eventuellt en egen komponent för felmeddelanden
+* Deklarativ radio group
+* Angular 8.0
+* Rättning av buggar
+
+
+**OBS detta är en uppskattning**
+
+
 ## Komma igång
 
 ### 0. Förutsättningar
