@@ -109,12 +109,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.onTouched = func;
   }
 
-  onChange(input: any) {
-    this.value = input;
-    if (this.control) {
-      this.control.setValue(this.value);
-    }
-  }
+  onChange() { }
 
   onTouched() { }
 
@@ -126,10 +121,8 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.onTouched();
     this.formatDisplayNumber();
 
-    this.onChange(this.value);
     this.hasFocus = false;
     this.blur.emit(event);
-
   }
 
   formatDisplayNumber() {
