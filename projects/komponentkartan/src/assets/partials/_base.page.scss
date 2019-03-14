@@ -23,16 +23,7 @@ body {
   font-stretch: normal;
   line-height: $line-height;
   letter-spacing: normal;
-  min-width: calc(#{$desktop-width__small} - 20px);
+  min-width: $desktop-width__small - 20px;
   height: 100%;
   margin: 0;
-  &.modal--open {
-    overflow: hidden;
-    /*.page__page-body-container {
-      position: absolute;
-    }*/
-    header.header, .sidebar-menu, .page-header {
-      z-index: auto;
-    }
-  }
 }

@@ -1,3 +1,15 @@
+<vgr-modal id="modal2">
+  <vgr-modal-header>Här kan du trycka på knappar om du gillar det.</vgr-modal-header>
+  <vgr-modal-content>
+    <vgr-button>Hahahah!</vgr-button>
+    <vgr-button>Hohohoho!</vgr-button>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal2')">Knapp 1</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal2')">Knapp 2</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+
 <app-component-docs [componentName]="'Modal dialog'">
   <div class="docs__overview">
     <code>&lt;vgr-modal&gt;</code>
@@ -11,17 +23,6 @@
     </p>
     <div style="margin-top: 20px;height:35px;">
       <vgr-button (click)="showOneButtonModalOverview()">Visa dialog!</vgr-button>
-      <vgr-modal id="modal2">
-        <vgr-modal-header>Här kan du trycka på knappar om du gillar det.</vgr-modal-header>
-        <vgr-modal-content>
-          <vgr-button>Hahahah!</vgr-button>
-          <vgr-button>Hohohoho!</vgr-button>
-        </vgr-modal-content>
-        <vgr-modal-footer>
-          <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal2')">Knapp 1</vgr-button>
-          <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal2')">Knapp 2</vgr-button>
-        </vgr-modal-footer>
-      </vgr-modal>
     </div>
     <br>
     <p> Förändras med tema:
@@ -66,7 +67,7 @@
 
   </div>
   <div class="docs__api">
-    Modal består av två delar. En komponent som läggs ytterst i DOM, med
+    Modal består av två delar. En komponent som läggs på samma nivå som vgr-page, med
     <code>&lt;vgr-modal&gt;</code>. Detta är en placeholder för det innehåll som sedan visas över applikationen. Den
     består i sin
     tur av tre delar,
