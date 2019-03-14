@@ -509,7 +509,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
           if (this.multi) {
             const selectedItems = this.items.filter(x => x.selected);
             this.allSelected = selectedItems.length === this.items.length;
-            this.toggleSelectAllLabel = this.allSelected ? this.selectAllLabel : this.deselectAllLabel;
+            this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
             this.setLabel(selectedItems);
             const values = selectedItems.map(x => x.value);
             this.onChange(values);
@@ -601,7 +601,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       const defaultItems = this.items.filter(x => x.default);
       defaultItems.forEach(x => x.selected = true);
       this.allSelected = defaultItems.length === this.items.length;
-      this.toggleSelectAllLabel = this.allSelected ? this.selectAllLabel : this.deselectAllLabel;
+      this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
       this.setLabel(defaultItems);
       const values = defaultItems.map(x => x.value);
       this.onChange(values);
