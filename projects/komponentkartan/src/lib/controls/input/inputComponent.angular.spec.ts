@@ -234,7 +234,7 @@ describe('[InputComponent]', () => {
       describe('When setting number value', () => {
         let element: DebugElement;
         beforeEach(() => {
-          component.control = new FormControl('', { validators: [Validators.required], updateOn: 'change' });
+          component.control = new FormControl('', { validators: [Validators.required], updateOn: 'blur' });
           component.formatNumber = true;
           component.readonly = false;
           component.nrOfDecimals = 1;
