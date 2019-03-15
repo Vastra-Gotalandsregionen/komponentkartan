@@ -101,7 +101,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     }
   }
 
-  registerOnChange(func: any) {
+  registerOnChange(func: (_: any) => void) {
     this.onChange = func;
   }
 
@@ -109,7 +109,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.onTouched = func;
   }
 
-  onChange() { }
+  onChange(value: any) { }
 
   onTouched() { }
 
