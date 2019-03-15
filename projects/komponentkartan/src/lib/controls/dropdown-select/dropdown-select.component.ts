@@ -117,7 +117,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         if (this.multi) {
           this.setMultiOnItems();
         }
-        if (!this.formControl) {
+        if (this.formControl) {
+          setTimeout(() => {
+            this.writeValue(this.formControl.value);
+          });
+        } else {
           setTimeout(() => {
             this.selectDefaultItems();
           });
