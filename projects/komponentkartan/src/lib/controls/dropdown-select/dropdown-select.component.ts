@@ -270,12 +270,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     this.hasFocus = false;
     this.collapse(false);
-
-    if (this.formControl) {
-      setTimeout(() => {
-        this.onTouched();
-      });
-    }
   }
 
   onKeydown(event: KeyboardEvent) {
@@ -288,7 +282,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (event.key === 'Escape' || event.key === 'Esc') {
       this.collapse();
     } else if (event.key === 'Tab') {
-      this.collapse(false);
+      this.collapse();
     } else if (this.multi && event.ctrlKey && event.key === 'a') {
       event.preventDefault();
       this.toggleSelectAll();
@@ -461,6 +455,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     if (focusHeader) {
       this.header.nativeElement.focus();
+    }
+
+    if (this.formControl) {
+      this.onTouched();
     }
   }
 
