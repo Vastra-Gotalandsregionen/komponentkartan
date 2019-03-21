@@ -1,5 +1,5 @@
 <div class="datepicker-new">
-  <div>{{selectedDate | date:'yyyy-MM-dd'}}</div>
+  <input [value]="label" [disabled]="!allowText" (change)="parseSelectedDate($event.target.value)"> 
   <vgr-button (click)="toggleExpanded()">
     <vgr-icon [icon]="'calendar-alt'" [color]="'success'" [size]="'lg'"></vgr-icon>
   </vgr-button>
