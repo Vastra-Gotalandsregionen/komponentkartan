@@ -1,0 +1,63 @@
+<div class="datepicker-new">
+  <div>{{selectedDate | date:'yyyy-MM-dd'}}</div>
+  <vgr-button (click)="toggleExpanded()">
+    <vgr-icon [icon]="'calendar-alt'" [color]="'success'" [size]="'lg'"></vgr-icon>
+  </vgr-button>
+  <div *ngIf="expanded" class="datepicker-new__calendar">
+    <div *ngIf="zoomedToDays">
+      <div>
+        <span (click)="days.previous()">&lt;</span>
+        <span (click)="days.zoomOut()">{{days.date | date:'MMM yyyy'}}</span>
+        <span (click)="days.next()">&gt;</span>
+      </div>
+      <table>
+        <tr>
+          <td>Må</td>
+          <td>Ti</td>
+          <td>On</td>
+          <td>To</td>
+          <td>Fr</td>
+          <td>Lö</td>
+          <td>Sö</td>
+        </tr>
+        <tr *ngFor="let row of days.items">
+          <td *ngFor="let item of row">
+            <span *ngIf="item" class="datepicker-new__calendar__item"
+              [ngClass]="{'datepicker-new__calendar__item--selected': item.selected, 'datepicker-new__calendar__item--current': item.current}"
+              (click)="item.onClick()">{{item.date | date:'d'}}</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="zoomedToMonths">
+      <div>
+        <span (click)="months.previous()">&lt;</span>
+        <span (click)="months.zoomOut()">{{months.date | date:'yyyy'}}</span>
+        <span (click)="months.next()">&gt;</span>
+      </div>
+      <table>
+        <tr *ngFor="let row of months.items">
+          <td *ngFor="let item of row" class="datepicker-new__calendar__item"
+            [ngClass]="{'datepicker-new__calendar__item--selected': item.selected, 'datepicker-new__calendar__item--current': item.current}"
+            (click)="item.onClick()">
+            {{item.date | date:'MMM'}}</td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="zoomedToYears">
+      <div>
+        <span (click)="years.previous()">&lt;</span>
+        <span (click)="years.next()">&gt;</span>
+      </div>
+      <table>
+        <tr *ngFor="let row of years.items">
+          <td *ngFor="let item of row" class="datepicker-new__calendar__item"
+            [ngClass]="{'datepicker-new__calendar__item--selected': item.selected, 'datepicker-new__calendar__item--current': item.current}"
+            (click)="item.onClick()">
+            {{item.date | date:'yyyy'}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+.datepicker-new {
+  .datepicker-new__calendar {
+    .datepicker-new__calendar__item {
+      &.datepicker-new__calendar__item--selected {
+        font-weight: bold;
+      }
+      &.datepicker-new__calendar__item--current {
+        color: red;
+      }
+    }
+  }
+}

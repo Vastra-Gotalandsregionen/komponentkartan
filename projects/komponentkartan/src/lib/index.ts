@@ -66,6 +66,7 @@ export { PaginationComponent } from './controls/pagination/pagination.component'
 export { DropdownSelectComponent } from './controls/dropdown-select/dropdown-select.component';
 export { DropdownItemComponent } from './controls/dropdown-select/dropdown-item.component';
 export { IconComponent } from './controls/icon/icon.component';
+export { DatepickerNewComponent } from './controls/datepicker-new/datepicker-new.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';
