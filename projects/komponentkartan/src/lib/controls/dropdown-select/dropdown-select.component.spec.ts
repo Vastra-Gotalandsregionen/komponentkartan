@@ -32,12 +32,6 @@ describe('[DropdownSelectComponent]', () => {
     it('showValidation is correct', () => {
       expect(component.showValidation).toBe(true);
     });
-    it('formControl is correct', () => {
-      expect(component.formControl).toBe(undefined);
-    });
-    it('formControlName is correct', () => {
-      expect(component.formControlName).toBe(undefined);
-    });
     it('labelId is correct', () => {
       expect(component.labelId).toBe(undefined);
     });
