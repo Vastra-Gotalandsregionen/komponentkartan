@@ -1,8 +1,8 @@
 import {
   Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
-  Input, Output, EventEmitter, Optional, Host, SkipSelf, SimpleChanges, forwardRef
+  Input, Output, EventEmitter, Optional, SimpleChanges, Self
 } from '@angular/core';
-import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -17,12 +17,7 @@ function _defaultCompare(o1: any, o2: any): boolean {
 
 @Component({
   selector: 'vgr-dropdown-select',
-  templateUrl: './dropdown-select.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DropdownSelectComponent),
-    multi: true
-  }]
+  templateUrl: './dropdown-select.component.html'
 })
 export class DropdownSelectComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 
@@ -35,8 +30,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() disabled = false;
   @Input() showValidation = true;
   @Input() compareWith = _defaultCompare;
-  @Input() formControl: AbstractControl;
-  @Input() formControlName: string;
   @Input() labelId: string;
 
   @Output() selectedChanged = new EventEmitter<any>();
@@ -80,19 +73,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
+  constructor(@Optional() @Self() private formControl: NgControl) {
+    if (this.formControl != null) {
+      this.formControl.valueAccessor = this;
+    }
     this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['formControlName']) {
-      if (this.formControlName && this.controlContainer) {
-        this.formControl = this.controlContainer.control.get(this.formControlName);
-      } else {
-        this.formControl = null;
-      }
-    }
-
     if (changes['multi'] && this.items) {
       this.setMultiOnItems();
     }
