@@ -5,6 +5,9 @@
   &.icon-color--text {
     color: $text-color--default;
   }
+  &.icon-color--light {
+    color: $text-color--light;
+  }
   &.icon-color--success {
     color: $primary-color--success;
   }  
