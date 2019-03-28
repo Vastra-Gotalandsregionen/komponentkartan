@@ -1,5 +1,45 @@
 .datepicker-new {
+  display: inline-block;
+  position: relative;
+
+  .datepicker-new__header {
+    height: $component-height;
+    // width: 270px;
+    display: flex;
+
+    &.datepicker-new__header--focus {
+      outline: $focus-outline-width solid $focus-color;
+    }
+
+    .datepicker-new__header__button {
+      @extend .background-color--primary;
+      padding-left: 5px;
+      padding-right: 5px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+  
   .datepicker-new__calendar {
+    position: absolute;
+    top: 42px;
+    z-index: $layer-four;
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
+    background-color: $background-color--content;
+    width: 330px;
+    cursor: default;
+    
+    &::before {
+      @extend .bg-image-menu-arrow;
+      content: "";
+      position: absolute;
+      display: inline-block;
+      z-index: $layer-four;
+      top: -17px;
+      left: 20px;
+    }
+
     .datepicker-new__calendar__item {
       &.datepicker-new__calendar__item--selected {
         font-weight: bold;

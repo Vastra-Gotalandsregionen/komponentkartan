@@ -1,17 +1,11 @@
-import { Component, OnInit, forwardRef, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Host, SkipSelf } from '@angular/core';
-import { NG_VALUE_ACCESSOR, AbstractControl, ControlValueAccessor, ControlContainer } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Host, SkipSelf, Self } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'vgr-datepicker-new',
-  templateUrl: './datepicker-new.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DatepickerNewComponent),
-    multi: true
-  }]
+  templateUrl: './datepicker-new.component.html'
 })
 export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAccessor {
-  @Input() showValidation = true;
   @Input() selectedDate: Date;
   @Input() minZoom: string;
   @Input() minDate: Date;
@@ -19,15 +13,12 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   @Input() allowText = true;
   @Input() disabled = false;
   @Input() readonly = false;
-  @Input() noDateSelectedLabel = 'Välj datum';
-  @Input() selectedDateFormat = 'yyyy-MM-dd';
-  @Input() tooltipDateFormat = 'yyyy-MM-dd';
-  @Input() formControl: AbstractControl;
-  @Input() formControlName: string;
+  @Input() showValidation = true;
 
   @Output() selectedDateChanged = new EventEmitter<Date>();
 
   label = '';
+  headerHasFocus = false;
   expanded = false;
   years: Calendar;
   months: Calendar;
@@ -37,21 +28,17 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   zoomedToDays = false;
   private minZoomLevel: DatepickerZoomLevel;
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) { }
+  constructor(@Optional() @Self() private formControl: NgControl) {
+    if (this.formControl != null) {
+      this.formControl.valueAccessor = this;
+    }
+  }
 
   ngOnInit() {
     this.setMinZoomLevel();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['formControlName']) {
-      if (this.formControlName && this.controlContainer) {
-        this.formControl = this.controlContainer.control.get(this.formControlName);
-      } else {
-        this.formControl = null;
-      }
-    }
-
     if (changes['minZoom']) {
       this.setMinZoomLevel();
     }
@@ -59,6 +46,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
 
   writeValue(value: any) {
     this.selectedDate = value;
+    this.label = this.formatDate(value);
   }
 
   registerOnChange(func: (value: any) => any) {
@@ -68,7 +56,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     };
   }
 
-  registerOnTouched(func: () => any) {
+  registerOnTouched(func: (value: any) => any) {
     this.onTouched = func;
   }
 
@@ -80,7 +68,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     this.selectedDateChanged.emit(value);
   }
 
-  onTouched() { }
+  onTouched(value: any) { }
 
   toggleExpanded() {
     if (this.expanded) {
@@ -121,6 +109,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     }
 
     this.setSelectedDate(date);
+    this.collapse();
   }
 
   setZoomLevel(zoomLevel: DatepickerZoomLevel, focusDate: Date) {
@@ -336,10 +325,24 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     }
   }
 
-  setSelectedDate(date: Date) {
+  private setSelectedDate(date: Date) {
     this.selectedDate = date;
-    this.label = date ? date.toDateString() : '';
+    this.label = this.formatDate(date);
     this.onChange(date);
+  }
+
+  private formatDate(date: Date): string {
+    if (!date) {
+      return '';
+    }
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const monthSpacer = month < 10 ? '0' : '';
+    const day = date.getDate();
+    const daySpacer = day < 10 ? '0' : '';
+
+    return `${year}-${monthSpacer}${month}-${daySpacer}${day}`;
   }
 }
 

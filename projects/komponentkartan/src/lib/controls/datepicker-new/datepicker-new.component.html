@@ -1,13 +1,17 @@
-<div class="datepicker-new">
-  <input [value]="label" [disabled]="!allowText" (change)="parseSelectedDate($event.target.value)"> 
-  <vgr-button (click)="toggleExpanded()">
-    <vgr-icon [icon]="'calendar-alt'" [color]="'success'" [size]="'lg'"></vgr-icon>
-  </vgr-button>
+<div class="datepicker-new" (focusout)="onTouched(selectedDate)">
+  <div class="datepicker-new__header" [ngClass]="{'datepicker-new__header--focus': headerHasFocus}"
+    (click)="toggleExpanded()">
+    <input #input placeholder="ÅÅÅÅMMDD" [value]="label" [disabled]="!allowText || disabled"
+      (change)="parseSelectedDate($event.target.value)" (focus)="headerHasFocus = true" (blur)="headerHasFocus = false">
+    <div class="datepicker-new__header__button">
+      <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'" [size]="'lg'"></vgr-icon>
+    </div>
+  </div>
   <div *ngIf="expanded" class="datepicker-new__calendar">
     <div *ngIf="zoomedToDays">
       <div>
         <span (click)="days.previous()">&lt;</span>
-        <span (click)="days.zoomOut()">{{days.date | date:'MMM yyyy'}}</span>
+        <span (click)="days.zoomOut()">{{days.date | date:'MMMM yyyy'}}</span>
         <span (click)="days.next()">&gt;</span>
       </div>
       <table>
