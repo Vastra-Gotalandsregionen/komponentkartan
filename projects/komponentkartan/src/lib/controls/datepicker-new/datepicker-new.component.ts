@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Host, SkipSelf, Self } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Host, SkipSelf, Self, ViewChild, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
@@ -16,6 +16,9 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   @Input() showValidation = true;
 
   @Output() selectedDateChanged = new EventEmitter<Date>();
+
+  @ViewChild('datepicker') datepicker: ElementRef;
+  @ViewChild('headerInput') headerInput: ElementRef;
 
   label = '';
   headerHasFocus = false;
@@ -70,6 +73,10 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
 
   onTouched(value: any) { }
 
+  focusHeaderInput() {
+    this.headerInput.nativeElement.focus();
+  }
+
   toggleExpanded() {
     if (this.expanded) {
       this.collapse();
@@ -85,6 +92,34 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
 
   collapse() {
     this.expanded = false;
+  }
+
+  onHeaderFocus() {
+    this.headerHasFocus = true;
+  }
+
+  onHeaderBlur() {
+    this.headerHasFocus = false;
+  }
+
+  onBlur(event: FocusEvent) {
+    const datepickerElement = this.datepicker.nativeElement as HTMLElement;
+    const focusedNode = event.relatedTarget as Node;
+    if (datepickerElement.contains(focusedNode)) {
+      console.log('inner blur');
+      return;
+    }
+
+    console.log('outer blur');
+    this.headerHasFocus = false;
+    this.onTouched(this.selectedDate);
+    this.collapse();
+  }
+
+  onHeaderKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.toggleExpanded();
+    }
   }
 
   parseSelectedDate(value: string) {
@@ -161,7 +196,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
             selected: selected,
             current: current,
             onClick: () => {
-              this.collapse();
+              // this.collapse();
               this.setSelectedDate(date);
             }
           });

@@ -4,7 +4,6 @@
 
   .datepicker-new__header {
     height: $component-height;
-    // width: 270px;
     display: flex;
 
     &.datepicker-new__header--focus {
@@ -41,9 +40,14 @@
     }
 
     .datepicker-new__calendar__item {
+      &:focus {
+        outline: $focus-outline-width solid $focus-color;
+      }
+
       &.datepicker-new__calendar__item--selected {
         font-weight: bold;
       }
+
       &.datepicker-new__calendar__item--current {
         color: red;
       }
