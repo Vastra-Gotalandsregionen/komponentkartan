@@ -16,10 +16,9 @@ export class HeaderMenuComponent {
     }
 
     toggleHeaderMenu(event: MouseEvent|any) {
-        console.log(event.target.nodeName);
         this.hidden = !this.hidden;
 
-        if (event.target.nodeName === 'A') {
+        if (event.target && event.target.nodeName === 'A') {
             event.target.click();
         }
 
