@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed text for button select/deselect all in Dropdown multiselect when not bound to a form control.
 - Modal background now correctly covers menus and headers.
 - Input component: a bound form control is not changed on a DOM blur event.
+- Fixing a bug in header menu where clicks get captured.
 
 ## 4.0.0 (beta)
 - *Breaking change* Angular is upgraded to version 7.

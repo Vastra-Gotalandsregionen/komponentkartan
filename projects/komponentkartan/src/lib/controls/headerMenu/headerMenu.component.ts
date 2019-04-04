@@ -15,8 +15,13 @@ export class HeaderMenuComponent {
         this.hidden = true;
     }
 
-    toggleHeaderMenu(event: Event) {
+    toggleHeaderMenu(event: MouseEvent|any) {
+        console.log(event.target.nodeName);
         this.hidden = !this.hidden;
+
+        if (event.target.nodeName === 'A') {
+            event.target.click();
+        }
 
         if (!this.hidden) {
             event.cancelBubble = true;
