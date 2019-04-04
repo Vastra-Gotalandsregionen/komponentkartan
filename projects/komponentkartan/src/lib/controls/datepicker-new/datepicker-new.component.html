@@ -1,4 +1,4 @@
-<div #datepicker class="datepicker-new" (focusout)="onBlur($event)">
+<div #datepicker class="datepicker-new" (keydown)="onKeydown($event)" (focusout)="onBlur($event)">
   <div class="datepicker-new__header" [ngClass]="{'datepicker-new__header--focus': headerHasFocus}"
     (keydown)="onHeaderKeydown($event)" (click)="focusHeaderInput(); toggleExpanded()">
     <input #headerInput placeholder="ÅÅÅÅMMDD" [value]="label" [disabled]="!allowText || disabled"
@@ -7,61 +7,86 @@
       <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'" [size]="'lg'"></vgr-icon>
     </div>
   </div>
-  <div *ngIf="expanded" class="datepicker-new__calendar">
+  <div *ngIf="expanded" class="datepicker-new__calendar" tabindex="0">
     <div *ngIf="zoomedToDays">
-      <div>
-        <span tabindex="0" (click)="days.previous()">&lt;</span>
-        <span tabindex="0" (click)="days.zoomOut()">{{days.date | date:'MMMM yyyy'}}</span>
-        <span tabindex="0" (click)="days.next()">&gt;</span>
+      <div class="datepicker-new__calendar__header">
+        <div (click)="days.previous()">
+          <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+        </div>
+        <div (click)="days.zoomOut()">{{days.date | date:'MMMM yyyy'}}</div>
+        <div (click)="days.next()">
+          <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+        </div>
       </div>
-      <table>
-        <tr>
-          <td>Må</td>
-          <td>Ti</td>
-          <td>On</td>
-          <td>To</td>
-          <td>Fr</td>
-          <td>Lö</td>
-          <td>Sö</td>
-        </tr>
-        <tr *ngFor="let row of days.items">
-          <td *ngFor="let item of row">
-            <span *ngIf="item" tabindex="0" class="datepicker-new__calendar__item"
-              [ngClass]="{'datepicker-new__calendar__item--selected': item.selected, 'datepicker-new__calendar__item--current': item.current}"
-              (click)="item.onClick()">{{item.date | date:'d'}}</span>
-          </td>
-        </tr>
-      </table>
+      <div class="datepicker-new__calendar__body">
+        <table class="datepicker-new__calendar__body__days">
+          <tr>
+            <td>Må</td>
+            <td>Ti</td>
+            <td>On</td>
+            <td>To</td>
+            <td>Fr</td>
+            <td>Lö</td>
+            <td>Sö</td>
+          </tr>
+          <tr *ngFor="let row of days.items">
+            <td *ngFor="let item of row">
+              <div *ngIf="item" tabindex="0" class="datepicker-new__calendar__body__item"
+                [ngClass]="{'datepicker-new__calendar__body__item--selected': item.selected, 'datepicker-new__calendar__body__item--current': item.current}"
+                (click)="item.onClick()">
+                {{item.date | date:'d'}}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
     <div *ngIf="zoomedToMonths">
-      <div>
-        <span tabindex="0" (click)="months.previous()">&lt;</span>
-        <span tabindex="0" (click)="months.zoomOut()">{{months.date | date:'yyyy'}}</span>
-        <span tabindex="0" (click)="months.next()">&gt;</span>
+      <div class="datepicker-new__calendar__header">
+        <div (click)="months.previous()">
+          <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+        </div>
+        <div (click)="months.zoomOut()">{{months.date | date:'yyyy'}}</div>
+        <div (click)="months.next()">
+          <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+        </div>
       </div>
-      <table>
-        <tr *ngFor="let row of months.items">
-          <td *ngFor="let item of row" tabindex="0" class="datepicker-new__calendar__item"
-            [ngClass]="{'datepicker-new__calendar__item--selected': item.selected, 'datepicker-new__calendar__item--current': item.current}"
-            (click)="item.onClick()">
-            {{item.date | date:'MMM'}}</td>
-        </tr>
-      </table>
+      <div class="datepicker-new__calendar__body">
+        <table class="datepicker-new__calendar__body__months">
+          <tr *ngFor="let row of months.items">
+            <td *ngFor="let item of row">
+              <div tabindex="0" class="datepicker-new__calendar__body__item"
+                [ngClass]="{'datepicker-new__calendar__body__item--selected': item.selected, 'datepicker-new__calendar__body__item--current': item.current}"
+                (click)="item.onClick()">
+                {{item.date | date:'MMM'}}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
     <div *ngIf="zoomedToYears">
-      <div>
-        <span tabindex="0" (click)="years.previous()">&lt;</span>
-        <span tabindex="0" (click)="years.next()">&gt;</span>
+      <div class="datepicker-new__calendar__header">
+        <div (click)="years.previous()">
+          <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+        </div>
+        <div (click)="years.next()">
+          <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+        </div>
       </div>
-      <table>
-        <tr *ngFor="let row of years.items">
-          <td *ngFor="let item of row" tabindex="0" class="datepicker-new__calendar__item"
-            [ngClass]="{'datepicker-new__calendar__item--selected': item.selected, 'datepicker-new__calendar__item--current': item.current}"
-            (click)="item.onClick()">
-            {{item.date | date:'yyyy'}}
-          </td>
-        </tr>
-      </table>
+      <div class="datepicker-new__calendar__body">
+        <table class="datepicker-new__calendar__body__years">
+          <tr *ngFor="let row of years.items">
+            <td *ngFor="let item of row">
+              <div tabindex="0" class="datepicker-new__calendar__body__item"
+                [ngClass]="{'datepicker-new__calendar__body__item--selected': item.selected, 'datepicker-new__calendar__body__item--current': item.current}"
+                (click)="item.onClick()">
+                {{item.date | date:'yyyy'}}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

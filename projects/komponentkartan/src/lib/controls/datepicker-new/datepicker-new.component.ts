@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Host, SkipSelf, Self, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
@@ -19,6 +19,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
 
   @ViewChild('datepicker') datepicker: ElementRef;
   @ViewChild('headerInput') headerInput: ElementRef;
+  @ViewChildren('item') items: QueryList<ElementRef>;
 
   label = '';
   headerHasFocus = false;
@@ -30,6 +31,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   zoomedToMonths = false;
   zoomedToDays = false;
   private minZoomLevel: DatepickerZoomLevel;
+  private focusedDate: Date;
 
   constructor(@Optional() @Self() private formControl: NgControl) {
     if (this.formControl != null) {
@@ -86,12 +88,17 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   expand() {
-    this.setZoomLevel(this.minZoomLevel, this.selectedDate);
+    this.focusedDate = this.selectedDate || new Date();
+    this.setZoomLevel(this.minZoomLevel, this.focusedDate);
     this.expanded = true;
   }
 
-  collapse() {
+  collapse(focusHeader = true) {
     this.expanded = false;
+
+    if (focusHeader) {
+      this.focusHeaderInput();
+    }
   }
 
   onHeaderFocus() {
@@ -105,20 +112,70 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   onBlur(event: FocusEvent) {
     const datepickerElement = this.datepicker.nativeElement as HTMLElement;
     const focusedNode = event.relatedTarget as Node;
+
     if (datepickerElement.contains(focusedNode)) {
-      console.log('inner blur');
       return;
     }
 
-    console.log('outer blur');
-    this.headerHasFocus = false;
     this.onTouched(this.selectedDate);
-    this.collapse();
+    this.collapse(false);
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown' || event.key === 'Down' ||
+      event.key === 'ArrowUp' || event.key === 'Up' ||
+      event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault();
+    }
+
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      this.collapse();
+    } else if (event.key === 'Tab') {
+      this.collapse();
+    }
   }
 
   onHeaderKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       this.toggleExpanded();
+    }
+  }
+
+  onCalendarKeydown(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft' || event.key === 'Left') {
+      let focusedIndex = -1;
+      const itemsArray = this.items.toArray();
+      for (let index = 0; index < itemsArray.length; index++) {
+        if (itemsArray[index].nativeElement === document.activeElement) {
+          focusedIndex = index;
+        }
+      }
+      if (focusedIndex > 0) {
+        itemsArray[focusedIndex - 1].nativeElement.focus();
+      } else if (this.zoomedToDays) {
+        this.days.previous();
+      } else if (this.zoomedToMonths) {
+        this.months.previous();
+      } else if (this.zoomToYears) {
+        this.years.previous();
+      }
+    } else if (event.key === 'ArrowRight' || event.key === 'Right') {
+      let focusedIndex = -1;
+      const itemsArray = this.items.toArray();
+      for (let index = 0; index < itemsArray.length; index++) {
+        if (itemsArray[index].nativeElement === document.activeElement) {
+          focusedIndex = index;
+        }
+      }
+      if (focusedIndex < itemsArray.length - 1) {
+        itemsArray[focusedIndex + 1].nativeElement.focus();
+      } else if (this.zoomedToDays) {
+        this.days.next();
+      } else if (this.zoomedToMonths) {
+        this.months.next();
+      } else if (this.zoomToYears) {
+        this.years.next();
+      }
     }
   }
 
@@ -147,32 +204,28 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     this.collapse();
   }
 
-  setZoomLevel(zoomLevel: DatepickerZoomLevel, focusDate: Date) {
-    if (!focusDate) {
-      focusDate = new Date();
-    }
-
+  setZoomLevel(zoomLevel: DatepickerZoomLevel, referenceDate: Date) {
     switch (zoomLevel) {
       case DatepickerZoomLevel.Days:
-        this.zoomToDays(focusDate);
+        this.zoomToDays(referenceDate);
         break;
       case DatepickerZoomLevel.Months:
-        this.zoomToMonths(focusDate);
+        this.zoomToMonths(referenceDate);
         break;
       case DatepickerZoomLevel.Years:
-        this.zoomToYears(focusDate);
+        this.zoomToYears(referenceDate);
         break;
     }
   }
 
-  zoomToDays(focusDate: Date) {
+  zoomToDays(referenceDate: Date) {
     this.zoomedToYears = false;
     this.zoomedToMonths = false;
     this.zoomedToDays = true;
 
     const today = new Date();
-    const year = focusDate.getFullYear();
-    const month = focusDate.getMonth();
+    const year = referenceDate.getFullYear();
+    const month = referenceDate.getMonth();
     const firstDayWeekDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const dayOffset = firstDayWeekDay ? firstDayWeekDay - 1 : 6; // Sunday is 0
@@ -196,7 +249,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
             selected: selected,
             current: current,
             onClick: () => {
-              // this.collapse();
+              this.collapse();
               this.setSelectedDate(date);
             }
           });
@@ -204,6 +257,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
       }
       items.push(weekDays);
     }
+
     this.days = {
       date: new Date(year, month),
       items: items,
@@ -213,12 +267,12 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     };
   }
 
-  zoomToMonths(focusDate: Date) {
+  zoomToMonths(referenceDate: Date) {
     this.zoomedToYears = false;
     this.zoomedToMonths = true;
     this.zoomedToDays = false;
 
-    const year = focusDate.getFullYear();
+    const year = referenceDate.getFullYear();
 
     const monthArray: Date[] = [
       new Date(year, 0),
@@ -275,13 +329,13 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     };
   }
 
-  zoomToYears(focusDate: Date) {
+  zoomToYears(referenceDate: Date) {
     this.zoomedToYears = true;
     this.zoomedToMonths = false;
     this.zoomedToDays = false;
 
     const today = new Date();
-    const year = focusDate.getFullYear();
+    const year = referenceDate.getFullYear();
 
     const yearArray: Date[] = [
       new Date(year - 4, 0),
