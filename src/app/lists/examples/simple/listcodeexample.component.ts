@@ -39,8 +39,8 @@ export class ListcodeexampleComponent implements OnInit {
     initExampleData() {
         this.peopleRowsSimpleList = [
             { id: '1', firstName: 'Git', lastName: 'Hubsson', occupation: 'Ninja codewarrior', income: 300000 } as ExamplePerson,
-            { id: '2', firstName: 'Stud', lastName: 'Visualizer', occupation: 'Black Dragon', income: 450000, expanded: true } as ExamplePerson,
-            { id: '3', firstName: 'See', lastName: 'Charper', occupation: 'Chrome wizard', income: 230000, expanded: true } as ExamplePerson,
+            { id: '2', firstName: 'Stud', lastName: 'Visualizer', occupation: 'Black Dragon', income: 450000 } as ExamplePerson,
+            { id: '3', firstName: 'See', lastName: 'Charper', occupation: 'Chrome wizard', income: 230000 } as ExamplePerson,
             { id: '3', firstName: 'IT-Lasse', lastName: 'Andersson', occupation: 'Data', income: 600000 } as ExamplePerson
         ];
     }
@@ -55,7 +55,7 @@ export class ListcodeexampleComponent implements OnInit {
 
     togglePreventCollapse(row: ExamplePerson) {
         row.preventCollapse = !row.preventCollapse;
-        if (row.preventCollapse){
+        if (row.preventCollapse) {
             console.log(`Prevent collapse for ${row.firstName} ${row.lastName}`);
         } else {
             console.log(`Allow collapse for ${row.firstName} ${row.lastName}`);
@@ -78,6 +78,11 @@ export class ListcodeexampleComponent implements OnInit {
 
     onCollapsePrevented(row: ExamplePerson) {
         console.log(`Prevented collapse - ${row.firstName} ${row.lastName}`);
+    }
+
+    setTwoExpanded() {
+        this.peopleRowsSimpleList[0].expanded = true;
+        this.peopleRowsSimpleList[1].expanded = true;
     }
 
 }

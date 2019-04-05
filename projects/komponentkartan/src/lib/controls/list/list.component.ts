@@ -61,7 +61,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
           const expandedItems = this.items.filter(x => x.isExpanded);
 
           if (expandedItems.length) {
-            const preventedItems = expandedItems.filter(x => x.preventCollapse);
+            const preventedItems = expandedItems.filter(x => x.preventCollapse || x.notInteractable);
 
             if (preventedItems.length) {
               preventedItems.forEach(x => x.collapsePrevented.emit());

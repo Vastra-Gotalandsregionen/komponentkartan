@@ -12,6 +12,7 @@
     <div style="display:flex">
     <vgr-input #pagesInput [small]="true" value="{{pages}}"></vgr-input>
     <vgr-button (click)="setPages(pagesInput.value)">Sätt antal sidor</vgr-button>
+    <vgr-button (click)="setTwoExpanded()">Sätt två expanded items</vgr-button>
     </div>
     <vgr-page-block>      
       <vgr-list [flexibleHeader]="true" [pages]="pages" [activePage]="activePage" (pageChanged)="activePage = $event" (sortChanged)="onSortChanged($event)">
