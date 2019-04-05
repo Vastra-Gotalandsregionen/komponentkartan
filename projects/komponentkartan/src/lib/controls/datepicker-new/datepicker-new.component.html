@@ -7,7 +7,7 @@
       <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'" [size]="'lg'"></vgr-icon>
     </div>
   </div>
-  <div *ngIf="expanded" class="datepicker-new__calendar noselect" tabindex="0" (keydown)="onCalendarKeydown($event)">
+  <div #calendar *ngIf="expanded" class="datepicker-new__calendar noselect" tabindex="0" (keydown)="onCalendarKeydown($event)">
     <div *ngIf="zoomedToDays">
       <div class="datepicker-new__calendar__header">
         <div (click)="days.previous()">
@@ -31,11 +31,7 @@
           </tr>
           <tr *ngFor="let row of days.items">
             <td *ngFor="let item of row">
-              <div *ngIf="item" tabindex="0" class="datepicker-new__calendar__body__item"
-                [ngClass]="{'datepicker-new__calendar__body__item--selected': item.selected, 'datepicker-new__calendar__body__item--current': item.current}"
-                (click)="item.onClick()">
-                {{item.date | date:'d'}}
-              </div>
+              <vgr-datepicker-item *ngIf="item" [type]="'day'" [date]="item.date" [selected]="item.selected" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
             </td>
           </tr>
         </table>
@@ -55,11 +51,7 @@
         <table class="datepicker-new__calendar__body__months">
           <tr *ngFor="let row of months.items">
             <td *ngFor="let item of row">
-              <div tabindex="0" class="datepicker-new__calendar__body__item"
-                [ngClass]="{'datepicker-new__calendar__body__item--selected': item.selected, 'datepicker-new__calendar__body__item--current': item.current}"
-                (click)="item.onClick()">
-                {{item.date | date:'MMM'}}
-              </div>
+              <vgr-datepicker-item [type]="'month'" [date]="item.date" [selected]="item.selected" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
             </td>
           </tr>
         </table>
@@ -78,11 +70,7 @@
         <table class="datepicker-new__calendar__body__years">
           <tr *ngFor="let row of years.items">
             <td *ngFor="let item of row">
-              <div tabindex="0" class="datepicker-new__calendar__body__item"
-                [ngClass]="{'datepicker-new__calendar__body__item--selected': item.selected, 'datepicker-new__calendar__body__item--current': item.current}"
-                (click)="item.onClick()">
-                {{item.date | date:'yyyy'}}
-              </div>
+              <vgr-datepicker-item [type]="'year'" [date]="item.date" [selected]="item.selected" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
             </td>
           </tr>
         </table>

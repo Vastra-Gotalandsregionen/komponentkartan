@@ -104,7 +104,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.PaginationComponent,
     type.DropdownSelectComponent,
     type.IconComponent,
-    type.DatepickerNewComponent
+    type.DatepickerNewComponent,
+    type.DatepickerItemComponent
   ],
   exports: [
     type.SafePipe,
@@ -177,7 +178,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.PaginationComponent,
     type.DropdownSelectComponent,
     type.IconComponent,
-    type.DatepickerNewComponent
+    type.DatepickerNewComponent,
+    type.DatepickerItemComponent
   ],
   providers: [
     type.ModalService,

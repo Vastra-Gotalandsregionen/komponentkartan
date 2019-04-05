@@ -1,11 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { DatepickerItemComponent } from './datepicker-item.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'vgr-datepicker-new',
   templateUrl: './datepicker-new.component.html'
 })
-export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
   @Input() selectedDate: Date;
   @Input() minZoom: string;
   @Input() minDate: Date;
@@ -19,6 +22,8 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
 
   @ViewChild('datepicker') datepicker: ElementRef;
   @ViewChild('headerInput') headerInput: ElementRef;
+  @ViewChild('calendar') calendar: ElementRef;
+  @ViewChildren(DatepickerItemComponent) items: QueryList<DatepickerItemComponent>;
 
   label = '';
   headerHasFocus = false;
@@ -30,7 +35,8 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   zoomedToMonths = false;
   zoomedToDays = false;
   private minZoomLevel: DatepickerZoomLevel;
-  private focusedDate: Date;
+  private ngUnsubscribe = new Subject();
+  private ngUnsubscribeItems = new Subject();
 
   constructor(private elementRef: ElementRef, @Optional() @Self() private formControl: NgControl) {
     if (this.formControl != null) {
@@ -42,10 +48,48 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     this.setMinZoomLevel();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes['minZoom']) {
       this.setMinZoomLevel();
     }
+  }
+
+  ngAfterViewInit() {
+    this.subscribeToItems();
+
+    this.items.changes
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(_ => this.subscribeToItems());
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
+  }
+
+  subscribeToItems() {
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
+    this.ngUnsubscribeItems = new Subject();
+
+    this.items.forEach(item => {
+      item.select
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          this.collapse();
+          this.setSelectedDate(date);
+        });
+
+      item.zoomIn
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          this.calendar.nativeElement.focus();
+          this.zoomIn(date);
+        });
+    });
   }
 
   writeValue(value: any) {
@@ -87,7 +131,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   expand() {
-    this.setZoomLevel(this.minZoomLevel, this.focusedDate);
+    this.setZoomLevel(this.minZoomLevel, this.selectedDate || new Date());
     this.expanded = true;
   }
 
@@ -116,7 +160,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     }
 
     this.onTouched(this.selectedDate);
-    this.collapse(false);
+    // this.collapse(false);
   }
 
   onKeydown(event: KeyboardEvent) {
@@ -216,12 +260,19 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     }
   }
 
+  zoomIn(referenceDate: Date) {
+    if (this.zoomedToYears) {
+      this.zoomToMonths(referenceDate);
+    } else if (this.zoomedToMonths) {
+      this.zoomToDays(referenceDate);
+    }
+  }
+
   zoomToDays(referenceDate: Date) {
     this.zoomedToYears = false;
     this.zoomedToMonths = false;
     this.zoomedToDays = true;
 
-    const today = new Date();
     const year = referenceDate.getFullYear();
     const month = referenceDate.getMonth();
     const firstDayWeekDay = new Date(year, month, 1).getDay();
@@ -241,15 +292,10 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
           const selectedMonth = this.selectedDate ? this.selectedDate.getMonth() : null;
           const selectedDay = this.selectedDate ? this.selectedDate.getDate() : null;
           const selected = date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === selectedDay;
-          const current = date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate();
           weekDays.push({
             date: date,
             selected: selected,
-            current: current,
-            onClick: () => {
-              this.collapse();
-              this.setSelectedDate(date);
-            }
+            isMinZoom: true
           });
         }
       }
@@ -287,19 +333,9 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
       new Date(year, 11)
     ];
 
-    let fn: (value: Date) => void;
-    if (this.minZoomLevel === DatepickerZoomLevel.Years) {
-      fn = (value: Date) => {
-        this.collapse();
-        this.setSelectedDate(value);
-      };
-    } else {
-      fn = (value: Date) => this.setZoomLevel(DatepickerZoomLevel.Days, value);
-    }
-
-    const today = new Date();
     const selectedYear = this.selectedDate ? this.selectedDate.getFullYear() : null;
     const selectedMonth = this.selectedDate ? this.selectedDate.getMonth() : null;
+    const isMinZoom = this.minZoomLevel === DatepickerZoomLevel.Months;
 
     const items: CalendarItem[][] = [];
     for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
@@ -307,12 +343,10 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
       for (let colIndex = 0; colIndex < 4; colIndex++) {
         const date = monthArray[4 * rowIndex + colIndex];
         const selected = date.getFullYear() === selectedYear && date.getMonth() === selectedMonth;
-        const current = date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth();
         row.push({
           date: date,
           selected: selected,
-          current: current,
-          onClick: () => fn(date)
+          isMinZoom: isMinZoom
         });
       }
       items.push(row);
@@ -332,7 +366,6 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     this.zoomedToMonths = false;
     this.zoomedToDays = false;
 
-    const today = new Date();
     const year = referenceDate.getFullYear();
 
     const yearArray: Date[] = [
@@ -347,17 +380,8 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
       new Date(year + 4, 0)
     ];
 
-    let fn: (value: Date) => void;
-    if (this.minZoomLevel === DatepickerZoomLevel.Years) {
-      fn = (value: Date) => {
-        this.collapse();
-        this.setSelectedDate(value);
-      };
-    } else {
-      fn = (value: Date) => this.setZoomLevel(DatepickerZoomLevel.Months, value);
-    }
-
     const selectedYear = this.selectedDate ? this.selectedDate.getFullYear() : null;
+    const isMinZoom = this.minZoomLevel === DatepickerZoomLevel.Years;
 
     const items: CalendarItem[][] = [];
     for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
@@ -365,12 +389,10 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
       for (let colIndex = 0; colIndex < 3; colIndex++) {
         const date = yearArray[3 * rowIndex + colIndex];
         const selected = date.getFullYear() === selectedYear;
-        const current = date.getFullYear() === today.getFullYear();
         row.push({
           date: date,
           selected: selected,
-          current: current,
-          onClick: () => fn(date)
+          isMinZoom: isMinZoom
         });
       }
       items.push(row);
@@ -444,8 +466,7 @@ interface Calendar {
 interface CalendarItem {
   date: Date;
   selected: boolean;
-  current: boolean;
-  onClick: () => void;
+  isMinZoom: boolean;
 }
 
 const enum DatepickerZoomLevel {

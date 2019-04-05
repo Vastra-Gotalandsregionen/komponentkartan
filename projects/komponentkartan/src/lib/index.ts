@@ -67,6 +67,7 @@ export { DropdownSelectComponent } from './controls/dropdown-select/dropdown-sel
 export { DropdownItemComponent } from './controls/dropdown-select/dropdown-item.component';
 export { IconComponent } from './controls/icon/icon.component';
 export { DatepickerNewComponent } from './controls/datepicker-new/datepicker-new.component';
+export { DatepickerItemComponent } from './controls/datepicker-new/datepicker-item.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';

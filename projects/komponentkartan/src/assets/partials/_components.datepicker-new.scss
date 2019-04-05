@@ -57,19 +57,41 @@
       
       .datepicker-new__calendar__body__days {
         td {
-          text-align: center;
-          vertical-align: middle;
           width: 36px;
           height: 33px;
+
+          div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 33px;
+            
+            div {
+              width: 30px;
+              height: 30px;
+            }
+          }
         }
       }
 
       .datepicker-new__calendar__body__months {
         td {
-          text-align: center;
-          vertical-align: middle;
           width: 63px;
           height: 77px;
+
+          div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 63px;
+            height: 77px;
+            
+            div {
+              width: 40px;
+              height: 40px;
+            }
+          }
         }
       }
 
@@ -79,33 +101,50 @@
           vertical-align: middle;
           width: 84px;
           height: 77px;
+
+          div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 84px;
+            height: 77px;
+            
+            div {
+              width: 40px;
+              height: 40px;
+            }
+          }
         }
       }
       
       .datepicker-new__calendar__body__item {
-        width: 30px;
-        height: 30px;
         border-radius: 50%;
-
+        border-style: solid;
+        border-width: 0;
+        
         &:hover:not(.disabled) {
           @extend .background-color--secondary;
           @extend .border-color--secondary;
           color: $text-color--light;
         }
-
+        
         &:focus {
           outline: 0;
           border-color: $focus-color;
           border-width: $focus-outline-width;
-          border-style: solid;
         }
         
         &.datepicker-new__calendar__body__item--selected {
-          font-weight: bold;
+          @extend .background-color--primary;
+          @extend .border-color--primary;
+          color: $text-color--light;
+          border-width: 1px;
         }
         
         &.datepicker-new__calendar__body__item--current {
-          color: red;
+          @extend .border-color--primary;
+          background-color: $background-color--content;
+          border-width: 1px;
         }
       }
     }
