@@ -11,6 +11,7 @@ import { ListItemHeaderComponent } from '../list-item/list-item-header.component
 import { ListItemContentComponent } from '../list-item/list-item-content.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ListService } from '../list/list.service';
 
 @Component({
   templateUrl: './list-item.component.html',
@@ -64,6 +65,7 @@ import { takeUntil } from 'rxjs/operators';
 
 export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges {
   readonly showNotificationDurationMs = 1500;
+  isExpanded = false;
   ngUnsubscribe = new Subject();
   temporaryNotification: RowNotification;
   permanentNotification: RowNotification;
@@ -74,6 +76,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   overflow = false;
 
   @Input() expanded = false;
+  @Input() preventCollapse = false;
   @Input() notification: RowNotification;
   @Input() animationSpeed = 400;
 
@@ -81,6 +84,8 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
+  @Output() expandPrevented: EventEmitter<any> = new EventEmitter();
+  @Output() collapsePrevented: EventEmitter<any> = new EventEmitter();
   @Output() notificationChanged: EventEmitter<RowNotification> = new EventEmitter<RowNotification>();
   @Output() deleted: EventEmitter<any> = new EventEmitter();
   @Output() setFocusOnFirstRow: EventEmitter<any> = new EventEmitter();
@@ -92,11 +97,17 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
-  constructor() {
+  constructor(private listService: ListService) {
     this.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.hideNotifications());
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (changes.expanded && changes.expanded.currentValue !== undefined) {
+      if (changes.expanded.currentValue !== this.isExpanded) {
+        this.toggleExpanded();
+      }
+    }
+
     if (changes.notification && changes.notification.currentValue) {
       this.handleNotifications(changes.notification);
     }
@@ -104,7 +115,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   ngAfterContentInit() {
     if (this.listItemHeader) {
-      this.listItemHeader.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.toggleExpand());
+      this.listItemHeader.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.toggleExpanded());
       this.listItemHeader.goToFirst.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnFirstRow.emit());
       this.listItemHeader.goToLast.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnLastRow.emit());
       this.listItemHeader.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow.emit());
@@ -116,10 +127,27 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  toggleExpand(forceclose = false) {
+  toggleExpanded(setCollapsed = false) {
+    if (setCollapsed && !this.isExpanded) {
+      return;
+    }
+
+    if (this.isExpanded) {
+      if (this.preventCollapse) {
+        this.collapsePrevented.emit();
+      } else {
+        this.setExpanded(false);
+      }
+
+    } else {
+      this.listService.requestExpandListItem(this);
+    }
+  }
+
+  setExpanded(expanded: boolean) {
     if (!this.notInteractable) {
-      this.expanded = forceclose ? false : !this.expanded;
-      this.expandedChanged.emit(this.expanded);
+      this.isExpanded = expanded;
+      this.expandedChanged.emit(this.isExpanded);
       this.notInteractable = true;
       setTimeout(() => { this.notInteractable = false; }, 400);
     }
@@ -188,13 +216,13 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
         this.permanentNotification = null;
       }
       setTimeout(() => {
-        this.toggleExpand(true);
+        this.toggleExpanded(true);
       }, this.showNotificationDurationMs);
     } else if (current.type === NotificationType.ShowOnRemove) {
       this.temporaryNotification = current;
       this.temporaryNotificationVisible = true;
       setTimeout(() => {
-        this.toggleExpand(true);
+        this.toggleExpanded(true);
       }, this.showNotificationDurationMs);
     }
     this.handleNotificatonColor();

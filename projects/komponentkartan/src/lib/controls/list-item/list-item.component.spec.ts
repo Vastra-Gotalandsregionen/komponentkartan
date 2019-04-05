@@ -55,7 +55,7 @@ describe('ListItemComponent', () => {
 
   describe('When initialized as expanded', () => {
     beforeEach(() => {
-      component.expanded = true;
+      component.isExpanded = true;
       fixture.detectChanges();
     });
 
@@ -83,7 +83,7 @@ describe('ListItemComponent', () => {
     let element: DebugElement;
 
     beforeEach(() => {
-      spyOn(component, 'toggleExpand').and.callThrough();
+      spyOn(component, 'toggleExpanded').and.callThrough();
       component.notInteractable = false;
       component.isDeleted = false;
 
@@ -93,7 +93,7 @@ describe('ListItemComponent', () => {
       fixture.detectChanges();
     });
     it('toggleExpand has been called once', () => {
-      expect(component.toggleExpand).toHaveBeenCalledTimes(1);
+      expect(component.toggleExpanded).toHaveBeenCalledTimes(1);
     });
     it('component is expanded', () => {
       expect(listElement.classes['list-item--expanded']).toBe(true);
@@ -121,7 +121,7 @@ describe('ListItemComponent', () => {
         expect(listElement.classes['list-item--expanded']).toBe(false);
       });
       it('toggleExpand has been called once again', () => {
-        expect(component.toggleExpand).toHaveBeenCalledTimes(2);
+        expect(component.toggleExpanded).toHaveBeenCalledTimes(2);
       });
     });
   });
@@ -145,7 +145,7 @@ describe('ListItemComponent', () => {
       spyOn(component.setFocusOnPreviousRowContent, 'emit');
       spyOn(component.setFocusOnNextRowContent, 'emit');
 
-      spyOn(component, 'toggleExpand').and.callThrough();
+      spyOn(component, 'toggleExpanded').and.callThrough();
       toggleExpandSpy = spyOn(component.listItemHeader, 'toggleExpand').and.callThrough();
       spyOn(component.listItemHeader, 'setFocus').and.callThrough();
 
@@ -174,7 +174,7 @@ describe('ListItemComponent', () => {
       });
 
       it('listItemHeaderComponent listItemHeader setExpandOrCollapsed has been called', () => {
-        expect(component.toggleExpand).toHaveBeenCalled();
+        expect(component.toggleExpanded).toHaveBeenCalled();
       });
 
       it('component is expanded', () => {
@@ -324,15 +324,15 @@ describe('ListItemComponent', () => {
 
   describe('the component is clicked outside of the list-item-header', () => {
     beforeEach(() => {
-      spyOn(component, 'toggleExpand');
+      spyOn(component, 'toggleExpanded');
       rootElement.triggerEventHandler('click', event);
       fixture.detectChanges();
     });
     it('component is not expanded', () => {
-      expect(component.expanded).toBeFalsy();
+      expect(component.isExpanded).toBeFalsy();
     });
     it('content is not visible', () => {
-      expect(component.toggleExpand).toHaveBeenCalledTimes(0);
+      expect(component.toggleExpanded).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -340,7 +340,7 @@ describe('ListItemComponent', () => {
     let message;
     beforeEach(() => {
       component.notification = { message: 'Information', icon: 'vgr-icon-ok-check ', type: NotificationType.Permanent } as RowNotification;
-      component.expanded = true;
+      component.isExpanded = true;
       // component.ngAfterContentInit();
       component.ngOnChanges({
         notification: new SimpleChange(null, component.notification, true)
@@ -365,14 +365,14 @@ describe('ListItemComponent', () => {
       message = listElement.query(By.css('.list-item__notification')).nativeElement.innerText.trim();
 
       expect(component.temporaryNotificationVisible).toBe(true);
-      expect(component.expanded).toBe(true);
+      expect(component.isExpanded).toBe(true);
       expect(message).toBe('Sparar');
       expect(component.notInteractable).toBe(false);
 
       // Closing the content area
       tick(component.showNotificationDurationMs);
       fixture.detectChanges();
-      expect(component.expanded).toBe(false);
+      expect(component.isExpanded).toBe(false);
       expect(component.notInteractable).toBe(true);
 
       // Waiting for it to be interactable again
@@ -401,14 +401,14 @@ describe('ListItemComponent', () => {
       message = listElement.query(By.css('.list-item__notification')).nativeElement.innerText.trim();
 
       expect(component.temporaryNotificationVisible).toBe(true);
-      expect(component.expanded).toBe(true);
+      expect(component.isExpanded).toBe(true);
       expect(message).toBe('Tar Bort');
       expect(component.notInteractable).toBe(false);
 
       // Closing the content area
       tick(component.showNotificationDurationMs);
       fixture.detectChanges();
-      expect(component.expanded).toBe(false);
+      expect(component.isExpanded).toBe(false);
       expect(component.notInteractable).toBe(true);
 
       // Waiting for it to be interactable again
@@ -438,7 +438,7 @@ describe('ListItemComponent', () => {
       message = listElement.query(By.css('.list-item__notification')).nativeElement.innerText.trim();
 
       expect(component.temporaryNotificationVisible).toBe(true);
-      expect(component.expanded).toBe(true);
+      expect(component.isExpanded).toBe(true);
       expect(message).toBe('Tar Bort');
       expect(component.notInteractable).toBe(false);
       expect(component.isDeleted).toBe(false);
@@ -446,7 +446,7 @@ describe('ListItemComponent', () => {
       // Closing the content area
       tick(component.showNotificationDurationMs);
       fixture.detectChanges();
-      expect(component.expanded).toBe(false);
+      expect(component.isExpanded).toBe(false);
       expect(component.notInteractable).toBe(true);
 
       // Waiting for it to be interactable again

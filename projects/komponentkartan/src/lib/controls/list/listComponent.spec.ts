@@ -26,7 +26,7 @@ describe('[ListComponent]', () => {
 
     const childItem1 = {
       setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), expandedChanged: new EventEmitter<boolean>(),
-      toggleExpand(forceclose = false) {
+      toggleExpanded(forceclose = false) {
         if (!this.notInteractable) {
           this.expanded = forceclose ? false : !this.expanded;
           this.expandedChanged.emit(this.expanded);
@@ -37,7 +37,7 @@ describe('[ListComponent]', () => {
     } as ListItemComponent;
     const childItem2 = {
       setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), expandedChanged: new EventEmitter<boolean>(),
-      toggleExpand(forceclose = false) {
+      toggleExpanded(forceclose = false) {
         if (!this.notInteractable) {
           this.expanded = forceclose ? false : !this.expanded;
           this.expandedChanged.emit(this.expanded);
@@ -48,7 +48,7 @@ describe('[ListComponent]', () => {
     } as ListItemComponent;
     const childItem3 = {
       setFocusOnRow: (r) => { }, setFocusOnFirstRow: new EventEmitter(), setFocusOnLastRow: new EventEmitter(), setFocusOnPreviousRow: new EventEmitter(), setFocusOnNextRow: new EventEmitter(), setFocusOnPreviousRowContent: new EventEmitter(), setFocusOnNextRowContent: new EventEmitter(), expandedChanged: new EventEmitter<boolean>(),
-      toggleExpand(forceclose = false) {
+      toggleExpanded(forceclose = false) {
         if (!this.notInteractable) {
           this.expanded = forceclose ? false : !this.expanded;
           this.expandedChanged.emit(this.expanded);
@@ -75,38 +75,38 @@ describe('[ListComponent]', () => {
         childItem1.notInteractable = false;
         childItem2.notInteractable = false;
         childItem3.notInteractable = false;
-        spyOn(childItem1, 'toggleExpand').and.callThrough();
-        spyOn(childItem2, 'toggleExpand').and.callThrough();
-        spyOn(childItem3, 'toggleExpand').and.callThrough();
+        spyOn(childItem1, 'toggleExpanded').and.callThrough();
+        spyOn(childItem2, 'toggleExpanded').and.callThrough();
+        spyOn(childItem3, 'toggleExpanded').and.callThrough();
       });
       describe('and a child item is expanded', () => {
         beforeEach(() => {
-          childItem1.expanded = false;
-          childItem2.expanded = false;
-          childItem3.expanded = false;
-          childItem1.toggleExpand();
+          childItem1.isExpanded = false;
+          childItem2.isExpanded = false;
+          childItem3.isExpanded = false;
+          childItem1.toggleExpanded();
         });
         it('the other items are collapsed', () => {
-          expect(childItem1.toggleExpand).toHaveBeenCalledWith();
-          expect(childItem1.expanded).toBe(true);
-          expect(childItem2.expanded).toBe(false);
-          expect(childItem3.expanded).toBe(false);
+          expect(childItem1.toggleExpanded).toHaveBeenCalledWith();
+          expect(childItem1.isExpanded).toBe(true);
+          expect(childItem2.isExpanded).toBe(false);
+          expect(childItem3.isExpanded).toBe(false);
         });
       });
       describe('and a different child item is expanded', () => {
         beforeEach(() => {
-          childItem1.expanded = true;
-          childItem2.expanded = false;
-          childItem3.expanded = true;
-          childItem2.toggleExpand();
+          childItem1.isExpanded = true;
+          childItem2.isExpanded = false;
+          childItem3.isExpanded = true;
+          childItem2.toggleExpanded();
         });
         it('the other items are collapsed', () => {
-          expect(childItem2.toggleExpand).toHaveBeenCalledWith();
-          expect(childItem2.expanded).toBe(true);
-          expect(childItem1.toggleExpand).toHaveBeenCalledWith(true);
-          expect(childItem3.toggleExpand).toHaveBeenCalledWith(true);
-          expect(childItem1.expanded).toBe(false);
-          expect(childItem3.expanded).toBe(false);
+          expect(childItem2.toggleExpanded).toHaveBeenCalledWith();
+          expect(childItem2.isExpanded).toBe(true);
+          expect(childItem1.toggleExpanded).toHaveBeenCalledWith(true);
+          expect(childItem3.toggleExpanded).toHaveBeenCalledWith(true);
+          expect(childItem1.isExpanded).toBe(false);
+          expect(childItem3.isExpanded).toBe(false);
         });
       });
     });
