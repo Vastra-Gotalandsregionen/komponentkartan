@@ -19,7 +19,6 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
 
   @ViewChild('datepicker') datepicker: ElementRef;
   @ViewChild('headerInput') headerInput: ElementRef;
-  @ViewChildren('item') items: QueryList<ElementRef>;
 
   label = '';
   headerHasFocus = false;
@@ -33,7 +32,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   private minZoomLevel: DatepickerZoomLevel;
   private focusedDate: Date;
 
-  constructor(@Optional() @Self() private formControl: NgControl) {
+  constructor(private elementRef: ElementRef, @Optional() @Self() private formControl: NgControl) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
@@ -88,7 +87,6 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   expand() {
-    this.focusedDate = this.selectedDate || new Date();
     this.setZoomLevel(this.minZoomLevel, this.focusedDate);
     this.expanded = true;
   }
@@ -144,14 +142,14 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
   onCalendarKeydown(event: KeyboardEvent) {
     if (event.key === 'ArrowLeft' || event.key === 'Left') {
       let focusedIndex = -1;
-      const itemsArray = this.items.toArray();
-      for (let index = 0; index < itemsArray.length; index++) {
-        if (itemsArray[index].nativeElement === document.activeElement) {
+      const items = this.elementRef.nativeElement.getElementsByClassName('datepicker-new__calendar__body__item');
+      for (let index = 0; index < items.length; index++) {
+        if (items[index] === document.activeElement) {
           focusedIndex = index;
         }
       }
       if (focusedIndex > 0) {
-        itemsArray[focusedIndex - 1].nativeElement.focus();
+        items[focusedIndex - 1].focus();
       } else if (this.zoomedToDays) {
         this.days.previous();
       } else if (this.zoomedToMonths) {
@@ -161,14 +159,14 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
       }
     } else if (event.key === 'ArrowRight' || event.key === 'Right') {
       let focusedIndex = -1;
-      const itemsArray = this.items.toArray();
-      for (let index = 0; index < itemsArray.length; index++) {
-        if (itemsArray[index].nativeElement === document.activeElement) {
+      const items = this.elementRef.nativeElement.getElementsByClassName('datepicker-new__calendar__body__item');
+      for (let index = 0; index < items.length; index++) {
+        if (items[index] === document.activeElement) {
           focusedIndex = index;
         }
       }
-      if (focusedIndex < itemsArray.length - 1) {
-        itemsArray[focusedIndex + 1].nativeElement.focus();
+      if (focusedIndex < items.length - 1) {
+        items[focusedIndex + 1].focus();
       } else if (this.zoomedToDays) {
         this.days.next();
       } else if (this.zoomedToMonths) {
@@ -204,7 +202,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, ControlValueAc
     this.collapse();
   }
 
-  setZoomLevel(zoomLevel: DatepickerZoomLevel, referenceDate: Date) {
+  setZoomLevel(zoomLevel: DatepickerZoomLevel, referenceDate: Date, focus = true) {
     switch (zoomLevel) {
       case DatepickerZoomLevel.Days:
         this.zoomToDays(referenceDate);
@@ -450,7 +448,7 @@ interface CalendarItem {
   onClick: () => void;
 }
 
-export const enum DatepickerZoomLevel {
+const enum DatepickerZoomLevel {
   Days = 1,
   Months = 2,
   Years = 3
