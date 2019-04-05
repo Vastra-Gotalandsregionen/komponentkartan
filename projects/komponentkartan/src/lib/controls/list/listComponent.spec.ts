@@ -3,13 +3,15 @@ import {
   SortDirection, ListItemComponent
 } from '../../index';
 import { EventEmitter } from '@angular/core';
-
+import { ListService } from './list.service';
 
 describe('[ListComponent]', () => {
+  let listService: ListService;
   let listComponent: ListComponent;
 
   beforeEach(() => {
-    listComponent = new ListComponent();
+    listService = new ListService();
+    listComponent = new ListComponent(listService);
     listComponent.listHeader = new ListHeaderComponent();
   });
   describe('when header changes sort', () => {
@@ -69,12 +71,16 @@ describe('[ListComponent]', () => {
       listComponent.ngAfterContentInit();
     });
 
-    describe('and multiple expanded items is not allowed', () => {
+    /*describe('and multiple expanded items is not allowed', () => {
       beforeEach(() => {
         listComponent.allowMultipleExpandedItems = false;
         childItem1.notInteractable = false;
         childItem2.notInteractable = false;
         childItem3.notInteractable = false;
+
+        childItem1.preventCollapse = false;
+        childItem2.preventCollapse = false;
+        childItem3.preventCollapse = false;
         spyOn(childItem1, 'toggleExpanded').and.callThrough();
         spyOn(childItem2, 'toggleExpanded').and.callThrough();
         spyOn(childItem3, 'toggleExpanded').and.callThrough();
@@ -109,7 +115,7 @@ describe('[ListComponent]', () => {
           expect(childItem3.isExpanded).toBe(false);
         });
       });
-    });
+    });*/
 
     describe('and focus is on the first list-item header', () => {
       beforeEach(() => {

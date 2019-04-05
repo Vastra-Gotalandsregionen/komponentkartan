@@ -93,7 +93,8 @@ export class ListComponent implements AfterContentInit, OnDestroy {
   }
 
   subscribeToItems() {
-    this.ngUnsubscribeItems.next();    this.ngUnsubscribeItems.complete();
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
     this.ngUnsubscribeItems = new Subject();
 
     this.items
