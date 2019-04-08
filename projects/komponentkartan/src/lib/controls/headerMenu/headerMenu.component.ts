@@ -17,11 +17,6 @@ export class HeaderMenuComponent {
 
     toggleHeaderMenu(event: MouseEvent|any) {
         this.hidden = !this.hidden;
-
-        if (event.target && event.target.nodeName === 'A') {
-            event.target.click();
-        }
-
         if (!this.hidden) {
             event.cancelBubble = true;
         }
@@ -33,7 +28,7 @@ export class HeaderMenuComponent {
         event.cancelBubble = true;
     }
 
-    @HostListener('document:mousedown', ['$event'])
+    @HostListener('document:click', ['$event'])
     onDocumentClick(event: any) {
         const target = event.target || event.srcElement || event.currentTarget;
 
@@ -42,18 +37,6 @@ export class HeaderMenuComponent {
         }
     }
 
-    onMouseEnter(item: IHeaderMenuItem) {
-        this.menu.menuItems.forEach(x => x.marked = false);
-
-        item.marked = true;
-    }
-
-    onMouseLeave(item: IHeaderMenuItem) {
-        item.marked = false;
-        if (this.selectedItem) {
-            this.selectedItem.marked = true;
-        }
-    }
 
 
     selectItem(item: IHeaderMenuItem) {

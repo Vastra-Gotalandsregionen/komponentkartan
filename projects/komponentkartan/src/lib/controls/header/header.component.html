@@ -3,7 +3,7 @@
   <div *ngIf="systemText" class="header__system-text-box" tabindex="1">
     {{systemText}}
   </div>
-  <div *ngIf="userName" [ngClass]="{ 'header__login-info-menu': headerMenu }" tabindex="1" (mousedown)="clickToggleHeaderMenu($event)"
+  <div *ngIf="userName" [ngClass]="{ 'header__login-info-menu': headerMenu }" tabindex="1" (click)="clickToggleHeaderMenu($event)"
     (keydown)="keyToggleHeaderMenu($event)">
     <vgr-login-information [initials]="internalInitials" [userName]="userName" [textColor]="textColor" [circleColor]="circleColor"></vgr-login-information>
     <div *ngIf="headerMenu" class="header__login-info-menu-arrow"></div>

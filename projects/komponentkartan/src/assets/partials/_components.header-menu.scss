@@ -93,13 +93,21 @@
 
 /* Left side line, indicating that this element is hovered or active. Accessed by javascript*/
 
-.header-menu-item--marked {
+.header-menu-item--header a:hover {
     @extend .border-left-color--primary;
     border-left-width: 4px;
     border-left-style: solid;
     font-weight: bold;
+    padding-left: 11px;
 }
+.header-menu-submenu a:hover {
+    @extend .border-left-color--primary;
+    border-left-width: 4px;
+    border-left-style: solid;
+    font-weight: bold;
+    padding-left: 21px;
 
+}
 .header-menu-item--selected {
     font-weight: bold;
 }
