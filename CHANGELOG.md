@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Input component: a bound form control is not changed on a DOM blur event.
 - Fixing a bug in header menu where clicks get captured.
 
-## 4.0.0 (beta)
+## 4.0.0 (Stable, 2019-02-08)
 - *Breaking change* Angular is upgraded to version 7.
 - *Breaking change* Dropdown and dropdown multiselect have been replaced by a declarative component called dropdown select.
 - *Breaking change* Added new discreet style to vgr-button. Input secondary is removed and replaced by buttonStyle. 
@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Changed modal-css to allow it to be placed outside of root.
 - Removed the need fo rxjs-compat, all should be upgraded for rxjs6.
 
-## 3.2.1 (Stable, 2018-10-05)
+## 3.2.1 (2018-10-05)
 - Removed large font-size on long menu-headers
 - Adjusted hover-effects on vgr-table.
 
