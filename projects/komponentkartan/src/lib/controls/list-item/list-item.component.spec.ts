@@ -9,6 +9,7 @@ import { ListItemContentComponent } from './list-item-content.component';
 import { ListColumnComponent } from '../list/list-column.component';
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
+import { ListService } from '../list/list.service';
 
 @Component({
   selector: 'vgr-test',
@@ -27,6 +28,11 @@ import { RowNotification } from '../../models/rowNotification.model';
 })
 class TestListItemComponent { }
 
+class ListServiceMock {
+  requestExpandListItem(listItem: ListItemComponent) {
+    listItem.setExpanded(true);
+  }
+}
 
 describe('ListItemComponent', () => {
   let component: ListItemComponent;
@@ -43,6 +49,9 @@ describe('ListItemComponent', () => {
         ListItemContentComponent,
         ListItemHeaderComponent,
         ListColumnComponent
+      ],
+      providers: [
+        { provide: ListService, useClass: ListServiceMock }
       ]
     }).compileComponents();
 
@@ -55,11 +64,17 @@ describe('ListItemComponent', () => {
 
   describe('When initialized as expanded', () => {
     beforeEach(() => {
-      component.isExpanded = true;
+      spyOn(component, 'toggleExpanded').and.callThrough();
+      component.expanded = true;
+      component.ngOnChanges({ expanded: new SimpleChange(undefined, true, true) });
       fixture.detectChanges();
     });
 
-    it('the component is collapsed', () => {
+    it('toggleExpanded has been called once', () => {
+      expect(component.toggleExpanded).toHaveBeenCalledTimes(1);
+    });
+
+    it('the component is expanded', () => {
       expect(listElement.classes['list-item--expanded']).toBe(true);
     });
   });
@@ -92,7 +107,7 @@ describe('ListItemComponent', () => {
 
       fixture.detectChanges();
     });
-    it('toggleExpand has been called once', () => {
+    it('toggleExpanded has been called once', () => {
       expect(component.toggleExpanded).toHaveBeenCalledTimes(1);
     });
     it('component is expanded', () => {
@@ -120,7 +135,7 @@ describe('ListItemComponent', () => {
       it('component is not expanded', () => {
         expect(listElement.classes['list-item--expanded']).toBe(false);
       });
-      it('toggleExpand has been called once again', () => {
+      it('toggleExpanded has been called once again', () => {
         expect(component.toggleExpanded).toHaveBeenCalledTimes(2);
       });
     });
@@ -128,7 +143,7 @@ describe('ListItemComponent', () => {
 
   describe('When the list-item-header is in focus', () => {
     let header: DebugElement;
-    let toggleExpandSpy: jasmine.Spy;
+    let onKeyDownSpy: jasmine.Spy;
     beforeEach(() => {
       header = fixture.debugElement.query(By.directive(ListItemHeaderComponent)); // First element in list-item which is list-item-header;
 
@@ -146,7 +161,7 @@ describe('ListItemComponent', () => {
       spyOn(component.setFocusOnNextRowContent, 'emit');
 
       spyOn(component, 'toggleExpanded').and.callThrough();
-      toggleExpandSpy = spyOn(component.listItemHeader, 'toggleExpand').and.callThrough();
+      onKeyDownSpy = spyOn(component.listItemHeader, 'onKeyDown').and.callThrough();
       spyOn(component.listItemHeader, 'setFocus').and.callThrough();
 
       component.ngAfterContentInit();
@@ -169,8 +184,8 @@ describe('ListItemComponent', () => {
         expect(component.listItemHeader.expandedChanged.emit).toHaveBeenCalledWith(true);
       });
 
-      it('listItemHeaderComponent listItemHeader toggleExpand has been called', () => {
-        expect(component.listItemHeader.toggleExpand).toHaveBeenCalled();
+      it('listItemHeaderComponent listItemHeader onKeyDown has been called', () => {
+        expect(component.listItemHeader.onKeyDown).toHaveBeenCalled();
       });
 
       it('listItemHeaderComponent listItemHeader setExpandOrCollapsed has been called', () => {

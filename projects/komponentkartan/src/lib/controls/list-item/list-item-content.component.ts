@@ -14,7 +14,7 @@ export class ListItemContentComponent {
     @Input() indentContent = true;
 
     @HostListener('keydown', ['$event'])
-    toggleExpand(event: KeyboardEvent) {
+    onKeyDown(event: KeyboardEvent) {
         if (event.ctrlKey && event.keyCode === 33) { // Ctrl + PageUp
             this.goUp.emit();
             event.preventDefault();

@@ -17,7 +17,7 @@ export class ListItemHeaderComponent implements AfterViewInit {
     @Output() goDown: EventEmitter<any> = new EventEmitter();
 
     @HostListener('keydown', ['$event'])
-    toggleExpand(event: KeyboardEvent) {
+    onKeyDown(event: KeyboardEvent) {
         if (event.keyCode === 13 || event.keyCode === 32) { // enter & space
             this.expandedChanged.emit(true);
             this.expanded = !this.expanded;

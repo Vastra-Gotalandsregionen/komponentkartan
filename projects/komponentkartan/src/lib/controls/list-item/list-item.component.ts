@@ -133,7 +133,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
 
     if (this.isExpanded) {
-      if (this.preventCollapse) {
+      if (this.preventCollapse || this.notInteractable) {
         this.collapsePrevented.emit();
       } else {
         this.setExpanded(false);
