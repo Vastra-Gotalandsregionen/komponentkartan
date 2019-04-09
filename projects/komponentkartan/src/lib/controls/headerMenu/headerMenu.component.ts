@@ -42,6 +42,18 @@ export class HeaderMenuComponent {
         }
     }
 
+    onMouseEnter(item: IHeaderMenuItem) {
+        this.menu.menuItems.forEach(x => x.marked = false);
+
+        item.marked = true;
+    }
+
+    onMouseLeave(item: IHeaderMenuItem) {
+        item.marked = false;
+        if (this.selectedItem) {
+            this.selectedItem.marked = true;
+        }
+    }
 
 
     selectItem(item: IHeaderMenuItem) {

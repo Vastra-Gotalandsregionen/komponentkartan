@@ -110,7 +110,7 @@ describe('HeaderMenuComponent', () => {
         let itemToClick: DebugElement;
         beforeEach(() => {
           itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('Min sida'))[0];
-          itemToClick.nativeElement.click();
+          itemToClick.triggerEventHandler('mousedown', null);
           fixture.detectChanges();
 
         });
@@ -119,6 +119,46 @@ describe('HeaderMenuComponent', () => {
         });
         it('the clicked item is marked', () => {
           expect(itemToClick.classes['header-menu-item--marked']).toBe(true);
+        });
+
+        describe('and an item is hovered', () => {
+          let itemToHover: DebugElement;
+          beforeEach(() => {
+            itemToHover = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('FAQ'))[0];
+            itemToHover.triggerEventHandler('mouseenter', null);
+            fixture.detectChanges();
+          });
+          it('the hovered item is marked', () => {
+            expect(itemToHover.classes['header-menu-item--marked']).toBe(true);
+          });
+          it('the hovered item is not selected', () => {
+            expect(itemToHover.classes['header-menu-item--selected']).toBe(false);
+          });
+          it('the selected item is not marked', () => {
+            expect(itemToClick.classes['header-menu-item--marked']).toBe(false);
+          });
+          it('the clicked item is selected', () => {
+            expect(itemToClick.classes['header-menu-item--selected']).toBe(true);
+          });
+
+          describe('and the item is un-hovered', () => {
+            beforeEach(() => {
+              itemToHover.triggerEventHandler('mouseleave', null);
+              fixture.detectChanges();
+            });
+            it('the un-hovered item is not marked', () => {
+              expect(itemToHover.classes['header-menu-item--marked']).toBe(false);
+            });
+            it('the un-hovered item is not selected', () => {
+              expect(itemToHover.classes['header-menu-item--selected']).toBe(false);
+            });
+            it('the selected item is marked', () => {
+              expect(itemToClick.classes['header-menu-item--marked']).toBe(true);
+            });
+            it('the clicked item is selected', () => {
+              expect(itemToClick.classes['header-menu-item--selected']).toBe(true);
+            });
+          });
         });
       });
 
@@ -140,7 +180,7 @@ describe('HeaderMenuComponent', () => {
     let itemToClick: DebugElement;
     beforeEach(() => {
       itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('FAQ'))[0];
-      itemToClick.triggerEventHandler('click', null);
+      itemToClick.triggerEventHandler('mousedown', null);
       fixture.detectChanges();
 
     });
