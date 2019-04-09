@@ -1,5 +1,5 @@
-﻿<div class="header-menu" [ngClass]="{'header-menu--hidden' : hidden}">
-  <div class="header-menu__content">
+﻿<div class="header-menu" [ngClass]="{'header-menu--hidden' : hideMenu}">
+    <div class="header-menu__content">
     <ul>
       <li *ngFor="let menuItem of menu.menuItems" class="header-menu-item--header"
         [ngClass]="{'header-menu-divider': menuItem.isSeparator, 'header-menu-submenu--expanded': menuItem.expanded}">

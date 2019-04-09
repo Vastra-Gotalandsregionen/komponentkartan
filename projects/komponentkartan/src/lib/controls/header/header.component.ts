@@ -18,6 +18,7 @@ export class HeaderComponent implements OnChanges {
   @Input() logoClass: string;
   @ViewChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
   internalInitials: string;
+  hideMenu = true;
 
   ngOnChanges(changes: SimpleChanges) {
     const initialsChange = changes['initials'];
@@ -36,7 +37,6 @@ export class HeaderComponent implements OnChanges {
       this.internalInitials = this.getInitialsFromUserName();
     }
   }
-
   clickToggleHeaderMenu(event: Event) {
     if (!this.headerMenuComponent) {
       return;
