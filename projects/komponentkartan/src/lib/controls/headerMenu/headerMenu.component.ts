@@ -8,23 +8,14 @@ import { IHeaderMenu, IHeaderMenuItem } from '../../models/headerMenu.model';
 
 export class HeaderMenuComponent {
     @Input() menu: IHeaderMenu;
-    hidden: boolean;
+    @Input() hideMenu: boolean = true;
     selectedItem: IHeaderMenuItem;
 
     constructor(private elementRef: ElementRef) {
-        this.hidden = true;
     }
 
     toggleHeaderMenu(event: MouseEvent|any) {
-        this.hidden = !this.hidden;
-
-        if (event.target && event.target.nodeName === 'A') {
-            event.target.click();
-        }
-
-        if (!this.hidden) {
-            event.cancelBubble = true;
-        }
+        this.hideMenu = !this.hideMenu;
     }
 
     toggleSubMenu(item: IHeaderMenuItem) {
@@ -33,12 +24,11 @@ export class HeaderMenuComponent {
         event.cancelBubble = true;
     }
 
-    @HostListener('document:mousedown', ['$event'])
+    @HostListener('document:click', ['$event'])
     onDocumentClick(event: any) {
         const target = event.target || event.srcElement || event.currentTarget;
-
-        if (!this.elementRef.nativeElement.contains(target)) {
-            this.hidden = true;
+        if (!this.elementRef.nativeElement.parentNode.contains(target)) {
+            this.hideMenu = true;
         }
     }
 
