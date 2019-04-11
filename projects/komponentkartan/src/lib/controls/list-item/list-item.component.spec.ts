@@ -107,16 +107,14 @@ describe('ListItemComponent', () => {
 
       fixture.detectChanges();
     });
+
     it('toggleExpanded has been called once', () => {
       expect(component.toggleExpanded).toHaveBeenCalledTimes(1);
     });
+
     it('component is expanded', () => {
       expect(listElement.classes['list-item--expanded']).toBe(true);
     });
-
-    /*it('click event is not bubbled', () => {
-      expect(event.cancelBubble).toBeTruthy();
-    });*/
 
     describe('and the header is clicked again', () => {
       const event2: any = { cancelBubble: false };
@@ -135,6 +133,7 @@ describe('ListItemComponent', () => {
       it('component is not expanded', () => {
         expect(listElement.classes['list-item--expanded']).toBe(false);
       });
+      
       it('toggleExpanded has been called once again', () => {
         expect(component.toggleExpanded).toHaveBeenCalledTimes(2);
       });

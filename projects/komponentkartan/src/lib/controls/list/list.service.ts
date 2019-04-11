@@ -8,7 +8,7 @@ export class ListService {
 
   private expandListItemRequestedSource = new Subject<any>();
 
-  expandListItemRequested$ = this.expandListItemRequestedSource.asObservable();
+  expandListItemRequested = this.expandListItemRequestedSource.asObservable();
 
   constructor() { }
 

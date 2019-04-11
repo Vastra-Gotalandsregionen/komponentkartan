@@ -1,159 +1,33 @@
-import {
-  ListComponent, ListHeaderComponent, SortChangedArgs,
-  SortDirection, ListItemComponent
-} from '../../index';
+import { ListComponent } from './list.component';
 import { ListService } from './list.service';
+import { Subject } from 'rxjs';
+
+class ListServiceMock {
+  expandListItemRequested = new Subject<any>().asObservable();
+}
 
 describe('[ListComponent]', () => {
-  let listService: ListService;
-  let listComponent: ListComponent;
-  let childItem1: ListItemComponent;
-  let childItem2: ListItemComponent;
-  let childItem3: ListItemComponent;
+  let component: ListComponent;
 
   beforeEach(() => {
-    listService = new ListService();
-    listComponent = new ListComponent(listService);
-    listComponent.listHeader = new ListHeaderComponent();
-    childItem1 = new ListItemComponent(listService);
-    childItem2 = new ListItemComponent(listService);
-    childItem3 = new ListItemComponent(listService);
-    listComponent.items.reset([childItem1, childItem2, childItem3]);
+    component = new ListComponent(new ListServiceMock() as ListService);
+  });
 
-    describe('when header changes sort', () => {
-      beforeEach(() => {
-        spyOn(listComponent.sortChanged, 'emit');
-        listComponent.ngAfterContentInit();
-        listComponent.listHeader.sortChanged.emit({ direction: SortDirection.Ascending, key: 'foo' } as SortChangedArgs);
-      });
-      it('a sortChange event is emitted', () => {
-        expect(listComponent.sortChanged.emit).toHaveBeenCalledWith({ direction: SortDirection.Ascending, key: 'foo' });
-      });
+  describe('Instatiate', () => {
+    it('allowMultipleExpandedItems is correct', () => {
+      expect(component.allowMultipleExpandedItems).toBe(false);
     });
-    describe('when list is initialized with three items', () => {
-
-      beforeEach(() => {
-        spyOn(listComponent, 'setFocusOnPreviousRow').and.callThrough();
-        spyOn(listComponent, 'setFocusOnNextRow').and.callThrough();
-
-        listComponent.ngAfterContentInit();
-      });
-
-      describe('and multiple expanded items is not allowed', () => {
-        beforeEach(() => {
-          listComponent.allowMultipleExpandedItems = false;
-          childItem1.notInteractable = false;
-          childItem2.notInteractable = false;
-          childItem3.notInteractable = false;
-
-          childItem1.preventCollapse = false;
-          childItem2.preventCollapse = false;
-          childItem3.preventCollapse = false;
-          spyOn(childItem1, 'toggleExpanded').and.callThrough();
-          spyOn(childItem2, 'toggleExpanded').and.callThrough();
-          spyOn(childItem3, 'toggleExpanded').and.callThrough();
-        });
-        describe('and a child item is expanded', () => {
-          beforeEach(() => {
-            childItem1.isExpanded = false;
-            childItem2.isExpanded = false;
-            childItem3.isExpanded = false;
-            childItem1.toggleExpanded();
-          });
-          it('the other items are collapsed', () => {
-            expect(childItem1.toggleExpanded).toHaveBeenCalledWith();
-            expect(childItem1.isExpanded).toBe(true);
-            expect(childItem2.isExpanded).toBe(false);
-            expect(childItem3.isExpanded).toBe(false);
-          });
-        });
-        describe('and a different child item is expanded', () => {
-          beforeEach(() => {
-            childItem1.isExpanded = true;
-            childItem2.isExpanded = false;
-            childItem3.isExpanded = true;
-            childItem2.toggleExpanded();
-          });
-          it('the other items are collapsed', () => {
-            expect(childItem2.toggleExpanded).toHaveBeenCalledWith();
-            expect(childItem2.isExpanded).toBe(true);
-            expect(childItem1.toggleExpanded).toHaveBeenCalledWith(true);
-            expect(childItem3.toggleExpanded).toHaveBeenCalledWith(true);
-            expect(childItem1.isExpanded).toBe(false);
-            expect(childItem3.isExpanded).toBe(false);
-          });
-        });
-      });
-
-      describe('and focus is on the first list-item header', () => {
-        beforeEach(() => {
-          spyOn(childItem3, 'setFocusOnRow').and.callThrough();
-          listComponent.setFocusOnPreviousRow(0);
-        });
-        it('setFocusOnPreviousRow toHaveBeenCalled ', () => {
-          expect(listComponent.setFocusOnPreviousRow).toHaveBeenCalledWith(0);
-
-        });
-        it('setFocusOnRow on the last list-item-header toHaveBeenCalled ', () => {
-          expect(childItem3.setFocusOnRow).toHaveBeenCalled();
-        });
-      });
-
-      describe('and focus is on the second list-item header', () => {
-        beforeEach(() => {
-          spyOn(childItem1, 'setFocusOnRow');
-          listComponent.setFocusOnPreviousRow(1);
-
-        });
-        it('setFocusOnPreviousRow toHaveBeenCalled ', () => {
-          expect(listComponent.setFocusOnPreviousRow).toHaveBeenCalledWith(1);
-
-        });
-        it('setFocusOnRow toHaveBeenCalled ', () => {
-          expect(childItem1.setFocusOnRow).toHaveBeenCalled();
-        });
-      });
-
-      describe('and focus is on the second item list-item header', () => {
-        beforeEach(() => {
-          spyOn(childItem3, 'setFocusOnRow');
-          listComponent.setFocusOnNextRow(1);
-        });
-        it('setFocusOnNextRow toHaveBeenCalled ', () => {
-          expect(listComponent.setFocusOnNextRow).toHaveBeenCalledWith(1);
-        });
-        it('setFocusOnRow toHaveBeenCalled ', () => {
-          expect(childItem3.setFocusOnRow).toHaveBeenCalled();
-        });
-      });
-
-      describe('and focus is on the last item list-item header', () => {
-        beforeEach(() => {
-          spyOn(childItem1, 'setFocusOnRow');
-          listComponent.setFocusOnNextRow(2);
-        });
-        it('setFocusOnNextRow toHaveBeenCalled ', () => {
-          expect(listComponent.setFocusOnNextRow).toHaveBeenCalledWith(2);
-        });
-        it('setFocusOnRow toHaveBeenCalled ', () => {
-          expect(childItem1.setFocusOnRow).toHaveBeenCalled();
-        });
-      });
-
-      describe('and focus is on the last item list-item content and item is not collapsed', () => {
-        beforeEach(() => {
-          spyOn(listComponent, 'setFocusOnPreviousRowContent').and.callThrough();
-          spyOn(childItem1, 'setFocusOnRow');
-          // childItem1.collapsed = false;
-          listComponent.setFocusOnPreviousRowContent(childItem1);
-        });
-        it('setFocusOnNextRow toHaveBeenCalled ', () => {
-          expect(listComponent.setFocusOnPreviousRowContent).toHaveBeenCalledWith(childItem1);
-        });
-        xit('setFocusOnRow toHaveBeenCalled ', () => {
-          expect(childItem1.setFocusOnRow).toHaveBeenCalled();
-        });
-      });
+    it('notification is correct', () => {
+      expect(component.notification).toBe(undefined);
+    });
+    it('pages is correct', () => {
+      expect(component.pages).toBe(1);
+    });
+    it('activePage is correct', () => {
+      expect(component.activePage).toBe(1);
+    });
+    it('flexibleHeader is correct', () => {
+      expect(component.flexibleHeader).toBe(false);
     });
   });
 });

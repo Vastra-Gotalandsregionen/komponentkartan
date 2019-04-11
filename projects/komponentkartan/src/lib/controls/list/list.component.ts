@@ -1,10 +1,11 @@
 import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
-
-import { ListItemComponent } from '../list-item/list-item.component';
-import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { Notification } from '../../models/notification.model';
+import { ListItemComponent } from '../list-item/list-item.component';
+import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 import { ListService } from './list.service';
 
 @Component({
@@ -26,7 +27,7 @@ import { ListService } from './list.service';
 })
 export class ListComponent implements AfterContentInit, OnDestroy {
   @Input() allowMultipleExpandedItems = false;
-  @Input() notification;
+  @Input() notification: Notification;
   @Input() pages = 1;
   @Input() activePage = 1;
   @Input() @HostBinding('class.list--inline') flexibleHeader = false;
@@ -52,7 +53,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
         .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
     }
 
-    this.listService.expandListItemRequested$
+    this.listService.expandListItemRequested
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe((itemToExpand: ListItemComponent) => {
         if (this.allowMultipleExpandedItems) {
           itemToExpand.setExpanded(true);
@@ -126,7 +127,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     }, 2600);
   }
 
-  setFocusOnPreviousRow(index: number): any {
+  setFocusOnPreviousRow(index: number) {
     if (index === 0) {
       this.items.toArray()[this.items.toArray().length - 1].setFocusOnRow();
     } else {

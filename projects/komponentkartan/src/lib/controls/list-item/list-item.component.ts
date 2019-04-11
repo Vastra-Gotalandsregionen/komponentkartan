@@ -102,8 +102,10 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.expanded && changes.expanded.currentValue !== undefined) {
-      if (changes.expanded.currentValue !== this.isExpanded) {
+    if (changes.expanded && changes.expanded.currentValue !== this.isExpanded) {
+      if (changes.expanded.isFirstChange()) {
+        this.isExpanded = changes.expanded.currentValue;
+      } else {
         this.toggleExpanded();
       }
     }
@@ -159,7 +161,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   hideNotifications() {
     if (this.temporaryNotificationVisible) {
-      if (this.notification && this.notification.type === 2) {
+      if (this.notification && this.notification.type === NotificationType.ShowOnRemove) {
         setTimeout(() => {
           this.isDeleted = true;
         }, this.showNotificationDurationMs);

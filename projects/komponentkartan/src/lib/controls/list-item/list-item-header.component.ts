@@ -18,24 +18,24 @@ export class ListItemHeaderComponent implements AfterViewInit {
 
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent) {
-        if (event.keyCode === 13 || event.keyCode === 32) { // enter & space
+        if (event.key === 'Enter' || event.key === 'Space' || event.key === ' ') {
             this.expandedChanged.emit(true);
             this.expanded = !this.expanded;
             event.preventDefault();
         }
-        if (event.keyCode === 36) { // Home
+        if (event.key === 'Home') {
             this.goToFirst.emit();
             event.preventDefault();
         }
-        if (event.keyCode === 35) { // End
+        if (event.key === 'End') {
             this.goToLast.emit();
             event.preventDefault();
         }
-        if ((event.ctrlKey && event.keyCode === 33) || event.keyCode === 38) { // Ctrl + PageUp and Arrow Up
+        if ((event.ctrlKey && event.key === 'PageUp') || event.key === 'ArrowUp' || event.key === 'Up') {
             this.goUp.emit();
             event.preventDefault();
         }
-        if ((event.ctrlKey && event.keyCode === 34) || event.keyCode === 40) { // PageDown and Arrow Down
+        if ((event.ctrlKey && event.key === 'PageDown') || event.key === 'ArrowDown' || event.key === 'Down') {
             this.goDown.emit();
             event.preventDefault();
         }
