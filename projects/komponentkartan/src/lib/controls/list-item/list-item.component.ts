@@ -111,7 +111,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
 
     if (changes.notification && changes.notification.currentValue) {
-      this.handleNotifications(changes.notification);
+      this.handleNotifications(changes.notification.currentValue);
     }
   }
 
@@ -205,23 +205,21 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-
-  handleNotifications(notification: SimpleChange) {
+  handleNotifications(currentNotification: RowNotification) {
     // Hantera de olika notifieringstyperna
-    const current = notification.currentValue;
-    if (current.type === NotificationType.Permanent) {
-      this.permanentNotification = current;
-    } else if (current.type === NotificationType.ShowOnCollapse) {
-      this.temporaryNotification = current;
+    if (currentNotification.type === NotificationType.Permanent) {
+      this.permanentNotification = currentNotification;
+    } else if (currentNotification.type === NotificationType.ShowOnCollapse) {
+      this.temporaryNotification = currentNotification;
       this.temporaryNotificationVisible = true;
-      if (current.removeWhenDone) {
+      if (currentNotification.removeWhenDone) {
         this.permanentNotification = null;
       }
       setTimeout(() => {
         this.toggleExpanded(true);
       }, this.showNotificationDurationMs);
-    } else if (current.type === NotificationType.ShowOnRemove) {
-      this.temporaryNotification = current;
+    } else if (currentNotification.type === NotificationType.ShowOnRemove) {
+      this.temporaryNotification = currentNotification;
       this.temporaryNotificationVisible = true;
       setTimeout(() => {
         this.toggleExpanded(true);

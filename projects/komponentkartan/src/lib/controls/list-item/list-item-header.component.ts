@@ -18,7 +18,7 @@ export class ListItemHeaderComponent implements AfterViewInit {
 
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent) {
-        if (event.key === 'Enter' || event.key === 'Space' || event.key === ' ') {
+        if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
             this.expandedChanged.emit(true);
             this.expanded = !this.expanded;
             event.preventDefault();
