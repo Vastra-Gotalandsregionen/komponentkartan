@@ -124,7 +124,7 @@ describe('[ListItemComponent]', () => {
         });
         it('temporaryNotification is removed', () => {
           jasmine.clock().tick(component.showNotificationDurationMs);
-          jasmine.clock().tick(component.showNotificationDurationMs); // keeps showing in collapsed state
+          jasmine.clock().tick(component.showNotificationDurationMs); // new timer to show note in collapsed state
           expect(component.temporaryNotification).toBeFalsy();
         });
       });
@@ -142,7 +142,7 @@ describe('[ListItemComponent]', () => {
         });
         it('item is removed', () => {
           jasmine.clock().tick(component.showNotificationDurationMs);
-          jasmine.clock().tick(component.showNotificationDurationMs); // keeps showing in collapsed state
+          jasmine.clock().tick(component.showNotificationDurationMs); // new timer to show note in collapsed state
           expect(component.isDeleted).toBe(true);
         });
       });

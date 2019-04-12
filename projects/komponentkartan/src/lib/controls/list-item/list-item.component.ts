@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter, ContentChildren, ContentChild, QueryList,
-  AfterContentInit, forwardRef, OnDestroy, OnChanges, SimpleChanges, SimpleChange
+  AfterContentInit, forwardRef, OnDestroy, OnChanges, SimpleChanges,
 } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 

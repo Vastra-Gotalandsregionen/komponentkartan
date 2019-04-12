@@ -41,8 +41,6 @@ describe('[ListComponent - Angular]', () => {
   let headerElement: DebugElement;
 
   beforeEach(() => {
-    TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [
         TestComponent,
