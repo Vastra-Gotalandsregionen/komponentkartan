@@ -21,11 +21,13 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   @Output() selectedDateChanged = new EventEmitter<Date>();
 
   @ViewChild('datepicker') datepicker: ElementRef;
+  @ViewChild('headerLabel') headerLabel: ElementRef;
   @ViewChild('headerInput') headerInput: ElementRef;
   @ViewChild('calendar') calendar: ElementRef;
   @ViewChildren(DatepickerItemComponent) items: QueryList<DatepickerItemComponent>;
 
   label = '';
+  labelDateFormat: string;
   headerHasFocus = false;
   expanded = false;
   years: Calendar;
@@ -38,7 +40,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
-  constructor(private elementRef: ElementRef, @Optional() @Self() private formControl: NgControl) {
+  constructor(@Optional() @Self() private formControl: NgControl) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
@@ -70,28 +72,6 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     this.ngUnsubscribeItems.complete();
   }
 
-  subscribeToItems() {
-    this.ngUnsubscribeItems.next();
-    this.ngUnsubscribeItems.complete();
-    this.ngUnsubscribeItems = new Subject();
-
-    this.items.forEach(item => {
-      item.select
-        .pipe(takeUntil(this.ngUnsubscribeItems))
-        .subscribe(date => {
-          this.collapse();
-          this.setSelectedDate(date);
-        });
-
-      item.zoomIn
-        .pipe(takeUntil(this.ngUnsubscribeItems))
-        .subscribe(date => {
-          this.calendar.nativeElement.focus();
-          this.zoomIn(date);
-        });
-    });
-  }
-
   writeValue(value: any) {
     this.selectedDate = value;
     this.label = this.formatDate(value);
@@ -118,28 +98,11 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
   onTouched(value: any) { }
 
-  focusHeaderInput() {
-    this.headerInput.nativeElement.focus();
-  }
-
   toggleExpanded() {
     if (this.expanded) {
       this.collapse();
     } else {
       this.expand();
-    }
-  }
-
-  expand() {
-    this.setZoomLevel(this.minZoomLevel, this.selectedDate || new Date());
-    this.expanded = true;
-  }
-
-  collapse(focusHeader = true) {
-    this.expanded = false;
-
-    if (focusHeader) {
-      this.focusHeaderInput();
     }
   }
 
@@ -160,7 +123,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     }
 
     this.onTouched(this.selectedDate);
-    // this.collapse(false);
+    this.collapse(false);
   }
 
   onKeydown(event: KeyboardEvent) {
@@ -180,43 +143,38 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   onHeaderKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       this.toggleExpanded();
+    } else if (event.key === 'ArrowDown' || event.key === 'Down') {
+      if (this.expanded) {
+        const itemToFocus = this.items.find(x => x.selected) || this.items.first;
+        itemToFocus.focus();
+      }
     }
   }
 
   onCalendarKeydown(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft' || event.key === 'Left') {
-      let focusedIndex = -1;
-      const items = this.elementRef.nativeElement.getElementsByClassName('datepicker-new__calendar__body__item');
-      for (let index = 0; index < items.length; index++) {
-        if (items[index] === document.activeElement) {
-          focusedIndex = index;
-        }
-      }
-      if (focusedIndex > 0) {
-        items[focusedIndex - 1].focus();
-      } else if (this.zoomedToDays) {
+    if (event.key === 'PageDown' && !event.altKey) {
+      if (this.zoomedToDays) {
         this.days.previous();
       } else if (this.zoomedToMonths) {
         this.months.previous();
-      } else if (this.zoomToYears) {
+      } else if (this.zoomedToYears) {
         this.years.previous();
       }
-    } else if (event.key === 'ArrowRight' || event.key === 'Right') {
-      let focusedIndex = -1;
-      const items = this.elementRef.nativeElement.getElementsByClassName('datepicker-new__calendar__body__item');
-      for (let index = 0; index < items.length; index++) {
-        if (items[index] === document.activeElement) {
-          focusedIndex = index;
-        }
-      }
-      if (focusedIndex < items.length - 1) {
-        items[focusedIndex + 1].focus();
-      } else if (this.zoomedToDays) {
+    } else if (event.key === 'PageUp' && !event.altKey) {
+      if (this.zoomedToDays) {
         this.days.next();
       } else if (this.zoomedToMonths) {
         this.months.next();
-      } else if (this.zoomToYears) {
+      } else if (this.zoomedToYears) {
         this.years.next();
+      }
+    } else if (event.key === 'PageDown' && event.altKey) {
+      if (this.zoomedToDays) {
+        // this.days.previous();
+      }
+    } else if (event.key === 'PageUp' && event.altKey) {
+      if (this.zoomedToDays) {
+        // this.days.next();
       }
     }
   }
@@ -246,29 +204,36 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     this.collapse();
   }
 
-  setZoomLevel(zoomLevel: DatepickerZoomLevel, referenceDate: Date, focus = true) {
-    switch (zoomLevel) {
+  private expand() {
+    const referenceDate = this.selectedDate || new Date();
+    switch (this.minZoomLevel) {
       case DatepickerZoomLevel.Days:
-        this.zoomToDays(referenceDate);
+        this.zoomToDays(referenceDate, false);
         break;
       case DatepickerZoomLevel.Months:
-        this.zoomToMonths(referenceDate);
+        this.zoomToMonths(referenceDate, false);
         break;
       case DatepickerZoomLevel.Years:
-        this.zoomToYears(referenceDate);
+        this.zoomToYears(referenceDate, referenceDate, false);
         break;
     }
+
+    this.expanded = true;
   }
 
-  zoomIn(referenceDate: Date) {
-    if (this.zoomedToYears) {
-      this.zoomToMonths(referenceDate);
-    } else if (this.zoomedToMonths) {
-      this.zoomToDays(referenceDate);
+  private collapse(focusHeader = true) {
+    this.expanded = false;
+
+    if (focusHeader) {
+      if (this.headerInput) {
+        this.headerInput.nativeElement.focus();
+      } else if (this.headerLabel) {
+        this.headerLabel.nativeElement.focus();
+      }
     }
   }
 
-  zoomToDays(referenceDate: Date) {
+  private zoomToDays(referenceDate: Date, focus = true) {
     this.zoomedToYears = false;
     this.zoomedToMonths = false;
     this.zoomedToDays = true;
@@ -305,13 +270,40 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     this.days = {
       date: new Date(year, month),
       items: items,
-      previous: () => this.setZoomLevel(DatepickerZoomLevel.Days, new Date(year, month - 1)),
-      next: () => this.setZoomLevel(DatepickerZoomLevel.Days, new Date(year, month + 1)),
-      zoomOut: () => this.setZoomLevel(DatepickerZoomLevel.Months, new Date(year, month))
+      previous: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        let dayToFocus = focusedItem ? focusedItem.date.getDate() : 1;
+        if (dayToFocus > 28) {
+          const previousMonthLastDay = new Date(year, month, 0).getDate();
+          if (previousMonthLastDay < dayToFocus) {
+            dayToFocus = previousMonthLastDay;
+          }
+        }
+        this.zoomToDays(new Date(year, month - 1, dayToFocus));
+      },
+      next: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        let dayToFocus = focusedItem ? focusedItem.date.getDate() : 1;
+        if (dayToFocus > 28) {
+          const nextMonthLastDay = new Date(year, month + 1, 0).getDate();
+          if (nextMonthLastDay < dayToFocus) {
+            dayToFocus = nextMonthLastDay;
+          }
+        }
+        this.zoomToDays(new Date(year, month + 1, dayToFocus));
+      },
+      zoomOut: () => this.zoomToMonths(new Date(year, month))
     };
+
+    if (focus) {
+      this.calendar.nativeElement.focus();
+      setTimeout(() => {
+        this.items.find(x => x.date.getDate() === referenceDate.getDate()).focus();
+      });
+    }
   }
 
-  zoomToMonths(referenceDate: Date) {
+  private zoomToMonths(referenceDate: Date, focus = true) {
     this.zoomedToYears = false;
     this.zoomedToMonths = true;
     this.zoomedToDays = false;
@@ -355,13 +347,28 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     this.months = {
       date: new Date(year, 0),
       items: items,
-      previous: () => this.setZoomLevel(DatepickerZoomLevel.Months, new Date(year - 1, 0)),
-      next: () => this.setZoomLevel(DatepickerZoomLevel.Months, new Date(year + 1, 0)),
-      zoomOut: () => this.setZoomLevel(DatepickerZoomLevel.Years, new Date(year, 0))
+      previous: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        const monthToFocus = focusedItem ? focusedItem.date.getMonth() : 0;
+        this.zoomToMonths(new Date(year - 1, monthToFocus));
+      },
+      next: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        const monthToFocus = focusedItem ? focusedItem.date.getMonth() : 0;
+        this.zoomToMonths(new Date(year + 1, monthToFocus));
+      },
+      zoomOut: () => this.zoomToYears(new Date(year, 0), new Date(year, 0))
     };
+
+    if (focus) {
+      this.calendar.nativeElement.focus();
+      setTimeout(() => {
+        this.items.find(x => x.date.getMonth() === referenceDate.getMonth()).focus();
+      });
+    }
   }
 
-  zoomToYears(referenceDate: Date) {
+  private zoomToYears(referenceDate: Date, focusDate: Date, focus = true) {
     this.zoomedToYears = true;
     this.zoomedToMonths = false;
     this.zoomedToDays = false;
@@ -401,10 +408,25 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     this.years = {
       date: null,
       items: items,
-      previous: () => this.setZoomLevel(DatepickerZoomLevel.Years, new Date(year - 9, 0)),
-      next: () => this.setZoomLevel(DatepickerZoomLevel.Years, new Date(year + 9, 0)),
+      previous: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        const yearToFocus = focusedItem ? focusedItem.date.getFullYear() - 9 : year - 9;
+        this.zoomToYears(new Date(year - 9, 0), new Date(yearToFocus, 0));
+      },
+      next: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        const yearToFocus = focusedItem ? focusedItem.date.getFullYear() + 9 : year + 9;
+        this.zoomToYears(new Date(year + 9, 0), new Date(yearToFocus, 0));
+      },
       zoomOut: () => { }
     };
+
+    if (focus) {
+      this.calendar.nativeElement.focus();
+      setTimeout(() => {
+        this.items.find(x => x.date.getFullYear() === focusDate.getFullYear()).focus();
+      });
+    }
   }
 
   private setMinZoomLevel() {
@@ -416,6 +438,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.zoomedToYears = true;
         this.zoomedToMonths = false;
         this.zoomedToDays = false;
+        this.labelDateFormat = 'yyyy';
         break;
       case 'months':
       case 'month':
@@ -424,12 +447,14 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.zoomedToYears = false;
         this.zoomedToMonths = true;
         this.zoomedToDays = false;
+        this.labelDateFormat = 'MMM yyyy';
         break;
       default:
         this.minZoomLevel = DatepickerZoomLevel.Days;
         this.zoomedToYears = false;
         this.zoomedToMonths = false;
         this.zoomedToDays = true;
+        this.labelDateFormat = 'yyyy-MM-dd';
         break;
     }
   }
@@ -452,6 +477,146 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     const daySpacer = day < 10 ? '0' : '';
 
     return `${year}-${monthSpacer}${month}-${daySpacer}${day}`;
+  }
+
+  private subscribeToItems() {
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
+    this.ngUnsubscribeItems = new Subject();
+
+    this.items.forEach(item => {
+      item.select
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          this.collapse();
+          this.setSelectedDate(date);
+        });
+
+      item.zoomIn
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          console.log(document.activeElement);
+          if (this.zoomedToYears) {
+            this.zoomToMonths(date);
+          } else if (this.zoomedToMonths) {
+            this.zoomToDays(date);
+          }
+        });
+
+      item.previousColumn
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          if (this.zoomedToDays) {
+            const dayToFocus = date.getDate() - 1;
+            if (dayToFocus < 1) {
+              this.zoomToDays(new Date(date.getFullYear(), date.getMonth(), 0));
+            } else {
+              this.items.find(x => x.date.getDate() === dayToFocus).focus();
+            }
+          } else if (this.zoomedToMonths) {
+            const monthToFocus = date.getMonth() - 1;
+            if (monthToFocus < 0) {
+              this.zoomToMonths(new Date(date.getFullYear() - 1, 11));
+            } else {
+              this.items.find(x => x.date.getMonth() === monthToFocus).focus();
+            }
+          } else if (this.zoomedToYears) {
+            const yearToFocus = date.getFullYear() - 1;
+            if (yearToFocus < this.items.first.date.getFullYear()) {
+              this.zoomToYears(new Date(this.items.first.date.getFullYear() - 5, 0), new Date(yearToFocus, 0));
+            } else {
+              this.items.find(x => x.date.getFullYear() === yearToFocus).focus();
+            }
+          }
+        });
+
+      item.nextColumn
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          if (this.zoomedToDays) {
+            const dayToFocus = date.getDate() + 1;
+            if (dayToFocus > 28) {
+              const dateToFocus = new Date(date.getFullYear(), date.getMonth(), dayToFocus);
+              if (dateToFocus.getDate() !== dayToFocus) {
+                this.zoomToDays(new Date(date.getFullYear(), date.getMonth() + 1, 1));
+                return;
+              }
+            }
+            this.items.find(x => x.date.getDate() === dayToFocus).focus();
+          } else if (this.zoomedToMonths) {
+            const monthToFocus = date.getMonth() + 1;
+            if (monthToFocus > 11) {
+              this.zoomToMonths(new Date(date.getFullYear() + 1, 0));
+            } else {
+              this.items.find(x => x.date.getMonth() === monthToFocus).focus();
+            }
+          } else if (this.zoomedToYears) {
+            const yearToFocus = date.getFullYear() + 1;
+            if (yearToFocus > this.items.last.date.getFullYear()) {
+              this.zoomToYears(new Date(this.items.last.date.getFullYear() + 5, 0), new Date(yearToFocus, 0));
+            } else {
+              this.items.find(x => x.date.getFullYear() === yearToFocus).focus();
+            }
+          }
+        });
+
+      item.previousRow
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          if (this.zoomedToDays) {
+            const dayToFocus = date.getDate() - 7;
+            if (dayToFocus < 1) {
+              this.zoomToDays(new Date(date.getFullYear(), date.getMonth(), dayToFocus));
+            } else {
+              this.items.find(x => x.date.getDate() === dayToFocus).focus();
+            }
+          } else if (this.zoomedToMonths) {
+            const monthToFocus = date.getMonth() - 4;
+            if (monthToFocus < 0) {
+              this.zoomToMonths(new Date(date.getFullYear(), monthToFocus));
+            } else {
+              this.items.find(x => x.date.getMonth() === monthToFocus).focus();
+            }
+          } else if (this.zoomedToYears) {
+            const yearToFocus = date.getFullYear() - 3;
+            if (yearToFocus < this.items.first.date.getFullYear()) {
+              this.zoomToYears(new Date(this.items.first.date.getFullYear() - 5, 0), new Date(yearToFocus, 0));
+            } else {
+              this.items.find(x => x.date.getFullYear() === yearToFocus).focus();
+            }
+          }
+        });
+
+      item.nextRow
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          if (this.zoomedToDays) {
+            const dayToFocus = date.getDate() + 7;
+            if (dayToFocus > 28) {
+              const dateToFocus = new Date(date.getFullYear(), date.getMonth(), dayToFocus);
+              if (dateToFocus.getDate() !== dayToFocus) {
+                this.zoomToDays(dateToFocus);
+                return;
+              }
+            }
+            this.items.find(x => x.date.getDate() === dayToFocus).focus();
+          } else if (this.zoomedToMonths) {
+            const monthToFocus = date.getMonth() + 4;
+            if (monthToFocus > 11) {
+              this.zoomToMonths(new Date(date.getFullYear(), monthToFocus));
+            } else {
+              this.items.find(x => x.date.getMonth() === monthToFocus).focus();
+            }
+          } else if (this.zoomedToYears) {
+            const yearToFocus = date.getFullYear() + 3;
+            if (yearToFocus > this.items.last.date.getFullYear()) {
+              this.zoomToYears(new Date(this.items.last.date.getFullYear() + 5, 0), new Date(yearToFocus, 0));
+            } else {
+              this.items.find(x => x.date.getFullYear() === yearToFocus).focus();
+            }
+          }
+        });
+    });
   }
 }
 

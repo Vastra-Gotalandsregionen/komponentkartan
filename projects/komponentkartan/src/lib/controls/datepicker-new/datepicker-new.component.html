@@ -1,13 +1,17 @@
 <div #datepicker class="datepicker-new" (keydown)="onKeydown($event)" (focusout)="onBlur($event)">
   <div class="datepicker-new__header" [ngClass]="{'datepicker-new__header--focus': headerHasFocus}"
-    (keydown)="onHeaderKeydown($event)" (click)="focusHeaderInput(); toggleExpanded()">
-    <input #headerInput placeholder="ÅÅÅÅMMDD" [value]="label" [disabled]="!allowText || disabled"
-      (change)="parseSelectedDate($event.target.value)" (focus)="onHeaderFocus()" (blur)="onHeaderBlur()">
+    (keydown)="onHeaderKeydown($event)" (click)="toggleExpanded()">
+    <div #headerLabel *ngIf="!allowText" class="datepicker-new__header__label" tabindex="0" (focus)="onHeaderFocus()"
+      (blur)="onHeaderBlur()">{{selectedDate | date:labelDateFormat}}</div>
+    <input #headerInput *ngIf="allowText" class="datepicker-new__header__input" placeholder="ÅÅÅÅMMDD" [value]="label"
+      [disabled]="!allowText || disabled" (change)="parseSelectedDate($event.target.value)" (focus)="onHeaderFocus()"
+      (blur)="onHeaderBlur()">
     <div class="datepicker-new__header__button">
       <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'" [size]="'lg'"></vgr-icon>
     </div>
   </div>
-  <div #calendar *ngIf="expanded" class="datepicker-new__calendar noselect" tabindex="0" (keydown)="onCalendarKeydown($event)">
+  <div #calendar *ngIf="expanded" class="datepicker-new__calendar noselect" tabindex="0"
+    (keydown)="onCalendarKeydown($event)">
     <div *ngIf="zoomedToDays">
       <div class="datepicker-new__calendar__header">
         <div (click)="days.previous()">
@@ -31,7 +35,8 @@
           </tr>
           <tr *ngFor="let row of days.items">
             <td *ngFor="let item of row">
-              <vgr-datepicker-item *ngIf="item" [type]="'day'" [date]="item.date" [selected]="item.selected" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+              <vgr-datepicker-item *ngIf="item" [type]="'day'" [date]="item.date" [selected]="item.selected"
+                [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
             </td>
           </tr>
         </table>
@@ -51,7 +56,8 @@
         <table class="datepicker-new__calendar__body__months">
           <tr *ngFor="let row of months.items">
             <td *ngFor="let item of row">
-              <vgr-datepicker-item [type]="'month'" [date]="item.date" [selected]="item.selected" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+              <vgr-datepicker-item [type]="'month'" [date]="item.date" [selected]="item.selected"
+                [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
             </td>
           </tr>
         </table>
@@ -70,7 +76,8 @@
         <table class="datepicker-new__calendar__body__years">
           <tr *ngFor="let row of years.items">
             <td *ngFor="let item of row">
-              <vgr-datepicker-item [type]="'year'" [date]="item.date" [selected]="item.selected" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+              <vgr-datepicker-item [type]="'year'" [date]="item.date" [selected]="item.selected"
+                [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
             </td>
           </tr>
         </table>

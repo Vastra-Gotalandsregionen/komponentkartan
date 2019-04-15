@@ -3,20 +3,52 @@
   position: relative;
 
   .datepicker-new__header {
+    position: relative;
     height: $component-height;
-    display: flex;
+    width: 160px;
+    cursor: pointer;
 
     &.datepicker-new__header--focus {
       outline: $focus-outline-width solid $focus-color;
     }
 
+    .datepicker-new__header__label {
+      height: $component-height;
+      width: 160px;
+      padding-left: $margin--slim;
+      border: $border--single solid $control-border-color--default;
+      border-radius: 1px;
+      background-color: $background-color--content;
+      
+      &:focus {
+        outline: 0;
+      }
+    }
+
+    .datepicker-new__header__input {
+      height: $component-height;
+      width: 160px;
+      border: $border--single solid $control-border-color--default;
+      border-radius: 1px;
+
+      &:focus {
+        outline: 0;
+      }
+    }
+
     .datepicker-new__header__button {
       @extend .background-color--primary;
-      padding-left: 5px;
-      padding-right: 5px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: $component-height;
+      border-top-right-radius: 1px;
+      border-bottom-right-radius: 1px;
+      width: 36px;
       display: flex;
+      justify-content: center;
       align-items: center;
-      cursor: pointer;
+      pointer-events: none;
     }
   }
   
@@ -30,16 +62,6 @@
     height: 311px;
     outline: 0;
     cursor: default;
-    
-    &::before {
-      @extend .bg-image-menu-arrow;
-      content: "";
-      position: absolute;
-      display: inline-block;
-      z-index: $layer-four;
-      top: -17px;
-      left: 20px;
-    }
     
     .datepicker-new__calendar__header {
       @extend .background-color--primary;
@@ -127,7 +149,7 @@
           @extend .border-color--secondary;
           color: $text-color--light;
         }
-        
+
         &:focus {
           outline: 0;
           border-color: $focus-color;
@@ -136,15 +158,21 @@
         
         &.datepicker-new__calendar__body__item--selected {
           @extend .background-color--primary;
-          @extend .border-color--primary;
           color: $text-color--light;
-          border-width: 1px;
+          
+          &:not(:focus) {
+            @extend .border-color--primary;
+            border-width: 1px;
+          }
         }
         
         &.datepicker-new__calendar__body__item--current {
-          @extend .border-color--primary;
           background-color: $background-color--content;
-          border-width: 1px;
+          
+          &:not(:focus) {
+            @extend .border-color--primary;
+            border-width: 1px;
+          }
         }
       }
     }

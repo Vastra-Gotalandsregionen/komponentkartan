@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'vgr-datepicker-item',
@@ -9,15 +9,20 @@ export class DatepickerItemComponent implements OnInit {
   @Input() type: string;
   @Input() selected: boolean;
   @Input() isMinZoom: boolean;
+  @Input() row: number;
+  @Input() column: number;
 
   @Output() select = new EventEmitter<Date>();
   @Output() zoomIn = new EventEmitter<Date>();
+  @Output() previousColumn = new EventEmitter<Date>();
+  @Output() nextColumn = new EventEmitter<Date>();
+  @Output() previousRow = new EventEmitter<Date>();
+  @Output() nextRow = new EventEmitter<Date>();
 
+  @ViewChild('item') item: ElementRef;
   dateFormat: string;
   current: boolean;
-
-  constructor() {
-  }
+  focused: boolean;
 
   ngOnInit() {
     const today = new Date();
@@ -44,6 +49,36 @@ export class DatepickerItemComponent implements OnInit {
   }
 
   onClick() {
+    this.activate();
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === 'Space' || event.key === ' ') {
+      this.activate();
+    } else if (event.key === 'ArrowLeft' || event.key === 'Left') {
+      this.previousColumn.emit(this.date);
+    } else if (event.key === 'ArrowRight' || event.key === 'Right') {
+      this.nextColumn.emit(this.date);
+    } else if (event.key === 'ArrowUp' || event.key === 'Up') {
+      this.previousRow.emit(this.date);
+    } else if (event.key === 'ArrowDown' || event.key === 'Down') {
+      this.nextRow.emit(this.date);
+    }
+  }
+
+  onFocus() {
+    this.focused = true;
+  }
+
+  onBlur() {
+    this.focused = false;
+  }
+
+  focus() {
+    this.item.nativeElement.focus();
+  }
+
+  private activate() {
     if (this.isMinZoom) {
       this.select.emit(this.date);
     } else {
