@@ -4,17 +4,6 @@
   min-height: 20px;
   .expandable-div-header {
     cursor: pointer;
-    .expandable-div-chevron {
-      position: absolute;
-      top: 0;
-      right: 0px;
-      &.expanded {
-        @extend .chevron-expanded;
-      }
-      &.collapsed {
-        @extend .chevron-collapsed;
-      }
-    }
   }
   &.expandable-div--collapsed {
     .expandable-div-content {
@@ -30,4 +19,16 @@
 .expandable-div-header:focus {
   outline: 0;
   box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+}
+.expandable-div-header {
+  .icon {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    transform: rotate(0deg);
+    transition: transform 0.4s;
+  }
+  &[aria-expanded=true] .icon {
+    transform: rotate(180deg);
+  }
 }

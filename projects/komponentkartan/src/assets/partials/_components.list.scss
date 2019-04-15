@@ -18,9 +18,30 @@
   }
 }
 
+.list-item {
+  position: relative;
+  .list-item__header_wrapper {
+    > vgr-icon {
+      .icon {
+        position: absolute;
+        top: 8px;
+        right: 20px;
+        transform: rotate(0deg);
+        transition: -webkit-transform 0.4s;
+        transition: transform 0.4s;
+        transition: transform 0.4s, -webkit-transform 0.4s;
+      }
+      &.expanded {
+        .icon {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
+
 .list-item-content {
   overflow: hidden;
-
   &.overflow-visible {
     overflow: visible;
   }
@@ -158,25 +179,6 @@ vgr-list.list--new-item-added {
 
 /* Expandable container = en rad i listan som kan expanderas*/
 
-.chevron-expanded {
-  @extend .bg-image-icon-chevron;
-  content: "";
-  transform: rotate(-180deg);
-  transition: transform 0.4s;
-  width: 15px !important;
-  background-size: 100% !important;
-  display: block;
-}
-
-.chevron-collapsed {
-  @extend .bg-image-icon-chevron;
-  content: "";
-  width: 15px !important;
-  background-size: 100% !important;
-  display: block;
-  transform: rotate(0deg);
-  transition: transform 0.4s;
-}
 
 .list-item {
   visibility: visible;
@@ -186,12 +188,6 @@ vgr-list.list--new-item-added {
   display: block;
   border-left: 5px solid white;
   transition: border-left-color 0.2s ease, margin-top 0.2s ease-in;
-
-  .list-item__header:after {
-    @extend .chevron-collapsed;
-    margin-left: auto;
-  }
-
   //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
 
   &.list-item--expanded:not(.list-item--compact) {
@@ -200,12 +196,6 @@ vgr-list.list--new-item-added {
     margin-bottom: 14px;
   }
 
-  &.list-item--expanded {
-    .list-item__header:after {
-      //OBS! Denna måste ligga efter expanded-stilen i filen!
-      @extend .chevron-expanded;
-    }
-  }
 
   //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
   &:not(.list-item--compact):hover {
@@ -312,7 +302,7 @@ vgr-list.list--new-item-added {
   }
 
   .list-item__notification__message {
-    padding: 3px 0;
+    padding: 3px;
   }
 }
 
@@ -325,8 +315,7 @@ vgr-list.list--new-item-added {
   }
 
   .list-item__notification__message {
-    margin-left: 36px;
-    margin-top: 3px;
+    margin-left: 6px;
     font-size: 16px;
   }
 }
@@ -476,14 +465,14 @@ vgr-list.list--new-item-added {
 
     .list-item__notification__message {
       font-size: 18px;
-      margin-top: 1px;
     }
   }
 }
 
 .list__notification {
   background: $background-color--content;
-  //border: 1px solid red;
+  display: flex;
+  align-items: baseline;
 }
 
 .column--align-left {

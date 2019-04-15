@@ -10,6 +10,8 @@ import {
   ListItemComponent, ListItemHeaderComponent, ListColumnComponent, ListHeaderComponent,
   ListItemContentComponent, ListColumnHeaderComponent, PaginationComponent
 } from '../../index';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconComponent } from '../icon/icon.component';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -28,9 +30,10 @@ describe('ListComponent', () => {
         ListItemHeaderComponent,
         ListColumnComponent,
         ListItemContentComponent,
-        PaginationComponent
+        PaginationComponent,
+        IconComponent
       ],
-      imports: [CommonModule, BrowserAnimationsModule],
+      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule],
       providers: [
         { provide: ElementRef },
         { provide: Renderer }]

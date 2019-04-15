@@ -147,7 +147,6 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     const type = notification ? notification.type : null;
     if (!this.temporaryNotification) {
       this.temporaryNotificationVisible = false;
-      this.handleNotificatonColor();
       if (type && type === NotificationType.ShowOnCollapse) {
         this.notification = this.permanentNotification ? this.permanentNotification : null;
         this.notificationChanged.emit(this.notification);
@@ -155,19 +154,19 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  handleNotificatonColor() {
-    const current = this.temporaryNotification ? this.temporaryNotification : this.permanentNotification;
-    if (current) {
-      // Hantera färg på vänsterkanten
-      if (current.icon === 'vgr-icon-exclamation--red' || current.icon === 'vgr-icon-ok-check-green') {
-        this.notificationColor = current.icon === 'vgr-icon-exclamation--red' ? 'notification-error' : 'notification-success';
-      } else {
-        this.notificationColor = null;
-      }
-    } else {
-      this.notificationColor = null;
-    }
-  }
+  // handleNotificatonColor() {
+  //   const current = this.temporaryNotification ? this.temporaryNotification : this.permanentNotification;
+  //   if (current) {
+  //     // Hantera färg på vänsterkanten
+  //     if (current.icon.name === 'check-circle') 
+  //       this.notificationColor = 'success';
+  //     else if (current.icon.name === 'exclamation-circle')
+  //       this.notificationColor = 'error';
+  //   } 
+  //   else {
+  //     this.notificationColor = null;
+  //   }
+  // }
 
   triggerDeletedEvent() {
     if (this.isDeleted) {
@@ -197,7 +196,6 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
         this.toggleExpand(true);
       }, this.showNotificationDurationMs);
     }
-    this.handleNotificatonColor();
   }
 
   ngOnDestroy() {

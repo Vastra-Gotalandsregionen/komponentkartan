@@ -9,6 +9,8 @@ import { ListItemContentComponent } from './list-item-content.component';
 import { ListColumnComponent } from '../list/list-column.component';
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'vgr-test',
@@ -36,13 +38,17 @@ describe('ListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
+      imports: [
+        NoopAnimationsModule,
+        FontAwesomeModule
+      ],
       declarations: [
         ListItemComponent,
         TestListItemComponent,
         ListItemContentComponent,
         ListItemHeaderComponent,
-        ListColumnComponent
+        ListColumnComponent,
+        IconComponent
       ]
     }).compileComponents();
 
@@ -339,7 +345,7 @@ describe('ListItemComponent', () => {
   describe('When initialized with a Permanent notification', () => {
     let message;
     beforeEach(() => {
-      component.notification = { message: 'Information', icon: 'vgr-icon-ok-check ', type: NotificationType.Permanent } as RowNotification;
+      component.notification = { message: 'Information', icon: {name:'check-circle'}, type: NotificationType.Permanent } as RowNotification;
       component.expanded = true;
       // component.ngAfterContentInit();
       component.ngOnChanges({
@@ -357,7 +363,7 @@ describe('ListItemComponent', () => {
     });
 
     it('should show a temporary notificiation and restore permanent notification after delay', fakeAsync(() => {
-      component.notification = { message: 'Sparar', icon: 'vgr-icon-ok-check-green', type: NotificationType.ShowOnCollapse } as RowNotification;
+      component.notification = { message: 'Sparar', icon: {name: 'check-circle', color: 'success'}, type: NotificationType.ShowOnCollapse } as RowNotification;
       component.ngOnChanges({
         notification: new SimpleChange(component.permanentNotification, component.notification, true)
       });
@@ -393,7 +399,7 @@ describe('ListItemComponent', () => {
     }));
 
     it('should show a temporary notificiation and remove the permanent notification after delay', fakeAsync(() => {
-      component.notification = { message: 'Tar Bort', icon: 'vgr-icon-exclamation--red', type: NotificationType.ShowOnCollapse, removeWhenDone: true } as RowNotification;
+      component.notification = { message: 'Tar Bort', icon: {name: 'exclamation-circle', color: 'error'}, type: NotificationType.ShowOnCollapse, removeWhenDone: true } as RowNotification;
       component.ngOnChanges({
         notification: new SimpleChange(component.permanentNotification, component.notification, true)
       });
@@ -430,7 +436,7 @@ describe('ListItemComponent', () => {
     }));
 
     it('should show a temporary notificiation and remove the parent element after delay', fakeAsync(() => {
-      component.notification = { message: 'Tar Bort', icon: 'vgr-icon-ok-check-green', type: NotificationType.ShowOnRemove } as RowNotification;
+      component.notification = { message: 'Tar Bort', icon: {name: 'check-circle', color: 'success'}, type: NotificationType.ShowOnRemove } as RowNotification;
       component.ngOnChanges({
         notification: new SimpleChange(component.permanentNotification, component.notification, true)
       });

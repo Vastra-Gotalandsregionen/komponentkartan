@@ -30,7 +30,7 @@ export class ListexamplewithrownotificationComponent {
       htmlEncoder.prepareHighlightedSection(this.examples.htmlAdvancedListMarkup);
 
     this.panelNotification = {
-      message: 'Panelinformation', icon: 'vgr-icon-message',
+      message: 'Panelinformation', icon: {name: 'exclamation-circle'},
       type: NotificationType.Permanent
     } as RowNotification;
 
@@ -44,14 +44,14 @@ export class ListexamplewithrownotificationComponent {
 
     this.peopleRows = this.examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
-    this.peopleRows[0].setNotification('Meddelande: Text', 'vgr-icon-message');
-    this.peopleRows[2].setNotification('tillfällig', 'vgr-icon-message', true);
-    this.peopleRows[4].setNotification('Personen är inaktiv', 'vgr-icon-exclamation--red');
+    this.peopleRows[0].setNotification('Meddelande: Text', {name: 'check-circle'});
+    this.peopleRows[2].setNotification('tillfällig', {name: 'comment-dots'}, true);
+    this.peopleRows[4].setNotification('Personen är inaktiv', {name: 'comment-dots'});
   }
 
   deleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
     // Remove visually.
-    row.notifyOnRemove(row.previewObject.firstName + ' togs bort och kommer inte längre att kunna logga in', 'vgr-icon-ok-check');
+    row.notifyOnRemove(row.previewObject.firstName + ' togs bort och kommer inte längre att kunna logga in', {name: 'check-circle', color: 'success'});
 
     /*
      Remove for real...
@@ -63,11 +63,11 @@ export class ListexamplewithrownotificationComponent {
   }
 
   updateRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
-    row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green');
+    row.notifyOnCollapse(row.previewObject.firstName + ' sparades', {name: 'check-circle', color: 'success'});
   }
 
   updateRow2(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
-    row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green', true);
+    row.notifyOnCollapse(row.previewObject.firstName + ' sparades', {name: 'check-circle', color: 'success'}, true);
   }
 
   onSortChanged(event: SortChangedArgs) {

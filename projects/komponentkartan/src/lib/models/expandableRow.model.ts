@@ -9,16 +9,16 @@ export class ExpandableRow<TPreview, TFull> {
     constructor(previewObject: TPreview) {
         this.previewObject = previewObject;
     }
-    setNotification(message: string, icon: string, temporary = false) {
+    setNotification(message: string, icon: object, temporary = false) {
         const type = temporary ? NotificationType.ShowOnCollapse : NotificationType.Permanent;
         this.notification = { icon: icon, message: message, type: type } as RowNotification;
     }
 
-    notifyOnCollapse(message: string, icon: string, clearNotification: boolean = false) {
+    notifyOnCollapse(message: string, icon: object, clearNotification: boolean = false) {
         this.notification = { icon: icon, message: message, type: NotificationType.ShowOnCollapse, removeWhenDone: clearNotification } as RowNotification;
     }
 
-    notifyOnRemove(message: string, icon: string) {
+    notifyOnRemove(message: string, icon: object) {
         this.notification = { icon: icon, message: message, type: NotificationType.ShowOnRemove } as RowNotification;
     }
 

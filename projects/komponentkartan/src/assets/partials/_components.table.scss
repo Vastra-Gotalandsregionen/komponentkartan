@@ -75,13 +75,6 @@
   top: 0;
   right: $margin--slim;
 
-  &.expanded {
-    @extend .chevron-expanded;
-  }
-
-  &.collapsed {
-    @extend .chevron-collapsed;
-  }
 }
 
 .table > .table-header.expanded + .table-content{

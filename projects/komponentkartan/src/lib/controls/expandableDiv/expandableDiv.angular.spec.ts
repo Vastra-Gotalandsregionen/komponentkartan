@@ -8,6 +8,8 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconComponent } from '../icon/icon.component';
 
 describe('[ExpandableDivComponent]', () => {
 
@@ -21,8 +23,8 @@ describe('[ExpandableDivComponent]', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [ExpandableDivComponent],
-            imports: [CommonModule, BrowserAnimationsModule]
+            declarations: [ExpandableDivComponent, IconComponent],
+            imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule]
         });
 
         TestBed.overrideComponent(ExpandableDivComponent, {

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ExpandableRow, RowNotification, NotificationType, ModalService,
-  SortChangedArgs, ListHeaderComponent, SortDirection, Notification
-} from 'vgr-komponentkartan';
 import { Examples } from '../examples';
 import { HtmlEncodeService } from '../../../html-encode.service';
+import { RowNotification } from 'dist/komponentkartan/lib';
+import { Notification } from 'dist/komponentkartan/lib';
 
 @Component({
   selector: 'app-listexample',
@@ -26,7 +24,11 @@ export class ListexampleComponent {
 
     this.listNotification = {
       message: 'Här är ett exempel på en list-notifikation. De kan användas om det t.ex. blir något fel när man hämtar datan från servicen.',
-      icon: 'vgr-icon-exclamation--red'
+      icon: {
+        name: 'exclamation-circle',
+        color: 'error',
+        solid: true
+      }
     };
 
   }
