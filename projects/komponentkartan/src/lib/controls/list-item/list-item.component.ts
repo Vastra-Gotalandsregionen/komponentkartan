@@ -111,7 +111,10 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
 
     if (changes.notification && changes.notification.currentValue) {
-      this.handleNotifications(changes.notification.currentValue);
+      const notificationType = changes.notification.currentValue.NotificationType;
+      if (!this.preventCollapse || notificationType === NotificationType.Permanent) {
+        this.handleNotifications(changes.notification.currentValue);
+      }
     }
   }
 
@@ -129,11 +132,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  toggleExpanded(setCollapsed = false) {
-    if (setCollapsed && !this.isExpanded) {
-      return;
-    }
-
+  toggleExpanded() {
     if (this.isExpanded) {
       if (this.preventCollapse || this.notInteractable) {
         this.collapsePrevented.emit();
@@ -173,11 +172,11 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  closeTemporary(notification) {
+  closeTemporary(notification: RowNotification) {
     const type = notification ? notification.type : null;
     if (!this.temporaryNotification) {
       this.temporaryNotificationVisible = false;
-      this.handleNotificatonColor();
+      this.handleNotificationColor();
       if (type && type === NotificationType.ShowOnCollapse) {
         this.notification = this.permanentNotification ? this.permanentNotification : null;
         this.notificationChanged.emit(this.notification);
@@ -185,7 +184,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  handleNotificatonColor() {
+  handleNotificationColor() {
     const current = this.temporaryNotification ? this.temporaryNotification : this.permanentNotification;
     if (current) {
       // Hantera färg på vänsterkanten
@@ -206,26 +205,19 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   }
 
   handleNotifications(currentNotification: RowNotification) {
-    // Hantera de olika notifieringstyperna
     if (currentNotification.type === NotificationType.Permanent) {
       this.permanentNotification = currentNotification;
-    } else if (currentNotification.type === NotificationType.ShowOnCollapse) {
+    } else {
       this.temporaryNotification = currentNotification;
       this.temporaryNotificationVisible = true;
       if (currentNotification.removeWhenDone) {
         this.permanentNotification = null;
       }
       setTimeout(() => {
-        this.toggleExpanded(true);
-      }, this.showNotificationDurationMs);
-    } else if (currentNotification.type === NotificationType.ShowOnRemove) {
-      this.temporaryNotification = currentNotification;
-      this.temporaryNotificationVisible = true;
-      setTimeout(() => {
-        this.toggleExpanded(true);
+        this.setExpanded(false);
       }, this.showNotificationDurationMs);
     }
-    this.handleNotificatonColor();
+    this.handleNotificationColor();
   }
 
   ngOnDestroy() {

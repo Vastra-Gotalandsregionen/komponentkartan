@@ -15,11 +15,11 @@ export class ListItemContentComponent {
 
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent) {
-        if (event.ctrlKey && event.keyCode === 33) { // Ctrl + PageUp
+        if (event.ctrlKey && event.key === 'PageUp') {
             this.goUp.emit();
             event.preventDefault();
         }
-        if (event.ctrlKey && event.keyCode === 34) { // Ctrl + PageDown
+        if (event.ctrlKey && event.key === 'PageDown') {
             this.goDown.emit();
             event.preventDefault();
         }

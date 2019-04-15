@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
     SortDirection,  // Enum för vilket håll sorteringen skall ske.
-    SortChangedArgs // Args när sorteringordningen ändras.
+    SortChangedArgs, // Args när sorteringordningen ändras.
+    NotificationType,
+    RowNotification
 } from 'vgr-komponentkartan';
 import { HtmlEncodeService } from '../../../html-encode.service';
 import { Examples } from '../examples';
@@ -62,6 +64,28 @@ export class ListcodeexampleComponent implements OnInit {
         }
     }
 
+    showNotification(row: ExamplePerson, permanent: boolean) {
+        if (permanent) {
+            row.notification = {
+                type: NotificationType.Permanent,
+                message: 'En permanent notifiering',
+                icon: 'vgr-icon-message'
+            } as RowNotification;
+
+        } else {
+            row.notification = {
+                type: NotificationType.ShowOnCollapse,
+                message: 'En temporär notifiering',
+                icon: 'vgr-icon-message'
+                // removeWhenDone: true
+            } as RowNotification;
+        }
+    }
+
+    showNotificationOnFirstRow() {
+        this.showNotification(this.peopleRowsSimpleList[0], false);
+    }
+
     onExpandedChanged(row: ExamplePerson, expanded: boolean) {
         row.expanded = expanded;
 
@@ -94,5 +118,6 @@ export interface ExamplePerson {
     income: number;
     expanded: boolean;
     preventCollapse: boolean;
+    notification: RowNotification;
 }
 
