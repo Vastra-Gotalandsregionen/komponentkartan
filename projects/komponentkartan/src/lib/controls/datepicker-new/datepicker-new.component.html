@@ -1,87 +1,104 @@
-<div #datepicker class="datepicker-new" (keydown)="onKeydown($event)" (focusout)="onBlur($event)">
-  <div class="datepicker-new__header" [ngClass]="{'datepicker-new__header--focus': headerHasFocus}"
-    (keydown)="onHeaderKeydown($event)" (click)="toggleExpanded()">
-    <div #headerLabel *ngIf="!allowText" class="datepicker-new__header__label" tabindex="0" (focus)="onHeaderFocus()"
-      (blur)="onHeaderBlur()">{{selectedDate | date:labelDateFormat}}</div>
-    <input #headerInput *ngIf="allowText" class="datepicker-new__header__input" placeholder="ÅÅÅÅMMDD" [value]="label"
-      [disabled]="!allowText || disabled" (change)="parseSelectedDate($event.target.value)" (focus)="onHeaderFocus()"
-      (blur)="onHeaderBlur()">
-    <div class="datepicker-new__header__button">
-      <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'" [size]="'lg'"></vgr-icon>
+<div class="datepicker-new"
+  [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
+  <div class="validation">
+    <div #datepicker class="datepicker-new__control" [ngClass]="{ 'datepicker-new--disabled': disabled }"
+      (keydown)="onKeydown($event)" (focusout)="onBlur($event)">
+      <div class="datepicker-new__header" [ngClass]="{'datepicker-new__header--focus': headerHasFocus}"
+        (keydown)="onHeaderKeydown($event)" (click)="onHeaderClick()">
+        <div #headerLabel *ngIf="!allowText" class="datepicker-new__header__label" tabindex="0"
+          (focus)="onHeaderFocus()" (blur)="onHeaderBlur()">
+          <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
+          <span *ngIf="!selectedDate" class="noselect">Välj datum</span>
+        </div>
+        <input #headerInput *ngIf="allowText" class="datepicker-new__header__input" placeholder="ÅÅÅÅMMDD"
+          [value]="label" (change)="parseSelectedDate($event.target.value)" (focus)="onHeaderFocus()"
+          (blur)="onHeaderBlur()">
+        <div class="datepicker-new__header__button">
+          <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'" [size]="'lg'"></vgr-icon>
+        </div>
+      </div>
+      <div #calendar *ngIf="expanded" class="datepicker-new__calendar noselect" tabindex="0"
+        (keydown)="onCalendarKeydown($event)">
+        <div *ngIf="zoomedToDays">
+          <div class="datepicker-new__calendar__header">
+            <div (click)="days.previous()">
+              <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+            </div>
+            <div (click)="days.zoomOut()">{{days.date | date:'MMMM yyyy'}}</div>
+            <div (click)="days.next()">
+              <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+            </div>
+          </div>
+          <div class="datepicker-new__calendar__body">
+            <table class="datepicker-new__calendar__body__days">
+              <tr>
+                <td>Må</td>
+                <td>Ti</td>
+                <td>On</td>
+                <td>To</td>
+                <td>Fr</td>
+                <td>Lö</td>
+                <td>Sö</td>
+              </tr>
+              <tr *ngFor="let row of days.items">
+                <td *ngFor="let item of row">
+                  <vgr-datepicker-item *ngIf="item" [type]="'day'" [date]="item.date" [selected]="item.selected"
+                    [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="zoomedToMonths">
+          <div class="datepicker-new__calendar__header">
+            <div (click)="months.previous()">
+              <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+            </div>
+            <div (click)="months.zoomOut()">{{months.date | date:'yyyy'}}</div>
+            <div (click)="months.next()">
+              <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+            </div>
+          </div>
+          <div class="datepicker-new__calendar__body">
+            <table class="datepicker-new__calendar__body__months">
+              <tr *ngFor="let row of months.items">
+                <td *ngFor="let item of row">
+                  <vgr-datepicker-item [type]="'month'" [date]="item.date" [selected]="item.selected"
+                    [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="zoomedToYears">
+          <div class="datepicker-new__calendar__header">
+            <div (click)="years.previous()">
+              <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+            </div>
+            <div (click)="years.next()">
+              <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+            </div>
+          </div>
+          <div class="datepicker-new__calendar__body">
+            <table class="datepicker-new__calendar__body__years">
+              <tr *ngFor="let row of years.items">
+                <td *ngFor="let item of row">
+                  <vgr-datepicker-item [type]="'year'" [date]="item.date" [selected]="item.selected"
+                    [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div #calendar *ngIf="expanded" class="datepicker-new__calendar noselect" tabindex="0"
-    (keydown)="onCalendarKeydown($event)">
-    <div *ngIf="zoomedToDays">
-      <div class="datepicker-new__calendar__header">
-        <div (click)="days.previous()">
-          <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
-        </div>
-        <div (click)="days.zoomOut()">{{days.date | date:'MMMM yyyy'}}</div>
-        <div (click)="days.next()">
-          <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
-        </div>
-      </div>
-      <div class="datepicker-new__calendar__body">
-        <table class="datepicker-new__calendar__body__days">
-          <tr>
-            <td>Må</td>
-            <td>Ti</td>
-            <td>On</td>
-            <td>To</td>
-            <td>Fr</td>
-            <td>Lö</td>
-            <td>Sö</td>
-          </tr>
-          <tr *ngFor="let row of days.items">
-            <td *ngFor="let item of row">
-              <vgr-datepicker-item *ngIf="item" [type]="'day'" [date]="item.date" [selected]="item.selected"
-                [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
-            </td>
-          </tr>
-        </table>
-      </div>
+    <div *ngIf="parseError" class="validation__status" title="{{parseErrorMessage}}">
+      <div class="validation__status__icon"></div>
+      <div class="validation__status__message">{{parseErrorMessage}}</div>
     </div>
-    <div *ngIf="zoomedToMonths">
-      <div class="datepicker-new__calendar__header">
-        <div (click)="months.previous()">
-          <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
-        </div>
-        <div (click)="months.zoomOut()">{{months.date | date:'yyyy'}}</div>
-        <div (click)="months.next()">
-          <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
-        </div>
-      </div>
-      <div class="datepicker-new__calendar__body">
-        <table class="datepicker-new__calendar__body__months">
-          <tr *ngFor="let row of months.items">
-            <td *ngFor="let item of row">
-              <vgr-datepicker-item [type]="'month'" [date]="item.date" [selected]="item.selected"
-                [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div *ngIf="zoomedToYears">
-      <div class="datepicker-new__calendar__header">
-        <div (click)="years.previous()">
-          <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
-        </div>
-        <div (click)="years.next()">
-          <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
-        </div>
-      </div>
-      <div class="datepicker-new__calendar__body">
-        <table class="datepicker-new__calendar__body__years">
-          <tr *ngFor="let row of years.items">
-            <td *ngFor="let item of row">
-              <vgr-datepicker-item [type]="'year'" [date]="item.date" [selected]="item.selected"
-                [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
-            </td>
-          </tr>
-        </table>
-      </div>
+    <div *ngIf="!parseError" class="validation__status" title="{{errorMessage | errorMessage : formControl?.errors}}">
+      <div class="validation__status__icon"></div>
+      <div class="validation__status__message">{{errorMessage | errorMessage : formControl?.errors}}</div>
     </div>
   </div>
 </div>
