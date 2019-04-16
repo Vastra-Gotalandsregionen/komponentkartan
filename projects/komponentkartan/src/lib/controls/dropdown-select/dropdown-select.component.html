@@ -7,11 +7,7 @@
         [attr.aria-labelledby]="combinedLabelIds" (click)="toggleExpanded()" (keydown)="onHeaderKeydown($event)">
         <div class="dropdown-select__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
         <div class="dropdown-select__header__button">
-<<<<<<< HEAD
           <vgr-icon icon="chevron-down" size="sm" class="dropdown-select__header__button__icon"></vgr-icon>
-=======
-          <vgr-icon [icon]="'chevron-down'" [size]="'sm'" class="dropdown-select__header__button__icon"></vgr-icon>
->>>>>>> 0024238935871c31d340a00f3528fa43ad5cc509
         </div>
       </div>
       <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu" role="listbox"

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Modal background now correctly covers menus and headers.
 - Input component: a bound form control is not changed on a DOM blur event.
 - Fixing a bug in header menu where clicks get captured.
+- Changed icons to use vgr-icons
 
 ## 4.0.0 (Stable, 2019-02-08)
 - *Breaking change* Angular is upgraded to version 7.
