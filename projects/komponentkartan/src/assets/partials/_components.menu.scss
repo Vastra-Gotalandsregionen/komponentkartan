@@ -62,10 +62,15 @@
     }
     .menu__item__expander {
       position: absolute;
-      top: 5px;
       right: $margin--regular;
-      font-size: 10px;
-      padding-bottom: 26px;
+      transform: rotate(0deg);
+      transition: all ease 0.3s;
+      &.expanded {
+        transform: rotate(180deg);
+      }
+      .icon {
+        color: $text-color--default;
+      }
     }
     .menu__item__minus {
       @extend .bg-image-icon-minus;
@@ -222,8 +227,8 @@
         }
       }
       .menu__item__expander {
-        font-size: 11px;
-        top: 7px;
+        // font-size: 11px;
+        // top: 7px;
       }
     }
     .submenu {
