@@ -4,6 +4,20 @@
   min-height: 20px;
   .expandable-div-header {
     cursor: pointer;
+    > vgr-icon {
+      .icon {
+        position: absolute;
+        right: 0;
+        top: 4px;
+        transition: transform 0.4s;
+        transform: rotate(0deg);
+      }
+    }
+    > .expanded {
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
     .expandable-div-chevron {
       position: absolute;
       top: 0;

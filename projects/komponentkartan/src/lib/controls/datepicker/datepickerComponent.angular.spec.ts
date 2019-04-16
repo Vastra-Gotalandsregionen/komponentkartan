@@ -10,6 +10,8 @@ import { ICalendarDay } from '../../models/calendarDay.model';
 import { DatepickerComponent } from '../../controls/datepicker/datepicker.component';
 import { inject } from '@angular/core/testing';
 import { TruncatePipe } from '../../pipes/truncatePipe';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 describe('[DatepickerComponent(Angular)]', () => {
@@ -24,8 +26,8 @@ describe('[DatepickerComponent(Angular)]', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [DatepickerComponent, TruncatePipe],
-            imports: [CommonModule]
+            declarations: [DatepickerComponent, TruncatePipe, IconComponent],
+            imports: [CommonModule, FontAwesomeModule]
         });
 
         TestBed.overrideComponent(DatepickerComponent, {

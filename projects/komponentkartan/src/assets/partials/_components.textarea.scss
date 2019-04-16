@@ -56,11 +56,10 @@
     &_status {
       margin-top: 8px;
       &__message {
-        position: relative;
-        top: -2px;
         max-width: calc(100% - 30px);
         display: none;
         vertical-align: middle;
+        margin-left: 4px;
         .textarea-validation-error--active & {
           color: $primary-color--error;
           display: inline-block;
@@ -71,19 +70,16 @@
         }
       }
       &__icon {
-        position: relative;
-        top: -2px;
         display: none;
-        height: 30px;
-        width: 30px;
         vertical-align: middle;
-        .textarea-validation-error--active & {
-          @extend .bg-image-icon-exclamation--red;
-          display: inline-block;
+        .icon {
+          .textarea-validation-error--active & {
+            color: $primary-color--error;
+          }
         }
+        .textarea-validation-error--active &, 
         .textarea-validation-error--editing & {
           display: inline-block;
-          @extend .bg-image-icon-exclamation;
         }
       }
     }

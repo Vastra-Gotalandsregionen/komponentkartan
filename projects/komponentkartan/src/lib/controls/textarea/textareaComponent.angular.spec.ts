@@ -7,6 +7,8 @@ import {
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('TextareaComponent', () => {
   let component: TextareaComponent;
@@ -17,8 +19,8 @@ describe('TextareaComponent', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [TextareaComponent],
-      imports: [CommonModule, FormsModule, ReactiveFormsModule],
+      declarations: [TextareaComponent, IconComponent],
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule],
       providers: [ControlContainer]
     });
 

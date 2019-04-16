@@ -1,5 +1,6 @@
 <div class="list-item" [class.list-item--notification-visible]="temporaryNotification || permanentNotification" [class.list-item--expanded]="expanded" [ngClass]="notificationColor" [@deleted] (@deleted.done)="triggerDeletedEvent()" *ngIf="!isDeleted">
   <div class="list-item__header_wrapper" (click)="toggleExpand()">
+    <vgr-icon icon="chevron-down" size="sm"></vgr-icon>
     <ng-content select="vgr-list-item-header">
     </ng-content>
   </div>

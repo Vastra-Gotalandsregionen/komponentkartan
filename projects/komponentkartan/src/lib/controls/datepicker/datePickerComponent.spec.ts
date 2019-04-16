@@ -9,6 +9,9 @@ import { ICalendarWeek } from '../../models/calendarWeek.model';
 import { ICalendarDay } from '../../models/calendarDay.model';
 import { DatepickerComponent } from '../../controls/datepicker/datepicker.component';
 import { inject } from '@angular/core/testing';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TruncatePipe } from '../../pipes/truncatePipe';
 
 describe('[DatepickerComponent]', () => {
   let component: DatepickerComponent;
@@ -17,12 +20,28 @@ describe('[DatepickerComponent]', () => {
   let minDate: Date;
   let maxDate: Date;
 
+  let fixture: ComponentFixture<DatepickerComponent>;
+  let rootElement: DebugElement;
+  let testComponent: DatepickerComponent;
+
+
   describe('When initialized with minDate 2017-08-01 and maxDate 2017-09-01', () => {
-    beforeEach(() => {
+    beforeEach(async() => {
       component = new DatepickerComponent(null, { detectChanges: () => { } } as ChangeDetectorRef, null);
       component.minDate = new Date(2017, 7, 1);
       component.maxDate = new Date(2017, 8, 1);
       component.ngOnInit();
+
+      TestBed.resetTestEnvironment();
+      TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+    TestBed.configureTestingModule({
+        imports: [ CommonModule, FontAwesomeModule],
+        declarations: [DatepickerComponent, TruncatePipe, IconComponent]
+      });
+      fixture = TestBed.createComponent(DatepickerComponent);
+      testComponent = fixture.componentInstance;
+      fixture.detectChanges(); 
+
     });
 
     it('contains months after maxDate', () => {

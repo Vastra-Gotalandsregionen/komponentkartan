@@ -5,7 +5,7 @@
     <div class="datepicker__dropdown">
       <span *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}" id="{{labelledbyid}}">{{selectedDate | date: selectedDateFormat}}</span>
       <span *ngIf="!selectedDate" class="datepicker__calendar__selector" title="{{ readonly ? '' : noDateSelectedLabel }}" id="{{labelledbyid}}">{{ readonly ? '' : noDateSelectedLabel }}</span>
-
+      <vgr-icon icon="calendar-alt" [solid]="false"></vgr-icon>
       <!-- *ngIf="expanded" -->
       <div class="datepicker__calendar" (mousedown)="onCalendarMousedown($event)">
         <div class="datepicker__calendar__header">
@@ -45,8 +45,7 @@
     </div>
   </div>
   <div class="validation__status" title="{{validationErrorMessage}}">
-    <div class="validation__status__icon"></div>
+    <vgr-icon icon="exclamation-circle" class="validation__status__icon" size="sm"></vgr-icon>
     <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
   </div>
-
 </div>

@@ -9,6 +9,8 @@ import { ListItemContentComponent } from './list-item-content.component';
 import { ListColumnComponent } from '../list/list-column.component';
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'vgr-test',
@@ -36,13 +38,14 @@ describe('ListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
+      imports: [NoopAnimationsModule, FontAwesomeModule],
       declarations: [
         ListItemComponent,
         TestListItemComponent,
         ListItemContentComponent,
         ListItemHeaderComponent,
-        ListColumnComponent
+        ListColumnComponent,
+        IconComponent
       ]
     }).compileComponents();
 
