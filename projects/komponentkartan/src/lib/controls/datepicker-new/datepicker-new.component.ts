@@ -186,7 +186,11 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
     if (event.key === 'Enter') {
       this.toggleExpanded();
-    } else if (event.key === 'ArrowDown' || event.key === 'Down') {
+    } else if (
+      event.key === 'ArrowUp' || event.key === 'Up' ||
+      event.key === 'ArrowDown' || event.key === 'Down' ||
+      event.key === 'ArrowLeft' || event.key === 'Left' ||
+      event.key === 'ArrowRight' || event.key === 'Right') {
       if (this.expanded) {
         const itemToFocus = this.items.find(x => x.selected) || this.items.first;
         itemToFocus.focus();
@@ -195,6 +199,10 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onCalendarKeydown(event: KeyboardEvent) {
+    if (event.target !== this.calendar.nativeElement) {
+      return;
+    }
+
     if (event.key === 'PageDown' && !event.altKey) {
       if (this.zoomedToDays) {
         this.days.previous();
@@ -219,6 +227,13 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       if (this.zoomedToDays) {
         // TODO: Change year?
       }
+    } else if (
+      event.key === 'ArrowUp' || event.key === 'Up' ||
+      event.key === 'ArrowDown' || event.key === 'Down' ||
+      event.key === 'ArrowLeft' || event.key === 'Left' ||
+      event.key === 'ArrowRight' || event.key === 'Right') {
+      const itemToFocus = this.items.find(x => x.selected) || this.items.first;
+      itemToFocus.focus();
     }
   }
 
@@ -256,7 +271,21 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   private expand() {
-    const referenceDate = this.selectedDate || new Date();
+    let referenceDate: Date;
+    if (this.selectedDate) {
+      referenceDate = this.selectedDate;
+    } else {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (this.minDate && today < this.minDate) {
+        referenceDate = this.minDate;
+      } else if (this.maxDate && today > this.maxDate) {
+        referenceDate = this.maxDate;
+      } else {
+        referenceDate = today;
+      }
+    }
+
     switch (this.minZoomLevel) {
       case DatepickerZoomLevel.Days:
         this.zoomToDays(referenceDate);
@@ -308,9 +337,11 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
           const selectedMonth = this.selectedDate ? this.selectedDate.getMonth() : null;
           const selectedDay = this.selectedDate ? this.selectedDate.getDate() : null;
           const selected = date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === selectedDay;
+          const disabled = date < this.minDate || date > this.maxDate;
           weekDays.push({
             date: date,
             selected: selected,
+            disabled: disabled,
             isMinZoom: true
           });
         }
@@ -386,9 +417,12 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       for (let colIndex = 0; colIndex < 4; colIndex++) {
         const date = monthArray[4 * rowIndex + colIndex];
         const selected = date.getFullYear() === selectedYear && date.getMonth() === selectedMonth;
+        // TODO: Fix for month
+        const disabled = date < this.minDate || date > this.maxDate;
         row.push({
           date: date,
           selected: selected,
+          disabled: disabled,
           isMinZoom: isMinZoom
         });
       }
@@ -447,9 +481,12 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       for (let colIndex = 0; colIndex < 3; colIndex++) {
         const date = yearArray[3 * rowIndex + colIndex];
         const selected = date.getFullYear() === selectedYear;
+        // TODO: Fix for year
+        const disabled = date < this.minDate || date > this.maxDate;
         row.push({
           date: date,
           selected: selected,
+          disabled: disabled,
           isMinZoom: isMinZoom
         });
       }
@@ -551,9 +588,9 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         .pipe(takeUntil(this.ngUnsubscribeItems))
         .subscribe(date => {
           if (this.zoomedToYears) {
-            this.zoomToMonths(date);
+            this.zoomToMonths(date, true);
           } else if (this.zoomedToMonths) {
-            this.zoomToDays(date);
+            this.zoomToDays(date, true);
           }
         });
 
@@ -685,6 +722,7 @@ interface Calendar {
 interface CalendarItem {
   date: Date;
   selected: boolean;
+  disabled: boolean;
   isMinZoom: boolean;
 }
 

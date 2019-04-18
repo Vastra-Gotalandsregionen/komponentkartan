@@ -1,6 +1,6 @@
 <div>
   <div #item tabindex="0" class="datepicker-new__calendar__body__item"
-    [ngClass]="{'datepicker-new__calendar__body__item--selected': selected, 'datepicker-new__calendar__body__item--current': current}"
+    [ngClass]="{'datepicker-new__calendar__body__item--selected': selected, 'datepicker-new__calendar__body__item--current': current, 'datepicker-new__calendar__body__item--disabled': disabled}"
     (click)="onClick()" (keydown)="onKeydown($event)" (focus)="onFocus()" (blur)="onBlur()">
     {{date | date:dateFormat}}
   </div>

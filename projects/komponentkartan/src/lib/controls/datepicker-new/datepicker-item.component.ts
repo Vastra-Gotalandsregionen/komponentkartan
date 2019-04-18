@@ -8,9 +8,8 @@ export class DatepickerItemComponent implements OnInit {
   @Input() date: Date;
   @Input() type: string;
   @Input() selected: boolean;
+  @Input() disabled: boolean;
   @Input() isMinZoom: boolean;
-  @Input() row: number;
-  @Input() column: number;
 
   @Output() select = new EventEmitter<Date>();
   @Output() zoomIn = new EventEmitter<Date>();
@@ -54,14 +53,19 @@ export class DatepickerItemComponent implements OnInit {
 
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === 'Space' || event.key === ' ') {
+      event.stopPropagation();
       this.activate();
     } else if (event.key === 'ArrowLeft' || event.key === 'Left') {
+      event.stopPropagation();
       this.previousColumn.emit(this.date);
     } else if (event.key === 'ArrowRight' || event.key === 'Right') {
+      event.stopPropagation();
       this.nextColumn.emit(this.date);
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
+      event.stopPropagation();
       this.previousRow.emit(this.date);
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
+      event.stopPropagation();
       this.nextRow.emit(this.date);
     }
   }
@@ -79,6 +83,10 @@ export class DatepickerItemComponent implements OnInit {
   }
 
   private activate() {
+    if (this.disabled) {
+      return;
+    }
+
     if (this.isMinZoom) {
       this.select.emit(this.date);
     } else {

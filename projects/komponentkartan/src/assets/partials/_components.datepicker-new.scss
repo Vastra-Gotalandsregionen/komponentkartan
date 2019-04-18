@@ -66,8 +66,8 @@
       z-index: $layer-four;
       box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
       background-color: $background-color--content;
-      width: 272px;
-      height: 311px;
+      width: 262px;
+      height: 280px;
       outline: 0;
       cursor: default;
       
@@ -80,26 +80,38 @@
         height: 60px;
         padding-left: 20px;
         padding-right: 20px;
+        
+        .datepicker-new__calendar__header__date {
+          cursor: pointer;
+          
+          &:hover {
+            font-weight: bold;
+          }
+        }
+
+        .datepicker-new__calendar__header__chevron {
+          cursor: pointer;
+        }
       }
 
       .datepicker-new__calendar__body {
-        padding: 10px;
+        padding: 5px;
         
         .datepicker-new__calendar__body__days {
           td {
             width: 36px;
-            height: 33px;
+            height: 30px;
 
             div {
               display: flex;
               justify-content: center;
               align-items: center;
               width: 36px;
-              height: 33px;
+              height: 30px;
               
               div {
-                width: 30px;
-                height: 30px;
+                width: 28px;
+                height: 28px;
               }
             }
           }
@@ -108,18 +120,18 @@
         .datepicker-new__calendar__body__months {
           td {
             width: 63px;
-            height: 77px;
+            height: 70px;
 
             div {
               display: flex;
               justify-content: center;
               align-items: center;
               width: 63px;
-              height: 77px;
+              height: 70px;
               
               div {
-                width: 40px;
-                height: 40px;
+                width: 42px;
+                height: 42px;
               }
             }
           }
@@ -130,18 +142,18 @@
             text-align: center;
             vertical-align: middle;
             width: 84px;
-            height: 77px;
+            height: 70px;
 
             div {
               display: flex;
               justify-content: center;
               align-items: center;
               width: 84px;
-              height: 77px;
+              height: 70px;
               
               div {
-                width: 40px;
-                height: 40px;
+                width: 42px;
+                height: 42px;
               }
             }
           }
@@ -151,8 +163,9 @@
           border-radius: 50%;
           border-style: solid;
           border-width: 0;
+          cursor: pointer;
           
-          &:hover:not(.disabled) {
+          &:hover:not(.datepicker-new__calendar__body__item--disabled) {
             @extend .background-color--secondary;
             @extend .border-color--secondary;
             color: $text-color--light;
@@ -182,6 +195,11 @@
               border-width: 1px;
             }
           }
+
+          &.datepicker-new__calendar__body__item--disabled {
+            color: $text-color--read-only;
+            cursor: default;
+          }
         }
       }
     }
@@ -201,6 +219,84 @@
         .datepicker-new__header__button {
           background-color: $control-color--disabled;
           cursor: default;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .datepicker-new {
+    .datepicker-new__control {
+      .datepicker-new__header {
+        width: 170px;
+
+        .datepicker-new__header__label {
+          width: 170px;
+        }
+
+        .datepicker-new__header__input {
+          width: 170px;
+        }
+      }
+
+      .datepicker-new__calendar {
+        width: 272px;
+        height: 311px;
+
+        .datepicker-new__calendar__body {
+          padding: 10px;
+          
+          .datepicker-new__calendar__body__days {
+            td {
+              width: 36px;
+              height: 33px;
+  
+              div {
+                width: 36px;
+                height: 33px;
+                
+                div {
+                  width: 30px;
+                  height: 30px;
+                }
+              }
+            }
+          }
+  
+          .datepicker-new__calendar__body__months {
+            td {
+              width: 63px;
+              height: 77px;
+  
+              div {
+                width: 63px;
+                height: 77px;
+                
+                div {
+                  width: 46px;
+                  height: 46px;
+                }
+              }
+            }
+          }
+  
+          .datepicker-new__calendar__body__years {
+            td {
+              width: 84px;
+              height: 77px;
+  
+              div {
+                width: 84px;
+                height: 77px;
+                
+                div {
+                  width: 46px;
+                  height: 46px;
+                }
+              }
+            }
+          }
         }
       }
     }
