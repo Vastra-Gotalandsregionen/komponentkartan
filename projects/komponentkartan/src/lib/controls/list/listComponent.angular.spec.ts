@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement, Renderer, ElementRef, Input, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,6 +11,8 @@ import {
 } from '../../index';
 import { ListService } from './list.service';
 import { SortDirection } from './list-column-header.component';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'vgr-test',
@@ -51,9 +52,10 @@ describe('[ListComponent - Angular]', () => {
         ListItemHeaderComponent,
         ListColumnComponent,
         ListItemContentComponent,
-        PaginationComponent
+        PaginationComponent,
+        IconComponent
       ],
-      imports: [CommonModule, BrowserAnimationsModule],
+      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule],
       providers: [
         { provide: ElementRef },
         { provide: Renderer },

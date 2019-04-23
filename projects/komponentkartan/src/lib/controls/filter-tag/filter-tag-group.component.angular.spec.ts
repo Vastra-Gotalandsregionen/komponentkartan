@@ -5,6 +5,9 @@ import { Component, DebugElement } from '@angular/core';
 
 import { FilterTagGroupComponent } from './filter-tag-group.component';
 import { FilterTagComponent } from './filter-tag.component';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @Component({
   selector: 'vgr-test',
@@ -36,7 +39,8 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [FilterTagGroupComponent, FilterTagComponent, TestComponent]
+      declarations: [FilterTagGroupComponent, FilterTagComponent, TestComponent, IconComponent],
+      imports: [FontAwesomeModule]
     });
 
     TestBed.compileComponents().then(() => {

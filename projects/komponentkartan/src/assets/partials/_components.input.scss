@@ -63,19 +63,19 @@ input.input-container__textbox {
 }
 
 .input-container__suffix-container__status-icon {
-  @extend .bg-image-icon-ok-check--green;
-  background-size: 100%;
-  height: 0px;
-  width: 0px;
+  // @extend .bg-image-icon-ok-check--green;
   display: inline-block;
   visibility: hidden;
-  transition: width 0.3s linear, visibility 0.3s linear;
+  transition: visibility 0.3s linear;
+  .icon {
+    color: $primary-color--success;    
+  }
   .validation-error--fixed & {
-    height: $validation-icon-size;
-    width: $validation-icon-size;
     visibility: visible;
-    transition: width 0.3s linear, visibility 0.3s linear;
-    transition-delay: 0s, 0.3s;
+    transition: visibility 0.3s linear;
+  }
+  .input-validation--suffixed & {
+    visibility: hidden;
   }
 }
 
@@ -124,20 +124,20 @@ input.input-container__textbox {
 .input-validation_status {
   margin-top: 4px;
   display: flex;
+  align-items: baseline;
 }
 
 .input-validation_status__icon {
   display: none;
-  margin-top: 2px;
-  height: 30px;
-  width: 30px;
-  .validation-error--active & {
-    @extend .bg-image-icon-exclamation--red;
-    display: inline-block;
+  vertical-align: middle;
+  .icon {
+    .validation-error--active & {
+      color: $primary-color--error;
+    }
   }
+  .validation-error--active &, 
   .validation-error--editing & {
     display: inline-block;
-    @extend .bg-image-icon-exclamation;
   }
 }
 

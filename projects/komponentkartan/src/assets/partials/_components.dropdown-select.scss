@@ -58,8 +58,16 @@
 
         .dropdown-select__header__button__icon {
           @extend .bg-image-icon-chevron-inverted;
-          transform: rotate(0deg);
-          transition: all ease 0.3s;
+          .icon {
+            display: block;
+            text-align: center;
+            width: 36px;
+            height: 30px;
+            color: $text-color--light;
+            padding-top: 3px;
+            transform: rotate(0deg);
+            transition: all ease 0.3s;
+          }
         }
       }
     }
@@ -261,7 +269,9 @@
       .dropdown-select__header {      
         .dropdown-select__header__button {
           .dropdown-select__header__button__icon {
-            transform: rotate(180deg);
+            .icon {
+              transform: rotate(-180deg);
+            }
           }
         }
       }

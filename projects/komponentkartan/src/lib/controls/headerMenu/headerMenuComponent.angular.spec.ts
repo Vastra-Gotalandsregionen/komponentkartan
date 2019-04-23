@@ -8,6 +8,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { HeaderMenuComponent } from '../../controls/headerMenu/headerMenu.component';
 import { IHeaderMenu, IHeaderMenuItem } from '../../models/headerMenu.model';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconComponent } from '../icon/icon.component';
 
 describe('HeaderMenuComponent', () => {
   let component: HeaderMenuComponent;
@@ -18,8 +20,8 @@ describe('HeaderMenuComponent', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [HeaderMenuComponent],
-      imports: [CommonModule, FormsModule, RouterTestingModule.withRoutes([])]
+      declarations: [HeaderMenuComponent, IconComponent],
+      imports: [CommonModule, FormsModule, FontAwesomeModule, RouterTestingModule.withRoutes([])]
 
     });
 

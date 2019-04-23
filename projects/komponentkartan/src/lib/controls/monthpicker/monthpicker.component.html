@@ -6,7 +6,7 @@
     <div class="monthpicker__dropdown">
       <span *ngIf="selectedDate" title="{{selectedDate | date: tooltipDateFormat}}" id="{{labelledbyid}}">{{selectedDate | date : selectedDateFormat}}</span>
       <span *ngIf="!selectedDate" title="{{ readonly ? '' : noMonthSelectedLabel }}" id="{{labelledbyid}}">{{ !noMonthSelectedLabel || readonly ? '' : noMonthSelectedLabel }}</span>
-
+      <vgr-icon icon="calendar-alt" [solid]="false"></vgr-icon>
       <div class="monthpicker__calendar">
         <div class="monthpicker__calendar__header">
           <div class="monthpicker__calendar__header__previous-year" (mousedown)="onPreviousMouseDown($event)" [ngClass]="{'disabled':!previousYear}"
@@ -90,7 +90,7 @@
     </div>
   </div>
   <div class="validation__status" title="{{validationErrorMessage}}">
-    <div class="validation__status__icon"></div>
+    <vgr-icon icon="exclamation-circle" size="sm" class="validation__status__icon"></vgr-icon>
     <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
   </div>
 </div>

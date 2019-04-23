@@ -118,18 +118,17 @@
 /* The title row of an expandable menu */
 
 .header-menu__submenu-header {
-    &:after {
-        @extend .header-menu-item__plus;
-        content: "";
-        float: right;
-        vertical-align: middle;
-        text-align: center;
-        margin-top: 5px;
-        margin-right: 10px;
+    position: relative;
+    > vgr-icon .icon {
+        position: absolute;
+        right: 16px;
+        top: 6px;
+        transform: rotate(0deg);
+        transition: all ease 0.3s;
     }
     .header-menu-submenu--expanded & {
-        &:after {
-            @extend .header-menu-item__minus;
+        > vgr-icon .icon {
+            transform: rotate(-180deg);
         }
     }
 }

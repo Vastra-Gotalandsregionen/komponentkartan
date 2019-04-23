@@ -100,17 +100,16 @@
 }
 
 .card-section__header__expander {
-  @extend .bg-image-icon-chevron;
-  display: inline-block;
   margin-right: $margin--slim;
-  width: 15px;
-  height: 15px;
   background-size: 100%;
   vertical-align: middle;
   margin-left: auto;
   transform: rotate(0deg);
   .card-section--expanded & {
      transform: rotate(-180deg);
+  }
+  span {
+    pointer-events: none
   }
 }
 

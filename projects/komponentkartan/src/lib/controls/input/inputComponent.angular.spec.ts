@@ -19,6 +19,8 @@ import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { registerLocaleData } from '@angular/common';
 import localeSe from '@angular/common/locales/se';
 import localeSerExtra from '@angular/common/locales/extra/se';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 registerLocaleData(localeSe, 'sv-SE', localeSerExtra);
 
 
@@ -32,8 +34,8 @@ describe('[InputComponent]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [InputComponent, TruncatePipe, ErrorMessagePipe],
-      imports: [CommonModule, FormsModule, ReactiveFormsModule],
+      declarations: [InputComponent, TruncatePipe, ErrorMessagePipe, IconComponent],
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule],
       providers: [ErrorHandler, ControlContainer]
     });
 

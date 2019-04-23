@@ -37,7 +37,6 @@ $filter-tag__close-icon-margin: 6px;
   }
 
   .filter-tag__close-icon {
-    @extend .bg-image-filter-tag__close;
     display: inline-block;
     width: 30px;
     height: $filter-tag-height--small - 2 * $filter-tag__close-icon-margin;
@@ -45,6 +44,11 @@ $filter-tag__close-icon-margin: 6px;
     margin-bottom: $filter-tag__close-icon-margin; 
     border-left: $text-color--light solid 1px;
     vertical-align: top;
+    .icon {
+      display: block;
+      color: $text-color--light;
+      margin-top: -6px;
+    }
   }
 
   &.filter-tag--removing {
