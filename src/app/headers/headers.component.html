@@ -13,8 +13,38 @@
     <code>&lt;vgr-header-menu&gt;</code>). Den menyn kan endast bo i headern.
     <br>
     <br>
+
+    
     <div class="column-layout">
-      <vgr-header class="header--inline" [userName]="'Neo Åhn'" [headerMenu]="headerMenu"></vgr-header>
+      <vgr-header class="header--inline">
+        <vgr-header-menu
+          userName="Neo Åhn">
+            <vgr-menu-item link="/headers" text="Headers"></vgr-menu-item>
+            <vgr-menu-item link="/inputFields" text="Input"></vgr-menu-item>
+            <vgr-menu-separator></vgr-menu-separator>          
+            <vgr-submenu text="Calender">
+              <vgr-menu-item link="/datepicker" text="Datepicker"></vgr-menu-item>
+              <vgr-menu-item link="/monthpicker" text="Monthpicker"></vgr-menu-item>
+            </vgr-submenu>
+
+            <vgr-submenu text="FAQ">
+              <vgr-menu-item link="http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-vg-primarvard/krav--och-kvalitetsbok-vg-primarvard/" text="VGPV (extern)"></vgr-menu-item>
+              <vgr-menu-item link="http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-vg-primarvard/krav--och-kvalitetsbok-vg-primarvard/" text="Rehab (extern)"></vgr-menu-item>
+            </vgr-submenu>
+          </vgr-header-menu>
+        </vgr-header>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+  
+
+
+    <div class="column-layout">
+      <!-- <vgr-header class="header--inline" [userName]="'Neo Åhn'" [headerMenu]="headerMenu"></vgr-header> -->
     </div>
     <br>
     <p> Förändras med tema:
@@ -24,19 +54,19 @@
   <div class="docs__examples">
     <div class="column-layout">
       <h3>Header med user och meny (temad grön)</h3>
-      <vgr-header class="header--inline theme--green" [userName]="'Nova Audit'" [headerMenu]="simpleHeaderMenu"></vgr-header>
+      <!-- <vgr-header class="header--inline theme--green" [userName]="'Nova Audit'" [headerMenu]="simpleHeaderMenu"></vgr-header> -->
       <div>
         <h3>Markup för en menyn i exemplet ovan, tryck på pilen i headern så ser du kontextmenyn</h3>
         <section [innerHTML]="exampleCodeSimpleMenyMarkup" highlight-js-content=".highlight"></section>
       </div>
       <h3>Header med user utan meny (temad röd)</h3>
-      <vgr-header class="header--inline theme--red" [userName]="'Nils Åstrand'"></vgr-header>
+      <!-- <vgr-header class="header--inline theme--red" [userName]="'Nils Åstrand'"></vgr-header> -->
       <h3>Header utan user och meny (temad blå)</h3>
-      <vgr-header class="header--inline theme--blue"></vgr-header>
+      <!-- <vgr-header class="header--inline theme--blue"></vgr-header> -->
       <h3>Header utan user och meny (Standard)</h3>
-      <vgr-header class="header--inline"></vgr-header>
+      <!-- <vgr-header class="header--inline"></vgr-header> -->
       <h3>Header med systeminformation</h3>
-      <vgr-header [systemText]="'Development'" class="header--inline"></vgr-header>
+      <!-- <vgr-header [systemText]="'Development'" class="header--inline"></vgr-header> -->
     </div>
   </div>
   <div class="docs__api">

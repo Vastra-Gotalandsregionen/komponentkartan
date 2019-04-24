@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IHeaderMenu, IHeaderMenuItem, HeaderComponent } from 'vgr-komponentkartan';
 import { HtmlEncodeService } from '../html-encode.service';
 
@@ -9,7 +9,7 @@ import { HtmlEncodeService } from '../html-encode.service';
 })
 
 
-export class HeadersComponent implements OnInit, AfterViewInit {
+export class HeadersComponent implements OnInit {
 
   headerMenu: IHeaderMenu;
   simpleHeaderMenu: IHeaderMenu;
@@ -44,11 +44,6 @@ export class HeadersComponent implements OnInit, AfterViewInit {
     this.setMenuItems();
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.headerComponent.clickToggleHeaderMenu(new Event(null));
-    }, 200);
-  }
 
   setMenuItems() {
 
