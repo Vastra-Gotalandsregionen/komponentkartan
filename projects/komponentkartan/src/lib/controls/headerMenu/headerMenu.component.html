@@ -4,7 +4,7 @@
     [circleColor]="circleColor"></vgr-login-information>
 
   <div *ngIf="menuItems.length > 0" class="header__login-info-menu-arrow"></div>
-  <div div class="header-menu header-menu__content" [ngClass]="{'header-menu--hidden' : hideMenu}">
+  <div *ngIf="menuItems.length > 0" class="header-menu header-menu__content" [ngClass]="{'header-menu--hidden' : hideMenu}">
     <ul>
       <ng-content></ng-content>
     </ul>
