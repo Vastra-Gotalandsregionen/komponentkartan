@@ -1,18 +1,24 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { DebugElement } from '@angular/core';
+import { DebugElement, SimpleChanges, SimpleChange } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { HeaderMenuComponent } from '../../controls/headerMenu/headerMenu.component';
-import { IHeaderMenu, IHeaderMenuItem } from '../../models/headerMenu.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
+import { LoginInformationComponent } from '../../controls/loginInformation/loginInformation.component';
+import { RingWithTextComponent } from '../..//controls/ring-with-text/ring-with-text.component';
+import { HeaderComponent } from '../header/header.component';
+import { MenuItemComponent } from '../menu/menu-item.component';
+import { SubmenuComponent } from '../menu/submenu.component';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuSeparatorComponent } from '../menu/menu-separator.component';
 
 describe('HeaderMenuComponent', () => {
   let component: HeaderMenuComponent;
+  let menuItem: ComponentFixture<MenuItemComponent>;
   let fixture: ComponentFixture<HeaderMenuComponent>;
   let rootElement: DebugElement;
 
@@ -20,69 +26,59 @@ describe('HeaderMenuComponent', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [HeaderMenuComponent, IconComponent],
-      imports: [CommonModule, FormsModule, FontAwesomeModule, RouterTestingModule.withRoutes([])]
-
+      declarations: [
+        HeaderComponent,
+        HeaderMenuComponent,
+        MenuItemComponent,
+        SubmenuComponent,
+        IconComponent,
+        MenuSeparatorComponent,
+        LoginInformationComponent,
+        RingWithTextComponent
+      ],
+      imports: [
+        CommonModule,
+        BrowserAnimationsModule,
+        BrowserDynamicTestingModule,
+        NoopAnimationsModule,
+        FontAwesomeModule,
+        RouterTestingModule
+      ]
+    });
+    TestBed.overrideComponent(HeaderMenuComponent, {
+      set: {
+        templateUrl: 'headerMenu.component.html'
+      }
+    });
+    TestBed.overrideComponent(MenuItemComponent, {
+      set: {
+        templateUrl: '../menu/menu-item.component.html'
+      }
     });
 
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(HeaderMenuComponent);
-
-
       component = fixture.componentInstance;
-
-      component.menu = {
-        menuItems: [
-          {
-            displayName: 'Min sida',
-            url: '/minsida',
-            isInternalLink: true
-          },
-          {
-            isSeparator: true
-          },
-          {
-            displayName: 'Krav- och kvalitetsbok',
-            menuItems: [
-              {
-                displayName: 'VGPV',
-                url: `http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-vg-primarvard/krav--och-kvalitetsbok-vg-primarvard/`,
-                isInternalLink: false
-              },
-              {
-                displayName: 'Rehab',
-                url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-rehab/krav--och-kvalitetsbok/',
-                isInternalLink: false
-              }
-            ] as IHeaderMenuItem[]
-          },
-          {
-            displayName: 'FAQ',
-            menuItems: [
-              {
-                displayName: 'VGPV',
-                url: 'http://www.vgregion.se/sv/Vastra-Gotalandsregionen/startsida/Vard-och-halsa/Forvardgivare/VG-Primarvard1/Fragor-och-svar/',
-                isInternalLink: false
-              },
-              {
-                displayName: 'Rehab',
-                url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-rehab/fragor-och-svar/',
-                isInternalLink: false
-              }
-            ] as IHeaderMenuItem[]
-          },
-          {
-            displayName: 'Kontakt',
-            url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/it/it-system/it-stod-for-vardval-rehab/kontaktpersoner/',
-            isInternalLink: false
-          }
-        ] as IHeaderMenuItem[]
-      } as IHeaderMenu;
-
       rootElement = fixture.debugElement;
-      fixture.detectChanges();
+      menuItem = TestBed.createComponent(MenuItemComponent);
 
+      fixture.detectChanges();
       done();
+    });
+  });
+
+  describe('', () => {
+    it('userName is correct', () => {
+      expect(component.userName).toBeFalsy();
+    });
+    it('initials is correct', () => {
+      expect(component.initials).toBeFalsy();
+    });
+    it('textColor is correct', () => {
+      expect(component.textColor).toBeFalsy();
+    });
+    it('circleColor is correct', () => {
+      expect(component.circleColor).toBeFalsy();
     });
   });
 
@@ -93,9 +89,6 @@ describe('HeaderMenuComponent', () => {
 
 
     });
-    it('headerMenu is not visible', () => {
-      expect(headerMenuElement.classes['header-menu--hidden']).toBe(true);
-    });
     describe('and toggleHeaderMenu is called ', () => {
       let mockEvent;
       beforeEach(() => {
@@ -105,92 +98,156 @@ describe('HeaderMenuComponent', () => {
 
       });
       it('headerMenu should be visible', () => {
-        expect(headerMenuElement.classes['header-menu--hidden']).toBe(false);
+        expect(component.hideMenu).toBe(false);
       });
 
-      describe(' an item is clicked', () => {
-        let itemToClick: DebugElement;
+    });
+  });
+
+  describe('ngOnChanges', () => {
+    let changes: SimpleChanges;
+    describe('When initials have changed', () => {
+      let initialsChange: SimpleChange;
+      beforeEach(() => {
+        initialsChange = {} as SimpleChange;
+        changes = { 'initials': initialsChange } as SimpleChanges;
+      });
+      describe('from no value to some value', () => {
         beforeEach(() => {
-          itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('Min sida'))[0];
-          itemToClick.triggerEventHandler('mousedown', null);
-          fixture.detectChanges();
-
+          initialsChange.previousValue = undefined;
+          initialsChange.currentValue = 'AB';
         });
-        it('the clicked item is selected', () => {
-          expect(itemToClick.classes['header-menu-item--selected']).toBe(true);
+        it('internal initials are set to new value', () => {
+          component.ngOnChanges(changes);
+          expect(component.internalInitials).toBe('AB');
         });
-        it('the clicked item is marked', () => {
-          expect(itemToClick.classes['header-menu-item--marked']).toBe(true);
+      });
+      describe('from some value to some other value', () => {
+        beforeEach(() => {
+          initialsChange.previousValue = 'AB';
+          initialsChange.currentValue = 'CD';
         });
-
-        describe('and an item is hovered', () => {
-          let itemToHover: DebugElement;
+        it('internal initials are set to new value', () => {
+          component.ngOnChanges(changes);
+          expect(component.internalInitials).toBe('CD');
+        });
+      });
+      describe('from some value to no value', () => {
+        beforeEach(() => {
+          initialsChange.previousValue = 'AB';
+          initialsChange.currentValue = undefined;
+        });
+        describe('and user name has value', () => {
           beforeEach(() => {
-            itemToHover = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('FAQ'))[0];
-            itemToHover.triggerEventHandler('mouseenter', null);
-            fixture.detectChanges();
+            component.userName = 'Test User Name';
           });
-          it('the hovered item is marked', () => {
-            expect(itemToHover.classes['header-menu-item--marked']).toBe(true);
+          it('internal initials are set from user name', () => {
+            component.ngOnChanges(changes);
+            expect(component.internalInitials).toBe('TN');
           });
-          it('the hovered item is not selected', () => {
-            expect(itemToHover.classes['header-menu-item--selected']).toBe(false);
+        });
+        describe('and user name has no value', () => {
+          beforeEach(() => {
+            component.userName = undefined;
           });
-          it('the selected item is not marked', () => {
-            expect(itemToClick.classes['header-menu-item--marked']).toBe(false);
-          });
-          it('the clicked item is selected', () => {
-            expect(itemToClick.classes['header-menu-item--selected']).toBe(true);
-          });
-
-          describe('and the item is un-hovered', () => {
-            beforeEach(() => {
-              itemToHover.triggerEventHandler('mouseleave', null);
-              fixture.detectChanges();
-            });
-            it('the un-hovered item is not marked', () => {
-              expect(itemToHover.classes['header-menu-item--marked']).toBe(false);
-            });
-            it('the un-hovered item is not selected', () => {
-              expect(itemToHover.classes['header-menu-item--selected']).toBe(false);
-            });
-            it('the selected item is marked', () => {
-              expect(itemToClick.classes['header-menu-item--marked']).toBe(true);
-            });
-            it('the clicked item is selected', () => {
-              expect(itemToClick.classes['header-menu-item--selected']).toBe(true);
-            });
+          it('internal initials are empty', () => {
+            component.ngOnChanges(changes);
+            expect(component.internalInitials).toBe('');
           });
         });
       });
-
-      describe(' and the user clicks outside headermenu', () => {
+    });
+    describe('When initials have not changed', () => {
+      describe('and user name has changed', () => {
+        let userNameChange: SimpleChange;
         beforeEach(() => {
-          mockEvent = new Event('');
-          component.onDocumentClick(mockEvent);
-          fixture.detectChanges();
-
+          userNameChange = {} as SimpleChange;
+          changes = { 'userName': userNameChange } as SimpleChanges;
         });
-        it('headerMenu should not be visible', () => {
-          expect(headerMenuElement.classes['header-menu--hidden']).toBe(true);
+        describe('and initials have no value', () => {
+          beforeEach(() => {
+            component.initials = undefined;
+          });
+          describe('and user name has value', () => {
+            beforeEach(() => {
+              component.userName = 'Test User Name';
+            });
+            it('internal initials are set from user name', () => {
+              component.ngOnChanges(changes);
+              expect(component.internalInitials).toBe('TN');
+            });
+          });
+          describe('and user name has no value', () => {
+            beforeEach(() => {
+              component.userName = undefined;
+            });
+            it('internal initials are empty', () => {
+              component.ngOnChanges(changes);
+              expect(component.internalInitials).toBe('');
+            });
+          });
         });
       });
     });
   });
 
-  describe('A submenu header is clicked', () => {
-    let itemToClick: DebugElement;
-    beforeEach(() => {
-      itemToClick = rootElement.queryAll(By.css('a')).filter(x => x.nativeElement.text.includes('FAQ'))[0];
-      itemToClick.triggerEventHandler('mousedown', null);
-      fixture.detectChanges();
+  describe('clickToggleHeaderMenu', () => {
+    describe('When header menu exists', () => {
+      let spy: jasmine.Spy;
+      beforeEach(() => {
+        spy = spyOn(component, 'toggleHeaderMenu');
+      });
+      it('header menu is toggled', () => {
+        const event = {} as Event;
+        component.toggleHeaderMenu(event);
+        expect(spy).toHaveBeenCalledWith(event);
+      });
+    });
+  });
 
-    });
-    it(' the header is not marked as selected ', () => {
-      expect(itemToClick.classes['header-menu-item--selected']).toBe(false);
-    });
-    it(' the submenu is opened ', () => {
-      expect(itemToClick.parent.classes['header-menu-submenu--expanded']).toBe(true);
+  describe('keyToggleHeaderMenu', () => {
+    describe('When header menu exists', () => {
+      let spy: jasmine.Spy;
+      let event: KeyboardEvent;
+      beforeEach(() => {
+        spy = spyOn(component, 'toggleHeaderMenu');
+      });
+      describe('and key is space', () => {
+        beforeEach(() => {
+          event = { key: ' ' } as KeyboardEvent;
+        });
+        it('header menu is toggled', () => {
+          component.keyToggleHeaderMenu(event);
+          expect(spy).toHaveBeenCalledWith(event);
+        });
+      });
+      describe('and key is space in IE', () => {
+        beforeEach(() => {
+          event = { key: 'Spacebar' } as KeyboardEvent;
+        });
+        it('header menu is toggled', () => {
+          component.keyToggleHeaderMenu(event);
+          expect(spy).toHaveBeenCalledWith(event);
+        });
+      });
+      describe('and key is enter', () => {
+        beforeEach(() => {
+          event = { key: 'Enter' } as KeyboardEvent;
+        });
+        it('header menu is toggled', () => {
+          component.keyToggleHeaderMenu(event);
+          expect(spy).toHaveBeenCalledWith(event);
+        });
+      });
+      describe('and key is not space or enter', () => {
+        beforeEach(() => {
+          event = { key: 'x' } as KeyboardEvent;
+        });
+        it('header menu is not toggled', () => {
+          component.keyToggleHeaderMenu(event);
+          expect(spy).not.toHaveBeenCalled();
+        });
+      });
     });
   });
 });

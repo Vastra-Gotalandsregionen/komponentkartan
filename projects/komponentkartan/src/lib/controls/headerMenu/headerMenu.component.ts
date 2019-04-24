@@ -29,8 +29,7 @@ export class HeaderMenuComponent implements OnChanges {
   }
   keyToggleHeaderMenu(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-      this.hideMenu = !this.hideMenu;
-      // this.headerMenuComponent.toggleHeaderMenu(event);
+      this.toggleHeaderMenu(event);
     }
   }
   toggleHeaderMenu(event: MouseEvent | any) {
