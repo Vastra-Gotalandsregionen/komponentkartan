@@ -1,18 +1,12 @@
-﻿<div 
-*ngIf="userName" 
-[ngClass]="{ 'header__login-info-menu': headerMenu }" 
-tabindex="1" 
-(keydown)="keyToggleHeaderMenu($event)">
-  <vgr-login-information 
-  [initials]="internalInitials" 
-  [userName]="userName" 
-  [textColor]="textColor" 
-  [circleColor]="circleColor" 
-  (mousedown)="clickToggleHeaderMenu($event)"></vgr-login-information>
-  <div *ngIf="headerMenu" class="header__login-info-menu-arrow"></div>
-  <div div class="header-menu"  [ngClass]="{'header-menu--hidden' : hideMenu}">
-    <ul class="header-menu__content">
-        <ng-content></ng-content>
+﻿<div *ngIf="userName" [ngClass]="{ 'header__login-info-menu': menuItems.length > 0 }" tabindex="1"
+  (keydown)="keyToggleHeaderMenu($event)">
+  <vgr-login-information [initials]="internalInitials" [userName]="userName" [textColor]="textColor"
+    [circleColor]="circleColor" (mousedown)="clickToggleHeaderMenu($event)"></vgr-login-information>
+
+  <div *ngIf="menuItems.length > 0" class="header__login-info-menu-arrow"></div>
+  <div div class="header-menu header-menu__content" [ngClass]="{'header-menu--hidden' : hideMenu}">
+    <ul>
+      <ng-content></ng-content>
     </ul>
   </div>
 </div>
