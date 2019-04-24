@@ -17,7 +17,7 @@
   background-repeat: no-repeat;
   background-position: top right;
   padding-left: 16px;
-  padding-right: 40px;
+  // padding-right: 40px;
   @extend .background-color--primary;
   transition: background-color ease-in 0.3s;
   .theme--blue & {
@@ -48,14 +48,23 @@
     background: linear-gradient(to bottom, rgba(23, 67, 117, 1) 0%, rgba(24, 93, 154, 1) 40%, rgba(24, 93, 154, 1) 40%, rgba(30, 105, 166, 1) 50%, rgba(53, 147, 219, 1) 100%);
     color: white;
   }
+  vgr-header-menu {
+    height: inherit;
+    > div {
+      display: flex;
+      height: inherit;
+      align-items: center;
+      padding: 0 20px;
+    }
+  }
   .header__login-info-menu {
     cursor: pointer;
     .header__login-info-menu-arrow {
       @extend .bg-image-icon-arrow-white;
       display: inline-block;
       position: absolute;
-      right: 89px;
-      bottom: 22px;
+      right: 69px;
+      bottom: 20px;
     }
   }
 }
