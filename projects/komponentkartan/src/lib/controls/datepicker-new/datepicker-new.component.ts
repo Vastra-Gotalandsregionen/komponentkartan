@@ -5,6 +5,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 
+import { Guid } from '../../utils/guid';
+
 @Component({
   selector: 'vgr-datepicker-new',
   templateUrl: './datepicker-new.component.html'
@@ -29,6 +31,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   @ViewChild('calendar') calendar: ElementRef;
   @ViewChildren(DatepickerItemComponent) items: QueryList<DatepickerItemComponent>;
 
+  headerLabelId = Guid.newGuid();
   label = '';
   labelDateFormat: string;
   inputPlaceholder: string;
@@ -45,6 +48,10 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   private minZoomLevel: DatepickerZoomLevel;
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
+
+  get combinedLabelIds() {
+    return `${this.labelId} ${this.headerLabelId}`;
+  }
 
   get errorActive() {
     return (this.parseError || (this.showValidation && this.formControl && this.formControl.invalid)) && !this.headerHasFocus;

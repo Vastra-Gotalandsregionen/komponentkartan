@@ -4,9 +4,10 @@
     <div #datepicker class="datepicker-new__control"
       [ngClass]="{ 'datepicker-new--disabled': disabled, 'datepicker-new--readonly': readonly }"
       (keydown)="onKeydown($event)" (focusout)="onBlur($event)">
-      <div *ngIf="!readonly" class="datepicker-new__header" [attr.aria-labelledby]="labelId"
-        [ngClass]="{'datepicker-new__header--focus': headerHasFocus}" (focusin)="onHeaderFocus()"
-        (focusout)="onHeaderBlur()" (keydown)="onHeaderKeydown($event)" (click)="onHeaderClick()">
+      <div *ngIf="!readonly" id="{{headerLabelId}}" class="datepicker-new__header"
+        [attr.aria-labelledby]="combinedLabelIds" [ngClass]="{'datepicker-new__header--focus': headerHasFocus}"
+        (focusin)="onHeaderFocus()" (focusout)="onHeaderBlur()" (keydown)="onHeaderKeydown($event)"
+        (click)="onHeaderClick()">
         <div #headerLabel *ngIf="!allowText" class="datepicker-new__header__label" tabindex="0" role="button"
           aria-haspopup="grid" [attr.aria-expanded]="expanded">
           <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
@@ -14,8 +15,8 @@
         </div>
         <div *ngIf="allowText">
           <input #headerInput *ngIf="!disabled" class="datepicker-new__header__input" [placeholder]="inputPlaceholder"
-            aria-haspopup="grid" [attr.aria-expanded]="expanded"
-            [value]="label" (change)="parseSelectedDate($event.target.value)">
+            aria-haspopup="grid" [attr.aria-expanded]="expanded" [value]="label"
+            (change)="parseSelectedDate($event.target.value)">
           <div *ngIf="disabled" class="datepicker-new__header__label" tabindex="0">
             <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
             <span *ngIf="!selectedDate" class="noselect">&nbsp;</span>
@@ -43,7 +44,7 @@
             </div>
           </div>
           <div class="datepicker-new__calendar__body">
-            <table class="datepicker-new__calendar__body__days" role="grid">
+            <table class="datepicker-new__calendar__body__days" role="grid" [attr.aria-labelledby]="labelId">
               <tr>
                 <td role="columnheader">
                   <div>Må</div>
@@ -88,7 +89,7 @@
             </div>
           </div>
           <div class="datepicker-new__calendar__body">
-            <table class="datepicker-new__calendar__body__months" role="grid">
+            <table class="datepicker-new__calendar__body__months" role="grid" [attr.aria-labelledby]="labelId">
               <tr *ngFor="let row of months.items">
                 <td *ngFor="let item of row">
                   <vgr-datepicker-item [type]="'month'" [date]="item.date" [selected]="item.selected"
@@ -108,7 +109,7 @@
             </div>
           </div>
           <div class="datepicker-new__calendar__body">
-            <table class="datepicker-new__calendar__body__years" role="grid">
+            <table class="datepicker-new__calendar__body__years" role="grid" [attr.aria-labelledby]="labelId">
               <tr *ngFor="let row of years.items">
                 <td *ngFor="let item of row">
                   <vgr-datepicker-item [type]="'year'" [date]="item.date" [selected]="item.selected"
