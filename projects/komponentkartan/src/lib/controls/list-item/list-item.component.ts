@@ -134,9 +134,9 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   toggleExpanded() {
     if (this.isExpanded) {
-      if (this.preventCollapse || this.notInteractable) {
+      if (this.preventCollapse) {
         this.collapsePrevented.emit();
-      } else {
+      } else if (!this.notInteractable) {
         this.setExpanded(false);
       }
 
