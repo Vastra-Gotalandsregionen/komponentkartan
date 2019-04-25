@@ -20,6 +20,7 @@ export class DatepickerItemComponent implements OnInit {
 
   @ViewChild('item') item: ElementRef;
   dateFormat: string;
+  ariaDateFormat: string;
   current: boolean;
   focused: boolean;
 
@@ -29,6 +30,7 @@ export class DatepickerItemComponent implements OnInit {
     switch (this.type) {
       case 'day':
         this.dateFormat = 'd';
+        this.ariaDateFormat = 'EEEE yyyy-MM-dd';
         this.current =
           this.date.getFullYear() === today.getFullYear() &&
           this.date.getMonth() === today.getMonth() &&
@@ -36,12 +38,14 @@ export class DatepickerItemComponent implements OnInit {
         break;
       case 'month':
         this.dateFormat = 'MMM';
+        this.ariaDateFormat = 'MMM yyyy';
         this.current =
           this.date.getFullYear() === today.getFullYear() &&
           this.date.getMonth() === today.getMonth();
         break;
       case 'year':
         this.dateFormat = 'yyyy';
+        this.ariaDateFormat = 'yyyy';
         this.current = this.date.getFullYear() === today.getFullYear();
         break;
     }

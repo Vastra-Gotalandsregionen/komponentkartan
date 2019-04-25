@@ -3,6 +3,7 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { DatepickerItemComponent } from './datepicker-item.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'vgr-datepicker-new',
@@ -18,6 +19,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   @Input() readonly = false;
   @Input() showValidation = true;
   @Input() errorMessage = {};
+  @Input() labelId: string;
 
   @Output() selectedDateChanged = new EventEmitter<Date>();
 
@@ -29,6 +31,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
   label = '';
   labelDateFormat: string;
+  inputPlaceholder: string;
   parseError = false;
   parseErrorMessage: string;
   headerHasFocus = false;
@@ -112,7 +115,9 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
 
-    this.renderer.setProperty(this.headerInput.nativeElement, 'disabled', isDisabled);
+    if (this.headerInput) {
+      this.renderer.setProperty(this.headerInput.nativeElement, 'disabled', isDisabled);
+    }
 
     if (isDisabled) {
       this.collapse(false);
@@ -154,14 +159,8 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onKeydown(event: KeyboardEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.readonly) {
       return;
-    }
-
-    if (event.key === 'ArrowDown' || event.key === 'Down' ||
-      event.key === 'ArrowUp' || event.key === 'Up' ||
-      event.key === ' ' || event.key === 'Spacebar') {
-      event.preventDefault();
     }
 
     if (event.key === 'Escape' || event.key === 'Esc') {
@@ -172,7 +171,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onHeaderClick() {
-    if (this.disabled) {
+    if (this.disabled || this.readonly) {
       return;
     }
 
@@ -180,17 +179,19 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onHeaderKeydown(event: KeyboardEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.readonly) {
       return;
     }
 
     if (event.key === 'Enter') {
       this.toggleExpanded();
+    } else if (event.key === ' ' || event.key === 'Spacebar') {
+      if (!this.allowText) {
+        this.toggleExpanded();
+      }
     } else if (
       event.key === 'ArrowUp' || event.key === 'Up' ||
-      event.key === 'ArrowDown' || event.key === 'Down' ||
-      event.key === 'ArrowLeft' || event.key === 'Left' ||
-      event.key === 'ArrowRight' || event.key === 'Right') {
+      event.key === 'ArrowDown' || event.key === 'Down') {
       if (this.expanded) {
         const itemToFocus = this.items.find(x => x.selected) || this.items.first;
         itemToFocus.focus();
@@ -199,10 +200,6 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onCalendarKeydown(event: KeyboardEvent) {
-    if (event.target !== this.calendar.nativeElement) {
-      return;
-    }
-
     if (event.key === 'PageDown' && !event.altKey) {
       if (this.zoomedToDays) {
         this.days.previous();
@@ -232,6 +229,9 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       event.key === 'ArrowDown' || event.key === 'Down' ||
       event.key === 'ArrowLeft' || event.key === 'Left' ||
       event.key === 'ArrowRight' || event.key === 'Right') {
+      if (event.target !== this.calendar.nativeElement) {
+        return;
+      }
       const itemToFocus = this.items.find(x => x.selected) || this.items.first;
       itemToFocus.focus();
     }
@@ -244,22 +244,115 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       return;
     }
 
-    const matches = value.match(/^((\d\d)?\d\d)[ -]?(\d\d)[ -]?(\d\d)$/);
+    let date: Date;
+    let year: number;
+    let month = 0;
+    let day = 1;
+    let invalidFormat = false;
 
-    if (!matches) {
+    if (this.minZoomLevel === DatepickerZoomLevel.Days) {
+      const matches = value.match(/^((\d\d)?\d\d)[ -]?(\d\d)[ -]?(\d\d)$/);
+
+      if (!matches) {
+        invalidFormat = true;
+      } else {
+        year = +matches[1];
+        if (year < 100) {
+          year += 2000;
+        }
+        month = +matches[3] - 1;
+        day = +matches[4];
+        date = new Date(year, month, day);
+      }
+    } else if (this.minZoomLevel === DatepickerZoomLevel.Months) {
+      const numericMatches = value.match(/^((\d\d)?\d\d)[ -]?(\d\d)$/);
+      const textMatches = value.match(/^(\w+)\.? ((\d\d)?\d\d)$/);
+
+      if (numericMatches) {
+        year = +numericMatches[1];
+        if (year < 100) {
+          year += 2000;
+        }
+        month = +numericMatches[3] - 1;
+        date = new Date(year, month, 1);
+      } else if (textMatches) {
+        year = +textMatches[2];
+        if (year < 100) {
+          year += 2000;
+        }
+        switch (textMatches[1].toLowerCase()) {
+          case 'jan':
+          case 'januari':
+            month = 0;
+            break;
+          case 'feb':
+          case 'februari':
+            month = 1;
+            break;
+          case 'mars':
+            month = 2;
+            break;
+          case 'apr':
+          case 'april':
+            month = 3;
+            break;
+          case 'maj':
+            month = 4;
+            break;
+          case 'juni':
+            month = 5;
+            break;
+          case 'juli':
+            month = 6;
+            break;
+          case 'aug':
+          case 'augusti':
+            month = 7;
+            break;
+          case 'sep':
+          case 'september':
+            month = 8;
+            break;
+          case 'okt':
+          case 'oktober':
+            month = 9;
+            break;
+          case 'nov':
+          case 'november':
+            month = 10;
+            break;
+          case 'dec':
+          case 'december':
+            month = 11;
+            break;
+          default:
+            month = -1;
+            break;
+        }
+        date = new Date(year, month, 1);
+      } else {
+        invalidFormat = true;
+      }
+    } else if (this.minZoomLevel === DatepickerZoomLevel.Years) {
+      const matches = value.match(/^((\d\d)?\d\d)$/);
+
+      if (!matches) {
+        invalidFormat = true;
+      } else {
+        year = +matches[1];
+        if (year < 100) {
+          year += 2000;
+        }
+        date = new Date(year, 0, 1);
+      }
+    }
+
+    if (invalidFormat) {
       this.setSelectedDate(null, true);
       this.parseErrorMessage = 'Felaktigt format';
       return;
     }
 
-    let year = +matches[1];
-    if (year < 100) {
-      year += 2000;
-    }
-    const month = +matches[3] - 1;
-    const day = +matches[4];
-
-    const date = new Date(year, month, day);
     if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
       this.setSelectedDate(null, true);
       this.parseErrorMessage = 'Ogiltigt datum';
@@ -267,7 +360,6 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     }
 
     this.setSelectedDate(date);
-    this.collapse();
   }
 
   private expand() {
@@ -337,7 +429,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
           const selectedMonth = this.selectedDate ? this.selectedDate.getMonth() : null;
           const selectedDay = this.selectedDate ? this.selectedDate.getDate() : null;
           const selected = date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === selectedDay;
-          const disabled = date < this.minDate || date > this.maxDate;
+          const disabled = (this.minDate && date < this.minDate) || (this.maxDate && date > this.maxDate);
           weekDays.push({
             date: date,
             selected: selected,
@@ -409,6 +501,8 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
     const selectedYear = this.selectedDate ? this.selectedDate.getFullYear() : null;
     const selectedMonth = this.selectedDate ? this.selectedDate.getMonth() : null;
+    const minDateMonth = this.minDate ? new Date(this.minDate.getFullYear(), this.minDate.getMonth()) : null;
+    const maxDateMonth = this.maxDate ? new Date(this.maxDate.getFullYear(), this.maxDate.getMonth()) : null;
     const isMinZoom = this.minZoomLevel === DatepickerZoomLevel.Months;
 
     const items: CalendarItem[][] = [];
@@ -417,8 +511,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       for (let colIndex = 0; colIndex < 4; colIndex++) {
         const date = monthArray[4 * rowIndex + colIndex];
         const selected = date.getFullYear() === selectedYear && date.getMonth() === selectedMonth;
-        // TODO: Fix for month
-        const disabled = date < this.minDate || date > this.maxDate;
+        const disabled = (minDateMonth && date < minDateMonth) || (maxDateMonth && date > maxDateMonth);
         row.push({
           date: date,
           selected: selected,
@@ -473,6 +566,8 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     ];
 
     const selectedYear = this.selectedDate ? this.selectedDate.getFullYear() : null;
+    const minDateYear = this.minDate ? new Date(this.minDate.getFullYear(), 0) : null;
+    const maxDateYear = this.maxDate ? new Date(this.maxDate.getFullYear(), 0) : null;
     const isMinZoom = this.minZoomLevel === DatepickerZoomLevel.Years;
 
     const items: CalendarItem[][] = [];
@@ -481,8 +576,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       for (let colIndex = 0; colIndex < 3; colIndex++) {
         const date = yearArray[3 * rowIndex + colIndex];
         const selected = date.getFullYear() === selectedYear;
-        // TODO: Fix for year
-        const disabled = date < this.minDate || date > this.maxDate;
+        const disabled = (minDateYear && date < minDateYear) || (maxDateYear && date > maxDateYear);
         row.push({
           date: date,
           selected: selected,
@@ -527,6 +621,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.zoomedToMonths = false;
         this.zoomedToDays = false;
         this.labelDateFormat = 'yyyy';
+        this.inputPlaceholder = 'ÅÅ';
         break;
       case 'months':
       case 'month':
@@ -536,6 +631,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.zoomedToMonths = true;
         this.zoomedToDays = false;
         this.labelDateFormat = 'MMM yyyy';
+        this.inputPlaceholder = 'ÅÅMM';
         break;
       default:
         this.minZoomLevel = DatepickerZoomLevel.Days;
@@ -543,6 +639,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.zoomedToMonths = false;
         this.zoomedToDays = true;
         this.labelDateFormat = 'yyyy-MM-dd';
+        this.inputPlaceholder = 'ÅÅMMDD';
         break;
     }
   }
@@ -558,17 +655,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   private formatDate(date: Date): string {
-    if (!date) {
-      return '';
-    }
-
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const monthSpacer = month < 10 ? '0' : '';
-    const day = date.getDate();
-    const daySpacer = day < 10 ? '0' : '';
-
-    return `${year}-${monthSpacer}${month}-${daySpacer}${day}`;
+    return new DatePipe('sv-SE').transform(date, this.labelDateFormat);
   }
 
   private subscribeToItems() {

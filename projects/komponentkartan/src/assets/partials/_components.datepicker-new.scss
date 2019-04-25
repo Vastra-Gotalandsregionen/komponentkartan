@@ -59,6 +59,15 @@
         pointer-events: none;
       }
     }
+
+    .datepicker-new__readonly-header {
+      height: $component-height;
+      padding-left: $margin--slim;
+
+      &:focus {
+        outline: $focus-outline-width solid $focus-color;
+      }
+    }
     
     .datepicker-new__calendar {
       position: absolute;
@@ -206,19 +215,38 @@
 
     &.datepicker-new--disabled {
       .datepicker-new__header {
+        cursor: default;
+
         .datepicker-new__header__label {
           background-color: $background-color--default;
           border-color: $control-color--disabled;
-          cursor: default;
         }
         .datepicker-new__header__input {
           background-color: $background-color--default;
           border-color: $control-color--disabled;
-          cursor: default;
         }
         .datepicker-new__header__button {
           background-color: $control-color--disabled;
-          cursor: default;
+        }
+      }
+    }
+
+    &.datepicker-new--readonly {
+      .datepicker-new__header {
+        height: auto;
+        width: auto;
+        cursor: default;
+
+        .datepicker-new__header__label {
+          height: auto;
+          width: auto;
+        }
+        .datepicker-new__header__input {
+          background-color: $background-color--default;
+          border-color: $control-color--disabled;
+        }
+        .datepicker-new__header__button {
+          display: none;
         }
       }
     }
