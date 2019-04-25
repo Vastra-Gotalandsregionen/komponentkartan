@@ -185,10 +185,6 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
     if (event.key === 'Enter') {
       this.toggleExpanded();
-    } else if (event.key === ' ' || event.key === 'Spacebar') {
-      if (!this.allowText) {
-        this.toggleExpanded();
-      }
     } else if (
       event.key === 'ArrowUp' || event.key === 'Up' ||
       event.key === 'ArrowDown' || event.key === 'Down') {
@@ -200,7 +196,11 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   onCalendarKeydown(event: KeyboardEvent) {
-    if (event.key === 'PageDown' && !event.altKey) {
+    if (event.key === 'Home') {
+      this.items.first.focus();
+    } else if (event.key === 'End') {
+      this.items.last.focus();
+    } else if (event.key === 'PageUp' && !event.altKey) {
       if (this.zoomedToDays) {
         this.days.previous();
       } else if (this.zoomedToMonths) {
@@ -208,7 +208,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       } else if (this.zoomedToYears) {
         this.years.previous();
       }
-    } else if (event.key === 'PageUp' && !event.altKey) {
+    } else if (event.key === 'PageDown' && !event.altKey) {
       if (this.zoomedToDays) {
         this.days.next();
       } else if (this.zoomedToMonths) {
@@ -216,13 +216,13 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       } else if (this.zoomedToYears) {
         this.years.next();
       }
-    } else if (event.key === 'PageDown' && event.altKey) {
-      if (this.zoomedToDays) {
-        // TODO: Change year?
-      }
     } else if (event.key === 'PageUp' && event.altKey) {
       if (this.zoomedToDays) {
-        // TODO: Change year?
+        this.days.farPrevious();
+      }
+    } else if (event.key === 'PageDown' && event.altKey) {
+      if (this.zoomedToDays) {
+        this.days.farNext();
       }
     } else if (
       event.key === 'ArrowUp' || event.key === 'Up' ||
@@ -466,6 +466,22 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         }
         this.zoomToDays(new Date(year, month + 1, dayToFocus), focusedItem ? true : false);
       },
+      farPrevious: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        let dayToFocus = focusedItem ? focusedItem.date.getDate() : 1;
+        if (month === 1 && dayToFocus === 29) {
+          dayToFocus = 28;
+        }
+        this.zoomToDays(new Date(year - 1, month, dayToFocus), focusedItem ? true : false);
+      },
+      farNext: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        let dayToFocus = focusedItem ? focusedItem.date.getDate() : 1;
+        if (month === 1 && dayToFocus === 29) {
+          dayToFocus = 28;
+        }
+        this.zoomToDays(new Date(year + 1, month, dayToFocus), focusedItem ? true : false);
+      },
       zoomOut: () => this.zoomToMonths(new Date(year, month))
     };
 
@@ -535,6 +551,8 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         const monthToFocus = focusedItem ? focusedItem.date.getMonth() : 0;
         this.zoomToMonths(new Date(year + 1, monthToFocus), focusedItem ? true : false);
       },
+      farPrevious: () => { },
+      farNext: () => { },
       zoomOut: () => this.zoomToYears(new Date(year, 0), new Date(year, 0))
     };
 
@@ -600,6 +618,8 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         const yearToFocus = focusedItem ? new Date(focusedItem.date.getFullYear() + 9, 0) : null;
         this.zoomToYears(new Date(year + 9, 0), yearToFocus, focusedItem ? true : false);
       },
+      farPrevious: () => { },
+      farNext: () => { },
       zoomOut: () => { }
     };
 
@@ -803,6 +823,8 @@ interface Calendar {
   items: CalendarItem[][];
   previous: () => void;
   next: () => void;
+  farPrevious: () => void;
+  farNext: () => void;
   zoomOut: () => void;
 }
 

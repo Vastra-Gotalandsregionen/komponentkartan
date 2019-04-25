@@ -1,5 +1,5 @@
 <div>
-  <div #item tabindex="0" class="datepicker-new__calendar__body__item" role="gridcell" [attr.aria-selected]="selected" [attr.aria-label]="date | date:ariaDateFormat"
+  <div #item tabindex="0" class="datepicker-new__calendar__body__item" role="gridcell" [attr.aria-selected]="selected" [attr.aria-disabled]="disabled" [attr.aria-label]="date | date:ariaDateFormat"
     [ngClass]="{'datepicker-new__calendar__body__item--selected': selected, 'datepicker-new__calendar__body__item--current': current, 'datepicker-new__calendar__body__item--disabled': disabled}"
     (click)="onClick()" (keydown)="onKeydown($event)" (focus)="onFocus()" (blur)="onBlur()">
     {{date | date:dateFormat}}
