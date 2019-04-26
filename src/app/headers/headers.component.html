@@ -1,6 +1,5 @@
 <app-component-docs [componentName]="'header/header menu'">
-  <div class="docs__overview" style="height:420px">
-    <vgr-header class="header--inline theme--red" [hideSwosh]="true" [logoClass]="'custom-logo'"></vgr-header>
+  <div class="docs__overview">
     <code>&lt;vgr-header&gt;</code> är en komponent som skall användas i huvudet på sidorna och ligga där fast när användaren
     navigerar i systemet.
     <br> Färgen kan sättas beroende på vilket system som är aktivt. I portalen beror färgen på om användaren har ett eller
@@ -19,8 +18,8 @@
       <vgr-header class="header--inline">
         <vgr-header-menu
           userName="Neo Åhn">
-            <vgr-menu-item link="/headers" text="Headers"></vgr-menu-item>
             <vgr-menu-item link="/inputFields" text="Input"></vgr-menu-item>
+            <vgr-menu-item link="/headers" text="Headers"></vgr-menu-item>
             <vgr-menu-separator></vgr-menu-separator>          
             <vgr-submenu text="Calender">
               <vgr-menu-item link="/datepicker" text="Datepicker"></vgr-menu-item>
@@ -34,15 +33,6 @@
           </vgr-header-menu>
         </vgr-header>
       </div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-  
-
-
     <div class="column-layout">
       <!-- <vgr-header class="header--inline" [userName]="'Neo Åhn'" [headerMenu]="headerMenu"></vgr-header> -->
     </div>
@@ -67,6 +57,9 @@
       <!-- <vgr-header class="header--inline"></vgr-header> -->
       <h3>Header med systeminformation</h3>
       <!-- <vgr-header [systemText]="'Development'" class="header--inline"></vgr-header> -->
+
+      <h3>Custom Logo</h3>
+      <!-- <vgr-header class="header--inline theme--red" [hideSwosh]="true" [logoClass]="'custom-logo'"></vgr-header> -->
     </div>
   </div>
   <div class="docs__api">
@@ -112,7 +105,7 @@
     </table>
     <br>
     <h3>IHeaderMenu</h3>
-    <table class="property-table" style="margin-bottom: 20px">
+    <table class="property-table">
       <tr>
         <th>Namn</th>
         <th>Beskrivning</th>
@@ -126,7 +119,7 @@
       </tr>
     </table>
     <h3>IHeaderMenuItem</h3>
-    <table class="property-table" style="margin-bottom: 20px">
+    <table class="property-table">
       <tr>
         <th>Namn</th>
         <th>Beskrivning</th>

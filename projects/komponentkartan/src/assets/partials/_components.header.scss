@@ -54,7 +54,13 @@
       display: flex;
       height: inherit;
       align-items: center;
-      padding: 0 20px;
+      > vgr-login-information {
+        padding: 0 20px;
+        height: inherit;
+        width: inherit;
+        align-items: inherit;
+        display: inherit;
+      }
     }
   }
   .header__login-info-menu {

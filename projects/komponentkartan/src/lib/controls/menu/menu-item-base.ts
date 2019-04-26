@@ -7,9 +7,7 @@ export abstract class MenuItemBase {
     @Output() arrowUp: EventEmitter<null> = new EventEmitter();
     @Output() arrowDown: EventEmitter<null> = new EventEmitter();
 
-    constructor() {
-    }
+    constructor() { }
 
-    setFocus(movingUp: boolean = false) {
-    }
+    setFocus(movingUp: boolean = false) { }
 }

@@ -42,7 +42,7 @@
   }
   &:hover {
     .menu__item {
-      &.menu__item--selected {
+      &.menu__item--active {
         @extend .border-left-color--secondary;
         &:hover {
           @extend .border-left-color--primary;
@@ -133,7 +133,7 @@
       letter-spacing: $menu-text-font-size--small-letter-spacing-bold;
     }
   }
-  &.menu__item--selected {
+  &.menu__item--active {
     @extend .border-left-color--primary;
     @extend .background-color--primary-dimmed;
     font-weight: bold;
@@ -198,9 +198,8 @@
   .menu__item {
     border-left-width: 0;
     padding-left: 15px;
-    &.menu__item--selected {
+    &.menu__item--active {
       background: none;
-      font-weight: normal;
     }
     &:hover:not(.menu__item_disabled) {
       padding-left: 11px;

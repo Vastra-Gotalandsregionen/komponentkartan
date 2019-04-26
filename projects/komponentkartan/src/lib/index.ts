@@ -11,9 +11,6 @@ export { FilterTextboxComponent } from './controls/filterTextbox/filterTextbox.c
 export { LockButtonComponent } from './controls/lock-button/lock-button.component';
 export { SaveCancelComponent } from './controls/save-cancel/save-cancel.component';
 export { RadioGroupComponent } from './controls/radioGroup/radioGroup.component';
-export { HeaderComponent } from './controls/header/header.component';
-export { LoginInformationComponent } from './controls/loginInformation/loginInformation.component';
-export { HeaderMenuComponent } from './controls/headerMenu/headerMenu.component';
 export { ModalPlaceholderComponent } from './controls/modal/modal.component';
 export { MonthpickerComponent } from './controls/monthpicker/monthpicker.component';
 export { DatepickerComponent } from './controls/datepicker/datepicker.component';
@@ -33,6 +30,12 @@ export { ListItemComponent } from './controls/list-item/list-item.component';
 export { MenuComponent } from './controls/menu/menu.component';
 export { MenuItemComponent } from './controls/menu/menu-item.component';
 export { MenuSeparatorComponent } from './controls/menu/menu-separator.component';
+
+export { HeaderComponent } from './controls/header/header.component';
+export { LoginInformationComponent } from './controls/loginInformation/loginInformation.component';
+export { HeaderMenuComponent } from './controls/headerMenu/headerMenu.component';
+
+
 export { SidebarMenuComponent } from './controls/menu/sidebar-menu.component';
 export { SubmenuComponent } from './controls/menu/submenu.component';
 export { PanelComponent } from './controls/panel/panel.component';

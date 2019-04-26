@@ -1,13 +1,18 @@
-import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, Output, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, SimpleChanges, OnChanges, AfterContentInit, OnDestroy, Renderer } from '@angular/core';
 import { IHeaderMenu, IHeaderMenuItem } from '../../models/headerMenu.model';
 import { MenuItemBase } from '../menu/menu-item-base';
+import { SubmenuComponent } from '../menu/submenu.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'vgr-header-menu',
   templateUrl: './headerMenu.component.html'
 })
 
-export class HeaderMenuComponent implements OnChanges {
+export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChanges {
+  private ngUnsubscribe = new Subject();
+
   @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
   @Input() menu: IHeaderMenu;
   @Input() navigationToggled: boolean;
@@ -16,22 +21,80 @@ export class HeaderMenuComponent implements OnChanges {
   @Input() textColor: string;
   @Input() circleColor: string;
   internalInitials: string;
-
   selectedItem: IHeaderMenuItem;
   hideMenu = true;
 
-
-
   constructor(private elementRef: ElementRef) {
   }
-  clickToggleHeaderMenu(event: Event) {
-    this.hideMenu = !this.hideMenu;
+
+  ngAfterContentInit() {
+    const menuItemArray = this.menuItems.toArray();
+
+    menuItemArray.forEach((menuItem, i) => {
+      menuItem.home
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => this.menuItems.first.setFocus());
+
+      menuItem.end
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => this.menuItems.last.setFocus(true));
+
+      menuItem.arrowUp
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          if (i === 0) {
+            const lastMenuItem = this.menuItems.last;
+            if (lastMenuItem instanceof SubmenuComponent) {
+              if ((<SubmenuComponent>lastMenuItem).expanded) {
+                (<SubmenuComponent>lastMenuItem).menuItems.last.setFocus();
+
+                return;
+              }
+            }
+            this.menuItems.last.setFocus();
+            return;
+          }
+          this.menuItems.toArray()[i - 1].setFocus(true);
+        });
+
+      menuItem.arrowDown.pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          if (i === this.menuItems.length - 1) {
+            this.menuItems.first.setFocus();
+            return;
+          }
+          this.menuItems.toArray()[i + 1].setFocus();
+        });
+
+      menuItem.escape
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          this.elementRef.nativeElement.querySelector('.header__login-info-menu').focus();
+          this.hideMenu = true;
+        });
+    });
   }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  clickToggleHeaderMenu(event: Event) {
+    this.toggleHeaderMenu(event);
+  }
+
   keyToggleHeaderMenu(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       this.toggleHeaderMenu(event);
+      setTimeout(() => {
+        this.focusFirstMenuItem();
+      }, 100);
+    } else if (event.key === 'Tab' && !this.hideMenu) {
+      this.focusFirstMenuItem();
     }
   }
+
   toggleHeaderMenu(event: MouseEvent | any) {
     this.hideMenu = !this.hideMenu;
     if (!this.hideMenu) {
@@ -39,10 +102,8 @@ export class HeaderMenuComponent implements OnChanges {
     }
   }
 
-  toggleSubMenu(item: IHeaderMenuItem) {
-    item.expanded = !item.expanded;
-
-    event.cancelBubble = true;
+  focusFirstMenuItem() {
+    this.menuItems.first.setFocus();
   }
 
   @HostListener('document:mousedown', ['$event'])
@@ -51,35 +112,6 @@ export class HeaderMenuComponent implements OnChanges {
       this.hideMenu = true;
     }
   }
-
-  onMouseEnter(item: IHeaderMenuItem) {
-    this.menu.menuItems.forEach(x => x.marked = false);
-
-    item.marked = true;
-  }
-
-  onMouseLeave(item: IHeaderMenuItem) {
-    item.marked = false;
-    if (this.selectedItem) {
-      this.selectedItem.marked = true;
-    }
-  }
-
-
-  selectItem(item: IHeaderMenuItem) {
-    if (!item) {
-      return;
-    }
-
-    this.menu.menuItems.forEach(x => x.selected = false);
-
-    item.selected = true;
-    item.marked = true;
-    this.selectedItem = item;
-
-
-  }
-
 
   ngOnChanges(changes: SimpleChanges) {
     const initialsChange = changes['initials'];
@@ -113,5 +145,3 @@ export class HeaderMenuComponent implements OnChanges {
   }
 
 }
-
-

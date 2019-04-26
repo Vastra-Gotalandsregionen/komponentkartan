@@ -1,5 +1,5 @@
 import { Input, Component, HostListener, ElementRef, Renderer, forwardRef, HostBinding, AfterViewInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
 
 @Component({
