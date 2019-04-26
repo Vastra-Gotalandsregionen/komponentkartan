@@ -76,7 +76,6 @@ export { ICalendarWeek } from './models/calendarWeek.model';
 export { ICalendarYear } from './models/calendarYear.model';
 export { ICalendarYearMonth } from './models/calendarYearMonth.model';
 export { ExpandableRow } from './models/expandableRow.model';
-export { IHeaderMenu, IHeaderMenuGroup, IHeaderMenuItem } from './models/headerMenu.model';
 export { IMenu, IMenuGroup, IMenuItem } from './models/menu.model';
 export { NotificationIcon } from './models/notificationIcon.model';
 export { NotificationType } from './models/notificationType.model';
