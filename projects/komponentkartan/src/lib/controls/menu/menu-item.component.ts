@@ -15,6 +15,7 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @Input() notification: string;
     @Input() notificationColor: string;
     @Input() notificationTooltip: string;
+    @Input() isInternalLink: boolean;
     @HostBinding('attr.role') role = 'menuitem';
     @HostBinding('attr.aria-disabled') ariaDisabled;
     @ViewChild('menuitem') menuitem: ElementRef;

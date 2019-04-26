@@ -1,6 +1,6 @@
 <div #menuitem class="menu__item" *ngIf="!disabled else disableditem"
   routerLinkActive="menu__item--active" routerLink={{link}} [routerLinkActiveOptions]="{exact:true}">
-  <a>{{text}}</a>
+  <a target="{{isInternalLink ? '_blank' : '_self'}}">{{text}}</a>
   <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass"
     title={{notificationTooltip}}>{{ notificationText }}</span>
 </div>

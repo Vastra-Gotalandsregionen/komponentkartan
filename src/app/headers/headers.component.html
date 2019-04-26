@@ -1,5 +1,5 @@
 <vgr-page class="no-sort">
-  <vgr-page-header [title]="'List'">
+  <vgr-page-header [title]="'Header & HeaderMenu'">
   </vgr-page-header>
   <vgr-page-body>
     <vgr-page-block>
@@ -75,7 +75,7 @@
 
         <!-- Exempel -->
 
-        <vgr-list-item>
+        <vgr-list-item [expanded]="true">
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>Exempel</h4>
@@ -85,22 +85,43 @@
             <div class="docs__examples">
               <div class="column-layout">
                 <h3>Header med user och meny (temad grön)</h3>
-                <!-- <vgr-header class="header--inline theme--green" [userName]="'Nova Audit'" [headerMenu]="simpleHeaderMenu"></vgr-header> -->
+                <vgr-header class="header--inline theme--green">
+                  <vgr-header-menu [userName]="'Nova Audit'">
+                    <vgr-menu-item link="/minsida" text="Internt menyval"></vgr-menu-item>
+                    <vgr-submenu text="Submeny">
+                      <vgr-menu-item link="/backtotop" text="Submenyval : backtotop"></vgr-menu-item>
+                    </vgr-submenu>
+                  </vgr-header-menu>
+                </vgr-header>
                 <div>
-                  <h3>Markup för en menyn i exemplet ovan, tryck på pilen i headern så ser du kontextmenyn</h3>
-                  <section [innerHTML]="exampleCodeSimpleMenyMarkup" highlight-js-content=".highlight"></section>
+                
+
+                <h3>Markup för en menyn i exemplet ovan, tryck på pilen i headern så ser du kontextmenyn</h3>
+                <section [innerHTML]="exampleCodeSimpleMenyMarkup" highlight-js-content=".highlight"></section>
                 </div>
-                <h3>Header med user utan meny (temad röd)</h3>
-                <!-- <vgr-header class="header--inline theme--red" [userName]="'Nils Åstrand'"></vgr-header> -->
-                <h3>Header utan user och meny (temad blå)</h3>
-                <!-- <vgr-header class="header--inline theme--blue"></vgr-header> -->
+                
+                                
                 <h3>Header utan user och meny (Standard)</h3>
-                <!-- <vgr-header class="header--inline"></vgr-header> -->
+                <vgr-header class="header--inline"></vgr-header>
+                <section [innerHTML]="standardExampleMarkup" highlight-js-content=".highlight"></section>
+                
+
                 <h3>Header med systeminformation</h3>
-                <!-- <vgr-header [systemText]="'Development'" class="header--inline"></vgr-header> -->
+                <vgr-header systemText="Development" class="header--inline"></vgr-header>
+                <section [innerHTML]="systemExampleMarkup" highlight-js-content=".highlight"></section>
+
 
                 <h3>Custom Logo</h3>
-                <!-- <vgr-header class="header--inline theme--red" [hideSwosh]="true" [logoClass]="'custom-logo'"></vgr-header> -->
+                <vgr-header class="header--inline theme--red" [hideSwosh]="true"  logoClass="custom-logo"></vgr-header>
+                <section [innerHTML]="customExampleMarkup" highlight-js-content=".highlight"></section>
+
+
+                <h3>Skriva över initialer, textfärg samt bakgrundsfärg</h3>
+                <vgr-header class="header--inline" [hideSwosh]="true">
+                  <vgr-header-menu initials="AB" userName="Claes Göransson" textColor="red" circleColor="white"></vgr-header-menu>
+                </vgr-header>
+                <section [innerHTML]="overwriteExampleMarkup" highlight-js-content=".highlight"></section>
+
               </div>
             </div>
           </vgr-list-item-content>
@@ -140,7 +161,7 @@
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="true">
+        <vgr-list-item [expanded]="false">
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - header-menu</h4>
@@ -164,7 +185,7 @@
               <tr>
                 <td>initials : string</td>
                 <td>Skriver över initialerna med egna initialer</td>
-                <td>[initials]="GB"</td>
+                <td>[initials]="'GB'"</td>
               </tr>
               <tr>
                 <td>textColor : string</td>

@@ -14,33 +14,33 @@ export class HeadersComponent implements OnInit {
   headerMenu: IHeaderMenu;
   simpleHeaderMenu: IHeaderMenu;
   @ViewChild(HeaderComponent) headerComponent: HeaderComponent;
-  exampleCodeHeaderMenu = `    this.headerMenu = {
-    menuItems: [
-      {
-        displayName: 'Internt menyval',
-        url: '/minsida',
-        isInternalLink: true
-      },
-      {
-        isSeparator: true
-      },
-      {
-        displayName: 'Externt menyval',
-        menuItems: [
-          {
-            displayName: 'Submenyval vgregion',
-            url: 'http://www.vgregion.se',
-            isInternalLink: false
-          }
-        ] as IHeaderMenuItem[]
-      }
-    ] as IHeaderMenuItem[]
-  } as IHeaderMenu;`;
+  exampleCodeHeaderMenu =  `  <vgr-header class="header--inline theme--green">
+    <vgr-header-menu [userName]="'Nova Audit'">
+      <vgr-menu-item link="/minsida" text="Internt menyval"></vgr-menu-item>
+      <vgr-submenu text="Submeny">
+        <vgr-menu-item link="/backtotop" text="Submenyval : backtotop"></vgr-menu-item>
+      </vgr-submenu>
+    </vgr-header-menu>
+  </vgr-header>`;
+  standardExample = `<vgr-header class="header--inline"></vgr-header>`;
+  systemExample = `<vgr-header systemText="Development" class="header--inline"></vgr-header>`;
+  customExample = `<vgr-header class="header--inline theme--red" [hideSwosh]="true"  logoClass="custom-logo"></vgr-header>`;
+  overwriteExample = `<vgr-header class="header--inline" [hideSwosh]="true">
+  <vgr-header-menu initials="AB" userName="Claes Göransson" textColor="red" circleColor="white"></vgr-header-menu>
+</vgr-header>`;
 
   exampleCodeSimpleMenyMarkup: string;
+  standardExampleMarkup: string;
+  systemExampleMarkup: string;
+  customExampleMarkup: string;
+  overwriteExampleMarkup: string;
 
   constructor(htmlEncoder: HtmlEncodeService) {
     this.exampleCodeSimpleMenyMarkup = htmlEncoder.prepareHighlightedSection(this.exampleCodeHeaderMenu, 'typescript');
+    this.standardExampleMarkup = htmlEncoder.prepareHighlightedSection(this.standardExample, 'typescript');
+    this.systemExampleMarkup = htmlEncoder.prepareHighlightedSection(this.systemExample, 'typescript');
+    this.customExampleMarkup = htmlEncoder.prepareHighlightedSection(this.customExample, 'typescript');
+    this.overwriteExampleMarkup = htmlEncoder.prepareHighlightedSection(this.overwriteExample, 'typescript');
     this.setMenuItems();
   }
 
