@@ -1,5 +1,4 @@
 import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, SimpleChanges, OnChanges, AfterContentInit, OnDestroy, Renderer } from '@angular/core';
-import { IHeaderMenu, IHeaderMenuItem } from '../../models/headerMenu.model';
 import { MenuItemBase } from '../menu/menu-item-base';
 import { SubmenuComponent } from '../menu/submenu.component';
 import { Subject } from 'rxjs';
@@ -14,14 +13,11 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
   private ngUnsubscribe = new Subject();
 
   @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
-  @Input() menu: IHeaderMenu;
-  @Input() navigationToggled: boolean;
   @Input() userName: string;
   @Input() initials: string;
   @Input() textColor: string;
   @Input() circleColor: string;
   internalInitials: string;
-  selectedItem: IHeaderMenuItem;
   hideMenu = true;
 
   constructor(private elementRef: ElementRef) {
