@@ -1,10 +1,12 @@
 import { Component, HostBinding, ContentChildren, ContentChild, AfterContentInit, QueryList, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
-
-import { ListItemComponent } from '../list-item/list-item.component';
-import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { Notification } from '../../models/notification.model';
+import { ListItemComponent } from '../list-item/list-item.component';
+import { ListHeaderComponent, SortChangedArgs } from '../list/list-header.component';
+import { ListService } from './list.service';
 
 @Component({
   templateUrl: './list.component.html',
@@ -25,7 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ListComponent implements AfterContentInit, OnDestroy {
   @Input() allowMultipleExpandedItems = false;
-  @Input() notification;
+  @Input() notification: Notification;
   @Input() pages = 1;
   @Input() activePage = 1;
   @Input() @HostBinding('class.list--inline') flexibleHeader = false;
@@ -40,51 +42,82 @@ export class ListComponent implements AfterContentInit, OnDestroy {
   @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
   @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
 
-  loaded = false;
-
   private ngUnsubscribe = new Subject();
+  private ngUnsubscribeItems = new Subject();
+
+  constructor(private listService: ListService) { }
 
   ngAfterContentInit() {
     if (this.listHeader) {
-      this.listHeader.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+      this.listHeader.sortChanged
+        .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
     }
-    this.subscribeEvents();
+
+    this.listService.expandListItemRequested
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((itemToExpand: ListItemComponent) => {
+        if (this.allowMultipleExpandedItems) {
+          itemToExpand.setExpanded(true);
+
+        } else {
+          const expandedItems = this.items.filter(x => x.isExpanded);
+
+          if (expandedItems.length) {
+            const preventedItems = expandedItems.filter(x => x.preventCollapse || x.notInteractable);
+
+            if (preventedItems.length) {
+              preventedItems.forEach(x => x.collapsePrevented.emit());
+              itemToExpand.expandPrevented.emit();
+
+            } else {
+              expandedItems.forEach(x => x.setExpanded(false));
+              itemToExpand.setExpanded(true);
+            }
+
+          } else {
+            itemToExpand.setExpanded(true);
+          }
+        }
+      });
+
+    this.subscribeToItems();
     this.items.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
-      this.subscribeEvents();
+      this.subscribeToItems();
     });
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
   }
 
-  subscribeEvents() {
-    if (!this.allowMultipleExpandedItems) {
-      this.items.forEach(listItem => {
-        listItem.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((expanded: boolean) => {
-          if (expanded) {
-            this.items.filter(x => x !== listItem && x.expanded === true)
-              .forEach(otherItem => {
-                otherItem.toggleExpand(true);
-              });
-          }
-        });
+  subscribeToItems() {
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
+    this.ngUnsubscribeItems = new Subject();
 
+    this.items
+      .forEach((item, index) => {
+        item.setFocusOnFirstRow
+          .pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(() => this.items.first.setFocusOnRow());
+
+        item.setFocusOnLastRow
+          .pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(() => this.items.last.setFocusOnRow());
+
+        item.setFocusOnPreviousRow
+          .pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(() => this.setFocusOnPreviousRow(index));
+
+        item.setFocusOnNextRow.
+          pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(() => this.setFocusOnNextRow(index));
+
+        item.setFocusOnPreviousRowContent
+          .pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(() => this.setFocusOnPreviousRowContent(item));
+
+        item.setFocusOnNextRowContent
+          .pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(() => this.setFocusOnNextRow(index));
       });
-    }
-    if (this.items.length > 0) {
-      this.loaded = true;
-    }
-
-    this.items.forEach((item, index) => {
-      item.setFocusOnFirstRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.items.first.setFocusOnRow());
-      item.setFocusOnLastRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.items.last.setFocusOnRow());
-      item.setFocusOnPreviousRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow(index));
-      item.setFocusOnNextRow.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow(index));
-      item.setFocusOnPreviousRowContent.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRowContent(item));
-      item.setFocusOnNextRowContent.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow(index));
-    });
   }
 
   animateHeader() {
@@ -94,7 +127,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
     }, 2600);
   }
 
-  setFocusOnPreviousRow(index: number): any {
+  setFocusOnPreviousRow(index: number) {
     if (index === 0) {
       this.items.toArray()[this.items.toArray().length - 1].setFocusOnRow();
     } else {
@@ -111,7 +144,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
   }
 
   setFocusOnPreviousRowContent(item: ListItemComponent) {
-    if (item.expanded) {
+    if (item.isExpanded) {
       item.setFocusOnRow();
     }
   }
