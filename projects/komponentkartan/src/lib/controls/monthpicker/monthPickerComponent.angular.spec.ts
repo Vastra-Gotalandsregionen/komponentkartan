@@ -5,6 +5,8 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MonthpickerComponent } from '../../controls/monthpicker/monthpicker.component';
 import { TruncatePipe } from '../../pipes/truncatePipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconComponent } from '../icon/icon.component';
 
 
 describe('[MonthpickerComponent(Angular)]', () => {
@@ -16,8 +18,8 @@ describe('[MonthpickerComponent(Angular)]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [MonthpickerComponent, TruncatePipe],
-      imports: [CommonModule]
+      declarations: [MonthpickerComponent, TruncatePipe, IconComponent],
+      imports: [CommonModule, FontAwesomeModule]
     });
 
     TestBed.overrideComponent(MonthpickerComponent, {

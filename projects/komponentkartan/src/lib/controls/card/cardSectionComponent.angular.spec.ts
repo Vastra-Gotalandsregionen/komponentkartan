@@ -8,6 +8,8 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardSectionComponent } from './cardSection.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 describe('[CardSectionComponent]', () => {
@@ -19,8 +21,8 @@ describe('[CardSectionComponent]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [CardSectionComponent, TruncatePipe],
-      imports: [CommonModule, BrowserAnimationsModule]
+      declarations: [CardSectionComponent, TruncatePipe, IconComponent],
+      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule]
     });
 
     TestBed.overrideComponent(CardSectionComponent, {

@@ -79,38 +79,29 @@ vgr-monthpicker {
       cursor: text;
     }
   }
-  &:after {
-    content: "";
-    vertical-align: middle;
-    text-align: center;
-    float: right;
-    cursor: pointer;
-    margin-top: 0px;
-    padding-right: 3px;
-    width: 36px;
-    height: 30px;
-    opacity: 1;
-    @extend .bg-image-icon-calendar;
+  .icon {
     background-color: $primary-color--default;
-    transition: background-color 0.6s linear, opacity 0.6s linear;
+    position: inherit;
+    float: right;
+    text-align: center;
+    color: $text-color--light;
+    padding-top: 3px;
+    background: none;
+    width: 36px;
+    padding-left: 0;
     .theme--blue & {
-      @extend .bg-image-icon-calendar--blue;
       background-color: $primary-color--blue;
     }
     .theme--red & {
       background-color: $primary-color--red;
-      @extend .bg-image-icon-calendar--red;
     }
     .theme--green & {
       background-color: $primary-color--green;
-      @extend .bg-image-icon-calendar--green;
     }
     .theme--pinkie & {
       background-color: $primary-color--pinkie;
-      @extend .bg-image-icon-calendar--red;
     }
     .disabled & {
-      @extend .bg-image-icon-calendar--inactive;
       background-color: $control-color--disabled;
       cursor: default;
     }

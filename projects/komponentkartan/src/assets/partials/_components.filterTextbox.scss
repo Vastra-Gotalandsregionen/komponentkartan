@@ -12,33 +12,25 @@
     border-right: none;
     border-radius:0px;
   }
-  &:after {
-    @extend .bg-image-icon-search--neutral;
-   // @extend .background-color--primary; 
-   
-    background-size: 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-    content: "";
+  .icon {
     width: 34px;
     height: $component-height;
-    font-size: 16px;
-    font-family: FontAwesome;
-    vertical-align: middle;
     float: right;
     border: $border--single solid $control-border-color--default;
     border-left: none;
+    text-align: center;
+    padding-top: 2px;
     .theme--blue & {
-      @extend .bg-image-icon-search--blue;
+      color: $primary-color--blue;
     }
     .theme--red & {
-      @extend .bg-image-icon-search--red;
+      color: $primary-color--red;
     }
     .theme--green & {
-      @extend .bg-image-icon-search--green;
+      color: $primary-color--green;
     }
     .theme--pinkie & {
-      @extend .bg-image-icon-search--red;
+      color: $primary-color--pinkie;
     }
   }
 }

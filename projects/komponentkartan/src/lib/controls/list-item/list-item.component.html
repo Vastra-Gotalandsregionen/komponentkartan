@@ -1,10 +1,11 @@
-<div class="list-item" [class.list-item--notification-visible]="temporaryNotification || permanentNotification" [class.list-item--expanded]="expanded" [ngClass]="notificationColor" [@deleted] (@deleted.done)="triggerDeletedEvent()" *ngIf="!isDeleted">
-  <div class="list-item__header_wrapper" (click)="toggleExpand()">
+<div class="list-item" [class.list-item--notification-visible]="temporaryNotification || permanentNotification" [class.list-item--expanded]="isExpanded" [ngClass]="notificationColor" [@deleted] (@deleted.done)="triggerDeletedEvent()" *ngIf="!isDeleted">
+  <div class="list-item__header_wrapper" (click)="toggleExpanded()">
+    <vgr-icon icon="chevron-down" size="sm"></vgr-icon>
     <ng-content select="vgr-list-item-header">
     </ng-content>
   </div>
   <!-- Denna notis visas när det finns en permanent notis men ingen temporär -->
-  <div *ngIf="permanentNotification && !temporaryNotificationVisible" class="list-item__notification" (click)="toggleExpand()">
+  <div *ngIf="permanentNotification && !temporaryNotificationVisible" class="list-item__notification" (click)="toggleExpanded()">
     <span class="list-item__notification__icon" [ngClass]="permanentNotification.icon">
     </span>
     <div class="list-item__notification__message">
@@ -12,7 +13,7 @@
     </div>
   </div>
   <!-- Denna notis visas när det endast finns en temporär notis -->
-  <div *ngIf="temporaryNotification && !permanentNotification" class="list-item__notification" [@toggleFadedState] (@toggleFadedState.done)="closeTemporary(notification)" (click)="toggleExpand()">
+  <div *ngIf="temporaryNotification && !permanentNotification" class="list-item__notification" [@toggleFadedState] (@toggleFadedState.done)="closeTemporary(notification)" (click)="toggleExpanded()">
     <span class="list-item__notification__icon" [ngClass]="temporaryNotification.icon">
     </span>
     <div class="list-item__notification__message">
@@ -20,14 +21,14 @@
     </div>
   </div>
   <!-- Denna notis visas när det finns en permanent notis som skall ses åter när den temorärar är klar -->
-  <div *ngIf="temporaryNotification && permanentNotification" class="list-item__notification" [@toggleFadedState0ms] (@toggleFadedState0ms.done)="closeTemporary(notification)" (click)="toggleExpand()">
+  <div *ngIf="temporaryNotification && permanentNotification" class="list-item__notification" [@toggleFadedState0ms] (@toggleFadedState0ms.done)="closeTemporary(notification)" (click)="toggleExpanded()">
     <span class="list-item__notification__icon" [ngClass]="temporaryNotification?.icon">
     </span>
     <div class="list-item__notification__message">
       {{temporaryNotification? temporaryNotification?.message : ''}}
     </div>
   </div>
-  <div [@toggleState]="{value: expanded, params: {animationSpeed: animationSpeed}}" class="list-item-content" (@toggleState.done)="overflow=true" (@toggleState.start)="overflow=false" [ngClass]="{'overflow-visible': overflow}">
+  <div [@toggleState]="{value: isExpanded, params: {animationSpeed: animationSpeed}}" class="list-item-content" (@toggleState.done)="overflow=true" (@toggleState.start)="overflow=false" [ngClass]="{'overflow-visible': overflow}">
     <ng-content select="vgr-list-item-content"></ng-content>
   </div>
 </div>

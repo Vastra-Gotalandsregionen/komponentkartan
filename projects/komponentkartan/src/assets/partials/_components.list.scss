@@ -169,10 +169,6 @@ vgr-list.list--new-item-added {
 }
 
 .chevron-collapsed {
-  @extend .bg-image-icon-chevron;
-  content: "";
-  width: 15px !important;
-  background-size: 100% !important;
   display: block;
   transform: rotate(0deg);
   transition: transform 0.4s;
@@ -187,10 +183,6 @@ vgr-list.list--new-item-added {
   border-left: 5px solid white;
   transition: border-left-color 0.2s ease, margin-top 0.2s ease-in;
 
-  .list-item__header:after {
-    @extend .chevron-collapsed;
-    margin-left: auto;
-  }
 
   //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
 
@@ -199,14 +191,6 @@ vgr-list.list--new-item-added {
     margin-top: 14px;
     margin-bottom: 14px;
   }
-
-  &.list-item--expanded {
-    .list-item__header:after {
-      //OBS! Denna måste ligga efter expanded-stilen i filen!
-      @extend .chevron-expanded;
-    }
-  }
-
   //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
   &:not(.list-item--compact):hover {
     position: relative;
@@ -226,7 +210,20 @@ vgr-list.list--new-item-added {
     border-left-color: $primary-color--success;
   }
 }
-
+.list-item__header_wrapper {
+  position: relative;
+  > vgr-icon .icon {
+    @extend .chevron-collapsed;
+    color: $text-color--default;
+    position: absolute;
+    top: 7px;
+    right: 12px;
+    transform: rotate(0deg);
+    .list-item--expanded & {
+      transform: rotate(-180deg);
+    }
+  }
+}
 .list-item__header {
   opacity: 1;
   cursor: pointer;
@@ -384,13 +381,12 @@ vgr-list.list--new-item-added {
 .list__column-header--sorted-asc {
   h2 {
     &:after {
-      @extend .bg-image-icon-sortarrow;
       content: "";
       display: inline-block;
       background-size: 100% !important;
       vertical-align: middle;
       margin-left: 2px;
-      transform: rotate(180deg);
+      transform: rotate(-180deg);
       position: absolute;
       top: 18px;
 

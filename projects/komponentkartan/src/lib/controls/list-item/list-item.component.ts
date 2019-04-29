@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter, ContentChildren, ContentChild, QueryList,
-  AfterContentInit, forwardRef, OnDestroy, OnChanges, SimpleChanges, SimpleChange
+  AfterContentInit, forwardRef, OnDestroy, OnChanges, SimpleChanges,
 } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 
@@ -11,6 +11,7 @@ import { ListItemHeaderComponent } from '../list-item/list-item-header.component
 import { ListItemContentComponent } from '../list-item/list-item-content.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ListService } from '../list/list.service';
 
 @Component({
   templateUrl: './list-item.component.html',
@@ -64,6 +65,7 @@ import { takeUntil } from 'rxjs/operators';
 
 export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges {
   readonly showNotificationDurationMs = 1500;
+  isExpanded = false;
   ngUnsubscribe = new Subject();
   temporaryNotification: RowNotification;
   permanentNotification: RowNotification;
@@ -74,6 +76,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   overflow = false;
 
   @Input() expanded = false;
+  @Input() preventCollapse = false;
   @Input() notification: RowNotification;
   @Input() animationSpeed = 400;
 
@@ -81,6 +84,8 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
+  @Output() expandPrevented: EventEmitter<any> = new EventEmitter();
+  @Output() collapsePrevented: EventEmitter<any> = new EventEmitter();
   @Output() notificationChanged: EventEmitter<RowNotification> = new EventEmitter<RowNotification>();
   @Output() deleted: EventEmitter<any> = new EventEmitter();
   @Output() setFocusOnFirstRow: EventEmitter<any> = new EventEmitter();
@@ -92,19 +97,30 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
-  constructor() {
+  constructor(private listService: ListService) {
     this.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.hideNotifications());
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (changes.expanded && changes.expanded.currentValue !== this.isExpanded) {
+      if (changes.expanded.isFirstChange()) {
+        this.isExpanded = changes.expanded.currentValue;
+      } else {
+        this.toggleExpanded();
+      }
+    }
+
     if (changes.notification && changes.notification.currentValue) {
-      this.handleNotifications(changes.notification);
+      const notificationType = changes.notification.currentValue.NotificationType;
+      if (!this.preventCollapse || notificationType === NotificationType.Permanent) {
+        this.handleNotifications(changes.notification.currentValue);
+      }
     }
   }
 
   ngAfterContentInit() {
     if (this.listItemHeader) {
-      this.listItemHeader.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.toggleExpand());
+      this.listItemHeader.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.toggleExpanded());
       this.listItemHeader.goToFirst.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnFirstRow.emit());
       this.listItemHeader.goToLast.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnLastRow.emit());
       this.listItemHeader.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow.emit());
@@ -116,10 +132,23 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  toggleExpand(forceclose = false) {
+  toggleExpanded() {
+    if (this.isExpanded) {
+      if (this.preventCollapse) {
+        this.collapsePrevented.emit();
+      } else if (!this.notInteractable) {
+        this.setExpanded(false);
+      }
+
+    } else {
+      this.listService.requestExpandListItem(this);
+    }
+  }
+
+  setExpanded(expanded: boolean) {
     if (!this.notInteractable) {
-      this.expanded = forceclose ? false : !this.expanded;
-      this.expandedChanged.emit(this.expanded);
+      this.isExpanded = expanded;
+      this.expandedChanged.emit(this.isExpanded);
       this.notInteractable = true;
       setTimeout(() => { this.notInteractable = false; }, 400);
     }
@@ -131,7 +160,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   hideNotifications() {
     if (this.temporaryNotificationVisible) {
-      if (this.notification && this.notification.type === 2) {
+      if (this.notification && this.notification.type === NotificationType.ShowOnRemove) {
         setTimeout(() => {
           this.isDeleted = true;
         }, this.showNotificationDurationMs);
@@ -143,11 +172,11 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  closeTemporary(notification) {
+  closeTemporary(notification: RowNotification) {
     const type = notification ? notification.type : null;
     if (!this.temporaryNotification) {
       this.temporaryNotificationVisible = false;
-      this.handleNotificatonColor();
+      this.handleNotificationColor();
       if (type && type === NotificationType.ShowOnCollapse) {
         this.notification = this.permanentNotification ? this.permanentNotification : null;
         this.notificationChanged.emit(this.notification);
@@ -155,7 +184,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  handleNotificatonColor() {
+  handleNotificationColor() {
     const current = this.temporaryNotification ? this.temporaryNotification : this.permanentNotification;
     if (current) {
       // Hantera färg på vänsterkanten
@@ -175,29 +204,20 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-
-  handleNotifications(notification: SimpleChange) {
-    // Hantera de olika notifieringstyperna
-    const current = notification.currentValue;
-    if (current.type === NotificationType.Permanent) {
-      this.permanentNotification = current;
-    } else if (current.type === NotificationType.ShowOnCollapse) {
-      this.temporaryNotification = current;
+  handleNotifications(currentNotification: RowNotification) {
+    if (currentNotification.type === NotificationType.Permanent) {
+      this.permanentNotification = currentNotification;
+    } else {
+      this.temporaryNotification = currentNotification;
       this.temporaryNotificationVisible = true;
-      if (current.removeWhenDone) {
+      if (currentNotification.removeWhenDone) {
         this.permanentNotification = null;
       }
       setTimeout(() => {
-        this.toggleExpand(true);
-      }, this.showNotificationDurationMs);
-    } else if (current.type === NotificationType.ShowOnRemove) {
-      this.temporaryNotification = current;
-      this.temporaryNotificationVisible = true;
-      setTimeout(() => {
-        this.toggleExpand(true);
+        this.setExpanded(false);
       }, this.showNotificationDurationMs);
     }
-    this.handleNotificatonColor();
+    this.handleNotificationColor();
   }
 
   ngOnDestroy() {
