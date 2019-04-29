@@ -2,6 +2,9 @@
   @extend .button__base;
   width: 34px;
   height: 30px;
+  &.lock-button--unlocked {
+    background: $lockbutton-color--unlocked;
+  }
   vgr-icon {
     > .icon {
       color: $text-color--light;
