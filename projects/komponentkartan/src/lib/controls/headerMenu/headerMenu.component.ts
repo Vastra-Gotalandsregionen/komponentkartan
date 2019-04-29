@@ -68,12 +68,13 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
           this.elementRef.nativeElement.querySelector('.header__login-info-menu').focus();
           this.hideMenu = true;
         });
-        menuItem.tab
+
+      menuItem.tab
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(() => {
           this.elementRef.nativeElement.querySelector('.header__login-info-menu').focus();
           this.hideMenu = true;
-      });
+        });
     });
   }
 
@@ -96,7 +97,7 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
       this.focusFirstMenuItem();
 
 
-      } else if (event.key === 'Escape') {
+    } else if (event.key === 'Escape') {
       this.hideMenu = true;
     }
   }

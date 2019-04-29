@@ -204,51 +204,38 @@ describe('HeaderMenuComponent', () => {
       });
     });
   });
-  // need to fix settimeout on keyToggleHeaderMenu
-  xdescribe('keyToggleHeaderMenu', () => {
-    describe('When header menu exists', () => {
-      let spy: jasmine.Spy;
-      let event: KeyboardEvent;
-      beforeEach(() => {
-        spy = spyOn(component, 'toggleHeaderMenu').and.callThrough();
-      });
-      describe('and key is space', () => {
-        beforeEach(() => {
-          event = { key: ' ' } as KeyboardEvent;
-        });
-        it('header menu is toggled', () => {
-          component.keyToggleHeaderMenu(event);
-          expect(spy).toHaveBeenCalledWith(event);
-        });
-      });
-      describe('and key is space in IE', () => {
-        beforeEach(() => {
-          event = { key: 'Spacebar' } as KeyboardEvent;
-        });
-        it('header menu is toggled', () => {
-          component.keyToggleHeaderMenu(event);
-          expect(spy).toHaveBeenCalledWith(event);
-        });
-      });
+  describe('Toggle Header Menu', () => {
+    it('and key is space', () => {
+      const button = { key: ' ' } as KeyboardEvent;
+      const keyEvent = new KeyboardEvent('keydown', button);
 
-      describe('and key is enter', () => {
-        beforeEach(() => {
-          event = { key: 'Enter' } as KeyboardEvent;
-        });
-        it('header menu is toggled', () => {
-          component.keyToggleHeaderMenu(event);
-          expect(spy).toHaveBeenCalledWith(event);
-        });
-      });
-      describe('and key is not space or enter', () => {
-        beforeEach(() => {
-          event = { key: 'x' } as KeyboardEvent;
-        });
-        it('header menu is not toggled', () => {
-          component.keyToggleHeaderMenu(event);
-          expect(spy).not.toHaveBeenCalled();
-        });
-      });
+      component.keyToggleHeaderMenu(keyEvent);
+
+      expect(component.hideMenu).toBeFalsy();
+    });
+    it('and key is space (IE)', () => {
+      const button = { key: 'Spacebar' } as KeyboardEvent;
+      const keyEvent = new KeyboardEvent('keydown', button);
+
+      component.keyToggleHeaderMenu(keyEvent);
+
+      expect(component.hideMenu).toBeFalsy();
+    });
+    it('and key is Enter', () => {
+      const button = { key: 'Enter' } as KeyboardEvent;
+      const keyEvent = new KeyboardEvent('keydown', button);
+
+      component.keyToggleHeaderMenu(keyEvent);
+
+      expect(component.hideMenu).toBeFalsy();
+    });
+    xit('and key is not Spacebar or Enter', () => {
+      const button = { key: 'x' } as KeyboardEvent;
+      const keyEvent = new KeyboardEvent('keydown', button);
+
+      component.keyToggleHeaderMenu(keyEvent);
+
+      expect(component.hideMenu).toBeTruthy();
     });
   });
 });
