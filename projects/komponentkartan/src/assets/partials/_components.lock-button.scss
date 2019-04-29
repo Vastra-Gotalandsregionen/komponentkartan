@@ -2,24 +2,9 @@
   @extend .button__base;
   width: 34px;
   height: 30px;
-}
-
-.lock-button__top {
-  @extend .bg-image-lock-button__top;
-  position: absolute;
-  top: 6px;
-  left: 10px;
-  //background-position: -5px 0px;
-  transition: left 0.2s linear;
-  .lock-button--unlocked & {
-    left: 17px;
+  vgr-icon {
+    > .icon {
+      color: $text-color--light;
+    }
   }
-}
-
-.lock-button__bottom {
-  @extend .bg-image-lock-button__bottom;
-  position: absolute;
-  top: 13px;
-  left: 10px;
-  background-position: bottom center;
 }

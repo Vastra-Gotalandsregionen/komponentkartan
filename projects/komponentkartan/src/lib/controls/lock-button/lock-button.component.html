@@ -1,7 +1,6 @@
 ﻿<span (click)="checkDisabled($event)">
   <button type="button" (click)="toggleLocked()" class="lock-button noselect" [ngClass]="{'lock-button--unlocked' : !locked, 'button--disabled' : disabled}"
     [attr.aria-disabled]="disabled" [attr.aria-label]="label">
-    
     <vgr-icon icon="lock" *ngIf="locked"></vgr-icon>
     <vgr-icon icon="lock-open" *ngIf="!locked"></vgr-icon>
 
