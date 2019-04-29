@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IHeaderMenu, IHeaderMenuItem, HeaderComponent } from 'vgr-komponentkartan';
+import { Component } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
@@ -9,11 +8,8 @@ import { HtmlEncodeService } from '../html-encode.service';
 })
 
 
-export class HeadersComponent implements OnInit {
+export class HeadersComponent {
 
-  headerMenu: IHeaderMenu;
-  simpleHeaderMenu: IHeaderMenu;
-  @ViewChild(HeaderComponent) headerComponent: HeaderComponent;
   exampleCodeHeaderMenu =  `  <vgr-header class="header--inline theme--green">
     <vgr-header-menu [userName]="'Nova Audit'">
       <vgr-menu-item link="/minsida" text="Internt menyval"></vgr-menu-item>
@@ -41,87 +37,5 @@ export class HeadersComponent implements OnInit {
     this.systemExampleMarkup = htmlEncoder.prepareHighlightedSection(this.systemExample, 'typescript');
     this.customExampleMarkup = htmlEncoder.prepareHighlightedSection(this.customExample, 'typescript');
     this.overwriteExampleMarkup = htmlEncoder.prepareHighlightedSection(this.overwriteExample, 'typescript');
-    this.setMenuItems();
   }
-
-
-  setMenuItems() {
-
-    this.simpleHeaderMenu = {
-      menuItems: [
-        {
-          displayName: 'Internt menyval',
-          url: '/minsida',
-          isInternalLink: true
-        },
-        {
-          isSeparator: true
-        },
-        {
-          displayName: 'Externt menyval',
-          menuItems: [
-            {
-              displayName: 'Submenyval vgregion',
-              url: 'http://www.vgregion.se',
-              isInternalLink: false
-            }
-          ] as IHeaderMenuItem[]
-        }
-      ] as IHeaderMenuItem[]
-    } as IHeaderMenu;
-
-    this.headerMenu = {
-      menuItems: [
-        {
-          displayName: 'Min sida',
-          url: '/minsida',
-          isInternalLink: true
-        },
-        {
-          isSeparator: true
-        },
-        {
-          displayName: 'Krav- och kvalitetsbok',
-          menuItems: [
-            {
-              displayName: 'VGPV',
-              url: `http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-vg-primarvard/krav--och-kvalitetsbok-vg-primarvard/`,
-              isInternalLink: false
-            },
-            {
-              displayName: 'Rehab',
-              url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-rehab/krav--och-kvalitetsbok/',
-              isInternalLink: false
-            }
-          ] as IHeaderMenuItem[]
-        },
-        {
-          displayName: 'FAQ',
-          menuItems: [
-            {
-              displayName: 'VGPV',
-              url: 'http://www.vgregion.se/sv/Vastra-Gotalandsregionen/startsida/Vard-och-halsa/Forvardgivare/VG-Primarvard1/Fragor-och-svar/',
-              isInternalLink: false
-            },
-            {
-              displayName: 'Rehab',
-              url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/uppdrag-och-avtal/vardval-rehab/fragor-och-svar/',
-              isInternalLink: false
-            }
-          ] as IHeaderMenuItem[]
-        },
-        {
-          displayName: 'Kontakt',
-          url: 'http://www.vgregion.se/halsa-och-vard/vardgivarwebben/it/it-system/it-stod-for-vardval-rehab/kontaktpersoner/',
-          isInternalLink: false
-        }
-      ] as IHeaderMenuItem[]
-    } as IHeaderMenu;
-
-  }
-
-
-  ngOnInit() {
-  }
-
 }

@@ -21,9 +21,6 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @ViewChild('menuitem') menuitem: ElementRef;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
-        if (event.keyCode === 9) { // Tab
-            return;
-        }
 
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
             if (this.disabled) {
@@ -48,6 +45,9 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
         }
         if (event.keyCode === 27) { // Escape
             this.escape.emit();
+        }
+        if (event.keyCode === 9) { // Tab
+            this.tab.emit();
         }
 
         event.cancelBubble = true;
