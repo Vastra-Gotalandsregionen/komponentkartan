@@ -4,20 +4,20 @@
     <div #datepicker class="datepicker-new__control"
       [ngClass]="{ 'datepicker-new--disabled': disabled, 'datepicker-new--readonly': readonly }"
       (keydown)="onKeydown($event)" (focusout)="onBlur($event)">
-      <div *ngIf="!readonly" id="{{headerLabelId}}" class="datepicker-new__header"
-        [attr.aria-labelledby]="combinedLabelIds" [ngClass]="{'datepicker-new__header--focus': headerHasFocus}"
-        (focusin)="onHeaderFocus()" (focusout)="onHeaderBlur()" (keydown)="onHeaderKeydown($event)"
-        (click)="onHeaderClick()">
+      <div *ngIf="!readonly" class="datepicker-new__header"
+        [ngClass]="{'datepicker-new__header--focus': headerHasFocus}" (focusin)="onHeaderFocus()"
+        (focusout)="onHeaderBlur()" (keydown)="onHeaderKeydown($event)" (click)="onHeaderClick()">
         <div #headerLabel *ngIf="!allowText" class="datepicker-new__header__label" tabindex="0" role="button"
-          aria-haspopup="grid" [attr.aria-expanded]="expanded">
-          <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
-          <span *ngIf="!selectedDate" class="noselect">Välj datum</span>
+          aria-haspopup="grid" [attr.aria-labelledby]="labelId + ' ' + headerLabelId" [attr.aria-expanded]="expanded">
+          <span *ngIf="selectedDate" id="{{headerLabelId}}">{{selectedDate | date:labelDateFormat}}</span>
+          <span *ngIf="!selectedDate" id="{{headerLabelId}}" class="noselect">Välj datum</span>
         </div>
         <div *ngIf="allowText">
           <input #headerInput *ngIf="!disabled" class="datepicker-new__header__input" [placeholder]="inputPlaceholder"
-            aria-haspopup="grid" [attr.aria-expanded]="expanded" [value]="label"
+            aria-haspopup="grid" [attr.aria-labelledby]="labelId" [attr.aria-expanded]="expanded" [value]="label"
             (change)="parseSelectedDate($event.target.value)">
-          <div *ngIf="disabled" class="datepicker-new__header__label" tabindex="0">
+          <div *ngIf="disabled" id="{{headerLabelId}}" role="textbox" class="datepicker-new__header__label" tabindex="0"
+            [attr.aria-labelledby]="labelId + ' ' + headerLabelId" [attr.aria-disabled]="true">
             <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
             <span *ngIf="!selectedDate" class="noselect">&nbsp;</span>
           </div>
@@ -28,7 +28,7 @@
       </div>
       <div *ngIf="readonly" class="datepicker-new__readonly-header" tabindex="0" aria-readonly="true">
         <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
-        <span *ngIf="!selectedDate">&ndash;</span>
+        <span *ngIf="!selectedDate">&nbsp;</span>
       </div>
       <div #calendar *ngIf="expanded" class="datepicker-new__calendar noselect" tabindex="0"
         (keydown)="onCalendarKeydown($event)">

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { DatepickerItemComponent } from './datepicker-item.component';
 import { Subject } from 'rxjs';
@@ -49,19 +49,23 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
-  get combinedLabelIds() {
-    return `${this.labelId} ${this.headerLabelId}`;
-  }
-
   get errorActive() {
-    return (this.parseError || (this.showValidation && this.formControl && this.formControl.invalid)) && !this.headerHasFocus;
+    if (!this.showValidation || this.disabled || this.readonly) {
+      return false;
+    }
+
+    return !this.headerHasFocus && (this.parseError || (this.formControl && this.formControl.invalid));
   }
 
   get errorEditing() {
-    return (this.parseError || (this.showValidation && this.formControl && this.formControl.invalid)) && this.headerHasFocus;
+    if (!this.showValidation || this.disabled || this.readonly) {
+      return false;
+    }
+
+    return this.headerHasFocus && (this.parseError || (this.formControl && this.formControl.invalid));
   }
 
-  constructor(@Optional() @Self() private formControl: NgControl, private renderer: Renderer2) {
+  constructor(@Optional() @Self() private formControl: NgControl) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
@@ -121,10 +125,6 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
-
-    if (this.headerInput) {
-      this.renderer.setProperty(this.headerInput.nativeElement, 'disabled', isDisabled);
-    }
 
     if (isDisabled) {
       this.collapse(false);
