@@ -12,6 +12,8 @@
     <div style="display:flex">
     <vgr-input #pagesInput [small]="true" value="{{pages}}"></vgr-input>
     <vgr-button (click)="setPages(pagesInput.value)">Sätt antal sidor</vgr-button>
+    <vgr-button (click)="setTwoExpanded()">Sätt två expanded items</vgr-button>
+    <vgr-button (click)="showNotificationOnFirstRow()">Visa temporär notifiering på första</vgr-button>
     </div>
     <vgr-page-block>      
       <vgr-list [flexibleHeader]="true" [pages]="pages" [activePage]="activePage" (pageChanged)="activePage = $event" (sortChanged)="onSortChanged($event)">
@@ -21,7 +23,7 @@
           <vgr-list-column-header width="5" sortKey="occupation">Yrke</vgr-list-column-header>
           <vgr-list-column-header align="right" width="5" sortKey="income">Inkomst</vgr-list-column-header>
         </vgr-list-header>
-        <vgr-list-item *ngFor="let row of peopleRowsSimpleList">
+        <vgr-list-item *ngFor="let row of peopleRowsSimpleList" [expanded]="row.expanded" [preventCollapse]="row.preventCollapse" (expandedChanged)="onExpandedChanged(row, $event)" (expandPrevented)="onExpandPrevented(row)" (collapsePrevented)="onCollapsePrevented(row)" [notification]="row.notification">
           <vgr-list-item-header>
             <vgr-list-column width="5"><span title="Detta är ett förnamn">{{row.firstName}}</span></vgr-list-column>
             <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
@@ -36,6 +38,10 @@
             <span>Yrke: {{row.occupation}}</span>
             <br>
             <span>Inkomst: {{row.income | currency : 'SEK'}}</span>
+            <br>
+            <vgr-button (click)="togglePreventCollapse(row)">{{row.preventCollapse ? 'Låst' : 'Öppen'}}</vgr-button>
+            <vgr-button (click)="showNotification(row, true)">Visa permanent notifiering</vgr-button>
+            <vgr-button (click)="showNotification(row, false)">visa temporär notifiering</vgr-button>
           </vgr-list-item-content>
         </vgr-list-item>
       </vgr-list>
