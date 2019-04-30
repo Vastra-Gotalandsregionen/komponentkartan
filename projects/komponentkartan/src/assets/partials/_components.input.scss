@@ -19,11 +19,9 @@ $suffix-width: 30px;
 input.input-container__textbox {
   border-color: $control-border-color--default;
   flex: 1;
-  border-right-style: none;
   transition: padding-right 0.3s linear;
   margin-left: -1px;
   margin-right: -1px;
-  width: $input-width--small - $suffix-width;
   .input--small & {
     width: $input-small-width--small - $suffix-width;
   }

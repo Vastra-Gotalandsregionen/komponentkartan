@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixing a bug in header menu where clicks get captured.
 - Changed icons to use vgr-icons.
 - Possible to prevent collapse of list-items in list.
+- Suffix on input field will not cover text
 
 ## 4.0.0 (Stable, 2019-02-08)
 - *Breaking change* Angular is upgraded to version 7.
