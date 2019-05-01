@@ -57,18 +57,26 @@ export class DatepickerItemComponent implements OnInit {
 
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === 'Space' || event.key === ' ') {
+      event.preventDefault();
       event.stopPropagation();
-      this.activate();
+      // This moves focus to input in datepicker, so wait one cycle to avoid pressed key being entered
+      setTimeout(() => {
+        this.activate();
+      });
     } else if (event.key === 'ArrowLeft' || event.key === 'Left') {
+      event.preventDefault();
       event.stopPropagation();
       this.previousColumn.emit(this.date);
     } else if (event.key === 'ArrowRight' || event.key === 'Right') {
+      event.preventDefault();
       event.stopPropagation();
       this.nextColumn.emit(this.date);
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
+      event.preventDefault();
       event.stopPropagation();
       this.previousRow.emit(this.date);
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
+      event.preventDefault();
       event.stopPropagation();
       this.nextRow.emit(this.date);
     }

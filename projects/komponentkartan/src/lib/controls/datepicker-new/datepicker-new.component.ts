@@ -80,6 +80,16 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       this.setMinZoomLevel();
     }
 
+    if (changes.selectedDate) {
+      if (changes.selectedDate.firstChange) {
+        setTimeout(() => {
+          this.writeValue(changes.selectedDate.currentValue);
+        });
+      } else {
+        this.writeValue(changes.selectedDate.currentValue);
+      }
+    }
+
     if (changes.disabled) {
       if (changes.disabled.firstChange) {
         setTimeout(() => {
@@ -192,10 +202,17 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
     if (event.key === 'Enter') {
       this.toggleExpanded();
+      if (!this.allowText) {
+        setTimeout(() => {
+          const itemToFocus = this.items.find(x => x.selected) || this.items.first;
+          itemToFocus.focus();
+        });
+      }
     } else if (
       event.key === 'ArrowUp' || event.key === 'Up' ||
       event.key === 'ArrowDown' || event.key === 'Down') {
       if (this.expanded) {
+        event.preventDefault();
         const itemToFocus = this.items.find(x => x.selected) || this.items.first;
         itemToFocus.focus();
       }
@@ -208,6 +225,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     } else if (event.key === 'End') {
       this.items.last.focus();
     } else if (event.key === 'PageUp' && !event.altKey) {
+      event.preventDefault();
       if (this.zoomedToDays) {
         this.days.previous();
       } else if (this.zoomedToMonths) {
@@ -216,6 +234,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.years.previous();
       }
     } else if (event.key === 'PageDown' && !event.altKey) {
+      event.preventDefault();
       if (this.zoomedToDays) {
         this.days.next();
       } else if (this.zoomedToMonths) {
@@ -224,10 +243,12 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.years.next();
       }
     } else if (event.key === 'PageUp' && event.altKey) {
+      event.preventDefault();
       if (this.zoomedToDays) {
         this.days.farPrevious();
       }
     } else if (event.key === 'PageDown' && event.altKey) {
+      event.preventDefault();
       if (this.zoomedToDays) {
         this.days.farNext();
       }
@@ -239,6 +260,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
       if (event.target !== this.calendar.nativeElement) {
         return;
       }
+      event.preventDefault();
       const itemToFocus = this.items.find(x => x.selected) || this.items.first;
       itemToFocus.focus();
     }
@@ -362,7 +384,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
     if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
       this.setSelectedDate(null, true);
-      this.parseErrorMessage = 'Ogiltigt datum';
+      this.parseErrorMessage = 'Datum finns inte.';
       return;
     }
 
@@ -466,7 +488,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         const focusedItem = this.items.find(x => x.focused);
         let dayToFocus = focusedItem ? focusedItem.date.getDate() : 1;
         if (dayToFocus > 28) {
-          const nextMonthLastDay = new Date(year, month + 1, 0).getDate();
+          const nextMonthLastDay = new Date(year, month + 2, 0).getDate();
           if (nextMonthLastDay < dayToFocus) {
             dayToFocus = nextMonthLastDay;
           }
@@ -677,7 +699,15 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     this.parseError = parseError;
 
     if (!parseError) {
-      this.label = this.formatDate(date);
+      const newLabel = this.formatDate(date);
+      if (this.label !== newLabel) {
+        this.label = newLabel;
+      } else {
+        this.label = '';
+        setTimeout(() => {
+          this.label = newLabel;
+        });
+      }
     }
   }
 

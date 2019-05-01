@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="datepicker-new__header__button">
-          <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'" [size]="'lg'"></vgr-icon>
+          <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'"></vgr-icon>
         </div>
       </div>
       <div *ngIf="readonly" class="datepicker-new__readonly-header" tabindex="0" aria-readonly="true">
@@ -122,11 +122,11 @@
       </div>
     </div>
     <div *ngIf="parseError" class="validation__status" title="{{parseErrorMessage}}">
-      <div class="validation__status__icon"></div>
+      <vgr-icon icon="exclamation-circle" size="sm" class="input-validation_status__icon"></vgr-icon>
       <div class="validation__status__message">{{parseErrorMessage}}</div>
     </div>
     <div *ngIf="!parseError" class="validation__status" title="{{errorMessage | errorMessage : formControl?.errors}}">
-      <div class="validation__status__icon"></div>
+      <vgr-icon icon="exclamation-circle" size="sm" class="input-validation_status__icon"></vgr-icon>
       <div class="validation__status__message">{{errorMessage | errorMessage : formControl?.errors}}</div>
     </div>
   </div>
