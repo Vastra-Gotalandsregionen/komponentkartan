@@ -149,7 +149,7 @@ input.input-container__textbox {
     max-width: 89px;
   }
   .validation-error--active & {
-    color: $primary-color--error;
+    color: $text-color--default;
     display: inline-block;
   }
   .validation-error--editing & {

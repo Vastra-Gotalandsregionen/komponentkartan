@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 4.0.1 (beta)
+## 4.2.0 (Stable, 2019-05-02)
+- Changed colors on validation
+
+## 4.1.0 (Stable, 2019-04-30)
 - Fixed a bug in List when multipleExpandedItems are not allowed and closing list-items did not emit any event.
 - Fixed text for button select/deselect all in Dropdown multiselect when not bound to a form control.
 - Modal background now correctly covers menus and headers.
