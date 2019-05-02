@@ -5,6 +5,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ActionPanelComponent } from './action-panel.component';
 import { CloseButtonComponent } from '../close-button/close-button.component';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('[ActionPanelComponent - Angular]', () => {
   let component: ActionPanelComponent;
@@ -14,11 +16,13 @@ describe('[ActionPanelComponent - Angular]', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        FontAwesomeModule
       ],
       declarations: [
         ActionPanelComponent,
-        CloseButtonComponent
+        CloseButtonComponent,
+        IconComponent
       ]
     });
 

@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 4.2.0 (Stable, 2019-05-02)
 - Changed colors on validation
+- Changed icons to use vgr-icons (continue). 
 
 ## 4.1.0 (Stable, 2019-04-30)
 - Fixed a bug in List when multipleExpandedItems are not allowed and closing list-items did not emit any event.
