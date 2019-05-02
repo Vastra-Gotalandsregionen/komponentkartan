@@ -61,7 +61,7 @@
         vertical-align: middle;
         margin-left: 4px;
         .textarea-validation-error--active & {
-          color: $primary-color--error;
+          color: $text-color--default;
           display: inline-block;
         }
         .textarea-validation-error--editing & {
