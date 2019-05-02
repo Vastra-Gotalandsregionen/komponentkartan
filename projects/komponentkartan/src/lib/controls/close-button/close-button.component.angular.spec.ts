@@ -6,6 +6,8 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CloseButtonComponent } from './close-button.component';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('[CloseButtonComponent - Angular]', () => {
   let component: CloseButtonComponent;
@@ -17,8 +19,8 @@ describe('[CloseButtonComponent - Angular]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [CloseButtonComponent],
-      imports: [CommonModule, FormsModule]
+      declarations: [CloseButtonComponent, IconComponent],
+      imports: [CommonModule, FormsModule, FontAwesomeModule]
     });
 
     TestBed.overrideComponent(CloseButtonComponent, {

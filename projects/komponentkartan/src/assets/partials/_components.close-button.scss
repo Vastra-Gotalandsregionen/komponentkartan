@@ -1,10 +1,15 @@
 ﻿.close-button {
   @extend .button__base;
-  @extend .bg-image-close-button;
+  // @extend .bg-image-close-button;
   width: 20px;
   height: 20px;
   &:active:not(.button--disabled) {
     transform: scale(0.92);
+  }
+  vgr-icon {
+    > .icon {
+      color: $text-color--light;
+    }
   }
 }
 

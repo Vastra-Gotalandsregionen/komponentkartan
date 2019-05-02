@@ -6,6 +6,8 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LockButtonComponent } from '../../controls/lock-button/lock-button.component';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('[LockButtonComponent - Angular]', () => {
   let component: LockButtonComponent;
@@ -17,8 +19,8 @@ describe('[LockButtonComponent - Angular]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [LockButtonComponent],
-      imports: [CommonModule, FormsModule]
+      declarations: [LockButtonComponent, IconComponent],
+      imports: [CommonModule, FormsModule, FontAwesomeModule]
     });
 
     TestBed.overrideComponent(LockButtonComponent, {

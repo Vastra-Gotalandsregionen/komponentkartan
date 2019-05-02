@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { SaveCancelComponent } from '../../controls/save-cancel/save-cancel.component';
 import { ButtonComponent } from '../../controls/button/button.component';
 import { LockButtonComponent } from '../../controls/lock-button/lock-button.component';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('[SaveCancelComponent - Angular]', () => {
     let component: SaveCancelComponent;
@@ -19,8 +21,8 @@ describe('[SaveCancelComponent - Angular]', () => {
         TestBed.resetTestEnvironment();
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
-            declarations: [SaveCancelComponent, ButtonComponent, LockButtonComponent],
-            imports: [CommonModule, FormsModule]
+            declarations: [SaveCancelComponent, ButtonComponent, LockButtonComponent, IconComponent],
+            imports: [CommonModule, FormsModule, FontAwesomeModule]
         });
 
         TestBed.overrideComponent(SaveCancelComponent, {
