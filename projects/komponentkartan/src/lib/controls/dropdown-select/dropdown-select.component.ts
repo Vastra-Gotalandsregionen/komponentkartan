@@ -33,6 +33,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() labelId: string;
 
   @Output() selectedChanged = new EventEmitter<any>();
+  @Output() expandedChanged = new EventEmitter<boolean>();
 
   @ViewChild('dropdown') dropdown: ElementRef;
   @ViewChild('header') header: ElementRef;
@@ -200,7 +201,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (this.expanded) {
       this.collapse();
     } else {
-      this.expanded = true;
+      this.expand();
     }
   }
 
@@ -301,7 +302,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   onHeaderKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.expanded = true;
+      this.expand();
 
       const selectedItems = this.items.filter(x => x.selected);
       if (selectedItems.length) {
@@ -318,7 +319,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         });
       }
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
-      this.expanded = true;
+      this.expand();
 
       let lastSelectedIndex = -1;
       const itemsArray = this.items.toArray();
@@ -345,7 +346,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         });
       }
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
-      this.expanded = true;
+      this.expand();
 
       let firstSelectedIndex = -1;
       const itemsArray = this.items.toArray();
@@ -433,6 +434,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
   }
 
+  private expand() {
+    this.expanded = true;
+    this.expandedChanged.emit(true);
+  }
+
   private collapse(focusHeader = true) {
     this.expanded = false;
 
@@ -448,6 +454,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (this.formControl) {
       this.onTouched();
     }
+
+    this.expandedChanged.emit(false);
   }
 
   private setFilterVisibility() {
