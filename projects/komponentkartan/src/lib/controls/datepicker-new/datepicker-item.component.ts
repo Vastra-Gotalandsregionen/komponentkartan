@@ -56,7 +56,7 @@ export class DatepickerItemComponent implements OnInit {
   }
 
   onKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === 'Space' || event.key === ' ') {
+    if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
       event.preventDefault();
       event.stopPropagation();
       // This moves focus to input in datepicker, so wait one cycle to avoid pressed key being entered
