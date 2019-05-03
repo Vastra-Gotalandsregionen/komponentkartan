@@ -1,25 +1,27 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DatepickerItemComponent } from './datepicker-item.component';
 
-describe('DatepickerItemComponent', () => {
+describe('[DatepickerItemComponent]', () => {
   let component: DatepickerItemComponent;
-  let fixture: ComponentFixture<DatepickerItemComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DatepickerItemComponent ]
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DatepickerItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new DatepickerItemComponent();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('Instatiate', () => {
+    it('date is correct', () => {
+      expect(component.date).toBe(undefined);
+    });
+    it('type is correct', () => {
+      expect(component.type).toBe(undefined);
+    });
+    it('selected is correct', () => {
+      expect(component.selected).toBe(undefined);
+    });
+    it('disabled is correct', () => {
+      expect(component.disabled).toBe(undefined);
+    });
+    it('isMinZoom is correct', () => {
+      expect(component.isMinZoom).toBe(undefined);
+    });
   });
 });
