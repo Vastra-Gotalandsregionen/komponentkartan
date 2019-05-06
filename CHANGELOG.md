@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 4.3.0 (beta)
 - Added event for expanded status to dropdown select.
+- Fixed a bug where vgr-lists shared the same list-service but now resolves the service individually.
 
 ## 4.2.0 (Stable, 2019-05-02)
 - Changed colors on validation
