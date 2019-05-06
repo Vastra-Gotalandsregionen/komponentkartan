@@ -384,7 +384,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
     if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
       this.setSelectedDate(null, true);
-      this.parseErrorMessage = 'Datum finns inte.';
+      this.parseErrorMessage = 'Datumet finns inte.';
       return;
     }
 

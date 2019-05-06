@@ -17,6 +17,14 @@ describe('[DatepickerNewComponent - Angular]', () => {
   let headerInputElement: DebugElement;
   let calendarElement: DebugElement;
   // let calendarHeaderElement: DebugElement;
+  let now: Date;
+
+  beforeAll(() => {
+    now = new Date(2019, 3, 1);
+    jasmine.clock().uninstall();
+    jasmine.clock().install();
+    jasmine.clock().mockDate(now);
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,6 +42,10 @@ describe('[DatepickerNewComponent - Angular]', () => {
     fixture.detectChanges();
   });
 
+  afterAll(() => {
+    jasmine.clock().uninstall();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -47,7 +59,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
         component.expanded = false;
       });
       it('calendar is expanded', () => {
-        headerElement.triggerEventHandler('click', {});
+        headerElement.triggerEventHandler('click', null);
         fixture.detectChanges();
         calendarElement = rootElement.query(By.css('.datepicker-new__calendar'));
         expect(calendarElement).toBeTruthy();
@@ -57,7 +69,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
           component.disabled = true;
         });
         it('calendar is not expanded', () => {
-          headerElement.triggerEventHandler('click', {});
+          headerElement.triggerEventHandler('click', null);
           fixture.detectChanges();
           calendarElement = rootElement.query(By.css('.datepicker-new__calendar'));
           expect(calendarElement).toBeFalsy();
@@ -70,7 +82,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
           headerElement = rootElement.query(By.css('.datepicker-new__readonly-header'));
         });
         it('calendar is not expanded', () => {
-          headerElement.triggerEventHandler('click', {});
+          headerElement.triggerEventHandler('click', null);
           fixture.detectChanges();
           calendarElement = rootElement.query(By.css('.datepicker-new__calendar'));
           expect(calendarElement).toBeFalsy();
@@ -82,7 +94,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
         component.expanded = true;
       });
       it('calendar is collapsed', () => {
-        headerElement.triggerEventHandler('click', {});
+        headerElement.triggerEventHandler('click', null);
         fixture.detectChanges();
         calendarElement = rootElement.query(By.css('.datepicker-new__calendar'));
         expect(calendarElement).toBeFalsy();
@@ -150,33 +162,54 @@ describe('[DatepickerNewComponent - Angular]', () => {
       });
     });
     describe('and invalid text is entered', () => {
+      beforeEach(() => {
+        headerInputElement = rootElement.query(By.css('.datepicker-new__header__input'));
+        const text = 'invalid';
+        headerInputElement.triggerEventHandler('change', { target: { value: text } });
+        fixture.detectChanges();
+      });
+      it('no date is selected', () => {
+        expect(component.selectedDate).toBeFalsy();
+      });
       it('error is shown', () => {
+        const validationStatusMessageElement = rootElement.query(By.css('.validation__status__message'));
+        expect(validationStatusMessageElement.nativeElement.innerText).toBe('Felaktigt format');
       });
     });
-    describe('and date is clicked', () => {
-      it('date is selected', () => {
+    describe('and calendar is open', () => {
+      beforeEach(() => {
+        headerElement = rootElement.query(By.css('.datepicker-new__header'));
+        headerElement.triggerEventHandler('click', null);
+        fixture.detectChanges();
       });
-    });
-    describe('and previous arrow is clicked', () => {
-      it('previous month is shown', () => {
+      describe('and date is clicked', () => {
+        it('date is selected', () => {
+          const dateElement = rootElement.query(By.css('table tr:nth-child(4) td:nth-child(1) .datepicker-new__calendar__body__item'));
+          dateElement.triggerEventHandler('click', null);
+          expect(component.selectedDate).toEqual(new Date(now.getFullYear(), now.getMonth(), 15));
+        });
       });
-    });
-    describe('and next arrow is clicked', () => {
-      it('next month is shown', () => {
+      describe('and previous arrow is clicked', () => {
+        it('previous month is shown', () => {
+        });
       });
-    });
-    describe('and header is clicked', () => {
-      it('months are shown', () => {
-      });
-      describe('and month is clicked', () => {
-        it('days are shown', () => {
+      describe('and next arrow is clicked', () => {
+        it('next month is shown', () => {
         });
       });
       describe('and header is clicked', () => {
-        it('years are shown', () => {
+        it('months are shown', () => {
         });
-        describe('and year is clicked', () => {
-          it('months are shown', () => {
+        describe('and month is clicked', () => {
+          it('days are shown', () => {
+          });
+        });
+        describe('and header is clicked', () => {
+          it('years are shown', () => {
+          });
+          describe('and year is clicked', () => {
+            it('months are shown', () => {
+            });
           });
         });
       });
