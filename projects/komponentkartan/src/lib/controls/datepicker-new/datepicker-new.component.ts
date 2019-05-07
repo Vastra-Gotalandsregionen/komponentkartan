@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self,
+  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject
+} from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { DatepickerItemComponent } from './datepicker-item.component';
 import { Subject } from 'rxjs';
@@ -65,7 +68,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
     return this.headerHasFocus && (this.parseError || (this.formControl && this.formControl.invalid));
   }
 
-  constructor(@Optional() @Self() private formControl: NgControl) {
+  constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() private formControl: NgControl) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
@@ -712,7 +715,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
   }
 
   private formatDate(date: Date): string {
-    return new DatePipe('sv-SE').transform(date, this.labelDateFormat);
+    return new DatePipe(this.locale).transform(date, this.labelDateFormat);
   }
 
   private subscribeToItems() {
