@@ -82,6 +82,11 @@ describe('[DropdownSelectComponent - Angular]', () => {
         menuElement = rootElement.query(By.css('.dropdown-select__menu'));
         expect(menuElement).toBeTruthy();
       });
+      it('event is emitted', () => {
+        const spy = spyOn(component.expandedChanged, 'emit');
+        headerElement.triggerEventHandler('click', {});
+        expect(spy).toHaveBeenCalledWith(true);
+      });
       describe('and component is disabled', () => {
         beforeEach(() => {
           component.disabled = true;
@@ -114,6 +119,11 @@ describe('[DropdownSelectComponent - Angular]', () => {
         fixture.detectChanges();
         menuElement = rootElement.query(By.css('.dropdown-select__menu'));
         expect(menuElement).toBeFalsy();
+      });
+      it('event is emitted', () => {
+        const spy = spyOn(component.expandedChanged, 'emit');
+        headerElement.triggerEventHandler('click', {});
+        expect(spy).toHaveBeenCalledWith(false);
       });
     });
   });
