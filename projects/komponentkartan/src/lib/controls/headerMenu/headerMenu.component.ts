@@ -89,6 +89,7 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
 
   keyToggleHeaderMenu(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+      event.preventDefault();
       this.toggleHeaderMenu(event);
       setTimeout(() => {
         this.focusFirstMenuItem();
