@@ -45,7 +45,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
 
         if (event.keyCode === 9) { // Tab
-            return;
+            this.tab.emit();
         }
 
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
@@ -166,6 +166,14 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(() => {
                     this.escape.emit();
+                    // this.setFocus();
+                    // this.showExpanded = false;
+
+                });
+            x.tab
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
+                    this.tab.emit();
                     // this.setFocus();
                     // this.showExpanded = false;
 
