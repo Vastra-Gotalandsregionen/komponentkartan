@@ -20,6 +20,7 @@ Det som kommer att ingå i de olika versionerna är ännu inte beslutat, men ned
 * Deklarativ radio group
 * Angular 8.0
 * Rättning av buggar
+* Ny sammanslagen datum- och månadsväljare, som det går att skriva in datum i för att välja.
 
 
 **OBS detta är en uppskattning**
