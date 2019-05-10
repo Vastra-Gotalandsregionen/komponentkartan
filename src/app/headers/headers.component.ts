@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
+import { ModalService } from 'vgr-komponentkartan';
 
 @Component({
   selector: 'app-headers',
@@ -31,11 +32,17 @@ export class HeadersComponent {
   customExampleMarkup: string;
   overwriteExampleMarkup: string;
 
-  constructor(htmlEncoder: HtmlEncodeService) {
+  constructor(public modalService: ModalService, htmlEncoder: HtmlEncodeService) {
     this.exampleCodeSimpleMenyMarkup = htmlEncoder.prepareHighlightedSection(this.exampleCodeHeaderMenu, 'typescript');
     this.standardExampleMarkup = htmlEncoder.prepareHighlightedSection(this.standardExample, 'typescript');
     this.systemExampleMarkup = htmlEncoder.prepareHighlightedSection(this.systemExample, 'typescript');
     this.customExampleMarkup = htmlEncoder.prepareHighlightedSection(this.customExample, 'typescript');
     this.overwriteExampleMarkup = htmlEncoder.prepareHighlightedSection(this.overwriteExample, 'typescript');
+  }
+  showOneButtonModal(elementId: string): void {
+    this.modalService.openDialog(elementId);
+  }
+  closeModal(elementId: string): void {
+    this.modalService.closeDialog(elementId);
   }
 }

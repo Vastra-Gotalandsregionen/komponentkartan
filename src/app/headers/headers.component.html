@@ -41,7 +41,10 @@
               <div class="column-layout">
                 <vgr-header class="header--inline">
                   <vgr-header-menu userName="Neo Åhn">
-                    <vgr-menu-item link="/inputFields" text="Input"></vgr-menu-item>
+                    <vgr-menu-item link="https://www.google.com" text="Extern länk" [isInternalLink]="false">
+                    </vgr-menu-item>
+                    <vgr-menu-item text="Modal" (click)="showOneButtonModal('modal1')" [isInternalLink]="false">
+                    </vgr-menu-item>
                     <vgr-menu-item link="/headers" text="Headers"></vgr-menu-item>
                     <vgr-menu-separator></vgr-menu-separator>
                     <vgr-submenu text="Calender">
@@ -191,3 +194,16 @@
     </vgr-page-block>
   </vgr-page-body>
 </vgr-page>
+
+<vgr-modal id="modal1">
+  <vgr-modal-header>Välj i dropdown</vgr-modal-header>
+  <vgr-modal-content>
+    <vgr-dropdown-select>
+      <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
+      <vgr-dropdown-item>Äpple</vgr-dropdown-item>
+    </vgr-dropdown-select>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal1')">Stäng</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>

@@ -1,14 +1,20 @@
-<div #menuitem class="menu__item" *ngIf="!disabled else disableditem"
-  routerLinkActive="menu__item--active" routerLink={{link}} [routerLinkActiveOptions]="{exact:true}">
-  <a>{{text}}</a>
-  <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass"
-    title={{notificationTooltip}}>{{ notificationText }}</span>
+<div *ngIf="!isInternalLink" (click)="externalLink()" class="menu__item">
+    <a>{{text}}</a>
+    <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass"
+      title={{notificationTooltip}}>{{ notificationText }}</span>
 </div>
-
-<ng-template #disableditem>
-  <div #menuitem class="menu__item menu__item--disabled" tabindex="0">
-    <p title="{{disabledTooltip}}">{{text}}</p>
+<div *ngIf="isInternalLink">
+  <div #menuitem class="menu__item" *ngIf="!disabled else disableditem" routerLinkActive="menu__item--active"
+    routerLink={{link}} [routerLinkActiveOptions]="{exact:true}">
+    <a>{{text}}</a>
     <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass"
       title={{notificationTooltip}}>{{ notificationText }}</span>
   </div>
-</ng-template>
+  <ng-template #disableditem>
+    <div #menuitem class="menu__item menu__item--disabled" tabindex="0">
+      <p title="{{disabledTooltip}}">{{text}}</p>
+      <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass"
+        title={{notificationTooltip}}>{{ notificationText }}</span>
+    </div>
+  </ng-template>
+</div>

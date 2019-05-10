@@ -15,7 +15,8 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @Input() notification: string;
     @Input() notificationColor: string;
     @Input() notificationTooltip: string;
-    @Input() isInternalLink: boolean;
+    @Input() isInternalLink = true;
+    @Input() isExternalLink: boolean;
     @HostBinding('attr.role') role = 'menuitem';
     @HostBinding('attr.aria-disabled') ariaDisabled;
     @ViewChild('menuitem') menuitem: ElementRef;
@@ -74,5 +75,10 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
         setTimeout(() => {
             this.ariaDisabled = this.disabled;
         }, 25);
+    }
+    externalLink() {
+        if (this.link) {
+            return window.open(this.link, '_blank');
+        }
     }
 }
