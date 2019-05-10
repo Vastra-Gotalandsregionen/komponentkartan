@@ -76,7 +76,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
             this.arrowUp.emit();
         }
         if (event.keyCode === 27) { // Escape
-            this.showExpanded = false;
+            this.escape.emit();
         }
 
         event.cancelBubble = true;
@@ -165,8 +165,10 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
             x.escape
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(() => {
-                    this.setFocus();
-                    this.showExpanded = false;
+                    this.escape.emit();
+                    // this.setFocus();
+                    // this.showExpanded = false;
+
                 });
         });
     }

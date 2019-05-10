@@ -68,6 +68,12 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
                     }
                     this.menuItems.toArray()[i + 1].setFocus();
                 });
+            x.escape
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
+                    this.menuItems.toArray()[i].showExpanded = false;
+                    this.menuItems.toArray()[i].setFocus();
+                });
         });
     }
 
