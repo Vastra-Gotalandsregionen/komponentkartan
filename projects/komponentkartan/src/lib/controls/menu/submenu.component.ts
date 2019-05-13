@@ -166,17 +166,11 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(() => {
                     this.escape.emit();
-                    // this.setFocus();
-                    // this.showExpanded = false;
-
                 });
             x.tab
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(() => {
                     this.tab.emit();
-                    // this.setFocus();
-                    // this.showExpanded = false;
-
                 });
         });
     }

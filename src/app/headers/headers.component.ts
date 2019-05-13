@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 import { ModalService } from 'vgr-komponentkartan';
 
@@ -11,7 +11,7 @@ import { ModalService } from 'vgr-komponentkartan';
 
 export class HeadersComponent {
 
-  exampleCodeHeaderMenu =  `  <vgr-header class="header--inline theme--green">
+  exampleCodeHeaderMenu = `  <vgr-header class="header--inline theme--green">
     <vgr-header-menu [userName]="'Nova Audit'">
       <vgr-menu-item link="/minsida" text="Internt menyval"></vgr-menu-item>
       <vgr-submenu text="Submeny">
@@ -39,10 +39,15 @@ export class HeadersComponent {
     this.customExampleMarkup = htmlEncoder.prepareHighlightedSection(this.customExample, 'typescript');
     this.overwriteExampleMarkup = htmlEncoder.prepareHighlightedSection(this.overwriteExample, 'typescript');
   }
-  showOneButtonModal(elementId: string): void {
+  openModalOnClick(elementId: string): void {
     this.modalService.openDialog(elementId);
   }
   closeModal(elementId: string): void {
     this.modalService.closeDialog(elementId);
+  }
+  openModalOnKey(event: KeyboardEvent , elementId: string) {
+    if ((event.keyCode === 13 || event.keyCode === 32)) { // enter & space
+      this.modalService.openDialog(elementId);
+    }
   }
 }
