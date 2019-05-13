@@ -29,7 +29,8 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
                 event.preventDefault();
                 return;
             }
-            this.router.navigate([this.link]);
+            this.isInternalLink
+                ? this.router.navigate([this.link]) : this.externalLink();
         }
         if (event.keyCode === 36) { // Home
             this.home.emit();
