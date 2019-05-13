@@ -3,6 +3,8 @@ import { HtmlEncodeService } from '../html-encode.service';
 import { ModalService } from 'vgr-komponentkartan';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+declare var tinymce: any;
+
 @Component({
   selector: 'app-modaldialog',
   templateUrl: './modaldialog.component.html',
@@ -14,6 +16,7 @@ export class ModaldialogComponent implements OnInit {
   vardval1Answer: string;
   vardval2Answer: string;
   validateOnSubmit: boolean;
+  editMode = false;
 
   exampleCodeHtml = `
   <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>
@@ -90,6 +93,11 @@ export class ModaldialogComponent implements OnInit {
 
   showCommentModal() {
     this.modalService.openDialog('commentModal');
+  }
+
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+    this.modalService.updateDialog('commentModal');
   }
 
   createForms() {

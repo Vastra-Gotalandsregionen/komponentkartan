@@ -7,12 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 4.3.0 (beta)
 - Added event for expanded status to dropdown select.
 - Fixed a bug where vgr-lists shared the same list-service but now resolves the service individually.
+- Added method in modalService to update available tab stops in modal.
 
 ## 4.2.0 (Stable, 2019-05-02)
 - Changed colors on validation
 - Changed icons to use vgr-icons (continue). 
 
-## 4.1.0 (Stable, 2019-04-30)
+## 4.1.0 (2019-04-30)
 - Fixed a bug in List when multipleExpandedItems are not allowed and closing list-items did not emit any event.
 - Fixed text for button select/deselect all in Dropdown multiselect when not bound to a form control.
 - Modal background now correctly covers menus and headers.
@@ -22,7 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Possible to prevent collapse of list-items in list.
 - Suffix on input field will not cover text
 
-## 4.0.0 (Stable, 2019-02-08)
+## 4.0.0 (2019-02-08)
 - *Breaking change* Angular is upgraded to version 7.
 - *Breaking change* Dropdown and dropdown multiselect have been replaced by a declarative component called dropdown select.
 - *Breaking change* Added new discreet style to vgr-button. Input secondary is removed and replaced by buttonStyle. 
