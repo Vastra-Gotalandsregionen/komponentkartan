@@ -10,7 +10,7 @@
         <div #headerLabel *ngIf="!allowText" class="datepicker-new__header__label" tabindex="0" role="button"
           aria-haspopup="grid" [attr.aria-labelledby]="labelId + ' ' + headerLabelId" [attr.aria-expanded]="expanded">
           <span *ngIf="selectedDate" id="{{headerLabelId}}">{{selectedDate | date:labelDateFormat}}</span>
-          <span *ngIf="!selectedDate" id="{{headerLabelId}}" class="noselect">Välj datum</span>
+          <span *ngIf="!selectedDate" id="{{headerLabelId}}" class="noselect">{{ noSelectedDateLabel }}</span>
         </div>
         <div *ngIf="allowText">
           <input #headerInput *ngIf="!disabled" class="datepicker-new__header__input" [placeholder]="inputPlaceholder"

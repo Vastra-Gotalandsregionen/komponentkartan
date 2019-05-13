@@ -36,6 +36,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
 
   headerLabelId = Guid.newGuid();
   label = '';
+  noSelectedDateLabel: string;
   labelDateFormat: string;
   inputPlaceholder: string;
   parseError = false;
@@ -672,6 +673,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.zoomedToYears = true;
         this.zoomedToMonths = false;
         this.zoomedToDays = false;
+        this.noSelectedDateLabel = 'Välj år';
         this.labelDateFormat = 'yyyy';
         this.inputPlaceholder = 'ÅÅ';
         break;
@@ -682,6 +684,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.zoomedToYears = false;
         this.zoomedToMonths = true;
         this.zoomedToDays = false;
+        this.noSelectedDateLabel = 'Välj månad';
         this.labelDateFormat = 'MMM yyyy';
         this.inputPlaceholder = 'ÅÅMM';
         break;
@@ -690,6 +693,7 @@ export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit,
         this.zoomedToYears = false;
         this.zoomedToMonths = false;
         this.zoomedToDays = true;
+        this.noSelectedDateLabel = 'Välj datum';
         this.labelDateFormat = 'yyyy-MM-dd';
         this.inputPlaceholder = 'ÅÅMMDD';
         break;
