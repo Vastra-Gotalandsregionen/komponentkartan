@@ -4,7 +4,7 @@ describe('[DatepickerNewComponent]', () => {
   let component: DatepickerNewComponent;
 
   beforeEach(() => {
-    component = new DatepickerNewComponent(null);
+    component = new DatepickerNewComponent(null, null);
   });
 
   describe('Instatiate', () => {
