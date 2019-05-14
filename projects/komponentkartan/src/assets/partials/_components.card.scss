@@ -111,6 +111,9 @@
   span {
     pointer-events: none
   }
+  > .icon {
+    color: $text-color--default;
+  }
 }
 
 .card-section__content .add-padding {

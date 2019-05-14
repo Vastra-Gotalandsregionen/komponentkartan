@@ -16,14 +16,15 @@ Under 2019 har följande datum satt för release av major-versioner
 Det som kommer att ingå i de olika versionerna är ännu inte beslutat, men nedan finns en beskrivning av funktionalitet som troligtvis kan komma med i de släpp vi planerat under våren 2019. 
 
 ### Version 5
-* Förbättringar i felmeddelande, eventuellt en egen komponent för felmeddelanden
+**OBS detta är en uppskattning**
+* Ny sammanslagen datum- och månadsväljare, som det går att skriva in datum i för att välja. :white_check_mark:
+* Byte av ikoner till FontAwesome :white_check_mark:
+
+* Deklarativ header menu
 * Deklarativ radio group
 * Angular 8.0
+* Förbättringar i felmeddelande, eventuellt en egen komponent för felmeddelanden
 * Rättning av buggar
-
-
-**OBS detta är en uppskattning**
-
 
 ## Komma igång
 

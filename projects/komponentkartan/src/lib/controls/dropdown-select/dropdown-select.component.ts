@@ -42,6 +42,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @ViewChild('filter') filter: ElementRef;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
+  value: any;
   expanded = false;
   filterVisible = false;
   allSelected = false;
@@ -106,15 +107,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         if (this.multi) {
           this.setMultiOnItems();
         }
-        if (this.formControl) {
-          setTimeout(() => {
-            this.writeValue(this.formControl.value);
-          });
-        } else {
-          setTimeout(() => {
-            this.selectDefaultItems();
-          });
-        }
+        setTimeout(() => {
+          this.writeValue(this.value);
+        });
       });
   }
 
@@ -139,6 +134,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   writeValue(value: any) {
+    this.value = value;
+    this.selectedChanged.emit(this.value);
+
     if (!this.items) {
       return;
     }
@@ -178,6 +176,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   registerOnChange(func: (value: any) => any) {
     this.onChange = (value: any) => {
+      this.value = value;
       this.selectedChanged.emit(value);
       func(value);
     };
@@ -188,6 +187,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   onChange(value: any) {
+    this.value = value;
     this.selectedChanged.emit(value);
   }
 
