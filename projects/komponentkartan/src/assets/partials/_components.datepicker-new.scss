@@ -92,8 +92,8 @@
         justify-content: space-between;
         align-items: center;
         height: 60px;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
         
         .datepicker-new__calendar__header__date {
           cursor: pointer;
@@ -104,7 +104,27 @@
         }
 
         .datepicker-new__calendar__header__chevron {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 28px;
+          height: 28px;
+          padding-top: 1px;
+          border-radius: 50%;
+          border-width: 0;
           cursor: pointer;
+
+          &:hover {
+            @extend .background-color--secondary;
+          }
+        }
+
+        .datepicker-new__calendar__header__chevron-left {
+          padding-right: 2px;
+        }
+
+        .datepicker-new__calendar__header__chevron-right {
+          padding-left: 2px;
         }
       }
 
@@ -276,6 +296,14 @@
       .datepicker-new__calendar {
         width: 272px;
         height: 311px;
+
+        .datepicker-new__calendar__header {
+          .datepicker-new__calendar__header__chevron {
+            width: 30px;
+            height: 30px;
+            padding-top: 2px;
+          }
+        }
 
         .datepicker-new__calendar__body {
           padding: 10px;

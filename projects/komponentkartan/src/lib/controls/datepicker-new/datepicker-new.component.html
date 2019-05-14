@@ -34,12 +34,12 @@
         (keydown)="onCalendarKeydown($event)">
         <div *ngIf="zoomedToDays">
           <div class="datepicker-new__calendar__header">
-            <div class="datepicker-new__calendar__header__chevron" (click)="days.previous()">
+            <div class="datepicker-new__calendar__header__chevron datepicker-new__calendar__header__chevron-left" (click)="days.previous()">
               <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
             </div>
             <div class="datepicker-new__calendar__header__date" (click)="days.zoomOut()">
               {{days.date | date:'MMMM yyyy'}}</div>
-            <div class="datepicker-new__calendar__header__chevron" (click)="days.next()">
+            <div class="datepicker-new__calendar__header__chevron datepicker-new__calendar__header__chevron-right" (click)="days.next()">
               <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
             </div>
           </div>
@@ -79,12 +79,12 @@
         </div>
         <div *ngIf="zoomedToMonths">
           <div class="datepicker-new__calendar__header">
-            <div class="datepicker-new__calendar__header__chevron" (click)="months.previous()">
+            <div class="datepicker-new__calendar__header__chevron datepicker-new__calendar__header__chevron-left" (click)="months.previous()">
               <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
             </div>
             <div class="datepicker-new__calendar__header__date" (click)="months.zoomOut()">{{months.date | date:'yyyy'}}
             </div>
-            <div class="datepicker-new__calendar__header__chevron" (click)="months.next()">
+            <div class="datepicker-new__calendar__header__chevron datepicker-new__calendar__header__chevron-right" (click)="months.next()">
               <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
             </div>
           </div>
@@ -101,10 +101,10 @@
         </div>
         <div *ngIf="zoomedToYears">
           <div class="datepicker-new__calendar__header">
-            <div class="datepicker-new__calendar__header__chevron" (click)="years.previous()">
+            <div class="datepicker-new__calendar__header__chevron datepicker-new__calendar__header__chevron-left" (click)="years.previous()">
               <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
             </div>
-            <div class="datepicker-new__calendar__header__chevron" (click)="years.next()">
+            <div class="datepicker-new__calendar__header__chevron datepicker-new__calendar__header__chevron-right" (click)="years.next()">
               <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
             </div>
           </div>
