@@ -76,6 +76,10 @@
           .textarea-validation-error--active & {
             color: $primary-color--error;
           }
+          .textarea-validation-error--editing & {
+            color: $text-color--default;
+          }
+      
         }
         .textarea-validation-error--active &, 
         .textarea-validation-error--editing & {
