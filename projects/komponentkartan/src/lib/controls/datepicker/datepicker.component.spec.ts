@@ -1,10 +1,10 @@
-import { DatepickerNewComponent } from './datepicker-new.component';
+import { DatepickerComponent } from './datepicker.component';
 
 describe('[DatepickerNewComponent]', () => {
-  let component: DatepickerNewComponent;
+  let component: DatepickerComponent;
 
   beforeEach(() => {
-    component = new DatepickerNewComponent(null, null);
+    component = new DatepickerComponent(null, null);
   });
 
   describe('Instatiate', () => {

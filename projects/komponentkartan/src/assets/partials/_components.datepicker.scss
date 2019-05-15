@@ -1,20 +1,20 @@
-.datepicker-new {
+.datepicker {
   display: inline-block;
 
-  .datepicker-new__control {
+  .datepicker__control {
     position: relative;
   
-    .datepicker-new__header {
+    .datepicker__header {
       position: relative;
       height: $component-height;
       width: 160px;
       cursor: pointer;
 
-      &.datepicker-new__header--focus {
+      &.datepicker__header--focus {
         outline: $focus-outline-width solid $focus-color;
       }
 
-      .datepicker-new__header__label {
+      .datepicker__header__label {
         height: $component-height;
         width: 160px;
         padding-left: $margin--slim;
@@ -29,7 +29,7 @@
         }
       }
 
-      .datepicker-new__header__input {
+      .datepicker__header__input {
         height: $component-height;
         width: 160px;
         padding-top: 0;
@@ -48,7 +48,7 @@
         }
       }
 
-      .datepicker-new__header__button {
+      .datepicker__header__button {
         @extend .background-color--primary;
         position: absolute;
         top: 0;
@@ -65,7 +65,7 @@
       }
     }
 
-    .datepicker-new__readonly-header {
+    .datepicker__readonly-header {
       height: $component-height;
       padding-left: $margin--slim;
 
@@ -74,7 +74,7 @@
       }
     }
     
-    .datepicker-new__calendar {
+    .datepicker__calendar {
       position: absolute;
       top: 42px;
       z-index: $layer-four;
@@ -85,7 +85,7 @@
       outline: 0;
       cursor: default;
       
-      .datepicker-new__calendar__header {
+      .datepicker__calendar__header {
         @extend .background-color--primary;
         color: $text-color--light;
         display: flex;
@@ -95,7 +95,7 @@
         padding-left: 10px;
         padding-right: 10px;
         
-        .datepicker-new__calendar__header__date {
+        .datepicker__calendar__header__date {
           cursor: pointer;
           
           &:hover {
@@ -103,7 +103,7 @@
           }
         }
 
-        .datepicker-new__calendar__header__chevron {
+        .datepicker__calendar__header__chevron {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -119,19 +119,19 @@
           }
         }
 
-        .datepicker-new__calendar__header__chevron-left {
+        .datepicker__calendar__header__chevron-left {
           padding-right: 2px;
         }
 
-        .datepicker-new__calendar__header__chevron-right {
+        .datepicker__calendar__header__chevron-right {
           padding-left: 2px;
         }
       }
 
-      .datepicker-new__calendar__body {
+      .datepicker__calendar__body {
         padding: 5px;
         
-        .datepicker-new__calendar__body__days {
+        .datepicker__calendar__body__days {
           td {
             width: 36px;
             height: 30px;
@@ -151,7 +151,7 @@
           }
         }
 
-        .datepicker-new__calendar__body__months {
+        .datepicker__calendar__body__months {
           td {
             width: 63px;
             height: 70px;
@@ -171,7 +171,7 @@
           }
         }
 
-        .datepicker-new__calendar__body__years {
+        .datepicker__calendar__body__years {
           td {
             text-align: center;
             vertical-align: middle;
@@ -193,13 +193,13 @@
           }
         }
         
-        .datepicker-new__calendar__body__item {
+        .datepicker__calendar__body__item {
           border-radius: 50%;
           border-style: solid;
           border-width: 0;
           cursor: pointer;
           
-          &:hover:not(.datepicker-new__calendar__body__item--disabled) {
+          &:hover:not(.datepicker__calendar__body__item--disabled) {
             @extend .background-color--secondary;
             @extend .border-color--secondary;
             color: $text-color--light;
@@ -211,7 +211,7 @@
             border-width: $focus-outline-width;
           }
           
-          &.datepicker-new__calendar__body__item--selected {
+          &.datepicker__calendar__body__item--selected {
             @extend .background-color--primary;
             color: $text-color--light;
             
@@ -221,7 +221,7 @@
             }
           }
           
-          &.datepicker-new__calendar__body__item--current {
+          &.datepicker__calendar__body__item--current {
             background-color: $background-color--content;
             
             &:not(:focus) {
@@ -230,7 +230,7 @@
             }
           }
 
-          &.datepicker-new__calendar__body__item--disabled {
+          &.datepicker__calendar__body__item--disabled {
             color: $text-color--read-only;
             cursor: default;
           }
@@ -238,39 +238,39 @@
       }
     }
 
-    &.datepicker-new--disabled {
-      .datepicker-new__header {
+    &.datepicker--disabled {
+      .datepicker__header {
         cursor: default;
 
-        .datepicker-new__header__label {
+        .datepicker__header__label {
           background-color: $background-color--default;
           border-color: $control-color--disabled;
         }
-        .datepicker-new__header__input {
+        .datepicker__header__input {
           background-color: $background-color--default;
           border-color: $control-color--disabled;
         }
-        .datepicker-new__header__button {
+        .datepicker__header__button {
           background-color: $control-color--disabled;
         }
       }
     }
 
-    &.datepicker-new--readonly {
-      .datepicker-new__header {
+    &.datepicker--readonly {
+      .datepicker__header {
         height: auto;
         width: auto;
         cursor: default;
 
-        .datepicker-new__header__label {
+        .datepicker__header__label {
           height: auto;
           width: auto;
         }
-        .datepicker-new__header__input {
+        .datepicker__header__input {
           background-color: $background-color--default;
           border-color: $control-color--disabled;
         }
-        .datepicker-new__header__button {
+        .datepicker__header__button {
           display: none;
         }
       }
@@ -279,36 +279,36 @@
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .datepicker-new {
-    .datepicker-new__control {
-      .datepicker-new__header {
+  .datepicker {
+    .datepicker__control {
+      .datepicker__header {
         width: 170px;
 
-        .datepicker-new__header__label {
+        .datepicker__header__label {
           width: 170px;
         }
 
-        .datepicker-new__header__input {
+        .datepicker__header__input {
           width: 170px;
         }
       }
 
-      .datepicker-new__calendar {
+      .datepicker__calendar {
         width: 272px;
         height: 311px;
 
-        .datepicker-new__calendar__header {
-          .datepicker-new__calendar__header__chevron {
+        .datepicker__calendar__header {
+          .datepicker__calendar__header__chevron {
             width: 30px;
             height: 30px;
             padding-top: 2px;
           }
         }
 
-        .datepicker-new__calendar__body {
+        .datepicker__calendar__body {
           padding: 10px;
           
-          .datepicker-new__calendar__body__days {
+          .datepicker__calendar__body__days {
             td {
               width: 36px;
               height: 33px;
@@ -325,7 +325,7 @@
             }
           }
   
-          .datepicker-new__calendar__body__months {
+          .datepicker__calendar__body__months {
             td {
               width: 63px;
               height: 77px;
@@ -342,7 +342,7 @@
             }
           }
   
-          .datepicker-new__calendar__body__years {
+          .datepicker__calendar__body__years {
             td {
               width: 84px;
               height: 77px;

@@ -5,15 +5,15 @@ import localeSv from '@angular/common/locales/sv';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { DatepickerNewComponent } from './datepicker-new.component';
+import { DatepickerComponent } from './datepicker.component';
 import { DatepickerItemComponent } from './datepicker-item.component';
 import { IconComponent } from '../icon/icon.component';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('[DatepickerNewComponent - Angular]', () => {
-  let component: DatepickerNewComponent;
-  let fixture: ComponentFixture<DatepickerNewComponent>;
+  let component: DatepickerComponent;
+  let fixture: ComponentFixture<DatepickerComponent>;
   let rootElement: DebugElement;
   let headerElement: DebugElement;
   let headerInputElement: DebugElement;
@@ -30,7 +30,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        DatepickerNewComponent,
+        DatepickerComponent,
         DatepickerItemComponent,
         IconComponent,
         ErrorMessagePipe
@@ -38,7 +38,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
       imports: [ReactiveFormsModule, FontAwesomeModule],
       providers: [{provide: LOCALE_ID, useValue: 'sv-SE'}]
     });
-    fixture = TestBed.createComponent(DatepickerNewComponent);
+    fixture = TestBed.createComponent(DatepickerComponent);
     rootElement = fixture.debugElement;
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -54,7 +54,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
 
   describe('When header is clicked', () => {
     beforeEach(() => {
-      headerElement = rootElement.query(By.css('.datepicker-new__header'));
+      headerElement = rootElement.query(By.css('.datepicker__header'));
     });
     describe('and calendar is collapsed', () => {
       beforeEach(() => {
@@ -63,7 +63,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
       it('calendar is expanded', () => {
         headerElement.triggerEventHandler('click', null);
         fixture.detectChanges();
-        const calendarElement = rootElement.query(By.css('.datepicker-new__calendar'));
+        const calendarElement = rootElement.query(By.css('.datepicker__calendar'));
         expect(calendarElement).toBeTruthy();
       });
       describe('and component is disabled', () => {
@@ -73,7 +73,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
         it('calendar is not expanded', () => {
           headerElement.triggerEventHandler('click', null);
           fixture.detectChanges();
-          const calendarElement = rootElement.query(By.css('.datepicker-new__calendar'));
+          const calendarElement = rootElement.query(By.css('.datepicker__calendar'));
           expect(calendarElement).toBeFalsy();
         });
       });
@@ -81,12 +81,12 @@ describe('[DatepickerNewComponent - Angular]', () => {
         beforeEach(() => {
           component.readonly = true;
           fixture.detectChanges();
-          headerElement = rootElement.query(By.css('.datepicker-new__readonly-header'));
+          headerElement = rootElement.query(By.css('.datepicker__readonly-header'));
         });
         it('calendar is not expanded', () => {
           headerElement.triggerEventHandler('click', null);
           fixture.detectChanges();
-          const calendarElement = rootElement.query(By.css('.datepicker-new__calendar'));
+          const calendarElement = rootElement.query(By.css('.datepicker__calendar'));
           expect(calendarElement).toBeFalsy();
         });
       });
@@ -98,7 +98,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
       it('calendar is collapsed', () => {
         headerElement.triggerEventHandler('click', null);
         fixture.detectChanges();
-        const calendarElement = rootElement.query(By.css('.datepicker-new__calendar'));
+        const calendarElement = rootElement.query(By.css('.datepicker__calendar'));
         expect(calendarElement).toBeFalsy();
       });
     });
@@ -112,7 +112,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
     });
     describe('and valid text is entered', () => {
       beforeEach(() => {
-        headerInputElement = rootElement.query(By.css('.datepicker-new__header__input'));
+        headerInputElement = rootElement.query(By.css('.datepicker__header__input'));
       });
       describe('with format YYMMDD', () => {
         it('date is selected', () => {
@@ -165,7 +165,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
     });
     describe('and invalid text is entered', () => {
       beforeEach(() => {
-        headerInputElement = rootElement.query(By.css('.datepicker-new__header__input'));
+        headerInputElement = rootElement.query(By.css('.datepicker__header__input'));
         const text = 'invalid';
         headerInputElement.triggerEventHandler('change', { target: { value: text } });
         fixture.detectChanges();
@@ -180,73 +180,73 @@ describe('[DatepickerNewComponent - Angular]', () => {
     });
     describe('and calendar is open', () => {
       beforeEach(() => {
-        headerElement = rootElement.query(By.css('.datepicker-new__header'));
+        headerElement = rootElement.query(By.css('.datepicker__header'));
         headerElement.triggerEventHandler('click', null);
         fixture.detectChanges();
       });
       describe('and date is clicked', () => {
         it('date is selected', () => {
-          const dateElement = rootElement.query(By.css('table tr:nth-child(4) td:nth-child(1) .datepicker-new__calendar__body__item'));
+          const dateElement = rootElement.query(By.css('table tr:nth-child(4) td:nth-child(1) .datepicker__calendar__body__item'));
           dateElement.triggerEventHandler('click', null);
           expect(component.selectedDate).toEqual(new Date(now.getFullYear(), now.getMonth(), 15));
         });
       });
       describe('and previous arrow is clicked', () => {
         it('previous month is shown', () => {
-          const previousElement = rootElement.query(By.css('.datepicker-new__calendar__header__chevron:first-child'));
+          const previousElement = rootElement.query(By.css('.datepicker__calendar__header__chevron:first-child'));
           previousElement.triggerEventHandler('click', null);
           fixture.detectChanges();
-          const calendarHeaderDateElement = rootElement.query(By.css('.datepicker-new__calendar__header__date'));
+          const calendarHeaderDateElement = rootElement.query(By.css('.datepicker__calendar__header__date'));
           expect(calendarHeaderDateElement.nativeElement.innerText).toBe('mars 2019');
         });
       });
       describe('and next arrow is clicked', () => {
         it('next month is shown', () => {
-          const previousElement = rootElement.query(By.css('.datepicker-new__calendar__header__chevron:last-child'));
+          const previousElement = rootElement.query(By.css('.datepicker__calendar__header__chevron:last-child'));
           previousElement.triggerEventHandler('click', null);
           fixture.detectChanges();
-          const calendarHeaderDateElement = rootElement.query(By.css('.datepicker-new__calendar__header__date'));
+          const calendarHeaderDateElement = rootElement.query(By.css('.datepicker__calendar__header__date'));
           expect(calendarHeaderDateElement.nativeElement.innerText).toBe('maj 2019');
         });
       });
       describe('and header is clicked', () => {
         let calendarHeaderDateElement;
         beforeEach(() => {
-          calendarHeaderDateElement = rootElement.query(By.css('.datepicker-new__calendar__header__date'));
+          calendarHeaderDateElement = rootElement.query(By.css('.datepicker__calendar__header__date'));
           calendarHeaderDateElement.triggerEventHandler('click', null);
           fixture.detectChanges();
         });
         it('months are shown', () => {
-          const monthElements = rootElement.queryAll(By.css('.datepicker-new__calendar__body__item'));
+          const monthElements = rootElement.queryAll(By.css('.datepicker__calendar__body__item'));
           const months = monthElements.map(x => x.nativeElement.innerText);
           expect(months).toEqual(['jan.', 'feb.', 'mars', 'apr.', 'maj', 'juni', 'juli', 'aug.', 'sep.', 'okt.', 'nov.', 'dec.']);
         });
         describe('and month is clicked', () => {
           it('days are shown', () => {
-            const monthElement = rootElement.query(By.css('table tr:nth-child(1) td:nth-child(4) .datepicker-new__calendar__body__item'));
+            const monthElement = rootElement.query(By.css('table tr:nth-child(1) td:nth-child(4) .datepicker__calendar__body__item'));
             monthElement.triggerEventHandler('click', null);
             fixture.detectChanges();
-            calendarHeaderDateElement = rootElement.query(By.css('.datepicker-new__calendar__header__date'));
+            calendarHeaderDateElement = rootElement.query(By.css('.datepicker__calendar__header__date'));
             expect(calendarHeaderDateElement.nativeElement.innerText).toBe('april 2019');
           });
         });
         describe('and header is clicked', () => {
           beforeEach(() => {
-            calendarHeaderDateElement = rootElement.query(By.css('.datepicker-new__calendar__header__date'));
+            calendarHeaderDateElement = rootElement.query(By.css('.datepicker__calendar__header__date'));
             calendarHeaderDateElement.triggerEventHandler('click', null);
             fixture.detectChanges();
           });
           it('years are shown', () => {
-            const yearElements = rootElement.queryAll(By.css('.datepicker-new__calendar__body__item'));
+            const yearElements = rootElement.queryAll(By.css('.datepicker__calendar__body__item'));
             const years = yearElements.map(x => x.nativeElement.innerText);
             expect(years).toEqual(['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']);
           });
           describe('and year is clicked', () => {
             it('months are shown', () => {
-              const yearElement = rootElement.query(By.css('table tr:nth-child(2) td:nth-child(2) .datepicker-new__calendar__body__item'));
+              const yearElement = rootElement.query(By.css('table tr:nth-child(2) td:nth-child(2) .datepicker__calendar__body__item'));
               yearElement.triggerEventHandler('click', null);
               fixture.detectChanges();
-              const monthElements = rootElement.queryAll(By.css('.datepicker-new__calendar__body__item'));
+              const monthElements = rootElement.queryAll(By.css('.datepicker__calendar__body__item'));
               const months = monthElements.map(x => x.nativeElement.innerText);
               expect(months).toEqual(['jan.', 'feb.', 'mars', 'apr.', 'maj', 'juni', 'juli', 'aug.', 'sep.', 'okt.', 'nov.', 'dec.']);
             });
@@ -264,7 +264,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
     });
     describe('and valid text is entered', () => {
       beforeEach(() => {
-        headerInputElement = rootElement.query(By.css('.datepicker-new__header__input'));
+        headerInputElement = rootElement.query(By.css('.datepicker__header__input'));
       });
       describe('with format YYMM', () => {
         it('month is selected', () => {
@@ -349,7 +349,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
     });
     describe('and invalid text is entered', () => {
       beforeEach(() => {
-        headerInputElement = rootElement.query(By.css('.datepicker-new__header__input'));
+        headerInputElement = rootElement.query(By.css('.datepicker__header__input'));
         const text = 'invalid';
         headerInputElement.triggerEventHandler('change', { target: { value: text } });
         fixture.detectChanges();
@@ -364,53 +364,53 @@ describe('[DatepickerNewComponent - Angular]', () => {
     });
     describe('and calendar is open', () => {
       beforeEach(() => {
-        headerElement = rootElement.query(By.css('.datepicker-new__header'));
+        headerElement = rootElement.query(By.css('.datepicker__header'));
         headerElement.triggerEventHandler('click', null);
         fixture.detectChanges();
       });
       describe('and month is clicked', () => {
         it('month is selected', () => {
-          const monthElement = rootElement.query(By.css('table tr:nth-child(2) td:nth-child(2) .datepicker-new__calendar__body__item'));
+          const monthElement = rootElement.query(By.css('table tr:nth-child(2) td:nth-child(2) .datepicker__calendar__body__item'));
           monthElement.triggerEventHandler('click', null);
           expect(component.selectedDate).toEqual(new Date(now.getFullYear(), 5, 1));
         });
       });
       describe('and previous arrow is clicked', () => {
         it('previous year is shown', () => {
-          const previousElement = rootElement.query(By.css('.datepicker-new__calendar__header__chevron:first-child'));
+          const previousElement = rootElement.query(By.css('.datepicker__calendar__header__chevron:first-child'));
           previousElement.triggerEventHandler('click', null);
           fixture.detectChanges();
-          const calendarHeaderDateElement = rootElement.query(By.css('.datepicker-new__calendar__header__date'));
+          const calendarHeaderDateElement = rootElement.query(By.css('.datepicker__calendar__header__date'));
           expect(calendarHeaderDateElement.nativeElement.innerText).toBe('2018');
         });
       });
       describe('and next arrow is clicked', () => {
         it('next year is shown', () => {
-          const previousElement = rootElement.query(By.css('.datepicker-new__calendar__header__chevron:last-child'));
+          const previousElement = rootElement.query(By.css('.datepicker__calendar__header__chevron:last-child'));
           previousElement.triggerEventHandler('click', null);
           fixture.detectChanges();
-          const calendarHeaderDateElement = rootElement.query(By.css('.datepicker-new__calendar__header__date'));
+          const calendarHeaderDateElement = rootElement.query(By.css('.datepicker__calendar__header__date'));
           expect(calendarHeaderDateElement.nativeElement.innerText).toBe('2020');
         });
       });
       describe('and header is clicked', () => {
         let calendarHeaderDateElement;
         beforeEach(() => {
-          calendarHeaderDateElement = rootElement.query(By.css('.datepicker-new__calendar__header__date'));
+          calendarHeaderDateElement = rootElement.query(By.css('.datepicker__calendar__header__date'));
           calendarHeaderDateElement.triggerEventHandler('click', null);
           fixture.detectChanges();
         });
         it('years are shown', () => {
-          const yearElements = rootElement.queryAll(By.css('.datepicker-new__calendar__body__item'));
+          const yearElements = rootElement.queryAll(By.css('.datepicker__calendar__body__item'));
           const years = yearElements.map(x => x.nativeElement.innerText);
           expect(years).toEqual(['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']);
         });
         describe('and year is clicked', () => {
           it('months are shown', () => {
-            const yearElement = rootElement.query(By.css('table tr:nth-child(2) td:nth-child(2) .datepicker-new__calendar__body__item'));
+            const yearElement = rootElement.query(By.css('table tr:nth-child(2) td:nth-child(2) .datepicker__calendar__body__item'));
             yearElement.triggerEventHandler('click', null);
             fixture.detectChanges();
-            const monthElements = rootElement.queryAll(By.css('.datepicker-new__calendar__body__item'));
+            const monthElements = rootElement.queryAll(By.css('.datepicker__calendar__body__item'));
             const months = monthElements.map(x => x.nativeElement.innerText);
             expect(months).toEqual(['jan.', 'feb.', 'mars', 'apr.', 'maj', 'juni', 'juli', 'aug.', 'sep.', 'okt.', 'nov.', 'dec.']);
           });
@@ -427,7 +427,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
     });
     describe('and valid text is entered', () => {
       beforeEach(() => {
-        headerInputElement = rootElement.query(By.css('.datepicker-new__header__input'));
+        headerInputElement = rootElement.query(By.css('.datepicker__header__input'));
       });
       describe('with format YY', () => {
         it('year is selected', () => {
@@ -448,7 +448,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
     });
     describe('and invalid text is entered', () => {
       beforeEach(() => {
-        headerInputElement = rootElement.query(By.css('.datepicker-new__header__input'));
+        headerInputElement = rootElement.query(By.css('.datepicker__header__input'));
         const text = 'invalid';
         headerInputElement.triggerEventHandler('change', { target: { value: text } });
         fixture.detectChanges();
@@ -463,33 +463,33 @@ describe('[DatepickerNewComponent - Angular]', () => {
     });
     describe('and calendar is open', () => {
       beforeEach(() => {
-        headerElement = rootElement.query(By.css('.datepicker-new__header'));
+        headerElement = rootElement.query(By.css('.datepicker__header'));
         headerElement.triggerEventHandler('click', null);
         fixture.detectChanges();
       });
       describe('and year is clicked', () => {
         it('year is selected', () => {
-          const monthElement = rootElement.query(By.css('table tr:nth-child(3) td:nth-child(1) .datepicker-new__calendar__body__item'));
+          const monthElement = rootElement.query(By.css('table tr:nth-child(3) td:nth-child(1) .datepicker__calendar__body__item'));
           monthElement.triggerEventHandler('click', null);
           expect(component.selectedDate).toEqual(new Date(2021, 0, 1));
         });
       });
       describe('and previous arrow is clicked', () => {
         it('previous set of years are shown', () => {
-          const previousElement = rootElement.query(By.css('.datepicker-new__calendar__header__chevron:first-child'));
+          const previousElement = rootElement.query(By.css('.datepicker__calendar__header__chevron:first-child'));
           previousElement.triggerEventHandler('click', null);
           fixture.detectChanges();
-          const yearElements = rootElement.queryAll(By.css('.datepicker-new__calendar__body__item'));
+          const yearElements = rootElement.queryAll(By.css('.datepicker__calendar__body__item'));
           const years = yearElements.map(x => x.nativeElement.innerText);
           expect(years).toEqual(['2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014']);
         });
       });
       describe('and next arrow is clicked', () => {
         it('next set of years are shown', () => {
-          const previousElement = rootElement.query(By.css('.datepicker-new__calendar__header__chevron:last-child'));
+          const previousElement = rootElement.query(By.css('.datepicker__calendar__header__chevron:last-child'));
           previousElement.triggerEventHandler('click', null);
           fixture.detectChanges();
-          const yearElements = rootElement.queryAll(By.css('.datepicker-new__calendar__body__item'));
+          const yearElements = rootElement.queryAll(By.css('.datepicker__calendar__body__item'));
           const years = yearElements.map(x => x.nativeElement.innerText);
           expect(years).toEqual(['2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032']);
         });

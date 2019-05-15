@@ -5,7 +5,6 @@ import { Routes } from '@angular/router';
 import { InputfieldsComponent } from './inputfields/inputfields.component';
 import { TextareafieldComponent } from './textareaField/textareafield.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
-import { MonthpickerComponent } from './monthpicker/monthpicker.component';
 import { ColoursComponent } from './colours/colours.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { FormattemplateComponent } from './formattemplate/formattemplate.component';
@@ -61,7 +60,6 @@ export const appRoutes: Routes = [
     { path: 'closebutton', component: ClosebuttonComponent },
     { path: 'colours', component: ColoursComponent },
     { path: 'datepicker', component: DatepickerComponent },
-    { path: 'monthpicker', component: MonthpickerComponent },
     { path: 'formattemplate', component: FormattemplateComponent },
     { path: 'headers', component: HeadersComponent },
     { path: 'loader', component: LoaderComponent },

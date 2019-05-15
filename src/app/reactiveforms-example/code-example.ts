@@ -35,8 +35,8 @@ export class Examples {
           </vgr-radio-group>
         </vgr-title-value>
         <vgr-title-value title="Välj Månad">
-          <vgr-monthpicker formControlName="monthpicker" [showValidation]="updateOnChangeForm.controls.monthpicker.dirty" [minDate]="minDate"
-            [maxDate]="maxDate"></vgr-monthpicker>
+          <vgr-datepicker [minZoom]="'m'" formControlName="monthpicker" [showValidation]="updateOnChangeForm.controls.monthpicker.dirty" [minDate]="minDate"
+            [maxDate]="maxDate"></vgr-datepicker>
         </vgr-title-value>
         <vgr-title-value title="Välj Dag">
           <vgr-datepicker formControlName="datepicker" [showValidation]="updateOnChangeForm.controls.datepicker.dirty"></vgr-datepicker>
@@ -84,7 +84,7 @@ export class Examples {
           </vgr-radio-group>
         </vgr-title-value>
         <vgr-title-value title="Välj Månad">
-          <vgr-monthpicker formControlName="monthpicker" [showValidation]="formSubmitted" [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
+          <vgr-datepicker formControlName="monthpicker" [showValidation]="formSubmitted" [minDate]="minDate" [maxDate]="maxDate"></vgr-datepicker>
         </vgr-title-value>
         <vgr-title-value title="Välj Dag">
           <vgr-datepicker formControlName="datepicker" [showValidation]="formSubmitted"></vgr-datepicker>
@@ -136,8 +136,8 @@ export class Examples {
           </vgr-radio-group>
         </vgr-title-value>
         <vgr-title-value title="Välj Månad">
-          <vgr-monthpicker formControlName="monthpicker" [showValidation]="updateOnBlurForm.controls.monthpicker.touched" [minDate]="minDate"
-            [maxDate]="maxDate"></vgr-monthpicker>
+          <vgr-datepicker [minZoom]="'m'" formControlName="monthpicker" [showValidation]="updateOnBlurForm.controls.monthpicker.touched" [minDate]="minDate"
+            [maxDate]="maxDate"></vgr-datepicker>
         </vgr-title-value>
         <vgr-title-value title="Välj Dag">
           <vgr-datepicker formControlName="datepicker" [showValidation]="updateOnBlurForm.controls.datepicker.touched"></vgr-datepicker>

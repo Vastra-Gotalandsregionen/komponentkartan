@@ -11,10 +11,10 @@ import { DatePipe } from '@angular/common';
 import { Guid } from '../../utils/guid';
 
 @Component({
-  selector: 'vgr-datepicker-new',
-  templateUrl: './datepicker-new.component.html'
+  selector: 'vgr-datepicker',
+  templateUrl: './datepicker.component.html'
 })
-export class DatepickerNewComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
+export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
   @Input() selectedDate: Date;
   @Input() minZoom: string;
   @Input() minDate: Date;

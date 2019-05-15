@@ -3,43 +3,43 @@
     <div>
       <div>Dag</div>
       <div>
-        <vgr-datepicker-new [minZoom]="'d'" [disabled]="disabled" [readonly]="readonly" [minDate]="minDate" [maxDate]="maxDate"></vgr-datepicker-new>
+        <vgr-datepicker [minZoom]="'d'" [disabled]="disabled" [readonly]="readonly" [minDate]="minDate" [maxDate]="maxDate"></vgr-datepicker>
       </div>
     </div>
     <div>
       <div>Månad</div>
       <div>
-        <vgr-datepicker-new [minZoom]="'m'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker-new>
+        <vgr-datepicker [minZoom]="'m'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker>
       </div>
     </div>
     <div>
       <div>År</div>
       <div>
-        <vgr-datepicker-new [minZoom]="'y'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker-new>
+        <vgr-datepicker [minZoom]="'y'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker>
       </div>
     </div>
     <div>
       <div> Dag utan textinmatning</div>
       <div>
-        <vgr-datepicker-new [allowText]="false" [minZoom]="'d'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker-new>
+        <vgr-datepicker [allowText]="false" [minZoom]="'d'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker>
       </div>
     </div>
     <div>
       <div>Månad utan textinmatning</div>
       <div>
-        <vgr-datepicker-new [allowText]="false" [minZoom]="'m'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker-new>
+        <vgr-datepicker [allowText]="false" [minZoom]="'m'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker>
       </div>
     </div>
     <div>
       <div>År utan textinmatning</div>
       <div>
-        <vgr-datepicker-new [allowText]="false" [minZoom]="'y'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker-new>
+        <vgr-datepicker [allowText]="false" [minZoom]="'y'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker>
       </div>
     </div>
     <div>
       <div>Forms API</div>
       <div>
-        <vgr-datepicker-new [formControl]="form" [readonly]="readonly"></vgr-datepicker-new>
+        <vgr-datepicker [formControl]="form" [readonly]="readonly"></vgr-datepicker>
         <vgr-button (click)="changeFormValue()" style="margin-left: 20px">Change date</vgr-button>
       </div>
     </div>
