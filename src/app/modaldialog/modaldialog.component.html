@@ -56,6 +56,22 @@
       <div>
         <vgr-button (click)="showCommentModal()">Kommentar 3</vgr-button>
       </div>
+
+      <vgr-modal id="commentModal">
+        <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+        <vgr-modal-content>
+          <button *ngIf="!editMode" (click)="toggleEditMode()">test</button>
+          <p>Kommentar:
+            <br /> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
+          </p>
+          <button *ngIf="editMode" (click)="toggleEditMode()">toggle tillbaka</button>
+          <textarea id="test" *ngIf="editMode"></textarea>
+        </vgr-modal-content>
+        <vgr-modal-footer>
+          <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Avbryt</vgr-button>
+          <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Spara</vgr-button>
+        </vgr-modal-footer>
+      </vgr-modal>
     </div>
     <br>
     <h2>HTML</h2>
@@ -233,21 +249,6 @@
     <vgr-button [buttonStyle]="'secondary'" (click)="closeModalSave('commentAnswerWithoutTextModal')">Svara</vgr-button>
   </vgr-modal-footer>
 
-</vgr-modal>
-<vgr-modal id="commentModal">
-  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
-  <vgr-modal-content>
-    <button *ngIf="!editMode" (click)="toggleEditMode()">test</button>
-    <p>Kommentar:
-      <br /> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
-    </p>
-    <button *ngIf="editMode" (click)="toggleEditMode()">toggle tillbaka</button>
-    <textarea id="test" *ngIf="editMode"></textarea>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Avbryt</vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Spara</vgr-button>
-  </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="myModalId">
   <vgr-modal-header>En header från app</vgr-modal-header>
