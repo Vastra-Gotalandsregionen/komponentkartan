@@ -1,30 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss']
 })
-export class DatepickerComponent implements OnInit {
+export class DatepickerComponent {
+  disabled = false;
+  readonly = false;
+  form = new FormControl();
+  minDate = new Date(2017, 4, 10);
+  maxDate = new Date(2018, 4, 10);
 
-  minDate20160515: Date = new Date();
-  maxDate20161225: Date = new Date();
-  tomorrow: Date = new Date();
-  lastselectedDate: Date;
-  selectedDate: Date;
-  isReadonlyAndDisabled: boolean;
-
-  constructor() {
-    const today = new Date();
-    this.tomorrow.setDate(today.getDate() + 1);
-    this.selectedDate = new Date(2017, 6, 25);
-    this.isReadonlyAndDisabled = true;
+  changeFormValue() {
+    this.form.setValue(new Date(2018, 5, 15));
   }
 
-  ngOnInit() {
-    setTimeout(() => {
-      this.minDate20160515 = new Date(2016, 4, 15);
-      this.maxDate20161225 = new Date(2016, 11, 25);
-    }, 5000);
+  toggleDisabled() {
+    this.disabled = !this.disabled;
+    if (this.disabled) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
+
+  toggleReadonly() {
+    this.readonly = !this.readonly;
   }
 }

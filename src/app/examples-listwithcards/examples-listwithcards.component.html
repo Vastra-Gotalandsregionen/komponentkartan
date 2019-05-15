@@ -58,10 +58,10 @@
                   </vgr-title-value>
                   <vgr-title-value [title]=" 'Avtalsperiod*'" [slim]="newCardLocked">
                     <div class="row-layout row-layout--tight">
-                      <vgr-monthpicker formControlName="avtalsperiod_start" [showValidation]="onChangeForm.controls.avtalsperiod_start.touched || submitted"
-                        [readonly]="newCardLocked"></vgr-monthpicker>
-                      <vgr-monthpicker formControlName="avtalsperiod_slut" [showValidation]="onChangeForm.controls.avtalsperiod_slut.touched || submitted"
-                        [readonly]="newCardLocked"></vgr-monthpicker>
+                      <vgr-datepicker [minZoom]="'m'" formControlName="avtalsperiod_start" [showValidation]="onChangeForm.controls.avtalsperiod_start.touched || submitted"
+                        [readonly]="newCardLocked"></vgr-datepicker>
+                      <vgr-datepicker [minZoom]="'m'" formControlName="avtalsperiod_slut" [showValidation]="onChangeForm.controls.avtalsperiod_slut.touched || submitted"
+                        [readonly]="newCardLocked"></vgr-datepicker>
                     </div>
                   </vgr-title-value>
                 </vgr-title-value-layout>
@@ -229,10 +229,10 @@
                         </vgr-title-value>
                         <vgr-title-value [title]=" 'Avtalsperiod*'" [slim]="cardLocked">
                           <div class="row-layout  row-layout--tight">
-                            <vgr-monthpicker formControlName="avtalsperiod_start" [showValidation]="editUnitForm.controls.avtalsperiod_start.touched || submitted"
-                              [readonly]="cardLocked"></vgr-monthpicker>
-                            <vgr-monthpicker formControlName="avtalsperiod_slut" [showValidation]="editUnitForm.controls.avtalsperiod_slut.touched || submitted"
-                              [readonly]="cardLocked"></vgr-monthpicker>
+                            <vgr-datepicker [minZoom]="'m'" formControlName="avtalsperiod_start" [showValidation]="editUnitForm.controls.avtalsperiod_start.touched || submitted"
+                              [readonly]="cardLocked"></vgr-datepicker>
+                            <vgr-datepicker [minZoom]="'m'" formControlName="avtalsperiod_slut" [showValidation]="editUnitForm.controls.avtalsperiod_slut.touched || submitted"
+                              [readonly]="cardLocked"></vgr-datepicker>
                           </div>
                         </vgr-title-value>
                       </vgr-title-value-layout>
