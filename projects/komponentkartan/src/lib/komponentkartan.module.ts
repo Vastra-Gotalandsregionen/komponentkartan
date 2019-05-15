@@ -53,8 +53,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ModalContentComponent,
     type.ModalHeaderComponent,
     type.ModalFooterComponent,
-    type.MonthpickerComponent,
-    type.DatepickerComponent,
     type.InputComponent,
     type.CardComponent,
     type.CardHeaderComponent,

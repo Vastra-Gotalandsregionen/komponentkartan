@@ -15,8 +15,6 @@ export { HeaderComponent } from './controls/header/header.component';
 export { LoginInformationComponent } from './controls/loginInformation/loginInformation.component';
 export { HeaderMenuComponent } from './controls/headerMenu/headerMenu.component';
 export { ModalPlaceholderComponent } from './controls/modal/modal.component';
-export { MonthpickerComponent } from './controls/monthpicker/monthpicker.component';
-export { DatepickerComponent } from './controls/datepicker/datepicker.component';
 export { InputComponent } from './controls/input/input.component';
 export { CardSectionComponent } from './controls/card/cardSection.component';
 export { TitleValueComponent } from './controls/titleValue/titleValue.component';
