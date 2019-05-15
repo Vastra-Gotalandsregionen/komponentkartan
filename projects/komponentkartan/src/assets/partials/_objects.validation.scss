@@ -62,6 +62,9 @@
     .validation-error--active & {
       color: $primary-color--error;
     }
+    .validation-error--editing & {
+      color: $text-color--default;
+    }
   }
   .validation-error--active &, 
   .validation-error--editing & {
