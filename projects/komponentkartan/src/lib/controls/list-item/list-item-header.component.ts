@@ -40,6 +40,12 @@ export class ListItemHeaderComponent implements AfterViewInit {
             event.preventDefault();
         }
     }
+    @HostListener('click', ['$event'])
+    onclick(event: MouseEvent) {
+        this.expandedChanged.emit(true);
+        this.expanded = !this.expanded;
+        event.preventDefault();
+    }
     constructor(private hostElement: ElementRef, private renderer: Renderer) {
     }
 
