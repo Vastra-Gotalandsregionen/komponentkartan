@@ -5,6 +5,7 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 5.0.0 (beta)
+- *Breaking change* Dropdown select now has a value input. As a result, the default input on dropdown items has been removed. If using dropdown select without a form control, set default values via the value input instead.
 - *Breaking change* Monthpicker has been removed. Use datepicker with min zoom set to months instead.
 - Datepicker now allows text input and zooming between days, months and years views.
 - Added event for expanded status to dropdown select.
