@@ -1,34 +1,42 @@
-import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement, SimpleChanges, SimpleChange } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterTestingModule } from '@angular/router/testing';
-
-import { HeaderMenuComponent } from '../../controls/headerMenu/headerMenu.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { IconComponent } from '../icon/icon.component';
-import { LoginInformationComponent } from '../../controls/loginInformation/loginInformation.component';
-import { RingWithTextComponent } from '../..//controls/ring-with-text/ring-with-text.component';
-import { HeaderComponent } from '../header/header.component';
-import { MenuItemComponent } from '../menu/menu-item.component';
-import { SubmenuComponent } from '../menu/submenu.component';
+import { HeaderMenuComponent, MenuItemComponent, SubmenuComponent, MenuSeparatorComponent, LoginInformationComponent, RingWithTextComponent, HeaderComponent } from '../../index';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MenuSeparatorComponent } from '../menu/menu-separator.component';
+import { DebugElement, Component, SimpleChanges, SimpleChange } from '@angular/core';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { CommonModule } from '@angular/common';
+import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+@Component({
+  selector: 'vgr-test',
+  template:
+    `<vgr-header-menu [userName]="'Nova Audit'">
+      <vgr-menu-item link="/minsida" text="Internt menyval"></vgr-menu-item>
+      <vgr-submenu text="Submeny">
+        <vgr-menu-item link="/backtotop" text="Submenyval : backtotop"></vgr-menu-item>
+      </vgr-submenu>
+    </vgr-header-menu>
+  `
+})
+class TestHeaderMenuComponent { }
 
 describe('HeaderMenuComponent', () => {
+  let fixture: ComponentFixture<TestHeaderMenuComponent>;
   let component: HeaderMenuComponent;
-  let menuItem: ComponentFixture<MenuItemComponent>;
-  let fixture: ComponentFixture<HeaderMenuComponent>;
-  let rootElement: DebugElement;
+  let rootElement: HTMLElement;
+  let debugElement: DebugElement;
 
   beforeEach((done) => {
-    TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [
+        TestHeaderMenuComponent,
         HeaderComponent,
         HeaderMenuComponent,
+        MenuItemComponent,
+        SubmenuComponent,
+        IconComponent,
         MenuItemComponent,
         SubmenuComponent,
         IconComponent,
@@ -41,35 +49,26 @@ describe('HeaderMenuComponent', () => {
         BrowserAnimationsModule,
         BrowserDynamicTestingModule,
         NoopAnimationsModule,
-        FontAwesomeModule,
-        RouterTestingModule
-      ]
-    });
-    TestBed.overrideComponent(HeaderMenuComponent, {
-      set: {
-        templateUrl: 'headerMenu.component.html'
-      }
-    });
-    TestBed.overrideComponent(MenuItemComponent, {
-      set: {
-        templateUrl: '../menu/menu-item.component.html'
-      }
-    });
+        RouterTestingModule.withRoutes([]),
+        FontAwesomeModule
+      ],
 
+
+    });
     TestBed.compileComponents().then(() => {
-      fixture = TestBed.createComponent(HeaderMenuComponent);
-      component = fixture.componentInstance;
-      rootElement = fixture.debugElement;
-      menuItem = TestBed.createComponent(MenuItemComponent);
+      fixture = TestBed.createComponent(TestHeaderMenuComponent);
+      component = fixture.debugElement.children[0].componentInstance;
+      debugElement = fixture.debugElement;
+      rootElement = fixture.debugElement.nativeElement;
 
       fixture.detectChanges();
       done();
     });
   });
 
-  describe('', () => {
+  describe('Test variables', () => {
     it('userName is correct', () => {
-      expect(component.userName).toBeFalsy();
+      expect(component.userName).toBe('Nova Audit');
     });
     it('initials is correct', () => {
       expect(component.initials).toBeFalsy();
@@ -81,13 +80,10 @@ describe('HeaderMenuComponent', () => {
       expect(component.circleColor).toBeFalsy();
     });
   });
-
   describe('When component is initialized', () => {
     let headerMenuElement: DebugElement;
     beforeEach(() => {
-      headerMenuElement = rootElement.query(By.css('.header-menu'));
-
-
+      headerMenuElement = debugElement.query(By.css('.header-menu'));
     });
     describe('and toggleHeaderMenu is called ', () => {
       let mockEvent;
@@ -95,15 +91,12 @@ describe('HeaderMenuComponent', () => {
         mockEvent = new Event('');
         component.toggleHeaderMenu(mockEvent);
         fixture.detectChanges();
-
       });
       it('headerMenu should be visible', () => {
         expect(component.hideMenu).toBe(false);
       });
-
     });
   });
-
   describe('ngOnChanges', () => {
     let changes: SimpleChanges;
     describe('When initials have changed', () => {

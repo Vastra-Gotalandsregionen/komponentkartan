@@ -88,16 +88,15 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
   }
 
   keyToggleHeaderMenu(event: KeyboardEvent) {
-    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+    if (this.menuItems.length > 0 && event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       event.preventDefault();
       this.toggleHeaderMenu(event);
       setTimeout(() => {
         this.focusFirstMenuItem();
       }, 100);
-    } else if (event.key === 'Tab' && !this.hideMenu) {
+    } else if (this.menuItems.length > 0 && event.key === 'Tab' && !this.hideMenu) {
+      event.preventDefault();
       this.focusFirstMenuItem();
-
-
     } else if (event.key === 'Escape') {
       this.hideMenu = true;
     }

@@ -29,13 +29,13 @@ import { takeUntil } from 'rxjs/operators';
 
 export class SubmenuComponent extends MenuItemBase implements AfterContentInit, OnInit, OnDestroy {
     @Input() text: string;
-    @Input() expanded = false;
     private _showExpanded: boolean;
     private ngUnsubscribe = new Subject();
     state: string;
 
-    @HostBinding('attr.aria-haspopup') hasAriaPopup = true;
+    @HostBinding('attr.aria-haspopup') hasAriaPopup = 'menu';
     @HostBinding('attr.role') role = 'menuitem';
+    @HostBinding('attr.aria-expanded') expanded = false;
 
     @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
     @HostBinding('class.submenu') hasClass = true;

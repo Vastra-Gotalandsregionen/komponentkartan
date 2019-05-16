@@ -14,6 +14,7 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
     @HostBinding('class.menu') hasClass = true;
     @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
     @HostBinding('attr.role') role = 'menu';
+    @HostBinding('attr.aria-orientation') orientation = 'vertical';
 
     get smallerFont(): boolean {
         return this.title && this.title.length > 9;
