@@ -1,660 +1,886 @@
 import {
-    Component, Input, EventEmitter, Output, OnChanges, HostBinding, OnInit, HostListener,
-    ElementRef, forwardRef, SkipSelf, Optional, Host, ChangeDetectorRef, AfterViewInit, SimpleChanges
+  Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self,
+  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject
 } from '@angular/core';
-import { ICalendarYearMonth } from '../../models/calendarYearMonth.model';
-import { ICalendarWeek } from '../../models/calendarWeek.model';
-import { ICalendarDay } from '../../models/calendarDay.model';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer } from '@angular/forms';
-import { AbstractControl } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { DatepickerItemComponent } from './datepicker-item.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
+
 import { Guid } from '../../utils/guid';
 
 @Component({
-    selector: 'vgr-datepicker',
-    templateUrl: './datepicker.component.html',
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => DatepickerComponent),
-        multi: true
-    }]
+  selector: 'vgr-datepicker',
+  templateUrl: './datepicker.component.html'
 })
-export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
-    @Input() showValidation = true;
+export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
+  @Input() selectedDate: Date;
+  @Input() minZoom: string;
+  @Input() minDate: Date;
+  @Input() maxDate: Date;
+  @Input() allowText = true;
+  @Input() disabled = false;
+  @Input() readonly = false;
+  @Input() showValidation = true;
+  @Input() errorMessage = {};
+  @Input() labelId: string;
 
-    @Input() minDate: Date;
-    @Input() maxDate: Date;
-    @Input() selectedDate?: Date;
-    @Input() @HostBinding('class.disabled') disabled = false;
-    @Input() @HostBinding('class.readonly') readonly = false;
-    @Input() noDateSelectedLabel = 'Välj datum';
-    @Input() selectedDateFormat = 'yyyy-MM-dd';
-    @Input() tooltipDateFormat = 'yyyy-MM-dd';
-    @Output() selectedDateChanged = new EventEmitter<Date>();
-    @Input() formControlName?: string;
+  @Output() selectedDateChanged = new EventEmitter<Date>();
 
-    @HostBinding('class.validated-input') hasClass = true;
-    @HostBinding('class.validation-error--active') get errorClass() {
-        return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
-    }
-    @HostBinding('class.validation-error--editing') get editingClass() {
-        return this.showValidation && this.control && this.control.invalid && this.hasFocus;
-    }
+  @ViewChild('datepicker') datepicker: ElementRef;
+  @ViewChild('headerLabel') headerLabel: ElementRef;
+  @ViewChild('headerInput') headerInput: ElementRef;
+  @ViewChild('calendar') calendar: ElementRef;
+  @ViewChildren(DatepickerItemComponent) items: QueryList<DatepickerItemComponent>;
 
-    labelledbyid: string = Guid.newGuid();
+  headerLabelId = Guid.newGuid();
+  label = '';
+  noSelectedDateLabel: string;
+  labelDateFormat: string;
+  inputPlaceholder: string;
+  parseError = false;
+  parseErrorMessage: string;
+  headerHasFocus = false;
+  expanded = false;
+  years: Calendar;
+  months: Calendar;
+  days: Calendar;
+  zoomedToYears = false;
+  zoomedToMonths = false;
+  zoomedToDays = false;
+  private minZoomLevel: DatepickerZoomLevel;
+  private ngUnsubscribe = new Subject();
+  private ngUnsubscribeItems = new Subject();
 
-    expanded: boolean;
-    hasFocus: boolean;
-    control: AbstractControl;
-
-    focusableDays = [];
-    currentFocusedDayIndex = 0;
-
-    today: Date;
-    yearMonths: ICalendarYearMonth[] = [];
-    nextMonth: boolean;
-    previousMonth: boolean;
-    currentYearMonthIndex = 0;
-    currentYearMonthOutput: Date;
-    selectedCalendarDay: ICalendarDay;
-
-    validationErrorMessage = 'Obligatoriskt';
-
-
-    constructor(protected elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
-        this.expanded = false;
-        this.today = new Date();
-        this.nextMonth = true;
-        this.previousMonth = true;
-        this.minDate = new Date(this.today.getFullYear(), 0, 1);
-        this.maxDate = new Date(this.today.getFullYear(), 11, 31);
+  get errorActive() {
+    if (!this.showValidation || this.disabled || this.readonly) {
+      return false;
     }
 
-    ngOnInit() {
-        this.setCalendar();
+    return !this.headerHasFocus && (this.parseError || (this.formControl && this.formControl.invalid));
+  }
+
+  get errorEditing() {
+    if (!this.showValidation || this.disabled || this.readonly) {
+      return false;
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes) {
-            if (changes['maxDate'] || changes['minDate']) {
-                this.setCalendar();
-            }
+    return this.headerHasFocus && (this.parseError || (this.formControl && this.formControl.invalid));
+  }
 
-            if (this.formControlName) {
-                this.control = this.controlContainer.control.get(this.formControlName);
-            }
-            this.setFocusableItems();
-        }
+  constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() private formControl: NgControl) {
+    if (this.formControl != null) {
+      this.formControl.valueAccessor = this;
+    }
+  }
+
+  ngOnInit() {
+    this.setMinZoomLevel();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.minZoom) {
+      this.setMinZoomLevel();
     }
 
-    ngAfterViewInit() {
-        this.setFocusableItems();
-    }
-
-    setCalendar() {
-        this.yearMonths = null;
-        this.yearMonths = this.createYearMonths(this.minDate, this.maxDate);
-        this.updateYearMonths(this.minDate, this.maxDate, this.yearMonths);
-        this.setCurrentYearMonthOutput();
-        this.setPreviousAndNextMonthNavigation();
-    }
-
-    setFocusableItems() {
-        this.focusableDays = this.elementRef.nativeElement.getElementsByClassName('datepicker__calendar__day');
-    }
-
-    setFocusedElement() {
-        if (!this.selectedDate) {
-            this.currentFocusedDayIndex = this.today.getDate() - 1;
-        } else {
-            this.currentFocusedDayIndex = this.selectedDate.getDate() - 1;
-        }
-        this.focusableDays[this.currentFocusedDayIndex].focus();
-    }
-
-    writeValue(value: any): void {
-        this.selectedDate = value;
-
-        if (!value && this.selectedCalendarDay) {
-            // control was resetted
-            this.selectedCalendarDay.selected = false;
-            this.updateYearMonths(this.minDate, this.maxDate, this.yearMonths);
-            this.setCurrentYearMonthOutput();
-            this.setPreviousAndNextMonthNavigation();
-        }
-    }
-
-    registerOnChange(func: any): void {
-        this.onChange = func;
-    }
-
-    registerOnTouched(func: any): void {
-        this.onTouched = func;
-    }
-
-    onChange(input: any) {
-    }
-
-    onTouched() { }
-
-    controlHasErrors() {
-        return (this.control && this.control.errors ? this.control.errors['required'] : false);
-    }
-
-    onLeave() {
-        this.hasFocus = false;
-        if (this.control) {
-            if (this.control.updateOn === 'blur') {
-                this.control.setValue(this.selectedDate);
-            }
-            this.control.markAsTouched();
-            this.control.markAsDirty();
-        }
-    }
-
-    onEnter() {
-        if (this.disabled || this.readonly) {
-            return;
-        }
-        this.hasFocus = true;
-    }
-
-    @HostListener('document:mousedown', ['$event'])
-    onDocumentClick(event: any) {
-        const target = event.target || event.srcElement || event.currentTarget;
-        if (!this.elementRef.nativeElement.contains(target)) {
-            this.expanded = false;
-        }
-    }
-
-    setCurrentYearMonthOutput() {
-        this.currentYearMonthOutput = new Date(this.yearMonths[this.currentYearMonthIndex].year, this.yearMonths[this.currentYearMonthIndex].month - 1);
-    }
-
-    createYearMonths(minDate: Date, maxDate: Date): ICalendarYearMonth[] {
-
-        const yearMonths: ICalendarYearMonth[] = [];
-        let tmpMinDate = minDate;
-        let tmpMaxDate = maxDate;
-
-
-        if (tmpMinDate > this.today) {
-            tmpMinDate = this.today;
-        }
-        if (tmpMaxDate < this.today) {
-            tmpMaxDate = this.today;
-        }
-
-        for (let year = tmpMinDate.getFullYear(); year <= tmpMaxDate.getFullYear(); year++) {
-            for (let month = 1; month <= 12; month++) {
-                if (new Date(year, month - 1) >= new Date(tmpMinDate.getFullYear(), tmpMinDate.getMonth())
-                    && (new Date(year, month - 1) <= new Date(tmpMaxDate.getFullYear(), tmpMaxDate.getMonth()))) {
-                    yearMonths.push({ year: year, month: month, weeks: this.createWeeksAndDays(year, month) } as ICalendarYearMonth);
-                }
-            }
-        }
-
-        return yearMonths;
-    }
-
-    getFirstDayInMonth(year: number, month: number) { return new Date(year, month, 1); }
-
-    getLastDayInMonth(year: number, month: number) { return new Date(year, month, 0); }
-
-    getNumberOfWeeks(year: number, month: number): number {
-        const firstDayOfWeek = 1;
-        const firstDayOfMonth = this.getFirstDayInMonth(year, month - 1);
-        const lastDayOfMonth = this.getLastDayInMonth(year, month);
-        const numberOfDaysInMonth = lastDayOfMonth.getDate();
-        const firstWeekDay = (firstDayOfMonth.getDay() - firstDayOfWeek + 7) % 7;
-        const used = firstWeekDay + numberOfDaysInMonth;
-
-        return Math.ceil(used / 7);
-    }
-
-    private createWeeks(year: number, month: number): ICalendarWeek[] {
-        const weeks: ICalendarWeek[] = [];
-        const numberOfWeeks = this.getNumberOfWeeks(year, month);
-
-        for (let i = 1; i <= numberOfWeeks; i++) {
-            weeks.push({} as ICalendarWeek);
-        }
-        return weeks;
-    }
-
-    private createWeeksAndDays(year: number, month: number): ICalendarWeek[] {
-        const weeks: ICalendarWeek[] = this.createWeeks(year, month);
-        const firstWeek: ICalendarWeek = this.createFirstWeek(year, month);
-        const lastWeek: ICalendarWeek = this.createLastWeek(year, month);
-        const secondWeekIndex = 1;
-        const secondLastWeekIndex = weeks.length - 2;
-        const lastWeekIndex = weeks.length - 1;
-
-        let dayNumber = firstWeek.days[6].day.getDate() + 1;
-
-        weeks[0] = firstWeek;
-
-        for (let iWeekIndex = secondWeekIndex; iWeekIndex <= secondLastWeekIndex + 1; iWeekIndex++) {
-            let weekContainer: ICalendarWeek;
-            weekContainer = {} as ICalendarWeek;
-            const daysContainer: ICalendarDay[] = [];
-            weekContainer.days = [];
-            for (let iDayIndex = 0; iDayIndex < 7; iDayIndex++) {
-                weekContainer.days.push({ day: new Date(year, month - 1, dayNumber), disabled: false } as ICalendarDay);
-                dayNumber++;
-            }
-            weeks[iWeekIndex] = weekContainer;
-        }
-
-        weeks[lastWeekIndex] = lastWeek;
-
-        return weeks;
-    }
-
-    private createFirstWeek(year: number, month: number): ICalendarWeek {
-        const firstDayOfMonth = this.getFirstDayInMonth(year, month - 1);
-        const calendarWeek: ICalendarWeek = {} as ICalendarWeek;
-        calendarWeek.days = [];
-
-        let daynumber = 1;
-
-        for (let i = 0; i < 7; i++) {
-            if (i < (this.getSwedishDayNumbersInWeek(firstDayOfMonth.getDay()))) {
-                calendarWeek.days.push(null);
-            } else {
-                calendarWeek.days.push({ day: new Date(year, month - 1, daynumber), disabled: false } as ICalendarDay);
-                daynumber++;
-            }
-        }
-        return calendarWeek;
-    }
-
-    private createLastWeek(year: number, month: number): ICalendarWeek {
-        const lastDayOfMonth = this.getLastDayInMonth(year, month);
-        const calendarWeek: ICalendarWeek = {} as ICalendarWeek;
-        calendarWeek.days = [];
-
-        let daynumber = lastDayOfMonth.getDate() - this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay());
-
-        for (let i = 0; i < 7; i++) {
-            if (i <= (this.getSwedishDayNumbersInWeek(lastDayOfMonth.getDay()))) {
-                calendarWeek.days.push({ day: new Date(year, month - 1, daynumber), disabled: false } as ICalendarDay);
-                daynumber++;
-            } else { calendarWeek.days.push(null); }
-        }
-
-        return calendarWeek;
-    }
-
-    getSwedishDayNumbersInWeek(weekNumber: number): number {
-        return weekNumber > 0 ? weekNumber - 1 : 6;
-    }
-
-    private updateYearMonths(minDate: Date, maxDate: Date, yearMonths: ICalendarYearMonth[]) {
-        yearMonths.forEach((month, index) => {
-            month.weeks.forEach((week, weekindex) => {
-                week.days.forEach((calendarDay, dayindex) => {
-                    if (calendarDay != null) {
-
-                        const currentDatePosition = calendarDay.day.toDateString();
-                        const currentselectedDate = this.selectedDate ? this.selectedDate.toDateString() : this.selectedDate;
-                        const currentTodayDate = this.today.toDateString();
-
-                        // Set disabled dates
-                        if (calendarDay.day < minDate || calendarDay.day > maxDate) {
-                            month.weeks[weekindex].days[dayindex].disabled = true;
-                        }
-
-                        // Set current selected date
-                        if (currentselectedDate !== undefined && currentDatePosition === currentselectedDate) {
-                            this.setSelectedDay(calendarDay);
-                            this.currentYearMonthIndex = index;
-                        }
-
-                        // Set today's date
-                        if (currentDatePosition === currentTodayDate) {
-                            calendarDay.isCurrentDay = true;
-                            if (this.selectedDate === null || this.selectedDate === undefined) {
-                                this.currentYearMonthIndex = index;
-                            }
-                        }
-                    }
-                });
-            });
+    if (changes.selectedDate) {
+      if (changes.selectedDate.firstChange) {
+        setTimeout(() => {
+          this.writeValue(changes.selectedDate.currentValue);
         });
+      } else {
+        this.writeValue(changes.selectedDate.currentValue);
+      }
     }
 
-    private setSelectedDay(calendarDay: ICalendarDay) {
+    if (changes.disabled) {
+      if (changes.disabled.firstChange) {
+        setTimeout(() => {
+          this.setDisabledState(changes.disabled.currentValue);
+        });
+      } else {
+        this.setDisabledState(changes.disabled.currentValue);
+      }
+    }
+  }
 
-        if (this.selectedCalendarDay) {
-            this.selectedCalendarDay.selected = false;
+  ngAfterViewInit() {
+    this.subscribeToItems();
+
+    this.items.changes
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(_ => this.subscribeToItems());
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
+  }
+
+  writeValue(value: any) {
+    this.selectedDate = value;
+    this.label = this.formatDate(value);
+  }
+
+  registerOnChange(func: (value: any) => any) {
+    this.onChange = (value: any) => {
+      this.selectedDateChanged.emit(value);
+      func(value);
+    };
+  }
+
+  registerOnTouched(func: (value: any) => any) {
+    this.onTouched = func;
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+
+    if (isDisabled) {
+      this.collapse(false);
+    }
+  }
+
+  onChange(value: any) {
+    this.selectedDateChanged.emit(value);
+  }
+
+  onTouched(value: any) { }
+
+  toggleExpanded() {
+    if (this.expanded) {
+      this.collapse();
+    } else {
+      this.expand();
+    }
+  }
+
+  onHeaderFocus() {
+    this.headerHasFocus = true;
+  }
+
+  onHeaderBlur() {
+    this.headerHasFocus = false;
+  }
+
+  onBlur(event: FocusEvent) {
+    const datepickerElement = this.datepicker.nativeElement as HTMLElement;
+    const focusedNode = event.relatedTarget as Node;
+
+    if (datepickerElement.contains(focusedNode)) {
+      return;
+    }
+
+    this.onTouched(this.selectedDate);
+    this.collapse(false);
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    if (this.disabled || this.readonly) {
+      return;
+    }
+
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      this.collapse();
+    } else if (event.key === 'Tab') {
+      this.collapse();
+    }
+  }
+
+  onHeaderClick() {
+    if (this.disabled || this.readonly) {
+      return;
+    }
+
+    this.toggleExpanded();
+  }
+
+  onHeaderKeydown(event: KeyboardEvent) {
+    if (this.disabled || this.readonly) {
+      return;
+    }
+
+    if (event.key === 'Enter') {
+      this.toggleExpanded();
+      if (!this.allowText) {
+        setTimeout(() => {
+          const itemToFocus = this.items.find(x => x.selected) || this.items.first;
+          itemToFocus.focus();
+        });
+      }
+    } else if (
+      event.key === 'ArrowUp' || event.key === 'Up' ||
+      event.key === 'ArrowDown' || event.key === 'Down') {
+      if (this.expanded) {
+        event.preventDefault();
+        const itemToFocus = this.items.find(x => x.selected) || this.items.first;
+        itemToFocus.focus();
+      }
+    }
+  }
+
+  onCalendarKeydown(event: KeyboardEvent) {
+    if (event.key === 'Home') {
+      this.items.first.focus();
+    } else if (event.key === 'End') {
+      this.items.last.focus();
+    } else if (event.key === 'PageUp' && !event.altKey) {
+      event.preventDefault();
+      if (this.zoomedToDays) {
+        this.days.previous();
+      } else if (this.zoomedToMonths) {
+        this.months.previous();
+      } else if (this.zoomedToYears) {
+        this.years.previous();
+      }
+    } else if (event.key === 'PageDown' && !event.altKey) {
+      event.preventDefault();
+      if (this.zoomedToDays) {
+        this.days.next();
+      } else if (this.zoomedToMonths) {
+        this.months.next();
+      } else if (this.zoomedToYears) {
+        this.years.next();
+      }
+    } else if (event.key === 'PageUp' && event.altKey) {
+      event.preventDefault();
+      if (this.zoomedToDays) {
+        this.days.farPrevious();
+      }
+    } else if (event.key === 'PageDown' && event.altKey) {
+      event.preventDefault();
+      if (this.zoomedToDays) {
+        this.days.farNext();
+      }
+    } else if (
+      event.key === 'ArrowUp' || event.key === 'Up' ||
+      event.key === 'ArrowDown' || event.key === 'Down' ||
+      event.key === 'ArrowLeft' || event.key === 'Left' ||
+      event.key === 'ArrowRight' || event.key === 'Right') {
+      if (event.target !== this.calendar.nativeElement) {
+        return;
+      }
+      event.preventDefault();
+      const itemToFocus = this.items.find(x => x.selected) || this.items.first;
+      itemToFocus.focus();
+    }
+  }
+
+  parseSelectedDate(value: string) {
+    if (!value) {
+      this.setSelectedDate(null);
+      this.collapse();
+      return;
+    }
+
+    let date: Date;
+    let year: number;
+    let month = 0;
+    let day = 1;
+    let invalidFormat = false;
+
+    if (this.minZoomLevel === DatepickerZoomLevel.Days) {
+      const matches = value.match(/^((\d\d)?\d\d)[ -]?(\d\d)[ -]?(\d\d)$/);
+
+      if (!matches) {
+        invalidFormat = true;
+      } else {
+        year = +matches[1];
+        if (year < 100) {
+          year += 2000;
         }
-        calendarDay.selected = true;
-        this.selectedCalendarDay = calendarDay;
-        this.setPreviousAndNextMonthNavigation();
-    }
+        month = +matches[3] - 1;
+        day = +matches[4];
+        date = new Date(year, month, day);
+      }
+    } else if (this.minZoomLevel === DatepickerZoomLevel.Months) {
+      const numericMatches = value.match(/^((\d\d)?\d\d)[ -]?(\d\d)$/);
+      const textMatches = value.match(/^(\w+)\.? ((\d\d)?\d\d)$/);
 
-    onCalendarMousedown(event: Event) {
-        // används för att stoppa events från att bubbla ut
-        event.cancelBubble = true;
-    }
-
-    toggleCalendar(event: Event) {
-
-        if (this.disabled || this.readonly) {
-            return;
+      if (numericMatches) {
+        year = +numericMatches[1];
+        if (year < 100) {
+          year += 2000;
         }
-        this.expanded = !this.expanded;
-        if (this.expanded) {
-            setTimeout(() => {
-                this.setFocusedElement();
-            }, 50);
+        month = +numericMatches[3] - 1;
+        date = new Date(year, month, 1);
+      } else if (textMatches) {
+        year = +textMatches[2];
+        if (year < 100) {
+          year += 2000;
+        }
+        switch (textMatches[1].toLowerCase()) {
+          case 'jan':
+          case 'januari':
+            month = 0;
+            break;
+          case 'feb':
+          case 'februari':
+            month = 1;
+            break;
+          case 'mars':
+            month = 2;
+            break;
+          case 'apr':
+          case 'april':
+            month = 3;
+            break;
+          case 'maj':
+            month = 4;
+            break;
+          case 'juni':
+            month = 5;
+            break;
+          case 'juli':
+            month = 6;
+            break;
+          case 'aug':
+          case 'augusti':
+            month = 7;
+            break;
+          case 'sep':
+          case 'september':
+            month = 8;
+            break;
+          case 'okt':
+          case 'oktober':
+            month = 9;
+            break;
+          case 'nov':
+          case 'november':
+            month = 10;
+            break;
+          case 'dec':
+          case 'december':
+            month = 11;
+            break;
+          default:
+            month = -1;
+            break;
+        }
+        date = new Date(year, month, 1);
+      } else {
+        invalidFormat = true;
+      }
+    } else if (this.minZoomLevel === DatepickerZoomLevel.Years) {
+      const matches = value.match(/^((\d\d)?\d\d)$/);
+
+      if (!matches) {
+        invalidFormat = true;
+      } else {
+        year = +matches[1];
+        if (year < 100) {
+          year += 2000;
+        }
+        date = new Date(year, 0, 1);
+      }
+    }
+
+    if (invalidFormat) {
+      this.setSelectedDate(null, true);
+      this.parseErrorMessage = 'Felaktigt format';
+      return;
+    }
+
+    if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
+      this.setSelectedDate(null, true);
+      this.parseErrorMessage = 'Datumet finns inte.';
+      return;
+    }
+
+    this.setSelectedDate(date);
+  }
+
+  private expand() {
+    let referenceDate: Date;
+    if (this.selectedDate) {
+      referenceDate = this.selectedDate;
+    } else {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (this.minDate && today < this.minDate) {
+        referenceDate = this.minDate;
+      } else if (this.maxDate && today > this.maxDate) {
+        referenceDate = this.maxDate;
+      } else {
+        referenceDate = today;
+      }
+    }
+
+    switch (this.minZoomLevel) {
+      case DatepickerZoomLevel.Days:
+        this.zoomToDays(referenceDate);
+        break;
+      case DatepickerZoomLevel.Months:
+        this.zoomToMonths(referenceDate);
+        break;
+      case DatepickerZoomLevel.Years:
+        this.zoomToYears(referenceDate, referenceDate);
+        break;
+    }
+
+    this.expanded = true;
+  }
+
+  private collapse(focusHeader = true) {
+    this.expanded = false;
+
+    if (focusHeader) {
+      if (this.headerInput) {
+        this.headerInput.nativeElement.focus();
+      } else if (this.headerLabel) {
+        this.headerLabel.nativeElement.focus();
+      }
+    }
+  }
+
+  private zoomToDays(referenceDate: Date, focus = false) {
+    this.zoomedToYears = false;
+    this.zoomedToMonths = false;
+    this.zoomedToDays = true;
+
+    const year = referenceDate.getFullYear();
+    const month = referenceDate.getMonth();
+    const firstDayWeekDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const dayOffset = firstDayWeekDay ? firstDayWeekDay - 1 : 6; // Sunday is 0
+    const weeks = Math.ceil((daysInMonth + dayOffset) / 7);
+    const items: CalendarItem[][] = [];
+    for (let week = 0; week < weeks; week++) {
+      const weekDays: CalendarItem[] = [];
+      for (let day = 1; day <= 7; day++) {
+        const dayOfMonth = week * 7 + day - dayOffset;
+        if (dayOfMonth < 1 || dayOfMonth > daysInMonth) {
+          weekDays.push(null);
         } else {
-            // set focus on component
-            this.elementRef.nativeElement.querySelector('.datepicker').focus();
+          const date = new Date(year, month, dayOfMonth);
+          const selectedYear = this.selectedDate ? this.selectedDate.getFullYear() : null;
+          const selectedMonth = this.selectedDate ? this.selectedDate.getMonth() : null;
+          const selectedDay = this.selectedDate ? this.selectedDate.getDate() : null;
+          const selected = date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === selectedDay;
+          const disabled = (this.minDate && date < this.minDate) || (this.maxDate && date > this.maxDate);
+          weekDays.push({
+            date: date,
+            selected: selected,
+            disabled: disabled,
+            isMinZoom: true
+          });
         }
+      }
+      items.push(weekDays);
     }
 
-    onPreviousMonth(event: Event) {
-        event.cancelBubble = true;
-        if (this.previousMonth) {
-
-            this.currentYearMonthIndex = this.currentYearMonthIndex - 1;
-            this.setCurrentYearMonthOutput();
-            this.setPreviousAndNextMonthNavigation();
+    this.days = {
+      date: new Date(year, month),
+      items: items,
+      previous: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        let dayToFocus = focusedItem ? focusedItem.date.getDate() : 1;
+        if (dayToFocus > 28) {
+          const previousMonthLastDay = new Date(year, month, 0).getDate();
+          if (previousMonthLastDay < dayToFocus) {
+            dayToFocus = previousMonthLastDay;
+          }
         }
+        this.zoomToDays(new Date(year, month - 1, dayToFocus), focusedItem ? true : false);
+      },
+      next: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        let dayToFocus = focusedItem ? focusedItem.date.getDate() : 1;
+        if (dayToFocus > 28) {
+          const nextMonthLastDay = new Date(year, month + 2, 0).getDate();
+          if (nextMonthLastDay < dayToFocus) {
+            dayToFocus = nextMonthLastDay;
+          }
+        }
+        this.zoomToDays(new Date(year, month + 1, dayToFocus), focusedItem ? true : false);
+      },
+      farPrevious: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        let dayToFocus = focusedItem ? focusedItem.date.getDate() : 1;
+        if (month === 1 && dayToFocus === 29) {
+          dayToFocus = 28;
+        }
+        this.zoomToDays(new Date(year - 1, month, dayToFocus), focusedItem ? true : false);
+      },
+      farNext: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        let dayToFocus = focusedItem ? focusedItem.date.getDate() : 1;
+        if (month === 1 && dayToFocus === 29) {
+          dayToFocus = 28;
+        }
+        this.zoomToDays(new Date(year + 1, month, dayToFocus), focusedItem ? true : false);
+      },
+      zoomOut: () => this.zoomToMonths(new Date(year, month))
+    };
+
+    if (focus) {
+      this.calendar.nativeElement.focus();
+      setTimeout(() => {
+        this.items.find(x => x.date.getDate() === referenceDate.getDate()).focus();
+      });
+    }
+  }
+
+  private zoomToMonths(referenceDate: Date, focus = false) {
+    this.zoomedToYears = false;
+    this.zoomedToMonths = true;
+    this.zoomedToDays = false;
+
+    const year = referenceDate.getFullYear();
+
+    const monthArray: Date[] = [
+      new Date(year, 0),
+      new Date(year, 1),
+      new Date(year, 2),
+      new Date(year, 3),
+      new Date(year, 4),
+      new Date(year, 5),
+      new Date(year, 6),
+      new Date(year, 7),
+      new Date(year, 8),
+      new Date(year, 9),
+      new Date(year, 10),
+      new Date(year, 11)
+    ];
+
+    const selectedYear = this.selectedDate ? this.selectedDate.getFullYear() : null;
+    const selectedMonth = this.selectedDate ? this.selectedDate.getMonth() : null;
+    const minDateMonth = this.minDate ? new Date(this.minDate.getFullYear(), this.minDate.getMonth()) : null;
+    const maxDateMonth = this.maxDate ? new Date(this.maxDate.getFullYear(), this.maxDate.getMonth()) : null;
+    const isMinZoom = this.minZoomLevel === DatepickerZoomLevel.Months;
+
+    const items: CalendarItem[][] = [];
+    for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
+      const row: CalendarItem[] = [];
+      for (let colIndex = 0; colIndex < 4; colIndex++) {
+        const date = monthArray[4 * rowIndex + colIndex];
+        const selected = date.getFullYear() === selectedYear && date.getMonth() === selectedMonth;
+        const disabled = (minDateMonth && date < minDateMonth) || (maxDateMonth && date > maxDateMonth);
+        row.push({
+          date: date,
+          selected: selected,
+          disabled: disabled,
+          isMinZoom: isMinZoom
+        });
+      }
+      items.push(row);
     }
 
-    onNextMonth(event: Event) {
-        event.cancelBubble = true;
-        if (this.nextMonth) {
-            this.currentYearMonthIndex = this.currentYearMonthIndex + 1;
-            this.setCurrentYearMonthOutput();
-            this.setPreviousAndNextMonthNavigation();
-        }
+    this.months = {
+      date: new Date(year, 0),
+      items: items,
+      previous: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        const monthToFocus = focusedItem ? focusedItem.date.getMonth() : 0;
+        this.zoomToMonths(new Date(year - 1, monthToFocus), focusedItem ? true : false);
+      },
+      next: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        const monthToFocus = focusedItem ? focusedItem.date.getMonth() : 0;
+        this.zoomToMonths(new Date(year + 1, monthToFocus), focusedItem ? true : false);
+      },
+      farPrevious: () => { },
+      farNext: () => { },
+      zoomOut: () => this.zoomToYears(new Date(year, 0), new Date(year, 0))
+    };
+
+    if (focus) {
+      this.calendar.nativeElement.focus();
+      setTimeout(() => {
+        this.items.find(x => x.date.getMonth() === referenceDate.getMonth()).focus();
+      });
+    }
+  }
+
+  private zoomToYears(referenceDate: Date, focusDate: Date, focus = false) {
+    this.zoomedToYears = true;
+    this.zoomedToMonths = false;
+    this.zoomedToDays = false;
+
+    const year = referenceDate.getFullYear();
+
+    const yearArray: Date[] = [
+      new Date(year - 4, 0),
+      new Date(year - 3, 0),
+      new Date(year - 2, 0),
+      new Date(year - 1, 0),
+      new Date(year, 0),
+      new Date(year + 1, 0),
+      new Date(year + 2, 0),
+      new Date(year + 3, 0),
+      new Date(year + 4, 0)
+    ];
+
+    const selectedYear = this.selectedDate ? this.selectedDate.getFullYear() : null;
+    const minDateYear = this.minDate ? new Date(this.minDate.getFullYear(), 0) : null;
+    const maxDateYear = this.maxDate ? new Date(this.maxDate.getFullYear(), 0) : null;
+    const isMinZoom = this.minZoomLevel === DatepickerZoomLevel.Years;
+
+    const items: CalendarItem[][] = [];
+    for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
+      const row: CalendarItem[] = [];
+      for (let colIndex = 0; colIndex < 3; colIndex++) {
+        const date = yearArray[3 * rowIndex + colIndex];
+        const selected = date.getFullYear() === selectedYear;
+        const disabled = (minDateYear && date < minDateYear) || (maxDateYear && date > maxDateYear);
+        row.push({
+          date: date,
+          selected: selected,
+          disabled: disabled,
+          isMinZoom: isMinZoom
+        });
+      }
+      items.push(row);
     }
 
-    onSelectedDate(event: Event, currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
-        const clickedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
+    this.years = {
+      date: null,
+      items: items,
+      previous: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        const yearToFocus = focusedItem ? new Date(focusedItem.date.getFullYear() - 9, 0) : null;
+        this.zoomToYears(new Date(year - 9, 0), yearToFocus, focusedItem ? true : false);
+      },
+      next: () => {
+        const focusedItem = this.items.find(x => x.focused);
+        const yearToFocus = focusedItem ? new Date(focusedItem.date.getFullYear() + 9, 0) : null;
+        this.zoomToYears(new Date(year + 9, 0), yearToFocus, focusedItem ? true : false);
+      },
+      farPrevious: () => { },
+      farNext: () => { },
+      zoomOut: () => { }
+    };
 
-        if (!clickedDate || clickedDate.disabled) {
-            return;
-        }
-        event.cancelBubble = true;
-        this.selectedDate = clickedDate.day;
-        this.setSelectedDay(clickedDate);
-
-        this.expanded = false;
-        this.onChange(clickedDate.day);
-        this.selectedDateChanged.emit(clickedDate.day);
-        this.changeDetectorRef.detectChanges();
-
-        if (this.control) {
-            this.control.setValue(clickedDate.day);
-        }
+    if (focus) {
+      this.calendar.nativeElement.focus();
+      setTimeout(() => {
+        this.items.find(x => x.date.getFullYear() === focusDate.getFullYear()).focus();
+      });
     }
+  }
 
-    onDateKeyDown(event: KeyboardEvent, currentYearMonthIndex: number, weekIndex: number, dayIndex: number) {
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            const clickedDate = this.yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex];
+  private setMinZoomLevel() {
+    switch (this.minZoom) {
+      case 'years':
+      case 'year':
+      case 'y':
+        this.minZoomLevel = DatepickerZoomLevel.Years;
+        this.zoomedToYears = true;
+        this.zoomedToMonths = false;
+        this.zoomedToDays = false;
+        this.noSelectedDateLabel = 'Välj år';
+        this.labelDateFormat = 'yyyy';
+        this.inputPlaceholder = 'ÅÅ';
+        break;
+      case 'months':
+      case 'month':
+      case 'm':
+        this.minZoomLevel = DatepickerZoomLevel.Months;
+        this.zoomedToYears = false;
+        this.zoomedToMonths = true;
+        this.zoomedToDays = false;
+        this.noSelectedDateLabel = 'Välj månad';
+        this.labelDateFormat = 'MMM yyyy';
+        this.inputPlaceholder = 'ÅÅMM';
+        break;
+      default:
+        this.minZoomLevel = DatepickerZoomLevel.Days;
+        this.zoomedToYears = false;
+        this.zoomedToMonths = false;
+        this.zoomedToDays = true;
+        this.noSelectedDateLabel = 'Välj datum';
+        this.labelDateFormat = 'yyyy-MM-dd';
+        this.inputPlaceholder = 'ÅÅMMDD';
+        break;
+    }
+  }
 
-            if (!clickedDate || clickedDate.disabled) {
-                event.cancelBubble = true;
-                event.preventDefault();
+  private setSelectedDate(date: Date, parseError = false) {
+    this.selectedDate = date;
+    this.onChange(date);
+    this.parseError = parseError;
+
+    if (!parseError) {
+      const newLabel = this.formatDate(date);
+      if (this.label !== newLabel) {
+        this.label = newLabel;
+      } else {
+        this.label = '';
+        setTimeout(() => {
+          this.label = newLabel;
+        });
+      }
+    }
+  }
+
+  private formatDate(date: Date): string {
+    return new DatePipe(this.locale).transform(date, this.labelDateFormat);
+  }
+
+  private subscribeToItems() {
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
+    this.ngUnsubscribeItems = new Subject();
+
+    this.items.forEach(item => {
+      item.select
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          this.collapse();
+          this.setSelectedDate(date);
+        });
+
+      item.zoomIn
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          if (this.zoomedToYears) {
+            this.zoomToMonths(date, true);
+          } else if (this.zoomedToMonths) {
+            this.zoomToDays(date, true);
+          }
+        });
+
+      item.previousColumn
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          if (this.zoomedToDays) {
+            const dayToFocus = date.getDate() - 1;
+            if (dayToFocus < 1) {
+              this.zoomToDays(new Date(date.getFullYear(), date.getMonth(), 0), true);
+            } else {
+              this.items.find(x => x.date.getDate() === dayToFocus).focus();
+            }
+          } else if (this.zoomedToMonths) {
+            const monthToFocus = date.getMonth() - 1;
+            if (monthToFocus < 0) {
+              this.zoomToMonths(new Date(date.getFullYear() - 1, 11), true);
+            } else {
+              this.items.find(x => x.date.getMonth() === monthToFocus).focus();
+            }
+          } else if (this.zoomedToYears) {
+            const yearToFocus = date.getFullYear() - 1;
+            if (yearToFocus < this.items.first.date.getFullYear()) {
+              this.zoomToYears(new Date(this.items.first.date.getFullYear() - 5, 0), new Date(yearToFocus, 0), true);
+            } else {
+              this.items.find(x => x.date.getFullYear() === yearToFocus).focus();
+            }
+          }
+        });
+
+      item.nextColumn
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          if (this.zoomedToDays) {
+            const dayToFocus = date.getDate() + 1;
+            if (dayToFocus > 28) {
+              const dateToFocus = new Date(date.getFullYear(), date.getMonth(), dayToFocus);
+              if (dateToFocus.getDate() !== dayToFocus) {
+                this.zoomToDays(new Date(date.getFullYear(), date.getMonth() + 1, 1), true);
                 return;
+              }
             }
-            this.selectedDate = clickedDate.day;
-            this.setSelectedDay(clickedDate);
-
-            this.onChange(clickedDate.day);
-            this.selectedDateChanged.emit(clickedDate.day);
-            this.changeDetectorRef.detectChanges();
-
-            if (this.control) {
-                this.control.setValue(clickedDate.day);
+            this.items.find(x => x.date.getDate() === dayToFocus).focus();
+          } else if (this.zoomedToMonths) {
+            const monthToFocus = date.getMonth() + 1;
+            if (monthToFocus > 11) {
+              this.zoomToMonths(new Date(date.getFullYear() + 1, 0), true);
+            } else {
+              this.items.find(x => x.date.getMonth() === monthToFocus).focus();
             }
-        }
-    }
+          } else if (this.zoomedToYears) {
+            const yearToFocus = date.getFullYear() + 1;
+            if (yearToFocus > this.items.last.date.getFullYear()) {
+              this.zoomToYears(new Date(this.items.last.date.getFullYear() + 5, 0), new Date(yearToFocus, 0), true);
+            } else {
+              this.items.find(x => x.date.getFullYear() === yearToFocus).focus();
+            }
+          }
+        });
 
-    checkDisabledDate(weekIndex: number, dayIndex: number): boolean {
-        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] === null || this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].disabled;
-    }
+      item.previousRow
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          if (this.zoomedToDays) {
+            const dayToFocus = date.getDate() - 7;
+            if (dayToFocus < 1) {
+              this.zoomToDays(new Date(date.getFullYear(), date.getMonth(), dayToFocus), true);
+            } else {
+              this.items.find(x => x.date.getDate() === dayToFocus).focus();
+            }
+          } else if (this.zoomedToMonths) {
+            const monthToFocus = date.getMonth() - 4;
+            if (monthToFocus < 0) {
+              this.zoomToMonths(new Date(date.getFullYear(), monthToFocus), true);
+            } else {
+              this.items.find(x => x.date.getMonth() === monthToFocus).focus();
+            }
+          } else if (this.zoomedToYears) {
+            const yearToFocus = date.getFullYear() - 3;
+            if (yearToFocus < this.items.first.date.getFullYear()) {
+              this.zoomToYears(new Date(this.items.first.date.getFullYear() - 5, 0), new Date(yearToFocus, 0), true);
+            } else {
+              this.items.find(x => x.date.getFullYear() === yearToFocus).focus();
+            }
+          }
+        });
 
-    checkTodayDate(weekIndex: number, dayIndex: number): boolean {
-        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].isCurrentDay;
-    }
+      item.nextRow
+        .pipe(takeUntil(this.ngUnsubscribeItems))
+        .subscribe(date => {
+          if (this.zoomedToDays) {
+            const dayToFocus = date.getDate() + 7;
+            if (dayToFocus > 28) {
+              const dateToFocus = new Date(date.getFullYear(), date.getMonth(), dayToFocus);
+              if (dateToFocus.getDate() !== dayToFocus) {
+                this.zoomToDays(dateToFocus, true);
+                return;
+              }
+            }
+            this.items.find(x => x.date.getDate() === dayToFocus).focus();
+          } else if (this.zoomedToMonths) {
+            const monthToFocus = date.getMonth() + 4;
+            if (monthToFocus > 11) {
+              this.zoomToMonths(new Date(date.getFullYear(), monthToFocus), true);
+            } else {
+              this.items.find(x => x.date.getMonth() === monthToFocus).focus();
+            }
+          } else if (this.zoomedToYears) {
+            const yearToFocus = date.getFullYear() + 3;
+            if (yearToFocus > this.items.last.date.getFullYear()) {
+              this.zoomToYears(new Date(this.items.last.date.getFullYear() + 5, 0), new Date(yearToFocus, 0), true);
+            } else {
+              this.items.find(x => x.date.getFullYear() === yearToFocus).focus();
+            }
+          }
+        });
+    });
+  }
+}
 
-    checkSelectedDate(weekIndex: number, dayIndex: number): boolean {
-        return this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex] !== null && !!this.yearMonths[this.currentYearMonthIndex].weeks[weekIndex].days[dayIndex].selected;
-    }
+interface Calendar {
+  date: Date;
+  items: CalendarItem[][];
+  previous: () => void;
+  next: () => void;
+  farPrevious: () => void;
+  farNext: () => void;
+  zoomOut: () => void;
+}
 
-    setPreviousAndNextMonthNavigation() {
-        let tmpMinDate = this.minDate;
-        let tmpMaxDate = this.maxDate;
-        if (tmpMinDate > this.today) {
-            tmpMinDate = this.today;
-        }
-        if (tmpMaxDate < this.today) {
-            tmpMaxDate = this.today;
-        }
+interface CalendarItem {
+  date: Date;
+  selected: boolean;
+  disabled: boolean;
+  isMinZoom: boolean;
+}
 
-        const minMonth = tmpMinDate.getMonth() + 1;
-        const maxMonth = tmpMaxDate.getMonth() + 1;
-        const minYear = tmpMinDate.getFullYear();
-        const maxYear = tmpMaxDate.getFullYear();
-
-        const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
-        const currentYear = this.yearMonths[this.currentYearMonthIndex].year;
-        if ((currentYear === minYear && currentMonth === minMonth) && (currentYear === maxYear && currentMonth === maxMonth)) {
-            this.previousMonth = false;
-            this.nextMonth = false;
-        } else if (currentYear <= minYear && currentMonth <= minMonth) {
-            this.previousMonth = false;
-            this.nextMonth = true;
-        } else if (currentYear >= maxYear && currentMonth >= maxMonth) {
-            this.nextMonth = false;
-            this.previousMonth = true;
-        } else {
-            this.previousMonth = true;
-            this.nextMonth = true;
-        }
-    }
-
-    onKeyDown(event: KeyboardEvent) {
-        switch (event.keyCode) {
-            case 9: // tab
-                {
-                    this.expanded = false;
-                    break;
-                }
-            case 13: // enter
-            case 32: // space
-                {
-                    this.toggleCalendar(event);
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-            case 27: // escape
-                {
-                    if (this.expanded) {
-                        this.toggleCalendar(event);
-                    }
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-            case 33: // pageUp
-                {
-                    if (event.shiftKey && this.currentYearMonthIndex - 12 >= 0) {
-                        this.currentYearMonthIndex = this.currentYearMonthIndex - 12;
-                        this.setCurrentYearMonthOutput();
-                        this.setPreviousAndNextMonthNavigation();
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 10);
-                    } else if (!event.shiftKey && this.previousMonth) {
-                        this.onPreviousMonth(event);
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            if (this.currentFocusedDayIndex >= this.focusableDays.length) {
-                                this.currentFocusedDayIndex = this.focusableDays.length - 1;
-                            }
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 10);
-                    }
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-            case 34: // pageDown
-                {
-                    if (event.shiftKey && this.currentYearMonthIndex + 12 < this.yearMonths.length) {
-                        this.currentYearMonthIndex = this.currentYearMonthIndex + 12;
-                        this.setCurrentYearMonthOutput();
-                        this.setPreviousAndNextMonthNavigation();
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 10);
-                    } else if (!event.shiftKey && this.nextMonth) {
-                        this.onNextMonth(event);
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            if (this.currentFocusedDayIndex >= this.focusableDays.length) {
-                                this.currentFocusedDayIndex = this.focusableDays.length - 1;
-                            }
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-
-                        }, 10);
-                    }
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-            case 35: // end
-                {
-                    if (event.ctrlKey) {
-                        const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
-
-                        this.currentYearMonthIndex = this.currentYearMonthIndex + (12 - currentMonth);
-                        if (this.currentYearMonthIndex > this.yearMonths.length - 1) {
-                            this.currentYearMonthIndex = this.yearMonths.length - 1;
-                        }
-
-                        this.setCurrentYearMonthOutput();
-                        this.setPreviousAndNextMonthNavigation();
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-
-                        }, 10);
-                    } else {
-                        this.currentFocusedDayIndex = this.focusableDays.length - 1;
-                        this.focusableDays[this.currentFocusedDayIndex].focus();
-                    }
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-            case 36: // home
-                {
-                    if (event.ctrlKey) {
-                        const currentMonth = this.yearMonths[this.currentYearMonthIndex].month;
-
-                        this.currentYearMonthIndex = this.currentYearMonthIndex - (currentMonth - 1);
-                        if (this.currentYearMonthIndex < 0) {
-                            this.currentYearMonthIndex = 0;
-                        }
-                        this.setCurrentYearMonthOutput();
-                        this.setPreviousAndNextMonthNavigation();
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            this.currentFocusedDayIndex = 0;
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 10);
-                    } else {
-                        this.currentFocusedDayIndex = 0;
-                        this.focusableDays[this.currentFocusedDayIndex].focus();
-                    }
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-            case 37: // arrow left
-                {
-                    if (this.currentFocusedDayIndex > 0) {
-                        this.currentFocusedDayIndex = this.currentFocusedDayIndex - 1;
-                        this.focusableDays[this.currentFocusedDayIndex].focus();
-                    } else if (this.previousMonth) {
-                        this.onPreviousMonth(event);
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            this.currentFocusedDayIndex = this.focusableDays.length - 1;
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 10);
-                    }
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-            case 38: // arrow up
-                {
-                    if (this.currentFocusedDayIndex < 7) {
-                        if (this.previousMonth) {
-                            this.onPreviousMonth(event);
-                            setTimeout(() => {
-                                this.setFocusableItems();
-                                this.currentFocusedDayIndex = this.focusableDays.length - (7 - this.currentFocusedDayIndex);
-                                this.focusableDays[this.currentFocusedDayIndex].focus();
-                            }, 10);
-                        }
-                    } else {
-                        this.currentFocusedDayIndex = this.currentFocusedDayIndex - 7;
-                        this.focusableDays[this.currentFocusedDayIndex].focus();
-                    }
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-            case 39: // arrow right
-                {
-                    if (this.currentFocusedDayIndex < this.focusableDays.length - 1) {
-                        this.currentFocusedDayIndex = this.currentFocusedDayIndex + 1;
-                        this.focusableDays[this.currentFocusedDayIndex].focus();
-                    } else if (this.nextMonth) {
-                        this.onNextMonth(event);
-                        setTimeout(() => {
-                            this.setFocusableItems();
-                            this.currentFocusedDayIndex = 0;
-                            this.focusableDays[this.currentFocusedDayIndex].focus();
-                        }, 10);
-                    }
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-            case 40: // arrow down
-                {
-                    if ((this.currentFocusedDayIndex + 7) > (this.focusableDays.length - 1)) {
-                        const daysInCurrentMonth = this.focusableDays.length;
-                        if (this.nextMonth) {
-                            this.onNextMonth(event);
-                            setTimeout(() => {
-                                this.setFocusableItems();
-                                this.currentFocusedDayIndex = this.currentFocusedDayIndex + 7 - daysInCurrentMonth;
-                                this.focusableDays[this.currentFocusedDayIndex].focus();
-                            }, 10);
-                        }
-                    } else {
-                        this.currentFocusedDayIndex = this.currentFocusedDayIndex + 7;
-                        this.focusableDays[this.currentFocusedDayIndex].focus();
-                    }
-                    event.preventDefault();
-                    event.cancelBubble = true;
-                    break;
-                }
-        }
-    }
+const enum DatepickerZoomLevel {
+  Days = 1,
+  Months = 2,
+  Years = 3
 }

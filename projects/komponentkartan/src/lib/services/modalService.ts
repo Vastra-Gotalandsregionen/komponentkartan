@@ -7,10 +7,12 @@ export class ModalService {
     // Observable string sources
     private modalOpenedSource = new Subject<string>();
     private modalClosedSource = new Subject<string>();
+    private modalUpdateSource = new Subject<string>();
 
     // Observable string streams
     modalOpened$ = this.modalOpenedSource.asObservable();
     modalClosed$ = this.modalClosedSource.asObservable();
+    modalUpdate$ = this.modalUpdateSource.asObservable();
 
     openDialog(elementId: string) {
         this.modalOpenedSource.next(elementId);
@@ -18,6 +20,10 @@ export class ModalService {
 
     closeDialog(elementId: string) {
         this.modalClosedSource.next(elementId);
+    }
+
+    updateDialog(elementId: string) {
+        this.modalUpdateSource.next(elementId);
     }
 }
 

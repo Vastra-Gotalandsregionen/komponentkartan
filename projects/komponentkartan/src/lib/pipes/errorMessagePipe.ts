@@ -1,14 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
-  name: 'errormessagehandler'
+  name: 'errorMessage'
 })
 
 export class ErrorMessagePipe implements PipeTransform {
   currentMessage: string;
 
-  transform(message: any, hasFocus: boolean, errors: any, small: boolean) {
+  transform(message: any, errors: any, hasFocus: boolean, small: boolean) {
     if (!message) {
       return null;
     }
