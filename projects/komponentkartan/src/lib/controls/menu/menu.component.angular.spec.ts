@@ -153,7 +153,7 @@ describe('[MenuComponent]', () => {
                     submenuMenuItem = submenuItem.querySelector('.menu__item');
                 });
                 it('aria-haspopup true ', () => {
-                    expect(submenuItem.getAttribute('aria-haspopup')).toBe('true');
+                    expect(submenuItem.getAttribute('aria-haspopup')).toBe('menu');
                 });
                 it('tabIndex = 0', () => {
                     expect(submenuMenuItem.tabIndex).toBe(0);
