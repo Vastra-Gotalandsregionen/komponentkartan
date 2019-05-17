@@ -355,7 +355,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
 
     this.exampleData.forEach(element => {
       if (element.previewObject.details.medverkanfamiljecentral === '') {
-        element.setNotification('Information saknas, medverkan i något register ej ifylld', 'vgr-icon-exclamation--red');
+        element.setNotification('Meddelande som visas här, visas även när kortet är öppet.', { name: 'exclamation-circle', solid: true });
       }
     });
 
@@ -513,7 +513,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
   onCardCancel(row: ExpandableRow<ExampleUnit, any>) {
     this.cardLocked = true;
 
-    row.notifyOnCollapse('Redigering av ' + row.previewObject.enhet + ' avbröts', 'vgr-icon-exclamation');
+    row.notifyOnCollapse('Redigering av ' + row.previewObject.enhet + ' avbröts', { name: 'exclamation-circle', solid: true });
   }
 
   onCardSave(event: Event, row: ExpandableRow<ExampleUnit, any>) {
@@ -526,7 +526,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.updateRowValues(row);
 
     this.cardLocked = true;
-    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green', true);
+    row.notifyOnCollapse(row.previewObject.enhet + ' sparades', { name: 'check-circle' }, true);
   }
 
   removeNotification(event, row) {
@@ -610,7 +610,7 @@ export class ExamplesListwithcardsComponent implements OnInit {
     this.newUnit.isActive = true;
 
     const newRow = new ExpandableRow<ExampleUnit, ExampleUnit>(this.newUnit);
-    newRow.notifyOnCollapse(newRow.previewObject.enhet + ' sparades', 'vgr-icon-ok-check-green');
+    newRow.notifyOnCollapse(newRow.previewObject.enhet + ' sparades', { name: 'check-circle' });
     this.exampleData.unshift(newRow);
 
     this.actionPanelClose();

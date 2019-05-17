@@ -20,7 +20,7 @@
         <vgr-list-header>
           <vgr-list-column-header width="7" sortKey="firstName">Förnamn</vgr-list-column-header>
           <vgr-list-column-header width="4" sortKey="lastName">Efternamn</vgr-list-column-header>
-          <vgr-list-column-header width="3" align="right" sortKey="amount">Årsbelopp</vgr-list-column-header>
+          <vgr-list-column-header width="3" [align]="'right'" sortKey="amount">Årsbelopp</vgr-list-column-header>
           <vgr-list-column-header width="1"></vgr-list-column-header>
           <vgr-list-column-header width="3">
             <vgr-checkbox [checked]="allChecked" (checkedChanged)="onSelectAllChanged($event)" label="Markera alla"></vgr-checkbox>

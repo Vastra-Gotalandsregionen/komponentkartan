@@ -4,10 +4,30 @@
   min-height: 20px;
   .expandable-div-header {
     cursor: pointer;
-  }
-  &.expandable-div--collapsed {
-    .expandable-div-content {
-      //display: none;
+    > vgr-icon {
+      .icon {
+        position: absolute;
+        right: 0;
+        top: 4px;
+        transition: transform 0.4s;
+        transform: rotate(0deg);
+      }
+    }
+    > .expanded {
+      .icon {
+        transform: rotate(-180deg);
+      }
+    }
+    .expandable-div-chevron {
+      position: absolute;
+      top: 0;
+      right: 0px;
+      &.expanded {
+        @extend .chevron-expanded;
+      }
+      &.collapsed {
+        @extend .chevron-collapsed;
+      }
     }
   }
   &:focus {

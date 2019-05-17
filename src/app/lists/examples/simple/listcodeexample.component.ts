@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
     SortDirection,  // Enum för vilket håll sorteringen skall ske.
-    SortChangedArgs // Args när sorteringordningen ändras.
+    SortChangedArgs, // Args när sorteringordningen ändras.
+    NotificationType,
+    RowNotification
 } from 'vgr-komponentkartan';
 import { HtmlEncodeService } from '../../../html-encode.service';
 import { Examples } from '../examples';
@@ -45,13 +47,65 @@ export class ListcodeexampleComponent implements OnInit {
         ];
     }
 
-
     constructor(htmlEncoder: HtmlEncodeService) {
 
         this.typeScriptSimpleListMarkup =
             htmlEncoder.prepareHighlightedSection(this.examples.typeScriptSimpleListMarkup, 'typescript');
         this.htmlSimpleListMarkup =
             htmlEncoder.prepareHighlightedSection(this.examples.htmltSimpleListMarkup);
+    }
+
+    togglePreventCollapse(row: ExamplePerson) {
+        row.preventCollapse = !row.preventCollapse;
+        if (row.preventCollapse) {
+            console.log(`Prevent collapse for ${row.firstName} ${row.lastName}`);
+        } else {
+            console.log(`Allow collapse for ${row.firstName} ${row.lastName}`);
+        }
+    }
+
+    showNotification(row: ExamplePerson, permanent: boolean) {
+        if (permanent) {
+            row.notification = {
+                type: NotificationType.Permanent,
+                message: 'En permanent notifiering',
+                icon: { name: 'comment-dots' }
+            } as RowNotification;
+
+        } else {
+            row.notification = {
+                type: NotificationType.ShowOnCollapse,
+                message: 'En temporär notifiering',
+                icon: { name: 'comment-dots' }
+            } as RowNotification;
+        }
+    }
+
+    showNotificationOnFirstRow() {
+        this.showNotification(this.peopleRowsSimpleList[0], false);
+    }
+
+    onExpandedChanged(row: ExamplePerson, expanded: boolean) {
+        row.expanded = expanded;
+
+        if (expanded) {
+            console.log(`Expanded  - ${row.firstName} ${row.lastName}`);
+        } else {
+            console.log(`Collapsed - ${row.firstName} ${row.lastName}`);
+        }
+    }
+
+    onExpandPrevented(row: ExamplePerson) {
+        console.log(`Prevented expand   - ${row.firstName} ${row.lastName}`);
+    }
+
+    onCollapsePrevented(row: ExamplePerson) {
+        console.log(`Prevented collapse - ${row.firstName} ${row.lastName}`);
+    }
+
+    setTwoExpanded() {
+        this.peopleRowsSimpleList[0].expanded = true;
+        this.peopleRowsSimpleList[1].expanded = true;
     }
 
 }
@@ -61,5 +115,8 @@ export interface ExamplePerson {
     lastName: string;
     occupation: string;
     income: number;
+    expanded: boolean;
+    preventCollapse: boolean;
+    notification: RowNotification;
 }
 

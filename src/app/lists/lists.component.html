@@ -28,14 +28,12 @@
             </div>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>Exempel</h4>
             </vgr-list-column>
           </vgr-list-item-header>
-
-
           <vgr-list-item-content>
             <section [innerHTML]="htmlBasicListStructureMarkup" highlight-js-content=".highlight"></section>
             <br> Under "kodexempel" finns flera exempel på listor:
@@ -44,11 +42,10 @@
             <br>
             <a href="/listexample-notifications">Lista med notifieringar</a>
             <br>
-
             <a href="/listexample-actionbuttons">Lista med checkbox och papperskorg</a>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list</h4>
@@ -75,12 +72,13 @@
                 <td>notification : Notification</td>
                 <td>Sätter man om man vill visa en notifiering, t.ex. när listan ej kan laddas, default visas inget
                   meddelande.</td>
-                <td>[notification]="{{'{'}} message: 'Här är texten i notifikationen', icon: 'vgr-icon-message'{{'}'}}"</td>
+                <td>[notification]="{{'{'}} message: 'Här är texten i notifikationen', icon: 'vgr-icon-message'{{'}'}}"
+                </td>
               </tr>
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list-item</h4>
@@ -98,7 +96,6 @@
                 <td>Anger om raden skall vara expanderad eller inte.</td>
                 <td>[expanded]="false"</td>
               </tr>
-
               <tr>
                 <td>notification : RowNotification</td>
                 <td>Ger möjligheten att lägga en notifiering på raden. En
@@ -143,7 +140,7 @@
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list-item-header</h4>
@@ -162,7 +159,7 @@
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list-item-content</h4>
@@ -181,7 +178,7 @@
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list-column-header</h4>
@@ -239,11 +236,10 @@
                 <td>Event som triggas när sortering sker i kolumnen</td>
                 <td>(sortChanged)="onSortChanged($event)"</td>
               </tr>
-
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list-column-header-checkbox</h4>
@@ -275,7 +271,7 @@
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list-header</h4>
@@ -289,17 +285,15 @@
                 <th style="width:600px">Beskrivning</th>
                 <th>Exempel</th>
               </tr>
-
               <tr>
                 <td>sortChanged : EventEmitter&lt;SortChangedArgs&gt;</td>
                 <td>Event som triggas när sortering sker i någon av headerns kolumner</td>
                 <td>(sortChanged)="onSortChanged($event)"</td>
               </tr>
-
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list-column</h4>
@@ -336,7 +330,7 @@
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list-column-trashcan</h4>
@@ -350,7 +344,6 @@
                 <th style="width:600px">Beskrivning</th>
                 <th>Exempel</th>
               </tr>
-
               <tr>
                 <td>disabled : boolean</td>
                 <td>Inaktiverar papperskorgen, den blir utgråad.</td>
@@ -364,7 +357,7 @@
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>API - vgr-list-column-checkbox</h4>
@@ -396,7 +389,7 @@
             </table>
           </vgr-list-item-content>
         </vgr-list-item>
-        <vgr-list-item [expanded]="false">
+        <vgr-list-item>
           <vgr-list-item-header>
             <vgr-list-column width="20">
               <h4>Tillgänglighet</h4>

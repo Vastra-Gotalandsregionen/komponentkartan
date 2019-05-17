@@ -4,14 +4,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 4.0.1 (beta)
+## 5.0.0 (beta)
+- *Breaking change* Dropdown select now has a value input. As a result, the default input on dropdown items has been removed. If using dropdown select without a form control, set default values via the value input instead.
+- *Breaking change* Monthpicker has been removed. Use datepicker with min zoom set to months instead.
+- *Breaking change* Header Menu has been changed into a declarative component.
+- Datepicker now allows text input and zooming between days, months and years views.
+- Added event for expanded status to dropdown select.
+- Fixed a bug where vgr-lists shared the same list-service but now resolves the service individually.
+- Added method in modalService to update available tab stops in modal.
+- Fixed color when editing validation field.
+
+## 4.2.0 (Stable, 2019-05-02)
+- Changed colors on validation
+- Changed icons to use vgr-icons (continue). 
+
+## 4.1.0 (2019-04-30)
 - Fixed a bug in List when multipleExpandedItems are not allowed and closing list-items did not emit any event.
 - Fixed text for button select/deselect all in Dropdown multiselect when not bound to a form control.
 - Modal background now correctly covers menus and headers.
 - Input component: a bound form control is not changed on a DOM blur event.
 - Fixing a bug in header menu where clicks get captured.
+- Changed icons to use vgr-icons.
+- Possible to prevent collapse of list-items in list.
+- Suffix on input field will not cover text
 
-## 4.0.0 (Stable, 2019-02-08)
+## 4.0.0 (2019-02-08)
 - *Breaking change* Angular is upgraded to version 7.
 - *Breaking change* Dropdown and dropdown multiselect have been replaced by a declarative component called dropdown select.
 - *Breaking change* Added new discreet style to vgr-button. Input secondary is removed and replaced by buttonStyle. 

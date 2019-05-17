@@ -8,7 +8,6 @@ export class DropdownItemComponent implements AfterViewInit {
 
   @Input() selectedLabel: string;
   @Input() value: any;
-  @Input() default = false;
   @Output() toggle = new EventEmitter();
   @Output() confirm = new EventEmitter();
   @Output() previous = new EventEmitter();

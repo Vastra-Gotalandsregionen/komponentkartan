@@ -1,52 +1,133 @@
-<div class="validation">
-  <div [ngClass]="{'datepicker--open' : expanded}" tabindex="0" class="datepicker" (mousedown)="toggleCalendar($event)" (focusin)="onEnter()"
-    (focusout)="onLeave()" (keydown)="onKeyDown($event)" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly" role="form"
-    [attr.aria-expanded]="expanded" [attr.aria-labelledby]="labelledbyid">
-    <div class="datepicker__dropdown">
-      <span *ngIf="selectedDate" class="datepicker__calendar__selector" title="{{selectedDate | date: tooltipDateFormat}}" id="{{labelledbyid}}">{{selectedDate | date: selectedDateFormat}}</span>
-      <span *ngIf="!selectedDate" class="datepicker__calendar__selector" title="{{ readonly ? '' : noDateSelectedLabel }}" id="{{labelledbyid}}">{{ readonly ? '' : noDateSelectedLabel }}</span>
-
-      <!-- *ngIf="expanded" -->
-      <div class="datepicker__calendar" (mousedown)="onCalendarMousedown($event)">
-        <div class="datepicker__calendar__header">
-          <div class="datepicker__calendar__header__previous-year" (mousedown)="onPreviousMonth($event)" [ngClass]="{'disabled': !previousMonth}"
-            [attr.aria-disabled]="!previousMonth" role="button"></div>
-
-          <div class="datepicker__calendar__header__year">{{currentYearMonthOutput | date: 'MMMM y' }}</div>
-
-          <div class="datepicker__calendar__header__next-year" (mousedown)="onNextMonth($event)" [ngClass]="{'disabled' : !nextMonth}"
-            role="button" [attr.aria-disabled]="!nextMonth"></div>
+<div class="datepicker"
+  [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
+  <div class="validation">
+    <div #datepicker class="datepicker__control"
+      [ngClass]="{ 'datepicker--disabled': disabled, 'datepicker--readonly': readonly }"
+      (keydown)="onKeydown($event)" (focusout)="onBlur($event)">
+      <div *ngIf="!readonly" class="datepicker__header"
+        [ngClass]="{'datepicker__header--focus': headerHasFocus}" (focusin)="onHeaderFocus()"
+        (focusout)="onHeaderBlur()" (keydown)="onHeaderKeydown($event)" (click)="onHeaderClick()">
+        <div #headerLabel *ngIf="!allowText" class="datepicker__header__label" tabindex="0" role="button"
+          aria-haspopup="grid" [attr.aria-labelledby]="labelId + ' ' + headerLabelId" [attr.aria-expanded]="expanded">
+          <span *ngIf="selectedDate" id="{{headerLabelId}}">{{selectedDate | date:labelDateFormat}}</span>
+          <span *ngIf="!selectedDate" id="{{headerLabelId}}" class="noselect">{{ noSelectedDateLabel }}</span>
         </div>
-        <div class="datepicker__calendar__content">
-          <table>
-            <tr>
-              <td>Må</td>
-              <td>Ti</td>
-              <td>On</td>
-              <td>To</td>
-              <td>Fr</td>
-              <td>Lö</td>
-              <td>Sö</td>
-            </tr>
-            <tr *ngFor="let week of yearMonths[currentYearMonthIndex].weeks; let weekIndex = index">
-              <td *ngFor="let day of yearMonths[currentYearMonthIndex].weeks[weekIndex].days; let dayIndex = index" (mousedown)="onSelectedDate($event, currentYearMonthIndex, weekIndex,dayIndex)">
-                <div *ngIf="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex]" class="datepicker__calendar__day" tabindex="0"
-                  (keydown)="onDateKeyDown($event, currentYearMonthIndex, weekIndex,dayIndex)" [attr.aria-selected]="checkSelectedDate(weekIndex, dayIndex)"
-                  role="gridcell" [attr.aria-label]="yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d MMMM y, (EEEE)'"
-                  [attr.aria-disabled]="checkDisabledDate(weekIndex, dayIndex)" [ngClass]="{
-                'disabled': checkDisabledDate(weekIndex, dayIndex),
-                'datepicker__calendar__day--today' : checkTodayDate(weekIndex, dayIndex),
-                'datepicker__calendar__day--selected' : checkSelectedDate(weekIndex, dayIndex)}">{{yearMonths[currentYearMonthIndex].weeks[weekIndex].days[dayIndex].day | date:'d'}}</div>
-              </td>
-            </tr>
-          </table>
+        <div *ngIf="allowText">
+          <input #headerInput *ngIf="!disabled" class="datepicker__header__input" [placeholder]="inputPlaceholder"
+            aria-haspopup="grid" [attr.aria-labelledby]="labelId" [attr.aria-expanded]="expanded" [value]="label"
+            (change)="parseSelectedDate($event.target.value)">
+          <div *ngIf="disabled" id="{{headerLabelId}}" role="textbox" class="datepicker__header__label" tabindex="0"
+            [attr.aria-labelledby]="labelId + ' ' + headerLabelId" [attr.aria-disabled]="true">
+            <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
+            <span *ngIf="!selectedDate" class="noselect">&nbsp;</span>
+          </div>
+        </div>
+        <div class="datepicker__header__button">
+          <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'"></vgr-icon>
+        </div>
+      </div>
+      <div *ngIf="readonly" class="datepicker__readonly-header" tabindex="0" aria-readonly="true">
+        <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
+        <span *ngIf="!selectedDate">&nbsp;</span>
+      </div>
+      <div #calendar *ngIf="expanded" class="datepicker__calendar noselect" tabindex="0"
+        (keydown)="onCalendarKeydown($event)">
+        <div *ngIf="zoomedToDays">
+          <div class="datepicker__calendar__header">
+            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-left" (click)="days.previous()">
+              <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+            </div>
+            <div class="datepicker__calendar__header__date" (click)="days.zoomOut()">
+              {{days.date | date:'MMMM yyyy'}}</div>
+            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-right" (click)="days.next()">
+              <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+            </div>
+          </div>
+          <div class="datepicker__calendar__body">
+            <table class="datepicker__calendar__body__days" role="grid" [attr.aria-labelledby]="labelId">
+              <tr>
+                <td role="columnheader">
+                  <div>Må</div>
+                </td>
+                <td role="columnheader">
+                  <div>Ti</div>
+                </td>
+                <td role="columnheader">
+                  <div>On</div>
+                </td>
+                <td role="columnheader">
+                  <div>To</div>
+                </td>
+                <td role="columnheader">
+                  <div>Fr</div>
+                </td>
+                <td role="columnheader">
+                  <div>Lö</div>
+                </td>
+                <td role="columnheader">
+                  <div>Sö</div>
+                </td>
+              </tr>
+              <tr *ngFor="let row of days.items">
+                <td *ngFor="let item of row">
+                  <vgr-datepicker-item *ngIf="item" [type]="'day'" [date]="item.date" [selected]="item.selected"
+                    [disabled]="item.disabled" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="zoomedToMonths">
+          <div class="datepicker__calendar__header">
+            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-left" (click)="months.previous()">
+              <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+            </div>
+            <div class="datepicker__calendar__header__date" (click)="months.zoomOut()">{{months.date | date:'yyyy'}}
+            </div>
+            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-right" (click)="months.next()">
+              <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+            </div>
+          </div>
+          <div class="datepicker__calendar__body">
+            <table class="datepicker__calendar__body__months" role="grid" [attr.aria-labelledby]="labelId">
+              <tr *ngFor="let row of months.items">
+                <td *ngFor="let item of row">
+                  <vgr-datepicker-item [type]="'month'" [date]="item.date" [selected]="item.selected"
+                    [disabled]="item.disabled" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="zoomedToYears">
+          <div class="datepicker__calendar__header">
+            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-left" (click)="years.previous()">
+              <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+            </div>
+            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-right" (click)="years.next()">
+              <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+            </div>
+          </div>
+          <div class="datepicker__calendar__body">
+            <table class="datepicker__calendar__body__years" role="grid" [attr.aria-labelledby]="labelId">
+              <tr *ngFor="let row of years.items">
+                <td *ngFor="let item of row">
+                  <vgr-datepicker-item [type]="'year'" [date]="item.date" [selected]="item.selected"
+                    [disabled]="item.disabled" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+    <div *ngIf="parseError" class="validation__status" title="{{parseErrorMessage}}">
+      <vgr-icon icon="exclamation-circle" size="sm" class="input-validation_status__icon"></vgr-icon>
+      <div class="validation__status__message">{{parseErrorMessage}}</div>
+    </div>
+    <div *ngIf="!parseError" class="validation__status" title="{{errorMessage | errorMessage : formControl?.errors}}">
+      <vgr-icon icon="exclamation-circle" size="sm" class="input-validation_status__icon"></vgr-icon>
+      <div class="validation__status__message">{{errorMessage | errorMessage : formControl?.errors}}</div>
+    </div>
   </div>
-  <div class="validation__status" title="{{validationErrorMessage}}">
-    <div class="validation__status__icon"></div>
-    <div class="validation__status__message">{{validationErrorMessage | truncate:50}}</div>
-  </div>
-
 </div>

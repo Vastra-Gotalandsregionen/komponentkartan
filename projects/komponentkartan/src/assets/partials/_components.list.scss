@@ -179,6 +179,21 @@ vgr-list.list--new-item-added {
 
 /* Expandable container = en rad i listan som kan expanderas*/
 
+.chevron-expanded {
+  @extend .bg-image-icon-chevron;
+  content: "";
+  transform: rotate(-180deg);
+  transition: transform 0.4s;
+  width: 15px !important;
+  background-size: 100% !important;
+  display: block;
+}
+
+.chevron-collapsed {
+  display: block;
+  transform: rotate(0deg);
+  transition: transform 0.4s;
+}
 
 .list-item {
   visibility: visible;
@@ -195,7 +210,6 @@ vgr-list.list--new-item-added {
     margin-top: 14px;
     margin-bottom: 14px;
   }
-
 
   //Visa box-shadow på Hover, bara om kollapsad och i icke-kompakt läge
   &:not(.list-item--compact):hover {
@@ -216,7 +230,20 @@ vgr-list.list--new-item-added {
     border-left-color: $primary-color--success;
   }
 }
-
+.list-item__header_wrapper {
+  position: relative;
+  > vgr-icon .icon {
+    @extend .chevron-collapsed;
+    color: $text-color--default;
+    position: absolute;
+    top: 7px;
+    right: 12px;
+    transform: rotate(0deg);
+    .list-item--expanded & {
+      transform: rotate(-180deg);
+    }
+  }
+}
 .list-item__header {
   opacity: 1;
   cursor: pointer;
@@ -373,13 +400,12 @@ vgr-list.list--new-item-added {
 .list__column-header--sorted-asc {
   h2 {
     &:after {
-      @extend .bg-image-icon-sortarrow;
       content: "";
       display: inline-block;
       background-size: 100% !important;
       vertical-align: middle;
       margin-left: 2px;
-      transform: rotate(180deg);
+      transform: rotate(-180deg);
       position: absolute;
       top: 18px;
 

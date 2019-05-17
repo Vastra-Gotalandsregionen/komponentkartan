@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Examples } from '../examples';
 import { HtmlEncodeService } from '../../../html-encode.service';
-import { RowNotification } from 'dist/komponentkartan/lib';
-import { Notification } from 'dist/komponentkartan/lib';
+import { RowNotification, Notification } from 'vgr-komponentkartan';
 
 @Component({
   selector: 'app-listexample',

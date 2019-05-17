@@ -6,6 +6,8 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'vgr-test',
@@ -31,12 +33,13 @@ describe('[MenuComponent]', () => {
 
     beforeEach((done) => {
         TestBed.configureTestingModule({
-            declarations: [TestMenuComponent, MenuComponent, MenuItemComponent, SubmenuComponent],
+            declarations: [TestMenuComponent, MenuComponent, MenuItemComponent, SubmenuComponent, IconComponent],
             imports: [CommonModule,
                 BrowserAnimationsModule,
                 BrowserDynamicTestingModule,
                 NoopAnimationsModule,
-                RouterTestingModule.withRoutes([])
+                RouterTestingModule.withRoutes([]),
+                FontAwesomeModule
             ],
 
 
@@ -150,7 +153,7 @@ describe('[MenuComponent]', () => {
                     submenuMenuItem = submenuItem.querySelector('.menu__item');
                 });
                 it('aria-haspopup true ', () => {
-                    expect(submenuItem.getAttribute('aria-haspopup')).toBe('true');
+                    expect(submenuItem.getAttribute('aria-haspopup')).toBe('menu');
                 });
                 it('tabIndex = 0', () => {
                     expect(submenuMenuItem.tabIndex).toBe(0);

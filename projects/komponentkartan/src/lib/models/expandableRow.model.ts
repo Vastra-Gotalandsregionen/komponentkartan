@@ -4,7 +4,7 @@ import { NotificationType } from './notificationType.model';
 export class ExpandableRow<TPreview, TFull> {
     previewObject: TPreview;
     fullObject: TFull;
-    private notification: RowNotification; // the permanentNofication
+    notification: RowNotification; // the permanentNofication
 
     constructor(previewObject: TPreview) {
         this.previewObject = previewObject;

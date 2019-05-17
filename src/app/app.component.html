@@ -30,7 +30,6 @@
         <vgr-menu-item link="/lockbutton" text="Lock button"></vgr-menu-item>
         <vgr-menu-item link="/menu" text="Menu"></vgr-menu-item>
         <vgr-menu-item link="/modaldialog" text="Modal dialog"></vgr-menu-item>
-        <vgr-menu-item link="/monthpicker" text="Monthpicker"></vgr-menu-item>
         <vgr-menu-item link="/page-block" text="Page block"></vgr-menu-item>
         <vgr-menu-item link="/page-header" text="Page header"></vgr-menu-item>
         <vgr-menu-item link="/panels" text="Panel/Dashboard"></vgr-menu-item>
@@ -60,6 +59,12 @@
       </vgr-submenu>
     </vgr-menu>
   </vgr-sidebar-menu>
-  <vgr-header [userName]="userName" [systemText]="systemText" textColor="black" circleColor="#f9dede"></vgr-header>
+  <vgr-header [systemText]="systemText">
+      <vgr-header-menu
+        [userName]="userName"
+        textColor="black" 
+        circleColor="#f9dede">
+      </vgr-header-menu>
+  </vgr-header>
   <router-outlet></router-outlet>
 </div>

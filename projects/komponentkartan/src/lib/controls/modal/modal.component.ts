@@ -45,6 +45,13 @@ export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
                 this.elementId = elementId;
                 this.closeModal();
             });
+
+        this.modalService.modalUpdate$
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(elementId => {
+                this.elementId = elementId;
+                this.initFocusableElements();
+            });
     }
 
     ngOnDestroy() {
@@ -63,6 +70,9 @@ export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
         // Had to put this in a SetTimeout since the QuerySelector returned old objects from the last opened dialog otherwise
         setTimeout(() => {
             const focusableNodes: NodeList = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
+            if (focusableNodes.length === 0) {
+                return false;
+            }
             this.focusableElements = Array.from(focusableNodes);
 
             this.firstTabStop = this.focusableElements[0];

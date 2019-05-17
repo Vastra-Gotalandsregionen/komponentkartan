@@ -1,5 +1,5 @@
 <div class="expandable-div-header" (click)="expanded = !expanded" tabindex="0" [attr.aria-expanded]="_expanded" role="button">
-    <vgr-icon [icon]="'chevron-down'" [size]="'sm'"></vgr-icon>
+    <vgr-icon icon="chevron-down" size="sm" [className]="chevron_class"></vgr-icon>
     <ng-content select="vgr-expandable-div-header"></ng-content>
   </div>
   <div class="expandable-div-content" [@slideExpandableContent]="stateName" (@slideExpandableContent.done)="animationDone($event)"

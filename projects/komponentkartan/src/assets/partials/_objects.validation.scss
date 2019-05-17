@@ -41,6 +41,7 @@
 
 .validation__status {
   display: none;
+  align-items: center;
   .validation-error--active & {
     margin-top: 4px;
     display: flex;
@@ -53,29 +54,30 @@
     display: none;
   }
 }
-
-.validation__status__icon {
+.validation__status__icon,
+.validation_status__icon {
   display: none;
-  margin-top: 2px;
-  height: 30px;
-  width: 30px;
-  .validation-error--active & {
-    @extend .bg-image-icon-exclamation--red;
-    display: inline-block;
+  vertical-align: middle;
+  .icon {
+    .validation-error--active & {
+      color: $primary-color--error;
+    }
+    .validation-error--editing & {
+      color: $text-color--default;
+    }
   }
+  .validation-error--active &, 
   .validation-error--editing & {
     display: inline-block;
-    @extend .bg-image-icon-exclamation;
   }
 }
 
 .validation__status__message {
   display: none;
   margin-left: 4px;
-  margin-top: 5px;
   vertical-align: middle;
   .validation-error--active & {
-    color: $primary-color--error;
+    color: $text-color--default;
     display: inline-block;
   }
   .validation-error--editing & {

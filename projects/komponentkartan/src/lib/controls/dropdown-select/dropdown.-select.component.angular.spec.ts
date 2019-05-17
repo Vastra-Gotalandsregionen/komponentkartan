@@ -7,6 +7,8 @@ import { DropdownSelectComponent } from './dropdown-select.component';
 import { DropdownItemComponent } from './dropdown-item.component';
 import { ButtonComponent } from '../button/button.component';
 import { TruncatePipe } from '../../pipes/truncatePipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'perfect-scrollbar',
@@ -46,14 +48,15 @@ describe('[DropdownSelectComponent - Angular]', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, FontAwesomeModule],
       declarations: [
         TestComponent,
         DropdownSelectComponent,
         DropdownItemComponent,
         ButtonComponent,
         MockPerfectScrollbarComponent,
-        TruncatePipe
+        TruncatePipe,
+        IconComponent
       ]
     });
     fixture = TestBed.createComponent(TestComponent);
@@ -78,6 +81,11 @@ describe('[DropdownSelectComponent - Angular]', () => {
         fixture.detectChanges();
         menuElement = rootElement.query(By.css('.dropdown-select__menu'));
         expect(menuElement).toBeTruthy();
+      });
+      it('event is emitted', () => {
+        const spy = spyOn(component.expandedChanged, 'emit');
+        headerElement.triggerEventHandler('click', {});
+        expect(spy).toHaveBeenCalledWith(true);
       });
       describe('and component is disabled', () => {
         beforeEach(() => {
@@ -111,6 +119,11 @@ describe('[DropdownSelectComponent - Angular]', () => {
         fixture.detectChanges();
         menuElement = rootElement.query(By.css('.dropdown-select__menu'));
         expect(menuElement).toBeFalsy();
+      });
+      it('event is emitted', () => {
+        const spy = spyOn(component.expandedChanged, 'emit');
+        headerElement.triggerEventHandler('click', {});
+        expect(spy).toHaveBeenCalledWith(false);
       });
     });
   });

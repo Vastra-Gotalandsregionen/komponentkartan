@@ -77,7 +77,7 @@ export class ListExampleWithActionButtonsComponent {
     }
 
     removeSelectedRow() {
-        this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
+        this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', { icon: 'circle-checkmark'});
         this.rowToRemove.previewObject.selected = false;
         this.rowToRemove.previewObject.deleted = true;
         /*

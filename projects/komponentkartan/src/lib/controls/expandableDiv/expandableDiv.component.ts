@@ -56,7 +56,7 @@ export class ExpandableDivComponent {
     }
 
     get chevron_class() {
-        return 'expandable-div-chevron '.concat(this.expanded ? 'expanded' : 'collapsed');
+        return this.expanded ? 'expanded' : 'collapsed';
     }
 
     get stateName() {
