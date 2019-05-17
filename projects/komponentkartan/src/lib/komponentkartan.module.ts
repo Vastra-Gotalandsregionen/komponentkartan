@@ -53,8 +53,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ModalContentComponent,
     type.ModalHeaderComponent,
     type.ModalFooterComponent,
-    type.MonthpickerComponent,
-    type.DatepickerComponent,
     type.InputComponent,
     type.CardComponent,
     type.CardHeaderComponent,
@@ -103,7 +101,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.DropdownItemComponent,
     type.PaginationComponent,
     type.DropdownSelectComponent,
-    type.IconComponent
+    type.IconComponent,
+    type.DatepickerComponent,
+    type.DatepickerItemComponent
   ],
   exports: [
     type.SafePipe,
@@ -125,8 +125,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ModalContentComponent,
     type.ModalHeaderComponent,
     type.ModalFooterComponent,
-    type.MonthpickerComponent,
-    type.DatepickerComponent,
     type.InputComponent,
     type.CardComponent,
     type.CardHeaderComponent,
@@ -175,7 +173,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.DropdownItemComponent,
     type.PaginationComponent,
     type.DropdownSelectComponent,
-    type.IconComponent
+    type.IconComponent,
+    type.DatepickerComponent,
+    type.DatepickerItemComponent
   ],
   providers: [
     type.ModalService,

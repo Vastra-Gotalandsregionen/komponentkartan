@@ -12,8 +12,6 @@ export { LockButtonComponent } from './controls/lock-button/lock-button.componen
 export { SaveCancelComponent } from './controls/save-cancel/save-cancel.component';
 export { RadioGroupComponent } from './controls/radioGroup/radioGroup.component';
 export { ModalPlaceholderComponent } from './controls/modal/modal.component';
-export { MonthpickerComponent } from './controls/monthpicker/monthpicker.component';
-export { DatepickerComponent } from './controls/datepicker/datepicker.component';
 export { InputComponent } from './controls/input/input.component';
 export { CardSectionComponent } from './controls/card/cardSection.component';
 export { TitleValueComponent } from './controls/titleValue/titleValue.component';
@@ -69,6 +67,8 @@ export { PaginationComponent } from './controls/pagination/pagination.component'
 export { DropdownSelectComponent } from './controls/dropdown-select/dropdown-select.component';
 export { DropdownItemComponent } from './controls/dropdown-select/dropdown-item.component';
 export { IconComponent } from './controls/icon/icon.component';
+export { DatepickerComponent } from './controls/datepicker/datepicker.component';
+export { DatepickerItemComponent } from './controls/datepicker/datepicker-item.component';
 
 export { ICalendarDay } from './models/calendarDay.model';
 export { ICalendarMonth } from './models/calendarMonth.model';

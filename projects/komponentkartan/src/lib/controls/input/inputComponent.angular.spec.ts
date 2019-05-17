@@ -8,27 +8,27 @@ import {
 } from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { InputComponent } from '../../controls/input/input.component';
-
 import { ErrorHandler } from '../../services/errorhandler';
 import { TruncatePipe } from '../../pipes/truncatePipe';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
+import { IconComponent } from '../icon/icon.component';
 
 // Locale registration
 import { registerLocaleData } from '@angular/common';
-import localeSe from '@angular/common/locales/se';
-import localeSerExtra from '@angular/common/locales/extra/se';
-import { IconComponent } from '../icon/icon.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-registerLocaleData(localeSe, 'sv-SE', localeSerExtra);
-
+import localeSv from '@angular/common/locales/sv';
 
 describe('[InputComponent]', () => {
   let component: InputComponent;
   let fixture: ComponentFixture<InputComponent>;
   let rootElement: DebugElement;
   let validatedInputElement: DebugElement;
+
+  beforeAll(() => {
+    registerLocaleData(localeSv);
+  });
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();

@@ -17,14 +17,14 @@ Det som kommer att ingå i de olika versionerna är ännu inte beslutat, men ned
 
 ### Version 5
 **OBS detta är en uppskattning**
-* Ny sammanslagen datum- och månadsväljare, som det går att skriva in datum i för att välja. :white_check_mark:
-* Byte av ikoner till FontAwesome :white_check_mark:
-
-* Deklarativ header menu
-* Deklarativ radio group
-* Angular 8.0
-* Förbättringar i felmeddelande, eventuellt en egen komponent för felmeddelanden
-* Rättning av buggar
+* Ny sammanslagen datum- och månadsväljare, som det går att skriva in datum i för att välja. *Breaking changes* :white_check_mark:
+* Byte av ikoner till FontAwesome *Breaking changes* :white_check_mark:
+* Deklarativ header menu *Breaking changes* :white_check_mark:
+* Möjlighet att förvälja items i dropdown select utan form control *Breaking changes* :white_check_mark:
+* WCAG-anpassning av header menu och menu :white_check_mark:
+* Möjlighet att förhindra att kort stängs :white_check_mark:
+* Korrigering av inputfält och suffix :white_check_mark:
+* Rättning av buggar :white_check_mark:
 
 ## Komma igång
 
