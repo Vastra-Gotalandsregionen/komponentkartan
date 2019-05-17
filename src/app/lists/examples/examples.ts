@@ -223,9 +223,10 @@ export class Examples {
 
       this.peopleRows = this.examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
-      this.peopleRows[0].setNotification('Meddelande: Text', 'vgr-icon-message');
-      this.peopleRows[4].setNotification('Personen är inaktiv', 'vgr-icon-exclamation--red');
-    }
+      this.peopleRows[0].setNotification('Meddelande: Text', { name: 'check-circle', color: 'success' } as NotificationIconTypes);
+      this.peopleRows[2].setNotification('tillfällig', { name: 'comment-dots' } as NotificationIconTypes, true);
+      this.peopleRows[4].setNotification('Personen är inaktiv', { name: 'exclamation-circle', color: 'error', solid: true } as NotificationIconTypes);
+      }
 
     deleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
       // Remove visually.
@@ -474,7 +475,8 @@ export class Examples {
           message: 'Här är ett exempel på en list-notifikation. De kan användas om det t.ex. blir något fel när man hämtar datan från servicen.',
           icon: {
             name: 'exclamation-circle',
-            color: 'error'
+            color: 'error',
+            solid: true
           }
         };
 

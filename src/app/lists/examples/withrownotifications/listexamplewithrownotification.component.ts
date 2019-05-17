@@ -5,6 +5,7 @@ import {
 } from '../../../../../projects/komponentkartan/src/lib/index';
 import { Examples } from '../examples';
 import { HtmlEncodeService } from '../../../html-encode.service';
+import { NotificationIconTypes } from 'dist/komponentkartan/lib/models/notificationIconTypes';
 
 @Component({
   selector: 'app-listexample',
@@ -30,7 +31,7 @@ export class ListexamplewithrownotificationComponent {
       htmlEncoder.prepareHighlightedSection(this.examples.htmlAdvancedListMarkup);
 
     this.panelNotification = {
-      message: 'Panelinformation', icon: {name: 'exclamation-circle'},
+      message: 'Panelinformation', icon: { name: 'exclamation-circle' },
       type: NotificationType.Permanent
     } as RowNotification;
 
@@ -44,9 +45,9 @@ export class ListexamplewithrownotificationComponent {
 
     this.peopleRows = this.examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
-    this.peopleRows[0].setNotification('Meddelande: Text', {name: 'check-circle'});
-    this.peopleRows[2].setNotification('tillfällig', {name: 'comment-dots'}, true);
-    this.peopleRows[4].setNotification('Personen är inaktiv', {name: 'comment-dots'});
+    this.peopleRows[0].setNotification('Meddelande: Text', { name: 'check-circle', color: 'success' } as NotificationIconTypes );
+    this.peopleRows[2].setNotification('tillfällig', { name: 'comment-dots' } as NotificationIconTypes, true);
+    this.peopleRows[4].setNotification('Personen är inaktiv', { name: 'exclamation-circle', color: 'error', solid: true } as NotificationIconTypes);
   }
 
   deleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
