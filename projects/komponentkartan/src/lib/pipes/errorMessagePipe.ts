@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ErrorMessagePipe implements PipeTransform {
   currentMessage: string;
 
-  transform(message: any, errors: any, hasFocus: boolean, small: boolean) {
+  transform(message: any, errors: any, hasFocus = false, small = false) {
     if (!message) {
       return null;
     }
