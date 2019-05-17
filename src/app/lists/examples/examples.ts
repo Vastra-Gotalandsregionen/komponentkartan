@@ -472,7 +472,10 @@ export class Examples {
 
         this.listNotification = {
           message: 'Här är ett exempel på en list-notifikation. De kan användas om det t.ex. blir något fel när man hämtar datan från servicen.',
-          icon: 'vgr-icon-exclamation--red'
+          icon: {
+            name: 'exclamation-circle',
+            color: 'error'
+          }
         };
 
       }

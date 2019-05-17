@@ -79,7 +79,7 @@ export class CardComponent implements OnInit {
   constructor(htmlEncoder: HtmlEncodeService) {
     this.notification = {
       message: 'Meddelande som visas här, visas även när kortet är öppet.',
-      icon: { name: 'exclamation-circle', solid: true },
+      icon: { name: 'exclamation-circle', solid: true, color: 'error' },
       type: NotificationType.Permanent,
     } as RowNotification;
 

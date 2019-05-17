@@ -220,6 +220,19 @@ vgr-list.list--new-item-added {
   &.list-item--notification-visible {
     border-left-color: $text-color--default;
     margin: 5px 0px;
+    .theme--blue & {
+      border-left-color: $primary-color--blue;
+    }
+    .theme--red & {
+      border-left-color: $primary-color--red;
+    }
+    .theme--green & {
+      border-left-color: $primary-color--green;
+    }
+    .theme--pinkie & {
+      border-left-color: $primary-color--pinkie;
+    }
+  
   }
 
   &.notification-error {

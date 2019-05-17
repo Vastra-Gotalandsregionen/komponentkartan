@@ -16,7 +16,14 @@ describe('[ExpandableRow]', () => {
             });
             it('notification is set to notify on collapse', () => {
                 expect(expandableRow.notification).toEqual(
-                    { type: NotificationType.ShowOnCollapse, icon: { name: 'check-circle' }, message: 'Collapsed' } as RowNotification);
+                    {
+                        icon: {
+                            name: 'check-circle'
+                        },
+                        message: 'Collapsed',
+                        type: 1,
+                        removeWhenDone: false
+                    } as RowNotification);
             });
         });
         describe('When showNotificationOnRemove is called', () => {
