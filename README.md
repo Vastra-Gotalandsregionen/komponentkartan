@@ -26,8 +26,6 @@ Det som kommer att ingå i de olika versionerna är ännu inte beslutat, men ned
 * Korrigering av inputfält och suffix :white_check_mark:
 * Rättning av buggar :white_check_mark:
 
-* Angular 8.0(Under utredning)
-
 ## Komma igång
 
 ### 0. Förutsättningar
