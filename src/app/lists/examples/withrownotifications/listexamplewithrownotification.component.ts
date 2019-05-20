@@ -5,7 +5,7 @@ import {
 } from '../../../../../projects/komponentkartan/src/lib/index';
 import { Examples } from '../examples';
 import { HtmlEncodeService } from '../../../html-encode.service';
-import { NotificationIconTypes } from 'dist/komponentkartan/lib/models/notificationIconTypes';
+import { NotificationIconTypes } from 'vgr-komponentkartan';
 
 @Component({
   selector: 'app-listexample',
