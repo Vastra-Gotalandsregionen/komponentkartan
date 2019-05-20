@@ -12,7 +12,7 @@ describe('[ExpandableRow]', () => {
         });
         describe('When showNotificationOnCollapse is called', () => {
             beforeEach(() => {
-                expandableRow.notifyOnCollapse('Collapsed', { name: 'check-circle' });
+                expandableRow.notifyOnCollapse('Collapsed', { name: 'check-circle', });
             });
             it('notification is set to notify on collapse', () => {
                 expect(expandableRow.notification).toEqual(

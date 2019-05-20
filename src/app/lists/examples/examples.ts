@@ -230,15 +230,15 @@ export class Examples {
 
     deleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
       // Remove visually.
-      row.notifyOnRemove(row.previewObject.firstName + ' togs bort och kommer inte längre att kunna logga in', 'vgr-icon-ok-check');
+      row.notifyOnRemove(row.previewObject.firstName + ' togs bort och kommer inte längre att kunna logga in', { name: 'check-circle', color: 'success' });
     }
 
     updateRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
-      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green');
+      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', { name: 'check-circle', color: 'success' });
     }
 
     updateRow2(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
-      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green', true);
+      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', { name: 'check-circle', color: 'success' }, true);
     }
 
     onSortChanged(event: SortChangedArgs) {
@@ -380,7 +380,7 @@ export class Examples {
         }
 
         removeSelectedRow() {
-            this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
+            this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', , { name: 'check-circle', color: 'success' });
             this.rowToRemove.previewObject.selected = false;
             this.rowToRemove.previewObject.deleted = true;
             /*
