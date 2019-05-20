@@ -1,5 +1,5 @@
 import { Input, Component, HostListener, ElementRef, Renderer, forwardRef, HostBinding, AfterViewInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
 
 @Component({
@@ -15,14 +15,12 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @Input() notification: string;
     @Input() notificationColor: string;
     @Input() notificationTooltip: string;
+    @Input() isInternalLink = true;
     @HostBinding('attr.role') role = 'menuitem';
     @HostBinding('attr.aria-disabled') ariaDisabled;
     @ViewChild('menuitem') menuitem: ElementRef;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
-        if (event.keyCode === 9) { // Tab
-            return;
-        }
 
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
             if (this.disabled) {
@@ -31,7 +29,8 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
                 event.preventDefault();
                 return;
             }
-            this.router.navigate([this.link]);
+            this.isInternalLink
+                ? this.router.navigate([this.link]) : this.externalLink();
         }
         if (event.keyCode === 36) { // Home
             this.home.emit();
@@ -47,6 +46,9 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
         }
         if (event.keyCode === 27) { // Escape
             this.escape.emit();
+        }
+        if (event.keyCode === 9) { // Tab
+            this.tab.emit();
         }
 
         event.cancelBubble = true;
@@ -73,5 +75,10 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
         setTimeout(() => {
             this.ariaDisabled = this.disabled;
         }, 25);
+    }
+    externalLink() {
+        if (this.link) {
+            return window.open(this.link, '_blank');
+        }
     }
 }

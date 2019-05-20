@@ -59,6 +59,12 @@
       </vgr-submenu>
     </vgr-menu>
   </vgr-sidebar-menu>
-  <vgr-header [userName]="userName" [systemText]="systemText" textColor="black" circleColor="#f9dede"></vgr-header>
+  <vgr-header [systemText]="systemText">
+      <vgr-header-menu
+        [userName]="userName"
+        textColor="black" 
+        circleColor="#f9dede">
+      </vgr-header-menu>
+  </vgr-header>
   <router-outlet></router-outlet>
 </div>

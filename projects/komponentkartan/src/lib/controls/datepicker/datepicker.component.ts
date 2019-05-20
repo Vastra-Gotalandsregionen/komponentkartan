@@ -69,7 +69,7 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, On
     return this.headerHasFocus && (this.parseError || (this.formControl && this.formControl.invalid));
   }
 
-  constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() private formControl: NgControl) {
+  constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() public formControl: NgControl) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }

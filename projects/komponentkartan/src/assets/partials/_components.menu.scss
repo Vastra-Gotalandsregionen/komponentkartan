@@ -42,7 +42,7 @@
   }
   &:hover {
     .menu__item {
-      &.menu__item--selected {
+      &.menu__item--active {
         @extend .border-left-color--secondary;
         &:hover {
           @extend .border-left-color--primary;
@@ -133,7 +133,7 @@
       letter-spacing: $menu-text-font-size--small-letter-spacing-bold;
     }
   }
-  &.menu__item--selected {
+  &.menu__item--active {
     @extend .border-left-color--primary;
     @extend .background-color--primary-dimmed;
     font-weight: bold;
@@ -194,6 +194,43 @@
   }
 }
 
+.header-menu {
+  .menu__item {
+    border-left-width: 0;
+    padding-left: 15px;
+    &.menu__item--active {
+      background: none;
+    }
+    &:hover:not(.menu__item_disabled) {
+      padding-left: 11px;
+      border-left-width: 4px;
+    }
+    > vgr-icon {
+      .icon {
+        color: $text-color--default;
+        position: absolute;
+        right: 16px;
+        top: 6px;
+        transform: rotate(0);
+        transition: all ease .3s;
+      }
+      &.expanded .icon {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+  .submenu-content {
+    overflow: hidden;
+    .menu__item {
+      padding-left: 25px;
+      &:hover:not(.menu__item_disabled) {
+        padding-left: 21px;
+        border-left-width: 4px;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: $desktop-width--medium) {
   .menu {
     .menu__header {
@@ -225,10 +262,6 @@
         a {
           letter-spacing: $menu-text-font-size--medium-letter-spacing-bold;
         }
-      }
-      .menu__item__expander {
-        // font-size: 11px;
-        // top: 7px;
       }
     }
     .submenu {
