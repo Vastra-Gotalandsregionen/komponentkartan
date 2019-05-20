@@ -180,7 +180,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   providers: [
     type.ModalService,
     type.BrowserDetector,
-    type.ErrorHandler,
     { provide: LOCALE_ID, useValue: 'sv-SE' },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

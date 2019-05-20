@@ -29,6 +29,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() readonly = false;
   @Input() disabled = false;
   @Input() showValidation = true;
+  @Input() errorMessage = {};
   @Input() compareWith = _defaultCompare;
   @Input() labelId: string;
   @Input() value: any;
@@ -47,7 +48,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   filterVisible = false;
   allSelected = false;
   deselectDisabled = true;
-  validationErrorMessage = 'Obligatorisk';
   headerLabelId = Guid.newGuid();
   label = this.noItemSelectedLabel;
   selectAllLabel = 'Markera alla';
