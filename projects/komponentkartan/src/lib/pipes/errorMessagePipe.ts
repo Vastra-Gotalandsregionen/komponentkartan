@@ -7,14 +7,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ErrorMessagePipe implements PipeTransform {
   currentMessage: string;
 
-  transform(message: any, errors: any, hasFocus: boolean, small: boolean) {
+  transform(message: any, errors: any, small = false) {
     if (!message) {
       return null;
     }
 
-    if (!hasFocus) {
-      this.currentMessage = this.setErrorMessage(errors, message, small);
-    }
+    this.currentMessage = this.setErrorMessage(errors, message, small);
 
     return this.currentMessage;
   }
@@ -29,7 +27,7 @@ export class ErrorMessagePipe implements PipeTransform {
         } else if (message) {
           return message[key];
         } else {
-          return 'Det här ska inte hända';
+          return 'Oväntat fel';
         }
       }
     } else {

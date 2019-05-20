@@ -34,10 +34,9 @@
         <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-bottom"></div>
       </div>
     </div>
-    <div *ngIf="formControl" class="validation__status" title="{{ errorMessage | errorMessage: false : formControl?.errors : small }}">
+    <div *ngIf="formControl" class="validation__status" title="{{ errorMessage | errorMessage: formControl?.errors : true  }}">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div *ngIf="!small" class="validation__status__message">{{errorMessage | errorMessage : formControl?.errors : false : small | truncate:64}}</div>
-      <div *ngIf="small" class="validation__status__message">{{errorMessage | errorMessage : formControl?.errors : false : small | truncate:24}}</div>
+      <div class="validation__status__message">{{ errorMessage | errorMessage : formControl?.errors : true | truncate:24 }}</div>
     </div>
   </div>
 </div>
