@@ -10,6 +10,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
+import { IconModule } from '../icon/icon.module';
 
 describe('[ExpandableDivComponent]', () => {
 
@@ -24,7 +25,7 @@ describe('[ExpandableDivComponent]', () => {
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
             declarations: [ExpandableDivComponent, IconComponent],
-            imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule]
+            imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule]
         });
 
         TestBed.overrideComponent(ExpandableDivComponent, {

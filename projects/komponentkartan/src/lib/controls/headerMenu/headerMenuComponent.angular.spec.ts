@@ -1,4 +1,4 @@
-import { HeaderMenuComponent, MenuItemComponent, SubmenuComponent, MenuSeparatorComponent, LoginInformationComponent, RingWithTextComponent, HeaderComponent } from '../../index';
+import { HeaderMenuComponent, MenuItemComponent, SubmenuComponent, MenuSeparatorComponent, LoginInformationComponent, RingWithTextComponent, HeaderComponent, IconComponent } from '../../index';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement, Component, SimpleChanges, SimpleChange } from '@angular/core';
@@ -6,8 +6,8 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 @Component({
   selector: 'vgr-test',
@@ -20,7 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     </vgr-header-menu>
   `
 })
-class TestHeaderMenuComponent { }
+class TestHeaderMenuComponent  { }
 
 describe('HeaderMenuComponent', () => {
   let fixture: ComponentFixture<TestHeaderMenuComponent>;
@@ -36,7 +36,6 @@ describe('HeaderMenuComponent', () => {
         HeaderMenuComponent,
         MenuItemComponent,
         SubmenuComponent,
-        IconComponent,
         MenuItemComponent,
         SubmenuComponent,
         IconComponent,
@@ -50,7 +49,8 @@ describe('HeaderMenuComponent', () => {
         BrowserDynamicTestingModule,
         NoopAnimationsModule,
         RouterTestingModule.withRoutes([]),
-        FontAwesomeModule
+        FontAwesomeModule,
+        IconModule
       ],
 
 

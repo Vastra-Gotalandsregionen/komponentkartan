@@ -8,6 +8,7 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 @Component({
     selector: 'vgr-test',
@@ -33,13 +34,21 @@ describe('[MenuComponent]', () => {
 
     beforeEach((done) => {
         TestBed.configureTestingModule({
-            declarations: [TestMenuComponent, MenuComponent, MenuItemComponent, SubmenuComponent, IconComponent],
-            imports: [CommonModule,
+            declarations: [
+                TestMenuComponent,
+                MenuComponent,
+                MenuItemComponent,
+                SubmenuComponent,
+                IconComponent
+            ],
+            imports: [
+                CommonModule,
                 BrowserAnimationsModule,
                 BrowserDynamicTestingModule,
                 NoopAnimationsModule,
                 RouterTestingModule.withRoutes([]),
-                FontAwesomeModule
+                FontAwesomeModule,
+                IconModule
             ],
 
 

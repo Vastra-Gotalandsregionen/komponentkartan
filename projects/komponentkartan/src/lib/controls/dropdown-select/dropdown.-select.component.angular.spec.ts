@@ -9,6 +9,7 @@ import { ButtonComponent } from '../button/button.component';
 import { TruncatePipe } from '../../pipes/truncatePipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
+import { IconModule } from '../icon/icon.module';
 
 @Component({
   selector: 'perfect-scrollbar',
@@ -48,7 +49,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FontAwesomeModule],
+      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule],
       declarations: [
         TestComponent,
         DropdownSelectComponent,

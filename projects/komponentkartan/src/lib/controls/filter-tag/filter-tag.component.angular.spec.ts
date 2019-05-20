@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { FilterTagComponent } from './filter-tag.component';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 describe('[FilterTagComponent - Angular]', () => {
   let component: FilterTagComponent;
@@ -18,7 +19,7 @@ describe('[FilterTagComponent - Angular]', () => {
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [FilterTagComponent, IconComponent],
-      imports: [FontAwesomeModule]
+      imports: [FontAwesomeModule, IconModule]
     });
 
     TestBed.overrideComponent(FilterTagComponent, {

@@ -1,14 +1,8 @@
 // Core
-import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DecimalPipe, CommonModule } from '@angular/common';
-
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
+import { CommonModule } from '@angular/common';
 
 // Common
 import * as type from './index';
@@ -20,6 +14,8 @@ registerLocaleData(localeSv);
 
 // Perfect Scrollbar
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { IconModule } from './controls/icon/icon.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -31,6 +27,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     CommonModule,
     ReactiveFormsModule,
+    IconModule,
     FontAwesomeModule
   ],
   declarations: [
@@ -189,8 +186,5 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ]
 })
 export class KomponentkartanModule {
-  constructor() {
-    // Add an icon to the library for convenient access in other components
-    library.add(fas, far);
-  }
+  constructor() { }
  }

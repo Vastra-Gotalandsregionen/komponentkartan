@@ -12,6 +12,7 @@ import { NotificationType } from '../../models/notificationType.model';
 import { ListService } from '../list/list.service';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 class ListServiceMock {
   requestExpandListItem(listItem: ListItemComponent) {
@@ -51,7 +52,7 @@ describe('[ListItemComponent - Angular]', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, FontAwesomeModule],
+      imports: [NoopAnimationsModule, FontAwesomeModule, IconModule],
       declarations: [
         ListItemComponent,
         TestListItemComponent,

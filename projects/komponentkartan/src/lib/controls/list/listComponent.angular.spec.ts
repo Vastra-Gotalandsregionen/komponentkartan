@@ -13,6 +13,7 @@ import { ListService } from './list.service';
 import { SortDirection } from './list-column-header.component';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 @Component({
   selector: 'vgr-test',
@@ -55,7 +56,7 @@ describe('[ListComponent - Angular]', () => {
         PaginationComponent,
         IconComponent
       ],
-      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule],
+      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule],
       providers: [
         { provide: ElementRef },
         { provide: Renderer },
@@ -248,7 +249,7 @@ describe('[ListComponent - Angular]', () => {
 
   describe('When notification is set', () => {
     beforeEach(() => {
-      component.notification = { message: 'Detta är en notifikation', icon: { name: 'exclamation-circle' } };
+      component.notification = { message: 'Detta är en notifikation', icon: { name: 'exclamation-circle', solid: true } };
       fixture.detectChanges();
     });
     it('notification is visible', () => {

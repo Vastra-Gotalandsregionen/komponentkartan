@@ -7,6 +7,7 @@ import { ActionPanelComponent } from './action-panel.component';
 import { CloseButtonComponent } from '../close-button/close-button.component';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 describe('[ActionPanelComponent - Angular]', () => {
   let component: ActionPanelComponent;
@@ -17,7 +18,8 @@ describe('[ActionPanelComponent - Angular]', () => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        IconModule
       ],
       declarations: [
         ActionPanelComponent,

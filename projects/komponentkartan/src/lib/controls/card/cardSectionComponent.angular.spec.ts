@@ -10,6 +10,7 @@ import { CardSectionComponent } from './cardSection.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 
 describe('[CardSectionComponent]', () => {
@@ -22,7 +23,7 @@ describe('[CardSectionComponent]', () => {
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [CardSectionComponent, TruncatePipe, IconComponent],
-      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule]
+      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule]
     });
 
     TestBed.overrideComponent(CardSectionComponent, {
