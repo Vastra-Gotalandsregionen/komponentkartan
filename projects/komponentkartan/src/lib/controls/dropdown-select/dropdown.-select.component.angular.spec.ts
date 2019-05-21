@@ -10,6 +10,7 @@ import { TruncatePipe } from '../../pipes/truncatePipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
 import { IconModule } from '../icon/icon.module';
+import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 
 @Component({
   selector: 'perfect-scrollbar',
@@ -57,7 +58,8 @@ describe('[DropdownSelectComponent - Angular]', () => {
         ButtonComponent,
         MockPerfectScrollbarComponent,
         TruncatePipe,
-        IconComponent
+        IconComponent,
+        ErrorMessagePipe
       ]
     });
     fixture = TestBed.createComponent(TestComponent);

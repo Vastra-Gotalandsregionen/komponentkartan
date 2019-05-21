@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { InputComponent } from '../../controls/input/input.component';
-import { ErrorHandler } from '../../services/errorhandler';
 import { TruncatePipe } from '../../pipes/truncatePipe';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { IconComponent } from '../icon/icon.component';
@@ -36,8 +35,7 @@ describe('[InputComponent]', () => {
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [InputComponent, TruncatePipe, ErrorMessagePipe, IconComponent],
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, IconModule],
-      providers: [ErrorHandler, ControlContainer]
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, IconModule]
     });
 
     TestBed.overrideComponent(InputComponent, {

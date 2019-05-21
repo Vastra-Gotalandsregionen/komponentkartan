@@ -90,7 +90,6 @@ export { TruncatePipe } from './pipes/truncatePipe';
 export { ErrorMessagePipe } from './pipes/errorMessagePipe';
 
 export { BrowserDetector } from './services/browserDetector';
-export { ErrorHandler } from './services/errorhandler';
 export { ModalService } from './services/modalService';
 
 export { Guid } from './utils/guid';
