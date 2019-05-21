@@ -223,7 +223,7 @@ export class Examples {
 
       this.peopleRows = this.examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
-      this.peopleRows[0].setNotification('Meddelande: Text', { name: 'check-circle', color: 'success' } as NotificationIconTypes);
+      this.peopleRows[0].setNotification('Meddelande: Text', { name: 'comment-dots' } as NotificationIconTypes);
       this.peopleRows[2].setNotification('tillfällig', { name: 'comment-dots' } as NotificationIconTypes, true);
       this.peopleRows[4].setNotification('Personen är inaktiv', { name: 'exclamation-circle', color: 'error', solid: true } as NotificationIconTypes);
       }

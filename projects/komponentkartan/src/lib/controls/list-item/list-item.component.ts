@@ -176,7 +176,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     const type = notification ? notification.type : null;
     if (!this.temporaryNotification) {
       this.temporaryNotificationVisible = false;
-      // this.handleNotificationColor();
+      this.handleNotificationColor();
       if (type && type === NotificationType.ShowOnCollapse) {
         this.notification = this.permanentNotification ? this.permanentNotification : null;
         this.notificationChanged.emit(this.notification);
@@ -184,19 +184,17 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
-  // handleNotificatonColor() {
-  //   const current = this.temporaryNotification ? this.temporaryNotification : this.permanentNotification;
-  //   if (current) {
-  //     // Hantera färg på vänsterkanten
-  //     if (current.icon.name === 'check-circle') 
-  //       this.notificationColor = 'success';
-  //     else if (current.icon.name === 'exclamation-circle')
-  //       this.notificationColor = 'error';
-  //   } 
-  //   else {
-  //     this.notificationColor = null;
-  //   }
-  // }
+  /** Hantering av färg på vänsterkanten. Sätts till success/error om valt, annars fallback */
+  handleNotificationColor() {
+    const current = this.temporaryNotification ? this.temporaryNotification : this.permanentNotification;
+    if (current && ('icon' in current)) {
+      if (current.icon.color === 'success') { this.notificationColor = 'notification-success';
+      } else if (current.icon.color === 'error') { this.notificationColor = 'notification-error';
+      } else { this.notificationColor = null; }
+    } else {
+      this.notificationColor = null;
+    }
+  }
 
 
   triggerDeletedEvent() {
@@ -218,7 +216,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
         this.setExpanded(false);
       }, this.showNotificationDurationMs);
     }
-    // this.handleNotificationColor();
+    this.handleNotificationColor();
   }
 
   ngOnDestroy() {
