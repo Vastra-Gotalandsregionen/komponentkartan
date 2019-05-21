@@ -29,13 +29,13 @@ import { takeUntil } from 'rxjs/operators';
 
 export class SubmenuComponent extends MenuItemBase implements AfterContentInit, OnInit, OnDestroy {
     @Input() text: string;
-    @Input() expanded = false;
     private _showExpanded: boolean;
     private ngUnsubscribe = new Subject();
     state: string;
 
-    @HostBinding('attr.aria-haspopup') hasAriaPopup = true;
+    @HostBinding('attr.aria-haspopup') hasAriaPopup = 'menu';
     @HostBinding('attr.role') role = 'menuitem';
+    @HostBinding('attr.aria-expanded') expanded = false;
 
     @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
     @HostBinding('class.submenu') hasClass = true;
@@ -45,7 +45,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
 
         if (event.keyCode === 9) { // Tab
-            return;
+            this.tab.emit();
         }
 
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
@@ -76,7 +76,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
             this.arrowUp.emit();
         }
         if (event.keyCode === 27) { // Escape
-            this.showExpanded = false;
+            this.escape.emit();
         }
 
         event.cancelBubble = true;
@@ -165,8 +165,12 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
             x.escape
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(() => {
-                    this.setFocus();
-                    this.showExpanded = false;
+                    this.escape.emit();
+                });
+            x.tab
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
+                    this.tab.emit();
                 });
         });
     }

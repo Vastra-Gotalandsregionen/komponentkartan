@@ -14,7 +14,6 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ErrorHandler } from '../../services/errorhandler';
 
 @Component({
   selector: 'vgr-input',
@@ -62,7 +61,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   currentErrorMessage: string;
   selectedErrorMessage: string;
 
-  constructor(private errorHandler: ErrorHandler, @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.blur = new EventEmitter<any>();
     this.focus = new EventEmitter<any>();
     this.nrOfDecimals = 2;

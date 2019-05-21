@@ -11,9 +11,6 @@ export { FilterTextboxComponent } from './controls/filterTextbox/filterTextbox.c
 export { LockButtonComponent } from './controls/lock-button/lock-button.component';
 export { SaveCancelComponent } from './controls/save-cancel/save-cancel.component';
 export { RadioGroupComponent } from './controls/radioGroup/radioGroup.component';
-export { HeaderComponent } from './controls/header/header.component';
-export { LoginInformationComponent } from './controls/loginInformation/loginInformation.component';
-export { HeaderMenuComponent } from './controls/headerMenu/headerMenu.component';
 export { ModalPlaceholderComponent } from './controls/modal/modal.component';
 export { InputComponent } from './controls/input/input.component';
 export { CardSectionComponent } from './controls/card/cardSection.component';
@@ -31,6 +28,12 @@ export { ListItemComponent } from './controls/list-item/list-item.component';
 export { MenuComponent } from './controls/menu/menu.component';
 export { MenuItemComponent } from './controls/menu/menu-item.component';
 export { MenuSeparatorComponent } from './controls/menu/menu-separator.component';
+
+export { HeaderComponent } from './controls/header/header.component';
+export { LoginInformationComponent } from './controls/loginInformation/loginInformation.component';
+export { HeaderMenuComponent } from './controls/headerMenu/headerMenu.component';
+
+
 export { SidebarMenuComponent } from './controls/menu/sidebar-menu.component';
 export { SubmenuComponent } from './controls/menu/submenu.component';
 export { PanelComponent } from './controls/panel/panel.component';
@@ -73,7 +76,6 @@ export { ICalendarWeek } from './models/calendarWeek.model';
 export { ICalendarYear } from './models/calendarYear.model';
 export { ICalendarYearMonth } from './models/calendarYearMonth.model';
 export { ExpandableRow } from './models/expandableRow.model';
-export { IHeaderMenu, IHeaderMenuGroup, IHeaderMenuItem } from './models/headerMenu.model';
 export { IMenu, IMenuGroup, IMenuItem } from './models/menu.model';
 export { NotificationIcon } from './models/notificationIcon.model';
 export { NotificationType } from './models/notificationType.model';
@@ -88,7 +90,6 @@ export { TruncatePipe } from './pipes/truncatePipe';
 export { ErrorMessagePipe } from './pipes/errorMessagePipe';
 
 export { BrowserDetector } from './services/browserDetector';
-export { ErrorHandler } from './services/errorhandler';
 export { ModalService } from './services/modalService';
 
 export { Guid } from './utils/guid';

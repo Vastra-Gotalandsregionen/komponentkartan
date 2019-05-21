@@ -12,10 +12,10 @@
       </div>
     </div>
 
-    <div *ngIf="control" class="input-validation_status" title="{{ errorMessage | errorMessage: control.errors : false : small }}">
+    <div *ngIf="control" class="input-validation_status" title="{{ errorMessage | errorMessage: control.errors : small }}">
       <vgr-icon icon="exclamation-circle" size="sm" class="input-validation_status__icon"></vgr-icon>
-      <div *ngIf="!small" class="input-validation_status__message">{{errorMessage | errorMessage: control.errors : false : small | truncate:64}}</div>
-      <div *ngIf="small" class="input-validation_status__message">{{errorMessage | errorMessage: control.errors : false : small | truncate:24}}</div>
+      <div *ngIf="!small" class="input-validation_status__message">{{errorMessage | errorMessage: control.errors : small | truncate:64}}</div>
+      <div *ngIf="small" class="input-validation_status__message">{{errorMessage | errorMessage: control.errors : small | truncate:24}}</div>
     </div>
 
   </div>

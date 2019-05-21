@@ -14,6 +14,7 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
     @HostBinding('class.menu') hasClass = true;
     @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
     @HostBinding('attr.role') role = 'menu';
+    @HostBinding('attr.aria-orientation') orientation = 'vertical';
 
     get smallerFont(): boolean {
         return this.title && this.title.length > 9;
@@ -50,13 +51,29 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
                 });
 
 
-            x.arrowDown.pipe(takeUntil(this.ngUnsubscribe))
+            x.arrowDown
+                .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(() => {
                     if (i === this.menuItems.length - 1) {
                         this.menuItems.first.setFocus();
                         return;
                     }
                     this.menuItems.toArray()[i + 1].setFocus();
+                });
+            x.tab
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
+                    if (i === this.menuItems.length - 1) {
+                        this.menuItems.first.setFocus();
+                        return;
+                    }
+                    this.menuItems.toArray()[i + 1].setFocus();
+                });
+            x.escape
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(() => {
+                    this.menuItems.toArray()[i].showExpanded = false;
+                    this.menuItems.toArray()[i].setFocus();
                 });
         });
     }

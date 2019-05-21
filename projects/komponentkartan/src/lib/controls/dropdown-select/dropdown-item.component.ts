@@ -22,6 +22,9 @@ export class DropdownItemComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.label = this.item.nativeElement.textContent;
+    if (this.value === undefined) {
+      this.value = this.label;
+    }
   }
 
   toggleSelect() {
