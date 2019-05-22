@@ -397,44 +397,20 @@ vgr-list.list--new-item-added {
   }
 }
 
-.list__column-header--sorted-asc {
-  h2 {
-    &:after {
-      content: "";
-      display: inline-block;
-      background-size: 100% !important;
-      vertical-align: middle;
-      margin-left: 2px;
-      transform: rotate(-180deg);
-      position: absolute;
-      top: 18px;
-
-      @media screen and (min-width: $desktop-width--medium) {
-        top: 20px;
-      }
-    }
+.caret {
+  display: none;
+  transition: transform 0.4s;
+  .list__column-header--sorted-desc &, .list__column-header--sorted-asc & {
+    display: inline-block;
+  }
+  .list__column-header--sorted-desc & {
+    transform: rotate(0deg);
+  }
+  .list__column-header--sorted-asc & {
+    transform: rotate(-180deg);
   }
 }
 
-.list__column-header--sorted-desc {
-  h2 {
-    &:after {
-      @extend .bg-image-icon-sortarrow;
-      content: "";
-      display: inline-block;
-      background-size: 100% !important;
-      vertical-align: middle;
-      margin-left: 2px;
-      transform: rotate(0deg);
-      position: absolute;
-      top: 18px;
-
-      @media screen and (min-width: $desktop-width--medium) {
-        top: 20px;
-      }
-    }
-  }
-}
 
 @media screen and (min-width: $desktop-width--medium) {
   .list {
