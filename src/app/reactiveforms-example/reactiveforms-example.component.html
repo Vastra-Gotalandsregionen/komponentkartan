@@ -37,7 +37,7 @@
                 </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="updateOnBlurForm.controls.interests.touched">
+                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="updateOnBlurForm.controls.interests.touched" [errorMessage]="{'pattern': 'Du får bara koda!'}">
                   <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
@@ -98,7 +98,7 @@
                 </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="formSubmitted">
+                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="formSubmitted" [errorMessage]="{'pattern': 'Du får bara koda!'}">
                   <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
@@ -164,7 +164,7 @@
                 </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-select formControlName="interests" [simpleLabel]="true" [multi]="true" [showValidation]="updateOnChangeForm.controls.interests.dirty">
+                <vgr-dropdown-select formControlName="interests" [simpleLabel]="true" [multi]="true" [showValidation]="updateOnChangeForm.controls.interests.dirty" [errorMessage]="{'pattern': 'Du får bara koda!'}">
                   <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
