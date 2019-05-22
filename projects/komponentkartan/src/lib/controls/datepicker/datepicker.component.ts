@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self,
+  Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self,
   ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
@@ -14,7 +14,7 @@ import { Guid } from '../../utils/guid';
   selector: 'vgr-datepicker',
   templateUrl: './datepicker.component.html'
 })
-export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
+export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
   @Input() selectedDate: Date;
   @Input() minZoom: string;
   @Input() minDate: Date;
@@ -70,13 +70,11 @@ export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit, On
   }
 
   constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() public formControl: NgControl) {
+    this.setMinZoomLevel();
+
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
-  }
-
-  ngOnInit() {
-    this.setMinZoomLevel();
   }
 
   ngOnChanges(changes: SimpleChanges) {
