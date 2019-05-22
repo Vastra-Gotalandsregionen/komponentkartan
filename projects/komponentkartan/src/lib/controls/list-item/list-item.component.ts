@@ -146,9 +146,11 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   }
 
   setExpanded(expanded: boolean) {
+    this.listItemHeader.expand();
     if (!this.notInteractable) {
       this.isExpanded = expanded;
       this.expandedChanged.emit(this.isExpanded);
+
       this.notInteractable = true;
       setTimeout(() => { this.notInteractable = false; }, 400);
     }

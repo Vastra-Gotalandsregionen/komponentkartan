@@ -20,7 +20,6 @@ export class ListItemHeaderComponent implements AfterViewInit {
     onKeyDown(event: KeyboardEvent) {
         if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
             this.expandedChanged.emit(true);
-            this.expanded = !this.expanded;
             event.preventDefault();
         }
         if (event.key === 'Home') {
@@ -40,12 +39,6 @@ export class ListItemHeaderComponent implements AfterViewInit {
             event.preventDefault();
         }
     }
-    @HostListener('click', ['$event'])
-    onclick(event: MouseEvent) {
-        this.expandedChanged.emit(true);
-        this.expanded = !this.expanded;
-        event.preventDefault();
-    }
     constructor(private hostElement: ElementRef, private renderer: Renderer) {
     }
 
@@ -53,6 +46,10 @@ export class ListItemHeaderComponent implements AfterViewInit {
         setTimeout(() => {
             this.expanded = this.hostElement.nativeElement.parentNode.parentNode.className.indexOf('list-item--expanded') > 0;
         });
+    }
+
+    expand() {
+        this.expanded = !this.expanded;
     }
 
     setFocus() {
