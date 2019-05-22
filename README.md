@@ -11,7 +11,7 @@ Komponentkartan planeras släppas i major-version fyra gånger per år, förutsa
 ## Planerade släpp
 Under 2019 har följande datum satt för release av major-versioner
 * *Version 5: 20 mars 2019 OBS utgår då det inte finns någon funktionalitet som medför major-version*
-* Version 5: 22 maj 2019
+* Version 5: runt 22 maj 2019
 
 Det som kommer att ingå i de olika versionerna är ännu inte beslutat, men nedan finns en beskrivning av funktionalitet som troligtvis kan komma med i de släpp vi planerat under våren 2019. 
 
