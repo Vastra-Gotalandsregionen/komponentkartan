@@ -19,6 +19,13 @@
     &:hover {
       @extend .background-color--primary-dimmed;
     }
+    .table-chevron {
+      transform: rotate(0);
+      transition: all ease .3s;
+      &.expanded {
+        transform: rotate(-180deg);
+      }
+    }
   }
 
   .table-content {
