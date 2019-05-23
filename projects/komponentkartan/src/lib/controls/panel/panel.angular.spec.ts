@@ -19,11 +19,6 @@ describe('PanelComponent', () => {
             imports: [CommonModule]
         });
 
-        TestBed.overrideComponent(PanelComponent, {
-            set: {
-                templateUrl: 'panel.component.html'
-            }
-        });
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(PanelComponent);
             component = fixture.componentInstance;

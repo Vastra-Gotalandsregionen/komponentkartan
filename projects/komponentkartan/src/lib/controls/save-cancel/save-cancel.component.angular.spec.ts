@@ -25,22 +25,6 @@ describe('[SaveCancelComponent - Angular]', () => {
             imports: [CommonModule, FormsModule, FontAwesomeModule]
         });
 
-        TestBed.overrideComponent(SaveCancelComponent, {
-            set: {
-                templateUrl: 'save-cancel.component.html'
-            }
-        });
-        TestBed.overrideComponent(ButtonComponent, {
-            set: {
-                templateUrl: '../button/button.component.html'
-            }
-        });
-        TestBed.overrideComponent(LockButtonComponent, {
-            set: {
-                templateUrl: '../lock-button/lock-button.component.html'
-            }
-        });
-
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(SaveCancelComponent);
             component = fixture.componentInstance;

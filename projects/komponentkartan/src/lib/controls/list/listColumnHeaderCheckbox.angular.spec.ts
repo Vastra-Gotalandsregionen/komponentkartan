@@ -23,12 +23,6 @@ describe('ListColumnHeaderCheckboxComponent', () => {
       imports: [CommonModule]
     });
 
-    TestBed.overrideComponent(ListColumnHeaderCheckboxComponent, {
-      set: {
-        templateUrl: './list-column-header-checkbox.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(ListColumnHeaderCheckboxComponent);
       component = fixture.componentInstance;
