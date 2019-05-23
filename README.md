@@ -8,23 +8,11 @@ Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular
 # Releaser för Komponentkartan
 Komponentkartan planeras släppas i major-version fyra gånger per år, förutsatt att det finns någon funktionalitet som leder till breaking changes att släppa. 
 
-## Planerade släpp
+## Planerade releaser
 Under 2019 har följande datum satt för release av major-versioner
-* *Version 5: 20 mars 2019 OBS utgår då det inte finns någon funktionalitet som medför major-version*
-* Version 5: runt 22 maj 2019
+* Version 5: runt 22 maj 2019(test pågår)
 
-Det som kommer att ingå i de olika versionerna är ännu inte beslutat, men nedan finns en beskrivning av funktionalitet som troligtvis kan komma med i de släpp vi planerat under våren 2019. 
-
-### Version 5
-**OBS detta är en uppskattning**
-* Ny sammanslagen datum- och månadsväljare, som det går att skriva in datum i för att välja. *Breaking changes* :white_check_mark:
-* Byte av ikoner till FontAwesome *Breaking changes* :white_check_mark:
-* Deklarativ header menu *Breaking changes* :white_check_mark:
-* Möjlighet att förvälja items i dropdown select utan form control *Breaking changes* :white_check_mark:
-* WCAG-anpassning av header menu och menu :white_check_mark:
-* Möjlighet att förhindra att kort stängs :white_check_mark:
-* Korrigering av inputfält och suffix :white_check_mark:
-* Rättning av buggar :white_check_mark:
+För mer information om releasen och innehåll: [Realeseinformaiton](https://github.com/Vastra-Gotalandsregionen/komponentkartan/wiki/Releaser-(prelimin%C3%A4rt))
 
 ## Komma igång
 
