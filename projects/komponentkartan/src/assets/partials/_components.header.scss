@@ -67,11 +67,13 @@
   .header__login-info-menu {
     cursor: pointer;
     .header__login-info-menu-arrow {
-      @extend .bg-image-icon-arrow-white;
       display: inline-block;
       position: absolute;
       right: 69px;
-      bottom: 20px;
+      bottom: 14px;
+      > .icon {
+        color: white;
+      }
     }
   }
 }
