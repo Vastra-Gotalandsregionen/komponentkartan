@@ -23,12 +23,6 @@ describe('[CloseButtonComponent - Angular]', () => {
       imports: [CommonModule, FormsModule, FontAwesomeModule]
     });
 
-    TestBed.overrideComponent(CloseButtonComponent, {
-      set: {
-        templateUrl: 'close-button.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(CloseButtonComponent);
       component = fixture.componentInstance;

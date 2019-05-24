@@ -16,12 +16,6 @@ describe('IconComponent', () => {
       imports: [FontAwesomeModule]
     });
 
-    TestBed.overrideComponent(IconComponent, {
-      set: {
-        templateUrl: 'icon.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(IconComponent);
       component = fixture.componentInstance;
