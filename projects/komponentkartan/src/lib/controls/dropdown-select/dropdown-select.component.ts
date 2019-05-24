@@ -75,7 +75,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
-  constructor(@Optional() @Self() private formControl: NgControl) {
+  constructor(@Optional() @Self() public formControl: NgControl) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }

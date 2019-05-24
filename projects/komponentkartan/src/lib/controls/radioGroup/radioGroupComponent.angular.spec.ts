@@ -21,12 +21,6 @@ describe('RadioGroupComponent', () => {
             imports: [CommonModule]
         });
 
-        TestBed.overrideComponent(RadioGroupComponent, {
-            set: {
-                templateUrl: 'radioGroup.component.html'
-            }
-        });
-
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(RadioGroupComponent);
             component = fixture.componentInstance;

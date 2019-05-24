@@ -38,12 +38,6 @@ describe('[InputComponent]', () => {
       imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, IconModule]
     });
 
-    TestBed.overrideComponent(InputComponent, {
-      set: {
-        templateUrl: 'input.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(InputComponent);
       component = fixture.componentInstance;

@@ -18,11 +18,6 @@ describe('[ToggleButtonComponent - Angular]', () => {
       declarations: [ToggleButtonComponent]
     });
 
-    TestBed.overrideComponent(ToggleButtonComponent, {
-      set: {
-        templateUrl: 'toggle-button.component.html'
-      }
-    });
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(ToggleButtonComponent);
       component = fixture.componentInstance;

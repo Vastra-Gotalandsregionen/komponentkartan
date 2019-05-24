@@ -24,12 +24,6 @@ describe('[LockButtonComponent - Angular]', () => {
       imports: [CommonModule, FormsModule, FontAwesomeModule, IconModule]
     });
 
-    TestBed.overrideComponent(LockButtonComponent, {
-      set: {
-        templateUrl: 'lock-button.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(LockButtonComponent);
       component = fixture.componentInstance;

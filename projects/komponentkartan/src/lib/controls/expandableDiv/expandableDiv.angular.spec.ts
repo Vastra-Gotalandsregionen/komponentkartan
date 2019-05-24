@@ -28,13 +28,6 @@ describe('[ExpandableDivComponent]', () => {
             imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule]
         });
 
-        TestBed.overrideComponent(ExpandableDivComponent, {
-            set: {
-                templateUrl: './expandableDiv.component.html'
-            }
-        });
-
-
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(ExpandableDivComponent);
             component = fixture.componentInstance;

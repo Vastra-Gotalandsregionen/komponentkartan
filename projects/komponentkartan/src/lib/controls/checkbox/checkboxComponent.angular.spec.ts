@@ -24,12 +24,6 @@ describe('CheckboxComponent', () => {
       imports: [CommonModule]
     });
 
-    TestBed.overrideComponent(CheckboxComponent, {
-      set: {
-        templateUrl: './checkbox.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(CheckboxComponent);
       component = fixture.componentInstance;

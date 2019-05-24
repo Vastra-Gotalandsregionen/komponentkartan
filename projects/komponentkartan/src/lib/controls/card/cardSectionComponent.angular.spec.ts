@@ -26,12 +26,6 @@ describe('[CardSectionComponent]', () => {
       imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule]
     });
 
-    TestBed.overrideComponent(CardSectionComponent, {
-      set: {
-        templateUrl: './cardSection.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(CardSectionComponent);
       component = fixture.componentInstance;

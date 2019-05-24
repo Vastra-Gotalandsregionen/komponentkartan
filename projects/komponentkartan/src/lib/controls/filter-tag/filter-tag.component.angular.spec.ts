@@ -22,12 +22,6 @@ describe('[FilterTagComponent - Angular]', () => {
       imports: [FontAwesomeModule, IconModule]
     });
 
-    TestBed.overrideComponent(FilterTagComponent, {
-      set: {
-        templateUrl: 'filter-tag.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(FilterTagComponent);
       component = fixture.componentInstance;
