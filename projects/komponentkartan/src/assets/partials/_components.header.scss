@@ -69,8 +69,18 @@
     .header__login-info-menu-arrow {
       display: inline-block;
       position: absolute;
-      right: 69px;
-      bottom: 14px;
+      height: 26px;
+      right: 68px;
+      bottom: 12px;
+      transform: rotate(0deg);
+      transition: all ease 0.3s;
+      &.expanded {
+        transform: rotate(-180deg);
+      }
+      @media screen and (min-width: 1459px) {
+        height: 28px;
+        bottom: 11px;
+      }
       > .icon {
         color: white;
       }
@@ -84,6 +94,6 @@
   align-items: center;
   text-align: right;
   .login-information__user-name {
-    padding-right: 20px;
+    padding-right: 22px;
   }
 }
