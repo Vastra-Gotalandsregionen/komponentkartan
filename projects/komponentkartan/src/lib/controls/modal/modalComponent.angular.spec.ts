@@ -27,19 +27,6 @@ describe('ModalPlaceholderComponent', () => {
             ],
         });
 
-        TestBed.overrideComponent(ModalPlaceholderComponent, {
-            set: {
-                templateUrl: 'modal.component.html'
-            }
-        });
-
-
-        TestBed.overrideComponent(ButtonComponent, {
-            set: {
-                templateUrl: '../button/button.component.html'
-            }
-        });
-
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(ModalPlaceholderComponent);
             component = fixture.componentInstance;
