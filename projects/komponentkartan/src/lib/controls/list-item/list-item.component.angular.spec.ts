@@ -46,7 +46,6 @@ describe('[ListItemComponent - Angular]', () => {
   let component: ListItemComponent;
   let rootElement: DebugElement;
   let headerWrapperElement: DebugElement;
-  let headerElement: DebugElement;
   let contentElement: DebugElement;
 
   beforeEach(async(() => {
@@ -71,7 +70,6 @@ describe('[ListItemComponent - Angular]', () => {
     rootElement = fixture.debugElement.query(By.css('vgr-list-item'));
     component = rootElement.componentInstance;
     headerWrapperElement = rootElement.query(By.css('.list-item__header_wrapper'));
-    headerElement = rootElement.query(By.css('.list-item__header'));
     contentElement = rootElement.query(By.css('.list-item__content'));
   }));
 
@@ -145,7 +143,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('when Home is pressed on header', () => {
     it('setFocusOnFirstRow is emitted', () => {
       const spy = spyOn(component.setFocusOnFirstRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'Home' }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'Home' }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -153,7 +151,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('when End is pressed on header', () => {
     it('setFocusOnLastRow is emitted', () => {
       const spy = spyOn(component.setFocusOnLastRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'End' }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'End' }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -161,7 +159,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('When ArrowDown is pressed on header', () => {
     it('setFocusOnNextRow is emitted', () => {
       const spy = spyOn(component.setFocusOnNextRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -169,7 +167,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('When ArrowUp is pressed on header', () => {
     it('setFocusOnPreviousRow is emitted', () => {
       const spy = spyOn(component.setFocusOnPreviousRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowUp' }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -177,7 +175,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('when Ctrl + PageDown is pressed on header', () => {
     it('setFocusOnNextRow is emitted', () => {
       const spy = spyOn(component.setFocusOnNextRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageDown', ctrlKey: true }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageDown', ctrlKey: true }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -185,7 +183,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('when Ctrl + PageUp is pressed on header', () => {
     it('setFocusOnPreviousRow is emitted', () => {
       const spy = spyOn(component.setFocusOnPreviousRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageUp', ctrlKey: true }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageUp', ctrlKey: true }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed a bug where vgr-lists shared the same list-service but now resolves the service individually.
 - Added method in modalService to update available tab stops in modal.
 - Fixed color when editing validation field.
+- Fixed WCAG-support for vgr-list and vgr-expandable-div.
 - Added errorMessage to Dropdown select.
 
 ## 4.2.0 (Stable, 2019-05-02)

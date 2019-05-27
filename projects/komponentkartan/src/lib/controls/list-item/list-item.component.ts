@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter, ContentChildren, ContentChild, QueryList,
-  AfterContentInit, forwardRef, OnDestroy, OnChanges, SimpleChanges,
+  AfterContentInit, forwardRef, OnDestroy, OnChanges, SimpleChanges, ElementRef, Renderer,
 } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 
@@ -97,7 +97,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
-  constructor(private listService: ListService) {
+  constructor(private listService: ListService, private hostElement: ElementRef, private renderer: Renderer) {
     this.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.hideNotifications());
   }
 
@@ -119,13 +119,6 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   }
 
   ngAfterContentInit() {
-    if (this.listItemHeader) {
-      this.listItemHeader.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.toggleExpanded());
-      this.listItemHeader.goToFirst.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnFirstRow.emit());
-      this.listItemHeader.goToLast.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnLastRow.emit());
-      this.listItemHeader.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRow.emit());
-      this.listItemHeader.goDown.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRow.emit());
-    }
     if (this.listContent) {
       this.listContent.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRowContent.emit());
       this.listContent.goDown.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRowContent.emit());
@@ -144,18 +137,42 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
       this.listService.requestExpandListItem(this);
     }
   }
+  keydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
+      this.toggleExpanded();
+      event.preventDefault();
+    }
+    if (event.key === 'Home') {
+      this.setFocusOnFirstRow.emit();
+      event.preventDefault();
+    }
+    if (event.key === 'End') {
+      this.setFocusOnLastRow.emit();
+      event.preventDefault();
+    }
+    if ((event.ctrlKey && event.key === 'PageUp') || event.key === 'ArrowUp' || event.key === 'Up') {
+      this.setFocusOnPreviousRow.emit();
+      event.preventDefault();
+    }
+    if ((event.ctrlKey && event.key === 'PageDown') || event.key === 'ArrowDown' || event.key === 'Down') {
+      this.setFocusOnNextRow.emit();
+      event.preventDefault();
+    }
+  }
 
   setExpanded(expanded: boolean) {
     if (!this.notInteractable) {
       this.isExpanded = expanded;
       this.expandedChanged.emit(this.isExpanded);
+
       this.notInteractable = true;
       setTimeout(() => { this.notInteractable = false; }, 400);
     }
   }
 
   setFocusOnRow() {
-    this.listItemHeader.setFocus();
+    let item = this.hostElement.nativeElement.querySelector('.list-item__header_wrapper');
+    this.renderer.invokeElementMethod(item, 'focus');
   }
 
   hideNotifications() {
