@@ -11,6 +11,7 @@
         top: 4px;
         transition: transform 0.4s;
         transform: rotate(0deg);
+        color: $text-color--default;
       }
     }
     > .expanded {
@@ -30,11 +31,6 @@
       }
     }
   }
-  &.expandable-div--collapsed {
-    .expandable-div-content {
-      //display: none;
-    }
-  }
   &:focus {
     outline: 0; // z-index: 999;
     box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
@@ -44,4 +40,16 @@
 .expandable-div-header:focus {
   outline: 0;
   box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+}
+.expandable-div-header {
+  .icon {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    transform: rotate(0deg);
+    transition: transform 0.4s;
+  }
+  &[aria-expanded=true] .icon {
+    transform: rotate(180deg);
+  }
 }

@@ -223,21 +223,22 @@ export class Examples {
 
       this.peopleRows = this.examplePeople.map(x => new ExpandableRow<ExamplePerson, ExamplePerson>(x));
 
-      this.peopleRows[0].setNotification('Meddelande: Text', 'vgr-icon-message');
-      this.peopleRows[4].setNotification('Personen är inaktiv', 'vgr-icon-exclamation--red');
-    }
+      this.peopleRows[0].setNotification('Meddelande: Text', { name: 'comment-dots' } as NotificationIconTypes);
+      this.peopleRows[2].setNotification('tillfällig', { name: 'comment-dots' } as NotificationIconTypes, true);
+      this.peopleRows[4].setNotification('Personen är inaktiv', { name: 'exclamation-circle', color: 'error', solid: true } as NotificationIconTypes);
+      }
 
     deleteRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
       // Remove visually.
-      row.notifyOnRemove(row.previewObject.firstName + ' togs bort och kommer inte längre att kunna logga in', 'vgr-icon-ok-check');
+      row.notifyOnRemove(row.previewObject.firstName + ' togs bort och kommer inte längre att kunna logga in', { name: 'check-circle', color: 'success' });
     }
 
     updateRow(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
-      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green');
+      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', { name: 'check-circle', color: 'success' });
     }
 
     updateRow2(row: ExpandableRow<ExamplePerson, ExamplePerson>) {
-      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', 'vgr-icon-ok-check-green', true);
+      row.notifyOnCollapse(row.previewObject.firstName + ' sparades', { name: 'check-circle', color: 'success' }, true);
     }
 
     onSortChanged(event: SortChangedArgs) {
@@ -379,7 +380,7 @@ export class Examples {
         }
 
         removeSelectedRow() {
-            this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', 'vgr-icon-ok-check');
+            this.rowToRemove.notifyOnRemove(this.rowToRemove.previewObject.firstName + ' togs bort', , { name: 'check-circle', color: 'success' });
             this.rowToRemove.previewObject.selected = false;
             this.rowToRemove.previewObject.deleted = true;
             /*
@@ -472,7 +473,11 @@ export class Examples {
 
         this.listNotification = {
           message: 'Här är ett exempel på en list-notifikation. De kan användas om det t.ex. blir något fel när man hämtar datan från servicen.',
-          icon: 'vgr-icon-exclamation--red'
+          icon: {
+            name: 'exclamation-circle',
+            color: 'error',
+            solid: true
+          }
         };
 
       }

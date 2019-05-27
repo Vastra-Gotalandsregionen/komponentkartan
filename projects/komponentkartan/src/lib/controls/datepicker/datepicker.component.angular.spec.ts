@@ -10,6 +10,7 @@ import { DatepickerItemComponent } from './datepicker-item.component';
 import { IconComponent } from '../icon/icon.component';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IconModule } from '../icon/icon.module';
 
 describe('[DatepickerNewComponent - Angular]', () => {
   let component: DatepickerComponent;
@@ -35,7 +36,7 @@ describe('[DatepickerNewComponent - Angular]', () => {
         IconComponent,
         ErrorMessagePipe
       ],
-      imports: [ReactiveFormsModule, FontAwesomeModule],
+      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule],
       providers: [{provide: LOCALE_ID, useValue: 'sv-SE'}]
     });
     fixture = TestBed.createComponent(DatepickerComponent);

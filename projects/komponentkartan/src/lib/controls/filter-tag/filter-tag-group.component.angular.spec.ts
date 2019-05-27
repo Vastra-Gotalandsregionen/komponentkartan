@@ -7,6 +7,7 @@ import { FilterTagGroupComponent } from './filter-tag-group.component';
 import { FilterTagComponent } from './filter-tag.component';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 
 @Component({
@@ -40,7 +41,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [FilterTagGroupComponent, FilterTagComponent, TestComponent, IconComponent],
-      imports: [FontAwesomeModule]
+      imports: [FontAwesomeModule, IconModule]
     });
 
     TestBed.compileComponents().then(() => {

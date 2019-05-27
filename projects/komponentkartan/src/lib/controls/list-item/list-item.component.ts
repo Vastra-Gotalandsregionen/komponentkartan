@@ -201,19 +201,18 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
+  /** Hantering av färg på vänsterkanten. Sätts till success/error om valt, annars fallback */
   handleNotificationColor() {
     const current = this.temporaryNotification ? this.temporaryNotification : this.permanentNotification;
-    if (current) {
-      // Hantera färg på vänsterkanten
-      if (current.icon === 'vgr-icon-exclamation--red' || current.icon === 'vgr-icon-ok-check-green') {
-        this.notificationColor = current.icon === 'vgr-icon-exclamation--red' ? 'notification-error' : 'notification-success';
-      } else {
-        this.notificationColor = null;
-      }
+    if (current && ('icon' in current)) {
+      if (current.icon.color === 'success') { this.notificationColor = 'notification-success';
+      } else if (current.icon.color === 'error') { this.notificationColor = 'notification-error';
+      } else { this.notificationColor = null; }
     } else {
       this.notificationColor = null;
     }
   }
+
 
   triggerDeletedEvent() {
     if (this.isDeleted) {

@@ -72,7 +72,20 @@
                 <td>notification : Notification</td>
                 <td>Sätter man om man vill visa en notifiering, t.ex. när listan ej kan laddas, default visas inget
                   meddelande.</td>
-                <td>[notification]="{{'{'}} message: 'Här är texten i notifikationen', icon: 'vgr-icon-message'{{'}'}}"
+                <td>
+                  [notification]="
+                  {{'{'}} <br>
+                    <strong>message</strong>: 'Här är texten i notifikationen', <br>
+                    <strong>icon</strong>: 
+                    {{'{'}} <br>
+                      <strong>size</strong>?: string, <br>
+                      <strong>color</strong>?: 'success' | 'error', <br>
+                      <strong>solid</strong>?: boolean, <br>
+                      <strong>disabled</strong>?: boolean <br>
+                    {{'}'}}
+                  
+                  
+                  {{'}'}}"
                 </td>
               </tr>
             </table>
@@ -114,7 +127,7 @@
                   <code>NotificationType.ShowOnCollapse</code> eller när raden tas bort -
                   <code>NotificationType.ShowOnRemove</code>
                 </td>
-                <td>[notification]="{{'{'}} message: 'Personen är inaktiv', icon: 'vgr-icon-message', type:
+                <td>[notification]="{{'{'}} message: 'Personen är inaktiv', icon: {{'{'}} name: 'check-circle', color: 'success' {{'}'}}, type:
                   notificationTypes.Permanent{{'}'}}"
                   <strong>OBS!</strong> För att binda till enums i html, måste en rad till i .ts-filen som deklarerar
                   enum som en
