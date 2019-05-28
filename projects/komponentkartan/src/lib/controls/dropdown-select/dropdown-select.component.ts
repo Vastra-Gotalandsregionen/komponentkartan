@@ -29,8 +29,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() readonly = false;
   @Input() disabled = false;
   @Input() showValidation = true;
+  @Input() errorMessage = {};
   @Input() compareWith = _defaultCompare;
   @Input() labelId: string;
+  @Input() value: any;
 
   @Output() selectedChanged = new EventEmitter<any>();
   @Output() expandedChanged = new EventEmitter<boolean>();
@@ -42,12 +44,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @ViewChild('filter') filter: ElementRef;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
-  value: any;
   expanded = false;
   filterVisible = false;
   allSelected = false;
   deselectDisabled = true;
-  validationErrorMessage = 'Obligatorisk';
   headerLabelId = Guid.newGuid();
   label = this.noItemSelectedLabel;
   selectAllLabel = 'Markera alla';
@@ -75,7 +75,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
-  constructor(@Optional() @Self() private formControl: NgControl) {
+  constructor(@Optional() @Self() public formControl: NgControl) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
@@ -83,11 +83,16 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['multi'] && this.items) {
+    if (changes.value && !changes.value.firstChange) {
+      this.onChange(changes.value.currentValue);
+      this.setSelectedState(changes.value.currentValue);
+    }
+
+    if (changes.multi && this.items) {
       this.setMultiOnItems();
     }
 
-    if (changes['noItemSelectedLabel'] && changes['noItemSelectedLabel'].firstChange || (this.items && !this.items.some(x => x.selected))) {
+    if (changes.noItemSelectedLabel && changes.noItemSelectedLabel.firstChange || (this.items && !this.items.some(x => x.selected))) {
       this.label = this.noItemSelectedLabel;
     }
   }
@@ -108,7 +113,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
           this.setMultiOnItems();
         }
         setTimeout(() => {
-          this.writeValue(this.value);
+          this.setSelectedState(this.value);
         });
       });
   }
@@ -116,11 +121,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   ngAfterViewInit() {
     if (this.formControl) {
       setTimeout(() => {
-        this.writeValue(this.formControl.value);
+        this.setSelectedState(this.formControl.value);
       });
     } else {
       setTimeout(() => {
-        this.selectDefaultItems();
+        this.setSelectedState(this.value);
       });
     }
   }
@@ -141,37 +146,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       return;
     }
 
-    if (this.multi) {
-      const selectedItems: DropdownItemComponent[] = [];
-      const values = value as any[] || [];
-      this.items.forEach(i => {
-        if (values.some(v => this.compareWith(v, i.value))) {
-          i.selected = true;
-          selectedItems.push(i);
-        } else {
-          i.selected = false;
-        }
-      });
-      this.allSelected = this.items.length && this.items.length === selectedItems.length;
-      this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
-      this.setLabel(selectedItems);
-    } else {
-      let selectedItem: DropdownItemComponent;
-      this.items.forEach(i => {
-        if (this.compareWith(value, i.value)) {
-          i.selected = true;
-          selectedItem = i;
-        } else {
-          i.selected = false;
-        }
-      });
-      this.label = selectedItem ? selectedItem.selectedLabel || selectedItem.label : this.noItemSelectedLabel;
-      if (value) {
-        this.deselectDisabled = false;
-      } else {
-        this.deselectDisabled = true;
-      }
-    }
+    this.setSelectedState(this.value);
   }
 
   registerOnChange(func: (value: any) => any) {
@@ -594,22 +569,36 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
   }
 
-  private selectDefaultItems() {
+  private setSelectedState(value: any) {
     if (this.multi) {
-      const defaultItems = this.items.filter(x => x.default);
-      defaultItems.forEach(x => x.selected = true);
-      this.allSelected = defaultItems.length === this.items.length;
+      const selectedItems: DropdownItemComponent[] = [];
+      const values = value as any[] || [];
+      this.items.forEach(i => {
+        if (values.some(v => this.compareWith(v, i.value))) {
+          i.selected = true;
+          selectedItems.push(i);
+        } else {
+          i.selected = false;
+        }
+      });
+      this.allSelected = this.items.length && this.items.length === selectedItems.length;
       this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
-      this.setLabel(defaultItems);
-      const values = defaultItems.map(x => x.value);
-      this.onChange(values);
+      this.setLabel(selectedItems);
     } else {
-      const defaultItems = this.items.filter(x => x.default);
-      if (defaultItems.length) {
-        defaultItems[0].selected = true;
-        this.label = defaultItems[0].selectedLabel || defaultItems[0].label;
+      let selectedItem: DropdownItemComponent;
+      this.items.forEach(i => {
+        if (this.compareWith(value, i.value)) {
+          i.selected = true;
+          selectedItem = i;
+        } else {
+          i.selected = false;
+        }
+      });
+      this.label = selectedItem ? selectedItem.selectedLabel || selectedItem.label : this.noItemSelectedLabel;
+      if (value) {
         this.deselectDisabled = false;
-        this.onChange(defaultItems[0].value);
+      } else {
+        this.deselectDisabled = true;
       }
     }
   }

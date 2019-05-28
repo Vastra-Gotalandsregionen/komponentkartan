@@ -18,7 +18,6 @@ import { KomponentkartanApplicationComponent } from './app.component';
 
 import { InputfieldsComponent } from './inputfields/inputfields.component';
 import { CityService } from './inputfields/cityService';
-import { MonthpickerComponent } from './monthpicker/monthpicker.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ColoursComponent } from './colours/colours.component';
@@ -73,7 +72,6 @@ import { UnitFilterPipe } from './examples-listwithcards/unitfilterpipe';
     declarations: [
         KomponentkartanApplicationComponent,
         InputfieldsComponent,
-        MonthpickerComponent,
         DatepickerComponent,
         BacktotopComponent,
         SavecancelComponent,

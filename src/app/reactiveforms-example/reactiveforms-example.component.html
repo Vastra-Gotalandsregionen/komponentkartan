@@ -37,7 +37,7 @@
                 </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="updateOnBlurForm.controls.interests.touched">
+                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="updateOnBlurForm.controls.interests.touched" [errorMessage]="{'pattern': 'Du får bara koda!'}">
                   <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
@@ -51,8 +51,8 @@
                 </vgr-radio-group>
               </vgr-title-value>
               <vgr-title-value title="Välj Månad">
-                <vgr-monthpicker formControlName="monthpicker" [showValidation]="updateOnBlurForm.controls.monthpicker.touched"
-                  [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
+                <vgr-datepicker [minZoom]="'m'" formControlName="monthpicker" [showValidation]="updateOnBlurForm.controls.monthpicker.touched"
+                  [minDate]="minDate" [maxDate]="maxDate"></vgr-datepicker>
               </vgr-title-value>
               <vgr-title-value title="Välj Dag">
                 <vgr-datepicker formControlName="datepicker" [showValidation]="updateOnBlurForm.controls.datepicker.touched"></vgr-datepicker>
@@ -98,7 +98,7 @@
                 </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="formSubmitted">
+                <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="formSubmitted" [errorMessage]="{'pattern': 'Du får bara koda!'}">
                   <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
@@ -112,8 +112,8 @@
                 </vgr-radio-group>
               </vgr-title-value>
               <vgr-title-value title="Välj Månad">
-                <vgr-monthpicker formControlName="monthpicker" [showValidation]="formSubmitted" [minDate]="minDate"
-                  [maxDate]="maxDate"></vgr-monthpicker>
+                <vgr-datepicker [minZoom]="'m'" formControlName="monthpicker" [showValidation]="formSubmitted" [minDate]="minDate"
+                  [maxDate]="maxDate"></vgr-datepicker>
               </vgr-title-value>
               <vgr-title-value title="Välj Dag">
                 <vgr-datepicker formControlName="datepicker" [showValidation]="formSubmitted"></vgr-datepicker>
@@ -164,7 +164,7 @@
                 </vgr-dropdown-select>
               </vgr-title-value>
               <vgr-title-value title="Intressen">
-                <vgr-dropdown-select formControlName="interests" [simpleLabel]="true" [multi]="true" [showValidation]="updateOnChangeForm.controls.interests.dirty">
+                <vgr-dropdown-select formControlName="interests" [simpleLabel]="true" [multi]="true" [showValidation]="updateOnChangeForm.controls.interests.dirty" [errorMessage]="{'pattern': 'Du får bara koda!'}">
                   <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
                   <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
@@ -178,8 +178,8 @@
                 </vgr-radio-group>
               </vgr-title-value>
               <vgr-title-value title="Välj Månad">
-                <vgr-monthpicker formControlName="monthpicker" [showValidation]="updateOnChangeForm.controls.monthpicker.dirty"
-                  [minDate]="minDate" [maxDate]="maxDate"></vgr-monthpicker>
+                <vgr-datepicker [minZoom]="'m'" formControlName="monthpicker" [showValidation]="updateOnChangeForm.controls.monthpicker.dirty"
+                  [minDate]="minDate" [maxDate]="maxDate"></vgr-datepicker>
               </vgr-title-value>
               <vgr-title-value title="Välj Dag">
                 <vgr-datepicker formControlName="datepicker" [showValidation]="updateOnChangeForm.controls.datepicker.dirty"></vgr-datepicker>

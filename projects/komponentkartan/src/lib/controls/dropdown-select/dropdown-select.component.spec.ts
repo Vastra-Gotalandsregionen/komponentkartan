@@ -47,9 +47,6 @@ describe('[DropdownSelectComponent]', () => {
     it('deselectDisabled is correct', () => {
       expect(component.deselectDisabled).toBe(true);
     });
-    it('validationErrorMessage is correct', () => {
-      expect(component.validationErrorMessage).toBe('Obligatorisk');
-    });
     it('label is correct', () => {
       expect(component.label).toBe(component.noItemSelectedLabel);
     });

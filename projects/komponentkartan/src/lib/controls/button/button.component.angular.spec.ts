@@ -20,12 +20,6 @@ describe('[ButtonComponent - Angular]', () => {
       imports: [CommonModule, FormsModule]
     });
 
-    TestBed.overrideComponent(ButtonComponent, {
-      set: {
-        templateUrl: 'button.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(ButtonComponent);
       component = fixture.componentInstance;

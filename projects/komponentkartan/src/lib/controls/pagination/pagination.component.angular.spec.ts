@@ -17,12 +17,6 @@ describe('[PaginationComponent - Angular]', () => {
       declarations: [PaginationComponent]
     });
 
-    TestBed.overrideComponent(PaginationComponent, {
-      set: {
-        templateUrl: 'pagination.component.html'
-      }
-    });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(PaginationComponent);
       component = fixture.componentInstance;

@@ -28,12 +28,6 @@ describe('[MenuItemComponent]', () => {
                 ])]
         });
 
-        TestBed.overrideComponent(MenuItemComponent, {
-            set: {
-                templateUrl: './menu-item.component.html'
-            }
-        });
-
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(MenuItemComponent);
             component = fixture.componentInstance;

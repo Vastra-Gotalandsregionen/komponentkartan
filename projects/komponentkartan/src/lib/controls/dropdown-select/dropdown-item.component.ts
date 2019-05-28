@@ -8,7 +8,6 @@ export class DropdownItemComponent implements AfterViewInit {
 
   @Input() selectedLabel: string;
   @Input() value: any;
-  @Input() default = false;
   @Output() toggle = new EventEmitter();
   @Output() confirm = new EventEmitter();
   @Output() previous = new EventEmitter();
@@ -23,6 +22,9 @@ export class DropdownItemComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.label = this.item.nativeElement.textContent;
+    if (this.value === undefined) {
+      this.value = this.label;
+    }
   }
 
   toggleSelect() {
