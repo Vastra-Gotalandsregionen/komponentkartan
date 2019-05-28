@@ -97,7 +97,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
-  constructor(private listService: ListService, private hostElement: ElementRef, private renderer: Renderer) {
+  constructor(private listService: ListService, private elementRef: ElementRef, private renderer: Renderer) {
     this.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.hideNotifications());
   }
 
@@ -171,12 +171,13 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   }
 
   setFocusOnRow() {
-    let item = this.hostElement.nativeElement.querySelector('.list-item__header_wrapper');
-    this.renderer.invokeElementMethod(item, 'focus');
+      const item = this.elementRef.nativeElement.querySelector('.list-item__header_wrapper');
+      item.focus();
   }
 
   hideNotifications() {
     if (this.temporaryNotificationVisible) {
+      this.setFocusOnRow();
       if (this.notification && this.notification.type === NotificationType.ShowOnRemove) {
         setTimeout(() => {
           this.isDeleted = true;
@@ -205,14 +206,15 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   handleNotificationColor() {
     const current = this.temporaryNotification ? this.temporaryNotification : this.permanentNotification;
     if (current && ('icon' in current)) {
-      if (current.icon.color === 'success') { this.notificationColor = 'notification-success';
-      } else if (current.icon.color === 'error') { this.notificationColor = 'notification-error';
+      if (current.icon.color === 'success') {
+        this.notificationColor = 'notification-success';
+      } else if (current.icon.color === 'error') {
+        this.notificationColor = 'notification-error';
       } else { this.notificationColor = null; }
     } else {
       this.notificationColor = null;
     }
   }
-
 
   triggerDeletedEvent() {
     if (this.isDeleted) {
@@ -240,5 +242,4 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
-
 }
