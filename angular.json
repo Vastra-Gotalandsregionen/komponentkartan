@@ -88,7 +88,7 @@
               ]
             },
             "styles": [
-              "projects/komponentkartan/assets/komponentkartan.scss",
+              "projects/komponentkartan/src/assets/komponentkartan.scss",
               "src/styles.scss"
             ],
             "assets": [
