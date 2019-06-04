@@ -216,6 +216,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
     }
   }
 
+
   triggerDeletedEvent() {
     if (this.isDeleted) {
       this.deleted.emit();

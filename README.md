@@ -10,7 +10,7 @@ Komponentkartan planeras släppas i major-version fyra gånger per år, förutsa
 
 ## Planerade releaser
 Under 2019 har följande datum satt för release av major-versioner
-* Version 5: runt 22 maj 2019(test pågår)
+* Version 5: runt 22 maj uppdaterat till runt 15 juni 2019(test pågår)
 
 För mer information om releasen och innehåll: [Realeseinformaiton](https://github.com/Vastra-Gotalandsregionen/komponentkartan/wiki/Releaser-(prelimin%C3%A4rt))
 
