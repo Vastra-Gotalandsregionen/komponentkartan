@@ -27,6 +27,9 @@
       &.expanded {
         transform: rotate(-180deg);
       }
+      .icon {
+        color: $text-color--default;
+      }
     }
   }
 
