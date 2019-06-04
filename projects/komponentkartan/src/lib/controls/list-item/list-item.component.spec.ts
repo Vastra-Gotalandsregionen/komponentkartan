@@ -13,7 +13,7 @@ describe('[ListItemComponent]', () => {
   let component: ListItemComponent;
 
   beforeEach(() => {
-    component = new ListItemComponent(new ListServiceMock() as ListService);
+    component = new ListItemComponent(new ListServiceMock() as ListService, null, null);
   });
 
   describe('Instatiate', () => {
