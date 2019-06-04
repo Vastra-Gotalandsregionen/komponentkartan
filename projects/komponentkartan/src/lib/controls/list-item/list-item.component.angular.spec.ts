@@ -12,6 +12,7 @@ import { NotificationType } from '../../models/notificationType.model';
 import { ListService } from '../list/list.service';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 class ListServiceMock {
   requestExpandListItem(listItem: ListItemComponent) {
@@ -51,7 +52,7 @@ describe('[ListItemComponent - Angular]', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, FontAwesomeModule],
+      imports: [NoopAnimationsModule, FontAwesomeModule, IconModule],
       declarations: [
         ListItemComponent,
         TestListItemComponent,
@@ -211,6 +212,10 @@ describe('[ListItemComponent - Angular]', () => {
     beforeEach(() => {
       testComponent.notification = {
         message: 'A permanent note',
+        icon: {
+          name: 'check-circle',
+          color: 'success'
+        },
         type: NotificationType.Permanent
       } as RowNotification;
       fixture.detectChanges();
@@ -223,7 +228,11 @@ describe('[ListItemComponent - Angular]', () => {
       beforeEach(() => {
         testComponent.notification = {
           message: 'A temporary note',
-          type: NotificationType.ShowOnCollapse
+          icon: {
+            name: 'check-circle',
+            color: 'success'
+          },
+            type: NotificationType.ShowOnCollapse
         } as RowNotification;
       });
       it('the temporary notification is shown', () => {
@@ -256,7 +265,11 @@ describe('[ListItemComponent - Angular]', () => {
         testComponent.notification = {
           message: 'A temporary note',
           type: NotificationType.ShowOnCollapse,
-          removeWhenDone: true
+          icon: {
+            name: 'check-circle',
+            color: 'success'
+          },
+            removeWhenDone: true
         } as RowNotification;
       }));
       it('the temporary notification is shown', () => {
@@ -289,6 +302,10 @@ describe('[ListItemComponent - Angular]', () => {
       beforeEach(() => {
         testComponent.notification = {
           message: 'A temporary note',
+          icon: {
+            name: 'check-circle',
+            color: 'success'
+          },
           type: NotificationType.ShowOnRemove
         } as RowNotification;
       });

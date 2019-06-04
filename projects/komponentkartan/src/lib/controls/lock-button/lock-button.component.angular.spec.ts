@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { LockButtonComponent } from '../../controls/lock-button/lock-button.component';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 describe('[LockButtonComponent - Angular]', () => {
   let component: LockButtonComponent;
@@ -20,7 +21,7 @@ describe('[LockButtonComponent - Angular]', () => {
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [LockButtonComponent, IconComponent],
-      imports: [CommonModule, FormsModule, FontAwesomeModule]
+      imports: [CommonModule, FormsModule, FontAwesomeModule, IconModule]
     });
 
     TestBed.compileComponents().then(() => {

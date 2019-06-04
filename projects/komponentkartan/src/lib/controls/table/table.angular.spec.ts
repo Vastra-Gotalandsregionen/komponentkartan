@@ -10,6 +10,9 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IconComponent } from '../icon/icon.component';
+import { IconModule } from '../icon/icon.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @Component({
@@ -44,9 +47,15 @@ describe('[TestTableComponent]', () => {
         TableHeaderComponent,
         TableHeaderColumnComponent,
         TableRowComponent,
-        TableRowColumnComponent
+        TableRowColumnComponent,
+        IconComponent
       ],
-      imports: [CommonModule, BrowserAnimationsModule]
+      imports: [
+        CommonModule,
+        BrowserAnimationsModule,
+        FontAwesomeModule,
+        IconModule
+      ]
     });
 
     TestBed.compileComponents().then(() => {

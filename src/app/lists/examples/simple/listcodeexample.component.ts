@@ -69,15 +69,14 @@ export class ListcodeexampleComponent implements OnInit {
             row.notification = {
                 type: NotificationType.Permanent,
                 message: 'En permanent notifiering',
-                icon: 'vgr-icon-message'
+                icon: { name: 'comment-dots' }
             } as RowNotification;
 
         } else {
             row.notification = {
                 type: NotificationType.ShowOnCollapse,
                 message: 'En temporär notifiering',
-                icon: 'vgr-icon-message'
-                // removeWhenDone: true
+                icon: { name: 'comment-dots' }
             } as RowNotification;
         }
     }
