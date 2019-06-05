@@ -5,7 +5,7 @@ export interface NotificationIconTypes {
     */
     name: 'pen' | 'comment-dots' | 'trash-alt' | 'check-circle' | 'question-circle' | 'exclamation-circle';
     size?: string;
-    color?: 'success' | 'error';
+    color?: 'success' | 'error' | 'disabled' | 'text' | 'light';
     solid?: boolean;
     disabled?: boolean;
 }
