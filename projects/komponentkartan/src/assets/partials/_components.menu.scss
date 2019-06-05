@@ -205,6 +205,9 @@
       padding-left: 11px;
       border-left-width: 4px;
     }
+    &:focus {
+      font-weight: 700;
+    }
     > vgr-icon {
       .icon {
         color: $text-color--default;
