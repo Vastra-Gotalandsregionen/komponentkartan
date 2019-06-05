@@ -409,6 +409,9 @@ vgr-list.list--new-item-added {
   .list__column-header--sorted-asc & {
     transform: rotate(-180deg);
   }
+  .icon {
+    color: $text-color--default
+  }
 }
 
 
