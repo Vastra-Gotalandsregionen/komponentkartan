@@ -18,46 +18,18 @@ vgr-checkbox .checkbox {
 }
 
 .checkbox__image {
-  min-width: 16px;
-  min-height: 16px;
-  background: white;
-  border: 2px solid $control-color--enabled;
-  transition: border-color 0.6s linear;
   position: relative;
   margin-right: $margin--slim;
-  margin-left: 2px;
+  margin-left: $focus-outline-width;
+  margin-top: $focus-outline-width;
+  margin-bottom: $focus-outline-width;
   &:focus {
-    outline: $focus-outline-width solid $focus-color;
-  }
-  .checkbox--disabled & {
-    border: 2px solid $control-color--disabled;
-    box-shadow: none;
-    transition: border-color 0.6s linear;
-    &:after {
-      left: 4px !important;
-      top: 5px !important;
-    }
-  }
-  .checkbox--checked & {
-    background: $control-color--enabled;
-    &:after {
-      content: '';
-      position: absolute;
-      width: 9px;
-      height: 5px;
-      background: transparent;
-      top: 3px;
-      left: 2px;
-      border: 2px solid white;
-      border-top: none;
-      border-right: none;
-      transform: rotate(-50deg);
-    }
-  }
-  .checkbox--disabled.checkbox--checked & {
-    background: $control-color--disabled;
-    border: none;
-    box-shadow: none;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    margin-right: $margin--slim - $focus-outline-width;
+    outline: none;
+    border: $focus-outline-width solid $focus-color;
   }
 }
 
@@ -71,23 +43,5 @@ vgr-checkbox .checkbox {
     color: $control-color--disabled;
     transition: color 0.6s linear;
     cursor: default;
-  }
-}
-
-@media screen and (min-width: $desktop-width--medium) {
-  .checkbox__image {
-    min-width: 18px;
-    min-height: 18px;
-    .checkbox--checked & {
-      &:after {
-        width: 10px;
-        height: 5px;
-        top: 4px;
-        left: 2px;
-      }
-    }
-  }
-  .checkbox__image {
-    margin-right: $margin--regular;
   }
 }

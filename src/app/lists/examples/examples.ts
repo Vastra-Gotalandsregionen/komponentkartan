@@ -286,9 +286,8 @@ export class Examples {
       <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
       <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
       <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
-      <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (delete)="onDeleteRow(row)" width="1"></vgr-list-column-trashcan>
-      <vgr-list-column-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected" (checkedChanged)="onSelectRowChanged(row, $event)"
-        width="3"></vgr-list-column-checkbox>
+      <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (click)="onDeleteRow($event,row)" (keydown)="handleKeyDown($event,row)" [align]="'center'"></vgr-list-column-trashcan>
+      <vgr-list-column-checkbox width="3" [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected" (checkedChanged)="onSelectRowChanged(row, $event)"></vgr-list-column-checkbox>  width="3"></vgr-list-column-checkbox>
     </vgr-list-item-header>
     <vgr-list-item-content>
       <span>Mer information</span>
@@ -364,8 +363,14 @@ export class Examples {
             }
         }
 
-        onDeleteRow(row: any) {
-            this.removeRow(row);
+        onDeleteRow(event: Event, row: any) {
+          event.stopPropagation();
+          this.removeRow(row);
+        }
+        handleKeyDown(event: KeyboardEvent, row: any) {
+          if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
+              this.onDeleteRow(event, row);
+          }
         }
 
         notifyOnDelete(row: any) {

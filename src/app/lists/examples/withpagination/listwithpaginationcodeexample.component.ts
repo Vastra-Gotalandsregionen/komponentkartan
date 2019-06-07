@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Examples } from '../examples';
-
+import {
+    SortDirection,  // Enum för vilket håll sorteringen skall ske.
+    SortChangedArgs // Args när sorteringordningen ändras.
+  } from 'vgr-komponentkartan';
+  
 @Component({
     selector: 'app-listwithpaginationcodeexample',
     templateUrl: './listwithpaginationcodeexample.component.html',
@@ -14,6 +18,7 @@ export class ListwithpaginationcodeexampleComponent implements OnInit {
     persons: ExamplePerson[];
     pageCount = 1;
     private itemsPerPage = 4;
+    currentPage = 1;
 
     personsData = [
         { id: '1', firstName: 'Git', lastName: 'Hubsson', occupation: 'Ninja codewarrior', income: 300000 } as ExamplePerson,
@@ -60,17 +65,25 @@ export class ListwithpaginationcodeexampleComponent implements OnInit {
 
     ngOnInit() {
         this.pageCount = Math.ceil(this.personsData.length / this.itemsPerPage);
-        this.setPagingData(1);
+        this.setPagingData(this.currentPage);
     }
 
     onPageChanged(page: number) {
-        this.setPagingData(page);
+        this.currentPage = page;
+        this.setPagingData(this.currentPage);
     }
 
     setPagingData(page: number) {
         const start = (page - 1) * this.itemsPerPage;
         const end = start + this.itemsPerPage;
         this.persons = this.personsData.slice(start, end);
+    }
+    onSortChanged(event: SortChangedArgs) {
+        this.personsData = this.personsData.sort((row1, row2) => {
+            return row1[event.key] > row2[event.key] ? (event.direction === SortDirection.Ascending ? 1 : -1) :
+                row1[event.key] < row2[event.key] ? (event.direction === SortDirection.Ascending ? -1 : 1) : 0;
+        });
+        this.setPagingData(this.currentPage);
     }
 }
 export interface ExamplePerson {

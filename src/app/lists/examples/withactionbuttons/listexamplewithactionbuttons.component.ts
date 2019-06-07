@@ -56,6 +56,11 @@ export class ListExampleWithActionButtonsComponent {
         event.stopPropagation();
         this.removeRow(row);
     }
+    handleKeyDown(event: KeyboardEvent, row: any) {
+        if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
+            this.onDeleteRow(event, row);
+        }
+    }
 
     notifyOnDelete(row: any) {
         this.removedObjectString = JSON.stringify(row, null, '\t');

@@ -6,6 +6,9 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { ListColumnHeaderCheckboxComponent } from './list-column-header-checkbox.component';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 
 describe('ListColumnHeaderCheckboxComponent', () => {
@@ -19,8 +22,16 @@ describe('ListColumnHeaderCheckboxComponent', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [ListColumnHeaderCheckboxComponent, CheckboxComponent],
-      imports: [CommonModule]
+      declarations: [
+        ListColumnHeaderCheckboxComponent,
+        CheckboxComponent,
+        IconComponent
+      ],
+      imports: [
+        CommonModule,
+        FontAwesomeModule,
+        IconModule
+      ]
     });
 
     TestBed.compileComponents().then(() => {
