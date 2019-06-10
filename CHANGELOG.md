@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed WCAG-support for vgr-list and vgr-expandable-div.
 - Added errorMessage to Dropdown select.
 - Fixed focus on list on update.
+- Fixed icons used on list-component.
 
 ## 4.2.0 (Stable, 2019-05-02)
 - Changed colors on validation
