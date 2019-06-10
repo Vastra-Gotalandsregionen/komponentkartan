@@ -188,6 +188,12 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
       this.collapse();
     } else if (event.key === 'Tab') {
       this.collapse();
+    } else if (event.key === 'Home') {
+      event.preventDefault();
+      this.items.first.focus();
+    } else if (event.key === 'End') {
+      event.preventDefault();
+      this.items.last.focus();
     }
   }
 
