@@ -141,7 +141,7 @@
   }
   &.menu__item--disabled {
     cursor: default;
-    color: $secondary-color--default;
+    color: $control-color--disabled;
     p {
       position: relative;
       display: inline-block;

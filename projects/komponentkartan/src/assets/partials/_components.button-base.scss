@@ -28,7 +28,7 @@
     }
   }
   &.button--disabled {
-    background-color: $secondary-color--default;
+    background-color: $control-color--disabled;
     cursor: default;
   }
   .button__focus-line {
