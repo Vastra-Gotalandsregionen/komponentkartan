@@ -87,10 +87,7 @@
 }
 
 .card-section__header__icon {
-  @extend .bg-image-icon--edit;
   margin-left: $margin--regular;
-  width: 30px;
-  height: 30px;
   opacity: 1;
   transition: opacity 0.6s linear;
   .card-section--readonly & {

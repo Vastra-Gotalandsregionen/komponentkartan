@@ -12,6 +12,7 @@ import { NotificationType } from '../../models/notificationType.model';
 import { ListService } from '../list/list.service';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 class ListServiceMock {
   requestExpandListItem(listItem: ListItemComponent) {
@@ -46,12 +47,11 @@ describe('[ListItemComponent - Angular]', () => {
   let component: ListItemComponent;
   let rootElement: DebugElement;
   let headerWrapperElement: DebugElement;
-  let headerElement: DebugElement;
   let contentElement: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, FontAwesomeModule],
+      imports: [NoopAnimationsModule, FontAwesomeModule, IconModule],
       declarations: [
         ListItemComponent,
         TestListItemComponent,
@@ -71,7 +71,6 @@ describe('[ListItemComponent - Angular]', () => {
     rootElement = fixture.debugElement.query(By.css('vgr-list-item'));
     component = rootElement.componentInstance;
     headerWrapperElement = rootElement.query(By.css('.list-item__header_wrapper'));
-    headerElement = rootElement.query(By.css('.list-item__header'));
     contentElement = rootElement.query(By.css('.list-item__content'));
   }));
 
@@ -145,7 +144,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('when Home is pressed on header', () => {
     it('setFocusOnFirstRow is emitted', () => {
       const spy = spyOn(component.setFocusOnFirstRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'Home' }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'Home' }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -153,7 +152,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('when End is pressed on header', () => {
     it('setFocusOnLastRow is emitted', () => {
       const spy = spyOn(component.setFocusOnLastRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'End' }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'End' }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -161,7 +160,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('When ArrowDown is pressed on header', () => {
     it('setFocusOnNextRow is emitted', () => {
       const spy = spyOn(component.setFocusOnNextRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -169,7 +168,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('When ArrowUp is pressed on header', () => {
     it('setFocusOnPreviousRow is emitted', () => {
       const spy = spyOn(component.setFocusOnPreviousRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowUp' }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -177,7 +176,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('when Ctrl + PageDown is pressed on header', () => {
     it('setFocusOnNextRow is emitted', () => {
       const spy = spyOn(component.setFocusOnNextRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageDown', ctrlKey: true }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageDown', ctrlKey: true }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -185,7 +184,7 @@ describe('[ListItemComponent - Angular]', () => {
   describe('when Ctrl + PageUp is pressed on header', () => {
     it('setFocusOnPreviousRow is emitted', () => {
       const spy = spyOn(component.setFocusOnPreviousRow, 'emit');
-      headerElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageUp', ctrlKey: true }));
+      headerWrapperElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageUp', ctrlKey: true }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
     });
@@ -211,6 +210,10 @@ describe('[ListItemComponent - Angular]', () => {
     beforeEach(() => {
       testComponent.notification = {
         message: 'A permanent note',
+        icon: {
+          name: 'check-circle',
+          color: 'success'
+        },
         type: NotificationType.Permanent
       } as RowNotification;
       fixture.detectChanges();
@@ -223,7 +226,11 @@ describe('[ListItemComponent - Angular]', () => {
       beforeEach(() => {
         testComponent.notification = {
           message: 'A temporary note',
-          type: NotificationType.ShowOnCollapse
+          icon: {
+            name: 'check-circle',
+            color: 'success'
+          },
+            type: NotificationType.ShowOnCollapse
         } as RowNotification;
       });
       it('the temporary notification is shown', () => {
@@ -256,7 +263,11 @@ describe('[ListItemComponent - Angular]', () => {
         testComponent.notification = {
           message: 'A temporary note',
           type: NotificationType.ShowOnCollapse,
-          removeWhenDone: true
+          icon: {
+            name: 'check-circle',
+            color: 'success'
+          },
+            removeWhenDone: true
         } as RowNotification;
       }));
       it('the temporary notification is shown', () => {
@@ -289,6 +300,10 @@ describe('[ListItemComponent - Angular]', () => {
       beforeEach(() => {
         testComponent.notification = {
           message: 'A temporary note',
+          icon: {
+            name: 'check-circle',
+            color: 'success'
+          },
           type: NotificationType.ShowOnRemove
         } as RowNotification;
       });
@@ -316,6 +331,53 @@ describe('[ListItemComponent - Angular]', () => {
           expect(spy).toHaveBeenCalled();
         });
       });
+    });
+  });
+
+  describe('ShowOnCollapse', () => {
+    beforeEach(() => {
+      jasmine.clock().uninstall();
+      jasmine.clock().install();
+      component.notification = { message: 'A temporary note', type: NotificationType.ShowOnCollapse } as RowNotification;
+      component.handleNotifications(component.notification);
+    });
+    afterEach(() => {
+      jasmine.clock().uninstall();
+    });
+    it('temporaryNotification is set', () => {
+      expect(component.temporaryNotification).toBe(component.notification);
+    });
+    it('item is collapsed', () => {
+      jasmine.clock().tick(component.showNotificationDurationMs);
+      expect(component.isExpanded).toBe(false);
+    });
+    it('temporaryNotification is removed', () => {
+      jasmine.clock().tick(component.showNotificationDurationMs); // timer to show note in expanded state
+      jasmine.clock().tick(component.showNotificationDurationMs); // timer to show note in collapsed state
+      expect(component.temporaryNotification).toBeFalsy();
+    });
+  });
+  describe('ShowOnRemove', () => {
+    beforeEach(() => {
+      jasmine.clock().uninstall();
+      jasmine.clock().install();
+      component.notification = { message: 'A temporary note', type: NotificationType.ShowOnRemove } as RowNotification;
+      component.handleNotifications(component.notification);
+    });
+    afterEach(() => {
+      jasmine.clock().uninstall();
+    });
+    it('temporaryNotification is set', () => {
+      expect(component.temporaryNotification).toBe(component.notification);
+    });
+    it('item is collapsed', () => {
+      jasmine.clock().tick(component.showNotificationDurationMs);
+      expect(component.isExpanded).toBe(false);
+    });
+    it('item is removed', () => {
+      jasmine.clock().tick(component.showNotificationDurationMs); // timer to show note in expanded state
+      jasmine.clock().tick(component.showNotificationDurationMs); // timer to show note in collapsed state
+      expect(component.isDeleted).toBe(true);
     });
   });
 });

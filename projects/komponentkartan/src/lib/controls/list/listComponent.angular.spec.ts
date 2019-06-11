@@ -13,6 +13,7 @@ import { ListService } from './list.service';
 import { SortDirection } from './list-column-header.component';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 @Component({
   selector: 'vgr-test',
@@ -55,7 +56,7 @@ describe('[ListComponent - Angular]', () => {
         PaginationComponent,
         IconComponent
       ],
-      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule],
+      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule],
       providers: [
         { provide: ElementRef },
         { provide: Renderer },
@@ -248,7 +249,7 @@ describe('[ListComponent - Angular]', () => {
 
   describe('When notification is set', () => {
     beforeEach(() => {
-      component.notification = { message: 'Detta är en notifikation', icon: 'vgr-icon-plus' };
+      component.notification = { message: 'Detta är en notifikation', icon: { name: 'exclamation-circle', solid: true } };
       fixture.detectChanges();
     });
     it('notification is visible', () => {
@@ -286,7 +287,7 @@ describe('[ListComponent - Angular]', () => {
       describe('and End is pressed', () => {
         beforeEach(() => {
           spy = spyOn(itemElements[3].componentInstance, 'setFocusOnRow');
-          const itemHeaderElement = itemElements[0].query(By.css('.list-item__header'));
+          const itemHeaderElement = itemElements[0].query(By.css('.list-item__header_wrapper'));
           itemHeaderElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'End' }));
           fixture.detectChanges();
         });
@@ -297,7 +298,7 @@ describe('[ListComponent - Angular]', () => {
       describe('and ArrowDown is pressed', () => {
         beforeEach(() => {
           spy = spyOn(itemElements[1].componentInstance, 'setFocusOnRow');
-          const itemHeaderElement = itemElements[0].query(By.css('.list-item__header'));
+          const itemHeaderElement = itemElements[0].query(By.css('.list-item__header_wrapper'));
           itemHeaderElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowDown' }));
           fixture.detectChanges();
         });
@@ -308,7 +309,7 @@ describe('[ListComponent - Angular]', () => {
       describe('and Ctrl + PageDown is pressed', () => {
         beforeEach(() => {
           spy = spyOn(itemElements[1].componentInstance, 'setFocusOnRow');
-          const itemHeaderElement = itemElements[0].query(By.css('.list-item__header'));
+          const itemHeaderElement = itemElements[0].query(By.css('.list-item__header_wrapper'));
           itemHeaderElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageDown', ctrlKey: true }));
           fixture.detectChanges();
         });
@@ -325,7 +326,7 @@ describe('[ListComponent - Angular]', () => {
       describe('and Home is pressed', () => {
         beforeEach(() => {
           spy = spyOn(itemElements[0].componentInstance, 'setFocusOnRow');
-          const itemHeaderElement = itemElements[3].query(By.css('.list-item__header'));
+          const itemHeaderElement = itemElements[3].query(By.css('.list-item__header_wrapper'));
           itemHeaderElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'Home' }));
           fixture.detectChanges();
         });
@@ -336,7 +337,7 @@ describe('[ListComponent - Angular]', () => {
       describe('and ArrowUp is pressed', () => {
         beforeEach(() => {
           spy = spyOn(itemElements[2].componentInstance, 'setFocusOnRow');
-          const itemHeaderElement = itemElements[3].query(By.css('.list-item__header'));
+          const itemHeaderElement = itemElements[3].query(By.css('.list-item__header_wrapper'));
           itemHeaderElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowUp' }));
           fixture.detectChanges();
         });
@@ -347,7 +348,7 @@ describe('[ListComponent - Angular]', () => {
       describe('and Ctrl + PageUp is pressed', () => {
         beforeEach(() => {
           spy = spyOn(itemElements[2].componentInstance, 'setFocusOnRow');
-          const itemHeaderElement = itemElements[3].query(By.css('.list-item__header'));
+          const itemHeaderElement = itemElements[3].query(By.css('.list-item__header_wrapper'));
           itemHeaderElement.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'PageUp', ctrlKey: true }));
           fixture.detectChanges();
         });

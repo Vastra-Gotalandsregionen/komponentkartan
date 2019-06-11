@@ -6,6 +6,9 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Guid } from '../../utils/guid';
 import { CheckboxComponent } from './checkbox.component';
+import { IconComponent } from '../icon/icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 
 describe('CheckboxComponent', () => {
@@ -20,8 +23,8 @@ describe('CheckboxComponent', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [CheckboxComponent],
-      imports: [CommonModule]
+      declarations: [CheckboxComponent, IconComponent],
+      imports: [CommonModule, FontAwesomeModule, IconModule]
     });
 
     TestBed.compileComponents().then(() => {

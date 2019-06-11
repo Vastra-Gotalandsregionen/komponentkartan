@@ -1,8 +1,11 @@
 <ng-content select="vgr-list-header"></ng-content>
-<div class="list__items">
+<div class="list__items" role="list">
   <div *ngIf="notification" class="list__notification">
-    <span class="list-item__notification__icon" [ngClass]="notification.icon">
-    </span>
+      <vgr-icon
+      [icon]="notification?.icon?.name"
+      [color]="notification?.icon?.color"
+      [solid]="notification?.icon?.solid"
+    ></vgr-icon>
     <div class="list-item__notification__message">
       {{notification? notification.message : ''}}
     </div>

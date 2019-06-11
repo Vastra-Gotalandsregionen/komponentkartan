@@ -13,7 +13,7 @@ describe('[ListItemComponent]', () => {
   let component: ListItemComponent;
 
   beforeEach(() => {
-    component = new ListItemComponent(new ListServiceMock() as ListService);
+    component = new ListItemComponent(new ListServiceMock() as ListService, null, null);
   });
 
   describe('Instatiate', () => {
@@ -104,47 +104,6 @@ describe('[ListItemComponent]', () => {
       });
       it('permanentNotification is set', () => {
         expect(component.permanentNotification).toBe(component.notification);
-      });
-    });
-    describe('is temporary', () => {
-      beforeEach(() => {
-        component.isExpanded = true;
-      });
-      describe('ShowOnCollapse', () => {
-        beforeEach(() => {
-          component.notification = { message: 'A temporary note', type: NotificationType.ShowOnCollapse } as RowNotification;
-          component.handleNotifications(component.notification);
-        });
-        it('temporaryNotification is set', () => {
-          expect(component.temporaryNotification).toBe(component.notification);
-        });
-        it('item is collapsed', () => {
-          jasmine.clock().tick(component.showNotificationDurationMs);
-          expect(component.isExpanded).toBe(false);
-        });
-        it('temporaryNotification is removed', () => {
-          jasmine.clock().tick(component.showNotificationDurationMs); // timer to show note in expanded state
-          jasmine.clock().tick(component.showNotificationDurationMs); // timer to show note in collapsed state
-          expect(component.temporaryNotification).toBeFalsy();
-        });
-      });
-      describe('ShowOnRemove', () => {
-        beforeEach(() => {
-          component.notification = { message: 'A temporary note', type: NotificationType.ShowOnRemove } as RowNotification;
-          component.handleNotifications(component.notification);
-        });
-        it('temporaryNotification is set', () => {
-          expect(component.temporaryNotification).toBe(component.notification);
-        });
-        it('item is collapsed', () => {
-          jasmine.clock().tick(component.showNotificationDurationMs);
-          expect(component.isExpanded).toBe(false);
-        });
-        it('item is removed', () => {
-          jasmine.clock().tick(component.showNotificationDurationMs); // timer to show note in expanded state
-          jasmine.clock().tick(component.showNotificationDurationMs); // timer to show note in collapsed state
-          expect(component.isDeleted).toBe(true);
-        });
       });
     });
   });

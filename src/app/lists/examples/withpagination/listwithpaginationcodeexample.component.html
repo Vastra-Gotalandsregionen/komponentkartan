@@ -10,12 +10,12 @@
       </p>
     </vgr-page-block>
     <vgr-page-block>
-      <vgr-list [pages]="pageCount" (pageChanged)="onPageChanged($event)" [flexibleHeader]="true">
+      <vgr-list [pages]="pageCount" (pageChanged)="onPageChanged($event)" [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
-          <vgr-list-column-header width="5">Förnamn</vgr-list-column-header>
-          <vgr-list-column-header width="5">Efternamn</vgr-list-column-header>
-          <vgr-list-column-header width="5">Yrke</vgr-list-column-header>
-          <vgr-list-column-header [align]="'right'" [width]="5">Inkomst</vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="firstName">Förnamn</vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="lastName">Efternamn</vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="occupation">Yrke</vgr-list-column-header>
+          <vgr-list-column-header width="5" [align]="'right'" sortKey="income">Inkomst</vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let item of persons">
           <vgr-list-item-header>

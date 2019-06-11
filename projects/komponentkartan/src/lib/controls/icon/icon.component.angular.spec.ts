@@ -3,6 +3,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { IconComponent } from './icon.component';
+import { IconModule } from './icon.module';
 
 describe('IconComponent', () => {
   let component: IconComponent;
@@ -13,7 +14,7 @@ describe('IconComponent', () => {
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [IconComponent],
-      imports: [FontAwesomeModule]
+      imports: [FontAwesomeModule, IconModule]
     });
 
     TestBed.compileComponents().then(() => {

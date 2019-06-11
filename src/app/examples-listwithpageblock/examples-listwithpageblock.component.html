@@ -10,12 +10,12 @@
       </div>
     </vgr-page-block>
     <vgr-page-block>
-      <vgr-list [flexibleHeader]="true">
+      <vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
-          <vgr-list-column-header width="5">Förnamn</vgr-list-column-header>
-          <vgr-list-column-header width="5">Efternamn</vgr-list-column-header>
-          <vgr-list-column-header width="5">Yrke</vgr-list-column-header>
-          <vgr-list-column-header width="5" [align]="'right'">Inkomst</vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="firstName">Förnamn</vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="lastName">Efternamn</vgr-list-column-header>
+          <vgr-list-column-header width="5" sortKey="occupation">Yrke</vgr-list-column-header>
+          <vgr-list-column-header width="5" [align]="'right'" sortKey="income">Inkomst</vgr-list-column-header>
         </vgr-list-header>
         <vgr-list-item *ngFor="let row of peopleFiltered">
           <vgr-list-item-header>

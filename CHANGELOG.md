@@ -8,12 +8,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - *Breaking change* Dropdown select now has a value input. As a result, the default input on dropdown items has been removed. If using dropdown select without a form control, set default values via the value input instead.
 - *Breaking change* Monthpicker has been removed. Use datepicker with min zoom set to months instead.
 - *Breaking change* Header Menu has been changed into a declarative component.
+- *Breaking change* Icons replaced with font awesome, all other icons are removed
 - Datepicker now allows text input and zooming between days, months and years views.
 - Added event for expanded status to dropdown select.
 - Fixed a bug where vgr-lists shared the same list-service but now resolves the service individually.
 - Added method in modalService to update available tab stops in modal.
 - Fixed color when editing validation field.
+- Fixed WCAG-support for vgr-list and vgr-expandable-div.
 - Added errorMessage to Dropdown select.
+- Fixed focus on list on update.
+- Fixed icons used on list-component.
 
 ## 4.2.0 (Stable, 2019-05-02)
 - Changed colors on validation

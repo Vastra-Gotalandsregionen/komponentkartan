@@ -19,6 +19,18 @@
     &:hover {
       @extend .background-color--primary-dimmed;
     }
+    .table-chevron {
+      width: initial;
+      height: initial;
+      transform: rotate(0);
+      transition: all ease .3s;
+      &.expanded {
+        transform: rotate(-180deg);
+      }
+      .icon {
+        color: $text-color--default;
+      }
+    }
   }
 
   .table-content {
@@ -75,13 +87,6 @@
   top: 0;
   right: $margin--slim;
 
-  &.expanded {
-    @extend .chevron-expanded;
-  }
-
-  &.collapsed {
-    @extend .chevron-collapsed;
-  }
 }
 
 .table > .table-header.expanded + .table-content{
@@ -95,7 +100,8 @@
 
 .table-content {
   .table-row, .table {
-    font-size: 0;
+    // removed to resolve https://www.pivotaltracker.com/story/show/164325264
+    // font-size: 0;
     .table__column:first-child { padding-left: $margin--slim * 1; }
     .table-row, .table {
       .table__column:first-child { padding-left: $margin--slim * 2 }

@@ -11,6 +11,7 @@ import { ButtonComponent } from '../../controls/button/button.component';
 import { LockButtonComponent } from '../../controls/lock-button/lock-button.component';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
 
 describe('[SaveCancelComponent - Angular]', () => {
     let component: SaveCancelComponent;
@@ -22,7 +23,7 @@ describe('[SaveCancelComponent - Angular]', () => {
         TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
         TestBed.configureTestingModule({
             declarations: [SaveCancelComponent, ButtonComponent, LockButtonComponent, IconComponent],
-            imports: [CommonModule, FormsModule, FontAwesomeModule]
+            imports: [CommonModule, FormsModule, FontAwesomeModule, IconModule]
         });
 
         TestBed.compileComponents().then(() => {

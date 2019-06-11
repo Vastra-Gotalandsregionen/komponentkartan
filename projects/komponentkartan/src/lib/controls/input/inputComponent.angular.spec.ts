@@ -18,6 +18,7 @@ import { IconComponent } from '../icon/icon.component';
 // Locale registration
 import { registerLocaleData } from '@angular/common';
 import localeSv from '@angular/common/locales/sv';
+import { IconModule } from '../icon/icon.module';
 
 describe('[InputComponent]', () => {
   let component: InputComponent;
@@ -34,7 +35,7 @@ describe('[InputComponent]', () => {
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
       declarations: [InputComponent, TruncatePipe, ErrorMessagePipe, IconComponent],
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule]
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, IconModule]
     });
 
     TestBed.compileComponents().then(() => {

@@ -50,6 +50,8 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   zoomedToMonths = false;
   zoomedToDays = false;
   private minZoomLevel: DatepickerZoomLevel;
+  private actualMinDate: Date;
+  private actualMaxDate: Date;
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
@@ -78,7 +80,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.minZoom) {
+    if (changes.minZoom || changes.minDate || changes.maxDate) {
       this.setMinZoomLevel();
     }
 
@@ -186,6 +188,12 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
       this.collapse();
     } else if (event.key === 'Tab') {
       this.collapse();
+    } else if (event.key === 'Home') {
+      event.preventDefault();
+      this.items.first.focus();
+    } else if (event.key === 'End') {
+      event.preventDefault();
+      this.items.last.focus();
     }
   }
 
@@ -390,6 +398,18 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
       return;
     }
 
+    if (this.actualMinDate && date < this.actualMinDate) {
+      this.setSelectedDate(null, true);
+      this.parseErrorMessage = 'Datumet är tidigare än tillåtet.';
+      return;
+    }
+
+    if (this.actualMaxDate && date > this.actualMaxDate) {
+      this.setSelectedDate(null, true);
+      this.parseErrorMessage = 'Datumet är senare än tillåtet.';
+      return;
+    }
+
     this.setSelectedDate(date);
   }
 
@@ -441,6 +461,8 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     this.zoomedToMonths = false;
     this.zoomedToDays = true;
 
+    const minDateDay = this.minDate ? new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate()) : null;
+    const maxDateDay = this.maxDate ? new Date(this.maxDate.getFullYear(), this.maxDate.getMonth(), this.minDate.getDate()) : null;
     const year = referenceDate.getFullYear();
     const month = referenceDate.getMonth();
     const firstDayWeekDay = new Date(year, month, 1).getDay();
@@ -460,7 +482,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
           const selectedMonth = this.selectedDate ? this.selectedDate.getMonth() : null;
           const selectedDay = this.selectedDate ? this.selectedDate.getDate() : null;
           const selected = date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === selectedDay;
-          const disabled = (this.minDate && date < this.minDate) || (this.maxDate && date > this.maxDate);
+          const disabled = (minDateDay && date < minDateDay) || (maxDateDay && date > maxDateDay);
           weekDays.push({
             date: date,
             selected: selected,
@@ -674,6 +696,8 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
         this.noSelectedDateLabel = 'Välj år';
         this.labelDateFormat = 'yyyy';
         this.inputPlaceholder = 'ÅÅ';
+        this.actualMinDate = this.minDate ? new Date(this.minDate.getFullYear(), 0) : null;
+        this.actualMaxDate = this.maxDate ? new Date(this.maxDate.getFullYear(), 0) : null;
         break;
       case 'months':
       case 'month':
@@ -685,6 +709,8 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
         this.noSelectedDateLabel = 'Välj månad';
         this.labelDateFormat = 'MMM yyyy';
         this.inputPlaceholder = 'ÅÅMM';
+        this.actualMinDate = this.minDate ? new Date(this.minDate.getFullYear(), this.minDate.getMonth()) : null;
+        this.actualMaxDate = this.maxDate ? new Date(this.maxDate.getFullYear(), this.maxDate.getMonth()) : null;
         break;
       default:
         this.minZoomLevel = DatepickerZoomLevel.Days;
@@ -694,6 +720,8 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
         this.noSelectedDateLabel = 'Välj datum';
         this.labelDateFormat = 'yyyy-MM-dd';
         this.inputPlaceholder = 'ÅÅMMDD';
+        this.actualMinDate = this.minDate ? new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate()) : null;
+        this.actualMaxDate = this.maxDate ? new Date(this.maxDate.getFullYear(), this.minDate.getMonth(), this.maxDate.getDate()) : null;
         break;
     }
   }
