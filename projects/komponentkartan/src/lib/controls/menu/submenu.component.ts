@@ -45,7 +45,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
 
         if (event.keyCode === 9) { // Tab
-            this.tab.emit();
+            this.tab.emit(event);
         }
 
         if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
@@ -79,8 +79,11 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
             this.escape.emit();
         }
 
-        event.cancelBubble = true;
-        event.preventDefault();
+        if ([36, 35, 38, 40, 27, 13, 32].includes(event.keyCode)) {
+            event.cancelBubble = true;
+            event.preventDefault();
+            return false;
+        }
     }
 
     get showExpanded() {
@@ -131,6 +134,14 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
     }
 
     ngAfterContentInit() {
+        this.appendEventListeners();
+        this.menuItems.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((change) => {
+            this.ngOnDestroy();
+            this.appendEventListeners();
+        });
+    }
+
+    appendEventListeners() {
         const menuItemArray = this.menuItems.toArray();
         menuItemArray.splice(0, 1);
         menuItemArray.forEach((x, i) => {
@@ -169,8 +180,8 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
                 });
             x.tab
                 .pipe(takeUntil(this.ngUnsubscribe))
-                .subscribe(() => {
-                    this.tab.emit();
+                .subscribe((event) => {
+                    this.tab.emit(event);
                 });
         });
     }

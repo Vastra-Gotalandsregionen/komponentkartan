@@ -6,7 +6,7 @@ export abstract class MenuItemBase {
     @Output() escape: EventEmitter<null> = new EventEmitter();
     @Output() arrowUp: EventEmitter<null> = new EventEmitter();
     @Output() arrowDown: EventEmitter<null> = new EventEmitter();
-    @Output() tab: EventEmitter<null> = new EventEmitter();
+    @Output() tab: EventEmitter<KeyboardEvent> = new EventEmitter();
     @Output() showExpanded: boolean;
 
     constructor() { }

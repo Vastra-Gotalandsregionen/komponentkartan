@@ -48,11 +48,15 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
             this.escape.emit();
         }
         if (event.keyCode === 9) { // Tab
-            this.tab.emit();
+            this.tab.emit(event);
         }
 
-        event.cancelBubble = true;
-        event.preventDefault();
+        if ([36, 35, 38, 40, 27].includes(event.keyCode)) {
+            event.cancelBubble = true;
+            event.preventDefault();
+            return false;
+        }
+
     }
 
     get notificationColorClass(): string {

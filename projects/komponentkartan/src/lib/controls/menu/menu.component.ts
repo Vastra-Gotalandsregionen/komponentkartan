@@ -23,6 +23,15 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
     constructor() { }
 
     ngAfterContentInit() {
+        this.appendEventListeners();
+        this.menuItems.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((change) => {
+            this.ngOnDestroy();
+            this.appendEventListeners();
+        });
+
+    }
+
+    appendEventListeners() {
         this.menuItems.forEach((x, i) => {
             x.home
                 .pipe(takeUntil(this.ngUnsubscribe))
@@ -60,15 +69,7 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
                     }
                     this.menuItems.toArray()[i + 1].setFocus();
                 });
-            x.tab
-                .pipe(takeUntil(this.ngUnsubscribe))
-                .subscribe(() => {
-                    if (i === this.menuItems.length - 1) {
-                        this.menuItems.first.setFocus();
-                        return;
-                    }
-                    this.menuItems.toArray()[i + 1].setFocus();
-                });
+
             x.escape
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(() => {
