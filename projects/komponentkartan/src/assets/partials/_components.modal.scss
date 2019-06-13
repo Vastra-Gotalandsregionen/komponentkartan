@@ -44,17 +44,6 @@
   }
 }
 
-.modal--open {
-  overflow: hidden;
-  .sidebar-menu, .page-header {
-    z-index: 0;
-  }
-  vgr-header {
-    position: fixed;
-    z-index: 0;
-  }
-}
-
 @media screen and (min-width: $desktop-width--medium) {
   .modal-content {
     padding-top: 38px;

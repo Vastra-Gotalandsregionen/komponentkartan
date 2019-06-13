@@ -23,16 +23,16 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
     constructor() { }
 
     ngAfterContentInit() {
-        this.addSubscription();
+        this.addSubscriptions();
         this.menuItems.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((change) => {
             this.ngUnsubscribe.next();
             this.ngUnsubscribe.complete();
-            this.addSubscription();
+            this.addSubscriptions();
         });
 
     }
 
-    addSubscription() {
+    addSubscriptions() {
         this.menuItems.forEach((x, i) => {
             x.home
                 .pipe(takeUntil(this.ngUnsubscribe))
