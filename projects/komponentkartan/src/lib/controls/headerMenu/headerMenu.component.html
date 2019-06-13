@@ -1,4 +1,4 @@
-﻿<div *ngIf="userName" [ngClass]="{ 'header__login-info-menu': menuItems.length > 0 }" tabindex="1"
+﻿<div *ngIf="userName" [ngClass]="{ 'header__login-info-menu': menuItems.length > 0 }" tabindex="0"
   (keydown)="keyToggleHeaderMenu($event)" [attr.aria-haspopup]="menuItems.length > 0" role="menu">
   <vgr-login-information [initials]="internalInitials" [userName]="userName" [textColor]="textColor" (mousedown)="clickToggleHeaderMenu($event)"
     [circleColor]="circleColor" [attr.aria-haspopup]="menuItems.length > 0" role="menu">

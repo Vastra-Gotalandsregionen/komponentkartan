@@ -22,37 +22,40 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
 
-        if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
+        if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
             if (this.disabled) {
 
-                event.cancelBubble = true;
+                event.stopPropagation();
                 event.preventDefault();
                 return;
             }
             this.isInternalLink
                 ? this.router.navigate([this.link]) : this.externalLink();
         }
-        if (event.keyCode === 36) { // Home
+        if (event.key === 'Home') {
             this.home.emit();
         }
-        if (event.keyCode === 35) { // End
+        if (event.key === 'End') {
             this.end.emit();
         }
-        if (event.keyCode === 38) { // Arrow Up
+        if (event.key === 'ArrowUp' || event.key === 'Up') {
             this.arrowUp.emit();
         }
-        if (event.keyCode === 40) { // Arrow Down
+        if (event.key === 'ArrowDown' || event.key === 'Down') {
             this.arrowDown.emit();
         }
-        if (event.keyCode === 27) { // Escape
+        if (event.key === 'Escape' || event.key === 'Esc') {
             this.escape.emit();
         }
-        if (event.keyCode === 9) { // Tab
+        if (event.key === 'Tab') {
             this.tab.emit();
         }
 
-        event.cancelBubble = true;
-        event.preventDefault();
+        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc', ].indexOf(event.key) > -1) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
     }
 
     get notificationColorClass(): string {
