@@ -71,10 +71,7 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
 
       menuItem.tab
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe((event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          this.elementRef.nativeElement.querySelector('.header__login-info-menu').focus();
+        .subscribe(() => {
           this.hideMenu = true;
         });
     });
@@ -115,7 +112,7 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
     this.menuItems.first.setFocus();
   }
 
-  @HostListener('document:mousedown', ['$event'])
+ @HostListener('document:mousedown', ['$event'])
   onDocumentClick(event: any) {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.hideMenu = true;
