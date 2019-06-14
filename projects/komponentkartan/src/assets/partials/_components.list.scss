@@ -19,8 +19,9 @@
 }
 
 .list-item {
-  position: relative;
+  // position: relative;
   .list-item__header_wrapper {
+    margin-left: -5px;
     > vgr-icon {
       .icon {
         position: absolute;
@@ -39,6 +40,7 @@
     }
     &:focus {
       outline: $focus-outline-width solid $focus-color;
+      // margin-left: -5px;
     }
   }
 }
@@ -151,7 +153,7 @@ vgr-list.list--new-item-added {
 
 .list__items {
   position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
-
+  z-index: 12;
   &:before {
     content: "";
     width: $content-width--small;

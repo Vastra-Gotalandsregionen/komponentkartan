@@ -5,7 +5,7 @@
   </vgr-login-information>
   <vgr-icon icon="chevron-down" size="xs" class="caret" *ngIf="menuItems.length > 0" 
     class="header__login-info-menu-arrow" [ngClass]="{'expanded' : !hideMenu}"></vgr-icon>
-  <div class="header-menu header-menu__content" [ngClass]="{'header-menu--hidden' : hideMenu}">
+  <div class="header-menu header-menu__content" [ngClass]="{'header-menu--hidden' : hideMenu}" *ngIf="menuItems.length > 0">
     <div role="menu">
       <ng-content></ng-content>
     </div>
