@@ -122,8 +122,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   writeValue(value: any) {
-    this.selectedDate = value;
-    this.label = this.formatDate(value);
+    this.setSelectedDate(value, false, false);
   }
 
   registerOnChange(func: (value: any) => any) {
@@ -726,9 +725,12 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     }
   }
 
-  private setSelectedDate(date: Date, parseError = false) {
+  private setSelectedDate(date: Date, parseError = false, emit = true) {
+    if (emit) {
+      this.onChange(date);
+    }
+
     this.selectedDate = date;
-    this.onChange(date);
     this.parseError = parseError;
 
     if (!parseError) {
