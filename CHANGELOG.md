@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 5.0.1
+- Fixed a bug where setting max date in datepicker broke the datepicker.
+
 ## 5.0.0 (Stable, 2019-06-18)
 - *Breaking change* Dropdown select now has a value input. As a result, the default input on dropdown items has been removed. If using dropdown select without a form control, set default values via the value input instead.
 - *Breaking change* Monthpicker has been removed. Use datepicker with min zoom set to months instead.
