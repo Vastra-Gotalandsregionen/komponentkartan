@@ -30,7 +30,7 @@ export class ListexamplewithrownotificationComponent {
       htmlEncoder.prepareHighlightedSection(this.examples.htmlAdvancedListMarkup);
 
     this.panelNotification = {
-      message: 'Panelinformation', icon: { name: 'exclamation-circle' },
+      message: 'Panelinformation', icon: { name: 'exclamation-circle', color: 'error', solid: true },
       type: NotificationType.Permanent
     } as RowNotification;
 

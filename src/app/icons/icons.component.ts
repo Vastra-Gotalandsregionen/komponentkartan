@@ -10,7 +10,7 @@ export class IconsComponent implements OnInit {
   html = `<div class="vgr-icon-edit"></div>`;
   code = `row.notifyOnCollapse(row.previewObject.enhet + ' sparades', { name: 'check-circle'; color: 'success' });`;
   code2 = `this.row.notification = {
-  message: 'Ett meddelande', icon: { name: 'exclamation-circle'; color: 'error' },
+  message: 'Ett meddelande', icon: { name: 'exclamation-circle'; color: 'error', solid: true },
   type: NotificationType.Permanent
 } as RowNotification;`;
   iconExamplesHTML: string;
