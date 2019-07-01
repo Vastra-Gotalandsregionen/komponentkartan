@@ -58,9 +58,9 @@
     padding-left: 17px;
     padding-right: 17px;
     &.button--disabled {
-      color: $secondary-color--default;
+      color: $control-color--disabled;
       background-color: $text-color--light;
-      border-color: $secondary-color--default;
+      border-color: $control-color--disabled;
     }
     &:hover:not(.button--disabled),
     &:focus:not(.button--disabled) {
@@ -95,7 +95,7 @@
     padding-left: 10px;
     padding-right: 10px;
     &.button--disabled {
-      color: $secondary-color--default;
+      color: $control-color--disabled;
     }
     &.button--enabling {
       animation: none;

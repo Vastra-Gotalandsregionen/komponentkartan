@@ -18,7 +18,7 @@
         height: $component-height;
         width: 160px;
         padding-left: $margin--slim;
-        border: $border--single solid $control-border-color--default;
+        border: $border--single solid $control-color--disabled;
         border-radius: 1px;
         background-color: $background-color--content;
         transition: background-color 0.6s linear;
