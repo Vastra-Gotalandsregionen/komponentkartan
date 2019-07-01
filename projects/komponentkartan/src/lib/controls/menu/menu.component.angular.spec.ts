@@ -197,7 +197,7 @@ describe('[MenuComponent]', () => {
 
                     beforeEach(() => {
                         focusedElement = debugElement.query(By.css(':focus'));
-                        focusedElement.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+                        focusedElement.triggerEventHandler('keydown', { key: 'ArrowDown' } as KeyboardEvent);
 
                         fixture.detectChanges();
                         jasmine.clock().tick(650);
@@ -236,7 +236,7 @@ describe('[MenuComponent]', () => {
 
                         navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate');
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'Enter' } as KeyboardEvent);
                         fixture.detectChanges();
                     });
                     it('router is activated', () => {
@@ -251,7 +251,7 @@ describe('[MenuComponent]', () => {
 
                         navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate');
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: ' ' } as KeyboardEvent);
                         fixture.detectChanges();
                     });
                     it('router is activated', () => {
@@ -262,7 +262,7 @@ describe('[MenuComponent]', () => {
                     beforeEach(() => {
                         spyOn(component.menuItems.first.arrowDown, 'emit').and.callThrough();
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'ArrowDown' } as KeyboardEvent);
                         fixture.detectChanges();
                     });
                     it('godown event is emitted', () => {
@@ -278,7 +278,7 @@ describe('[MenuComponent]', () => {
                     describe('Enter is pressed', () => {
                         beforeEach(() => {
                             const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
-                            menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
+                            menuItemToTriggerOn.triggerEventHandler('keydown', { key: ' ' } as KeyboardEvent);
 
                             fixture.detectChanges();
                             jasmine.clock().tick(650);
@@ -297,7 +297,7 @@ describe('[MenuComponent]', () => {
 
                         beforeEach(() => {
                             const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
-                            menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
+                            menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'Enter' } as KeyboardEvent);
 
                             fixture.detectChanges();
                             jasmine.clock().tick(650);
@@ -316,7 +316,7 @@ describe('[MenuComponent]', () => {
 
                                 spyOn(actionPanelDebugElement.componentInstance.arrowDown, 'emit').and.callThrough();
 
-                                actionPanelDebugElement.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+                                actionPanelDebugElement.triggerEventHandler('keydown', { key: 'ArrowDown' } as KeyboardEvent);
                                 fixture.detectChanges();
                             });
                             it('last item in the submenuitem has focus', () => {
@@ -336,7 +336,7 @@ describe('[MenuComponent]', () => {
 
                                     spyOn(backToTopDebugElement.componentInstance.arrowUp, 'emit').and.callThrough();
 
-                                    backToTopDebugElement.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
+                                    backToTopDebugElement.triggerEventHandler('keydown', { key: 'ArrowUp' } as KeyboardEvent);
                                     fixture.detectChanges();
                                 });
                                 it('previous menuitem has focus', () => {
@@ -359,7 +359,7 @@ describe('[MenuComponent]', () => {
                                     mySub = <SubmenuComponent>component.menuItems.toArray()[1];
                                     spyOn(backToTopElement.componentInstance.escape, 'emit').and.callThrough();
 
-                                    backToTopElement.triggerEventHandler('keydown', { keyCode: 27 } as KeyboardEvent);
+                                    backToTopElement.triggerEventHandler('keydown', { key: 'Esc' } as KeyboardEvent);
                                     submenucomponent.ngOnInit();
 
 
@@ -386,7 +386,7 @@ describe('[MenuComponent]', () => {
                                 beforeEach(() => {
                                     spyOn(actionPanelDebugElement.componentInstance.home, 'emit').and.callThrough();
                                     spyOn(submenucomponent.home, 'emit').and.callThrough();
-                                    actionPanelDebugElement.triggerEventHandler('keydown', { keyCode: 36 } as KeyboardEvent);
+                                    actionPanelDebugElement.triggerEventHandler('keydown', { key: 'Home' } as KeyboardEvent);
                                     fixture.detectChanges();
                                 });
                                 it('first item in menu is focused', () => {
@@ -407,7 +407,7 @@ describe('[MenuComponent]', () => {
                                 beforeEach(() => {
                                     spyOn(actionPanelDebugElement.componentInstance.end, 'emit').and.callThrough();
                                     spyOn(submenucomponent.end, 'emit').and.callThrough();
-                                    actionPanelDebugElement.triggerEventHandler('keydown', { keyCode: 35 } as KeyboardEvent);
+                                    actionPanelDebugElement.triggerEventHandler('keydown', { key: 'End' } as KeyboardEvent);
                                     fixture.detectChanges();
                                 });
                                 it('last visible item on menu is focused (submenus last item)', () => {
@@ -432,7 +432,7 @@ describe('[MenuComponent]', () => {
 
                                 spyOn(actionPanelDebugElement.componentInstance.arrowUp, 'emit').and.callThrough();
 
-                                actionPanelDebugElement.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
+                                actionPanelDebugElement.triggerEventHandler('keydown', { key: 'ArrowUp' } as KeyboardEvent);
                                 fixture.detectChanges();
                             });
                             it('submenuitem has focus', () => {
@@ -448,7 +448,7 @@ describe('[MenuComponent]', () => {
                 describe('Arrow down is pressed on last visible menuitem', () => {
                     beforeEach(() => {
                         const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 40 } as KeyboardEvent);
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'ArrowDown' } as KeyboardEvent);
                         fixture.detectChanges();
                     });
                     it('first menuItems has focus', () => {
@@ -459,7 +459,7 @@ describe('[MenuComponent]', () => {
                 describe('Arrow up is pressed on first menuitem with closed submenu', () => {
                     beforeEach(() => {
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'ArrowUp' } as KeyboardEvent);
                         fixture.detectChanges();
                     });
                     it('submenuitem has focus', () => {
@@ -475,7 +475,7 @@ describe('[MenuComponent]', () => {
                         fixture.detectChanges();
 
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { keyCode: 38 } as KeyboardEvent);
+                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'ArrowUp' } as KeyboardEvent);
 
                     });
                     it(('submenu is expanded'), () => {

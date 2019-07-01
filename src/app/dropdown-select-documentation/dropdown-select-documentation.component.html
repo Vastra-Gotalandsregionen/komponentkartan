@@ -87,16 +87,6 @@
       </div>
       <div style="margin-right: 20px">
         <div>
-          Endast visning
-        </div>
-        <div>
-          <vgr-dropdown-select [small]="true" [readonly]="true" [formControl]="form">
-              <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
-          </vgr-dropdown-select>
-        </div>
-      </div>
-      <div>
-        <div>
           Inaktiv
         </div>
         <div>
@@ -104,7 +94,29 @@
             <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
+      </div>      
+      <div style="margin-right: 20px">
+        <div>
+          Endast visning
+        </div>
+        <div>
+          <vgr-dropdown-select [small]="true" [readonly]="true" [formControl]="form">
+              <vgr-dropdown-item [value]="itemValue">
+                {{itemLabel}}
+              </vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </div>
       </div>
+      <div style="max-width: 292px;">
+        <div style="margin-bottom: 4px;">
+          <vgr-button [buttonStyle]="'secondary'" (click)="testReadonly=!testReadonly">Testa endast visning flera valda</vgr-button>
+        </div>
+        <div>
+          <vgr-dropdown-select [multi]="true" [readonly]="testReadonly">
+            <vgr-dropdown-item *ngFor="let item of items10">{{item}}</vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </div>
+      </div>      
     </div>
   </div>
   <div class="docs__api">

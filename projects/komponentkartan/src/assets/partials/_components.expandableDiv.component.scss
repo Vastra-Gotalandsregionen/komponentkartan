@@ -2,9 +2,11 @@
   position: relative;
   display: block;
   min-height: 20px;
+
   .expandable-div-header {
     cursor: pointer;
-    > vgr-icon {
+
+    >vgr-icon {
       .icon {
         position: absolute;
         right: 0;
@@ -14,23 +16,26 @@
         color: $text-color--default;
       }
     }
-    > .expanded {
-      .icon {
-        transform: rotate(-180deg);
-      }
+
+    &[aria-expanded=true] >vgr-icon .icon {
+      transform: rotate(-180deg);
     }
+    
     .expandable-div-chevron {
       position: absolute;
       top: 0;
       right: 0px;
+
       &.expanded {
         @extend .chevron-expanded;
       }
+
       &.collapsed {
         @extend .chevron-collapsed;
       }
     }
   }
+
   &:focus {
     outline: 0; // z-index: 999;
     box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
@@ -40,16 +45,4 @@
 .expandable-div-header:focus {
   outline: 0;
   box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
-}
-.expandable-div-header {
-  .icon {
-    position: absolute;
-    top: 4px;
-    right: 0;
-    transform: rotate(0deg);
-    transition: transform 0.4s;
-  }
-  &[aria-expanded=true] .icon {
-    transform: rotate(180deg);
-  }
 }

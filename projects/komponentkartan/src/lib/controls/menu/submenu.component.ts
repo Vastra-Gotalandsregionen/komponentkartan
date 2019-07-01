@@ -44,11 +44,11 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
 
-        if (event.keyCode === 9) { // Tab
+        if (event.key === 'Tab') { // Tab
             this.tab.emit();
         }
 
-        if (event.keyCode === 13 || event.keyCode === 32) { // Enter, Space
+        if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
             this.showExpanded = !this.showExpanded;
             // SetFocus after the animation is completed.
             setTimeout(() => {
@@ -59,28 +59,29 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
                 }
             }, 650);
         }
-        if (event.keyCode === 36) { // Home
+        if (event.key === 'Home') {
             this.home.emit();
         }
-        if (event.keyCode === 35) { // End
+        if (event.key === 'End') {
             this.end.emit();
         }
-        if (event.keyCode === 40) { // Arrow Down
+        if (event.key === 'ArrowDown' || event.key === 'Down') {
             if (this.expanded) {
                 this.menuItems.toArray()[1].setFocus();
             } else {
                 this.arrowDown.emit();
             }
         }
-        if (event.keyCode === 38) { // Arrow Up
+        if (event.key === 'ArrowUp' || event.key === 'Up') {
             this.arrowUp.emit();
         }
-        if (event.keyCode === 27) { // Escape
+        if (event.key === 'Escape' || event.key === 'Esc') {
             this.escape.emit();
         }
-
-        event.cancelBubble = true;
-        event.preventDefault();
+        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc', ].indexOf(event.key) > -1) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
     }
 
     get showExpanded() {
@@ -131,6 +132,15 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
     }
 
     ngAfterContentInit() {
+        this.addSubscriptions();
+        this.menuItems.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((change) => {
+            this.ngUnsubscribe.next();
+            this.ngUnsubscribe.complete();
+            this.addSubscriptions();
+        });
+    }
+
+    addSubscriptions() {
         const menuItemArray = this.menuItems.toArray();
         menuItemArray.splice(0, 1);
         menuItemArray.forEach((x, i) => {
@@ -169,8 +179,8 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
                 });
             x.tab
                 .pipe(takeUntil(this.ngUnsubscribe))
-                .subscribe(() => {
-                    this.tab.emit();
+                .subscribe((event) => {
+                    this.tab.emit(event);
                 });
         });
     }

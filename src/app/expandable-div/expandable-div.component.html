@@ -20,7 +20,8 @@
     <h2>Resultat</h2>
     <vgr-expandable-div [expanded]="false" (expandedChanged)="onExpandedChanged($event)">
       <vgr-expandable-div-header>
-        <p>Denna div är collapsed från början</p>
+        <vgr-icon icon="check-circle" color="success"></vgr-icon>
+        Denna div är collapsed från början
       </vgr-expandable-div-header>
       <vgr-expandable-div-content>
         <p>Lite innehåll</p>

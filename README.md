@@ -8,16 +8,16 @@ Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular
 # Releaser för Komponentkartan
 Komponentkartan planeras släppas i major-version fyra gånger per år, förutsatt att det finns någon funktionalitet som leder till breaking changes att släppa. 
 
+Version 5: släppt 18 Juni, för mer information om releasen och innehåll: [Realeseinformaiton](https://github.com/Vastra-Gotalandsregionen/komponentkartan/wiki/Releaser-(prelimin%C3%A4rt))
+
 ## Planerade releaser
 Under 2019 har följande datum satt för release av major-versioner
-* Version 5: runt 22 maj uppdaterat till runt 15 juni 2019(test pågår)
-
-För mer information om releasen och innehåll: [Realeseinformaiton](https://github.com/Vastra-Gotalandsregionen/komponentkartan/wiki/Releaser-(prelimin%C3%A4rt))
+* Version 6: TBD
 
 ## Komma igång
 
 ### 0. Förutsättningar
-Se [Demoprojektet]https://github.com/Vastra-Gotalandsregionen/komponentkartan-demo) för en exempeluppsättning.
+Se [Demoprojektet](https://github.com/Vastra-Gotalandsregionen/komponentkartan-demo) för en exempeluppsättning.
 
 ### 1. Installera vgr-komponentkartan via **npm**
 ```npm

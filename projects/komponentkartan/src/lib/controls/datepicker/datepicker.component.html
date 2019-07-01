@@ -125,7 +125,7 @@
       <vgr-icon icon="exclamation-circle" size="sm" class="input-validation_status__icon"></vgr-icon>
       <div class="validation__status__message">{{parseErrorMessage}}</div>
     </div>
-    <div *ngIf="!parseError" class="validation__status" title="{{errorMessage | errorMessage : formControl?.errors : true}}">
+    <div *ngIf="formControl?.errors" class="validation__status" title="{{errorMessage | errorMessage : formControl?.errors : true}}">
       <vgr-icon icon="exclamation-circle" size="sm" class="input-validation_status__icon"></vgr-icon>
       <div class="validation__status__message">{{errorMessage | errorMessage : formControl?.errors : true}}</div>
     </div>

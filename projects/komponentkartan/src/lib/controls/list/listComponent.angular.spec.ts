@@ -249,7 +249,7 @@ describe('[ListComponent - Angular]', () => {
 
   describe('When notification is set', () => {
     beforeEach(() => {
-      component.notification = { message: 'Detta är en notifikation', icon: { name: 'exclamation-circle', solid: true } };
+      component.notification = { message: 'Detta är en notifikation', icon: { name: 'exclamation-circle', solid: true, color: 'error' } };
       fixture.detectChanges();
     });
     it('notification is visible', () => {

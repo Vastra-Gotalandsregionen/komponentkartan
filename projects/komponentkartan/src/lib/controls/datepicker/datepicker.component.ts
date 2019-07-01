@@ -122,8 +122,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   writeValue(value: any) {
-    this.selectedDate = value;
-    this.label = this.formatDate(value);
+    this.setSelectedDate(value, false, false);
   }
 
   registerOnChange(func: (value: any) => any) {
@@ -462,7 +461,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     this.zoomedToDays = true;
 
     const minDateDay = this.minDate ? new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate()) : null;
-    const maxDateDay = this.maxDate ? new Date(this.maxDate.getFullYear(), this.maxDate.getMonth(), this.minDate.getDate()) : null;
+    const maxDateDay = this.maxDate ? new Date(this.maxDate.getFullYear(), this.maxDate.getMonth(), this.maxDate.getDate()) : null;
     const year = referenceDate.getFullYear();
     const month = referenceDate.getMonth();
     const firstDayWeekDay = new Date(year, month, 1).getDay();
@@ -721,14 +720,17 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
         this.labelDateFormat = 'yyyy-MM-dd';
         this.inputPlaceholder = 'ÅÅMMDD';
         this.actualMinDate = this.minDate ? new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate()) : null;
-        this.actualMaxDate = this.maxDate ? new Date(this.maxDate.getFullYear(), this.minDate.getMonth(), this.maxDate.getDate()) : null;
+        this.actualMaxDate = this.maxDate ? new Date(this.maxDate.getFullYear(), this.maxDate.getMonth(), this.maxDate.getDate()) : null;
         break;
     }
   }
 
-  private setSelectedDate(date: Date, parseError = false) {
+  private setSelectedDate(date: Date, parseError = false, emit = true) {
+    if (emit) {
+      this.onChange(date);
+    }
+
     this.selectedDate = date;
-    this.onChange(date);
     this.parseError = parseError;
 
     if (!parseError) {
