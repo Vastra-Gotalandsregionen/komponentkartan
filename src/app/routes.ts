@@ -80,7 +80,13 @@ export const appRoutes: Routes = [
     { path: 'pagestructure', component: PageStructureComponent },
     { path: 'card', component: CardComponent },
     { path: 'sizes', component: SizesComponent },
-    { path: 'menu', component: MenuComponent },
+    {
+        path: 'menu', component: MenuComponent,
+        children: [{
+            path: ':id',
+            component: MenuComponent
+        }]
+    },
     { path: 'listexample-simple', component: ListcodeexampleComponent },
     { path: 'listexample-pagination', component: ListwithpaginationcodeexampleComponent },
     { path: 'listexample-actionbuttons', component: ListExampleWithActionButtonsComponent },
@@ -97,7 +103,7 @@ export const appRoutes: Routes = [
     { path: 'page-block', component: PageBlockDocumentationComponent },
     { path: 'page-header', component: PageHeaderDocumentationComponent },
     { path: 'dropdown-select', component: DropdownSelectDocumentationComponent },
-    { path: 'pagination-documentation', component: PaginationDocumentationComponent},
+    { path: 'pagination-documentation', component: PaginationDocumentationComponent },
     { path: 'modaldialog', component: ModaldialogComponent },
     { path: 'grid', component: GridDocumentationComponent },
     { path: 'notification', component: NotificationDocumentationComponent },
