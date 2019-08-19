@@ -5,7 +5,8 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 5.0.3
-- Fixed a bug in listheader where buttons were not clickable
+- Fixed a bug in listheader where buttons were not clickable.
+- Added event for valueChange for InputField and updated documentation.
 
 ## 5.0.2
 - Fixed a bug in dropdown select where linebreaks inside dropdown item tags caused whitespaces to be added in start and ending in label.
