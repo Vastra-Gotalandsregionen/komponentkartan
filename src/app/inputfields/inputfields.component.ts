@@ -22,6 +22,7 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   percentValue: number;
   kmValue: number;
   intValue: number;
+  changeValue: any;
 
   state: string;
   allCities: any;
@@ -97,6 +98,10 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  valueChange(value) {
+    this.changeValue = value;
   }
 
   createForm() {

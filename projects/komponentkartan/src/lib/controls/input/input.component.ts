@@ -42,6 +42,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
+  @Output() valueChanged: EventEmitter<any>;
 
   get errorClass() {
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
@@ -64,6 +65,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.blur = new EventEmitter<any>();
     this.focus = new EventEmitter<any>();
+    this.valueChanged = new EventEmitter<any>();
     this.nrOfDecimals = 2;
     this.swedishDecimalPipe = new DecimalPipe('sv-SE');
   }
@@ -108,7 +110,9 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.onTouched = func;
   }
 
-  onChange(value: any) { }
+  onChange(value: any) {
+    this.valueChanged.emit(value);
+  }
 
   onTouched() { }
 

@@ -11,16 +11,16 @@
       <br> - Visar suffix.
     </p>
     <br>
-    <vgr-input [readonly]="readonly"></vgr-input><br>
-    <p>Förändras med tema:
-      <strong>nej</strong>
+    <vgr-input [readonly]="readonly"></vgr-input>
+    <p>Förändras med tema: <strong>nej</strong>
     </p>
   </div>
 
   <div class="docs__examples">
     <vgr-button (click)="readonly = !readonly">Readonly</vgr-button>
     <p>Ändra storleken på inputfälten:</p>
-    <vgr-radio-group [options]="[{value:'Stor', displayName:'Stor', selected:true},{value:'Liten', displayName:'Liten'}]"
+    <vgr-radio-group
+      [options]="[{value:'Stor', displayName:'Stor', selected:true},{value:'Liten', displayName:'Liten'}]"
       (selectedChanged)="toggleInputType($event)">
     </vgr-radio-group>
     <form [formGroup]="form">
@@ -61,7 +61,8 @@
           <div>
             Numeriskt värde utan enhet
             <vgr-input [readonly]="readonly" formControlName="control5" [formatNumber]="true" [alignRight]="true"
-              [small]="isSmall" [errorMessage]="validationMessages.control5" [showValidation]="form.controls.control5.touched"></vgr-input>
+              [small]="isSmall" [errorMessage]="validationMessages.control5"
+              [showValidation]="form.controls.control5.touched"></vgr-input>
             <span>Värde: </span>
             <span>{{formatNumericValue(form.controls.control5.value)}}</span>
           </div>
@@ -81,13 +82,15 @@
           </div>
           <div>
             Mellan 2 och 6 tecken
-            <vgr-input [readonly]="readonly" formControlName="control8" [maxlength]=6 [errorMessage]="validationMessages.control8"
-              [small]="isSmall" [showValidation]="form.controls.control8.touched"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control8" [maxlength]=6
+              [errorMessage]="validationMessages.control8" [small]="isSmall"
+              [showValidation]="form.controls.control8.touched"></vgr-input>
           </div>
           <div>
             Heltal med enhet
             <vgr-input [readonly]="readonly" formControlName="control9" [formatNumber]="true" [nrOfDecimals]="0"
-              [suffix]="'st'" [errorMessage]="validationMessages.control9" [alignRight]="true" [small]="isSmall"></vgr-input>
+              [suffix]="'st'" [errorMessage]="validationMessages.control9" [alignRight]="true" [small]="isSmall">
+            </vgr-input>
             <span>Antal: </span>
             <span>{{intValue + 0}}</span>
           </div>
@@ -110,14 +113,20 @@
         <div class="one-third">
           <div>
             Ange en storstad i USA (validera vid initiering)
-            <vgr-input [readonly]="readonly" formControlName="control13" [small]="isSmall" [errorMessage]="validationMessages.control13"
-              [showValidation]="true"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control13" [small]="isSmall"
+              [errorMessage]="validationMessages.control13" [showValidation]="true"></vgr-input>
             <span>Din stad: {{form.controls.control13.value}}</span>
           </div>
           <div>
             E-postadress
-            <vgr-input [readonly]="readonly" formControlName="control14" [small]="isSmall" [errorMessage]="validationMessages.control14"
-              [showValidation]="form.controls.control14.touched"></vgr-input>
+            <vgr-input [readonly]="readonly" formControlName="control14" [small]="isSmall"
+              [errorMessage]="validationMessages.control14" [showValidation]="form.controls.control14.touched">
+            </vgr-input>
+          </div>
+          <div>
+            <br><br>
+            <vgr-input [readonly]="readonly" (valueChanged)="valueChange($event)"></vgr-input>
+            <span>Value change: {{changeValue}}</span>
           </div>
         </div>
       </div>
@@ -189,6 +198,28 @@
         <td>small: boolean</td>
         <td>Gör inputfälten till en mindre storlek.</td>
         <td>[small]="true"</td>
+      </tr>
+
+      <tr>
+          <th>Property</th>
+          <th>Beskrivning</th>
+          <th>Exempel</th>
+        </tr>
+  
+      <tr>
+        <td>blur: eventEmitter</td>
+        <td>Event som triggas när användaren går ifrån inputfield.</td>
+        <td>(blur)="function($event)"</td>
+      </tr>
+      <tr>
+        <td>focus: eventEmitter</td>
+        <td>Event som triggas när användaren fokuserar på inputfield.</td>
+        <td>(focus)="function($event)"</td>
+      </tr>
+      <tr>
+        <td>valueChanged: eventEmitter</td>
+        <td>Event som triggas när inputfield uppdateras med ny text.</td>
+        <td>(valueChanged)="function($event)"</td>
       </tr>
     </table>
   </div>
