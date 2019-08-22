@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 5.0.3
 - Fixed a bug in listheader where buttons were not clickable.
 - Added event for valueChange for InputField and updated documentation.
+- Fixed inputfield to support spacing and comma instead of dots for numbers.
 
 ## 5.0.2
 - Fixed a bug in dropdown select where linebreaks inside dropdown item tags caused whitespaces to be added in start and ending in label.

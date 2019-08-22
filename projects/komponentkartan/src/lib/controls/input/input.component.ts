@@ -129,8 +129,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   formatDisplayNumber() {
-    if (this.formatNumber && this.isNumber(this.displayValue)) {
-      this.value = this.convertStringToNumber(this.displayValue);
+    const number = this.displayValue !== undefined && this.displayValue.replace(/,/g, '.').replace(/ /g, '').replace(/−/g, '-');
+
+    if (this.formatNumber && this.isNumber(number)) {
+      this.value = this.convertStringToNumber(number);
       this.displayValue = this.convertNumberToString(this.value);
     } else {
       this.value = this.displayValue;
@@ -153,14 +155,15 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     }
     this.invalidOnFocus = this.control && this.control.invalid && this.showValidation;
     if (this.isNumber(this.displayValue)) {
-      this.displayValue = this.displayValue.toString().replace(/\s/g, '');
+      this.displayValue = this.displayValue.toString().replace(/\s/g, '').replace(/−/g, '-');
     }
     this.hasFocus = true;
+
     this.focus.emit(event);
   }
 
   private convertStringToNumber(value: string): number {
-    const normalized = value.toString().trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
+    const normalized = value.toString().trim().replace(/\s/g, '').replace(/,/g, '.').replace(/−/g, '-');
     const floatVal = this.roundNumber(parseFloat(normalized));
     return floatVal;
   }
