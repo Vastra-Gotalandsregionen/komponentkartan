@@ -1,4 +1,3 @@
-import { from } from 'rxjs';
 
 export { ActionPanelComponent } from './controls/action-panel/action-panel.component';
 export { TextareaComponent } from './controls/textarea/textarea.component';
@@ -91,5 +90,11 @@ export { ErrorMessagePipe } from './pipes/errorMessagePipe';
 
 export { BrowserDetector } from './services/browserDetector';
 export { ModalService } from './services/modalService';
+
+export { GridComponent } from './grid/grid.component';
+export { GridHeaderComponent } from './grid/grid-header.component';
+export { GridColumnComponent } from './grid/grid-column.component';
+export { GridRowComponent } from './grid/grid-row.component';
+export { GridContentComponent } from './grid/grid-content.component';
 
 export { Guid } from './utils/guid';

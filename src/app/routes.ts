@@ -48,6 +48,7 @@ import { DropdownSelectDocumentationComponent } from './dropdown-select-document
 import { PaginationDocumentationComponent } from './pagination-documentation/pagination-documentation.component';
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
+import { GridDocumentationComponent } from './grid-documentation/grid-documentation.component';
 
 export const appRoutes: Routes = [
 
@@ -97,6 +98,7 @@ export const appRoutes: Routes = [
     { path: 'dropdown-select', component: DropdownSelectDocumentationComponent },
     { path: 'pagination-documentation', component: PaginationDocumentationComponent},
     { path: 'modaldialog', component: ModaldialogComponent },
+    { path: 'grid', component: GridDocumentationComponent },
 
     { path: '**', redirectTo: '/' }
 ];
