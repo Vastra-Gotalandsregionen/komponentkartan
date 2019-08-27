@@ -1,11 +1,11 @@
 <vgr-page class="no-sort">
   <vgr-page-body>
     <!--vgr-page-block-->
-    <vgr-grid>
+    <vgr-grid (sortChanged)="sort($event)">
       <vgr-grid-header>
-        <vgr-grid-header-column>1</vgr-grid-header-column>
-        <vgr-grid-header-column>2</vgr-grid-header-column>
-        <vgr-grid-header-column>3</vgr-grid-header-column>
+        <vgr-grid-header-column [sortKey]="'1'">1</vgr-grid-header-column>
+        <vgr-grid-header-column [sortKey]="'2'">2</vgr-grid-header-column>
+        <vgr-grid-header-column [sortKey]="'3'">3</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row>
         <vgr-grid-column>4</vgr-grid-column>

@@ -1,14 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+export enum GridSortDirection {
+  None,
+  Ascending,
+  Descending
+}
 @Component({
   selector: 'vgr-grid-header-column',
   templateUrl: './grid-header-column.component.html'
 })
 export class GridHeaderColumnComponent implements OnInit {
+  @Input() sortKey: string;
+  @Input() sortDirection = GridSortDirection.None;
+  @Output() sortChanged: EventEmitter<GridSortDirection> = new EventEmitter<GridSortDirection>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  changeSort() {
+    if (this.sortDirection === GridSortDirection.None) {
+      this.sortDirection = GridSortDirection.Ascending;
+    } else if (this.sortDirection === GridSortDirection.Ascending) {
+      this.sortDirection = GridSortDirection.Descending;
+    } else if (this.sortDirection === GridSortDirection.Descending) {
+      this.sortDirection = GridSortDirection.Ascending;
+    }
+    this.sortChanged.emit(this.sortDirection);
   }
 
 }
