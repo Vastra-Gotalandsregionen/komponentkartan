@@ -93,6 +93,7 @@ export { ModalService } from './services/modalService';
 
 export { GridComponent } from './grid/grid.component';
 export { GridHeaderComponent } from './grid/grid-header.component';
+export { GridHeaderColumnComponent } from './grid/grid-header-column.component';
 export { GridColumnComponent } from './grid/grid-column.component';
 export { GridRowComponent } from './grid/grid-row.component';
 export { GridContentComponent } from './grid/grid-content.component';

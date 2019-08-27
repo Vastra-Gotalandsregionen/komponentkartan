@@ -104,6 +104,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.DatepickerItemComponent,
     type.GridComponent,
     type.GridHeaderComponent,
+    type.GridHeaderColumnComponent,
     type.GridColumnComponent,
     type.GridRowComponent,
     type.GridContentComponent
@@ -181,6 +182,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.DatepickerItemComponent,
     type.GridComponent,
     type.GridHeaderComponent,
+    type.GridHeaderColumnComponent,
     type.GridColumnComponent,
     type.GridRowComponent,
     type.GridContentComponent
