@@ -1,18 +1,18 @@
 vgr-grid {
-    border: 1px solid red;
+    // border: 1px solid red;
     display: block;
-    background: white;
     margin-top: 20px;
+    box-sizing: border-box;
 
-    vgr-grid-row, grid-row-content  {
-        
-    }
-
-    .grid-row-header, .grid-row-content {
+    .grid-row-header, .grid-row-content, vgr-grid-header {
+        margin-bottom: 1px;
+        background: white;
         display: flex;
-        vgr-grid-column {
+        vgr-grid-column, vgr-grid-header-column {
             flex: 1;
-            border: 1px solid blue;
+            min-height: 36px;
+            // border: 1px solid blue;
+            padding: 5px;
         }
     }
 }

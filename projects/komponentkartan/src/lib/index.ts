@@ -91,10 +91,11 @@ export { ErrorMessagePipe } from './pipes/errorMessagePipe';
 export { BrowserDetector } from './services/browserDetector';
 export { ModalService } from './services/modalService';
 
-export { GridComponent } from './grid/grid.component';
-export { GridHeaderComponent } from './grid/grid-header.component';
-export { GridColumnComponent } from './grid/grid-column.component';
-export { GridRowComponent } from './grid/grid-row.component';
-export { GridContentComponent } from './grid/grid-content.component';
+export { GridComponent } from './controls/grid/grid.component';
+export { GridHeaderComponent } from './controls/grid/grid-header.component';
+export { GridHeaderColumnComponent } from './controls/grid/grid-header-column.component';
+export { GridColumnComponent } from './controls/grid/grid-column.component';
+export { GridRowComponent } from './controls/grid/grid-row.component';
+export { GridContentComponent } from './controls/grid/grid-content.component';
 
 export { Guid } from './utils/guid';
