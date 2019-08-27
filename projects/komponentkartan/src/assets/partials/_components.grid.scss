@@ -1,0 +1,18 @@
+vgr-grid {
+    border: 1px solid red;
+    display: block;
+    background: white;
+    margin-top: 20px;
+
+    vgr-grid-row, grid-row-content  {
+        
+    }
+
+    .grid-row-header, .grid-row-content {
+        display: flex;
+        vgr-grid-column {
+            flex: 1;
+            border: 1px solid blue;
+        }
+    }
+}

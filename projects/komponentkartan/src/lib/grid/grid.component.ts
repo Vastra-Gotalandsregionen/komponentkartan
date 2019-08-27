@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'vgr-grid',
-  templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.css']
+  templateUrl: './grid.component.html'
 })
 export class GridComponent implements OnInit {
 
