@@ -1,28 +1,37 @@
 <vgr-page class="no-sort">
   <vgr-page-body>
-    <!--vgr-page-block-->
-    <vgr-grid [allowMultipleExpandedRows]="true" (sortChanged)="sort($event)">
+    <vgr-page-block>
+      <h1>Hemsidan</h1>
+    </vgr-page-block>
+    <vgr-grid (sortChanged)="sort($event)">
       <vgr-grid-header [allowSort]="false">
-        <vgr-grid-header-column [sortKey]="'1'">1</vgr-grid-header-column>
-        <vgr-grid-header-column [sortKey]="'2'">2</vgr-grid-header-column>
-        <vgr-grid-header-column [sortKey]="'3'">3</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="1" [sortKey]="'amount'">Pris</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="1" [sortKey]="'status'">Status</vgr-grid-header-column>
       </vgr-grid-header>
-      <vgr-grid-row>
-        <vgr-grid-column width="2">4</vgr-grid-column>
-        <vgr-grid-column width="3">5</vgr-grid-column>
-        <vgr-grid-column width="1">6</vgr-grid-column>
+      <vgr-grid-row *ngFor="let item of data">
+        <vgr-grid-column [width]="2">{{ item.name }}</vgr-grid-column>
+        <vgr-grid-column [width]="3">{{ item.count }}</vgr-grid-column>
+        <vgr-grid-column [width]="1">{{ item.amount }}</vgr-grid-column>
+        <vgr-grid-column [width]="1">{{ item.status }}</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
-      <vgr-grid-row>
-        <vgr-grid-column width="90">Hej</vgr-grid-column>
-        <vgr-grid-column width="5">på</vgr-grid-column>
-        <vgr-grid-column width="5">dig</vgr-grid-column>
-      </vgr-grid-row>
-      <vgr-grid-row>
-        <vgr-grid-column>dig</vgr-grid-column>
-        <vgr-grid-column>på</vgr-grid-column>
-        <vgr-grid-column>hej</vgr-grid-column>
-        <vgr-grid-content>Row content tre</vgr-grid-content>
+    </vgr-grid>
+
+    <vgr-grid (sortChanged)="sort($event)">
+      <vgr-grid-header [allowSort]="false">
+        <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="1" [sortKey]="'amount'">Pris</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="1" [sortKey]="'status'">Status</vgr-grid-header-column>
+      </vgr-grid-header>
+      <vgr-grid-row *ngFor="let item of data">
+        <vgr-grid-column [width]="2">{{ item.name }}</vgr-grid-column>
+        <vgr-grid-column [width]="3">{{ item.count }}</vgr-grid-column>
+        <vgr-grid-column [width]="1">{{ item.amount }}</vgr-grid-column>
+        <vgr-grid-column [width]="1">{{ item.status }}</vgr-grid-column>
+        <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
     </vgr-grid>
 
@@ -58,35 +67,6 @@
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
-      </vgr-grid-row>
-    </vgr-grid>
-    <!--/vgr-page-block-->
-
-    <vgr-grid>
-      <vgr-grid-header [allowSort]="false">
-        <vgr-grid-header-column width="1">gpaigpahgpaihgapig  a a fas a</vgr-grid-header-column>
-        <vgr-grid-header-column width="1">fafafafasfasf</vgr-grid-header-column>
-      </vgr-grid-header>
-      <vgr-grid-row>
-        <vgr-grid-column width="1">54654654</vgr-grid-column>
-        <vgr-grid-column width="1">12312</vgr-grid-column>
-        <vgr-grid-column width="1">888888</vgr-grid-column>
-        <vgr-grid-column width="1">45654654 45</vgr-grid-column>
-      </vgr-grid-row>
-      <vgr-grid-row>
-        <vgr-grid-column width="1">Olle</vgr-grid-column>
-        <vgr-grid-column width="1">Benjamin Från rymden</vgr-grid-column>
-        <vgr-grid-column width="1">Laban är glad på måndagar</vgr-grid-column>
-        <vgr-grid-column width="1">Xerxes</vgr-grid-column>
-        <vgr-grid-column width="1">Lasermannen</vgr-grid-column>
-        <vgr-grid-column width="1">jultomten</vgr-grid-column>
-        <vgr-grid-column width="1"></vgr-grid-column>
-        <vgr-grid-column width="1"></vgr-grid-column>
-      </vgr-grid-row>
-      <vgr-grid-row>
-        <vgr-grid-column width="2"></vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-grid-column width="1"></vgr-grid-column>
       </vgr-grid-row>
     </vgr-grid>
   </vgr-page-body>

@@ -50,7 +50,10 @@ vgr-grid {
     vgr-grid-column:last-child:after {
       transform: rotate(180deg);
     }
+<<<<<<< refs/remotes/origin/vgr-grid
   }
+}
+=======
 
     .grid-header {
         background: white;
@@ -59,3 +62,4 @@ vgr-grid {
         top: 79px;
     }
 }
+>>>>>>> Sticky och refactorering av pageHeaderHeight mm.

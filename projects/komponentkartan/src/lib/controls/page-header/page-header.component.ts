@@ -1,4 +1,5 @@
 import { Component, Input, ViewChild, AfterViewChecked, ElementRef, Output, EventEmitter } from '@angular/core';
+import { PageHeaderHeightService } from '../../services/page-header-height.service';
 
 @Component({
   selector: 'vgr-page-header',
@@ -11,20 +12,20 @@ export class PageHeaderComponent implements AfterViewChecked {
   height = 0;
   private previousHeight = 0;
 
+  constructor(private pageHeaderHeightService: PageHeaderHeightService) {  }
+
   ngAfterViewChecked() {
-    this.setHeight(false);
+    this.setHeight();
   }
 
-  setHeight(emit = true) {
+  setHeight() {
     this.height = this.pageHeader.nativeElement.offsetTop
       ? this.pageHeader.nativeElement.offsetHeight
       : 0;
 
     if (this.height !== this.previousHeight) {
       this.previousHeight = this.height;
-      if (emit) {
-        this.heightChanged.emit(this.height);
-      }
+      this.pageHeaderHeightService.setHeight(this.height);
     }
   }
 }
