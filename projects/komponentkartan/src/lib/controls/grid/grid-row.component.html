@@ -1,6 +1,6 @@
-<div class="grid-row-header">
+<div class="grid-row-header" [class.grid-header-expandable]="hasExpandablecontent" [class.grid-header-expanded]="expanded" (click)="toggleExpanded()">
   <ng-content select="vgr-grid-column"></ng-content>
 </div>
-<div class="grid-row-content">
+<div class="grid-row-content" *ngIf="expanded">
   <ng-content select="vgr-grid-content"></ng-content>
 </div>

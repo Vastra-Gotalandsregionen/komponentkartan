@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 export enum GridSortDirection {
   None,
@@ -10,6 +10,7 @@ export enum GridSortDirection {
   templateUrl: './grid-header-column.component.html'
 })
 export class GridHeaderColumnComponent implements OnInit {
+  @Input() @HostBinding('style.flex') width = 1;
   @Input() sortKey: string;
   @Input() sortDirection = GridSortDirection.None;
   @Output() sortChanged: EventEmitter<GridSortDirection> = new EventEmitter<GridSortDirection>();

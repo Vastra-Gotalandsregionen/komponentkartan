@@ -8,22 +8,40 @@
         <vgr-grid-header-column [sortKey]="'3'">3</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row>
-        <vgr-grid-column>4</vgr-grid-column>
-        <vgr-grid-column>5</vgr-grid-column>
-        <vgr-grid-column>6</vgr-grid-column>
+        <vgr-grid-column [width]="2">4</vgr-grid-column>
+        <vgr-grid-column [width]="3">5</vgr-grid-column>
+        <vgr-grid-column [width]="1">6</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
       <vgr-grid-row>
-        <vgr-grid-column>Hej</vgr-grid-column>
-        <vgr-grid-column>på</vgr-grid-column>
-        <vgr-grid-column>dig</vgr-grid-column>
-        <vgr-grid-content>Row content två</vgr-grid-content>
+        <vgr-grid-column [width]="90">Hej</vgr-grid-column>
+        <vgr-grid-column [width]="5">på</vgr-grid-column>
+        <vgr-grid-column [width]="5">dig</vgr-grid-column>
       </vgr-grid-row>
       <vgr-grid-row>
         <vgr-grid-column>dig</vgr-grid-column>
         <vgr-grid-column>på</vgr-grid-column>
         <vgr-grid-column>hej</vgr-grid-column>
         <vgr-grid-content>Row content tre</vgr-grid-content>
+      </vgr-grid-row>
+    </vgr-grid>
+
+    <vgr-grid>
+      <vgr-grid-header [allowSort]="false">
+        <vgr-grid-header-column width="4">Vårdcentral</vgr-grid-header-column>
+        <vgr-grid-header-column width="6">1 st</vgr-grid-header-column>
+        <vgr-grid-header-column width="3">Ersättning</vgr-grid-header-column>
+        <vgr-grid-header-column width="3"></vgr-grid-header-column>
+        <vgr-grid-header-column width="2">Status</vgr-grid-header-column>
+        <vgr-grid-header-column width="5"></vgr-grid-header-column>
+      </vgr-grid-header>
+      <vgr-grid-row>
+        <vgr-grid-column [width]="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column [width]="3">-131 980,87</vgr-grid-column>
+        <vgr-grid-column [width]="3"></vgr-grid-column>
+        <vgr-grid-column [width]="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column [width]="5"></vgr-grid-column>
+        <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
     </vgr-grid>
     <!--/vgr-page-block-->
