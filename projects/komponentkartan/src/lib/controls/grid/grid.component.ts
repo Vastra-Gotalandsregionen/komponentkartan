@@ -3,6 +3,7 @@ import { GridHeaderComponent, GridSortChangedArgs } from './grid-header.componen
 import { GridRowComponent } from './grid-row.component';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { PageHeaderHeightService } from '../../services/page-header-height.service';
 
 @Component({
   selector: 'vgr-grid',
@@ -20,11 +21,20 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
   @ContentChild(GridHeaderComponent) gridHeader: GridHeaderComponent;
   @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
+  headerOffset: string;
+  private headerHeight = 79;
   private ngUnsubscribe = new Subject();
 
-  constructor() { }
+  constructor(private pageHeaderHeightService: PageHeaderHeightService) { }
 
   ngOnInit() {
+    this.headerOffset =  `${this.headerHeight}px`;
+    this.pageHeaderHeightService.height
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe(value => {
+      console.log('value');
+      this.headerOffset = `${this.headerHeight + value}px`;
+    });
   }
 
   ngAfterContentInit() {

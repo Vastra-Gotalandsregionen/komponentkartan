@@ -1,4 +1,4 @@
-<div class="grid-header">
+<div class="grid-header" [ngClass]="{'grid-header--sticky': stickyHeader}" [style.top]="headerOffset">
   <ng-content select="vgr-grid-header"></ng-content>
 </div>
 <div class="grid-rows">

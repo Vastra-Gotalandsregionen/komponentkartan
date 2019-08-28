@@ -1,9 +1,10 @@
 <vgr-page class="no-sort">
+  <vgr-page-header [title]="'Hemsidan'"></vgr-page-header>
   <vgr-page-body>
     <vgr-page-block>
-      <h1>Hemsidan</h1>
+      <h1>Block</h1>
     </vgr-page-block>
-    <vgr-grid (sortChanged)="sort($event)">
+    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true">
       <vgr-grid-header [allowSort]="false">
         <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
@@ -19,7 +20,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid (sortChanged)="sort($event)">
+    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true">
       <vgr-grid-header [allowSort]="false">
         <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
@@ -35,7 +36,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid>
+    <vgr-grid [stickyHeader]="true">
       <vgr-grid-header [allowSort]="false">
         <vgr-grid-header-column width="6">Vårdcentral</vgr-grid-header-column>
         <vgr-grid-header-column width="4">1 st</vgr-grid-header-column>
