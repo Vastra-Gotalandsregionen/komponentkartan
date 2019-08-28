@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter } from '@angular/core';
 import { GridContentComponent } from './grid-content.component';
 
 @Component({
@@ -8,6 +8,7 @@ import { GridContentComponent } from './grid-content.component';
 export class GridRowComponent implements OnInit, AfterContentInit {
 
   @Input() expanded = false;
+  @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
 
   hasExpandablecontent = false;
 
@@ -20,7 +21,7 @@ export class GridRowComponent implements OnInit, AfterContentInit {
 
   toggleExpanded() {
     if (this.hasExpandablecontent) {
-      this.expanded = !this.expanded;
+      this.expandedChanged.emit(this.expanded);
     }
   }
 

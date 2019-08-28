@@ -19,7 +19,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
 
   @ContentChild(GridHeaderComponent) gridHeader: GridHeaderComponent;
-  @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent> = new QueryList<GridRowComponent>();
+  @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
   private ngUnsubscribe = new Subject();
 
   constructor() { }
@@ -32,6 +32,16 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       this.gridHeader.sortChanged
         .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: GridSortChangedArgs) => this.sortChanged.emit(args));
     }
+    this.rows.forEach((item) => {
+      item.expandedChanged
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((currentState) => {
+          if (!this.allowMultipleExpandedRows) {
+            this.rows.forEach(row => row.expanded = false);
+          }
+          item.expanded = !currentState;
+        });
+    });
   }
 
   ngOnDestroy() {

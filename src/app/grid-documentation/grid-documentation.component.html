@@ -1,22 +1,22 @@
 <vgr-page class="no-sort">
   <vgr-page-body>
     <!--vgr-page-block-->
-    <vgr-grid (sortChanged)="sort($event)">
+    <vgr-grid [allowMultipleExpandedRows]="true" (sortChanged)="sort($event)">
       <vgr-grid-header [allowSort]="false">
         <vgr-grid-header-column [sortKey]="'1'">1</vgr-grid-header-column>
         <vgr-grid-header-column [sortKey]="'2'">2</vgr-grid-header-column>
         <vgr-grid-header-column [sortKey]="'3'">3</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row>
-        <vgr-grid-column [width]="2">4</vgr-grid-column>
-        <vgr-grid-column [width]="3">5</vgr-grid-column>
-        <vgr-grid-column [width]="1">6</vgr-grid-column>
+        <vgr-grid-column width="2">4</vgr-grid-column>
+        <vgr-grid-column width="3">5</vgr-grid-column>
+        <vgr-grid-column width="1">6</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
       <vgr-grid-row>
-        <vgr-grid-column [width]="90">Hej</vgr-grid-column>
-        <vgr-grid-column [width]="5">på</vgr-grid-column>
-        <vgr-grid-column [width]="5">dig</vgr-grid-column>
+        <vgr-grid-column width="90">Hej</vgr-grid-column>
+        <vgr-grid-column width="5">på</vgr-grid-column>
+        <vgr-grid-column width="5">dig</vgr-grid-column>
       </vgr-grid-row>
       <vgr-grid-row>
         <vgr-grid-column>dig</vgr-grid-column>
@@ -28,22 +28,66 @@
 
     <vgr-grid>
       <vgr-grid-header [allowSort]="false">
-        <vgr-grid-header-column width="4">Vårdcentral</vgr-grid-header-column>
-        <vgr-grid-header-column width="6">1 st</vgr-grid-header-column>
+        <vgr-grid-header-column width="6">Vårdcentral</vgr-grid-header-column>
+        <vgr-grid-header-column width="4">1 st</vgr-grid-header-column>
         <vgr-grid-header-column width="3">Ersättning</vgr-grid-header-column>
         <vgr-grid-header-column width="3"></vgr-grid-header-column>
         <vgr-grid-header-column width="2">Status</vgr-grid-header-column>
         <vgr-grid-header-column width="5"></vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row>
-        <vgr-grid-column [width]="10">Balderkliniken</vgr-grid-column>
-        <vgr-grid-column [width]="3">-131 980,87</vgr-grid-column>
-        <vgr-grid-column [width]="3"></vgr-grid-column>
-        <vgr-grid-column [width]="2">Skall godkännas</vgr-grid-column>
-        <vgr-grid-column [width]="5"></vgr-grid-column>
+        <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-grid-content>Row content</vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row>
+        <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
+        <vgr-grid-column width="3">-980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Godkänd</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-grid-content>Row content</vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row>
+        <vgr-grid-column width="10">Svens klinik</vgr-grid-column>
+        <vgr-grid-column width="3">123 456,98</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
     </vgr-grid>
     <!--/vgr-page-block-->
+
+    <vgr-grid>
+      <vgr-grid-header [allowSort]="false">
+        <vgr-grid-header-column width="1">gpaigpahgpaihgapig  a a fas a</vgr-grid-header-column>
+        <vgr-grid-header-column width="1">fafafafasfasf</vgr-grid-header-column>
+      </vgr-grid-header>
+      <vgr-grid-row>
+        <vgr-grid-column width="1">54654654</vgr-grid-column>
+        <vgr-grid-column width="1">12312</vgr-grid-column>
+        <vgr-grid-column width="1">888888</vgr-grid-column>
+        <vgr-grid-column width="1">45654654 45</vgr-grid-column>
+      </vgr-grid-row>
+      <vgr-grid-row>
+        <vgr-grid-column width="1">Olle</vgr-grid-column>
+        <vgr-grid-column width="1">Benjamin Från rymden</vgr-grid-column>
+        <vgr-grid-column width="1">Laban är glad på måndagar</vgr-grid-column>
+        <vgr-grid-column width="1">Xerxes</vgr-grid-column>
+        <vgr-grid-column width="1">Lasermannen</vgr-grid-column>
+        <vgr-grid-column width="1">jultomten</vgr-grid-column>
+        <vgr-grid-column width="1"></vgr-grid-column>
+        <vgr-grid-column width="1"></vgr-grid-column>
+      </vgr-grid-row>
+      <vgr-grid-row>
+        <vgr-grid-column width="2"></vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-grid-column width="1"></vgr-grid-column>
+      </vgr-grid-row>
+    </vgr-grid>
   </vgr-page-body>
 </vgr-page>
