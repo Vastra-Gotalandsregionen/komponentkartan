@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding } from '@angular/core';
 import { GridContentComponent } from './grid-content.component';
 
 @Component({
@@ -7,7 +7,7 @@ import { GridContentComponent } from './grid-content.component';
 })
 export class GridRowComponent implements OnInit, AfterContentInit {
 
-  @Input() expanded = false;
+  @Input() @HostBinding('class.grid-row-expanded') expanded = false;
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
 
   hasExpandablecontent = false;
