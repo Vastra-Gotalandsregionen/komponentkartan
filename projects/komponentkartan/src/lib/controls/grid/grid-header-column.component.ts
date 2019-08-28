@@ -13,6 +13,7 @@ export class GridHeaderColumnComponent implements OnInit {
   @Input() sortKey: string;
   @Input() sortDirection = GridSortDirection.None;
   @Output() sortChanged: EventEmitter<GridSortDirection> = new EventEmitter<GridSortDirection>();
+  preventSort = false;
 
   constructor() { }
 
@@ -20,12 +21,14 @@ export class GridHeaderColumnComponent implements OnInit {
   }
 
   changeSort() {
-    if (this.sortDirection === GridSortDirection.None) {
-      this.sortDirection = GridSortDirection.Ascending;
-    } else if (this.sortDirection === GridSortDirection.Ascending) {
-      this.sortDirection = GridSortDirection.Descending;
-    } else if (this.sortDirection === GridSortDirection.Descending) {
-      this.sortDirection = GridSortDirection.Ascending;
+    if (!this.preventSort) {
+      if (this.sortDirection === GridSortDirection.None) {
+        this.sortDirection = GridSortDirection.Ascending;
+      } else if (this.sortDirection === GridSortDirection.Ascending) {
+        this.sortDirection = GridSortDirection.Descending;
+      } else if (this.sortDirection === GridSortDirection.Descending) {
+        this.sortDirection = GridSortDirection.Ascending;
+      }
     }
     this.sortChanged.emit(this.sortDirection);
   }

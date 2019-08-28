@@ -1,4 +1,4 @@
-import { Component, ContentChildren, Output, EventEmitter, QueryList, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, ContentChildren, Output, EventEmitter, QueryList, AfterContentInit, OnDestroy, Input } from '@angular/core';
 import { GridSortDirection, GridHeaderColumnComponent } from './grid-header-column.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,12 +12,18 @@ export interface GridSortChangedArgs {
   templateUrl: './grid-header.component.html'
 })
 export class GridHeaderComponent implements AfterContentInit, OnDestroy {
+  @Input() allowSort = true;
   @ContentChildren(GridHeaderColumnComponent) gridHeaderColumns: QueryList<GridHeaderColumnComponent>;
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
   private ngUnsubscribe = new Subject();
 
   ngAfterContentInit() {
-    this.gridHeaderColumns.forEach(column => column.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((direction: GridSortDirection) => this.onColumnSortChanged(column, direction)));
+    if (this.allowSort) {
+      this.gridHeaderColumns.forEach(column => column.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(
+        (direction: GridSortDirection) => this.onColumnSortChanged(column, direction)));
+    } else {
+      this.gridHeaderColumns.forEach(column => column.preventSort = true);
+    }
   }
 
   ngOnDestroy() {
