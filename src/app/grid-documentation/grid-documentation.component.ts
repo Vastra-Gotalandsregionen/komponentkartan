@@ -6,6 +6,7 @@ export interface DataRow {
   count: number;
   amount: number;
   status: string;
+  expanded: boolean;
 }
 @Component({
   selector: 'vgr-grid-documentation',
@@ -19,13 +20,20 @@ export class GridDocumentationComponent implements OnInit {
 
   ngOnInit() {
     for (let i = 0; i < 10; i++) {
-      const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar'};
+      const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false };
       this.data.push(row);
     }
   }
 
   sort(args: GridSortChangedArgs) {
-    console.log(args);
+    this.data = this.data.sort((row1, row2) => {
+      return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
+        row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
+    });
+  }
+
+  onExpandedChanged(row: DataRow, event: boolean) {
+    row.expanded = event;
   }
 
 }

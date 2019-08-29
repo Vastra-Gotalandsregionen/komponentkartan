@@ -4,6 +4,7 @@ import { GridRowComponent } from './grid-row.component';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
+import { GridService } from '../../grid/grid.service';
 
 @Component({
   selector: 'vgr-grid',
@@ -25,16 +26,17 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   private headerHeight = 79;
   private ngUnsubscribe = new Subject();
 
-  constructor(private pageHeaderHeightService: PageHeaderHeightService) { }
+  constructor(private pageHeaderHeightService: PageHeaderHeightService, private gridService: GridService) { }
 
   ngOnInit() {
-    this.headerOffset =  `${this.headerHeight}px`;
+    this.headerOffset = `${this.headerHeight}px`;
     this.pageHeaderHeightService.height
-    .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe(value => {
-      console.log('value');
-      this.headerOffset = `${this.headerHeight + value}px`;
-    });
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(value => {
+        setTimeout(() => {
+          this.headerOffset = `${this.headerHeight + value}px`;
+        });
+      });
   }
 
   ngAfterContentInit() {
@@ -42,16 +44,32 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       this.gridHeader.sortChanged
         .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: GridSortChangedArgs) => this.sortChanged.emit(args));
     }
-    this.rows.forEach((item) => {
-      item.expandedChanged
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe((currentState) => {
-          if (!this.allowMultipleExpandedRows) {
-            this.rows.forEach(row => row.expanded = false);
+
+    this.gridService.expandRowRequested
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((rowToExpand: GridRowComponent) => {
+        if (this.allowMultipleExpandedRows) {
+          rowToExpand.setExpanded(true);
+        } else {
+          const expandedRows = this.rows.filter(x => x.isExpanded);
+
+          if (expandedRows.length) {
+            const preventedRows = expandedRows.filter(x => x.preventCollapse);
+
+            if (preventedRows.length) {
+              preventedRows.forEach(x => x.collapsePrevented.emit());
+              rowToExpand.expandPrevented.emit();
+
+            } else {
+              expandedRows.forEach(x => x.setExpanded(false));
+              rowToExpand.setExpanded(true);
+            }
+
+          } else {
+            rowToExpand.setExpanded(true);
           }
-          item.expanded = !currentState;
-        });
-    });
+        }
+      });
+
   }
 
   ngOnDestroy() {
