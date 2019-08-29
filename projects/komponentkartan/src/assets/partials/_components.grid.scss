@@ -66,6 +66,10 @@ vgr-grid {
     }
   }
 
+  .grid-header-toolbox {
+    background-color: $background-color--default;
+  }
+
   vgr-grid-row {
     display: block;
     transition: margin 0.4s, box-shadow 0.4s;

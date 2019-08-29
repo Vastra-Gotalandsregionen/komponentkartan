@@ -99,5 +99,6 @@ export { GridSortDirection } from './controls/grid/grid-header-column.component'
 export { GridColumnComponent } from './controls/grid/grid-column.component';
 export { GridRowComponent } from './controls/grid/grid-row.component';
 export { GridContentComponent } from './controls/grid/grid-content.component';
+export { GridHeaderToolboxComponent } from './controls/grid/grid-header-toolbox.component';
 
 export { Guid } from './utils/guid';

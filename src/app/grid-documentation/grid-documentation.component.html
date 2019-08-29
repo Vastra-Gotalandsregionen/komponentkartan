@@ -5,6 +5,9 @@
       <h1>Block</h1>
     </vgr-page-block>
     <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true">
+      <vgr-grid-header-toolbox>
+        Antal: {{ data1.length }}
+      </vgr-grid-header-toolbox>
       <vgr-grid-header [allowSort]="false">
         <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
@@ -21,6 +24,9 @@
     </vgr-grid>
 
     <vgr-grid (sortChanged)="sort2($event)" [stickyHeader]="true">
+      <vgr-grid-header-toolbox>
+        Antal: {{ data2.length }}
+      </vgr-grid-header-toolbox>
       <vgr-grid-header [allowSort]="true">
         <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
@@ -59,7 +65,7 @@
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Godkänd</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
-        
+
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded3" (expandedChanged)="expanded3 = $event">
         <vgr-grid-column width="10">Svens klinik</vgr-grid-column>

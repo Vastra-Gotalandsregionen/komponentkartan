@@ -1,6 +1,6 @@
 // Core
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -107,7 +107,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridHeaderColumnComponent,
     type.GridColumnComponent,
     type.GridRowComponent,
-    type.GridContentComponent
+    type.GridContentComponent,
+    type.GridHeaderToolboxComponent
   ],
   exports: [
     type.SafePipe,
@@ -185,7 +186,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridHeaderColumnComponent,
     type.GridColumnComponent,
     type.GridRowComponent,
-    type.GridContentComponent
+    type.GridContentComponent,
+    type.GridHeaderToolboxComponent
   ],
   providers: [
     type.ModalService,
