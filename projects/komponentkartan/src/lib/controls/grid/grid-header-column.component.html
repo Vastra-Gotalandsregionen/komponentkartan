@@ -1,4 +1,4 @@
-<div (click)="changeSort()">
+<div [attr.class]="'grid-align-'+align" (click)="changeSort()">
   <h2>
     <ng-content></ng-content>
     <vgr-icon *ngIf="sortDirection === 1" [icon]="'caret-up'" size="sm"></vgr-icon>

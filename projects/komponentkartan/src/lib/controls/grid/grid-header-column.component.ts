@@ -11,6 +11,7 @@ export enum GridSortDirection {
 })
 export class GridHeaderColumnComponent implements OnInit {
   @Input() @HostBinding('style.flex') width = 1;
+  @Input() align = 'left';
   @Input() sortKey: string;
   @Input() sortDirection = GridSortDirection.None;
   @Output() sortChanged: EventEmitter<GridSortDirection> = new EventEmitter<GridSortDirection>();

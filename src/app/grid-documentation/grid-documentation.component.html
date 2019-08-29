@@ -24,13 +24,13 @@
       <vgr-grid-header [allowSort]="false">
         <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="1" [sortKey]="'amount'">Pris</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="1"  align="right" [sortKey]="'amount'">Pris</vgr-grid-header-column>
         <vgr-grid-header-column [width]="1" [sortKey]="'status'">Status</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row *ngFor="let item of data">
         <vgr-grid-column [width]="2">{{ item.name }}</vgr-grid-column>
         <vgr-grid-column [width]="3">{{ item.count }}</vgr-grid-column>
-        <vgr-grid-column [width]="1">{{ item.amount }}</vgr-grid-column>
+        <vgr-grid-column [width]="1" align="right">{{ item.amount }}</vgr-grid-column>
         <vgr-grid-column [width]="1">{{ item.status }}</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>

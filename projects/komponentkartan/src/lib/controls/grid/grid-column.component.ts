@@ -7,6 +7,7 @@ import { Component, OnInit, Input, HostBinding } from '@angular/core';
 export class GridColumnComponent implements OnInit {
 
   @Input() @HostBinding('style.flex') width = 1;
+  @Input() align = 'left';
 
   constructor() { }
 
