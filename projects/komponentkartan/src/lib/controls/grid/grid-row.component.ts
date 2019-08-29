@@ -1,6 +1,6 @@
-import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 import { GridContentComponent } from './grid-content.component';
-import { GridService } from '../../grid/grid.service';
+import { GridService } from './grid.service';
 
 @Component({
   selector: 'vgr-grid-row',

@@ -4,11 +4,12 @@ import { GridRowComponent } from './grid-row.component';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
-import { GridService } from '../../grid/grid.service';
+import { GridService } from './grid.service';
 
 @Component({
   selector: 'vgr-grid',
-  templateUrl: './grid.component.html'
+  templateUrl: './grid.component.html',
+  providers: [GridService]
 })
 export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
@@ -26,7 +27,8 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   private headerHeight = 79;
   private ngUnsubscribe = new Subject();
 
-  constructor(private pageHeaderHeightService: PageHeaderHeightService, private gridService: GridService) { }
+  constructor(private pageHeaderHeightService: PageHeaderHeightService, 
+    private gridService: GridService) { }
 
   ngOnInit() {
     this.headerOffset = `${this.headerHeight}px`;
