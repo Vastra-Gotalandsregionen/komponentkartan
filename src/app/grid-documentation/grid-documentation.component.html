@@ -5,9 +5,12 @@
       <h1>Block</h1>
     </vgr-page-block>
     <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true">
-      <vgr-grid-header-toolbox>
+      <vgr-grid-header-toolbar>
         Antal: {{ data1.length }}
-      </vgr-grid-header-toolbox>
+        <vgr-button [buttonStyle]="'discreet'" (click)="print()">
+          <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
+        </vgr-button>
+      </vgr-grid-header-toolbar>
       <vgr-grid-header [allowSort]="false">
         <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
@@ -24,9 +27,9 @@
     </vgr-grid>
 
     <vgr-grid (sortChanged)="sort2($event)" [stickyHeader]="true">
-      <vgr-grid-header-toolbox>
+      <vgr-grid-header-toolbar>
         Antal: {{ data2.length }}
-      </vgr-grid-header-toolbox>
+      </vgr-grid-header-toolbar>
       <vgr-grid-header [allowSort]="true">
         <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'vgr-grid-header-toolbox',
+  selector: 'vgr-grid-header-toolbar',
   template: '<ng-content></ng-content>'
 })
-export class GridHeaderToolboxComponent implements OnInit {
+export class GridHeaderToolbarComponent implements OnInit {
 
   constructor() { }
 
