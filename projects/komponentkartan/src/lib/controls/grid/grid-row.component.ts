@@ -1,15 +1,18 @@
 import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 import { GridContentComponent } from './grid-content.component';
 import { GridService } from './grid.service';
+import { toggleExpandedState } from '../../animation';
 
 @Component({
   selector: 'vgr-grid-row',
-  templateUrl: './grid-row.component.html'
+  templateUrl: './grid-row.component.html',
+  animations: [toggleExpandedState]
 })
 export class GridRowComponent implements OnChanges, AfterContentInit {
 
   @Input() @HostBinding('class.grid-row-expanded') expanded = false;
   @Input() preventCollapse = false;
+  @Input() animationSpeed = '0.4s';
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
   @Output() expandPrevented: EventEmitter<any> = new EventEmitter();
   @Output() collapsePrevented: EventEmitter<any> = new EventEmitter();
