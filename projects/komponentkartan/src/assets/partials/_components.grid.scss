@@ -17,11 +17,11 @@ vgr-grid {
 
     vgr-grid-column,
     vgr-grid-header-column {
+      cursor: pointer;
       flex: 1;
       box-sizing: border-box;
       min-height: 36px;
       min-width: 0px;
-
       > div {
         text-overflow: ellipsis;
         overflow: hidden;
@@ -34,11 +34,18 @@ vgr-grid {
           text-align: right;
         }
       }
+      .grid-header-column-sort {
+        display: inline;
+        &--none {
+          padding-left: 18px;
+        }
+      }
     }
   }
 
   .grid-row-content {
     overflow: hidden;
+    padding: 6px 10px;
   }
 
   .grid-row-header {
@@ -111,6 +118,11 @@ vgr-grid {
       transition: visibility 0s linear 300ms, opacity 300ms;
       visibility: hidden;
     }
+  }
+
+  .grid-footer {
+    background-color: white;
+    padding: 10px 10px;
   }
 }
 

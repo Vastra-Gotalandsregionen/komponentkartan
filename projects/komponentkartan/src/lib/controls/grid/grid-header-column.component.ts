@@ -31,8 +31,8 @@ export class GridHeaderColumnComponent implements OnInit {
       } else if (this.sortDirection === GridSortDirection.Descending) {
         this.sortDirection = GridSortDirection.Ascending;
       }
+      this.sortChanged.emit(this.sortDirection);
     }
-    this.sortChanged.emit(this.sortDirection);
   }
 
 }

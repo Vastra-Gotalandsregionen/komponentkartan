@@ -1,7 +1,9 @@
 <div [attr.class]="'grid-align-'+align" (click)="changeSort()">
   <h2>
     <ng-content></ng-content>
-    <vgr-icon *ngIf="sortDirection === 1" [icon]="'chevron-up'" size="xs"></vgr-icon>
-    <vgr-icon *ngIf="sortDirection === 2" [icon]="'chevron-down'" size="xs"></vgr-icon>
+    <div *ngIf="!preventSort" class="grid-header-column-sort" [ngClass]="{'grid-header-column-sort--none': sortDirection === 0 }">
+      <vgr-icon *ngIf="sortDirection === 1" [icon]="'chevron-up'" size="xs"></vgr-icon>
+      <vgr-icon *ngIf="sortDirection === 2" [icon]="'chevron-down'" size="xs"></vgr-icon>
+    </div>
   </h2>
 </div>
