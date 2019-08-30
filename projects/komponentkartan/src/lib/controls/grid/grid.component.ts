@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import { GridHeaderComponent, GridSortChangedArgs } from './grid-header.component';
 import { GridRowComponent } from './grid-row.component';
 import { takeUntil } from 'rxjs/operators';
@@ -18,6 +18,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Input() pages = 0;
   @Input() activePage = 1;
   @Input() showLoader = false;
+  @Input() toggleAnimation: 'none' | 'slow' | 'medium' | 'fast' = 'medium';
 
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
@@ -25,6 +26,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @ContentChild(GridHeaderComponent) gridHeader: GridHeaderComponent;
   @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
   headerOffset: string;
+  public animationSpeed: string;
   private headerHeight = 79;
   private ngUnsubscribe = new Subject();
 
@@ -40,6 +42,13 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
           this.headerOffset = `${this.headerHeight + value}px`;
         });
       });
+    const animationSpeeds = {
+      none: '1ms',
+      slow: '.6s ease',
+      medium: '.4s ease',
+      fast: '.2s ease'
+    };
+    this.animationSpeed = animationSpeeds[this.toggleAnimation];
   }
 
   ngAfterContentInit() {
@@ -72,6 +81,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
           }
         }
       });
+    this.rows.forEach(row => row.animationSpeed = this.animationSpeed );
 
 
   }

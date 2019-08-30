@@ -11,6 +11,9 @@ vgr-grid {
     margin-bottom: 2px;
     background: white;
     display: flex;
+    h2 vgr-icon {
+      margin-left: 5px;
+    }
 
     vgr-grid-column,
     vgr-grid-header-column {
@@ -34,12 +37,16 @@ vgr-grid {
     }
   }
 
+  .grid-row-content {
+    overflow: hidden;
+  }
+
   .grid-row-header {
-    &:hover {
+    &.grid-header-expandable:hover {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
       position:relative;
     }
-    &:active {
+    &.grid-header-expandable:active {
       border: 1px solid #f0f0f0;
       margin: 3px 2px;
     }
