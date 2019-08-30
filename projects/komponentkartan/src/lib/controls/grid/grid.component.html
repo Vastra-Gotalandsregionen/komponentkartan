@@ -6,7 +6,10 @@
     <ng-content select="vgr-grid-header"></ng-content>
   </div>
 </div>
-<div class="grid-rows">
+<div *ngIf="isLoading" class="grid-loader" [ngClass]="{'grid-loader--hidden': !isLoading}">
+  <vgr-loader [active]="isLoading"></vgr-loader>
+</div>
+<div class="grid-rows" [ngClass]="{'grid-rows--loading': isLoading}">
   <ng-content select="vgr-grid-row"></ng-content>
 </div>
 <div *ngIf="pages > 1">
