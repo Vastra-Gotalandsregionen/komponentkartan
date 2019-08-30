@@ -16,7 +16,11 @@ export interface DataRow {
 })
 export class GridDocumentationComponent implements OnInit {
   data1: DataRow[] = [];
+  paginatedData1: DataRow[] = [];
   data2: DataRow[] = [];
+  showLoader2 = true;
+  pageCount = 1;
+  private itemsPerPage = 3;
 
   constructor() { }
 
@@ -27,8 +31,11 @@ export class GridDocumentationComponent implements OnInit {
         const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
         this.data1.push(row);
       }
-    }, 3000);
 
+      this.pageCount = Math.ceil(this.data1.length / this.itemsPerPage);
+      this.setPagingData(1);
+
+    }, 400);
 
     setTimeout(() => {
       for (let i = 0; i < 10; i++) {
@@ -61,6 +68,19 @@ export class GridDocumentationComponent implements OnInit {
     this.data1.forEach(x => x.checked = checked);
   }
 
+  onPageChanged(page: number) {
+    this.setPagingData(page);
+  }
+
+  setPagingData(page: number) {
+    const start = (page - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedData1 = this.data1.slice(start, end);
+  }
+
+  get showLoader1(): boolean {
+    return this.data1.length === 0;
+  }
   get anyIsChecked(): boolean {
     return this.data1.some(x => x.checked === true);
   }

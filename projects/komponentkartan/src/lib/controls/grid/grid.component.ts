@@ -17,6 +17,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Input() allowMultipleExpandedRows = false;
   @Input() pages = 0;
   @Input() activePage = 1;
+  @Input() showLoader = false;
 
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
@@ -85,7 +86,6 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   get isLoading() {
-    console.log((!this.rows || this.rows.length === 0));
     return (!this.rows || this.rows.length === 0);
   }
 }
