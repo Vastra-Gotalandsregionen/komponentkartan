@@ -1,15 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy, SimpleChanges, OnChanges, HostListener } from '@angular/core';
 import { GridHeaderComponent, GridSortChangedArgs } from './grid-header.component';
 import { GridRowComponent } from './grid-row.component';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
 import { GridService } from './grid.service';
+import { listStagger } from '../../animation';
 
 @Component({
   selector: 'vgr-grid',
   templateUrl: './grid.component.html',
-  providers: [GridService]
+  providers: [GridService],
+  // animations: [listStagger]
 })
 export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
@@ -24,10 +26,45 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
   @ContentChild(GridHeaderComponent) gridHeader: GridHeaderComponent;
   @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
+
   headerOffset: string;
   public animationSpeed: string;
   private headerHeight = 79;
   private ngUnsubscribe = new Subject();
+
+  @HostListener('keydown', ['$event']) keydown(event: any) {
+    if (!event.target.className.includes('grid-row-header') || event.key === 'Tab') {
+      return;
+    }
+    const row = event.target.closest('vgr-grid-row');
+    const parent = row.closest('.grid-rows');
+    const index = Array.from(parent.children).indexOf(row);
+    if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
+      this.rows.toArray()[index].toggleExpanded();
+      event.preventDefault();
+    }
+    if (event.key === 'Home') {
+      this.setFocusOnRow(0);
+      event.preventDefault();
+    }
+    if (event.key === 'End') {
+      this.setFocusOnRow(this.rows.length - 1);
+      event.preventDefault();
+    }
+    if ((event.key === 'ArrowUp' || event.key === 'Up') && index > 0) {
+      this.setFocusOnRow(index - 1);
+      event.preventDefault();
+    }
+    if ((event.key === 'ArrowDown' || event.key === 'Down') && index < this.rows.length - 1) {
+      this.setFocusOnRow(index + 1);
+      event.preventDefault();
+    }
+  }
+
+  setFocusOnRow(index) {
+    const elem = this.rows.toArray()[index].el.nativeElement.querySelector('.grid-row-header');
+    elem.focus();
+  }
 
   constructor(private pageHeaderHeightService: PageHeaderHeightService,
     private gridService: GridService) { }
@@ -80,7 +117,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
           }
         }
       });
-    this.rows.forEach(row => row.animationSpeed = this.animationSpeed );
+    this.rows.forEach(row => row.animationSpeed = this.animationSpeed);
 
 
   }

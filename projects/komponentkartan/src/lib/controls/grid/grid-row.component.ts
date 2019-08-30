@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
 import { GridContentComponent } from './grid-content.component';
 import { GridService } from './grid.service';
 import { toggleExpandedState } from '../../animation';
@@ -22,7 +22,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit {
 
   @ContentChildren(GridContentComponent) content: QueryList<GridContentComponent>;
 
-  constructor(private gridService: GridService) { }
+  constructor(private gridService: GridService, public el: ElementRef) { }
 
   ngOnChanges(changes: SimpleChanges) {
     const expandedChange = changes['expanded'];
