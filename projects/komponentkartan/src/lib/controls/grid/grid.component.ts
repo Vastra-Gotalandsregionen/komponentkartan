@@ -27,7 +27,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   private headerHeight = 79;
   private ngUnsubscribe = new Subject();
 
-  constructor(private pageHeaderHeightService: PageHeaderHeightService, 
+  constructor(private pageHeaderHeightService: PageHeaderHeightService,
     private gridService: GridService) { }
 
   ngOnInit() {
@@ -72,6 +72,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
         }
       });
 
+
   }
 
   ngOnDestroy() {
@@ -81,5 +82,10 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
   onPageChanged(event: number) {
     this.pageChanged.emit(event);
+  }
+
+  get isLoading() {
+    console.log((!this.rows || this.rows.length === 0));
+    return (!this.rows || this.rows.length === 0);
   }
 }

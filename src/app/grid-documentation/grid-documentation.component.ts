@@ -21,15 +21,22 @@ export class GridDocumentationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    for (let i = 0; i < 10; i++) {
-      const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
-      this.data1.push(row);
-    }
 
-    for (let i = 0; i < 10; i++) {
-      const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
-      this.data2.push(row);
-    }
+    setTimeout(() => {
+      for (let i = 0; i < 10; i++) {
+        const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
+        this.data1.push(row);
+      }
+    }, 3000);
+
+
+    setTimeout(() => {
+      for (let i = 0; i < 10; i++) {
+        const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
+        this.data2.push(row);
+      }
+    }, 400);
+
   }
 
   sort1(args: GridSortChangedArgs) {
@@ -64,5 +71,4 @@ export class GridDocumentationComponent implements OnInit {
     }
     return false;
   }
-
 }
