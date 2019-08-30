@@ -95,7 +95,6 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   get isLoading() {
-    console.log((!this.rows || this.rows.length === 0));
     return (!this.rows || this.rows.length === 0);
   }
 }
