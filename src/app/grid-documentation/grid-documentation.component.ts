@@ -7,6 +7,7 @@ export interface DataRow {
   amount: number;
   status: string;
   expanded: boolean;
+  checked: boolean;
 }
 @Component({
   selector: 'vgr-grid-documentation',
@@ -21,12 +22,12 @@ export class GridDocumentationComponent implements OnInit {
 
   ngOnInit() {
     for (let i = 0; i < 10; i++) {
-      const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false };
+      const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
       this.data1.push(row);
     }
 
     for (let i = 0; i < 10; i++) {
-      const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false };
+      const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
       this.data2.push(row);
     }
   }
@@ -43,6 +44,25 @@ export class GridDocumentationComponent implements OnInit {
       return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
         row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
     });
+  }
+
+  toggleChecked(row: DataRow) {
+    row.checked = !row.checked;
+  }
+
+  setAllChecked(checked: boolean) {
+    this.data1.forEach(x => x.checked = checked);
+  }
+
+  get anyIsChecked(): boolean {
+    return this.data1.some(x => x.checked === true);
+  }
+
+  get allChecked(): boolean {
+    if (this.data1.length > 0) {
+      return this.data1.every(x => x.checked);
+    }
+    return false;
   }
 
 }

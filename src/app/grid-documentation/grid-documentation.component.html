@@ -4,24 +4,32 @@
     <vgr-page-block>
       <h1>Block</h1>
     </vgr-page-block>
+    
     <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true">
       <vgr-grid-header-toolbar>
         Antal: {{ data1.length }}
-        <vgr-button [buttonStyle]="'discreet'" (click)="print()">
+        <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
           <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
         </vgr-button>
       </vgr-grid-header-toolbar>
       <vgr-grid-header [allowSort]="false">
-        <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="2" [sortKey]="'status'">
+          <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
+        </vgr-grid-header-column>
+        <vgr-grid-header-column [width]="20" [sortKey]="'name'">Namn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="1" [sortKey]="'amount'">Pris</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="1" [sortKey]="'status'">Status</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="10" [sortKey]="'amount'">Pris</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="10" [sortKey]="'status'">Status</vgr-grid-header-column>
       </vgr-grid-header>
+      
       <vgr-grid-row *ngFor="let row of data1" [expanded]="row.expanded" (expandedChanged)="row.expanded = $event">
-        <vgr-grid-column [width]="2">{{ row.name }}</vgr-grid-column>
+        <vgr-grid-column [width]="2">
+          <vgr-checkbox [checked]="row.checked" (checkedChanged)="toggleChecked(row)"></vgr-checkbox>
+        </vgr-grid-column>
+        <vgr-grid-column [width]="20">{{ row.name }}</vgr-grid-column>
         <vgr-grid-column [width]="3">{{ row.count }}</vgr-grid-column>
-        <vgr-grid-column [width]="1">{{ row.amount }}</vgr-grid-column>
-        <vgr-grid-column [width]="1">{{ row.status }}</vgr-grid-column>
+        <vgr-grid-column [width]="10">{{ row.amount }}</vgr-grid-column>
+        <vgr-grid-column [width]="10">{{ row.status }}</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
     </vgr-grid>
