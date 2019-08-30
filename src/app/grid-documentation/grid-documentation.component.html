@@ -5,7 +5,7 @@
       <h1>Block</h1>
     </vgr-page-block>
     
-    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true" [showLoader]="showLoader1" [pages]="pageCount" (pageChanged)="onPageChanged($event)" toggleAnimation="slow">
+    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true" [showLoader]="showLoader1" [pages]="pageCount" (pageChanged)="onPageChanged($event)" [toggleAnimation]="'none'">
       <vgr-grid-header-toolbar>
         Antal: {{ data1.length }}
         <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
@@ -33,7 +33,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid (sortChanged)="sort2($event)" [stickyHeader]="true" toggleAnimation="none">
+    <vgr-grid (sortChanged)="sort2($event)" [stickyHeader]="true" [toggleAnimation]="none">
       <vgr-grid-header-toolbar>
         Antal: {{ data2.length }}
       </vgr-grid-header-toolbar>
@@ -48,11 +48,13 @@
         <vgr-grid-column [width]="3">{{ row.count }}</vgr-grid-column>
         <vgr-grid-column [width]="1">{{ row.amount }}</vgr-grid-column>
         <vgr-grid-column [width]="1">{{ row.status }}</vgr-grid-column>
-        <vgr-grid-content>Row content</vgr-grid-content>
+        <vgr-grid-content>
+          <p>In hac habitasse platea dictumst. Praesent nec mi lorem. Etiam faucibus ut velit tristique faucibus. Vestibulum mollis ipsum tellus, vel tincidunt elit congue eget. Nulla ut magna turpis. Phasellus dapibus mauris mi, sit amet suscipit felis cursus a. Morbi sed pretium enim, eu hendrerit tortor. In hac habitasse platea dictumst. Proin dapibus ligula justo, et malesuada quam iaculis sit amet. Duis faucibus, mi in bibendum aliquam, elit mauris pretium nulla, vitae venenatis orci enim eget lectus. Suspendisse mollis, nunc a laoreet congue, libero nulla euismod elit, id mattis sem magna ullamcorper orci. Donec id neque convallis, fermentum arcu sit amet, pharetra odio.</p>
+        </vgr-grid-content>
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid>
+    <vgr-grid [toggleAnimation]="'slow'">
       <!-- <vgr-grid-header [allowSort]="false">
         <vgr-grid-header-column width="6">Vårdcentral</vgr-grid-header-column>
         <vgr-grid-header-column width="4">1 st</vgr-grid-header-column>

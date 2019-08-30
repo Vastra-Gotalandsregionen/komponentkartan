@@ -12,6 +12,6 @@
 <div class="grid-rows" [ngClass]="{'grid-rows--loading': isLoading && showLoader}">
   <ng-content select="vgr-grid-row"></ng-content>
 </div>
-<div *ngIf="pages > 1">
+<div *ngIf="pages > 1" class="grid-footer">
   <vgr-pagination [pages]="pages" [activePage]="activePage" (pageChanged)="onPageChanged($event)"></vgr-pagination>
 </div>
