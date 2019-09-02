@@ -18,8 +18,8 @@ export class GridDocumentationComponent implements OnInit {
   data1: DataRow[] = [];
   paginatedData1: DataRow[] = [];
   data2: DataRow[] = [];
-  showLoader2 = true;
   pageCount = 1;
+  showLoader1 = true;
   private itemsPerPage = 3;
 
   constructor() { }
@@ -31,6 +31,7 @@ export class GridDocumentationComponent implements OnInit {
         const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
         this.data1.push(row);
       }
+      this.showLoader1 = false;
 
       this.pageCount = Math.ceil(this.data1.length / this.itemsPerPage);
       this.setPagingData(1);
@@ -42,7 +43,7 @@ export class GridDocumentationComponent implements OnInit {
         const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
         this.data2.push(row);
       }
-    }, 400);
+    }, 1000);
 
   }
 
@@ -69,6 +70,7 @@ export class GridDocumentationComponent implements OnInit {
   }
 
   onPageChanged(page: number) {
+    this.showLoader1 = true;
     this.setPagingData(page);
   }
 
@@ -76,11 +78,11 @@ export class GridDocumentationComponent implements OnInit {
     const start = (page - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
     this.paginatedData1 = this.data1.slice(start, end);
+    setTimeout(() => {
+      this.showLoader1 = false;
+    }, 300);
   }
 
-  get showLoader1(): boolean {
-    return this.data1.length === 0;
-  }
   get anyIsChecked(): boolean {
     return this.data1.some(x => x.checked === true);
   }

@@ -1,5 +1,4 @@
 vgr-grid {
-  // border: 1px solid red;
   max-width: 1100px;
   display: block;
   padding-top: 20px;
@@ -11,9 +10,6 @@ vgr-grid {
     margin-bottom: 2px;
     background: white;
     display: flex;
-    h2 vgr-icon {
-      margin-left: 5px;
-    }
 
     vgr-grid-column,
     vgr-grid-header-column {
@@ -26,19 +22,22 @@ vgr-grid {
         overflow: hidden;
         white-space: nowrap;
         padding: 6px 10px;
-        &.grid-align-center {
+        &.grid-align--center {
           text-align: center;
         }
-        &.grid-align-right {
+        &.grid-align--right {
           text-align: right;
         }
-      }
-      .grid-header-column-sort {
-        display: inline;
-        &--none {
-          padding-left: 18px;
-        }
-      }
+      }      
+    }
+    &.allow-sort h2 {
+      cursor: pointer;
+    }
+  }
+
+  vgr-grid-header-column {
+    h2 vgr-icon {
+      margin-left: 5px;
     }
   }
 
@@ -48,34 +47,34 @@ vgr-grid {
   }
 
   .grid-row-header {
-    &.grid-header-expandable:hover {
+    &--expandable:hover {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-      position:relative;
+      position: relative;
     }
-    &.grid-header-expandable:active {
+    &--expandable:active {
       border: 1px solid #f0f0f0;
       margin: 3px 2px;
     }
     &:focus {
       outline: $focus-outline-width solid $focus-color;
     }
-  }
-
-  .grid-header-expandable {
-    cursor: pointer;
-    vgr-grid-column:last-child {
-      position: relative;
-      &:after {
-        content: "";
-        background: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='chevron-down' class='svg-inline--fa fa-chevron-down fa-w-14 fa-sm' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='currentColor' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'%3E%3C/path%3E%3C/svg%3E") center center no-repeat;
-        width: 15px;
-        height: 15px;
-        display: block;
-        position: absolute;
-        right: 10px;
-        top: 12px;
-        transition: transform 0.4s;
-        z-index: 0;
+    &--expandable {
+      cursor: pointer;
+      vgr-grid-column:last-child {
+        position: relative;
+        &:after {
+          content: "";
+          background: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='chevron-down' class='svg-inline--fa fa-chevron-down fa-w-14 fa-sm' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='currentColor' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'%3E%3C/path%3E%3C/svg%3E")
+            center center no-repeat;
+          width: 15px;
+          height: 15px;
+          display: block;
+          position: absolute;
+          right: 10px;
+          top: 12px;
+          transition: transform 0.4s;
+          z-index: 0;
+        }
       }
     }
   }
@@ -88,16 +87,13 @@ vgr-grid {
     display: block;
     transition: margin 0.4s, box-shadow 0.4s;
     &.grid-row-expanded {
-      box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, .5);
+      box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
       margin-top: 14px;
       margin-bottom: 14px;
 
       .grid-row-header:hover {
         box-shadow: none;
       }
-    }
-    &.grid-row-loading {
-      transition: visibility 0s linear 300ms, opacity 300ms;
     }
   }
 
@@ -113,15 +109,10 @@ vgr-grid {
   }
 
   .grid-loader {
-    height: 100px;;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.5ms ease;
-    &.grid-loader--hidden {
-      transition: visibility 0s linear 300ms, opacity 300ms;
-      visibility: hidden;
-    }
   }
 
   .grid-footer {
@@ -129,7 +120,6 @@ vgr-grid {
     padding: 10px 10px;
   }
 }
-
 
 @media screen and (min-width: $desktop-width--medium) {
   vgr-grid {

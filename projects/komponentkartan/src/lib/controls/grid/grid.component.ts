@@ -131,8 +131,4 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   onPageChanged(event: number) {
     this.pageChanged.emit(event);
   }
-
-  get isLoading() {
-    return (!this.rows || this.rows.length === 0);
-  }
 }

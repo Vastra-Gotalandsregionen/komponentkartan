@@ -33,7 +33,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid (sortChanged)="sort2($event)" [stickyHeader]="true" [toggleAnimation]="none">
+    <vgr-grid (sortChanged)="sort2($event)" [stickyHeader]="true" [toggleAnimation]="none" [showLoader]="data2.length === 0">
       <vgr-grid-header-toolbar>
         Antal: {{ data2.length }}
       </vgr-grid-header-toolbar>
@@ -43,7 +43,7 @@
         <vgr-grid-header-column [width]="1" [align]="'right'" [sortKey]="'amount'">Pris</vgr-grid-header-column>
         <vgr-grid-header-column [width]="1" [sortKey]="'status'">Status</vgr-grid-header-column>
       </vgr-grid-header>
-      <vgr-grid-row *ngFor="let row of data2" [expanded]="row.expanded" (expandedChanged)="row.expanded = $event">
+      <vgr-grid-row *ngFor="let row of data2"  (expandedChanged)="row.expanded = $event">
         <vgr-grid-column [width]="2">{{ row.name }}</vgr-grid-column>
         <vgr-grid-column [width]="3">{{ row.count }}</vgr-grid-column>
         <vgr-grid-column [width]="1" [align]="'right'">{{ row.amount }}</vgr-grid-column>
