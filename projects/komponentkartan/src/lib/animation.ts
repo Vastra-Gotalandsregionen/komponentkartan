@@ -19,6 +19,13 @@ export const toggleExpandedState = trigger('toggleExpandedState', [
     ], { params: { speed: '0.4s' } }),
 ]);
 
+export const remove = trigger('remove', [
+    transition(':leave', [
+        style({ height: '*' }),
+        animate('{{speed}}', style({ height: '0', opacity: '0',  overflow: 'hidden' })),
+    ], { params: { speed: '1.4s' } }),
+]);
+
 export const listStagger = trigger('listStagger', [
     transition('* <=> *', [
         query(

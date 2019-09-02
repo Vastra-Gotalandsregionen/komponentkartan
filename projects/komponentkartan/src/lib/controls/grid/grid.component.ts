@@ -5,13 +5,13 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
 import { GridService } from './grid.service';
-import { listStagger } from '../../animation';
+import { remove } from '../../animation';
 
 @Component({
   selector: 'vgr-grid',
   templateUrl: './grid.component.html',
   providers: [GridService],
-  // animations: [listStagger]
+  animations: [remove]
 })
 export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 

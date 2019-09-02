@@ -65,6 +65,16 @@ export class GridDocumentationComponent implements OnInit {
     row.checked = !row.checked;
   }
 
+  remove() {
+    /*const rows4removal = this.data1.filter(row => row.checked);
+    rows4removal.forEach((x) => {
+      const index = this.data1.indexOf(x);
+      this.data1.splice(index, 1);
+    });*/
+    this.paginatedData1.splice(0, 1);
+
+  }
+
   setAllChecked(checked: boolean) {
     this.data1.forEach(x => x.checked = checked);
   }
