@@ -17,7 +17,6 @@ vgr-grid {
 
     vgr-grid-column,
     vgr-grid-header-column {
-      cursor: pointer;
       flex: 1;
       box-sizing: border-box;
       min-height: 36px;
@@ -63,6 +62,7 @@ vgr-grid {
   }
 
   .grid-header-expandable {
+    cursor: pointer;
     vgr-grid-column:last-child {
       position: relative;
       &:after {
@@ -91,6 +91,10 @@ vgr-grid {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, .5);
       margin-top: 14px;
       margin-bottom: 14px;
+
+      .grid-row-header:hover {
+        box-shadow: none;
+      }
     }
     &.grid-row-loading {
       transition: visibility 0s linear 300ms, opacity 300ms;

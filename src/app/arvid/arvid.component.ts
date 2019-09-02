@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArvidComponent implements OnInit {
 
+  preventCollapse = true;
+  exp = false;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  togglePreventStatus() {
+    this.preventCollapse = !this.preventCollapse;
   }
 
 }

@@ -5,8 +5,8 @@
       <h1>Block</h1>
     </vgr-page-block>
     
-    
-    <vgr-grid>
+    {{preventCollapse}}
+    <vgr-grid [allowMultipleExpandedRows]="true">
       <vgr-grid-header [allowSort]="false">
         <vgr-grid-header-column width="6">Vårdcentral</vgr-grid-header-column>
         <vgr-grid-header-column width="4">1 st</vgr-grid-header-column>
@@ -15,10 +15,10 @@
         <vgr-grid-header-column width="2">Status</vgr-grid-header-column>
         <vgr-grid-header-column width="5"></vgr-grid-header-column>
       </vgr-grid-header>
-      <vgr-grid-row>
+      <vgr-grid-row [preventCollapse]="preventCollapse">
         <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="3"><vgr-checkbox label="Hindra stängning" [checked]="preventCollapse" (checkedChanged)="togglePreventStatus()"></vgr-checkbox></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
