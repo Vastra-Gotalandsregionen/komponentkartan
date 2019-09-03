@@ -52,13 +52,21 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       this.setFocusOnRow(this.rows.length - 1);
       event.preventDefault();
     }
-    if ((event.key === 'ArrowUp' || event.key === 'Up') && index > 0) {
-      this.setFocusOnRow(index - 1);
+    if (event.key === 'ArrowUp' || event.key === 'Up') {
       event.preventDefault();
+      if (index > 0) {
+        this.setFocusOnRow(index - 1);
+      } else {
+        this.setFocusOnRow(this.rows.length - 1);
+      }
     }
-    if ((event.key === 'ArrowDown' || event.key === 'Down') && index < this.rows.length - 1) {
-      this.setFocusOnRow(index + 1);
+    if (event.key === 'ArrowDown' || event.key === 'Down') {
       event.preventDefault();
+      if (index < this.rows.length - 1) {
+        this.setFocusOnRow(index + 1);
+      } else {
+        this.setFocusOnRow(0);
+      }
     }
   }
 
