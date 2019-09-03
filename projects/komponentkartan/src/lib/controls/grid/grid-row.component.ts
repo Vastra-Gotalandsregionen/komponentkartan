@@ -12,8 +12,8 @@ import { NotificationComponent } from '../notification/notification.component';
 export class GridRowComponent implements OnChanges, AfterContentInit {
 
   @HostBinding('@remove') removeAnimation = true;
-  @HostBinding('class.grid-row--expanded') isExpandedClass = false;
   @HostBinding('class.grid-row--has-notifications') hasNotifications = false;
+  @HostBinding('class.grid-row--expanded') isExpanded = false;
 
   @Input() expanded = false;
   @Input() preventCollapse = false;
@@ -22,7 +22,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit {
   @Output() expandPrevented: EventEmitter<any> = new EventEmitter();
   @Output() collapsePrevented: EventEmitter<any> = new EventEmitter();
 
-  isExpanded = false;
   hasExpandablecontent = false;
 
   @ContentChildren(GridContentComponent) content: QueryList<GridContentComponent>;
@@ -35,7 +34,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit {
     if (expandedChange && expandedChange.currentValue !== this.isExpanded) {
       if (expandedChange.isFirstChange()) {
         this.isExpanded = expandedChange.currentValue;
-        this.isExpandedClass = this.isExpanded;
       } else {
         this.toggleExpanded();
       }
@@ -58,7 +56,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit {
 
   setExpanded(expanded: boolean) {
     this.isExpanded = expanded;
-    this.isExpandedClass = expanded;
     this.expandedChanged.emit(this.isExpanded);
   }
 

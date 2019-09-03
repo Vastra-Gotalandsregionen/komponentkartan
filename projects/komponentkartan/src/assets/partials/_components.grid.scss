@@ -85,6 +85,11 @@ vgr-grid {
   vgr-grid-row {
     display: block;
     transition: margin 0.4s, box-shadow 0.4s;
+    &.grid-row--has-notifications {
+      margin-top: 4px;
+      margin-bottom: 4px;
+      border-left: 4px solid black;
+    }
     &.grid-row--expanded {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
       margin-top: 14px;
@@ -97,11 +102,6 @@ vgr-grid {
         box-shadow: none;
       }
 
-    }
-    &.grid-row--has-notifications {
-      margin-top: 4px;
-      margin-bottom: 4px;
-      border-left: 4px solid black;
     }
     .grid-row-notification {
       display: block;
