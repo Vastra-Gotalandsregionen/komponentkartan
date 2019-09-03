@@ -38,7 +38,7 @@
 
     <vgr-grid (sortChanged)="sort2($event)" [stickyHeader]="true" [toggleAnimation]="none" [showLoader]="data2.length === 0">
       <vgr-grid-header-toolbar>
-        Antal: {{ data2.length }} <a (click)="remove()">ta bort</a>
+        Antal: {{ data2.length }} 
       </vgr-grid-header-toolbar>
       <vgr-grid-header [allowSort]="true">
         <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>

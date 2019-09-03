@@ -16,9 +16,10 @@ export interface DataRow {
 })
 export class GridDocumentationComponent implements OnInit {
   data1: DataRow[] = [];
-  paginatedData1: DataRow[] = [];
   data2: DataRow[] = [];
+  paginatedData1: DataRow[] = [];
   pageCount = 1;
+  activePage = 1;
   showLoader1 = true;
   private itemsPerPage = 3;
 
@@ -34,7 +35,7 @@ export class GridDocumentationComponent implements OnInit {
       this.showLoader1 = false;
 
       this.pageCount = Math.ceil(this.data1.length / this.itemsPerPage);
-      this.setPagingData(1);
+      this.setPagingData(this.activePage);
 
     }, 400);
 
@@ -66,13 +67,12 @@ export class GridDocumentationComponent implements OnInit {
   }
 
   remove() {
-    /*const rows4removal = this.data1.filter(row => row.checked);
+    const rows4removal = this.data1.filter(row => row.checked);
     rows4removal.forEach((x) => {
       const index = this.data1.indexOf(x);
       this.data1.splice(index, 1);
-    });*/
-    this.paginatedData1.splice(0, 1);
-
+    });
+    this.setPagingData(this.activePage);
   }
 
   setAllChecked(checked: boolean) {
@@ -85,6 +85,7 @@ export class GridDocumentationComponent implements OnInit {
   }
 
   setPagingData(page: number) {
+    this.activePage = page;
     const start = (page - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
     this.paginatedData1 = this.data1.slice(start, end);
