@@ -52,8 +52,9 @@ vgr-grid {
       position: relative;
     }
     &--expandable:active {
-      border: 1px solid #f0f0f0;
-      margin: 3px 2px;
+      box-shadow: none;
+      // border: 1px solid #f0f0f0;
+      // margin: 3px 2px;
     }
     &:focus {
       outline: $focus-outline-width solid $focus-color;
