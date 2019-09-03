@@ -72,6 +72,7 @@ export class GridDocumentationComponent implements OnInit {
       const index = this.data1.indexOf(x);
       this.data1.splice(index, 1);
     });
+    this.pageCount = Math.ceil(this.data1.length / this.itemsPerPage);
     this.setPagingData(this.activePage);
   }
 
