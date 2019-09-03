@@ -108,7 +108,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridColumnComponent,
     type.GridRowComponent,
     type.GridContentComponent,
-    type.GridHeaderToolbarComponent
+    type.GridHeaderToolbarComponent,
+    type.NotificationComponent
   ],
   exports: [
     type.SafePipe,
@@ -187,7 +188,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridColumnComponent,
     type.GridRowComponent,
     type.GridContentComponent,
-    type.GridHeaderToolbarComponent
+    type.GridHeaderToolbarComponent,
+    type.NotificationComponent
   ],
   providers: [
     type.ModalService,

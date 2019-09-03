@@ -53,8 +53,6 @@ vgr-grid {
     }
     &--expandable:active {
       box-shadow: none;
-      // border: 1px solid #f0f0f0;
-      // margin: 3px 2px;
     }
     &:focus {
       outline: $focus-outline-width solid $focus-color;
@@ -77,7 +75,7 @@ vgr-grid {
           z-index: 0;
         }
       }
-    }
+    }  
   }
 
   .grid-header-toolbar {
@@ -87,20 +85,26 @@ vgr-grid {
   vgr-grid-row {
     display: block;
     transition: margin 0.4s, box-shadow 0.4s;
-    &.grid-row-expanded {
+    &.grid-row--expanded {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
       margin-top: 14px;
       margin-bottom: 14px;
+      vgr-grid-column:last-child:after {
+        transform: rotate(180deg);
+      }
 
       .grid-row-header:hover {
         box-shadow: none;
       }
-    }
-  }
 
-  .grid-header-expanded {
-    vgr-grid-column:last-child:after {
-      transform: rotate(180deg);
+    }
+    &.grid-row--has-notifications {
+      margin-top: 4px;
+      margin-bottom: 4px;
+      border-left: 4px solid black;
+    }
+    .grid-row-notification {
+      display: block;
     }
   }
 

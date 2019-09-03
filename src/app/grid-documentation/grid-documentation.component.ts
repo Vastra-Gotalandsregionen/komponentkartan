@@ -8,6 +8,7 @@ export interface DataRow {
   status: string;
   expanded: boolean;
   checked: boolean;
+  comment: string;
 }
 @Component({
   selector: 'vgr-grid-documentation',
@@ -29,7 +30,10 @@ export class GridDocumentationComponent implements OnInit {
 
     setTimeout(() => {
       for (let i = 0; i < 10; i++) {
-        const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
+        const row = {
+          name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', comment: (i % 2 === 0) ? 'Min kommentar ' + (i) : null,
+          expanded: false, checked: false,
+        };
         this.data1.push(row);
       }
       this.showLoader1 = false;
@@ -41,7 +45,10 @@ export class GridDocumentationComponent implements OnInit {
 
     setTimeout(() => {
       for (let i = 0; i < 10; i++) {
-        const row = { name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', expanded: false, checked: false };
+        const row = {
+          name: 'Petter' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', comment: (i > 5) ? 'Min kommentar ' + 500031 + i : null,
+          expanded: false, checked: false
+        };
         this.data2.push(row);
       }
     }, 1000);

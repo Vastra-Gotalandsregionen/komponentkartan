@@ -2,6 +2,7 @@ import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output,
 import { GridContentComponent } from './grid-content.component';
 import { GridService } from './grid.service';
 import { toggleExpandedState, remove } from '../../animation';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'vgr-grid-row',
@@ -11,7 +12,10 @@ import { toggleExpandedState, remove } from '../../animation';
 export class GridRowComponent implements OnChanges, AfterContentInit {
 
   @HostBinding('@remove') removeAnimation = true;
-  @Input() @HostBinding('class.grid-row-expanded') expanded = false;
+  @HostBinding('class.grid-row--expanded') isExpandedClass = false;
+  @HostBinding('class.grid-row--has-notifications') hasNotifications = false;
+
+  @Input() expanded = false;
   @Input() preventCollapse = false;
   @Input() animationSpeed = '0.4s';
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
@@ -22,6 +26,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit {
   hasExpandablecontent = false;
 
   @ContentChildren(GridContentComponent) content: QueryList<GridContentComponent>;
+  @ContentChildren(NotificationComponent) notifications: QueryList<NotificationComponent>;
 
   constructor(private gridService: GridService, public el: ElementRef) { }
 
@@ -30,6 +35,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit {
     if (expandedChange && expandedChange.currentValue !== this.isExpanded) {
       if (expandedChange.isFirstChange()) {
         this.isExpanded = expandedChange.currentValue;
+        this.isExpandedClass = this.isExpanded;
       } else {
         this.toggleExpanded();
       }
@@ -52,11 +58,13 @@ export class GridRowComponent implements OnChanges, AfterContentInit {
 
   setExpanded(expanded: boolean) {
     this.isExpanded = expanded;
+    this.isExpandedClass = expanded;
     this.expandedChanged.emit(this.isExpanded);
   }
 
   ngAfterContentInit() {
     this.hasExpandablecontent = this.content.length !== 0;
+    this.hasNotifications = this.notifications.length !== 0;
   }
 
 }

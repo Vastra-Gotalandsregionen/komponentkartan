@@ -1,6 +1,11 @@
-<div tabindex="0" class="grid-row-header" [class.grid-row-header--expandable]="hasExpandablecontent" [class.grid-header-expanded]="isExpanded" (click)="toggleExpanded()" [attr.aria-expanded]="isExpanded">
-  <ng-content select="vgr-grid-column"></ng-content>
+<div [class.grid-row-header--expandable]="hasExpandablecontent" [class.grid-row--expanded]="isExpanded" [class.grid-row--has-notifications]="hasNotifications" (click)="toggleExpanded()" [attr.aria-expanded]="isExpanded">
+  <div tabindex="0" class="grid-row-header">
+    <ng-content select="vgr-grid-column"></ng-content>
+  </div>
+  <div class="grid-row-notification">
+    <ng-content select="vgr-notification"></ng-content>
+  </div>
 </div>
-<div class="grid-row-content" *ngIf="isExpanded" role="region" [@toggleExpandedState]="{value: ':leave', params: {speed: animationSpeed}}">
+<div class="grid-row-content" *ngIf="isExpanded" [@toggleExpandedState]="{value: ':leave', params: {speed: animationSpeed}}">
   <ng-content select="vgr-grid-content"></ng-content>
 </div>

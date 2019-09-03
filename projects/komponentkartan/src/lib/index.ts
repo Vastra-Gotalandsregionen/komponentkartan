@@ -100,5 +100,7 @@ export { GridColumnComponent } from './controls/grid/grid-column.component';
 export { GridRowComponent } from './controls/grid/grid-row.component';
 export { GridContentComponent } from './controls/grid/grid-content.component';
 export { GridHeaderToolbarComponent } from './controls/grid/grid-header-toolbar.component';
+export { NotificationComponent } from './controls/notification/notification.component';
+
 
 export { Guid } from './utils/guid';
