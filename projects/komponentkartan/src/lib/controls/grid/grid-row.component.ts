@@ -15,8 +15,8 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
 
   @HostBinding('@remove') removeAnimation = true;
 
-  @HostBinding('class.grid-row--has-notifications') hasNotifications = false;
-  @HostBinding('class.grid-row--expanded') isExpanded = false;
+  // @HostBinding('class.grid-row--has-notifications') hasNotifications = false;
+  // @HostBinding('class.grid-row--expanded') isExpanded = false;
   @Input() expanded = false;
   @Input() preventCollapse = false;
   @Input() animationSpeed = '0.4s';
@@ -28,7 +28,20 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   @ContentChildren(NotificationComponent) notifications: QueryList<NotificationComponent>;
 
   hasExpandablecontent = true;
+  hasNotifications = false;
+  isExpanded = false;
   notificationColor = 'default';
+
+  get classlist() {
+    let list = 'grid-row-container ';
+    if (this.isExpanded) {
+      list += 'grid-row--expanded ';
+    }
+    if (this.hasNotifications) {
+      list += `grid-row--has-notifications notification-color--${this.notificationColor} `;
+    }
+    return list;
+  }
 
   private ngUnsubscribe = new Subject();
   constructor(private gridService: GridService, public el: ElementRef) { }

@@ -1,13 +1,15 @@
-<div [ngClass]="{'grid-row-header--expandable': hasExpandablecontent, 'grid-row--expanded': isExpanded}"
-  (click)="toggleExpanded()" [attr.aria-expanded]="isExpanded">
-  <div tabindex="0" class="grid-row-header">
-    <ng-content select="vgr-grid-column"></ng-content>
+<!-- <div class="grid-row-container" [ngClass]="{'grid-row-header--expandable': hasExpandablecontent, 'grid-row--expanded': isExpanded}"> -->
+<div [attr.class]="classlist">
+  <div class="grid-row-header-focus" tabindex="0" (click)="toggleExpanded()" [attr.aria-expanded]="isExpanded">
+    <div class="grid-row-header" [ngClass]="{'grid-row-header--expandable': hasExpandablecontent}">
+      <ng-content select="vgr-grid-column"></ng-content>
+    </div>
+    <div class="grid-row-notification">
+      <ng-content select="vgr-notification"></ng-content>
+    </div>
   </div>
-  <div class="grid-row-notification">
-    <ng-content select="vgr-notification"></ng-content>
+  <div class="grid-row-content" *ngIf="isExpanded"
+    [@toggleExpandedState]="{value: ':leave', params: {speed: animationSpeed}}">
+    <ng-content select="vgr-grid-content"></ng-content>
   </div>
-</div>
-<div class="grid-row-content" *ngIf="isExpanded"
-  [@toggleExpandedState]="{value: ':leave', params: {speed: animationSpeed}}">
-  <ng-content select="vgr-grid-content"></ng-content>
 </div>

@@ -35,7 +35,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   @HostListener('keydown', ['$event']) keydown(event: any) {
-    if (!event.target.className.includes('grid-row-header') || event.key === 'Tab') {
+    if (!event.target.className.includes('grid-row-header-focus') || event.key === 'Tab') {
       return;
     }
     const row = event.target.closest('vgr-grid-row');
@@ -72,7 +72,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   setFocusOnRow(index) {
-    const elem = this.rows.toArray()[index].el.nativeElement.querySelector('.grid-row-header');
+    const elem = this.rows.toArray()[index].el.nativeElement.querySelector('.grid-row-header-focus');
     elem.focus();
   }
 

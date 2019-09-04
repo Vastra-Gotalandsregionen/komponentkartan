@@ -49,6 +49,10 @@ vgr-grid {
     padding: 6px 10px;
   }
 
+  .grid-row-container .grid-row-header-focus:focus{
+    outline: $focus-outline-width solid $focus-color;
+  }
+
   .grid-row-header {
     &--expandable:hover {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
@@ -56,9 +60,6 @@ vgr-grid {
     }
     &--expandable:active {
       box-shadow: none;
-    }
-    &:focus {
-      outline: $focus-outline-width solid $focus-color;
     }
     /*&--expandable {
       cursor: pointer;
@@ -85,7 +86,7 @@ vgr-grid {
     background-color: $background-color--default;
   }
 
-  vgr-grid-row {
+  vgr-grid-row .grid-row-container {
     display: block;
     transition: margin 0.4s, box-shadow 0.4s;
     &.grid-row--has-notifications {
@@ -104,7 +105,7 @@ vgr-grid {
         transform: rotate(180deg);
       }
 
-      &:hover .grid-row-header:hover {
+      &:hover .grid-row-header {
         box-shadow: none;
       }
 
