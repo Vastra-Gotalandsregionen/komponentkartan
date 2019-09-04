@@ -21,6 +21,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Input() activePage = 1;
   @Input() showLoader = false;
   @Input() toggleAnimation: 'none' | 'slow' | 'medium' | 'fast' = 'medium';
+  @Input() ariaLabel = 'Lista';
 
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();

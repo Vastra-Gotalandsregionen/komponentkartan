@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArvidComponent implements OnInit {
 
-  preventCollapse = true;
-  exp = false;
+  preventCollapse = false;
   constructor() { }
 
   ngOnInit() {

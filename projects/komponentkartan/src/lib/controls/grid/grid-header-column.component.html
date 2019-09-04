@@ -1,4 +1,4 @@
-<div [attr.class]="'grid-align--'+align" (click)="changeSort()">
+<div [attr.class]="'grid-align--'+align" (click)="changeSort()" [attr.tabindex]="preventSort ? -1 : 0" (keydown.space)="changeSort()" (keydown.enter)="changeSort()">
   <h2>
     <ng-content></ng-content>
     <ng-container *ngIf="!preventSort">

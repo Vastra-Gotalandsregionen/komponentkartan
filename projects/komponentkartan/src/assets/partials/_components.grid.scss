@@ -39,6 +39,9 @@ vgr-grid {
     h2 vgr-icon {
       margin-left: 5px;
     }
+    > div:focus {
+      outline: $focus-outline-width solid $focus-color;
+    }
   }
 
   .grid-row-content {
@@ -57,7 +60,7 @@ vgr-grid {
     &:focus {
       outline: $focus-outline-width solid $focus-color;
     }
-    &--expandable {
+    /*&--expandable {
       cursor: pointer;
       vgr-grid-column:last-child {
         position: relative;
@@ -75,7 +78,7 @@ vgr-grid {
           z-index: 0;
         }
       }
-    }  
+    }*/  
   }
 
   .grid-header-toolbar {
@@ -89,6 +92,9 @@ vgr-grid {
       margin-top: 4px;
       margin-bottom: 4px;
       border-left: 4px solid black;
+      &.notification-color--error {
+        border-left-color: red;
+      }
     }
     &.grid-row--expanded {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
@@ -98,7 +104,7 @@ vgr-grid {
         transform: rotate(180deg);
       }
 
-      .grid-row-header:hover {
+      &:hover .grid-row-header:hover {
         box-shadow: none;
       }
 
@@ -108,9 +114,13 @@ vgr-grid {
     }
   }
 
-  .grid-header--sticky {
+  .grid-header-wrapper--sticky {
     z-index: 2;
     position: sticky;
+  }
+
+  .grid-header:focus {
+    outline: $focus-outline-width solid $focus-color;
   }
 
   .grid-loader {

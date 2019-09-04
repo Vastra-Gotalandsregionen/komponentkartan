@@ -1,8 +1,8 @@
-<div class="grid-header" [ngClass]="{'grid-header--sticky': stickyHeader}" [style.top]="headerOffset">
+<div class="grid-header-wrapper" [ngClass]="{'grid-header-wrapper--sticky': stickyHeader}" [style.top]="headerOffset">
   <div class="grid-header-toolbar">
     <ng-content select="vgr-grid-header-toolbar"></ng-content>
   </div>
-  <div>
+  <div tabindex="0" [attr.aria-label]="ariaLabel" class="grid-header">
     <ng-content select="vgr-grid-header"></ng-content>
   </div>
 </div>

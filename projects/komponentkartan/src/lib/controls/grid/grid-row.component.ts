@@ -1,5 +1,4 @@
 import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges, ElementRef, OnDestroy } from '@angular/core';
-import { AnimationEvent } from '@angular/animations';
 import { GridContentComponent } from './grid-content.component';
 import { GridService } from './grid.service';
 import { toggleExpandedState, remove } from '../../animation';
@@ -18,7 +17,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
 
   @HostBinding('class.grid-row--has-notifications') hasNotifications = false;
   @HostBinding('class.grid-row--expanded') isExpanded = false;
-
   @Input() expanded = false;
   @Input() preventCollapse = false;
   @Input() animationSpeed = '0.4s';
@@ -29,8 +27,9 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   @ContentChildren(GridContentComponent) content: QueryList<GridContentComponent>;
   @ContentChildren(NotificationComponent) notifications: QueryList<NotificationComponent>;
 
-  hasExpandablecontent = false;
-  temporaryNotifications = [] as NotificationComponent[];
+  hasExpandablecontent = true;
+  notificationColor = 'default';
+
   private ngUnsubscribe = new Subject();
   constructor(private gridService: GridService, public el: ElementRef) { }
 
@@ -64,32 +63,14 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
     this.expandedChanged.emit(this.isExpanded);
   }
 
-  onRemovEnd(event: AnimationEvent) {
-    console.log('hoho');
-    this.showTemporaryNotifications();
-  }
-
-  showTemporaryNotifications() {
-    this.notifications.forEach(x => {
-      if (x.temporary) {
-        x.show();
-      }
-    });
-  }
-
   ngAfterContentInit() {
-    this.hasExpandablecontent = this.content.length !== 0;
-    this.hasNotifications = this.notifications.filter(x => x.visible).length > 0;
+    this.hasExpandablecontent = this.content.length > 0;
+    this.hasNotifications = this.notifications.length > 0;
 
-    this.notifications.forEach(x => {
-      x.visibilityChanged.pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(visible => {
-          this.hasNotifications = this.notifications.filter(y => y.visible).length > 0;
-        });
-      if (x.temporary) {
-        x.show();
-      }
-    });
+    if (this.hasNotifications) {
+      console.log(this.notifications);
+      this.notificationColor = this.notifications.toArray()[0].type;
+    }
   }
 
   ngOnDestroy() {

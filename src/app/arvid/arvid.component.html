@@ -16,7 +16,7 @@
       </vgr-grid-header>
       <vgr-grid-row [preventCollapse]="preventCollapse">
         <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
-        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+        <vgr-grid-column width="3" align="center">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"><vgr-checkbox label="Hindra stängning" [checked]="preventCollapse" (checkedChanged)="togglePreventStatus()"></vgr-checkbox></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
@@ -50,6 +50,8 @@
 
           <p>Mauris non pellentesque dolor, ullamcorper laoreet tortor. Nunc scelerisque ante vitae est tincidunt sagittis. Quisque facilisis nulla eget augue condimentum tristique. Etiam et ipsum elementum, lacinia ex quis, commodo odio. Aliquam accumsan vehicula felis ut posuere. Vestibulum id velit id mauris tristique scelerisque vestibulum sed magna. Etiam lectus augue, fermentum nec lectus id, sollicitudin posuere metus. Donec ac sem blandit, imperdiet est ac, ornare urna. Nulla in nulla tristique, facilisis augue quis, lacinia turpis. Cras pretium nulla eleifend sem viverra maximus. Donec feugiat arcu id enim sollicitudin maximus. Suspendisse potenti. Vivamus ac malesuada mi. Donec auctor non felis non accumsan.</p>
         </vgr-grid-content>
+        <vgr-notification type="error">test</vgr-notification>
+        <vgr-notification><vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>test med ikon</vgr-notification>
       </vgr-grid-row>
     </vgr-grid>
   </vgr-page-body>
