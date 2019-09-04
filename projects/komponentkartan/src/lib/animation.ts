@@ -20,9 +20,17 @@ export const toggleExpandedState = trigger('toggleExpandedState', [
 ]);
 
 export const remove = trigger('remove', [
+    // state('start', style({
+    //     height: '*'
+    // })),
+    // state('end', style({
+    //     height: '0', opacity: '0', overflow: 'hidden'
+    // })),
+    // transition('start => end', animate('1.4s'))
+
     transition(':leave', [
         style({ height: '*' }),
-        animate('{{speed}}', style({ height: '0', opacity: '0',  overflow: 'hidden' })),
+        animate('{{speed}}', style({ height: '0', opacity: '0', overflow: 'hidden' })),
     ], { params: { speed: '1.4s' } }),
 ]);
 

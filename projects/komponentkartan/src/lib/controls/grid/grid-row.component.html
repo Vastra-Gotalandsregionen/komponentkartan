@@ -1,4 +1,4 @@
-<div [class.grid-row-header--expandable]="hasExpandablecontent" [class.grid-row--expanded]="isExpanded" [class.grid-row--has-notifications]="hasNotifications" (click)="toggleExpanded()" [attr.aria-expanded]="isExpanded">
+<div [class.grid-row-header--expandable]="hasExpandablecontent" [class.grid-row--expanded]="isExpanded" [class.grid-row--has-notifications]="hasNotifications" (click)="toggleExpanded()" [attr.aria-expanded]="isExpanded" (@remove.done)="onRemovEnd($event)" >
   <div tabindex="0" class="grid-row-header">
     <ng-content select="vgr-grid-column"></ng-content>
   </div>

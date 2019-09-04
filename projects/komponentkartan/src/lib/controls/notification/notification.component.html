@@ -1,4 +1,3 @@
-<!-- <div class="notification-icon">
-  <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
-</div> -->
-<ng-content></ng-content>
+<div class="notification" *ngIf="visible">
+  <ng-content></ng-content>
+</div>

@@ -1,17 +1,21 @@
-import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
+import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges, ElementRef, OnDestroy } from '@angular/core';
+import { AnimationEvent } from '@angular/animations';
 import { GridContentComponent } from './grid-content.component';
 import { GridService } from './grid.service';
 import { toggleExpandedState, remove } from '../../animation';
 import { NotificationComponent } from '../notification/notification.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'vgr-grid-row',
   templateUrl: './grid-row.component.html',
   animations: [toggleExpandedState, remove]
 })
-export class GridRowComponent implements OnChanges, AfterContentInit {
+export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy {
 
   @HostBinding('@remove') removeAnimation = true;
+
   @HostBinding('class.grid-row--has-notifications') hasNotifications = false;
   @HostBinding('class.grid-row--expanded') isExpanded = false;
 
@@ -22,11 +26,12 @@ export class GridRowComponent implements OnChanges, AfterContentInit {
   @Output() expandPrevented: EventEmitter<any> = new EventEmitter();
   @Output() collapsePrevented: EventEmitter<any> = new EventEmitter();
 
-  hasExpandablecontent = false;
-
   @ContentChildren(GridContentComponent) content: QueryList<GridContentComponent>;
   @ContentChildren(NotificationComponent) notifications: QueryList<NotificationComponent>;
 
+  hasExpandablecontent = false;
+  temporaryNotifications = [] as NotificationComponent[];
+  private ngUnsubscribe = new Subject();
   constructor(private gridService: GridService, public el: ElementRef) { }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -59,9 +64,37 @@ export class GridRowComponent implements OnChanges, AfterContentInit {
     this.expandedChanged.emit(this.isExpanded);
   }
 
+  onRemovEnd(event: AnimationEvent) {
+    console.log('hoho');
+    this.showTemporaryNotifications();
+  }
+
+  showTemporaryNotifications() {
+    this.notifications.forEach(x => {
+      if (x.temporary) {
+        x.show();
+      }
+    });
+  }
+
   ngAfterContentInit() {
     this.hasExpandablecontent = this.content.length !== 0;
-    this.hasNotifications = this.notifications.length !== 0;
+    this.hasNotifications = this.notifications.filter(x => x.visible).length > 0;
+
+    this.notifications.forEach(x => {
+      x.visibilityChanged.pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(visible => {
+          this.hasNotifications = this.notifications.filter(y => y.visible).length > 0;
+        });
+      if (x.temporary) {
+        x.show();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

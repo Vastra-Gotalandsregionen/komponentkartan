@@ -34,11 +34,35 @@
         <vgr-grid-column [width]="3">{{ row.count }}</vgr-grid-column>
         <vgr-grid-column [width]="10" [align]="'right'">{{ row.amount }}</vgr-grid-column>
         <vgr-grid-column [width]="10">{{ row.status }}</vgr-grid-column>
-        <vgr-notification *ngIf="row.comment">
+        <vgr-notification *ngIf="row.comment && !row.expanded">
           <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
           {{ row.comment }}
         </vgr-notification>
-        <vgr-grid-content>Row content</vgr-grid-content>
+        <!-- <vgr-notification>
+          <vgr-icon [icon]="'check-circle'" [color]="'success'"></vgr-icon>
+          Success!!
+        </vgr-notification> -->
+        <vgr-notification [temporary]="true">
+          <vgr-icon [icon]="'check-circle'" [color]="'error'"></vgr-icon>
+          {{ row.name }} togs bort!
+        </vgr-notification>
+        <vgr-grid-content>
+          <div *ngIf="row.comment">
+            <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
+            {{ row.comment }} <p>In hac habitasse platea dictumst. Praesent nec mi lorem. Etiam faucibus ut velit
+              tristique faucibus.
+              Vestibulum mollis ipsum tellus, vel tincidunt elit congue eget. Nulla ut magna turpis. Phasellus dapibus
+              mauris mi, sit amet suscipit felis cursus a. Morbi sed pretium enim, eu hendrerit tortor. In hac habitasse
+              platea dictumst. </p>
+          </div>
+          <h2>Lite innehåll</h2>
+          <p>
+            Löksås ipsum så äng hav där både dock, både bland mot från upprätthållande sista, samtidigt ordningens dimma
+            och nu erfarenheter.
+            Är kan där och söka vid annat, där tidigare är som åker sällan det, räv helt precis ordningens omfångsrik.
+            Sjö oss där olika tre bäckasiner så när, faktor annat kom ska kanske därmed, häst tid tre äng kan dunge.
+          </p>
+        </vgr-grid-content>
       </vgr-grid-row>
     </vgr-grid>
 
