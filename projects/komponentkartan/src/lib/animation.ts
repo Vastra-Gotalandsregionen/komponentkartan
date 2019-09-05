@@ -19,6 +19,17 @@ export const toggleExpandedState = trigger('toggleExpandedState', [
     ], { params: { speed: '0.4s' } }),
 ]);
 
+export const toggleFadedState = trigger('toggleFadedState', [
+    transition(':enter', [
+        style({ opacity: 0 }),
+        animate('400ms ease', style({ opacity: 1 })),
+    ]),
+    transition(':leave', [
+        style({ opacity: 1, height: '*' }),
+        animate('400ms ease', style({ opacity: 0, height: 0 })),
+    ]),
+]);
+
 export const remove = trigger('remove', [
     // state('start', style({
     //     height: '*'
@@ -29,9 +40,9 @@ export const remove = trigger('remove', [
     // transition('start => end', animate('1.4s'))
 
     transition(':leave', [
-        style({ height: '*' }),
-        animate('{{speed}}', style({ height: '0', opacity: '0', overflow: 'hidden' })),
-    ], { params: { speed: '1.4s' } }),
+        style({ height: '*', overflow: 'hidden', display: 'block' }),
+        animate('{{speed}}', style({ height: '0', opacity: '0' })),
+    ], { params: { speed: '.4s' } }),
 ]);
 
 export const listStagger = trigger('listStagger', [

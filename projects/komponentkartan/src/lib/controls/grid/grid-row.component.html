@@ -1,7 +1,7 @@
 <!-- <div class="grid-row-container" [ngClass]="{'grid-row-header--expandable': hasExpandablecontent, 'grid-row--expanded': isExpanded}"> -->
-<div [attr.class]="classlist">
+<div class="grid-row-container" [ngClass]="{'grid-row-header--expandable': hasExpandablecontent, 'grid-row--expanded': isExpanded}">
   <div class="grid-row-header-focus" tabindex="0" (click)="toggleExpanded()" [attr.aria-expanded]="isExpanded">
-    <div class="grid-row-header" [ngClass]="{'grid-row-header--expandable': hasExpandablecontent}">
+    <div class="grid-row-header">
       <ng-content select="vgr-grid-column"></ng-content>
     </div>
     <div class="grid-row-notification">

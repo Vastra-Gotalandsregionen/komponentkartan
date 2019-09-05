@@ -49,19 +49,22 @@ vgr-grid {
     padding: 6px 10px;
   }
 
-  .grid-row-container .grid-row-header-focus:focus{
-    outline: $focus-outline-width solid $focus-color;
-  }
-
-  .grid-row-header {
-    &--expandable:hover {
+  .grid-row-container {
+    .grid-row-header-focus:focus{
+      outline: $focus-outline-width solid $focus-color;
+    }
+    &.grid-row-header--expandable:hover {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
+      z-index: 1;
       position: relative;
     }
-    &--expandable:active {
+    &.grid-row-header--expandable--expandable:active {
       box-shadow: none;
     }
-    /*&--expandable {
+  }
+
+  /*.grid-row-header {
+    &--expandable {
       cursor: pointer;
       vgr-grid-column:last-child {
         position: relative;
@@ -79,24 +82,22 @@ vgr-grid {
           z-index: 0;
         }
       }
-    }*/  
-  }
+    }
+  }*/  
 
   .grid-header-toolbar {
     background-color: $background-color--default;
   }
 
+  vgr-grid-row {
+    display: block;
+    position: relative;
+    margin-bottom: 2px;
+  }
+
   vgr-grid-row .grid-row-container {
     display: block;
     transition: margin 0.4s, box-shadow 0.4s;
-    &.grid-row--has-notifications {
-      margin-top: 4px;
-      margin-bottom: 4px;
-      border-left: 4px solid black;
-      &.notification-color--error {
-        border-left-color: red;
-      }
-    }
     &.grid-row--expanded {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
       margin-top: 14px;

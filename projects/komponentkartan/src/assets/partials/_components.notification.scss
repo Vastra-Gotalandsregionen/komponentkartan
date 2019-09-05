@@ -5,4 +5,21 @@
   vgr-icon {
     margin-right: 6px;
   }
+  &:before {
+    content: '';
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background:$text-color--default;;
+    position: absolute;
+    transition: background .2s ease;
+  }
+  &.success:before {
+    background: $primary-color--success;;
+  }
+  &.error:before {
+    background: $primary-color--error;;
+  }
 }

@@ -32,17 +32,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   isExpanded = false;
   notificationColor = 'default';
 
-  get classlist() {
-    let list = 'grid-row-container ';
-    if (this.isExpanded) {
-      list += 'grid-row--expanded ';
-    }
-    if (this.hasNotifications) {
-      list += `grid-row--has-notifications notification-color--${this.notificationColor} `;
-    }
-    return list;
-  }
-
   private ngUnsubscribe = new Subject();
   constructor(private gridService: GridService, public el: ElementRef) { }
 
@@ -80,8 +69,14 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
     this.hasExpandablecontent = this.content.length > 0;
     this.hasNotifications = this.notifications.length > 0;
 
+    this.notifications.changes
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(_ => {
+        this.hasNotifications = _.length > 0;
+        console.log(_);
+      });
+
     if (this.hasNotifications) {
-      console.log(this.notifications);
       this.notificationColor = this.notifications.toArray()[0].type;
     }
   }
