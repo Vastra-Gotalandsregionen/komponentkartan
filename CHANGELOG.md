@@ -4,17 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 5.0.3
+## 5.1.0 (Beta, 2019-09-17)
+- Added a new "grid"-component that will replace the list function in the future.
+- Added a new "notification"-component that can be used with the grid component (and perhaps more components in the future).
+
+## 5.0.3 (Stable, 2016-06-28)
 - Fixed a bug in listheader where buttons were not clickable
 
-## 5.0.2
+## 5.0.2 (2016-06-28)
 - Fixed a bug in dropdown select where linebreaks inside dropdown item tags caused whitespaces to be added in start and ending in label.
 - Fixed a bug in dropdown select readonly mode when text growing over other content instead och normal flow.
 
-## 5.0.1
+## 5.0.1 (2016-06-26)
 - Fixed a bug where setting max date in datepicker broke the datepicker.
 
-## 5.0.0 (Stable, 2019-06-18)
+## 5.0.0 (2019-06-18)
 - *Breaking change* Dropdown select now has a value input. As a result, the default input on dropdown items has been removed. If using dropdown select without a form control, set default values via the value input instead.
 - *Breaking change* Monthpicker has been removed. Use datepicker with min zoom set to months instead.
 - *Breaking change* Header Menu has been changed into a declarative component.
@@ -29,7 +33,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed focus on list on update.
 - Fixed icons used on list-component.
 
-## 4.2.0 (Stable, 2019-05-02)
+## 4.2.0 (2019-05-02)
 - Changed colors on validation
 - Changed icons to use vgr-icons (continue). 
 
