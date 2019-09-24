@@ -9,5 +9,6 @@ import { toggleFadedState } from '../../animation';
 export class NotificationComponent {
   @Input() @HostBinding('@toggleFadedState') animate = true;
   @Input() @HostBinding('attr.class') type = 'default';
+  @Input() autoAddTypeIcons = false;
 
 }

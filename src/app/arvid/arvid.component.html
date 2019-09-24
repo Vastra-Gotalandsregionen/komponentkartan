@@ -4,13 +4,13 @@
     <vgr-grid (sortChanged)="sort($event)">
       <vgr-grid-header>
         <vgr-grid-header-column sortKey="namn">Förnamn</vgr-grid-header-column>
-        <vgr-grid-header-column sortKey="efternamn">Efternamn</vgr-grid-header-column>
+        <vgr-grid-header-column>Efternamn</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row *ngFor="let person of people" [expanded]="person.expanded" (expandedChanged)="person.expanded = $event">
         <vgr-grid-column>{{person.namn}}</vgr-grid-column>
         <vgr-grid-column>{{person.efternamn}}</vgr-grid-column>
-        <vgr-notification *ngFor="let notification of person.notifications" [type]="notification.type">
-          <vgr-icon [solid]="notification.icon === 'exclamation-circle'" [icon]="notification.icon"></vgr-icon>{{notification.text}}
+        <vgr-notification *ngFor="let notification of person.notifications" [type]="notification.type" autoAddTypeIcons="true">
+          {{notification.text}}
         </vgr-notification>
         <vgr-grid-content>
           <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person)">Uppdatera</vgr-button>

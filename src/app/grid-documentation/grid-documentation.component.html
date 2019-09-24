@@ -16,14 +16,14 @@
           <vgr-icon [icon]="'trash'" style="margin-right: 7px;"></vgr-icon><span>Ta bort</span>
         </vgr-button>
       </vgr-grid-header-toolbar>
-      <vgr-grid-header [allowSort]="false">
-        <vgr-grid-header-column [width]="2" [sortKey]="'status'">
+      <vgr-grid-header>
+        <vgr-grid-header-column [width]="2">
           <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
         </vgr-grid-header-column>
-        <vgr-grid-header-column [width]="20" [sortKey]="'name'">Namn</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="10" [sortKey]="'amount'" [align]="'right'">Pris</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="10" [sortKey]="'status'">Status</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="20">Namn</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="3">Antal</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="10" [align]="'right'">Pris</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="10">Status</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row *ngFor="let row of paginatedData1" [expanded]="row.expanded"
         (expandedChanged)="row.expanded = $event">
@@ -71,7 +71,7 @@
       <vgr-grid-header-toolbar>
         Antal: {{ data2.length }}
       </vgr-grid-header-toolbar>
-      <vgr-grid-header [allowSort]="true">
+      <vgr-grid-header>
         <vgr-grid-header-column [width]="2" [sortKey]="'name'">Namn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="3" [sortKey]="'count'">Antal</vgr-grid-header-column>
         <vgr-grid-header-column [width]="1" [align]="'right'" [sortKey]="'amount'">Pris</vgr-grid-header-column>

@@ -1,1 +1,6 @@
+<ng-container *ngIf="autoAddTypeIcons">
+    <vgr-icon [solid]="false" color="success" icon="check-circle" *ngIf="type === 'success'"></vgr-icon>
+    <vgr-icon [solid]="true" color="error" icon="exclamation-circle" *ngIf="type === 'error'"></vgr-icon>
+    <vgr-icon [solid]="false" icon="comment-dots" *ngIf="type === 'comment'"></vgr-icon>
+</ng-container>
 <ng-content></ng-content>

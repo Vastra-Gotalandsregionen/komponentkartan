@@ -73,7 +73,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(_ => {
         this.hasNotifications = _.length > 0;
-        console.log(_);
       });
 
     if (this.hasNotifications) {

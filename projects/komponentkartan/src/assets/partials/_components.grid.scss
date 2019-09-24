@@ -30,7 +30,7 @@ vgr-grid {
         }
       }      
     }
-    &.allow-sort h2 {
+    h2.sortable {
       cursor: pointer;
     }
   }

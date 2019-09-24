@@ -16,8 +16,7 @@ export class ArvidComponent implements OnInit {
       efternamn: 'Andersson',
       notifications: [{
         text: 'Meddelande: Text',
-        type: 'default',
-        icon: 'comment-dots'
+        type: 'comment'
       }],
       expanded: false
     },
@@ -44,8 +43,7 @@ export class ArvidComponent implements OnInit {
       efternamn: '',
       notifications: [{
         text: 'Personen är inaktiv',
-        type: 'error',
-        icon: 'exclamation-circle'
+        type: 'error'
       }],
       expanded: false
     }
@@ -67,7 +65,6 @@ export class ArvidComponent implements OnInit {
     if (row.notifications.length > 0) {
       const originalNotification = JSON.parse(JSON.stringify(row.notifications[0]));
       row.notifications[0].text = row.namn + ' sparades';
-      row.notifications[0].icon = 'check-circle';
       row.notifications[0].type = 'success';
       row.expanded = false;
       setTimeout(() => {
@@ -75,14 +72,12 @@ export class ArvidComponent implements OnInit {
           row.notifications.pop();
         } else {
           row.notifications[0].text = originalNotification.text;
-          row.notifications[0].icon = originalNotification.icon;
           row.notifications[0].type = originalNotification.type;
         }
       }, 2500);
     } else {
       row.notifications.push({
         text: row.namn + ' sparades',
-        icon: 'check-circle',
         type: 'success'
       });
       setTimeout(() => row.expanded = false, 1000);
@@ -96,18 +91,15 @@ export class ArvidComponent implements OnInit {
     const index = this.people.indexOf(row);
     if (row.notifications.length > 0) {
       row.notifications[0].text = row.namn + ' togs bort och kommer inte längre kunna logga in';
-      row.notifications[0].icon = 'check-circle';
       row.notifications[0].type = 'success';
     } else {
       row.notifications = [{
         text: row.namn + ' togs bort och kommer inte längre kunna logga in',
-        icon: 'check-circle',
         type: 'success'
       }];
     }
     row.notifications = [{
       text: row.namn + ' togs bort och kommer inte längre kunna logga in',
-      icon: 'check-circle',
       type: 'success'
     }];
     setTimeout(() => row.expanded = false, 1000);
@@ -128,6 +120,6 @@ export interface Person {
 
 export interface Notification {
   text: string;
-  type: 'default' | 'error' | 'success';
-  icon: string;
+  type: 'default' | 'error' | 'success' | 'comment';
+  icon?: string;
 }

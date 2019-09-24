@@ -1,7 +1,7 @@
-<div [attr.class]="'grid-align--'+align" (click)="changeSort()" [attr.tabindex]="preventSort ? -1 : 0" (keydown.space)="changeSort()" (keydown.enter)="changeSort()">
-  <h2>
+<div [attr.class]="'grid-align--'+align" (click)="changeSort()" [attr.tabindex]="!sortKey ? -1 : 0" (keydown.space)="changeSort()" (keydown.enter)="changeSort()">
+  <h2 [class.sortable]="sortKey">
     <ng-content></ng-content>
-    <ng-container *ngIf="!preventSort">
+    <ng-container *ngIf="sortKey">
       <vgr-icon *ngIf="sortDirection === 1" [icon]="'caret-up'" size="sm"></vgr-icon>
       <vgr-icon *ngIf="sortDirection === 2" [icon]="'caret-down'" size="sm"></vgr-icon>
     </ng-container>
