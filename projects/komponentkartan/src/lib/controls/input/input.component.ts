@@ -42,6 +42,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
+  @Output() valueChanged: EventEmitter<any>;
 
   get errorClass() {
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
@@ -64,6 +65,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
     this.blur = new EventEmitter<any>();
     this.focus = new EventEmitter<any>();
+    this.valueChanged = new EventEmitter<any>();
     this.nrOfDecimals = 2;
     this.swedishDecimalPipe = new DecimalPipe('sv-SE');
   }
@@ -108,7 +110,9 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.onTouched = func;
   }
 
-  onChange(value: any) { }
+  onChange(value: any) {
+    this.valueChanged.emit(value);
+  }
 
   onTouched() { }
 
@@ -125,8 +129,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   formatDisplayNumber() {
-    if (this.formatNumber && this.isNumber(this.displayValue)) {
-      this.value = this.convertStringToNumber(this.displayValue);
+    const number = this.displayValue !== undefined && this.displayValue.replace(/,/g, '.').replace(/ /g, '').replace(/−/g, '-');
+
+    if (this.formatNumber && this.isNumber(number)) {
+      this.value = this.convertStringToNumber(number);
       this.displayValue = this.convertNumberToString(this.value);
     } else {
       this.value = this.displayValue;
@@ -149,14 +155,15 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     }
     this.invalidOnFocus = this.control && this.control.invalid && this.showValidation;
     if (this.isNumber(this.displayValue)) {
-      this.displayValue = this.displayValue.toString().replace(/\s/g, '');
+      this.displayValue = this.displayValue.toString().replace(/\s/g, '').replace(/−/g, '-');
     }
     this.hasFocus = true;
+
     this.focus.emit(event);
   }
 
   private convertStringToNumber(value: string): number {
-    const normalized = value.toString().trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
+    const normalized = value.toString().trim().replace(/\s/g, '').replace(/,/g, '.').replace(/−/g, '-');
     const floatVal = this.roundNumber(parseFloat(normalized));
     return floatVal;
   }
