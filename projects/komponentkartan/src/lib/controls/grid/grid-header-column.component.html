@@ -2,8 +2,8 @@
   <h2 [class.sortable]="sortKey">
     <ng-content></ng-content>
     <ng-container *ngIf="sortKey">
-      <vgr-icon *ngIf="sortDirection === 1" [icon]="'caret-up'" size="sm"></vgr-icon>
-      <vgr-icon *ngIf="sortDirection === 2" [icon]="'caret-down'" size="sm"></vgr-icon>
+      <vgr-icon *ngIf="sortDirection === 1" color="text" [icon]="'caret-up'" size="sm"></vgr-icon>
+      <vgr-icon *ngIf="sortDirection === 2" color="text" [icon]="'caret-down'" size="sm"></vgr-icon>
     </ng-container>
   </h2>
 </div>

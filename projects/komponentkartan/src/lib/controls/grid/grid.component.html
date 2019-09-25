@@ -9,9 +9,11 @@
 <div *ngIf="showLoader" class="grid-loader">
   <vgr-loader [active]="true"></vgr-loader>
 </div>
-<div class="grid-rows" *ngIf="!showLoader">
-  <ng-content select="vgr-grid-row"></ng-content>
-</div>
+<ng-container *ngIf="!showLoader">
+  <div class="grid-rows" [@.disabled]="animationsDisabled">
+    <ng-content select="vgr-grid-row"></ng-content>
+  </div>
+</ng-container>
 <div *ngIf="pages > 1" class="grid-footer">
   <vgr-pagination [pages]="pages" [activePage]="activePage" (pageChanged)="onPageChanged($event)"></vgr-pagination>
 </div>

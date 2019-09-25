@@ -48,14 +48,42 @@ export class ArvidComponent implements OnInit {
       expanded: false
     }
   ];
+  vanster = [
+    { fornamn: 'Arvid', efternamn: 'Sollenby' },
+    { fornamn: 'Fredrik', efternamn: 'Aronsson' },
+    { fornamn: 'Caroline', efternamn: 'Bornsjö' },
+    { fornamn: 'Torin', efternamn: 'Williams' },
+  ];
+  hoger = [
+    { fornamn: 'Olga', efternamn: 'Akselrad' },
+    { fornamn: 'Markus', efternamn: 'Rydin' },
+    { fornamn: 'Jörgen', efternamn: 'Åkesson' },
+    { fornamn: 'Sofia', efternamn: 'Hejdenberg' },
+  ];
+  people2: any = [];
+  clicks = 1;
 
   constructor() { }
 
   ngOnInit() {
+    this.people2 = JSON.parse(JSON.stringify(this.vanster));
+  }
+
+  togglePeople() {
+    console.log('toggla listan');
+    this.people2 = JSON.parse(JSON.stringify(this.clicks % 2 === 0 ? this.hoger : this.vanster));
+    this.clicks++;
   }
 
   sort(args: GridSortChangedArgs) {
     this.people = this.people.sort((row1, row2) => {
+      return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
+        row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
+    });
+  }
+
+  sort2(args: GridSortChangedArgs) {
+    this.people2 = this.people2.sort((row1, row2) => {
       return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
         row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
     });

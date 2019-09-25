@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy, SimpleChanges, OnChanges, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy, SimpleChanges, OnChanges, HostListener, HostBinding } from '@angular/core';
 import { GridHeaderComponent, GridSortChangedArgs } from './grid-header.component';
 import { GridRowComponent } from './grid-row.component';
 import { takeUntil } from 'rxjs/operators';
@@ -17,11 +17,14 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
   @Input() stickyHeader = false;
   @Input() allowMultipleExpandedRows = false;
-  @Input() pages = 0;
+  @Input() pages = 1;
   @Input() activePage = 1;
   @Input() showLoader = false;
   @Input() toggleAnimation: 'none' | 'slow' | 'medium' | 'fast' = 'medium';
   @Input() ariaLabel = 'Lista';
+
+  // @HostBinding('@.disabled') public
+  animationsDisabled = false;
 
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
@@ -89,7 +92,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
         });
       });
     const animationSpeeds = {
-      none: '1ms',
+      none: '0ms',
       slow: '.6s ease',
       medium: '.4s ease',
       fast: '.2s ease'
@@ -129,6 +132,12 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       });
     this.rows.forEach(row => row.animationSpeed = this.animationSpeed);
 
+    this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      setTimeout(() => {
+        this.animationsDisabled = false;
+      }, 500);
+    });
+
 
   }
 
@@ -138,6 +147,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   onPageChanged(event: number) {
+    this.animationsDisabled = true;
     this.pageChanged.emit(event);
   }
 }
