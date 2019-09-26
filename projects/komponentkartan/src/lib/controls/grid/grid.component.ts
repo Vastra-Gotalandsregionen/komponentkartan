@@ -30,6 +30,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @ContentChild(GridHeaderComponent) gridHeader: GridHeaderComponent;
   @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
 
+  animationsDisabled = false;
   headerOffset: string;
   public animationSpeed: string;
   private headerHeight = 79;
@@ -131,11 +132,10 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
     this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.setAnimationSpeed();
-
+      this.enableAnimation();
     });
-
+    this.enableAnimation();
     this.setAnimationSpeed();
-
   }
 
   ngOnDestroy() {
@@ -149,7 +149,16 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
     });
   }
 
+  enableAnimation() {
+    setTimeout(() => {
+      this.animationsDisabled = false;
+    }, 500);
+  }
+
   onPageChanged(event: number) {
-    this.pageChanged.emit(event);
+    setTimeout(() => {
+      this.animationsDisabled = true;
+      this.pageChanged.emit(event);
+    });
   }
 }

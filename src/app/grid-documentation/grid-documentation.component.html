@@ -5,8 +5,8 @@
       <h1>Block</h1>
     </vgr-page-block>
 
-    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true" [showLoader]="showLoader1" [pages]="pageCount"
-      (pageChanged)="onPageChanged($event)" [toggleAnimation]="'none'">
+    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true" [showLoader]="showLoader1" [activePage]="activePage" [pages]="pageCount"
+      (pageChanged)="onPageChanged($event)">
       <vgr-grid-header-toolbar>
         Antal: {{ data1.length }}
         <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
@@ -15,6 +15,7 @@
         <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="remove()">
           <vgr-icon [icon]="'trash'" style="margin-right: 7px;"></vgr-icon><span>Ta bort</span>
         </vgr-button>
+        <vgr-button (click)="activePage=2">Gåt till sidan 2</vgr-button>
       </vgr-grid-header-toolbar>
       <vgr-grid-header>
         <vgr-grid-header-column [width]="2">
@@ -34,18 +35,6 @@
         <vgr-grid-column [width]="3">{{ row.count }}</vgr-grid-column>
         <vgr-grid-column [width]="10" [align]="'right'">{{ row.amount }}</vgr-grid-column>
         <vgr-grid-column [width]="10">{{ row.status }}</vgr-grid-column>
-        <vgr-notification *ngIf="row.comment && !row.expanded">
-          <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
-          {{ row.comment }}
-        </vgr-notification>
-        <!-- <vgr-notification>
-          <vgr-icon [icon]="'check-circle'" [color]="'success'"></vgr-icon>
-          Success!!
-        </vgr-notification> -->
-        <vgr-notification [type]="'error'">
-          <vgr-icon [icon]="'check-circle'" [color]="'error'"></vgr-icon>
-          {{ row.name }} togs bort!
-        </vgr-notification>
         <vgr-grid-content>
           <div *ngIf="row.comment">
             <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
@@ -66,7 +55,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid (sortChanged)="sort2($event)" [stickyHeader]="true" [toggleAnimation]="none"
+    <!-- <vgr-grid (sortChanged)="sort2($event)" [stickyHeader]="true" [toggleAnimation]="none"
       [showLoader]="data2.length === 0">
       <vgr-grid-header-toolbar>
         Antal: {{ data2.length }}
@@ -99,14 +88,6 @@
     </vgr-grid>
 
     <vgr-grid [toggleAnimation]="'slow'">
-      <!-- <vgr-grid-header [allowSort]="false">
-        <vgr-grid-header-column width="6">Vårdcentral</vgr-grid-header-column>
-        <vgr-grid-header-column width="4">1 st</vgr-grid-header-column>
-        <vgr-grid-header-column width="3">Ersättning</vgr-grid-header-column>
-        <vgr-grid-header-column width="3"></vgr-grid-header-column>
-        <vgr-grid-header-column width="2">Status</vgr-grid-header-column>
-        <vgr-grid-header-column width="5"></vgr-grid-header-column>
-      </vgr-grid-header> -->
       <vgr-grid-row [expanded]="expanded1" (expandedChanged)="expanded1 = $event">
         <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
@@ -191,6 +172,6 @@
             Suspendisse potenti. Vivamus ac malesuada mi. Donec auctor non felis non accumsan.</p>
         </vgr-grid-content>
       </vgr-grid-row>
-    </vgr-grid>
+    </vgr-grid> -->
   </vgr-page-body>
 </vgr-page>

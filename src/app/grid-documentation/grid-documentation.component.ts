@@ -22,55 +22,48 @@ export class GridDocumentationComponent implements OnInit {
   pageCount = 1;
   activePage = 1;
   showLoader1 = true;
+  disableAnimation = false;
   private itemsPerPage = 3;
 
   constructor() { }
 
   ngOnInit() {
 
-    setTimeout(() => {
-      for (let i = 0; i < 10; i++) {
-        const row = {
-          name: 'Petter ' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', comment: (i % 2 === 0) ? 'Min kommentar ' + (i) : null,
-          expanded: false, checked: false,
-        };
-        this.data1.push(row);
-      }
-      this.showLoader1 = false;
+    for (let i = 0; i < 10; i++) {
+      const row = {
+        name: 'Petter ' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', comment: (i % 2 === 0) ? 'Min kommentar ' + (i) : null,
+        expanded: false, checked: false,
+      };
+      this.data1.push(row);
+    }
+    this.showLoader1 = false;
 
-      this.pageCount = Math.ceil(this.data1.length / this.itemsPerPage);
-      this.setPagingData(this.activePage);
+    this.pageCount = Math.ceil(this.data1.length / this.itemsPerPage);
+    this.setPagingData(this.activePage);
 
-    }, 400);
-
-    setTimeout(() => {
-      for (let i = 0; i < 10; i++) {
-        const row = {
-          name: 'Lisa ' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', comment: (i > 5) ? 'Min kommentar ' + 500031 + i : null,
-          expanded: false, checked: false
-        };
-        this.data2.push(row);
-      }
-    }, 1000);
-
+    // for (let i = 0; i < 10; i++) {
+    //   const row = {
+    //     name: 'Lisa ' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', comment: (i > 5) ? 'Min kommentar ' + 500031 + i : null,
+    //     expanded: false, checked: false
+    //   };
+    //   this.data2.push(row);
+    // }
   }
 
-  sort1(args: GridSortChangedArgs) {
-    this.data1 = this.data1.sort((row1, row2) => {
-      return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
-        row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
-    });
+  onPageChanged(page: number) {
+    this.setPagingData(page);
   }
 
-  sort2(args: GridSortChangedArgs) {
-    this.data2 = this.data2.sort((row1, row2) => {
-      return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
-        row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
-    });
-  }
+  setPagingData(page: number) {
+    this.activePage = page;
+    const start = (page - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedData1 = this.data1.slice(start, end);
+    this.disableAnimation = true;
 
-  toggleChecked(row: DataRow) {
-    row.checked = !row.checked;
+    // setTimeout(() => {
+    //   this.showLoader1 = false;
+    // }, 1000);
   }
 
   remove() {
@@ -83,24 +76,27 @@ export class GridDocumentationComponent implements OnInit {
     this.setPagingData(this.activePage);
   }
 
+  toggleChecked(row: DataRow) {
+    row.checked = !row.checked;
+  }
+
   setAllChecked(checked: boolean) {
     this.data1.forEach(x => x.checked = checked);
   }
 
-  onPageChanged(page: number) {
-    this.showLoader1 = true;
-    this.setPagingData(page);
+  sort1(args: GridSortChangedArgs) {
+    this.data1 = this.data1.sort((row1, row2) => {
+      return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
+        row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
+    });
   }
 
-  setPagingData(page: number) {
-    this.activePage = page;
-    const start = (page - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    this.paginatedData1 = this.data1.slice(start, end);
-    setTimeout(() => {
-      this.showLoader1 = false;
-    }, 300);
-  }
+  // sort2(args: GridSortChangedArgs) {
+  //   this.data2 = this.data2.sort((row1, row2) => {
+  //     return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
+  //       row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
+  //   });
+  // }
 
   get anyIsChecked(): boolean {
     return this.data1.some(x => x.checked === true);
