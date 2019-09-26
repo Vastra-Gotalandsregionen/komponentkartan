@@ -70,7 +70,6 @@ export class ArvidComponent implements OnInit {
   }
 
   togglePeople() {
-    console.log('toggla listan');
     this.people2 = JSON.parse(JSON.stringify(this.clicks % 2 === 0 ? this.hoger : this.vanster));
     this.clicks++;
   }

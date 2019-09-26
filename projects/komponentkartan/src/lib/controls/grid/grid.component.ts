@@ -23,8 +23,6 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Input() toggleAnimation: 'none' | 'slow' | 'medium' | 'fast' = 'medium';
   @Input() ariaLabel = 'Lista';
 
-  // @HostBinding('@.disabled') public
-  animationsDisabled = false;
 
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
@@ -130,14 +128,13 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
           }
         }
       });
-    this.rows.forEach(row => row.animationSpeed = this.animationSpeed);
 
     this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
-      setTimeout(() => {
-        this.animationsDisabled = false;
-      }, 500);
+      this.setAnimationSpeed();
+
     });
 
+    this.setAnimationSpeed();
 
   }
 
@@ -146,8 +143,13 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
+  setAnimationSpeed() {
+    this.rows.forEach(row => {
+      row.animationSpeed = this.animationSpeed;
+    });
+  }
+
   onPageChanged(event: number) {
-    this.animationsDisabled = true;
     this.pageChanged.emit(event);
   }
 }
