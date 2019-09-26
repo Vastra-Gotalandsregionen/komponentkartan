@@ -18,6 +18,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
   nextPage = new EventEmitter();
   previousPage = new EventEmitter();
 
+  private _activePage: number;
   private ngUnsubscribe = new Subject();
 
   ngOnInit() {
@@ -33,11 +34,12 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
         this.focusedPageLabel = this.pages.toString();
       } else {
         this.setPageItems(this.activePage);
-        if (activePageChange) {
+        if (activePageChange && (this.activePage !== this._activePage)) {
           if (this.focusedPageLabel && (!this.focusedPageLabel.startsWith('Nästa sida') && !this.focusedPageLabel.endsWith('Föregående sida'))) {
             this.focusedPageLabel = this.activePage.toString();
           }
-          this.pageChanged.emit(activePageChange.currentValue);
+          this._activePage = this.activePage;
+          this.pageChanged.emit(this.activePage);
         }
       }
     }
@@ -110,6 +112,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
     this.setPageItems(page);
     if (this.activePage !== page) {
       this.activePage = page;
+      this._activePage = page;
       this.pageChanged.emit(page);
     }
   }
