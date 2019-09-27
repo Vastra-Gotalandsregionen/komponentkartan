@@ -73,7 +73,11 @@ export class GridDocumentationComponent implements OnInit {
       this.data1.splice(index, 1);
     });
     this.pageCount = Math.ceil(this.data1.length / this.itemsPerPage);
-    this.setPagingData(this.activePage);
+    if (this.pageCount < this.activePage) {
+      this.setPagingData(this.pageCount);
+    } else {
+      this.setPagingData(this.activePage);
+    }
   }
 
   toggleChecked(row: DataRow) {
