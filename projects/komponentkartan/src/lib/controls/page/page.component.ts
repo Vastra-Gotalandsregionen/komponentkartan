@@ -1,5 +1,4 @@
-import { Component, OnInit, AfterViewChecked, OnDestroy, ContentChild, ViewChild, ElementRef } from '@angular/core';
-import { PageHeaderComponent } from '../page-header/page-header.component';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
@@ -15,7 +14,8 @@ export class PageComponent implements OnInit, OnDestroy {
   constructor(private pageHeaderHeightService: PageHeaderHeightService) { }
 
   ngOnInit() {
-    this.pageHeaderHeightService.height
+    this.bodyContainer.nativeElement.style.top = `${this.pageHeaderHeightService.height}px`;
+    this.pageHeaderHeightService.heightChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(value => {
         this.bodyContainer.nativeElement.style.top = `${value}px`;

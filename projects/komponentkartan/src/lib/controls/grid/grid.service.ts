@@ -10,8 +10,6 @@ export class GridService {
 
   expandRowRequested = this.expandRowRequestedSource.asObservable();
 
-  constructor() { }
-
   requestExpandRow(row: any) {
     setTimeout(() => {
       this.expandRowRequestedSource.next(row);
