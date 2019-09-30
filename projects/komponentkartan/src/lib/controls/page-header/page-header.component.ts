@@ -8,7 +8,6 @@ import { PageHeaderHeightService } from '../../services/page-header-height.servi
 export class PageHeaderComponent implements AfterViewChecked {
   @Input() title: string;
   @ViewChild('pageHeader') pageHeader: ElementRef;
-  @Output() heightChanged = new EventEmitter<number>();
   height = 0;
   private previousHeight = 0;
 
