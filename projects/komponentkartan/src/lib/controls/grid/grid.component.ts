@@ -31,9 +31,9 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
 
   animationsDisabled = false;
-  headerOffset: string;
+  headerOffset: string; // dynamic offset depending on the heightof the page header + header height.
   public animationSpeed: string;
-  private headerHeight = 79;
+  private headerHeight = 79; // vgr-header height (same value as $header-height _setting.sizes.scss)
   private ngUnsubscribe = new Subject();
 
   @HostListener('keydown', ['$event']) keydown(event: any) {
@@ -82,8 +82,8 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
     private gridService: GridService) { }
 
   ngOnInit() {
-    this.headerOffset = `${this.headerHeight}px`;
-    this.pageHeaderHeightService.height
+    this.headerOffset = `${this.headerHeight + this.pageHeaderHeightService.height}px`;
+    this.pageHeaderHeightService.heightChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(value => {
         setTimeout(() => {

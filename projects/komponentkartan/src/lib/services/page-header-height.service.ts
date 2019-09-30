@@ -7,9 +7,11 @@ import { Subject } from 'rxjs';
 export class PageHeaderHeightService {
   private heightSource = new Subject<number>();
 
-  height = this.heightSource.asObservable();
+  heightChanged = this.heightSource.asObservable();
+  height = 0;
 
   setHeight(height: number) {
-      this.heightSource.next(height);
+    this.height = height;
+    this.heightSource.next(height);
   }
 }
