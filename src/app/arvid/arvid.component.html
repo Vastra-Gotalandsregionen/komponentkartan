@@ -1,7 +1,8 @@
 <vgr-page>
   <vgr-page-header title="Arvids testsida"></vgr-page-header>
   <vgr-page-body>
-    <vgr-grid (sortChanged)="sort2($event)" (pageChanged)="togglePeople()" [pages]="2">
+    <button (click)="addRow()">lägg till rad</button>
+    <vgr-grid (sortChanged)="sort2($event)" (pageChanged)="togglePeople()" [pages]="2" [stickyHeader]="true">
       <vgr-grid-header>
         <vgr-grid-header-column sortKey="fornamn">Förnamn</vgr-grid-header-column>
         <vgr-grid-header-column sortKey="efternamn">Efternamn</vgr-grid-header-column>
@@ -15,7 +16,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid (sortChanged)="sort($event)" toggleAnimation="slow">
+    <vgr-grid (sortChanged)="sort($event)" toggleAnimation="slow" >
       <vgr-grid-header>
         <vgr-grid-header-column sortKey="namn">Förnamn</vgr-grid-header-column>
         <vgr-grid-header-column>Efternamn</vgr-grid-header-column>

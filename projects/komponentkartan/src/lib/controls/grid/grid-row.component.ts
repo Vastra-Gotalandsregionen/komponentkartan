@@ -13,10 +13,6 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy {
 
-  @HostBinding('@remove') removeAnimation = true;
-
-  // @HostBinding('class.grid-row--has-notifications') hasNotifications = false;
-  // @HostBinding('class.grid-row--expanded') isExpanded = false;
   @Input() expanded = false;
   @Input() preventCollapse = false;
   @Input() animationSpeed = '0.4s';

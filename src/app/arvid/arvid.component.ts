@@ -66,7 +66,16 @@ export class ArvidComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.people2 = JSON.parse(JSON.stringify(this.vanster));
+    // this.people2 = JSON.parse(JSON.stringify(this.vanster));
+  }
+
+  addRow() {
+    this.people.unshift({
+      namn: 'Pelle',
+      efternamn: 'Karlsson',
+      notifications: [],
+      expanded: false
+    });
   }
 
   togglePeople() {
