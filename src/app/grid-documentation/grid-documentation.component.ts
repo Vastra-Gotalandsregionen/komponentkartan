@@ -16,38 +16,30 @@ export interface DataRow {
   styleUrls: ['./grid-documentation.component.css']
 })
 export class GridDocumentationComponent implements OnInit {
-  data1: DataRow[] = [];
-  data2: DataRow[] = [];
-  paginatedData1: DataRow[] = [];
+  data: DataRow[] = [];
+  paginatedData: DataRow[] = [];
   pageCount = 1;
   activePage = 1;
-  showLoader1 = true;
+  showLoader = true;
   disableAnimation = false;
-  private itemsPerPage = 3;
+  filterOn = false;
+  private itemsPerPage = 30;
 
   constructor() { }
 
   ngOnInit() {
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 100; i++) {
       const row = {
         name: 'Petter ' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', comment: (i % 2 === 0) ? 'Min kommentar ' + (i) : null,
         expanded: false, checked: false,
       };
-      this.data1.push(row);
+      this.data.push(row);
     }
-    this.showLoader1 = false;
+    this.showLoader = false;
 
-    this.pageCount = Math.ceil(this.data1.length / this.itemsPerPage);
+    this.pageCount = Math.ceil(this.data.length / this.itemsPerPage);
     this.setPagingData(this.activePage);
-
-    // for (let i = 0; i < 10; i++) {
-    //   const row = {
-    //     name: 'Lisa ' + i, count: 3 + i, amount: 500031 + i, status: 'Klar', comment: (i > 5) ? 'Min kommentar ' + 500031 + i : null,
-    //     expanded: false, checked: false
-    //   };
-    //   this.data2.push(row);
-    // }
   }
 
   onPageChanged(page: number) {
@@ -56,10 +48,20 @@ export class GridDocumentationComponent implements OnInit {
 
   setPagingData(page: number) {
     this.activePage = page;
+    const rows = this.data.filter(row => {
+      if (this.filterOn && row.amount < 500100) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    this.pageCount = Math.ceil(rows.length / this.itemsPerPage);
     const start = (page - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-    this.paginatedData1 = this.data1.slice(start, end);
+
+    this.paginatedData = rows.slice(start, end);
     this.disableAnimation = true;
+
 
     // setTimeout(() => {
     //   this.showLoader1 = false;
@@ -67,16 +69,19 @@ export class GridDocumentationComponent implements OnInit {
   }
 
   remove() {
-    const rows4removal = this.data1.filter(row => row.checked);
+    const rows4removal = this.data.filter(row => row.checked);
     rows4removal.forEach((x) => {
-      const index = this.data1.indexOf(x);
-      this.data1.splice(index, 1);
+      const dateindex = this.data.indexOf(x);
+      this.data.splice(dateindex, 1);
+      const index = this.paginatedData.indexOf(x);
+      this.paginatedData.splice(index, 1);
     });
-    this.pageCount = Math.ceil(this.data1.length / this.itemsPerPage);
-    if (this.pageCount < this.activePage) {
+    rows4removal.forEach((x) => {
+
+    });
+    this.pageCount = Math.ceil(this.data.length / this.itemsPerPage);
+    if (this.activePage > this.pageCount) {
       this.setPagingData(this.pageCount);
-    } else {
-      this.setPagingData(this.activePage);
     }
   }
 
@@ -85,30 +90,28 @@ export class GridDocumentationComponent implements OnInit {
   }
 
   setAllChecked(checked: boolean) {
-    this.data1.forEach(x => x.checked = checked);
+    this.paginatedData.forEach(x => x.checked = checked);
   }
 
-  sort1(args: GridSortChangedArgs) {
-    this.data1 = this.data1.sort((row1, row2) => {
+  sort(args: GridSortChangedArgs) {
+    this.data = this.data.sort((row1, row2) => {
       return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
         row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
     });
   }
 
-  // sort2(args: GridSortChangedArgs) {
-  //   this.data2 = this.data2.sort((row1, row2) => {
-  //     return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
-  //       row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
-  //   });
-  // }
+  setFilter(event: boolean) {
+    this.filterOn = event;
+    this.setPagingData(1);
+  }
 
   get anyIsChecked(): boolean {
-    return this.data1.some(x => x.checked === true);
+    return this.paginatedData.some(x => x.checked === true);
   }
 
   get allChecked(): boolean {
-    if (this.data1.length > 0) {
-      return this.data1.every(x => x.checked);
+    if (this.paginatedData.length > 0) {
+      return this.paginatedData.every(x => x.checked);
     }
     return false;
   }

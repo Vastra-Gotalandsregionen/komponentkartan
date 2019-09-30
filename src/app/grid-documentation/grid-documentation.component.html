@@ -5,17 +5,21 @@
       <h1>Block</h1>
     </vgr-page-block>
 
-    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true" [showLoader]="showLoader1" [activePage]="activePage" [pages]="pageCount"
+    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true" [showLoader]="showLoader" [activePage]="activePage" [pages]="pageCount"
       (pageChanged)="onPageChanged($event)">
       <vgr-grid-header-toolbar>
-        Antal: {{ data1.length }}
-        <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
-          <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
-        </vgr-button>
-        <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="remove()">
-          <vgr-icon [icon]="'trash'" style="margin-right: 7px;"></vgr-icon><span>Ta bort</span>
-        </vgr-button>
-        <vgr-button (click)="activePage=2">Gåt till sidan 2</vgr-button>
+        <div style="display: flex; align-items: center">
+          <div style="margin-right: 10px;">Antal: {{ data.length }}</div>
+          <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
+            <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
+          </vgr-button>
+          <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="remove()">
+            <vgr-icon [icon]="'trash'" style="margin-right: 7px;"></vgr-icon><span>Ta bort</span>
+          </vgr-button>
+          <vgr-checkbox [label]="'Filter > 500100'" (checkedChanged)="setFilter($event)">
+          </vgr-checkbox>
+          <!-- <vgr-button (click)="activePage=2">Gåt till sidan 2</vgr-button> -->
+        </div>
       </vgr-grid-header-toolbar>
       <vgr-grid-header>
         <vgr-grid-header-column [width]="2">
@@ -26,7 +30,7 @@
         <vgr-grid-header-column [width]="10" [align]="'right'">Pris</vgr-grid-header-column>
         <vgr-grid-header-column [width]="10">Status</vgr-grid-header-column>
       </vgr-grid-header>
-      <vgr-grid-row *ngFor="let row of paginatedData1" [expanded]="row.expanded"
+      <vgr-grid-row *ngFor="let row of paginatedData" [expanded]="row.expanded"
         (expandedChanged)="row.expanded = $event">
         <vgr-grid-column [width]="2">
           <vgr-checkbox [checked]="row.checked" (checkedChanged)="toggleChecked(row)"></vgr-checkbox>
