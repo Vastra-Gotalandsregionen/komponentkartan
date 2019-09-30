@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GridComponent } from './grid.component';
+import { GridComponent, LoaderComponent, PaginationComponent } from '../../index';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('GridComponent', () => {
   let component: GridComponent;
@@ -8,7 +10,8 @@ describe('GridComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GridComponent ]
+      declarations: [ GridComponent, LoaderComponent, PaginationComponent ],
+      imports: [CommonModule, BrowserAnimationsModule ],
     })
     .compileComponents();
   }));

@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GridHeaderColumnComponent } from './grid-header-column.component';
+import { GridHeaderColumnComponent, IconComponent } from '../../index';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconModule } from '../icon/icon.module';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('GridHeaderColumnComponent', () => {
   let component: GridHeaderColumnComponent;
@@ -8,7 +12,8 @@ describe('GridHeaderColumnComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GridHeaderColumnComponent ]
+      declarations: [ GridHeaderColumnComponent, IconComponent ],
+      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule],
     })
     .compileComponents();
   }));
