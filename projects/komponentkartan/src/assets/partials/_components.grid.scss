@@ -51,6 +51,9 @@ vgr-grid {
     &.no-padding {
       padding: 0;
     }
+    vgr-grid-content {
+      width:100%;
+    }
   }
 
   .grid-row-container {
