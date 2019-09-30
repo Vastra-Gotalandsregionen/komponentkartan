@@ -38,11 +38,15 @@ export const remove = trigger('remove', [
     //     height: '0', opacity: '0', overflow: 'hidden'
     // })),
     // transition('start => end', animate('1.4s'))
+    transition(':enter', [
+        style({ height: '0', opacity: '1', overflow: 'hidden', display: 'block' }),
+        animate('{{speed}}', style({ height: '*', opacity: '1' })),
+    ], { params: { speed: '.2s' } }),
 
     transition(':leave', [
         style({ height: '*', overflow: 'hidden', display: 'block' }),
         animate('{{speed}}', style({ height: '0', opacity: '0' })),
-    ], { params: { speed: '.4s' } }),
+    ], { params: { speed: '.2s' } }),
 ]);
 
 export const listStagger = trigger('listStagger', [
