@@ -30,7 +30,6 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @ContentChild(GridHeaderComponent) gridHeader: GridHeaderComponent;
   @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
 
-  animationsDisabled = false;
   headerOffset: string; // dynamic offset depending on the heightof the page header + header height.
   public animationSpeed: string;
   private headerHeight = 79; // vgr-header height (same value as $header-height _setting.sizes.scss)
@@ -132,9 +131,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
     this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.setAnimationSpeed();
-      this.enableAnimation();
     });
-    this.enableAnimation();
     this.setAnimationSpeed();
   }
 
@@ -149,15 +146,8 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
     });
   }
 
-  enableAnimation() {
-    setTimeout(() => {
-      this.animationsDisabled = false;
-    }, 500);
-  }
-
   onPageChanged(event: number) {
     setTimeout(() => {
-      this.animationsDisabled = true;
       this.pageChanged.emit(event);
     });
   }
