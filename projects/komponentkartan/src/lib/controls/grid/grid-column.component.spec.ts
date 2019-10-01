@@ -23,7 +23,4 @@ describe('GridColumnComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Alignment', () => {
-
-  });
 });
