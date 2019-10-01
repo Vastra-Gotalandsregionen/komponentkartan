@@ -15,7 +15,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
 
   @Input() expanded = false;
   @Input() preventCollapse = false;
-  @Input() animationSpeed = '0.4s';
+  @Input() animationSpeed = '.4s ease';
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
   @Output() expandPrevented: EventEmitter<any> = new EventEmitter();
   @Output() collapsePrevented: EventEmitter<any> = new EventEmitter();
