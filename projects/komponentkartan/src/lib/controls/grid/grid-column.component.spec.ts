@@ -22,4 +22,8 @@ describe('GridColumnComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('Alignment', () => {
+
+  });
 });

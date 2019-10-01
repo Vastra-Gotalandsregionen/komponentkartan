@@ -76,13 +76,12 @@ export class GridDocumentationComponent implements OnInit {
       const index = this.paginatedData.indexOf(x);
       this.paginatedData.splice(index, 1);
     });
-    rows4removal.forEach((x) => {
 
-    });
     this.pageCount = Math.ceil(this.data.length / this.itemsPerPage);
-    if (this.activePage > this.pageCount) {
-      this.setPagingData(this.pageCount);
-    }
+    this.setPagingData(this.activePage);
+    // if (this.activePage > this.pageCount) {
+    //   this.setPagingData(this.pageCount);
+    // }
   }
 
   toggleChecked(row: DataRow) {
