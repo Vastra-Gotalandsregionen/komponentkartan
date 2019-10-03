@@ -8,12 +8,5 @@ import { HtmlEncodeService } from '../html-encode.service';
   styleUrls: ['./grid-documentation.component.css']
 })
 export class GridDocumentationComponent  {
-  htmlBasicListStructureMarkup: string;
-  examples: Examples = new Examples();
 
-  constructor(htmlEncoder: HtmlEncodeService) {
-
-    this.htmlBasicListStructureMarkup =
-      htmlEncoder.prepareHighlightedSection(this.examples.htmlBasicListStructureMarkup);
-  }
 }
