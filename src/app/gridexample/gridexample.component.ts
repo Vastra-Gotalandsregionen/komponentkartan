@@ -183,7 +183,6 @@ export class GridexampleComponent implements OnInit {
     const end = start + this.itemsPerPage;
 
     this.paginatedPeople = this.people2.slice(start, end);
-    console.log(this.paginatedPeople);
   }
 }
 
