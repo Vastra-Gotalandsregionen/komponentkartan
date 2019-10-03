@@ -68,7 +68,7 @@ import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 import { UnitFilterPipe } from './examples-listwithcards/unitfilterpipe';
 import { GridDocumentationComponent } from './grid-documentation/grid-documentation.component';
-import { ArvidComponent } from './arvid/arvid.component';
+import { GridexampleComponent } from './gridexample/gridexample.component';
 
 @NgModule({
     declarations: [
@@ -122,7 +122,7 @@ import { ArvidComponent } from './arvid/arvid.component';
         ModaldialogComponent,
         UnitFilterPipe,
         GridDocumentationComponent,
-        ArvidComponent
+        GridexampleComponent
     ],
     imports: [
         KomponentkartanModule,

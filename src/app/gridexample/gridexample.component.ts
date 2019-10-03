@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { GridSortChangedArgs, GridSortDirection } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
-  selector: 'vgr-arvid',
-  templateUrl: './arvid.component.html',
-  styleUrls: ['./arvid.component.css']
+  selector: 'vgr-gridexample',
+  templateUrl: './gridexample.component.html',
+  styleUrls: ['./gridexample.component.css']
 })
-export class ArvidComponent implements OnInit {
-
-  preventCollapse = false;
+export class GridexampleComponent implements OnInit {
 
   people: Person[] = [
     {
@@ -18,25 +16,29 @@ export class ArvidComponent implements OnInit {
         text: 'Meddelande: Text',
         type: 'comment'
       }],
-      expanded: false
+      expanded: false,
+      checked: false
     },
     {
       namn: 'Bjarne',
       efternamn: 'Bengtsson',
       notifications: [],
-      expanded: false
+      expanded: false,
+      checked: false
     },
     {
       namn: 'Carola',
       efternamn: 'Claesson',
       notifications: [],
-      expanded: false
+      expanded: false,
+      checked: false
     },
     {
       namn: 'Daniella',
       efternamn: 'Di Maria Marqueez',
       notifications: [],
-      expanded: false
+      expanded: false,
+      checked: false
     },
     {
       namn: 'Erik',
@@ -45,42 +47,49 @@ export class ArvidComponent implements OnInit {
         text: 'Personen är inaktiv',
         type: 'error'
       }],
-      expanded: false
+      expanded: false,
+      checked: false
     }
   ];
-  vanster = [
-    { fornamn: 'Arvid', efternamn: 'Sollenby' },
-    { fornamn: 'Fredrik', efternamn: 'Aronsson' },
-    { fornamn: 'Caroline', efternamn: 'Bornsjö' },
-    { fornamn: 'Torin', efternamn: 'Williams' },
-  ];
-  hoger = [
-    { fornamn: 'Olga', efternamn: 'Akselrad' },
-    { fornamn: 'Markus', efternamn: 'Rydin' },
-    { fornamn: 'Jörgen', efternamn: 'Åkesson' },
-    { fornamn: 'Sofia', efternamn: 'Hejdenberg' },
-  ];
-  people2: any = [];
-  clicks = 1;
 
-  constructor() { }
+  people2: any[] = [
+    { fornamn: 'Arvid', efternamn: 'Sollenby', expanded: false, checked: false },
+    { fornamn: 'Fredrik', efternamn: 'Aronsson', expanded: false, checked: false },
+    { fornamn: 'Caroline', efternamn: 'Bornsjö', expanded: false, checked: false },
+    { fornamn: 'Torin', efternamn: 'Williams', expanded: false, checked: false },
+    { fornamn: 'Olga', efternamn: 'Akselrad', expanded: false, checked: false },
+    { fornamn: 'Markus', efternamn: 'Rydin', expanded: false, checked: false },
+    { fornamn: 'Jörgen', efternamn: 'Åkesson', expanded: false, checked: false },
+    { fornamn: 'Sofia', efternamn: 'Hejdenberg', expanded: false, checked: false },
+  ];
+  activePage = 1;
+  pageCount = 1;
+  itemsPerPage = 3;
+  paginatedPeople: any[] = [];
 
   ngOnInit() {
-    // this.people2 = JSON.parse(JSON.stringify(this.vanster));
+    this.setPagingData(this.activePage);
   }
 
   addRow() {
-    this.people.unshift({
+    const pelle = {
       namn: 'Pelle',
       efternamn: 'Karlsson',
-      notifications: [],
-      expanded: false
-    });
-  }
+      notifications: [{
+        text: 'Pelle lades till.',
+        type: 'success'
+      } as any],
+      expanded: true,
+      checked: false
+    };
 
-  togglePeople() {
-    this.people2 = JSON.parse(JSON.stringify(this.clicks % 2 === 0 ? this.hoger : this.vanster));
-    this.clicks++;
+    this.people.unshift(pelle);
+    setTimeout(() => {
+      pelle.expanded = false;
+    }, 2500);
+    setTimeout(() => {
+      pelle.notifications.pop();
+    }, 2500);
   }
 
   sort(args: GridSortChangedArgs) {
@@ -144,6 +153,38 @@ export class ArvidComponent implements OnInit {
     }, 2500);
   }
 
+  toggleChecked(row: Person) {
+    row.checked = !row.checked;
+  }
+
+  setAllChecked(checked: boolean) {
+    this.paginatedPeople.forEach(x => x.checked = checked);
+  }
+
+  get anyIsChecked(): boolean {
+    return this.paginatedPeople.some(x => x.checked === true);
+  }
+
+  get allChecked(): boolean {
+    if (this.people2.length > 0) {
+      return this.paginatedPeople.every(x => x.checked);
+    }
+    return false;
+  }
+
+  onPageChanged(page: number) {
+    this.setPagingData(page);
+  }
+
+  setPagingData(page: number) {
+    this.activePage = page;
+    this.pageCount = Math.ceil(this.people2.length / this.itemsPerPage);
+    const start = (page - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+
+    this.paginatedPeople = this.people2.slice(start, end);
+    console.log(this.paginatedPeople);
+  }
 }
 
 
@@ -152,6 +193,7 @@ export interface Person {
   efternamn: string;
   notifications?: Notification[];
   expanded?: boolean;
+  checked: boolean;
 }
 
 export interface Notification {

@@ -1,0 +1,66 @@
+<vgr-page>
+  <vgr-page-header title="Grid exempel"></vgr-page-header>
+  <vgr-page-body>
+    <vgr-grid (sortChanged)="sort($event)" toggleAnimation="slow">
+      <vgr-grid-header-toolbar>
+          <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
+            <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad</vgr-button>
+      </vgr-grid-header-toolbar>
+      <vgr-grid-header>
+        <vgr-grid-header-column sortKey="namn">Förnamn</vgr-grid-header-column>
+        <vgr-grid-header-column>Efternamn</vgr-grid-header-column>
+      </vgr-grid-header>
+      <vgr-grid-row *ngFor="let person of people" [expanded]="person.expanded"
+        (expandedChanged)="person.expanded = $event">
+        <vgr-grid-column>{{person.namn}}</vgr-grid-column>
+        <vgr-grid-column>{{person.efternamn}}</vgr-grid-column>
+        <vgr-notification *ngFor="let notification of person.notifications" [type]="notification.type"
+          autoAddTypeIcons="true">
+          {{notification.text}}
+        </vgr-notification>
+        <vgr-grid-content>
+          <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person)">Uppdatera</vgr-button>
+          <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person, true)">Uppdatera och rensa meddelande
+          </vgr-button>
+          <vgr-button [buttonStyle]="'secondary'" (click)="deleteRow(person)">Ta bort</vgr-button>
+        </vgr-grid-content>
+      </vgr-grid-row>
+    </vgr-grid>
+
+    <vgr-grid (sortChanged)="sort2($event)" (pageChanged)="onPageChanged($event)" [pages]="pageCount" [activePage]="activePage" [stickyHeader]="true">
+        <vgr-grid-header-toolbar>
+          <div style="display: flex; align-items: center; height: 30px;">
+            <div style="margin-right: 10px;">Antal: {{ people2.length }}</div>
+            <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
+              <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
+            </vgr-button>
+            <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="remove()">
+              <vgr-icon [icon]="'trash'" style="margin-right: 7px;"></vgr-icon><span>Ta bort</span>
+            </vgr-button>
+          </div>
+        </vgr-grid-header-toolbar>
+        <vgr-grid-header>
+          <vgr-grid-header-column [width]="12">
+            <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
+          </vgr-grid-header-column>
+          <vgr-grid-header-column [width]="200" sortKey="fornamn">Förnamn</vgr-grid-header-column>
+          <vgr-grid-header-column [width]="200" sortKey="efternamn">Efternamn</vgr-grid-header-column>
+        </vgr-grid-header>
+        <vgr-grid-row *ngFor="let person of paginatedPeople">
+          <vgr-grid-column [width]="12">
+            <vgr-checkbox [checked]="person.checked" (checkedChanged)="toggleChecked(person)"></vgr-checkbox>
+          </vgr-grid-column>
+          <vgr-grid-column [width]="200">{{person.fornamn}}</vgr-grid-column>
+          <vgr-grid-column [width]="200">{{person.efternamn}}</vgr-grid-column>
+          <vgr-grid-content>
+            <p>
+              Löksås ipsum så äng hav där både dock, både bland mot från upprätthållande sista, samtidigt ordningens dimma
+              och nu erfarenheter.
+              Är kan där och söka vid annat, där tidigare är som åker sällan det, räv helt precis ordningens omfångsrik.
+              Sjö oss där olika tre bäckasiner så när, faktor annat kom ska kanske därmed, häst tid tre äng kan dunge.
+            </p>
+          </vgr-grid-content>
+        </vgr-grid-row>
+      </vgr-grid>
+  </vgr-page-body>
+</vgr-page>
