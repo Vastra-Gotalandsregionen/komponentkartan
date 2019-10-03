@@ -29,7 +29,7 @@ vgr-grid {
         &.grid-align--right {
           text-align: right;
         }
-      }      
+      }
     }
     h2.sortable {
       cursor: pointer;
@@ -48,11 +48,11 @@ vgr-grid {
   .grid-row-content {
     width: 100%;
     overflow: hidden;
-    padding: 0;    
+    padding: 0;
 
     vgr-grid-content {
-      padding: 6px 10px;
-      width:100%;
+      padding: 10px 10px 30px 10px;
+      width: 100%;
       &.no-padding {
         padding: 0;
       }
@@ -60,7 +60,7 @@ vgr-grid {
   }
 
   .grid-row-container {
-    .grid-row-header-focus:focus{
+    .grid-row-header-focus:focus {
       outline: $focus-outline-width solid $focus-color;
       z-index: 1;
       position: relative;
@@ -95,7 +95,7 @@ vgr-grid {
         }
       }
     }
-  }*/  
+  }*/
 
   .grid-header-toolbar {
     background-color: $background-color--default;
@@ -121,7 +121,6 @@ vgr-grid {
       &:hover .grid-row-header {
         box-shadow: none;
       }
-
     }
     .grid-row-notification {
       display: block;
@@ -153,5 +152,23 @@ vgr-grid {
 @media screen and (min-width: $desktop-width--medium) {
   vgr-grid {
     max-width: 1170px;
+
+    vgr-grid-header {
+      vgr-grid-header-column {
+        min-height: 40px;
+      }
+    }
+    vgr-grid-row {
+      .grid-row-header {
+        vgr-grid-column {
+          min-height: 40px;
+        }
+      }
+      // .grid-row-content {
+      //   vgr-grid-content {
+      //     padding: 10px 20px 30px 20px;
+      //   }
+      // }
+    }
   }
 }
