@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy, SimpleChanges, OnChanges, HostListener, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy, HostListener } from '@angular/core';
 import { GridHeaderComponent, GridSortChangedArgs } from './grid-header.component';
 import { GridRowComponent } from './grid-row.component';
 import { takeUntil } from 'rxjs/operators';
@@ -15,14 +15,13 @@ import { remove } from '../../animation';
 })
 export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  @Input() stickyHeader = false;
   @Input() allowMultipleExpandedRows = false;
+  @Input() stickyHeader = false;
+  @Input() toggleAnimation: 'none' | 'slow' | 'medium' | 'fast' = 'medium';
   @Input() pages = 1;
   @Input() activePage = 1;
   @Input() showLoader = false;
-  @Input() toggleAnimation: 'none' | 'slow' | 'medium' | 'fast' = 'medium';
   @Input() ariaLabel = 'Lista';
-
 
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
