@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Examples } from '../lists/examples/examples';
-import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
   selector: 'vgr-grid-documentation',

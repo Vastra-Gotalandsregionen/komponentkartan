@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 export { ActionPanelComponent } from './controls/action-panel/action-panel.component';
 export { TextareaComponent } from './controls/textarea/textarea.component';
 export { ButtonComponent } from './controls/button/button.component';
