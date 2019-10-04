@@ -154,21 +154,24 @@ vgr-grid {
     max-width: 1170px;
 
     vgr-grid-header {
+      padding: 0px 10px;
       vgr-grid-header-column {
         min-height: 40px;
       }
     }
+
     vgr-grid-row {
       .grid-row-header {
+        padding: 0px 10px;
         vgr-grid-column {
           min-height: 40px;
         }
       }
-      // .grid-row-content {
-      //   vgr-grid-content {
-      //     padding: 10px 20px 30px 20px;
-      //   }
-      // }
+      .grid-row-content {
+        vgr-grid-content {
+          padding: 10px 20px 30px 20px;
+        }
+      }
     }
   }
 }
