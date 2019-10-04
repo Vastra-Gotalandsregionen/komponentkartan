@@ -1,5 +1,4 @@
 import { ExpandableRow } from '../models/expandableRow.model';
-import { NotificationIcon } from './notificationIcon.model';
 import { NotificationType } from './notificationType.model';
 import { RowNotification } from './rowNotification.model';
 

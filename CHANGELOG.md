@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 5.0.4
+- Added event for valueChange for InputField and updated documentation.
+- Fixed inputfield to support spacing and comma instead of dots for numbers.
+
+## 5.0.3
+- Fixed a bug in listheader where buttons were not clickable.
 ## 5.1.0 (Beta)
 - Added a new "grid"-component that will replace the list function in the future.
 - Added a new "notification"-component that can be used with the grid component (and perhaps more components in the future).
