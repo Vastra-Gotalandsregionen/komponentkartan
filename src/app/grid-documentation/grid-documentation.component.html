@@ -1,321 +1,169 @@
 <vgr-page class="no-sort">
   <vgr-page-header [title]="'Grid'">
+    <br>
+      Dokumentation för vgr-grid finns på
+      <a href="https://vastra-gotalandsregionen.github.io/komponentkartan-demo/" target="_blank">Komponentkartan demo
+      </a>
+
   </vgr-page-header>
   <vgr-page-body>
-    <vgr-page-block>
+    <vgr-grid (sortChanged)="sort($event)" toggleAnimation="slow" [stickyHeader]="true">
+      <vgr-grid-header-toolbar>
+        <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
+          <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad
+        </vgr-button>
+      </vgr-grid-header-toolbar>
+      <vgr-grid-header>
+        <vgr-grid-header-column sortKey="namn">Förnamn</vgr-grid-header-column>
+        <vgr-grid-header-column>Efternamn</vgr-grid-header-column>
+      </vgr-grid-header>
+      <vgr-grid-row *ngFor="let person of people" [expanded]="person.expanded"
+        (expandedChanged)="person.expanded = $event">
+        <vgr-grid-column>{{person.namn}}</vgr-grid-column>
+        <vgr-grid-column>{{person.efternamn}}</vgr-grid-column>
+        <vgr-notification *ngFor="let notification of person.notifications" [type]="notification.type"
+          autoAddTypeIcons="true">
+          {{notification.text}}
+        </vgr-notification>
+        <vgr-grid-content>
+          <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person)">Uppdatera</vgr-button>
+          <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person, true)">Uppdatera och rensa meddelande
+          </vgr-button>
+          <vgr-button [buttonStyle]="'secondary'" (click)="deleteRow(person)">Ta bort</vgr-button>
+        </vgr-grid-content>
+      </vgr-grid-row>
+    </vgr-grid>
 
-      <p>
-        Dokumentation för vgr-grid finns på 
-        <a href="https://vastra-gotalandsregionen.github.io/komponentkartan-demo/" target="_blank">Komponentkartan demo </a>
-      </p>
-      <p>
-        <br> Under "kodexempel" finns exempel grid: <a href="/gridexample">Grid</a>
-        <br>
-      </p>
+    <vgr-grid (sortChanged)="sort2($event)" (pageChanged)="onPageChanged($event)" [pages]="pageCount"
+      [activePage]="activePage" [stickyHeader]="true">
+      <vgr-grid-header-toolbar>
+        <div style="display: flex; align-items: center; height: 30px;">
+          <div style="margin-right: 10px;">Antal: {{ people2.length }}</div>
+          <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
+            <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
+          </vgr-button>
+          <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="remove()">
+            <vgr-icon [icon]="'trash'" style="margin-right: 7px;"></vgr-icon><span>Ta bort</span>
+          </vgr-button>
+        </div>
+      </vgr-grid-header-toolbar>
+      <vgr-grid-header>
+        <vgr-grid-header-column [width]="12">
+          <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
+        </vgr-grid-header-column>
+        <vgr-grid-header-column [width]="200" sortKey="fornamn">Förnamn</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="200" sortKey="efternamn">Efternamn</vgr-grid-header-column>
+      </vgr-grid-header>
+      <vgr-grid-row *ngFor="let person of paginatedPeople">
+        <vgr-grid-column [width]="12">
+          <vgr-checkbox [checked]="person.checked" (checkedChanged)="toggleChecked(person)"></vgr-checkbox>
+        </vgr-grid-column>
+        <vgr-grid-column [width]="200">{{person.fornamn}}</vgr-grid-column>
+        <vgr-grid-column [width]="200">{{person.efternamn}}</vgr-grid-column>
+        <vgr-grid-content>
+          <p>
+            Löksås ipsum så äng hav där både dock, både bland mot från upprätthållande sista, samtidigt ordningens dimma
+            och nu erfarenheter.
+            Är kan där och söka vid annat, där tidigare är som åker sällan det, räv helt precis ordningens omfångsrik.
+            Sjö oss där olika tre bäckasiner så när, faktor annat kom ska kanske därmed, häst tid tre äng kan dunge.
+          </p>
+        </vgr-grid-content>
+      </vgr-grid-row>
+    </vgr-grid>
 
-      <!-- <vgr-list [allowMultipleExpandedItems]="true">
-        <vgr-list-header>
-          <vgr-list-column-header [width]="20">Dokumentation för grid</vgr-list-column-header>
-        </vgr-list-header>
-        <vgr-list-item [expanded]="true">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Översikt</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <div class="content-overview">
-              <p>
-                En tabell med header och expanderbara rader.
-              </p>
-              <p>
-                <code>&lt;vgr-grid&gt;</code><br>
-              </p>
-              <br>
-              <p> Förändras med tema:
-                <strong>nej</strong>
-              </p>
-            </div>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Exempel</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <code>&lt;vgr-grid&gt;</code><br>
-            &nbsp;&nbsp;<code>&lt;vgr-grid-header-toolbar&gt;</code>&nbsp;&nbsp;<code>&lt;vgr-grid-header-toolbar&gt;</code><br>
-            &nbsp;&nbsp;<code>&lt;vgr-grid-header&gt;</code><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;vgr-grid-header-column&gt;</code><code>&lt;/vgr-grid-header-column&gt;</code><br>            
-            &nbsp;&nbsp;<code>&lt;/vgr-grid-header&gt;</code><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;vgr-grid-column&gt;</code><code>&lt;/vgr-grid-column&gt;</code><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;vgr-notification&gt;</code>
-            &nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;/vgr-notification&gt;</code><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;vgr-content&gt;</code>
-            &nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;/vgr-content&gt;</code><br>
-            &nbsp;&nbsp;<code>&lt;vgr-grid-row&gt;</code><br>
-            <code>&lt;vgr-grid&gt;</code><br>
-            <br> Under "kodexempel" finns exempel grid:
-            <br>
-            <a href="/gridexample">Grid</a>
-            <br>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-grid</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>allowMultipleExpandedRows : boolean</td>
-                <td>Om flera rader skall kunna vara expanderade samtidigt, default är false.</td>
-                <td>[allowMultipleExpandedRows]="true"</td>
-              </tr>
-              <tr>
-                <td>stickyHeader : boolean</td>
-                <td>Kan man sätta om headern skall vara sticky, default är false.</td>
-                <td>[stickyHeader]="true"</td>
-              </tr>
-              <tr>
-                <td>toggleAnimation: string</td>
-                <td>Anger hastigheten på anmimationen för expanderad och kollapsa innehållet.
-                  Tillåtna värden 'none' | 'slow' | 'medium' | 'fast' = 'medium' </td>
-                <td>[toggleAnimation]="'slow'"</td>
-              </tr>
-              <tr>
-                <td>pages : number</td>
-                <td>Om paginering ska visas anges antal sidor som ska hanteras. Giltigt värde är ett eller större.
-                  Paginering visas endast om värdet är strörre än ett.</td>
-                <td>[pages]="10"</td>
-              </tr>
-              <tr>
-                <td>activePage : number</td>
-                <td>Styr aktiv sida om paginering är vald ([pages] är satt). Giltigt värde är ett till [pages].</td>
-                <td>[activePage]="1"</td>
-              </tr>
-              <tr>
-                <td>pageChanged :<br> EventEmitter &lt;number&gt;</td>
-                <td>Event som triggas när aktiv sida ändras.</td>
-                <td>(pageChanged)="onPageChanged($event)"</td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-grid-header-toolbar</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            Kan innehålla valfritt innehåll. Innehållet blir sticky om stickyHeader är true.
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-grid-header</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            Innehåller ett antal vgr-grid-header-column element.
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th style="width:600px">Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>sortChanged : EventEmitter&lt;SortChangedArgs&gt;</td>
-                <td>Event som triggas när sortering sker i någon av headerns kolumner</td>
-                <td>(sortChanged)="onSortChanged($event)"</td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-gridheader-column</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <p>Kan innehålla valfritt innehåll.</p>
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th style="width:600px">Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>width : number</td>
-                <td>vgr-list är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av
-                  width ska
-                  vara 20 för vgr-list.
-                </td>
-                <td>
-                  [width]="20"
-                </td>
-              </tr>
-              <tr>
-                <td>align : string</td>
-                <td>Man kan sätta en alignment på kolumnerna. Defaultvärde är left. Giltiga värden är right, left och
-                  center.
-                  <br>Om man sätter ett felaktigt värde så sätts defaultvärdet
-                </td>
-                <td>
-                  [align]="'right'"
-                </td>
-              </tr>
-              <tr>
-                <td>sortKey : string</td>
-                <td>Nyckel som används för att identifiera kolumnen vid sorteringsevent.</td>
-                <td>[sortKey]="'firstName'"</td>
-              </tr>
-              <tr>
-                <td>sortDirection : GridSortDirection</td>
-                <td>Anger åt vilket håll kolumnen sorteras vid initiering
-                  <code>SortDirection.None</code>, default - ingen sortering
-                  <code>SortDirection.Ascending</code> sortera stigande
-                  <code>SortDirection.Descending</code> sortera fallande
-                </td>
-                <td>[sortDirection]="sortDirection.Ascending"
-                  <strong>OBS!</strong> För att binda till enums i html, måste en rad till i .ts-filen som deklarerar
-                  enum som en
-                  property. T.ex:
-                  <code>sortDirection = SortDirection</code>
-                </td>
-              </tr>
-              <tr>
-                <td>sortChanged : EventEmitter&lt;SortDirection&gt;</td>
-                <td>Event som triggas när sortering sker i kolumnen</td>
-                <td>(sortChanged)="onSortChanged($event)"</td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-grid-row</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th style="width:600px">Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>expanded : boolean</td>
-                <td>Anger om raden skall vara expanderad eller inte.</td>
-                <td>[expanded]="false"</td>
-              </tr>
-              <tr>
-                <td>preventCollapse : boolean</td>
-                <td>Anger om raden tillåts att kollapsa.</td>
-                <td>[preventCollapse]="true"</td>
-              </tr>
-              <tr>
-                <td>expandedChanged : EventEmitter&lt;boolean&gt;</td>
-                <td>Event som triggas när raden expanderar</td>
-                <td>(expandedChanged)="onExpandedChanged($event)"</td>
-              </tr>
-              <tr>
-                <td>expandPrevented : EventEmitter&lt;boolean&gt;</td>
-                <td>Event som triggas när raden försöker expandera men hindras</td>
-                <td>(expandPrevented)="onExpandPrevented($event)"</td>
-              </tr>
-              <tr>
-                <td>collapsePrevented : EventEmitter&lt;boolean&gt;</td>
-                <td>Event som triggas när raden försöker kollapsa men hindras</td>
-                <td>(collapsePrevented)="onCollapsePrevented($event)"</td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-grid-column</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <p>Kan innehålla valfritt innehåll.</p>
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th style="width:600px">Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>width : number</td>
-                <td>vgr-grid är baserad på en n kolumns layout. Varje kolumn måste ha en width satt och summan av
-                  width ska vara 100% av brädden.
-                </td>
-                <td>
-                  [width]="18"
-                </td>
-              </tr>
-              <tr>
-                <td>align : string</td>
-                <td>Man kan sätta en alignment på kolumnerna. Defaultvärde är left. Giltiga värden är right, left och
-                  center.
-                  <br>Om man sätter ett felaktigt värde så sätts defaultvärdet
-                </td>
-                <td>
-                  [align]="'right'"
-                </td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-grid-content</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <p>Kan innehålla valfritt innehåll.</p>
-          </vgr-list-item-content>
-        </vgr-list-item>
+    <vgr-grid [toggleAnimation]="'slow'">
+      <vgr-grid-row [expanded]="expanded1" (expandedChanged)="expanded1 = $event">
+        <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-grid-content>Row content</vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = $event">
+        <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
+        <vgr-grid-column width="3">-980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Godkänd</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-notification>
+          <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
+          En kommentar
+        </vgr-notification>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="expanded3" (expandedChanged)="expanded3 = $event">
+        <vgr-grid-column width="10">Svens klinik</vgr-grid-column>
+        <vgr-grid-column width="3">123 456,98</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-grid-content>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet nunc sit amet massa dignissim, non
+            iaculis tortor placerat. Suspendisse pellentesque nibh eu augue auctor, eget tempor eros porttitor. Sed
+            mollis, velit sed hendrerit tempor, turpis est blandit nibh, sit amet pharetra turpis leo nec felis. Class
+            aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget
+            mauris ultricies lorem consectetur ullamcorper sit amet eget felis. Donec posuere aliquam aliquam. Quisque
+            molestie in lacus id condimentum. Nulla nec urna metus. Sed a risus turpis. In quis aliquet mi, id aliquet
+            magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam pretium ipsum odio, non
+            scelerisque odio auctor eu. Donec ultrices velit a tempus pharetra.</p>
 
-
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Tillgänglighet</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <p>
-              Navigering i griden:
-              <br>
-              <br> - Enter och Space: När fokus är på listradens header togglas listraden expanderad / kollapsad.
-              <br> - Nedåtpil: Om fokus ligger på en listrad flyttar fokus till raden nedanför. Om fokus ligger på den
-              sista
-              raden flyttas fokus till den första raden.
-              <br> - Uppåtpil: Om fokus ligger på en listrad, flyttar fokus till raden ovanför. Om fokus ligger på
-              första raden,
-              flyttas fokus till den sista raden.
-              <br> - Home: När fokus ligger på en listrad, flyttar fokus till första raden.
-              <br> - End: När fokus ligger på en rad flyttar fokus till sista raden.
-            </p>
-          </vgr-list-item-content>
-        </vgr-list-item>
-      </vgr-list> -->
-    </vgr-page-block>
+          <p>Pellentesque egestas viverra consequat. Phasellus mollis aliquet libero quis eleifend. Nullam at dolor
+            interdum, interdum lacus non, rutrum nulla. Phasellus laoreet quam quis justo mattis, sit amet vehicula diam
+            ullamcorper. Nulla a quam id nibh aliquam accumsan at ut lectus. Nullam dictum dolor vel scelerisque tempus.
+            Phasellus vel nisi justo. Praesent blandit ultricies lacus, ac ornare leo hendrerit ullamcorper. Etiam ipsum
+            eros, faucibus luctus hendrerit sit amet, bibendum in felis. Phasellus imperdiet, ante sed viverra
+            tincidunt, ante quam dictum urna, et condimentum lacus neque nec ligula. Nullam aliquet vel eros vitae
+            lacinia.</p>
+        </vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="expanded4" (expandedChanged)="expanded4 = $event">
+        <vgr-grid-column width="10">Klinik (utan innehåll)</vgr-grid-column>
+        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <!-- <vgr-grid-content>Row content</vgr-grid-content> -->
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="expanded5" (expandedChanged)="expanded5 = $event">
+        <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-grid-content>Row content</vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="expanded6" (expandedChanged)="expanded6 = $event">
+        <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-notification>
+          <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
+          En kommentar
+        </vgr-notification>
+        <vgr-grid-content>Row content</vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="expanded7" (expandedChanged)="expanded7 = $event">
+        <vgr-grid-column width="10">KBalderkliniken</vgr-grid-column>
+        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-grid-content></vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="expanded8" (expandedChanged)="expanded8 = $event">
+        <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-notification>
+          <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
+          En kommentar
+        </vgr-notification>
+        <vgr-grid-content>Row content</vgr-grid-content>
+      </vgr-grid-row>
+    </vgr-grid>
   </vgr-page-body>
 </vgr-page>

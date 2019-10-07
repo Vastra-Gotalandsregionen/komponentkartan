@@ -5,7 +5,8 @@ import { PageHeaderHeightService } from '../../services/page-header-height.servi
 
 @Component({
   selector: 'vgr-page',
-  templateUrl: './page.component.html'
+  templateUrl: './page.component.html',
+  providers: [PageHeaderHeightService]
 })
 export class PageComponent implements OnInit, OnDestroy {
   @ViewChild('bodyContainer') bodyContainer: ElementRef;

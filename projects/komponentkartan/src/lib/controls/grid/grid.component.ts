@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
 import { GridService } from './grid.service';
 import { remove } from '../../animation';
+import { GridHeaderToolbarComponent } from './grid-header-toolbar.component';
 
 @Component({
   selector: 'vgr-grid',
@@ -26,10 +27,12 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
 
+  @ContentChild(GridHeaderToolbarComponent) gridHeaderToolbar: GridHeaderToolbarComponent;
   @ContentChild(GridHeaderComponent) gridHeader: GridHeaderComponent;
   @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
 
   headerOffset: string; // dynamic offset depending on the heightof the page header + header height.
+  hasToolbar = false;
   public animationSpeed: string;
   private headerHeight = 79; // vgr-header height (same value as $header-height _setting.sizes.scss)
   private ngUnsubscribe = new Subject();
@@ -85,7 +88,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(value => {
         setTimeout(() => {
-          this.headerOffset = `${this.headerHeight + value}px`;
+          this.headerOffset = `${this.headerHeight + value }px`;
         });
       });
     const animationSpeeds = {
@@ -101,6 +104,9 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
     if (this.gridHeader) {
       this.gridHeader.sortChanged
         .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: GridSortChangedArgs) => this.sortChanged.emit(args));
+    }
+    if (this.gridHeaderToolbar) {
+      this.hasToolbar = true;
     }
 
     this.gridService.expandRowRequested

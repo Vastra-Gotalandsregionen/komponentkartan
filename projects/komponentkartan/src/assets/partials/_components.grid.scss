@@ -1,13 +1,18 @@
 vgr-grid {
   max-width: 1100px;
   display: block;
-  padding-top: 20px;
   box-sizing: border-box;
+  padding-bottom: 20px;
+  .grid-header-toolbar {
+    width: 100%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: $background-color--default;
+  }
 
   .grid-row-header,
   .grid-row-content,
   vgr-grid-header {
-    margin-bottom: 2px;
     background: white;
     display: flex;
     align-items: center;
@@ -35,6 +40,14 @@ vgr-grid {
       cursor: pointer;
     }
   }
+
+  vgr-grid-header {
+    margin-bottom: 2px;
+  }
+
+  .grid-row-header {
+    border-bottom: 1px solid $background-color--default;
+  }  
 
   vgr-grid-header-column {
     h2 vgr-icon {
@@ -97,10 +110,6 @@ vgr-grid {
     }
   }*/
 
-  .grid-header-toolbar {
-    background-color: $background-color--default;
-  }
-
   vgr-grid-row {
     display: block;
     position: relative;
@@ -114,9 +123,9 @@ vgr-grid {
       box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
       margin-top: 14px;
       margin-bottom: 14px;
-      vgr-grid-column:last-child:after {
-        transform: rotate(180deg);
-      }
+      // vgr-grid-column:last-child:after {
+      //   transform: rotate(180deg);
+      // }
 
       &:hover .grid-row-header {
         box-shadow: none;
@@ -125,6 +134,19 @@ vgr-grid {
     .grid-row-notification {
       display: block;
     }
+  }
+
+  .grid-row-container {
+    margin-bottom: 2px;
+  }
+
+  .grid-row-container--notification {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .grid-header-wrapper {
+    background-color: $background-color--default;
   }
 
   .grid-header-wrapper--sticky {
@@ -154,7 +176,8 @@ vgr-grid {
     max-width: 1170px;
 
     vgr-grid-header {
-      padding: 0px 10px;
+      padding-left: 10px;
+      padding-right: 10px;
       vgr-grid-header-column {
         min-height: 40px;
       }
@@ -162,7 +185,8 @@ vgr-grid {
 
     vgr-grid-row {
       .grid-row-header {
-        padding: 0px 10px;
+        padding-left: 10px;
+        padding-right: 10px;
         vgr-grid-column {
           min-height: 40px;
         }
@@ -171,6 +195,9 @@ vgr-grid {
         vgr-grid-content {
           padding: 10px 20px 30px 20px;
         }
+      }
+      .grid-row-notification {
+        display: block;
       }
     }
   }

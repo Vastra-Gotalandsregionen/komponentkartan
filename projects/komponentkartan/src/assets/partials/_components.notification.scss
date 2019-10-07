@@ -1,5 +1,6 @@
 ﻿vgr-notification {
   display: flex;
+  align-items: center;
   background-color: white;
   padding: 4px 10px;
   vgr-icon {
@@ -12,14 +13,20 @@
     left: 0;
     width: 5px;
     height: 100%;
-    background:$text-color--default;;
+    background:$text-color--default;
     position: absolute;
     transition: background .2s ease;
   }
   &.success:before {
-    background: $primary-color--success;;
+    background: $primary-color--success;
   }
   &.error:before {
-    background: $primary-color--error;;
+    background: $primary-color--error;
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  vgr-notification {
+    padding: 4px 20px;
   }
 }
