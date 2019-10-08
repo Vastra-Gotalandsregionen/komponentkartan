@@ -6,21 +6,38 @@
   vgr-icon {
     margin-right: 6px;
   }
-  &:before {
+  &.default:before,
+  &.comment:before {
     content: '';
     z-index: 2;
     top: 0;
     left: 0;
     width: 5px;
     height: 100%;
-    background:$text-color--default;
     position: absolute;
     transition: background .2s ease;
+    background:$text-color--default;
   }
   &.success:before {
+    content: '';
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    transition: background .2s ease;
     background: $primary-color--success;
   }
   &.error:before {
+    content: '';
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    transition: background .2s ease;
     background: $primary-color--error;
   }
 }

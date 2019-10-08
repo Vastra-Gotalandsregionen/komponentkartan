@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Input, HostBinding, OnInit } from '@angular/core';
 import { toggleFadedState } from '../../animation';
 
 @Component({
@@ -6,9 +6,14 @@ import { toggleFadedState } from '../../animation';
   templateUrl: './notification.component.html',
   animations: [toggleFadedState]
 })
-export class NotificationComponent {
+export class NotificationComponent implements OnInit {
   @HostBinding('@toggleFadedState') animate = true;
   @Input() @HostBinding('attr.class') type = 'default';
   @Input() autoAddTypeIcons = false;
+  ngOnInit() {
+    if (!this.autoAddTypeIcons) {
+      this.type = 'none';
+    }
+  }
 
 }
