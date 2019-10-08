@@ -52,14 +52,14 @@ export class GridDocumentationComponent implements OnInit {
   ];
 
   people2: any[] = [
-    { fornamn: 'Arvid', efternamn: 'Johansson', status: 'klar', belopp: 300 as number, expanded: false, checked: false },
-    { fornamn: 'Fredrik', efternamn: 'Pettersson', status: 'pågår', belopp: 500 as number, expanded: false, checked: false },
-    { fornamn: 'Caroline', efternamn: 'Andersson', status: 'klar', belopp: 6000 as number, expanded: false, checked: false },
-    { fornamn: 'Torin', efternamn: 'Hansson', status: 'ej startad', belopp: 400 as number, expanded: false, checked: false },
-    { fornamn: 'Olga', efternamn: 'Gran', status: 'klar', belopp: 300 as number, expanded: false, checked: false },
-    { fornamn: 'Markus', efternamn: 'Björk', status: 'pågår', belopp: 4000 as number, expanded: false, checked: false },
-    { fornamn: 'Jörgen', efternamn: 'Karlsson', status: 'klar', belopp: 50 as number, expanded: false, checked: false },
-    { fornamn: 'Sofia', efternamn: 'Carlsson', status: 'ej startad', belopp: 500 as number, expanded: false, checked: false },
+    { fornamn: 'Arvid', efternamn: 'Johansson', status: 'klar', belopp: 300, expanded: false, checked: false },
+    { fornamn: 'Fredrik', efternamn: 'Pettersson', status: 'pågår', belopp: 500, expanded: false, checked: false },
+    { fornamn: 'Caroline', efternamn: 'Andersson', status: 'klar', belopp: 6000, expanded: false, checked: false },
+    { fornamn: 'Torin', efternamn: 'Hansson', status: 'ej startad', belopp: 400, expanded: false, checked: false },
+    { fornamn: 'Olga', efternamn: 'Gran', status: 'klar', belopp: 300, expanded: false, checked: false },
+    { fornamn: 'Markus', efternamn: 'Björk', status: 'pågår', belopp: 4000, expanded: false, checked: false },
+    { fornamn: 'Jörgen', efternamn: 'Karlsson', status: 'klar', belopp: 50, expanded: false, checked: false },
+    { fornamn: 'Sofia', efternamn: 'Carlsson', status: 'ej startad', belopp: 500, expanded: false, checked: false },
   ];
   loading = false;
   activePage = 1;
