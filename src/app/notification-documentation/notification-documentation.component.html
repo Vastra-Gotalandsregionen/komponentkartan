@@ -1,21 +1,24 @@
 <vgr-page class="no-sort">
   <vgr-page-header [title]="'Notification'">
+    <p>
+      Dokumentation för <code>&lt;vgr-notification&gt;</code> finns på
+      <!-- <a href="https://vastra-gotalandsregionen.github.io/komponentkartan-demo/grid" target="_blank">Komponentkartan demo </a> -->
+      <a href="http://vgwb0399.vgregion.se:4500/notification-documentation" target="_blank">Komponentkartan demo </a>
+    </p>
   </vgr-page-header>
   <vgr-page-body>
     <vgr-page-block>
+      <code>&lt;vgr-notification&gt;</code><br>
+      En notifiering är en egen komponet som kan läggas in deklarativt i html. 
+      <vgr-notification [autoAddTypeIcons]="false">
+        <vgr-icon [solid]="true" color="error" icon="exclamation-circle"></vgr-icon>Ett felmeddelade!
+      </vgr-notification>
       <p>
-        Dokumentation för vgr-notification finns på 
-        <a href="https://vastra-gotalandsregionen.github.io/komponentkartan-demo/" target="_blank">Komponentkartan demo </a>
+        <br><a href="/grid">Här</a> finns exempel på hur <code>&lt;vgr-notification&gt;</code> implementeras med
+        <code>&lt;vgr-grid&gt;</code>.
+        <br>
+        <br>
       </p>
-
-      <p>
-          <code>&lt;vgr-notification&gt;</code>
-          <code>&lt;/vgr-notification&gt;</code><br>
-          <br> Under "kodexempel" finns exempel på hur vgr-notification implementeras med vgr-grid:
-          <br>
-          <a href="/gridexample">Grid</a>
-          <br>
-      </p>     
     </vgr-page-block>
   </vgr-page-body>
 </vgr-page>

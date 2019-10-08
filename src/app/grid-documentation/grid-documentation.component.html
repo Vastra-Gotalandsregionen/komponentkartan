@@ -12,9 +12,18 @@
   <vgr-page-body>
     <vgr-grid (sortChanged)="sort($event)" toggleAnimation="slow" [stickyHeader]="true">
       <vgr-grid-header-toolbar>
-        <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
+        <vgr-button *ngIf="!error" [buttonStyle]="'discreet'" (click)="addRow()">
           <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad
         </vgr-button>
+        <div *ngIf="error">
+          <vgr-notification [autoAddTypeIcons]="false" [type]="'error'">
+            <vgr-icon [icon]="'exclamation-circle'" [color]="'error'"></vgr-icon>
+            <div style="margin-right: 20px">Något gick fel!!!</div>
+            <vgr-button [buttonStyle]="'discreet'" (click)="resetError()">
+              <vgr-icon [icon]="'check-circle'" [color]="'success'"></vgr-icon> OK (klicka här)
+            </vgr-button>
+          </vgr-notification>
+        </div>
       </vgr-grid-header-toolbar>
       <vgr-grid-header>
         <vgr-grid-header-column [sortKey]="'namn'">Förnamn</vgr-grid-header-column>
@@ -42,7 +51,8 @@
       <vgr-grid-header-toolbar>
         <div style="display: flex; align-items: center; height: 30px;">
           <div style="margin-right: 10px;">Antal: {{ people2.length }}</div>
-          <div style="margin-right: 10px;">Grid med stickyHeader, ingen animering och loader. Belopp är högerställd och Status är centrerad.</div>
+          <div style="margin-right: 10px;">Grid med stickyHeader, ingen animering och loader. Belopp är högerställd och
+            Status är centrerad.</div>
           <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
             <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
           </vgr-button>

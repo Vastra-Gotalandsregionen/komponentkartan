@@ -61,6 +61,7 @@ export class GridDocumentationComponent implements OnInit {
     { fornamn: 'Jörgen', efternamn: 'Karlsson', status: 'klar', belopp: 50, expanded: false, checked: false },
     { fornamn: 'Sofia', efternamn: 'Carlsson', status: 'ej startad', belopp: 500, expanded: false, checked: false },
   ];
+  error = true;
   loading = false;
   activePage = 1;
   pageCount = 1;
@@ -90,6 +91,12 @@ export class GridDocumentationComponent implements OnInit {
     setTimeout(() => {
       pelle.notifications.pop();
     }, 2500);
+  }
+
+  resetError() {
+    setTimeout(() => {
+      this.error = !this.error;
+    }, 400);
   }
 
   sort(args: GridSortChangedArgs) {
