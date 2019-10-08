@@ -52,15 +52,16 @@ export class GridDocumentationComponent implements OnInit {
   ];
 
   people2: any[] = [
-    { fornamn: 'Arvid', efternamn: 'Sollenby', expanded: false, checked: false },
-    { fornamn: 'Fredrik', efternamn: 'Aronsson', expanded: false, checked: false },
-    { fornamn: 'Caroline', efternamn: 'Bornsjö', expanded: false, checked: false },
-    { fornamn: 'Torin', efternamn: 'Williams', expanded: false, checked: false },
-    { fornamn: 'Olga', efternamn: 'Akselrad', expanded: false, checked: false },
-    { fornamn: 'Markus', efternamn: 'Rydin', expanded: false, checked: false },
-    { fornamn: 'Jörgen', efternamn: 'Åkesson', expanded: false, checked: false },
-    { fornamn: 'Sofia', efternamn: 'Hejdenberg', expanded: false, checked: false },
+    { fornamn: 'Arvid', efternamn: 'Johansson', status: 'klar', belopp: 300 as number, expanded: false, checked: false },
+    { fornamn: 'Fredrik', efternamn: 'Pettersson', status: 'pågår', belopp: 500 as number, expanded: false, checked: false },
+    { fornamn: 'Caroline', efternamn: 'Andersson', status: 'klar', belopp: 6000 as number, expanded: false, checked: false },
+    { fornamn: 'Torin', efternamn: 'Hansson', status: 'ej startad', belopp: 400 as number, expanded: false, checked: false },
+    { fornamn: 'Olga', efternamn: 'Gran', status: 'klar', belopp: 300 as number, expanded: false, checked: false },
+    { fornamn: 'Markus', efternamn: 'Björk', status: 'pågår', belopp: 4000 as number, expanded: false, checked: false },
+    { fornamn: 'Jörgen', efternamn: 'Karlsson', status: 'klar', belopp: 50 as number, expanded: false, checked: false },
+    { fornamn: 'Sofia', efternamn: 'Carlsson', status: 'ej startad', belopp: 500 as number, expanded: false, checked: false },
   ];
+  loading = false;
   activePage = 1;
   pageCount = 1;
   itemsPerPage = 3;
@@ -103,6 +104,8 @@ export class GridDocumentationComponent implements OnInit {
       return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
         row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
     });
+    this.activePage = 1;
+    this.setPagingData(this.activePage);
   }
 
   updateRow(row: Person, clear = false) {
@@ -176,12 +179,17 @@ export class GridDocumentationComponent implements OnInit {
   }
 
   setPagingData(page: number) {
+    this.loading = true;
+
     this.activePage = page;
     this.pageCount = Math.ceil(this.people2.length / this.itemsPerPage);
     const start = (page - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
 
     this.paginatedPeople = this.people2.slice(start, end);
+    setTimeout(() => {
+      this.loading = false;
+    }, 400);
   }
 }
 

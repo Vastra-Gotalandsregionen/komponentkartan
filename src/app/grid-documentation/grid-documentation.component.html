@@ -1,9 +1,12 @@
 <vgr-page class="no-sort">
   <vgr-page-header [title]="'Grid'">
     <br>
-      Dokumentation för vgr-grid finns på
-      <a href="https://vastra-gotalandsregionen.github.io/komponentkartan-demo/" target="_blank">Komponentkartan demo
-      </a>
+    Dokumentation för vgr-grid finns på
+    <!-- github (finns inte för betaversionen)  -->
+    <!-- <a href="https://vastra-gotalandsregionen.github.io/komponentkartan-demo/grid-documentation" target="_blank">Komponentkartan demo</a> -->
+
+    <!-- interna servern -->
+    <a href="http://vgwb0399.vgregion.se:4500/grid-documentation" target="_blank">Komponentkartan demo</a>
 
   </vgr-page-header>
   <vgr-page-body>
@@ -14,7 +17,7 @@
         </vgr-button>
       </vgr-grid-header-toolbar>
       <vgr-grid-header>
-        <vgr-grid-header-column sortKey="namn">Förnamn</vgr-grid-header-column>
+        <vgr-grid-header-column [sortKey]="'namn'">Förnamn</vgr-grid-header-column>
         <vgr-grid-header-column>Efternamn</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row *ngFor="let person of people" [expanded]="person.expanded"
@@ -35,10 +38,11 @@
     </vgr-grid>
 
     <vgr-grid (sortChanged)="sort2($event)" (pageChanged)="onPageChanged($event)" [pages]="pageCount"
-      [activePage]="activePage" [stickyHeader]="true">
+      [toggleAnimation]="'none'" [activePage]="activePage" [stickyHeader]="true" [showLoader]="loading">
       <vgr-grid-header-toolbar>
         <div style="display: flex; align-items: center; height: 30px;">
           <div style="margin-right: 10px;">Antal: {{ people2.length }}</div>
+          <div style="margin-right: 10px;">Grid med stickyHeader, ingen animering och loader. Belopp är högerställd och Status är centrerad.</div>
           <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
             <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
           </vgr-button>
@@ -48,18 +52,22 @@
         </div>
       </vgr-grid-header-toolbar>
       <vgr-grid-header>
-        <vgr-grid-header-column [width]="12">
+        <vgr-grid-header-column [width]="20">
           <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
         </vgr-grid-header-column>
         <vgr-grid-header-column [width]="200" sortKey="fornamn">Förnamn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="200" sortKey="efternamn">Efternamn</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="100" sortKey="belopp" [align]="'right'">Belopp</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="100" sortKey="status" [align]="'center'">Status</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row *ngFor="let person of paginatedPeople">
-        <vgr-grid-column [width]="12">
+        <vgr-grid-column [width]="20">
           <vgr-checkbox [checked]="person.checked" (checkedChanged)="toggleChecked(person)"></vgr-checkbox>
         </vgr-grid-column>
         <vgr-grid-column [width]="200">{{person.fornamn}}</vgr-grid-column>
         <vgr-grid-column [width]="200">{{person.efternamn}}</vgr-grid-column>
+        <vgr-grid-column [width]="100" [align]="'right'">{{person.belopp}}</vgr-grid-column>
+        <vgr-grid-column [width]="100" [align]="'center'">{{person.status}}</vgr-grid-column>
         <vgr-grid-content>
           <p>
             Löksås ipsum så äng hav där både dock, både bland mot från upprätthållande sista, samtidigt ordningens dimma
@@ -71,9 +79,13 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid [toggleAnimation]="'slow'">
+    <vgr-grid [toggleAnimation]="'fast'">
+      <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = $event">
+        <vgr-grid-column width="23">Grid utan rubriker och snabb animeringen</vgr-grid-column>
+        <vgr-grid-content>Row content</vgr-grid-content>
+      </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded1" (expandedChanged)="expanded1 = $event">
-        <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
@@ -125,7 +137,7 @@
         <!-- <vgr-grid-content>Row content</vgr-grid-content> -->
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded5" (expandedChanged)="expanded5 = $event">
-        <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
@@ -133,7 +145,7 @@
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded6" (expandedChanged)="expanded6 = $event">
-        <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
@@ -145,7 +157,7 @@
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded7" (expandedChanged)="expanded7 = $event">
-        <vgr-grid-column width="10">KBalderkliniken</vgr-grid-column>
+        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
@@ -153,7 +165,7 @@
         <vgr-grid-content></vgr-grid-content>
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded8" (expandedChanged)="expanded8 = $event">
-        <vgr-grid-column width="10">Balderkliniken</vgr-grid-column>
+        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
