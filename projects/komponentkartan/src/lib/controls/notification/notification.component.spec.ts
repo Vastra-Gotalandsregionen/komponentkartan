@@ -11,9 +11,10 @@ import { By } from '@angular/platform-browser';
 @Component({
   selector: 'vgr-test',
   template: `
-  <vgr-notification>Med default-klass</vgr-notification>
+  <vgr-notification>Utan klass och utan ikon</vgr-notification>
   <vgr-notification type="error">Med error-klass</vgr-notification>
-  <vgr-notification type="success" [autoAddTypeIcons]="true">Med success-klass och ikon autoadderad</vgr-notification>
+  <vgr-notification type="success">Med success-klass och ikon autoadderad</vgr-notification>
+  <vgr-notification borderColor="disabled">Med disabled klass och utan ikon</vgr-notification>
   `
 })
 export class TestComponent { }
@@ -41,11 +42,11 @@ describe('NotificationComponent', () => {
   });
 
   describe('Notification 1', () => {
-    it('should have class "default"', () => {
-      expect(notifications[0].attributes['class']).toContain('default');
+    it('should have not have any class"', () => {
+      expect(notifications[0].attributes['class']).toBeNull();
     });
-    it('should have text "Med default-klass"', () => {
-      expect(notifications[0].nativeElement.innerText).toBe('Med default-klass');
+    it('should have text "Utan klass och utan ikon"', () => {
+      expect(notifications[0].nativeElement.innerText).toBe('Utan klass och utan ikon');
     });
     it('should not have any icon automaticly added', () => {
       const icons = notifications[0].query(By.css('vgr-icon'));
@@ -60,9 +61,9 @@ describe('NotificationComponent', () => {
     it('should have text "Med error-klass"', () => {
       expect(notifications[1].nativeElement.innerText).toBe('Med error-klass');
     });
-    it('should not have any icon automaticly added', () => {
+    it('should have any icon automaticly added', () => {
       const icons = notifications[1].query(By.css('vgr-icon'));
-      expect(icons).toBe(null);
+      expect(icons).toBeTruthy();
     });
   });
 
@@ -76,6 +77,19 @@ describe('NotificationComponent', () => {
     it('should have icon automaticly added', () => {
       const icons = notifications[2].query(By.css('vgr-icon'));
       expect(icons).toBeTruthy();
+    });
+  });
+
+  describe('Notification 4', () => {
+    it('should have class "disabled"', () => {
+      expect(notifications[3].attributes['class']).toContain('disabled');
+    });
+    it('should have text "Med disabled klass och utan ikon"', () => {
+      expect(notifications[3].nativeElement.innerText).toBe('Med disabled klass och utan ikon');
+    });
+    it('should have icon automaticly added', () => {
+      const icons = notifications[3].query(By.css('vgr-icon'));
+      expect(icons).toBe(null);
     });
   });
 });

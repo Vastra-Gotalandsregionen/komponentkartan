@@ -68,7 +68,6 @@ import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 import { UnitFilterPipe } from './examples-listwithcards/unitfilterpipe';
 import { GridDocumentationComponent } from './grid-documentation/grid-documentation.component';
-import { GridexampleComponent } from './gridexample/gridexample.component';
 import { NotificationDocumentationComponent} from './notification-documentation/notification-documentation.component';
 
 @NgModule({
@@ -123,7 +122,6 @@ import { NotificationDocumentationComponent} from './notification-documentation/
         ModaldialogComponent,
         UnitFilterPipe,
         GridDocumentationComponent,
-        GridexampleComponent,
         NotificationDocumentationComponent
     ],
     imports: [

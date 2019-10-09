@@ -12,18 +12,9 @@
   <vgr-page-body>
     <vgr-grid (sortChanged)="sort($event)" toggleAnimation="slow" [stickyHeader]="true">
       <vgr-grid-header-toolbar>
-        <vgr-button *ngIf="!error" [buttonStyle]="'discreet'" (click)="addRow()">
+        <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
           <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad
         </vgr-button>
-        <div *ngIf="error">
-          <vgr-notification [autoAddTypeIcons]="false" [type]="'error'">
-            <vgr-icon [icon]="'exclamation-circle'" [color]="'error'"></vgr-icon>
-            <div style="margin-right: 20px">Något gick fel!!!</div>
-            <vgr-button [buttonStyle]="'discreet'" (click)="resetError()">
-              <vgr-icon [icon]="'check-circle'" [color]="'success'"></vgr-icon> OK (klicka här)
-            </vgr-button>
-          </vgr-notification>
-        </div>
       </vgr-grid-header-toolbar>
       <vgr-grid-header>
         <vgr-grid-header-column [sortKey]="'namn'">Förnamn</vgr-grid-header-column>
@@ -33,8 +24,7 @@
         (expandedChanged)="person.expanded = $event">
         <vgr-grid-column>{{person.namn}}</vgr-grid-column>
         <vgr-grid-column>{{person.efternamn}}</vgr-grid-column>
-        <vgr-notification *ngFor="let notification of person.notifications" [type]="notification.type"
-          autoAddTypeIcons="true">
+        <vgr-notification *ngFor="let notification of person.notifications" [type]="notification.type">
           {{notification.text}}
         </vgr-notification>
         <vgr-grid-content>
@@ -89,7 +79,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid [toggleAnimation]="'fast'">
+    <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false">
       <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = $event">
         <vgr-grid-column width="23">Grid utan rubriker och snabb animeringen</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
@@ -101,6 +91,10 @@
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
+        <vgr-notification [borderColor]="'error-secondary'">
+            <vgr-icon [icon]="'star'" [color]="'error'" [solid]="true"></vgr-icon>
+            En specialikon
+          </vgr-notification>
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = $event">
         <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
@@ -108,9 +102,9 @@
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Godkänd</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification>
-          <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
-          En kommentar
+        <vgr-notification [borderColor]="'secondary'">
+          <vgr-icon [icon]="'star'" [color]="'disabled'" ></vgr-icon>
+          En specialikon
         </vgr-notification>
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded3" (expandedChanged)="expanded3 = $event">
@@ -119,6 +113,10 @@
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-notification [borderColor]="'secondary'">
+          <vgr-icon [icon]="'coffee'" ></vgr-icon>
+          Gillar kaffe
+        </vgr-notification>
         <vgr-grid-content>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet nunc sit amet massa dignissim, non
             iaculis tortor placerat. Suspendisse pellentesque nibh eu augue auctor, eget tempor eros porttitor. Sed
@@ -160,8 +158,7 @@
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification>
-          <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
+        <vgr-notification [type]="'comment'">
           En kommentar
         </vgr-notification>
         <vgr-grid-content>Row content</vgr-grid-content>
@@ -180,8 +177,7 @@
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification>
-          <vgr-icon [icon]="'comment-dots'" [color]="'text'" [solid]="false"></vgr-icon>
+        <vgr-notification [type]="'comment'">
           En kommentar
         </vgr-notification>
         <vgr-grid-content>Row content</vgr-grid-content>

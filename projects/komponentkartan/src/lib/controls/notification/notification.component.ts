@@ -8,12 +8,12 @@ import { toggleFadedState } from '../../animation';
 })
 export class NotificationComponent implements OnInit {
   @HostBinding('@toggleFadedState') animate = true;
-  @Input() @HostBinding('attr.class') type = 'default';
-  @Input() autoAddTypeIcons = false;
+  @Input() @HostBinding('attr.class') borderColor: string  = null;
+  @Input() type: string = null;
+
   ngOnInit() {
-    if (!this.autoAddTypeIcons) {
-      this.type = 'none';
+    if (this.type) {
+      this.borderColor = this.type;
     }
   }
-
 }

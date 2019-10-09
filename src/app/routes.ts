@@ -49,7 +49,6 @@ import { PaginationDocumentationComponent } from './pagination-documentation/pag
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 import { GridDocumentationComponent } from './grid-documentation/grid-documentation.component';
-import { GridexampleComponent } from './gridexample/gridexample.component';
 import { NotificationDocumentationComponent} from './notification-documentation/notification-documentation.component';
 
 export const appRoutes: Routes = [
@@ -101,9 +100,7 @@ export const appRoutes: Routes = [
     { path: 'pagination-documentation', component: PaginationDocumentationComponent},
     { path: 'modaldialog', component: ModaldialogComponent },
     { path: 'grid', component: GridDocumentationComponent },
-    { path: 'gridexample', component: GridexampleComponent },
     { path: 'notification', component: NotificationDocumentationComponent },
-
 
     { path: '**', redirectTo: '/' }
 ];

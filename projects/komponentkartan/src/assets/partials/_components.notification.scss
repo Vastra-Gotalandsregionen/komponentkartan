@@ -6,8 +6,8 @@
   vgr-icon {
     margin-right: 6px;
   }
-  &.default:before,
-  &.comment:before {
+
+  &:before {
     content: '';
     z-index: 2;
     top: 0;
@@ -16,29 +16,35 @@
     height: 100%;
     position: absolute;
     transition: background .2s ease;
+  }
+
+  &.text:before,
+  &.comment:before {
     background:$text-color--default;
   }
   &.success:before {
-    content: '';
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    position: absolute;
-    transition: background .2s ease;
     background: $primary-color--success;
   }
   &.error:before {
-    content: '';
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    position: absolute;
-    transition: background .2s ease;
     background: $primary-color--error;
+  }
+  &.error-secondary:before {
+    background: $secondary-color--error;
+  }
+  &.primary:before {
+    @extend .background-color--primary;
+  }   
+  &.secondary:before {
+    @extend .background-color--secondary;
+  }     
+  &.dimmed:before {
+    @extend .background-color--primary-dimmed;
+  }  
+  &.light:before {
+    background: $text-color--light;
+  }
+  &.disabled:before {
+    background: $control-color--disabled;
   }
 }
 
