@@ -159,7 +159,12 @@
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-notification [type]="'comment'">
-          En kommentar
+          <div class="text" [ngClass]="{'text--short': !expanded6}">
+          En lång kommentar ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet nunc sit amet massa dignissim, non
+          iaculis tortor placerat. Suspendisse pellentesque nibh eu augue auctor, eget tempor eros porttitor. Sed
+          mollis, velit sed hendrerit tempor, turpis est blandit nibh, sit amet pharetra turpis leo nec felis. Class
+          aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget
+          mauris ultricies lorem consectetur ullamcorper sit amet eget felis. Donec posuere aliquam aliquam. Quisque</div>
         </vgr-notification>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
