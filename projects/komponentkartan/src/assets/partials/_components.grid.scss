@@ -146,6 +146,7 @@ vgr-grid {
 
   .grid-header-wrapper {
     background-color: $background-color--default;
+    position: static;
   }
 
   .grid-header-wrapper--sticky {
