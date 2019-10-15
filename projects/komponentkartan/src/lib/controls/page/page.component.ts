@@ -1,32 +1,26 @@
-import { Component, OnInit, AfterViewChecked, OnDestroy, ContentChild, ViewChild, ElementRef } from '@angular/core';
-import { PageHeaderComponent } from '../page-header/page-header.component';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { PageHeaderHeightService } from '../../services/page-header-height.service';
 
 @Component({
   selector: 'vgr-page',
-  templateUrl: './page.component.html'
+  templateUrl: './page.component.html',
+  providers: [PageHeaderHeightService]
 })
-export class PageComponent implements OnInit, AfterViewChecked, OnDestroy {
-  @ContentChild(PageHeaderComponent) pageHeader: PageHeaderComponent;
+export class PageComponent implements OnInit, OnDestroy {
   @ViewChild('bodyContainer') bodyContainer: ElementRef;
-  pageHeaderHeight = 0;
   private ngUnsubscribe = new Subject();
 
-  ngOnInit() {
-    if (this.pageHeader) {
-      this.pageHeader.heightChanged
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(value =>
-          this.bodyContainer.nativeElement.style.top = `${value}px`
-        );
-    }
-  }
+  constructor(private pageHeaderHeightService: PageHeaderHeightService) { }
 
-  ngAfterViewChecked() {
-    if (this.pageHeader && this.pageHeaderHeight !== this.pageHeader.height) {
-      this.bodyContainer.nativeElement.style.top = `${this.pageHeader.height}px`;
-    }
+  ngOnInit() {
+    this.bodyContainer.nativeElement.style.top = `${this.pageHeaderHeightService.height}px`;
+    this.pageHeaderHeightService.heightChanged
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(value => {
+        this.bodyContainer.nativeElement.style.top = `${value}px`;
+      });
   }
 
   ngOnDestroy() {

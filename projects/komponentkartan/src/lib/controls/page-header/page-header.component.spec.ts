@@ -1,11 +1,13 @@
 import { ElementRef } from '@angular/core';
 
 import { PageHeaderComponent } from './page-header.component';
+import { PageHeaderHeightService } from '../../services/page-header-height.service';
 
 describe('[PageHeaderComponent]', () => {
+  const service = new PageHeaderHeightService();
   let component: PageHeaderComponent;
   beforeEach(() => {
-    component = new PageHeaderComponent();
+    component = new PageHeaderComponent(new PageHeaderHeightService);
   });
 
   describe('Instatiate', () => {
@@ -78,7 +80,6 @@ describe('[PageHeaderComponent]', () => {
       });
     });
     describe('When height has changed', () => {
-      let spy: jasmine.Spy;
       beforeEach(() => {
         component.pageHeader = {
           nativeElement: {
@@ -96,18 +97,11 @@ describe('[PageHeaderComponent]', () => {
           } as HTMLElement
         } as ElementRef;
 
-        spy = spyOn(component.heightChanged, 'emit');
       });
       describe('and emit is true', () => {
         it('new height is emitted', () => {
-          component.setHeight(true);
-          expect(spy).toHaveBeenCalledWith(300);
-        });
-      });
-      describe('and emit is false', () => {
-        it('new height is not emitted', () => {
-          component.setHeight(false);
-          expect(spy).not.toHaveBeenCalled();
+          component.setHeight();
+          expect(component.height).toBe(300);
         });
       });
     });

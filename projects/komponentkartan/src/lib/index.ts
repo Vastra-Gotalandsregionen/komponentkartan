@@ -1,3 +1,4 @@
+
 export { ActionPanelComponent } from './controls/action-panel/action-panel.component';
 export { TextareaComponent } from './controls/textarea/textarea.component';
 export { ButtonComponent } from './controls/button/button.component';
@@ -79,5 +80,17 @@ export { ErrorMessagePipe } from './pipes/errorMessagePipe';
 
 export { BrowserDetector } from './services/browserDetector';
 export { ModalService } from './services/modalService';
+
+export { GridComponent } from './controls/grid/grid.component';
+export { GridHeaderComponent } from './controls/grid/grid-header.component';
+export { GridSortChangedArgs } from './controls/grid/grid-header.component';
+export { GridHeaderColumnComponent } from './controls/grid/grid-header-column.component';
+export { GridSortDirection } from './controls/grid/grid-header-column.component';
+export { GridColumnComponent } from './controls/grid/grid-column.component';
+export { GridRowComponent } from './controls/grid/grid-row.component';
+export { GridContentComponent } from './controls/grid/grid-content.component';
+export { GridHeaderToolbarComponent } from './controls/grid/grid-header-toolbar.component';
+export { NotificationComponent } from './controls/notification/notification.component';
+
 
 export { Guid } from './utils/guid';

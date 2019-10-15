@@ -1,6 +1,6 @@
 // Core
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +16,7 @@ registerLocaleData(localeSv);
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { IconModule } from './controls/icon/icon.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -100,7 +101,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.DropdownSelectComponent,
     type.IconComponent,
     type.DatepickerComponent,
-    type.DatepickerItemComponent
+    type.DatepickerItemComponent,
+    type.GridComponent,
+    type.GridHeaderComponent,
+    type.GridHeaderColumnComponent,
+    type.GridColumnComponent,
+    type.GridRowComponent,
+    type.GridContentComponent,
+    type.GridHeaderToolbarComponent,
+    type.NotificationComponent
   ],
   exports: [
     type.SafePipe,
@@ -172,7 +181,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.DropdownSelectComponent,
     type.IconComponent,
     type.DatepickerComponent,
-    type.DatepickerItemComponent
+    type.DatepickerItemComponent,
+    type.GridComponent,
+    type.GridHeaderComponent,
+    type.GridHeaderColumnComponent,
+    type.GridColumnComponent,
+    type.GridRowComponent,
+    type.GridContentComponent,
+    type.GridHeaderToolbarComponent,
+    type.NotificationComponent
   ],
   providers: [
     type.ModalService,

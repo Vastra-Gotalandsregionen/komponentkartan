@@ -67,6 +67,8 @@ import { PaginationDocumentationComponent } from './pagination-documentation/pag
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { ExamplesListwithcardsComponent } from './examples-listwithcards/examples-listwithcards.component';
 import { UnitFilterPipe } from './examples-listwithcards/unitfilterpipe';
+import { GridDocumentationComponent } from './grid-documentation/grid-documentation.component';
+import { NotificationDocumentationComponent} from './notification-documentation/notification-documentation.component';
 
 @NgModule({
     declarations: [
@@ -118,7 +120,9 @@ import { UnitFilterPipe } from './examples-listwithcards/unitfilterpipe';
         DropdownSelectDocumentationComponent,
         PaginationDocumentationComponent,
         ModaldialogComponent,
-        UnitFilterPipe
+        UnitFilterPipe,
+        GridDocumentationComponent,
+        NotificationDocumentationComponent
     ],
     imports: [
         KomponentkartanModule,

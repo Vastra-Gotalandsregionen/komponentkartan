@@ -1,12 +1,17 @@
-import { ElementRef, EventEmitter } from '@angular/core';
 
 import { PageComponent } from './page.component';
-import { PageHeaderComponent } from '../page-header/page-header.component';
+import { PageHeaderHeightService } from '../../services/page-header-height.service';
 
 describe('[PageComponent]', () => {
+  const service = new PageHeaderHeightService();
   let component: PageComponent;
   beforeEach(() => {
-    component = new PageComponent();
+    component = new PageComponent(service);
+    component.bodyContainer = {
+      nativeElement: {
+        style: {}
+      }
+    };
   });
   afterEach(() => {
     component.ngOnDestroy();
@@ -14,51 +19,21 @@ describe('[PageComponent]', () => {
 
   describe('Instatiate', () => {
     it('pageHeaderHeight is correct', () => {
-      expect(component.pageHeaderHeight).toBe(0);
+      service.setHeight(0);
+      component.ngOnInit();
+      expect(component.bodyContainer.nativeElement.style.top).toBe('0px');
     });
   });
 
   describe('ngOnInit', () => {
-    beforeEach(() => {
-      component.bodyContainer = {
-        nativeElement: {
-          style: {}
-        }
-      };
-    });
     describe('When page header exists', () => {
-      beforeEach(() => {
-        component.pageHeader = {
-          heightChanged: new EventEmitter<number>()
-        } as PageHeaderComponent;
-      });
       describe('and page header height changes', () => {
         it('body container is offset', () => {
+          service.setHeight(100);
           component.ngOnInit();
-          component.pageHeader.heightChanged.emit(100);
           expect(component.bodyContainer.nativeElement.style.top).toBe('100px');
         });
       });
     });
   });
-
-  describe('ngAfterViewChecked', () => {
-    beforeEach(() => {
-      component.bodyContainer = {
-        nativeElement: {
-          style: {}
-        }
-      };
-    });
-    describe('When page header exists', () => {
-      beforeEach(() => {
-        component.pageHeader = { height: 100 } as PageHeaderComponent;
-      });
-      it('body container is offset', () => {
-        component.ngAfterViewChecked();
-        expect(component.bodyContainer.nativeElement.style.top).toBe('100px');
-      });
-    });
-  });
-
 });
