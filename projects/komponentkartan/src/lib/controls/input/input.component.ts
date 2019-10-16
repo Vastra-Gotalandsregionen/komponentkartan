@@ -129,10 +129,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   formatDisplayNumber() {
-    const number = this.displayValue !== undefined && this.displayValue.replace(/,/g, '.').replace(/ /g, '').replace(/−/g, '-');
+    const replacedValue = this.displayValue && this.displayValue.replace(/,/g, '.').replace(/ /g, '').replace(/−/g, '-');
 
-    if (this.formatNumber && this.isNumber(number)) {
-      this.value = this.convertStringToNumber(number);
+    if (this.formatNumber && this.isNumber(replacedValue)) {
+      this.value = this.convertStringToNumber(replacedValue);
       this.displayValue = this.convertNumberToString(this.value);
     } else {
       this.value = this.displayValue;
