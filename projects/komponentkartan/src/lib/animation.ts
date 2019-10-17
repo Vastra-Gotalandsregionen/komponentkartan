@@ -10,11 +10,11 @@ import {
 
 export const toggleExpandedState = trigger('toggleExpandedState', [
     transition(':enter', [
-        style({ height: '0' }),
-        animate('{{speed}}', style({ height: '*' }))
+        style({ height: '0' , overflow: 'hidden' }),
+        animate('{{speed}}', style({ height: '*', overflow: 'visible' }))
     ], { params: { speed: '0.4s' } }),
     transition(':leave', [
-        style({ height: '*' }),
+        style({ height: '*', overflow: 'hidden' }),
         animate('{{speed}}', style({ height: '0', overflow: 'hidden' })),
     ], { params: { speed: '0.4s' } }),
 ]);
