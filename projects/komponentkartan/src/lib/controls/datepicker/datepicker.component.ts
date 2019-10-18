@@ -201,6 +201,12 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
       return;
     }
 
+    if (this.allowText) {
+      this.headerInput.nativeElement.focus();
+    } else {
+      this.headerLabel.nativeElement.focus();
+    }
+
     this.toggleExpanded();
   }
 
