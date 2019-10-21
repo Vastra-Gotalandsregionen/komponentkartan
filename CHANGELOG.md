@@ -4,24 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 5.1.2
+## 5.1.3 (Stable, 2019-10-21)
+- Fixed another bug in "grid"-component regarding toggle animation.
+
+## 5.1.2 (2019-10-17)
 - Fixed bug in "grid"-component where content was not hidden during toggle animation.
 
-## 5.1.1
+## 5.1.1 (2019-10-16)
 - Fixed bug in input "input"-component.
 
-## 5.1.0
+## 5.1.0 (Beta, 2019-09-17)
 - Added a new "grid"-component that will replace the list function in the future.
 - Added a new "notification"-component that can be used with the grid component (and perhaps more components in the future).
 
-## 5.0.4
+## 5.0.4 (2019-09-24)
 - Added event for valueChange for InputField and updated documentation.
 - Fixed inputfield to support spacing and comma instead of dots for numbers.
 
-## 5.0.3
-- Fixed a bug in listheader where buttons were not clickable.
-
-## 5.0.3 (Stable, 2016-06-28)
+## 5.0.3 (2016-06-28)
 - Fixed a bug in listheader where buttons were not clickable
 
 ## 5.0.2 (2016-06-28)
