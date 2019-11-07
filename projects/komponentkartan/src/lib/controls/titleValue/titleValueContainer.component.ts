@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'vgr-title-value-title',
+    selector: 'vgr-title-value-container',
     template: `<ng-content></ng-content>`
 })
-export class TitleValueTitleComponent {
+export class TitleValueContainerComponent {
     constructor() {}
 }
