@@ -5,7 +5,7 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 6.0.0
-- Added width-handler for date-picker
+- Added width-handler for `vgr-datepicker`
 
 ## 5.1.3 (Stable, 2019-10-21)
 - Fixed another bug in "grid"-component regarding toggle animation.
