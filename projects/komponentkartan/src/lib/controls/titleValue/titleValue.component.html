@@ -1,4 +1,6 @@
-<h4 class="title-value__title">{{title}}</h4>
+<h4 class="title-value__title">
+  <ng-content select="vgr-title-value-title"></ng-content>
+</h4>
 <div class="title-value__value">
-  <ng-content></ng-content>
+  <ng-content select="vgr-title-value-value"></ng-content>
 </div>

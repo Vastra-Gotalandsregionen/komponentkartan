@@ -58,6 +58,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.CardSectionComponent,
     type.TitleValueComponent,
     type.TitleValueLayoutComponent,
+    type.TitleValueTitleComponent,
+    type.TitleValueValueComponent,
     type.LoaderComponent,
     type.ListComponent,
     type.ListItemComponent,
