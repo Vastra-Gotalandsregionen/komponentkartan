@@ -246,12 +246,18 @@
                     <vgr-card-section [title]=" 'Enhetsinformation'" expanded="true" [readonly]="cardLocked">
                       <vgr-title-value-layout>
                         <vgr-title-value [title]=" 'HSA-id'" [slim]="cardLocked">
-                          <vgr-input [readonly]="true" formControlName="hsaid"></vgr-input>
+                          <vgr-title-value-heading>HSA-id</vgr-title-value-heading>
+                          <vgr-title-value-container>
+                            <vgr-input [readonly]="true" formControlName="hsaid"></vgr-input>
+                          </vgr-title-value-container>
                         </vgr-title-value>
-                        <vgr-title-value [title]="'Avtalskod*'" [slim]="cardLocked">
-                          <vgr-input formControlName="avtalskod"
-                            [showValidation]="editUnitForm.controls.avtalskod.touched || submitted"
-                            [errorMessage]="validationMessages.avtalskod" [readonly]="cardLocked"></vgr-input>
+                        <vgr-title-value [slim]="cardLocked">
+                          <vgr-title-value-heading>Avtalskod*</vgr-title-value-heading>
+                          <vgr-title-value-container>
+                            <vgr-input formControlName="avtalskod"
+                              [showValidation]="editUnitForm.controls.avtalskod.touched || submitted"
+                              [errorMessage]="validationMessages.avtalskod" [readonly]="cardLocked"></vgr-input>
+                          </vgr-title-value-container>
                         </vgr-title-value>
                         <vgr-title-value [title]=" 'Enhetskod*'" [slim]="cardLocked">
                           <vgr-input formControlName="enhetskod"
