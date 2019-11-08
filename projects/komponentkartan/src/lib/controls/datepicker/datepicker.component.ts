@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self,
-  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject
+  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject, HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { DatepickerItemComponent } from './datepicker-item.component';
@@ -9,12 +9,14 @@ import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 
 import { Guid } from '../../utils/guid';
+import { DatepickerZoomLevel, CalendarItem, Calendar } from './datepicker.interface';
 
 @Component({
   selector: 'vgr-datepicker',
   templateUrl: './datepicker.component.html'
 })
 export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
+  @Input() @HostBinding('style.width') width = '170px';
   @Input() selectedDate: Date;
   @Input() minZoom: string;
   @Input() minDate: Date;
@@ -896,25 +898,3 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 }
 
-interface Calendar {
-  date: Date;
-  items: CalendarItem[][];
-  previous: () => void;
-  next: () => void;
-  farPrevious: () => void;
-  farNext: () => void;
-  zoomOut: () => void;
-}
-
-interface CalendarItem {
-  date: Date;
-  selected: boolean;
-  disabled: boolean;
-  isMinZoom: boolean;
-}
-
-const enum DatepickerZoomLevel {
-  Days = 1,
-  Months = 2,
-  Years = 3
-}
