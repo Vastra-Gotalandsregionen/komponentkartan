@@ -11,7 +11,6 @@ export class TitleValueComponent {
     public get isSlim(): boolean {
         return this.slim;
     }
-    @Input() title: string;
     @Input() slim: boolean;
     constructor() {
     }

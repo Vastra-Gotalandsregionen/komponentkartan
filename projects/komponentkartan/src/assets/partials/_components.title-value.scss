@@ -6,8 +6,10 @@
 }
 
 .title-value {
-  display: table-row;
-  width: 100%;
+  display: flex;
+  > * {
+    flex: 1;
+  }
 }
 
 .title-value__title {
