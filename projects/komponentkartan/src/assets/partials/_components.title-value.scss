@@ -13,7 +13,6 @@
 }
 
 .title-value__title {
-  display: table-cell;
   vertical-align: top;
   padding: 10px 0 0px 0;
   transition: padding 0.2s linear;
@@ -23,12 +22,9 @@
 }
 
 .title-value__value {
-  display: table-cell;
   vertical-align: top;
   padding: 5px 0;
   transition: padding 0.2s linear;
-  width: 290px;
-  height: 30px;
   >span,
   .row-layout>span {
     display: block;
@@ -50,7 +46,6 @@
 
 @media screen and (min-width: $desktop-width--medium) {
   .title-value__value {
-    width: 300px;
     padding: 7px 0 0px 0;
     .slim-row & {
       padding: 3px 0 0 0;
