@@ -5,6 +5,7 @@ $suffix-width: 30px;
 
 .input-container {
   max-width: $input-width--small;
+  width: $input-width--small;
   display: flex;
   .input--small & {
     max-width: $input-small-width--small;
@@ -81,6 +82,7 @@ input.input-container__textbox {
   padding: 0px;
   background-color: inherit;
   position: relative;
+  width: $input-width--small + $margin--fat;
   max-width: $input-width--small + $margin--fat;
   top: 0px;
   .input--small & {
@@ -170,6 +172,7 @@ input.input-container__textbox {
   border-width: 1px;  
   border-color: $background-color--content;
   width: auto;
+  min-width: $input-width--small + $margin--fat;
   max-width: none;   
   .align-right & {
     padding-left: 0px;
@@ -195,6 +198,7 @@ input.input-container__textbox {
 @media screen and (min-width: $desktop-width--medium) {
   .input-container {
     max-width: $input-width--medium;
+    width: $input-width--medium;
     .input--small & {
       max-width: $input-small-width--medium;
       width: $input-small-width--medium;
@@ -204,6 +208,7 @@ input.input-container__textbox {
     padding-top: 0px;
   }
   .input-validation {
+    width: $input-width--medium + $margin--fat;
     max-width: $input-width--medium + $margin--fat;
     &:after {
       left: 260px;
@@ -225,6 +230,7 @@ input.input-container__textbox {
   }
   .readonly-container {  
     padding-top: 1px;
+    min-width: $input-width--medium + $margin--fat;
     .align-right & {
       max-width: $input-width--medium + $margin--fat;
       & .readonly-container__display-value  {
@@ -237,5 +243,4 @@ input.input-container__textbox {
     } 
   }
 }
-
 
