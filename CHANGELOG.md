@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 6.0.0
 - *Breaking change* `title-value` is now declarative using: `title-value-heading` and `title-value-container` as children.
 - Fixed `title-value-heading` and `title-value-container` now has a new property for defining it's width.
+- Added width-handler for `vgr-datepicker`
 
 ## 5.1.3 (Stable, 2019-10-21)
 - Fixed another bug in "grid"-component regarding toggle animation.
