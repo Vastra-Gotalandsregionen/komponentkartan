@@ -4,7 +4,7 @@ describe('ModalService', () => {
 
   let modalService: ModalService;
   let publishedModals: string[];
-  let dialogResult: string;
+  // let dialogResult: string;
   beforeEach(() => {
     modalService = new ModalService();
     publishedModals = [];
