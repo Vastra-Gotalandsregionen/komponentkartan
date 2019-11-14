@@ -19,7 +19,7 @@ describe('[ActionPanelComponent - Angular]', () => {
         it('it is created', () => {
             expect(component).toBeTruthy();
         });
-        it('set to 1 in width', () =>{
+        it('set to 1 in width', () => {
             expect(component.width).toBe(1);
         });
     });
