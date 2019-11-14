@@ -3,8 +3,8 @@ import { Examples } from '../examples';
 import {
     SortDirection,  // Enum för vilket håll sorteringen skall ske.
     SortChangedArgs // Args när sorteringordningen ändras.
-  } from 'vgr-komponentkartan';
-  
+} from 'vgr-komponentkartan';
+
 @Component({
     selector: 'app-listwithpaginationcodeexample',
     templateUrl: './listwithpaginationcodeexample.component.html',

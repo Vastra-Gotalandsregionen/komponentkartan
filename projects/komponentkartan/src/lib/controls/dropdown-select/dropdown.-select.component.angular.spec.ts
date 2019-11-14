@@ -13,7 +13,7 @@ import { IconModule } from '../icon/icon.module';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 
 @Component({
-  selector: 'perfect-scrollbar',
+  selector: 'vgr-perfect-scrollbar',
   template: `
   <div class="ps">
     <ng-content></ng-content>

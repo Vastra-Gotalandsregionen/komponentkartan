@@ -1,4 +1,4 @@
-import { NotificationIconTypes } from "./notificationIconTypes";
+import { NotificationIconTypes } from './notificationIconTypes';
 
 export interface Notification {
     icon: NotificationIconTypes;
