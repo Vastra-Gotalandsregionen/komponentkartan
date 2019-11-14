@@ -83,10 +83,10 @@
                       <div class="row-layout row-layout--tight">
                         <vgr-datepicker [minZoom]="'m'" formControlName="avtalsperiod_start"
                           [showValidation]="onChangeForm.controls.avtalsperiod_start.touched || submitted"
-                          [readonly]="newCardLocked"></vgr-datepicker>
+                          [readonly]="newCardLocked" width="100%"></vgr-datepicker>
                         <vgr-datepicker [minZoom]="'m'" formControlName="avtalsperiod_slut"
                           [showValidation]="onChangeForm.controls.avtalsperiod_slut.touched || submitted"
-                          [readonly]="newCardLocked"></vgr-datepicker>
+                          [readonly]="newCardLocked" width="100%"></vgr-datepicker>
                       </div>
                     </vgr-title-value-container>
                   </vgr-title-value>
@@ -260,9 +260,9 @@
         <vgr-list-header>
           <vgr-list-column-header width="5" sortKey="enhet" [sortDirection]="sortDirections.Ascending">Enhet
           </vgr-list-column-header>
-          <vgr-list-column-header width="5" [align]="left" sortKey="hsaid">HSA-ID</vgr-list-column-header>
+          <vgr-list-column-header width="5" [align]="'left'" sortKey="hsaid">HSA-ID</vgr-list-column-header>
           <vgr-list-column-header width="3" sortKey="agare">Ägare</vgr-list-column-header>
-          <vgr-list-column-header [align]="right" width="2" sortKey="enhetskod">Enhetskod</vgr-list-column-header>
+          <vgr-list-column-header [align]="'right'" width="2" sortKey="enhetskod">Enhetskod</vgr-list-column-header>
           <vgr-list-column-header width="5" sortKey="namnd">Nämnd</vgr-list-column-header>
         </vgr-list-header> <!-- | unitfilter:filtertext: includeInactiveUnits -->
         <vgr-list-item *ngFor="let row of exampleData | unitfilter:filtertext: includeInactiveUnits"
@@ -272,7 +272,7 @@
             <vgr-list-column width="5">{{row.previewObject.enhet}}</vgr-list-column>
             <vgr-list-column width="5">{{row.previewObject.hsaid}}</vgr-list-column>
             <vgr-list-column width="3">{{row.previewObject.agare}}</vgr-list-column>
-            <vgr-list-column [align]="right" width="2">{{row.previewObject.enhetskod}}</vgr-list-column>
+            <vgr-list-column [align]="'right'" width="2">{{row.previewObject.enhetskod}}</vgr-list-column>
             <vgr-list-column width="5">{{row.previewObject.namnd}}</vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>
@@ -335,10 +335,10 @@
                             <div class="row-layout  row-layout--tight">
                               <vgr-datepicker [minZoom]="'m'" formControlName="avtalsperiod_start"
                                 [showValidation]="editUnitForm.controls.avtalsperiod_start.touched || submitted"
-                                [readonly]="cardLocked"></vgr-datepicker>
+                                [readonly]="cardLocked" width="100%"></vgr-datepicker>
                               <vgr-datepicker [minZoom]="'m'" formControlName="avtalsperiod_slut"
                                 [showValidation]="editUnitForm.controls.avtalsperiod_slut.touched || submitted"
-                                [readonly]="cardLocked"></vgr-datepicker>
+                                [readonly]="cardLocked" width="100%"></vgr-datepicker>
                             </div>
                           </vgr-title-value-container>
                         </vgr-title-value>
