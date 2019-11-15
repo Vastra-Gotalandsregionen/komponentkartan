@@ -30,7 +30,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
 
   @Output() selectedDateChanged = new EventEmitter<Date>();
 
-  @ViewChild('datepicker', { static: false }) datepicker: ElementRef;
+  @ViewChild('datepicker', { static: true }) datepicker: ElementRef;
   @ViewChild('headerLabel', { static: false }) headerLabel: ElementRef;
   @ViewChild('headerInput', { static: false }) headerInput: ElementRef;
   @ViewChild('calendar', { static: false }) calendar: ElementRef;
