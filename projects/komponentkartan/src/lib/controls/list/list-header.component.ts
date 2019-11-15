@@ -1,6 +1,5 @@
-import { Component, HostBinding, ContentChildren, AfterContentInit, QueryList, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, HostBinding, ContentChildren, AfterContentInit, QueryList, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { ListColumnHeaderComponent, SortDirection } from './list-column-header.component';
-import { ListColumnComponent } from './list-column.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -17,6 +16,7 @@ export class ListHeaderComponent implements AfterContentInit, OnDestroy {
 
 
     ngAfterContentInit() {
+        console.warn('vgr-list-header soon to be deprecated');
         this.headerColumns.forEach(column => column.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((sort: SortDirection) => this.onColumnSortChanged(column, sort)));
     }
 
