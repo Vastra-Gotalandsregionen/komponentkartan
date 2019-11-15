@@ -1,4 +1,4 @@
-<div class="card-section__header" (click)="toggleExpanded($event)" (keydown)="toggleExpandedKey($event)"
+<div class="card-section__header" (click)="toggleExpanded($event)" (keydown)="toggleExpanded($event)"
  tabindex="0" [attr.aria-expanded]="expanded" role="button">
 <h2 class="card-section__header__title noselect">{{title}}</h2>
   <h4 class="card-section__header__subtitle" *ngIf="subtitle && subtitle.length>0" title="{{subtitle}}">{{subtitle|truncate:30}}</h4>

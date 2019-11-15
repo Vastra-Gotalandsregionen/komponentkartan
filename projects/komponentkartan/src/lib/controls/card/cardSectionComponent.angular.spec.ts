@@ -55,7 +55,7 @@ describe('[CardSectionComponent]', () => {
       beforeEach(() => {
         jasmine.clock().uninstall();
         jasmine.clock().install();
-        rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', null);
+        rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', new MouseEvent('click'));
         jasmine.clock().tick(10);
       });
       it('section is expanded', () => {
@@ -63,7 +63,7 @@ describe('[CardSectionComponent]', () => {
       });
       describe('and header is clicked again', () => {
         beforeEach(() => {
-          rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', null);
+          rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', new MouseEvent('click'));
           jasmine.clock().tick(10);
         });
         it('section is collapsed', () => {
@@ -112,7 +112,6 @@ describe('[CardSectionComponent]', () => {
       });
       describe('header is focused and enter is pressed', () => {
         beforeEach(() => {
-          console.log(component.expanded);
           const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
           const focusedElement = rootElement.query(By.css('.card-section__header'));
           Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
