@@ -12,7 +12,6 @@ import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconModule } from '../icon/icon.module';
 
-
 describe('[CardSectionComponent]', () => {
   let component: CardSectionComponent;
   let fixture: ComponentFixture<CardSectionComponent>;
@@ -105,7 +104,7 @@ describe('[CardSectionComponent]', () => {
         Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
         Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
         Object.defineProperty(keyEvent, 'srcElement', {'value' : focusedElement.nativeElement});
-        component.toggleExpand(keyEvent);
+        component.toggleExpanded(keyEvent);
         jasmine.clock().tick(10);
       });
       it('section is expanded', () => {
@@ -119,7 +118,7 @@ describe('[CardSectionComponent]', () => {
           Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
           Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
           Object.defineProperty(keyEvent, 'srcElement', {'value' : focusedElement.nativeElement});
-          component.toggleExpand(keyEvent);
+          component.toggleExpanded(keyEvent);
           jasmine.clock().tick(10);
         });
 
