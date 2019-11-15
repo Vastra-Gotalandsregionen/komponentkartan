@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, Output, EventEmitter, HostListener, ElementRef, Renderer } from '@angular/core';
+import { Component, HostBinding, Input, Output, EventEmitter, HostListener, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
     selector: 'vgr-list-item-content',
@@ -25,10 +25,10 @@ export class ListItemContentComponent {
         }
     }
 
-    constructor(private elementRef: ElementRef, private renderer: Renderer) {
+    constructor(private elementRef: ElementRef, private renderer: Renderer2) {
     }
 
     setFocus() {
-        this.renderer.invokeElementMethod(this.elementRef.nativeElement, 'focus');
+        this.elementRef.nativeElement.focus();
     }
 }

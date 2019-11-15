@@ -1,7 +1,4 @@
-import {
-  Component, Input, Output, EventEmitter, ContentChildren, ContentChild, QueryList,
-  AfterContentInit, forwardRef, OnDestroy, OnChanges, SimpleChanges, ElementRef, Renderer,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ContentChildren, ContentChild, QueryList, AfterContentInit, forwardRef, OnDestroy, OnChanges, SimpleChanges, ElementRef, Renderer2 } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 
 import { NotificationType } from '../../models/notificationType.model';
@@ -80,8 +77,8 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   @Input() notification: RowNotification;
   @Input() animationSpeed = 400;
 
-  @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
-  @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
+  @ContentChild(ListItemHeaderComponent, /* TODO: add static flag */ {}) listItemHeader: ListItemHeaderComponent;
+  @ContentChild(ListItemContentComponent, /* TODO: add static flag */ {}) listContent: ListItemContentComponent;
 
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
   @Output() expandPrevented: EventEmitter<any> = new EventEmitter();
@@ -97,7 +94,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
 
   @ContentChildren(forwardRef(() => ListColumnComponent), { descendants: true }) columns: QueryList<ListColumnComponent>;
 
-  constructor(private listService: ListService, private elementRef: ElementRef, private renderer: Renderer) {
+  constructor(private listService: ListService, private elementRef: ElementRef, private renderer: Renderer2) {
     this.expandedChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.hideNotifications());
   }
 

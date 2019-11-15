@@ -35,7 +35,7 @@ export class ActionPanelComponent implements OnChanges, OnInit {
   @Input() open = false;
   @Input() showCloseButton = true;
   @Output() openChanged = new EventEmitter<boolean>();
-  @ViewChild('actionPanel') actionPanelElement;
+  @ViewChild('actionPanel', { static: true }) actionPanelElement;
   private readonly slideStateOpen = 'open';
   private readonly slideStateClosed = 'closed';
   private readonly fadeStateVisible = 'visible';

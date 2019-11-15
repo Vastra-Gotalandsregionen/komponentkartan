@@ -40,7 +40,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
   @HostBinding('class.list--new-item-added') moveHeader = false;
   @HostBinding('class.animate') animate = false;
 
-  @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
+  @ContentChild(ListHeaderComponent, /* TODO: add static flag */ {}) listHeader: ListHeaderComponent;
   @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
 
   private ngUnsubscribe = new Subject();

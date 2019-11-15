@@ -27,8 +27,8 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
 
-  @ContentChild(GridHeaderToolbarComponent) gridHeaderToolbar: GridHeaderToolbarComponent;
-  @ContentChild(GridHeaderComponent) gridHeader: GridHeaderComponent;
+  @ContentChild(GridHeaderToolbarComponent, /* TODO: add static flag */ {}) gridHeaderToolbar: GridHeaderToolbarComponent;
+  @ContentChild(GridHeaderComponent, /* TODO: add static flag */ {}) gridHeader: GridHeaderComponent;
   @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
 
   headerOffset: string; // dynamic offset depending on the heightof the page header + header height.

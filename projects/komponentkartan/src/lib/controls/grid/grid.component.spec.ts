@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement, Renderer, ElementRef, Input, Component } from '@angular/core';
+import { DebugElement, ElementRef, Input, Component, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GridHeaderComponent } from './grid-header.component';
