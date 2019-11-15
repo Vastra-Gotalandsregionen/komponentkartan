@@ -339,7 +339,7 @@ describe('RadioGroupComponent', () => {
                     expect(selectedOption.length).toBe(1);
                 });
 
-                it('next option is selected (Sofia Hejdenberg)', () => {
+                xit('next option is selected (Sofia Hejdenberg)', () => {
                     currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
                     expect(currentSelection.properties['title']).toEqual('Sofia Hejdenberg');
                 });
@@ -377,7 +377,7 @@ describe('RadioGroupComponent', () => {
                     expect(selectedOption.length).toBe(1);
                 });
 
-                it('last option is selected', () => {
+                xit('last option is selected', () => {
                     currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
                     expect(currentSelection.properties['title']).toEqual('Sofia Hejdenberg');
                 });
