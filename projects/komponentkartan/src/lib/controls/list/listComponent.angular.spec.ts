@@ -59,7 +59,7 @@ describe('[ListComponent - Angular]', () => {
       imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule],
       providers: [
         { provide: ElementRef },
-        { provide: Renderer },
+        { provide: Renderer2 },
         ListService
       ]
     });

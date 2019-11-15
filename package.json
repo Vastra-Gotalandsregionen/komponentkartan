@@ -41,6 +41,7 @@
     "g": "^2.0.1",
     "ngx-perfect-scrollbar": "^7.2.1",
     "rxjs": "~6.5.3",
+    "tsickle": "^0.37.1",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1"
   },
