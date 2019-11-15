@@ -318,7 +318,7 @@ describe('RadioGroupComponent', () => {
                 selectedChangedSpy.calls.reset();
                 optionToSelect = rootElement.queryAll(By.css('.radio-button')).filter(x => x.properties['title'] === 'Per Åkerberg')[0];
                 optionToSelect.triggerEventHandler('click', null);
-                spyOn(component.classRenderer, 'invokeElementMethod');
+                // spyOn(component.classRenderer, 'invokeElementMethod');
                 fixture.detectChanges();
                 selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
             });

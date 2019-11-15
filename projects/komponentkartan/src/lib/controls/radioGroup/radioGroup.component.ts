@@ -41,10 +41,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         return this.radiogroupItems.every((x) => (x.selected === false || x.selected === undefined));
     }
 
-    get classRenderer(): Renderer {
-        return this.renderer;
-    }
-
     constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer2) {
     }
 
