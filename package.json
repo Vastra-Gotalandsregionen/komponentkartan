@@ -38,7 +38,6 @@
     "core-js": "^2.6.9",
     "detect-browser": "^2.5.0",
     "eslint": "^4.14.0",
-    "g": "^2.0.1",
     "ngx-perfect-scrollbar": "^7.2.1",
     "rxjs": "~6.5.3",
     "web-animations-js": "^2.3.2",
