@@ -9,56 +9,12 @@ import { ListItemContentComponent } from '../list-item/list-item-content.compone
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ListService } from '../list/list.service';
+import { toggleExpandedState, deleteListRow } from '../../animation';
 
 @Component({
   templateUrl: './list-item.component.html',
   selector: 'vgr-list-item',
-  animations: [
-    trigger('toggleState', [
-      state('*', style({
-        height: 0,
-        display: 'none'
-      })),
-      state('true', style({
-        height: '*',
-        display: 'block'
-      })),
-      state('false', style({
-        height: 0,
-        display: 'none'
-      })),
-      transition('* <=> true', [
-        animate('{{animationSpeed}}ms ease')
-      ])
-    ]),
-    trigger('toggleFadedState', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('400ms ease', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ opacity: 1, height: '*' }),
-        animate('400ms ease', style({ opacity: 0, height: 0 })),
-      ]),
-    ]),
-    trigger('toggleFadedState0ms', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('0ms ease', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ opacity: 1, height: '*' }),
-        animate('0ms ease', style({ opacity: 0, height: 0 })),
-      ]),
-    ]),
-    trigger('deleted', [
-      transition(':leave', [
-        style({ opacity: 1, height: '*', overflow: 'hidden' }),
-        animate('0.4s ease', style({ opacity: 0, height: 0, overflow: 'hidden' })),
-      ]),
-    ])
-  ]
-})
+  animations: [ toggleExpandedState, deleteListRow ]})
 
 export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges {
   readonly showNotificationDurationMs = 1500;
@@ -168,8 +124,8 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   }
 
   setFocusOnRow() {
-      const item = this.elementRef.nativeElement.querySelector('.list-item__header_wrapper');
-      item.focus();
+    const item = this.elementRef.nativeElement.querySelector('.list-item__header_wrapper');
+    item.focus();
   }
 
   hideNotifications() {
