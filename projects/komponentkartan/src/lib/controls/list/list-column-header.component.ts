@@ -1,4 +1,4 @@
-import { Component, HostBinding, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, HostBinding, Input, Output, EventEmitter } from '@angular/core';
 
 export enum SortDirection {
   None,
@@ -10,7 +10,7 @@ export enum SortDirection {
   templateUrl: './list-column-header.component.html',
   selector: 'vgr-list-column-header'
 })
-export class ListColumnHeaderComponent implements AfterViewInit {
+export class ListColumnHeaderComponent {
   @HostBinding('class')
   get classes(): string {
     return 'list__column-header flex-column ' + this.getColumnWidthClass() + ' ' + this.getAlignClass();
@@ -35,9 +35,6 @@ export class ListColumnHeaderComponent implements AfterViewInit {
 
   constructor() {
     this.sortDirection = SortDirection.None;
-  }
-  ngAfterViewInit() {
-    console.warn('vgr-list-column-header soon to be deprecated');
   }
 
   getColumnWidthClass(): string {

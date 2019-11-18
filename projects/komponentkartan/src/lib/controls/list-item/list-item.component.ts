@@ -116,7 +116,6 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   }
 
   ngAfterContentInit() {
-    console.warn('vgr-list-item soon to be deprecated');
     if (this.listContent) {
       this.listContent.goUp.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnPreviousRowContent.emit());
       this.listContent.goDown.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.setFocusOnNextRowContent.emit());

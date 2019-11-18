@@ -16,7 +16,6 @@ export class ListHeaderComponent implements AfterContentInit, OnDestroy {
 
 
     ngAfterContentInit() {
-        console.warn('vgr-list-header soon to be deprecated');
         this.headerColumns.forEach(column => column.sortChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((sort: SortDirection) => this.onColumnSortChanged(column, sort)));
     }
 
