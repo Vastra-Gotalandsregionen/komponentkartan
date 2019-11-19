@@ -39,8 +39,8 @@ export class ExamplesListwithcardsComponent implements OnInit {
   userFormSubmitted = false;
   listNotification = null;
 
-  @ViewChild(SaveCancelComponent) saveCancelComponent: SaveCancelComponent;
-  @ViewChild(ListComponent) listComponent: ListComponent;
+  @ViewChild(SaveCancelComponent, { static: false }) saveCancelComponent: SaveCancelComponent;
+  @ViewChild(ListComponent, { static: true }) listComponent: ListComponent;
 
   validationMessages = {
     avtalskod: {

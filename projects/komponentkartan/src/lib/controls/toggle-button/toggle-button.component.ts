@@ -10,8 +10,8 @@ export class ToggleButtonComponent implements AfterViewInit, OnChanges {
   @Input() ariaLabel: string;
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
-  @ViewChild('togglebutton') togglebutton: ElementRef;
-  @ViewChild('content') content: ElementRef;
+  @ViewChild('togglebutton', { static: true }) togglebutton: ElementRef;
+  @ViewChild('content', { static: true }) content: ElementRef;
 
   tabindex = 0;
   ariaPressed: boolean;

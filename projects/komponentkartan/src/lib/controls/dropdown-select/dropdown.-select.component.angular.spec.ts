@@ -11,18 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
 import { IconModule } from '../icon/icon.module';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
-
-@Component({
-  selector: 'vgr-perfect-scrollbar',
-  template: `
-  <div class="ps">
-    <ng-content></ng-content>
-  </div>
-  `
-})
-class MockPerfectScrollbarComponent {
-  @Input() config;
-}
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'vgr-test',
@@ -50,13 +39,12 @@ describe('[DropdownSelectComponent - Angular]', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule],
+      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, PerfectScrollbarModule],
       declarations: [
         TestComponent,
         DropdownSelectComponent,
         DropdownItemComponent,
         ButtonComponent,
-        MockPerfectScrollbarComponent,
         TruncatePipe,
         IconComponent,
         ErrorMessagePipe

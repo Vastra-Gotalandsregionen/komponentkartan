@@ -10,7 +10,7 @@ import {
 
 export const toggleExpandedState = trigger('toggleExpandedState', [
     transition(':enter', [
-        style({ height: '0' , overflow: 'hidden'}),
+        style({ height: '0', overflow: 'hidden' }),
         animate('{{speed}}', style({ height: '*' }))
     ], { params: { speed: '0.4s' } }),
     transition(':leave', [
@@ -47,6 +47,13 @@ export const remove = trigger('remove', [
         style({ height: '*', overflow: 'hidden', display: 'block' }),
         animate('{{speed}}', style({ height: '0', opacity: '0' })),
     ], { params: { speed: '.2s' } }),
+]);
+
+export const deleteListRow = trigger('deleted', [
+    transition(':leave', [
+        style({ opacity: 1, height: '*', overflow: 'hidden' }),
+        animate('0.4s ease', style({ opacity: 0, height: 0, overflow: 'hidden' })),
+    ]),
 ]);
 
 export const listStagger = trigger('listStagger', [

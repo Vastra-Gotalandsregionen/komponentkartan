@@ -37,11 +37,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Output() selectedChanged = new EventEmitter<any>();
   @Output() expandedChanged = new EventEmitter<boolean>();
 
-  @ViewChild('dropdown') dropdown: ElementRef;
-  @ViewChild('header') header: ElementRef;
-  @ViewChild('selectAll') selectAll: ElementRef;
-  @ViewChild('deselectButton') deselectButton: ButtonComponent;
-  @ViewChild('filter') filter: ElementRef;
+  @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
+  @ViewChild('header', { static: true }) header: ElementRef;
+  @ViewChild('selectAll', { static: false }) selectAll: ElementRef;
+  @ViewChild('deselectButton', { static: false }) deselectButton: ButtonComponent;
+  @ViewChild('filter', { static: false }) filter: ElementRef;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
   expanded = false;

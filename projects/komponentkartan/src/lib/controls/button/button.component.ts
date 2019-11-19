@@ -8,7 +8,7 @@ export class ButtonComponent implements OnChanges {
   @Input() disabled = false;
   @Input() buttonStyle = 'primary';
   @Input() type = 'button';
-  @ViewChild('button') button: ElementRef;
+  @ViewChild('button', { static: true }) button: ElementRef;
   reenabled = false;
   private wasDisabled = false;
 

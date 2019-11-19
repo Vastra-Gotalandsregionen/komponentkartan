@@ -1,5 +1,5 @@
-import { Component, HostBinding, HostListener, Input } from '@angular/core';
-import { trigger, style, transition, animate, group, state, query } from '@angular/animations';
+import { Component, HostBinding, Input } from '@angular/core';
+import { trigger, style, transition, animate, state } from '@angular/animations';
 
 @Component({
     selector: 'vgr-card-section',
@@ -38,19 +38,15 @@ export class CardSectionComponent {
     @Input() subtitle: string;
     overflow = false;
 
-    @HostListener('keydown', ['$event'])
-    toggleExpand(event: KeyboardEvent) {
-        if ((event.keyCode === 13 || event.keyCode === 32) && event.srcElement.className === 'card-section__header') { // enter & space
-            this.toggleExpanded();
+
+    toggleExpanded(event) {
+        if ( ( event instanceof KeyboardEvent && event.keyCode === 13 || event.keyCode === 32) || ( event instanceof MouseEvent ) ) {
+            this.overflow = false;
+            setTimeout(() => {
+                this.expanded = !this.expanded;
+            });
             event.preventDefault();
         }
-    }
-
-    toggleExpanded() {
-        this.overflow = false;
-        setTimeout(() => {
-            this.expanded = !this.expanded;
-        });
     }
 
     constructor() {
