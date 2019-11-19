@@ -4,13 +4,7 @@ $validation-icon-size: 18px;
 $suffix-width: 30px;
 
 .input-container {
-  max-width: $input-width--small;
-  width: $input-width--small;
   display: flex;
-  .input--small & {
-    max-width: $input-small-width--small;
-    width: $input-small-width--small;
-  }
   &.input-container--focus {
     outline: $focus-outline-width solid $focus-color;
   }
@@ -22,9 +16,6 @@ input.input-container__textbox {
   transition: padding-right 0.3s linear;
   margin-left: -1px;
   margin-right: -1px;
-  .input--small & {
-    width: $input-small-width--small - $suffix-width;
-  }
   .align-right & {
     text-align: right;
     padding-right: 5px;
@@ -82,17 +73,12 @@ input.input-container__textbox {
   padding: 0px;
   background-color: inherit;
   position: relative;
-  width: $input-width--small + $margin--fat;
-  max-width: $input-width--small + $margin--fat;
   top: 0px;
-  .input--small & {
-    width: $input-small-width--small + $margin--fat;
-    max-width: $input-small-width--small + $margin--fat;
-  }
   .validation-error--active & {
     max-height: none;
     padding: $margin--slim;
     margin-left: -$margin--slim;
+    margin-right: -$margin--slim;
     .title-value-layout & {
       top: -10px;
     }
@@ -146,11 +132,7 @@ input.input-container__textbox {
   display: none;
   margin-left: 4px;
   margin-top: 5px;
-  max-width: 239px;
   vertical-align: middle;
-  .input--small & {
-    max-width: 89px;
-  }
   .validation-error--active & {
     color: $text-color--default;
     display: inline-block;
@@ -171,13 +153,9 @@ input.input-container__textbox {
   padding-top: 2px;
   border-width: 1px;  
   border-color: $background-color--content;
-  width: auto;
-  min-width: $input-width--small + $margin--fat;
-  max-width: none;   
   .align-right & {
     padding-left: 0px;
     padding-right: 20px; 
-    max-width: $input-width--small + $margin--fat;
     & .readonly-container__display-value  {
       flex: 1;
       text-align: right;
@@ -189,33 +167,17 @@ input.input-container__textbox {
       font-style: italic;
     }
   }
-  .input--small & {
-    min-width: $input-small-width--small  + $margin--fat;
-    max-width: $input-small-width--small  + $margin--fat;
-  }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .input-container {
-    max-width: $input-width--medium;
-    width: $input-width--medium;
-    .input--small & {
-      max-width: $input-small-width--medium;
-      width: $input-small-width--medium;
-    }
-  }
   .input-container__suffix-container {
     padding-top: 0px;
   }
   .input-validation {
-    width: $input-width--medium + $margin--fat;
-    max-width: $input-width--medium + $margin--fat;
     &:after {
       left: 260px;
     }
     .input--small & {
-      width: $input-small-width--medium + $margin--fat;
-      max-width: $input-small-width--medium + $margin--fat;
       &:after {
         left: 140px;
       }
@@ -230,17 +192,11 @@ input.input-container__textbox {
   }
   .readonly-container {  
     padding-top: 1px;
-    min-width: $input-width--medium + $margin--fat;
     .align-right & {
-      max-width: $input-width--medium + $margin--fat;
       & .readonly-container__display-value  {
         padding-right: 4px;     
       } 
     }
-    .input--small & {
-      min-width: $input-small-width--medium  + $margin--fat;
-      max-width: $input-small-width--medium  + $margin--fat;
-    } 
   }
 }
 

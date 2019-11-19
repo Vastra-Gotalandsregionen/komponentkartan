@@ -11,6 +11,7 @@ import {
   Output,
   SimpleChanges,
   SkipSelf,
+  HostBinding,
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -39,6 +40,9 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() readonly?: boolean;
   @Input() small: boolean;
   @Input() alignRight: boolean;
+
+  @Input() @HostBinding('style.width') width = this.small ? '140px' : '290px';
+  @HostBinding('style.display') display = 'block';
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
