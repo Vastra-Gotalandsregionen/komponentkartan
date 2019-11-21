@@ -19,8 +19,8 @@
     </div>
   </div>
   <!-- Denna notis visas när det endast finns en temporär notis -->
-  <div *ngIf="temporaryNotification && !permanentNotification" class="list-item__notification" [@toggleFadedState]
-    (@toggleFadedState.done)="closeTemporary(notification)" (click)="toggleExpanded()">
+  <div *ngIf="temporaryNotification && !permanentNotification" class="list-item__notification" [@toggleExpandedState]="{value: ':leave',  params: { speed: animationSpeed + 'ms' } }"
+    (@toggleExpandedState.done)="closeTemporary(notification)" (click)="toggleExpanded()">
     <vgr-icon [icon]="temporaryNotification.icon.name" [color]="temporaryNotification?.icon.color"
       [solid]="temporaryNotification?.icon.solid">
     </vgr-icon>
@@ -29,8 +29,8 @@
     </div>
   </div>
   <!-- Denna notis visas när det finns en permanent notis som skall ses åter när den temorärar är klar -->
-  <div *ngIf="temporaryNotification && permanentNotification" class="list-item__notification" [@toggleFadedState0ms]
-    (@toggleFadedState0ms.done)="closeTemporary(notification)" (click)="toggleExpanded()">
+  <div *ngIf="temporaryNotification && permanentNotification" class="list-item__notification" [@toggleExpandedState]="{value: ':leave',  params: { speed: animationSpeed + 'ms' } }"
+    (@toggleExpandedState.done)="closeTemporary(notification)" (click)="toggleExpanded()">
     <vgr-icon [icon]="temporaryNotification?.icon.name" [color]="temporaryNotification?.icon.color"
       [solid]="temporaryNotification?.icon.solid">
     </vgr-icon>
