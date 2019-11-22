@@ -156,7 +156,6 @@ input.input-container__textbox {
   border-color: $background-color--content;
   .align-right & {
     padding-left: 0px;
-    padding-right: 20px; 
     & .readonly-container__display-value  {
       flex: 1;
       text-align: right;
