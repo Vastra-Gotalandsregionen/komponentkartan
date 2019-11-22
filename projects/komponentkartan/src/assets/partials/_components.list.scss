@@ -47,9 +47,8 @@
 }
 
 .list-item-content {
-  overflow: hidden;
-  &.overflow-visible {
-    overflow: visible;
+  &.ng-animating {
+    overflow: hidden;
   }
 }
 

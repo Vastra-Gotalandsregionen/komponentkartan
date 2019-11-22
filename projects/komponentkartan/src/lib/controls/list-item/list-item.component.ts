@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, ContentChildren, ContentChild, QueryList, AfterContentInit, forwardRef, OnDestroy, OnChanges, SimpleChanges, ElementRef, Renderer2 } from '@angular/core';
-import { trigger, style, transition, animate, state } from '@angular/animations';
 
 import { NotificationType } from '../../models/notificationType.model';
 import { RowNotification } from '../../models/rowNotification.model';
