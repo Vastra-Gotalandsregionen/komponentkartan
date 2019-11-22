@@ -17,12 +17,34 @@
   </div>
 
   <div class="docs__examples">
+    <h3>Size</h3>
+    <section>
+      <div class="row-layout">
+        <div class="one-third">
+          Small
+          <vgr-input [small]="true"></vgr-input>
+        </div>
+        <div class="one-third">
+          Large
+          <vgr-input [small]="false"></vgr-input>
+        </div>
+        <div class="one-third">
+          Custom Size
+          <vgr-input [width]="'100%'"></vgr-input>
+        </div>
+      </div>
+    </section>
+    <br>
+    <br>
+    <br>
+    <br>
     <vgr-button (click)="readonly = !readonly">Readonly</vgr-button>
     <p>Ändra storleken på inputfälten:</p>
     <vgr-radio-group
       [options]="[{value:'Stor', displayName:'Stor', selected:true},{value:'Liten', displayName:'Liten'}]"
       (selectedChanged)="toggleInputType($event)">
     </vgr-radio-group>
+    <h3>Input hantering</h3>
     <form [formGroup]="form">
       <div class="row-layout">
         <div class="one-third">
@@ -125,7 +147,7 @@
           </div>
           <div>
             <br><br>
-            <vgr-input [readonly]="readonly" (valueChanged)="valueChange($event)"></vgr-input>
+            <vgr-input [readonly]="readonly" (valueChanged)="valueChange($event)" [small]="isSmall"></vgr-input>
             <span>Value change: {{changeValue}}</span>
           </div>
         </div>
@@ -201,11 +223,11 @@
       </tr>
 
       <tr>
-          <th>Property</th>
-          <th>Beskrivning</th>
-          <th>Exempel</th>
-        </tr>
-  
+        <th>Property</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+
       <tr>
         <td>blur: eventEmitter</td>
         <td>Event som triggas när användaren går ifrån inputfield.</td>
