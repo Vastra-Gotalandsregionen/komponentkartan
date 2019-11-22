@@ -1,28 +1,33 @@
 <div class="validated-input" [ngClass]="{'validation-error--active' : errorClass, 'validation-error--editing' : editingClass, 
 'validation-error--fixed' : fixedClass, 'readonly' : readonly, 'input--small' : small, 'align-right' : alignRight}">
 
-  <div *ngIf="!readonly" class="input-validation" [ngClass]="{'input-validation--suffixed' : suffix && suffix.length>0}">
+  <div *ngIf="!readonly" class="input-validation"
+    [ngClass]="{'input-validation--suffixed' : suffix && suffix.length>0}">
 
     <div class="input-container" [ngClass]="{'input-container--focus' : hasFocus}">
       <input type="text" #inputTextBox class="input-container__textbox" (blur)="onBlur($event)" (focus)="onFocus()"
-        [(ngModel)]="displayValue" (ngModelChange)="onChange($event)" [maxlength]="maxlength" [placeholder]="placeholder ? placeholder : ''">
+        [(ngModel)]="displayValue" (ngModelChange)="onChange($event)" [maxlength]="maxlength"
+        [placeholder]="placeholder ? placeholder : ''">
       <div class="input-container__suffix-container" *ngIf="suffix">
         <div class="input-container__suffix-container__suffix">{{suffix}}</div>
         <vgr-icon icon="check-circle" class="input-container__suffix-container__status-icon"></vgr-icon>
       </div>
     </div>
 
-    <div *ngIf="control" class="input-validation_status" title="{{ errorMessage | errorMessage: control.errors : small }}">
+    <div *ngIf="control" class="input-validation_status"
+      title="{{ errorMessage | errorMessage: control.errors : small }}">
       <vgr-icon icon="exclamation-circle" size="sm" class="input-validation_status__icon"></vgr-icon>
-      <div *ngIf="!small" class="input-validation_status__message">{{errorMessage | errorMessage: control.errors : small | truncate:64}}</div>
-      <div *ngIf="small" class="input-validation_status__message">{{errorMessage | errorMessage: control.errors : small | truncate:24}}</div>
+      <div *ngIf="!small" class="input-validation_status__message">
+        {{errorMessage | errorMessage: control.errors : small | truncate:64}}</div>
+      <div *ngIf="small" class="input-validation_status__message">
+        {{errorMessage | errorMessage: control.errors : small | truncate:24}}</div>
     </div>
 
   </div>
 
   <div *ngIf="readonly" class="readonly-container" [ngClass]="{'align-right' : alignRight}">
     <span class="readonly-container__display-value">{{displayValue}}</span>
-    <span class="readonly-container__suffix" >{{suffix}}</span>
+    <span class="readonly-container__suffix">{{suffix}}</span>
   </div>
 
 </div>
