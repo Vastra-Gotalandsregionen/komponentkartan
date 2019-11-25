@@ -10,8 +10,8 @@ vgr-dropdown-select {
     @media screen and (min-width: $desktop-width--medium) {
       width: 170px;
     }
-
   }
+
 }
 
 .dropdown-select {
@@ -66,7 +66,6 @@ vgr-dropdown-select {
         border-bottom: $border--single solid $control-border-color--default;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
       }
 
       .dropdown-select__header__button {
@@ -114,30 +113,8 @@ vgr-dropdown-select {
         align-items: center;
         padding-top: 15px;
         border-bottom: 1px solid $border-color;
-
-        .dropdown-select__menu__header__filter {
-          display: flex;
-          align-items: center;
-          height: $component-height;
-          border: $border--single solid $control-border-color--default;
-          border-radius: 0px;
+        vgr-filter-textbox {
           margin-bottom: 10px;
-
-          &.dropdown-select__menu__header__filter--focus {
-            outline: $focus-outline-width solid $focus-color;
-          }
-
-          input {
-            height: $component-height - 4px;
-            width: 240px;
-            border: none;
-          }
-
-          &::after {
-            @extend .icon-search;
-            content: "";
-            margin-right: 10px;
-          }
         }
 
         .dropdown-select__menu__header__deselect {
@@ -340,16 +317,6 @@ vgr-dropdown-select {
         }
       }
       
-      &.dropdown-select--small {
-        .dropdown-select__header {
-          width: 170px;
-
-          .dropdown-select__header__label {
-            width: 170px - $icon-width;
-          }
-        }
-      }
-
       &.dropdown-select--readonly {
         .dropdown-select__header {
           width: auto;
