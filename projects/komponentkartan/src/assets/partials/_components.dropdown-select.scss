@@ -1,5 +1,7 @@
 .dropdown-select {
-  display: inline-block;
+  .validation {
+    height: auto;
+  }
 
   .icon-search {
     display: inline-block;
@@ -32,7 +34,6 @@
     
     .dropdown-select__header {
       height: $component-height;
-      width: 270px;
       cursor: pointer;
       display: flex;
 
@@ -41,7 +42,7 @@
       }
 
       .dropdown-select__header__label {
-        width: 270px - $icon-width;
+        width: 100%;
         padding-left: $margin--slim;
         background-color: $background-color--content;
         border-top: $border--single solid $control-border-color--default;
@@ -256,15 +257,6 @@
       }
     }
 
-    &.dropdown-select--small {
-      .dropdown-select__header {
-        width: 160px;
-        .dropdown-select__header__label {
-          width: 160px - $icon-width;
-        }
-      }
-    }
-
     &.dropdown-select--expanded {
       .dropdown-select__header {      
         .dropdown-select__header__button {
@@ -325,13 +317,6 @@
 @media screen and (min-width: $desktop-width--medium) {
   .dropdown-select {
     .dropdown-select__control {
-      .dropdown-select__header {
-        width: 287px;
-
-        .dropdown-select__header__label {
-          width: 287px - $icon-width;
-        }
-      }
 
       .dropdown-select__menu {
         .dropdown-select__menu__items {

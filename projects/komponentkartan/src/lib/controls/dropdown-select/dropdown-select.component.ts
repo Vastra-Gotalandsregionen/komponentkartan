@@ -1,6 +1,6 @@
 import {
   Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
-  Input, Output, EventEmitter, Optional, SimpleChanges, Self
+  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -22,7 +22,6 @@ function _defaultCompare(o1: any, o2: any): boolean {
 export class DropdownSelectComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 
   @Input() multi = false;
-  @Input() small = false;
   @Input() deselectable = false;
   @Input() simpleLabel = false;
   @Input() noItemSelectedLabel = 'Välj';
@@ -33,6 +32,19 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() compareWith = _defaultCompare;
   @Input() labelId: string;
   @Input() value: any;
+
+  @Input() small: boolean;
+  @Input() width: string;
+
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.width') get getWidth() {
+    if (this.width) {
+      return this.width;
+    } else {
+      return this.small ? '170px' : '287px';
+    }
+  }
+
 
   @Output() selectedChanged = new EventEmitter<any>();
   @Output() expandedChanged = new EventEmitter<boolean>();
