@@ -33,7 +33,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() labelId: string;
   @Input() value: any;
 
-  @Input() small: boolean;
+  @Input() small = false;
   @Input() width: string;
 
   @HostBinding('style.display') display = 'block';
