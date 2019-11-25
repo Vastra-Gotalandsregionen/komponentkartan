@@ -34,16 +34,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() value: any;
 
   @Input() small = false;
-  @Input() width: string;
 
   @HostBinding('style.display') display = 'block';
-  @HostBinding('style.width') get getWidth() {
-    if (this.width) {
-      return this.width;
-    } else {
-      return this.small ? '170px' : '287px';
-    }
+
+  @HostBinding('class') get getSize() {
+    return this.small ? 'small' : 'large';
   }
+
+  @Input() @HostBinding('style.width') width;
 
 
   @Output() selectedChanged = new EventEmitter<any>();

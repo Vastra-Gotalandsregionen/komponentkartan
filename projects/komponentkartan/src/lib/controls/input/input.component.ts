@@ -46,16 +46,15 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Output() valueChanged: EventEmitter<any>;
 
   @Input() small: boolean;
-  @Input() width: string;
 
   @HostBinding('style.display') display = 'block';
-  @HostBinding('style.width') get getWidth() {
-    if (this.width) {
-      return this.width;
-    } else {
-      return this.small ? '140px' : '290px';
-    }
+
+  @HostBinding('class') get getSize() {
+    return this.small ? 'small' : 'large';
   }
+
+  @Input() @HostBinding('style.width') width;
+
 
   get errorClass() {
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;

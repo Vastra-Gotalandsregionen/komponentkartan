@@ -1,3 +1,19 @@
+vgr-dropdown-select {
+  &.large {
+    width: 270px;
+    @media screen and (min-width: $desktop-width--medium) {
+      width: 287px;
+    }
+  }
+  &.small {
+    width: 160px;
+    @media screen and (min-width: $desktop-width--medium) {
+      width: 170px;
+    }
+
+  }
+}
+
 .dropdown-select {
   .validation {
     height: auto;
