@@ -6,7 +6,7 @@
     [ngClass]="{'input-validation--suffixed' : suffix && suffix.length>0}">
     <div class="input-container" [ngClass]="{'input-container--focus' : hasFocus}">
       <input type="text" #inputTextBox class="input-container__textbox" (blur)="onBlur($event)" (focus)="onFocus()"
-        [(ngModel)]="displayValue" (ngModelChange)="onChange($event)" [maxlength]="maxlengt"
+        [(ngModel)]="displayValue" (ngModelChange)="onChange($event)" [maxlength]="maxlength"
         [placeholder]=" placeholder ? placeholder : ''">
       <div class=" input-container__suffix-container" *ngIf="suffix">
         <div class="input-container__suffix-container__suffix">{{suffix}}</div>
