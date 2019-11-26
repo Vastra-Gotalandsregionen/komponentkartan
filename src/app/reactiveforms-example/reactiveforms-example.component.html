@@ -46,7 +46,7 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Favoritdjur</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-dropdown-select formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
+                  <vgr-dropdown-select width="100%" formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
                     [showValidation]="updateOnBlurForm.controls.favourite_pet.touched">
                     <vgr-dropdown-item [value]="'Hund'">Hund</vgr-dropdown-item>
                     <vgr-dropdown-item [value]="'Katt'">Katt</vgr-dropdown-item>
@@ -57,7 +57,7 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Intressen</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-dropdown-select formControlName="interests" [multi]="true"
+                  <vgr-dropdown-select width="100%" formControlName="interests" [multi]="true"
                     [showValidation]="updateOnBlurForm.controls.interests.touched"
                     [errorMessage]="{'pattern': 'Du får bara koda!'}">
                     <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
@@ -158,7 +158,7 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Favoritdjur</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-dropdown-select formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
+                  <vgr-dropdown-select width="100%" formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
                     [showValidation]="formSubmitted">
                     <vgr-dropdown-item [value]="'Hund'">Hund</vgr-dropdown-item>
                     <vgr-dropdown-item [value]="'Katt'">Katt</vgr-dropdown-item>
@@ -169,7 +169,7 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Intressen</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-dropdown-select formControlName="interests" [multi]="true" [showValidation]="formSubmitted"
+                  <vgr-dropdown-select width="100%" formControlName="interests" [multi]="true" [showValidation]="formSubmitted"
                     [errorMessage]="{'pattern': 'Du får bara koda!'}">
                     <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
                     <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
@@ -265,7 +265,7 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Favoritdjur</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-dropdown-select formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
+                  <vgr-dropdown-select width="100%" formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
                     [showValidation]="updateOnChangeForm.controls.favourite_pet.dirty">
                     <vgr-dropdown-item [value]="'Hund'">Hund</vgr-dropdown-item>
                     <vgr-dropdown-item [value]="'Katt'">Katt</vgr-dropdown-item>
@@ -276,7 +276,7 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Intressen</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-dropdown-select formControlName="interests" [simpleLabel]="true" [multi]="true"
+                  <vgr-dropdown-select width="100%" formControlName="interests" [simpleLabel]="true" [multi]="true"
                     [showValidation]="updateOnChangeForm.controls.interests.dirty"
                     [errorMessage]="{'pattern': 'Du får bara koda!'}">
                     <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>

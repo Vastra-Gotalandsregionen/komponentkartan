@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { DropdownSelectComponent } from './dropdown-select.component';
 import { DropdownItemComponent } from './dropdown-item.component';
@@ -12,6 +12,8 @@ import { IconComponent } from '../icon/icon.component';
 import { IconModule } from '../icon/icon.module';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 
 @Component({
   selector: 'vgr-test',
@@ -33,13 +35,15 @@ describe('[DropdownSelectComponent - Angular]', () => {
   let rootElement: DebugElement;
   let headerElement: DebugElement;
   let menuElement: DebugElement;
-  let filterElement: DebugElement;
+  let filterElement: FilterTextboxComponent;
   let deselectElement: DebugElement;
   let selectAllElement: DebugElement;
 
-  beforeEach(() => {
+  beforeEach((done) => {
+    TestBed.resetTestEnvironment();
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, PerfectScrollbarModule],
+      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, PerfectScrollbarModule, FormsModule],
       declarations: [
         TestComponent,
         DropdownSelectComponent,
@@ -47,16 +51,24 @@ describe('[DropdownSelectComponent - Angular]', () => {
         ButtonComponent,
         TruncatePipe,
         IconComponent,
-        ErrorMessagePipe
+        ErrorMessagePipe,
+        FilterTextboxComponent
       ]
     });
-    fixture = TestBed.createComponent(TestComponent);
-    testComponent = fixture.componentInstance;
-    rootElement = fixture.debugElement.query(By.css('vgr-dropdown-select'));
-    headerElement = rootElement.query(By.css('.dropdown-select__header'));
-    component = rootElement.componentInstance;
-    fixture.detectChanges();
+
+    TestBed.compileComponents().then(() => {
+      fixture = TestBed.createComponent(TestComponent);
+      testComponent = fixture.componentInstance;
+      rootElement = fixture.debugElement.query(By.css('vgr-dropdown-select'));
+      headerElement = rootElement.query(By.css('.dropdown-select__header'));;
+      component = rootElement.componentInstance;
+      filterElement = component.filter;
+      fixture.detectChanges();
+      done();
+    });
   });
+
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -124,7 +136,6 @@ describe('[DropdownSelectComponent - Angular]', () => {
       component.expanded = true;
       fixture.componentInstance.items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
       fixture.detectChanges();
-      filterElement = rootElement.query(By.css('.dropdown-select__menu__header__filter'));
     });
     it('filter is not shown', () => {
       expect(filterElement).toBeFalsy();
@@ -137,16 +148,14 @@ describe('[DropdownSelectComponent - Angular]', () => {
       component.expanded = true;
       fixture.componentInstance.items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
       fixture.detectChanges();
-      filterElement = rootElement.query(By.css('.dropdown-select__menu__header__filter'));
+      filterElement = component.filter;
     });
     it('filter is shown', () => {
       expect(filterElement).toBeTruthy();
     });
     describe('and filter is applied', () => {
       beforeEach(() => {
-        const filterInputElement = filterElement.query(By.css('input'));
-        filterInputElement.nativeElement.value = '1';
-        filterInputElement.triggerEventHandler('input', {});
+        filterElement.value = '1';
         fixture.detectChanges();
       });
       it('only matching items are shown', () => {
