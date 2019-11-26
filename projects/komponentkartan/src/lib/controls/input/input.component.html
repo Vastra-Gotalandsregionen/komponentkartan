@@ -1,7 +1,7 @@
 <div class="validated-input" [ngClass]="{
   'validation-error--active' : errorClass,  'validation-error--editing' : editingClass,  'validation-error--fixed' : fixedClass, 
   'readonly' : readonly, 'align-right' : alignRight,
-  'input--small' : small, 'input--large' : !small }">
+  'input--small' : small, 'input--large' : !small }" [ngStyle]="{ 'width': width }">
   <div *ngIf="!readonly" class="input-validation"
     [ngClass]="{'input-validation--suffixed' : suffix && suffix.length>0}">
     <div class="input-container" [ngClass]="{'input-container--focus' : hasFocus}">
