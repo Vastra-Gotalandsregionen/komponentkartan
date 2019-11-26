@@ -11,13 +11,17 @@ $suffix-width: 30px;
 }
 
 vgr-input {
-  &.large {
+  display: inline-block;
+  > * {
+    display: block;
+  }
+  .input--large {
     width: 270px;
     @media screen and (min-width: $desktop-width--medium) {
       width: 290px;
     }
   }
-  &.small {
+  .input--small {
     width: 130px;
     @media screen and (min-width: $desktop-width--medium) {
       width: 140px;
