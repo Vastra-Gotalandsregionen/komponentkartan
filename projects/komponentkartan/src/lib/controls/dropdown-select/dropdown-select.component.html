@@ -1,5 +1,7 @@
-<div class="dropdown-select"
-  [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
+<div class="dropdown-select" [ngClass]="{ 
+    'validation-error--active': errorActive, 
+    'validation-error--editing': errorEditing,
+    'dropdown--small': small, 'dropdown--large': !small }" [ngStyle]="{ 'width': width }">
   <div class="validation">
     <div #dropdown class="dropdown-select__control" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
       [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly': readonly, 'dropdown-select--disabled': disabled && !readonly, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
@@ -14,8 +16,8 @@
       <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu" role="listbox"
         [attr.aria-labelledby]="labelId" [attr.aria-multiselectable]="multi">
         <div *ngIf="filterVisible || deselectable || multi" class="dropdown-select__menu__header">
-          <vgr-filter-textbox *ngIf="filterVisible"
-            (keydown)="onFilterKeydown($event)" (valueChanged)="filterItems()"></vgr-filter-textbox>
+          <vgr-filter-textbox *ngIf="filterVisible" (keydown)="onFilterKeydown($event)" (valueChanged)="filterItems()">
+          </vgr-filter-textbox>
           <vgr-button #deselectButton *ngIf="deselectable && !multi" class="dropdown-select__menu__header__deselect"
             [buttonStyle]="'discreet'" [disabled]="deselectDisabled" (click)="deselectItems()"
             (keydown)="onDeselectKeydown($event)">Ta

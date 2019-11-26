@@ -1,6 +1,6 @@
 import {
   Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
-  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostBinding
+  Input, Output, EventEmitter, Optional, SimpleChanges, Self
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -33,17 +33,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() compareWith = _defaultCompare;
   @Input() labelId: string;
   @Input() value: any;
-
+  @Input() width: string;
   @Input() small = false;
-
-  @HostBinding('style.display') display = 'block';
-
-  @HostBinding('class') get getSize() {
-    return this.small ? 'small' : 'large';
-  }
-
-  @Input() @HostBinding('style.width') width;
-
 
   @Output() selectedChanged = new EventEmitter<any>();
   @Output() expandedChanged = new EventEmitter<boolean>();
