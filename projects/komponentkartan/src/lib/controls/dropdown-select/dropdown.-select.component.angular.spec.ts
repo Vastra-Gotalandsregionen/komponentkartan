@@ -60,7 +60,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
       fixture = TestBed.createComponent(TestComponent);
       testComponent = fixture.componentInstance;
       rootElement = fixture.debugElement.query(By.css('vgr-dropdown-select'));
-      headerElement = rootElement.query(By.css('.dropdown-select__header'));;
+      headerElement = rootElement.query(By.css('.dropdown-select__header'));
       component = rootElement.componentInstance;
       filterElement = component.filter;
       fixture.detectChanges();
