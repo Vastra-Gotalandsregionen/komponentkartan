@@ -11,9 +11,8 @@ $suffix-width: 30px;
 }
 
 vgr-input {
-  display: inline-block;
   > * {
-    display: block;
+    display: inline-block;
   }
   .input--large {
     width: 270px;
