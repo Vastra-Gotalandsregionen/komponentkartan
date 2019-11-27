@@ -117,6 +117,7 @@ input.input-container__textbox {
     background-color: $background-color--default;
     padding: $margin--slim;
     margin-left: -$margin--slim;
+    margin-right: -$margin--slim;
     transition: background-color 0.3s linear;
   }
   .validation-error--fixed & {
