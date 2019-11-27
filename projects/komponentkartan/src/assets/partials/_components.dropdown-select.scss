@@ -1,12 +1,15 @@
 vgr-dropdown-select {
   .dropdown--large {
     width: 270px;
+
     @media screen and (min-width: $desktop-width--medium) {
       width: 287px;
     }
   }
+
   .dropdown--small {
     width: 160px;
+
     @media screen and (min-width: $desktop-width--medium) {
       width: 170px;
     }
@@ -16,8 +19,20 @@ vgr-dropdown-select {
 
 .dropdown-select {
   .validation {
-    height: auto;
+    height: 30px;
+
+    &.readonly {
+      height: auto;
+    }
   }
+
+  &.validation-error--active,
+  &.validation-error--editing {
+    .validation {
+      height: auto;
+    }
+  }
+
 
   .icon-search {
     display: inline-block;
@@ -46,8 +61,17 @@ vgr-dropdown-select {
     background-position: center;
   }
 
+  &:not(.validation-error--editing):not(.validation-error--active) {
+    .dropdown-select__control:not(.dropdown-select--readonly) {
+      .dropdown-select__header {
+        position: absolute;
+        width: 100%;
+      }
+    }
+  }
+
   .dropdown-select__control {
-    
+
     .dropdown-select__header {
       height: $component-height;
       cursor: pointer;
@@ -74,6 +98,7 @@ vgr-dropdown-select {
 
         .dropdown-select__header__button__icon {
           @extend .bg-image-icon-chevron-inverted;
+
           .icon {
             display: block;
             text-align: center;
@@ -96,7 +121,7 @@ vgr-dropdown-select {
       background-color: $background-color--content;
       width: 330px;
       cursor: default;
-      
+
       &::before {
         @extend .bg-image-menu-arrow;
         content: "";
@@ -106,13 +131,14 @@ vgr-dropdown-select {
         top: -17px;
         left: 20px;
       }
-      
+
       .dropdown-select__menu__header {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-top: 15px;
         border-bottom: 1px solid $border-color;
+
         vgr-filter-textbox {
           margin-bottom: 10px;
         }
@@ -130,7 +156,7 @@ vgr-dropdown-select {
           padding-left: $margin--regular;
           padding-right: $margin--regular;
           background: white;
-          
+
           &::before {
             @extend .icon-checkbox-unchecked;
             content: "";
@@ -147,8 +173,9 @@ vgr-dropdown-select {
           &:focus {
             outline: $focus-outline-width solid $focus-color;
           }
-          
-          &:focus, &:hover {
+
+          &:focus,
+          &:hover {
             font-weight: bold;
             letter-spacing: $font-size--small-letter-spacing-bold;
             padding-left: $margin--regular - 4px;
@@ -158,7 +185,7 @@ vgr-dropdown-select {
           }
         }
       }
-      
+
       .dropdown-select__menu__items {
         max-height: 285px;
 
@@ -173,17 +200,20 @@ vgr-dropdown-select {
           padding-left: $margin--regular;
           padding-right: $margin--regular;
           background: white;
-          
-          &.dropdown-item--selected, &.dropdown-item--focus, &:hover {
+
+          &.dropdown-item--selected,
+          &.dropdown-item--focus,
+          &:hover {
             font-weight: bold;
             letter-spacing: $font-size--small-letter-spacing-bold;
           }
-          
+
           &.dropdown-item--focus {
             outline: $focus-outline-width solid $focus-color;
           }
-          
-          &.dropdown-item--focus, &:hover {
+
+          &.dropdown-item--focus,
+          &:hover {
             padding-left: $margin--regular - 4px;
             border-left-width: 4px;
             border-left-style: solid;
@@ -204,11 +234,11 @@ vgr-dropdown-select {
         margin-right: 15px;
         z-index: $layer-five;
       }
-      
+
       .dropdown-select__menu__dimmer-top {
         background: linear-gradient(white, rgba(255, 255, 255, 0));
       }
-      
+
       .dropdown-select__menu__dimmer-bottom {
         background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
         bottom: 0;
@@ -242,7 +272,7 @@ vgr-dropdown-select {
               .dropdown-select__menu__items__item__content-wrapper__checkbox {
                 &::before {
                   @extend .icon-checkbox-checked;
-                } 
+                }
               }
             }
           }
@@ -251,7 +281,7 @@ vgr-dropdown-select {
     }
 
     &.dropdown-select--expanded {
-      .dropdown-select__header {      
+      .dropdown-select__header {
         .dropdown-select__header__button {
           .dropdown-select__header__button__icon {
             .icon {
@@ -264,7 +294,7 @@ vgr-dropdown-select {
 
     &.dropdown-select--disabled {
       cursor: default;
-      
+
       .dropdown-select__header {
         background-color: $control-color--disabled;
 
@@ -282,8 +312,8 @@ vgr-dropdown-select {
 
     &.dropdown-select--readonly {
       cursor: default;
-      
-      .dropdown-select__header {      
+
+      .dropdown-select__header {
         height: auto;
         width: auto;
         display: block;
@@ -298,7 +328,7 @@ vgr-dropdown-select {
           white-space: normal;
           cursor: text;
         }
-        
+
         .dropdown-select__header__button {
           display: none;
         }
@@ -316,7 +346,7 @@ vgr-dropdown-select {
           max-height: 340px;
         }
       }
-      
+
       &.dropdown-select--readonly {
         .dropdown-select__header {
           width: auto;

@@ -281,7 +281,7 @@
                 <vgr-card-header>
                   <div class="row-layout">
                     <label style="width:189px">Version</label>
-                    <vgr-dropdown-select width="100%" [readonly]="!cardLocked" [formControl]="versionForm"
+                    <vgr-dropdown-select [small]="true" [readonly]="!cardLocked" [formControl]="versionForm"
                       (selectedChanged)="onSelectedChangedVersion($event, row.previewObject)">
                       <vgr-dropdown-item *ngFor="let version of row.previewObject.details.versions" [value]="version">
                         {{version}}</vgr-dropdown-item>

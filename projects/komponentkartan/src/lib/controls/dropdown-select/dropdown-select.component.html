@@ -2,7 +2,7 @@
     'validation-error--active': errorActive, 
     'validation-error--editing': errorEditing,
     'dropdown--small': small, 'dropdown--large': !small }" [ngStyle]="{ 'width': width }">
-  <div class="validation">
+  <div class="validation" [ngClass]="{ 'readonly': readonly }">
     <div #dropdown class="dropdown-select__control" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
       [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly': readonly, 'dropdown-select--disabled': disabled && !readonly, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
       (keydown)="onKeydown($event)" (focusin)="onFocus()" (focusout)="onBlur($event)">
