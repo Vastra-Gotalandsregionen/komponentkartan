@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 6.0.0
+- *Breaking change* Angular is upgraded to version 8.
+- *Breaking change* `title-value` is now declarative using: `title-value-heading` and `title-value-container` as children.
+- *Deprecated* `list` and `list-item`.
+- Fixed `title-value-heading` and `title-value-container` now has a new property for defining it's width.
+- Fixed `vgr-dropdown-select` uses `vgr-filter-textbox` for filtering.
+- Added width-handler for `vgr-datepicker`, `vgr-input` & `vgr-dropdown-select`
+
 ## 5.1.3 (Stable, 2019-10-21)
 - Fixed another bug in "grid"-component regarding toggle animation.
 

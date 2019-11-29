@@ -9,7 +9,7 @@ import { PageHeaderHeightService } from '../../services/page-header-height.servi
   providers: [PageHeaderHeightService]
 })
 export class PageComponent implements OnInit, OnDestroy {
-  @ViewChild('bodyContainer') bodyContainer: ElementRef;
+  @ViewChild('bodyContainer', { static: true }) bodyContainer: ElementRef;
   private ngUnsubscribe = new Subject();
 
   constructor(private pageHeaderHeightService: PageHeaderHeightService) { }

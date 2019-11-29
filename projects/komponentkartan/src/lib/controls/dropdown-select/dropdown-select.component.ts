@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DropdownItemComponent } from './dropdown-item.component';
 import { ButtonComponent } from '../button/button.component';
 import { Guid } from '../../utils/guid';
+import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 
 function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
@@ -22,7 +23,6 @@ function _defaultCompare(o1: any, o2: any): boolean {
 export class DropdownSelectComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 
   @Input() multi = false;
-  @Input() small = false;
   @Input() deselectable = false;
   @Input() simpleLabel = false;
   @Input() noItemSelectedLabel = 'Välj';
@@ -33,15 +33,17 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() compareWith = _defaultCompare;
   @Input() labelId: string;
   @Input() value: any;
+  @Input() width: string;
+  @Input() small = false;
 
   @Output() selectedChanged = new EventEmitter<any>();
   @Output() expandedChanged = new EventEmitter<boolean>();
 
-  @ViewChild('dropdown') dropdown: ElementRef;
-  @ViewChild('header') header: ElementRef;
-  @ViewChild('selectAll') selectAll: ElementRef;
-  @ViewChild('deselectButton') deselectButton: ButtonComponent;
-  @ViewChild('filter') filter: ElementRef;
+  @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
+  @ViewChild('header', { static: true }) header: ElementRef;
+  @ViewChild('selectAll', { static: false }) selectAll: ElementRef;
+  @ViewChild('deselectButton', { static: false }) deselectButton: ButtonComponent;
+  @ViewChild(FilterTextboxComponent, { static: false }) filter: FilterTextboxComponent;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
   expanded = false;
@@ -92,7 +94,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       this.setMultiOnItems();
     }
 
-    if (changes.noItemSelectedLabel && changes.noItemSelectedLabel.firstChange || (this.items && !this.items.some(x => x.selected))) {
+    if (changes.noItemSelectedLabel && changes.noItemSelectedLabel.firstChange || (this.items && !this.items.some(item => item.selected))) {
       this.label = this.noItemSelectedLabel;
     }
   }
@@ -181,7 +183,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   filterItems() {
-    const value = this.filter.nativeElement.value;
+    console.log('filterItems');
+    console.log('value', this.filter.value);
+    const value = this.filter.value;
 
     if (this.items) {
       this.items.forEach(item => {
@@ -194,7 +198,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   deselectItems() {
-    const selecedItem = this.items.find(x => x.selected);
+    const selecedItem = this.items.find(item => item.selected);
     if (selecedItem) {
       selecedItem.selected = false;
       this.label = this.noItemSelectedLabel;
@@ -207,16 +211,16 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   toggleSelectAll() {
     if (this.allSelected) {
       this.allSelected = false;
-      this.items.forEach(x => x.selected = false);
+      this.items.forEach(item => item.selected = false);
       this.label = this.noItemSelectedLabel;
       this.toggleSelectAllLabel = this.selectAllLabel;
       this.onChange(null);
     } else {
       this.allSelected = true;
-      this.items.forEach(x => x.selected = true);
+      this.items.forEach(item => item.selected = true);
       this.setLabel(this.items.toArray());
       this.toggleSelectAllLabel = this.deselectAllLabel;
-      const values = this.items.map(x => x.value);
+      const values = this.items.map(item => item.value);
       this.onChange(values);
     }
   }
@@ -254,10 +258,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       event.preventDefault();
       if (this.filterVisible) {
         setTimeout(() => {
-          this.filter.nativeElement.focus();
+          this.filter.focus();
         });
       } else {
-        const filteredItems = this.items.filter(x => x.visible);
+        const filteredItems = this.items.filter(item => item.visible);
         if (filteredItems.length) {
           setTimeout(() => {
             filteredItems[0].focus();
@@ -266,7 +270,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       }
     } else if (event.key === 'End') {
       event.preventDefault();
-      const filteredItems = this.items.filter(x => x.visible);
+      const filteredItems = this.items.filter(item => item.visible);
       if (filteredItems.length) {
         setTimeout(() => {
           filteredItems[filteredItems.length - 1].focus();
@@ -279,14 +283,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (event.key === 'Enter') {
       this.expand();
 
-      const selectedItems = this.items.filter(x => x.selected);
+      const selectedItems = this.items.filter(item => item.selected);
       if (selectedItems.length) {
         setTimeout(() => {
           selectedItems[0].focus();
         });
       } else if (this.filterVisible) {
         setTimeout(() => {
-          this.filter.nativeElement.focus();
+          this.filter.focus();
         });
       } else if (this.items.length) {
         setTimeout(() => {
@@ -313,7 +317,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         });
       } else if (this.filterVisible) {
         setTimeout(() => {
-          this.filter.nativeElement.focus();
+          this.filter.focus();
         });
       } else if (this.items.length) {
         setTimeout(() => {
@@ -340,7 +344,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         });
       } else if (this.filterVisible) {
         setTimeout(() => {
-          this.filter.nativeElement.focus();
+          this.filter.focus();
         });
       } else if (this.items.length) {
         setTimeout(() => {
@@ -359,7 +363,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   onFilterKeydown(event: KeyboardEvent) {
-    const filteredItems = this.items.filter(x => x.visible);
+    console.log(event);
+    const filteredItems = this.items.filter(item => item.visible);
 
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       event.stopPropagation();
@@ -375,7 +380,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   onDeselectKeydown(event: KeyboardEvent) {
-    const filteredItems = this.items.filter(x => x.visible);
+    const filteredItems = this.items.filter(item => item.visible);
 
     if (event.key === ' ' || event.key === 'Spacebar') {
       this.deselectItems();
@@ -385,13 +390,13 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       }
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
       if (this.filterVisible) {
-        this.filter.nativeElement.focus();
+        this.filter.focus();
       }
     }
   }
 
   onSelectAllKeydown(event: KeyboardEvent) {
-    const filteredItems = this.items.filter(x => x.visible);
+    const filteredItems = this.items.filter(item => item.visible);
 
     if (event.key === 'ArrowDown' || event.key === 'Down') {
       if (filteredItems.length) {
@@ -399,7 +404,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       }
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
       if (this.filterVisible) {
-        this.filter.nativeElement.focus();
+        this.filter.focus();
       }
     } else if (event.key === ' ' || event.key === 'Spacebar') {
       this.toggleSelectAll();
@@ -418,7 +423,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     this.expanded = false;
 
     if (this.filter) {
-      this.filter.nativeElement.value = '';
+      this.filter.value = '';
       this.filterItems();
     }
 
@@ -438,7 +443,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   private setMultiOnItems() {
-    this.items.forEach(x => x.multi = this.multi);
+    this.items.forEach(item => item.multi = this.multi);
   }
 
   private subscribeToItems() {
@@ -462,12 +467,12 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       item.toggle
         .pipe(takeUntil(this.ngUnsubscribeItems))
         .subscribe(() => {
-          const selectedItems = this.items.filter(x => x.selected);
+          const selectedItems = this.items.filter(i => i.selected);
           if (selectedItems.length) {
             this.allSelected = selectedItems.length === this.items.length;
             this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
             this.setLabel(selectedItems);
-            const values = selectedItems.map(x => x.value);
+            const values = selectedItems.map(i => i.value);
             this.onChange(values);
           } else {
             this.allSelected = false;
@@ -480,11 +485,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         .pipe(takeUntil(this.ngUnsubscribeItems))
         .subscribe(() => {
           if (this.multi) {
-            const selectedItems = this.items.filter(x => x.selected);
+            const selectedItems = this.items.filter(i => i.selected);
             this.allSelected = selectedItems.length === this.items.length;
             this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
             this.setLabel(selectedItems);
-            const values = selectedItems.map(x => x.value);
+            const values = selectedItems.map(i => i.value);
             this.onChange(values);
           } else {
             this.items.forEach(x => {
@@ -502,8 +507,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   private focusPreviousItem(item: DropdownItemComponent) {
-    const filteredItems = this.items.filter(x => x.visible);
-    const itemIndex = filteredItems.findIndex(x => x === item);
+    const filteredItems = this.items.filter(i => i.visible);
+    const itemIndex = filteredItems.findIndex(i => i === item);
 
     if (itemIndex > 0) {
       filteredItems[itemIndex - 1].focus();
@@ -512,13 +517,13 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     } else if (this.deselectable) {
       this.deselectButton.focus();
     } else if (this.filterVisible) {
-      this.filter.nativeElement.focus();
+      this.filter.focus();
     }
   }
 
   private focusNextItem(item: DropdownItemComponent) {
-    const filteredItems = this.items.filter(x => x.visible);
-    const itemIndex = filteredItems.findIndex(x => x === item);
+    const filteredItems = this.items.filter(i => i.visible);
+    const itemIndex = filteredItems.findIndex(i => i === item);
 
     if (itemIndex < (filteredItems.length - 1)) {
       filteredItems[itemIndex + 1].focus();
@@ -528,16 +533,16 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private focusNextMatchingItem(item: DropdownItemComponent, query: string) {
     if (!this.matchQuery) {
       setTimeout(() => {
-        const filteredItems = this.items.filter(x => x.visible);
-        const itemIndex = filteredItems.findIndex(x => x === item);
+        const filteredItems = this.items.filter(i => i.visible);
+        const itemIndex = filteredItems.findIndex(i => i === item);
 
         const match =
           filteredItems.slice(itemIndex + 1)
             .concat(filteredItems.slice(0, itemIndex))
-            .find(x => x.label.toLowerCase().startsWith(this.matchQuery));
+            .find(i => i.label.toLowerCase().startsWith(this.matchQuery));
 
         if (match) {
-          const matchIndex = filteredItems.findIndex(x => x === match);
+          const matchIndex = filteredItems.findIndex(i => i === match);
           filteredItems[matchIndex].focus();
         }
 
@@ -560,7 +565,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         this.label = `${selectedItems.length} valda`;
       }
     } else {
-      const labels = selectedItems.map(x => x.selectedLabel || x.label);
+      const labels = selectedItems.map(item => item.selectedLabel || item.label);
       if (labels.length) {
         this.label = labels.reduce((xs, x) => xs = `${xs}, ${x}`);
       } else {

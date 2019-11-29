@@ -15,6 +15,8 @@ export { InputComponent } from './controls/input/input.component';
 export { CardSectionComponent } from './controls/card/cardSection.component';
 export { TitleValueComponent } from './controls/titleValue/titleValue.component';
 export { TitleValueLayoutComponent } from './controls/titleValue/titleValueLayout.component';
+export { TitleValueContainerComponent } from './controls/titleValue/titleValueContainer/titleValueContainer.component';
+export { TitleValueHeadingComponent } from './controls/titleValue/titleValueHeading/titleValueHeading.component';
 export { LoaderComponent } from './controls/loader/loader.component';
 export { ListComponent } from './controls/list/list.component';
 export { ListHeaderComponent, SortChangedArgs } from './controls/list/list-header.component';

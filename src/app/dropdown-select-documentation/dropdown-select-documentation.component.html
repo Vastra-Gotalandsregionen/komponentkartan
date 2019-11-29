@@ -2,10 +2,10 @@
   <div class="docs__overview">
     <p>Dropdown select finns i två bredder, har en rad olika alternativ och följer temafärg.</p>
     <vgr-dropdown-select>
-        <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
-        <vgr-dropdown-item>Banan</vgr-dropdown-item>
-        <vgr-dropdown-item>Citron</vgr-dropdown-item>
-      </vgr-dropdown-select>
+      <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
+      <vgr-dropdown-item>Banan</vgr-dropdown-item>
+      <vgr-dropdown-item>Citron</vgr-dropdown-item>
+    </vgr-dropdown-select>
 
     <p>Detta händer automatiskt:</p>
     <ul>
@@ -29,43 +29,23 @@
     </p>
   </div>
   <div class="docs__examples">
-    <div style="display: flex">
-      <div style="margin-right: 20px">
-        <div>
+    <section>
+      <div class="row-layout">
+        <div class="one-third">
           Liten, 5 alternativ
-        </div>
-        <div>
           <vgr-dropdown-select [small]="true" [deselectable]="true">
             <vgr-dropdown-item *ngFor="let item of items5">{{item}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
-      </div>
-      <div style="margin-right: 20px">
-        <div>
+        <div class="one-third">
           Stor, 50 alternativ
-        </div>
-        <div>
           <vgr-dropdown-select>
             <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
-      </div>
-      <div style="margin-right: 20px">
-        <div>
-          Val av flera alternativ
-        </div>
-        <div>
-          <vgr-dropdown-select [multi]="true" [simpleLabel]="true">
-            <vgr-dropdown-item *ngFor="let item of items10">{{item}}</vgr-dropdown-item>
-          </vgr-dropdown-select>
-        </div>
-      </div>
-      <div>
-        <div>
+        <div class="one-third">
           Alternativ med extra information
-        </div>
-        <div>
-          <vgr-dropdown-select [multi]="true">
+          <vgr-dropdown-select [multi]="true" [width]="'100%'">
             <vgr-dropdown-item *ngFor="let item of items50" [selectedLabel]="item">
               <div>{{item}}</div>
               <div style="font-style: italic">Information</div>
@@ -73,51 +53,31 @@
           </vgr-dropdown-select>
         </div>
       </div>
-    </div>
-    <div style="display: flex; margin-top: 20px">
-      <div style="margin-right: 20px">
-        <div>
+    </section>
+    <section>
+      <div class="row-layout">
+        <div class="one-third">
           Aktiv
-        </div>
-        <div>
           <vgr-dropdown-select [small]="true" [formControl]="form">
-              <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
+            <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
-      </div>
-      <div style="margin-right: 20px">
-        <div>
+        <div class="one-third">
           Inaktiv
-        </div>
-        <div>
           <vgr-dropdown-select [small]="true" [disabled]="true" [formControl]="form">
             <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
-      </div>      
-      <div style="margin-right: 20px">
-        <div>
+        <div class="one-third">
           Endast visning
-        </div>
-        <div>
-          <vgr-dropdown-select [small]="true" [readonly]="true" [formControl]="form">
-              <vgr-dropdown-item [value]="itemValue">
-                {{itemLabel}}
-              </vgr-dropdown-item>
+          <vgr-dropdown-select [small]="false" [readonly]="true" [formControl]="form">
+            <vgr-dropdown-item [value]="itemValue">
+              {{itemLabel}}
+            </vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
       </div>
-      <div style="max-width: 292px;">
-        <div style="margin-bottom: 4px;">
-          <vgr-button [buttonStyle]="'secondary'" (click)="testReadonly=!testReadonly">Testa endast visning flera valda</vgr-button>
-        </div>
-        <div>
-          <vgr-dropdown-select [multi]="true" [readonly]="testReadonly">
-            <vgr-dropdown-item *ngFor="let item of items10">{{item}}</vgr-dropdown-item>
-          </vgr-dropdown-select>
-        </div>
-      </div>      
-    </div>
+    </section>
   </div>
   <div class="docs__api">
     <h2>DropdownSelect</h2>
@@ -214,7 +174,8 @@
       </tr>
       <tr>
         <td>selectedChanged: EventEmitter&lt;any&gt;</td>
-        <td>Event som triggas när val ändras av användaren. Värdet är <code>true</code> om alternativet valts och <code>false</code>
+        <td>Event som triggas när val ändras av användaren. Värdet är <code>true</code> om alternativet valts och
+          <code>false</code>
           om det avvalts. Används av <code>&lt;vgr-dropdown-select&gt;</code>.</td>
         <td></td>
       </tr>

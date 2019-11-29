@@ -15,7 +15,7 @@ export class FilterTextboxComponent {
 
   @Output() valueChanged = new EventEmitter<string>();
 
-  @ViewChild('filterTextbox') filterTextbox: ElementRef;
+  @ViewChild('filterTextbox', { static: true }) filterTextbox: ElementRef;
 
   hasFocus: boolean;
   private _value: string;

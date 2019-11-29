@@ -39,4 +39,12 @@ export class KomponentkartanApplicationComponent implements OnInit {
     this.userName = 'Göte Borg';
     this.systemText = `<localhost> vgr-komponentkartan version: ${this.komponentkartanVersion}, Angular: ${this.angularVersion} och Angular-Cli: ${this.angularCliVersion}`;
   }
+  changeTheme(theme) {
+    const root = document.getElementById('theme-root');
+    const colors = ['neutral', 'blue', 'red', 'green', 'pinkie'];
+
+    colors.map(color => root.classList.remove(`theme--${color}`));
+
+    root.classList.add(`theme--${theme}`);
+  }
 }

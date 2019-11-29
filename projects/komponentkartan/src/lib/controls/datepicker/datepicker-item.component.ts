@@ -18,7 +18,7 @@ export class DatepickerItemComponent implements OnInit {
   @Output() previousRow = new EventEmitter<Date>();
   @Output() nextRow = new EventEmitter<Date>();
 
-  @ViewChild('item') item: ElementRef;
+  @ViewChild('item', { static: true }) item: ElementRef;
   dateFormat: string;
   ariaDateFormat: string;
   current: boolean;

@@ -1,9 +1,8 @@
 
 import {map} from 'rxjs/operators';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { CityService } from './cityService';
-import { OnInit, OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import { Subject } from 'rxjs';
 

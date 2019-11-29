@@ -1,16 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import {
-  Component,
-  EventEmitter,
-  forwardRef,
-  Host,
-  Input,
-  OnChanges,
-  OnInit,
-  Optional,
-  Output,
-  SimpleChanges,
-  SkipSelf,
+  Component, EventEmitter, forwardRef, Host, Input, OnChanges, OnInit, Optional, Output, SimpleChanges, SkipSelf
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -18,13 +8,11 @@ import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCES
 @Component({
   selector: 'vgr-input',
   templateUrl: './input.component.html',
-
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => InputComponent),
     multi: true,
   }]
-
 })
 export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() showValidation = true;
@@ -37,12 +25,15 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() maxlength?: number;
   @Input() errorMessage = {};
   @Input() readonly?: boolean;
-  @Input() small: boolean;
   @Input() alignRight: boolean;
+  @Input() small: boolean;
+  @Input() width: string;
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;
   @Output() valueChanged: EventEmitter<any>;
+
+
 
   get errorClass() {
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;

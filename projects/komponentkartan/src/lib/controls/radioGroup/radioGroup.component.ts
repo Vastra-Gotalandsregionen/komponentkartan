@@ -1,7 +1,4 @@
-import {
-    Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, Renderer, OnChanges, AfterViewInit,
-    SkipSelf, Optional, Host
-} from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, OnChanges, AfterViewInit, SkipSelf, Optional, Host, Renderer2 } from '@angular/core';
 import { SelectableItem } from '../../models/selectableItem.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 import { Guid } from '../../utils/guid';
@@ -44,11 +41,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         return this.radiogroupItems.every((x) => (x.selected === false || x.selected === undefined));
     }
 
-    get classRenderer(): Renderer {
-        return this.renderer;
-    }
-
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
+    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer2) {
     }
 
     ngOnChanges() {
@@ -79,7 +72,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
 
         if (this.renderer) {
             const position = this.radiogroupItems.indexOf(option);
-            this.renderer.invokeElementMethod(this.elements[position], 'focus');
+            this.elements[position].focus();
         }
     }
 
@@ -110,18 +103,18 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         const enabledOptions = this.radiogroupItems.filter(x => !x.disabled);
         if (direction === 'forward') {
             if (position + 1 === enabledOptions.length) {
-                this.renderer.invokeElementMethod(this.elements[0], 'focus');
+                this.elements[0].focus();
                 this.optionClicked(enabledOptions[0]);
             } else {
-                this.renderer.invokeElementMethod(this.elements[position + 1], 'focus');
+                this.elements[position + 1].focus();
                 this.optionClicked(nextItem);
             }
         } else if (direction === 'back') {
             if (position === 0) {
-                this.renderer.invokeElementMethod(this.elements[this.radiogroupItems.length - 1], 'focus');
+                this.elements[this.radiogroupItems.length - 1].focus();
                 this.optionClicked(this.radiogroupItems[enabledOptions.length - 1]);
             } else {
-                this.renderer.invokeElementMethod(this.elements[position - 1], 'focus');
+                this.elements[position - 1].focus();
                 this.optionClicked(previousItem);
             }
         }

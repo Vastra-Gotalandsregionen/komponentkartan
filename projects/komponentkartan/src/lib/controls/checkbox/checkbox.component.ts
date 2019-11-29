@@ -1,7 +1,4 @@
-import {
-    Component, Input, EventEmitter, Output, OnChanges, HostBinding, forwardRef, SkipSelf,
-    Optional, Host, ElementRef, Renderer, AfterViewInit
-} from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges, HostBinding, forwardRef, SkipSelf, Optional, Host, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 import { Guid } from '../../utils/guid';
 
@@ -26,7 +23,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     public labelledbyid: string = Guid.newGuid();
     public element: any;
 
-    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer2) {
         this.disabled = false;
         this.checked = false;
 
@@ -45,7 +42,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     onClick(event: Event): void {
         if (!this.disabled) {
             this.checked = !this.checked;
-            if (this.element) { this.renderer.invokeElementMethod(this.element, 'focus'); }
+            if (this.element) { this.element.focus(); }
             this.onChange(this.checked);
             this.checkedChanged.emit(this.checked);
             event.cancelBubble = true;
