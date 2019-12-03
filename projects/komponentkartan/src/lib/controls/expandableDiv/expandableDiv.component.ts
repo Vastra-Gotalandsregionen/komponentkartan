@@ -74,16 +74,12 @@ export class ExpandableDivComponent {
   constructor(private elementRef: ElementRef) { }
 
   animationStart(event: AnimationEvent) {
-    console.log('animationStart' + event.fromState);
-    console.log('animationStart'  + event.toState);
     if (event.toState === 'collapsed') {
       this.elementRef.nativeElement.style['overflow'] = 'hidden';
     }
   }
 
   animationDone(event: AnimationEvent) {
-    console.log('animationDone' + event.fromState);
-    console.log('animationDone'  + event.toState);
     if (event.toState === 'expanded') {
       this.elementRef.nativeElement.style['overflow'] = 'visible';
     }
