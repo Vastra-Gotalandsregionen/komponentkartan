@@ -1,7 +1,7 @@
 import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges, ElementRef, OnDestroy } from '@angular/core';
 import { GridContentComponent } from './grid-content.component';
 import { GridService } from './grid.service';
-import { toggleExpandedState } from '../../animation';
+import { toggleExpandedState, toggleRow } from '../../animation';
 import { NotificationComponent } from '../notification/notification.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -9,7 +9,10 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'vgr-grid-row',
   templateUrl: './grid-row.component.html',
-  animations: [toggleExpandedState]
+  animations: [
+    toggleExpandedState,
+    toggleRow
+  ]
 })
 export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy {
 

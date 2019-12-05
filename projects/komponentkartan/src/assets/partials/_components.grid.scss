@@ -62,7 +62,8 @@ vgr-grid {
     width: 100%;
     padding: 0;
     align-items: initial;
-    &.ng-animating {
+    &.ng-animating,
+    &.collapsed {
       overflow:hidden !important;
       align-items: flex-start !important;
     }

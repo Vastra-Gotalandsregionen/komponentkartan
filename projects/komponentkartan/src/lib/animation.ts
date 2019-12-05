@@ -19,6 +19,20 @@ export const toggleExpandedState = trigger('toggleExpandedState', [
     ], { params: { speed: '0.4s' } }),
 ]);
 
+export const toggleRow = trigger('toggleRow', [
+    state('void', style({
+        height: '0'
+    })),
+    state('false', style({
+        height: '0'
+    })),
+    state('true', style({
+        height: '*'
+    })),
+    transition('* => true', [animate('0.4s ease')]),
+    transition('* => false', [animate('0.4s ease')])
+]);
+
 export const toggleFadedState = trigger('toggleFadedState', [
     transition(':enter', [
         style({ opacity: 0 }),

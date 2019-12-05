@@ -16,6 +16,7 @@
 }
 
 .card-section__content {
+  background: red;
   overflow:hidden;
   &.overflow-visible {
     overflow: visible;
@@ -132,4 +133,10 @@
   .card__top {
     padding-top: 0px;
   }
+}
+
+
+vgr-card-section {
+  display: block;
+  border: 1px solid pink;
 }
