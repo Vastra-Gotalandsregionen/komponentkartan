@@ -12,7 +12,7 @@ Version 5: släppt 18 Juni, för mer information om releasen och innehåll: [Rea
 
 ## Planerade releaser
 Under 2019 har följande datum satt för release av major-versioner
-* Version 6: November 2019
+* Version 6: December 2019
 
 ## Komma igång
 
