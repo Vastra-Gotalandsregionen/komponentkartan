@@ -15,7 +15,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
 
   @Input() expanded = false;
   @Input() preventCollapse = false;
-  @Input() animationSpeed = '.4s ease';
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
   @Output() expandPrevented: EventEmitter<any> = new EventEmitter();
   @Output() collapsePrevented: EventEmitter<any> = new EventEmitter();
@@ -23,6 +22,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   @ContentChildren(GridContentComponent) content: QueryList<GridContentComponent>;
   @ContentChildren(NotificationComponent) notifications: QueryList<NotificationComponent>;
 
+  animationSpeed = '400ms';
   hasExpandablecontent = true;
   hasNotifications = false;
   isExpanded = false;
@@ -31,10 +31,19 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   private ngUnsubscribe = new Subject();
   constructor(private gridService: GridService, public el: ElementRef) { }
 
+  get expandedState() {
+    return {
+      value: this.isExpanded,
+      params: {
+        speed: this.animationSpeed
+      }
+    };
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     const expandedChange = changes['expanded'];
     if (expandedChange && expandedChange.currentValue !== this.isExpanded) {
-      if (expandedChange.isFirstChange()) {
+      if (expandedChange.firstChange) {
         this.isExpanded = expandedChange.currentValue;
       } else {
         this.toggleExpanded();

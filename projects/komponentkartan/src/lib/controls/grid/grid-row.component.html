@@ -7,7 +7,7 @@
       <ng-content select="vgr-notification"></ng-content>
     </div>
   </div>
-  <div class="grid-row-content" [@toggleExpandedState]="{value: isExpanded, params: {speed: animationSpeed}}">
+  <div class="grid-row-content" [@toggleExpandedState]="expandedState">
     <ng-content select="vgr-grid-content"></ng-content>
   </div>
 </div>

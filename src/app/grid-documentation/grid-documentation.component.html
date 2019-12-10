@@ -96,7 +96,7 @@
     <vgr-grid (sortChanged)="sort($event)" toggleAnimation="slow" [stickyHeader]="true">
       <vgr-grid-header-toolbar>
         <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
-          <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad (toggle SLOW)
+          <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad
         </vgr-button>
       </vgr-grid-header-toolbar>
       <vgr-grid-header>
@@ -178,7 +178,7 @@
 
     <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false">
       <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = $event">
-        <vgr-grid-column width="23">toggle FAST Grid utan rubriker och snabb animeringen</vgr-grid-column>
+        <vgr-grid-column width="23">Grid utan rubriker och snabb animeringen</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded1" (expandedChanged)="expanded1 = $event">
