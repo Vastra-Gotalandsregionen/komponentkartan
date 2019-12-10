@@ -39,6 +39,60 @@
       </vgr-grid-row>
 
     </vgr-grid>
+    <vgr-grid>
+      <vgr-grid-header>
+        <vgr-grid-header-column [width]="5">Header 1</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="5">Header 2</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="5">Header 3</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="5">Header 4</vgr-grid-header-column>
+      </vgr-grid-header>
+      <!-- Funkar -->
+      <vgr-grid-row (expandedChanged)="visible1 = $event">
+        <vgr-grid-column [width]="5">Value 1</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 2</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 3</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 4</vgr-grid-column>
+        <vgr-grid-content>
+          <div *ngIf="visible1" style="background-color: red; width: 100%; height: 300px;"></div>
+        </vgr-grid-content>
+      </vgr-grid-row>
+      <!-- Funkar -->
+      <vgr-grid-row>
+
+        <vgr-grid-column [width]="5">Value 1</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 2</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 3</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 4</vgr-grid-column>
+        <vgr-grid-content>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              Text
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+              <div style="background-color: red; width: 100%; height: 300px;"></div>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
+        </vgr-grid-content>
+      </vgr-grid-row>
+      <!-- Funkar inte -->
+      <vgr-grid-row>
+        <vgr-grid-column [width]="5">Value 1</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 2</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 3</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 4</vgr-grid-column>
+        <vgr-grid-content>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              Text
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+              <div style="background-color: red; width: 100%; height: 300px;"></div>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
+        </vgr-grid-content>
+      </vgr-grid-row>
+    </vgr-grid>
+
     <vgr-grid (sortChanged)="sort($event)" toggleAnimation="slow" [stickyHeader]="true">
       <vgr-grid-header-toolbar>
         <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">

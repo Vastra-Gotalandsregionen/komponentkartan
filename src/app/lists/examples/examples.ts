@@ -87,21 +87,19 @@ export class Examples {
       children: ExamplePerson[];
   }`;
 
-  htmlListWithExpandableDiv = `<vgr-list [flexibleHeader]="true" (sortChanged)="onSortChanged($event)">
-  <vgr-list-header>
-    <vgr-list-column-header width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
-    <vgr-list-column-header width="5" sortKey="lastName">Efternamn</vgr-list-column-header>
-    <vgr-list-column-header width="5" sortKey="occupation">Yrke</vgr-list-column-header>
-    <vgr-list-column-header align="right" width="5" sortKey="income">Inkomst</vgr-list-column-header>
-  </vgr-list-header>
-  <vgr-list-item *ngFor="let row of peopleRowsSimpleList">
-    <vgr-list-item-header>
-      <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
-      <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
-      <vgr-list-column width="5">{{row.occupation}}</vgr-list-column>
-      <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
-    </vgr-list-item-header>
-    <vgr-list-item-content>
+  htmlListWithExpandableDiv = `<vgr-grid [stickyHeader]="false" (sortChanged)="onSortChanged($event)">
+  <vgr-grid-header>
+    <vgr-grid-header-column width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-grid-header-column>
+    <vgr-grid-header-column width="5" sortKey="lastName">Efternamn</vgr-grid-header-column>
+    <vgr-grid-header-column width="5" sortKey="occupation">Yrke</vgr-grid-header-column>
+    <vgr-grid-header-column align="right" width="5" sortKey="income">Inkomst</vgr-grid-header-column>
+  </vgr-grid-header>
+  <vgr-grid-row *ngFor="let row of peopleRowsSimpleList">
+      <vgr-grid-column width="5">{{row.firstName}}</vgr-grid-column>
+      <vgr-grid-column width="5">{{row.lastName}}</vgr-grid-column>
+      <vgr-grid-column width="5">{{row.occupation}}</vgr-grid-column>
+      <vgr-grid-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-grid-column>
+    <vgr-grid-content>
       <vgr-expandable-div *ngFor="let row of row.children" [expanded]="false">
         <vgr-expandable-div-header>
           <h2>Barn</h2>
@@ -112,9 +110,9 @@ export class Examples {
           <span>Efternamn: {{row.lastName}}</span>
         </vgr-expandable-div-content>
       </vgr-expandable-div>
-    </vgr-list-item-content>
-  </vgr-list-item>
-</vgr-list>`;
+    </vgr-grid-content>
+  </vgr-grid-row>
+</vgr-grid>`;
 
 
   typeScriptSimpleListMarkup = `import { Component, OnInit } from '@angular/core';
