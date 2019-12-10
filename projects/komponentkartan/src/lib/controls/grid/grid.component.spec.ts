@@ -126,96 +126,96 @@ describe('GridComponent', () => {
           expect(rowElements[2].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
         });
       });
+    });
 
-      describe('and is initialized with one expanded and many collapsed rows', () => {
+    describe('and is initialized with one expanded and many collapsed rows', () => {
+      beforeEach(() => {
+        testComponent.rows = [
+          { text: '0', expanded: false, preventCollapse: false },
+          { text: '1', expanded: true, preventCollapse: false },
+          { text: '2', expanded: false, preventCollapse: false }
+        ];
+        fixture.detectChanges();
+        rowElements = rootElement.queryAll(By.css('vgr-grid-row'));
+      });
+      describe('and a collapsed row is clicked', () => {
+        beforeEach(fakeAsync(() => {
+          const rowHeader = rowElements[0].query(By.css('.grid-row-container > div'));
+          rowHeader.triggerEventHandler('click', {});
+          tick(400);
+          fixture.detectChanges();
+        }));
+        it('it is expanded', () => {
+          expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(true);
+        });
+        it('all other rows are collapsed', () => {
+          expect(rowElements[1].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
+          expect(rowElements[2].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
+        });
+      });
+    });
+
+    describe('and is initialized with an expanded row that prevents collapse', () => {
+      let spyCollapsePrevented: jasmine.Spy;
+      beforeEach(fakeAsync(() => {
+        testComponent.rows = [
+          { text: '0', expanded: true, preventCollapse: true },
+          { text: '1', expanded: false, preventCollapse: false },
+          { text: '2', expanded: false, preventCollapse: false }
+        ];
+        fixture.detectChanges();
+        tick(400);
+        rowElements = rootElement.queryAll(By.css('vgr-grid-row'));
+        spyCollapsePrevented = spyOn(rowElements[0].componentInstance.collapsePrevented, 'emit');
+      }));
+      describe('and it is clicked', () => {
         beforeEach(() => {
-          testComponent.rows = [
-            { text: '0', expanded: false, preventCollapse: false },
-            { text: '1', expanded: true, preventCollapse: false },
-            { text: '2', expanded: false, preventCollapse: false }
-          ];
+          const rowHeader = rowElements[0].query(By.css('.grid-row-container > div'));
+          rowHeader.triggerEventHandler('click', {});
           fixture.detectChanges();
-          rowElements = rootElement.queryAll(By.css('vgr-grid-row'));
         });
-        describe('and a collapsed row is clicked', () => {
-          beforeEach(fakeAsync(() => {
-            const rowHeader = rowElements[0].query(By.css('.grid-row-container > div'));
-            rowHeader.triggerEventHandler('click', {});
-            tick(400);
-            fixture.detectChanges();
-          }));
-          it('it is expanded', () => {
-            expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(true);
-          });
-          it('all other rows are collapsed', () => {
-            expect(rowElements[1].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
-            expect(rowElements[2].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
-          });
+        it('it is still expanded', () => {
+          expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(true);
+        });
+        it('it emits collapsePrevented event', () => {
+          expect(spyCollapsePrevented).toHaveBeenCalled();
         });
       });
+    });
 
-      describe('and is initialized with an expanded row that prevents collapse', () => {
-        let spyCollapsePrevented: jasmine.Spy;
+    describe('and is initialized with an expanded row that prevents collapse', () => {
+      let spyCollapsePrevented: jasmine.Spy;
+      let spyExpandPrevented: jasmine.Spy;
+      beforeEach(fakeAsync(() => {
+        testComponent.rows = [
+          { text: '0', expanded: false, preventCollapse: false },
+          { text: '1', expanded: true, preventCollapse: true },
+          { text: '2', expanded: false, preventCollapse: false }
+        ];
+        fixture.detectChanges();
+        tick(400);
+        rowElements = rootElement.queryAll(By.css('vgr-grid-row'));
+        spyCollapsePrevented = spyOn(rowElements[1].componentInstance.collapsePrevented, 'emit');
+        spyExpandPrevented = spyOn(rowElements[0].componentInstance.expandPrevented, 'emit');
+      }));
+      describe('and another row is clicked', () => {
         beforeEach(fakeAsync(() => {
-          testComponent.rows = [
-            { text: '0', expanded: true, preventCollapse: true },
-            { text: '1', expanded: false, preventCollapse: false },
-            { text: '2', expanded: false, preventCollapse: false }
-          ];
+          const rowHeader = rowElements[0].query(By.css('.grid-row-container > div'));
+          rowHeader.triggerEventHandler('click', {});
+          tick();
           fixture.detectChanges();
-          tick(400);
-          rowElements = rootElement.queryAll(By.css('vgr-grid-row'));
-          spyCollapsePrevented = spyOn(rowElements[0].componentInstance.collapsePrevented, 'emit');
         }));
-        describe('and it is clicked', () => {
-          beforeEach(() => {
-            const rowHeader = rowElements[0].query(By.css('.grid-row-container > div'));
-            rowHeader.triggerEventHandler('click', {});
-            fixture.detectChanges();
-          });
-          it('it is still expanded', () => {
-            expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(true);
-          });
-          it('it emits collapsePrevented event', () => {
-            expect(spyCollapsePrevented).toHaveBeenCalled();
-          });
+        it('clicked row emits an expandPrevented event', () => {
+          expect(spyExpandPrevented).toHaveBeenCalled();
         });
-      });
-
-      describe('and is initialized with an expanded row that prevents collapse', () => {
-        let spyCollapsePrevented: jasmine.Spy;
-        let spyExpandPrevented: jasmine.Spy;
-        beforeEach(fakeAsync(() => {
-          testComponent.rows = [
-            { text: '0', expanded: false, preventCollapse: false },
-            { text: '1', expanded: true, preventCollapse: true },
-            { text: '2', expanded: false, preventCollapse: false }
-          ];
-          fixture.detectChanges();
-          tick(400);
-          rowElements = rootElement.queryAll(By.css('vgr-grid-row'));
-          spyCollapsePrevented = spyOn(rowElements[1].componentInstance.collapsePrevented, 'emit');
-          spyExpandPrevented = spyOn(rowElements[0].componentInstance.expandPrevented, 'emit');
-        }));
-        describe('and another row is clicked', () => {
-          beforeEach(fakeAsync(() => {
-            const rowHeader = rowElements[0].query(By.css('.grid-row-container > div'));
-            rowHeader.triggerEventHandler('click', {});
-            tick();
-            fixture.detectChanges();
-          }));
-          it('clicked row emits an expandPrevented event', () => {
-            expect(spyExpandPrevented).toHaveBeenCalled();
-          });
-          it('clicked row is still collapsed', () => {
-            expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
-          });
-          it('it emits a collapsePrevented event', () => {
-            expect(spyCollapsePrevented).toHaveBeenCalled();
-          });
-          it('it is still expanded', () => {
-            expect(rowElements[1].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(true);
-          });
+        it('clicked row is still collapsed', () => {
+          expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
+        });
+        it('it emits a collapsePrevented event', () => {
+          expect(spyCollapsePrevented).toHaveBeenCalled();
+        });
+        it('it is still expanded', () => {
+          expect(rowElements[1].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(true);
         });
       });
     });
