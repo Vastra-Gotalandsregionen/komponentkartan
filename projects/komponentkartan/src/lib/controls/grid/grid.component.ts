@@ -146,8 +146,6 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   setAnimationSpeed() {
-    console.log('Rows count:' + this.rows.length);
-    console.log('Set animation speed: ' + this.animationSpeed);
     this.rows.forEach(row => {
       row.animationSpeed = this.animationSpeed;
     });
