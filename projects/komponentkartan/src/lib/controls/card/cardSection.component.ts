@@ -1,46 +1,22 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { trigger, style, transition, animate, state } from '@angular/animations';
+import { toggleExpandedState , toggleChevron } from '../../animation';
 
 @Component({
     selector: 'vgr-card-section',
     templateUrl: './cardSection.component.html',
-    animations: [
-        trigger('toggleExpandedState', [
-            transition(':enter', [
-                style({ height: '0'}),
-                animate('0.4s ease', style({ height: '*' })),
-            ]),
-            transition(':leave', [
-                style({ height: '*'}),
-                animate('0.4s ease', style({ height: '0' })),
-            ]),
-        ]),
-        trigger('animateChevron', [
-            state('void', style({
-                transform: 'rotate(0deg)'
-            })),
-            state('false', style({
-                transform: 'rotate(0deg)'
-            })),
-            state('true', style({
-                transform: 'rotate(-180deg)'
-            })),
-            transition('* => true', [animate('0.4s ease')]),
-            transition('* => false', [animate('0.4s ease')])
-        ])
-    ]
+    animations: [ toggleExpandedState, toggleChevron ]
 })
 export class CardSectionComponent {
     @HostBinding('class.card-section') cardSectionClass = true;
     @Input() @HostBinding('class.card-section--expanded') expanded = false;
-    @Input() @HostBinding('class.card-section--readonly') readonly: boolean;
+    @Input() @HostBinding('class.card-section--readonly') readonly = true;
     @Input() title: string;
     @Input() subtitle: string;
     overflow = false;
-
+    animationSpeed = '.4s ease';
 
     toggleExpanded(event) {
-        if ( ( event instanceof KeyboardEvent && event.keyCode === 13 || event.keyCode === 32) || ( event instanceof MouseEvent ) ) {
+        if ((event instanceof KeyboardEvent && event.keyCode === 13 || event.keyCode === 32) || (event instanceof MouseEvent)) {
             this.overflow = false;
             setTimeout(() => {
                 this.expanded = !this.expanded;
@@ -49,9 +25,7 @@ export class CardSectionComponent {
         }
     }
 
-    constructor() {
-        this.readonly = true;
-    }
+    constructor() { }
 
     allowOverflow() {
         this.overflow = true;
