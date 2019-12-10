@@ -1,9 +1,11 @@
-<div class="expandable-div-header" (click)="expanded = !expanded" tabindex="0" [attr.aria-expanded]="_expanded" role="button">
-    <vgr-icon icon="chevron-down" size="sm" [className]="chevron_class"></vgr-icon>
+<div class="expandable-div">
+  <div class="expandable-div-header" (click)="toggleExpanded()" (keydown)="onKeydown($event)" tabindex="0"
+    [attr.aria-expanded]="expanded" role="button">
+    <vgr-icon icon="chevron-down" size="sm" [ngClass]="{ 'expanded': expanded, 'collapsed': !expanded }"></vgr-icon>
     <ng-content select="vgr-expandable-div-header"></ng-content>
   </div>
-  <div class="expandable-div-content" [@slideExpandableContent]="stateName" (@slideExpandableContent.done)="animationDone($event)"
-    (@slideExpandableContent.start)="animationStart($event)">
+  <div #content class="expandable-div-content" [@slideExpandableContent]="stateName"
+    (@slideExpandableContent.done)="animationDone($event)" (@slideExpandableContent.start)="animationStart($event)">
     <ng-content select="vgr-expandable-div-content"></ng-content>
   </div>
-  
+</div>
