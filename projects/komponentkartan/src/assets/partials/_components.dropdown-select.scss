@@ -69,7 +69,8 @@ vgr-dropdown-select {
       }
     }
   }
-  &.validation-error--editing   .dropdown-select__control .dropdown-select__menu {
+
+  &.validation-error--editing .dropdown-select__control .dropdown-select__menu {
     top: 50px
   }
 
@@ -93,6 +94,7 @@ vgr-dropdown-select {
         border-bottom: $border--single solid $control-border-color--default;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .dropdown-select__header__button {
