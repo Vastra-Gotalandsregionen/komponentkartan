@@ -69,7 +69,7 @@
           <vgr-list-column-header [width]="10" [sortKey]="'firstName'" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
           <vgr-list-column-header [width]="10" [sortKey]="'lastName'">Efternamn</vgr-list-column-header>
         </vgr-list-header>
-        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded" (deleted)="deleteEvent()">
+        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.previewObject.expanded" (deleted)="deleteEvent()">
           <vgr-list-item-header>
             <vgr-list-column [width]="10">{{row.previewObject.firstName}}</vgr-list-column>
             <vgr-list-column [width]="10">{{row.previewObject.lastName}}</vgr-list-column>
