@@ -13,7 +13,7 @@ export const toggleExpandedState = trigger('toggleExpandedState', [
         height: '0', overflow: 'hidden'
     })),
     state('true', style({
-        height: '*', overflow: 'hidden'
+        height: '*'
     })),
     transition('* => *', [animate('{{speed}}')],
         { params: { speed: '400ms ease' } }
