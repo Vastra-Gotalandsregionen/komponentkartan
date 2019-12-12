@@ -18,6 +18,13 @@
     transition: background .2s ease;
   }
 
+  &.list-notification {
+    margin-bottom: 2px;
+    &:before {
+      display: none;
+    }
+  }
+
   &.text:before,
   &.comment:before {
     background:$text-color--default;
