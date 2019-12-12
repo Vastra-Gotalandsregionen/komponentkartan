@@ -16,7 +16,10 @@
 }
 
 .card-section__content {
-  overflow:hidden;
+  position: relative;
+  &.ng-animate {
+    overflow: hidden;
+  }
   &.overflow-visible {
     overflow: visible;
   }

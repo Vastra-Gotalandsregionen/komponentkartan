@@ -19,7 +19,11 @@
 }
 
 .list-item {
-  // position: relative;
+  position: relative;
+  &:not(.list-item--expanded) {
+    overflow: hidden;
+  }
+  
   .list-item__header_wrapper {
     margin-left: -5px;
     padding-left: 5px;
