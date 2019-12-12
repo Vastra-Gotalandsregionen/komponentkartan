@@ -4,7 +4,7 @@
   <h4 class="card-section__header__subtitle" *ngIf="subtitle && subtitle.length>0" title="{{subtitle}}">
     {{subtitle|truncate:30}}</h4>
   <vgr-icon icon="pen" color="text" class="card-section__header__icon" size="sm"></vgr-icon>
-  <vgr-icon icon="chevron-down" size="sm" class="card-section__header__expander" [@animateChevron]="expanded">
+  <vgr-icon icon="chevron-down" size="sm" class="card-section__header__expander" [@toggleChevron]="expanded">
   </vgr-icon>
 </div>
 <div class="card-section__content" [@toggleExpandedState]="{value: expanded, params: {speed: animationSpeed}}"

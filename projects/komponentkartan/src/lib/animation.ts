@@ -24,7 +24,7 @@ export const toggleExpandedState = trigger('toggleExpandedState', [
     )
 ]);
 
-export const toggleChevron = trigger('animateChevron', [
+export const toggleChevron = trigger('toggleChevron', [
     state('false', style({
         transform: 'rotate(0deg)'
     })),
