@@ -53,6 +53,9 @@ describe('[ActionPanelComponent - Angular]', () => {
 
   describe('When clicking close button', () => {
     it('close method is called', () => {
+      component.showCloseButton = true;
+      fixture.detectChanges();
+
       const spy = spyOn(component, 'close');
       const buttonEl = componentEl.querySelector('vgr-close-button') as HTMLElement;
       buttonEl.click();
