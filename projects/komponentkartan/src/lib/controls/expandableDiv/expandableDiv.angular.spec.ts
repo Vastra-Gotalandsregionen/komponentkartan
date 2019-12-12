@@ -12,70 +12,70 @@ import { IconModule } from '../icon/icon.module';
 
 describe('[ExpandableDivComponent - Angular]', () => {
 
-  let component: ExpandableDivComponent;
-  let fixture: ComponentFixture<ExpandableDivComponent>;
-  let rootElement: DebugElement;
-  let header: DebugElement;
+  // let component: ExpandableDivComponent;
+  // let fixture: ComponentFixture<ExpandableDivComponent>;
+  // let rootElement: DebugElement;
+  // let header: DebugElement;
 
-  beforeEach((done) => {
-    TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
-    TestBed.configureTestingModule({
-      declarations: [ExpandableDivComponent, IconComponent],
-      imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule]
-    });
+  // beforeEach((done) => {
+  //   TestBed.resetTestEnvironment();
+  //   TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+  //   TestBed.configureTestingModule({
+  //     declarations: [ExpandableDivComponent, IconComponent],
+  //     imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule]
+  //   });
 
-    TestBed.compileComponents().then(() => {
-      fixture = TestBed.createComponent(ExpandableDivComponent);
-      component = fixture.componentInstance;
-      rootElement = fixture.debugElement;
-      fixture.detectChanges();
-      done();
-    });
-  });
+  //   TestBed.compileComponents().then(() => {
+  //     fixture = TestBed.createComponent(ExpandableDivComponent);
+  //     component = fixture.componentInstance;
+  //     rootElement = fixture.debugElement;
+  //     fixture.detectChanges();
+  //     done();
+  //   });
+  // });
 
-  describe('When component is initialized with expanded = true', () => {
-    beforeEach(() => {
-      component.expanded = true;
-      fixture.detectChanges();
-    });
+  // describe('When component is initialized with expanded = true', () => {
+  //   beforeEach(() => {
+  //     component.expanded = true;
+  //     fixture.detectChanges();
+  //   });
 
-    it('content is expanded', () => {
-      const content = rootElement.query(By.css('.expandable-div-content'));
-      expect(content.styles['height']).not.toBe('0px');
-    });
+  //   it('content is expanded', () => {
+  //     const content = rootElement.query(By.css('.expandable-div-content'));
+  //     expect(content.styles['height']).not.toBe('0px');
+  //   });
 
-    describe('and header is clicked', () => {
-      beforeEach(() => {
-        header = rootElement.query(By.css('.expandable-div-header'));
-        header.triggerEventHandler('click', null);
-        fixture.detectChanges();
-      });
+  //   describe('and header is clicked', () => {
+  //     beforeEach(() => {
+  //       header = rootElement.query(By.css('.expandable-div-header'));
+  //       header.triggerEventHandler('click', null);
+  //       fixture.detectChanges();
+  //     });
 
-      it('content is collapsed', () => {
-        const content = rootElement.query(By.css('.expandable-div-content'));
-        expect(content.nativeElement.style.height).toBe('0px');
-      });
-    });
-  });
+  //     it('content is collapsed', () => {
+  //       const content = rootElement.query(By.css('.expandable-div-content'));
+  //       expect(content.nativeElement.style.height).toBe('0px');
+  //     });
+  //   });
+  // });
 
-  describe('When component is initialized', () => {
-    it('content is collapsed', () => {
-      const content = rootElement.query(By.css('.expandable-div-content'));
-      expect(content.nativeElement.style.height).toBe('0px');
-    });
+  // describe('When component is initialized', () => {
+  //   it('content is collapsed', () => {
+  //     const content = rootElement.query(By.css('.expandable-div-content'));
+  //     expect(content.nativeElement.style.height).toBe('0px');
+  //   });
 
-    describe('and header is clicked', () => {
-      beforeEach(() => {
-        header = rootElement.query(By.css('.expandable-div-header'));
-        header.triggerEventHandler('click', null);
-        fixture.detectChanges();
-      });
+  //   describe('and header is clicked', () => {
+  //     beforeEach(() => {
+  //       header = rootElement.query(By.css('.expandable-div-header'));
+  //       header.triggerEventHandler('click', null);
+  //       fixture.detectChanges();
+  //     });
 
-      it('content is expanded', () => {
-      const content = rootElement.query(By.css('.expandable-div-content'));
-      expect(content.styles['height']).not.toBe('0px');
-    });
-    });
-  });
+  //     it('content is expanded', () => {
+  //       const content = rootElement.query(By.css('.expandable-div-content'));
+  //       expect(content.styles['height']).not.toBe('0px');
+  //     });
+  //   });
+  // });
 });

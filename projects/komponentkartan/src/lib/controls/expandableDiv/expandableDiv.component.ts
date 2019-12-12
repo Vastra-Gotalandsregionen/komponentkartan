@@ -1,40 +1,14 @@
-import { Input, Component, ElementRef, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { trigger, style, transition, animate, state, AnimationEvent } from '@angular/animations';
+import { Input, Component, Output, EventEmitter } from '@angular/core';
+import { toggleExpandedState, toggleChevron } from '../../animation';
 
 @Component({
   selector: 'vgr-expandable-div',
   templateUrl: './expandableDiv.component.html',
-  animations: [
-    trigger('slideExpandableContent', [
-      state('collapsed', style({
-        overflow: 'hidden',
-        height: '0'
-      })),
-      state('expanded', style({
-        overflow: 'visible',
-        height: '*',
-      })),
-      transition('expanded => collapsed',
-        animate('400ms ease-out')
-      ),
-      transition('collapsed => expanded',
-        animate('400ms ease-in')
-      )
-    ])
-  ]
+  animations: [toggleExpandedState, toggleChevron]
 })
-export class ExpandableDivComponent implements OnChanges {
+export class ExpandableDivComponent{
   @Input() expanded = false;
   @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @ViewChild('content', { static: true }) content: ElementRef;
-  stateName = 'collapsed';
-
-  ngOnChanges(changes: SimpleChanges) {
-    const expandedChange = changes['expanded'];
-    if (expandedChange) {
-      this.stateName = this.expanded ? 'expanded' : 'collapsed';
-    }
-  }
 
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
@@ -48,20 +22,6 @@ export class ExpandableDivComponent implements OnChanges {
     }
   }
 
-  constructor() { }
-
-  animationStart(event: AnimationEvent) {
-    if (event.toState === 'collapsed') {
-      this.content.nativeElement.style['overflow'] = 'hidden';
-    }
-  }
-
-  animationDone(event: AnimationEvent) {
-    if (event.toState === 'expanded') {
-      this.content.nativeElement.style['overflow'] = 'visible';
-    }
-  }
-
   toggleExpanded() {
     if (this.expanded) {
       this.collapse();
@@ -72,14 +32,11 @@ export class ExpandableDivComponent implements OnChanges {
 
   collapse() {
     this.expanded = false;
-    this.stateName = 'collapsed';
     this.expandedChanged.emit(this.expanded);
   }
 
   expand() {
     this.expanded = true;
-    this.stateName = 'expanded';
     this.expandedChanged.emit(this.expanded);
   }
 }
-
