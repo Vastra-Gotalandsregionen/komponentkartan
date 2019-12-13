@@ -6,7 +6,7 @@ import { toggleExpandedState, toggleChevron } from '../../animation';
   templateUrl: './expandableDiv.component.html',
   animations: [toggleExpandedState, toggleChevron]
 })
-export class ExpandableDivComponent{
+export class ExpandableDivComponent {
   @Input() expanded = false;
   @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
