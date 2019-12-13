@@ -15,15 +15,21 @@
   flex-direction: row;
 }
 
+vgr-card-section {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
 .card-section__content {
   position: relative;
+  display: block;
+
   &.ng-animating {
     overflow: hidden;
   }
 
-  &.overflow-visible {
-    overflow: visible;
-  }
+
 }
 
 .card__section-container {
