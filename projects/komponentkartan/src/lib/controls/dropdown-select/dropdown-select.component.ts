@@ -183,8 +183,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   filterItems() {
-    console.log('filterItems');
-    console.log('value', this.filter.value);
     const value = this.filter.value;
 
     if (this.items) {
@@ -363,7 +361,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   onFilterKeydown(event: KeyboardEvent) {
-    console.log(event);
     const filteredItems = this.items.filter(item => item.visible);
 
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {

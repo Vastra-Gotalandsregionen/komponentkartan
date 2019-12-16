@@ -299,7 +299,6 @@ describe('[ListItemComponent - Angular]', () => {
         it('the permanent notification removed', () => {
           fixture.detectChanges();
           const messageElement = rootElement.query(By.css('.list-item__notification__message'));
-          console.log(messageElement);
           expect(messageElement).toBeFalsy();
         });
         it('a notificationChanged is emitted', () => {
