@@ -55,8 +55,13 @@ vgr-grid {
   }
 
   vgr-grid-header-column {
-    h2 vgr-icon {
-      margin-left: 5px;
+    h2 {
+      position: relative;
+
+      >vgr-icon {
+        position: absolute;
+        right: -10px;
+      }
     }
 
     >div:focus {
@@ -73,6 +78,7 @@ vgr-grid {
     &.ng-animating {
       overflow: hidden !important;
       align-items: flex-start !important;
+
       .content-overview {
         overflow: hidden;
         position: relative;
@@ -97,6 +103,7 @@ vgr-grid {
         z-index: 1;
         position: relative;
       }
+
       &:hover {
         cursor: pointer;
       }
