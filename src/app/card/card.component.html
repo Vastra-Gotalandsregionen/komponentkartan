@@ -36,6 +36,7 @@
                   <vgr-card-section class="card__right" [expanded]="true" [title]="'Rubrik'" [subtitle]="'Höger 1'"
                     [readonly]="false">
                     <div>Innehåll</div>
+                    <vgr-datepicker></vgr-datepicker>
                   </vgr-card-section>
                 </vgr-card-column>
               </vgr-card>
@@ -67,21 +68,21 @@
                     <vgr-title-value [slim]="!unlocked">
                         <vgr-title-value-heading  [width]="1">Förnamn</vgr-title-value-heading>
                         <vgr-title-value-container  [width]="1">
-                          <vgr-input [value]="'Per-Åke'" [readonly]="!unlocked"></vgr-input>
+                          <vgr-input [value]="'Per-Åke'" [readonly]="!unlocked" [width]="'100%'"></vgr-input>
                         </vgr-title-value-container>
                     </vgr-title-value>
 
                     <vgr-title-value [slim]="!unlocked">
                       <vgr-title-value-heading  [width]="1">Efternamn</vgr-title-value-heading>
                       <vgr-title-value-container  [width]="1">
-                        <vgr-input [value]="'Berg'" [readonly]="!unlocked"></vgr-input>
+                        <vgr-input [value]="'Berg'" [readonly]="!unlocked" [width]="'100%'"></vgr-input>
                       </vgr-title-value-container>
                     </vgr-title-value>
    
                     <vgr-title-value [slim]="!unlocked">
                         <vgr-title-value-heading  [width]="1">Boende</vgr-title-value-heading>
                         <vgr-title-value-container  [width]="1">
-                      <vgr-dropdown-select [readonly]="!unlocked">
+                      <vgr-dropdown-select [readonly]="!unlocked" [width]="'100%'">
                         <vgr-dropdown-item>Hus</vgr-dropdown-item>
                         <vgr-dropdown-item>Lägenhet</vgr-dropdown-item>
                         <vgr-dropdown-item>Kartong</vgr-dropdown-item>
@@ -92,7 +93,7 @@
                     <vgr-title-value [slim]="!unlocked">
                         <vgr-title-value-heading  [width]="1">Födelsedatum</vgr-title-value-heading>
                         <vgr-title-value-container  [width]="1">
-                      <vgr-datepicker [selectedDate]="birthDate" [readonly]="!unlocked"></vgr-datepicker>
+                      <vgr-datepicker [selectedDate]="birthDate" [readonly]="!unlocked" [width]="'100%'"></vgr-datepicker>
                         </vgr-title-value-container>
                     </vgr-title-value>
 
