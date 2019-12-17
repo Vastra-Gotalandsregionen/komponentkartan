@@ -69,11 +69,14 @@ vgr-grid {
     padding: 0;
     align-items: initial;
     position: relative;
-    overflow: hidden;
 
     &.ng-animating {
       overflow: hidden !important;
       align-items: flex-start !important;
+      .content-overview {
+        overflow: hidden;
+        position: relative;
+      }
     }
 
     vgr-grid-content {
