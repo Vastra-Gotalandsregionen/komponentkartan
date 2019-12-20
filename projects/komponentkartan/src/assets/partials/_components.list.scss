@@ -20,14 +20,16 @@
 
 .list-item {
   position: relative;
+
   &:not(.list-item--expanded) {
     overflow: hidden;
   }
-  
+
   .list-item__header_wrapper {
     margin-left: -5px;
     padding-left: 5px;
-    > vgr-icon {
+
+    >vgr-icon {
       .icon {
         position: absolute;
         top: 8px;
@@ -37,12 +39,14 @@
         transition: transform 0.4s;
         transition: transform 0.4s, -webkit-transform 0.4s;
       }
+
       &.expanded {
         .icon {
           transform: rotate(180deg);
         }
       }
     }
+
     &:focus {
       outline: $focus-outline-width solid $focus-color;
       // margin-left: -5px;
@@ -50,11 +54,6 @@
   }
 }
 
-.list-item-content {
-  &.ng-animating {
-    overflow: hidden;
-  }
-}
 
 $animation-time: 1.4s;
 
@@ -150,13 +149,14 @@ vgr-list.list--new-item-added {
 
 .list__footer {
   margin-top: 2px;
-  background-color:white; 
-  padding-top: 10px; 
-  padding-bottom:10px; 
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .list__items {
   position: relative; //Lägg till en extra rad ovanför listan för att möjliggöra expandering med skugga. Annars finns det inget att "putta" ifrån sig...
+
   &:before {
     content: "";
     width: $content-width--small;
@@ -213,6 +213,15 @@ vgr-list.list--new-item-added {
   transition: border-left-color 0.2s ease, margin-top 0.2s ease-in;
   //Pop-out beteende vid expand, endast om vi visar normal vy, inte för Compact.
 
+  &.list-item--overflow {
+    position: relative;
+    overflow: hidden;
+    > * {
+      position: relative;
+      overflow: hidden;
+    }
+  }
+
   &.list-item--expanded:not(.list-item--compact) {
     box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
     margin-top: 14px;
@@ -238,20 +247,24 @@ vgr-list.list--new-item-added {
     border-left-color: $primary-color--success;
   }
 }
+
 .list-item__header_wrapper {
   position: relative;
-  > vgr-icon .icon {
+
+  >vgr-icon .icon {
     @extend .chevron-collapsed;
     color: $text-color--default;
     position: absolute;
     top: 7px;
     right: 12px;
     transform: rotate(0deg);
+
     .list-item--expanded & {
       transform: rotate(-180deg);
     }
   }
 }
+
 .list-item__header {
   opacity: 1;
   cursor: pointer;
@@ -398,32 +411,40 @@ vgr-list.list--new-item-added {
   div {
     display: inline-block;
   }
+
   .caret {
     position: absolute;
     margin-left: 4px;
     display: none;
     transition: transform 0.4s;
+
     .icon {
       color: $text-color--default
     }
   }
-  &.list__column-header--sorted-desc, &.list__column-header--sorted-asc {
+
+  &.list__column-header--sorted-desc,
+  &.list__column-header--sorted-asc {
+
     // h2:not(.noselect) .caret {
     .caret {
       display: inline-block;
     }
-  } 
+  }
+
   &.list__column-header--sorted-desc {
     .caret {
       transform: rotate(0deg);
     }
   }
-  &.list__column-header--sorted-asc { 
+
+  &.list__column-header--sorted-asc {
     .caret {
       transform: rotate(-180deg);
     }
   }
-    &:last-child() {
+
+  &:last-child() {
     padding-right: 0;
   }
 }
@@ -545,12 +566,13 @@ vgr-list.list--new-item-added {
 }
 
 vgr-list-column-trashcan {
-  > vgr-icon:focus {
+  >vgr-icon:focus {
     outline: 0;
     border: $focus-outline-width solid $focus-color;
 
   }
-  &.disabled  {
+
+  &.disabled {
     color: $secondary-color--default;
   }
 }
@@ -594,7 +616,8 @@ vgr-list-column-header-checkbox {
   }
 }
 
-@media screen and (min-width: $desktop-width--medium) { 
+@media screen and (min-width: $desktop-width--medium) {
+
   vgr-list-column-header,
   vgr-list-column-header-checkbox {
     .checkbox__label {

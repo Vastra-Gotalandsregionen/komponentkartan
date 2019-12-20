@@ -26,6 +26,7 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   isDeleted = false;
   notInteractable = false;
   overflow = false;
+  expandOverflow: boolean;
 
   @Input() expanded = false;
   @Input() preventCollapse = false;
@@ -189,6 +190,14 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
       }, this.showNotificationDurationMs);
     }
     this.handleNotificationColor();
+  }
+
+  toggleState(state: 'start'|'done', expanded: boolean) {
+    if (state === 'done' && expanded === true) {
+      this.expandOverflow = false;
+    } else {
+      this.expandOverflow = true;
+    }
   }
 
   ngOnDestroy() {

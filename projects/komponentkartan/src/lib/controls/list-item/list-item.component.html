@@ -1,4 +1,5 @@
 <div class="list-item" [class.list-item--notification-visible]="temporaryNotification || permanentNotification"
+[class.list-item--overflow]="expandOverflow"
   [class.list-item--expanded]="isExpanded" [ngClass]="notificationColor" [@deleted]
   (@deleted.done)="triggerDeletedEvent()" *ngIf="!isDeleted">
   <div class="list-item__header_wrapper" (click)="toggleExpanded()" (keydown)="keydown($event)" tabindex="0"
@@ -19,7 +20,8 @@
     </div>
   </div>
   <!-- Denna notis visas när det endast finns en temporär notis -->
-  <div *ngIf="temporaryNotification && !permanentNotification" class="list-item__notification" [@toggleExpandedState]="{value: isExpanded,  params: { speed: animationSpeed + 'ms' } }"
+  <div *ngIf="temporaryNotification && !permanentNotification" class="list-item__notification"
+    [@toggleExpandedState]="{value: isExpanded,  params: { speed: animationSpeed + 'ms' } }"
     (@toggleExpandedState.done)="closeTemporary(notification)" (click)="toggleExpanded()">
     <vgr-icon [icon]="temporaryNotification.icon.name" [color]="temporaryNotification?.icon.color"
       [solid]="temporaryNotification?.icon.solid">
@@ -29,7 +31,8 @@
     </div>
   </div>
   <!-- Denna notis visas när det finns en permanent notis som skall ses åter när den temorärar är klar -->
-  <div *ngIf="temporaryNotification && permanentNotification" class="list-item__notification" [@toggleExpandedState]="{value: isExpanded,  params: { speed: animationSpeed + 'ms' } }"
+  <div *ngIf="temporaryNotification && permanentNotification" class="list-item__notification"
+    [@toggleExpandedState]="{value: isExpanded,  params: { speed: animationSpeed + 'ms' } }"
     (@toggleExpandedState.done)="closeTemporary(notification)" (click)="toggleExpanded()">
     <vgr-icon [icon]="temporaryNotification?.icon.name" [color]="temporaryNotification?.icon.color"
       [solid]="temporaryNotification?.icon.solid">
@@ -38,7 +41,9 @@
       {{temporaryNotification? temporaryNotification?.message : ''}}
     </div>
   </div>
-  <div [@toggleExpandedState]="{value: isExpanded, params: { speed: animationSpeed + 'ms' } }" class="list-item-content">
+  <div [@toggleExpandedState]="{value: isExpanded, params: { speed: animationSpeed + 'ms' } }" class="list-item-content"
+    (@toggleExpandedState.start)="toggleState('start', false)"
+    (@toggleExpandedState.done)="toggleState('done', isExpanded)">
     <ng-content select="vgr-list-item-content"></ng-content>
   </div>
 </div>
