@@ -35,7 +35,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
 
     @HostBinding('attr.aria-haspopup') hasAriaPopup = 'menu';
     @HostBinding('attr.role') role = 'menuitem';
-    @HostBinding('attr.aria-expanded') expanded = false;
+    @Input() @HostBinding('attr.aria-expanded') expanded = false;
 
     @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
     @HostBinding('class.submenu') hasClass = true;

@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 5.1.4 (Stable, 2019-12-20)
+- Restored possibility to start submenus expanded
+
 ## 5.1.3 (Stable, 2019-10-21)
 - Fixed another bug in "grid"-component regarding toggle animation.
 
