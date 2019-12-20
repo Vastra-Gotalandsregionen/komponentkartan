@@ -75,13 +75,11 @@ vgr-grid {
     align-items: initial;
     position: relative;
 
-    &.ng-animating {
-      overflow: hidden !important;
-      align-items: flex-start !important;
+    &.grid-row-overflow {
+      overflow: hidden;
 
-      .content-overview {
+      >* {
         overflow: hidden;
-        position: relative;
       }
     }
 

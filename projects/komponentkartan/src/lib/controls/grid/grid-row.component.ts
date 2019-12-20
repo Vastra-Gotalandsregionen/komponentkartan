@@ -27,6 +27,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   hasNotifications = false;
   isExpanded = false;
   notificationColor = 'default';
+  overflow: boolean;
 
   private ngUnsubscribe = new Subject();
   constructor(private gridService: GridService, public el: ElementRef) { }
@@ -62,6 +63,15 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
       } else {
         this.gridService.requestExpandRow(this);
       }
+    }
+  }
+  
+
+  toggleState(state: 'start'|'done', expanded: boolean) {
+    if (state === 'done' && expanded === true) {
+      this.overflow = false;
+    } else {
+      this.overflow = true;
     }
   }
 
