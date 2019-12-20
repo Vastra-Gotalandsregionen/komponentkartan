@@ -24,6 +24,15 @@ vgr-card-section {
   position: relative;
   display: block;
 
+  &.card-section__content {
+    position: relative;
+    overflow: hidden;
+
+    >* {
+      overflow: hidden;
+    }
+  }
+
   &.ng-animating {
     overflow: hidden;
 

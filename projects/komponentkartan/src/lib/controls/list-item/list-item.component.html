@@ -42,7 +42,7 @@
     </div>
   </div>
   <div [@toggleExpandedState]="{value: isExpanded, params: { speed: animationSpeed + 'ms' } }" class="list-item-content"
-    (@toggleExpandedState.start)="toggleState('start', false)"
+    (@toggleExpandedState.start)="toggleState('start', expanded)"
     (@toggleExpandedState.done)="toggleState('done', isExpanded)">
     <ng-content select="vgr-list-item-content"></ng-content>
   </div>

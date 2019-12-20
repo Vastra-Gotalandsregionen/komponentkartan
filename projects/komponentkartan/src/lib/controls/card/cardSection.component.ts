@@ -1,10 +1,10 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { toggleExpandedState , toggleChevron } from '../../animation';
+import { toggleExpandedState, toggleChevron } from '../../animation';
 
 @Component({
     selector: 'vgr-card-section',
     templateUrl: './cardSection.component.html',
-    animations: [ toggleExpandedState, toggleChevron ]
+    animations: [toggleExpandedState, toggleChevron]
 })
 export class CardSectionComponent {
     @HostBinding('class.card-section') cardSectionClass = true;
@@ -14,6 +14,7 @@ export class CardSectionComponent {
     @Input() subtitle: string;
     overflow = false;
     animationSpeed = '.4s ease';
+    expandOverflow: boolean;
 
     toggleExpanded(event) {
         if ((event instanceof KeyboardEvent && event.keyCode === 13 || event.keyCode === 32) || (event instanceof MouseEvent)) {
@@ -27,8 +28,13 @@ export class CardSectionComponent {
 
     constructor() { }
 
-    allowOverflow() {
-        this.overflow = true;
+    toggleState(state: 'start' | 'done', expanded: boolean) {
+        if (state === 'done' && expanded === true) {
+            this.expandOverflow = false;
+        } else {
+            this.expandOverflow = true;
+        }
     }
+
 
 }

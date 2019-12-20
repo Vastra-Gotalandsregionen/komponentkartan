@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="grid-row-content" [@toggleExpandedState]="expandedState"
-   (@toggleExpandedState.start)="toggleState('start', false)" (@toggleExpandedState.done)="toggleState('done', expanded)"
+   (@toggleExpandedState.start)="toggleState('start', expanded)" (@toggleExpandedState.done)="toggleState('done', expanded)"
    [ngClass]="{'grid-row-overflow': overflow}">
     <ng-content select="vgr-grid-content"></ng-content>
   </div>
