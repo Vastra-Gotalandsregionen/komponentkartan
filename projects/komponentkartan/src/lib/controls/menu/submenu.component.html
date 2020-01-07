@@ -1,4 +1,4 @@
-<div #menuitem class="menu__item" (click)="showExpanded = !showExpanded" tabindex="0">
+<div #menuitem class="menu__item" tabindex="0" (click)="toggleExpand()">
   <a>{{text}}</a>
   <vgr-icon icon="chevron-down" size="xs" class="menu__item__expander" [ngClass]="{'expanded': expanded}"></vgr-icon>
 </div>
