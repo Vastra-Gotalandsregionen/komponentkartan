@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed `vgr-dropdown-select` uses `vgr-filter-textbox` for filtering.
 - Fixed the handler of disable for `vgr-checkbox` in form control.
 
+## 5.1.4 (Stable, 2019-12-20)
+- Restored possibility to start submenus expanded
+
 ## 5.1.3 (Stable, 2019-10-21)
 - Fixed another bug in "grid"-component regarding toggle animation.
 

@@ -22,7 +22,7 @@ import { takeUntil } from 'rxjs/operators';
                 height: '*'
             })),
             transition('* => expanded', [animate('600ms  ease-in')]),
-            transition('expanded => collapsed', [animate('600ms ease-out')])
+            transition('* => collapsed', [animate('600ms ease-out')])
         ])
     ]
 })
@@ -49,7 +49,8 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         }
 
         if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-            this.showExpanded = !this.showExpanded;
+            this._showExpanded = true;
+            this.expanded = !this.expanded;
             // SetFocus after the animation is completed.
             setTimeout(() => {
                 if (this.showExpanded) {
@@ -78,13 +79,14 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         if (event.key === 'Escape' || event.key === 'Esc') {
             this.escape.emit();
         }
-        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc', ].indexOf(event.key) > -1) {
+        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc',].indexOf(event.key) > -1) {
             event.stopPropagation();
             event.preventDefault();
         }
     }
 
     get showExpanded() {
+        this.state = this.expanded ? 'expanded' : 'collapsed';
         return this._showExpanded;
     }
 
@@ -96,6 +98,11 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         } else {
             this.state = 'collapsed';
         }
+    }
+
+    toggleExpand() {
+        this._showExpanded = true;
+        this.expanded = !this.expanded;
     }
 
     constructor(private router: Router, private elementRef: ElementRef, private renderer: Renderer2) {
