@@ -88,9 +88,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
 
     if (changes.selectedDate) {
       if (changes.selectedDate.firstChange) {
-        setTimeout(() => {
           this.writeValue(changes.selectedDate.currentValue);
-        });
       } else {
         this.writeValue(changes.selectedDate.currentValue);
       }
@@ -123,7 +121,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     this.ngUnsubscribeItems.complete();
   }
 
-  writeValue(value: any) {
+  writeValue(value: Date) {
     this.setSelectedDate(value, false, false);
   }
 
@@ -746,10 +744,10 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
       if (this.label !== newLabel) {
         this.label = newLabel;
       } else {
-        this.label = '';
-        setTimeout(() => {
+       // this.label = '';
+        // setTimeout(() => {
           this.label = newLabel;
-        });
+        // });
       }
     }
   }
