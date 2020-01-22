@@ -10,7 +10,7 @@
         <div #headerLabel *ngIf="!allowText" tabindex="0" role="button" aria-haspopup="grid"
           [attr.aria-labelledby]="labelId + ' ' + headerLabelId" [attr.aria-expanded]="expanded">
           <input class="datepicker__header__input readonly" [placeholder]="noSelectedDateLabel" readonly="readonly"
-            [value]="label">
+            tabindex="-1" [value]="label">
         </div>
         <div *ngIf="allowText">
           <input #headerInput class="datepicker__header__input" [placeholder]="inputPlaceholder" aria-haspopup="grid"
