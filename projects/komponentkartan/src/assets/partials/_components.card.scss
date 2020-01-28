@@ -24,7 +24,7 @@ vgr-card-section {
   position: relative;
   display: block;
 
-  &.card-section__content {
+  &.card-section__content--overflow {
     position: relative;
     overflow: hidden;
 
