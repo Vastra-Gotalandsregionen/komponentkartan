@@ -79,7 +79,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
         if (event.key === 'Escape' || event.key === 'Esc') {
             this.escape.emit();
         }
-        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc',].indexOf(event.key) > -1) {
+        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc'].indexOf(event.key) > -1) {
             event.stopPropagation();
             event.preventDefault();
         }
