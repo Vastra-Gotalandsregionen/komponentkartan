@@ -1,6 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import {
-  Component, EventEmitter, forwardRef, Host, Input, OnChanges, OnInit, Optional, Output, SimpleChanges, SkipSelf
+  Component, EventEmitter, forwardRef, Host, Input, OnChanges, OnInit, Optional, Output, SimpleChanges, SkipSelf, HostBinding
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -15,6 +15,7 @@ import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCES
   }]
 })
 export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
+  @Input() @HostBinding('style.width') width: string;
   @Input() showValidation = true;
   @Input() formControlName: string;
   @Input() formatNumber?: boolean;
@@ -27,7 +28,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() readonly?: boolean;
   @Input() alignRight: boolean;
   @Input() small: boolean;
-  @Input() width: string;
 
   @Output() blur: EventEmitter<any>;
   @Output() focus: EventEmitter<any>;

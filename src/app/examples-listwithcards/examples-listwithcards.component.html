@@ -107,13 +107,15 @@
                 <vgr-title-value [slim]="newCardLocked">
                   <vgr-title-value-heading>Telefon</vgr-title-value-heading>
                   <vgr-title-value-container>
-                    <vgr-input [width]="'100%'" formControlName="enhetschef_telefon" [readonly]="newCardLocked"></vgr-input>
+                    <vgr-input [width]="'100%'" formControlName="enhetschef_telefon" [readonly]="newCardLocked">
+                    </vgr-input>
                   </vgr-title-value-container>
                 </vgr-title-value>
                 <vgr-title-value [slim]="newCardLocked">
                   <vgr-title-value-heading>E-post</vgr-title-value-heading>
                   <vgr-title-value-container>
-                    <vgr-input [width]="'100%'" formControlName="enhetschef_epost" [readonly]="newCardLocked"></vgr-input>
+                    <vgr-input [width]="'100%'" formControlName="enhetschef_epost" [readonly]="newCardLocked">
+                    </vgr-input>
                   </vgr-title-value-container>
                 </vgr-title-value>
               </vgr-title-value-layout>
@@ -245,7 +247,8 @@
                   <vgr-title-value-heading [width]="3">Regionsövergripande grupper (kr/månad)
                   </vgr-title-value-heading>
                   <vgr-title-value-container>
-                    <vgr-input [width]="'100%'" formControlName="regionsovergripandegrupper" [readonly]="newCardLocked"></vgr-input>
+                    <vgr-input [width]="'100%'" formControlName="regionsovergripandegrupper" [readonly]="newCardLocked">
+                    </vgr-input>
                   </vgr-title-value-container>
                 </vgr-title-value>
               </vgr-title-value-layout>
@@ -357,13 +360,15 @@
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>Telefon</vgr-title-value-heading>
                           <vgr-title-value-container>
-                            <vgr-input [width]="'100%'" formControlName="enhetschef_telefon" [readonly]="cardLocked"></vgr-input>
+                            <vgr-input [width]="'100%'" formControlName="enhetschef_telefon" [readonly]="cardLocked">
+                            </vgr-input>
                           </vgr-title-value-container>
                         </vgr-title-value>
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>E-post</vgr-title-value-heading>
                           <vgr-title-value-container>
-                            <vgr-input [width]="'100%'" formControlName="enhetschef_epost" [readonly]="cardLocked"></vgr-input>
+                            <vgr-input [width]="'100%'" formControlName="enhetschef_epost" [readonly]="cardLocked">
+                            </vgr-input>
                           </vgr-title-value-container>
                         </vgr-title-value>
                       </vgr-title-value-layout>
@@ -434,7 +439,8 @@
                             [readonly]="cardLocked"></vgr-input>
                         </vgr-title-value>
                         <vgr-title-value [title]=" 'Kundreferens'" [slim]="cardLocked">
-                          <vgr-input [width]="'100%'" formControlName="kundreferens" [readonly]="cardLocked"></vgr-input>
+                          <vgr-input [width]="'100%'" formControlName="kundreferens" [readonly]="cardLocked">
+                          </vgr-input>
                         </vgr-title-value>
                       </vgr-title-value-layout>
                     </vgr-card-section>
@@ -476,7 +482,14 @@
                       <vgr-title-value [slim]="cardLocked">
                         <vgr-title-value-heading>Geokod (PT90)</vgr-title-value-heading>
                         <vgr-title-value-container>
-                          <span>{{row.previewObject.details.geokod}}</span>
+                          <!-- <vgr-input>{{row.previewObject.details.geokod}}</vgr-input> -->
+
+                          <section class="row-layout row-layout--tight">
+                            <vgr-input [readonly]="cardLocked" [value]="row.previewObject.details.geokod.x" suffix=":x"
+                              [small]="true" [alignRight]="true" width="100%"></vgr-input>
+                            <vgr-input [readonly]="cardLocked" [value]="row.previewObject.details.geokod.y" suffix=":y"
+                              [small]="true" [alignRight]="true" width="100%"></vgr-input>
+                          </section>
                         </vgr-title-value-container>
                       </vgr-title-value>
                       <vgr-title-value [slim]="cardLocked">
@@ -509,7 +522,8 @@
                           <vgr-title-value-heading [width]="3">Regionsövergripande grupper (kr/månad)
                           </vgr-title-value-heading>
                           <vgr-title-value-container>
-                            <vgr-input [width]="'100%'" formControlName="regionsovergripandegrupper" [readonly]="cardLocked"></vgr-input>
+                            <vgr-input [width]="'100%'" formControlName="regionsovergripandegrupper"
+                              [readonly]="cardLocked"></vgr-input>
                           </vgr-title-value-container>
                         </vgr-title-value>
                       </vgr-title-value-layout>

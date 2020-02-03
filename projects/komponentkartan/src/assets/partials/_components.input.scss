@@ -196,16 +196,21 @@ input.input-container__textbox {
   border-width: 1px;
   border-color: $background-color--content;
 
+  .readonly-container__display-value {
+    border: none;
+  }
+
   .align-right & {
     padding-left: 0px;
 
-    & .readonly-container__display-value {
+    .readonly-container__display-value {
       flex: 1;
       text-align: right;
       padding-right: 4px;
+      border: none;
     }
 
-    & .readonly-container__suffix {
+    .readonly-container__suffix {
       font-style: italic;
     }
   }

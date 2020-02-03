@@ -1,7 +1,7 @@
 <div class="validated-input" [ngClass]="{
   'validation-error--active' : errorClass,  'validation-error--editing' : editingClass,  'validation-error--fixed' : fixedClass, 
   'readonly' : readonly, 'align-right' : alignRight,
-  'input--small' : small, 'input--large' : !small }" [ngStyle]="{ 'width': width }">
+  'input--small' : small, 'input--large' : !small }">
   <div *ngIf="!readonly" class="input-validation"
     [ngClass]="{'input-validation--suffixed' : suffix && suffix.length>0}">
     <div class="input-container" [ngClass]="{'input-container--focus' : hasFocus}">
@@ -25,7 +25,7 @@
     </div>
   </div>
   <div *ngIf="readonly" class="readonly-container" [ngClass]="{'align-right' : alignRight}">
-    <span class="readonly-container__display-value">{{displayValue}}</span>
+    <input type="text" class="input-container__textbox readonly-container__display-value" [placeholder]=" placeholder ? placeholder : ''" readonly="readonly" [value]="displayValue">
     <span class="readonly-container__suffix">{{suffix}}</span>
   </div>
 </div>
