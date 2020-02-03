@@ -49,7 +49,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
   constructor(private listService: ListService) { }
 
   ngAfterContentInit() {
-    console.warn('vgr-list soon to be deprecated');
+    console.warn('vgr-list is deprecated and soon to be removed. Please consider using vgr-grid.');
     if (this.listHeader) {
       this.listHeader.sortChanged
         .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
