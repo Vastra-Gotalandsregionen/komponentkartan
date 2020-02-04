@@ -10,8 +10,18 @@
 
   .expandable-div-header {
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     cursor: pointer;
+
+    .expandable-div-header__content {
+      flex-grow: 1;
+    }
+
+    .expandable-div-header__icon {
+      margin-left: 20px;
+      flex-grow: 0;
+    }
   }
 
   &:focus {

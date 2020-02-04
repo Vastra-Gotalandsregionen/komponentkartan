@@ -1,8 +1,12 @@
 <div class="expandable-div">
   <div class="expandable-div-header" (click)="toggleExpanded()" (keydown)="onKeydown($event)" tabindex="0"
     [attr.aria-expanded]="expanded" role="button">
-    <ng-content select="vgr-expandable-div-header"></ng-content>
-    <vgr-icon icon="chevron-down" size="sm" [@toggleChevron]="expanded"></vgr-icon>
+    <div class="expandable-div-header__content">
+      <ng-content select="vgr-expandable-div-header"></ng-content>
+    </div>
+    <div class="expandable-div-header__icon" [@toggleChevron]="expanded">
+      <vgr-icon icon="chevron-down" size="sm"></vgr-icon>
+    </div>
   </div>
   <div class="expandable-div-content" [@toggleExpandedState]="expanded">
     <ng-content select="vgr-expandable-div-content"></ng-content>
