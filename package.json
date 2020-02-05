@@ -40,7 +40,6 @@
     "eslint": "^4.14.0",
     "ngx-perfect-scrollbar": "^7.2.1",
     "rxjs": "~6.5.3",
-    "vgr-komponentkartan": "^6.0.0-rc17",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1"
   },
