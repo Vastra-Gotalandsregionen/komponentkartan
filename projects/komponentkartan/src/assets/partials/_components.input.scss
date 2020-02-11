@@ -45,7 +45,6 @@ input.input-container__textbox {
   transition: padding-right 0.3s linear;
   margin-left: -1px;
   margin-right: -1px;
-  padding-left: 0;
 
   .align-right & {
     text-align: right;
@@ -205,6 +204,7 @@ input.input-container__textbox {
 
   .readonly-container__display-value {
     border: none;
+    padding: 0;
   }
 
   .align-right & {
