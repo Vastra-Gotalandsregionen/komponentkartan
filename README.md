@@ -8,11 +8,14 @@ Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular
 # Releaser för Komponentkartan
 Komponentkartan planeras släppas i major-version fyra gånger per år, förutsatt att det finns någon funktionalitet som leder till breaking changes att släppa. 
 
-Version 5: släppt 18 Juni, för mer information om releasen och innehåll: [Realeseinformaiton](https://github.com/Vastra-Gotalandsregionen/komponentkartan/wiki/Releaser-(prelimin%C3%A4rt))
+Version 5: släppt 18 juni
+Version 6: släppt 13 februari
+
+För mer information om följande releaser och dess innehåll: [Releaseinformaiton](https://github.com/Vastra-Gotalandsregionen/komponentkartan/wiki/Releaser-(prelimin%C3%A4rt)) eller [Changelog](CHANGELOG.md).
+
 
 ## Planerade releaser
-Under 2019 har följande datum satt för release av major-versioner
-* Version 6: December 2019
+Under 2020 är version 7 planerad för release.
 
 ## Komma igång
 
@@ -79,11 +82,11 @@ Testerna är uppdelade i två typer, tester med Angular och tester utan Angular.
 
 ## Byggt med
 
-* [Angular 5](https://angular.io/) - Web framework
+* [Angular 8](https://angular.io/) - Web framework
 * [Typescript](https://www.typescriptlang.org/) - Javascript that scales
 * [SASS](sass-lang.com) - SASS - Syntactically Awesome Style Sheets
 * [NPM](https://www.npmjs.com/) - Dependency Management
-* CSS struktureras enligt ITCSS. Se [ITCSS: SCALABLE AND MAINTAINABLE CSS ARCHITECTURE] (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/) för mer information.
+* CSS struktureras enligt ITCSS. Se [ITCSS: SCALABLE AND MAINTAINABLE CSS ARCHITECTURE](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/) för mer information.
 
 
 ## Versioner
