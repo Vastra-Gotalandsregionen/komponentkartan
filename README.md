@@ -8,8 +8,8 @@ Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular
 # Releaser för Komponentkartan
 Komponentkartan planeras släppas i major-version fyra gånger per år, förutsatt att det finns någon funktionalitet som leder till breaking changes att släppa. 
 
-Version 5: släppt 18 juni
-Version 6: släppt 13 februari
+* Version 6: släppt 13 februari, 2020
+* Version 5: släppt 18 juni, 2019
 
 För mer information om följande releaser och dess innehåll: [Releaseinformaiton](https://github.com/Vastra-Gotalandsregionen/komponentkartan/wiki/Releaser-(prelimin%C3%A4rt)) eller [Changelog](CHANGELOG.md).
 
