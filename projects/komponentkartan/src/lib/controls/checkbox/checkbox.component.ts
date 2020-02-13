@@ -1,7 +1,4 @@
-import {
-    Component, Input, EventEmitter, Output, OnChanges, HostBinding, forwardRef, SkipSelf,
-    Optional, Host, ElementRef, Renderer, AfterViewInit
-} from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges, forwardRef, SkipSelf, Optional, Host, ElementRef, AfterViewInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 import { Guid } from '../../utils/guid';
 
@@ -16,8 +13,8 @@ import { Guid } from '../../utils/guid';
     }]
 })
 export class CheckboxComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
-    @Input() disabled: boolean;
-    @Input() checked: boolean;
+    @Input() disabled = false;
+    @Input() checked = false;
     @Output() checkedChanged = new EventEmitter<boolean>();
     @Input() label: string;
     @Input() formControlName?: string;
@@ -26,16 +23,16 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     public labelledbyid: string = Guid.newGuid();
     public element: any;
 
-    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer) {
-        this.disabled = false;
-        this.checked = false;
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef) { }
 
-    }
-
-    ngOnChanges() {
+    ngOnChanges(changes: SimpleChanges) {
         if (this.formControlName && this.controlContainer) {
             this.control = this.controlContainer.control.get(this.formControlName);
+            this.setDisabledState(this.controlContainer.control.get(this.formControlName).disabled);
         }
+    }
+    setDisabledState(isDisabled: boolean) {
+        this.disabled = isDisabled;
     }
 
     ngAfterViewInit() {
@@ -45,7 +42,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     onClick(event: Event): void {
         if (!this.disabled) {
             this.checked = !this.checked;
-            if (this.element) { this.renderer.invokeElementMethod(this.element, 'focus'); }
+            if (this.element) { this.element.focus(); }
             this.onChange(this.checked);
             this.checkedChanged.emit(this.checked);
             event.cancelBubble = true;

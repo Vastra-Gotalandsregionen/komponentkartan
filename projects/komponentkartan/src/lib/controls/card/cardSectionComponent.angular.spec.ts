@@ -12,7 +12,6 @@ import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconModule } from '../icon/icon.module';
 
-
 describe('[CardSectionComponent]', () => {
   let component: CardSectionComponent;
   let fixture: ComponentFixture<CardSectionComponent>;
@@ -56,7 +55,7 @@ describe('[CardSectionComponent]', () => {
       beforeEach(() => {
         jasmine.clock().uninstall();
         jasmine.clock().install();
-        rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', null);
+        rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', new MouseEvent('click'));
         jasmine.clock().tick(10);
       });
       it('section is expanded', () => {
@@ -64,7 +63,7 @@ describe('[CardSectionComponent]', () => {
       });
       describe('and header is clicked again', () => {
         beforeEach(() => {
-          rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', null);
+          rootElement.query(By.css('.card-section__header')).triggerEventHandler('click', new MouseEvent('click'));
           jasmine.clock().tick(10);
         });
         it('section is collapsed', () => {
@@ -105,7 +104,7 @@ describe('[CardSectionComponent]', () => {
         Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
         Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
         Object.defineProperty(keyEvent, 'srcElement', {'value' : focusedElement.nativeElement});
-        component.toggleExpand(keyEvent);
+        component.toggleExpanded(keyEvent);
         jasmine.clock().tick(10);
       });
       it('section is expanded', () => {
@@ -113,13 +112,12 @@ describe('[CardSectionComponent]', () => {
       });
       describe('header is focused and enter is pressed', () => {
         beforeEach(() => {
-          console.log(component.expanded);
           const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
           const focusedElement = rootElement.query(By.css('.card-section__header'));
           Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
           Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
           Object.defineProperty(keyEvent, 'srcElement', {'value' : focusedElement.nativeElement});
-          component.toggleExpand(keyEvent);
+          component.toggleExpanded(keyEvent);
           jasmine.clock().tick(10);
         });
 

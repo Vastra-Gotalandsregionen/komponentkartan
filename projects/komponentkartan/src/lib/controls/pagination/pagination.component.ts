@@ -29,18 +29,12 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
     const pagesChange = changes['pages'];
     const activePageChange = changes['activePage'];
     if (pagesChange || activePageChange) {
-      if (this.activePage > this.pages) {
-        this.showPage(this.pages);
-        this.focusedPageLabel = this.pages.toString();
-      } else {
-        this.setPageItems(this.activePage);
-        if (activePageChange && (this.activePage !== this._activePage)) {
-          if (this.focusedPageLabel && (!this.focusedPageLabel.startsWith('Nästa sida') && !this.focusedPageLabel.endsWith('Föregående sida'))) {
-            this.focusedPageLabel = this.activePage.toString();
-          }
-          this._activePage = this.activePage;
-          this.pageChanged.emit(this.activePage);
+      this.setPageItems(this.activePage);
+      if (activePageChange && (this.activePage !== this._activePage)) {
+        if (this.focusedPageLabel && (!this.focusedPageLabel.startsWith('Nästa sida') && !this.focusedPageLabel.endsWith('Föregående sida'))) {
+          this.focusedPageLabel = this.activePage.toString();
         }
+        this._activePage = this.activePage;
       }
     }
   }

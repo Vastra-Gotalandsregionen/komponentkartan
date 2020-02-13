@@ -1,6 +1,4 @@
-import { Component, HostBinding, Input, Output, EventEmitter } from '@angular/core';
-
-import { ListColumnHeaderComponent } from './list-column-header.component';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
     templateUrl: './list-column.component.html',

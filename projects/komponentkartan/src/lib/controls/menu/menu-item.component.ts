@@ -1,4 +1,4 @@
-import { Input, Component, HostListener, ElementRef, Renderer, forwardRef, HostBinding, AfterViewInit, ViewChild } from '@angular/core';
+import { Input, Component, HostListener, ElementRef, forwardRef, HostBinding, AfterViewInit, ViewChild, Renderer2 } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
 import { MenuItemBase } from './menu-item-base';
 
@@ -18,7 +18,7 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
     @Input() isInternalLink = true;
     @HostBinding('attr.role') role = 'menuitem';
     @HostBinding('attr.aria-disabled') ariaDisabled;
-    @ViewChild('menuitem') menuitem: ElementRef;
+    @ViewChild('menuitem', { static: false }) menuitem: ElementRef;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
 
@@ -66,12 +66,12 @@ export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
         return this.notification && this.notification.length > 2 ? '!' : this.notification;
     }
 
-    constructor(private router: Router, private renderer: Renderer) {
+    constructor(private router: Router, private renderer: Renderer2) {
         super();
     }
 
     setFocus(movingUp: boolean = false) {
-        this.renderer.invokeElementMethod(this.menuitem.nativeElement, 'focus');
+        this.menuitem.nativeElement.focus();
     }
 
     ngAfterViewInit() {

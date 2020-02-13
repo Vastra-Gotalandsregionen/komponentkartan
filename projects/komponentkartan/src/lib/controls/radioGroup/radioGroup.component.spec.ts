@@ -1,8 +1,8 @@
-import { RadioGroupComponent, RadioGroupItem } from './radioGroup.component';
+import { RadioGroupComponent } from './radioGroup.component';
 import { SelectableItem } from '../../models/selectableItem.model';
 
 
-describe('[DropdownComponent]', () => {
+describe('[RadioGroupComponent]', () => {
     let component: RadioGroupComponent;
     let component2: RadioGroupComponent;
     const source: SelectableItem<string>[] = [{ displayName: 'Kalle', value: '1', selected: true }, { displayName: 'Eva', value: '2' }, { displayName: 'Anna', value: '3' }];

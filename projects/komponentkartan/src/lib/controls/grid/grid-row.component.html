@@ -3,11 +3,13 @@
     <div class="grid-row-header">
       <ng-content select="vgr-grid-column"></ng-content>
     </div>
-    <div class="grid-row-notification" *ngIf="hasNotifications">
+    <div class="grid-row-notification">
       <ng-content select="vgr-notification"></ng-content>
     </div>
   </div>
-  <div class="grid-row-content" *ngIf="isExpanded" [@toggleExpandedState]="{value: ':leave', params: {speed: animationSpeed}}">
+  <div class="grid-row-content" [@toggleExpandedState]="expandedState"
+   (@toggleExpandedState.start)="toggleState('start', expanded)" (@toggleExpandedState.done)="toggleState('done', expanded)"
+   [ngClass]="{'grid-row-overflow': overflow}">
     <ng-content select="vgr-grid-content"></ng-content>
   </div>
 </div>

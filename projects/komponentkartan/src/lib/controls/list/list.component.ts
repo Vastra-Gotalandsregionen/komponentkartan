@@ -40,7 +40,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
   @HostBinding('class.list--new-item-added') moveHeader = false;
   @HostBinding('class.animate') animate = false;
 
-  @ContentChild(ListHeaderComponent) listHeader: ListHeaderComponent;
+  @ContentChild(ListHeaderComponent, { static: false }) listHeader: ListHeaderComponent;
   @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent> = new QueryList<ListItemComponent>();
 
   private ngUnsubscribe = new Subject();
@@ -49,6 +49,7 @@ export class ListComponent implements AfterContentInit, OnDestroy {
   constructor(private listService: ListService) { }
 
   ngAfterContentInit() {
+    console.warn('vgr-list is deprecated and soon to be removed. Please consider using vgr-grid.');
     if (this.listHeader) {
       this.listHeader.sortChanged
         .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));

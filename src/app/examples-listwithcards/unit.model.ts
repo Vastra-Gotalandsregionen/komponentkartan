@@ -32,7 +32,7 @@ export interface ExampleUnitDetails {
     besoksadress_stad: string;
     kommun: string;
     kommunkod: number;
-    geokod: string;
+    geokod: Geokod;
     telefon: string;
     leverantorsid_RD: string;
     kundreferens: string;
@@ -41,6 +41,12 @@ export interface ExampleUnitDetails {
     justeringar: ExampleUnitJusteringar[];
 
 }
+
+export interface Geokod {
+    x: number;
+    y: number;
+}
+
 export interface ExampleUnitJusteringar {
     typ: string;
     betalningavser: string;

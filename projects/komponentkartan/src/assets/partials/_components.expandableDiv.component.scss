@@ -3,36 +3,24 @@
   display: block;
   min-height: 20px;
 
+  //TODO: Fix for IE and Edge. Move to base SCSS for animations.
+  .ng-trigger-toggleExpandedState.ng-animating {
+    overflow: hidden;
+  }
+
   .expandable-div-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     cursor: pointer;
 
-    >vgr-icon {
-      .icon {
-        position: absolute;
-        right: 0;
-        top: 4px;
-        transition: transform 0.4s;
-        transform: rotate(0deg);
-        color: $text-color--default;
-      }
+    .expandable-div-header__content {
+      flex-grow: 1;
     }
 
-    &[aria-expanded=true] >vgr-icon .icon {
-      transform: rotate(-180deg);
-    }
-    
-    .expandable-div-chevron {
-      position: absolute;
-      top: 0;
-      right: 0px;
-
-      &.expanded {
-        @extend .chevron-expanded;
-      }
-
-      &.collapsed {
-        @extend .chevron-collapsed;
-      }
+    .expandable-div-header__icon {
+      margin-left: 20px;
+      flex-grow: 0;
     }
   }
 

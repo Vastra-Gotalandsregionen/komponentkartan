@@ -10,6 +10,92 @@
 
   </vgr-page-header>
   <vgr-page-body>
+    <vgr-grid>
+      <vgr-grid-header>
+        <vgr-grid-header-column>
+          Exempel med <code>vgr-grid</code> & <code>vgr-card</code>
+        </vgr-grid-header-column>
+      </vgr-grid-header>
+      <vgr-grid-row>
+        <vgr-grid-column>Pelle Karlssons Jourcentral</vgr-grid-column>
+        <vgr-grid-content>
+          <vgr-card>
+            <vgr-card-column>
+              <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 1'">
+                <span>Innehåll</span>
+              </vgr-card-section>
+              <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 2'">
+                <span>Innehåll</span>
+              </vgr-card-section>
+            </vgr-card-column>
+            <vgr-card-column>
+              <vgr-card-section class="card__right" [expanded]="true" [title]="'Rubrik'" [subtitle]="'Höger 1'"
+                [readonly]="false">
+                <div>Innehåll</div>
+              </vgr-card-section>
+            </vgr-card-column>
+          </vgr-card>
+        </vgr-grid-content>
+      </vgr-grid-row>
+
+    </vgr-grid>
+    <vgr-grid>
+      <vgr-grid-header>
+        <vgr-grid-header-column [width]="5">Header 1</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="5">Header 2</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="5">Header 3</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="5">Header 4</vgr-grid-header-column>
+      </vgr-grid-header>
+
+      <vgr-notification type="error">Problem med olika saker.</vgr-notification>
+
+      <!-- Funkar -->
+      <vgr-grid-row (expandedChanged)="visible1 = $event">
+        <vgr-grid-column [width]="5">Value 1</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 2</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 3</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 4</vgr-grid-column>
+        <vgr-grid-content>
+          <div *ngIf="visible1" style="background-color: red; width: 100%; height: 300px;"></div>
+        </vgr-grid-content>
+      </vgr-grid-row>
+      <!-- Funkar -->
+      <vgr-grid-row>
+
+        <vgr-grid-column [width]="5">Value 1</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 2</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 3</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 4</vgr-grid-column>
+        <vgr-grid-content>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              Text
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+              <div style="background-color: red; width: 100%; height: 300px;"></div>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
+        </vgr-grid-content>
+      </vgr-grid-row>
+      <!-- Funkar inte -->
+      <vgr-grid-row>
+        <vgr-grid-column [width]="5">Value 1</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 2</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 3</vgr-grid-column>
+        <vgr-grid-column [width]="5">Value 4</vgr-grid-column>
+        <vgr-grid-content>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              Text
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+              <div style="background-color: red; width: 100%; height: 300px;"></div>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
+        </vgr-grid-content>
+      </vgr-grid-row>
+    </vgr-grid>
+
     <vgr-grid (sortChanged)="sort($event)" toggleAnimation="slow" [stickyHeader]="true">
       <vgr-grid-header-toolbar>
         <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
@@ -106,9 +192,9 @@
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
         <vgr-notification [borderColor]="'error-secondary'">
-            <vgr-icon [icon]="'star'" [color]="'error'" [solid]="true"></vgr-icon>
-            En specialikon
-          </vgr-notification>
+          <vgr-icon [icon]="'star'" [color]="'error'" [solid]="true"></vgr-icon>
+          En specialikon
+        </vgr-notification>
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = $event">
         <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
@@ -117,7 +203,7 @@
         <vgr-grid-column width="2">Godkänd</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-notification [borderColor]="'secondary'">
-          <vgr-icon [icon]="'star'" [color]="'disabled'" ></vgr-icon>
+          <vgr-icon [icon]="'star'" [color]="'disabled'"></vgr-icon>
           En specialikon
         </vgr-notification>
       </vgr-grid-row>
@@ -128,7 +214,7 @@
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-notification [borderColor]="'secondary'">
-          <vgr-icon [icon]="'coffee'" ></vgr-icon>
+          <vgr-icon [icon]="'coffee'"></vgr-icon>
           Gillar kaffe
         </vgr-notification>
         <vgr-grid-content>
@@ -174,11 +260,13 @@
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-notification [type]="'comment'">
           <div class="text" [ngClass]="{'text--short': !expanded6}">
-          En lång kommentar ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet nunc sit amet massa dignissim, non
-          iaculis tortor placerat. Suspendisse pellentesque nibh eu augue auctor, eget tempor eros porttitor. Sed
-          mollis, velit sed hendrerit tempor, turpis est blandit nibh, sit amet pharetra turpis leo nec felis. Class
-          aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget
-          mauris ultricies lorem consectetur ullamcorper sit amet eget felis. Donec posuere aliquam aliquam. Quisque</div>
+            En lång kommentar ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet nunc sit amet
+            massa dignissim, non
+            iaculis tortor placerat. Suspendisse pellentesque nibh eu augue auctor, eget tempor eros porttitor. Sed
+            mollis, velit sed hendrerit tempor, turpis est blandit nibh, sit amet pharetra turpis leo nec felis. Class
+            aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget
+            mauris ultricies lorem consectetur ullamcorper sit amet eget felis. Donec posuere aliquam aliquam. Quisque
+          </div>
         </vgr-notification>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>

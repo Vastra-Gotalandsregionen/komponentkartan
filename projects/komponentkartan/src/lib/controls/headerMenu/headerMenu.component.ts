@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, SimpleChanges, OnChanges, AfterContentInit, OnDestroy, Renderer } from '@angular/core';
+import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, SimpleChanges, OnChanges, AfterContentInit, OnDestroy, Renderer2 } from '@angular/core';
 import { MenuItemBase } from '../menu/menu-item-base';
 import { SubmenuComponent } from '../menu/submenu.component';
 import { Subject } from 'rxjs';

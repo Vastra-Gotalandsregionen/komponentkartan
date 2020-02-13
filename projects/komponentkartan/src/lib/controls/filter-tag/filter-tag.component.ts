@@ -10,8 +10,8 @@ export class FilterTagComponent implements AfterViewInit {
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
   @Output() remove = new EventEmitter();
-  @ViewChild('filtertag') filtertag: ElementRef;
-  @ViewChild('content') content: ElementRef;
+  @ViewChild('filtertag', { static: true }) filtertag: ElementRef;
+  @ViewChild('content', { static: true }) content: ElementRef;
   tabindex = 0;
   removed = false;
   removing = false;

@@ -4,39 +4,56 @@
     <vgr-button (click)="actionsVisible = true">Öppna panel</vgr-button>
   </vgr-page-header>
   <vgr-page-body>
-    <vgr-action-panel [open]="actionsVisible" [title]="'Action-panel'">
+    <vgr-action-panel [open]="actionsVisible" [title]="'Action-panel'" [showCloseButton]="true">
 
       <vgr-card>
         <vgr-card-header>
-          <div class="flex-right">
-            <vgr-button [buttonStyle]="'secondary'" (click)="actionsVisible=false">Stäng</vgr-button>
-          </div>
+          Kodexempel
         </vgr-card-header>
         <vgr-card-column>
           <vgr-card-section [title]=" 'Information' " expanded="true" [readonly]="readonly">
             <vgr-title-value-layout>
-              <vgr-title-value [title]=" 'Id' " [slim]="readonly">
-                <span>123456789-1234-546</span>
+              <vgr-title-value [slim]="readonly">
+                <vgr-title-value-heading>Id</vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-input value="123456789-1234-546" [readonly]="true" width="100%"></vgr-input>
+                </vgr-title-value-container>
               </vgr-title-value>
-              <vgr-title-value title="Kod* " [slim]="readonly">
-                <vgr-input></vgr-input>
+              <vgr-title-value [slim]="readonly">
+                <vgr-title-value-heading>
+                  Kod*
+                </vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-input width="100%"></vgr-input>
+                </vgr-title-value-container>
               </vgr-title-value>
-              <vgr-title-value [title]=" 'Nämnd*' " [slim]="readonly">
-                <vgr-dropdown-select [noItemSelectedLabel]=" 'Välj nämnd' ">
-                  <vgr-dropdown-item>Nämnd 1</vgr-dropdown-item>
-                  <vgr-dropdown-item>Nämnd 2</vgr-dropdown-item>
-                  <vgr-dropdown-item>Nämnd 3</vgr-dropdown-item>
-                  <vgr-dropdown-item>Nämnd 4</vgr-dropdown-item>
-                  <vgr-dropdown-item>Nämnd 5</vgr-dropdown-item>
-                  <vgr-dropdown-item>Nämnd 6</vgr-dropdown-item>
-                  <vgr-dropdown-item>Nämnd 7</vgr-dropdown-item>
-                </vgr-dropdown-select>
+              <vgr-title-value [slim]="readonly">
+                <vgr-title-value-heading>
+                  Nämnd*
+                </vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-dropdown-select [noItemSelectedLabel]="'Välj nämnd'" width="100%">
+                    <vgr-dropdown-item>Nämnd 1</vgr-dropdown-item>
+                    <vgr-dropdown-item>Nämnd 2</vgr-dropdown-item>
+                    <vgr-dropdown-item>Nämnd 3</vgr-dropdown-item>
+                    <vgr-dropdown-item>Nämnd 4</vgr-dropdown-item>
+                    <vgr-dropdown-item>Nämnd 5</vgr-dropdown-item>
+                    <vgr-dropdown-item>Nämnd 6</vgr-dropdown-item>
+                    <vgr-dropdown-item>Nämnd 7</vgr-dropdown-item>
+                  </vgr-dropdown-select>
+                </vgr-title-value-container>
+
               </vgr-title-value>
-              <vgr-title-value [title]=" 'Datum*' " [slim]="readonly">
-                <div class="row-layout ">
-                  <vgr-datepicker [minZoom]="'m'"></vgr-datepicker>
-                  <vgr-datepicker [minZoom]="'m'"></vgr-datepicker>
-                </div>
+              <vgr-title-value [slim]="readonly">
+                <vgr-title-value-heading>
+                  Datum*
+                </vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <div class="row-layout ">
+                    <vgr-datepicker width="100%" [minZoom]="'m'"></vgr-datepicker>
+                    <vgr-datepicker width="100%" [minZoom]="'m'"></vgr-datepicker>
+                  </div>
+                </vgr-title-value-container>
               </vgr-title-value>
             </vgr-title-value-layout>
           </vgr-card-section>
@@ -45,10 +62,22 @@
         <vgr-card-column>
           <vgr-card-section [title]=" 'Ersättningsgrundande information' " [readonly]="readonly " [expanded]="false ">
             <vgr-title-value-layout>
-              <vgr-title-value [title]=" 'Medverkan i familjecentral' " [slim]="readonly">
+              <vgr-title-value [slim]="readonly">
+                <vgr-title-value-heading>
+                  Medverkan i familjecentral
+                </vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-checkbox></vgr-checkbox>
+                </vgr-title-value-container>
+
               </vgr-title-value>
-              <vgr-title-value [title]=" 'Regionsövergripande grupper (kr/månad)' " [slim]="readonly">
-                <vgr-input></vgr-input>
+              <vgr-title-value [slim]="readonly">
+                <vgr-title-value-heading>
+                  Regionsövergripande grupper (kr/månad)
+                </vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-input width="100%"></vgr-input>
+                </vgr-title-value-container>
               </vgr-title-value>
             </vgr-title-value-layout>
           </vgr-card-section>
@@ -58,7 +87,8 @@
     </vgr-action-panel>
     <vgr-page-block>
       <h2>Lista med notifieringar</h2>
-      <p>Här har vi exempel på en lista med notifieringar. även bredden på kolumnerna är satta. För att se dokumentationen
+      <p>Här har vi exempel på en lista med notifieringar. även bredden på kolumnerna är satta. För att se
+        dokumentationen
         på komponenten, klicka
         <a href="/lists">här.</a>
       </p>
@@ -66,17 +96,20 @@
     <vgr-page-block>
       <vgr-list [flexibleHeader]="true" [allowMultipleExpandedItems]="false" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
-          <vgr-list-column-header [width]="10" [sortKey]="'firstName'" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
+          <vgr-list-column-header [width]="10" [sortKey]="'firstName'" [sortDirection]="sortDirections.Ascending">
+            Förnamn</vgr-list-column-header>
           <vgr-list-column-header [width]="10" [sortKey]="'lastName'">Efternamn</vgr-list-column-header>
         </vgr-list-header>
-        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification" [expanded]="row.expanded" (deleted)="deleteEvent()">
+        <vgr-list-item *ngFor="let row of peopleRows" [notification]="row.notification"
+          [expanded]="row.previewObject.expanded" (deleted)="deleteEvent()">
           <vgr-list-item-header>
             <vgr-list-column [width]="10">{{row.previewObject.firstName}}</vgr-list-column>
             <vgr-list-column [width]="10">{{row.previewObject.lastName}}</vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>
             <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(row)">Uppdatera</vgr-button>
-            <vgr-button [buttonStyle]="'secondary'" (click)="updateRow2(row)">Uppdatera och rensa meddelande</vgr-button>
+            <vgr-button [buttonStyle]="'secondary'" (click)="updateRow2(row)">Uppdatera och rensa meddelande
+            </vgr-button>
             <vgr-button [buttonStyle]="'secondary'" (click)="deleteRow(row)">Ta bort</vgr-button>
           </vgr-list-item-content>
         </vgr-list-item>

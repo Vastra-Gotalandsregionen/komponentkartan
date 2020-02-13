@@ -4,31 +4,53 @@ $validation-icon-size: 18px;
 $suffix-width: 30px;
 
 .input-container {
-  max-width: $input-width--small;
-  width: $input-width--small;
   display: flex;
-  .input--small & {
-    max-width: $input-small-width--small;
-    width: $input-small-width--small;
-  }
+
   &.input-container--focus {
     outline: $focus-outline-width solid $focus-color;
   }
 }
 
+vgr-input {
+
+  .input--large {
+    width: 270px;
+    &.input--custom-size {
+      width: inherit;
+    }
+
+    @media screen and (min-width: $desktop-width--medium) {
+      width: 290px;
+    }
+  }
+
+  .input--small {
+    width: 130px;
+    &.input--custom-size {
+      width: inherit;
+    }
+
+    @media screen and (min-width: $desktop-width--medium) {
+      width: 140px;
+    }
+
+  }
+}
+
+
 input.input-container__textbox {
+  width: 100%;
   border-color: $control-border-color--default;
   flex: 1;
   transition: padding-right 0.3s linear;
   margin-left: -1px;
   margin-right: -1px;
-  .input--small & {
-    width: $input-small-width--small - $suffix-width;
-  }
+
   .align-right & {
     text-align: right;
     padding-right: 5px;
   }
+
   .input-validation--suffixed & {
     padding-right: 5px;
   }
@@ -55,6 +77,7 @@ input.input-container__textbox {
   font-style: italic;
   display: none;
   margin-right: $margin--slim;
+
   .input-validation--suffixed & {
     display: inline-block;
   }
@@ -65,13 +88,16 @@ input.input-container__textbox {
   display: inline-block;
   visibility: hidden;
   transition: visibility 0.3s linear;
+
   .icon {
-    color: $primary-color--success;    
+    color: $primary-color--success;
   }
+
   .validation-error--fixed & {
     visibility: visible;
     transition: visibility 0.3s linear;
   }
+
   .input-validation--suffixed & {
     visibility: hidden;
   }
@@ -82,36 +108,39 @@ input.input-container__textbox {
   padding: 0px;
   background-color: inherit;
   position: relative;
-  width: $input-width--small + $margin--fat;
-  max-width: $input-width--small + $margin--fat;
   top: 0px;
-  .input--small & {
-    width: $input-small-width--small + $margin--fat;
-    max-width: $input-small-width--small + $margin--fat;
-  }
+
   .validation-error--active & {
     max-height: none;
     padding: $margin--slim;
     margin-left: -$margin--slim;
+    margin-right: -$margin--slim;
+
     .title-value-layout & {
       top: -10px;
     }
+
     background-color: $secondary-color--error;
     transition: background-color 0.3s linear;
     padding-top: 0.3s linear;
     padding-bottom: 0.3s linear;
     top: 0.3s linear;
   }
+
   .validation-error--editing & {
     max-height: none;
+
     .title-value-layout & {
       top: -10px;
     }
+
     background-color: $background-color--default;
     padding: $margin--slim;
     margin-left: -$margin--slim;
+    margin-right: -$margin--slim;
     transition: background-color 0.3s linear;
   }
+
   .validation-error--fixed & {
     &:after {
       visibility: visible;
@@ -128,15 +157,18 @@ input.input-container__textbox {
 .input-validation_status__icon {
   display: none;
   vertical-align: middle;
+
   .icon {
     .validation-error--active & {
       color: $primary-color--error;
     }
+
     .validation-error--editing & {
       color: $text-color--default;
     }
   }
-  .validation-error--active &, 
+
+  .validation-error--active &,
   .validation-error--editing & {
     display: inline-block;
   }
@@ -146,22 +178,20 @@ input.input-container__textbox {
   display: none;
   margin-left: 4px;
   margin-top: 5px;
-  max-width: 239px;
   vertical-align: middle;
-  .input--small & {
-    max-width: 89px;
-  }
+
   .validation-error--active & {
     color: $text-color--default;
     display: inline-block;
   }
+
   .validation-error--editing & {
     display: inline-block;
     color: $text-color--default;
   }
 }
 
-.readonly-container {  
+.readonly-container {
   display: flex;
   align-items: center;
   cursor: default;
@@ -169,79 +199,63 @@ input.input-container__textbox {
   padding-right: $margin--slim;
   padding-left: 10px;
   padding-top: 2px;
-  border-width: 1px;  
+  border-width: 1px;
   border-color: $background-color--content;
-  width: auto;
-  min-width: $input-width--small + $margin--fat;
-  max-width: none;   
+
+  .readonly-container__display-value {
+    border: none;
+    padding: 0;
+  }
+
   .align-right & {
     padding-left: 0px;
-    padding-right: 20px; 
-    max-width: $input-width--small + $margin--fat;
-    & .readonly-container__display-value  {
+
+    .readonly-container__display-value {
       flex: 1;
       text-align: right;
-      padding-right: 4px;     
-    } 
-    & .readonly-container__suffix {
-      width: $suffix-width;
-      min-width: $suffix-width;
+      padding-right: 4px;
+      border: none;
+    }
+
+    .readonly-container__suffix {
       font-style: italic;
     }
-  }
-  .input--small & {
-    min-width: $input-small-width--small  + $margin--fat;
-    max-width: $input-small-width--small  + $margin--fat;
   }
 }
 
 @media screen and (min-width: $desktop-width--medium) {
-  .input-container {
-    max-width: $input-width--medium;
-    width: $input-width--medium;
-    .input--small & {
-      max-width: $input-small-width--medium;
-      width: $input-small-width--medium;
-    }
-  }
   .input-container__suffix-container {
     padding-top: 0px;
   }
+
   .input-validation {
-    width: $input-width--medium + $margin--fat;
-    max-width: $input-width--medium + $margin--fat;
     &:after {
       left: 260px;
     }
+
     .input--small & {
-      width: $input-small-width--medium + $margin--fat;
-      max-width: $input-small-width--medium + $margin--fat;
       &:after {
         left: 140px;
       }
     }
   }
+
   .input-validation_status__message {
     max-width: 259px;
     margin-top: 3px;
+
     .input--small & {
       max-width: 99px;
     }
   }
-  .readonly-container {  
+
+  .readonly-container {
     padding-top: 1px;
-    min-width: $input-width--medium + $margin--fat;
+
     .align-right & {
-      max-width: $input-width--medium + $margin--fat;
-      & .readonly-container__display-value  {
-        padding-right: 4px;     
-      } 
+      & .readonly-container__display-value {
+        padding-right: 4px;
+      }
     }
-    .input--small & {
-      min-width: $input-small-width--medium  + $margin--fat;
-      max-width: $input-small-width--medium  + $margin--fat;
-    } 
   }
 }
-
-

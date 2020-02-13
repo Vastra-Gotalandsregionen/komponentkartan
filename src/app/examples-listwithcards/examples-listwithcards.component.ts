@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { RowNotification, NotificationType, SaveCancelComponent, SortDirection, SortChangedArgs, SelectableItem, ExpandableRow, ListComponent } from 'vgr-komponentkartan';
-import { ExampleUnit, ExampleUnitDetails, ExampleUnitJusteringar } from './unit.model';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SaveCancelComponent, SortDirection, SortChangedArgs, ExpandableRow, ListComponent } from 'vgr-komponentkartan';
+import { ExampleUnit, ExampleUnitDetails } from './unit.model';
 
 @Component({
   selector: 'app-examples-listwithcards',
@@ -39,8 +39,8 @@ export class ExamplesListwithcardsComponent implements OnInit {
   userFormSubmitted = false;
   listNotification = null;
 
-  @ViewChild(SaveCancelComponent) saveCancelComponent: SaveCancelComponent;
-  @ViewChild(ListComponent) listComponent: ListComponent;
+  @ViewChild(SaveCancelComponent, { static: false }) saveCancelComponent: SaveCancelComponent;
+  @ViewChild(ListComponent, { static: true }) listComponent: ListComponent;
 
   validationMessages = {
     avtalskod: {
@@ -69,7 +69,10 @@ export class ExamplesListwithcardsComponent implements OnInit {
       avtalskod: 1234,
       kontonummer: '1234 1234 12',
       utbetalningsssätt: 'PG',
-      geokod: 'x:6471784 y:6471784',
+      geokod: {
+        x: 6471784,
+        y: 6471784
+      },
       kommun: 'Mölndal', kommunkod: 123,
       telefon: '123456789',
       organisationsnummer: '123456789',
@@ -564,8 +567,11 @@ export class ExamplesListwithcardsComponent implements OnInit {
         besoksadress_stad: 'Göteborg',
         besoksadress_gata: 'Torgatan',
         besoksadress_postnummer: '32133',
-        geokod: 'x:6471784 y:6471784',
-        kommun: 'Mölndal', kommunkod: 123,
+        geokod: {
+          x: 6471784,
+          y: 6471784
+        },
+          kommun: 'Mölndal', kommunkod: 123,
       }
     } as ExampleUnit;
     this.newCardLocked = false;

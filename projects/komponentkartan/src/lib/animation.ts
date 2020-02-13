@@ -9,14 +9,29 @@ import {
 } from '@angular/animations';
 
 export const toggleExpandedState = trigger('toggleExpandedState', [
-    transition(':enter', [
-        style({ height: '0' , overflow: 'hidden'}),
-        animate('{{speed}}', style({ height: '*' }))
-    ], { params: { speed: '0.4s' } }),
-    transition(':leave', [
-        style({ height: '*', overflow: 'hidden' }),
-        animate('{{speed}}', style({ height: '0' })),
-    ], { params: { speed: '0.4s' } }),
+    state('false, void', style({
+        height: '0', overflow: 'hidden'
+    })),
+    state('true', style({
+        height: '*'
+    })),
+    transition('false => *, true => *',
+        [
+          style({ overflow: 'hidden'}),
+          animate('{{speed}}')
+        ],
+        { params: { speed: '400ms ease' } }
+    )
+]);
+
+export const toggleChevron = trigger('toggleChevron', [
+    state('false', style({
+        transform: 'rotate(0deg)'
+    })),
+    state('true', style({
+        transform: 'rotate(-180deg)'
+    })),
+    transition('* => *', [animate('400ms ease')]),
 ]);
 
 export const toggleFadedState = trigger('toggleFadedState', [
@@ -47,6 +62,13 @@ export const remove = trigger('remove', [
         style({ height: '*', overflow: 'hidden', display: 'block' }),
         animate('{{speed}}', style({ height: '0', opacity: '0' })),
     ], { params: { speed: '.2s' } }),
+]);
+
+export const deleteListRow = trigger('deleted', [
+    transition(':leave', [
+        style({ opacity: 1, height: '*', overflow: 'hidden' }),
+        animate('0.4s ease', style({ opacity: 0, height: 0, overflow: 'hidden' })),
+    ]),
 ]);
 
 export const listStagger = trigger('listStagger', [

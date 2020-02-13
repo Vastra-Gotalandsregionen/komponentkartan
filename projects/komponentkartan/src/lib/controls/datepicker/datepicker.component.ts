@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self,
-  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject
+  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject, HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { DatepickerItemComponent } from './datepicker-item.component';
@@ -9,12 +9,14 @@ import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 
 import { Guid } from '../../utils/guid';
+import { DatepickerZoomLevel, CalendarItem, Calendar } from './datepicker.interface';
 
 @Component({
   selector: 'vgr-datepicker',
   templateUrl: './datepicker.component.html'
 })
 export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
+  @Input() @HostBinding('style.width') width = '170px';
   @Input() selectedDate: Date;
   @Input() minZoom: string;
   @Input() minDate: Date;
@@ -28,10 +30,10 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
 
   @Output() selectedDateChanged = new EventEmitter<Date>();
 
-  @ViewChild('datepicker') datepicker: ElementRef;
-  @ViewChild('headerLabel') headerLabel: ElementRef;
-  @ViewChild('headerInput') headerInput: ElementRef;
-  @ViewChild('calendar') calendar: ElementRef;
+  @ViewChild('datepicker', { static: true }) datepicker: ElementRef;
+  @ViewChild('headerLabel', { static: false }) headerLabel: ElementRef;
+  @ViewChild('headerInput', { static: false }) headerInput: ElementRef;
+  @ViewChild('calendar', { static: false }) calendar: ElementRef;
   @ViewChildren(DatepickerItemComponent) items: QueryList<DatepickerItemComponent>;
 
   headerLabelId = Guid.newGuid();
@@ -86,9 +88,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
 
     if (changes.selectedDate) {
       if (changes.selectedDate.firstChange) {
-        setTimeout(() => {
           this.writeValue(changes.selectedDate.currentValue);
-        });
       } else {
         this.writeValue(changes.selectedDate.currentValue);
       }
@@ -121,7 +121,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     this.ngUnsubscribeItems.complete();
   }
 
-  writeValue(value: any) {
+  writeValue(value: Date) {
     this.setSelectedDate(value, false, false);
   }
 
@@ -744,10 +744,10 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
       if (this.label !== newLabel) {
         this.label = newLabel;
       } else {
-        this.label = '';
-        setTimeout(() => {
+       // this.label = '';
+        // setTimeout(() => {
           this.label = newLabel;
-        });
+        // });
       }
     }
   }
@@ -896,25 +896,3 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 }
 
-interface Calendar {
-  date: Date;
-  items: CalendarItem[][];
-  previous: () => void;
-  next: () => void;
-  farPrevious: () => void;
-  farNext: () => void;
-  zoomOut: () => void;
-}
-
-interface CalendarItem {
-  date: Date;
-  selected: boolean;
-  disabled: boolean;
-  isMinZoom: boolean;
-}
-
-const enum DatepickerZoomLevel {
-  Days = 1,
-  Months = 2,
-  Years = 3
-}

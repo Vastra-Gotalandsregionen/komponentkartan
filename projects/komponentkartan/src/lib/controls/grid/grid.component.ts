@@ -27,13 +27,13 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
 
-  @ContentChild(GridHeaderToolbarComponent) gridHeaderToolbar: GridHeaderToolbarComponent;
-  @ContentChild(GridHeaderComponent) gridHeader: GridHeaderComponent;
+  @ContentChild(GridHeaderToolbarComponent, { static: false }) gridHeaderToolbar: GridHeaderToolbarComponent;
+  @ContentChild(GridHeaderComponent, { static: false }) gridHeader: GridHeaderComponent;
   @ContentChildren(GridRowComponent) rows: QueryList<GridRowComponent>;
 
   headerOffset: string; // dynamic offset depending on the heightof the page header + header height.
   hasToolbar = false;
-  public animationSpeed: string;
+  private animationSpeed: string;
   private headerHeight = 79; // vgr-header height (same value as $header-height _setting.sizes.scss)
   private ngUnsubscribe = new Subject();
 
@@ -93,9 +93,9 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       });
     const animationSpeeds = {
       none: '0ms',
-      slow: '.6s ease',
-      medium: '.4s ease',
-      fast: '.2s ease'
+      slow: '600ms ease',
+      medium: '400ms ease',
+      fast: '200ms ease'
     };
     this.animationSpeed = animationSpeeds[this.toggleAnimation];
   }

@@ -16,14 +16,23 @@
       <vgr-card-column>
         <vgr-card-section [title]="'Belopp readonly (slim)'" [expanded]="true">
           <vgr-title-value-layout>
-            <vgr-title-value [title]="'Bruttobelopp'" [slim]="true">
-              <vgr-input [value]="1000" [suffix]="'kr'" [alignRight]="true" [readonly]="true"></vgr-input>
+            <vgr-title-value [slim]="true">
+              <vgr-title-value-heading>Bruttobelopp</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="1000" [suffix]="'kr'" [alignRight]="true" [readonly]="true"></vgr-input>
+              </vgr-title-value-container>
             </vgr-title-value>
-            <vgr-title-value [title]="'Skattesats'" [slim]="true">
-              <vgr-input [value]="32" [suffix]="'%'" [alignRight]="true" [readonly]="true"></vgr-input>
+            <vgr-title-value [slim]="true">
+              <vgr-title-value-heading>Skattesats</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="32" [suffix]="'%'" [alignRight]="true" [readonly]="true"></vgr-input>
+              </vgr-title-value-container>
             </vgr-title-value>
-            <vgr-title-value [title]="'Nettobelopp'" [slim]="true">
-              <vgr-input [value]="32" [suffix]="'kr'" [alignRight]="true" [readonly]="true"></vgr-input>
+            <vgr-title-value [slim]="true">
+              <vgr-title-value-heading>Nettobelopp</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="32" [suffix]="'kr'" [alignRight]="true" [readonly]="true"></vgr-input>
+              </vgr-title-value-container>
             </vgr-title-value>
           </vgr-title-value-layout>
         </vgr-card-section>
@@ -31,14 +40,23 @@
       <vgr-card-column>
         <vgr-card-section [title]="'Belopp'" [expanded]="true" class="card__right">
           <vgr-title-value-layout>
-            <vgr-title-value [title]="'Bruttobelopp'">
-              <vgr-input [value]="10000" [suffix]="'kr'" [alignRight]="true"></vgr-input>
+            <vgr-title-value>
+              <vgr-title-value-heading>Bruttobelopp</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="10000" [suffix]="'kr'" [alignRight]="true"></vgr-input>
+              </vgr-title-value-container>
             </vgr-title-value>
-            <vgr-title-value [title]="'Skattesats'">
-              <vgr-input [value]="32" [suffix]="'%'" [alignRight]="true"></vgr-input>
+            <vgr-title-value>
+              <vgr-title-value-heading>Skattesats</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="32" [suffix]="'%'" [alignRight]="true"></vgr-input>
+              </vgr-title-value-container>
             </vgr-title-value>
-            <vgr-title-value [title]="'Nettobelopp'">
-              <vgr-input [value]="32" [suffix]="'kr'" [alignRight]="true"></vgr-input>
+            <vgr-title-value>
+              <vgr-title-value-heading>Nettobelopp</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="32" [suffix]="'kr'" [alignRight]="true"></vgr-input>
+              </vgr-title-value-container>
             </vgr-title-value>
           </vgr-title-value-layout>
         </vgr-card-section>
@@ -54,14 +72,6 @@
         <th>Exempel</th>
       </tr>
       <tr>
-        <td>title : string</td>
-        <td>Title(label) för title-value-paret.
-        </td>
-        <td>
-          [title]="'En titel'"
-        </td>
-      </tr>
-      <tr>
         <td>slim : boolean</td>
         <td>Om title-value är satt som slim så kommer title-value-raden ta så lite plats som möjligt i höjdled.
           <br>Detta ska användas för en title-value komponent som endast visar readonly fält.
@@ -75,7 +85,7 @@
     <p>
 
       <strong>Tips!</strong> om man vill lägga två komponenter bredvid varandra som värde, lägg dem i en
-      <code>&lt;div&gt; class="row-layout row-layout--tight row-layout--component" &lt;/div&gt;</code>
+      <code>&lt;div class="row-layout row-layout--tight row-layout--component"&gt; &lt;/div&gt;</code>
     </p>
   </div>
 

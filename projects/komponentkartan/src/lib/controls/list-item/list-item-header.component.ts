@@ -7,8 +7,6 @@ import { Component, HostBinding } from '@angular/core';
 
 export class ListItemHeaderComponent {
     @HostBinding('class.list-item__header') listItemHeader = true;
-    
+
     constructor() { }
 }
-
-
