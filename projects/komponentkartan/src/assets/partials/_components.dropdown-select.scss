@@ -88,6 +88,7 @@ vgr-dropdown-select {
       .dropdown-select__header__label {
         width: 100%;
         padding-left: $margin--slim;
+        padding-top: 2px;
         background-color: $background-color--content;
         border-top: $border--single solid $control-border-color--default;
         border-left: $border--single solid $control-border-color--default;
