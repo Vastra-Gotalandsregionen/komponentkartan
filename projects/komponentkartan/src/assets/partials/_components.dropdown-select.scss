@@ -88,7 +88,6 @@ vgr-dropdown-select {
       .dropdown-select__header__label {
         width: 100%;
         padding-left: $margin--slim;
-        padding-top: 2px;
         background-color: $background-color--content;
         border-top: $border--single solid $control-border-color--default;
         border-left: $border--single solid $control-border-color--default;
@@ -96,6 +95,11 @@ vgr-dropdown-select {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        padding-top: 2px;
+
+        @media screen and (min-width: $desktop-width--medium) {
+          padding-top: 0;
+        }
       }
 
       .dropdown-select__header__button {
