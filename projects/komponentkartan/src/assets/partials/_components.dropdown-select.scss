@@ -1,4 +1,9 @@
 vgr-dropdown-select {
+  .dropdown-select {
+    display: inline-block;
+    vertical-align: baseline;
+  }
+
   .dropdown--large {
     width: 270px;
 
