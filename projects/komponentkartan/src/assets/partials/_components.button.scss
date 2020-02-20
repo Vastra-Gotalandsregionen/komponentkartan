@@ -59,11 +59,12 @@
     padding-left: 17px;
     padding-right: 17px;
     &.button--disabled {
-      color: $control-color--disabled;
-      background-color: $text-color--light;
-      border-color: $control-color--disabled;
+      border: none;
+      background-color: $control-color--disabled;
+      cursor: default;
+      color: #fff;
     }
-    &:hover:not(.button--disabled),
+      &:hover:not(.button--disabled),
     &:focus:not(.button--disabled) {
       @extend .background-color--primary;
       color: $text-color--light;
