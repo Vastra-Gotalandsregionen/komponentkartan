@@ -19,7 +19,7 @@ vgr-checkbox .checkbox {
 
 .checkbox__image {
   position: relative;
-  margin-right: $margin--slim;
+  margin-right: $margin--slim - 2px;
   margin-left: $focus-outline-width;
   margin-top: $focus-outline-width;
   margin-bottom: $focus-outline-width;
