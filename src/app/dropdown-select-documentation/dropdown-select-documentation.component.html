@@ -32,19 +32,19 @@
     <section>
       <div class="row-layout">
         <div class="one-third">
-          Liten, 5 alternativ
+          <p>Liten, 5 alternativ</p>
           <vgr-dropdown-select [small]="true" [deselectable]="true">
             <vgr-dropdown-item *ngFor="let item of items5">{{item}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
         <div class="one-third">
-          Stor, 50 alternativ
+          <p>Stor, 50 alternativ</p>
           <vgr-dropdown-select>
             <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
         <div class="one-third">
-          Alternativ med extra information
+          <p>Alternativ med extra information</p>
           <vgr-dropdown-select [multi]="true" [width]="'100%'">
             <vgr-dropdown-item *ngFor="let item of items50" [selectedLabel]="item">
               <div>{{item}}</div>
@@ -57,19 +57,19 @@
     <section>
       <div class="row-layout">
         <div class="one-third">
-          Aktiv
+          <p>Aktiv</p>
           <vgr-dropdown-select [small]="true" [formControl]="form">
             <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
         <div class="one-third">
-          Inaktiv
+          <p>Inaktiv</p>
           <vgr-dropdown-select [small]="true" [disabled]="true" [formControl]="form">
             <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
         <div class="one-third">
-          Endast visning
+          <p>Endast visning</p>
           <vgr-dropdown-select [small]="false" [readonly]="true" [formControl]="form">
             <vgr-dropdown-item [value]="itemValue">
               {{itemLabel}}

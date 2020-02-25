@@ -1,4 +1,9 @@
 vgr-dropdown-select {
+  .dropdown-select {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
   .dropdown--large {
     width: 270px;
 
@@ -95,6 +100,11 @@ vgr-dropdown-select {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        padding-top: 2px;
+
+        @media screen and (min-width: $desktop-width--medium) {
+          padding-top: 0;
+        }
       }
 
       .dropdown-select__header__button {

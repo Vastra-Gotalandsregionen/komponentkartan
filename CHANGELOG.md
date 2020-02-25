@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 6.1.0
 - Updated design of `vgr-button`.
 - Changed margin between `vgr-checkbox` and it's label.
+- Changed alignment of `vgr-textarea`, `vgr-dropdown`, `vgr-datepicker` & `vgr-button`
 
 ## 6.0.0
 - *Breaking change* Angular is upgraded to version 8.

@@ -1,6 +1,5 @@
 .textarea {
   display: inline-block;
-  margin-bottom: 5px;
   &-input {
     line-height: $line-height;
     display: block;
@@ -37,9 +36,12 @@
   &-validation {
     max-height: none;
     padding: $margin--slim;
-    padding-bottom: 8px;
+    padding-bottom: 0px;
     margin-left: -$margin--slim;
     margin-right: -$margin--slim;
+    &-error--active &,  &-error--editing & {
+      padding-bottom: 8px;
+    }
     &-error--active & {
       background-color: $secondary-color--error;
       transition: background-color 0.3s linear;
