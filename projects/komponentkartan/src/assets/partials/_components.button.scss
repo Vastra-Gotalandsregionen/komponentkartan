@@ -3,6 +3,7 @@
     0% {
       background-color: $text-color--light;
     }
+
     50% {
       box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
       background-color: $color;
@@ -11,6 +12,7 @@
       border-style: solid;
       color: $text-color--light;
     }
+
     100% {
       background-color: $text-color--light;
     }
@@ -27,9 +29,11 @@
   0% {
     box-shadow: none;
   }
+
   50% {
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
   }
+
   100% {
     box-shadow: none;
   }
@@ -44,10 +48,13 @@
   min-width: 87px;
   padding-left: 18px;
   padding-right: 18px;
+  border-radius: 4px;
+
   &.button--enabling {
     animation: button-enabling 0.6s;
     transition: background-color 0.4s ease;
   }
+
   &.button--secondary {
     @extend .color--primary;
     @extend .border-color--primary;
@@ -57,33 +64,41 @@
     border-style: solid;
     padding-left: 17px;
     padding-right: 17px;
+
     &.button--disabled {
-      color: $control-color--disabled;
-      background-color: $text-color--light;
-      border-color: $control-color--disabled;
+      border: none;
+      background-color: $control-color--disabled;
+      cursor: default;
+      color: #fff;
     }
-    &:hover:not(.button--disabled),
-    &:focus:not(.button--disabled) {
+
+    &:hover:not(.button--disabled) {
       @extend .background-color--primary;
       color: $text-color--light;
       transition: background-color 0.5s ease, color 0.5s ease;
     }
+
     &.button--enabling {
       animation: button-enabling--secondary-neutral 0.9s;
+
       .theme--red & {
         animation: button-enabling--secondary-red 0.9s;
       }
+
       .theme--blue & {
         animation: button-enabling--secondary-blue 0.9s;
       }
+
       .theme--green & {
         animation: button-enabling--secondary-green 0.9s;
       }
+
       .theme--pinkie & {
         animation: button-enabling--secondary-pinkie 0.9s;
       }
     }
   }
+
   &.button--discreet {
     @extend .color--primary;
     border-color: transparent;
@@ -94,13 +109,16 @@
     min-width: 20px;
     padding-left: 10px;
     padding-right: 10px;
+
     &.button--disabled {
       color: $control-color--disabled;
     }
+
     &.button--enabling {
       animation: none;
       transition: color 0.6s ease;
     }
+
     &:hover:not(.button--disabled),
     &:focus:not(.button--disabled) {
       @extend .background-color--primary-dimmed;
@@ -115,6 +133,7 @@
     padding-left: 22px;
     padding-right: 22px;
     font-size: $font-size--medium;
+
     &.button--secondary {
       padding-left: 21px;
       padding-right: 21px;
