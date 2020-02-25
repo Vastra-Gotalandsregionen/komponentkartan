@@ -5,7 +5,8 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 6.1.0
-- Updated design of `vgr-button`
+- Updated design of `vgr-button`.
+- Changed margin between `vgr-checkbox` and it's label.
 
 ## 6.0.0
 - *Breaking change* Angular is upgraded to version 8.
