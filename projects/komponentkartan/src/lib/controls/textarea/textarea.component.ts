@@ -47,9 +47,6 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
     return this.showValidation && this.control && this.control.invalid && this.hasFocus;
   }
 
-  @Output() blur: EventEmitter<any>;
-  @Output() focus: EventEmitter<any>;
-
   scrollHeight: string;
   control: AbstractControl;
   hasFocus = false;
@@ -62,9 +59,6 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
     this.width = '100%';
     this.height = '120px';
     this.placeholder = '';
-
-    this.blur = new EventEmitter<any>();
-    this.focus = new EventEmitter<any>();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -116,7 +110,6 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   onBlur(event: Event) {
     event.cancelBubble = true;
     this.hasFocus = false;
-    this.blur.emit(event);
     if (this.control) {
       this.control.markAsTouched();
       this.control.markAsDirty();
@@ -128,7 +121,6 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
 
   onFocus(event: Event): void {
     this.hasFocus = true;
-    this.focus.emit(event);
   }
 
   ngOnDestroy() {
