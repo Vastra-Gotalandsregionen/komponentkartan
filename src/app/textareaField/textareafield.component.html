@@ -10,8 +10,11 @@
     <form [formGroup]="form">
       <vgr-textarea [width]="'70%'" [height]="'20px'" [value]="initValue" [placeholder]="'Vänligen fyll i text om du vill'" [readonly]="isReadonly"></vgr-textarea>
 
-      <vgr-textarea formControlName="control1"></vgr-textarea>
+      <vgr-textarea #myTextarea formControlName="control1"></vgr-textarea>
     </form>
+
+    <vgr-button  (click)="setFocus()">Kommentera</vgr-button>
+
     <br>
     <p>Förändras med tema:
       <strong>nej</strong>
@@ -23,6 +26,7 @@
       <vgr-textarea formControlName="control2" [width]="'70%'" [height]="'100px'" [maxlength]="50" [placeholder]="'Vänligen fyll i text'"
         [readonly]="false"></vgr-textarea>
     </form>
+    
     <br>
     <br>
     <vgr-textarea [width]="'70%'" [height]="'130px'" [value]="initValue" [placeholder]="'Vänligen fyll i text om du vill'" [readonly]="isReadonly"></vgr-textarea>
