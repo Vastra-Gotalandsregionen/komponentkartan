@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { DropdownSelectComponent } from '../../../projects/komponentkartan/src/public_api';
 
 @Component({
   selector: 'app-dropdown-select-documentation',
   templateUrl: './dropdown-select-documentation.component.html'
 })
 export class DropdownSelectDocumentationComponent {
-
+  @ViewChild('myDropdown', { read: DropdownSelectComponent, static: false}) myDropdown: DropdownSelectComponent;
   items5: string[];
   items10: string[];
   items50: string[];
@@ -27,6 +28,10 @@ export class DropdownSelectDocumentationComponent {
       items.push(`Val ${item}`);
     }
     return items;
+  }
+
+  setFocus() {
+    this.myDropdown.focus();
   }
 
 }
