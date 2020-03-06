@@ -12,7 +12,10 @@
     </p>
     <p>
       <label>HSA-id: </label>
-      <vgr-input [readonly]="readonly" [width]="'300px'" value="SE2329999131-E000000011351"></vgr-input>
+      <vgr-input #myInput [readonly]="readonly" [width]="'300px'" value="SE2329999131-E000000011351"></vgr-input>
+      <br>
+      <vgr-button (click)="setFocus()">Set fokus</vgr-button>
+      <br>
     </p>
     <p>Förändras med tema: <strong>nej</strong>
     </p>

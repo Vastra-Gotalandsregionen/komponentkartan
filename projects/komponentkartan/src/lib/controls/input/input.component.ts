@@ -1,6 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import {
-  Component, EventEmitter, forwardRef, Host, Input, OnChanges, OnInit, Optional, Output, SimpleChanges, SkipSelf, HostBinding
+  Component, EventEmitter, forwardRef, Host, Input, OnChanges, OnInit, Optional, Output, SimpleChanges, SkipSelf, HostBinding, ViewChild, ElementRef
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -30,6 +30,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() small: boolean;
 
   @Output() valueChanged: EventEmitter<any>;
+  @ViewChild('inputElement', { static: false }) inputElement: ElementRef;
 
   get errorClass() {
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
@@ -65,6 +66,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   ngOnInit() {
     this.setDisplayValue();
+  }
+
+  public focus() {
+    this.inputElement.nativeElement.focus();
   }
 
   writeValue(value: any) {
