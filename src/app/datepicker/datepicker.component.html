@@ -3,7 +3,8 @@
     <div>
       <div>Dag</div>
       <div>
-        <vgr-datepicker [minZoom]="'d'" [disabled]="disabled" [readonly]="readonly" [minDate]="minDate" [maxDate]="maxDate"></vgr-datepicker>
+        <vgr-datepicker #myDatepicker [minZoom]="'d'" [disabled]="disabled" [readonly]="readonly" [minDate]="minDate" [maxDate]="maxDate"></vgr-datepicker>
+        <vgr-button style="margin-left: 20px" (click)="setFocus1()">Sätt fokus</vgr-button>
       </div>
     </div>
     <div>
@@ -21,7 +22,8 @@
     <div>
       <div> Dag utan textinmatning</div>
       <div>
-        <vgr-datepicker [allowText]="false" [minZoom]="'d'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker>
+        <vgr-datepicker #myDatepickerWithoutInput [allowText]="false" [minZoom]="'d'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker>
+        <vgr-button style="margin-left: 20px" (click)="setFocus2()">Sätt fokus</vgr-button>
       </div>
     </div>
     <div>

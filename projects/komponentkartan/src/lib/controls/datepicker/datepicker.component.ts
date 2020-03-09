@@ -33,6 +33,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   @ViewChild('datepicker', { static: true }) datepicker: ElementRef;
   @ViewChild('headerLabel', { static: false }) headerLabel: ElementRef;
   @ViewChild('headerInput', { static: false }) headerInput: ElementRef;
+  @ViewChild('readOnlyHeader', { static: false }) readOnlyHeader: ElementRef;
   @ViewChild('calendar', { static: false }) calendar: ElementRef;
   @ViewChildren(DatepickerItemComponent) items: QueryList<DatepickerItemComponent>;
 
@@ -88,7 +89,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
 
     if (changes.selectedDate) {
       if (changes.selectedDate.firstChange) {
-          this.writeValue(changes.selectedDate.currentValue);
+        this.writeValue(changes.selectedDate.currentValue);
       } else {
         this.writeValue(changes.selectedDate.currentValue);
       }
@@ -122,7 +123,15 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   public focus() {
-    this.datepicker.nativeElement.focus();
+    if (this.readonly) {
+      this.readOnlyHeader.nativeElement.focus();
+    } else {
+      if (this.allowText) {
+        this.headerInput.nativeElement.focus();
+      } else {
+        this.headerLabel.nativeElement.focus();
+      }
+    }
   }
 
   writeValue(value: Date) {
@@ -748,9 +757,9 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
       if (this.label !== newLabel) {
         this.label = newLabel;
       } else {
-       // this.label = '';
+        // this.label = '';
         // setTimeout(() => {
-          this.label = newLabel;
+        this.label = newLabel;
         // });
       }
     }
