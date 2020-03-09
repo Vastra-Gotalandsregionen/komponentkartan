@@ -1,14 +1,16 @@
 <app-component-docs [componentName]="'Dropdown select'">
   <div class="docs__overview">
     <p>Dropdown select finns i två bredder, har en rad olika alternativ och följer temafärg.</p>
-    <vgr-dropdown-select #myDropdown>
+    <vgr-dropdown-select [readonly]="readonly" [disabled]="disabled" #myDropdown>
       <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
       <vgr-dropdown-item>Banan</vgr-dropdown-item>
       <vgr-dropdown-item>Citron</vgr-dropdown-item>
     </vgr-dropdown-select>
 
     <br><br>
-    <vgr-button (click)="setFocus()">Set fokus</vgr-button>
+    <vgr-button (click)="setFocus()">Sätt fokus</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="toggleReadonly()">Readonly</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" [disabled]="readonly" (click)="toggleDisabled()">{{ disabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
     <br><br>
 
     <p>Detta händer automatiskt:</p>

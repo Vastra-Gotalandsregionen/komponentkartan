@@ -14,6 +14,8 @@ export class DropdownSelectDocumentationComponent {
   form: FormControl;
   itemLabel = 'Ett långt alternativ som skrivs ut i helhet';
   itemValue = 1;
+  readonly = false;
+  disabled = false;
 
   constructor() {
     this.items5 = this.getItems(5);
@@ -32,6 +34,14 @@ export class DropdownSelectDocumentationComponent {
 
   setFocus() {
     this.myDropdown.focus();
+  }
+
+  toggleReadonly() {
+    this.readonly = !this.readonly;
+  }
+
+  toggleDisabled(value) {
+    this.disabled = !this.disabled;
   }
 
 }
