@@ -50,4 +50,82 @@
       <vgr-button (click)="toggleReadonly()">Toggle Readonly</vgr-button>
     </div>
   </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>selectedDate: Date</td>
+        <td>Värdet på kontrollen. Gör det möjligt att programmatiskt styra värdet när form control inte används.</td>
+        <td>[value]="someDate"</td>
+      </tr>
+      <tr>
+        <td>minZoom: string</td>
+        <td>Sätter vilken typ av tidsenhet som kan väljas. För dag, använd "d", "day" eller "days". För månad, använd
+          "m", "month" eller "months". För år, använd "y", "year" eller "years". Förvalt värde är dag.</td>
+        <td>[minZoom]="'m'"</td>
+      </tr>
+      <tr>
+        <td>minDate: Date</td>
+        <td>Anger minsta valbara datum. Om inget anges finns ingen begränsing.</td>
+        <td>[minDate]="someDate"</td>
+      </tr>
+      <tr>
+        <td>maxDate: Date</td>
+        <td>Anger största valbara datum. Om inget anges finns ingen begränsing.</td>
+        <td>[maxDate]="someDate"
+      </tr>
+      <tr>
+        <td>allowText: boolean</td>
+        <td>Anger om textinmatning tillåts. Förvalt värde är
+          <code>true</code>.</td>
+        <td>[allowText]="false"</td>
+      </tr>
+      <tr>
+        <td>readonly: boolean</td>
+        <td>Gör att textfält med valt värde visas. Förvalt värde är
+          <code>false</code>.</td>
+        <td>[readonly]="true"</td>
+      </tr>
+      <tr>
+        <td>disabled: boolean</td>
+        <td>Förhindrar interaktion. Förvalt värde är
+          <code>false</code>.</td>
+        <td>[disabled]="true"</td>
+      </tr>
+      <tr>
+        <td>showValidation: boolean</td>
+        <td>Anger om valideringsfel ska visas eller ej. Förvalt värde är
+          <code>false</code>.</td>
+        <td>[showValidation]="true"</td>
+      </tr>
+      <tr>
+        <td>errorMessage: any</td>
+        <td>Meddelande som skall visas vid valideringsfel. Nyckel för meddelandet skall vara valideringens namn.
+          Valideringen required har redan det förvalda värdet "Obligatoriskt". Detta kan ändras.
+        </td>
+        <td>[errorMessage]="&#123; required: 'Du måste välja ett värde.' &#125;"</td>
+      </tr>
+      <tr>
+        <td>labelId: string</td>
+        <td>ID för det element som är rubrik. Används av skärmläsare.</td>
+        <td>[labelId]="'someLabelId'"</td>
+      </tr>
+      <tr>
+        <td>selectedDateChanged: EventEmitter&lt;Date&gt;</td>
+        <td>Event som triggas när val ändras. Värdet är det nya valet.</td>
+        <td>(selectedDateChanged)="doSomething($event)"</td>
+      </tr>
+      
+      <!-- New functionallity in "Next breacking change release" Copy into komponenetkartan-demo when finished.-->
+      <tr>
+        <td>focus()</td>
+        <td>Metod man kan anropa för att programmatiskt kan sätta fokus på komponenten. </td>
+        <td>this.myDropdown.focus()</td>
+      </tr>        
+    </table>
+  </div>
 </app-component-docs>

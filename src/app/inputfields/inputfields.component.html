@@ -177,7 +177,7 @@
   <div class="docs__api">
     <table class="property-table">
       <tr>
-        <th>Property</th>
+        <th>Egenskap</th>
         <th>Beskrivning</th>
         <th>Exempel</th>
       </tr>
@@ -228,25 +228,39 @@
       </tr>
 
       <tr>
-        <th>Property</th>
+        <th>Event</th>
         <th>Beskrivning</th>
         <th>Exempel</th>
-      </tr>
-
-      <tr>
-        <td>blur: eventEmitter</td>
-        <td>Event som triggas när användaren går ifrån inputfield.</td>
-        <td>(blur)="function($event)"</td>
-      </tr>
-      <tr>
-        <td>focus: eventEmitter</td>
-        <td>Event som triggas när användaren fokuserar på inputfield.</td>
-        <td>(focus)="function($event)"</td>
       </tr>
       <tr>
         <td>valueChanged: eventEmitter</td>
         <td>Event som triggas när inputfield uppdateras med ny text.</td>
         <td>(valueChanged)="function($event)"</td>
+      </tr>
+
+      <!-- Deprecated events removed in "Next breacking change release" -->
+      <tr>
+        <td>blur <i>*deprecated*</i>: eventEmitter </td>
+        <td>Event som triggas när användaren går ifrån inputfield.</td>
+        <td>(blur)="function($event)"</td>
+      </tr>
+      <tr>
+        <td>focus <i>*deprecated*</i>: eventEmitter</td>
+        <td>Event som triggas när användaren fokuserar på inputfield.</td>
+        <td>(focus)="function($event)"</td>
+      </tr>
+      <!-- -->
+
+      <!-- New functionallity in "Next breacking change release" Copy into komponenetkartan-demo when finished.-->
+      <tr>
+        <th>Publik metod</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>      
+      <tr>
+        <td>focus()</td>
+        <td>Metod man kan anropa för att programmatiskt kan sätta fokus på komponenten. </td>
+        <td>this.myTextarea.focus()</td>
       </tr>
     </table>
   </div>
