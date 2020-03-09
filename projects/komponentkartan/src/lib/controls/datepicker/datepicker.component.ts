@@ -121,6 +121,10 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     this.ngUnsubscribeItems.complete();
   }
 
+  public focus() {
+    this.datepicker.nativeElement.focus();
+  }
+
   writeValue(value: Date) {
     this.setSelectedDate(value, false, false);
   }
