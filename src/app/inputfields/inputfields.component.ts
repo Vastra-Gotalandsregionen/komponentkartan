@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, AsyncValidatorFn }
 import { CityService } from './cityService';
 
 import { Subject } from 'rxjs';
-import { InputComponent } from '../../../projects/komponentkartan/src/public_api';
+import { InputComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
   selector: 'app-inputfields',

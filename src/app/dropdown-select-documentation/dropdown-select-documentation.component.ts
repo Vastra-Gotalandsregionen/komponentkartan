@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DropdownSelectComponent } from '../../../projects/komponentkartan/src/public_api';
+import { DropdownSelectComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
   selector: 'app-dropdown-select-documentation',

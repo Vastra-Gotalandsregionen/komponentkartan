@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TextareaComponent } from '../../../projects/komponentkartan/src/public_api';
+import { TextareaComponent } from '../../../projects/komponentkartan/src/lib';
+
 
 @Component({
   selector: 'app-textareafield',

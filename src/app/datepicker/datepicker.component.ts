@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DatepickerComponent as Datepicker } from '../../../projects/komponentkartan/src/public_api';
+import { DatepickerComponent as Datepicker } from '../../../projects/komponentkartan/src/lib';
 
 
 @Component({
