@@ -67,6 +67,26 @@ export class GridDocumentationComponent implements OnInit {
   itemsPerPage = 3;
   paginatedPeople: any[] = [];
 
+  expanded0 = false;
+  expanded1 = false;
+  expanded2 = false;
+  expanded3 = false;
+  expanded4 = false;
+  expanded5 = false;
+  expanded6 = false;
+  expanded7 = false;
+  expanded8 = false;
+
+
+  visible1 = false;
+  visible2 = false;
+  visible3 = false;
+  visible4 = false;
+  visible5 = false;
+  visible6 = false;
+  visible7 = false;
+  visible8 = false;
+
   ngOnInit() {
     this.setPagingData(this.activePage);
   }

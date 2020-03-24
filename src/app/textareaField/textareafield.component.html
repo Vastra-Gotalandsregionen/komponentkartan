@@ -10,11 +10,11 @@
     <form [formGroup]="form">
       <vgr-textarea [width]="'70%'" [height]="'20px'" [value]="initValue" [placeholder]="'Vänligen fyll i text om du vill'" [readonly]="isReadonly"></vgr-textarea>
 
-      <vgr-textarea #myTextarea [readonly]="readonly" formControlName="control1"></vgr-textarea>
+      <vgr-textarea #myTextarea [readonly]="isReadonly" formControlName="control1"></vgr-textarea>
     </form>
 
     <vgr-button (click)="setFocus()">Sätt fokus</vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" (click)="readonly = !readonly">Readonly</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="isReadonly = !isReadonly">Readonly</vgr-button>
 
     <br>
     <p>Förändras med tema:

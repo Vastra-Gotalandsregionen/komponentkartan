@@ -28,6 +28,8 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   state: string;
   allCities: any;
 
+  readonly = false;
+
   value: any = 81273128739;
   private ngUnsubscribe = new Subject();
 
