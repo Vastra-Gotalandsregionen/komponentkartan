@@ -1,13 +1,13 @@
 import { Input, Component, HostListener, ElementRef, forwardRef, HostBinding, AfterViewInit, ViewChild, Renderer2 } from '@angular/core';
-import { Router, RouterLinkActive } from '@angular/router';
-import { MenuItemBase } from './menu-item-base';
+import { Router } from '@angular/router';
+import { MenuItemBaseDirective } from './menu-item-base';
 
 @Component({
     selector: 'vgr-menu-item',
     templateUrl: './menu-item.component.html',
-    providers: [{ provide: MenuItemBase, useExisting: forwardRef(() => MenuItemComponent) }]
+    providers: [{ provide: MenuItemBaseDirective, useExisting: forwardRef(() => MenuItemComponent) }]
 })
-export class MenuItemComponent extends MenuItemBase implements AfterViewInit {
+export class MenuItemComponent extends MenuItemBaseDirective implements AfterViewInit {
     @Input() text: string;
     @Input() link: string;
     @Input() disabled = false;

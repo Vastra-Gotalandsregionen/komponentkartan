@@ -1,6 +1,6 @@
 import { Input, Component, ElementRef, HostBinding, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, OnInit, ViewChild, OnDestroy, Renderer2 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { MenuItemBase } from './menu-item-base';
+import { MenuItemBaseDirective } from './menu-item-base';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 import { MenuItemComponent } from '../..';
 import { Subject } from 'rxjs';
@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'vgr-submenu',
     templateUrl: './submenu.component.html',
-    providers: [{ provide: MenuItemBase, useExisting: forwardRef(() => SubmenuComponent) }],
+    providers: [{ provide: MenuItemBaseDirective, useExisting: forwardRef(() => SubmenuComponent) }],
     animations: [
         trigger('toggleSubMenu', [
             state('void', style({
@@ -27,7 +27,7 @@ import { takeUntil } from 'rxjs/operators';
     ]
 })
 
-export class SubmenuComponent extends MenuItemBase implements AfterContentInit, OnInit, OnDestroy {
+export class SubmenuComponent extends MenuItemBaseDirective implements AfterContentInit, OnInit, OnDestroy {
     @Input() text: string;
     private _showExpanded: boolean;
     private ngUnsubscribe = new Subject();
@@ -37,7 +37,7 @@ export class SubmenuComponent extends MenuItemBase implements AfterContentInit, 
     @HostBinding('attr.role') role = 'menuitem';
     @Input() @HostBinding('attr.aria-expanded') expanded = false;
 
-    @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
+    @ContentChildren(MenuItemBaseDirective) menuItems: QueryList<MenuItemBaseDirective>;
     @HostBinding('class.submenu') hasClass = true;
     @HostBinding('class.submenu--child-selected') childSelected: boolean;
     @ViewChild('menuitem', { static: true }) menuitem: ElementRef;

@@ -1,5 +1,5 @@
 import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, SimpleChanges, OnChanges, AfterContentInit, OnDestroy, Renderer2 } from '@angular/core';
-import { MenuItemBase } from '../menu/menu-item-base';
+import { MenuItemBaseDirective } from '../menu/menu-item-base';
 import { SubmenuComponent } from '../menu/submenu.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChanges {
   private ngUnsubscribe = new Subject();
 
-  @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
+  @ContentChildren(MenuItemBaseDirective) menuItems: QueryList<MenuItemBaseDirective>;
   @Input() userName: string;
   @Input() initials: string;
   @Input() textColor: string;
