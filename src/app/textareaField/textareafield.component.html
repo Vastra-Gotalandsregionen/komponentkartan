@@ -10,8 +10,12 @@
     <form [formGroup]="form">
       <vgr-textarea [width]="'70%'" [height]="'20px'" [value]="initValue" [placeholder]="'Vänligen fyll i text om du vill'" [readonly]="isReadonly"></vgr-textarea>
 
-      <vgr-textarea formControlName="control1"></vgr-textarea>
+      <vgr-textarea #myTextarea [readonly]="readonly" formControlName="control1"></vgr-textarea>
     </form>
+
+    <vgr-button (click)="setFocus()">Sätt fokus</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="readonly = !readonly">Readonly</vgr-button>
+
     <br>
     <p>Förändras med tema:
       <strong>nej</strong>
@@ -23,6 +27,7 @@
       <vgr-textarea formControlName="control2" [width]="'70%'" [height]="'100px'" [maxlength]="50" [placeholder]="'Vänligen fyll i text'"
         [readonly]="false"></vgr-textarea>
     </form>
+    
     <br>
     <br>
     <vgr-textarea [width]="'70%'" [height]="'130px'" [value]="initValue" [placeholder]="'Vänligen fyll i text om du vill'" [readonly]="isReadonly"></vgr-textarea>
@@ -46,7 +51,7 @@
   <div class="docs__api">
     <table class="property-table">
       <tr>
-        <th>Property</th>
+        <th>Namn</th>
         <th>Beskrivning</th>
         <th>Exempel</th>
       </tr>
@@ -74,6 +79,13 @@
         <td>readonly: boolean</td>
         <td>Sätter textfältet i readonly-läge. </td>
         <td>[readonly]="true"</td>
+      </tr>   
+      
+      <!-- New functionallity in "Next breacking change release" Copy into komponenetkartan-demo when finished.-->
+      <tr>
+        <td>focus()</td>
+        <td>Metod man kan anropa för att programmatiskt kan sätta fokus på komponenten. </td>
+        <td>this.myTextarea.focus()</td>
       </tr>
     </table>
   </div>

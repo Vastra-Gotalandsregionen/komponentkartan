@@ -1,10 +1,11 @@
 
 import {map} from 'rxjs/operators';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { CityService } from './cityService';
 
 import { Subject } from 'rxjs';
+import { InputComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
   selector: 'app-inputfields',
@@ -12,6 +13,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./inputfields.component.scss']
 })
 export class InputfieldsComponent implements OnInit, OnDestroy {
+  @ViewChild('myInput', { read: InputComponent, static: false}) myInput: InputComponent;
   form: FormGroup;
   isSmall: boolean;
   cityName: string;
@@ -97,6 +99,10 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  setFocus() {
+    this.myInput.focus();
   }
 
   valueChange(value) {

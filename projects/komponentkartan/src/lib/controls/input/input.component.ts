@@ -1,6 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import {
-  Component, EventEmitter, forwardRef, Host, Input, OnChanges, OnInit, Optional, Output, SimpleChanges, SkipSelf, HostBinding
+  Component, EventEmitter, forwardRef, Host, Input, OnChanges, OnInit, Optional, Output, SimpleChanges, SkipSelf, HostBinding, ViewChild, ElementRef
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -29,11 +29,8 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() alignRight: boolean;
   @Input() small: boolean;
 
-  @Output() blur: EventEmitter<any>;
-  @Output() focus: EventEmitter<any>;
   @Output() valueChanged: EventEmitter<any>;
-
-
+  @ViewChild('inputElement', { static: false }) inputElement: ElementRef;
 
   get errorClass() {
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
@@ -54,8 +51,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   selectedErrorMessage: string;
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
-    this.blur = new EventEmitter<any>();
-    this.focus = new EventEmitter<any>();
     this.valueChanged = new EventEmitter<any>();
     this.nrOfDecimals = 2;
     this.swedishDecimalPipe = new DecimalPipe('sv-SE');
@@ -71,6 +66,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   ngOnInit() {
     this.setDisplayValue();
+  }
+
+  public focus() {
+    this.inputElement.nativeElement.focus();
   }
 
   writeValue(value: any) {
@@ -116,7 +115,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.formatDisplayNumber();
 
     this.hasFocus = false;
-    this.blur.emit(event);
   }
 
   formatDisplayNumber() {
@@ -149,8 +147,6 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
       this.displayValue = this.displayValue.toString().replace(/\s/g, '').replace(/−/g, '-');
     }
     this.hasFocus = true;
-
-    this.focus.emit(event);
   }
 
   private convertStringToNumber(value: string): number {
