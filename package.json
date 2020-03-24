@@ -71,7 +71,7 @@
     "smoothscroll-polyfill": "^0.4.4",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.5.3",
+    "typescript": "^3.6.5",
     "wallaby-webpack": "^3.9.15",
     "webpack": "^4.41.5"
   }
