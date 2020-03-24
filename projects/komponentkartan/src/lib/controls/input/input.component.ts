@@ -30,7 +30,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() small: boolean;
 
   @Output() valueChanged: EventEmitter<any>;
-  @ViewChild('inputElement', { static: false }) inputElement: ElementRef;
+  @ViewChild('inputElement') inputElement: ElementRef;
 
   get errorClass() {
     return this.showValidation && this.control && this.control.invalid && !this.hasFocus;

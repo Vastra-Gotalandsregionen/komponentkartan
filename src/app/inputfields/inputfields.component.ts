@@ -13,7 +13,7 @@ import { InputComponent } from '../../../projects/komponentkartan/src/lib';
   styleUrls: ['./inputfields.component.scss']
 })
 export class InputfieldsComponent implements OnInit, OnDestroy {
-  @ViewChild('myInput', { read: InputComponent, static: false}) myInput: InputComponent;
+  @ViewChild('myInput', { read: InputComponent }) myInput: InputComponent;
   form: FormGroup;
   isSmall: boolean;
   cityName: string;

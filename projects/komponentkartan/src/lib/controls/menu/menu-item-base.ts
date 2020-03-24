@@ -1,5 +1,6 @@
-import { Output, EventEmitter } from '@angular/core';
+import { Output, EventEmitter, Directive } from '@angular/core';
 
+@Directive()
 export abstract class MenuItemBase {
     @Output() home: EventEmitter<null> = new EventEmitter();
     @Output() end: EventEmitter<null> = new EventEmitter();

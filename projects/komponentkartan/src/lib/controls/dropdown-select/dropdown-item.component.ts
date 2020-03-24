@@ -13,7 +13,7 @@ export class DropdownItemComponent implements AfterViewInit {
   @Output() previous = new EventEmitter();
   @Output() next = new EventEmitter();
   @Output() nextMatch = new EventEmitter<string>();
-  @ViewChild('item', { static: false }) item: ElementRef;
+  @ViewChild('item') item: ElementRef;
   label: string;
   multi = false;
   selected = false;

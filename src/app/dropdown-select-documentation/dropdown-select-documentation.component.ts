@@ -7,7 +7,7 @@ import { DropdownSelectComponent } from '../../../projects/komponentkartan/src/l
   templateUrl: './dropdown-select-documentation.component.html'
 })
 export class DropdownSelectDocumentationComponent {
-  @ViewChild('myDropdown', { read: DropdownSelectComponent, static: false}) myDropdown: DropdownSelectComponent;
+  @ViewChild('myDropdown', { read: DropdownSelectComponent }) myDropdown: DropdownSelectComponent;
   items5: string[];
   items10: string[];
   items50: string[];

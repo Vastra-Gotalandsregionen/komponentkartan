@@ -46,7 +46,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
     return this.showValidation && this.control && this.control.invalid && this.hasFocus;
   }
 
-  @ViewChild('textareaElement', { static: false }) textareaElement: ElementRef;
+  @ViewChild('textareaElement') textareaElement: ElementRef;
 
   scrollHeight: string;
   control: AbstractControl;

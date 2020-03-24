@@ -9,8 +9,8 @@ import { DatepickerComponent as Datepicker } from '../../../projects/komponentka
   styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent {
-  @ViewChild('myDatepicker', { read: Datepicker, static: false }) myDatepicker: Datepicker;
-  @ViewChild('myDatepickerWithoutInput', { read: Datepicker, static: false }) myDatepickerWithoutInput: Datepicker;
+  @ViewChild('myDatepicker', { read: Datepicker }) myDatepicker: Datepicker;
+  @ViewChild('myDatepickerWithoutInput', { read: Datepicker }) myDatepickerWithoutInput: Datepicker;
 
   disabled = false;
   readonly = false;

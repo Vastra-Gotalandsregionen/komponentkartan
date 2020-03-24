@@ -41,9 +41,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
   @ViewChild('header', { static: true }) header: ElementRef;
-  @ViewChild('selectAll', { static: false }) selectAll: ElementRef;
-  @ViewChild('deselectButton', { static: false }) deselectButton: ButtonComponent;
-  @ViewChild(FilterTextboxComponent, { static: false }) filter: FilterTextboxComponent;
+  @ViewChild('selectAll') selectAll: ElementRef;
+  @ViewChild('deselectButton') deselectButton: ButtonComponent;
+  @ViewChild(FilterTextboxComponent) filter: FilterTextboxComponent;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
   expanded = false;
