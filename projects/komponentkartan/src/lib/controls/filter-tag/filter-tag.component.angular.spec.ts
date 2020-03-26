@@ -57,7 +57,7 @@ describe('[FilterTagComponent - Angular]', () => {
       fixture.detectChanges();
     });
     it('button is displayed as enabled', () => {
-      expect(buttonElement.classes['button--disabled']).toBe(false);
+      expect(buttonElement.classes['button--disabled']).not.toBe(true);
     });
     it('click bubbles', () => {
       let clickBubbled = false;
@@ -96,14 +96,14 @@ describe('[FilterTagComponent - Angular]', () => {
       it('button is not displayed as removing', fakeAsync(() => {
         buttonElement.nativeElement.click();
         fixture.detectChanges();
-        expect(buttonElement.classes['filter-tag--removing']).toBe(false);
+        expect(buttonElement.classes['filter-tag--removing']).not.toBe(true);
         tick(200);
       }));
       it('button is not displayed as removed after delay', fakeAsync(() => {
         buttonElement.nativeElement.click();
         tick(200);
         fixture.detectChanges();
-        expect(buttonElement.classes['filter-tag--removed']).toBe(false);
+        expect(buttonElement.classes['filter-tag--removed']).not.toBe(true);
       }));
       it('remove is not emitted after delay', fakeAsync(() => {
         spyOn(component.remove, 'emit');

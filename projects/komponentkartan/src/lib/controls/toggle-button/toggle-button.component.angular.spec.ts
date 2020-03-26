@@ -53,7 +53,7 @@ describe('[ToggleButtonComponent - Angular]', () => {
       fixture.detectChanges();
     });
     it('button is displayed as enabled', () => {
-      expect(buttonElement.classes['button--disabled']).toBe(false);
+      expect(buttonElement.classes['button--disabled']).not.toBe(true);
     });
     it('click bubbles', () => {
       let clickBubbled = false;
@@ -69,7 +69,7 @@ describe('[ToggleButtonComponent - Angular]', () => {
     it('button is dispalyed as primary', () => {
       component.pressed = true;
       fixture.detectChanges();
-      expect(buttonElement.classes['button--secondary']).toBe(false);
+      expect(buttonElement.classes['button--secondary']).not.toBe(true);
     });
   });
 

@@ -110,8 +110,8 @@ describe('[InputComponent]', () => {
           });
           it('CSS Class validation-error--editing has been applied', () => {
             expect(validatedInputElement.classes['validation-error--editing']).toEqual(true);
-            expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
-            expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
+            expect(validatedInputElement.classes['validation-error--active']).not.toBe(true);
+            expect(validatedInputElement.classes['validation-error--fixed']).not.toBe(true);
           });
 
           describe('When input is out of focus and still corrected', () => {
@@ -120,9 +120,9 @@ describe('[InputComponent]', () => {
               fixture.detectChanges();
             });
             it('CSS Class validation-error--active is still active', () => {
-              expect(validatedInputElement.classes['validation-error--editing']).toEqual(false);
+              expect(validatedInputElement.classes['validation-error--editing']).not.toEqual(true);
               expect(validatedInputElement.classes['validation-error--active']).toEqual(true);
-              expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
+              expect(validatedInputElement.classes['validation-error--fixed']).not.toEqual(true);
             });
 
             describe('When submit is triggered with valid input', () => {
@@ -132,8 +132,8 @@ describe('[InputComponent]', () => {
                 rootElement.triggerEventHandler('submit', event);
               });
               it('Validation is not triggered', () => {
-                expect(validatedInputElement.classes['validation-error--editing']).toEqual(false);
-                expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
+                expect(validatedInputElement.classes['validation-error--editing']).not.toEqual(true);
+                expect(validatedInputElement.classes['validation-error--active']).not.toEqual(true);
                 expect(validatedInputElement.classes['validation-error--fixed']).toEqual(true);
               });
             });
@@ -166,9 +166,9 @@ describe('[InputComponent]', () => {
         it('Validation is not triggered', () => {
           const element = rootElement.query(By.css('.input-validation_status__message'));
           expect(element.nativeElement.innerText).toEqual('error');
-          expect(validatedInputElement.classes['validation-error--editing']).toEqual(false);
-          expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
-          expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
+          expect(validatedInputElement.classes['validation-error--editing']).not.toEqual(true);
+          expect(validatedInputElement.classes['validation-error--active']).not.toEqual(true);
+          expect(validatedInputElement.classes['validation-error--fixed']).not.toEqual(true);
         });
 
         describe('When error is corrected first time', () => {
@@ -180,9 +180,9 @@ describe('[InputComponent]', () => {
             fixture.detectChanges();
           });
           it('Validation is not triggered', () => {
-            expect(validatedInputElement.classes['validation-error--editing']).toEqual(false);
-            expect(validatedInputElement.classes['validation-error--active']).toEqual(false);
-            expect(validatedInputElement.classes['validation-error--fixed']).toEqual(false);
+            expect(validatedInputElement.classes['validation-error--editing']).not.toEqual(true);
+            expect(validatedInputElement.classes['validation-error--active']).not.toEqual(true);
+            expect(validatedInputElement.classes['validation-error--fixed']).not.toEqual(true);
           });
         });
       });

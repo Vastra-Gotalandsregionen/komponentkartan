@@ -19,7 +19,7 @@ import { By } from '@angular/platform-browser';
 })
 export class TestComponent { }
 
-describe('NotificationComponent', () => {
+describe('[NotificationComponent]', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let rootElement: DebugElement;
@@ -27,10 +27,10 @@ describe('NotificationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TestComponent, NotificationComponent, IconComponent ],
+      declarations: [TestComponent, NotificationComponent, IconComponent],
       imports: [IconModule, FontAwesomeModule, NoopAnimationsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -43,7 +43,10 @@ describe('NotificationComponent', () => {
 
   describe('Notification 1', () => {
     it('should have not have any class"', () => {
-      expect(notifications[0].attributes['class']).toBeNull();
+      let classes: string[] = notifications[0].attributes['class'].split(' ');
+      const ignoredClasses: string[] = ['ng-trigger', 'ng-trigger-toggleFadedState', 'ng-animating'];
+      classes = classes.filter(cssClass => !ignoredClasses.includes(cssClass));
+      expect(classes.length).toBe(0);
     });
     it('should have text "Utan klass och utan ikon"', () => {
       expect(notifications[0].nativeElement.innerText).toBe('Utan klass och utan ikon');

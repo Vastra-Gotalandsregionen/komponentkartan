@@ -72,7 +72,7 @@ describe('[LockButtonComponent - Angular]', () => {
       fixture.detectChanges();
     });
     it('button is displayed as enabled', () => {
-      expect(buttonElement.classes['button--disabled']).toBe(false);
+      expect(buttonElement.classes['button--disabled']).not.toBe(true);
     });
     it('click bubbles', () => {
       let clickBubbled = false;
@@ -90,7 +90,7 @@ describe('[LockButtonComponent - Angular]', () => {
       fixture.detectChanges();
     });
     it('it is displayed as locked', () => {
-      expect(buttonElement.classes['lock-button--unlocked']).toBe(false);
+      expect(buttonElement.classes['lock-button--unlocked']).not.toBe(true);
     });
     it('aria-label is "lås upp"', () => {
       expect(buttonElement.attributes['aria-label']).toBe('lås upp');

@@ -37,7 +37,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
     @HostBinding('attr.role') role = 'menuitem';
     @Input() @HostBinding('attr.aria-expanded') expanded = false;
 
-    @ContentChildren(MenuItemBaseDirective) menuItems: QueryList<MenuItemBaseDirective>;
+    @ContentChildren(MenuItemBaseDirective) menuItems: QueryList<MenuItemComponent>;
     @HostBinding('class.submenu') hasClass = true;
     @HostBinding('class.submenu--child-selected') childSelected: boolean;
     @ViewChild('menuitem', { static: true }) menuitem: ElementRef;

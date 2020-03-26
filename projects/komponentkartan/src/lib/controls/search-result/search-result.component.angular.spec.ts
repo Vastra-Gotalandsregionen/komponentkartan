@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DebugElement, ElementRef, Component } from '@angular/core';
+import { DebugElement, Component } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
@@ -34,7 +34,7 @@ class TestSearchResultComponent {
 
 }
 
-describe('SearchResultComponent', () => {
+describe('[SearchResultComponent - Angular]', () => {
   let component: SearchResultComponent;
   let testSearchResultsComponentFixture: ComponentFixture<TestSearchResultComponent>;
   let onlyComponentFixture: ComponentFixture<SearchResultComponent>;
@@ -49,10 +49,7 @@ describe('SearchResultComponent', () => {
         TestSearchResultComponent,
         SearchResultComponent
       ],
-      imports: [PerfectScrollbarModule, BrowserDynamicTestingModule],
-      providers: [
-        { provide: ElementRef }
-      ]
+      imports: [PerfectScrollbarModule, BrowserDynamicTestingModule]
     });
 
     TestBed.compileComponents()

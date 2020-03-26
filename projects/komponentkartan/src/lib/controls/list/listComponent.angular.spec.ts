@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement, ElementRef, Input, Component, Renderer2 } from '@angular/core';
+import { DebugElement, Input, Component, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -58,7 +58,6 @@ describe('[ListComponent - Angular]', () => {
       ],
       imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule],
       providers: [
-        { provide: ElementRef },
         { provide: Renderer2 },
         ListService
       ]
@@ -115,8 +114,8 @@ describe('[ListComponent - Angular]', () => {
           expect(itemElements[0].classes['list-item--expanded']).toBe(true);
         });
         it('all other items are collapsed', () => {
-          expect(itemElements[1].classes['list-item--expanded']).toBe(false);
-          expect(itemElements[2].classes['list-item--expanded']).toBe(false);
+          expect(itemElements[1].classes['list-item--expanded']).not.toBe(true);
+          expect(itemElements[2].classes['list-item--expanded']).not.toBe(true);
         });
       });
     });
@@ -141,8 +140,8 @@ describe('[ListComponent - Angular]', () => {
           expect(itemElements[0].classes['list-item--expanded']).toBe(true);
         });
         it('all other items are collapsed', () => {
-          expect(itemElements[1].classes['list-item--expanded']).toBe(false);
-          expect(itemElements[2].classes['list-item--expanded']).toBe(false);
+          expect(itemElements[1].classes['list-item--expanded']).not.toBe(true);
+          expect(itemElements[2].classes['list-item--expanded']).not.toBe(true);
         });
       });
     });
@@ -201,7 +200,7 @@ describe('[ListComponent - Angular]', () => {
           expect(spyExpandPrevented).toHaveBeenCalled();
         });
         it('clicked item is still collapsed', () => {
-          expect(itemElements[0].classes['list-item--expanded']).toBe(false);
+          expect(itemElements[0].classes['list-item--expanded']).not.toBe(true);
         });
         it('it emits a collapsePrevented event', () => {
           expect(spyCollapsePrevented).toHaveBeenCalled();
