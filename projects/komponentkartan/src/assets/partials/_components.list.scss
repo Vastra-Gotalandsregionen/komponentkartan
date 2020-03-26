@@ -565,18 +565,6 @@ vgr-list.list--new-item-added {
   @include flex-column($i);
 }
 
-vgr-list-column-trashcan {
-  >vgr-icon:focus {
-    outline: 0;
-    border: $focus-outline-width solid $focus-color;
-
-  }
-
-  &.disabled {
-    color: $secondary-color--default;
-  }
-}
-
 @media screen and (min-width: $desktop-width--medium) {
   .list-item__content {
     .list-item--notification-visible & {
@@ -609,8 +597,7 @@ vgr-list-column-trashcan {
   }
 }
 
-vgr-list-column-header,
-vgr-list-column-header-checkbox {
+vgr-list-column-header {
   .checkbox__label {
     font-size: 18px;
   }
@@ -618,8 +605,7 @@ vgr-list-column-header-checkbox {
 
 @media screen and (min-width: $desktop-width--medium) {
 
-  vgr-list-column-header,
-  vgr-list-column-header-checkbox {
+  vgr-list-column-header {
     .checkbox__label {
       font-size: 20px;
     }
