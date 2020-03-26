@@ -54,7 +54,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
             // SetFocus after the animation is completed.
             setTimeout(() => {
                 if (this.showExpanded) {
-                    this.menuItems.toArray()[1].setFocus();
+                    this.menuItems.toArray()[0].setFocus();
                 } else {
                     this.setFocus();
                 }
@@ -68,7 +68,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         }
         if (event.key === 'ArrowDown' || event.key === 'Down') {
             if (this.expanded) {
-                this.menuItems.toArray()[1].setFocus();
+                this.menuItems.toArray()[0].setFocus();
             } else {
                 this.arrowDown.emit();
             }
@@ -149,7 +149,6 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
 
     addSubscriptions() {
         const menuItemArray = this.menuItems.toArray();
-        menuItemArray.splice(0, 1);
         menuItemArray.forEach((x, i) => {
             x.home
                 .pipe(takeUntil(this.ngUnsubscribe))
