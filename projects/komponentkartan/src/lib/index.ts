@@ -11,6 +11,7 @@ export { LockButtonComponent } from './controls/lock-button/lock-button.componen
 export { SaveCancelComponent } from './controls/save-cancel/save-cancel.component';
 export { RadioGroupComponent } from './controls/radioGroup/radioGroup.component';
 export { ModalPlaceholderComponent } from './controls/modal/modal.component';
+export { InputOldComponent } from './controls/input-old/input.component';
 export { InputComponent } from './controls/input/input.component';
 export { CardSectionComponent } from './controls/card/cardSection.component';
 export { TitleValueComponent } from './controls/titleValue/titleValue.component';

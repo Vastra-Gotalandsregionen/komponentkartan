@@ -26,6 +26,16 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   state: string;
   allCities: any;
 
+  fisken = 25;
+  laser = null;
+  dummyVals = [
+    1,
+    2,
+    3,
+    'Fyra',
+    'Fem'
+  ];
+
   value: any = 81273128739;
   private ngUnsubscribe = new Subject();
 
@@ -92,6 +102,10 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.createForm();
+  }
+
+  logga(val) {
+    console.log(val);
   }
 
   ngOnDestroy() {

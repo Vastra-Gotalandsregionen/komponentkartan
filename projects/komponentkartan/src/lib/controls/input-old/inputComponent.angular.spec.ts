@@ -10,7 +10,7 @@ import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { InputComponent } from '../../controls/input/input.component';
+import { InputOldComponent } from './input.component';
 import { TruncatePipe } from '../../pipes/truncatePipe';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { IconComponent } from '../icon/icon.component';
@@ -21,8 +21,8 @@ import localeSv from '@angular/common/locales/sv';
 import { IconModule } from '../icon/icon.module';
 
 describe('[InputComponent]', () => {
-  let component: InputComponent;
-  let fixture: ComponentFixture<InputComponent>;
+  let component: InputOldComponent;
+  let fixture: ComponentFixture<InputOldComponent>;
   let rootElement: DebugElement;
   let validatedInputElement: DebugElement;
 
@@ -34,12 +34,12 @@ describe('[InputComponent]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      declarations: [InputComponent, TruncatePipe, ErrorMessagePipe, IconComponent],
+      declarations: [InputOldComponent, TruncatePipe, ErrorMessagePipe, IconComponent],
       imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, IconModule]
     });
 
     TestBed.compileComponents().then(() => {
-      fixture = TestBed.createComponent(InputComponent);
+      fixture = TestBed.createComponent(InputOldComponent);
       component = fixture.componentInstance;
       rootElement = fixture.debugElement;
       fixture.detectChanges();

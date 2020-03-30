@@ -4,21 +4,21 @@ export class Examples {
     <form [formGroup]="updateOnChangeForm">
       <vgr-title-value-layout>
         <vgr-title-value title="Förnamn">
-          <vgr-input formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty" [errorMessage]="validationMessages.firstname"></vgr-input>
+          <vgr-input-old formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty" [errorMessage]="validationMessages.firstname"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Efternamn">
-          <vgr-input formControlName="lastname" [showValidation]="updateOnChangeForm.controls.lastname.dirty" [errorMessage]="validationMessages.lastname"></vgr-input>
+          <vgr-input-old formControlName="lastname" [showValidation]="updateOnChangeForm.controls.lastname.dirty" [errorMessage]="validationMessages.lastname"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Ålder">
-          <vgr-input formControlName="age" [showValidation]="updateOnChangeForm.controls.age.dirty" [alignRight]="true" [suffix]="'år'"
-            [errorMessage]="validationMessages.age"></vgr-input>
+          <vgr-input-old formControlName="age" [showValidation]="updateOnChangeForm.controls.age.dirty" [alignRight]="true" [suffix]="'år'"
+            [errorMessage]="validationMessages.age"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="E-post">
-          <vgr-input formControlName="email" [showValidation]="updateOnChangeForm.controls.email.dirty" [errorMessage]="validationMessages.email"></vgr-input>
+          <vgr-input-old formControlName="email" [showValidation]="updateOnChangeForm.controls.email.dirty" [errorMessage]="validationMessages.email"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Inkomst">
-          <vgr-input formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty" [errorMessage]="validationMessages.salary"
-            [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
+          <vgr-input-old formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty" [errorMessage]="validationMessages.salary"
+            [formatNumber]="true" [nrOfDecimals]="0"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Favoritdjur">
           <vgr-dropdown formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'" [showValidation]="updateOnChangeForm.controls.favourite_pet.dirty"
@@ -55,20 +55,20 @@ export class Examples {
     <form [formGroup]="updateOnSubmitForm">
       <vgr-title-value-layout>
         <vgr-title-value title="Förnamn">
-          <vgr-input formControlName="firstname" [showValidation]="formSubmitted" [errorMessage]="validationMessages.firstname"></vgr-input>
+          <vgr-input-old formControlName="firstname" [showValidation]="formSubmitted" [errorMessage]="validationMessages.firstname"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Efternamn">
-          <vgr-input formControlName="lastname" [showValidation]="formSubmitted" [errorMessage]="validationMessages.lastname"></vgr-input>
+          <vgr-input-old formControlName="lastname" [showValidation]="formSubmitted" [errorMessage]="validationMessages.lastname"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Ålder">
-          <vgr-input formControlName="age" [showValidation]="formSubmitted" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+          <vgr-input-old formControlName="age" [showValidation]="formSubmitted" [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="E-post">
-          <vgr-input formControlName="email" [showValidation]="formSubmitted" [errorMessage]="validationMessages.email"></vgr-input>
+          <vgr-input-old formControlName="email" [showValidation]="formSubmitted" [errorMessage]="validationMessages.email"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Inkomst">
-          <vgr-input formControlName="salary" [showValidation]="formSubmitted" [errorMessage]="validationMessages.salary" [formatNumber]="true"
-            [nrOfDecimals]="0"></vgr-input>
+          <vgr-input-old formControlName="salary" [showValidation]="formSubmitted" [errorMessage]="validationMessages.salary" [formatNumber]="true"
+            [nrOfDecimals]="0"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Favoritdjur">
           <vgr-dropdown formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'" [showValidation]="formSubmitted" [items]="dropdownItems"></vgr-dropdown>
@@ -105,21 +105,21 @@ export class Examples {
     <form [formGroup]="updateOnBlurForm">
       <vgr-title-value-layout>
         <vgr-title-value title="Förnamn">
-          <vgr-input formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched" [errorMessage]="validationMessages.firstname"></vgr-input>
+          <vgr-input-old formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched" [errorMessage]="validationMessages.firstname"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Efternamn">
-          <vgr-input formControlName="lastname" [showValidation]="updateOnBlurForm.controls.lastname.touched" [errorMessage]="validationMessages.lastname"></vgr-input>
+          <vgr-input-old formControlName="lastname" [showValidation]="updateOnBlurForm.controls.lastname.touched" [errorMessage]="validationMessages.lastname"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Ålder">
-          <vgr-input formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched" [alignRight]="true" [suffix]="'år'"
-            [errorMessage]="validationMessages.age"></vgr-input>
+          <vgr-input-old formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched" [alignRight]="true" [suffix]="'år'"
+            [errorMessage]="validationMessages.age"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="E-post">
-          <vgr-input formControlName="email" [showValidation]="updateOnBlurForm.controls.email.touched" [errorMessage]="validationMessages.email"></vgr-input>
+          <vgr-input-old formControlName="email" [showValidation]="updateOnBlurForm.controls.email.touched" [errorMessage]="validationMessages.email"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Inkomst">
-          <vgr-input formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched" [errorMessage]="validationMessages.salary"
-            [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
+          <vgr-input-old formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched" [errorMessage]="validationMessages.salary"
+            [formatNumber]="true" [nrOfDecimals]="0"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value title="Favoritdjur">
           <vgr-dropdown formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'" [showValidation]="updateOnBlurForm.controls.favourite_pet.touched"

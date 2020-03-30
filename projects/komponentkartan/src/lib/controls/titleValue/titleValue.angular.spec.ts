@@ -1,9 +1,7 @@
-
 import { ComponentFixture, TestBed, async, fakeAsync } from '@angular/core/testing';
 import { DebugElement, Component } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
-import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { IconModule } from '../icon/icon.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -12,7 +10,7 @@ import { TitleValueLayoutComponent } from './titleValueLayout.component';
 import { TitleValueComponent } from './titleValue.component';
 import { TitleValueContainerComponent } from './titleValueContainer/titleValueContainer.component';
 import { TitleValueHeadingComponent } from './titleValueHeading/titleValueHeading.component';
-import { InputComponent } from '../input/input.component';
+import { InputOldComponent } from '../input-old/input.component';
 import { FormsModule } from '@angular/forms';
 import { IconComponent } from '../icon/icon.component';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
@@ -26,19 +24,19 @@ import { TruncatePipe } from '../../pipes/truncatePipe';
         <vgr-title-value>
           <vgr-title-value-heading>Bruttobelopp</vgr-title-value-heading>
           <vgr-title-value-container>
-            <vgr-input [value]="10000" [suffix]="'kr'" [alignRight]="true"></vgr-input>
+            <vgr-input-old [value]="10000" [suffix]="'kr'" [alignRight]="true"></vgr-input-old>
           </vgr-title-value-container>
         </vgr-title-value>
         <vgr-title-value>
           <vgr-title-value-heading>Skattesats</vgr-title-value-heading>
           <vgr-title-value-container>
-            <vgr-input [value]="32" [suffix]="'%'" [alignRight]="true"></vgr-input>
+            <vgr-input-old [value]="32" [suffix]="'%'" [alignRight]="true"></vgr-input-old>
           </vgr-title-value-container>
         </vgr-title-value>
         <vgr-title-value>
           <vgr-title-value-heading>Nettobelopp</vgr-title-value-heading>
           <vgr-title-value-container>
-            <vgr-input [value]="32" [suffix]="'kr'" [alignRight]="true"></vgr-input>
+            <vgr-input-old [value]="32" [suffix]="'kr'" [alignRight]="true"></vgr-input-old>
           </vgr-title-value-container>
         </vgr-title-value>
       </vgr-title-value-layout>
@@ -62,7 +60,7 @@ describe('[TitleValueComponent - test]', () => {
                 TitleValueComponent,
                 TitleValueContainerComponent,
                 TitleValueHeadingComponent,
-                InputComponent,
+                InputOldComponent,
                 IconComponent,
                 ErrorMessagePipe,
                 TruncatePipe

@@ -15,7 +15,7 @@
     <div class="docs__examples">
       <div style="margin-bottom: 20px">
         <div><span style="font-weight: bold">Enkelt exempel</span> - den filtrerade texten finns i För- eller Efternamn.</div>
-        <vgr-input [small]="true" style="display: inline-block; " #filterInput></vgr-input>
+        <vgr-input-old [small]="true" style="display: inline-block; " #filterInput></vgr-input-old>
         <vgr-button (click)="addFilter(filterInput.value)">Lägg till filter</vgr-button>
         <vgr-button (click)="removeAllFilters()" style="margin-left: 20px;">Ta bort alla filter</vgr-button>
         <vgr-button (click)="toggleDisableFilters()" style="margin-left: 20px;">{{filtersDisabled ? 'Aktivera' : 'Inaktivera'}} filtertaggar</vgr-button>
@@ -45,13 +45,13 @@
             <div>
               <div>Namn:</div>
               <div>
-                <vgr-input formControlName="name"></vgr-input>
+                <vgr-input-old formControlName="name"></vgr-input-old>
               </div>
             </div>
             <div>
               <div>Minimiålder:</div>
               <div>
-                <vgr-input formControlName="minimumAge" [small]="true"></vgr-input>
+                <vgr-input-old formControlName="minimumAge" [small]="true"></vgr-input-old>
               </div>
             </div>
             <div>            

@@ -44,23 +44,23 @@
                 <vgr-title-value [slim]="newCardLocked">
                   <vgr-title-value-heading>HSA-id</vgr-title-value-heading>
                   <vgr-title-value-container [width]="2">
-                    <vgr-input [width]="'100%'" [readonly]="true" formControlName="hsaid"></vgr-input>
+                    <vgr-input-old [width]="'100%'" [readonly]="true" formControlName="hsaid"></vgr-input-old>
                   </vgr-title-value-container>
                 </vgr-title-value>
                 <vgr-title-value [slim]="newCardLocked">
                   <vgr-title-value-heading>Avtalskod</vgr-title-value-heading>
                   <vgr-title-value-container [width]="2">
-                    <vgr-input [width]="'100%'" formControlName="avtalskod"
+                    <vgr-input-old [width]="'100%'" formControlName="avtalskod"
                       [showValidation]="newUnitForm.controls.avtalskod.touched || submitted"
-                      [errorMessage]="validationMessages.avtalskod" [readonly]="newCardLocked"></vgr-input>
+                      [errorMessage]="validationMessages.avtalskod" [readonly]="newCardLocked"></vgr-input-old>
                   </vgr-title-value-container>
                 </vgr-title-value>
                 <vgr-title-value [slim]="newCardLocked">
                   <vgr-title-value-heading>Enhetskod*</vgr-title-value-heading>
                   <vgr-title-value-container [width]="2">
-                    <vgr-input [width]="'100%'" formControlName="enhetskod"
+                    <vgr-input-old [width]="'100%'" formControlName="enhetskod"
                       [showValidation]="newUnitForm.controls.enhetskod.touched || submitted"
-                      [errorMessage]="validationMessages.enhetskod" [readonly]="newCardLocked"></vgr-input>
+                      [errorMessage]="validationMessages.enhetskod" [readonly]="newCardLocked"></vgr-input-old>
                   </vgr-title-value-container>
                 </vgr-title-value>
               </vgr-title-value-layout>
@@ -98,24 +98,24 @@
                 <vgr-title-value [slim]="newCardLocked">
                   <vgr-title-value-heading>Enhetschef*</vgr-title-value-heading>
                   <vgr-title-value-container>
-                    <vgr-input [width]="'100%'" formControlName="enhetschef"
+                    <vgr-input-old [width]="'100%'" formControlName="enhetschef"
                       [showValidation]="newUnitForm.controls.enhetschef.touched || submitted"
                       [readonly]="newCardLocked">
-                    </vgr-input>
+                    </vgr-input-old>
                   </vgr-title-value-container>
                 </vgr-title-value>
                 <vgr-title-value [slim]="newCardLocked">
                   <vgr-title-value-heading>Telefon</vgr-title-value-heading>
                   <vgr-title-value-container>
-                    <vgr-input [width]="'100%'" formControlName="enhetschef_telefon" [readonly]="newCardLocked">
-                    </vgr-input>
+                    <vgr-input-old [width]="'100%'" formControlName="enhetschef_telefon" [readonly]="newCardLocked">
+                    </vgr-input-old>
                   </vgr-title-value-container>
                 </vgr-title-value>
                 <vgr-title-value [slim]="newCardLocked">
                   <vgr-title-value-heading>E-post</vgr-title-value-heading>
                   <vgr-title-value-container>
-                    <vgr-input [width]="'100%'" formControlName="enhetschef_epost" [readonly]="newCardLocked">
-                    </vgr-input>
+                    <vgr-input-old [width]="'100%'" formControlName="enhetschef_epost" [readonly]="newCardLocked">
+                    </vgr-input-old>
                   </vgr-title-value-container>
                 </vgr-title-value>
               </vgr-title-value-layout>
@@ -138,19 +138,19 @@
               </form>
               <vgr-title-value-layout>
                 <vgr-title-value [title]=" 'Ägarkod'" [slim]="newCardLocked">
-                  <vgr-input [width]="'100%'" [readonly]="true" formControlName="agarkod"></vgr-input>
+                  <vgr-input-old [width]="'100%'" [readonly]="true" formControlName="agarkod"></vgr-input-old>
                 </vgr-title-value>
                 <vgr-title-value [title]=" 'Ägarform'" [slim]="newCardLocked">
-                  <vgr-input [width]="'100%'" [readonly]="true" formControlName="agarform"></vgr-input>
+                  <vgr-input-old [width]="'100%'" [readonly]="true" formControlName="agarform"></vgr-input-old>
                 </vgr-title-value>
               </vgr-title-value-layout>
               <form [formGroup]="privateOwnerForm">
                 <vgr-title-value-layout>
                   <vgr-title-value *ngIf="newUnitForm.controls.agarform.value==='Privat'" [title]=" 'Organisationsnr*'"
                     [slim]="newCardLocked">
-                    <vgr-input [width]="'100%'" formControlName="organisationsnummer"
+                    <vgr-input-old [width]="'100%'" formControlName="organisationsnummer"
                       [showValidation]="privateOwnerForm.controls.organisationsnummer.touched || submitted"
-                      [readonly]="newCardLocked"></vgr-input>
+                      [readonly]="newCardLocked"></vgr-input-old>
                   </vgr-title-value>
                   <vgr-title-value *ngIf="newUnitForm.controls.agarform.value==='Privat'" [title]=" 'Utbetalningssätt*'"
                     [slim]="newCardLocked">
@@ -163,20 +163,20 @@
                   </vgr-title-value>
                   <vgr-title-value *ngIf="newUnitForm.controls.agarform.value==='Privat'" [title]=" 'Kontonummer*'"
                     [slim]="newCardLocked">
-                    <vgr-input [width]="'100%'" formControlName="kontonummer"
+                    <vgr-input-old [width]="'100%'" formControlName="kontonummer"
                       [showValidation]="privateOwnerForm.controls.kontonummer.touched || submitted"
-                      [readonly]="newCardLocked"></vgr-input>
+                      [readonly]="newCardLocked"></vgr-input-old>
                   </vgr-title-value>
                 </vgr-title-value-layout>
               </form>
               <vgr-title-value-layout>
                 <vgr-title-value [title]=" 'Leverantörsid RD*'" [slim]="newCardLocked">
-                  <vgr-input [width]="'100%'" formControlName="leverantorsid"
+                  <vgr-input-old [width]="'100%'" formControlName="leverantorsid"
                     [showValidation]="newUnitForm.controls.leverantorsid.touched || submitted"
-                    [readonly]="newCardLocked"></vgr-input>
+                    [readonly]="newCardLocked"></vgr-input-old>
                 </vgr-title-value>
                 <vgr-title-value [title]=" 'Kundreferens'" [slim]="newCardLocked">
-                  <vgr-input [width]="'100%'" formControlName="kundreferens" [readonly]="newCardLocked"></vgr-input>
+                  <vgr-input-old [width]="'100%'" formControlName="kundreferens" [readonly]="newCardLocked"></vgr-input-old>
                 </vgr-title-value>
               </vgr-title-value-layout>
             </vgr-card-section>
@@ -247,8 +247,8 @@
                   <vgr-title-value-heading [width]="3">Regionsövergripande grupper (kr/månad)
                   </vgr-title-value-heading>
                   <vgr-title-value-container>
-                    <vgr-input [width]="'100%'" formControlName="regionsovergripandegrupper" [readonly]="newCardLocked">
-                    </vgr-input>
+                    <vgr-input-old [width]="'100%'" formControlName="regionsovergripandegrupper" [readonly]="newCardLocked">
+                    </vgr-input-old>
                   </vgr-title-value-container>
                 </vgr-title-value>
               </vgr-title-value-layout>
@@ -302,23 +302,23 @@
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>HSA-id</vgr-title-value-heading>
                           <vgr-title-value-container [width]="2">
-                            <vgr-input [width]="'100%'" [readonly]="true" formControlName="hsaid"></vgr-input>
+                            <vgr-input-old [width]="'100%'" [readonly]="true" formControlName="hsaid"></vgr-input-old>
                           </vgr-title-value-container>
                         </vgr-title-value>
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>Avtalskod*</vgr-title-value-heading>
                           <vgr-title-value-container [width]="2">
-                            <vgr-input [width]="'100%'" formControlName="avtalskod"
+                            <vgr-input-old [width]="'100%'" formControlName="avtalskod"
                               [showValidation]="editUnitForm.controls.avtalskod.touched || submitted"
-                              [errorMessage]="validationMessages.avtalskod" [readonly]="cardLocked"></vgr-input>
+                              [errorMessage]="validationMessages.avtalskod" [readonly]="cardLocked"></vgr-input-old>
                           </vgr-title-value-container>
                         </vgr-title-value>
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>Enhetskod*</vgr-title-value-heading>
                           <vgr-title-value-container [width]="2">
-                            <vgr-input [width]="'100%'" formControlName="enhetskod"
+                            <vgr-input-old [width]="'100%'" formControlName="enhetskod"
                               [showValidation]="editUnitForm.controls.enhetskod.touched || submitted"
-                              [errorMessage]="validationMessages.enhetskod" [readonly]="cardLocked"></vgr-input>
+                              [errorMessage]="validationMessages.enhetskod" [readonly]="cardLocked"></vgr-input-old>
                           </vgr-title-value-container>
                         </vgr-title-value>
                         <vgr-title-value [slim]="cardLocked">
@@ -352,23 +352,23 @@
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>Enhetschef*</vgr-title-value-heading>
                           <vgr-title-value-container>
-                            <vgr-input [width]="'100%'" formControlName="enhetschef"
+                            <vgr-input-old [width]="'100%'" formControlName="enhetschef"
                               [showValidation]="editUnitForm.controls.enhetschef.touched || submitted"
-                              [readonly]="cardLocked"></vgr-input>
+                              [readonly]="cardLocked"></vgr-input-old>
                           </vgr-title-value-container>
                         </vgr-title-value>
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>Telefon</vgr-title-value-heading>
                           <vgr-title-value-container>
-                            <vgr-input [width]="'100%'" formControlName="enhetschef_telefon" [readonly]="cardLocked">
-                            </vgr-input>
+                            <vgr-input-old [width]="'100%'" formControlName="enhetschef_telefon" [readonly]="cardLocked">
+                            </vgr-input-old>
                           </vgr-title-value-container>
                         </vgr-title-value>
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>E-post</vgr-title-value-heading>
                           <vgr-title-value-container>
-                            <vgr-input [width]="'100%'" formControlName="enhetschef_epost" [readonly]="cardLocked">
-                            </vgr-input>
+                            <vgr-input-old [width]="'100%'" formControlName="enhetschef_epost" [readonly]="cardLocked">
+                            </vgr-input-old>
                           </vgr-title-value-container>
                         </vgr-title-value>
                       </vgr-title-value-layout>
@@ -389,13 +389,13 @@
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>Ägarkod</vgr-title-value-heading>
                           <vgr-title-value-container>
-                            <vgr-input [width]="'100%'" [readonly]="true" formControlName="agarkod"></vgr-input>
+                            <vgr-input-old [width]="'100%'" [readonly]="true" formControlName="agarkod"></vgr-input-old>
                           </vgr-title-value-container>
                         </vgr-title-value>
                         <vgr-title-value [slim]="cardLocked">
                           <vgr-title-value-heading>Ägarform</vgr-title-value-heading>
                           <vgr-title-value-container>
-                            <vgr-input [width]="'100%'" [readonly]="true" formControlName="agarform"></vgr-input>
+                            <vgr-input-old [width]="'100%'" [readonly]="true" formControlName="agarform"></vgr-input-old>
                           </vgr-title-value-container>
                         </vgr-title-value>
                       </vgr-title-value-layout>
@@ -406,9 +406,9 @@
                           <vgr-title-value [slim]="cardLocked">
                             <vgr-title-value-heading>Organisationsnr*</vgr-title-value-heading>
                             <vgr-title-value-container>
-                              <vgr-input [width]="'100%'" formControlName="organisationsnummer"
+                              <vgr-input-old [width]="'100%'" formControlName="organisationsnummer"
                                 [showValidation]="editprivateOwnerForm.controls.organisationsnummer.touched || submitted"
-                                [readonly]="cardLocked"></vgr-input>
+                                [readonly]="cardLocked"></vgr-input-old>
                             </vgr-title-value-container>
                           </vgr-title-value>
                           <vgr-title-value [slim]="cardLocked">
@@ -425,22 +425,22 @@
                           <vgr-title-value [slim]="cardLocked">
                             <vgr-title-value-heading>Kontonummer*</vgr-title-value-heading>
                             <vgr-title-value-container>
-                              <vgr-input [width]="'100%'" formControlName="kontonummer"
+                              <vgr-input-old [width]="'100%'" formControlName="kontonummer"
                                 [showValidation]="editprivateOwnerForm.controls.kontonummer.touched || submitted"
-                                [readonly]="cardLocked"></vgr-input>
+                                [readonly]="cardLocked"></vgr-input-old>
                             </vgr-title-value-container>
                           </vgr-title-value>
                         </vgr-title-value-layout>
                       </form>
                       <vgr-title-value-layout>
                         <vgr-title-value [title]=" 'Leverantörsid RD*'" [slim]="cardLocked">
-                          <vgr-input [width]="'100%'" formControlName="leverantorsid"
+                          <vgr-input-old [width]="'100%'" formControlName="leverantorsid"
                             [showValidation]="editUnitForm.controls.leverantorsid.touched || submitted"
-                            [readonly]="cardLocked"></vgr-input>
+                            [readonly]="cardLocked"></vgr-input-old>
                         </vgr-title-value>
                         <vgr-title-value [title]=" 'Kundreferens'" [slim]="cardLocked">
-                          <vgr-input [width]="'100%'" formControlName="kundreferens" [readonly]="cardLocked">
-                          </vgr-input>
+                          <vgr-input-old [width]="'100%'" formControlName="kundreferens" [readonly]="cardLocked">
+                          </vgr-input-old>
                         </vgr-title-value>
                       </vgr-title-value-layout>
                     </vgr-card-section>
@@ -482,13 +482,13 @@
                       <vgr-title-value [slim]="cardLocked">
                         <vgr-title-value-heading>Geokod (PT90)</vgr-title-value-heading>
                         <vgr-title-value-container>
-                          <!-- <vgr-input>{{row.previewObject.details.geokod}}</vgr-input> -->
+                          <!-- <vgr-input-old>{{row.previewObject.details.geokod}}</vgr-input-old> -->
 
                           <section class="row-layout row-layout--tight">
-                            <vgr-input [readonly]="cardLocked" [value]="row.previewObject.details.geokod.x" suffix=":x"
-                              [small]="true" [alignRight]="true" width="100%"></vgr-input>
-                            <vgr-input [readonly]="cardLocked" [value]="row.previewObject.details.geokod.y" suffix=":y"
-                              [small]="true" [alignRight]="true" width="100%"></vgr-input>
+                            <vgr-input-old [readonly]="cardLocked" [value]="row.previewObject.details.geokod.x" suffix=":x"
+                              [small]="true" [alignRight]="true" width="100%"></vgr-input-old>
+                            <vgr-input-old [readonly]="cardLocked" [value]="row.previewObject.details.geokod.y" suffix=":y"
+                              [small]="true" [alignRight]="true" width="100%"></vgr-input-old>
                           </section>
                         </vgr-title-value-container>
                       </vgr-title-value>
@@ -522,8 +522,8 @@
                           <vgr-title-value-heading [width]="3">Regionsövergripande grupper (kr/månad)
                           </vgr-title-value-heading>
                           <vgr-title-value-container>
-                            <vgr-input [width]="'100%'" formControlName="regionsovergripandegrupper"
-                              [readonly]="cardLocked"></vgr-input>
+                            <vgr-input-old [width]="'100%'" formControlName="regionsovergripandegrupper"
+                              [readonly]="cardLocked"></vgr-input-old>
                           </vgr-title-value-container>
                         </vgr-title-value>
                       </vgr-title-value-layout>

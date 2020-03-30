@@ -23,10 +23,10 @@ export class CardComponent implements OnInit {
     <vgr-title-value-layout>
 
         <vgr-title-value [title]="'Förnamn'" [slim]="!unlocked">
-          <vgr-input [value]="'Per-Åke'" [readonly]="!unlocked"></vgr-input>
+          <vgr-input-old [value]="'Per-Åke'" [readonly]="!unlocked"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value [title]="'Efternamn'" [slim]="!unlocked">
-          <vgr-input [value]="'Berg'" [readonly]="!unlocked"></vgr-input>
+          <vgr-input-old [value]="'Berg'" [readonly]="!unlocked"></vgr-input-old>
         </vgr-title-value>
         <vgr-title-value [title]="'Boende'" [slim]="!unlocked">
           <vgr-dropdown [values]="['Hus','Lägenhet','Kartong']" [readonly]="!unlocked"></vgr-dropdown>
