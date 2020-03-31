@@ -1,6 +1,6 @@
 @import "../../../assets/partials/settings.colors";
-@import "../../../assets//partials/_settings.fonts.scss";
-@import "../../../assets//partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/_settings.sizes.scss";
 
 .inputwrapper {
     border: 1px solid #151515;
@@ -12,10 +12,12 @@
     input {
         flex-grow: 1;
         border: 0;
-        // background: pink;
         height: 27px;
         line-height: 28px;
-        padding-right: 5px;
+        // padding-right: 0 10px;
+        &[type='search'] {
+            padding-right: 0px;
+        }
     }
     div.prefix, div.suffix {
         // background: yellow;
@@ -39,6 +41,11 @@
             text-align: right;
         }
     }
+    
+    .searchicon {
+        padding: 0 5px;
+        line-height: 30px;
+    }
 }
 
 .error-message {
@@ -50,6 +57,7 @@
 }
 
 :host {
+    margin: 1px;
     display: inline-block;
     box-sizing: content-box;
     &.vgr-input--show-validation.ng-invalid {
@@ -70,7 +78,7 @@
             outline: $focus-outline-width solid $focus-color;
         }
     }
-    &.vgr-input--show-validation.focused.ng-invalid {
+    &.vgr-input--show-validation.vgr-input--focused.ng-invalid {
         background: $background-color--default;
         .error-message::ng-deep .icon {
             color: $primary-color--default;
@@ -81,4 +89,9 @@
             border-color: transparent;
         }
     }
+
+    &.vgr-input--suffix input {
+        padding-right: 5px;
+    }
+
 }

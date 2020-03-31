@@ -26,16 +26,6 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   state: string;
   allCities: any;
 
-  fisken = 25;
-  laser = null;
-  dummyVals = [
-    1,
-    2,
-    3,
-    'Fyra',
-    'Fem'
-  ];
-
   value: any = 81273128739;
   private ngUnsubscribe = new Subject();
 
@@ -92,7 +82,7 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder) {
     this.cityName = 'Houstons';
-    this.amount1 = 15000;
+    this.amount1 = 15000.00;
     this.amount2 = -25.5;
     this.percentValue = 0.02;
     this.kmValue = 11;

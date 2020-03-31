@@ -17,12 +17,12 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @HostBinding('class.vgr-input--focused') hasFocus = false;
   @HostBinding('class.vgr-input--readonly') @Input() readonly = false;
   @HostBinding('class.vgr-input--disabled') @Input() disabled: boolean;
+  @HostBinding('class.vgr-input--suffix') hasSuffix = false;
 
   /** DEFAULT INPUT OPTIONS FORWARDED **/
-  /*@Input() disabled = false;
   @Input() required = false;
-  @Input() step = null;*/
-  // @Input() pattern = null;
+  @Input() step = null;
+  @Input() pattern = null;
   @Input() id: string;
   @Input() maxlength: number;
   @Input() minlength: number;
@@ -42,7 +42,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @Input() errorMessage: any = 'Innehåller valideringsfel';
 
   @Output() blur = new EventEmitter<any>();
-  @Output() focus = new EventEmitter<any>();
+  // @Output() focus = new EventEmitter<any>();
+
+  @ViewChild('inputElement', {static: false}) inputElement: ElementRef;
 
   control: AbstractControl;
 
@@ -51,6 +53,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   ngOnInit() {
     if (!this.textAlign && this.suffix) {
       this.textAlign = 'right';
+    }
+    if (this.suffix) {
+      this.hasSuffix = true;
     }
   }
 
@@ -64,6 +69,10 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
     if (value) {
       this.value = value;
     }
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
   }
 
   propagateChange = (_: any) => {};
@@ -92,8 +101,13 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   }
 
   onFocus(event) {
+    console.log(event, 'focus');
     this.hasFocus = true;
-    this.focus.emit(event);
+    // this.focus.emit(event);
+  }
+
+  public focus() {
+    this.inputElement.nativeElement.focus();
   }
 
 }

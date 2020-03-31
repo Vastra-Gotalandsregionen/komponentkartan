@@ -4,48 +4,14 @@
   <div class="docs__overview">
     <p>
       <code>
-        &lt;vgr-input-old&gt; </code> är ett fält för inmatning utav värden i t.ex. ett formulär. Sen har den även följande
-      funktioner
-      implementerade:
-      <br> - Två olika fasta storlekar på fältet (liten och stor).
-      <br> - Visar suffix.
+        &lt;vgr-input&gt; </code> är ett fält för inmatning utav värden i t.ex. ett formulär. Den har liknande funktioner som ett vanligt HTML-input fält men har även möjlighet för:
+      <br> - Visa suffix eller prefix
+      <br> - Visa upp felmedlenaden i anslutning till input-fältet.
     </p>
     <p>
-      <label>HSA-id: </label>
-      <vgr-input-old [readonly]="readonly" [width]="'300px'" value="SE2329999131-E000000011351"></vgr-input-old>
+      <label>HSA-id: </label><br>
+      <vgr-input [readonly]="readonly" width="300" value="SE2329999131-E000000011351"></vgr-input>
     </p>
-    <p>
-      <label>Ng-model & pattern [a-z]: </label><br>
-      <vgr-input [(ngModel)]="dummyVals[0]" required pattern="[a-z]{3}"></vgr-input><br>
-      val: {{dummyVals[0]}}
-    </p>
-
-    <p>
-      <label>ngModel, number, min, max: </label><br>
-      <vgr-input [(ngModel)]="dummyVals[1]" suffix="kr"></vgr-input><br>
-      val: {{dummyVals[1]}}
-    </p>
-
-    <p>
-      <label for="dummy3">ngModel, text, placeholder, max och min length: </label><br>
-      <vgr-input id="dummy3" [(ngModel)]="dummyVals[2]" minlength="3" maxlength="5" textAlign="right" placeholder="kul text"></vgr-input><br>
-      val: {{dummyVals[2]}}
-    </p>
-
-    <p>
-      <label>ngModel, readonly: </label><br>
-      <vgr-input [(ngModel)]="dummyVals[3]" readonly="true" placeholder="kul text"></vgr-input><br>
-      val: {{dummyVals[3]}}
-    </p>
-
-    <p>
-      <label>ngModel, disabled,  width: 500px: </label><br>
-      <vgr-input [(ngModel)]="dummyVals[4]" width="500" placeholder="kul text" (focus)="logga('focus')" (blur)="logga('blur')"></vgr-input><br>
-      val: {{dummyVals[4]}}
-    </p>
-
-    
-
     <p>Förändras med tema: <strong>nej</strong>
     </p>
   </div>
@@ -55,70 +21,48 @@
     <section>
       <div class="row-layout">
         <div class="one-third">
-          <h3>Small</h3>
-          <vgr-input-old [small]="true"></vgr-input-old>
+          <h3>Normal storlek</h3>
+          <vgr-input [(ngModel)]="value" pattern="[a-z]*"></vgr-input>
         </div>
         <div class="one-third">
-          <h3>Large</h3>
-          <vgr-input-old [small]="false"></vgr-input-old>
-        </div>
-        <div class="one-third">
-          <h3>Custom Size</h3>
-          <vgr-input-old [width]="'100%'"></vgr-input-old>
+          <h3>Egenvald storlek</h3>
+          <vgr-input [(ngModel)]="value" pattern="[\d]*" [width]="425"></vgr-input>
         </div>
       </div>
     </section>
     <br>
     <br>
-    <br>
-    <br>
     <vgr-button (click)="readonly = !readonly">Readonly</vgr-button>
-    <p>Ändra storleken på inputfälten:</p>
-    <vgr-radio-group
-      [options]="[{value:'Stor', displayName:'Stor', selected:true},{value:'Liten', displayName:'Liten'}]"
-      (selectedChanged)="toggleInputType($event)">
-    </vgr-radio-group>
     <h3>Input hantering</h3>
     <form [formGroup]="form">
-      <div>
-        Exakt 3 VERSALER (validera vid initiering)<br>
-        <vgr-input formControlName="control7" [errorMessage]="validationMessages.control7"
-          [maxlength]="3"></vgr-input><br>
-        <span>Värde: </span>
-        <span>{{form.controls.control7.value}}</span>
-      </div>
       <div class="row-layout">
         <div class="one-third">
           <div>
-            Belopp 1 (2 decimaler)
-            <vgr-input-old [readonly]="readonly" formControlName="control1" [formatNumber]="true" [nrOfDecimals]="2"
-              [suffix]="'kr'" [alignRight]="true" [small]="isSmall" [errorMessage]="validationMessages.control1"
-              [showValidation]="form.controls.control1.touched"></vgr-input-old>
-            <span>Belopp 1: </span>
-            <span>{{formatNumericValue(form.controls.control1.value)}}</span>
+            Input 1<br>
+            <vgr-input [readonly]="readonly" formControlName="control1" [errorMessage]="validationMessages.control1"></vgr-input><br>
+            <span>Värde 1: </span>
+            <span>{{form.controls.control1.value}}</span>
           </div>
           <div>
-            Belopp 2 (2 decimaler)
-            <vgr-input-old [readonly]="readonly" formControlName="control2" [formatNumber]="true" [nrOfDecimals]="2"
-              [suffix]="'kr'" [alignRight]="true" [small]="isSmall" [errorMessage]="validationMessages.control2"
-              [showValidation]="form.controls.control2.touched"></vgr-input-old>
+            Belopp 2 (decimaler och suffix)<br>
+            <vgr-input [readonly]="readonly" formControlName="control2" 
+              [suffix]="'kr'" textalign="right" [errorMessage]="validationMessages.control2"></vgr-input><br>
             <span>Belopp 2: </span>
             <span>{{formatNumericValue(form.controls.control2.value)}}</span>
           </div>
           <div>
-            Procent (2 decimaler)
-            <vgr-input-old [readonly]="readonly" formControlName="control3" [formatNumber]="true" [nrOfDecimals]="2"
-              [suffix]="'%'" [alignRight]="true" [small]="isSmall" [errorMessage]="validationMessages.control3"
-              [showValidation]="form.controls.control3.touched"></vgr-input-old>
+            Belopp 3 (med prefix och type number)<br>
+            <vgr-input [readonly]="readonly" formControlName="control3" 
+              [prefix]="'$'" [errorMessage]="validationMessages.control3"
+              type="number"
+              [showValidation]="form.controls.control3.touched"></vgr-input><br>
             <span>Procent: </span>
             <span>{{formatNumericValue(form.controls.control3.value)}}</span>
           </div>
           <div>
-            Km (inga decimaler)
-            <vgr-input-old [readonly]="readonly" formControlName="control4" [formatNumber]="true" [nrOfDecimals]="0"
-              [suffix]="'km'" [alignRight]="true" [small]="isSmall" [errorMessage]="validationMessages.control4"
-              [showValidation]="form.controls.control4.touched"></vgr-input-old>
-            <span>Km: </span>
+            Högerställd (med placeholder)<br>
+            <vgr-input [readonly]="readonly" formControlName="control4" textAlign="right" placeholder="input align right"></vgr-input><br>
+            <span>värde: </span>
             <span>{{formatNumericValue(form.controls.control4.value)}}</span>
           </div>
           <div>
