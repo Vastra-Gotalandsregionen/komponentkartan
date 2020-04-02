@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement, ElementRef, Input, Component, Renderer2 } from '@angular/core';
+import { DebugElement, Input, Component, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GridHeaderComponent } from './grid-header.component';
@@ -60,7 +60,6 @@ describe('GridComponent', () => {
       ],
       imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule],
       providers: [
-        { provide: ElementRef },
         { provide: Renderer2 },
         GridService
       ]
@@ -122,8 +121,8 @@ describe('GridComponent', () => {
           expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(true);
         });
         it('all other rows are collapsed', () => {
-          expect(rowElements[1].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
-          expect(rowElements[2].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
+          expect(rowElements[1].query(By.css('.grid-row-container')).classes['grid-row--expanded']).not.toBe(true);
+          expect(rowElements[2].query(By.css('.grid-row-container')).classes['grid-row--expanded']).not.toBe(true);
         });
       });
     });
@@ -149,8 +148,8 @@ describe('GridComponent', () => {
           expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(true);
         });
         it('all other rows are collapsed', () => {
-          expect(rowElements[1].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
-          expect(rowElements[2].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
+          expect(rowElements[1].query(By.css('.grid-row-container')).classes['grid-row--expanded']).not.toBe(true);
+          expect(rowElements[2].query(By.css('.grid-row-container')).classes['grid-row--expanded']).not.toBe(true);
         });
       });
     });
@@ -209,7 +208,7 @@ describe('GridComponent', () => {
           expect(spyExpandPrevented).toHaveBeenCalled();
         });
         it('clicked row is still collapsed', () => {
-          expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).toBe(false);
+          expect(rowElements[0].query(By.css('.grid-row-container')).classes['grid-row--expanded']).not.toBe(true);
         });
         it('it emits a collapsePrevented event', () => {
           expect(spyCollapsePrevented).toHaveBeenCalled();

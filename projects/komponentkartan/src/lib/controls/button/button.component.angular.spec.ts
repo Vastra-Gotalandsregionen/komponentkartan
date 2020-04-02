@@ -92,7 +92,7 @@ describe('[ButtonComponent - Angular]', () => {
       fixture.detectChanges();
     });
     it('button is displayed as enabled', () => {
-      expect(buttonElement.classes['button--disabled']).toBe(false);
+      expect(buttonElement.classes['button--disabled']).not.toBe(true);
     });
     it('click bubbles', () => {
       let clickBubbled = false;

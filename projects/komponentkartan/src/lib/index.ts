@@ -23,8 +23,6 @@ export { ListHeaderComponent, SortChangedArgs } from './controls/list/list-heade
 export { ListColumnHeaderComponent, SortDirection } from './controls/list/list-column-header.component';
 export { ListColumnHeaderCheckboxComponent } from './controls/list/list-column-header-checkbox.component';
 export { ListColumnComponent } from './controls/list/list-column.component';
-export { ListColumnCheckboxComponent } from './controls/list/list-column-checkbox.component';
-export { ListColumnTrashcanComponent } from './controls/list/list-column-trashcan.component';
 export { ListItemComponent } from './controls/list-item/list-item.component';
 export { MenuComponent } from './controls/menu/menu.component';
 export { MenuItemComponent } from './controls/menu/menu-item.component';

@@ -230,9 +230,9 @@ describe('[DropdownSelectComponent - Angular]', () => {
           fixture.detectChanges();
         });
         it('all items are deselected', () => {
-          expect(itemElements[0].classes['dropdown-item--selected']).toBe(false);
-          expect(itemElements[1].classes['dropdown-item--selected']).toBe(false);
-          expect(itemElements[2].classes['dropdown-item--selected']).toBe(false);
+          expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
+          expect(itemElements[1].classes['dropdown-item--selected']).not.toBe(true);
+          expect(itemElements[2].classes['dropdown-item--selected']).not.toBe(true);
         });
         it('label is set', () => {
           const headerLabelElement = headerElement.query(By.css('.dropdown-select__header__label'));
@@ -293,7 +293,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
           fixture.detectChanges();
         });
         it('item is deselected', () => {
-          expect(itemElements[0].classes['dropdown-item--selected']).toBe(false);
+          expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
         });
         it('label is set', () => {
           const headerLabelElement = headerElement.query(By.css('.dropdown-select__header__label'));
@@ -346,7 +346,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
           fixture.detectChanges();
         });
         it('previous item is deselected', () => {
-          expect(itemElements[0].classes['dropdown-item--selected']).toBe(false);
+          expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
         });
         it('new item is selected', () => {
           expect(itemElements[1].classes['dropdown-item--selected']).toBe(true);
@@ -373,7 +373,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
           fixture.detectChanges();
         });
         it('item is deselected', () => {
-          expect(itemElements[0].classes['dropdown-item--selected']).toBe(false);
+          expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
         });
         it('label is set', () => {
           const headerLabelElement = headerElement.query(By.css('.dropdown-select__header__label'));

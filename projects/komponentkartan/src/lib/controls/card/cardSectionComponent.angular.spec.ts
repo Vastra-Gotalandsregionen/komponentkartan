@@ -88,7 +88,7 @@ describe('[CardSectionComponent]', () => {
           fixture.detectChanges();
         });
         it('expanded class is not set', () => {
-          expect(rootElement.classes['card-section--expanded']).toBe(false);
+          expect(rootElement.classes['card-section--expanded']).not.toBe(true);
         });
         it('expanded is false', () => {
           expect(component.expanded).toBe(false);

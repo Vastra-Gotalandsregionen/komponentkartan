@@ -21,7 +21,7 @@
           <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'"></vgr-icon>
         </div>
       </div>
-      <div *ngIf="readonly" class="datepicker__readonly-header" tabindex="0" aria-readonly="true">
+      <div *ngIf="readonly" #readOnlyHeader class="datepicker__readonly-header" tabindex="0" aria-readonly="true">
         <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
         <span *ngIf="!selectedDate">&nbsp;</span>
       </div>

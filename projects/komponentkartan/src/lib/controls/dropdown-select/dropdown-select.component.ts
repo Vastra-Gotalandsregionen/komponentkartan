@@ -140,6 +140,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     this.ngUnsubscribeItems.complete();
   }
 
+  public focus() {
+    this.header.nativeElement.focus();
+  }
+
   writeValue(value: any) {
     this.value = value;
     this.selectedChanged.emit(this.value);

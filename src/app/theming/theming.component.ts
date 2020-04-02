@@ -11,7 +11,7 @@ export class ThemingComponent implements OnInit {
   themes: SelectableItem<string>[];
   pinkieMeter = 0;
 
-  constructor(private modalService: ModalService) {
+  constructor(public modalService: ModalService) {
     this.themes = [
       { displayName: 'Neutralt', value: 'theme--neutral' } as SelectableItem<string>,
       { displayName: 'Blått', value: 'theme--blue' } as SelectableItem<string>,

@@ -1,5 +1,5 @@
 import { Input, Component, HostBinding, AfterContentInit, ContentChildren, QueryList, OnDestroy } from '@angular/core';
-import { MenuItemBase } from './menu-item-base';
+import { MenuItemBaseDirective } from './menu-item-base';
 import { SubmenuComponent } from './submenu.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,7 +12,7 @@ export class MenuComponent implements AfterContentInit, OnDestroy {
 
     @Input() title: string;
     @HostBinding('class.menu') hasClass = true;
-    @ContentChildren(MenuItemBase) menuItems: QueryList<MenuItemBase>;
+    @ContentChildren(MenuItemBaseDirective) menuItems: QueryList<MenuItemBaseDirective>;
     @HostBinding('attr.role') role = 'menu';
     @HostBinding('attr.aria-orientation') orientation = 'vertical';
 

@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Next 7.0 (beta)
+- `vgr-list-column-checkbox` & `vgr-list-column-trashcan` are now officially removed.
+- *Deprecated* output event focus from `vgr-textarea`, `vgr-input`
+- *Deprecated* output event blur from `vgr-textarea`, `vgr-input`
+- Added public method focus() for  `vgr-textarea`, `vgr-input`, `vgr-dropdown` and `vgr-datepicker`. 
+- Makes it possible to programmatically set focus on the component.
+
 ## 6.1.0
 - Updated design of `vgr-button`.
 - Changed margin between `vgr-checkbox` and it's label.

@@ -107,7 +107,7 @@
   <div class="docs__api">
     <table class="property-table">
       <tr>
-        <th>Property</th>
+        <th>Egenskap</th>
         <th>Beskrivning</th>
         <th>Exempel</th>
       </tr>
@@ -221,13 +221,19 @@
       </tr>
   
       <tr>
-        <th>Property</th>
+        <th>Event</th>
         <th>Beskrivning</th>
         <th>Exempel</th>
       </tr>
-
       <tr>
-        <td>blur: eventEmitter</td>
+        <td>valueChanged: eventEmitter</td>
+        <td>Event som triggas när inputfield uppdateras med ny text.</td>
+        <td>(valueChanged)="function($event)"</td>
+      </tr>
+
+      <!-- Deprecated events removed in "Next breacking change release" -->
+      <tr>
+        <td>blur <i>*deprecated*</i>: eventEmitter </td>
         <td>Event som triggas när användaren går ifrån inputfield.</td>
         <td>(blur)="function($event)"</td>
       </tr>

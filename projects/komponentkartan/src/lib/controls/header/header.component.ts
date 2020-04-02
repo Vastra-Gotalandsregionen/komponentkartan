@@ -10,7 +10,7 @@ export class HeaderComponent {
   @Input() systemText: string;
   @Input() hideSwosh = false;
   @Input() logoClass: string;
-  @ContentChild(HeaderMenuComponent, { static: false }) headerMenuComponent: HeaderMenuComponent;
+  @ContentChild(HeaderMenuComponent) headerMenuComponent: HeaderMenuComponent;
 
   constructor() {}
 

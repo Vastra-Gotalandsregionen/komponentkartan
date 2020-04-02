@@ -101,7 +101,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   onBlur(event) {
     this.onTouched();
     this.hasFocus = false;
-    this.blur.emit(event);
   }
 
   onFocus(event) {
