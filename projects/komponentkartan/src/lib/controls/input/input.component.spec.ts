@@ -74,8 +74,9 @@ describe('InputComponent', () => {
     it('it should be left aligned (default) and show prefix', () => {
       const prefix = rootElement.query(By.css('.prefix'));
       const wrapper = rootElement.query(By.css('.inputwrapper'));
+      console.log(component.textAlign);
       expect(prefix.nativeElement.textContent).toEqual('$');
-      expect(wrapper.classes['alignRight']).toBe(false);
+      expect(wrapper.classes['alignRight']).toBeFalsy();
     });
   });
 

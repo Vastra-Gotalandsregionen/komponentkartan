@@ -38,7 +38,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @Input() formControlName: string;
   @Input() prefix: string = null;
   @Input() suffix: string = null;
-  @Input() textAlign = null;
+  @Input() textAlign: string;
   @Input() errorMessage: any = 'Innehåller valideringsfel';
 
   @Output() blur = new EventEmitter<any>();

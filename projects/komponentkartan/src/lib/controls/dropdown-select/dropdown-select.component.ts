@@ -365,6 +365,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   onFilterKeydown(event: KeyboardEvent) {
+    console.log(event);
     const filteredItems = this.items.filter(item => item.visible);
 
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
