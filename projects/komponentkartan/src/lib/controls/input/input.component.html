@@ -30,7 +30,7 @@
 </div>
 <div class="error-message">
     <vgr-icon icon="exclamation-circle" size="sm"></vgr-icon>
-    <span *ngIf="control">{{errorMessage | errorMessage: control.errors : small | truncate:24}}</span>
+    <span *ngIf="control">{{errorMessage | errorMessage: control.errors : false | truncate:24}}</span>
     <span *ngIf="!control">{{errorMessage}}</span>
 </div>   
 
