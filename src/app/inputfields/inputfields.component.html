@@ -199,7 +199,7 @@
       <tr>
         <td>textAlign: string</td>
         <td>Möjlighet att högerställa texten i fältet genom att skicka in 'right'. Default - 'left' om man inte använder sig av suffix då är det 'right'</td>
-        <td>[textAlign]="right"</td>
+        <td>textAlign="right"</td>
       </tr>
       <tr>
         <td>type: string</td>
@@ -226,14 +226,7 @@
         <th>Exempel</th>
       </tr>
       <tr>
-        <td>valueChanged: eventEmitter</td>
-        <td>Event som triggas när inputfield uppdateras med ny text.</td>
-        <td>(valueChanged)="function($event)"</td>
-      </tr>
-
-      <!-- Deprecated events removed in "Next breacking change release" -->
-      <tr>
-        <td>blur <i>*deprecated*</i>: eventEmitter </td>
+        <td>blur: eventEmitter </td>
         <td>Event som triggas när användaren går ifrån inputfield.</td>
         <td>(blur)="function($event)"</td>
       </tr>

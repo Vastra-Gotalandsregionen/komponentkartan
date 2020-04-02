@@ -24,19 +24,19 @@ import { InputComponent } from '../input/input.component';
         <vgr-title-value>
           <vgr-title-value-heading>Bruttobelopp</vgr-title-value-heading>
           <vgr-title-value-container>
-            <vgr-input [value]="10000" [suffix]="'kr'" [textAlign]="right"></vgr-input>
+            <vgr-input [value]="10000" [suffix]="'kr'" textAlign="right"></vgr-input>
           </vgr-title-value-container>
         </vgr-title-value>
         <vgr-title-value>
           <vgr-title-value-heading>Skattesats</vgr-title-value-heading>
           <vgr-title-value-container>
-            <vgr-input [value]="32" [suffix]="'%'" [textAlign]="right"></vgr-input>
+            <vgr-input [value]="32" [suffix]="'%'" textAlign="right"></vgr-input>
           </vgr-title-value-container>
         </vgr-title-value>
         <vgr-title-value>
           <vgr-title-value-heading>Nettobelopp</vgr-title-value-heading>
           <vgr-title-value-container>
-            <vgr-input [value]="32" [suffix]="'kr'" [textAlign]="right"></vgr-input>
+            <vgr-input [value]="32" [suffix]="'kr'" textAlign="right"></vgr-input>
           </vgr-title-value-container>
         </vgr-title-value>
       </vgr-title-value-layout>

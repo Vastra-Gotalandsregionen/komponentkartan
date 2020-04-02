@@ -26,7 +26,7 @@
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
                   <vgr-input [width]="'100%'" formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched"
-                    [textAlign]="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+                    textAlign="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -137,7 +137,7 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="formSubmitted" [textAlign]="right" [suffix]="'år'"
+                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="formSubmitted" textAlign="right" [suffix]="'år'"
                     [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
@@ -245,7 +245,7 @@
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
                   <vgr-input [width]="'100%'" formControlName="age" [showValidation]="updateOnChangeForm.controls.age.dirty"
-                    [textAlign]="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+                    textAlign="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
