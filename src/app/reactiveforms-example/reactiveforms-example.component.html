@@ -11,36 +11,36 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Förnamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched"
-                    [errorMessage]="validationMessages.firstname"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched"
+                    [errorMessage]="validationMessages.firstname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Efternamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="lastname" [showValidation]="updateOnBlurForm.controls.lastname.touched"
-                    [errorMessage]="validationMessages.lastname"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="lastname" [showValidation]="updateOnBlurForm.controls.lastname.touched"
+                    [errorMessage]="validationMessages.lastname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched"
-                    [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched"
+                    [textAlign]="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>E-post</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="email" [showValidation]="updateOnBlurForm.controls.email.touched"
-                    [errorMessage]="validationMessages.email"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="email" [showValidation]="updateOnBlurForm.controls.email.touched"
+                    [errorMessage]="validationMessages.email"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched"
-                    [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched"
+                    [errorMessage]="validationMessages.salary" ></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -121,38 +121,38 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Förnamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="firstname" [showValidation]="formSubmitted"
-                    [errorMessage]="validationMessages.firstname"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="firstname" [showValidation]="formSubmitted"
+                    [errorMessage]="validationMessages.firstname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
 
               <vgr-title-value>
                 <vgr-title-value-heading>Efternamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="lastname" [showValidation]="formSubmitted"
-                    [errorMessage]="validationMessages.lastname"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="lastname" [showValidation]="formSubmitted"
+                    [errorMessage]="validationMessages.lastname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
 
               <vgr-title-value>
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="age" [showValidation]="formSubmitted" [alignRight]="true" [suffix]="'år'"
-                    [errorMessage]="validationMessages.age"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="formSubmitted" [textAlign]="right" [suffix]="'år'"
+                    [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>E-post</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="email" [showValidation]="formSubmitted"
-                    [errorMessage]="validationMessages.email"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="email" [showValidation]="formSubmitted"
+                    [errorMessage]="validationMessages.email"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="salary" [showValidation]="formSubmitted"
-                    [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="salary" [showValidation]="formSubmitted"
+                    [errorMessage]="validationMessages.salary"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -230,36 +230,36 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Förnamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty"
-                    [errorMessage]="validationMessages.firstname"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty"
+                    [errorMessage]="validationMessages.firstname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Efternamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="lastname" [showValidation]="updateOnChangeForm.controls.lastname.dirty"
-                    [errorMessage]="validationMessages.lastname"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="lastname" [showValidation]="updateOnChangeForm.controls.lastname.dirty"
+                    [errorMessage]="validationMessages.lastname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="age" [showValidation]="updateOnChangeForm.controls.age.dirty"
-                    [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="updateOnChangeForm.controls.age.dirty"
+                    [textAlign]="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>E-post</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="email" [showValidation]="updateOnChangeForm.controls.email.dirty"
-                    [errorMessage]="validationMessages.email"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="email" [showValidation]="updateOnChangeForm.controls.email.dirty"
+                    [errorMessage]="validationMessages.email"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input-old [width]="'100%'" formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty"
-                    [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input-old>
+                  <vgr-input [width]="'100%'" formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty"
+                    [errorMessage]="validationMessages.salary"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>

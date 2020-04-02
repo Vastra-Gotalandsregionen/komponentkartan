@@ -33,7 +33,7 @@
       <div class="row-layout">
         <div class="one-third">
           <p>Liten, 5 alternativ</p>
-          <vgr-dropdown-select [small]="true" [deselectable]="true">
+          <vgr-dropdown-select width="130px" [deselectable]="true">
             <vgr-dropdown-item *ngFor="let item of items5">{{item}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
@@ -58,13 +58,13 @@
       <div class="row-layout">
         <div class="one-third">
           <p>Aktiv</p>
-          <vgr-dropdown-select [small]="true" [formControl]="form">
+          <vgr-dropdown-select width="130px" [formControl]="form">
             <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
         <div class="one-third">
           <p>Inaktiv</p>
-          <vgr-dropdown-select [small]="true" [disabled]="true" [formControl]="form">
+          <vgr-dropdown-select width="130px" [disabled]="true" [formControl]="form">
             <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
@@ -97,7 +97,7 @@
         <td>small: string</td>
         <td>Gör det valda alternativet kortare. Förvalt värde är
           <code>false</code>.</td>
-        <td>[small]="true"</td>
+        <td>width="130px"</td>
       </tr>
       <tr>
         <td>deselectable: boolean</td>

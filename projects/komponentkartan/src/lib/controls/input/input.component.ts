@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostListener, HostBinding, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostListener, HostBinding, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContainer } from '@angular/forms';
 
 @Component({
@@ -16,8 +16,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @HostBinding('class.vgr-input--show-validation') @Input() showValidation = true;
   @HostBinding('class.vgr-input--focused') hasFocus = false;
   @HostBinding('class.vgr-input--readonly') @Input() readonly = false;
-  @HostBinding('class.vgr-input--disabled') @Input() disabled: boolean;
+  @HostBinding('class.vgr-input--disabled') @Input() disabledControl = false;
   @HostBinding('class.vgr-input--suffix') hasSuffix = false;
+  @HostBinding('style.width') @Input() width = '270px';
 
   /** DEFAULT INPUT OPTIONS FORWARDED **/
   @Input() required = false;
@@ -34,7 +35,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @Input() value: any = null;
 
   /**  */
-  @Input() width = 270;
   @Input() formControlName: string;
   @Input() prefix: string = null;
   @Input() suffix: string = null;
@@ -47,6 +47,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @ViewChild('inputElement', {static: false}) inputElement: ElementRef;
 
   control: AbstractControl;
+  isDisabled = false;
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef) { }
 
@@ -57,11 +58,14 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
     if (this.suffix) {
       this.hasSuffix = true;
     }
-  }
-
-  ngOnChanges() {
     if (this.formControlName) {
       this.control = this.controlContainer.control.get(this.formControlName);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.control && changes.disabledControl) {
+      this.setDisabledState(changes.disabledControl.currentValue);
     }
   }
 
@@ -72,7 +76,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   }
 
   setDisabledState(isDisabled: boolean) {
-    this.disabled = isDisabled;
+    this.disabledControl = isDisabled;
   }
 
   propagateChange = (_: any) => {};
@@ -101,7 +105,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   }
 
   onFocus(event) {
-    console.log(event, 'focus');
     this.hasFocus = true;
     // this.focus.emit(event);
   }

@@ -1,13 +1,13 @@
-<div class="inputwrapper" [style.width.px]="width" [ngClass]="{
+<div class="inputwrapper" [ngClass]="{
     'alignRight': textAlign === 'right'
 }">
     <div class="prefix" *ngIf="prefix">{{prefix}}</div>
     <input 
         [attr.id]="id"
         [type]="type" 
-        [disabled]="disabled"
         [attr.min]="min"
         [attr.max]="max"
+        [disabled]="disabledControl"
         [attr.minlength]="minlength"
         [attr.maxlength]="maxlength"
         [attr.pattern]="pattern"

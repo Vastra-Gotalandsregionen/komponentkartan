@@ -4,147 +4,97 @@
   <div class="docs__overview">
     <p>
       <code>
-        &lt;vgr-input&gt; </code> är ett fält för inmatning utav värden i t.ex. ett formulär. Den har liknande funktioner som ett vanligt HTML-input fält men har även möjlighet för:
+        &lt;vgr-input&gt; </code> är ett fält för inmatning utav värden i t.ex. ett formulär. Den har liknande
+      funktioner som ett vanligt HTML-input fält men har även möjlighet för:
       <br> - Visa suffix eller prefix
       <br> - Visa upp felmedlenaden i anslutning till input-fältet.
     </p>
     <p>
       <label>HSA-id: </label><br>
-      <vgr-input [readonly]="readonly" width="300" value="SE2329999131-E000000011351"></vgr-input>
+      <vgr-input [readonly]="readonly" [showValidation]="showErrors" width="300px" value="SE2329999131-E000000011351"></vgr-input>
     </p>
     <p>Förändras med tema: <strong>nej</strong>
     </p>
   </div>
 
-  <div class="docs__examples">
-    <h3>Size</h3>
+  <div class="docs__examples" expanded="true">
+    <h2>Storlek</h2>
     <section>
       <div class="row-layout">
-        <div class="one-third">
+        <div class="half">
           <h3>Normal storlek</h3>
-          <vgr-input [(ngModel)]="value" pattern="[a-z]*"></vgr-input>
+          <vgr-input></vgr-input>
         </div>
-        <div class="one-third">
+        <div class="half">
           <h3>Egenvald storlek</h3>
-          <vgr-input [(ngModel)]="value" pattern="[\d]*" [width]="425"></vgr-input>
+          <vgr-input width="425px"></vgr-input>
         </div>
       </div>
     </section>
     <br>
     <br>
-    <vgr-button (click)="readonly = !readonly">Readonly</vgr-button>
-    <h3>Input hantering</h3>
-    <form [formGroup]="form">
-      <div class="row-layout">
-        <div class="one-third">
-          <div>
-            Input 1<br>
-            <vgr-input [readonly]="readonly" formControlName="control1" [errorMessage]="validationMessages.control1"></vgr-input><br>
-            <span>Värde 1: </span>
-            <span>{{form.controls.control1.value}}</span>
-          </div>
-          <div>
-            Belopp 2 (decimaler och suffix)<br>
-            <vgr-input [readonly]="readonly" formControlName="control2" 
-              [suffix]="'kr'" textalign="right" [errorMessage]="validationMessages.control2"></vgr-input><br>
-            <span>Belopp 2: </span>
-            <span>{{formatNumericValue(form.controls.control2.value)}}</span>
-          </div>
-          <div>
-            Belopp 3 (med prefix och type number)<br>
-            <vgr-input [readonly]="readonly" formControlName="control3" 
-              [prefix]="'$'" [errorMessage]="validationMessages.control3"
-              type="number"
-              [showValidation]="form.controls.control3.touched"></vgr-input><br>
-            <span>Procent: </span>
-            <span>{{formatNumericValue(form.controls.control3.value)}}</span>
-          </div>
-          <div>
-            Högerställd (med placeholder)<br>
-            <vgr-input [readonly]="readonly" formControlName="control4" textAlign="right" placeholder="input align right"></vgr-input><br>
-            <span>värde: </span>
-            <span>{{formatNumericValue(form.controls.control4.value)}}</span>
-          </div>
-          <div>
-            Numeriskt värde utan enhet
-            <vgr-input-old [readonly]="readonly" formControlName="control5" [formatNumber]="true" [alignRight]="true"
-              [small]="isSmall" [errorMessage]="validationMessages.control5"
-              [showValidation]="form.controls.control5.touched"></vgr-input-old>
-            <span>Värde: </span>
-            <span>{{formatNumericValue(form.controls.control5.value)}}</span>
-          </div>
+    <div>
+      <vgr-checkbox [(ngModel)]="disabled" label="Sätt exemplen som disabled"></vgr-checkbox>
+      <vgr-checkbox [(ngModel)]="readonly" label="Sätt exemplen till readonly"></vgr-checkbox>
+      <vgr-checkbox [(ngModel)]="showErrors" label="Slå på/av att felmedelanden visas"></vgr-checkbox>
+    </div>
+    <div class="row-layout">
+      <div class="half">
+        <h2>Med [(ngModel)]</h2>
+        <div class="inputBlock">
+          <label for="ngmodel1">Text (maxlängd 10 tecken)</label>
+          <vgr-input [(ngModel)]="ngModelValues[0]" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="ngmodel1" maxlength="10"></vgr-input>
+          <span>Värde: {{ngModelValues[0]}}</span>
         </div>
-        <div class="one-third">
-          <div>
-            Max-längd 5 tecken
-            <vgr-input-old [readonly]="readonly" formControlName="control6" [maxlength]=5 [small]="isSmall"
-              [showValidation]="form.controls.control6.touched"></vgr-input-old>
-          </div>
-          <div>
-            Exakt 3 VERSALER (validera vid initiering)
-            <vgr-input-old [readonly]="readonly" formControlName="control7" [errorMessage]="validationMessages.control7"
-              [maxlength]="3" [small]="isSmall" [showValidation]="true"></vgr-input-old>
-            <span>Värde: </span>
-            <span>{{form.controls.control7.value}}</span>
-          </div>
-          <div>
-            Mellan 2 och 6 tecken
-            <vgr-input-old [readonly]="readonly" formControlName="control8" [maxlength]=6
-              [errorMessage]="validationMessages.control8" [small]="isSmall"
-              [showValidation]="form.controls.control8.touched"></vgr-input-old>
-          </div>
-          <div>
-            Heltal med enhet
-            <vgr-input-old [readonly]="readonly" formControlName="control9" [formatNumber]="true" [nrOfDecimals]="0"
-              [suffix]="'st'" [errorMessage]="validationMessages.control9" [alignRight]="true" [small]="isSmall">
-            </vgr-input-old>
-            <span>Antal: </span>
-            <span>{{intValue + 0}}</span>
-          </div>
-          <div>
-            Långa felmeddelanden
-            <vgr-input-old [readonly]="readonly" formControlName="control10" [errorMessage]="validationMessages.control10"
-              [small]="isSmall" [showValidation]="form.controls.control10.touched"></vgr-input-old>
-          </div>
-          <div>
-            Readonly fält
-            <vgr-input-old [readonly]="readonly" formControlName="control11" [readonly]="true" [small]="isSmall"
-              [showValidation]="form.controls.control11.touched"></vgr-input-old>
-          </div>
-          <div>
-            Ingen validering
-            <vgr-input-old [readonly]="readonly" formControlName="control12" [small]="isSmall"></vgr-input-old>
-          </div>
-
+        <div class="inputBlock">
+          <label for="ngmodel2">Type="search" (ersätter vgr-filter-textbox)</label>
+          <vgr-input [(ngModel)]="ngModelValues[1]" type="search" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="ngmodel2"></vgr-input>
+          <span>Värde: {{ngModelValues[1]}}</span>
         </div>
-        <div class="one-third">
-          <div>
-            Ange en storstad i USA (validera vid initiering)
-            <vgr-input-old [readonly]="readonly" formControlName="control13" [small]="isSmall"
-              [errorMessage]="validationMessages.control13" [showValidation]="true"></vgr-input-old>
-            <span>Din stad: {{form.controls.control13.value}}</span>
-          </div>
-          <div>
-            E-postadress
-            <vgr-input-old [readonly]="readonly" formControlName="control14" [small]="isSmall"
-              [errorMessage]="validationMessages.control14" [showValidation]="form.controls.control14.touched">
-            </vgr-input-old>
-          </div>
-          <div>
-            <br><br>
-            <vgr-input-old [readonly]="readonly" (valueChanged)="valueChange($event)" [small]="isSmall"></vgr-input-old>
-            <span>Value change: {{changeValue}}</span>
-          </div>
+        <div class="inputBlock">
+          <label for="ngmodel3">Högerstäld text med suffix (obligatorisk)</label>
+          <vgr-input [(ngModel)]="ngModelValues[2]" required="true" type="text" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="ngmodel3" suffix=":-" errorMessage="Fältet är obligatoriskt"></vgr-input>
+          <span>Värde: {{ngModelValues[2]}}</span>
+        </div>
+        <div class="inputBlock">
+          <label for="ngmodel4">Nummer med prefix</label>
+          <vgr-input [(ngModel)]="ngModelValues[3]" type="number" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="ngmodel4" prefix="€"></vgr-input>
+          <span>Värde: {{ngModelValues[3]}}</span>
         </div>
       </div>
-    </form>
+      <div class="half">
+        <h2>Med reactive forms</h2>
+        <form [formGroup]="form">
+          <div class="inputBlock">
+            <label for="rf1">Text med placeholder (Tre VERSALER)</label>
+            <vgr-input formControlName="rf1" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="rf1" [errorMessage]="validationMessages.rf1" placeholder="jag gillar versaler"></vgr-input>
+            <span>Värde: {{form.controls.rf1.value}}</span>
+          </div>
+          <div class="inputBlock">
+            <label for="rf2">Text (gilltig email)</label>
+            <vgr-input formControlName="rf2" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="rf2" [errorMessage]="validationMessages.rf2"></vgr-input>
+            <span>Värde: {{form.controls.rf1.value}}</span>
+          </div>
+          <div class="inputBlock">
+            <label for="rf3">Ange en storstad i USA (asynkron validering)</label>
+            <vgr-input formControlName="rf3" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="rf3" [errorMessage]="validationMessages.rf3"></vgr-input>
+            <span>Värde: {{form.controls.rf3.value}}</span>
+          </div>
+          <div class="inputBlock">
+            <label for="rf4">Nummer (mellan 40 och 50)</label>
+            <vgr-input formControlName="rf4" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="rf4"  type="number" [errorMessage]="validationMessages.rf4"></vgr-input>
+            <span>Värde: {{form.controls.rf4.value}}</span>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="row-layout">
       <div class="full">
         <h2>Notera</h2>
         <ul>
           <li>
-            För validering så använder vi Reactive Forms för att hantera detta. Validering kan ske på blur, change och
-            submit.
+            För att validering skal fungera behöver du använda dig av NgModel eller Reactive Forms. Validering kan ske på blur, change och
+            submit. För att använda dig av olika felmedelanden för olika fel behöver du använda dig av Reactive Forms.
           </li>
         </ul>
         Under "kodexempel" finns exempel på hur input-komponenten kan användas i Angular Reactive Forms:
@@ -162,9 +112,74 @@
         <th>Exempel</th>
       </tr>
       <tr>
-        <td>value: string</td>
-        <td>Värde att binda till</td>
-        <td>[value]="person.lastName"</td>
+        <td>disabledControl: boolean</td>
+        <td>Möjlighet att inaktivera ett input-fält. Default - false</td>
+        <td>[disabledControl]="true"</td>
+      </tr>
+      <tr>
+        <td>errorMessage: string | object</td>
+        <td>Text som visas vid valideringsfel. Man behöver använda sig av Reactive Forms eller NgModel för att deta skall synas. Vid ngModel skickar man in en sträng. Använder man Reactive Forms kan man antingen skicka in en sträng elelr ett objekt med felmedelandekoden som nyckel och en text. Man kan på detta sätt ha olika felmedelanden för olika valideringsfel. Defaul - "Innehåller valideringsfel"</td>
+        <td>[errorMessage]="'Ange ett värde mellan 1-10'"</td>
+      </tr>
+      <tr>
+        <td>formControlName: string</td>
+        <td>Namnet på kontrollen som skall kopplas till fältet när man använder sig av reactive forms.</td>
+        <td>formControlName="hsaid"</td>
+      </tr>
+      <tr>
+        <td>id: string</td>
+        <td>idt på inputen. (Viktig att ange för att kunna para ihop med label m.h.a. for-propertyn)</td>
+        <td>id="name"</td>
+      </tr>
+      <tr>
+        <td>max: number</td>
+        <td>Maximalt tillåtet värde för en input[type=number] (Sätts i controlern när du avnänder reactive forms)</td>
+        <td>[max]="23"</td>
+      </tr>
+      <tr>
+        <td>maxlength: number</td>
+        <td>Max antal tecken. Begränsar antalet möjliga tecken att mata in. Default = obegränsat. (Sätts i controlern när du avnänder reactive forms)</td>
+        <td>[maxlength]="5"</td>
+      </tr>
+      <tr>
+        <td>min: number</td>
+        <td>Minimalt tillåtet värde för en input[type=number] (Sätts i controlern när du avnänder reactive forms)</td>
+        <td>[min]="5"</td>
+      </tr>
+      <tr>
+        <td>minlength: number</td>
+        <td>Ger valideringsfel om man skriver in färre tecken än detta. Default = 0 (Sätts i controlern när du avnänder reactive forms)</td>
+        <td>[maxlength]="5"</td>
+      </tr>
+      <tr>
+        <td>name: string</td>
+        <td>Input fältets name attribut</td>
+        <td>name="adress"</td>
+      </tr>
+      <tr>
+        <td>pattern: string</td>
+        <td>Regex för validering (Sätts i controlern när du avnänder reactive forms)</td>
+        <td>[pattern]="'[a-z]{{'{'}}0,3{{'}'}}'"</td>
+      </tr>
+      <tr>
+        <td>placeholder: string</td>
+        <td>Skuggad text som visas i fältet innan något värde matats in</td>
+        <td>[placeholder]="'Här skriver du ditt namn'"</td>
+      </tr>
+      <tr>
+        <td>prefix: string</td>
+        <td>Fast text som visas till vänster i fältet</td>
+        <td>[prefix]="'€'"</td>
+      </tr>
+      <tr>
+        <td>readonly: boolean</td>
+        <td>Om fältet skall vara redigerbart eller bara läsbart. Visas utan ram.</td>
+        <td>[readonly]="true"</td>
+      </tr>
+      <tr>
+        <td>required: boolean</td>
+        <td>Anger om fältet skal lvara obligatoriskt (Sätts i controlern när du avnänder reactive forms)</td>
+        <td>[required]="true"</td>
       </tr>
       <tr>
         <td>showValidation: boolean</td>
@@ -172,41 +187,39 @@
         <td>[showValidation]="true"</td>
       </tr>
       <tr>
-        <td>maxlength: string</td>
-        <td>Max antal tecken. Begränsar antalet möjliga tecken att mata in. Default = obegränsat.</td>
-        <td>[maxlength]="5"</td>
-      </tr>
-      <tr>
-        <td>errorMessage: string</td>
-        <td>Text som visas vid valideringsfel</td>
-        <td>[errorMessage]="'Ange ett värde mellan 1-10'"</td>
+        <td>step: number</td>
+        <td>Hur mycket värdet skall ökas/minskas när man använder sig av kontrolelrna för att ändra värdet i en input type=number</td>
+        <td>[step]="1"</td>
       </tr>
       <tr>
         <td>suffix: string</td>
-        <td>Text som visas till höger om fältet, som t.ex en enhet (km, m, kg, kr mm)</td>
+        <td>Text som visas till höger i fältet, som t.ex en enhet (km, m, kg, kr mm)</td>
         <td>[suffix]="'kg'"</td>
       </tr>
       <tr>
-        <td>alignRight: boolean</td>
-        <td>Om true, högerställ innehållet i fältet. Default är False.</td>
-        <td>[alignRight]="true"</td>
+        <td>textAlign: string</td>
+        <td>Möjlighet att högerställa texten i fältet genom att skicka in 'right'. Default - 'left' om man inte använder sig av suffix då är det 'right'</td>
+        <td>[textAlign]="right"</td>
       </tr>
       <tr>
-        <td>formatNumber: boolean</td>
-        <td>Om värdet som visas ska formateras, dvs '.' visas som ',' och mellanslag läggs mellan 1000-tal.</td>
-        <td>[formatNumber]="true"</td>
+        <td>type: string</td>
+        <td>Vilken typ av input det är. Följande typer är tillåtna:
+          'text' = vanlig text, 'email' = för epostadresser, 'number' = för inmatning av nummer,  'password' = för inmatning av lösenord (döljer inmatningen), 'search' = inmatning av text (visar ett förstoringsglas till höger i fältet, denna kan med fördel användas i stälelt för <code>vgr-filter-textbox</code> som nu är depricated), 'tel' = för inmatning av telfonnummer. Default - 'text'
+        </td>
+        <td>type="number"</td>
       </tr>
       <tr>
-        <td>nrOfDecimals: number</td>
-        <td>Antal decimaler som det inmatade värdet ska avrundas till.</td>
-        <td>[nrOfDecimals]="2"</td>
-      </tr>
-      <tr>
-        <td>small: boolean</td>
-        <td>Gör inputfälten till en mindre storlek.</td>
-        <td>[small]="true"</td>
+        <td>value: string</td>
+        <td>Värde att binda till</td>
+        <td>[value]="person.lastName"</td>
       </tr>
 
+      <tr>
+        <td>width: string</td>
+        <td>Bredden på input-fältet. Default - '270px'</td>
+        <td>[width]="500px"</td>
+      </tr>
+  
       <tr>
         <th>Property</th>
         <th>Beskrivning</th>
@@ -219,14 +232,9 @@
         <td>(blur)="function($event)"</td>
       </tr>
       <tr>
-        <td>focus: eventEmitter</td>
-        <td>Event som triggas när användaren fokuserar på inputfield.</td>
-        <td>(focus)="function($event)"</td>
-      </tr>
-      <tr>
-        <td>valueChanged: eventEmitter</td>
-        <td>Event som triggas när inputfield uppdateras med ny text.</td>
-        <td>(valueChanged)="function($event)"</td>
+        <td>click, keyup, keydown, change, input</td>
+        <td>De vanliga eventsen för HTML-input bubblar vidare och går fint att använda sig av.</td>
+        <td>(keyup)="handleKeyEvent($event)"</td>
       </tr>
     </table>
   </div>

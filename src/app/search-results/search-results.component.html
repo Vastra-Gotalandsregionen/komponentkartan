@@ -11,7 +11,7 @@
 
     <br>
     <div class="search-result-wrapper">
-      <vgr-input-old (click)="openDropdown()"> </vgr-input-old><p>Event emittat: {{output | json}}</p>
+      <vgr-input (click)="openDropdown()"> </vgr-input><p>Event emittat: {{output | json}}</p>
       <vgr-search-result [items]="items" [(visible)]="dropdownVisible" (itemClick)="closeDropdown($event)"></vgr-search-result>
     </div>
     <br>
@@ -31,7 +31,7 @@
       <div>
         <p>Exempel på sökning 2</p>
         <div class="search-result-wrapper">
-          <vgr-input-old [(ngModel)]="filterBoxValue_e2" style="display: inline-flex;"></vgr-input-old><vgr-button (click)="filterSearch_e2($event)">Sök</vgr-button>
+          <vgr-input [(ngModel)]="filterBoxValue_e2" style="display: inline-flex;"></vgr-input><vgr-button (click)="filterSearch_e2($event)">Sök</vgr-button>
           <vgr-search-result [items]="filteredItems_e2" [(visible)]="dropdownVisible_e2" maxItems="15" noResultsText="Inga resultat hittades." (itemClick)="setResult_e2($event)"></vgr-search-result>
         </div>
 
