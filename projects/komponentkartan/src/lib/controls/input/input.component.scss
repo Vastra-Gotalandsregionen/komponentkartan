@@ -12,7 +12,7 @@
     input {
         flex-grow: 1;
         border: 0;
-        height: 27px;
+        height: 28px;
         line-height: 28px;
         // padding-right: 0 10px;
         &[type='search'] {
@@ -57,13 +57,12 @@
 }
 
 :host {
-    margin: 1px;
     display: inline-block;
     box-sizing: content-box;
     &.vgr-input--show-validation.ng-invalid {
         transition: background-color 0.3s linear;
         padding: 10px;
-        margin: 1px -10px;
+        margin: 0 -10px;
         background: #f9dede;
         .error-message::ng-deep {
             display: block;
@@ -85,13 +84,27 @@
         }
     }
     &.vgr-input--readonly {
-        .inputwrapper {
+        .inputwrapper, input {
             border-color: transparent;
+            background: transparent;
+        }
+        input::placeholder {
+            color: transparent;
+        }
+        .searchicon {
+            display: none;
         }
     }
 
     &.vgr-input--suffix input {
         padding-right: 5px;
+    }
+
+    &.vgr-input--disabled {
+        .inputwrapper {
+            background-color: #f0f0f0;
+            border-color: #87939f;
+        }
     }
 
 }

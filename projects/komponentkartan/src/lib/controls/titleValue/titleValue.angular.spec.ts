@@ -10,11 +10,11 @@ import { TitleValueLayoutComponent } from './titleValueLayout.component';
 import { TitleValueComponent } from './titleValue.component';
 import { TitleValueContainerComponent } from './titleValueContainer/titleValueContainer.component';
 import { TitleValueHeadingComponent } from './titleValueHeading/titleValueHeading.component';
-import { InputOldComponent } from '../input-old/input.component';
 import { FormsModule } from '@angular/forms';
 import { IconComponent } from '../icon/icon.component';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { TruncatePipe } from '../../pipes/truncatePipe';
+import { InputComponent } from '../input/input.component';
 
 
 @Component({
@@ -60,7 +60,7 @@ describe('[TitleValueComponent - test]', () => {
                 TitleValueComponent,
                 TitleValueContainerComponent,
                 TitleValueHeadingComponent,
-                InputOldComponent,
+                InputComponent,
                 IconComponent,
                 ErrorMessagePipe,
                 TruncatePipe

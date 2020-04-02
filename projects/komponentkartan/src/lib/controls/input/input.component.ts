@@ -32,7 +32,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @Input() placeholder = '';
   @Input() name = '';
   @Input() type: 'text' | 'email' | 'number' | 'password' | 'search' | 'tel' = 'text';
-  @Input() value: any = null;
+  @Input() value: any = '';
 
   /**  */
   @Input() formControlName: string;
