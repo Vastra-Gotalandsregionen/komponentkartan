@@ -46,10 +46,6 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
     this.createForm();
   }
 
-  logga(val) {
-    console.log(val);
-  }
-
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();

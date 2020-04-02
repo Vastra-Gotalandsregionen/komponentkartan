@@ -187,7 +187,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   filterItems() {
-    console.log(this.filter);
     const value = this.filter.value;
 
     if (this.items) {
