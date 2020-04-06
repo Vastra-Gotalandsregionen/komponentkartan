@@ -1,0 +1,110 @@
+@import "../../../assets/partials/settings.colors";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/_settings.sizes.scss";
+
+.inputwrapper {
+    border: 1px solid #151515;
+    display: flex;
+    height: 30px;
+    overflow: hidden;
+    width: 100%;
+    background: white;
+    input {
+        flex-grow: 1;
+        border: 0;
+        height: 28px;
+        line-height: 28px;
+        // padding-right: 0 10px;
+        &[type='search'] {
+            padding-right: 0px;
+        }
+    }
+    div.prefix, div.suffix {
+        // background: yellow;
+        font-style: italic;
+        line-height: 30px;
+    }
+
+    .suffix {
+        padding-right: 10px;
+    }
+
+    .prefix {
+        padding-left: 10px;
+        & + input {
+            padding-left: 5px;
+        }
+    }
+
+    &.alignRight {
+        input {
+            text-align: right;
+        }
+    }
+    
+    .searchicon {
+        padding: 0 5px;
+        line-height: 30px;
+    }
+}
+
+.error-message {
+    display: none;
+    padding-top: 5px;
+    vgr-icon {
+        margin-right: 5px; 
+    }
+}
+
+:host {
+    display: inline-block;
+    box-sizing: content-box;
+    &.vgr-input--show-validation.ng-invalid {
+        transition: background-color 0.3s linear;
+        padding: 10px;
+        margin: 0 -10px;
+        background: #f9dede;
+        .error-message::ng-deep {
+            display: block;
+            .icon {
+                transition: color 0.3s linear;
+                color: $primary-color--error;
+            }
+        }
+    }
+    &.vgr-input--focused:not(.vgr-input--readonly) {
+        .inputwrapper {
+            outline: $focus-outline-width solid $focus-color;
+        }
+    }
+    &.vgr-input--show-validation.vgr-input--focused.ng-invalid {
+        background: $background-color--default;
+        .error-message::ng-deep .icon {
+            color: $primary-color--default;
+        }
+    }
+    &.vgr-input--readonly {
+        .inputwrapper, input {
+            border-color: transparent;
+            background: transparent;
+        }
+        input::placeholder {
+            color: transparent;
+        }
+        .searchicon {
+            display: none;
+        }
+    }
+
+    &.vgr-input--suffix input {
+        padding-right: 5px;
+    }
+
+    &.vgr-input--disabled {
+        .inputwrapper {
+            background-color: #f0f0f0;
+            border-color: #87939f;
+        }
+    }
+
+}

@@ -26,7 +26,7 @@
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
                   <vgr-input [width]="'100%'" formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched"
-                    [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+                    textAlign="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -40,7 +40,7 @@
                 <vgr-title-value-heading>Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
                   <vgr-input [width]="'100%'" formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched"
-                    [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
+                    [errorMessage]="validationMessages.salary" ></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -137,7 +137,7 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="formSubmitted" [alignRight]="true" [suffix]="'år'"
+                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="formSubmitted" textAlign="right" [suffix]="'år'"
                     [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
@@ -152,7 +152,7 @@
                 <vgr-title-value-heading>Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
                   <vgr-input [width]="'100%'" formControlName="salary" [showValidation]="formSubmitted"
-                    [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
+                    [errorMessage]="validationMessages.salary"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -245,7 +245,7 @@
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
                   <vgr-input [width]="'100%'" formControlName="age" [showValidation]="updateOnChangeForm.controls.age.dirty"
-                    [alignRight]="true" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+                    textAlign="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -259,7 +259,7 @@
                 <vgr-title-value-heading>Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
                   <vgr-input [width]="'100%'" formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty"
-                    [errorMessage]="validationMessages.salary" [formatNumber]="true" [nrOfDecimals]="0"></vgr-input>
+                    [errorMessage]="validationMessages.salary"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>

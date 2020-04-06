@@ -16,8 +16,8 @@
       <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu" role="listbox"
         [attr.aria-labelledby]="labelId" [attr.aria-multiselectable]="multi">
         <div *ngIf="filterVisible || deselectable || multi" class="dropdown-select__menu__header">
-          <vgr-filter-textbox *ngIf="filterVisible" (keydown)="onFilterKeydown($event)" (valueChanged)="filterItems()">
-          </vgr-filter-textbox>
+          <vgr-input *ngIf="filterVisible" type="search" (keydown)="onFilterKeydown($event)" (keyup)="filterItems()">
+          </vgr-input>
           <vgr-button #deselectButton *ngIf="deselectable && !multi" class="dropdown-select__menu__header__deselect"
             [buttonStyle]="'discreet'" [disabled]="deselectDisabled" (click)="deselectItems()"
             (keydown)="onDeselectKeydown($event)">Ta

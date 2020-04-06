@@ -10,7 +10,7 @@
       </p>
     </vgr-page-block>
     <div style="display:flex">
-    <vgr-input #pagesInput [small]="true" value="{{pages}}"></vgr-input>
+    <vgr-input #pagesInput width="130px" [value]="pages"></vgr-input>
     <vgr-button (click)="setPages(pagesInput.value)">Sätt antal sidor</vgr-button>
     <vgr-button (click)="setTwoExpanded()">Sätt två expanded items</vgr-button>
     <vgr-button (click)="showNotificationOnFirstRow()">Visa temporär notifiering på första</vgr-button>

@@ -5,9 +5,12 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Next 7.0 (beta)
+- *Breaking change* `vgr-input` is updated, can now handle prefix and API more closely resembles HTML-input.
 - `vgr-list-column-checkbox` & `vgr-list-column-trashcan` are now officially removed.
+- *Deprecated* `vgr-filter-textbox` has been deprecated. `<vgr input type="search">` insetad.
 - *Deprecated* output event focus from `vgr-textarea`, `vgr-input`
-- *Deprecated* output event blur from `vgr-textarea`, `vgr-input`
+- *Deprecated* output event blur from `vgr-textarea`
+- Added [for] property for `vgr-title-value-heading` and changed it to use label instead of H4.
 - Added public method focus() for  `vgr-textarea`, `vgr-input`, `vgr-dropdown` and `vgr-datepicker`. 
 - Makes it possible to programmatically set focus on the component.
 

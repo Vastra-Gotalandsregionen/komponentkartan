@@ -1,175 +1,116 @@
-import { DecimalPipe } from '@angular/common';
-import {
-  Component, EventEmitter, forwardRef, Host, Input, OnChanges, OnInit, Optional, Output, SimpleChanges, SkipSelf, HostBinding, ViewChild, ElementRef
-} from '@angular/core';
-import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
+import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostListener, HostBinding, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContainer } from '@angular/forms';
 
 @Component({
   selector: 'vgr-input',
   templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => InputComponent),
-    multi: true,
+    multi: true
   }]
 })
-export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
-  @Input() @HostBinding('style.width') width: string;
-  @Input() showValidation = true;
+export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
+
+  @HostBinding('class.vgr-input--show-validation') @Input() showValidation = true;
+  @HostBinding('class.vgr-input--focused') hasFocus = false;
+  @HostBinding('class.vgr-input--readonly') @Input() readonly = false;
+  @HostBinding('class.vgr-input--disabled') @Input() disabledControl = false;
+  @HostBinding('class.vgr-input--suffix') hasSuffix = false;
+  @HostBinding('style.width') @Input() width = '270px';
+
+  /** DEFAULT INPUT OPTIONS FORWARDED **/
+  @Input() required = false;
+  @Input() step = null;
+  @Input() pattern = null;
+  @Input() id: string;
+  @Input() maxlength: number;
+  @Input() minlength: number;
+  @Input() min: number;
+  @Input() max: number;
+  @Input() placeholder = '';
+  @Input() name = '';
+  @Input() type: 'text' | 'email' | 'number' | 'password' | 'search' | 'tel' = 'text';
+  @Input() value: any = '';
+
+  /**  */
   @Input() formControlName: string;
-  @Input() formatNumber?: boolean;
-  @Input() nrOfDecimals?: number;
-  @Input() suffix?: string;
-  @Input() placeholder?: string;
-  @Input() value?: any;
-  @Input() maxlength?: number;
-  @Input() errorMessage = {};
-  @Input() readonly?: boolean;
-  @Input() alignRight: boolean;
-  @Input() small: boolean;
+  @Input() prefix: string = null;
+  @Input() suffix: string = null;
+  @Input() textAlign: string;
+  @Input() errorMessage: any = 'Innehåller valideringsfel';
 
-  @Output() valueChanged: EventEmitter<any>;
-  @ViewChild('inputElement') inputElement: ElementRef;
+  @Output() blur = new EventEmitter<any>();
+  // @Output() focus = new EventEmitter<any>();
 
-  get errorClass() {
-    return this.showValidation && this.control && this.control.invalid && !this.hasFocus;
-  }
-  get editingClass() {
-    return this.showValidation && this.control && this.control.invalid && this.hasFocus;
-  }
-  get fixedClass() {
-    return this.showValidation && this.invalidOnFocus && this.control && this.control.valid && !this.hasFocus;
-  }
+  @ViewChild('inputElement', {static: false}) inputElement: ElementRef;
 
   control: AbstractControl;
-  invalidOnFocus = false;
-  hasFocus = false;
-  swedishDecimalPipe: DecimalPipe;
-  displayValue: string;
-  currentErrorMessage: string;
-  selectedErrorMessage: string;
+  isDisabled = false;
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {
-    this.valueChanged = new EventEmitter<any>();
-    this.nrOfDecimals = 2;
-    this.swedishDecimalPipe = new DecimalPipe('sv-SE');
-  }
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef) { }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnInit() {
+    console.log(this.id, ': id');
+    if (!this.textAlign && this.suffix) {
+      this.textAlign = 'right';
+    }
+    if (this.suffix) {
+      this.hasSuffix = true;
+    }
     if (this.formControlName) {
       this.control = this.controlContainer.control.get(this.formControlName);
-    } else {
-      this.setDisplayValue();
     }
   }
 
-  ngOnInit() {
-    this.setDisplayValue();
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.control && changes.disabledControl) {
+      this.setDisabledState(changes.disabledControl.currentValue);
+    }
+  }
+
+  writeValue(value: any): void {
+    if (value) {
+      this.value = value;
+    }
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabledControl = isDisabled;
+  }
+
+  propagateChange = (_: any) => {};
+  propagateTouch = (_: any) => {};
+
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.propagateTouch = fn;
+  }
+
+  onChange(event: KeyboardEvent) {
+    const target = event.target as HTMLInputElement;
+    this.value = target.value;
+    this.propagateChange(this.value);
+  }
+
+  onTouched() { }
+
+  onBlur(event) {
+    this.onTouched();
+    this.hasFocus = false;
+  }
+
+  onFocus(event) {
+    this.hasFocus = true;
+    // this.focus.emit(event);
   }
 
   public focus() {
     this.inputElement.nativeElement.focus();
   }
 
-  writeValue(value: any) {
-    if (value !== undefined) {
-      this.value = value;
-      this.setDisplayValue();
-
-      if (value && this.formatNumber && (value.toString().split('.')[1] || []).length !== this.nrOfDecimals) {
-        this.formatDisplayNumber();
-        this.control.setValue(this.value);
-      }
-    }
-  }
-
-  setDisplayValue() {
-    if (this.formatNumber && this.control && this.control.valid) {
-      this.displayValue = this.convertNumberToString(this.value);
-    } else {
-      this.displayValue = this.value;
-    }
-  }
-
-  registerOnChange(func: (_: any) => void) {
-    this.onChange = func;
-  }
-
-  registerOnTouched(func: any) {
-    this.onTouched = func;
-  }
-
-  onChange(value: any) {
-    this.valueChanged.emit(value);
-  }
-
-  onTouched() { }
-
-  onBlur(event: Event) {
-    if (this.readonly) {
-      return;
-    }
-
-    this.onTouched();
-    this.formatDisplayNumber();
-
-    this.hasFocus = false;
-  }
-
-  formatDisplayNumber() {
-    const replacedValue = this.displayValue && this.displayValue.replace(/,/g, '.').replace(/ /g, '').replace(/−/g, '-');
-
-    if (this.formatNumber && this.isNumber(replacedValue)) {
-      this.value = this.convertStringToNumber(replacedValue);
-      this.displayValue = this.convertNumberToString(this.value);
-    } else {
-      this.value = this.displayValue;
-    }
-    if (this.control && this.control.updateOn === 'blur') {
-      this.control.setValue(this.value);
-    }
-  }
-
-
-  isNumber(value: any): boolean {
-    // const pattern = /^[-−]?(\d{1,3}(\s\d{3})*|\d+)(,\d+)?$/; //TODO: (if we only will allow swedish format ?)
-    const pattern = /^[-,−]?(\d{1,3}([,.\s]\d{3})*|\d+)([.,]\d+)?$/;
-    return pattern.test(value);
-  }
-
-  onFocus(): void {
-    if (this.readonly) {
-      return;
-    }
-    this.invalidOnFocus = this.control && this.control.invalid && this.showValidation;
-    if (this.isNumber(this.displayValue)) {
-      this.displayValue = this.displayValue.toString().replace(/\s/g, '').replace(/−/g, '-');
-    }
-    this.hasFocus = true;
-  }
-
-  private convertStringToNumber(value: string): number {
-    const normalized = value.toString().trim().replace(/\s/g, '').replace(/,/g, '.').replace(/−/g, '-');
-    const floatVal = this.roundNumber(parseFloat(normalized));
-    return floatVal;
-  }
-
-  private roundNumber(value: number) {
-    if (isNaN(value)) {
-      return value;
-    }
-
-    const factor = Math.pow(10, this.nrOfDecimals);
-    const tempNumber = value * factor;
-    const roundedTempNumber = Math.round(tempNumber);
-    return roundedTempNumber / factor;
-  }
-
-  private convertNumberToString(value: number): string {
-    if (!isNaN(this.value)) {
-      return this.swedishDecimalPipe.transform(this.value, `1.${this.nrOfDecimals}-${this.nrOfDecimals}`);
-    }
-    return null;
-  }
 }

@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'vgr-filter-textbox',
   templateUrl: './filterTextbox.component.html'
 })
-export class FilterTextboxComponent {
+export class FilterTextboxComponent implements OnInit {
   @Input() get value() {
     return this._value;
   }
@@ -19,6 +19,11 @@ export class FilterTextboxComponent {
 
   hasFocus: boolean;
   private _value: string;
+
+  ngOnInit(){
+    console.warn('vgr-filter-textbox is deprecated and soon to be removed. Please consider using <vgr-input type="search"> instead.');
+
+  }
 
   clear() {
     this._value = '';
