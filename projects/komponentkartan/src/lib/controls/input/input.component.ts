@@ -52,7 +52,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef) { }
 
   ngOnInit() {
-    console.log(this.id, ': id');
     if (!this.textAlign && this.suffix) {
       this.textAlign = 'right';
     }
