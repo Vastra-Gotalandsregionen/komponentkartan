@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - *Deprecated* `vgr-filter-textbox` has been deprecated. `<vgr input type="search">` insetad.
 - *Deprecated* output event focus from `vgr-textarea`, `vgr-input`
 - *Deprecated* output event blur from `vgr-textarea`
+- Added [for] property for `vgr-title-value-heading` and changed it to use label instead of H4.
 - Added public method focus() for  `vgr-textarea`, `vgr-input`, `vgr-dropdown` and `vgr-datepicker`. 
 - Makes it possible to programmatically set focus on the component.
 

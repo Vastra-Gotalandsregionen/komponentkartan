@@ -13,6 +13,7 @@
 }
 
 .title-value__title {
+  display: inline-block;
   vertical-align: top;
   padding: 8px 0 0px 0;
   transition: padding 0.2s linear;
@@ -56,7 +57,7 @@
     }
   }
   .title-value__title {
-    padding: 8px 0 8px 0;
+    padding: 9px 0 8px 0;
     .slim-row & {
       padding: 6px 0 0 0;
     }
