@@ -14,13 +14,12 @@
         border: 0;
         height: 28px;
         line-height: 28px;
-        // padding-right: 0 10px;
+        width: inherit;
         &[type='search'] {
             padding-right: 0px;
         }
     }
     div.prefix, div.suffix {
-        // background: yellow;
         font-style: italic;
         line-height: 30px;
     }
@@ -41,7 +40,7 @@
             text-align: right;
         }
     }
-    
+
     .searchicon {
         padding: 0 5px;
         line-height: 30px;
@@ -52,7 +51,7 @@
     display: none;
     padding-top: 5px;
     vgr-icon {
-        margin-right: 5px; 
+        margin-right: 5px;
     }
 }
 
