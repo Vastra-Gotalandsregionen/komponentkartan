@@ -2,9 +2,9 @@
     'alignRight': textAlign === 'right'
 }">
     <div class="prefix" *ngIf="prefix">{{prefix}}</div>
-    <input 
-        [attr.id]="id"
-        [type]="type" 
+    <input
+        [attr.id]="idForLabel"
+        [type]="type"
         [attr.min]="min"
         [attr.max]="max"
         [disabled]="disabledControl"
@@ -32,5 +32,5 @@
     <vgr-icon icon="exclamation-circle" size="sm"></vgr-icon>
     <span *ngIf="control">{{errorMessage | errorMessage: control.errors : false | truncate:24}}</span>
     <span *ngIf="!control">{{errorMessage}}</span>
-</div>   
+</div>
 

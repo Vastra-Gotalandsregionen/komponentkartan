@@ -1,6 +1,7 @@
 <div class="textarea" [ngStyle]="{ 'width': width }">
   <div class="textarea-validation">
-    <textarea #textareaElement class="textarea-input" type="text" [ngStyle]="{'height': readonly ? scrollHeight : height}" [maxlength]="maxlength"
+    <textarea #textareaElement class="textarea-input" [ngStyle]="{'height': readonly ? scrollHeight : height}"
+      [maxlength]="maxlength" [attr.id]="idForLabel"
       [placeholder]="placeholder" [(ngModel)]="value" (ngModelChange)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus($event)"
       [attr.readonly]="readonly ? '' : null"></textarea>
     <div *ngIf="control" class="textarea-validation_status" [title]="validationErrorMessage">

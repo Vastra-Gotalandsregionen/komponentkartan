@@ -27,7 +27,7 @@
       <vgr-textarea formControlName="control2" [width]="'70%'" [height]="'100px'" [maxlength]="50" [placeholder]="'Vänligen fyll i text'"
         [readonly]="false"></vgr-textarea>
     </form>
-    
+
     <br>
     <br>
     <vgr-textarea [width]="'70%'" [height]="'130px'" [value]="initValue" [placeholder]="'Vänligen fyll i text om du vill'" [readonly]="isReadonly"></vgr-textarea>
@@ -66,6 +66,11 @@
         <td>[height]="'45px'", [height]="'45%'",</td>
       </tr>
       <tr>
+        <td>idForLabel: string</td>
+        <td>idt på textarean. (Viktig att ange för att kunna para ihop med label m.h.a. for-propertyn)</td>
+        <td>idForLabel="name"</td>
+      </tr>
+      <tr>
         <td>placeholder: string</td>
         <td>Förvald text. Default = tomt.</td>
         <td>[placeholder]="'skriv här'"</td>
@@ -79,8 +84,8 @@
         <td>readonly: boolean</td>
         <td>Sätter textfältet i readonly-läge. </td>
         <td>[readonly]="true"</td>
-      </tr>   
-      
+      </tr>
+
       <!-- New functionallity in "Next breacking change release" Copy into komponenetkartan-demo when finished.-->
       <tr>
         <td>focus()</td>

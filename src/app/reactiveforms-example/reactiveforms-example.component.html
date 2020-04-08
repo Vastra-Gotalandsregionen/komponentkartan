@@ -9,44 +9,44 @@
           <form [formGroup]="updateOnBlurForm">
             <vgr-title-value-layout>
               <vgr-title-value>
-                <vgr-title-value-heading>Förnamn</vgr-title-value-heading>
+                <vgr-title-value-heading for="firstname">Förnamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched"
+                  <vgr-input [width]="'100%'" idForLabel="firstname" formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched"
                     [errorMessage]="validationMessages.firstname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
-                <vgr-title-value-heading>Efternamn</vgr-title-value-heading>
+                <vgr-title-value-heading for="lastname">Efternamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="lastname" [showValidation]="updateOnBlurForm.controls.lastname.touched"
+                  <vgr-input [width]="'100%'" idForLabel="lastname" formControlName="lastname" [showValidation]="updateOnBlurForm.controls.lastname.touched"
                     [errorMessage]="validationMessages.lastname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
-                <vgr-title-value-heading>Ålder</vgr-title-value-heading>
+                <vgr-title-value-heading for="age">Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched"
+                  <vgr-input [width]="'100%'" idForLabel="age" formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched"
                     textAlign="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
-                <vgr-title-value-heading>E-post</vgr-title-value-heading>
+                <vgr-title-value-heading for="email">E-post</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="email" [showValidation]="updateOnBlurForm.controls.email.touched"
+                  <vgr-input [width]="'100%'" idForLabel="email" formControlName="email" [showValidation]="updateOnBlurForm.controls.email.touched"
                     [errorMessage]="validationMessages.email"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
-                <vgr-title-value-heading>Inkomst</vgr-title-value-heading>
+                <vgr-title-value-heading for="salary">Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched"
+                  <vgr-input [width]="'100%'" idForLabel="salary" formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched"
                     [errorMessage]="validationMessages.salary" ></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
-                <vgr-title-value-heading>Favoritdjur</vgr-title-value-heading>
+                <vgr-title-value-heading for="favourite_pet">Favoritdjur</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-dropdown-select width="100%" formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
+                  <vgr-dropdown-select idForLabel="favourite_pet" width="100%" formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
                     [showValidation]="updateOnBlurForm.controls.favourite_pet.touched">
                     <vgr-dropdown-item [value]="'Hund'">Hund</vgr-dropdown-item>
                     <vgr-dropdown-item [value]="'Katt'">Katt</vgr-dropdown-item>
@@ -102,9 +102,9 @@
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
-                <vgr-title-value-heading>Kommentar</vgr-title-value-heading>
+                <vgr-title-value-heading for="kommentar">Kommentar</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-textarea formControlName="textarea"
+                  <vgr-textarea formControlName="textarea" idForLabel="kommentar"
                     [showValidation]="updateOnBlurForm.controls.textarea.touched">
                   </vgr-textarea>
                 </vgr-title-value-container>
@@ -119,39 +119,39 @@
           <form [formGroup]="updateOnSubmitForm">
             <vgr-title-value-layout>
               <vgr-title-value>
-                <vgr-title-value-heading>Förnamn</vgr-title-value-heading>
+                <vgr-title-value-heading for="submit_firstname">Förnamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="firstname" [showValidation]="formSubmitted"
+                  <vgr-input [width]="'100%'" idForLabel="submit_firstname" formControlName="firstname" [showValidation]="formSubmitted"
                     [errorMessage]="validationMessages.firstname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
 
               <vgr-title-value>
-                <vgr-title-value-heading>Efternamn</vgr-title-value-heading>
+                <vgr-title-value-heading for="submit_lastname">Efternamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="lastname" [showValidation]="formSubmitted"
+                  <vgr-input [width]="'100%'" idForLabel="submit_lastname" formControlName="lastname" [showValidation]="formSubmitted"
                     [errorMessage]="validationMessages.lastname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
 
               <vgr-title-value>
-                <vgr-title-value-heading>Ålder</vgr-title-value-heading>
+                <vgr-title-value-heading for="submit_age">Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="formSubmitted" textAlign="right" [suffix]="'år'"
+                  <vgr-input [width]="'100%'" idForLabel="submit_age" formControlName="age" [showValidation]="formSubmitted" textAlign="right" [suffix]="'år'"
                     [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
-                <vgr-title-value-heading>E-post</vgr-title-value-heading>
+                <vgr-title-value-heading for="submit_email">E-post</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="email" [showValidation]="formSubmitted"
+                  <vgr-input [width]="'100%'" idForLabel="submit_email" formControlName="email" [showValidation]="formSubmitted"
                     [errorMessage]="validationMessages.email"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
-                <vgr-title-value-heading>Inkomst</vgr-title-value-heading>
+                <vgr-title-value-heading for="submit_salary">Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="salary" [showValidation]="formSubmitted"
+                  <vgr-input [width]="'100%'" idForLabel="submit_salary" formControlName="salary" [showValidation]="formSubmitted"
                     [errorMessage]="validationMessages.salary"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>

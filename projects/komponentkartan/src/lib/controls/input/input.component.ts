@@ -24,7 +24,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @Input() required = false;
   @Input() step = null;
   @Input() pattern = null;
-  @Input() id: string;
+  @Input() idForLabel: string;
   @Input() maxlength: number;
   @Input() minlength: number;
   @Input() min: number;
@@ -70,9 +70,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   }
 
   writeValue(value: any): void {
-    if (value) {
-      this.value = value;
-    }
+    this.value = value;
   }
 
   setDisabledState(isDisabled: boolean) {

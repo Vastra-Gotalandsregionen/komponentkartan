@@ -43,22 +43,22 @@
         <h2>Med [(ngModel)]</h2>
         <div class="inputBlock">
           <label for="ngmodel1">Text (maxlängd 10 tecken)</label>
-          <vgr-input [(ngModel)]="ngModelValues[0]" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="ngmodel1" maxlength="10"></vgr-input>
+          <vgr-input [(ngModel)]="ngModelValues[0]" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="ngmodel1" maxlength="10"></vgr-input>
           <span>Värde: {{ngModelValues[0]}}</span>
         </div>
         <div class="inputBlock">
           <label for="ngmodel2">Type="search" (ersätter vgr-filter-textbox)</label>
-          <vgr-input [(ngModel)]="ngModelValues[1]" type="search" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="ngmodel2"></vgr-input>
+          <vgr-input [(ngModel)]="ngModelValues[1]" type="search" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="ngmodel2"></vgr-input>
           <span>Värde: {{ngModelValues[1]}}</span>
         </div>
         <div class="inputBlock">
           <label for="ngmodel3">Högerstäld text med suffix (obligatorisk)</label>
-          <vgr-input [(ngModel)]="ngModelValues[2]" required="true" type="text" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="ngmodel3" suffix=":-" errorMessage="Fältet är obligatoriskt"></vgr-input>
+          <vgr-input [(ngModel)]="ngModelValues[2]" required="true" type="text" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="ngmodel3" suffix=":-" errorMessage="Fältet är obligatoriskt"></vgr-input>
           <span>Värde: {{ngModelValues[2]}}</span>
         </div>
         <div class="inputBlock">
           <label for="ngmodel4">Nummer med prefix</label>
-          <vgr-input [(ngModel)]="ngModelValues[3]" type="number" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="ngmodel4" prefix="€"></vgr-input>
+          <vgr-input [(ngModel)]="ngModelValues[3]" type="number" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="ngmodel4" prefix="€"></vgr-input>
           <span>Värde: {{ngModelValues[3]}}</span>
         </div>
       </div>
@@ -67,22 +67,22 @@
         <form [formGroup]="form">
           <div class="inputBlock">
             <label for="rf1">Text med placeholder (Tre VERSALER)</label>
-            <vgr-input formControlName="rf1" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="rf1" [errorMessage]="validationMessages.rf1" placeholder="jag gillar versaler"></vgr-input>
+            <vgr-input formControlName="rf1" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf1" [errorMessage]="validationMessages.rf1" placeholder="jag gillar versaler"></vgr-input>
             <span>Värde: {{form.controls.rf1.value}}</span>
           </div>
           <div class="inputBlock">
             <label for="rf2">Text (gilltig email)</label>
-            <vgr-input formControlName="rf2" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="rf2" [errorMessage]="validationMessages.rf2"></vgr-input>
+            <vgr-input formControlName="rf2" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf2" [errorMessage]="validationMessages.rf2"></vgr-input>
             <span>Värde: {{form.controls.rf1.value}}</span>
           </div>
           <div class="inputBlock">
             <label for="rf3">Ange en storstad i USA (asynkron validering)</label>
-            <vgr-input formControlName="rf3" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="rf3" [errorMessage]="validationMessages.rf3"></vgr-input>
+            <vgr-input formControlName="rf3" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf3" [errorMessage]="validationMessages.rf3"></vgr-input>
             <span>Värde: {{form.controls.rf3.value}}</span>
           </div>
           <div class="inputBlock">
             <label for="rf4">Nummer (mellan 40 och 50)</label>
-            <vgr-input formControlName="rf4" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" id="rf4"  type="number" [errorMessage]="validationMessages.rf4"></vgr-input>
+            <vgr-input formControlName="rf4" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf4"  type="number" [errorMessage]="validationMessages.rf4"></vgr-input>
             <span>Värde: {{form.controls.rf4.value}}</span>
           </div>
         </form>
@@ -127,9 +127,9 @@
         <td>formControlName="hsaid"</td>
       </tr>
       <tr>
-        <td>id: string</td>
+        <td>idForLabel: string</td>
         <td>idt på inputen. (Viktig att ange för att kunna para ihop med label m.h.a. for-propertyn)</td>
-        <td>id="name"</td>
+        <td>idForLabel="name"</td>
       </tr>
       <tr>
         <td>max: number</td>
@@ -219,7 +219,7 @@
         <td>Bredden på input-fältet. Default - '270px'</td>
         <td>[width]="500px"</td>
       </tr>
-  
+
       <tr>
         <th>Event</th>
         <th>Beskrivning</th>
