@@ -45,8 +45,8 @@ describe('InputComponent', () => {
   });
 
   describe('when initiated', () => {
-    it('Should get the show-vaidation by default', () => {
-      expect(rootElement.classes['vgr-input--show-validation']).toBe(true);
+    it('Should get the show-validation by default', () => {
+      expect(rootElement.query(By.css('.custominput')).classes['validation-error--active']).toBe(true);
     });
   });
 
@@ -92,7 +92,7 @@ describe('InputComponent', () => {
     });
 
     it('should show error message', () => {
-      const errorMessage = rootElement.query(By.css('.error-message'));
+      const errorMessage = rootElement.query(By.css('.validation__status__message'));
       expect(errorMessage.nativeElement.textContent).toBe('error');
     });
 

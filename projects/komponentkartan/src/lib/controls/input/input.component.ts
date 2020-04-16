@@ -13,9 +13,8 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContai
 })
 export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
 
-  @HostBinding('class.vgr-input--show-validation') @Input() showValidation = true;
-  @HostBinding('class.vgr-input--focused') hasFocus = false;
-  @HostBinding('class.vgr-input--readonly') @Input() readonly = false;
+  @Input() showValidation = true;
+  @Input() readonly = false;
   @HostBinding('class.vgr-input--disabled') @Input() disabledControl = false;
   @HostBinding('class.vgr-input--suffix') hasSuffix = false;
   @HostBinding('style.width') @Input() width = '270px';
@@ -47,7 +46,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @ViewChild('inputElement', {static: false}) inputElement: ElementRef;
 
   control: AbstractControl;
-  isDisabled = false;
+  hasFocus = false;
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef) { }
 
@@ -97,11 +96,11 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   onBlur(event) {
     this.propagateTouch(this.value);
     this.hasFocus = false;
+    this.blur.emit(event);
   }
 
   onFocus(event) {
     this.hasFocus = true;
-    // this.focus.emit(event);
   }
 
   public focus() {

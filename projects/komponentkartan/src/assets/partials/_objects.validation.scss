@@ -1,12 +1,14 @@
+
+
 .validation {
-  max-height: auto;
+  max-height: none;
   height: 30px;
   padding: 0px;
   background-color: inherit;
   position: relative;
   display: block;
   top: 0px;
-  .validation-error--active & {
+  .ng-invalid > .validation-error--active & {
     max-height: unset;
     height: auto;
     padding: $margin--slim;
@@ -16,12 +18,9 @@
       top: -10px;
     }
     background-color: $secondary-color--error;
-    transition: background-color 0.3s linear;
-    padding-top: 0.3s linear;
-    padding-bottom: 0.3s linear;
-    top: 0.3s linear;
+    transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear, top 0.3s linear;
   }
-  .validation-error--editing & {
+  .ng-invalid > .validation-error--editing.validation-error--active & {
     max-height: unset;
     height: auto;
     .title-value-layout & {
@@ -33,22 +32,26 @@
     margin-right: -$margin--slim;
     transition: background-color 0.3s linear;
   }
-  .readonly & {
-    background-color: inherit;
+  .readonly &,
+  &.readonly {
+    background-color: inherit !important;
     transition: max-height 0.3s linear;
     max-width: none !important;
     height: auto;
+    .validation__status {
+      display: none !important;
+    }
   }
 }
 
 .validation__status {
   display: none;
   align-items: center;
-  .validation-error--active & {
+  .ng-invalid > .validation-error--active & {
     margin-top: 4px;
     display: flex;
   }
-  .validation-error--editing & {
+  .ng-invalid > .validation-error--editing.validation-error--active & {
     margin-top: 4px;
     display: flex;
   }
@@ -68,7 +71,7 @@
       color: $text-color--default;
     }
   }
-  .validation-error--active &, 
+  .validation-error--active &,
   .validation-error--editing & {
     display: inline-block;
   }
