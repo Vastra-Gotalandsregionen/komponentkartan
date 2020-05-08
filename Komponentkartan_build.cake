@@ -58,5 +58,6 @@ Task("Build-Frontend")
     });
 
 });
+Task("Default");
 
 RunTarget(target);
