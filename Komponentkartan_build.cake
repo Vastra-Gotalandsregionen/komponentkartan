@@ -58,6 +58,6 @@ Task("Build-Frontend")
     });
 
 });
-Task("Default");
+Task("Default").IsDependentOn("Run-Jasmine-Tests");
 
 RunTarget(target);
