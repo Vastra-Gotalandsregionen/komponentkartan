@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { appRoutes } from './routes';
 
 // Komponentkartan
-import { KomponentkartanModule } from '@komponentkartan-module';
+import { KomponentkartanModule } from '../../projects/komponentkartan/src/lib/komponentkartan.module';
 
 // Vendors
 import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';

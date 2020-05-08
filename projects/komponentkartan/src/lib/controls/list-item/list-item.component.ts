@@ -33,8 +33,8 @@ export class ListItemComponent implements AfterContentInit, OnDestroy, OnChanges
   @Input() notification: RowNotification;
   @Input() animationSpeed = 400;
 
-  @ContentChild(ListItemHeaderComponent, { static: false }) listItemHeader: ListItemHeaderComponent;
-  @ContentChild(ListItemContentComponent, { static: false }) listContent: ListItemContentComponent;
+  @ContentChild(ListItemHeaderComponent) listItemHeader: ListItemHeaderComponent;
+  @ContentChild(ListItemContentComponent) listContent: ListItemContentComponent;
 
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
   @Output() expandPrevented: EventEmitter<any> = new EventEmitter();

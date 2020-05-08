@@ -1,11 +1,17 @@
 <app-component-docs [componentName]="'Dropdown select'">
   <div class="docs__overview">
     <p>Dropdown select finns i två bredder, har en rad olika alternativ och följer temafärg.</p>
-    <vgr-dropdown-select>
+    <vgr-dropdown-select [readonly]="readonly" [disabled]="disabled" #myDropdown>
       <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
       <vgr-dropdown-item>Banan</vgr-dropdown-item>
       <vgr-dropdown-item>Citron</vgr-dropdown-item>
     </vgr-dropdown-select>
+
+    <br><br>
+    <vgr-button (click)="setFocus()">Sätt fokus</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="toggleReadonly()">Readonly</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" [disabled]="readonly" (click)="toggleDisabled(disabled)">{{ disabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
+    <br><br>
 
     <p>Detta händer automatiskt:</p>
     <ul>
@@ -33,7 +39,7 @@
       <div class="row-layout">
         <div class="one-third">
           <p>Liten, 5 alternativ</p>
-          <vgr-dropdown-select [small]="true" [deselectable]="true">
+          <vgr-dropdown-select width="130px" [deselectable]="true">
             <vgr-dropdown-item *ngFor="let item of items5">{{item}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
@@ -58,13 +64,13 @@
       <div class="row-layout">
         <div class="one-third">
           <p>Aktiv</p>
-          <vgr-dropdown-select [small]="true" [formControl]="form">
+          <vgr-dropdown-select width="130px" [formControl]="form">
             <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
         <div class="one-third">
           <p>Inaktiv</p>
-          <vgr-dropdown-select [small]="true" [disabled]="true" [formControl]="form">
+          <vgr-dropdown-select width="130px" [disabled]="true" [formControl]="form">
             <vgr-dropdown-item [value]="itemValue">{{itemLabel}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
@@ -97,7 +103,7 @@
         <td>small: string</td>
         <td>Gör det valda alternativet kortare. Förvalt värde är
           <code>false</code>.</td>
-        <td>[small]="true"</td>
+        <td>width="130px"</td>
       </tr>
       <tr>
         <td>deselectable: boolean</td>
@@ -146,6 +152,13 @@
         <td>selectedChanged: EventEmitter&lt;any&gt;</td>
         <td>Event som triggas när val ändras av användaren. Värdet är det nya valet.</td>
         <td>(selectedChanged)="doSomething($event)"</td>
+      </tr>
+
+      <!-- New functionallity in "Next breacking change release" Copy into komponenetkartan-demo when finished.-->
+      <tr>
+        <td>focus()</td>
+        <td>Metod man kan anropa för att programmatiskt kan sätta fokus på komponenten. </td>
+        <td>this.myDropdown.focus()</td>
       </tr>
     </table>
     <br>

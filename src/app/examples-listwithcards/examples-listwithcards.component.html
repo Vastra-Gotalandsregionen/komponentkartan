@@ -4,7 +4,7 @@
     <div class="column-layout column-layout--pull-left">
       <h3>Filtrera enheter</h3>
       <div class="row-layout row-layout--equal-height">
-        <vgr-filter-textbox (valueChanged)="filtertext = $event"></vgr-filter-textbox>
+        <vgr-input type="search" (input)="filtertext = $event.target.value"></vgr-input>
         <vgr-button (click)="openActionPanel()">Lägg till ny enhet</vgr-button>
       </div>
       <vgr-checkbox (checkedChanged)="includeInactiveUnits = $event" [checked]="includeInactiveUnits"
@@ -284,7 +284,7 @@
                 <vgr-card-header>
                   <div class="row-layout">
                     <label style="width:189px">Version</label>
-                    <vgr-dropdown-select [small]="true" [readonly]="!cardLocked" [formControl]="versionForm"
+                    <vgr-dropdown-select width="130px" [readonly]="!cardLocked" [formControl]="versionForm"
                       (selectedChanged)="onSelectedChangedVersion($event, row.previewObject)">
                       <vgr-dropdown-item *ngFor="let version of row.previewObject.details.versions" [value]="version">
                         {{version}}</vgr-dropdown-item>
@@ -486,9 +486,9 @@
 
                           <section class="row-layout row-layout--tight">
                             <vgr-input [readonly]="cardLocked" [value]="row.previewObject.details.geokod.x" suffix=":x"
-                              [small]="true" [alignRight]="true" width="100%"></vgr-input>
+                              width="130px" textAlign="right" width="100%"></vgr-input>
                             <vgr-input [readonly]="cardLocked" [value]="row.previewObject.details.geokod.y" suffix=":y"
-                              [small]="true" [alignRight]="true" width="100%"></vgr-input>
+                              width="130px" textAlign="right" width="100%"></vgr-input>
                           </section>
                         </vgr-title-value-container>
                       </vgr-title-value>

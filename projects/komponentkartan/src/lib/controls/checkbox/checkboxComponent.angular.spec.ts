@@ -40,10 +40,10 @@ describe('CheckboxComponent', () => {
   });
   describe('When initialized', () => {
     it('checkbox is not checked', () => {
-      expect(checkbox.classes['checkbox--checked']).toBe(false);
+      expect(checkbox.classes['checkbox--checked']).not.toBe(true);
     });
     it('checkbox is enabled', () => {
-      expect(checkbox.classes['checkbox--disabled']).toBe(false);
+      expect(checkbox.classes['checkbox--disabled']).not.toBe(true);
     });
   });
 
@@ -56,7 +56,7 @@ describe('CheckboxComponent', () => {
       expect(checkbox.classes['checkbox--checked']).toBe(true);
     });
     it('checkbox is enabled', () => {
-      expect(checkbox.classes['checkbox--disabled']).toBe(false);
+      expect(checkbox.classes['checkbox--disabled']).not.toBe(true);
     });
   });
 
@@ -66,7 +66,7 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
     });
     it('checkbox is not checked', () => {
-      expect(checkbox.classes['checkbox--checked']).toBe(false);
+      expect(checkbox.classes['checkbox--checked']).not.toBe(true);
     });
     it('checkbox is disabled', () => {
       expect(checkbox.classes['checkbox--disabled']).toBe(true);
@@ -108,7 +108,7 @@ describe('CheckboxComponent', () => {
       });
       it('checkbox is unchecked', () => {
         expect(component.checked).toBe(false);
-        expect(checkbox.classes['checkbox--checked']).toBe(false);
+        expect(checkbox.classes['checkbox--checked']).not.toBe(true);
       });
       it('checked event is emitted', () => {
         expect(component.checkedChanged.emit).toHaveBeenCalledWith(false);

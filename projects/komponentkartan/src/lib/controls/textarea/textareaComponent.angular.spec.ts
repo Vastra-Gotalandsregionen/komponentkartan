@@ -55,7 +55,7 @@ describe('TextareaComponent', () => {
     });
 
     it('CSS Class validated-input has been applied', () => {
-      expect(rootElement.classes['textarea-validation-error--editing']).toEqual(false);
+      expect(rootElement.classes['textarea-validation-error--editing']).not.toEqual(true);
       expect(rootElement.classes['textarea-validation-error--active']).toEqual(true);
     });
 
@@ -67,7 +67,7 @@ describe('TextareaComponent', () => {
 
       it('CSS Class validated-input has been applied', () => {
         expect(rootElement.classes['textarea-validation-error--editing']).toEqual(true);
-        expect(rootElement.classes['textarea-validation-error--active']).toEqual(false);
+        expect(rootElement.classes['textarea-validation-error--active']).not.toEqual(true);
       });
       describe('and input has been corrected', () => {
         beforeEach(() => {
@@ -76,8 +76,8 @@ describe('TextareaComponent', () => {
         });
 
         it('CSS Class validated-input has been applied', () => {
-          expect(rootElement.classes['textarea-validation-error--editing']).toEqual(false);
-          expect(rootElement.classes['textarea-validation-error--active']).toEqual(false);
+          expect(rootElement.classes['textarea-validation-error--editing']).not.toEqual(true);
+          expect(rootElement.classes['textarea-validation-error--active']).not.toEqual(true);
         });
       });
     });

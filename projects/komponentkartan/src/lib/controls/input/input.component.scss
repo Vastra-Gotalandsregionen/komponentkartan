@@ -1,0 +1,82 @@
+@import "../../../assets/partials/settings.colors";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/_settings.sizes.scss";
+
+.inputwrapper {
+  border: 1px solid #151515;
+  display: flex;
+  height: 30px;
+  overflow: hidden;
+  width: 100%;
+  background: white;
+  input {
+    flex-grow: 1;
+    border: 0;
+    height: 28px;
+    line-height: 28px;
+    width: 0;
+    background: transparent;
+    &[type="search"] {
+      padding-right: 0px;
+    }
+  }
+  div.prefix,
+  div.suffix {
+    font-style: italic;
+    line-height: 30px;
+  }
+
+  .suffix {
+    padding-right: 10px;
+  }
+
+  .prefix {
+    padding-left: 10px;
+    & + input {
+      padding-left: 5px;
+    }
+  }
+
+  &.alignRight {
+    input {
+      text-align: right;
+    }
+  }
+
+  .searchicon {
+    padding: 0 5px;
+    line-height: 30px;
+  }
+}
+
+.validation-error--editing {
+  .inputwrapper {
+      outline: $focus-outline-width solid $focus-color;
+  }
+}
+.validation.readonly {
+  .inputwrapper {
+    outline: none;
+  }
+  .inputwrapper,
+  input {
+    border-color: transparent;
+    background: transparent;
+  }
+  input::placeholder {
+    color: transparent;
+  }
+  .searchicon {
+    display: none;
+  }
+}
+
+:host {
+  display: inline-block;
+  &.vgr-input--disabled {
+    .inputwrapper {
+      background-color: rgb(235, 235, 228);
+      border-color: #87939f;
+    }
+  }
+}

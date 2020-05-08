@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DropdownItemComponent } from './dropdown-item.component';
 import { ButtonComponent } from '../button/button.component';
 import { Guid } from '../../utils/guid';
-import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
+import { InputComponent } from '../input/input.component';
 
 function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
@@ -43,7 +43,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @ViewChild('header', { static: true }) header: ElementRef;
   @ViewChild('selectAll', { static: false }) selectAll: ElementRef;
   @ViewChild('deselectButton', { static: false }) deselectButton: ButtonComponent;
-  @ViewChild(FilterTextboxComponent, { static: false }) filter: FilterTextboxComponent;
+  @ViewChild(InputComponent, { static: false }) filter: InputComponent;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
   expanded = false;
@@ -138,6 +138,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     this.ngUnsubscribeItems.next();
     this.ngUnsubscribeItems.complete();
+  }
+
+  public focus() {
+    this.header.nativeElement.focus();
   }
 
   writeValue(value: any) {

@@ -12,8 +12,9 @@ import { IconComponent } from '../icon/icon.component';
 import { IconModule } from '../icon/icon.module';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { InputComponent } from '../input/input.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'vgr-test',
@@ -35,7 +36,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
   let rootElement: DebugElement;
   let headerElement: DebugElement;
   let menuElement: DebugElement;
-  let filterElement: FilterTextboxComponent;
+  let filterElement: InputComponent;
   let deselectElement: DebugElement;
   let selectAllElement: DebugElement;
 
@@ -52,7 +53,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
         TruncatePipe,
         IconComponent,
         ErrorMessagePipe,
-        FilterTextboxComponent
+        InputComponent
       ]
     });
 
@@ -156,6 +157,8 @@ describe('[DropdownSelectComponent - Angular]', () => {
     describe('and filter is applied', () => {
       beforeEach(() => {
         filterElement.value = '1';
+        const filterInput = rootElement.query(By.directive(InputComponent));
+        filterInput.nativeElement.dispatchEvent(new KeyboardEvent('keyup', {code: 'Digit1', key: '1'}));
         fixture.detectChanges();
       });
       it('only matching items are shown', () => {
@@ -230,9 +233,9 @@ describe('[DropdownSelectComponent - Angular]', () => {
           fixture.detectChanges();
         });
         it('all items are deselected', () => {
-          expect(itemElements[0].classes['dropdown-item--selected']).toBe(false);
-          expect(itemElements[1].classes['dropdown-item--selected']).toBe(false);
-          expect(itemElements[2].classes['dropdown-item--selected']).toBe(false);
+          expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
+          expect(itemElements[1].classes['dropdown-item--selected']).not.toBe(true);
+          expect(itemElements[2].classes['dropdown-item--selected']).not.toBe(true);
         });
         it('label is set', () => {
           const headerLabelElement = headerElement.query(By.css('.dropdown-select__header__label'));
@@ -293,7 +296,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
           fixture.detectChanges();
         });
         it('item is deselected', () => {
-          expect(itemElements[0].classes['dropdown-item--selected']).toBe(false);
+          expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
         });
         it('label is set', () => {
           const headerLabelElement = headerElement.query(By.css('.dropdown-select__header__label'));
@@ -346,7 +349,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
           fixture.detectChanges();
         });
         it('previous item is deselected', () => {
-          expect(itemElements[0].classes['dropdown-item--selected']).toBe(false);
+          expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
         });
         it('new item is selected', () => {
           expect(itemElements[1].classes['dropdown-item--selected']).toBe(true);
@@ -373,7 +376,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
           fixture.detectChanges();
         });
         it('item is deselected', () => {
-          expect(itemElements[0].classes['dropdown-item--selected']).toBe(false);
+          expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
         });
         it('label is set', () => {
           const headerLabelElement = headerElement.query(By.css('.dropdown-select__header__label'));

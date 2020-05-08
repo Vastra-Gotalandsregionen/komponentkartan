@@ -5,6 +5,7 @@ import { Component, HostBinding, Input } from '@angular/core';
     templateUrl: './titleValueHeading.component.html'
 })
 export class TitleValueHeadingComponent {
+    @Input() for: string = null;
     @Input() @HostBinding('style.flex') width = 1;
     constructor() {}
 }

@@ -284,8 +284,14 @@ export class Examples {
       <vgr-list-column width="5">{{row.firstName}}</vgr-list-column>
       <vgr-list-column width="5">{{row.lastName}}</vgr-list-column>
       <vgr-list-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-list-column>
-      <vgr-list-column-trashcan [disabled]="row.previewObject.deleted" (click)="onDeleteRow($event,row)" (keydown)="handleKeyDown($event,row)" [align]="'center'"></vgr-list-column-trashcan>
-      <vgr-list-column-checkbox width="3" [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected" (checkedChanged)="onSelectRowChanged(row, $event)"></vgr-list-column-checkbox>  width="3"></vgr-list-column-checkbox>
+      <vgr-list-column width="1" [align]="center">
+        <vgr-icon (click)="onDeleteRow($event,row)" (keydown)="handleKeyDown($event,row)"></vgr-icon>
+      </vgr-list-column>
+      <vgr-list-column width="3" [align]="center">
+        <vgr-checkbox [disabled]="row.previewObject.deleted" [checked]="row.previewObject.selected"
+          (checkedChanged)="onSelectRowChanged(row, $event)">
+        </vgr-checkbox>
+      </vgr-list-column>
     </vgr-list-item-header>
     <vgr-list-item-content>
       <span>Mer information</span>

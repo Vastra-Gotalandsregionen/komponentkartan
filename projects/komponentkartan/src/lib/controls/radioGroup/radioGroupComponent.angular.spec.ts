@@ -1,5 +1,5 @@
 
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
@@ -280,7 +280,7 @@ describe('RadioGroupComponent', () => {
             describe('When no option is selected', () => {
                 it('first element has tabstop', () => {
                     for (let i = 0; i < visibleOptions.length; i++) {
-                        expect(visibleOptions[i].properties['tabIndex']).toBe(i === 0 ? '0' : '-1');
+                        expect(visibleOptions[i].properties['tabIndex']).toBe(i === 0 ? 0 : -1);
                     }
                 });
 
@@ -298,11 +298,11 @@ describe('RadioGroupComponent', () => {
                             expect(selectedOptions.length).toEqual(1);
                         });
                         it('the selected option has tabstop', () => {
-                            expect(selectedOptions[0].properties['tabIndex']).toBe('0');
+                            expect(selectedOptions[0].properties['tabIndex']).toBe(0);
                         });
                         it('only the second option has first tabstop', () => {
                             for (let i = 0; i < visibleOptions.length; i++) {
-                                expect(visibleOptions[i].properties['tabIndex']).toBe(i === 1 ? '0' : '-1');
+                                expect(visibleOptions[i].properties['tabIndex']).toBe(i === 1 ? 0 : -1);
                             }
                         });
                     });

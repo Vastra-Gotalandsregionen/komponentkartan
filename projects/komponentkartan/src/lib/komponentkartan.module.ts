@@ -51,7 +51,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ModalContentComponent,
     type.ModalHeaderComponent,
     type.ModalFooterComponent,
-    type.InputComponent,
     type.CardComponent,
     type.CardHeaderComponent,
     type.CardColumnComponent,
@@ -69,8 +68,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ListColumnHeaderComponent,
     type.ListColumnHeaderCheckboxComponent,
     type.ListColumnComponent,
-    type.ListColumnCheckboxComponent,
-    type.ListColumnTrashcanComponent,
     type.ListHeaderComponent,
     type.ListItemContentComponent,
     type.ListItemHeaderComponent,
@@ -111,7 +108,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridRowComponent,
     type.GridContentComponent,
     type.GridHeaderToolbarComponent,
-    type.NotificationComponent
+    type.NotificationComponent,
+    type.InputComponent
   ],
   exports: [
     type.SafePipe,
@@ -133,7 +131,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ModalContentComponent,
     type.ModalHeaderComponent,
     type.ModalFooterComponent,
-    type.InputComponent,
     type.CardComponent,
     type.CardHeaderComponent,
     type.CardColumnComponent,
@@ -151,8 +148,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ListColumnHeaderComponent,
     type.ListColumnHeaderCheckboxComponent,
     type.ListColumnComponent,
-    type.ListColumnCheckboxComponent,
-    type.ListColumnTrashcanComponent,
     type.ListHeaderComponent,
     type.ListItemContentComponent,
     type.ListItemHeaderComponent,
@@ -193,7 +188,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridRowComponent,
     type.GridContentComponent,
     type.GridHeaderToolbarComponent,
-    type.NotificationComponent
+    type.NotificationComponent,
+    type.InputComponent
   ],
   providers: [
     type.ModalService,

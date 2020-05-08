@@ -49,9 +49,7 @@ describe('[MenuComponent]', () => {
                 RouterTestingModule.withRoutes([]),
                 FontAwesomeModule,
                 IconModule
-            ],
-
-
+            ]
         });
 
         TestBed.compileComponents().then(() => {
@@ -218,9 +216,7 @@ describe('[MenuComponent]', () => {
 
             });
             describe('and first menuitem (Start) has focus', () => {
-
                 beforeEach(() => {
-
                     (<MenuItemComponent>component.menuItems.first).setFocus();
                     fixture.detectChanges();
                 });

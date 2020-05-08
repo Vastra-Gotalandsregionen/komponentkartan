@@ -50,7 +50,7 @@
       <vgr-notification type="error">Problem med olika saker.</vgr-notification>
 
       <!-- Funkar -->
-      <vgr-grid-row (expandedChanged)="visible1 = $event">
+      <vgr-grid-row (expandedChanged)="visible1 = !visible1">
         <vgr-grid-column [width]="5">Value 1</vgr-grid-column>
         <vgr-grid-column [width]="5">Value 2</vgr-grid-column>
         <vgr-grid-column [width]="5">Value 3</vgr-grid-column>
@@ -125,7 +125,7 @@
             eros, faucibus luctus hendrerit sit amet, bibendum in felis. Phasellus imperdiet, ante sed viverra
             tincidunt, ante quam dictum urna, et condimentum lacus neque nec ligula. Nullam aliquet vel eros vitae
             lacinia.</p>
-          <div style="margin-top: 20px;;">
+          <div style="margin-top: 20px;">
             <vgr-dropdown-select>
               <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
               <vgr-dropdown-item>Banan</vgr-dropdown-item>
@@ -180,11 +180,11 @@
     </vgr-grid>
 
     <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false">
-      <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = $event">
+      <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = !expanded0">
         <vgr-grid-column width="23">Grid utan rubriker och snabb animeringen</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded1" (expandedChanged)="expanded1 = $event">
+      <vgr-grid-row [expanded]="expanded1" (expandedChanged)="expanded1 = !expanded1">
         <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
@@ -196,7 +196,7 @@
           En specialikon
         </vgr-notification>
       </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = $event">
+      <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = !expanded2">
         <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
         <vgr-grid-column width="3">-980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
@@ -207,7 +207,7 @@
           En specialikon
         </vgr-notification>
       </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded3" (expandedChanged)="expanded3 = $event">
+      <vgr-grid-row [expanded]="expanded3" (expandedChanged)="expanded3 = !expanded3">
         <vgr-grid-column width="10">Svens klinik</vgr-grid-column>
         <vgr-grid-column width="3">123 456,98</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
@@ -236,7 +236,7 @@
             lacinia.</p>
         </vgr-grid-content>
       </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded4" (expandedChanged)="expanded4 = $event">
+      <vgr-grid-row [expanded]="expanded4" (expandedChanged)="expanded4 = !expanded4">
         <vgr-grid-column width="10">Klinik (utan innehåll)</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
@@ -244,7 +244,7 @@
         <vgr-grid-column width="5"></vgr-grid-column>
         <!-- <vgr-grid-content>Row content</vgr-grid-content> -->
       </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded5" (expandedChanged)="expanded5 = $event">
+      <vgr-grid-row [expanded]="expanded5" (expandedChanged)="expanded5 = !expanded5">
         <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
@@ -252,7 +252,7 @@
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded6" (expandedChanged)="expanded6 = $event">
+      <vgr-grid-row [expanded]="expanded6" (expandedChanged)="expanded6 = !expanded6">
         <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
@@ -270,7 +270,7 @@
         </vgr-notification>
         <vgr-grid-content>Row content</vgr-grid-content>
       </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded7" (expandedChanged)="expanded7 = $event">
+      <vgr-grid-row [expanded]="expanded7" (expandedChanged)="expanded7 = !expanded7">
         <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>
@@ -278,7 +278,7 @@
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-grid-content></vgr-grid-content>
       </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded8" (expandedChanged)="expanded8 = $event">
+      <vgr-grid-row [expanded]="expanded8" (expandedChanged)="expanded8 = !expanded8">
         <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
         <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
         <vgr-grid-column width="3"></vgr-grid-column>

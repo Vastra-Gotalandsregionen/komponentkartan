@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { DatepickerComponent as Datepicker } from '../../../projects/komponentkartan/src/lib';
+
 
 @Component({
   selector: 'app-datepicker',
@@ -7,6 +9,9 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent {
+  @ViewChild('myDatepicker', { read: Datepicker }) myDatepicker: Datepicker;
+  @ViewChild('myDatepickerWithoutInput', { read: Datepicker }) myDatepickerWithoutInput: Datepicker;
+
   disabled = false;
   readonly = false;
   form = new FormControl();
@@ -28,5 +33,13 @@ export class DatepickerComponent {
 
   toggleReadonly() {
     this.readonly = !this.readonly;
+  }
+
+  setFocus1() {
+    this.myDatepicker.focus();
+  }
+
+  setFocus2() {
+    this.myDatepickerWithoutInput.focus();
   }
 }

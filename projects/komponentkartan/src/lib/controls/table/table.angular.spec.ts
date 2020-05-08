@@ -70,7 +70,7 @@ describe('[TestTableComponent]', () => {
   describe('When component is initialized with expanded = true', () => {
 
     it('headerrow does not have class collapsed', () => {
-      expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(false);
+      expect(rootElement.query(By.css('.table-header')).classes['collapsed']).not.toBe(true);
     });
     it('headerrow do have class expanded', () => {
       expect(rootElement.query(By.css('.table-header')).classes['expanded']).toBe(true);
@@ -91,7 +91,7 @@ describe('[TestTableComponent]', () => {
         expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(true);
       });
       it('headerrow do have class expanded', () => {
-        expect(rootElement.query(By.css('.table-header')).classes['expanded']).toBe(false);
+        expect(rootElement.query(By.css('.table-header')).classes['expanded']).not.toBe(true);
       });
     });
 
@@ -114,7 +114,7 @@ describe('[TestTableComponent]', () => {
         expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(true);
       });
       it('headerrow does not have class expanded', () => {
-        expect(rootElement.query(By.css('.table-header')).classes['expanded']).toBe(false);
+        expect(rootElement.query(By.css('.table-header')).classes['expanded']).not.toBe(true);
       });
 
       describe('table is collapsed, row is focused and enter is space', () => {
@@ -135,7 +135,7 @@ describe('[TestTableComponent]', () => {
           expect(rootElement.query(By.css('.table-header')).classes['expanded']).toBe(true);
         });
         it('headerrow does not have class collapsed', () => {
-          expect(rootElement.query(By.css('.table-header')).classes['collapsed']).toBe(false);
+          expect(rootElement.query(By.css('.table-header')).classes['collapsed']).not.toBe(true);
         });
       });
 
