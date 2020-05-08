@@ -14,10 +14,8 @@ Task("Validate-Arguments")
 		case "Local":
 			break;
 		case "Test":
-			deployServer = "vgwb0399";
 			break;
 		case "Demo":
-			deployServer = "vgwb0399";
 			break;
 		default:
 			throw new Exception(string.Format(
@@ -59,45 +57,6 @@ Task("Build-Frontend")
         WorkingDirectory = "./"
     });
 
-	});
-
-
-
-Task("Deploy-Frontend")
-	.IsDependentOn("Validate-Arguments")
-	.WithCriteria(() => environment != "Local")
-	
-	.IsDependentOn("Run-Jasmine-Tests")
-	.Does(() =>
-{
-
-	var sourcePath =  MakeAbsolute(Directory("./dist/")).FullPath;
-	var destinationPath = environment + "-komponentkartan";
-	var username =  EnvironmentVariable("DeployUsername");
-	var password =  EnvironmentVariable("DeployPwd");
-
-		MsDeploy(new MsDeploySettings
-	{
-		Verb = Operation.Sync,
-		AllowUntrusted = true,
-		Source = new IisAppProvider
-		{
-			Direction = Direction.source,
-			Path = sourcePath
-		},
-		Destination = new IisAppProvider
-		{
-			Direction = Direction.dest,
-			Path = destinationPath,
-			WebManagementService = deployServer,
-			Username = username,
-			Password = password
-		}
-	});
 });
-
-
-Task("Default")
-	.IsDependentOn("Deploy-Frontend");
 
 RunTarget(target);
