@@ -4,10 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Next 7.0
+## 7.0 (Stable, 2020-05-08)
 - *Breaking change* `vgr-input` is updated, can now handle prefix and API more closely resembles HTML-input.
 - `vgr-list-column-checkbox` & `vgr-list-column-trashcan` are now officially removed.
-- *Deprecated* `vgr-filter-textbox` has been deprecated. `<vgr input type="search">` insetad.
+- *Deprecated* `vgr-filter-textbox` has been deprecated. `<vgr input type="search">` instead.
 - *Deprecated* output event focus from `vgr-textarea`, `vgr-input`
 - *Deprecated* output event blur from `vgr-textarea`
 - Added [idForLabel] property on `vgr-textarea` to make it possible to connect label to it.
@@ -15,12 +15,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added public method focus() for  `vgr-textarea`, `vgr-input`, `vgr-dropdown` and `vgr-datepicker`. 
 - Makes it possible to programmatically set focus on the component.
 
-## 6.1.0
+## 6.1.0 (2020-02-25)
 - Updated design of `vgr-button`.
 - Changed margin between `vgr-checkbox` and it's label.
 - Changed alignment of `vgr-textarea`, `vgr-dropdown`, `vgr-datepicker` & `vgr-button`
 
-## 6.0.0
+## 6.0.0 (2020-02-13)
 - *Breaking change* Angular is upgraded to version 8.
 - *Breaking change* `title-value` is now declarative using: `title-value-heading` and `title-value-container` as children.
 - *Deprecated* `list` and `list-item`.
@@ -29,10 +29,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed `vgr-dropdown-select` uses `vgr-filter-textbox` for filtering.
 - Fixed the handler of disable for `vgr-checkbox` in form control.
 
-## 5.1.4 (Stable, 2019-12-20)
+## 5.1.4 (2019-12-20)
 - Restored possibility to start submenus expanded
 
-## 5.1.3 (Stable, 2019-10-21)
+## 5.1.3 (2019-10-21)
 - Fixed another bug in "grid"-component regarding toggle animation.
 
 ## 5.1.2 (2019-10-17)
