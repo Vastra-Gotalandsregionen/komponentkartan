@@ -1,5 +1,12 @@
 <app-component-docs [componentName]="'Dropdown select'">
   <div class="docs__overview">
+
+    <vgr-dropdown-select [multi]="true" [value]="vc_selected" [simpleLabel]="true">
+      <vgr-dropdown-item *ngFor="let enhet of vc_namn">{{enhet}}</vgr-dropdown-item>
+    </vgr-dropdown-select>
+
+
+    <br><bR>
     <p>Dropdown select finns i två bredder, har en rad olika alternativ och följer temafärg.</p>
     <vgr-dropdown-select [readonly]="readonly" [disabled]="disabled" #myDropdown>
       <vgr-dropdown-item>Apelsin</vgr-dropdown-item>

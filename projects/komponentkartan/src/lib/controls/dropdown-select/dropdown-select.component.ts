@@ -52,13 +52,12 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   deselectDisabled = true;
   headerLabelId = Guid.newGuid();
   label = this.noItemSelectedLabel;
-  selectAllLabel = 'Markera alla';
-  deselectAllLabel = 'Avmarkera alla';
-  toggleSelectAllLabel = this.selectAllLabel;
 
   hasFocus: boolean;
   filterHasFocus: boolean;
   scrollbarConfig: PerfectScrollbarConfig;
+  visibleCount: number;
+  searchString = '';
 
   private matchQuery = '';
 
@@ -187,12 +186,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   filterItems() {
-    const value = this.filter.value;
+    const value = this.searchString;
 
     if (this.items) {
       this.items.forEach(item => {
         item.visible = item.label.toLowerCase().includes(value.toLowerCase());
       });
+      this.visibleCount = this.items.filter(e => e.visible).length;
+      this.updateAllCheckedStatus();
     }
 
     // Scroll to top when filter is changed
@@ -211,20 +212,22 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   toggleSelectAll() {
-    if (this.allSelected) {
-      this.allSelected = false;
-      this.items.forEach(item => item.selected = false);
-      this.label = this.noItemSelectedLabel;
-      this.toggleSelectAllLabel = this.selectAllLabel;
-      this.onChange(null);
+    this.items.filter(i => i.visible).forEach(item => item.selected = !this.allSelected);
+    this.setLabel(Array.from(this.items.filter(i => i.selected)));
+    this.updateAllCheckedStatus();
+    const values = this. items ? this.items.filter(i => i.selected).map(item => item.value) : null;
+    this.onChange(values);
+  }
+
+  updateAllCheckedStatus() {
+    if (this.items) {
+      const selected = Array.from(this.items.filter(i => i.selected));
+      const visible = Array.from(this.items.filter(i => i.visible));
+      this.allSelected = visible.every(i => selected.includes(i));
     } else {
-      this.allSelected = true;
-      this.items.forEach(item => item.selected = true);
-      this.setLabel(this.items.toArray());
-      this.toggleSelectAllLabel = this.deselectAllLabel;
-      const values = this.items.map(item => item.value);
-      this.onChange(values);
+      this.allSelected = false;
     }
+    // this.allSelected = this.items && this.items.filter(i => i.visible).length === this.items.filter(i => i.selected).length;
   }
 
   onFocus() {
@@ -441,6 +444,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   private setFilterVisibility() {
     this.filterVisible = this.items && this.items.length > 20;
+    this.visibleCount = this.value ? this.value.length : 0;
   }
 
   private setMultiOnItems() {
@@ -470,8 +474,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         .subscribe(() => {
           const selectedItems = this.items.filter(i => i.selected);
           if (selectedItems.length) {
-            this.allSelected = selectedItems.length === this.items.length;
-            this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
+            this.updateAllCheckedStatus();
             this.setLabel(selectedItems);
             const values = selectedItems.map(i => i.value);
             this.onChange(values);
@@ -487,8 +490,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         .subscribe(() => {
           if (this.multi) {
             const selectedItems = this.items.filter(i => i.selected);
-            this.allSelected = selectedItems.length === this.items.length;
-            this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
+            this.updateAllCheckedStatus();
             this.setLabel(selectedItems);
             const values = selectedItems.map(i => i.value);
             this.onChange(values);
@@ -587,8 +589,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
           i.selected = false;
         }
       });
-      this.allSelected = this.items.length && this.items.length === selectedItems.length;
-      this.toggleSelectAllLabel = this.allSelected ? this.deselectAllLabel : this.selectAllLabel;
+      this.updateAllCheckedStatus();
       this.setLabel(selectedItems);
     } else {
       let selectedItem: DropdownItemComponent;
