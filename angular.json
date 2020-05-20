@@ -47,10 +47,12 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }]
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
             },
             "dev": {
               "budgets": [
@@ -162,9 +164,9 @@
           },
           "configurations": {
             "production": {
-              "project": "projects/komponentkartan/ng-package.prod.json"
-            ,              "tsConfig": "projects/komponentkartan/tsconfig.lib.prod.json"
-}
+              "project": "projects/komponentkartan/ng-package.prod.json",
+              "tsConfig": "projects/komponentkartan/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -199,5 +201,8 @@
     "@schematics/angular:directive": {
       "prefix": "vgr"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
