@@ -37,6 +37,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   @Input() maxlength: number;
   @Input() value: string;
   @Input() idForLabel: string;
+  @Input() disabled = false;
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
 
@@ -96,8 +97,8 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
     this.onTouched = func;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
   }
 
   onChange(input: any) {
