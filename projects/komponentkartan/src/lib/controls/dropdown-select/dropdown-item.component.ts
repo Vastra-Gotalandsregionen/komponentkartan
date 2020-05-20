@@ -38,7 +38,9 @@ export class DropdownItemComponent implements AfterViewInit {
   }
 
   focus() {
-    this.item.nativeElement.focus();
+    if (this.item) {
+      this.item.nativeElement.focus();
+    }
   }
 
   // IE specific hack, since IE sets focus on internal elements when clicked.
