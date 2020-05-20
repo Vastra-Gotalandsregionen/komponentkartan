@@ -12,6 +12,7 @@ export class CardSectionComponent {
     @Input() @HostBinding('class.card-section--readonly') readonly = true;
     @Input() title: string;
     @Input() subtitle: string;
+    @Input() truncateLength: number = 30;
     overflow = false;
     animationSpeed = '.4s ease';
     expandOverflow: boolean;
