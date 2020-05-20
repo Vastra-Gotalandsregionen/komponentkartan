@@ -5,8 +5,7 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 7.2.0
-- Added setDisabled state for `vgr-dropdown`
-- Added setDisabled state for `vgr-textarea`
+- Added setDisabled state for `vgr-dropdown`, `vgr-textarea` and `vgr-radio-group`
 
 ## 7.1.0 (2020-05-15)
 - Added property for truncateLength on `vgr-card-section`
