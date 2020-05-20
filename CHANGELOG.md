@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 7.2.0
 - Added setDisabled state for `vgr-dropdown`
+- Added setDisabled state for `vgr-textarea`
 
 ## 7.1.0 (2020-05-15)
 - Added property for truncateLength on `vgr-card-section`
