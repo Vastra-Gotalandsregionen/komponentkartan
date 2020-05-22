@@ -41,13 +41,13 @@ export class ToggleButtonComponent implements AfterViewInit, OnChanges {
   }
 
   onKeydown(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft' || event.key === 'Left' || event.key === 'ArrowUp' || event.key === 'Up') {
+    if (['ArrowLeft', 'Left', 'ArrowUp', 'Up'].includes(event.key)) {
       this.previous.emit();
       event.preventDefault();
-    } else if (event.key === 'ArrowRight' || event.key === 'Right' || event.key === 'ArrowDown' || event.key === 'Down') {
+    } else if (['ArrowRight', 'Right', 'ArrowDown', 'Down'].includes(event.key)) {
       this.next.emit();
       event.preventDefault();
-    } else if (event.keyCode === 13 || event.keyCode === 32) {
+    } else if (['Enter', 'Spacebar', ' '].includes(event.key)) {
       event.stopPropagation();
     }
   }

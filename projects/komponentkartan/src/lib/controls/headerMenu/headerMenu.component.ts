@@ -104,7 +104,7 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
   toggleHeaderMenu(event: MouseEvent | any) {
     this.hideMenu = !this.hideMenu;
     if (!this.hideMenu) {
-      event.cancelBubble = true;
+      event.stopPropagation();
     }
   }
 

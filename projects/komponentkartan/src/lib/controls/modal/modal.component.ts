@@ -107,7 +107,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
     }
 
     onKeyDown(e: any) {
-        if (e.keyCode === 9) {
+        if (e.key === 'Tab') {
             // If Shift + Tab
             if (e.shiftKey) {
                 // If the current element in focus is the first focusable element within the modal window...

@@ -69,7 +69,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow right key', () => {
       beforeEach(() => {
-        firstFilterTagOuterSpan.triggerEventHandler('keydown', { key: 'ArrowRight' });
+        firstFilterTagOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
       });
       it('next filter tag is focused', () => {
         expect(document.activeElement).toBe(secondFilterTagButton.nativeElement);
@@ -77,7 +77,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow right key in IE', () => {
       beforeEach(() => {
-        firstFilterTagOuterSpan.triggerEventHandler('keydown', { key: 'Right' });
+        firstFilterTagOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Right' }));
       });
       it('next filter tag is focused', () => {
         expect(document.activeElement).toBe(secondFilterTagButton.nativeElement);
@@ -85,7 +85,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow down key', () => {
       beforeEach(() => {
-        firstFilterTagOuterSpan.triggerEventHandler('keydown', { key: 'ArrowDown' });
+        firstFilterTagOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       });
       it('next filter tag is focused', () => {
         expect(document.activeElement).toBe(secondFilterTagButton.nativeElement);
@@ -93,7 +93,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow down in IE', () => {
       beforeEach(() => {
-        firstFilterTagOuterSpan.triggerEventHandler('keydown', { key: 'Down' });
+        firstFilterTagOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
       });
       it('next filter tag is focused', () => {
         expect(document.activeElement).toBe(secondFilterTagButton.nativeElement);
@@ -101,7 +101,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow left key', () => {
       beforeEach(() => {
-        firstFilterTagOuterSpan.triggerEventHandler('keydown', { key: 'ArrowLeft' });
+        firstFilterTagOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
       });
       it('previous filter tag is focused', () => {
         expect(document.activeElement).toBe(thirdFilterTagButton.nativeElement);
@@ -109,7 +109,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow left key in IE', () => {
       beforeEach(() => {
-        firstFilterTagOuterSpan.triggerEventHandler('keydown', { key: 'Left' });
+        firstFilterTagOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Left' }));
       });
       it('previous filter tag is focused', () => {
         expect(document.activeElement).toBe(thirdFilterTagButton.nativeElement);
@@ -117,7 +117,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow up key', () => {
       beforeEach(() => {
-        firstFilterTagOuterSpan.triggerEventHandler('keydown', { key: 'ArrowUp' });
+        firstFilterTagOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
       });
       it('previous filter tag is focused', () => {
         expect(document.activeElement).toBe(thirdFilterTagButton.nativeElement);
@@ -125,7 +125,7 @@ describe('[FilterTagGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow up in IE', () => {
       beforeEach(() => {
-        firstFilterTagOuterSpan.triggerEventHandler('keydown', { key: 'Up' });
+        firstFilterTagOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Up' }));
       });
       it('previous filter tag is focused', () => {
         expect(document.activeElement).toBe(thirdFilterTagButton.nativeElement);

@@ -114,7 +114,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   }
 
   onBlur(event: Event) {
-    event.cancelBubble = true;
+    event.stopPropagation();
     this.hasFocus = false;
     if (this.control) {
       this.control.markAsTouched();

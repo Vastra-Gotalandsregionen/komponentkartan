@@ -12,13 +12,13 @@ export class CardSectionComponent {
     @Input() @HostBinding('class.card-section--readonly') readonly = true;
     @Input() title: string;
     @Input() subtitle: string;
-    @Input() truncateLength: number = 30;
+    @Input() truncateLength = 30;
     overflow = false;
     animationSpeed = '.4s ease';
     expandOverflow: boolean;
 
     toggleExpanded(event) {
-        if ((event instanceof KeyboardEvent && event.keyCode === 13 || event.keyCode === 32) || (event instanceof MouseEvent)) {
+        if ((event instanceof KeyboardEvent && ['Enter', 'Spacebar', ' '].includes(event.key)) || (event instanceof MouseEvent)) {
             this.overflow = false;
             setTimeout(() => {
                 this.expanded = !this.expanded;

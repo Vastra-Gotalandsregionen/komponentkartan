@@ -156,9 +156,8 @@ describe('[DropdownSelectComponent - Angular]', () => {
     });
     describe('and filter is applied', () => {
       beforeEach(() => {
-        filterElement.value = '1';
-        const filterInput = rootElement.query(By.directive(InputComponent));
-        filterInput.nativeElement.dispatchEvent(new KeyboardEvent('keyup', {code: 'Digit1', key: '1'}));
+        component.searchString = '1';
+        component.filterItems();
         fixture.detectChanges();
       });
       it('only matching items are shown', () => {

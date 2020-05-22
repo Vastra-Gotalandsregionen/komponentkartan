@@ -187,30 +187,27 @@ describe('[MenuComponent]', () => {
                     expect(submenucomponent.expanded).toBe(true);
                 });
                 it('disabled menuitem is focused', () => {
-                    const focusedElement = rootElement.querySelector('.menu__item:focus p');
-                    expect(focusedElement.innerHTML).toBe('Back to top');
+                    expect(document.activeElement.textContent).toBe('Back to top');
                 });
                 describe('and enter is pressed', () => {
                     let focusedElement;
 
                     beforeEach(() => {
-                        focusedElement = debugElement.query(By.css(':focus'));
-                        focusedElement.triggerEventHandler('keydown', { key: 'ArrowDown' } as KeyboardEvent);
-
+                        focusedElement = document.activeElement; // debugElement.query(By.css(':focus'));
+                        focusedElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown'}));
                         fixture.detectChanges();
                         jasmine.clock().tick(650);
                     });
 
                     it('item has disabled set to true', () => {
-                        expect(focusedElement.componentInstance.disabled).toBe('true');
+                        expect(focusedElement.className).toContain('menu__item--disabled');
                     });
                     it(('submenu is still expanded'), () => {
                         expect(submenucomponent.expanded).toBe(true);
                     });
 
                     it('last submenuitem has focus', () => {
-                        focusedElement = rootElement.querySelector('.menu__item:focus p');
-                        expect(focusedElement.innerHTML).toBe('Back to top');
+                        expect(document.activeElement.textContent).toBe('Back to top');
                     });
                 });
 
@@ -221,8 +218,7 @@ describe('[MenuComponent]', () => {
                     fixture.detectChanges();
                 });
                 it('first menuitem has focus', () => {
-                    const focusedElement = rootElement.querySelector(':focus a');
-                    expect(focusedElement.innerHTML).toBe('Start');
+                    expect(document.activeElement.textContent).toBe('Start');
                 });
                 describe('enter is pressed', () => {
                     let firstMenuItemComponent;
@@ -232,7 +228,7 @@ describe('[MenuComponent]', () => {
 
                         navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate');
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'Enter' } as KeyboardEvent);
+                        menuItemToTriggerOn.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter'}));
                         fixture.detectChanges();
                     });
                     it('router is activated', () => {
@@ -247,7 +243,7 @@ describe('[MenuComponent]', () => {
 
                         navigateSpy = spyOn((<any>firstMenuItemComponent).router, 'navigate');
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: ' ' } as KeyboardEvent);
+                        menuItemToTriggerOn.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' '}));
                         fixture.detectChanges();
                     });
                     it('router is activated', () => {
@@ -258,15 +254,14 @@ describe('[MenuComponent]', () => {
                     beforeEach(() => {
                         spyOn(component.menuItems.first.arrowDown, 'emit').and.callThrough();
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'ArrowDown' } as KeyboardEvent);
+                        menuItemToTriggerOn.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown'}));
                         fixture.detectChanges();
                     });
                     it('godown event is emitted', () => {
                         expect(component.menuItems.first.arrowDown.emit).toHaveBeenCalled();
                     });
                     it('submenuitem has focus', () => {
-                        const focusedElement = rootElement.querySelector('.menu__item:focus a');
-                        expect(focusedElement.innerHTML).toBe('Komponenter');
+                        expect(document.activeElement.textContent).toBe('Komponenter');
                     });
                     it('submenu should not be expanded', () => {
                         expect(submenucomponent.expanded).toBe(false);
@@ -274,8 +269,7 @@ describe('[MenuComponent]', () => {
                     describe('Enter is pressed', () => {
                         beforeEach(() => {
                             const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
-                            menuItemToTriggerOn.triggerEventHandler('keydown', { key: ' ' } as KeyboardEvent);
-
+                            menuItemToTriggerOn.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' '}));
                             fixture.detectChanges();
                             jasmine.clock().tick(650);
                         });
@@ -283,8 +277,7 @@ describe('[MenuComponent]', () => {
                             expect(submenucomponent.expanded).toBe(true);
                         });
                         it('first item in the submenuitem has focus', () => {
-                            const focusedElement = rootElement.querySelector('.menu__item:focus a');
-                            expect(focusedElement.innerHTML).toBe('Action panel');
+                            expect(document.activeElement.textContent).toBe('Action panel');
                         });
                     });
                     describe('Space is pressed', () => {
@@ -293,8 +286,7 @@ describe('[MenuComponent]', () => {
 
                         beforeEach(() => {
                             const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
-                            menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'Enter' } as KeyboardEvent);
-
+                            menuItemToTriggerOn.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter'}));
                             fixture.detectChanges();
                             jasmine.clock().tick(650);
                         });
@@ -302,22 +294,18 @@ describe('[MenuComponent]', () => {
                             expect(submenucomponent.expanded).toBe(true);
                         });
                         it('first item in the submenuitem has focus', () => {
-                            const focusedElement = rootElement.querySelector('.menu__item:focus a');
-                            expect(focusedElement.innerHTML).toBe('Action panel');
+                            expect(document.activeElement.textContent).toBe('Action panel');
                         });
                         describe('arrow down is pressed', () => {
                             beforeEach(() => {
                                 submenuDebugElement = debugElement.query(By.directive(SubmenuComponent));
                                 actionPanelDebugElement = submenuDebugElement.queryAll(By.directive(MenuItemComponent)).filter(mi => mi.componentInstance.text === 'Action panel')[0];
-
                                 spyOn(actionPanelDebugElement.componentInstance.arrowDown, 'emit').and.callThrough();
-
-                                actionPanelDebugElement.triggerEventHandler('keydown', { key: 'ArrowDown' } as KeyboardEvent);
+                                actionPanelDebugElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown'}));
                                 fixture.detectChanges();
                             });
                             it('last item in the submenuitem has focus', () => {
-                                const focusedElement = rootElement.querySelector('.menu__item:focus p');
-                                expect(focusedElement.innerHTML).toBe('Back to top');
+                                expect(document.activeElement.textContent).toBe('Back to top');
                             });
                             it('godown event is emitted', () => {
                                 expect(actionPanelDebugElement.componentInstance.arrowDown.emit).toHaveBeenCalled();
@@ -332,12 +320,11 @@ describe('[MenuComponent]', () => {
 
                                     spyOn(backToTopDebugElement.componentInstance.arrowUp, 'emit').and.callThrough();
 
-                                    backToTopDebugElement.triggerEventHandler('keydown', { key: 'ArrowUp' } as KeyboardEvent);
+                                    backToTopDebugElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp'}));
                                     fixture.detectChanges();
                                 });
                                 it('previous menuitem has focus', () => {
-                                    const focusedElement = rootElement.querySelector('.menu__item:focus a');
-                                    expect(focusedElement.innerHTML).toBe('Action panel');
+                                    expect(document.activeElement.textContent).toBe('Action panel');
                                 });
                                 it('arrowUp event is emitted', () => {
                                     expect(backToTopDebugElement.componentInstance.arrowUp.emit).toHaveBeenCalled();
@@ -355,9 +342,8 @@ describe('[MenuComponent]', () => {
                                     mySub = <SubmenuComponent>component.menuItems.toArray()[1];
                                     spyOn(backToTopElement.componentInstance.escape, 'emit').and.callThrough();
 
-                                    backToTopElement.triggerEventHandler('keydown', { key: 'Esc' } as KeyboardEvent);
+                                    backToTopElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Esc'}));
                                     submenucomponent.ngOnInit();
-
 
                                     fixture.detectChanges();
 
@@ -367,8 +353,7 @@ describe('[MenuComponent]', () => {
                                     expect(backToTopElement.componentInstance.escape.emit).toHaveBeenCalled();
                                 });
                                 it('submenu is focused', () => {
-                                    const focusedElement = rootElement.querySelector('.menu__item:focus a');
-                                    expect(focusedElement.innerHTML).toBe('Komponenter');
+                                    expect(document.activeElement.textContent).toBe('Komponenter');
                                 });
 
                                 // eventet går igenom, men kan inte få den att påvisa att den är collapsad igen
@@ -382,12 +367,11 @@ describe('[MenuComponent]', () => {
                                 beforeEach(() => {
                                     spyOn(actionPanelDebugElement.componentInstance.home, 'emit').and.callThrough();
                                     spyOn(submenucomponent.home, 'emit').and.callThrough();
-                                    actionPanelDebugElement.triggerEventHandler('keydown', { key: 'Home' } as KeyboardEvent);
+                                    actionPanelDebugElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home'}));
                                     fixture.detectChanges();
                                 });
                                 it('first item in menu is focused', () => {
-                                    const focusedElement = rootElement.querySelector('.menu__item:focus a');
-                                    expect(focusedElement.innerHTML).toBe('Start');
+                                    expect(document.activeElement.textContent).toBe('Start');
                                 });
                                 it('submenu should be expanded', () => {
                                     expect(submenucomponent.expanded).toBe(true);
@@ -403,12 +387,11 @@ describe('[MenuComponent]', () => {
                                 beforeEach(() => {
                                     spyOn(actionPanelDebugElement.componentInstance.end, 'emit').and.callThrough();
                                     spyOn(submenucomponent.end, 'emit').and.callThrough();
-                                    actionPanelDebugElement.triggerEventHandler('keydown', { key: 'End' } as KeyboardEvent);
+                                    actionPanelDebugElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'End'}));
                                     fixture.detectChanges();
                                 });
                                 it('last visible item on menu is focused (submenus last item)', () => {
-                                    const focusedElement = rootElement.querySelector('.menu__item:focus p');
-                                    expect(focusedElement.innerHTML).toBe('Back to top');
+                                    expect(document.activeElement.textContent).toBe('Back to top');
                                 });
                                 it('submenu should be expanded', () => {
                                     expect(submenucomponent.expanded).toBe(true);
@@ -428,12 +411,11 @@ describe('[MenuComponent]', () => {
 
                                 spyOn(actionPanelDebugElement.componentInstance.arrowUp, 'emit').and.callThrough();
 
-                                actionPanelDebugElement.triggerEventHandler('keydown', { key: 'ArrowUp' } as KeyboardEvent);
+                                actionPanelDebugElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp'}));
                                 fixture.detectChanges();
                             });
                             it('submenuitem has focus', () => {
-                                const focusedElement = rootElement.querySelector('.menu__item:focus a');
-                                expect(focusedElement.innerHTML).toBe('Komponenter');
+                                expect(document.activeElement.textContent).toBe('Komponenter');
                             });
                             it('arrowUp event is emitted', () => {
                                 expect(actionPanelDebugElement.componentInstance.arrowUp.emit).toHaveBeenCalled();
@@ -444,23 +426,21 @@ describe('[MenuComponent]', () => {
                 describe('Arrow down is pressed on last visible menuitem', () => {
                     beforeEach(() => {
                         const menuItemToTriggerOn = debugElement.query(By.directive(SubmenuComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'ArrowDown' } as KeyboardEvent);
+                        menuItemToTriggerOn.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown'}));
                         fixture.detectChanges();
                     });
                     it('first menuItems has focus', () => {
-                        const focusedElement = rootElement.querySelector('.menu__item:focus a');
-                        expect(focusedElement.innerHTML).toBe('Start');
+                        expect(document.activeElement.textContent).toBe('Start');
                     });
                 });
                 describe('Arrow up is pressed on first menuitem with closed submenu', () => {
                     beforeEach(() => {
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'ArrowUp' } as KeyboardEvent);
+                        menuItemToTriggerOn.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp'}));
                         fixture.detectChanges();
                     });
                     it('submenuitem has focus', () => {
-                        const focusedElement = rootElement.querySelector('.menu__item:focus a');
-                        expect(focusedElement.innerHTML).toBe('Komponenter');
+                        expect(document.activeElement.textContent).toBe('Komponenter');
                     });
                 });
                 describe('Arrow up is pressed on first menuitem with opened submenu', () => {
@@ -471,15 +451,14 @@ describe('[MenuComponent]', () => {
                         fixture.detectChanges();
 
                         const menuItemToTriggerOn = debugElement.query(By.directive(MenuItemComponent));
-                        menuItemToTriggerOn.triggerEventHandler('keydown', { key: 'ArrowUp' } as KeyboardEvent);
+                        menuItemToTriggerOn.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp'}));
 
                     });
                     it(('submenu is expanded'), () => {
                         expect(submenucomponent.expanded).toBe(true);
                     });
                     it('last submenuitem has focus', () => {
-                        const focusedElement = rootElement.querySelector('.menu__item:focus p');
-                        expect(focusedElement.innerHTML).toBe('Back to top');
+                        expect(document.activeElement.textContent).toBe('Back to top');
                     });
                 });
 
