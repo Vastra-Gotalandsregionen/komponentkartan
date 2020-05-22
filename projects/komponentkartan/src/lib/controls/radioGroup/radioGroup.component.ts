@@ -51,7 +51,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         this.selectOption(preSelectedOption);
       }
     }
-
     if (this.formControlName && this.controlContainer) {
       this.control = this.controlContainer.control.get(this.formControlName);
     }
@@ -179,6 +178,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     option.selected = true;
     this.onChange(option.value);
     this.selectedChanged.emit(option.value);
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
   }
 }
 

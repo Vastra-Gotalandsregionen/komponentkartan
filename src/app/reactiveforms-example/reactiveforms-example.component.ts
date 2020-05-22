@@ -14,6 +14,8 @@ export class ReactiveformsexampleComponent implements OnInit {
     radioOptions2: SelectableItem<number>[];
     radioOptions3: SelectableItem<number>[];
 
+    locked = false;
+
     minDate = new Date('2015');
     maxDate = new Date('2025');
 
@@ -160,6 +162,18 @@ export class ReactiveformsexampleComponent implements OnInit {
     }
 
     onSubmitUpdateOnBlurForm() {
+    }
+
+    handleLockChanged(state) {
+        this.locked = !this.locked;
+
+        Object.keys(this.updateOnBlurForm.controls).map(key => {
+            if (state) {
+                this.updateOnBlurForm.controls[key].enable();
+            } else {
+                this.updateOnBlurForm.controls[key].disable();
+            }
+        });
     }
 }
 

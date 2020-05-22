@@ -4,13 +4,15 @@ import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
   selector: 'app-action-panel',
-  templateUrl: './actionpanels.component.html'
+  templateUrl: './actionpanels.component.html',
+  styleUrls: ['./actionpanels.component.scss']
 })
 export class ActionPanelsComponent {
 
   open1 = false;
   showCloseButton1 = true;
   open2 = false;
+  openError = false;
 
   exampleCode = `
   <vgr-action-panel [showCloseButton]="true" (openChanged)="open=$event" [open]="open"
@@ -24,6 +26,14 @@ export class ActionPanelsComponent {
   constructor(htmlEncoder: HtmlEncodeService) {
     this.exampleCodeMarkup =
       htmlEncoder.prepareHighlightedSection(this.exampleCode, 'HTML');
+  }
+
+  getActionText(open: boolean): string {
+    if (open) {
+      return 'Stäng';
+    } else {
+      return 'Öppna';
+    }
   }
 
 }

@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 7.1.0 (Stable, 2020-05-15)
+## 7.3.0 (Beta, 2020-05-22)
+- Changed the behavior for "Markera alla" in `vgr-dropdown-select`
+
+## 7.2.0 (2020-05-22)
+- Added setDisabled state for `vgr-dropdown`, `vgr-textarea` and `vgr-radio-group`
+
+## 7.1.0 (2020-05-15)
 - Added property for truncateLength on `vgr-card-section`
 
 ## 7.0.0 (2020-05-08)
@@ -44,7 +50,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 5.1.1 (2019-10-16)
 - Fixed bug in input "input"-component.
 
-## 5.1.0 (Beta, 2019-09-17)
+## 5.1.0 (2019-09-17)
 - Added a new "grid"-component that will replace the list function in the future.
 - Added a new "notification"-component that can be used with the grid component (and perhaps more components in the future).
 
