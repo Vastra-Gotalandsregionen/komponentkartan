@@ -23,7 +23,7 @@ Task("Validate-Arguments")
 				environment));
 	}
 
-	
+
 	Verbose("Environment: {0}", environment);
 });
 
@@ -33,7 +33,7 @@ Task("Restore-NpmPackages")
 		NpmInstall(new NpmInstallSettings
     	{
         	WorkingDirectory = "./",
-			Production = false
+			    Production = false
     	});
 	});
 
@@ -49,8 +49,8 @@ Task("Run-Jasmine-Tests")
 });
 
 Task("Build-Frontend")
-	 .IsDependentOn("Restore-NpmPackages")
-	.Does(() => {
+.IsDependentOn("Restore-NpmPackages")
+.Does(() => {
       NpmRunScript(new NpmRunScriptSettings
     {
         ScriptName = "build",
