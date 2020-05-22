@@ -88,7 +88,7 @@ describe('RadioGroupComponent', () => {
             beforeEach(() => {
                 selectedChangedSpy.calls.reset();
                 const optionToSelect = rootElement.queryAll(By.css('.radio-button')).filter(x => x.properties['title'] === 'Caroline Bornsjö')[0];
-                optionToSelect.triggerEventHandler('keydown', { keyCode: 32, preventDefault: function () { } } as KeyboardEvent);
+                optionToSelect.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Spacebar' }));
                 fixture.detectChanges();
             });
             it('the option is selected', () => {
@@ -104,7 +104,7 @@ describe('RadioGroupComponent', () => {
             beforeEach(() => {
                 selectedChangedSpy.calls.reset();
                 const optionToSelect = rootElement.queryAll(By.css('.radio-button')).filter(x => x.properties['title'] === 'Caroline Bornsjö')[0];
-                optionToSelect.triggerEventHandler('keydown', { keyCode: 13, preventDefault: function () { } } as KeyboardEvent);
+                optionToSelect.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
 
                 fixture.detectChanges();
             });
@@ -329,7 +329,7 @@ describe('RadioGroupComponent', () => {
             describe('and right arrow key is pressed', () => {
                 beforeEach(() => {
                     currentSelection = rootElement.query(By.css('.radio-button--checked'));
-                    currentSelection.triggerEventHandler('keydown', { keyCode: 39, preventDefault: function () { } } as KeyboardEvent);
+                    currentSelection.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
 
 
                     fixture.detectChanges();
@@ -339,7 +339,7 @@ describe('RadioGroupComponent', () => {
                     expect(selectedOption.length).toBe(1);
                 });
 
-                xit('next option is selected (Sofia Hejdenberg)', () => {
+                it('next option is selected (Sofia Hejdenberg)', () => {
                     currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
                     expect(currentSelection.properties['title']).toEqual('Sofia Hejdenberg');
                 });
@@ -348,7 +348,7 @@ describe('RadioGroupComponent', () => {
                     beforeEach(() => {
 
                         currentSelection = rootElement.query(By.css('.radio-button--checked'));
-                        currentSelection.triggerEventHandler('keydown', { keyCode: 37, preventDefault: function () { } } as KeyboardEvent);
+                        currentSelection.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
 
                         fixture.detectChanges();
                         selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
@@ -368,7 +368,7 @@ describe('RadioGroupComponent', () => {
 
                 beforeEach(() => {
                     currentSelection = rootElement.query(By.css('.radio-button--checked'));
-                    currentSelection.triggerEventHandler('keydown', { keyCode: 40, preventDefault: function () { } } as KeyboardEvent);
+                    currentSelection.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 
                     fixture.detectChanges();
                     selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
@@ -377,7 +377,7 @@ describe('RadioGroupComponent', () => {
                     expect(selectedOption.length).toBe(1);
                 });
 
-                xit('last option is selected', () => {
+                it('last option is selected', () => {
                     currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
                     expect(currentSelection.properties['title']).toEqual('Sofia Hejdenberg');
                 });
@@ -386,7 +386,7 @@ describe('RadioGroupComponent', () => {
                     beforeEach(() => {
 
                         currentSelection = rootElement.query(By.css('.radio-button--checked'));
-                        currentSelection.triggerEventHandler('keydown', { keyCode: 38, preventDefault: function () { } } as KeyboardEvent);
+                        currentSelection.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 
                         fixture.detectChanges();
                         selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));

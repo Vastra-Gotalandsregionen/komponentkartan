@@ -222,7 +222,7 @@ describe('HeaderMenuComponent', () => {
 
       expect(component.hideMenu).toBeFalsy();
     });
-    xit('and key is not Spacebar or Enter', () => {
+    it('and key is not Spacebar or Enter', () => {
       const button = { key: 'x' } as KeyboardEvent;
       const keyEvent = new KeyboardEvent('keydown', button);
 

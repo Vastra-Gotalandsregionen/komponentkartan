@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
-import { ModalService } from 'vgr-komponentkartan';
+import { ModalService } from '../../../projects/komponentkartan/src/lib/services/modalService';
 
 @Component({
   selector: 'app-headers',
@@ -46,7 +46,7 @@ export class HeadersComponent {
     this.modalService.closeDialog(elementId);
   }
   openModalOnKey(event: KeyboardEvent , elementId: string) {
-    if ((event.keyCode === 13 || event.keyCode === 32)) { // enter & space
+    if (['Enter', 'Spacebar', ' '].includes(event.key)) { // enter & space
       this.modalService.openDialog(elementId);
     }
   }

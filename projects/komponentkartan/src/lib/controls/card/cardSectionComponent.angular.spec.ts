@@ -101,7 +101,6 @@ describe('[CardSectionComponent]', () => {
         jasmine.clock().install();
         const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
         const focusedElement = rootElement.query(By.css('.card-section__header'));
-        Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
         Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
         Object.defineProperty(keyEvent, 'srcElement', {'value' : focusedElement.nativeElement});
         component.toggleExpanded(keyEvent);
@@ -114,7 +113,6 @@ describe('[CardSectionComponent]', () => {
         beforeEach(() => {
           const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
           const focusedElement = rootElement.query(By.css('.card-section__header'));
-          Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
           Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
           Object.defineProperty(keyEvent, 'srcElement', {'value' : focusedElement.nativeElement});
           component.toggleExpanded(keyEvent);

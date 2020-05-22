@@ -45,15 +45,15 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
             if (this.element) { this.element.focus(); }
             this.onChange(this.checked);
             this.checkedChanged.emit(this.checked);
-            event.cancelBubble = true;
+            event.stopPropagation();
         }
     }
 
     onKeyDown(event: KeyboardEvent): void {
-        if (event.keyCode === 13 || event.keyCode === 32) {
+        if ([' ', 'Spacebar', 'Enter'].includes(event.key)) {
             this.onClick(event);
             event.preventDefault();
-            event.cancelBubble = true;
+            event.stopPropagation();
         }
     }
 

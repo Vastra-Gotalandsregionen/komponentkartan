@@ -88,7 +88,7 @@ describe('CheckboxComponent', () => {
 
   describe('When checkbox is clicked ', () => {
     beforeEach(() => {
-      checkbox.triggerEventHandler('click', null);
+      checkbox.nativeElement.click();
       fixture.detectChanges();
     });
     it('checkbox is checked', () => {
@@ -103,7 +103,7 @@ describe('CheckboxComponent', () => {
     describe('And checkbox is clicked again', () => {
       beforeEach(() => {
         checkedChangedSpy.calls.reset();
-        checkbox.triggerEventHandler('click', null);
+        checkbox.nativeElement.click();
         fixture.detectChanges();
       });
       it('checkbox is unchecked', () => {
@@ -118,7 +118,7 @@ describe('CheckboxComponent', () => {
 
   describe('When checkbox is triggered with the SPACE key ', () => {
     beforeEach(() => {
-      checkbox.triggerEventHandler('keydown', { keyCode: 32 } as KeyboardEvent);
+      checkbox.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Spacebar'}));
       fixture.detectChanges();
     });
     it('checkbox is checked', () => {
@@ -132,7 +132,7 @@ describe('CheckboxComponent', () => {
 
   describe('When checkbox is triggered with the ENTER key ', () => {
     beforeEach(() => {
-      checkbox.triggerEventHandler('keydown', { keyCode: 13 } as KeyboardEvent);
+      checkbox.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
       fixture.detectChanges();
     });
     it('checkbox is checked', () => {

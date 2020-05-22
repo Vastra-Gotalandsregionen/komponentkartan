@@ -121,9 +121,7 @@ describe('[SearchResultComponent - Angular]', () => {
 
     describe(' when you press escape ', () => {
       beforeEach(() => {
-        const keyEvent = new KeyboardEvent('keydown', {key: 'Escape'});
-        Object.defineProperty(keyEvent, 'keyCode', {'value' : 27});
-        component.handleKeyevents(keyEvent);
+        component.handleKeyevents(new KeyboardEvent('keydown', {key: 'Escape'}));
         testSearchResultsComponentFixture.detectChanges();
       });
 
@@ -135,9 +133,7 @@ describe('[SearchResultComponent - Angular]', () => {
 
     describe(' when you press arrow down ', () => {
       beforeEach(() => {
-        const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowDown'});
-        Object.defineProperty(keyEvent, 'keyCode', {'value' : 40});
-        component.handleKeyevents(keyEvent);
+        component.handleKeyevents(new KeyboardEvent('keydown', {key: 'ArrowDown'}));
         spyOn(component, 'onItemClick').and.callThrough();
         testSearchResultsComponentFixture.detectChanges();
       });
@@ -148,9 +144,8 @@ describe('[SearchResultComponent - Angular]', () => {
 
       describe(' and you press space ', () => {
         beforeEach(() => {
-          const keyEvent = new KeyboardEvent('keydown', {key: 'Space'});
+          const keyEvent = new KeyboardEvent('keydown', {key: 'Spacebar'});
           const focusedElement = rootElement.query(By.css('.search-results-item--focused'));
-          Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
           Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
           component.handleKeyevents(keyEvent);
           testSearchResultsComponentFixture.detectChanges();
@@ -170,7 +165,6 @@ describe('[SearchResultComponent - Angular]', () => {
         beforeEach(() => {
           const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
           const focusedElement = rootElement.query(By.css('.search-results-item--focused'));
-          Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
           Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
           component.handleKeyevents(keyEvent);
           testSearchResultsComponentFixture.detectChanges();
@@ -187,7 +181,6 @@ describe('[SearchResultComponent - Angular]', () => {
         describe(' when you press arrow up ', () => {
           beforeEach(() => {
             const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowUp'});
-            Object.defineProperty(keyEvent, 'keyCode', {'value' : 38});
             component.handleKeyevents(keyEvent);
             testSearchResultsComponentFixture.detectChanges();
             spyOn(component, 'setFocusedElement');
@@ -204,7 +197,6 @@ describe('[SearchResultComponent - Angular]', () => {
     describe(' when you press arrow up ', () => {
       beforeEach(() => {
         const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowUp'});
-        Object.defineProperty(keyEvent, 'keyCode', {'value' : 38});
         component.handleKeyevents(keyEvent);
         testSearchResultsComponentFixture.detectChanges();
 
@@ -217,25 +209,12 @@ describe('[SearchResultComponent - Angular]', () => {
       describe(' and then press arrow down ', () => {
         beforeEach(() => {
           const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowDown'});
-          Object.defineProperty(keyEvent, 'keyCode', {'value' : 40});
           component.handleKeyevents(keyEvent);
           testSearchResultsComponentFixture.detectChanges();
 
         });
-        it(' should focus on the last item in the list', () => {
+        it(' should focus on the first item in the list', () => {
           expect(component.focusItem).toBe(0);
-        });
-      });
-
-      describe(' when you press arrow up ', () => {
-        beforeEach(() => {
-          const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowUp'});
-          Object.defineProperty(keyEvent, 'keyCode', {'value' : 38});
-          component.handleKeyevents(keyEvent);
-          testSearchResultsComponentFixture.detectChanges();
-        });
-        it(' should focus on the last item in the list', () => {
-          expect(component.focusItem).toBe(23);
         });
       });
 
@@ -279,9 +258,7 @@ describe('[SearchResultComponent - Angular]', () => {
 
     describe(' when you press arrow down ', () => {
       beforeEach(() => {
-        const keyEvent = new KeyboardEvent('keydown', {key: 'ArrowDown'});
-        Object.defineProperty(keyEvent, 'keyCode', {'value' : 40});
-        component.handleKeyevents(keyEvent);
+        component.handleKeyevents(new KeyboardEvent('keydown', {key: 'ArrowDown'}));
         testSearchResultsComponentFixture.detectChanges();
         spyOn(component, 'onItemClick').and.callThrough();
       });

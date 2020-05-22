@@ -16,7 +16,7 @@ export class TableComponent {
   @HostListener('keydown', ['$event']) toggleRow(event: KeyboardEvent) {
     const target = <HTMLDivElement>event.target;
     const targetClass = target.className;
-    if (targetClass.includes('table-header') && (event.keyCode === 13 || event.keyCode === 32) && targetClass.includes('expandable')) { // enter & space
+    if (targetClass.includes('table-header') && (['Enter', 'Spacebar', ' '].includes(event.key)) && targetClass.includes('expandable')) { // enter & space
       event.preventDefault();
       event.stopPropagation();
       this.toggleExpansion();

@@ -101,7 +101,6 @@ describe('[TestTableComponent]', () => {
 
         const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
         const focusedElement = rootElement.children[0];
-        Object.defineProperty(keyEvent, 'keyCode', {'value' : 13});
         Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
         component.toggleRow(keyEvent);
         fixture.detectChanges();
@@ -122,7 +121,6 @@ describe('[TestTableComponent]', () => {
 
           const keyEvent = new KeyboardEvent('keydown', {key: 'Enter'});
           const focusedElement = rootElement.children[0];
-          Object.defineProperty(keyEvent, 'keyCode', {'value' : 32});
           Object.defineProperty(keyEvent, 'target', {'value' : focusedElement.nativeElement});
           component.toggleRow(keyEvent);
           fixture.detectChanges();

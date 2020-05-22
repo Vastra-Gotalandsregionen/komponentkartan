@@ -218,7 +218,12 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     this.items.filter(i => i.visible).forEach(item => item.selected = !this.allSelected);
     this.setLabel(Array.from(this.items.filter(i => i.selected)));
     this.updateAllCheckedStatus();
-    const values = this. items ? this.items.filter(i => i.selected).map(item => item.value) : null;
+    let values;
+    if (this.items) {
+      values = this.items.filter(i => i.selected).map(item => item.value).length > 0 ? this.items.filter(i => i.selected).map(item => item.value) : null;
+    } else {
+      values = null;
+    }
     this.onChange(values);
   }
 
@@ -292,7 +297,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       this.expand();
 
       const selectedItems = this.items.filter(item => item.selected);
-      console.log(selectedItems);
       if (selectedItems.length) {
         setTimeout(() => {
           selectedItems[0].focus();

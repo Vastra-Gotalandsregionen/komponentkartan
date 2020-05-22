@@ -64,7 +64,7 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow right key', () => {
       beforeEach(() => {
-        firstToggleButtonOuterSpan.triggerEventHandler('keydown', { key: 'ArrowRight' });
+        firstToggleButtonOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
       });
       it('next toggle-button is focused', () => {
         expect(document.activeElement).toBe(secondToggleButtonButton.nativeElement);
@@ -72,7 +72,7 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow right key in IE', () => {
       beforeEach(() => {
-        firstToggleButtonOuterSpan.triggerEventHandler('keydown', { key: 'Right' });
+        firstToggleButtonOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Right' }));
       });
       it('next toggle-button is focused', () => {
         expect(document.activeElement).toBe(secondToggleButtonButton.nativeElement);
@@ -80,7 +80,7 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow down key', () => {
       beforeEach(() => {
-        firstToggleButtonOuterSpan.triggerEventHandler('keydown', { key: 'ArrowDown' });
+        firstToggleButtonOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       });
       it('next toggle-button is focused', () => {
         expect(document.activeElement).toBe(secondToggleButtonButton.nativeElement);
@@ -88,7 +88,7 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow down in IE', () => {
       beforeEach(() => {
-        firstToggleButtonOuterSpan.triggerEventHandler('keydown', { key: 'Down' });
+        firstToggleButtonOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Down' }));
       });
       it('next toggle-button is focused', () => {
         expect(document.activeElement).toBe(secondToggleButtonButton.nativeElement);
@@ -96,7 +96,7 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow left key', () => {
       beforeEach(() => {
-        firstToggleButtonOuterSpan.triggerEventHandler('keydown', { key: 'ArrowLeft' });
+        firstToggleButtonOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
       });
       it('previous toggle-button is focused', () => {
         expect(document.activeElement).toBe(thirdToggleButtonButton.nativeElement);
@@ -104,7 +104,7 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow left key in IE', () => {
       beforeEach(() => {
-        firstToggleButtonOuterSpan.triggerEventHandler('keydown', { key: 'Left' });
+        firstToggleButtonOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Left' }));
       });
       it('previous toggle-button is focused', () => {
         expect(document.activeElement).toBe(thirdToggleButtonButton.nativeElement);
@@ -112,7 +112,7 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow up key', () => {
       beforeEach(() => {
-        firstToggleButtonOuterSpan.triggerEventHandler('keydown', { key: 'ArrowUp' });
+        firstToggleButtonOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
       });
       it('previous toggle-button is focused', () => {
         expect(document.activeElement).toBe(thirdToggleButtonButton.nativeElement);
@@ -120,7 +120,7 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
     });
     describe('and pressing arrow up in IE', () => {
       beforeEach(() => {
-        firstToggleButtonOuterSpan.triggerEventHandler('keydown', { key: 'Up' });
+        firstToggleButtonOuterSpan.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Up' }));
       });
       it('previous toggle-button is focused', () => {
         expect(document.activeElement).toBe(thirdToggleButtonButton.nativeElement);
