@@ -608,4 +608,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       }
     }
   }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
 }

@@ -41,7 +41,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         return this.radiogroupItems.every((x) => (x.selected === false || x.selected === undefined));
     }
 
-    constructor( @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer2) {
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer2) {
     }
 
     ngOnChanges() {
@@ -168,6 +168,9 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
         option.selected = true;
         this.onChange(option.value);
         this.selectedChanged.emit(option.value);
+    }
+    setDisabledState(isDisabled: boolean) {
+        this.disabled = isDisabled;
     }
 }
 

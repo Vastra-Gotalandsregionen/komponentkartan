@@ -12,6 +12,8 @@ export class DropdownSelectDocumentationComponent {
   items10: string[];
   items50: string[];
   form: FormControl;
+  formControl: FormControl;
+  formControlDisabled = false;
   itemLabel = 'Ett långt alternativ som skrivs ut i helhet';
   itemValue = 1;
   readonly = false;
@@ -22,6 +24,7 @@ export class DropdownSelectDocumentationComponent {
     this.items10 = this.getItems(10);
     this.items50 = this.getItems(50);
     this.form = new FormControl(this.itemValue);
+    this.formControl = new FormControl();
   }
 
   getItems(length: number): string[] {
@@ -42,6 +45,15 @@ export class DropdownSelectDocumentationComponent {
 
   toggleDisabled(value) {
     this.disabled = !this.disabled;
+  }
+
+  toggleDisabledFormControl(state) {
+    this.formControlDisabled = !this.formControlDisabled;
+    if (state) {
+      this.formControl.enable();
+    } else {
+      this.formControl.disable();
+    }
   }
 
 }
