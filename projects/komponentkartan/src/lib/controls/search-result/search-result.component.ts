@@ -1,5 +1,5 @@
-import { Component, OnChanges, Input, HostBinding, Output, EventEmitter, ElementRef, HostListener, OnInit } from '@angular/core';
-import { PerfectScrollbarComponent, PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'vgr-search-result',

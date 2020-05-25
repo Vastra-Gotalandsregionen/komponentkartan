@@ -18,7 +18,8 @@
     "publish-stable": "npm run packagr && npm publish dist/komponentkartan/",
     "publish-local": "npm run packagr && npm pack dist/komponentkartan/",
     "test-ci": "ng test komponentkartan --watch=false --source-map=false",
-    "test-ci-watch": "ng test komponentkartan --watch=true --source-map=false"
+    "test-ci-watch": "ng test komponentkartan --watch=true --source-map=false",
+    "postinstall": "ngcc"
   },
   "dependencies": {
     "@angular/animations": "~9.1.7",
@@ -71,7 +72,7 @@
     "smoothscroll-polyfill": "^0.4.4",
     "ts-node": "~7.0.0",
     "tslint": "^6.1.0",
-    "typescript": "^3.8.3",
+    "typescript": "3.8.3",
     "wallaby-webpack": "^3.9.15",
     "webpack": "^4.42.1"
   }
