@@ -16,8 +16,9 @@
       <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu" role="listbox"
         [attr.aria-labelledby]="labelId" [attr.aria-multiselectable]="multi">
         <div *ngIf="filterVisible || deselectable || multi" class="dropdown-select__menu__header">
-          <vgr-input *ngIf="filterVisible" type="search" (keydown)="onFilterKeydown($event)" [(ngModel)]="searchString" (ngModelChange)="filterItems()" (keyup.enter)="toggleSelectAll()">
+          <vgr-input *ngIf="filterVisible" type="search" (keydown)="onFilterKeydown($event)" [(ngModel)]="searchString" (ngModelChange)="filterItems()" (keyup.enter)="toggleSelectAll()" (focusin)="onFilterFocus()" (focusout)="onFilterBlur()">
           </vgr-input>
+          <div *ngIf="filterHasFocus" class="select-all-text">(tryck retur för att välja alla träffar)</div>
           <vgr-button #deselectButton *ngIf="deselectable && !multi" class="dropdown-select__menu__header__deselect"
             [buttonStyle]="'discreet'" [disabled]="deselectDisabled" (click)="deselectItems()"
             (keydown)="onDeselectKeydown($event)">Ta
