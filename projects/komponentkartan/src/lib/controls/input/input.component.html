@@ -8,7 +8,7 @@
         [attr.minlength]="minlength" [attr.maxlength]="maxlength" [attr.pattern]="pattern" [placeholder]="placeholder"
         [readonly]="readonly" [required]="required" [attr.step]="step" [name]="name" [value]="value"
         (search)="onChange($event)"
-        (keyup)="onChange($event)" (change)="onChange($event)" (focus)="onFocus($event)" (blur)="onBlur($event)"
+        (input)="onChange($event)" (focus)="onFocus($event)" (blur)="onBlur($event)"
         #inputElement>
       <div class="suffix" *ngIf="suffix">{{suffix}}</div>
       <div class="searchicon" *ngIf="type === 'search'">

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 7.3.0 (Beta, 2020-05-22)
 - Changed the behavior for "Markera alla" in `vgr-dropdown-select`
 
+## 7.2.1 (2020-06-09)
+- Fixed a bug with `vgr-input` when it sometimes not trigger events.
+
 ## 7.2.0 (2020-05-22)
 - Added setDisabled state for `vgr-dropdown`, `vgr-textarea` and `vgr-radio-group`
 
