@@ -26,4 +26,12 @@ export class ButtonComponent implements OnChanges {
   focus() {
     this.button.nativeElement.focus();
   }
+
+  calculateClasses() {
+    return { 'button--disabled' : this.disabled,
+    'button--enabling' : this.reenabled,
+    'button--secondary': this.buttonStyle === 'secondary',
+    'button--discreet': this.buttonStyle === 'discreet'
+    };
+  }
 }
