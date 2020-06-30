@@ -224,7 +224,7 @@ export class DropdownSelectDocumentationComponent {
     `Älvpraktiken`,
     `Älvängens Läkarhus`
   ];
-  vc_selected = this.vc_namn.slice();
+  vc_selected =  []; // this.vc_namn.slice();
 
   constructor() {
     this.items5 = this.getItems(5);

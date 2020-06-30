@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 7.3.1 (2020-06-30)
+- Bugfix for "Markera alla" in `vgr-dropdown-select`
+
 ## 7.3.0 (2020-06-30)
 - Changed the behavior for "Markera alla" in `vgr-dropdown-select`
 
