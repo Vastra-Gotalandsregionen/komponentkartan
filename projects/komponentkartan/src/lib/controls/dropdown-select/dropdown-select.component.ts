@@ -452,7 +452,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   private setFilterVisibility() {
     this.filterVisible = this.items && this.items.length > 20;
-    this.visibleCount = this.value && this.value.length > 0 ? this.value.length : this.items.length;
+    this.visibleCount = this.items.length;
   }
 
   private setMultiOnItems() {
