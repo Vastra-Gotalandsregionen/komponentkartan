@@ -242,6 +242,10 @@ export class DropdownSelectDocumentationComponent {
     return items;
   }
 
+  andralangd() {
+    this.vc_namn = this.vc_namn.slice(0, -3);
+  }
+
   setFocus() {
     this.myDropdown.focus();
   }
