@@ -1,0 +1,173 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card__top {
+  display: flex;
+  flex-direction: row;
+  padding-top: $margin--slim;
+  padding-bottom: $margin--slim;
+}
+
+.card__bottom-container {
+  display: flex;
+  flex-direction: row;
+}
+
+vgr-card-section {
+  position: relative;
+  display: block;
+}
+
+.card-section__content {
+  position: relative;
+  display: block;
+
+  &.card-section__content--overflow {
+    position: relative;
+    overflow: hidden;
+
+    >* {
+      overflow: hidden;
+    }
+  }
+
+  &.ng-animating {
+    overflow: hidden;
+
+    .add-padding {
+      overflow: hidden;
+      position: relative;
+      display: block;
+    }
+  }
+
+
+}
+
+.card__section-container {
+  padding-top: $margin--slim;
+  padding-bottom: $margin--slim;
+
+  .card-section--expanded {
+    .card-section__content {
+      border-bottom: 1px solid $border-color;
+    }
+  }
+
+  .card-section--expanded:last-child {
+    .card-section__content {
+      border-bottom: none;
+    }
+  }
+}
+
+.card__fullwidth-container {
+  @extend .card__section-container;
+  flex: 1 1 auto;
+}
+
+.card__left-container {
+  @extend .card__section-container;
+  border-right: 1px solid $border-color;
+  padding-right: $margin--slim;
+  flex: 1 1 auto;
+}
+
+.card__right-container {
+  @extend .card__section-container;
+  padding-left: $margin--slim;
+  flex: 0 0 600px;
+  min-width: 600px;
+  width: 600px;
+}
+
+.card-section__header {
+  min-height: 35px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid $border-color;
+  cursor: pointer;
+
+  .card-section:first-child & {
+    border-top: 1px solid $border-color;
+  }
+
+  &:focus {
+    outline: 0; // z-index: 999;
+    box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+  }
+}
+
+.card-section__header__title {
+  display: inline-block;
+  flex: 0 0 auto;
+  line-height: 35px;
+}
+
+.card-section__header__subtitle {
+  margin-left: $margin--regular;
+  flex: 0 0 auto;
+  line-height: 35px;
+}
+
+.card-section__header__icon {
+  margin-left: $margin--regular;
+  opacity: 0;
+  transition: opacity 0.6s linear;
+
+  .card-section:not(.card-section--readonly) & {
+    opacity: 1;
+  }
+}
+
+.card-section__header__expander {
+  margin-right: $margin--slim;
+  background-size: 100%;
+  vertical-align: middle;
+  margin-left: auto;
+  transform: rotate(0deg);
+
+  .card-section--expanded & {
+    transform: rotate(-180deg);
+  }
+
+  span {
+    pointer-events: none
+  }
+
+  >.icon {
+    color: $text-color--default;
+  }
+}
+
+.card-section__content .add-padding {
+  padding-bottom: $margin--slim;
+  padding-top: $margin--slim;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .card-section__header {
+    min-height: 40px;
+    line-height: 40px;
+  }
+
+  .card__left-container {
+    padding-right: $margin--fat;
+  }
+
+  .card__right-container {
+    padding-left: $margin--fat;
+  }
+
+  .card__top {
+    padding-top: 0px;
+  }
+}

@@ -1,0 +1,29 @@
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/components.button-base";
+
+
+
+.close-button {
+  @extend .button__base;
+  // @extend .bg-image-close-button;
+  width: 20px;
+  height: 20px;
+  &:active:not(.button--disabled) {
+    transform: scale(0.92);
+  }
+  vgr-icon {
+    > .icon {
+      // color: $text-color--light !important;
+      color: white;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .close-button {
+    width: 24px;
+    height: 24px;
+  }
+}

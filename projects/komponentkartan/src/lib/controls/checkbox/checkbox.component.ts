@@ -6,6 +6,7 @@ import { Guid } from '../../utils/guid';
 @Component({
     selector: 'vgr-checkbox',
     templateUrl: './checkbox.component.html',
+    styleUrls: ['./checkbox.component.scss'],
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => CheckboxComponent),

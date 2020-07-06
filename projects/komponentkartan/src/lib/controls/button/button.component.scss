@@ -1,0 +1,148 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/components.button-base";
+@import "../../../assets/partials/base.themes";
+
+@mixin button-enabling--secondary($name, $color) {
+  @keyframes #{$name} {
+    0% {
+      background-color: $text-color--light;
+    }
+
+    50% {
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+      background-color: $color;
+      border-color: $color;
+      border-width: 1px;
+      border-style: solid;
+      color: $text-color--light;
+    }
+
+    100% {
+      background-color: $text-color--light;
+    }
+  }
+}
+
+@include button-enabling--secondary(button-enabling--secondary-red, $primary-color--red);
+@include button-enabling--secondary(button-enabling--secondary-neutral, $primary-color--default);
+@include button-enabling--secondary(button-enabling--secondary-blue, $primary-color--blue);
+@include button-enabling--secondary(button-enabling--secondary-green, $primary-color--green);
+@include button-enabling--secondary(button-enabling--secondary-pinkie, $primary-color--pinkie);
+
+@keyframes button-enabling {
+  0% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}
+
+.button {
+  @extend .button__base;
+  font-size: $font-size--small;
+  font-family: $font-family;
+  height: 30px;
+  line-height: 30px;
+  min-width: 87px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 4px;
+
+  &.button--enabling {
+    animation: button-enabling 0.6s;
+    transition: background-color 0.4s ease;
+  }
+
+  &.button--secondary {
+    @extend .color--primary;
+    @extend .border-color--primary;
+    background-color: $text-color--light;
+    line-height: 28px;
+    border-width: 1px;
+    border-style: solid;
+    padding-left: 17px;
+    padding-right: 17px;
+
+    &.button--disabled {
+      border: none;
+      background-color: $control-color--disabled;
+      cursor: default;
+      color: #fff;
+    }
+
+    &:hover:not(.button--disabled) {
+      @extend .background-color--primary;
+      color: $text-color--light;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    &.button--enabling {
+      animation: button-enabling--secondary-neutral 0.9s;
+
+      .theme--red & {
+        animation: button-enabling--secondary-red 0.9s;
+      }
+
+      .theme--blue & {
+        animation: button-enabling--secondary-blue 0.9s;
+      }
+
+      .theme--green & {
+        animation: button-enabling--secondary-green 0.9s;
+      }
+
+      .theme--pinkie & {
+        animation: button-enabling--secondary-pinkie 0.9s;
+      }
+    }
+  }
+
+  &.button--discreet {
+    @extend .color--primary;
+    border-color: transparent;
+    background-color: transparent;
+    line-height: 28px;
+    border-width: 1px;
+    border-style: solid;
+    min-width: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &.button--disabled {
+      color: $control-color--disabled;
+    }
+
+    &.button--enabling {
+      animation: none;
+      transition: color 0.6s ease;
+    }
+
+    &:hover:not(.button--disabled),
+    &:focus:not(.button--disabled) {
+      @extend .background-color--primary-dimmed;
+      border-color: $primary-color--default-dimmed;
+      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .button {
+    padding-left: 22px;
+    padding-right: 22px;
+    font-size: $font-size--medium;
+
+    &.button--secondary {
+      padding-left: 21px;
+      padding-right: 21px;
+    }
+  }
+}

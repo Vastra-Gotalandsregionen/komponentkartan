@@ -2,7 +2,8 @@
 
 @Component({
   selector: 'vgr-button',
-  templateUrl: './button.component.html'
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent implements OnChanges {
   @Input() disabled = false;
