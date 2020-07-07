@@ -1,25 +1,27 @@
-.loader {
-  width: 55px;
-  height: 55px;
-  transform: rotate(-45deg);
-  border: solid 7px #dbdbdb;
-  border-top: solid 7px #314152;
-  border-radius: 50%;
-  opacity: 0;
-  animation: spin 1s linear infinite;
-  &.loader--small {
-    width: 22px;
-    height: 22px;
-    border: solid 4px #dbdbdb;
-    border-top: solid 4px #314152;
-  }
-}
-
-@keyframes spin {
-  0% {
+:host::ng-deep {
+  .loader {
+    width: 55px;
+    height: 55px;
     transform: rotate(-45deg);
+    border: solid 7px #dbdbdb;
+    border-top: solid 7px #314152;
+    border-radius: 50%;
+    opacity: 0;
+    animation: spin 1s linear infinite;
+    &.loader--small {
+      width: 22px;
+      height: 22px;
+      border: solid 4px #dbdbdb;
+      border-top: solid 4px #314152;
+    }
   }
-  100% {
-    transform: rotate(315deg);
+
+  @keyframes spin {
+    0% {
+      transform: rotate(-45deg);
+    }
+    100% {
+      transform: rotate(315deg);
+    }
   }
 }

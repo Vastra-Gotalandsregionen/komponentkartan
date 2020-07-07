@@ -9,7 +9,8 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'vgr-modal',
-    templateUrl: './modal.component.html'
+    templateUrl: './modal.component.html',
+    styleUrls: ['./modal.component.scss']
 })
 
 export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {

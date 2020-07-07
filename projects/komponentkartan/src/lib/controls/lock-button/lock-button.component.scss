@@ -1,0 +1,20 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_base.themes.scss";
+@import "../../../assets/partials/_components.button-base.scss";
+
+:host::ng-deep {
+  .lock-button {
+    @extend .button__base;
+    width: 34px;
+    height: 30px;
+    &.lock-button--unlocked {
+      background: $lockbutton-color--unlocked;
+    }
+    vgr-icon {
+      > .icon {
+        color: $text-color--light;
+      }
+    }
+  }
+}
