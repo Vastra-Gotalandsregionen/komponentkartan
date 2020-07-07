@@ -1,0 +1,87 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/base.themes";
+
+:host::ng-deep {
+  .panel {
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
+    padding-top: $margin--slim;
+    padding-bottom: $margin--slim;
+    background: white;
+    height: 150px;
+    width: 100%;
+    .panel-with-border & {
+      @extend .border-top-color--primary;
+      border-color: $secondary-color--default;
+      border: solid 1px $border-color;
+      border-top: $border--regular solid;
+    }
+    .color--red.panel-with-border & {
+      border-top-color: $primary-color--red;
+    }
+    .color--green.panel-with-border & {
+      border-top-color: $primary-color--green;
+    }
+    .color--blue.panel-with-border & {
+      border-top-color: $primary-color--blue;
+    }
+    .color--neutral.panel-with-border & {
+      border-top-color: $primary-color--default;
+    }
+  }
+
+  @mixin flex-width($number) {
+    .flex-width--#{$number} {
+      flex: $number;
+    }
+  }
+
+  @for $i from 1 through 12 {
+    @include flex-width($i);
+  }
+
+  .panel-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: $margin--slim/2 0;
+    .panel__wrapper {
+      padding: 0 $margin--slim/2;
+    }
+    >*:first-child {
+      .panel__wrapper {
+        padding-left: 0;
+      }
+    }
+    >*:last-child {
+      .panel__wrapper {
+        padding-right: 0;
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .panel {
+      padding-left: $margin--fat;
+      padding-right: $margin--fat;
+      padding-top: $margin--fat;
+      padding-bottom: $margin--fat;
+      height: 170px;
+    }
+    .panel-container {
+      padding: $margin--fat/2 0;
+      .panel__wrapper {
+        padding: 0 $margin--fat/2;
+      }
+    }
+  }
+
+  vgr-panel-container:first-of-type {
+    padding-top: 0px;
+  }
+
+  vgr-panel-container:last-of-type {
+    padding-bottom: 0px;
+  }
+}

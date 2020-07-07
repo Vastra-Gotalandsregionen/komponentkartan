@@ -3,6 +3,7 @@ import { Input, Component, HostBinding, ContentChild, ElementRef } from '@angula
 @Component({
     selector: 'vgr-panel',
     templateUrl: './panel.component.html',
+    styleUrls: ['./panel.component.scss']
 })
 export class PanelComponent {
     @Input() width: number;

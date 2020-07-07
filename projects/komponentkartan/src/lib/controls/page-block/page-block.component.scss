@@ -1,0 +1,21 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+
+:host::ng-deep {
+  .page-block {
+    position: relative;
+    padding: $margin--slim;
+    background-color: white;
+    width: $content-width--small;
+    margin-bottom: $margin--slim;
+    &.page-block--transparent {
+      background-color: transparent;
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .page-block {
+        padding: $margin--fat;
+        width: $content-width--medium;
+    }
+  }
+}

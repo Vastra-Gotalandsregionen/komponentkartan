@@ -1,0 +1,84 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/base.themes";
+
+:host::ng-deep {
+  .pagination {
+    display: flex;
+    justify-content: center;
+    .pagination__page-button {
+      position: relative;
+      box-sizing: border-box;
+      padding: 0;
+      border: 0;
+      border-radius: 1px;
+      vertical-align: baseline;
+      text-align: center;
+      cursor: pointer;
+      @extend .color--primary;
+      background-color: transparent;
+      border-color: transparent;
+      border-width: 1px;
+      border-style: solid;
+      font-size: $font-size--small;
+      font-family: $font-family;
+      line-height: 28px;
+      min-width: 10px;
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-left: 7px;
+      margin-right: 7px;
+      &:active:not(.button--disabled) {
+        transform: scale(0.96);
+        outline: 0;
+      }
+      &:hover:not(.page--active):not(.button--disabled),
+      &:focus:not(.page--active):not(.button--disabled) {
+        @extend .background-color--primary-dimmed;
+        border-color: $primary-color--default-dimmed;
+        @extend .color--primary;
+      }
+      &:focus {
+        outline: $focus-outline-width solid $focus-color;
+      }
+      &.page--active {
+        @extend .background-color--primary;
+        color: $text-color--light;
+      }
+      &.button--disabled {
+        color: $control-color--disabled;
+        cursor: default;
+      }
+      &.previous {
+        margin-right: 33px;
+        & > span:first-child {
+          font-weight: bold;
+          padding-right: 8px;
+        }
+      }
+      &.next {
+        margin-left: 33px;
+        & > span:last-child {
+          font-weight: bold;
+          padding-left: 8px;
+        }
+      }
+    }
+    .pagination__dots {
+      font-size: $font-size--small;
+      font-family: $font-family;
+      line-height: 30px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .pagination {
+      .pagination__page-button {
+        font-size: $font-size--medium;
+      }
+    }
+  }
+}
