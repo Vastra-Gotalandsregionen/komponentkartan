@@ -2,7 +2,8 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit }
 
 @Component({
   selector: 'vgr-filter-textbox',
-  templateUrl: './filterTextbox.component.html'
+  templateUrl: './filterTextbox.component.html',
+  styleUrls: ['./filterTextbox.component.scss']
 })
 export class FilterTextboxComponent implements OnInit {
   @Input() get value() {
