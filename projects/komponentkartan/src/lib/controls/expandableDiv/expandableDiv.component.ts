@@ -4,6 +4,7 @@ import { toggleExpandedState, toggleChevron } from '../../animation';
 @Component({
   selector: 'vgr-expandable-div',
   templateUrl: './expandableDiv.component.html',
+  styleUrls: ['./expandableDiv.component.scss'],
   animations: [toggleExpandedState, toggleChevron]
 })
 export class ExpandableDivComponent {

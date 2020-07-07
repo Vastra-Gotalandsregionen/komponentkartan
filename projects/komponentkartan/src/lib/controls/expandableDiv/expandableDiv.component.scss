@@ -1,0 +1,40 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+
+.expandable-div {
+  position: relative;
+  display: block;
+  min-height: 20px;
+
+  //TODO: Fix for IE and Edge. Move to base SCSS for animations.
+  .ng-trigger-toggleExpandedState.ng-animating {
+    overflow: hidden;
+  }
+
+  .expandable-div-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .expandable-div-header__content {
+      flex-grow: 1;
+    }
+
+    .expandable-div-header__icon {
+      margin-left: 20px;
+      flex-grow: 0;
+      align-self: center;
+    }
+  }
+
+  &:focus {
+    outline: 0; // z-index: 999;
+    box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+  }
+}
+
+.expandable-div-header:focus {
+  outline: 0;
+  box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
+}
