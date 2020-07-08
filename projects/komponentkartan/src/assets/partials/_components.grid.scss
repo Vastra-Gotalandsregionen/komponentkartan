@@ -57,32 +57,6 @@ vgr-grid {
   vgr-grid-header-column {
     h2 {
       position: relative;
-
-      .vgr-grid-row-sort {
-        // position: absolute;
-        // right: -10px;
-        margin-left: 5px;
-        display: inline-block;
-        transition: all 1s ease;
-      }
-
-      &.only-hover {
-        .vgr-grid-row-sort {
-          width: 0px;
-          opacity: 0;
-          // width: 0;
-
-        }
-
-        &:hover .vgr-grid-row-sort {
-          width: auto;
-          opacity: 1;
-          margin-left: 5px;
-          .icon {
-            color: silver;
-          }
-        }
-      }
     }
 
     >div:focus {

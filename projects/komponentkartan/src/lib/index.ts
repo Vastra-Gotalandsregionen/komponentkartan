@@ -92,5 +92,7 @@ export { GridContentComponent } from './controls/grid/grid-content.component';
 export { GridHeaderToolbarComponent } from './controls/grid/grid-header-toolbar.component';
 export { NotificationComponent } from './controls/notification/notification.component';
 
+export { SortArrowComponent } from './controls/sort-arrow/sort-arrow.component';
+
 
 export { Guid } from './utils/guid';

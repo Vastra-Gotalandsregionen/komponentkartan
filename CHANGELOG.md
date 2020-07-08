@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 7.4.0 (Beta, 2020-07-08)
+- Created a `vgr-sort-arrow`-component, used internally in vgr-grid and available to be used inother components.
+
 ## 7.3.3 (2020-07-02)
 - Another bugfix for "Markera alla" in `vgr-dropdown-select`
 

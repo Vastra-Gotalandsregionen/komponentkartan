@@ -16,6 +16,7 @@ registerLocaleData(localeSv);
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { IconModule } from './controls/icon/icon.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SortArrowComponent } from './controls/sort-arrow/sort-arrow.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -109,7 +110,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridContentComponent,
     type.GridHeaderToolbarComponent,
     type.NotificationComponent,
-    type.InputComponent
+    type.InputComponent,
+    type.SortArrowComponent
   ],
   exports: [
     type.SafePipe,
@@ -189,7 +191,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridContentComponent,
     type.GridHeaderToolbarComponent,
     type.NotificationComponent,
-    type.InputComponent
+    type.InputComponent,
+    type.SortArrowComponent
   ],
   providers: [
     type.ModalService,
