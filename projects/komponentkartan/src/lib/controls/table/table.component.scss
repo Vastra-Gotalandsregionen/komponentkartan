@@ -4,56 +4,58 @@
 @import "../../../assets/partials/base.themes";
 
 :host::ng-deep {
-  .table {
-    .table-header {
-      position: relative;
-      padding: 4px $margin--slim 2px;
+  .table-header {
+    position: relative;
+    padding: 4px $margin--slim 2px;
 
-      &.expandable {
-        cursor: pointer;
+    &.expandable {
+      cursor: pointer;
 
-        &:hover {
-          font-weight: bold;
-          letter-spacing: -0.17px//$font-size--small-letter-spacing-bold;
-        }
-      }
-
-      &.expanded {
-        font-weight: bold;
-        letter-spacing: -0.17px // $font-size--small-letter-spacing-bold;
-      }
       &:hover {
-        @extend .background-color--primary-dimmed;
-      }
-      .table-chevron {
-        width: initial;
-        height: initial;
-        transform: rotate(0);
-        transition: all ease .3s;
-        &.expanded {
-          transform: rotate(-180deg);
-        }
-        .icon {
-          color: $text-color--default;
-        }
+        font-weight: bold;
+        letter-spacing: -0.17px//$font-size--small-letter-spacing-bold;
       }
     }
 
-    .table-content {
-      position: relative;
-      overflow: hidden;
+    &.expanded {
+      font-weight: bold;
+      letter-spacing: -0.17px // $font-size--small-letter-spacing-bold;
     }
-
-    .table {
-      position: relative;
-      .table-header {
-        padding: 0 $margin--slim;
+    &:hover {
+      @extend .background-color--primary-dimmed;
+    }
+    .table-chevron {
+      width: initial;
+      height: initial;
+      transform: rotate(0);
+      transition: all ease .3s;
+      &.expanded {
+        transform: rotate(-180deg);
       }
-      .table-chevron {
-        margin-top: -4px;
+      .icon {
+        color: $text-color--default;
       }
     }
   }
+
+  .table-content {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .table {
+    position: relative;
+    .table-header {
+      padding: 0 $margin--slim;
+    }
+    .table-chevron {
+      margin-top: -4px;
+    }
+  }
+}
+
+
+:host::ng-deep {
 
   .table-header:focus,
   .table-row:focus {
