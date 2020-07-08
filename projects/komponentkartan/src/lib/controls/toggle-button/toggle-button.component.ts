@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, 
 
 @Component({
   selector: 'vgr-toggle-button',
-  templateUrl: './toggle-button.component.html'
+  templateUrl: './toggle-button.component.html',
+  styleUrls: ['./toggle-button.component.scss']
 })
 export class ToggleButtonComponent implements AfterViewInit, OnChanges {
   @Input() disabled = false;
