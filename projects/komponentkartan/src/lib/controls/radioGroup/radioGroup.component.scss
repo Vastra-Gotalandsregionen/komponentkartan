@@ -1,8 +1,8 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 
-:host::ng-deep {
-  .radio-group {
+:host {
+  &.radio-group {
     &.vertical {
       display: inline-flex;
       flex-direction: column;
@@ -43,7 +43,7 @@
     height: 18px;
     border: solid 2px #151515;
     background-color: $background-color--content;
-    transition: background-color 0.6s linear border-color 0.6s linear;
+    transition: background-color 0.6s linear, border-color 0.6s linear;
     border-radius: 100px;
     margin-right: $margin--slim;
     &:after {
@@ -58,12 +58,7 @@
       margin-top: 3px;
       opacity: 0;
     }
-    .radio-button--checked & {
-      &:after {
-        transition: opacity 0.5s ease;
-        opacity: 1;
-      }
-    }
+
     &:focus {
       &:before {
         content: "";
@@ -98,6 +93,13 @@
         display: none;
       }
       transition: border-color 0.6s linear;
+    }
+  }
+
+  .radio-button--checked .radio-button__icon {
+    &:after {
+      transition: opacity 0.5s ease;
+      opacity: 1;
     }
   }
 
