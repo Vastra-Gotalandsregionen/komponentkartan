@@ -38,6 +38,13 @@
       transform: scale(0.98, 0.98);
     }
 
+    &.button--disabled {
+      border: none;
+      background-color: $control-color--disabled;
+      cursor: default;
+      color: #fff;
+    }
+
     .filter-tag__content {
       padding-left: 15px;
       padding-right: 12px;

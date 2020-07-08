@@ -1,0 +1,153 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/objects.images";
+@import "../../../assets/partials/base.themes";
+
+:host::ng-deep {
+$search-results-height--small: 285px;
+$search-results-height--medium: 340px;
+$search-results-height--medium-with-filter: 360px;
+$search-results-width--medium: 160px;
+$search-results-width--small: 100px;
+$filter-area-height: 60px;
+.search-result-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.search-results {
+  &.search-results--focus {
+    .search-results--edit {
+      outline: $focus-outline-width solid $focus-color;
+    }
+  }
+}
+
+/*******************************************************************************************************
+ * .search-results
+ *  Hela den yta som "droppar" ner från kontrollen. Här läggs listan, filtrering mm
+ *
+ *******************************************************************************************************/
+
+.search-results {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  text-align: left;
+  z-index: $layer-four;
+  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
+  background-color: $background-color--content;
+  border: none;
+  padding-top: $margin--regular;
+  padding-bottom: 0px;
+  width: 330px; //max-height: $search-results-height--small;
+  display: none;
+  cursor: default;
+  &:before {
+    @extend .bg-image-menu-arrow;
+    content: "";
+    position: absolute;
+    display: inline-block;
+    z-index: $layer-two;
+    margin-top: -31px;
+    left: 20px;
+  }
+  a {
+    color: $menu-text-color;
+    text-decoration: none;
+    display: block;
+    border-bottom: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: $margin--regular;
+    padding-right: $margin--regular;
+  }
+  .search-results--open & {
+    display: inline-block;
+  }
+  .search-results__items {
+    position: relative;
+    max-height: 285px; //calc(#{$search-results-height--small} - #{$margin--fat});
+    li {
+      width: calc(100% - 3px);
+      background: white;
+      a {
+        padding-right: 11px;
+        padding-left: 15px;
+        span {
+          display: block;
+          &.italic {
+            font-style: italic;
+          }
+        }
+      }
+      &.search-results-item--focused,
+      &.search-results-item:hover {
+        a {
+          padding-left: 11px;
+          border-left-width: 4px;
+          border-left-style: solid;
+          font-weight: bold;
+          letter-spacing: $font-size--small-letter-spacing-bold;
+          @extend .border-left-color--primary;
+        }
+      }
+      &:last-child {
+        margin-bottom: 7px;
+      }
+      &:focus {
+        outline: $focus-outline-width solid $focus-color;
+      }
+    }
+    li:first-child {
+      margin-top: 4px;
+    }
+  }
+}
+
+.search-results__description,
+.search-results__noresults {
+  padding-left: 15px;
+  padding-right: 21px;
+}
+
+.search-results__noresults {
+  margin-bottom: 15px;
+}
+
+.search-results__description {
+  &:after {
+    content: "";
+    height: 0px;
+    display: block;
+    height: 2px;
+    opacity: 0.5;
+    border-top: solid 0.5px #99a3ad; //border-top: 1px solid $border-color;
+    margin-left: -15px;
+    margin-right: -21px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    z-index: $layer-one;
+    position: relative;
+  }
+}
+
+.scroll-element.scroll-x {
+  display: none !important;
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .search-results {
+    .validation {
+      max-width: $search-results-width--medium + $margin--regular + $margin--regular;
+    }
+  }
+  .search-results {
+    //max-height: $search-results-height--medium;
+    .search-results__items {
+      max-height: calc(#{$search-results-height--medium} - #{$margin--fat});
+    }
+  }
+}
+}

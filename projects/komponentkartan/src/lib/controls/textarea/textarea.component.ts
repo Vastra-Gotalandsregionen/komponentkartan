@@ -20,6 +20,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'vgr-textarea',
   templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => TextareaComponent),

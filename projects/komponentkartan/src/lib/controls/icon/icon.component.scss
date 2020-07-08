@@ -1,0 +1,23 @@
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/base.themes";
+
+.icon {
+  @extend .color--primary;
+  outline: none;
+  &.icon-color--text {
+    color: $text-color--default;
+  }
+  &.icon-color--light {
+    color: $text-color--light;
+  }
+  &.icon-color--success {
+    color: $primary-color--success;
+  }
+  &.icon-color--error {
+    color: $primary-color--error;
+  }
+  &.icon--disabled {
+    color: $control-color--disabled;
+    cursor: default;
+  }
+}

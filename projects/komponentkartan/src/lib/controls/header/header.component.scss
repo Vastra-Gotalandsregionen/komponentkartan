@@ -10,6 +10,20 @@
   */
 
 :host::ng-deep {
+  &.theme--blue {
+    @extend .bg-image-vgr-header;
+  }
+  &.theme--red {
+    @extend .bg-image-vgr-header;
+  }
+  &.theme--green .header {
+    @extend .bg-image-vgr-header;
+  }
+  &.theme--pinkie {
+    @extend .bg-image-pinkie-header;
+    background-position: right center;
+  }
+
   .header {
     position: fixed;
     z-index: $layer-site-header;
@@ -26,19 +40,7 @@
     // padding-right: 40px;
     @extend .background-color--primary;
     transition: background-color ease-in 0.3s;
-    .theme--blue & {
-      @extend .bg-image-vgr-header;
-    }
-    .theme--red & {
-      @extend .bg-image-vgr-header;
-    }
-    .theme--green & {
-      @extend .bg-image-vgr-header;
-    }
-    .theme--pinkie & {
-      @extend .bg-image-pinkie-header;
-      background-position: right center;
-    }
+
     &.header--hide-swosh {
       background-image: none;
     }

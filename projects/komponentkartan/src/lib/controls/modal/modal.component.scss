@@ -62,3 +62,8 @@
     }
   }
 }
+::ng-deep {
+  .vgr-modal--open .modal {
+    display: flex;
+  }
+}
