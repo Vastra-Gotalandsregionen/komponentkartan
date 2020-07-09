@@ -3,8 +3,7 @@ import { Input, Output, Component, HostBinding, ContentChild } from '@angular/co
 
 @Component({
     selector: 'vgr-title-value',
-    templateUrl: './titleValue.component.html',
-    styleUrls: ['./titleValue.component.scss']
+    templateUrl: './titleValue.component.html'
 })
 export class TitleValueComponent {
     @HostBinding('class.title-value') titleValueClass = true;

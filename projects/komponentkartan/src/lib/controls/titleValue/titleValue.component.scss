@@ -1,12 +1,13 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 
+:host {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 0px;
+}
+
 :host::ng-deep {
-  .title-value-layout {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-    border-spacing: 0px;
-  }
 
   .title-value {
     display: flex;
@@ -14,7 +15,6 @@
       flex: 1;
     }
   }
-
   .title-value__title {
     display: inline-block;
     vertical-align: top;
