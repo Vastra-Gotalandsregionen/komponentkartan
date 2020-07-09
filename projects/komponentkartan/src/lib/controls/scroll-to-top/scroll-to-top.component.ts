@@ -3,6 +3,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 @Component({
   selector: 'vgr-scroll-to-top',
   templateUrl: './scroll-to-top.component.html',
+  styleUrls: ['./scroll-to-top.component.scss']
 })
 export class ScrollToTopComponent {
 
