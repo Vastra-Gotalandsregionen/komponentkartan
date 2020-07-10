@@ -96,4 +96,10 @@
       }
     }
   }
+  &.textarea-validation-error--active {
+    .textarea-validation {
+      background-color: $secondary-color--error;
+        transition: background-color 0.3s linear;
+    }
+  }
 }
