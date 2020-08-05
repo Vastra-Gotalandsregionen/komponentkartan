@@ -5,7 +5,7 @@
       <code>&lt;vgr-button&gt; </code><br>
       Finns i tre olika utföranden, primär, sekundär och diskret.
       Primär knapp används för att indikera x, sekundär för att indikera y och textknappen används för z.
-      Primär - visar den action du “borde” ta, troligaste valet.<br>   
+      Primär - visar den action du “borde” ta, troligaste valet.<br>
       Sekundär för mindre troligt alternativ som ändå måste finnas. Textknappen används i samma syfte som sekundär
         men när man vill ha mindre visuellt fokus. (Likt
         https://material.io/design/components/buttons.html#hierarchy-placement)<br><br>
@@ -59,6 +59,15 @@
           ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
         <vgr-button [buttonStyle]="'discreet'" [disabled]="buttonDiscreetDisabled">{{buttonDiscreetDisabled ? 'Inaktiv'
           : 'Aktiv'}}</vgr-button>
+      </div>
+
+      <h2>I ett reactive form</h2>
+      <div>
+      <form [formGroup]="form" class="spacer" (ngSubmit)="onSubmit()">
+        <input class="margin" type="text" formControlName="name" />
+        <vgr-button [disabled]="form.disabled" type="submit">Skicka</vgr-button>
+      </form>
+      <vgr-button (click)="toggleFormActive()">Aktivera</vgr-button>
       </div>
     </div>
     <br>
