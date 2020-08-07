@@ -1,6 +1,6 @@
 
 import {
-    Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy
+    Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy,
 } from '@angular/core';
 import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
@@ -106,27 +106,34 @@ export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
         this.renderer.removeClass(document.body, 'modal--open');
     }
 
-    onKeyDown(e: any) {
-        if (e.key === 'Tab') {
-            // If Shift + Tab
-            if (e.shiftKey) {
-                // If the current element in focus is the first focusable element within the modal window...
-                if (document.activeElement === this.firstTabStop) {
-                    e.preventDefault();
-                    // ...jump to the last focusable element
-                    this.lastTabStop.focus();
-                }
-                // if Tab
-            } else {
-                // If the current element in focus is the last focusable element within the modal window...
-                if (document.activeElement === this.lastTabStop) {
-                    e.preventDefault();
-                    // ...jump to the first focusable element
-                    this.firstTabStop.focus();
-                }
-            }
-        }
+    onKeyDown(e: KeyboardEvent) {
+      switch (e.key) {
+        case 'Tab':
+          this.handleTabPress(e);
+          break;
+        case 'Escape':
+          this.modalService.closeDialog(this.elementId);
+          break;
+      }
     }
 
-
+  private handleTabPress(e: KeyboardEvent) {
+    if (e.shiftKey) {
+      // If Shift + Tab
+      // If the current element in focus is the first focusable element within the modal window...
+      if (document.activeElement === this.firstTabStop) {
+        e.preventDefault();
+        // ...jump to the last focusable element
+        this.lastTabStop.focus();
+      }
+      // if Tab
+    } else {
+      // If the current element in focus is the last focusable element within the modal window...
+      if (document.activeElement === this.lastTabStop) {
+        e.preventDefault();
+        // ...jump to the first focusable element
+        this.firstTabStop.focus();
+      }
+    }
+  }
 }
