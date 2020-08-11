@@ -13,7 +13,7 @@
     box-shadow: none;
     outline: $focus-outline-width solid $focus-color;
   }
-  &:active:not(.button--disabled) {
+  &:active:not(.button--disabled), &.button--active {
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
     transform: scale(0.96);
     outline: 0;
