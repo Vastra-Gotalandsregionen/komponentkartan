@@ -4,7 +4,8 @@
    class="button noselect"
    [attr.aria-disabled]="disabled"
    [disabled]="disabled"
-   [ngClass]="calculateClasses()">
+   [ngClass]="calculateClasses()"
+   (keydown)="onKeyboardActivation($event)">
     <span class="button__fixIE">
       <ng-content></ng-content>
     </span>
