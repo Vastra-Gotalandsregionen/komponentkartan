@@ -80,7 +80,12 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
-    this.scrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
+    this.scrollbarConfig = new PerfectScrollbarConfig(
+      {
+        minScrollbarLength: 40,
+        wheelPropagation: false
+      } as PerfectScrollbarConfigInterface
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
