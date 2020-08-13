@@ -38,7 +38,7 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^3.6.5",
     "highlight.js": "^9.18.3",
-    "ngx-perfect-scrollbar": "^7.2.1",
+    "ngx-perfect-scrollbar": "^9.0.0",
     "rxjs": "~6.5.3",
     "tslib": "^1.11.1",
     "web-animations-js": "^2.3.2",
