@@ -35,7 +35,7 @@
             </vgr-list-column>
           </vgr-list-item-header>
           <vgr-list-item-content>
-            <section [innerHTML]="htmlBasicListStructureMarkup" highlight-js-content=".highlight"></section>
+            <section [innerHTML]="htmlBasicListStructureMarkup" hljsContent=".highlight"></section>
             <br> Under "kodexempel" finns flera exempel på listor:
             <br>
             <a href="/listexample-simple">Enkel lista</a>
@@ -76,15 +76,15 @@
                   [notification]="
                   {{'{'}} <br>
                     <strong>message</strong>: 'Här är texten i notifikationen', <br>
-                    <strong>icon</strong>: 
+                    <strong>icon</strong>:
                     {{'{'}} <br>
                       <strong>size</strong>?: string, <br>
                       <strong>color</strong>?: 'success' | 'error', <br>
                       <strong>solid</strong>?: boolean, <br>
                       <strong>disabled</strong>?: boolean <br>
                     {{'}'}}
-                  
-                  
+
+
                   {{'}'}}"
                 </td>
               </tr>

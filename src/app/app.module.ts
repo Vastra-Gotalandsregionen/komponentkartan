@@ -10,8 +10,14 @@ import { appRoutes } from './routes';
 import { KomponentkartanModule } from '../../projects/komponentkartan/src/lib/komponentkartan.module';
 
 // Vendors
-import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
-
+import { AngularHighlightJsModule } from 'angular2-highlight-js';
+import hljs from 'highlight.js/lib/highlight';
+import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
+import xml from 'highlight.js/lib/languages/xml';
+hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('xml', xml);
 
 // Domain
 import { KomponentkartanApplicationComponent } from './app.component';
@@ -129,12 +135,11 @@ import { NotificationDocumentationComponent} from './notification-documentation/
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        HighlightJsModule,
+        AngularHighlightJsModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
         CityService,
-        HighlightJsService,
         HtmlEncodeService,
         {
             provide: LOCALE_ID, useValue: 'sv-SE'
