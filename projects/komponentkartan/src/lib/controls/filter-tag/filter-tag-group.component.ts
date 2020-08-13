@@ -35,9 +35,8 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
   }
 
   setFilterTagTabFocusability() {
-    this.filterTags.forEach((x, i) => {
-      const focusable = i ? false : true;
-      x.makeTabFocusable(focusable);
+    this.filterTags.forEach((x) => {
+      x.makeTabFocusable(true);
     });
   }
 
