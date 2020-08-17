@@ -1,10 +1,10 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InputComponent } from './input.component';
 import { IconComponent } from '../icon/icon.component';
 import { TruncatePipe } from '../../pipes/truncatePipe';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Component, DebugElement } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, FormControl, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -15,7 +15,7 @@ describe('InputComponent', () => {
   let component: InputComponent;
   let rootElement: DebugElement;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         InputComponent,
@@ -31,9 +31,7 @@ describe('InputComponent', () => {
       ]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(InputComponent);
     component = fixture.componentInstance;
     rootElement = fixture.debugElement;
