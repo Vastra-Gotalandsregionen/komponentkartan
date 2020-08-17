@@ -15,7 +15,7 @@
     <vgr-button (click)="setTwoExpanded()">Sätt två expanded items</vgr-button>
     <vgr-button (click)="showNotificationOnFirstRow()">Visa temporär notifiering på första</vgr-button>
     </div>
-    <vgr-page-block>      
+    <vgr-page-block>
       <vgr-list [flexibleHeader]="true" [pages]="pages" [activePage]="activePage" (pageChanged)="activePage = $event" (sortChanged)="onSortChanged($event)">
         <vgr-list-header>
           <vgr-list-column-header width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-list-column-header>
@@ -49,12 +49,12 @@
     <vgr-page-block>
       <div>
         <h3>HTML</h3>
-        <section [innerHTML]="htmlSimpleListMarkup" highlight-js-content=".highlight"></section>
+        <section [innerHTML]="htmlSimpleListMarkup" hljsContent=".highlight"></section>
       </div>
       <br>
       <div>
         <h3>Typescript</h3>
-        <section [innerHTML]="typeScriptSimpleListMarkup" highlight-js-content=".highlight"></section>
+        <section [innerHTML]="typeScriptSimpleListMarkup" hljsContent=".highlight"></section>
       </div>
     </vgr-page-block>
   </vgr-page-body>

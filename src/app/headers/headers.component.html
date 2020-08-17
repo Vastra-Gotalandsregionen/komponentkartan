@@ -82,23 +82,23 @@
                 </vgr-header>
                 <div>
                   <h3>Markup för en menyn i exemplet ovan, tryck på pilen i headern så ser du kontextmenyn</h3>
-                  <section [innerHTML]="exampleCodeSimpleMenyMarkup" highlight-js-content=".highlight"></section>
+                  <section [innerHTML]="exampleCodeSimpleMenyMarkup" hljsContent=".highlight"></section>
                 </div>
                 <h3>Header utan user och meny (Standard)</h3>
                 <vgr-header class="header--inline"></vgr-header>
-                <section [innerHTML]="standardExampleMarkup" highlight-js-content=".highlight"></section>
+                <section [innerHTML]="standardExampleMarkup" hljsContent=".highlight"></section>
                 <h3>Header med systeminformation</h3>
                 <vgr-header systemText="Development" class="header--inline"></vgr-header>
-                <section [innerHTML]="systemExampleMarkup" highlight-js-content=".highlight"></section>
+                <section [innerHTML]="systemExampleMarkup" hljsContent=".highlight"></section>
                 <h3>Custom Logo</h3>
                 <vgr-header class="header--inline theme--red" [hideSwosh]="true" logoClass="custom-logo"></vgr-header>
-                <section [innerHTML]="customExampleMarkup" highlight-js-content=".highlight"></section>
+                <section [innerHTML]="customExampleMarkup" hljsContent=".highlight"></section>
                 <h3>Skriva över initialer, textfärg samt bakgrundsfärg</h3>
                 <vgr-header class="header--inline" [hideSwosh]="true">
                   <vgr-header-menu initials="AB" userName="Claes Göransson" textColor="red" circleColor="white">
                   </vgr-header-menu>
                 </vgr-header>
-                <section [innerHTML]="overwriteExampleMarkup" highlight-js-content=".highlight"></section>
+                <section [innerHTML]="overwriteExampleMarkup" hljsContent=".highlight"></section>
               </div>
             </div>
           </vgr-list-item-content>
@@ -204,8 +204,8 @@
     </vgr-dropdown-select>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button 
-      [buttonStyle]="'secondary'" 
+    <vgr-button
+      [buttonStyle]="'secondary'"
       (click)="closeModal('modal1')">Stäng</vgr-button>
   </vgr-modal-footer>
 </vgr-modal>

@@ -10,7 +10,7 @@
         <a href="/expandablediv">här.</a>
       </p>
     </vgr-page-block>
-    
+
       <vgr-grid [stickyHeader]="false" (sortChanged)="onSortChanged($event)">
         <vgr-grid-header>
           <vgr-grid-header-column width="5" sortKey="firstName" [sortDirection]="sortDirections.Ascending">Förnamn</vgr-grid-header-column>
@@ -19,12 +19,12 @@
           <vgr-grid-header-column align="right" width="5" sortKey="income">Inkomst</vgr-grid-header-column>
         </vgr-grid-header>
         <vgr-grid-row *ngFor="let row of peopleRowsSimpleList">
-          
+
             <vgr-grid-column width="5">{{row.firstName}}</vgr-grid-column>
             <vgr-grid-column width="5">{{row.lastName}}</vgr-grid-column>
             <vgr-grid-column width="5">{{row.occupation}}</vgr-grid-column>
             <vgr-grid-column width="5" align="right">{{row.income | number:'2.2-2':'sv-SE'}}</vgr-grid-column>
-          
+
           <vgr-grid-content>
             <vgr-expandable-div *ngFor="let row of row.children" [expanded]="false">
               <vgr-expandable-div-header>
@@ -39,16 +39,16 @@
           </vgr-grid-content>
         </vgr-grid-row>
       </vgr-grid>
-  
+
     <vgr-page-block>
       <div>
         <h3>HTML</h3>
-        <section [innerHTML]="htmlSimpleListMarkup" highlight-js-content=".highlight"></section>
+        <section [innerHTML]="htmlSimpleListMarkup" hljsContent=".highlight"></section>
       </div>
       <br>
       <div>
         <h3>Typescript</h3>
-        <section [innerHTML]="typeScriptSimpleListMarkup" highlight-js-content=".highlight"></section>
+        <section [innerHTML]="typeScriptSimpleListMarkup" hljsContent=".highlight"></section>
       </div>
     </vgr-page-block>
   </vgr-page-body>
