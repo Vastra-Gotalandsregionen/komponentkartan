@@ -10,6 +10,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0"
   },
   "dependencies": {
-    "ngx-perfect-scrollbar": "^8.0.0"
+    "ngx-perfect-scrollbar": "^9.0.0"
   }
 }
