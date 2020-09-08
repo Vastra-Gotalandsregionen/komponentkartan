@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 7.3.8 (2020-08-18)
+
+- Fix randomly failing tests and update dependencies.
+
+## 7.3.7 (2020-08-14)
+
+- Fix bug where it was not possible to use tab to navigate buttons.
+- Change scoll behavior in dropdowns: when reaching end of dropdown, scroll does not propagate to the main window anymore.
+
+## 7.3.6 (2020-08-12)
+
+- Improved visibility when activating buttons with keyboard. The button now changes size and appearence when "pressed" with keyboard, just as if clicked with mouse.
+
+## 7.3.5 (2020-08-07)
+
+- Modal dialog can be closed by pressing Escape.
+
 ## 7.3.4 (2020-08-05)
 - Update button so that setting disabled also updates the disabled property on the button element.
 
@@ -36,7 +53,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - *Deprecated* output event blur from `vgr-textarea`
 - Added [idForLabel] property on `vgr-textarea` to make it possible to connect label to it.
 - Added [for] property for `vgr-title-value-heading` and changed it to use label instead of H4.
-- Added public method focus() for  `vgr-textarea`, `vgr-input`, `vgr-dropdown` and `vgr-datepicker`. 
+- Added public method focus() for  `vgr-textarea`, `vgr-input`, `vgr-dropdown` and `vgr-datepicker`.
 - Makes it possible to programmatically set focus on the component.
 
 ## 6.1.0 (2020-02-25)
@@ -100,7 +117,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 4.2.0 (2019-05-02)
 - Changed colors on validation
-- Changed icons to use vgr-icons (continue). 
+- Changed icons to use vgr-icons (continue).
 
 ## 4.1.0 (2019-04-30)
 - Fixed a bug in List when multipleExpandedItems are not allowed and closing list-items did not emit any event.
@@ -115,7 +132,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 4.0.0 (2019-02-08)
 - *Breaking change* Angular is upgraded to version 7.
 - *Breaking change* Dropdown and dropdown multiselect have been replaced by a declarative component called dropdown select.
-- *Breaking change* Added new discreet style to vgr-button. Input secondary is removed and replaced by buttonStyle. 
+- *Breaking change* Added new discreet style to vgr-button. Input secondary is removed and replaced by buttonStyle.
 - *Breaking change* In vgr-list the sort ascending/descening icons have been switched around to reflect how it's usually used.
 - *Breaking change* Added support for Font Awsome (free) as a pair dependency.
 - List (specially the notifications) have been remade and restyled.
@@ -150,7 +167,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - *Breaking change* List flexible header is no longer bound to the state of an Action panel on the same page. To replicate the old behavior, bind the List flexibleHeader input to the same value as the Action panel open input.
 - *Breaking change* vgr-list-column & vgr-list-column-header now renders flexible content insted of a fixed text (and fixed tooltip).
 - Added a polyfill for smooth scrolling in back to top component. (is added in demo-page)
-- Fixed a bug with overflow inside of card-sections. 
+- Fixed a bug with overflow inside of card-sections.
 - Added WCAG for cardSection and vgr-table.
 - Fixed spacing between buttons laying next to each other.
 - Added more options for how the header is displayed.
@@ -169,14 +186,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Moved komponentkartan lib folder from src/lib to projects/komponentkartan/lib
 - Removed jquery
 - Refactored back-to-top from javascript to Angular component
-- Added toggle-button component 
+- Added toggle-button component
 - Fixed a bug were elements were focused in collapsed action panels.
 - Bugfix for card-section animation in IE.
 - FilterText updated with new icon (themebased)
 - Added a new component Searchresult
 - Changed some icons to use SVG inseat of PNG
 
-## 2.6.0 
+## 2.6.0
 - Fixed smoother animations in list component
 - Error message in list component
 - Added ring with text component
@@ -190,7 +207,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - WCAG-support for datepickern
 - WCAG-support for the menu
 
-## 2.4.1 
+## 2.4.1
 - Fix bug with deselect on dropdown multi
 
 ## 2.4.0
@@ -200,7 +217,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add property noMonthSelectedLabel to Monthpicker
 - Add property noDateSelectedLabel to Datepicker
 - Added vgr-customized border to components on focus
-- Fixed bug that makes the dropdown-multi component to push other components to the right that lies next to it 
+- Fixed bug that makes the dropdown-multi component to push other components to the right that lies next to it
 - vgr-button now wraps an HTML-button and has a type-property
 - Fixed issue with line breaks in menu in Safari
 - Possible to display radio group horizontally and vertically
@@ -208,7 +225,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Checkboxes in dropdown multi has the same height in checked and unchecked state
 - Fixed bug with vgr-datepicker in vgr-actionpanel.
 
-## 2.3.0 
+## 2.3.0
 - Added vgr-table component
 
 ## 2.2.0
