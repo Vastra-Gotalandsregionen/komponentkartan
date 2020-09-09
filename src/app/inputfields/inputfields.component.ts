@@ -18,6 +18,7 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   disabled = false;
   readonly = false;
   showErrors = true;
+  ariaTest = {describedby: 'forandras'};
 
   private ngUnsubscribe = new Subject();
 
