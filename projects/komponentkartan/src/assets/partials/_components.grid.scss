@@ -57,11 +57,6 @@ vgr-grid {
   vgr-grid-header-column {
     h2 {
       position: relative;
-
-      >vgr-icon {
-        position: absolute;
-        right: -10px;
-      }
     }
 
     >div:focus {

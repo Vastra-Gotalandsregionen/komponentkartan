@@ -18,6 +18,7 @@ import {
   GridSortDirection
 } from '../../index';
 import { GridService } from './grid.service';
+import { SortArrowComponent } from '../sort-arrow/sort-arrow.component';
 
 @Component({
   selector: 'vgr-test',
@@ -56,7 +57,8 @@ describe('GridComponent', () => {
         GridContentComponent,
         LoaderComponent,
         PaginationComponent,
-        IconComponent
+        IconComponent,
+        SortArrowComponent
       ],
       imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule],
       providers: [

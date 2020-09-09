@@ -4,21 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 7.3.8 (2020-08-18)
+# 7.4.0 (Beta, 2020-07-08)
+- Created a `vgr-sort-arrow`-component, used internally in vgr-grid and available to be used inother components.
+- Added possibility to add ARIA-attributes `vgr-input`
 
+## 7.3.8 (2020-08-18)
 - Fix randomly failing tests and update dependencies.
 
 ## 7.3.7 (2020-08-14)
-
 - Fix bug where it was not possible to use tab to navigate buttons.
 - Change scoll behavior in dropdowns: when reaching end of dropdown, scroll does not propagate to the main window anymore.
 
 ## 7.3.6 (2020-08-12)
-
 - Improved visibility when activating buttons with keyboard. The button now changes size and appearence when "pressed" with keyboard, just as if clicked with mouse.
 
 ## 7.3.5 (2020-08-07)
-
 - Modal dialog can be closed by pressing Escape.
 
 ## 7.3.4 (2020-08-05)
