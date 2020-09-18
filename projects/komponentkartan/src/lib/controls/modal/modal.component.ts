@@ -1,6 +1,6 @@
 
 import {
-    Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy,
+  Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy, Output, EventEmitter
 } from '@angular/core';
 import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
@@ -13,6 +13,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 
 export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
+    @Output() outsideClick = new EventEmitter();
+
     isOpen: boolean;
     elementId: string;
     title: string;
@@ -116,6 +118,14 @@ export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
           break;
       }
     }
+
+  onOutsideClick(e: MouseEvent) {
+    // Is event bubbling; Ignore
+    if (e.eventPhase === Event.BUBBLING_PHASE) {
+      return;
+    }
+    this.outsideClick.emit(e);
+  }
 
   private handleTabPress(e: KeyboardEvent) {
     if (e.shiftKey) {
