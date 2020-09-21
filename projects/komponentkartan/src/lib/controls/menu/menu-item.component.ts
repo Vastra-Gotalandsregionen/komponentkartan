@@ -1,4 +1,4 @@
-import { Input, Component, HostListener, ElementRef, forwardRef, HostBinding, AfterViewInit, ViewChild, Renderer2 } from '@angular/core';
+import { Input, Component, HostListener, ElementRef, forwardRef, HostBinding, AfterViewInit, ViewChild, Renderer2, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItemBaseDirective } from './menu-item-base';
 
@@ -10,6 +10,7 @@ import { MenuItemBaseDirective } from './menu-item-base';
 export class MenuItemComponent extends MenuItemBaseDirective implements AfterViewInit {
     @Input() text: string;
     @Input() link: string;
+    @Output() action = new EventEmitter<MouseEvent | KeyboardEvent>();
     @Input() disabled = false;
     @Input() disabledTooltip: string;
     @Input() notification: string;
@@ -29,8 +30,13 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
                 event.preventDefault();
                 return;
             }
-            this.isInternalLink
-                ? this.router.navigate([this.link]) : this.externalLink();
+
+            if (this.link) {
+                this.isInternalLink ? this.router.navigate([this.link]) : this.onExternalLink();
+            } else if (this.action) {
+                this.onAction(event);
+            }
+
         }
         if (event.key === 'Home') {
             this.home.emit();
@@ -79,9 +85,14 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
             this.ariaDisabled = this.disabled;
         }, 25);
     }
-    externalLink() {
+
+    onExternalLink() {
         if (this.link) {
             return window.open(this.link, '_blank');
         }
+    }
+
+    onAction(event: MouseEvent | KeyboardEvent) {
+        this.action.emit(event);
     }
 }
