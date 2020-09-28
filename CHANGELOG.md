@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 7.5.0 (2020-09-28)
+- Added action-event to `vgr-menu-item`
+- Added outsideClick-event to `vgr-modal`
+
 # 7.4.0 (2020-09-09)
 - Created a `vgr-sort-arrow`-component, used internally in vgr-grid and available to be used inother components.
 - Added possibility to add ARIA-attributes `vgr-input`
