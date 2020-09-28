@@ -43,8 +43,7 @@
                   <vgr-header-menu userName="Neo Åhn">
                     <vgr-menu-item link="https://www.google.com" text="Extern länk" [isInternalLink]="false"></vgr-menu-item>
                     <vgr-menu-item link="https://www.google.com" [disabled]="true" text="Inaktiv länk" [isInternalLink]="false"></vgr-menu-item>
-                    <vgr-menu-item text="Modal" (click)="openModalOnClick('modal1')" (keyup)="openModalOnKey($event, 'modal1')" [isInternalLink]="false">
-                    </vgr-menu-item>
+                    <vgr-menu-item text="Modal" (action)="openModalOnClick('modal1')"></vgr-menu-item>
                     <vgr-menu-item link="/headers" text="Headers"></vgr-menu-item>
                     <vgr-menu-separator></vgr-menu-separator>
                     <vgr-submenu text="Calender">

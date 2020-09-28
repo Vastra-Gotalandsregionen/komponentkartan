@@ -64,11 +64,11 @@
   <vgr-header [systemText]="systemText">
     <vgr-header-menu [userName]="userName" textColor="black" circleColor="#f9dede">
       <vgr-submenu text="Tema">
-        <vgr-menu-item [isInternalLink]="false" text="Neutral" (click)="changeTheme('neutral')"></vgr-menu-item>
-        <vgr-menu-item [isInternalLink]="false" text="Blått" (click)="changeTheme('blue')"></vgr-menu-item>
-        <vgr-menu-item [isInternalLink]="false" text="Rött" (click)="changeTheme('red')"></vgr-menu-item>
-        <vgr-menu-item [isInternalLink]="false" text="Grönt" (click)="changeTheme('green')"></vgr-menu-item>
-        <vgr-menu-item [isInternalLink]="false" text="Rosa" (click)="changeTheme('pinkie')"></vgr-menu-item>
+        <vgr-menu-item text="Neutral" (action)="changeTheme('neutral')"></vgr-menu-item>
+        <vgr-menu-item text="Blått" (action)="changeTheme('blue')"></vgr-menu-item>
+        <vgr-menu-item text="Rött" (action)="changeTheme('red')"></vgr-menu-item>
+        <vgr-menu-item text="Grönt" (action)="changeTheme('green')"></vgr-menu-item>
+        <vgr-menu-item text="Rosa" (action)="changeTheme('pinkie')"></vgr-menu-item>
       </vgr-submenu>
     </vgr-header-menu>
   </vgr-header>
