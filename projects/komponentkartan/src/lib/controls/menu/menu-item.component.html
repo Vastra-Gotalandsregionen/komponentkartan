@@ -16,7 +16,7 @@
   </div>
 
   <!-- Action -->
-  <div #menuitem *ngIf="!link" (click)="onAction()" class="menu__item" tabindex="0">
+  <div #menuitem *ngIf="!link" (click)="onAction($event)" class="menu__item" tabindex="0">
     <a>{{text}}</a>
     <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass"
       title={{notificationTooltip}}>{{ notificationText }}</span>
