@@ -10,8 +10,8 @@ export class ButtonComponent implements OnChanges {
   @Input() type = 'button';
   @ViewChild('button', { static: true }) button: ElementRef;
   reenabled = false;
+  activated = false;
   private wasDisabled = false;
-  private activated = false;
 
   ngOnChanges() {
     this.reenabled = this.wasDisabled && !this.disabled;
