@@ -1,4 +1,5 @@
 ﻿import { Component, Input, OnChanges, ViewChild, ElementRef } from '@angular/core';
+import { mapToClassString } from '../../utils/map-to-class-string';
 
 @Component({
   selector: 'vgr-button',
@@ -38,11 +39,14 @@ export class ButtonComponent implements OnChanges {
   }
 
   calculateClasses() {
-    return { 'button--disabled' : this.disabled,
-    'button--enabling' : this.reenabled,
-    'button--secondary': this.buttonStyle === 'secondary',
-    'button--discreet': this.buttonStyle === 'discreet',
-    'button--active': this.activated
-    };
+    const css = new Map([
+      ['button--disabled', this.disabled],
+      ['button--enabling', this.reenabled],
+      ['button--secondary', this.buttonStyle === 'secondary'],
+      ['button--discreet', this.buttonStyle === 'discreet'],
+      ['button--active', this.activated]
+    ]);
+
+    return mapToClassString(css);
   }
 }
