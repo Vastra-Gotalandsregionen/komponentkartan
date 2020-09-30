@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 7.5.1 (2020-09-30)
+- Fix bug where styling of vgr-button would not work if angular build config was set to `optimization: true`. #474
+
 # 7.5.0 (2020-09-28)
 - Added action-event to `vgr-menu-item`
 - Added outsideClick-event to `vgr-modal`
