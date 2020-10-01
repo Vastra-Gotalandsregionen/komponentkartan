@@ -46,6 +46,7 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
       if (this.lastSelectedIndex < nonRemovedFilterTags.length) {
         nonRemovedFilterTags[this.lastSelectedIndex].focus();
       } else if (nonRemovedFilterTags.length) {
+        this.lastSelectedIndex = nonRemovedFilterTags.length - 1;
         nonRemovedFilterTags[nonRemovedFilterTags.length - 1].focus();
       }
     }
