@@ -1,5 +1,5 @@
 ﻿
-.icon {  
+.icon {
   @extend .color--primary;
   outline: none;
   &.icon-color--text {
@@ -10,12 +10,18 @@
   }
   &.icon-color--success {
     color: $primary-color--success;
-  }  
+  }
   &.icon-color--error {
     color: $primary-color--error;
-  }   
+  }
+  &.icon-color--warning {
+    color: $primary-color--warning;
+  }
+  &.icon-color--info {
+    color: $primary-color--info;
+  }
   &.icon--disabled {
     color: $control-color--disabled;
     cursor: default;
-  }   
+  }
 }

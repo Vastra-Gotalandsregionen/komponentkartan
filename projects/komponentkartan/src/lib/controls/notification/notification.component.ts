@@ -7,20 +7,26 @@ import { toggleFadedState } from '../../animation';
   animations: [toggleFadedState]
 })
 export class NotificationComponent implements OnInit {
-  @HostBinding('@toggleFadedState') animate = true;
-  @Input() @HostBinding('attr.class') borderColor: string = null;
-  @Input() type: string = null;
-  @HostBinding('class.list-notification') listNotification = false;
+  @Input() standalone = false;
+  @Input() @HostBinding('attr.class') type: string = null;
+  @Input() @HostBinding('style.width') width = null;
+  @Input() @HostBinding('class.no-icon') noIcon = false;
 
-  constructor(public el: ElementRef) {
-  }
+  @HostBinding('class.list-notification') listNotification = false;
+  @HostBinding('class.standalone-notification') standaloneNotification = false;
+  @HostBinding('@toggleFadedState') animate = true;
+
+  constructor(public el: ElementRef) {}
 
   ngOnInit() {
-    if (this.el.nativeElement.parentElement && this.el.nativeElement.parentElement.localName === 'vgr-grid') {
+    // Is <vgr-grid /> direct parent; Add class "list-notification"
+    if (this.el.nativeElement?.parentElement?.localName === 'vgr-grid') {
       this.listNotification = true;
     }
-    if (this.type) {
-      this.borderColor = this.type;
+
+    // Not list-notification & standalone passed to component; Add class "standalone-notification"
+    if (!this.listNotification && this.standalone) {
+      this.standaloneNotification = true;
     }
   }
 }

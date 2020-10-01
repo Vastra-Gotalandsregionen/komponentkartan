@@ -1,10 +1,12 @@
 ﻿vgr-notification {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   background-color: white;
-  padding: 4px 10px;
+  padding: 6px 10px;
+  
   vgr-icon {
     margin-right: 6px;
+    font-size: 20px;
   }
 
   &:before {
@@ -25,15 +27,25 @@
     }
   }
 
+  &.standalone-notification:before {
+    display: none;
+  }
+
+  &.success { background: $secondary-color--success; }
+  &.success:before { background: $primary-color--success; }
+
+  &.error { background: $secondary-color--error; }
+  &.error:before { background: $primary-color--error; }
+
+  &.warning { background: $secondary-color--warning; }
+  &.warning:before { background: $primary-color--warning; }
+
+  &.info { background: $secondary-color--info; }
+  &.info:before { background: $primary-color--info; }
+
   &.text:before,
   &.comment:before {
     background:$text-color--default;
-  }
-  &.success:before {
-    background: $primary-color--success;
-  }
-  &.error:before {
-    background: $primary-color--error;
   }
   &.error-secondary:before {
     background: $secondary-color--error;
@@ -57,6 +69,11 @@
 
 @media screen and (min-width: $desktop-width--medium) {
   vgr-notification {
-    padding: 4px 20px;
+    padding: 8px 12px;
+    
+    vgr-icon {
+      margin-right: 8px;
+      font-size: 23px;
+    }
   }
 }

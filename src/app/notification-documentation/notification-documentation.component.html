@@ -5,20 +5,77 @@
       <!-- <a href="https://vastra-gotalandsregionen.github.io/komponentkartan-demo/grid" target="_blank">Komponentkartan demo </a> -->
       <a href="http://vgwb0399.vgregion.se:4500/notification-documentation" target="_blank">Komponentkartan demo </a>
     </p>
+    <p>
+      <br><a href="/grid">Här</a> finns exempel på hur <code>&lt;vgr-notification&gt;</code> implementeras med
+      <code>&lt;vgr-grid&gt;</code>.
+      <br>
+      <br>
+    </p>
   </vgr-page-header>
   <vgr-page-body>
     <vgr-page-block>
-      <code>&lt;vgr-notification&gt;</code><br>
-      En notifiering är en egen komponet som kan läggas in deklarativt i html. 
+      <p>Inte ens type satt, ikon via &lt;vgr-icon&gt;</p>
+      <vgr-notification>
+        <vgr-icon [solid]="true" color="success" icon="check-circle"></vgr-icon>Ett felmeddelade!
+      </vgr-notification>
       <vgr-notification>
         <vgr-icon [solid]="true" color="error" icon="exclamation-circle"></vgr-icon>Ett felmeddelade!
       </vgr-notification>
-      <p>
-        <br><a href="/grid">Här</a> finns exempel på hur <code>&lt;vgr-notification&gt;</code> implementeras med
-        <code>&lt;vgr-grid&gt;</code>.
-        <br>
-        <br>
-      </p>
+      <vgr-notification>
+        <vgr-icon [solid]="true" color="warning" icon="exclamation-circle"></vgr-icon>Ett felmeddelade!
+      </vgr-notification>
+      <vgr-notification>
+        <vgr-icon [solid]="true" color="info" icon="info-circle"></vgr-icon>Ett felmeddelade!
+      </vgr-notification>
     </vgr-page-block>
+    
+    <vgr-page-block>
+      <p>Ej standalone, Vilket innebär att då den har type kommer border sättas på &lt;vgr-page-block&gt;</p>
+      <vgr-notification type="success">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+      </vgr-notification>
+      
+    </vgr-page-block>
+    
+    <vgr-page-block>
+      <p>Default beteende, type satt annars inget</p>
+      <vgr-notification type="success" [standalone]="true">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</vgr-notification>
+      <vgr-notification type="error" [standalone]="true">Ett felmeddelade!</vgr-notification>
+      <vgr-notification type="warning" [standalone]="true">Ett varningsmeddelande!</vgr-notification>
+      <vgr-notification type="info" [standalone]="true">Ett informations-meddelande!</vgr-notification>
+    </vgr-page-block>
+
+    <vgr-page-block>
+      <p>Ikon borttagen genom [noIcon]="true" och istället satt via &lt;vgr-icon&gt;</p>
+      <vgr-notification type="success" [noIcon]="true" [standalone]="true">
+        <vgr-icon [solid]="true" color="success" icon="star"></vgr-icon> En bekräftelse om att något gick!
+      </vgr-notification>
+      <vgr-notification type="error" [noIcon]="true" [standalone]="true">
+        <vgr-icon [solid]="true" color="error" icon="anchor"></vgr-icon> Ett felmeddelade!
+      </vgr-notification>
+      <vgr-notification type="warning" [noIcon]="true" [standalone]="true">
+        <vgr-icon [solid]="true" icon="angry"></vgr-icon> Ett varningsmeddelande!
+      </vgr-notification>
+      <vgr-notification type="info" [noIcon]="true" [standalone]="true">
+        <vgr-icon [solid]="true" icon="address-card"></vgr-icon> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+      </vgr-notification>
+    </vgr-page-block>
+    
+    <vgr-page-block>
+      <p>Ikon borttagen genom [noIcon]="true"</p>
+      <vgr-notification type="success" [standalone]="true" [noIcon]="true">En bekräftelse om att något gick!</vgr-notification>
+      <vgr-notification type="error" [width]="'500px'" [standalone]="true" [noIcon]="true">Ett felmeddelade!</vgr-notification>
+      <vgr-notification type="warning" [width]="'500px'" [standalone]="true" [noIcon]="true">Ett varningsmeddelande!</vgr-notification>
+      <vgr-notification type="info" [standalone]="true" [noIcon]="true">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</vgr-notification>
+    </vgr-page-block>
+    
+    <vgr-page-block>
+      <p>Bredden är satt likt [width]="'300px'"</p>
+      <vgr-notification type="success" [width]="'300px'" [standalone]="true">En bekräftelse om att något gick!</vgr-notification>
+      <vgr-notification type="error" [width]="'500px'" [standalone]="true">Ett felmeddelade!</vgr-notification>
+      <vgr-notification type="warning" [width]="'750px'" [standalone]="true">Ett varningsmeddelande!</vgr-notification>
+      <vgr-notification type="info" [width]="'450px'" [standalone]="true">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</vgr-notification>
+    </vgr-page-block>
+  
   </vgr-page-body>
 </vgr-page>
