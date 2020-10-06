@@ -1,14 +1,9 @@
 ﻿vgr-notification {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   background-color: white;
-  padding: 6px 10px;
+  padding: 4px 10px;
   
-  vgr-icon {
-    margin-right: 6px;
-    font-size: 20px;
-  }
-
   &:before {
     content: '';
     z-index: 2;
@@ -19,6 +14,10 @@
     position: absolute;
     transition: background .2s ease;
   }
+  
+  vgr-icon {
+    margin-right: 6px;
+  }
 
   &.list-notification {
     margin-bottom: 2px;
@@ -27,8 +26,16 @@
     }
   }
 
-  &.standalone-notification:before {
-    display: none;
+  &.standalone-notification {
+    padding: 6px 10px;
+    &:before {
+      display: none;
+    }
+    vgr-icon {
+      position: relative;
+      top: 2px;
+      font-size: 20px;
+    }
   }
 
   &.success { background: $secondary-color--success; }
@@ -65,15 +72,15 @@
   &.disabled:before {
     background: $control-color--disabled;
   }
-}
 
-@media screen and (min-width: $desktop-width--medium) {
-  vgr-notification {
-    padding: 8px 12px;
-    
-    vgr-icon {
-      margin-right: 8px;
-      font-size: 23px;
+  @media screen and (min-width: $desktop-width--medium) {
+    &.standalone-notification {
+      padding: 8px 12px;
+      vgr-icon {
+        top: 3px;
+        margin-right: 8px;
+        font-size: 23px;
+      }
     }
   }
 }

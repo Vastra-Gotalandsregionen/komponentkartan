@@ -14,13 +14,12 @@ export class NotificationComponent implements OnInit {
   @Input() borderColor: string = null;
   @Input() @HostBinding('attr.class') type: string = null;
   @Input() @HostBinding('style.width') width = null;
-  @Input() @HostBinding('style.height') height = null;
+  @Input() @HostBinding('style.min-height') height = null;
   @Input() @HostBinding('class.no-icon') noIcon = false;
 
   @HostBinding('class.list-notification') listNotification = false;
   @HostBinding('class.standalone-notification') standaloneNotification = false;
   @HostBinding('@toggleFadedState') animate = true;
-  @HostBinding('attr.tabIndex') tabIndex = 0;
 
   constructor(public el: ElementRef) {}
 
