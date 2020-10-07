@@ -50,29 +50,3 @@ $themes: (
 
   }
 }
-
-
-
-
-
-// ::ng-deep {
-//   @include theme(border-top-color);
-//   @include theme(border-left-color);
-//   @include theme(border-right-color);
-//   @include theme(border-bottom-color);
-//   @include theme(border-color);
-//   @include theme(color);
-//   @include theme(background-color);
-// }
-
-
-// NÅGRA BRÅKIGA SIDOR BEHÖVER TEMAS HÄR:
-// :ng-deep {
-//   .menu__header {
-//     background: lime;
-//     @include themify($themes) {
-//       border-left-color: themed('primaryColor');
-//     }
-//   }
-// }
-
