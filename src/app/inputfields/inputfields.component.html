@@ -10,10 +10,10 @@
       <br> - Visa upp felmedlenaden i anslutning till input-fältet.
     </p>
     <p>
-      <label>HSA-id: </label><br>
-      <vgr-input [readonly]="readonly" [showValidation]="showErrors" width="300px" value="SE2329999131-E000000011351"></vgr-input>
+      <label for="hsaid">HSA-id: </label><br>
+      <vgr-input idForLabel="hsaid" [readonly]="readonly" [showValidation]="showErrors" [aria]="ariaTest" width="300px" value=""></vgr-input>
     </p>
-    <p>Förändras med tema: <strong>nej</strong>
+    <p id="forandras">Förändras med tema: <strong>nej</strong>
     </p>
   </div>
 

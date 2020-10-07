@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostListener, HostBinding, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostListener, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContainer } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContai
     multi: true
   }]
 })
-export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
+export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, AfterViewInit {
 
   @Input() showValidation = true;
   @Input() readonly = false;
@@ -32,6 +32,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   @Input() name = '';
   @Input() type: 'text' | 'email' | 'number' | 'password' | 'search' | 'tel' = 'text';
   @Input() value: any = '';
+  @Input() aria: any;
 
   /**  */
   @Input() formControlName: string;
@@ -48,7 +49,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   control: AbstractControl;
   hasFocus = false;
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef) { }
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) { }
 
   ngOnInit() {
     if (!this.textAlign && this.suffix) {
@@ -59,6 +60,18 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
     }
     if (this.formControlName) {
       this.control = this.controlContainer.control.get(this.formControlName);
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.aria) {
+      console.log(this.aria);
+      for (const key in this.aria) {
+        if (Object.prototype.hasOwnProperty.call(this.aria, key)) {
+          const value = this.aria[key];
+          this.renderer.setAttribute(this.inputElement.nativeElement, 'aria-' + key, value);
+        }
+      }
     }
   }
 

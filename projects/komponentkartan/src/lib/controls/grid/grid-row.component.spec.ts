@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GridRowComponent, LoaderComponent, IconComponent } from '../../index';
 import { GridService } from './grid.service';
@@ -11,7 +11,7 @@ describe('GridRowComponent', () => {
   let component: GridRowComponent;
   let fixture: ComponentFixture<GridRowComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         GridRowComponent,
@@ -23,9 +23,7 @@ describe('GridRowComponent', () => {
         ]
     })
       .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(GridRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

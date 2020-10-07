@@ -1,11 +1,22 @@
 <div *ngIf="!disabled else disableditem">
-  <div #menuitem *ngIf="isInternalLink" class="menu__item" routerLinkActive="menu__item--active" routerLink={{link}}
+
+  <!-- Internal link -->
+  <div #menuitem *ngIf="isInternalLink && link" class="menu__item" routerLinkActive="menu__item--active" routerLink={{link}}
     [routerLinkActiveOptions]="{exact:false}" tabindex="0">
     <a>{{text}}</a>
     <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass"
       title={{notificationTooltip}}>{{ notificationText }}</span>
   </div>
-  <div #menuitem *ngIf="!isInternalLink" (click)="externalLink()" class="menu__item" tabindex="0">
+
+  <!-- External link -->
+  <div #menuitem *ngIf="!isInternalLink && link" (click)="onExternalLink()" class="menu__item" tabindex="0">
+    <a>{{text}}</a>
+    <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass"
+      title={{notificationTooltip}}>{{ notificationText }}</span>
+  </div>
+
+  <!-- Action -->
+  <div #menuitem *ngIf="!link" (click)="onAction($event)" class="menu__item" tabindex="0">
     <a>{{text}}</a>
     <span *ngIf="notification" class="menu__item--notification" [ngClass]="notificationColorClass"
       title={{notificationTooltip}}>{{ notificationText }}</span>

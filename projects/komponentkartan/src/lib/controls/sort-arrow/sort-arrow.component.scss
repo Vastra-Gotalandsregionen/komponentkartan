@@ -1,0 +1,33 @@
+$margintime: 0.3s;
+$fadetime: 0.4s;
+:host {
+  margin-left: -10px;
+  opacity: 0;
+  display: inline-block;
+  width: auto;
+  transition: margin-left $margintime ease $fadetime,
+              opacity $fadetime ease;
+  .icon { color: transparent; }
+  &.permanent {
+    transition: none;
+    margin-left: 5px;
+    opacity: 1;
+    .icon {
+      color: black;
+    }
+  }
+}
+
+::ng-deep {
+  *:hover {
+    > vgr-sort-arrow.only-hover {
+      transition: margin-left $margintime ease,
+              opacity $fadetime ease $margintime;
+      opacity: 1;
+      margin-left: 5px;
+      .icon {
+        color: silver;
+      }
+    }
+  }
+}

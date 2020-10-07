@@ -1,6 +1,7 @@
-<vgr-modal id="modal2">
+<vgr-modal id="modal2" (outsideClick)="closeModal('modal2')">
   <vgr-modal-header>Här kan du trycka på knappar om du gillar det.</vgr-modal-header>
   <vgr-modal-content>
+    Om du klickar utanför stängs modalen
     <vgr-button>Hahahah!</vgr-button>
     <vgr-button>Hohohoho!</vgr-button>
   </vgr-modal-content>
@@ -59,24 +60,27 @@
     </div>
     <br>
     <h2>HTML</h2>
-    <section [innerHTML]="exampleCodeMarkup" highlight-js-content=".highlight"></section>
+    <section [innerHTML]="exampleCodeMarkup" hljsContent=".highlight"></section>
     <h2>TypeScript</h2>
-    <section [innerHTML]="exampleCodeTypescript" highlight-js-content=".highlight"></section>
+    <section [innerHTML]="exampleCodeTypescript" hljsContent=".highlight"></section>
     <h2>Resultat</h2>
     <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>
     <br>
 
   </div>
   <div class="docs__api">
-    Modal består av två delar. En komponent som läggs på samma nivå som vgr-page, med
-    <code>&lt;vgr-modal&gt;</code>. Detta är en placeholder för det innehåll som sedan visas över applikationen. Den
-    består i sin
-    tur av tre delar,
+    Modal består av två delar. En komponent som läggs på samma nivå som <code>&lt;vgr-page&gt;</code>, med <code>&lt;vgr-modal&gt;</code>.
+    Detta är en placeholder för det innehåll som sedan visas över applikationen.
+    Den har ett id som behöver anges för att kunna öppna/stänga modalen.
+    Du kan även koppla funktionalitet till klick utanför modalen genom att använda dig av <code>&#40;outsideClick&#41;="foobar()"</code>.
+    Modalen består i sin tur av tre delar,
     <code>&lt;vgr-modal-header&gt;</code>,
     <code>&lt;vgr-modal-content&gt;</code>
     och
     <code>&lt;vgr-modal-footer&gt;</code>. Den andra delen är en
-    <code>modalService</code> som injectas i de komponenter som vill visa en dialog. För att visa en dialog, använd
+    <code>modalService</code> som injectas i de komponenter som vill visa en dialog. Bredden på dialogen kan i det lilla läget minst vara 450px och max 1080px 
+    alternativt i det stora läget minst 500px och max 1130px. För att sätta förvalt fokus på en 
+    <code>&lt;vgr-button&gt;</code> i ett modalt fönster anges attributet <code>default=true</code> för knappen. För att visa en dialog, använd
     <code>modalService.openDialog()</code> och för att stänga dialogen, använd
     <code>modalService.closeDialog()</code>. Se nedan.
     <br>
@@ -87,15 +91,30 @@
         <th>Exempel</th>
       </tr>
       <tr>
-        <td>openDialog(elementId: string)</td>
+        <td>outsideClick(e: MouseEvent)</td>
+        <td>
+          Event som triggas när du klickar utanför modalen.
+          Denna läggs på <code>&lt;vgr-modal&gt;</code>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>modalService.openDialog(elementId: string)</td>
         <td>Öppnar den modal dialog som har det element id som skickats in -
           <code>elementId</code>.
         </td>
         <td></td>
       </tr>
       <tr>
-        <td>closeDialog(elementId: string)</td>
+        <td>modalService.closeDialog(elementId: string)</td>
         <td>Stänger den modal dialog som har det element id som skickats in -
+          <code>elementId</code>.
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>modalService.updateDialog(elementId: string)</td>
+        <td>Uppdaterar vilka tabstop som finns i modalen (används om man ändrar innehållet i modalen efter att man öppnat den) -
           <code>elementId</code>.
         </td>
         <td></td>

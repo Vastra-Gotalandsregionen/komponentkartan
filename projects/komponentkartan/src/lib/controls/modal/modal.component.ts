@@ -1,6 +1,6 @@
 
 import {
-    Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy
+  Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy, Output, EventEmitter
 } from '@angular/core';
 import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
@@ -14,6 +14,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 
 export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
+    @Output() outsideClick = new EventEmitter();
+
     isOpen: boolean;
     elementId: string;
     title: string;
@@ -107,27 +109,42 @@ export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
         this.renderer.removeClass(document.body, 'modal--open');
     }
 
-    onKeyDown(e: any) {
-        if (e.key === 'Tab') {
-            // If Shift + Tab
-            if (e.shiftKey) {
-                // If the current element in focus is the first focusable element within the modal window...
-                if (document.activeElement === this.firstTabStop) {
-                    e.preventDefault();
-                    // ...jump to the last focusable element
-                    this.lastTabStop.focus();
-                }
-                // if Tab
-            } else {
-                // If the current element in focus is the last focusable element within the modal window...
-                if (document.activeElement === this.lastTabStop) {
-                    e.preventDefault();
-                    // ...jump to the first focusable element
-                    this.firstTabStop.focus();
-                }
-            }
-        }
+    onKeyDown(e: KeyboardEvent) {
+      switch (e.key) {
+        case 'Tab':
+          this.handleTabPress(e);
+          break;
+        case 'Escape':
+          this.modalService.closeDialog(this.elementId);
+          break;
+      }
     }
 
+  onOutsideClick(e: MouseEvent) {
+    // Is event bubbling; Ignore
+    if (e.eventPhase === Event.BUBBLING_PHASE) {
+      return;
+    }
+    this.outsideClick.emit(e);
+  }
 
+  private handleTabPress(e: KeyboardEvent) {
+    if (e.shiftKey) {
+      // If Shift + Tab
+      // If the current element in focus is the first focusable element within the modal window...
+      if (document.activeElement === this.firstTabStop) {
+        e.preventDefault();
+        // ...jump to the last focusable element
+        this.lastTabStop.focus();
+      }
+      // if Tab
+    } else {
+      // If the current element in focus is the last focusable element within the modal window...
+      if (document.activeElement === this.lastTabStop) {
+        e.preventDefault();
+        // ...jump to the first focusable element
+        this.firstTabStop.focus();
+      }
+    }
+  }
 }

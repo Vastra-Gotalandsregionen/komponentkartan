@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotificationComponent } from './notification.component';
 import { IconModule } from '../icon/icon.module';
@@ -20,22 +20,17 @@ import { By } from '@angular/platform-browser';
 export class TestComponent { }
 
 describe('[NotificationComponent]', () => {
-  let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let rootElement: DebugElement;
   let notifications: DebugElement[];
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent, NotificationComponent, IconComponent],
       imports: [IconModule, FontAwesomeModule, NoopAnimationsModule]
     })
       .compileComponents();
-  }));
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
     rootElement = fixture.debugElement;
     notifications = rootElement.queryAll(By.directive(NotificationComponent));

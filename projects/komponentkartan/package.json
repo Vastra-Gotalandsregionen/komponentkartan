@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "7.3.3",
+  "version": "7.5.1",
   "peerDependencies": {
     "@angular/common": "^9.1.7",
     "@angular/core": "^9.1.7",
@@ -10,6 +10,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0"
   },
   "dependencies": {
-    "ngx-perfect-scrollbar": "^8.0.0"
+    "ngx-perfect-scrollbar": "^9.0.0"
   }
 }

@@ -66,9 +66,7 @@
               </div>
               <div class="code-container">
                 <h3>HTML</h3>
-                <section [innerHTML]="htmlMenuMarkup" highlight-js-content=".highlight"></section>
-                <h3>Typescript</h3>
-                <section [innerHTML]="typeScriptMenuMarkup" highlight-js-content=".highlight"></section>
+                <section [innerHTML]="htmlMenuMarkup" hljsContent=".highlight"></section>
               </div>
             </div>
           </vgr-list-item-content>
@@ -116,6 +114,11 @@
                 <td>link : string</td>
                 <td>Sätter länken till menynalternativet.</td>
                 <td>[link]="/start"</td>
+              </tr>
+              <tr>
+                <td>action : Funktion</td>
+                <td>Kopplar en funktion till menyalternativet</td>
+                <td>(action)="foobar()"</td>
               </tr>
               <tr>
                 <td>disabled : boolean</td>

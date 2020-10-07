@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GridHeaderColumnComponent, IconComponent } from '../../index';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -10,15 +10,13 @@ describe('GridHeaderColumnComponent', () => {
   let component: GridHeaderColumnComponent;
   let fixture: ComponentFixture<GridHeaderColumnComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ GridHeaderColumnComponent, IconComponent ],
       imports: [CommonModule, BrowserAnimationsModule, FontAwesomeModule, IconModule],
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(GridHeaderColumnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

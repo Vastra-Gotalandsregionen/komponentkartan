@@ -1,5 +1,11 @@
 ﻿<span (click)="checkDisabled($event)">
-  <button #button [type]="type" class="button noselect" [attr.aria-disabled]="disabled" [ngClass]="{'button--disabled' : disabled, 'button--enabling' : reenabled, 'button--secondary': buttonStyle === 'secondary', 'button--discreet': buttonStyle === 'discreet'}">
+  <button #button
+   [type]="type"
+   class="button noselect"
+   [attr.aria-disabled]="disabled"
+   [disabled]="disabled"
+   [ngClass]="calculateClasses()"
+   (keydown)="onKeyboardActivation($event)">
     <span class="button__fixIE">
       <ng-content></ng-content>
     </span>

@@ -21,7 +21,7 @@ export class FilterTextboxComponent implements OnInit {
   hasFocus: boolean;
   private _value: string;
 
-  ngOnInit(){
+  ngOnInit() {
     console.warn('vgr-filter-textbox is deprecated and soon to be removed. Please consider using <vgr-input type="search"> instead.');
 
   }
