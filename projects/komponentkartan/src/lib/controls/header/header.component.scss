@@ -1,6 +1,6 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify.scss";
 @import "../../../assets/partials/objects.images";
 
 /**
@@ -11,16 +11,16 @@
 
 :host::ng-deep {
   &.theme--blue {
-    @extend .bg-image-vgr-header;
+    background-image: map-get($imagesBase64, 'bg-image-vgr-header');
   }
   &.theme--red {
-    @extend .bg-image-vgr-header;
+    background-image: map-get($imagesBase64, 'bg-image-vgr-header');
   }
   &.theme--green .header {
-    @extend .bg-image-vgr-header;
+    background-image: map-get($imagesBase64, 'bg-image-vgr-header');
   }
   &.theme--pinkie {
-    @extend .bg-image-pinkie-header;
+    background-image: map-get($imagesBase64, 'bg-image-pinkie-header');
     background-position: right center;
   }
 
@@ -37,15 +37,16 @@
     background-repeat: no-repeat;
     background-position: top right;
     padding-left: 16px;
-    // padding-right: 40px;
-    @extend .background-color--primary;
+    @include themify($themes) {
+      background-color: themed('primaryColor');
+    }
     transition: background-color ease-in 0.3s;
 
     &.header--hide-swosh {
       background-image: none;
     }
     .header__vgr-logo {
-      @extend .bg-image-vgr-logo;
+      background-image: map-get($imagesBase64, 'bg-image-vgr-logo');
       width: 236px;
       height: 48px;
       background-repeat: no-repeat;

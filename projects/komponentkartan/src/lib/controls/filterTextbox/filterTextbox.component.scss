@@ -1,39 +1,33 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/base.themify.scss";
 
-.filter-textbox {
-  height: $component-height;
-  font-size: 16px;
-  width: $input-width--small;
-  &.filter-textbox--focus {
-    outline: $focus-outline-width solid $focus-color;
-  }
-  input {
-    width: calc(100% - 34px);
-    height: 100%;
-    border: $border--single solid $control-border-color--default;
-    border-right: none;
-    border-radius:0px;
-  }
-  .icon {
-    width: 34px;
+:host::ng-deep {
+  .filter-textbox {
     height: $component-height;
-    float: right;
-    border: $border--single solid $control-border-color--default;
-    border-left: none;
-    text-align: center;
-    padding-top: 2px;
-    .theme--blue & {
-      color: $primary-color--blue;
+    font-size: 16px;
+    width: $input-width--small;
+    &.filter-textbox--focus {
+      outline: $focus-outline-width solid $focus-color;
     }
-    .theme--red & {
-      color: $primary-color--red;
+    input {
+      width: calc(100% - 34px);
+      height: 100%;
+      border: $border--single solid $control-border-color--default;
+      border-right: none;
+      border-radius:0px;
     }
-    .theme--green & {
-      color: $primary-color--green;
-    }
-    .theme--pinkie & {
-      color: $primary-color--pinkie;
+    .icon {
+      width: 34px;
+      height: $component-height;
+      float: right;
+      border: $border--single solid $control-border-color--default;
+      border-left: none;
+      text-align: center;
+      padding-top: 2px;
+      @include themify($themes) {
+        color: themed('primaryColor');
+      }
     }
   }
 }

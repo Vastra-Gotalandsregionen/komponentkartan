@@ -209,8 +209,10 @@
       padding: 10px 10px;
     }
 
+  }
+
   @media screen and (min-width: $desktop-width--medium) {
-    vgr-grid {
+    :host::ng-deep {
       max-width: 1170px;
 
       vgr-grid-header {
@@ -243,6 +245,4 @@
         }
       }
     }
-  }
-
   }

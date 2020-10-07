@@ -1,8 +1,11 @@
 @import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify.scss";
+
 
 .icon {
-  @extend .color--primary;
+  @include themify($themes) {
+    color: themed('primaryColor');
+  }
   outline: none;
   &.icon-color--text {
     color: $text-color--default;

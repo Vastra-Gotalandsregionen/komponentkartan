@@ -1,5 +1,9 @@
+@import "../../../assets/partials/base.themify";
+
 .button__base {
-  @extend .background-color--primary;
+  @include themify($themes) {
+    background-color: themed('primaryColor');
+  }
   position: relative;
   box-sizing: border-box;
   padding: 0;
@@ -32,7 +36,9 @@
     cursor: default;
   }
   .button__focus-line {
-    @extend .background-color--secondary;
+    @include themify($themes) {
+      background-color: themed('secondaryColor');
+    }
     visibility: hidden;
     height: 4px;
     width: 100%;
@@ -48,10 +54,13 @@
   }
 }
 
-vgr-button + vgr-button,
-vgr-lock-button + vgr-button,
-vgr-button + vgr-lock-button,
-vgr-lock-button + vgr-lock-button,
-vgr-close-button + vgr-close-button {
-  padding-left: 20px;
+::ng-deep {
+  vgr-button + vgr-button,
+  vgr-lock-button + vgr-button,
+  vgr-button + vgr-lock-button,
+  vgr-lock-button + vgr-lock-button,
+  vgr-close-button + vgr-close-button {
+    padding-left: 20px;
+  }
 }
+

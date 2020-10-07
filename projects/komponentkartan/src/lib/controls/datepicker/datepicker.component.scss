@@ -1,6 +1,7 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify.scss";
+
 
 :host::ng-deep {
   .datepicker {
@@ -59,7 +60,9 @@
         }
 
         .datepicker__header__button {
-          @extend .background-color--primary;
+          @include themify($themes) {
+            background-color: themed('primaryColor');
+          }
           position: absolute;
           top: 0;
           right: 0;
@@ -95,7 +98,9 @@
         cursor: default;
 
         .datepicker__calendar__header {
-          @extend .background-color--primary;
+          @include themify($themes) {
+            background-color: themed('primaryColor');
+          }
           color: $text-color--light;
           display: flex;
           justify-content: space-between;
@@ -124,7 +129,9 @@
             cursor: pointer;
 
             &:hover {
-              @extend .background-color--secondary;
+              @include themify($themes) {
+                background-color: themed('secondaryColor');
+              }
             }
           }
 
@@ -209,8 +216,10 @@
             cursor: pointer;
 
             &:hover:not(.datepicker__calendar__body__item--disabled) {
-              @extend .background-color--secondary;
-              @extend .border-color--secondary;
+              @include themify($themes) {
+                background-color: themed('secondaryColor');
+                border-color: themed('secondaryColor');
+              }
               color: $text-color--light;
             }
 
@@ -221,11 +230,15 @@
             }
 
             &.datepicker__calendar__body__item--selected {
-              @extend .background-color--primary;
+              @include themify($themes) {
+                background-color: themed('primaryColor');
+              }
               color: $text-color--light;
 
               &:not(:focus) {
-                @extend .border-color--primary;
+                @include themify($themes) {
+                  border-color: themed('secondaryColor');
+                }
                 border-width: 1px;
               }
             }
@@ -234,7 +247,9 @@
               background-color: $background-color--content;
 
               &:not(:focus) {
-                @extend .border-color--primary;
+                @include themify($themes) {
+                  border-color: themed('primaryColor');
+                }
                 border-width: 1px;
               }
             }

@@ -1,8 +1,8 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/base.themes";
-@import "../../../assets/partials/components.button-base";
+@import "../../../assets/partials/base.themify.scss";
+@import "../button/button.base.scss";
 
 :host::ng-deep {
   $toggle-button-height: 30px;
@@ -20,8 +20,10 @@
     }
     &.button--secondary {
       background-color: $text-color--light;
-      @extend .color--primary;
-      @extend .border-color--primary;
+      @include themify($themes) {
+        border-color: themed('primaryColor');
+        color: themed('primaryColor');
+      }
       line-height: 28px;
       border-width: 1px;
       border-style: solid;
@@ -35,7 +37,9 @@
       }
       &:hover:not(.button--disabled),
       &:focus:not(.button--disabled) {
-        @extend .background-color--primary;
+        @include themify($themes) {
+          background-color: themed('primaryColor');
+        }
         color: $text-color--light;
         transition: background-color 0.5s ease, color 0.5s ease;
       }

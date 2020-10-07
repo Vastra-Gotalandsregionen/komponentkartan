@@ -4,7 +4,7 @@
 
 :host {
   .back-to-top {
-    @extend .bg-image-back-to-top;
+    background-image: map-get($imagesBase64, 'bg-image-back-to-top');
     width: 51px !important;
     height: 51px !important;
     border-radius: 50%;

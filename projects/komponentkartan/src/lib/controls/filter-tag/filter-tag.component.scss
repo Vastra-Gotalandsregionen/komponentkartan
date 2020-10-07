@@ -1,8 +1,7 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/components.button-base";
-@import "../../../assets/partials/base.themes";
+@import "../button/button.base.scss";
 
 :host::ng-deep {
   $filter-tag-height--medium: 28px;

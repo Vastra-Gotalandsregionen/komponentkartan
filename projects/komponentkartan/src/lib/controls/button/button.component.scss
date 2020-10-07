@@ -1,8 +1,8 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/components.button-base";
-@import "../../../assets/partials/base.themes";
+@import "./button.base.scss";
+@import "../../../assets/partials/base.themify.scss";
 
 @mixin button-enabling--secondary($name, $color) {
   @keyframes #{$name} {
@@ -62,8 +62,10 @@
     }
 
     &.button--secondary {
-      @extend .color--primary;
-      @extend .border-color--primary;
+      @include themify($themes) {
+        color: themed('primaryColor');
+        border-color: themed('primaryColor');
+      }
       background-color: $text-color--light;
       line-height: 28px;
       border-width: 1px;
@@ -79,7 +81,9 @@
       }
 
       &:hover:not(.button--disabled) {
-        @extend .background-color--primary;
+        @include themify($themes) {
+          background-color: themed('primaryColor');
+        }
         color: $text-color--light;
         transition: background-color 0.5s ease, color 0.5s ease;
       }
@@ -106,7 +110,9 @@
     }
 
     &.button--discreet {
-      @extend .color--primary;
+      @include themify($themes) {
+        color: themed('primaryColor');
+      }
       border-color: transparent;
       background-color: transparent;
       line-height: 28px;
@@ -127,7 +133,9 @@
 
       &:hover:not(.button--disabled),
       &:focus:not(.button--disabled) {
-        @extend .background-color--primary-dimmed;
+        @include themify($themes) {
+          background-color: themed('primaryColorDimmed');
+        }
         border-color: $primary-color--default-dimmed;
         transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
       }

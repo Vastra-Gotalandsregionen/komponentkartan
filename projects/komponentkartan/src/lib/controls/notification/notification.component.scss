@@ -1,6 +1,6 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify.scss";
 
 :host {
   display: flex;
@@ -43,13 +43,19 @@
     background: $secondary-color--error;
   }
   &.primary:before {
-    @extend .background-color--primary;
+    @include themify($themes) {
+      background-color: themed('primaryColor');
+    }
   }
   &.secondary:before {
-    @extend .background-color--secondary;
+    @include themify($themes) {
+      background-color: themed('secondaryColor');
+    }
   }
   &.dimmed:before {
-    @extend .background-color--primary-dimmed;
+    @include themify($themes) {
+      background-color: themed('primaryColorDimmed');
+    }
   }
   &.light:before {
     background: $text-color--light;

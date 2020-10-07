@@ -2,7 +2,11 @@
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
 @import "../../../assets/partials/objects.images";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify";
+
+// @include theme(background-color);
+// @include theme(border-left-color);
+
 
 :host {
   .dropdown-select {
@@ -119,11 +123,19 @@
         }
 
         .dropdown-select__header__button {
-          @extend .background-color--primary;
+          // @extend .background-color--primary;
+          @include themify($themes) {
+            background-color: themed('primaryColor');
+          }
+
           transition: all 0.6s linear;
 
           .dropdown-select__header__button__icon {
-            @extend .bg-image-icon-chevron-inverted;
+            background: transparent map-get($imagesBase64, 'bg-image-icon-chevron') center no-repeat;
+            background-size: 40%;
+            width: 36px;
+            height: 30px;
+
 
             .icon {
               display: block;
@@ -149,12 +161,15 @@
         cursor: default;
 
         &::before {
-          @extend .bg-image-menu-arrow;
+          // @extend .bg-image-menu-arrow;
+          background: transparent map-get($imagesBase64, 'bg-image-menu-arrow') center no-repeat;
+          width: 16px;
+          height: 21px;
           content: "";
           position: absolute;
           display: inline-block;
           z-index: $layer-four;
-          top: -17px;
+          top: -16px;
           left: 20px;
         }
 
@@ -207,7 +222,10 @@
               padding-left: $margin--regular - 4px;
               border-left-width: 4px;
               border-left-style: solid;
-              @extend .border-left-color--primary;
+              // @extend .border-left-color--primary;
+              @include themify($themes) {
+                border-left-color: themed('primaryColor');
+              }
             }
           }
         }
@@ -243,7 +261,10 @@
               padding-left: $margin--regular - 4px;
               border-left-width: 4px;
               border-left-style: solid;
-              @extend .border-left-color--primary;
+              @include themify($themes) {
+                border-left-color: themed('primaryColor');
+              }
+              // @extend .border-left-color--primary;
             }
 
             .dropdown-select__menu__items__item__content-wrapper {

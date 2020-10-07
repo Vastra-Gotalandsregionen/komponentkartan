@@ -1,8 +1,38 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify";
 @import "../../../assets/partials/objects.images";
+
+:host::ng-deep {
+  .menu__header {
+    @include themify($themes) {
+      border-left-color: themed('primaryColor');
+    }
+  }
+  .menu__footer {
+    @include themify($themes) {
+      border-left-color: themed('secondaryColor');
+    }
+  }
+  .menu__item {
+    @include themify($themes) {
+      border-left-color: themed('secondaryColor');
+    }
+    &:hover:not(.menu__item--disabled) {
+      @include themify($themes) {
+        border-left-color: themed('primaryColor');
+      }
+    }
+    &.menu__item--active {
+      @include themify($themes) {
+        border-left-color: themed('primaryColor');
+        background-color: themed('primaryColorDimmed');
+      }
+    }
+  }
+}
+
 
 ::ng-deep {
   vgr-menu.menu {
@@ -13,8 +43,8 @@
     background: white;
     color: $menu-text-color;
     .menu__header {
-      @extend .border-left-color--primary;
-      border-left: $menu-border-width--small solid;
+      border-left-width: $menu-border-width--small;
+      border-left-style: solid;
       padding-left: 0px;
       margin: 0;
       min-height: $menu-header-height--small;
@@ -22,7 +52,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      cursor: pointer; // @extend .border-left-color--primary;
+      cursor: pointer;
       .menu__header__title {
         font-size: $menu-header-font-size--small;
         font-weight: bold;
@@ -44,18 +74,8 @@
       height: 100%;
       width: 100%;
       flex-grow: 1;
-      @extend .border-left-color--secondary;
-      border-left: $menu-border-width--small solid;
-    }
-    &:hover {
-      .menu__item {
-        &.menu__item--active {
-          @extend .border-left-color--secondary;
-          &:hover {
-            @extend .border-left-color--primary;
-          }
-        }
-      }
+      border-left-width: $menu-border-width--small;
+      border-left-style: solid;
     }
     .submenu {
       .menu__item {
@@ -79,15 +99,6 @@
           color: $text-color--default;
         }
       }
-      .menu__item__minus {
-        @extend .bg-image-icon-minus;
-        background-size: 9px 26px;
-        background-repeat: no-repeat;
-        background-position-x: center;
-      }
-      .menu__item__plus {
-        @extend .bg-image-icon-plus;
-      }
       &.submenu--child-selected {
         >.menu__item a {
           font-weight: bold;
@@ -98,7 +109,6 @@
   }
 
   .menu__item {
-    @extend .border-left-color--secondary;
     position: relative;
     border-left: $menu-border-width--small solid;
     padding-left: $margin--slim;
@@ -129,11 +139,10 @@
       font-weight: inherit;
     }
     &:focus {
-      outline: 0; // z-index: 999;
+      outline: 0;
       box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
     }
     &:hover:not(.menu__item--disabled) {
-      @extend .border-left-color--primary;
       cursor: pointer;
       font-weight: bold;
       a {
@@ -141,8 +150,6 @@
       }
     }
     &.menu__item--active {
-      @extend .border-left-color--primary;
-      @extend .background-color--primary-dimmed;
       font-weight: bold;
       letter-spacing: $menu-text-font-size--small-letter-spacing-bold;
     }
@@ -161,9 +168,9 @@
       display: block;
       height: 1px;
       background-color: #dbdbdb;
-      &:hover {
-        @extend .border-left-color--secondary;
-      }
+      // &:hover {
+      //   // @extend .border-left-color--secondary;
+      // }
     }
     .menu__item--notification {
       height: 21px;
@@ -242,10 +249,10 @@
   }
 
   @media screen and (min-width: $desktop-width--medium) {
-    .menu {
+    vgr-menu.menu {
       .menu__header {
         padding-left: 0px;
-        border-left: $menu-border-width--medium solid $primary-color--default;
+        border-left-width: $menu-border-width--medium;
         min-height: $menu-header-height--medium;
         max-height: $menu-header-height--medium;
         .menu__header__title {
@@ -282,7 +289,7 @@
         }
       }
       .menu__footer {
-        border-left: $menu-border-width--medium solid;
+        border-left-width: $menu-border-width--medium;
       }
     }
   }

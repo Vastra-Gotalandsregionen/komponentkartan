@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectableItem, ModalService } from 'vgr-komponentkartan';
+import { ModalService, SelectableItem } from '../../../projects/komponentkartan/src/lib';
+
 
 @Component({
   selector: 'app-theming',

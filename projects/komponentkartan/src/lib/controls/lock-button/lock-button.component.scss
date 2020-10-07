@@ -1,7 +1,6 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/_base.themes.scss";
-@import "../../../assets/partials/_components.button-base.scss";
+@import "../button/button.base.scss";
 
 :host::ng-deep {
   .lock-button {

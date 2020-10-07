@@ -1,21 +1,10 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify.scss";
 @import "../../../assets/partials/objects.images";
-
 
 /* The small arrow indicating that there is a drop down menu below */
 :host::ng-deep {
-  .header-menu-indicator {
-    color: white;
-    align-self: flex-end;
-    padding-bottom: 22px;
-    padding-left: 5px;
-    &:before {
-        @extend .bg-image-icon-arrow-white;
-    }
-  }
-
 
   /* Main container for the header menu */
 
@@ -100,7 +89,9 @@
   /* Left side line, indicating that this element is hovered or active. Accessed by javascript*/
 
   .header-menu-item--marked {
-    @extend .border-left-color--primary;
+    @include themify($themes) {
+      border-left-color: themed('primaryColor');
+    }
     border-left-width: 4px;
     border-left-style: solid;
     font-weight: bold;
@@ -110,17 +101,6 @@
     font-weight: bold;
   }
 
-  .header-menu-item__minus {
-    @extend .bg-image-icon-minus;
-    background-size: 9px 26px;
-    background-repeat: no-repeat;
-    background-position-x: center;
-    margin-top: 7px;
-  }
-
-  .header-menu-item__plus {
-    @extend .bg-image-icon-plus;
-  }
   /* The title row of an expandable menu */
 
   .header-menu__submenu-header {
@@ -170,19 +150,23 @@
     }
   }
 
+  .menu__item {
+    &:hover:not(.menu__item--disabled) {
+      @include themify($themes) {
+        border-left-color: themed('primaryColor');
+      }
+    }
+    &.menu__item--active {
+      @include themify($themes) {
+        border-left-color: themed('primaryColor');
+        background-color: themed('primaryColorDimmed');
+      }
+    }
+  }
+
+
   @media screen and (min-width: $desktop-width--medium) {
 
-
-    .header-menu-item__plus {
-
-    height: 15px;
-    width: 15px;
-
-  }
-
-  .header-menu-item__minus {
-    margin-top: 9px;
-  }
 
     /* Main container for the header menu */
     .header-menu {

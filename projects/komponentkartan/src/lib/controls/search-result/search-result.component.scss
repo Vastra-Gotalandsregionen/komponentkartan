@@ -2,7 +2,7 @@
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
 @import "../../../assets/partials/objects.images";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify.scss";
 
 ::ng-deep {
   .search-result-wrapper {
@@ -52,12 +52,15 @@
     display: none;
     cursor: default;
     &:before {
-      @extend .bg-image-menu-arrow;
+      // @extend .bg-image-menu-arrow;
+      background: transparent map-get($imagesBase64, 'bg-image-menu-arrow') center no-repeat;
+      width: 16px;
+      height: 21px;
       content: "";
       position: absolute;
       display: inline-block;
       z-index: $layer-two;
-      margin-top: -31px;
+      top: -16px;
       left: 20px;
     }
     a {
@@ -94,7 +97,9 @@
             border-left-style: solid;
             font-weight: bold;
             letter-spacing: $font-size--small-letter-spacing-bold;
-            @extend .border-left-color--primary;
+            @include themify($themes) {
+              border-left-color: themed('primaryColor');
+            }
           }
         }
         &:last-child {
@@ -149,7 +154,6 @@
       }
     }
     .search-results {
-      //max-height: $search-results-height--medium;
       .search-results__items {
         max-height: calc(#{$search-results-height--medium} - #{$margin--fat});
       }

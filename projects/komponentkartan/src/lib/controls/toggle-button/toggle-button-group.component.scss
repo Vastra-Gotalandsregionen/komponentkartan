@@ -1,7 +1,7 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify.scss";
 
 :host::ng-deep {
 
@@ -44,7 +44,9 @@
       border-right-width: 1px;
       padding-left: 18px;
       padding-right: 18px;
-      @extend .border-right-color--primary;
+      @include themify($themes) {
+        border-right-color: themed('primaryColor');
+      }
       border-top-right-radius: 1px;
       border-bottom-right-radius: 1px;
     }

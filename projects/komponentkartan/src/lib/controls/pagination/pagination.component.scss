@@ -1,7 +1,7 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/base.themes";
+@import "../../../assets/partials/base.themify.scss";
 
 :host::ng-deep {
   .pagination {
@@ -16,7 +16,9 @@
       vertical-align: baseline;
       text-align: center;
       cursor: pointer;
-      @extend .color--primary;
+      @include themify($themes) {
+        color: themed('primaryColor');
+      }
       background-color: transparent;
       border-color: transparent;
       border-width: 1px;
@@ -35,15 +37,21 @@
       }
       &:hover:not(.page--active):not(.button--disabled),
       &:focus:not(.page--active):not(.button--disabled) {
-        @extend .background-color--primary-dimmed;
+        @include themify($themes) {
+          background-color: themed('primaryColorDimmed');
+        }
         border-color: $primary-color--default-dimmed;
-        @extend .color--primary;
+        @include themify($themes) {
+          color: themed('primaryColor');
+        }
       }
       &:focus {
         outline: $focus-outline-width solid $focus-color;
       }
       &.page--active {
-        @extend .background-color--primary;
+        @include themify($themes) {
+          background-color: themed('primaryColor');
+        }
         color: $text-color--light;
       }
       &.button--disabled {

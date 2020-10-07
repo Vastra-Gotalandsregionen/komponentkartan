@@ -2,7 +2,7 @@
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
 
-:host::ng-deep {
+::ng-deep {
   .sidebar-menu {
     position: fixed;
     z-index: $layer-three;
