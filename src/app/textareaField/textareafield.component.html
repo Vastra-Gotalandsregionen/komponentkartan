@@ -8,9 +8,9 @@
     </p>
     <br>
     <form [formGroup]="form">
-      <vgr-textarea [width]="'70%'" [height]="'20px'" [value]="initValue" [placeholder]="'Vänligen fyll i text om du vill'" [readonly]="isReadonly"></vgr-textarea>
+      <vgr-textarea [width]="'70%'" [height]="'20px'" [value]="initValue" [placeholder]="'Vänligen fyll i text om du vill'" [readonly]="true"></vgr-textarea>
 
-      <vgr-textarea #myTextarea [readonly]="isReadonly" formControlName="control1"></vgr-textarea>
+      <vgr-textarea #myTextarea formControlName="control1" [readonly]="isReadonly"></vgr-textarea>
     </form>
 
     <vgr-button (click)="setFocus()">Sätt fokus</vgr-button>

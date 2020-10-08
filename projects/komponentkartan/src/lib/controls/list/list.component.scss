@@ -220,7 +220,7 @@
     }
   }
 
-  .list-item--expanded .icon {
+  .list-item--expanded .list-item__header_wrapper > vgr-icon >.icon {
     transform: rotate(-180deg) !important;
   }
 

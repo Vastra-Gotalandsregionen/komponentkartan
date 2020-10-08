@@ -1,26 +1,28 @@
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/base.themify.scss";
 
-
-.icon {
-  @include themify($themes) {
-    color: themed('primaryColor');
-  }
-  outline: none;
-  &.icon-color--text {
-    color: $text-color--default;
-  }
-  &.icon-color--light {
-    color: $text-color--light;
-  }
-  &.icon-color--success {
-    color: $primary-color--success;
-  }
-  &.icon-color--error {
-    color: $primary-color--error;
-  }
-  &.icon--disabled {
-    color: $control-color--disabled;
-    cursor: default;
+:host::ng-deep {
+  .icon {
+    @include themify($themes) {
+      color: themed('primaryColor');
+    }
+    outline: none;
+    &.icon-color--text {
+      color: $text-color--default;
+    }
+    &.icon-color--light {
+      color: $text-color--light;
+    }
+    &.icon-color--success {
+      color: $primary-color--success;
+    }
+    &.icon-color--error {
+      color: $primary-color--error;
+    }
+    &.icon--disabled {
+      color: $control-color--disabled;
+      cursor: default;
+    }
   }
 }
+
