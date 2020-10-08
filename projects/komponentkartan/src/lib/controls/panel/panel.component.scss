@@ -72,10 +72,8 @@
   vgr-panel-container:last-of-type {
     padding-bottom: 0px;
   }
-}
 
-@media screen and (min-width: $desktop-width--medium) {
-  ::ng-deep {
+  @media screen and (min-width: $desktop-width--medium) {
     .panel {
       padding-left: $margin--fat;
       padding-right: $margin--fat;

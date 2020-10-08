@@ -10,19 +10,19 @@
   */
 
 :host::ng-deep {
-  &.theme--blue {
-    background-image: map-get($imagesBase64, 'bg-image-vgr-header');
-  }
-  &.theme--red {
-    background-image: map-get($imagesBase64, 'bg-image-vgr-header');
-  }
-  &.theme--green .header {
-    background-image: map-get($imagesBase64, 'bg-image-vgr-header');
-  }
-  &.theme--pinkie {
-    background-image: map-get($imagesBase64, 'bg-image-pinkie-header');
-    background-position: right center;
-  }
+  // &.theme--blue {
+  //   background-image: map-get($imagesBase64, 'bg-image-vgr-header');
+  // }
+  // &.theme--red {
+  //   background-image: map-get($imagesBase64, 'bg-image-vgr-header');
+  // }
+  // &.theme--green .header {
+  //   background-image: map-get($imagesBase64, 'bg-image-vgr-header');
+  // }
+  // &.theme--pinkie {
+  //   background-image: map-get($imagesBase64, 'bg-image-pinkie-header');
+  //   background-position: right center;
+  // }
 
   .header {
     position: fixed;
@@ -39,8 +39,14 @@
     padding-left: 16px;
     @include themify($themes) {
       background-color: themed('primaryColor');
+      background-image: map-get($imagesBase64, 'bg-image-vgr-header');
     }
     transition: background-color ease-in 0.3s;
+
+    .theme--pinkie & {
+      background-image: map-get($imagesBase64, 'bg-image-pinkie-header');
+      background-position: right center;
+    }
 
     &.header--hide-swosh {
       background-image: none;

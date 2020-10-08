@@ -104,10 +104,10 @@
     margin-left: $margin--regular;
     opacity: 0;
     transition: opacity 0.6s linear;
+  }
 
-    .card-section:not(.card-section--readonly) & {
-      opacity: 1;
-    }
+  .card-section:not(.card-section--readonly) .card-section__header__icon {
+    opacity: 1;
   }
 
   .card-section__header__expander {
