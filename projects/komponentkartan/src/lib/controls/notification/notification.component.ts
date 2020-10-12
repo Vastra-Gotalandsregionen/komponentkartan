@@ -7,14 +7,33 @@ import { toggleFadedState } from '../../animation';
   animations: [toggleFadedState]
 })
 export class NotificationComponent implements OnInit {
+  /**
+   * Option to use Notification as standalone.
+   * If true, no margin will be set or any border on parent-element.
+   * This is for use outside of <vgr-grid />
+   */
   @Input() standalone = false;
   /**
+   * This is deprecated and you're encouraged to use "type" instead.
+   *
    * @deprecated
    */
-  @Input() borderColor: string = null;
-  @Input() @HostBinding('attr.class') type: string = null;
+  @Input() borderColor: 'success' | 'error' | 'warning' | 'info' = null;
+  /**
+   * Set icon and background-color of notification
+   */
+  @Input() @HostBinding('attr.class') type: 'success' | 'error' | 'warning' | 'info'  = null;
+  /**
+   * Set width of notification
+   */
   @Input() @HostBinding('style.width') width = null;
+  /**
+   * Set min-height of notification.
+   */
   @Input() @HostBinding('style.min-height') height = null;
+  /**
+   * Remove icon that's otherwise automatically added
+   */
   @Input() @HostBinding('class.no-icon') noIcon = false;
 
   @HostBinding('class.list-notification') listNotification = false;
