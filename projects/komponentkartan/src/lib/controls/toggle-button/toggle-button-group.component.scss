@@ -4,83 +4,82 @@
 @import "../../../assets/partials/base.themify.scss";
 
 :host::ng-deep {
-
-.toggle-button-group {
-  margin-bottom: -10px;
-  width: 100%;
-  display: inline-flex;
-  justify-content: space-around;
-  & > * {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
-  .toggle-button {
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 0;
-    border-right-width: 0;
-
-    &:focus:not(:active) {
-      z-index: $layer-three;
-    }
-    &.button--secondary {
-      border-right-width: 0;
-      padding-left: 17px;
-      padding-right: 18px;
-    }
-
-    > span > span{
-      white-space: nowrap;
-    }
-  }
-  :first-child .toggle-button-container {
-    .toggle-button {
-      border-top-left-radius: 1px;
-      border-bottom-left-radius: 1px;
-    }
-  }
-  :last-child .toggle-button-container {
-    .toggle-button {
-      border-right-width: 1px;
-      padding-left: 18px;
-      padding-right: 18px;
-      @include themify($themes) {
-        border-right-color: themed('primaryColor');
-      }
-      border-top-right-radius: 1px;
-      border-bottom-right-radius: 1px;
-    }
-  }
-}
-
-@media screen and (min-width: $desktop-width--medium) {
   .toggle-button-group {
-    margin-bottom: -15px;
+    margin-bottom: -10px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    & > * {
+      flex-grow: 1;
+      flex-basis: 0;
+    }
     .toggle-button {
-      margin-bottom: 15px;
-      padding-left: 22px;
-      padding-right: 22px;
-      &.button--secondary{
-        padding-left: 21px;
-        padding-right: 22px;
+      width: 100%;
+      margin-bottom: 10px;
+      border-radius: 0;
+      border-right-width: 0;
+
+      &:focus:not(:active) {
+        z-index: $layer-three;
+      }
+      &.button--secondary {
+        border-right-width: 0;
+        padding-left: 17px;
+        padding-right: 18px;
+      }
+
+      > span > span {
+        white-space: nowrap;
+      }
+    }
+    :first-child .toggle-button-container {
+      .toggle-button {
+        border-top-left-radius: 1px;
+        border-bottom-left-radius: 1px;
       }
     }
     :last-child .toggle-button-container {
       .toggle-button {
-        padding-left: 22px;
-        padding-right: 22px;
+        border-right-width: 1px;
+        padding-left: 18px;
+        padding-right: 18px;
+        @include themify($themes) {
+          border-right-color: themed("primaryColor");
+        }
+        border-top-right-radius: 1px;
+        border-bottom-right-radius: 1px;
       }
     }
   }
 
-  .toggle-button {
-    font-size: $font-size--medium;
-    padding-left: 22px;
-    padding-right: 22px;
-    &.button--secondary{
-      padding-left: 21px;
-      padding-right: 21px;
+  @media screen and (min-width: $desktop-width--medium) {
+    .toggle-button-group {
+      margin-bottom: -15px;
+      .toggle-button {
+        margin-bottom: 15px;
+        padding-left: 22px;
+        padding-right: 22px;
+        &.button--secondary {
+          padding-left: 21px;
+          padding-right: 22px;
+        }
+      }
+      :last-child .toggle-button-container {
+        .toggle-button {
+          padding-left: 22px;
+          padding-right: 22px;
+        }
+      }
+    }
+
+    .toggle-button {
+      font-size: $font-size--medium;
+      padding-left: 22px;
+      padding-right: 22px;
+      &.button--secondary {
+        padding-left: 21px;
+        padding-right: 21px;
+      }
     }
   }
-}
 }

@@ -54,10 +54,6 @@
       margin-top: -4px;
     }
   }
-}
-
-
-:host::ng-deep {
 
   .table-header:focus,
   .table-row:focus {
@@ -107,6 +103,45 @@
     padding-bottom: 0px;
   }
 
+  @media screen and (min-width: $desktop-width--medium) {
+    .table-header {
+      padding-left: $margin--fat !important;
+      padding-right: $margin--fat;
+
+      &.expandable{
+        &:hover {
+          letter-spacing: $font-size--medium-letter-spacing-bold;
+        }
+      }
+
+      &.expanded {
+        letter-spacing: $font-size--medium-letter-spacing-bold;
+      }
+
+      .table-chevron {
+        right: $margin--fat;
+        top: 2px;
+      }
+    }
+
+    .table__column {
+      font-size: $font-size--medium;
+      padding-right: $margin--fat;
+      &:last-child{
+        padding-right: 0px;
+      }
+
+    }
+
+    .table-content {
+      .table-row {
+        display: block;
+        padding-left: $margin--fat;
+        padding-right: $margin--fat;
+      }
+    }
+  }
+
   .table-content {
     .table-row, .table {
       // removed to resolve https://www.pivotaltracker.com/story/show/164325264
@@ -125,47 +160,6 @@
               }
             }
           }
-        }
-      }
-    }
-  }
-
-  @media screen and (min-width: $desktop-width--medium) {
-    .table {
-      .table-header {
-        padding-left: $margin--fat !important;
-        padding-right: $margin--fat;
-
-        &.expandable{
-          &:hover {
-            letter-spacing: $font-size--medium-letter-spacing-bold;
-          }
-        }
-
-        &.expanded {
-          letter-spacing: $font-size--medium-letter-spacing-bold;
-        }
-
-        .table-chevron {
-          right: $margin--fat;
-          top: 2px;
-        }
-      }
-
-      .table__column {
-        font-size: $font-size--medium;
-        padding-right: $margin--fat;
-        &:last-child{
-          padding-right: 0px;
-        }
-
-      }
-
-      .table-content {
-        .table-row {
-          display: block;
-          padding-left: $margin--fat;
-          padding-right: $margin--fat;
         }
       }
     }
