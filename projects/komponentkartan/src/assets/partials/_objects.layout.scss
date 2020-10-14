@@ -106,6 +106,22 @@
   @include flex-column($i);
 }
 
+.column--align-left {
+  text-align: left;
+}
+
+.column--align-right {
+  text-align: right;
+}
+
+.column--align-center {
+  text-align: center;
+
+  > * {
+    margin-left: auto;
+  }
+}
+
 .bordered {
   border: 1px solid $border-color;
 }

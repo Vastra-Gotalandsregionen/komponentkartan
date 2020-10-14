@@ -471,22 +471,6 @@
     align-items: baseline;
   }
 
-  .column--align-left {
-    text-align: left;
-  }
-
-  .column--align-right {
-    text-align: right;
-  }
-
-  .column--align-center {
-    text-align: center;
-
-    > * {
-      margin-left: auto;
-    }
-  }
-
   @media screen and (min-width: $desktop-width--medium) {
     vgr-list {
       margin: -$margin--fat;

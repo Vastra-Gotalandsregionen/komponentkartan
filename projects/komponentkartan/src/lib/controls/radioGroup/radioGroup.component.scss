@@ -128,7 +128,7 @@
   }
 
   @media screen and (min-width: $desktop-width--medium) {
-    .radio-group {
+    &.radio-group {
       &.vertical {
         display: inline-flex;
         .radio-button {

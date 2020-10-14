@@ -5,7 +5,7 @@
  * Instead, we will use the "label" that is associated with our textbox.
  * It will contain all of the checkbox graphics and behaviour */
 
- vgr-checkbox .checkbox {
+:host .checkbox {
   position: relative;
   align-items: center;
   display: flex !important;
