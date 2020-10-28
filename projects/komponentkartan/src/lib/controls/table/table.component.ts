@@ -4,6 +4,7 @@ import { toggleExpandedState } from '../../animation';
 @Component({
   selector: 'vgr-table',
   templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss'],
   animations: [ toggleExpandedState  ]
 })
 export class TableComponent {

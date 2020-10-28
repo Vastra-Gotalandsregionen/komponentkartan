@@ -1,0 +1,62 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/objects.images";
+
+:host {
+  .back-to-top {
+    background-image: map-get($imagesBase64, 'bg-image-back-to-top');
+    width: 51px !important;
+    height: 51px !important;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px;
+    right: 2px;
+    cursor: pointer;
+    background-position: center;
+    background-color: transparent !important;
+    opacity: 0;
+    pointer-events: none;
+    &:hover {
+      border: $focus-outline-width solid $focus-color;
+      transition: border-color 0.5s ease;
+    }
+    &:focus {
+      border: $focus-outline-width solid $focus-color;
+    }
+    z-index: $layer-five;
+    transition: pointer-events 0s,
+    opacity 0.4s;
+    &--visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+
+::ng-deep {
+  .back-to-top--inline .back-to-top {
+    position: relative !important;
+    display: block !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    z-index: 0;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+  @media screen and (min-width: $desktop-width--small) {
+    .back-to-top {
+      //display: none;
+      left: calc(#{$content-width--small} + #{$nav-width--small} - 10px);
+      cursor: pointer;
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .back-to-top {
+      //display: none;
+      left: calc(#{$content-width--medium} + #{$nav-width--medium} - 10px);
+      cursor: pointer;
+    }
+  }

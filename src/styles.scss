@@ -1,4 +1,6 @@
 @import 'partials/_settings.colors.scss';
+@import "partials/_settings.sizes.scss";
+
 .input-fields {
   li {
     list-style-type: circle;
@@ -23,10 +25,6 @@
     text-align: left;
     padding-left: 10px;
     padding-right: 10px;
-  }
-  th:first-child,
-  td:first-child {
-    //width: 200px;
   }
   tr:nth-child(even) {
     background-color: rgba(0, 0, 0, .03);
@@ -74,8 +72,8 @@ code {
 
 .header--inline {
   .header {
-    position: relative;
-    z-index: auto;
+    position: relative !important;
+    z-index: auto !important;
   }
 }
 
@@ -83,4 +81,150 @@ code {
   background-image: url('https://www.quickdata.ae/wp-content/uploads/Quickdata-Network-Logo.png');
   width: 250px;
   height: 50px;
+}
+
+
+.komponentkarta-components {
+  background-color: $background-color--content;
+  position: relative;
+  top: 97px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $margin--regular;
+  padding-top: $margin--fat;
+  transition: top 0.5s ease;
+}
+
+.komponentkarta-component {
+  margin-top: $margin--fat;
+}
+
+.komponentkarta-component__code {
+  display: none;
+}
+
+.with-classes {
+  cursor: pointer;
+}
+
+.class-description {
+  position: absolute;
+  background: $background-color--default;
+  border-radius: 5px;
+  border: 1px solid $border-color--light;
+  font-family: Courier New, Courier, monospace;
+  color: black;
+  display: block;
+  font-size: 14px;
+  font-style: italic;
+  display: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-left: 3px;
+  padding-left: 3px;
+  left: $margin--fat;
+}
+
+.markup-example {
+  background: $background-color--default;
+  font-family: Consolas, Courier New, Courier, monospace;
+  font-size: 12px;
+  border: 2px solid $border-color;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.color-sample {
+  display: block;
+  width: 600px;
+  height: 50px;
+  padding-left: $margin--slim;
+  padding-right: $margin--slim;
+  margin-top: 0px;
+  &::first-child {
+      margin-top: $margin--slim;
+  }
+}
+
+.color-sample__name {
+  float: left;
+}
+
+.color-sample__code {
+  float: right;
+}
+
+.control-example {
+  border: 1px solid $border-color;
+  padding: $margin--slim;
+  width: 300px;
+}
+
+.formatmall__header {
+  &:after {
+      content: " (1366px - 1458px)";
+  }
+}
+
+.font-example {
+  width: 900px;
+  &:after {
+      content: "Text: 16 px, regular, radavstånd 1.5, #151515";
+  }
+}
+
+strong.font-example:after {
+  content: "Text: 16 px, bold, radavstånd 1.5, #151515";
+}
+
+.text--white.font-example:after {
+  content: "Text vit: 16 px, bold, radavstånd 1.5, #151515";
+}
+
+h1.font-example:after {
+  content: "Rubrik 1, ANVÄNDARE: 25 px, regular, radavstånd 1.5, #151515";
+}
+
+h2.font-example:after {
+  content: "Rubrik 2: 18 px, bold, radavstånd 1.5, #151515";
+}
+
+h3.font-example:after {
+  content: "Rubrik 3: 18 px, regular, radavstånd 1.5, #151515";
+}
+
+h4.font-example:after {
+  content: "Rubrik 4: 16 px, bold, radavstånd 1.5, #151515";
+}
+
+@media screen and (min-width: $desktop-width--medium) {
+  .formatmall__header {
+      &:after {
+          content: " (1459px - )";
+      }
+  }
+  .font-example {
+      width: 900px;
+      &:after {
+          content: "Text: 18 px, regular, radavstånd 1.5, #151515";
+      }
+  }
+  strong.font-example:after {
+      content: "Text: 18 px, bold, radavstånd 1.5, #151515";
+  }
+  .text--white.font-example:after {
+      content: "Text vit: 18 px, bold, radavstånd 1.5, #151515";
+  }
+  h1.font-example:after {
+      content: "Rubrik 1, ANVÄNDARE: 30 px, regular, radavstånd 1.5, #151515";
+  }
+  h2.font-example:after {
+      content: "Rubrik 2: 20 px, bold, radavstånd 1.5, #151515";
+  }
+  h3.font-example:after {
+      content: "Rubrik 3: 20 px, regular, radavstånd 1.5, #151515";
+  }
+  h4.font-example:after {
+      content: "Rubrik 4: 18 px, bold, radavstånd 1.5, #151515";
+  }
 }

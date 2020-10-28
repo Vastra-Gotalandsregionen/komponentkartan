@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 7.6.0 (2020-10-28)
+- Changed all components to use 'Component styles' and remade how theming works in the project.
+
 # 7.5.2 (2020-10-23)
 - Removed a unnecessary console log
 

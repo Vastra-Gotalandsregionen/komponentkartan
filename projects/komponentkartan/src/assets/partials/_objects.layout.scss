@@ -73,6 +73,55 @@
   margin-left: auto;
 }
 
+.flex-column {
+  overflow: hidden;
+  display: inline-block;
+}
+
+@mixin flex-column($number) {
+  .flex-column--#{$number} {
+    min-width: 53px * $number;
+    width: 53px * $number;
+
+    &:last-child() {
+      min-width: (53px * $number) - $margin--fat;
+      width: (53px * $number) - $margin--fat;
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .flex-column--#{$number} {
+      min-width: 55.5px * $number;
+      width: 55.5px * $number;
+
+      &:last-child() {
+        min-width: (55.5px * $number) - $margin--fat;
+        width: (55.5px * $number) - $margin--fat;
+      }
+    }
+  }
+}
+
+@for $i from 1 through 20 {
+  @include flex-column($i);
+}
+
+.column--align-left {
+  text-align: left;
+}
+
+.column--align-right {
+  text-align: right;
+}
+
+.column--align-center {
+  text-align: center;
+
+  > * {
+    margin-left: auto;
+  }
+}
+
 .bordered {
   border: 1px solid $border-color;
 }

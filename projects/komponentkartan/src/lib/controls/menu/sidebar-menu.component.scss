@@ -1,0 +1,24 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+
+::ng-deep {
+  .sidebar-menu {
+    position: fixed;
+    z-index: $layer-three;
+    top: $header-height;
+    height: calc(100vh - #{$header-height});
+    width: $nav-width--small;
+    background: white;
+    border-right: solid 1px $border-color;
+    .ps-content {
+      height: 100%;
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .sidebar-menu {
+      width: $nav-width--medium;
+    }
+  }
+}

@@ -3,7 +3,8 @@ import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-per
 
 @Component({
   selector: 'vgr-search-result',
-  templateUrl: './search-result.component.html'
+  templateUrl: './search-result.component.html',
+  styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnChanges, OnInit {
 

@@ -1,0 +1,52 @@
+ @import "_objects.colors.scss";
+
+$theme-map: null;
+$themes: (
+  'neutral': (
+    primaryColor: $primary-color--default,
+    secondaryColor: $secondary-color--default,
+    primaryColorDimmed: $primary-color--default-dimmed
+  ),
+  'blue': (
+    primaryColor: $primary-color--blue,
+    secondaryColor: $secondary-color--blue,
+    primaryColorDimmed: $primary-color--blue-dimmed
+  ),
+  'red': (
+    primaryColor: $primary-color--red,
+    secondaryColor: $secondary-color--red,
+    primaryColorDimmed: $primary-color--red-dimmed
+  ),
+  'green': (
+    primaryColor: $primary-color--green,
+    secondaryColor: $secondary-color--green,
+    primaryColorDimmed: $primary-color--green-dimmed
+  ),
+  'pinkie': (
+    primaryColor: $primary-color--pinkie,
+    secondaryColor: $secondary-color--pinkie,
+    primaryColorDimmed: $primary-color--pinkie-dimmed
+  ),
+);
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+
+@mixin themify($themes: $themes) {
+  @each $theme, $map in $themes {
+
+    .theme--#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+
+      @content;
+      $theme-map: null !global;
+    }
+
+  }
+}

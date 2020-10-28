@@ -1,0 +1,30 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../button/button.base.scss";
+
+:host::ng-deep {
+  $filter-tag-height--medium: 28px;
+  $filter-tag-height--small: 25px;
+  $filter-tag__close-icon-margin: 6px;
+
+  .filter-tag-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin-bottom: -10px;
+    .filter-tag {
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .filter-tag-group {
+      margin-bottom: -15px;
+      .filter-tag {
+        margin-right: 15px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

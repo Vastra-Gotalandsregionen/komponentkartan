@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'vgr-icon',
-  templateUrl: './icon.component.html'
+  templateUrl: './icon.component.html',
+  styleUrls: ['./icon.component.scss']
 })
 export class IconComponent {
   @Input() color = 'primary';

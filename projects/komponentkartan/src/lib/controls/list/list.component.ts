@@ -11,6 +11,7 @@ import { ListService } from './list.service';
 @Component({
   templateUrl: './list.component.html',
   selector: 'vgr-list',
+  styleUrls: ['./list.component.scss'],
   providers: [ListService],
   animations: [
     trigger('loadContent', [

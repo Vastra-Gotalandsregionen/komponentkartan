@@ -2,7 +2,8 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterVie
 
 @Component({
   selector: 'vgr-filter-tag',
-  templateUrl: './filter-tag.component.html'
+  templateUrl: './filter-tag.component.html',
+  styleUrls: ['./filter-tag.component.scss']
 })
 export class FilterTagComponent implements AfterViewInit {
   @Input() disabled = false;

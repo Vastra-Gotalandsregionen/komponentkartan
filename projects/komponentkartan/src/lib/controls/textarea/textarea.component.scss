@@ -1,0 +1,103 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+
+
+.textarea {
+  display: inline-block;
+  &-input {
+    line-height: $line-height;
+    display: block;
+    overflow: auto;
+    width: 100%;
+    top: 0px;
+    resize: none;
+    padding: 10px;
+    transition: border-color 0.6s linear;
+    &:focus {
+      outline: $focus-outline-width solid $focus-color;
+    }
+  }
+  &-validation {
+    max-height: none;
+    padding: $margin--slim;
+    padding-bottom: 0px;
+    margin-left: -$margin--slim;
+    margin-right: -$margin--slim;
+    &_status {
+      margin-top: 8px;
+      &__message {
+        max-width: calc(100% - 30px);
+        display: none;
+        vertical-align: middle;
+        margin-left: 4px;
+      }
+      &__icon {
+        display: none;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+:host {
+  &.readonly .textarea-input {
+    border-color: $background-color--content;
+    overflow: hidden;
+    cursor: text;
+    &::placeholder {
+      // Chrome, Firefox, Opera, Safari 10.1+
+      opacity: 0; // Firefox
+      transition: opacity 0.6s linear;
+    }
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      opacity: 0;
+      transition: opacity 0.6s linear;
+    }
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      opacity: 0;
+      transition: opacity 0.6s linear;
+    }
+  }
+
+
+  &.textarea-validation-error--active .textarea-validation,
+  &.textarea-validation-error--editing .textarea-validation {
+    padding-bottom: 8px;
+  }
+  &.textarea-validation-error--active .textarea-validation {
+    background-color: $secondary-color--error;
+    transition: background-color 0.3s linear;
+  }
+  &.textarea-validation-error--editing .textarea-validation {
+    background-color: $background-color--default;
+    transition: background-color 0.3s linear;
+  }
+  &.textarea-validation-error--fixed .textarea-validation {
+    &:after {
+      visibility: visible;
+    }
+  }
+
+  &.textarea-validation-error--active .textarea-validation_status__message,
+  &.textarea-validation-error--editing .textarea-validation_status__message {
+    display: inline-block;
+    color: $text-color--default;
+  }
+
+
+  &.textarea-validation-error--active .textarea-validation_status__icon ::ng-deep .icon {
+    color: $primary-color--error;
+  }
+  &.textarea-validation-error--editing .textarea-validation_status__icon ::ng-deep .icon {
+    color: $text-color--default;
+  }
+
+
+  &.textarea-validation-error--active .textarea-validation_status__icon,
+  &.textarea-validation-error--editing .textarea-validation_status__icon {
+    display: inline-block;
+  }
+}

@@ -5,6 +5,7 @@ import { trigger, state, animate, style, transition } from '@angular/animations'
 @Component({
   selector: 'vgr-loader',
   templateUrl: './loader.component.html',
+  styleUrls: ['./loader.component.scss'],
   animations: [
     trigger('fadeInOut', [
       state('true', style({

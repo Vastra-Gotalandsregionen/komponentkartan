@@ -1,0 +1,51 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+
+:host::ng-deep {
+  .page-header {
+    position: fixed;
+    z-index: $layer-page-header;
+    top: $header-height;
+    width: $content-width--small + 40px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    background-color: $background-color--default;
+    .page-header__block {
+      min-height: 52px;
+      width: $content-width--small;
+      padding: $margin--slim;
+      background-color: white;
+      .page-header__title {
+        float: right;
+        margin-left: 10px;
+        font-size: 25px;
+        text-transform: uppercase;
+        text-align: right;
+      }
+    }
+  }
+
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .page-header {
+      width: $content-width--medium + 40px;
+      .page-header__block {
+        width: $content-width--medium;
+        padding-left: $margin--fat;
+        padding-right: $margin--fat;
+      }
+    }
+  }
+
+
+
+  @media screen and (max-width: $desktop-width--small - 1px) {
+    .page-header {
+        position: relative;
+        top: 0;
+        z-index: $layer-one;
+    }
+  }
+}

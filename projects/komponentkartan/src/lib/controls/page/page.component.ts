@@ -6,6 +6,7 @@ import { PageHeaderHeightService } from '../../services/page-header-height.servi
 @Component({
   selector: 'vgr-page',
   templateUrl: './page.component.html',
+  styleUrls: ['./page.component.scss'],
   providers: [PageHeaderHeightService]
 })
 export class PageComponent implements OnInit, OnDestroy {
