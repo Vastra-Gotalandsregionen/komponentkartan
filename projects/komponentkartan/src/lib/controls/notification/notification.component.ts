@@ -19,11 +19,11 @@ export class NotificationComponent implements OnInit {
    *
    * @deprecated
    */
-  @Input() borderColor: 'success' | 'error' | 'warning' | 'info' = null;
+  @Input() borderColor: 'success' | 'error' | 'warning' | 'info' | 'comment' = null;
   /**
    * Set icon and background-color of notification
    */
-  @Input() @HostBinding('attr.class') type: 'success' | 'error' | 'warning' | 'info'  = null;
+  @Input() @HostBinding('attr.class') type: 'success' | 'error' | 'warning' | 'info' | 'comment'  = null;
   /**
    * Set width of notification
    */
