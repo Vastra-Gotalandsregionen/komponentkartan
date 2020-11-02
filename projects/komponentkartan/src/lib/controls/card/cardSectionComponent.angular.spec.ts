@@ -41,6 +41,9 @@ describe('[CardSectionComponent]', () => {
     it('readonly is set to true', () => {
       expect(component.readonly).toBe(true);
     });
+    it ('backgroundColor is default white', () => {
+      expect(component.backgroundColor).toBe('#FFFFFF');
+    });
     describe('and title is set', () => {
       beforeEach(() => {
         component.title = 'Section 1';
@@ -49,6 +52,16 @@ describe('[CardSectionComponent]', () => {
         it('title is displayed', () => {
           const header = rootElement.query(By.css('h2'));
           expect(header.nativeElement.innerText).toBe('Section 1');
+        });
+    });
+    describe('and backgroundColor is set', () => {
+      beforeEach(() => {
+        component.backgroundColor = '#f1eadc';
+        fixture.detectChanges();
+      }),
+        it('backgroundColor is displayed', () => {
+          const header = rootElement.query(By.css('.card-section__header'));
+          expect(header.nativeElement.style.backgroundColor).toBe('rgb(241, 234, 220)');
         });
     });
     describe('and header is clicked', () => {
