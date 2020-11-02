@@ -4,6 +4,7 @@ import { toggleExpandedState, toggleChevron } from '../../animation';
 @Component({
     selector: 'vgr-card-section',
     templateUrl: './cardSection.component.html',
+    styleUrls: ['./card.component.scss'],
     animations: [toggleExpandedState, toggleChevron]
 })
 export class CardSectionComponent {

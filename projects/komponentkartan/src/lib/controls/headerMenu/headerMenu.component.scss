@@ -1,0 +1,186 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/base.themify.scss";
+@import "../../../assets/partials/objects.images";
+
+/* The small arrow indicating that there is a drop down menu below */
+:host::ng-deep {
+
+  /* Main container for the header menu */
+
+  .header-menu {
+    position: absolute;
+    display: inline-block;
+    width: $header-menu-width-small;
+    top: 70px;
+    right: $margin--fat;
+    text-align: left; //This adds the small arrow on top of the menu
+    &:after,
+    &:before {
+        bottom: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    &:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #ffffff;
+        border-width: 4px;
+        left: 45%;
+    }
+  }
+
+
+  /* Area that triggers the menu to open. Accessed by javascript */
+
+  .header-menu__trigger {
+    cursor: pointer;
+  }
+
+
+  /* Header-menu state Hidden */
+
+  .header-menu--hidden {
+    display: none;
+  }
+
+
+  /* Container for the top-level menu items*/
+
+  .header-menu__content {
+    position: absolute;
+    background-color: $background-color--content;
+    min-width: $header-menu-width-small;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: $layer-two;
+    a {
+        color: $menu-text-color;
+        padding: 0px;
+        padding-left: $margin--regular;
+        text-decoration: none;
+        display: block;
+        border-bottom: none; //When this link is marked, push the contents closer to prevent moving menu items
+        &.header-menu-item--marked {
+            padding-left: 11px;
+        }
+    }
+  }
+
+
+  /* Divider between groups of related menu items*/
+
+  .header-menu-divider {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    height: 1px;
+    &:after {
+        content: '';
+        display: block;
+        border-bottom: 1px solid #dbdbdb; //margin-left: -10px;
+        opacity: 1;
+        transition: opacity 0.5ms ease;
+    }
+  }
+
+
+  /* Left side line, indicating that this element is hovered or active. Accessed by javascript*/
+
+  .header-menu-item--marked {
+    @include themify($themes) {
+      border-left-color: themed('primaryColor');
+    }
+    border-left-width: 4px;
+    border-left-style: solid;
+    font-weight: bold;
+  }
+
+  .header-menu-item--selected {
+    font-weight: bold;
+  }
+
+  /* The title row of an expandable menu */
+
+  .header-menu__submenu-header {
+    position: relative;
+    > vgr-icon .icon {
+        position: absolute;
+        right: 16px;
+        top: 6px;
+        transform: rotate(0deg);
+        transition: all ease 0.3s;
+    }
+    .header-menu-submenu--expanded & {
+        > vgr-icon .icon {
+            transform: rotate(-180deg);
+        }
+    }
+  }
+
+  .header-menu-item--header {
+    //An expanded submenu
+    &.header-menu-submenu--expanded {
+        .header-menu-submenu {
+            max-height: 500px;
+            transition: max-height 0.8s ease;
+            a {
+                opacity: 1;
+                transition: opacity 0.8s ease;
+            }
+        }
+    }
+  }
+
+
+  /* A submenu containing child items*/
+
+  .header-menu-submenu {
+    max-height: 0;
+    transition: max-height 0.5s ease;
+    overflow: hidden;
+    a {
+        opacity: 0;
+        transition: opacity 0.3s ease 0.2s;
+        padding-left: 25px;
+        &.header-menu-item--marked {
+            padding-left: 21px;
+        }
+    }
+  }
+
+  .menu__item {
+    &:hover:not(.menu__item--disabled) {
+      @include themify($themes) {
+        border-left-color: themed('primaryColor');
+      }
+    }
+    &.menu__item--active {
+      @include themify($themes) {
+        border-left-color: themed('primaryColor');
+        background-color: themed('primaryColorDimmed');
+      }
+    }
+  }
+
+
+  @media screen and (min-width: $desktop-width--medium) {
+
+
+    /* Main container for the header menu */
+    .header-menu {
+        width: $header-menu-width-medium;
+    }
+    .header-menu__content {
+        min-width: $header-menu-width-medium;
+    }
+    .header-menu__submenu-header {
+        &:after {
+            margin-top: 7px;
+        }
+    }
+
+
+  }
+}

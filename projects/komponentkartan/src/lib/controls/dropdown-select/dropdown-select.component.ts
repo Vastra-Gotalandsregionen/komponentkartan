@@ -18,7 +18,8 @@ function _defaultCompare(o1: any, o2: any): boolean {
 
 @Component({
   selector: 'vgr-dropdown-select',
-  templateUrl: './dropdown-select.component.html'
+  templateUrl: './dropdown-select.component.html',
+  styleUrls: ['./dropdown-select.component.scss']
 })
 export class DropdownSelectComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 

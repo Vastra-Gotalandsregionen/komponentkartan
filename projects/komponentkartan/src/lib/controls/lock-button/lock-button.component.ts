@@ -2,7 +2,8 @@ import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/co
 
 @Component({
   selector: 'vgr-lock-button',
-  templateUrl: './lock-button.component.html'
+  templateUrl: './lock-button.component.html',
+  styleUrls: ['./lock-button.component.scss']
 })
 export class LockButtonComponent {
   @Input() disabled = false;

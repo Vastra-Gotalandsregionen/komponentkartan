@@ -5,7 +5,8 @@ import { PageItem } from './page-item';
 
 @Component({
   selector: 'vgr-pagination',
-  templateUrl: './pagination.component.html'
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() pages = 1;

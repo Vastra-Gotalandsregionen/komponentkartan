@@ -4,6 +4,7 @@ import { trigger, style, animate, transition, state, AnimationEvent } from '@ang
 @Component({
   templateUrl: './action-panel.component.html',
   selector: 'vgr-action-panel',
+  styleUrls: ['./action-panel.component.scss'],
   animations: [
     trigger('slide', [
       state('closed', style({

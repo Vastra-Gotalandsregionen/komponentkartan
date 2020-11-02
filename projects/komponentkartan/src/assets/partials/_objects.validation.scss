@@ -65,10 +65,10 @@
   vertical-align: middle;
   .icon {
     .validation-error--active & {
-      color: $primary-color--error;
+      color: $primary-color--error !important;
     }
     .validation-error--editing & {
-      color: $text-color--default;
+      color: $text-color--default !important;
     }
   }
   .validation-error--active &,

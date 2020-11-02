@@ -65,7 +65,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
 
   ngAfterViewInit() {
     if (this.aria) {
-      console.log(this.aria);
       for (const key in this.aria) {
         if (Object.prototype.hasOwnProperty.call(this.aria, key)) {
           const value = this.aria[key];

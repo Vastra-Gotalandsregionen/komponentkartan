@@ -2,7 +2,8 @@
 
 @Component({
   selector: 'vgr-save-cancel',
-  templateUrl: './save-cancel.component.html'
+  templateUrl: './save-cancel.component.html',
+  styleUrls: ['./save-cancel.component.scss']
 })
 export class SaveCancelComponent implements OnInit {
   @Input() locked = true;

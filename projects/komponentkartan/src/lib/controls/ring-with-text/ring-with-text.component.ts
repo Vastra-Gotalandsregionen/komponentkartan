@@ -3,6 +3,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 @Component({
   selector: 'vgr-ring-with-text',
   templateUrl: './ring-with-text.component.html',
+  styleUrls: ['./ring-with-text.component.scss']
 })
 export class RingWithTextComponent implements OnChanges {
 

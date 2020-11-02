@@ -5,7 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'vgr-toggle-button-group',
-  templateUrl: './toggle-button-group.component.html'
+  templateUrl: './toggle-button-group.component.html',
+  styleUrls: ['./toggle-button-group.component.scss']
 })
 export class ToggleButtonGroupComponent implements AfterContentInit, OnDestroy {
 

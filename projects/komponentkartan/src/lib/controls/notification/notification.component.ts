@@ -4,6 +4,7 @@ import { toggleFadedState } from '../../animation';
 @Component({
   selector: 'vgr-notification',
   templateUrl: './notification.component.html',
+  styleUrls: ['./notification.component.scss'],
   animations: [toggleFadedState]
 })
 export class NotificationComponent implements OnInit {

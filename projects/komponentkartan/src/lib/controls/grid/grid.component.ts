@@ -11,6 +11,7 @@ import { GridHeaderToolbarComponent } from './grid-header-toolbar.component';
 @Component({
   selector: 'vgr-grid',
   templateUrl: './grid.component.html',
+  styleUrls: ['./grid.component.scss'],
   providers: [GridService],
   animations: [remove]
 })
