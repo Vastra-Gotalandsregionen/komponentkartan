@@ -42,7 +42,7 @@
 
     .card-section--expanded:last-child {
       .card-section__content {
-        
+
         border-bottom: none;
       }
     }
@@ -72,7 +72,7 @@
     align-items: center;
     justify-content: flex-start;
     padding-left: 10px;
-    border-radius: 4px;
+    border-radius: 2px;
     border: solid 1px $lockbutton-color--unlocked;
     cursor: pointer;
 
