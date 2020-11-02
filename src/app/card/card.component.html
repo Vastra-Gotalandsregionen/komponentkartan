@@ -25,15 +25,15 @@
                   <vgr-button class="flex-right" [buttonStyle]="'secondary'">Åtgärd</vgr-button>
                 </vgr-card-header>
                 <vgr-card-column>
-                  <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 1'" [expanded]="true">
+                  <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 1 med färg'" [expanded]="true" backgroundColor="#f1eadc">
                     <span>Innehåll</span>
                   </vgr-card-section>
-                  <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 2'">
+                  <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 2 med färg'" backgroundColor="#f1eadc">
                     <span>Innehåll</span>
                   </vgr-card-section>
                 </vgr-card-column>
                 <vgr-card-column>
-                  <vgr-card-section class="card__right" [expanded]="true" [title]="'Rubrik'" [subtitle]="'Höger 1'"
+                  <vgr-card-section class="card__right" [expanded]="true" [title]="'Rubrik'" [subtitle]="'Höger 1  med default färg, vit'"
                     [readonly]="false">
                     <div>Innehåll</div>
                     <vgr-datepicker></vgr-datepicker>
@@ -63,7 +63,7 @@
                   (cancel)="unlocked = false"></vgr-save-cancel>
               </vgr-card-header>
               <vgr-card-column>
-                <vgr-card-section [expanded]="true" [title]="'Rubrik'" [subtitle]="'Personuppgifter'" [readonly]="!unlocked">
+                <vgr-card-section [expanded]="true" [title]="'Rubrik'" [subtitle]="'Personuppgifter'" [readonly]="!unlocked" >
                   <vgr-title-value-layout>
                     <vgr-title-value [slim]="!unlocked">
                         <vgr-title-value-heading  [width]="1">Förnamn</vgr-title-value-heading>
@@ -283,6 +283,16 @@
                 <td>subTitle: string</td>
                 <td>Sektionens underrubrik</td>
                 <td>[title]="'Underrubrik'"</td>
+              </tr>
+              <tr>
+                <td>truncateLength: number</td>
+                <td>Antalet tecken synas innan det trunkeras (default = 30)</td>
+                <td>[title]="50"</td>
+              </tr>
+              <tr>
+                <td>backgroundColor: string</td>
+                <td>Bakgrundsfärg på sektionen (default = '#FFFFFF')</td>
+                <td>[title]="'#FFFFFF'"</td>
               </tr>
               <tr>
                 <td>readonly: boolean</td>
