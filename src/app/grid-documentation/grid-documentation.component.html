@@ -191,7 +191,7 @@
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
-        <vgr-notification [borderColor]="'error-secondary'">
+        <vgr-notification [type]="'error-secondary'">
           <vgr-icon [icon]="'star'" [color]="'error'" [solid]="true"></vgr-icon>
           En specialikon
         </vgr-notification>
@@ -202,9 +202,20 @@
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Godkänd</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification [borderColor]="'secondary'">
+        <vgr-notification [type]="'secondary'">
           <vgr-icon [icon]="'star'" [color]="'disabled'"></vgr-icon>
           En specialikon
+        </vgr-notification>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = !expanded2">
+        <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
+        <vgr-grid-column width="3">-980,87</vgr-grid-column>
+        <vgr-grid-column width="3"></vgr-grid-column>
+        <vgr-grid-column width="2">Godkänd</vgr-grid-column>
+        <vgr-grid-column width="5"></vgr-grid-column>
+        <vgr-notification [type]="'error'" [noIcon]="true">
+          <vgr-icon [icon]="'star'" [color]="'disabled'"></vgr-icon>
+          Typ error med specialikon
         </vgr-notification>
       </vgr-grid-row>
       <vgr-grid-row [expanded]="expanded3" (expandedChanged)="expanded3 = !expanded3">
@@ -213,7 +224,7 @@
         <vgr-grid-column width="3"></vgr-grid-column>
         <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
         <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification [borderColor]="'secondary'">
+        <vgr-notification [type]="'secondary'">
           <vgr-icon [icon]="'coffee'"></vgr-icon>
           Gillar kaffe
         </vgr-notification>
