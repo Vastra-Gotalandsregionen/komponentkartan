@@ -1,59 +1,54 @@
 <vgr-page class="no-sort">
-  <vgr-page-header [title]="componentName">
-  </vgr-page-header>
+  <vgr-page-header [title]="componentName"> </vgr-page-header>
   <vgr-page-body>
-    <vgr-page-block>
-      <vgr-list [allowMultipleExpandedItems]="true" [flexibleHeader]="true">
-        <vgr-list-header>
-          <vgr-list-column-header [width]="20">Dokumentation för {{componentName}}</vgr-list-column-header>
-        </vgr-list-header>
-        <vgr-list-item [expanded]="true">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Översikt</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <div class="content-overview">
-              <!-- Översikt -->
-              <ng-content select=".docs__overview"></ng-content>
-            </div>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Exempel</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <!-- Exempel -->
-            <ng-content select=".docs__examples"></ng-content>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <!-- API -->
-            <ng-content select=".docs__api"></ng-content>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Tillgänglighet</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <!-- tILLGÄNGLIGHET -->
-            <ng-content select=".docs__wcag"></ng-content>
-          </vgr-list-item-content>
-        </vgr-list-item>
-      </vgr-list>
-    </vgr-page-block>
+    <!-- Components before-->
+    <ng-content select=".docs__before"></ng-content>
+    <vgr-grid [allowMultipleExpandedRows]="true" [stickyHeader]="true">
+      <vgr-grid-header>
+        <vgr-grid-header-column [width]="20"
+          >Dokumentation för {{ componentName }}</vgr-grid-header-column
+        >
+      </vgr-grid-header>
+      <vgr-grid-row [expanded]="true">
+        <vgr-grid-column width="20">
+          <h4>Översikt</h4>
+        </vgr-grid-column>
+        <vgr-grid-content>
+          <div class="content-overview">
+            <!-- Översikt -->
+            <ng-content select=".docs__overview"></ng-content>
+          </div>
+        </vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="false">
+        <vgr-grid-column width="20">
+          <h4>Exempel</h4>
+        </vgr-grid-column>
+        <vgr-grid-content>
+          <!-- Exempel -->
+          <ng-content select=".docs__examples"></ng-content>
+        </vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="false">
+        <vgr-grid-column width="20">
+          <h4>API</h4>
+        </vgr-grid-column>
+        <vgr-grid-content>
+          <!-- API -->
+          <ng-content select=".docs__api"></ng-content>
+        </vgr-grid-content>
+      </vgr-grid-row>
+      <vgr-grid-row [expanded]="false">
+        <vgr-grid-column width="20">
+          <h4>Tillgänglighet</h4>
+        </vgr-grid-column>
+        <vgr-grid-content>
+          <!-- tILLGÄNGLIGHET -->
+          <ng-content select=".docs__wcag"></ng-content>
+        </vgr-grid-content>
+      </vgr-grid-row>
+    </vgr-grid>
+    <!-- Components before-->
+    <ng-content select=".docs__after"></ng-content>
   </vgr-page-body>
 </vgr-page>
