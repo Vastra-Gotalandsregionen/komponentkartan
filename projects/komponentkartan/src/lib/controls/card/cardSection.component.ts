@@ -14,6 +14,7 @@ export class CardSectionComponent {
     @Input() title: string;
     @Input() subtitle: string;
     @Input() truncateLength = 30;
+    @Input() backgroundColor = '#FFFFFF';
     overflow = false;
     animationSpeed = '.4s ease';
     expandOverflow: boolean;

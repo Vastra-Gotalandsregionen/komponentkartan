@@ -1,8 +1,10 @@
 <span class="icon" [ngClass]="{ 
-    'icon-color--text': color==='text', 
-    'icon-color--light': color==='light', 
-    'icon-color--success': color==='success', 
-    'icon-color--error': color==='error',  
+    'icon-color--text': color === 'text',
+    'icon-color--light': color === 'light',
+    'icon-color--success': color === 'success',
+    'icon-color--error': color === 'error',
+    'icon-color--warning': color === 'warning',
+    'icon-color--info': color === 'info',
     'icon--disabled': disabled
   }" [attr.aria-disabled]="disabled" [attr.aria-label]="ariaLabel">
   <fa-icon 

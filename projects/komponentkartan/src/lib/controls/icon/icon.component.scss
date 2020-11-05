@@ -19,6 +19,12 @@
     &.icon-color--error {
       color: $primary-color--error;
     }
+    &.icon-color--warning {
+      color: $primary-color--warning;
+    }
+    &.icon-color--info {
+      color: $primary-color--info;
+    }
     &.icon--disabled {
       color: $control-color--disabled;
       cursor: default;
