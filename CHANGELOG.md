@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 8.0.0 (Beta)
+- *Breaking change* Upgraded to angular 10.
+- `vgr-filter-textbox` & `vgr-list` (and all of its child components) are now officially removed.
+
 # 7.8.0 (2020-11-02)
 - Added option for using `vgr-notification` as standalone and new types `warning`, `info`
 
