@@ -10,7 +10,7 @@
     padding-bottom: 10px;
     background-color: $background-color--default;
     .page-header__block {
-      min-height: 63px;
+      min-height: 65px;
       width:  calc(100vw - #{$nav-width--small});
       padding: $margin--slim $margin--fat;
       background-color: #F8F8F8;
@@ -23,6 +23,9 @@
         text-transform: uppercase;
         text-align: right;
       }
+      &--scroll-margin {
+        padding-right: 40px;
+      }
     }
   }
 
@@ -31,7 +34,7 @@
     .page-header {
       width: $content-width--medium + 40px;
       .page-header__block {
-        min-height: 72px;
+        min-height: 74px;
         width:  calc(100vw - #{$nav-width--medium});
       }
     }

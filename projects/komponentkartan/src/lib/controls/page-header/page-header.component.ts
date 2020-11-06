@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, AfterViewChecked, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewChecked, ElementRef, HostListener } from '@angular/core';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
 
 @Component({
@@ -11,6 +11,16 @@ export class PageHeaderComponent implements AfterViewChecked {
   @ViewChild('pageHeader', { static: true }) pageHeader: ElementRef;
   height = 0;
   private previousHeight = 0;
+
+  visibleState = false;
+
+  @HostListener('window:scroll', []) onWindowScroll() {
+    if (window.scrollY) {
+      this.visibleState = true;
+    } else {
+      this.visibleState = false;
+    }
+  }
 
   constructor(private pageHeaderHeightService: PageHeaderHeightService) {  }
 

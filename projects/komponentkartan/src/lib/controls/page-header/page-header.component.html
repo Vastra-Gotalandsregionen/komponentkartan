@@ -1,5 +1,5 @@
 <div #pageHeader class="page-header" (window:resize)="setHeight()">
-  <div class="page-header__block">
+  <div class="page-header__block" [class.page-header__block--scroll-margin]="visibleState">
     <h1 class="page-header__title">{{title}}</h1>
     <ng-content></ng-content>
   </div>
