@@ -7,16 +7,15 @@
     z-index: $layer-page-header;
     top: $header-height;
     width: $content-width--small + 40px;
-    padding-left: 20px;
-    padding-top: 20px;
-    padding-right: 20px;
     padding-bottom: 10px;
     background-color: $background-color--default;
     .page-header__block {
-      min-height: 52px;
-      width: $content-width--small;
-      padding: $margin--slim;
-      background-color: white;
+      min-height: 63px;
+      width:  calc(100vw - #{$nav-width--small});
+      padding: $margin--slim $margin--fat;
+      background-color: #F8F8F8;
+      box-shadow: 0px 2px 8px #0000001A;
+      border-bottom: 2px solid #BBBEBE;
       .page-header__title {
         float: right;
         margin-left: 10px;
@@ -32,9 +31,8 @@
     .page-header {
       width: $content-width--medium + 40px;
       .page-header__block {
-        width: $content-width--medium;
-        padding-left: $margin--fat;
-        padding-right: $margin--fat;
+        min-height: 72px;
+        width:  calc(100vw - #{$nav-width--medium});
       }
     }
   }

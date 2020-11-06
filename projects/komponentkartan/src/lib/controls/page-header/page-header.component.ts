@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, AfterViewChecked, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewChecked, ElementRef } from '@angular/core';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
 
 @Component({
