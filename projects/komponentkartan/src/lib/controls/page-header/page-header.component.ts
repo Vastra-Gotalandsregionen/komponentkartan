@@ -14,18 +14,33 @@ export class PageHeaderComponent implements AfterViewChecked {
 
   visibleState = false;
 
-  @HostListener('window:scroll', []) onWindowScroll() {
-    if (window.scrollY) {
-      this.visibleState = true;
-    } else {
-      this.visibleState = false;
-    }
-  }
+  // @HostListener('window:scroll', []) onWindowScroll() {
+  //   if (window.scrollY) {
+  //     this.visibleState = true;
+  //   } else {
+  //     this.visibleState = false;
+  //   }
+  // }
 
-  constructor(private pageHeaderHeightService: PageHeaderHeightService) {  }
+  constructor(private pageHeaderHeightService: PageHeaderHeightService) {}
 
   ngAfterViewChecked() {
     this.setHeight();
+    this.setMargin();
+    
+  }
+
+  setMargin() {
+    let state;
+    if (document.body.scrollHeight > document.body.clientHeight) {
+      state = true;
+    } else {
+      state = false;
+    }
+
+    setTimeout(() => {
+      this.visibleState = state;
+    }, 0);
   }
 
   setHeight() {
