@@ -300,6 +300,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   onHeaderKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
+      event.stopPropagation();
       this.expand();
 
       const selectedItems = this.items.filter(item => item.selected);
@@ -386,6 +387,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       event.stopPropagation();
+      if (event.key === 'Enter') {
+        this.toggleSelectAll();
+      }
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
       if (this.multi) {
         this.selectAll.nativeElement.focus();
