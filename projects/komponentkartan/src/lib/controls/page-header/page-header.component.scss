@@ -12,6 +12,7 @@
     .page-header__block {
       min-height: 52px;
       width:  calc(100vw - #{$nav-width--small});
+      min-width: calc(#{$desktop-width--small} - #{$nav-width--small});
       padding: $margin--slim $margin--fat;
       background-color: #F8F8F8;
       box-shadow: 0px 2px 8px #0000001A;
@@ -33,6 +34,7 @@
       .page-header__block {
         min-height: 52px;
         width:  calc(100vw - #{$nav-width--medium});
+        min-width: calc(#{$desktop-width--medium} - #{$nav-width--medium});
       }
     }
   }
@@ -44,6 +46,7 @@
         position: relative;
         top: 0;
         z-index: $layer-one;
+      
     }
   }
 }
