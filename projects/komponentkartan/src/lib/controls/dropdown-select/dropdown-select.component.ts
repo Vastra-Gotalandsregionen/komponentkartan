@@ -393,7 +393,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
       if (this.multi) {
         this.selectAll.nativeElement.focus();
-      } else if (this.deselectable) {
+      } else if (this.deselectable && this.value) {
         this.deselectButton.focus();
       } else if (filteredItems.length) {
         filteredItems[0].focus();
@@ -535,7 +535,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       filteredItems[itemIndex - 1].focus();
     } else if (this.multi) {
       this.selectAll.nativeElement.focus();
-    } else if (this.deselectable) {
+    } else if (this.deselectable && this.value) {
       this.deselectButton.focus();
     } else if (this.filterVisible) {
       this.filter.focus();

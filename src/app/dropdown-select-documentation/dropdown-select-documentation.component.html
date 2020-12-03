@@ -53,7 +53,7 @@
         </div>
         <div class="one-third">
           <p>Stor, 50 alternativ</p>
-          <vgr-dropdown-select>
+          <vgr-dropdown-select [deselectable]="true">
             <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
           </vgr-dropdown-select>
         </div>
