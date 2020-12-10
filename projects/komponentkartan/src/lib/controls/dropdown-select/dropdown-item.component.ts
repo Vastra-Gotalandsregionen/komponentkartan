@@ -1,10 +1,10 @@
-import { Component, Input, EventEmitter, Output, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'vgr-dropdown-item',
   templateUrl: './dropdown-item.component.html'
 })
-export class DropdownItemComponent implements AfterViewInit {
+export class DropdownItemComponent {
 
   @Input() selectedLabel: string;
   @Input() value: any;
@@ -14,18 +14,15 @@ export class DropdownItemComponent implements AfterViewInit {
   @Output() next = new EventEmitter();
   @Output() nextMatch = new EventEmitter<string>();
   @ViewChild('item') item: ElementRef;
-  label: string;
+
+  get label(): string {
+    return this.value;
+  };
+
   multi = false;
   selected = false;
   visible = true;
   hasFocus = false;
-
-  ngAfterViewInit() {
-    this.label = (this.item.nativeElement as Node).textContent.trim();
-    if (this.value === undefined) {
-      this.value = this.label;
-    }
-  }
 
   toggleSelect() {
     if (this.multi) {
