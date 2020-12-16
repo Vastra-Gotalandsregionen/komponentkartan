@@ -15,9 +15,9 @@ export class DropdownItemComponent {
   @Output() nextMatch = new EventEmitter<string>();
   @ViewChild('item') item: ElementRef;
 
-  get label(): any {
+  get label(): string {
     return this.value;
-  }
+  };
 
   multi = false;
   selected = false;
