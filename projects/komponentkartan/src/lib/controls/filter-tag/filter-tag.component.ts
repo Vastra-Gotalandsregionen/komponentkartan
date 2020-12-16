@@ -42,19 +42,7 @@ export class FilterTagComponent implements AfterViewInit {
   }
 
   focus() {
-    // focus() does not work in IE11 unless
-    // called after a short delay. Wrap in if
-    // to not do this in better browsers.
-    const re = /Trident\/7/;
-    const isIE11 = re.test(window.navigator.userAgent);
-
-    if (isIE11) {
-      setTimeout(() => {
-        this.filtertag.nativeElement.focus();
-      }, 5);
-    } else {
-      this.filtertag.nativeElement.focus();
-    }
+    this.filtertag.nativeElement.focus();
   }
 
   emitRemove() {
