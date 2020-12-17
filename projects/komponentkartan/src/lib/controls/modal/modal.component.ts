@@ -1,6 +1,6 @@
 
 import {
-  Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy, Output, EventEmitter
+  Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy, Output, EventEmitter, AfterContentInit
 } from '@angular/core';
 import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./modal.component.scss']
 })
 
-export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
+export class ModalPlaceholderComponent implements AfterViewChecked, AfterContentInit, OnDestroy {
   @Output() outsideClick = new EventEmitter();
 
   isOpen: boolean;
@@ -38,22 +38,25 @@ export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(elementId => {
         this.modalInitialized = false;
-        this.elementId = elementId;
-        this.openModal();
+        if (elementId === this.elementId) {
+          this.openModal();
+        }
       });
 
     this.modalService.modalClosed$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(elementId => {
-        this.elementId = elementId;
-        this.closeModal();
+        if (elementId === this.elementId) {
+          this.closeModal();
+        }
       });
 
     this.modalService.modalUpdate$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(elementId => {
-        this.elementId = elementId;
-        this.initFocusableElements();
+        if (elementId === this.elementId) {
+          this.initFocusableElements();
+        }
       });
   }
 
@@ -67,6 +70,10 @@ export class ModalPlaceholderComponent implements AfterViewChecked, OnDestroy {
       this.initFocusableElements();
       this.modalInitialized = true;
     }
+  }
+
+  ngAfterContentInit() {
+    this.elementId = this.elementRef.nativeElement.id;
   }
 
   initFocusableElements() {

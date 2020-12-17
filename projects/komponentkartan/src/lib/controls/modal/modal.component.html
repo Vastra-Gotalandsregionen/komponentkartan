@@ -1,6 +1,6 @@
 <div class="modal" (keydown)="onKeyDown($event)" (click)="onOutsideClick($event)">
-  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
-    <h1 id="dialogTitle" class="modal-content__title">
+  <div class="modal-content" role="dialog" aria-modal="true" [attr.aria-labelledby]="'dialogTitle' + elementId">
+    <h1 [id]="'dialogTitle' + elementId" class="modal-content__title">
       <ng-content select="vgr-modal-header"></ng-content>
     </h1>
     <div class="modal-content__content">
