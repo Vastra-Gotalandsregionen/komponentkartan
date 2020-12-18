@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, HostBinding } from '@angular/core';
-import { SortDirection } from '../list/list-column-header.component';
+import { GridSortDirection } from '../grid/grid-header-column.component';
 
 @Component({
   selector: 'vgr-sort-arrow',
@@ -8,7 +8,7 @@ import { SortDirection } from '../list/list-column-header.component';
 })
 export class SortArrowComponent implements OnInit, OnChanges {
 
-  @Input() sortDirection: SortDirection;
+  @Input() sortDirection: GridSortDirection;
   @HostBinding('class') className;
 
   constructor() { }

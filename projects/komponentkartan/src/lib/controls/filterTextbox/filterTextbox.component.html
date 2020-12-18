@@ -1,4 +1,0 @@
-<div class="filter-textbox" [ngClass]="{'filter-textbox--focus' : hasFocus}">
-  <input #filterTextbox type="text" [ngModel]="value" (focusin)="hasFocus=true;" (focusout)="hasFocus=false;" (ngModelChange)="value = $event"/>
-  <vgr-icon icon="search" size="sm"></vgr-icon>
-</div>

@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 8.0.0 (2020-12-18)
+- *Breaking change* Upgraded to angular 10.
+- `vgr-filter-textbox` & `vgr-list` (and all of its child components) are now officially removed.
 # 7.9.0 (2020-12-17)
 - New and improved header-design
 # 7.8.4 (2020-12-17)
@@ -12,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixing a bug in `vgr-dropdown-select` where focus got stuck in filter if deselectable was active.
 # 7.8.1 (2020-11-10)
 - Various bugfixes for `vgr-dropdown-select`.
+
 
 # 7.8.0 (2020-11-02)
 - Added option for using `vgr-notification` as standalone and new types `warning`, `info`

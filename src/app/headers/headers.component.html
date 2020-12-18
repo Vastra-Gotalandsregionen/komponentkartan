@@ -1,198 +1,145 @@
-<vgr-page class="no-sort">
-  <vgr-page-header [title]="'Header & HeaderMenu'">
-  </vgr-page-header>
-  <vgr-page-body>
-    <vgr-page-block>
-      <vgr-list [allowMultipleExpandedItems]="true">
-        <vgr-list-header>
-          <vgr-list-column-header [width]="20">Dokumentation för Header samt HeaderMenu</vgr-list-column-header>
-        </vgr-list-header>
-        <vgr-list-item [expanded]="true">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Översikt</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <div class="docs__overview">
-              <code>&lt;vgr-header&gt;</code> är en komponent som skall användas i huvudet på sidorna och ligga där fast
-              när
-              användaren
-              navigerar i systemet.
-              <br> Färgen kan sättas beroende på vilket system som är aktivt. I portalen beror färgen på om användaren
-              har ett
-              eller
-              flera system. Om bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent
-              bild som gör
-              att man bara behöver sätta headerns bakgrundsfärg genom rätt klassnamn på headern eller på ett
-              föräldraelement. I
-              det
-              "neutrala" läget skall inte den transparenta bilden synas. Headern kan visas i olika utföranden, man kan
-              ha den med
-              eller
-              utan användarinformation samt med eller utan meny och olika kombinationer av dessa. I exemplet kan man se
-              de olika
-              vyerna.
-              <br>
-              <br> På headern kan man även lägga till en kontextmeny (
-              <code>&lt;vgr-header-menu&gt;</code>). Den menyn kan endast bo i headern.
-              <br>
-              <br>
-              <div class="column-layout">
-                <vgr-header class="header--inline">
-                  <vgr-header-menu userName="Neo Åhn">
-                    <vgr-menu-item link="https://www.google.com" text="Extern länk" [isInternalLink]="false"></vgr-menu-item>
-                    <vgr-menu-item link="https://www.google.com" [disabled]="true" text="Inaktiv länk" [isInternalLink]="false"></vgr-menu-item>
-                    <vgr-menu-item text="Modal" (action)="openModalOnClick('modal1')"></vgr-menu-item>
-                    <vgr-menu-item link="/headers" text="Headers"></vgr-menu-item>
-                    <vgr-menu-separator></vgr-menu-separator>
-                    <vgr-submenu text="Calender">
-                      <vgr-menu-item link="/datepicker" text="Datepicker"></vgr-menu-item>
-                      <vgr-menu-item link="/monthpicker" text="Monthpicker"></vgr-menu-item>
-                    </vgr-submenu>
-                  </vgr-header-menu>
-                </vgr-header>
-              </div>
-              <br>
-              <p> Förändras med tema:
-                <strong>ja</strong>
-              </p>
-            </div>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <!-- Exempel -->
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Exempel</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <div class="docs__examples">
-              <div class="column-layout">
-                <h3>Header med user och meny (temad grön)</h3>
-                <vgr-header class="header--inline theme--green">
-                  <vgr-header-menu [userName]="'Nova Audit'">
-                    <vgr-menu-item link="/minsida" text="Internt menyval"></vgr-menu-item>
-                    <vgr-submenu text="Submeny">
-                      <vgr-menu-item link="/backtotop" text="Submenyval : backtotop"></vgr-menu-item>
-                    </vgr-submenu>
-                  </vgr-header-menu>
-                </vgr-header>
-                <div>
-                  <h3>Markup för en menyn i exemplet ovan, tryck på pilen i headern så ser du kontextmenyn</h3>
-                  <section [innerHTML]="exampleCodeSimpleMenyMarkup" hljsContent=".highlight"></section>
-                </div>
-                <h3>Header utan user och meny (Standard)</h3>
-                <vgr-header class="header--inline"></vgr-header>
-                <section [innerHTML]="standardExampleMarkup" hljsContent=".highlight"></section>
-                <h3>Header med systeminformation</h3>
-                <vgr-header systemText="Development" class="header--inline"></vgr-header>
-                <section [innerHTML]="systemExampleMarkup" hljsContent=".highlight"></section>
-                <h3>Custom Logo</h3>
-                <vgr-header class="header--inline theme--red" [hideSwosh]="true" logoClass="custom-logo"></vgr-header>
-                <section [innerHTML]="customExampleMarkup" hljsContent=".highlight"></section>
-                <h3>Skriva över initialer, textfärg samt bakgrundsfärg</h3>
-                <vgr-header class="header--inline" [hideSwosh]="true">
-                  <vgr-header-menu initials="AB" userName="Claes Göransson" textColor="red" circleColor="white">
-                  </vgr-header-menu>
-                </vgr-header>
-                <section [innerHTML]="overwriteExampleMarkup" hljsContent=".highlight"></section>
-              </div>
-            </div>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <!-- DOCS -->
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - header</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>systemText : string</td>
-                <td>Text för att påvisa vilken miljö man befinner sig i. Ska inte visas i produktion. Upp till
-                  immplementatören.
-                </td>
-                <td>[systemtext]="'development'"</td>
-              </tr>
-              <tr>
-                <td>hideSwosh : boolean</td>
-                <td>Hanterar bakgrundsbild som täcker headern.</td>
-                <td>[hideSwosh]="true"</td>
-              </tr>
-              <tr>
-                <td>logoClass</td>
-                <td>Fält för att skriva över klass för logo.</td>
-                <td>[logoClass]="'custom-logo'"</td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - header-menu</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>userName : string</td>
-                <td>Sätter namnet på texten för den som är inloggad. Intialerna för cirkeln är default först bokstaven
-                  i första
-                  och
-                  sista namnet. Exemepel: "Göte Borg" får initialerna GB, och "Göte Borg Stad" får GS</td>
-                <td>[userName]="signedInUser"</td>
-              </tr>
-              <tr>
-                <td>initials : string</td>
-                <td>Skriver över initialerna med egna initialer</td>
-                <td>[initials]="'GB'"</td>
-              </tr>
-              <tr>
-                <td>textColor : string</td>
-                <td>Färgen på texten i ringen. Accepterar html-kompatibla färgväden (HEX eller färgnamn)</td>
-                <td>[textColor]="white"</td>
-              </tr>
-              <tr>
-                <td>circleColor : string</td>
-                <td>Färgen på cirkeln. Accepterar html-kompatibla färgväden (HEX eller färgnamn)</td>
-                <td>[circleColor]="'#f9dede'"</td>
-              </tr>
-              <tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <!-- Tillgänglighet -->
-        <vgr-list-item>
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Tillgänglighet</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <p>
-              Under utveckling
-            </p>
-          </vgr-list-item-content>
-        </vgr-list-item>
-      </vgr-list>
-    </vgr-page-block>
-  </vgr-page-body>
-</vgr-page>
+<app-component-docs componentName="Header & HeaderMenu">
+  <div class=" docs__overview ">
+    <code>&lt;vgr-header&gt;</code> är en komponent som skall användas i huvudet på sidorna och ligga där fast
+    när
+    användaren
+    navigerar i systemet.
+    <br> Färgen kan sättas beroende på vilket system som är aktivt. I portalen beror färgen på om användaren
+    har ett
+    eller
+    flera system. Om bara ett system finns, är det den färgen som gäller. Headern innehåller en transparent
+    bild som gör
+    att man bara behöver sätta headerns bakgrundsfärg genom rätt klassnamn på headern eller på ett
+    föräldraelement. I
+    det
+    "neutrala" läget skall inte den transparenta bilden synas. Headern kan visas i olika utföranden, man kan
+    ha den med
+    eller
+    utan användarinformation samt med eller utan meny och olika kombinationer av dessa. I exemplet kan man se
+    de olika
+    vyerna.
+    <br>
+    <br> På headern kan man även lägga till en kontextmeny (
+    <code>&lt;vgr-header-menu&gt;</code>). Den menyn kan endast bo i headern.
+    <br>
+    <br>
+    <div class="column-layout">
+      <vgr-header class="header--inline">
+        <vgr-header-menu userName="Neo Åhn">
+          <vgr-menu-item link="https://www.google.com" text="Extern länk" [isInternalLink]="false"></vgr-menu-item>
+          <vgr-menu-item link="https://www.google.com" [disabled]="true" text="Inaktiv länk" [isInternalLink]="false"></vgr-menu-item>
+          <vgr-menu-item text="Modal" (action)="openModalOnClick('modal1')"></vgr-menu-item>
+          <vgr-menu-item link="/headers" text="Headers"></vgr-menu-item>
+          <vgr-menu-separator></vgr-menu-separator>
+          <vgr-submenu text="Calender">
+            <vgr-menu-item link="/datepicker" text="Datepicker"></vgr-menu-item>
+            <vgr-menu-item link="/monthpicker" text="Monthpicker"></vgr-menu-item>
+          </vgr-submenu>
+        </vgr-header-menu>
+      </vgr-header>
+    </div>
+    <br>
+    <p> Förändras med tema:
+      <strong>ja</strong>
+    </p>
+  </div>
+  <div class="docs__examples ">
+    <h3>Header med user och meny (temad grön)</h3>
+    <vgr-header class="header--inline theme--green">
+      <vgr-header-menu [userName]="'Nova Audit'">
+        <vgr-menu-item link="/minsida" text="Internt menyval"></vgr-menu-item>
+        <vgr-submenu text="Submeny">
+          <vgr-menu-item link="/backtotop" text="Submenyval : backtotop"></vgr-menu-item>
+        </vgr-submenu>
+      </vgr-header-menu>
+    </vgr-header>
+    <div>
+      <h3>Markup för en menyn i exemplet ovan, tryck på pilen i headern så ser du kontextmenyn</h3>
+      <section [innerHTML]="exampleCodeSimpleMenyMarkup" hljsContent=".highlight"></section>
+    </div>
+    <h3>Header utan user och meny (Standard)</h3>
+    <vgr-header class="header--inline"></vgr-header>
+    <section [innerHTML]="standardExampleMarkup" hljsContent=".highlight"></section>
+    <h3>Header med systeminformation</h3>
+    <vgr-header systemText="Development" class="header--inline"></vgr-header>
+    <section [innerHTML]="systemExampleMarkup" hljsContent=".highlight"></section>
+    <h3>Custom Logo</h3>
+    <vgr-header class="header--inline theme--red" [hideSwosh]="true" logoClass="custom-logo"></vgr-header>
+    <section [innerHTML]="customExampleMarkup" hljsContent=".highlight"></section>
+    <h3>Skriva över initialer, textfärg samt bakgrundsfärg</h3>
+    <vgr-header class="header--inline" [hideSwosh]="true">
+      <vgr-header-menu initials="AB" userName="Claes Göransson" textColor="red" circleColor="white">
+      </vgr-header-menu>
+    </vgr-header>
+    <section [innerHTML]="overwriteExampleMarkup" hljsContent=".highlight"></section>
+  </div>
+  <div class="docs__api">
+    <h2><code>&lt;vgr-header&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>systemText : string</td>
+        <td>Text för att påvisa vilken miljö man befinner sig i. Ska inte visas i produktion. Upp till
+          immplementatören.
+        </td>
+        <td>[systemtext]="'development'"</td>
+      </tr>
+      <tr>
+        <td>hideSwosh : boolean</td>
+        <td>Hanterar bakgrundsbild som täcker headern.</td>
+        <td>[hideSwosh]="true"</td>
+      </tr>
+      <tr>
+        <td>logoClass</td>
+        <td>Fält för att skriva över klass för logo.</td>
+        <td>[logoClass]="'custom-logo'"</td>
+      </tr>
+    </table>
+    <h2><code>&lt;vgr-header-menu&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>userName : string</td>
+        <td>Sätter namnet på texten för den som är inloggad. Intialerna för cirkeln är default först bokstaven
+          i första
+          och
+          sista namnet. Exemepel: "Göte Borg" får initialerna GB, och "Göte Borg Stad" får GS</td>
+        <td>[userName]="signedInUser"</td>
+      </tr>
+      <tr>
+        <td>initials : string</td>
+        <td>Skriver över initialerna med egna initialer</td>
+        <td>[initials]="'GB'"</td>
+      </tr>
+      <tr>
+        <td>textColor : string</td>
+        <td>Färgen på texten i ringen. Accepterar html-kompatibla färgväden (HEX eller färgnamn)</td>
+        <td>[textColor]="white"</td>
+      </tr>
+      <tr>
+        <td>circleColor : string</td>
+        <td>Färgen på cirkeln. Accepterar html-kompatibla färgväden (HEX eller färgnamn)</td>
+        <td>[circleColor]="'#f9dede'"</td>
+      </tr>
+      <tr>
+    </table>
+  </div>
+  <div class="docs__wcag ">
+    <p>
+      Under utveckling
+    </p>
+  </div>
+  <div class="docs__after">
+  </div>
+</app-component-docs>
 
 <vgr-modal id="modal1">
   <vgr-modal-header>Välj i dropdown</vgr-modal-header>

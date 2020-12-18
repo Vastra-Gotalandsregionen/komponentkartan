@@ -1,85 +1,52 @@
-<vgr-page class="no-sort">
-  <vgr-page-header title="Page block"></vgr-page-header>
-  <vgr-page-body>
-    <vgr-page-block>
-      <vgr-list [allowMultipleExpandedItems]="true" [flexibleHeader]="true">
-        <vgr-list-header>
-          <vgr-list-column-header [width]="20">Dokumentation för Page block</vgr-list-column-header>
-        </vgr-list-header>
-        <vgr-list-item [expanded]="true">
-          <vgr-list-item-header>
-            <h4>Översikt</h4>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <div class="content-overview">
-              <p>
-                <code>&lt;vgr-page-block&gt;</code> används för att gruppera innehåll på sidan. Page block kan visas
-                antingen med
-                vit bakgrund eller transparent. För mer information, se dokumentation för <a
-                  href="../pagestructure">sidhantering</a>.
-              </p>
-              <p>
-                Förändras med tema: <strong>nej</strong>
-              </p>
-            </div>
-            <!-- Översikt -->
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]=" false ">
-          <vgr-list-item-header>
-            <h4>Exempel</h4>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <h2>HTML</h2>
-            <section [innerHTML]="exampleCodeMarkup" hljsContent=".highlight"></section>
-            <!-- Exempel -->
-            <h2>Andra exempel</h2>
-            <p>
-              Under "Exempelsidor" finns ett exempel på <a href="../examples-listwithpageblock">transparent block tillsammans med lista</a>.
 
-            </p>
-            </vgr-list-item-content>
-            </vgr-list-item>
-            <vgr-list-item [expanded]="false">
-              <vgr-list-item-header>
-                <h4>API</h4>
-              </vgr-list-item-header>
-              <vgr-list-item-content>
-                <!-- API -->
-                <table class="property-table">
-                  <tr>
-                    <th>Namn</th>
-                    <th>Beskrivning</th>
-                    <th>Exempel</th>
-                  </tr>
-                  <tr>
-                    <td>transparent: boolean</td>
-                    <td>Gör backgrunden transparent. Förvalt värde är
-                      <code>false</code>.</td>
-                    <td>[transparent]="true"</td>
-                  </tr>
-                </table>
-              </vgr-list-item-content>
-            </vgr-list-item>
-            <vgr-list-item [expanded]="false ">
-              <vgr-list-item-header>
-                <h4>Tillgänglighet</h4>
-              </vgr-list-item-header>
-              <vgr-list-item-content>
-                <!-- Tillgänglighet -->
-                <i>Ej tillgängligt.</i>
-              </vgr-list-item-content>
-            </vgr-list-item>
-            </vgr-list>
-            </vgr-page-block>
-            <vgr-page-block>
-              <h1>Page block</h1>
-              <p>
-                Här är ett <code>vgr-page-block</code> med en <code>vgr-notification</code> med ett felmeddelande.
-              </p>
-              <vgr-notification type="error">
-                Något gick fel.
-              </vgr-notification>
-            </vgr-page-block>
-            </vgr-page-body>
-            </vgr-page>
+<app-component-docs componentName="Page block">
+  <div class=" docs__overview ">
+    <p>
+      <code>&lt;vgr-page-block&gt;</code> används för att gruppera innehåll på sidan. Page block kan visas
+      antingen med
+      vit bakgrund eller transparent. För mer information, se dokumentation för <a
+        href="../pagestructure">sidhantering</a>.
+    </p>
+    <p>
+      Förändras med tema: <strong>nej</strong>
+    </p>
+  </div>
+  <div class="docs__examples ">
+    <h2>HTML</h2>
+    <section [innerHTML]="exampleCodeMarkup" hljsContent=".highlight"></section>
+    <!-- Exempel -->
+    <h2>Andra exempel</h2>
+    <p>
+      Här under ser ni ett exempel på en page-block.
+    </p>
+  </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>transparent: boolean</td>
+        <td>Gör backgrunden transparent. Förvalt värde är
+          <code>false</code>.</td>
+        <td>[transparent]="true"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag ">
+    <i>Ej tillgängligt.</i>
+  </div>
+  <div class="docs__after">
+    <vgr-page-block>
+      <h1>Page block</h1>
+      <p>
+        Här är ett <code>vgr-page-block</code> med en <code>vgr-notification</code> med ett felmeddelande.
+      </p>
+      <vgr-notification type="error">
+        Något gick fel.
+      </vgr-notification>
+    </vgr-page-block>
+  </div>
+</app-component-docs>
