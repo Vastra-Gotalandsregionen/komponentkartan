@@ -53,7 +53,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
             this.expanded = !this.expanded;
             // SetFocus after the animation is completed.
             setTimeout(() => {
-                if (this.showExpanded) {
+                if (this.expandedState) {
                     this.menuItems.toArray()[0].setFocus();
                 } else {
                     this.setFocus();
@@ -85,12 +85,12 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         }
     }
 
-    get showExpanded() {
+    get expandedState() {
         this.state = this.expanded ? 'expanded' : 'collapsed';
         return this._showExpanded;
     }
 
-    set showExpanded(show: boolean) {
+    set expandedState(show: boolean) {
         if (show) {
             this._showExpanded = true;
             this.expanded = true;
@@ -198,7 +198,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         const matches = menuItemArray.filter(m => m.link === event.url);
 
         if (matches.length === 1) {
-            this.showExpanded = true;
+            this.expandedState = true;
             // SetFocus after the animation is completed.
             setTimeout(() => {
                 this.childSelected = this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');

@@ -1,46 +1,96 @@
-<vgr-page class="no-sort">
-  <vgr-page-header [title]="'Table'">
-  </vgr-page-header>
-  <vgr-page-body>
-    <vgr-page-block>
-      <vgr-list [allowMultipleExpandedItems]="true">
-        <vgr-list-header>
-          <vgr-list-column-header [width]="20">Dokumentation för Table</vgr-list-column-header>
-        </vgr-list-header>
-        <vgr-list-item [expanded]="true">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Översikt</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <div class="content-overview">
-              <p>
-                <code>&lt;vgr-table&gt;</code> består av
-                <code>&lt;vgr-table-header&gt;</code> och <code>&lt;vgr-table-row&gt;</code>
-                Headern är alltid synlig och kan vid klick visa/dölja tabellens rader. Använd table när du vil ha en hierarki i dina listor.
-                En vgr-table kan även innehålla en vgr-table i sig. Se förslag på användning under rubriken exempel.
-              </p>
-              <h5>Grundläggande struktur för en tabell:</h5>
-              <section [innerHTML]="htmlMarkup" hljsContent=".highlight"></section>
-              <p> Förändras med tema:
-                <strong>ja</strong>
-              </p>
-            </div>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Exempel</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
+<app-component-docs componentName="Table">
+  <div class="docs__overview">
+    <p>
+      <code>&lt;vgr-table&gt;</code> består av
+      <code>&lt;vgr-table-header&gt;</code> och <code>&lt;vgr-table-row&gt;</code>
+      Headern är alltid synlig och kan vid klick visa/dölja tabellens rader. Använd table när du vil ha en hierarki i dina listor.
+      En vgr-table kan även innehålla en vgr-table i sig. Se förslag på användning under rubriken exempel.
+    </p>
+    <h5>Grundläggande struktur för en tabell:</h5>
+    <section [innerHTML]="htmlMarkup" hljsContent=".highlight"></section>
+    <p> Förändras med tema:
+      <strong>ja</strong>
+    </p>
+  </div>
+  <div class="docs__examples ">
+    <vgr-table>
+      <vgr-table-header>
+        <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
+        <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
+        <vgr-table-header-column [width]="3" [align]="'right'">Header Column3</vgr-table-header-column>
+      </vgr-table-header>
+      <vgr-table-row tabindex="0">
+        <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+      </vgr-table-row>
+      <vgr-table-row tabindex="0">
+        <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+      </vgr-table-row>
+      <vgr-table>
+        <vgr-table-header>
+          <vgr-table-header-column [width]="10">Row Column
+            <span class="vgr-icon-calendar-border"></span>
+          </vgr-table-header-column>
+          <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
+          <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+        </vgr-table-header>
+        <vgr-table-row tabindex="0">
+          <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+        </vgr-table-row>
+        <vgr-table-row tabindex="0">
+          <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+        </vgr-table-row>
+        <vgr-table>
+          <vgr-table-header>
+            <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
+            <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
+            <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+          </vgr-table-header>
+          <vgr-table-row tabindex="0">
+            <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+            <vgr-table-row-column [width]="5"> Donec eu est eros. Suspendisse eget dolor porta, volutpat
+              ligula a, euismod tellus. Quisque posuere nisi
+              vitae nisi commodo mollis. Vivamus interdum dolor at neque blandit sollicitudin. Pellentesque
+              ac ornare</vgr-table-row-column>
+            <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+          </vgr-table-row>
+          <vgr-table-row tabindex="0">
+            <vgr-table-row-column [width]="10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              eu ante ac tortor ornare efficitur non a
+              nisi. Donec turpis sapien, semper a posuere ac, luctus et urna.</vgr-table-row-column>
+            <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+            <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+          </vgr-table-row>
+          <vgr-table>
+            <vgr-table-header>
+              <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
+              <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
+              <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+            </vgr-table-header>
+            <vgr-table-row tabindex="0">
+              <vgr-table-row-column [width]="7">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+            </vgr-table-row>
+            <vgr-table-row tabindex="0">
+              <vgr-table-row-column [width]="7">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+            </vgr-table-row>
             <vgr-table>
               <vgr-table-header>
-                <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
-                <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
-                <vgr-table-header-column [width]="3" [align]="'right'">Header Column3</vgr-table-header-column>
+                <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
+                <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
+                <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
               </vgr-table-header>
               <vgr-table-row tabindex="0">
                 <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
@@ -54,9 +104,7 @@
               </vgr-table-row>
               <vgr-table>
                 <vgr-table-header>
-                  <vgr-table-header-column [width]="10">Row Column
-                    <span class="vgr-icon-calendar-border"></span>
-                  </vgr-table-header-column>
+                  <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
                   <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
                   <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
                 </vgr-table-header>
@@ -65,264 +113,155 @@
                   <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
                   <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
                 </vgr-table-row>
-                <vgr-table-row tabindex="0">
-                  <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-                  <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                  <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                </vgr-table-row>
-                <vgr-table>
-                  <vgr-table-header>
-                    <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
-                    <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
-                    <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
-                  </vgr-table-header>
-                  <vgr-table-row tabindex="0">
-                    <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-                    <vgr-table-row-column [width]="5"> Donec eu est eros. Suspendisse eget dolor porta, volutpat
-                      ligula a, euismod tellus. Quisque posuere nisi
-                      vitae nisi commodo mollis. Vivamus interdum dolor at neque blandit sollicitudin. Pellentesque
-                      ac ornare</vgr-table-row-column>
-                    <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                  </vgr-table-row>
-                  <vgr-table-row tabindex="0">
-                    <vgr-table-row-column [width]="10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                      eu ante ac tortor ornare efficitur non a
-                      nisi. Donec turpis sapien, semper a posuere ac, luctus et urna.</vgr-table-row-column>
-                    <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                    <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                  </vgr-table-row>
-                  <vgr-table>
-                    <vgr-table-header>
-                      <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
-                      <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
-                      <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
-                    </vgr-table-header>
-                    <vgr-table-row tabindex="0">
-                      <vgr-table-row-column [width]="7">Row Column</vgr-table-row-column>
-                      <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                      <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                      <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                    </vgr-table-row>
-                    <vgr-table-row tabindex="0">
-                      <vgr-table-row-column [width]="7">Row Column</vgr-table-row-column>
-                      <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                      <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                      <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                    </vgr-table-row>
-                    <vgr-table>
-                      <vgr-table-header>
-                        <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
-                        <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
-                        <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
-                      </vgr-table-header>
-                      <vgr-table-row tabindex="0">
-                        <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-                        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                      </vgr-table-row>
-                      <vgr-table-row tabindex="0">
-                        <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-                        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                      </vgr-table-row>
-                      <vgr-table>
-                        <vgr-table-header>
-                          <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
-                          <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
-                          <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
-                        </vgr-table-header>
-                        <vgr-table-row tabindex="0">
-                          <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-                          <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                          <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-                        </vgr-table-row>
-                      </vgr-table>
-                    </vgr-table>
-                  </vgr-table>
-                </vgr-table>
               </vgr-table>
             </vgr-table>
-            <vgr-table>
-              <vgr-table-header>
-                <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
-                <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
-                <vgr-table-header-column [width]="3" [align]="'right'">Header Column3</vgr-table-header-column>
-              </vgr-table-header>
-              <vgr-table-row tabindex="0">
-                <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-                <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-              </vgr-table-row>
-            </vgr-table>
-            <vgr-table [expandable]="false">
-              <vgr-table-header>
-                <vgr-table-header-column [width]="10">Ej</vgr-table-header-column>
-                <vgr-table-header-column [width]="5">Expanderbar</vgr-table-header-column>
-                <vgr-table-header-column [width]="3" [align]="'right'">Header</vgr-table-header-column>
-              </vgr-table-header>
-            </vgr-table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-table</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>expanded: boolean</td>
-                <td>Anger om sektionen är expanderad eller ej</td>
-                <td>[expanded]="true"</td>
-              </tr>
-              <tr>
-                <td>expandable: boolean (default: true)</td>
-                <td>Genom att sätta [expandable]="false" på tabellen så kan kan raden inte expanderas och har ingen
-                  chevron.</td>
-                <td>[expandable]="false"</td>
-              </tr>
-              <tr>
-                <td>expandedChanged: EventEmitter&lt;boolean&gt;
-                </td>
-                <td>Event som triggras när sektionen expanderas/kollapsas.</td>
-                <td>(expandedChanged)="onExpandedChanged($event)</td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-table-header</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <table class="property-table">
-              <tr>
-                <th style="width:600px">Beskrivning</th>
-              </tr>
-              <tr>
-                <td>
-                  Behållare för vgr-table-header-column. Har inga properties.
-                </td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-table-header-column</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>width : number</td>
-                <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av
-                  width ska
-                  vara 20 för vgr-table.
-                </td>
-                <td>
-                  [width]="20"
-                </td>
-              </tr>
-              <tr>
-                <td>align : string</td>
-                <td>Man kan sätta en alignment på kolumnerna. Defaultvärde är left. Giltiga värden är right, left och
-                  center.
-                  <br>Om man sätter ett felaktigt värde så sätts defaultvärdet
-                </td>
-                <td>
-                  [align]="'right'"
-                </td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-table-row</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <table class="property-table">
-              <tr>
-                <th style="width:600px">Beskrivning</th>
-              </tr>
-              <tr>
-                <td>
-                  Behållare för vgr-table-row. Har inga properties.
-                </td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false ">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>API - vgr-table-row-column</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>width : number</td>
-                <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av
-                  width ska
-                  vara 20 för vgr-table.
-                </td>
-                <td>
-                  [width]="20"
-                </td>
-              </tr>
-              <tr>
-                <td>align : string</td>
-                <td>Man kan sätta en alignment på kolumnerna. Defaultvärde är left. Giltiga värden är right, left och
-                  center.
-                  <br>Om man sätter ett felaktigt värde så sätts defaultvärdet
-                </td>
-                <td>
-                  [align]="'right'"
-                </td>
-              </tr>
-            </table>
-          </vgr-list-item-content>
-        </vgr-list-item>
-        <vgr-list-item [expanded]="false">
-          <vgr-list-item-header>
-            <vgr-list-column width="20">
-              <h4>Tillgänglighet</h4>
-            </vgr-list-column>
-          </vgr-list-item-header>
-          <vgr-list-item-content>
-            <p>Navigering i tabell:</p>
-            <ul>
-              <li>- Tab/Shift+Tab - För att hoppa mellan raderna</li>
-              <li>- Enter eller Space - För att toggla expanderbara tabellrader mellan expanderat och ihopfällt läge.</li>
-              <li>- Implementatören behöver sätta tabindex på sina table rows för att de skall vara möjliga att nå med
-                tab.</li>
-            </ul>
-          </vgr-list-item-content>
-        </vgr-list-item>
-      </vgr-list>
-    </vgr-page-block>
-  </vgr-page-body>
-</vgr-page>
+          </vgr-table>
+        </vgr-table>
+      </vgr-table>
+    </vgr-table>
+    <vgr-table>
+      <vgr-table-header>
+        <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
+        <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
+        <vgr-table-header-column [width]="3" [align]="'right'">Header Column3</vgr-table-header-column>
+      </vgr-table-header>
+      <vgr-table-row tabindex="0">
+        <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+      </vgr-table-row>
+    </vgr-table>
+    <vgr-table [expandable]="false">
+      <vgr-table-header>
+        <vgr-table-header-column [width]="10">Ej</vgr-table-header-column>
+        <vgr-table-header-column [width]="5">Expanderbar</vgr-table-header-column>
+        <vgr-table-header-column [width]="3" [align]="'right'">Header</vgr-table-header-column>
+      </vgr-table-header>
+    </vgr-table>
+  </div>
+  <div class="docs__api">
+    <h2><code>&lt;vgr-table&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>expanded: boolean</td>
+        <td>Anger om sektionen är expanderad eller ej</td>
+        <td>[expanded]="true"</td>
+      </tr>
+      <tr>
+        <td>expandable: boolean (default: true)</td>
+        <td>Genom att sätta [expandable]="false" på tabellen så kan kan raden inte expanderas och har ingen
+          chevron.</td>
+        <td>[expandable]="false"</td>
+      </tr>
+      <tr>
+        <td>expandedChanged: EventEmitter&lt;boolean&gt;
+        </td>
+        <td>Event som triggras när sektionen expanderas/kollapsas.</td>
+        <td>(expandedChanged)="onExpandedChanged($event)"</td>
+      </tr>
+    </table>
+    <br>
+
+    <h2><code>&lt;vgr-table-header&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th style="width:600px">Beskrivning</th>
+      </tr>
+      <tr>
+        <td>
+          Behållare för vgr-table-header-column. Har inga properties.
+        </td>
+      </tr>
+    </table>
+    <br>
+
+    <h2><code>&lt;vgr-table-header-column&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>width : number</td>
+        <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av
+          width ska
+          vara 20 för vgr-table.
+        </td>
+        <td>
+          [width]="20"
+        </td>
+      </tr>
+      <tr>
+        <td>align : string</td>
+        <td>Man kan sätta en alignment på kolumnerna. Defaultvärde är left. Giltiga värden är right, left och
+          center.
+          <br>Om man sätter ett felaktigt värde så sätts defaultvärdet
+        </td>
+        <td>
+          [align]="'right'"
+        </td>
+      </tr>
+    </table>
+    <br>
+
+    <h2><code>&lt;vgr-table-row&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th style="width:600px">Beskrivning</th>
+      </tr>
+      <tr>
+        <td>
+          Behållare för vgr-table-row. Har inga properties.
+        </td>
+      </tr>
+    </table>
+    <br>
+
+    <h2><code>&lt;vgr-table-row-column&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>width : number</td>
+        <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av
+          width ska
+          vara 20 för vgr-table.
+        </td>
+        <td>
+          [width]="20"
+        </td>
+      </tr>
+      <tr>
+        <td>align : string</td>
+        <td>Man kan sätta en alignment på kolumnerna. Defaultvärde är left. Giltiga värden är right, left och
+          center.
+          <br>Om man sätter ett felaktigt värde så sätts defaultvärdet
+        </td>
+        <td>
+          [align]="'right'"
+        </td>
+      </tr>
+    </table>
+
+  </div>
+  <div class="docs__wcag ">
+    <p>Navigering i tabell:</p>
+    <ul>
+      <li>- Tab/Shift+Tab - För att hoppa mellan raderna</li>
+      <li>- Enter eller Space - För att toggla expanderbara tabellrader mellan expanderat och ihopfällt läge.</li>
+      <li>- Implementatören behöver sätta tabindex på sina table rows för att de skall vara möjliga att nå med
+        tab.</li>
+    </ul>
+  </div>
+  <div class="docs__after">
+  </div>
+</app-component-docs>

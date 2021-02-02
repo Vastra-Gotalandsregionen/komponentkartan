@@ -16,11 +16,13 @@ export class PageComponent implements OnInit, OnDestroy {
   constructor(private pageHeaderHeightService: PageHeaderHeightService) { }
 
   ngOnInit() {
-    this.bodyContainer.nativeElement.style.top = `${this.pageHeaderHeightService.height}px`;
+    const margin =  10;
+
+    this.bodyContainer.nativeElement.style.top = `${this.pageHeaderHeightService.height + margin }px`;
     this.pageHeaderHeightService.heightChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(value => {
-        this.bodyContainer.nativeElement.style.top = `${value}px`;
+        this.bodyContainer.nativeElement.style.top = `${value + margin}px`;
       });
   }
 

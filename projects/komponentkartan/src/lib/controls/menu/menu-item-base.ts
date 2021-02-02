@@ -13,8 +13,7 @@ export abstract class MenuItemBaseDirective {
     arrowDown: EventEmitter<null> = new EventEmitter();
     @Output()
     tab: EventEmitter<null> = new EventEmitter();
-    @Output()
-    showExpanded: boolean;
+    @Output() showExpanded: boolean;
     constructor() { }
     setFocus(movingUp: boolean = false) { }
 }
