@@ -5,40 +5,41 @@
  * Instead, we will use the "label" that is associated with our textbox.
  * It will contain all of the checkbox graphics and behaviour */
 
-:host .checkbox {
-  position: relative;
-  align-items: center;
-  display: flex !important;
-  cursor: pointer;
-  min-height: $component-height;
-  &.checkbox--disabled {
-    cursor: default;
-  }
-}
+// :host .checkbox {
+//   position: relative;
+//   align-items: center;
+//   display: flex !important;
+//   cursor: pointer;
+//   min-height: $component-height;
+//   &.checkbox--disabled {
+//     cursor: default;
+//   }
+// }
 
-.checkbox--inline {
-  display: inline-flex;
-}
+// .checkbox--inline {
+//   display: inline-flex;
+// }
 
-.checkbox__image {
-  position: relative;
-  margin-right: $margin--slim - 2px;
-  margin-left: $focus-outline-width;
-  margin-top: $focus-outline-width;
-  margin-bottom: $focus-outline-width;
-  font-size: 18px;
-  &:focus {
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-bottom: 0px;
-    margin-right: $margin--slim - $focus-outline-width;
-    outline: none;
-    border: $focus-outline-width solid $focus-color;
-  }
-}
+// .checkbox__image {
+//   position: relative;
+//   margin-right: $margin--slim - 2px;
+//   margin-left: $focus-outline-width;
+//   margin-top: $focus-outline-width;
+//   margin-bottom: $focus-outline-width;
+//   font-size: 18px;
+//   &:focus {
+//     margin-top: 0px;
+//     margin-left: 0px;
+//     margin-bottom: 0px;
+//     margin-right: $margin--slim - $focus-outline-width;
+//     outline: none;
+//     border: $focus-outline-width solid $focus-color;
+//   }
+// }
 
 .checkbox__label {
   white-space: nowrap;
+  margin-left: 5px;
   text-overflow: ellipsis;
   display: inline-block;
   transition: color 0.6s linear;
@@ -50,10 +51,76 @@
   }
 }
 
-input[type="checkbox"] { position: absolute; opacity: 0; z-index: -1; }
-input[type="checkbox"]+span { font: 16pt sans-serif; color: #000; }
-input[type="checkbox"]+span:before { font: 16pt FontAwesome; content: '\00f096'; display: inline-block; width: 16pt; padding: 2px 0 0 3px; margin-right: 0.5em; }
-input[type="checkbox"]:checked+span:before { content: '\00f046'; }
-input[type="checkbox"]:focus+span:before { outline: 1px dotted #aaa; }
-input[type="checkbox"]:disabled+span { color: #999; }
-input[type="checkbox"]:not(:disabled)+span:hover:before { text-shadow: 0 1px 2px #77F; }
+.checkbox {
+  display: grid;
+  grid-gap: 5px;
+  font-size: 16px;
+  color: var(--color);
+}
+
+.checkbox__input {
+  display: contents;
+
+  input {
+    opacity: 0;
+    width: 0.875em;
+    height: 0.875em;
+
+    &:focus + .checkbox__control {
+      box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+    }
+
+    &:checked + .checkbox__control svg {
+      transform: scale(1);
+      background-color: black;
+      color: white;
+
+    }
+    &:checked + .checkbox__control {
+      background-color: black;
+    }
+
+    &:disabled + .checkbox__control {
+      border: 2px solid $control-color--disabled;
+      background-color: white;
+    }
+
+    &:checked:disabled + .checkbox__control svg {
+      background-color: $control-color--disabled;
+      color: #fff;
+    }
+
+    &:checked:disabled + .checkbox__control {
+      background-color: $control-color--disabled;
+    }
+
+  }
+
+
+}
+
+
+
+.checkbox__control {
+  display: inline-flex;
+  width: 0.875em;
+  height: 0.875em;
+  border-radius: 2px;
+  border: 2px solid;
+  background-color: #fff;
+  cursor: pointer;
+
+  &.checkbox--transparent {
+    background-color: transparent;
+  }
+
+}
+
+.checkbox__control svg {
+  // transition: transform 0.1s ease-in 25ms;
+  transform: scale(0);
+  // transform-origin: bottom left;
+}
+
+
+
