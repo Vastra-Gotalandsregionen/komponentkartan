@@ -7,7 +7,7 @@
   align-items: baseline;
   background-color: white;
   padding: 4px 10px;
-  
+
   &:before {
     content: '';
     z-index: 2;
@@ -18,7 +18,7 @@
     position: absolute;
     transition: background .2s ease;
   }
-  
+
   ::ng-deep {
     vgr-icon {
       margin-right: 6px;
@@ -44,16 +44,16 @@
     }
   }
 
-  &.success { background: $secondary-color--success; }
+  &.success { background: $secondary-color--success; border: 1px solid $primary-color--success; }
   &.success:before { background: $primary-color--success; }
 
-  &.error { background: $secondary-color--error; }
+  &.error { background: $secondary-color--error; border: 1px solid $primary-color--error; }
   &.error:before { background: $primary-color--error; }
 
-  &.warning { background: $secondary-color--warning; }
+  &.warning { background: $secondary-color--warning; border: 1px solid $primary-color--warning; }
   &.warning:before { background: $primary-color--warning; }
 
-  &.info { background: $secondary-color--info; }
+  &.info { background: $secondary-color--info; border: 1px solid $primary-color--info; }
   &.info:before { background: $primary-color--info; }
 
   &.text:before,
@@ -96,5 +96,10 @@
         }
       }
     }
+
+    &.success { border: 2px solid $primary-color--success; }
+    &.error { border: 2px solid $primary-color--error; }
+    &.warning { border: 2px solid $primary-color--warning; }
+    &.info { border: 2px solid $primary-color--info; }
   }
 }
