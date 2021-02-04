@@ -21,7 +21,7 @@ describe('[PageComponent]', () => {
     it('pageHeaderHeight is correct', () => {
       service.setHeight(0);
       component.ngOnInit();
-      expect(component.bodyContainer.nativeElement.style.top).toBe('0px');
+      expect(component.bodyContainer.nativeElement.style.top).toBe('10px');
     });
   });
 
@@ -31,7 +31,7 @@ describe('[PageComponent]', () => {
         it('body container is offset', () => {
           service.setHeight(100);
           component.ngOnInit();
-          expect(component.bodyContainer.nativeElement.style.top).toBe('100px');
+          expect(component.bodyContainer.nativeElement.style.top).toBe('110px');
         });
       });
     });
