@@ -2,31 +2,36 @@
 
 .validation {
   max-height: none;
-  height: 30px;
+  // height: 30px;
   padding: 0px;
-  background-color: inherit;
+  // background-color: inherit;
   position: relative;
   display: block;
   top: 0px;
   .ng-invalid > .validation-error--active & {
     max-height: unset;
-    height: auto;
+    // height: auto;
     padding: $margin--slim;
     margin-left: -$margin--slim;
     margin-right: -$margin--slim;
     .title-value-layout & {
       top: -10px;
     }
-    background-color: $secondary-color--error;
+    // background-color: $secondary-color--error;
     transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear, top 0.3s linear;
+    > div:first-of-type {
+      border: 3px solid red;
+      border-radius: 2px;
+      padding: 1px;
+    }
   }
   .ng-invalid > .validation-error--editing.validation-error--active & {
     max-height: unset;
-    height: auto;
+    // height: auto;
     .title-value-layout & {
       top: -10px;
     }
-    background-color: $background-color--default;
+    // background-color: $background-color--default;
     padding: $margin--slim;
     margin-left: -$margin--slim;
     margin-right: -$margin--slim;
@@ -34,10 +39,10 @@
   }
   .readonly &,
   &.readonly {
-    background-color: inherit !important;
+    // background-color: inherit !important;
     transition: max-height 0.3s linear;
     max-width: none !important;
-    height: auto;
+    // height: auto;
     .validation__status {
       display: none !important;
     }
