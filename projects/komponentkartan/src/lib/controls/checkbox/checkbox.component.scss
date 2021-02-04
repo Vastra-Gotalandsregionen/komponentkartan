@@ -5,38 +5,6 @@
  * Instead, we will use the "label" that is associated with our textbox.
  * It will contain all of the checkbox graphics and behaviour */
 
-// :host .checkbox {
-//   position: relative;
-//   align-items: center;
-//   display: flex !important;
-//   cursor: pointer;
-//   min-height: $component-height;
-//   &.checkbox--disabled {
-//     cursor: default;
-//   }
-// }
-
-// .checkbox--inline {
-//   display: inline-flex;
-// }
-
-// .checkbox__image {
-//   position: relative;
-//   margin-right: $margin--slim - 2px;
-//   margin-left: $focus-outline-width;
-//   margin-top: $focus-outline-width;
-//   margin-bottom: $focus-outline-width;
-//   font-size: 18px;
-//   &:focus {
-//     margin-top: 0px;
-//     margin-left: 0px;
-//     margin-bottom: 0px;
-//     margin-right: $margin--slim - $focus-outline-width;
-//     outline: none;
-//     border: $focus-outline-width solid $focus-color;
-//   }
-// }
-
 .checkbox__label {
   white-space: nowrap;
   margin-left: 8px;
@@ -113,7 +81,5 @@
 }
 
 .checkbox__control svg {
-  // transition: transform 0.1s ease-in 25ms;
   transform: scale(0);
-  // transform-origin: bottom left;
 }
