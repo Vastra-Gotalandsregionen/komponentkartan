@@ -52,15 +52,18 @@
     &:disabled + .checkbox__control {
       border: 2px solid $control-color--disabled;
       background-color: white;
+      cursor: default;
     }
 
     &:checked:disabled + .checkbox__control svg {
       background-color: $control-color--disabled;
       color: #fff;
+      cursor: default;
     }
 
     &:checked:disabled + .checkbox__control {
       background-color: $control-color--disabled;
+      cursor: default;
     }
   }
 }
