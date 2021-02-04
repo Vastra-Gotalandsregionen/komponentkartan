@@ -44,11 +44,11 @@
   display: inline-block;
   transition: color 0.6s linear;
   cursor: pointer;
-  .checkbox--disabled & {
-    color: $control-color--disabled;
-    transition: color 0.6s linear;
-    cursor: default;
-  }
+}
+.checkbox--disabled {
+  color: $control-color--disabled;
+  transition: color 0.6s linear;
+  cursor: default;
 }
 
 .checkbox {
@@ -67,15 +67,16 @@
     height: 0.875em;
 
     &:focus + .checkbox__control {
-      box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+      box-shadow: 0 0 0 2px #2275d3;
+      outline: none;
     }
 
     &:checked + .checkbox__control svg {
       transform: scale(1);
       background-color: black;
       color: white;
-
     }
+
     &:checked + .checkbox__control {
       background-color: black;
     }
@@ -93,13 +94,8 @@
     &:checked:disabled + .checkbox__control {
       background-color: $control-color--disabled;
     }
-
   }
-
-
 }
-
-
 
 .checkbox__control {
   display: inline-flex;
@@ -121,6 +117,3 @@
   transform: scale(0);
   // transform-origin: bottom left;
 }
-
-
-
