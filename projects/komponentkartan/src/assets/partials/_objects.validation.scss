@@ -7,15 +7,19 @@
   // background-color: inherit;
   position: relative;
   display: block;
-  top: 0px;
+  top: 5px;
   .ng-invalid > .validation-error--active & {
     max-height: unset;
     // height: auto;
-    padding: $margin--slim;
-    margin-left: -$margin--slim;
-    margin-right: -$margin--slim;
+    // padding: $margin--slim;
+    // margin-left: -$margin--slim;
+    // margin-right: -$margin--slim;
+    top: 0px;
+    padding-top: 2px;
+    margin-left: -4px;
+    margin-right: -4px;
     .title-value-layout & {
-      top: -10px;
+      top: -10px; //TODO
     }
     // background-color: $secondary-color--error;
     transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear, top 0.3s linear;
@@ -32,9 +36,9 @@
       top: -10px;
     }
     // background-color: $background-color--default;
-    padding: $margin--slim;
-    margin-left: -$margin--slim;
-    margin-right: -$margin--slim;
+    padding-top: 2px;
+    margin-left: -4px;
+    margin-right: -4px;
     transition: background-color 0.3s linear;
   }
   .readonly &,
@@ -50,6 +54,7 @@
 }
 
 .validation__status {
+  padding-left: 5px;
   display: none;
   align-items: top;
   .ng-invalid > .validation-error--active & {
