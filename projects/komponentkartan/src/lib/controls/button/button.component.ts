@@ -26,7 +26,7 @@ export class ButtonComponent implements OnChanges {
     }
   }
 
-  focus() {
+  public focus() {
     this.button.nativeElement.focus();
   }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ButtonComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
   selector: 'app-textbuttons',
@@ -7,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./textbuttons.component.scss']
 })
 export class TextbuttonsComponent implements OnInit {
+  @ViewChild('submitButton', { read: ButtonComponent, static: false }) submitButton: ButtonComponent;
   lastButtonPressed: string;
   buttonDisabled = true;
   buttonSecondaryDisabled = true;
@@ -33,5 +35,9 @@ export class TextbuttonsComponent implements OnInit {
 
   onSubmit() {
     alert('Form submitted!');
+  }
+
+  setFocusOnSubmit() {
+    this.submitButton.focus();
   }
 }
