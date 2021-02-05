@@ -1,32 +1,34 @@
 <div class="custominput" [ngClass]="{ 'validation-error--active': showValidation, 'validation-error--editing': hasFocus }">
   <div class="validation" [ngClass]="{ 'readonly': readonly }">
-    <div class="inputwrapper" [ngClass]="{
-      'alignRight': textAlign === 'right'
-    }">
-      <div class="prefix" *ngIf="prefix">{{prefix}}</div>
-      <input
-        [attr.id]="idForLabel"
-        [type]="type"
-        [attr.min]="min"
-        [attr.max]="max"
-        [disabled]="disabledControl"
-        [attr.minlength]="minlength"
-        [attr.maxlength]="maxlength"
-        [attr.pattern]="pattern"
-        [placeholder]="placeholder"
-        [readonly]="readonly"
-        [required]="required"
-        [attr.step]="step"
-        [name]="name"
-        [value]="value"
-        (search)="onChange($event)"
-        (input)="onChange($event)"
-        (focus)="onFocus($event)"
-        (blur)="onBlur($event)"
-        #inputElement>
-      <div class="suffix" *ngIf="suffix">{{suffix}}</div>
-      <div class="searchicon" *ngIf="type === 'search'">
-        <vgr-icon icon="search"></vgr-icon>
+    <div>
+      <div class="inputwrapper" [ngClass]="{
+        'alignRight': textAlign === 'right'
+      }">
+        <div class="prefix" *ngIf="prefix">{{prefix}}</div>
+        <input
+          [attr.id]="idForLabel"
+          [type]="type"
+          [attr.min]="min"
+          [attr.max]="max"
+          [disabled]="disabledControl"
+          [attr.minlength]="minlength"
+          [attr.maxlength]="maxlength"
+          [attr.pattern]="pattern"
+          [placeholder]="placeholder"
+          [readonly]="readonly"
+          [required]="required"
+          [attr.step]="step"
+          [name]="name"
+          [value]="value"
+          (search)="onChange($event)"
+          (input)="onChange($event)"
+          (focus)="onFocus($event)"
+          (blur)="onBlur($event)"
+          #inputElement>
+        <div class="suffix" *ngIf="suffix">{{suffix}}</div>
+        <div class="searchicon" *ngIf="type === 'search'">
+          <vgr-icon icon="search"></vgr-icon>
+        </div>
       </div>
     </div>
     <div class="validation__status">
