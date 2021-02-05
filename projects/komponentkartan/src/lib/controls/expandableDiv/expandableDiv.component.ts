@@ -1,4 +1,4 @@
-import { Input, Component, Output, EventEmitter } from '@angular/core';
+import { Input, Component, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { toggleExpandedState, toggleChevron } from '../../animation';
 
 @Component({
@@ -10,6 +10,7 @@ import { toggleExpandedState, toggleChevron } from '../../animation';
 export class ExpandableDivComponent {
   @Input() expanded = false;
   @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @ViewChild('header', { static: false }) header: ElementRef;
 
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
@@ -39,5 +40,11 @@ export class ExpandableDivComponent {
   expand() {
     this.expanded = true;
     this.expandedChanged.emit(this.expanded);
+  }
+
+  public focus() {
+    if (this.header) {
+      this.header.nativeElement.focus();
+    }
   }
 }

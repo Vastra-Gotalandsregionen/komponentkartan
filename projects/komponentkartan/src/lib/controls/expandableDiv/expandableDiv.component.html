@@ -1,5 +1,5 @@
 <div class="expandable-div">
-  <div class="expandable-div-header" (click)="toggleExpanded()" (keydown)="onKeydown($event)" tabindex="0"
+  <div #header class="expandable-div-header" (click)="toggleExpanded()" (keydown)="onKeydown($event)" tabindex="0"
     [attr.aria-expanded]="expanded" role="button">
     <div class="expandable-div-header__content">
       <ng-content select="vgr-expandable-div-header"></ng-content>
