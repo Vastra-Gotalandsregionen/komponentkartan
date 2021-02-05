@@ -8,7 +8,7 @@
   // background-color: inherit;
   position: relative;
   display: block;
-  top: 5px;
+  top: 9px; //changed
   .ng-invalid > .validation-error--active & {
     max-height: unset;
     // height: auto;
@@ -16,28 +16,37 @@
     // margin-left: -$margin--slim;
     // margin-right: -$margin--slim;
     top: 0px;
-    padding-top: 2px;
+    padding-top: 5px;
+    padding-bottom: 0px;
     margin-left: -4px;
     margin-right: -4px;
     .title-value-layout & {
-      top: -10px; //TODO
+      top: -4px; //TODO
     }
     // background-color: $secondary-color--error;
-    transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear, top 0.3s linear;
+    // transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear, top 0.3s linear;
     > div:first-of-type {
       border: 3px solid #FF0000;
       border-radius: 2px;
       padding: 1px;
+
     }
   }
   .ng-invalid > .validation-error--editing.validation-error--active & {
     max-height: unset;
+    padding-bottom: 0px;
     // height: auto;
+    > div:first-of-type {
+      border: none;
+      // border: 3px solid blue;
+      // border-radius: 2px;
+      padding: 4px;
+    }
     .title-value-layout & {
-      top: -10px;
+      top: -3px;
     }
     // background-color: $background-color--default;
-    padding-top: 2px;
+    padding-top: 5px;
     margin-left: -4px;
     margin-right: -4px;
     transition: background-color 0.3s linear;

@@ -93,19 +93,19 @@
             <vgr-title-value>
               <vgr-title-value-heading>Bruttobelopp</vgr-title-value-heading>
               <vgr-title-value-container>
-                <vgr-input [value]="10000" [suffix]="'kr'" textAlign="right" formControlName="control1"></vgr-input>
+                <vgr-input [value]="10000" [suffix]="'kr'" textAlign="right" formControlName="control1" [readonly]="locked"></vgr-input>
               </vgr-title-value-container>
             </vgr-title-value>
             <vgr-title-value>
               <vgr-title-value-heading for="skattesats">Skattesats</vgr-title-value-heading>
               <vgr-title-value-container>
-                <vgr-input id="skattesats" [value]="32" [suffix]="'%'" textAlign="right" formControlName="control2"></vgr-input>
+                <vgr-input id="skattesats" [value]="32" [suffix]="'%'" textAlign="right" formControlName="control2" [readonly]="locked"></vgr-input>
               </vgr-title-value-container>
             </vgr-title-value>
             <vgr-title-value>
               <vgr-title-value-heading>Nettobelopp</vgr-title-value-heading>
               <vgr-title-value-container>
-                <vgr-input [value]="32" [suffix]="'kr'" textAlign="right" formControlName="control3"></vgr-input>
+                <vgr-input [value]="32" [suffix]="'kr'" textAlign="right" formControlName="control3" [readonly]="locked"></vgr-input>
               </vgr-title-value-container>
             </vgr-title-value>
           </vgr-title-value-layout>
@@ -113,6 +113,7 @@
       </vgr-card-column>
     </vgr-card>
     </form>
+    <vgr-button (click)="locked = !locked">Lås/Låsupp</vgr-button>
   </div>
   <div class="docs__api">
     <h2><code>&lt;vgr-title-value&gt;</code></h2>
