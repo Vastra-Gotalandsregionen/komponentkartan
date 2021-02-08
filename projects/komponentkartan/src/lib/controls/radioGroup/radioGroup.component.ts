@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, OnChanges, AfterViewInit, SkipSelf, Optional, Host, Renderer2 } from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, OnChanges, AfterViewInit, SkipSelf, Optional, Host, Renderer2, ViewChild } from '@angular/core';
 import { SelectableItem } from '../../models/selectableItem.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 import { Guid } from '../../utils/guid';
@@ -59,6 +59,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
 
   ngAfterViewInit() {
     this.elements = this.elementRef.nativeElement.querySelectorAll(':not(.radio-button--disabled) .radio-button__icon');
+  }
+
+  public focus() {
+    this.elements[0].focus();
   }
 
   optionClicked(option: RadioGroupItem<any>) {
@@ -171,6 +175,10 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     }
   }
 
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
+
   private selectOption(option: RadioGroupItem<any>) {
     this.selectedOption = option;
     this.radiogroupItems.forEach(o => {
@@ -181,9 +189,6 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     this.selectedChanged.emit(option.value);
   }
 
-  setDisabledState(isDisabled: boolean) {
-    this.disabled = isDisabled;
-  }
 }
 
 export interface RadioGroupItem<TValue> extends SelectableItem<TValue> {
