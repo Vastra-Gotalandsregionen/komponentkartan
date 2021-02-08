@@ -9,6 +9,10 @@
   position: relative;
   display: block;
   top: 9px; //changed
+  .title-value-layout & {
+    top: 0;
+    padding-bottom: 0;
+  }
   .ng-invalid > .validation-error--active & {
     max-height: unset;
     // height: auto;
