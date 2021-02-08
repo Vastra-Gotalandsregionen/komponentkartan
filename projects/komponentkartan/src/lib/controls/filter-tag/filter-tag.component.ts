@@ -41,7 +41,7 @@ export class FilterTagComponent implements AfterViewInit {
     }
   }
 
-  focus() {
+  public focus() {
     // focus() does not work in IE11 unless
     // called after a short delay. Wrap in if
     // to not do this in better browsers.

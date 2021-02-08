@@ -20,14 +20,14 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
     this.addFilterTagSubscriptions();
 
     this.filterTags.changes
-    .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe(
-      _ => {
-        this.setFilterTagTabFocusability();
-        this.setFilterTagFocus();
-        this.addFilterTagSubscriptions();
-      }
-    );
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        _ => {
+          this.setFilterTagTabFocusability();
+          this.setFilterTagFocus();
+          this.addFilterTagSubscriptions();
+        }
+      );
   }
 
   ngOnDestroy() {
@@ -59,34 +59,40 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
 
     this.filterTags.forEach((x, i) => {
       const previousSubscription = x.previous
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        if (i > 0) {
-          this.filterTags.toArray()[i - 1].focus();
-        } else {
-          this.filterTags.last.focus();
-        }
-      });
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          if (i > 0) {
+            this.filterTags.toArray()[i - 1].focus();
+          } else {
+            this.filterTags.last.focus();
+          }
+        });
       this.filterTagSubscriptions.push(previousSubscription);
 
       const nextSubscription = x.next
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        if (i < this.filterTags.length - 1) {
-          this.filterTags.toArray()[i + 1].focus();
-        } else {
-          this.filterTags.first.focus();
-        }
-      });
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          if (i < this.filterTags.length - 1) {
+            this.filterTags.toArray()[i + 1].focus();
+          } else {
+            this.filterTags.first.focus();
+          }
+        });
       this.filterTagSubscriptions.push(nextSubscription);
 
       const removeSubscription = x.remove
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        this.lastSelectedIndex = i;
-        this.setFilterTagFocus();
-      });
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          this.lastSelectedIndex = i;
+          this.setFilterTagFocus();
+        });
       this.filterTagSubscriptions.push(removeSubscription);
     });
+  }
+
+  public focus() {
+    if (this.filterTags && this.filterTags.length) {
+      this.filterTags.first.focus();
+    }
   }
 }
