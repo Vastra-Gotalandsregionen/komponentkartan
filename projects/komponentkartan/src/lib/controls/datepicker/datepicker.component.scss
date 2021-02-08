@@ -8,6 +8,22 @@
     display: inline-block;
     width: inherit;
 
+    .validation {
+      padding-top: 0px;
+      background-color: green;
+      
+    }
+
+    &.validation-error--active,
+    &.validation-error--editing {
+      .validation {
+        height: auto;
+        padding-top: 1px;
+        background-color: yellow;
+      }
+   
+    }
+
     .datepicker__control {
       position: relative;
 

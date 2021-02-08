@@ -64,7 +64,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
       return false;
     }
 
-    return !this.headerHasFocus && (this.parseError || (this.formControl && this.formControl.invalid));
+    return (this.parseError || (this.formControl && this.formControl.invalid));
   }
 
   get errorEditing() {

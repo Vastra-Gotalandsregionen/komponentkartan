@@ -2,31 +2,38 @@
 
 .validation {
   max-height: none;
+  
   // height: 30px;
   padding: 0px;
-  padding-bottom: 5px;
+  // padding-bottom: 5px;
   // background-color: inherit;
   position: relative;
   display: block;
-  top: 9px; //changed
+  // top: 9px; //changed
   .title-value-layout & {
     top: 0;
     padding-bottom: 0;
+    background-color: greenyellow;
   }
   .ng-invalid > .validation-error--active & {
     max-height: unset;
-    // height: auto;
+    min-height: 71px;
+    height: auto;
     // padding: $margin--slim;
     // margin-left: -$margin--slim;
     // margin-right: -$margin--slim;
     top: 0px;
-    padding-top: 5px;
+    // padding-top: 5px;
     padding-bottom: 0px;
     margin-left: -4px;
     margin-right: -4px;
+    background-color: pink;
     .title-value-layout & {
       top: -4px; //TODO
     }
+    // .dropdown-select__control & {
+    //   top: -7px;
+    // }
     // background-color: $secondary-color--error;
     // transition: background-color 0.3s linear, padding-top 0.3s linear, padding-bottom 0.3s linear, top 0.3s linear;
     > div:first-of-type {
@@ -39,21 +46,19 @@
   .ng-invalid > .validation-error--editing.validation-error--active & {
     max-height: unset;
     padding-bottom: 0px;
+    // padding-top: 5px;
+    margin-left: -4px;
+    margin-right: -4px;
+    // transition: background-color 0.3s linear;
+
     // height: auto;
     > div:first-of-type {
       border: none;
-      // border: 3px solid blue;
-      // border-radius: 2px;
       padding: 4px;
     }
     .title-value-layout & {
-      top: -3px;
+      top: -4px;
     }
-    // background-color: $background-color--default;
-    padding-top: 5px;
-    margin-left: -4px;
-    margin-right: -4px;
-    transition: background-color 0.3s linear;
   }
   .readonly &,
   &.readonly {
@@ -79,9 +84,9 @@
     margin-top: 4px;
     display: flex;
   }
-  .readonly & {
-    display: none;
-  }
+  // .readonly & {
+  //   display: none;
+  // }
 }
 .validation__status__icon,
 .validation_status__icon {
