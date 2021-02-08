@@ -48,6 +48,12 @@
     line-height: 30px;
   }
 }
+.custominput:not(validation-error--active):not(.validation-error--editing) > .validation  > .inputwrapper { 
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+
 
 .validation-error--editing {
   .inputwrapper {

@@ -10,8 +10,6 @@
 
     .validation {
       padding-top: 0px;
-      background-color: green;
-      
     }
 
     &.validation-error--active,
@@ -19,7 +17,6 @@
       .validation {
         height: auto;
         padding-top: 1px;
-        background-color: yellow;
       }
    
     }
