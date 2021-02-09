@@ -7,14 +7,16 @@
     </div>
   </div>
   <div class="docs__examples">
-    <vgr-toggle-button [pressed]="state" (click)="toggle()">{{state ? 'På' : 'Av'}}</vgr-toggle-button>&nbsp;
+    <vgr-toggle-button #myToggleButton [pressed]="state" (click)="toggle()">{{state ? 'På' : 'Av'}}</vgr-toggle-button>&nbsp;
     <vgr-toggle-button [disabled]="true">Disabled toggle button</vgr-toggle-button>
+    <vgr-button style="margin-left: 20px;" (click)="setFocusOnMyToggleButton()">Fokusera</vgr-button>
     <br>
     <br>
-    <div>
-      <vgr-toggle-button-group [width]="'400px'">
+    <div style="display: flex;">
+      <vgr-toggle-button-group [width]="'400px'" #myToggleButtonGroup>
         <vgr-toggle-button *ngFor="let state of states" [pressed]="state.state" (click)="toggleStates(state)">{{state.text}}</vgr-toggle-button>
       </vgr-toggle-button-group>
+      <vgr-button style="margin-left: 20px;" (click)="setFocusOnMyToggleButtonGroup()">Fokusera</vgr-button>
     </div>
   </div>
   <div class="docs__api">
