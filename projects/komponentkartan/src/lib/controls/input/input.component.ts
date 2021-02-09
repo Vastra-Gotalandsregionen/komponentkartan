@@ -97,7 +97,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
       return false;
     }
 
-    return ((this.control && this.control.invalid) || (this.required && this.value == '' ));
+    return ((this.control && this.control.invalid) || (this.required && this.value === '' ));
 
   }
 

@@ -26,7 +26,7 @@ export class TitleValueComponent implements OnInit {
     removeWhenDone: false
   };
   form: FormGroup;
-  locked: boolean = false;
+  locked = false;
 
 
   constructor(public htmlEncoder: HtmlEncodeService, private fb: FormBuilder) { }
