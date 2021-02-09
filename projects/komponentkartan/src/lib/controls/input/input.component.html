@@ -1,4 +1,4 @@
-<div class="custominput" [ngClass]="{ 'validation-error--active': showValidation, 'validation-error--editing': hasFocus }">
+<div class="custominput" [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': hasFocus }">
   <div class="validation" [ngClass]="{ 'readonly': readonly }">
     <div>
       <div class="inputwrapper" [ngClass]="{

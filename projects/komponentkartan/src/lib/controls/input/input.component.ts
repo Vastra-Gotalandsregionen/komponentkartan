@@ -74,6 +74,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
     }
   }
 
+
+
+
   ngOnChanges(changes: SimpleChanges) {
     if (this.control && changes.disabledControl) {
       this.setDisabledState(changes.disabledControl.currentValue);
@@ -86,6 +89,16 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
 
   setDisabledState(isDisabled: boolean) {
     this.disabledControl = isDisabled;
+  }
+
+
+  get errorActive() {
+    if (!this.showValidation || this.disabledControl || this.readonly) {
+      return false;
+    }
+
+    return ((this.control && this.control.invalid) || (this.required && this.value == '' ));
+
   }
 
   propagateChange = (_: any) => {};
