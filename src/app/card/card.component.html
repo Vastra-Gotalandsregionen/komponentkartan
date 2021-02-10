@@ -59,6 +59,7 @@
             <!-- Exempel -->
             <vgr-card>
               <vgr-card-header>
+                <vgr-button (click)="setFocus()">Fokusera på Adressuppgifter</vgr-button>
                 <vgr-save-cancel class="flex-right" [secondary]="true" (unlock)="unlocked = true" (save)="unlocked = false"
                   (cancel)="unlocked = false"></vgr-save-cancel>
               </vgr-card-header>
@@ -106,7 +107,7 @@
                   </vgr-title-value-layout>
                 </vgr-card-section>
 
-                <vgr-card-section [expanded]="true" [title]="'Rubrik'" [subtitle]="'Adressuppgifter'">
+                <vgr-card-section #myCardSection [expanded]="true" [title]="'Rubrik'" [subtitle]="'Adressuppgifter'">
                   <vgr-title-value-layout>
 
                     <vgr-title-value [slim]="true">

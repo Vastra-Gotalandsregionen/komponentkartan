@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
 import { toggleExpandedState, toggleChevron } from '../../animation';
 
 @Component({
@@ -15,6 +15,7 @@ export class CardSectionComponent {
     @Input() subtitle: string;
     @Input() truncateLength = 30;
     @Input() backgroundColor = '#FFFFFF';
+    @ViewChild('cardSectionHeader', { read: ElementRef, static: true }) cardSectionHeader: ElementRef;
     overflow = false;
     animationSpeed = '.4s ease';
     expandOverflow: boolean;
@@ -37,6 +38,10 @@ export class CardSectionComponent {
         } else {
             this.expandOverflow = true;
         }
+    }
+
+    public focus() {
+        this.cardSectionHeader.nativeElement.focus();
     }
 
 
