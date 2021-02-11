@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
-
+import { TableComponent as TableComponentElement } from '../../../projects/komponentkartan/src/lib';
 
 
 @Component({
@@ -9,7 +9,9 @@ import { HtmlEncodeService } from '../html-encode.service';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
-
+  @ViewChild('myTableNo1', { read: TableComponentElement, static: false }) myTableNo1: TableComponentElement;
+  @ViewChild('myTableNo2', { read: TableComponentElement, static: false }) myTableNo2: TableComponentElement;
+  @ViewChild('myTableNo3', { read: TableComponentElement, static: false }) myTableNo3: TableComponentElement;
   htmlTableStructureMarkup = `
   <vgr-table>
   <!-- Rootelementet -->
@@ -30,10 +32,29 @@ export class TableComponent implements OnInit {
   htmlMarkup: string;
   constructor(private htmlEncoder: HtmlEncodeService) {
     this.htmlMarkup =
-    htmlEncoder.prepareHighlightedSection(this.htmlTableStructureMarkup);
-   }
+      htmlEncoder.prepareHighlightedSection(this.htmlTableStructureMarkup);
+  }
 
   ngOnInit() {
+  }
+
+  setFocus(tableNo: number) {
+    setTimeout(() => {
+      switch (tableNo) {
+        case 1:
+          this.myTableNo1.focus();
+          break;
+        case 2:
+          this.myTableNo2.focus();
+          break;
+        case 3:
+          this.myTableNo3.focus();
+          break;
+
+        default:
+          this.myTableNo1.focus();
+      }
+    });
   }
 
 }
