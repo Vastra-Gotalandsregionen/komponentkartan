@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges, ElementRef, OnDestroy } from '@angular/core';
+import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { GridContentComponent } from './grid-content.component';
 import { GridService } from './grid.service';
 import { toggleExpandedState } from '../../animation';
@@ -18,6 +18,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   @Output() expandedChanged: EventEmitter<any> = new EventEmitter();
   @Output() expandPrevented: EventEmitter<any> = new EventEmitter();
   @Output() collapsePrevented: EventEmitter<any> = new EventEmitter();
+  @ViewChild('gridRowHeader', { read: ElementRef, static: false }) gridRowHeader: ElementRef;
 
   @ContentChildren(GridContentComponent) content: QueryList<GridContentComponent>;
   @ContentChildren(NotificationComponent) notifications: QueryList<NotificationComponent>;
@@ -100,4 +101,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
     this.ngUnsubscribe.complete();
   }
 
+  public focus() {
+    this.gridRowHeader.nativeElement.focus();
+  }
 }
