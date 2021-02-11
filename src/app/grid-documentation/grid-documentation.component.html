@@ -101,12 +101,14 @@
         <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
           <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad
         </vgr-button>
+        <vgr-button [buttonStyle]="'discreet'" (click)="setFocusOnColumn()">Fokusera på rubriken Förnamn</vgr-button>
+        <vgr-button [buttonStyle]="'discreet'" (click)="setFocusOnRow()">Fokusera på Raden med Carola</vgr-button>
       </vgr-grid-header-toolbar>
       <vgr-grid-header>
-        <vgr-grid-header-column [sortKey]="'namn'">Förnamn</vgr-grid-header-column>
+        <vgr-grid-header-column [sortKey]="'namn'" #nameColumn>Förnamn</vgr-grid-header-column>
         <vgr-grid-header-column>Efternamn</vgr-grid-header-column>
       </vgr-grid-header>
-      <vgr-grid-row *ngFor="let person of people" [expanded]="person.expanded"
+      <vgr-grid-row #peopleGridRows *ngFor="let person of people" [expanded]="person.expanded"
         (expandedChanged)="person.expanded = $event">
         <vgr-grid-column>{{person.namn}}</vgr-grid-column>
         <vgr-grid-column>{{person.efternamn}}</vgr-grid-column>

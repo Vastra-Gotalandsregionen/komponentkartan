@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { GridSortChangedArgs, GridSortDirection } from '../../../projects/komponentkartan/src/lib';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { GridRowComponent, GridHeaderColumnComponent, GridSortChangedArgs, GridSortDirection } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
   selector: 'vgr-grid-documentation',
@@ -7,6 +7,8 @@ import { GridSortChangedArgs, GridSortDirection } from '../../../projects/kompon
   styleUrls: ['./grid-documentation.component.css']
 })
 export class GridDocumentationComponent implements OnInit {
+  @ViewChild('nameColumn', { read: GridHeaderColumnComponent}) nameColumn: GridHeaderColumnComponent;
+  @ViewChildren('peopleGridRows', {read: GridRowComponent}) peopleGridRows: QueryList<GridRowComponent>;
   people: Person[] = [
     {
       namn: 'Adam',
@@ -210,6 +212,19 @@ export class GridDocumentationComponent implements OnInit {
     setTimeout(() => {
       this.loading = false;
     }, 400);
+  }
+
+  setFocusOnColumn() {
+    setTimeout(() => {
+      this.nameColumn.focus();
+    });
+  }
+
+  setFocusOnRow() {
+    const index = this.people.findIndex(x => x.namn === 'Carola');
+    setTimeout(() => {
+      this.peopleGridRows.toArray()[index].focus();
+    });
   }
 }
 
