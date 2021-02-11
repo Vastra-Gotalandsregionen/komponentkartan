@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CheckboxComponent as CheckboxComponentElement } from '../../../projects/komponentkartan/src/lib';
+import { Component, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-checkbox',
@@ -7,13 +7,10 @@ import { CheckboxComponent as CheckboxComponentElement } from '../../../projects
   styleUrls: ['./checkbox.component.scss']
 })
 export class CheckboxComponent implements OnInit {
-  @ViewChild('myCheckbox', { read: CheckboxComponentElement }) myCheckbox: CheckboxComponentElement;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  setFocus() {
-    this.myCheckbox.focus();
-  }
 }

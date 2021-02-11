@@ -1,6 +1,6 @@
 <div class="checkbox" [ngClass]="{'checkbox--checked' : checked, 'checkbox--disabled' : disabled }" (focusout)="onLeave()"
   (click)="onClick($event)" (keydown)="onKeyDown($event)">
-  <vgr-icon #checkbox [icon]="checked ? 'check-square' : 'square'" [solid]="checked ? true : false" color="text" [disabled]="disabled" class="checkbox__image"
+  <vgr-icon [icon]="checked ? 'check-square' : 'square'" [solid]="checked ? true : false" color="text" [disabled]="disabled" class="checkbox__image"
     [attr.aria-labelledby]="labelledbyid" role="checkbox" tabindex="0" [attr.aria-disabled]="disabled" [attr.aria-checked]="checked">
   </vgr-icon>
   <label id="{{labelledbyid}}" class="checkbox__label" *ngIf="label">{{label}}</label>
