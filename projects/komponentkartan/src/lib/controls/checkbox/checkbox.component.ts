@@ -19,6 +19,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     @Output() checkedChanged = new EventEmitter<boolean>();
     @Input() label: string;
     @Input() formControlName?: string;
+    @Input() transparent = false;
 
     public control: AbstractControl;
     public labelledbyid: string = Guid.newGuid();
@@ -30,6 +31,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
         if (this.formControlName && this.controlContainer) {
             this.control = this.controlContainer.control.get(this.formControlName);
             this.setDisabledState(this.controlContainer.control.get(this.formControlName).disabled);
+
         }
     }
     setDisabledState(isDisabled: boolean) {
@@ -43,7 +45,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     onClick(event: Event): void {
         if (!this.disabled) {
             this.checked = !this.checked;
-            if (this.element) { this.element.focus(); }
+
+            if (this.element) {
+                this.element.focus();
+            }
+
             this.onChange(this.checked);
             this.checkedChanged.emit(this.checked);
             event.stopPropagation();
