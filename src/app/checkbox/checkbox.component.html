@@ -26,8 +26,10 @@
                  <span><vgr-checkbox></vgr-checkbox>Utan ledtext</span>
                     <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
                     <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
-                    <vgr-checkbox [checked]="true" [label]=" 'Vald' "></vgr-checkbox>
+                    <vgr-checkbox #myCheckbox [checked]="true" [label]=" 'Vald' "></vgr-checkbox>
                     <vgr-checkbox [checked]="true" [disabled]="true" [label]=" 'Inaktiverad vald' "></vgr-checkbox>
+                    <br><br>
+                    <vgr-button (click)="setFocus()" >Fokusera på Vald</vgr-button>
                 </div>
 
             </div>
