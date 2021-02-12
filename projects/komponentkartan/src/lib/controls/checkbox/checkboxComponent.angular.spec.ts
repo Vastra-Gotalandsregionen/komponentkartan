@@ -31,7 +31,7 @@ describe('CheckboxComponent', () => {
       fixture = TestBed.createComponent(CheckboxComponent);
       component = fixture.componentInstance;
       rootElement = fixture.debugElement;
-      checkbox = rootElement.query(By.css('.checkbox'));
+      checkbox = rootElement.query(By.css('.checkbox__input'));
       checkedChangedSpy = spyOn(component.checkedChanged, 'emit');
       fixture.detectChanges();
 
@@ -40,10 +40,10 @@ describe('CheckboxComponent', () => {
   });
   describe('When initialized', () => {
     it('checkbox is not checked', () => {
-      expect(checkbox.classes['checkbox--checked']).not.toBe(true);
+      expect(checkbox.context['checked']).not.toBe(true);
     });
     it('checkbox is enabled', () => {
-      expect(checkbox.classes['checkbox--disabled']).not.toBe(true);
+      expect(checkbox.context['disabled']).not.toBe(true);
     });
   });
 
@@ -53,10 +53,10 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
     });
     it('checkbox is not checked', () => {
-      expect(checkbox.classes['checkbox--checked']).toBe(true);
+      expect(checkbox.context['checked']).toBe(true);
     });
     it('checkbox is enabled', () => {
-      expect(checkbox.classes['checkbox--disabled']).not.toBe(true);
+      expect(checkbox.context['disabled']).not.toBe(true);
     });
   });
 
@@ -66,10 +66,10 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
     });
     it('checkbox is not checked', () => {
-      expect(checkbox.classes['checkbox--checked']).not.toBe(true);
+      expect(checkbox.context['checked']).not.toBe(true);
     });
     it('checkbox is disabled', () => {
-      expect(checkbox.classes['checkbox--disabled']).toBe(true);
+      expect(checkbox.context['disabled']).toBe(true);
     });
 
     describe('and checked', () => {
@@ -78,10 +78,10 @@ describe('CheckboxComponent', () => {
         fixture.detectChanges();
       });
       it('checkbox is checked', () => {
-        expect(checkbox.classes['checkbox--checked']).toBe(true);
+        expect(checkbox.context['checked']).toBe(true);
       });
       it('checkbox is disabled', () => {
-        expect(checkbox.classes['checkbox--disabled']).toBe(true);
+        expect(checkbox.context['disabled']).toBe(true);
       });
     });
   });
@@ -93,8 +93,7 @@ describe('CheckboxComponent', () => {
     });
     it('checkbox is checked', () => {
       expect(component.checked).toBe(true);
-
-      expect(checkbox.classes['checkbox--checked']).toBe(true);
+      expect(checkbox.context['checked']).toBe(true);
     });
     it('checked event is emitted', () => {
       expect(component.checkedChanged.emit).toHaveBeenCalledWith(true);
@@ -108,7 +107,7 @@ describe('CheckboxComponent', () => {
       });
       it('checkbox is unchecked', () => {
         expect(component.checked).toBe(false);
-        expect(checkbox.classes['checkbox--checked']).not.toBe(true);
+        expect(checkbox.context['checked']).not.toBe(true);
       });
       it('checked event is emitted', () => {
         expect(component.checkedChanged.emit).toHaveBeenCalledWith(false);
@@ -123,7 +122,7 @@ describe('CheckboxComponent', () => {
     });
     it('checkbox is checked', () => {
       expect(component.checked).toBe(true);
-      expect(checkbox.classes['checkbox--checked']).toBe(true);
+      expect(checkbox.context['checked']).toBe(true);
     });
     it('checked event is emitted', () => {
       expect(component.checkedChanged.emit).toHaveBeenCalledWith(true);
@@ -137,7 +136,7 @@ describe('CheckboxComponent', () => {
     });
     it('checkbox is checked', () => {
       expect(component.checked).toBe(true);
-      expect(checkbox.classes['checkbox--checked']).toBe(true);
+      expect(checkbox.context['checked']).toBe(true);
     });
     it('checked event is emitted', () => {
       expect(component.checkedChanged.emit).toHaveBeenCalledWith(true);
@@ -149,7 +148,7 @@ describe('CheckboxComponent', () => {
 
     beforeEach(() => {
       component.label = 'Ettikett';
-      checkboximage = rootElement.query(By.css('.checkbox__image'));
+      checkboximage = rootElement.query(By.css('.checkbox__control'));
       fixture.detectChanges();
     });
     it('The checkbox has role checkbox.', () => {
@@ -163,11 +162,11 @@ describe('CheckboxComponent', () => {
       });
 
       it('checkbox is associated with the label', () => {
-        expect(labelElement.nativeElement.id).toBe(component.labelledbyid);
+        expect(labelElement.nativeElement.htmlFor).toBe(component.labelledbyid);
       });
       it('checkbox has a label with an id', () => {
         checkbox = rootElement.query(By.css('.checkbox'));
-        expect(checkboximage.attributes['aria-labelledby']).toBe(labelElement.nativeElement.id);
+        expect(checkboximage.attributes['aria-labelledby']).toBe(labelElement.nativeElement.htmlFor);
       });
     });
 

@@ -1,7 +1,16 @@
-<div class="checkbox" [ngClass]="{'checkbox--checked' : checked, 'checkbox--disabled' : disabled }" (focusout)="onLeave()"
-  (click)="onClick($event)" (keydown)="onKeyDown($event)">
-  <vgr-icon [icon]="checked ? 'check-square' : 'square'" [solid]="checked ? true : false" color="text" [disabled]="disabled" class="checkbox__image"
-    [attr.aria-labelledby]="labelledbyid" role="checkbox" tabindex="0" [attr.aria-disabled]="disabled" [attr.aria-checked]="checked">
-  </vgr-icon>
-  <label id="{{labelledbyid}}" class="checkbox__label" *ngIf="label">{{label}}</label>
-</div>
+<span class="checkbox__input" (focusout)="onLeave()" (click)="onClick($event)" (keydown)="onKeyDown($event)">
+  <input id="{{labelledbyid}}" type="checkbox" name="checkbox" [disabled]="disabled" [checked]="checked" aria-hidden="true" tabindex="-1">
+  <span
+  class="checkbox__control"
+  [ngClass]="{ 'checkbox--transparent': transparent }"
+  [attr.aria-labelledby]="labelledbyid"
+  role="checkbox"
+  tabindex="0"
+  [attr.aria-disabled]="disabled"
+  [attr.aria-checked]="checked">
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+    <path fill='none' stroke='currentColor' stroke-width='6' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+  </span>
+</span>
+<label class="checkbox__label" for="{{labelledbyid}}" [ngClass]="{'checkbox--disabled' : disabled }">{{label}}</label>
+
