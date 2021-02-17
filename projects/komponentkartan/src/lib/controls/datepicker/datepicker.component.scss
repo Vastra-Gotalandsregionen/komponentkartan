@@ -35,6 +35,7 @@
         }
 
         .datepicker__header__input {
+          background-color: #fff;
           height: $component-height;
           padding-top: 0;
           padding-bottom: 0;
@@ -46,9 +47,6 @@
           &:after {
             content: attr(data-width);
           }
-          &.readonly {
-            background: inherit;
-          }
 
           &:focus {
             outline: 0;
@@ -56,6 +54,10 @@
 
           &::placeholder {
             color: $text-color--read-only;
+          }
+
+          &.datepicker--transparent {
+            background-color: transparent;
           }
         }
 

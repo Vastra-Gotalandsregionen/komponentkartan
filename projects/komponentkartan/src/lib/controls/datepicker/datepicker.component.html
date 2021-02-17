@@ -9,11 +9,11 @@
         (click)="onHeaderClick()">
         <div #headerLabel *ngIf="!allowText" tabindex="0" role="button" aria-haspopup="grid"
           [attr.aria-labelledby]="labelId + ' ' + headerLabelId" [attr.aria-expanded]="expanded">
-          <input class="datepicker__header__input readonly" [placeholder]="noSelectedDateLabel" readonly="readonly"
+          <input class="datepicker__header__input readonly"[placeholder]="noSelectedDateLabel" readonly="readonly"
             tabindex="-1" [value]="label">
         </div>
         <div *ngIf="allowText">
-          <input #headerInput class="datepicker__header__input" [placeholder]="inputPlaceholder" aria-haspopup="grid"
+          <input #headerInput class="datepicker__header__input" [ngClass]="{'datepicker--transparent': transparent }" [placeholder]="inputPlaceholder" aria-haspopup="grid"
             [attr.aria-labelledby]="labelId" [attr.aria-expanded]="expanded" [value]="label"
             (change)="parseSelectedDate($event.target.value)" [disabled]="disabled">
         </div>
