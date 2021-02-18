@@ -1,0 +1,15 @@
+<span
+  (click)="checkDisabled($event)"
+  (keydown)="onKeydown($event)"
+  class="tab-button-container"
+>
+  <button #tabbutton type="button" class="noselect tab-button"
+  [ngClass]="{'button--disabled': disabled, 'tab-button--active': pressed}"
+  [attr.aria-disabled]="disabled" [attr.aria-label]="ariaLabel" [attr.aria-pressed]="ariaPressed" [tabindex]="tabindex">
+    <span class="button__fixIE">
+      <span #content>
+        <ng-content></ng-content>
+      </span>
+    </span>
+  </button>
+</span>

@@ -1,0 +1,80 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/base.themify.scss";
+
+:host::ng-deep {
+  .tab-button-group {
+    margin-bottom: -10px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    & > * {
+      flex-grow: 1;
+      flex-basis: 0;
+    }
+    .tab-button {
+      width: 100%;
+      margin-bottom: 10px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      // border-right-width: 0;
+
+      &:focus:not(:active) {
+        z-index: $layer-three;
+      }
+      &.tab-button--active {
+        // border-right-width: 0;
+        padding-left: 17px;
+        padding-right: 18px;
+      }
+
+      > span > span {
+        white-space: nowrap;
+      }
+    }
+    :first-child .tab-button-container {
+      .tab-button {
+        // border-top-left-radius: 1px;
+        // border-bottom-left-radius: 1px;
+      }
+    }
+    :last-child .tab-button-container {
+      .tab-button {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .tab-button-group {
+      margin-bottom: -15px;
+      .tab-button {
+        margin-bottom: 15px;
+        padding-left: 22px;
+        padding-right: 22px;
+        &.button--active {
+          padding-left: 21px;
+          padding-right: 22px;
+        }
+      }
+      :last-child .tab-button-container {
+        .tab-button--active {
+          padding-left: 22px;
+          padding-right: 22px;
+        }
+      }
+    }
+
+    .tab-button {
+      font-size: $font-size--medium;
+      padding-left: 22px;
+      padding-right: 22px;
+      &.tab-button--active {
+        padding-left: 21px;
+        padding-right: 21px;
+      }
+    }
+  }
+}

@@ -63,6 +63,7 @@ import { PaginationDocumentationComponent } from './pagination-documentation/pag
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { GridDocumentationComponent } from './grid-documentation/grid-documentation.component';
 import { NotificationDocumentationComponent} from './notification-documentation/notification-documentation.component';
+import { TabButtonComponent } from './tab-button/tab-button.component';
 
 @NgModule({
     declarations: [
@@ -105,7 +106,8 @@ import { NotificationDocumentationComponent} from './notification-documentation/
         PaginationDocumentationComponent,
         ModaldialogComponent,
         GridDocumentationComponent,
-        NotificationDocumentationComponent
+        NotificationDocumentationComponent,
+        TabButtonComponent
     ],
     imports: [
         KomponentkartanModule,

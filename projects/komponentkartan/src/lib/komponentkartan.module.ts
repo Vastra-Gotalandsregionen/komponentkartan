@@ -101,7 +101,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridHeaderToolbarComponent,
     type.NotificationComponent,
     type.InputComponent,
-    type.SortArrowComponent
+    type.SortArrowComponent,
+    type.TabButtonComponent,
+    type.TabButtonGroupComponent
   ],
   exports: [
     type.SafePipe,
@@ -173,7 +175,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.GridHeaderToolbarComponent,
     type.NotificationComponent,
     type.InputComponent,
-    type.SortArrowComponent
+    type.SortArrowComponent,
+    type.TabButtonComponent,
+    type.TabButtonGroupComponent,
   ],
   providers: [
     type.ModalService,

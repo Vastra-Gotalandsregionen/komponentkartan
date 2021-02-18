@@ -1,0 +1,83 @@
+import { AfterContentInit, Component, ContentChildren, Input, OnDestroy, OnInit, QueryList } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { TabButtonComponent } from './tab-button.component';
+
+@Component({
+  selector: 'vgr-tab-button-group',
+  templateUrl: './tab-button-group.component.html',
+  styleUrls: ['./tab-button-group.component.scss']
+})
+export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
+
+  @Input() width: string;
+  @ContentChildren(TabButtonComponent) tabButtons: QueryList<TabButtonComponent>;
+  tabButtonSubscriptions = [];
+  lastSelectedIndex: number;
+  private ngUnsubscribe = new Subject();
+
+  ngAfterContentInit() {
+    this.setTabButtonTabFocusability();
+    this.addTabButtonSubscriptions();
+
+    this.tabButtons.changes
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe(
+      _ => {
+        this.setTabButtonTabFocusability();
+        this.setTabButtonFocus();
+        this.addTabButtonSubscriptions();
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+  setTabButtonTabFocusability() {
+    this.tabButtons.forEach((x, i) => {
+      const focusable = i ? false : true;
+      x.makeTabFocusable(focusable);
+    });
+  }
+
+  setTabButtonFocus() {
+    if (this.lastSelectedIndex >= 0) {
+      if (this.lastSelectedIndex < this.tabButtons.length) {
+        this.tabButtons[this.lastSelectedIndex].focus();
+      } else if (this.tabButtons.length) {
+        this.tabButtons[this.tabButtons.length - 1].focus();
+      }
+    }
+  }
+
+  addTabButtonSubscriptions() {
+    this.tabButtonSubscriptions.forEach(x => x.unsubscribe());
+    this.tabButtonSubscriptions = [];
+
+    this.tabButtons.forEach((x, i) => {
+      const previousSubscription = x.previous
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        if (i > 0) {
+          this.tabButtons.toArray()[i - 1].focus();
+        } else {
+          this.tabButtons.last.focus();
+        }
+      });
+      this.tabButtonSubscriptions.push(previousSubscription);
+
+      const nextSubscription = x.next
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        if (i < this.tabButtons.length - 1) {
+          this.tabButtons.toArray()[i + 1].focus();
+        } else {
+          this.tabButtons.first.focus();
+        }
+      });
+      this.tabButtonSubscriptions.push(nextSubscription);
+    });
+  }
+}

@@ -40,6 +40,7 @@ import { PaginationDocumentationComponent } from './pagination-documentation/pag
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { GridDocumentationComponent } from './grid-documentation/grid-documentation.component';
 import { NotificationDocumentationComponent} from './notification-documentation/notification-documentation.component';
+import { TabButtonComponent } from './tab-button/tab-button.component';
 
 export const appRoutes: Routes = [
 
@@ -76,6 +77,7 @@ export const appRoutes: Routes = [
     { path: 'reactiveformsexample', component: ReactiveformsexampleComponent },
     { path: 'expandablediv', component: ExpandableDivComponent },
     { path: 'toggle-button', component: ToggleButtonComponent },
+    { path: 'tab-button', component: TabButtonComponent },
     { path: 'actionPanels', component: ActionPanelsComponent },
     { path: 'filter-tag', component: FilterTagComponent },
     { path: 'ring-with-text', component: RingWithTextComponent },
