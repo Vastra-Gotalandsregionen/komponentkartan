@@ -7,11 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabButtonComponent implements OnInit {
 
+  // active = false;
   state = false;
   states = [
     { 'text': 'Favoriter', 'state': false },
     { 'text': 'Avtal', 'state': true },
     { 'text': 'Valda', 'state': false }
+  ];
+
+  active = false;
+
+  pages = [
+    { 'text': 'Oversikt', 'active': false },
+    { 'text': 'Exempel', 'active': true },
+    { 'text': 'Api', 'active': false }
   ];
   constructor() { }
 
@@ -19,7 +28,7 @@ export class TabButtonComponent implements OnInit {
   }
 
   toggle() {
-    this.state = !this.state;
+    this.active = !this.active;
   }
 
   toggleStates(state: any) {
@@ -30,5 +39,10 @@ export class TabButtonComponent implements OnInit {
       }
     });
 
+  }
+
+  printLog(id) {
+    console.log('skriver ut här: ', id);
+    this.active = !this.active;
   }
 }

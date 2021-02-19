@@ -53,6 +53,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
   }
 
   addTabButtonSubscriptions() {
+
     this.tabButtonSubscriptions.forEach(x => x.unsubscribe());
     this.tabButtonSubscriptions = [];
 
@@ -78,6 +79,23 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
         }
       });
       this.tabButtonSubscriptions.push(nextSubscription);
+
+      const selectedChangedSubscription = x.selectedChanged
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event) => {
+
+        this.tabButtons.forEach( button => {
+
+          if (button.tabId === event) {
+            button.active = true;
+          } else {
+            button.active = false;
+          }
+
+        });
+      });
+      this.tabButtonSubscriptions.push(selectedChangedSubscription);
+
     });
   }
 }

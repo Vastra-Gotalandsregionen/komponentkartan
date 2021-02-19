@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'vgr-tab-button',
   templateUrl: './tab-button.component.html',
   styleUrls: ['./tab-button.component.scss']
 })
-export class TabButtonComponent implements AfterViewInit, OnChanges {
+export class TabButtonComponent implements AfterViewInit, AfterContentInit, OnChanges {
 
   @Input() disabled = false;
   @Input() active = false;
@@ -13,12 +13,15 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   @Input() tabId: string;
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
-  @Output() onChanged = new EventEmitter<string>();
+  @Output() selectedChanged = new EventEmitter<string>();
   @ViewChild('tabbutton', { static: true }) tabbutton: ElementRef;
   @ViewChild('content', { static: true }) content: ElementRef;
 
   tabindex = 0;
   ariaPressed: boolean;
+  initialTabId: string;
+
+  constructor(private elementRef: ElementRef) {}
 
   ngOnChanges() {
     Promise.resolve(null).then(() =>
@@ -38,6 +41,12 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
     );
   }
 
+  ngAfterContentInit() {
+    this.tabId = this.elementRef.nativeElement.innerText;
+    // console.log(this.elementRef)
+    console.log('tabid ', this.tabId)
+  }
+
   makeTabFocusable(focusable: boolean) {
     Promise.resolve(null).then(() =>
       this.tabindex = focusable ? 0 : -1
@@ -52,7 +61,6 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
       this.next.emit();
       event.preventDefault();
     } else if (['Enter', 'Spacebar', ' '].includes(event.key)) {
-      this.onChange(event);
       event.stopPropagation();
     }
   }
@@ -62,13 +70,12 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   }
 
   onChange(event: any) {
-    console.log(this.active)
+    console.log('onChange: ', event)
     if (this.disabled || this.active) {
       event.stopPropagation();
       return;
     }
 
-    console.log('onChanged', this.tabId)
-    this.onChanged.emit(this.tabId)
+    this.selectedChanged.emit(this.tabId)
   }
 }
