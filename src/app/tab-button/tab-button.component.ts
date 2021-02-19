@@ -9,8 +9,8 @@ export class TabButtonComponent implements OnInit {
 
   state = false;
   states = [
-    { 'text': 'Favoriter', 'state': true },
-    { 'text': 'Avtal', 'state': false },
+    { 'text': 'Favoriter', 'state': false },
+    { 'text': 'Avtal', 'state': true },
     { 'text': 'Valda', 'state': false }
   ];
   constructor() { }

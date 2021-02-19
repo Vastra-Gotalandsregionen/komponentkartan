@@ -2,7 +2,7 @@
 <vgr-page class="no-sort">
     <vgr-page-header [title]="'Tab button'">
       <vgr-tab-button-group [width]="'500px'">
-        <vgr-tab-button *ngFor="let state of states" [pressed]="state.state" (click)="toggleStates(state)">{{state.text}}</vgr-tab-button>
+        <vgr-tab-button *ngFor="let state of states" [active]="state.state" (click)="toggleStates(state)">{{state.text}}</vgr-tab-button>
         <vgr-tab-button [disabled]="true">Disabled tab button</vgr-tab-button>
       </vgr-tab-button-group>
     </vgr-page-header>
@@ -20,7 +20,7 @@
           <vgr-grid-content>
             <div>
               <vgr-tab-button-group [width]="'500px'">
-                <vgr-tab-button *ngFor="let state of states" [pressed]="state.state" (click)="toggleStates(state)">{{state.text}}</vgr-tab-button>
+                <vgr-tab-button *ngFor="let state of states" [active]="state.state" [tabId]="state.text" (click)="toggleStates(state)">{{state.text}}</vgr-tab-button>
               </vgr-tab-button-group>
               <br><br>
               <vgr-tab-button-group [width]="'167px'">
@@ -35,13 +35,13 @@
           </vgr-grid-column>
           <vgr-grid-content>
             <!-- Exempel -->
-            <vgr-tab-button [pressed]="state" (click)="toggle()">{{state ? 'På' : 'Av'}}</vgr-tab-button>&nbsp;
+            <vgr-tab-button [active]="state" (click)="toggle()">{{state ? 'På' : 'Av'}}</vgr-tab-button>&nbsp;
             <vgr-tab-button [disabled]="true">Disabled tab button</vgr-tab-button>
             <br>
             <br>
             <div>
               <vgr-tab-button-group [width]="'400px'">
-                <vgr-tab-button *ngFor="let state of states" [pressed]="state.state" (click)="toggleStates(state)">{{state.text}}</vgr-tab-button>
+                <vgr-tab-button *ngFor="let state of states" [active]="state.state" (click)="toggleStates(state)">{{state.text}}</vgr-tab-button>
               </vgr-tab-button-group>
             </div>
           </vgr-grid-content>

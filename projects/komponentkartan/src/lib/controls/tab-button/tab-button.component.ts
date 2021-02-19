@@ -8,10 +8,12 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, O
 export class TabButtonComponent implements AfterViewInit, OnChanges {
 
   @Input() disabled = false;
-  @Input() pressed = false;
+  @Input() active = false;
   @Input() ariaLabel: string;
+  @Input() tabId: string;
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
+  @Output() onChanged = new EventEmitter<string>();
   @ViewChild('tabbutton', { static: true }) tabbutton: ElementRef;
   @ViewChild('content', { static: true }) content: ElementRef;
 
@@ -20,8 +22,8 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges() {
     Promise.resolve(null).then(() =>
-      this.ariaPressed = this.pressed
-    );
+      this.ariaPressed = this.active
+      );
   }
 
   ngAfterViewInit() {
@@ -32,7 +34,7 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
     }
 
     Promise.resolve(null).then(() =>
-      this.ariaPressed = this.pressed
+      this.ariaPressed = this.active
     );
   }
 
@@ -50,6 +52,7 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
       this.next.emit();
       event.preventDefault();
     } else if (['Enter', 'Spacebar', ' '].includes(event.key)) {
+      this.onChange(event);
       event.stopPropagation();
     }
   }
@@ -58,9 +61,14 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
     this.tabbutton.nativeElement.focus();
   }
 
-  checkDisabled(event: MouseEvent) {
-    if (this.disabled) {
+  onChange(event: any) {
+    console.log(this.active)
+    if (this.disabled || this.active) {
       event.stopPropagation();
+      return;
     }
+
+    console.log('onChanged', this.tabId)
+    this.onChanged.emit(this.tabId)
   }
 }
