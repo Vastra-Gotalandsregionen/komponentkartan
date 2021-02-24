@@ -3,9 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-# 8.0.1-betaX (2021-02-12)
+# 8.1.0-betaX (2021-02-12)
 - Did a refact on checkbox and added a transparant option to it.
 - Added focus method to `vgr-expandable-div`, `vgr-button`, `vgr-grid`, `vgr-checkbox`, `vgr-radio-group`, `vgr-filter-tag`, `vgr-card`, `vgr-toggle-button` and `vgr-table`
+- Upgraded ngx-perfect-scrollbar and fontawesome dependencies. 
 # 8.0.1 (2021-02-09) Stable
 - Changed design for notifications, added border
 - Fixed wcag-bug regarding screenreader reading wrong Modaltitle when multiple modals on page
