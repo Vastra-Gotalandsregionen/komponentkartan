@@ -19,6 +19,12 @@
         <vgr-datepicker [minZoom]="'y'" [disabled]="disabled" [readonly]="readonly"></vgr-datepicker>
       </div>
     </div>
+    <div style="background-color: #f0f0f0">
+      <div>Transparent</div>
+      <div>
+        <vgr-datepicker [disabled]="disabled" [readonly]="readonly" [transparent]="true"></vgr-datepicker>
+      </div>
+    </div>
     <div>
       <div> Dag utan textinmatning</div>
       <div>
@@ -97,6 +103,12 @@
         <td>[disabled]="true"</td>
       </tr>
       <tr>
+        <td>transparent: boolean</td>
+        <td>Sätter om checkboxen skall ha en transparent bakgrund eller vara vit. Förvalt värde är
+          <code>false</code>.</td>
+        <td>[transparent]="true"</td>
+      </tr>
+      <tr>
         <td>showValidation: boolean</td>
         <td>Anger om valideringsfel ska visas eller ej. Förvalt värde är
           <code>false</code>.</td>
@@ -119,13 +131,13 @@
         <td>Event som triggas när val ändras. Värdet är det nya valet.</td>
         <td>(selectedDateChanged)="doSomething($event)"</td>
       </tr>
-      
+
       <!-- New functionallity in "Next breacking change release" Copy into komponenetkartan-demo when finished.-->
       <tr>
         <td>focus()</td>
         <td>Metod man kan anropa för att programmatiskt kan sätta fokus på komponenten. </td>
         <td>this.myDropdown.focus()</td>
-      </tr>        
+      </tr>
     </table>
   </div>
 </app-component-docs>
