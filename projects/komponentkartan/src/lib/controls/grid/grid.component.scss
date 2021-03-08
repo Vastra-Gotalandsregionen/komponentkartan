@@ -22,7 +22,7 @@
     vgr-grid-header {
       background: white;
       display: flex;
-      align-items: center;
+      align-items: baseline;
 
       vgr-grid-column,
       vgr-grid-header-column {
@@ -35,7 +35,7 @@
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
-          padding: 6px 10px;
+          padding: 10px 10px;
 
           &.grid-align--center {
             text-align: center;
