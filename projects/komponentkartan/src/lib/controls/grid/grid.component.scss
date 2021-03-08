@@ -28,7 +28,7 @@
       vgr-grid-header-column {
         flex: 1;
         box-sizing: border-box;
-        min-height: 36px;
+        // min-height: 36px;
         min-width: 0px;
 
         >div {
@@ -230,7 +230,7 @@
           padding-right: 10px;
 
           vgr-grid-column {
-            min-height: 40px;
+            // min-height: 40px;
           }
         }
 
