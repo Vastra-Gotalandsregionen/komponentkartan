@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 8.1.2-betaX (2021-03-08)
+- Vertical alignement (align-items) in grid changed to baseline instead of center.
 # 8.1.1 (2021-03-05) Stable
 - Minor designchange for notifications, border should always be 1px
 
