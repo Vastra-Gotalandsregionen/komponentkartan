@@ -197,6 +197,10 @@ h4.font-example:after {
   content: "Rubrik 4: 16 px, bold, radavstånd 1.5, #151515";
 }
 
+.small--text.font-example:after {
+  content: "Liten text: 13 px, regular, radavstånd 1.5, #151515";
+}
+
 @media screen and (min-width: $desktop-width--medium) {
   .formatmall__header {
       &:after {
@@ -227,4 +231,8 @@ h4.font-example:after {
   h4.font-example:after {
       content: "Rubrik 4: 18 px, bold, radavstånd 1.5, #151515";
   }
+  .small--text.font-example:after {
+      content: "Liten text: 15 px, regular, radavstånd 1.5, #151515";
+  }
+
 }

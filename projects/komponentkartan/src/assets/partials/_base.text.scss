@@ -52,10 +52,12 @@ strong {
 i {
   font-style: italic;
 }
-
 .text--white {
   color: $text-color--light;
   background: $primary-color--default;
+}
+.small--text{
+  font-size: $font-size--smaller;
 }
 
 @media screen and (min-width: $desktop-width--medium) {
@@ -79,5 +81,8 @@ i {
   h4 {
     font-size: $font-size--medium;
     font-weight: normal;
+  }
+  .small--text{
+    font-size: $font-size--medium-small;
   }
 }
