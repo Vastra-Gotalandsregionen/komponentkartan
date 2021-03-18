@@ -1,6 +1,6 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "8.1.2",
+  "version": "8.1.3",
   "peerDependencies": {
     "@angular/common": "^10.2.1",
     "@angular/core": "^10.2.1",
