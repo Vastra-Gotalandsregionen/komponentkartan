@@ -90,6 +90,8 @@ Den senaste stabila versionen hämtas automatiskt via.
 npm install vgr-komponentkartan
 ```
 
+Samtliga versioner som släppts kan ses på [NPM](https://www.npmjs.com/package/vgr-komponentkartan)
+
 ### Senaste demoversion
 Under utveckling av nya features publiceras en demoversion. Den används internt av teamet och används vid demo för produktägare. Den namnges som releasekandidat med *kommande-version*-*rc*.*nummer*. T.ex
 - 1.2.0-rc1
