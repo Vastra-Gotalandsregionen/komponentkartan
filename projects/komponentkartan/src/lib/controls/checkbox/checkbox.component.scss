@@ -87,4 +87,12 @@
   .checkbox__control svg {
     transform: scale(0);
   }
+
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* IE10+ specific styles go here */
+  .checkbox {
+    display: table-cell;
+    padding-right: 3px; /* För att dölja ... på elipses som finns på kolumnerna i griden */
+  }
 }
