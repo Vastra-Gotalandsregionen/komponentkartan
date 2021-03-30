@@ -4,7 +4,8 @@
 ![npm](https://img.shields.io/npm/v/vgr-komponentkartan/demo.svg)
 ![npm](https://img.shields.io/npm/v/vgr-komponentkartan/dev.svg)
 
-Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular
+Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular. 
+Supportade webbläsare är IE, Chrome och Edge.
 
 ## Komma igång
 
