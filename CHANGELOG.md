@@ -5,7 +5,8 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 # 8.1.5
-- Increased padding between menu and page
+- Increased padding between menu and page+
+- Updated some npm packages
 # 8.1.4 (2021-03-30) Stable
 - Fixed IE bugg, regarding checkbox in grid
 # 8.1.3 (2021-03-18) Stable
