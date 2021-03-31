@@ -1,19 +1,26 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/base.themify";
 
   :host {
     max-width: 1100px;
     display: block;
     box-sizing: border-box;
     padding-bottom: 20px;
-
+ 
     .grid-header-toolbar {
       width: 100%;
       padding-top: 2px;
       padding-bottom: 2px;
       background-color: $background-color--default;
     }
+  }
+
+  .grid-footer, .grid-header, .grid-rows {
+    //background: #FFFFFF;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+    border-radius: 2px;
   }
 
   :host::ng-deep {
@@ -57,7 +64,8 @@
     }
 
     .grid-row-header {
-      border-bottom: 1px solid $background-color--default;
+      border-bottom: 0.5px solid $background-color--default;
+      border-top: 0.5px solid $background-color--default;
     }
 
     vgr-grid-header-column {
@@ -114,9 +122,13 @@
       }
 
       &.grid-row-header--expandable:hover {
-        box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        position: relative;
+        // @include themify($themes) {
+        //   background-color: themed('primaryColorDimmed');
+        // }
+        background: green;
+        //box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
+        //z-index: 1;
+        //position: relative;
       }
 
       &.grid-row-header--expandable--expandable:active {
@@ -149,7 +161,7 @@
     vgr-grid-row {
       display: block;
       position: relative;
-      margin-bottom: 2px;
+     // margin-bottom: 2px;
     }
 
     vgr-grid-row .grid-row-container {
@@ -160,9 +172,6 @@
         box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
         margin-top: 14px;
         margin-bottom: 14px;
-        // vgr-grid-column:last-child:after {
-        //   transform: rotate(180deg);
-        // }
 
         &:hover .grid-row-header {
           box-shadow: none;
@@ -174,9 +183,9 @@
       }
     }
 
-    .grid-row-container {
-      margin-bottom: 2px;
-    }
+    // .grid-row-container {
+    //   margin-bottom: 2px;
+    // }
 
     .grid-row-container--notification {
       margin-top: 5px;
@@ -229,9 +238,9 @@
           padding-left: 10px;
           padding-right: 10px;
 
-          vgr-grid-column {
+          // vgr-grid-column {
             // min-height: 40px;
-          }
+          // }
         }
 
         .grid-row-content {
