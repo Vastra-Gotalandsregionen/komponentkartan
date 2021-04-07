@@ -18,7 +18,6 @@
   }
 
   .grid-footer, .grid-header, .grid-rows {
-    //background: #FFFFFF;
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
     border-radius: 2px;
   }
@@ -30,6 +29,12 @@
       background: white;
       display: flex;
       align-items: baseline;
+
+      &.grid-row-header:hover {
+        @include themify($themes) {
+          background-color: themed('primaryColorDimmed');
+        }
+      }
 
       vgr-grid-column,
       vgr-grid-header-column {
@@ -119,16 +124,6 @@
         &:hover {
           cursor: pointer;
         }
-      }
-
-      &.grid-row-header--expandable:hover {
-        // @include themify($themes) {
-        //   background-color: themed('primaryColorDimmed');
-        // }
-        background: green;
-        //box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-        //z-index: 1;
-        //position: relative;
       }
 
       &.grid-row-header--expandable--expandable:active {
