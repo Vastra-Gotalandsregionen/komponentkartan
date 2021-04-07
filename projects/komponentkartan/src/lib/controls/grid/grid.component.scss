@@ -22,6 +22,10 @@
     border-radius: 2px;
   }
 
+  .grid-header-wrapper {
+    background-color: $gray-ultradimmed; //funkar inte :(
+  }
+
   :host::ng-deep {
     .grid-row-header,
     .grid-row-content,
