@@ -16,7 +16,7 @@
       padding: $margin--slim $margin--fat;
       background-color: $gray-ultradimmed;
       box-shadow: 0px 2px 8px #0000001A;
-      border-bottom: 2px solid #BBBEBE;
+      border-bottom: 2px solid $gray-secondary;
       .page-header__title {
         float: right;
         margin-left: 10px;

@@ -22,17 +22,13 @@
     border-radius: 2px;
   }
 
-  .grid-header-wrapper {
-    background-color: $gray-ultradimmed; //funkar inte :(
-  }
-
   :host::ng-deep {
     .grid-row-header,
     .grid-row-content,
     vgr-grid-header {
       background: white;
       display: flex;
-      align-items: baseline;
+      align-items: center;
 
       &.grid-row-header:hover {
         @include themify($themes) {
@@ -69,7 +65,9 @@
     }
 
     vgr-grid-header {
-      margin-bottom: 2px;
+      border-bottom: 2px solid $gray-secondary;
+      background: $gray-ultradimmed;
+      height: 40px;
     }
 
     .grid-row-header {
