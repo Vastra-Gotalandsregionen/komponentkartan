@@ -105,7 +105,7 @@
       }
 
       vgr-grid-content {
-        padding: 10px 10px 30px 10px;
+        padding: 10px 15px 30px 15px;
         width: 100%;
 
         &.no-padding {
@@ -169,6 +169,7 @@
      // margin-bottom: 2px;
     }
 
+
     vgr-grid-row .grid-row-container {
       display: block;
       transition: box-shadow 0.4s, width 0.4s, margin-left 0.4s;
@@ -180,10 +181,22 @@
         // margin-bottom: 14px;
         background: #FFFFFF;
         border: 1px solid $gray-primary;
-        box-shadow: 0 0 15px 0 rgba(0,0,0,0.60);
+        // box-shadow: 0 0 15px 0 rgba(0,0,0,0.60);
         border-radius: 2px;
-        width: 1120px;
-        margin-left: -10px;
+        width: 1110px;
+        margin-left: -5px;
+        position: relative;
+        
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 1;
+          box-shadow: 0 0 15px 0 rgba(0,0,0,0.60);
+        }
 
         .grid-row-header {
           @include themify($themes) {
@@ -191,13 +204,13 @@
           }
           border-bottom: 1px solid $gray-primary;
           border-radius: 2px 2px 0 0;
-          padding-left: 10px;
-          padding-right: 10px;
+          padding-left: 5px;
+          padding-right: 5px;
         }
 
         &:hover .grid-row-header {
           box-shadow: none;
-        }
+        }        
       }
 
       .grid-row-notification {
@@ -270,17 +283,17 @@
         }
 
         .grid-row-container.grid-row--expanded {
-          width: 1190px;
+          width: 1180px;
 
           .grid-row-header {
-            padding-left: 20px;
-            padding-right: 20px;
+            padding-left: 15px;
+            padding-right: 15px;
           }
         }
 
         .grid-row-content {
           vgr-grid-content {
-            padding: 10px 20px 30px 20px;
+            padding: 10px 25px 30px 25px;
           }
         }
 
