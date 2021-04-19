@@ -142,6 +142,13 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
         }
       });
 
+      this.gridService.collapseRowRequested
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((rowToCollapse: GridRowComponent) => {
+        rowToCollapse.setExpanded(false);
+        if(this.stickyHeader)
+          this.expandHeader = false;
+      });
+
     this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.setAnimationSpeed();
     });

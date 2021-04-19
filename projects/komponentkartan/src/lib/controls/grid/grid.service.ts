@@ -7,12 +7,20 @@ import { Subject } from 'rxjs';
 export class GridService {
 
   private expandRowRequestedSource = new Subject<any>();
-
   expandRowRequested = this.expandRowRequestedSource.asObservable();
+
+  private collapseRowRequestedSource = new Subject<any>();
+  collapseRowRequested = this.collapseRowRequestedSource.asObservable();
 
   requestExpandRow(row: any) {
     setTimeout(() => {
       this.expandRowRequestedSource.next(row);
+    });
+  }
+
+  requestCollapseRow(row:any) {
+    setTimeout(() => {
+      this.collapseRowRequestedSource.next(row);
     });
   }
 }
