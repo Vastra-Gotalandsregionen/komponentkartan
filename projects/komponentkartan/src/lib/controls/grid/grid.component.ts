@@ -169,6 +169,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   onPageChanged(event: number) {
     setTimeout(() => {
       this.pageChanged.emit(event);
+      this.expandHeader = false;
     });
   }
 }
