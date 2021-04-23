@@ -28,6 +28,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   @Input() showValidation = true;
   @Input() errorMessage = {};
   @Input() labelId: string;
+  @Input() transparent = false;
 
   @Output() selectedDateChanged = new EventEmitter<Date>();
 

@@ -28,6 +28,19 @@
         <p>Mer innehåll</p>
       </vgr-expandable-div-content>
     </vgr-expandable-div>
+    <br>
+    <br>
+    <vgr-button [buttonStyle]="'secondary'" (click)="setFocus()">Fokusera på tvåan</vgr-button>
+    <br>
+    <br>
+    <vgr-expandable-div #myExpandableList *ngFor="let item of list">
+      <vgr-expandable-div-header>
+         <strong>{{ item.id }} {{ item.title }}</strong>
+      </vgr-expandable-div-header>
+      <vgr-expandable-div-content>
+        <p> {{ item.text }}</p>
+      </vgr-expandable-div-content>
+    </vgr-expandable-div>
   </div>
   <div class="docs__api ">
     <!-- API -->

@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnChanges, forwardRef, SkipSelf, Optional, Host, ElementRef, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges, forwardRef, SkipSelf, Optional, Host, ElementRef, AfterViewInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 import { Guid } from '../../utils/guid';
 
@@ -19,6 +19,8 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     @Output() checkedChanged = new EventEmitter<boolean>();
     @Input() label: string;
     @Input() formControlName?: string;
+    @Input() transparent = false;
+    @ViewChild('checkbox', { read: ElementRef, static: false }) checkbox: ElementRef;
 
     public control: AbstractControl;
     public labelledbyid: string = Guid.newGuid();
@@ -30,6 +32,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
         if (this.formControlName && this.controlContainer) {
             this.control = this.controlContainer.control.get(this.formControlName);
             this.setDisabledState(this.controlContainer.control.get(this.formControlName).disabled);
+
         }
     }
     setDisabledState(isDisabled: boolean) {
@@ -43,7 +46,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     onClick(event: Event): void {
         if (!this.disabled) {
             this.checked = !this.checked;
-            if (this.element) { this.element.focus(); }
+
+            if (this.element) {
+                this.element.focus();
+            }
+
             this.onChange(this.checked);
             this.checkedChanged.emit(this.checked);
             event.stopPropagation();
@@ -84,4 +91,8 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     }
 
     onTouched() { }
+
+    public focus() {
+        this.checkbox.nativeElement.focus();
+    }
 }

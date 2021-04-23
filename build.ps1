@@ -128,55 +128,55 @@ if (!(Test-Path $PACKAGES_CONFIG)) {
 }
 
 # Try find NuGet.exe in path if not exists
-if (!(Test-Path $NUGET_EXE)) {
-    Write-Verbose -Message "Trying to find nuget.exe in PATH..."
-    $existingPaths = $Env:Path -Split ';' | Where-Object { (![string]::IsNullOrEmpty($_)) -and (Test-Path $_ -PathType Container) }
-    $NUGET_EXE_IN_PATH = Get-ChildItem -Path $existingPaths -Filter "nuget.exe" | Select -First 1
-    if ($NUGET_EXE_IN_PATH -ne $null -and (Test-Path $NUGET_EXE_IN_PATH.FullName)) {
-        Write-Verbose -Message "Found in PATH at $($NUGET_EXE_IN_PATH.FullName)."
-        $NUGET_EXE = $NUGET_EXE_IN_PATH.FullName
-    }
-}
+# if (!(Test-Path $NUGET_EXE)) {
+#     Write-Verbose -Message "Trying to find nuget.exe in PATH..."
+#     $existingPaths = $Env:Path -Split ';' | Where-Object { (![string]::IsNullOrEmpty($_)) -and (Test-Path $_ -PathType Container) }
+#     $NUGET_EXE_IN_PATH = Get-ChildItem -Path $existingPaths -Filter "nuget.exe" | Select -First 1
+#     if ($NUGET_EXE_IN_PATH -ne $null -and (Test-Path $NUGET_EXE_IN_PATH.FullName)) {
+#         Write-Verbose -Message "Found in PATH at $($NUGET_EXE_IN_PATH.FullName)."
+#         $NUGET_EXE = $NUGET_EXE_IN_PATH.FullName
+#     }
+# }
 
 # Try download NuGet.exe if not exists
-if (!(Test-Path $NUGET_EXE)) {
-    Write-Verbose -Message "Downloading NuGet.exe..."
-    try {
-        (New-Object System.Net.WebClient).DownloadFile($NUGET_URL, $NUGET_EXE)
-    } catch {
-        Throw "Could not download NuGet.exe."
-    }
-}
+# if (!(Test-Path $NUGET_EXE)) {
+#     Write-Verbose -Message "Downloading NuGet.exe..."
+#     try {
+#         (New-Object System.Net.WebClient).DownloadFile($NUGET_URL, $NUGET_EXE)
+#     } catch {
+#         Throw "Could not download NuGet.exe."
+#     }
+# }
 
 # Save nuget.exe path to environment to be available to child processed
-$ENV:NUGET_EXE = $NUGET_EXE
+# $ENV:NUGET_EXE = $NUGET_EXE
 
-# Restore tools from NuGet?
-if(-Not $SkipToolPackageRestore.IsPresent) {
-    Push-Location
-    Set-Location $TOOLS_DIR
+# # Restore tools from NuGet?
+# if(-Not $SkipToolPackageRestore.IsPresent) {
+#     Push-Location
+#     Set-Location $TOOLS_DIR
 
-    # Check for changes in packages.config and remove installed tools if true.
-    [string] $md5Hash = MD5HashFile($PACKAGES_CONFIG)
-    if((!(Test-Path $PACKAGES_CONFIG_MD5)) -Or
-      ($md5Hash -ne (Get-Content $PACKAGES_CONFIG_MD5 ))) {
-        Write-Verbose -Message "Missing or changed package.config hash..."
-        Remove-Item * -Recurse -Exclude packages.config,nuget.exe
-    }
+#     # Check for changes in packages.config and remove installed tools if true.
+#     [string] $md5Hash = MD5HashFile($PACKAGES_CONFIG)
+#     if((!(Test-Path $PACKAGES_CONFIG_MD5)) -Or
+#       ($md5Hash -ne (Get-Content $PACKAGES_CONFIG_MD5 ))) {
+#         Write-Verbose -Message "Missing or changed package.config hash..."
+#         Remove-Item * -Recurse -Exclude packages.config,nuget.exe
+#     }
 
-    Write-Verbose -Message "Restoring tools from NuGet..."
-    $NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install -ExcludeVersion -OutputDirectory `"$TOOLS_DIR`""
+#     Write-Verbose -Message "Restoring tools from NuGet..."
+#     $NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install -ExcludeVersion -OutputDirectory `"$TOOLS_DIR`""
 
-    if ($LASTEXITCODE -ne 0) {
-        Throw "An error occured while restoring NuGet tools."
-    }
-    else
-    {
-        $md5Hash | Out-File $PACKAGES_CONFIG_MD5 -Encoding "ASCII"
-    }
-    Write-Verbose -Message ($NuGetOutput | out-string)
-    Pop-Location
-}
+#     if ($LASTEXITCODE -ne 0) {
+#         Throw "An error occured while restoring NuGet tools."
+#     }
+#     else
+#     {
+#         $md5Hash | Out-File $PACKAGES_CONFIG_MD5 -Encoding "ASCII"
+#     }
+#     Write-Verbose -Message ($NuGetOutput | out-string)
+#     Pop-Location
+# }
 
 # Make sure that Cake has been installed.
 if (!(Test-Path $CAKE_EXE)) {

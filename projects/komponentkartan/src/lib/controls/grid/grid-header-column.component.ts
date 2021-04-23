@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding, ViewChild, ElementRef } from '@angular/core';
 
 export enum GridSortDirection {
   None,
@@ -15,6 +15,7 @@ export class GridHeaderColumnComponent implements OnInit {
   @Input() sortKey: string;
   @Input() sortDirection = GridSortDirection.None;
   @Output() sortChanged: EventEmitter<GridSortDirection> = new EventEmitter<GridSortDirection>();
+  @ViewChild('gridHeaderColumn', { read: ElementRef, static: false }) gridHeaderColumn: ElementRef;
 
   constructor() { }
 
@@ -31,6 +32,12 @@ export class GridHeaderColumnComponent implements OnInit {
         this.sortDirection = GridSortDirection.Ascending;
       }
       this.sortChanged.emit(this.sortDirection);
+    }
+  }
+
+  public focus() {
+    if (this.sortKey) {
+      this.gridHeaderColumn.nativeElement.focus();
     }
   }
 

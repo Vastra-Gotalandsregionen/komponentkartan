@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NotificationType, SelectableItem } from 'vgr-komponentkartan';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NotificationType, SelectableItem, RadioGroupComponent } from 'vgr-komponentkartan';
 @Component({
   selector: 'app-radiobuttons',
   templateUrl: './radiobuttons.component.html',
@@ -11,6 +11,7 @@ export class RadiobuttonsComponent implements OnInit {
 
   options: Array<SelectableItem<any>> = [];
   options2: Array<SelectableItem<any>> = [];
+  @ViewChild('myRadioGroup', { read: RadioGroupComponent, static: false }) myRadioGroup: RadioGroupComponent;
 
   constructor() { }
 
@@ -26,6 +27,14 @@ export class RadiobuttonsComponent implements OnInit {
 
   rensaVal() {
     this.options.forEach(o => o.selected = false);
+  }
+
+  setFocus() {
+    if (this.myRadioGroup) {
+      setTimeout(() => {
+        this.myRadioGroup.focus();
+      });
+    }
   }
 
 }

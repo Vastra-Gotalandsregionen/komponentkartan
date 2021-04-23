@@ -13,7 +13,12 @@
     </p>
   </div>
   <div class="docs__examples ">
-    <vgr-table>
+    <div style="padding: 10px;">
+      <vgr-button (click)="setFocus(1)">Flytta fokus till tabell 1</vgr-button>
+      <vgr-button (click)="setFocus(2)">Flytta fokus till tabell 2</vgr-button>
+      <vgr-button (click)="setFocus(3)">Flytta fokus till tabell 3</vgr-button>
+    </div>
+    <vgr-table #myTableNo1>
       <vgr-table-header>
         <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
         <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
@@ -119,7 +124,7 @@
         </vgr-table>
       </vgr-table>
     </vgr-table>
-    <vgr-table>
+    <vgr-table #myTableNo2>
       <vgr-table-header>
         <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
         <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
@@ -131,7 +136,7 @@
         <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
       </vgr-table-row>
     </vgr-table>
-    <vgr-table [expandable]="false">
+    <vgr-table #myTableNo3 [expandable]="false">
       <vgr-table-header>
         <vgr-table-header-column [width]="10">Ej</vgr-table-header-column>
         <vgr-table-header-column [width]="5">Expanderbar</vgr-table-header-column>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
-import { RowNotification, NotificationType } from 'vgr-komponentkartan';
+import { RowNotification, NotificationType, CardSectionComponent } from 'vgr-komponentkartan';
 
 @Component({
   selector: 'app-card',
@@ -8,7 +8,7 @@ import { RowNotification, NotificationType } from 'vgr-komponentkartan';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-
+  @ViewChild('myCardSection', { read: CardSectionComponent, static: true }) myCardSection: CardSectionComponent;
   cardExampleMarkup: string;
   cardExampleMarkup2: string;
   unlocked: boolean;
@@ -88,6 +88,12 @@ export class CardComponent implements OnInit {
     this.birthDate = new Date(1976, 5, 17);
   }
   ngOnInit() {
+  }
+
+  setFocus() {
+    setTimeout(() => {
+      this.myCardSection.focus();
+    });
   }
 
 }

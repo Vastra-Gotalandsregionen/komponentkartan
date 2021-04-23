@@ -5,7 +5,8 @@
         <code>&lt;vgr-filter-tag-group&gt;</code> kan filtren navigeras med piltangenterna.
       </p>
       <br>
-      <vgr-filter-tag>Filter</vgr-filter-tag>
+      <vgr-filter-tag #myFilterTag>Filter</vgr-filter-tag>
+      <vgr-button [buttonStyle]="'secondary'" (click)="setFocusOnSpecificTag()" style="margin-left: 20px;">Fokusera</vgr-button>
       <br>
       <br>
       <p>Förändras med tema:
@@ -16,12 +17,13 @@
       <div style="margin-bottom: 20px">
         <div><span style="font-weight: bold">Enkelt exempel</span> - den filtrerade texten finns i För- eller Efternamn.</div>
         <vgr-input width="130px" #filterInput></vgr-input>
-        <vgr-button (click)="addFilter(filterInput.value)">Lägg till filter</vgr-button>
-        <vgr-button (click)="removeAllFilters()" style="margin-left: 20px;">Ta bort alla filter</vgr-button>
-        <vgr-button (click)="toggleDisableFilters()" style="margin-left: 20px;">{{filtersDisabled ? 'Aktivera' : 'Inaktivera'}} filtertaggar</vgr-button>
+        <vgr-button (click)="addFilter(filterInput.value)" style="margin-left: 20px;">Lägg till filter</vgr-button>
+        <vgr-button (click)="removeAllFilters()" >Ta bort alla filter</vgr-button>
+        <vgr-button (click)="toggleDisableFilters()">{{filtersDisabled ? 'Aktivera' : 'Inaktivera'}} filtertaggar</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" [disabled]="!filterTags.length" (click)="setFocusOnGroup()">Fokusera</vgr-button>
       </div>
       <div style="margin-bottom: 20px" *ngIf="filterTags.length">
-        <vgr-filter-tag-group>
+        <vgr-filter-tag-group #myFilterGroup>
           <vgr-filter-tag *ngFor="let filter of filterTags" (remove)="filter.remove(filter)" [disabled]="filtersDisabled">{{filter.text}}</vgr-filter-tag>
         </vgr-filter-tag-group>
       </div>
@@ -48,18 +50,18 @@
                 <vgr-input formControlName="name"></vgr-input>
               </div>
             </div>
-            <div>
+            <div  style="margin-left: 20px;">
               <div>Minimiålder:</div>
               <div>
                 <vgr-input formControlName="minimumAge" width="130px"></vgr-input>
               </div>
             </div>
             <div>            
-              <vgr-checkbox formControlName="women" [label]="'Kvinnor'" style="display: inline-block;"></vgr-checkbox>
+              <vgr-checkbox formControlName="women" [label]="'Kvinnor'" style="display: inline-block; margin-left: 20px;"></vgr-checkbox>
               <vgr-checkbox formControlName="men" [label]="'Män'" style="display: inline-block; margin-left: 10px;"></vgr-checkbox>
             </div>
             <vgr-button (click)="advancedFilter()" style="margin-left: 20px;">Filtrera</vgr-button>
-            <vgr-button (click)="removeAllAdvancedFilters()" style="margin-left: 20px;">Ta bort alla filter</vgr-button>
+            <vgr-button (click)="removeAllAdvancedFilters()">Ta bort alla filter</vgr-button>
           </div>
         </div>
       </form>

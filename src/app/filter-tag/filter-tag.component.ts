@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, AbstractControl } from '@angular/forms';
+import { FilterTagGroupComponent, FilterTagComponent as FilterTagComponentElement } from '../../../projects/komponentkartan/src/lib';
 
 interface FilterTag {
   id: number;
@@ -13,6 +14,8 @@ interface FilterTag {
   styles: ['.list-row { width: 500px; display: flex}', '.list-column { width: 120px; }', '.list-header { font-weight: bold;}']
 })
 export class FilterTagComponent implements OnInit {
+  @ViewChild('myFilterGroup', {read: FilterTagGroupComponent}) myFilterGroup: FilterTagGroupComponent;
+  @ViewChild('myFilterTag', {read: FilterTagComponentElement}) myFilterTag: FilterTagComponentElement;
   persons = [
     { 'firstName': 'Johanna', 'surname': 'Andersson', 'age': 25, 'gender': 'w' },
     { 'firstName': 'Anders', 'surname': 'Johansson', 'age': 51, 'gender': 'm' },
@@ -47,6 +50,7 @@ export class FilterTagComponent implements OnInit {
   getId(): number {
     return this.ids++;
   }
+
   addFilter(filterName: string) {
     if (filterName) {
       const tag = {
@@ -147,5 +151,13 @@ export class FilterTagComponent implements OnInit {
   removeAllAdvancedFilters() {
     this.advancedSearchForm.reset();
     this.advancedFilter();
+  }
+
+  setFocusOnGroup() {
+    this.myFilterGroup.focus();
+  }
+
+  setFocusOnSpecificTag() {
+    this.myFilterTag.focus();
   }
 }

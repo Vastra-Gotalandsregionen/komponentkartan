@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'vgr-toggle-button',
@@ -18,27 +18,27 @@ export class ToggleButtonComponent implements AfterViewInit, OnChanges {
   ariaPressed: boolean;
 
   ngOnChanges() {
-    Promise.resolve(null).then(() =>
-      this.ariaPressed = this.pressed
-    );
+    setTimeout(() => {
+      this.ariaPressed = this.pressed;
+    });
   }
 
   ngAfterViewInit() {
     if (!this.ariaLabel) {
-      Promise.resolve(null).then(() =>
-        this.ariaLabel = `${this.content.nativeElement.innerHTML} toggle button`
-      );
+      setTimeout(() => {
+        this.ariaLabel = `${this.content.nativeElement.innerHTML} toggle button`;
+      });
     }
 
-    Promise.resolve(null).then(() =>
-      this.ariaPressed = this.pressed
-    );
+    setTimeout(() => {
+      this.ariaPressed = this.pressed;
+    });
   }
 
   makeTabFocusable(focusable: boolean) {
-    Promise.resolve(null).then(() =>
-      this.tabindex = focusable ? 0 : -1
-    );
+    setTimeout(() => {
+      this.tabindex = focusable ? 0 : -1;
+    });
   }
 
   onKeydown(event: KeyboardEvent) {
@@ -53,14 +53,13 @@ export class ToggleButtonComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  focus() {
-    this.togglebutton.nativeElement.focus();
-  }
-
   checkDisabled(event: MouseEvent) {
     if (this.disabled) {
       event.stopPropagation();
     }
   }
 
+  public focus() {
+    this.togglebutton.nativeElement.focus();
+  }
 }
