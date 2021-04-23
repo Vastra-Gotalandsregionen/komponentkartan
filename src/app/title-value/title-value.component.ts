@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 import { RowNotification, NotificationType } from '../../../projects/komponentkartan/src/lib';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-title-value',
@@ -24,9 +25,17 @@ export class TitleValueComponent implements OnInit {
     done: true,
     removeWhenDone: false
   };
+  form: FormGroup;
+  locked = false;
 
 
-  constructor(public htmlEncoder: HtmlEncodeService) { }
+  constructor(public htmlEncoder: HtmlEncodeService, private fb: FormBuilder) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.form = this.fb.group({
+      control1:  new FormControl('', [Validators.required]),
+      control2: new FormControl('', [Validators.required]),
+      control3: new FormControl('', [Validators.required])
+    }, { updateOn: 'blur' });
+   }
 }

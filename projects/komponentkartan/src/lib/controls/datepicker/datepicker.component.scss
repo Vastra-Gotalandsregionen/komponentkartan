@@ -8,6 +8,19 @@
     display: inline-block;
     width: inherit;
 
+    .validation {
+      padding-top: 0px;
+    }
+
+    &.validation-error--active,
+    &.validation-error--editing {
+      .validation {
+        height: auto;
+        padding-top: 1px;
+      }
+   
+    }
+
     .datepicker__control {
       position: relative;
 
