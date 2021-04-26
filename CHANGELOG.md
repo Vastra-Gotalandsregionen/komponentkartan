@@ -5,6 +5,7 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 # 8.1.5
+- New styling on grid
 - New styling on page block
 - Increased padding between menu and page+
 - Updated some npm packages
