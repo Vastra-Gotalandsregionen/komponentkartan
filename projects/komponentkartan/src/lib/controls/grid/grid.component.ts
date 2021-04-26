@@ -24,7 +24,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Input() activePage = 1;
   @Input() showLoader = false;
   @Input() ariaLabel = 'Lista';
-  @Input() expandHeader = false;
+  @Input() increaseHeaderWidth = false;
 
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
@@ -116,7 +116,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
         if (this.allowMultipleExpandedRows) {
           rowToExpand.setExpanded(true);
           if(this.stickyHeader)
-            this.expandHeader = true;
+            this.increaseHeaderWidth = true;
         } else {
           const expandedRows = this.rows.filter(x => x.isExpanded);
 
@@ -131,13 +131,13 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
               expandedRows.forEach(x => x.setExpanded(false));
               rowToExpand.setExpanded(true);
               if(this.stickyHeader)
-                this.expandHeader = true;
+                this.increaseHeaderWidth = true;
             }
 
           } else {
             rowToExpand.setExpanded(true);
             if(this.stickyHeader)
-              this.expandHeader = true;
+              this.increaseHeaderWidth = true;
           }
         }
       });
@@ -146,7 +146,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe((rowToCollapse: GridRowComponent) => {
         rowToCollapse.setExpanded(false);
         if(this.stickyHeader)
-          this.expandHeader = false;
+          this.increaseHeaderWidth = false;
       });
 
     this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
@@ -169,7 +169,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   onPageChanged(event: number) {
     setTimeout(() => {
       this.pageChanged.emit(event);
-      this.expandHeader = false;
+      this.increaseHeaderWidth = false;
     });
   }
 }
