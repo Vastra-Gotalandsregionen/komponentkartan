@@ -60,6 +60,60 @@
     </vgr-card>
     <p>Nya API-guidelines ser ut som följande:</p>
     <section [innerHTML]="htmlEncoder.prepareHighlightedSection(markupExample)" hljsContent=".highlight"></section>
+
+    <form [formGroup]="form">
+    <vgr-card>
+      <vgr-card-column>
+        <vgr-card-section [title]="'Belopp readonly (slim)'" [expanded]="true">
+          <vgr-title-value-layout>
+            <vgr-title-value [slim]="true">
+              <vgr-title-value-heading>Bruttobelopp</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="1000" [suffix]="'kr'" textAlign="right" [readonly]="true" ></vgr-input>
+              </vgr-title-value-container>
+            </vgr-title-value>
+            <vgr-title-value [slim]="true">
+              <vgr-title-value-heading>Skattesats</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="32" [suffix]="'%'" textAlign="right" [readonly]="true"></vgr-input>
+              </vgr-title-value-container>
+            </vgr-title-value>
+            <vgr-title-value [slim]="true">
+              <vgr-title-value-heading>Nettobelopp</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="32" [suffix]="'kr'" textAlign="right" [readonly]="true"></vgr-input>
+              </vgr-title-value-container>
+            </vgr-title-value>
+          </vgr-title-value-layout>
+        </vgr-card-section>
+      </vgr-card-column>
+      <vgr-card-column>
+        <vgr-card-section [title]="'Belopp'" [expanded]="true" class="card__right">
+          <vgr-title-value-layout>
+            <vgr-title-value>
+              <vgr-title-value-heading>Bruttobelopp</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="10000" [suffix]="'kr'" textAlign="right" formControlName="control1" [readonly]="locked"></vgr-input>
+              </vgr-title-value-container>
+            </vgr-title-value>
+            <vgr-title-value>
+              <vgr-title-value-heading for="skattesats">Skattesats</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input id="skattesats" [value]="32" [suffix]="'%'" textAlign="right" formControlName="control2" [readonly]="locked"></vgr-input>
+              </vgr-title-value-container>
+            </vgr-title-value>
+            <vgr-title-value>
+              <vgr-title-value-heading>Nettobelopp</vgr-title-value-heading>
+              <vgr-title-value-container>
+                <vgr-input [value]="32" [suffix]="'kr'" textAlign="right" formControlName="control3" [readonly]="locked"></vgr-input>
+              </vgr-title-value-container>
+            </vgr-title-value>
+          </vgr-title-value-layout>
+        </vgr-card-section>
+      </vgr-card-column>
+    </vgr-card>
+    </form>
+    <vgr-button (click)="locked = !locked">Lås/Låsupp</vgr-button>
   </div>
   <div class="docs__api">
     <h2><code>&lt;vgr-title-value&gt;</code></h2>

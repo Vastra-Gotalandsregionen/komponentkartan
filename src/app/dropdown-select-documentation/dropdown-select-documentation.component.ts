@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { DropdownSelectComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
@@ -231,7 +231,7 @@ export class DropdownSelectDocumentationComponent {
     this.items10 = this.getItems(10);
     this.items50 = this.getItems(50);
     this.form = new FormControl(this.itemValue);
-    this.formControl = new FormControl();
+    this.formControl = new FormControl('', Validators.required);
   }
 
   getItems(length: number): string[] {

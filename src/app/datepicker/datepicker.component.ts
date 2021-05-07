@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { DatepickerComponent as Datepicker } from '../../../projects/komponentkartan/src/lib';
 
 
@@ -14,7 +14,9 @@ export class DatepickerComponent {
 
   disabled = false;
   readonly = false;
-  form = new FormControl();
+  form = new FormControl('', Validators.required);
+
+
   minDate = new Date(2017, 4, 10);
   maxDate = new Date(2018, 4, 10);
 

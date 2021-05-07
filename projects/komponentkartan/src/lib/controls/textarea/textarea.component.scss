@@ -14,9 +14,10 @@
     resize: none;
     padding: 10px;
     transition: border-color 0.6s linear;
-    &:focus {
-      outline: $focus-outline-width solid $focus-color;
-    }
+    // &:focus {
+    //   outline: $focus-outline-width solid $focus-color;
+    //   outline-offset: 2px;
+    // }
   }
   &-validation {
     max-height: none;
@@ -67,13 +68,18 @@
   &.textarea-validation-error--editing .textarea-validation {
     padding-bottom: 8px;
   }
-  &.textarea-validation-error--active .textarea-validation {
-    background-color: $secondary-color--error;
-    transition: background-color 0.3s linear;
+  &.textarea-validation-error--active .textarea-validation > div:first-of-type {
+    // background-color: $secondary-color--error;
+    // transition: background-color 0.3s linear;
+    border: 3px solid #FF0000;
+    border-radius: 2px;
+    padding: 1px;
   }
-  &.textarea-validation-error--editing .textarea-validation {
-    background-color: $background-color--default;
-    transition: background-color 0.3s linear;
+  &.textarea-validation-error--editing .textarea-validation > div:first-of-type {
+    // background-color: $background-color--default;
+    // transition: background-color 0.3s linear;
+    border: 3px solid $focus-color;
+    padding: 1px;
   }
   &.textarea-validation-error--fixed .textarea-validation {
     &:after {

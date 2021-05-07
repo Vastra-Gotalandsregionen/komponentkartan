@@ -67,7 +67,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   get errorActive() {
-    return this.showValidation && this.formControl && this.formControl.invalid && !this.hasFocus;
+    return this.showValidation && this.formControl && this.formControl.invalid;
   }
 
   get errorEditing() {

@@ -44,7 +44,7 @@ describe('InputComponent', () => {
 
   describe('when initiated', () => {
     it('Should get the show-validation by default', () => {
-      expect(rootElement.query(By.css('.custominput')).classes['validation-error--active']).toBe(true);
+      expect(component.showValidation).toBe(true);
     });
   });
 
