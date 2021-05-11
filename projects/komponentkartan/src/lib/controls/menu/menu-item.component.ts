@@ -57,7 +57,7 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
             this.tab.emit();
         }
 
-        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc',].indexOf(event.key) > -1) {
+        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc'].indexOf(event.key) > -1) {
             event.stopPropagation();
             event.preventDefault();
         }
