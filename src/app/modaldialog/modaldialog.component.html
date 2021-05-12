@@ -46,6 +46,9 @@
         <vgr-button (click)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt</vgr-button>
         Modal där avbryt är defaultknapp
       </div>
+      <div>
+        <vgr-button (click)="this.modalService.openDialog('modelInPageComponent')">Modal i page komponent</vgr-button>
+      </div>
     </div>
     <div class="row-layout">
       <div>
@@ -69,17 +72,16 @@
 
   </div>
   <div class="docs__api">
-    Modal består av två delar. En komponent som läggs på samma nivå som <code>&lt;vgr-page&gt;</code>, med <code>&lt;vgr-modal&gt;</code>.
-    Detta är en placeholder för det innehåll som sedan visas över applikationen.
-    Den har ett id som behöver anges för att kunna öppna/stänga modalen.
+    <code>&lt;vgr-modal&gt;</code> är en placeholder för det innehåll som sedan visas över applikationen.
+    Modal har ett id som behöver anges för att kunna öppna/stänga modalen.
     Du kan även koppla funktionalitet till klick utanför modalen genom att använda dig av <code>&#40;outsideClick&#41;="foobar()"</code>.
     Modalen består i sin tur av tre delar,
     <code>&lt;vgr-modal-header&gt;</code>,
     <code>&lt;vgr-modal-content&gt;</code>
     och
     <code>&lt;vgr-modal-footer&gt;</code>. Den andra delen är en
-    <code>modalService</code> som injectas i de komponenter som vill visa en dialog. Bredden på dialogen kan i det lilla läget minst vara 450px och max 1080px 
-    alternativt i det stora läget minst 500px och max 1130px. För att sätta förvalt fokus på en 
+    <code>modalService</code> som injectas i de komponenter som vill visa en dialog. Bredden på dialogen kan i det lilla läget minst vara 450px och max 1080px
+    alternativt i det stora läget minst 500px och max 1130px. För att sätta förvalt fokus på en
     <code>&lt;vgr-button&gt;</code> i ett modalt fönster anges attributet <code>default=true</code> för knappen. För att visa en dialog, använd
     <code>modalService.openDialog()</code> och för att stänga dialogen, använd
     <code>modalService.closeDialog()</code>. Se nedan.
@@ -279,3 +281,16 @@
     </vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
+<vgr-page>
+  <vgr-page-body>
+    <vgr-modal id="modelInPageComponent"  (outsideClick)="closeModal('modelInPageComponent')">
+      <vgr-modal-header>En header från app</vgr-modal-header>
+      <vgr-modal-content>
+        <p>Om du klickar utanför stängs modalen</p>
+      </vgr-modal-content>
+      <vgr-modal-footer>
+        <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modelInPageComponent')">Avbryt</vgr-button>
+      </vgr-modal-footer>
+    </vgr-modal>
+  </vgr-page-body>
+</vgr-page>
