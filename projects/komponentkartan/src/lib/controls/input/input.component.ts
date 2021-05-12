@@ -93,12 +93,11 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
 
 
   get errorActive() {
-    if (!this.showValidation || this.disabledControl || this.readonly) {
+    if (this.disabledControl || this.readonly) {
       return false;
     }
 
-    return ((this.control && this.control.invalid) || (this.required && this.value === '' ));
-
+    return this.showValidation;
   }
 
   propagateChange = (_: any) => {};

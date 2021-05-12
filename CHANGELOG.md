@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 # 8.2.1
 - Fixed `vgr-modal` bugg when modal is in page component
+- Fixed a bug when using input in formcontrol
 # 8.2.0 (2021-04-23) Stable
 - Changed design for validation across all components with added validation
 # 8.1.5
