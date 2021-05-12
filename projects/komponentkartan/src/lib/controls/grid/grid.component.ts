@@ -115,8 +115,9 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe((rowToExpand: GridRowComponent) => {
         if (this.allowMultipleExpandedRows) {
           rowToExpand.setExpanded(true);
-          if(this.stickyHeader)
+          if (this.stickyHeader) {
             this.increaseHeaderWidth = true;
+          }
         } else {
           const expandedRows = this.rows.filter(x => x.isExpanded);
 
@@ -130,14 +131,16 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
             } else {
               expandedRows.forEach(x => x.setExpanded(false));
               rowToExpand.setExpanded(true);
-              if(this.stickyHeader)
+              if (this.stickyHeader) {
                 this.increaseHeaderWidth = true;
+              }
             }
 
           } else {
             rowToExpand.setExpanded(true);
-            if(this.stickyHeader)
+            if (this.stickyHeader) {
               this.increaseHeaderWidth = true;
+            }
           }
         }
       });
@@ -145,8 +148,9 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       this.gridService.collapseRowRequested
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe((rowToCollapse: GridRowComponent) => {
         rowToCollapse.setExpanded(false);
-        if(this.stickyHeader)
+        if (this.stickyHeader) {
           this.increaseHeaderWidth = false;
+        }
       });
 
     this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
