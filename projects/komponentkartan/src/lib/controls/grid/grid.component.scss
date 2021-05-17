@@ -1,13 +1,14 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/base.themify";
 
   :host {
     max-width: 1100px;
     display: block;
     box-sizing: border-box;
     padding-bottom: 20px;
-
+ 
     .grid-header-toolbar {
       width: 100%;
       padding-top: 2px;
@@ -16,19 +17,29 @@
     }
   }
 
+  .grid-footer, .grid-header, .grid-rows {
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+    border-radius: 2px;
+  }
+
   :host::ng-deep {
     .grid-row-header,
     .grid-row-content,
     vgr-grid-header {
       background: white;
       display: flex;
-      align-items: baseline;
+      align-items: center;
+
+      &.grid-row-header:hover {
+        @include themify($themes) {
+          background-color: themed('primaryColorDimmed');
+        }
+      }
 
       vgr-grid-column,
       vgr-grid-header-column {
         flex: 1;
         box-sizing: border-box;
-        // min-height: 36px;
         min-width: 0px;
 
         >div {
@@ -53,11 +64,23 @@
     }
 
     vgr-grid-header {
-      margin-bottom: 2px;
+      border-bottom: 2px solid $gray-secondary;
+      background: $gray-ultradimmed;
+      height: 40px;
+      padding-left: 0px;
+      padding-right: 0px;
+      transition: padding-left 0.4s, padding-right 0.4s;
     }
 
-    .grid-row-header {
+    .grid-header-toolbar {
+      padding-left: 0px;
+      padding-right: 0px;
+      transition: padding-left 0.4s, padding-right 0.4s;
+    }
+
+    .grid-row-header-focus {
       border-bottom: 1px solid $background-color--default;
+      border-top: 1px solid $background-color--default;
     }
 
     vgr-grid-header-column {
@@ -90,8 +113,9 @@
       }
 
       vgr-grid-content {
-        padding: 10px 10px 30px 10px;
+        padding: 10px 15px 30px 15px;
         width: 100%;
+        transition: padding-left 0.4s, padding-right 0.4s;
 
         &.no-padding {
           padding: 0;
@@ -100,7 +124,7 @@
     }
 
     .grid-row-container {
-
+      width: 1100px;
       .grid-row-header-focus {
         &:focus {
           outline: $focus-outline-width solid $focus-color;
@@ -111,16 +135,6 @@
         &:hover {
           cursor: pointer;
         }
-      }
-
-      &.grid-row-header--expandable:hover {
-        box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        position: relative;
-      }
-
-      &.grid-row-header--expandable--expandable:active {
-        box-shadow: none;
       }
     }
 
@@ -149,48 +163,93 @@
     vgr-grid-row {
       display: block;
       position: relative;
-      margin-bottom: 2px;
+      .grid-row-header {
+        padding-left: 0px;
+        padding-right: 0px;
+        transition: padding-left 0.4s, padding-right 0.4s;
+      }
     }
 
     vgr-grid-row .grid-row-container {
       display: block;
-      transition: margin 0.4s, box-shadow 0.4s;
+      transition: box-shadow 0.4s, width 0.4s, margin-left 0.4s;
 
       &.grid-row--expanded {
-        box-shadow: 3px 3px 9px 0 rgba(0, 0, 0, 0.5);
-        margin-top: 14px;
-        margin-bottom: 14px;
-        // vgr-grid-column:last-child:after {
-        //   transform: rotate(180deg);
-        // }
+        background: #FFFFFF;
+        border: 1px solid $gray-primary;
+        border-radius: 2px;
+        width: 1110px;
+        margin-left: -5px;
+        position: relative;
+        
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 1;
+          box-shadow: 0 0 15px 0 rgba(0,0,0,0.60);
+          pointer-events: none;
+        }
+
+        .grid-row-header-focus {
+          border: none;
+        }
+
+        .grid-row-header {
+          @include themify($themes) {
+            background-color: themed('primaryColorDimmed');
+          }
+          border-bottom: 1px solid $gray-primary;
+          border-radius: 2px 2px 0 0;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
 
         &:hover .grid-row-header {
           box-shadow: none;
-        }
+        }        
       }
 
       .grid-row-notification {
         display: block;
       }
+      & .error, .success, .info, .warning {
+        margin: 5px 10px 5px 10px;
+      }
     }
 
     .grid-row-container {
-      margin-bottom: 2px;
-    }
-
-    .grid-row-container--notification {
-      margin-top: 5px;
-      margin-bottom: 5px;
+      background-color: white;
     }
 
     .grid-header-wrapper {
       background-color: $background-color--default;
       position: static;
+      margin-left: 0px;
+      width: 1100px;
+      transition: width 0.4s, margin-left 0.4s;
     }
 
     .grid-header-wrapper--sticky {
       z-index: 3;
       position: sticky;
+    }
+
+    .grid-header-wrapper-expanded {
+      width: 1110px;
+      margin-left: -5px;
+
+      vgr-grid-header {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      .grid-header-toolbar {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     }
 
     .grid-header:focus {
@@ -205,10 +264,9 @@
     }
 
     .grid-footer {
-      background-color: white;
+      background-color: $gray-ultradimmed;
       padding: 10px 10px;
     }
-
   }
 
   @media screen and (min-width: $desktop-width--medium) {
@@ -228,20 +286,41 @@
         .grid-row-header {
           padding-left: 10px;
           padding-right: 10px;
+        }
 
-          vgr-grid-column {
-            // min-height: 40px;
+        .grid-row-container {
+          width: 1170px;
+        }
+
+        .grid-row-container.grid-row--expanded {
+          width: 1180px;
+
+          .grid-row-header {
+            padding-left: 15px;
+            padding-right: 15px;
           }
         }
 
         .grid-row-content {
           vgr-grid-content {
-            padding: 10px 20px 30px 20px;
+            padding: 10px 25px 30px 25px;
           }
         }
 
         .grid-row-notification {
           display: block;
+        }
+      }
+
+      .grid-header-wrapper {
+        width: 1170px;
+      }
+
+      .grid-header-wrapper-expanded {
+        width: 1180px;
+        vgr-grid-header {
+          padding-left: 15px;
+          padding-right: 15px;
         }
       }
     }

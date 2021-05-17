@@ -59,7 +59,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
         if (this.preventCollapse) {
           this.collapsePrevented.emit();
         } else {
-          this.setExpanded(false);
+          this.gridService.requestCollapseRow(this);
         }
       } else {
         this.gridService.requestExpandRow(this);
