@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, Input, OnDestroy, OnInit, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Input, OnDestroy, QueryList } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TabButtonComponent } from './tab-button.component';
