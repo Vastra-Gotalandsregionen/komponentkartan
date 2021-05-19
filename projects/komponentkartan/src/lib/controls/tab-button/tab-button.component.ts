@@ -76,7 +76,6 @@ export class TabButtonComponent implements AfterViewInit, AfterContentInit, OnCh
   }
 
   onChange(event: any) {
-    console.log('onChange: ', event)
     if (this.disabled || this.active) {
       event.stopPropagation();
       return;
