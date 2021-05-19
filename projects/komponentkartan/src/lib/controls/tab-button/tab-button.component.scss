@@ -52,6 +52,10 @@
         background-color: themed('primaryColorDimmed');
       }
     }
+    &:focus:not(.button--disabled) {
+      outline: $focus-outline-width solid $focus-color;
+      border: none;
+    }
     &.button--disabled {
       outline: none;
       background-color: transparent;

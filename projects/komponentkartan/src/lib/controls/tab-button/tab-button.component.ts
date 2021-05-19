@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, QueryList, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'vgr-tab-button',
@@ -13,6 +13,8 @@ export class TabButtonComponent implements AfterViewInit, AfterContentInit, OnCh
   @Input() tabId: string;
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
+  @Output() home = new EventEmitter();
+  @Output() end = new EventEmitter();
   @Output() selectedChanged = new EventEmitter<string>();
   @ViewChild('tabbutton', { static: true }) tabbutton: ElementRef;
   @ViewChild('content', { static: true }) content: ElementRef;
@@ -43,8 +45,6 @@ export class TabButtonComponent implements AfterViewInit, AfterContentInit, OnCh
 
   ngAfterContentInit() {
     this.tabId = this.elementRef.nativeElement.innerText;
-    // console.log(this.elementRef)
-    console.log('tabid ', this.tabId)
   }
 
   makeTabFocusable(focusable: boolean) {
@@ -62,6 +62,12 @@ export class TabButtonComponent implements AfterViewInit, AfterContentInit, OnCh
       event.preventDefault();
     } else if (['Enter', 'Spacebar', ' '].includes(event.key)) {
       event.stopPropagation();
+    } else if (['Home'].includes(event.key)) {
+      this.home.emit();
+      event.preventDefault();
+    } else if (['End'].includes(event.key)) {
+      this.end.emit();
+      event.preventDefault();
     }
   }
 

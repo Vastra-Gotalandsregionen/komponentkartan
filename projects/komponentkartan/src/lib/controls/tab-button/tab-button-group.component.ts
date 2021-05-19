@@ -80,6 +80,20 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
       });
       this.tabButtonSubscriptions.push(nextSubscription);
 
+      const homeSubscription = x.home
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.tabButtons.first.focus();
+      });
+      this.tabButtonSubscriptions.push(homeSubscription);
+
+      const endSubscription = x.end
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.tabButtons.last.focus();
+      });
+      this.tabButtonSubscriptions.push(endSubscription);
+
       const selectedChangedSubscription = x.selectedChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event) => {
