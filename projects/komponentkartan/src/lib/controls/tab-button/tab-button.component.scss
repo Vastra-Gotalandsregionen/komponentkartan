@@ -19,8 +19,6 @@
     color: #000000;
     border: 2px solid transparent;
     cursor: pointer;
-    &:active:not(.button--disabled) {
-    }
     &.tab-button--active {
       outline: 0;
       pointer-events: none;
@@ -43,16 +41,15 @@
         color: #9EA2A2;
         cursor: initial;
       }
-      &:hover:not(.button--disabled) {
-          @include themify($themes) {
-          border-bottom: 2px solid themed('primaryColor');
-          background-color: themed('primaryColorDimmed');
-        }
-
-      }
       &:focus:not(.button--disabled) {
         outline: $focus-outline-width solid $focus-color;
         border: none;
+      }
+    }
+    &:hover:not(.button--disabled) {
+        @include themify($themes) {
+        border-bottom: 2px solid themed('primaryColor');
+        background-color: themed('primaryColorDimmed');
       }
     }
     &.button--disabled {
