@@ -52,6 +52,7 @@
       }
       &:focus:not(.button--disabled) {
         outline: $focus-outline-width solid $focus-color;
+        border: none;
       }
     }
     &.button--disabled {
