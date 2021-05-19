@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToggleButtonGroupComponent, ToggleButtonComponent as ToggleButtonComponentElement } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
   selector: 'app-toggle-button',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toggle-button.component.css']
 })
 export class ToggleButtonComponent implements OnInit {
+  @ViewChild('myToggleButtonGroup', { read: ToggleButtonGroupComponent }) myToggleButtonGroup: ToggleButtonGroupComponent;
+  @ViewChild('myToggleButton', { read: ToggleButtonComponentElement }) myToggleButton: ToggleButtonComponentElement;
   state = false;
   states = [
     { 'text': 'Favoriter', 'state': true },
@@ -28,7 +31,18 @@ export class ToggleButtonComponent implements OnInit {
         element.state = true;
       }
     });
+  }
 
+  setFocusOnMyToggleButton() {
+    setTimeout(() => {
+      this.myToggleButton.focus();
+    });
+  }
+
+  setFocusOnMyToggleButtonGroup() {
+    setTimeout(() => {
+      this.myToggleButtonGroup.focus();
+    });
   }
 
 }

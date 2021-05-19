@@ -4,19 +4,8 @@
 ![npm](https://img.shields.io/npm/v/vgr-komponentkartan/demo.svg)
 ![npm](https://img.shields.io/npm/v/vgr-komponentkartan/dev.svg)
 
-Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular
-
-# Releaser för Komponentkartan
-Komponentkartan planeras släppas i major-version fyra gånger per år, förutsatt att det finns någon funktionalitet som leder till breaking changes att släppa. 
-
-* Version 6: släppt 13 februari, 2020
-* Version 5: släppt 18 juni, 2019
-
-För mer information om följande releaser och dess innehåll: [Releaseinformaiton](https://github.com/Vastra-Gotalandsregionen/komponentkartan/wiki/Releaser-(prelimin%C3%A4rt)) eller [Changelog](CHANGELOG.md).
-
-
-## Planerade releaser
-Under 2020 är version 7 planerad för release.
+Grafiska komponenter för ersättningssystem inom VGR, implementerade i Angular. 
+Supportade webbläsare är IE, Chrome och Edge.
 
 ## Komma igång
 
@@ -101,6 +90,8 @@ Den senaste stabila versionen hämtas automatiskt via.
 ```npm
 npm install vgr-komponentkartan
 ```
+
+Samtliga versioner som släppts kan ses på [NPM](https://www.npmjs.com/package/vgr-komponentkartan)
 
 ### Senaste demoversion
 Under utveckling av nya features publiceras en demoversion. Den används internt av teamet och används vid demo för produktägare. Den namnges som releasekandidat med *kommande-version*-*rc*.*nummer*. T.ex

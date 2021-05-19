@@ -23,7 +23,6 @@
       <vgr-radio-group [options]="[{value:'Förvald', displayName:'Förvald', selected:true},{value:'Ej förvald', displayName:'Ej förvald'}, {value:'3Inaktiv', displayName:'Inaktiv', disabled:true}]"
         (selectedChanged)="onSelectedRadioOptionChanged($event)">
       </vgr-radio-group>
-
       <br>
       <br>
       <br>
@@ -41,8 +40,9 @@
 
       <br>
       <h2>Horisontell radiogroup</h2>
-      <vgr-radio-group [options]="options" (selectedChanged)="onSelectedRadioOptionChanged($event)">
+      <vgr-radio-group #myRadioGroup  [options]="options" (selectedChanged)="onSelectedRadioOptionChanged($event)">
       </vgr-radio-group>
+      <vgr-button (click)="setFocus()">Fokusera</vgr-button>
       <br>
       <br>
       <br>

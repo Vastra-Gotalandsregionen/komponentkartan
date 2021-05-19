@@ -96,10 +96,5 @@
         }
       }
     }
-
-    &.success { border: 2px solid $primary-color--success; }
-    &.error { border: 2px solid $primary-color--error; }
-    &.warning { border: 2px solid $primary-color--warning; }
-    &.info { border: 2px solid $primary-color--info; }
   }
 }

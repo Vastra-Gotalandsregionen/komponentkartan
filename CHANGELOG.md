@@ -3,8 +3,31 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-# 8.0.1-betaX (2021-02-12)
-- Did a refact on checkbox and added a transparant option to it.
+
+# 8.2.2 (2021-05-17) Stable
+- Fixed `vgr-modal` bugg when modal is in page component
+- New styling on grid
+- New styling on page block
+- Increased padding between menu and page+
+- Updated some npm packages
+# 8.2.1
+- Fixed a bug when using input in formcontrol
+# 8.2.0 (2021-04-23) Stable
+- Changed design for validation across all components with added validation
+# 8.1.4 (2021-03-30) Stable
+- Fixed IE bugg, regarding checkbox in grid
+# 8.1.3 (2021-03-18) Stable
+- Added class for small text with font size 13 and 15.
+# 8.1.2 (2021-03-09) Stable
+- Vertical alignement (align-items) in grid changed to baseline instead of center.
+# 8.1.1 (2021-03-05) Stable
+- Minor designchange for notifications, border should always be 1px
+
+# 8.1.0 (2021-03-02) Stable
+- Did a refact on checkbox and added a transparent option to it.
+- Added focus method to `vgr-expandable-div`, `vgr-button`, `vgr-grid`, `vgr-checkbox`, `vgr-radio-group`, `vgr-filter-tag`, `vgr-card`, `vgr-toggle-button` and `vgr-table`
+- Upgraded ngx-perfect-scrollbar and fontawesome dependencies.
+- Added transparent option to datepicker
 # 8.0.1 (2021-02-09) Stable
 - Changed design for notifications, added border
 - Fixed wcag-bug regarding screenreader reading wrong Modaltitle when multiple modals on page

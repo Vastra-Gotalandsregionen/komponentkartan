@@ -1,17 +1,17 @@
-import { Component, HostBinding, Output, EventEmitter, HostListener, Input } from '@angular/core';
-import { trigger, style, transition, animate, state } from '@angular/animations';
+import { Component, HostBinding, Output, EventEmitter, HostListener, Input, ElementRef, ViewChild } from '@angular/core';
 import { toggleExpandedState } from '../../animation';
 @Component({
   selector: 'vgr-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  animations: [ toggleExpandedState  ]
+  animations: [toggleExpandedState]
 })
 export class TableComponent {
   @HostBinding('class') tableClass = 'table';
   @Input() expanded = false;
   @Input() expandable = true;
   @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @ViewChild('table', { read: ElementRef, static: false }) table: ElementRef;
   animationSpeed = '400ms';
 
   @HostListener('keydown', ['$event']) toggleRow(event: KeyboardEvent) {
@@ -29,6 +29,10 @@ export class TableComponent {
       this.expanded = !this.expanded;
       this.expandedChanged.emit(this.expanded);
     }
+  }
+
+  public focus() {
+    this.table.nativeElement.focus();
   }
 }
 

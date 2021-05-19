@@ -12,7 +12,7 @@
             <strong>nej</strong>
         </p>
     </div>
-    <div class="docs__examples" style="background-color: #f0f0f0">
+    <div class="docs__examples" style="background-color: #f0f0f0; display: flex; margin-bottom: 10px;">
         <vgr-checkbox style="margin-right: 20px;" [label]="'Klicka på mig!'"></vgr-checkbox> 
         <vgr-checkbox [label]="'Transparant bakgrund'" [transparent]="true"></vgr-checkbox>
 
@@ -23,11 +23,13 @@
         <div class="row-layout ">
             <div class="full ">
                 <div class="column-layout ">
-                 <span><vgr-checkbox></vgr-checkbox>Utan ledtext</span>
+                 <div style="display: flex; align-items: baseline;"><vgr-checkbox></vgr-checkbox>Utan ledtext</div>
                     <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
                     <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
-                    <vgr-checkbox [checked]="true" [label]=" 'Vald' "></vgr-checkbox>
+                    <vgr-checkbox #myCheckbox [checked]="true" [label]=" 'Vald' "></vgr-checkbox>
                     <vgr-checkbox [checked]="true" [disabled]="true" [label]=" 'Inaktiverad vald' "></vgr-checkbox>
+                    <br><br>
+                    <vgr-button (click)="setFocus()" >Fokusera på Vald</vgr-button>
                 </div>
 
             </div>

@@ -21,20 +21,21 @@ export class ToggleButtonGroupComponent implements AfterContentInit, OnDestroy {
     this.addToggleButtonSubscriptions();
 
     this.toggleButtons.changes
-    .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe(
-      _ => {
-        this.setToggleButtonTabFocusability();
-        this.setToggleButtonFocus();
-        this.addToggleButtonSubscriptions();
-      }
-    );
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        _ => {
+          this.setToggleButtonTabFocusability();
+          this.setToggleButtonFocus();
+          this.addToggleButtonSubscriptions();
+        }
+      );
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
+
   setToggleButtonTabFocusability() {
     this.toggleButtons.forEach((x, i) => {
       const focusable = i ? false : true;
@@ -58,26 +59,32 @@ export class ToggleButtonGroupComponent implements AfterContentInit, OnDestroy {
 
     this.toggleButtons.forEach((x, i) => {
       const previousSubscription = x.previous
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        if (i > 0) {
-          this.toggleButtons.toArray()[i - 1].focus();
-        } else {
-          this.toggleButtons.last.focus();
-        }
-      });
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          if (i > 0) {
+            this.toggleButtons.toArray()[i - 1].focus();
+          } else {
+            this.toggleButtons.last.focus();
+          }
+        });
       this.toggleButtonSubscriptions.push(previousSubscription);
 
       const nextSubscription = x.next
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        if (i < this.toggleButtons.length - 1) {
-          this.toggleButtons.toArray()[i + 1].focus();
-        } else {
-          this.toggleButtons.first.focus();
-        }
-      });
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          if (i < this.toggleButtons.length - 1) {
+            this.toggleButtons.toArray()[i + 1].focus();
+          } else {
+            this.toggleButtons.first.focus();
+          }
+        });
       this.toggleButtonSubscriptions.push(nextSubscription);
     });
+  }
+
+  public focus() {
+    if (this.toggleButtons && this.toggleButtons.length) {
+      this.toggleButtons.toArray()[0].focus();
+    }
   }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
+import { ExpandableDivComponent as ExpandableDivComponentElement } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
   selector: 'app-expandable-div',
@@ -7,6 +8,7 @@ import { HtmlEncodeService } from '../html-encode.service';
   styleUrls: ['./expandable-div.component.scss']
 })
 export class ExpandableDivComponent implements OnInit {
+  @ViewChildren('myExpandableList', { read: ExpandableDivComponentElement }) myExpandableList: QueryList<ExpandableDivComponentElement>;
 
   exampleCode = `<vgr-expandable-div [expanded]="false" (expandedChanged)="onExpandedChanged($event)">
   <vgr-expandable-div-header>
@@ -19,6 +21,7 @@ export class ExpandableDivComponent implements OnInit {
 </vgr-expandable-div>`;
 
   exampleCodeMarkup;
+  list: any[];
 
   constructor(htmlEncoder: HtmlEncodeService) {
     this.exampleCodeMarkup =
@@ -26,6 +29,31 @@ export class ExpandableDivComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.list = [
+      {
+        id: '1',
+        title: 'Ettan',
+        text: 'Ettans innehåll'
+      },
+      {
+        id: '2',
+        title: 'Tvåan',
+        text: 'Tvåans innehåll'
+      },
+      {
+        id: '3',
+        title: 'Trean',
+        text: 'Treans innehåll'
+      }
+    ];
   }
+
+  setFocus() {
+    const index = this.list.findIndex(x => x.id === '2');
+    setTimeout(() => {
+      this.myExpandableList.toArray()[index].focus();
+    });
+  }
+
   onExpandedChanged(flag: Boolean) { }
 }

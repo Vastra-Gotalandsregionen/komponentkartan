@@ -57,7 +57,7 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
             this.tab.emit();
         }
 
-        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc', ].indexOf(event.key) > -1) {
+        if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc'].indexOf(event.key) > -1) {
             event.stopPropagation();
             event.preventDefault();
         }
@@ -94,5 +94,9 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
 
     onAction(event: MouseEvent | KeyboardEvent) {
         this.action.emit(event);
+    }
+
+    public focus() {
+        this.setFocus();
     }
 }
