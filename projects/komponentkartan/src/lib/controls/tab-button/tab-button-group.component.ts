@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChildren, HostBinding, Input, OnDestroy, QueryList } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 import { TabButtonComponent } from './tab-button.component';
 
 @Component({
@@ -11,6 +11,7 @@ import { TabButtonComponent } from './tab-button.component';
 export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 
   @Input() width: string;
+  @Input() activeTabId: string;
   @HostBinding('attr.id') @Input() id: string;
   @ContentChildren(TabButtonComponent) tabButtons: QueryList<TabButtonComponent>;
   tabButtonSubscriptions = [];
@@ -21,6 +22,8 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
     this.setTabButtonTabFocusability();
     this.addTabButtonSubscriptions();
 
+
+
     this.tabButtons.changes
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(
@@ -30,6 +33,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
         this.addTabButtonSubscriptions();
       }
     );
+
   }
 
   ngOnDestroy() {
@@ -102,8 +106,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
       .subscribe((event) => {
 
         this.tabButtons.forEach( button => {
-
-          if (button.id === event) {
+          if (button.tabId === event) {
             button.active = true;
           } else {
             button.active = false;

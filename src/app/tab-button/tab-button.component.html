@@ -1,90 +1,16 @@
 
 <vgr-page class="no-sort">
     <vgr-page-header [title]="'Tab button'">
-      <vgr-tab-button-group [width]="'500px'" [id]="'sidor'">
-        <vgr-tab-button *ngFor="let page of pages" [active]="page.active" (selectedChanged)="printLog(page.text)">{{page.text}}</vgr-tab-button>
-        <vgr-tab-button [disabled]="true">Disabled tab button</vgr-tab-button>
+      <vgr-tab-button-group [width]="'500px'" [id]="'sidor'" [activeTabId]="'Avtal'">
+
+
+        <vgr-tab-button *ngFor="let page of pages" [active]="page.active"  [tabId]="page.text" (selectedChanged)="navigate(page.text)" >{{page.text}}</vgr-tab-button>
+        <vgr-tab-button  [disabled]="true">Disabled tab button</vgr-tab-button>
       </vgr-tab-button-group>
     </vgr-page-header>
     <vgr-page-body>
       <!-- Components before-->
-      <vgr-grid [allowMultipleExpandedRows]="true" [stickyHeader]="true">
-        <vgr-grid-header>
-          <vgr-grid-header-column [width]="20"
-            >Dokumentation för Tab button</vgr-grid-header-column>
-        </vgr-grid-header>
-        <vgr-grid-row [expanded]="true">
-          <vgr-grid-column width="20">
-            <h4>Översikt</h4>
-          </vgr-grid-column>
-          <vgr-grid-content>
-            <div>
-              <vgr-tab-button-group [id]="'gruppLista1'" [width]="'500px'">
-                <vgr-tab-button *ngFor="let state of states" [active]="state.state" (selectedChanged)="printLog($event)" (click)="toggleStates(state)" [tabId]="state.text">{{state.text}}</vgr-tab-button>
-              </vgr-tab-button-group>
-              <br><br>
 
-                <vgr-tab-button [disabled]="true">Disabled tab button</vgr-tab-button>
-                <vgr-tab-button (selectedChanged)="printLog($event)" [active]="active">Översikt</vgr-tab-button>
-                <vgr-tab-button (selectedChanged)="printLog($event)" [active]="!active">Kalle</vgr-tab-button>
-
-            </div>
-          </vgr-grid-content>
-        </vgr-grid-row>
-        <vgr-grid-row [expanded]="false">
-          <vgr-grid-column width="20">
-            <h4>Exempel</h4>
-          </vgr-grid-column>
-          <vgr-grid-content>
-            <!-- Exempel -->
-            <!-- <vgr-tab-button [disabled]="true">Disabled tab button</vgr-tab-button> -->
-            <br>
-            <br>
-            <div>
-              <vgr-tab-button-group [width]="'400px'">
-                <vgr-tab-button *ngFor="let state of states" [active]="state.state" (click)="toggleStates(state)" (selectedChanged)="printLog(state.text)">{{state.text}}</vgr-tab-button>
-              </vgr-tab-button-group>
-            </div>
-          </vgr-grid-content>
-        </vgr-grid-row>
-        <vgr-grid-row [expanded]="false">
-          <vgr-grid-column width="20">
-            <h4>API</h4>
-          </vgr-grid-column>
-          <vgr-grid-content>
-            <!-- API -->
-            <table class="property-table">
-              <tr>
-                <th>Namn</th>
-                <th>Beskrivning</th>
-                <th>Exempel</th>
-              </tr>
-              <tr>
-                <td>disabled: boolean</td>
-                <td>Inaktivera toggle button. Förvalt värde är
-                  <code>false</code>.</td>
-                <td>[disabled]="true"</td>
-              </tr>
-              <tr>
-                <td>ariaLabel: string</td>
-                <td>Värde för
-                  <code>aria-label</code>. Förvalt värde är "Aktivera [text]", där [text] är text content för
-                  <code>&lt;vgr-toggle-button&gt;</code>.</td>
-                <td>[ariaLabel]="En alternativ beskrivning."</td>
-              </tr>
-            </table>
-          </vgr-grid-content>
-        </vgr-grid-row>
-        <vgr-grid-row [expanded]="false">
-          <vgr-grid-column width="20">
-            <h4>Tillgänglighet</h4>
-          </vgr-grid-column>
-          <vgr-grid-content>
-            <!-- tILLGÄNGLIGHET -->
-            <ng-content select=".docs__wcag"></ng-content>
-          </vgr-grid-content>
-        </vgr-grid-row>
-      </vgr-grid>
+      <router-outlet></router-outlet>
     </vgr-page-body>
   </vgr-page>
-  <router-outlet name="content"></router-outlet>

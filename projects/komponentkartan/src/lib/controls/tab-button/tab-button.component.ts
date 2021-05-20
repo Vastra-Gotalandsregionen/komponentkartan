@@ -107,6 +107,7 @@ export class TabButtonComponent implements OnInit, AfterViewInit, OnChanges {
       event.stopPropagation();
       return;
     }
+    console.log('selectedChanged, emit: ', this.tabId)
 
     this.selectedChanged.emit(this.tabId)
   }
