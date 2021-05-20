@@ -6,10 +6,12 @@ import { KomponentkartanModule } from '../../../projects/komponentkartan/src/lib
 import { TabButtonComponent } from './tab-button.component';
 import { TabbuttonRoutingModule } from './tab-button-routing.module';
 import { ValdaComponent } from './pages/valda.component';
+import { FavoriterComponent } from './pages/favoriter.component';
 
 @NgModule({
   declarations: [
     TabButtonComponent,
+    FavoriterComponent,
     ValdaComponent,
   ],
   imports: [

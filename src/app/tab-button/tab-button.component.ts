@@ -19,9 +19,9 @@ export class TabButtonComponent implements OnInit {
   active = false;
 
   pages = [
-    { 'text': 'Oversikt', 'active': false },
-    { 'text': 'Exempel', 'active': true },
-    { 'text': 'Api', 'active': false }
+    { 'text': 'Favoriter', 'active': false },
+    { 'text': 'Avtal', 'active': true },
+    { 'text': 'Valda', 'active': false }
   ];
   constructor(private router: Router) { }
 

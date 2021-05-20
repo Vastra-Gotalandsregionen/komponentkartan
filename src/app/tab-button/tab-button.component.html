@@ -2,7 +2,7 @@
 <vgr-page class="no-sort">
     <vgr-page-header [title]="'Tab button'">
       <vgr-tab-button-group [width]="'500px'" [id]="'sidor'">
-        <vgr-tab-button *ngFor="let page of pages" [active]="page.active">{{page.text}}</vgr-tab-button>
+        <vgr-tab-button *ngFor="let page of pages" [active]="page.active" (selectedChanged)="printLog(page.text)">{{page.text}}</vgr-tab-button>
         <vgr-tab-button [disabled]="true">Disabled tab button</vgr-tab-button>
       </vgr-tab-button-group>
     </vgr-page-header>
@@ -87,3 +87,4 @@
       </vgr-grid>
     </vgr-page-body>
   </vgr-page>
+  <router-outlet name="content"></router-outlet>

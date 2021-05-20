@@ -6,9 +6,9 @@ import { TabButtonComponent } from './tab-button.component';
 
 const routes: Routes = [
 
-  { path: '', component: TabButtonComponent, pathMatch: 'full' },
-  { path: 'favoriter', component: FavoriterComponent },
-  { path: 'valda', component: ValdaComponent }
+  { path: '', component: TabButtonComponent, pathMatch: 'full'},
+  { path: 'favoriter', component: FavoriterComponent, outlet: 'content' },
+  { path: 'valda', component: ValdaComponent, outlet: 'content' }
 ];
 
 @NgModule({
