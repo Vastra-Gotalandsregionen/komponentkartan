@@ -77,7 +77,7 @@ export const appRoutes: Routes = [
     { path: 'reactiveformsexample', component: ReactiveformsexampleComponent },
     { path: 'expandablediv', component: ExpandableDivComponent },
     { path: 'toggle-button', component: ToggleButtonComponent },
-    { path: 'tab-button', component: TabButtonComponent },
+    { path: 'tab-button', loadChildren: () => import('../app/tab-button/tab-button.module').then(m => m.TabButtonModule), component: TabButtonComponent },
     { path: 'actionPanels', component: ActionPanelsComponent },
     { path: 'filter-tag', component: FilterTagComponent },
     { path: 'ring-with-text', component: RingWithTextComponent },

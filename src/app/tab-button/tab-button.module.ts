@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 import { KomponentkartanModule } from '../../../projects/komponentkartan/src/lib/komponentkartan.module';
 import { TabButtonComponent } from './tab-button.component';
 import { TabbuttonRoutingModule } from './tab-button-routing.module';
+import { ValdaComponent } from './pages/valda.component';
 
 @NgModule({
   declarations: [
     TabButtonComponent,
+    ValdaComponent,
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, Input, OnDestroy, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, HostBinding, Input, OnDestroy, QueryList } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TabButtonComponent } from './tab-button.component';
@@ -11,6 +11,7 @@ import { TabButtonComponent } from './tab-button.component';
 export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 
   @Input() width: string;
+  @HostBinding('attr.id') @Input() id: string;
   @ContentChildren(TabButtonComponent) tabButtons: QueryList<TabButtonComponent>;
   tabButtonSubscriptions = [];
   lastSelectedIndex: number;
@@ -102,7 +103,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 
         this.tabButtons.forEach( button => {
 
-          if (button.tabId === event) {
+          if (button.id === event) {
             button.active = true;
           } else {
             button.active = false;

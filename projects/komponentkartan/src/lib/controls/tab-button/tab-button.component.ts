@@ -1,21 +1,23 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { Guid } from '../../utils/guid';
 
 @Component({
   selector: 'vgr-tab-button',
   templateUrl: './tab-button.component.html',
   styleUrls: ['./tab-button.component.scss']
 })
-export class TabButtonComponent implements AfterViewInit, AfterContentInit, OnChanges {
+export class TabButtonComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() disabled = false;
   @Input() active = false;
   @Input() ariaLabel: string;
-  @Input() tabId: string;
+  @Input() tabId = Guid.newGuid();
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
   @Output() home = new EventEmitter();
   @Output() end = new EventEmitter();
   @Output() selectedChanged = new EventEmitter<string>();
+  @Output() id: any;
   @ViewChild('tabbutton', { static: true }) tabbutton: ElementRef;
   @ViewChild('content', { static: true }) content: ElementRef;
 
@@ -25,6 +27,31 @@ export class TabButtonComponent implements AfterViewInit, AfterContentInit, OnCh
 
   constructor(private elementRef: ElementRef) {}
 
+  ngOnInit() {
+
+    // const parent = this.elementRef.nativeElement.closest('vgr-tab-button-group');
+    // let parentId;
+
+    // if (parent && parent.attributes){
+    //   console.log('id: ', parent.getAttribute('id'))
+    //   if (parent.getAttribute('id')) {
+    //     parentId = parent.attributes['id'].value;
+    //     console.log('parentId: ', parentId)
+    //   } else {
+    //     console.log('3')
+    //     parentId =  Guid.newGuid();
+    //   }
+    // } else {
+    //   console.log('2')
+    //   parentId =  Guid.newGuid();
+    // }
+    // const index = Array.from(this.elementRef.nativeElement.parentNode.children).indexOf(this.elementRef.nativeElement);
+    // this.id = `${parentId}-tab${index}`;
+    // if (!this.tabId) {
+    //   this.tabId = Guid.newGuid();
+    //   console.log(this.id)
+    // }
+  }
   ngOnChanges() {
     Promise.resolve(null).then(() =>
       this.ariaPressed = this.active
@@ -43,9 +70,9 @@ export class TabButtonComponent implements AfterViewInit, AfterContentInit, OnCh
     );
   }
 
-  ngAfterContentInit() {
-    this.tabId = this.elementRef.nativeElement.innerText;
-  }
+  // ngAfterContentInit() {
+  //   this.tabId = this.elementRef.nativeElement.innerText;
+  // }
 
   makeTabFocusable(focusable: boolean) {
     Promise.resolve(null).then(() =>

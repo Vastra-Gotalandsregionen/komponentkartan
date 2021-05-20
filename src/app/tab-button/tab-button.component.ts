@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab-button',
@@ -22,7 +23,7 @@ export class TabButtonComponent implements OnInit {
     { 'text': 'Exempel', 'active': true },
     { 'text': 'Api', 'active': false }
   ];
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -42,7 +43,18 @@ export class TabButtonComponent implements OnInit {
   }
 
   printLog(id) {
-    console.log('skriver ut här: ', id);
+    console.log('skriver ut här: ', id, this.states);
+    switch(id) {
+      case 'Favoriter':
+        this.router.navigate(['/favoriter']);
+        break;
+      case 'Valda':
+        this.router.navigate(['/valda']);
+        break;
+      default:
+        this.router.navigate(['/tab-button']);
+        break;
+    }
     this.active = !this.active;
   }
 }
