@@ -8,7 +8,8 @@
     width: $content-width--small + 48px;
     .page__page-body-container {
         position: relative;
-        padding-left: $margin--fat;
+        padding-left: $margin--x-fat;
+        z-index: 1;
     }
   }
 
