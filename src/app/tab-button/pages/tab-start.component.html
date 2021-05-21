@@ -15,9 +15,9 @@
           <br><br>
 
             <vgr-tab-button [disabled]="true">Disabled tab button</vgr-tab-button>
-            <vgr-tab-button (selectedChanged)="printLog($event)" [active]="active">Översikt</vgr-tab-button>
-            <vgr-tab-button (selectedChanged)="printLog($event)" [active]="!active">Kalle</vgr-tab-button>
-
+            <vgr-tab-button (selectedChanged)="printLog($event)" >Översikt</vgr-tab-button>
+            <vgr-tab-button (selectedChanged)="printLog($event)" >Kalle</vgr-tab-button>
+          <div style="padding-top: 20px;">Har tryckt på {{activeTab}}</div>
         </div>
       </vgr-grid-content>
     </vgr-grid-row>
@@ -32,7 +32,11 @@
         <br>
         <div>
           <vgr-tab-button-group [width]="'400px'">
-            <vgr-tab-button *ngFor="let state of states" [active]="state.state" (click)="toggleStates(state)" (selectedChanged)="printLog(state.text)">{{state.text}}</vgr-tab-button>
+            <vgr-tab-button>Till vänster</vgr-tab-button>
+            <vgr-tab-button>I mitten</vgr-tab-button>
+            <vgr-tab-button>Till höger</vgr-tab-button>
+            
+            
           </vgr-tab-button-group>
         </div>
       </vgr-grid-content>

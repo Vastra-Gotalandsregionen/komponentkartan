@@ -111,6 +111,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
           } else {
             button.active = false;
           }
+          button.ariaPressed = button.active;
 
         });
       });

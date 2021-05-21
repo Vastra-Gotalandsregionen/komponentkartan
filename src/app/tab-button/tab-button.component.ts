@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab-button',
@@ -7,20 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./tab-button.component.css']
 })
 export class TabButtonComponent implements OnInit {
-
-  // active = false;
-  state = false;
-  states = [
-    { 'text': 'Favoriter', 'state': false },
-    { 'text': 'Avtal', 'state': false },
-    { 'text': 'Valda', 'state': false }
-  ];
-
-  active = false;
-
   pages = [
     { 'text': 'Favoriter' },
-    { 'text': 'Avtal' , 'active': 'true'},
+    { 'text': 'Avtal' , 'active': true},
     { 'text': 'Valda' }
   ];
   constructor(private router: Router) { }
@@ -30,21 +20,16 @@ export class TabButtonComponent implements OnInit {
     // console.log('hello from app')
   }
 
-  toggle() {
-    this.active = !this.active;
-  }
+  navigate(id) {
 
-  toggleStates(state: any) {
-    this.states.forEach(element => {
-      element.state = false;
-      if (element.text === state.text) {
-        element.state = true;
+    const page = this.pages.filter(tab => tab.text === id)[0];
+    this.pages.forEach(element => {
+      element.active = false;
+      if (element.text === page.text) {
+        element.active = true;
       }
     });
 
-  }
-
-  navigate(id) {
     switch(id) {
       case 'Favoriter':
         this.router.navigate( ['/favoriter'],  { skipLocationChange: true });

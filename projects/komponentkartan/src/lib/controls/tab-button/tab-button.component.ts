@@ -6,55 +6,35 @@ import { Guid } from '../../utils/guid';
   templateUrl: './tab-button.component.html',
   styleUrls: ['./tab-button.component.scss']
 })
-export class TabButtonComponent implements OnInit, AfterViewInit, OnChanges {
+export class TabButtonComponent implements AfterViewInit, OnChanges {
 
   @Input() disabled = false;
   @Input() active = false;
   @Input() ariaLabel: string;
   @Input() tabId = Guid.newGuid();
+
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
   @Output() home = new EventEmitter();
   @Output() end = new EventEmitter();
   @Output() selectedChanged = new EventEmitter<string>();
-  @Output() id: any;
+
   @ViewChild('tabbutton', { static: true }) tabbutton: ElementRef;
   @ViewChild('content', { static: true }) content: ElementRef;
 
   tabindex = 0;
-  ariaPressed: boolean;
+  ariaPressed: boolean = false;
   initialTabId: string;
 
   constructor(private elementRef: ElementRef) {}
 
-  ngOnInit() {
-
-    // const parent = this.elementRef.nativeElement.closest('vgr-tab-button-group');
-    // let parentId;
-
-    // if (parent && parent.attributes){
-    //   console.log('id: ', parent.getAttribute('id'))
-    //   if (parent.getAttribute('id')) {
-    //     parentId = parent.attributes['id'].value;
-    //     console.log('parentId: ', parentId)
-    //   } else {
-    //     console.log('3')
-    //     parentId =  Guid.newGuid();
-    //   }
-    // } else {
-    //   console.log('2')
-    //   parentId =  Guid.newGuid();
-    // }
-    // const index = Array.from(this.elementRef.nativeElement.parentNode.children).indexOf(this.elementRef.nativeElement);
-    // this.id = `${parentId}-tab${index}`;
-    // if (!this.tabId) {
-    //   this.tabId = Guid.newGuid();
-    //   console.log(this.id)
-    // }
-  }
   ngOnChanges() {
+    
     Promise.resolve(null).then(() =>
-      this.ariaPressed = this.active
+      {
+        this.ariaPressed = this.active;
+        console.log('onChanges', this.tabId, this.ariaPressed, this.active)
+      }
       );
   }
 
@@ -103,12 +83,15 @@ export class TabButtonComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onChange(event: any) {
+    console.log('onChang', event, this.active)
     if (this.disabled || this.active) {
       event.stopPropagation();
       return;
     }
     console.log('selectedChanged, emit: ', this.tabId)
-
+  //   Promise.resolve(null).then(() =>
+  //   this.ariaPressed = this.active
+  // );
     this.selectedChanged.emit(this.tabId)
   }
 }
