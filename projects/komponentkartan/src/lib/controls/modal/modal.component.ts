@@ -108,12 +108,14 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
     this.isOpen = true;
     this.renderer.addClass(document.querySelector(`#${this.elementId}`), 'vgr-modal--open');
     this.renderer.addClass(document.body, 'modal--open');
+    this.renderer.setStyle(document.body, 'overflow', 'hidden');
   }
 
   private closeModal() {
     this.isOpen = false;
     this.renderer.removeClass(document.querySelector(`#${this.elementId}`), 'vgr-modal--open');
     this.renderer.removeClass(document.body, 'modal--open');
+    this.renderer.setStyle(document.body, 'overflow', 'visible');
   }
 
   onKeyDown(e: KeyboardEvent) {
