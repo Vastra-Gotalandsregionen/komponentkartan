@@ -8,15 +8,16 @@
         <h4>Översikt</h4>
       </vgr-grid-column>
       <vgr-grid-content>
-        <div>
+        <div style="width:100%">
           <!-- <vgr-tab-button-group [id]="'gruppLista1'" [width]="'500px'">
             <vgr-tab-button *ngFor="let state of states" [active]="state.state" (selectedChanged)="printLog($event)" (click)="toggleStates(state)" [tabId]="state.text">{{state.text}}</vgr-tab-button>
           </vgr-tab-button-group> -->
           <br><br>
 
-            <vgr-tab-button [disabled]="true">Disabled tab button</vgr-tab-button>
-            <vgr-tab-button (selectedChanged)="printLog($event)" >Översikt</vgr-tab-button>
-            <vgr-tab-button (selectedChanged)="printLog($event)" >Kalle</vgr-tab-button>
+           
+            <vgr-tab-button (selectedChanged)="printLog($event)" style="width:30px" >Översikt</vgr-tab-button>
+            <vgr-tab-button (selectedChanged)="printLog($event)">Kalle</vgr-tab-button>
+            <vgr-tab-button [disabled]="true" width="30px">Disabled tab button</vgr-tab-button>
           <div style="padding-top: 20px;">Har tryckt på {{activeTab}}</div>
         </div>
       </vgr-grid-content>

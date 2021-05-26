@@ -18,6 +18,8 @@
     background-color: transparent;
     color: #000000;
     border: 2px solid transparent;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     cursor: pointer;
     &.tab-button--active {
       outline: 0;
@@ -30,8 +32,8 @@
       }
 
       // line-height: 28px;
-      // padding-left: 17px;
-      // padding-right: 17px;
+       padding-left: 19px;
+       padding-right: 19px;
 
       &.button--disabled {
         outline: none;
@@ -66,15 +68,15 @@
     }
   }
 
-  // @media screen and (min-width: $desktop-width--medium) {
-  //   .tab-button {
-  //     font-size: $font-size--medium;
-  //     padding-left: 22px;
-  //     padding-right: 22px;
+   @media screen and (min-width: $desktop-width--medium) {
+     .tab-button {
+       font-size: $font-size--medium;
+       padding-left: 17px;
+       padding-right: 17px;
   //     &.tab-button--active {
   //       padding-left: 21px;
   //       padding-right: 21px;
   //     }
-  //   }
-  // }
+     }
+   }
 }
