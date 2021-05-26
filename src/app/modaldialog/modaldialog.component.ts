@@ -17,6 +17,7 @@ export class ModaldialogComponent implements OnInit {
   vardval2Answer: string;
   validateOnSubmit: boolean;
   editMode = false;
+  enable_disable_button = true;
 
   exampleCodeHtml = `
   <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>
@@ -83,6 +84,10 @@ export class ModaldialogComponent implements OnInit {
     this.modalService.openDialog('vardvalWithoutTextModal');
   }
 
+  showDisabledButtonModal() {
+    this.modalService.openDialog('modalDisabledButton');
+  }
+
   showCommentAnswerWithTextModal() {
     this.modalService.openDialog('commentAnswerWithTextModal');
   }
@@ -98,6 +103,11 @@ export class ModaldialogComponent implements OnInit {
   toggleEditMode() {
     this.editMode = !this.editMode;
     this.modalService.updateDialog('commentModal');
+  }
+
+  enableDisabledButton(event) {
+    this.enable_disable_button = !this.enable_disable_button;
+    this.modalService.updateDialog('modalDisabledButton');
   }
 
   createForms() {
