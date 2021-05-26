@@ -279,7 +279,7 @@
     <vgr-checkbox [label]="'Aktivera/Inaktivera knapp'" (checkedChanged)="enableDisabledButton($event)"></vgr-checkbox>
   </vgr-modal-content>
   <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" [disabled]="enable_disable_button" (click)="modalService.closeDialog('modalDisabledButton')">Spara</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" [disabled]="enable_disable_button">Spara</vgr-button>
     <!-- <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modalDisabledButton')">Avbryt -->
     <!-- </vgr-button> -->
   </vgr-modal-footer>

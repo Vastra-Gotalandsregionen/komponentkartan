@@ -110,6 +110,10 @@ export class ModaldialogComponent implements OnInit {
     this.modalService.updateDialog('modalDisabledButton');
   }
 
+  clickDisabledButton(event) {
+    this.modalService.closeDialog('modalDisabledButton');
+  }
+
   createForms() {
     this.vardvalForm = new FormGroup({
       vardval: new FormControl(null, { validators: [Validators.required] }),
