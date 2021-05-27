@@ -5,7 +5,7 @@
 
 
         <vgr-tab-button *ngFor="let page of pages" [active]="page.active"  [tabId]="page.text" (selectedChanged)="navigate(page.text)" >{{page.text}}</vgr-tab-button>
-        <vgr-tab-button  [disabled]="true">Disabled tab button</vgr-tab-button>
+        <vgr-tab-button  width="'140px'" [disabled]="true">Disabled tab button</vgr-tab-button>
       </vgr-tab-button-group>
 
 

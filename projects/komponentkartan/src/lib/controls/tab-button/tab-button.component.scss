@@ -8,11 +8,10 @@
   $tab-button-height: 30px;
   .tab-button {
     position: relative;
-    bottom: -12px;
+    bottom: -13px;
     font-family: $font-family;
     font-size: $font-size--small;
     height: $tab-button-height;
-    // line-height: $tab-button-height;
     padding-left: 18px;
     padding-right: 18px;
     background-color: transparent;
@@ -31,11 +30,8 @@
         border-bottom: 2px solid themed('primaryColor');
       }
 
-      // line-height: 28px;
-       padding-left: 19px;
-       padding-right: 19px;
-
       &.button--disabled {
+        bottom: -12px;
         outline: none;
         background-color: transparent;
         border: none;
@@ -45,7 +41,6 @@
       }
       &:focus:not(.button--disabled) {
         outline: $focus-outline-width solid $focus-color;
-        border: none;
       }
     }
     &:hover:not(.button--disabled) {
@@ -56,9 +51,9 @@
     }
     &:focus:not(.button--disabled) {
       outline: $focus-outline-width solid $focus-color;
-      border: none;
     }
     &.button--disabled {
+      bottom: -12px;
       outline: none;
       background-color: transparent;
       border: none;
@@ -73,10 +68,6 @@
        font-size: $font-size--medium;
        padding-left: 17px;
        padding-right: 17px;
-  //     &.tab-button--active {
-  //       padding-left: 21px;
-  //       padding-right: 21px;
-  //     }
      }
    }
 }

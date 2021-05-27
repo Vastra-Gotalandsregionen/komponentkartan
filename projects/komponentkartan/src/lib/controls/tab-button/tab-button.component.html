@@ -3,7 +3,9 @@
   (keydown)="onKeydown($event)"
   class="tab-button-container"
 >
-  <button #tabbutton type="button" class="noselect tab-button"
+  <button #tabbutton type="button" 
+  [ngStyle]="{'width': width }"
+  class="noselect tab-button"
   [ngClass]="{'button--disabled': disabled, 'tab-button--active': active}"
   [attr.aria-disabled]="disabled" [attr.aria-label]="ariaLabel" [attr.aria-pressed]="ariaPressed" [tabindex]="tabindex">
     <span class="button__fixIE">

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class TabStartComponent implements OnInit {
   // active = false;
-  active = false;
+  active = true;
 
   pages = [
     { 'text': 'Favoriter', 'active': false },
@@ -24,5 +24,6 @@ export class TabStartComponent implements OnInit {
 
   printLog(id) {
     this.activeTab = id;
+    this.active = !this.active;
   }
 }

@@ -14,10 +14,13 @@
           </vgr-tab-button-group> -->
           <br><br>
 
-           
-            <vgr-tab-button (selectedChanged)="printLog($event)" style="width:30px" >Översikt</vgr-tab-button>
-            <vgr-tab-button (selectedChanged)="printLog($event)">Kalle</vgr-tab-button>
-            <vgr-tab-button [disabled]="true" width="30px">Disabled tab button</vgr-tab-button>
+           <div style="width: 300px; ">
+            <vgr-tab-button [active]="active" (selectedChanged)="printLog($event)" style="width:30px" >Översikt</vgr-tab-button>
+            <vgr-tab-button [active]="!active" (selectedChanged)="printLog($event)">Kalle</vgr-tab-button>
+            <!-- <vgr-tab-button [disabled]="true" width="30px">Disabled tab button</vgr-tab-button> -->
+
+           </div>
+           <br>
           <div style="padding-top: 20px;">Har tryckt på {{activeTab}}</div>
         </div>
       </vgr-grid-content>
