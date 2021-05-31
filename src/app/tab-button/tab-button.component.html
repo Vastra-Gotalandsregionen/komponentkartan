@@ -1,8 +1,7 @@
 
 <vgr-page class="no-sort">
     <vgr-page-header [title]="'Tab button'">
-      <vgr-checkbox [checked]="centrera" (checkedChanged)="centrera = !centrera"></vgr-checkbox>
-      {{centrera}}
+      <vgr-checkbox [checked]="centrera" (checkedChanged)="centrera = !centrera" [label]="'Centrera tabbar i header'"></vgr-checkbox>
       <vgr-tab-button-group [width]="'550px'" [id]="'sidor'" [alignCenter]="centrera" >
 
 
