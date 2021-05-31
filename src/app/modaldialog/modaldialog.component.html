@@ -52,6 +52,9 @@
     </div>
     <div class="row-layout">
       <div>
+        <vgr-button (click)="showDisabledButtonModal()">Disablad knapp i modal</vgr-button>
+      </div>
+      <div>
         <vgr-button (click)="showCommentAnswerWithTextModal()">Kommentar 1</vgr-button>
       </div>
       <div>
@@ -268,6 +271,17 @@
   <vgr-modal-footer>
     <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Avbryt</vgr-button>
     <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Spara</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="modalDisabledButton">
+  <vgr-modal-header tabindex="0">En header från app</vgr-modal-header>
+  <vgr-modal-content>
+    <vgr-checkbox [label]="'Aktivera/Inaktivera knapp'" (checkedChanged)="enableDisabledButton($event)"></vgr-checkbox>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [buttonStyle]="'secondary'" [disabled]="enable_disable_button">Spara</vgr-button>
+    <!-- <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modalDisabledButton')">Avbryt -->
+    <!-- </vgr-button> -->
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="myModalId">
