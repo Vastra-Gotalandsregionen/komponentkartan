@@ -15,7 +15,7 @@
           <br><br>
 
            <div style="width: 300px;">
-            <vgr-tab-button [active]="active" (selectedChanged)="printLog($event)">Översikt</vgr-tab-button>
+            <vgr-tab-button [active]="active" (selectedChanged)="printLog($event)"><vgr-icon icon="exclamation-circle" size="sm" ></vgr-icon>  Översikt</vgr-tab-button>
             <vgr-tab-button [active]="!active" (selectedChanged)="printLog($event)">Kalle</vgr-tab-button>
             <!-- <vgr-tab-button [disabled]="true" width="30px">Disabled tab button</vgr-tab-button> -->
 
@@ -70,7 +70,7 @@
             <vgr-tab-button (selectedChanged)="setActivePanelText('Till höger')">Till höger</vgr-tab-button>
             <vgr-panel-container>
            
-              <vgr-panel [themecolor]="panelColor">
+              <vgr-panel noborder="true" style="border: 1px solid grey">
                 <p>{{tabPressed}}</p>
               </vgr-panel>
             </vgr-panel-container>
@@ -141,6 +141,12 @@
             <th>Namn</th>
             <th>Beskrivning</th>
             <th>Exempel</th>
+          </tr>
+          <tr>
+            <td>alignCenter: boolean</td>
+            <td>Boolean för att centrera tabbarna. Förvalt värde är
+              <code>false</code>.</td>
+            <td>[alignCenter]="true"</td>
           </tr>
           <tr>
             <td>width: string</td>

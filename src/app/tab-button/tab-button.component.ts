@@ -13,6 +13,7 @@ export class TabButtonComponent implements OnInit {
     { 'text': 'Avtal' , 'active': true},
     { 'text': 'Valda' }
   ];
+  centrera = false;
   constructor(private router: Router) { }
 
   ngOnInit() {

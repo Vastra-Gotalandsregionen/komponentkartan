@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./tab-start.component.css']
 })
 export class TabStartComponent implements OnInit {
-  // active = false;
   active = true;
   active2 = true;
 
@@ -20,7 +19,7 @@ export class TabStartComponent implements OnInit {
   activeTab2: any = 'inget än';
   tabPressed: string;
   panelColor: string;
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -38,12 +37,5 @@ export class TabStartComponent implements OnInit {
 
   setActivePanelText(text: string) {
     this.tabPressed = text;
-    if (this.tabPressed.includes('mitten')) {
-      this.panelColor = 'green'
-    } else if (this.tabPressed.includes('höger')) {
-      this.panelColor = 'blue'
-    } else {
-      this.panelColor = 'red'
-    }
   }
 }

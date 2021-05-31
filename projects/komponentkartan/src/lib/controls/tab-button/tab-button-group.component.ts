@@ -1,4 +1,5 @@
 import { AfterContentInit, Component, ContentChildren, HostBinding, Input, OnDestroy, QueryList } from '@angular/core';
+import { faAlignCenter } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
 import { TabButtonComponent } from './tab-button.component';
@@ -11,7 +12,9 @@ import { TabButtonComponent } from './tab-button.component';
 export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 
   @Input() width = 'auto';
+  
   @HostBinding('attr.id') @Input() id: string;
+  @HostBinding('class.centrera')  @Input() alignCenter = false;
   @ContentChildren(TabButtonComponent) tabButtons: QueryList<TabButtonComponent>;
   tabButtonSubscriptions = [];
   lastSelectedIndex: number;
