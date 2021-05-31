@@ -12,7 +12,7 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   @Input() active = false;
   @Input() ariaLabel: string;
   @Input() tabId = Guid.newGuid();
-  @Input() width = '110px'
+  @Input() width = 'auto'
 
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
@@ -79,7 +79,7 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  focus() {
+  public focus() {
     this.tabbutton.nativeElement.focus();
   }
 

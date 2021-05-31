@@ -10,8 +10,7 @@ import { TabButtonComponent } from './tab-button.component';
 })
 export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 
-  @Input() width: string;
-  @Input() activeTabId: string;
+  @Input() width = 'auto';
   @HostBinding('attr.id') @Input() id: string;
   @ContentChildren(TabButtonComponent) tabButtons: QueryList<TabButtonComponent>;
   tabButtonSubscriptions = [];
@@ -40,6 +39,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
+
   setTabButtonTabFocusability() {
     this.tabButtons.forEach((x, i) => {
       const focusable = i ? false : true;
@@ -118,5 +118,11 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
       this.tabButtonSubscriptions.push(selectedChangedSubscription);
 
     });
+  }
+
+  public focus() {
+    if (this.tabButtons && this.tabButtons.length) {
+      this.tabButtons.toArray()[0].focus();
+    }
   }
 }
