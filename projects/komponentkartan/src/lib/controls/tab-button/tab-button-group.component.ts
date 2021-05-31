@@ -12,7 +12,6 @@ import { TabButtonComponent } from './tab-button.component';
 export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 
   @Input() width = 'auto';
-  
   @HostBinding('attr.id') @Input() id: string;
   @HostBinding('class.centrera')  @Input() alignCenter = false;
   @ContentChildren(TabButtonComponent) tabButtons: QueryList<TabButtonComponent>;
@@ -91,7 +90,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
       const homeSubscription = x.home
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        const notDisabledButtons = this.tabButtons.filter(x => x.disabled === false);
+        const notDisabledButtons = this.tabButtons.filter(tab => tab.disabled === false);
         notDisabledButtons[0].focus();
       });
       this.tabButtonSubscriptions.push(homeSubscription);
@@ -99,7 +98,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
       const endSubscription = x.end
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        const notDisabledButtons = this.tabButtons.filter(x => x.disabled === false);
+        const notDisabledButtons = this.tabButtons.filter(tab => tab.disabled === false);
         notDisabledButtons[notDisabledButtons.length - 1].focus();
       });
       this.tabButtonSubscriptions.push(endSubscription);

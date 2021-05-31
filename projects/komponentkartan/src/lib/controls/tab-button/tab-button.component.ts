@@ -12,7 +12,7 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   @Input() active = false;
   @Input() ariaLabel: string;
   @Input() tabId = Guid.newGuid();
-  @Input() width = 'auto'
+  @Input() width = 'auto';
 
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
@@ -24,19 +24,15 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   @ViewChild('content', { static: true }) content: ElementRef;
 
   tabindex = 0;
-  ariaPressed: boolean = false;
+  ariaPressed = false;
   initialTabId: string;
 
   constructor(private elementRef: ElementRef) {}
 
   ngOnChanges() {
-    
-    Promise.resolve(null).then(() =>
-      {
+    Promise.resolve(null).then(() => {
         this.ariaPressed = this.active;
-        console.log('onChanges', this.tabId, this.ariaPressed, this.active)
-      }
-      );
+      });
   }
 
   ngAfterViewInit() {
@@ -50,10 +46,6 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
       this.ariaPressed = this.active
     );
   }
-
-  // ngAfterContentInit() {
-  //   this.tabId = this.elementRef.nativeElement.innerText;
-  // }
 
   makeTabFocusable(focusable: boolean) {
     Promise.resolve(null).then(() =>
@@ -84,15 +76,10 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   }
 
   onChange(event: any) {
-    console.log('onChang', event, this.active)
     if (this.disabled || this.active) {
       event.stopPropagation();
       return;
     }
-    console.log('selectedChanged, emit: ', this.tabId)
-  //   Promise.resolve(null).then(() =>
-  //   this.ariaPressed = this.active
-  // );
-    this.selectedChanged.emit(this.tabId)
+    this.selectedChanged.emit(this.tabId);
   }
 }

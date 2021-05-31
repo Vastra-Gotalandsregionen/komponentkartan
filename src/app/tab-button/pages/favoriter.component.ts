@@ -11,7 +11,6 @@ export class FavoriterComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('welcome!')
   }
 
 }

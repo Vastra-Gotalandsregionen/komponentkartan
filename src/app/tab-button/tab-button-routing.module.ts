@@ -9,14 +9,10 @@ const routes: Routes = [
 
   { path: '', component: TabButtonComponent,
   children: [
-    { path:'tab-start', component: TabStartComponent},
-    { path:'favoriter', component: FavoriterComponent},
-    { path:'valda', component: ValdaComponent}
+    { path: 'tab-start', component: TabStartComponent},
+    { path: 'favoriter', component: FavoriterComponent},
+    { path: 'valda', component: ValdaComponent}
   ]}
-// },
-//   { path: 'avtal', component: FavoriterComponent },
-//   { path: 'favoriter', component: FavoriterComponent },
-//   { path: 'valda', component: ValdaComponent, outlet: 'content' }
 ];
 
 @NgModule({
