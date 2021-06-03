@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self,
-  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject, HostBinding
+  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject, HostBinding, HostListener
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { DatepickerItemComponent } from './datepicker-item.component';
@@ -17,7 +17,7 @@ import { DatepickerZoomLevel, CalendarItem, Calendar } from './datepicker.interf
   styleUrls: ['./datepicker.component.scss'],
 })
 export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
-  @Input() @HostBinding('style.width') width = '170px';
+  @Input() @HostBinding('style.width') width = '130px';
   @Input() selectedDate: Date;
   @Input() minZoom: string;
   @Input() minDate: Date;
@@ -38,6 +38,19 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   @ViewChild('readOnlyHeader') readOnlyHeader: ElementRef;
   @ViewChild('calendar') calendar: ElementRef;
   @ViewChildren(DatepickerItemComponent) items: QueryList<DatepickerItemComponent>;
+
+  @HostListener('window:resize', []) onWindowResize() {
+    // only change if 'default' values
+    if (window.innerWidth <= 1459) {
+      if (this.width === '142px') {
+        this.width = '130px';
+      }
+    } else {
+      if (this.width === '130px') {
+        this.width = '142px';
+      }
+    }
+  }
 
   headerLabelId = Guid.newGuid();
   label = '';
