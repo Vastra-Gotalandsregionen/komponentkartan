@@ -21,12 +21,21 @@ export class SearchResultsComponent implements OnInit {
   filterBoxValue_e2: string;
   searchDescription_e1 = null;
   htmlExample1;
+  htmlExample2;
 
   constructor(htmlEncoder: HtmlEncodeService) {
     this.htmlExample1 = htmlEncoder.prepareHighlightedSection(`<div class="search-result-wrapper">
     <vgr-input type="search" (keydown)="filterSearch($event)" [value]="filterBoxValue_e1"></vgr-input>
-    <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible_e1" maxItems="15" [description]="searchDescription_e1" (itemClick)="setResult($event)"></vgr-search-result>
+    <vgr-search-result [items]="filteredItems" [visible]="dropdownVisible_e1"
+    maxItems="15" [description]="searchDescription_e1" (itemClick)="setResult($event)"></vgr-search-result>
   </div>`, 'html');
+
+  this.htmlExample2 = htmlEncoder.prepareHighlightedSection(`<div class="search-result-wrapper">
+  <vgr-input [(ngModel)]="filterBoxValue_e2" style="display: inline-flex;"></vgr-input>
+  <vgr-button (click)="filterSearch_e2($event)">Sök</vgr-button>
+  <vgr-search-result [items]="filteredItems_e2" [(visible)]="dropdownVisible_e2" [width]="'500px'"
+  maxItems="15" noResultsText="Inga resultat hittades." (itemClick)="setResult_e2($event)"></vgr-search-result>
+</div>`, 'html');
   }
 
   private getDemoItems(numberOfItems: number, addSecondRow: boolean = false): SearchResultItem[] {
