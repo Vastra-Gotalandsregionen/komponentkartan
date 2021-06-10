@@ -143,7 +143,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     if (option) {
       const preSelectedOption = this.radiogroupItems.find(x => x.value === option);
       if (preSelectedOption) {
-        this.selectOption(preSelectedOption);
+        this.selectOption(preSelectedOption, false);
       }
     } else {
       this.radiogroupItems.forEach(o => {
@@ -179,20 +179,20 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     this.disabled = isDisabled;
   }
 
-  private selectOption(option: RadioGroupItem<any>) {
+  private selectOption(option: RadioGroupItem<any>, event: boolean = true) {
     this.selectedOption = option;
     this.radiogroupItems.forEach(o => {
       o.selected = (o === option);
     });
     option.selected = true;
-    this.onChange(option.value);
-    this.selectedChanged.emit(option.value);
-  }
 
+    this.selectedChanged.emit(option.value);
+    if(event) {
+      this.onChange(option.value);
+    }
+  }
 }
 
 export interface RadioGroupItem<TValue> extends SelectableItem<TValue> {
   ariaid?: string;
 }
-
-
