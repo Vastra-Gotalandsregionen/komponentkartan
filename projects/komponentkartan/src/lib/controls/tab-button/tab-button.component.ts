@@ -38,7 +38,7 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   ngAfterViewInit() {
     if (!this.ariaLabel) {
       Promise.resolve(null).then(() =>
-        this.ariaLabel = `${this.content.nativeElement.innerHTML} tab button`
+        this.ariaLabel = `${this.content.nativeElement.innerText} tab button`
       );
     }
 
