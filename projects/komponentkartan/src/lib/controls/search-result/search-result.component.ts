@@ -12,6 +12,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
   @Input() noResultsText = 'Inget resultat';
   @Input() items: any;
   @Input() maxItems = 25;
+  @Input() width: string;
   displayItems: any;
   focusItem = -1;
   @Input() @HostBinding('class.search-results--open') visible = false;

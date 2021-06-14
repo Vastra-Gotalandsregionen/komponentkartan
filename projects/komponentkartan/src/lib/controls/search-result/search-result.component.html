@@ -1,4 +1,4 @@
-<div class="search-results">
+<div class="search-results" [ngStyle]="{'width': width }">
   <div class="search-results__noresults" *ngIf="!items || items?.length === 0">
     {{noResultsText}}
   </div>
