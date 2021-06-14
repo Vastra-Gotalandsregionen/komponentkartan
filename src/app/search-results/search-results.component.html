@@ -20,24 +20,39 @@
     </p>
   </div>
   <div class="docs__examples">
-    <div class="row-layout">
-      <div>
-        <p>Exempel på sökning 1</p>
-        <div class="search-result-wrapper">
-          <vgr-input type="search" (keydown)="filterSearch($event)" [value]="filterBoxValue_e1"></vgr-input>
-          <vgr-search-result [items]="filteredItems" [(visible)]="dropdownVisible_e1" maxItems="15" [description]="searchDescription_e1" (itemClick)="setResult($event)"></vgr-search-result>
-        </div>
-      </div>
-      <div>
-        <p>Exempel på sökning 2</p>
-        <div class="search-result-wrapper">
-          <vgr-input [(ngModel)]="filterBoxValue_e2" style="display: inline-flex;"></vgr-input><vgr-button (click)="filterSearch_e2($event)">Sök</vgr-button>
-          <vgr-search-result [items]="filteredItems_e2" [(visible)]="dropdownVisible_e2" maxItems="15" noResultsText="Inga resultat hittades." (itemClick)="setResult_e2($event)"></vgr-search-result>
-        </div>
 
+    <div>
+      <p>
+        <strong>1.</strong> Exempel på sökning med en filtertextbox och en beskrivning tillagd för sökresultatet samt minskat antal
+        maxItems. Sökningen startar efter 3 tecken, testa med att skriva 'min'</p>
+      <div class="search-result-wrapper">
+        <vgr-input type="search" (keydown)="filterSearch($event)" [value]="filterBoxValue_e1"></vgr-input>
+        <vgr-search-result [items]="filteredItems" [(visible)]="dropdownVisible_e1" maxItems="15" [description]="searchDescription_e1"
+          (itemClick)="setResult($event)"></vgr-search-result>
       </div>
+      <br>
+      <br>
+      <h3>HTML</h3>
+      <section [innerHTML]="htmlExample1" hljsContent=".highlight"></section>
     </div>
-    <section [innerHTML]="htmlExample1" hljsContent=".highlight"></section>
+    <div>
+      <br>
+      <br>
+      <p>
+        <strong>2.</strong> Exempel på sökning med en vgr-input och en manuellt satt width på 500px. Sökningen startar då man trycker på knappen sök.</p>
+      <div class="search-result-wrapper">
+        <vgr-input [(ngModel)]="filterBoxValue_e2"></vgr-input>
+        <vgr-button (click)="filterSearch_e2($event)">Sök</vgr-button>
+        <vgr-search-result [items]="filteredItems_e2" [(visible)]="dropdownVisible_e2" [width]="'500px'" maxItems="15" noResultsText="Inga resultat hittades."
+          (itemClick)="setResult_e2($event)"></vgr-search-result>
+      </div>
+      <br>
+      <br>
+      <h3>HTML</h3>
+      <section [innerHTML]="htmlExample2" hljsContent=".highlight"></section>
+
+    </div>
+
   </div>
   <div class="docs__api">
     <table class="property-table">
@@ -67,7 +82,7 @@
           items : array
         </td>
         <td>Listan på sökträffar i rätt format.</td>
-        <td>[items]="['{{'{'}}value: "123", displayName: " Min mottagning"{{'}'}}, ...]"</td>
+        <td>[items]="['{{'{'}}value: "123", displayName: " Min mottagning"{{'}'}}', ...]"</td>
       </tr>
       <tr>
         <td>
@@ -89,6 +104,13 @@
         </td>
         <td>Event som triggas när man klickar på en listitem, skickar med datan för det listitemet.</td>
         <td>(itemClick)="doSomething($event)"</td>
+      </tr>
+      <tr>
+        <td>
+          width : string
+        </td>
+        <td>Bredden på sökresultat-fältet. Default - '330px'</td>
+        <td>[width]="'500px'"</td>
       </tr>
     </table>
   </div>
