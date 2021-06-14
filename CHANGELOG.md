@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 # 8.2.4
 - Radiogroup no longer triggers a change-event in reactive forms when changed programmatically
+- Updated default-width on datepicker
 - Added possibility to add width to vgr-search-result
 - Fixed scroll behind vgr-modal bugg
 # 8.2.3 (2021-05-21) Stable
