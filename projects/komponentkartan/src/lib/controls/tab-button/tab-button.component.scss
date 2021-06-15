@@ -1,0 +1,74 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/base.themify.scss";
+@import "../button/button.base.scss";
+
+:host::ng-deep {
+  $tab-button-height: 30px;
+  .tab-button {
+    position: relative;
+    bottom: -13px;
+    font-family: $font-family;
+    font-size: $font-size--small;
+    height: $tab-button-height;
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: transparent;
+    color: #000000;
+    border: 2px solid transparent;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    cursor: pointer;
+    &.tab-button--active {
+      outline: 0;
+      pointer-events: none;
+      border-top: 2px solid $border-color--light;
+      border-left: 2px solid $border-color--light;
+      border-right: 2px solid $border-color--light;
+      @include themify($themes) {
+        border-bottom: 2px solid themed('primaryColor');
+      }
+
+      &.button--disabled {
+        bottom: -12px;
+        outline: none;
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid #9EA2A2;
+        color: #9EA2A2;
+        cursor: initial;
+      }
+      &:focus:not(.button--disabled) {
+        outline: $focus-outline-width solid $focus-color;
+      }
+    }
+    &:hover:not(.button--disabled) {
+        @include themify($themes) {
+        border-bottom: 2px solid themed('primaryColor');
+        background-color: themed('primaryColorDimmed');
+      }
+    }
+    &:focus:not(.button--disabled) {
+      outline: $focus-outline-width solid $focus-color;
+    }
+    &.button--disabled {
+      bottom: -12px;
+      outline: none;
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid #9EA2A2;
+      color: #9EA2A2;
+      cursor: initial;
+    }
+  }
+
+   @media screen and (min-width: $desktop-width--medium) {
+     .tab-button {
+       font-size: $font-size--medium;
+       padding-left: 17px;
+       padding-right: 17px;
+       bottom: -14px;
+     }
+   }
+}

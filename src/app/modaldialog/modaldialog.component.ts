@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
-import { ModalService } from 'vgr-komponentkartan';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ModalService } from '../../../projects/komponentkartan/src/lib';
 
 declare var tinymce: any;
 

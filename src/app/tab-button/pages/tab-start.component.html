@@ -1,0 +1,188 @@
+<vgr-grid [allowMultipleExpandedRows]="true" [stickyHeader]="true">
+    <vgr-grid-header>
+      <vgr-grid-header-column [width]="20"
+        >Dokumentation för Tab button</vgr-grid-header-column>
+    </vgr-grid-header>
+    <vgr-grid-row [expanded]="true">
+      <vgr-grid-column width="20">
+        <h4>Översikt</h4>
+      </vgr-grid-column>
+      <vgr-grid-content>
+        <div style="width:100%">
+          <span>vgr-tab är en anpassad variant av knapp komponenten som ska kunna kopplas till en container. Den ska inte användas till navigering, utan är ett sätt att visa olika information eller funktionalitet inom ett bredare kontext.
+            vgr-tab ska vara placerad direkt ovanpå containern (med 0 px mellanrum), men ska vara antingen centrerad med, eller vänster allignad med containern. 
+            Om containern är vgr-page-body ska tab vara i sidans vgr-page-header som längst upp på denna sidan.
+            Om man placerar en vgr-panel-container i en vgr-tab-button-group så kan man få tabbarna att "sitta" på panelen. Se sista exemplet
+            </span>
+          <br><br>
+
+           <div style="width: 300px;">
+            <vgr-tab-button [active]="active" (selectedChanged)="printLog($event)"><vgr-icon icon="exclamation-circle" size="sm" ></vgr-icon>  Översikt</vgr-tab-button>
+            <vgr-tab-button [active]="!active" (selectedChanged)="printLog($event)">Kalle</vgr-tab-button>
+            <!-- <vgr-tab-button [disabled]="true" width="30px">Disabled tab button</vgr-tab-button> -->
+
+           </div>
+           <br>
+          <div style="padding-top: 20px;">Har tryckt på {{activeTab}}</div>
+        </div>
+        <br>
+        <p>Förändras med tema: <strong>Ja</strong></p>
+
+      </vgr-grid-content>
+    </vgr-grid-row>
+    <vgr-grid-row [expanded]="false">
+      <vgr-grid-column width="20">
+        <h4>Exempel</h4>
+      </vgr-grid-column>
+      <vgr-grid-content>
+        <!-- Exempel -->
+        <span>En <code>
+          &lt;vgr-tab-button&gt;</code> kan användas själv eller tillsammans med <code>
+            &lt;vgr-tab-button-group&gt;</code> (rekommenderas).
+
+            Man kan sätta storlek på tabbarna alt. låta tabbarna ta den storlek som namnet på tabben behöver. Man kan även sätta ett id på tabben för att kunna ha olika beteenden beroende på vilken knapp man tryckt på. Anger man inte något specifikt id som kommer en guid sättas.
+            Tabbarna är en knapp i botten så kommer agera som en knapp</span>
+        <br>
+        <br>
+        <h2>Utan tab group</h2>
+    <code>&lt;vgr-tab-button [width]="'110px'" [active]="active2" [tabId]="'oversikt'" (selectedChanged)="setActiveTab2($event)" &gt;</code>Översikt<code>&lt;vgr-tab-button&gt;</code><br>
+    <code>&lt;vgr-tab-button [width]="'110px'" [active]="!active2" [tabId]="'innehall'" (selectedChanged)="setActiveTab2($event)" &gt;</code>Innehåll<code>&lt;vgr-tab-button&gt;</code><br>
+   
+        <hr>
+          <vgr-tab-button [width]="'110px'" [active]="active2" [tabId]="'oversikt'" (selectedChanged)="setActiveTab2($event)" >Översikt</vgr-tab-button>
+          <vgr-tab-button  [width]="'110px'" [active]="!active2" [tabId]="'innehall'" (selectedChanged)="setActiveTab2($event)">Innehåll</vgr-tab-button>
+          <!-- <vgr-tab-button [disabled]="true" width="30px">Disabled tab button</vgr-tab-button> -->
+
+      
+        <br>
+        <div style="padding-top: 20px;">Har tryckt på {{activeTab2}}</div>
+        <br>
+        <div>
+          <h2>Med tab group och vgr-panel-container</h2>
+          <code>&lt;vgr-tab-button-group&gt;</code><br>
+          &nbsp;&nbsp;<code>&lt;vgr-tab-button&gt; (selectedChanged)="setActivePanelText('Till vänster')"</code>Till vänster<code>&lt;/vgr-tab-button&gt;</code><br>
+          &nbsp;&nbsp;<code>&lt;vgr-tab-button&gt; (selectedChanged)="setActivePanelText('I mitten')"</code>I mitten<code>&lt;/vgr-tab-button&gt;</code><br>
+          &nbsp;&nbsp;<code>&lt;vgr-tab-button&gt; (selectedChanged)="setActivePanelText('Till höger')"</code>Till höger<code>&lt;/vgr-tab-button&gt;</code><br>
+          &nbsp;&nbsp;<code>&lt;vgr-panel-container&gt;</code><br>
+           
+            &nbsp;&nbsp;&nbsp;&nbsp;  <code>&lt;vgr-panel noborder="true" style="border: 1px solid grey"&gt;</code><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>&lt;p&gt;{{tabPressed}}&lt;/p&gt;</code><br>
+              &nbsp;&nbsp;&nbsp;&nbsp; <code>&lt;/vgr-panel&gt;</code><br>
+              &nbsp;&nbsp; <code>&lt;/vgr-panel-container&gt;</code><br>
+          <code>&lt;/vgr-tab-button-group&gt;</code><br>
+          <br>
+          <hr>
+          <vgr-tab-button-group >
+            <vgr-tab-button (selectedChanged)="setActivePanelText('Till vänster')">Till vänster</vgr-tab-button>
+            <vgr-tab-button (selectedChanged)="setActivePanelText('I mitten')">I mitten</vgr-tab-button>
+            <vgr-tab-button (selectedChanged)="setActivePanelText('Till höger')">Till höger</vgr-tab-button>
+            <vgr-panel-container>
+           
+              <vgr-panel noborder="true" style="border: 1px solid grey">
+                <p>{{tabPressed}}</p>
+              </vgr-panel>
+            </vgr-panel-container>
+          </vgr-tab-button-group>
+        
+         
+          
+        </div>
+      </vgr-grid-content>
+    </vgr-grid-row>
+    <vgr-grid-row [expanded]="false">
+      <vgr-grid-column width="20">
+        <h4>API</h4>
+      </vgr-grid-column>
+      <vgr-grid-content>
+        <!-- API -->
+        <h2><code>&lt;vgr-tab-button&gt;</code></h2>
+        <table class="property-table">
+          <tr>
+            <th>Namn</th>
+            <th>Beskrivning</th>
+            <th>Exempel</th>
+          </tr>
+          <tr>
+            <td>ariaLabel: boolean</td>
+            <td>Värde för
+              <code>aria-label</code>. Förvalt värde är "[text] tab button",<br>
+              där [text] är text content för
+              <code>&lt;vgr-tab-button&gt;</code>.</td>
+            <td>[ariaLabel]="En alternativ beskrivning."</td>
+          </tr>
+          <tr>
+            <td>active: boolean</td>
+            <td>Talar om vilken knapp som är aktiverad. Om man använder tab-button-group <br>
+              så sätts detta automatiskt, annars får man hantera det själv. Förvalt värde är
+              <code>false</code>.</td>
+            <td>[active]="true"</td>
+          </tr>
+          <tr>
+            <td>disabled: boolean</td>
+            <td>Inaktivera tab button. Förvalt värde är
+              <code>false</code>.</td>
+            <td>[disabled]="true"</td>
+          </tr>
+          <tr>
+            <td>tabId: string</td>
+            <td>Värde för id't på tabben. Förvalt värde är <code>Guid.newGuid()</code>.</td>
+            <td>[tabId]="'Översikt'"</td>
+          </tr>
+          <tr>
+            <td>width: string</td>
+            <td>Ett strängvärde för att sätta vilken bredd man vill ha på gruppen. Förvalt värde är <br>
+              <code>auto</code>.</td>
+            <td>[width]="'500px'"</td>
+          </tr>
+          <tr>
+            <td>focus()	</td>
+            <td>Metod för att flytta fokus till komponenten.</td>
+            <td>this.myTabButton.focus()</td>
+          </tr>
+          	
+        </table>
+        <br>
+        <h2><code>&lt;vgr-tab-button-group&gt;</code></h2>
+
+        <table class="property-table">
+          <tr>
+            <th>Namn</th>
+            <th>Beskrivning</th>
+            <th>Exempel</th>
+          </tr>
+          <tr>
+            <td>alignCenter: boolean</td>
+            <td>Boolean för att centrera tabbarna. Förvalt värde är
+              <code>false</code>.</td>
+            <td>[alignCenter]="true"</td>
+          </tr>
+          <tr>
+            <td>width: string</td>
+            <td>Ett strängvärde för att sätta vilken bredd man vill ha på gruppen. Förvalt värde är
+              <code>auto</code>.</td>
+            <td>[width]="'120px'"</td>
+          </tr>
+          <tr>
+            <td>focus()	</td>
+            <td>Metod för att flytta fokus till komponenten.</td>
+            <td>this.myTabButtonGroup.focus()</td>
+          </tr>
+        </table>
+      </vgr-grid-content>
+    </vgr-grid-row>
+    <vgr-grid-row [expanded]="false">
+      <vgr-grid-column width="20">
+        <h4>Tillgänglighet</h4>
+      </vgr-grid-column>
+      <vgr-grid-content>
+        <!-- tILLGÄNGLIGHET -->
+        <ng-content select=".docs__wcag"></ng-content>
+        <span>
+          När man står i gruppen kan man gå med pilar < > föra att loopa runt i tabbarna. <br>
+          Man aktiverar en tab med space / enter. <br>
+          Med home / end kan man hoppa till ändarna i tabgruppen. <br>
+          Tab går till "blocket" och lämnar det. 
+        </span>
+      </vgr-grid-content>
+    </vgr-grid-row>
+  </vgr-grid>

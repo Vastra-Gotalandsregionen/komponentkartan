@@ -1,0 +1,19 @@
+
+<vgr-page class="no-sort">
+    <vgr-page-header [title]="'Tab button'">
+      <vgr-checkbox [checked]="centrera" (checkedChanged)="centrera = !centrera" [label]="'Centrera tabbar i header'"></vgr-checkbox>
+      <vgr-tab-button-group [width]="'550px'" [id]="'sidor'" [alignCenter]="centrera" >
+
+
+        <vgr-tab-button *ngFor="let page of pages" [width]="'110px'" [active]="page.active"  [tabId]="page.text" (selectedChanged)="navigate(page.text)" >{{page.text}}</vgr-tab-button>
+        <vgr-tab-button   [disabled]="true">Disabled tab button</vgr-tab-button>
+      </vgr-tab-button-group>
+
+
+    </vgr-page-header>
+    <vgr-page-body>
+      <!-- Components before-->
+
+      <router-outlet></router-outlet>
+    </vgr-page-body>
+  </vgr-page>

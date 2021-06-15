@@ -63,6 +63,7 @@ import { PaginationDocumentationComponent } from './pagination-documentation/pag
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { GridDocumentationComponent } from './grid-documentation/grid-documentation.component';
 import { NotificationDocumentationComponent} from './notification-documentation/notification-documentation.component';
+import { TabButtonModule } from './tab-button/tab-button.module';
 
 @NgModule({
     declarations: [
@@ -113,6 +114,7 @@ import { NotificationDocumentationComponent} from './notification-documentation/
         FormsModule,
         ReactiveFormsModule,
         AngularHighlightJsModule,
+        TabButtonModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
