@@ -1,61 +1,77 @@
 
 
-.custominput:not(.validation-error--active) > .validation > div:first-of-type,
-.datepicker:not(.validation-error--active) > .validation > div:first-of-type,
-.dropdown-select:not(.validation-error--active) > .validation > div:first-of-type {
-  padding-top: 4px;
-  padding-bottom: 4px;
-  .title-value-layout & {
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-}
+// .custominput:not(.validation-error--active) > .validation > div:first-of-type,
+// .datepicker:not(.validation-error--active) > .validation > div:first-of-type,
+// .dropdown-select:not(.validation-error--active) > .validation > div:first-of-type {
+//   padding-top: 4px;
+//   padding-bottom: 4px;
+//   .title-value-layout & {
+//     padding-top: 0px;
+//     padding-bottom: 0px;
+//   }
+//   .vgr-input & {
+//     padding-top: 0px;
+//     padding-bottom: 0px;
+//   }
+// }
 
 .validation {
   max-height: none;
-  padding: 0px;
+  padding: 1px;
   position: relative;
   display: block;
 
 
-  .title-value-layout & {
-    top: 0;
-    // padding-bottom: 0;
-  }
+  // .title-value-layout & {
+  //   top: 0;
+  //   // padding-bottom: 0;
+  // }
+
+  // .vgr-input & {
+  //   top: 0;
+  // }
 
 
   .ng-invalid > .validation-error--active & {
-    max-height: unset;
+    // max-height: unset;
     min-height: 71px;
-    height: auto;
+    // height: auto;
 
-    top: 0px;
-    padding-bottom: 0px;
-    margin-left: -4px;
-    margin-right: -4px;
-    .title-value-layout & {
-      top: -4px;
-    }
+    // top: 0px;
+    // padding-bottom: 0px;
+    // margin-left: -4px;
+    // margin-right: -4px;
+    // .title-value-layout & {
+    //   top: -4px;
+    // }
+    // .vgr-input & {
+    //   top: -4px;
+    // }
 
     > div:first-of-type {
-      border: 3px solid #FF0000;
-      border-radius: 2px;
+      // border: 3px solid #FF0000;
+      // border-radius: 2px;
+      outline: 3px solid #FF0000;
+      
       padding: 1px;
-
+      // > vgr-input & {
+      //   padding: 0px;
+      //   // padding-bottom: 0;
+      // }
     }
   }
   .ng-invalid > .validation-error--editing.validation-error--active & {
     max-height: unset;
-    padding-bottom: 0px;
-    margin-left: -4px;
-    margin-right: -4px;
+    // padding-bottom: 1px;
+    // margin-left: -4px;
+    // margin-right: -4px;
     > div:first-of-type {
-      border: none;
-      padding: 4px;
+      outline: none;
+      // padding: 4px;
     }
-    .title-value-layout & {
-      top: -4px;
-    }
+    // .title-value-layout & {
+    //   top: -4px;
+    // }
   }
 
   .readonly &,
