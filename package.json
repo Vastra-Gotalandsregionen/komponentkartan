@@ -38,7 +38,7 @@
     "angular2-highlight-js": "^8.0.1",
     "classlist.js": "^1.1.20150312",
     "core-js": "^3.6.5",
-    "highlight.js": "^9.18.3",
+    "highlight.js": "^10.4.1",
     "ngx-perfect-scrollbar": "^10.1.0",
     "rxjs": "^6.6.2",
     "tslib": "^2.0.0",
