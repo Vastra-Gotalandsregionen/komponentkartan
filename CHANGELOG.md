@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 8.3.0-beta2 (dev)
+-Fixed aligning issues after validation design change
 # 8.3.0-beta1 (dev)
 - Added new component `vgr-tab-button` & `vgr-tab-button-group`
 - Removed enable-animation on disabled button when enabling button
