@@ -40,7 +40,7 @@
   .dropdown-select {
     .validation {
       height: 30px;
-      margin-bottom: 9px;
+      // margin-bottom: 9px;
       &.readonly {
         height: auto;
       }
@@ -50,7 +50,7 @@
     &.validation-error--editing {
       .validation {
         height: auto;
-        padding-top: 1px;
+        // padding-top: 1px;
       }
    
     }
