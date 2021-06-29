@@ -52,7 +52,7 @@
         height: auto;
         // padding-top: 1px;
       }
-
+   
     }
 
 
@@ -122,10 +122,6 @@
           @media screen and (min-width: $desktop-width--medium) {
             padding-top: 0;
           }
-        }
-
-        .no-padding-left {
-          padding-left: 0px;
         }
 
         .dropdown-select__header__button {
