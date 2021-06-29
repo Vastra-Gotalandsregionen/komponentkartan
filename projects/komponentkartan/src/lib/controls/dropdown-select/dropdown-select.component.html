@@ -2,13 +2,13 @@
     'validation-error--active': errorActive,
     'validation-error--editing': errorEditing,
     'dropdown--small': small, 'dropdown--large': !small }" [ngStyle]="{ 'width': width }">
-  <div class="validation" [ngClass]="{ 'readonly': readonly }">
+  <div class="validation" [ngClass]="{ 'readonly': readonly || readonlyNoPadding}">
     <div #dropdown class="dropdown-select__control" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
-      [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly': readonly, 'dropdown-select--disabled': disabled && !readonly, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
+      [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly': readonly || readonlyNoPadding, 'dropdown-select--disabled': disabled && !readonly, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
       (keydown)="onKeydown($event)" (focusin)="onFocus()" (focusout)="onBlur($event)">
       <div #header class="dropdown-select__header" tabindex="0" aria-haspopup="listbox" [attr.aria-expanded]="expanded"
         [attr.aria-labelledby]="combinedLabelIds" (click)="toggleExpanded()" (keydown)="onHeaderKeydown($event)">
-        <div class="dropdown-select__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
+        <div class="dropdown-select__header__label noselect" [ngClass]="{ 'no-padding-left': readonlyNoPadding}" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
         <div class="dropdown-select__header__button">
           <vgr-icon icon="chevron-down" size="sm" class="dropdown-select__header__button__icon"></vgr-icon>
         </div>

@@ -53,6 +53,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   deselectDisabled = true;
   headerLabelId = Guid.newGuid();
   label = this.noItemSelectedLabel;
+  readonlyNoPadding = false;
 
   hasFocus: boolean;
   filterHasFocus: boolean;
@@ -109,6 +110,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     this.subscribeToItems();
     if (this.multi) {
       this.setMultiOnItems();
+    }
+
+    if (this.items?.length === 1 && !this.deselectable && !this.disabled && !this.readonly) {
+      this.readonlyNoPadding = true;
     }
 
     this.items.changes
@@ -180,7 +185,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   onTouched() { }
 
   toggleExpanded() {
-    if (this.readonly || this.disabled) {
+    if (this.readonly || this.readonlyNoPadding || this.disabled) {
       return;
     }
 
