@@ -26,6 +26,7 @@
       border-top: 2px solid $border-color--light;
       border-left: 2px solid $border-color--light;
       border-right: 2px solid $border-color--light;
+      font-weight: bold;
       @include themify($themes) {
         border-bottom: 2px solid themed('primaryColor');
       }
