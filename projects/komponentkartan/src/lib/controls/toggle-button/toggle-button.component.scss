@@ -32,9 +32,9 @@
       padding-right: 17px;
 
       &.button--disabled {
-        color: $control-color--disabled;
+        color: $gray-primary;
         background-color: $text-color--light;
-        border-color: $control-color--disabled;
+        border-color: $gray-primary;
       }
       &:hover:not(.button--disabled),
       &:focus:not(.button--disabled) {
