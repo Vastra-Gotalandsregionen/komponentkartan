@@ -33,14 +33,12 @@
   }
 
   &.standalone-notification {
-    padding: 6px 10px;
     &:before {
       display: none;
     }
     vgr-icon {
       position: relative;
       top: 2px;
-      font-size: 20px;
     }
   }
 
@@ -87,12 +85,11 @@
 
   @media screen and (min-width: $desktop-width--medium) {
     &.standalone-notification {
-      padding: 8px 12px;
+      padding: 6px 10px;
       ::ng-deep {
         vgr-icon {
           top: 3px;
           margin-right: 8px;
-          font-size: 23px;
         }
       }
     }
