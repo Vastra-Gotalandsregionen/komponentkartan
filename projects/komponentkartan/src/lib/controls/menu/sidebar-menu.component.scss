@@ -22,3 +22,11 @@
     }
   }
 }
+
+:host::ng-deep {
+  .scroll-container {
+    .ps__thumb-y, .ps__rail-y:hover > .ps__thumb-y {
+      background-color: $gray-secondary;
+    }
+  }
+}
