@@ -1,1 +1,6 @@
-<div class="back-to-top" [class.back-to-top--visible]="visibleState" (click)="scrollToTop()"></div>
+<!-- <div class="back-to-top" [class.back-to-top--visible]="visibleState" (click)="scrollToTop()"></div> -->
+<span (click)="scrollToTop()">
+    <button type="button" class="back-to-top" [class.back-to-top--visible]="visibleState">
+      <vgr-icon icon="chevron-up" size="2x"></vgr-icon>
+    </button>
+</span>
