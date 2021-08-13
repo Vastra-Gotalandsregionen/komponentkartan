@@ -46,7 +46,6 @@
     border-color: $background-color--content;
     overflow: hidden;
     cursor: text;
-    color: $gray-primary;
     &::placeholder {
       // Chrome, Firefox, Opera, Safari 10.1+
       opacity: 0; // Firefox
