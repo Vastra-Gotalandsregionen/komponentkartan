@@ -20,6 +20,9 @@
       padding-right: 0px;
     }
   }
+  input::placeholder {
+    color: $gray-dark;
+  }
   div.prefix,
   div.suffix {
     font-style: italic;
