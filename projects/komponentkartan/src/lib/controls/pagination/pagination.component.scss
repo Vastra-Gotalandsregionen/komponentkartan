@@ -55,7 +55,7 @@
         color: $text-color--light;
       }
       &.button--disabled {
-        color: $control-color--disabled;
+        color: $gray-primary;
         cursor: default;
       }
       &.previous {

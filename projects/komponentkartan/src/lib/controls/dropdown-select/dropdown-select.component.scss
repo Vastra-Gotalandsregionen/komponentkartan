@@ -52,7 +52,7 @@
         height: auto;
         // padding-top: 1px;
       }
-   
+
     }
 
 
@@ -345,16 +345,16 @@
         cursor: default;
 
         .dropdown-select__header {
-          background-color: $control-color--disabled;
+          background-color: $gray-primary;
 
           .dropdown-select__header__label {
-            background-color: $background-color--default;
-            border-color: $control-color--disabled;
+            background-color: $gray-dimmed;
+            border-color: $gray-primary;
             cursor: default;
           }
 
           .dropdown-select__header__button {
-            background-color: $control-color--disabled;
+            background-color: $gray-primary;
           }
         }
       }

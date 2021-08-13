@@ -18,7 +18,7 @@
     cursor: pointer;
   }
   .checkbox--disabled {
-    color: $control-color--disabled;
+    color: $gray-primary;
     transition: color 0.6s linear;
     cursor: default;
   }
@@ -48,19 +48,19 @@
       }
 
       &:disabled + .checkbox__control {
-        border: 2px solid $control-color--disabled;
+        border: 2px solid $gray-primary;
         background-color: white;
         cursor: default;
       }
 
       &:checked:disabled + .checkbox__control svg {
-        background-color: $control-color--disabled;
+        background-color: $gray-primary;
         color: #fff;
         cursor: default;
       }
 
       &:checked:disabled + .checkbox__control {
-        background-color: $control-color--disabled;
+        background-color: $gray-primary;
         cursor: default;
       }
     }

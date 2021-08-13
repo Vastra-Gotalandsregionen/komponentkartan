@@ -32,7 +32,7 @@
     }
   }
   &.button--disabled {
-    background-color: $control-color--disabled;
+    background-color: $gray-primary;
     cursor: default;
   }
   .button__focus-line {

@@ -112,8 +112,20 @@
 
   .radio-button--disabled {
     cursor: default;
+
+    .radio-button__icon {
+      border: 2px solid $gray-primary;
+      &:focus {
+        outline: none;
+        box-shadow: none;
+        &:before {
+          border: none;
+          box-shadow: none;
+        }
+      }
+    }
     .radio-button__text {
-      color: $control-color--disabled;
+      color: $gray-primary;
       transition: color 0.6s linear;
     }
   }
@@ -122,7 +134,7 @@
     .disabled & {
       cursor: default;
       .radio-button__text {
-        color: $control-color--disabled;
+        color: $gray-primary;
       }
     }
   }
