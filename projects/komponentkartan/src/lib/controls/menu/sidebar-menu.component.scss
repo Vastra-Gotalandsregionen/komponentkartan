@@ -10,7 +10,7 @@
     height: calc(100vh - #{$header-height});
     width: $nav-width--small;
     background: white;
-    border-right: solid 1px $border-color;
+    border-right: solid 1px $gray-primary;
     .ps-content {
       height: 100%;
     }
