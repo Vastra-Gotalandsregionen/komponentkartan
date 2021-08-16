@@ -29,12 +29,6 @@ $menu-color--inactive: transparentize($background-color--default, 0.3);
 //misc
 $focus-color: #2275D3;
 $modal-background-color: transparentize($text-color--default, 0.35);
-//Gray
-$gray-dark: #717474;
-$gray-primary: #9EA2A2;
-$gray-secondary: #BBBEBE;
-$gray-dimmed: #EAEBEB;
-$gray-ultradimmed: #F8F8F8;
 //themes
 $primary-color--blue: #006298;
 $secondary-color--blue: #4C91B7;
@@ -51,3 +45,51 @@ $primary-color--default-dimmed: #EAECED;
 $primary-color--green-dimmed: #ECF1EB;
 $primary-color--pinkie-dimmed: #86d8f7;
 $primary-color--red-dimmed: #F5E8EA;
+//Gray
+$gray-dark: #717474;
+$gray-primary: #9EA2A2;
+$gray-secondary: #BBBEBE;
+$gray-dimmed: #EAEBEB;
+$gray-ultradimmed: #F8F8F8;
+
+// VARUMÄRKESFÄRGER
+
+//Beige
+$beige-primary: #C6AA75;
+$beige-secondary: #D7C39E;
+$beige-dimmed: #F1EADC;
+
+//Grön
+$green-primary: #008755;
+$green-secondary: #4CAB88;
+$green-dimmed: #D9EDE6;
+
+//Lime
+$lime-primary: #A8AD00;
+$lime-secondary: #C2C54C;
+$lime-dimmed: #EEEFCC;
+
+//Orange
+$orange-primary: #D86018;
+$orange-secondary: #E38F5D;
+$orange-dimmed: #F9E7DD;
+
+//Rose
+$rose-primary: #AF1685;
+$rose-secondary: #C357A5;
+$rose-dimmed: #F7E7F2;
+
+//Lila
+$purple-primary: #582C83;
+$purple-secondary: #8A6BA8;
+$purple-dimmed: #EEE9F2;
+
+//Röd
+$red-primary: #C8102E;
+$red-secondary: #D8576C;
+$red-dimmed: #F9E7EA;
+
+//Turkos
+$turquoise-primary: #71B2C9;
+$turquoise-secondary: #9BC9D9;
+$turquoise-dimmed: #E3F0F4;
