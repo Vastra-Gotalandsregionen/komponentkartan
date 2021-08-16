@@ -5,7 +5,6 @@
 
 :host::ng-deep {
   .back-to-top {
-    //background-image: map-get($imagesBase64, 'bg-image-back-to-top');
     @include themify($themes) {
       background-color: themed('primaryColor') !important;
     }
@@ -16,7 +15,6 @@
     bottom: 20px;
     right: 2px;
     cursor: pointer;
-    //background-position: center;
     border: none;
     opacity: 0;
     pointer-events: none;
