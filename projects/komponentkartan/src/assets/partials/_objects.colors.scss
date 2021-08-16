@@ -85,7 +85,6 @@
 
 .gray--dimmed {
   background-color: $gray-dimmed;
-  color: $text-color--light;
 }
 
 .gray--ultradimmed {
@@ -124,3 +123,34 @@
   background-color: $text-color--default;
   color: $text-color--light;
 }
+
+.company-green--primary {
+  background-color: $green-primary;
+  color: $text-color--light;
+}
+
+.company-green--secondary {
+  background-color: $green-secondary;
+  color: $text-color--light;
+}
+
+.company-green--dimmed {
+  background-color: $green-dimmed;
+  color: $text-color--light;
+}
+
+.company-beige--primary {
+  background-color: $beige-primary;
+  color: $text-color--light;
+}
+
+.company-beige--secondary {
+  background-color: $beige-secondary;
+  color: $text-color--light;
+}
+
+.company-beige--dimmed {
+  background-color: $beige-dimmed;
+  color: $text-color--light;
+}
+
