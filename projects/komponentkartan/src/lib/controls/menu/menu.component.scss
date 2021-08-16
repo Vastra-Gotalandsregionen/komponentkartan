@@ -155,7 +155,7 @@
     }
     &.menu__item--disabled {
       cursor: default;
-      color: $control-color--disabled;
+      color: $gray-primary;
       p {
         position: relative;
         display: inline-block;
@@ -167,7 +167,7 @@
       padding-bottom: 0px;
       display: block;
       height: 1px;
-      background-color: #dbdbdb;
+      background-color: $gray-secondary;
       // &:hover {
       //   // @extend .border-left-color--secondary;
       // }

@@ -20,6 +20,9 @@
       padding-right: 0px;
     }
   }
+  input::placeholder {
+    color: $gray-dark;
+  }
   div.prefix,
   div.suffix {
     font-style: italic;
@@ -76,8 +79,8 @@
   display: inline-block;
   &.vgr-input--disabled {
     .inputwrapper {
-      background-color: rgb(235, 235, 228);
-      border-color: #87939f;
+      background-color: $gray-dimmed;
+      border-color: $gray-primary;
     }
   }
 }

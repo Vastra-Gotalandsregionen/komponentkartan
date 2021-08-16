@@ -16,7 +16,7 @@
     z-index: $layer-site-header;
     width: 100%;
     height: $header-height;
-    border-bottom: solid 1px $border-color;
+    border-bottom: solid 1px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,6 +27,7 @@
     @include themify($themes) {
       background-color: themed('primaryColor');
       background-image: map-get($imagesBase64, 'bg-image-vgr-header');
+      border-color: themed('secondaryColor');
     }
     transition: background-color ease-in 0.3s;
 

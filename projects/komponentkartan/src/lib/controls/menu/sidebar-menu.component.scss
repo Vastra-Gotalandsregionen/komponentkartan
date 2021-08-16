@@ -10,7 +10,7 @@
     height: calc(100vh - #{$header-height});
     width: $nav-width--small;
     background: white;
-    border-right: solid 1px $border-color;
+    border-right: solid 1px $gray-primary;
     .ps-content {
       height: 100%;
     }
@@ -19,6 +19,14 @@
   @media screen and (min-width: $desktop-width--medium) {
     .sidebar-menu {
       width: $nav-width--medium;
+    }
+  }
+}
+
+:host::ng-deep {
+  .scroll-container {
+    .ps__thumb-y, .ps__rail-y:hover > .ps__thumb-y {
+      background-color: $gray-secondary;
     }
   }
 }

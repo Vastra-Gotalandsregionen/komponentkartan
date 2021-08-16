@@ -18,6 +18,9 @@
     //   outline: $focus-outline-width solid $focus-color;
     //   outline-offset: 2px;
     // }
+    &::placeholder {
+      color: $gray-dark;
+    }
   }
   &-validation {
     max-height: none;

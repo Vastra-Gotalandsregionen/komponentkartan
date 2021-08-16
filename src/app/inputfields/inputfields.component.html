@@ -72,17 +72,17 @@
           </div>
           <div class="inputBlock">
             <label for="rf2">Text (gilltig email)</label>
-            <vgr-input formControlName="rf2" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf2" [errorMessage]="validationMessages.rf2"></vgr-input>
+            <vgr-input formControlName="rf2" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf2" [errorMessage]="validationMessages.rf2" placeholder="namn@email.com"></vgr-input>
             <span>Värde: {{form.controls.rf1.value}}</span>
           </div>
           <div class="inputBlock">
             <label for="rf3">Ange en storstad i USA (asynkron validering)</label>
-            <vgr-input formControlName="rf3" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf3" [errorMessage]="validationMessages.rf3"></vgr-input>
+            <vgr-input formControlName="rf3" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf3" [errorMessage]="validationMessages.rf3" placeholder="Houstons"></vgr-input>
             <span>Värde: {{form.controls.rf3.value}}</span>
           </div>
           <div class="inputBlock">
             <label for="rf4">Nummer (mellan 40 och 50)</label>
-            <vgr-input formControlName="rf4" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf4"  type="number" [errorMessage]="validationMessages.rf4"></vgr-input>
+            <vgr-input formControlName="rf4" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" idForLabel="rf4"  type="number" [errorMessage]="validationMessages.rf4" placeholder="0"></vgr-input>
             <span>Värde: {{form.controls.rf4.value}}</span>
           </div>
         </form>

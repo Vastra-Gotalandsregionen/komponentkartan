@@ -29,8 +29,7 @@
     @include themify($themes) {
       border-top-color: themed('primaryColor');
     }
-    border-color: $secondary-color--default;
-    border: solid 1px $border-color;
+    border: solid 1px $gray-primary;
     border-top: $border--regular solid;
   }
   .color--red.panel-with-border .panel {

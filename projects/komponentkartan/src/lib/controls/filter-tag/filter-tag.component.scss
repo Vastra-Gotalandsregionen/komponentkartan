@@ -29,7 +29,7 @@
 
     &.button--disabled {
       border: none;
-      background-color: $control-color--disabled;
+      background-color: $gray-primary;
       cursor: default;
       color: #fff;
     }

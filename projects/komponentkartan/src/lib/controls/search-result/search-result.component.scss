@@ -9,6 +9,12 @@
     position: relative;
     display: inline-block;
   }
+
+  #scroll-container {
+    .ps__thumb-y, .ps__rail-y:hover > .ps__thumb-y {
+      background-color: $gray-secondary;
+    }
+  }
 }
 
 :host {
@@ -18,7 +24,6 @@
   $search-results-width--medium: 160px;
   $search-results-width--small: 100px;
   $filter-area-height: 60px;
-
   .search-results {
     &.search-results--focus {
       .search-results--edit {
@@ -26,7 +31,6 @@
       }
     }
   }
-
   /*******************************************************************************************************
  * .search-results
  *  Hela den yta som "droppar" ner från kontrollen. Här läggs listan, filtrering mm

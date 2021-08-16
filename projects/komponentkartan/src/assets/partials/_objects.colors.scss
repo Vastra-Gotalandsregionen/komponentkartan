@@ -68,6 +68,31 @@
   color: $text-color--light;
 }
 
+.gray--primary {
+  background-color: $gray-primary;
+  color: $text-color--light;
+}
+
+.gray--secondary {
+  background-color: $gray-secondary;
+  color: $text-color--light;
+}
+
+.gray--dark {
+  background-color: $gray-dark;
+  color: $text-color--light;
+}
+
+.gray--dimmed {
+  background-color: $gray-dimmed;
+  color: $text-color--light;
+}
+
+.gray--ultradimmed {
+  background-color: $gray-ultradimmed;
+  color: $text-color--light;
+}
+
 .focus-color {
   background-color: $focus-color;
   color: $text-color--light;
