@@ -136,7 +136,6 @@
 
 .company-green--dimmed {
   background-color: $green-dimmed;
-  color: $text-color--light;
 }
 
 .company-beige--primary {
@@ -151,6 +150,47 @@
 
 .company-beige--dimmed {
   background-color: $beige-dimmed;
+}
+
+.company-lime--primary {
+  background-color: $lime-primary;
   color: $text-color--light;
+}
+
+.company-lime--secondary {
+  background-color: $lime-secondary;
+  color: $text-color--light;
+}
+
+.company-lime--dimmed {
+  background-color: $lime-dimmed;
+}
+
+.company-orange--primary {
+  background-color: $orange-primary;
+  color: $text-color--light;
+}
+
+.company-orange--secondary {
+  background-color: $orange-secondary;
+  color: $text-color--light;
+}
+
+.company-orange--dimmed {
+  background-color: $orange-dimmed;
+}
+
+.company-rose--primary {
+  background-color: $rose-primary;
+  color: $text-color--light;
+}
+
+.company-rose--secondary {
+  background-color: $rose-secondary;
+  color: $text-color--light;
+}
+
+.company-rose--dimmed {
+  background-color: $rose-dimmed;
 }
 
