@@ -89,7 +89,6 @@
 
 .gray--ultradimmed {
   background-color: $gray-ultradimmed;
-  color: $text-color--light;
 }
 
 .focus-color {
@@ -106,6 +105,10 @@
   color: $text-color--light;
 }
 
+.secondary-color--success {
+  background-color: $secondary-color--success;
+}
+
 .primary-color--error {
   background-color: $primary-color--error;
   color: $text-color--light;
@@ -113,6 +116,24 @@
 
 .secondary-color--error {
   background-color: $secondary-color--error
+}
+
+.primary-color--warning {
+  background-color: $primary-color--warning;
+  color: $text-color--light;
+}
+
+.secondary-color--warning {
+  background-color: $secondary-color--warning;
+}
+
+.primary-color--info {
+  background-color: $primary-color--info;
+  color: $text-color--light;
+}
+
+.secondary-color--info {
+  background-color: $secondary-color--info;
 }
 
 .background-color--default {
