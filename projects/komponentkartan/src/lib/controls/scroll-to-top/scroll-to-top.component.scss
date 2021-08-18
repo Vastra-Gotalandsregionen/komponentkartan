@@ -1,10 +1,13 @@
 @import "../../../assets/partials/_settings.sizes.scss";
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/objects.images";
+@import "../../../assets/partials/base.themify";
 
-:host {
+:host::ng-deep {
   .back-to-top {
-    background-image: map-get($imagesBase64, 'bg-image-back-to-top');
+    @include themify($themes) {
+      background-color: themed('primaryColor') !important;
+    }
     width: 51px !important;
     height: 51px !important;
     border-radius: 50%;
@@ -12,8 +15,7 @@
     bottom: 20px;
     right: 2px;
     cursor: pointer;
-    background-position: center;
-    background-color: transparent !important;
+    border: none;
     opacity: 0;
     pointer-events: none;
     &:hover {
@@ -29,6 +31,11 @@
     &--visible {
       opacity: 1;
       pointer-events: auto;
+      vgr-icon {
+        > .icon {
+          color: $text-color--light;
+        }
+      }
     }
   }
 }
@@ -42,21 +49,26 @@
     z-index: 0;
     opacity: 1 !important;
     pointer-events: auto !important;
+    vgr-icon {
+      > .icon {
+        color: $text-color--light;
+      }
+    }    
   }
 }
 
-  @media screen and (min-width: $desktop-width--small) {
-    .back-to-top {
-      //display: none;
-      left: calc(#{$content-width--small} + #{$nav-width--small} - 10px);
-      cursor: pointer;
-    }
+@media screen and (min-width: $desktop-width--small) {
+  .back-to-top {
+    //display: none;
+    left: calc(#{$content-width--small} + #{$nav-width--small} - 10px);
+    cursor: pointer;
   }
+}
 
-  @media screen and (min-width: $desktop-width--medium) {
-    .back-to-top {
-      //display: none;
-      left: calc(#{$content-width--medium} + #{$nav-width--medium} - 10px);
-      cursor: pointer;
-    }
+@media screen and (min-width: $desktop-width--medium) {
+  .back-to-top {
+    //display: none;
+    left: calc(#{$content-width--medium} + #{$nav-width--medium} - 10px);
+    cursor: pointer;
   }
+}
