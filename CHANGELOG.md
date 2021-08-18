@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed new inactive colors
 - Fixed new gray-scale colors
 - Updated secondary colors (blue & green)
+- Checkbox update fixed size
+- Removed px from textarea validation
+- Smaller height for standalone notifications
+- Back-to-top component color now follows theme
 # 8.3.0-beta2 (dev)
 -Fixed aligning issues after validation design change
 # 8.3.0-beta1 (dev)
