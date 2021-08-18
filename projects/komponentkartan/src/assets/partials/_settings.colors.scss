@@ -30,17 +30,18 @@ $menu-color--inactive: transparentize($background-color--default, 0.3);
 $focus-color: #2275D3;
 $modal-background-color: transparentize($text-color--default, 0.35);
 //Gray
-$gray-secondary: #BBBEBE;
-$gray-ultradimmed: #F8F8F8;
-$gray-dimmed: #EAEBEB;
+$gray-dark: #717474;
 $gray-primary: #9EA2A2;
+$gray-secondary: #BBBEBE;
+$gray-dimmed: #EAEBEB;
+$gray-ultradimmed: #F8F8F8;
 //themes
 $primary-color--blue: #006298;
-$secondary-color--blue: #598eb6;
+$secondary-color--blue: #4C91B7;
 $primary-color--default: #314152;
 $secondary-color--default: #87939f;
 $primary-color--green: #4a773c;
-$secondary-color--green: #7fa276;
+$secondary-color--green: #80A076;
 $primary-color--pinkie: #f0438c;
 $secondary-color--pinkie: #f9b8d2;
 $primary-color--red: #9d2235;

@@ -55,9 +55,9 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   createForm() {
     this.form = this.fb.group({
       rf1: ['', [Validators.pattern('^[A-Z,Å,Ä,Ö]{3}$'), Validators.required]],
-      rf2: ['namn@email.com', Validators.email],
-      rf3: ['Houstons', Validators.required, validateAsyncCityName()],
-      rf4: ['0', [Validators.min(40), Validators.max(50)]]
+      rf2: ['', Validators.email],
+      rf3: ['', Validators.required, validateAsyncCityName()],
+      rf4: ['', [Validators.min(40), Validators.max(50)]]
     });
   }
 }

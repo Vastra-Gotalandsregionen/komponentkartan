@@ -1,4 +1,5 @@
 @import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
 
 .action-panel {
   position: relative;
@@ -15,7 +16,7 @@
     align-items: center;
     padding-left: $margin--slim;
     padding-right: $margin--slim;
-    border-bottom: 1px solid #99a3ad;
+    border-bottom: 1px solid $gray-primary;
     .action-panel__title {
       font-weight: bold;
     }
