@@ -28,8 +28,19 @@
                     <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
                     <vgr-checkbox #myCheckbox [checked]="true" [label]=" 'Vald' "></vgr-checkbox>
                     <vgr-checkbox [checked]="true" [disabled]="true" [label]=" 'Inaktiverad vald' "></vgr-checkbox>
-                    <br><br>
+                    <br>
                     <vgr-button (click)="setFocus()" >Fokusera på Vald</vgr-button>
+                    <br><br>
+                    <vgr-table #myTable [expanded]="true">
+                        <vgr-table-header>
+                            <vgr-table-header-column [width]="5"><vgr-checkbox [label]=" 'Header med Checkbox' "></vgr-checkbox></vgr-table-header-column>
+                            <vgr-table-header-column [width]="5">Header</vgr-table-header-column>
+                        </vgr-table-header>
+                        <vgr-table-row>
+                            <vgr-table-row-column [width]="5"><vgr-checkbox [label]=" 'Row med Checkbox' "></vgr-checkbox></vgr-table-row-column>
+                            <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
+                        </vgr-table-row>
+                    </vgr-table>
                 </div>
 
             </div>

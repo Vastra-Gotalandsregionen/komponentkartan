@@ -28,8 +28,8 @@
 
     input {
       opacity: 0;
-      width: 0.875em;
-      height: 0.875em;
+      width: 16px;
+      height: 16px;
       display: none;
 
       &:focus + .checkbox__control {
@@ -68,8 +68,8 @@
 
   .checkbox__control {
     display: inline-flex;
-    width: 0.875em;
-    height: 0.875em;
+    width: 16px;
+    height: 16px;
     border-radius: 2px;
     border: 2px solid;
     background-color: #fff;
