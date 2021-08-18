@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Removed px from textarea validation
 - Smaller height for standalone notifications
 - Back-to-top component color now follows theme
+- Fixed missaligned focus line on close & lock buttons
 # 8.3.0-beta2 (dev)
 -Fixed aligning issues after validation design change
 # 8.3.0-beta1 (dev)
