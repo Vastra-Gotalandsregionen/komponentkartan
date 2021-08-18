@@ -1,6 +1,6 @@
 .validation {
   max-height: none;
-  padding: 1px; // för att den skall ha plats för ev. validering (och inte hoppa)
+  // padding: 1px; // för att den skall ha plats för ev. validering (och inte hoppa)
   position: relative;
   display: block;
 
@@ -9,7 +9,7 @@
 
     > div:first-of-type {
       outline: 3px solid #FF0000;
-      padding: 1px;
+      // padding: 1px;
     }
   }
   .ng-invalid > .validation-error--editing.validation-error--active & {
