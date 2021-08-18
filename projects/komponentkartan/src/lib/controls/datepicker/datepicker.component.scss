@@ -18,7 +18,7 @@
         height: auto;
         // padding-top: 1px;
       }
-   
+
     }
 
     .datepicker__control {
@@ -282,17 +282,17 @@
           cursor: default;
 
           .datepicker__header__label {
-            background-color: $background-color--default;
-            border-color: $control-color--disabled;
+            background-color: $gray-dimmed;
+            border-color: $gray-primary;
           }
 
           .datepicker__header__input {
-            background-color: $background-color--default;
-            border-color: $control-color--disabled;
+            background-color: $gray-dimmed;
+            border-color: $gray-primary;
           }
 
           .datepicker__header__button {
-            background-color: $control-color--disabled;
+            background-color: $gray-primary;
           }
         }
       }

@@ -74,10 +74,10 @@
       padding-right: 17px;
 
       &.button--disabled {
-        border: none;
-        background-color: $control-color--disabled;
+        border: 1px solid $gray-primary;
+        background-color: #fff;
         cursor: default;
-        color: #fff;
+        color: $gray-primary;
       }
 
       &:hover:not(.button--disabled) {
@@ -128,7 +128,7 @@
       padding-right: 10px;
 
       &.button--disabled {
-        color: $control-color--disabled;
+        color: $gray-primary;
       }
 
       &.button--enabling {
