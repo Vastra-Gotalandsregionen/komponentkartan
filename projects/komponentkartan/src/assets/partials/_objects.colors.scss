@@ -85,12 +85,10 @@
 
 .gray--dimmed {
   background-color: $gray-dimmed;
-  color: $text-color--light;
 }
 
 .gray--ultradimmed {
   background-color: $gray-ultradimmed;
-  color: $text-color--light;
 }
 
 .focus-color {
@@ -107,6 +105,10 @@
   color: $text-color--light;
 }
 
+.secondary-color--success {
+  background-color: $secondary-color--success;
+}
+
 .primary-color--error {
   background-color: $primary-color--error;
   color: $text-color--light;
@@ -114,6 +116,24 @@
 
 .secondary-color--error {
   background-color: $secondary-color--error
+}
+
+.primary-color--warning {
+  background-color: $primary-color--warning;
+  color: $text-color--light;
+}
+
+.secondary-color--warning {
+  background-color: $secondary-color--warning;
+}
+
+.primary-color--info {
+  background-color: $primary-color--info;
+  color: $text-color--light;
+}
+
+.secondary-color--info {
+  background-color: $secondary-color--info;
 }
 
 .background-color--default {
@@ -124,3 +144,116 @@
   background-color: $text-color--default;
   color: $text-color--light;
 }
+
+.company-green--primary {
+  background-color: $green-primary;
+  color: $text-color--light;
+}
+
+.company-green--secondary {
+  background-color: $green-secondary;
+  color: $text-color--light;
+}
+
+.company-green--dimmed {
+  background-color: $green-dimmed;
+}
+
+.company-beige--primary {
+  background-color: $beige-primary;
+  color: $text-color--light;
+}
+
+.company-beige--secondary {
+  background-color: $beige-secondary;
+  color: $text-color--light;
+}
+
+.company-beige--dimmed {
+  background-color: $beige-dimmed;
+}
+
+.company-lime--primary {
+  background-color: $lime-primary;
+  color: $text-color--light;
+}
+
+.company-lime--secondary {
+  background-color: $lime-secondary;
+  color: $text-color--light;
+}
+
+.company-lime--dimmed {
+  background-color: $lime-dimmed;
+}
+
+.company-orange--primary {
+  background-color: $orange-primary;
+  color: $text-color--light;
+}
+
+.company-orange--secondary {
+  background-color: $orange-secondary;
+  color: $text-color--light;
+}
+
+.company-orange--dimmed {
+  background-color: $orange-dimmed;
+}
+
+.company-rose--primary {
+  background-color: $rose-primary;
+  color: $text-color--light;
+}
+
+.company-rose--secondary {
+  background-color: $rose-secondary;
+  color: $text-color--light;
+}
+
+.company-rose--dimmed {
+  background-color: $rose-dimmed;
+}
+
+.company-purple--primary {
+  background-color: $purple-primary;
+  color: $text-color--light;
+}
+
+.company-purple--secondary {
+  background-color: $purple-secondary;
+  color: $text-color--light;
+}
+
+.company-purple--dimmed {
+  background-color: $purple-dimmed;
+}
+
+.company-red--primary {
+  background-color: $red-primary;
+  color: $text-color--light;
+}
+
+.company-red--secondary {
+  background-color: $red-secondary;
+  color: $text-color--light;
+}
+
+.company-red--dimmed {
+  background-color: $red-dimmed;
+}
+
+.company-turquoise--primary {
+  background-color: $turquoise-primary;
+  color: $text-color--light;
+}
+
+.company-turquoise--secondary {
+  background-color: $turquoise-secondary;
+  color: $text-color--light;
+}
+
+.company-turquoise--dimmed {
+  background-color: $turquoise-dimmed;
+}
+
