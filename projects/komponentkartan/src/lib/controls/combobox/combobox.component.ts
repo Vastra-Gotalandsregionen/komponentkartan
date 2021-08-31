@@ -456,7 +456,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
         }
 
       } else {
-        if ((steps && (itemIndex % steps) === 0) || itemIsOutOfBounds) {
+        if ((steps && (itemIndex % steps) === 0 && itemIndex !== 0) || itemIsOutOfBounds) {
           this.combobox.nativeElement.querySelector('.ps').scrollTop = itemElement.offsetTop;
         }
       }
