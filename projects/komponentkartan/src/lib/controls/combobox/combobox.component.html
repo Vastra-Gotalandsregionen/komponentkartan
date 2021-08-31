@@ -10,13 +10,13 @@
 
       <div class="combobox__header">
         <input
+          *ngIf="!readonly"
           #textInput
           type="text"
           (keydown)="onKeydown($event)" 
           [(ngModel)]="searchString"
           (ngModelChange)="filterItems()" 
-          [disabled]="disabled"
-          [readonly]="readonly"
+          [disabled]="disabled"          
           [placeholder]="placeholder"     
           aria-autocomplete="both"   
           aria-controls="listbox"
@@ -27,6 +27,7 @@
         <div *ngIf="showButton" class="combobox__header__button" role="button" aria-label="Visa alternativ" tabindex="-1" (click)="expandListbox()" >
           <vgr-icon icon="chevron-down" size="sm" class="combobox__header__button__icon"></vgr-icon>
         </div>
+        <div *ngIf="readonly" class="combobox__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
       </div>
       <div *ngIf="expanded && !readonly && !disabled" class="combobox__menu" role="listbox" id="listbox" [attr.aria-labelledby]="labelId">
         <div class="combobox__menu__dimmer combobox__menu__dimmer-top"></div>
