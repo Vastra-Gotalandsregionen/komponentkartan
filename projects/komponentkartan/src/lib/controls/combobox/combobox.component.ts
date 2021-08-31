@@ -299,6 +299,16 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
         this.collapse();
       }
 
+    } else if (event.altKey && (event.key === 'ArrowDown' || event.key === 'Down')) {
+      event.stopPropagation();
+      event.preventDefault();
+      this.expand();
+
+    } else if (event.altKey && (event.key === 'ArrowUp' || event.key === 'Up')) {
+      event.stopPropagation();
+      event.preventDefault();
+      this.collapse();
+
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
       event.stopPropagation();
       event.preventDefault();
@@ -406,11 +416,13 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       this.scrollToItem(highlightedItem, ScrollDirection.Up);
 
     } else {
-      this.setHighlightedItem(filteredItems[filteredItems.length - 1].value);
+      if (!highlightedItem) {
+        this.setHighlightedItem(filteredItems[filteredItems.length - 1].value);
 
-      setTimeout(() => {
-        this.scrollToItem(filteredItems[filteredItems.length - 1], ScrollDirection.Up);
-      });
+        setTimeout(() => {
+          this.scrollToItem(filteredItems[filteredItems.length - 1], ScrollDirection.Up);
+        });
+      }
     }
   }
 
@@ -427,7 +439,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       });
 
     } else {
-      if (filteredItems.length) {
+      if (filteredItems.length && !highlightedItem) {
 
         this.setHighlightedItem(filteredItems[0].value);
 
