@@ -1,0 +1,294 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/objects.images";
+@import "../../../assets/partials/base.themify";
+
+// @include theme(background-color);
+// @include theme(border-left-color);
+
+
+:host {
+
+  .combobox {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .combobox--large {
+    width: 270px;
+
+    @media screen and (min-width: $desktop-width--medium) {
+      width: 287px;
+    }
+  }
+
+  .combobox--small {
+    width: 160px;
+
+    @media screen and (min-width: $desktop-width--medium) {
+      width: 170px;
+    }
+  }
+
+  .select-all-text {
+    margin-top:0;
+    color: grey;
+  }
+
+}
+:host::ng-deep {
+  .combobox {
+    .validation {
+      height: 30px;
+      &.readonly {
+        height: auto;
+      }
+    }
+
+    &.validation-error--active,
+    &.validation-error--editing {
+      .validation {
+        height: auto;
+      }
+   
+    }
+
+    &:not(.validation-error--editing):not(.validation-error--active) {
+      .combobox__control:not(.combobox--readonly) {
+        .combobox__header {
+          position: absolute;
+          width: 100%;
+        }
+      }
+    }
+
+    &.validation-error--editing .combobox__control .combobox__menu {
+      top: 50px
+    }
+
+    .combobox__control {
+
+      .combobox__header {
+        height: $component-height;
+        cursor: pointer;
+        display: flex;
+
+        &:focus {
+          outline: $focus-outline-width solid $focus-color;
+        }
+
+        .combobox__header__input {
+            border: 1px solid #151515;
+            display: flex;
+            height: 30px;
+            overflow: hidden;
+            width: 100%;
+            background: white;
+            input {
+              flex-grow: 1;
+              border: 0;
+              height: 28px;
+              line-height: 28px;
+              width: 0;
+              background: transparent;
+            }
+            &input.disabled {      
+              background-color: rgb(235, 235, 228);
+              border-color: #87939f;      
+            }
+        }
+
+        .combobox__header__button {
+          @include themify($themes) {
+            background-color: themed('primaryColor');
+          }
+
+          transition: all 0.6s linear;
+
+          .combobox__header__button__icon {
+            background: transparent map-get($imagesBase64, 'bg-image-icon-chevron') center no-repeat;
+            background-size: 40%;
+            width: 36px;
+            height: 30px;
+
+
+            .icon {
+              display: block;
+              text-align: center;
+              width: 36px;
+              height: 30px;
+              color: $text-color--light;
+              padding-top: 3px;
+              transform: rotate(0deg);
+              transition: all ease 0.3s;
+            }
+          }
+        }
+      }
+
+      .combobox__menu {
+        position: absolute;
+        top: 42px;
+        z-index: $layer-four;
+        box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.34);
+        background-color: $background-color--content;
+        width: 330px;
+        cursor: default;
+
+        &::before {
+          background: transparent map-get($imagesBase64, 'bg-image-menu-arrow') center no-repeat;
+          width: 16px;
+          height: 21px;
+          content: "";
+          position: absolute;
+          display: inline-block;
+          z-index: $layer-four;
+          top: -16px;
+          left: 20px;
+        }
+
+        .combobox__menu__items {
+          max-height: 285px;
+
+          .combobox__menu__items__dimmer-padding {
+            height: 20px;
+          }
+
+          .combobox__menu__items__item {
+            color: $text-color--default;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: $margin--regular;
+            padding-right: $margin--regular;
+            background: white;
+
+            &.combobox-item--selected,
+            &.combobox-item--highlighted,
+            &:hover {
+              font-weight: bold;
+              letter-spacing: $font-size--small-letter-spacing-bold;
+            }
+
+            &.combobox-item--highlighted {
+              background-color:  $primary-color--default-dimmed;
+            }
+
+            &:hover {
+              padding-left: $margin--regular - 4px;
+              border-left-width: 4px;
+              border-left-style: solid;
+              @include themify($themes) {
+                border-left-color: themed('primaryColor');
+              }
+            }
+
+            .combobox__menu__items__item__content-wrapper {
+              display: flex;
+            }
+          }
+        }
+
+        .combobox__menu__dimmer {
+          position: absolute;
+          height: 20px;
+          width: 300px;
+          margin-left: 15px;
+          margin-right: 15px;
+          z-index: $layer-five;
+        }
+
+        .combobox__menu__dimmer-top {
+          background: linear-gradient(white, rgba(255, 255, 255, 0));
+        }
+
+        .combobox__menu__dimmer-bottom {
+          background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
+          bottom: 0;
+        }
+      }
+
+      &.combobox--expanded {
+        .combobox__header {
+          .combobox__header__button {
+            .combobox__header__button__icon {
+              .icon {
+                transform: rotate(-180deg);
+              }
+            }
+          }
+        }
+      }
+
+      &.combobox--disabled {
+        cursor: default;
+
+        .combobox__header {
+          background-color: $control-color--disabled;
+
+          .combobox__header__input {
+            background-color: $background-color--default;
+            border-color: $control-color--disabled;
+            cursor: default;
+          }
+
+          .combobox__header__button {
+            background-color: $control-color--disabled;
+          }
+        }
+      }
+
+      &.combobox--readonly {
+        cursor: default;
+
+        .combobox__header {
+          height: auto;            
+          padding-top: 2px;     
+          width: auto;
+          display: block;
+
+          .combobox__header__input {
+            height: auto;
+            width: auto;
+            transition: max-width 0.3s linear;
+            border-color: $background-color--content;
+            overflow: visible;
+            word-wrap: break-word;
+            white-space: normal;
+            cursor: text;
+            word-break: break-word;
+
+            outline: none;
+          }
+
+          .combobox__header__button {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .combobox {
+      .combobox__control {
+
+        .combobox__menu {
+          .combobox__menu__items {
+            max-height: 340px;
+          }
+        }
+
+        &.combobox--readonly {
+          .combobox__header {
+            width: auto;
+
+            .combobox__header__input {
+              width: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}
