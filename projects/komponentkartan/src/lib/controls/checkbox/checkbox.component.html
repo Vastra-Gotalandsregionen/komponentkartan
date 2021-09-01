@@ -1,13 +1,12 @@
 <div class="checkbox">
   <span class="checkbox__input" (focusout)="onLeave()" (click)="onClick($event)" (keydown)="onKeyDown($event)">
-    <input id="{{labelledbyid}}" type="checkbox" name="checkbox" [disabled]="disabled" [checked]="checked" aria-hidden="true" tabindex="-1">
+    <input id="{{labelledbyid}}" type="checkbox" name="checkbox" [disabled]="disabled" [checked]="checked" aria-hidden="true">
     <span
     class="checkbox__control"
     [ngClass]="{ 'checkbox--transparent': transparent }"
     [attr.aria-labelledby]="labelledbyid"
     role="checkbox"
     #checkbox
-    tabindex="0"
     [attr.aria-disabled]="disabled"
     [attr.aria-checked]="checked">
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
