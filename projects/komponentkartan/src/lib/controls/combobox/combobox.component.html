@@ -3,7 +3,7 @@
     'validation-error--editing': errorEditing,
     'combobox--small': small, 'combobox--large': !small }" [ngStyle]="{ 'width': width }">
   <div class="validation" [ngClass]="{ 'readonly': readonly }">
-    <div #combobox class="combobox__control" 
+    <div #combobox class="combobox__control"
       [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly" role="combobox" id="combobox" aria-owns="listbox" aria-haspopup="listbox" [attr.aria-expanded]="expanded && !readonly && !disabled"
       [ngClass]="{ 'combobox--small': small, 'combobox--readonly': readonly, 'combobox--disabled': disabled && !readonly, 'combobox--expanded': expanded }"
       (focusin)="onFocus()" (focusout)="onBlur($event)">
@@ -29,7 +29,7 @@
         </div>
         <div *ngIf="readonly" class="combobox__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
       </div>
-      <div *ngIf="expanded && !readonly && !disabled" class="combobox__menu" role="listbox" id="listbox" [attr.aria-labelledby]="labelId">
+      <div *ngIf="expanded && !readonly && !disabled" class="combobox__menu" role="listbox" id="listbox" [attr.aria-labelledby]="labelId" [ngStyle]="{'left': leftPosition}" [ngClass]="{'alignRight': listAlignRight}">
         <div class="combobox__menu__dimmer combobox__menu__dimmer-top"></div>
         <perfect-scrollbar [config]="scrollbarConfig">
           <div class="combobox__menu__items">

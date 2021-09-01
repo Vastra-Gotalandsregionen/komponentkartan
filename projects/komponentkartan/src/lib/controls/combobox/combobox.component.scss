@@ -7,9 +7,7 @@
 // @include theme(background-color);
 // @include theme(border-left-color);
 
-
 :host {
-
   .combobox {
     display: inline-block;
     vertical-align: middle;
@@ -32,10 +30,9 @@
   }
 
   .select-all-text {
-    margin-top:0;
+    margin-top: 0;
     color: grey;
   }
-
 }
 :host::ng-deep {
   .combobox {
@@ -51,7 +48,6 @@
       .validation {
         height: auto;
       }
-   
     }
 
     &:not(.validation-error--editing):not(.validation-error--active) {
@@ -64,11 +60,10 @@
     }
 
     &.validation-error--editing .combobox__control .combobox__menu {
-      top: 50px
+      top: 50px;
     }
 
     .combobox__control {
-
       .combobox__header {
         height: $component-height;
         cursor: pointer;
@@ -79,24 +74,27 @@
         }
 
         .combobox__header__input {
-            border: 1px solid #151515;
-            display: flex;
-            height: 30px;
-            overflow: hidden;
-            width: 100%;
-            background: white;
-            input {
-              flex-grow: 1;
-              border: 0;
-              height: 28px;
-              line-height: 28px;
-              width: 0;
-              background: transparent;
-            }
-            &input.disabled {      
-              background-color: rgb(235, 235, 228);
-              border-color: #87939f;      
-            }
+          border: 1px solid #151515;
+          display: flex;
+          height: 30px;
+          overflow: hidden;
+          width: 100%;
+          background: white;
+          input {
+            flex-grow: 1;
+            border: 0;
+            height: 28px;
+            line-height: 28px;
+            width: 0;
+            background: transparent;
+          }
+          &input.disabled {
+            background-color: rgb(235, 235, 228);
+            border-color: #87939f;
+          }
+          input::placeholder {
+            color: $gray-dark;
+          }
         }
 
         .combobox__header__button {
@@ -111,7 +109,6 @@
             background-size: 40%;
             width: 36px;
             height: 30px;
-
 
             .icon {
               display: block;
@@ -148,6 +145,12 @@
           left: 20px;
         }
 
+        &.alignRight {
+          &::before {
+            left: 304px;
+          }
+        }
+
         .combobox__menu__items {
           max-height: 285px;
 
@@ -171,7 +174,7 @@
             }
 
             &.combobox-item--highlighted {
-              background-color:  $primary-color--default-dimmed;
+              background-color: $primary-color--default-dimmed;
             }
 
             &:hover {
@@ -242,8 +245,8 @@
         cursor: default;
 
         .combobox__header {
-          height: auto;            
-          padding-top: 2px;     
+          height: auto;
+          padding-top: 2px;
           width: auto;
           display: block;
 
@@ -272,7 +275,6 @@
   @media screen and (min-width: $desktop-width--medium) {
     .combobox {
       .combobox__control {
-
         .combobox__menu {
           .combobox__menu__items {
             max-height: 340px;

@@ -36,6 +36,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   @Input() small = false;
   @Input() showButton = true;
   @Input() placeholder = '';
+  @Input() listAlignRight = false;
   @Input() compareWith = _defaultCompare;
   // @Input() autocomplete = true;  // new story #513
   autocomplete = true;
@@ -53,6 +54,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   hasFocus: boolean;
   scrollbarConfig: PerfectScrollbarConfig;
   searchString = '';
+  leftPosition = '0px';
 
   get combinedLabelIds() {
     return `${this.labelId} ${this.headerLabelId}`;
@@ -126,6 +128,15 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       setTimeout(() => {
         this.setSelectedState(this.value);
       });
+    }
+
+    if (this.listAlignRight) {
+      const width = getComputedStyle(this.combobox.nativeElement).width;
+      if (width) {
+        this.leftPosition = `calc(${width} - 330px)`;
+      }
+    } else {
+      this.leftPosition = '0px';
     }
   }
 

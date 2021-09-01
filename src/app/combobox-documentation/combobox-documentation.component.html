@@ -59,7 +59,7 @@
           </div>
           <div class="one-third">
             <p>Alternativ med extra information</p>
-            <vgr-combobox  [width]="'100%'">
+            <vgr-combobox [width]="'100%'">
               <vgr-combobox-item *ngFor="let item of items50">
                 <div>{{item}}</div>
                 <div style="font-style: italic">&nbsp;Information</div>
@@ -103,7 +103,7 @@
 
           <div class="one-third">
             <h3 id="label">Combobox</h3>
-            <vgr-combobox #combobox1 width="130px" [formControl]="form" [labelId]="'label'" [readonly]="readonly" [showButton]="false" [disabled]="disabled">
+            <vgr-combobox #combobox1 [small]="true" [formControl]="form" [labelId]="'label'" [readonly]="readonly" [showButton]="true" [disabled]="disabled" [listAlignRight]="true">
               <vgr-combobox-item [value]="item" *ngFor="let item of items50">{{item}} {{ item.index }}</vgr-combobox-item>
             </vgr-combobox>
             <span> &nbsp;&nbsp; {{ combobox1.value }}</span>
@@ -112,7 +112,7 @@
 
           <div class="one-third">
             <h3>Combobox mer info</h3>
-            <vgr-combobox #combobox2 width="200px" [formControl]="form" [readonly]="readonly" [showButton]="false" [disabled]="disabled">
+            <vgr-combobox #combobox2 width="200px" [listAlignRight]="true" [formControl]="form" [readonly]="readonly" [showButton]="false" [disabled]="disabled" [showButton]="true">
               <vgr-combobox-item [value]="item" *ngFor="let item of items50">
                 <div>{{item}}</div>
                 <div style="font-style: italic"> Information</div>
@@ -187,6 +187,11 @@
           <td>width="130px"</td>
         </tr>
         <tr>
+          <td>listAlignRight: boolean</td>
+          <td>Gör att listboxens position linjerar med textfältet till höger. Förvalt värde är vänster (false).</td>
+          <td>listAlignRight="false"</td>
+        </tr>
+        <tr>
           <td>placeholder: string</td>
           <td>Gör det valda alternativet kortare. Förvalt värde är
             <code>false</code>.</td>
@@ -230,8 +235,7 @@
         </tr>
         <tr>
           <td>selectedChanged: EventEmitter&lt;any&gt;</td>
-          <td>Event som triggas när val ändras av användaren. Värdet är <code>true</code> om alternativet valts och
-            <code>false</code>
+          <td>Event som triggas när val ändras av användaren. Värdet är <code>true</code> om alternativet valts.
             om det avvalts. Används av <code>&lt;vgr-combobox&gt;</code>.</td>
           <td></td>
         </tr>
