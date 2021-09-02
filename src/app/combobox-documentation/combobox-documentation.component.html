@@ -103,7 +103,7 @@
 
           <div class="one-third">
             <h3 id="label">Combobox</h3>
-            <vgr-combobox #combobox1 [small]="true" [formControl]="form" [labelId]="'label'" [readonly]="readonly" [showButton]="true" [disabled]="disabled" [listAlignRight]="true">
+            <vgr-combobox #combobox1 [small]="true" [formControl]="form" [labelId]="'label'" [readonly]="readonly" [showButton]="true" [disabled]="disabled" [listAlignRight]="true" [allowFreeText]="true">
               <vgr-combobox-item [value]="item" *ngFor="let item of items50">{{item}} {{ item.index }}</vgr-combobox-item>
             </vgr-combobox>
             <span> &nbsp;&nbsp; {{ combobox1.value }}</span>

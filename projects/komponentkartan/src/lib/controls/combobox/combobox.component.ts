@@ -37,6 +37,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   @Input() showButton = true;
   @Input() placeholder = '';
   @Input() listAlignRight = false;
+  @Input() allowFreeText = false;
   @Input() compareWith = _defaultCompare;
   // @Input() autocomplete = true;  // new story #513
   autocomplete = true;
@@ -267,6 +268,10 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
           // new story #513
           // this.setSelectedState(this.searchString);
         }
+
+        if (this.allowFreeText) {
+          this.onChange(this.searchString);
+        }
       }
 
       this.collapse(false);
@@ -381,7 +386,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   private collapse(focusFilter = true) {
     this.expanded = false;
 
-    if (this.textInput) {
+    if (this.textInput && !this.allowFreeText) {
       this.filterItems();
     }
 
