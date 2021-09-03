@@ -53,7 +53,7 @@
           </div>
           <div class="one-third">
             <p>Stor, 50 alternativ</p>
-            <vgr-combobox>
+            <vgr-combobox [autocomplete]="false">
               <vgr-combobox-item *ngFor="let item of items50">{{item}}</vgr-combobox-item>
             </vgr-combobox>
           </div>

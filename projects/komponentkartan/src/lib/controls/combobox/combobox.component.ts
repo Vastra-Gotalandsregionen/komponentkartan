@@ -39,8 +39,8 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   @Input() listAlignRight = false;
   @Input() allowFreeText = false;
   @Input() compareWith = _defaultCompare;
-  // @Input() autocomplete = true;  // new story #513
-  autocomplete = true;
+  @Input() autocomplete = true;  // new story #513
+  // autocomplete = true;
 
   @Output() selectedChanged = new EventEmitter<any>();
   @Output() expandedChanged = new EventEmitter<boolean>();
@@ -191,14 +191,15 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
     }
 
     if (!this.expanded) {
-      this.expand();
 
       this.filterItems();
+      this.expand();
+
       const selectedItem = this.items.find(x => x.selected);
       if (selectedItem) {
         this.setHighlightedItem(selectedItem.value);
       } else {
-        if (this.items.length) {
+        if (this.autocomplete && !this.searchString.length) {
           this.setHighlightedItem(this.items.toArray()[0].value);
         }
       }
@@ -212,15 +213,9 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
 
     if (value) {
       if (this.items) {
-        if (this.autocomplete) {
-          this.items.forEach(item => {
-            item.visible = item.label.toLowerCase().startsWith(value.toLowerCase());
-          });
-        } else {
-          this.items.forEach(item => {
-            item.visible = item.label.toLowerCase() === value.toLowerCase();
-          });
-        }
+        this.items.forEach(item => {
+          item.visible = item.label.toLowerCase().startsWith(value.toLowerCase());
+        })
       }
     } else {
       this.items.forEach(item => {
@@ -262,15 +257,11 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       if (highlighted) {
         this.setSelectedState(highlighted.value);
       } else {
-        if (this.autocomplete) {
-          this.setSelectedState(this.value);
-        } else {
-          // new story #513
-          // this.setSelectedState(this.searchString);
-        }
 
         if (this.allowFreeText) {
           this.onChange(this.searchString);
+        } else {
+          this.setSelectedState(this.value);
         }
       }
 
@@ -300,9 +291,11 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
         this.collapse(true);
       } else {
         this.expand();
-        setTimeout(() => {
-          this.focusNextItem();
-        });
+        if (this.autocomplete) {
+          setTimeout(() => {
+            this.focusNextItem();
+          });
+        }
       }
 
     } else if (event.key === 'Escape' || event.key === 'Esc') {
@@ -358,7 +351,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
         }
       });
 
-    } else if (/^[\wåäöÅÄÖ]$/.test(event.key) && !event.ctrlKey && !event.altKey) {
+    } else if (/^[\wåäöÅÄÖ ]$/.test(event.key) && !event.ctrlKey && !event.altKey) {
 
       setTimeout(() => {
         this.setHighligthState();
@@ -369,6 +362,8 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
         const filteredItems = this.items.filter(i => i.visible);
         if (filteredItems.length) {
           this.expand();
+        } else {
+          this.collapse();
         }
       });
     }
@@ -379,14 +374,18 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   private expand() {
-    this.expanded = true;
-    this.expandedChanged.emit(true);
+    const filteredItems = this.items.filter(x => x.visible);
+
+    if (filteredItems.length) {
+      this.expanded = true;
+      this.expandedChanged.emit(true);
+    }
   }
 
   private collapse(focusFilter = true) {
     this.expanded = false;
 
-    if (this.textInput && !this.allowFreeText) {
+    if (this.textInput) {
       this.filterItems();
     }
 
@@ -504,21 +503,11 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       }
     });
 
-    if (this.autocomplete) {
-      this.label = selectedItem ? selectedItem.selectedLabel || selectedItem.label : '';
-      this.searchString = this.label;
-      if (selectedItem) {
-        this.onChange(selectedItem.value);
-      }
-    } else {
-      // new story  #513 custom values
-      // if (value) {
-      //   this.label = value.toString();
-      //   this.searchString = this.label;
-      //   this.onChange(value.toString());
-      // }
+    this.label = selectedItem ? selectedItem.selectedLabel || selectedItem.label : '';
+    this.searchString = this.label;
+    if (selectedItem) {
+      this.onChange(selectedItem.value);
     }
-
   }
 
   private setHighligthState() {
