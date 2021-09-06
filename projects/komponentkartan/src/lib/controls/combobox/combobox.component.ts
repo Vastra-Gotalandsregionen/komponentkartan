@@ -37,10 +37,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   @Input() showButton = true;
   @Input() placeholder = '';
   @Input() listAlignRight = false;
-  @Input() allowFreeText = false;
   @Input() compareWith = _defaultCompare;
-  @Input() autocomplete = true;  // new story #513
-  // autocomplete = true;
 
   @Output() selectedChanged = new EventEmitter<any>();
   @Output() expandedChanged = new EventEmitter<boolean>();
@@ -199,7 +196,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       if (selectedItem) {
         this.setHighlightedItem(selectedItem.value);
       } else {
-        if (this.autocomplete && !this.searchString.length) {
+        if (!this.searchString.length) {
           this.setHighlightedItem(this.items.toArray()[0].value);
         }
       }
@@ -257,12 +254,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       if (highlighted) {
         this.setSelectedState(highlighted.value);
       } else {
-
-        if (this.allowFreeText) {
-          this.onChange(this.searchString);
-        } else {
-          this.setSelectedState(this.value);
-        }
+        this.setSelectedState(this.value);
       }
 
       this.collapse(false);
@@ -291,11 +283,10 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
         this.collapse(true);
       } else {
         this.expand();
-        if (this.autocomplete) {
-          setTimeout(() => {
-            this.focusNextItem();
-          });
-        }
+
+        setTimeout(() => {
+          this.focusNextItem();
+        });
       }
 
     } else if (event.key === 'Escape' || event.key === 'Esc') {
@@ -355,9 +346,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
 
       setTimeout(() => {
         this.setHighligthState();
-        if (this.autocomplete) {
-          this.setInputText();
-        }
+        this.setInputText();
 
         const filteredItems = this.items.filter(i => i.visible);
         if (filteredItems.length) {
@@ -512,24 +501,16 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
 
   private setHighligthState() {
     let highligthedItem: ComboboxItemComponent;
+
     this.items.forEach(i => (i.highlighted = false));
-    if (this.autocomplete) {
-      this.items.forEach(item => {
-        if (item.label.toLowerCase().startsWith(this.searchString.toLowerCase()) && !highligthedItem) {
-          item.highlighted = true;
-          highligthedItem = item;
-          return;
-        }
-      });
-    } else {
-      this.items.forEach(item => {
-        if (item.label.toLowerCase() === this.searchString.toLowerCase() && !highligthedItem) {
-          item.highlighted = true;
-          highligthedItem = item;
-          return;
-        }
-      });
-    }
+    this.items.forEach(item => {
+      if (item.label.toLowerCase().startsWith(this.searchString.toLowerCase()) && !highligthedItem) {
+        item.highlighted = true;
+        highligthedItem = item;
+        return;
+      }
+    });
+
   }
 
   private setHighlightedItem(value: any) {

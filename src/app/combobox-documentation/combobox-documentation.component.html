@@ -7,7 +7,7 @@
   
   
       <br><button (click)="andralangd()">ändra längd på dd</button><br>
-      <p>Dropdown select finns i två bredder, har en rad olika alternativ och följer temafärg.</p>
+      <p>Combobox finns i två bredder, har en rad olika alternativ och följer temafärg.</p>
       <vgr-combobox [readonly]="readonly" [disabled]="disabled" #myDropdown>
         <vgr-combobox-item>Apelsin</vgr-combobox-item>
         <vgr-combobox-item>Banan</vgr-combobox-item>
@@ -53,7 +53,7 @@
           </div>
           <div class="one-third">
             <p>Stor, 50 alternativ</p>
-            <vgr-combobox [autocomplete]="false">
+            <vgr-combobox>
               <vgr-combobox-item *ngFor="let item of items50">{{item}}</vgr-combobox-item>
             </vgr-combobox>
           </div>
@@ -103,7 +103,7 @@
 
           <div class="one-third">
             <h3 id="label">Combobox</h3>
-            <vgr-combobox #combobox1 [small]="true" [formControl]="form" [labelId]="'label'" [readonly]="readonly" [showButton]="true" [disabled]="disabled" [listAlignRight]="true" [allowFreeText]="true">
+            <vgr-combobox #combobox1 [small]="true" [formControl]="form1" [labelId]="'label'" [readonly]="readonly" [showButton]="true" [disabled]="disabled" [listAlignRight]="true">
               <vgr-combobox-item [value]="item" *ngFor="let item of items50">{{item}} {{ item.index }}</vgr-combobox-item>
             </vgr-combobox>
             <span> &nbsp;&nbsp; {{ combobox1.value }}</span>
