@@ -18,6 +18,7 @@ export class ModaldialogComponent implements OnInit {
   validateOnSubmit: boolean;
   editMode = false;
   enable_disable_button = true;
+  modalChecked = false;
 
   exampleCodeHtml = `
   <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>

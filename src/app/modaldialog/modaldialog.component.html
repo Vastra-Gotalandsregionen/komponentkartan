@@ -63,6 +63,9 @@
       <div>
         <vgr-button (click)="showCommentModal()">Kommentar 3</vgr-button>
       </div>
+      <div>
+        <vgr-button (click)="this.modalService.openDialog('modalWithCheckbox')">Modal med checkbox</vgr-button>
+      </div>
     </div>
     <br>
     <h2>HTML</h2>
@@ -292,6 +295,16 @@
   <vgr-modal-footer>
     <vgr-button [buttonStyle]="'secondary'">Spara</vgr-button>
     <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('myModalId')">Avbryt
+    </vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
+<vgr-modal id="modalWithCheckbox">
+  <vgr-modal-header>En modal med en checkbox</vgr-modal-header>
+  <vgr-modal-content>
+    <vgr-checkbox label="Check me!" [checked]="modalChecked" (checkedChanged)="modalChecked = !modalChecked" [disabled]="false"></vgr-checkbox>
+  </vgr-modal-content>
+  <vgr-modal-footer>
+    <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modalWithCheckbox')">Stäng
     </vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
