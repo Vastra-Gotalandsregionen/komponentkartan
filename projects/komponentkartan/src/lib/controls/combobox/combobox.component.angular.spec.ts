@@ -26,15 +26,26 @@ export class TestComponent {
   form = new FormControl();
 }
 
-describe('[ComboboxComponent - Angulatr]', () => {
+function pickRandom(values: any[]): any {
+  const index = Math.ceil(Math.random() * values.length) - 1;
+  return values[index];
+}
+
+describe('[ComboboxComponent - Angular]', () => {
   let fixture: ComponentFixture<TestComponent>;
   let testComponent: TestComponent;
   let component: ComboboxComponent;
   let rootElement: DebugElement;
-  let headerElement: DebugElement;
   let expandButtonElement: DebugElement;
   let menuElement: DebugElement;
-  let textInputElement: ElementRef;
+  let textInputElement: DebugElement;
+  beforeAll(() => {
+    jasmine.clock().uninstall();
+    jasmine.clock().install();
+  });
+  afterAll(() => {
+    jasmine.clock().uninstall();
+  });
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
@@ -47,17 +58,16 @@ describe('[ComboboxComponent - Angulatr]', () => {
         ComboboxItemComponent,
         TruncatePipe,
         IconComponent,
-        ErrorMessagePipe,
+        ErrorMessagePipe
       ]
     });
 
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(TestComponent);
-      testComponent = fixture.componentInstance;   
-      testComponent.items = [1, 2, 3, 4, 5];   
+      testComponent = fixture.componentInstance;
       rootElement = fixture.debugElement.query(By.css('vgr-combobox'));
-      headerElement = rootElement.query(By.css('.combobox__header'));     
       component = rootElement.componentInstance;
+      fixture.componentInstance.items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
       fixture.detectChanges();
       done();
     });
@@ -67,19 +77,19 @@ describe('[ComboboxComponent - Angulatr]', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('When button is clicked', () => {
+  describe('When expand button is clicked', () => {
     describe('and menu is collapsed', () => {
       beforeEach(() => {
         component.showButton = true;
         component.expanded = false;
-        component.searchString = null;
+        component.searchString = '';
         expandButtonElement = rootElement.query(By.css('.combobox__header__button'));
       });
       it('menu is expanded', () => {
         expandButtonElement.triggerEventHandler('click', {});
         fixture.detectChanges();
-        
-        menuElement = rootElement.query(By.css('.combobox__menu')); 
+
+        menuElement = rootElement.query(By.css('.combobox__menu'));
         expect(menuElement).toBeTruthy();
       });
       it('event is emitted', () => {
@@ -112,13 +122,11 @@ describe('[ComboboxComponent - Angulatr]', () => {
     });
   });
 
-  describe('When there are more than 20 items', () => {
+  describe('When there are items', () => {
     let itemElements: DebugElement[];
     beforeEach(() => {
       component.expanded = true;
-      fixture.componentInstance.items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
       fixture.detectChanges();
-      textInputElement = component.textInput;
     });
 
     describe('and filter is applied', () => {
@@ -134,80 +142,247 @@ describe('[ComboboxComponent - Angulatr]', () => {
     });
   });
 
-  // describe('When multi is false', () => {
-  //   let itemElements: DebugElement[];
-  //   let spy: jasmine.Spy;
-  //   beforeEach(() => {
-  //     fixture.componentInstance.items = [1, 2, 3];
-  //     component.expanded = true;
-  //     fixture.detectChanges();
-  //     itemElements = rootElement.queryAll(By.css('.combobox__menu__items__item'));
-  //     spy = spyOn(component.selectedChanged, 'emit');
-  //   });
-  //   describe('and unselected item is clicked', () => {
-  //     beforeEach(() => {
-  //       itemElements[0].triggerEventHandler('click', {});
-  //       fixture.detectChanges();
-  //     });
-  //     it('item is selected', () => {
-  //       expect(itemElements[0].classes['dropdown-item--selected']).toBe(true);
-  //     });
-  //     it('label is set', () => {
-  //       const headerLabelElement = headerElement.query(By.css('.dropdown-select__header__label'));
-  //       const headerLabelText = (headerLabelElement.nativeElement as HTMLElement).textContent;
-  //       expect(headerLabelText).toBe('1');
-  //     });
-  //     it('value is set', () => {
-  //       expect(testComponent.form.value).toBe(1);
-  //     });
-  //     it('event is emitted', () => {
-  //       expect(spy).toHaveBeenCalledWith(1);
-  //     });
-  //     describe('and then other item is clicked', () => {
-  //       beforeEach(() => {
-  //         itemElements[1].triggerEventHandler('click', {});
-  //         fixture.detectChanges();
-  //       });
-  //       it('previous item is deselected', () => {
-  //         expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
-  //       });
-  //       it('new item is selected', () => {
-  //         expect(itemElements[1].classes['dropdown-item--selected']).toBe(true);
-  //       });
-  //       it('label is set', () => {
-  //         const headerLabelElement = headerElement.query(By.css('.dropdown-select__header__label'));
-  //         const headerLabelText = (headerLabelElement.nativeElement as HTMLElement).textContent;
-  //         expect(headerLabelText).toBe('2');
-  //       });
-  //       it('value is set', () => {
-  //         expect(testComponent.form.value).toBe(2);
-  //       });
-  //       it('event is emitted', () => {
-  //         expect(spy).toHaveBeenCalledWith(2);
-  //       });
-  //     });
-  //     describe('and deselect button is clicked', () => {
-  //       beforeEach(() => {
-  //         component.expanded = true;
+  describe('When an item is clicked', () => {
+    let itemElements: DebugElement[];
+    let spy: jasmine.Spy;
+    beforeEach(() => {
+      component.expanded = true;
+      component.searchString = '';
+      fixture.detectChanges();
+      itemElements = rootElement.queryAll(By.css('.combobox__menu__items__item'));
+      spy = spyOn(component.selectedChanged, 'emit');
+      itemElements[0].triggerEventHandler('click', {});
+      fixture.detectChanges();
+    });
+    it('item is selected', () => {
+      expect(itemElements[0].classes['combobox-item--selected']).toBe(true);
+    });
+    it('label is set', () => {
+      expect(component.searchString).toBe('1');
+    });
+    it('value is set', () => {
+      expect(testComponent.form.value).toBe(1);
+    });
+    it('event is emitted', () => {
+      expect(spy).toHaveBeenCalledWith(1);
+    });
+  });
 
+  describe('onKeydown', () => {
+    let itemElements: DebugElement[];
+    let event;
+    let spy: jasmine.Spy;
+    describe('When key is ArrowUp or Up', () => {
+      beforeEach(() => {
+        const key = pickRandom(['ArrowUp', 'Up']);
+        event = { key: key } as KeyboardEvent;
+        textInputElement = rootElement.query(By.css('.combobox__header__input'));
+        spy = spyOn(component.expandedChanged, 'emit');
+        textInputElement.triggerEventHandler('keydown', event);
+      });
+      it('expandedChanged is emitted', () => {
+        // textInputElement.nativeElement.dispatchEvent(new KeyboardEvent(event));
+        fixture.detectChanges();
+        expect(spy).toHaveBeenCalled();
+      });
+      it('expanded to be true', () => {
+        fixture.detectChanges();
+        expect(component.expanded).toBeTrue();
+      });
+      it('last item higlighted to be true', () => {
+        fixture.detectChanges();
+        itemElements = rootElement.queryAll(By.css('.combobox__menu__items__item'));
+        expect(itemElements[itemElements.length - 1].classes['combobox-item--highlighted']).toBe(true);
+      });
+    });
+    describe('When key is ArrowDown or Down', () => {
+      beforeEach(() => {
+        const key = pickRandom(['ArrowDown', 'Down']);
+        event = { key: key } as KeyboardEvent;
+        textInputElement = rootElement.query(By.css('.combobox__header__input'));
+        spy = spyOn(component.expandedChanged, 'emit');
+        textInputElement.triggerEventHandler('keydown', event);
+        fixture.detectChanges();
+      });
+      it('expandedChanged is emitted', () => {
+        expect(spy).toHaveBeenCalled();
+      });
+      it('expanded to be true', () => {
+        expect(component.expanded).toBeTrue();
+      });
+      it('first item higlighted to be true', () => {
+        jasmine.clock().tick(1);
+        fixture.detectChanges();
+        itemElements = rootElement.queryAll(By.css('.combobox__menu__items__item'));
+        expect(itemElements[0].classes['combobox-item--highlighted']).toBe(true);
+      });
+    });
+    describe('When key is Enter', () => {
+      beforeEach(() => {
+        event = { key: 'Enter' } as KeyboardEvent;
+        textInputElement = rootElement.query(By.css('.combobox__header__input'));
+        spy = spyOn(component.expandedChanged, 'emit');
+      });
+      describe('and searchstring is empty', () => {
+        beforeEach(() => {
+          component.searchString = '';
+          textInputElement.triggerEventHandler('keydown', event);
+          fixture.detectChanges();
+        });
+        it('confirm is emitted', () => {
+          fixture.detectChanges();
+          expect(spy).toHaveBeenCalled();
+        });
+        it('expanded to be true', () => {
+          expect(component.expanded).toBeTrue();
+        });
+      });
+      describe('and searchstring is not empty', () => {
+        let spy2: jasmine.Spy;
+        beforeEach(() => {
+          component.items.forEach(x => {
+            x.highlighted = false;
+            x.selected = false;
+          })
+          component.expanded = true;
+          component.searchString = 'abc';   // doesent matter the test. just not empty.
+          spy2 = spyOn(component.selectedChanged, 'emit');
+        });
+        describe('and there is a higlighted item', () => {
+          beforeEach(() => {
+            testComponent.form.setValue(2);
+            component.expanded = true;
+            component.items.first.highlighted = true;
+            textInputElement.triggerEventHandler('keydown', event);
+            fixture.detectChanges();
+          });
+          it('expandedChanged is emitted', () => {
+            fixture.detectChanges();
+            expect(spy).toHaveBeenCalled();
+          });
+          it('expanded to be false', () => {
+            expect(component.expanded).toBeFalse();
+          });
+          it('the form value have the new value', () => {
+            expect(testComponent.form.value).toBe(1);
+          });
+          it('selectedChanged is emitted', () => {
+            expect(spy2).toHaveBeenCalledWith(1);
+          });
+        });
+        describe('and there is not any higlighted item', () => {
+          beforeEach(() => {
+            testComponent.form.setValue(2);
+            component.expanded = true;
+            textInputElement.triggerEventHandler('keydown', event);
+            fixture.detectChanges();
+          });
+          it('confirm is emitted', () => {
+            expect(spy).toHaveBeenCalled();
+          });
+          it('expanded to be false', () => {
+            expect(component.expanded).toBeFalse();
+          });
+          it('the form value same as before', () => {
+            expect(testComponent.form.value).toBe(2);
+          });
+          it('selectedChanged is emitted', () => {
+            expect(spy2).toHaveBeenCalledWith(2);
+          });
+        });
+      });
+    });
+    describe('When key is Escape or Esc', () => {
+      beforeEach(() => {
+        const key = pickRandom(['Escape', 'Esc']);
+        event = { key: key } as KeyboardEvent;
+        textInputElement = rootElement.query(By.css('.combobox__header__input'));
+        spy = spyOn(component.selectedChanged, 'emit');
+      });
+      describe('and old value is null', () => {
+        beforeEach(() => {
+          textInputElement.triggerEventHandler('keydown', event);
+          fixture.detectChanges();
+        });
+        it('confirm is emitted', () => {
+          fixture.detectChanges();
+          expect(spy).not.toHaveBeenCalled();
+        });
+        it('expanded to be true', () => {
+          expect(testComponent.form.value).toBeNull();
+        });
+      });
+      describe('and old value is not null', () => {
+        beforeEach(() => {
+          component.expanded = true;
+          component.searchString = 'abc';   // doesent matter the test. just not empty.
+        });
+        describe('and there is a higlighted item', () => {
+          let randomValue: any;
+          beforeEach(() => {
+            randomValue = pickRandom([1, 2, 3]);
+            testComponent.form.setValue(randomValue);
+            textInputElement.triggerEventHandler('keydown', event);
+            fixture.detectChanges();
+          });
+          it('confirm is emitted', () => {
+            fixture.detectChanges();
+            expect(spy).toHaveBeenCalled();
+          });
+          it('expanded to be false', () => {
+            expect(component.expanded).toBeFalse();
+          });
+          it('the form value have the new value', () => {
+            expect(testComponent.form.value).toBe(randomValue);
+          });
+        });
+      });
+    });
+    describe('When key is word character', () => {
+      let key: string;
+      beforeEach(() => {
+        key = pickRandom([
+          'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+          'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+          'u', 'v', 'w', 'x', 'y', 'z', 'å', 'ä', 'ö', '1',
+          '2', '3', '4', '5', '6', '7', '8', '9', '0', '_', ' '
+        ]);
+        event = { key: key } as KeyboardEvent;
+      });
+      describe('and there are matching items or not', () => {
+        beforeEach(() => {
+          spy = spyOn(component.expandedChanged, 'emit');
+          component.onKeydown(event);
+          jasmine.clock().tick(1);
+          fixture.detectChanges();
+        });
+        it('expandedChanged is emitted', () => {        
+          expect(spy).toHaveBeenCalled();
+        });
+      });
+    });
+    describe('When key is Tab or Shift + Tab', () => {
+      let key: string;
+      beforeEach(() => {
+        key = 'Tab'
+        event = { key: key } as KeyboardEvent;
+      });
+      describe('and there are items or not', () => {
+        beforeEach(() => {
+          component.expanded = true;
+          spy = spyOn(component.expandedChanged, 'emit');
+          component.onKeydown(event);
+          jasmine.clock().tick(1);
+          fixture.detectChanges();
+        });
+        it('expandedChanged is emitted', () => {        
+          expect(spy).toHaveBeenCalled();
+        });
+        it('expanded is false', () => {        
+          expect(component.expanded).toBeFalse();
+        });
+      });
+    });
 
-  //         fixture.detectChanges();
-  //       });
-  //       it('item is deselected', () => {
-  //         expect(itemElements[0].classes['dropdown-item--selected']).not.toBe(true);
-  //       });
-  //       it('label is set', () => {
-  //         const headerLabelElement = headerElement.query(By.css('.dropdown-select__header__label'));
-  //         const headerLabelText = (headerLabelElement.nativeElement as HTMLElement).textContent;
-  //       });
-  //       it('value is set', () => {
-  //         expect(testComponent.form.value).toBeNull();
-  //       });
-  //       it('event is emitted', () => {
-  //         expect(spy).toHaveBeenCalledWith(null);
-  //       });
-  //     });
-  //   });
-  // });
-
+  });
 });
