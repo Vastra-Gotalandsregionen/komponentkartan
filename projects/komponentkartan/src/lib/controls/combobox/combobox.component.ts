@@ -44,6 +44,8 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
 
   @ViewChild('combobox', { static: true }) combobox: ElementRef;
   @ViewChild('textInput', { static: false }) textInput: ElementRef;
+  @ViewChild('readonlyLabel', { static: false }) readonlyLabel: ElementRef;
+  @ViewChild('header', { static: false }) header: ElementRef;
   @ContentChildren(ComboboxItemComponent) items: QueryList<ComboboxItemComponent>;
 
   expanded = false;
@@ -147,9 +149,15 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   public focus() {
-    const index = this.value ? (this.value as string).length : 0;
-    this.textInput.nativeElement.setSelectionRange(index, index);
-    this.textInput.nativeElement.focus();
+    if (this.readonly) {
+      this.readonlyLabel.nativeElement.focus();
+    } else if (this.disabled) {
+      this.header.nativeElement.focus();
+    } else {
+      const index = this.value ? (this.value as string).length : 0;
+      this.textInput.nativeElement.setSelectionRange(index, index);
+      this.textInput.nativeElement.focus();
+    }
   }
 
   writeValue(value: any) {
@@ -271,7 +279,6 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       this.collapse(false);
 
     } else if (event.key === 'Enter') {
-      event.stopPropagation();
       if (this.searchString.length) {
         const highlighted = this.items.find(x => x.highlighted);
 
@@ -300,18 +307,12 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       }
 
     } else if (event.altKey && (event.key === 'ArrowDown' || event.key === 'Down')) {
-      event.stopPropagation();
-      event.preventDefault();
       this.expand();
 
     } else if (event.altKey && (event.key === 'ArrowUp' || event.key === 'Up')) {
-      event.stopPropagation();
-      event.preventDefault();
       this.collapse();
 
     } else if (event.key === 'ArrowDown' || event.key === 'Down') {
-      event.stopPropagation();
-      event.preventDefault();
       this.expand();
 
       setTimeout(() => {
@@ -322,8 +323,6 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       });
 
     } else if (event.key === 'ArrowUp' || event.key === 'Up') {
-      event.stopPropagation();
-      event.preventDefault();
       this.expand();
 
       const filteredItems = this.items.filter(i => i.visible);

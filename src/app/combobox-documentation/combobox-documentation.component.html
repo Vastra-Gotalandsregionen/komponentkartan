@@ -8,7 +8,7 @@
   
       <br><button (click)="andralangd()">ändra längd på dd</button><br>
       <p>Combobox finns i två bredder, har en rad olika alternativ och följer temafärg.</p>
-      <vgr-combobox [readonly]="readonly" [disabled]="disabled" #myDropdown>
+      <vgr-combobox [readonly]="readonly" [disabled]="disabled" #myCombobox>
         <vgr-combobox-item>Apelsin</vgr-combobox-item>
         <vgr-combobox-item>Banan</vgr-combobox-item>
         <vgr-combobox-item>Citron</vgr-combobox-item>
@@ -52,8 +52,8 @@
             </vgr-combobox>
           </div>
           <div class="one-third">
-            <p>Stor, 50 alternativ</p>
-            <vgr-combobox>
+            <p>Stor, 50 alternativ (ingen knapp)</p>
+            <vgr-combobox [showButton]="false">
               <vgr-combobox-item *ngFor="let item of items50">{{item}}</vgr-combobox-item>
             </vgr-combobox>
           </div>
@@ -103,7 +103,7 @@
 
           <div class="one-third">
             <h3 id="label">Combobox</h3>
-            <vgr-combobox #combobox1 [small]="true" [formControl]="form" [labelId]="'label'" [readonly]="readonly" [showButton]="true" [disabled]="disabled" [listAlignRight]="true">
+            <vgr-combobox #combobox1 [small]="true" [formControl]="form" [labelId]="'label'" [readonly]="readonly" [showButton]="true" [disabled]="disabled">
               <vgr-combobox-item [value]="item" *ngFor="let item of items50">{{item}} {{ item.index }}</vgr-combobox-item>
             </vgr-combobox>
             <span> &nbsp;&nbsp; {{ combobox1.value }}</span>
@@ -111,13 +111,15 @@
           </div>
 
           <div class="one-third">
-            <h3>Combobox mer info</h3>
-            <vgr-combobox #combobox2 width="200px" [listAlignRight]="true" [formControl]="form" [readonly]="readonly" [showButton]="false" [disabled]="disabled" [showButton]="true">
-              <vgr-combobox-item [value]="item" *ngFor="let item of items50">
-                <div>{{item}}</div>
-                <div style="font-style: italic"> Information</div>
-              </vgr-combobox-item>
-            </vgr-combobox>
+            <h3>Combobox (listan linjerar till höger)</h3>
+            <div style="display: flex; justify-content: space-between">
+              <div style="margin-right: 10px;">Ett annat element</div>
+              <vgr-combobox #combobox2 [width]="'200px'" [listAlignRight]="true" [formControl]="form" [readonly]="readonly" [showButton]="false" [disabled]="disabled" [showButton]="true">
+                <vgr-combobox-item [value]="item" *ngFor="let item of items50">
+                  <div>{{item}}</div>
+                </vgr-combobox-item>
+              </vgr-combobox>
+            </div>
             <br><br><br><br><br><br><br><br><br><br>
           </div>
         </div>
@@ -212,7 +214,7 @@
         <tr>
           <td>focus()</td>
           <td>Metod man kan anropa för att programmatiskt kan sätta fokus på komponenten. </td>
-          <td>this.myDropdown.focus()</td>
+          <td>this.myCombobox.focus()</td>
         </tr>
       </table>
       <br>
@@ -248,7 +250,7 @@
         comboboxen.
       </p>
       <p>
-        Det är bra om alternativen i en dropdowns lista är tydligt urskiljbara och att de inledande tecknen är
+        Det är bra om alternativen i en combobox är tydligt urskiljbara och att de inledande tecknen är
         signifikanta. Det gör det lättare att hitta. Fundera över hur användarna letar i listan när du gör design för
         dess innehåll.
       </p>

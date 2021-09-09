@@ -69,10 +69,6 @@
         cursor: pointer;
         display: flex;
 
-        &:focus {
-          outline: $focus-outline-width solid $focus-color;
-        }
-
         .combobox__header__input {
           border: 1px solid #151515;
           display: flex;
@@ -241,6 +237,12 @@
         }
       }
 
+      &.combobox--focus {
+        .combobox__header {
+          outline: $focus-outline-width solid $focus-color;
+        }
+      }
+
       &.combobox--readonly {
         cursor: default;
 
@@ -261,6 +263,12 @@
             cursor: text;
             word-break: break-word;
 
+            outline: none;
+          }
+
+          .combobox__header__label {
+            padding-left: 11px;
+            min-height: 30px;
             outline: none;
           }
 
