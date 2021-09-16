@@ -220,7 +220,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       if (this.items) {
         this.items.forEach(item => {
           item.visible = item.label.toLowerCase().startsWith(value.toLowerCase());
-        })
+        });
       }
     } else {
       this.items.forEach(item => {
