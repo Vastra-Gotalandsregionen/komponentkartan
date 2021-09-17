@@ -24,7 +24,7 @@
           [attr.aria-labelledby]="combinedLabelIds"
           class="combobox__header__input"
           [ngClass]="{ 'combobox--disabled': disabled && !readonly, 'combobox--readonly': readonly, 'combobox--small': small }">
-        <div *ngIf="showButton" class="combobox__header__button" role="button" aria-label="Visa alternativ" tabindex="-1" (click)="expandListbox()" >
+        <div *ngIf="showButton" class="combobox__header__button" role="button" tabindex="-1" (click)="expandListbox()" >
           <vgr-icon icon="chevron-down" size="sm" class="combobox__header__button__icon" [disabled]="disabled"></vgr-icon>
         </div>
         <div *ngIf="readonly" #readonlyLabel class="combobox__header__label noselect" tabindex="0" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
