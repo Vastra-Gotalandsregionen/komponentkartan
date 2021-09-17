@@ -8,7 +8,7 @@
       <strong>Endast de {{maxItems}} första träffarna visas.</strong> Begränsa din sökning genom att ange mer specifika sökkriterier.
     </p>
   </div>
-  <ng-scrollbar id="scroll-container" class="container" [style.maxHeight.px]="getHeight()">
+  <ng-scrollbar id="scroll-container" class="container" style="height: 200px;" [style.maxHeight.px]="getHeight()">
     <ul class="search-results__items" role="listbox">
       <li *ngFor="let item of displayItems; let i = index" class="search-results-item" [ngClass]="{'search-results-item--focused' : i === focusItem }"
         tabindex="-1" [attr.aria-label]="item.displayName" [attr.aria-selected]="item.selected">

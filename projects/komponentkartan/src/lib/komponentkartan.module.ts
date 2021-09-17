@@ -14,9 +14,9 @@ registerLocaleData(localeSv);
 
 // Perfect Scrollbar
 // import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { IconModule } from './controls/icon/icon.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true
