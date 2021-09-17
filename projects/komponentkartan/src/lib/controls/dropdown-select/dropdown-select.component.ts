@@ -3,7 +3,6 @@ import {
   Input, Output, EventEmitter, Optional, SimpleChanges, Self
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -56,7 +55,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   hasFocus: boolean;
   filterHasFocus: boolean;
-  scrollbarConfig: PerfectScrollbarConfig;
   visibleCount: number;
   searchString = '';
 
@@ -81,12 +79,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
-    this.scrollbarConfig = new PerfectScrollbarConfig(
-      {
-        minScrollbarLength: 40,
-        wheelPropagation: false
-      } as PerfectScrollbarConfigInterface
-    );
   }
 
   ngOnChanges(changes: SimpleChanges) {

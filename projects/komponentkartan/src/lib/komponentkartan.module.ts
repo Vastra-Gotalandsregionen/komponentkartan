@@ -13,19 +13,20 @@ import localeSv from '@angular/common/locales/sv';
 registerLocaleData(localeSv);
 
 // Perfect Scrollbar
-import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { IconModule } from './controls/icon/icon.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
+// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+//   suppressScrollX: true
+// };
 
 @NgModule({
   imports: [
     FormsModule,
     RouterModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
     CommonModule,
     ReactiveFormsModule,
     IconModule,
@@ -183,10 +184,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.ModalService,
     type.BrowserDetector,
     { provide: LOCALE_ID, useValue: 'sv-SE' },
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    // {
+    //   provide: PERFECT_SCROLLBAR_CONFIG,
+    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    // }
   ]
 })
 export class KomponentkartanModule {

@@ -1,5 +1,4 @@
 import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'vgr-search-result',
@@ -18,7 +17,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
   @Input() @HostBinding('class.search-results--open') visible = false;
   @Output() visibleChange = new EventEmitter();
   @Output() itemClick = new EventEmitter();
-  scrollbarConfig: PerfectScrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
   descriptionHeight: number;
 
   @HostListener('document:click', ['$event'])
