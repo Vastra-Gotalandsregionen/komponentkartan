@@ -103,7 +103,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.InputComponent,
     type.SortArrowComponent,
     type.TabButtonComponent,
-    type.TabButtonGroupComponent
+    type.TabButtonGroupComponent,
+    type.ComboboxComponent,
+    type.ComboboxItemComponent
   ],
   exports: [
     type.SafePipe,
@@ -178,6 +180,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     type.SortArrowComponent,
     type.TabButtonComponent,
     type.TabButtonGroupComponent,
+    type.ComboboxComponent,
+    type.ComboboxItemComponent
   ],
   providers: [
     type.ModalService,
@@ -191,4 +195,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 })
 export class KomponentkartanModule {
   constructor() { }
- }
+}

@@ -58,6 +58,8 @@ export { DropdownItemComponent } from './controls/dropdown-select/dropdown-item.
 export { IconComponent } from './controls/icon/icon.component';
 export { DatepickerComponent } from './controls/datepicker/datepicker.component';
 export { DatepickerItemComponent } from './controls/datepicker/datepicker-item.component';
+export { ComboboxComponent } from './controls/combobox/combobox.component';
+export { ComboboxItemComponent } from './controls/combobox/combobox-item.component';
 
 export { ExpandableRow } from './models/expandableRow.model';
 export { NotificationType } from './models/notificationType.model';
