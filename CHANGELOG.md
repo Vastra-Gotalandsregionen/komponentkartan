@@ -3,29 +3,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-
-# 8.3.0 (stable)
-- fixed bug regarding backtabbing in dialog with checkbox (broke the index ordering and you fell out of the dialog)
-- released stable version
-# 8.3.0-beta6 (dev)
+# 8.4.0-beta1 (dev)
+- Added new component `vgr-combobox`
+# 8.3.0 (2021-09-07) Stable
+- Added new component `vgr-tab-button` & `vgr-tab-button-group`
+- Added possibility to add width to vgr-search-result
 - Updated company colors
+- Updated secondary colors (blue & green)
+- Fixed bug regarding backtabbing in dialog with checkbox (broke the index ordering and you fell out of the dialog)
 - Fixed and extended color-map
 - Fixed new inactive colors
 - Fixed new gray-scale colors
-- Updated secondary colors (blue & green)
 - Checkbox update fixed size
 - Removed px from textarea validation
 - Smaller height for standalone notifications
 - Back-to-top component color now follows theme
 - Fixed missaligned focus line on close & lock buttons
-# 8.3.0-beta2 (dev)
--Fixed aligning issues after validation design change
-# 8.3.0-beta1 (dev)
-- Added new component `vgr-tab-button` & `vgr-tab-button-group`
+- Fixed aligning issues after validation design change
 - Removed enable-animation on disabled button when enabling button
 - Radiogroup no longer triggers a change-event in reactive forms when changed programmatically
 - Updated default-width on datepicker
-- Added possibility to add width to vgr-search-result
 - Fixed scroll behind vgr-modal bugg
 # 8.2.3 (2021-05-21) Stable
 - Fixed missed file for vgr-modal bugg
