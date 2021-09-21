@@ -1,11 +1,12 @@
-import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
-
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { NgScrollbar } from 'ngx-scrollbar';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'vgr-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent implements OnChanges, OnInit {
+export class SearchResultComponent implements OnChanges, OnInit, AfterViewInit {
 
   @Input() description: string;
   @Input() noResultsText = 'Inget resultat';
@@ -19,6 +20,9 @@ export class SearchResultComponent implements OnChanges, OnInit {
   @Output() itemClick = new EventEmitter();
   descriptionHeight: number;
 
+  @ViewChild(NgScrollbar) scrollbarRef: NgScrollbar;
+
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {
     const target = event.target || event.srcElement || event.currentTarget;
@@ -29,15 +33,22 @@ export class SearchResultComponent implements OnChanges, OnInit {
     }
   }
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, private ngZone: NgZone) { }
+
 
   ngOnInit() {
+    console.log('ngOninit', this.scrollbarRef)
     const parent = this.getParentNode();
     if (parent && parent.classList.contains('search-result-wrapper')) {
       parent.onkeydown = () => this.handleKeyevents(event);
     } else {
       throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
     }
+  }
+
+  ngAfterViewInit() {
+    this.scrollbarRef.scrolled.subscribe(e => console.log(e))
+
   }
 
   ngOnChanges() {
@@ -54,8 +65,14 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   resetScrollPosition() {
-    const psNode = this.elementRef.nativeElement.querySelector('div.ps');
-    psNode.scrollTop = 0;
+    // const psNode = this.elementRef.nativeElement.querySelector('#scroll-container-searchResult');
+
+
+    // this.ngZone.run(() => this.scrollbarRef.scrollTo({top: 15}))
+    this.scrollbarRef.scrollTo({top: 15}).then(e => console.log('hello'));
+    // psNode.scrollTop = 0;
+
+    console.log('resetScroll', this.scrollbarRef)
     this.focusItem = -1;
   }
 

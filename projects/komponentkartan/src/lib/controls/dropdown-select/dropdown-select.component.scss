@@ -39,9 +39,12 @@
 :host::ng-deep {
 
   .scroll-container {
-    .ps__thumb-y, .ps__rail-y:hover > .ps__thumb-y {
-      background-color: $gray-secondary;
-    }
+    height: 285px;
+    z-index: $layer-six;
+    --scrollbar-thumb-color: rgba(187, 190, 190, 1);
+    --scrollbar-thumb-hover-color: rgba(234, 235, 235, 1);
+    --scrollbar-size: 5px;
+    --scrollbar-hover-size: var(--scrollbar-size);
   }
   .dropdown-select {
     .validation {

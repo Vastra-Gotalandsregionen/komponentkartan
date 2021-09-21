@@ -3,13 +3,14 @@ import {
   Input, Output, EventEmitter, Optional, SimpleChanges, Self
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { DropdownItemComponent } from './dropdown-item.component';
 import { ButtonComponent } from '../button/button.component';
 import { Guid } from '../../utils/guid';
 import { InputComponent } from '../input/input.component';
+import { NgScrollbar } from 'ngx-scrollbar';
 
 function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
@@ -40,12 +41,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Output() expandedChanged = new EventEmitter<boolean>();
 
   @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
+  @ViewChild(NgScrollbar) scrollbarRef: NgScrollbar;
   @ViewChild('header', { static: true }) header: ElementRef;
   @ViewChild('selectAll', { static: false }) selectAll: ElementRef;
   @ViewChild('deselectButton', { static: false }) deselectButton: ButtonComponent;
   @ViewChild(InputComponent, { static: false }) filter: InputComponent;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
+  scrollSubscription = Subscription.EMPTY;
   expanded = false;
   filterVisible = false;
   allSelected = false;
@@ -135,6 +138,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     this.ngUnsubscribeItems.next();
     this.ngUnsubscribeItems.complete();
+    this.scrollSubscription.unsubscribe();
   }
 
   public focus() {
@@ -195,7 +199,12 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
 
     // Scroll to top when filter is changed
-    this.dropdown.nativeElement.querySelector('.ps').scrollTop = 0;
+    // this.scrollbarRef.scrolled.subscribe(e => console.log(e));
+    // this.scrollSubscription = this.scrollbarRef.scrolled.pipe(
+    //   map((e: any) => e.target.scrollTop = 0)
+    // ).subscribe();
+    this.scrollbarRef.scrollTo({top: 0})
+    // this.dropdown.nativeElement.querySelector('.ps').scrollTop = 0;
   }
 
   deselectItems() {
@@ -430,7 +439,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   private expand() {
     this.expanded = true;
+
     this.expandedChanged.emit(true);
+
   }
 
   private collapse(focusHeader = true) {

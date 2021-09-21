@@ -10,11 +10,26 @@
     display: inline-block;
   }
 
-  #scroll-container {
-    .ps__thumb-y, .ps__rail-y:hover > .ps__thumb-y {
-      background-color: $gray-secondary;
-    }
+  #scroll-container-searchResult {
+    height: 285px;
+    z-index: $layer-five;
+    --scrollbar-thumb-color: rgba(187, 190, 190, 1);// $gray-secondary
+    --scrollbar-thumb-hover-color: rgba(234, 235, 235, 1); //$gray-dimmed
+    --scrollbar-size: 6px;
+    --scrollbar-hover-size: 11px;
+
   }
+
+  // .scrollbar {
+  //   background-color: transparent;
+  //   // border-radius: 4px;
+  // }
+   .scrollbar-thumb {
+      background-color: rgba(161, 27, 27, 0.4);
+  // //  @include themify($themes) {
+  //     background-color: rgba(255, 0, 0,1);// themed('primaryColor');
+  //  // }
+   }
 }
 
 :host {
