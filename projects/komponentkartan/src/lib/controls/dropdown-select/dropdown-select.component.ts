@@ -176,6 +176,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   onTouched() { }
 
   toggleExpanded() {
+
     if (this.readonly || this.disabled) {
       return;
     }
@@ -246,12 +247,18 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   onFocus() {
+    console.log('låt oss ha focus: ')
     this.hasFocus = true;
   }
 
   onBlur(event: FocusEvent) {
+    console.log('låt oss ha blura: ', event)
     const dropdownElement = this.dropdown.nativeElement as HTMLElement;
     const focusedNode = event.relatedTarget as Node;
+    console.log('fokusnod', focusedNode, dropdownElement)
+    if (!focusedNode) {
+      return;
+    }
     if (dropdownElement.contains(focusedNode)) {
       return;
     }
