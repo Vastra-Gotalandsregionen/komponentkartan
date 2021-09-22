@@ -68,9 +68,12 @@ export class SearchResultsComponent implements OnInit {
   }
 
   filterSearch_e2(event) {
+
     const searchText = this.filterBoxValue_e2;
-    this.filteredItems_e2 = this.items_e2.filter(item => item.displayName.toString().toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
-    this.dropdownVisible_e2 = true;
+    if (searchText) {
+      this.filteredItems_e2 = this.items_e2.filter(item => item.displayName.toString().toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
+      this.dropdownVisible_e2 = true;
+    }
   }
 
   setResult(item) {

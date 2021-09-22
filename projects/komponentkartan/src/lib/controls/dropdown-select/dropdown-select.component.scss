@@ -41,10 +41,11 @@
   .scroll-container {
     height: 285px;
     z-index: $layer-six;
-    --scrollbar-thumb-color: rgba(187, 190, 190, 1);
-    --scrollbar-thumb-hover-color: rgba(234, 235, 235, 1);
-    --scrollbar-size: 5px;
-    --scrollbar-hover-size: var(--scrollbar-size);
+    --scrollbar-thumb-color: rgba(187, 190, 190, 1);// $gray-secondary
+    --scrollbar-thumb-hover-color: rgba(158, 162, 162, 1); //$gray-primary
+    --scrollbar-track-color: rgba(234, 235, 235,1);//$gray-dimmed
+    --scrollbar-size: 8px;
+    --scrollbar-hover-size: 11px;
   }
   .dropdown-select {
     .validation {
@@ -290,7 +291,7 @@
           width: 300px;
           margin-left: 15px;
           margin-right: 15px;
-          z-index: $layer-five;
+          z-index: $layer-seven;
         }
 
         .dropdown-select__menu__dimmer-top {

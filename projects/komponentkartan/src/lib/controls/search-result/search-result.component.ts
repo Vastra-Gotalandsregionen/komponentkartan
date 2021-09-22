@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { Subscription } from 'rxjs';
+import { auditTime, tap } from 'rxjs/operators';
 @Component({
   selector: 'vgr-search-result',
   templateUrl: './search-result.component.html',
@@ -20,16 +21,20 @@ export class SearchResultComponent implements OnChanges, OnInit, AfterViewInit {
   @Output() itemClick = new EventEmitter();
   descriptionHeight: number;
 
-  @ViewChild(NgScrollbar) scrollbarRef: NgScrollbar;
+  @ViewChild(NgScrollbar) scrollable: NgScrollbar;
 
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {
     const target = event.target || event.srcElement || event.currentTarget;
+    // console.log('click: ', target, this.elementRef.nativeElement.parentNode, !this.elementRef.nativeElement.parentNode.contains(target),this.visible)
+    // console.log('click2:', this.scrollable.viewport.scrollTop)
     if ((this.elementRef.nativeElement.parentNode && !this.elementRef.nativeElement.parentNode.contains(target)) && this.visible) {
+      // this.resetScrollPosition();
       this.visible = false;
+
       this.visibleChange.emit(this.visible);
-      this.resetScrollPosition();
+
     }
   }
 
@@ -37,7 +42,7 @@ export class SearchResultComponent implements OnChanges, OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    console.log('ngOninit', this.scrollbarRef)
+
     const parent = this.getParentNode();
     if (parent && parent.classList.contains('search-result-wrapper')) {
       parent.onkeydown = () => this.handleKeyevents(event);
@@ -47,7 +52,20 @@ export class SearchResultComponent implements OnChanges, OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.scrollbarRef.scrolled.subscribe(e => console.log(e))
+    // this.scrollbarRef.scrolled.subscribe(e => console.log(e))
+    // this.scrollable?.scrollTo({top: 0});
+    // console.log('viewInit', this.scrollable.viewport)
+
+    // this.scrollable.verticalScrolled.pipe(
+    //   auditTime(200),
+    //   tap(() => {
+    //     const center = this.scrollable.viewport.clientHeight / 2;
+    //     const scrollHeight = this.scrollable.viewport.scrollHeight;
+    //     const scrollTop = this.scrollable.viewport.scrollTop;
+    //     // this.scrollable.viewport.scrollTop;
+    //     console.log('scroll: ', this.scrollable.viewport.scrollTop)
+    //   })
+    // ).subscribe();
 
   }
 
@@ -67,12 +85,18 @@ export class SearchResultComponent implements OnChanges, OnInit, AfterViewInit {
   resetScrollPosition() {
     // const psNode = this.elementRef.nativeElement.querySelector('#scroll-container-searchResult');
 
-
     // this.ngZone.run(() => this.scrollbarRef.scrollTo({top: 15}))
-    this.scrollbarRef.scrollTo({top: 15}).then(e => console.log('hello'));
-    // psNode.scrollTop = 0;
+    // setTimeout(() => {
+    //   this.scrollable.scrollTo({top: 0});
 
-    console.log('resetScroll', this.scrollbarRef)
+    //   console.log('reset2:', this.scrollable.viewport.scrollTop)
+    // // });
+
+    // console.log('reset1', this.scrollable.viewport)
+
+    // // psNode.scrollTop = 0;
+
+    // console.log('resetScroll', this.scrollbarRef)
     this.focusItem = -1;
   }
 
@@ -151,7 +175,7 @@ export class SearchResultComponent implements OnChanges, OnInit, AfterViewInit {
   }
 
   onItemClick(item) {
-    this.itemClick.emit(item);
+      this.itemClick.emit(item);
   }
 
 }

@@ -1,14 +1,15 @@
-<div class="search-results" [ngStyle]="{'width': width }">
+<div *ngIf="visible" class="search-results" [ngStyle]="{'width': width }">
   <div class="search-results__noresults" *ngIf="!items || items?.length === 0">
     {{noResultsText}}
   </div>
   <div class="search-results__description" *ngIf="description || items?.length > maxItems">
-    <p *ngIf="description" class="search-results__description-field">{{description}}</p>
+    <p *ngIf="description" class="search-results__description-field">{{description}} - {{displayItems.length}}</p>
     <p *ngIf="items?.length > maxItems" class="search-results__description-static">
       <strong>Endast de {{maxItems}} första träffarna visas.</strong> Begränsa din sökning genom att ange mer specifika sökkriterier.
     </p>
   </div>
-  <ng-scrollbar #scrollable id="scroll-container-searchResult" trackClass="scrollbar" thumbClass="scrollbar-thumb"  class="container" [style.maxHeight.px]="getHeight()">
+  <div class="scrollbar__dimmer scrollbar__dimmer-top"></div>
+  <ng-scrollbar #scrollable="ngScrollbar" id="scroll-container-searchResult" trackClass="scrollbar" thumbClass="scrollbar-thumb" [visibility]="'native'" [appearance]="'standard'"  class="container" [style.maxHeight.px]="getHeight()">
     <ul class="search-results__items" role="listbox">
       <li *ngFor="let item of displayItems; let i = index" class="search-results-item" [ngClass]="{'search-results-item--focused' : i === focusItem }"
         tabindex="-1" [attr.aria-label]="item.displayName" [attr.aria-selected]="item.selected">
@@ -19,4 +20,5 @@
       </li>
     </ul>
   </ng-scrollbar>
+  <div class="scrollbar__dimmer scrollbar__dimmer-bottom"></div>
 </div>
