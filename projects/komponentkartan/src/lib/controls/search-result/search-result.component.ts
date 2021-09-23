@@ -34,7 +34,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
 
 
   ngOnInit() {
-
     const parent = this.getParentNode();
     if (parent && parent.classList.contains('search-result-wrapper')) {
       parent.onkeydown = () => this.handleKeyevents(event);
@@ -127,10 +126,20 @@ export class SearchResultComponent implements OnChanges, OnInit {
     return this.elementRef.nativeElement.parentNode;
   }
 
-  getHeight() {
-    // 264px Is the size of the viewport that's available.
-    return (264 + this.descriptionHeight).toString() + 'px';
-  }
+  // getHeight() {
+  //   // console.log(this.elementRef.nativeElement.querySelector('ngx-scrollbar')?.offsetHeight)
+  //   // 264px Is the size of the viewport that's available.
+  //   return (264 + this.descriptionHeight).toString() + 'px';
+  // }
+
+  // calcHeight() {
+  //   const maxHeight = this.descriptionHeight ? 264 + this.descriptionHeight : 264;
+  //   const contentHeight = Math.round(this.displayItems.length * 32)+32;
+  //   let result = maxHeight  > contentHeight ?
+  //                 (contentHeight + 'px') : maxHeight + 'px';
+  //                 console.log(result, maxHeight, contentHeight, this.descriptionHeight)
+  //   return result;
+  // }
 
   filterItems() {
     this.displayItems = this.items.slice(0, this.maxItems);

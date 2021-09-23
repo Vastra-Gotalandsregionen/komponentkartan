@@ -1,8 +1,8 @@
-<div class="sidebar-menu" > <!--[ngStyle]="{'height': height}"-->
+<div class="sidebar-menu"  >
   <!-- <ng-scrollbar class="scroll-container" [visibility]="'native'" [appearance]="'standard'">
     <ng-content></ng-content>
   </ng-scrollbar> -->
-  <vgr-scrollbar >
+  <vgr-scrollbar [autoheightDisabled]="true">
       <ng-content></ng-content>
   </vgr-scrollbar>
 </div>

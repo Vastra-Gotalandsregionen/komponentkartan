@@ -56,7 +56,8 @@
     border: none;
     padding-top: $margin--regular;
     padding-bottom: 0px;
-    width: 330px; //max-height: $search-results-height--small;
+    width: 330px;
+    // max-height: $search-results-height--small;
     display: none;
     cursor: default;
     &:before {
@@ -83,7 +84,7 @@
     }
     .search-results__items {
       position: relative;
-      max-height: 285px; //calc(#{$search-results-height--small} - #{$margin--fat});
+      max-height: 285px; // calc(#{$search-results-height--small} - #{$margin--fat});
       li {
         width: calc(100% - 3px);
         background: white;

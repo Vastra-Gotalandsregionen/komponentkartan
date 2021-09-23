@@ -9,8 +9,7 @@
     </p>
   </div>
   <div class="scrollbar__dimmer scrollbar__dimmer-top"></div>
-  <!-- <ng-scrollbar #scrollable="ngScrollbar" id="scroll-container-searchResult" trackClass="scrollbar" thumbClass="scrollbar-thumb" [visibility]="'native'" [appearance]="'standard'"  class="container" [style.maxHeight.px]="getHeight()"> -->
-    <vgr-scrollbar [height]="getHeight()">
+    <vgr-scrollbar>
       <ul class="search-results__items" role="listbox">
         <li *ngFor="let item of displayItems; let i = index" class="search-results-item" [ngClass]="{'search-results-item--focused' : i === focusItem }"
           tabindex="-1" [attr.aria-label]="item.displayName" [attr.aria-selected]="item.selected">
@@ -21,6 +20,5 @@
         </li>
       </ul>
     </vgr-scrollbar>
-  <!-- </ng-scrollbar> -->
   <div class="scrollbar__dimmer scrollbar__dimmer-bottom"></div>
 </div>
