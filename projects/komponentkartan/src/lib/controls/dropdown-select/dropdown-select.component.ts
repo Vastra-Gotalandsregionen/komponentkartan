@@ -204,7 +204,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     // this.scrollSubscription = this.scrollbarRef.scrolled.pipe(
     //   map((e: any) => e.target.scrollTop = 0)
     // ).subscribe();
-    this.scrollbarRef.scrollTo({top: 0})
+    // this.scrollbarRef.scrollTo({top: 0})
     // this.dropdown.nativeElement.querySelector('.ps').scrollTop = 0;
   }
 
