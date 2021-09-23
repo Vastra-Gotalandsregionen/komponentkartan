@@ -1,6 +1,6 @@
 import {
   Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
-  Input, Output, EventEmitter, Optional, SimpleChanges, Self
+  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostListener
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
@@ -78,7 +78,15 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
-  constructor(@Optional() @Self() public formControl: NgControl) {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: any) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    if ((this.elementRef.nativeElement && !this.elementRef.nativeElement.contains(target)) && this.expanded) {
+      this.collapse();
+    }
+  }
+  
+  constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
@@ -247,15 +255,12 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   onFocus() {
-    console.log('låt oss ha focus: ')
     this.hasFocus = true;
   }
 
   onBlur(event: FocusEvent) {
-    console.log('låt oss ha blura: ', event)
     const dropdownElement = this.dropdown.nativeElement as HTMLElement;
     const focusedNode = event.relatedTarget as Node;
-    console.log('fokusnod', focusedNode, dropdownElement)
     if (!focusedNode) {
       return;
     }

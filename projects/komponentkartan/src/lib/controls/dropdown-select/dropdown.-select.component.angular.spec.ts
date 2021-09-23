@@ -11,7 +11,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
 import { IconModule } from '../icon/icon.module';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { InputComponent } from '../input/input.component';
 import { filter } from 'rxjs/operators';
@@ -44,7 +45,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, PerfectScrollbarModule, FormsModule],
+      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, FormsModule],
       declarations: [
         TestComponent,
         DropdownSelectComponent,

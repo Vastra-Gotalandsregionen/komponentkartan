@@ -4,7 +4,7 @@ describe('[DropdownSelectComponent]', () => {
   let component: DropdownSelectComponent;
 
   beforeEach(() => {
-    component = new DropdownSelectComponent(null);
+    component = new DropdownSelectComponent(null,null);
   });
 
   describe('Instatiate', () => {
