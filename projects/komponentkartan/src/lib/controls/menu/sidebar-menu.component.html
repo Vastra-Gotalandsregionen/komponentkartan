@@ -1,5 +1,8 @@
 <div class="sidebar-menu">
-  <ng-scrollbar class="scroll-container">
+  <!-- <ng-scrollbar class="scroll-container" [visibility]="'native'" [appearance]="'standard'">
     <ng-content></ng-content>
-  </ng-scrollbar>
+  </ng-scrollbar> -->
+  <vgr-scrollbar>
+      <ng-content></ng-content>
+  </vgr-scrollbar>
 </div>

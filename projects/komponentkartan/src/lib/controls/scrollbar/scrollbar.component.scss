@@ -1,0 +1,12 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+
+:host::ng-deep {
+  .scroll-container {
+    z-index: $layer-six;
+    --scrollbar-thumb-color: rgba(187, 190, 190, 1);// $gray-secondary
+    --scrollbar-thumb-hover-color: rgba(158, 162, 162, 1); //$gray-primary
+    --scrollbar-track-color: rgba(234, 235, 235,1);//$gray-dimmed
+    --scrollbar-size: 8px;
+    --scrollbar-hover-size: 11px;
+  }
+}

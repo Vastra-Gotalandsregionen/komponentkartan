@@ -10,27 +10,15 @@
     display: inline-block;
   }
 
-  #scroll-container-searchResult {
-    height: 285px;
-    z-index: $layer-five;
-    --scrollbar-thumb-color: rgba(187, 190, 190, 1);// $gray-secondary
-    --scrollbar-thumb-hover-color: rgba(158, 162, 162, 1); //$gray-primary
-    --scrollbar-track-color: rgba(234, 235, 235,1);//$gray-dimmed
-    --scrollbar-size: 8px;
-    --scrollbar-hover-size: 11px;
-
-  }
-
-  // .scrollbar {
-  //   background-color: transparent;
-  //   // border-radius: 4px;
+  // #scroll-container-searchResult {
+  //   height: 285px;
+  //   z-index: $layer-five;
+  //   --scrollbar-thumb-color: rgba(187, 190, 190, 1);// $gray-secondary
+  //   --scrollbar-thumb-hover-color: rgba(158, 162, 162, 1); //$gray-primary
+  //   --scrollbar-track-color: rgba(234, 235, 235,1);//$gray-dimmed
+  //   --scrollbar-size: 8px;
+  //   --scrollbar-hover-size: 11px;
   // }
-   .scrollbar-thumb {
-     // background-color: rgba(161, 27, 27, 0.4);
-  // //  @include themify($themes) {
-  //     background-color: rgba(255, 0, 0,1);// themed('primaryColor');
-  //  // }
-   }
 }
 
 :host {
@@ -172,7 +160,7 @@
     width: 300px;
     margin-left: 15px;
     margin-right: 15px;
-    z-index: $layer-six;
+    z-index: $layer-seven;
   }
 
   .scrollbar__dimmer-top {

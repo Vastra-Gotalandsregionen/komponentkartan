@@ -17,6 +17,7 @@ registerLocaleData(localeSv);
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { IconModule } from './controls/icon/icon.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true
@@ -104,7 +105,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     type.InputComponent,
     type.SortArrowComponent,
     type.TabButtonComponent,
-    type.TabButtonGroupComponent
+    type.TabButtonGroupComponent,
+    type.ScrollbarComponent
   ],
   exports: [
     type.SafePipe,
@@ -179,6 +181,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     type.SortArrowComponent,
     type.TabButtonComponent,
     type.TabButtonGroupComponent,
+    type.ScrollbarComponent
   ],
   providers: [
     type.ModalService,

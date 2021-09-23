@@ -28,13 +28,15 @@
             (keydown)="onSelectAllKeydown($event)">Markera alla<span *ngIf="searchString !== ''"> sökträffar</span> ({{visibleCount}} st)</div>
         </div>
         <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-top"></div>
-        <ng-scrollbar class="scroll-container" [visibility]="'native'" [appearance]="'standard'">
-          <div class="dropdown-select__menu__items">
-            <div class="dropdown-select__menu__items__dimmer-padding"></div>
-            <ng-content></ng-content>
-            <div class="dropdown-select__menu__items__dimmer-padding"></div>
-          </div>
-        </ng-scrollbar>
+        <!-- <ng-scrollbar class="scroll-container" [visibility]="'native'" [appearance]="'standard'"> -->
+          <vgr-scrollbar [height]="'285px'">
+            <div class="dropdown-select__menu__items">
+              <div class="dropdown-select__menu__items__dimmer-padding"></div>
+              <ng-content></ng-content>
+              <div class="dropdown-select__menu__items__dimmer-padding"></div>
+            </div>
+          </vgr-scrollbar>
+        <!-- </ng-scrollbar> -->
         <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-bottom"></div>
       </div>
     </div>
