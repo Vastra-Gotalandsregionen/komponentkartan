@@ -106,6 +106,8 @@ import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
     type.SortArrowComponent,
     type.TabButtonComponent,
     type.TabButtonGroupComponent,
+    type.ComboboxComponent,
+    type.ComboboxItemComponent
     type.ScrollbarComponent
   ],
   exports: [
@@ -181,6 +183,8 @@ import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
     type.SortArrowComponent,
     type.TabButtonComponent,
     type.TabButtonGroupComponent,
+    type.ComboboxComponent,
+    type.ComboboxItemComponent
     type.ScrollbarComponent
   ],
   providers: [
@@ -195,4 +199,4 @@ import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
 })
 export class KomponentkartanModule {
   constructor() { }
- }
+}

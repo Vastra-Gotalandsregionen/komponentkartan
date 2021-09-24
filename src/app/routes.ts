@@ -39,8 +39,9 @@ import { DropdownSelectDocumentationComponent } from './dropdown-select-document
 import { PaginationDocumentationComponent } from './pagination-documentation/pagination-documentation.component';
 import { ModaldialogComponent } from './modaldialog/modaldialog.component';
 import { GridDocumentationComponent } from './grid-documentation/grid-documentation.component';
-import { NotificationDocumentationComponent} from './notification-documentation/notification-documentation.component';
+import { NotificationDocumentationComponent } from './notification-documentation/notification-documentation.component';
 import { TabButtonComponent } from './tab-button/tab-button.component';
+import { ComboboxDocumentationComponent } from './combobox-documentation/combobox-documentation.component';
 
 export const appRoutes: Routes = [
 
@@ -77,8 +78,9 @@ export const appRoutes: Routes = [
     { path: 'reactiveformsexample', component: ReactiveformsexampleComponent },
     { path: 'expandablediv', component: ExpandableDivComponent },
     { path: 'toggle-button', component: ToggleButtonComponent },
-    { path: 'tab-button',
-      loadChildren: () => import('../app/tab-button/tab-button.module').then(m => m.TabButtonModule)
+    {
+        path: 'tab-button',
+        loadChildren: () => import('../app/tab-button/tab-button.module').then(m => m.TabButtonModule)
     },
     { path: 'actionPanels', component: ActionPanelsComponent },
     { path: 'filter-tag', component: FilterTagComponent },
@@ -91,6 +93,7 @@ export const appRoutes: Routes = [
     { path: 'modaldialog', component: ModaldialogComponent },
     { path: 'grid', component: GridDocumentationComponent },
     { path: 'notification', component: NotificationDocumentationComponent },
+    { path: 'combobox', component: ComboboxDocumentationComponent },
 
     { path: '**', redirectTo: '/' }
 ];
