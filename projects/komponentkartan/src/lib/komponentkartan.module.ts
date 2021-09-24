@@ -107,7 +107,7 @@ import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
     type.TabButtonComponent,
     type.TabButtonGroupComponent,
     type.ComboboxComponent,
-    type.ComboboxItemComponent
+    type.ComboboxItemComponent,
     type.ScrollbarComponent
   ],
   exports: [
@@ -184,7 +184,7 @@ import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
     type.TabButtonComponent,
     type.TabButtonGroupComponent,
     type.ComboboxComponent,
-    type.ComboboxItemComponent
+    type.ComboboxItemComponent,
     type.ScrollbarComponent
   ],
   providers: [

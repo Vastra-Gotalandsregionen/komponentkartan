@@ -1,9 +1,9 @@
 import {
   Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
-  Input, Output, EventEmitter, Optional, SimpleChanges, Self
+  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostListener
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -52,7 +52,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   headerLabelId = Guid.newGuid();
   label = '';
   hasFocus: boolean;
-  scrollbarConfig: PerfectScrollbarConfig;
+  // scrollbarConfig: PerfectScrollbarConfig;
   searchString = '';
   leftPosition = '0px';
 
@@ -76,19 +76,29 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
-  constructor(@Optional() @Self() public formControl: NgControl) {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: any) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    if ((this.elementRef.nativeElement && !this.elementRef.nativeElement.contains(target)) && this.expanded) {
+      this.onChange(null);
+      this.collapse(false);
+    }
+  }
+  
+  constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
-    this.scrollbarConfig = new PerfectScrollbarConfig(
-      {
-        minScrollbarLength: 40,
-        wheelPropagation: false
-      } as PerfectScrollbarConfigInterface
-    );
+    // this.scrollbarConfig = new PerfectScrollbarConfig(
+    //   {
+    //     minScrollbarLength: 40,
+    //     wheelPropagation: false
+    //   } as PerfectScrollbarConfigInterface
+    // );
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('onChnage')
     if (changes.value && !changes.value.firstChange) {
       this.onChange(changes.value.currentValue);
       this.setSelectedState(changes.value.currentValue);
@@ -184,6 +194,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   onChange(value: any) {
+    console.log('onchange: ', value)
     this.value = value;
     this.selectedChanged.emit(value);
   }
@@ -249,12 +260,14 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   onBlur(event: FocusEvent) {
+    console.log('onBlur: ', event)
     const comboboxElement = this.combobox.nativeElement as HTMLElement;
     const focusedNode = event.relatedTarget as Node;
-    if (comboboxElement.contains(focusedNode)) {
+    if (comboboxElement.contains(focusedNode) || event.relatedTarget === null ) { 
+      console.log('returns')
       return;
     }
-
+    
     this.hasFocus = false;
     if (this.searchString.length) {
       const highlighted = this.items.find(x => x.highlighted);
