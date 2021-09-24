@@ -17,7 +17,7 @@ import { DatepickerZoomLevel, CalendarItem, Calendar } from './datepicker.interf
   styleUrls: ['./datepicker.component.scss'],
 })
 export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
-  @Input() @HostBinding('style.width') width = '130px';
+  @Input() @HostBinding('style.width') width = '142px';
   @Input() selectedDate: Date;
   @Input() minZoom: string;
   @Input() minDate: Date;
