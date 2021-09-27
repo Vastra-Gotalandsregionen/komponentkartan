@@ -80,7 +80,7 @@ describe('[TestTableComponent]', () => {
       beforeEach(() => {
         spyOn(component.expandedChanged, 'emit').and.callThrough();
 
-        rootElement.children[0].triggerEventHandler('click', event);
+        rootElement.children[0].triggerEventHandler('click', {});
         fixture.detectChanges();
       });
 
