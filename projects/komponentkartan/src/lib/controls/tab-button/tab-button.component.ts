@@ -17,6 +17,7 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
   @Output() home = new EventEmitter();
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() end = new EventEmitter();
   @Output() selectedChanged = new EventEmitter<string>();
 

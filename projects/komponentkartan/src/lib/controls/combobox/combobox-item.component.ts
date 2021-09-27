@@ -8,6 +8,7 @@ export class ComboboxItemComponent implements AfterViewInit {
 
   @Input() selectedLabel: string;
   @Input() value: any;
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select = new EventEmitter();
   @ViewChild('item') item: ElementRef;
   label: string;

@@ -11,7 +11,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["highlight.js"],
+            "allowedCommonJsDependencies": [
+              "highlight.js"
+            ],
             "outputPath": "dist/app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -184,14 +186,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/komponentkartan/tsconfig.lib.json",
-              "projects/komponentkartan/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/komponentkartan/**/*.ts",
+              "projects/komponentkartan/**/*.html"
             ]
           }
         }

@@ -6,13 +6,10 @@ import { NgScrollbar } from 'ngx-scrollbar';
   templateUrl: './scrollbar.component.html',
   styleUrls: ['./scrollbar.component.scss']
 })
-export class ScrollbarComponent implements OnInit {
+export class ScrollbarComponent {
   @ViewChild(NgScrollbar) scrollable: NgScrollbar;
   @Input() autoheightDisabled = 'false';
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnChanges, SimpleChanges, HostListener, ElementRef, ContentChild } from '@angular/core';
+import { Component, Input, ContentChild } from '@angular/core';
 import { HeaderMenuComponent } from '../headerMenu/headerMenu.component';
 
 @Component({
