@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
   selector: 'vgr-scrollbar',
@@ -6,8 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./scrollbar.component.scss']
 })
 export class ScrollbarComponent implements OnInit {
-  // @Input() height = '100%';
-@Input() autoheightDisabled = 'false';
+  @ViewChild(NgScrollbar) scrollable: NgScrollbar;
+  @Input() autoheightDisabled = 'false';
+
   constructor() { }
 
   ngOnInit(): void {

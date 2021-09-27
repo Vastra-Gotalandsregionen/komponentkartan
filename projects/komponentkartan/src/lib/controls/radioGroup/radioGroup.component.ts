@@ -187,7 +187,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     option.selected = true;
 
     this.selectedChanged.emit(option.value);
-    if(event) {
+    if (event) {
       this.onChange(option.value);
     }
   }

@@ -5,7 +5,6 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { By } from '@angular/platform-browser';
 
 import { SearchResultItem } from '../../models/searchResultItem.model';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import {
   SearchResultComponent
@@ -49,7 +48,7 @@ describe('[SearchResultComponent - Angular]', () => {
         TestSearchResultComponent,
         SearchResultComponent
       ],
-      imports: [PerfectScrollbarModule, BrowserDynamicTestingModule]
+      imports: [BrowserDynamicTestingModule]
     });
 
     TestBed.compileComponents()

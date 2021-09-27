@@ -12,8 +12,7 @@ describe('TabButtonComponent', () => {
   beforeEach((done) => {
     TestBed.configureTestingModule({
       declarations: [ TabButtonComponent ]
-    })
-   
+    });
 
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(TabButtonComponent);
@@ -21,20 +20,15 @@ describe('TabButtonComponent', () => {
       rootElement = fixture.debugElement;
       fixture.detectChanges();
       done();
-      console.log(rootElement.nativeElement.innerHTML)
-   
-    })
+    });
   });
-
- 
- 
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   describe('When button is disabled', () => {
-    let buttonElement
+    let buttonElement;
     beforeEach(() => {
       buttonElement = rootElement.query(By.css('button'));
       component.disabled = true;
@@ -54,10 +48,10 @@ describe('TabButtonComponent', () => {
     });
 
 
-  })
+  });
 
   describe('When disabled is false', () => {
-    let buttonElement
+    let buttonElement;
     beforeEach(() => {
       buttonElement = rootElement.query(By.css('button'));
       component.disabled = false;
@@ -77,7 +71,7 @@ describe('TabButtonComponent', () => {
   });
 
   describe('When button is already active and pressed again', () => {
-    let buttonElement
+    let buttonElement;
     let spy;
     beforeEach(() => {
       buttonElement = rootElement.query(By.css('button'));
@@ -92,14 +86,14 @@ describe('TabButtonComponent', () => {
 
       fixture.detectChanges();
       spy = spyOn(component.selectedChanged, 'emit').and.callThrough();
-    })
+    });
 
     it('button event is not propogated', () => {
       expect(spy).not.toHaveBeenCalled();
-    })
-  })
+    });
+  });
   describe('WCAG Tests', () => {
-    let buttonElement
+    let buttonElement;
     beforeEach(() => {
       buttonElement = rootElement.query(By.css('button'));
     });

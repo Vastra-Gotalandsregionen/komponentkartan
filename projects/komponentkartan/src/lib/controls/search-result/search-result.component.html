@@ -3,7 +3,7 @@
     {{noResultsText}}
   </div>
   <div class="search-results__description" *ngIf="description || items?.length > maxItems">
-    <p *ngIf="description" class="search-results__description-field">{{description}} - {{displayItems.length}}</p>
+    <p *ngIf="description" class="search-results__description-field">{{description}}</p>
     <p *ngIf="items?.length > maxItems" class="search-results__description-static">
       <strong>Endast de {{maxItems}} första träffarna visas.</strong> Begränsa din sökning genom att ange mer specifika sökkriterier.
     </p>

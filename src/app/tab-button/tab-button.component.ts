@@ -31,7 +31,7 @@ export class TabButtonComponent implements OnInit {
       }
     });
 
-    switch(id) {
+    switch (id) {
       case 'Favoriter':
         this.router.navigate( ['/favoriter'],  { skipLocationChange: true });
         break;

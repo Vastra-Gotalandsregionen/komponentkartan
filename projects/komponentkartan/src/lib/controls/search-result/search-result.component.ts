@@ -22,15 +22,12 @@ export class SearchResultComponent implements OnChanges, OnInit {
   onDocumentClick(event: any) {
     const target = event.target || event.srcElement || event.currentTarget;
     if ((this.elementRef.nativeElement.parentNode && !this.elementRef.nativeElement.parentNode.contains(target)) && this.visible) {
-      // this.resetScrollPosition();
       this.visible = false;
-
       this.visibleChange.emit(this.visible);
-
     }
   }
 
-  constructor(private elementRef: ElementRef, private ngZone: NgZone) { }
+  constructor(private elementRef: ElementRef) { }
 
 
   ngOnInit() {
@@ -56,8 +53,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   resetScrollPosition() {
-    // const psNode = this.elementRef.nativeElement.querySelector('#scroll-container-searchResult');
-    // // psNode.scrollTop = 0;
     this.focusItem = -1;
   }
 
@@ -125,21 +120,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
   public getParentNode() {
     return this.elementRef.nativeElement.parentNode;
   }
-
-  // getHeight() {
-  //   // console.log(this.elementRef.nativeElement.querySelector('ngx-scrollbar')?.offsetHeight)
-  //   // 264px Is the size of the viewport that's available.
-  //   return (264 + this.descriptionHeight).toString() + 'px';
-  // }
-
-  // calcHeight() {
-  //   const maxHeight = this.descriptionHeight ? 264 + this.descriptionHeight : 264;
-  //   const contentHeight = Math.round(this.displayItems.length * 32)+32;
-  //   let result = maxHeight  > contentHeight ?
-  //                 (contentHeight + 'px') : maxHeight + 'px';
-  //                 console.log(result, maxHeight, contentHeight, this.descriptionHeight)
-  //   return result;
-  // }
 
   filterItems() {
     this.displayItems = this.items.slice(0, this.maxItems);

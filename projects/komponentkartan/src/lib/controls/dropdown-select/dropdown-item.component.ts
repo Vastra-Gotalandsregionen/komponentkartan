@@ -20,7 +20,6 @@ export class DropdownItemComponent implements AfterViewInit {
   visible = true;
   hasFocus = false;
 
-  
   ngAfterViewInit() {
     this.label = (this.item.nativeElement as Node).textContent.trim();
     if (this.value === undefined) {

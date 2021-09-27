@@ -1,7 +1,5 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ElementRef, HostListener, Input, OnChanges, OnInit } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, HostListener } from '@angular/core';
 import { SubmenuComponent } from './submenu.component';
-
-
 
 @Component({
     selector: 'vgr-sidebar-menu',
@@ -9,28 +7,27 @@ import { SubmenuComponent } from './submenu.component';
     styleUrls: ['./sidebar-menu.component.scss']
 })
 export class SidebarMenuComponent implements AfterContentInit {
+  @ContentChild(SubmenuComponent) subMenu: SubmenuComponent;
+
   @HostListener('window:load', ['$event'])
     onLoad() {
       const sidebarmenu = document.querySelector('.sidebar-menu') as HTMLElement;
-      
-      sidebarmenu.style.height = '1500px'
+      sidebarmenu.style.height = '1500px';
       setTimeout(() => {
         sidebarmenu.style.height = 'calc(100vh - 80px)';
       }, 500);
     }
 
-    @ContentChild(SubmenuComponent) subMenu: SubmenuComponent;
-
-    constructor(private elementRef: ElementRef){
-      
-    }
+    constructor() {}
 
     ngAfterContentInit() {
-     // this.elementRef.nativeElement.focus();
-     this.subMenu.ToggleChanged.subscribe(() => { const sidebarmenu = document.querySelector('.sidebar-menu') as HTMLElement;   sidebarmenu.style.height = '1500px';
-     setTimeout(() => {
-       sidebarmenu.style.height = 'calc(100vh - 80px)';
-     }, 500);});
-     
+      this.subMenu.ToggleChanged.subscribe(() =>
+      {
+        const sidebarmenu = document.querySelector('.sidebar-menu') as HTMLElement;
+        sidebarmenu.style.height = '1500px';
+        setTimeout(() => {
+          sidebarmenu.style.height = 'calc(100vh - 80px)';
+        }, 500);
+      });
     }
 }

@@ -10,8 +10,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
 import { IconModule } from '../icon/icon.module';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
 
 @Component({
   selector: 'vgr-test',
@@ -53,14 +53,15 @@ describe('[ComboboxComponent - Angular]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, PerfectScrollbarModule, FormsModule],
+      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, FormsModule],
       declarations: [
         TestComponent,
         ComboboxComponent,
         ComboboxItemComponent,
         TruncatePipe,
         IconComponent,
-        ErrorMessagePipe
+        ErrorMessagePipe,
+        ScrollbarComponent
       ]
     });
 
@@ -289,7 +290,7 @@ describe('[ComboboxComponent - Angular]', () => {
           component.items.forEach(x => {
             x.highlighted = false;
             x.selected = false;
-          })
+          });
           component.expanded = true;
           component.searchString = 'abc';   // doesent matter the test. just not empty.
           spy2 = spyOn(component.selectedChanged, 'emit');

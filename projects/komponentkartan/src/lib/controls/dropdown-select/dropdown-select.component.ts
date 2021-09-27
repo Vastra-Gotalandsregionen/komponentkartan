@@ -85,7 +85,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       this.collapse();
     }
   }
-  
+
   constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;

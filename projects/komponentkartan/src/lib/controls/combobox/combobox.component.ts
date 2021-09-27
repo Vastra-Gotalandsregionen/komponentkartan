@@ -3,7 +3,7 @@ import {
   Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostListener
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-// import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -14,10 +14,6 @@ function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
 }
 
-const enum ScrollDirection {
-  Up = 1,
-  Down = 2
-}
 
 @Component({
   selector: 'vgr-combobox',
@@ -46,13 +42,13 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   @ViewChild('textInput', { static: false }) textInput: ElementRef;
   @ViewChild('readonlyLabel', { static: false }) readonlyLabel: ElementRef;
   @ViewChild('header', { static: false }) header: ElementRef;
+  @ViewChild(ScrollbarComponent) scrollable: ScrollbarComponent;
   @ContentChildren(ComboboxItemComponent) items: QueryList<ComboboxItemComponent>;
 
   expanded = false;
   headerLabelId = Guid.newGuid();
   label = '';
   hasFocus: boolean;
-  // scrollbarConfig: PerfectScrollbarConfig;
   searchString = '';
   leftPosition = '0px';
 
@@ -84,21 +80,14 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       this.collapse(false);
     }
   }
-  
+
   constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
-    // this.scrollbarConfig = new PerfectScrollbarConfig(
-    //   {
-    //     minScrollbarLength: 40,
-    //     wheelPropagation: false
-    //   } as PerfectScrollbarConfigInterface
-    // );
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('onChnage')
     if (changes.value && !changes.value.firstChange) {
       this.onChange(changes.value.currentValue);
       this.setSelectedState(changes.value.currentValue);
@@ -194,7 +183,6 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   onChange(value: any) {
-    console.log('onchange: ', value)
     this.value = value;
     this.selectedChanged.emit(value);
   }
@@ -260,14 +248,12 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   onBlur(event: FocusEvent) {
-    console.log('onBlur: ', event)
     const comboboxElement = this.combobox.nativeElement as HTMLElement;
     const focusedNode = event.relatedTarget as Node;
-    if (comboboxElement.contains(focusedNode) || event.relatedTarget === null ) { 
-      console.log('returns')
+    if (comboboxElement.contains(focusedNode) || event.relatedTarget === null ) {
       return;
     }
-    
+
     this.hasFocus = false;
     if (this.searchString.length) {
       const highlighted = this.items.find(x => x.highlighted);
@@ -429,14 +415,14 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
 
     if (itemIndex > 0) {
       this.setHighlightedItem(filteredItems[itemIndex - 1].value);
-      this.scrollToItem(highlightedItem, ScrollDirection.Up);
+      this.scrollToItem(highlightedItem);
 
     } else {
       if (!highlightedItem) {
         this.setHighlightedItem(filteredItems[filteredItems.length - 1].value);
 
         setTimeout(() => {
-          this.scrollToItem(filteredItems[filteredItems.length - 1], ScrollDirection.Up);
+          this.scrollToItem(filteredItems[filteredItems.length - 1]);
         });
       }
     }
@@ -451,7 +437,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       this.setHighlightedItem(filteredItems[itemIndex + 1].value);
 
       setTimeout(() => {
-        this.scrollToItem(filteredItems[itemIndex + 1], ScrollDirection.Down);
+        this.scrollToItem(filteredItems[itemIndex + 1]);
       });
 
     } else {
@@ -460,32 +446,23 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
         this.setHighlightedItem(filteredItems[0].value);
 
         setTimeout(() => {
-          this.scrollToItem(filteredItems[0], ScrollDirection.Down);
+          this.scrollToItem(filteredItems[0]);
         });
       }
     }
   }
 
-  private scrollToItem(item: ComboboxItemComponent, direction: ScrollDirection) {
-    const listBox = this.combobox.nativeElement.querySelector('.combobox__menu');
-    if (listBox && listBox.offsetHeight >= 285) { // scroll viewport 285px or 340px
-
-      const itemElement = item.item.nativeElement;
+  private scrollToItem(item: ComboboxItemComponent) {
+    if (this.scrollable.scrollable) {
       const filteredItems = this.items.filter(i => i.visible);
       const itemIndex = filteredItems.findIndex(i => i === item);
-      const itemsHight = itemElement.offsetHeight;
-      const steps = itemsHight ? Math.floor(listBox.offsetHeight / itemsHight) - 1 : 0;
-      const itemIsOutOfBounds = (itemElement.getBoundingClientRect().top < listBox.getBoundingClientRect().top + 20) || (itemElement.getBoundingClientRect().bottom > listBox.getBoundingClientRect().bottom);
 
-      if (direction === ScrollDirection.Up) {
-        if ((steps && ((itemIndex - 1) % steps) === 0) || itemIsOutOfBounds) {
-          const scrollPosition = itemElement.offsetTop - (itemsHight * steps);
-          this.combobox.nativeElement.querySelector('.ps').scrollTop = scrollPosition;
-        }
-
-      } else {
-        if ((steps && (itemIndex % steps) === 0 && itemIndex !== 0) || itemIsOutOfBounds) {
-          this.combobox.nativeElement.querySelector('.ps').scrollTop = itemElement.offsetTop;
+      if (itemIndex > 3 || itemIndex === 1) {
+        const scrollToItem = filteredItems[itemIndex > 3 ? itemIndex - 3 : itemIndex ];
+        if (itemIndex === 1) {
+          this.scrollable.scrollable.scrollTo({top: 0});
+        } else {
+          this.scrollable.scrollable.scrollToElement(scrollToItem.item.nativeElement, {duration: 0} );
         }
       }
     }
@@ -513,7 +490,6 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
 
   private setHighligthState() {
     let highligthedItem: ComboboxItemComponent;
-
     this.items.forEach(i => (i.highlighted = false));
     this.items.forEach(item => {
       if (item.label.toLowerCase().startsWith(this.searchString.toLowerCase()) && !highligthedItem) {

@@ -36,6 +36,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
     @HostBinding('attr.aria-haspopup') hasAriaPopup = 'menu';
     @HostBinding('attr.role') role = 'menuitem';
     @Input() @HostBinding('attr.aria-expanded') expanded = false;
+    @Output() ToggleChanged: EventEmitter<any> = new EventEmitter();
 
     @ContentChildren(MenuItemBaseDirective) menuItems: QueryList<MenuItemComponent>;
     @HostBinding('class.submenu') hasClass = true;
@@ -85,7 +86,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         }
     }
 
-    @Output() ToggleChanged: EventEmitter<any> = new EventEmitter();
+
     get expandedState() {
         this.state = this.expanded ? 'expanded' : 'collapsed';
         return this._showExpanded;
