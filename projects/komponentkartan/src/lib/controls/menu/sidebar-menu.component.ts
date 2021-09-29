@@ -11,6 +11,8 @@ export class SidebarMenuComponent implements AfterContentInit {
 
   @HostListener('window:load', ['$event'])
     onLoad() {
+      // Detta är en hack-lösning för att scrollbaren skall räkna om sig och visa scrollbar eller inte.
+      // 80px är hårdkodad header-height
       const sidebarmenu = document.querySelector('.sidebar-menu') as HTMLElement;
       sidebarmenu.style.height = '1500px';
       setTimeout(() => {
@@ -23,6 +25,8 @@ export class SidebarMenuComponent implements AfterContentInit {
     ngAfterContentInit() {
       this.subMenu.ToggleChanged.subscribe(() =>
       {
+        // Detta är en hack-lösning för att scrollbaren skall räkna om sig och visa scrollbar eller inte.
+        // 80px är hårdkodad header-height
         const sidebarmenu = document.querySelector('.sidebar-menu') as HTMLElement;
         sidebarmenu.style.height = '1500px';
         setTimeout(() => {
