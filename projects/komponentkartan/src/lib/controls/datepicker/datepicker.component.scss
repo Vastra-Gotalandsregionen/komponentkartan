@@ -4,6 +4,7 @@
 
 
 :host::ng-deep {
+  width: 130px;
   .datepicker {
     display: inline-block;
     width: inherit;
@@ -322,7 +323,9 @@
   }
 
   @media screen and (min-width: $desktop-width--medium) {
+    width: 142px;
     .datepicker {
+      width: inherit;
       .datepicker__control {
         .datepicker__calendar {
           width: 272px;
