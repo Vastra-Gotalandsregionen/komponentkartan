@@ -12,8 +12,7 @@ describe('TabButtonComponent', () => {
   beforeEach((done) => {
     TestBed.configureTestingModule({
       declarations: [ TabButtonComponent ]
-    })
-   
+    });
 
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(TabButtonComponent);
@@ -21,13 +20,9 @@ describe('TabButtonComponent', () => {
       rootElement = fixture.debugElement;
       fixture.detectChanges();
       done();
-      console.log(rootElement.nativeElement.innerHTML)
-   
-    })
+    });
   });
 
- 
- 
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -44,6 +39,7 @@ describe('TabButtonComponent', () => {
     it('button is shown as disabled', () => {
       expect(buttonElement.classes['button--disabled']).toBe(true);
     });
+
     it('click does not bubble', () => {
       let clickBubbled = false;
       const handleClick = () => clickBubbled = true;
@@ -52,8 +48,6 @@ describe('TabButtonComponent', () => {
       rootElement.nativeElement.removeEventListener('click', handleClick);
       expect(clickBubbled).toBe(false);
     });
-
-
   })
 
   describe('When disabled is false', () => {
@@ -63,9 +57,11 @@ describe('TabButtonComponent', () => {
       component.disabled = false;
       fixture.detectChanges();
     });
+
     it('button is displayed as enabled', () => {
       expect(buttonElement.classes['button--disabled']).not.toBe(true);
     });
+
     it('click bubbles', () => {
       let clickBubbled = false;
       const handleClick = () => clickBubbled = true;
@@ -96,8 +92,9 @@ describe('TabButtonComponent', () => {
 
     it('button event is not propogated', () => {
       expect(spy).not.toHaveBeenCalled();
-    })
-  })
+    });
+  });
+
   describe('WCAG Tests', () => {
     let buttonElement
     beforeEach(() => {

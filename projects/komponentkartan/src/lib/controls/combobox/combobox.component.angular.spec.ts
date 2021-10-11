@@ -289,7 +289,7 @@ describe('[ComboboxComponent - Angular]', () => {
           component.items.forEach(x => {
             x.highlighted = false;
             x.selected = false;
-          })
+          });
           component.expanded = true;
           component.searchString = 'abc';   // doesent matter the test. just not empty.
           spy2 = spyOn(component.selectedChanged, 'emit');

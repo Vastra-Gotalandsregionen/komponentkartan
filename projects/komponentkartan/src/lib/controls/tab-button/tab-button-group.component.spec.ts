@@ -22,7 +22,7 @@ describe('TabButtonGroupComponent', () => {
   let component: TabButtonGroupComponent;
   let fixture: ComponentFixture<TestComponent>;
   let rootElement: DebugElement;
-  
+
   let firstTabButton: DebugElement;
   let firstTabButtonOuterSpan: DebugElement;
   let firstTabButtonButton: DebugElement;
@@ -129,6 +129,4 @@ describe('TabButtonGroupComponent', () => {
       });
     });
   });
-
-  
 });
