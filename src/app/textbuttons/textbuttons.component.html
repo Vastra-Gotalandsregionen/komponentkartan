@@ -67,7 +67,7 @@
         <input class="margin" type="text" formControlName="name" />
         <vgr-button #submitButton [disabled]="form.disabled" type="submit">Skicka</vgr-button>
       </form>
-      <vgr-button (click)="toggleFormActive()">Aktivera</vgr-button>
+      <vgr-button (click)="toggleFormActive()">{{!form.enabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
       <vgr-button [disabled]="form.disabled" (click)="setFocusOnSubmit()">Fokusera</vgr-button>
 
       </div>

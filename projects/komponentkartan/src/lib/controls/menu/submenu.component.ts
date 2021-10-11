@@ -193,9 +193,9 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
 
     private setChildSelected(event: NavigationEnd) {
         const itemArray = this.menuItems.toArray();
-        itemArray.splice(0, 1);
         const menuItemArray = <MenuItemComponent[]>itemArray;
-        const matches = menuItemArray.filter(m => m.link === event.url);
+        const url = decodeURIComponent(event.url);
+        const matches = menuItemArray.filter(m => m.link === url);
 
         if (matches.length === 1) {
             this.expandedState = true;

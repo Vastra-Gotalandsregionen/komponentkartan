@@ -145,6 +145,11 @@
         transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
       }
     }
+
+    .button__focus-line {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
   }
 
   @media screen and (min-width: $desktop-width--medium) {

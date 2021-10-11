@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SortArrowComponent } from './sort-arrow.component';
 import { IconComponent } from '../icon/icon.component';
@@ -9,7 +9,7 @@ describe('SortArrowComponent', () => {
   let component: SortArrowComponent;
   let fixture: ComponentFixture<SortArrowComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [ FontAwesomeModule, IconModule ],
       declarations: [ SortArrowComponent, IconComponent ]
