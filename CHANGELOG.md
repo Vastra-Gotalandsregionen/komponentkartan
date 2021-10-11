@@ -4,14 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-# 8.4.0-beta2 (dev)
+# 8.4.0 (2021-10-11) Stable
 - Fixed bug regarding components alingment in gridheader (#580)
 - Fixed datepickerDefault_size (#581)
 - Fixed bug where focusline was not visible on first row in grid with sticky header (#579)
 - Fixed bug regarding vgr-menu-separator and path with åäö (#395)
 - Fixed bug regarding closebutton hover (#453)
-
-# 8.4.0-beta1 (dev)
 - Added new component `vgr-combobox`
 # 8.3.0 (2021-09-07) Stable
 - Added new component `vgr-tab-button` & `vgr-tab-button-group`
