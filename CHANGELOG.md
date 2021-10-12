@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-# 8.4.0 (2021-10-11) Stable
+# 8.4.1 (2021-10-11) Stable
 - Fixed bug regarding components alingment in gridheader (#580)
 - Fixed datepickerDefault_size (#581)
 - Fixed bug where focusline was not visible on first row in grid with sticky header (#579)
