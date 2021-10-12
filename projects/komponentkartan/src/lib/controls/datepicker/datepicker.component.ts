@@ -39,19 +39,6 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   @ViewChild('calendar') calendar: ElementRef;
   @ViewChildren(DatepickerItemComponent) items: QueryList<DatepickerItemComponent>;
 
-  @HostListener('window:resize', []) onWindowResize() {
-    // only change if 'default' values
-    if (window.innerWidth <= 1459) {
-      if (this.width === '142px') {
-        this.width = '130px';
-      }
-    } else {
-      if (this.width === '130px') {
-        this.width = '142px';
-      }
-    }
-  }
-
   headerLabelId = Guid.newGuid();
   label = '';
   noSelectedDateLabel: string;
@@ -72,6 +59,21 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   private actualMaxDate: Date;
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
+
+  @HostListener('window:resize', [])
+  onWindowResize() {
+    // only change if 'default' values
+    if (window.innerWidth <= 1459) {
+      if (this.width === '142px') {
+        this.width = '130px';
+      }
+    } else {
+      if (this.width === '130px') {
+        this.width = '142px';
+      }
+    }
+  }
+
 
   get errorActive() {
     if (!this.showValidation || this.disabled || this.readonly) {

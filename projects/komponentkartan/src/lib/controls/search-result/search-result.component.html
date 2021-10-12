@@ -1,4 +1,4 @@
-<div class="search-results" [ngStyle]="{'width': width }">
+<div *ngIf="visible" class="search-results" [ngStyle]="{'width': width }">
   <div class="search-results__noresults" *ngIf="!items || items?.length === 0">
     {{noResultsText}}
   </div>
@@ -8,15 +8,17 @@
       <strong>Endast de {{maxItems}} första träffarna visas.</strong> Begränsa din sökning genom att ange mer specifika sökkriterier.
     </p>
   </div>
-  <perfect-scrollbar id="scroll-container" class="container" [config]="scrollbarConfig" [style.maxHeight.px]="getHeight()" [scrollIndicators]="true">
-    <ul class="search-results__items" role="listbox">
-      <li *ngFor="let item of displayItems; let i = index" class="search-results-item" [ngClass]="{'search-results-item--focused' : i === focusItem }"
-        tabindex="-1" [attr.aria-label]="item.displayName" [attr.aria-selected]="item.selected">
-        <a (click)="onItemClick(item)" title={{item.displayName}}>
-          {{item.displayName[0]}}
-          <span *ngIf="item.displayName.length > 1" [class.italic]="item.secondRowItalic">{{item.displayName[1]}}</span>
-        </a>
-      </li>
-    </ul>
-  </perfect-scrollbar>
+  <div class="scrollbar__dimmer scrollbar__dimmer-top"></div>
+    <vgr-scrollbar>
+      <ul class="search-results__items" role="listbox">
+        <li *ngFor="let item of displayItems; let i = index" class="search-results-item" [ngClass]="{'search-results-item--focused' : i === focusItem }"
+          tabindex="-1" [attr.aria-label]="item.displayName" [attr.aria-selected]="item.selected">
+          <a (click)="onItemClick(item)" title={{item.displayName}}>
+            {{item.displayName[0]}}
+            <span *ngIf="item.displayName.length > 1" [class.italic]="item.secondRowItalic">{{item.displayName[1]}}</span>
+          </a>
+        </li>
+      </ul>
+    </vgr-scrollbar>
+  <div class="scrollbar__dimmer scrollbar__dimmer-bottom"></div>
 </div>

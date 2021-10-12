@@ -10,7 +10,7 @@ export class DatepickerItemComponent implements OnInit {
   @Input() selected: boolean;
   @Input() disabled: boolean;
   @Input() isMinZoom: boolean;
-
+// eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select = new EventEmitter<Date>();
   @Output() zoomIn = new EventEmitter<Date>();
   @Output() previousColumn = new EventEmitter<Date>();

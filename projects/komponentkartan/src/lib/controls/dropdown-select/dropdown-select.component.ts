@@ -1,16 +1,16 @@
 import {
   Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
-  Input, Output, EventEmitter, Optional, SimpleChanges, Self
+  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostListener
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { DropdownItemComponent } from './dropdown-item.component';
 import { ButtonComponent } from '../button/button.component';
 import { Guid } from '../../utils/guid';
 import { InputComponent } from '../input/input.component';
+import { NgScrollbar } from 'ngx-scrollbar';
 
 function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
@@ -41,12 +41,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Output() expandedChanged = new EventEmitter<boolean>();
 
   @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
+  @ViewChild(NgScrollbar) scrollbarRef: NgScrollbar;
   @ViewChild('header', { static: true }) header: ElementRef;
   @ViewChild('selectAll', { static: false }) selectAll: ElementRef;
   @ViewChild('deselectButton', { static: false }) deselectButton: ButtonComponent;
   @ViewChild(InputComponent, { static: false }) filter: InputComponent;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
+  scrollSubscription = Subscription.EMPTY;
   expanded = false;
   filterVisible = false;
   allSelected = false;
@@ -56,7 +58,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   hasFocus: boolean;
   filterHasFocus: boolean;
-  scrollbarConfig: PerfectScrollbarConfig;
   visibleCount: number;
   searchString = '';
 
@@ -77,16 +78,18 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
-  constructor(@Optional() @Self() public formControl: NgControl) {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: any) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    if ((this.elementRef.nativeElement && !this.elementRef.nativeElement.contains(target)) && this.expanded) {
+      this.collapse();
+    }
+  }
+
+  constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
-    this.scrollbarConfig = new PerfectScrollbarConfig(
-      {
-        minScrollbarLength: 40,
-        wheelPropagation: false
-      } as PerfectScrollbarConfigInterface
-    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -143,6 +146,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     this.ngUnsubscribeItems.next();
     this.ngUnsubscribeItems.complete();
+    this.scrollSubscription.unsubscribe();
   }
 
   public focus() {
@@ -180,6 +184,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   onTouched() { }
 
   toggleExpanded() {
+
     if (this.readonly || this.disabled) {
       return;
     }
@@ -203,7 +208,12 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
 
     // Scroll to top when filter is changed
-    this.dropdown.nativeElement.querySelector('.ps').scrollTop = 0;
+    // this.scrollbarRef.scrolled.subscribe(e => console.log(e));
+    // this.scrollSubscription = this.scrollbarRef.scrolled.pipe(
+    //   map((e: any) => e.target.scrollTop = 0)
+    // ).subscribe();
+    // this.scrollbarRef.scrollTo({top: 0})
+    // this.dropdown.nativeElement.querySelector('.ps').scrollTop = 0;
   }
 
   deselectItems() {
@@ -251,6 +261,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   onBlur(event: FocusEvent) {
     const dropdownElement = this.dropdown.nativeElement as HTMLElement;
     const focusedNode = event.relatedTarget as Node;
+    if (!focusedNode) {
+      return;
+    }
     if (dropdownElement.contains(focusedNode)) {
       return;
     }
@@ -438,7 +451,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   private expand() {
     this.expanded = true;
+
     this.expandedChanged.emit(true);
+
   }
 
   private collapse(focusHeader = true) {

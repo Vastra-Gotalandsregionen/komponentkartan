@@ -9,7 +9,7 @@ export enum GridSortDirection {
   selector: 'vgr-grid-header-column',
   templateUrl: './grid-header-column.component.html'
 })
-export class GridHeaderColumnComponent implements OnInit {
+export class GridHeaderColumnComponent {
   @Input() @HostBinding('style.flex') width = 1;
   @Input() align = 'left';
   @Input() sortKey: string;
@@ -18,9 +18,6 @@ export class GridHeaderColumnComponent implements OnInit {
   @ViewChild('gridHeaderColumn', { read: ElementRef, static: false }) gridHeaderColumn: ElementRef;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   changeSort() {
     if (this.sortKey) {

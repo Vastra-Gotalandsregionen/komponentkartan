@@ -89,5 +89,7 @@ export { NotificationComponent } from './controls/notification/notification.comp
 
 export { SortArrowComponent } from './controls/sort-arrow/sort-arrow.component';
 
+export { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
+
 
 export { Guid } from './utils/guid';

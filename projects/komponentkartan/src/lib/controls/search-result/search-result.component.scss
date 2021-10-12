@@ -10,11 +10,15 @@
     display: inline-block;
   }
 
-  #scroll-container {
-    .ps__thumb-y, .ps__rail-y:hover > .ps__thumb-y {
-      background-color: $gray-secondary;
-    }
-  }
+  // #scroll-container-searchResult {
+  //   height: 285px;
+  //   z-index: $layer-five;
+  //   --scrollbar-thumb-color: rgba(187, 190, 190, 1);// $gray-secondary
+  //   --scrollbar-thumb-hover-color: rgba(158, 162, 162, 1); //$gray-primary
+  //   --scrollbar-track-color: rgba(234, 235, 235,1);//$gray-dimmed
+  //   --scrollbar-size: 8px;
+  //   --scrollbar-hover-size: 11px;
+  // }
 }
 
 :host {
@@ -52,7 +56,8 @@
     border: none;
     padding-top: $margin--regular;
     padding-bottom: 0px;
-    width: 330px; //max-height: $search-results-height--small;
+    width: 330px;
+    // max-height: $search-results-height--small;
     display: none;
     cursor: default;
     &:before {
@@ -79,7 +84,7 @@
     }
     .search-results__items {
       position: relative;
-      max-height: 285px; //calc(#{$search-results-height--small} - #{$margin--fat});
+      max-height: 285px; // calc(#{$search-results-height--small} - #{$margin--fat});
       li {
         width: calc(100% - 3px);
         background: white;
@@ -148,6 +153,24 @@
 
   .scroll-element.scroll-x {
     display: none !important;
+  }
+
+  .scrollbar__dimmer {
+    position: absolute;
+    height: 20px;
+    width: 300px;
+    margin-left: 15px;
+    margin-right: 15px;
+    z-index: $layer-seven;
+  }
+
+  .scrollbar__dimmer-top {
+    background: linear-gradient(white, rgba(255, 255, 255, 0));
+  }
+
+  .scrollbar__dimmer-bottom {
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
+    bottom: 0;
   }
 
   @media screen and (min-width: $desktop-width--medium) {

@@ -4,11 +4,8 @@ import { Component, OnInit } from '@angular/core';
   selector: 'vgr-grid-content',
   template: '<ng-content></ng-content>'
 })
-export class GridContentComponent implements OnInit {
+export class GridContentComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
