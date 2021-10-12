@@ -1,6 +1,7 @@
 <div class="checkbox">
   <span class="checkbox__input" (focusout)="onLeave()" (click)="onClick($event)" (keydown)="onKeyDown($event)">
-    <input id="{{labelledbyid}}" type="checkbox" name="checkbox" [disabled]="disabled" [checked]="checked" aria-hidden="true">
+    <input id="{{labelledbyid}}" type="checkbox" name="checkbox" [attr.aria-disabled]="disabled" [checked]="checked" aria-hidden="true">
+    <!--[attr.aria-labelledby]="labelledbyid"-->
     <span
     class="checkbox__control"
     [ngClass]="{ 'checkbox--transparent': transparent }"
@@ -13,7 +14,6 @@
       <path fill='none' stroke='currentColor' stroke-width='6' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
     </span>
   </span>
-  <label class="checkbox__label" for="{{labelledbyid}}" [ngClass]="{'checkbox--disabled' : disabled }">{{label}}</label>
+  <label id="{{labelledbyid}}" class="checkbox__label" for="{{labelledbyid}}" [ngClass]="{'checkbox--disabled' : disabled }" [attr.aria-disabled]="disabled">{{label}}</label>
 </div>
-  
-  
+
