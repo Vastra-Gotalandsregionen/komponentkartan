@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnChanges, ViewChild, ElementRef } from '@angular/core';
+﻿import { Component, Input, OnChanges, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { mapToClassString } from '../../utils/map-to-class-string';
 
 @Component({
@@ -15,6 +15,8 @@ export class ButtonComponent implements OnChanges {
   private wasDisabled = false;
   private activated = false;
 
+  constructor(private renderer: Renderer2) {}
+
   ngOnChanges() {
     this.reenabled = this.wasDisabled && !this.disabled;
     this.wasDisabled = this.disabled;
@@ -22,7 +24,9 @@ export class ButtonComponent implements OnChanges {
 
   checkDisabled(event: MouseEvent) {
     if (this.disabled) {
+      this.renderer.setAttribute(this.button.nativeElement, 'aria-disabled', 'false');
       event.stopPropagation();
+      event.preventDefault();
     }
   }
 
