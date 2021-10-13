@@ -78,9 +78,6 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
 
   onChange(event: any) {
     if (this.disabled || this.active) {
-      if (this.disabled) {
-        this.renderer.setStyle(this.tabbutton.nativeElement, 'outline', 'none');
-      }
       event.stopPropagation();
       return;
     }
