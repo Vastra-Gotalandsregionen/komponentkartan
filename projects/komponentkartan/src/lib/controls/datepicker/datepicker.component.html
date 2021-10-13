@@ -5,6 +5,7 @@
       [ngClass]="{ 'datepicker--disabled': disabled, 'datepicker--readonly': readonly }"
       (keydown)="onKeydown($event)"
       (focusout)="onBlur($event)">
+       <!-- Om datepicker inte är readonly -->
       <div *ngIf="!readonly" class="datepicker__header"
       [ngClass]="{'datepicker__header--focus': headerHasFocus}"
 
@@ -12,7 +13,7 @@
         (focusout)="onHeaderBlur()"
         (keydown)="onHeaderKeydown($event)"
         (click)="onHeaderClick()">
-        <!--role="button" [attr.aria-expanded]="expanded"-->
+        <!-- Om Textboxen inte tillåter att man skriver datum -->
         <div #headerLabel *ngIf="!allowText" role="button" tabindex="0"  aria-haspopup="grid"
         [attr.aria-disabled]="disabled"
         [attr.aria-expanded]="expanded"
@@ -21,6 +22,7 @@
           <input class="datepicker__header__input"[placeholder]="noSelectedDateLabel" readonly="readonly"
             tabindex="-1" [value]="label">
         </div>
+        <!-- Om Textboxen tillåter att man skriver datum -->
         <div *ngIf="allowText">
           <input #headerInput class="datepicker__header__input"
           [ngClass]="{'datepicker--transparent': transparent }"
@@ -29,16 +31,20 @@
           [attr.aria-labelledby]="labelId"
           [attr.aria-expanded]="expanded" [value]="label"
           (change)="parseSelectedDate($event.target.value)"
-          [disabled]="disabled">
+
+          [attr.aria-disabled]="disabled">
         </div>
         <div class="datepicker__header__button">
           <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'"></vgr-icon>
         </div>
       </div>
+       <!-- Om datepicker är readonly -->
       <div *ngIf="readonly" #readOnlyHeader class="datepicker__readonly-header" tabindex="0" aria-readonly="true">
         <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
         <span *ngIf="!selectedDate">&nbsp;</span>
       </div>
+
+       <!-- kalender grid, expanderad -->
       <div #calendar *ngIf="expanded" class="datepicker__calendar noselect" tabindex="0"
         (keydown)="onCalendarKeydown($event)">
         <div *ngIf="zoomedToDays">
