@@ -49,38 +49,38 @@
         background-color: black;
       }
 
-      // &:disabled + .checkbox__control {
-      //   border: 2px solid $gray-primary;
-      //   background-color: white;
-      //   cursor: default;
-      // }
-
-      // &:checked:disabled + .checkbox__control svg {
-      //   background-color: $gray-primary;
-      //   color: #fff;
-      //   cursor: default;
-      // }
-
-      // &:checked:disabled + .checkbox__control {
-      //   background-color: $gray-primary;
-      //   cursor: default;
-      // }
-      &[aria-disabled=true] + .checkbox__control {
+      &:disabled + .checkbox__control {
         border: 2px solid $gray-primary;
         background-color: white;
         cursor: default;
       }
 
-      &:checked[aria-disabled=true] + .checkbox__control svg {
+      &:checked:disabled + .checkbox__control svg {
         background-color: $gray-primary;
         color: #fff;
         cursor: default;
       }
 
-      &:checked[aria-disabled=true] + .checkbox__control {
+      &:checked:disabled + .checkbox__control {
         background-color: $gray-primary;
         cursor: default;
       }
+      // &[aria-disabled=true] + .checkbox__control {
+      //   border: 2px solid $gray-primary;
+      //   background-color: white;
+      //   cursor: default;
+      // }
+
+      // &:checked[aria-disabled=true] + .checkbox__control svg {
+      //   background-color: $gray-primary;
+      //   color: #fff;
+      //   cursor: default;
+      // }
+
+      // &:checked[aria-disabled=true] + .checkbox__control {
+      //   background-color: $gray-primary;
+      //   cursor: default;
+      // }
     }
   }
 
