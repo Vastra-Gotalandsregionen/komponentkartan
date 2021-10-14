@@ -33,6 +33,13 @@
     margin-top: 0;
     color: grey;
   }
+
+  .screenreader_only {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+  }
 }
 :host::ng-deep {
   .combobox {
