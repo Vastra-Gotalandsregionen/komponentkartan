@@ -296,6 +296,9 @@
             background-color: $gray-primary;
           }
         }
+        &:focus {
+          outline: $focus-outline-width solid $focus-color;
+        }
       }
 
       &.datepicker--readonly {
@@ -321,6 +324,7 @@
       }
     }
   }
+
 
   @media screen and (min-width: $desktop-width--medium) {
     width: 142px;

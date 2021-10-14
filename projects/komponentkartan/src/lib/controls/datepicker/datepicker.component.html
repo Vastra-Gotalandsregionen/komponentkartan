@@ -4,7 +4,9 @@
     <div #datepicker class="datepicker__control"
       [ngClass]="{ 'datepicker--disabled': disabled, 'datepicker--readonly': readonly }"
       (keydown)="onKeydown($event)"
-      (focusout)="onBlur($event)">
+      (focusout)="onBlur($event)"
+      [tabindex]="disabled ? 0 : -1"
+      [attr.aria-disabled]="disabled">
        <!-- Om datepicker inte är readonly -->
       <div *ngIf="!readonly" class="datepicker__header"
       [ngClass]="{'datepicker__header--focus': headerHasFocus}"
@@ -14,8 +16,8 @@
         (keydown)="onHeaderKeydown($event)"
         (click)="onHeaderClick()">
         <!-- Om Textboxen inte tillåter att man skriver datum -->
-        <div #headerLabel *ngIf="!allowText" role="button" tabindex="0"  aria-haspopup="grid"
-        [attr.aria-disabled]="disabled"
+        <div #headerLabel *ngIf="!allowText" role="button" aria-haspopup="grid"
+        [disabled]="disabled"
         [attr.aria-expanded]="expanded"
           [attr.aria-labelledby]="labelId + ' ' + headerLabelId"
           >
@@ -32,7 +34,7 @@
           [attr.aria-expanded]="expanded" [value]="label"
           (change)="parseSelectedDate($event.target.value)"
 
-          [attr.aria-disabled]="disabled">
+          [disabled]="disabled">
         </div>
         <div class="datepicker__header__button">
           <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'"></vgr-icon>
