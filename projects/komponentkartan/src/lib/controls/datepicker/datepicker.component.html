@@ -1,12 +1,13 @@
 <div class="datepicker"
   [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
   <div class="validation">
-    <div #datepicker class="datepicker__control"
+    <div #datepicker class="datepicker__control" role="textbox"
       [ngClass]="{ 'datepicker--disabled': disabled, 'datepicker--readonly': readonly }"
       (keydown)="onKeydown($event)"
       (focusout)="onBlur($event)"
       [tabindex]="disabled ? 0 : -1"
-      [attr.aria-disabled]="disabled">
+      [attr.aria-disabled]="disabled"
+      [attr.aria-readonly]="readonly">
        <!-- Om datepicker inte är readonly -->
       <div *ngIf="!readonly" class="datepicker__header"
       [ngClass]="{'datepicker__header--focus': headerHasFocus}"
@@ -18,22 +19,24 @@
         <!-- Om Textboxen inte tillåter att man skriver datum -->
         <div #headerLabel *ngIf="!allowText" role="button" aria-haspopup="grid"
         [disabled]="disabled"
+        [attr.aria-disabled]="disabled"
         [attr.aria-expanded]="expanded"
           [attr.aria-labelledby]="labelId + ' ' + headerLabelId"
           >
           <input class="datepicker__header__input"[placeholder]="noSelectedDateLabel" readonly="readonly"
-            tabindex="-1" [value]="label">
+          [tabindex]="disabled ? -1 : 0" [value]="label">
         </div>
         <!-- Om Textboxen tillåter att man skriver datum -->
         <div *ngIf="allowText">
           <input #headerInput class="datepicker__header__input"
           [ngClass]="{'datepicker--transparent': transparent }"
+          [value]="label"
           [placeholder]="inputPlaceholder"
           aria-haspopup="grid"
           [attr.aria-labelledby]="labelId"
-          [attr.aria-expanded]="expanded" [value]="label"
+          [attr.aria-expanded]="expanded"
           (change)="parseSelectedDate($event.target.value)"
-
+          [attr.aria-disabled]="disabled"
           [disabled]="disabled">
         </div>
         <div class="datepicker__header__button">
@@ -48,6 +51,7 @@
 
        <!-- kalender grid, expanderad -->
       <div #calendar *ngIf="expanded" class="datepicker__calendar noselect" tabindex="0"
+
         (keydown)="onCalendarKeydown($event)">
         <div *ngIf="zoomedToDays">
           <div class="datepicker__calendar__header">
@@ -143,6 +147,7 @@
           </div>
         </div>
       </div>
+      <span class="screenreader_only" aria-disabled="true">{{label}}</span>
     </div>
     <div *ngIf="parseError" class="validation__status" title="{{parseErrorMessage}}">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>

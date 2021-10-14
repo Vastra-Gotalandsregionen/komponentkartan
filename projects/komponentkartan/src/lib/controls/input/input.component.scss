@@ -57,6 +57,12 @@
   }
 }
 
+.screenreader_only {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}
 
 .disabled_focus:focus {
     outline: $focus-outline-width solid $focus-color!important;
