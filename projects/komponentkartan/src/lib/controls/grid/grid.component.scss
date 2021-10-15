@@ -30,7 +30,7 @@
   vgr-grid-header {
     background: white;
     display: flex;
-    align-items: center;
+    align-items: baseline;
 
     &.grid-row-header:hover {
       @include themify($themes) {
@@ -71,7 +71,7 @@
     padding-left: 0px;
     padding-right: 0px;
     transition: padding-left 0.4s, padding-right 0.4s;
-    align-items:baseline;
+    margin-bottom: 2px;
   }
 
   .grid-header-toolbar {
@@ -130,7 +130,7 @@
     .grid-row-header-focus {
       &:focus {
         outline: $focus-outline-width solid $focus-color;
-        z-index: 3;
+        z-index: 1;
         position: relative;
       }
 
@@ -139,28 +139,6 @@
       }
     }
   }
-
-  /*.grid-row-header {
-      &--expandable {
-        cursor: pointer;
-        vgr-grid-column:last-child {
-          position: relative;
-          &:after {
-            content: "";
-            background: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='chevron-down' class='svg-inline--fa fa-chevron-down fa-w-14 fa-sm' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='currentColor' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'%3E%3C/path%3E%3C/svg%3E")
-              center center no-repeat;
-            width: 15px;
-            height: 15px;
-            display: block;
-            position: absolute;
-            right: 10px;
-            top: 12px;
-            transition: transform 0.4s;
-            z-index: 0;
-          }
-        }
-      }
-    }*/
 
   vgr-grid-row {
     display: block;
@@ -217,12 +195,6 @@
 
     .grid-row-notification {
       display: block;
-    }
-    & .error,
-    .success,
-    .info,
-    .warning {
-      margin: 5px 10px 5px 10px;
     }
   }
 
@@ -281,10 +253,6 @@
     vgr-grid-header {
       padding-left: 10px;
       padding-right: 10px;
-
-      vgr-grid-header-column {
-        min-height: 40px;
-      }
     }
 
     vgr-grid-row {
