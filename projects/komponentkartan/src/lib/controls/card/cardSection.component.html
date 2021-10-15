@@ -11,6 +11,6 @@
   (@toggleExpandedState.start)="toggleState('start', expanded)"
   (@toggleExpandedState.done)="toggleState('done', expanded)" [class.card-section__content--overflow]="expandOverflow">
   <div class="add-padding">
-    <ng-content></ng-content>
+    <ng-content *ngIf="expanded"></ng-content>
   </div>
 </div>
