@@ -135,10 +135,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
                 }
             });
 
-        this.childSelected = true;
-        // The class .menu__item--selected does not exist. I set the property to true instead and it still works.
-        // If anyone understand or knows better please redo or we can remove this comments.
-        // this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
+        this.childSelected = !!this.elementRef.nativeElement.querySelector('.submenu--child-selected');   // The class .menu__item--selected does not exist.
     }
 
     ngAfterContentInit() {
@@ -203,10 +200,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         if (matches.length) {
             this.expandedState = true;
             setTimeout(() => {
-                this.childSelected = true;
-                // this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
-                // The class .menu__item--selected does not exist. I set the property to true instead and it still works.
-                // If anyone understand or knows better please redo or we can remove this comments.
+                this.childSelected = !!this.elementRef.nativeElement.querySelector('.submenu--child-selected'); // The class .menu__item--selected does not exist.
             }, 650);
         } else {
             this.childSelected = false;
