@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div id="expDesc" class="validation__status" aria-live="assertive">
+    <div id="expDesc" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
       <div class="validation__status__message" *ngIf="control">{{errorMessage | errorMessage: control.errors : false}}</div>
       <div class="validation__status__message" *ngIf="!control">{{errorMessage}}</div>
