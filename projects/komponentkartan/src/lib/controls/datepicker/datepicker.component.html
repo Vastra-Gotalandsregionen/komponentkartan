@@ -23,7 +23,7 @@
         [attr.aria-expanded]="expanded"
           [attr.aria-labelledby]="labelId + ' ' + headerLabelId"
           >
-          <input class="datepicker__header__input"[placeholder]="noSelectedDateLabel" readonly="readonly"
+          <input class="datepicker__header__input" [disabled]="disabled" [placeholder]="noSelectedDateLabel" readonly="readonly"
           [tabindex]="disabled ? -1 : 0" [value]="label">
         </div>
         <!-- Om Textboxen tillåter att man skriver datum -->

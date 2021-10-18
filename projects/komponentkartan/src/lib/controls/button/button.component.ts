@@ -22,9 +22,8 @@ export class ButtonComponent implements OnChanges {
     this.wasDisabled = this.disabled;
   }
 
-  checkDisabled(event: MouseEvent) {
+  checkDisabled(event: Event) {
     if (this.disabled) {
-      this.renderer.setAttribute(this.button.nativeElement, 'aria-disabled', 'false');
       event.stopPropagation();
       event.preventDefault();
     }
@@ -35,11 +34,13 @@ export class ButtonComponent implements OnChanges {
   }
 
   onKeyboardActivation(e: KeyboardEvent): void {
-    if (e.key === ' ' || e.key === 'Enter') {
-      this.activated = true;
-      setTimeout(() => {
-        this.activated = false;
-      }, 500);
+    if (!this.disabled) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        this.activated = true;
+        setTimeout(() => {
+          this.activated = false;
+        }, 500);
+      }
     }
   }
 
