@@ -60,6 +60,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   filterHasFocus: boolean;
   visibleCount: number;
   searchString = '';
+  elementId: string;
 
   private matchQuery = '';
 
@@ -87,6 +88,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
+    this.elementId = Math.random().toString();
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
