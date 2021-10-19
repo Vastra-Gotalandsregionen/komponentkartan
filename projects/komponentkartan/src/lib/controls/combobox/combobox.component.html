@@ -3,7 +3,7 @@
     'validation-error--editing': errorEditing,
     'combobox--small': small, 'combobox--large': !small }" [ngStyle]="{ 'width': width }">
   <div class="validation" [ngClass]="{ 'readonly': readonly }">
-    <div #combobox class="combobox__control" 
+    <div #combobox class="combobox__control"
       [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly" role="combobox" id="combobox" aria-owns="listbox" aria-haspopup="listbox" [attr.aria-expanded]="expanded && !readonly && !disabled"
       [ngClass]="{ 'combobox--small': small, 'combobox--readonly': readonly, 'combobox--disabled': disabled && !readonly, 'combobox--expanded': expanded, 'combobox--focus': hasFocus }"
       (focusin)="onFocus()" (focusout)="onBlur($event)">
@@ -13,15 +13,17 @@
           *ngIf="!readonly"
           #textInput
           type="text"
-          (keydown)="onKeydown($event)" 
+          (keydown)="onKeydown($event)"
           [(ngModel)]="searchString"
-          (ngModelChange)="filterItems()" 
-          [disabled]="disabled"          
-          [placeholder]="placeholder"     
-          aria-autocomplete="both"   
+          (ngModelChange)="filterItems()"
+          [disabled]="disabled"
+          [placeholder]="placeholder"
+          aria-autocomplete="both"
           aria-controls="listbox"
           [attr.aria-activedescendant]="highlightedItemIndex"
           [attr.aria-labelledby]="combinedLabelIds"
+          [attr.aria-invalid]="errorActive"
+          [attr.aria-describedby]="elementId"
           class="combobox__header__input"
           [ngClass]="{ 'combobox--disabled': disabled && !readonly, 'combobox--readonly': readonly, 'combobox--small': small }">
         <div *ngIf="showButton" class="combobox__header__button" role="button" tabindex="-1" (click)="expandListbox()" >
@@ -43,7 +45,7 @@
         <div class="combobox__menu__dimmer combobox__menu__dimmer-bottom"></div>
       </div>
     </div>
-    <div *ngIf="formControl" class="validation__status"
+    <div [attr.id]="elementId" *ngIf="formControl" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'"
       title="{{ errorMessage | errorMessage: formControl?.errors : true  }}">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
       <div class="validation__status__message">
