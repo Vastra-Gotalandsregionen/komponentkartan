@@ -59,6 +59,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   private actualMaxDate: Date;
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
+  elementId: string;
 
   @HostListener('window:resize', [])
   onWindowResize() {
@@ -92,6 +93,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() public formControl: NgControl) {
+    this.elementId = Math.random().toString();
     this.setMinZoomLevel();
 
     if (this.formControl != null) {
