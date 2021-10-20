@@ -136,4 +136,13 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
     this.inputElement.nativeElement.focus();
   }
 
+  getLabelFromId() {
+    // return window.document.getElementById(this.idForLabel)
+    let labels = document.getElementsByTagName('label');
+    for( var i = 0; i < labels.length; i++ ) {
+      if (labels[i].htmlFor == this.idForLabel)
+           return labels[i];
+   }
+  }
+
 }

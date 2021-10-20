@@ -35,7 +35,7 @@
     </div>
     <div [attr.id]="elementId" class="validation__status" *ngIf="errorActive" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div class="validation__status__message" *ngIf="control">{{errorMessage | errorMessage: control.errors : false}}</div>
+      <div class="validation__status__message" *ngIf="control">{{errorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
       <div class="validation__status__message" *ngIf="!control">{{errorMessage}}</div>
     </div>
   </div>

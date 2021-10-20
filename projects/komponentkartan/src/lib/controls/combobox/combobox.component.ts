@@ -538,4 +538,13 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       }
     }
   }
+
+  getLabelFromId() {
+    // return window.document.getElementById(this.idForLabel)
+    let labels = document.getElementsByTagName('label');
+    for( var i = 0; i < labels.length; i++ ) {
+      if (labels[i].htmlFor == this.labelId)
+           return labels[i];
+   }
+  }
 }
