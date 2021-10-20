@@ -130,7 +130,6 @@
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
       <div class="validation__status__message">{{parseErrorMessage}}</div>
     </div>
-    {{errorActive}} - {{parseError}}
     <div  [attr.id]="elementId" *ngIf="formControl?.errors && !parseError" class="validation__status"
       title="{{errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
