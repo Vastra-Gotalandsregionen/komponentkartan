@@ -1,20 +1,22 @@
 <div class="datepicker"
   [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
   <div class="validation">
-    <div #datepicker class="datepicker__control" role="textbox"
+    <div #datepicker class="datepicker__control"
       [ngClass]="{ 'datepicker--disabled': disabled, 'datepicker--readonly': readonly }" (keydown)="onKeydown($event)"
       (focusout)="onBlur($event)">
       <div *ngIf="!readonly" class="datepicker__header" [ngClass]="{'datepicker__header--focus': headerHasFocus}"
         (focusin)="onHeaderFocus()" (focusout)="onHeaderBlur()" (keydown)="onHeaderKeydown($event)"
         (click)="onHeaderClick()" >
-        <div #headerLabel *ngIf="!allowText" tabindex="0" role="button" aria-haspopup="grid"
-          [attr.aria-labelledby]="labelId + ' ' + headerLabelId" [attr.aria-expanded]="expanded"  [attr.aria-describedby]="elementId">
+        <!-- [attr.aria-labelledby]="labelId + ' ' + headerLabelId"-->
+        <div #headerLabel *ngIf="!allowText" tabindex="0" role="button" aria-haspopup="grid" [attr.aria-invalid]="errorActive"
+        [attr.id]="labelId" [attr.aria-expanded]="expanded"  [attr.aria-describedby]="elementId">
           <input class="datepicker__header__input"[placeholder]="noSelectedDateLabel" readonly="readonly"
-            tabindex="-1" [value]="label"  [attr.aria-invalid]="errorActive">
+            tabindex="-1" [value]="label" >
         </div>
-        <div *ngIf="allowText"  [attr.aria-describedby]="elementId">
+        <!-- [attr.aria-labelledby]="labelId" -->
+        <div *ngIf="allowText" [attr.aria-describedby]="elementId">
           <input #headerInput class="datepicker__header__input" [ngClass]="{'datepicker--transparent': transparent }" [placeholder]="inputPlaceholder" aria-haspopup="grid"
-            [attr.aria-labelledby]="labelId" [attr.aria-expanded]="expanded" [value]="label"
+          [attr.id]="labelId" [attr.aria-expanded]="expanded" [value]="label"
             (change)="parseSelectedDate($event.target.value)" [disabled]="disabled"
              [attr.aria-invalid]="errorActive">
         </div>
@@ -128,10 +130,12 @@
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
       <div class="validation__status__message">{{parseErrorMessage}}</div>
     </div>
+    {{errorActive}} - {{parseError}}
     <div  [attr.id]="elementId" *ngIf="formControl?.errors && !parseError" class="validation__status"
       title="{{errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div class="validation__status__message">{{errorMessage | errorMessage :  formControl?.errors : getLabelFromId() : true}}</div>
+      <div class="validation__status__message" *ngIf="formControl">{{errorMessage | errorMessage :  formControl?.errors : getLabelFromId() : true}}</div>
+      <div class="validation__status__message" *ngIf="!formControl">{{errorMessage + 'hopp'}}</div>
     </div>
   </div>
 </div>
