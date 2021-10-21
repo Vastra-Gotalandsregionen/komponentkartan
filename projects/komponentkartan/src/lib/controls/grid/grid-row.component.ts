@@ -78,7 +78,9 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
 
   setExpanded(expanded: boolean) {
     this.isExpanded = expanded;
+    this.expanded = expanded;
     this.expandedChanged.emit(this.isExpanded);
+
   }
 
   ngAfterContentInit() {
