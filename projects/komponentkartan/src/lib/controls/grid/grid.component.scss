@@ -106,13 +106,13 @@
     align-items: initial;
     position: relative;
 
-    &.grid-row-overflow {
-      overflow: hidden;
+    // &.grid-row-overflow {
+    //   overflow: hidden;
 
-      > * {
-        overflow: hidden;
-      }
-    }
+    //   > * {
+    //     overflow: hidden;
+    //   }
+    // }
 
     vgr-grid-content {
       padding: 10px 15px 30px 15px;
