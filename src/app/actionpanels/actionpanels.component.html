@@ -29,7 +29,8 @@
   </div>
   <div class="docs__examples ">
     <h2>HTML</h2>
-    <section [innerHTML]="exampleCodeMarkup" hljsContent=".highlight"></section>
+    <!-- <section [innerHTML]="exampleCodeMarkup" hljsContent=".highlight"></section> -->
+    <section vgrHighlightCode [innerHTML]="exampleCodeMarkup"></section>
   </div>
   <div class="docs__api">
     <table class="property-table">

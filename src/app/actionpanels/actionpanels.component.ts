@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { HighlightCodeDirective } from '../directives/highlight-code.directive';
 import { HtmlEncodeService } from '../html-encode.service';
-
 
 @Component({
   selector: 'app-action-panel',
@@ -15,17 +15,20 @@ export class ActionPanelsComponent {
   openError = false;
 
   exampleCode = `
+  <pre>
   <vgr-action-panel [showCloseButton]="true" (openChanged)="open=$event" [open]="open"
     [title]="'Ett exempel på en action panel'">
     <vgr-button>En knapp</vgr-button>
     <p>Lite text...</p>
-  </vgr-action-panel>`;
+  </vgr-action-panel>
+  </pre>`;
 
   exampleCodeMarkup;
 
   constructor(htmlEncoder: HtmlEncodeService) {
     this.exampleCodeMarkup =
       htmlEncoder.prepareHighlightedSection(this.exampleCode, 'HTML');
+
   }
 
   getActionText(open: boolean): string {
