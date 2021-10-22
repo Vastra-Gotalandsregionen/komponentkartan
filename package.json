@@ -36,7 +36,6 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "angular2-highlight-js": "^9.0.0",
     "classlist.js": "^1.1.20150312",
     "core-js": "^3.6.5",
     "highlight.js": "^11.3.1",
