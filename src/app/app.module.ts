@@ -11,7 +11,7 @@ import { KomponentkartanModule } from '../../projects/komponentkartan/src/lib/ko
 
 // Vendors
 import { AngularHighlightJsModule } from 'angular2-highlight-js';
-import hljs from 'highlight.js/lib/highlight';
+import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
