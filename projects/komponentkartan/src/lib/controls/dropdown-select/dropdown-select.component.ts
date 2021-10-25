@@ -60,6 +60,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   filterHasFocus: boolean;
   visibleCount: number;
   searchString = '';
+  elementId: string;
 
   private matchQuery = '';
 
@@ -87,6 +88,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
+    this.elementId = Math.random().toString();
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
@@ -645,5 +647,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+  }
+  
+  getLabelFromId() {
+    // return window.document.getElementById(this.idForLabel)
+    let labels = document.getElementsByTagName('label');
+    for( var i = 0; i < labels.length; i++ ) {
+      if (labels[i].htmlFor == this.labelId)
+           return labels[i];
+   }
   }
 }

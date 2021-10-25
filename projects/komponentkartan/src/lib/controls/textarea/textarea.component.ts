@@ -55,11 +55,13 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   control: AbstractControl;
   hasFocus = false;
   cancel: boolean;
+  elementId: string;
 
   validationErrorMessage = 'Obligatoriskt';
   private ngUnsubscribe = new Subject();
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private cdRef: ChangeDetectorRef) {
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private cdRef: ChangeDetectorRef, private el: ElementRef) {
+    this.elementId = Math.random().toString();
     this.width = '100%';
     this.height = '120px';
     this.placeholder = '';
@@ -133,5 +135,13 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  get errorActive() {
+    if (this.disabled || this.readonly) {
+      return false;
+    }
+    const classes = this.el.nativeElement.classList;
+    return this.showValidation && classes.contains('ng-invalid');
   }
 }

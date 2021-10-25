@@ -47,10 +47,15 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
 
   control: AbstractControl;
   hasFocus = false;
+  elementId: string;
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) { }
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) {
+    this.elementId = Math.random().toString();
+
+  }
 
   ngOnInit() {
+
     if (!this.textAlign && this.suffix) {
       this.textAlign = 'right';
     }
@@ -95,8 +100,8 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
     if (this.disabledControl || this.readonly) {
       return false;
     }
-
-    return this.showValidation;
+    const classes = this.el.nativeElement.classList;
+    return this.showValidation && classes.contains('ng-invalid');
   }
 
   propagateChange = (_: any) => {};
@@ -128,6 +133,15 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
 
   public focus() {
     this.inputElement.nativeElement.focus();
+  }
+
+  getLabelFromId() {
+    // return window.document.getElementById(this.idForLabel)
+    let labels = document.getElementsByTagName('label');
+    for( var i = 0; i < labels.length; i++ ) {
+      if (labels[i].htmlFor == this.idForLabel)
+           return labels[i];
+   }
   }
 
 }

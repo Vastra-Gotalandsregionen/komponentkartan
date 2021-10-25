@@ -51,6 +51,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   hasFocus: boolean;
   searchString = '';
   leftPosition = '0px';
+  elementId: string;
 
   get combinedLabelIds() {
     return `${this.labelId} ${this.headerLabelId}`;
@@ -82,6 +83,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
+    this.elementId = Math.random().toString();
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
@@ -535,5 +537,14 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
         });
       }
     }
+  }
+
+  getLabelFromId() {
+    // return window.document.getElementById(this.idForLabel)
+    let labels = document.getElementsByTagName('label');
+    for( var i = 0; i < labels.length; i++ ) {
+      if (labels[i].htmlFor == this.labelId)
+           return labels[i];
+   }
   }
 }

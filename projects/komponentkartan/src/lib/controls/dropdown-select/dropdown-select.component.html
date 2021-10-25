@@ -3,11 +3,11 @@
     'validation-error--editing': errorEditing,
     'dropdown--small': small, 'dropdown--large': !small }" [ngStyle]="{ 'width': width }">
   <div class="validation" [ngClass]="{ 'readonly': readonly }">
-    <div #dropdown class="dropdown-select__control" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
+    <div #dropdown class="dropdown-select__control" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly" [attr.aria-describedby]="elementId"
       [ngClass]="{ 'dropdown-select--multi': multi, 'dropdown-select--small': small, 'dropdown-select--readonly': readonly, 'dropdown-select--disabled': disabled && !readonly, 'dropdown-select--expanded': expanded, 'dropdown-select--filter-visible': filterVisible }"
       (keydown)="onKeydown($event)" (focusin)="onFocus()" (focusout)="onBlur($event)">
       <div #header class="dropdown-select__header" tabindex="0" aria-haspopup="listbox" [attr.aria-expanded]="expanded"
-        [attr.aria-labelledby]="combinedLabelIds" (click)="toggleExpanded()" (keydown)="onHeaderKeydown($event)" role="listbox" [attr.aria-disabled]="disabled">
+        [attr.aria-labelledby]="combinedLabelIds" (click)="toggleExpanded()" (keydown)="onHeaderKeydown($event)" role="listbox" [attr.aria-invalid]="errorActive" [attr.aria-disabled]="disabled">
         <div class="dropdown-select__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
         <div class="dropdown-select__header__button">
           <vgr-icon icon="chevron-down" size="sm" class="dropdown-select__header__button__icon"></vgr-icon>
@@ -38,11 +38,11 @@
         <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-bottom"></div>
       </div>
     </div>
-    <div *ngIf="formControl" class="validation__status"
-      title="{{ errorMessage | errorMessage: formControl?.errors : true  }}">
+    <div [attr.id]="elementId" *ngIf="formControl" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'"
+      title="{{ errorMessage | errorMessage: formControl?.errors : getLabelFromId() :  true  }}">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
       <div class="validation__status__message">
-        {{ errorMessage | errorMessage : formControl?.errors : true | truncate:24 }}</div>
+        {{ errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true | truncate:24 }}</div>
     </div>
   </div>
 </div>
