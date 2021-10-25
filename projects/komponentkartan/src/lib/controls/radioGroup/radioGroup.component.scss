@@ -79,9 +79,9 @@
         background-color: $control-color--disabled;
         transition: background-color 0.6s linear;
       }
-      &:before {
-        display: none;
-      }
+      // &:before {
+      //   // display: none;
+      // }
     }
     .disabled & {
       border-color: $control-color--disabled;
@@ -89,9 +89,9 @@
         background-color: $control-color--disabled;
         transition: background-color 0.6s linear;
       }
-      &:before {
-        display: none;
-      }
+      // &:before {
+      //   // display: none;
+      // }
       transition: border-color 0.6s linear;
     }
   }
@@ -116,11 +116,11 @@
     .radio-button__icon {
       border: 2px solid $gray-primary;
       &:focus {
-        outline: none;
-        box-shadow: none;
+        // outline: none;
+        // box-shadow: none;
         &:before {
-          border: none;
-          box-shadow: none;
+          box-shadow: 0 0 4px 0 $focus-color;
+          border: solid 1px $focus-color;
         }
       }
     }

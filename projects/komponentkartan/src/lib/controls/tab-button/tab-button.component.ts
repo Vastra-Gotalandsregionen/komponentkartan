@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { Guid } from '../../utils/guid';
 
 @Component({
@@ -28,7 +28,7 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   ariaPressed = false;
   initialTabId: string;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnChanges() {
     Promise.resolve(null).then(() => {

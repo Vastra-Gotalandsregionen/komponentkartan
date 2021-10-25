@@ -1,7 +1,13 @@
 <div>
-  <div #item tabindex="0" class="datepicker__calendar__body__item" role="gridcell" [attr.aria-selected]="selected" [attr.aria-disabled]="disabled" [attr.aria-label]="date | date:ariaDateFormat"
-    [ngClass]="{'datepicker__calendar__body__item--selected': selected, 'datepicker__calendar__body__item--current': current, 'datepicker__calendar__body__item--disabled': disabled}"
-    (click)="onClick()" (keydown)="onKeydown($event)" (focus)="onFocus()" (blur)="onBlur()">
+  <div #item tabindex="0" class="datepicker__calendar__body__item" role="gridcell"
+  [attr.aria-selected]="selected"
+  [attr.aria-disabled]="disabled"
+  [attr.aria-label]="date | date:ariaDateFormat"
+  [ngClass]="{'datepicker__calendar__body__item--selected': selected, 'datepicker__calendar__body__item--current': current, 'datepicker__calendar__body__item--disabled': disabled}"
+  (click)="onClick()"
+  (keydown)="onKeydown($event)"
+  (focus)="onFocus()"
+  (blur)="onBlur()">
     {{date | date:dateFormat}}
   </div>
 </div>

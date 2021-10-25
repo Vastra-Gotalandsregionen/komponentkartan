@@ -1,8 +1,11 @@
 <div class="custominput" [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': hasFocus }">
   <div class="validation" [ngClass]="{ 'readonly': readonly }">
     <div>
-      <div class="inputwrapper" [ngClass]="{
-        'alignRight': textAlign === 'right'
+      <div class="inputwrapper" role="textbox" [tabindex]="disabledControl ? 0 : -1"
+      [attr.aria-disabled]="disabledControl"
+      [ngClass]="{
+        'alignRight': textAlign === 'right',
+        'disabled_focus': disabledControl
       }">
         <div class="prefix" *ngIf="prefix">{{prefix}}</div>
         <input
@@ -29,6 +32,7 @@
         <div class="searchicon" *ngIf="type === 'search'">
           <vgr-icon icon="search"></vgr-icon>
         </div>
+        <span class="screenreader_only" aria-disabled="true">{{value}}</span>
       </div>
     </div>
     <div class="validation__status">
