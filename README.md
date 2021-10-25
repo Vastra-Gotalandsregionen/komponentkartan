@@ -37,21 +37,18 @@ Lägg till sökvägar till scss filen i angular.json filen, som är beroenden f�
 ],
 ```
 
-Ange dependency för ngx-perfect-scrollbar i package.json.
-Om du använder npm v3 så måste detta göras.
+Ange dependency för ngx-scrollbar i package.json.
+Om du använder npm v3 - v6 så måste detta göras manuellt.
 Mer förklaring:https://github.com/npm/npm/releases/tag/v3.0.0
-```
-"dependencies": {
-    "ngx-perfect-scrollbar": "^5.3.5"
-  },
-```
 
-Ifall du får ngx-perfect-scrollbar error med rxjs så lägg till rxjs-compat:
+Följande behöver installeras för att använda komponentkartan (version angular 12):
 ```
-"dependencies": {
-    "ngx-perfect-scrollbar": "^5.3.5",    
-    "rxjs-compat": "^6.2.0",
-  },
+npm uninstall @fortawesome/angular-fontawesome && npm install @fortawesome/angular-fontawesom@latest
+npm uninstall ngx-scrollbar && npm install ngx-scrollbar@latest
+npm uninstall @fortawesome/fontawesome-svg-core && npm install @fortawesome/fontawesome-svg-core@latest
+npm uninstall @fortawesome/free-regular-svg-icons && npm install @fortawesome/free-regular-svg-icons@latest
+npm uninstall @fortawesome/free-solid-svg-icons && npm install @fortawesome/free-solid-svg-icons@latest
+npm uninstall @angular/cdk && npm install @angular/cdk@latest
 ```
 
 Börja använda komponenterna t.ex.
@@ -72,7 +69,7 @@ Testerna är uppdelade i två typer, tester med Angular och tester utan Angular.
 
 ## Byggt med
 
-* [Angular 8](https://angular.io/) - Web framework
+* [Angular 12](https://angular.io/) - Web framework
 * [Typescript](https://www.typescriptlang.org/) - Javascript that scales
 * [SASS](sass-lang.com) - SASS - Syntactically Awesome Style Sheets
 * [NPM](https://www.npmjs.com/) - Dependency Management

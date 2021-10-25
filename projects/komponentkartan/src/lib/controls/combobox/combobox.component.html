@@ -31,7 +31,6 @@
       </div>
       <div *ngIf="expanded && !readonly && !disabled" class="combobox__menu" role="listbox" id="listbox" [attr.aria-labelledby]="labelId" [ngStyle]="{'left': leftPosition}" [ngClass]="{'alignRight': listAlignRight}">
         <div class="combobox__menu__dimmer combobox__menu__dimmer-top"></div>
-        <!-- <perfect-scrollbar [config]="scrollbarConfig"> -->
           <vgr-scrollbar #scrollable>
           <div class="combobox__menu__items">
             <div class="combobox__menu__items__dimmer-padding"></div>
@@ -39,7 +38,6 @@
             <div class="combobox__menu__items__dimmer-padding"></div>
           </div>
         </vgr-scrollbar>
-        <!-- </perfect-scrollbar> -->
         <div class="combobox__menu__dimmer combobox__menu__dimmer-bottom"></div>
       </div>
     </div>

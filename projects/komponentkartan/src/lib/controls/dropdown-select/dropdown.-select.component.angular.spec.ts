@@ -11,7 +11,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
 import { IconModule } from '../icon/icon.module';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
-// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { InputComponent } from '../input/input.component';
