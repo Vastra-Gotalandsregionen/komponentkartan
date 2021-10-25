@@ -18,7 +18,7 @@
         (click)="onHeaderClick()">
         <!-- Om Textboxen inte tillåter att man skriver datum -->
         <div #headerLabel *ngIf="!allowText" role="button" aria-haspopup="grid"
-        [disabled]="disabled"
+        
         [attr.aria-disabled]="disabled"
         [attr.aria-expanded]="expanded"
           [attr.aria-labelledby]="labelId + ' ' + headerLabelId"
