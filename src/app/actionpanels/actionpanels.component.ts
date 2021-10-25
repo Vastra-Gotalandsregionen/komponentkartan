@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { HighlightCodeDirective } from '../directives/highlight-code.directive';
 import { HtmlEncodeService } from '../html-encode.service';
-
-
 @Component({
   selector: 'app-action-panel',
   templateUrl: './actionpanels.component.html',
@@ -26,6 +25,7 @@ export class ActionPanelsComponent {
   constructor(htmlEncoder: HtmlEncodeService) {
     this.exampleCodeMarkup =
       htmlEncoder.prepareHighlightedSection(this.exampleCode, 'HTML');
+
   }
 
   getActionText(open: boolean): string {

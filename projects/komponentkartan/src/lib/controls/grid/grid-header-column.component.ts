@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding, ViewChild, ElementRef } from '@angular/core';
+import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 
-export enum GridSortDirection {
-  None,
-  Ascending,
-  Descending
-}
+
 @Component({
   selector: 'vgr-grid-header-column',
   templateUrl: './grid-header-column.component.html'

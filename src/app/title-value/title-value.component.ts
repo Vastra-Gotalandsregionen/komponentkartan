@@ -9,7 +9,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./title-value.component.scss']
 })
 export class TitleValueComponent implements OnInit {
-  markupExample = `<vgr-title-value-layout>
+  markupExample = `
+  <vgr-title-value-layout>
   <vgr-title-value>
     <vgr-title-value-heading [width]="1" for="bruttobelopp">Bruttobelopp</vgr-title-value-heading>
     <vgr-title-value-container [width]="1">
@@ -17,6 +18,8 @@ export class TitleValueComponent implements OnInit {
     </vgr-title-value-container>
   </vgr-title-value>
 </vgr-title-value-layout>`;
+
+markupExampleCode;
 
   notification: RowNotification = {
     icon: { name: 'exclamation-circle', color: 'success', solid: true },
@@ -29,7 +32,10 @@ export class TitleValueComponent implements OnInit {
   locked = false;
 
 
-  constructor(public htmlEncoder: HtmlEncodeService, private fb: FormBuilder) { }
+  constructor(htmlEncoder: HtmlEncodeService, private fb: FormBuilder) {
+    this.markupExampleCode =
+            htmlEncoder.prepareHighlightedSection(this.markupExample, 'HTML');
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
