@@ -1,11 +1,16 @@
 import { Component, Input, OnChanges, HostBinding } from '@angular/core';
-import { GridSortDirection } from '../grid/grid-header-column.component';
 
+export enum GridSortDirection {
+  None,
+  Ascending,
+  Descending
+}
 @Component({
   selector: 'vgr-sort-arrow',
   templateUrl: './sort-arrow.component.html',
   styleUrls: ['./sort-arrow.component.scss']
 })
+
 export class SortArrowComponent implements  OnChanges {
 
   @Input() sortDirection: GridSortDirection;
