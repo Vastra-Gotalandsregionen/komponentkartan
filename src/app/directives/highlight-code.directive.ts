@@ -1,10 +1,10 @@
-import { Directive, ElementRef } from '@angular/core';
-import hljs from 'highlight.js';
+import { AfterViewInit, Directive, ElementRef } from '@angular/core';
+declare var hljs: any;
 
 @Directive({
   selector: '[vgrHighlightCode]'
 })
-export class HighlightCodeDirective {
+export class HighlightCodeDirective implements AfterViewInit {
 
   constructor(private eltRef: ElementRef) {
   }
