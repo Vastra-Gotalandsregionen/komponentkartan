@@ -15,14 +15,10 @@ import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
-import { registerLanguage } from 'highlight.js';
 
-// hljs.registerLanguage('typescript', typescript);
-// hljs.registerLanguage('javascript', javascript);
-registerLanguage('typescript', typescript)
-registerLanguage('javascript', javascript)
-registerLanguage('xml', xml)
-// hljs.registerLanguage('xml', xml);
+hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('xml', xml);
 
 // Domain
 import { KomponentkartanApplicationComponent } from './app.component';
