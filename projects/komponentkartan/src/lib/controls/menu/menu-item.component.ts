@@ -34,7 +34,7 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
             if (this.link) {
                 this.isInternalLink ? this.router.navigate([this.link]) : this.onExternalLink();
               setTimeout(() => {
-                this.renderer.selectRootElement('#page-header-focus', true).focus();
+                this.renderer.selectRootElement('#page-content-focus', true).focus();
               }, 100);
             } else if (this.action) {
                 this.onAction(event);
