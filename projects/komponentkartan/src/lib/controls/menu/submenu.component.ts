@@ -199,7 +199,6 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         const menuItemArray = <MenuItemComponent[]>itemArray;
         const url = decodeURIComponent(event.url);
         const matches = menuItemArray.filter(m => m.link === url);
-
         if (matches.length === 1) {
             this.expandedState = true;
             // SetFocus after the animation is completed.
