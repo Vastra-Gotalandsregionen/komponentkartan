@@ -80,7 +80,7 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
     }
 
     setFocus(movingUp: boolean = false) {
-        var pageHeaderHasFocus = (document.activeElement === document.getElementById('page-header-focus'));
+        var pageHeaderHasFocus = (document.activeElement === document.getElementById('page-content-focus'));
         if (!pageHeaderHasFocus) {
             this.menuitem.nativeElement.focus();
         }
