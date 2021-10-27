@@ -138,7 +138,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
                 }
             });
 
-        this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
+        this.childSelected = !!this.elementRef.nativeElement.querySelector('.submenu--child-selected');   // The class .menu__item--selected does not exist.
     }
 
     ngAfterContentInit() {
@@ -198,14 +198,12 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         const itemArray = this.menuItems.toArray();
         const menuItemArray = <MenuItemComponent[]>itemArray;
         const url = decodeURIComponent(event.url);
-        const matches = menuItemArray.filter(m => m.link === url);
+        const matches = menuItemArray.filter(m => url.includes(m.link));
 
-        if (matches.length === 1) {
+        if (matches.length) {
             this.expandedState = true;
-            // SetFocus after the animation is completed.
             setTimeout(() => {
-                this.childSelected = this.childSelected = !!this.elementRef.nativeElement.querySelector('.menu__item--selected');
-                matches[0].setFocus();
+                this.childSelected = !!this.elementRef.nativeElement.querySelector('.submenu--child-selected'); // The class .menu__item--selected does not exist.
             }, 650);
         } else {
             this.childSelected = false;

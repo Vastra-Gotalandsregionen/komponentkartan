@@ -13,7 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Upgraded to Angular 12
 - replaced ngx-perfect-scrollbar with ngx-scrollbar (#435)
 
-# 8.4.0 (2021-10-11) Stable
+# 8.4.2 (2021-10-20) Stable
+- Fixed bugs in grid style and submenu steals focus on matching url. (#595)
+# 8.4.1 (2021-10-11) Stable
 - Fixed bug regarding components alingment in gridheader (#580)
 - Fixed datepickerDefault_size (#581)
 - Fixed bug where focusline was not visible on first row in grid with sticky header (#579)
