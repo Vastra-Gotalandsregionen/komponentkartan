@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 9.0.1-beta2
+- Fixed bug for grid-content overflow (#481)
+- Fixed bug for validations on validations in non-form elements (#598)
+- Added focus on page-content when selecting menu alternative [WCAG] (#506)
 # 9.0.1-beta1
 - Make it possible to tab to disabled components [WCAG] (#577)
 - Make it possible for screenreaders to read validation messages [WCAG] (#451)
