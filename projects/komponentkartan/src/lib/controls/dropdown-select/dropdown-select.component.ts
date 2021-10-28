@@ -82,7 +82,11 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {
     const target = event.target || event.srcElement || event.currentTarget;
+    console.log('target', target)
+    console.log('this.elementRef.nativeElement', this.elementRef.nativeElement)
+    console.log('this.expanded', this.expanded)
     if ((this.elementRef.nativeElement && !this.elementRef.nativeElement.contains(target)) && this.expanded) {
+      console.log('i if satsen')
       this.collapse();
     }
   }
@@ -648,7 +652,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
   }
-  
+
   getLabelFromId() {
     // return window.document.getElementById(this.idForLabel)
     let labels = document.getElementsByTagName('label');
