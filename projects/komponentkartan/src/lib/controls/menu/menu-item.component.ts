@@ -83,16 +83,7 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
     }
 
     setFocus(movingUp: boolean = false) {
-      // const id = document.getElementById('page-content-focus');
-      // console.log('document.activeElement', document.activeElement)
-      // if (!id) {
-      //   return;
-      // }
-      // var pageHeaderHasFocus = (document.activeElement === id);
-      // if (!pageHeaderHasFocus) {
-          this.menuitem.nativeElement.focus();
-      // }
-
+        this.menuitem.nativeElement.focus();
     }
 
     ngAfterViewInit() {

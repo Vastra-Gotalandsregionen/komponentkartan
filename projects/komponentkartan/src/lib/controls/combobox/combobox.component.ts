@@ -254,6 +254,8 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
     const focusedNode = event.relatedTarget as Node;
     if (comboboxElement.contains(focusedNode) || event.relatedTarget === null ) {
       return;
+    } else if (event.relatedTarget !== null  && (event.relatedTarget as HTMLElement).id === 'page-content-focus') { // otherwise the pagefocus will steal event and collapse
+      return;
     }
 
     this.hasFocus = false;

@@ -186,7 +186,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   onTouched() { }
 
   toggleExpanded() {
-
     if (this.readonly || this.disabled) {
       return;
     }
@@ -208,14 +207,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       this.visibleCount = this.items.filter(e => e.visible).length;
       this.updateAllCheckedStatus();
     }
-
-    // Scroll to top when filter is changed
-    // this.scrollbarRef.scrolled.subscribe(e => console.log(e));
-    // this.scrollSubscription = this.scrollbarRef.scrolled.pipe(
-    //   map((e: any) => e.target.scrollTop = 0)
-    // ).subscribe();
-    // this.scrollbarRef.scrollTo({top: 0})
-    // this.dropdown.nativeElement.querySelector('.ps').scrollTop = 0;
   }
 
   deselectItems() {
@@ -263,10 +254,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   onBlur(event: FocusEvent) {
     const dropdownElement = this.dropdown.nativeElement as HTMLElement;
     const focusedNode = event.relatedTarget as Node;
-    if (!focusedNode) {
+
+    if (!focusedNode || dropdownElement.contains(focusedNode)) {
       return;
-    }
-    if (dropdownElement.contains(focusedNode)) {
+    } else if (event.relatedTarget !== null && (event.relatedTarget as HTMLElement).id === 'page-content-focus') { // otherwise the pagefocus will steal event and collapse
       return;
     }
 
@@ -648,7 +639,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
   }
-  
+
   getLabelFromId() {
     // return window.document.getElementById(this.idForLabel)
     let labels = document.getElementsByTagName('label');
