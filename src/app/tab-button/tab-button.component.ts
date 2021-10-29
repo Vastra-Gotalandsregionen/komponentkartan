@@ -18,7 +18,6 @@ export class TabButtonComponent implements OnInit {
 
   ngOnInit() {
     this.router.navigate( ['/tab-start'],  { skipLocationChange: true });
-    // console.log('hello from app')
   }
 
   navigate(id) {
