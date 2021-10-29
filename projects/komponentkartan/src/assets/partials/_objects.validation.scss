@@ -5,7 +5,7 @@
   display: block;
 
   .ng-invalid > .validation-error--active & {
-    min-height: 71px; // för att den skall ha en fast höjd för felmeddelandet (så det inte hoppar)
+    // min-height: 71px; // för att den skall ha en fast höjd för felmeddelandet (så det inte hoppar)
 
     > div:first-of-type {
       outline: 3px solid #FF0000;
