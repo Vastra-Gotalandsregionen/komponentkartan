@@ -33,7 +33,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
   ngOnInit() {
     const parent = this.getParentNode();
     if (parent && parent.classList.contains('search-result-wrapper')) {
-      parent.onkeydown = () => this.handleKeyevents({});
+      parent.onkeydown = (event) => this.handleKeyevents(event);
     } else {
       throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
     }
@@ -60,7 +60,7 @@ export class SearchResultComponent implements OnChanges, OnInit {
     if (!this.visible) {
       return;
     }
-
+    console.log('event.key: ', event)
     this.setFocusedElement();
 
     if (['Esc', 'Escape', 'Tab'].includes(event.key)) {
