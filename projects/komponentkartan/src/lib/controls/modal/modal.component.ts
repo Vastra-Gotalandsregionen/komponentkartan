@@ -27,7 +27,9 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   private ngUnsubscribe = new Subject();
 
   // A list of elements that can recieve focus
-  focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+  focusableNodes: NodeList;
+  // document.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
   @ContentChildren(forwardRef(() => ButtonComponent), { read: ElementRef, descendants: true }) buttonComponents: QueryList<ElementRef>;
 
   constructor(
@@ -79,11 +81,13 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   initFocusableElements() {
     // Had to put this in a SetTimeout since the QuerySelector returned old objects from the last opened dialog otherwise
     setTimeout(() => {
-      const focusableNodes: NodeList = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
-      if (focusableNodes.length === 0) {
+      this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
+      // console.log('InitFocusableElements: ', this.focusableNodes)
+
+      if (this.focusableNodes.length === 0) {
         return false;
       }
-      this.focusableElements = Array.from(focusableNodes);
+      this.focusableElements = Array.from(this.focusableNodes);
 
       this.firstTabStop = this.focusableElements[0];
       this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
