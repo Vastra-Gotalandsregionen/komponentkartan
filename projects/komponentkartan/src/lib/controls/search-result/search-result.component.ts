@@ -57,10 +57,10 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   handleKeyevents(event) {
-    if (!this.visible) {
+    if (!['Esc', 'Escape', 'Enter', 'Spacebar', ' ', 'Tab', 'Up', 'Down', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
       return;
     }
-    console.log('event.key: ', event)
+
     this.setFocusedElement();
 
     if (['Esc', 'Escape', 'Tab'].includes(event.key)) {
@@ -69,7 +69,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
       this.resetScrollPosition();
     } else if (['Up', 'Down', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
       const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__items li');
-
       if (nodes.length === 0) {
         return;
       }

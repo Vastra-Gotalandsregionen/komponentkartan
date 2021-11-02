@@ -82,7 +82,6 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
     // Had to put this in a SetTimeout since the QuerySelector returned old objects from the last opened dialog otherwise
     setTimeout(() => {
       this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
-      // console.log('InitFocusableElements: ', this.focusableNodes)
 
       if (this.focusableNodes.length === 0) {
         return false;
