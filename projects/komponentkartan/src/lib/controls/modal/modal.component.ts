@@ -27,7 +27,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   private ngUnsubscribe = new Subject();
 
   // A list of elements that can recieve focus
-  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled]):not([aria-hidden]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
   focusableNodes: NodeList;
   // document.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
   @ContentChildren(forwardRef(() => ButtonComponent), { read: ElementRef, descendants: true }) buttonComponents: QueryList<ElementRef>;
@@ -137,6 +137,11 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   onOutsideClick(e: MouseEvent) {
+    // When click on non focusable item within the modal will place focus on firstTabStop
+    if (this.elementRef.nativeElement.classList.contains('vgr-modal--open')) {
+      this.firstTabStop.focus();
+    }
+
     // Is event bubbling; Ignore
     if (e.eventPhase === Event.BUBBLING_PHASE) {
       return;
@@ -145,10 +150,24 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   private handleTabPress(e: KeyboardEvent) {
+    let OnfocusableNode = false;
+
+    this.focusableNodes.forEach((node) => {
+      if (node === (document.activeElement as Node)) {
+        OnfocusableNode = true;
+        return;
+      }
+    })
+
     if (e.shiftKey) {
+      if (!OnfocusableNode) {
+        e.preventDefault();
+        // ...jump to the last focusable element
+        this.lastTabStop.focus();
+      }
       // If Shift + Tab
       // If the current element in focus is the first focusable element within the modal window...
-      if (document.activeElement === this.firstTabStop) {
+      else if (document.activeElement === this.firstTabStop) {
         e.preventDefault();
         // ...jump to the last focusable element
         this.lastTabStop.focus();
