@@ -30,9 +30,9 @@ export class GridHeaderColumnComponent {
   }
 
   public focus() {
-    if (this.sortKey) {
+    // if (this.sortKey) {
       this.gridHeaderColumn.nativeElement.focus();
-    }
+    // }
   }
 
 }
