@@ -92,18 +92,18 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
       this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
 
       // Set focus default button if one is defined
-      const defaultButtonComponent = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
-      if (defaultButtonComponent) {
-        const spanElement = defaultButtonComponent.nativeElement.children[0];
-        if (spanElement) {
-          // wait one lifecycle and set focus on the button element wrapped insde the span
-          Promise.resolve(null).then(() => {
-            spanElement.children[0].focus();
-          });
+        const defaultButtonComponent = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
+        if (defaultButtonComponent) {
+          const spanElement = defaultButtonComponent.nativeElement.children[0];
+          if (spanElement) {
+            // wait one lifecycle and set focus on the button element wrapped insde the span
+            Promise.resolve(null).then(() => {
+              spanElement.children[0].focus();
+            });
+          }
+        } else {
+          this.firstTabStop.focus();
         }
-      } else {
-        this.firstTabStop.focus();
-      }
     }, 10);
   }
 
@@ -158,18 +158,21 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
     this.outsideClick.emit(e);
   }
 
-  private handleTabPress(e: KeyboardEvent) {
-    let OnfocusableNode = false;
-
+  private checkIfOnFocusableNode(): boolean {
+    let onfocusableNode = false;
     this.focusableNodes.forEach((node) => {
       if (node === (document.activeElement as Node)) {
-        OnfocusableNode = true;
-        return;
+        onfocusableNode = true;
       }
     })
+    return onfocusableNode;
+  }
+
+  private handleTabPress(e: KeyboardEvent) {
+    let onFocusableNode = this.checkIfOnFocusableNode();
 
     if (e.shiftKey) {
-      if (!OnfocusableNode) {
+      if (!onFocusableNode) {
         e.preventDefault();
         // ...jump to the last focusable element
         this.lastTabStop.focus();
