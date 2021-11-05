@@ -15,7 +15,7 @@ export class ButtonComponent implements OnChanges {
   private wasDisabled = false;
   private activated = false;
 
-  constructor(private renderer: Renderer2) {}
+  constructor() {}
 
   ngOnChanges() {
     this.reenabled = this.wasDisabled && !this.disabled;
