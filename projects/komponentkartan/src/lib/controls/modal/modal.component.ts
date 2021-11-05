@@ -122,6 +122,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   onKeyDown(e: KeyboardEvent) {
+    // This only happens if we come from a focusable content
     switch (e.key) {
       case 'Tab':
         this.handleTabPress(e);
@@ -137,8 +138,9 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   onOutsideClick(e: MouseEvent) {
+    this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
     let onFocusableNode = this.checkIfOnFocusableNode();
-
+    
     // When click on non focusable item within the modal will place focus on firstTabStop
     if (!onFocusableNode && this.elementRef.nativeElement.classList.contains('vgr-modal--open')) {
       this.firstTabStop.focus();
@@ -148,6 +150,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
     if (e.eventPhase === Event.BUBBLING_PHASE) {
       return;
     }
+
     this.outsideClick.emit(e);
   }
 
