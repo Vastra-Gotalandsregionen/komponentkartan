@@ -3,7 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-
+# 9.0.1-beta10
+- Fixed bug for modal regarding non-tabbable elements
+- Fixed bug regarding vgr-search-result
+- Fixed bug regarding dropdowns not scrollable with mouseclick when on page-header
 # 9.0.1-beta2
 - Fixed bug for grid-content overflow (#481)
 - Fixed bug for validations on validations in non-form elements (#598)
