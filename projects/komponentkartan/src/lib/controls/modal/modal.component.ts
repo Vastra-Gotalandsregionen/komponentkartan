@@ -137,8 +137,16 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   onOutsideClick(e: MouseEvent) {
+    let OnfocusableNode = false;
+
+    this.focusableNodes.forEach((node) => {
+      if (node === (document.activeElement as Node)) {
+        OnfocusableNode = true;
+        return;
+      }
+    })
     // When click on non focusable item within the modal will place focus on firstTabStop
-    if (this.elementRef.nativeElement.classList.contains('vgr-modal--open')) {
+    if (!OnfocusableNode && this.elementRef.nativeElement.classList.contains('vgr-modal--open')) {
       this.firstTabStop.focus();
     }
 
