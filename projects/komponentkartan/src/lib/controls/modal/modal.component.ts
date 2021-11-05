@@ -137,9 +137,10 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   onOutsideClick(e: MouseEvent) {
+    let focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
     let OnfocusableNode = false;
 
-    this.focusableNodes.forEach((node) => {
+    focusableNodes.forEach((node) => {
       if (node === (document.activeElement as Node)) {
         OnfocusableNode = true;
         return;
