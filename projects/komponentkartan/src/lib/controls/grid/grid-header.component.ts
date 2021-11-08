@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 
+
 export interface GridSortChangedArgs {
   key: string;
   direction: GridSortDirection;
@@ -27,50 +28,46 @@ export class GridHeaderComponent implements AfterContentInit, OnDestroy {
 
     let currentColumn = event.target.closest('vgr-grid-header-column');
     let parent = event.target.closest('vgr-grid-header');
-    // let sortableColumns: GridHeaderColumnComponent[] = []; // = this.gridHeaderColumns.filter(columns => columns.sortKey !== undefined)
-    let sortableColumns = this.gridHeaderColumns.filter(columns => columns.sortKey !== undefined);
-    // console.log(parent.children.filter(child  => child.attributes['sortkey'] !== undefined))
-    // for(let i = 0;i < parent.children.length; i++ ){
-    //   if ( parent.children[i].attributes['sortkey'] !== undefined) {
-    //     //console.log('index: ', i , parent.children[i].attributes)
-    //     sortableColumns.push(parent.children[i])
-    //   }
-    // }
-    // let array: HTMLCollection[] = Array.from(parent.children);
-    // console.log(array.filter( (x: HTMLElement) =>  x.attributes['sortkey'] !== undefined))
-    // console.log((Array.from(parent.children)).filter(x => x.attributes['sortkey'] !== undefined))
     let index = (Array.from(parent.children).indexOf(currentColumn));
 
-    console.log('index before: ', index)
-    console.log(sortableColumns)
     switch (event.key) {
       case 'ArrowRight':
       case 'Right':
         if (index === -1) {
           // sätt till första sorterbara kolumn
             index = 0;
-
-          } else if (index === sortableColumns.length - 1) {
+            if (this.gridHeaderColumns.get(index).sortKey === undefined) {
+            index = this.nextSortableColumn(0); 
+            }
+          } else if (index === this.gridHeaderColumns.length-1) {
             // sätt till första sorterbara kolumnen
-            console.log('här är jag nu', sortableColumns)
             index = 0
+            if (this.gridHeaderColumns.get(index).sortKey === undefined) {
+              index = this.nextSortableColumn(0); 
+             }
           } else if (index => 0) {
             // sätt till nästa sorterbara kolumn (om finnes, annars första igen)
-            index++
+            index = index+1;
+            if (this.gridHeaderColumns.get( index).sortKey === undefined) {
+              index = this.nextSortableColumn(index); 
+             }
         }
-        console.log('index: ', index)
         event.preventDefault();
         this.gridHeaderColumns.get(index).focus();
-
-        //sortableColumns[index].focus();
-
         break;
       case 'ArrowLeft':
       case 'Left':
         if (index === -1) {
+          // sätt till första sorterbara kolumn
           index = 0;
-        } else if ( index > 0 || index === this.gridHeaderColumns.length - 1) {
-          index--
+          if (this.gridHeaderColumns.get(index).sortKey === undefined) {
+          index = this.previousSortableColumn(0); 
+          }
+        } else if ( index > 0 || index === this.gridHeaderColumns.length) {
+          index = index-1;
+          if (this.gridHeaderColumns.get( index).sortKey === undefined) {
+            index = this.previousSortableColumn(index); 
+           }
         } else if (index === 0) {
           index = this.gridHeaderColumns.length - 1
       }
@@ -86,6 +83,34 @@ export class GridHeaderComponent implements AfterContentInit, OnDestroy {
         this.gridHeaderColumns.get(this.gridHeaderColumns.length - 1).focus();
         break;
     }
+  }
+
+  previousSortableColumn(startIndex: number): number {
+    if (startIndex === -1) {
+      return;
+    }
+    for (let index = startIndex; index < this.gridHeaderColumns.length; index--) {
+      if (index === -1) {
+        // gå till sista
+        index = this.gridHeaderColumns.length-1;
+      }
+      if (this.gridHeaderColumns.get(index).sortKey !== undefined) {
+      return index;
+      }
+    }
+    return startIndex;
+
+  }
+  nextSortableColumn(startIndex: number): number {
+    if (startIndex === -1) {
+      return;
+    }
+    for (let index = startIndex; index < this.gridHeaderColumns.length; index++) {
+      if (this.gridHeaderColumns.get(index).sortKey !== undefined) {
+      return index;
+      }
+    }
+    return startIndex;
   }
 
   constructor(public el: ElementRef) { }
@@ -107,3 +132,5 @@ export class GridHeaderComponent implements AfterContentInit, OnDestroy {
   }
 
 }
+
+

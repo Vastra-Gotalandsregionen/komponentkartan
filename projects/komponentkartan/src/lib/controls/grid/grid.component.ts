@@ -43,17 +43,13 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 // grid-header
     if (event.target.classList.contains('grid-header')) {
       const columns = this.gridHeader.gridHeaderColumns;
-
+      let sortableColumns = columns.filter(column => column.sortKey !== undefined);
       if (event.key === 'Tab') {
             event.preventDefault();
             this.setFocusOnRow(0);
       } else if (event.key === 'ArrowRight') {
         // hämta första fokuserbara elementet (om det finns)
-        // console.log('arrow-right')
-        // console.log(columns.get(0).sortKey)
-        let sortableColumns = columns.filter(column => column.sortKey !== undefined);
-        // console.log('arrow-right', sortableColumns, sortableColumns[0])
-        if (sortableColumns) {
+        if (sortableColumns && sortableColumns.length > 0) {
           sortableColumns[0].focus();
         }
         //columns.get(0).focus();
