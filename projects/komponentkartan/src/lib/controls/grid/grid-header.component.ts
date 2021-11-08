@@ -27,19 +27,42 @@ export class GridHeaderComponent implements AfterContentInit, OnDestroy {
 
     let currentColumn = event.target.closest('vgr-grid-header-column');
     let parent = event.target.closest('vgr-grid-header');
-    let index = Array.from(parent.children).indexOf(currentColumn);
+    // let sortableColumns: GridHeaderColumnComponent[] = []; // = this.gridHeaderColumns.filter(columns => columns.sortKey !== undefined)
+    let sortableColumns = this.gridHeaderColumns.filter(columns => columns.sortKey !== undefined);
+    // console.log(parent.children.filter(child  => child.attributes['sortkey'] !== undefined))
+    // for(let i = 0;i < parent.children.length; i++ ){
+    //   if ( parent.children[i].attributes['sortkey'] !== undefined) {
+    //     //console.log('index: ', i , parent.children[i].attributes)
+    //     sortableColumns.push(parent.children[i])
+    //   }
+    // }
+    // let array: HTMLCollection[] = Array.from(parent.children);
+    // console.log(array.filter( (x: HTMLElement) =>  x.attributes['sortkey'] !== undefined))
+    // console.log((Array.from(parent.children)).filter(x => x.attributes['sortkey'] !== undefined))
+    let index = (Array.from(parent.children).indexOf(currentColumn));
+
+    console.log('index before: ', index)
+    console.log(sortableColumns)
     switch (event.key) {
       case 'ArrowRight':
       case 'Right':
         if (index === -1) {
+          // sätt till första sorterbara kolumn
             index = 0;
-          } else if (index === this.gridHeaderColumns.length-1) {
+
+          } else if (index === sortableColumns.length - 1) {
+            // sätt till första sorterbara kolumnen
+            console.log('här är jag nu', sortableColumns)
             index = 0
           } else if (index => 0) {
+            // sätt till nästa sorterbara kolumn (om finnes, annars första igen)
             index++
         }
+        console.log('index: ', index)
         event.preventDefault();
         this.gridHeaderColumns.get(index).focus();
+
+        //sortableColumns[index].focus();
 
         break;
       case 'ArrowLeft':

@@ -30,9 +30,10 @@ export class GridHeaderColumnComponent {
   }
 
   public focus() {
-    // if (this.sortKey) {
+    console.log('fokusera på: ', this.sortKey)
+    if (this.sortKey) {
       this.gridHeaderColumn.nativeElement.focus();
-    // }
+    }
   }
 
 }
