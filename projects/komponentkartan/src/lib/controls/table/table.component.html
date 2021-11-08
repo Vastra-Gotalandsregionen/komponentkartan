@@ -2,7 +2,7 @@
   <ng-content select="vgr-table-header"></ng-content>
   <vgr-icon icon="chevron-down" size="sm" class="table-chevron" [ngClass]="{ 'expanded': expanded, 'collapsed': !expanded }" *ngIf="expandable"></vgr-icon>
 </div>
-<div class="table-content" [@toggleExpandedState]="{value: expanded,  params: { speed: animationSpeed } }">
+<div class="table-content" [@toggleExpandedState]="{value: expanded,  params: { speed: animationSpeed } }" *ngIf="expanded">
   <ng-content select="vgr-table-row"></ng-content>
   <ng-content select="vgr-table"></ng-content>
 </div>
