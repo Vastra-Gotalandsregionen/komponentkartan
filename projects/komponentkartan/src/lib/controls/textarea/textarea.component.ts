@@ -37,7 +37,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   @Input() formControlName: string;
   @Input() maxlength: number;
   @Input() value: string;
-  @Input() idForLabel: string;
+  @Input() labelId: string;
   @Input() disabled = false;
 
   @Input() @HostBinding('class.readonly') readonly?: boolean;
