@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-# 9.0.1-beta11
+# 9.0.1-beta12
 - Fixed dropdown-select validation inheritance bug (#568)
 - Fixed bugg for focus on closed elements when tabbing (#507)
 - Refactoring for labelId (changed from idForLabel in some cases) (#600) 
