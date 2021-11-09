@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit, HostListener } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContainer } from '@angular/forms';
 
 @Component({
@@ -48,6 +48,19 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   control: AbstractControl;
   hasFocus = false;
   elementId: string;
+  mouseDown: boolean;
+
+  // @HostListener('keydown', ['$event']) keydown(event: any) {
+  //   console.log('keydown')
+
+  //   this.mouseDown = false;
+  // }
+
+
+  // @HostListener('mousedown', ['$event']) mousedown(event: any) {
+  //   console.log('mousedown')
+  //   this.mouseDown = true;
+  // }
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) {
     this.elementId = Math.random().toString();
@@ -76,6 +89,10 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
         }
       }
     }
+
+    this.inputElement.nativeElement.addEventListener('mousemove', () => {this.mouseDown = true;})
+
+    this.inputElement.nativeElement.addEventListener('keydown', () => {this.mouseDown = false })
   }
 
 
@@ -101,7 +118,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
       return false;
     }
     const classes = this.el.nativeElement.classList;
-    console.log('classes: ', classes)
     return this.showValidation && classes.contains('ng-invalid');
   }
 
@@ -115,7 +131,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   registerOnTouched(fn: any): void {
     this.propagateTouch = fn;
   }
-
   onChange(event: KeyboardEvent) {
     const target = event.target as HTMLInputElement;
     this.value = target.value;
@@ -129,10 +144,14 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   }
 
   onFocus(event) {
-    this.hasFocus = true;
+    console.log(event, this.mouseDown)
+    if (!this.mouseDown) {
+      this.hasFocus = true;
+    }
   }
 
   public focus() {
+
     this.inputElement.nativeElement.focus();
   }
 
