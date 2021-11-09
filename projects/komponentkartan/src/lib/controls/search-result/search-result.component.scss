@@ -114,7 +114,7 @@
         &:last-child {
           margin-bottom: 7px;
         }
-        &:focus {
+        &:focus-visible {
           outline: $focus-outline-width solid $focus-color;
         }
       }
