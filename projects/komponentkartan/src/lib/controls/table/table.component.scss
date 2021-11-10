@@ -55,8 +55,8 @@
     }
   }
 
-  .table-header:focus,
-  .table-row:focus {
+  .table-header:focus-visible,
+  .table-row:focus-visible {
     outline: 0;
     box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
   }

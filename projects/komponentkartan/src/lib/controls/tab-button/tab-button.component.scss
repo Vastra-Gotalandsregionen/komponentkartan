@@ -41,7 +41,7 @@
         cursor: initial;
       }
       // :not(.button--disabled)
-      &:focus {
+      &:focus-visible {
         outline: $focus-outline-width solid $focus-color;
       }
     }
@@ -52,7 +52,7 @@
       }
     }
     // :not(.button--disabled)
-    &:focus {
+    &:focus-visible {
       outline: $focus-outline-width solid $focus-color;
     }
     &.button--disabled {
