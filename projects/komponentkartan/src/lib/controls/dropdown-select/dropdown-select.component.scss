@@ -264,7 +264,7 @@
               letter-spacing: $font-size--small-letter-spacing-bold;
             }
 
-            &.dropdown-item--focus {
+            &.dropdown-item--focus:focus-visible {
               outline: $focus-outline-width solid $focus-color;
             }
 
