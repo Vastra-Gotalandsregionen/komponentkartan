@@ -50,18 +50,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   elementId: string;
   mouseDown: boolean;
 
-  // @HostListener('keydown', ['$event']) keydown(event: any) {
-  //   console.log('keydown')
-
-  //   this.mouseDown = false;
-  // }
-
-
-  // @HostListener('mousedown', ['$event']) mousedown(event: any) {
-  //   console.log('mousedown')
-  //   this.mouseDown = true;
-  // }
-
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) {
     this.elementId = Math.random().toString();
 
@@ -89,10 +77,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
         }
       }
     }
-
-    this.inputElement.nativeElement.addEventListener('mousemove', () => {this.mouseDown = true;})
-
-    this.inputElement.nativeElement.addEventListener('keydown', () => {this.mouseDown = false })
   }
 
 
@@ -143,20 +127,28 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
     this.blur.emit(event);
   }
 
+  onClickFocus(event) {
+    this.mouseDown = true;
+    this.hasFocus = false;
+  }
+
   onFocus(event) {
-    console.log(event, this.mouseDown)
-    if (!this.mouseDown) {
-      this.hasFocus = true;
+    if (this.mouseDown) {
+      //reset mouseDown event (it will be set again on click)
+      this.mouseDown = false;
+      return;
     }
+
+      this.hasFocus = true
+      //reset mouseDown event (it will be set again on click)
+      this.mouseDown = false;
   }
 
   public focus() {
-
     this.inputElement.nativeElement.focus();
   }
 
   getLabelFromId() {
-    // return window.document.getElementById(this.idForLabel)
     let labels = document.getElementsByTagName('label');
     for( var i = 0; i < labels.length; i++ ) {
       if (labels[i].htmlFor == this.labelId)

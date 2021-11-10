@@ -2,8 +2,6 @@
 @import "../../../assets/partials/_settings.fonts.scss";
 @import "../../../assets/partials/_settings.sizes.scss";
 
-:host::ng-deep {
-
 .inputwrapper {
   border: 1px solid #151515;
   display: flex;
@@ -11,18 +9,6 @@
   overflow: hidden;
   width: 100%;
   background: white;
-  &:focus-within:not(:focus) {
-    outline: $focus-outline-width solid $focus-color!important;
-  }
-
-  // &:focus-visible {
-  //   outline: $focus-outline-width solid $focus-color
-  // }
-
-
-
-
-
 
   input {
     flex-grow: 1;
@@ -34,20 +20,6 @@
     &[type="search"] {
       padding-right: 0px;
     }
-
-
-
-    // :focus-visible {
-
-    //   .validation-error--editing & {
-    //     .inputwrapper {
-    //         outline: $focus-outline-width solid $focus-color!important;
-    //     }
-    //   }
-    // }
-    // :focus & {
-    //   outline: $focus-outline-width solid $focus-color!important;
-    // }
   }
   input::placeholder {
     color: $gray-dark;
@@ -74,16 +46,10 @@
       text-align: right;
     }
   }
-
-  // .focusable_div {
-  //   height: 28px;
-  //   line-height: 28px;
-  // }
   .searchicon {
     padding: 0 5px;
     line-height: 30px;
   }
-}
 }
 
 .screenreader_only {
@@ -97,11 +63,11 @@
     outline: $focus-outline-width solid $focus-color!important;
 }
 
-// .validation-error--editing {
-//   .inputwrapper {
-//       outline: $focus-outline-width solid $focus-color!important;
-//   }
-// }
+.validation-error--editing {
+  .inputwrapper {
+      outline: $focus-outline-width solid $focus-color!important;
+  }
+}
 .validation.readonly {
   .inputwrapper {
     outline: none;
