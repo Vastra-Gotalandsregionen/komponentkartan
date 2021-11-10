@@ -13,7 +13,7 @@
   vertical-align: top;
   text-align: center;
   cursor: pointer;
-  &:focus {
+  &:focus-visible {
     box-shadow: none;
     outline: $focus-outline-width solid $focus-color;
   }
