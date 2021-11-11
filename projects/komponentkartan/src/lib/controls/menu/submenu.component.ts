@@ -1,4 +1,4 @@
-import { Input, Component, ElementRef, HostBinding, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, OnInit, ViewChild, OnDestroy, Renderer2 } from '@angular/core';
+import { Input, Component, ElementRef, HostBinding, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, OnInit, ViewChild, OnDestroy, Renderer2, EventEmitter, Output } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MenuItemBaseDirective } from './menu-item-base';
 import { trigger, style, transition, animate, state } from '@angular/animations';
@@ -36,6 +36,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
     @HostBinding('attr.aria-haspopup') hasAriaPopup = 'menu';
     @HostBinding('attr.role') role = 'menuitem';
     @Input() @HostBinding('attr.aria-expanded') expanded = false;
+    @Output() ToggleChanged: EventEmitter<any> = new EventEmitter();
 
     @ContentChildren(MenuItemBaseDirective) menuItems: QueryList<MenuItemComponent>;
     @HostBinding('class.submenu') hasClass = true;
@@ -85,6 +86,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         }
     }
 
+
     get expandedState() {
         this.state = this.expanded ? 'expanded' : 'collapsed';
         return this._showExpanded;
@@ -103,6 +105,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
     toggleExpand() {
         this._showExpanded = true;
         this.expanded = !this.expanded;
+        this.ToggleChanged.emit();
     }
 
     constructor(private router: Router, private elementRef: ElementRef, private renderer: Renderer2) {

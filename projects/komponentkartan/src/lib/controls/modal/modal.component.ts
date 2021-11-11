@@ -27,7 +27,9 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   private ngUnsubscribe = new Subject();
 
   // A list of elements that can recieve focus
-  focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled]):not([aria-hidden]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+  focusableNodes: NodeList;
+  // document.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
   @ContentChildren(forwardRef(() => ButtonComponent), { read: ElementRef, descendants: true }) buttonComponents: QueryList<ElementRef>;
 
   constructor(
@@ -79,28 +81,29 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   initFocusableElements() {
     // Had to put this in a SetTimeout since the QuerySelector returned old objects from the last opened dialog otherwise
     setTimeout(() => {
-      const focusableNodes: NodeList = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
-      if (focusableNodes.length === 0) {
+      this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
+
+      if (this.focusableNodes.length === 0) {
         return false;
       }
-      this.focusableElements = Array.from(focusableNodes);
+      this.focusableElements = Array.from(this.focusableNodes);
 
       this.firstTabStop = this.focusableElements[0];
       this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
 
       // Set focus default button if one is defined
-      const defaultButtonComponent = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
-      if (defaultButtonComponent) {
-        const spanElement = defaultButtonComponent.nativeElement.children[0];
-        if (spanElement) {
-          // wait one lifecycle and set focus on the button element wrapped insde the span
-          Promise.resolve(null).then(() => {
-            spanElement.children[0].focus();
-          });
+        const defaultButtonComponent = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
+        if (defaultButtonComponent) {
+          const spanElement = defaultButtonComponent.nativeElement.children[0];
+          if (spanElement) {
+            // wait one lifecycle and set focus on the button element wrapped insde the span
+            Promise.resolve(null).then(() => {
+              spanElement.children[0].focus();
+            });
+          }
+        } else {
+          this.firstTabStop.focus();
         }
-      } else {
-        this.firstTabStop.focus();
-      }
     }, 10);
   }
 
@@ -119,6 +122,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   onKeyDown(e: KeyboardEvent) {
+    // This only happens if we come from a focusable content
     switch (e.key) {
       case 'Tab':
         this.handleTabPress(e);
@@ -134,18 +138,44 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   onOutsideClick(e: MouseEvent) {
+    this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
+    let onFocusableNode = this.checkIfOnFocusableNode();
+    
+    // When click on non focusable item within the modal will place focus on firstTabStop
+    if (!onFocusableNode && this.elementRef.nativeElement.classList.contains('vgr-modal--open')) {
+      this.firstTabStop.focus();
+    }
+
     // Is event bubbling; Ignore
     if (e.eventPhase === Event.BUBBLING_PHASE) {
       return;
     }
+
     this.outsideClick.emit(e);
   }
 
+  private checkIfOnFocusableNode(): boolean {
+    let onfocusableNode = false;
+    this.focusableNodes.forEach((node) => {
+      if (node === (document.activeElement as Node)) {
+        onfocusableNode = true;
+      }
+    })
+    return onfocusableNode;
+  }
+
   private handleTabPress(e: KeyboardEvent) {
+    let onFocusableNode = this.checkIfOnFocusableNode();
+
     if (e.shiftKey) {
+      if (!onFocusableNode) {
+        e.preventDefault();
+        // ...jump to the last focusable element
+        this.lastTabStop.focus();
+      }
       // If Shift + Tab
       // If the current element in focus is the first focusable element within the modal window...
-      if (document.activeElement === this.firstTabStop) {
+      else if (document.activeElement === this.firstTabStop) {
         e.preventDefault();
         // ...jump to the last focusable element
         this.lastTabStop.focus();

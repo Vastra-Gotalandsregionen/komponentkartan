@@ -3,6 +3,28 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+# 9.0.1-beta12
+- Fixed dropdown-select validation inheritance bug (#568)
+- Fixed bugg for focus on closed elements when tabbing (#507)
+- Refactoring for labelId (changed from idForLabel in some cases) (#600) 
+# 9.0.1-beta11
+- Fixed bug for modal regarding non-tabbable elements
+- Fixed bug regarding vgr-search-result
+- Fixed bug regarding dropdowns not scrollable with mouseclick when on page-header
+# 9.0.1-beta2
+- Fixed bug for grid-content overflow (#481)
+- Fixed bug for validations on validations in non-form elements (#598)
+- Added focus on page-content when selecting menu alternative [WCAG] (#506)
+# 9.0.1-beta1
+- Make it possible to tab to disabled components [WCAG] (#577)
+- Make it possible for screenreaders to read validation messages [WCAG] (#451)
+- Fixed bug where you could tab to closed cardsection content (#486)
+
+# 9.0.0-beta1 
+- Upgraded to Angular 12
+- replaced ngx-perfect-scrollbar with ngx-scrollbar (#435)
+
 # 8.4.2 (2021-10-20) Stable
 - Fixed bugs in grid style and submenu steals focus on matching url. (#595)
 # 8.4.1 (2021-10-11) Stable

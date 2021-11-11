@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnChanges, ViewChild, ElementRef } from '@angular/core';
+﻿import { Component, Input, OnChanges, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { mapToClassString } from '../../utils/map-to-class-string';
 
 @Component({
@@ -15,14 +15,17 @@ export class ButtonComponent implements OnChanges {
   private wasDisabled = false;
   private activated = false;
 
+  constructor() {}
+
   ngOnChanges() {
     this.reenabled = this.wasDisabled && !this.disabled;
     this.wasDisabled = this.disabled;
   }
 
-  checkDisabled(event: MouseEvent) {
+  checkDisabled(event: Event) {
     if (this.disabled) {
       event.stopPropagation();
+      event.preventDefault();
     }
   }
 
@@ -31,11 +34,13 @@ export class ButtonComponent implements OnChanges {
   }
 
   onKeyboardActivation(e: KeyboardEvent): void {
-    if (e.key === ' ' || e.key === 'Enter') {
-      this.activated = true;
-      setTimeout(() => {
-        this.activated = false;
-      }, 500);
+    if (!this.disabled) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        this.activated = true;
+        setTimeout(() => {
+          this.activated = false;
+        }, 500);
+      }
     }
   }
 

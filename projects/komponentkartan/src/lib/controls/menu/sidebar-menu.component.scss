@@ -7,13 +7,15 @@
     position: fixed;
     z-index: $layer-three;
     top: $header-height;
-    height: calc(100vh - #{$header-height});
+  //  height: calc(100vh - #{$header-height}) !important; // #{$header-height}
     width: $nav-width--small;
     background: white;
     border-right: solid 1px $gray-primary;
-    .ps-content {
+
+    .ng-scroll-content {
       height: 100%;
     }
+
   }
 
   @media screen and (min-width: $desktop-width--medium) {
@@ -23,10 +25,3 @@
   }
 }
 
-:host::ng-deep {
-  .scroll-container {
-    .ps__thumb-y, .ps__rail-y:hover > .ps__thumb-y {
-      background-color: $gray-secondary;
-    }
-  }
-}

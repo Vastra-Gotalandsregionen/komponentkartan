@@ -7,13 +7,13 @@
     display: flex;
     flex-direction: row;
     margin: 0;
-    padding: $margin--slim/2 0;
+    padding: $margin--slim,2 0;
   }
 }
 
 :host::ng-deep {
   .panel__wrapper {
-    padding: 0 $margin--slim/2;
+    padding: 0 $margin--slim,2;
   }
   > *:first-child {
     .panel__wrapper {
@@ -81,9 +81,9 @@
       height: 170px;
     }
     .panel-container {
-      padding: $margin--fat/2 0;
+      padding: $margin--fat,2 0;
       .panel__wrapper {
-        padding: 0 $margin--fat/2;
+        padding: 0 $margin--fat,2;
       }
     }
   }

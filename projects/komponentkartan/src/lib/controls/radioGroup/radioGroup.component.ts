@@ -58,7 +58,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   }
 
   ngAfterViewInit() {
-    this.elements = this.elementRef.nativeElement.querySelectorAll(':not(.radio-button--disabled) .radio-button__icon');
+    this.elements = this.elementRef.nativeElement.querySelectorAll('.radio-button__icon');
   }
 
   public focus() {
@@ -67,7 +67,11 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
 
   optionClicked(option: RadioGroupItem<any>) {
     if (this.disabled || option.disabled) {
-      return;
+      const position = this.radiogroupItems.indexOf(option);
+      if (this.elements[position]) {
+        this.elements[position].focus();
+        return;
+      }
     }
 
     if (!option.selected) {
@@ -106,7 +110,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
     const nextItem = this.radiogroupItems[position + 1];
     const previousItem = this.radiogroupItems[position - 1];
 
-    const enabledOptions = this.radiogroupItems.filter(x => !x.disabled);
+    const enabledOptions = this.radiogroupItems;
     if (direction === 'forward') {
       if (position + 1 === enabledOptions.length) {
         if (this.elements[0]) {
@@ -136,7 +140,8 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   }
 
   checkTabFocus(index: number) {
-    return !this.radiogroupItems[index].disabled && (this.radiogroupItems[index].selected || (index === 0 && this.noSelectionFlag));
+    // return !this.radiogroupItems[index].disabled && (this.radiogroupItems[index].selected || (index === 0 && this.noSelectionFlag));
+    return this.radiogroupItems[index].selected || (index === 0 && this.noSelectionFlag);
   }
 
   writeValue(option: any): void {

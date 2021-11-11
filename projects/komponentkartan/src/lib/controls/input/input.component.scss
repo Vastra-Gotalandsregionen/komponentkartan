@@ -9,6 +9,7 @@
   overflow: hidden;
   width: 100%;
   background: white;
+
   input {
     flex-grow: 1;
     border: 0;
@@ -46,12 +47,26 @@
     }
   }
 
+  .focusable_div {
+    height: 28px;
+    line-height: 28px;
+  }
   .searchicon {
     padding: 0 5px;
     line-height: 30px;
   }
 }
 
+.screenreader_only {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}
+
+.disabled_focus:focus {
+    outline: $focus-outline-width solid $focus-color!important;
+}
 
 .validation-error--editing {
   .inputwrapper {

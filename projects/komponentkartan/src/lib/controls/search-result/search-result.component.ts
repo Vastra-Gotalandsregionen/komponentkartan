@@ -1,6 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
+import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, NgZone, OnChanges, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'vgr-search-result',
   templateUrl: './search-result.component.html',
@@ -18,7 +16,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
   @Input() @HostBinding('class.search-results--open') visible = false;
   @Output() visibleChange = new EventEmitter();
   @Output() itemClick = new EventEmitter();
-  scrollbarConfig: PerfectScrollbarConfig = new PerfectScrollbarConfig({ minScrollbarLength: 40 } as PerfectScrollbarConfigInterface);
   descriptionHeight: number;
 
   @HostListener('document:click', ['$event'])
@@ -27,16 +24,16 @@ export class SearchResultComponent implements OnChanges, OnInit {
     if ((this.elementRef.nativeElement.parentNode && !this.elementRef.nativeElement.parentNode.contains(target)) && this.visible) {
       this.visible = false;
       this.visibleChange.emit(this.visible);
-      this.resetScrollPosition();
     }
   }
 
   constructor(private elementRef: ElementRef) { }
 
+
   ngOnInit() {
     const parent = this.getParentNode();
     if (parent && parent.classList.contains('search-result-wrapper')) {
-      parent.onkeydown = () => this.handleKeyevents(event);
+      parent.onkeydown = (event) => this.handleKeyevents(event);
     } else {
       throw new Error('Du har glömt att lägga din search-result komponent i en wrapper');
     }
@@ -56,13 +53,11 @@ export class SearchResultComponent implements OnChanges, OnInit {
   }
 
   resetScrollPosition() {
-    const psNode = this.elementRef.nativeElement.querySelector('div.ps');
-    psNode.scrollTop = 0;
     this.focusItem = -1;
   }
 
   handleKeyevents(event) {
-    if (!this.visible) {
+    if (!['Esc', 'Escape', 'Enter', 'Spacebar', ' ', 'Tab', 'Up', 'Down', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
       return;
     }
 
@@ -74,7 +69,6 @@ export class SearchResultComponent implements OnChanges, OnInit {
       this.resetScrollPosition();
     } else if (['Up', 'Down', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
       const nodes = this.elementRef.nativeElement.querySelectorAll('.search-results__items li');
-
       if (nodes.length === 0) {
         return;
       }
@@ -126,17 +120,12 @@ export class SearchResultComponent implements OnChanges, OnInit {
     return this.elementRef.nativeElement.parentNode;
   }
 
-  getHeight() {
-    // 264px Is the size of the viewport that's available.
-    return 264 + this.descriptionHeight;
-  }
-
   filterItems() {
     this.displayItems = this.items.slice(0, this.maxItems);
   }
 
   onItemClick(item) {
-    this.itemClick.emit(item);
+      this.itemClick.emit(item);
   }
 
 }

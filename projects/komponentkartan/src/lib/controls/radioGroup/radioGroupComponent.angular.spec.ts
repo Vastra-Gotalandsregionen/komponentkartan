@@ -187,6 +187,8 @@ describe('RadioGroupComponent', () => {
                 { value: 'CB', displayName: 'Caroline Bornsjö' } as SelectableItem<any>,
             ] as SelectableItem<any>[];
             fixture.detectChanges();
+            component.ngAfterViewInit();
+            fixture.detectChanges();
         });
         it('options are displayed', () => {
             const visibleOptions = rootElement.queryAll(By.css('.radio-button'));

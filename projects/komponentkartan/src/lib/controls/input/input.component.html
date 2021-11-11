@@ -1,12 +1,15 @@
 <div class="custominput" [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': hasFocus }">
   <div class="validation" [ngClass]="{ 'readonly': readonly }">
     <div>
-      <div class="inputwrapper" [ngClass]="{
-        'alignRight': textAlign === 'right'
+      <div class="inputwrapper" role="textbox" [tabindex]="disabledControl ? 0 : -1"
+      [attr.aria-disabled]="disabledControl"
+      [ngClass]="{
+        'alignRight': textAlign === 'right',
+        'disabled_focus': disabledControl
       }">
         <div class="prefix" *ngIf="prefix">{{prefix}}</div>
         <input
-          [attr.id]="idForLabel"
+          [attr.id]="labelId"
           [type]="type"
           [attr.min]="min"
           [attr.max]="max"
@@ -24,16 +27,19 @@
           (input)="onChange($event)"
           (focus)="onFocus($event)"
           (blur)="onBlur($event)"
-          #inputElement>
+          #inputElement
+          [attr.aria-describedby]="elementId"
+          [attr.aria-invalid]="errorActive">
         <div class="suffix" *ngIf="suffix">{{suffix}}</div>
         <div class="searchicon" *ngIf="type === 'search'">
           <vgr-icon icon="search"></vgr-icon>
         </div>
+        <span class="screenreader_only" aria-disabled="true">{{value}}</span>
       </div>
     </div>
-    <div class="validation__status">
+    <div [attr.id]="elementId" class="validation__status" *ngIf="errorActive" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div class="validation__status__message" *ngIf="control">{{errorMessage | errorMessage: control.errors : false}}</div>
+      <div class="validation__status__message" *ngIf="control">{{errorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
       <div class="validation__status__message" *ngIf="!control">{{errorMessage}}</div>
     </div>
   </div>

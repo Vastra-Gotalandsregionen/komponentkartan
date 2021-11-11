@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostListener, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContainer } from '@angular/forms';
 
 @Component({
@@ -23,7 +23,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   @Input() required = false;
   @Input() step = null;
   @Input() pattern = null;
-  @Input() idForLabel: string;
+  @Input() labelId: string;
   @Input() maxlength: number;
   @Input() minlength: number;
   @Input() min: number;
@@ -40,18 +40,22 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   @Input() suffix: string = null;
   @Input() textAlign: string;
   @Input() errorMessage: any = 'Innehåller valideringsfel';
-
+// eslint-disable-next-line @angular-eslint/no-output-native
   @Output() blur = new EventEmitter<any>();
-  // @Output() focus = new EventEmitter<any>();
 
   @ViewChild('inputElement', {static: false}) inputElement: ElementRef;
 
   control: AbstractControl;
   hasFocus = false;
+  elementId: string;
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) { }
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) {
+    this.elementId = Math.random().toString();
+
+  }
 
   ngOnInit() {
+
     if (!this.textAlign && this.suffix) {
       this.textAlign = 'right';
     }
@@ -96,8 +100,8 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
     if (this.disabledControl || this.readonly) {
       return false;
     }
-
-    return this.showValidation;
+    const classes = this.el.nativeElement.classList;
+    return this.showValidation && classes.contains('ng-invalid');
   }
 
   propagateChange = (_: any) => {};
@@ -129,6 +133,15 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
 
   public focus() {
     this.inputElement.nativeElement.focus();
+  }
+
+  getLabelFromId() {
+    // return window.document.getElementById(this.idForLabel)
+    let labels = document.getElementsByTagName('label');
+    for( var i = 0; i < labels.length; i++ ) {
+      if (labels[i].htmlFor == this.labelId)
+           return labels[i];
+   }
   }
 
 }

@@ -5,7 +5,7 @@
   display: block;
 
   .ng-invalid > .validation-error--active & {
-    min-height: 71px; // för att den skall ha en fast höjd för felmeddelandet (så det inte hoppar)
+    // min-height: 71px; // för att den skall ha en fast höjd för felmeddelandet (så det inte hoppar)
 
     > div:first-of-type {
       outline: 3px solid #FF0000;
@@ -34,11 +34,20 @@
   padding-left: 5px;
   display: none;
   align-items: top;
+
   .ng-invalid > .validation-error--active & {
     margin-top: 4px;
     display: flex;
   }
   .ng-invalid > .validation-error--editing.validation-error--active & {
+    margin-top: 4px;
+    display: flex;
+  }
+  .validation-error--active & {
+    margin-top: 4px;
+    display: flex;
+  }
+  .validation-error--editing.validation-error--active & {
     margin-top: 4px;
     display: flex;
   }

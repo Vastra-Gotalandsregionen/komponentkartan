@@ -10,11 +10,12 @@ import { appRoutes } from './routes';
 import { KomponentkartanModule } from '../../projects/komponentkartan/src/lib/komponentkartan.module';
 
 // Vendors
-import { AngularHighlightJsModule } from 'angular2-highlight-js';
-import hljs from 'highlight.js/lib/highlight';
+// import { AngularHighlightJsModule } from 'angular2-highlight-js';
+import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
+
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
@@ -65,6 +66,7 @@ import { GridDocumentationComponent } from './grid-documentation/grid-documentat
 import { NotificationDocumentationComponent} from './notification-documentation/notification-documentation.component';
 import { TabButtonModule } from './tab-button/tab-button.module';
 import { ComboboxDocumentationComponent } from './combobox-documentation/combobox-documentation.component';
+import { HighlightCodeDirective } from './directives/highlight-code.directive';
 
 @NgModule({
     declarations: [
@@ -108,14 +110,15 @@ import { ComboboxDocumentationComponent } from './combobox-documentation/combobo
         ModaldialogComponent,
         GridDocumentationComponent,
         NotificationDocumentationComponent,
-        ComboboxDocumentationComponent
+        ComboboxDocumentationComponent,
+        HighlightCodeDirective
     ],
     imports: [
         KomponentkartanModule,
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        AngularHighlightJsModule,
+        // AngularHighlightJsModule,
         TabButtonModule,
         RouterModule.forRoot(appRoutes)
     ],

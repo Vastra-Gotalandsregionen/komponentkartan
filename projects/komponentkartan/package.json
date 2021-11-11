@@ -1,16 +1,17 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "8.4.2",
+  "version": "9.0.1-beta12",
   "peerDependencies": {
-    "@angular/common": "^10.2.1",
-    "@angular/core": "^10.2.1",
-    "@fortawesome/angular-fontawesome": "^0.7.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-regular-svg-icons": "^5.15.2",
-    "@fortawesome/free-solid-svg-icons": "^5.15.2"
+    "@angular/common": "^12.2.11",
+    "@angular/core": "^12.2.11",
+    "ngx-scrollbar": "^8.0.0",
+    "@angular/cdk": "^12.2.11",
+    "@fortawesome/angular-fontawesome": "^0.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4"
   },
   "dependencies": {
-    "ngx-perfect-scrollbar": "^10.1.0",
     "tslib": "^2.0.0"
   }
 }

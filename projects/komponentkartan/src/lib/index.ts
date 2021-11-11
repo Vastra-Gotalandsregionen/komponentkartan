@@ -80,14 +80,16 @@ export { GridComponent } from './controls/grid/grid.component';
 export { GridHeaderComponent } from './controls/grid/grid-header.component';
 export { GridSortChangedArgs } from './controls/grid/grid-header.component';
 export { GridHeaderColumnComponent } from './controls/grid/grid-header-column.component';
-export { GridSortDirection } from './controls/grid/grid-header-column.component';
+
 export { GridColumnComponent } from './controls/grid/grid-column.component';
 export { GridRowComponent } from './controls/grid/grid-row.component';
 export { GridContentComponent } from './controls/grid/grid-content.component';
 export { GridHeaderToolbarComponent } from './controls/grid/grid-header-toolbar.component';
 export { NotificationComponent } from './controls/notification/notification.component';
-
+export { GridSortDirection } from './controls/sort-arrow/sort-arrow.component';
 export { SortArrowComponent } from './controls/sort-arrow/sort-arrow.component';
+
+export { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
 
 
 export { Guid } from './utils/guid';

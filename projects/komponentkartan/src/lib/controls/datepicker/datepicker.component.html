@@ -2,30 +2,62 @@
   [ngClass]="{ 'validation-error--active': errorActive, 'validation-error--editing': errorEditing }">
   <div class="validation">
     <div #datepicker class="datepicker__control"
-      [ngClass]="{ 'datepicker--disabled': disabled, 'datepicker--readonly': readonly }" (keydown)="onKeydown($event)"
-      (focusout)="onBlur($event)">
-      <div *ngIf="!readonly" class="datepicker__header" [ngClass]="{'datepicker__header--focus': headerHasFocus}"
-        (focusin)="onHeaderFocus()" (focusout)="onHeaderBlur()" (keydown)="onHeaderKeydown($event)"
-        (click)="onHeaderClick()">
-        <div #headerLabel *ngIf="!allowText" tabindex="0" role="button" aria-haspopup="grid"
-          [attr.aria-labelledby]="labelId + ' ' + headerLabelId" [attr.aria-expanded]="expanded">
-          <input class="datepicker__header__input"[placeholder]="noSelectedDateLabel" readonly="readonly"
-            tabindex="-1" [value]="label">
+      [ngClass]="{ 'datepicker--disabled': disabled, 'datepicker--readonly': readonly }"
+      (keydown)="onKeydown($event)"
+      (focusout)="onBlur($event)"
+      [attr.aria-disabled]="disabled"
+      [attr.aria-readonly]="readonly">
+
+       <!-- Om datepicker inte är readonly -->
+      <div *ngIf="!readonly" class="datepicker__header"
+        [ngClass]="{'datepicker__header--focus': headerHasFocus}"
+        (focusin)="onHeaderFocus()"
+        (focusout)="onHeaderBlur()"
+        (keydown)="onHeaderKeydown($event)"
+        (click)="onHeaderClick()" >
+
+        <!-- Om Textboxen inte tillåter att man skriver datum disabled || errorActive  ? -1 : 0-->
+        <div #headerLabel *ngIf="!allowText" tabindex="0" role="button"
+          aria-haspopup="grid"
+          [attr.aria-invalid]="errorActive"
+          [attr.id]="labelId"
+          [attr.aria-disabled]="disabled"
+          [attr.aria-expanded]="expanded"
+          [attr.aria-describedby]="elementId">
+          <input class="datepicker__header__input" [disabled]="disabled" [placeholder]="noSelectedDateLabel" readonly="readonly"
+          [tabindex]="-1" [value]="label" >
+          <span class="screenreader_only" aria-disabled="true">{{label}}</span>
         </div>
-        <div *ngIf="allowText">
-          <input #headerInput class="datepicker__header__input" [ngClass]="{'datepicker--transparent': transparent }" [placeholder]="inputPlaceholder" aria-haspopup="grid"
-            [attr.aria-labelledby]="labelId" [attr.aria-expanded]="expanded" [value]="label"
-            (change)="parseSelectedDate($event.target.value)" [disabled]="disabled">
+
+        <!-- Om Textboxen tillåter att man skriver datum -->
+        <div #headerInputDiv *ngIf="allowText" [attr.aria-describedby]="elementId" tabindex="0" role="textbox" [attr.aria-disabled]="disabled" >
+          <input #headerInput class="datepicker__header__input"
+            [ngClass]="{'datepicker--transparent': transparent }"
+            [placeholder]="inputPlaceholder"
+            aria-haspopup="grid"
+            [attr.id]="labelId"
+            [attr.aria-expanded]="expanded"
+            [value]="label"
+            (change)="parseSelectedDate($event.target.value)"
+            [disabled]="disabled"
+            [attr.aria-invalid]="errorActive"
+            (keydown)="onHeaderInputKeydown($event)"
+            >
+            <span class="screenreader_only" aria-disabled="true">{{label}}</span>
         </div>
         <div class="datepicker__header__button">
           <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'"></vgr-icon>
         </div>
       </div>
+       <!-- Om datepicker är readonly -->
       <div *ngIf="readonly" #readOnlyHeader class="datepicker__readonly-header" tabindex="0" aria-readonly="true">
         <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
         <span *ngIf="!selectedDate">&nbsp;</span>
       </div>
+
+       <!-- kalender grid, expanderad -->
       <div #calendar *ngIf="expanded" class="datepicker__calendar noselect" tabindex="0"
+
         (keydown)="onCalendarKeydown($event)">
         <div *ngIf="zoomedToDays">
           <div class="datepicker__calendar__header">
@@ -122,14 +154,16 @@
         </div>
       </div>
     </div>
-    <div *ngIf="parseError" class="validation__status" title="{{parseErrorMessage}}">
+    <!-- ParseError har alltid företräde till om det går fel, visar endast 1 fel åt gången -->
+    <div  [attr.id]="elementId" *ngIf="parseError" class="validation__status" title="{{parseErrorMessage}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
       <div class="validation__status__message">{{parseErrorMessage}}</div>
     </div>
-    <div *ngIf="formControl?.errors" class="validation__status"
-      title="{{errorMessage | errorMessage : formControl?.errors : true}}">
+    <div  [attr.id]="elementId" *ngIf="formControl?.errors && !parseError" class="validation__status"
+      title="{{errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div class="validation__status__message">{{errorMessage | errorMessage : formControl?.errors : true}}</div>
+      <div class="validation__status__message" *ngIf="formControl">{{errorMessage | errorMessage :  formControl?.errors : getLabelFromId() : true}}</div>
+      <div class="validation__status__message" *ngIf="!formControl">{{errorMessage + 'hopp'}}</div>
     </div>
   </div>
 </div>

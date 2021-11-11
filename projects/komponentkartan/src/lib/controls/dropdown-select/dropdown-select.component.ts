@@ -1,16 +1,16 @@
 import {
   Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
-  Input, Output, EventEmitter, Optional, SimpleChanges, Self
+  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostListener
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { PerfectScrollbarConfig, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { DropdownItemComponent } from './dropdown-item.component';
 import { ButtonComponent } from '../button/button.component';
 import { Guid } from '../../utils/guid';
 import { InputComponent } from '../input/input.component';
+import { NgScrollbar } from 'ngx-scrollbar';
 
 function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
@@ -41,12 +41,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Output() expandedChanged = new EventEmitter<boolean>();
 
   @ViewChild('dropdown', { static: true }) dropdown: ElementRef;
+  @ViewChild(NgScrollbar) scrollbarRef: NgScrollbar;
   @ViewChild('header', { static: true }) header: ElementRef;
   @ViewChild('selectAll', { static: false }) selectAll: ElementRef;
   @ViewChild('deselectButton', { static: false }) deselectButton: ButtonComponent;
   @ViewChild(InputComponent, { static: false }) filter: InputComponent;
   @ContentChildren(DropdownItemComponent) items: QueryList<DropdownItemComponent>;
 
+  scrollSubscription = Subscription.EMPTY;
   expanded = false;
   filterVisible = false;
   allSelected = false;
@@ -56,9 +58,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   hasFocus: boolean;
   filterHasFocus: boolean;
-  scrollbarConfig: PerfectScrollbarConfig;
   visibleCount: number;
   searchString = '';
+  elementId: string;
 
   private matchQuery = '';
 
@@ -77,16 +79,19 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
 
-  constructor(@Optional() @Self() public formControl: NgControl) {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: any) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    if ((this.elementRef.nativeElement && !this.elementRef.nativeElement.contains(target)) && this.expanded) {
+      this.collapse();
+    }
+  }
+
+  constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
+    this.elementId = Math.random().toString();
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
-    this.scrollbarConfig = new PerfectScrollbarConfig(
-      {
-        minScrollbarLength: 40,
-        wheelPropagation: false
-      } as PerfectScrollbarConfigInterface
-    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -143,6 +148,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     this.ngUnsubscribeItems.next();
     this.ngUnsubscribeItems.complete();
+    this.scrollSubscription.unsubscribe();
   }
 
   public focus() {
@@ -201,9 +207,6 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       this.visibleCount = this.items.filter(e => e.visible).length;
       this.updateAllCheckedStatus();
     }
-
-    // Scroll to top when filter is changed
-    this.dropdown.nativeElement.querySelector('.ps').scrollTop = 0;
   }
 
   deselectItems() {
@@ -251,7 +254,10 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   onBlur(event: FocusEvent) {
     const dropdownElement = this.dropdown.nativeElement as HTMLElement;
     const focusedNode = event.relatedTarget as Node;
-    if (dropdownElement.contains(focusedNode)) {
+
+    if (!focusedNode || dropdownElement.contains(focusedNode)) {
+      return;
+    } else if (event.relatedTarget !== null && (event.relatedTarget as HTMLElement).id === 'page-content-focus') { // otherwise the pagefocus will steal event and collapse
       return;
     }
 
@@ -438,7 +444,9 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   private expand() {
     this.expanded = true;
+
     this.expandedChanged.emit(true);
+
   }
 
   private collapse(focusHeader = true) {
@@ -630,5 +638,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+  }
+
+  getLabelFromId() {
+    // return window.document.getElementById(this.idForLabel)
+    let labels = document.getElementsByTagName('label');
+    for( var i = 0; i < labels.length; i++ ) {
+      if (labels[i].htmlFor == this.labelId)
+           return labels[i];
+   }
   }
 }

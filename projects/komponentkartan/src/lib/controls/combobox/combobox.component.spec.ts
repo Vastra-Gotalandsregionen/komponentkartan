@@ -1,15 +1,10 @@
 import { ComboboxComponent } from './combobox.component';
 
-function pickRandom(values: any[]): any {
-  const index = Math.ceil(Math.random() * values.length) - 1;
-  return values[index];
-}
-
 describe('[ComboboxComponent]', () => {
   let component: ComboboxComponent;
 
   beforeEach(() => {
-    component = new ComboboxComponent(null);
+    component = new ComboboxComponent(null, null);
   });
 
   describe('Instatiate', () => {

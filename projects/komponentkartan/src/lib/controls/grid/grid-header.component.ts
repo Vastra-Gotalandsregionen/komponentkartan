@@ -1,7 +1,8 @@
 import { Component, ContentChildren, Output, EventEmitter, QueryList, AfterContentInit, OnDestroy, Input, HostBinding } from '@angular/core';
-import { GridSortDirection, GridHeaderColumnComponent } from './grid-header-column.component';
+import { GridHeaderColumnComponent } from './grid-header-column.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 
 export interface GridSortChangedArgs {
   key: string;
