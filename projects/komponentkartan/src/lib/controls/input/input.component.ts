@@ -101,7 +101,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
       return false;
     }
     const classes = this.el.nativeElement.classList;
-    console.log('classes: ', classes)
     return this.showValidation && classes.contains('ng-invalid');
   }
 

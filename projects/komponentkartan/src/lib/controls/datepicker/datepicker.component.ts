@@ -36,6 +36,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   @ViewChild('headerLabel') headerLabel: ElementRef;
   @ViewChild('headerInput') headerInput: ElementRef;
   @ViewChild('readOnlyHeader') readOnlyHeader: ElementRef;
+  @ViewChild('headerInputDiv') headerInputDiv: ElementRef;
   @ViewChild('calendar') calendar: ElementRef;
   @ViewChildren(DatepickerItemComponent) items: QueryList<DatepickerItemComponent>;
 
@@ -210,6 +211,13 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     this.collapse(false);
   }
 
+  onHeaderInputKeydown(event: KeyboardEvent ) {
+    // to be able to move backwards-tab, otherwise we will be stuck in an endless loop going to input in div 'allowtext'
+    if (event.key === 'Tab' && event.shiftKey) {
+      this.headerInputDiv.nativeElement.focus();
+    }
+  }
+
   onKeydown(event: KeyboardEvent) {
     if (this.disabled || this.readonly) {
       return;
@@ -217,8 +225,13 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
 
     if (event.key === 'Escape' || event.key === 'Esc') {
       this.collapse();
-    } else if (event.key === 'Tab') {
-      this.collapse();
+    } else if (event.key === 'Tab' ) {
+      if (event.shiftKey) {
+        // to be able to move backwards-tab, otherwise we will be stuck in an endless loop going to input in div 'allowtext'
+        this.collapse(false);
+      } else {
+        this.collapse();
+      }
     } else if (event.key === 'Home') {
       event.preventDefault();
       this.items.first.focus();
@@ -482,6 +495,10 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   private collapse(focusHeader = true) {
+    if (this.disabled) {
+      return;
+    }
+
     this.expanded = false;
 
     if (focusHeader) {
