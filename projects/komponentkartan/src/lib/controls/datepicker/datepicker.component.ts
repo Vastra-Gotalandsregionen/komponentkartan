@@ -147,11 +147,20 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
       this.readOnlyHeader.nativeElement.focus();
     } else {
       if (this.allowText) {
-        this.headerInput.nativeElement.focus();
+        this.setFocusOnHeaderInput();
       } else {
         this.headerLabel.nativeElement.focus();
       }
     }
+  }
+
+  setFocusOnHeaderInput() {
+    if (this.disabled)  {
+      this.headerInputDiv.nativeElement.focus();
+    } else {
+      this.headerInput.nativeElement.focus();
+    }
+    
   }
 
   writeValue(value: Date) {
