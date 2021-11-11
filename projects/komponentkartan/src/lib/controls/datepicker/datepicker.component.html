@@ -3,18 +3,18 @@
   <div class="validation">
     <div #datepicker class="datepicker__control"
       [ngClass]="{ 'datepicker--disabled': disabled, 'datepicker--readonly': readonly }" (keydown)="onKeydown($event)"
-      (focusout)="onBlur($event)" [tabindex]="disabled || errorActive? 0 : -1" 
+      (focusout)="onBlur($event)" [tabindex]="disabled || errorActive? 0 : -1"
       [attr.aria-disabled]="disabled" >
       <div *ngIf="!readonly" class="datepicker__header" [ngClass]="{'datepicker__header--focus': headerHasFocus}"
         (focusin)="onHeaderFocus()" (focusout)="onHeaderBlur()" (keydown)="onHeaderKeydown($event)"
         (click)="onHeaderClick()" >
         <!-- Om Textboxen inte tillåter att man skriver datum disabled || errorActive  ? -1 : 0-->
-        <div #headerLabel *ngIf="!allowText" tabindex="0" role="button" aria-haspopup="grid" [attr.aria-invalid]="errorActive"
+        <div #headerLabel *ngIf="!allowText" [tabindex]="disabled || errorActive  ? -1 : 0" role="button" aria-haspopup="grid" [attr.aria-invalid]="errorActive"
         [attr.id]="labelId" [attr.aria-disabled]="disabled" [attr.aria-expanded]="expanded"  [attr.aria-describedby]="elementId">
           <input class="datepicker__header__input" [disabled]="disabled" [placeholder]="noSelectedDateLabel" readonly="readonly"
               [tabindex]="-1"  [value]="label" >
         </div>
-        
+
         <!-- Om Textboxen tillåter att man skriver datum -->
         <div *ngIf="allowText" [attr.aria-describedby]="elementId">
           <input #headerInput class="datepicker__header__input" [ngClass]="{'datepicker--transparent': transparent }" [placeholder]="inputPlaceholder" aria-haspopup="grid"
