@@ -23,7 +23,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   @Input() required = false;
   @Input() step = null;
   @Input() pattern = null;
-  @Input() idForLabel: string;
+  @Input() labelId: string;
   @Input() maxlength: number;
   @Input() minlength: number;
   @Input() min: number;
@@ -139,7 +139,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
     // return window.document.getElementById(this.idForLabel)
     let labels = document.getElementsByTagName('label');
     for( var i = 0; i < labels.length; i++ ) {
-      if (labels[i].htmlFor == this.idForLabel)
+      if (labels[i].htmlFor == this.labelId)
            return labels[i];
    }
   }
