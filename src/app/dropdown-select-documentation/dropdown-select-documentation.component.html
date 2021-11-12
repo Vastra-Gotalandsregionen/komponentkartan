@@ -1,7 +1,7 @@
 <app-component-docs [componentName]="'Dropdown select'">
   <div class="docs__overview">
 
-    <vgr-dropdown-select [multi]="true" [value]="vc_selected" [simpleLabel]="true">
+    <vgr-dropdown-select [multi]="true" [value]="vc_selected" [simpleLabel]="true" [disabled]="disabled">
       <vgr-dropdown-item *ngFor="let enhet of vc_namn">{{enhet}}</vgr-dropdown-item>
     </vgr-dropdown-select>
 
