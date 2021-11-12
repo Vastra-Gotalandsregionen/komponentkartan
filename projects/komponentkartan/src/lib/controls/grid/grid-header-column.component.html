@@ -1,5 +1,4 @@
-<!--[attr.tabindex]="!sortKey ? -1 : 0"-->
-<div #gridHeaderColumn [attr.class]="'grid-align--'+align" [attr.tabindex]="0" (click)="changeSort()"  (keydown.space)="changeSort()" (keydown.enter)="changeSort()">
+<div #gridHeaderColumn [attr.class]="'grid-align--'+align" [attr.tabindex]="0" (click)="changeSort()" [attr.tabindex]="!sortKey ? -1 : 0"  (keydown.space)="changeSort()" (keydown.enter)="changeSort()">
   <h2 [class.sortable]="sortKey">
     <ng-content></ng-content>
     <vgr-sort-arrow *ngIf="sortKey" [sortDirection]="sortDirection"></vgr-sort-arrow>

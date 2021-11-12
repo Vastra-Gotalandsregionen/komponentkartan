@@ -40,22 +40,10 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   @HostListener('keydown', ['$event']) keydown(event: any) {
-// grid-header
     if (event.target.classList.contains('grid-header')) {
-      const columns = this.gridHeader.gridHeaderColumns;
-      let sortableColumns = columns.filter(column => column.sortKey !== undefined);
-      if (event.key === 'Tab') {
-            event.preventDefault();
-            this.setFocusOnRow(0);
-      } else if (event.key === 'ArrowRight') {
-        // hämta första fokuserbara elementet (om det finns)
-        if (sortableColumns && sortableColumns.length > 0) {
-          sortableColumns[0].focus();
-        }
-        //columns.get(0).focus();
-
-      } else if (event.key === 'ArrowLeft') {
-        columns.get(this.gridHeader.gridHeaderColumns.length - 1).focus();
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        this.setFocusOnRow(0);
       }
     } else {
       if (!event.target.className.includes('grid-row-header-focus') || event.key === 'Tab') {
