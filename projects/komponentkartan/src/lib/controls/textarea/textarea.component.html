@@ -3,7 +3,7 @@
     <div>
     <textarea #textareaElement class="textarea-input" [ngStyle]="{'height': readonly ? scrollHeight : height}"
       [maxlength]="maxlength" [attr.id]="labelId"
-      [placeholder]="placeholder" [(ngModel)]="value" (ngModelChange)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus($event)"
+      [placeholder]="disabled ? '' : placeholder" [(ngModel)]="value" (ngModelChange)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus($event)"
       [attr.readonly]="readonly ? '' : null"
       [disabled]="disabled" [attr.aria-describedby]="elementId" [attr.aria-invalid]="errorActive"></textarea>
     </div>

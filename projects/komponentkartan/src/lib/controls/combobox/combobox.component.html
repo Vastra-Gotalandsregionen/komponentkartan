@@ -17,7 +17,7 @@
           [(ngModel)]="searchString"
           (ngModelChange)="filterItems()"
           [disabled]="disabled"
-          [placeholder]="placeholder"
+          [placeholder]="disabled ? '' : placeholder"
           aria-autocomplete="both"
           aria-controls="listbox"
           [attr.aria-activedescendant]="highlightedItemIndex"
