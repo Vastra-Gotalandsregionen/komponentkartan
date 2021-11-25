@@ -1,0 +1,35 @@
+<table class="data-input" [class.readonly-margin]="!readOnlyMode" [ngStyle]="{'height': height }">
+  <thead #tableHeaderContainer>
+    <tr>
+      <th>
+        <div class="editable-table-header">
+          <ng-content select="vgr-editable-table-header"></ng-content>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody role="table" aria-label="tabell">
+    <div style="position: relative; padding: 5px; border-bottom: 1px solid #97939f; border-left: 1px solid #97939f; border-right: 1px solid #97939f;" [ngStyle]="{'height': calculatedHeight }" *ngIf="height !== ''" >
+      <div class="editable-table__menu__dimmer editable-table__menu__dimmer-top"></div>
+      <ng-scrollbar [visibility]="'native'" [appearance]="'compact'" class="scroll-container" [autoHeightDisabled]="false">
+
+        <div *ngTemplateOutlet="rowContent"></div>
+      </ng-scrollbar>
+      <div class="editable-table__menu__dimmer editable-table__menu__dimmer-bottom"></div>
+    </div>
+
+    <div style="position: relative;" *ngIf="height === ''" >
+      <div *ngTemplateOutlet="rowContent"></div>
+    </div>
+
+    <ng-template #rowContent>
+      <tr style="display: table; width: 100%; margin-top: 10px;">
+        <th class="list-wrapper">
+            <ng-content select="vgr-editable-table-row" ></ng-content>
+          </th>
+        </tr>
+    </ng-template>
+
+
+    </tbody>
+  </table>
