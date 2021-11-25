@@ -4,7 +4,7 @@
   "peerDependencies": {
     "@angular/common": "^12.2.11",
     "@angular/core": "^12.2.11",
-    "ngx-scrollbar": "^8.0.0",
+    "ngx-scrollbar": "8.0.0",
     "@angular/cdk": "^12.2.11",
     "@fortawesome/angular-fontawesome": "^0.9.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",

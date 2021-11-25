@@ -44,11 +44,11 @@ Mer förklaring:https://github.com/npm/npm/releases/tag/v3.0.0
 Följande behöver installeras för att använda komponentkartan (version angular 12):
 ```
 npm uninstall @fortawesome/angular-fontawesome && npm install @fortawesome/angular-fontawesom@latest
-npm uninstall ngx-scrollbar && npm install ngx-scrollbar@latest
+npm uninstall ngx-scrollbar && npm install ngx-scrollbar@8.0.0
 npm uninstall @fortawesome/fontawesome-svg-core && npm install @fortawesome/fontawesome-svg-core@latest
 npm uninstall @fortawesome/free-regular-svg-icons && npm install @fortawesome/free-regular-svg-icons@latest
 npm uninstall @fortawesome/free-solid-svg-icons && npm install @fortawesome/free-solid-svg-icons@latest
-npm uninstall @angular/cdk && npm install @angular/cdk@latest
+npm uninstall @angular/cdk && npm install @angular/cdk@v12-lts
 ```
 
 Börja använda komponenterna t.ex.
