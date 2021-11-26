@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
   selector: 'vgr-editable-table-documentation',
@@ -354,12 +355,47 @@ export class EditableTableDocumentationComponent {
   redigera = true;
   redigera2 = true;
 
+  exampleCode = `
+  <vgr-editable-table [editMode]="!redigera" [height]="'500px'">
+        <vgr-editable-table-header>
+          <vgr-editable-table-header-column [width]="'100px'">Produktkod</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'350px'">Rubrik</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'70px'" [align]="'center'">Konto</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar offentlig</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar privat</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Momskomp.</vgr-editable-table-header-column>
+        </vgr-editable-table-header>
+        <vgr-editable-table-row *ngFor="let d of data">
+            <vgr-editable-table-column><div><span>61 </span><span style="font-weight: bold;">{{d.produktkod}}</span></div></vgr-editable-table-column>
+            <vgr-editable-table-column>
+              {{ d.rubrik }}
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input [readonly]="redigera" [value]="d.konto" textAlign="right" [width]="'70px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input [readonly]="redigera" [value]="d.ansvarOffentlig" textAlign="right" [width]="'100px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input [readonly]="redigera" [value]="d.ansvarPrivat" textAlign="right" [width]="'100px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-checkbox [checked]="d.momsKompensation" [disabled]="redigera" style="display: inline-block;"></vgr-checkbox>
+            </vgr-editable-table-column>
+          </vgr-editable-table-row>
+      </vgr-editable-table>`;
+
+  exampleCodeMarkup;
+
   myForm: FormGroup = new FormGroup({
     myFormArray: new FormArray([]) as FormArray,
 
   });
   myData: any;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, htmlEncoder: HtmlEncodeService) {
+    this.exampleCodeMarkup =
+      htmlEncoder.prepareHighlightedSection(this.exampleCode, 'HTML');
+
     this.myData = this.myForm.get('myFormArray') as FormArray;
     this.myData.clear;
     this.data2.forEach(data => {
