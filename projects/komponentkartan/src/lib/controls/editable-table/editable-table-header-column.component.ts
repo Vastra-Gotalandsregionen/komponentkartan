@@ -9,6 +9,7 @@ export class EditableTableHeaderColumnComponent implements OnInit {
   @HostBinding('style.textAlign') @Input() align = 'left';
   @HostBinding('style.width') @Input() width;
   @HostBinding('attr.id') id: string;
+  @HostBinding('attr.role') role = 'columnheader';
   parentId: string;
 
 

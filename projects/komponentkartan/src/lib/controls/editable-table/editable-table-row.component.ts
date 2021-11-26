@@ -1,4 +1,4 @@
-import { Component, ElementRef, QueryList, ContentChildren, AfterContentInit, Input } from '@angular/core';
+import { Component, ElementRef, QueryList, ContentChildren, AfterContentInit, Input, HostBinding } from '@angular/core';
 import { EditableTableColumnComponent } from './editable-table-column.component';
 import { EditableTableService } from './editable-table.service';
 
@@ -9,6 +9,8 @@ import { EditableTableService } from './editable-table.service';
 export class EditableTableRowComponent implements AfterContentInit {
   @ContentChildren(EditableTableColumnComponent) columns : QueryList<EditableTableColumnComponent>;
   @Input() parentId: string;
+  @HostBinding('attr.role') role = 'row';
+
   constructor(public elem: ElementRef, private editableTableService: EditableTableService) {
   }
 
