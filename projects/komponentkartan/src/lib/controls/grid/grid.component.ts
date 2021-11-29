@@ -25,7 +25,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   @Input() showLoader = false;
   @Input() ariaLabel = 'Lista';
   @Input() increaseHeaderWidth = false;
-
+  @Input() zebraLayout = false;
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
 
@@ -157,11 +157,19 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       this.setAnimationSpeed();
     });
     this.setAnimationSpeed();
+
+    this.setLayout();
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  setLayout() {
+    this.rows.forEach(row => {
+      row.zebraLayout = this.zebraLayout;
+    });
   }
 
   setAnimationSpeed() {
