@@ -95,7 +95,7 @@
       }
     }
 
-    > div:focus {
+    > div:focus-visible {
       outline: $focus-outline-width solid $focus-color;
     }
   }
@@ -128,7 +128,7 @@
   .grid-row-container {
     width: 1100px;
     .grid-row-header-focus {
-      &:focus {
+      &:focus-visible {
         outline: $focus-outline-width solid $focus-color;
         z-index: 1;
         position: relative;

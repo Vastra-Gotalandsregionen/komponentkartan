@@ -25,6 +25,7 @@
           [value]="value"
           (search)="onChange($event)"
           (input)="onChange($event)"
+          (mousedown)="onClickFocus($event)"
           (focus)="onFocus($event)"
           (blur)="onBlur($event)"
           #inputElement

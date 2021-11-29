@@ -97,7 +97,7 @@
         height: $component-height;
         padding-left: $margin--slim;
 
-        &:focus {
+        &:focus-visible {
           outline: $focus-outline-width solid $focus-color;
         }
       }
@@ -239,7 +239,7 @@
               color: $text-color--light;
             }
 
-            &:focus {
+            &:focus-visible {
               outline: 0;
               border-color: $focus-color;
               border-width: $focus-outline-width;
@@ -296,7 +296,7 @@
             background-color: $gray-primary;
           }
         }
-        &:focus {
+        &:focus-visible {
           outline: $focus-outline-width solid $focus-color;
         }
       }

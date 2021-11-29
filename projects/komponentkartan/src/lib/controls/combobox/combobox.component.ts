@@ -52,6 +52,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   searchString = '';
   leftPosition = '0px';
   elementId: string;
+  mouseDown: boolean;
 
   get combinedLabelIds() {
     return `${this.labelId} ${this.headerLabelId}`;
@@ -150,6 +151,8 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   public focus() {
+    //to make sure that combobox is not highlighted on focus
+    this.mouseDown = true;
     if (this.readonly) {
       this.readonlyLabel.nativeElement.focus();
     } else if (this.disabled) {
@@ -245,8 +248,18 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
     }
   }
 
+  onMouseDownClick() {
+    this.mouseDown = true;
+    this.hasFocus = false;
+  }
+
   onFocus() {
+    if (this.mouseDown) {
+      this.mouseDown = false;
+      return;
+    }
     this.hasFocus = true;
+    this.mouseDown = false;
   }
 
   onBlur(event: FocusEvent) {

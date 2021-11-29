@@ -6,7 +6,7 @@
     <div #combobox class="combobox__control"
       [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly" role="combobox" id="combobox" aria-owns="listbox" aria-haspopup="listbox" [attr.aria-expanded]="expanded && !readonly && !disabled"
       [ngClass]="{ 'combobox--small': small, 'combobox--readonly': readonly, 'combobox--disabled': disabled && !readonly, 'combobox--expanded': expanded, 'combobox--focus': hasFocus }"
-      (focusin)="onFocus()" (focusout)="onBlur($event)">
+      (focusin)="onFocus()" (focusout)="onBlur($event)"  (mousedown)="onMouseDownClick()">
 
       <div #header class="combobox__header" [tabindex]="(disabled ? 0 : -1)">
         <input
@@ -14,6 +14,7 @@
           #textInput
           type="text"
           (keydown)="onKeydown($event)"
+
           [(ngModel)]="searchString"
           (ngModelChange)="filterItems()"
           [disabled]="disabled"
@@ -26,7 +27,7 @@
           [attr.aria-describedby]="elementId"
           class="combobox__header__input"
           [ngClass]="{ 'combobox--disabled': disabled && !readonly, 'combobox--readonly': readonly, 'combobox--small': small }">
-        <div *ngIf="showButton" class="combobox__header__button" role="button" tabindex="-1" (click)="expandListbox()" >
+        <div *ngIf="showButton" class="combobox__header__button" role="button" tabindex="-1"   (click)="expandListbox()" >
           <vgr-icon icon="chevron-down" size="sm" class="combobox__header__button__icon" [disabled]="disabled"></vgr-icon>
         </div>
         <div *ngIf="readonly" #readonlyLabel class="combobox__header__label noselect" tabindex="0" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>

@@ -45,7 +45,7 @@
           color: themed('primaryColor');
         }
       }
-      &:focus {
+      &:focus-visible {
         outline: $focus-outline-width solid $focus-color;
       }
       &.page--active {
