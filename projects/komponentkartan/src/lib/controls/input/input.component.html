@@ -17,7 +17,7 @@
           [attr.minlength]="minlength"
           [attr.maxlength]="maxlength"
           [attr.pattern]="pattern"
-          [placeholder]="placeholder"
+          [placeholder]="disabledControl ? '' : placeholder"
           [readonly]="readonly"
           [required]="required"
           [attr.step]="step"
