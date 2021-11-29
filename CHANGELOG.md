@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 9.0.2 (2021-11-29) Stable
+- Removed placeholder text when component is disabled (#603)
 # 9.0.1 (2021-11-11) Stable
 - Fixed dropdown-select validation inheritance bug (#568)
 - Fixed bugg for focus on closed elements when tabbing (#507)
