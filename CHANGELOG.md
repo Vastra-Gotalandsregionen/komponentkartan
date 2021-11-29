@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 # 9.0.2 (2021-11-29) Stable
 - Removed placeholder text when component is disabled (#603)
-- Hide focus on mouseclick (#525) 
+- Hide focus on mouseclick (#525)
+- Updated navigation in grid (#508)
 # 9.0.1 (2021-11-11) Stable
 - Fixed dropdown-select validation inheritance bug (#568)
 - Fixed bugg for focus on closed elements when tabbing (#507)
