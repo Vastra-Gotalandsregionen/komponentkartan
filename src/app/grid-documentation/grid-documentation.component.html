@@ -157,9 +157,10 @@
         <vgr-grid-header-column [width]="20">
           <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
         </vgr-grid-header-column>
+        <!--sortKey="belopp" -->
         <vgr-grid-header-column [width]="200" sortKey="fornamn">Förnamn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="200" sortKey="efternamn">Efternamn</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="100" sortKey="belopp" [align]="'right'">Belopp</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="100" [align]="'right'">Belopp</vgr-grid-header-column>
         <vgr-grid-header-column [width]="100" sortKey="status" [align]="'center'">Status</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row *ngFor="let person of paginatedPeople">

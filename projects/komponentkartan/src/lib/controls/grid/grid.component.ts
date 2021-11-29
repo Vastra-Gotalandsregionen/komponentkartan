@@ -40,39 +40,61 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   @HostListener('keydown', ['$event']) keydown(event: any) {
-    if (!event.target.className.includes('grid-row-header-focus') || event.key === 'Tab') {
-      return;
-    }
-    const row = event.target.closest('vgr-grid-row');
-    const parent = row.closest('.grid-rows');
-    const index = Array.from(parent.children).indexOf(row);
-    if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
-      this.rows.toArray()[index].toggleExpanded();
-      event.preventDefault();
-    }
-    if (event.key === 'Home') {
-      this.setFocusOnRow(0);
-      event.preventDefault();
-    }
-    if (event.key === 'End') {
-      this.setFocusOnRow(this.rows.length - 1);
-      event.preventDefault();
-    }
-    if (event.key === 'ArrowUp' || event.key === 'Up') {
-      event.preventDefault();
-      if (index > 0) {
-        this.setFocusOnRow(index - 1);
-      } else {
-        this.setFocusOnRow(this.rows.length - 1);
-      }
-    }
-    if (event.key === 'ArrowDown' || event.key === 'Down') {
-      event.preventDefault();
-      if (index < this.rows.length - 1) {
-        this.setFocusOnRow(index + 1);
-      } else {
+    if (event.target.classList.contains('grid-header')) {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
         this.setFocusOnRow(0);
       }
+    } else {
+      if (!event.target.className.includes('grid-row-header-focus') || event.key === 'Tab') {
+
+        // Om vi står på en rad
+        const row = event.target.closest('vgr-grid-row');
+        if (row) {
+          const parent = row.closest('.grid-rows');
+          const index = Array.from(parent.children).indexOf(row);
+
+          if (index === 0 && event.key === 'Tab' && event.shiftKey) {
+            event.preventDefault();
+            let headerToFocus = event.currentTarget.getElementsByClassName('grid-header')[0];
+            headerToFocus.focus();
+          }
+        }
+
+        return;
+      }
+      const row = event.target.closest('vgr-grid-row');
+      const parent = row.closest('.grid-rows');
+      const index = Array.from(parent.children).indexOf(row);
+      if (event.key === 'Enter' || event.key === 'Spacebar' || event.key === ' ') {
+        this.rows.toArray()[index].toggleExpanded();
+        event.preventDefault();
+      }
+      if (event.key === 'Home') {
+        this.setFocusOnRow(0);
+        event.preventDefault();
+      }
+      if (event.key === 'End') {
+        this.setFocusOnRow(this.rows.length - 1);
+        event.preventDefault();
+      }
+      if (event.key === 'ArrowUp' || event.key === 'Up') {
+        event.preventDefault();
+        if (index > 0) {
+          this.setFocusOnRow(index - 1);
+        } else {
+          this.setFocusOnRow(this.rows.length - 1);
+        }
+      }
+      if (event.key === 'ArrowDown' || event.key === 'Down') {
+        event.preventDefault();
+        if (index < this.rows.length - 1) {
+          this.setFocusOnRow(index + 1);
+        } else {
+          this.setFocusOnRow(0);
+        }
+      }
+
     }
   }
 
@@ -106,6 +128,9 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
     if (this.gridHeader) {
       this.gridHeader.sortChanged
         .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: GridSortChangedArgs) => this.sortChanged.emit(args));
+
+      this.gridHeader.focusChanged
+        .pipe(takeUntil(this.ngUnsubscribe)).subscribe((index: number) => this.setFocusOnRow(index));
     }
     if (this.gridHeaderToolbar) {
       this.hasToolbar = true;
