@@ -21,6 +21,10 @@
     &::placeholder {
       color: $gray-dark;
     }
+    &:disabled {
+      background-color: $gray-dimmed;
+      border-color: $gray-primary;
+    }
   }
   &-validation {
     max-height: none;
