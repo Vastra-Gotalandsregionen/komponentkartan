@@ -147,7 +147,8 @@
   .list-wrapper {
     border-collapse: collapse;
     display: table;
-    width: 100%;
+    width: 100%; 
+    margin-top: 10px;
   }
 
   .in-editmode tr > td {
