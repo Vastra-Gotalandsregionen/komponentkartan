@@ -28,7 +28,12 @@
   .grid-rows {
   & vgr-grid-row:nth-child(even)  {
       .grid-row-header-background-zebra {
-        background: $gray-ultradimmed!important;
+        background: $gray-ultradimmed;
+        &:hover {
+          @include themify($themes) {
+            background-color: themed("primaryColorDimmed");
+          }
+        }
        }
     }
   }
