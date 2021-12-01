@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, HostBinding, OnChanges, SimpleChanges, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, OnChanges, SimpleChanges, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { GridContentComponent } from './grid-content.component';
 import { GridService } from './grid.service';
 import { toggleExpandedState } from '../../animation';
@@ -22,6 +22,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
 
   @ContentChildren(GridContentComponent) content: QueryList<GridContentComponent>;
   @ContentChildren(NotificationComponent) notifications: QueryList<NotificationComponent>;
+  zebraLayout = false;
 
   animationSpeed = '400ms';
   hasExpandablecontent = true;

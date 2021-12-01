@@ -39,8 +39,8 @@
       </vgr-grid-row>
 
     </vgr-grid>
-    <vgr-grid>
-      <vgr-grid-header>
+    <vgr-grid [zebraLayout]="true">
+      <vgr-grid-header >
         <vgr-grid-header-column [width]="5">Header 1</vgr-grid-header-column>
         <vgr-grid-header-column [width]="5">Header 2</vgr-grid-header-column>
         <vgr-grid-header-column [width]="5">Header 3</vgr-grid-header-column>
@@ -182,7 +182,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false">
+    <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false" [zebraLayout]="true">
       <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = !expanded0">
         <vgr-grid-column width="23">Grid utan rubriker och snabb animeringen</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>
