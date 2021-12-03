@@ -13,6 +13,13 @@
       <vgr-radio-group [options]="[{value:'1', displayName:'Alternativ 1', selected:true},{value:'2', displayName:'Alternativ 2'}]">
       </vgr-radio-group>
     </p>
+
+    <!--Disabled på group, overrides disabled på item vid true -->
+    <vgr-radiobutton-group (selectedChanged)="someCode()" [vertical]="true" [disabled]="false">
+      <vgr-radiobutton-item [selected]="true" [disabled]="false">Det var bra</vgr-radiobutton-item>
+      <vgr-radiobutton-item [selected]="false" [disabled]="false">Det var inte bra</vgr-radiobutton-item>
+    </vgr-radiobutton-group>
+
     <br>
     <p> Förändras med tema:
       <strong>nej</strong>

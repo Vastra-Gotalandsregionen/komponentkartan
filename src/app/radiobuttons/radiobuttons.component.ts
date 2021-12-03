@@ -25,6 +25,10 @@ export class RadiobuttonsComponent implements OnInit {
     this.selectedOption = option;
   }
 
+  someCode() {
+    console.log('someCode')
+  }
+
   rensaVal() {
     this.options.forEach(o => o.selected = false);
   }
