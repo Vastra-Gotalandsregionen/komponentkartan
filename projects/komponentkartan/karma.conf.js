@@ -10,6 +10,7 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
+      require('karma-coverage'),
       require('karma-junit-reporter'),
       require('karma-spec-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
@@ -33,14 +34,14 @@ module.exports = function (config) {
       dir: '../../TestResults/Coverage/'
     },
 
-    // preprocessors: {
-    //   // source files, that you wanna generate coverage for
-    //   // do not include tests or libraries
-    //   // (these files will be instrumented by Istanbul)
-    //   'src/**/*.js': ['coverage']
-    // },
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'src/**/*.js': ['coverage']
+    },
 
-    reporters: ['progress', 'kjhtml',  'junit'],
+    reporters: ['progress', 'kjhtml',  'junit', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_DEBUG,
