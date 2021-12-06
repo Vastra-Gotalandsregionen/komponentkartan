@@ -55,4 +55,64 @@ export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
       }
     });
   }
+
+  keyDown(event: KeyboardEvent): void {
+    const selectedItem = this.items.filter(item => item.selected === true)[0];
+
+
+    if (['Enter', 'Spacebar', ' '].includes(event.key)) {
+      const positionArray = this.items.toArray();
+      const position = positionArray.indexOf(selectedItem)
+      this.items.get(position).itemClicked();
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    if (['ArrowRight', 'Right', 'ArrowDown', 'Down'].includes(event.key)) {
+      this.setFocus(selectedItem, 'forward');
+      event.preventDefault();
+    }
+
+    if (['ArrowLeft', 'Left', 'ArrowUp', 'Up'].includes(event.key)) {
+      this.setFocus(selectedItem, 'back');
+      event.preventDefault();
+    }
+  }
+
+  setFocus(option: any, direction?: string) {
+    let positionArray = this.items.toArray();
+    let position = positionArray.indexOf(option);
+
+    const enabledOptions = this.items;
+    if (direction === 'forward') {
+      if (position + 1 === enabledOptions.length) {
+        if (this.items.get(0)) {
+          this.items.get(0).focus();
+        }
+        this.items.get(0).itemClicked();
+        // this.optionClicked(enabledOptions[0]);
+      } else {
+        if (this.items.get(position + 1)) {
+
+          this.items.get(position + 1).focus();
+        }
+        this.items.get(position + 1).itemClicked();
+        // this.optionClicked(nextItem);
+      }
+    } else if (direction === 'back') {
+      if (position === 0) {
+        if (this.items.get(this.items.length - 1)) {
+          this.items.get(this.items.length - 1).focus();
+        }
+        this.items.get(enabledOptions.length - 1).itemClicked();
+        // this.optionClicked(this.items[enabledOptions.length - 1]);
+      } else {
+        if (this.items.get(position - 1)) {
+          this.items.get(position - 1).focus();
+        }
+        this.items.get(position - 1).itemClicked();
+        // this.optionClicked(previousItem);
+      }
+    }
+  }
 }
