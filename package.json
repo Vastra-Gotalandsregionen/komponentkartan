@@ -18,7 +18,7 @@
     "publish-dev": "npm run packagr && npm publish --tag dev dist/komponentkartan/",
     "publish-stable": "npm run packagr && npm publish dist/komponentkartan/",
     "publish-local": "npm run packagr && npm pack dist/komponentkartan/",
-    "test-ci": "ng test komponentkartan --watch=false --source-map=false",
+    "test-ci": "ng test komponentkartan --watch=false --source-map=false --code-coverage",
     "test-ci-watch": "ng test komponentkartan --watch=true --source-map=false",
     "postinstall": "ngcc"
   },
