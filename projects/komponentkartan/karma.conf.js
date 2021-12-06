@@ -44,9 +44,9 @@ module.exports = function (config) {
     reporters: ['progress', 'kjhtml',  'junit', 'coverage'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_DEBUG,
+    logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadless'],
     singleRun: false
   });
 };
