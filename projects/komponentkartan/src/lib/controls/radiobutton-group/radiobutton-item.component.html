@@ -1,9 +1,7 @@
-<div style="display: inline-flex; align-items: center; margin-right: 20px;">
-  <input type="radio">
-  <div role="radio"class="radio-button__icon">
-
-  </div>
-  <span style="position: relative; top: 2px;">
+<div #item class="radio-button-container" [ngClass]="{'radio-button--checked' : selected, 'radio-button--disabled' : disabled}" (click)="itemClicked()">
+  <input type="radio" >
+  <div role="radio" class="radio-button__icon"></div>
+  <span style="position: relative; top: 2px;" class="radio-button__content">
     <ng-content></ng-content>
   </span>
 </div>
