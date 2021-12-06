@@ -38,7 +38,6 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   }
 
   checkTabFocus() {
-    console.log(this.item.nativeElement)
     return this.item;
   }
 }
