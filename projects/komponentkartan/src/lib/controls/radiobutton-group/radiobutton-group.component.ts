@@ -15,11 +15,9 @@ import { RadiobuttonItemComponent } from './radiobutton-item.component';
   }]
 })
 export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges, OnDestroy {
-
   _disabled: boolean;
   @Input() showValidation = true;
   @Input() @HostBinding('class.disabled') set disabled(val) {
-
     this._disabled = val;
     if (val !== undefined) {
       this.setGroupDisabledOverride(val);
@@ -27,6 +25,8 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
   }
   @Input() @HostBinding('class.vertical') vertical = false;
   @Input() formControlName?: string;
+  @Input() required = false;
+
   @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
   @ContentChildren(RadiobuttonItemComponent) items: QueryList<RadiobuttonItemComponent>;
 
@@ -50,11 +50,18 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
         this.unSelectItems(item);
       });
 
+
+
+
      });
 
     this.setGroupDisabledOverride(this._disabled);
 
     // Om ingen är vald, möjliggör att man kan tabba in till första enablade elementet
+    this.setFirstOptionAsTabable();
+  }
+
+  setFirstOptionAsTabable() {
     if(!this.items.some(x => x.selected)) {
       this.items.filter(x => !x.disabled)[0].isTabEnabled = true;
     }
@@ -67,6 +74,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     //     this.selectOption(preSelectedOption);
     //   }
     // }
+    console.log('changes in group')
     if (this.formControlName && this.controlContainer) {
       this.control = this.controlContainer.control.get(this.formControlName);
     }
@@ -76,9 +84,23 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     if (this.disabled) {
       return false;
     }
-    return true;
-    // const classes = this.elementRef.nativeElement.classList;
-    // return this.showValidation && classes.contains('ng-invalid');
+
+    if (this.showValidation ) {
+      if (this.required && !this.items.some(x => x.selected)) {
+        this.validationErrorMessage = 'Obligatoriskt'
+        return true;
+      } else if (this.items.filter(x => x.selected === true).length > 1) {
+        this.validationErrorMessage = 'Mer än ett val är aktivt'
+        return true;
+      } else {
+        return false;
+      }
+    } else if(this.control) {
+      const classes = this.elementRef.nativeElement.classList;
+      return classes.contains('ng-invalid');
+    } else {
+      return false;
+    }
   }
 
 
@@ -87,12 +109,14 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     this.ngUnsubscribeItems.complete();
   }
 
-  unSelectItems(itemToExclude: RadiobuttonItemComponent) {
+  unSelectItems(itemToExclude?: RadiobuttonItemComponent) {
     this.items.forEach(item => {
-      if (item !== itemToExclude) {
+      if (item !== itemToExclude || !itemToExclude) {
         item.selected = false;
       }
     });
+
+    this.setFirstOptionAsTabable();
   }
 
   disabledItems() {

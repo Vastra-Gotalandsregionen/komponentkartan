@@ -27,13 +27,13 @@
 
     <hr>
     <h2>Vertical radiogrupp </h2>
-    <vgr-radiobutton-group (selectedChanged)="someCode()" vertical="true">
+    <vgr-radiobutton-group #RadioGroup2 (selectedChanged)="someCode()" vertical="true" required="true">
       <vgr-radiobutton-item [selected]="true">Det var bra</vgr-radiobutton-item>
       <vgr-radiobutton-item [selected]="false">Det var inte bra</vgr-radiobutton-item>
       <vgr-radiobutton-item [selected]="true">Det var verkligen inte bra</vgr-radiobutton-item>
     </vgr-radiobutton-group>
-
-
+    <br>
+    <vgr-button (click)="rensaVal()">Rensa val</vgr-button>
     <p> Förändras med tema:
       <strong>nej</strong>
     </p>
