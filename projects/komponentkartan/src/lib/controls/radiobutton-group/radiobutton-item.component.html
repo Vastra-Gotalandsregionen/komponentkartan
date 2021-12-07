@@ -3,7 +3,7 @@
   [ngClass]="{'radio-button--checked' : selected, 'radio-button--disabled' : disabled}"
   (click)="itemClicked()">
   <input type="radio" >
-  <div role="radio" class="radio-button__icon" tabindex="{{checkTabFocus() ? 0 : -1}}"></div>
+  <div #radioButton role="radio" class="radio-button__icon" tabindex="{{checkTabFocus() ? 0 : -1}}"></div>
   <span style="position: relative; top: 2px;" class="radio-button__content">
     <ng-content></ng-content>
   </span>

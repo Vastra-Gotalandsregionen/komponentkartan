@@ -13,8 +13,9 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   @Output() itemDisabled = new EventEmitter();
 
   @ViewChild('item') item: ElementRef;
+  @ViewChild('radioButton') radioButton: ElementRef;
 
-  constructor() { }
+  constructor(private elementRef: ElementRef) { }
 
   ngAfterViewInit() {
     this.itemDisabled.emit();
@@ -24,7 +25,6 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   }
 
   itemClicked() {
-    console.log(this.item)
     if (this.item && !this.disabled) {
       this.selected = true;
       this.itemSelected.emit();
@@ -34,10 +34,10 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   }
 
   public focus() {
-    this.item.nativeElement.focus();
+    this.radioButton.nativeElement.focus();
   }
 
   checkTabFocus() {
-    return this.item;
+    return this.elementRef.nativeElement.querySelectorAll('.radio-button--checked').length > 0;
   }
 }
