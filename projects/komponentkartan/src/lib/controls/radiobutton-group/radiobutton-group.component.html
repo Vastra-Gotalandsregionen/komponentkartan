@@ -1,8 +1,19 @@
-<div
-  (keydown)="keyDown($event)"
-  [attr.aria-disabled]="_disabled"
-  tabindex="{{!_disabled ? -1 : 0}}"
-  role="radiogroup"
-  [ngClass]="{'vertical' : vertical}">
-  <ng-content select="vgr-radiobutton-item"></ng-content>
+<div [ngClass]="{ 'radiobutton-group-validation-error--active': errorActive}">
+  <div class="radiobutton-group-validation" >
+    <div
+      (keydown)="keyDown($event)"
+      [attr.aria-disabled]="_disabled"
+      tabindex="{{!_disabled ? -1 : 0}}"
+      role="radiogroup"
+      [ngClass]="{'vertical' : vertical}"
+      [attr.aria-invalid]="errorActive">
+      <ng-content select="vgr-radiobutton-item"></ng-content>
+    </div>
+  </div>
+  <div [attr.id]="elementId" *ngIf="errorActive" class="radiobutton-group-validation_status" [title]="validationErrorMessage" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
+    <vgr-icon icon="exclamation-circle" size="sm" class="radiobutton-group-validation_status__icon"></vgr-icon>
+    <div class="radiobutton-group-validation_status__message" *ngIf="control">{{validationErrorMessage | validationErrorMessage: control.errors : getLabelFromId() : false}}</div>
+    <div class="radiobutton-group-validation_status__message" *ngIf="!control">{{validationErrorMessage}}</div>
+
+  </div>
 </div>

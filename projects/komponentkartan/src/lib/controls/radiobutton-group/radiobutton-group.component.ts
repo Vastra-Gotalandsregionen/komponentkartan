@@ -1,4 +1,5 @@
-import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, Host, HostBinding, Input, OnChanges, OnDestroy, Optional, Output, QueryList, SkipSelf } from '@angular/core';
+import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { RadiobuttonItemComponent } from './radiobutton-item.component';
@@ -6,12 +7,17 @@ import { RadiobuttonItemComponent } from './radiobutton-item.component';
 @Component({
   selector: 'vgr-radiobutton-group',
   templateUrl: './radiobutton-group.component.html',
-  styleUrls: ['./radiobutton-group.component.scss']
+  styleUrls: ['./radiobutton-group.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => RadiobuttonItemComponent),
+    multi: true
+  }]
 })
-export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
+export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges, OnDestroy {
 
   _disabled: boolean;
-  // @Input() @HostBinding('class.disabled') disabled: boolean;
+  @Input() showValidation = true;
   @Input() @HostBinding('class.disabled') set disabled(val) {
 
     this._disabled = val;
@@ -20,13 +26,21 @@ export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
     }
   }
   @Input() @HostBinding('class.vertical') vertical = false;
+  @Input() formControlName?: string;
   @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
   @ContentChildren(RadiobuttonItemComponent) items: QueryList<RadiobuttonItemComponent>;
 
   ngUnsubscribeItems = new Subject();
 
   internalDisabled: boolean;
-  constructor(private elementRef: ElementRef) { }
+  validationErrorMessage = 'Obligatoriskt';
+  elementId: string;
+  public control: AbstractControl;
+  constructor(@Host() @SkipSelf() @Optional() private controlContainer: ControlContainer, private elementRef: ElementRef) {
+    this.elementId = Math.random().toString();
+   }
+
+
 
   ngAfterContentInit() {
     this.items.forEach(item => {
@@ -40,11 +54,33 @@ export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
 
     this.setGroupDisabledOverride(this._disabled);
 
-    // Om ingen är vald, tabba in till första enablade elementet
+    // Om ingen är vald, möjliggör att man kan tabba in till första enablade elementet
     if(!this.items.some(x => x.selected)) {
       this.items.filter(x => !x.disabled)[0].isTabEnabled = true;
     }
   }
+
+  ngOnChanges() {
+    // if (this.radiogroupItems && this.radiogroupItems.length > 0) {
+    //   const preSelectedOption = this.radiogroupItems.find(x => x.selected);
+    //   if (preSelectedOption) {
+    //     this.selectOption(preSelectedOption);
+    //   }
+    // }
+    if (this.formControlName && this.controlContainer) {
+      this.control = this.controlContainer.control.get(this.formControlName);
+    }
+  }
+
+  get errorActive() {
+    if (this.disabled) {
+      return false;
+    }
+    return true;
+    // const classes = this.elementRef.nativeElement.classList;
+    // return this.showValidation && classes.contains('ng-invalid');
+  }
+
 
   ngOnDestroy() {
     this.ngUnsubscribeItems.next();
@@ -125,4 +161,20 @@ export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
       }
     }
   }
+  onTouched() { }
+  onChange(input: RadiobuttonItemComponent) { }
+
+  writeValue(obj: any): void {
+    console.log('WriteValue: ', obj)
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
 }
