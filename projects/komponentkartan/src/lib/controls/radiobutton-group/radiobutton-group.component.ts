@@ -57,7 +57,7 @@ export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
   }
 
   keyDown(event: KeyboardEvent): void {
-    const selectedItem = this.items.filter(item => item.selected === true)[0];
+    const selectedItem = this.items.filter(item => item.radioButton.nativeElement === event.target)[0];
 
 
     if (['Enter', 'Spacebar', ' '].includes(event.key)) {
@@ -89,29 +89,21 @@ export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
         if (this.items.get(0)) {
           this.items.get(0).focus();
         }
-        this.items.get(0).itemClicked();
-        // this.optionClicked(enabledOptions[0]);
       } else {
         if (this.items.get(position + 1)) {
 
           this.items.get(position + 1).focus();
         }
-        this.items.get(position + 1).itemClicked();
-        // this.optionClicked(nextItem);
       }
     } else if (direction === 'back') {
       if (position === 0) {
         if (this.items.get(this.items.length - 1)) {
           this.items.get(this.items.length - 1).focus();
         }
-        this.items.get(enabledOptions.length - 1).itemClicked();
-        // this.optionClicked(this.items[enabledOptions.length - 1]);
       } else {
         if (this.items.get(position - 1)) {
           this.items.get(position - 1).focus();
         }
-        this.items.get(position - 1).itemClicked();
-        // this.optionClicked(previousItem);
       }
     }
   }

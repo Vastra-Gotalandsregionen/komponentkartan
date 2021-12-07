@@ -28,16 +28,21 @@ export class RadiobuttonItemComponent implements AfterViewInit {
     if (this.item && !this.disabled) {
       this.selected = true;
       this.itemSelected.emit();
-      this.focus();
-      return;
     }
+    this.focus();
   }
 
   public focus() {
+    if(!this.disabled && !this.selected) {
+      this.selected = true;
+      this.itemSelected.emit();
+    }
+
     this.radioButton.nativeElement.focus();
   }
 
   checkTabFocus() {
     return this.elementRef.nativeElement.querySelectorAll('.radio-button--checked').length > 0;
+
   }
 }
