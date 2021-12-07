@@ -74,7 +74,15 @@
     }
   }
 
-  .radio-button--checked .radio-button__icon {
+  .radio-button--checked.radio-button--disabled .radio-button__icon {
+    &:after {
+      transition: opacity 0.5s ease;
+      opacity: 1;
+      background-color: $control-color--disabled;
+    }
+  }
+
+  .radio-button--checked  .radio-button__icon {
     &:after {
       transition: opacity 0.5s ease;
       opacity: 1;

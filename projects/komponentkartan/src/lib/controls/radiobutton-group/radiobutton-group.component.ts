@@ -10,13 +10,22 @@ import { RadiobuttonItemComponent } from './radiobutton-item.component';
 })
 export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
 
-  @Input() @HostBinding('class.disabled') disabled: boolean;
+  _disabled: boolean;
+  // @Input() @HostBinding('class.disabled') disabled: boolean;
+  @Input() @HostBinding('class.disabled') set disabled(val) {
+
+    this._disabled = val;
+    if (val !== undefined) {
+      this.setGroupDisabledOverride(val);
+    }
+  }
   @Input() @HostBinding('class.vertical') vertical = false;
   @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
   @ContentChildren(RadiobuttonItemComponent) items: QueryList<RadiobuttonItemComponent>;
 
   ngUnsubscribeItems = new Subject();
 
+  internalDisabled: boolean;
   constructor(private elementRef: ElementRef) { }
 
   ngAfterContentInit() {
@@ -27,12 +36,14 @@ export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
         this.unSelectItems(item);
       });
 
-      item.itemDisabled.pipe(
-        takeUntil(this.ngUnsubscribeItems)
-      ).subscribe(() => {
-        this.disabledItems();
-      });
-    });
+     });
+
+    this.setGroupDisabledOverride(this._disabled);
+
+    // Om ingen är vald, tabba in till första enablade elementet
+    if(!this.items.some(x => x.selected)) {
+      this.items.filter(x => !x.disabled)[0].isTabEnabled = true;
+    }
   }
 
   ngOnDestroy() {
@@ -50,9 +61,15 @@ export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
 
   disabledItems() {
     this.items.forEach(item => {
-      if (this.disabled) {
+      // if (this.disabled) {
         item.disabled = true;
-      }
+      // }
+    });
+  }
+
+  setGroupDisabledOverride(groupDisabledState: boolean) {
+    this.items?.forEach(item => {
+        item.groupDisabledOverride = groupDisabledState;
     });
   }
 
@@ -67,6 +84,7 @@ export class RadiobuttonGroupComponent implements AfterContentInit, OnDestroy {
       event.preventDefault();
       event.stopPropagation();
     }
+
 
     if (['ArrowRight', 'Right', 'ArrowDown', 'Down'].includes(event.key)) {
       this.setFocus(selectedItem, 'forward');

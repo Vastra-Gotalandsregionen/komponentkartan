@@ -15,13 +15,25 @@
     </p>
 
     <!--Disabled på group, overrides disabled på item vid true -->
-    <vgr-radiobutton-group (selectedChanged)="someCode()" [vertical]="true" [disabled]="false">
-      <vgr-radiobutton-item [selected]="true" [disabled]="false">Det var bra</vgr-radiobutton-item>
-      <vgr-radiobutton-item [selected]="false" [disabled]="true">Det var inte bra</vgr-radiobutton-item>
-      <vgr-radiobutton-item [selected]="false" [disabled]="false">Det var verkligen inte bra</vgr-radiobutton-item>
+    <h2>Horisontell radiogrupp med möjlighet att disabla gruppen</h2>
+    Välj föredragen bil
+    <vgr-radiobutton-group (selectedChanged)="someCode()" [disabled]="groupDisabled">
+      <vgr-radiobutton-item [selected]="true" [disabled]="false">Subaru</vgr-radiobutton-item>
+      <vgr-radiobutton-item [selected]="false" [disabled]="true">Volvo</vgr-radiobutton-item>
+      <vgr-radiobutton-item [selected]="false" [disabled]="false">Toyota</vgr-radiobutton-item>
     </vgr-radiobutton-group>
 
-    <br>
+    <vgr-checkbox (checkedChanged)="groupDisabled = $event" label="Jag cyklar" [checked]="groupDisabled"></vgr-checkbox>
+
+    <hr>
+    <h2>Vertical radiogrupp </h2>
+    <vgr-radiobutton-group (selectedChanged)="someCode()" vertical="true">
+      <vgr-radiobutton-item [selected]="false">Det var bra</vgr-radiobutton-item>
+      <vgr-radiobutton-item [selected]="false">Det var inte bra</vgr-radiobutton-item>
+      <vgr-radiobutton-item [selected]="false">Det var verkligen inte bra</vgr-radiobutton-item>
+    </vgr-radiobutton-group>
+
+
     <p> Förändras med tema:
       <strong>nej</strong>
     </p>

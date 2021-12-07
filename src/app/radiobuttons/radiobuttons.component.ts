@@ -11,6 +11,7 @@ export class RadiobuttonsComponent implements OnInit {
 
   options: Array<SelectableItem<any>> = [];
   options2: Array<SelectableItem<any>> = [];
+  groupDisabled: boolean = true;
   @ViewChild('myRadioGroup', { read: RadioGroupComponent, static: false }) myRadioGroup: RadioGroupComponent;
 
   constructor() { }

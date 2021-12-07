@@ -6,22 +6,39 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, View
   styleUrls: ['./radiobutton-item.component.scss']
 })
 export class RadiobuttonItemComponent implements AfterViewInit {
+  groupDisabledOverride: boolean; // gruppens disabledState
 
   @Input() selected: boolean;
-  @Input() disabled: boolean;
+
+  @Input() set disabled(val: boolean) {
+    console.log('set _disabled: ', val)
+    this._disabled = val;
+  };
+  get disabled() {
+    if (this.groupDisabledOverride) {
+      return true;
+    } else {
+      return this._disabled;
+    }
+  }
+
   @Output() itemSelected = new EventEmitter();
   @Output() itemDisabled = new EventEmitter();
 
   @ViewChild('item') item: ElementRef;
   @ViewChild('radioButton') radioButton: ElementRef;
 
+
+  _disabled: boolean;
+  isTabEnabled: boolean;
   constructor(private elementRef: ElementRef) { }
 
   ngAfterViewInit() {
-    this.itemDisabled.emit();
-    if (this.disabled && this.selected) {
-      this.selected = false;
-    }
+    // this.itemDisabled.emit();
+    // if (this.disabled && this.selected) {
+    //   this.selected = false;
+    // }
+    console.log('afterviewInit: ', this.groupDisabledOverride)
   }
 
   itemClicked() {
@@ -30,6 +47,14 @@ export class RadiobuttonItemComponent implements AfterViewInit {
       this.itemSelected.emit();
     }
     this.focus();
+  }
+
+  public firstfocusIn() {
+
+    if (this.isTabEnabled) {
+      this.isTabEnabled = false;
+      this.focus();
+    }
   }
 
   public focus() {

@@ -1,3 +1,8 @@
-<div (keydown)="keyDown($event)">
+<div
+  (keydown)="keyDown($event)"
+  [attr.aria-disabled]="_disabled"
+  tabindex="{{!_disabled ? -1 : 0}}"
+  role="radiogroup"
+  [ngClass]="{'vertical' : vertical}">
   <ng-content select="vgr-radiobutton-item"></ng-content>
 </div>
