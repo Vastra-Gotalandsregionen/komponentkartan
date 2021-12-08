@@ -5,14 +5,14 @@ import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, E
   templateUrl: './radiobutton-item.component.html',
   styleUrls: ['./radiobutton-item.component.scss']
 })
-export class RadiobuttonItemComponent implements AfterViewInit, AfterContentInit, OnChanges {
+export class RadiobuttonItemComponent implements AfterContentInit {
   groupDisabledOverride: boolean; // gruppens disabledState
   elementId: string;
 
 
   @Input() selected: boolean;
+  @Input() value: string | number;
   @Input() set disabled(val: boolean) {
-    console.log('set _disabled: ', val)
     this._disabled = val;
   };
   get disabled() {
@@ -39,23 +39,11 @@ export class RadiobuttonItemComponent implements AfterViewInit, AfterContentInit
 
   }
 
-  ngAfterViewInit() {
-    // this.itemDisabled.emit();
-    // if (this.disabled && this.selected) {
-    //   this.selected = false;
-    // }
-    console.log('afterviewInit: ', this.groupDisabledOverride)
-  }
-
   ngAfterContentInit() {
     setTimeout(() => {
-      console.log('radioContent: ', this.radioButtonContent)
+      // console.log('radioContent: ', this.radioButtonContent)
     }, 1000);
 
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('changes: ', changes)
   }
 
   itemClicked() {

@@ -75,8 +75,11 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Välj valfri</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-radio-group formControlName="optional" [options]="radioOptions1">
-                  </vgr-radio-group>
+                  <vgr-radiobutton-group formControlName="optional" [showValidation]="true">
+                    <vgr-radiobutton-item *ngFor="let option of radioOptions1" [value]="option.value" [disabled]="option.disabled" >{{option.displayName}}</vgr-radiobutton-item>
+                  </vgr-radiobutton-group>
+                  <!-- <vgr-radio-group formControlName="optional" [options]="radioOptions1">
+                  </vgr-radio-group> -->
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -114,6 +117,21 @@
             <vgr-button (click)="onSubmitUpdateOnBlurForm()" [disabled]="false">Skapa användare</vgr-button>
             <vgr-lock-button (lockChanged)="handleLockChanged(locked)"></vgr-lock-button>
           </form>
+          <hr>
+          <h2>Update on blur values</h2>
+          firstname: {{updateOnBlurForm.controls.firstname.value}} <br>
+          lastname: {{updateOnBlurForm.controls.lastname.value}} <br>
+          age: {{updateOnBlurForm.controls.age.value}} <br>
+          email: {{updateOnBlurForm.controls.email.value}} <br>
+          salary: {{updateOnBlurForm.controls.salary.value}} <br>
+          favouritepet: {{updateOnBlurForm.controls.favourite_pet.value}} <br>
+          interests: {{updateOnBlurForm.controls.interests.value}} <br>
+          check: {{updateOnBlurForm.controls.check.value}} <br>
+          optional: {{updateOnBlurForm.controls.optional.value?.value}} <br>
+          monthpicker: {{updateOnBlurForm.controls.monthpicker.value}} <br>
+          datepicker: {{updateOnBlurForm.controls.datepicker.value}} <br>
+          datepicker_preselected: {{updateOnBlurForm.controls.datepicker_preselected.value}} <br>
+          textarea: {{updateOnBlurForm.controls.textarea.value}} <br>
         </vgr-card-column>
         <vgr-card-column>
           <h1>On Submit</h1>
@@ -187,8 +205,18 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Välj valfri</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-radio-group formControlName="optional" [options]="radioOptions2">
-                  </vgr-radio-group>
+                  <!-- <vgr-radiobutton-group formControlName="optional">
+                    <vgr-radiobutton-item *ngFor="let option of radioOptions2" [value]="option.value">{{option.displayName}}</vgr-radiobutton-item>
+                  </vgr-radiobutton-group> -->
+
+                  <vgr-radiobutton-group formControlName="optional" [showValidation]="formSubmitted">
+                    <vgr-radiobutton-item [value]="'Bra'">Bra</vgr-radiobutton-item>
+                    <vgr-radiobutton-item [value]="'Okej'">Okej</vgr-radiobutton-item>
+                    <vgr-radiobutton-item [value]="'Nej tack'">Nej tack</vgr-radiobutton-item>
+                  </vgr-radiobutton-group>
+
+                  <!-- <vgr-radio-group formControlName="optional" [options]="radioOptions2"> -->
+                  <!-- </vgr-radio-group> -->
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -221,6 +249,23 @@
             <vgr-button (click)="onResetUpdateOnSubmitForm()">Reset form</vgr-button>
             <vgr-button type="submit" (click)="onSubmit()">Submit</vgr-button>
           </form>
+          <br>
+          <br>
+          <hr>
+          <h2>Update on submit values</h2>
+          firstname: {{updateOnSubmitForm.controls.firstname.value}} <br>
+          lastname: {{updateOnSubmitForm.controls.lastname.value}} <br>
+          age: {{updateOnSubmitForm.controls.age.value}} <br>
+          email: {{updateOnSubmitForm.controls.email.value}} <br>
+          salary: {{updateOnSubmitForm.controls.salary.value}} <br>
+          favouritepet: {{updateOnSubmitForm.controls.favourite_pet.value}} <br>
+          interests: {{updateOnSubmitForm.controls.interests.value}} <br>
+          check: {{updateOnSubmitForm.controls.check.value}} <br>
+          optional: {{updateOnSubmitForm.controls.optional.value?.value}} <br>
+          monthpicker: {{updateOnSubmitForm.controls.monthpicker.value}} <br>
+          datepicker: {{updateOnSubmitForm.controls.datepicker.value}} <br>
+          datepicker_preselected: {{updateOnSubmitForm.controls.datepicker_preselected.value}} <br>
+          textarea: {{updateOnSubmitForm.controls.textarea.value}} <br>
         </vgr-card-column>
       </vgr-card>
       <vgr-card>
@@ -295,8 +340,12 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Välj valfri</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-radio-group formControlName="optional" [options]="radioOptions3">
-                  </vgr-radio-group>
+                  <vgr-radiobutton-group formControlName="optional" [showValidation]="true">
+
+                    <vgr-radiobutton-item *ngFor="let options of radioOptions3" [value]="options.value">{{options.displayName}}</vgr-radiobutton-item>
+                  </vgr-radiobutton-group>
+                  <!-- <vgr-radio-group formControlName="optional" [options]="radioOptions3">
+                  </vgr-radio-group> -->
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -331,10 +380,26 @@
               </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnChangeForm()">Reset form</vgr-button>
-            <vgr-button [disabled]="false">Skapa användare</vgr-button>
+            <vgr-button [disabled]="false" (click)="showPerson()">Skapa användare</vgr-button>
           </form>
         </vgr-card-column>
         <vgr-card-column>
+          <h2>Update on change values</h2>
+          firstname: {{updateOnChangeForm.controls.firstname.value}} <br>
+          lastname: {{updateOnChangeForm.controls.lastname.value}} <br>
+          age: {{updateOnChangeForm.controls.age.value}} <br>
+          email: {{updateOnChangeForm.controls.email.value}} <br>
+          salary: {{updateOnChangeForm.controls.salary.value}} <br>
+          favouritepet: {{updateOnChangeForm.controls.favourite_pet.value}} <br>
+          interests: {{updateOnChangeForm.controls.interests.value}} <br>
+          check: {{updateOnChangeForm.controls.check.value}} <br>
+          optional: {{updateOnChangeForm.controls.optional.value?.value}} <br>
+          monthpicker: {{updateOnChangeForm.controls.monthpicker.value}} <br>
+          datepicker: {{updateOnChangeForm.controls.datepicker.value}} <br>
+          datepicker_preselected: {{updateOnChangeForm.controls.datepicker_preselected.value}} <br>
+          textarea: {{updateOnChangeForm.controls.textarea.value}} <br>
+
+
         </vgr-card-column>
       </vgr-card>
     </vgr-page-block>

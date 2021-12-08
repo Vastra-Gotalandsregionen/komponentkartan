@@ -10,13 +10,14 @@ import { RadiobuttonItemComponent } from './radiobutton-item.component';
   styleUrls: ['./radiobutton-group.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => RadiobuttonItemComponent),
+    useExisting: RadiobuttonGroupComponent,
     multi: true
   }]
 })
 export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges, OnDestroy {
   _disabled: boolean;
   @Input() showValidation = true;
+  value: string | number;
   @Input() @HostBinding('class.disabled') set disabled(val) {
     this._disabled = val;
     if (val !== undefined) {
@@ -38,8 +39,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
   public control: AbstractControl;
   constructor(@Host() @SkipSelf() @Optional() private controlContainer: ControlContainer, private elementRef: ElementRef) {
     this.elementId = Math.random().toString();
-   }
-
+  }
 
 
   ngAfterContentInit() {
@@ -55,13 +55,25 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
 
      });
 
+    this.setSelectedValue(this.value);
     this.setGroupDisabledOverride(this._disabled);
 
     // Om ingen är vald, möjliggör att man kan tabba in till första enablade elementet
-    this.setFirstOptionAsTabable();
+    this.setFirstOptionAsFocusable();
   }
 
-  setFirstOptionAsTabable() {
+
+ setSelectedValue(value: string | number) {
+  const selectedItem = this.items.filter(x => x.value === value)[0];
+  console.log(value, this.items)
+  if (selectedItem) {
+    selectedItem.selected = true;
+    this.unSelectItems(selectedItem);
+  } else {
+    this.unSelectItems();
+  }
+ }
+  setFirstOptionAsFocusable() {
     if(!this.items.some(x => x.selected)) {
       this.items.filter(x => !x.disabled)[0].isTabEnabled = true;
     }
@@ -74,8 +86,9 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     //     this.selectOption(preSelectedOption);
     //   }
     // }
-    console.log('changes in group')
+    console.log('onchanges')
     if (this.formControlName && this.controlContainer) {
+      console.log('onChanges group')
       this.control = this.controlContainer.control.get(this.formControlName);
     }
   }
@@ -92,12 +105,12 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       } else if (this.items.filter(x => x.selected === true).length > 1) {
         this.validationErrorMessage = 'Mer än ett val är aktivt'
         return true;
+      } else if (this.control) {
+        const classes = this.elementRef.nativeElement.classList;
+        return classes.contains('ng-invalid');
       } else {
         return false;
       }
-    } else if(this.control) {
-      const classes = this.elementRef.nativeElement.classList;
-      return classes.contains('ng-invalid');
     } else {
       return false;
     }
@@ -116,7 +129,9 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       }
     });
 
-    this.setFirstOptionAsTabable();
+    this.setFirstOptionAsFocusable();
+
+    this.onChange(itemToExclude);
   }
 
   disabledItems() {
@@ -185,11 +200,22 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       }
     }
   }
-  onTouched() { }
-  onChange(input: RadiobuttonItemComponent) { }
+  onTouched() {}
+  onChange(input: RadiobuttonItemComponent) {}
 
-  writeValue(obj: any): void {
-    console.log('WriteValue: ', obj)
+  onLeave() {
+
+    this.onTouched();
+  }
+
+  writeValue(value: string | number): void {
+    if (value) {
+      this.value = value;
+    }
+    console.log('writeValue: ', value)
+    if (this.items) {
+      this.setSelectedValue(value);
+    }
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -201,4 +227,13 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     this.disabled = isDisabled;
   }
 
+
+  getLabelFromId() {
+    // return window.document.getElementById(this.idForLabel)
+    let labels = document.getElementsByTagName('label');
+    for( var i = 0; i < labels.length; i++ ) {
+      if (labels[i].htmlFor == this.elementId)
+           return labels[i];
+   }
+  }
 }

@@ -34,6 +34,18 @@
     </vgr-radiobutton-group>
     <br>
     <vgr-button (click)="rensaVal()">Rensa val</vgr-button>
+
+    <hr>
+    <h2>FormGroup radiogrupp </h2>
+    <form [formGroup]="radioGroupForm">
+    <vgr-radiobutton-group [formControlName]="'val'" (selectedChanged)="someCode()" required="true">
+      <vgr-radiobutton-item >Det var bra</vgr-radiobutton-item>
+      <vgr-radiobutton-item >Det var inte bra</vgr-radiobutton-item>
+      <vgr-radiobutton-item >Det var verkligen inte bra</vgr-radiobutton-item>
+    </vgr-radiobutton-group>
+    <label>Val: {{this.radioGroupForm.controls.val}}</label>
+    </form>
+    <br>
     <p> Förändras med tema:
       <strong>nej</strong>
     </p>
