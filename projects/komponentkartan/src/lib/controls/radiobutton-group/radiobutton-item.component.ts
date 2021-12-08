@@ -41,6 +41,8 @@ export class RadiobuttonItemComponent implements AfterContentInit {
 
   ngAfterContentInit() {
     setTimeout(() => {
+      this.value = this.value ?? document.getElementById(this.elementId).innerHTML;
+      // console.log(this.value, document.getElementById(this.elementId).innerHTML)
       // console.log('radioContent: ', this.radioButtonContent)
     }, 1000);
 

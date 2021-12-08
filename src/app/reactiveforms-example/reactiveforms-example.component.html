@@ -11,42 +11,48 @@
               <vgr-title-value>
                 <vgr-title-value-heading for="firstname">Förnamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="firstname" formControlName="firstname" [showValidation]="updateOnBlurForm.controls.firstname.touched"
+                  <vgr-input [width]="'100%'" labelId="firstname" formControlName="firstname"
+                    [showValidation]="updateOnBlurForm.controls.firstname.touched"
                     [errorMessage]="validationMessages.firstname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading for="lastname">Efternamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="lastname" formControlName="lastname" [showValidation]="updateOnBlurForm.controls.lastname.touched"
+                  <vgr-input [width]="'100%'" labelId="lastname" formControlName="lastname"
+                    [showValidation]="updateOnBlurForm.controls.lastname.touched"
                     [errorMessage]="validationMessages.lastname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading for="age">Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="age" formControlName="age" [showValidation]="updateOnBlurForm.controls.age.touched"
-                    textAlign="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+                  <vgr-input [width]="'100%'" labelId="age" formControlName="age"
+                    [showValidation]="updateOnBlurForm.controls.age.touched" textAlign="right" [suffix]="'år'"
+                    [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading for="email">E-post</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="email" formControlName="email" [showValidation]="updateOnBlurForm.controls.email.touched"
+                  <vgr-input [width]="'100%'" labelId="email" formControlName="email"
+                    [showValidation]="updateOnBlurForm.controls.email.touched"
                     [errorMessage]="validationMessages.email"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading for="salary">Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="salary" formControlName="salary" [showValidation]="updateOnBlurForm.controls.salary.touched"
-                    [errorMessage]="validationMessages.salary" ></vgr-input>
+                  <vgr-input [width]="'100%'" labelId="salary" formControlName="salary"
+                    [showValidation]="updateOnBlurForm.controls.salary.touched"
+                    [errorMessage]="validationMessages.salary"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading for="favourite_pet">Favoritdjur</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-dropdown-select labelId="favourite_pet" width="100%" formControlName="favourite_pet" [noItemSelectedLabel]="'Välj djur'"
+                  <vgr-dropdown-select labelId="favourite_pet" width="100%" formControlName="favourite_pet"
+                    [noItemSelectedLabel]="'Välj djur'"
                     [showValidation]="updateOnBlurForm.controls.favourite_pet.touched">
                     <vgr-dropdown-item [value]="'Hund'">Hund</vgr-dropdown-item>
                     <vgr-dropdown-item [value]="'Katt'">Katt</vgr-dropdown-item>
@@ -76,7 +82,8 @@
                 <vgr-title-value-heading>Välj valfri</vgr-title-value-heading>
                 <vgr-title-value-container>
                   <vgr-radiobutton-group formControlName="optional" [showValidation]="true">
-                    <vgr-radiobutton-item *ngFor="let option of radioOptions1" [value]="option.value" [disabled]="option.disabled" >{{option.displayName}}</vgr-radiobutton-item>
+                    <vgr-radiobutton-item *ngFor="let option of radioOptions1" [value]="option.value"
+                      [disabled]="option.disabled">{{option.displayName}}</vgr-radiobutton-item>
                   </vgr-radiobutton-group>
                   <!-- <vgr-radio-group formControlName="optional" [options]="radioOptions1">
                   </vgr-radio-group> -->
@@ -117,21 +124,8 @@
             <vgr-button (click)="onSubmitUpdateOnBlurForm()" [disabled]="false">Skapa användare</vgr-button>
             <vgr-lock-button (lockChanged)="handleLockChanged(locked)"></vgr-lock-button>
           </form>
-          <hr>
-          <h2>Update on blur values</h2>
-          firstname: {{updateOnBlurForm.controls.firstname.value}} <br>
-          lastname: {{updateOnBlurForm.controls.lastname.value}} <br>
-          age: {{updateOnBlurForm.controls.age.value}} <br>
-          email: {{updateOnBlurForm.controls.email.value}} <br>
-          salary: {{updateOnBlurForm.controls.salary.value}} <br>
-          favouritepet: {{updateOnBlurForm.controls.favourite_pet.value}} <br>
-          interests: {{updateOnBlurForm.controls.interests.value}} <br>
-          check: {{updateOnBlurForm.controls.check.value}} <br>
-          optional: {{updateOnBlurForm.controls.optional.value?.value}} <br>
-          monthpicker: {{updateOnBlurForm.controls.monthpicker.value}} <br>
-          datepicker: {{updateOnBlurForm.controls.datepicker.value}} <br>
-          datepicker_preselected: {{updateOnBlurForm.controls.datepicker_preselected.value}} <br>
-          textarea: {{updateOnBlurForm.controls.textarea.value}} <br>
+
+
         </vgr-card-column>
         <vgr-card-column>
           <h1>On Submit</h1>
@@ -140,38 +134,39 @@
               <vgr-title-value>
                 <vgr-title-value-heading for="submit_firstname">Förnamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="submit_firstname" formControlName="firstname" [showValidation]="formSubmitted"
-                    [errorMessage]="validationMessages.firstname"></vgr-input>
+                  <vgr-input [width]="'100%'" labelId="submit_firstname" formControlName="firstname"
+                    [showValidation]="formSubmitted" [errorMessage]="validationMessages.firstname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
 
               <vgr-title-value>
                 <vgr-title-value-heading for="submit_lastname">Efternamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="submit_lastname" formControlName="lastname" [showValidation]="formSubmitted"
-                    [errorMessage]="validationMessages.lastname"></vgr-input>
+                  <vgr-input [width]="'100%'" labelId="submit_lastname" formControlName="lastname"
+                    [showValidation]="formSubmitted" [errorMessage]="validationMessages.lastname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
 
               <vgr-title-value>
                 <vgr-title-value-heading for="submit_age">Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="submit_age" formControlName="age" [showValidation]="formSubmitted" textAlign="right" [suffix]="'år'"
+                  <vgr-input [width]="'100%'" labelId="submit_age" formControlName="age"
+                    [showValidation]="formSubmitted" textAlign="right" [suffix]="'år'"
                     [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading for="submit_email">E-post</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="submit_email" formControlName="email" [showValidation]="formSubmitted"
-                    [errorMessage]="validationMessages.email"></vgr-input>
+                  <vgr-input [width]="'100%'" labelId="submit_email" formControlName="email"
+                    [showValidation]="formSubmitted" [errorMessage]="validationMessages.email"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading for="submit_salary">Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" labelId="submit_salary" formControlName="salary" [showValidation]="formSubmitted"
-                    [errorMessage]="validationMessages.salary"></vgr-input>
+                  <vgr-input [width]="'100%'" labelId="submit_salary" formControlName="salary"
+                    [showValidation]="formSubmitted" [errorMessage]="validationMessages.salary"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
@@ -188,8 +183,8 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Intressen</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-dropdown-select width="100%" formControlName="interests" [multi]="true" [showValidation]="formSubmitted"
-                    [errorMessage]="{'pattern': 'Du får bara koda!'}">
+                  <vgr-dropdown-select width="100%" formControlName="interests" [multi]="true"
+                    [showValidation]="formSubmitted" [errorMessage]="{'pattern': 'Du får bara koda!'}">
                     <vgr-dropdown-item [value]="'Koda'">Koda</vgr-dropdown-item>
                     <vgr-dropdown-item [value]="'Äta'">Äta</vgr-dropdown-item>
                     <vgr-dropdown-item [value]="'Sova'">Sova</vgr-dropdown-item>
@@ -249,23 +244,7 @@
             <vgr-button (click)="onResetUpdateOnSubmitForm()">Reset form</vgr-button>
             <vgr-button type="submit" (click)="onSubmit()">Submit</vgr-button>
           </form>
-          <br>
-          <br>
-          <hr>
-          <h2>Update on submit values</h2>
-          firstname: {{updateOnSubmitForm.controls.firstname.value}} <br>
-          lastname: {{updateOnSubmitForm.controls.lastname.value}} <br>
-          age: {{updateOnSubmitForm.controls.age.value}} <br>
-          email: {{updateOnSubmitForm.controls.email.value}} <br>
-          salary: {{updateOnSubmitForm.controls.salary.value}} <br>
-          favouritepet: {{updateOnSubmitForm.controls.favourite_pet.value}} <br>
-          interests: {{updateOnSubmitForm.controls.interests.value}} <br>
-          check: {{updateOnSubmitForm.controls.check.value}} <br>
-          optional: {{updateOnSubmitForm.controls.optional.value?.value}} <br>
-          monthpicker: {{updateOnSubmitForm.controls.monthpicker.value}} <br>
-          datepicker: {{updateOnSubmitForm.controls.datepicker.value}} <br>
-          datepicker_preselected: {{updateOnSubmitForm.controls.datepicker_preselected.value}} <br>
-          textarea: {{updateOnSubmitForm.controls.textarea.value}} <br>
+
         </vgr-card-column>
       </vgr-card>
       <vgr-card>
@@ -276,35 +255,40 @@
               <vgr-title-value>
                 <vgr-title-value-heading>Förnamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="firstname" [showValidation]="updateOnChangeForm.controls.firstname.dirty"
+                  <vgr-input [width]="'100%'" formControlName="firstname"
+                    [showValidation]="updateOnChangeForm.controls.firstname.dirty"
                     [errorMessage]="validationMessages.firstname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Efternamn</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="lastname" [showValidation]="updateOnChangeForm.controls.lastname.dirty"
+                  <vgr-input [width]="'100%'" formControlName="lastname"
+                    [showValidation]="updateOnChangeForm.controls.lastname.dirty"
                     [errorMessage]="validationMessages.lastname"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Ålder</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="age" [showValidation]="updateOnChangeForm.controls.age.dirty"
-                    textAlign="right" [suffix]="'år'" [errorMessage]="validationMessages.age"></vgr-input>
+                  <vgr-input [width]="'100%'" formControlName="age"
+                    [showValidation]="updateOnChangeForm.controls.age.dirty" textAlign="right" [suffix]="'år'"
+                    [errorMessage]="validationMessages.age"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>E-post</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="email" [showValidation]="updateOnChangeForm.controls.email.dirty"
+                  <vgr-input [width]="'100%'" formControlName="email"
+                    [showValidation]="updateOnChangeForm.controls.email.dirty"
                     [errorMessage]="validationMessages.email"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
               <vgr-title-value>
                 <vgr-title-value-heading>Inkomst</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-input [width]="'100%'" formControlName="salary" [showValidation]="updateOnChangeForm.controls.salary.dirty"
+                  <vgr-input [width]="'100%'" formControlName="salary"
+                    [showValidation]="updateOnChangeForm.controls.salary.dirty"
                     [errorMessage]="validationMessages.salary"></vgr-input>
                 </vgr-title-value-container>
               </vgr-title-value>
@@ -342,7 +326,8 @@
                 <vgr-title-value-container>
                   <vgr-radiobutton-group formControlName="optional" [showValidation]="true">
 
-                    <vgr-radiobutton-item *ngFor="let options of radioOptions3" [value]="options.value">{{options.displayName}}</vgr-radiobutton-item>
+                    <vgr-radiobutton-item *ngFor="let options of radioOptions3" [value]="options.value">
+                      {{options.displayName}}</vgr-radiobutton-item>
                   </vgr-radiobutton-group>
                   <!-- <vgr-radio-group formControlName="optional" [options]="radioOptions3">
                   </vgr-radio-group> -->
@@ -384,21 +369,71 @@
           </form>
         </vgr-card-column>
         <vgr-card-column>
-          <hr>
-          <h2>Update on change values</h2>
-          firstname: {{updateOnChangeForm.controls.firstname.value}} <br>
-          lastname: {{updateOnChangeForm.controls.lastname.value}} <br>
-          age: {{updateOnChangeForm.controls.age.value}} <br>
-          email: {{updateOnChangeForm.controls.email.value}} <br>
-          salary: {{updateOnChangeForm.controls.salary.value}} <br>
-          favouritepet: {{updateOnChangeForm.controls.favourite_pet.value}} <br>
-          interests: {{updateOnChangeForm.controls.interests.value}} <br>
-          check: {{updateOnChangeForm.controls.check.value}} <br>
-          optional: {{updateOnChangeForm.controls.optional.value?.value}} <br>
-          monthpicker: {{updateOnChangeForm.controls.monthpicker.value}} <br>
-          datepicker: {{updateOnChangeForm.controls.datepicker.value}} <br>
-          datepicker_preselected: {{updateOnChangeForm.controls.datepicker_preselected.value}} <br>
-          textarea: {{updateOnChangeForm.controls.textarea.value}} <br>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              <h2>Update on blur values</h2>
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+              <p>firstname: <strong>{{updateOnBlurForm.controls.firstname.value}}</strong></p>
+              <p>lastname: <strong> {{updateOnBlurForm.controls.lastname.value}} </strong></p>
+              <p>age: <strong>{{updateOnBlurForm.controls.age.value}} </strong></p>
+              <p>email: <strong>{{updateOnBlurForm.controls.email.value}} </strong></p>
+              <p>salary: <strong>{{updateOnBlurForm.controls.salary.value}} </strong></p>
+              <p>favouritepet: <strong>{{updateOnBlurForm.controls.favourite_pet.value}} </strong></p>
+              <p>interests: <strong>{{updateOnBlurForm.controls.interests.value}} </strong></p>
+              <p>check: <strong>{{updateOnBlurForm.controls.check.value}} </strong></p>
+              <p>optional: <strong>{{updateOnBlurForm.controls.optional.value?.value}} </strong></p>
+              <p>monthpicker: <strong>{{updateOnBlurForm.controls.monthpicker.value}} </strong></p>
+              <p>datepicker: <strong>{{updateOnBlurForm.controls.datepicker.value}} </strong></p>
+              <p>datepicker_preselected: <strong>{{updateOnBlurForm.controls.datepicker_preselected.value}} </strong>
+              </p>
+              <p>textarea: <strong>{{updateOnBlurForm.controls.textarea.value}} </strong></p>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              <h2>Update on submit values</h2>
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+
+              <p>firstname: <strong>{{updateOnSubmitForm.controls.firstname.value}}</strong></p>
+              <p>lastname: <strong> {{updateOnSubmitForm.controls.lastname.value}} </strong></p>
+              <p>age: <strong>{{updateOnSubmitForm.controls.age.value}} </strong></p>
+              <p>email: <strong>{{updateOnSubmitForm.controls.email.value}} </strong></p>
+              <p>salary: <strong>{{updateOnSubmitForm.controls.salary.value}} </strong></p>
+              <p>favouritepet: <strong>{{updateOnSubmitForm.controls.favourite_pet.value}} </strong></p>
+              <p>interests: <strong>{{updateOnSubmitForm.controls.interests.value}} </strong></p>
+              <p>check: <strong>{{updateOnSubmitForm.controls.check.value}} </strong></p>
+              <p>optional: <strong>{{updateOnSubmitForm.controls.optional.value?.value}} </strong></p>
+              <p>monthpicker: <strong>{{updateOnSubmitForm.controls.monthpicker.value}} </strong></p>
+              <p>datepicker: <strong>{{updateOnSubmitForm.controls.datepicker.value}} </strong></p>
+              <p>datepicker_preselected: <strong>{{updateOnSubmitForm.controls.datepicker_preselected.value}} </strong>
+              </p>
+              <p>textarea: <strong>{{updateOnSubmitForm.controls.textarea.value}} </strong></p>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              <h2>Update on change values</h2>
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+
+              <p>firstname: <strong>{{updateOnChangeForm.controls.firstname.value}}</strong></p>
+              <p>lastname: <strong> {{updateOnChangeForm.controls.lastname.value}} </strong></p>
+              <p>age: <strong>{{updateOnChangeForm.controls.age.value}} </strong></p>
+              <p>email: <strong>{{updateOnChangeForm.controls.email.value}} </strong></p>
+              <p>salary: <strong>{{updateOnChangeForm.controls.salary.value}} </strong></p>
+              <p>favouritepet: <strong>{{updateOnChangeForm.controls.favourite_pet.value}} </strong></p>
+              <p>interests: <strong>{{updateOnChangeForm.controls.interests.value}} </strong></p>
+              <p>check: <strong>{{updateOnChangeForm.controls.check.value}} </strong></p>
+              <p>optional: <strong>{{updateOnChangeForm.controls.optional.value?.value}} </strong></p>
+              <p>monthpicker: <strong>{{updateOnChangeForm.controls.monthpicker.value}} </strong></p>
+              <p>datepicker: <strong>{{updateOnChangeForm.controls.datepicker.value}} </strong></p>
+              <p>datepicker_preselected: <strong>{{updateOnChangeForm.controls.datepicker_preselected.value}} </strong>
+              </p>
+              <p>textarea: <strong>{{updateOnChangeForm.controls.textarea.value}} </strong></p>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
 
 
         </vgr-card-column>

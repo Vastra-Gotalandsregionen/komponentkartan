@@ -1,6 +1,5 @@
 <div [ngClass]="{ 'radiobutton-group-validation-error--active': errorActive}">
   <div class="radiobutton-group-validation" >
-    <p>värde: {{this.value}}</p>
     <div
       [attr.aria-labelledby]="elementId"
       (keydown)="keyDown($event)"

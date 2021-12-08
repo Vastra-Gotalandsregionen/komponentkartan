@@ -49,11 +49,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       ).subscribe(() => {
         this.unSelectItems(item);
       });
-
-
-
-
-     });
+    });
 
     this.setSelectedValue(this.value);
     this.setGroupDisabledOverride(this._disabled);
@@ -65,7 +61,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
 
  setSelectedValue(value: string | number) {
   const selectedItem = this.items.filter(x => x.value === value)[0];
-  console.log(value, this.items)
+  
   if (selectedItem) {
     selectedItem.selected = true;
     this.unSelectItems(selectedItem);
@@ -131,6 +127,12 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
 
     this.setFirstOptionAsFocusable();
 
+    if (itemToExclude) {
+      this.value = itemToExclude.value;
+    } else {
+      this.value = null;
+    }
+    
     this.onChange(itemToExclude);
   }
 
@@ -212,7 +214,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     if (value) {
       this.value = value;
     }
-    console.log('writeValue: ', value)
+    
     if (this.items) {
       this.setSelectedValue(value);
     }

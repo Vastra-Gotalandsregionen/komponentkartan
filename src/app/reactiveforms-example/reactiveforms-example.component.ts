@@ -100,7 +100,7 @@ export class ReactiveformsexampleComponent implements OnInit {
             favourite_pet: new FormControl(null, { validators: [Validators.required] }),
             interests: new FormControl(null, { validators: [Validators.required, Validators.pattern('Koda')] }),
             check: new FormControl(true, { validators: [Validators.pattern('true')] }),
-            optional: new FormControl(2),
+            optional: new FormControl(),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
             datepicker: new FormControl('', { validators: [Validators.required] }),
             datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
