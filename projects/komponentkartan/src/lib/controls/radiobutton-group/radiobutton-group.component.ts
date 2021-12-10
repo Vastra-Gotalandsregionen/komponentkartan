@@ -43,6 +43,9 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
 
 
   ngAfterContentInit() {
+    if (this.items.length === 0) {
+      return;
+    }
     this.items.forEach(item => {
       item.itemSelected.pipe(
         takeUntil(this.ngUnsubscribeItems)
@@ -53,38 +56,31 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
 
     this.setSelectedValue(this.value);
     this.setGroupDisabledOverride(this._disabled);
-
-    // Om ingen är vald, möjliggör att man kan tabba in till första enablade elementet
-    this.setFirstOptionAsFocusable();
   }
 
 
  setSelectedValue(value: string | number) {
-  const selectedItem = this.items.filter(x => x.value === value)[0];
-  
-  if (selectedItem) {
-    selectedItem.selected = true;
-    this.unSelectItems(selectedItem);
+  if(value) {
+    const selectedItem = this.items.filter(x => x.value === value)[0];
+    if (selectedItem) {
+      selectedItem.selected = true;
+      this.unSelectItems(selectedItem);
+    } else {
+      this.unSelectItems();
+    }
   } else {
     this.unSelectItems();
   }
  }
-  setFirstOptionAsFocusable() {
+
+ setFirstOptionAsFocusable() {
     if(!this.items.some(x => x.selected)) {
       this.items.filter(x => !x.disabled)[0].isTabEnabled = true;
     }
-  }
+ }
 
   ngOnChanges() {
-    // if (this.radiogroupItems && this.radiogroupItems.length > 0) {
-    //   const preSelectedOption = this.radiogroupItems.find(x => x.selected);
-    //   if (preSelectedOption) {
-    //     this.selectOption(preSelectedOption);
-    //   }
-    // }
-    console.log('onchanges')
     if (this.formControlName && this.controlContainer) {
-      console.log('onChanges group')
       this.control = this.controlContainer.control.get(this.formControlName);
     }
   }
@@ -125,14 +121,14 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       }
     });
 
-    this.setFirstOptionAsFocusable();
-
     if (itemToExclude) {
       this.value = itemToExclude.value;
     } else {
+      // Om ingen är vald, möjliggör att man kan tabba in till första enablade elementet
+      this.setFirstOptionAsFocusable();
       this.value = null;
     }
-    
+
     this.onChange(itemToExclude);
   }
 
@@ -214,7 +210,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     if (value) {
       this.value = value;
     }
-    
+
     if (this.items) {
       this.setSelectedValue(value);
     }
