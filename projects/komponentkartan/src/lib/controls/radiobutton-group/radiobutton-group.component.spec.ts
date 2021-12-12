@@ -26,9 +26,9 @@ fdescribe('RadiobuttonGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TestRadiogroupComponent, RadiobuttonGroupComponent, RadiobuttonItemComponent ]
+      declarations: [TestRadiogroupComponent, RadiobuttonGroupComponent, RadiobuttonItemComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -70,16 +70,16 @@ fdescribe('RadiobuttonGroupComponent', () => {
       fixture.detectChanges();
     });
 
-    it('firstOptionFocusable has been called',() => {
+    it('firstOptionFocusable has been called', () => {
       expect(spyFirstOptionFocusable).toHaveBeenCalled();
     });
 
-    it('firstItem has tabIndex = 0',() => {
+    it('firstItem has tabIndex = 0', () => {
       const firstItem = rootElement.queryAll(By.css('vgr-radiobutton-item .radio-button__icon'))[0];
       expect(firstItem.nativeElement.tabIndex).toBe(0);
     });
 
-    it('other Items has tabIndex = -1',() => {
+    it('other Items has tabIndex = -1', () => {
       const noTabIndexItems = rootElement.queryAll(By.css('vgr-radiobutton-item .radio-button__icon')).filter(x => x.nativeElement.tabIndex === -1);
       expect(noTabIndexItems.length).toBe(2);
     });
@@ -97,8 +97,8 @@ fdescribe('RadiobuttonGroupComponent', () => {
       tick(400);
       fixture.detectChanges();
       //  fixture.whenStable().then(() => {
-        component.ngAfterContentInit();
-        tick(Infinity);
+      component.ngAfterContentInit();
+      tick(Infinity);
 
       //  });
       fixture.detectChanges();
@@ -106,9 +106,9 @@ fdescribe('RadiobuttonGroupComponent', () => {
 
     }));
 
-    it('firstOptionFocusable not to have been called',() => {
+    it('firstOptionFocusable not to have been called', () => {
       // fixture.whenStable().then(() => {
-        expect(spyFirstOptionFocusable).not.toHaveBeenCalled();
+      expect(spyFirstOptionFocusable).not.toHaveBeenCalled();
       // })
     });
 
@@ -164,19 +164,17 @@ fdescribe('RadiobuttonGroupComponent', () => {
 
     });
 
-  describe('more than one item selected', () => {
+    describe('more than one item selected', () => {
 
     });
 
   });
 
-  fdescribe('Keyboard navigation', () => {
+  describe('Keyboard navigation', () => {
     let selectedOption: DebugElement[];
     let optionToSelect: DebugElement;
     let currentSelection: DebugElement;
-    let spySetSelected;
     beforeEach(() => {
-      spySetSelected = spyOn(component, "setSelectedValue").and.callThrough();
       component.ngAfterContentInit();
       fixture.detectChanges
       optionToSelect = rootElement.queryAll(By.css('vgr-radiobutton-item > div')).filter(x => x.nativeElement.innerText === 'One')[0];
@@ -185,67 +183,45 @@ fdescribe('RadiobuttonGroupComponent', () => {
       selectedOption = rootElement.queryAll(By.css('.radio-button--checked'));
     });
 
-    it('spy to have been called', () => {
-      expect(spySetSelected).toHaveBeenCalled();
-    })
     it('the option is  selected', () => {
       expect(selectedOption[0].nativeElement.innerText).toEqual('One');
     });
 
     describe('and right arrow key is pressed', () => {
       beforeEach(() => {
-        
-        
-        let selections = rootElement.queryAll(By.css('#radiogroup .radio-button--checked'));
-        currentSelection = selections[0]
-        console.log(selections[0].nativeElement.innerHTML)
-        console.log(currentSelection.nativeElement.innerHTML)
-      
-        console.log(component.items.get(0).elementId, component.items.get(0).selected)
-        console.log(component.items.get(1).elementId, component.items.get(1).selected)
-        console.log(component.items.get(2).elementId, component.items.get(2).selected)
+        let currentSelection = rootElement.query(By.css('#radiogroup'));
         currentSelection.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
-        //currentSelection.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowRight' }));
 
-          fixture.detectChanges();
-          console.log(component.items.get(0).elementId, component.items.get(0).selected, component.items.get(0).isTabEnabled)
-          console.log(component.items.get(1).elementId, component.items.get(1).selected, component.items.get(1).isTabEnabled)
-          console.log(component.items.get(2).elementId, component.items.get(2).selected, component.items.get(2).isTabEnabled)
-          selectedOption = rootElement.queryAll(By.css('.radio-button--checked'));
-          console.log(selectedOption[0].nativeElement.innerHTML)
+        fixture.detectChanges();
+        selectedOption = rootElement.queryAll(By.css('.radio-button--checked'));
       });
       it('only one option is selected', () => {
-        
-          expect(selectedOption.length).toBe(1);
+        expect(selectedOption.length).toBe(1);
       });
 
-      fit('next option is selected (Two)', () => {
-        console.log(component.items.get(0).elementId, component.items.get(0).selected)
-        console.log(component.items.get(1).elementId, component.items.get(1).selected)
-        console.log(component.items.get(2).elementId, component.items.get(2).selected)
-          currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
-          console.log(currentSelection.nativeElement.innerText)
-          expect(currentSelection.nativeElement.innerText).toEqual('Two');
+      it('next option is selected (Two)', () => {
+        currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
+        expect(currentSelection.nativeElement.innerText).toEqual('Two');
       });
       describe('and left arrow key is pressed', () => {
 
-          beforeEach(() => {
-              currentSelection = rootElement.query(By.css('.radio-button--checked'));
-              currentSelection.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+        beforeEach(() => {
+          currentSelection = rootElement.query(By.css('#radiogroup'));
+          currentSelection.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
 
-              fixture.detectChanges();
-              selectedOption = rootElement.queryAll(By.css('.radio-button--checked .radio-button__icon'));
+          fixture.detectChanges();
+          selectedOption = rootElement.queryAll(By.css('.radio-button--checked'));
 
-          });
-          it('only one option is selected', () => {
-              expect(selectedOption.length).toBe(1);
-          });
+        });
+        it('only one option is selected', () => {
+          expect(selectedOption.length).toBe(1);
+        });
 
-          it('previous option is selected (One), ', () => {
-              currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
-              expect(currentSelection.nativeElement.innerText).toEqual('One');
-          });
+        it('previous option is selected (One), ', () => {
+          currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
+          expect(currentSelection.nativeElement.innerText).toEqual('One');
+        });
       });
-  });
+    });
   });
 });
