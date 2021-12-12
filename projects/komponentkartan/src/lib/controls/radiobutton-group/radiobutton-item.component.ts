@@ -36,7 +36,6 @@ export class RadiobuttonItemComponent implements AfterContentInit {
 
   constructor(private elementRef: ElementRef) {
     this.elementId = Math.random().toString();
-
   }
 
   ngAfterContentInit() {
@@ -44,7 +43,7 @@ export class RadiobuttonItemComponent implements AfterContentInit {
       this.value = this.value ?? document.getElementById(this.elementId).innerHTML;
       // console.log(this.value, document.getElementById(this.elementId).innerHTML)
       // console.log('radioContent: ', this.radioButtonContent)
-    }, 100);
+    }, 50);
 
   }
 

@@ -54,13 +54,12 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       });
     });
 
-    this.setSelectedValue(this.value);
+    // this.setSelectedValue(this.value);
     this.setGroupDisabledOverride(this._disabled);
   }
 
 
  setSelectedValue(value: string | number) {
-  if(value) {
     const selectedItem = this.items.filter(x => x.value === value)[0];
     if (selectedItem) {
       selectedItem.selected = true;
@@ -68,9 +67,6 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     } else {
       this.unSelectItems();
     }
-  } else {
-    this.unSelectItems();
-  }
  }
 
  setFirstOptionAsFocusable() {
@@ -147,7 +143,9 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
   }
 
   keyDown(event: KeyboardEvent): void {
-    const selectedItem = this.items.filter(item => item.radioButton.nativeElement === event.target)[0];
+    const selectedItem = this.items.filter(item => {
+      return item.radioButton.nativeElement === event.target
+    })[0];
 
 
     if (['Enter', 'Spacebar', ' '].includes(event.key)) {

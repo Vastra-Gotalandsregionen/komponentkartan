@@ -194,21 +194,37 @@ fdescribe('RadiobuttonGroupComponent', () => {
 
     describe('and right arrow key is pressed', () => {
       beforeEach(() => {
-        currentSelection = rootElement.query(By.css('.radio-button--checked'));
-        console.log(currentSelection)
-          currentSelection.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
-
+        
+        
+        let selections = rootElement.queryAll(By.css('#radiogroup .radio-button--checked'));
+        currentSelection = selections[0]
+        console.log(selections[0].nativeElement.innerHTML)
+        console.log(currentSelection.nativeElement.innerHTML)
+      
+        console.log(component.items.get(0).elementId, component.items.get(0).selected)
+        console.log(component.items.get(1).elementId, component.items.get(1).selected)
+        console.log(component.items.get(2).elementId, component.items.get(2).selected)
+        currentSelection.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+        //currentSelection.triggerEventHandler('keydown', new KeyboardEvent('keydown', { key: 'ArrowRight' }));
 
           fixture.detectChanges();
+          console.log(component.items.get(0).elementId, component.items.get(0).selected, component.items.get(0).isTabEnabled)
+          console.log(component.items.get(1).elementId, component.items.get(1).selected, component.items.get(1).isTabEnabled)
+          console.log(component.items.get(2).elementId, component.items.get(2).selected, component.items.get(2).isTabEnabled)
           selectedOption = rootElement.queryAll(By.css('.radio-button--checked'));
           console.log(selectedOption[0].nativeElement.innerHTML)
       });
       it('only one option is selected', () => {
+        
           expect(selectedOption.length).toBe(1);
       });
 
       fit('next option is selected (Two)', () => {
+        console.log(component.items.get(0).elementId, component.items.get(0).selected)
+        console.log(component.items.get(1).elementId, component.items.get(1).selected)
+        console.log(component.items.get(2).elementId, component.items.get(2).selected)
           currentSelection = rootElement.queryAll(By.css('.radio-button--checked'))[0];
+          console.log(currentSelection.nativeElement.innerText)
           expect(currentSelection.nativeElement.innerText).toEqual('Two');
       });
       describe('and left arrow key is pressed', () => {
