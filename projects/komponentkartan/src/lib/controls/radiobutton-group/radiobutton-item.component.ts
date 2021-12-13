@@ -72,6 +72,9 @@ export class RadiobuttonItemComponent implements AfterContentInit {
     this.radioButton.nativeElement.focus();
   }
 
+  public hasFocus() {
+    return this.radioButton.nativeElement === document.activeElement;
+  }
   checkTabFocus() {
     return this.elementRef.nativeElement.querySelectorAll('.radio-button--checked').length > 0;
 
