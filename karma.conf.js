@@ -3,38 +3,44 @@
 
 module.exports = function (config) {
   config.set({
-    basePath: '',
+    basePath: 'projects/komponentkartan',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
+      require('karma-junit-reporter'),
+      require('karma-spec-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    // coverageIstanbulReporter: {
-    //   dir: require('path').join(__dirname, 'coverage'),
-    //   reports: ['html', 'lcovonly'],
-    //   fixWebpackSourcePaths: true
-    // },
+    coverageIstanbulReporter: {
+      dir: require('path').join(__dirname, 'coverage'),
+      reports: ['html', 'lcovonly'],
+      fixWebpackSourcePaths: true
+    },
     junitReporter: {
       outputDir: 'TestResults/',
       outputFile: 'karma-test-result.xml',
       suite: 'karma-test-result',
       useBrowserName: false
     },
-    angularCli: {
-      environment: 'dev'
+    coverageReporter: {
+      type: 'cobertura',
+      dir: 'TestResults/Coverage/'
     },
-    reporters: ['progress', 'kjhtml'],
+    // angularCli: {
+    //   environment: 'dev'
+    // },
+    reporters: ['progress', 'kjhtml', 'junit'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
     autoWatch: true,
-    browsers: ['ChromeHeadless'],
+    browsers: ['Chrome'],
     singleRun: false
   });
 };
