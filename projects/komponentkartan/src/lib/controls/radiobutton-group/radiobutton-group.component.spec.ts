@@ -161,16 +161,57 @@ fdescribe('RadiobuttonGroupComponent', () => {
 
   describe('Errorhandling', () => {
     describe('required but no item selected', () => {
+      beforeEach(() => {
+        component.items.forEach(element => element.selected = false);
+        component.required = true;
+        fixture.detectChanges();
+        component.ngAfterContentInit();
+      });
 
+      it('errorActive should be true', () => {
+        expect(component.errorActive).toBe(true);
+      });
+
+      it('validationErrorMessage should be "Obligatoriskt"', () => {
+        expect(component.validationErrorMessage).toBe('Obligatoriskt');
+      });
     });
 
     describe('more than one item selected', () => {
+      beforeEach(() => {
+        component.items.forEach(element => element.selected = true);
+        fixture.detectChanges();
+        component.ngAfterContentInit();
+      });
 
+      it('errorActive should be true', () => {
+        expect(component.errorActive).toBe(true);
+      });
+
+      it('validationErrorMessage should be "Mer än ett val är aktivt"', () => {
+        expect(component.validationErrorMessage).toBe('Mer än ett val är aktivt');
+      });
     });
 
+    describe('showValidation is false', () => {
+      beforeEach(() => {
+        component.items.forEach(element => element.selected = true);
+        component.showValidation = false;
+        fixture.detectChanges();
+        component.ngAfterContentInit();
+      });
+
+      it('errorActive should be false', () => {
+        expect(component.errorActive).toBe(false);
+      });
+
+      it('validationErrorMessage should be "Mer än ett val är aktivt"', () => {
+        expect(component.validationErrorMessage).toBe('Obligatoriskt');
+      });
+    });
   });
 
-  describe('Keyboard navigation', () => {
+  xdescribe('Keyboard navigation', () => {
     let selectedOption: DebugElement[];
     let optionToSelect: DebugElement;
     let currentSelection: DebugElement;
