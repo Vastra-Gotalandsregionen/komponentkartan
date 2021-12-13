@@ -120,6 +120,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       }
     });
 
+
     if (itemToExclude) {
       this.value = itemToExclude.value;
     } else {

@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { RadiobuttonItemComponent } from './radiobutton-item.component';
 
-fdescribe('RadiobuttonItemComponent', () => {
+describe('RadiobuttonItemComponent', () => {
   let component: RadiobuttonItemComponent;
   let fixture: ComponentFixture<RadiobuttonItemComponent>;
   let rootElement: DebugElement;
