@@ -2,16 +2,18 @@
   <div class="docs__overview">
     <p>
       <code>
-        &lt;vgr-radio-group&gt;</code>
+        &lt;vgr-radiobutton-group&gt;</code>
     </p>
     <br>
     <p>En radiogroup innehåller flera radioknappar, där bara ett alternativ är valt åt gången, val kan vara förvalda och/eller
       inaktiva. Vid val av alternativ triggas eventet
-      <code>selectedChanged</code>. Valbara items är av typen
-      <code>SelectableItem</code>. Det är genom att sätta properties på dessa objekt som man styr beteendet.
+      <code>selectedChanged</code>. Man kan placera valfria objekt i sina items, eller bara sätta en text. Om man lägger objekt i sina items så är
+      det bra att även sätta ett värde för sitt item så gruppen vet om detta.
       <br>
-      <vgr-radio-group [options]="[{value:'1', displayName:'Alternativ 1', selected:true},{value:'2', displayName:'Alternativ 2'}]">
-      </vgr-radio-group>
+      <vgr-radiobutton-group>
+        <vgr-radiobutton-item [selected]="true" [value]="1" >Alternativ 1</vgr-radiobutton-item>
+      <vgr-radiobutton-item [selected]="false" [value]="2">Alternativ 2</vgr-radiobutton-item>
+      </vgr-radiobutton-group>
     </p>
 
 
@@ -25,13 +27,14 @@
       <!--Disabled på group, overrides disabled på item vid true -->
     <h2>Horisontell radiogrupp med möjlighet att disabla gruppen</h2>
     Välj föredragen bil
+    <vgr-checkbox (checkedChanged)="groupDisabled = $event" label="Jag cyklar" [checked]="groupDisabled"></vgr-checkbox>
     <vgr-radiobutton-group (selectedChanged)="someCode()" [disabled]="groupDisabled">
       <vgr-radiobutton-item [selected]="true" [disabled]="false">Subaru</vgr-radiobutton-item>
       <vgr-radiobutton-item [selected]="false" [disabled]="true">Volvo</vgr-radiobutton-item>
       <vgr-radiobutton-item [selected]="false" [disabled]="false">Toyota</vgr-radiobutton-item>
     </vgr-radiobutton-group>
 
-    <vgr-checkbox (checkedChanged)="groupDisabled = $event" label="Jag cyklar" [checked]="groupDisabled"></vgr-checkbox>
+
 
     <hr>
     <h2>Vertical radiogrupp </h2>
@@ -53,7 +56,7 @@
     </vgr-radiobutton-group>
     <label>Val: {{this.radioGroupForm.controls.val.value?.value}}</label>
     </form>
-    <hr>
+    <!-- <hr>
       <vgr-radio-group [options]="[{value:'Förvald', displayName:'Förvald', selected:true},{value:'Ej förvald', displayName:'Ej förvald'}, {value:'3Inaktiv', displayName:'Inaktiv', disabled:true}]"
         (selectedChanged)="onSelectedRadioOptionChanged($event)">
       </vgr-radio-group>
@@ -80,11 +83,10 @@
       <br>
       <br>
       <br>
-      <div>Du har valt alternativ: {{selectedOption}}</div>
+      <div>Du har valt alternativ: {{selectedOption}}</div> -->
 
 
     </div>
-    <br>
     <br> Under "kodexempel" finns exempel på hur radiogroup-komponenten kan användas i Angular Reactive Forms:
     <br>
     <a href="/reactiveformsexample">Reactive Forms exempel</a>
