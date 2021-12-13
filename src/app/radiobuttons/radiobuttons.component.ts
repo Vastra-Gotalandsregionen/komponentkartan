@@ -27,8 +27,9 @@ export class RadiobuttonsComponent implements OnInit {
     this.options2 = [{ value: 'Val 1', displayName: 'Val 1 med  väldigt lång label' }, { value: 'Val 2', displayName: 'Val 2' }, { value: 'Val 3', displayName: 'Val 3' }];
 
     this.radioGroupForm = new FormGroup({
-      val: new FormControl('Det var bra')
+      val: new FormControl('Det var inte bra')
     }, { updateOn: 'change' });
+
 
   }
 

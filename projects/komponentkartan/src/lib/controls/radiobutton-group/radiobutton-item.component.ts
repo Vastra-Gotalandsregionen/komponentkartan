@@ -1,17 +1,18 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'vgr-radiobutton-item',
   templateUrl: './radiobutton-item.component.html',
   styleUrls: ['./radiobutton-item.component.scss']
 })
-export class RadiobuttonItemComponent implements AfterContentInit {
+export class RadiobuttonItemComponent implements AfterViewInit {
   groupDisabledOverride: boolean; // gruppens disabledState
   elementId: string;
 
 
   @Input() selected: boolean;
   @Input() value: string | number;
+  label: string;
   @Input() set disabled(val: boolean) {
     this._disabled = val;
   };
@@ -38,13 +39,12 @@ export class RadiobuttonItemComponent implements AfterContentInit {
     this.elementId = Math.random().toString();
   }
 
-  ngAfterContentInit() {
-    setTimeout(() => {
-      this.value = this.value ?? document.getElementById(this.elementId).innerHTML;
-    }, 50);
-
+  ngAfterViewInit() {
+    this.label = (this.item.nativeElement as Node).textContent.trim();
+    if (this.value === undefined) {
+      this.value = this.label;
+    }
   }
-
   itemClicked() {
     if (this.item && !this.disabled) {
       this.selected = true;
