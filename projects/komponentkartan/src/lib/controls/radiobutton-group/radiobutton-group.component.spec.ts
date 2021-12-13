@@ -205,13 +205,13 @@ fdescribe('RadiobuttonGroupComponent', () => {
         expect(component.errorActive).toBe(false);
       });
 
-      it('validationErrorMessage should be "Mer än ett val är aktivt"', () => {
+      it('validationErrorMessage should be "Obligatoriskt"', () => {
         expect(component.validationErrorMessage).toBe('Obligatoriskt');
       });
     });
   });
 
-  xdescribe('Keyboard navigation', () => {
+  describe('Keyboard navigation', () => {
     let selectedOption: DebugElement[];
     let optionToSelect: DebugElement;
     let currentSelection: DebugElement;

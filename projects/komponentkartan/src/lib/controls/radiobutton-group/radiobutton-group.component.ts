@@ -146,12 +146,12 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
   }
 
   keyDown(event: KeyboardEvent): void {
-    const selectedItem = this.items.filter(item => {
-      console.log(event.target)
-      return item.radioButton.nativeElement === event.target
-    })[0];
+    // const selectedItem = this.items.filter(item => {
+    //   console.log(event.target)
+    //   return item.radioButton.nativeElement === event.target
+    // })[0];
 
-    // const selectedItem = this.items.filter(item => item.selected)[0];
+    const selectedItem = this.items.filter(item => item.checkTabFocus())[0];
     if (['Enter', 'Spacebar', ' '].includes(event.key)) {
       const positionArray = this.items.toArray();
       const position = positionArray.indexOf(selectedItem)
