@@ -18,7 +18,7 @@ import { RadiobuttonItemComponent } from './radiobutton-item.component';
   `
 }) class TestRadiogroupComponent { }
 
-fdescribe('RadiobuttonGroupComponent', () => {
+describe('RadiobuttonGroupComponent', () => {
   let component: RadiobuttonGroupComponent;
   // let fixture: ComponentFixture<RadiobuttonGroupComponent>;
   let fixture: ComponentFixture<TestRadiogroupComponent>;
