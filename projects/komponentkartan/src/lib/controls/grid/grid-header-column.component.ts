@@ -18,10 +18,6 @@ export class GridHeaderColumnComponent {
   constructor(private injector: Injector) { }
 
   @HostListener('keydown', ['$event']) keydown(event: any) {
-    let grid = event.target.closest('vgr-grid');
-    console.log('grid: ', grid);
-
-    
     const parent: GridComponent = this.injector.get<GridComponent>(GridComponent);  
     if (event.key === 'ArrowDown') {
       event.preventDefault();

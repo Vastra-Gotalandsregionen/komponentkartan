@@ -89,7 +89,6 @@ describe('InputComponent', () => {
       fixture.detectChanges();
       component.control.dirty;
       fixture.detectChanges();
-      console.log(component.control)
     });
 
     it('should show as invalid', () => {
