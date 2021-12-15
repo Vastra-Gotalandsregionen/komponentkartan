@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormattemplateComponent implements OnInit {
 
+  showAlert = false;
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.showAlert = true;
+    }, 3000);
   }
+
+
 
 }
