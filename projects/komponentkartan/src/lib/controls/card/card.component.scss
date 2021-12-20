@@ -78,7 +78,7 @@
     margin-bottom: 5px;
 
 
-    &:focus {
+    &:focus-visible {
       outline: 0; // z-index: 999;
       box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
     }

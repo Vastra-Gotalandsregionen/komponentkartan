@@ -39,8 +39,8 @@
       </vgr-grid-row>
 
     </vgr-grid>
-    <vgr-grid>
-      <vgr-grid-header>
+    <vgr-grid [zebraLayout]="true">
+      <vgr-grid-header >
         <vgr-grid-header-column [width]="5">Header 1</vgr-grid-header-column>
         <vgr-grid-header-column [width]="5">Header 2</vgr-grid-header-column>
         <vgr-grid-header-column [width]="5">Header 3</vgr-grid-header-column>
@@ -157,9 +157,10 @@
         <vgr-grid-header-column [width]="20">
           <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
         </vgr-grid-header-column>
+        <!--sortKey="belopp" -->
         <vgr-grid-header-column [width]="200" sortKey="fornamn">Förnamn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="200" sortKey="efternamn">Efternamn</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="100" sortKey="belopp" [align]="'right'">Belopp</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="100" [align]="'right'">Belopp</vgr-grid-header-column>
         <vgr-grid-header-column [width]="100" sortKey="status" [align]="'center'">Status</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row *ngFor="let person of paginatedPeople">
@@ -181,7 +182,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-    <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false">
+    <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false" [zebraLayout]="true">
       <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = !expanded0">
         <vgr-grid-column width="23">Grid utan rubriker och snabb animeringen</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>

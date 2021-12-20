@@ -22,7 +22,7 @@
       border: $focus-outline-width solid $focus-color;
       transition: border-color 0.5s ease;
     }
-    &:focus {
+    &:focus-visible {
       border: $focus-outline-width solid $focus-color;
     }
     z-index: $layer-five;
@@ -53,7 +53,7 @@
       > .icon {
         color: $text-color--light;
       }
-    }    
+    }
   }
 }
 

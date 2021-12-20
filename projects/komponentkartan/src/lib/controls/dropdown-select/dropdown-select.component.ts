@@ -105,7 +105,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     }
 
     if (changes.noItemSelectedLabel && changes.noItemSelectedLabel.firstChange || (this.items && !this.items.some(item => item.selected))) {
-      this.label = this.noItemSelectedLabel;
+       this.label = this.disabled ? '' : this.noItemSelectedLabel;
     }
   }
 
@@ -213,7 +213,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     const selecedItem = this.items.find(item => item.selected);
     if (selecedItem) {
       selecedItem.selected = false;
-      this.label = this.noItemSelectedLabel;
+      this.label = this.disabled ? '' : this.noItemSelectedLabel;
       this.deselectDisabled = true;
       this.onChange(null);
     }
@@ -506,7 +506,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
             this.onChange(values);
           } else {
             this.allSelected = false;
-            this.label = this.noItemSelectedLabel;
+            this.label = this.disabled ? '' : this.noItemSelectedLabel;
             this.onChange(null);
           }
         });
@@ -585,7 +585,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   private setLabel(selectedItems: DropdownItemComponent[]) {
     if (this.simpleLabel) {
       if (!selectedItems.length) {
-        this.label = this.noItemSelectedLabel;
+        this.label = this.disabled ? '' : this.noItemSelectedLabel;
       } else if (selectedItems.length === this.items.length) {
         this.label = 'Alla';
       } else if (selectedItems.length === 1) {
@@ -598,7 +598,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       if (labels.length) {
         this.label = labels.reduce((xs, x) => xs = `${xs}, ${x}`);
       } else {
-        this.label = this.noItemSelectedLabel;
+        this.label = this.disabled ? '' : this.noItemSelectedLabel;
       }
     }
   }
@@ -627,7 +627,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
           i.selected = false;
         }
       });
-      this.label = selectedItem ? selectedItem.selectedLabel || selectedItem.label : this.noItemSelectedLabel;
+      this.label = selectedItem ? selectedItem.selectedLabel || selectedItem.label : this.disabled ? '' : this.noItemSelectedLabel;
       if (value) {
         this.deselectDisabled = false;
       } else {
@@ -638,6 +638,14 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+
+    // if disabled and noitems selected, empty placeholder
+    if (this.disabled && this.label === this.noItemSelectedLabel ) {
+      this.label = '';
+    // if not disabled and noitems selected, set placeholder
+    } else if (!this.disabled && this.label === '') {
+      this.label = this.noItemSelectedLabel;
+    }
   }
 
   getLabelFromId() {

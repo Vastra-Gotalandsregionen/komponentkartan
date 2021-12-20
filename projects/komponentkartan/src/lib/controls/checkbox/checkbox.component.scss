@@ -34,7 +34,7 @@
       /* Det blir problem med tab "flödet" när display:none används för att dölja input element.
       *  Width och height har satts till 0px istället för att använda display:none eller visibilty:hidden. */
 
-      &:focus + .checkbox__control {
+      &:focus-visible + .checkbox__control {
         box-shadow: 0 0 0 2px #2275d3;
         outline: none;
       }
@@ -80,7 +80,7 @@
     &.checkbox--transparent {
       background-color: transparent;
     }
-    &:focus {
+    &:focus-visible {
       box-shadow: 0 0 0 2px #2275d3;
       outline: none;
     }

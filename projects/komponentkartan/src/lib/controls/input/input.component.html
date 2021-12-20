@@ -17,7 +17,7 @@
           [attr.minlength]="minlength"
           [attr.maxlength]="maxlength"
           [attr.pattern]="pattern"
-          [placeholder]="placeholder"
+          [placeholder]="disabledControl ? '' : placeholder"
           [readonly]="readonly"
           [required]="required"
           [attr.step]="step"
@@ -25,6 +25,7 @@
           [value]="value"
           (search)="onChange($event)"
           (input)="onChange($event)"
+          (mousedown)="onClickFocus($event)"
           (focus)="onFocus($event)"
           (blur)="onBlur($event)"
           #inputElement

@@ -46,11 +46,6 @@
       text-align: right;
     }
   }
-
-  .focusable_div {
-    height: 28px;
-    line-height: 28px;
-  }
   .searchicon {
     padding: 0 5px;
     line-height: 30px;
@@ -64,13 +59,13 @@
   height: 1px;
 }
 
-.disabled_focus:focus {
+.disabled_focus:focus-visible {
     outline: $focus-outline-width solid $focus-color!important;
 }
 
 .validation-error--editing {
   .inputwrapper {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid $focus-color!important;
   }
 }
 .validation.readonly {

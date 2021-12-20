@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostBinding, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding, ViewChild, ElementRef, HostListener, Injector } from '@angular/core';
+import { GridComponent } from '../grid/grid.component'
 import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 
 
@@ -14,7 +15,15 @@ export class GridHeaderColumnComponent {
   @Output() sortChanged: EventEmitter<GridSortDirection> = new EventEmitter<GridSortDirection>();
   @ViewChild('gridHeaderColumn', { read: ElementRef, static: false }) gridHeaderColumn: ElementRef;
 
-  constructor() { }
+  constructor(private injector: Injector) { }
+
+  @HostListener('keydown', ['$event']) keydown(event: any) {
+    const parent: GridComponent = this.injector.get<GridComponent>(GridComponent);  
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      parent.setFocusOnRow(0);
+    }
+  } 
 
   changeSort() {
     if (this.sortKey) {

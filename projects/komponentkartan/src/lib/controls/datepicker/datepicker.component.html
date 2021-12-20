@@ -14,6 +14,7 @@
         (focusin)="onHeaderFocus()"
         (focusout)="onHeaderBlur()"
         (keydown)="onHeaderKeydown($event)"
+        (mousedown)="onMouseDownClick()"
         (click)="onHeaderClick()" >
 
         <!-- Om Textboxen inte tillåter att man skriver datum disabled || errorActive  ? -1 : 0-->
@@ -24,7 +25,7 @@
           [attr.aria-disabled]="disabled"
           [attr.aria-expanded]="expanded"
           [attr.aria-describedby]="elementId">
-          <input class="datepicker__header__input" [disabled]="disabled" [placeholder]="noSelectedDateLabel" readonly="readonly"
+          <input class="datepicker__header__input" [disabled]="disabled" [placeholder]="disabled ? '' : noSelectedDateLabel" readonly="readonly"
           [tabindex]="-1" [value]="label" >
           <span class="screenreader_only" aria-disabled="true">{{label}}</span>
         </div>
@@ -33,7 +34,7 @@
         <div #headerInputDiv *ngIf="allowText" [attr.aria-describedby]="elementId" tabindex="0" role="textbox" [attr.aria-disabled]="disabled" >
           <input #headerInput class="datepicker__header__input"
             [ngClass]="{'datepicker--transparent': transparent }"
-            [placeholder]="inputPlaceholder"
+            [placeholder]="disabled ? '' : inputPlaceholder"
             aria-haspopup="grid"
             [attr.id]="labelId"
             [attr.aria-expanded]="expanded"

@@ -3,7 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-
+# 9.0.4 (2021-12-01) Stable 
+- removed anoying console logs
+# 9.0.3 (2021-12-01) Stable 
+- Fixed bug for page-header width (#596)
+- Added disabled background-color to vgr-textarea (#469)
+- Added zebraLayout input property for vgr-grid (#523)
+# 9.0.2 (2021-11-29) Stable
+- Removed placeholder text when component is disabled (#603)
+- Hide focus on mouseclick (#525)
+- Updated navigation in grid (#508)
 # 9.0.1 (2021-11-11) Stable
 - Fixed dropdown-select validation inheritance bug (#568)
 - Fixed bugg for focus on closed elements when tabbing (#507)

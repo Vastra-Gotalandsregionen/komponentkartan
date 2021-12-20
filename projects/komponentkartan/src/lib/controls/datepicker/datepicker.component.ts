@@ -61,6 +61,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   private ngUnsubscribe = new Subject();
   private ngUnsubscribeItems = new Subject();
   elementId: string;
+  mouseDown: any;
 
   @HostListener('window:resize', [])
   onWindowResize() {
@@ -160,7 +161,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     } else {
       this.headerInput.nativeElement.focus();
     }
-    
+
   }
 
   writeValue(value: Date) {
@@ -200,8 +201,18 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     }
   }
 
+  onMouseDownClick() {
+    this.mouseDown = true;
+    this.headerHasFocus = false;
+  }
+
   onHeaderFocus() {
+    if (this.mouseDown) {
+      this.mouseDown = false;
+      return;
+    }
     this.headerHasFocus = true;
+    this.mouseDown = false;
   }
 
   onHeaderBlur() {
@@ -258,6 +269,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     if (this.allowText) {
       this.headerInput.nativeElement.focus();
     } else {
+      this.mouseDown = true;
       this.headerLabel.nativeElement.focus();
     }
 

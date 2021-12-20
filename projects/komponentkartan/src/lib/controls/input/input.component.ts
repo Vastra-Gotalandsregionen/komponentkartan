@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit, HostListener } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContainer } from '@angular/forms';
 
 @Component({
@@ -48,6 +48,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   control: AbstractControl;
   hasFocus = false;
   elementId: string;
+  mouseDown: boolean;
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) {
     this.elementId = Math.random().toString();
@@ -114,7 +115,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   registerOnTouched(fn: any): void {
     this.propagateTouch = fn;
   }
-
   onChange(event: KeyboardEvent) {
     const target = event.target as HTMLInputElement;
     this.value = target.value;
@@ -127,8 +127,21 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
     this.blur.emit(event);
   }
 
+  onClickFocus(event) {
+    this.mouseDown = true;
+    this.hasFocus = false;
+  }
+
   onFocus(event) {
-    this.hasFocus = true;
+    if (this.mouseDown) {
+      //reset mouseDown event (it will be set again on click)
+      this.mouseDown = false;
+      return;
+    }
+
+      this.hasFocus = true
+      //reset mouseDown event (it will be set again on click)
+      this.mouseDown = false;
   }
 
   public focus() {
@@ -136,7 +149,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   }
 
   getLabelFromId() {
-    // return window.document.getElementById(this.idForLabel)
     let labels = document.getElementsByTagName('label');
     for( var i = 0; i < labels.length; i++ ) {
       if (labels[i].htmlFor == this.labelId)

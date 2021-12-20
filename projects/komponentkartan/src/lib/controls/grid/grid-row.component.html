@@ -1,6 +1,6 @@
 <div class="grid-row-container" [ngClass]="{'grid-row-header--expandable': hasExpandablecontent, 'grid-row--expanded': isExpanded, 'grid-row-container--notification': hasNotifications}">
   <div #gridRowHeader class="grid-row-header-focus" tabindex="0" (click)="toggleExpanded()" [attr.aria-expanded]="isExpanded">
-    <div class="grid-row-header">
+    <div class="grid-row-header" [ngClass]="{'grid-row-header-background-zebra': zebraLayout}">
       <ng-content select="vgr-grid-column"></ng-content>
     </div>
     <div class="grid-row-notification">
