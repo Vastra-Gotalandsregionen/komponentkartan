@@ -222,9 +222,10 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
           rowColumns.forEach((column: HTMLElement, index) => {
             column.style.width = headerColumnWidth[index];
           })
+        
+          this.setAlignment();
+          rows.get(rows.length-1).editMode = this.inEditmode;
         }
-        this.setAlignment();
-        rows.get(rows.length-1).editMode = this.inEditmode;
       });
 
 
