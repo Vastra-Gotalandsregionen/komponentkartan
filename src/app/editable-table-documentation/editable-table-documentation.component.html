@@ -5,6 +5,42 @@
       För mer information, se dokumentation för <a routerLink="/pagestructure">sidhantering</a>.
       Exempel på redigerbar tabell med scroll och utan scroll nedan:
     </p>
+    <vgr-button  buttonStyle="discreet" (click)="addData()">
+      <vgr-icon icon="pen" [solid]="true"></vgr-icon>
+      Lägg till
+    </vgr-button>
+
+    <div style="padding-left: 20px; margin-top: 20px;">
+      <h2>Editerbar tabell med satt höjd</h2>
+    </div>
+      <vgr-editable-table [editMode]="true" [height]="'500px'">
+        <vgr-editable-table-header>
+          <vgr-editable-table-header-column [width]="'100px'">Produktkod</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'350px'">Rubrik</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'70px'" [align]="'center'">Konto</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar offentlig</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar privat</vgr-editable-table-header-column>
+          
+        </vgr-editable-table-header>
+        <vgr-editable-table-row *ngFor="let d of data3">
+            <vgr-editable-table-column><div><span>61 </span><span style="font-weight: bold;">{{d.produktkod}}</span></div></vgr-editable-table-column>
+            <vgr-editable-table-column>
+              {{ d.rubrik }}
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input  [value]="d.konto || ''" textAlign="right" [width]="'70px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input  [value]="d.ansvarOffentlig || ''" textAlign="right" [width]="'100px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input [value]="d.ansvarPrivat || ''" textAlign="right" [width]="'100px'"></vgr-input>
+            </vgr-editable-table-column>
+            
+          </vgr-editable-table-row>
+      </vgr-editable-table>
+
+<hr>
 
     <vgr-button  buttonStyle="discreet" (click)="redigera = !redigera">
       <vgr-icon icon="pen" [solid]="true"></vgr-icon>

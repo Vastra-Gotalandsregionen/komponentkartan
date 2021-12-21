@@ -33,24 +33,51 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
   @HostListener('focusout', ['$event']) onFocus(event) {
 
     if (!this.elRef.nativeElement.contains(event.relatedTarget)) {
-      this.resetTabIndexOnColumn();
-      this.tableRows.get(0).columns.get(0).tabIndex = 0;
+      if (this.tableRows.length > 0) {
+        this.resetTabIndexOnColumn();
+        this.tableRows.get(0).columns.get(0).tabIndex = 0;
+      }
       this.currentColumn = 0;
       this.currentRow = 0;
     }
   }
   resetTabIndexOnColumn() {
-    this.tableRows.get(this.currentRow).columns.get(this.currentColumn).tabIndex = -1;
+    if (this.tableRows.length > 0) {
+      this.tableRows.get(this.currentRow).columns.get(this.currentColumn).tabIndex = -1;
+    }
   }
 
   setTabIndexAndFocusOnColumn() {
-    this.tableRows.get(this.currentRow).columns.get(this.currentColumn).tabIndex = 0;
-    this.tableRows.get(this.currentRow).columns.get(this.currentColumn).focus();
+    if (this.tableRows.length > 0) {
+      this.tableRows.get(this.currentRow).columns.get(this.currentColumn).tabIndex = 0;
+      this.tableRows.get(this.currentRow).columns.get(this.currentColumn).focus();
+    }
   }
 
   @HostListener('keydown', ['$event']) onKeydownHandler(event: any) {
 
     switch (event.key) {
+//       case 'Tab':
+//         console.log('tabb', event, event.target, event.sourceTarget)
+//         if ((this.elRef.nativeElement && this.elRef.nativeElement.contains(event.target))) {
+//           console.log('tab i tabellen')
+//           // this.currentColumn = this.tableRows.get(this.tableRows.length-1).columns.length-1;
+//           // this.currentRow = this.tableRows.length-1;
+//           // this.setTabIndexAndFocusOnColumn();
+// // var x = document.getElementById("item1").nextElementSibling.innerHTML;
+// console.log(this.elRef.nativeElement.nextElementSibling)
+//           // setTimeout(() => {
+        
+//             event.preventDefault();
+//             event.stopPropagation();
+            
+//             this.elRef.nativeElement.nextElementSibling.focus();
+//           // }, 200);
+          
+//           console.log(this.elRef)
+//           console.log(document.activeElement)
+//         }
+//         break;
       case 'ArrowRight':
       case 'Right':
         event.preventDefault();
@@ -184,7 +211,9 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
     this.tableRows.forEach(row => row.parentId = this.id);
     this.tableHeader.headerColumns.forEach(column => column.parentId = this.id)
 
-    this.tableRows.get(0).columns.get(0).tabIndex = 0;
+    if (this.tableRows.length > 0) {
+      this.tableRows.get(0).columns.get(0).tabIndex = 0;
+    }
     this.currentColumn = 0;
     this.currentRow = 0;
 

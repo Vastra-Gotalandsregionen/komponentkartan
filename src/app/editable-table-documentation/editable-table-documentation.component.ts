@@ -8,6 +8,7 @@ import { HtmlEncodeService } from '../html-encode.service';
   styleUrls: ['./editable-table-documentation.component.scss']
 })
 export class EditableTableDocumentationComponent {
+  data3 = [];
   data = [
     {
       produktkod: '010',
@@ -407,6 +408,10 @@ export class EditableTableDocumentationComponent {
       });
       this.myData.push(g)
     });
+  }
+
+  addData() {
+    this.data3.push({})
   }
 
 }
