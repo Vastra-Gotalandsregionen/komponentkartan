@@ -415,4 +415,10 @@ export class EditableTableDocumentationComponent {
     this.data3.push({})
   }
 
+  removeData() {
+    if (this.data3.length > 0){
+      this.data3.splice(this.data3.length-1, 1);
+    }
+  }
+
 }

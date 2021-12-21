@@ -224,8 +224,9 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
           })
         
           this.setAlignment();
-          rows.get(rows.length-1).editMode = this.inEditmode;
+          rows.get(rows.length-1).editMode = this.inEditmode;  
         }
+       
       });
 
 
