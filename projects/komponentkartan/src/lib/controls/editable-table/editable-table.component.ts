@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { EditableTableHeaderComponent } from './editable-table-header.component';
 import { EditableTableRowComponent } from './editable-table-row.component';
 import { EditableTableService } from './editable-table.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'vgr-editable-table',
@@ -26,7 +27,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
 
   currentRow: number;
   currentColumn: number;
-  inEditmode: boolean;
+  inEditmode: boolean = false;
   calculatedHeight: any
   @HostBinding('class.editable-table') editableTableClass = true;
   @HostBinding('attr.id') id: string;
@@ -210,6 +211,25 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
   ngAfterContentInit() {
     this.tableRows.forEach(row => row.parentId = this.id);
     this.tableHeader.headerColumns.forEach(column => column.parentId = this.id)
+
+    this.tableRows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((rows) => {
+      setTimeout(() => {
+        const el = this.elRef.nativeElement;
+        const row = el.querySelector('vgr-editable-table-row');
+        if (row) {
+          const rowColumns = Array.from(row.querySelectorAll('vgr-editable-table-column'));
+          const headerColumnWidth = this.tableHeader.headerColumns.map(element => element.width);
+          rowColumns.forEach((column: HTMLElement, index) => {
+            column.style.width = headerColumnWidth[index];
+          })
+        }
+        this.setAlignment();
+        rows.get(rows.length-1).editMode = this.inEditmode;
+      });
+
+
+    });
+
 
     if (this.tableRows.length > 0) {
       this.tableRows.get(0).columns.get(0).tabIndex = 0;

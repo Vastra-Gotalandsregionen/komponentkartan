@@ -405,6 +405,7 @@ export class EditableTableDocumentationComponent {
       const g =  this.fb.group({
         datum: new FormControl(date),
         text: new FormControl(data.text, [ Validators.maxLength(6) ]),
+        combobox: new FormControl('', [ Validators.required ]),
       });
       this.myData.push(g)
     });

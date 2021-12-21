@@ -13,7 +13,7 @@
     <div style="padding-left: 20px; margin-top: 20px;">
       <h2>Editerbar tabell med satt höjd</h2>
     </div>
-      <vgr-editable-table [editMode]="true" [height]="'500px'">
+      <vgr-editable-table [editMode]="true" >
         <vgr-editable-table-header>
           <vgr-editable-table-header-column [width]="'100px'">Produktkod</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [width]="'350px'">Rubrik</vgr-editable-table-header-column>
@@ -23,9 +23,9 @@
           
         </vgr-editable-table-header>
         <vgr-editable-table-row *ngFor="let d of data3">
-            <vgr-editable-table-column><div><span>61 </span><span style="font-weight: bold;">{{d.produktkod}}</span></div></vgr-editable-table-column>
-            <vgr-editable-table-column>
-              {{ d.rubrik }}
+            <vgr-editable-table-column [width]="'100px'"><div><span>61 </span><span style="font-weight: bold;">{{d.produktkod}}</span></div></vgr-editable-table-column>
+            <vgr-editable-table-column [width]="'350px'">
+              {{ d.rubrik || '' }}
             </vgr-editable-table-column>
             <vgr-editable-table-column>
               <vgr-input  [value]="d.konto || ''" textAlign="right" [width]="'70px'"></vgr-input>
@@ -89,23 +89,31 @@
     <div style="padding-left: 20px; margin-top: 20px;">
       <h2>Editerbar tabell utan höjd satt och i ett formulär</h2>
     </div>
-    <div style="width:650px">
+    <div style="width:850px">
       <form [formGroup]="myForm">
       <vgr-editable-table [editMode]="!redigera2">
         <vgr-editable-table-header>
           <vgr-editable-table-header-column [align]="'left'" [width]="'150px'">AlignLeft</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [align]="'center'" [width]="'250px'" >AlignCenter</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [align]="'right'" [width]="'200px'">AlignRight</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [align]="'right'" [width]="'150px'">AlignRight</vgr-editable-table-header-column>
         </vgr-editable-table-header>
 
         <vgr-editable-table-row *ngFor="let d of myData.controls; let i = index" formArrayName="myFormArray">
           <ng-container [formGroupName]="i">
-            <vgr-editable-table-column >{{ data2[i].nummer }}</vgr-editable-table-column>
+            <vgr-editable-table-column >{{ data2[i].nummer }} </vgr-editable-table-column>
             <vgr-editable-table-column>
               <vgr-datepicker [readonly]="redigera2" formControlName="datum" ></vgr-datepicker>
             </vgr-editable-table-column>
             <vgr-editable-table-column>
               <vgr-input [width]="'150px'" [errorMessage]="'valideringsfel'" textAlign="right" [readonly]="redigera2"  formControlName="text" [value]="d.text"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-combobox [width]="'150px'" [showValidation]="d.controls.combobox.touched" [errorMessage]="'valideringsfel'" textAlign="right" [readonly]="redigera2"  formControlName="combobox" [value]="d.text">
+                <vgr-combobox-item>01</vgr-combobox-item>
+                <vgr-combobox-item>02</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+              </vgr-combobox>
             </vgr-editable-table-column>
             </ng-container>
           </vgr-editable-table-row>

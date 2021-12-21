@@ -1,5 +1,6 @@
 import { Component, ElementRef, QueryList, ContentChildren, AfterContentInit, Input, HostBinding } from '@angular/core';
 import { EditableTableColumnComponent } from './editable-table-column.component';
+import { EditableTableComponent } from './editable-table.component';
 import { EditableTableService } from './editable-table.service';
 
 @Component({
@@ -10,9 +11,11 @@ export class EditableTableRowComponent implements AfterContentInit {
   @ContentChildren(EditableTableColumnComponent) columns : QueryList<EditableTableColumnComponent>;
   @Input() parentId: string;
   @HostBinding('attr.role') role = 'row';
-
-  constructor(public elem: ElementRef, private editableTableService: EditableTableService) {
+  set editMode(value:boolean) {
+    this.columns.forEach((column) => column.editMode = value );
   }
+
+  constructor(public elem: ElementRef, private editableTableService: EditableTableService) {}
 
   ngAfterContentInit() {
     this.editableTableService.editmodeChanged.subscribe((value) => {
@@ -20,5 +23,7 @@ export class EditableTableRowComponent implements AfterContentInit {
         this.columns.forEach((column) => column.editMode = value.value );
       }
     });
+    
+
   }
 }

@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class EditableTableService {
+  
   private editmode = new Subject<any>();
   constructor() { }
 
@@ -12,4 +13,5 @@ export class EditableTableService {
   changeEditmode(value: boolean, id: any) {
     this.editmode.next({ value: value, id: id });
   }
+
 }

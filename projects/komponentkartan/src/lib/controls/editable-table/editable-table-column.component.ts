@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, ElementRef } from '@angular/core';
+import { Component, Input, HostBinding, ElementRef, Host } from '@angular/core';
 
 
 
@@ -12,6 +12,7 @@ export class EditableTableColumnComponent {
   @HostBinding('style.textAlign') align = 'left';
   @HostBinding('tabIndex') tabIndex = -1;
   @HostBinding('class.editmode') editMode = false;
+
   @Input() @HostBinding('attr.aria-describedby') headerId = '';
   @HostBinding('attr.role') role = 'cell';
 
