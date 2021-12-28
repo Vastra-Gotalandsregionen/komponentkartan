@@ -68,13 +68,13 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
 // // var x = document.getElementById("item1").nextElementSibling.innerHTML;
 // console.log(this.elRef.nativeElement.nextElementSibling)
 //           // setTimeout(() => {
-        
+
 //             event.preventDefault();
 //             event.stopPropagation();
-            
+
 //             this.elRef.nativeElement.nextElementSibling.focus();
 //           // }, 200);
-          
+
 //           console.log(this.elRef)
 //           console.log(document.activeElement)
 //         }
@@ -104,6 +104,12 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
         break;
       case 'ArrowUp':
       case 'Up':
+        if (event.srcElement.classList.contains('combobox__header__input')) {
+          return;
+        }
+        if (event.srcElement.childNodes[0].classList.contains('datepicker__header__input')) {
+          return;
+        }
         event.preventDefault();
         this.resetTabIndexOnColumn();
         if (this.currentRow === 0) {
@@ -115,6 +121,12 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
         break;
       case 'ArrowDown':
       case 'Down':
+        if (event.srcElement.classList.contains('combobox__header__input')) {
+          return;
+        }
+        if (event.srcElement.childNodes[0].classList.contains('datepicker__header__input')) {
+          return;
+        }
         event.preventDefault();
         this.resetTabIndexOnColumn();
         if (this.currentRow === this.tableRows.length-1) {
@@ -222,11 +234,11 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
           rowColumns.forEach((column: HTMLElement, index) => {
             column.style.width = headerColumnWidth[index];
           })
-        
+
           this.setAlignment();
-          rows.get(rows.length-1).editMode = this.inEditmode;  
+          rows.get(rows.length-1).editMode = this.inEditmode;
         }
-       
+
       });
 
 
