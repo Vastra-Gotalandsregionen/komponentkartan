@@ -107,7 +107,9 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
         if (event.srcElement.classList.contains('combobox__header__input')) {
           return;
         }
-        if (event.srcElement.childNodes[0].classList.contains('datepicker__header__input')) {
+        if (
+          event.srcElement.classList.contains('datepicker__header__input') ||
+          event.srcElement.childNodes[0].classList.contains('datepicker__header__input')) {
           return;
         }
         event.preventDefault();
@@ -124,7 +126,9 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
         if (event.srcElement.classList.contains('combobox__header__input')) {
           return;
         }
-        if (event.srcElement.childNodes[0].classList.contains('datepicker__header__input')) {
+        if (
+          event.srcElement.classList.contains('datepicker__header__input') ||
+          event.srcElement.childNodes[0].classList.contains('datepicker__header__input')) {
           return;
         }
         event.preventDefault();
