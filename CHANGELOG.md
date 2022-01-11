@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+
+# 9.0.5-beta6 (2022-01-11) Dev
+- Moved tabindex for editable-datepicker (but not when disabled)
 # 9.0.4 (2021-12-01) Stable 
 - removed anoying console logs
 # 9.0.3 (2021-12-01) Stable 
