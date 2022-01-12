@@ -11,7 +11,7 @@ export class EditableTableColumnComponent {
 
   @HostBinding('style.textAlign') align = 'left';
   @HostBinding('tabIndex') tabIndex = -1;
-  @HostBinding('class.editmode') editMode = false;
+  @HostBinding('class.editmode') editMode;
 
   @Input() @HostBinding('attr.aria-describedby') headerId = '';
   @HostBinding('attr.role') role = 'cell';

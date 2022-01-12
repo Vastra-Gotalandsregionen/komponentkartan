@@ -409,6 +409,8 @@ export class EditableTableDocumentationComponent {
       });
       this.myData.push(g)
     });
+
+    this.data3.push({});
   }
 
   addData() {

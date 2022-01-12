@@ -250,12 +250,18 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
 
 
     if (this.tableRows.length > 0) {
-      this.tableRows.get(0).columns.get(0).tabIndex = 0;
+     setTimeout(() => {
+      this.tableRows.get(0).columns.get(0).tabIndex = 0; 
+      this.tableRows.get(0).editMode = this.inEditmode;
+     });
     }
+
     this.currentColumn = 0;
     this.currentRow = 0;
 
-    this.setAlignment();
+    setTimeout(() => {
+      this.setAlignment();  
+    });
   }
 
 
