@@ -381,12 +381,15 @@
             height: auto;
             width: auto;
             transition: max-width 0.3s linear;
-            border-color: $background-color--content;
+            // border-color: $background-color--content;
             overflow: visible;
             word-wrap: break-word;
             white-space: normal;
             cursor: text;
             word-break: break-word;
+
+            background: transparent;
+            border: transparent;
           }
 
           .dropdown-select__header__button {

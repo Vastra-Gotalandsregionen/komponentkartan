@@ -8,7 +8,7 @@
       (keydown)="onKeydown($event)" (focusin)="onFocus()" (focusout)="onBlur($event)">
       <div #header class="dropdown-select__header" tabindex="0" aria-haspopup="listbox" [attr.aria-expanded]="expanded"
         [attr.aria-labelledby]="combinedLabelIds" (click)="toggleExpanded()" (keydown)="onHeaderKeydown($event)" role="listbox" [attr.aria-invalid]="errorActive" [attr.aria-disabled]="disabled">
-        <div class="dropdown-select__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
+        <div *ngIf="!(readonly && noItemSelectedLabel === label)" class="dropdown-select__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
         <div class="dropdown-select__header__button">
           <vgr-icon icon="chevron-down" size="sm" class="dropdown-select__header__button__icon"></vgr-icon>
         </div>
