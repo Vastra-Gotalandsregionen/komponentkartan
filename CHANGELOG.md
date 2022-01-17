@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 9.0.5-beta8 (2022-01-12) Dev
+- Fixed bug regarding shift+tab move in a grid
+- Fixed that you can tab into a editable-table, next tab gets you to last tabable item in table and then out from table
+- Fixed so a readonly object dont get the red error frame when touched
+- Fixed so you can grab the scroll in a combobox when it lies in another combonent
 # 9.0.5-beta7 (2022-01-12) Dev
 - Added check on editmode in the initialisation of the table
 # 9.0.5-beta6 (2022-01-11) Dev
