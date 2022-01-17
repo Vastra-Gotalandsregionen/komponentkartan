@@ -1,10 +1,10 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, DebugElement, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit, QueryList, ViewChild } from '@angular/core';
 import { Guid } from '../../utils/guid';
 import { Subject } from 'rxjs';
 import { EditableTableHeaderComponent } from './editable-table-header.component';
 import { EditableTableRowComponent } from './editable-table-row.component';
 import { EditableTableService } from './editable-table.service';
-import { takeUntil } from 'rxjs/operators';
+import { last, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'vgr-editable-table',
@@ -32,7 +32,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
   @HostBinding('class.editable-table') editableTableClass = true;
   @HostBinding('attr.id') id: string;
   @HostListener('focusout', ['$event']) onFocus(event) {
-
+    
     if (!this.elRef.nativeElement.contains(event.relatedTarget)) {
       if (this.tableRows.length > 0) {
         this.resetTabIndexOnColumn();
@@ -40,6 +40,11 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
       }
       this.currentColumn = 0;
       this.currentRow = 0;
+      event.preventDefault();
+    } else {
+      event.preventDefault();
+      event.stopPropagation();
+
     }
   }
   resetTabIndexOnColumn() {
@@ -57,28 +62,45 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
 
   @HostListener('keydown', ['$event']) onKeydownHandler(event: any) {
 
+    if (event.key === 'Tab' || (event.shiftKey && event.key === 'Tab')) {
+    } else if (event.srcElement.tagName !== 'VGR-EDITABLE-TABLE-COLUMN') {
+      return;
+    }
+
     switch (event.key) {
-//       case 'Tab':
-//         console.log('tabb', event, event.target, event.sourceTarget)
-//         if ((this.elRef.nativeElement && this.elRef.nativeElement.contains(event.target))) {
-//           console.log('tab i tabellen')
-//           // this.currentColumn = this.tableRows.get(this.tableRows.length-1).columns.length-1;
-//           // this.currentRow = this.tableRows.length-1;
-//           // this.setTabIndexAndFocusOnColumn();
-// // var x = document.getElementById("item1").nextElementSibling.innerHTML;
-// console.log(this.elRef.nativeElement.nextElementSibling)
-//           // setTimeout(() => {
 
-//             event.preventDefault();
-//             event.stopPropagation();
-
-//             this.elRef.nativeElement.nextElementSibling.focus();
-//           // }, 200);
-
-//           console.log(this.elRef)
-//           console.log(document.activeElement)
-//         }
-//         break;
+      case 'Tab':
+        //tab out of table
+        if (event.shiftKey) {
+          if (!this.inEditmode) {
+            let focusableElements = this.elRef.nativeElement.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            let firstFocusable = <HTMLElement>focusableElements[0]; //<HTMLElement>
+            if (document.activeElement === firstFocusable) {
+              return;
+            } else {
+             event.preventDefault();
+             firstFocusable.focus();
+  
+              //not working...
+              firstFocusable.dispatchEvent(new KeyboardEvent('keydown', {'key':'Tab', 'shiftKey': event.shiftKey}));            
+            }
+          }
+        } else {
+          if (!this.inEditmode) {
+            let focusableElements = this.elRef.nativeElement.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            let lastFocusable = <HTMLElement>focusableElements[focusableElements.length - 1]; //<HTMLElement>
+            if (document.activeElement === lastFocusable) {
+              return;
+            } else {
+             event.preventDefault();
+             lastFocusable.focus();
+  
+              //not working...
+             lastFocusable.dispatchEvent(new KeyboardEvent('keydown', {'key':'Tab'}));            
+            }
+          }
+        }
+        break;
       case 'ArrowRight':
       case 'Right':
         event.preventDefault();
@@ -104,14 +126,9 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
         break;
       case 'ArrowUp':
       case 'Up':
-        if (event.srcElement.classList.contains('combobox__header__input')) {
-          return;
-        }
-        if (
-          event.srcElement.classList.contains('datepicker__header__input') ||
-          event.srcElement.childNodes[0].classList.contains('datepicker__header__input')) {
-          return;
-        }
+        // Only move up and down if we are in table
+      
+
         event.preventDefault();
         this.resetTabIndexOnColumn();
         if (this.currentRow === 0) {
@@ -123,14 +140,6 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
         break;
       case 'ArrowDown':
       case 'Down':
-        if (event.srcElement.classList.contains('combobox__header__input')) {
-          return;
-        }
-        if (
-          event.srcElement.classList.contains('datepicker__header__input') ||
-          event.srcElement.childNodes[0].classList.contains('datepicker__header__input')) {
-          return;
-        }
         event.preventDefault();
         this.resetTabIndexOnColumn();
         if (this.currentRow === this.tableRows.length-1) {

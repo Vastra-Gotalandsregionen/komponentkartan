@@ -38,7 +38,24 @@
               <vgr-input  [value]="d.ansvarOffentlig || ''" textAlign="right" [width]="'100px'"></vgr-input>
             </vgr-editable-table-column>
             <vgr-editable-table-column>
-              <vgr-input [value]="d.ansvarPrivat || ''" textAlign="right" [width]="'100px'"></vgr-input>
+              <!-- <vgr-combobox [width]="'150px'"  [errorMessage]="'valideringsfel'" textAlign="right"  >
+                <vgr-combobox-item>01</vgr-combobox-item>
+                <vgr-combobox-item>02</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>26</vgr-combobox-item>
+                <vgr-combobox-item>23</vgr-combobox-item>
+                <vgr-combobox-item>22</vgr-combobox-item>
+                <vgr-combobox-item>21</vgr-combobox-item>
+                <vgr-combobox-item>20</vgr-combobox-item>
+              </vgr-combobox>             -->
             </vgr-editable-table-column>
             
           </vgr-editable-table-row>
@@ -93,13 +110,14 @@
     <div style="padding-left: 20px; margin-top: 20px;">
       <h2>Editerbar tabell utan höjd satt och i ett formulär</h2>
     </div>
-    <div style="width:850px">
+    <div style="width:1000px">
       <form [formGroup]="myForm">
       <vgr-editable-table [editMode]="!redigera2">
         <vgr-editable-table-header>
           <vgr-editable-table-header-column [align]="'left'" [width]="'150px'">AlignLeft</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [align]="'center'" [width]="'250px'" >AlignCenter</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [align]="'right'" [width]="'200px'">AlignRight</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [align]="'right'" [width]="'150px'">AlignRight</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [align]="'right'" [width]="'150px'">AlignRight</vgr-editable-table-header-column>
         </vgr-editable-table-header>
 
@@ -117,7 +135,27 @@
                 <vgr-combobox-item>01</vgr-combobox-item>
                 <vgr-combobox-item>02</vgr-combobox-item>
                 <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>04</vgr-combobox-item>
+                <vgr-combobox-item>05</vgr-combobox-item>
+                <vgr-combobox-item>06</vgr-combobox-item>
+                <vgr-combobox-item>07</vgr-combobox-item>
+                <vgr-combobox-item>08</vgr-combobox-item>
+                <vgr-combobox-item>09</vgr-combobox-item>
+                <vgr-combobox-item>10</vgr-combobox-item>
+                <vgr-combobox-item>11</vgr-combobox-item>
+                <vgr-combobox-item>26</vgr-combobox-item>
+                <vgr-combobox-item>23</vgr-combobox-item>
+                <vgr-combobox-item>22</vgr-combobox-item>
+                <vgr-combobox-item>21</vgr-combobox-item>
+                <vgr-combobox-item>20</vgr-combobox-item>
               </vgr-combobox>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-dropdown-select [width]="'150px'"  [showValidation]="d.controls.dropdown.touched"  [readonly]="redigera2" formControlName="dropdown" [value]="d.dropdownValue">
+                <vgr-dropdown-item *ngFor="let item of items" [selectedLabel]="item">
+                  <div>{{item}}</div>
+                </vgr-dropdown-item>
+              </vgr-dropdown-select>
             </vgr-editable-table-column>
             </ng-container>
           </vgr-editable-table-row>

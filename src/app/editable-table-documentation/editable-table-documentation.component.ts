@@ -9,6 +9,62 @@ import { HtmlEncodeService } from '../html-encode.service';
 })
 export class EditableTableDocumentationComponent {
   data3 = [];
+  items = [
+    `Allékliniken Sleipner Vårdcentral`,
+    `Allemanshälsan vårdcentral - Lunden`,
+    `Allemanshälsans vårdcentral - City`,
+    `Backaplan Vårdcentral och BVC`,
+    `Bohuspraktiken`,
+    `Borås Vårdcentral`,
+    `Bräcke Diakoni Vårdcentralen Centralhälsan`,
+    `Bräcke Diakoni Vårdcentralen Centrum`,
+    `Bräcke diakoni Vårdcentralen Malmen`,
+    `Brämhults Vårdcentral`,
+    `Capio Läkarhus Almö`,
+    `Capio Läkarhus Angered`,
+    `Capio Läkarhus Hjortmossen`,
+    `Capio Läkarhus Kvillebäcken`,
+    `Capio Läkarhus Lysekil`,
+    `Capio Läkarhus Lödöse`,
+    `Capio Läkarhus Selma`,
+    `Capio Läkarhus Stenungsund`,
+    `Capio Vårdcentral Amhult`,
+    `Capio Vårdcentral Axess`,
+    `Capio vårdcentral Grästorp`,
+    `Capio Vårdcentral Gårda`,
+    `Capio Vårdcentral Hovås`,
+    `Capio Vårdcentral Lundby`,
+    `Capio Vårdcentral Mölndal`,
+    `Capio Vårdcentral Orust`,
+    `Capio Vårdcentral Strömstad`,
+    `Capio Vårdcentral Sävedalen`,
+    `Centrumpraktiken`,
+    `Cityläkarna Borås`,
+    `Din Klinik`,
+    `Din Vårdcentral i Lerum`,
+    `Distriktsläkarna Kviberg Vårdcentral och BVC`,
+    `Distriktsläkarna Mölndal Vårdcentral och BVC`,
+    `Familjehälsan Vårdcentral`,
+    `Familjeläkarna i Mölnlycke Vårdcentral och BVC`,
+    `Gårdsten Vårdcentral`,
+    `Hamnstadens Vårdcentral`,
+    `Herkules Vårdcentral`,
+    `HälsoBrunnen - vårdcentral`,
+    `Hälsocentralen`,
+    `Hälsocentralen i Tibro`,
+    `Hönö Vårdcentral`,
+    `JohannesVården - Vårdcentral och BVC`,
+    `Kungsportsläkarna`,
+    `Kvarterskliniken Husaren`,
+    `Kvarterskliniken Lorensberg`,
+    `Kvarterskliniken Tanum`,
+    `Lextorp Vårdcentral`,
+    `Läkargruppen Mölndalsbro`,
+    `Läkarhus Kyrkbyn`,
+    `Maria Alberts Vårdcentral`,
+    `Medpro Clinic Brålanda - Torpa Vårdcentral`,
+    `Medpro Clinic Lilla Edet Vårdcentral`
+  ]
   data = [
     {
       produktkod: '010',
@@ -319,7 +375,8 @@ export class EditableTableDocumentationComponent {
     {
       nummer: '440',
       datum: '2022-01-01',
-      text: 'hej hej'
+      text: 'hej hej',
+
     },
     {
       nummer: '450',
@@ -406,6 +463,7 @@ export class EditableTableDocumentationComponent {
         datum: new FormControl(date),
         text: new FormControl(data.text, [ Validators.maxLength(6) ]),
         combobox: new FormControl('', [ Validators.required ]),
+        dropdown: new FormControl('', [ Validators.required ]),
       });
       this.myData.push(g)
     });
