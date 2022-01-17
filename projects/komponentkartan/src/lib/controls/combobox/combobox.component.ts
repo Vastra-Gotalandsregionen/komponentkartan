@@ -77,6 +77,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {
     const target = event.target || event.srcElement || event.currentTarget;
+    
     if ((this.elementRef.nativeElement && !this.elementRef.nativeElement.contains(target)) && this.expanded) {
       this.onChange(null);
       this.collapse(false);
@@ -280,12 +281,12 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       } else {
         this.setSelectedState(this.value);
       }
-
-      this.collapse(false);
+      // console.log('onBlur')
+      // this.collapse(false);
     } else {
       this.deselectItems();
       this.onChange(null);
-      this.collapse(false);
+      // this.collapse(false);
     }
   }
 
