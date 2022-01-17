@@ -371,6 +371,7 @@
 
       &.dropdown-select--readonly {
         cursor: default;
+        outline: none !important; // readonly items should not show error-border
 
         .dropdown-select__header {
           height: auto;
