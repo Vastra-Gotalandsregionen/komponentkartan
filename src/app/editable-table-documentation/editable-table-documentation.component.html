@@ -15,7 +15,7 @@
     </vgr-button>
 
     <div style="padding-left: 20px; margin-top: 20px;">
-      <h2>Editerbar tabell med satt höjd</h2>
+      <h2>Dynamisk editerbar tabell</h2>
     </div>
       <vgr-editable-table [editMode]="true" >
         <vgr-editable-table-header>
@@ -110,7 +110,7 @@
     <div style="padding-left: 20px; margin-top: 20px;">
       <h2>Editerbar tabell utan höjd satt och i ett formulär</h2>
     </div>
-    <div style="width:1000px">
+    <div style="width:800px">
       <form [formGroup]="myForm">
       <vgr-editable-table [editMode]="!redigera2">
         <vgr-editable-table-header>
@@ -118,7 +118,7 @@
           <vgr-editable-table-header-column [align]="'center'" [width]="'250px'" >AlignCenter</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [align]="'right'" [width]="'200px'">AlignRight</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [align]="'right'" [width]="'150px'">AlignRight</vgr-editable-table-header-column>
-          <vgr-editable-table-header-column [align]="'right'" [width]="'150px'">AlignRight</vgr-editable-table-header-column>
+          <!-- <vgr-editable-table-header-column [align]="'right'" [width]="'150px'">AlignRight</vgr-editable-table-header-column> -->
         </vgr-editable-table-header>
 
         <vgr-editable-table-row *ngFor="let d of myData.controls; let i = index" formArrayName="myFormArray">
@@ -150,13 +150,13 @@
                 <vgr-combobox-item>20</vgr-combobox-item>
               </vgr-combobox>
             </vgr-editable-table-column>
-            <vgr-editable-table-column>
+            <!-- <vgr-editable-table-column>
               <vgr-dropdown-select [width]="'150px'"  [showValidation]="d.controls.dropdown.touched"  [readonly]="redigera2" formControlName="dropdown" [value]="d.dropdownValue">
                 <vgr-dropdown-item *ngFor="let item of items" [selectedLabel]="item">
                   <div>{{item}}</div>
                 </vgr-dropdown-item>
               </vgr-dropdown-select>
-            </vgr-editable-table-column>
+            </vgr-editable-table-column> -->
             </ng-container>
           </vgr-editable-table-row>
       </vgr-editable-table>
