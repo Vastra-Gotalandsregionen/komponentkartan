@@ -76,6 +76,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {
+
     const target = event.target || event.srcElement || event.currentTarget;
     
     if ((this.elementRef.nativeElement && !this.elementRef.nativeElement.contains(target)) && this.expanded) {
@@ -270,6 +271,8 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       return;
     } else if (event.relatedTarget !== null  && (event.relatedTarget as HTMLElement).id === 'page-content-focus') { // otherwise the pagefocus will steal event and collapse
       return;
+    } else if (event.relatedTarget !== null  && (event.relatedTarget as HTMLElement).tagName === 'VGR-EDITABLE-TABLE-COLUMN') { // otherwise the the combobox in an editable-table will alway collapse on click
+      return;
     }
 
     this.hasFocus = false;
@@ -281,12 +284,11 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
       } else {
         this.setSelectedState(this.value);
       }
-      // console.log('onBlur')
-      // this.collapse(false);
+      this.collapse(false);
     } else {
       this.deselectItems();
       this.onChange(null);
-      // this.collapse(false);
+      this.collapse(false);
     }
   }
 
