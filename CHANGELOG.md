@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 9.0.5-beta9 (2022-01-21) Dev
+- Returned collapse to compbobox and added new terms for blurevent
+
 # 9.0.5-beta8 (2022-01-12) Dev
 - Fixed bug regarding shift+tab move in a grid
 - Fixed that you can tab into a editable-table, next tab gets you to last tabable item in table and then out from table
