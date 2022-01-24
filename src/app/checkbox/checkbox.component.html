@@ -42,14 +42,20 @@
                         </vgr-table-row>
                     </vgr-table>
                     <h3><strong>Checkbox group</strong></h3>
-                    <!-- <div style="width: 120px;"> -->
                         <vgr-checkbox-group [required]="true">
-                        <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
-                        <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
-                        <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
-                        <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                          <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                          <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                          <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
+                          <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
                         </vgr-checkbox-group>
-                    <!-- </div> -->
+
+                    <h3><strong>Checkbox group (hela gruppen disabled)</strong></h3>
+                    <vgr-checkbox-group [required]="true" [disabled]="true">
+                      <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                      <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                      <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
+                      <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                    </vgr-checkbox-group>
 
                     <h3><strong>Checkbox single required</strong></h3>
                     <p>

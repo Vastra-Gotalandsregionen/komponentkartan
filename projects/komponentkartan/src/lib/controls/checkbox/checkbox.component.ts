@@ -14,7 +14,16 @@ import { Guid } from '../../utils/guid';
     }]
 })
 export class CheckboxComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
-    @Input() disabled = false;
+  @Input() set disabled(val: boolean) {
+    this._disabled = val;
+  };
+  get disabled() {
+    if (this.groupDisabledOverride) {
+      return true;
+    } else {
+      return this._disabled;
+    }
+  }
     @Input() checked = false;
     @Output() checkedChanged = new EventEmitter<boolean>();
     @Input() label: string;
@@ -30,6 +39,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     groupDisabledOverride: boolean;
     validationErrorMessage = 'Obligatoriskt';
     elementId: string;
+    _disabled: boolean;
 
     constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef) {
         this.elementId = Math.random().toString();

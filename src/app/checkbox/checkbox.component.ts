@@ -25,8 +25,6 @@ export class CheckboxComponent implements OnInit {
     this.form = this.fb.group({
       checkbox: [false, [Validators.required]]
     }, { updateOn: 'submit' });
-
-    console.log(this.form)
   }
 
   submitForm() {
