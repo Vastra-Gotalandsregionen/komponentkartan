@@ -72,9 +72,19 @@
                         <p>
                             Jag skall inte checka in dålig kod....
                         </p>
-                        <form [formGroup]="form">
-                            <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [required]="true" formControlName="checkbox" [showValidation]="form.controls.checkbox.touched"></vgr-checkbox>
+                        <!-- <form [formGroup]="form">
+                             <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [required]="true" formControlName="checkbox" [showValidation]="form.controls.checkbox.touched"></vgr-checkbox>
                             <vgr-button type="submit" (click)="submitForm()">Submit</vgr-button>
+                        </form> -->
+
+                        <h3><strong>Checkbox group (hela gruppen disabled)</strong></h3>
+                        <form [formGroup]="checkboxForm">
+                          <vgr-checkbox-group formControlName="checkboxValues" [required]="true">
+                            <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                            <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                            <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
+                            <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                          </vgr-checkbox-group>
                         </form>
 
                 </div>

@@ -1,5 +1,5 @@
-import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter, Host, HostBinding, Input, OnInit, Optional, Output, QueryList, SkipSelf } from '@angular/core';
-import { AbstractControl, ControlContainer } from '@angular/forms';
+import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter, Host, HostBinding, Input, OnChanges, OnInit, Optional, Output, QueryList, SimpleChanges, SkipSelf } from '@angular/core';
+import { AbstractControl, ControlContainer, ControlValueAccessor } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { CheckboxComponent } from './checkbox.component';
 
@@ -8,7 +8,7 @@ import { CheckboxComponent } from './checkbox.component';
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss']
 })
-export class CheckboxGroupComponent implements AfterContentInit {
+export class CheckboxGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges {
   _disabled: boolean;
   @Input() showValidation = true;
 
@@ -29,6 +29,9 @@ export class CheckboxGroupComponent implements AfterContentInit {
 
   validationErrorMessage = 'Obligatoriskt';
   elementId: string;
+  value: string[] | number[];
+
+
   public control: AbstractControl;
 
   constructor(@Host() @SkipSelf() @Optional() private controlContainer: ControlContainer, private elementRef: ElementRef) {
@@ -36,9 +39,25 @@ export class CheckboxGroupComponent implements AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    console.log(this._disabled)
     this.setGroupDisabledOverride(this._disabled)
   }
+
+  ngOnChanges(): void {
+    console.log('ngOnChanges', this.formControlName)
+    if (this.formControlName && this.controlContainer) {
+      this.control = this.controlContainer.control.get(this.formControlName)
+    }
+  }
+
+  getLabelFromId() {
+    // return window.document.getElementById(this.idForLabel)
+    let labels = document.getElementsByTagName('label');
+    for( var i = 0; i < labels.length; i++ ) {
+      if (labels[i].htmlFor == this.elementId)
+           return labels[i];
+   }
+}
+
 
   get errorActive() {
     if (this.disabled) {
@@ -62,8 +81,29 @@ export class CheckboxGroupComponent implements AfterContentInit {
 
   setGroupDisabledOverride(groupDisabledState: boolean) {
     this.items?.forEach(item => {
-        item.groupDisabledOverride = groupDisabledState;
+      item.groupDisabledOverride = groupDisabledState;
     });
   }
 
+  onTouched() {}
+
+  onChange(input: CheckboxComponent) {}
+
+  onLeave() {
+    this.onTouched();
+  }
+
+  writeValue(obj: any): void {
+    console.log('WriteValue', obj);
+    throw new Error('Method not implemented.');
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

@@ -12,7 +12,9 @@ import { TableComponent as TableComponentElement } from '../../../projects/kompo
 export class CheckboxComponent implements OnInit {
   @ViewChild('myCheckbox', { read: CheckboxComponentElement }) myCheckbox: CheckboxComponentElement;
   @ViewChild('myTable', { read: TableComponentElement }) myTable: TableComponentElement;
-  form: FormGroup;
+  // form: FormGroup;
+  checkboxForm: FormGroup;
+
   // checkbox = new FormControl('', Validators.required);
 
   constructor(private fb: FormBuilder) { }
@@ -22,13 +24,17 @@ export class CheckboxComponent implements OnInit {
   }
 
   createForm() {
-    this.form = this.fb.group({
-      checkbox: [false, [Validators.required]]
-    }, { updateOn: 'submit' });
+    // this.form = this.fb.group({
+    //   checkbox: [false, [Validators.required]]
+    // }, { updateOn: 'submit' });
+
+    this.checkboxForm = this.fb.group({
+      checkboxValues: ['']
+    }, { updateOn: 'change' });
   }
 
   submitForm() {
-    this.form.controls.checkbox.markAsTouched();
+    // this.form.controls.checkbox.markAsTouched();
   }
 
   setFocus() {
