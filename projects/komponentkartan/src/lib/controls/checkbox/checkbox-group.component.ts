@@ -19,7 +19,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     }
   }
   @Input() @HostBinding('class.vertical') vertical = false;
-  @Input() formControlName?: string;
+  @Input() controlName?: string;
   @Input() required = false;
 
   @Output() selectedChanged: EventEmitter<CheckboxComponent> = new EventEmitter<CheckboxComponent>();
@@ -43,11 +43,33 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   }
 
   ngOnChanges(): void {
-    console.log('ngOnChanges', this.formControlName)
-    if (this.formControlName && this.controlContainer) {
-      this.control = this.controlContainer.control.get(this.formControlName)
+    if (this.controlName && this.controlContainer) {
+      this.control = this.controlContainer.control.get(this.controlName)
     }
   }
+  onClick(event: any): void {
+    if (!this.disabled) {
+        // this.checked = !this.checked;
+
+        // if (this.element) {
+        //     this.element.focus();
+        // }
+      console.log('onClick: ', event)
+        this.onChange(event);
+        // this.checkedChanged.emit(this.checked);
+        event.stopPropagation();
+    }
+}
+
+keyDown(event: KeyboardEvent): void {
+    if ([' ', 'Spacebar', 'Enter'].includes(event.key)) {
+        this.onClick(event);
+        event.preventDefault();
+        event.stopPropagation();
+    }
+}
+
+
 
   getLabelFromId() {
     // return window.document.getElementById(this.idForLabel)
@@ -85,9 +107,13 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     });
   }
 
-  onTouched() {}
+  onTouched() {
+    console.log('touched')
+  }
 
-  onChange(input: CheckboxComponent) {}
+  onChange(input: CheckboxComponent) {
+    console.log('change', input)
+  }
 
   onLeave() {
     this.onTouched();
@@ -98,9 +124,11 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     throw new Error('Method not implemented.');
   }
   registerOnChange(fn: any): void {
+    console.log('registerOnChange')
     this.onChange = fn;
   }
   registerOnTouched(fn: any): void {
+    console.log('registerOnTouched')
     this.onTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {

@@ -4,7 +4,7 @@
       <div
         id="checkboxlist"
         [attr.aria-labelledby]="elementId"
-
+        (keydown)="keyDown($event)" (focusout)="onLeave()"
         [attr.aria-disabled]="_disabled"
         tabindex="{{_disabled ? 0 : -1}}"
         role="list"
