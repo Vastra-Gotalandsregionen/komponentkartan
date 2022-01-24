@@ -1,0 +1,30 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+
+
+:host {
+    .checkbox-group-validation-error--active .checkbox-group-validation {
+        padding-bottom: 8px;
+    }
+    .checkbox-group-validation-error--active .checkbox-group-validation {
+      outline: 3px solid #FF0000;
+      border-radius: 2px;
+      padding-right: 5px;
+    }
+
+    .checkbox-group-validation-error--active .checkbox-group-validation_status__message {
+      display: inline-block;
+      color: $text-color--default;
+      margin-left: 4px;
+      margin-top: 4px;
+    }
+
+    .checkbox-group-validation-error--active .checkbox-group-validation_status__icon ::ng-deep .icon {
+      color: $primary-color--error;
+    }
+
+    .checkbox-group-validation-error--active .checkbox-group-validation_status__icon {
+      display: inline-block;
+    }
+  }

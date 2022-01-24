@@ -20,13 +20,20 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     @Input() label: string;
     @Input() formControlName?: string;
     @Input() transparent = false;
+    @Input() required = false;
+    @Input() showValidation = true;
     @ViewChild('checkbox', { read: ElementRef, static: false }) checkbox: ElementRef;
 
     public control: AbstractControl;
     public labelledbyid: string = Guid.newGuid();
     public element: any;
+    groupDisabledOverride: boolean;
+    validationErrorMessage = 'Obligatoriskt';
+    elementId: string;
 
-    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef) { }
+    constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef) {
+        this.elementId = Math.random().toString();
+    }
 
     ngOnChanges(changes: SimpleChanges) {
         if (this.formControlName && this.controlContainer) {
@@ -34,6 +41,43 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
             this.setDisabledState(this.controlContainer.control.get(this.formControlName).disabled);
 
         }
+    }
+
+    getLabelFromId() {
+        // return window.document.getElementById(this.idForLabel)
+        let labels = document.getElementsByTagName('label');
+        for( var i = 0; i < labels.length; i++ ) {
+          if (labels[i].htmlFor == this.elementId)
+               return labels[i];
+       }
+    }
+
+
+    get errorActive() {
+        const el = this.elementRef.nativeElement;
+        // console.log(el.parentNode.parentNode.parentNode.parentNode)
+        // console.log('closest:', el.closest('vgr-checkbox-group'))
+
+      if (el.closest('vgr-checkbox-group')) { // if checkbox is in a group, dont validate
+           return false;
+       }
+      if (this.disabled) {
+        return false;
+      }
+
+      if (this.showValidation) {
+        if (this.required && !this.checked) {
+          this.validationErrorMessage = 'Obligatoriskt'
+          return true;
+        } else if (this.control) {
+          const classes = this.elementRef.nativeElement.classList;
+          return classes.contains('ng-invalid');
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
     }
     setDisabledState(isDisabled: boolean) {
         this.disabled = isDisabled;

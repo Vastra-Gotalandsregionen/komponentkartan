@@ -90,6 +90,7 @@ export { GridSortDirection } from './controls/sort-arrow/sort-arrow.component';
 export { SortArrowComponent } from './controls/sort-arrow/sort-arrow.component';
 
 export { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
+export { CheckboxGroupComponent } from './controls/checkbox/checkbox-group.component';
 
 
 export { Guid } from './utils/guid';

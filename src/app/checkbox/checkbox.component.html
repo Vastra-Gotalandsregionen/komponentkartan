@@ -13,7 +13,7 @@
         </p>
     </div>
     <div class="docs__examples" style="background-color: #f0f0f0; display: flex; margin-bottom: 10px;">
-        <vgr-checkbox style="margin-right: 20px;" [label]="'Klicka på mig!'"></vgr-checkbox> 
+        <vgr-checkbox style="margin-right: 20px;" [label]="'Klicka på mig!'"></vgr-checkbox>
         <vgr-checkbox [label]="'Transparant bakgrund'" [transparent]="true"></vgr-checkbox>
 
       </div>
@@ -41,6 +41,36 @@
                             <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
                         </vgr-table-row>
                     </vgr-table>
+                    <h3><strong>Checkbox group</strong></h3>
+                    <!-- <div style="width: 120px;"> -->
+                        <vgr-checkbox-group [required]="true">
+                        <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                        <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                        <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
+                        <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                        </vgr-checkbox-group>
+                    <!-- </div> -->
+
+                    <h3><strong>Checkbox single required</strong></h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut tristique libero. Proin non aliquet ligula. Etiam
+      ante diam, volutpat at tempor quis, pulvinar eget leo. Vestibulum ac nisi sed odio commodo lacinia. Etiam pulvinar
+      convallis diam, quis convallis dui fermentum a. Donec nunc massa, pharetra ac vulputate vel, bibendum a dolor. Nam
+      interdum, ex vel varius feugiat, nisl urna faucibus nulla, quis mattis lacus mi at mauris. Fusce interdum a ligula
+      sit amet scelerisque. Sed nec metus vitae ipsum luctus mollis eget eu libero. Proin lacinia vehicula felis ut mollis.
+                    </p>
+                        <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [required]="true"></vgr-checkbox>
+
+
+                        <h3><strong>Checkbox single required</strong></h3>
+                        <p>
+                            Jag skall inte checka in dålig kod....
+                        </p>
+                        <form [formGroup]="form">
+                            <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [required]="true" formControlName="checkbox" [showValidation]="form.controls.checkbox.touched"></vgr-checkbox>
+                            <vgr-button type="submit" (click)="submitForm()">Submit</vgr-button>
+                        </form>
+
                 </div>
 
             </div>
