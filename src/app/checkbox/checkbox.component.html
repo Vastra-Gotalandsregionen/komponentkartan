@@ -47,7 +47,7 @@
                             <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
                         </vgr-table-row>
                     </vgr-table> -->
-                    <h3><strong>Checkbox group</strong></h3>
+                    <!-- <h3><strong>Checkbox group</strong></h3>
                     <vgr-checkbox-group [required]="true">
                         <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
                         <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
@@ -80,11 +80,11 @@
                             formControlName="checkbox" [showValidation]="form.controls.checkbox.touched"></vgr-checkbox>
 
                     </form>
-                    <vgr-button style="margin-top: 5px;" type="submit" (click)="submitForm()">Submit</vgr-button>
+                    <vgr-button style="margin-top: 5px;" type="submit" (click)="submitForm()">Submit</vgr-button> -->
                     <hr class="hr_line" />
                     <h3><strong>Checkbox group in formcontrol</strong></h3>
                     <form [formGroup]="checkboxForm">
-                        <vgr-checkbox-group controlName="checkboxValues" [required]="true">
+                        <vgr-checkbox-group formControlName="checkboxValues" [required]="true">
                             <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
                             <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
                             <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
@@ -92,7 +92,10 @@
                         </vgr-checkbox-group>
                     </form>
                     <vgr-button style="margin-top: 5px;" type="submit" (click)="submitCheckboxForm()">Submit</vgr-button>
-                    <label>value: {{checkboxForm.controls.checkboxValues.value}}</label>
+                    <label>Antal valda: {{checkboxForm.controls.checkboxValues.value.length}}</label>
+                    <ol>
+                        <li *ngFor="let item of checkboxForm.controls.checkboxValues.value">{{item}}</li>
+                    </ol>
                 </div>
 
             </div>

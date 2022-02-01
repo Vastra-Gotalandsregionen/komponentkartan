@@ -19,7 +19,7 @@
   </div>
   <div [attr.id]="elementId" *ngIf="errorActive" class="checkbox-validation_status" [title]="validationErrorMessage" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
     <vgr-icon icon="exclamation-circle" size="sm" class="checkbox-validation_status__icon"></vgr-icon>
-    <div class="checkbox-validation__status__message" *ngIf="control">{{validationErrorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
+    <div class="checkbox-validation_status__message" *ngIf="control">{{validationErrorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
     <div class="checkbox-validation_status__message" *ngIf="!control">{{validationErrorMessage}}</div>
   </div>
 </div>

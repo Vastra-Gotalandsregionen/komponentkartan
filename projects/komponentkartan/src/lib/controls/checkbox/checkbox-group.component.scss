@@ -2,8 +2,9 @@
 @import "../../../assets/partials/_settings.colors.scss";
 @import "../../../assets/partials/_settings.fonts.scss";
 
-
 :host {
+  
+
     .checkbox-group-validation-error--active .checkbox-group-validation {
         padding-bottom: 8px;
     }
@@ -27,4 +28,10 @@
     .checkbox-group-validation-error--active .checkbox-group-validation_status__icon {
       display: inline-block;
     }
+
+  .checkbox-group {
+    min-width: 120px;
+    width: max-content;    
   }
+}
+

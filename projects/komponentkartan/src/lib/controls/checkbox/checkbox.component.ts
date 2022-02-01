@@ -14,23 +14,26 @@ import { Guid } from '../../utils/guid';
     }]
 })
 export class CheckboxComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
-  @Input() set disabled(val: boolean) {
-    this._disabled = val;
-  };
-  get disabled() {
-    if (this.groupDisabledOverride) {
-      return true;
-    } else {
-      return this._disabled;
+ 
+    get disabled() {
+      if (this.groupDisabledOverride) {
+        return true;
+      } else {
+        return this._disabled;
+      }
     }
-  }
+    @Input() set disabled(val: boolean) {
+      this._disabled = val;
+    };
     @Input() checked = false;
-    @Output() checkedChanged = new EventEmitter<boolean>();
     @Input() label: string;
     @Input() formControlName?: string;
     @Input() transparent = false;
     @Input() required = false;
     @Input() showValidation = true;
+    
+    @Output() checkedChanged = new EventEmitter<any>();
+
     @ViewChild('checkbox', { read: ElementRef, static: false }) checkbox: ElementRef;
 
     public control: AbstractControl;
@@ -39,34 +42,32 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     groupDisabledOverride: boolean;
     validationErrorMessage = 'Obligatoriskt';
     elementId: string;
-    _disabled: boolean;
+    _disabled: boolean = false;
 
     constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef) {
         this.elementId = Math.random().toString();
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (this.formControlName && this.controlContainer) {
-            this.control = this.controlContainer.control.get(this.formControlName);
-            this.setDisabledState(this.controlContainer.control.get(this.formControlName).disabled);
+      if (this.formControlName && this.controlContainer) {
+          this.control = this.controlContainer.control.get(this.formControlName);
+          this.setDisabledState(this.controlContainer.control.get(this.formControlName).disabled);
 
-        }
+      }
     }
 
     getLabelFromId() {
         // return window.document.getElementById(this.idForLabel)
-        let labels = document.getElementsByTagName('label');
-        for( var i = 0; i < labels.length; i++ ) {
-          if (labels[i].htmlFor == this.elementId)
-               return labels[i];
-       }
+      let labels = document.getElementsByTagName('label');
+      for( var i = 0; i < labels.length; i++ ) {
+        if (labels[i].htmlFor == this.elementId)
+              return labels[i];
+      }
     }
 
 
     get errorActive() {
-        const el = this.elementRef.nativeElement;
-        // console.log(el.parentNode.parentNode.parentNode.parentNode)
-        // console.log('closest:', el.closest('vgr-checkbox-group'))
+      const el = this.elementRef.nativeElement;
 
       if (el.closest('vgr-checkbox-group')) { // if checkbox is in a group, dont validate
            return false;
@@ -89,64 +90,65 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
         return false;
       }
     }
+
     setDisabledState(isDisabled: boolean) {
         this.disabled = isDisabled;
     }
 
     ngAfterViewInit() {
-        this.element = this.elementRef.nativeElement.querySelector(':not(.checkbox--disabled) .checkbox__image');
+      this.element = this.elementRef.nativeElement.querySelector(':not(.checkbox--disabled) .checkbox__image');
     }
 
     onClick(event: Event): void {
-        if (!this.disabled) {
-            this.checked = !this.checked;
+      if (!this.disabled) {
+          this.checked = !this.checked;
 
-            if (this.element) {
-                this.element.focus();
-            }
+          if (this.element) {
+              this.element.focus();
+          }
 
-            this.onChange(this.checked);
-            this.checkedChanged.emit(this.checked);
-            event.stopPropagation();
-        }
+          this.onChange(this.checked);
+          
+          this.checkedChanged.emit( {id: this.elementId, checked: this.checked, label: this.label});
+          event.stopPropagation();
+      }
     }
 
     onKeyDown(event: KeyboardEvent): void {
-        if ([' ', 'Spacebar', 'Enter'].includes(event.key)) {
-            this.onClick(event);
-            event.preventDefault();
-            event.stopPropagation();
-        }
+      if ([' ', 'Spacebar', 'Enter'].includes(event.key)) {
+          this.onClick(event);
+          event.preventDefault();
+          event.stopPropagation();
+      }
     }
 
     onLeave() {
-        if (this.control) {
-            this.control.markAsTouched();
-            this.control.markAsDirty();
-            if (this.control.updateOn === 'blur') {
-                this.control.setValue(this.checked);
-            }
-        }
+      if (this.control) {
+          this.control.markAsTouched();
+          this.control.markAsDirty();
+          if (this.control.updateOn === 'blur') {
+            this.control.setValue(this.checked);
+          }
+      }
     }
 
     writeValue(value: any): void {
-        this.checked = value;
+      this.checked = value;
     }
 
     registerOnChange(func: any): void {
-        this.onChange = func;
+      this.onChange = func;
     }
 
     registerOnTouched(func: any): void {
-        this.onTouched = func;
+      this.onTouched = func;
     }
 
-    onChange(input: any) {
-    }
+    onChange(input: any) { }
 
     onTouched() { }
 
     public focus() {
-        this.checkbox.nativeElement.focus();
+      this.checkbox.nativeElement.focus();
     }
 }
