@@ -12,11 +12,11 @@
             <strong>nej</strong>
         </p>
     </div>
-    <div class="docs__examples" style="background-color: #f0f0f0; display: flex; margin-bottom: 10px;">
+    <!-- <div class="docs__examples" style="background-color: #f0f0f0; display: flex; margin-bottom: 10px;">
         <vgr-checkbox style="margin-right: 20px;" [label]="'Klicka på mig!'"></vgr-checkbox>
         <vgr-checkbox [label]="'Transparant bakgrund'" [transparent]="true"></vgr-checkbox>
 
-    </div>
+    </div> -->
     <div class="docs__examples">
 
 
@@ -47,7 +47,7 @@
                             <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
                         </vgr-table-row>
                     </vgr-table> -->
-                    <!-- <h3><strong>Checkbox group</strong></h3>
+                    <h3><strong>Checkbox group (required = true)</strong></h3>
                     <vgr-checkbox-group [required]="true">
                         <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
                         <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
@@ -55,11 +55,20 @@
                         <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
                     </vgr-checkbox-group>
                     <hr class="hr_line" />
-                    <h3><strong>Checkbox group (hela gruppen disabled)</strong></h3>
-                    <vgr-checkbox-group [required]="true" [disabled]="true">
+                    <h3><strong>Checkbox group (required = false)</strong></h3>
+                    <vgr-checkbox-group [required]="false">
                         <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
                         <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
                         <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
+                        <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                    </vgr-checkbox-group>
+                    <hr class="hr_line" />
+
+                    <h3><strong>Checkbox group (hela gruppen disabled)</strong></h3>
+                    <vgr-checkbox-group [required]="false" [disabled]="true">
+                        <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                        <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                        <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox> 
                         <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
                     </vgr-checkbox-group>
                     <hr class="hr_line" />
@@ -70,7 +79,7 @@
                     </p>
                     <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [required]="true"></vgr-checkbox>
                     <hr class="hr_line" />
-                    
+
                     <h3><strong>Checkbox single required in formcontrol</strong></h3>
                     <p>
                         Jag skall inte checka in dålig kod....
@@ -78,20 +87,22 @@
                     <form [formGroup]="form">
                         <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [required]="true"
                             formControlName="checkbox" [showValidation]="form.controls.checkbox.touched"></vgr-checkbox>
-
+                        <vgr-button  type="submit" (click)="submitForm()" style="margin-top: 10px; display: block;">Submit</vgr-button><br>
+<vgr-notification *ngIf="form.valid" type="success" width="200px" [standalone]="true" style="margin-top: 10px;">Formuläret postat!</vgr-notification>
                     </form>
-                    <vgr-button style="margin-top: 5px;" type="submit" (click)="submitForm()">Submit</vgr-button> -->
                     <hr class="hr_line" />
                     <h3><strong>Checkbox group in formcontrol</strong></h3>
                     <form [formGroup]="checkboxForm">
-                        <vgr-checkbox-group formControlName="checkboxValues" [required]="true">
+                        <vgr-checkbox-group formControlName="checkboxValues" [required]="true" [showValidation]="checkboxForm.controls.checkboxValues.touched">
                             <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
                             <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
                             <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
                             <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
                         </vgr-checkbox-group>
+                        <vgr-button style="margin-top: 10px; display: block;" type="submit" (click)="submitCheckboxForm()">Submit
+                        </vgr-button>
                     </form>
-                    <vgr-button style="margin-top: 5px;" type="submit" (click)="submitCheckboxForm()">Submit</vgr-button>
+
                     <label>Antal valda: {{checkboxForm.controls.checkboxValues.value.length}}</label>
                     <ol>
                         <li *ngFor="let item of checkboxForm.controls.checkboxValues.value">{{item}}</li>

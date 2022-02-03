@@ -108,7 +108,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
           }
 
           this.onChange(this.checked);
-          
           this.checkedChanged.emit( {id: this.elementId, checked: this.checked, label: this.label});
           event.stopPropagation();
       }

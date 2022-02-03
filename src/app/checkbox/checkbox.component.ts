@@ -14,6 +14,7 @@ export class CheckboxComponent implements OnInit {
   @ViewChild('myTable', { read: TableComponentElement }) myTable: TableComponentElement;
   form: FormGroup;
   checkboxForm: FormGroup;
+  showValidFormText: boolean = false;
 
   // checkbox = new FormControl('', Validators.required);
 
@@ -25,22 +26,30 @@ export class CheckboxComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      checkbox: [false, [Validators.required]]
+      checkbox: ['', [Validators.requiredTrue]]
     }, { updateOn: 'submit' });
 
     this.checkboxForm = this.fb.group({
       checkboxValues: ['']
-    }, { updateOn: 'change' });
+    }, { updateOn: 'submit' });
   }
 
   submitForm() {
     this.form.controls.checkbox.markAsTouched();
 
+    
+    if (this.form.valid) {
+      this.showValidFormText = true;
+    } else {
+      this.showValidFormText = false;
+    }
+
   }
 
   submitCheckboxForm() {
     this.checkboxForm.controls.checkboxValues.markAsTouched();
-    console.log(this.checkboxForm.controls.checkboxValues)
+    // Do nothing...
+    // this.checkboxForm.reset();
   }
 
   setFocus() {

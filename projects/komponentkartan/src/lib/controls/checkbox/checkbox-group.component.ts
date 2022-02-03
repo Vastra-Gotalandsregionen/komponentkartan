@@ -11,7 +11,7 @@ import { CheckboxComponent } from './checkbox.component';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CheckboxGroupComponent),
     multi: true
-}]
+  }]
 })
 export class CheckboxGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges {
   _disabled: boolean;
@@ -46,25 +46,26 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
 
   ngAfterContentInit(): void {
     this.setGroupDisabledOverride(this._disabled)
-
     this.items.forEach(item => {
-
       if (item.checked) {
-        
         this._value.push(item.label)
-        this.onChange(this._value);
+        if (this.formControlName && this.controlContainer) {
+          this.onChange(this._value);
+        }
       }
       item.checkedChanged.subscribe(($event) => {
-        if ( $event.checked) {
-          this._value.push( $event.label)
+        if ($event.checked) {
+          this._value.push($event.label)
         } else {
-          const index = this._value.indexOf( $event.label);
+          const index = this._value.indexOf($event.label);
           if (index >= 0) {
             this._value.splice(index, 1);
           }
         }
 
-        this.onChange(this._value);
+        if (this.formControlName && this.controlContainer) {
+          this.onChange(this._value);
+        }
       })
     })
   }
@@ -74,38 +75,26 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
       this.control = this.controlContainer.control.get(this.formControlName)
     }
   }
-//   onClick(event: any): void {
-//     if (!this.disabled) {
-//         // this.checked = !this.checked;
 
-//         // if (this.element) {
-//         //     this.element.focus();
-//         // }
-//       console.log('onClick: ', event)
-//         this.onChange(event);
-//         // this.checkedChanged.emit(this.checked);
-//         event.stopPropagation();
-//     }
-// }  
 
-keyDown(event: KeyboardEvent): void {
+  keyDown(event: KeyboardEvent): void {
     if ([' ', 'Spacebar', 'Enter'].includes(event.key)) {
-        // this.onClick(event);
-        event.preventDefault();
-        event.stopPropagation();
+      // this.onClick(event);
+      event.preventDefault();
+      event.stopPropagation();
     }
-}
+  }
 
 
 
   getLabelFromId() {
     // return window.document.getElementById(this.idForLabel)
     let labels = document.getElementsByTagName('label');
-    for( var i = 0; i < labels.length; i++ ) {
+    for (var i = 0; i < labels.length; i++) {
       if (labels[i].htmlFor == this.elementId)
-           return labels[i];
-   }
-}
+        return labels[i];
+    }
+  }
 
 
   get errorActive() {
@@ -113,7 +102,7 @@ keyDown(event: KeyboardEvent): void {
       return false;
     }
 
-    if (this.showValidation ) {
+    if (this.showValidation) {
       if (this.required && !this.items.some(x => x.checked)) {
         this.validationErrorMessage = 'Obligatoriskt'
         return true;
@@ -134,27 +123,8 @@ keyDown(event: KeyboardEvent): void {
     });
   }
 
-  // onTouched() {
-  //   console.log('touched')
-  // }
-
-  // onChange(input: CheckboxComponent) {
-  //   console.log('change', input)
-  // }
-  // onChange: any = () => {console.log('onChange, ', this.value)}
-//   set(value: any) {
-//     console.log('here?, ', value)
-//     this._value = value;
-//     this.onChange(this._value);
-// }
-
-// get value() {
-//   console.log('here? get, ')
-//   return this._value;
-// }
-
   public onChange: (value) => void;
-  onTouch: any = () => {}
+  onTouch:  (value) => void;
 
   onLeave() {
     console.log('onLeave')
