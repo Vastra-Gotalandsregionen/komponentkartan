@@ -107,17 +107,13 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     }
 
     if (this.showValidation) {
-      console.log('errorActive')
       if (this.required && !this.items.some(x => x.checked)) {
-        console.log('errorActive - går ej via formcontrol')
         this.validationErrorMessage = 'Obligatoriskt'
         return true;
       } else if (this.control) {
         const classes = this.elementRef.nativeElement.classList;
-        console.log('errorActive - ng-invalid ', classes.contains('ng-invalid'))
         return classes.contains('ng-invalid');
       } else {
-        console.log('errorActive - ramlar ur med false')
         return false;
       }
     } else {
@@ -131,12 +127,33 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     });
   }
 
-  public onChange: (value) => void;
+  onChange: (value) => void;
   onTouch:  (value) => void;
 
   onLeave() {
-    console.log('onLeave')
-    //this.onTouched();
+    if (this.control) {
+      this.control.markAsTouched();
+      this.control.markAsDirty();
+
+      if (this.control.updateOn === 'blur') {
+
+        this.items.forEach(element => {
+          const index = this._value.indexOf(element.label);
+          // if element is checked and not in values - add it
+          if (element.checked && index === -1) {
+            this._value.push(element.label)
+            // if element is not checked and is in values - remove it
+          } else if (!element.checked && index >= 0)
+              this._value.splice(index, 1);
+        });
+
+        this.control.setValue(this._value);
+        // this.onTouch(this._value);
+      }
+      console.log('onLeave: ', this.control)
+  }
+    //console.log('onLeave')
+    // this.onTouch();
   }
 
   writeValue(event: any): void {
