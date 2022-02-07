@@ -47,12 +47,15 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   ngAfterContentInit(): void {
     this.setGroupDisabledOverride(this._disabled)
     this.items.forEach(item => {
+      // On init
       if (item.checked) {
         this._value.push(item.label)
         if (this.formControlName && this.controlContainer) {
           this.onChange(this._value);
         }
       }
+
+      // Subscribe on changes
       item.checkedChanged.subscribe(($event) => {
         if ($event.checked) {
           this._value.push($event.label)
@@ -64,6 +67,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
         }
 
         if (this.formControlName && this.controlContainer) {
+          console.log('onchange is called in group')
           this.onChange(this._value);
         }
       })
@@ -103,13 +107,17 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     }
 
     if (this.showValidation) {
+      console.log('errorActive')
       if (this.required && !this.items.some(x => x.checked)) {
+        console.log('errorActive - går ej via formcontrol')
         this.validationErrorMessage = 'Obligatoriskt'
         return true;
       } else if (this.control) {
         const classes = this.elementRef.nativeElement.classList;
+        console.log('errorActive - ng-invalid ', classes.contains('ng-invalid'))
         return classes.contains('ng-invalid');
       } else {
+        console.log('errorActive - ramlar ur med false')
         return false;
       }
     } else {
@@ -132,13 +140,21 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   }
 
   writeValue(event: any): void {
-    if (event.checked) {
-      this._value.push(event.label)
-    } else {
-      const index = this._value.indexOf(event.label);
-      if (index >= 0) {
-        this._value.splice(index, 1);
+    console.log('WriteValue - checkboxgroup', event)
+    if (event) {
+      if (event.checked) {
+        this._value.push(event.label)
+      } else {
+        const index = this._value.indexOf(event.label);
+        if (index >= 0) {
+          this._value.splice(index, 1);
+        }
       }
+    } else { // formcontrol.reset
+      this._value = [];
+      this.items.forEach(element => {
+        element.checked = false;
+      });
     }
   }
 

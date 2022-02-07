@@ -37,7 +37,7 @@ export class CheckboxComponent implements OnInit {
   submitForm() {
     this.form.controls.checkbox.markAsTouched();
 
-    
+
     if (this.form.valid) {
       this.showValidFormText = true;
     } else {

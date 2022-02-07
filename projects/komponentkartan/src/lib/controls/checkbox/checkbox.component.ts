@@ -14,7 +14,7 @@ import { Guid } from '../../utils/guid';
     }]
 })
 export class CheckboxComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
- 
+
     get disabled() {
       if (this.groupDisabledOverride) {
         return true;
@@ -31,7 +31,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     @Input() transparent = false;
     @Input() required = false;
     @Input() showValidation = true;
-    
+
     @Output() checkedChanged = new EventEmitter<any>();
 
     @ViewChild('checkbox', { read: ElementRef, static: false }) checkbox: ElementRef;
@@ -107,6 +107,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
               this.element.focus();
           }
 
+          console.log('onchange is called on component and emit')
           this.onChange(this.checked);
           this.checkedChanged.emit( {id: this.elementId, checked: this.checked, label: this.label});
           event.stopPropagation();

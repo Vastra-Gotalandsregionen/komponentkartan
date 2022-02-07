@@ -109,6 +109,17 @@
                   </vgr-textarea>
                 </vgr-title-value-container>
               </vgr-title-value>
+              <vgr-title-value>
+                <vgr-title-value-heading for="checkboxGroup">checkboxGroup</vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-checkbox-group formControlName="checkboxGroup" [showValidation]="updateOnBlurForm.controls.checkboxGroup.touched" labelId="checkboxGroup">
+                    <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                    <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                    <vgr-checkbox [checked]="true" [label]=" 'Vald' "></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                </vgr-checkbox-group>
+                </vgr-title-value-container>
+              </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
             <vgr-button (click)="onSubmitUpdateOnBlurForm()" [disabled]="false">Skapa användare</vgr-button>
@@ -215,6 +226,17 @@
                 <vgr-title-value-heading>Kommentar</vgr-title-value-heading>
                 <vgr-title-value-container>
                   <vgr-textarea formControlName="textarea" [showValidation]="formSubmitted"></vgr-textarea>
+                </vgr-title-value-container>
+              </vgr-title-value>
+              <vgr-title-value>
+                <vgr-title-value-heading for="checkboxGroup">checkboxGroup</vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-checkbox-group formControlName="checkboxGroup" [showValidation]="formSubmitted" labelId="checkboxGroup">
+                    <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                    <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                    <vgr-checkbox [checked]="true" [label]=" 'Vald' "></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                </vgr-checkbox-group>
                 </vgr-title-value-container>
               </vgr-title-value>
             </vgr-title-value-layout>
@@ -329,13 +351,93 @@
                   </vgr-textarea>
                 </vgr-title-value-container>
               </vgr-title-value>
+              <vgr-title-value>
+                <vgr-title-value-heading for="checkboxGroup">checkboxGroup</vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-checkbox-group formControlName="checkboxGroup" [showValidation]="updateOnChangeForm.controls.checkboxGroup.dirty" labelId="checkboxGroup">
+                    <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                    <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Vald' "></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                </vgr-checkbox-group>
+                </vgr-title-value-container>
+              </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnChangeForm()">Reset form</vgr-button>
             <vgr-button [disabled]="false">Skapa användare</vgr-button>
           </form>
         </vgr-card-column>
         <vgr-card-column>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              <h2>Update on blur values</h2>
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+              <p>firstname: <strong>{{updateOnBlurForm.controls.firstname.value}}</strong></p>
+              <p>lastname: <strong> {{updateOnBlurForm.controls.lastname.value}} </strong></p>
+              <p>age: <strong>{{updateOnBlurForm.controls.age.value}} </strong></p>
+              <p>email: <strong>{{updateOnBlurForm.controls.email.value}} </strong></p>
+              <p>salary: <strong>{{updateOnBlurForm.controls.salary.value}} </strong></p>
+              <p>favouritepet: <strong>{{updateOnBlurForm.controls.favourite_pet.value}} </strong></p>
+              <p>interests: <strong>{{updateOnBlurForm.controls.interests.value}} </strong></p>
+              <p>check: <strong>{{updateOnBlurForm.controls.check.value}} </strong></p>
+              <p>optional: <strong>{{updateOnBlurForm.controls.optional.value?.value}} </strong></p>
+              <p>monthpicker: <strong>{{updateOnBlurForm.controls.monthpicker.value}} </strong></p>
+              <p>datepicker: <strong>{{updateOnBlurForm.controls.datepicker.value}} </strong></p>
+              <p>datepicker_preselected: <strong>{{updateOnBlurForm.controls.datepicker_preselected.value}} </strong>
+              </p>
+              <p>textarea: <strong>{{updateOnBlurForm.controls.textarea.value}} </strong></p>
+              <p>checkboxgroup: <strong>{{updateOnBlurForm.controls.checkboxGroup.value?.length}} </strong></p>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              <h2>Update on submit values</h2>
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+
+              <p>firstname: <strong>{{updateOnSubmitForm.controls.firstname.value}}</strong></p>
+              <p>lastname: <strong> {{updateOnSubmitForm.controls.lastname.value}} </strong></p>
+              <p>age: <strong>{{updateOnSubmitForm.controls.age.value}} </strong></p>
+              <p>email: <strong>{{updateOnSubmitForm.controls.email.value}} </strong></p>
+              <p>salary: <strong>{{updateOnSubmitForm.controls.salary.value}} </strong></p>
+              <p>favouritepet: <strong>{{updateOnSubmitForm.controls.favourite_pet.value}} </strong></p>
+              <p>interests: <strong>{{updateOnSubmitForm.controls.interests.value}} </strong></p>
+              <p>check: <strong>{{updateOnSubmitForm.controls.check.value}} </strong></p>
+              <p>optional: <strong>{{updateOnSubmitForm.controls.optional.value?.value}} </strong></p>
+              <p>monthpicker: <strong>{{updateOnSubmitForm.controls.monthpicker.value}} </strong></p>
+              <p>datepicker: <strong>{{updateOnSubmitForm.controls.datepicker.value}} </strong></p>
+              <p>datepicker_preselected: <strong>{{updateOnSubmitForm.controls.datepicker_preselected.value}} </strong>
+              </p>
+              <p>textarea: <strong>{{updateOnSubmitForm.controls.textarea.value}} </strong></p>
+              <p>checkboxgroup: <strong>{{updateOnSubmitForm.controls.checkboxGroup.value.length}} </strong></p>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
+          <vgr-expandable-div>
+            <vgr-expandable-div-header>
+              <h2>Update on change values</h2>
+            </vgr-expandable-div-header>
+            <vgr-expandable-div-content>
+
+              <p>firstname: <strong>{{updateOnChangeForm.controls.firstname.value}}</strong></p>
+              <p>lastname: <strong> {{updateOnChangeForm.controls.lastname.value}} </strong></p>
+              <p>age: <strong>{{updateOnChangeForm.controls.age.value}} </strong></p>
+              <p>email: <strong>{{updateOnChangeForm.controls.email.value}} </strong></p>
+              <p>salary: <strong>{{updateOnChangeForm.controls.salary.value}} </strong></p>
+              <p>favouritepet: <strong>{{updateOnChangeForm.controls.favourite_pet.value}} </strong></p>
+              <p>interests: <strong>{{updateOnChangeForm.controls.interests.value}} </strong></p>
+              <p>check: <strong>{{updateOnChangeForm.controls.check.value}} </strong></p>
+              <p>optional: <strong>{{updateOnChangeForm.controls.optional.value?.value}} </strong></p>
+              <p>monthpicker: <strong>{{updateOnChangeForm.controls.monthpicker.value}} </strong></p>
+              <p>datepicker: <strong>{{updateOnChangeForm.controls.datepicker.value}} </strong></p>
+              <p>datepicker_preselected: <strong>{{updateOnChangeForm.controls.datepicker_preselected.value}} </strong>
+              </p>
+              <p>textarea: <strong>{{updateOnChangeForm.controls.textarea.value}} </strong></p>
+              <p>checkboxgroup: <strong>{{updateOnChangeForm.controls.checkboxGroup.value.length}} </strong></p>
+            </vgr-expandable-div-content>
+          </vgr-expandable-div>
         </vgr-card-column>
+
       </vgr-card>
     </vgr-page-block>
     <vgr-page-block>

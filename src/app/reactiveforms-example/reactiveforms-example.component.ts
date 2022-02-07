@@ -99,12 +99,13 @@ export class ReactiveformsexampleComponent implements OnInit {
             salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
             favourite_pet: new FormControl(null, { validators: [Validators.required] }),
             interests: new FormControl(null, { validators: [Validators.required, Validators.pattern('Koda')] }),
-            check: new FormControl(true, { validators: [Validators.pattern('true')] }),
+            check: new FormControl(true, { validators: [Validators.requiredTrue] }),
             optional: new FormControl(1),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
             datepicker: new FormControl('', { validators: [Validators.required] }),
             datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
-            textarea: new FormControl('', { validators: [Validators.required] })
+            textarea: new FormControl('', { validators: [Validators.required] }),
+            checkboxGroup: new FormControl([], { validators: [Validators.required] })
         }, { updateOn: 'blur' });
     }
 
@@ -122,7 +123,8 @@ export class ReactiveformsexampleComponent implements OnInit {
             monthpicker: new FormControl('', { validators: [Validators.required] }),
             datepicker: new FormControl('', { validators: [Validators.required] }),
             datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
-            textarea: new FormControl('', { validators: [Validators.required] })
+            textarea: new FormControl('', { validators: [Validators.required] }),
+            checkboxGroup: new FormControl([], { validators: [Validators.required] })
         }, { updateOn: 'submit' });
     }
 
@@ -140,7 +142,8 @@ export class ReactiveformsexampleComponent implements OnInit {
             monthpicker: new FormControl('', { validators: [Validators.required] }),
             datepicker: new FormControl('', { validators: [Validators.required] }),
             datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
-            textarea: new FormControl('', { validators: [Validators.required] })
+            textarea: new FormControl('', { validators: [Validators.required] }),
+            checkboxGroup: new FormControl([], { validators: [Validators.required] })
         }, { updateOn: 'change' });
     }
 
