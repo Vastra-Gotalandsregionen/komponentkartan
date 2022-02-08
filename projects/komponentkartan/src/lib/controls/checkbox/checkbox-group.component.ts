@@ -1,6 +1,7 @@
-import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, Host, HostBinding, Input, OnChanges, OnInit, Optional, Output, QueryList, SimpleChanges, SkipSelf } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, Host, HostBinding, Input, OnChanges, OnDestroy, OnInit, Optional, Output, QueryList, SimpleChanges, SkipSelf } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { CheckboxComponent } from './checkbox.component';
 
 @Component({
@@ -13,7 +14,7 @@ import { CheckboxComponent } from './checkbox.component';
     multi: true
   }]
 })
-export class CheckboxGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges {
+export class CheckboxGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges, OnDestroy {
   _disabled: boolean;
   @Input() showValidation = true;
 
@@ -51,17 +52,18 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
       if (item.checked) {
         this._value.push(item.label)
         if (this.formControlName && this.controlContainer) {
-          
+
           this.onChange(this._value); // makes submit work (1st time)
           //this.control.setValue(this._value) // makes start value work, but nothing else...
-         
+
         }
       }
        this.control.markAsUntouched();
       // Subscribe on changes
-      item.checkedChanged.subscribe(($event) => {
+      item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event) => {
         if ($event.checked) {
           this._value.push($event.label)
+          console.log('event i checkedChange subscribe: ', $event, this._value)
         } else {
           const index = this._value.indexOf($event.label);
           if (index >= 0) {
@@ -69,14 +71,19 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
           }
         }
         // debugger;
-        // if (this.formControlName && this.controlContainer) {
+        if (this.formControlName && this.controlContainer) {
 
-        //   this.onChange(this._value);
-        // }
+          this.onChange(this._value);
+        }
       })
     });
-    
 
+
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribeItems.next();
+    this.ngUnsubscribeItems.complete();
   }
 
   ngOnChanges(): void {

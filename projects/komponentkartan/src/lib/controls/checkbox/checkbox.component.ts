@@ -106,11 +106,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
               this.element.focus();
           }
 
-          console.log('onchange is called on component and emit')
           if (this.control) {
+            console.log('onchange is called on component and emit')
             this.onChange(this.checked);
           }
-          
+
           this.checkedChanged.emit( {id: this.elementId, checked: this.checked, label: this.label});
           event.stopPropagation();
       }
