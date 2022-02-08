@@ -51,10 +51,13 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
       if (item.checked) {
         this._value.push(item.label)
         if (this.formControlName && this.controlContainer) {
-          this.onChange(this._value);
+          
+          this.onChange(this._value); // makes submit work (1st time)
+          //this.control.setValue(this._value) // makes start value work, but nothing else...
+         
         }
       }
-
+       this.control.markAsUntouched();
       // Subscribe on changes
       item.checkedChanged.subscribe(($event) => {
         if ($event.checked) {
@@ -65,13 +68,15 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
             this._value.splice(index, 1);
           }
         }
+        // debugger;
+        // if (this.formControlName && this.controlContainer) {
 
-        if (this.formControlName && this.controlContainer) {
-          console.log('onchange is called in group')
-          this.onChange(this._value);
-        }
+        //   this.onChange(this._value);
+        // }
       })
-    })
+    });
+    
+
   }
 
   ngOnChanges(): void {
@@ -127,7 +132,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     });
   }
 
-  onChange: (value) => void;
+  onChange(input: any) { }
   onTouch:  (value) => void;
 
   onLeave() {
@@ -147,7 +152,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
               this._value.splice(index, 1);
         });
 
-        this.control.setValue(this._value);
+        // this.control.setValue(this._value);
         // this.onTouch(this._value);
       }
       console.log('onLeave: ', this.control)
@@ -157,8 +162,12 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   }
 
   writeValue(event: any): void {
-    console.log('WriteValue - checkboxgroup', event)
+    if (event.length === 0) {
+      return;
+    }
+
     if (event) {
+      console.log('WriteValue - checkboxgroup', event, this.items, this._value)
       if (event.checked) {
         this._value.push(event.label)
       } else {
@@ -167,6 +176,8 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
           this._value.splice(index, 1);
         }
       }
+
+      // this.control.setValue(this._value)
     } else { // formcontrol.reset
       this._value = [];
       this.items.forEach(element => {
@@ -176,6 +187,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   }
 
   registerOnChange(fn: any): void {
+    console.log('registerOnChange')
     this.onChange = fn;
   }
   registerOnTouched(fn: any): void {

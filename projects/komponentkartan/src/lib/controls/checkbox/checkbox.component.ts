@@ -52,7 +52,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
       if (this.formControlName && this.controlContainer) {
           this.control = this.controlContainer.control.get(this.formControlName);
           this.setDisabledState(this.controlContainer.control.get(this.formControlName).disabled);
-
       }
     }
 
@@ -108,11 +107,12 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
           }
 
           console.log('onchange is called on component and emit')
-          this.onChange(this.checked);
+          if (this.control) {
+            this.onChange(this.checked);
+          }
+          
           this.checkedChanged.emit( {id: this.elementId, checked: this.checked, label: this.label});
           event.stopPropagation();
-
-          console.log('checkbox - ', this.control)
       }
     }
 
