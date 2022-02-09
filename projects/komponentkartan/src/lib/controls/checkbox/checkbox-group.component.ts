@@ -42,44 +42,58 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
 
   constructor(@Host() @SkipSelf() @Optional() private controlContainer: ControlContainer, private elementRef: ElementRef) {
     this.elementId = Math.random().toString();
-  }
 
+
+  }
 
   ngAfterContentInit(): void {
-    this.setGroupDisabledOverride(this._disabled)
+    this.setGroupDisabledOverride(this._disabled);
+
+    // this.items.forEach(item => {
+    //   // On init
+    //   if (item.checked) {
+    //     this._value.push(item.label)
+    //     if (this.formControlName && this.controlContainer) {
+
+    //       this.onChange(this._value); // makes submit work (1st time)
+    //       //this.control.setValue(this._value) // makes start value work, but nothing else...
+
+    //     }
+    //   }
+    //    this.control.markAsUntouched();
+    // });
+
+    const values = this.items.filter(item => item.checked).map(i => i.label);
+    console.log('sätt första värdena: ', values)
+    this.onChange( values);
+
+    // Subscribe on changes
     this.items.forEach(item => {
-      // On init
-      if (item.checked) {
-        this._value.push(item.label)
-        if (this.formControlName && this.controlContainer) {
-
-          this.onChange(this._value); // makes submit work (1st time)
-          //this.control.setValue(this._value) // makes start value work, but nothing else...
-
-        }
-      }
-       this.control.markAsUntouched();
-      // Subscribe on changes
       item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event) => {
-        if ($event.checked) {
-          this._value.push($event.label)
-          console.log('event i checkedChange subscribe: ', $event, this._value)
-        } else {
-          const index = this._value.indexOf($event.label);
-          if (index >= 0) {
-            this._value.splice(index, 1);
-          }
-        }
+        console.log('event: ', $event)
+        // if ($event.checked) {
+        //   this._value.push($event.label)
+        //   console.log('event i checkedChange subscribe: ', $event, this._value)
+        // } else {
+        //   const index = this._value.indexOf($event.label);
+        //   if (index >= 0) {
+        //     this._value.splice(index, 1);
+        //   }
+        // }
+
+        const values = this.items.filter(item => item.checked).map(i => i.label);
+        this.onChange( values);
         // debugger;
-        if (this.formControlName && this.controlContainer) {
+        // if (this.formControlName && this.controlContainer) {
 
-          this.onChange(this._value);
-        }
-      })
+        //   this.onChange(this._value);
+        // }
+      });
     });
+  };
 
 
-  }
+
 
   ngOnDestroy() {
     this.ngUnsubscribeItems.next();
@@ -139,7 +153,9 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     });
   }
 
-  onChange(input: any) { }
+  onChange(value: any) {
+    this._value = value;
+  }
   onTouch:  (value) => void;
 
   onLeave() {
@@ -149,18 +165,18 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
 
       if (this.control.updateOn === 'blur') {
 
-        this.items.forEach(element => {
-          const index = this._value.indexOf(element.label);
-          // if element is checked and not in values - add it
-          if (element.checked && index === -1) {
-            this._value.push(element.label)
-            // if element is not checked and is in values - remove it
-          } else if (!element.checked && index >= 0)
-              this._value.splice(index, 1);
-        });
+        // this.items.forEach(element => {
+        //   const index = this._value.indexOf(element.label);
+        //   // if element is checked and not in values - add it
+        //   if (element.checked && index === -1) {
+        //     this._value.push(element.label)
+        //     // if element is not checked and is in values - remove it
+        //   } else if (!element.checked && index >= 0)
+        //       this._value.splice(index, 1);
+        // });
+        const values = this.items.filter(item => item.checked).map(i => i.label);
+        this.onChange( values);
 
-        // this.control.setValue(this._value);
-        // this.onTouch(this._value);
       }
       console.log('onLeave: ', this.control)
   }
@@ -169,20 +185,22 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   }
 
   writeValue(event: any): void {
+    console.log('writeValue: ', event)
     if (event.length === 0) {
       return;
     }
 
     if (event) {
-      console.log('WriteValue - checkboxgroup', event, this.items, this._value)
-      if (event.checked) {
-        this._value.push(event.label)
-      } else {
-        const index = this._value.indexOf(event.label);
-        if (index >= 0) {
-          this._value.splice(index, 1);
-        }
-      }
+      // console.log('WriteValue - checkboxgroup', event, this.items, this._value)
+      // if (event.checked) {
+      //   this._value.push(event.label)
+      // } else {
+      //   const index = this._value.indexOf(event.label);
+      //   if (index >= 0) {
+      //     this._value.splice(index, 1);
+      //   }
+      // }
+      this._value = event;
 
       // this.control.setValue(this._value)
     } else { // formcontrol.reset
@@ -195,7 +213,10 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
 
   registerOnChange(fn: any): void {
     console.log('registerOnChange')
-    this.onChange = fn;
+     this.onChange = (value: any) => {
+      this._value = value;
+      fn(value);
+    };
   }
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
