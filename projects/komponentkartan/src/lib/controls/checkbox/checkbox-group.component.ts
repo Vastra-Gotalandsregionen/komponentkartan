@@ -70,7 +70,6 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     // Subscribe on changes
     this.items.forEach(item => {
       item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event) => {
-        console.log('event: ', $event)
         // if ($event.checked) {
         //   this._value.push($event.label)
         //   console.log('event i checkedChange subscribe: ', $event, this._value)
@@ -158,61 +157,47 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   }
   onTouch:  (value) => void;
 
-  onLeave() {
+  onLeave(event) {
     if (this.control) {
       this.control.markAsTouched();
       this.control.markAsDirty();
 
       if (this.control.updateOn === 'blur') {
 
-        // this.items.forEach(element => {
-        //   const index = this._value.indexOf(element.label);
-        //   // if element is checked and not in values - add it
-        //   if (element.checked && index === -1) {
-        //     this._value.push(element.label)
-        //     // if element is not checked and is in values - remove it
-        //   } else if (!element.checked && index >= 0)
-        //       this._value.splice(index, 1);
-        // });
         const values = this.items.filter(item => item.checked).map(i => i.label);
-        this.onChange( values);
 
+        console.log('OnLeave (onUpdateBlur): ', values, event)
+
+        this.control.setValue(values);
       }
-      console.log('onLeave: ', this.control)
-  }
-    //console.log('onLeave')
-    // this.onTouch();
+
+      console.log('OnLeave - after')
+    }
   }
 
   writeValue(event: any): void {
-    console.log('writeValue: ', event)
-    if (event.length === 0) {
-      return;
-    }
+      if (event.length === 0) {
+        return;
+      }
 
-    if (event) {
-      // console.log('WriteValue - checkboxgroup', event, this.items, this._value)
-      // if (event.checked) {
-      //   this._value.push(event.label)
-      // } else {
-      //   const index = this._value.indexOf(event.label);
-      //   if (index >= 0) {
-      //     this._value.splice(index, 1);
-      //   }
-      // }
-      this._value = event;
+      if (event) {
+        setTimeout(() => {
+          event.forEach( checkboxValue => {
+            this.items.filter(item => item.label === checkboxValue).map(checked => checked.checked = true);
+          })
+        }, 10);
 
-      // this.control.setValue(this._value)
-    } else { // formcontrol.reset
-      this._value = [];
-      this.items.forEach(element => {
-        element.checked = false;
-      });
-    }
+        this._value = event;
+
+      } else { // formcontrol.reset
+        this._value = [];
+        this.items.forEach(element => {
+          element.checked = false;
+        });
+      }
   }
 
   registerOnChange(fn: any): void {
-    console.log('registerOnChange')
      this.onChange = (value: any) => {
       this._value = value;
       fn(value);

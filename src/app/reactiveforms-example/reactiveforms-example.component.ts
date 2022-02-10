@@ -124,7 +124,7 @@ export class ReactiveformsexampleComponent implements OnInit {
             datepicker: new FormControl('', { validators: [Validators.required] }),
             datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
             textarea: new FormControl('', { validators: [Validators.required] }),
-            checkboxGroup: new FormControl([], { validators: [Validators.required] })
+            checkboxGroup: new FormControl(['Vald'], { validators: [Validators.required] })
         }, { updateOn: 'submit' });
     }
 

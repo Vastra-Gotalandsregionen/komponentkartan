@@ -129,6 +129,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
           this.control.markAsTouched();
           this.control.markAsDirty();
           if (this.control.updateOn === 'blur') {
+
             this.control.setValue(this.checked);
           }
       }
