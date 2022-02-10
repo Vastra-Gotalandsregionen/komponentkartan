@@ -1,6 +1,6 @@
 <div [ngClass]="{ 'checkbox-validation-error--active': errorActive}" >
   <div class="checkbox checkbox-validation">
-    <span class="checkbox__input" (focusout)="onLeave()" (click)="onClick($event)" (keydown)="onKeyDown($event)">
+    <span class="checkbox__input" (focusout)="onLeave($event)" (click)="onClick($event)" (keydown)="onKeyDown($event)">
       <input id="{{labelledbyid}}" tabindex="-1" type="checkbox" name="checkbox" [disabled]="disabled" [checked]="checked" aria-hidden="true">
       <span
       class="checkbox__control"

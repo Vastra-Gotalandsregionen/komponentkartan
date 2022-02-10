@@ -49,20 +49,6 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   ngAfterContentInit(): void {
     this.setGroupDisabledOverride(this._disabled);
 
-    // this.items.forEach(item => {
-    //   // On init
-    //   if (item.checked) {
-    //     this._value.push(item.label)
-    //     if (this.formControlName && this.controlContainer) {
-
-    //       this.onChange(this._value); // makes submit work (1st time)
-    //       //this.control.setValue(this._value) // makes start value work, but nothing else...
-
-    //     }
-    //   }
-    //    this.control.markAsUntouched();
-    // });
-
     const values = this.items.filter(item => item.checked).map(i => i.label);
     console.log('sätt första värdena: ', values)
     this.onChange( values);
@@ -70,23 +56,9 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     // Subscribe on changes
     this.items.forEach(item => {
       item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event) => {
-        // if ($event.checked) {
-        //   this._value.push($event.label)
-        //   console.log('event i checkedChange subscribe: ', $event, this._value)
-        // } else {
-        //   const index = this._value.indexOf($event.label);
-        //   if (index >= 0) {
-        //     this._value.splice(index, 1);
-        //   }
-        // }
-
         const values = this.items.filter(item => item.checked).map(i => i.label);
         this.onChange( values);
-        // debugger;
-        // if (this.formControlName && this.controlContainer) {
 
-        //   this.onChange(this._value);
-        // }
       });
     });
   };
@@ -158,20 +130,22 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   onTouch:  (value) => void;
 
   onLeave(event) {
+
+    if ((event.relatedTarget !== null)) {
+      return;
+    }
     if (this.control) {
       this.control.markAsTouched();
       this.control.markAsDirty();
-
+      console.log('OnLeave: ', this.control.updateOn)
       if (this.control.updateOn === 'blur') {
 
         const values = this.items.filter(item => item.checked).map(i => i.label);
 
-        console.log('OnLeave (onUpdateBlur): ', values, event)
 
         this.control.setValue(values);
       }
 
-      console.log('OnLeave - after')
     }
   }
 
@@ -188,7 +162,6 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
         }, 10);
 
         this._value = event;
-
       } else { // formcontrol.reset
         this._value = [];
         this.items.forEach(element => {

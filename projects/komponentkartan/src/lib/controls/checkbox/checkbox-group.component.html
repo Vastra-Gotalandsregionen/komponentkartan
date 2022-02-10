@@ -13,7 +13,7 @@
         <ng-content select="vgr-checkbox"></ng-content>
       </div>
     </div>
-    <div [attr.id]="elementId" *ngIf="errorActive" class="checkbox-group-validation_status" [title]="validationErrorMessage" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
+    <div [attr.id]="elementId" *ngIf="errorActive" class="checkbox-group-validation_status" [title]="validationErrorMessage" [attr.aria-live]="'assertive'">
       <vgr-icon icon="exclamation-circle" size="sm" class="checkbox-group-validation_status__icon"></vgr-icon>
       <div class="checkbox-group-validation_status__message" *ngIf="control">{{validationErrorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
       <div class="checkbox-group-validation_status__message" *ngIf="!control">{{validationErrorMessage}}</div>

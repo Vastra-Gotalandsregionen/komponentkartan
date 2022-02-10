@@ -127,7 +127,7 @@
           </form>
         </vgr-card-column>
         <vgr-card-column>
-          <!-- <h1>On Submit</h1>
+          <h1>On Submit</h1>
           <form [formGroup]="updateOnSubmitForm">
             <vgr-title-value-layout>
               <vgr-title-value>
@@ -242,13 +242,13 @@
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnSubmitForm()">Reset form</vgr-button>
             <vgr-button type="submit" (click)="onSubmit()">Submit</vgr-button>
-          </form> -->
+          </form>
         </vgr-card-column>
       </vgr-card>
       <vgr-card>
         <vgr-card-column>
           <h1>On Change</h1>
-    <!--      <form [formGroup]="updateOnChangeForm">
+         <form [formGroup]="updateOnChangeForm">
             <vgr-title-value-layout>
               <vgr-title-value>
                 <vgr-title-value-heading>Förnamn</vgr-title-value-heading>
@@ -354,9 +354,9 @@
               <vgr-title-value>
                 <vgr-title-value-heading for="checkboxGroup">checkboxGroup</vgr-title-value-heading>
                 <vgr-title-value-container>
-                  <vgr-checkbox-group formControlName="checkboxGroup" [showValidation]="updateOnChangeForm.controls.checkboxGroup.dirty" labelId="checkboxGroup">
+                  <vgr-checkbox-group formControlName="checkboxGroup" [showValidation]="updateOnChangeForm.controls.checkboxGroup.touched" labelId="checkboxGroup">
                     <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
-                    <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Inaktiverad' " [disabled]="true"></vgr-checkbox>
                     <vgr-checkbox [label]=" 'Vald' "></vgr-checkbox>
                     <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
                 </vgr-checkbox-group>
@@ -365,7 +365,7 @@
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnChangeForm()">Reset form</vgr-button>
             <vgr-button [disabled]="false">Skapa användare</vgr-button>
-          </form> -->
+          </form>
         </vgr-card-column>
         <vgr-card-column>
           <vgr-expandable-div [expanded]="true">

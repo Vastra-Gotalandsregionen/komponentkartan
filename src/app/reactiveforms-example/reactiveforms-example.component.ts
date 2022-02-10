@@ -129,22 +129,22 @@ export class ReactiveformsexampleComponent implements OnInit {
     }
 
     createUpdateOnChangeForm() {
-        this.updateOnChangeForm = new FormGroup({
-            firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
-            lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
-            age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
-            email: new FormControl('', { validators: [Validators.required, Validators.email] }),
-            salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
-            favourite_pet: new FormControl(null, { validators: [Validators.required] }),
-            interests: new FormControl(null, { validators: [Validators.required, Validators.pattern('Koda')] }),
-            check: new FormControl(true, { validators: [Validators.pattern('true')] }),
-            optional: new FormControl(3),
-            monthpicker: new FormControl('', { validators: [Validators.required] }),
-            datepicker: new FormControl('', { validators: [Validators.required] }),
-            datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
-            textarea: new FormControl('', { validators: [Validators.required] }),
-            checkboxGroup: new FormControl([], { validators: [Validators.required] })
-        }, { updateOn: 'change' });
+            this.updateOnChangeForm = new FormGroup({
+                firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+                lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+                age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
+                email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+                salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
+                favourite_pet: new FormControl(null, { validators: [Validators.required] }),
+                interests: new FormControl(null, { validators: [Validators.required, Validators.pattern('Koda')] }),
+                check: new FormControl(true, { validators: [Validators.pattern('true')] }),
+                optional: new FormControl(3),
+                monthpicker: new FormControl('', { validators: [Validators.required] }),
+                datepicker: new FormControl('', { validators: [Validators.required] }),
+                datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
+                textarea: new FormControl('', { validators: [Validators.required] }),
+                checkboxGroup: new FormControl([], { validators: [Validators.required] })
+            }, { updateOn: 'change' });
     }
 
     onSubmit() {

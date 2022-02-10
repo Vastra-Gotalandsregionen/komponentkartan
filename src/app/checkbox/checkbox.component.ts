@@ -15,7 +15,8 @@ export class CheckboxComponent implements OnInit {
   form: FormGroup;
   checkboxForm: FormGroup;
   showValidFormText: boolean = false;
-
+  formSubmittedCheckboxGroup: boolean;
+  formSubmittedCheckbox: boolean;
   // checkbox = new FormControl('', Validators.required);
 
   constructor(private fb: FormBuilder) { }
@@ -30,16 +31,17 @@ export class CheckboxComponent implements OnInit {
     }, { updateOn: 'submit' });
 
     this.checkboxForm = this.fb.group({
-      checkboxValues: ['']
+      checkboxValues: [['Vald'], { validators: [Validators.requiredTrue]}]
     }, { updateOn: 'submit' });
   }
 
   submitForm() {
     this.form.controls.checkbox.markAsTouched();
 
-
+    this.formSubmittedCheckbox = true;
     if (this.form.valid) {
       this.showValidFormText = true;
+
     } else {
       this.showValidFormText = false;
     }
@@ -47,9 +49,14 @@ export class CheckboxComponent implements OnInit {
   }
 
   submitCheckboxForm() {
-    this.checkboxForm.controls.checkboxValues.markAsTouched();
+    this.formSubmittedCheckboxGroup = true;
+    // this.checkboxForm.controls.checkboxValues.markAsTouched();
     // Do nothing...
     // this.checkboxForm.reset();
+  }
+
+  resetCheckboxForm() {
+    this.formSubmittedCheckboxGroup = false;
   }
 
   setFocus() {
