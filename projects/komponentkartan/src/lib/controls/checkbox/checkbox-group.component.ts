@@ -50,7 +50,6 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     this.setGroupDisabledOverride(this._disabled);
 
     const values = this.items.filter(item => item.checked).map(i => i.label);
-    console.log('sätt första värdena: ', values)
     this.onChange( values);
 
     // Subscribe on changes
@@ -137,7 +136,6 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     if (this.control) {
       this.control.markAsTouched();
       this.control.markAsDirty();
-      console.log('OnLeave: ', this.control.updateOn)
       if (this.control.updateOn === 'blur') {
 
         const values = this.items.filter(item => item.checked).map(i => i.label);

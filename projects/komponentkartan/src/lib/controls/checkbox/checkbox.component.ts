@@ -107,7 +107,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
           }
 
           if (this.control) {
-            console.log('onchange is called on component and emit')
             this.onChange(this.checked);
           }
 
@@ -143,7 +142,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     }
 
     writeValue(value: any): void {
-      console.log('writevalue checkbox')
       this.checked = value;
     }
 
