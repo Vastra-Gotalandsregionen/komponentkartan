@@ -55,9 +55,9 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
           const index = Array.from(parent.children).indexOf(row);
 
           if (index === 0 && event.key === 'Tab' && event.shiftKey) {
-            event.preventDefault();
-            let headerToFocus = event.currentTarget.getElementsByClassName('grid-header')[0];
-            headerToFocus.focus();
+            // event.preventDefault();
+            // let headerToFocus = event.currentTarget.getElementsByClassName('grid-header')[0];
+            // headerToFocus.focus();
           }
         }
 
@@ -112,7 +112,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(value => {
         setTimeout(() => {
-          this.headerOffset = `${this.headerHeight + value }px`;
+          this.headerOffset = `${this.headerHeight + value}px`;
         });
       });
     const animationSpeeds = {
@@ -170,7 +170,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
         }
       });
 
-      this.gridService.collapseRowRequested
+    this.gridService.collapseRowRequested
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe((rowToCollapse: GridRowComponent) => {
         rowToCollapse.setExpanded(false);
         if (this.stickyHeader) {
