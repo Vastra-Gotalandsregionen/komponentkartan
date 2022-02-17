@@ -1,8 +1,8 @@
 import { AfterContentInit, Component, ContentChildren, HostBinding, Input, OnDestroy, QueryList } from '@angular/core';
-import { faAlignCenter } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
-import { delay, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { TabButtonComponent } from './tab-button.component';
+import { TabManagementService } from './tab-management.service';
 
 @Component({
   selector: 'vgr-tab-button-group',
@@ -12,12 +12,20 @@ import { TabButtonComponent } from './tab-button.component';
 export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 
   @Input() width = 'auto';
+
   @HostBinding('attr.id') @Input() id: string;
   @HostBinding('class.centrera')  @Input() alignCenter = false;
   @ContentChildren(TabButtonComponent) tabButtons: QueryList<TabButtonComponent>;
   tabButtonSubscriptions = [];
   lastSelectedIndex: number;
+  activeTabId: string;
+  previousActiveTabId: string = '';
   private ngUnsubscribe = new Subject();
+  _navigationCancelled: boolean;
+  get navigationCancelled() {
+    return this._navigationCancelled;
+  }
+
 
   ngAfterContentInit() {
     this.setTabButtonTabFocusability();
@@ -28,19 +36,59 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
     this.tabButtons.changes
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(
-      _ => {
+      () => {
         this.setTabButtonTabFocusability();
         this.setTabButtonFocus();
         this.addTabButtonSubscriptions();
       }
     );
 
+    this.tabManagementService.tabChanged
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe((tab) => {
+      console.log('service.tabChanged: ', tab.tabId, tab.active, this.navigationCancelled)
+      setTimeout(() => {
+        if (this.navigationCancelled) {
+          console.log('navigering cancellerad, återställ till föregående tab: ', this.activeTabId, this.previousActiveTabId, event)
+
+          this.tabButtons.forEach( button => {
+            if (button.tabId === this.activeTabId) {
+              button.active = true;
+              this.setActiveTabId(button.tabId);
+              this.tabManagementService.tabChangeRequested(button);
+            } else {
+              button.active = false;
+            }
+            button.ariaPressed = button.active;
+          })
+          this._navigationCancelled = false;
+          return;
+        }
+
+        this.setActiveTabId(tab.tabId);
+
+        this.tabButtons.forEach(tab => {
+          tab.active = false;
+          if (tab.tabId === this.activeTabId) {
+            tab.active = true;
+          }
+
+          tab.ariaPressed = tab.active;
+        });
+
+      });
+
+    })
+
+    this.tabButtons.forEach(tab => {if (tab.active === true) { this.setActiveTabId(tab.tabId); console.log('Sätter tabid första gången: ', this.activeTabId)}})
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
+
+  constructor(private tabManagementService: TabManagementService) { }
 
   setTabButtonTabFocusability() {
     this.tabButtons.forEach((x, i) => {
@@ -107,19 +155,78 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event) => {
 
-        this.tabButtons.forEach( button => {
+
+          // if (this.navigationCancelled) {
+          //   console.log('navigering cancellerad, återställ till föregående tab: ', this.activeTabId, this.previousActiveTabId, event)
+
+          //   this.tabButtons.forEach( button => {
+          //     if (button.tabId === this.activeTabId) {
+          //       button.active = true;
+          //       this.setActiveTabId(button.tabId);
+          //       this.tabManagementService.tabChangeRequested(button);
+          //     } else {
+          //       button.active = false;
+          //     }
+          //     button.ariaPressed = button.active;
+          //   })
+          //   this._navigationCancelled = false;
+          //   return;
+          // }
+          this.tabButtons.forEach( button => {
+          console.log('selectedChanged', event)
           if (button.tabId === event) {
-            button.active = true;
-          } else {
-            button.active = false;
+            this.tabManagementService.tabChangeRequested(button);
           }
-          button.ariaPressed = button.active;
+          // else {
+          //   button.active = false;
+          // }
+          // button.ariaPressed = button.active;
 
         });
       });
       this.tabButtonSubscriptions.push(selectedChangedSubscription);
 
+
+      /* kod från klienten */
+      this.tabManagementService.changeNavigation.subscribe(navigationCancelled => {
+        console.log('navigationCancelled', navigationCancelled, 'go to', this.previousActiveTabId)
+        this._navigationCancelled = navigationCancelled;
+        if (navigationCancelled && this.tabButtons) {
+
+
+          if (!this.activeTabId) {
+            return;
+          }
+          this.tabButtons.forEach(tab => {
+            tab.active = false;
+          })
+          // this.tabButtons.filter(tab => tab.active === true)[0].active = false; // hämta aktiv tab och sätt den till false
+
+          this.tabButtons.forEach(tab => {
+            if (tab.tabId === this.previousActiveTabId) {
+              tab.active = true;
+              console.log('satt till true: ', tab.tabId, tab.active)
+            }
+          });
+          // switch (this.router.url) {
+          //   case '/filuppladdning/registervard' : this.tabs.filter(tab => tab.id === Tab.Registervård )[0].active = true; break;
+          //   case '/filuppladdning/undantag' : this.tabs.filter(tab => tab.id === Tab.Undantag )[0].active = true; break;
+          //   default: break;
+          // }
+        }
+      });
+
+
     });
+  }
+  setActiveTabId(tabId: string) {
+    // setTimeout(() => {
+      this.previousActiveTabId = this.activeTabId ? this.activeTabId : tabId;
+      this.activeTabId = tabId;
+
+      console.log('Tidigare tab: ', this.previousActiveTabId, ' > Till tab: ',  this.activeTabId)
+
+    // }, 100);
   }
 
   public focus() {
