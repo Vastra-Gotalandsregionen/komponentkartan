@@ -220,11 +220,14 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
             }
           });
 
-            // this.setActiveTabId(tab.tabId);
-            this.previousActiveTabId = this.activeTabId;
-            this.activeTabId = activeTabId;
-           
-            console.log('satt till true: ', activeTabId, this.previousActiveTabId, ' to ', this.activeTabId)
+            if (activeTabId) {
+              this.previousActiveTabId = this.activeTabId;
+              this.activeTabId = activeTabId;
+            
+              console.log('satt till true: ', activeTabId, this.previousActiveTabId, ' to ', this.activeTabId)
+            } else {
+              console.log('no tabid')
+            }
 
           // switch (this.router.url) {
           //   case '/filuppladdning/registervard' : this.tabs.filter(tab => tab.id === Tab.Registervård )[0].active = true; break;
