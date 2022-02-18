@@ -152,6 +152,11 @@
     }
   }
 
+  .loader-class {
+    display: flex;
+    justify-content: center;
+  }
+
   @media screen and (min-width: $desktop-width--medium) {
     .button {
       padding-left: 22px;

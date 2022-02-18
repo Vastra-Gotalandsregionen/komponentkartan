@@ -61,6 +61,13 @@
           : 'Aktiv'}}</vgr-button>
       </div>
 
+      <h2>Knappar med loadingState = true</h2>
+      <div>
+        <vgr-button [buttonStyle]="'primary'" [loadingState]="true">OK</vgr-button>
+        <vgr-button [buttonStyle]="'primary'">Text</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" [disabled]="buttonDiscreetDisabled" [loadingState]="true">Text</vgr-button>
+      </div>
+
       <h2>I ett reactive form</h2>
       <div>
       <form [formGroup]="form" class="spacer" (ngSubmit)="onSubmit()">

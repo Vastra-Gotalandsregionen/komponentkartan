@@ -5,8 +5,11 @@
    [attr.aria-disabled]="disabled"
    [ngClass]="calculateClasses()"
    (keydown)="onKeyboardActivation($event)">
-    <span class="button__fixIE">
+    <span class="button__fixIE" *ngIf="!loadingState">
       <ng-content></ng-content>
+    </span>
+    <span class="loader-class" *ngIf="loadingState">
+      <vgr-loader [small]="true" [active]="true"></vgr-loader>
     </span>
     <div *ngIf="buttonStyle==='primary'" class="button__focus-line"></div>
   </button>

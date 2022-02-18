@@ -10,14 +10,20 @@ export class ButtonComponent implements OnChanges {
   @Input() disabled = false;
   @Input() buttonStyle = 'primary';
   @Input() type = 'button';
+  @Input() loadingState = false;
   @ViewChild('button', { static: true }) button: ElementRef;
   reenabled = false;
   private wasDisabled = false;
   private activated = false;
 
-  constructor() {}
+  constructor() {
+    if (this.loadingState) {
+      console.log(this.button);
+    }
+  }
 
   ngOnChanges() {
+    console.log('this.button ', this.button.nativeElement)
     this.reenabled = this.wasDisabled && !this.disabled;
     this.wasDisabled = this.disabled;
   }
@@ -46,7 +52,7 @@ export class ButtonComponent implements OnChanges {
 
   calculateClasses() {
     const css = new Map([
-      ['button--disabled', this.disabled],
+      ['button--disabled', this.disabled || this.loadingState],
       ['button--enabling', this.reenabled],
       ['button--secondary', this.buttonStyle === 'secondary'],
       ['button--discreet', this.buttonStyle === 'discreet'],
