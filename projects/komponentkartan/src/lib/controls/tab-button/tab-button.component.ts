@@ -28,7 +28,9 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   ariaPressed = false;
   initialTabId: string;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+    console.log('constructor: ', this.tabId)
+  }
 
   ngOnChanges() {
     Promise.resolve(null).then(() => {

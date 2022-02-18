@@ -29,7 +29,7 @@ export class TabButtonComponent implements OnInit {
         element.active = true;
       }
     });
-
+    this.tabManagementService.navigationCancelled(false);
     switch (id) {
       case 'Favoriter':
         this.router.navigate( ['/favoriter'],  { skipLocationChange: true });
@@ -48,6 +48,7 @@ export class TabButtonComponent implements OnInit {
 
   lamnaTab() {
     console.log('lämna')
+    this.tabManagementService.navigationCancelled(false);
     this.router.navigate( ['/valda'],  { skipLocationChange: true });
     this.closeModal();
   }

@@ -37,6 +37,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(
       () => {
+        console.log('tabchanges')
         this.setTabButtonTabFocusability();
         this.setTabButtonFocus();
         this.addTabButtonSubscriptions();
@@ -47,42 +48,50 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe((tab) => {
       
-      setTimeout(() => {
-        if (this.navigationCancelled) {
-          console.log('service.tabChanged: navigering cancellerad, återställ till föregående tab: ', this.activeTabId, this.previousActiveTabId, event)
+      // setTimeout(() => {
+        // if (this.navigationCancelled) {
+        //   console.log('service.tabChanged: navigering cancellerad, återställ till föregående tab: ', this.activeTabId, this.previousActiveTabId, event)
 
-          let activeTabId;
-          this.tabButtons.forEach( button => {
-            if (button.tabId === this.activeTabId) {
-              button.active = true;
-              activeTabId = button.tabId;
-              this.tabManagementService.tabChangeRequested(button);
-            } else {
-              button.active = false;
-            }
-            button.ariaPressed = button.active;
-          })
-          this.setActiveTabId(activeTabId);
+        //   let activeTabId;
+        //   this.tabButtons.forEach( button => {
+        //     if (button.tabId === this.activeTabId) {
+        //       button.active = true;
+        //       activeTabId = button.tabId;
+        //       //this.tabManagementService.tabChangeRequested(button);
+        //     } else {
+        //       button.active = false;
+        //     }
+        //     button.ariaPressed = button.active;
+        //   })
+        //   console.log('setActiveTab from tabChanged, cancelnavigation', activeTabId)
+        //   this.setActiveTabId(activeTabId);
 
-          this._navigationCancelled = false;
-          return;
-        }
+        //   this._navigationCancelled = false;
+        //   console.log('navigeringen cancellerad och satt tillbaka till false', this.navigationCancelled)
+        //   return;
+        // }
 
-        this.setActiveTabId(tab.tabId);
+        
+        let activeTabId;
+      console.log('tabChange - ', tab)
+        this.tabButtons.forEach(item => {
+          // if (tab.tabId === this.activeTabId) {
+            console.log('service.tabChanged: ', item.tabId, item.active, this.navigationCancelled)
 
-        this.tabButtons.forEach(tab => {
-          
-          if (tab.tabId === this.activeTabId) {
-            console.log('service.tabChanged: ', tab.tabId, tab.active, this.navigationCancelled)
-            tab.active = true;
-          } else {
-            tab.active = false;
+          if (tab.tabId === item.tabId) {
+            activeTabId = item.tabId;
+            item.active = true;
+          }
+          else {
+            item.active = false;
           }
 
-          tab.ariaPressed = tab.active;
+          item.ariaPressed = item.active;
         });
 
-      });
+        console.log('setActiveTab from tabChanged', tab.tabId)
+        this.setActiveTabId(tab.tabId);
+      // });
 
     })
 
@@ -182,6 +191,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
          
           if (button.tabId === event) {
             console.log('selectedChanged', button.tabId)
+            button.active = true;
             this.tabManagementService.tabChangeRequested(button);
           }
           // else {
@@ -242,6 +252,11 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
   }
   setActiveTabId(tabId: string) {
     // setTimeout(() => {
+      console.log('setactiveTabId', tabId, this.activeTabId, this.previousActiveTabId)
+      if (tabId === this.activeTabId) {
+        console.log('return from this.setActiveTabId')
+        return;
+      }
       this.previousActiveTabId = this.activeTabId ? this.activeTabId : tabId;
       this.activeTabId = tabId;
 

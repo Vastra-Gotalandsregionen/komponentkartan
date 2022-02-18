@@ -18,8 +18,7 @@
 
            <div style="width: 300px;">
             <vgr-tab-button [active]="active" (selectedChanged)="printLog($event)"><vgr-icon icon="exclamation-circle" size="sm" ></vgr-icon>  Översikt</vgr-tab-button>
-            <vgr-tab-button [active]="!active" (selectedChanged)="printLog($event)">Kalle</vgr-tab-button>
-            <!-- <vgr-tab-button [disabled]="true" width="30px">Disabled tab button</vgr-tab-button> -->
+            <vgr-tab-button [active]="!active" (selectedChanged)="printLog($event)">Kalle</vgr-tab-button> 
 
            </div>
            <br>
@@ -54,7 +53,7 @@
           <!-- <vgr-tab-button [disabled]="true" width="30px">Disabled tab button</vgr-tab-button> -->
 
       
-        <br>
+         <br>
         <div style="padding-top: 20px;">Har tryckt på {{activeTab2}}</div>
         <br>
         <div>
@@ -72,7 +71,7 @@
           <code>&lt;/vgr-tab-button-group&gt;</code><br>
           <br>
           <hr>
-          <vgr-tab-button-group >
+          <!-- <vgr-tab-button-group >
             <vgr-tab-button (selectedChanged)="setActivePanelText('Till vänster')">Till vänster</vgr-tab-button>
             <vgr-tab-button (selectedChanged)="setActivePanelText('I mitten')">I mitten</vgr-tab-button>
             <vgr-tab-button (selectedChanged)="setActivePanelText('Till höger')">Till höger</vgr-tab-button>
@@ -82,7 +81,7 @@
                 <p>{{tabPressed}}</p>
               </vgr-panel>
             </vgr-panel-container>
-          </vgr-tab-button-group>
+          </vgr-tab-button-group>  -->
         
          
           
