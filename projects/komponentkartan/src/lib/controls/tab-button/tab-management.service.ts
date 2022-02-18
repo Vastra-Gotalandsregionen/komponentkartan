@@ -18,9 +18,8 @@ export class TabManagementService {
     this.messageSource.next(navigated);
   }
 
-  tabChangeRequested(tab) {
-    console.log('tabChangeRequested: ', tab.tabId, tab.active)
-    this.currentTab.next(tab)
+  tabChangeRequested(tab, id) {
+    this.currentTab.next({tab: tab, id: id})
   }
 
   constructor() { }
