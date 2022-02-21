@@ -16,14 +16,9 @@ export class ButtonComponent implements OnChanges {
   private wasDisabled = false;
   private activated = false;
 
-  constructor() {
-    if (this.loadingState) {
-      console.log(this.button);
-    }
-  }
+  constructor() {}
 
   ngOnChanges() {
-    console.log('this.button ', this.button.nativeElement)
     this.reenabled = this.wasDisabled && !this.disabled;
     this.wasDisabled = this.disabled;
   }
