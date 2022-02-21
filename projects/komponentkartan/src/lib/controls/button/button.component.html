@@ -4,7 +4,8 @@
    class="button noselect"
    [attr.aria-disabled]="disabled"
    [ngClass]="calculateClasses()"
-   (keydown)="onKeyboardActivation($event)">
+   (keydown)="onKeyboardActivation($event)"
+   [ngStyle]="{'background-color': loadingState ? '#9EA2A2' : '', 'min-width': loadingState ? '87px' : ''}">
     <span class="button__fixIE" *ngIf="!loadingState">
       <ng-content></ng-content>
     </span>

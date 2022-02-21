@@ -14,6 +14,7 @@ export class TextbuttonsComponent implements OnInit {
   buttonSecondaryDisabled = true;
   buttonDiscreetDisabled = true;
   form: FormGroup;
+  loadingState = true;
   constructor(private fb: FormBuilder) {
     this.lastButtonPressed = '';
     this.form = fb.group({
@@ -31,6 +32,10 @@ export class TextbuttonsComponent implements OnInit {
     } else {
       this.form.enable();
     }
+  }
+
+  toggleLoadingState() {
+    this.loadingState = !this.loadingState;
   }
 
   onSubmit() {
