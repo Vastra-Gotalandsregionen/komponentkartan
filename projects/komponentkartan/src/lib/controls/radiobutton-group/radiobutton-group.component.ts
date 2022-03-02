@@ -129,6 +129,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       this.value = null;
     }
 
+    this.selectedChanged.emit(itemToExclude);
     this.onChange(itemToExclude);
   }
 

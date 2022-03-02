@@ -37,8 +37,8 @@ export class RadiobuttonsComponent implements OnInit {
     this.selectedOption = option;
   }
 
-  someCode() {
-    console.log('someCode')
+  someCode(param) {
+    console.log('someCode: ', param)
   }
 
   rensaVal() {

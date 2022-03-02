@@ -28,7 +28,7 @@
     <h2>Horisontell radiogrupp med möjlighet att disabla gruppen</h2>
     Välj föredragen bil
     <vgr-checkbox (checkedChanged)="groupDisabled = $event" label="Jag cyklar" [checked]="groupDisabled"></vgr-checkbox>
-    <vgr-radiobutton-group (selectedChanged)="someCode()" [disabled]="groupDisabled">
+    <vgr-radiobutton-group (selectedChanged)="someCode($event)" [disabled]="groupDisabled">
       <vgr-radiobutton-item [selected]="true" [disabled]="false">Subaru</vgr-radiobutton-item>
       <vgr-radiobutton-item [selected]="false" [disabled]="true">Volvo</vgr-radiobutton-item>
       <vgr-radiobutton-item [selected]="false" [disabled]="false">Toyota</vgr-radiobutton-item>
@@ -38,7 +38,7 @@
 
     <hr>
     <h2>Vertical radiogrupp </h2>
-    <vgr-radiobutton-group #RadioGroup2 (selectedChanged)="someCode()" vertical="true" required="true">
+    <vgr-radiobutton-group #RadioGroup2 (selectedChanged)="someCode($event)" vertical="true" required="true">
       <vgr-radiobutton-item [selected]="true">Det var bra</vgr-radiobutton-item>
       <vgr-radiobutton-item [selected]="false">Det var inte bra</vgr-radiobutton-item>
       <vgr-radiobutton-item [selected]="true">Det var verkligen inte bra</vgr-radiobutton-item>
@@ -49,7 +49,7 @@
     <hr>
     <h2>FormGroup radiogrupp </h2>
     <form [formGroup]="radioGroupForm">
-    <vgr-radiobutton-group formControlName="val" (selectedChanged)="someCode()" required="true">
+    <vgr-radiobutton-group formControlName="val" (selectedChanged)="someCode($event)" required="true">
       <vgr-radiobutton-item >Det var bra</vgr-radiobutton-item>
       <vgr-radiobutton-item >Det var inte bra</vgr-radiobutton-item>
       <vgr-radiobutton-item >Det var verkligen inte bra</vgr-radiobutton-item>

@@ -43,6 +43,7 @@ export class RadioGroupComponent implements ControlValueAccessor, OnChanges, Aft
   }
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef, private renderer: Renderer2) {
+    console.warn('Komponenten <vgr-radio-group> är utfasad och skall ersättas med <vgr-radiobutton-group>')
   }
 
   ngOnChanges() {
