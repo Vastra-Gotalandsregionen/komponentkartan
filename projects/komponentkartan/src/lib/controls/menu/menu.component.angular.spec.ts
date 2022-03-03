@@ -9,6 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconModule } from '../icon/icon.module';
+import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
 
 @Component({
     selector: 'vgr-test',
@@ -39,7 +40,8 @@ describe('[MenuComponent]', () => {
                 MenuComponent,
                 MenuItemComponent,
                 SubmenuComponent,
-                IconComponent
+                IconComponent,
+                ScrollbarComponent
             ],
             imports: [
                 CommonModule,

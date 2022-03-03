@@ -12,6 +12,7 @@ import { IconModule } from '../icon/icon.module';
 import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @Component({
   selector: 'vgr-test',
@@ -53,7 +54,7 @@ describe('[ComboboxComponent - Angular]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, FormsModule],
+      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, FormsModule, NgScrollbarModule],
       declarations: [
         TestComponent,
         ComboboxComponent,

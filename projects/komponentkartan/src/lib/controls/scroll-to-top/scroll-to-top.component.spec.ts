@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconComponent } from '../icon/icon.component';
+import { IconModule } from '../icon/icon.module';
 
 import { ScrollToTopComponent } from './scroll-to-top.component';
 
@@ -8,7 +11,8 @@ describe('ScrollToTopComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScrollToTopComponent ]
+      declarations: [ ScrollToTopComponent, IconComponent ],
+      imports: [ IconModule, FontAwesomeModule ]
     })
     .compileComponents();
 

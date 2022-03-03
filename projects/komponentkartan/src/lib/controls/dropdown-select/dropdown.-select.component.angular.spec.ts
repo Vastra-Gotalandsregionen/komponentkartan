@@ -15,6 +15,8 @@ import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { InputComponent } from '../input/input.component';
 import { filter } from 'rxjs/operators';
+import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @Component({
   selector: 'vgr-test',
@@ -44,7 +46,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
     TestBed.resetTestEnvironment();
     TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, FormsModule],
+      imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, FormsModule, NgScrollbarModule],
       declarations: [
         TestComponent,
         DropdownSelectComponent,
@@ -53,7 +55,8 @@ describe('[DropdownSelectComponent - Angular]', () => {
         TruncatePipe,
         IconComponent,
         ErrorMessagePipe,
-        InputComponent
+        InputComponent,
+        ScrollbarComponent
       ]
     });
 

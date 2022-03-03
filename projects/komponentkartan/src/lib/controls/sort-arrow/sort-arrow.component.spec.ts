@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { SortArrowComponent } from './sort-arrow.component';
 import { IconComponent } from '../icon/icon.component';
@@ -17,11 +17,15 @@ describe('SortArrowComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(fakeAsync(() => {
     fixture = TestBed.createComponent(SortArrowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+
+    tick(400);
+    fixture.detectChanges();
+    tick(Infinity);
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

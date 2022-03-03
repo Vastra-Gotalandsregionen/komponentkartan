@@ -1,4 +1,6 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { ScrollbarComponent } from './scrollbar.component';
 
@@ -8,7 +10,8 @@ describe('ScrollbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ScrollbarComponent ]
+      declarations: [ ScrollbarComponent ],
+      imports: [ ScrollingModule, NgScrollbarModule ]
     })
     .compileComponents();
   });

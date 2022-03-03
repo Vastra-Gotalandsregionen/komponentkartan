@@ -9,6 +9,8 @@ import { SearchResultItem } from '../../models/searchResultItem.model';
 import {
   SearchResultComponent
 } from '../../index';
+import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 
 @Component({
@@ -46,9 +48,10 @@ describe('[SearchResultComponent - Angular]', () => {
     TestBed.configureTestingModule({
       declarations: [
         TestSearchResultComponent,
-        SearchResultComponent
+        SearchResultComponent,
+        ScrollbarComponent
       ],
-      imports: [BrowserDynamicTestingModule]
+      imports: [BrowserDynamicTestingModule, NgScrollbarModule]
     });
 
     TestBed.compileComponents()
