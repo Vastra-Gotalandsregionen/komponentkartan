@@ -1,4 +1,4 @@
-name: Testbuild
+name: komponentkartan-ci
 
 on:
   push:
