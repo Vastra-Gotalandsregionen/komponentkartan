@@ -3,7 +3,7 @@
   (keydown)="onKeydown($event)"
   class="tab-button-container"
 >
-  <button #tabbutton type="button" 
+  <button #tabbutton type="button"  id="{{tabId}}"
   [ngStyle]="{'width': width }"
   class="tab-button noselect"
   [ngClass]="{'button--disabled': disabled, 'tab-button--active': active}"

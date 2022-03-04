@@ -17,3 +17,11 @@
       <router-outlet></router-outlet>
     </vgr-page-body>
   </vgr-page>
+
+  <vgr-modal id="modal1">
+    <vgr-modal-header>Vill du lämna?</vgr-modal-header>
+    <vgr-modal-footer>
+      <vgr-button [buttonStyle]="'secondary'" (click)="lamnaTab();">Ja</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" (click)="stannaPaTab();">Nej</vgr-button>
+    </vgr-modal-footer>
+  </vgr-modal>
