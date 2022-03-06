@@ -3,8 +3,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-# 9.0.6-beta1 (2022-03-04) 
-- Tabbutton change can now be stopped. (#605) // Ej klar
+# 9.0.6-beta2 (2022-03-04) 
+- Tabbutton change can now be stopped. (#605)
 - Added property for loading-state on button (#515)
 # 9.0.5 (2022-02-14) Stable 
 - Fixed bug with shift+tab not working in grid first row

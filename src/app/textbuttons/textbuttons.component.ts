@@ -7,7 +7,7 @@ import { ButtonComponent } from '../../../projects/komponentkartan/src/lib';
   templateUrl: './textbuttons.component.html',
   styleUrls: ['./textbuttons.component.scss']
 })
-export class TextbuttonsComponent implements OnInit {
+export class TextbuttonsComponent{
   @ViewChild('submitButton', { read: ButtonComponent, static: false }) submitButton: ButtonComponent;
   lastButtonPressed: string;
   buttonDisabled = true;
@@ -21,9 +21,6 @@ export class TextbuttonsComponent implements OnInit {
       name: ['Namn']
     });
     this.form.disable();
-  }
-
-  ngOnInit() {
   }
 
   toggleFormActive() {
