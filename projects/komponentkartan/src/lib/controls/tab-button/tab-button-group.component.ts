@@ -27,8 +27,10 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
     return this._navigationCancelled;
   }
 
-  constructor(private tabManagementService: TabManagementService) { 
-    this.id = Guid.newGuid();
+  constructor(private tabManagementService: TabManagementService) {
+    if (!this.id) {
+      this.id = Guid.newGuid();
+    }
   }
 
   ngAfterContentInit() {
@@ -41,7 +43,6 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(
       () => {
-        console.log('tabchanges')
         this.setTabButtonTabFocusability();
         this.setTabButtonFocus();
         this.addTabButtonSubscriptions();
@@ -50,13 +51,13 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 
     this.tabManagementService.tabChanged
     .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe((tab) => {
-       if (tab.id === this.id) {
+    .subscribe((res) => {
+       if (res.tabGroupId === this.id) {
         let activeTabId;
 
         this.tabButtons.forEach(item => {
 
-          if (tab.tabId === item.tabId) {
+          if (res.tab.tabId === item.tabId) {
             activeTabId = item.tabId;
             item.active = true;
           }
@@ -67,14 +68,14 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
           item.ariaPressed = item.active;
         });
 
-        this.setActiveTabId(tab.tabId);
+        this.setActiveTabId(res.tabId);
       }
     })
 
     this.tabButtons.forEach(tab => {
       tab.parentId = this.id;
-      if (tab.active === true) { 
-        this.setActiveTabId(tab.tabId); 
+      if (tab.active === true) {
+        this.setActiveTabId(tab.tabId);
       }
     });
   }
@@ -150,7 +151,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event) => {
           this.tabButtons.forEach( button => {
-         
+
           if (button.tabId === event) {
             button.active = true;
             this.tabManagementService.tabChangeRequested(button, this.id);
@@ -171,7 +172,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
             if (tab.tabId === this.previousActiveTabId) {
               tab.active = true;
               activeTabId = tab.tabId;
-            
+
             } else {
               tab.active = false;
             }
@@ -180,7 +181,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
             if (activeTabId) {
               this.previousActiveTabId = this.activeTabId;
               this.activeTabId = activeTabId;
-            } 
+            }
         }
       });
 

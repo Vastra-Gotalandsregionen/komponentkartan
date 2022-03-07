@@ -19,7 +19,7 @@ export class TabManagementService {
   }
 
   tabChangeRequested(tab, id) {
-    this.currentTab.next({tab: tab, id: id})
+    this.currentTab.next({tab: tab, tabGroupId: id})
   }
 
   constructor() { }
