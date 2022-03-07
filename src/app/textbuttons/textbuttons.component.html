@@ -61,6 +61,17 @@
           : 'Aktiv'}}</vgr-button>
       </div>
 
+      <h2>Knappar med loadingState = true</h2>
+      <div>
+        <vgr-button [buttonStyle]="'primary'" [loadingState]="loadingState">OK</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" [disabled]="buttonDiscreetDisabled" [loadingState]="loadingState">Text</vgr-button>
+        <vgr-button [buttonStyle]="'discreet'" [loadingState]="loadingState">Text</vgr-button>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <vgr-button [buttonStyle]="'primary'" (click)="toggleLoadingState()">Toggla loadingState</vgr-button>
+      </div>
+
       <h2>I ett reactive form</h2>
       <div>
       <form [formGroup]="form" class="spacer" (ngSubmit)="onSubmit()">

@@ -1,8 +1,9 @@
 import { AfterContentInit, Component, ContentChildren, HostBinding, Input, OnDestroy, QueryList } from '@angular/core';
-import { faAlignCenter } from '@fortawesome/free-solid-svg-icons';
+import { Guid } from '../../utils/guid';
 import { Subject } from 'rxjs';
-import { delay, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { TabButtonComponent } from './tab-button.component';
+import { TabManagementService } from './tab-management.service';
 
 @Component({
   selector: 'vgr-tab-button-group',
@@ -12,12 +13,25 @@ import { TabButtonComponent } from './tab-button.component';
 export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 
   @Input() width = 'auto';
+
   @HostBinding('attr.id') @Input() id: string;
   @HostBinding('class.centrera')  @Input() alignCenter = false;
   @ContentChildren(TabButtonComponent) tabButtons: QueryList<TabButtonComponent>;
   tabButtonSubscriptions = [];
   lastSelectedIndex: number;
+  activeTabId: string;
+  previousActiveTabId: string = '';
   private ngUnsubscribe = new Subject();
+  _navigationCancelled: boolean;
+  get navigationCancelled() {
+    return this._navigationCancelled;
+  }
+
+  constructor(private tabManagementService: TabManagementService) {
+    if (!this.id) {
+      this.id = Guid.newGuid();
+    }
+  }
 
   ngAfterContentInit() {
     this.setTabButtonTabFocusability();
@@ -28,19 +42,49 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
     this.tabButtons.changes
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(
-      _ => {
+      () => {
         this.setTabButtonTabFocusability();
         this.setTabButtonFocus();
         this.addTabButtonSubscriptions();
       }
     );
 
+    this.tabManagementService.tabChanged
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe((res) => {
+       if (res.tabGroupId === this.id) {
+        let activeTabId;
+
+        this.tabButtons.forEach(item => {
+
+          if (res.tab.tabId === item.tabId) {
+            activeTabId = item.tabId;
+            item.active = true;
+          }
+          else {
+            item.active = false;
+          }
+
+          item.ariaPressed = item.active;
+        });
+
+        this.setActiveTabId(res.tab.tabId);
+      }
+    })
+
+    this.tabButtons.forEach(tab => {
+      tab.parentId = this.id;
+      if (tab.active === true) {
+        this.setActiveTabId(tab.tabId);
+      }
+    });
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
+
 
   setTabButtonTabFocusability() {
     this.tabButtons.forEach((x, i) => {
@@ -106,20 +150,50 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
       const selectedChangedSubscription = x.selectedChanged
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event) => {
+          this.tabButtons.forEach( button => {
 
-        this.tabButtons.forEach( button => {
           if (button.tabId === event) {
             button.active = true;
-          } else {
-            button.active = false;
+            this.tabManagementService.tabChangeRequested(button, this.id);
           }
-          button.ariaPressed = button.active;
-
         });
       });
       this.tabButtonSubscriptions.push(selectedChangedSubscription);
 
+      this.tabManagementService.changeNavigation.subscribe(navigationCancelled => {
+        if (this._navigationCancelled === navigationCancelled) {
+          return;
+        }
+
+        this._navigationCancelled = navigationCancelled;
+        if (navigationCancelled && this.tabButtons) {
+          let activeTabId;
+          this.tabButtons.forEach(tab => {
+            if (tab.tabId === this.previousActiveTabId) {
+              tab.active = true;
+              activeTabId = tab.tabId;
+
+            } else {
+              tab.active = false;
+            }
+          });
+
+            if (activeTabId) {
+              this.previousActiveTabId = this.activeTabId;
+              this.activeTabId = activeTabId;
+            }
+        }
+      });
+
+
     });
+  }
+  setActiveTabId(tabId: string) {
+      if (tabId === this.activeTabId) {
+        return;
+      }
+      this.previousActiveTabId = this.activeTabId ? this.activeTabId : tabId;
+      this.activeTabId = tabId;
   }
 
   public focus() {

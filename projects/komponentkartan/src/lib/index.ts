@@ -52,6 +52,7 @@ export { ToggleButtonComponent } from './controls/toggle-button/toggle-button.co
 export { ToggleButtonGroupComponent } from './controls/toggle-button/toggle-button-group.component';
 export { TabButtonComponent } from './controls/tab-button/tab-button.component';
 export { TabButtonGroupComponent } from './controls/tab-button/tab-button-group.component';
+export { TabManagementService } from './controls/tab-button/tab-management.service';
 export { PaginationComponent } from './controls/pagination/pagination.component';
 export { DropdownSelectComponent } from './controls/dropdown-select/dropdown-select.component';
 export { DropdownItemComponent } from './controls/dropdown-select/dropdown-item.component';

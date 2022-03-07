@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { ModalService, TabManagementService } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
   selector: 'app-tab-button',
@@ -14,7 +14,7 @@ export class TabButtonComponent implements OnInit {
     { 'text': 'Valda' }
   ];
   centrera = false;
-  constructor(private router: Router) { }
+  constructor(private router: Router, public modalService: ModalService, private tabManagementService: TabManagementService) { }
 
   ngOnInit() {
     this.router.navigate( ['/tab-start'],  { skipLocationChange: true });
@@ -29,13 +29,13 @@ export class TabButtonComponent implements OnInit {
         element.active = true;
       }
     });
-
+    this.tabManagementService.navigationCancelled(false);
     switch (id) {
       case 'Favoriter':
         this.router.navigate( ['/favoriter'],  { skipLocationChange: true });
         break;
       case 'Valda':
-        this.router.navigate( ['/valda'],  { skipLocationChange: true });
+        this.modalService.openDialog('modal1');
         break;
         case 'Avtal':
           this.router.navigate( ['/tab-start'],  { skipLocationChange: true });
@@ -44,5 +44,22 @@ export class TabButtonComponent implements OnInit {
         this.router.navigate(['/tab-button']);
         break;
     }
+  }
+
+  lamnaTab() {
+    console.log('lämna')
+    this.tabManagementService.navigationCancelled(false);
+    this.router.navigate( ['/valda'],  { skipLocationChange: true });
+    this.closeModal();
+  }
+
+  stannaPaTab() {
+    console.log('stanna')
+    this.tabManagementService.navigationCancelled(true);
+    this.closeModal();
+  }
+
+  closeModal() {
+    this.modalService.closeDialog('modal1');
   }
 }

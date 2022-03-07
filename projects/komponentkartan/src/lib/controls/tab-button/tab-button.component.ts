@@ -13,6 +13,7 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   @Input() ariaLabel: string;
   @Input() tabId = Guid.newGuid();
   @Input() width = 'auto';
+  @Input() parentId;
 
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
@@ -28,7 +29,8 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   ariaPressed = false;
   initialTabId: string;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor() {
+  }
 
   ngOnChanges() {
     Promise.resolve(null).then(() => {

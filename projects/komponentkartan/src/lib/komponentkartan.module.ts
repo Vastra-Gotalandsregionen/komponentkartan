@@ -188,6 +188,7 @@ import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
   providers: [
     type.ModalService,
     type.BrowserDetector,
+    type.TabManagementService,
     { provide: LOCALE_ID, useValue: 'sv-SE' },
     // {
     //   provide: PERFECT_SCROLLBAR_CONFIG,

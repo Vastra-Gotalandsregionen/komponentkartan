@@ -13,6 +13,9 @@
     </p>
   </vgr-page-header>
   <vgr-page-body>
+    <vgr-notification *ngIf="showAlert" [standalone]="true" type="error" [isAlertNotice]="true" style="margin-bottom: 30px;">
+      Ett felmeddelande!
+    </vgr-notification>
     <vgr-page-block>
       <p>Inte ens type satt, ikon via &lt;vgr-icon&gt;</p>
       <vgr-notification>
@@ -28,15 +31,15 @@
         <vgr-icon [solid]="true" color="info" icon="info-circle"></vgr-icon>Ett felmeddelade!
       </vgr-notification>
     </vgr-page-block>
-    
+
     <vgr-page-block>
       <p>Ej standalone, Vilket innebär att då den har type kommer border sättas på &lt;vgr-page-block&gt;</p>
       <vgr-notification type="success">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
       </vgr-notification>
-      
+
     </vgr-page-block>
-    
+
     <vgr-page-block>
       <p>Default beteende, type satt annars inget</p>
       <vgr-notification type="success" [standalone]="true">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</vgr-notification>
@@ -60,7 +63,7 @@
         <vgr-icon [solid]="true" icon="address-card"></vgr-icon> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
       </vgr-notification>
     </vgr-page-block>
-    
+
     <vgr-page-block>
       <p>Ikon borttagen genom [noIcon]="true"</p>
       <vgr-notification type="success" [standalone]="true" [noIcon]="true">En bekräftelse om att något gick!</vgr-notification>
@@ -68,7 +71,7 @@
       <vgr-notification type="warning" [width]="'500px'" [standalone]="true" [noIcon]="true">Ett varningsmeddelande!</vgr-notification>
       <vgr-notification type="info" [standalone]="true" [noIcon]="true">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</vgr-notification>
     </vgr-page-block>
-    
+
     <vgr-page-block>
       <p>Bredden är satt likt [width]="'300px'"</p>
       <vgr-notification type="success" [width]="'300px'" [standalone]="true">
@@ -81,6 +84,6 @@
       <vgr-notification type="warning" [width]="'750px'" [standalone]="true">Ett varningsmeddelande!</vgr-notification>
       <vgr-notification type="info" [width]="'450px'" [height]="'450px'" [standalone]="true">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</vgr-notification>
     </vgr-page-block>
-  
+
   </vgr-page-body>
 </vgr-page>

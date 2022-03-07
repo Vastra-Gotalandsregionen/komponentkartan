@@ -7,13 +7,14 @@ import { ButtonComponent } from '../../../projects/komponentkartan/src/lib';
   templateUrl: './textbuttons.component.html',
   styleUrls: ['./textbuttons.component.scss']
 })
-export class TextbuttonsComponent implements OnInit {
+export class TextbuttonsComponent{
   @ViewChild('submitButton', { read: ButtonComponent, static: false }) submitButton: ButtonComponent;
   lastButtonPressed: string;
   buttonDisabled = true;
   buttonSecondaryDisabled = true;
   buttonDiscreetDisabled = true;
   form: FormGroup;
+  loadingState = true;
   constructor(private fb: FormBuilder) {
     this.lastButtonPressed = '';
     this.form = fb.group({
@@ -22,15 +23,16 @@ export class TextbuttonsComponent implements OnInit {
     this.form.disable();
   }
 
-  ngOnInit() {
-  }
-
   toggleFormActive() {
     if (this.form.enabled) {
       this.form.disable();
     } else {
       this.form.enable();
     }
+  }
+
+  toggleLoadingState() {
+    this.loadingState = !this.loadingState;
   }
 
   onSubmit() {

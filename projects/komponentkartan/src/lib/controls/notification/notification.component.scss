@@ -83,6 +83,10 @@
     background: $control-color--disabled;
   }
 
+  #description {
+    display: none;
+  }
+
   @media screen and (min-width: $desktop-width--medium) {
     &.standalone-notification {
       padding: 6px 10px;

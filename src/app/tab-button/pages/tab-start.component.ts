@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './tab-start.component.html',
   styleUrls: ['./tab-start.component.css']
 })
-export class TabStartComponent implements OnInit {
+export class TabStartComponent {
   active = true;
   active2 = true;
 
@@ -20,10 +20,6 @@ export class TabStartComponent implements OnInit {
   tabPressed: string;
   panelColor: string;
   constructor() { }
-
-  ngOnInit() {
-  }
-
 
   printLog(id) {
     this.activeTab = id;

@@ -40,6 +40,16 @@ export class NotificationComponent implements OnInit {
   @HostBinding('class.list-notification') listNotification = false;
   @HostBinding('class.standalone-notification') standaloneNotification = false;
   @HostBinding('@toggleFadedState') animate = true;
+  @HostBinding('attr.role') role = '';
+  @HostBinding('attr.aria-describedby') describeBy = 'description';
+
+  @Input()  set  isAlertNotice(value: boolean) {
+    if (value) {
+      this.role = 'alert';
+    } else {
+      this.role = '';
+    }
+  }
 
   constructor(public el: ElementRef) {}
 
