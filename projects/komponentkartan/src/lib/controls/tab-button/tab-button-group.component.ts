@@ -68,7 +68,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
           item.ariaPressed = item.active;
         });
 
-        this.setActiveTabId(res.tabId);
+        this.setActiveTabId(res.tab.tabId);
       }
     })
 
