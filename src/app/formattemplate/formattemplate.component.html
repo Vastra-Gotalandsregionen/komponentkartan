@@ -1,8 +1,10 @@
 <vgr-page>
     <vgr-page-header [title]="'Formatmall'">
     </vgr-page-header>
-
     <vgr-page-body>
+      <vgr-notification *ngIf="showAlert" type="success" [standalone]="true" style="margin-bottom: 30px;" [isAlertNotice]="true">
+          Från och med 2022 ska inte längre antal avvikelserapporter och antal årsarbetare rapporteras via IT-stödet.
+        </vgr-notification>
         <vgr-page-block>
             <div class="column-layout">
                 <span>Fonten som används är
