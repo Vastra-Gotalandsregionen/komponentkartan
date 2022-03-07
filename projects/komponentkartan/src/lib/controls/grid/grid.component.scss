@@ -164,7 +164,7 @@
 
   vgr-grid-row .grid-row-container {
     display: block;
-    transition: box-shadow 0.4s, width 0.4s, margin-left 0.4s;
+    transition: box-shadow 0.4s, width 0.4s, margin-left 0.4s, margin-top 0.4s, margin-bottom 0.4s;
 
       &.grid-row--expanded {
         background: #FFFFFF;
@@ -173,6 +173,8 @@
         width: 1110px;
         margin-left: -5px;
         position: relative;
+        margin-bottom: 10px;
+        margin-top: 10px;
 
         &:after {
           content: "";
