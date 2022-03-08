@@ -42,6 +42,7 @@ import { GridDocumentationComponent } from './grid-documentation/grid-documentat
 import { NotificationDocumentationComponent } from './notification-documentation/notification-documentation.component';
 import { TabButtonComponent } from './tab-button/tab-button.component';
 import { ComboboxDocumentationComponent } from './combobox-documentation/combobox-documentation.component';
+import { EditableTableDocumentationComponent } from './editable-table-documentation/editable-table-documentation.component';
 
 export const appRoutes: Routes = [
 
@@ -94,6 +95,7 @@ export const appRoutes: Routes = [
     { path: 'grid', component: GridDocumentationComponent },
     { path: 'notification', component: NotificationDocumentationComponent },
     { path: 'combobox', component: ComboboxDocumentationComponent },
+    { path: 'editable-table', component: EditableTableDocumentationComponent },
 
     { path: '**', redirectTo: '/' }
 ];

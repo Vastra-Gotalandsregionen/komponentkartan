@@ -16,6 +16,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { IconModule } from './controls/icon/icon.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
+import { EditableTableComponent } from './controls/editable-table/editable-table.component';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true
@@ -106,7 +107,12 @@ import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
     type.TabButtonGroupComponent,
     type.ComboboxComponent,
     type.ComboboxItemComponent,
-    type.ScrollbarComponent
+    type.ScrollbarComponent,
+    type.EditableTableComponent,
+    type.EditableTableHeaderColumnComponent,
+    type.EditableTableHeaderComponent,
+    type.EditableTableRowComponent,
+    type.EditableTableColumnComponent
   ],
   exports: [
     type.SafePipe,
@@ -183,7 +189,12 @@ import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
     type.TabButtonGroupComponent,
     type.ComboboxComponent,
     type.ComboboxItemComponent,
-    type.ScrollbarComponent
+    type.ScrollbarComponent,
+    type.EditableTableComponent,
+    type.EditableTableHeaderColumnComponent,
+    type.EditableTableHeaderComponent,
+    type.EditableTableRowComponent,
+    type.EditableTableColumnComponent
   ],
   providers: [
     type.ModalService,

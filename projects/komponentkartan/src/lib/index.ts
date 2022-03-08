@@ -91,6 +91,10 @@ export { GridSortDirection } from './controls/sort-arrow/sort-arrow.component';
 export { SortArrowComponent } from './controls/sort-arrow/sort-arrow.component';
 
 export { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
-
+export { EditableTableComponent } from './controls/editable-table/editable-table.component';
+export { EditableTableHeaderComponent } from './controls/editable-table/editable-table-header.component';
+export { EditableTableHeaderColumnComponent } from './controls/editable-table/editable-table-header-column.component';
+export { EditableTableColumnComponent } from './controls/editable-table/editable-table-column.component';
+export { EditableTableRowComponent } from './controls/editable-table/editable-table-row.component';
 
 export { Guid } from './utils/guid';

@@ -67,6 +67,7 @@ import { NotificationDocumentationComponent} from './notification-documentation/
 import { TabButtonModule } from './tab-button/tab-button.module';
 import { ComboboxDocumentationComponent } from './combobox-documentation/combobox-documentation.component';
 import { HighlightCodeDirective } from './directives/highlight-code.directive';
+import { EditableTableDocumentationComponent } from './editable-table-documentation/editable-table-documentation.component';
 
 @NgModule({
     declarations: [
@@ -111,7 +112,8 @@ import { HighlightCodeDirective } from './directives/highlight-code.directive';
         GridDocumentationComponent,
         NotificationDocumentationComponent,
         ComboboxDocumentationComponent,
-        HighlightCodeDirective
+        HighlightCodeDirective,
+        EditableTableDocumentationComponent
     ],
     imports: [
         KomponentkartanModule,

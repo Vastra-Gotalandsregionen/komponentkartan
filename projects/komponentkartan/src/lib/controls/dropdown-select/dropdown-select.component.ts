@@ -259,6 +259,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       return;
     } else if (event.relatedTarget !== null && (event.relatedTarget as HTMLElement).id === 'page-content-focus') { // otherwise the pagefocus will steal event and collapse
       return;
+    } else if (event.relatedTarget !== null  && (event.relatedTarget as HTMLElement).tagName === 'VGR-EDITABLE-TABLE-COLUMN') { // otherwise the the combobox in an editable-table will alway collapse on click
+      return;
     }
 
     this.hasFocus = false;

@@ -252,6 +252,7 @@
 
       &.combobox--readonly {
         cursor: default;
+        outline: none !important; // readonly items should not show error-border
 
         .combobox__header {
           height: auto;

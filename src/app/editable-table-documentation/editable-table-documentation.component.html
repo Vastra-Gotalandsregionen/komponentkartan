@@ -1,0 +1,231 @@
+<app-component-docs [componentName]="'editable-table'">
+  <div class=" docs__overview ">
+    <p>
+      <code>&lt;vgr-editable-table&gt;</code> är en tabell som kan redigeras.
+      För mer information, se dokumentation för <a routerLink="/pagestructure">sidhantering</a>.
+      Exempel på redigerbar tabell med scroll och utan scroll nedan:
+    </p>
+    <vgr-button  buttonStyle="discreet" (click)="addData()">
+      <vgr-icon icon="pen" [solid]="true"></vgr-icon>
+      Lägg till
+    </vgr-button>
+    <vgr-button  buttonStyle="discreet" (click)="removeData()">
+      <vgr-icon icon="pen" [solid]="true"></vgr-icon>
+      Ta bort
+    </vgr-button>
+
+    <div style="padding-left: 20px; margin-top: 20px;">
+      <h2>Dynamisk editerbar tabell</h2>
+    </div>
+      <vgr-editable-table [editMode]="true" >
+        <vgr-editable-table-header>
+          <vgr-editable-table-header-column [width]="'100px'">Produktkod</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'350px'">Rubrik</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'70px'" [align]="'center'">Konto</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar offentlig</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar privat</vgr-editable-table-header-column>
+          
+        </vgr-editable-table-header>
+        <vgr-editable-table-row *ngFor="let d of data3">
+            <vgr-editable-table-column [width]="'100px'"><div><span>61 </span><span style="font-weight: bold;">{{d.produktkod}}</span></div></vgr-editable-table-column>
+            <vgr-editable-table-column [width]="'350px'">
+              {{ d.rubrik || '' }}
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input  [value]="d.konto || ''" textAlign="right" [width]="'70px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input  [value]="d.ansvarOffentlig || ''" textAlign="right" [width]="'100px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <!-- <vgr-combobox [width]="'150px'"  [errorMessage]="'valideringsfel'" textAlign="right"  >
+                <vgr-combobox-item>01</vgr-combobox-item>
+                <vgr-combobox-item>02</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>26</vgr-combobox-item>
+                <vgr-combobox-item>23</vgr-combobox-item>
+                <vgr-combobox-item>22</vgr-combobox-item>
+                <vgr-combobox-item>21</vgr-combobox-item>
+                <vgr-combobox-item>20</vgr-combobox-item>
+              </vgr-combobox>             -->
+            </vgr-editable-table-column>
+            
+          </vgr-editable-table-row>
+      </vgr-editable-table>
+
+<hr>
+
+    <vgr-button  buttonStyle="discreet" (click)="redigera = !redigera">
+      <vgr-icon icon="pen" [solid]="true"></vgr-icon>
+      {{redigera ? 'Redigera' : 'Avbryt'}}
+    </vgr-button>
+
+    <div style="padding-left: 20px; margin-top: 20px;">
+      <h2>Editerbar tabell med satt höjd</h2>
+    </div>
+      <vgr-editable-table [editMode]="!redigera" [height]="'500px'">
+        <vgr-editable-table-header>
+          <vgr-editable-table-header-column [width]="'100px'">Produktkod</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'350px'">Rubrik</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'70px'" [align]="'center'">Konto</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar offentlig</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar privat</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Momskomp.</vgr-editable-table-header-column>
+        </vgr-editable-table-header>
+        <vgr-editable-table-row *ngFor="let d of data">
+            <vgr-editable-table-column><div><span>61 </span><span style="font-weight: bold;">{{d.produktkod}}</span></div></vgr-editable-table-column>
+            <vgr-editable-table-column>
+              {{ d.rubrik }}
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input [readonly]="redigera" [value]="d.konto" textAlign="right" [width]="'70px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input [readonly]="redigera" [value]="d.ansvarOffentlig" textAlign="right" [width]="'100px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input [readonly]="redigera" [value]="d.ansvarPrivat" textAlign="right" [width]="'100px'"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-checkbox [checked]="d.momsKompensation" [disabled]="redigera" style="display: inline-block;"></vgr-checkbox>
+            </vgr-editable-table-column>
+          </vgr-editable-table-row>
+      </vgr-editable-table>
+
+<hr>
+
+    <vgr-button  buttonStyle="discreet" (click)="redigera2 = !redigera2">
+      <vgr-icon icon="pen" [solid]="true"></vgr-icon>
+      {{redigera2 ? 'Redigera2' : 'Avbryt2'}}
+    </vgr-button>
+
+    <div style="padding-left: 20px; margin-top: 20px;">
+      <h2>Editerbar tabell utan höjd satt och i ett formulär</h2>
+    </div>
+    <div style="width:1000px">
+      <form [formGroup]="myForm">
+      <vgr-editable-table [editMode]="!redigera2">
+        <vgr-editable-table-header>
+          <vgr-editable-table-header-column [align]="'left'" [width]="'150px'">AlignLeft</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [align]="'center'" [width]="'250px'" >AlignCenter</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [align]="'right'" [width]="'200px'">AlignRight</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [align]="'right'" [width]="'150px'">AlignRight</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [align]="'right'" [width]="'150px'">AlignRight</vgr-editable-table-header-column>
+        </vgr-editable-table-header>
+
+        <vgr-editable-table-row *ngFor="let d of myData.controls; let i = index" formArrayName="myFormArray">
+          <ng-container [formGroupName]="i">
+            <vgr-editable-table-column >{{ data2[i].nummer }} </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-datepicker [readonly]="redigera2" formControlName="datum" ></vgr-datepicker>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-input [width]="'150px'" [errorMessage]="'valideringsfel'" textAlign="right" [readonly]="redigera2"  formControlName="text" [value]="d.text"></vgr-input>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-combobox [width]="'150px'" [showValidation]="d.controls.combobox.touched" [errorMessage]="'valideringsfel'" textAlign="right" [readonly]="redigera2"  formControlName="combobox" [value]="d.text">
+                <vgr-combobox-item>01</vgr-combobox-item>
+                <vgr-combobox-item>02</vgr-combobox-item>
+                <vgr-combobox-item>03</vgr-combobox-item>
+                <vgr-combobox-item>04</vgr-combobox-item>
+                <vgr-combobox-item>05</vgr-combobox-item>
+                <vgr-combobox-item>06</vgr-combobox-item>
+                <vgr-combobox-item>07</vgr-combobox-item>
+                <vgr-combobox-item>08</vgr-combobox-item>
+                <vgr-combobox-item>09</vgr-combobox-item>
+                <vgr-combobox-item>10</vgr-combobox-item>
+                <vgr-combobox-item>11</vgr-combobox-item>
+                <vgr-combobox-item>26</vgr-combobox-item>
+                <vgr-combobox-item>23</vgr-combobox-item>
+                <vgr-combobox-item>22</vgr-combobox-item>
+                <vgr-combobox-item>21</vgr-combobox-item>
+                <vgr-combobox-item>20</vgr-combobox-item>
+              </vgr-combobox>
+            </vgr-editable-table-column>
+            <vgr-editable-table-column>
+              <vgr-dropdown-select [width]="'150px'"  [showValidation]="d.controls.dropdown.touched"  [readonly]="redigera2" formControlName="dropdown" [value]="d.dropdownValue">
+                <vgr-dropdown-item *ngFor="let item of items" [selectedLabel]="item">
+                  <div>{{item}}</div>
+                </vgr-dropdown-item>
+              </vgr-dropdown-select>
+            </vgr-editable-table-column>
+            </ng-container>
+          </vgr-editable-table-row>
+      </vgr-editable-table>
+    </form>
+    </div>
+    <br>
+    <p>Förändras med tema:
+      <strong>ja</strong>
+    </p>
+  </div>
+  <div class="docs__examples ">
+    <h2>HTML</h2>
+    <section vgrHighlightCode [innerHTML]="exampleCodeMarkup"></section>
+  </div>
+  <div class="docs__api">
+    <h3>Templatestruktur</h3>
+    <ul>
+      <li>
+        <code>&lt;vgr-editable-table&gt;</code>, första elementet som representerar hela tabellen</li>
+      <li>
+        <code>&lt;vgr-editable-table-header&gt;</code>, ger titelyta på en vgr-editable-table.</li>
+      <li>
+        <code>&lt;vgr-editable-table-header-column&gt;</code>, här sätts namn för tabellens rubriker</li>
+      <li>
+        <code>&lt;vgr-editable-table-row&gt;</code>, behållare för tabellens rader som innehåller kolumner</li>
+      <li>
+        <code>&lt;vgr-editable-table-column&gt;</code>, kolumner i tabellen.</li>
+    </ul>
+    <br><br>
+    <strong><code>&lt;vgr-editable-table&gt;</code></strong><br><br>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>editMode: boolean</td>
+        <td>Anger om tabellen ska vara i redigerbart läge eller inte</td>
+        <td>[editMode]="true"</td>
+      </tr>
+      <tr>
+        <td>height: string</td>
+        <td>Anger höjden på tabellen (om innehållet i tabellen överskrider den angivna höjden så visas en scroll). Höjden MÅSTE anges i px.</td>
+        <td>[height]="'500px'"</td>
+      </tr>
+
+      <br>
+      <strong><code>&lt;vgr-editable-table-header-column&gt;</code></strong><br><br>
+      <tr>
+        <td>width: string</td>
+        <td>Anger bredden på tabellens rubriker (tabellens rad-kolumner sätts per automatik till samma bredd som rubriken). Bredden MÅSTE anges i px.</td>
+        <td>[width]="'100px'"</td>
+      </tr>
+      <tr>
+        <td>align: string</td>
+        <td>Anger om tabellen ska vara vänsterjusterad, högerjusterad eller centrerad. Default är left. Accepterade värden är left, right och center.</td>
+        <td>[align]="'center'"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag ">
+    <p>Navigering i tabell:</p>
+    <ul>
+      <li>- Tab/Shift+Tab - För att komma till tabellen</li>
+      <li>- Tab i tabellen går endast till, av användaren satta, fokuserbara element</li>
+      <li>- Höger-, vänster-, upp- och nerpil för att förflytta mellan tabell cellerna.</li>
+      <li>- Ctrl+End för att komma till sista cellen i tabellen</li>
+      <li>- Ctrl+Home för att komma till första cellen i tabellen</li>
+    </ul>
+  </div>
+</app-component-docs>
