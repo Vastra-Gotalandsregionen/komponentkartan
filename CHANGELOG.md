@@ -5,6 +5,8 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+# 9.1.0-beta11 (2022-03-08)
+- Added `vgr-radiobutton-group` (new component) which will replace `vgr-radio-group` who is deprecated as of this version.
 # 9.0.7 (2022-03-08) Stable
 - Added new editable-table component
 - Returned collapse to compbobox and added new terms for blurevent
