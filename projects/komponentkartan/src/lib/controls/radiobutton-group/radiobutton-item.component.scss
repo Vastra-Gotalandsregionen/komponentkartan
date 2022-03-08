@@ -1,0 +1,116 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+
+:host {
+
+  input[type="radio"] {
+    display:none;
+  }
+  .radio-button-container {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+
+  .radio-button__icon {
+    min-width: 18px;
+    width: 18px;
+    height: 18px;
+    border: solid 2px #151515;
+    background-color: $background-color--content;
+    transition: background-color 0.6s linear, border-color 0.6s linear;
+    border-radius: 50%;
+    margin-right: $margin--slim;
+    margin-left: 0;
+    display: grid;
+    place-content: center;
+    &:after {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: #151515;
+      transition: background-color 0.6s linear;
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    &:focus-visible {
+      &:before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        box-shadow: 0 0 4px 0 $focus-color;
+        border: solid 1px $focus-color;
+        border-radius: 100px;
+        margin-left: -3px;
+        margin-top: -3px;
+        position: absolute;
+        z-index: $layer-two;
+      }
+    }
+    .radio-button--disabled & {
+      border-color: $control-color--disabled;
+      &:after {
+        background-color: $control-color--disabled;
+        transition: background-color 0.6s linear;
+      }
+      // &:before {
+      //   // display: none;
+      // }
+    }
+    .disabled & {
+      border-color: $control-color--disabled;
+      &:after {
+        background-color: $control-color--disabled;
+        transition: background-color 0.6s linear;
+      }
+      // &:before {
+      //   // display: none;
+      // }
+      transition: border-color 0.6s linear;
+    }
+  }
+
+  .radio-button--checked.radio-button--disabled .radio-button__icon {
+    &:after {
+      transition: opacity 0.5s ease;
+      opacity: 1;
+      background-color: $control-color--disabled;
+    }
+  }
+
+  .radio-button--checked  .radio-button__icon {
+    &:after {
+      transition: opacity 0.5s ease;
+      opacity: 1;
+    }
+  }
+
+  .radio-button__icon {
+    &:focus-visible {
+      outline: 0;
+      box-shadow: 0 0 0 2px $focus-color;
+    }
+  }
+
+  .radio-button--disabled {
+    cursor: default;
+
+    .radio-button__icon {
+      border: 2px solid $gray-primary;
+      &:focus-visible {
+        // outline: none;
+        // box-shadow: none;
+        &:before {
+          box-shadow: 0 0 4px 0 $focus-color;
+          border: solid 1px $focus-color;
+        }
+      }
+    }
+    .radio-button__content {
+      color: $gray-primary;
+      transition: color 0.6s linear;
+    }
+  }
+}

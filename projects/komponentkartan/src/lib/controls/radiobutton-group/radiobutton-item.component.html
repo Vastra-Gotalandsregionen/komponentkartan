@@ -1,0 +1,20 @@
+<div #item
+  class="radio-button-container"
+  [ngClass]="{'radio-button--checked' : selected, 'radio-button--disabled' : disabled}"
+  (click)="itemClicked()"
+  >
+  <input type="radio" >
+  <!-- role="radio"-->
+  <div
+    #radioButton
+    role="radio"
+    [attr.aria-labelledby]="elementId"
+    [attr.aria-checked]="selected"
+    [attr.aria-disabled]="disabled"
+    class="radio-button__icon"
+    tabindex="{{checkTabFocus() || isTabEnabled ? 0 : -1}}"
+    (focusin)="firstfocusIn()"></div>
+  <span [attr.id]="elementId" style="position: relative; top: 2px;" class="radio-button__content" >
+    <ng-content #radioButtonContent></ng-content>
+  </span>
+</div>

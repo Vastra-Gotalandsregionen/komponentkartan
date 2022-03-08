@@ -1,0 +1,54 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+
+.radiobutton-group {
+  &-validation {
+    max-height: none;
+    padding: $margin--slim;
+    padding-bottom: 0px;
+    margin-left: -$margin--slim;
+    margin-right: -$margin--slim;
+    &_status {
+      margin-top: 8px;
+      &__message {
+        max-width: calc(100% - 30px);
+        display: none;
+        vertical-align: middle;
+        margin-left: 4px;
+      }
+      &__icon {
+        display: none;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.vertical {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+:host {
+  .radiobutton-group-validation-error--active .radiobutton-group-validation {
+      padding-bottom: 8px;
+  }
+  .radiobutton-group-validation-error--active .radiobutton-group-validation {
+    outline: 3px solid #FF0000;
+    border-radius: 2px;
+  }
+
+  .radiobutton-group-validation-error--active .radiobutton-group-validation_status__message {
+    display: inline-block;
+    color: $text-color--default;
+  }
+
+  .radiobutton-group-validation-error--active .radiobutton-group-validation_status__icon ::ng-deep .icon {
+    color: $primary-color--error;
+  }
+
+  .radiobutton-group-validation-error--active .radiobutton-group-validation_status__icon {
+    display: inline-block;
+  }
+}

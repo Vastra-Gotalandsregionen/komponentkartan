@@ -112,7 +112,9 @@ import { EditableTableComponent } from './controls/editable-table/editable-table
     type.EditableTableHeaderColumnComponent,
     type.EditableTableHeaderComponent,
     type.EditableTableRowComponent,
-    type.EditableTableColumnComponent
+    type.EditableTableColumnComponent,
+    type.RadiobuttonGroupComponent,
+    type.RadiobuttonItemComponent
   ],
   exports: [
     type.SafePipe,
@@ -194,7 +196,9 @@ import { EditableTableComponent } from './controls/editable-table/editable-table
     type.EditableTableHeaderColumnComponent,
     type.EditableTableHeaderComponent,
     type.EditableTableRowComponent,
-    type.EditableTableColumnComponent
+    type.EditableTableColumnComponent,
+    type.RadiobuttonGroupComponent,
+    type.RadiobuttonItemComponent
   ],
   providers: [
     type.ModalService,
