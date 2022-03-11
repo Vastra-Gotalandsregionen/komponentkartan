@@ -17,7 +17,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
     this.inEditmode = value;
     this.editableTableService.changeEditmode(value, this.id);
   }
-  @Input() readOnlyMode = true;
+  
   @Input() height = '';
 
 
