@@ -5,7 +5,7 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-# 9.0.7 (2022-03-08) Stable
+# 9.0.7 (2022-03-11) Stable
 - Added new editable-table component
 - Returned collapse to compbobox and added new terms for blurevent
 - Fixed bug regarding shift+tab move in a grid
