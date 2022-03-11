@@ -97,5 +97,6 @@ export const appRoutes: Routes = [
     { path: 'combobox', component: ComboboxDocumentationComponent },
     { path: 'editable-table', component: EditableTableDocumentationComponent },
 
-    { path: '**', redirectTo: '/' }
+    { path: '**', redirectTo: '/start' },
+    
 ];
