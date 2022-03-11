@@ -235,7 +235,8 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
 
   ngAfterContentInit() {
     this.tableRows.forEach(row => row.parentId = this.id);
-    this.tableHeader.headerColumns.forEach(column => column.parentId = this.id)
+    console.log(this.tableHeader)
+    this.tableHeader?.headerColumns?.forEach(column => column.parentId = this.id)
 
     this.tableRows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((rows) => {
       setTimeout(() => {
