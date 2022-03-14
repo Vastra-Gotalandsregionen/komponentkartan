@@ -98,5 +98,6 @@ export { EditableTableHeaderComponent } from './controls/editable-table/editable
 export { EditableTableHeaderColumnComponent } from './controls/editable-table/editable-table-header-column.component';
 export { EditableTableColumnComponent } from './controls/editable-table/editable-table-column.component';
 export { EditableTableRowComponent } from './controls/editable-table/editable-table-row.component';
+export { CheckboxGroupComponent } from './controls/checkbox/checkbox-group.component';
 
 export { Guid } from './utils/guid';

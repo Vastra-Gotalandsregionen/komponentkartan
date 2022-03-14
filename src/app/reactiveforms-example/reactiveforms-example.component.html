@@ -119,6 +119,17 @@
                   </vgr-textarea>
                 </vgr-title-value-container>
               </vgr-title-value>
+              <vgr-title-value>
+                <vgr-title-value-heading for="checkboxGroup">checkboxGroup</vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-checkbox-group formControlName="checkboxGroup" [showValidation]="updateOnBlurForm.controls.checkboxGroup.touched" labelId="checkboxGroup">
+                    <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                    <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Vald' "></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                </vgr-checkbox-group>
+                </vgr-title-value-container>
+              </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnBlurForm()">Reset form</vgr-button>
             <vgr-button (click)="onSubmitUpdateOnBlurForm()" [disabled]="false">Skapa användare</vgr-button>
@@ -240,6 +251,17 @@
                   <vgr-textarea formControlName="textarea" [showValidation]="formSubmitted"></vgr-textarea>
                 </vgr-title-value-container>
               </vgr-title-value>
+              <vgr-title-value>
+                <vgr-title-value-heading for="checkboxGroup">checkboxGroup</vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-checkbox-group formControlName="checkboxGroup"  [showValidation]="formSubmitted" labelId="checkboxGroup">
+                    <vgr-checkbox [label]="'Med ledtext'"></vgr-checkbox>
+                    <vgr-checkbox [label]="'Inaktiverad'" [disabled]="true"></vgr-checkbox>
+                    <vgr-checkbox [label]="'Vald'"></vgr-checkbox>
+                    <vgr-checkbox [label]="'Vald2'"></vgr-checkbox>
+                </vgr-checkbox-group>
+                </vgr-title-value-container>
+              </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnSubmitForm()">Reset form</vgr-button>
             <vgr-button type="submit" (click)="onSubmit()">Submit</vgr-button>
@@ -250,7 +272,7 @@
       <vgr-card>
         <vgr-card-column>
           <h1>On Change</h1>
-          <form [formGroup]="updateOnChangeForm">
+         <form [formGroup]="updateOnChangeForm">
             <vgr-title-value-layout>
               <vgr-title-value>
                 <vgr-title-value-heading>Förnamn</vgr-title-value-heading>
@@ -363,13 +385,24 @@
                   </vgr-textarea>
                 </vgr-title-value-container>
               </vgr-title-value>
+              <vgr-title-value>
+                <vgr-title-value-heading for="checkboxGroup">checkboxGroup</vgr-title-value-heading>
+                <vgr-title-value-container>
+                  <vgr-checkbox-group formControlName="checkboxGroup" [showValidation]="updateOnChangeForm.controls.checkboxGroup.touched" labelId="checkboxGroup">
+                    <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Inaktiverad' " [disabled]="true"></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Vald' "></vgr-checkbox>
+                    <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                </vgr-checkbox-group>
+                </vgr-title-value-container>
+              </vgr-title-value>
             </vgr-title-value-layout>
             <vgr-button (click)="onResetUpdateOnChangeForm()">Reset form</vgr-button>
             <vgr-button [disabled]="false" (click)="showPerson()">Skapa användare</vgr-button>
           </form>
         </vgr-card-column>
         <vgr-card-column>
-          <vgr-expandable-div>
+          <vgr-expandable-div [expanded]="true">
             <vgr-expandable-div-header>
               <h2>Update on blur values</h2>
             </vgr-expandable-div-header>
@@ -388,6 +421,7 @@
               <p>datepicker_preselected: <strong>{{updateOnBlurForm.controls.datepicker_preselected.value}} </strong>
               </p>
               <p>textarea: <strong>{{updateOnBlurForm.controls.textarea.value}} </strong></p>
+              <p>checkboxgroup: <strong>{{updateOnBlurForm.controls.checkboxGroup.value}} </strong></p>
             </vgr-expandable-div-content>
           </vgr-expandable-div>
           <vgr-expandable-div>
@@ -410,6 +444,7 @@
               <p>datepicker_preselected: <strong>{{updateOnSubmitForm.controls.datepicker_preselected.value}} </strong>
               </p>
               <p>textarea: <strong>{{updateOnSubmitForm.controls.textarea.value}} </strong></p>
+              <p>checkboxgroup: <strong>{{updateOnSubmitForm.controls.checkboxGroup.value}} </strong></p>
             </vgr-expandable-div-content>
           </vgr-expandable-div>
           <vgr-expandable-div>
@@ -432,11 +467,11 @@
               <p>datepicker_preselected: <strong>{{updateOnChangeForm.controls.datepicker_preselected.value}} </strong>
               </p>
               <p>textarea: <strong>{{updateOnChangeForm.controls.textarea.value}} </strong></p>
+              <p>checkboxgroup: <strong>{{updateOnChangeForm.controls.checkboxGroup.value}} </strong></p>
             </vgr-expandable-div-content>
           </vgr-expandable-div>
-
-
         </vgr-card-column>
+
       </vgr-card>
     </vgr-page-block>
     <vgr-page-block>

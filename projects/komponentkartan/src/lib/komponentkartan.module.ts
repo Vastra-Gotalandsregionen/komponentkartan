@@ -18,6 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
 import { EditableTableComponent } from './controls/editable-table/editable-table.component';
 
+
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true
 // };
@@ -114,7 +115,8 @@ import { EditableTableComponent } from './controls/editable-table/editable-table
     type.EditableTableRowComponent,
     type.EditableTableColumnComponent,
     type.RadiobuttonGroupComponent,
-    type.RadiobuttonItemComponent
+    type.RadiobuttonItemComponent,
+    type.CheckboxGroupComponent
   ],
   exports: [
     type.SafePipe,
@@ -198,7 +200,8 @@ import { EditableTableComponent } from './controls/editable-table/editable-table
     type.EditableTableRowComponent,
     type.EditableTableColumnComponent,
     type.RadiobuttonGroupComponent,
-    type.RadiobuttonItemComponent
+    type.RadiobuttonItemComponent,
+    type.CheckboxGroupComponent
   ],
   providers: [
     type.ModalService,

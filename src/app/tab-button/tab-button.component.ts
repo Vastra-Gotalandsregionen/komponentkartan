@@ -41,7 +41,7 @@ export class TabButtonComponent implements OnInit {
           this.router.navigate( ['tab-button/tab-start'],  { skipLocationChange: true });
           break;
       default:
-        this.router.navigate(['tab-button/tab-button']);
+        this.router.navigate(['tab-button']);
         break;
     }
   }
