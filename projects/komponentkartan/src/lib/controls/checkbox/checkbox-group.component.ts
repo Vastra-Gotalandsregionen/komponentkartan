@@ -47,7 +47,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   ngAfterContentInit(): void {
     this.setGroupDisabledOverride(this._disabled);
 
-   
+
 
     // Subscribe on changes
     this.items.forEach(item => {
@@ -61,7 +61,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     setTimeout(() => {
       const values = this.items.filter(item => item.checked === true).map(i => i.label);
       this.onChange( values);
-    });
+    }, 20);
   };
 
 
@@ -74,9 +74,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
 
   ngOnChanges(changes): void {
     if (this.formControlName && this.controlContainer) {
-      
       this.control = this.controlContainer.control.get(this.formControlName)
-      console.log('got changes in OnChanges: ', changes,'-', this.control, ' slut')
     }
   }
 
