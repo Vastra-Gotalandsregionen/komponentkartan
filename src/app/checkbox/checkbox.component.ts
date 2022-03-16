@@ -27,7 +27,7 @@ export class CheckboxComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      checkbox: ['', [Validators.required]]
+      checkbox: [false, { validators: [Validators.pattern('true')] }]
     }, { updateOn: 'submit' });
 
     this.checkboxForm = this.fb.group({
@@ -36,16 +36,7 @@ export class CheckboxComponent implements OnInit {
   }
 
   submitForm() {
-    this.form.controls.checkbox.markAsTouched();
-
     this.formSubmittedCheckbox = true;
-    if (this.form.valid) {
-      this.showValidFormText = true;
-
-    } else {
-      this.showValidFormText = false;
-    }
-
   }
 
   submitCheckboxForm() {
@@ -61,5 +52,9 @@ export class CheckboxComponent implements OnInit {
 
   setFocus() {
     this.myCheckbox.focus();
+  }
+
+  changed(event: any) {
+    console.log(event)
   }
 }

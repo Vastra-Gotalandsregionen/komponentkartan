@@ -61,16 +61,17 @@
                     <p>
                         Jag skall inte checka in dålig kod....
                     </p>
+
                     <form [formGroup]="form">
-                        <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [required]="true"
+                        <vgr-checkbox [label]=" 'Jag har läst och förstått texten' "
                             formControlName="checkbox" [showValidation]="formSubmittedCheckbox"></vgr-checkbox>
-                        <vgr-button  type="submit" (click)="submitForm()" style="margin-top: 10px; display: block;">Submit</vgr-button><br>
-<vgr-notification *ngIf="form.valid" type="success" width="200px" [standalone]="true" style="margin-top: 10px;">Formuläret postat!</vgr-notification>
-                    </form>
+                            <vgr-button   type="submit" (click)="submitForm()" style="margin-top: 10px; display: block; width: 8%;">Submit</vgr-button><br>
+                            <vgr-notification *ngIf="form.valid" type="success" width="200px" [standalone]="true" style="margin-top: 10px;">Formuläret postat!</vgr-notification>
+                          </form>
                     <hr class="hr_line" />
                     <h3><strong>Checkbox group in formcontrol</strong></h3>
                     <form [formGroup]="checkboxForm">
-                        <vgr-checkbox-group formControlName="checkboxValues" [showValidation]="formSubmittedCheckboxGroup">
+                        <vgr-checkbox-group (selectedChanged)="changed($event)" formControlName="checkboxValues" [showValidation]="formSubmittedCheckboxGroup">
                             <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
                             <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
                             <vgr-checkbox [label]=" 'Vald' "></vgr-checkbox>

@@ -53,6 +53,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
     this.items.forEach(item => {
       item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event) => {
         const values = this.items.filter(item => item.checked).map(i => i.label);
+        this.selectedChanged.emit(item);
         this.onChange( values);
 
       });
@@ -127,6 +128,8 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
 
   onChange(value: any) {
     this._value = value;
+
+
   }
   onTouch:  (value) => void;
 
