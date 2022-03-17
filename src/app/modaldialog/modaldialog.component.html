@@ -319,7 +319,7 @@
 <vgr-modal id="modalDisabledButton">
   <vgr-modal-header tabindex="0">En header från app</vgr-modal-header>
   <vgr-modal-content>
-    <vgr-checkbox [label]="'Aktivera/Inaktivera knapp'" (checkedChanged)="enableDisabledButton($event)"></vgr-checkbox>
+    <vgr-checkbox [label]="'Aktivera/Inaktivera knapp'" (checkedChanged)="enableDisabledButton()"></vgr-checkbox>
   </vgr-modal-content>
   <vgr-modal-footer>
     <vgr-button [buttonStyle]="'secondary'" [disabled]="enable_disable_button">Spara</vgr-button>

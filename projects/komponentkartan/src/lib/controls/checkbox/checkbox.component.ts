@@ -100,18 +100,15 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
 
     onClick(event: Event): void {
       if (!this.disabled) {
-          this.checked = !this.checked;
+        this.checked = !this.checked;
 
-          if (this.element) {
-              this.element.focus();
-          }
+        if (this.element) {
+          this.element.focus();
+        }
 
-          if (this.control) {
-            this.onChange(this.checked);
-          }
-
-          this.checkedChanged.emit( {id: this.elementId, checked: this.checked, label: this.label});
-          event.stopPropagation();
+        this.onChange(this.checked);
+        this.checkedChanged.emit( {id: this.elementId, checked: this.checked, label: this.label});
+        event.stopPropagation();
       }
     }
 

@@ -57,6 +57,11 @@
                     <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [required]="true"></vgr-checkbox>
                     <hr class="hr_line" />
 
+                    <h3><strong>Checkbox ngModel example</strong></h3>
+                    <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [(ngModel)]="klarmarkerad"></vgr-checkbox>
+                    <label>{{klarmarkerad}}</label>
+                    <hr class="hr_line" />
+
                     <h3><strong>Checkbox single required in formcontrol</strong></h3>
                     <p>
                         Jag skall inte checka in dålig kod....

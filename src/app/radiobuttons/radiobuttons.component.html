@@ -27,7 +27,7 @@
       <!--Disabled på group, overrides disabled på item vid true -->
     <h2>Horisontell radiogrupp med möjlighet att disabla gruppen</h2>
     Välj föredragen bil
-    <vgr-checkbox (checkedChanged)="groupDisabled = $event" label="Jag cyklar" [checked]="groupDisabled"></vgr-checkbox>
+    <vgr-checkbox (checkedChanged)="groupDisabled = $event.checked" label="Jag cyklar" [checked]="groupDisabled"></vgr-checkbox>
     <vgr-radiobutton-group (selectedChanged)="someCode($event)" [disabled]="groupDisabled">
       <vgr-radiobutton-item [selected]="true" [disabled]="false">Subaru</vgr-radiobutton-item>
       <vgr-radiobutton-item [selected]="false" [disabled]="true">Volvo</vgr-radiobutton-item>

@@ -18,6 +18,7 @@ export class CheckboxComponent implements OnInit {
   formSubmittedCheckboxGroup: boolean;
   formSubmittedCheckbox: boolean;
   // checkbox = new FormControl('', Validators.required);
+  klarmarkerad = false;
 
   constructor(private fb: FormBuilder) { }
 

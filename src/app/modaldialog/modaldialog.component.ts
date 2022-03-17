@@ -106,7 +106,7 @@ export class ModaldialogComponent implements OnInit {
     this.modalService.updateDialog('commentModal');
   }
 
-  enableDisabledButton(event) {
+  enableDisabledButton() {
     this.enable_disable_button = !this.enable_disable_button;
     this.modalService.updateDialog('modalDisabledButton');
   }
