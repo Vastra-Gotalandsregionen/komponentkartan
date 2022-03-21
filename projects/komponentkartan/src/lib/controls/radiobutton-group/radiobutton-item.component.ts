@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'vgr-radiobutton-item',
@@ -29,7 +29,7 @@ export class RadiobuttonItemComponent implements AfterViewInit {
 
   @ViewChild('item') item: ElementRef;
   @ViewChild('radioButton') radioButton: ElementRef;
-  @ViewChild('radioButtonContent') radioButtonContent: ElementRef;
+  @ContentChild('radioButtonContent') radioButtonContent: ElementRef;
 
 
   _disabled: boolean;
@@ -37,6 +37,8 @@ export class RadiobuttonItemComponent implements AfterViewInit {
 
   constructor(private elementRef: ElementRef) {
     this.elementId = Math.random().toString();
+
+    
   }
 
   ngAfterViewInit() {
@@ -45,6 +47,7 @@ export class RadiobuttonItemComponent implements AfterViewInit {
       this.value = this.label;
     }
   }
+
   itemClicked() {
     if (this.item && !this.disabled) {
       this.selected = true;

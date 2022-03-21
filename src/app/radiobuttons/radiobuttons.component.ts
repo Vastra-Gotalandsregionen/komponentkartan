@@ -20,6 +20,7 @@ export class RadiobuttonsComponent implements OnInit {
   @ViewChild('myRadioGroup', { read: RadioGroupComponent, static: false }) myRadioGroup: RadioGroupComponent;
   @ViewChild('RadioGroup2') radioGroup2: RadiobuttonGroupComponent;
 
+  valdBil: string;
   constructor() { }
 
   ngOnInit() {
@@ -30,15 +31,24 @@ export class RadiobuttonsComponent implements OnInit {
       val: new FormControl('Det var inte bra')
     }, { updateOn: 'change' });
 
+    this.selectedOption = 'Toyota';
 
   }
 
-  onSelectedRadioOptionChanged(option: string) {
-    this.selectedOption = option;
+
+  valjBil(param) {
+    this.selectedOption = param.value;
+    if (this.groupDisabled) {
+      this.valdBil = 'Du har valt att cykla'
+    } else {
+      this.valdBil = this.selectedOption;
+    }
+
+    console.log( this.selectedOption)
   }
 
   someCode(param) {
-    console.log('someCode: ', param)
+    console.log('Du har valt ', param.value)
   }
 
   rensaVal() {
