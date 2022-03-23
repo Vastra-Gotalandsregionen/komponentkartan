@@ -5,14 +5,16 @@
         &lt;vgr-radiobutton-group&gt;</code>
     </p>
     <br>
-    <p>En radiogroup innehåller flera radioknappar, där bara ett alternativ är valt åt gången, val kan vara förvalda och/eller
+    <p>En radiogroup innehåller flera radioknappar, där bara ett alternativ är valt åt gången, val kan vara förvalda
+      och/eller
       inaktiva. Vid val av alternativ triggas eventet
-      <code>selectedChanged</code>. Man kan placera valfria objekt i sina items, eller bara sätta en text. Om man lägger objekt i sina items så är
+      <code>selectedChanged</code>. Man kan placera valfria objekt i sina items, eller bara sätta en text. Om man lägger
+      objekt i sina items så är
       det bra att även sätta ett värde för sitt item så gruppen vet om detta.
       <br>
       <vgr-radiobutton-group>
-        <vgr-radiobutton-item [selected]="true" [value]="1" >Alternativ 1</vgr-radiobutton-item>
-      <vgr-radiobutton-item [selected]="false" [value]="2">Alternativ 2</vgr-radiobutton-item>
+        <vgr-radiobutton-item [selected]="true" [value]="1">Alternativ 1</vgr-radiobutton-item>
+        <vgr-radiobutton-item [selected]="false" [value]="2">Alternativ 2</vgr-radiobutton-item>
       </vgr-radiobutton-group>
     </p>
 
@@ -25,67 +27,70 @@
   <div class="docs__examples">
     <div>
       <!--Disabled på group, overrides disabled på item vid true -->
-    <h2>Horisontell radiogrupp med möjlighet att disabla gruppen</h2>
-    Välj föredragen bil
-    <vgr-checkbox (checkedChanged)="groupDisabled = $event.checked" label="Jag cyklar" [checked]="groupDisabled"></vgr-checkbox>
-    <vgr-radiobutton-group (selectedChanged)="someCode($event)" [disabled]="groupDisabled">
-      <vgr-radiobutton-item [selected]="true" [disabled]="false">Subaru</vgr-radiobutton-item>
-      <vgr-radiobutton-item [selected]="false" [disabled]="true">Volvo</vgr-radiobutton-item>
-      <vgr-radiobutton-item [selected]="false" [disabled]="false">Toyota</vgr-radiobutton-item>
-    </vgr-radiobutton-group>
+      <h2>Horisontell radiogrupp med möjlighet att disabla gruppen</h2>
+      Välj föredragen bil
+      <vgr-checkbox (checkedChanged)="groupDisabled = $event.checked" label="Jag cyklar" [checked]="groupDisabled">
+      </vgr-checkbox>
 
-
-
-    <hr>
-    <h2>Vertical radiogrupp </h2>
-    <vgr-radiobutton-group #RadioGroup2 (selectedChanged)="someCode($event)" vertical="true" required="true">
-      <vgr-radiobutton-item [selected]="true">Det var bra</vgr-radiobutton-item>
-      <vgr-radiobutton-item [selected]="false">Det var inte bra</vgr-radiobutton-item>
-      <vgr-radiobutton-item [selected]="true">Det var verkligen inte bra</vgr-radiobutton-item>
-    </vgr-radiobutton-group>
-    <br>
-    <vgr-button (click)="rensaVal()">Rensa val</vgr-button>
-
-    <hr>
-    <h2>FormGroup radiogrupp </h2>
-    <form [formGroup]="radioGroupForm">
-    <vgr-radiobutton-group formControlName="val" (selectedChanged)="someCode($event)" required="true">
-      <vgr-radiobutton-item >Det var bra</vgr-radiobutton-item>
-      <vgr-radiobutton-item >Det var inte bra</vgr-radiobutton-item>
-      <vgr-radiobutton-item >Det var verkligen inte bra</vgr-radiobutton-item>
-    </vgr-radiobutton-group>
-    <label>Val: {{this.radioGroupForm.controls.val.value?.value}}</label>
-    </form>
-    <!-- <hr>
-      <vgr-radio-group [options]="[{value:'Förvald', displayName:'Förvald', selected:true},{value:'Ej förvald', displayName:'Ej förvald'}, {value:'3Inaktiv', displayName:'Inaktiv', disabled:true}]"
-        (selectedChanged)="onSelectedRadioOptionChanged($event)">
-      </vgr-radio-group>
-      <br>
-      <br>
-      <br>
-
-
-      <vgr-radio-group [options]="options" (selectedChanged)="onSelectedRadioOptionChanged($event)">
-      </vgr-radio-group>
-
-      <vgr-button (click)="rensaVal()">Rensa alternativ</vgr-button>
-      <br>
-      <br>
-      <h2>Vertikal radiogroup</h2>
-      <vgr-radio-group style="max-width: 200px;" [options]="options2" [vertical]="true" (selectedChanged)="onSelectedRadioOptionChanged($event)">
-      </vgr-radio-group>
+      <vgr-radiobutton-group (selectedChanged)="valjBil($event)" [disabled]="groupDisabled" [value]="selectedOption">
+        <vgr-radiobutton-item [disabled]="false">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> Subaru
+        </vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="true">Volvo</vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false">Toyota</vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> Honda
+        </vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> Seat
+        </vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> Skoda
+        </vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> VW
+        </vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> Porsche
+        </vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false" [selected]="true">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> Ferrari
+        </vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> Tesla
+        </vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> Kia
+        </vgr-radiobutton-item>
+        <vgr-radiobutton-item [disabled]="false">
+          <vgr-icon icon="pen" [disabled]="groupDisabled" color="text" size="sm"></vgr-icon> Nissan
+        </vgr-radiobutton-item>
+      </vgr-radiobutton-group>
 
       <br>
-      <h2>Horisontell radiogroup</h2>
-      <vgr-radio-group #myRadioGroup  [options]="options" (selectedChanged)="onSelectedRadioOptionChanged($event)">
-      </vgr-radio-group>
-      <vgr-button (click)="setFocus()">Fokusera</vgr-button>
-      <br>
-      <br>
-      <br>
-      <div>Du har valt alternativ: {{selectedOption}}</div> -->
+      <label>Vald bil: {{valdBil}}</label>
 
 
+      <hr>
+      <h2>Vertical radiogrupp </h2>
+      <vgr-radiobutton-group #RadioGroup2 (selectedChanged)="someCode($event)" vertical="true" required="true">
+        <vgr-radiobutton-item [selected]="true">Det var bra</vgr-radiobutton-item>
+        <vgr-radiobutton-item [selected]="false">Det var inte bra</vgr-radiobutton-item>
+        <vgr-radiobutton-item [selected]="true">Det var verkligen inte bra</vgr-radiobutton-item>
+      </vgr-radiobutton-group>
+      <br>
+      <vgr-button (click)="rensaVal()">Rensa val</vgr-button>
+
+      <hr>
+      <h2>FormGroup radiogrupp </h2>
+      <form [formGroup]="radioGroupForm">
+        <vgr-radiobutton-group formControlName="val" (selectedChanged)="someCode($event)" required="true">
+          <vgr-radiobutton-item>Det var bra</vgr-radiobutton-item>
+          <vgr-radiobutton-item>Det var inte bra</vgr-radiobutton-item>
+          <vgr-radiobutton-item>Det var verkligen inte bra</vgr-radiobutton-item>
+        </vgr-radiobutton-group>
+        <label>Val: {{this.radioGroupForm.controls.val.value?.value}}</label>
+      </form>
     </div>
     <br> Under "kodexempel" finns exempel på hur radiogroup-komponenten kan användas i Angular Reactive Forms:
     <br>
@@ -104,7 +109,8 @@
           options : SelectableItem[]
         </td>
         <td>Samling av
-          <code>SelectableItem</code> som utgör valbara alternativ</td>
+          <code>SelectableItem</code> som utgör valbara alternativ
+        </td>
         <td>[options]="[item1, item2, ...]"</td>
       </tr>
       <tr>
@@ -130,8 +136,10 @@
   </div>
   <div class="docs__wcag">
     <p>
-      <code>&lt;vgr-radiogroup&gt;</code> har en intern div vars roll är satt till radiogroup respektive radio för radioknapparna.
-      Förutom rollen så används attributen: attr.aria-checked (kryssad/ej ikryssad) och attr.aria-labelledby (pekning till
+      <code>&lt;vgr-radiogroup&gt;</code> har en intern div vars roll är satt till radiogroup respektive radio för
+      radioknapparna.
+      Förutom rollen så används attributen: attr.aria-checked (kryssad/ej ikryssad) och attr.aria-labelledby (pekning
+      till
       interna label i
       <code>&lt;vgr-radiogroup&gt;</code>)
 

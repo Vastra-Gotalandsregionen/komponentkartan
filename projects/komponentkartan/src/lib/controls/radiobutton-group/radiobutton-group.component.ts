@@ -2,6 +2,7 @@ import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter,
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { __values } from 'tslib';
 import { RadiobuttonItemComponent } from './radiobutton-item.component';
 
 @Component({
@@ -16,8 +17,21 @@ import { RadiobuttonItemComponent } from './radiobutton-item.component';
 })
 export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges, OnDestroy {
   _disabled: boolean;
+  _value: string | number;
+
   @Input() showValidation = true;
-  value: string | number;
+
+  @Input() set value(val: string | number) {
+    this._value = val;
+  };
+  get value() {
+    return this._value;
+  }
+
+
+
+
+
   @Input() @HostBinding('class.disabled') set disabled(val) {
     this._disabled = val;
     if (val !== undefined) {
@@ -36,6 +50,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
   internalDisabled: boolean;
   validationErrorMessage = 'Obligatoriskt';
   elementId: string;
+  
   public control: AbstractControl;
   constructor(@Host() @SkipSelf() @Optional() private controlContainer: ControlContainer, private elementRef: ElementRef) {
     this.elementId = Math.random().toString();
@@ -54,23 +69,16 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       });
     });
 
-    if (!this.items.some(x => x.selected)) {
+    if (!this.items.some(x => x.selected) && this._value === undefined) {
       this.unSelectItems();
     }
-    // this.setSelectedValue(this.value);
     this.setGroupDisabledOverride(this._disabled);
+    setTimeout(() => {
+      this.setPreselectedValue();
+    }, 100); 
   }
 
 
- setSelectedValue(value: string | number) {
-    const selectedItem = this.items.filter(x => x.value === value)[0];
-    if (selectedItem) {
-      selectedItem.selected = true;
-      this.unSelectItems(selectedItem);
-    } else {
-      this.unSelectItems();
-    }
- }
 
  setFirstOptionAsFocusable() {
     if(!this.items.some(x => x.selected)) {
@@ -121,6 +129,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     });
 
 
+
     if (itemToExclude) {
       this.value = itemToExclude.value;
     } else {
@@ -147,12 +156,19 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     });
   }
 
-  keyDown(event: KeyboardEvent): void {
-    // const selectedItem = this.items.filter(item => {
-    //   console.log(event.target)
-    //   return item.radioButton.nativeElement === event.target
-    // })[0];
+  setPreselectedValue() {
+    if (this.value) {
+      this.items?.forEach(item => {
+        if(item.value === this.value) {
+          item.selected = true;
+          this.unSelectItems(item);
 
+        }
+      });
+    }
+  }
+
+  keyDown(event: KeyboardEvent): void {
     const selectedItem = this.items.filter(item => item.hasFocus())[0];
     if (['Enter', 'Spacebar', ' '].includes(event.key)) {
       const positionArray = this.items.toArray();
@@ -173,6 +189,16 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       event.preventDefault();
     }
   }
+
+  setSelectedValue(value: string | number) {
+    const selectedItem = this.items.filter(x => x.value === value)[0];
+    if (selectedItem) {
+      selectedItem.selected = true;
+      this.unSelectItems(selectedItem);
+    } else {
+      this.unSelectItems();
+    }
+ }
 
   setFocus(option: any, direction?: string) {
     let positionArray = this.items.toArray();
