@@ -323,14 +323,19 @@
   </vgr-modal-content>
   <vgr-modal-footer>
     <vgr-button [buttonStyle]="'secondary'" [disabled]="enable_disable_button">Spara</vgr-button>
-    <!-- <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modalDisabledButton')">Avbryt -->
-    <!-- </vgr-button> -->
+
   </vgr-modal-footer>
 </vgr-modal>
 <vgr-modal id="myModalId">
   <vgr-modal-header>En header från app</vgr-modal-header>
   <vgr-modal-content>
     <p>Ändringarna går förlorade om du inte sparar dem</p>
+    <vgr-radiobutton-group>
+      <vgr-radiobutton-item>Val 1</vgr-radiobutton-item>
+      <vgr-radiobutton-item>Val 2</vgr-radiobutton-item>
+      <vgr-radiobutton-item>Val 3</vgr-radiobutton-item>
+    </vgr-radiobutton-group>
+
   </vgr-modal-content>
   <vgr-modal-footer>
     <vgr-button [buttonStyle]="'secondary'">Spara</vgr-button>
