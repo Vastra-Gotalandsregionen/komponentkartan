@@ -62,7 +62,7 @@ export const appRoutes: Routes = [
     { path: 'panels', component: PanelsComponent },
     { path: 'savecancel', component: SavecancelComponent },
     { path: 'backtotop', component: BacktotopComponent },
-    { path: '', component: StartComponent },
+    { path: 'start', component: StartComponent },
     { path: 'table', component: TableComponent },
     { path: 'theming', component: ThemingComponent },
     { path: 'titlevalue', component: TitleValueComponent },
@@ -97,5 +97,6 @@ export const appRoutes: Routes = [
     { path: 'combobox', component: ComboboxDocumentationComponent },
     { path: 'editable-table', component: EditableTableDocumentationComponent },
 
-    { path: '**', redirectTo: '/' }
+    { path: '**', redirectTo: '/start' },
+    
 ];

@@ -4,7 +4,33 @@
 /* First, hide the default checkbox. It cannot be styled with CSS.
  * Instead, we will use the "label" that is associated with our textbox.
  * It will contain all of the checkbox graphics and behaviour */
+ :host {
+   .checkbox-validation_status {
+     display: flex;
+     align-items: baseline;
+   }
 
+  .checkbox-validation-error--active .checkbox-validation {
+    outline: 3px solid #FF0000;
+    border-radius: 2px;
+    padding-right: 5px;
+  }
+
+  .checkbox-validation-error--active .checkbox-validation_status__message {
+    display: inline-block;
+    color: $text-color--default;
+    margin-left: 4px;
+    margin-top: 4px;
+  }
+
+  .checkbox-validation-error--active .checkbox-validation_status__icon ::ng-deep .icon {
+    color: $primary-color--error;
+  }
+
+  .checkbox-validation-error--active .checkbox-validation_status__icon {
+    display: inline-block;
+  }
+}
 .checkbox {
   display: flex;
   flex-wrap: nowrap;
@@ -89,6 +115,8 @@
   .checkbox__control svg {
     transform: scale(0);
   }
+
+
 
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {

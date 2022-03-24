@@ -9,6 +9,8 @@ export { CheckboxComponent } from './controls/checkbox/checkbox.component';
 export { LockButtonComponent } from './controls/lock-button/lock-button.component';
 export { SaveCancelComponent } from './controls/save-cancel/save-cancel.component';
 export { RadioGroupComponent } from './controls/radioGroup/radioGroup.component';
+export { RadiobuttonGroupComponent } from './controls/radiobutton-group/radiobutton-group.component';
+export { RadiobuttonItemComponent } from './controls/radiobutton-group/radiobutton-item.component';
 export { ModalPlaceholderComponent } from './controls/modal/modal.component';
 export { InputComponent } from './controls/input/input.component';
 export { CardSectionComponent } from './controls/card/cardSection.component';
@@ -96,5 +98,6 @@ export { EditableTableHeaderComponent } from './controls/editable-table/editable
 export { EditableTableHeaderColumnComponent } from './controls/editable-table/editable-table-header-column.component';
 export { EditableTableColumnComponent } from './controls/editable-table/editable-table-column.component';
 export { EditableTableRowComponent } from './controls/editable-table/editable-table-row.component';
+export { CheckboxGroupComponent } from './controls/checkbox/checkbox-group.component';
 
 export { Guid } from './utils/guid';

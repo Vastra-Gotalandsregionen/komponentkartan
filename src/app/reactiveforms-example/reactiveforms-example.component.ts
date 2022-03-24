@@ -11,7 +11,7 @@ import { SelectableItem } from '../../../projects/komponentkartan/src/lib';
 })
 export class ReactiveformsexampleComponent implements OnInit {
     radioOptions1: SelectableItem<number>[];
-    radioOptions2: SelectableItem<number>[];
+    radioOptions2: any;
     radioOptions3: SelectableItem<number>[];
 
     locked = false;
@@ -66,21 +66,21 @@ export class ReactiveformsexampleComponent implements OnInit {
 
 
         this.radioOptions1 = [
-            { displayName: 'Ett', value: 1 },
-            { displayName: 'Två', value: 2 },
-            { displayName: 'Tre', value: 3 }
+            { displayName: 'Ett', value: 1, disabled: false  },
+            { displayName: 'Två', value: 2, disabled: false },
+            { displayName: 'Tre', value: 3, disabled: true  }
         ];
 
         this.radioOptions2 = [
-            { displayName: 'Ett', value: 1 },
-            { displayName: 'Två', value: 2 },
-            { displayName: 'Tre', value: 3 }
+            { displayName: 'Ett', value: 'Ett' },
+            { displayName: 'Två', value: 'Tva' },
+            { displayName: 'Tre', value: 'Tre' }
         ];
 
         this.radioOptions3 = [
-            { displayName: 'Ett', value: 1 },
-            { displayName: 'Två', value: 2 },
-            { displayName: 'Tre', value: 3 }
+            { displayName: 'Uno', value: 1 },
+            { displayName: 'Dos', value: 2 },
+            { displayName: 'Tres', value: 3 }
         ];
     }
 
@@ -99,12 +99,13 @@ export class ReactiveformsexampleComponent implements OnInit {
             salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
             favourite_pet: new FormControl(null, { validators: [Validators.required] }),
             interests: new FormControl(null, { validators: [Validators.required, Validators.pattern('Koda')] }),
-            check: new FormControl(true, { validators: [Validators.pattern('true')] }),
-            optional: new FormControl(1),
+            check: new FormControl(true, { validators: [Validators.requiredTrue] }),
+            optional: new FormControl(),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
             datepicker: new FormControl('', { validators: [Validators.required] }),
             datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
-            textarea: new FormControl('', { validators: [Validators.required] })
+            textarea: new FormControl('', { validators: [Validators.required] }),
+            checkboxGroup: new FormControl([], { validators: [Validators.required] })
         }, { updateOn: 'blur' });
     }
 
@@ -118,33 +119,36 @@ export class ReactiveformsexampleComponent implements OnInit {
             favourite_pet: new FormControl(null, { validators: [Validators.required] }),
             interests: new FormControl(null, { validators: [Validators.required, Validators.pattern('Koda')] }),
             check: new FormControl(true, { validators: [Validators.pattern('true')] }),
-            optional: new FormControl(2),
+            optional: new FormControl('', { validators: [Validators.required] }),
             monthpicker: new FormControl('', { validators: [Validators.required] }),
             datepicker: new FormControl('', { validators: [Validators.required] }),
             datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
-            textarea: new FormControl('', { validators: [Validators.required] })
+            textarea: new FormControl('', { validators: [Validators.required] }),
+            checkboxGroup: new FormControl(['Vald'], { validators: [Validators.required] })
         }, { updateOn: 'submit' });
     }
 
     createUpdateOnChangeForm() {
-        this.updateOnChangeForm = new FormGroup({
-            firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
-            lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
-            age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
-            email: new FormControl('', { validators: [Validators.required, Validators.email] }),
-            salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
-            favourite_pet: new FormControl(null, { validators: [Validators.required] }),
-            interests: new FormControl(null, { validators: [Validators.required, Validators.pattern('Koda')] }),
-            check: new FormControl(true, { validators: [Validators.pattern('true')] }),
-            optional: new FormControl(3),
-            monthpicker: new FormControl('', { validators: [Validators.required] }),
-            datepicker: new FormControl('', { validators: [Validators.required] }),
-            datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
-            textarea: new FormControl('', { validators: [Validators.required] })
-        }, { updateOn: 'change' });
+            this.updateOnChangeForm = new FormGroup({
+                firstname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+                lastname: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] }),
+                age: new FormControl('', { validators: [Validators.required, Validators.min(18), Validators.max(120), validateNumber] }),
+                email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+                salary: new FormControl('', { validators: [Validators.required, validateNumber] }),
+                favourite_pet: new FormControl(null, { validators: [Validators.required] }),
+                interests: new FormControl(null, { validators: [Validators.required, Validators.pattern('Koda')] }),
+                check: new FormControl(true, { validators: [Validators.pattern('true')] }),
+                optional: new FormControl(3),
+                monthpicker: new FormControl('', { validators: [Validators.required] }),
+                datepicker: new FormControl('', { validators: [Validators.required] }),
+                datepicker_preselected: new FormControl(new Date(), { validators: [Validators.required] }),
+                textarea: new FormControl('', { validators: [Validators.required] }),
+                checkboxGroup: new FormControl([], { validators: [Validators.required] })
+            }, { updateOn: 'change' });
     }
 
     onSubmit() {
+        console.log(this.updateOnSubmitForm)
         this.formSubmitted = true;
     }
 
@@ -174,6 +178,10 @@ export class ReactiveformsexampleComponent implements OnInit {
                 this.updateOnBlurForm.controls[key].disable();
             }
         });
+    }
+
+    showPerson() {
+
     }
 }
 

@@ -1,10 +1,9 @@
 
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Guid } from '../../utils/guid';
 import { CheckboxComponent } from './checkbox.component';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -96,7 +95,12 @@ describe('CheckboxComponent', () => {
       expect(checkbox.context['checked']).toBe(true);
     });
     it('checked event is emitted', () => {
-      expect(component.checkedChanged.emit).toHaveBeenCalledWith(true);
+      expect(component.checkedChanged.emit).toHaveBeenCalledWith(
+        {
+          id: component.elementId,
+          checked: component.checked,
+          label: component.label
+        });
     });
 
     describe('And checkbox is clicked again', () => {
@@ -110,7 +114,12 @@ describe('CheckboxComponent', () => {
         expect(checkbox.context['checked']).not.toBe(true);
       });
       it('checked event is emitted', () => {
-        expect(component.checkedChanged.emit).toHaveBeenCalledWith(false);
+        expect(component.checkedChanged.emit).toHaveBeenCalledWith(
+          {
+            id: component.elementId,
+            checked: component.checked,
+            label: component.label
+          });
       });
     });
   });
@@ -125,7 +134,12 @@ describe('CheckboxComponent', () => {
       expect(checkbox.context['checked']).toBe(true);
     });
     it('checked event is emitted', () => {
-      expect(component.checkedChanged.emit).toHaveBeenCalledWith(true);
+      expect(component.checkedChanged.emit).toHaveBeenCalledWith(
+        {
+          id: component.elementId,
+          checked: component.checked,
+          label: component.label
+        });
     });
   });
 
@@ -139,7 +153,12 @@ describe('CheckboxComponent', () => {
       expect(checkbox.context['checked']).toBe(true);
     });
     it('checked event is emitted', () => {
-      expect(component.checkedChanged.emit).toHaveBeenCalledWith(true);
+      expect(component.checkedChanged.emit).toHaveBeenCalledWith(
+        {
+          id: component.elementId,
+          checked: component.checked,
+          label: component.label
+        });
     });
   });
 

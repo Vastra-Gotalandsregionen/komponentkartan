@@ -20,6 +20,12 @@ export class ModaldialogComponent implements OnInit {
   enable_disable_button = true;
   modalChecked = false;
 
+  myradiogroupOptions = [
+    { displayName: 'Ett', value: 1 },
+    { displayName: 'Två', value: 2 },
+    { displayName: 'Tre', value: 3 }
+  ]
+
   exampleCodeHtml = `
   <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>
 
@@ -106,7 +112,7 @@ export class ModaldialogComponent implements OnInit {
     this.modalService.updateDialog('commentModal');
   }
 
-  enableDisabledButton(event) {
+  enableDisabledButton() {
     this.enable_disable_button = !this.enable_disable_button;
     this.modalService.updateDialog('modalDisabledButton');
   }

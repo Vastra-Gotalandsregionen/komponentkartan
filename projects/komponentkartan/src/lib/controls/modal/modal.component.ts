@@ -27,9 +27,8 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   private ngUnsubscribe = new Subject();
 
   // A list of elements that can recieve focus
-  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled]):not([aria-hidden]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]):not([type="radio"]), select:not([disabled]), textarea:not([disabled]):not([aria-hidden]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
   focusableNodes: NodeList;
-  // document.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
   @ContentChildren(forwardRef(() => ButtonComponent), { read: ElementRef, descendants: true }) buttonComponents: QueryList<ElementRef>;
 
   constructor(
@@ -82,7 +81,6 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
     // Had to put this in a SetTimeout since the QuerySelector returned old objects from the last opened dialog otherwise
     setTimeout(() => {
       this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
-
       if (this.focusableNodes.length === 0) {
         return false;
       }
@@ -140,7 +138,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   onOutsideClick(e: MouseEvent) {
     this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
     let onFocusableNode = this.checkIfOnFocusableNode();
-    
+
     // When click on non focusable item within the modal will place focus on firstTabStop
     if (!onFocusableNode && this.elementRef.nativeElement.classList.contains('vgr-modal--open')) {
       this.firstTabStop.focus();

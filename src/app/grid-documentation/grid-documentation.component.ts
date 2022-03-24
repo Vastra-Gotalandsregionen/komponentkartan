@@ -181,8 +181,8 @@ export class GridDocumentationComponent implements OnInit {
     row.checked = !row.checked;
   }
 
-  setAllChecked(checked: boolean) {
-    this.paginatedPeople.forEach(x => x.checked = checked);
+  setAllChecked(checked: any) {
+    this.paginatedPeople.forEach(x => x.checked = checked.checked);
   }
 
   get anyIsChecked(): boolean {

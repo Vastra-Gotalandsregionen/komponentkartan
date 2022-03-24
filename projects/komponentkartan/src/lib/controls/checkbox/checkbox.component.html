@@ -1,19 +1,28 @@
-<div class="checkbox">
-  <span class="checkbox__input" (focusout)="onLeave()" (click)="onClick($event)" (keydown)="onKeyDown($event)">
-    <input id="{{labelledbyid}}" tabindex="-1" type="checkbox" name="checkbox" [disabled]="disabled" [checked]="checked" aria-hidden="true">
-    <span
-    class="checkbox__control"
-    [ngClass]="{ 'checkbox--transparent': transparent }"
-    [attr.aria-labelledby]="labelledbyid"
-    role="checkbox"
-    #checkbox
-    [attr.aria-disabled]="disabled"
-    [attr.aria-checked]="checked"
-    tabindex="0">
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-      <path fill='none' stroke='currentColor' stroke-width='6' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-    </span>
+<div [ngClass]="{ 'checkbox-validation-error--active': errorActive}" >
+  <div class="checkbox checkbox-validation">
+    <span class="checkbox__input" (focusout)="onLeave($event)" (click)="onClick($event)" (keydown)="onKeyDown($event)">
+      <input id="{{labelledbyid}}" tabindex="-1" type="checkbox" name="checkbox" [disabled]="disabled" [checked]="checked" aria-hidden="true">
+      <span
+      class="checkbox__control"
+      [ngClass]="{ 'checkbox--transparent': transparent }"
+      [attr.aria-labelledby]="labelledbyid"
+      role="checkbox"
+      #checkbox
+      [attr.aria-disabled]="disabled"
+      [attr.aria-checked]="checked"
+      tabindex="0">
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+        <path fill='none' stroke='currentColor' stroke-width='6' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+      </span>
+
+
   </span>
   <label id="{{labelledbyid}}" class="checkbox__label" for="{{labelledbyid}}" [ngClass]="{'checkbox--disabled' : disabled }" [attr.aria-disabled]="disabled">{{label}}</label>
+  </div>
+  <div [attr.id]="elementId" *ngIf="errorActive" class="checkbox-validation_status" [title]="validationErrorMessage" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
+    <vgr-icon icon="exclamation-circle" size="sm" class="checkbox-validation_status__icon"></vgr-icon>
+    <div class="checkbox-validation_status__message" *ngIf="control">{{validationErrorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
+    <div class="checkbox-validation_status__message" *ngIf="!control">{{validationErrorMessage}}</div>
+  </div>
 </div>
 

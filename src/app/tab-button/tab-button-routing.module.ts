@@ -7,11 +7,12 @@ import { TabButtonComponent } from './tab-button.component';
 
 const routes: Routes = [
 
-  { path: '', component: TabButtonComponent,
+  { path: 'tab-button', component: TabButtonComponent,
   children: [
     { path: 'tab-start', component: TabStartComponent},
     { path: 'favoriter', component: FavoriterComponent},
-    { path: 'valda', component: ValdaComponent}
+    { path: 'valda', component: ValdaComponent},
+    { path: '**', component: TabStartComponent }
   ]}
 ];
 

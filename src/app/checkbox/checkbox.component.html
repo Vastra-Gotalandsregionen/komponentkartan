@@ -13,34 +13,83 @@
         </p>
     </div>
     <div class="docs__examples" style="background-color: #f0f0f0; display: flex; margin-bottom: 10px;">
-        <vgr-checkbox style="margin-right: 20px;" [label]="'Klicka på mig!'"></vgr-checkbox> 
+        <vgr-checkbox style="margin-right: 20px;" [label]="'Klicka på mig!'"></vgr-checkbox>
         <vgr-checkbox [label]="'Transparant bakgrund'" [transparent]="true"></vgr-checkbox>
 
-      </div>
+    </div>
     <div class="docs__examples">
 
 
         <div class="row-layout ">
             <div class="full ">
                 <div class="column-layout ">
-                 <div style="display: flex; align-items: baseline;"><vgr-checkbox></vgr-checkbox>Utan ledtext</div>
-                    <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
-                    <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
-                    <vgr-checkbox #myCheckbox [checked]="true" [label]=" 'Vald' "></vgr-checkbox>
-                    <vgr-checkbox [checked]="true" [disabled]="true" [label]=" 'Inaktiverad vald' "></vgr-checkbox>
-                    <br>
-                    <vgr-button (click)="setFocus()" >Fokusera på Vald</vgr-button>
-                    <br><br>
-                    <vgr-table #myTable [expanded]="true">
-                        <vgr-table-header>
-                            <vgr-table-header-column [width]="5"><vgr-checkbox [label]=" 'Header med Checkbox' "></vgr-checkbox></vgr-table-header-column>
-                            <vgr-table-header-column [width]="5">Header</vgr-table-header-column>
-                        </vgr-table-header>
-                        <vgr-table-row>
-                            <vgr-table-row-column [width]="5"><vgr-checkbox [label]=" 'Row med Checkbox' "></vgr-checkbox></vgr-table-row-column>
-                            <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                        </vgr-table-row>
-                    </vgr-table>
+
+                    <h3><strong>Checkbox group (required = true)</strong></h3>
+                    <vgr-checkbox-group [required]="true">
+                        <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                        <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                        <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
+                        <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                    </vgr-checkbox-group>
+                    <hr class="hr_line" />
+                    <h3><strong>Checkbox group (required = false)</strong></h3>
+                    <vgr-checkbox-group [required]="false">
+                        <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                        <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                        <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
+                        <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                    </vgr-checkbox-group>
+                    <hr class="hr_line" />
+
+                    <h3><strong>Checkbox group (hela gruppen disabled)</strong></h3>
+                    <vgr-checkbox-group [required]="false" [disabled]="true">
+                        <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                        <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                        <vgr-checkbox [checked]="true" [label]=" 'Vald' " [required]="true"></vgr-checkbox>
+                        <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                    </vgr-checkbox-group>
+                    <hr class="hr_line" />
+                    <h3><strong>Checkbox single required</strong></h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut tristique libero. Proin non
+                        aliquet ligula.
+                    </p>
+                    <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [required]="true"></vgr-checkbox>
+                    <hr class="hr_line" />
+
+                    <h3><strong>Checkbox ngModel example</strong></h3>
+                    <vgr-checkbox [label]=" 'Jag har läst och förstått texten' " [(ngModel)]="klarmarkerad"></vgr-checkbox>
+                    <label>{{klarmarkerad}}</label>
+                    <hr class="hr_line" />
+
+                    <h3><strong>Checkbox single required in formcontrol</strong></h3>
+                    <p>
+                        Jag skall inte checka in dålig kod....
+                    </p>
+
+                    <form [formGroup]="form">
+                        <vgr-checkbox [label]=" 'Jag har läst och förstått texten' "
+                            formControlName="checkbox" [showValidation]="formSubmittedCheckbox"></vgr-checkbox>
+                            <vgr-button   type="submit" (click)="submitForm()" style="margin-top: 10px; display: block; width: 8%;">Submit</vgr-button><br>
+                            <vgr-notification *ngIf="form.valid" type="success" width="200px" [standalone]="true" style="margin-top: 10px;">Formuläret postat!</vgr-notification>
+                          </form>
+                    <hr class="hr_line" />
+                    <h3><strong>Checkbox group in formcontrol</strong></h3>
+                    <form [formGroup]="checkboxForm">
+                        <vgr-checkbox-group (selectedChanged)="changed($event)" formControlName="checkboxValues" [showValidation]="formSubmittedCheckboxGroup">
+                            <vgr-checkbox [label]=" 'Med ledtext' "></vgr-checkbox>
+                            <vgr-checkbox [disabled]="true" [label]=" 'Inaktiverad' "></vgr-checkbox>
+                            <vgr-checkbox [label]=" 'Vald' "></vgr-checkbox>
+                            <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
+                        </vgr-checkbox-group>
+                        <vgr-button style="margin-top: 10px; display: block; width: 50px;" type="submit" (click)="submitCheckboxForm()">Submit</vgr-button>
+                        <vgr-button style="margin-top: 10px; display: block; width: 50px;" (click)="resetCheckboxForm()">Reset Form</vgr-button>
+                    </form>
+
+                    <label>Antal valda: {{checkboxForm.controls.checkboxValues.value.length}}</label>
+                    <ol>
+                        <li *ngFor="let item of checkboxForm.controls.checkboxValues.value">{{item}}</li>
+                    </ol>
                 </div>
 
             </div>
@@ -91,8 +140,10 @@
     </div>
     <div class="docs__wcag">
         <p>
-            <code>&lt;vgr-checkbox&gt;</code> har en intern div vars roll är satt till checkbox. Förutom rollen så används attributen: attr.aria-disabled
-            (inaktiv/aktiv), attr.aria-checked (kryssad/ej ikryssad) och attr.aria-labelledby (pekning till interna label
+            <code>&lt;vgr-checkbox&gt;</code> har en intern div vars roll är satt till checkbox. Förutom rollen så
+            används attributen: attr.aria-disabled
+            (inaktiv/aktiv), attr.aria-checked (kryssad/ej ikryssad) och attr.aria-labelledby (pekning till interna
+            label
             i
             <code>&lt;vgr-checkbox&gt;</code>)
         </p>

@@ -1,0 +1,21 @@
+<div [ngClass]="{ 'checkbox-group-validation-error--active': errorActive}" class="checkbox-group" >
+    <div class="checkbox-group-validation" >
+      <div
+        id="checkboxlist"
+        [attr.aria-labelledby]="elementId"
+        (keydown)="keyDown($event)" (focusout)="onLeave($event)"
+        [attr.aria-disabled]="_disabled"
+        tabindex="{{_disabled ? 0 : -1}}"
+        role="list"
+        [ngClass]="{'vertical' : vertical}"
+        [attr.aria-invalid]="errorActive"
+      >
+        <ng-content select="vgr-checkbox"></ng-content>
+      </div>
+    </div>
+    <div [attr.id]="elementId" *ngIf="errorActive" class="checkbox-group-validation_status" [title]="validationErrorMessage" [attr.aria-live]="'assertive'">
+      <vgr-icon icon="exclamation-circle" size="sm" class="checkbox-group-validation_status__icon"></vgr-icon>
+      <div class="checkbox-group-validation_status__message" *ngIf="control">{{validationErrorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
+      <div class="checkbox-group-validation_status__message" *ngIf="!control">{{validationErrorMessage}}</div>
+    </div>
+  </div>
