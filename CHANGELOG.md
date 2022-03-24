@@ -5,13 +5,12 @@ The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-# 9.1.0 (2022-03-24)
-- *Breaking change* Refactoring of `vgr-checkbox` which now contains a different structure with `vgr-checkbox-group` which wraps `vgr-checkbox`
-- Added `vgr-radiobutton-group` (new component) which will replace `vgr-radio-group` who is deprecated as of this version.
-- *Breaking change* Changed [routerLinkActiveOptions] from {exact: false} to {exact: true} which means the menu will only accept exact paths from now on.
+# 9.1.0 (2022-03-24) Stable
+- *Breaking change* Refactoring of `vgr-checkbox` which now contains a different structure with `vgr-checkbox-group` which wraps `vgr-checkbox` (#448)
+- Added `vgr-radiobutton-group` (new component) which will replace `vgr-radio-group` who is deprecated as of this version (#449) & (#443)
 # 9.0.7 (2022-03-11) Stable
-- Added new editable-table component
-- Returned collapse to compbobox and added new terms for blurevent
+- Added new editable-table component (#608)
+- Returned collapse to combobox and added new terms for blurevent
 - Fixed bug regarding shift+tab move in a grid
 - Fixed that you can tab into a editable-table, next tab gets you to last tabable item in table and then out from table
 - Fixed so a readonly object dont get the red error frame when touched
