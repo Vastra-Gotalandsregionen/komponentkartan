@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { CheckboxGroupComponent } from './checkbox-group.component';
@@ -35,13 +35,16 @@ describe('CheckboxGroupComponent', () => {
   describe('Initial values for checkbox-group', () => {
     let setGroupDisabledSpy;
     let onChangeSpy;
-    beforeEach(() => {
+    beforeEach(fakeAsync(() => {
       setGroupDisabledSpy = spyOn(component, 'setGroupDisabledOverride').and.callThrough();
       onChangeSpy = spyOn(component, 'onChange').and.callThrough();
       component.disabled = true;
       component.ngAfterContentInit();
+      tick(400);
       fixture.detectChanges();
-    });
+      tick(Infinity);
+      fixture.detectChanges();
+    }));
 
     it('setGroupDisabledOverride() should be called 2 times', () => {
       expect(setGroupDisabledSpy).toHaveBeenCalledTimes(2);
