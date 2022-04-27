@@ -38,7 +38,7 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   constructor(private elementRef: ElementRef) {
     this.elementId = Math.random().toString();
 
-    
+
   }
 
   ngAfterViewInit() {
@@ -51,15 +51,18 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   itemClicked() {
     if (this.item && !this.disabled) {
       this.selected = true;
+      console.log('itemClicked: ', this.label, this.item?.nativeElement.tabIndex)
       this.itemSelected.emit();
     }
+    console.log('itemClicked (no if): ', this.label, this.item?.nativeElement.tabIndex)
     this.focus();
   }
 
   public firstfocusIn() {
-
+    console.log('firstfocusIn: ', this.label, this.item?.nativeElement.tabIndex)
     if (this.isTabEnabled) {
       this.isTabEnabled = false;
+      console.log('firstfocusIn lets focus')
       this.focus();
     }
   }
@@ -67,6 +70,7 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   public focus() {
     if(!this.disabled && !this.selected) {
       this.selected = true;
+      console.log('focus: ', this.label, this.item?.nativeElement.tabIndex)
       this.itemSelected.emit();
     }
 

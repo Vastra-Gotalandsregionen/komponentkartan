@@ -23,7 +23,6 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   lastFocusedElement: any;
   firstTabStop: any;
   lastTabStop: any;
-  focusableElements: any;
   private ngUnsubscribe = new Subject();
 
   // A list of elements that can recieve focus
@@ -84,10 +83,12 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
       if (this.focusableNodes.length === 0) {
         return false;
       }
-      this.focusableElements = Array.from(this.focusableNodes);
+      const focusableElements = Array.from(this.focusableNodes);
 
-      this.firstTabStop = this.focusableElements[0];
-      this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
+      console.log(this.focusableNodes)
+
+      this.firstTabStop = focusableElements[0];
+      this.lastTabStop = focusableElements[focusableElements.length - 1];
 
       // Set focus default button if one is defined
         const defaultButtonComponent = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
@@ -137,8 +138,10 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
 
   onOutsideClick(e: MouseEvent) {
     this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
+    this.firstTabStop = this.focusableNodes[0]; // reset first tabstop
     let onFocusableNode = this.checkIfOnFocusableNode();
 
+    console.log('onOutsideClick: ', this.focusableNodes)
     // When click on non focusable item within the modal will place focus on firstTabStop
     if (!onFocusableNode && this.elementRef.nativeElement.classList.contains('vgr-modal--open')) {
       this.firstTabStop.focus();
@@ -163,8 +166,9 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   private handleTabPress(e: KeyboardEvent) {
+    this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
     let onFocusableNode = this.checkIfOnFocusableNode();
-
+    this.firstTabStop = this.focusableNodes[0]; // reset first tabstop
     if (e.shiftKey) {
       if (!onFocusableNode) {
         e.preventDefault();
