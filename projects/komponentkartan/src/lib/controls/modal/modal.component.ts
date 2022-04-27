@@ -27,7 +27,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   private ngUnsubscribe = new Subject();
 
   // A list of elements that can recieve focus
-  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]):not([type="radio"]), select:not([disabled]), textarea:not([disabled]):not([aria-hidden]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]):not([type="radio"]), select:not([disabled]), textarea:not([disabled]):not([aria-hidden]), button:not([disabled]), div[role=radio], iframe, object, embed, [tabindex="0"], [contenteditable]';
   focusableNodes: NodeList;
   @ContentChildren(forwardRef(() => ButtonComponent), { read: ElementRef, descendants: true }) buttonComponents: QueryList<ElementRef>;
 
@@ -86,6 +86,8 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
       }
       this.focusableElements = Array.from(this.focusableNodes);
 
+      console.log(this.focusableNodes)
+
       this.firstTabStop = this.focusableElements[0];
       this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
 
@@ -139,6 +141,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
     this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
     let onFocusableNode = this.checkIfOnFocusableNode();
 
+    console.log('onOutsideClick: ', this.focusableNodes)
     // When click on non focusable item within the modal will place focus on firstTabStop
     if (!onFocusableNode && this.elementRef.nativeElement.classList.contains('vgr-modal--open')) {
       this.firstTabStop.focus();

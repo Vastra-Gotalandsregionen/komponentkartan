@@ -50,7 +50,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
   internalDisabled: boolean;
   validationErrorMessage = 'Obligatoriskt';
   elementId: string;
-  
+
   public control: AbstractControl;
   constructor(@Host() @SkipSelf() @Optional() private controlContainer: ControlContainer, private elementRef: ElementRef) {
     this.elementId = Math.random().toString();
@@ -65,6 +65,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       item.itemSelected.pipe(
         takeUntil(this.ngUnsubscribeItems)
       ).subscribe(() => {
+        console.log('i pipe: ', item)
         this.unSelectItems(item);
       });
     });
@@ -75,7 +76,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     this.setGroupDisabledOverride(this._disabled);
     setTimeout(() => {
       this.setPreselectedValue();
-    }, 100); 
+    }, 100);
   }
 
 
@@ -122,9 +123,14 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
   }
 
   unSelectItems(itemToExclude?: RadiobuttonItemComponent) {
+    console.log('unselected items, except: ',itemToExclude )
     this.items.forEach(item => {
       if (item !== itemToExclude || !itemToExclude) {
         item.selected = false;
+        console.log(item.item?.nativeElement.children[1].tabIndex, item.item?.nativeElement.tabIndex, item.item?.nativeElement.outerText);
+        if (item.item) {
+          item.item.nativeElement.children[1].tabIndex = '-1';
+        }
       }
     });
 
@@ -132,7 +138,9 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
 
     if (itemToExclude) {
       this.value = itemToExclude.value;
+      console.log('unselected items if:', this.value)
     } else {
+      console.log('unselected items, setFirstOption as index 0' )
       // Om ingen är vald, möjliggör att man kan tabba in till första enablade elementet
       this.setFirstOptionAsFocusable();
       this.value = null;
@@ -161,6 +169,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       this.items?.forEach(item => {
         if(item.value === this.value) {
           item.selected = true;
+          console.log('setPreselectedValue: ', item)
           this.unSelectItems(item);
 
         }
@@ -171,6 +180,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
   keyDown(event: KeyboardEvent): void {
     const selectedItem = this.items.filter(item => item.hasFocus())[0];
     if (['Enter', 'Spacebar', ' '].includes(event.key)) {
+      console.log('keyDownGroup')
       const positionArray = this.items.toArray();
       const position = positionArray.indexOf(selectedItem)
       this.items.get(position).itemClicked();
@@ -194,6 +204,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     const selectedItem = this.items.filter(x => x.value === value)[0];
     if (selectedItem) {
       selectedItem.selected = true;
+      console.log('setSelectedValue: ', selectedItem)
       this.unSelectItems(selectedItem);
     } else {
       this.unSelectItems();
