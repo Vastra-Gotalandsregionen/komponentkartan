@@ -83,7 +83,7 @@
     min-width: 53px * $number;
     width: 53px * $number;
 
-    &:last-child() {
+    &:last-child {
       min-width: (53px * $number) - $margin--fat;
       width: (53px * $number) - $margin--fat;
     }
@@ -94,7 +94,7 @@
       min-width: 55.5px * $number;
       width: 55.5px * $number;
 
-      &:last-child() {
+      &:last-child {
         min-width: (55.5px * $number) - $margin--fat;
         width: (55.5px * $number) - $margin--fat;
       }
