@@ -23,11 +23,10 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   lastFocusedElement: any;
   firstTabStop: any;
   lastTabStop: any;
-  focusableElements: any;
   private ngUnsubscribe = new Subject();
 
   // A list of elements that can recieve focus
-  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]):not([type="radio"]), select:not([disabled]), textarea:not([disabled]):not([aria-hidden]), button:not([disabled]), div[role=radio], iframe, object, embed, [tabindex="0"], [contenteditable]';
+  focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]):not([type="radio"]), select:not([disabled]), textarea:not([disabled]):not([aria-hidden]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
   focusableNodes: NodeList;
   @ContentChildren(forwardRef(() => ButtonComponent), { read: ElementRef, descendants: true }) buttonComponents: QueryList<ElementRef>;
 
@@ -84,12 +83,12 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
       if (this.focusableNodes.length === 0) {
         return false;
       }
-      this.focusableElements = Array.from(this.focusableNodes);
+      const focusableElements = Array.from(this.focusableNodes);
 
       console.log(this.focusableNodes)
 
-      this.firstTabStop = this.focusableElements[0];
-      this.lastTabStop = this.focusableElements[this.focusableElements.length - 1];
+      this.firstTabStop = focusableElements[0];
+      this.lastTabStop = focusableElements[focusableElements.length - 1];
 
       // Set focus default button if one is defined
         const defaultButtonComponent = this.buttonComponents && this.buttonComponents.find(x => x.nativeElement.getAttribute('default') === 'true');
@@ -139,6 +138,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
 
   onOutsideClick(e: MouseEvent) {
     this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
+    this.firstTabStop = this.focusableNodes[0]; // reset first tabstop
     let onFocusableNode = this.checkIfOnFocusableNode();
 
     console.log('onOutsideClick: ', this.focusableNodes)
@@ -166,8 +166,9 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   }
 
   private handleTabPress(e: KeyboardEvent) {
+    this.focusableNodes = this.elementRef.nativeElement.querySelectorAll(this.focusableElementsString);
     let onFocusableNode = this.checkIfOnFocusableNode();
-
+    this.firstTabStop = this.focusableNodes[0]; // reset first tabstop
     if (e.shiftKey) {
       if (!onFocusableNode) {
         e.preventDefault();
