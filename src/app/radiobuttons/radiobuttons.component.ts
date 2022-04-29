@@ -44,7 +44,6 @@ export class RadiobuttonsComponent implements OnInit {
       this.valdBil = this.selectedOption;
     }
 
-    console.log( this.selectedOption)
   }
 
   someCode(param) {
