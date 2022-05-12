@@ -85,8 +85,6 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
       }
       const focusableElements = Array.from(this.focusableNodes);
 
-      console.log(this.focusableNodes)
-
       this.firstTabStop = focusableElements[0];
       this.lastTabStop = focusableElements[focusableElements.length - 1];
 
@@ -141,7 +139,6 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
     this.firstTabStop = this.focusableNodes[0]; // reset first tabstop
     let onFocusableNode = this.checkIfOnFocusableNode();
 
-    console.log('onOutsideClick: ', this.focusableNodes)
     // When click on non focusable item within the modal will place focus on firstTabStop
     if (!onFocusableNode && this.elementRef.nativeElement.classList.contains('vgr-modal--open')) {
       this.firstTabStop.focus();

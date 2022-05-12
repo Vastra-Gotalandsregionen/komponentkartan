@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
+# 9.1.2 (2022-04-29) Stable
+- Bugfix regarding radiobuttons in modal
+- removed extensive logs
 # 9.1.0 (2022-03-24) Stable
 - *Breaking change* Refactoring of `vgr-checkbox` which now contains a different structure with `vgr-checkbox-group` which wraps `vgr-checkbox` (#448)
 - Added `vgr-radiobutton-group` (new component) which will replace `vgr-radio-group` who is deprecated as of this version (#449) & (#443)

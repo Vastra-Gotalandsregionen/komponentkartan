@@ -56,6 +56,5 @@ export class CheckboxComponent implements OnInit {
   }
 
   changed(event: any) {
-    console.log(event)
   }
 }
