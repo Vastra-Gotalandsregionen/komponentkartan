@@ -1,10 +1,10 @@
-name: komponentkartan-ci
+name: komponentkartan-ci-feature
 
 on:
   push:
-    branches: [ master ]
+    branches: [ feature/byggfix ]
   pull_request:
-    branches: [ master ]
+    branches: [ feature/byggfix ]
 
 jobs:
   build:
