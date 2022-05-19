@@ -37,6 +37,10 @@
       <p><b>Kodexempel: </b></p>
       <section [innerHTML]="samplePagination" vgrHighlightCode></section><br>
     </div>
+
+    <div>
+      <vgr-pagination [pages]="10" (pageChanged)="onPageChanged($event)"></vgr-pagination>
+    </div>
     <p>
       <a href="/listexample-pagination">Exempel på lista med paginering.</a>
     </p>

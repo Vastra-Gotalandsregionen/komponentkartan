@@ -106,6 +106,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
   private showPage(page: number) {
     this.setPageItems(page);
     if (this.activePage !== page) {
+      console.log('showPage')
       this.activePage = page;
       this._activePage = page;
       this.pageChanged.emit(page);

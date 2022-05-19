@@ -17,5 +17,9 @@ export class PaginationDocumentationComponent {
     this.samplePagination = htmlEncoder.prepareHighlightedSection(this.samplePagination);
   }
 
+  onPageChanged(e) {
+    console.log(e)
+  }
+
 
 }
