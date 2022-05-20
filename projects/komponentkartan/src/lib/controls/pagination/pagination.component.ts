@@ -54,6 +54,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
   ngAfterViewInit() {
     this.pageButtons.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
       const focusedPageButton = this.pageButtons.find(button => button.nativeElement.textContent.trim() === this.focusedPageLabel);
+      console.log(focusedPageButton)
       if (focusedPageButton && this._navigationCancelled === false) {
         setTimeout(() => focusedPageButton.nativeElement.focus());
       }
@@ -61,6 +62,11 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
 
     this.paginationManagementService.changeNavigation.subscribe(navigationCancelled => {
       if (this._navigationCancelled === navigationCancelled) {
+        const focusedPageButton = this.pageButtons.find(button => button.nativeElement.textContent.trim() === this.activePage);
+        console.log('pagebuttons: ', this.pageButtons.find(button => button.nativeElement.textContent.trim()))
+        // if (focusedPageButton && this._navigationCancelled === false) {
+        //   setTimeout(() => focusedPageButton.nativeElement.focus());
+        // }
         return;
       }
       this._navigationCancelled = navigationCancelled;
@@ -68,6 +74,8 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
       if (navigationCancelled && this.pageButtons) {
         this.focusedPageLabel = this.previousActivePage.toString();
         this.showPage(this.previousActivePage);
+      } else {
+        console.log('vi har gått vidare')
       }
     })
   }
