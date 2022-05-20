@@ -2,6 +2,7 @@ import { Component, OnChanges, SimpleChanges, Input, Output, EventEmitter, OnDes
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PageItem } from './page-item';
+import { PaginationManagementService } from './pagination-management.service';
 
 @Component({
   selector: 'vgr-pagination',
@@ -22,6 +23,15 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
   private _activePage: number;
   private ngUnsubscribe = new Subject();
 
+  previousActivePage: number;
+
+  _navigationCancelled: boolean;
+  get navigationCancelled() {
+    return this._navigationCancelled;
+  }
+
+  constructor(private paginationManagementService: PaginationManagementService) {}
+
   ngOnInit() {
     this.setPageItems(this.activePage);
   }
@@ -29,6 +39,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
   ngOnChanges(changes: SimpleChanges) {
     const pagesChange = changes['pages'];
     const activePageChange = changes['activePage'];
+
     if (pagesChange || activePageChange) {
       this.setPageItems(this.activePage);
       if (activePageChange && (this.activePage !== this._activePage)) {
@@ -43,10 +54,22 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
   ngAfterViewInit() {
     this.pageButtons.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(_ => {
       const focusedPageButton = this.pageButtons.find(button => button.nativeElement.textContent.trim() === this.focusedPageLabel);
-      if (focusedPageButton) {
+      if (focusedPageButton && this._navigationCancelled === false) {
         setTimeout(() => focusedPageButton.nativeElement.focus());
       }
     });
+
+    this.paginationManagementService.changeNavigation.subscribe(navigationCancelled => {
+      if (this._navigationCancelled === navigationCancelled) {
+        return;
+      }
+      this._navigationCancelled = navigationCancelled;
+      //Om vi har cancellerat, sätt active till previous
+      if (navigationCancelled && this.pageButtons) {
+        this.focusedPageLabel = this.previousActivePage.toString();
+        this.showPage(this.previousActivePage);
+      }
+    })
   }
 
   ngOnDestroy() {
@@ -105,11 +128,16 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
 
   private showPage(page: number) {
     this.setPageItems(page);
+    this.previousActivePage = this.activePage;
     if (this.activePage !== page) {
-      console.log('showPage')
       this.activePage = page;
       this._activePage = page;
-      this.pageChanged.emit(page);
+      if (this._navigationCancelled === false) {
+        this.pageChanged.emit(page);
+      } else {
+        // reset navigationCancelled
+        this._navigationCancelled = false;
+      }
     }
   }
 

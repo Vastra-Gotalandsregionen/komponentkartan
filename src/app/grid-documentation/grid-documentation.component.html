@@ -306,3 +306,11 @@
     </vgr-grid>
   </vgr-page-body>
 </vgr-page>
+
+<vgr-modal id="modal1">
+  <vgr-modal-header>Vill du lämna?</vgr-modal-header>
+  <vgr-modal-footer>
+    <vgr-button [buttonStyle]="'secondary'" (click)="lamnaPage();">Ja</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="stannaPaPage();">Nej</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>
