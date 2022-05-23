@@ -102,22 +102,30 @@
       <vgr-button [buttonStyle]="'secondary'" (click)="toggleDisabledFormControl(formControlDisabled)">
         {{ formControlDisabled ? 'Aktivera' : 'Inaktivera'}}</vgr-button>
     </section>
-    <section style="float: right;">
-      <h3>Högerjusterad</h3>
-      <vgr-dropdown-select [deselectable]="true" [rightAlign]="true">
-        <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
-      </vgr-dropdown-select>
-    </section>
     <section style="display: flex; justify-content: space-between;">
       <div>
-        <h3>Vänsterjusterad och upptill</h3>
+        <h3>Vänsterjusterad</h3>
         <vgr-dropdown-select [deselectable]="true">
           <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
         </vgr-dropdown-select>
       </div>
       <div>
-        <h3>Högerjusterad och upptill</h3>
+        <h3>Högerjusterad</h3>
         <vgr-dropdown-select [deselectable]="true" [rightAlign]="true">
+          <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
+        </vgr-dropdown-select>
+      </div>
+    </section>
+    <section style="display: flex; justify-content: space-between;">
+      <div>
+        <h4>Vänsterjusterad och upptill</h4>
+        <vgr-dropdown-select [deselectable]="true" [topAlign]="true">
+          <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
+        </vgr-dropdown-select>
+      </div>
+      <div>
+        <h3>Högerjusterad och upptill</h3>
+        <vgr-dropdown-select [deselectable]="true" [topAlign]="true" [rightAlign]="true">
           <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
         </vgr-dropdown-select>
       </div>
