@@ -13,7 +13,7 @@
           <vgr-icon icon="chevron-down" size="sm" class="dropdown-select__header__button__icon"></vgr-icon>
         </div>
       </div>
-      <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu" role="listbox"
+      <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu right-align" role="listbox"
         [attr.aria-labelledby]="labelId" [attr.aria-multiselectable]="multi">
         <div *ngIf="filterVisible || deselectable || multi" class="dropdown-select__menu__header">
           <vgr-input *ngIf="filterVisible" type="search" (keydown)="onFilterKeydown($event)" [(ngModel)]="searchString" (ngModelChange)="filterItems()" (focusin)="onFilterFocus()" (focusout)="onFilterBlur()" >
