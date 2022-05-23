@@ -108,6 +108,20 @@
         <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
       </vgr-dropdown-select>
     </section>
+    <section style="display: flex; justify-content: space-between;">
+      <div>
+        <h3>Vänsterjusterad och upptill</h3>
+        <vgr-dropdown-select [deselectable]="true">
+          <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
+        </vgr-dropdown-select>
+      </div>
+      <div>
+        <h3>Högerjusterad och upptill</h3>
+        <vgr-dropdown-select [deselectable]="true" [rightAlign]="true">
+          <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
+        </vgr-dropdown-select>
+      </div>
+    </section>
   </div>
   <div class="docs__api">
     <h2>DropdownSelect</h2>
