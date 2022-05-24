@@ -14,7 +14,7 @@
         </div>
       </div>
       <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu" role="listbox"
-        [attr.aria-labelledby]="labelId" [attr.aria-multiselectable]="multi">
+        [attr.aria-labelledby]="labelId" [attr.aria-multiselectable]="multi" [ngClass]="{ 'top-align': topAlign, 'right-align': rightAlign }">
         <div *ngIf="filterVisible || deselectable || multi" class="dropdown-select__menu__header">
           <vgr-input *ngIf="filterVisible" type="search" (keydown)="onFilterKeydown($event)" [(ngModel)]="searchString" (ngModelChange)="filterItems()" (focusin)="onFilterFocus()" (focusout)="onFilterBlur()" >
           </vgr-input>

@@ -36,6 +36,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   @Input() value: any;
   @Input() width: string;
   @Input() small = false;
+  @Input() rightAlign = false;
+  @Input() topAlign = false;
 
   @Output() selectedChanged = new EventEmitter<any>();
   @Output() expandedChanged = new EventEmitter<boolean>();
