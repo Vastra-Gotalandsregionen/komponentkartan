@@ -56,6 +56,7 @@ export { TabButtonComponent } from './controls/tab-button/tab-button.component';
 export { TabButtonGroupComponent } from './controls/tab-button/tab-button-group.component';
 export { TabManagementService } from './controls/tab-button/tab-management.service';
 export { PaginationComponent } from './controls/pagination/pagination.component';
+export { PaginationManagementService } from './controls/pagination/pagination-management.service';
 export { DropdownSelectComponent } from './controls/dropdown-select/dropdown-select.component';
 export { DropdownItemComponent } from './controls/dropdown-select/dropdown-item.component';
 export { IconComponent } from './controls/icon/icon.component';

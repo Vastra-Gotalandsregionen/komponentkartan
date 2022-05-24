@@ -1,5 +1,7 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { GridRowComponent, GridHeaderColumnComponent, GridSortChangedArgs, GridSortDirection } from '../../../projects/komponentkartan/src/lib';
+import { PaginationManagementService } from '../../../projects/komponentkartan/src/lib/controls/pagination/pagination-management.service';
+import { ModalService } from '../../../projects/komponentkartan/src/lib/services/modalService';
 
 @Component({
   selector: 'vgr-grid-documentation',
@@ -89,6 +91,7 @@ export class GridDocumentationComponent implements OnInit {
   visible7 = false;
   visible8 = false;
 
+  constructor(private paginationManagementService: PaginationManagementService, private modalService: ModalService){}
   ngOnInit() {
     this.setPagingData(this.activePage);
   }
@@ -197,7 +200,15 @@ export class GridDocumentationComponent implements OnInit {
   }
 
   onPageChanged(page: number) {
-    this.setPagingData(page);
+    if (page === 2) {
+      this.activePage = page;
+      this.modalService.openDialog('modal1');
+    } else {
+      this.paginationManagementService.navigationCancelled(false);
+      this.setPagingData(page);
+    }
+
+
   }
 
   setPagingData(page: number) {
@@ -225,6 +236,21 @@ export class GridDocumentationComponent implements OnInit {
     setTimeout(() => {
       this.peopleGridRows.toArray()[index].focus();
     });
+  }
+
+  lamnaPage() {
+    this.paginationManagementService.navigationCancelled(false);
+    this.setPagingData(this.activePage);
+    this.closeModal();
+  }
+
+  stannaPaPage() {
+    this.paginationManagementService.navigationCancelled(true);
+    this.closeModal();
+  }
+
+  closeModal() {
+    this.modalService.closeDialog('modal1');
   }
 }
 

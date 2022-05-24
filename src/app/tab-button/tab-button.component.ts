@@ -47,14 +47,12 @@ export class TabButtonComponent implements OnInit {
   }
 
   lamnaTab() {
-    console.log('lämna')
     this.tabManagementService.navigationCancelled(false);
     this.router.navigate( ['tab-button/valda'],  { skipLocationChange: true });
     this.closeModal();
   }
 
   stannaPaTab() {
-    console.log('stanna')
     this.tabManagementService.navigationCancelled(true);
     this.closeModal();
   }
