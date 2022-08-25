@@ -34,8 +34,15 @@
 
   <div class="docs__examples">
     <div class="column-layout">
-      <p><b>Kodexempel: </b></p>
+      <p><strong>Kodexempel: </strong>
+        <br>
+      Sida 3 och 10 har en modal som frågar om du vill lämna den sida du är på eller gå vidare
+      </p>
       <section [innerHTML]="samplePagination" vgrHighlightCode></section><br>
+    </div>
+
+    <div>
+      <vgr-pagination [pages]="10" (pageChanged)="onPageChanged($event)"></vgr-pagination>
     </div>
     <p>
       <a href="/listexample-pagination">Exempel på lista med paginering.</a>
@@ -65,7 +72,20 @@
         <td>Event som triggas när aktiv sida ändras.</td>
         <td>(pageChanged)="onPageChanged($event)"</td>
       </tr>
+      <tr>
+        <td>navigationCancelled(cancelled:boolean)	</td>
+        <td>Metod för att tala om navigeringen ska cancelleras eller inte.</td>
+        <td>navigationCancelled(false)</td>
+      </tr>
     </table>
+    <br>
+      <h2>paginationManagementService</h2>
+      <p>Service för att hantera möjligheten att avbryta en navigering. <br>
+        Exempelvis om man inte har sparat på sidan man är på och användaren väljer att stanna kvar istället för att gå vidare. <br>
+        Detta styrs i din kod där man tar in <code>paginationManagementService</code> i constructorn. <br>
+        Därefter talar man om ifall navigationen ska gå vidare eller stanna kvar. <br>
+        Ex: <code>this.paginationManagementService.navigationCancelled(true);</code>
+      </p>
   </div>
 
   <div class="docs__wcag">
@@ -83,4 +103,12 @@
       aria-label sättas till “Gå till första/sista sidan, sida x av y”
     </p>
   </div>
+
 </app-component-docs>
+<vgr-modal id="modal1">
+  <vgr-modal-header>Vill du lämna?</vgr-modal-header>
+  <vgr-modal-footer>
+    <vgr-button [buttonStyle]="'secondary'" (click)="lamnaTab();">Ja</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="stannaPaTab();">Nej</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>

@@ -207,6 +207,7 @@ import { EditableTableComponent } from './controls/editable-table/editable-table
     type.ModalService,
     type.BrowserDetector,
     type.TabManagementService,
+    type.PaginationManagementService,
     { provide: LOCALE_ID, useValue: 'sv-SE' },
     // {
     //   provide: PERFECT_SCROLLBAR_CONFIG,

@@ -164,6 +164,22 @@
       }
 
       .dropdown-select__menu {
+        &.right-align {
+          right: 0px;
+          &::before {
+            right: 40px!important;
+            left: unset;
+          }
+        }
+        &.top-align {
+          bottom: 40px;
+          top: unset;
+          &::before {
+            bottom: -17px;
+            transform: rotate(180deg);
+            top: unset;
+          }
+        }
         position: absolute;
         top: 42px;
         z-index: $layer-four;

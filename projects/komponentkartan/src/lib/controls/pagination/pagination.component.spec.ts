@@ -1,11 +1,12 @@
 import { SimpleChanges, SimpleChange } from '@angular/core';
+import { PaginationManagementService } from './pagination-management.service';
 
 import { PaginationComponent } from './pagination.component';
 
 describe('[PaginationComponent]', () => {
     let component: PaginationComponent;
     beforeEach(() => {
-        component = new PaginationComponent();
+        component = new PaginationComponent(new PaginationManagementService);
     });
     describe('Instatiate', () => {
         it('pages is correct', () => {
