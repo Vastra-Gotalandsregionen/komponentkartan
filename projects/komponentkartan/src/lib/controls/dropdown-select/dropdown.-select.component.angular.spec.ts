@@ -44,7 +44,9 @@ describe('[DropdownSelectComponent - Angular]', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    teardown: { destroyAfterEach: false }
+});
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, FormsModule, NgScrollbarModule],
       declarations: [

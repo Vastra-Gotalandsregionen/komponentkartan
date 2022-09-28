@@ -34,7 +34,9 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    teardown: { destroyAfterEach: false }
+});
     TestBed.configureTestingModule({
       declarations: [ToggleButtonGroupComponent, ToggleButtonComponent, TestComponent]
     });
