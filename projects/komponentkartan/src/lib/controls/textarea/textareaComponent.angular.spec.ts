@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TextareaComponent } from './textarea.component';
 import {
   FormsModule, ReactiveFormsModule, ControlContainer,
-  FormControl, Validators
+  UntypedFormControl, Validators
 } from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -51,7 +51,7 @@ describe('TextareaComponent', () => {
   });
   describe('When initialized with invalid state', () => {
     beforeEach(() => {
-      component.control = new FormControl('', { validators: [Validators.required], updateOn: 'submit' });
+      component.control = new UntypedFormControl('', { validators: [Validators.required], updateOn: 'submit' });
       component.readonly = false;
       fixture.detectChanges();
     });

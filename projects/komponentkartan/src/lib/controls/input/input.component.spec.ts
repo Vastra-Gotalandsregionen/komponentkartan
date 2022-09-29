@@ -6,7 +6,7 @@ import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, FormControl, Validators } from '@angular/forms';
+import { FormsModule, UntypedFormControl, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { IconModule } from '../icon/icon.module';
 
@@ -79,7 +79,7 @@ describe('InputComponent', () => {
 
   describe('Error messages', () => {
     beforeEach(() => {
-      component.control = new FormControl('', { validators: [Validators.required]});
+      component.control = new UntypedFormControl('', { validators: [Validators.required]});
       component.errorMessage = 'error';
       component.showValidation = true;
 

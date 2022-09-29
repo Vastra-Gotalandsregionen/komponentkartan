@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormArray, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
@@ -445,25 +445,25 @@ export class EditableTableDocumentationComponent {
 
   exampleCodeMarkup;
 
-  myForm: FormGroup = new FormGroup({
-    myFormArray: new FormArray([]) as FormArray,
+  myForm: UntypedFormGroup = new UntypedFormGroup({
+    myFormArray: new UntypedFormArray([]) as UntypedFormArray,
 
   });
   myData: any;
-  constructor(private fb: FormBuilder, htmlEncoder: HtmlEncodeService) {
+  constructor(private fb: UntypedFormBuilder, htmlEncoder: HtmlEncodeService) {
     this.exampleCodeMarkup =
       htmlEncoder.prepareHighlightedSection(this.exampleCode, 'HTML');
 
-    this.myData = this.myForm.get('myFormArray') as FormArray;
+    this.myData = this.myForm.get('myFormArray') as UntypedFormArray;
     this.myData.clear;
     this.data2.forEach(data => {
       let date = new Date();
       date.setDate(new Date(+data.datum.substring(0,4), +data.datum.substring(5,7), +data.datum.substring(9,10)).getDate());
       const g =  this.fb.group({
-        datum: new FormControl(date),
-        text: new FormControl(data.text, [ Validators.maxLength(6) ]),
-        combobox: new FormControl('', [ Validators.required ]),
-        dropdown: new FormControl('', [ Validators.required ]),
+        datum: new UntypedFormControl(date),
+        text: new UntypedFormControl(data.text, [ Validators.maxLength(6) ]),
+        combobox: new UntypedFormControl('', [ Validators.required ]),
+        dropdown: new UntypedFormControl('', [ Validators.required ]),
       });
       this.myData.push(g)
     });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 import { RowNotification, NotificationType } from '../../../projects/komponentkartan/src/lib';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-title-value',
@@ -28,20 +28,20 @@ markupExampleCode;
     done: true,
     removeWhenDone: false
   };
-  form: FormGroup;
+  form: UntypedFormGroup;
   locked = false;
 
 
-  constructor(htmlEncoder: HtmlEncodeService, private fb: FormBuilder) {
+  constructor(htmlEncoder: HtmlEncodeService, private fb: UntypedFormBuilder) {
     this.markupExampleCode =
             htmlEncoder.prepareHighlightedSection(this.markupExample, 'HTML');
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      control1:  new FormControl('', [Validators.required]),
-      control2: new FormControl('', [Validators.required]),
-      control3: new FormControl('', [Validators.required])
+      control1:  new UntypedFormControl('', [Validators.required]),
+      control2: new UntypedFormControl('', [Validators.required]),
+      control3: new UntypedFormControl('', [Validators.required])
     }, { updateOn: 'blur' });
    }
 }

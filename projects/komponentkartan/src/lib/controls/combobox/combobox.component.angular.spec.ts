@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input, DebugElement, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { UntypedFormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { ComboboxComponent } from './combobox.component';
 import { ComboboxItemComponent } from './combobox-item.component';
@@ -24,7 +24,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 })
 export class TestComponent {
   @Input() items = [];
-  form = new FormControl();
+  form = new UntypedFormControl();
 }
 
 function pickRandom(values: any[]): any {
