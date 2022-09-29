@@ -7,7 +7,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start-develop": "ng serve --configuration=dev",
-    "build": "ng build --configuration production",
+    "build": "ng build --configuration production komponentkartan",
     "test": "npm run test-ci",
     "lint": "npx ng lint komponentkartan",
     "e2e": "ng e2e",
