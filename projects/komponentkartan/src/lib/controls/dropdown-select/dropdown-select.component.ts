@@ -78,8 +78,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     return this.showValidation && this.formControl && this.formControl.invalid && this.hasFocus;
   }
 
-  private ngUnsubscribe = new Subject();
-  private ngUnsubscribeItems = new Subject();
+  private ngUnsubscribe: any = new Subject();
+  private ngUnsubscribeItems: any = new Subject();
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {

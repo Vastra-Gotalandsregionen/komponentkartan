@@ -58,8 +58,8 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   private minZoomLevel: DatepickerZoomLevel;
   private actualMinDate: Date;
   private actualMaxDate: Date;
-  private ngUnsubscribe = new Subject();
-  private ngUnsubscribeItems = new Subject();
+  private ngUnsubscribe: any = new Subject();
+  private ngUnsubscribeItems: any = new Subject();
   elementId: string;
   mouseDown: any;
 

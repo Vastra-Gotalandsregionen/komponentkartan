@@ -71,14 +71,14 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
     return this.showValidation && this.formControl && this.formControl.invalid && this.hasFocus;
   }
 
-  private ngUnsubscribe = new Subject();
-  private ngUnsubscribeItems = new Subject();
+  private ngUnsubscribe: any = new Subject();
+  private ngUnsubscribeItems: any = new Subject();
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any) {
 
     const target = event.target || event.srcElement || event.currentTarget;
-    
+
     if ((this.elementRef.nativeElement && !this.elementRef.nativeElement.contains(target)) && this.expanded) {
       this.onChange(null);
       this.collapse(false);

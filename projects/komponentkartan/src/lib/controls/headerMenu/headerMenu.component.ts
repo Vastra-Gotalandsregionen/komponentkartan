@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 
 export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChanges {
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   @ContentChildren(MenuItemBaseDirective) menuItems: QueryList<MenuItemBaseDirective>;
   @Input() userName: string;

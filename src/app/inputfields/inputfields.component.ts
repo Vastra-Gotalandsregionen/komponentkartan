@@ -2,7 +2,7 @@
 import {map} from 'rxjs/operators';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
-import { CityService } from './cityService';
+import { CityService, ICityInformation } from './cityService';
 
 import { Subject } from 'rxjs';
 import { InputComponent } from '../../../projects/komponentkartan/src/lib';
@@ -20,7 +20,7 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   showErrors = true;
   ariaTest = {describedby: 'forandras'};
 
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
 
   ngModelValues = ['', 125, '', 22];
@@ -69,7 +69,7 @@ function validateAsyncCityName(): AsyncValidatorFn {
   const service = new CityService();
 
   return (control: AbstractControl) => {
-    return service.getAsyncCities().pipe(map(cities => {
+    return service.getAsyncCities().pipe(map((cities: ICityInformation[]) => {
       return cities.filter(x => x.city === control.value).length > 0 ? null : { 'invalidCity': { value: control.value } };
     }));
   };

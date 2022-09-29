@@ -45,7 +45,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
   @Output() selectedChanged: EventEmitter<RadiobuttonItemComponent> = new EventEmitter<RadiobuttonItemComponent>();
   @ContentChildren(RadiobuttonItemComponent) items: QueryList<RadiobuttonItemComponent>;
 
-  ngUnsubscribeItems = new Subject();
+  ngUnsubscribeItems: any = new Subject();
 
   internalDisabled: boolean;
   validationErrorMessage = 'Obligatoriskt';

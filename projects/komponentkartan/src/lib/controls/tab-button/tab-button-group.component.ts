@@ -21,7 +21,7 @@ export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
   lastSelectedIndex: number;
   activeTabId: string;
   previousActiveTabId: string = '';
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
   _navigationCancelled: boolean;
   get navigationCancelled() {
     return this._navigationCancelled;

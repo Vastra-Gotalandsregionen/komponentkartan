@@ -17,7 +17,7 @@ export class GridHeaderComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(GridHeaderColumnComponent) gridHeaderColumns: QueryList<GridHeaderColumnComponent>;
   @Output() sortChanged: EventEmitter<GridSortChangedArgs> = new EventEmitter<GridSortChangedArgs>();
   @Output() focusChanged: EventEmitter<number> = new EventEmitter<number>();
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   previousSortableColumn(startIndex: number): number {
     if (startIndex === -1) {

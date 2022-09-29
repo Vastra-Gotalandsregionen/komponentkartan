@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements AfterContentInit, OnDestroy {
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe: any = new Subject();
 
     @Input() title: string;
     @HostBinding('class.menu') hasClass = true;

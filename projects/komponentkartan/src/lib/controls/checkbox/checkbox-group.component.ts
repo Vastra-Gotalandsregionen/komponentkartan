@@ -31,7 +31,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   @Output() selectedChanged: EventEmitter<CheckboxComponent> = new EventEmitter<CheckboxComponent>();
   @ContentChildren(CheckboxComponent) items: QueryList<CheckboxComponent>;
 
-  ngUnsubscribeItems = new Subject();
+  ngUnsubscribeItems: any = new Subject();
 
   validationErrorMessage = 'Obligatoriskt';
   elementId: string;
@@ -51,8 +51,8 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
 
     // Subscribe on changes
     this.items.forEach(item => {
-      item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event) => {
-        const values = this.items.filter(item => item.checked).map(i => i.label);
+      item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event: any) => {
+        const values = this.items.filter((item: any) => item.checked).map(i => i.label);
         this.selectedChanged.emit(item);
         this.onChange( values);
 

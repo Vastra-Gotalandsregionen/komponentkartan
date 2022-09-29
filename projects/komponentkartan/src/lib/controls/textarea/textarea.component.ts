@@ -58,7 +58,7 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   elementId: string;
 
   validationErrorMessage = 'Obligatoriskt';
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private cdRef: ChangeDetectorRef, private el: ElementRef) {
     this.elementId = Math.random().toString();

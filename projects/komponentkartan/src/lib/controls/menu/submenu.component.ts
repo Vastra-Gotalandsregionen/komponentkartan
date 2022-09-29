@@ -30,7 +30,7 @@ import { takeUntil } from 'rxjs/operators';
 export class SubmenuComponent extends MenuItemBaseDirective implements AfterContentInit, OnInit, OnDestroy {
     @Input() text: string;
     private _showExpanded: boolean;
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe: any = new Subject();
     state: string;
 
     @HostBinding('attr.aria-haspopup') hasAriaPopup = 'menu';

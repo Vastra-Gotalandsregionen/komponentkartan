@@ -23,7 +23,7 @@ export class ModalPlaceholderComponent implements AfterViewChecked, AfterContent
   lastFocusedElement: any;
   firstTabStop: any;
   lastTabStop: any;
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   // A list of elements that can recieve focus
   focusableElementsString = '[tabindex]:not([tabindex="-1"]), a[href], area[href], input:not([disabled]):not([tabindex="-1"]):not([type="radio"]), select:not([disabled]), textarea:not([disabled]):not([aria-hidden]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
