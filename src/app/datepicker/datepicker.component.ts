@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { FormControl, UntypedFormControl, Validators } from '@angular/forms';
 import { DatepickerComponent as Datepicker } from '../../../projects/komponentkartan/src/lib';
 
 
@@ -14,7 +14,7 @@ export class DatepickerComponent {
 
   disabled = false;
   readonly = false;
-  form = new UntypedFormControl('', Validators.required);
+  form = new FormControl<string|Date>('', Validators.required);
 
 
   minDate = new Date(2017, 4, 10);
