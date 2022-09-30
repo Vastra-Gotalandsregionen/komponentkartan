@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, UntypedFormControl, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { DatepickerComponent as Datepicker } from '../../../projects/komponentkartan/src/lib';
 
 
