@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { ComboboxComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
@@ -11,8 +11,8 @@ export class ComboboxDocumentationComponent {
   items5: string[];
   items10: string[];
   items50: string[];
-  form: UntypedFormControl;
-  formControl: UntypedFormControl;
+  form: FormControl;
+  formControl: FormControl;
   formControlDisabled = false;
   itemLabel = 'Ett långt alternativ som skrivs ut i helhet';
   itemValue = 1;
@@ -231,8 +231,8 @@ export class ComboboxDocumentationComponent {
     this.items5 = this.getItems(5);
     this.items10 = this.getItems(10);
     this.items50 = this.getItems(50);
-    this.form = new UntypedFormControl(this.itemValue);
-    this.formControl = new UntypedFormControl('', Validators.required);
+    this.form = new FormControl(this.itemValue);
+    this.formControl = new FormControl('', Validators.required);
   }
 
   getItems(length: number): string[] {
