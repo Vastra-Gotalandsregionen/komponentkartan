@@ -1,4 +1,4 @@
-<!-- <vgr-modal id="modal2" (outsideClick)="closeModal('modal2')">
+<vgr-modal id="modal2" (outsideClick)="closeModal('modal2')">
   <vgr-modal-header>Här kan du trycka på knappar om du gillar det.</vgr-modal-header>
   <vgr-modal-content>
     Om du klickar utanför stängs modalen
@@ -9,7 +9,7 @@
     <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal2')">Knapp 1</vgr-button>
     <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal2')">Knapp 2</vgr-button>
   </vgr-modal-footer>
-</vgr-modal> -->
+</vgr-modal>
 
 <app-component-docs [componentName]="'Modal dialog'">
   <div class="docs__overview">
@@ -174,7 +174,7 @@
 
   </div>
 </app-component-docs>
-<!-- <vgr-modal id="modal1">
+<vgr-modal id="modal1">
   <vgr-modal-header>Välj i dropdown</vgr-modal-header>
   <vgr-modal-content>
     <p>Här kan du välja i en fin dropdownlista.</p>
@@ -325,7 +325,7 @@
     <vgr-button [buttonStyle]="'secondary'" [disabled]="enable_disable_button">Spara</vgr-button>
 
   </vgr-modal-footer>
-</vgr-modal> -->
+</vgr-modal>
 <vgr-modal id="myModalId">
   <vgr-modal-header>En header från app</vgr-modal-header>
   <vgr-modal-content>
@@ -343,7 +343,7 @@
     </vgr-button>
   </vgr-modal-footer>
 </vgr-modal>
-<!-- <vgr-modal id="modalWithCheckbox">
+<vgr-modal id="modalWithCheckbox">
   <vgr-modal-header>En modal med en checkbox</vgr-modal-header>
   <vgr-modal-content>
     <vgr-checkbox label="Check me!" [checked]="modalChecked" (checkedChanged)="modalChecked = !modalChecked" [disabled]="false"></vgr-checkbox>
@@ -352,10 +352,10 @@
     <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modalWithCheckbox')">Stäng
     </vgr-button>
   </vgr-modal-footer>
-</vgr-modal> -->
+</vgr-modal>
 <vgr-page>
   <vgr-page-body>
-    <!-- <vgr-modal id="modelInPageComponent"  (outsideClick)="closeModal('modelInPageComponent')">
+    <vgr-modal id="modelInPageComponent"  (outsideClick)="closeModal('modelInPageComponent')">
       <vgr-modal-header>En header från app</vgr-modal-header>
       <vgr-modal-content>
         <p>Om du klickar utanför stängs modalen</p>
@@ -363,6 +363,6 @@
       <vgr-modal-footer>
         <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modelInPageComponent')">Avbryt</vgr-button>
       </vgr-modal-footer>
-    </vgr-modal> -->
+    </vgr-modal>
   </vgr-page-body>
 </vgr-page>
