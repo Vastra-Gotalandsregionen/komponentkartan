@@ -82,8 +82,10 @@
                             <vgr-checkbox [label]=" 'Vald' "></vgr-checkbox>
                             <vgr-checkbox [label]=" 'Vald2' "></vgr-checkbox>
                         </vgr-checkbox-group>
-                        <vgr-button style="margin-top: 10px; display: block; width: 50px;" type="submit" (click)="submitCheckboxForm()">Submit</vgr-button>
-                        <vgr-button style="margin-top: 10px; display: block; width: 50px;" (click)="resetCheckboxForm()">Reset Form</vgr-button>
+                        <div style="display: flex;">
+                          <vgr-button style="margin-top: 10px; margin-right: 5px; width: 7%;" type="submit" (click)="submitCheckboxForm()">Submit</vgr-button>
+                          <vgr-button style="margin-top: 10px; margin-left: 5px; width: 7%;" (click)="resetCheckboxForm()">Reset Form</vgr-button>
+                        </div>
                     </form>
 
                     <label>Antal valda: {{checkboxForm.controls.checkboxValues.value.length}}</label>

@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CheckboxComponent as CheckboxComponentElement } from '../../../projects/komponentkartan/src/lib';
 import { TableComponent as TableComponentElement } from '../../../projects/komponentkartan/src/lib';
 
@@ -12,15 +12,15 @@ import { TableComponent as TableComponentElement } from '../../../projects/kompo
 export class CheckboxComponent implements OnInit {
   @ViewChild('myCheckbox', { read: CheckboxComponentElement }) myCheckbox: CheckboxComponentElement;
   @ViewChild('myTable', { read: TableComponentElement }) myTable: TableComponentElement;
-  form: UntypedFormGroup;
-  checkboxForm: UntypedFormGroup;
+  form: FormGroup;
+  checkboxForm: FormGroup;
   showValidFormText: boolean = false;
   formSubmittedCheckboxGroup: boolean;
   formSubmittedCheckbox: boolean;
   // checkbox = new FormControl('', Validators.required);
   klarmarkerad = false;
 
-  constructor(private fb: UntypedFormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createForm();
