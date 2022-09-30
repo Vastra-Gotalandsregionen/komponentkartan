@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ButtonComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
@@ -13,9 +13,9 @@ export class TextbuttonsComponent{
   buttonDisabled = true;
   buttonSecondaryDisabled = true;
   buttonDiscreetDisabled = true;
-  form: UntypedFormGroup;
+  form: FormGroup;
   loadingState = true;
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private fb: FormBuilder) {
     this.lastButtonPressed = '';
     this.form = fb.group({
       name: ['Namn']
