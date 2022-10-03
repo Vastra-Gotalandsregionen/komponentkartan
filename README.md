@@ -69,7 +69,7 @@ Testerna är uppdelade i två typer, tester med Angular och tester utan Angular.
 
 ## Byggt med
 
-* [Angular 12](https://angular.io/) - Web framework
+* [Angular 14](https://angular.io/) - Web framework
 * [Typescript](https://www.typescriptlang.org/) - Javascript that scales
 * [SASS](sass-lang.com) - SASS - Syntactically Awesome Style Sheets
 * [NPM](https://www.npmjs.com/) - Dependency Management

@@ -227,7 +227,13 @@
             background: white;
 
             &::before {
-              @extend .icon-checkbox-unchecked;
+              // @extend .icon-checkbox-unchecked;
+              display: inline-block;
+              width: 18px;
+              height: 18px;
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect x='10' y='10' width='160' height='160' stroke='%23151515' stroke-width='20' fill='none' /%3E%3C/svg%3E");
+              background-repeat: no-repeat;
+              background-position: center;
               content: "";
               vertical-align: middle;
               margin-right: 15px;
@@ -235,7 +241,13 @@
 
             &.select-all--selected {
               &::before {
-                @extend .icon-checkbox-checked;
+                // @extend .icon-checkbox-checked;
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect x='0' y='0' width='180' height='180' stroke='none' fill='%23151515' /%3E%3Cpolyline points='40 85, 75 120, 139 56' stroke='white' stroke-width='20' fill='none' /%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: center;
               }
             }
 
@@ -327,7 +339,13 @@
               .dropdown-select__menu__items__item__content-wrapper {
                 .dropdown-select__menu__items__item__content-wrapper__checkbox {
                   &::before {
-                    @extend .icon-checkbox-unchecked;
+                    // @extend .icon-checkbox-unchecked;
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect x='10' y='10' width='160' height='160' stroke='%23151515' stroke-width='20' fill='none' /%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: center;
                     content: "";
                     vertical-align: middle;
                     margin-right: 15px;
@@ -346,7 +364,13 @@
               .dropdown-select__menu__items__item__content-wrapper {
                 .dropdown-select__menu__items__item__content-wrapper__checkbox {
                   &::before {
-                    @extend .icon-checkbox-checked;
+                    // @extend .icon-checkbox-checked;
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect x='0' y='0' width='180' height='180' stroke='none' fill='%23151515' /%3E%3Cpolyline points='40 85, 75 120, 139 56' stroke='white' stroke-width='20' fill='none' /%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: center;
                   }
                 }
               }
