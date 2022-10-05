@@ -42,4 +42,8 @@ export class TextbuttonsComponent{
   setFocusOnSubmit() {
     this.submitButton.focus();
   }
+
+  testarLogg() {
+    console.log('KLICKAD PÅ!')
+  }
 }

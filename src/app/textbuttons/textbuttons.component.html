@@ -63,9 +63,9 @@
 
       <h2>Knappar med loadingState = true</h2>
       <div>
-        <vgr-button [buttonStyle]="'primary'" [loadingState]="loadingState">OK</vgr-button>
-        <vgr-button [buttonStyle]="'secondary'" [disabled]="buttonDiscreetDisabled" [loadingState]="loadingState">Text</vgr-button>
-        <vgr-button [buttonStyle]="'discreet'" [loadingState]="loadingState">Text</vgr-button>
+        <vgr-button [buttonStyle]="'primary'" [loadingState]="loadingState" (click)="testarLogg()">OK</vgr-button>
+        <vgr-button [buttonStyle]="'secondary'" [disabled]="buttonDiscreetDisabled" [loadingState]="loadingState" (click)="testarLogg()">Text</vgr-button>
+        <vgr-button [buttonStyle]="'discreet'" [loadingState]="loadingState" (click)="testarLogg()">Text</vgr-button>
       </div>
 
       <div style="margin-top: 20px;">

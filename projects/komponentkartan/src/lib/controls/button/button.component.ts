@@ -24,7 +24,7 @@ export class ButtonComponent implements OnChanges {
   }
 
   checkDisabled(event: Event) {
-    if (this.disabled) {
+    if (this.disabled || this.loadingState) {
       event.stopPropagation();
       event.preventDefault();
     }
