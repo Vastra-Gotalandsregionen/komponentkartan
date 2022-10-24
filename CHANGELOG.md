@@ -6,9 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 # 10.0.0-beta1 (2022-10-10)
 - Updated application to Angular 14
-- Fixed to bugs on vgr-button: 
+- Fixed two bugs on vgr-button: 
 - #1 Removed padding-left 20px and instead added margin-left 20px (otherwise you could click outside button and still activate click-event) 
 - #2 Added disableState when loadingState is active.
+- Fixed WCAG bug on menu-item
+- #1 Added check for when modal is open it should not focus
 # 9.1.3 (2022-08-25) Stable
  - implemented possibility to prevent pagechange in pagination (#544)
  - implmented possibility to make dropdown align to left or right and up or down (#444)

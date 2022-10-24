@@ -35,7 +35,9 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
                 this.isInternalLink ? this.router.navigate([this.link]) : this.onExternalLink();
               setTimeout(() => {
                 const id = document.getElementById('page-content-focus');
-                if (id) {
+                const modalIsOpen = document.getElementsByClassName('vgr-modal--open');
+
+                if (id && modalIsOpen.length === 0) {
                   this.renderer.selectRootElement('#page-content-focus', true).focus();
                 }
               }, 100);
