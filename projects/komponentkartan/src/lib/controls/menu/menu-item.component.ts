@@ -22,17 +22,17 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
     @ViewChild('menuitem') menuitem: ElementRef;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
-
+        console.log('keydowb in menu-item: ', event.key)
         if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+            console.log('pressed key: ', event.key)
             if (this.disabled) {
 
                 event.stopPropagation();
                 event.preventDefault();
                 return;
-            }
-
-            if (this.link) {
+            } else if (this.link) {
                 this.isInternalLink ? this.router.navigate([this.link]) : this.onExternalLink();
+                this.enter.emit();
               setTimeout(() => {
                 const id = document.getElementById('page-content-focus');
                 const modalIsOpen = document.getElementsByClassName('vgr-modal--open');
@@ -42,10 +42,14 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
                 }
               }, 100);
             } else if (this.action) {
+                console.log('this has an action and no link')
+                this.enter.emit();
                 this.onAction(event);
+
             }
 
         }
+        console.log('pressed no enter or space')
         if (event.key === 'Home') {
             this.home.emit();
         }
@@ -66,6 +70,7 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
         }
 
         if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc'].indexOf(event.key) > -1) {
+            console.log('stop propogration')
             event.stopPropagation();
             event.preventDefault();
         }

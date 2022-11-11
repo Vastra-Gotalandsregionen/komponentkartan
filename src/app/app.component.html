@@ -54,6 +54,9 @@
   </vgr-sidebar-menu>
   <vgr-header [systemText]="systemText">
     <vgr-header-menu [userName]="userName" textColor="black" circleColor="#f9dede">
+      <vgr-menu-item link="https://www.google.com" text="Extern länk" [isInternalLink]="false"></vgr-menu-item>
+      <vgr-menu-item text="menyval (does nothing)"></vgr-menu-item>
+      <vgr-menu-item link="/sizes" text="menyval Sizes"></vgr-menu-item>
       <vgr-submenu text="Tema">
         <vgr-menu-item text="Neutral" (action)="changeTheme('neutral')"></vgr-menu-item>
         <vgr-menu-item text="Blått" (action)="changeTheme('blue')"></vgr-menu-item>
