@@ -102,6 +102,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
             this.state = 'expanded';
         } else {
             this.state = 'collapsed';
+            this.expanded = false;
         }
     }
 

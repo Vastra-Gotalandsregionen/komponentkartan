@@ -20,13 +20,11 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
     @HostBinding('attr.role') role = 'menuitem';
     @HostBinding('attr.aria-disabled') ariaDisabled;
     @ViewChild('menuitem') menuitem: ElementRef;
+    elementId: string;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
-        console.log('keydowb in menu-item: ', event.key)
         if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-            console.log('pressed key: ', event.key)
             if (this.disabled) {
-
                 event.stopPropagation();
                 event.preventDefault();
                 return;
@@ -42,7 +40,6 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
                 }
               }, 100);
             } else if (this.action) {
-                console.log('this has an action and no link')
                 this.enter.emit();
                 this.onAction(event);
 
@@ -70,7 +67,6 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
         }
 
         if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc'].indexOf(event.key) > -1) {
-            console.log('stop propogration')
             event.stopPropagation();
             event.preventDefault();
         }
@@ -86,8 +82,17 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
     }
 
     constructor(private router: Router, private renderer: Renderer2) {
-        super();
+      super();
+        this.elementId = `menu-item_${this.generateGuid()}`;
     }
+
+    generateGuid() : string {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0,
+            v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
 
     setFocus(movingUp: boolean = false) {
         this.menuitem.nativeElement.focus();

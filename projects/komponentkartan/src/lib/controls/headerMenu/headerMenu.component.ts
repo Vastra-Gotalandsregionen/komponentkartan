@@ -25,17 +25,6 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
   constructor(private elementRef: ElementRef) {
   }
 
-  // @HostListener('document:click', ['$event'])
-  // onDocumentClick(event: any) {
-
-  //   const target = event.target || event.srcElement || event.currentTarget;
-
-  //   if ((this.elementRef.nativeElement && !this.elementRef.nativeElement.contains(target)) && this.expanded) {
-  //     this.onChange(null);
-  //     this.collapse(false);
-  //   }
-  // }
-
   ngAfterContentInit() {
     const menuItemArray = this.menuItems.toArray();
 
@@ -79,19 +68,18 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(() => {
           this.elementRef.nativeElement.querySelector('.header__login-info-menu').focus();
-          this.hideMenu = true;
+          this.hideMenuAction();
         });
 
       menuItem.tab
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(() => {
-          this.hideMenu = true;
+          this.hideMenuAction();
         });
 
       menuItem.enter
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        console.log('hello')
         this.closeMenuOnClick(event, this.menuItems.map(x => x as MenuItemComponent))
       });
 
@@ -108,33 +96,27 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
   }
 
   closeMenuOnClick(event, menuItems: MenuItemComponent[]) {
-    console.log(event)
     if (!( event instanceof KeyboardEvent) && ( event.key === 'Spacebar' || event.key === 'Enter')) {
       return
     }
 
-    const focusedNode = event.target as HTMLElement;
-        menuItems.forEach((menuitem) => {
-          if (menuitem instanceof SubmenuComponent) {
-            let subMenuItem : SubmenuComponent = menuitem;
-            let menuClicked = subMenuItem.menuItems.filter((x) => x.text === focusedNode.innerText)[0];
-            if (menuClicked) {
-              this.hideMenu = true;
-            }
-          } else if (menuitem.text === focusedNode.innerText) {
-              if (!(menuitem instanceof SubmenuComponent)) {
-                this.hideMenu = true;
-              } else {
-                this.hideMenu = false;
-              }
-            }
-        })
-
-
-
-
-
-  }
+    const focusedId = event.composedPath().filter((x: HTMLElement) => x.id && x.id.startsWith('menu-item'))[0]?.id;
+    menuItems.forEach((menuitem) => {
+      if (menuitem instanceof SubmenuComponent) {
+        let subMenuItem : SubmenuComponent = menuitem;
+        let menuClicked = subMenuItem.menuItems.filter((x) => x.elementId === focusedId)[0];
+        if (menuClicked) {
+          this.hideMenuAction();
+        }
+      } else if (menuitem.elementId === focusedId) {
+          if (!(menuitem instanceof SubmenuComponent)) {
+            this.hideMenuAction();
+          } else {
+            this.hideMenu = false;
+          }
+        }
+    })
+   }
 
   keyToggleHeaderMenu(event: KeyboardEvent) {
 
@@ -148,7 +130,7 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
       event.preventDefault();
       this.focusFirstMenuItem();
     } else if (event.key === 'Escape') {
-      this.hideMenu = true;
+      this.hideMenuAction();
     }
   }
 
@@ -163,25 +145,32 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
     this.menuItems.first.setFocus();
   }
 
+
+
  @HostListener('document:mousedown', ['$event'])
   onDocumentClick(event: any) {
 
     if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.hideMenu = true;
+      this.hideMenuAction();
     }
   }
 
   @HostListener('document:keydown', ['$event'])
   onDocumentKeyPressed(event: any) {
-    console.log('header-menu: ', event)
     if (event.key === 'Spacebar' || event.key === 'Enter') {
-      console.log('key pressed on ', event)
       if (!this.elementRef.nativeElement.contains(event.target)) {
-        this.hideMenu = true;
+        this.hideMenuAction();
       }
     }
   }
 
+  hideMenuAction() {
+    this.hideMenu = true;
+    const submenus = this.menuItems.filter(menuItem => menuItem instanceof SubmenuComponent);
+    submenus.forEach((submenu: SubmenuComponent) => {
+      submenu.expandedState = false;
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const initialsChange = changes['initials'];
