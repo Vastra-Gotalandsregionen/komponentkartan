@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, OnInit, AfterViewInit, Renderer2 } from '@angular/core';
 import { trigger, style, animate, transition, state, AnimationEvent } from '@angular/animations';
+import { Guid } from '../../utils/guid';
 
 @Component({
   templateUrl: './action-panel.component.html',
@@ -30,7 +31,7 @@ import { trigger, style, animate, transition, state, AnimationEvent } from '@ang
     ])
   ]
 })
-export class ActionPanelComponent implements OnChanges, OnInit {
+export class ActionPanelComponent implements OnChanges, OnInit, AfterViewInit {
 
   @Input() title: string;
   @Input() open = false;
@@ -45,6 +46,11 @@ export class ActionPanelComponent implements OnChanges, OnInit {
   fadeState = this.fadeStateVisible;
   isOpened: boolean;
   isClosed: boolean;
+  elementId: string;
+
+  constructor(private renderer: Renderer2) {
+    this.elementId = `action-panel-container${Guid.newGuid()}`;
+  }
 
   ngOnInit() {
     this.isOpened = this.open;
@@ -57,6 +63,7 @@ export class ActionPanelComponent implements OnChanges, OnInit {
       if (openChange.currentValue) {
         this.slideState = this.slideStateOpen;
         this.openChanged.emit(true);
+        this.focus();
       } else {
         this.slideState = this.slideStateClosed;
         this.openChanged.emit(false);
@@ -71,6 +78,10 @@ export class ActionPanelComponent implements OnChanges, OnInit {
         this.fadeState = this.fadeStateHidden;
       }
     }
+  }
+
+  ngAfterViewInit(): void {
+      this.focus();
   }
 
   close() {
@@ -95,5 +106,15 @@ export class ActionPanelComponent implements OnChanges, OnInit {
     if (event.fromState === this.slideStateOpen) {
       this.isClosed = true;
     }
+  }
+
+  public focus() {
+    setTimeout(() => {
+      const id = document.getElementById(this.elementId);
+
+      if (id) {
+        this.renderer.selectRootElement('#' + this.elementId, true).focus();
+      }
+    }, 100);
   }
 }
