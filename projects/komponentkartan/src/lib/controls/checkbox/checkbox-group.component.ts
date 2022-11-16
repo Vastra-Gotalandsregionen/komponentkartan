@@ -2,6 +2,7 @@ import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter,
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Guid } from '../../utils/guid';
 import { CheckboxComponent } from './checkbox.component';
 
 @Component({
@@ -41,7 +42,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   public control: AbstractControl;
 
   constructor(@Host() @SkipSelf() @Optional() private controlContainer: ControlContainer, private elementRef: ElementRef) {
-    this.elementId = Math.random().toString();
+    this.elementId = Guid.newGuid();
   }
 
   ngAfterContentInit(): void {

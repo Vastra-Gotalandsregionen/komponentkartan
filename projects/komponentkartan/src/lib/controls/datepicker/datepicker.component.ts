@@ -95,7 +95,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() public formControl: NgControl) {
-    this.elementId = Math.random().toString();
+    this.elementId = Guid.newGuid();
     this.setMinZoomLevel();
 
     if (this.formControl != null) {

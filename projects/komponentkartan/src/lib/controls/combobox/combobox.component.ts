@@ -86,7 +86,7 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   constructor(@Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
-    this.elementId = Math.random().toString();
+    this.elementId = Guid.newGuid();
     if (this.formControl != null) {
       this.formControl.valueAccessor = this;
     }
