@@ -45,7 +45,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     _disabled: boolean = false;
 
     constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef) {
-        this.elementId = Math.random().toString();
+        this.elementId = Guid.newGuid();
     }
 
     ngOnChanges(changes: SimpleChanges) {

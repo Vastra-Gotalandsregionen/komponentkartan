@@ -1,5 +1,6 @@
 import { Input, Component, HostListener, ElementRef, forwardRef, HostBinding, AfterViewInit, ViewChild, Renderer2, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Guid } from '../../utils/guid';
 import { MenuItemBaseDirective } from './menu-item-base';
 
 @Component({
@@ -83,16 +84,8 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
 
     constructor(private router: Router, private renderer: Renderer2) {
       super();
-        this.elementId = `menu-item_${this.generateGuid()}`;
+        this.elementId = `menu-item_${Guid.newGuid()}`;
     }
-
-    generateGuid() : string {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = Math.random() * 16 | 0,
-            v = c == 'x' ? r : (r & 0x3 | 0x8);
-          return v.toString(16);
-        });
-      }
 
     setFocus(movingUp: boolean = false) {
         this.menuitem.nativeElement.focus();
