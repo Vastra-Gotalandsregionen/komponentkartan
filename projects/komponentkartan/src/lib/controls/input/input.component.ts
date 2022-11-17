@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit, HostListener } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContainer } from '@angular/forms';
+import { Guid } from '../../utils/guid';
 
 @Component({
   selector: 'vgr-input',
@@ -51,7 +52,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   mouseDown: boolean;
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) {
-    this.elementId = Math.random().toString();
+    this.elementId = Guid.newGuid();
 
   }
 

@@ -3,6 +3,7 @@ import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCES
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { __values } from 'tslib';
+import { Guid } from '../../utils/guid';
 import { RadiobuttonItemComponent } from './radiobutton-item.component';
 
 @Component({
@@ -53,7 +54,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
 
   public control: AbstractControl;
   constructor(@Host() @SkipSelf() @Optional() private controlContainer: ControlContainer, private elementRef: ElementRef) {
-    this.elementId = Math.random().toString();
+    this.elementId = Guid.newGuid();
   }
 
 

@@ -1,4 +1,4 @@
-<div #actionPanel class="action-panel" [@slide]="slideState" (@slide.start)="onSlideStart($event)" (@slide.done)="onSlideEnd($event)" [ngClass]="{ 'action-panel--open': isOpened }" [ngStyle]="{'visibility': isClosed ? 'hidden' : 'visible'}">
+<div #actionPanel class="action-panel" [id]="elementId" tabindex="0" [@slide]="slideState" (@slide.start)="onSlideStart($event)" (@slide.done)="onSlideEnd($event)" [ngClass]="{ 'action-panel--open': isOpened }" [ngStyle]="{'visibility': isClosed ? 'hidden' : 'visible'}">
   <div class="action-panel__header">
     <h3 class="action-panel__title">{{title}}</h3>
     <vgr-close-button class="action-panel__close-button" [@fade]="fadeState" (click)="close()" *ngIf="showCloseButton"></vgr-close-button>
