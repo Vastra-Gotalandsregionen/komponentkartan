@@ -1,4 +1,4 @@
-import { SimpleChanges, SimpleChange } from '@angular/core';
+import { SimpleChanges, SimpleChange, Renderer2 } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
 
 import { ActionPanelComponent } from './action-panel.component';
@@ -6,7 +6,7 @@ import { ActionPanelComponent } from './action-panel.component';
 describe('[ActionPanelComponent]', () => {
   let component: ActionPanelComponent;
   beforeEach(() => {
-    component = new ActionPanelComponent();
+    component = new ActionPanelComponent(null);
   });
   describe('Instatiate', () => {
     it('title is correct', () => {
