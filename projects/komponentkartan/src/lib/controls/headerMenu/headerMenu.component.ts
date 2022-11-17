@@ -95,7 +95,7 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
     this.toggleHeaderMenu(event);
   }
 
-  closeMenuOnClick(event, menuItems: MenuItemComponent[]) {
+  closeMenuOnClick(event, menuItems: any) {
     if (!( event instanceof KeyboardEvent) && ( event.key === 'Spacebar' || event.key === 'Enter')) {
       return
     }
