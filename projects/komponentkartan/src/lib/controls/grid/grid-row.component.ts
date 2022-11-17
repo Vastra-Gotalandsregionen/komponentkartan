@@ -31,7 +31,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   notificationColor = 'default';
   overflow: boolean;
 
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
   constructor(private gridService: GridService, public el: ElementRef) { }
 
   get expandedState() {

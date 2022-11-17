@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TextareaComponent } from './textarea.component';
-import {
-  FormsModule, ReactiveFormsModule, ControlContainer,
-  FormControl, Validators
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, ControlContainer, Validators, FormControl } from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
@@ -18,7 +15,9 @@ describe('TextareaComponent', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    teardown: { destroyAfterEach: false }
+});
     TestBed.configureTestingModule({
       declarations: [TextareaComponent, IconComponent],
       imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, IconModule],

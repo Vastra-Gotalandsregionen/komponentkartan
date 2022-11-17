@@ -3,8 +3,6 @@ import { HtmlEncodeService } from '../html-encode.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalService } from '../../../projects/komponentkartan/src/lib';
 
-declare var tinymce: any;
-
 @Component({
   selector: 'app-modaldialog',
   templateUrl: './modaldialog.component.html',

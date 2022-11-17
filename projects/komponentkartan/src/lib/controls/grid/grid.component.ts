@@ -37,7 +37,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   hasToolbar = false;
   private animationSpeed: string;
   private headerHeight = 79; // vgr-header height (same value as $header-height _setting.sizes.scss)
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   @HostListener('keydown', ['$event']) keydown(event: any) {
     if (event.target.classList.contains('grid-header')) {

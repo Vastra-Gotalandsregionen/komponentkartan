@@ -17,7 +17,9 @@ describe('ModalPlaceholderComponent', () => {
     beforeEach((done) => {
         modalService = new ModalService();
         TestBed.resetTestEnvironment();
-        TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+        TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    teardown: { destroyAfterEach: false }
+});
         TestBed.configureTestingModule({
             declarations: [ModalPlaceholderComponent, ButtonComponent],
             imports: [CommonModule, FormsModule],

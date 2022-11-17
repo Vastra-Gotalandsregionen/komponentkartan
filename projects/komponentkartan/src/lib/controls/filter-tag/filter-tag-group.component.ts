@@ -13,7 +13,7 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(FilterTagComponent) filterTags: QueryList<FilterTagComponent>;
   filterTagSubscriptions = [];
   lastSelectedIndex: number;
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   ngAfterContentInit() {
     this.setFilterTagTabFocusability();

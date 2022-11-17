@@ -30,7 +30,7 @@ import { takeUntil } from 'rxjs/operators';
 export class SubmenuComponent extends MenuItemBaseDirective implements AfterContentInit, OnInit, OnDestroy {
     @Input() text: string;
     private _showExpanded: boolean;
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe: any = new Subject();
     state: string;
 
     @HostBinding('attr.aria-haspopup') hasAriaPopup = 'menu';
@@ -80,6 +80,9 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         if (event.key === 'Escape' || event.key === 'Esc') {
             this.escape.emit();
         }
+        if (event.key === 'Enter') {
+            this.enter.emit();
+        }
         if ([' ', 'Spacebar', 'Enter', 'Home', 'End', 'ArrowDown', 'Down', 'ArrowUp', 'Up', 'Escape', 'Esc'].indexOf(event.key) > -1) {
             event.stopPropagation();
             event.preventDefault();
@@ -99,6 +102,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
             this.state = 'expanded';
         } else {
             this.state = 'collapsed';
+            this.expanded = false;
         }
     }
 
@@ -191,6 +195,11 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
                 .subscribe((event) => {
                     this.tab.emit(event);
                 });
+            x.enter
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((event) => {
+                this.enter.emit(event);
+            });
         });
     }
 

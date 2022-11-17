@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NotificationType, SelectableItem, RadioGroupComponent, RadiobuttonGroupComponent } from 'vgr-komponentkartan';
+import { FormControl, FormGroup } from '@angular/forms';
+import { NotificationType, SelectableItem, RadioGroupComponent, RadiobuttonGroupComponent } from '../../../projects/komponentkartan/src/lib';
 @Component({
   selector: 'app-radiobuttons',
   templateUrl: './radiobuttons.component.html',

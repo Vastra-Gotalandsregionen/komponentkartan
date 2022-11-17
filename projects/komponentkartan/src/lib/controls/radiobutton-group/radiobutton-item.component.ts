@@ -1,4 +1,5 @@
 import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Guid } from '../../utils/guid';
 
 @Component({
   selector: 'vgr-radiobutton-item',
@@ -36,7 +37,7 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   isTabEnabled: boolean;
 
   constructor(private elementRef: ElementRef) {
-    this.elementId = Math.random().toString();
+    this.elementId = Guid.newGuid();
 
 
   }

@@ -17,7 +17,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
     this.inEditmode = value;
     this.editableTableService.changeEditmode(value, this.id);
   }
-  
+
   @Input() height = '';
 
 
@@ -32,7 +32,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
   @HostBinding('class.editable-table') editableTableClass = true;
   @HostBinding('attr.id') id: string;
   @HostListener('focusout', ['$event']) onFocus(event) {
-    
+
     if (!this.elRef.nativeElement.contains(event.relatedTarget)) {
       if (this.tableRows.length > 0) {
         this.resetTabIndexOnColumn();
@@ -80,9 +80,9 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
             } else {
              event.preventDefault();
              firstFocusable.focus();
-  
+
               //not working...
-              firstFocusable.dispatchEvent(new KeyboardEvent('keydown', {'key':'Tab', 'shiftKey': event.shiftKey}));            
+              firstFocusable.dispatchEvent(new KeyboardEvent('keydown', {'key':'Tab', 'shiftKey': event.shiftKey}));
             }
           }
         } else {
@@ -94,9 +94,9 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
             } else {
              event.preventDefault();
              lastFocusable.focus();
-  
+
               //not working...
-             lastFocusable.dispatchEvent(new KeyboardEvent('keydown', {'key':'Tab'}));            
+             lastFocusable.dispatchEvent(new KeyboardEvent('keydown', {'key':'Tab'}));
             }
           }
         }
@@ -127,7 +127,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
       case 'ArrowUp':
       case 'Up':
         // Only move up and down if we are in table
-      
+
 
         event.preventDefault();
         this.resetTabIndexOnColumn();
@@ -210,7 +210,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
     this.id = `${uniqeId}`;
   }
 
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
   ngAfterViewInit() {
     setTimeout(() => this.setColumnWidths(), 100);
 
@@ -260,7 +260,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
 
     if (this.tableRows.length > 0) {
      setTimeout(() => {
-      this.tableRows.get(0).columns.get(0).tabIndex = 0; 
+      this.tableRows.get(0).columns.get(0).tabIndex = 0;
       this.tableRows.get(0).editMode = this.inEditmode;
      });
     }
@@ -269,7 +269,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
     this.currentRow = 0;
 
     setTimeout(() => {
-      this.setAlignment();  
+      this.setAlignment();
     });
   }
 

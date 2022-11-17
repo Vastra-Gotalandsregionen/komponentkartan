@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CheckboxComponent as CheckboxComponentElement } from '../../../projects/komponentkartan/src/lib';
 import { TableComponent as TableComponentElement } from '../../../projects/komponentkartan/src/lib';
 

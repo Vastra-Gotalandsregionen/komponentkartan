@@ -21,7 +21,7 @@ export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, On
   previousPage = new EventEmitter();
 
   private _activePage: number;
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   previousActivePage: number;
 

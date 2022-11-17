@@ -2,6 +2,7 @@ import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter,
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Guid } from '../../utils/guid';
 import { CheckboxComponent } from './checkbox.component';
 
 @Component({
@@ -31,7 +32,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   @Output() selectedChanged: EventEmitter<CheckboxComponent> = new EventEmitter<CheckboxComponent>();
   @ContentChildren(CheckboxComponent) items: QueryList<CheckboxComponent>;
 
-  ngUnsubscribeItems = new Subject();
+  ngUnsubscribeItems: any = new Subject();
 
   validationErrorMessage = 'Obligatoriskt';
   elementId: string;
@@ -41,7 +42,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   public control: AbstractControl;
 
   constructor(@Host() @SkipSelf() @Optional() private controlContainer: ControlContainer, private elementRef: ElementRef) {
-    this.elementId = Math.random().toString();
+    this.elementId = Guid.newGuid();
   }
 
   ngAfterContentInit(): void {
@@ -51,8 +52,8 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
 
     // Subscribe on changes
     this.items.forEach(item => {
-      item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event) => {
-        const values = this.items.filter(item => item.checked).map(i => i.label);
+      item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event: any) => {
+        const values = this.items.filter((item: any) => item.checked).map(i => i.label);
         this.selectedChanged.emit(item);
         this.onChange( values);
 

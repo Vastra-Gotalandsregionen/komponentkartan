@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ButtonComponent } from '../../../projects/komponentkartan/src/lib';
 
@@ -41,5 +41,9 @@ export class TextbuttonsComponent{
 
   setFocusOnSubmit() {
     this.submitButton.focus();
+  }
+
+  testarLogg() {
+    console.log('KLICKAD PÅ!')
   }
 }

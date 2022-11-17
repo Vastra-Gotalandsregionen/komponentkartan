@@ -58,8 +58,8 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   private minZoomLevel: DatepickerZoomLevel;
   private actualMinDate: Date;
   private actualMaxDate: Date;
-  private ngUnsubscribe = new Subject();
-  private ngUnsubscribeItems = new Subject();
+  private ngUnsubscribe: any = new Subject();
+  private ngUnsubscribeItems: any = new Subject();
   elementId: string;
   mouseDown: any;
 
@@ -95,7 +95,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() public formControl: NgControl) {
-    this.elementId = Math.random().toString();
+    this.elementId = Guid.newGuid();
     this.setMinZoomLevel();
 
     if (this.formControl != null) {

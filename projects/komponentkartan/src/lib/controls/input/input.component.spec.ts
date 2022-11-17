@@ -6,7 +6,7 @@ import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { IconModule } from '../icon/icon.module';
 

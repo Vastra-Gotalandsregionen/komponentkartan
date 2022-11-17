@@ -1,8 +1,9 @@
-import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, SimpleChanges, OnChanges, AfterContentInit, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, SimpleChanges, OnChanges, AfterContentInit, OnDestroy, Renderer2, ViewChild, ContentChild } from '@angular/core';
 import { MenuItemBaseDirective } from '../menu/menu-item-base';
 import { SubmenuComponent } from '../menu/submenu.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MenuItemComponent } from '../menu/menu-item.component';
 
 @Component({
   selector: 'vgr-header-menu',
@@ -11,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 
 export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChanges {
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   @ContentChildren(MenuItemBaseDirective) menuItems: QueryList<MenuItemBaseDirective>;
   @Input() userName: string;
@@ -67,14 +68,21 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(() => {
           this.elementRef.nativeElement.querySelector('.header__login-info-menu').focus();
-          this.hideMenu = true;
+          this.hideMenuAction();
         });
 
       menuItem.tab
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(() => {
-          this.hideMenu = true;
+          this.hideMenuAction();
         });
+
+      menuItem.enter
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.closeMenuOnClick(event, this.menuItems.map(x => x as MenuItemComponent))
+      });
+
     });
   }
 
@@ -87,7 +95,31 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
     this.toggleHeaderMenu(event);
   }
 
+  closeMenuOnClick(event, menuItems: any) {
+    if (!( event instanceof KeyboardEvent) && ( event.key === 'Spacebar' || event.key === 'Enter')) {
+      return
+    }
+
+    const focusedId = event.composedPath().filter((x: HTMLElement) => x.id && x.id.startsWith('menu-item'))[0]?.id;
+    menuItems.forEach((menuitem) => {
+      if (menuitem instanceof SubmenuComponent) {
+        let subMenuItem : SubmenuComponent = menuitem;
+        let menuClicked = subMenuItem.menuItems.filter((x) => x.elementId === focusedId)[0];
+        if (menuClicked) {
+          this.hideMenuAction();
+        }
+      } else if (menuitem.elementId === focusedId) {
+          if (!(menuitem instanceof SubmenuComponent)) {
+            this.hideMenuAction();
+          } else {
+            this.hideMenu = false;
+          }
+        }
+    })
+   }
+
   keyToggleHeaderMenu(event: KeyboardEvent) {
+
     if (this.menuItems.length > 0 && event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
       event.preventDefault();
       this.toggleHeaderMenu(event);
@@ -98,7 +130,7 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
       event.preventDefault();
       this.focusFirstMenuItem();
     } else if (event.key === 'Escape') {
-      this.hideMenu = true;
+      this.hideMenuAction();
     }
   }
 
@@ -113,11 +145,31 @@ export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChang
     this.menuItems.first.setFocus();
   }
 
+
+
  @HostListener('document:mousedown', ['$event'])
   onDocumentClick(event: any) {
+
     if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.hideMenu = true;
+      this.hideMenuAction();
     }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeyPressed(event: any) {
+    if (event.key === 'Spacebar' || event.key === 'Enter') {
+      if (!this.elementRef.nativeElement.contains(event.target)) {
+        this.hideMenuAction();
+      }
+    }
+  }
+
+  hideMenuAction() {
+    this.hideMenu = true;
+    const submenus = this.menuItems.filter(menuItem => menuItem instanceof SubmenuComponent);
+    submenus.forEach((submenu: SubmenuComponent) => {
+      submenu.expandedState = false;
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {

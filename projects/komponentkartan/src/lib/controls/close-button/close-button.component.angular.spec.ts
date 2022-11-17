@@ -18,7 +18,9 @@ describe('[CloseButtonComponent - Angular]', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    teardown: { destroyAfterEach: false }
+});
     TestBed.configureTestingModule({
       declarations: [CloseButtonComponent, IconComponent],
       imports: [CommonModule, FormsModule, FontAwesomeModule, IconModule]

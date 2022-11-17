@@ -3,10 +3,10 @@
   <vgr-login-information [initials]="internalInitials" [userName]="userName" [textColor]="textColor" (mousedown)="clickToggleHeaderMenu($event)"
     [circleColor]="circleColor" [attr.aria-haspopup]="menuItems.length > 0" role="menu">
   </vgr-login-information>
-  <vgr-icon icon="chevron-down" size="xs" class="caret" *ngIf="menuItems.length > 0" 
+  <vgr-icon icon="chevron-down" size="xs" class="caret" *ngIf="menuItems.length > 0"
     class="header__login-info-menu-arrow" [ngClass]="{'expanded' : !hideMenu}"></vgr-icon>
   <div class="header-menu header-menu__content" [ngClass]="{'header-menu--hidden' : hideMenu}" *ngIf="menuItems.length > 0">
-    <div role="menu">
+    <div role="menu" (click)="closeMenuOnClick($event, menuItems)" (keydown)="closeMenuOnClick($event, menuItems)">
       <ng-content></ng-content>
     </div>
   </div>

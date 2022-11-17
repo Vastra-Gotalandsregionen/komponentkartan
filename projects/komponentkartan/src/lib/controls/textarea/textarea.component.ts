@@ -17,6 +17,7 @@ import {
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Guid } from '../../utils/guid';
 @Component({
   selector: 'vgr-textarea',
   templateUrl: './textarea.component.html',
@@ -58,10 +59,10 @@ export class TextareaComponent implements AfterViewInit, OnChanges, ControlValue
   elementId: string;
 
   validationErrorMessage = 'Obligatoriskt';
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private cdRef: ChangeDetectorRef, private el: ElementRef) {
-    this.elementId = Math.random().toString();
+    this.elementId = Guid.newGuid();
     this.width = '100%';
     this.height = '120px';
     this.placeholder = '';

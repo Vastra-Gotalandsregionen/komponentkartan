@@ -14,7 +14,7 @@ export class ToggleButtonGroupComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(ToggleButtonComponent) toggleButtons: QueryList<ToggleButtonComponent>;
   toggleButtonSubscriptions = [];
   lastSelectedIndex: number;
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe: any = new Subject();
 
   ngAfterContentInit() {
     this.setToggleButtonTabFocusability();

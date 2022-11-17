@@ -20,7 +20,9 @@ describe('CheckboxComponent', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    teardown: { destroyAfterEach: false }
+});
     TestBed.configureTestingModule({
       declarations: [CheckboxComponent, IconComponent],
       imports: [CommonModule, FontAwesomeModule, IconModule]

@@ -1,5 +1,6 @@
 import { Input, Component, HostListener, ElementRef, forwardRef, HostBinding, AfterViewInit, ViewChild, Renderer2, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Guid } from '../../utils/guid';
 import { MenuItemBaseDirective } from './menu-item-base';
 
 @Component({
@@ -20,30 +21,33 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
     @HostBinding('attr.role') role = 'menuitem';
     @HostBinding('attr.aria-disabled') ariaDisabled;
     @ViewChild('menuitem') menuitem: ElementRef;
+    elementId: string;
 
     @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
-
         if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
             if (this.disabled) {
-
                 event.stopPropagation();
                 event.preventDefault();
                 return;
-            }
-
-            if (this.link) {
+            } else if (this.link) {
                 this.isInternalLink ? this.router.navigate([this.link]) : this.onExternalLink();
+                this.enter.emit();
               setTimeout(() => {
                 const id = document.getElementById('page-content-focus');
-                if (id) {
+                const modalIsOpen = document.getElementsByClassName('vgr-modal--open');
+
+                if (id && modalIsOpen.length === 0) {
                   this.renderer.selectRootElement('#page-content-focus', true).focus();
                 }
               }, 100);
             } else if (this.action) {
+                this.enter.emit();
                 this.onAction(event);
+
             }
 
         }
+        console.log('pressed no enter or space')
         if (event.key === 'Home') {
             this.home.emit();
         }
@@ -79,7 +83,8 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
     }
 
     constructor(private router: Router, private renderer: Renderer2) {
-        super();
+      super();
+        this.elementId = `menu-item_${Guid.newGuid()}`;
     }
 
     setFocus(movingUp: boolean = false) {

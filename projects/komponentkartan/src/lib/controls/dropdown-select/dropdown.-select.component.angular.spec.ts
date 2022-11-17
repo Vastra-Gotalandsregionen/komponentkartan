@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
 
 import { DropdownSelectComponent } from './dropdown-select.component';
 import { DropdownItemComponent } from './dropdown-item.component';
@@ -14,7 +14,6 @@ import { ErrorMessagePipe } from '../../pipes/errorMessagePipe';
 
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { InputComponent } from '../input/input.component';
-import { filter } from 'rxjs/operators';
 import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
@@ -44,7 +43,9 @@ describe('[DropdownSelectComponent - Angular]', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    teardown: { destroyAfterEach: false }
+});
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, FontAwesomeModule, IconModule, FormsModule, NgScrollbarModule],
       declarations: [
