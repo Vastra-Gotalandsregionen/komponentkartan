@@ -44,6 +44,13 @@
   </div>
   <div class="docs__examples">
     <section>
+      <div style="width: 80%;">
+        <vgr-action-panel [open]="open1" [title]="'Ett exempel på en action panel'" (openChanged)="open1 = $event">
+          <vgr-dropdown-select [deselectable]="true">
+            <vgr-dropdown-item *ngFor="let item of items50">{{item}}</vgr-dropdown-item>
+          </vgr-dropdown-select>
+        </vgr-action-panel>
+      </div>
       <div class="row-layout">
         <div class="one-third">
           <p>Liten, 5 alternativ</p>

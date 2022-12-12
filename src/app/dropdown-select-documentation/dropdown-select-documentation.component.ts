@@ -11,6 +11,7 @@ export class DropdownSelectDocumentationComponent {
   items5: string[];
   items10: string[];
   items50: string[];
+  open1: boolean = true;
   form: FormControl;
   formControl: FormControl;
   formControlDisabled = false;
