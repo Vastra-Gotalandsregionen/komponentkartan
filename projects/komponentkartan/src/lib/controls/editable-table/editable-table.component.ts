@@ -1,16 +1,18 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, DebugElement, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, DebugElement, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, QueryList, ViewChild } from '@angular/core';
 import { Guid } from '../../utils/guid';
 import { Subject } from 'rxjs';
 import { EditableTableHeaderComponent } from './editable-table-header.component';
 import { EditableTableRowComponent } from './editable-table-row.component';
 import { EditableTableService } from './editable-table.service';
 import { last, takeUntil } from 'rxjs/operators';
+import { SortChangedArgs } from '../sort-arrow/sort-arrow.component';
 
 @Component({
   selector: 'vgr-editable-table',
   templateUrl: './editable-table.component.html',
   styleUrls: ['./editable-table.component.scss']
 })
+
 export class EditableTableComponent implements AfterViewInit, AfterContentInit, OnDestroy {
 
   @Input() set  editMode(value: boolean){
@@ -19,7 +21,7 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
   }
 
   @Input() height = '';
-
+  @Output() sortChanged: EventEmitter<SortChangedArgs> = new EventEmitter<SortChangedArgs>();
 
   @ContentChild(EditableTableHeaderComponent) tableHeader: EditableTableHeaderComponent;
   @ContentChildren(EditableTableRowComponent) tableRows: QueryList<EditableTableRowComponent>;
@@ -236,6 +238,10 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
   ngAfterContentInit() {
     this.tableRows.forEach(row => row.parentId = this.id);
     this.tableHeader?.headerColumns?.forEach(column => column.parentId = this.id)
+
+    this.tableHeader.sortChanged
+    .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+
 
     this.tableRows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((rows) => {
       setTimeout(() => {

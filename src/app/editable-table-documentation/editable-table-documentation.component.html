@@ -24,7 +24,7 @@
           <vgr-editable-table-header-column [width]="'70px'" [align]="'center'">Konto</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar offentlig</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar privat</vgr-editable-table-header-column>
-          
+
         </vgr-editable-table-header>
         <vgr-editable-table-row *ngFor="let d of data3">
             <vgr-editable-table-column [width]="'100px'"><div><span>61 </span><span style="font-weight: bold;">{{d.produktkod}}</span></div></vgr-editable-table-column>
@@ -57,7 +57,7 @@
                 <vgr-combobox-item>20</vgr-combobox-item>
               </vgr-combobox>             -->
             </vgr-editable-table-column>
-            
+
           </vgr-editable-table-row>
       </vgr-editable-table>
 
@@ -71,10 +71,10 @@
     <div style="padding-left: 20px; margin-top: 20px;">
       <h2>Editerbar tabell med satt höjd</h2>
     </div>
-      <vgr-editable-table [editMode]="!redigera" [height]="'500px'">
+      <vgr-editable-table [editMode]="!redigera" [height]="'500px'" (sortChanged)="sort($event)">
         <vgr-editable-table-header>
-          <vgr-editable-table-header-column [width]="'100px'">Produktkod</vgr-editable-table-header-column>
-          <vgr-editable-table-header-column [width]="'350px'">Rubrik</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'100px'"  [sortKey]="'produktkod'" >Produktkod</vgr-editable-table-header-column>
+          <vgr-editable-table-header-column [width]="'350px'" [sortKey]="'rubrik'">Rubrik</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [width]="'70px'" [align]="'center'">Konto</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar offentlig</vgr-editable-table-header-column>
           <vgr-editable-table-header-column [width]="'100px'" [align]="'center'">Ansvar privat</vgr-editable-table-header-column>
