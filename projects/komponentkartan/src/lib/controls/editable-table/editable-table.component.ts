@@ -237,11 +237,12 @@ export class EditableTableComponent implements AfterViewInit, AfterContentInit, 
 
   ngAfterContentInit() {
     this.tableRows.forEach(row => row.parentId = this.id);
-    this.tableHeader?.headerColumns?.forEach(column => column.parentId = this.id)
+    if (this.tableHeader) {
+      this.tableHeader?.headerColumns?.forEach(column => column.parentId = this.id)
 
-    this.tableHeader.sortChanged
-    .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
-
+      this.tableHeader.sortChanged
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((args: SortChangedArgs) => this.sortChanged.emit(args));
+      }
 
     this.tableRows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((rows) => {
       setTimeout(() => {

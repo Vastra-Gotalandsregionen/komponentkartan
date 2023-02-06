@@ -483,7 +483,6 @@ export class EditableTableDocumentationComponent {
   }
 
   sort(args: SortChangedArgs) {
-    console.log(args)
     this.data = this.data.sort((row1, row2) => {
       return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
         row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
