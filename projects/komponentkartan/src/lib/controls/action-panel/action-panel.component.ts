@@ -91,21 +91,25 @@ export class ActionPanelComponent implements OnChanges, OnInit, AfterViewInit {
   }
 
   onSlideStart(event: AnimationEvent) {
-    if (event.fromState === this.slideStateOpen) {
-      this.isOpened = false;
-    }
-    if (event.fromState === this.slideStateClosed) {
-      this.isClosed = false;
-    }
+    setTimeout(() => {
+      if (event.fromState === this.slideStateOpen) {
+        this.isOpened = false;
+      }
+      if (event.fromState === this.slideStateClosed) {
+        this.isClosed = false;
+      }
+    });
   }
 
   onSlideEnd(event: AnimationEvent) {
-    if (event.fromState === this.slideStateClosed) {
-      this.isOpened = true;
-    }
-    if (event.fromState === this.slideStateOpen) {
-      this.isClosed = true;
-    }
+    setTimeout(() => {
+      if (event.fromState === this.slideStateClosed) {
+        this.isOpened = true;
+      }
+      if (event.fromState === this.slideStateOpen) {
+        this.isClosed = true;
+      }
+    });
   }
 
   public focus() {

@@ -33,11 +33,13 @@ export class CardSectionComponent {
     constructor() { }
 
     toggleState(state: 'start' | 'done', expanded: boolean) {
+      setTimeout(() => {
         if (state === 'done' && expanded === true) {
             this.expandOverflow = false;
         } else {
             this.expandOverflow = true;
         }
+      });
     }
 
     public focus() {
