@@ -70,11 +70,13 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
 
 
   toggleState(state: 'start' | 'done', expanded: boolean) {
-    if (state === 'done' && expanded === true) {
-      this.overflow = false;
-    } else {
-      this.overflow = true;
-    }
+    setTimeout(() => {
+      if (state === 'done' && expanded === true) {
+        this.overflow = false;
+      } else {
+        this.overflow = true;
+      }
+    });
   }
 
   setExpanded(expanded: boolean) {
