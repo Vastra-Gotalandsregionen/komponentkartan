@@ -29,10 +29,6 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     return this._value;
   }
 
-
-
-
-
   @Input() @HostBinding('class.disabled') set disabled(val) {
     this._disabled = val;
     if (val !== undefined) {
@@ -83,7 +79,9 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
 
  setFirstOptionAsFocusable() {
     if(!this.items.some(x => x.selected)) {
-      this.items.filter(x => !x.disabled)[0].isTabEnabled = true;
+      // if (this.items.filter(x => !x.disabled)[0].item !== undefined) {
+        this.items.filter(x => !x.disabled)[0].tabEnabled = true;
+      // }
     }
  }
 
@@ -127,7 +125,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       if (item !== itemToExclude || !itemToExclude) {
         item.selected = false;
         if (item.item) {
-          item.item.nativeElement.children[1].tabIndex = '-1';
+          item.tabIndex = -1;
         }
       }
     });
