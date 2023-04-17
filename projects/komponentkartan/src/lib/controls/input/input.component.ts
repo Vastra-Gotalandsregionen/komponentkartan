@@ -65,7 +65,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
       this.hasSuffix = true;
     }
     if (this.formControlName) {
+      console.log('formControlName', this.formControlName)
       this.control = this.controlContainer.control.get(this.formControlName);
+      console.log('control', this.control)
     }
   }
 
