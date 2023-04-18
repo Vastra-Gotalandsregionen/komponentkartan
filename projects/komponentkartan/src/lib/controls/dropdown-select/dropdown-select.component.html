@@ -38,7 +38,7 @@
         <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-bottom"></div>
       </div>
     </div>
-    <div [attr.id]="elementId" *ngIf="formControl" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'"
+    <div [attr.id]="elementId" *ngIf="errorActive || errorEditing" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'"
       title="{{ errorMessage | errorMessage: formControl?.errors : getLabelFromId() :  true  }}">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
       <div class="validation__status__message">
