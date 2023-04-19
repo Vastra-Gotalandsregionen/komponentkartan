@@ -85,6 +85,7 @@ export { GridHeaderComponent } from './controls/grid/grid-header.component';
 export { GridSortChangedArgs } from './controls/grid/grid-header.component';
 export { GridHeaderColumnComponent } from './controls/grid/grid-header-column.component';
 
+
 export { GridColumnComponent } from './controls/grid/grid-column.component';
 export { GridRowComponent } from './controls/grid/grid-row.component';
 export { GridContentComponent } from './controls/grid/grid-content.component';
@@ -92,6 +93,7 @@ export { GridHeaderToolbarComponent } from './controls/grid/grid-header-toolbar.
 export { NotificationComponent } from './controls/notification/notification.component';
 export { GridSortDirection } from './controls/sort-arrow/sort-arrow.component';
 export { SortArrowComponent } from './controls/sort-arrow/sort-arrow.component';
+export { SortChangedArgs } from './controls/sort-arrow/sort-arrow.component';
 
 export { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
 export { EditableTableComponent } from './controls/editable-table/editable-table.component';
