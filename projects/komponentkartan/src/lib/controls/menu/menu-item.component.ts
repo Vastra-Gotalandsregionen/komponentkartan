@@ -47,7 +47,6 @@ export class MenuItemComponent extends MenuItemBaseDirective implements AfterVie
             }
 
         }
-        console.log('pressed no enter or space')
         if (event.key === 'Home') {
             this.home.emit();
         }

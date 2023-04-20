@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
@@ -36,15 +36,21 @@ describe('RadiobuttonGroupComponent', () => {
   });
 
   beforeEach(() => {
-    // fixture = TestBed.createComponent(RadiobuttonGroupComponent);
     fixture = TestBed.createComponent(TestRadiogroupComponent);
     fixture.detectChanges();
-    // component = fixture.componentInstance;
     component = fixture.debugElement.query(By.directive(RadiobuttonGroupComponent)).componentInstance;
     rootElement = fixture.debugElement;
     fixture.detectChanges();
   });
 
+  beforeAll(() => {
+    jasmine.clock().uninstall();
+    jasmine.clock().install();
+  })
+  afterAll(() => {
+    jasmine.clock().uninstall();
+
+  })
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -65,14 +71,17 @@ describe('RadiobuttonGroupComponent', () => {
   });
 
   describe('No items selected', () => {
-    // let spyFirstOptionFocusable;
     beforeEach(() => {
-      // spyFirstOptionFocusable = spyOn(component, 'setFirstOptionAsFocusable').and.callThrough();
       component.items.forEach(element => element.selected = false);
       fixture.detectChanges();
       component.ngAfterContentInit();
       fixture.detectChanges();
+      jasmine.clock().tick(10);
+      fixture.detectChanges();
+
     });
+
+
 
     // it('firstOptionFocusable has been called', () => {
     //   expect(spyFirstOptionFocusable).toHaveBeenCalled();
@@ -81,30 +90,30 @@ describe('RadiobuttonGroupComponent', () => {
     it('firstItem has tabIndex = 0', () => {
       const firstItem = rootElement.queryAll(By.css('vgr-radiobutton-item .radio-button__icon'))[0];
       expect(firstItem.nativeElement.tabIndex).toBe(0);
-    });
+      });
 
-    it('other Items has tabIndex = -1', () => {
-      const noTabIndexItems = rootElement.queryAll(By.css('vgr-radiobutton-item .radio-button__icon')).filter(x => x.nativeElement.tabIndex === -1);
-      expect(noTabIndexItems.length).toBe(2);
-    });
+      it('other Items has tabIndex = -1', () => {
+        const noTabIndexItems = rootElement.queryAll(By.css('vgr-radiobutton-item .radio-button__icon')).filter(x => x.nativeElement.tabIndex === -1);
+        expect(noTabIndexItems.length).toBe(2);
+      });
   });
 
   describe('Item preselected', () => {
-    beforeEach(fakeAsync(() => {
+    beforeEach(() => {
+      // component.items.filter(x => x.value === 'One')[0].selected = true;
+
+      component.value = 'One';
+
 
       fixture.detectChanges();
-
-      tick(400);
-      fixture.detectChanges();
-      //  fixture.whenStable().then(() => {
       component.ngAfterContentInit();
-      tick(Infinity);
-      component.items.filter(x => x.value === 'One')[0].selected = true;
-      //  });
       fixture.detectChanges();
 
+      jasmine.clock().tick(100);
 
-    }));
+      fixture.detectChanges();
+
+    });
 
     it('one item is selected', () => {
       expect(component.items.filter(x => x.selected).length).toBe(1);
@@ -258,3 +267,5 @@ describe('RadiobuttonGroupComponent', () => {
     });
   });
 });
+
+

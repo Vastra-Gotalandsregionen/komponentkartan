@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Guid } from '../../utils/guid';
 
 @Component({
@@ -11,7 +11,12 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   elementId: string;
 
 
-  @Input() selected: boolean;
+  @Input() set selected(val: boolean) {
+    this._selected = val;
+    if (this._selected) {
+      this.tabIndex = 0;
+    }
+  };
   @Input() value: string | number;
   label: string;
   @Input() set disabled(val: boolean) {
@@ -25,6 +30,10 @@ export class RadiobuttonItemComponent implements AfterViewInit {
     }
   }
 
+  get selected() : boolean {
+    return this._selected;
+  }
+
   @Output() itemSelected = new EventEmitter();
   @Output() itemDisabled = new EventEmitter();
 
@@ -32,14 +41,23 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   @ViewChild('radioButton') radioButton: ElementRef;
   @ContentChild('radioButtonContent') radioButtonContent: ElementRef;
 
-
+  tabIndex: number = -1;
   _disabled: boolean;
-  isTabEnabled: boolean;
+  _selected: boolean = false;
+
+  set tabEnabled(val: boolean) {
+    this.isTabEnabled = val;
+    if (this.isTabEnabled) {
+      setTimeout(() => {
+        this.tabIndex = 0
+      });
+    }
+  }
+
+  isTabEnabled: boolean = false;
 
   constructor(private elementRef: ElementRef) {
     this.elementId = Guid.newGuid();
-
-
   }
 
   ngAfterViewInit() {
@@ -52,6 +70,7 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   itemClicked() {
     if (this.item && !this.disabled) {
       this.selected = true;
+      // this.tabIndex = 0;
       this.itemSelected.emit();
     }
     this.focus();
@@ -67,6 +86,7 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   public focus() {
     if(!this.disabled && !this.selected) {
       this.selected = true;
+      // this.tabIndex = 0;
       this.itemSelected.emit();
     }
 
@@ -78,6 +98,5 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   }
   checkTabFocus() {
     return this.elementRef.nativeElement.querySelectorAll('.radio-button--checked').length > 0;
-
   }
 }

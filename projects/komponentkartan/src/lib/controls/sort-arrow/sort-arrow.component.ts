@@ -5,6 +5,10 @@ export enum GridSortDirection {
   Ascending,
   Descending
 }
+export interface SortChangedArgs {
+  key: string;
+  direction: GridSortDirection;
+}
 @Component({
   selector: 'vgr-sort-arrow',
   templateUrl: './sort-arrow.component.html',

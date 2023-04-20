@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { SortChangedArgs, GridSortDirection } from '../../../projects/komponentkartan/src/lib';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
@@ -481,4 +482,10 @@ export class EditableTableDocumentationComponent {
     }
   }
 
+  sort(args: SortChangedArgs) {
+    this.data = this.data.sort((row1, row2) => {
+      return row1[args.key] > row2[args.key] ? (args.direction === GridSortDirection.Ascending ? 1 : -1) :
+        row1[args.key] < row2[args.key] ? (args.direction === GridSortDirection.Ascending ? -1 : 1) : 0;
+    });
+  }
 }

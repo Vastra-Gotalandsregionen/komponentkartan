@@ -67,12 +67,12 @@
         <vgr-grid-column [width]="5">Value 3</vgr-grid-column>
         <vgr-grid-column [width]="5">Value 4</vgr-grid-column>
         <vgr-grid-content>
-          <vgr-expandable-div>
+          <vgr-expandable-div (expandedChanged)="visible10 = !visible10">
             <vgr-expandable-div-header>
               Text
             </vgr-expandable-div-header>
             <vgr-expandable-div-content>
-              <div style="background-color: red; width: 100%; height: 300px;"></div>
+              <div *ngIf="visible10" style="background-color: red; width: 100%; height: 300px;"></div>
             </vgr-expandable-div-content>
           </vgr-expandable-div>
         </vgr-grid-content>
@@ -84,12 +84,12 @@
         <vgr-grid-column [width]="5">Value 3</vgr-grid-column>
         <vgr-grid-column [width]="5">Value 4</vgr-grid-column>
         <vgr-grid-content>
-          <vgr-expandable-div>
+          <vgr-expandable-div (expandedChanged)="visible9 = !visible9">
             <vgr-expandable-div-header>
               Text
             </vgr-expandable-div-header>
             <vgr-expandable-div-content>
-              <div style="background-color: red; width: 100%; height: 300px;"></div>
+              <div *ngIf="visible9" style="background-color: red; width: 100%; height: 300px;"></div>
             </vgr-expandable-div-content>
           </vgr-expandable-div>
         </vgr-grid-content>

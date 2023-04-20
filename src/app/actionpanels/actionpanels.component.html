@@ -3,6 +3,34 @@
     <vgr-action-panel [open]="open1" [title]="'Ett exempel på en action panel'" (openChanged)="open1 = $event">
       <vgr-button>En knapp</vgr-button>
       <p>Lite text ...</p>
+      <vgr-card>
+        <vgr-card-header>
+        </vgr-card-header>
+        <vgr-card-column >
+          <vgr-card-section [expanded]="true" [formGroup]="form" [subtitle]="form.get('agare')?.value ?? ''">
+      <!-- <form *ngIf="form"> -->
+        <vgr-input [readonly]="true" labelId="agare" [value]="form.get('agare')?.value" width="100%"></vgr-input>
+        <vgr-dropdown-select
+            noItemSelectedLabel="- Välj ägare -"
+            formControlName="agare"
+            labelId="agare"
+            [width]="'100%'"
+            (selectedChanged)="setAgarinformation($event)"
+            [showValidation]="form.get('agare')?.touched ?? false "
+            *ngIf="true">
+              <vgr-dropdown-item *ngFor="let agare of vc_namn" [value]="agare" [selectedLabel]="agare">
+                {{ agare }}
+              </vgr-dropdown-item>
+            </vgr-dropdown-select>
+
+
+      <!-- <vgr-dropdown-select [multi]="true" [value]="vc_selected" [simpleLabel]="true" [disabled]="false">
+        <vgr-dropdown-item *ngFor="let enhet of vc_namn">{{enhet}}</vgr-dropdown-item>
+      </vgr-dropdown-select> -->
+    <!-- </form> -->
+  </vgr-card-section>
+  </vgr-card-column>
+  </vgr-card>
     </vgr-action-panel>
   </div>
   <div class=" docs__overview ">

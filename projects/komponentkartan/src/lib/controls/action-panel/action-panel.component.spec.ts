@@ -1,13 +1,34 @@
-import { SimpleChanges, SimpleChange, Renderer2 } from '@angular/core';
+import { SimpleChanges, SimpleChange, Renderer2, DebugElement } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
 
 import { ActionPanelComponent } from './action-panel.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('[ActionPanelComponent]', () => {
   let component: ActionPanelComponent;
+  let fixture: ComponentFixture<ActionPanelComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ActionPanelComponent],
+      imports: [BrowserAnimationsModule]
+    })
+      .compileComponents();
+  });
   beforeEach(() => {
     component = new ActionPanelComponent(null);
+    fixture = TestBed.createComponent(ActionPanelComponent);
   });
+
+  beforeAll(() => {
+    jasmine.clock().uninstall();
+    jasmine.clock().install();
+  })
+  afterAll(() => {
+    jasmine.clock().uninstall();
+
+  })
   describe('Instatiate', () => {
     it('title is correct', () => {
       expect(component.title).toBeFalsy();
@@ -136,6 +157,8 @@ describe('[ActionPanelComponent]', () => {
         component.isOpened = true;
         const event = { fromState: 'open' } as AnimationEvent;
         component.onSlideStart(event);
+        jasmine.clock().tick(10);
+        fixture.detectChanges();
 
         expect(component.isOpened).toBe(false);
       });
@@ -165,6 +188,8 @@ describe('[ActionPanelComponent]', () => {
         component.isOpened = false;
         const event = { fromState: 'closed' } as AnimationEvent;
         component.onSlideEnd(event);
+        jasmine.clock().tick(10);
+        fixture.detectChanges();
 
         expect(component.isOpened).toBe(true);
       });

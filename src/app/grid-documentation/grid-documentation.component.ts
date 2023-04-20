@@ -90,6 +90,8 @@ export class GridDocumentationComponent implements OnInit {
   visible6 = false;
   visible7 = false;
   visible8 = false;
+  visible9 = false;
+  visible10 = false;
 
   constructor(private paginationManagementService: PaginationManagementService, private modalService: ModalService){}
   ngOnInit() {
