@@ -70,6 +70,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       this.unSelectItems();
     }
     this.setGroupDisabledOverride(this._disabled);
+
     setTimeout(() => {
       this.setPreselectedValue();
     }, 100);
@@ -130,8 +131,6 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
       }
     });
 
-
-
     if (itemToExclude) {
       this.value = itemToExclude.value;
     } else {
@@ -164,7 +163,6 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
         if(item.value === this.value) {
           item.selected = true;
           this.unSelectItems(item);
-
         }
       });
     }
