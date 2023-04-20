@@ -4,8 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-# 10.1.0 (2023-02-01) 
+# 10.1.0 (2023-04-20) Stable 
 - Added sort capabilities to editable-table
+- Fixed expressionchanged errors for dropdown, grid, actionpanel, cardsection and radiobuttongroup
+- Removed and fixed warning about animating overflow
 # 10.0.2 (2023-01-13) Stable
 - Fixed syntax for peerDependencies
 

@@ -12,7 +12,6 @@ export class RadiobuttonItemComponent implements AfterViewInit {
 
 
   @Input() set selected(val: boolean) {
-    console.log('setting selected to ', val)
     this._selected = val;
     if (this._selected) {
       this.tabIndex = 0;
@@ -51,9 +50,7 @@ export class RadiobuttonItemComponent implements AfterViewInit {
     if (this.isTabEnabled) {
       setTimeout(() => {
         this.tabIndex = 0
-        console.log('sätter index = 0')
       });
-      console.log('efter timeout')
     }
   }
 
