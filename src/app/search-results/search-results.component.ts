@@ -22,6 +22,7 @@ export class SearchResultsComponent implements OnInit {
   searchDescription_e1 = null;
   htmlExample1;
   htmlExample2;
+  sokningPagar: boolean = false;
 
   constructor(htmlEncoder: HtmlEncodeService) {
     this.htmlExample1 = htmlEncoder.prepareHighlightedSection(`<div class="search-result-wrapper">
@@ -56,7 +57,11 @@ export class SearchResultsComponent implements OnInit {
   }
 
   filterSearch(event) {
-    const searchText = event.target.value;
+
+
+      const searchText = event.target.value;
+
+
 
     if (!searchText || searchText.length < 3) {
       this.dropdownVisible_e1 = false;
@@ -65,15 +70,21 @@ export class SearchResultsComponent implements OnInit {
     this.filteredItems = this.items.filter(item => item.displayName.toString().toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
     this.searchDescription_e1 = this.filteredItems.length + ' träffar i "VGR" KIV.';
     this.dropdownVisible_e1 = true;
+
   }
 
   filterSearch_e2(event) {
+    this.sokningPagar = true;
 
+    setTimeout(() => {
     const searchText = this.filterBoxValue_e2;
     if (searchText) {
       this.filteredItems_e2 = this.items_e2.filter(item => item.displayName.toString().toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
       this.dropdownVisible_e2 = true;
     }
+
+    this.sokningPagar = false;
+  }, 2000);
   }
 
   setResult(item) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit, HostListener, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContainer } from '@angular/forms';
 import { Guid } from '../../utils/guid';
 
@@ -46,12 +46,12 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
 
   @ViewChild('inputElement', {static: false}) inputElement: ElementRef;
 
-  control: AbstractControl;
+  control: AbstractControl = null;
   hasFocus = false;
   elementId: string;
   mouseDown: boolean;
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2) {
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private el: ElementRef, public renderer: Renderer2, private cdr: ChangeDetectorRef) {
     this.elementId = Guid.newGuid();
 
   }
@@ -84,9 +84,20 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
 
 
   ngOnChanges(changes: SimpleChanges) {
+
     if (this.control && changes.disabledControl) {
       this.setDisabledState(changes.disabledControl.currentValue);
     }
+
+    this.cdr.detectChanges();
+    // lets change focus back to input after going from disabled to enabled
+    if (this.el.nativeElement.parentElement.className === 'search-result-wrapper') {
+      if (changes.disabledControl && changes.disabledControl.previousValue === true) {
+        this.focus();
+      }
+    }
+
+
   }
 
   writeValue(value: any): void {

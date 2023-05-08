@@ -48,8 +48,9 @@
         </div>
         <div class="inputBlock">
           <label for="ngmodel2">Type="search" (ersätter vgr-filter-textbox)</label>
-          <vgr-input [(ngModel)]="ngModelValues[1]" type="search" [disabledControl]="disabled" [readonly]="readonly" [showValidation]="showErrors" labelId="ngmodel2"></vgr-input>
+          <vgr-input [(ngModel)]="ngModelValues[1]" type="search" [disabledControl]="sokningPagar" (keydown.enter)="testSok()" [readonly]="readonly" [showValidation]="showErrors" labelId="ngmodel2"></vgr-input>
           <span>Värde: {{ngModelValues[1]}}</span>
+          <vgr-button (click)="testSok()">Sok</vgr-button>
         </div>
         <div class="inputBlock">
           <label for="ngmodel3">Högerstäld text med suffix (obligatorisk)</label>
