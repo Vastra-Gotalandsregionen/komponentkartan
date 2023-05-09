@@ -91,7 +91,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
 
     this.cdr.detectChanges();
     // lets change focus back to input after going from disabled to enabled
-    if (this.el.nativeElement.parentElement.className === 'search-result-wrapper') {
+    if (this.el.nativeElement.offsetParent && this.el.nativeElement.offsetParent.className.includes('search-result-wrapper')) {
       if (changes.disabledControl && changes.disabledControl.previousValue === true) {
         this.focus();
       }
