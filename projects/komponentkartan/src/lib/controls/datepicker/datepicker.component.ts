@@ -29,6 +29,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   @Input() errorMessage = {};
   @Input() labelId: string;
   @Input() transparent = false;
+  @Input() displayFormat: string = '';
 
   @Output() selectedDateChanged = new EventEmitter<Date>();
 
@@ -769,7 +770,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
         this.zoomedToMonths = false;
         this.zoomedToDays = false;
         this.noSelectedDateLabel = 'Välj år';
-        this.labelDateFormat = 'yyyy';
+        this.labelDateFormat = this.displayFormat !== '' ? this.displayFormat : 'yyyy';
         this.inputPlaceholder = 'ÅÅ';
         this.actualMinDate = this.minDate ? new Date(this.minDate.getFullYear(), 0) : null;
         this.actualMaxDate = this.maxDate ? new Date(this.maxDate.getFullYear(), 0) : null;
@@ -782,7 +783,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
         this.zoomedToMonths = true;
         this.zoomedToDays = false;
         this.noSelectedDateLabel = 'Välj månad';
-        this.labelDateFormat = 'MMM yyyy';
+        this.labelDateFormat = this.displayFormat !== '' ? this.displayFormat : 'MMM yyyy';
         this.inputPlaceholder = 'ÅÅMM';
         this.actualMinDate = this.minDate ? new Date(this.minDate.getFullYear(), this.minDate.getMonth()) : null;
         this.actualMaxDate = this.maxDate ? new Date(this.maxDate.getFullYear(), this.maxDate.getMonth()) : null;
@@ -793,7 +794,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
         this.zoomedToMonths = false;
         this.zoomedToDays = true;
         this.noSelectedDateLabel = 'Välj datum';
-        this.labelDateFormat = 'yyyy-MM-dd';
+        this.labelDateFormat = this.displayFormat !== '' ? this.displayFormat : 'yyyy-MM-dd';
         this.inputPlaceholder = 'ÅÅMMDD';
         this.actualMinDate = this.minDate ? new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate()) : null;
         this.actualMaxDate = this.maxDate ? new Date(this.maxDate.getFullYear(), this.maxDate.getMonth(), this.maxDate.getDate()) : null;
