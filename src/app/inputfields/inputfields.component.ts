@@ -19,6 +19,7 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
   readonly = false;
   showErrors = true;
   ariaTest = {describedby: 'forandras'};
+  sokningPagar = false;
 
   private ngUnsubscribe: any = new Subject();
 
@@ -59,6 +60,13 @@ export class InputfieldsComponent implements OnInit, OnDestroy {
       rf3: ['', Validators.required, validateAsyncCityName()],
       rf4: ['', [Validators.min(40), Validators.max(50)]]
     });
+  }
+
+  testSok() {
+    this.sokningPagar = true;
+    setTimeout(() => {
+      this.sokningPagar = false;
+    }, 2000);
   }
 }
 

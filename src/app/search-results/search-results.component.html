@@ -41,7 +41,7 @@
       <p>
         <strong>2.</strong> Exempel på sökning med en vgr-input och en manuellt satt width på 500px. Sökningen startar då man trycker på knappen sök.</p>
       <div class="search-result-wrapper">
-        <vgr-input [(ngModel)]="filterBoxValue_e2"></vgr-input>
+        <vgr-input [(ngModel)]="filterBoxValue_e2" (keydown.enter)="filterSearch_e2($event)" [disabledControl]="sokningPagar" ></vgr-input>
         <vgr-button (click)="filterSearch_e2($event)">Sök</vgr-button>
         <vgr-search-result [items]="filteredItems_e2" [(visible)]="dropdownVisible_e2" [width]="'500px'" maxItems="15" noResultsText="Inga resultat hittades."
           (itemClick)="setResult_e2($event)"></vgr-search-result>
