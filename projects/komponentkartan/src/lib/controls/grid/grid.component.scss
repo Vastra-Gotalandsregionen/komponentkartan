@@ -64,10 +64,20 @@
 
         &.grid-align--center {
           text-align: center;
+          // Speciallösning för checkbox
+          vgr-checkbox {
+            display: flex;
+            justify-content: center;
+          }
         }
 
         &.grid-align--right {
           text-align: right;
+          // Speciallösning för checkbox
+          vgr-checkbox {
+            display: flex;
+            justify-content: end;
+          }
         }
       }
     }

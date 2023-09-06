@@ -154,20 +154,20 @@
         </div>
       </vgr-grid-header-toolbar>
       <vgr-grid-header>
-        <vgr-grid-header-column [width]="20">
+        <vgr-grid-header-column [width]="100" [align]="'center'">
           <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
         </vgr-grid-header-column>
         <!--sortKey="belopp" -->
-        <vgr-grid-header-column [width]="200" sortKey="fornamn">Förnamn</vgr-grid-header-column>
+        <vgr-grid-header-column [width]="100" sortKey="fornamn">Förnamn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="200" sortKey="efternamn">Efternamn</vgr-grid-header-column>
         <vgr-grid-header-column [width]="100" [align]="'right'">Belopp</vgr-grid-header-column>
         <vgr-grid-header-column [width]="100" sortKey="status" [align]="'center'">Status</vgr-grid-header-column>
       </vgr-grid-header>
       <vgr-grid-row *ngFor="let person of paginatedPeople">
-        <vgr-grid-column [width]="20">
+        <vgr-grid-column [width]="100" [align]="'center'">
           <vgr-checkbox [checked]="person.checked" (checkedChanged)="toggleChecked(person)"></vgr-checkbox>
         </vgr-grid-column>
-        <vgr-grid-column [width]="200">{{person.fornamn}}</vgr-grid-column>
+        <vgr-grid-column [width]="100">{{person.fornamn}}</vgr-grid-column>
         <vgr-grid-column [width]="200">{{person.efternamn}}</vgr-grid-column>
         <vgr-grid-column [width]="100" [align]="'right'">{{person.belopp}}</vgr-grid-column>
         <vgr-grid-column [width]="100" [align]="'center'">{{person.status}}</vgr-grid-column>
