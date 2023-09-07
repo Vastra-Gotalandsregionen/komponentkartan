@@ -64,20 +64,22 @@
 
         &.grid-align--center {
           text-align: center;
-          // Speciallösning för checkbox
-          vgr-checkbox {
-            display: flex;
-            justify-content: center;
-          }
         }
+
+        // Speciallösning för checkbox
+        &.grid-align--center:has(vgr-checkbox) {
+          display: flex;
+          justify-content: center;
+      }
 
         &.grid-align--right {
           text-align: right;
-          // Speciallösning för checkbox
-          vgr-checkbox {
-            display: flex;
-            justify-content: end;
-          }
+        }
+
+        // Speciallösning för checkbox
+        &.grid-align--right:has(vgr-checkbox) {
+          display: flex;
+          justify-content: end;
         }
       }
     }
@@ -115,6 +117,13 @@
         position: absolute;
         right: -10px;
       }
+    }
+
+    // Speciallösning för checkbox och när det är sortering implementerat
+    h2:has(vgr-checkbox) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     > div:focus-visible {
