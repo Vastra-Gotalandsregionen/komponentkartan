@@ -62,6 +62,11 @@
         white-space: nowrap;
         padding: 6px 10px;
 
+        &.grid-align--left:has(vgr-checkbox) {
+          display: flex;
+          justify-content: start;
+        }
+
         &.grid-align--center {
           text-align: center;
         }
