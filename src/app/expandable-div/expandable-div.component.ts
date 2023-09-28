@@ -22,6 +22,8 @@ export class ExpandableDivComponent implements OnInit {
 
   exampleCodeMarkup;
   list: any[];
+  list2: any[];
+  list3: any[];
 
   constructor(htmlEncoder: HtmlEncodeService) {
     this.exampleCodeMarkup =
@@ -44,6 +46,42 @@ export class ExpandableDivComponent implements OnInit {
         id: '3',
         title: 'Trean',
         text: 'Treans innehåll'
+      }
+    ];
+
+    this.list2 = [
+      {
+
+        title: 'Karl-Johan',
+        text: 'Karl-Johan innehåll'
+      },
+      {
+
+        title: 'Eva',
+        text: 'Eva innehåll'
+      },
+      {
+
+        title: 'Karin',
+        text: 'Karin innehåll'
+      }
+    ];
+
+    this.list3 = [
+      {
+
+        title: 'Skor',
+        text: '1 st'
+      },
+      {
+
+        title: 'Byxor',
+        text: '2 st'
+      },
+      {
+
+        title: 'Tröjor',
+        text: '5 st'
       }
     ];
   }
