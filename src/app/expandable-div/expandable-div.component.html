@@ -51,7 +51,7 @@
         <div style="margin-left: 20px;">
           <vgr-expandable-div   #myExpandableList2 *ngFor="let item of list2; let i = index;">
             <vgr-expandable-div-header>
-               <strong>- {{ item.title }}</strong>
+               <strong><vgr-icon icon="pen" color="text" class="card-section__header__icon" size="sm"></vgr-icon> {{ item.title }}</strong>
             </vgr-expandable-div-header>
             <vgr-expandable-div-content>
               <div *ngIf="i === 0" style="margin-left: 20px;">
