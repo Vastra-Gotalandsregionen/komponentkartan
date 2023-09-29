@@ -24,12 +24,16 @@
         width: 0;
         position: absolute;
         pointer-events: none;
+        right: 23%;
+        @media screen and (min-width: $desktop-width--medium) {
+          right: 21%;
+        }
     }
     &:after {
         border-color: rgba(255, 255, 255, 0);
         border-bottom-color: #ffffff;
         border-width: 4px;
-        left: 45%;
+        // left: 45%;
     }
   }
 

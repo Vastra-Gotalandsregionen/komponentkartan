@@ -71,14 +71,18 @@
     }
     .header__login-info-menu {
       cursor: pointer;
-      .header__login-info-menu-arrow {
-        display: inline-block;
+      .header__login-info-menu-dots {
+        display: flex;
+        justify-content: center;
         position: absolute;
         height: 26px;
-        right: 68px;
-        bottom: 12px;
+        width: 20px;
+        right: 61px;
+        bottom: 13px;
         transform: rotate(0deg);
         transition: all ease 0.3s;
+        padding-left: 5px;
+        padding-right: 5px;
         &.expanded {
           transform: rotate(-180deg);
         }
@@ -90,6 +94,15 @@
           color: white;
         }
       }
+    }
+  }
+
+  .header__login-info-menu-dots:hover {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: rgb(248, 248, 248, .2);
+    > .icon:hover {
+      color: white;
     }
   }
 
