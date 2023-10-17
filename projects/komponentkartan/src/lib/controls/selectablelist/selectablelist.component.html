@@ -1,0 +1,13 @@
+<div class="list-header" [class.hidden]="!headersPresent">
+  <ng-content select="vgr-selectablelist-header"></ng-content>
+</div>
+
+<div class="scrollbar-container">
+  <vgr-scrollbar [ngClass]="{'remove-scrollbar': !useScrollbar}">
+    <div #scrollWrapper class="scroll-wrapper">
+      <div class="list-wrapper" [class.active]="active">
+        <ng-content select="vgr-selectablelist-row"></ng-content>
+      </div>
+    </div>
+  </vgr-scrollbar>
+</div>

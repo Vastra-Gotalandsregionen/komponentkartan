@@ -1,0 +1,53 @@
+<app-component-docs [componentName]="'Selectable list'">
+  <div class="docs__overview">
+    <p>
+      <code>
+        &lt;vgr-selectablelist&gt;</code>
+    </p>
+    <br>
+    <p>En tabell/lista där du kan markera ett alternativv och som markerar ditt valda alternativ i aktivt läge där möjligheten finns att sätta aktivt läge till true eller false.
+    </p>
+    <br>
+    <p> Förändras med tema:
+      <strong>ja</strong>
+    </p>
+  </div>
+  <div class="docs__examples">
+    <vgr-selectablelist [id]="'test'" [active]="true">
+      <vgr-selectablelist-header>
+          <vgr-selectablelist-header-column><strong>Utbetalning avser</strong>
+          </vgr-selectablelist-header-column>
+          <vgr-selectablelist-header-column><strong>Månad</strong></vgr-selectablelist-header-column>
+          <vgr-selectablelist-header-column [alignRight]="true"><strong>Belopp</strong>
+          </vgr-selectablelist-header-column>
+        </vgr-selectablelist-header>
+      <vgr-selectablelist-row *ngFor="let justering of justeringar; let i = index" [value]="i">
+        <vgr-selectablelist-column class="truncate-text-withoutellips"
+          style="max-width: 350px; width:350px">{{justering.beskrivning}}...
+        </vgr-selectablelist-column>
+        <vgr-selectablelist-column>{{justering.period | date: 'MMM YYYY'}}
+        </vgr-selectablelist-column>
+        <vgr-selectablelist-column [alignRight]="true">{{justering.belopp}}
+        </vgr-selectablelist-column>
+      </vgr-selectablelist-row>
+  </vgr-selectablelist>
+
+  </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>active: boolean</td>
+        <td>Talar om huruvida tabellen är aktiverad eller inte. Default värde är <code>false</code>.</td>
+        <td>[active]="true"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    <i>Under utveckling</i>
+  </div>
+</app-component-docs>

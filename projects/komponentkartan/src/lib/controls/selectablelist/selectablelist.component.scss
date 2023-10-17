@@ -1,0 +1,178 @@
+@import "../../../assets/partials/_settings.sizes.scss";
+@import "../../../assets/partials/_settings.colors.scss";
+@import "../../../assets/partials/_settings.fonts.scss";
+@import "../../../assets/partials/objects.images";
+@import "../../../assets/partials/base.themify";
+
+:host::ng-deep {
+
+  vgr-selectablelist {
+    width: 100%;
+
+    &:focus {
+      outline: 0;
+
+    }
+
+    &-header,
+    &-row {
+      display: table-row;
+      height: 32px;
+    }
+
+    &-row:nth-child(even) {
+      background: white;
+
+      &.selected,
+      &.selected:hover {
+        @include themify($themes) {
+          background: themed('primaryColorDimmed') !important;
+          border-left-color: themed('primaryColor') !important;
+        }
+        border-left: 4px solid;
+      }
+
+      &.focused {
+        outline: 3px solid #2275d3;
+        outline-offset: -3px;
+      }
+
+
+      &.groupheader {
+        font-weight: bold;
+
+        vgr-selectablelist-column {
+          padding-left: 10px;
+        }
+      }
+    }
+
+    &-row:nth-child(odd) {
+      background: #f0f0f0;
+
+      &.selected,
+      &.selected:hover {
+        @include themify($themes) {
+          background: themed('primaryColorDimmed') !important;
+          border-left-color: themed('primaryColor') !important;
+        }
+        border-left: 4px solid;
+      }
+
+      &.focused {
+        outline: 3px solid #2275d3;
+        outline-offset: -3px;
+      }
+    }
+
+    .list-wrapper.active {
+      vgr-selectablelist-row:not(.groupheader) {
+        cursor: pointer;
+
+        &:hover {
+          font-weight: bold;
+          background: transparent;
+          letter-spacing: -0.15px;
+
+          &.selected {
+            @include themify($themes) {
+              background: themed('primaryColorDimmed') !important;
+              border-left-color: themed('primaryColor') !important;
+            }
+            border-left: 4px solid;
+          }
+        }
+      }
+      vgr-selectablelist-row:not(.selectable) {
+        cursor: default;
+        &:hover {
+          font-weight: normal;
+          background: transparent;
+          letter-spacing: 0;
+          &:nth-child(odd) {
+            background: #f0f0f0;
+            @include themify($themes) {
+              background: themed('primaryColorDimmed') !important;
+              border-left-color: themed('primaryColor') !important;
+            }
+            border-left: 4px solid;
+          }
+        }
+      }
+    }
+
+    &-header-column,
+    &-column {
+      display: table-cell;
+      height: 22px;
+      line-height: 22px;
+      padding: 5px;
+
+      &:first-child {
+        padding-left: 20px;
+      }
+
+      &.right {
+        text-align: right;
+      }
+    }
+  }
+
+  .scrollbar-container {
+    @include themify($themes) {
+      border-top-color: themed('primaryColor') !important;
+    }
+    border-top: 2px solid;
+    border-bottom: 1px solid #97939f;
+    border-left: 1px solid #97939f;
+    border-right: 1px solid #97939f;
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .list-wrapper.active {
+      vgr-selectablelist-row:hover {
+        letter-spacing: -0.19px;
+      }
+    }
+  }
+
+  // IE HACK to fix outline bug on focused states
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* IE10+ specific styles go here */
+    vgr-selectablelist-row.focused {
+      border: 3px solid #2275d3 !important;
+      outline: none !important;
+    }
+  }
+  .scroll-wrapper {
+    position: relative;
+    background: white;
+    display: block;
+
+    max-height: 244px;
+    // overflow: auto;
+    padding: 10px 0px;
+  }
+
+  .remove-scrollbar {
+    .scroll-wrapper {
+      width: 101% !important;
+    }
+    scrollbar-y {
+    display: none !important;
+    }
+  }
+}
+
+.list-header {
+  display: table;
+  width: 100%;
+  border-spacing: 0px !important;
+}
+
+.list-wrapper {
+  border-collapse: collapse;
+  display: table;
+  width: 100%;
+}
+

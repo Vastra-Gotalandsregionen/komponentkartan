@@ -68,6 +68,7 @@ import { TabButtonModule } from './tab-button/tab-button.module';
 import { ComboboxDocumentationComponent } from './combobox-documentation/combobox-documentation.component';
 import { HighlightCodeDirective } from './directives/highlight-code.directive';
 import { EditableTableDocumentationComponent } from './editable-table-documentation/editable-table-documentation.component';
+import { SelectablelistDocumentationComponent } from './selectablelist-documentation/selectablelist-documentation.component';
 
 @NgModule({
     declarations: [
@@ -113,7 +114,8 @@ import { EditableTableDocumentationComponent } from './editable-table-documentat
         NotificationDocumentationComponent,
         ComboboxDocumentationComponent,
         HighlightCodeDirective,
-        EditableTableDocumentationComponent
+        EditableTableDocumentationComponent,
+        SelectablelistDocumentationComponent
     ],
     imports: [
         KomponentkartanModule,
