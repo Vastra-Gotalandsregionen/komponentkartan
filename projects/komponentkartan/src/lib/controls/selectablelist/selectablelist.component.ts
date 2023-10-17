@@ -152,6 +152,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
   }
 
   ngAfterContentInit() {
+    // Fix för att ta bort scrollbar om height är mindre än maxheighten för tabellen (244px)
     setTimeout(() => {
       if (this.scrollWrapper.nativeElement.clientHeight < 244) {
         this.useScrollbar = false;
