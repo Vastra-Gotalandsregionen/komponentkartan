@@ -44,6 +44,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
   @HostBinding('attr.role') role = 'listbox';
   @HostBinding('attr.aria-multiselectable') multi = true;
   @HostBinding('attr.tabIndex') tabIndex = 0;
+  @HostBinding('style.outline') outLine = 0;
 
   @Input() active: boolean;
   @Input() useScrollbar: boolean = true;
@@ -55,6 +56,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
   @ContentChildren(SelectablelistRowComponent) rows: QueryList<SelectablelistRowComponent>;
 
   @ViewChild('scrollWrapper') scrollWrapper;
+  @ViewChild('scrollable') scrollable: ScrollbarComponent;
 
   private ngUnsubscribe = new Subject();
 
@@ -268,13 +270,13 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
 
     this.focusedRow = index;
     this.activeDecendant = rows[index].id;
-    // if (!this.isRowVisible(this.activeDecendant)) {
-    //   this.psb.directiveRef.scrollToElement('#' + this.activeDecendant, -5);
-    // }
+    if (!this.isRowVisible(this.activeDecendant)) {
+      this.scrollable.scrollable.scrollToElement('#' + this.activeDecendant, {duration: 500});
+    }
   }
 
   isRowVisible(id) {
-    const container = this.elRef.nativeElement.querySelector('.ps--active-y');
+    const container = this.elRef.nativeElement.querySelector('.ng-scroll-viewport');
     if (!container) {
       return true;
     }
@@ -289,7 +291,6 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
 
     // Check if in view
     return (eTop >= cTop && eBottom <= cBottom);
-
   }
 
   changeActiveStatus(index, setFocus = true) {

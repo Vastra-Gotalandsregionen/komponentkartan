@@ -8,10 +8,11 @@
 
   vgr-selectablelist {
     width: 100%;
+    outline: 0;
 
-    &:focus {
-      outline: 0;
-
+    &:focus,
+    &:focus-visible {
+      outline: none !important;
     }
 
     &-header,
@@ -82,6 +83,11 @@
     }
   }
 
+  .selectablelist:focus,
+  .selectablelist:focus-visible {
+    outline: none !important;
+  }
+
   .list-wrapper.active {
     vgr-selectablelist-row:not(.groupheader) {
       cursor: pointer;
@@ -148,7 +154,7 @@
     position: relative;
     background: white;
     display: block;
-
+    height: 244px;
     max-height: 244px;
     // overflow: auto;
     padding: 10px 0px;
