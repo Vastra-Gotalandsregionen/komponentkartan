@@ -5,7 +5,7 @@
         &lt;vgr-selectablelist&gt;</code>
     </p>
     <br>
-    <p>En tabell/lista där du kan markera ett alternativv och som markerar ditt valda alternativ i aktivt läge där möjligheten finns att sätta aktivt läge till true eller false.
+    <p>En tabell/lista där du kan markera ett alternativ och som markerar ditt valda alternativ i aktivt läge där möjligheten finns att sätta aktivt läge till true eller false.
     </p>
     <br>
     <p> Förändras med tema:
@@ -13,6 +13,7 @@
     </p>
   </div>
   <div class="docs__examples">
+    <h2>Exempel</h2>
     <vgr-selectablelist [id]="'test'" [active]="true">
       <vgr-selectablelist-header>
           <vgr-selectablelist-header-column><strong>Utbetalning avser</strong>
@@ -22,8 +23,7 @@
           </vgr-selectablelist-header-column>
         </vgr-selectablelist-header>
       <vgr-selectablelist-row *ngFor="let justering of justeringar; let i = index" [value]="i">
-        <vgr-selectablelist-column class="truncate-text-withoutellips"
-          style="max-width: 350px; width:350px">{{justering.beskrivning}}...
+        <vgr-selectablelist-column style="max-width: 350px; width:350px">{{justering.beskrivning}}...
         </vgr-selectablelist-column>
         <vgr-selectablelist-column>{{justering.period | date: 'MMM YYYY'}}
         </vgr-selectablelist-column>
@@ -31,6 +31,9 @@
         </vgr-selectablelist-column>
       </vgr-selectablelist-row>
   </vgr-selectablelist>
+  <br>
+    <h2>HTML</h2>
+    <section vgrHighlightCode [innerHTML]="exampleCodeMarkup"></section>
 
   </div>
   <div class="docs__api">
@@ -41,13 +44,28 @@
         <th>Exempel</th>
       </tr>
       <tr>
+        <td>id: string</td>
+        <td>Användaren kan sätta id på tabellen och bör göra det för att tabellen ska fungera korrekt.</td>
+        <td>[id]="'id1'"</td>
+      </tr>
+      <tr>
         <td>active: boolean</td>
         <td>Talar om huruvida tabellen är aktiverad eller inte. Default värde är <code>false</code>.</td>
         <td>[active]="true"</td>
       </tr>
+      <tr>
+        <td>useScrollbar: boolean</td>
+        <td>Användaren kan välja om man vill ha med en synlig scrollbar eller inte. Default värde är <code>true</code>.</td>
+        <td>[useScrollbar]="false"</td>
+      </tr>
     </table>
   </div>
   <div class="docs__wcag">
-    <i>Under utveckling</i>
+    <p>Navigering i tabell:</p>
+    <ul>
+      <li>- Tab/Shift+Tab - För att komma till tabellen</li>
+      <li>- Tab/Shift+Tab - För att komma ut ur tabellen om man är inne i tabellen</li>
+      <li>- Upp- och nerpil för att förflytta mellan raderna i tabellen.</li>
+    </ul>
   </div>
 </app-component-docs>
