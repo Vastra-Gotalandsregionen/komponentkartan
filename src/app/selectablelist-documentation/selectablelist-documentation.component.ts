@@ -70,7 +70,7 @@ export class SelectablelistDocumentationComponent implements OnInit {
           </vgr-selectablelist-header-column>
         </vgr-selectablelist-header>
       <vgr-selectablelist-row *ngFor="let justering of justeringar; let i = index" [value]="i">
-        <vgr-selectablelist-column style="max-width: 350px; width:350px">{{justering.beskrivning}}...
+        <vgr-selectablelist-column>{{justering.beskrivning}}...
         </vgr-selectablelist-column>
         <vgr-selectablelist-column>{{justering.period | date: 'MMM YYYY'}}
         </vgr-selectablelist-column>

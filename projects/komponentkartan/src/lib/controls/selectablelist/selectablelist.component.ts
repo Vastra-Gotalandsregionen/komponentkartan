@@ -181,14 +181,6 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
         this.selectFirstSelectable();
       }, 200);
     }
-
-    // We don't want a tabstop on the scrollbar.
-    setTimeout(() => {
-      const scrollbar = this.elRef.nativeElement.querySelector('.ps__thumb-y');
-      if (scrollbar) {
-        scrollbar.tabIndex = -1;
-      }
-    }, 300);
   }
 
   // sortColumn(clickedHeader: SelectablelistHeaderColumnComponent) {
