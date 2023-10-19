@@ -61,7 +61,7 @@ export class SelectablelistDocumentationComponent implements OnInit {
     }
   ]
 
-  exampleCode = `<vgr-selectablelist [id]="'test'" [active]="true">
+  exampleCode = `<vgr-selectablelist [id]="'test'" [active]="true (selectedChanged)="onSelectablelistChanged($event)">
       <vgr-selectablelist-header>
           <vgr-selectablelist-header-column><strong>Utbetalning avser</strong>
           </vgr-selectablelist-header-column>
@@ -69,7 +69,7 @@ export class SelectablelistDocumentationComponent implements OnInit {
           <vgr-selectablelist-header-column [alignRight]="true"><strong>Belopp</strong>
           </vgr-selectablelist-header-column>
         </vgr-selectablelist-header>
-      <vgr-selectablelist-row *ngFor="let justering of justeringar; let i = index" [value]="i">
+      <vgr-selectablelist-row *ngFor="let justering of justeringar; let i = index" [value]="justering">
         <vgr-selectablelist-column>{{justering.beskrivning}}...
         </vgr-selectablelist-column>
         <vgr-selectablelist-column>{{justering.period | date: 'MMM YYYY'}}
@@ -88,7 +88,7 @@ export class SelectablelistDocumentationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  testSelected(event) {
+  onSelectablelistChanged(event) {
     console.log(event)
   }
 
