@@ -44,9 +44,6 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
   @HostBinding('attr.role') role = 'listbox';
   @HostBinding('attr.aria-multiselectable') multi = true;
   @HostBinding('attr.tabIndex') tabIndex = 0;
-  @HostBinding('style.outline') outLine = 0;
-  @HostBinding('style.position') position = 'relative';
-  @HostBinding('style.zIndex') zIndex = 0;
 
   @Input() active: boolean;
   @Input() useScrollbar: boolean = true;

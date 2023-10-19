@@ -5,23 +5,18 @@
 @import "../../../assets/partials/base.themify";
 
 :host::ng-deep {
+  outline: 0;
+  position: relative;
+  z-index: 0;
+  width: 100%;
 
-  vgr-selectablelist {
-    width: 100%;
-    outline: 0;
-
-    &:focus,
-    &:focus-visible {
-      outline: none !important;
-    }
-
-    &-header,
-    &-row {
+    vgr-selectablelist-header,
+    vgr-selectablelist-row {
       display: table-row;
       height: 32px;
     }
 
-    &-row:nth-child(even) {
+    vgr-selectablelist-row:nth-child(even) {
       background: white;
 
       &.selected,
@@ -48,7 +43,7 @@
       }
     }
 
-    &-row:nth-child(odd) {
+    vgr-selectablelist-row:nth-child(odd) {
       background: #f0f0f0;
 
       &.selected,
@@ -66,8 +61,8 @@
       }
     }
 
-    &-header-column,
-    &-column {
+    vgr-selectablelist-header-column,
+    vgr-selectablelist-column {
       display: table-cell;
       height: 22px;
       line-height: 22px;
@@ -81,12 +76,6 @@
         text-align: right;
       }
     }
-  }
-
-  .selectablelist:focus,
-  .selectablelist:focus-visible {
-    outline: none !important;
-  }
 
   .list-wrapper.active {
     vgr-selectablelist-row:not(.groupheader) {
