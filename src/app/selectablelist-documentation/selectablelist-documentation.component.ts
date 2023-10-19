@@ -88,4 +88,8 @@ export class SelectablelistDocumentationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  testSelected(event) {
+    console.log(event)
+  }
+
 }

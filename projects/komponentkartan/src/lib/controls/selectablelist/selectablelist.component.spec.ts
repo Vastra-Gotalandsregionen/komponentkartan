@@ -6,7 +6,6 @@ import { SelectablelistColumnComponent } from './selectablelist.column.component
 import { SelectablelistHeaderComponent } from './selectablelist.header.component';
 import { SelectablelistRowComponent } from './selectablelist.row.component';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { Component, DebugElement, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { SelectablelistService } from './selectablelist.service';
@@ -77,7 +76,6 @@ describe('SelectablelistComponent', () => {
         SelectablelistRowComponent,
         SelectablelistColumnComponent
       ],
-      imports: [PerfectScrollbarModule],
       providers: [
         { provide: SelectablelistService },
       ]
@@ -90,7 +88,7 @@ describe('SelectablelistComponent', () => {
     fixture.detectChanges();
     component = fixture.debugElement.query(By.directive(SelectablelistComponent)).componentInstance;
     rootElement = fixture.debugElement;
-    selectionChangedSpy = spyOn(component.selectionChanged, 'emit').and.callThrough();
+    selectionChangedSpy = spyOn(component.selectedChanged, 'emit').and.callThrough();
     rows = component.rows.toArray();
   });
 

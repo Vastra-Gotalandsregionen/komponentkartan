@@ -51,7 +51,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
   @Input() active: boolean;
   @Input() useScrollbar: boolean = true;
   @HostBinding('attr.id') @Input() id: string;
-  @Output() selectionChanged = new EventEmitter();
+  @Output() selectedChanged = new EventEmitter();
 
   @ContentChild(SelectablelistHeaderComponent) header: SelectablelistHeaderComponent;
 
@@ -151,7 +151,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
 
     if (changes.active.currentValue === false) {
       this.clearSelection();
-      this.selectionChanged.emit([]);
+      this.selectedChanged.emit([]);
     }
   }
 
@@ -313,7 +313,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
       setTimeout(() => {
         rows[index].selected = true;
         const selected = this.rows.filter(item => item.selected).map(item => item.value);
-        this.selectionChanged.emit(selected);
+        this.selectedChanged.emit(selected);
       }, 40);
 
     }

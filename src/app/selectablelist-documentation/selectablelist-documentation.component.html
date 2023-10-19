@@ -14,7 +14,7 @@
   </div>
   <div class="docs__examples">
     <h2>Exempel</h2>
-    <vgr-selectablelist [id]="'test'" [active]="true">
+    <vgr-selectablelist [id]="'test'" [active]="true" (selectedChanged)="testSelected($event)">
       <vgr-selectablelist-header>
           <vgr-selectablelist-header-column><strong>Utbetalning avser</strong>
           </vgr-selectablelist-header-column>
@@ -22,7 +22,7 @@
           <vgr-selectablelist-header-column [alignRight]="true"><strong>Belopp</strong>
           </vgr-selectablelist-header-column>
         </vgr-selectablelist-header>
-      <vgr-selectablelist-row *ngFor="let justering of justeringar; let i = index" [value]="i">
+      <vgr-selectablelist-row *ngFor="let justering of justeringar; let i = index" [value]="justering">
         <vgr-selectablelist-column>{{justering.beskrivning}}...
         </vgr-selectablelist-column>
         <vgr-selectablelist-column>{{justering.period | date: 'MMM YYYY'}}
@@ -37,6 +37,7 @@
 
   </div>
   <div class="docs__api">
+    <h2><code>&lt;vgr-selectablelist&gt;</code></h2>
     <table class="property-table">
       <tr>
         <th>Namn</th>
@@ -57,6 +58,40 @@
         <td>useScrollbar: boolean</td>
         <td>Användaren kan välja om man vill ha med en synlig scrollbar eller inte. Default värde är <code>true</code>.</td>
         <td>[useScrollbar]="false"</td>
+      </tr>
+      <tr>
+        <td>selectedChanged: EventEmitter&lt;any&gt;</td>
+        <td>Event som triggas när man väljer en ny rad i tabellen</td>
+        <td>(selectedChanged)="onSelectablelistChanged($event)"</td>
+      </tr>
+    </table>
+    <br>
+    <h2><code>&lt;vgr-selectablelist-row&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>value: any</td>
+        <td>Värdet som ska skickas in när användaren klickar på raden eller väljer raden</td>
+        <td>[value]="'i'"</td>
+      </tr>
+      <tr>
+        <td>groupheader: boolean</td>
+        <td>Talar om huruvida raden är groupheader eller inte. Default värde är <code>false</code>.</td>
+        <td>[groupheader]="false"</td>
+      </tr>
+      <tr>
+        <td>selectable: boolean</td>
+        <td>Talar om huruvida raden är valbar eller inte. Default värde är <code>true</code>.</td>
+        <td>[selectable]="true"</td>
+      </tr>
+      <tr>
+        <td>rowClicked : EventEmitter&lt;any&gt;</td>
+        <td>Event som triggas när man klickar på en specifik rad i tabellen</td>
+        <td>(rowClicked)="onRowClicked($event)"</td>
       </tr>
     </table>
   </div>
