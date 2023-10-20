@@ -14,7 +14,11 @@
   </div>
   <div class="docs__examples">
     <h2>Exempel</h2>
-    <vgr-selectablelist [id]="'test'" [active]="false" (selectedChanged)="onSelectablelistChanged($event)">
+    <div style="text-align: right;">
+      <vgr-button (click)="addToList()">Lägg till fler rader</vgr-button>
+      <vgr-button (click)="removeFromList()">Ta bort rader</vgr-button>
+    </div>
+    <vgr-selectablelist [id]="'test'" [active]="true" (selectedChanged)="onSelectablelistChanged($event)" [maxHeight]="220">
       <vgr-selectablelist-header>
           <vgr-selectablelist-header-column><strong>Utbetalning avser</strong>
           </vgr-selectablelist-header-column>

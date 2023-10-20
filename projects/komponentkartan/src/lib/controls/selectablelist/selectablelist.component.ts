@@ -47,6 +47,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
 
   @Input() active: boolean;
   @Input() useScrollbar: boolean = true;
+  @Input() maxHeight: number;
   @HostBinding('attr.id') @Input() id: string;
   @Output() selectedChanged = new EventEmitter();
 
@@ -153,18 +154,15 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
   }
 
   ngAfterContentInit() {
-    // Fix för att ta bort scrollbar om height är mindre än maxheighten för tabellen (244px)
-    setTimeout(() => {
-      if (this.scrollWrapper.nativeElement.clientHeight < 244) {
-        this.useScrollbar = false;
-      }
-    }, 20);
+    this.setScrollbarOnHeightChange();
+
     setTimeout(() => this.alignColumns(), 100);
     if (this.header) {
       this.headersPresent = true;
     }
 
     this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      this.setScrollbarOnHeightChange();
       setTimeout(() => this.alignColumns(), 100);
     });
 
@@ -178,6 +176,17 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
         this.selectFirstSelectable();
       }, 200);
     }
+  }
+
+  setScrollbarOnHeightChange() {
+    // Fix för att ta bort scrollbar om height är mindre än maxheighten för tabellen (244px)
+    setTimeout(() => {
+      if (this.scrollWrapper.nativeElement.clientHeight < this.maxHeight) {
+        this.useScrollbar = false;
+      } else {
+        this.useScrollbar = true;
+      }
+    }, 20);
   }
 
   // sortColumn(clickedHeader: SelectablelistHeaderColumnComponent) {
