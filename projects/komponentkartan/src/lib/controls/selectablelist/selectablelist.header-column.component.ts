@@ -8,6 +8,7 @@ import { SelectablelistService } from './selectablelist.service';
 export class SelectablelistHeaderColumnComponent implements OnInit {
 
   @HostBinding('class.right') @Input() alignRight = false;
+  @HostBinding('class.center') @Input() alignCenter = false;
   id: string;
   @HostListener('click') toggleSelected() {
     this.selectablelistService.headerClicked(this);

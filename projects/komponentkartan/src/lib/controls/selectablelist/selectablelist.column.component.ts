@@ -7,6 +7,7 @@ import { Component, Input, HostBinding } from '@angular/core';
 export class SelectablelistColumnComponent {
 
   @HostBinding('class.right') @Input() alignRight = false;
+  @HostBinding('class.center') @Input() alignCenter = false;
 
   constructor() { }
 
