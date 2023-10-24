@@ -62,6 +62,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
 
   lastSelectedItemIndex: number;
   isClicked: boolean;
+  showScrollbar: boolean;
 
   @HostListener('keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     this.isClicked = false;
@@ -108,7 +109,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
     this.activeDecendant = null;
   }
 
-  @HostListener('window:resize') alignColumns() {
+  @HostListener('window:resize', []) alignColumns() {
     const el = this.elRef.nativeElement;
     const row = el.querySelector('vgr-selectablelist-row');
     if (row) {
@@ -162,8 +163,10 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
     }
 
     this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
-      this.setScrollbarOnHeightChange();
-      setTimeout(() => this.alignColumns(), 100);
+      setTimeout(() => {
+        this.setScrollbarOnHeightChange();
+        this.alignColumns()
+      }, 100);
     });
 
     this.selectablelistService.clickedRowRequested
@@ -179,12 +182,16 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
   }
 
   setScrollbarOnHeightChange() {
+    if (this.useScrollbar === false) {
+      this.showScrollbar = false;
+      return;
+    }
     // Fix för att ta bort scrollbar om height är mindre än maxheighten för tabellen (244px)
     setTimeout(() => {
       if (this.scrollWrapper.nativeElement.clientHeight < this.maxHeight) {
-        this.useScrollbar = false;
+        this.showScrollbar = false;
       } else {
-        this.useScrollbar = true;
+        this.showScrollbar = true;
       }
     }, 20);
   }
