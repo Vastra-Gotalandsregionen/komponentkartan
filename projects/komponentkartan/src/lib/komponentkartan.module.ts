@@ -15,8 +15,6 @@ registerLocaleData(localeSv);
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { IconModule } from './controls/icon/icon.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ScrollbarComponent } from './controls/scrollbar/scrollbar.component';
-import { EditableTableComponent } from './controls/editable-table/editable-table.component';
 
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -116,7 +114,12 @@ import { EditableTableComponent } from './controls/editable-table/editable-table
     type.EditableTableColumnComponent,
     type.RadiobuttonGroupComponent,
     type.RadiobuttonItemComponent,
-    type.CheckboxGroupComponent
+    type.CheckboxGroupComponent,
+    type.SelectablelistComponent,
+    type.SelectablelistHeaderComponent,
+    type.SelectablelistColumnComponent,
+    type.SelectablelistHeaderColumnComponent,
+    type.SelectablelistRowComponent
   ],
   exports: [
     type.SafePipe,
@@ -201,7 +204,12 @@ import { EditableTableComponent } from './controls/editable-table/editable-table
     type.EditableTableColumnComponent,
     type.RadiobuttonGroupComponent,
     type.RadiobuttonItemComponent,
-    type.CheckboxGroupComponent
+    type.CheckboxGroupComponent,
+    type.SelectablelistComponent,
+    type.SelectablelistHeaderComponent,
+    type.SelectablelistColumnComponent,
+    type.SelectablelistHeaderColumnComponent,
+    type.SelectablelistRowComponent
   ],
   providers: [
     type.ModalService,

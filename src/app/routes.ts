@@ -43,6 +43,7 @@ import { NotificationDocumentationComponent } from './notification-documentation
 import { TabButtonComponent } from './tab-button/tab-button.component';
 import { ComboboxDocumentationComponent } from './combobox-documentation/combobox-documentation.component';
 import { EditableTableDocumentationComponent } from './editable-table-documentation/editable-table-documentation.component';
+import { SelectablelistDocumentationComponent } from './selectablelist-documentation/selectablelist-documentation.component';
 
 export const appRoutes: Routes = [
 
@@ -96,7 +97,8 @@ export const appRoutes: Routes = [
     { path: 'notification', component: NotificationDocumentationComponent },
     { path: 'combobox', component: ComboboxDocumentationComponent },
     { path: 'editable-table', component: EditableTableDocumentationComponent },
+    { path: 'selectablelist', component: SelectablelistDocumentationComponent },
 
     { path: '**', redirectTo: '/start' },
-    
+
 ];

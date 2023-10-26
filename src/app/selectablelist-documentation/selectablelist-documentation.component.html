@@ -1,0 +1,130 @@
+<app-component-docs [componentName]="'Selectable list'">
+  <div class="docs__overview">
+    <p>
+      <code>
+        &lt;vgr-selectablelist&gt;</code>
+    </p>
+    <br>
+    <p>En tabell/lista där du kan markera ett alternativ och som markerar ditt valda alternativ i aktivt läge där möjligheten finns att sätta aktivt läge till true eller false.
+    </p>
+    <br>
+    <p> Förändras med tema:
+      <strong>ja</strong>
+    </p>
+  </div>
+  <div class="docs__examples">
+    <h2>Exempel</h2>
+    <div style="text-align: right;">
+      <vgr-button (click)="addToList()">Lägg till fler rader</vgr-button>
+      <vgr-button (click)="removeFromList()">Ta bort rader</vgr-button>
+    </div>
+    <vgr-selectablelist [id]="'test'" [active]="true" (selectedChanged)="onSelectablelistChanged($event)" [maxHeight]="220">
+      <vgr-selectablelist-header>
+          <vgr-selectablelist-header-column><strong>Utbetalning avser</strong>
+          </vgr-selectablelist-header-column>
+          <vgr-selectablelist-header-column><strong>Månad</strong></vgr-selectablelist-header-column>
+          <vgr-selectablelist-header-column [alignRight]="true"><strong>Belopp</strong>
+          </vgr-selectablelist-header-column>
+        </vgr-selectablelist-header>
+      <vgr-selectablelist-row *ngFor="let justering of justeringar; let i = index" [value]="justering">
+        <vgr-selectablelist-column>{{justering.beskrivning}}...
+        </vgr-selectablelist-column>
+        <vgr-selectablelist-column>{{justering.period | date: 'MMM YYYY'}}
+        </vgr-selectablelist-column>
+        <vgr-selectablelist-column [alignRight]="true">{{justering.belopp}}
+        </vgr-selectablelist-column>
+      </vgr-selectablelist-row>
+  </vgr-selectablelist>
+  <br>
+    <h2>HTML</h2>
+    <section vgrHighlightCode [innerHTML]="exampleCodeMarkup"></section>
+
+  </div>
+  <div class="docs__api">
+    <h2><code>&lt;vgr-selectablelist&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>id: string</td>
+        <td>Användaren kan sätta id på tabellen och bör göra det för att tabellen ska fungera korrekt.</td>
+        <td>[id]="'id1'"</td>
+      </tr>
+      <tr>
+        <td>active: boolean</td>
+        <td>Talar om huruvida tabellen är aktiverad eller inte. Default värde är <code>false</code>.</td>
+        <td>[active]="true"</td>
+      </tr>
+      <tr>
+        <td>useScrollbar: boolean</td>
+        <td>Användaren kan välja om man vill ha med en synlig scrollbar eller inte. Default värde är <code>true</code>.</td>
+        <td>[useScrollbar]="false"</td>
+      </tr>
+      <tr>
+        <td>selectedChanged: EventEmitter&lt;any&gt;</td>
+        <td>Event som triggas när man väljer en ny rad i tabellen</td>
+        <td>(selectedChanged)="onSelectablelistChanged($event)"</td>
+      </tr>
+    </table>
+    <br>
+    <h2><code>&lt;vgr-selectablelist-row&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>value: any</td>
+        <td>Värdet som ska skickas in när användaren klickar på raden eller väljer raden</td>
+        <td>[value]="'i'"</td>
+      </tr>
+      <tr>
+        <td>groupheader: boolean</td>
+        <td>Talar om huruvida raden är groupheader eller inte. Default värde är <code>false</code>.</td>
+        <td>[groupheader]="false"</td>
+      </tr>
+      <tr>
+        <td>selectable: boolean</td>
+        <td>Talar om huruvida raden är valbar eller inte. Default värde är <code>true</code>.</td>
+        <td>[selectable]="true"</td>
+      </tr>
+      <tr>
+        <td>rowClicked : EventEmitter&lt;any&gt;</td>
+        <td>Event som triggas när man klickar på en specifik rad i tabellen</td>
+        <td>(rowClicked)="onRowClicked($event)"</td>
+      </tr>
+    </table>
+    <br>
+    <h2><code>&lt;vgr-selectablelist-column&gt;</code></h2>
+    <h2><code>&lt;vgr-selectablelist-header-column&gt;</code></h2>
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>alignRight: boolean</td>
+        <td>Sätter om värdet i kolumnen ska högerjusteras. Default värde är <code>false</code>.</td>
+        <td>[alignRight]="true"</td>
+      </tr>
+      <tr>
+        <td>alignCenter: any</td>
+        <td>Sätter om värdet i kolumnen ska centreras. Default värde är <code>false</code>.</td>
+        <td>[alignCenter]="true"</td>
+      </tr>
+    </table>
+  </div>
+  <div class="docs__wcag">
+    <p>Navigering i tabell:</p>
+    <ul>
+      <li>- Tab/Shift+Tab - För att komma till tabellen</li>
+      <li>- Tab/Shift+Tab - För att komma ut ur tabellen om man är inne i tabellen</li>
+      <li>- Upp- och nerpil för att förflytta mellan raderna i tabellen.</li>
+    </ul>
+  </div>
+</app-component-docs>
