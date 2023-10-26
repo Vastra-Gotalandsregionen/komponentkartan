@@ -89,7 +89,6 @@ export class SelectablelistDocumentationComponent implements OnInit {
   }
 
   onSelectablelistChanged(event) {
-    console.log(event)
   }
 
   addToList() {
