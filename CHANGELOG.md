@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 10.3.1 (2023-12-01) 
+- Exported `vgr-selectablelist.service`
 # 10.3.0 (2023-10-26) 
 - Added new component `vgr-selectablelist`
 # 10.2.0 (2023-09-29) 

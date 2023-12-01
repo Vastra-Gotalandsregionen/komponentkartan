@@ -108,5 +108,6 @@ export { SelectablelistRowComponent } from './controls/selectablelist/selectable
 export { SelectablelistHeaderColumnComponent } from './controls/selectablelist/selectablelist.header-column.component';
 export { SelectablelistHeaderComponent } from './controls/selectablelist/selectablelist.header.component';
 export { SelectablelistColumnComponent } from './controls/selectablelist/selectablelist.column.component';
+export { SelectablelistService } from './controls/selectablelist/selectablelist.service';
 
 export { Guid } from './utils/guid';

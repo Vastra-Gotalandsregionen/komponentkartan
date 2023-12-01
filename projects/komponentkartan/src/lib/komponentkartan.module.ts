@@ -215,6 +215,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     type.ModalService,
     type.BrowserDetector,
     type.TabManagementService,
+    type.SelectablelistService,
     type.PaginationManagementService,
     { provide: LOCALE_ID, useValue: 'sv-SE' },
     // {
