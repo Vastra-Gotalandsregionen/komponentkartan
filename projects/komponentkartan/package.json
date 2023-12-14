@@ -1,15 +1,16 @@
 {
   "name": "vgr-komponentkartan",
-  "version": "10.3.1",
+  "version": "10.4.0-beta1",
   "peerDependencies": {
-    "@angular/cdk": ">=14.2.3",
-    "@angular/common": ">=14.2.4",
-    "@angular/core": ">=14.2.4",
-    "@fortawesome/angular-fontawesome": ">=0.10.1",
+    "@angular/cdk": ">=17.0.0",
+    "@angular/common": ">=17.0.0",
+    "@angular/core": ">=17.0.0",
+    "@fortawesome/angular-fontawesome": ">=0.14.0",
     "@fortawesome/fontawesome-svg-core": ">=1.2.36",
     "@fortawesome/free-regular-svg-icons": ">=5.15.4",
     "@fortawesome/free-solid-svg-icons": ">=5.15.4",
-    "ngx-scrollbar": ">=8.0.0"
+    "ngx-scrollbar": ">=8.0.0",
+    "typescript": ">=5.2.2"
   },
   "dependencies": {
     "tslib": "^2.0.0"
