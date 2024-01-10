@@ -67,8 +67,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
           this.gridService.requestCollapseRow(this);
         }
       } else {
-        console.log('emit requestExpandRow')
-          this.gridService.requestExpandRow(this);
+         this.gridService.requestExpandRow(this);
       }
     }
   }
@@ -87,8 +86,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   //Anropas från Grid
   setExpanded(expanded: boolean) {
     this.isExpanded = expanded;
-    this.expanded = expanded;
-    console.log('GridRow setExpanded emit')
     this.expandedChanged.emit(this.isExpanded);
 
   }

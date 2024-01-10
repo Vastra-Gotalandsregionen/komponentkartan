@@ -64,87 +64,90 @@
           {{notification.text}}
         </vgr-notification>
         <vgr-grid-content>
-          <vgr-card-section *ngIf="person.expanded" backgroundColor="#f1eadc" title="Enhet" [subtitle]="'enhetsnamn'">
+          <div *ngIf="person.expanded">
+            <vgr-card-section  backgroundColor="#f1eadc" title="Enhet" [subtitle]="'enhetsnamn'">
 
-          <vgr-card>
-              <vgr-card-header>
-                hej hej
-              </vgr-card-header>
-              <vgr-card-column>
-                <table style="width:100%;text-align:left">
-                  <thead>
-                    <th>Kolumn 1</th>
-                    <th>Kolumn 2</th>
-                    <th>Kolumn 3</th>
-                    <th>Kolumn 4</th>
-                    <th>Kolumn 5</th>
-                    <th>Kolumn 6</th>
-                    <th>Kolumn 7</th>
-                    <th>Kolumn 8</th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Värde 1</td>
-                      <td>Värde 2</td>
-                      <td>Värde 3</td>
-                      <td>Värde 4</td>
-                      <td>Värde 5</td>
-                      <td>Värde 6</td>
-                      <td>Värde 7</td>
-                      <td>Värde 8</td>
-                    </tr>
-                    <tr>
-                      <td>Värde 1</td>
-                      <td>Värde 2</td>
-                      <td>Värde 3</td>
-                      <td>Värde 4</td>
-                      <td>Värde 5</td>
-                      <td>Värde 6</td>
-                      <td>Värde 7</td>
-                      <td>Värde 8</td>
-                    </tr>
-                    <tr>
-                      <td>Värde 1</td>
-                      <td>Värde 2</td>
-                      <td>Värde 3</td>
-                      <td>Värde 4</td>
-                      <td>Värde 5</td>
-                      <td>Värde 6</td>
-                      <td>Värde 7</td>
-                      <td>Värde 8</td>
-                    </tr>
-                    <tr>
-                      <td>Värde 1</td>
-                      <td>Värde 2</td>
-                      <td>Värde 3</td>
-                      <td>Värde 4</td>
-                      <td>Värde 5</td>
-                      <td>Värde 6</td>
-                      <td>Värde 7</td>
-                      <td>Värde 8</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </vgr-card-column>
-            </vgr-card>
-          </vgr-card-section>
-          <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person)">Uppdatera</vgr-button>
-          <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person, true)">Uppdatera och rensa meddelande
-          </vgr-button>
-          <vgr-button [buttonStyle]="'secondary'" (click)="deleteRow(person)">Ta bort</vgr-button>
-          <p>Pellentesque egestas viverra consequat. Phasellus mollis aliquet libero quis eleifend. Nullam at dolor
-            interdum, interdum lacus non, rutrum nulla. Phasellus laoreet quam quis justo mattis, sit amet vehicula diam
-            ullamcorper. Nulla a quam id nibh aliquam accumsan at ut lectus. Nullam dictum dolor vel scelerisque tempus.
-            Phasellus vel nisi justo. Praesent blandit ultricies lacus, ac ornare leo hendrerit ullamcorper. Etiam ipsum
-            eros, faucibus luctus hendrerit sit amet, bibendum in felis. Phasellus imperdiet, ante sed viverra
-            tincidunt, ante quam dictum urna, et condimentum lacus neque nec ligula. Nullam aliquet vel eros vitae
-            lacinia.</p>
-          <div style="margin-top: 20px;">
-            <vgr-dropdown-select>
-              <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
-              <vgr-dropdown-item>Banan</vgr-dropdown-item>
-              <vgr-dropdown-item>Citron</vgr-dropdown-item>
-            </vgr-dropdown-select>
+            <vgr-card>
+                <vgr-card-header>
+                  hej hej
+                </vgr-card-header>
+                <vgr-card-column>
+                  <table style="width:100%;text-align:left">
+                    <thead>
+                      <th>Kolumn 1</th>
+                      <th>Kolumn 2</th>
+                      <th>Kolumn 3</th>
+                      <th>Kolumn 4</th>
+                      <th>Kolumn 5</th>
+                      <th>Kolumn 6</th>
+                      <th>Kolumn 7</th>
+                      <th>Kolumn 8</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Värde 1</td>
+                        <td>Värde 2</td>
+                        <td>Värde 3</td>
+                        <td>Värde 4</td>
+                        <td>Värde 5</td>
+                        <td>Värde 6</td>
+                        <td>Värde 7</td>
+                        <td>Värde 8</td>
+                      </tr>
+                      <tr>
+                        <td>Värde 1</td>
+                        <td>Värde 2</td>
+                        <td>Värde 3</td>
+                        <td>Värde 4</td>
+                        <td>Värde 5</td>
+                        <td>Värde 6</td>
+                        <td>Värde 7</td>
+                        <td>Värde 8</td>
+                      </tr>
+                      <tr>
+                        <td>Värde 1</td>
+                        <td>Värde 2</td>
+                        <td>Värde 3</td>
+                        <td>Värde 4</td>
+                        <td>Värde 5</td>
+                        <td>Värde 6</td>
+                        <td>Värde 7</td>
+                        <td>Värde 8</td>
+                      </tr>
+                      <tr>
+                        <td>Värde 1</td>
+                        <td>Värde 2</td>
+                        <td>Värde 3</td>
+                        <td>Värde 4</td>
+                        <td>Värde 5</td>
+                        <td>Värde 6</td>
+                        <td>Värde 7</td>
+                        <td>Värde 8</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </vgr-card-column>
+              </vgr-card>
+            </vgr-card-section>
+
+            <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person)">Uppdatera</vgr-button>
+            <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person, true)">Uppdatera och rensa meddelande
+            </vgr-button>
+            <vgr-button [buttonStyle]="'secondary'" (click)="deleteRow(person)">Ta bort</vgr-button>
+            <p>Pellentesque egestas viverra consequat. Phasellus mollis aliquet libero quis eleifend. Nullam at dolor
+              interdum, interdum lacus non, rutrum nulla. Phasellus laoreet quam quis justo mattis, sit amet vehicula diam
+              ullamcorper. Nulla a quam id nibh aliquam accumsan at ut lectus. Nullam dictum dolor vel scelerisque tempus.
+              Phasellus vel nisi justo. Praesent blandit ultricies lacus, ac ornare leo hendrerit ullamcorper. Etiam ipsum
+              eros, faucibus luctus hendrerit sit amet, bibendum in felis. Phasellus imperdiet, ante sed viverra
+              tincidunt, ante quam dictum urna, et condimentum lacus neque nec ligula. Nullam aliquet vel eros vitae
+              lacinia.</p>
+            <div style="margin-top: 20px;">
+              <vgr-dropdown-select>
+                <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
+                <vgr-dropdown-item>Banan</vgr-dropdown-item>
+                <vgr-dropdown-item>Citron</vgr-dropdown-item>
+              </vgr-dropdown-select>
+            </div>
           </div>
         </vgr-grid-content>
       </vgr-grid-row>
