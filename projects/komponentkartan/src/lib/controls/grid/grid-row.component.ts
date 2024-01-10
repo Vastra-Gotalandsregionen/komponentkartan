@@ -44,6 +44,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges: ', changes)
     const expandedChange = changes['expanded'];
     if (expandedChange && expandedChange.currentValue !== this.isExpanded) {
       if (expandedChange.firstChange) {
@@ -55,15 +56,19 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   }
 
   toggleExpanded() {
+    console.log('ToggleExpanded checked: ', this.isExpanded)
     if (this.hasExpandablecontent) {
       if (this.isExpanded) {
         if (this.preventCollapse) {
+          console.log('emit collapsePrevented')
           this.collapsePrevented.emit();
         } else {
+          console.log('emit requestCollapseRow')
           this.gridService.requestCollapseRow(this);
         }
       } else {
-        this.gridService.requestExpandRow(this);
+        console.log('emit requestExpandRow')
+          this.gridService.requestExpandRow(this);
       }
     }
   }
@@ -79,9 +84,11 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
     });
   }
 
+  //Anropas från Grid
   setExpanded(expanded: boolean) {
     this.isExpanded = expanded;
     this.expanded = expanded;
+    console.log('GridRow setExpanded emit')
     this.expandedChanged.emit(this.isExpanded);
 
   }

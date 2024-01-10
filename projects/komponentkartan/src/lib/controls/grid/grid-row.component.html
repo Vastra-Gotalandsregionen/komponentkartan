@@ -10,6 +10,7 @@
   <div class="grid-row-content" [@toggleExpandedState]="expandedState"
    (@toggleExpandedState.start)="toggleState('start', expanded)" (@toggleExpandedState.done)="toggleState('done', expanded)"
    [class.grid-row-overflow]="overflow">
+   <!-- <div> -->
     <ng-content select="vgr-grid-content" *ngIf="expanded"></ng-content>
   </div>
 </div>
