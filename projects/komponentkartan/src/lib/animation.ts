@@ -17,29 +17,11 @@ export const toggleExpandedState = trigger('toggleExpandedState', [
     })),
     transition('false => *, true => *',
         [
-          // style({ overflow: 'hidden'}),
           animate('{{speed}}')
         ],
         { params: { speed: '400ms ease' } }
     )
 ]);
-
-
-// export const toggleExpandedStateGrid = trigger('toggleExpandedStateGrid', [
-//     state('false, void', style({
-//         height: '0', // overflow: 'hidden'
-//     })),
-//     state('true', style({
-//         height: '*'
-//     })),
-//     transition('false => *, true => *',
-//         [
-//           // style({ overflow: 'hidden'}),
-//           animate('{{speed}}')
-//         ],
-//         { params: { speed: '400ms ease' } }
-//     )
-// ]);
 
 export const toggleChevron = trigger('toggleChevron', [
     state('false', style({

@@ -24,7 +24,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   @ContentChildren(NotificationComponent) notifications: QueryList<NotificationComponent>;
   zebraLayout = false;
 
-  animationSpeed = '400ms';
+  animationSpeed = '400ms ease';
   hasExpandablecontent = true;
   hasNotifications = false;
   isExpanded = false;
@@ -44,7 +44,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges: ', changes)
     const expandedChange = changes['expanded'];
     if (expandedChange && expandedChange.currentValue !== this.isExpanded) {
       if (expandedChange.firstChange) {
@@ -56,14 +55,11 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   }
 
   toggleExpanded() {
-    console.log('ToggleExpanded checked: ', this.isExpanded)
     if (this.hasExpandablecontent) {
       if (this.isExpanded) {
         if (this.preventCollapse) {
-          console.log('emit collapsePrevented')
           this.collapsePrevented.emit();
         } else {
-          console.log('emit requestCollapseRow')
           this.gridService.requestCollapseRow(this);
         }
       } else {
@@ -86,6 +82,7 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   //Anropas från Grid
   setExpanded(expanded: boolean) {
     this.isExpanded = expanded;
+    // this.expanded = expanded;
     this.expandedChanged.emit(this.isExpanded);
 
   }
