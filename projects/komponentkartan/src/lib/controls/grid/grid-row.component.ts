@@ -44,7 +44,6 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges: ', changes)
     const expandedChange = changes['expanded'];
     if (expandedChange && expandedChange.currentValue !== this.isExpanded) {
       if (expandedChange.firstChange) {
@@ -56,14 +55,11 @@ export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy 
   }
 
   toggleExpanded() {
-    console.log('ToggleExpanded checked: ', this.isExpanded)
     if (this.hasExpandablecontent) {
       if (this.isExpanded) {
         if (this.preventCollapse) {
-          console.log('emit collapsePrevented')
           this.collapsePrevented.emit();
         } else {
-          console.log('emit requestCollapseRow')
           this.gridService.requestCollapseRow(this);
         }
       } else {

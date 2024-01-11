@@ -139,14 +139,12 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
     //      .pipe(takeUntil(this.ngUnsubscribe))
     this.gridService.expandRowRequested.subscribe((rowToExpand: GridRowComponent) => {
-        console.log('Inne i pipe')
         if (this.allowMultipleExpandedRows) {
           rowToExpand.setExpanded(true);
           if (this.stickyHeader) {
             this.increaseHeaderWidth = true;
           }
         } else {
-          console.log('Grid expandrow')
           const expandedRows = this.rows.filter(x => x.isExpanded);
 
           if (expandedRows.length) {
@@ -154,11 +152,9 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 
             if (preventedRows.length) {
               preventedRows.forEach(x => x.collapsePrevented.emit());
-              console.log('Grid expandrow prevent')
               rowToExpand.expandPrevented.emit();
 
             } else {
-              console.log('Grid else')
               expandedRows.forEach(x => x.setExpanded(false));
               rowToExpand.setExpanded(true);
               if (this.stickyHeader) {
@@ -186,10 +182,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
     this.rows.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.setAnimationSpeed();
     });
-    console.log('setAnimationSpeed')
     this.setAnimationSpeed();
-
-    console.log('setLayout')
     this.setLayout();
   }
 

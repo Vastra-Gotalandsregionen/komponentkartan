@@ -103,9 +103,7 @@ export class GridDocumentationComponent implements OnInit {
   ngOnInit() {
     this.setPagingData(this.activePage);
 
-    console.log('start for')
     for(let i = 0; i < 200; i++) {
-      console.log('hello')
       this.manyPeople.push({
         namn: 'Pelle'+ i,
         efternamn: 'Karlsson',
