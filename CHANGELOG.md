@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+# 11.0.0 (2024-01-12) 
+- Upgraded to Angular 17 with support for only Angular 17 and above.
+- Corrected some bugs in `vgr-grid`
 # 10.3.1 (2023-12-01) 
 - Exported `vgr-selectablelist.service`
 # 10.3.0 (2023-10-26) 
