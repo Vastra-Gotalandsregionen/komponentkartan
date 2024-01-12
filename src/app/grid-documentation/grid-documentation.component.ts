@@ -13,16 +13,18 @@ export class GridDocumentationComponent implements OnInit {
   @ViewChildren('peopleGridRows', {read: GridRowComponent}) peopleGridRows: QueryList<GridRowComponent>;
   people: Person[] = [
     {
+      id: 1,
       namn: 'Adam',
       efternamn: 'Andersson',
-      notifications: [{
-        text: 'Meddelande: Text',
-        type: 'comment'
-      }],
+      // notifications: [{
+      //   text: 'Meddelande: Text',
+      //   type: 'comment'
+      // }],
       expanded: false,
       checked: false
     },
     {
+      id: 2,
       namn: 'Bjarne',
       efternamn: 'Bengtsson',
       notifications: [],
@@ -30,6 +32,7 @@ export class GridDocumentationComponent implements OnInit {
       checked: false
     },
     {
+      id: 3,
       namn: 'Carola',
       efternamn: 'Claesson',
       notifications: [],
@@ -37,6 +40,7 @@ export class GridDocumentationComponent implements OnInit {
       checked: false
     },
     {
+      id: 4,
       namn: 'Daniella',
       efternamn: 'Di Maria Marqueez',
       notifications: [],
@@ -44,6 +48,7 @@ export class GridDocumentationComponent implements OnInit {
       checked: false
     },
     {
+      id: 5,
       namn: 'Erik',
       efternamn: '',
       notifications: [{
@@ -70,6 +75,7 @@ export class GridDocumentationComponent implements OnInit {
   pageCount = 1;
   itemsPerPage = 3;
   paginatedPeople: any[] = [];
+  manyPeople: any[] = [];
 
   expanded0 = false;
   expanded1 = false;
@@ -96,6 +102,16 @@ export class GridDocumentationComponent implements OnInit {
   constructor(private paginationManagementService: PaginationManagementService, private modalService: ModalService){}
   ngOnInit() {
     this.setPagingData(this.activePage);
+
+    for(let i = 0; i < 10; i++) {
+      this.manyPeople.push({
+        namn: 'Pelle '+ i,
+        efternamn: 'Karlsson',
+        expanded: false,
+        checked: false
+      });
+
+    }
   }
 
   addRow() {
@@ -117,6 +133,11 @@ export class GridDocumentationComponent implements OnInit {
     setTimeout(() => {
       pelle.notifications.pop();
     }, 2500);
+  }
+
+  expanderingForandrad(person, event) {
+    console.log(person, event)
+    person.expanded = event
   }
 
   sort(args: GridSortChangedArgs) {
@@ -258,6 +279,7 @@ export class GridDocumentationComponent implements OnInit {
 
 
 export interface Person {
+  id?: number;
   namn: string;
   efternamn: string;
   notifications?: Notification[];

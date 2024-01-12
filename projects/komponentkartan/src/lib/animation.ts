@@ -9,7 +9,7 @@ import {
 } from '@angular/animations';
 
 export const toggleExpandedState = trigger('toggleExpandedState', [
-    state('false, void', style({
+    state('false', style({
         height: '0', // overflow: 'hidden'
     })),
     state('true', style({
@@ -17,7 +17,6 @@ export const toggleExpandedState = trigger('toggleExpandedState', [
     })),
     transition('false => *, true => *',
         [
-          // style({ overflow: 'hidden'}),
           animate('{{speed}}')
         ],
         { params: { speed: '400ms ease' } }

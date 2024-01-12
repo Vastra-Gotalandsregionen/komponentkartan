@@ -1,4 +1,4 @@
-import { waitForAsync, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, fakeAsync, tick, discardPeriodicTasks, flush } from '@angular/core/testing';
 
 import { SelectablelistComponent } from './selectablelist.component';
 import { SelectablelistHeaderColumnComponent } from './selectablelist.header-column.component';
@@ -9,6 +9,7 @@ import { SelectablelistRowComponent } from './selectablelist.row.component';
 import { Component, DebugElement, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { SelectablelistService } from './selectablelist.service';
+import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
 
 @Component({
   selector: 'vgr-selectablelist-test',
@@ -74,7 +75,8 @@ describe('SelectablelistComponent', () => {
         SelectablelistHeaderComponent,
         SelectablelistHeaderColumnComponent,
         SelectablelistRowComponent,
-        SelectablelistColumnComponent
+        SelectablelistColumnComponent,
+        ScrollbarComponent
       ],
       providers: [
         { provide: SelectablelistService },
@@ -134,6 +136,9 @@ describe('SelectablelistComponent', () => {
       fixture.detectChanges();
       tick(400);
       fixture.detectChanges();
+      tick(Infinity);
+      discardPeriodicTasks();
+      flush();
     }));
 
     it('"Kaninrow" should be the selected', () => {
@@ -146,7 +151,7 @@ describe('SelectablelistComponent', () => {
     });
   });
 
-  xdescribe('when both "Kanin" and "Hund" rows are clicked', () => { // removed because multiselect not yet implemented
+  describe('when both "Kanin" and "Hund" rows are clicked', () => { // removed because multiselect not yet implemented
     beforeEach(fakeAsync(() => {
       selectionChangedSpy.calls.reset();
       component.clearSelection();
@@ -159,6 +164,9 @@ describe('SelectablelistComponent', () => {
       hundRow.nativeElement.click();
       tick(400);
       fixture.detectChanges();
+      tick(Infinity);
+      discardPeriodicTasks();
+      flush();
     }));
 
     it('Both rows should be selected', () => {

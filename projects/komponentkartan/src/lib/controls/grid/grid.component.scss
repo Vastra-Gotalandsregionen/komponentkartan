@@ -170,9 +170,9 @@
         position: relative;
       }
 
-      &:hover {
-        cursor: pointer;
-      }
+      // &:hover {
+      //   cursor: pointer;
+      // }
     }
   }
 
@@ -183,12 +183,18 @@
       padding-left: 0px;
       padding-right: 0px;
       transition: padding-left 0.4s, padding-right 0.4s;
+
+
     }
   }
 
   vgr-grid-row .grid-row-container {
     display: block;
     transition: box-shadow 0.4s, width 0.4s, margin-left 0.4s, margin-top 0.4s, margin-bottom 0.4s;
+
+    &.grid-row-header--expandable {
+      cursor: pointer;
+    }
 
       &.grid-row--expanded {
         background: #FFFFFF;

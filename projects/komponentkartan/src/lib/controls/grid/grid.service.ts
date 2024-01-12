@@ -15,7 +15,7 @@ export class GridService {
   requestExpandRow(row: any) {
     setTimeout(() => {
       this.expandRowRequestedSource.next(row);
-    });
+    },0);
   }
 
   requestCollapseRow(row: any) {

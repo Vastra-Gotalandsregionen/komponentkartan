@@ -136,8 +136,8 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       this.hasToolbar = true;
     }
 
-    this.gridService.expandRowRequested
-      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((rowToExpand: GridRowComponent) => {
+    //      .pipe(takeUntil(this.ngUnsubscribe))
+    this.gridService.expandRowRequested.subscribe((rowToExpand: GridRowComponent) => {
         if (this.allowMultipleExpandedRows) {
           rowToExpand.setExpanded(true);
           if (this.stickyHeader) {
