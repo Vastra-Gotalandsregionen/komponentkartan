@@ -10,7 +10,7 @@
 
   </vgr-page-header>
   <vgr-page-body>
-     <vgr-grid>
+    <vgr-grid>
       <vgr-grid-header>
         <vgr-grid-header-column>
           Exempel med <code>vgr-grid</code> & <code>vgr-card</code>
@@ -39,12 +39,8 @@
       </vgr-grid-row>
 
     </vgr-grid>
-<!--
-  toggleAnimation="slow"
--->
 
-
-    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true">
+    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true"   toggleAnimation="slow">
       <vgr-grid-header-toolbar>
         <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
           <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad
@@ -56,7 +52,7 @@
         <vgr-grid-header-column [sortKey]="'namn'" #nameColumn>Förnamn</vgr-grid-header-column>
         <vgr-grid-header-column>Efternamn</vgr-grid-header-column>
       </vgr-grid-header>
-      <vgr-grid-row #peopleGridRows *ngFor="let person of manyPeople" [expanded]="person.expanded"
+      <vgr-grid-row #peopleGridRows *ngFor="let person of people" [expanded]="person.expanded"
         (expandedChanged)="person.expanded = $event">
         <vgr-grid-column>{{person.namn}}</vgr-grid-column>
         <vgr-grid-column>{{person.efternamn}}</vgr-grid-column>
@@ -153,7 +149,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-     <vgr-grid (sortChanged)="sort2($event)" (pageChanged)="onPageChanged($event)" [pages]="pageCount"
+    <vgr-grid (sortChanged)="sort2($event)" (pageChanged)="onPageChanged($event)" [pages]="pageCount"
       [toggleAnimation]="'none'" [activePage]="activePage" [stickyHeader]="true" [showLoader]="loading">
       <vgr-grid-header-toolbar>
         <div style="display: flex; align-items: center; height: 30px;">
@@ -197,7 +193,7 @@
       </vgr-grid-row>
     </vgr-grid>
 
-     <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false" [zebraLayout]="true">
+    <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false" [zebraLayout]="true">
       <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = !expanded0">
         <vgr-grid-column width="23">Grid utan rubriker och snabb animeringen</vgr-grid-column>
         <vgr-grid-content>Row content</vgr-grid-content>

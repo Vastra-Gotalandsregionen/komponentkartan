@@ -17,7 +17,7 @@ export class CardSectionComponent {
     @Input() backgroundColor = '#FFFFFF';
     @ViewChild('cardSectionHeader', { read: ElementRef, static: true }) cardSectionHeader: ElementRef;
     overflow = false;
-    animationSpeed = '.4s ease';
+    animationSpeed = '400ms ease';
     expandOverflow: boolean;
 
     toggleExpanded(event) {

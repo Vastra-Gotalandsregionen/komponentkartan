@@ -99,7 +99,6 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   setFocusOnRow(index) {
-    console.log('setFocusOnRow')
     const elem = this.rows.toArray()[index].el.nativeElement.querySelector('.grid-row-header-focus');
     elem.focus();
   }
@@ -183,6 +182,7 @@ export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
       this.setAnimationSpeed();
     });
     this.setAnimationSpeed();
+
     this.setLayout();
   }
 
