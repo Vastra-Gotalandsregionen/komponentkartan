@@ -14,7 +14,6 @@ import { takeUntil } from 'rxjs/operators';
         trigger('toggleSubMenu', [
             state('void', style({
                 height: '0',
-                background: 'green'
             })),
             state('collapsed', style({
                 height: '0'
@@ -144,10 +143,11 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
             });
 
         this.childSelected = !!this.elementRef.nativeElement.querySelector('.submenu--child-selected');  // The class .menu__item--selected does not exist.
-        console.log("this.childSelected", this.childSelected)
+        console.log("this.childSelected2", this.childSelected)
     }
 
     ngAfterContentInit() {
+      console.log("submeny, aftercontentInit: ", this.menuItems)
         this.addSubscriptions();
         this.menuItems.changes.pipe(takeUntil(this.ngUnsubscribe)).subscribe((change) => {
             this.ngUnsubscribe.next();
@@ -210,7 +210,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         const menuItemArray = <MenuItemComponent[]>itemArray;
         const url = decodeURIComponent(event.url);
         const matches = menuItemArray.filter(m => url.includes(m.link));
-
+        console.log('setChildSelected: ', matches, itemArray)
         if (matches.length) {
             this.expandedState = true;
             setTimeout(() => {
