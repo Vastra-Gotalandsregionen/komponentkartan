@@ -15,8 +15,10 @@ export class SidebarMenuComponent implements AfterContentInit {
       // 80px är hårdkodad header-height
       const sidebarmenu = document.querySelector('.sidebar-menu') as HTMLElement;
       sidebarmenu.style.height = '1500px';
+      console.log('innan timeout onload', sidebarmenu.style.height)
       setTimeout(() => {
         sidebarmenu.style.height = 'calc(100vh - 80px)';
+        console.log('i timeout onload', sidebarmenu.style.height)
       }, 500);
     }
 
@@ -31,12 +33,15 @@ export class SidebarMenuComponent implements AfterContentInit {
           // Detta är en hack-lösning för att scrollbaren skall räkna om sig och visa scrollbar eller inte.
           // 80px är hårdkodad header-height
           sidebarmenu.style.height = '1500px';
+          console.log('innan timeout aftercontentinit', sidebarmenu.style.height)
           setTimeout(() => {
             sidebarmenu.style.height = 'calc(100vh - 80px)';
+            console.log('i timeout aftercontentinit', sidebarmenu.style.height)
           }, 500);
         });
       } else {
         sidebarmenu.style.height = 'calc(100vh - 80px)';
+        console.log('i else aftercontentinit', sidebarmenu.style.height)
       }
     }
 }
