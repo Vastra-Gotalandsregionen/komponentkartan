@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-
+# 11.0.1 (2024-01-17) 
+- Fixed issue that submenu didnt always work and also that the scroll wasnt always updated
 # 11.0.0 (2024-01-12) 
 - Upgraded to Angular 17 with support for only Angular 17 and above.
 - Corrected some bugs in `vgr-grid`
