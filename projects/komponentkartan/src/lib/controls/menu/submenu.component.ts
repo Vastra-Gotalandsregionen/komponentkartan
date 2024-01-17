@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
     animations: [
         trigger('toggleSubMenu', [
             state('void', style({
-                height: '0'
+                height: '0',
             })),
             state('collapsed', style({
                 height: '0'
@@ -142,7 +142,7 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
                 }
             });
 
-        this.childSelected = !!this.elementRef.nativeElement.querySelector('.submenu--child-selected');   // The class .menu__item--selected does not exist.
+        this.childSelected = !!this.elementRef.nativeElement.querySelector('.submenu--child-selected');  // The class .menu__item--selected does not exist.
     }
 
     ngAfterContentInit() {
@@ -208,7 +208,6 @@ export class SubmenuComponent extends MenuItemBaseDirective implements AfterCont
         const menuItemArray = <MenuItemComponent[]>itemArray;
         const url = decodeURIComponent(event.url);
         const matches = menuItemArray.filter(m => url.includes(m.link));
-
         if (matches.length) {
             this.expandedState = true;
             setTimeout(() => {
