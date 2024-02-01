@@ -46,6 +46,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
   @HostBinding('attr.tabIndex') tabIndex = 0;
 
   @Input() active: boolean;
+  @Input() setFirstSelectable: boolean = true;
   @Input() useScrollbar: boolean = true;
   @Input() maxHeight: number;
   @HostBinding('attr.id') @Input() id: string;
@@ -174,7 +175,7 @@ export class SelectablelistComponent implements AfterContentInit, OnChanges, OnD
           this.handleRowClicked(row);
         });
 
-    if (this.active) {
+    if (this.active && this.setFirstSelectable) {
       setTimeout(() => {
         this.selectFirstSelectable();
       }, 200);
