@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { HtmlEncodeService } from '../html-encode.service';
   templateUrl: './selectablelist-documentation.component.html',
   styleUrls: ['./selectablelist-documentation.component.scss']
 })
-export class SelectablelistDocumentationComponent implements OnInit {
+export class SelectablelistDocumentationComponent {
 
   justeringar = [
     {
@@ -61,7 +61,7 @@ export class SelectablelistDocumentationComponent implements OnInit {
     }
   ]
 
-  exampleCode = `<vgr-selectablelist [id]="'test'" [active]="true (selectedChanged)="onSelectablelistChanged($event)">
+  exampleCode = `<vgr-selectablelist [id]="'test'" [active]="true" [setFirstSelectable]="true" (selectedChanged)="onSelectablelistChanged($event)" [maxHeight]="220">
       <vgr-selectablelist-header>
           <vgr-selectablelist-header-column><strong>Utbetalning avser</strong>
           </vgr-selectablelist-header-column>
@@ -84,9 +84,6 @@ export class SelectablelistDocumentationComponent implements OnInit {
     this.exampleCodeMarkup =
       htmlEncoder.prepareHighlightedSection(this.exampleCode, 'HTML');
    }
-
-  ngOnInit(): void {
-  }
 
   onSelectablelistChanged(event) {
   }

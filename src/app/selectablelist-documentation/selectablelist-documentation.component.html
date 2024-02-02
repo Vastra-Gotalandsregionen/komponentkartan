@@ -18,7 +18,7 @@
       <vgr-button (click)="addToList()">Lägg till fler rader</vgr-button>
       <vgr-button (click)="removeFromList()">Ta bort rader</vgr-button>
     </div>
-    <vgr-selectablelist [id]="'test'" [active]="true" (selectedChanged)="onSelectablelistChanged($event)" [maxHeight]="220">
+    <vgr-selectablelist [id]="'test'" [active]="true" [setFirstSelectable]="true" (selectedChanged)="onSelectablelistChanged($event)" [maxHeight]="220">
       <vgr-selectablelist-header>
           <vgr-selectablelist-header-column><strong>Utbetalning avser</strong>
           </vgr-selectablelist-header-column>
@@ -59,9 +59,19 @@
         <td>[active]="true"</td>
       </tr>
       <tr>
+        <td>setFirstSelectable: boolean</td>
+        <td>Talar om huruvida första posten i tabellen automatiskt skall väljas. Default värde är <code>true</code>.</td>
+        <td>[setFirstSelectable]="true"</td>
+      </tr>
+      <tr>
         <td>useScrollbar: boolean</td>
         <td>Användaren kan välja om man vill ha med en synlig scrollbar eller inte. Default värde är <code>true</code>.</td>
         <td>[useScrollbar]="false"</td>
+      </tr>
+      <tr>
+        <td>maxHeight: number</td>
+        <td>Användaren kan välja maxhöjd på listan utan att scrollbaren syns. Överskrids maxhöjden så kommer scrollbaren att synas.</td>
+        <td>[maxHeight]="220"</td>
       </tr>
       <tr>
         <td>selectedChanged: EventEmitter&lt;any&gt;</td>
