@@ -13,6 +13,7 @@ export class DropdownSelectDocumentationComponent {
   items50: string[];
   open1: boolean = true;
   form: FormControl;
+  form1: FormControl;
   formControl: FormControl;
   formControlDisabled = false;
   itemLabel = 'Ett långt alternativ som skrivs ut i helhet';
@@ -232,6 +233,7 @@ export class DropdownSelectDocumentationComponent {
     this.items10 = this.getItems(10);
     this.items50 = this.getItems(50);
     this.form = new FormControl(this.itemValue);
+    this.form1 = new FormControl({value: this.itemValue, disabled: true});
     this.formControl = new FormControl('', Validators.required);
   }
 
