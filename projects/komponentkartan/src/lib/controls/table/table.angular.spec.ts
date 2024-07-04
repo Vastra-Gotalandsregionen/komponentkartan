@@ -4,7 +4,7 @@ import { TableHeaderColumnComponent } from './table-header-column.component';
 import { TableRowComponent } from './table-row.component';
 import { TableRowColumnComponent } from './table-row-column.component';
 
-import { ComponentFixture, TestBed, async, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement, Component } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
