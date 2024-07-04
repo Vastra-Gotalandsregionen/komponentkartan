@@ -1,4 +1,4 @@
-<span class="icon" [ngClass]="{ 
+<span class="icon" [ngClass]="{
     'icon-color--text': color === 'text',
     'icon-color--light': color === 'light',
     'icon-color--success': color === 'success',
@@ -7,15 +7,14 @@
     'icon-color--info': color === 'info',
     'icon--disabled': disabled
   }" [attr.aria-disabled]="disabled" [attr.aria-label]="ariaLabel">
-  <fa-icon 
-    [icon]="[prefix, icon]" 
-    [fixedWidth]="fixedWidth" 
-    [border]="border" 
-    [spin]="spin" 
-    [pulse]="pulse"
-    size="{{size}}" 
-    flip="{{flip}}" 
-    rotate="{{rotate}}" 
+  <fa-icon
+    [icon]="[prefix, icon]"
+    [fixedWidth]="fixedWidth"
+    [border]="border"
+    [animation]="spin === true ? 'spin' : pulse === true ? 'beat' : ''"
+    size="{{size}}"
+    flip="{{flip}}"
+    rotate="{{rotate}}"
     pull="{{pull}}"
     >
   </fa-icon>
