@@ -8,8 +8,8 @@ import { NgScrollbar } from 'ngx-scrollbar';
 })
 export class ScrollbarComponent {
   @ViewChild(NgScrollbar) scrollable: NgScrollbar;
-  @Input() autoheightDisabled = 'false';
-  @Input() autowidthDisabled = 'true';
+  // @Input() autoheightDisabled = 'false';
+  // @Input() autowidthDisabled = 'true';
   @Input() visibility = 'native';
   @Input() maxHeight;
 
