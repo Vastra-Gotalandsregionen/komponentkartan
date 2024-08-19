@@ -1,5 +1,5 @@
 
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { DebugElement } from '@angular/core';
 import { CommonModule } from '@angular/common';
