@@ -9,7 +9,7 @@
   <tbody>
     <div style="position: relative; border-bottom: 1px solid #97939f; border-left: 1px solid #97939f; border-right: 1px solid #97939f;" [ngStyle]="{'height': calculatedHeight }" *ngIf="height !== ''" >
       <div class="editable-table__menu__dimmer editable-table__menu__dimmer-top"></div>
-      <ng-scrollbar [visibility]="'native'" [appearance]="'compact'" class="scroll-container" [autoHeightDisabled]="false">
+      <ng-scrollbar [visibility]="'native'" [appearance]="'compact'" class="scroll-container">
 
         <div *ngTemplateOutlet="rowContent"></div>
       </ng-scrollbar>
