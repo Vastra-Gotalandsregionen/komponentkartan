@@ -38,7 +38,7 @@
     "core-js": "^3.6.5",
     "highlight.js": "^11.3.1",
     "mini-css-extract-plugin": "^2.2.1",
-    "ngx-scrollbar": "^15.1.2",
+    "ngx-scrollbar": "^13.0.0",
     "rxjs": "^7.5.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.14.2"
