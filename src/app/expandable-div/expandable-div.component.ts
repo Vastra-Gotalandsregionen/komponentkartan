@@ -56,4 +56,6 @@ export class ExpandableDivComponent implements OnInit {
   }
 
   onExpandedChanged(flag: Boolean) { }
+  onExpandedChanged1(flag: Boolean) { }
+  onExpandedChanged2(flag: Boolean) { }
 }

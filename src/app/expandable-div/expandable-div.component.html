@@ -15,32 +15,45 @@
     </p>
   </div>
   <div class="docs__examples ">
-    <h2>HTML</h2>
-    <section vgrHighlightCode [innerHTML]="exampleCodeMarkup"></section>
-    <h2>Resultat</h2>
-    <vgr-expandable-div [expanded]="false" (expandedChanged)="onExpandedChanged($event)">
+    <div style="margin: 10px 0;">
+      <vgr-expandable-div [expanded]="false" (expandedChanged)="onExpandedChanged($event)">
       <vgr-expandable-div-header>
-        <vgr-icon icon="check-circle" color="success"></vgr-icon>
-        Denna div är collapsed från början
-      </vgr-expandable-div-header>
-      <vgr-expandable-div-content>
-        <p tabindex="0">Lite innehåll</p>
-        <p tabindex="0">Mer innehåll</p>
-      </vgr-expandable-div-content>
-    </vgr-expandable-div>
-    <br>
-    <br>
-    <vgr-button [buttonStyle]="'secondary'" (click)="setFocus()">Fokusera på tvåan</vgr-button>
-    <br>
-    <br>
-    <vgr-expandable-div #myExpandableList *ngFor="let item of list">
-      <vgr-expandable-div-header>
-         <strong>{{ item.id }} {{ item.title }}</strong>
-      </vgr-expandable-div-header>
-      <vgr-expandable-div-content>
-        <p> {{ item.text }}</p>
-      </vgr-expandable-div-content>
-    </vgr-expandable-div>
+        <p><strong>Expandable div med ett underliggande expandable div</strong></p>
+        </vgr-expandable-div-header>
+        <vgr-expandable-div-content>
+          <div style="margin-left: 10px;">
+            <vgr-expandable-div [expanded]="false" (expandedChanged)="onExpandedChanged($event)">
+              <vgr-expandable-div-header>
+                <p><strong>Expandable div nivå 2</strong></p>
+                </vgr-expandable-div-header>
+                <vgr-expandable-div-content>
+                  <p style="margin-left: 10px;">Kan innehålla både text, tabeller eller interaktiva element</p>
+                </vgr-expandable-div-content>
+              </vgr-expandable-div>
+          </div>
+        </vgr-expandable-div-content>
+      </vgr-expandable-div>
+
+      <vgr-expandable-div [expanded]="false" (expandedChanged)="onExpandedChanged1($event)">
+        <vgr-expandable-div-header>
+          <p>En annan expandable div</p>
+        </vgr-expandable-div-header>
+        <vgr-expandable-div-content>
+          <p style="margin-left: 10px;">Lite innehåll</p>
+        </vgr-expandable-div-content>
+      </vgr-expandable-div>
+
+      <vgr-expandable-div [expanded]="false" (expandedChanged)="onExpandedChanged2($event)">
+        <vgr-expandable-div-header>
+          <p>Ytterligare en expandable div</p>
+        </vgr-expandable-div-header>
+        <vgr-expandable-div-content>
+          <p style="margin-left: 10px;">Mer innehåll</p>
+        </vgr-expandable-div-content>
+      </vgr-expandable-div>
+    </div>
+      <h2>HTML</h2>
+      <section vgrHighlightCode [innerHTML]="exampleCodeMarkup"></section>
   </div>
   <div class="docs__api ">
     <!-- API -->
@@ -77,6 +90,11 @@
     </table>
   </div>
   <div class="docs__wcag ">
-    <i>Under utveckling</i>
+    <ol>
+      <li>rubrik läsas upp av skärmläsaren, sedan om den är expanded eller inte</li>
+      <li>Både enter och mellanslag triggar om den expanderas eller stängas</li>
+      <li>Om [expanded]="false" ska tabb flytta fokus till nästa synlig</li>
+      <li>Om [expanded]="true" ska tabb flytta fokus till nästa underliggande rad</li>
+    </ol>
   </div>
 </app-component-docs>
