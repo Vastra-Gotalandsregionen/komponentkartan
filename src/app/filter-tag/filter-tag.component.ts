@@ -11,7 +11,7 @@ interface FilterTag {
 @Component({
   selector: 'app-filter-tag',
   templateUrl: './filter-tag.component.html',
-  styles: ['.list-row { width: 500px; display: flex}', '.list-column { width: 120px; }', '.list-header { font-weight: bold;}']
+  styleUrls: ['./filter-tag.component.scss']
 })
 export class FilterTagComponent implements OnInit {
   @ViewChild('myFilterGroup', {read: FilterTagGroupComponent}) myFilterGroup: FilterTagGroupComponent;
