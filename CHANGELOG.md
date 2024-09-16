@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+# 12.0.2 (2024-09-16) 
+- Changed VGR logo in `vgr-header-menu`.
 # 12.0.1 (2024-08-20) 
 - Fixed bugg for scrollbar in different components.
 # 12.0.0 (2024-08-19) 
