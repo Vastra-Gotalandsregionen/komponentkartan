@@ -1,0 +1,24 @@
+<vgr-page>
+  <vgr-page-header [title]="'Pipes'">
+  </vgr-page-header>
+
+  <vgr-page-body>
+    <!-- Färger -->
+    <vgr-page-block class="column-layout">
+      <h2>Dokumentation för tillgängliga Pipes i komponentkartan</h2>
+      <p>Det finns ett visst antal olika pipes som man via komponentkartan kan använda sig av, utöver de inbyggda som redan finns i Angular.</p>
+      <br>
+      <h2>Pipes</h2>
+      <ul>
+        <li>hsaidPipe - Pipe som tar in ett HSA-id (SEZZZZZZZZZZ-E0XXXXXXXXXX60) och returnerar sista delen av HSA-id:t (E0XXXXXXXXXX60)</li>
+        <li>postnummer - Pipe som tar in en sträng (5 siffror) och returnerar ett svenskt postnummer format (ex. XXX XX)</li>
+        <li>personnummer - Pipe som tar in en sträng (10 eller 12 siffror) och returnerar ett svenskt personnummer format (ex. YYYYMMDD-XXXX)</li>
+        <li>komponentKartanCurrency - Pipe som tar in ett nummer och returnerar detta med decimaltecken (default 2 decimaler, ex 12,00)</li>
+      </ul>
+      <br>
+      <h2>Exempel</h2>
+      <section [innerHTML]="samplePageStructure" vgrHighlightCode>
+      </section>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>
