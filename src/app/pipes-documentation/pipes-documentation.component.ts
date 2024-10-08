@@ -8,27 +8,13 @@ import { HtmlEncodeService } from '../html-encode.service';
 })
 export class PipesDocumentationComponent {
 
-  samplePageStructure: string;
-  samplePage = `
-  <vgr-page>
-    <vgr-page-header>
-      <!-- Lägg innehåll i header här -->
-    </vgr-page-header>
-    <vgr-page-body>
-      <!--Detta är en container för sidans olika block -->
-      <vgr-page-block>
-        <!--Sidans första block-->
-      </vgr-page-block>
-      <vgr-action-panel>
-        <!--Sidans första action panel-->
-      </vgr-action-panel>
-      <vgr-page-block>
-        <!--Sidans andra block-->
-      </vgr-page-block>
-    </vgr-page-body>
-  </vgr-page>`;
+  pipesPageStructure: string;
+  pipesPage = `<div>{{ 120 | komponentkartanCurrency }}</div> // Output 120,00
+  <div>{{ 'SEZZZZZZZZZZ-E0XXXXXXXXXX60' | hsaidPipe }}</div> // Output E0XXXXXXXXXX60
+  <div>{{ '47700' | postnummer }}</div> // Output 477 00
+  <div>{{ '191212121212' | personnummer }}</div> // Output 19121212-1212`;
   constructor(private htmlEncoder: HtmlEncodeService) {
-    this.samplePageStructure = htmlEncoder.prepareHighlightedSection(this.samplePage);
+    this.pipesPageStructure = htmlEncoder.prepareHighlightedSection(this.pipesPage);
   }
 
 
