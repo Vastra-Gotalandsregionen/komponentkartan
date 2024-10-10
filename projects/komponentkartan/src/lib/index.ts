@@ -76,6 +76,10 @@ export { FilterPipe } from './pipes/filterPipe';
 export { SafePipe } from './pipes/safePipe';
 export { TruncatePipe } from './pipes/truncatePipe';
 export { ErrorMessagePipe } from './pipes/errorMessagePipe';
+export { CurrencyPipe } from './pipes/currency.pipe';
+export { HsaidPipe } from './pipes/hsaid.pipe';
+export { PersonnummerPipe } from './pipes/personnummer.pipe';
+export { PostnummerPipe } from './pipes/postnummer.pipe';
 
 export { BrowserDetector } from './services/browserDetector';
 export { ModalService } from './services/modalService';

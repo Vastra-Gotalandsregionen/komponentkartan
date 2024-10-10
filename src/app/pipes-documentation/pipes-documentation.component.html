@@ -1,0 +1,52 @@
+<vgr-page>
+  <vgr-page-header [title]="'Pipes'">
+  </vgr-page-header>
+
+  <vgr-page-body>
+    <!-- Färger -->
+    <vgr-page-block class="column-layout">
+      <h2>Dokumentation för tillgängliga Pipes i komponentkartan</h2>
+      <p>Det finns ett visst antal olika pipes som man via komponentkartan kan använda sig av, utöver de inbyggda som redan finns i Angular.</p>
+      <br>
+      <table class="property-table">
+        <tr>
+          <th>Namn</th>
+          <th>Beskrivning</th>
+          <th>Exempel</th>
+        </tr>
+        <tr>
+          <td>
+            hsaidPipe : string
+          </td>
+          <td>Pipe som tar in ett HSA-id (SEZZZZZZZZZZ-E0XXXXXXXXXX60) och returnerar sista delen av HSA-id:t (E0XXXXXXXXXX60)</td>
+          <td>'SEZZZ-E0XXX60' | hsaidPipe</td>
+        </tr>
+        <tr>
+          <td>
+            postnummer : string
+          </td>
+          <td>Pipe som tar in en sträng (5 siffror) och returnerar ett svenskt postnummer format (ex. XXX XX)</td>
+          <td>'47700' | postnummer</td>
+        </tr>
+        <tr>
+          <td>
+            personnummer : string
+          </td>
+          <td>Pipe som tar in en sträng (10 eller 12 siffror) och returnerar ett svenskt personnummer format (ex. YYYYMMDD-XXXX)</td>
+          <td>'191212121212' | personnummer</td>
+        </tr>
+        <tr>
+          <td>
+            komponentkartanCurrency : number
+          </td>
+          <td>Pipe som tar in ett nummer och returnerar detta med decimaltecken (default 2 decimaler, ex 12,00)</td>
+          <td>12 | komponentkartanCurrency</td>
+        </tr>
+      </table>
+      <br>
+      <h2>Exempel</h2>
+      <section [innerHTML]="pipesPageStructure" vgrHighlightCode>
+      </section>
+    </vgr-page-block>
+  </vgr-page-body>
+</vgr-page>

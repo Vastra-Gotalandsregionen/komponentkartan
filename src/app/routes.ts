@@ -44,6 +44,7 @@ import { TabButtonComponent } from './tab-button/tab-button.component';
 import { ComboboxDocumentationComponent } from './combobox-documentation/combobox-documentation.component';
 import { EditableTableDocumentationComponent } from './editable-table-documentation/editable-table-documentation.component';
 import { SelectablelistDocumentationComponent } from './selectablelist-documentation/selectablelist-documentation.component';
+import { PipesDocumentationComponent } from './pipes-documentation/pipes-documentation.component';
 
 export const appRoutes: Routes = [
 
@@ -70,6 +71,7 @@ export const appRoutes: Routes = [
     { path: 'pagestructure', component: PageStructureComponent },
     { path: 'card', component: CardComponent },
     { path: 'sizes', component: SizesComponent },
+    { path: 'pipes', component: PipesDocumentationComponent },
     {
         path: 'menu', component: MenuComponent,
         children: [{

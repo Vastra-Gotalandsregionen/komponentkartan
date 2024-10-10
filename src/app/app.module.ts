@@ -69,6 +69,7 @@ import { ComboboxDocumentationComponent } from './combobox-documentation/combobo
 import { HighlightCodeDirective } from './directives/highlight-code.directive';
 import { EditableTableDocumentationComponent } from './editable-table-documentation/editable-table-documentation.component';
 import { SelectablelistDocumentationComponent } from './selectablelist-documentation/selectablelist-documentation.component';
+import { PipesDocumentationComponent } from './pipes-documentation/pipes-documentation.component';
 
 @NgModule({
     declarations: [
@@ -115,7 +116,8 @@ import { SelectablelistDocumentationComponent } from './selectablelist-documenta
         ComboboxDocumentationComponent,
         HighlightCodeDirective,
         EditableTableDocumentationComponent,
-        SelectablelistDocumentationComponent
+        SelectablelistDocumentationComponent,
+        PipesDocumentationComponent
     ],
     imports: [
         KomponentkartanModule,
