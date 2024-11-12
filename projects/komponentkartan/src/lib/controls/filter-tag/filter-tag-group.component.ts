@@ -35,28 +35,11 @@ export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  onKeydown(event: any) {
-    if (event.key === 'Tab') {
-      const filterTagGroup = event.target.closest('vgr-filter-tag-group');
-      event.preventDefault();
-      var nextEl = this.findNextTabStop(document.activeElement);
-      nextEl.focus();
-    }
-  }
-
-  findNextTabStop(el) {
-    var universe = document.querySelectorAll('[tabindex]');
-    var list = Array.prototype.filter.call(universe, function(item) {return item.tabIndex >= "0"});
-    console.log(list)
-    var index = list.indexOf(el);
-    return list[index + 1] || list[0];
-  }
-
   setFilterTagTabFocusability() {
+    this.filterTags.forEach((x) => {
+      x.makeTabFocusable(false);
+      });
     this.filterTags.get(0).makeTabFocusable(true);
-    // this.filterTags.forEach((x) => {
-    //   x.makeTabFocusable(true);
-    // });
   }
 
   setFilterTagFocus() {
