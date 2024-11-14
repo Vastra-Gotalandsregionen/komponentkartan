@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+# 12.0.4 (2024-11-14) 
+- Updated wcag for `filter-tag-group` so that you tab in/out of the component and inside you use the arrow keys.
 # 12.0.3 (2024-10-10) 
 - Added 4 new pipes for the user to use. The added pipes: hsaidPipe, postnummer, personnummer and komponentkartanCurrency.
 # 12.0.2 (2024-09-16) 
