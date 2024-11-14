@@ -1,6 +1,5 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { LoaderComponent } from '../../controls/loader/loader.component';
-import { discardPeriodicTasks, flush } from '@angular/core/testing';
 
 describe('[LoaderComponent]', () => {
   let loader: LoaderComponent;
@@ -12,8 +11,6 @@ describe('[LoaderComponent]', () => {
   });
   afterAll(() => {
     jasmine.clock().uninstall();
-    discardPeriodicTasks();
-    flush();
   });
   beforeEach(() => {
     changeDetector = {} as ChangeDetectorRef;

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, discardPeriodicTasks, flush } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
@@ -48,8 +48,6 @@ describe('[ComboboxComponent - Angular]', () => {
 
   afterAll(() => {
     jasmine.clock().uninstall();
-    discardPeriodicTasks();
-    flush();
   });
 
   beforeEach((done) => {

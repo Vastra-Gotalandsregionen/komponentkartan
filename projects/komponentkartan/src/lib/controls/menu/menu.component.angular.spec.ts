@@ -1,5 +1,5 @@
 import { MenuComponent, MenuItemComponent, SubmenuComponent } from '../../index';
-import { ComponentFixture, TestBed, discardPeriodicTasks, flush } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement, Component } from '@angular/core';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
@@ -117,8 +117,6 @@ describe('[MenuComponent]', () => {
         });
         afterAll(() => {
             jasmine.clock().uninstall();
-            discardPeriodicTasks();
-            flush();
         });
         beforeEach(() => {
             menuItem = rootElement.querySelector('vgr-menu-item');
