@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
@@ -49,7 +49,8 @@ describe('RadiobuttonGroupComponent', () => {
   })
   afterAll(() => {
     jasmine.clock().uninstall();
-
+    discardPeriodicTasks();
+    flush();
   })
   it('should create', () => {
     expect(component).toBeTruthy();

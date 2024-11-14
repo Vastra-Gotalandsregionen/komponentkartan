@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, discardPeriodicTasks, flush } from '@angular/core/testing';
 import { DebugElement, SimpleChange, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeSv from '@angular/common/locales/sv';
@@ -47,6 +47,8 @@ describe('[DatepickerNewComponent - Angular]', () => {
 
   afterAll(() => {
     jasmine.clock().uninstall();
+    discardPeriodicTasks();
+    flush();
   });
 
   it('should create', () => {
