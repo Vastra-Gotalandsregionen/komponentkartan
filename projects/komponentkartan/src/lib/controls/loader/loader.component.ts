@@ -3,20 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { trigger, state, animate, style, transition } from '@angular/animations';
 
 @Component({
-  selector: 'vgr-loader',
-  templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      state('true', style({
-        opacity: 1
-      })),
-      state('false', style({
-        opacity: 0
-      })),
-      transition('* => *', animate('400ms ease'))
-    ])
-  ]
+    selector: 'vgr-loader',
+    templateUrl: './loader.component.html',
+    styleUrls: ['./loader.component.scss'],
+    animations: [
+        trigger('fadeInOut', [
+            state('true', style({
+                opacity: 1
+            })),
+            state('false', style({
+                opacity: 0
+            })),
+            transition('* => *', animate('400ms ease'))
+        ])
+    ],
+    standalone: false
 })
 export class LoaderComponent {
   private _minimumTimeMs = 1000;

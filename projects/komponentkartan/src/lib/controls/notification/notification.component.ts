@@ -2,10 +2,11 @@ import { Component, Input, HostBinding, OnInit, ElementRef } from '@angular/core
 import { toggleFadedState } from '../../animation';
 
 @Component({
-  selector: 'vgr-notification',
-  templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.scss'],
-  animations: [toggleFadedState]
+    selector: 'vgr-notification',
+    templateUrl: './notification.component.html',
+    styleUrls: ['./notification.component.scss'],
+    animations: [toggleFadedState],
+    standalone: false
 })
 export class NotificationComponent implements OnInit {
   /**

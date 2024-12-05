@@ -9,11 +9,12 @@ import { remove } from '../../animation';
 import { GridHeaderToolbarComponent } from './grid-header-toolbar.component';
 
 @Component({
-  selector: 'vgr-grid',
-  templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss'],
-  providers: [GridService],
-  animations: [remove]
+    selector: 'vgr-grid',
+    templateUrl: './grid.component.html',
+    styleUrls: ['./grid.component.scss'],
+    providers: [GridService],
+    animations: [remove],
+    standalone: false
 })
 export class GridComponent implements OnInit, AfterContentInit, OnDestroy {
 

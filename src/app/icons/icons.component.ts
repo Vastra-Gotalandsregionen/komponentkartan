@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
-  selector: 'app-icons',
-  templateUrl: './icons.component.html',
-  styleUrls: ['./icons.component.scss']
+    selector: 'app-icons',
+    templateUrl: './icons.component.html',
+    styleUrls: ['./icons.component.scss'],
+    standalone: false
 })
 export class IconsComponent implements OnInit {
   html = `<div class="vgr-icon-edit"></div>`;

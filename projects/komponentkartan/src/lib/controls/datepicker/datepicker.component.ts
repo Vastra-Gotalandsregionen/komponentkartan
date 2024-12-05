@@ -12,9 +12,10 @@ import { Guid } from '../../utils/guid';
 import { DatepickerZoomLevel, CalendarItem, Calendar } from './datepicker.interface';
 
 @Component({
-  selector: 'vgr-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss'],
+    selector: 'vgr-datepicker',
+    templateUrl: './datepicker.component.html',
+    styleUrls: ['./datepicker.component.scss'],
+    standalone: false
 })
 export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {
   @Input() @HostBinding('style.width') width; // = '142px';

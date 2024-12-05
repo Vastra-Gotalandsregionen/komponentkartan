@@ -2,9 +2,10 @@ import { Component, Input, ViewChild, AfterViewChecked, ElementRef, HostListener
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
 
 @Component({
-  selector: 'vgr-page-header',
-  templateUrl: './page-header.component.html',
-  styleUrls: ['./page-header.component.scss']
+    selector: 'vgr-page-header',
+    templateUrl: './page-header.component.html',
+    styleUrls: ['./page-header.component.scss'],
+    standalone: false
 })
 export class PageHeaderComponent implements AfterViewChecked {
   @Input() title: string;

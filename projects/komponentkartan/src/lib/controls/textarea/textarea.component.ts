@@ -19,15 +19,15 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Guid } from '../../utils/guid';
 @Component({
-  selector: 'vgr-textarea',
-  templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => TextareaComponent),
-    multi: true,
-  }]
-
+    selector: 'vgr-textarea',
+    templateUrl: './textarea.component.html',
+    styleUrls: ['./textarea.component.scss'],
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TextareaComponent),
+            multi: true,
+        }],
+    standalone: false
 })
 export class TextareaComponent implements AfterViewInit, OnChanges, ControlValueAccessor, OnDestroy {
 

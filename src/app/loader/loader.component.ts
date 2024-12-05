@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-laddningssnurra',
-  templateUrl: 'loader.component.html'
+    selector: 'app-laddningssnurra',
+    templateUrl: 'loader.component.html',
+    standalone: false
 })
 
 export class LoaderComponent {

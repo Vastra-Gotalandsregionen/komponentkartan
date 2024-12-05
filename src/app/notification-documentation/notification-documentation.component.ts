@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'vgr-notification-documentation',
-  templateUrl: './notification-documentation.component.html',
-  styleUrls: ['./notification-documentation.component.css']
+    selector: 'vgr-notification-documentation',
+    templateUrl: './notification-documentation.component.html',
+    styleUrls: ['./notification-documentation.component.css'],
+    standalone: false
 })
 export class NotificationDocumentationComponent implements OnInit {
 

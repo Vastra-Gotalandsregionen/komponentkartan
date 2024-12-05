@@ -8,10 +8,11 @@ import { Guid } from '../../utils/guid';
     templateUrl: './checkbox.component.html',
     styleUrls: ['./checkbox.component.scss'],
     providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => CheckboxComponent),
-        multi: true
-    }]
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => CheckboxComponent),
+            multi: true
+        }],
+    standalone: false
 })
 export class CheckboxComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
 

@@ -2,7 +2,8 @@
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
-    name: 'filterByProperties'
+    name: 'filterByProperties',
+    standalone: false
 })
 
 export class FilterPipe implements PipeTransform {

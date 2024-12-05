@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'komponentkartanCurrency'
+    name: 'komponentkartanCurrency',
+    standalone: false
 })
 export class CurrencyPipe implements PipeTransform {
 

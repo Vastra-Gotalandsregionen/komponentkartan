@@ -10,8 +10,9 @@ export interface GridSortChangedArgs {
   direction: GridSortDirection;
 }
 @Component({
-  selector: 'vgr-grid-header',
-  templateUrl: './grid-header.component.html'
+    selector: 'vgr-grid-header',
+    templateUrl: './grid-header.component.html',
+    standalone: false
 })
 export class GridHeaderComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(GridHeaderColumnComponent) gridHeaderColumns: QueryList<GridHeaderColumnComponent>;

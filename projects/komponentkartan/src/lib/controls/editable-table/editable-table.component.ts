@@ -8,9 +8,10 @@ import { last, takeUntil } from 'rxjs/operators';
 import { SortChangedArgs } from '../sort-arrow/sort-arrow.component';
 
 @Component({
-  selector: 'vgr-editable-table',
-  templateUrl: './editable-table.component.html',
-  styleUrls: ['./editable-table.component.scss']
+    selector: 'vgr-editable-table',
+    templateUrl: './editable-table.component.html',
+    styleUrls: ['./editable-table.component.scss'],
+    standalone: false
 })
 
 export class EditableTableComponent implements AfterViewInit, AfterContentInit, OnDestroy {

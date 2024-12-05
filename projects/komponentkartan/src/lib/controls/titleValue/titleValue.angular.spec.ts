@@ -40,7 +40,8 @@ import { InputComponent } from '../input/input.component';
           </vgr-title-value-container>
         </vgr-title-value>
       </vgr-title-value-layout>
-      `
+      `,
+    standalone: false
 })
 class TestTextValueComponent { }
 

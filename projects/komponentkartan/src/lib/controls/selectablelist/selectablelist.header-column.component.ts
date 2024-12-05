@@ -2,8 +2,9 @@ import { Component, OnInit, HostBinding, Input, HostListener, ElementRef } from 
 import { Guid } from '../../utils/guid';
 import { SelectablelistService } from './selectablelist.service';
 @Component({
-  selector: 'vgr-selectablelist-header-column',
-  template: '<ng-content></ng-content>'
+    selector: 'vgr-selectablelist-header-column',
+    template: '<ng-content></ng-content>',
+    standalone: false
 })
 export class SelectablelistHeaderColumnComponent implements OnInit {
 

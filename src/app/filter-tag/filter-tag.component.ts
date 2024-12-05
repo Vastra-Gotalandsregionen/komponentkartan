@@ -9,9 +9,10 @@ interface FilterTag {
 }
 
 @Component({
-  selector: 'app-filter-tag',
-  templateUrl: './filter-tag.component.html',
-  styleUrls: ['./filter-tag.component.scss']
+    selector: 'app-filter-tag',
+    templateUrl: './filter-tag.component.html',
+    styleUrls: ['./filter-tag.component.scss'],
+    standalone: false
 })
 export class FilterTagComponent implements OnInit {
   @ViewChild('myFilterGroup', {read: FilterTagGroupComponent}) myFilterGroup: FilterTagGroupComponent;

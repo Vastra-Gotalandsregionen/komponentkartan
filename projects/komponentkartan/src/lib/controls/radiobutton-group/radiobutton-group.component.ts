@@ -7,14 +7,15 @@ import { Guid } from '../../utils/guid';
 import { RadiobuttonItemComponent } from './radiobutton-item.component';
 
 @Component({
-  selector: 'vgr-radiobutton-group',
-  templateUrl: './radiobutton-group.component.html',
-  styleUrls: ['./radiobutton-group.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: RadiobuttonGroupComponent,
-    multi: true
-  }]
+    selector: 'vgr-radiobutton-group',
+    templateUrl: './radiobutton-group.component.html',
+    styleUrls: ['./radiobutton-group.component.scss'],
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: RadiobuttonGroupComponent,
+            multi: true
+        }],
+    standalone: false
 })
 export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges, OnDestroy {
   _disabled: boolean;

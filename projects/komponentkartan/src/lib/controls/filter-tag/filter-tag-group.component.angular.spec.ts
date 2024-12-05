@@ -11,14 +11,15 @@ import { IconModule } from '../icon/icon.module';
 
 
 @Component({
-  selector: 'vgr-test',
-  template: `
+    selector: 'vgr-test',
+    template: `
   <vgr-filter-tag-group>
     <vgr-filter-tag id="first">First</vgr-filter-tag>
     <vgr-filter-tag id="second">Second</vgr-filter-tag>
     <vgr-filter-tag id="third">Third</vgr-filter-tag>
   </vgr-filter-tag-group>
-  `
+  `,
+    standalone: false
 })
 export class TestComponent { }
 

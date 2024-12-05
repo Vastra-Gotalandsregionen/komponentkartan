@@ -3,8 +3,9 @@ import { Component, Input, HostBinding, ElementRef, Host } from '@angular/core';
 
 
 @Component({
-  selector: 'vgr-editable-table-column',
-  template: '<ng-content></ng-content>'
+    selector: 'vgr-editable-table-column',
+    template: '<ng-content></ng-content>',
+    standalone: false
 })
 export class EditableTableColumnComponent {
 

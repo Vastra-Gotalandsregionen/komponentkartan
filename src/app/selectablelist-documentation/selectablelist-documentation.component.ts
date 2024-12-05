@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
-  selector: 'vgr-selectablelist-documentation',
-  templateUrl: './selectablelist-documentation.component.html',
-  styleUrls: ['./selectablelist-documentation.component.scss']
+    selector: 'vgr-selectablelist-documentation',
+    templateUrl: './selectablelist-documentation.component.html',
+    styleUrls: ['./selectablelist-documentation.component.scss'],
+    standalone: false
 })
 export class SelectablelistDocumentationComponent {
 

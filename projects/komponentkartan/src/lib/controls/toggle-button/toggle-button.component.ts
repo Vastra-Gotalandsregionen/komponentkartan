@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core';
 
 @Component({
-  selector: 'vgr-toggle-button',
-  templateUrl: './toggle-button.component.html',
-  styleUrls: ['./toggle-button.component.scss']
+    selector: 'vgr-toggle-button',
+    templateUrl: './toggle-button.component.html',
+    styleUrls: ['./toggle-button.component.scss'],
+    standalone: false
 })
 export class ToggleButtonComponent implements AfterViewInit, OnChanges {
   @Input() disabled = false;

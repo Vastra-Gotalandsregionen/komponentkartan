@@ -4,9 +4,10 @@ import { PaginationManagementService } from '../../../projects/komponentkartan/s
 import { ModalService } from '../../../projects/komponentkartan/src/lib/services/modalService';
 
 @Component({
-  selector: 'vgr-grid-documentation',
-  templateUrl: './grid-documentation.component.html',
-  styleUrls: ['./grid-documentation.component.css']
+    selector: 'vgr-grid-documentation',
+    templateUrl: './grid-documentation.component.html',
+    styleUrls: ['./grid-documentation.component.css'],
+    standalone: false
 })
 export class GridDocumentationComponent implements OnInit {
   @ViewChild('nameColumn', { read: GridHeaderColumnComponent}) nameColumn: GridHeaderColumnComponent;

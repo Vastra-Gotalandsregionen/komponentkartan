@@ -3,9 +3,10 @@ import { HtmlEncodeService } from '../html-encode.service';
 import { RowNotification, NotificationType, CardSectionComponent } from 'vgr-komponentkartan';
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+    selector: 'app-card',
+    templateUrl: './card.component.html',
+    styleUrls: ['./card.component.scss'],
+    standalone: false
 })
 export class CardComponent implements OnInit {
   @ViewChild('myCardSection', { read: CardSectionComponent, static: true }) myCardSection: CardSectionComponent;

@@ -4,8 +4,9 @@ import { EditableTableComponent } from './editable-table.component';
 import { EditableTableService } from './editable-table.service';
 
 @Component({
-  selector: 'vgr-editable-table-row',
-  template: '<ng-content selects="vgr-editable-table-column"></ng-content>'
+    selector: 'vgr-editable-table-row',
+    template: '<ng-content selects="vgr-editable-table-column"></ng-content>',
+    standalone: false
 })
 export class EditableTableRowComponent implements AfterContentInit {
   @ContentChildren(EditableTableColumnComponent) columns : QueryList<EditableTableColumnComponent>;

@@ -5,9 +5,10 @@ import { TableComponent as TableComponentElement } from '../../../projects/kompo
 
 
 @Component({
-  selector: 'app-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss']
+    selector: 'app-checkbox',
+    templateUrl: './checkbox.component.html',
+    styleUrls: ['./checkbox.component.scss'],
+    standalone: false
 })
 export class CheckboxComponent implements OnInit {
   @ViewChild('myCheckbox', { read: CheckboxComponentElement }) myCheckbox: CheckboxComponentElement;

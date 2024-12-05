@@ -10,15 +10,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconModule } from '../icon/icon.module';
 
 @Component({
-  selector: 'vgr-test',
-  template:
-    `<vgr-header-menu [userName]="'Nova Audit'">
+    selector: 'vgr-test',
+    template: `<vgr-header-menu [userName]="'Nova Audit'">
       <vgr-menu-item link="/minsida" text="Internt menyval"></vgr-menu-item>
       <vgr-submenu text="Submeny">
         <vgr-menu-item link="/backtotop" text="Submenyval : backtotop"></vgr-menu-item>
       </vgr-submenu>
     </vgr-header-menu>
-  `
+  `,
+    standalone: false
 })
 class TestHeaderMenuComponent  { }
 

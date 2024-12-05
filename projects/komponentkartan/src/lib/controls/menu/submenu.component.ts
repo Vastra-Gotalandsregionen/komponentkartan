@@ -24,7 +24,8 @@ import { takeUntil } from 'rxjs/operators';
             transition('* => expanded', [animate('600ms  ease-in')]),
             transition('* => collapsed', [animate('600ms ease-out')])
         ])
-    ]
+    ],
+    standalone: false
 })
 
 export class SubmenuComponent extends MenuItemBaseDirective implements AfterContentInit, OnInit, OnDestroy {

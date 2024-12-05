@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NotificationType, SelectableItem, RadioGroupComponent, RadiobuttonGroupComponent } from '../../../projects/komponentkartan/src/lib';
 @Component({
-  selector: 'app-radiobuttons',
-  templateUrl: './radiobuttons.component.html',
-  styleUrls: ['./radiobuttons.component.scss']
+    selector: 'app-radiobuttons',
+    templateUrl: './radiobuttons.component.html',
+    styleUrls: ['./radiobuttons.component.scss'],
+    standalone: false
 })
 export class RadiobuttonsComponent implements OnInit {
   selectedOption: string;

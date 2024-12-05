@@ -1,10 +1,11 @@
 import { Component, HostBinding, Output, EventEmitter, HostListener, Input, ElementRef, ViewChild } from '@angular/core';
 import { toggleExpandedState } from '../../animation';
 @Component({
-  selector: 'vgr-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
-  animations: [toggleExpandedState]
+    selector: 'vgr-table',
+    templateUrl: './table.component.html',
+    styleUrls: ['./table.component.scss'],
+    animations: [toggleExpandedState],
+    standalone: false
 })
 export class TableComponent {
   @HostBinding('class') tableClass = 'table';

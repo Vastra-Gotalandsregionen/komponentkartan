@@ -4,9 +4,10 @@ import { PaginationManagementService } from '../../../projects/komponentkartan/s
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
-  selector: 'app-pagination-documentation',
-  templateUrl: './pagination-documentation.component.html',
-  styleUrls: ['./pagination-documentation.component.scss']
+    selector: 'app-pagination-documentation',
+    templateUrl: './pagination-documentation.component.html',
+    styleUrls: ['./pagination-documentation.component.scss'],
+    standalone: false
 })
 export class PaginationDocumentationComponent {
 
