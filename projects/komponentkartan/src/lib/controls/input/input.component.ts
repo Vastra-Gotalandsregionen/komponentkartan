@@ -3,14 +3,15 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContai
 import { Guid } from '../../utils/guid';
 
 @Component({
-  selector: 'vgr-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => InputComponent),
-    multi: true
-  }]
+    selector: 'vgr-input',
+    templateUrl: './input.component.html',
+    styleUrls: ['./input.component.scss'],
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => InputComponent),
+            multi: true
+        }],
+    standalone: false
 })
 export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, AfterViewInit {
 

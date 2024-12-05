@@ -3,9 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { HighlightCodeDirective } from '../directives/highlight-code.directive';
 import { HtmlEncodeService } from '../html-encode.service';
 @Component({
-  selector: 'app-action-panel',
-  templateUrl: './actionpanels.component.html',
-  styleUrls: ['./actionpanels.component.scss']
+    selector: 'app-action-panel',
+    templateUrl: './actionpanels.component.html',
+    styleUrls: ['./actionpanels.component.scss'],
+    standalone: false
 })
 export class ActionPanelsComponent {
 

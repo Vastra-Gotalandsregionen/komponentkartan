@@ -1,9 +1,10 @@
 ﻿import { Component, Input, EventEmitter, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'vgr-save-cancel',
-  templateUrl: './save-cancel.component.html',
-  styleUrls: ['./save-cancel.component.scss']
+    selector: 'vgr-save-cancel',
+    templateUrl: './save-cancel.component.html',
+    styleUrls: ['./save-cancel.component.scss'],
+    standalone: false
 })
 export class SaveCancelComponent implements OnInit {
   @Input() locked = true;

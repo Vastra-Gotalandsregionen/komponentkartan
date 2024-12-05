@@ -7,9 +7,10 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'vgr-grid-row',
-  templateUrl: './grid-row.component.html',
-  animations: [toggleExpandedState]
+    selector: 'vgr-grid-row',
+    templateUrl: './grid-row.component.html',
+    animations: [toggleExpandedState],
+    standalone: false
 })
 export class GridRowComponent implements OnChanges, AfterContentInit, OnDestroy {
 

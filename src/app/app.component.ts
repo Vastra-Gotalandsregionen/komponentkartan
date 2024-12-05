@@ -4,8 +4,9 @@ import { Router, NavigationEnd } from '@angular/router';
 declare var require: any;
 
 @Component({
-  selector: 'app-komponentkartan',
-  templateUrl: 'app.component.html'
+    selector: 'app-komponentkartan',
+    templateUrl: 'app.component.html',
+    standalone: false
 })
 
 export class KomponentkartanApplicationComponent implements OnInit {

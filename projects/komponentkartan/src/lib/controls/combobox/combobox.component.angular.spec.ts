@@ -15,12 +15,13 @@ import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @Component({
-  selector: 'vgr-test',
-  template: `
+    selector: 'vgr-test',
+    template: `
   <vgr-combobox [formControl]="form">
     <vgr-combobox-item *ngFor="let item of items" [value]="item">{{item}}</vgr-combobox-item>
   </vgr-combobox>
-  `
+  `,
+    standalone: false
 })
 export class TestComponent {
   @Input() items = [];

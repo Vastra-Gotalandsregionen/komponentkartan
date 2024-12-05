@@ -1,7 +1,10 @@
 ﻿import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-@Pipe({ name: 'truncate' })
+@Pipe({
+    name: 'truncate',
+    standalone: false
+})
 export class TruncatePipe implements PipeTransform {
     transform(value: string, maxLength?: number): string {
         const trail = '...';

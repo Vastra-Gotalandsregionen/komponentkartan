@@ -6,7 +6,8 @@ import { MenuItemBaseDirective } from './menu-item-base';
 @Component({
     selector: 'vgr-menu-item',
     templateUrl: './menu-item.component.html',
-    providers: [{ provide: MenuItemBaseDirective, useExisting: forwardRef(() => MenuItemComponent) }]
+    providers: [{ provide: MenuItemBaseDirective, useExisting: forwardRef(() => MenuItemComponent) }],
+    standalone: false
 })
 export class MenuItemComponent extends MenuItemBaseDirective implements AfterViewInit {
     @Input() text: string;

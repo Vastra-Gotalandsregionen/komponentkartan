@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
-  selector: 'app-page-structure',
-  templateUrl: './page-structure.component.html',
-  styleUrls: ['./page-structure.component.scss']
+    selector: 'app-page-structure',
+    templateUrl: './page-structure.component.html',
+    styleUrls: ['./page-structure.component.scss'],
+    standalone: false
 })
 export class PageStructureComponent implements OnInit {
 

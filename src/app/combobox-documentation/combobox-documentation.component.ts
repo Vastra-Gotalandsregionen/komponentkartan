@@ -3,8 +3,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { ComboboxComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
-  selector: 'app-combobox-documentation',
-  templateUrl: './combobox-documentation.component.html'
+    selector: 'app-combobox-documentation',
+    templateUrl: './combobox-documentation.component.html',
+    standalone: false
 })
 export class ComboboxDocumentationComponent {
   @ViewChild('myCombobox', { read: ComboboxComponent }) myCombobox: ComboboxComponent;

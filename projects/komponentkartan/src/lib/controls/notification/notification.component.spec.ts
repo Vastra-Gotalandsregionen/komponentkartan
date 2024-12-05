@@ -9,14 +9,15 @@ import { DebugElement, Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 @Component({
-  selector: 'vgr-test',
-  template: `
+    selector: 'vgr-test',
+    template: `
   <vgr-notification>Utan klass och utan ikon</vgr-notification>
   <vgr-notification type="success">Med success-klass</vgr-notification>
   <vgr-notification type="error" [standalone]="true">Med error & standalone-klass, och ikon autoadderad</vgr-notification>
   <vgr-notification type="warning" [standalone]="true" [noIcon]="true">Med warning & standalone-klass, ingen ikon</vgr-notification>
   <vgr-notification type="info" [standalone]="true" width="100px">Med info & standalone-klass, ikon autoadderad och bredd satt</vgr-notification>
-  `
+  `,
+    standalone: false
 })
 export class TestComponent { }
 

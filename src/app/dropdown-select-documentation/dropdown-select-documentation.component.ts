@@ -3,8 +3,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { DropdownSelectComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
-  selector: 'app-dropdown-select-documentation',
-  templateUrl: './dropdown-select-documentation.component.html'
+    selector: 'app-dropdown-select-documentation',
+    templateUrl: './dropdown-select-documentation.component.html',
+    standalone: false
 })
 export class DropdownSelectDocumentationComponent {
   @ViewChild('myDropdown', { read: DropdownSelectComponent }) myDropdown: DropdownSelectComponent;

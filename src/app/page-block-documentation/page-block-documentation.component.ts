@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
-  selector: 'app-page-block-documentation',
-  templateUrl: './page-block-documentation.component.html'
+    selector: 'app-page-block-documentation',
+    templateUrl: './page-block-documentation.component.html',
+    standalone: false
 })
 export class PageBlockDocumentationComponent {
   exampleCodeMarkup: string;

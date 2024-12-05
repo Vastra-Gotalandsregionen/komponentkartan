@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
-  selector: 'app-pipes-documentation',
-  templateUrl: './pipes-documentation.component.html',
-  styleUrls: ['./pipes.documentation.component.scss']
+    selector: 'app-pipes-documentation',
+    templateUrl: './pipes-documentation.component.html',
+    styleUrls: ['./pipes.documentation.component.scss'],
+    standalone: false
 })
 export class PipesDocumentationComponent {
 

@@ -4,9 +4,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalService } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
-  selector: 'app-modaldialog',
-  templateUrl: './modaldialog.component.html',
-  styleUrls: ['./modaldialog.component.scss']
+    selector: 'app-modaldialog',
+    templateUrl: './modaldialog.component.html',
+    styleUrls: ['./modaldialog.component.scss'],
+    standalone: false
 })
 export class ModaldialogComponent implements OnInit {
   vardvalForm: FormGroup;

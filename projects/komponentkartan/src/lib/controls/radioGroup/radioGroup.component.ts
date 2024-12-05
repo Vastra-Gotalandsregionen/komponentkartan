@@ -4,14 +4,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractCont
 import { Guid } from '../../utils/guid';
 
 @Component({
-  selector: 'vgr-radio-group',
-  templateUrl: './radioGroup.component.html',
-  styleUrls: ['./radioGroup.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => RadioGroupComponent),
-    multi: true
-  }]
+    selector: 'vgr-radio-group',
+    templateUrl: './radioGroup.component.html',
+    styleUrls: ['./radioGroup.component.scss'],
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => RadioGroupComponent),
+            multi: true
+        }],
+    standalone: false
 })
 
 
