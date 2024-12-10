@@ -6,7 +6,8 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'vgr-menu',
     templateUrl: './menu.component.html',
-    styleUrls: ['./menu.component.scss']
+    styleUrls: ['./menu.component.scss'],
+    standalone: false
 })
 export class MenuComponent implements AfterContentInit, OnDestroy {
     private ngUnsubscribe: any = new Subject();

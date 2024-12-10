@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { ModalService, TabManagementService } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
-  selector: 'app-tab-button',
-  templateUrl: './tab-button.component.html',
-  styleUrls: ['./tab-button.component.css']
+    selector: 'app-tab-button',
+    templateUrl: './tab-button.component.html',
+    styleUrls: ['./tab-button.component.css'],
+    standalone: false
 })
 export class TabButtonComponent implements OnInit {
   pages = [

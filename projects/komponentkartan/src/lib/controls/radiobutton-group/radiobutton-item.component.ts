@@ -2,9 +2,10 @@ import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, E
 import { Guid } from '../../utils/guid';
 
 @Component({
-  selector: 'vgr-radiobutton-item',
-  templateUrl: './radiobutton-item.component.html',
-  styleUrls: ['./radiobutton-item.component.scss']
+    selector: 'vgr-radiobutton-item',
+    templateUrl: './radiobutton-item.component.html',
+    styleUrls: ['./radiobutton-item.component.scss'],
+    standalone: false
 })
 export class RadiobuttonItemComponent implements AfterViewInit {
   groupDisabledOverride: boolean; // gruppens disabledState

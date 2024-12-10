@@ -7,14 +7,15 @@ import { ToggleButtonGroupComponent } from './toggle-button-group.component';
 import { ToggleButtonComponent } from './toggle-button.component';
 
 @Component({
-  selector: 'vgr-test',
-  template: `
+    selector: 'vgr-test',
+    template: `
   <vgr-toggle-button-group>
     <vgr-toggle-button id="first">First</vgr-toggle-button>
     <vgr-toggle-button id="second">Second</vgr-toggle-button>
     <vgr-toggle-button id="third">Third</vgr-toggle-button>
   </vgr-toggle-button-group>
-  `
+  `,
+    standalone: false
 })
 export class TestComponent {}
 

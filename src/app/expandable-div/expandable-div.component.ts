@@ -3,9 +3,10 @@ import { HtmlEncodeService } from '../html-encode.service';
 import { ExpandableDivComponent as ExpandableDivComponentElement } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
-  selector: 'app-expandable-div',
-  templateUrl: './expandable-div.component.html',
-  styleUrls: ['./expandable-div.component.scss']
+    selector: 'app-expandable-div',
+    templateUrl: './expandable-div.component.html',
+    styleUrls: ['./expandable-div.component.scss'],
+    standalone: false
 })
 export class ExpandableDivComponent implements OnInit {
   @ViewChildren('myExpandableList', { read: ExpandableDivComponentElement }) myExpandableList: QueryList<ExpandableDivComponentElement>;

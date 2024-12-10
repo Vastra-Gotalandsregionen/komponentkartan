@@ -1,8 +1,9 @@
 import { Component, Input, EventEmitter, Output, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
-  selector: 'vgr-dropdown-item',
-  templateUrl: './dropdown-item.component.html'
+    selector: 'vgr-dropdown-item',
+    templateUrl: './dropdown-item.component.html',
+    standalone: false
 })
 export class DropdownItemComponent implements AfterViewInit {
 

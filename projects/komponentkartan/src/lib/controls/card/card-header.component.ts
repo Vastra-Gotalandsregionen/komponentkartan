@@ -1,9 +1,10 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
-  selector: 'vgr-card-header',
-  template: `<ng-content></ng-content>`,
-  styleUrls: ['./card.component.scss']
+    selector: 'vgr-card-header',
+    template: `<ng-content></ng-content>`,
+    styleUrls: ['./card.component.scss'],
+    standalone: false
 })
 
 export class CardHeaderComponent {

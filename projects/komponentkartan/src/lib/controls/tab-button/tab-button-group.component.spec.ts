@@ -7,14 +7,15 @@ import { TabButtonGroupComponent } from './tab-button-group.component';
 import { TabButtonComponent } from './tab-button.component';
 
 @Component({
-  selector: 'vgr-tab-button-group-test',
-  template: `
+    selector: 'vgr-tab-button-group-test',
+    template: `
   <vgr-tab-button-group>
     <vgr-tab-button id="first" tabId="first">First</vgr-tab-button>
     <vgr-tab-button id="second" tabId="second">Second</vgr-tab-button>
     <vgr-tab-button id="third" tabId="third">Third</vgr-tab-button>
   </vgr-tab-button-group>
-  `
+  `,
+    standalone: false
 })
 export class TestComponent {}
 

@@ -16,8 +16,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @Component({
-  selector: 'vgr-test-table-component',
-  template: `
+    selector: 'vgr-test-table-component',
+    template: `
     <vgr-table [expanded]="true">
       <vgr-table-header>
         <vgr-table-header-column>Header Column</vgr-table-header-column>
@@ -26,7 +26,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         <vgr-table-row-column>Row Column</vgr-table-row-column>
       </vgr-table-row>
     </vgr-table>
-          `
+          `,
+    standalone: false
 })
 class TestTableComponent { }
 

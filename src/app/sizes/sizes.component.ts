@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 @Component({
-  selector: 'app-sizes',
-  templateUrl: './sizes.component.html',
-  styleUrls: ['./sizes.component.scss']
+    selector: 'app-sizes',
+    templateUrl: './sizes.component.html',
+    styleUrls: ['./sizes.component.scss'],
+    standalone: false
 })
 export class SizesComponent implements OnInit {
 

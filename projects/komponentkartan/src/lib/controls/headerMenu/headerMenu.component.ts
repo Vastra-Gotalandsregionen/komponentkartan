@@ -6,9 +6,10 @@ import { takeUntil } from 'rxjs/operators';
 import { MenuItemComponent } from '../menu/menu-item.component';
 
 @Component({
-  selector: 'vgr-header-menu',
-  templateUrl: './headerMenu.component.html',
-  styleUrls: ['./headerMenu.component.scss']
+    selector: 'vgr-header-menu',
+    templateUrl: './headerMenu.component.html',
+    styleUrls: ['./headerMenu.component.scss'],
+    standalone: false
 })
 
 export class HeaderMenuComponent implements AfterContentInit, OnDestroy, OnChanges {

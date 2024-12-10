@@ -4,7 +4,8 @@ import { SubmenuComponent } from './submenu.component';
 @Component({
     selector: 'vgr-sidebar-menu',
     templateUrl: './sidebar-menu.component.html',
-    styleUrls: ['./sidebar-menu.component.scss']
+    styleUrls: ['./sidebar-menu.component.scss'],
+    standalone: false
 })
 export class SidebarMenuComponent implements AfterContentInit {
   @ContentChild(SubmenuComponent) subMenu: SubmenuComponent;

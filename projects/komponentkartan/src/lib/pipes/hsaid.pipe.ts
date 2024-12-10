@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'hsaidPipe'
+    name: 'hsaidPipe',
+    standalone: false
 })
 export class HsaidPipe implements PipeTransform {
 

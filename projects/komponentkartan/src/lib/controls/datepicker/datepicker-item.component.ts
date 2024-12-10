@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'vgr-datepicker-item',
-  templateUrl: './datepicker-item.component.html'
+    selector: 'vgr-datepicker-item',
+    templateUrl: './datepicker-item.component.html',
+    standalone: false
 })
 export class DatepickerItemComponent implements OnInit {
   @Input() date: Date;

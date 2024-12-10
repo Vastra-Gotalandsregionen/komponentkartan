@@ -5,9 +5,10 @@ import { PageItem } from './page-item';
 import { PaginationManagementService } from './pagination-management.service';
 
 @Component({
-  selector: 'vgr-pagination',
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+    selector: 'vgr-pagination',
+    templateUrl: './pagination.component.html',
+    styleUrls: ['./pagination.component.scss'],
+    standalone: false
 })
 export class PaginationComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() pages = 1;

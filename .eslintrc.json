@@ -20,6 +20,8 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "@angular-eslint/prefer-standalone": 0,
+        "@angular-eslint/no-output-native": 0,
         "@angular-eslint/component-selector": [
           "error",
           {

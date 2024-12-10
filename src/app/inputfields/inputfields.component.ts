@@ -8,9 +8,10 @@ import { Subject } from 'rxjs';
 import { InputComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
-  selector: 'app-inputfields',
-  templateUrl: './inputfields.component.html',
-  styleUrls: ['./inputfields.component.scss']
+    selector: 'app-inputfields',
+    templateUrl: './inputfields.component.html',
+    styleUrls: ['./inputfields.component.scss'],
+    standalone: false
 })
 export class InputfieldsComponent implements OnInit, OnDestroy {
   @ViewChild('myInput', { read: InputComponent }) myInput: InputComponent;

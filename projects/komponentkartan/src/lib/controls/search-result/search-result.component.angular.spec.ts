@@ -14,13 +14,14 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 
 
 @Component({
-  selector: 'vgr-test',
-  template: `
+    selector: 'vgr-test',
+    template: `
           <div class="search-result-wrapper">
             <input (click)="show()" type="text" />
             <vgr-search-result  [(visible)]="dropdownVisible" (itemClick)="hide()"></vgr-search-result>
           </div>
-          `
+          `,
+    standalone: false
 })
 class TestSearchResultComponent {
   dropdownVisible = false;

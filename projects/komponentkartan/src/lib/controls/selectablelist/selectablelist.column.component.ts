@@ -1,8 +1,9 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'vgr-selectablelist-column',
-  template: '<ng-content></ng-content>'
+    selector: 'vgr-selectablelist-column',
+    template: '<ng-content></ng-content>',
+    standalone: false
 })
 export class SelectablelistColumnComponent {
 

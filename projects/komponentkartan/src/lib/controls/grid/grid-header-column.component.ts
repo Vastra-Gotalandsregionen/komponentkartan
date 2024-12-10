@@ -4,8 +4,9 @@ import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 
 
 @Component({
-  selector: 'vgr-grid-header-column',
-  templateUrl: './grid-header-column.component.html'
+    selector: 'vgr-grid-header-column',
+    templateUrl: './grid-header-column.component.html',
+    standalone: false
 })
 export class GridHeaderColumnComponent {
   @Input() @HostBinding('style.flex') width = 1;

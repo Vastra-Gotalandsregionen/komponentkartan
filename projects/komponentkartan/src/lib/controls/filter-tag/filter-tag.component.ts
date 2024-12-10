@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
-  selector: 'vgr-filter-tag',
-  templateUrl: './filter-tag.component.html',
-  styleUrls: ['./filter-tag.component.scss']
+    selector: 'vgr-filter-tag',
+    templateUrl: './filter-tag.component.html',
+    styleUrls: ['./filter-tag.component.scss'],
+    standalone: false
 })
 export class FilterTagComponent implements AfterViewInit {
   @Input() disabled = false;

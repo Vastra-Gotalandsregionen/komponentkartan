@@ -4,10 +4,11 @@ import { takeUntil } from 'rxjs/operators';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
 
 @Component({
-  selector: 'vgr-page',
-  templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss'],
-  providers: [PageHeaderHeightService]
+    selector: 'vgr-page',
+    templateUrl: './page.component.html',
+    styleUrls: ['./page.component.scss'],
+    providers: [PageHeaderHeightService],
+    standalone: false
 })
 export class PageComponent implements OnInit, OnDestroy {
   @ViewChild('bodyContainer', { static: true }) bodyContainer: ElementRef;

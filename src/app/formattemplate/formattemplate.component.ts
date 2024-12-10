@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-formattemplate',
-  templateUrl: './formattemplate.component.html',
-  styleUrls: ['./formattemplate.component.scss']
+    selector: 'app-formattemplate',
+    templateUrl: './formattemplate.component.html',
+    styleUrls: ['./formattemplate.component.scss'],
+    standalone: false
 })
 export class FormattemplateComponent implements OnInit {
 

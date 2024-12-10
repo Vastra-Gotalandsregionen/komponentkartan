@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToggleButtonGroupComponent, ToggleButtonComponent as ToggleButtonComponentElement } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
-  selector: 'app-toggle-button',
-  templateUrl: './toggle-button.component.html',
-  styleUrls: ['./toggle-button.component.css']
+    selector: 'app-toggle-button',
+    templateUrl: './toggle-button.component.html',
+    styleUrls: ['./toggle-button.component.css'],
+    standalone: false
 })
 export class ToggleButtonComponent implements OnInit {
   @ViewChild('myToggleButtonGroup', { read: ToggleButtonGroupComponent }) myToggleButtonGroup: ToggleButtonGroupComponent;
