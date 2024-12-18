@@ -4,8 +4,9 @@ import { GridSortDirection, SortChangedArgs } from '../sort-arrow/sort-arrow.com
 import { EditableTableHeaderColumnComponent } from './editable-table-header-column.component';
 
 @Component({
-  selector: 'vgr-editable-table-header',
-  template: '<ng-content select="vgr-editable-table-header-column"></ng-content>'
+    selector: 'vgr-editable-table-header',
+    template: '<ng-content select="vgr-editable-table-header-column"></ng-content>',
+    standalone: false
 })
 export class EditableTableHeaderComponent implements AfterContentInit, OnDestroy{
   private ngUnsubscribe: any = new Subject();

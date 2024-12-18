@@ -2,9 +2,10 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, O
 import { Guid } from '../../utils/guid';
 
 @Component({
-  selector: 'vgr-tab-button',
-  templateUrl: './tab-button.component.html',
-  styleUrls: ['./tab-button.component.scss']
+    selector: 'vgr-tab-button',
+    templateUrl: './tab-button.component.html',
+    styleUrls: ['./tab-button.component.scss'],
+    standalone: false
 })
 export class TabButtonComponent implements AfterViewInit, OnChanges {
 

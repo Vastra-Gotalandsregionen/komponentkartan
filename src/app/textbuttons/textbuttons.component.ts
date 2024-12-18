@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ButtonComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
-  selector: 'app-textbuttons',
-  templateUrl: './textbuttons.component.html',
-  styleUrls: ['./textbuttons.component.scss']
+    selector: 'app-textbuttons',
+    templateUrl: './textbuttons.component.html',
+    styleUrls: ['./textbuttons.component.scss'],
+    standalone: false
 })
 export class TextbuttonsComponent{
   @ViewChild('submitButton', { read: ButtonComponent, static: false }) submitButton: ButtonComponent;

@@ -4,9 +4,10 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'vgr-filter-tag-group',
-  templateUrl: './filter-tag-group.component.html',
-  styleUrls: ['./filter-tag-group.component.scss']
+    selector: 'vgr-filter-tag-group',
+    templateUrl: './filter-tag-group.component.html',
+    styleUrls: ['./filter-tag-group.component.scss'],
+    standalone: false
 })
 export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {
 

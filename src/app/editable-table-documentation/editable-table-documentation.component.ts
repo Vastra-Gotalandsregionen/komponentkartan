@@ -4,9 +4,10 @@ import { SortChangedArgs, GridSortDirection } from '../../../projects/komponentk
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
-  selector: 'vgr-editable-table-documentation',
-  templateUrl: './editable-table-documentation.component.html',
-  styleUrls: ['./editable-table-documentation.component.scss']
+    selector: 'vgr-editable-table-documentation',
+    templateUrl: './editable-table-documentation.component.html',
+    styleUrls: ['./editable-table-documentation.component.scss'],
+    standalone: false
 })
 export class EditableTableDocumentationComponent {
   data3 = [];

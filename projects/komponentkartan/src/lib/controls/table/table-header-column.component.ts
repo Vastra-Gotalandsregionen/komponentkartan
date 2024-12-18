@@ -1,8 +1,9 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
-  selector: 'vgr-table-header-column',
-  template: `<ng-content></ng-content>`
+    selector: 'vgr-table-header-column',
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 
 export class TableHeaderColumnComponent {

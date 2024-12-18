@@ -16,9 +16,10 @@ function _defaultCompare(o1: any, o2: any): boolean {
 
 
 @Component({
-  selector: 'vgr-combobox',
-  templateUrl: './combobox.component.html',
-  styleUrls: ['./combobox.component.scss']
+    selector: 'vgr-combobox',
+    templateUrl: './combobox.component.html',
+    styleUrls: ['./combobox.component.scss'],
+    standalone: false
 })
 export class ComboboxComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 

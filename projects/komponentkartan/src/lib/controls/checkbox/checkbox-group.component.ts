@@ -6,14 +6,15 @@ import { Guid } from '../../utils/guid';
 import { CheckboxComponent } from './checkbox.component';
 
 @Component({
-  selector: 'vgr-checkbox-group',
-  templateUrl: './checkbox-group.component.html',
-  styleUrls: ['./checkbox-group.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => CheckboxGroupComponent),
-    multi: true
-  }]
+    selector: 'vgr-checkbox-group',
+    templateUrl: './checkbox-group.component.html',
+    styleUrls: ['./checkbox-group.component.scss'],
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => CheckboxGroupComponent),
+            multi: true
+        }],
+    standalone: false
 })
 export class CheckboxGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges, OnDestroy {
   _disabled: boolean;

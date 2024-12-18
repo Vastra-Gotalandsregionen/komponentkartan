@@ -4,9 +4,10 @@ import { DatepickerComponent as Datepicker } from '../../../projects/komponentka
 
 
 @Component({
-  selector: 'app-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss']
+    selector: 'app-datepicker',
+    templateUrl: './datepicker.component.html',
+    styleUrls: ['./datepicker.component.scss'],
+    standalone: false
 })
 export class DatepickerComponent {
   @ViewChild('myDatepicker', { read: Datepicker }) myDatepicker: Datepicker;

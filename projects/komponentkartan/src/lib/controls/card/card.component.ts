@@ -6,7 +6,8 @@ import { CardColumnComponent } from './card-column.component';
 @Component({
     selector: 'vgr-card',
     templateUrl: './card.component.html',
-    styleUrls: ['./card.component.scss']
+    styleUrls: ['./card.component.scss'],
+    standalone: false
 })
 export class CardComponent implements AfterContentInit {
     @ContentChildren(CardColumnComponent) columns: QueryList<CardColumnComponent>;

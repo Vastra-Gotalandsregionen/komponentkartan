@@ -3,8 +3,9 @@ import { Guid } from '../../utils/guid';
 import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 import { EditableTableService } from './editable-table.service';
 @Component({
-  selector: 'vgr-editable-table-header-column',
-  template: '<ng-content></ng-content>  <vgr-sort-arrow *ngIf="sortKey && editMode === false" [sortDirection]="sortDirection"></vgr-sort-arrow>'
+    selector: 'vgr-editable-table-header-column',
+    template: '<ng-content></ng-content>  <vgr-sort-arrow *ngIf="sortKey && editMode === false" [sortDirection]="sortDirection"></vgr-sort-arrow>',
+    standalone: false
 })
 export class EditableTableHeaderColumnComponent implements OnInit, AfterContentInit {
 

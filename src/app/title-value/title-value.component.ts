@@ -4,9 +4,10 @@ import { RowNotification, NotificationType } from '../../../projects/komponentka
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-title-value',
-  templateUrl: './title-value.component.html',
-  styleUrls: ['./title-value.component.scss']
+    selector: 'app-title-value',
+    templateUrl: './title-value.component.html',
+    styleUrls: ['./title-value.component.scss'],
+    standalone: false
 })
 export class TitleValueComponent implements OnInit {
   markupExample = `

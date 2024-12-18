@@ -12,8 +12,8 @@ import { SelectablelistService } from './selectablelist.service';
 import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
 
 @Component({
-  selector: 'vgr-selectablelist-test',
-  template: `
+    selector: 'vgr-selectablelist-test',
+    template: `
   <vgr-selectablelist [active]="true" id="djurlistan">
     <vgr-selectablelist-header>
       <vgr-selectablelist-header-column>Rubrik</vgr-selectablelist-header-column>
@@ -56,7 +56,8 @@ import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
       <vgr-selectablelist-column>8</vgr-selectablelist-column>
     </vgr-selectablelist-row>
   </vgr-selectablelist>
-  `
+  `,
+    standalone: false
 }) class TestSelectablelistComponent { }
 
 

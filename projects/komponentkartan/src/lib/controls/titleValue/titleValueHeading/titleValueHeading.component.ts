@@ -2,7 +2,8 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
     selector: 'vgr-title-value-heading',
-    templateUrl: './titleValueHeading.component.html'
+    templateUrl: './titleValueHeading.component.html',
+    standalone: false
 })
 export class TitleValueHeadingComponent {
     @Input() for: string = null;

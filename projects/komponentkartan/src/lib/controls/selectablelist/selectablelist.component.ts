@@ -24,9 +24,10 @@ import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
 
 @Component({
-  selector: 'vgr-selectablelist',
-  templateUrl: './selectablelist.component.html',
-  styleUrls: ['./selectablelist.component.scss']
+    selector: 'vgr-selectablelist',
+    templateUrl: './selectablelist.component.html',
+    styleUrls: ['./selectablelist.component.scss'],
+    standalone: false
 })
 export class SelectablelistComponent implements AfterContentInit, OnChanges, OnDestroy {
 

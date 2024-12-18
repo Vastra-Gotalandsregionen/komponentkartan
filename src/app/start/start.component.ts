@@ -3,9 +3,10 @@ declare var require: any;
 
 
 @Component({
-  selector: 'app-start',
-  templateUrl: './start.component.html',
-  styleUrls: ['./start.component.scss']
+    selector: 'app-start',
+    templateUrl: './start.component.html',
+    styleUrls: ['./start.component.scss'],
+    standalone: false
 })
 export class StartComponent implements OnInit {
   currentVersion: string;

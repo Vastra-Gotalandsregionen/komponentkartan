@@ -6,9 +6,10 @@ import { TabButtonComponent } from './tab-button.component';
 import { TabManagementService } from './tab-management.service';
 
 @Component({
-  selector: 'vgr-tab-button-group',
-  templateUrl: './tab-button-group.component.html',
-  styleUrls: ['./tab-button-group.component.scss']
+    selector: 'vgr-tab-button-group',
+    templateUrl: './tab-button-group.component.html',
+    styleUrls: ['./tab-button-group.component.scss'],
+    standalone: false
 })
 export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {
 

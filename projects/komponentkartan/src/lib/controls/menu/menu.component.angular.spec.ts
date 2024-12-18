@@ -21,7 +21,8 @@ import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
             <vgr-menu-item link="/backtotop" text="Back to top" disabled="true"></vgr-menu-item>
           </vgr-submenu>
         </vgr-menu>
-    `
+    `,
+    standalone: false
 })
 class TestMenuComponent { }
 

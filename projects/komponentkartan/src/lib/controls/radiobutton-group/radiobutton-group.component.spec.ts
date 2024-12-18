@@ -11,14 +11,15 @@ import { RadiobuttonItemComponent } from './radiobutton-item.component';
 
 
 @Component({
-  selector: 'vgr-radiogroup-test',
-  template: `
+    selector: 'vgr-radiogroup-test',
+    template: `
   <vgr-radiobutton-group>
       <vgr-radiobutton-item>One</vgr-radiobutton-item>
       <vgr-radiobutton-item>Two</vgr-radiobutton-item>
       <vgr-radiobutton-item>Three</vgr-radiobutton-item>
   </vgr-radiobutton-group>
-  `
+  `,
+    standalone: false
 }) class TestRadiogroupComponent { }
 
 describe('RadiobuttonGroupComponent', () => {

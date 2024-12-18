@@ -21,8 +21,8 @@ import { GridService } from './grid.service';
 import { SortArrowComponent } from '../sort-arrow/sort-arrow.component';
 
 @Component({
-  selector: 'vgr-test',
-  template: `
+    selector: 'vgr-test',
+    template: `
   <vgr-grid>
     <vgr-grid-header>
       <vgr-grid-header-column sortKey="test">Test</vgr-grid-header-column>
@@ -32,7 +32,8 @@ import { SortArrowComponent } from '../sort-arrow/sort-arrow.component';
       <vgr-grid-content>{{row}}</vgr-grid-content>
     </vgr-grid-row>
   </vgr-grid>
-  `
+  `,
+    standalone: false
 })
 export class TestComponent {
   @Input() rows: { text: string; expanded: boolean; preventCollapse: boolean; }[];

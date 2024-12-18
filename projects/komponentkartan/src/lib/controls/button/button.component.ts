@@ -2,9 +2,10 @@
 import { mapToClassString } from '../../utils/map-to-class-string';
 
 @Component({
-  selector: 'vgr-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+    selector: 'vgr-button',
+    templateUrl: './button.component.html',
+    styleUrls: ['./button.component.scss'],
+    standalone: false
 })
 export class ButtonComponent implements OnChanges {
   @Input() disabled = false;

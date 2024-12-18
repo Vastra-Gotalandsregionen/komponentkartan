@@ -10,9 +10,10 @@ export interface SortChangedArgs {
   direction: GridSortDirection;
 }
 @Component({
-  selector: 'vgr-sort-arrow',
-  templateUrl: './sort-arrow.component.html',
-  styleUrls: ['./sort-arrow.component.scss']
+    selector: 'vgr-sort-arrow',
+    templateUrl: './sort-arrow.component.html',
+    styleUrls: ['./sort-arrow.component.scss'],
+    standalone: false
 })
 
 export class SortArrowComponent implements  OnChanges {
