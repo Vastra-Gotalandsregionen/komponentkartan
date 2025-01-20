@@ -1,6 +1,5 @@
-@import "../../../assets/partials/settings.colors";
-@import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/_settings.sizes.scss";
+@use "../../../assets/partials/settings.colors" as colors;
+@use "../../../assets/partials/_settings.sizes.scss" as sizes;
 
 .inputwrapper {
   border: 1px solid #151515;
@@ -22,7 +21,7 @@
     }
   }
   input::placeholder {
-    color: $gray-dark;
+    color: colors.$gray-dark;
   }
   div.prefix,
   div.suffix {
@@ -60,12 +59,12 @@
 }
 
 .disabled_focus:focus-visible {
-    outline: $focus-outline-width solid $focus-color!important;
+    outline: sizes.$focus-outline-width solid colors.$focus-color!important;
 }
 
 .validation-error--editing {
   .inputwrapper {
-      outline: $focus-outline-width solid $focus-color!important;
+      outline: sizes.$focus-outline-width solid colors.$focus-color!important;
   }
 }
 .validation.readonly {
@@ -89,8 +88,8 @@
   display: inline-block;
   &.vgr-input--disabled {
     .inputwrapper {
-      background-color: $gray-dimmed;
-      border-color: $gray-primary;
+      background-color: colors.$gray-dimmed;
+      border-color: colors.$gray-primary;
     }
   }
 }

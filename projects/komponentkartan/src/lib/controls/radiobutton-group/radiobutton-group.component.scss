@@ -1,14 +1,13 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/_settings.fonts.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as sizes;
+@use "../../../assets/partials/_settings.colors.scss" as colors;
 
 .radiobutton-group {
   &-validation {
     max-height: none;
-    padding: $margin--slim;
+    padding: sizes.$margin--slim;
     padding-bottom: 0px;
-    margin-left: -$margin--slim;
-    margin-right: -$margin--slim;
+    margin-left: -(sizes.$margin--slim);
+    margin-right: -(sizes.$margin--slim);
     &_status {
       margin-top: 8px;
       &__message {
@@ -41,11 +40,11 @@
 
   .radiobutton-group-validation-error--active .radiobutton-group-validation_status__message {
     display: inline-block;
-    color: $text-color--default;
+    color: colors.$text-color--default;
   }
 
   .radiobutton-group-validation-error--active .radiobutton-group-validation_status__icon ::ng-deep .icon {
-    color: $primary-color--error;
+    color: colors.$primary-color--error;
   }
 
   .radiobutton-group-validation-error--active .radiobutton-group-validation_status__icon {

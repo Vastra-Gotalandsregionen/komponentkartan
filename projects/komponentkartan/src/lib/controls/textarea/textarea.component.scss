@@ -1,12 +1,12 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/_settings.fonts.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as sizes;
+@use "../../../assets/partials/_settings.colors.scss" as colors;
+@use "../../../assets/partials/_settings.fonts.scss" as fonts;
 
 
 .textarea {
   display: inline-block;
   &-input {
-    line-height: $line-height;
+    line-height: fonts.$line-height;
     display: block;
     overflow: auto;
     width: 100%;
@@ -14,24 +14,20 @@
     resize: none;
     padding: 10px;
     transition: border-color 0.6s linear;
-    // &:focus {
-    //   outline: $focus-outline-width solid $focus-color;
-    //   outline-offset: 2px;
-    // }
     &::placeholder {
-      color: $gray-dark;
+      color: colors.$gray-dark;
     }
     &:disabled {
-      background-color: $gray-dimmed;
-      border-color: $gray-primary;
+      background-color: colors.$gray-dimmed;
+      border-color: colors.$gray-primary;
     }
   }
   &-validation {
     max-height: none;
-    padding: $margin--slim;
+    padding: sizes.$margin--slim;
     padding-bottom: 0px;
-    margin-left: -$margin--slim;
-    margin-right: -$margin--slim;
+    margin-left: -(sizes.$margin--slim);
+    margin-right: -(sizes.$margin--slim);
     &_status {
       margin-top: 8px;
       &__message {
@@ -50,7 +46,7 @@
 
 :host {
   &.readonly .textarea-input {
-    border-color: $background-color--content;
+    border-color: colors.$background-color--content;
     overflow: hidden;
     cursor: text;
     &::placeholder {
@@ -76,15 +72,15 @@
     padding-bottom: 8px;
   }
   &.textarea-validation-error--active .textarea-validation > div:first-of-type {
-    // background-color: $secondary-color--error;
+    // background-color: colors.$secondary-color--error;
     // transition: background-color 0.3s linear;
     outline: 3px solid #FF0000;
     border-radius: 2px;
   }
   &.textarea-validation-error--editing .textarea-validation > div:first-of-type {
-    // background-color: $background-color--default;
+    // background-color: colors.$background-color--default;
     // transition: background-color 0.3s linear;
-    outline: 3px solid $focus-color;
+    outline: 3px solid colors.$focus-color;
   }
   &.textarea-validation-error--fixed .textarea-validation {
     &:after {
@@ -95,15 +91,15 @@
   &.textarea-validation-error--active .textarea-validation_status__message,
   &.textarea-validation-error--editing .textarea-validation_status__message {
     display: inline-block;
-    color: $text-color--default;
+    color: colors.$text-color--default;
   }
 
 
   &.textarea-validation-error--active .textarea-validation_status__icon ::ng-deep .icon {
-    color: $primary-color--error;
+    color: colors.$primary-color--error;
   }
   &.textarea-validation-error--editing .textarea-validation_status__icon ::ng-deep .icon {
-    color: $text-color--default;
+    color: colors.$text-color--default;
   }
 
 

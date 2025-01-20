@@ -1,17 +1,17 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as sizes;
+@use "../../../assets/partials/_settings.colors.scss" as colors;
 
 :host::ng-deep {
   .modal {
     display: none;
     position: fixed;
-    z-index: $layer-modal;
+    z-index: sizes.$layer-modal;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: $modal-background-color;
+    background-color: colors.$modal-background-color;
     .vgr-modal--open & {
       display: flex;
     }
@@ -48,7 +48,7 @@
     }
   }
 
-  @media screen and (min-width: $desktop-width--medium) {
+  @media screen and (min-width: sizes.$desktop-width--medium) {
     .modal-content {
       padding-top: 38px;
       min-width: 500px;

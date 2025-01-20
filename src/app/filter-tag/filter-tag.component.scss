@@ -1,4 +1,4 @@
-@import "partials/_settings.sizes.scss";
+@use "partials/_settings.sizes.scss" as sizes;
 
 .list-row {
   width: 500px; display: flex;
@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   width: 20%;
-  @media screen and (min-width: $desktop-width--medium) {
+  @media screen and (min-width: sizes.$desktop-width--medium) {
     width: 22%;
   }
 }

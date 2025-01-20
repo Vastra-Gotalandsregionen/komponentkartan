@@ -1,4 +1,4 @@
-@import "../../../assets/partials/_settings.sizes.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as sizes;
 
 :host {
   display: table;
@@ -22,11 +22,11 @@
     &.slim-row .title-value__value {
       padding: 1px 0 0 0;
       >vgr-radio-group {
-        padding-left: $margin--slim;
+        padding-left: sizes.$margin--slim;
       }
       >vgr-checkbox {
         .checkbox {
-          padding-left: $margin--slim;
+          padding-left: sizes.$margin--slim;
         }
       }
     }
@@ -44,12 +44,12 @@
     .row-layout>span {
       display: block;
       padding-top: 4px;
-      padding-left: $margin--slim;
+      padding-left: sizes.$margin--slim;
     }
 
   }
 
-  @media screen and (min-width: $desktop-width--medium) {
+  @media screen and (min-width: sizes.$desktop-width--medium) {
     .title-value__value {
       padding: 7px 0 0px 0;
       >span,

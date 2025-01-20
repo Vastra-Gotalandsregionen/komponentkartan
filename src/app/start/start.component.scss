@@ -1,7 +1,6 @@
-@import 'partials/_settings.colors.scss';
-@import 'partials/_settings.sizes.scss';
+@use 'partials/_settings.sizes.scss' as sizes;
 $primary-color--green:#334455;
 .first-input {
   background-color: $primary-color--green;
-  margin-left: $margin--fat;
+  margin-left: sizes.$margin--fat;
 }

@@ -1,5 +1,5 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as sizes;
+@use "../../../assets/partials/_settings.colors.scss" as colors;
 
 :host {
 
@@ -18,10 +18,10 @@
     width: 18px;
     height: 18px;
     border: solid 2px #151515;
-    background-color: $background-color--content;
+    background-color: colors.$background-color--content;
     transition: background-color 0.6s linear, border-color 0.6s linear;
     border-radius: 50%;
-    margin-right: $margin--slim;
+    margin-right: sizes.$margin--slim;
     margin-left: 0;
     display: grid;
     place-content: center;
@@ -40,19 +40,19 @@
         content: "";
         width: 20px;
         height: 20px;
-        box-shadow: 0 0 4px 0 $focus-color;
-        border: solid 1px $focus-color;
+        box-shadow: 0 0 4px 0 colors.$focus-color;
+        border: solid 1px colors.$focus-color;
         border-radius: 100px;
         margin-left: -3px;
         margin-top: -3px;
         position: absolute;
-        z-index: $layer-two;
+        z-index: sizes.$layer-two;
       }
     }
     .radio-button--disabled & {
-      border-color: $control-color--disabled;
+      border-color: colors.$control-color--disabled;
       &:after {
-        background-color: $control-color--disabled;
+        background-color: colors.$control-color--disabled;
         transition: background-color 0.6s linear;
       }
       // &:before {
@@ -60,9 +60,9 @@
       // }
     }
     .disabled & {
-      border-color: $control-color--disabled;
+      border-color: colors.$control-color--disabled;
       &:after {
-        background-color: $control-color--disabled;
+        background-color: colors.$control-color--disabled;
         transition: background-color 0.6s linear;
       }
       // &:before {
@@ -76,7 +76,7 @@
     &:after {
       transition: opacity 0.5s ease;
       opacity: 1;
-      background-color: $control-color--disabled;
+      background-color: colors.$control-color--disabled;
     }
   }
 
@@ -90,7 +90,7 @@
   .radio-button__icon {
     &:focus-visible {
       outline: 0;
-      box-shadow: 0 0 0 2px $focus-color;
+      box-shadow: 0 0 0 2px colors.$focus-color;
     }
   }
 
@@ -98,18 +98,18 @@
     cursor: default;
 
     .radio-button__icon {
-      border: 2px solid $gray-primary;
+      border: 2px solid colors.$gray-primary;
       &:focus-visible {
         // outline: none;
         // box-shadow: none;
         &:before {
-          box-shadow: 0 0 4px 0 $focus-color;
-          border: solid 1px $focus-color;
+          box-shadow: 0 0 4px 0 colors.$focus-color;
+          border: solid 1px colors.$focus-color;
         }
       }
     }
     .radio-button__content {
-      color: $gray-primary;
+      color: colors.$gray-primary;
       transition: color 0.6s linear;
     }
   }
