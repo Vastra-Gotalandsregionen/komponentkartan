@@ -1,5 +1,5 @@
-@use "../../../assets/partials/_settings.sizes.scss" as sizes;
-@use "../../../assets/partials/_settings.colors.scss" as colors;
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
 
 .expandable-div {
   position: relative;
@@ -30,11 +30,11 @@
 
   &:focus-visible {
     outline: 0; // z-index: 999;
-    box-shadow: inset 0px 0px 0px sizes.$focus-outline-width colors.$focus-color;
+    box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
   }
 }
 
 .expandable-div-header:focus-visible {
   outline: 0;
-  box-shadow: inset 0px 0px 0px sizes.$focus-outline-width colors.$focus-color;
+  box-shadow: inset 0px 0px 0px $focus-outline-width $focus-color;
 }

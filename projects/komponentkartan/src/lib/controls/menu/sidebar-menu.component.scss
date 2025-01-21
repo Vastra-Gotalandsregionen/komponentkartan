@@ -1,14 +1,14 @@
-@use "../../../assets/partials/_settings.sizes.scss" as sizes;
-@use "../../../assets/partials/_settings.colors.scss" as colors;
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
 
 ::ng-deep {
   .sidebar-menu {
     position: fixed;
-    z-index: sizes.$layer-three;
-    top: sizes.$header-height;
-    width: sizes.$nav-width--small;
+    z-index: $layer-three;
+    top: $header-height;
+    width: $nav-width--small;
     background: white;
-    border-right: solid 1px colors.$gray-primary;
+    border-right: solid 1px $gray-primary;
 
     .ng-scroll-content {
       height: 100%;
@@ -16,9 +16,9 @@
 
   }
 
-  @media screen and (min-width: sizes.$desktop-width--medium) {
+  @media screen and (min-width: $desktop-width--medium) {
     .sidebar-menu {
-      width: sizes.$nav-width--medium;
+      width: $nav-width--medium;
     }
   }
 }

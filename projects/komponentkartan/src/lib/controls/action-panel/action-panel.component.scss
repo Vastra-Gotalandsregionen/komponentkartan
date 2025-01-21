@@ -1,10 +1,10 @@
-@use "../../../assets/partials/_settings.sizes.scss" as sizes;
-@use "../../../assets/partials/_settings.colors.scss" as colors;
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
 
 .action-panel {
   position: relative;
   background-color: white;
-  width: sizes.$content-width--small;
+  width: $content-width--small;
   padding: 0;
   overflow: hidden;
   &.action-panel--open {
@@ -14,9 +14,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: sizes.$margin--slim;
-    padding-right: sizes.$margin--slim;
-    border-bottom: 1px solid colors.$gray-primary;
+    padding-left: $margin--slim;
+    padding-right: $margin--slim;
+    border-bottom: 1px solid $gray-primary;
     .action-panel__title {
       font-weight: bold;
     }
@@ -25,20 +25,20 @@
     }
   }
   .action-panel__content {
-    padding: sizes.$margin--slim;
+    padding: $margin--slim;
   }
 }
 
-@media screen and (min-width: sizes.$desktop-width--medium) {
+@media screen and (min-width: $desktop-width--medium) {
   .action-panel {
-    width: sizes.$content-width--medium;
+    width: $content-width--medium;
     .action-panel__header {
-      padding-left: sizes.$margin--fat;
+      padding-left: $margin--fat;
       padding-bottom: 0;
       padding-right: 10px;
     }
     .action-panel__content {
-      padding: sizes.$margin--fat;
+      padding: $margin--fat;
     }
   }
 }

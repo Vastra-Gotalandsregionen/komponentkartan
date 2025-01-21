@@ -1,4 +1,4 @@
-@use "../../../assets/partials/_settings.colors.scss" as colors;
+@use "../../../assets/partials/_settings.colors.scss" as *;
 
 /* First, hide the default checkbox. It cannot be styled with CSS.
  * Instead, we will use the "label" that is associated with our textbox.
@@ -17,13 +17,13 @@
 
   .checkbox-validation-error--active .checkbox-validation_status__message {
     display: inline-block;
-    color: colors.$text-color--default;
+    color: $text-color--default;
     margin-left: 4px;
     margin-top: 4px;
   }
 
   .checkbox-validation-error--active .checkbox-validation_status__icon ::ng-deep .icon {
-    color: colors.$primary-color--error;
+    color: $primary-color--error;
   }
 
   .checkbox-validation-error--active .checkbox-validation_status__icon {
@@ -43,7 +43,7 @@
     cursor: pointer;
   }
   .checkbox--disabled {
-    color: colors.$gray-primary;
+    color: $gray-primary;
     transition: color 0.6s linear;
     cursor: default;
   }
@@ -75,19 +75,19 @@
       }
 
       &:disabled + .checkbox__control {
-        border: 2px solid colors.$gray-primary;
+        border: 2px solid $gray-primary;
         background-color: white;
         cursor: default;
       }
 
       &:checked:disabled + .checkbox__control svg {
-        background-color: colors.$gray-primary;
+        background-color: $gray-primary;
         color: #fff;
         cursor: default;
       }
 
       &:checked:disabled + .checkbox__control {
-        background-color: colors.$gray-primary;
+        background-color: $gray-primary;
         cursor: default;
       }
     }

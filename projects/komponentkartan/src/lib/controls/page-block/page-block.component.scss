@@ -1,12 +1,12 @@
-@use "../../../assets/partials/_settings.sizes.scss" as sizes;
+@use "../../../assets/partials/settings.sizes" as *;
 
 :host::ng-deep {
   .page-block {
     position: relative;
-    padding: sizes.$margin--slim;
+    padding: $margin--slim;
     background-color: white;
-    width: sizes.$content-width--small;
-    margin-bottom: sizes.$margin--slim;
+    width: $content-width--small;
+    margin-bottom: $margin--slim;
     &.page-block--transparent {
       background-color: transparent;
     }
@@ -17,10 +17,10 @@
     border-radius: 2px;
   }
 
-  @media screen and (min-width: sizes.$desktop-width--medium) {
+  @media screen and (min-width: $desktop-width--medium) {
     .page-block {
-        padding: sizes.$margin--fat;
-        width: sizes.$content-width--medium;
+        padding: $margin--fat;
+        width: $content-width--medium;
     }
   }
 }

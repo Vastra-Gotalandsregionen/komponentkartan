@@ -1,5 +1,5 @@
-@use "../../../assets/partials/_settings.sizes.scss" as sizes;
-@use "../../../assets/partials/_settings.colors.scss" as colors;
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
 
 :host {
   &.radio-group {
@@ -7,7 +7,7 @@
       display: inline-flex;
       flex-direction: column;
       .radio-button {
-        min-height: sizes.$component-height;
+        min-height: $component-height;
         height: auto;
         display: flex;
         align-items: flex-start;
@@ -28,7 +28,7 @@
     align-items: center;
     margin-right: 20px;
     cursor: pointer;
-    height: sizes.$component-height;
+    height: $component-height;
   }
 
   .radio-button__text {
@@ -42,10 +42,10 @@
     width: 18px;
     height: 18px;
     border: solid 2px #151515;
-    background-color: colors.$background-color--content;
+    background-color: $background-color--content;
     transition: background-color 0.6s linear, border-color 0.6s linear;
     border-radius: 100px;
-    margin-right: sizes.$margin--slim;
+    margin-right: $margin--slim;
     &:after {
       content: "";
       width: 8px;
@@ -64,19 +64,19 @@
         content: "";
         width: 20px;
         height: 20px;
-        box-shadow: 0 0 4px 0 colors.$focus-color;
-        border: solid 1px colors.$focus-color;
+        box-shadow: 0 0 4px 0 $focus-color;
+        border: solid 1px $focus-color;
         border-radius: 100px;
         margin-left: -3px;
         margin-top: -3px;
         position: absolute;
-        z-index: sizes.$layer-two;
+        z-index: $layer-two;
       }
     }
     .radio-button--disabled & {
-      border-color: colors.$control-color--disabled;
+      border-color: $control-color--disabled;
       &:after {
-        background-color: colors.$control-color--disabled;
+        background-color: $control-color--disabled;
         transition: background-color 0.6s linear;
       }
       // &:before {
@@ -84,9 +84,9 @@
       // }
     }
     .disabled & {
-      border-color: colors.$control-color--disabled;
+      border-color: $control-color--disabled;
       &:after {
-        background-color: colors.$control-color--disabled;
+        background-color: $control-color--disabled;
         transition: background-color 0.6s linear;
       }
       // &:before {
@@ -106,7 +106,7 @@
   .radio-button__icon {
     &:focus-visible {
       outline: 0;
-      box-shadow: 0 0 0 2px colors.$focus-color;
+      box-shadow: 0 0 0 2px $focus-color;
     }
   }
 
@@ -114,18 +114,18 @@
     cursor: default;
 
     .radio-button__icon {
-      border: 2px solid colors.$gray-primary;
+      border: 2px solid $gray-primary;
       &:focus-visible {
         // outline: none;
         // box-shadow: none;
         &:before {
-          box-shadow: 0 0 4px 0 colors.$focus-color;
-          border: solid 1px colors.$focus-color;
+          box-shadow: 0 0 4px 0 $focus-color;
+          border: solid 1px $focus-color;
         }
       }
     }
     .radio-button__text {
-      color: colors.$gray-primary;
+      color: $gray-primary;
       transition: color 0.6s linear;
     }
   }
@@ -134,12 +134,12 @@
     .disabled & {
       cursor: default;
       .radio-button__text {
-        color: colors.$gray-primary;
+        color: $gray-primary;
       }
     }
   }
 
-  @media screen and (min-width: sizes.$desktop-width--medium) {
+  @media screen and (min-width: $desktop-width--medium) {
     &.radio-group {
       &.vertical {
         display: inline-flex;
