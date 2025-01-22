@@ -1,4 +1,5 @@
-﻿//background
+﻿@use "sass:color";
+//background
 $background-color--default: #f0f0f0;
 $background-color--content: #ffffff;
 $background-color--disabled: #87939f;
@@ -25,10 +26,10 @@ $border-color: #87939f;
 $border-color--light: #dfdfdf;
 //menu
 $menu-text-color: $text-color--default;
-$menu-color--inactive: transparentize($background-color--default, 0.3);
+$menu-color--inactive: color.scale($background-color--default, $alpha: -30%);
 //misc
 $focus-color: #2275D3;
-$modal-background-color: transparentize($text-color--default, 0.35);
+$modal-background-color: color.scale($text-color--default, $alpha: -35%);
 //themes
 $primary-color--blue: #006298;
 $secondary-color--blue: #4C91B7;

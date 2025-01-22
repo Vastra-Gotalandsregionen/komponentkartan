@@ -137,9 +137,11 @@
   >*:first-child {
     padding-bottom: 10px;
   }
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  & {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 }
 
 .control-without-heading {

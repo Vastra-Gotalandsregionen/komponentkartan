@@ -3,6 +3,7 @@
 @use "../../../assets/partials/_settings.fonts.scss" as *;
 @use "../../../assets/partials/objects.images" as *;
 @use "../../../assets/partials/base.themify" as *;
+@use "sass:map";
 
 // @include theme(background-color);
 // @include theme(border-left-color);
@@ -108,7 +109,7 @@
           transition: all 0.6s linear;
 
           .combobox__header__button__icon {
-            background: transparent map-get($imagesBase64, 'bg-image-icon-chevron') center no-repeat;
+            background: transparent map.get($imagesBase64, 'bg-image-icon-chevron') center no-repeat;
             background-size: 40%;
             width: 36px;
             height: 30px;
@@ -137,7 +138,7 @@
         cursor: default;
 
         &::before {
-          background: transparent map-get($imagesBase64, 'bg-image-menu-arrow') center no-repeat;
+          background: transparent map.get($imagesBase64, 'bg-image-menu-arrow') center no-repeat;
           width: 16px;
           height: 21px;
           content: "";

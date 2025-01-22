@@ -3,6 +3,7 @@
 @use "../../../assets/partials/_settings.fonts.scss" as *;
 @use "../../../assets/partials/base.themify" as *;
 @use "../button/button.base.scss" as *;
+@use "sass:color";
 
 :host::ng-deep {
   $filter-tag-height--medium: 28px;
@@ -32,7 +33,7 @@
       transform: scale(0.96);
       outline: 0;
       .button__focus-line {
-        background-color: transparentize($secondary-color--default, 0.4);
+        background-color: color.scale($secondary-color--default, $alpha: -40%);
       }
     }
     &:hover:not(.button--disabled),

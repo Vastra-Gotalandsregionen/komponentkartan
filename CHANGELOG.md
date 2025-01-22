@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-# 12.0.0 (2024-12-18) 
+# 13.0.0 (2024-12-18) 
 - Upgraded to Angular 19.
 # 12.0.4 (2024-11-14) 
 - Updated wcag for `filter-tag-group` so that you tab in/out of the component and inside you use the arrow keys.

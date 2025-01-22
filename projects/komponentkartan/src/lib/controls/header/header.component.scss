@@ -2,6 +2,7 @@
 @use "../../../assets/partials/_settings.colors.scss" as *;
 @use "../../../assets/partials/base.themify.scss" as *;
 @use "../../../assets/partials/objects.images" as *;
+@use "sass:map";
 
 /**
   * Headern innehåller VGR "vågen" som transparent bild. Det enda som krävs *
@@ -26,13 +27,13 @@
     padding-left: 16px;
     @include themify($themes) {
       background-color: themed('primaryColor');
-      background-image: map-get($imagesBase64, 'bg-image-vgr-header');
+      background-image: map.get($imagesBase64, 'bg-image-vgr-header');
       border-color: themed('secondaryColor');
     }
     transition: background-color ease-in 0.3s;
 
     .theme--pinkie & {
-      background-image: map-get($imagesBase64, 'bg-image-pinkie-header');
+      background-image: map.get($imagesBase64, 'bg-image-pinkie-header');
       background-position: right center;
     }
 
@@ -42,7 +43,7 @@
       background-image: none;
     }
     .header__vgr-logo {
-      background-image: map-get($imagesBase64, 'bg-image-vgr-logo');
+      background-image: map.get($imagesBase64, 'bg-image-vgr-logo');
       width: 236px;
       height: 48px;
       background-repeat: no-repeat;

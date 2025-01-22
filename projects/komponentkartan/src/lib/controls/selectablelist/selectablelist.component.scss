@@ -26,7 +26,9 @@
           background: themed('primaryColorDimmed') !important;
           border-left-color: themed('primaryColor') !important;
         }
-        border-left: 4px solid;
+        & {
+          border-left: 4px solid;
+        }
       }
 
       &.focused {
@@ -53,7 +55,9 @@
           background: themed('primaryColorDimmed') !important;
           border-left-color: themed('primaryColor') !important;
         }
-        border-left: 4px solid;
+        & {
+          border-left: 4px solid;
+        }
       }
 
       &.focused {
@@ -96,7 +100,9 @@
             background: themed('primaryColorDimmed') !important;
             border-left-color: themed('primaryColor') !important;
           }
-          border-left: 4px solid;
+          & {
+            border-left: 4px solid;
+          }
         }
       }
     }
@@ -112,7 +118,9 @@
             background: themed('primaryColorDimmed') !important;
             border-left-color: themed('primaryColor') !important;
           }
-          border-left: 4px solid;
+          & {
+            border-left: 4px solid;
+          }
         }
       }
     }
