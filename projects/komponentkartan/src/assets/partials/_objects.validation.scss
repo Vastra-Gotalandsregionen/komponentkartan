@@ -1,3 +1,5 @@
+@use './settings.colors' as *;
+
 .validation {
   max-height: none;
   // padding: 1px; // för att den skall ha plats för ev. validering (och inte hoppa)

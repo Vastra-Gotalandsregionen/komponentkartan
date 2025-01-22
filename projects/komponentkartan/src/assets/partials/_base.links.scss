@@ -1,4 +1,4 @@
-@import "_settings.fonts.scss";
+@use "_settings.fonts.scss" as *;
 
 a {
   color: #006298;

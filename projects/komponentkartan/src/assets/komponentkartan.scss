@@ -1,18 +1,18 @@
 ﻿/* Struktur efter ITCSS, se https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/*/
 
-@import "partials/generic.reset";
-/* SETTINGS */
+@forward "partials/generic.reset";
+// /* SETTINGS */
 
-@import "partials/_base.page.scss";
-@import "partials/_base.links.scss";
-@import "partials/_base.text.scss";
-@import "partials/_base.input.scss";
-/* OBJECTS */
+@forward "partials/_base.page.scss";
+@forward "partials/_base.links.scss";
+@forward "partials/_base.text.scss";
+// @forward "partials/_base.input.scss";
+// /* OBJECTS */
 
-@import "partials/_objects.colors.scss";
-@import "partials/_objects.layout.scss";
-@import "partials/_objects.sizes.scss";
-@import "partials/_objects.images.scss";
-@import "partials/_objects.validation.scss";
+@forward "partials/_objects.colors.scss";
+@forward "partials/_objects.layout.scss";
+@forward "partials/_objects.sizes.scss";
+@forward "partials/_objects.images.scss";
+@forward "partials/_objects.validation.scss";
 /* COMPONENTS */
 

@@ -1,3 +1,7 @@
+@use './settings.sizes' as *;
+@use './settings.fonts' as *;
+@use './settings.colors' as *;
+
 .row-layout {
   display: flex;
   flex-direction: row;

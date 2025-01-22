@@ -1,6 +1,6 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/base.themify";
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
+@use "../../../assets/partials/base.themify" as *;
 
 :host::ng-deep {
   .scroll-container {
@@ -147,7 +147,7 @@
   .list-wrapper {
     border-collapse: collapse;
     display: table;
-    width: 100%; 
+    width: 100%;
     margin-top: 10px;
   }
 

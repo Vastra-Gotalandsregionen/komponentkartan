@@ -1,8 +1,8 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/base.themify.scss";
-@import "../button/button.base.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
+@use "../../../assets/partials/_settings.fonts.scss" as *;
+@use "../../../assets/partials/base.themify.scss" as *;
+@use "../button/button.base.scss" as *;
 
 :host::ng-deep {
   $tab-button-height: 30px;

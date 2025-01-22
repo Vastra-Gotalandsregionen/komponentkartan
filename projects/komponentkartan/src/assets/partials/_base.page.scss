@@ -1,6 +1,6 @@
-@import "_settings.colors.scss";
-@import "_settings.fonts.scss";
-@import "_settings.sizes.scss";
+@use "_settings.colors.scss" as *;
+@use "_settings.fonts.scss" as *;
+@use "_settings.sizes.scss" as *;
 
 *,
 *:before,

@@ -1,4 +1,5 @@
- @import "_objects.colors.scss";
+ @use "_objects.colors.scss" as *;
+ @use "_settings.colors.scss" as *;
 
 $theme-map: null;
 $themes: (

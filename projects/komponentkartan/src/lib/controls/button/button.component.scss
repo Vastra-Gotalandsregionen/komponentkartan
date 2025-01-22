@@ -1,8 +1,8 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/_settings.fonts.scss";
-@import "./button.base.scss";
-@import "../../../assets/partials/base.themify.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
+@use "../../../assets/partials/_settings.fonts.scss" as *;
+@use "./button.base.scss" as *;
+@use "../../../assets/partials/base.themify.scss" as *;
 
 @mixin button-enabling--secondary($name, $color) {
   @keyframes #{$name} {

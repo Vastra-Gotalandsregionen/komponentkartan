@@ -1,7 +1,7 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/base.themify.scss";
-@import "../../../assets/partials/objects.images";
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
+@use "../../../assets/partials/base.themify.scss" as *;
+@use "../../../assets/partials/objects.images" as *;
 
 /* The small arrow indicating that there is a drop down menu below */
 :host::ng-deep {
