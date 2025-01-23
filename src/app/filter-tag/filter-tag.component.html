@@ -22,7 +22,7 @@
         </div>
         <div style="margin-bottom: 20px" *ngIf="filterTags.length">
           <vgr-filter-tag-group>
-            <vgr-filter-tag *ngFor="let filter of filters" (remove)="filter.remove(filter)" [disabled]="filter.disabled">{{filter.text}}</vgr-filter-tag>
+            <vgr-filter-tag *ngFor="let filter of filterTags" (remove)="filter.remove(filter)" [disabled]="filter.disabled">{{filter.text}}</vgr-filter-tag>
           </vgr-filter-tag-group>
         </div>
         <ul>
