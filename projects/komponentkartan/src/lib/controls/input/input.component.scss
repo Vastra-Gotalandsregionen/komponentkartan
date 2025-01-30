@@ -1,6 +1,5 @@
-@import "../../../assets/partials/settings.colors";
-@import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/_settings.sizes.scss";
+@use "../../../assets/partials/settings.colors" as *;
+@use "../../../assets/partials/_settings.sizes" as *;
 
 .inputwrapper {
   border: 1px solid #151515;

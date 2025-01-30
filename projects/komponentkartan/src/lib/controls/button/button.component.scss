@@ -1,8 +1,9 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/_settings.fonts.scss";
-@import "./button.base.scss";
-@import "../../../assets/partials/base.themify.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
+@use "../../../assets/partials/_settings.fonts.scss" as *;
+@use "./button.base.scss" as *;
+@use "../../../assets/partials/base.themify.scss" as *;
+@use "sass:color";
 
 @mixin button-enabling--secondary($name, $color) {
   @keyframes #{$name} {
@@ -68,7 +69,7 @@
       transform: scale(0.96);
       outline: 0;
       .button__focus-line {
-        background-color: transparentize($secondary-color--default, 0.4);
+        background-color: color.scale($secondary-color--default, $alpha: -40%);
       }
     }
     &:hover:not(.button--disabled),

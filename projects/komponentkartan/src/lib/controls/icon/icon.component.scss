@@ -1,5 +1,5 @@
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/base.themify.scss";
+@use "../../../assets/partials/_settings.colors.scss" as *;
+@use "../../../assets/partials/base.themify.scss" as *;
 
 :host::ng-deep {
   .icon {

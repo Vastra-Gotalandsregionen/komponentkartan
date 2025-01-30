@@ -1,5 +1,5 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
 
 :host::ng-deep {
   .page-header {
@@ -42,7 +42,7 @@
 
 
 
-  @media screen and (max-width: $desktop-width--small - 1px) {
+  @media screen and (max-width: ($desktop-width--small - 1px)) {
     .page-header {
         position: relative;
         top: 0;

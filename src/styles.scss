@@ -1,5 +1,5 @@
-@import 'partials/_settings.colors.scss';
-@import "partials/_settings.sizes.scss";
+@use 'partials/_settings.colors.scss' as *;
+@use "partials/_settings.sizes.scss" as *;
 
 .input-fields {
   li {

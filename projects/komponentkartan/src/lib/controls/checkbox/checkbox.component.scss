@@ -1,5 +1,4 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
+@use "../../../assets/partials/_settings.colors.scss" as *;
 
 /* First, hide the default checkbox. It cannot be styled with CSS.
  * Instead, we will use the "label" that is associated with our textbox.

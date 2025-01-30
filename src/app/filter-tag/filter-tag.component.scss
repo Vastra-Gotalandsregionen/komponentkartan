@@ -1,4 +1,4 @@
-@import "partials/_settings.sizes.scss";
+@use "partials/_settings.sizes.scss" as *;
 
 .list-row {
   width: 500px; display: flex;

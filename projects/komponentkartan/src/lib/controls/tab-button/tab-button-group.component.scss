@@ -1,7 +1,7 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/base.themify.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
+@use "../../../assets/partials/_settings.fonts.scss" as *;
+@use "../../../assets/partials/base.themify.scss" as *;
 
 :host::ng-deep {
   .tab-button-group {
@@ -12,7 +12,7 @@
       flex-basis: 0;
     }
     .tab-button {
-     
+
       margin-bottom: 10px;
       &:focus:not(:active) {
         z-index: $layer-three;
@@ -24,11 +24,11 @@
     &  vgr-panel-container {
       margin-top : -3px
     }
-    
-    
+
+
   }
-  
- 
+
+
   @media screen and (min-width: $desktop-width--medium) {
     .tab-button-group {
       margin-bottom: -15px;
@@ -38,7 +38,7 @@
       &  vgr-panel-container {
         margin-top : -6px
       }
-      
+
     }
 
     .tab-button {
@@ -50,4 +50,4 @@
 :host.centrera  {
   display: flex;
   justify-content: center;
-} 
+}

@@ -1,3 +1,7 @@
+@use './settings.sizes' as *;
+@use './settings.fonts' as *;
+@use './settings.colors' as *;
+
 .row-layout {
   display: flex;
   flex-direction: row;
@@ -133,9 +137,11 @@
   >*:first-child {
     padding-bottom: 10px;
   }
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  & {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 }
 
 .control-without-heading {

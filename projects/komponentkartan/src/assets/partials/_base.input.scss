@@ -1,5 +1,7 @@
-﻿@import "_settings.fonts.scss";
-@import "_settings.sizes.scss";
+﻿@use "_settings.fonts.scss" as *;
+@use "_settings.sizes.scss" as *;
+@use "_settings.colors.scss" as *;
+
 input,
 textarea {
   font-family: $font-family;
@@ -12,8 +14,8 @@ textarea {
   border-radius: 1px;
   border: 1px solid $control-border-color--default;
   height: 30px;
-  &:focus {
-    outline: none;
+  &:focus, :focus-visible {
+    outline: none !important;
   }
 }
 

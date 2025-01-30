@@ -11,6 +11,7 @@
 * .background-color--secondary
 * With themes for all defined colors.
 **********************************************************************************/
+@use './_settings.colors' as *;
 
 @mixin theme($property) {
   .#{$property}--primary {

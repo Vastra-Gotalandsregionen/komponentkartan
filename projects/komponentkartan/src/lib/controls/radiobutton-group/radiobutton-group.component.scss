@@ -1,6 +1,5 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/_settings.fonts.scss";
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
 
 .radiobutton-group {
   &-validation {

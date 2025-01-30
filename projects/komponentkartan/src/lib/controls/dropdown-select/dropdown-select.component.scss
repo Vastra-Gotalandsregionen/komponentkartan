@@ -1,8 +1,9 @@
-@import "../../../assets/partials/_settings.sizes.scss";
-@import "../../../assets/partials/_settings.colors.scss";
-@import "../../../assets/partials/_settings.fonts.scss";
-@import "../../../assets/partials/objects.images";
-@import "../../../assets/partials/base.themify";
+@use "../../../assets/partials/_settings.sizes.scss" as *;
+@use "../../../assets/partials/_settings.colors.scss" as *;
+@use "../../../assets/partials/_settings.fonts.scss" as *;
+@use "../../../assets/partials/objects.images" as *;
+@use "../../../assets/partials/base.themify" as *;
+@use "sass:map";
 
 // @include theme(background-color);
 // @include theme(border-left-color);
@@ -143,7 +144,7 @@
           transition: all 0.6s linear;
 
           .dropdown-select__header__button__icon {
-            background: transparent map-get($imagesBase64, 'bg-image-icon-chevron') center no-repeat;
+            background: transparent map.get($imagesBase64, 'bg-image-icon-chevron') center no-repeat;
             background-size: 40%;
             width: 36px;
             height: 30px;
@@ -190,7 +191,7 @@
 
         &::before {
           // @extend .bg-image-menu-arrow;
-          background: transparent map-get($imagesBase64, 'bg-image-menu-arrow') center no-repeat;
+          background: transparent map.get($imagesBase64, 'bg-image-menu-arrow') center no-repeat;
           width: 16px;
           height: 21px;
           content: "";

@@ -10,7 +10,7 @@ export class SizesComponent implements OnInit {
 
   mediaQueryCode = `
   // Importera _settings.sizes.scss från komponentkartan.
-  @import '../../../node_modules/vgr-komponentkartan/assets/partials/_settings.sizes.scss';
+  @use '../../../node_modules/vgr-komponentkartan/assets/partials/_settings.sizes.scss' as *;
 
   // Sätt default-storlek utan media query. Detta är den lilla storleken.
   .sizeInfo {
