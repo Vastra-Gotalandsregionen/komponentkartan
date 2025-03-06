@@ -38,6 +38,7 @@ import { TextbuttonsComponent } from './textbuttons/textbuttons.component';
 import { SavecancelComponent } from './savecancel/savecancel.component';
 import { BacktotopComponent } from './backtotop/backtotop.component';
 import { LoaderComponent } from './loader/loader.component';
+import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
 import { StartComponent } from './start/start.component';
 import { ThemingComponent } from './theming/theming.component';
 import { ReactiveformsexampleComponent } from './reactiveforms-example/reactiveforms-example.component';
@@ -87,6 +88,7 @@ import { PipesDocumentationComponent } from './pipes-documentation/pipes-documen
         RadiobuttonsComponent,
         TextbuttonsComponent,
         LoaderComponent,
+        SkeletonLoaderComponent,
         StartComponent,
         ThemingComponent,
         ComponentDocsComponent,
