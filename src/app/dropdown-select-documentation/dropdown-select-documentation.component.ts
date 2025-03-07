@@ -242,7 +242,8 @@ export class DropdownSelectDocumentationComponent {
     const items = [];
     for (let item = 1; item <= length; item++) {
       items.push(`Val ${item}`);
-    }
+      }
+    items.push('HS 2017');
     return items;
   }
 

@@ -205,7 +205,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     if (this.items) {
       this.items.forEach(item => {
-        item.visible = item.label.toLowerCase().includes(value.toLowerCase());
+        item.visible = item.label.toLowerCase().trim().replace(' ', '').includes(value.toLowerCase().trim().replace(' ', ''));
       });
       this.visibleCount = this.items.filter(e => e.visible).length;
       this.updateAllCheckedStatus();
