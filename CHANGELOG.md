@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+# 14.0.0 (2025-03-14) 
+- Added a new component `vgr-skeleton-loader` and fixed a bug when searching in dropdown-select component.
 # 13.1.0 (2025-01-30) 
 - Updated deprecated SCSS imports and removed all @import.
 # 13.0.0 (2024-12-18) 
