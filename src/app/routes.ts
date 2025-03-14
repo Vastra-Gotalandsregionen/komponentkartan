@@ -45,6 +45,7 @@ import { ComboboxDocumentationComponent } from './combobox-documentation/combobo
 import { EditableTableDocumentationComponent } from './editable-table-documentation/editable-table-documentation.component';
 import { SelectablelistDocumentationComponent } from './selectablelist-documentation/selectablelist-documentation.component';
 import { PipesDocumentationComponent } from './pipes-documentation/pipes-documentation.component';
+import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
 
 export const appRoutes: Routes = [
 
@@ -60,6 +61,7 @@ export const appRoutes: Routes = [
     { path: 'formattemplate', component: FormattemplateComponent },
     { path: 'headers', component: HeadersComponent },
     { path: 'loader', component: LoaderComponent },
+    { path: 'skeleton-loader', component: SkeletonLoaderComponent },
     { path: 'lockbutton', component: LockbuttonComponent },
     { path: 'panels', component: PanelsComponent },
     { path: 'savecancel', component: SavecancelComponent },

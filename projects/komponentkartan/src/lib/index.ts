@@ -19,6 +19,7 @@ export { TitleValueLayoutComponent } from './controls/titleValue/titleValueLayou
 export { TitleValueContainerComponent } from './controls/titleValue/titleValueContainer/titleValueContainer.component';
 export { TitleValueHeadingComponent } from './controls/titleValue/titleValueHeading/titleValueHeading.component';
 export { LoaderComponent } from './controls/loader/loader.component';
+export { SkeletonLoaderComponent } from './controls/skeleton-loader/skeleton-loader.component';
 export { MenuComponent } from './controls/menu/menu.component';
 export { MenuItemComponent } from './controls/menu/menu-item.component';
 export { MenuSeparatorComponent } from './controls/menu/menu-separator.component';
