@@ -83,30 +83,59 @@
 }
 
 @mixin flex-column($number) {
+  $percent: $number * 1%;
   .flex-column--#{$number} {
-    min-width: 53px * $number;
-    width: 53px * $number;
+    min-width: $percent;
+    width: $percent;
 
     &:last-child {
-      min-width: (53px * $number) - $margin--fat;
-      width: (53px * $number) - $margin--fat;
+      min-width: ($percent) - 5%;
+      width: ($percent) - 5%;
     }
   }
 
   @media screen and (min-width: $desktop-width--medium) {
     .flex-column--#{$number} {
-      min-width: 55.5px * $number;
-      width: 55.5px * $number;
+      min-width: $percent;
+      width: $percent;
 
       &:last-child {
-        min-width: (55.5px * $number) - $margin--fat;
-        width: (55.5px * $number) - $margin--fat;
+        min-width: ($percent) - 5%;
+        width: ($percent) - 5%;
       }
     }
   }
 }
 
-@for $i from 1 through 20 {
+// @mixin flex-column($number) {
+//   .flex-column--#{$number} {
+//     min-width: 53px * $number;
+//     width: 53px * $number;
+
+//     &:last-child {
+//       min-width: (53px * $number) - $margin--fat;
+//       width: (53px * $number) - $margin--fat;
+//     }
+//   }
+
+//   @media screen and (min-width: $desktop-width--medium) {
+//     .flex-column--#{$number} {
+//       min-width: 55.5px * $number;
+//       width: 55.5px * $number;
+
+//       &:last-child {
+//         min-width: (55.5px * $number) - $margin--fat;
+//         width: (55.5px * $number) - $margin--fat;
+//       }
+//     }
+//   }
+// }
+
+// @for $i from 1 through 20 {
+//   @include flex-column($i);
+// }
+
+@for $i from 1 through 100 {
   @include flex-column($i);
 }
 
