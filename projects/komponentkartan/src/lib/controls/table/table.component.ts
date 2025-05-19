@@ -11,6 +11,7 @@ export class TableComponent {
   @HostBinding('class') tableClass = 'table';
   @Input() expanded = false;
   @Input() expandable = true;
+  @Input() percentLayout: boolean = false;
   @Output() expandedChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('table', { read: ElementRef, static: false }) table: ElementRef;
   animationSpeed = '400ms';
