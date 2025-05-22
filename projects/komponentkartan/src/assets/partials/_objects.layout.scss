@@ -82,6 +82,31 @@
   display: inline-block;
 }
 
+@mixin flex-column-percent($number) {
+  $percent: $number * 1%;
+  .flex-column-percent--#{$number} {
+    min-width: $percent;
+    width: $percent;
+
+    &:last-child {
+      min-width: ($percent) - 5%;
+      width: ($percent) - 5%;
+    }
+  }
+
+  @media screen and (min-width: $desktop-width--medium) {
+    .flex-column-percent--#{$number} {
+      min-width: $percent;
+      width: $percent;
+
+      &:last-child {
+        min-width: ($percent) - 5%;
+        width: ($percent) - 5%;
+      }
+    }
+  }
+}
+
 @mixin flex-column($number) {
   .flex-column--#{$number} {
     min-width: 53px * $number;
@@ -108,6 +133,10 @@
 
 @for $i from 1 through 20 {
   @include flex-column($i);
+}
+
+@for $i from 1 through 100 {
+  @include flex-column-percent($i);
 }
 
 .column--align-left {

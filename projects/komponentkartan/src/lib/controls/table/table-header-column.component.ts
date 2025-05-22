@@ -1,4 +1,5 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, Host, HostBinding, Input, Optional, SkipSelf } from '@angular/core';
+import { TableComponent } from './table.component';
 
 @Component({
     selector: 'vgr-table-header-column',
@@ -15,11 +16,15 @@ export class TableHeaderColumnComponent {
     return 'table__column flex-column ' + this.getColumnWidthClass() + ' ' + this.getAlignClass();
   }
 
-  constructor() {
+  constructor(@Optional() @SkipSelf() @Host() private table: TableComponent) {
   }
 
   getColumnWidthClass(): string {
-    return 'flex-column--' + (this.width ? this.width : 1);
+    if (this.table.percentLayout) {
+      return 'flex-column-percent--' + (this.width ? this.width : 1);
+    } else {
+      return 'flex-column--' + (this.width ? this.width : 1);
+    }
   }
 
   getAlignClass(): string {

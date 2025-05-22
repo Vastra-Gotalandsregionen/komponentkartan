@@ -18,105 +18,105 @@
       <vgr-button (click)="setFocus(2)">Flytta fokus till tabell 2</vgr-button>
       <vgr-button (click)="setFocus(3)">Flytta fokus till tabell 3</vgr-button>
     </div>
-    <vgr-table #myTableNo1>
+    <vgr-table #myTableNo1 [percentLayout]="true">
       <vgr-table-header>
-        <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
-        <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
-        <vgr-table-header-column [width]="3" [align]="'right'">Header Column3</vgr-table-header-column>
+        <vgr-table-header-column [width]="50">Header Column 1</vgr-table-header-column>
+        <vgr-table-header-column [width]="30">Header Column 2</vgr-table-header-column>
+        <vgr-table-header-column [width]="20" [align]="'right'">Header Column3</vgr-table-header-column>
       </vgr-table-header>
       <vgr-table-row tabindex="0">
-        <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="50">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="30">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
       </vgr-table-row>
       <vgr-table-row tabindex="0">
-        <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="50">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="30">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
       </vgr-table-row>
-      <vgr-table>
+      <vgr-table [percentLayout]="true">
         <vgr-table-header>
-          <vgr-table-header-column [width]="10">Row Column
+          <vgr-table-header-column [width]="40">Row Column
             <span class="vgr-icon-calendar-border"></span>
           </vgr-table-header-column>
-          <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
-          <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+          <vgr-table-header-column [width]="40">Row Colum</vgr-table-header-column>
+          <vgr-table-header-column [width]="20" [align]="'right'">Row Column</vgr-table-header-column>
         </vgr-table-header>
         <vgr-table-row tabindex="0">
-          <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-          <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-          <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
         </vgr-table-row>
         <vgr-table-row tabindex="0">
-          <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-          <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-          <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+          <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
         </vgr-table-row>
-        <vgr-table>
+        <vgr-table [percentLayout]="true">
           <vgr-table-header>
-            <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
-            <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
-            <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+            <vgr-table-header-column [width]="40">Row Column</vgr-table-header-column>
+            <vgr-table-header-column [width]="40">Row Colum</vgr-table-header-column>
+            <vgr-table-header-column [width]="20" [align]="'right'">Row Column</vgr-table-header-column>
           </vgr-table-header>
           <vgr-table-row tabindex="0">
-            <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-            <vgr-table-row-column [width]="5"> Donec eu est eros. Suspendisse eget dolor porta, volutpat
+            <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+            <vgr-table-row-column [width]="40"> Donec eu est eros. Suspendisse eget dolor porta, volutpat
               ligula a, euismod tellus. Quisque posuere nisi
               vitae nisi commodo mollis. Vivamus interdum dolor at neque blandit sollicitudin. Pellentesque
               ac ornare</vgr-table-row-column>
-            <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+            <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
           </vgr-table-row>
           <vgr-table-row tabindex="0">
-            <vgr-table-row-column [width]="10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+            <vgr-table-row-column [width]="40">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               eu ante ac tortor ornare efficitur non a
               nisi. Donec turpis sapien, semper a posuere ac, luctus et urna.</vgr-table-row-column>
-            <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-            <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+            <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+            <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
           </vgr-table-row>
-          <vgr-table>
+          <vgr-table [percentLayout]="true">
             <vgr-table-header>
-              <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
-              <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
-              <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+              <vgr-table-header-column [width]="40">Row Column</vgr-table-header-column>
+              <vgr-table-header-column [width]="40">Row Colum</vgr-table-header-column>
+              <vgr-table-header-column [width]="20" [align]="'right'">Row Column</vgr-table-header-column>
             </vgr-table-header>
             <vgr-table-row tabindex="0">
-              <vgr-table-row-column [width]="7">Row Column</vgr-table-row-column>
-              <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-              <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-              <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="25">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="25" [align]="'right'">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="25">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="25" [align]="'right'">Row Column</vgr-table-row-column>
             </vgr-table-row>
             <vgr-table-row tabindex="0">
-              <vgr-table-row-column [width]="7">Row Column</vgr-table-row-column>
-              <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
-              <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-              <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="25">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="25" [align]="'right'">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="25">Row Column</vgr-table-row-column>
+              <vgr-table-row-column [width]="25" [align]="'right'">Row Column</vgr-table-row-column>
             </vgr-table-row>
-            <vgr-table>
+            <vgr-table [percentLayout]="true">
               <vgr-table-header>
-                <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
-                <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
-                <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+                <vgr-table-header-column [width]="40">Row Column</vgr-table-header-column>
+                <vgr-table-header-column [width]="40">Row Colum</vgr-table-header-column>
+                <vgr-table-header-column [width]="20" [align]="'right'">Row Column</vgr-table-header-column>
               </vgr-table-header>
               <vgr-table-row tabindex="0">
-                <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-                <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+                <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+                <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
               </vgr-table-row>
               <vgr-table-row tabindex="0">
-                <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-                <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+                <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+                <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
               </vgr-table-row>
-              <vgr-table>
+              <vgr-table [percentLayout]="true">
                 <vgr-table-header>
-                  <vgr-table-header-column [width]="10">Row Column</vgr-table-header-column>
-                  <vgr-table-header-column [width]="5">Row Colum</vgr-table-header-column>
-                  <vgr-table-header-column [width]="3" [align]="'right'">Row Column</vgr-table-header-column>
+                  <vgr-table-header-column [width]="40">Row Column</vgr-table-header-column>
+                  <vgr-table-header-column [width]="40">Row Colum</vgr-table-header-column>
+                  <vgr-table-header-column [width]="20" [align]="'right'">Row Column</vgr-table-header-column>
                 </vgr-table-header>
                 <vgr-table-row tabindex="0">
-                  <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-                  <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-                  <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+                  <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+                  <vgr-table-row-column [width]="40">Row Column</vgr-table-row-column>
+                  <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
                 </vgr-table-row>
               </vgr-table>
             </vgr-table>
@@ -124,16 +124,16 @@
         </vgr-table>
       </vgr-table>
     </vgr-table>
-    <vgr-table #myTableNo2>
+    <vgr-table #myTableNo2 [percentLayout]="true">
       <vgr-table-header>
-        <vgr-table-header-column [width]="10">Header Column 1</vgr-table-header-column>
-        <vgr-table-header-column [width]="5">Header Column 2</vgr-table-header-column>
-        <vgr-table-header-column [width]="3" [align]="'right'">Header Column3</vgr-table-header-column>
+        <vgr-table-header-column [width]="50">Header Column 1</vgr-table-header-column>
+        <vgr-table-header-column [width]="30">Header Column 2</vgr-table-header-column>
+        <vgr-table-header-column [width]="20" [align]="'right'">Header Column3</vgr-table-header-column>
       </vgr-table-header>
       <vgr-table-row tabindex="0">
-        <vgr-table-row-column [width]="10">Row Column</vgr-table-row-column>
-        <vgr-table-row-column [width]="5">Row Column</vgr-table-row-column>
-        <vgr-table-row-column [width]="3" [align]="'right'">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="50">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="30">Row Column</vgr-table-row-column>
+        <vgr-table-row-column [width]="20" [align]="'right'">Row Column</vgr-table-row-column>
       </vgr-table-row>
     </vgr-table>
     <vgr-table #myTableNo3 [expandable]="false">
@@ -162,6 +162,11 @@
         <td>Genom att sätta [expandable]="false" på tabellen så kan kan raden inte expanderas och har ingen
           chevron.</td>
         <td>[expandable]="false"</td>
+      </tr>
+      <tr>
+        <td>percentLayout: boolean</td>
+        <td>Anger om du som användare vill ange kolumnbredder i procent istället för default värdet som baseras på en 20 kolumns layout.</td>
+        <td>[percentLayout]="true"</td>
       </tr>
       <tr>
         <td>expandedChanged: EventEmitter&lt;boolean&gt;
@@ -194,9 +199,8 @@
       </tr>
       <tr>
         <td>width : number</td>
-        <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av
-          width ska
-          vara 20 för vgr-table.
+        <td>vgr-table är baserad på en 20 kolumns layout om du inte har angett att vill ha det i procent (genom propertien "percentLayout"). Varje kolumn måste ha en width satt och summan av
+          width ska vara 20 för vgr-table eller 100 (med percentLayout).
         </td>
         <td>
           [width]="20"
@@ -237,9 +241,8 @@
       </tr>
       <tr>
         <td>width : number</td>
-        <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av
-          width ska
-          vara 20 för vgr-table.
+        <td>vgr-table är baserad på en 20 kolumns layout om du inte har angett att vill ha det i procent (genom propertien "percentLayout"). Varje kolumn måste ha en width satt och summan av
+          width ska vara 20 för vgr-table eller 100 (med percentLayout).
         </td>
         <td>
           [width]="20"
