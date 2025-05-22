@@ -164,6 +164,11 @@
         <td>[expandable]="false"</td>
       </tr>
       <tr>
+        <td>percentLayout: boolean</td>
+        <td>Anger om du som användare vill ange kolumnbredder i procent istället för default värdet som baseras på en 20 kolumns layout.</td>
+        <td>[percentLayout]="true"</td>
+      </tr>
+      <tr>
         <td>expandedChanged: EventEmitter&lt;boolean&gt;
         </td>
         <td>Event som triggras när sektionen expanderas/kollapsas.</td>
@@ -194,9 +199,8 @@
       </tr>
       <tr>
         <td>width : number</td>
-        <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av
-          width ska
-          vara 20 för vgr-table.
+        <td>vgr-table är baserad på en 20 kolumns layout om du inte har angett att vill ha det i procent (genom propertien "percentLayout"). Varje kolumn måste ha en width satt och summan av
+          width ska vara 20 för vgr-table eller 100 (med percentLayout).
         </td>
         <td>
           [width]="20"
@@ -237,9 +241,8 @@
       </tr>
       <tr>
         <td>width : number</td>
-        <td>vgr-table är baserad på en 20 kolumns layout. Varje kolumn måste ha en width satt och summan av
-          width ska
-          vara 20 för vgr-table.
+        <td>vgr-table är baserad på en 20 kolumns layout om du inte har angett att vill ha det i procent (genom propertien "percentLayout"). Varje kolumn måste ha en width satt och summan av
+          width ska vara 20 för vgr-table eller 100 (med percentLayout).
         </td>
         <td>
           [width]="20"
