@@ -4,6 +4,7 @@ import { AnimationEvent } from '@angular/animations';
 import { ActionPanelComponent } from './action-panel.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CloseButtonComponent } from '../close-button/close-button.component';
 
 describe('[ActionPanelComponent]', () => {
   let component: ActionPanelComponent;
@@ -11,7 +12,7 @@ describe('[ActionPanelComponent]', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ActionPanelComponent],
+      declarations: [ActionPanelComponent, CloseButtonComponent],
       imports: [BrowserAnimationsModule]
     })
       .compileComponents();
