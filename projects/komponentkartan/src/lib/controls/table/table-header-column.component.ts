@@ -20,8 +20,12 @@ export class TableHeaderColumnComponent {
   }
 
   getColumnWidthClass(): string {
-    if (this.table.percentLayout) {
-      return 'flex-column-percent--' + (this.width ? this.width : 1);
+    if (this.table !== null) {
+      if (this.table.percentLayout) {
+        return 'flex-column-percent--' + (this.width ? this.width : 1);
+      } else {
+        return 'flex-column--' + (this.width ? this.width : 1);
+      }
     } else {
       return 'flex-column--' + (this.width ? this.width : 1);
     }

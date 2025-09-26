@@ -39,15 +39,17 @@ describe('[SaveCancelComponent - Angular]', () => {
     });
     describe('When initialized', () => {
         let lockButton: DebugElement;
+        let lockButtonEl: DebugElement;
         beforeEach(() => {
             spyOn(component.cancel, 'emit');
             spyOn(component.save, 'emit');
             spyOn(component.unlock, 'emit');
             lockButton = rootElement.query(By.css('vgr-lock-button'));
+            lockButtonEl = rootElement.query(By.css('vgr-lock-button button'));
             fixture.detectChanges();
         });
         it('lock button is enabled', () => {
-            expect(lockButton.attributes['ng-reflect-disabled']).toBe('false');
+            expect(lockButtonEl.attributes['aria-disabled']).toBe('false');
         });
         describe('When unlock button is clicked', () => {
             beforeEach(() => {
@@ -55,13 +57,13 @@ describe('[SaveCancelComponent - Angular]', () => {
                 fixture.detectChanges();
             });
             it('lock button is disabled', () => {
-                expect(lockButton.attributes['ng-reflect-disabled']).toEqual('true');
+                expect(lockButtonEl.attributes['aria-disabled']).toEqual('true');
             });
             it('component is unlocked', () => {
                 expect(component.locked).toBe(false);
             });
             it('lock button is disabled', () => {
-                expect(lockButton.attributes['ng-reflect-disabled']).toEqual('true');
+                expect(lockButtonEl.attributes['aria-disabled']).toEqual('true');
             });
 
             describe('and save button is clicked', () => {

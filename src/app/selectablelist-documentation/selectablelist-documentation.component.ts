@@ -73,7 +73,7 @@ export class SelectablelistDocumentationComponent {
       <vgr-selectablelist-row *ngFor="let justering of justeringar; let i = index" [value]="justering">
         <vgr-selectablelist-column>{{justering.beskrivning}}...
         </vgr-selectablelist-column>
-        <vgr-selectablelist-column>{{justering.period | date: 'MMM YYYY'}}
+        <vgr-selectablelist-column>{{justering.period | date: 'MMM yyyy'}}
         </vgr-selectablelist-column>
         <vgr-selectablelist-column [alignRight]="true">{{justering.belopp}}
         </vgr-selectablelist-column>

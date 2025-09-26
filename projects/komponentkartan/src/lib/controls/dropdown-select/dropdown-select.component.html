@@ -42,7 +42,7 @@
       title="{{ errorMessage | errorMessage: formControl?.errors : getLabelFromId() :  true  }}">
       <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
       <div class="validation__status__message">
-        {{ errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true | truncate:24 }}</div>
+        {{ errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true | truncate:truncateTextLength }}</div>
     </div>
   </div>
 </div>

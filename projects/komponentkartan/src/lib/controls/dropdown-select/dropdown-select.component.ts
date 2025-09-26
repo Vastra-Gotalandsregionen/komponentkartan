@@ -64,6 +64,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   visibleCount: number;
   searchString = '';
   elementId: string;
+  truncateTextLength: number;
 
   private matchQuery = '';
 
@@ -136,11 +137,13 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   ngAfterViewInit() {
     if (this.formControl) {
       setTimeout(() => {
+        this.truncateTextLength = this.errorMessage.toString().length < 25 ? 24 : this.errorMessage.toString().length;
         this.setSelectedState(this.formControl.value);
       });
     } else {
       setTimeout(() => {
         this.setSelectedState(this.value);
+        this.truncateTextLength = this.errorMessage.toString().length < 25 ? 24 : this.errorMessage.toString().length;
       });
     }
   }

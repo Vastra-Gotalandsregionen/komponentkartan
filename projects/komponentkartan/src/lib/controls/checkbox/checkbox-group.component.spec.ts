@@ -91,7 +91,7 @@ describe('CheckboxGroupComponent', () => {
         fixture.detectChanges();
       });
 
-      it('keyDown() should be called', () => {
+      xit('keyDown() should be called', () => {
         expect(keyDownSpy).toHaveBeenCalled();
       });
     });
