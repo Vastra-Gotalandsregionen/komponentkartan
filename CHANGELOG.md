@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+# 15.0.0 (2025-09-26) 
+- Upgraded to Angular 20.
+- changed so that validationErrorMessage for dropdown-select component is based on how long the string from the user is.
 # 14.0.1 (2025-05-22) 
 - Added a new property to `vgr-table` called percentLayout.
 # 14.0.0 (2025-03-14) 
