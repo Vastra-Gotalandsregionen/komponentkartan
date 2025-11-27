@@ -221,6 +221,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       selecedItem.selected = false;
       this.label = this.disabled ? '' : this.noItemSelectedLabel;
       this.deselectDisabled = true;
+      this.searchString = '';
       this.onChange(null);
     }
     this.collapse();
@@ -464,6 +465,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     if (this.filter) {
       this.filter.value = '';
+      this.searchString = '';
       this.filterItems();
     }
 
