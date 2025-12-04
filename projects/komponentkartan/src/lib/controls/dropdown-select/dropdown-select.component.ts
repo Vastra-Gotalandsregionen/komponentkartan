@@ -146,6 +146,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
         this.truncateTextLength = this.errorMessage.toString().length < 25 ? 24 : this.errorMessage.toString().length;
       });
     }
+
+    this.visibilityObserver();
   }
 
   ngOnDestroy() {
@@ -156,6 +158,29 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
     this.ngUnsubscribeItems.complete();
     this.scrollSubscription.unsubscribe();
   }
+
+    // Kollar om komponenten försvunnit ur view och rensar dropdown filtrerade och sökvärden
+    private visibilityObserver() {
+      const native = this.elementRef.nativeElement;
+
+      const observer = new MutationObserver(() => {
+      if (native.getClientRects().length === 0) {
+        this.deselectItems();
+        if (this.filter) {
+          this.filter.value = '';
+        }
+        this.filterItems();
+      }
+    });
+
+      observer.observe(document.body, {
+        attributes: true,
+        subtree: true,
+        childList: true
+      });
+
+      this.ngUnsubscribe.subscribe(() => observer.disconnect());
+    }
 
   public focus() {
     this.header.nativeElement.focus();
@@ -465,7 +490,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
 
     if (this.filter) {
       this.filter.value = '';
-      this.searchString = '';
+      // this.searchString = '';
       this.filterItems();
     }
 
