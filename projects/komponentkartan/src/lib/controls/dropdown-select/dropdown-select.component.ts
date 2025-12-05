@@ -147,7 +147,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       });
     }
 
-    this.visibilityObserver();
+    // this.visibilityObserver();
   }
 
   ngOnDestroy() {
@@ -164,7 +164,7 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
       const native = this.elementRef.nativeElement;
 
       const observer = new MutationObserver(() => {
-      if (native.getClientRects().length === 0) {
+      if (native.getClientRects().length === 0 || !native.offsetParent) {
         this.deselectItems();
         if (this.filter) {
           this.filter.value = '';

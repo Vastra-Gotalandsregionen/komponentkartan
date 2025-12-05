@@ -11,6 +11,7 @@
       <!-- <form *ngIf="form"> -->
         <vgr-input [readonly]="true" labelId="agare" [value]="form.get('agare')?.value" width="100%"></vgr-input>
         <vgr-dropdown-select
+            [deselectable]="true"
             noItemSelectedLabel="- Välj ägare -"
             formControlName="agare"
             labelId="agare"
