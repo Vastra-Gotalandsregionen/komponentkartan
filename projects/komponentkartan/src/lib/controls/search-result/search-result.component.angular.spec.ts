@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DebugElement, Component } from '@angular/core';
+import { DebugElement, Component, provideZoneChangeDetection, NgModule } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
@@ -36,6 +36,10 @@ class TestSearchResultComponent {
 
 }
 
+@NgModule({ providers: [ provideZoneChangeDetection() ] })
+export class ZoneChangeDetectionModule {}
+
+
 describe('[SearchResultComponent - Angular]', () => {
   let component: SearchResultComponent;
   let testSearchResultsComponentFixture: ComponentFixture<TestSearchResultComponent>;
@@ -45,7 +49,7 @@ describe('[SearchResultComponent - Angular]', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    TestBed.initTestEnvironment([ZoneChangeDetectionModule, BrowserDynamicTestingModule], platformBrowserDynamicTesting(), {
     teardown: { destroyAfterEach: false }
 });
     TestBed.configureTestingModule({

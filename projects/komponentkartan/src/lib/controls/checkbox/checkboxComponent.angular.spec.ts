@@ -2,12 +2,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CheckboxComponent } from './checkbox.component';
 import { IconComponent } from '../icon/icon.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconModule } from '../icon/icon.module';
+
+
+@NgModule({ providers: [ provideZoneChangeDetection() ] })
+export class ZoneChangeDetectionModule {}
 
 
 describe('CheckboxComponent', () => {
@@ -20,7 +24,7 @@ describe('CheckboxComponent', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    TestBed.initTestEnvironment([ZoneChangeDetectionModule, BrowserDynamicTestingModule], platformBrowserDynamicTesting(), {
     teardown: { destroyAfterEach: false }
 });
     TestBed.configureTestingModule({

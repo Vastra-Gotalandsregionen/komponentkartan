@@ -13,10 +13,15 @@
       <ng-content select="vgr-radiobutton-item"></ng-content>
     </div>
   </div>
-  <div [attr.id]="elementId" *ngIf="errorActive" class="radiobutton-group-validation_status" [title]="validationErrorMessage" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
-    <vgr-icon icon="exclamation-circle" size="sm" class="radiobutton-group-validation_status__icon"></vgr-icon>
-    <div class="radiobutton-group-validation_status__message" *ngIf="control">{{validationErrorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
-    <div class="radiobutton-group-validation_status__message" *ngIf="!control">{{validationErrorMessage}}</div>
-
-  </div>
+  @if (errorActive) {
+    <div [attr.id]="elementId" class="radiobutton-group-validation_status" [title]="validationErrorMessage" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
+      <vgr-icon icon="exclamation-circle" size="sm" class="radiobutton-group-validation_status__icon"></vgr-icon>
+      @if (control) {
+        <div class="radiobutton-group-validation_status__message">{{validationErrorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
+      }
+      @if (!control) {
+        <div class="radiobutton-group-validation_status__message">{{validationErrorMessage}}</div>
+      }
+    </div>
+  }
 </div>

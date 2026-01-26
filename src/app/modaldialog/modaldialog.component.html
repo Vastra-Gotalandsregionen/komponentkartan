@@ -27,342 +27,348 @@
       <vgr-button (click)="showOneButtonModalOverview()">Visa dialog!</vgr-button>
     </div>
     <br>
-    <p> Förändras med tema:
-      <strong>ja</strong> (Knappar)
-    </p>
-  </div>
-  <div class="docs__examples">
-    <div class="row-layout">
-      <div>
-        <vgr-button (click)="showOneButtonModal()">En knapp</vgr-button>
-      </div>
-      <div>
-        <vgr-button (click)="showTwoButtonModal()">Två knappar med lång text</vgr-button>
-      </div>
-      <div>
-        <vgr-button (click)="showThreeButtonModal()">Tre knappar</vgr-button>
-      </div>
-      <div class="column-layout">
-        <vgr-button (click)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt</vgr-button>
-        Modal där avbryt är defaultknapp
-      </div>
-      <div>
-        <vgr-button (click)="this.modalService.openDialog('modelInPageComponent')">Modal i page komponent</vgr-button>
-      </div>
+      <p> Förändras med tema:
+        <strong>ja</strong> (Knappar)
+      </p>
     </div>
-    <div class="row-layout">
-      <div>
-        <vgr-button (click)="showDisabledButtonModal()">Disablad knapp i modal</vgr-button>
+    <div class="docs__examples">
+      <div class="row-layout">
+        <div>
+          <vgr-button (click)="showOneButtonModal()">En knapp</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="showTwoButtonModal()">Två knappar med lång text</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="showThreeButtonModal()">Tre knappar</vgr-button>
+        </div>
+        <div class="column-layout">
+          <vgr-button (click)="showSaveDontSaveCancelModal()">Spara-SparaInte-Avbryt</vgr-button>
+          Modal där avbryt är defaultknapp
+        </div>
+        <div>
+          <vgr-button (click)="this.modalService.openDialog('modelInPageComponent')">Modal i page komponent</vgr-button>
+        </div>
       </div>
-      <div>
-        <vgr-button (click)="showCommentAnswerWithTextModal()">Kommentar 1</vgr-button>
+      <div class="row-layout">
+        <div>
+          <vgr-button (click)="showDisabledButtonModal()">Disablad knapp i modal</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="showCommentAnswerWithTextModal()">Kommentar 1</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="showCommentAnswerWithoutTextModal()">Kommentar 2</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="showCommentModal()">Kommentar 3</vgr-button>
+        </div>
+        <div>
+          <vgr-button (click)="this.modalService.openDialog('modalWithCheckbox')">Modal med checkbox</vgr-button>
+        </div>
       </div>
-      <div>
-        <vgr-button (click)="showCommentAnswerWithoutTextModal()">Kommentar 2</vgr-button>
-      </div>
-      <div>
-        <vgr-button (click)="showCommentModal()">Kommentar 3</vgr-button>
-      </div>
-      <div>
-        <vgr-button (click)="this.modalService.openDialog('modalWithCheckbox')">Modal med checkbox</vgr-button>
-      </div>
-    </div>
-    <br>
-    <h2>HTML</h2>
-    <section [innerHTML]="exampleCodeMarkup" vgrHighlightCode></section>
-    <h2>TypeScript</h2>
-    <section [innerHTML]="exampleCodeTypescript" vgrHighlightCode></section>
-    <h2>Resultat</h2>
-    <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>
-    <br>
+      <br>
+        <h2>HTML</h2>
+        <section [innerHTML]="exampleCodeMarkup" vgrHighlightCode></section>
+        <h2>TypeScript</h2>
+        <section [innerHTML]="exampleCodeTypescript" vgrHighlightCode></section>
+        <h2>Resultat</h2>
+        <vgr-button (click)="modalService.openDialog('myModalId')">Open Modal</vgr-button>
+        <br>
 
-  </div>
-  <div class="docs__api">
-    <code>&lt;vgr-modal&gt;</code> är en placeholder för det innehåll som sedan visas över applikationen.
-    Modal har ett id som behöver anges för att kunna öppna/stänga modalen.
-    Du kan även koppla funktionalitet till klick utanför modalen genom att använda dig av <code>&#40;outsideClick&#41;="foobar()"</code>.
-    Modalen består i sin tur av tre delar,
-    <code>&lt;vgr-modal-header&gt;</code>,
-    <code>&lt;vgr-modal-content&gt;</code>
-    och
-    <code>&lt;vgr-modal-footer&gt;</code>. Den andra delen är en
-    <code>modalService</code> som injectas i de komponenter som vill visa en dialog. Bredden på dialogen kan i det lilla läget minst vara 450px och max 1080px
-    alternativt i det stora läget minst 500px och max 1130px. För att sätta förvalt fokus på en
-    <code>&lt;vgr-button&gt;</code> i ett modalt fönster anges attributet <code>default=true</code> för knappen. För att visa en dialog, använd
-    <code>modalService.openDialog()</code> och för att stänga dialogen, använd
-    <code>modalService.closeDialog()</code>. Se nedan.
-    <br>
-    <table class="property-table" style="margin-bottom: 20px">
-      <tr>
-        <th>Namn</th>
-        <th>Beskrivning</th>
-        <th>Exempel</th>
-      </tr>
-      <tr>
-        <td>outsideClick(e: MouseEvent)</td>
-        <td>
-          Event som triggas när du klickar utanför modalen.
-          Denna läggs på <code>&lt;vgr-modal&gt;</code>
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>modalService.openDialog(elementId: string)</td>
-        <td>Öppnar den modal dialog som har det element id som skickats in -
-          <code>elementId</code>.
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>modalService.closeDialog(elementId: string)</td>
-        <td>Stänger den modal dialog som har det element id som skickats in -
-          <code>elementId</code>.
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>modalService.updateDialog(elementId: string)</td>
-        <td>Uppdaterar vilka tabstop som finns i modalen (används om man ändrar innehållet i modalen efter att man öppnat den) -
-          <code>elementId</code>.
-        </td>
-        <td></td>
-      </tr>
-    </table>
-  </div>
-  <div class="docs__wcag">
-    Dialogen följer WCAG genom att man inte kan tabba ur dialogen utan att stänga den först. Som default läggs fokus på
-    den första
-    knappen, eller element inne i modalen. Om fokus ska läggas på en annan knapp, sätt attributet default=true på den
-    knapp
-    där fokus önskas.
-    <br> Tänk på följande riktlinjer vid implementation av en modal:
-    <br>
-    <br> If content is large enough that focusing the first interactive element could cause the beginning of content to
-    scroll
-    out of view, it is advisable to add tabindex=-1 to a static element at the top of the dialog, such as the dialog
-    title
-    or first paragraph, and initially focus that element.
-    <ul>
-      <li>If a dialog contains the final step in a process that is not easily reversible, such as deleting data or
-        completing
-        a financial transaction, it may be advisable to set focus on the least destructive action, especially if
-        undoing
-        the action is difficult or impossible. The Alert Dialog Pattern is often employed in such circumstances.</li>
-      <li>If a dialog is limited to interactions that either provide additional information or continue processing, it
-        may be
-        advisable to set focus to the element that is likely to be most frequently used, such as an OK or Continue
-        button.</li>
-    </ul>
-    <br> When a dialog closes, focus returns to the element that invoked the dialog unless either: The invoking element
-    no longer
-    exists. Then, focus is set on another element that provides logical work flow.
-    <br>
-    <ul>
-      The work flow design includes the following conditions that can occasionally make focusing a different element a
-      more logical
-      choice:
-      <li>It is very unlikely users need to immediately re-invoke the dialog.</li>
-      <li>The task completed in the dialog is directly related to a subsequent step in the work flow.</li>
-      <li>For example, a grid has an associated toolbar with a button for adding rows. The Add Rows button opens a
-        dialog that
-        prompts for the number of rows. After the dialog closes, focus is placed in the first cell of the first new
-        row.</li>
-    </ul>
-    <br> It is strongly recommended that the tab sequence of all dialogs include a visible element with role button
-    that closes
-    the dialog, such as a close icon or cancel button.
+        </div>
+        <div class="docs__api">
+          <code>&lt;vgr-modal&gt;</code> är en placeholder för det innehåll som sedan visas över applikationen.
+          Modal har ett id som behöver anges för att kunna öppna/stänga modalen.
+          Du kan även koppla funktionalitet till klick utanför modalen genom att använda dig av <code>&#40;outsideClick&#41;="foobar()"</code>.
+          Modalen består i sin tur av tre delar,
+          <code>&lt;vgr-modal-header&gt;</code>,
+          <code>&lt;vgr-modal-content&gt;</code>
+          och
+          <code>&lt;vgr-modal-footer&gt;</code>. Den andra delen är en
+          <code>modalService</code> som injectas i de komponenter som vill visa en dialog. Bredden på dialogen kan i det lilla läget minst vara 450px och max 1080px
+          alternativt i det stora läget minst 500px och max 1130px. För att sätta förvalt fokus på en
+          <code>&lt;vgr-button&gt;</code> i ett modalt fönster anges attributet <code>default=true</code> för knappen. För att visa en dialog, använd
+          <code>modalService.openDialog()</code> och för att stänga dialogen, använd
+          <code>modalService.closeDialog()</code>. Se nedan.
+          <br>
+            <table class="property-table" style="margin-bottom: 20px">
+              <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Exempel</th>
+              </tr>
+              <tr>
+                <td>outsideClick(e: MouseEvent)</td>
+                <td>
+                  Event som triggas när du klickar utanför modalen.
+                  Denna läggs på <code>&lt;vgr-modal&gt;</code>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>modalService.openDialog(elementId: string)</td>
+                <td>Öppnar den modal dialog som har det element id som skickats in -
+                  <code>elementId</code>.
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>modalService.closeDialog(elementId: string)</td>
+                <td>Stänger den modal dialog som har det element id som skickats in -
+                  <code>elementId</code>.
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>modalService.updateDialog(elementId: string)</td>
+                <td>Uppdaterar vilka tabstop som finns i modalen (används om man ändrar innehållet i modalen efter att man öppnat den) -
+                  <code>elementId</code>.
+                </td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div class="docs__wcag">
+            Dialogen följer WCAG genom att man inte kan tabba ur dialogen utan att stänga den först. Som default läggs fokus på
+            den första
+            knappen, eller element inne i modalen. Om fokus ska läggas på en annan knapp, sätt attributet default=true på den
+            knapp
+            där fokus önskas.
+            <br> Tänk på följande riktlinjer vid implementation av en modal:
+              <br>
+                <br> If content is large enough that focusing the first interactive element could cause the beginning of content to
+                  scroll
+                  out of view, it is advisable to add tabindex=-1 to a static element at the top of the dialog, such as the dialog
+                  title
+                  or first paragraph, and initially focus that element.
+                  <ul>
+                    <li>If a dialog contains the final step in a process that is not easily reversible, such as deleting data or
+                      completing
+                      a financial transaction, it may be advisable to set focus on the least destructive action, especially if
+                      undoing
+                    the action is difficult or impossible. The Alert Dialog Pattern is often employed in such circumstances.</li>
+                    <li>If a dialog is limited to interactions that either provide additional information or continue processing, it
+                      may be
+                      advisable to set focus to the element that is likely to be most frequently used, such as an OK or Continue
+                    button.</li>
+                  </ul>
+                  <br> When a dialog closes, focus returns to the element that invoked the dialog unless either: The invoking element
+                    no longer
+                    exists. Then, focus is set on another element that provides logical work flow.
+                    <br>
+                      <ul>
+                        The work flow design includes the following conditions that can occasionally make focusing a different element a
+                        more logical
+                        choice:
+                        <li>It is very unlikely users need to immediately re-invoke the dialog.</li>
+                        <li>The task completed in the dialog is directly related to a subsequent step in the work flow.</li>
+                        <li>For example, a grid has an associated toolbar with a button for adding rows. The Add Rows button opens a
+                          dialog that
+                          prompts for the number of rows. After the dialog closes, focus is placed in the first cell of the first new
+                        row.</li>
+                      </ul>
+                      <br> It is strongly recommended that the tab sequence of all dialogs include a visible element with role button
+                        that closes
+                        the dialog, such as a close icon or cancel button.
 
-  </div>
-</app-component-docs>
-<vgr-modal id="modal1">
-  <vgr-modal-header>Välj i dropdown</vgr-modal-header>
-  <vgr-modal-content>
-    <p>Här kan du välja i en fin dropdownlista.</p>
-    <br />
-    <h3 style="margin-bottom: 10px;">Välj här nedan</h3>
-    <vgr-dropdown-select>
-      <vgr-dropdown-item>hej</vgr-dropdown-item>
-      <vgr-dropdown-item>på</vgr-dropdown-item>
-      <vgr-dropdown-item>dig</vgr-dropdown-item>
-      <vgr-dropdown-item>din</vgr-dropdown-item>
-      <vgr-dropdown-item>kodapa</vgr-dropdown-item>
-      <vgr-dropdown-item>:)</vgr-dropdown-item>
-    </vgr-dropdown-select>
+                      </div>
+                    </app-component-docs>
+                    <vgr-modal id="modal1">
+                      <vgr-modal-header>Välj i dropdown</vgr-modal-header>
+                      <vgr-modal-content>
+                        <p>Här kan du välja i en fin dropdownlista.</p>
+                        <br />
+                        <h3 style="margin-bottom: 10px;">Välj här nedan</h3>
+                        <vgr-dropdown-select>
+                          <vgr-dropdown-item>hej</vgr-dropdown-item>
+                          <vgr-dropdown-item>på</vgr-dropdown-item>
+                          <vgr-dropdown-item>dig</vgr-dropdown-item>
+                          <vgr-dropdown-item>din</vgr-dropdown-item>
+                          <vgr-dropdown-item>kodapa</vgr-dropdown-item>
+                          <vgr-dropdown-item>:)</vgr-dropdown-item>
+                        </vgr-dropdown-select>
 
-    <h3 style="margin-bottom: 10px;">Välj här nedan</h3>
-    <vgr-dropdown-select [multi]="true">
-      <vgr-dropdown-item>hej</vgr-dropdown-item>
-      <vgr-dropdown-item>på</vgr-dropdown-item>
-      <vgr-dropdown-item>dig</vgr-dropdown-item>
-      <vgr-dropdown-item>din</vgr-dropdown-item>
-      <vgr-dropdown-item>kodapa</vgr-dropdown-item>
-      <vgr-dropdown-item>:)</vgr-dropdown-item>
-      <vgr-dropdown-item>hej</vgr-dropdown-item>
-      <vgr-dropdown-item>på</vgr-dropdown-item>
-      <vgr-dropdown-item>dig</vgr-dropdown-item>
-      <vgr-dropdown-item>din</vgr-dropdown-item>
-      <vgr-dropdown-item>kodapa</vgr-dropdown-item>
-      <vgr-dropdown-item>:)</vgr-dropdown-item>
-      <vgr-dropdown-item>hej</vgr-dropdown-item>
-      <vgr-dropdown-item>på</vgr-dropdown-item>
-      <vgr-dropdown-item>dig</vgr-dropdown-item>
-      <vgr-dropdown-item>din</vgr-dropdown-item>
-      <vgr-dropdown-item>kodapa</vgr-dropdown-item>
-      <vgr-dropdown-item>:)</vgr-dropdown-item>
-      <vgr-dropdown-item>hej</vgr-dropdown-item>
-      <vgr-dropdown-item>på</vgr-dropdown-item>
-      <vgr-dropdown-item>dig</vgr-dropdown-item>
-      <vgr-dropdown-item>din</vgr-dropdown-item>
-      <vgr-dropdown-item>kodapa</vgr-dropdown-item>
-      <vgr-dropdown-item>:)</vgr-dropdown-item>
-      <vgr-dropdown-item>hej</vgr-dropdown-item>
-      <vgr-dropdown-item>på</vgr-dropdown-item>
-      <vgr-dropdown-item>dig</vgr-dropdown-item>
-      <vgr-dropdown-item>din</vgr-dropdown-item>
-      <vgr-dropdown-item>kodapa</vgr-dropdown-item>
-      <vgr-dropdown-item>:)</vgr-dropdown-item>
-      <vgr-dropdown-item>hej</vgr-dropdown-item>
-      <vgr-dropdown-item>på</vgr-dropdown-item>
-      <vgr-dropdown-item>dig</vgr-dropdown-item>
-      <vgr-dropdown-item>din</vgr-dropdown-item>
-      <vgr-dropdown-item>kodapa</vgr-dropdown-item>
-      <vgr-dropdown-item>:)</vgr-dropdown-item>
-    </vgr-dropdown-select>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal1')">Knapp</vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
-<vgr-modal id="modal3">
-  <vgr-modal-header tabindex="0">Här kan du se en lång text</vgr-modal-header>
-  <vgr-modal-content>
-    <p>Denna fil innehåller personnummer på de personer som valt er vårdcentral tom 2017-01-31. För nedladdning av
-      filen gäller
-      följande villkor 1. Innehållet i filen får inte behandlas i strid med personuppgiftslagen (PuL) och
-      patient-datalagen
-      (PdL). Informationen får därför inte användas för annat ändamål än det för vilket uppgifterna samlats in (9 §
-      punkt
-      c och d PuL och 2 kap. 4 § PdL). Detta innebär bland annat att uppgifterna inte får användas för massutskick
-      eller
-      marknadsföring. 2. Verksamhetschefen ansvarar för att endast den senaste månadens fil används för eventuell
-      bearbetning
-      av informationen. För att acceptera båda villkoren ovan, tryck [Jag accepterar] annars tryck [Avbryt] Notera att
-      systemet
-      bokför vem som accepterat villkoren och tidpunkten för detta. Notera även att alla register i verksamheten ska
-      vara
-      anmälda till utsett personuppgiftsombud eller Datainspektionen.
-    </p>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal3')">Jag accepterar</vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" default="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
-<vgr-modal id="modal4">
-  <vgr-modal-header>En header från app</vgr-modal-header>
-  <vgr-modal-content>
-    <p>Ändringarna går förlorade om du inte sparar dem</p>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal4')">Spara</vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal4')">Spara inte</vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" default="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
-<vgr-modal id="commentAnswerWithTextModal">
-  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
-  <vgr-modal-content>
-    <p>Kommentar:
-      <br /> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
-    </p>
-    <br />
-    <p>Ditt svar:</p>
-    <vgr-textarea></vgr-textarea>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentAnswerWithTextModal')">Avbryt</vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentAnswerWithTextModal')">Svara</vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
-<vgr-modal id="commentAnswerWithoutTextModal">
+                        <h3 style="margin-bottom: 10px;">Välj här nedan</h3>
+                        <vgr-dropdown-select [multi]="true">
+                          <vgr-dropdown-item>hej</vgr-dropdown-item>
+                          <vgr-dropdown-item>på</vgr-dropdown-item>
+                          <vgr-dropdown-item>dig</vgr-dropdown-item>
+                          <vgr-dropdown-item>din</vgr-dropdown-item>
+                          <vgr-dropdown-item>kodapa</vgr-dropdown-item>
+                          <vgr-dropdown-item>:)</vgr-dropdown-item>
+                          <vgr-dropdown-item>hej</vgr-dropdown-item>
+                          <vgr-dropdown-item>på</vgr-dropdown-item>
+                          <vgr-dropdown-item>dig</vgr-dropdown-item>
+                          <vgr-dropdown-item>din</vgr-dropdown-item>
+                          <vgr-dropdown-item>kodapa</vgr-dropdown-item>
+                          <vgr-dropdown-item>:)</vgr-dropdown-item>
+                          <vgr-dropdown-item>hej</vgr-dropdown-item>
+                          <vgr-dropdown-item>på</vgr-dropdown-item>
+                          <vgr-dropdown-item>dig</vgr-dropdown-item>
+                          <vgr-dropdown-item>din</vgr-dropdown-item>
+                          <vgr-dropdown-item>kodapa</vgr-dropdown-item>
+                          <vgr-dropdown-item>:)</vgr-dropdown-item>
+                          <vgr-dropdown-item>hej</vgr-dropdown-item>
+                          <vgr-dropdown-item>på</vgr-dropdown-item>
+                          <vgr-dropdown-item>dig</vgr-dropdown-item>
+                          <vgr-dropdown-item>din</vgr-dropdown-item>
+                          <vgr-dropdown-item>kodapa</vgr-dropdown-item>
+                          <vgr-dropdown-item>:)</vgr-dropdown-item>
+                          <vgr-dropdown-item>hej</vgr-dropdown-item>
+                          <vgr-dropdown-item>på</vgr-dropdown-item>
+                          <vgr-dropdown-item>dig</vgr-dropdown-item>
+                          <vgr-dropdown-item>din</vgr-dropdown-item>
+                          <vgr-dropdown-item>kodapa</vgr-dropdown-item>
+                          <vgr-dropdown-item>:)</vgr-dropdown-item>
+                          <vgr-dropdown-item>hej</vgr-dropdown-item>
+                          <vgr-dropdown-item>på</vgr-dropdown-item>
+                          <vgr-dropdown-item>dig</vgr-dropdown-item>
+                          <vgr-dropdown-item>din</vgr-dropdown-item>
+                          <vgr-dropdown-item>kodapa</vgr-dropdown-item>
+                          <vgr-dropdown-item>:)</vgr-dropdown-item>
+                        </vgr-dropdown-select>
+                      </vgr-modal-content>
+                      <vgr-modal-footer>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal1')">Knapp</vgr-button>
+                      </vgr-modal-footer>
+                    </vgr-modal>
+                    <vgr-modal id="modal3">
+                      <vgr-modal-header tabindex="0">Här kan du se en lång text</vgr-modal-header>
+                      <vgr-modal-content>
+                        <p>Denna fil innehåller personnummer på de personer som valt er vårdcentral tom 2017-01-31. För nedladdning av
+                          filen gäller
+                          följande villkor 1. Innehållet i filen får inte behandlas i strid med personuppgiftslagen (PuL) och
+                          patient-datalagen
+                          (PdL). Informationen får därför inte användas för annat ändamål än det för vilket uppgifterna samlats in (9 §
+                          punkt
+                          c och d PuL och 2 kap. 4 § PdL). Detta innebär bland annat att uppgifterna inte får användas för massutskick
+                          eller
+                          marknadsföring. 2. Verksamhetschefen ansvarar för att endast den senaste månadens fil används för eventuell
+                          bearbetning
+                          av informationen. För att acceptera båda villkoren ovan, tryck [Jag accepterar] annars tryck [Avbryt] Notera att
+                          systemet
+                          bokför vem som accepterat villkoren och tidpunkten för detta. Notera även att alla register i verksamheten ska
+                          vara
+                          anmälda till utsett personuppgiftsombud eller Datainspektionen.
+                        </p>
+                      </vgr-modal-content>
+                      <vgr-modal-footer>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal3')">Jag accepterar</vgr-button>
+                        <vgr-button [buttonStyle]="'secondary'" default="true" (click)="closeModal('modal3')">Avbryt</vgr-button>
+                      </vgr-modal-footer>
+                    </vgr-modal>
+                    <vgr-modal id="modal4">
+                      <vgr-modal-header>En header från app</vgr-modal-header>
+                      <vgr-modal-content>
+                        <p>Ändringarna går förlorade om du inte sparar dem</p>
+                      </vgr-modal-content>
+                      <vgr-modal-footer>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal4')">Spara</vgr-button>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('modal4')">Spara inte</vgr-button>
+                        <vgr-button [buttonStyle]="'secondary'" default="true" (click)="closeModal('modal4')">Avbryt</vgr-button>
+                      </vgr-modal-footer>
+                    </vgr-modal>
+                    <vgr-modal id="commentAnswerWithTextModal">
+                      <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+                      <vgr-modal-content>
+                        <p>Kommentar:
+                          <br /> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
+                        </p>
+                        <br />
+                        <p>Ditt svar:</p>
+                        <vgr-textarea></vgr-textarea>
+                      </vgr-modal-content>
+                      <vgr-modal-footer>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentAnswerWithTextModal')">Avbryt</vgr-button>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentAnswerWithTextModal')">Svara</vgr-button>
+                      </vgr-modal-footer>
+                    </vgr-modal>
+                    <vgr-modal id="commentAnswerWithoutTextModal">
 
-  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
-  <vgr-modal-content>
-    <p>Ditt svar:</p>
-    <form [formGroup]="form">
-      <vgr-textarea formControlName="textarea" [showValidation]="form.controls.textarea.touched && validateOnSubmit">
-      </vgr-textarea>
-    </form>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModalCancel('commentAnswerWithoutTextModal')">Avbryt
-    </vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModalSave('commentAnswerWithoutTextModal')">Svara</vgr-button>
-  </vgr-modal-footer>
+                      <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+                      <vgr-modal-content>
+                        <p>Ditt svar:</p>
+                        <form [formGroup]="form">
+                          <vgr-textarea formControlName="textarea" [showValidation]="form.controls.textarea.touched && validateOnSubmit">
+                          </vgr-textarea>
+                        </form>
+                      </vgr-modal-content>
+                      <vgr-modal-footer>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModalCancel('commentAnswerWithoutTextModal')">Avbryt
+                        </vgr-button>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModalSave('commentAnswerWithoutTextModal')">Svara</vgr-button>
+                      </vgr-modal-footer>
 
-</vgr-modal>
-<vgr-modal id="commentModal">
-  <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
-  <vgr-modal-content>
-    <button *ngIf="!editMode" (click)="toggleEditMode()">test</button>
-    <p>Kommentar:
-      <br /> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
-    </p>
-    <button *ngIf="editMode" (click)="toggleEditMode()">toggle tillbaka</button>
-    <textarea id="test" *ngIf="editMode"></textarea>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Avbryt</vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Spara</vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
-<vgr-modal id="modalDisabledButton">
-  <vgr-modal-header tabindex="0">En header från app</vgr-modal-header>
-  <vgr-modal-content>
-    <vgr-checkbox [label]="'Aktivera/Inaktivera knapp'" (checkedChanged)="enableDisabledButton()"></vgr-checkbox>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" [disabled]="enable_disable_button">Spara</vgr-button>
+                    </vgr-modal>
+                    <vgr-modal id="commentModal">
+                      <vgr-modal-header>Ann-Christin Berglund har skrivit en kommentar på utbetalningsunderlaget</vgr-modal-header>
+                      <vgr-modal-content>
+                        @if (!editMode) {
+                          <button (click)="toggleEditMode()">test</button>
+                        }
+                        <p>Kommentar:
+                          <br /> I beräkningssteg x har vi inte fått tillräcklig ersättning. Vi bör ha ersättning för 4 besök och inte 2.
+                        </p>
+                        @if (editMode) {
+                          <button (click)="toggleEditMode()">toggle tillbaka</button>
+                        }
+                        @if (editMode) {
+                          <textarea id="test"></textarea>
+                        }
+                      </vgr-modal-content>
+                      <vgr-modal-footer>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Avbryt</vgr-button>
+                        <vgr-button [buttonStyle]="'secondary'" (click)="closeModal('commentModal')">Spara</vgr-button>
+                      </vgr-modal-footer>
+                    </vgr-modal>
+                    <vgr-modal id="modalDisabledButton">
+                      <vgr-modal-header tabindex="0">En header från app</vgr-modal-header>
+                      <vgr-modal-content>
+                        <vgr-checkbox [label]="'Aktivera/Inaktivera knapp'" (checkedChanged)="enableDisabledButton()"></vgr-checkbox>
+                      </vgr-modal-content>
+                      <vgr-modal-footer>
+                        <vgr-button [buttonStyle]="'secondary'" [disabled]="enable_disable_button">Spara</vgr-button>
 
-  </vgr-modal-footer>
-</vgr-modal>
-<vgr-modal id="myModalId">
-  <vgr-modal-header>En header från app</vgr-modal-header>
-  <vgr-modal-content>
-    <p>Ändringarna går förlorade om du inte sparar dem</p>
-    <vgr-radiobutton-group>
-      <!-- <vgr-radiobutton-item>Val 1</vgr-radiobutton-item> -->
-      <vgr-radiobutton-item>Val 2</vgr-radiobutton-item>
-      <vgr-radiobutton-item>Val 3</vgr-radiobutton-item>
-    </vgr-radiobutton-group>
+                      </vgr-modal-footer>
+                    </vgr-modal>
+                    <vgr-modal id="myModalId">
+                      <vgr-modal-header>En header från app</vgr-modal-header>
+                      <vgr-modal-content>
+                        <p>Ändringarna går förlorade om du inte sparar dem</p>
+                        <vgr-radiobutton-group>
+                          <!-- <vgr-radiobutton-item>Val 1</vgr-radiobutton-item> -->
+                          <vgr-radiobutton-item>Val 2</vgr-radiobutton-item>
+                          <vgr-radiobutton-item>Val 3</vgr-radiobutton-item>
+                        </vgr-radiobutton-group>
 
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'">Spara</vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('myModalId')">Avbryt
-    </vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
-<vgr-modal id="modalWithCheckbox">
-  <vgr-modal-header>En modal med en checkbox</vgr-modal-header>
-  <vgr-modal-content>
-    <vgr-checkbox label="Check me!" [checked]="modalChecked" (checkedChanged)="modalChecked = !modalChecked" [disabled]="false"></vgr-checkbox>
-  </vgr-modal-content>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modalWithCheckbox')">Stäng
-    </vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
-<vgr-page>
-  <vgr-page-body>
-    <vgr-modal id="modelInPageComponent"  (outsideClick)="closeModal('modelInPageComponent')">
-      <vgr-modal-header>En header från app</vgr-modal-header>
-      <vgr-modal-content>
-        <p>Om du klickar utanför stängs modalen</p>
-      </vgr-modal-content>
-      <vgr-modal-footer>
-        <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modelInPageComponent')">Avbryt</vgr-button>
-      </vgr-modal-footer>
-    </vgr-modal>
-  </vgr-page-body>
-</vgr-page>
+                      </vgr-modal-content>
+                      <vgr-modal-footer>
+                        <vgr-button [buttonStyle]="'secondary'">Spara</vgr-button>
+                        <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('myModalId')">Avbryt
+                        </vgr-button>
+                      </vgr-modal-footer>
+                    </vgr-modal>
+                    <vgr-modal id="modalWithCheckbox">
+                      <vgr-modal-header>En modal med en checkbox</vgr-modal-header>
+                      <vgr-modal-content>
+                        <vgr-checkbox label="Check me!" [checked]="modalChecked" (checkedChanged)="modalChecked = !modalChecked" [disabled]="false"></vgr-checkbox>
+                      </vgr-modal-content>
+                      <vgr-modal-footer>
+                        <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modalWithCheckbox')">Stäng
+                        </vgr-button>
+                      </vgr-modal-footer>
+                    </vgr-modal>
+                    <vgr-page>
+                      <vgr-page-body>
+                        <vgr-modal id="modelInPageComponent"  (outsideClick)="closeModal('modelInPageComponent')">
+                          <vgr-modal-header>En header från app</vgr-modal-header>
+                          <vgr-modal-content>
+                            <p>Om du klickar utanför stängs modalen</p>
+                          </vgr-modal-content>
+                          <vgr-modal-footer>
+                            <vgr-button [buttonStyle]="'secondary'" default="true" (click)="modalService.closeDialog('modelInPageComponent')">Avbryt</vgr-button>
+                          </vgr-modal-footer>
+                        </vgr-modal>
+                      </vgr-page-body>
+                    </vgr-page>

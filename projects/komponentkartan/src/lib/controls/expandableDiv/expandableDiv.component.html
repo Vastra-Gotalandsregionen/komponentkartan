@@ -9,6 +9,8 @@
     </div>
   </div>
   <div class="expandable-div-content" [@toggleExpandedState]="expanded">
-    <ng-content select="vgr-expandable-div-content" *ngIf="expanded"></ng-content>
+    @if (expanded) {
+      <ng-content select="vgr-expandable-div-content"></ng-content>
+    }
   </div>
 </div>

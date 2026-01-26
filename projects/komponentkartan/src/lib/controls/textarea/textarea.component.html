@@ -1,15 +1,17 @@
 <div class="textarea" [ngStyle]="{ 'width': width }">
   <div class="textarea-validation">
     <div>
-    <textarea #textareaElement class="textarea-input" [ngStyle]="{'height': readonly ? scrollHeight : height}"
-      [maxlength]="maxlength" [attr.id]="labelId"
-      [placeholder]="disabled ? '' : placeholder" [(ngModel)]="value" (ngModelChange)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus($event)"
-      [attr.readonly]="readonly ? '' : null"
+      <textarea #textareaElement class="textarea-input" [ngStyle]="{'height': readonly ? scrollHeight : height}"
+        [maxlength]="maxlength" [attr.id]="labelId"
+        [placeholder]="disabled ? '' : placeholder" [(ngModel)]="value" (ngModelChange)="onChange($event)" (blur)="onBlur($event)" (focus)="onFocus($event)"
+        [attr.readonly]="readonly ? '' : null"
       [disabled]="disabled" [attr.aria-describedby]="elementId" [attr.aria-invalid]="errorActive"></textarea>
     </div>
-    <div [attr.id]="elementId" *ngIf="control" class="textarea-validation_status" [title]="validationErrorMessage" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
-      <vgr-icon icon="exclamation-circle" size="sm" class="textarea-validation_status__icon"></vgr-icon>
-      <div class="textarea-validation_status__message">{{validationErrorMessage}}</div>
-    </div>
+    @if (control) {
+      <div [attr.id]="elementId" class="textarea-validation_status" [title]="validationErrorMessage" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
+        <vgr-icon icon="exclamation-circle" size="sm" class="textarea-validation_status__icon"></vgr-icon>
+        <div class="textarea-validation_status__message">{{validationErrorMessage}}</div>
+      </div>
+    }
   </div>
 </div>

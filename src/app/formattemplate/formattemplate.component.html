@@ -1,28 +1,30 @@
 <vgr-page>
-    <vgr-page-header [title]="'Formatmall'">
-    </vgr-page-header>
-    <vgr-page-body>
-      <vgr-notification *ngIf="showAlert" type="success" [standalone]="true" style="margin-bottom: 30px;" [isAlertNotice]="true">
-          Från och med 2022 ska inte längre antal avvikelserapporter och antal årsarbetare rapporteras via IT-stödet.
-        </vgr-notification>
-        <vgr-page-block>
-            <div class="column-layout">
-                <span>Fonten som används är
-        <strong>Calibri</strong>. Storlek på brödtext och rubriker anpassas efter fönstrets bredd i två steg.
-        <br/> Liten storlek är
-        <strong>1366px - 1458px</strong>. Stor storlek
-        <strong>1459px</strong> och större.</span>
-                <h1 class="font-example"></h1>
-                <h2 class="font-example"></h2>
-                <h3 class="font-example"></h3>
-                <h4 class="font-example"></h4>
-                <div class="font-example"></div>
-                <div class="font-example text--white"></div>
-                <div>
-                    <strong class="font-example"></strong>
-                </div>
-                <div class="font-example small--text"></div>
-            </div>
-        </vgr-page-block>
+  <vgr-page-header [title]="'Formatmall'">
+  </vgr-page-header>
+  <vgr-page-body>
+    @if (showAlert) {
+      <vgr-notification type="success" [standalone]="true" style="margin-bottom: 30px;" [isAlertNotice]="true">
+        Från och med 2022 ska inte längre antal avvikelserapporter och antal årsarbetare rapporteras via IT-stödet.
+      </vgr-notification>
+    }
+    <vgr-page-block>
+      <div class="column-layout">
+        <span>Fonten som används är
+          <strong>Calibri</strong>. Storlek på brödtext och rubriker anpassas efter fönstrets bredd i två steg.
+          <br/> Liten storlek är
+          <strong>1366px - 1458px</strong>. Stor storlek
+          <strong>1459px</strong> och större.</span>
+          <h1 class="font-example"></h1>
+          <h2 class="font-example"></h2>
+          <h3 class="font-example"></h3>
+          <h4 class="font-example"></h4>
+          <div class="font-example"></div>
+          <div class="font-example text--white"></div>
+          <div>
+            <strong class="font-example"></strong>
+          </div>
+          <div class="font-example small--text"></div>
+        </div>
+      </vgr-page-block>
     </vgr-page-body>
-</vgr-page>
+  </vgr-page>

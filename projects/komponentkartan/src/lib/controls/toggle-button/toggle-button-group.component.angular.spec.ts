@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
 
 import { ToggleButtonGroupComponent } from './toggle-button-group.component';
 import { ToggleButtonComponent } from './toggle-button.component';
@@ -19,6 +19,10 @@ import { ToggleButtonComponent } from './toggle-button.component';
 })
 export class TestComponent {}
 
+@NgModule({ providers: [ provideZoneChangeDetection() ] })
+export class ZoneChangeDetectionModule {}
+
+
 describe('[ToggleButtonGroupComponent - Angular]', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: ToggleButtonGroupComponent;
@@ -35,7 +39,7 @@ describe('[ToggleButtonGroupComponent - Angular]', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    TestBed.initTestEnvironment([ZoneChangeDetectionModule, BrowserDynamicTestingModule], platformBrowserDynamicTesting(), {
     teardown: { destroyAfterEach: false }
 });
     TestBed.configureTestingModule({

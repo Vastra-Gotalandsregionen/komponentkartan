@@ -1,20 +1,26 @@
 <div class="grid-header-wrapper" [ngClass]="{'grid-header-wrapper--sticky': stickyHeader, 'grid-header-wrapper-expanded': increaseHeaderWidth}" [style.top]="headerOffset">
-  <div class="grid-header-toolbar" *ngIf="hasToolbar">
-    <ng-content select="vgr-grid-header-toolbar"></ng-content>
-  </div>
+  @if (hasToolbar) {
+    <div class="grid-header-toolbar">
+      <ng-content select="vgr-grid-header-toolbar"></ng-content>
+    </div>
+  }
   <div tabindex="0" [attr.aria-label]="ariaLabel" class="grid-header">
     <ng-content select="vgr-grid-header"></ng-content>
   </div>
 </div>
 <ng-content select="vgr-notification"></ng-content>
-<div *ngIf="showLoader" class="grid-loader">
-  <vgr-loader [active]="true"></vgr-loader>
-</div>
-<ng-container *ngIf="!showLoader">
+@if (showLoader) {
+  <div class="grid-loader">
+    <vgr-loader [active]="true"></vgr-loader>
+  </div>
+}
+@if (!showLoader) {
   <div class="grid-rows">
     <ng-content select="vgr-grid-row"></ng-content>
   </div>
-</ng-container>
-<div *ngIf="pages > 1" class="grid-footer">
-  <vgr-pagination [pages]="pages" [activePage]="activePage" (pageChanged)="onPageChanged($event)"></vgr-pagination>
-</div>
+}
+@if (pages > 1) {
+  <div class="grid-footer">
+    <vgr-pagination [pages]="pages" [activePage]="activePage" (pageChanged)="onPageChanged($event)"></vgr-pagination>
+  </div>
+}

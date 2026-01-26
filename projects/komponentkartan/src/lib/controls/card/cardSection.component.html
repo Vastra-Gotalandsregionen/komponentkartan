@@ -1,8 +1,10 @@
 <div #cardSectionHeader class="card-section__header" [ngStyle]="{'background-color': backgroundColor}" (click)="toggleExpanded($event)" (keydown)="toggleExpanded($event)" tabindex="0"
   [attr.aria-expanded]="expanded" role="button">
   <h2 class="card-section__header__title noselect">{{title}}</h2>
-  <h4 class="card-section__header__subtitle" *ngIf="subtitle && subtitle.length>0" title="{{subtitle}}">
+  @if (subtitle && subtitle.length>0) {
+    <h4 class="card-section__header__subtitle" title="{{subtitle}}">
     {{subtitle|truncate:truncateLength}}</h4>
+  }
   <vgr-icon icon="pen" color="text" class="card-section__header__icon" size="sm"></vgr-icon>
   <vgr-icon icon="chevron-down" size="sm" class="card-section__header__expander" [@toggleChevron]="expanded">
   </vgr-icon>
@@ -11,6 +13,8 @@
   (@toggleExpandedState.start)="toggleState('start', expanded)"
   (@toggleExpandedState.done)="toggleState('done', expanded)" [class.card-section__content--overflow]="expandOverflow">
   <div class="add-padding">
-    <ng-content *ngIf="expanded"></ng-content>
+    @if (expanded) {
+      <ng-content></ng-content>
+    }
   </div>
 </div>

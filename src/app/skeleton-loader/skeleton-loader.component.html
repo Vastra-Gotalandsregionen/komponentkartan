@@ -2,85 +2,89 @@
   <div class="docs__overview">
     <p>
       <code>
-        &lt;vgr-skeleton-loader&gt;</code> används för att visa att en åtgärd pågår.
-        Man kan sätta olika former med width och height attribut och det finns även möjlighet att sätta en cirkulär form med cirle attributet.
-        För att loadern ska fungera så behöver man även sätta active attributet.
+      &lt;vgr-skeleton-loader&gt;</code> används för att visa att en åtgärd pågår.
+      Man kan sätta olika former med width och height attribut och det finns även möjlighet att sätta en cirkulär form med cirle attributet.
+      För att loadern ska fungera så behöver man även sätta active attributet.
       <br>
-      <br>
-      <vgr-skeleton-loader [active]="true"></vgr-skeleton-loader>
-    </p>
-    <br>
-    <p> Förändras med tema:
-      <strong>nej</strong>
-    </p>
-  </div>
-  <div class="docs__examples">
-    <h2>HTML</h2>
-    <section vgrHighlightCode [innerHTML]="exampleCodeMarkup" style="margin-bottom: 30px;"></section>
+        <br>
+          <vgr-skeleton-loader [active]="true"></vgr-skeleton-loader>
+        </p>
+        <br>
+          <p> Förändras med tema:
+            <strong>nej</strong>
+          </p>
+        </div>
+        <div class="docs__examples">
+          <h2>HTML</h2>
+          <section vgrHighlightCode [innerHTML]="exampleCodeMarkup" style="margin-bottom: 30px;"></section>
 
-    <div style="margin-bottom: 30px;">
-      <h3 style="margin-bottom: 10px; font-weight: bold;">Text exempel</h3>
-      <div *ngIf="exampleLoading">
-        <vgr-skeleton-loader [active]="exampleLoading" width="90%"></vgr-skeleton-loader>
-        <vgr-skeleton-loader [active]="exampleLoading" width="100%"></vgr-skeleton-loader>
-        <vgr-skeleton-loader [active]="exampleLoading" width="60%"></vgr-skeleton-loader>
-      </div>
-      <section *ngIf="!exampleLoading">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in feugiat lorem. Phasellus vel lacus ac dui eleifend condimentum. Nunc et mi in leo vehicula fringilla. Pellentesque luctus tortor nec pharetra condimentum. Aliquam varius iaculis neque, sit amet sollicitudin neque porttitor quis. Phasellus eu placerat felis, sed condimentum lectus. Morbi id interdum mauris, ac gravida lorem.</section>
-    </div>
+          <div style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 10px; font-weight: bold;">Text exempel</h3>
+            @if (exampleLoading) {
+              <div>
+                <vgr-skeleton-loader [active]="exampleLoading" width="90%"></vgr-skeleton-loader>
+                <vgr-skeleton-loader [active]="exampleLoading" width="100%"></vgr-skeleton-loader>
+                <vgr-skeleton-loader [active]="exampleLoading" width="60%"></vgr-skeleton-loader>
+              </div>
+            }
+            @if (!exampleLoading) {
+              <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in feugiat lorem. Phasellus vel lacus ac dui eleifend condimentum. Nunc et mi in leo vehicula fringilla. Pellentesque luctus tortor nec pharetra condimentum. Aliquam varius iaculis neque, sit amet sollicitudin neque porttitor quis. Phasellus eu placerat felis, sed condimentum lectus. Morbi id interdum mauris, ac gravida lorem.</section>
+            }
+          </div>
 
-    <h3 style="margin-bottom: 10px; font-weight: bold;">Olika former</h3>
-    <div style="align-self:middle">
-      <span style="font-weight: bold;">Default</span>
-      <vgr-skeleton-loader [active]="actionInProgress"></vgr-skeleton-loader>
-    </div>
-    <div style="align-self:middle">
-      <span style="font-weight: bold;">Cirkulär (med default)</span>
-      <vgr-skeleton-loader [active]="actionInProgress" [circle]="true"></vgr-skeleton-loader>
-    </div>
-    <div style="align-self:middle">
-      <span style="font-weight: bold;">width (130px) och height (130px)</span>
-      <vgr-skeleton-loader [active]="actionInProgress" width="130px" height="130px"></vgr-skeleton-loader>
-    </div>
-    <div style="align-self:middle">
-      <span style="font-weight: bold;">width (130px) och height (130px) och cirkulär</span>
-      <vgr-skeleton-loader [active]="actionInProgress" width="130px" height="130px" [circle]="true"></vgr-skeleton-loader>
-    </div>
-    <br>
-    <div style="height:50px">
-      <vgr-button (click)="actionInProgress=!actionInProgress">{{buttonText}}</vgr-button>
-    </div>
-  </div>
-  <div class="docs__api">
-    <table class="property-table ">
-      <tr>
-        <th>Namn</th>
-        <th>Beskrivning</th>
-        <th>Exempel</th>
-      </tr>
-      <tr>
-        <td>active : boolean</td>
-        <td>Anger om loader är igång eller ej. Minsta tid som loader visas är 1 sekund. Inaktivering kan därför fördröjas.</td>
-        <td>[active]="true"</td>
-      </tr>
-      <tr>
-        <td>width : string</td>
-        <td>Sätt bredden på skeleton-loader</td>
-        <td>width="130px"</td>
-      </tr>
-      <tr>
-        <td>height : string</td>
-        <td>Sätt höjden på skeleton-loader</td>
-        <td>height="130px"</td>
-      </tr>
-      <tr>
-        <td>circle : boolean</td>
-        <td>Visar loadern i ett cirkulärt format</td>
-        <td>[circle]="true"</td>
-      </tr>
+          <h3 style="margin-bottom: 10px; font-weight: bold;">Olika former</h3>
+          <div style="align-self:middle">
+            <span style="font-weight: bold;">Default</span>
+            <vgr-skeleton-loader [active]="actionInProgress"></vgr-skeleton-loader>
+          </div>
+          <div style="align-self:middle">
+            <span style="font-weight: bold;">Cirkulär (med default)</span>
+            <vgr-skeleton-loader [active]="actionInProgress" [circle]="true"></vgr-skeleton-loader>
+          </div>
+          <div style="align-self:middle">
+            <span style="font-weight: bold;">width (130px) och height (130px)</span>
+            <vgr-skeleton-loader [active]="actionInProgress" width="130px" height="130px"></vgr-skeleton-loader>
+          </div>
+          <div style="align-self:middle">
+            <span style="font-weight: bold;">width (130px) och height (130px) och cirkulär</span>
+            <vgr-skeleton-loader [active]="actionInProgress" width="130px" height="130px" [circle]="true"></vgr-skeleton-loader>
+          </div>
+          <br>
+            <div style="height:50px">
+              <vgr-button (click)="actionInProgress=!actionInProgress">{{buttonText}}</vgr-button>
+            </div>
+          </div>
+          <div class="docs__api">
+            <table class="property-table ">
+              <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Exempel</th>
+              </tr>
+              <tr>
+                <td>active : boolean</td>
+                <td>Anger om loader är igång eller ej. Minsta tid som loader visas är 1 sekund. Inaktivering kan därför fördröjas.</td>
+                <td>[active]="true"</td>
+              </tr>
+              <tr>
+                <td>width : string</td>
+                <td>Sätt bredden på skeleton-loader</td>
+                <td>width="130px"</td>
+              </tr>
+              <tr>
+                <td>height : string</td>
+                <td>Sätt höjden på skeleton-loader</td>
+                <td>height="130px"</td>
+              </tr>
+              <tr>
+                <td>circle : boolean</td>
+                <td>Visar loadern i ett cirkulärt format</td>
+                <td>[circle]="true"</td>
+              </tr>
 
-    </table>
-  </div>
-  <div class="docs__wcag">
-    <i>Under utveckling</i>
-  </div>
-</app-component-docs>
+            </table>
+          </div>
+          <div class="docs__wcag">
+            <i>Under utveckling</i>
+          </div>
+        </app-component-docs>

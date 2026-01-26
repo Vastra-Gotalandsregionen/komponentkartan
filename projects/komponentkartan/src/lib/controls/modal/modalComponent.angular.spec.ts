@@ -2,12 +2,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { FormsModule } from '@angular/forms';
-import { DebugElement, Renderer2 } from '@angular/core';
+import { DebugElement, Renderer2, provideZoneChangeDetection, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ModalPlaceholderComponent } from '../../controls/modal/modal.component';
 import { ButtonComponent } from '../../controls/button/button.component';
 import { ModalService } from '../../services/modalService';
+
+@NgModule({ providers: [ provideZoneChangeDetection() ] })
+export class ZoneChangeDetectionModule {}
+
 
 describe('ModalPlaceholderComponent', () => {
     let component: ModalPlaceholderComponent;
@@ -17,7 +21,7 @@ describe('ModalPlaceholderComponent', () => {
     beforeEach((done) => {
         modalService = new ModalService();
         TestBed.resetTestEnvironment();
-        TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+        TestBed.initTestEnvironment([ZoneChangeDetectionModule, BrowserDynamicTestingModule], platformBrowserDynamicTesting(), {
     teardown: { destroyAfterEach: false }
 });
         TestBed.configureTestingModule({

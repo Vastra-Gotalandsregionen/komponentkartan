@@ -12,90 +12,106 @@
       <strong>ja</strong>
     </p>
   </div>
-    <div class="docs__examples">
-      <div style="margin: 20px 0;"><span style="font-weight: bold">Enkelt exempel</span> - skriv in text och tryck sedan på "lägg till filter" -knappen för att filtrera resultat i listan nedan.</div>
-      <div style="margin-left: 10px; margin-bottom: 30px;">
+  <div class="docs__examples">
+    <div style="margin: 20px 0;"><span style="font-weight: bold">Enkelt exempel</span> - skriv in text och tryck sedan på "lägg till filter" -knappen för att filtrera resultat i listan nedan.</div>
+    <div style="margin-left: 10px; margin-bottom: 30px;">
+      <div style="margin-bottom: 20px">
+        <vgr-input width="130px" style="display: inline-block; " #filterInput></vgr-input>
+        <vgr-button (click)="addFilter(filterInput.value)" style="margin-left: 20px;">Lägg till filter</vgr-button>
+        <vgr-button (click)="removeAllFilters()" buttonStyle="discreet" style="margin-left: 20px;"><vgr-icon icon="trash-alt" [solid]="true"></vgr-icon><span style="margin-left: 5px;">Rensa filtrering</span></vgr-button>
+      </div>
+      @if (filterTags.length) {
         <div style="margin-bottom: 20px">
-          <vgr-input width="130px" style="display: inline-block; " #filterInput></vgr-input>
-          <vgr-button (click)="addFilter(filterInput.value)" style="margin-left: 20px;">Lägg till filter</vgr-button>
-          <vgr-button (click)="removeAllFilters()" buttonStyle="discreet" style="margin-left: 20px;"><vgr-icon icon="trash-alt" [solid]="true"></vgr-icon><span style="margin-left: 5px;">Rensa filtrering</span></vgr-button>
-        </div>
-        <div style="margin-bottom: 20px" *ngIf="filterTags.length">
           <vgr-filter-tag-group>
-            <vgr-filter-tag *ngFor="let filter of filterTags" (remove)="filter.remove(filter)" [disabled]="filter.disabled">{{filter.text}}</vgr-filter-tag>
+            @for (filter of filterTags; track filter) {
+              <vgr-filter-tag (remove)="filter.remove(filter)" [disabled]="filter.disabled">{{filter.text}}</vgr-filter-tag>
+            }
           </vgr-filter-tag-group>
         </div>
-        <ul>
-          <div *ngIf="filteredPersons.length > 0" class="list-row">
+      }
+      <ul>
+        @if (filteredPersons.length > 0) {
+          <div class="list-row">
             <div class="list-column list-header">Förnamn</div>
             <div class="list-column list-header">Efternamn</div>
           </div>
-          <li *ngFor="let value of filteredPersons">
+        }
+        @for (value of filteredPersons; track value) {
+          <li>
             <div class="list-row">
               <div class="list-column">{{value.firstName}}</div>
               <div class="list-column">{{value.surname}}</div>
             </div>
           </li>
-        </ul>
-      </div>
-      <div style="margin: 20px 0;"><span style="font-weight: bold;">Avancerat exempel</span> - Filtrera på Namn (För- eller Efternamn) samt möjlighet att filtrera på minimiålder och kön.</div>
-      <div style="margin-left: 10px;">
-        <form [formGroup]="advancedSearchForm" (ngSubmit)="advancedFilter()" novalidate>
-          <div style="margin-bottom: 20px">
-            <div style="display: flex; align-items: flex-end">
-              <div style="margin-right: 20px;">
-                <div>Namn</div>
-                <div>
-                  <vgr-input formControlName="name"></vgr-input>
-                </div>
-              </div>
-              <div style="margin-right: 20px;">
-                <div>Minimiålder</div>
-                <div>
-                  <vgr-input formControlName="minimumAge" width="130px"></vgr-input>
-                </div>
-              </div>
+        }
+      </ul>
+    </div>
+    <div style="margin: 20px 0;"><span style="font-weight: bold;">Avancerat exempel</span> - Filtrera på Namn (För- eller Efternamn) samt möjlighet att filtrera på minimiålder och kön.</div>
+    <div style="margin-left: 10px;">
+      <form [formGroup]="advancedSearchForm" (ngSubmit)="advancedFilter()" novalidate>
+        <div style="margin-bottom: 20px">
+          <div style="display: flex; align-items: flex-end">
+            <div style="margin-right: 20px;">
+              <div>Namn</div>
               <div>
-                <vgr-checkbox formControlName="women" [label]="'Kvinnor'" style="display: inline-block;"></vgr-checkbox>
-                <vgr-checkbox formControlName="men" [label]="'Män'" style="display: inline-block; margin-left: 10px;"></vgr-checkbox>
+                <vgr-input formControlName="name"></vgr-input>
               </div>
-              <vgr-button (click)="advancedFilter()" style="margin-left: 20px;">Filtrera</vgr-button>
-              <vgr-button (click)="removeAllAdvancedFilters()" buttonStyle="discreet" style="margin-left: 20px;"><vgr-icon icon="trash-alt" [solid]="true"></vgr-icon><span style="margin-left: 5px;">Rensa filtrering</span></vgr-button>
             </div>
+            <div style="margin-right: 20px;">
+              <div>Minimiålder</div>
+              <div>
+                <vgr-input formControlName="minimumAge" width="130px"></vgr-input>
+              </div>
+            </div>
+            <div>
+              <vgr-checkbox formControlName="women" [label]="'Kvinnor'" style="display: inline-block;"></vgr-checkbox>
+              <vgr-checkbox formControlName="men" [label]="'Män'" style="display: inline-block; margin-left: 10px;"></vgr-checkbox>
+            </div>
+            <vgr-button (click)="advancedFilter()" style="margin-left: 20px;">Filtrera</vgr-button>
+            <vgr-button (click)="removeAllAdvancedFilters()" buttonStyle="discreet" style="margin-left: 20px;"><vgr-icon icon="trash-alt" [solid]="true"></vgr-icon><span style="margin-left: 5px;">Rensa filtrering</span></vgr-button>
           </div>
-        </form>
-        <div style="margin-bottom: 20px" *ngIf="advancedFilterTags.length">
+        </div>
+      </form>
+      @if (advancedFilterTags.length) {
+        <div style="margin-bottom: 20px">
           <vgr-filter-tag-group>
-            <vgr-filter-tag *ngFor="let tag of advancedFilterTags" (remove)="tag.remove()">{{tag.text}}</vgr-filter-tag>
+            @for (tag of advancedFilterTags; track tag) {
+              <vgr-filter-tag (remove)="tag.remove()">{{tag.text}}</vgr-filter-tag>
+            }
           </vgr-filter-tag-group>
         </div>
-        <ul style="margin-bottom: 20px;">
-          <div *ngIf="advancedFilteredPersons.length > 0" class="list-row">
+      }
+      <ul style="margin-bottom: 20px;">
+        @if (advancedFilteredPersons.length > 0) {
+          <div class="list-row">
             <div class="list-column list-header">Förnamn</div>
             <div class="list-column list-header">Efternamn</div>
             <div class="list-column list-header">Ålder</div>
           </div>
-          <li *ngFor="let value of advancedFilteredPersons">
+        }
+        @for (value of advancedFilteredPersons; track value) {
+          <li>
             <div class="list-row">
               <div class="list-column">{{value.firstName}}</div>
               <div class="list-column">{{value.surname}}</div>
               <div class="list-column">{{value.age}}</div>
             </div>
           </li>
-        </ul>
-      </div>
+        }
+      </ul>
     </div>
-    <div class="docs__api">
-      <table class="property-table">
-        <tr>
-          <th>Namn</th>
-          <th>Beskrivning</th>
-          <th>Exempel</th>
-        </tr>
-        <tr>
-          <td>disabled: boolean</td>
-          <td>Inaktivera filter tag. Förvalt värde är
-            <code>false</code>.</td>
+  </div>
+  <div class="docs__api">
+    <table class="property-table">
+      <tr>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Exempel</th>
+      </tr>
+      <tr>
+        <td>disabled: boolean</td>
+        <td>Inaktivera filter tag. Förvalt värde är
+          <code>false</code>.</td>
           <td>[disabled]="true"</td>
         </tr>
         <tr>
@@ -103,21 +119,21 @@
           <td>Värde för
             <code>aria-label</code>. Förvalt värde är "Ta bort filtrering [text]", där [text] är text content för
             <code>&lt;vgr-filter-tag&gt;</code>.</td>
-          <td>[ariaLabel]="En alternativ beskrivning."</td>
-        </tr>
-        <tr>
-          <td>remove: EventEmitter</td>
-          <td>Event som triggas efter att animationen för bortagning av filter är klar. Bör kopplas till uppdatering av tillstånd
+            <td>[ariaLabel]="En alternativ beskrivning."</td>
+          </tr>
+          <tr>
+            <td>remove: EventEmitter</td>
+            <td>Event som triggas efter att animationen för bortagning av filter är klar. Bör kopplas till uppdatering av tillstånd
             för den bakomliggande filtreringen.</td>
-          <td>(remove)="removeFilter()"</td>
-        </tr>
-      </table>
-    </div>
-    <div class="docs__wcag">
-      <p>
-        <code>&lt;vgr-filter-tag&gt;</code> har ett intern element av typen button och har alla dess WCAG egenskaper.
-        Default sätts <code>attr.aria-label</code> till "Ta bort filtrering [text]", där [text] är content för <code>&lt;vgr-filter-tag&gt;</code>.
-        Om input variabeln [disabled] sätts till <code>true</code> sätts även <code> aria.aria-disabled</code> till <code>true</code>
-      </p>
-    </div>
-  </app-component-docs>
+            <td>(remove)="removeFilter()"</td>
+          </tr>
+        </table>
+      </div>
+      <div class="docs__wcag">
+        <p>
+          <code>&lt;vgr-filter-tag&gt;</code> har ett intern element av typen button och har alla dess WCAG egenskaper.
+          Default sätts <code>attr.aria-label</code> till "Ta bort filtrering [text]", där [text] är content för <code>&lt;vgr-filter-tag&gt;</code>.
+          Om input variabeln [disabled] sätts till <code>true</code> sätts även <code> aria.aria-disabled</code> till <code>true</code>
+        </p>
+      </div>
+    </app-component-docs>

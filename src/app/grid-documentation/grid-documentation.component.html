@@ -1,326 +1,336 @@
 <vgr-page class="no-sort">
   <vgr-page-header [title]="'Grid'">
     <br>
-    Dokumentation för vgr-grid finns på
-    <!-- github (finns inte för betaversionen)  -->
-    <!-- <a href="https://vastra-gotalandsregionen.github.io/komponentkartan-demo/grid-documentation" target="_blank">Komponentkartan demo</a> -->
+      Dokumentation för vgr-grid finns på
+      <!-- github (finns inte för betaversionen)  -->
+      <!-- <a href="https://vastra-gotalandsregionen.github.io/komponentkartan-demo/grid-documentation" target="_blank">Komponentkartan demo</a> -->
 
-    <!-- interna servern -->
-    <a href="http://vgwb0399.vgregion.se:4500/grid-documentation" target="_blank">Komponentkartan demo</a>
+      <!-- interna servern -->
+      <a href="http://vgwb0399.vgregion.se:4500/grid-documentation" target="_blank">Komponentkartan demo</a>
 
-  </vgr-page-header>
-  <vgr-page-body>
-    <vgr-grid>
-      <vgr-grid-header>
-        <vgr-grid-header-column>
-          Exempel med <code>vgr-grid</code> & <code>vgr-card</code>
-        </vgr-grid-header-column>
-      </vgr-grid-header>
-      <vgr-grid-row>
-        <vgr-grid-column>Pelle Karlssons Jourcentral</vgr-grid-column>
-        <vgr-grid-content>
-          <vgr-card>
-            <vgr-card-column>
-              <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 1'">
-                <span>Innehåll</span>
-              </vgr-card-section>
-              <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 2'">
-                <span>Innehåll</span>
-              </vgr-card-section>
-            </vgr-card-column>
-            <vgr-card-column>
-              <vgr-card-section class="card__right" [expanded]="true" [title]="'Rubrik'" [subtitle]="'Höger 1'"
-                [readonly]="false">
-                <div>Innehåll</div>
-              </vgr-card-section>
-            </vgr-card-column>
-          </vgr-card>
-        </vgr-grid-content>
-      </vgr-grid-row>
-
-    </vgr-grid>
-
-    <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true"   toggleAnimation="slow">
-      <vgr-grid-header-toolbar>
-        <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
-          <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad
-        </vgr-button>
-        <vgr-button [buttonStyle]="'discreet'" (click)="setFocusOnColumn()">Fokusera på rubriken Förnamn</vgr-button>
-        <vgr-button [buttonStyle]="'discreet'" (click)="setFocusOnRow()">Fokusera på Raden med Carola</vgr-button>
-      </vgr-grid-header-toolbar>
-      <vgr-grid-header>
-        <vgr-grid-header-column [sortKey]="'namn'" #nameColumn>Förnamn</vgr-grid-header-column>
-        <vgr-grid-header-column>Efternamn</vgr-grid-header-column>
-      </vgr-grid-header>
-      <vgr-grid-row #peopleGridRows *ngFor="let person of people" [expanded]="person.expanded"
-        (expandedChanged)="person.expanded = $event">
-        <vgr-grid-column>{{person.namn}}</vgr-grid-column>
-        <vgr-grid-column>{{person.efternamn}}</vgr-grid-column>
-        <vgr-notification *ngFor="let notification of person.notifications" [type]="notification.type">
-          {{notification.text}}
-        </vgr-notification>
-        <vgr-grid-content>
-          <div *ngIf="person.expanded">
-            <vgr-card-section  backgroundColor="#f1eadc" title="Enhet" [subtitle]="'enhetsnamn'">
-
+    </vgr-page-header>
+    <vgr-page-body>
+      <vgr-grid>
+        <vgr-grid-header>
+          <vgr-grid-header-column>
+            Exempel med <code>vgr-grid</code> & <code>vgr-card</code>
+          </vgr-grid-header-column>
+        </vgr-grid-header>
+        <vgr-grid-row>
+          <vgr-grid-column>Pelle Karlssons Jourcentral</vgr-grid-column>
+          <vgr-grid-content>
             <vgr-card>
-                <vgr-card-header>
-                  hej hej
-                </vgr-card-header>
-                <vgr-card-column>
-                  <table style="width:100%;text-align:left">
-                    <thead>
-                      <th>Kolumn 1</th>
-                      <th>Kolumn 2</th>
-                      <th>Kolumn 3</th>
-                      <th>Kolumn 4</th>
-                      <th>Kolumn 5</th>
-                      <th>Kolumn 6</th>
-                      <th>Kolumn 7</th>
-                      <th>Kolumn 8</th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Värde 1</td>
-                        <td>Värde 2</td>
-                        <td>Värde 3</td>
-                        <td>Värde 4</td>
-                        <td>Värde 5</td>
-                        <td>Värde 6</td>
-                        <td>Värde 7</td>
-                        <td>Värde 8</td>
-                      </tr>
-                      <tr>
-                        <td>Värde 1</td>
-                        <td>Värde 2</td>
-                        <td>Värde 3</td>
-                        <td>Värde 4</td>
-                        <td>Värde 5</td>
-                        <td>Värde 6</td>
-                        <td>Värde 7</td>
-                        <td>Värde 8</td>
-                      </tr>
-                      <tr>
-                        <td>Värde 1</td>
-                        <td>Värde 2</td>
-                        <td>Värde 3</td>
-                        <td>Värde 4</td>
-                        <td>Värde 5</td>
-                        <td>Värde 6</td>
-                        <td>Värde 7</td>
-                        <td>Värde 8</td>
-                      </tr>
-                      <tr>
-                        <td>Värde 1</td>
-                        <td>Värde 2</td>
-                        <td>Värde 3</td>
-                        <td>Värde 4</td>
-                        <td>Värde 5</td>
-                        <td>Värde 6</td>
-                        <td>Värde 7</td>
-                        <td>Värde 8</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </vgr-card-column>
-              </vgr-card>
-            </vgr-card-section>
+              <vgr-card-column>
+                <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 1'">
+                  <span>Innehåll</span>
+                </vgr-card-section>
+                <vgr-card-section [title]="'Rubrik'" [subtitle]="'vänster 2'">
+                  <span>Innehåll</span>
+                </vgr-card-section>
+              </vgr-card-column>
+              <vgr-card-column>
+                <vgr-card-section class="card__right" [expanded]="true" [title]="'Rubrik'" [subtitle]="'Höger 1'"
+                  [readonly]="false">
+                  <div>Innehåll</div>
+                </vgr-card-section>
+              </vgr-card-column>
+            </vgr-card>
+          </vgr-grid-content>
+        </vgr-grid-row>
 
-            <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person)">Uppdatera</vgr-button>
-            <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person, true)">Uppdatera och rensa meddelande
-            </vgr-button>
-            <vgr-button [buttonStyle]="'secondary'" (click)="deleteRow(person)">Ta bort</vgr-button>
+      </vgr-grid>
+
+      <vgr-grid (sortChanged)="sort($event)" [stickyHeader]="true"   toggleAnimation="slow">
+        <vgr-grid-header-toolbar>
+          <vgr-button [buttonStyle]="'discreet'" (click)="addRow()">
+            <vgr-icon [icon]="'plus'"></vgr-icon> Lägg till rad
+          </vgr-button>
+          <vgr-button [buttonStyle]="'discreet'" (click)="setFocusOnColumn()">Fokusera på rubriken Förnamn</vgr-button>
+          <vgr-button [buttonStyle]="'discreet'" (click)="setFocusOnRow()">Fokusera på Raden med Carola</vgr-button>
+        </vgr-grid-header-toolbar>
+        <vgr-grid-header>
+          <vgr-grid-header-column [sortKey]="'namn'" #nameColumn>Förnamn</vgr-grid-header-column>
+          <vgr-grid-header-column>Efternamn</vgr-grid-header-column>
+        </vgr-grid-header>
+        @for (person of people; track person) {
+          <vgr-grid-row #peopleGridRows [expanded]="person.expanded"
+            (expandedChanged)="person.expanded = $event">
+            <vgr-grid-column>{{person.namn}}</vgr-grid-column>
+            <vgr-grid-column>{{person.efternamn}}</vgr-grid-column>
+            @for (notification of person.notifications; track notification) {
+              <vgr-notification [type]="notification.type">
+                {{notification.text}}
+              </vgr-notification>
+            }
+            <vgr-grid-content>
+              @if (person.expanded) {
+                <div>
+                  <vgr-card-section  backgroundColor="#f1eadc" title="Enhet" [subtitle]="'enhetsnamn'">
+                    <vgr-card>
+                      <vgr-card-header>
+                        hej hej
+                      </vgr-card-header>
+                      <vgr-card-column>
+                        <table style="width:100%;text-align:left">
+                          <thead>
+                            <th>Kolumn 1</th>
+                            <th>Kolumn 2</th>
+                            <th>Kolumn 3</th>
+                            <th>Kolumn 4</th>
+                            <th>Kolumn 5</th>
+                            <th>Kolumn 6</th>
+                            <th>Kolumn 7</th>
+                            <th>Kolumn 8</th>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Värde 1</td>
+                              <td>Värde 2</td>
+                              <td>Värde 3</td>
+                              <td>Värde 4</td>
+                              <td>Värde 5</td>
+                              <td>Värde 6</td>
+                              <td>Värde 7</td>
+                              <td>Värde 8</td>
+                            </tr>
+                            <tr>
+                              <td>Värde 1</td>
+                              <td>Värde 2</td>
+                              <td>Värde 3</td>
+                              <td>Värde 4</td>
+                              <td>Värde 5</td>
+                              <td>Värde 6</td>
+                              <td>Värde 7</td>
+                              <td>Värde 8</td>
+                            </tr>
+                            <tr>
+                              <td>Värde 1</td>
+                              <td>Värde 2</td>
+                              <td>Värde 3</td>
+                              <td>Värde 4</td>
+                              <td>Värde 5</td>
+                              <td>Värde 6</td>
+                              <td>Värde 7</td>
+                              <td>Värde 8</td>
+                            </tr>
+                            <tr>
+                              <td>Värde 1</td>
+                              <td>Värde 2</td>
+                              <td>Värde 3</td>
+                              <td>Värde 4</td>
+                              <td>Värde 5</td>
+                              <td>Värde 6</td>
+                              <td>Värde 7</td>
+                              <td>Värde 8</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </vgr-card-column>
+                    </vgr-card>
+                  </vgr-card-section>
+                  <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person)">Uppdatera</vgr-button>
+                  <vgr-button [buttonStyle]="'secondary'" (click)="updateRow(person, true)">Uppdatera och rensa meddelande
+                  </vgr-button>
+                  <vgr-button [buttonStyle]="'secondary'" (click)="deleteRow(person)">Ta bort</vgr-button>
+                  <p>Pellentesque egestas viverra consequat. Phasellus mollis aliquet libero quis eleifend. Nullam at dolor
+                    interdum, interdum lacus non, rutrum nulla. Phasellus laoreet quam quis justo mattis, sit amet vehicula diam
+                    ullamcorper. Nulla a quam id nibh aliquam accumsan at ut lectus. Nullam dictum dolor vel scelerisque tempus.
+                    Phasellus vel nisi justo. Praesent blandit ultricies lacus, ac ornare leo hendrerit ullamcorper. Etiam ipsum
+                    eros, faucibus luctus hendrerit sit amet, bibendum in felis. Phasellus imperdiet, ante sed viverra
+                    tincidunt, ante quam dictum urna, et condimentum lacus neque nec ligula. Nullam aliquet vel eros vitae
+                  lacinia.</p>
+                  <div style="margin-top: 20px;">
+                    <vgr-dropdown-select>
+                      <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
+                      <vgr-dropdown-item>Banan</vgr-dropdown-item>
+                      <vgr-dropdown-item>Citron</vgr-dropdown-item>
+                    </vgr-dropdown-select>
+                  </div>
+                </div>
+              }
+            </vgr-grid-content>
+          </vgr-grid-row>
+        }
+      </vgr-grid>
+
+      <vgr-grid (sortChanged)="sort2($event)" (pageChanged)="onPageChanged($event)" [pages]="pageCount"
+        [toggleAnimation]="'none'" [activePage]="activePage" [stickyHeader]="true" [showLoader]="loading">
+        <vgr-grid-header-toolbar>
+          <div style="display: flex; align-items: center; height: 30px;">
+            <div style="margin-right: 10px;">Antal: {{ people2.length }}</div>
+            <div style="margin-right: 10px;">Grid med stickyHeader, ingen animering och loader. Belopp är högerställd och
+            Status är centrerad.</div>
+            @if (anyIsChecked) {
+              <vgr-button [buttonStyle]="'discreet'" (click)="print()">
+                <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
+              </vgr-button>
+            }
+            @if (anyIsChecked) {
+              <vgr-button [buttonStyle]="'discreet'" (click)="remove()">
+                <vgr-icon [icon]="'trash'" style="margin-right: 7px;"></vgr-icon><span>Ta bort</span>
+              </vgr-button>
+            }
+          </div>
+        </vgr-grid-header-toolbar>
+        <vgr-grid-header>
+          <vgr-grid-header-column [width]="100" [align]="'center'">
+            <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
+            <vgr-icon color="text" [icon]="'caret-up'" size="sm"></vgr-icon>
+          </vgr-grid-header-column>
+          <vgr-grid-header-column [width]="100" sortKey="fornamn">Förnamn</vgr-grid-header-column>
+          <vgr-grid-header-column [width]="200" sortKey="efternamn">Efternamn</vgr-grid-header-column>
+          <vgr-grid-header-column [width]="100" [align]="'right'">Belopp</vgr-grid-header-column>
+          <vgr-grid-header-column [width]="100" sortKey="status" [align]="'center'">Status</vgr-grid-header-column>
+        </vgr-grid-header>
+        @for (person of paginatedPeople; track person) {
+          <vgr-grid-row>
+            <vgr-grid-column [width]="100" [align]="'center'">
+              <vgr-checkbox [checked]="person.checked" (checkedChanged)="toggleChecked(person)"></vgr-checkbox>
+            </vgr-grid-column>
+            <vgr-grid-column [width]="100">{{person.fornamn}}</vgr-grid-column>
+            <vgr-grid-column [width]="200">{{person.efternamn}}</vgr-grid-column>
+            <vgr-grid-column [width]="100" [align]="'right'">{{person.belopp}}</vgr-grid-column>
+            <vgr-grid-column [width]="100" [align]="'center'">{{person.status}}</vgr-grid-column>
+            <vgr-grid-content>
+              <p>
+                Löksås ipsum så äng hav där både dock, både bland mot från upprätthållande sista, samtidigt ordningens dimma
+                och nu erfarenheter.
+                Är kan där och söka vid annat, där tidigare är som åker sällan det, räv helt precis ordningens omfångsrik.
+                Sjö oss där olika tre bäckasiner så när, faktor annat kom ska kanske därmed, häst tid tre äng kan dunge.
+              </p>
+            </vgr-grid-content>
+          </vgr-grid-row>
+        }
+      </vgr-grid>
+
+      <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false" [zebraLayout]="true">
+        <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = !expanded0">
+          <vgr-grid-column width="23">Grid utan rubriker och snabb animeringen</vgr-grid-column>
+          <vgr-grid-content>Row content</vgr-grid-content>
+        </vgr-grid-row>
+        <vgr-grid-row [expanded]="expanded1" (expandedChanged)="expanded1 = !expanded1">
+          <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
+          <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+          <vgr-grid-column width="3"></vgr-grid-column>
+          <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+          <vgr-grid-column width="5"></vgr-grid-column>
+          <vgr-grid-content>Row content</vgr-grid-content>
+          <vgr-notification [type]="'error-secondary'">
+            <vgr-icon [icon]="'star'" [color]="'error'" [solid]="true"></vgr-icon>
+            En specialikon
+          </vgr-notification>
+        </vgr-grid-row>
+        <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = !expanded2">
+          <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
+          <vgr-grid-column width="3">-980,87</vgr-grid-column>
+          <vgr-grid-column width="3"></vgr-grid-column>
+          <vgr-grid-column width="2">Godkänd</vgr-grid-column>
+          <vgr-grid-column width="5"></vgr-grid-column>
+          <vgr-notification [type]="'secondary'">
+            <vgr-icon [icon]="'star'" [color]="'disabled'"></vgr-icon>
+            En specialikon
+          </vgr-notification>
+        </vgr-grid-row>
+        <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = !expanded2">
+          <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
+          <vgr-grid-column width="3">-980,87</vgr-grid-column>
+          <vgr-grid-column width="3"></vgr-grid-column>
+          <vgr-grid-column width="2">Godkänd</vgr-grid-column>
+          <vgr-grid-column width="5"></vgr-grid-column>
+          <vgr-notification [type]="'error'" [noIcon]="true">
+            <vgr-icon [icon]="'star'" [color]="'disabled'"></vgr-icon>
+            Typ error med specialikon
+          </vgr-notification>
+        </vgr-grid-row>
+        <vgr-grid-row [expanded]="expanded3" (expandedChanged)="expanded3 = !expanded3">
+          <vgr-grid-column width="10">Svens klinik</vgr-grid-column>
+          <vgr-grid-column width="3">123 456,98</vgr-grid-column>
+          <vgr-grid-column width="3"></vgr-grid-column>
+          <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+          <vgr-grid-column width="5"></vgr-grid-column>
+          <vgr-notification [type]="'secondary'">
+            <vgr-icon [icon]="'coffee'"></vgr-icon>
+            Gillar kaffe
+          </vgr-notification>
+          <vgr-grid-content>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet nunc sit amet massa dignissim, non
+              iaculis tortor placerat. Suspendisse pellentesque nibh eu augue auctor, eget tempor eros porttitor. Sed
+              mollis, velit sed hendrerit tempor, turpis est blandit nibh, sit amet pharetra turpis leo nec felis. Class
+              aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget
+              mauris ultricies lorem consectetur ullamcorper sit amet eget felis. Donec posuere aliquam aliquam. Quisque
+              molestie in lacus id condimentum. Nulla nec urna metus. Sed a risus turpis. In quis aliquet mi, id aliquet
+              magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam pretium ipsum odio, non
+            scelerisque odio auctor eu. Donec ultrices velit a tempus pharetra.</p>
+
             <p>Pellentesque egestas viverra consequat. Phasellus mollis aliquet libero quis eleifend. Nullam at dolor
               interdum, interdum lacus non, rutrum nulla. Phasellus laoreet quam quis justo mattis, sit amet vehicula diam
               ullamcorper. Nulla a quam id nibh aliquam accumsan at ut lectus. Nullam dictum dolor vel scelerisque tempus.
               Phasellus vel nisi justo. Praesent blandit ultricies lacus, ac ornare leo hendrerit ullamcorper. Etiam ipsum
               eros, faucibus luctus hendrerit sit amet, bibendum in felis. Phasellus imperdiet, ante sed viverra
               tincidunt, ante quam dictum urna, et condimentum lacus neque nec ligula. Nullam aliquet vel eros vitae
-              lacinia.</p>
-            <div style="margin-top: 20px;">
-              <vgr-dropdown-select>
-                <vgr-dropdown-item>Apelsin</vgr-dropdown-item>
-                <vgr-dropdown-item>Banan</vgr-dropdown-item>
-                <vgr-dropdown-item>Citron</vgr-dropdown-item>
-              </vgr-dropdown-select>
-            </div>
-          </div>
-        </vgr-grid-content>
-      </vgr-grid-row>
-    </vgr-grid>
-
-    <vgr-grid (sortChanged)="sort2($event)" (pageChanged)="onPageChanged($event)" [pages]="pageCount"
-      [toggleAnimation]="'none'" [activePage]="activePage" [stickyHeader]="true" [showLoader]="loading">
-      <vgr-grid-header-toolbar>
-        <div style="display: flex; align-items: center; height: 30px;">
-          <div style="margin-right: 10px;">Antal: {{ people2.length }}</div>
-          <div style="margin-right: 10px;">Grid med stickyHeader, ingen animering och loader. Belopp är högerställd och
-            Status är centrerad.</div>
-          <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="print()">
-            <vgr-icon [icon]="'print'" style="margin-right: 7px;"></vgr-icon><span>Skriv ut</span>
-          </vgr-button>
-          <vgr-button *ngIf="anyIsChecked" [buttonStyle]="'discreet'" (click)="remove()">
-            <vgr-icon [icon]="'trash'" style="margin-right: 7px;"></vgr-icon><span>Ta bort</span>
-          </vgr-button>
-        </div>
-      </vgr-grid-header-toolbar>
-      <vgr-grid-header>
-        <vgr-grid-header-column [width]="100" [align]="'center'">
-          <vgr-checkbox [checked]="allChecked" (checkedChanged)="setAllChecked($event)"></vgr-checkbox>
-          <vgr-icon color="text" [icon]="'caret-up'" size="sm"></vgr-icon>
-        </vgr-grid-header-column>
-        <vgr-grid-header-column [width]="100" sortKey="fornamn">Förnamn</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="200" sortKey="efternamn">Efternamn</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="100" [align]="'right'">Belopp</vgr-grid-header-column>
-        <vgr-grid-header-column [width]="100" sortKey="status" [align]="'center'">Status</vgr-grid-header-column>
-      </vgr-grid-header>
-      <vgr-grid-row *ngFor="let person of paginatedPeople">
-        <vgr-grid-column [width]="100" [align]="'center'">
-          <vgr-checkbox [checked]="person.checked" (checkedChanged)="toggleChecked(person)"></vgr-checkbox>
-        </vgr-grid-column>
-        <vgr-grid-column [width]="100">{{person.fornamn}}</vgr-grid-column>
-        <vgr-grid-column [width]="200">{{person.efternamn}}</vgr-grid-column>
-        <vgr-grid-column [width]="100" [align]="'right'">{{person.belopp}}</vgr-grid-column>
-        <vgr-grid-column [width]="100" [align]="'center'">{{person.status}}</vgr-grid-column>
-        <vgr-grid-content>
-          <p>
-            Löksås ipsum så äng hav där både dock, både bland mot från upprätthållande sista, samtidigt ordningens dimma
-            och nu erfarenheter.
-            Är kan där och söka vid annat, där tidigare är som åker sällan det, räv helt precis ordningens omfångsrik.
-            Sjö oss där olika tre bäckasiner så när, faktor annat kom ska kanske därmed, häst tid tre äng kan dunge.
-          </p>
-        </vgr-grid-content>
-      </vgr-grid-row>
-    </vgr-grid>
-
-    <vgr-grid [toggleAnimation]="'fast'" [stickyHeader]="false" [zebraLayout]="true">
-      <vgr-grid-row [expanded]="expanded0" (expandedChanged)="expanded0 = !expanded0">
-        <vgr-grid-column width="23">Grid utan rubriker och snabb animeringen</vgr-grid-column>
-        <vgr-grid-content>Row content</vgr-grid-content>
-      </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded1" (expandedChanged)="expanded1 = !expanded1">
-        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
-        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
-        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-grid-content>Row content</vgr-grid-content>
-        <vgr-notification [type]="'error-secondary'">
-          <vgr-icon [icon]="'star'" [color]="'error'" [solid]="true"></vgr-icon>
-          En specialikon
-        </vgr-notification>
-      </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = !expanded2">
-        <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
-        <vgr-grid-column width="3">-980,87</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
-        <vgr-grid-column width="2">Godkänd</vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification [type]="'secondary'">
-          <vgr-icon [icon]="'star'" [color]="'disabled'"></vgr-icon>
-          En specialikon
-        </vgr-notification>
-      </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded2" (expandedChanged)="expanded2 = !expanded2">
-        <vgr-grid-column width="10">En annan klinik</vgr-grid-column>
-        <vgr-grid-column width="3">-980,87</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
-        <vgr-grid-column width="2">Godkänd</vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification [type]="'error'" [noIcon]="true">
-          <vgr-icon [icon]="'star'" [color]="'disabled'"></vgr-icon>
-          Typ error med specialikon
-        </vgr-notification>
-      </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded3" (expandedChanged)="expanded3 = !expanded3">
-        <vgr-grid-column width="10">Svens klinik</vgr-grid-column>
-        <vgr-grid-column width="3">123 456,98</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
-        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification [type]="'secondary'">
-          <vgr-icon [icon]="'coffee'"></vgr-icon>
-          Gillar kaffe
-        </vgr-notification>
-        <vgr-grid-content>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet nunc sit amet massa dignissim, non
-            iaculis tortor placerat. Suspendisse pellentesque nibh eu augue auctor, eget tempor eros porttitor. Sed
-            mollis, velit sed hendrerit tempor, turpis est blandit nibh, sit amet pharetra turpis leo nec felis. Class
-            aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget
-            mauris ultricies lorem consectetur ullamcorper sit amet eget felis. Donec posuere aliquam aliquam. Quisque
-            molestie in lacus id condimentum. Nulla nec urna metus. Sed a risus turpis. In quis aliquet mi, id aliquet
-            magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam pretium ipsum odio, non
-            scelerisque odio auctor eu. Donec ultrices velit a tempus pharetra.</p>
-
-          <p>Pellentesque egestas viverra consequat. Phasellus mollis aliquet libero quis eleifend. Nullam at dolor
-            interdum, interdum lacus non, rutrum nulla. Phasellus laoreet quam quis justo mattis, sit amet vehicula diam
-            ullamcorper. Nulla a quam id nibh aliquam accumsan at ut lectus. Nullam dictum dolor vel scelerisque tempus.
-            Phasellus vel nisi justo. Praesent blandit ultricies lacus, ac ornare leo hendrerit ullamcorper. Etiam ipsum
-            eros, faucibus luctus hendrerit sit amet, bibendum in felis. Phasellus imperdiet, ante sed viverra
-            tincidunt, ante quam dictum urna, et condimentum lacus neque nec ligula. Nullam aliquet vel eros vitae
             lacinia.</p>
-        </vgr-grid-content>
-      </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded4" (expandedChanged)="expanded4 = !expanded4">
-        <vgr-grid-column width="10">Klinik (utan innehåll)</vgr-grid-column>
-        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
-        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-      </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded5" (expandedChanged)="expanded5 = !expanded5">
-        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
-        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
-        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-grid-content>Row content</vgr-grid-content>
-      </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded6" (expandedChanged)="expanded6 = !expanded6">
-        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
-        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
-        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification [type]="'comment'">
-          <div class="text" [ngClass]="{'text--short': !expanded6}">
-            En lång kommentar ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet nunc sit amet
-            massa dignissim, non
-            iaculis tortor placerat. Suspendisse pellentesque nibh eu augue auctor, eget tempor eros porttitor. Sed
-            mollis, velit sed hendrerit tempor, turpis est blandit nibh, sit amet pharetra turpis leo nec felis. Class
-            aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget
-            mauris ultricies lorem consectetur ullamcorper sit amet eget felis. Donec posuere aliquam aliquam. Quisque
-          </div>
-        </vgr-notification>
-        <vgr-grid-content>Row content</vgr-grid-content>
-      </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded7" (expandedChanged)="expanded7 = !expanded7">
-        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
-        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
-        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-grid-content></vgr-grid-content>
-      </vgr-grid-row>
-      <vgr-grid-row [expanded]="expanded8" (expandedChanged)="expanded8 = !expanded8">
-        <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
-        <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
-        <vgr-grid-column width="3"></vgr-grid-column>
-        <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
-        <vgr-grid-column width="5"></vgr-grid-column>
-        <vgr-notification [type]="'comment'">
-          En kommentar
-        </vgr-notification>
-        <vgr-grid-content>Row content</vgr-grid-content>
-      </vgr-grid-row>
-    </vgr-grid>
-  </vgr-page-body>
-</vgr-page>
+          </vgr-grid-content>
+        </vgr-grid-row>
+        <vgr-grid-row [expanded]="expanded4" (expandedChanged)="expanded4 = !expanded4">
+          <vgr-grid-column width="10">Klinik (utan innehåll)</vgr-grid-column>
+          <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+          <vgr-grid-column width="3"></vgr-grid-column>
+          <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+          <vgr-grid-column width="5"></vgr-grid-column>
+        </vgr-grid-row>
+        <vgr-grid-row [expanded]="expanded5" (expandedChanged)="expanded5 = !expanded5">
+          <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
+          <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+          <vgr-grid-column width="3"></vgr-grid-column>
+          <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+          <vgr-grid-column width="5"></vgr-grid-column>
+          <vgr-grid-content>Row content</vgr-grid-content>
+        </vgr-grid-row>
+        <vgr-grid-row [expanded]="expanded6" (expandedChanged)="expanded6 = !expanded6">
+          <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
+          <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+          <vgr-grid-column width="3"></vgr-grid-column>
+          <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+          <vgr-grid-column width="5"></vgr-grid-column>
+          <vgr-notification [type]="'comment'">
+            <div class="text" [ngClass]="{'text--short': !expanded6}">
+              En lång kommentar ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet nunc sit amet
+              massa dignissim, non
+              iaculis tortor placerat. Suspendisse pellentesque nibh eu augue auctor, eget tempor eros porttitor. Sed
+              mollis, velit sed hendrerit tempor, turpis est blandit nibh, sit amet pharetra turpis leo nec felis. Class
+              aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget
+              mauris ultricies lorem consectetur ullamcorper sit amet eget felis. Donec posuere aliquam aliquam. Quisque
+            </div>
+          </vgr-notification>
+          <vgr-grid-content>Row content</vgr-grid-content>
+        </vgr-grid-row>
+        <vgr-grid-row [expanded]="expanded7" (expandedChanged)="expanded7 = !expanded7">
+          <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
+          <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+          <vgr-grid-column width="3"></vgr-grid-column>
+          <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+          <vgr-grid-column width="5"></vgr-grid-column>
+          <vgr-grid-content></vgr-grid-content>
+        </vgr-grid-row>
+        <vgr-grid-row [expanded]="expanded8" (expandedChanged)="expanded8 = !expanded8">
+          <vgr-grid-column width="10">Tors klinik</vgr-grid-column>
+          <vgr-grid-column width="3">-131 980,87</vgr-grid-column>
+          <vgr-grid-column width="3"></vgr-grid-column>
+          <vgr-grid-column width="2">Skall godkännas</vgr-grid-column>
+          <vgr-grid-column width="5"></vgr-grid-column>
+          <vgr-notification [type]="'comment'">
+            En kommentar
+          </vgr-notification>
+          <vgr-grid-content>Row content</vgr-grid-content>
+        </vgr-grid-row>
+      </vgr-grid>
+    </vgr-page-body>
+  </vgr-page>
 
-<vgr-modal id="modal1">
-  <vgr-modal-header>Vill du lämna?</vgr-modal-header>
-  <vgr-modal-footer>
-    <vgr-button [buttonStyle]="'secondary'" (click)="lamnaPage();">Ja</vgr-button>
-    <vgr-button [buttonStyle]="'secondary'" (click)="stannaPaPage();">Nej</vgr-button>
-  </vgr-modal-footer>
-</vgr-modal>
+  <vgr-modal id="modal1">
+    <vgr-modal-header>Vill du lämna?</vgr-modal-header>
+    <vgr-modal-footer>
+      <vgr-button [buttonStyle]="'secondary'" (click)="lamnaPage();">Ja</vgr-button>
+      <vgr-button [buttonStyle]="'secondary'" (click)="stannaPaPage();">Nej</vgr-button>
+    </vgr-modal-footer>
+  </vgr-modal>

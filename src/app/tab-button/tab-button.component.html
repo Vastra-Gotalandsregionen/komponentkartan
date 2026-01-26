@@ -1,27 +1,29 @@
 
 <vgr-page class="no-sort">
-    <vgr-page-header [title]="'Tab button'">
-      <vgr-checkbox [checked]="centrera" (checkedChanged)="centrera = !centrera" [label]="'Centrera tabbar i header'"></vgr-checkbox>
-      <vgr-tab-button-group [width]="'550px'" [id]="'sidor'" [alignCenter]="centrera" >
+  <vgr-page-header [title]="'Tab button'">
+    <vgr-checkbox [checked]="centrera" (checkedChanged)="centrera = !centrera" [label]="'Centrera tabbar i header'"></vgr-checkbox>
+    <vgr-tab-button-group [width]="'550px'" [id]="'sidor'" [alignCenter]="centrera" >
 
 
-        <vgr-tab-button *ngFor="let page of pages" [width]="'110px'" [active]="page.active"  [tabId]="page.text" (selectedChanged)="navigate(page.text)" >{{page.text}}</vgr-tab-button>
-        <vgr-tab-button   [disabled]="true">Disabled tab button</vgr-tab-button>
-      </vgr-tab-button-group>
+      @for (page of pages; track page) {
+        <vgr-tab-button [width]="'110px'" [active]="page.active"  [tabId]="page.text" (selectedChanged)="navigate(page.text)" >{{page.text}}</vgr-tab-button>
+      }
+      <vgr-tab-button   [disabled]="true">Disabled tab button</vgr-tab-button>
+    </vgr-tab-button-group>
 
 
-    </vgr-page-header>
-    <vgr-page-body>
-      <!-- Components before-->
+  </vgr-page-header>
+  <vgr-page-body>
+    <!-- Components before-->
 
-      <router-outlet></router-outlet>
-    </vgr-page-body>
-  </vgr-page>
+    <router-outlet></router-outlet>
+  </vgr-page-body>
+</vgr-page>
 
-  <vgr-modal id="modal1">
-    <vgr-modal-header>Vill du lämna?</vgr-modal-header>
-    <vgr-modal-footer>
-      <vgr-button [buttonStyle]="'secondary'" (click)="lamnaTab();">Ja</vgr-button>
-      <vgr-button [buttonStyle]="'secondary'" (click)="stannaPaTab();">Nej</vgr-button>
-    </vgr-modal-footer>
-  </vgr-modal>
+<vgr-modal id="modal1">
+  <vgr-modal-header>Vill du lämna?</vgr-modal-header>
+  <vgr-modal-footer>
+    <vgr-button [buttonStyle]="'secondary'" (click)="lamnaTab();">Ja</vgr-button>
+    <vgr-button [buttonStyle]="'secondary'" (click)="stannaPaTab();">Nej</vgr-button>
+  </vgr-modal-footer>
+</vgr-modal>

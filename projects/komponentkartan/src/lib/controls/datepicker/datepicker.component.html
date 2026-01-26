@@ -8,165 +8,204 @@
       [attr.aria-disabled]="disabled"
       [attr.aria-readonly]="readonly">
 
-       <!-- Om datepicker inte är readonly -->
-      <div *ngIf="!readonly" class="datepicker__header"
-        [ngClass]="{'datepicker__header--focus': headerHasFocus}"
-        (focusin)="onHeaderFocus()"
-        (focusout)="onHeaderBlur()"
-        (keydown)="onHeaderKeydown($event)"
-        (mousedown)="onMouseDownClick()"
-        (click)="onHeaderClick()" >
+      <!-- Om datepicker inte är readonly -->
+      @if (!readonly) {
+        <div class="datepicker__header"
+          [ngClass]="{'datepicker__header--focus': headerHasFocus}"
+          (focusin)="onHeaderFocus()"
+          (focusout)="onHeaderBlur()"
+          (keydown)="onHeaderKeydown($event)"
+          (mousedown)="onMouseDownClick()"
+          (click)="onHeaderClick()" >
+          <!-- Om Textboxen inte tillåter att man skriver datum disabled || errorActive  ? -1 : 0-->
+          @if (!allowText) {
+            <div #headerLabel tabindex="0" role="button"
+              aria-haspopup="grid"
+              [attr.aria-invalid]="errorActive"
+              [attr.id]="labelId"
+              [attr.aria-disabled]="disabled"
+              [attr.aria-expanded]="expanded"
+              [attr.aria-describedby]="elementId">
+              <input class="datepicker__header__input" [disabled]="disabled" [placeholder]="disabled ? '' : noSelectedDateLabel" readonly="readonly"
+                [tabindex]="-1" [value]="label" >
+                <span class="screenreader_only" aria-disabled="true">{{label}}</span>
+              </div>
+            }
+            <!-- Om Textboxen tillåter att man skriver datum -->
+            @if (allowText) {
+              <div #headerInputDiv [attr.aria-describedby]="elementId"
+                tabindex="{{disabled ? 0 : -1}}" role="textbox" [attr.aria-disabled]="disabled" >
+                <input #headerInput class="datepicker__header__input"
+                  tabindex="{{disabled ? -1 : 0}}"
+                  [ngClass]="{'datepicker--transparent': transparent }"
+                  [placeholder]="disabled ? '' : inputPlaceholder"
+                  aria-haspopup="grid"
+                  [attr.id]="labelId"
+                  [attr.aria-expanded]="expanded"
+                  [value]="label"
+                  (change)="parseSelectedDate($event.target.value)"
+                  [disabled]="disabled"
+                  [attr.aria-invalid]="errorActive"
+                  (keydown)="onHeaderInputKeydown($event)"
+                  >
+                  <span class="screenreader_only" aria-disabled="true">{{label}}</span>
+                </div>
+              }
+              <div class="datepicker__header__button">
+                <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'"></vgr-icon>
+              </div>
+            </div>
+          }
+          <!-- Om datepicker är readonly -->
+          @if (readonly) {
+            <div #readOnlyHeader class="datepicker__readonly-header" tabindex="0" aria-readonly="true">
+              @if (selectedDate) {
+                <span>{{selectedDate | date:labelDateFormat}}</span>
+              }
+              @if (!selectedDate) {
+                <span>&nbsp;</span>
+              }
+            </div>
+          }
 
-        <!-- Om Textboxen inte tillåter att man skriver datum disabled || errorActive  ? -1 : 0-->
-        <div #headerLabel *ngIf="!allowText" tabindex="0" role="button"
-          aria-haspopup="grid"
-          [attr.aria-invalid]="errorActive"
-          [attr.id]="labelId"
-          [attr.aria-disabled]="disabled"
-          [attr.aria-expanded]="expanded"
-          [attr.aria-describedby]="elementId">
-          <input class="datepicker__header__input" [disabled]="disabled" [placeholder]="disabled ? '' : noSelectedDateLabel" readonly="readonly"
-          [tabindex]="-1" [value]="label" >
-          <span class="screenreader_only" aria-disabled="true">{{label}}</span>
+          <!-- kalender grid, expanderad -->
+          @if (expanded) {
+            <div #calendar class="datepicker__calendar noselect" tabindex="0"
+              (keydown)="onCalendarKeydown($event)">
+              @if (zoomedToDays) {
+                <div>
+                  <div class="datepicker__calendar__header">
+                    <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-left"
+                      (click)="days.previous()">
+                      <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+                    </div>
+                    <div class="datepicker__calendar__header__date" (click)="days.zoomOut()">
+                    {{days.date | date:'MMMM yyyy'}}</div>
+                    <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-right"
+                      (click)="days.next()">
+                      <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+                    </div>
+                  </div>
+                  <div class="datepicker__calendar__body">
+                    <table class="datepicker__calendar__body__days" role="grid" [attr.aria-labelledby]="labelId">
+                      <tr>
+                        <td role="columnheader">
+                          <div>Må</div>
+                        </td>
+                        <td role="columnheader">
+                          <div>Ti</div>
+                        </td>
+                        <td role="columnheader">
+                          <div>On</div>
+                        </td>
+                        <td role="columnheader">
+                          <div>To</div>
+                        </td>
+                        <td role="columnheader">
+                          <div>Fr</div>
+                        </td>
+                        <td role="columnheader">
+                          <div>Lö</div>
+                        </td>
+                        <td role="columnheader">
+                          <div>Sö</div>
+                        </td>
+                      </tr>
+                      @for (row of days.items; track row) {
+                        <tr>
+                          @for (item of row; track item) {
+                            <td>
+                              @if (item) {
+                                <vgr-datepicker-item [type]="'day'" [date]="item.date" [selected]="item.selected"
+                                [disabled]="item.disabled" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+                              }
+                            </td>
+                          }
+                        </tr>
+                      }
+                    </table>
+                  </div>
+                </div>
+              }
+              @if (zoomedToMonths) {
+                <div>
+                  <div class="datepicker__calendar__header">
+                    <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-left"
+                      (click)="months.previous()">
+                      <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+                    </div>
+                    <div class="datepicker__calendar__header__date" (click)="months.zoomOut()">{{months.date | date:'yyyy'}}
+                    </div>
+                    <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-right"
+                      (click)="months.next()">
+                      <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+                    </div>
+                  </div>
+                  <div class="datepicker__calendar__body">
+                    <table class="datepicker__calendar__body__months" role="grid" [attr.aria-labelledby]="labelId">
+                      @for (row of months.items; track row) {
+                        <tr>
+                          @for (item of row; track item) {
+                            <td>
+                              <vgr-datepicker-item [type]="'month'" [date]="item.date" [selected]="item.selected"
+                              [disabled]="item.disabled" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+                            </td>
+                          }
+                        </tr>
+                      }
+                    </table>
+                  </div>
+                </div>
+              }
+              @if (zoomedToYears) {
+                <div>
+                  <div class="datepicker__calendar__header">
+                    <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-left"
+                      (click)="years.previous()">
+                      <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
+                    </div>
+                    <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-right"
+                      (click)="years.next()">
+                      <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
+                    </div>
+                  </div>
+                  <div class="datepicker__calendar__body">
+                    <table class="datepicker__calendar__body__years" role="grid" [attr.aria-labelledby]="labelId">
+                      @for (row of years.items; track row) {
+                        <tr>
+                          @for (item of row; track item) {
+                            <td>
+                              <vgr-datepicker-item [type]="'year'" [date]="item.date" [selected]="item.selected"
+                              [disabled]="item.disabled" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
+                            </td>
+                          }
+                        </tr>
+                      }
+                    </table>
+                  </div>
+                </div>
+              }
+            </div>
+          }
         </div>
-
-        <!-- Om Textboxen tillåter att man skriver datum -->
-        <div #headerInputDiv *ngIf="allowText" [attr.aria-describedby]="elementId"
-        tabindex="{{disabled ? 0 : -1}}" role="textbox" [attr.aria-disabled]="disabled" >
-          <input #headerInput class="datepicker__header__input"
-            tabindex="{{disabled ? -1 : 0}}"
-            [ngClass]="{'datepicker--transparent': transparent }"
-            [placeholder]="disabled ? '' : inputPlaceholder"
-            aria-haspopup="grid"
-            [attr.id]="labelId"
-            [attr.aria-expanded]="expanded"
-            [value]="label"
-            (change)="parseSelectedDate($event.target.value)"
-            [disabled]="disabled"
-            [attr.aria-invalid]="errorActive"
-            (keydown)="onHeaderInputKeydown($event)"
-            >
-            <span class="screenreader_only" aria-disabled="true">{{label}}</span>
-        </div>
-        <div class="datepicker__header__button">
-          <vgr-icon [icon]="'calendar-alt'" [solid]="false" [color]="'light'"></vgr-icon>
-        </div>
-      </div>
-       <!-- Om datepicker är readonly -->
-      <div *ngIf="readonly" #readOnlyHeader class="datepicker__readonly-header" tabindex="0" aria-readonly="true">
-        <span *ngIf="selectedDate">{{selectedDate | date:labelDateFormat}}</span>
-        <span *ngIf="!selectedDate">&nbsp;</span>
-      </div>
-
-       <!-- kalender grid, expanderad -->
-      <div #calendar *ngIf="expanded" class="datepicker__calendar noselect" tabindex="0"
-
-        (keydown)="onCalendarKeydown($event)">
-        <div *ngIf="zoomedToDays">
-          <div class="datepicker__calendar__header">
-            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-left"
-              (click)="days.previous()">
-              <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
-            </div>
-            <div class="datepicker__calendar__header__date" (click)="days.zoomOut()">
-              {{days.date | date:'MMMM yyyy'}}</div>
-            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-right"
-              (click)="days.next()">
-              <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
-            </div>
+        <!-- ParseError har alltid företräde till om det går fel, visar endast 1 fel åt gången -->
+        @if (parseError) {
+          <div  [attr.id]="elementId" class="validation__status" title="{{parseErrorMessage}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
+            <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
+            <div class="validation__status__message">{{parseErrorMessage}}</div>
           </div>
-          <div class="datepicker__calendar__body">
-            <table class="datepicker__calendar__body__days" role="grid" [attr.aria-labelledby]="labelId">
-              <tr>
-                <td role="columnheader">
-                  <div>Må</div>
-                </td>
-                <td role="columnheader">
-                  <div>Ti</div>
-                </td>
-                <td role="columnheader">
-                  <div>On</div>
-                </td>
-                <td role="columnheader">
-                  <div>To</div>
-                </td>
-                <td role="columnheader">
-                  <div>Fr</div>
-                </td>
-                <td role="columnheader">
-                  <div>Lö</div>
-                </td>
-                <td role="columnheader">
-                  <div>Sö</div>
-                </td>
-              </tr>
-              <tr *ngFor="let row of days.items">
-                <td *ngFor="let item of row">
-                  <vgr-datepicker-item *ngIf="item" [type]="'day'" [date]="item.date" [selected]="item.selected"
-                    [disabled]="item.disabled" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
-                </td>
-              </tr>
-            </table>
+        }
+        @if (formControl?.errors && !parseError) {
+          <div  [attr.id]="elementId" class="validation__status"
+            title="{{errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
+            <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
+            @if (formControl) {
+              <div class="validation__status__message">{{errorMessage | errorMessage :  formControl?.errors : getLabelFromId() : true}}</div>
+            }
+            @if (!formControl) {
+              <div class="validation__status__message">{{errorMessage + 'hopp'}}</div>
+            }
           </div>
-        </div>
-        <div *ngIf="zoomedToMonths">
-          <div class="datepicker__calendar__header">
-            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-left"
-              (click)="months.previous()">
-              <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
-            </div>
-            <div class="datepicker__calendar__header__date" (click)="months.zoomOut()">{{months.date | date:'yyyy'}}
-            </div>
-            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-right"
-              (click)="months.next()">
-              <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
-            </div>
-          </div>
-          <div class="datepicker__calendar__body">
-            <table class="datepicker__calendar__body__months" role="grid" [attr.aria-labelledby]="labelId">
-              <tr *ngFor="let row of months.items">
-                <td *ngFor="let item of row">
-                  <vgr-datepicker-item [type]="'month'" [date]="item.date" [selected]="item.selected"
-                    [disabled]="item.disabled" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-        <div *ngIf="zoomedToYears">
-          <div class="datepicker__calendar__header">
-            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-left"
-              (click)="years.previous()">
-              <vgr-icon [icon]="'chevron-left'" [color]="'light'"></vgr-icon>
-            </div>
-            <div class="datepicker__calendar__header__chevron datepicker__calendar__header__chevron-right"
-              (click)="years.next()">
-              <vgr-icon [icon]="'chevron-right'" [color]="'light'"></vgr-icon>
-            </div>
-          </div>
-          <div class="datepicker__calendar__body">
-            <table class="datepicker__calendar__body__years" role="grid" [attr.aria-labelledby]="labelId">
-              <tr *ngFor="let row of years.items">
-                <td *ngFor="let item of row">
-                  <vgr-datepicker-item [type]="'year'" [date]="item.date" [selected]="item.selected"
-                    [disabled]="item.disabled" [isMinZoom]="item.isMinZoom"></vgr-datepicker-item>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
+        }
       </div>
     </div>
-    <!-- ParseError har alltid företräde till om det går fel, visar endast 1 fel åt gången -->
-    <div  [attr.id]="elementId" *ngIf="parseError" class="validation__status" title="{{parseErrorMessage}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
-      <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div class="validation__status__message">{{parseErrorMessage}}</div>
-    </div>
-    <div  [attr.id]="elementId" *ngIf="formControl?.errors && !parseError" class="validation__status"
-      title="{{errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
-      <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div class="validation__status__message" *ngIf="formControl">{{errorMessage | errorMessage :  formControl?.errors : getLabelFromId() : true}}</div>
-      <div class="validation__status__message" *ngIf="!formControl">{{errorMessage + 'hopp'}}</div>
-    </div>
-  </div>
-</div>

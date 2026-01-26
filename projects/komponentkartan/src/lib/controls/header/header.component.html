@@ -1,7 +1,9 @@
 <header class="header" [ngClass]="{ 'header--hide-swosh': hideSwosh }">
   <div alt="VG_Ne" [ngClass]="{ 'header__vgr-logo': !logoClass }" [class]="logoClass"></div>
-  <div *ngIf="systemText" class="header__system-text-box" tabindex="1">
-    {{systemText}}
-  </div>
+  @if (systemText) {
+    <div class="header__system-text-box" tabindex="1">
+      {{systemText}}
+    </div>
+  }
   <ng-content></ng-content>
 </header>

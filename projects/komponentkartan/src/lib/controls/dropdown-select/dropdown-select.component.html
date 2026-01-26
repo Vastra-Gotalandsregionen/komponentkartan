@@ -8,26 +8,41 @@
       (keydown)="onKeydown($event)" (focusin)="onFocus()" (focusout)="onBlur($event)">
       <div #header class="dropdown-select__header" tabindex="0" aria-haspopup="listbox" [attr.aria-expanded]="expanded"
         [attr.aria-labelledby]="combinedLabelIds" (click)="toggleExpanded()" (keydown)="onHeaderKeydown($event)" role="listbox" [attr.aria-invalid]="errorActive" [attr.aria-disabled]="disabled">
-        <div *ngIf="!(readonly && noItemSelectedLabel === label)" class="dropdown-select__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
+        @if (!(readonly && noItemSelectedLabel === label)) {
+          <div class="dropdown-select__header__label noselect" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
+        }
         <div class="dropdown-select__header__button">
           <vgr-icon icon="chevron-down" size="sm" class="dropdown-select__header__button__icon"></vgr-icon>
         </div>
       </div>
-      <div *ngIf="expanded && !readonly && !disabled" class="dropdown-select__menu" role="listbox"
-        [attr.aria-labelledby]="labelId" [attr.aria-multiselectable]="multi" [ngClass]="{ 'top-align': topAlign, 'right-align': rightAlign }">
-        <div *ngIf="filterVisible || deselectable || multi" class="dropdown-select__menu__header">
-          <vgr-input *ngIf="filterVisible" type="search" (keydown)="onFilterKeydown($event)" [(ngModel)]="searchString" (ngModelChange)="filterItems()" (focusin)="onFilterFocus()" (focusout)="onFilterBlur()" >
-          </vgr-input>
-          <div *ngIf="multi" class="select-all-text" [ngStyle]="{'visibility': filterHasFocus ? 'visible' : 'hidden'}">(tryck retur för att välja alla träffar)</div>
-          <vgr-button #deselectButton *ngIf="deselectable && !multi" class="dropdown-select__menu__header__deselect"
-            [buttonStyle]="'discreet'" [disabled]="deselectDisabled" (click)="deselectItems()"
-            (keydown)="onDeselectKeydown($event)">Ta
-            bort val</vgr-button>
-          <div #selectAll *ngIf="multi" class="dropdown-select__menu__header__select-all" tabindex="0" role="button"
-            [ngClass]="{ 'select-all--selected': allSelected }" (click)="toggleSelectAll()"
-            (keydown)="onSelectAllKeydown($event)">Markera alla<span *ngIf="searchString !== ''"> sökträffar</span> ({{visibleCount}} st)</div>
-        </div>
-        <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-top"></div>
+      @if (expanded && !readonly && !disabled) {
+        <div class="dropdown-select__menu" role="listbox"
+          [attr.aria-labelledby]="labelId" [attr.aria-multiselectable]="multi" [ngClass]="{ 'top-align': topAlign, 'right-align': rightAlign }">
+          @if (filterVisible || deselectable || multi) {
+            <div class="dropdown-select__menu__header">
+              @if (filterVisible) {
+                <vgr-input type="search" (keydown)="onFilterKeydown($event)" [(ngModel)]="searchString" (ngModelChange)="filterItems()" (focusin)="onFilterFocus()" (focusout)="onFilterBlur()" >
+                </vgr-input>
+              }
+              @if (multi) {
+                <div class="select-all-text" [ngStyle]="{'visibility': filterHasFocus ? 'visible' : 'hidden'}">(tryck retur för att välja alla träffar)</div>
+              }
+              @if (deselectable && !multi) {
+                <vgr-button #deselectButton class="dropdown-select__menu__header__deselect"
+                  [buttonStyle]="'discreet'" [disabled]="deselectDisabled" (click)="deselectItems()"
+                  (keydown)="onDeselectKeydown($event)">Ta
+                bort val</vgr-button>
+              }
+              @if (multi) {
+                <div #selectAll class="dropdown-select__menu__header__select-all" tabindex="0" role="button"
+                  [ngClass]="{ 'select-all--selected': allSelected }" (click)="toggleSelectAll()"
+                  (keydown)="onSelectAllKeydown($event)">Markera alla@if (searchString !== '') {
+                  <span> sökträffar</span>
+                } ({{visibleCount}} st)</div>
+              }
+            </div>
+          }
+          <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-top"></div>
           <vgr-scrollbar >
             <div class="dropdown-select__menu__items">
               <div class="dropdown-select__menu__items__dimmer-padding"></div>
@@ -35,14 +50,17 @@
               <div class="dropdown-select__menu__items__dimmer-padding"></div>
             </div>
           </vgr-scrollbar>
-        <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-bottom"></div>
-      </div>
+          <div class="dropdown-select__menu__dimmer dropdown-select__menu__dimmer-bottom"></div>
+        </div>
+      }
     </div>
-    <div [attr.id]="elementId" *ngIf="errorActive || errorEditing" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'"
-      title="{{ errorMessage | errorMessage: formControl?.errors : getLabelFromId() :  true  }}">
-      <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div class="validation__status__message">
+    @if (errorActive || errorEditing) {
+      <div [attr.id]="elementId" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'"
+        title="{{ errorMessage | errorMessage: formControl?.errors : getLabelFromId() :  true  }}">
+        <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
+        <div class="validation__status__message">
         {{ errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true | truncate:truncateTextLength }}</div>
-    </div>
+      </div>
+    }
   </div>
 </div>

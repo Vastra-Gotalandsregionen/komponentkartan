@@ -1,17 +1,37 @@
-<ng-container *ngIf="type && !noIcon">
-    <vgr-icon [solid]="true" color="success" icon="check-circle" *ngIf="type === 'success'"></vgr-icon>
-    <vgr-icon [solid]="true" color="error" icon="exclamation-circle" *ngIf="type === 'error'"></vgr-icon>
-    <vgr-icon [solid]="true" color="warning" icon="exclamation-circle" *ngIf="type === 'warning'"></vgr-icon>
-    <vgr-icon [solid]="true" color="info" icon="info-circle" *ngIf="type === 'info'"></vgr-icon>
-    <vgr-icon [solid]="false" color="text" icon="comment-dots" *ngIf="type === 'comment'"></vgr-icon>
-</ng-container>
+@if (type && !noIcon) {
+  @if (type === 'success') {
+    <vgr-icon [solid]="true" color="success" icon="check-circle"></vgr-icon>
+  }
+  @if (type === 'error') {
+    <vgr-icon [solid]="true" color="error" icon="exclamation-circle"></vgr-icon>
+  }
+  @if (type === 'warning') {
+    <vgr-icon [solid]="true" color="warning" icon="exclamation-circle"></vgr-icon>
+  }
+  @if (type === 'info') {
+    <vgr-icon [solid]="true" color="info" icon="info-circle"></vgr-icon>
+  }
+  @if (type === 'comment') {
+    <vgr-icon [solid]="false" color="text" icon="comment-dots"></vgr-icon>
+  }
+}
 
 <div id="description">
-  <p *ngIf="type === 'warning'">warning</p>
-  <p *ngIf="type === 'info'">information</p>
-  <p *ngIf="type === 'success'">success</p>
-  <p *ngIf="type === 'error'">error</p>
-  <p *ngIf="type === 'comment'">comment</p>
+  @if (type === 'warning') {
+    <p>warning</p>
+  }
+  @if (type === 'info') {
+    <p>information</p>
+  }
+  @if (type === 'success') {
+    <p>success</p>
+  }
+  @if (type === 'error') {
+    <p>error</p>
+  }
+  @if (type === 'comment') {
+    <p>comment</p>
+  }
 </div>
 <ng-content></ng-content>
 

@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
@@ -19,6 +19,10 @@ import { TabButtonComponent } from './tab-button.component';
 })
 export class TestComponent {}
 
+@NgModule({ providers: [ provideZoneChangeDetection() ] })
+export class ZoneChangeDetectionModule {}
+
+
 describe('TabButtonGroupComponent', () => {
   let component: TabButtonGroupComponent;
   let fixture: ComponentFixture<TestComponent>;
@@ -36,7 +40,7 @@ describe('TabButtonGroupComponent', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    TestBed.initTestEnvironment([ZoneChangeDetectionModule, BrowserDynamicTestingModule], platformBrowserDynamicTesting(), {
     teardown: { destroyAfterEach: false }
 });
     TestBed.configureTestingModule({
