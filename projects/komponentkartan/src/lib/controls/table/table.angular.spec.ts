@@ -5,7 +5,7 @@ import { TableRowComponent } from './table-row.component';
 import { TableRowColumnComponent } from './table-row-column.component';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement, Component } from '@angular/core';
+import { DebugElement, Component, provideZoneChangeDetection, NgModule } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
@@ -32,6 +32,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 class TestTableComponent { }
 
 
+@NgModule({ providers: [ provideZoneChangeDetection() ] })
+export class ZoneChangeDetectionModule {}
+
+
 describe('[TestTableComponent]', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TestTableComponent>;
@@ -40,7 +44,7 @@ describe('[TestTableComponent]', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    TestBed.initTestEnvironment([ZoneChangeDetectionModule, BrowserDynamicTestingModule], platformBrowserDynamicTesting(), {
     teardown: { destroyAfterEach: false }
 });
     TestBed.configureTestingModule({

@@ -27,10 +27,12 @@ import { SortArrowComponent } from '../sort-arrow/sort-arrow.component';
     <vgr-grid-header>
       <vgr-grid-header-column sortKey="test">Test</vgr-grid-header-column>
     </vgr-grid-header>
-    <vgr-grid-row *ngFor="let row of rows" [expanded]="row.expanded" [preventCollapse]="row.preventCollapse">
-      <vgr-grid-column>Test</vgr-grid-column>
-      <vgr-grid-content>{{row}}</vgr-grid-content>
-    </vgr-grid-row>
+    @for (row of rows; track row) {
+      <vgr-grid-row [expanded]="row.expanded" [preventCollapse]="row.preventCollapse">
+        <vgr-grid-column>Test</vgr-grid-column>
+        <vgr-grid-content>{{row}}</vgr-grid-content>
+      </vgr-grid-row>
+    }
   </vgr-grid>
   `,
     standalone: false

@@ -2,12 +2,14 @@
   <div class="validation" [ngClass]="{ 'readonly': readonly }">
     <div>
       <div class="inputwrapper" role="textbox" [tabindex]="disabledControl ? 0 : -1"
-      [attr.aria-disabled]="disabledControl"
+        [attr.aria-disabled]="disabledControl"
       [ngClass]="{
         'alignRight': textAlign === 'right',
         'disabled_focus': disabledControl
       }">
-        <div class="prefix" *ngIf="prefix">{{prefix}}</div>
+        @if (prefix) {
+          <div class="prefix">{{prefix}}</div>
+        }
 
         <input
           [attr.id]="labelId"
@@ -32,17 +34,27 @@
           #inputElement
           [attr.aria-describedby]="elementId"
           [attr.aria-invalid]="errorActive">
-        <div class="suffix" *ngIf="suffix">{{suffix}}</div>
-        <div class="searchicon" *ngIf="type === 'search'">
-          <vgr-icon icon="search"></vgr-icon>
+          @if (suffix) {
+            <div class="suffix">{{suffix}}</div>
+          }
+          @if (type === 'search') {
+            <div class="searchicon">
+              <vgr-icon icon="search"></vgr-icon>
+            </div>
+          }
+          <span class="screenreader_only" aria-disabled="true">{{value}}</span>
         </div>
-        <span class="screenreader_only" aria-disabled="true">{{value}}</span>
       </div>
-    </div>
-    <div [attr.id]="elementId" class="validation__status" *ngIf="errorActive" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
-      <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div class="validation__status__message" *ngIf="control">{{errorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
-      <div class="validation__status__message" *ngIf="!control">{{errorMessage}}</div>
+      @if (errorActive) {
+        <div [attr.id]="elementId" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
+          <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
+          @if (control) {
+            <div class="validation__status__message">{{errorMessage | errorMessage: control.errors : getLabelFromId() : false}}</div>
+          }
+          @if (!control) {
+            <div class="validation__status__message">{{errorMessage}}</div>
+          }
+        </div>
+      }
     </div>
   </div>
-</div>

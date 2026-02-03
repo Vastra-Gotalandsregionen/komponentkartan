@@ -9,49 +9,56 @@
       (focusin)="onFocus()" (focusout)="onBlur($event)"  (mousedown)="onMouseDownClick()">
 
       <div #header class="combobox__header" [tabindex]="(disabled ? 0 : -1)">
-        <input
-          *ngIf="!readonly"
-          #textInput
-          type="text"
-          (keydown)="onKeydown($event)"
-
-          [(ngModel)]="searchString"
-          (ngModelChange)="filterItems()"
-          [disabled]="disabled"
-          [placeholder]="disabled ? '' : placeholder"
-          aria-autocomplete="both"
-          aria-controls="listbox"
-          [attr.aria-activedescendant]="highlightedItemIndex"
-          [attr.aria-labelledby]="combinedLabelIds"
-          [attr.aria-invalid]="errorActive"
-          [attr.aria-describedby]="elementId"
-          class="combobox__header__input"
-          [ngClass]="{ 'combobox--disabled': disabled && !readonly, 'combobox--readonly': readonly, 'combobox--small': small }">
-        <div *ngIf="showButton" class="combobox__header__button" role="button" tabindex="-1"   (click)="expandListbox()" >
-          <vgr-icon icon="chevron-down" size="sm" class="combobox__header__button__icon" [disabled]="disabled"></vgr-icon>
-        </div>
-        <div *ngIf="readonly" #readonlyLabel class="combobox__header__label noselect" tabindex="0" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
+        @if (!readonly) {
+          <input
+            #textInput
+            type="text"
+            (keydown)="onKeydown($event)"
+            [(ngModel)]="searchString"
+            (ngModelChange)="filterItems()"
+            [disabled]="disabled"
+            [placeholder]="disabled ? '' : placeholder"
+            aria-autocomplete="both"
+            aria-controls="listbox"
+            [attr.aria-activedescendant]="highlightedItemIndex"
+            [attr.aria-labelledby]="combinedLabelIds"
+            [attr.aria-invalid]="errorActive"
+            [attr.aria-describedby]="elementId"
+            class="combobox__header__input"
+            [ngClass]="{ 'combobox--disabled': disabled && !readonly, 'combobox--readonly': readonly, 'combobox--small': small }">
+        }
+        @if (showButton) {
+          <div class="combobox__header__button" role="button" tabindex="-1"   (click)="expandListbox()" >
+            <vgr-icon icon="chevron-down" size="sm" class="combobox__header__button__icon" [disabled]="disabled"></vgr-icon>
+          </div>
+        }
+        @if (readonly) {
+          <div #readonlyLabel class="combobox__header__label noselect" tabindex="0" id="{{headerLabelId}}" title="{{label}}">{{label}}</div>
+        }
         <span class="screenreader_only" aria-disabled="true">{{label}}</span>
       </div>
-      <div *ngIf="expanded && !readonly && !disabled" class="combobox__menu" role="listbox" id="listbox" [attr.aria-labelledby]="labelId" [ngStyle]="{'left': leftPosition}" [ngClass]="{'alignRight': listAlignRight}">
-        <div class="combobox__menu__dimmer combobox__menu__dimmer-top"></div>
+      @if (expanded && !readonly && !disabled) {
+        <div class="combobox__menu" role="listbox" id="listbox" [attr.aria-labelledby]="labelId" [ngStyle]="{'left': leftPosition}" [ngClass]="{'alignRight': listAlignRight}">
+          <div class="combobox__menu__dimmer combobox__menu__dimmer-top"></div>
           <vgr-scrollbar #scrollable>
-          <div class="combobox__menu__items">
-            <div class="combobox__menu__items__dimmer-padding"></div>
-            <ng-content></ng-content>
-            <div class="combobox__menu__items__dimmer-padding"></div>
-          </div>
-        </vgr-scrollbar>
-        <div class="combobox__menu__dimmer combobox__menu__dimmer-bottom"></div>
-
-      </div>
+            <div class="combobox__menu__items">
+              <div class="combobox__menu__items__dimmer-padding"></div>
+              <ng-content></ng-content>
+              <div class="combobox__menu__items__dimmer-padding"></div>
+            </div>
+          </vgr-scrollbar>
+          <div class="combobox__menu__dimmer combobox__menu__dimmer-bottom"></div>
+        </div>
+      }
 
     </div>
-    <div [attr.id]="elementId" *ngIf="formControl" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'"
-      title="{{ errorMessage | errorMessage: formControl?.errors : getLabelFromId() : true  }}">
-      <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
-      <div class="validation__status__message">
+    @if (formControl) {
+      <div [attr.id]="elementId" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'"
+        title="{{ errorMessage | errorMessage: formControl?.errors : getLabelFromId() : true  }}">
+        <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
+        <div class="validation__status__message">
         {{ errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true | truncate:24 }}</div>
-    </div>
+      </div>
+    }
   </div>
 </div>

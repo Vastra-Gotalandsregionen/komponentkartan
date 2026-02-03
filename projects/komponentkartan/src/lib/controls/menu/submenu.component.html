@@ -3,6 +3,8 @@
   <vgr-icon icon="chevron-down" size="xs" class="menu__item__expander" [ngClass]="{'expanded': expanded}"></vgr-icon>
 </div>
 
-<div class="submenu-content" *ngIf="expandedState" [@toggleSubMenu]="state" (@toggleSubMenu.done)="animationDone($event)">
-  <ng-content></ng-content>
-</div>
+@if (expandedState) {
+  <div class="submenu-content" [@toggleSubMenu]="state" (@toggleSubMenu.done)="animationDone($event)">
+    <ng-content></ng-content>
+  </div>
+}

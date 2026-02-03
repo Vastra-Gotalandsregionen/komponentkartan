@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input, DebugElement } from '@angular/core';
+import { Component, Input, DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
 
@@ -21,7 +21,9 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     selector: 'vgr-test',
     template: `
   <vgr-dropdown-select [formControl]="form">
-    <vgr-dropdown-item *ngFor="let item of items" [value]="item">{{item}}</vgr-dropdown-item>
+    @for (item of items; track item) {
+      <vgr-dropdown-item [value]="item">{{item}}</vgr-dropdown-item>
+    }
   </vgr-dropdown-select>
   `,
     standalone: false
@@ -30,6 +32,10 @@ export class TestComponent {
   @Input() items = [];
   form = new FormControl();
 }
+
+@NgModule({ providers: [ provideZoneChangeDetection() ] })
+export class ZoneChangeDetectionModule {}
+
 
 describe('[DropdownSelectComponent - Angular]', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -44,7 +50,7 @@ describe('[DropdownSelectComponent - Angular]', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    TestBed.initTestEnvironment([ZoneChangeDetectionModule, BrowserDynamicTestingModule], platformBrowserDynamicTesting(), {
     teardown: { destroyAfterEach: false }
 });
     TestBed.configureTestingModule({

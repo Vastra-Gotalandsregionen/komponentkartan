@@ -1,8 +1,10 @@
-<div #item *ngIf="visible" class="combobox__menu__items__item" tabindex="0" role="option" id="{{index}}" [attr.aria-selected]="selected || highlighted"
-  [ngClass]="{ 'combobox-item--selected': selected, 'combobox-item--highlighted': highlighted }" (click)="setSelected()">
-  <div class="combobox__menu__items__item__content-wrapper">
-    <div>
-      <ng-content></ng-content>
+@if (visible) {
+  <div #item class="combobox__menu__items__item" tabindex="0" role="option" id="{{index}}" [attr.aria-selected]="selected || highlighted"
+    [ngClass]="{ 'combobox-item--selected': selected, 'combobox-item--highlighted': highlighted }" (click)="setSelected()">
+    <div class="combobox__menu__items__item__content-wrapper">
+      <div>
+        <ng-content></ng-content>
+      </div>
     </div>
   </div>
-</div>
+}

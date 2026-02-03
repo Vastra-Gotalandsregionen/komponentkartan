@@ -1,9 +1,13 @@
 import {  ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
 
 import { PaginationComponent } from './pagination.component';
+
+@NgModule({ providers: [ provideZoneChangeDetection() ] })
+export class ZoneChangeDetectionModule {}
+
 
 describe('[PaginationComponent - Angular]', () => {
   let component: PaginationComponent;
@@ -12,7 +16,7 @@ describe('[PaginationComponent - Angular]', () => {
   let paginationElement: DebugElement;
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    TestBed.initTestEnvironment([ZoneChangeDetectionModule, BrowserDynamicTestingModule], platformBrowserDynamicTesting(), {
     teardown: { destroyAfterEach: false }
 });
     TestBed.configureTestingModule({

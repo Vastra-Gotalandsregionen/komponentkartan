@@ -1,5 +1,7 @@
 ﻿<div class="save-cancel">
   <vgr-button class="button--cancel" [disabled]="locked" (click)="onCancel()" [buttonStyle]="secondary ? 'secondary' : 'primary'">Avbryt</vgr-button>
   <vgr-button class="button--save" [disabled]="locked" (click)="onSave()" [buttonStyle]="secondary ? 'secondary' : 'primary'">{{saveButtonText}}</vgr-button>
-  <vgr-lock-button *ngIf="!hideLock" [disabled]="!locked" [locked]="locked" (lockChanged)="onLockChanged($event)"></vgr-lock-button>
+  @if (!hideLock) {
+    <vgr-lock-button [disabled]="!locked" [locked]="locked" (lockChanged)="onLockChanged($event)"></vgr-lock-button>
+  }
 </div>

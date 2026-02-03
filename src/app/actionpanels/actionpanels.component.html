@@ -8,49 +8,53 @@
         </vgr-card-header>
         <vgr-card-column >
           <vgr-card-section [expanded]="true" [formGroup]="form" [subtitle]="form.get('agare')?.value ?? ''">
-      <!-- <form *ngIf="form"> -->
-        <vgr-input [readonly]="true" labelId="agare" [value]="form.get('agare')?.value" width="100%"></vgr-input>
-        <vgr-dropdown-select
-            noItemSelectedLabel="- Välj ägare -"
-            formControlName="agare"
-            labelId="agare"
-            [width]="'100%'"
-            (selectedChanged)="setAgarinformation($event)"
-            [showValidation]="form.get('agare')?.touched ?? false "
-            *ngIf="true">
-              <vgr-dropdown-item *ngFor="let agare of vc_namn" [value]="agare" [selectedLabel]="agare">
-                {{ agare }}
-              </vgr-dropdown-item>
-            </vgr-dropdown-select>
+            <!-- <form *ngIf="form"> -->
+            <vgr-input [readonly]="true" labelId="agare" [value]="form.get('agare')?.value" width="100%"></vgr-input>
+            @if (true) {
+              <vgr-dropdown-select
+                noItemSelectedLabel="- Välj ägare -"
+                formControlName="agare"
+                labelId="agare"
+                [width]="'100%'"
+                (selectedChanged)="setAgarinformation($event)"
+                [showValidation]="form.get('agare')?.touched ?? false "
+                >
+                @for (agare of vc_namn; track agare) {
+                  <vgr-dropdown-item [value]="agare" [selectedLabel]="agare">
+                    {{ agare }}
+                  </vgr-dropdown-item>
+                }
+              </vgr-dropdown-select>
+            }
 
 
-      <!-- <vgr-dropdown-select [multi]="true" [value]="vc_selected" [simpleLabel]="true" [disabled]="false">
-        <vgr-dropdown-item *ngFor="let enhet of vc_namn">{{enhet}}</vgr-dropdown-item>
-      </vgr-dropdown-select> -->
-    <!-- </form> -->
-  </vgr-card-section>
-  </vgr-card-column>
+            <!-- <vgr-dropdown-select [multi]="true" [value]="vc_selected" [simpleLabel]="true" [disabled]="false">
+            <vgr-dropdown-item *ngFor="let enhet of vc_namn">{{enhet}}</vgr-dropdown-item>
+          </vgr-dropdown-select> -->
+        <!-- </form> -->
+      </vgr-card-section>
+    </vgr-card-column>
   </vgr-card>
-    </vgr-action-panel>
-  </div>
-  <div class=" docs__overview ">
-    <p>
-      <code>&lt;vgr-action-panel&gt;</code> är en panel som kan öppnas och stängas.
-      För mer information, se dokumentation för <a routerLink="/pagestructure">sidhantering</a>.
-      Öppna och stäng panelerna på den här sidan med knapparna nedan:
-    </p>
-    <ul>
-      <li>
-        <vgr-button (click)="open1 = !open1">{{ getActionText(open1) }} panel 1</vgr-button>
-      </li>
-      <li>
-        <vgr-button (click)="open2 = !open2">{{ getActionText(open2) }} panel 2</vgr-button>
-      </li>
-      <li>
-        <vgr-button (click)="openError = !openError">{{ getActionText(openError) }} panel med Felmeddelande</vgr-button>
-      </li>
-    </ul>
-    <br>
+</vgr-action-panel>
+</div>
+<div class=" docs__overview ">
+  <p>
+    <code>&lt;vgr-action-panel&gt;</code> är en panel som kan öppnas och stängas.
+    För mer information, se dokumentation för <a routerLink="/pagestructure">sidhantering</a>.
+    Öppna och stäng panelerna på den här sidan med knapparna nedan:
+  </p>
+  <ul>
+    <li>
+      <vgr-button (click)="open1 = !open1">{{ getActionText(open1) }} panel 1</vgr-button>
+    </li>
+    <li>
+      <vgr-button (click)="open2 = !open2">{{ getActionText(open2) }} panel 2</vgr-button>
+    </li>
+    <li>
+      <vgr-button (click)="openError = !openError">{{ getActionText(openError) }} panel med Felmeddelande</vgr-button>
+    </li>
+  </ul>
+  <br>
     <p>Förändras med tema:
       <strong>ja</strong>
     </p>

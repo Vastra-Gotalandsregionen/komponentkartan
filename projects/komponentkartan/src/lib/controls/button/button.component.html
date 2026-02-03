@@ -1,17 +1,23 @@
 ﻿<span (click)="checkDisabled($event)">
   <button #button
-   [type]="type"
-   class="button noselect"
-   [attr.aria-disabled]="disabled"
-   [ngClass]="calculateClasses()"
-   (keydown)="onKeyboardActivation($event)"
-   [ngStyle]="{'background-color': loadingState ? '#9EA2A2' : '', 'min-width': loadingState ? '87px' : ''}">
-    <span class="button__fixIE" *ngIf="!loadingState">
-      <ng-content></ng-content>
-    </span>
-    <span class="loader-class" *ngIf="loadingState">
-      <vgr-loader [small]="true" [active]="true"></vgr-loader>
-    </span>
-    <div *ngIf="buttonStyle==='primary'" class="button__focus-line"></div>
+    [type]="type"
+    class="button noselect"
+    [attr.aria-disabled]="disabled"
+    [ngClass]="calculateClasses()"
+    (keydown)="onKeyboardActivation($event)"
+    [ngStyle]="{'background-color': loadingState ? '#9EA2A2' : '', 'min-width': loadingState ? '87px' : ''}">
+    @if (!loadingState) {
+      <span class="button__fixIE">
+        <ng-content></ng-content>
+      </span>
+    }
+    @if (loadingState) {
+      <span class="loader-class">
+        <vgr-loader [small]="true" [active]="true"></vgr-loader>
+      </span>
+    }
+    @if (buttonStyle==='primary') {
+      <div class="button__focus-line"></div>
+    }
   </button>
 </span>

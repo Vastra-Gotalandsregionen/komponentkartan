@@ -8,9 +8,11 @@
     </div>
   </div>
   <div class="grid-row-content" [@toggleExpandedState]="expandedState"
-   (@toggleExpandedState.start)="toggleState('start', isExpanded)" (@toggleExpandedState.done)="toggleState('done', isExpanded)"
-   [class.grid-row-overflow]="overflow">
-   <!-- <div> -->
-    <ng-content select="vgr-grid-content" *ngIf="isExpanded"></ng-content>
+    (@toggleExpandedState.start)="toggleState('start', isExpanded)" (@toggleExpandedState.done)="toggleState('done', isExpanded)"
+    [class.grid-row-overflow]="overflow">
+    <!-- <div> -->
+    @if (isExpanded) {
+      <ng-content select="vgr-grid-content"></ng-content>
+    }
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input, DebugElement } from '@angular/core';
+import { Component, Input, DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
 
@@ -18,7 +18,9 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     selector: 'vgr-test',
     template: `
   <vgr-combobox [formControl]="form">
-    <vgr-combobox-item *ngFor="let item of items" [value]="item">{{item}}</vgr-combobox-item>
+    @for (item of items; track item) {
+      <vgr-combobox-item [value]="item">{{item}}</vgr-combobox-item>
+    }
   </vgr-combobox>
   `,
     standalone: false
@@ -32,6 +34,10 @@ function pickRandom(values: any[]): any {
   const index = Math.ceil(Math.random() * values.length) - 1;
   return values[index];
 }
+
+@NgModule({ providers: [ provideZoneChangeDetection() ] })
+export class ZoneChangeDetectionModule {}
+
 
 describe('[ComboboxComponent - Angular]', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -53,7 +59,7 @@ describe('[ComboboxComponent - Angular]', () => {
 
   beforeEach((done) => {
     TestBed.resetTestEnvironment();
-    TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+    TestBed.initTestEnvironment([ZoneChangeDetectionModule, BrowserDynamicTestingModule], platformBrowserDynamicTesting(), {
     teardown: { destroyAfterEach: false }
 });
     TestBed.configureTestingModule({

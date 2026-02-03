@@ -3,11 +3,12 @@
 import 'core-js/es/reflect';
 import 'zone.js';
 import 'zone.js/testing';
-import { getTestBed } from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import { provideZoneChangeDetection } from '@angular/core';
 
 (globalThis as any).ResizeObserver = class {
   observe() {}
@@ -22,3 +23,15 @@ getTestBed().initTestEnvironment(
     teardown: { destroyAfterEach: false }
 }
 );
+
+const originalConfigureTestingModule = TestBed.configureTestingModule;
+
+TestBed.configureTestingModule = (moduleDef) => {
+  return originalConfigureTestingModule.call(TestBed, {
+    ...moduleDef,
+    providers: [
+      ...(moduleDef.providers || []),
+      provideZoneChangeDetection(), // <--- Återställer gamla zon-timing
+    ],
+  });
+};
