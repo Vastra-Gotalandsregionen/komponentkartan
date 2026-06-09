@@ -1,6 +1,6 @@
 @if (pages >= 1) {
   <div class="pagination">
-    @for (item of pageItems; track item; let isPrevious = $first; let isNext = $last) {
+    @for (item of pageItems; track $index; let isPrevious = $first; let isNext = $last) {
       <div>
         @if (item.label !== '...') {
           <button #pageButton type="button" [attr.aria-disabled]="isPrevious && activePage === 1 || isNext && activePage === pages"

@@ -111,9 +111,9 @@
                           <div>Sö</div>
                         </td>
                       </tr>
-                      @for (row of days.items; track row) {
+                      @for (row of days.items; track $index) {
                         <tr>
-                          @for (item of row; track item) {
+                          @for (item of row; track $index) {
                             <td>
                               @if (item) {
                                 <vgr-datepicker-item [type]="'day'" [date]="item.date" [selected]="item.selected"
