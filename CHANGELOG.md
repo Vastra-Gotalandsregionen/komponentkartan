@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Change-log](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+# 16.0.1 (2026-06-11) 
+- Removed warnings by adding $index to track in for loops for datepicker and pagination
 # 16.0.0 (2026-02-03) 
 - Upgraded to Angular 21.
 - Fixed a minor bugg in dropdown-select component for when clearing inputfield after a search.
