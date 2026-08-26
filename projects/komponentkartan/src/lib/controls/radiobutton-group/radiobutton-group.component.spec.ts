@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -19,6 +19,7 @@ import { RadiobuttonItemComponent } from './radiobutton-item.component';
       <vgr-radiobutton-item>Three</vgr-radiobutton-item>
   </vgr-radiobutton-group>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 }) class TestRadiogroupComponent { }
 

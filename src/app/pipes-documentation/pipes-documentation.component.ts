@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
     selector: 'app-pipes-documentation',
     templateUrl: './pipes-documentation.component.html',
     styleUrls: ['./pipes.documentation.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PipesDocumentationComponent {

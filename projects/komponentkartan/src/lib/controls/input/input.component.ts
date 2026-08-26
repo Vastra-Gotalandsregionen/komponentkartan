@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit, HostListener, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, OnChanges, Optional, Host, SkipSelf, Output, EventEmitter, HostBinding, ViewChild, ElementRef, SimpleChanges, Renderer2, AfterViewInit, HostListener, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, AbstractControl, ControlContainer } from '@angular/forms';
 import { Guid } from '../../utils/guid';
 
@@ -11,6 +11,7 @@ import { Guid } from '../../utils/guid';
             useExisting: forwardRef(() => InputComponent),
             multi: true
         }],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, AfterViewInit {

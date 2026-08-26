@@ -1,4 +1,4 @@
-import { Input, Component, ElementRef, HostBinding, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, OnInit, ViewChild, OnDestroy, Renderer2, EventEmitter, Output } from '@angular/core';
+import { Input, Component, ElementRef, HostBinding, forwardRef, HostListener, ContentChildren, QueryList, AfterContentInit, OnInit, ViewChild, OnDestroy, Renderer2, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MenuItemBaseDirective } from './menu-item-base';
 import { trigger, style, transition, animate, state } from '@angular/animations';
@@ -25,6 +25,7 @@ import { takeUntil } from 'rxjs/operators';
             transition('* => collapsed', [animate('600ms ease-out')])
         ])
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-tab-button',
     templateUrl: './tab-button.component.html',
     styleUrls: ['./tab-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TabButtonComponent implements AfterViewInit, OnChanges {

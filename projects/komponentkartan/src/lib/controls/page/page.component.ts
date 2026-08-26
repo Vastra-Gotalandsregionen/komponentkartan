@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PageHeaderHeightService } from '../../services/page-header-height.service';
@@ -8,6 +8,7 @@ import { PageHeaderHeightService } from '../../services/page-header-height.servi
     templateUrl: './page.component.html',
     styleUrls: ['./page.component.scss'],
     providers: [PageHeaderHeightService],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PageComponent implements OnInit, OnDestroy {

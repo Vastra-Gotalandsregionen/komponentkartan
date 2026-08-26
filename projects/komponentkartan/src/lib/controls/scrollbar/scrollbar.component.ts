@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
     selector: 'vgr-scrollbar',
     templateUrl: './scrollbar.component.html',
     styleUrls: ['./scrollbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ScrollbarComponent {

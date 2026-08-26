@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, OnInit, ElementRef } from '@angular/core';
+import { Component, Input, HostBinding, OnInit, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { toggleFadedState } from '../../animation';
 
 @Component({
@@ -6,6 +6,7 @@ import { toggleFadedState } from '../../animation';
     templateUrl: './notification.component.html',
     styleUrls: ['./notification.component.scss'],
     animations: [toggleFadedState],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NotificationComponent implements OnInit {

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'vgr-modal-footer',
     template: `<ng-content></ng-content>`,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
     selector: 'app-icons',
     templateUrl: './icons.component.html',
     styleUrls: ['./icons.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class IconsComponent implements OnInit {

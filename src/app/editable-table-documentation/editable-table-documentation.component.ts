@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { SortChangedArgs, GridSortDirection } from '../../../projects/komponentkartan/src/lib';
 import { HtmlEncodeService } from '../html-encode.service';
@@ -7,6 +7,7 @@ import { HtmlEncodeService } from '../html-encode.service';
     selector: 'vgr-editable-table-documentation',
     templateUrl: './editable-table-documentation.component.html',
     styleUrls: ['./editable-table-documentation.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditableTableDocumentationComponent {

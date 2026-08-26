@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, OnDestroy, ContentChildren, QueryList, Input } from '@angular/core';
+import { Component, AfterContentInit, OnDestroy, ContentChildren, QueryList, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ToggleButtonComponent } from './toggle-button.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'vgr-toggle-button-group',
     templateUrl: './toggle-button-group.component.html',
     styleUrls: ['./toggle-button-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ToggleButtonGroupComponent implements AfterContentInit, OnDestroy {

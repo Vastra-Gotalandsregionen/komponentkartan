@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, HostBinding, Input, OnDestroy, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, HostBinding, Input, OnDestroy, QueryList, ChangeDetectionStrategy } from '@angular/core';
 import { Guid } from '../../utils/guid';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { TabManagementService } from './tab-management.service';
     selector: 'vgr-tab-button-group',
     templateUrl: './tab-button-group.component.html',
     styleUrls: ['./tab-button-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TabButtonGroupComponent implements AfterContentInit, OnDestroy {

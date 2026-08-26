@@ -1,9 +1,10 @@
-import { Component, OnInit, HostBinding, Input, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, HostBinding, Input, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { Guid } from '../../utils/guid';
 import { SelectablelistService } from './selectablelist.service';
 @Component({
     selector: 'vgr-selectablelist-header-column',
     template: '<ng-content></ng-content>',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectablelistHeaderColumnComponent implements OnInit {

@@ -1,8 +1,9 @@
-import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, NgZone, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, NgZone, OnChanges, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 @Component({
     selector: 'vgr-search-result',
     templateUrl: './search-result.component.html',
     styleUrls: ['./search-result.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SearchResultComponent implements OnChanges, OnInit {

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, OnInit, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, OnInit, AfterViewInit, Renderer2, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, style, animate, transition, state, AnimationEvent } from '@angular/animations';
 import { Guid } from '../../utils/guid';
 
@@ -30,6 +30,7 @@ import { Guid } from '../../utils/guid';
             transition('hidden <=> visible', animate('400ms ease'))
         ])
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ActionPanelComponent implements OnChanges, OnInit, AfterViewInit {

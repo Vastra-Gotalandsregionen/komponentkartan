@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { SearchResultItem } from 'vgr-komponentkartan';
 import { HtmlEncodeService } from '../html-encode.service';
 
@@ -6,6 +6,7 @@ import { HtmlEncodeService } from '../html-encode.service';
     selector: 'app-search-results',
     templateUrl: './search-results.component.html',
     styleUrls: ['./search-results.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SearchResultsComponent implements OnInit {

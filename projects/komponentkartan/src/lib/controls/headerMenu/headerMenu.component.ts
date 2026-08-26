@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, SimpleChanges, OnChanges, AfterContentInit, OnDestroy, Renderer2, ViewChild, ContentChild } from '@angular/core';
+import { Component, Input, ElementRef, HostListener, ContentChildren, QueryList, SimpleChanges, OnChanges, AfterContentInit, OnDestroy, Renderer2, ViewChild, ContentChild, ChangeDetectionStrategy } from '@angular/core';
 import { MenuItemBaseDirective } from '../menu/menu-item-base';
 import { SubmenuComponent } from '../menu/submenu.component';
 import { Subject } from 'rxjs';
@@ -9,6 +9,7 @@ import { MenuItemComponent } from '../menu/menu-item.component';
     selector: 'vgr-header-menu',
     templateUrl: './headerMenu.component.html',
     styleUrls: ['./headerMenu.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

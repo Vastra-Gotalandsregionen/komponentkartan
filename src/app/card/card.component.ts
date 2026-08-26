@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 import { RowNotification, NotificationType, CardSectionComponent } from 'vgr-komponentkartan';
 
@@ -6,6 +6,7 @@ import { RowNotification, NotificationType, CardSectionComponent } from 'vgr-kom
     selector: 'app-card',
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CardComponent implements OnInit {

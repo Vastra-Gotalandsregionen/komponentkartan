@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ButtonComponent } from '../../../projects/komponentkartan/src/lib';
 
@@ -6,6 +6,7 @@ import { ButtonComponent } from '../../../projects/komponentkartan/src/lib';
     selector: 'app-textbuttons',
     templateUrl: './textbuttons.component.html',
     styleUrls: ['./textbuttons.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TextbuttonsComponent{

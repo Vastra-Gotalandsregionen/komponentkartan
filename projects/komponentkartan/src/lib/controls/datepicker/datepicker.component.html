@@ -197,10 +197,10 @@
         }
         @if (formControl?.errors && !parseError) {
           <div  [attr.id]="elementId" class="validation__status"
-            title="{{errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
+            title="{{errorMessage | errorMessage : $safeNavigationMigration(formControl?.errors) : getLabelFromId() : true}}" [attr.aria-live]="errorActive ? 'assertive' : 'off'">
             <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
             @if (formControl) {
-              <div class="validation__status__message">{{errorMessage | errorMessage :  formControl?.errors : getLabelFromId() : true}}</div>
+              <div class="validation__status__message">{{errorMessage | errorMessage :  $safeNavigationMigration(formControl?.errors) : getLabelFromId() : true}}</div>
             }
             @if (!formControl) {
               <div class="validation__status__message">{{errorMessage + 'hopp'}}</div>

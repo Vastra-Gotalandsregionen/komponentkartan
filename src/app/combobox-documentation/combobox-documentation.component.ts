@@ -1,10 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ComboboxComponent } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
     selector: 'app-combobox-documentation',
     templateUrl: './combobox-documentation.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ComboboxDocumentationComponent {

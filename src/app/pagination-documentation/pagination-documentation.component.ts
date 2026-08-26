@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ModalService } from '../../../projects/komponentkartan/src/lib/services/modalService';
 import { PaginationManagementService } from '../../../projects/komponentkartan/src/lib/controls/pagination/pagination-management.service';
 import { HtmlEncodeService } from '../html-encode.service';
@@ -7,6 +7,7 @@ import { HtmlEncodeService } from '../html-encode.service';
     selector: 'app-pagination-documentation',
     templateUrl: './pagination-documentation.component.html',
     styleUrls: ['./pagination-documentation.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PaginationDocumentationComponent {

@@ -1,6 +1,7 @@
 
 import {
-  Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy, Output, EventEmitter, AfterContentInit
+  Component, AfterViewChecked, QueryList, forwardRef, ElementRef, ContentChildren, Renderer2, OnDestroy, Output, EventEmitter, AfterContentInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ModalService } from '../../services/modalService';
 import { ButtonComponent } from '../button/button.component';
@@ -11,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'vgr-modal',
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

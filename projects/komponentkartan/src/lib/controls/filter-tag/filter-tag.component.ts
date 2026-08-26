@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'vgr-filter-tag',
     templateUrl: './filter-tag.component.html',
     styleUrls: ['./filter-tag.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FilterTagComponent implements AfterViewInit {

@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'vgr-combobox-item',
     templateUrl: './combobox-item.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ComboboxItemComponent implements AfterViewInit {

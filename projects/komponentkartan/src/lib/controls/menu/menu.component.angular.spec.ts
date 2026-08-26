@@ -1,7 +1,7 @@
 import { MenuComponent, MenuItemComponent, SubmenuComponent } from '../../index';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DebugElement, Component } from '@angular/core';
+import { DebugElement, Component, ChangeDetectionStrategy } from '@angular/core';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
@@ -22,6 +22,7 @@ import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
           </vgr-submenu>
         </vgr-menu>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class TestMenuComponent { }

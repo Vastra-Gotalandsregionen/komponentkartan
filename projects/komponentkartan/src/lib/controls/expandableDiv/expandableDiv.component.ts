@@ -1,4 +1,4 @@
-import { Input, Component, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Input, Component, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { toggleExpandedState, toggleChevron } from '../../animation';
 
 @Component({
@@ -6,6 +6,7 @@ import { toggleExpandedState, toggleChevron } from '../../animation';
     templateUrl: './expandableDiv.component.html',
     styleUrls: ['./expandableDiv.component.scss'],
     animations: [toggleExpandedState, toggleChevron],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ExpandableDivComponent {

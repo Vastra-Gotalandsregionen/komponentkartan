@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, HostBinding } from '@angular/core';
+import { Component, Input, OnChanges, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 export enum GridSortDirection {
   None,
@@ -13,6 +13,7 @@ export interface SortChangedArgs {
     selector: 'vgr-sort-arrow',
     templateUrl: './sort-arrow.component.html',
     styleUrls: ['./sort-arrow.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

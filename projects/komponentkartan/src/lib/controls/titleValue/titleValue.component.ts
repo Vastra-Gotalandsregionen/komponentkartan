@@ -1,9 +1,10 @@
-import { Input, Output, Component, HostBinding, ContentChild } from '@angular/core';
+import { Input, Output, Component, HostBinding, ContentChild, ChangeDetectionStrategy } from '@angular/core';
 
 
 @Component({
     selector: 'vgr-title-value',
     templateUrl: './titleValue.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TitleValueComponent {

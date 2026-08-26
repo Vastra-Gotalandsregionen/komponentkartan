@@ -1,4 +1,4 @@
-import { Input, Component, HostBinding, AfterContentInit, ContentChildren, QueryList, OnDestroy } from '@angular/core';
+import { Input, Component, HostBinding, AfterContentInit, ContentChildren, QueryList, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { MenuItemBaseDirective } from './menu-item-base';
 import { SubmenuComponent } from './submenu.component';
 import { Subject } from 'rxjs';
@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'vgr-menu',
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MenuComponent implements AfterContentInit, OnDestroy {

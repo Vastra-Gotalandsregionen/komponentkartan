@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, OnDestroy, ContentChildren, QueryList } from '@angular/core';
+import { Component, AfterContentInit, OnDestroy, ContentChildren, QueryList, ChangeDetectionStrategy } from '@angular/core';
 import { FilterTagComponent } from './filter-tag.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'vgr-filter-tag-group',
     templateUrl: './filter-tag-group.component.html',
     styleUrls: ['./filter-tag-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FilterTagGroupComponent implements AfterContentInit, OnDestroy {

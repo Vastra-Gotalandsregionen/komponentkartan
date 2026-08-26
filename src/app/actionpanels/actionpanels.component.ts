@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HighlightCodeDirective } from '../directives/highlight-code.directive';
 import { HtmlEncodeService } from '../html-encode.service';
@@ -6,6 +6,7 @@ import { HtmlEncodeService } from '../html-encode.service';
     selector: 'app-action-panel',
     templateUrl: './actionpanels.component.html',
     styleUrls: ['./actionpanels.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ActionPanelsComponent {

@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, OnChanges, AfterViewInit, SkipSelf, Optional, Host, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostBinding, forwardRef, ElementRef, OnChanges, AfterViewInit, SkipSelf, Optional, Host, Renderer2, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { SelectableItem } from '../../models/selectableItem.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ControlContainer, AbstractControl } from '@angular/forms';
 import { Guid } from '../../utils/guid';
@@ -12,6 +12,7 @@ import { Guid } from '../../utils/guid';
             useExisting: forwardRef(() => RadioGroupComponent),
             multi: true
         }],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

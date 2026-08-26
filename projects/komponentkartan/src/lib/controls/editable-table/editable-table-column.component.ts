@@ -1,10 +1,11 @@
-import { Component, Input, HostBinding, ElementRef, Host } from '@angular/core';
+import { Component, Input, HostBinding, ElementRef, Host, ChangeDetectionStrategy } from '@angular/core';
 
 
 
 @Component({
     selector: 'vgr-editable-table-column',
     template: '<ng-content></ng-content>',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditableTableColumnComponent {

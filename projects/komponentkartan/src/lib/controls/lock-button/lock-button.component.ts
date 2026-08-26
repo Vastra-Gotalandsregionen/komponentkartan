@@ -1,9 +1,10 @@
-import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'vgr-lock-button',
     templateUrl: './lock-button.component.html',
     styleUrls: ['./lock-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LockButtonComponent {

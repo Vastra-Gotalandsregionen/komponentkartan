@@ -1,10 +1,11 @@
-﻿import { Component, Input, OnChanges, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+﻿import { Component, Input, OnChanges, ViewChild, ElementRef, Renderer2, ChangeDetectionStrategy } from '@angular/core';
 import { mapToClassString } from '../../utils/map-to-class-string';
 
 @Component({
     selector: 'vgr-button',
     templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ButtonComponent implements OnChanges {
