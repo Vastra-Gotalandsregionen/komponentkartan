@@ -1,0 +1,6 @@
+Error: Cannot determine project for command.
+This is a multi-project workspace and more than one project supports this command. Run "ng build [project]" to execute the command for a specific project or change the current working directory to a project directory.
+
+Available projects are:
+- app
+- komponentkartan

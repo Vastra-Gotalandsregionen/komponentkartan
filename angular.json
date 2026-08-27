@@ -166,7 +166,8 @@
             "lintFilePatterns": [
               "projects/komponentkartan/**/*.ts",
               "projects/komponentkartan/**/*.html"
-            ]
+            ],
+            "eslintConfig": "projects/komponentkartan/eslint.config.js"
           }
         }
       }

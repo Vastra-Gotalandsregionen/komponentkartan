@@ -43,7 +43,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnInit, 
   @Input() suffix: string = null;
   @Input() textAlign: string;
   @Input() errorMessage: any = 'Innehåller valideringsfel';
-// eslint-disable-next-line @angular-eslint/no-output-native
   @Output() blur = new EventEmitter<any>();
 
   @ViewChild('inputElement', {static: false}) inputElement: ElementRef;

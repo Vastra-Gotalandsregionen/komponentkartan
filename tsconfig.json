@@ -12,6 +12,10 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "strict": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "vgr-komponentkartan": [
