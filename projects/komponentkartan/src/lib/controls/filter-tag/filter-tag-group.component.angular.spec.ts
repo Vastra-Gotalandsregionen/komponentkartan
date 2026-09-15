@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { Component, DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection, NgModule, ChangeDetectionStrategy } from '@angular/core';
 
 import { FilterTagGroupComponent } from './filter-tag-group.component';
 import { FilterTagComponent } from './filter-tag.component';
@@ -19,6 +19,7 @@ import { IconModule } from '../icon/icon.module';
     <vgr-filter-tag id="third">Third</vgr-filter-tag>
   </vgr-filter-tag-group>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TestComponent { }

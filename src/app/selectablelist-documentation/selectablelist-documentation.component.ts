@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 
 @Component({
     selector: 'vgr-selectablelist-documentation',
     templateUrl: './selectablelist-documentation.component.html',
     styleUrls: ['./selectablelist-documentation.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectablelistDocumentationComponent {

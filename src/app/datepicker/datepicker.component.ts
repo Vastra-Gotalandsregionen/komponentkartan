@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DatepickerComponent as Datepicker } from '../../../projects/komponentkartan/src/lib';
 
@@ -7,6 +7,7 @@ import { DatepickerComponent as Datepicker } from '../../../projects/komponentka
     selector: 'app-datepicker',
     templateUrl: './datepicker.component.html',
     styleUrls: ['./datepicker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DatepickerComponent {

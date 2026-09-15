@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
 import { GridRowComponent, GridHeaderColumnComponent, GridSortChangedArgs, GridSortDirection } from '../../../projects/komponentkartan/src/lib';
 import { PaginationManagementService } from '../../../projects/komponentkartan/src/lib/controls/pagination/pagination-management.service';
 import { ModalService } from '../../../projects/komponentkartan/src/lib/services/modalService';
@@ -7,6 +7,7 @@ import { ModalService } from '../../../projects/komponentkartan/src/lib/services
     selector: 'vgr-grid-documentation',
     templateUrl: './grid-documentation.component.html',
     styleUrls: ['./grid-documentation.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class GridDocumentationComponent implements OnInit {

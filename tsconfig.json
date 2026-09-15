@@ -1,9 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "downlevelIteration": true,
     "module": "es2020",
     "outDir": "./dist/out-tsc",
+    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "bundler",
@@ -12,6 +12,10 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "strict": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "vgr-komponentkartan": [

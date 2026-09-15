@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DebugElement, Component, provideZoneChangeDetection, NgModule } from '@angular/core';
+import { DebugElement, Component, provideZoneChangeDetection, NgModule, ChangeDetectionStrategy } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
@@ -21,6 +21,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
             <vgr-search-result  [(visible)]="dropdownVisible" (itemClick)="hide()"></vgr-search-result>
           </div>
           `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class TestSearchResultComponent {

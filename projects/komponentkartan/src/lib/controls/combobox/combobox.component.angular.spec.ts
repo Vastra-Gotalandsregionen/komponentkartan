@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input, DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
+import { Component, Input, DebugElement, provideZoneChangeDetection, NgModule, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
 
@@ -23,6 +23,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     }
   </vgr-combobox>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TestComponent {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalService, TabManagementService } from '../../../projects/komponentkartan/src/lib';
 
@@ -6,6 +6,7 @@ import { ModalService, TabManagementService } from '../../../projects/komponentk
     selector: 'app-tab-button',
     templateUrl: './tab-button.component.html',
     styleUrls: ['./tab-button.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TabButtonComponent implements OnInit {

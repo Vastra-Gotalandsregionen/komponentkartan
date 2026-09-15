@@ -13,7 +13,8 @@ import {
   OnDestroy,
   HostBinding,
   ViewChild,
-  ContentChild
+  ContentChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { SelectablelistHeaderComponent } from './selectablelist.header.component';
 import { SelectablelistRowComponent } from './selectablelist.row.component';
@@ -27,6 +28,7 @@ import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
     selector: 'vgr-selectablelist',
     templateUrl: './selectablelist.component.html',
     styleUrls: ['./selectablelist.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectablelistComponent implements AfterContentInit, OnChanges, OnDestroy {

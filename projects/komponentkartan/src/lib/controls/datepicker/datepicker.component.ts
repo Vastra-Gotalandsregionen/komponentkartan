@@ -1,6 +1,7 @@
 import {
   Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, Optional, Self,
-  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject, HostBinding, HostListener
+  ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit, OnDestroy, LOCALE_ID, Inject, HostBinding, HostListener,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { DatepickerItemComponent } from './datepicker-item.component';
@@ -15,6 +16,7 @@ import { DatepickerZoomLevel, CalendarItem, Calendar } from './datepicker.interf
     selector: 'vgr-datepicker',
     templateUrl: './datepicker.component.html',
     styleUrls: ['./datepicker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor {

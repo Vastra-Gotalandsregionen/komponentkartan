@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 import { ExpandableDivComponent as ExpandableDivComponentElement } from '../../../projects/komponentkartan/src/lib';
 
@@ -6,6 +6,7 @@ import { ExpandableDivComponent as ExpandableDivComponentElement } from '../../.
     selector: 'app-expandable-div',
     templateUrl: './expandable-div.component.html',
     styleUrls: ['./expandable-div.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ExpandableDivComponent implements OnInit {

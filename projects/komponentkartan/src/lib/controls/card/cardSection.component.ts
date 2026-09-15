@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { toggleExpandedState, toggleChevron } from '../../animation';
 
 @Component({
@@ -6,6 +6,7 @@ import { toggleExpandedState, toggleChevron } from '../../animation';
     templateUrl: './cardSection.component.html',
     styleUrls: ['./card.component.scss'],
     animations: [toggleExpandedState, toggleChevron],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CardSectionComponent {

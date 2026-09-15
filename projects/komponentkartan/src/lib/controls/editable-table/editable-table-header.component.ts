@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, EventEmitter, OnDestroy, Output, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, EventEmitter, OnDestroy, Output, QueryList, ChangeDetectionStrategy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { GridSortDirection, SortChangedArgs } from '../sort-arrow/sort-arrow.component';
 import { EditableTableHeaderColumnComponent } from './editable-table-header-column.component';
@@ -6,6 +6,7 @@ import { EditableTableHeaderColumnComponent } from './editable-table-header-colu
 @Component({
     selector: 'vgr-editable-table-header',
     template: '<ng-content select="vgr-editable-table-header-column"></ng-content>',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditableTableHeaderComponent implements AfterContentInit, OnDestroy{

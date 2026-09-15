@@ -9,7 +9,7 @@
         <vgr-card-column >
           <vgr-card-section [expanded]="true" [formGroup]="form" [subtitle]="form.get('agare')?.value ?? ''">
             <!-- <form *ngIf="form"> -->
-            <vgr-input [readonly]="true" labelId="agare" [value]="form.get('agare')?.value" width="100%"></vgr-input>
+            <vgr-input [readonly]="true" labelId="agare" [value]="$safeNavigationMigration(form.get('agare')?.value)" width="100%"></vgr-input>
             @if (true) {
               <vgr-dropdown-select
                 noItemSelectedLabel="- Välj ägare -"

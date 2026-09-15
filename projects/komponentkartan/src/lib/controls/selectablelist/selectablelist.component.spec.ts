@@ -6,7 +6,7 @@ import { SelectablelistColumnComponent } from './selectablelist.column.component
 import { SelectablelistHeaderComponent } from './selectablelist.header.component';
 import { SelectablelistRowComponent } from './selectablelist.row.component';
 
-import { Component, DebugElement, SimpleChange } from '@angular/core';
+import { Component, DebugElement, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { SelectablelistService } from './selectablelist.service';
 import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
@@ -57,6 +57,7 @@ import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
     </vgr-selectablelist-row>
   </vgr-selectablelist>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 }) class TestSelectablelistComponent { }
 

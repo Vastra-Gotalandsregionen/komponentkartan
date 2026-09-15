@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostBinding, ViewChild, ElementRef, HostListener, Injector } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding, ViewChild, ElementRef, HostListener, Injector, ChangeDetectionStrategy } from '@angular/core';
 import { GridComponent } from '../grid/grid.component'
 import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 
@@ -6,6 +6,7 @@ import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 @Component({
     selector: 'vgr-grid-header-column',
     templateUrl: './grid-header-column.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class GridHeaderColumnComponent {

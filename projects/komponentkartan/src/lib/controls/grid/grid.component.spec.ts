@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement, Input, Component, Renderer2 } from '@angular/core';
+import { DebugElement, Input, Component, Renderer2, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GridHeaderComponent } from './grid-header.component';
@@ -35,6 +35,7 @@ import { SortArrowComponent } from '../sort-arrow/sort-arrow.component';
     }
   </vgr-grid>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TestComponent {

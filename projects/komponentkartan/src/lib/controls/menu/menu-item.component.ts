@@ -1,4 +1,4 @@
-import { Input, Component, HostListener, ElementRef, forwardRef, HostBinding, AfterViewInit, ViewChild, Renderer2, Output, EventEmitter } from '@angular/core';
+import { Input, Component, HostListener, ElementRef, forwardRef, HostBinding, AfterViewInit, ViewChild, Renderer2, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Guid } from '../../utils/guid';
 import { MenuItemBaseDirective } from './menu-item-base';
@@ -7,6 +7,7 @@ import { MenuItemBaseDirective } from './menu-item-base';
     selector: 'vgr-menu-item',
     templateUrl: './menu-item.component.html',
     providers: [{ provide: MenuItemBaseDirective, useExisting: forwardRef(() => MenuItemComponent) }],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MenuItemComponent extends MenuItemBaseDirective implements AfterViewInit {

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-import { Component, DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection, NgModule, ChangeDetectionStrategy } from '@angular/core';
 
 import { ToggleButtonGroupComponent } from './toggle-button-group.component';
 import { ToggleButtonComponent } from './toggle-button.component';
@@ -15,6 +15,7 @@ import { ToggleButtonComponent } from './toggle-button.component';
     <vgr-toggle-button id="third">Third</vgr-toggle-button>
   </vgr-toggle-button-group>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TestComponent {}

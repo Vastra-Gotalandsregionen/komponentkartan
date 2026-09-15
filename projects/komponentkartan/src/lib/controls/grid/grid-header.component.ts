@@ -1,4 +1,4 @@
-import { Component, ContentChildren, Output, EventEmitter, QueryList, AfterContentInit, OnDestroy, Input, HostBinding, HostListener, ElementRef } from '@angular/core';
+import { Component, ContentChildren, Output, EventEmitter, QueryList, AfterContentInit, OnDestroy, Input, HostBinding, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { GridHeaderColumnComponent } from './grid-header-column.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,6 +12,7 @@ export interface GridSortChangedArgs {
 @Component({
     selector: 'vgr-grid-header',
     templateUrl: './grid-header.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class GridHeaderComponent implements AfterContentInit, OnDestroy {

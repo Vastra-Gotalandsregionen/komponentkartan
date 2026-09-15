@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement, Component } from '@angular/core';
+import { DebugElement, Component, ChangeDetectionStrategy } from '@angular/core';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,6 +41,7 @@ import { InputComponent } from '../input/input.component';
         </vgr-title-value>
       </vgr-title-value-layout>
       `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class TestTextValueComponent { }

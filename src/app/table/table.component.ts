@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { HtmlEncodeService } from '../html-encode.service';
 import { TableComponent as TableComponentElement } from '../../../projects/komponentkartan/src/lib';
 
@@ -7,6 +7,7 @@ import { TableComponent as TableComponentElement } from '../../../projects/kompo
     selector: 'app-table',
     templateUrl: './table.component.html',
     styleUrls: ['./table.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TableComponent implements OnInit {

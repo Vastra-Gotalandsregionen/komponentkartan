@@ -1,10 +1,11 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-radiobutton-item',
     templateUrl: './radiobutton-item.component.html',
     styleUrls: ['./radiobutton-item.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RadiobuttonItemComponent implements AfterViewInit {

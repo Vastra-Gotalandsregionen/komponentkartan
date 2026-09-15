@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectorRef, HostBinding } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { trigger, state, animate, style, transition } from '@angular/animations';
 
@@ -17,6 +17,7 @@ import { trigger, state, animate, style, transition } from '@angular/animations'
             transition('* => *', animate('400ms ease'))
         ])
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LoaderComponent {

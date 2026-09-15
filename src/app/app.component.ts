@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 declare var require: any;
@@ -6,6 +6,7 @@ declare var require: any;
 @Component({
     selector: 'app-komponentkartan',
     templateUrl: 'app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

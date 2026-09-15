@@ -1,7 +1,7 @@
 import { HeaderMenuComponent, MenuItemComponent, SubmenuComponent, MenuSeparatorComponent, LoginInformationComponent, RingWithTextComponent, HeaderComponent, IconComponent } from '../../index';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DebugElement, Component, SimpleChanges, SimpleChange } from '@angular/core';
+import { DebugElement, Component, SimpleChanges, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
@@ -18,6 +18,7 @@ import { IconModule } from '../icon/icon.module';
       </vgr-submenu>
     </vgr-header-menu>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class TestHeaderMenuComponent  { }

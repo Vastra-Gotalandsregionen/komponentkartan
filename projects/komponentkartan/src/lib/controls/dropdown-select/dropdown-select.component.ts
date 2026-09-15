@@ -1,6 +1,7 @@
 import {
   Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
-  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostListener
+  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostListener,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
@@ -20,6 +21,7 @@ function _defaultCompare(o1: any, o2: any): boolean {
     selector: 'vgr-dropdown-select',
     templateUrl: './dropdown-select.component.html',
     styleUrls: ['./dropdown-select.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DropdownSelectComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {

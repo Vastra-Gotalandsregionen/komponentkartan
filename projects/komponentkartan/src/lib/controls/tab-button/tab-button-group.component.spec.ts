@@ -1,4 +1,4 @@
-import { Component, DebugElement, provideZoneChangeDetection, NgModule } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection, NgModule, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
@@ -15,6 +15,7 @@ import { TabButtonComponent } from './tab-button.component';
     <vgr-tab-button id="third" tabId="third">Third</vgr-tab-button>
   </vgr-tab-button-group>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TestComponent {}

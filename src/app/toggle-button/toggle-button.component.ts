@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ToggleButtonGroupComponent, ToggleButtonComponent as ToggleButtonComponentElement } from '../../../projects/komponentkartan/src/lib';
 
 @Component({
     selector: 'app-toggle-button',
     templateUrl: './toggle-button.component.html',
     styleUrls: ['./toggle-button.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ToggleButtonComponent implements OnInit {

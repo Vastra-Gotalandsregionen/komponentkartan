@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Guid } from '../../utils/guid';
 
 @Component({
     selector: 'vgr-tab-button',
     templateUrl: './tab-button.component.html',
     styleUrls: ['./tab-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TabButtonComponent implements AfterViewInit, OnChanges {
@@ -19,7 +20,6 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
   @Output() next = new EventEmitter();
   @Output() previous = new EventEmitter();
   @Output() home = new EventEmitter();
-  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() end = new EventEmitter();
   @Output() selectedChanged = new EventEmitter<string>();
 

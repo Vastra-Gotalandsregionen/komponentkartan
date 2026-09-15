@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, ContentChild, ContentChildren, QueryList, OnDestroy, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { GridHeaderComponent, GridSortChangedArgs } from './grid-header.component';
 import { GridRowComponent } from './grid-row.component';
 import { takeUntil } from 'rxjs/operators';
@@ -14,6 +14,7 @@ import { GridHeaderToolbarComponent } from './grid-header-toolbar.component';
     styleUrls: ['./grid.component.scss'],
     providers: [GridService],
     animations: [remove],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class GridComponent implements OnInit, AfterContentInit, OnDestroy {

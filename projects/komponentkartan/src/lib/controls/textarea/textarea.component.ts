@@ -12,7 +12,8 @@ import {
   SkipSelf,
   ChangeDetectorRef,
   OnDestroy,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -27,6 +28,7 @@ import { Guid } from '../../utils/guid';
             useExisting: forwardRef(() => TextareaComponent),
             multi: true,
         }],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TextareaComponent implements AfterViewInit, OnChanges, ControlValueAccessor, OnDestroy {

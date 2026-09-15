@@ -1,10 +1,11 @@
-import { Component, OnInit, HostBinding, Input, ElementRef, EventEmitter, Output, Host, HostListener, AfterContentInit } from '@angular/core';
+import { Component, OnInit, HostBinding, Input, ElementRef, EventEmitter, Output, Host, HostListener, AfterContentInit, ChangeDetectionStrategy } from '@angular/core';
 import { Guid } from '../../utils/guid';
 import { GridSortDirection } from '../sort-arrow/sort-arrow.component';
 import { EditableTableService } from './editable-table.service';
 @Component({
     selector: 'vgr-editable-table-header-column',
     template: '<ng-content></ng-content>  @if (sortKey && editMode === false) {<vgr-sort-arrow [sortDirection]="sortDirection"></vgr-sort-arrow>}',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditableTableHeaderColumnComponent implements OnInit, AfterContentInit {

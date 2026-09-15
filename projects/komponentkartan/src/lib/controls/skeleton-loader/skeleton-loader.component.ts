@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, state, animate, style, transition } from '@angular/animations';
 
 @Component({
@@ -16,6 +16,7 @@ import { trigger, state, animate, style, transition } from '@angular/animations'
             transition('* => *', animate('400ms ease'))
         ])
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SkeletonLoaderComponent {

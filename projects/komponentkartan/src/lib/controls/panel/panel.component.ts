@@ -1,8 +1,9 @@
-import { Input, Component, HostBinding, ContentChild, ElementRef } from '@angular/core';
+import { Input, Component, HostBinding, ContentChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'vgr-panel',
     templateUrl: './panel.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PanelComponent {

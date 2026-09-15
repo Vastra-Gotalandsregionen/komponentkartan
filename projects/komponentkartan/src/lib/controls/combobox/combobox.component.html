@@ -54,10 +54,10 @@
     </div>
     @if (formControl) {
       <div [attr.id]="elementId" class="validation__status" [attr.aria-live]="errorActive ? 'assertive' : 'off'"
-        title="{{ errorMessage | errorMessage: formControl?.errors : getLabelFromId() : true  }}">
+        title="{{ errorMessage | errorMessage: $safeNavigationMigration(formControl?.errors) : getLabelFromId() : true  }}">
         <vgr-icon icon="exclamation-circle" size="sm" class="validation_status__icon"></vgr-icon>
         <div class="validation__status__message">
-        {{ errorMessage | errorMessage : formControl?.errors : getLabelFromId() : true | truncate:24 }}</div>
+        {{ errorMessage | errorMessage : $safeNavigationMigration(formControl?.errors) : getLabelFromId() : true | truncate:24 }}</div>
       </div>
     }
   </div>

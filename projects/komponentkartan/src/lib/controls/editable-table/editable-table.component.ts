@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, DebugElement, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, DebugElement, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, QueryList, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Guid } from '../../utils/guid';
 import { Subject } from 'rxjs';
 import { EditableTableHeaderComponent } from './editable-table-header.component';
@@ -11,6 +11,7 @@ import { SortChangedArgs } from '../sort-arrow/sort-arrow.component';
     selector: 'vgr-editable-table',
     templateUrl: './editable-table.component.html',
     styleUrls: ['./editable-table.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

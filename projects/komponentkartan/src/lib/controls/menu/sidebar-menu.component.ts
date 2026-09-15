@@ -1,10 +1,11 @@
-import { AfterContentInit, Component, ContentChild, HostListener } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { SubmenuComponent } from './submenu.component';
 
 @Component({
     selector: 'vgr-sidebar-menu',
     templateUrl: './sidebar-menu.component.html',
     styleUrls: ['./sidebar-menu.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SidebarMenuComponent implements AfterContentInit {

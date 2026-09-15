@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, AbstractControl } from '@angular/forms';
 import { FilterTagGroupComponent, FilterTagComponent as FilterTagComponentElement } from '../../../projects/komponentkartan/src/lib';
 
@@ -12,6 +12,7 @@ interface FilterTag {
     selector: 'app-filter-tag',
     templateUrl: './filter-tag.component.html',
     styleUrls: ['./filter-tag.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FilterTagComponent implements OnInit {

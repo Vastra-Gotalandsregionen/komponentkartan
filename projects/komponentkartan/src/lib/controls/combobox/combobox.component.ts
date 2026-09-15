@@ -1,6 +1,7 @@
 import {
   Component, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ViewChild, ContentChildren, ElementRef, QueryList,
-  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostListener
+  Input, Output, EventEmitter, Optional, SimpleChanges, Self, HostListener,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { ScrollbarComponent } from '../scrollbar/scrollbar.component';
@@ -19,6 +20,7 @@ function _defaultCompare(o1: any, o2: any): boolean {
     selector: 'vgr-combobox',
     templateUrl: './combobox.component.html',
     styleUrls: ['./combobox.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ComboboxComponent implements OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ControlValueAccessor {

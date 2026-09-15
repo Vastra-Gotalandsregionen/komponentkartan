@@ -1,4 +1,4 @@
-import { Component, ElementRef, QueryList, ContentChildren, AfterContentInit, Input, HostBinding } from '@angular/core';
+import { Component, ElementRef, QueryList, ContentChildren, AfterContentInit, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 import { EditableTableColumnComponent } from './editable-table-column.component';
 import { EditableTableComponent } from './editable-table.component';
 import { EditableTableService } from './editable-table.service';
@@ -6,6 +6,7 @@ import { EditableTableService } from './editable-table.service';
 @Component({
     selector: 'vgr-editable-table-row',
     template: '<ng-content selects="vgr-editable-table-column"></ng-content>',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditableTableRowComponent implements AfterContentInit {

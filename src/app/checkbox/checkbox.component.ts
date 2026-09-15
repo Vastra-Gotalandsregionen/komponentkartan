@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CheckboxComponent as CheckboxComponentElement } from '../../../projects/komponentkartan/src/lib';
 import { TableComponent as TableComponentElement } from '../../../projects/komponentkartan/src/lib';
@@ -8,6 +8,7 @@ import { TableComponent as TableComponentElement } from '../../../projects/kompo
     selector: 'app-checkbox',
     templateUrl: './checkbox.component.html',
     styleUrls: ['./checkbox.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CheckboxComponent implements OnInit {

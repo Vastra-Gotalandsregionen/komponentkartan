@@ -1,9 +1,10 @@
-import { Component, Host, HostBinding, Input, Optional, SkipSelf } from '@angular/core';
+import { Component, Host, HostBinding, Input, Optional, SkipSelf, ChangeDetectionStrategy } from '@angular/core';
 import { TableComponent } from './table.component';
 
 @Component({
     selector: 'vgr-table-header-column',
     template: `<ng-content></ng-content>`,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

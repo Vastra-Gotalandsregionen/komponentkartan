@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TextareaComponent } from '../../../projects/komponentkartan/src/lib';
 
@@ -7,6 +7,7 @@ import { TextareaComponent } from '../../../projects/komponentkartan/src/lib';
     selector: 'app-textareafield',
     templateUrl: './textareafield.component.html',
     styleUrls: ['./textareafield.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TextareafieldComponent implements OnInit {

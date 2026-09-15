@@ -5,7 +5,7 @@ import { IconModule } from '../icon/icon.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DebugElement, Component } from '@angular/core';
+import { DebugElement, Component, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 @Component({
@@ -17,6 +17,7 @@ import { By } from '@angular/platform-browser';
   <vgr-notification type="warning" [standalone]="true" [noIcon]="true">Med warning & standalone-klass, ingen ikon</vgr-notification>
   <vgr-notification type="info" [standalone]="true" width="100px">Med info & standalone-klass, ikon autoadderad och bredd satt</vgr-notification>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TestComponent { }
