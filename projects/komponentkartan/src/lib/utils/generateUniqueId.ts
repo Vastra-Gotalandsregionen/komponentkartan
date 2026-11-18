@@ -8,7 +8,7 @@ export function generateUniqueId(label: string, document: Document, componentStr
 
     const prefix = idText ? `${idText}-` : `${componentString}-`;
 
-    const existingElements = Array.from(document.querySelectorAll(`[id^="${prefix}"]`));
+    const existingElements = Array.from(document.querySelectorAll(`[data-element-id^="${prefix}"]`));
     const nextNumber = existingElements.length + 1;
 
     return `${prefix}${nextNumber}`;

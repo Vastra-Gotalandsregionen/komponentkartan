@@ -1,6 +1,6 @@
 export function setHostIdFromSiblingText(element: string, elementRef: any) {
     const host = elementRef.nativeElement as HTMLElement;
-    if (host.id || !host.parentElement) {
+    if (host.getAttribute('data-element-id') || !host.parentElement) {
       return;
     }
 
@@ -21,8 +21,8 @@ export function setHostIdFromSiblingText(element: string, elementRef: any) {
       .replace(/^-|-$/g, '') || 'label';
 
     const prefix = idText ? `${idText}-` : `${element}-`;
-    const existingElements = Array.from(document.querySelectorAll(`[id^="${prefix}"]`));
+    const existingElements = Array.from(document.querySelectorAll(`[data-element-id^="${prefix}"]`));
     const nextNumber = existingElements.length + 1;
 
-    host.id = `${prefix}${nextNumber}`;
+    host.setAttribute('data-element-id', `${prefix}${nextNumber}`);
   }

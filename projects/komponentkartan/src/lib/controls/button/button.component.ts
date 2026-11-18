@@ -10,7 +10,7 @@ import { generateUniqueId } from '../../utils/generateUniqueId';
     standalone: false
 })
 export class ButtonComponent implements OnChanges, AfterViewInit {
-  @HostBinding('attr.id') id: string;
+  @HostBinding('attr.data-element-id') id: string;
   @Input() disabled = false;
   @Input() buttonStyle = 'primary';
   @Input() type = 'button';

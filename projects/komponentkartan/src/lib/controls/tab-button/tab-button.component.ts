@@ -10,7 +10,7 @@ import { generateUniqueId } from '../../utils/generateUniqueId';
 })
 export class TabButtonComponent implements AfterViewInit, OnChanges {
 
-  @HostBinding('attr.id') id: string;
+  @HostBinding('attr.data-element-id') id: string;
   @Input() disabled = false;
   @Input() active = false;
   @Input() ariaLabel: string;
