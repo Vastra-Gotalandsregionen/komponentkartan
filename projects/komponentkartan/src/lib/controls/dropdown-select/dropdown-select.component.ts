@@ -12,6 +12,7 @@ import { ButtonComponent } from '../button/button.component';
 import { Guid } from '../../utils/guid';
 import { InputComponent } from '../input/input.component';
 import { NgScrollbar } from 'ngx-scrollbar';
+import { setHostIdFromSiblingText } from '../../utils/setHostIdFromSiblingText';
 
 function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
@@ -137,6 +138,8 @@ export class DropdownSelectComponent implements OnChanges, AfterContentInit, Aft
   }
 
   ngAfterViewInit() {
+    setHostIdFromSiblingText('vgr-dropdown-select', this.elementRef);
+
     if (this.formControl) {
       setTimeout(() => {
         this.truncateTextLength = this.errorMessage.toString().length < 25 ? 24 : this.errorMessage.toString().length;

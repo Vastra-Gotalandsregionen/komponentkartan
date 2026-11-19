@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { Guid } from '../../utils/guid';
 import { ComboboxItemComponent } from './combobox-item.component';
+import { setHostIdFromSiblingText } from '../../utils/setHostIdFromSiblingText';
 
 function _defaultCompare(o1: any, o2: any): boolean {
   return o1 === o2;
@@ -127,6 +128,8 @@ export class ComboboxComponent implements OnChanges, AfterContentInit, AfterView
   }
 
   ngAfterViewInit() {
+    setHostIdFromSiblingText('vgr-combobox', this.elementRef);
+
     if (this.formControl) {
       setTimeout(() => {
         this.setSelectedState(this.formControl.value);
