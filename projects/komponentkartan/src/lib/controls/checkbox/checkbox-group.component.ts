@@ -50,10 +50,13 @@ export class CheckboxGroupComponent implements ControlValueAccessor, AfterConten
   ngAfterContentInit(): void {
     this.setGroupDisabledOverride(this._disabled);
 
+    this.items.forEach((item, index) => {
+      if (item.label) {
+        const sanitizedLabel = item.label.replace(/\s+/g, '-').toLowerCase();
+        item.dataElementId = `${sanitizedLabel}-${index + 1}`;
+      }
 
-
-    // Subscribe on changes
-    this.items.forEach(item => {
+      // Subscribe on changes
       item.checkedChanged.pipe(takeUntil(this.ngUnsubscribeItems)).subscribe(($event: any) => {
         const values = this.items.filter((item: any) => item.checked).map(i => i.label);
         this.selectedChanged.emit(item);

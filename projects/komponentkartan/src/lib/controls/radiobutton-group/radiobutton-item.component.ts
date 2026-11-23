@@ -5,6 +5,9 @@ import { Guid } from '../../utils/guid';
     selector: 'vgr-radiobutton-item',
     templateUrl: './radiobutton-item.component.html',
     styleUrls: ['./radiobutton-item.component.scss'],
+    host: {
+        '[attr.data-element-id]': 'dataElementId'
+    },
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
@@ -46,6 +49,7 @@ export class RadiobuttonItemComponent implements AfterViewInit {
   tabIndex: number = -1;
   _disabled: boolean;
   _selected: boolean = false;
+  public dataElementId: string;
 
   set tabEnabled(val: boolean) {
     this.isTabEnabled = val;
