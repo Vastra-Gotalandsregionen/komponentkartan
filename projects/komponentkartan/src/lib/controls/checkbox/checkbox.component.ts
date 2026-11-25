@@ -59,6 +59,18 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
           this.control = this.controlContainer.control.get(this.formControlName);
           this.setDisabledState(this.controlContainer.control.get(this.formControlName).disabled);
       }
+
+      if (changes['label']) {
+        this.updateDataElementId();
+      }
+    }
+
+    private updateDataElementId() {
+      if (this.label) {
+        const sanitizedLabel = this.label.replace(/\s+/g, '-').toLowerCase();
+        // Om den är i en grupp kommer gruppen skriva över detta med index, annars behåller vi labeln
+        this.dataElementId = sanitizedLabel;
+      }
     }
 
     getLabelFromId() {
