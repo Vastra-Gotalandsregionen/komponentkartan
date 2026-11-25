@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { Guid } from '../../utils/guid';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { generateUniqueId } from '../../utils/generateUniqueId';
 
 @Component({
     selector: 'vgr-tab-button',
@@ -10,10 +10,11 @@ import { Guid } from '../../utils/guid';
 })
 export class TabButtonComponent implements AfterViewInit, OnChanges {
 
+  @HostBinding('attr.data-element-id') id: string;
   @Input() disabled = false;
   @Input() active = false;
   @Input() ariaLabel: string;
-  @Input() tabId = Guid.newGuid();
+  @Input() tabId;
   @Input() width = 'auto';
   @Input() parentId;
 
@@ -49,6 +50,13 @@ export class TabButtonComponent implements AfterViewInit, OnChanges {
     Promise.resolve(null).then(() =>
       this.ariaPressed = this.active
     );
+
+    const content = this.content.nativeElement as HTMLElement;
+    const label = content.textContent?.trim() ?? '';
+
+    setTimeout(() => {
+      this.id = this.tabId || generateUniqueId(label, content.ownerDocument, 'vgr-tab-button');
+    }, 0);
   }
 
   makeTabFocusable(focusable: boolean) {

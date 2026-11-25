@@ -12,6 +12,9 @@ import { Guid } from '../../utils/guid';
             useExisting: forwardRef(() => CheckboxComponent),
             multi: true
         }],
+    host: {
+        '[attr.data-element-id]': 'dataElementId'
+    },
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
@@ -45,6 +48,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     validationErrorMessage = 'Obligatoriskt';
     elementId: string;
     _disabled: boolean = false;
+    public dataElementId: string;
 
     constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, private elementRef: ElementRef) {
         this.elementId = Guid.newGuid();
@@ -54,6 +58,18 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
       if (this.formControlName && this.controlContainer) {
           this.control = this.controlContainer.control.get(this.formControlName);
           this.setDisabledState(this.controlContainer.control.get(this.formControlName).disabled);
+      }
+
+      if (changes['label']) {
+        this.updateDataElementId();
+      }
+    }
+
+    private updateDataElementId() {
+      if (this.label) {
+        const sanitizedLabel = this.label.replace(/\s+/g, '-').toLowerCase();
+        // Om den är i en grupp kommer gruppen skriva över detta med index, annars behåller vi labeln
+        this.dataElementId = sanitizedLabel;
       }
     }
 

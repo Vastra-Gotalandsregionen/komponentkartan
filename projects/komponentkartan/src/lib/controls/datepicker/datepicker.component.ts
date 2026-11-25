@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 
 import { Guid } from '../../utils/guid';
 import { DatepickerZoomLevel, CalendarItem, Calendar } from './datepicker.interface';
+import { setHostIdFromSiblingText } from '../../utils/setHostIdFromSiblingText';
 
 @Component({
     selector: 'vgr-datepicker',
@@ -98,7 +99,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
     return this.headerHasFocus && (this.parseError || (this.formControl && this.formControl.invalid));
   }
 
-  constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() public formControl: NgControl) {
+  constructor(@Inject(LOCALE_ID) private locale: string, @Optional() @Self() public formControl: NgControl, private elementRef: ElementRef) {
     this.elementId = Guid.newGuid();
     this.setMinZoomLevel();
 
@@ -132,6 +133,7 @@ export class DatepickerComponent implements OnChanges, AfterViewInit, OnDestroy,
   }
 
   ngAfterViewInit() {
+    setHostIdFromSiblingText('vgr-datepicker', this.elementRef);
     this.subscribeToItems();
 
     this.items.changes

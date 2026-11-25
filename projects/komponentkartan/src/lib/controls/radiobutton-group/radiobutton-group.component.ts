@@ -60,7 +60,7 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     if (this.items.length === 0) {
       return;
     }
-    this.items.forEach(item => {
+    this.items.forEach((item, index) => {
       item.itemSelected.pipe(
         takeUntil(this.ngUnsubscribeItems)
       ).subscribe(() => {
@@ -74,6 +74,13 @@ export class RadiobuttonGroupComponent implements ControlValueAccessor, AfterCon
     this.setGroupDisabledOverride(this._disabled);
 
     setTimeout(() => {
+      // Set data-element-id based on label and index after labels are initialized in items
+      this.items.forEach((item, index) => {
+        if (item.label) {
+          const sanitizedLabel = item.label.replace(/\s+/g, '-').toLowerCase();
+          item.dataElementId = `${sanitizedLabel}-${index + 1}`;
+        }
+      });
       this.setPreselectedValue();
     }, 100);
   }
